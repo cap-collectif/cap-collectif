@@ -6,6 +6,7 @@ import memoize from 'lodash/memoize';
 import debounce from 'lodash/debounce';
 import {
   change,
+  reset,
   SubmissionError,
   reduxForm,
   Field,
@@ -273,6 +274,7 @@ const onSubmit = (
       ...data,
       proposalFormId: proposalForm.id,
     },
+    stepId: proposalForm.step?.id || '',
   })
     .then(response => {
       if (response.createProposal && response.createProposal.userErrors) {
@@ -296,17 +298,21 @@ const onSubmit = (
       toast({
         variant: 'success',
         content: intl.formatHTMLMessage({
-          id: values.draft ? 'draft.create.redirecting' : message,
+          id: values.draft ? 'draft.create.registered' : message,
         }),
-        duration: TIMEOUT_BEFORE_REDIRECTION,
       });
-
+      if (values.draft) {
+        const draftAnchor = document.getElementById('draftAnchor');
+        if (draftAnchor) draftAnchor.scrollIntoView({ behavior: 'smooth' });
+        dispatch(reset(formName));
+      }
       // We may have some MySQL replication latency
       // That's why it's better to wait a bit
       // before redirecting, to avoid 404s…
-      setTimeout(() => {
-        window.location.href = createdProposal.url;
-      }, TIMEOUT_BEFORE_REDIRECTION);
+      else
+        setTimeout(() => {
+          window.location.href = createdProposal.url;
+        }, TIMEOUT_BEFORE_REDIRECTION);
     })
     .catch(e => {
       onSubmitFailed();

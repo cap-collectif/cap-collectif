@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import DraftProposalPreview from '../Preview/DraftProposalPreview';
 import DraftBox from '../../Utils/DraftBox';
 import type { DraftProposalList_step } from '~relay/DraftProposalList_step.graphql';
+import AppBox from '~/components/Ui/Primitives/AppBox';
 
 type Props = {
   step: DraftProposalList_step,
@@ -28,13 +29,15 @@ export class DraftProposalList extends React.Component<Props> {
     }
 
     return (
-      <DraftBox>
-        <ul className={classes}>
-          {proposals.map((edge, i) => (
-            <DraftProposalPreview key={`draft-proposal-${i}`} proposal={edge.node} />
-          ))}
-        </ul>
-      </DraftBox>
+      <AppBox id="draftAnchor" pt={8}>
+        <DraftBox>
+          <ul className={classes}>
+            {proposals.map((edge, i) => (
+              <DraftProposalPreview key={`draft-proposal-${i}`} proposal={edge.node} />
+            ))}
+          </ul>
+        </DraftBox>
+      </AppBox>
     );
   }
 }
