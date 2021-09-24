@@ -76,6 +76,7 @@ export const ICON_NAME = {
   SEARCH: 'SEARCH',
   DUPLICATE: 'DUPLICATE',
   DUPLICATE_O: 'DUPLICATE_O',
+  IMAGE: 'IMAGE',
 };
 
 export const ICON_SIZE = {

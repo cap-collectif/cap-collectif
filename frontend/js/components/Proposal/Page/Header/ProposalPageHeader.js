@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedMessage, FormattedDate } from 'react-intl';
+import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import moment from 'moment';
 import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
@@ -19,6 +20,8 @@ import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
 import Skeleton from '~ds/Skeleton';
 import Flex from '~ui/Primitives/Layout/Flex';
 import AppBox from '~ui/Primitives/AppBox';
+import Button from '~ds/Button/Button';
+import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration';
 
 type Props = {
   title: string,
@@ -125,7 +128,7 @@ const HeaderActions: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   max-width: calc(100% - 20px);
 
   > a,
-  > button {
+  #side-analysis-open-button {
     text-decoration: none;
     background: #fff;
     padding: 3px 15px;
@@ -133,7 +136,7 @@ const HeaderActions: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
     border: none;
     color: ${colors.primaryColor};
-
+    height: 29px;
     span {
       margin-left: 5px;
     }
@@ -147,7 +150,7 @@ const HeaderActions: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     }
 
     > a,
-    > button {
+    #side-analysis-open-button {
       padding: 3px 10px;
     }
   }
@@ -156,7 +159,6 @@ const HeaderActions: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 const AvatarPlaceholder = () => (
   <Flex direction="row" align="center">
     <Skeleton.Circle mb={1} size="45px" />
-
     <AppBox ml={4}>
       <Skeleton.Text size="sm" mb={2} width="115px" />
       <Skeleton.Text size="sm" width="200px" />
@@ -179,6 +181,9 @@ export const ProposalPageHeader = ({
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt;
   const icon = shouldDisplayPictures ? proposal?.category?.icon : null;
   const color = shouldDisplayPictures ? proposal?.category?.color || '#1E88E5' : '#C4C4C4';
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const intl = useIntl();
+
   const createdDate = (
     <FormattedDate
       value={moment(date)}
@@ -201,6 +206,10 @@ export const ProposalPageHeader = ({
       ? 'questions-list'
       : null;
 
+  const proposalIllustrationInitialValues = {
+    media: proposal?.media || null,
+  };
+
   return (
     <Header id="ProposalPageHeader">
       <div>
@@ -209,12 +218,33 @@ export const ProposalPageHeader = ({
             <Icon name={ICON_NAME.chevronLeft} size={9} color={colors.primaryColor} />
             {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
           </a>
-          {hasAnalysingButton && (
-            <button type="button" id="side-analysis-open-button" onClick={onAnalysisClick}>
-              <Icon name={ICON_NAME.chart} size={16} color={colors.primaryColor} />
-              <FormattedMessage id="panel.analysis.subtitle" />
-            </button>
-          )}
+          <div>
+            {hasAnalysingButton && (
+              <button type="button" id="side-analysis-open-button" onClick={onAnalysisClick}>
+                <Icon name={ICON_NAME.chart} size={16} color={colors.primaryColor} />
+                {intl.formatMessage({ id: 'panel.analysis.subtitle' })}
+              </button>
+            )}
+            {proposal?.form?.usingIllustration && proposal.author.isViewer && proposal.form.step && proposal.form.step.state === 'CLOSED' && (
+              <>
+                <Button
+                  id="edit-illustration"
+                  onClick={onOpen}
+                  variant="secondary"
+                  variantColor="primary"
+                  variantSize="small"
+                  leftIcon="IMAGE">
+                  {intl.formatMessage({ id: 'edit-image' })}
+                </Button>
+                <ModalProposalIllustration
+                  show={isOpen}
+                  initialValues={proposalIllustrationInitialValues}
+                  onClose={onClose}
+                  proposalId={proposal.id}
+                />
+              </>
+            )}
+          </div>
         </HeaderActions>
         {proposal?.media?.url || proposal?.category?.categoryImage?.image?.url ? (
           <Cover
@@ -311,6 +341,7 @@ export default createFragmentContainer(container, {
       }
       author {
         username
+        isViewer @include(if: $isAuthenticated)
         ...UserAvatar_user
       }
       createdAt
@@ -319,6 +350,10 @@ export default createFragmentContainer(container, {
       url
       form {
         objectType
+        usingIllustration
+        step {
+          state
+        }
       }
       ...interpellationLabelHelper_proposal @relay(mask: false)
     }

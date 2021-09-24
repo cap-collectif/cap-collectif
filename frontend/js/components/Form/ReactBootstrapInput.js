@@ -134,6 +134,8 @@ export type ParentProps = {|
   isValidDate?: (current: moment) => boolean,
   withCharacterCounter?: boolean,
   dateProps?: DateProps,
+  maxSize?: number,
+  accept?: string | string[],
 |};
 
 type Props = {|
@@ -148,7 +150,9 @@ class ReactBootstrapInput extends React.Component<Props> {
     warnings: null,
     image: null,
     medias: [],
+    accept: [],
     helpPrint: true,
+    maxSize: 26214400,
   };
 
   refFormControl: ?Element;
@@ -216,6 +220,8 @@ class ReactBootstrapInput extends React.Component<Props> {
     isValidDate,
     withCharacterCounter,
     dateProps,
+    maxSize,
+    accept,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -259,17 +265,16 @@ class ReactBootstrapInput extends React.Component<Props> {
     if (type === 'captcha') {
       return <Captcha value={value} {...props} />;
     }
-
     if (type === 'image') {
       return (
         <div className="hidden-print">
           <ImageUpload
             id={props.id}
             className={props.className}
-            valueLink={props.valueLink}
             value={value}
             onChange={props.onChange}
-            accept="image/*"
+            accept={accept && accept.length > 0 ? accept : ['.jpg', '.png', '.gif']}
+            maxSize={maxSize}
             preview={props.image}
             {...props}
           />
@@ -296,12 +301,10 @@ class ReactBootstrapInput extends React.Component<Props> {
           <ImageUpload
             id={props.id}
             className={props.className}
-            valueLink={props.valueLink}
             value={value}
             onChange={props.onChange}
             accept={acceptedMimeTypes.join()}
-            maxSize={26214400}
-            files={medias}
+            maxSize={maxSize}
             disablePreview
             multiple
           />

@@ -22,6 +22,10 @@ describe('<ProposalPageHeader />', () => {
     project: { type: { title: 'global.consultation' } },
     form: {
       objectType: 'PROPOSAL',
+      usingIllustration: true,
+      step: {
+        state: 'CLOSED',
+      },
     },
     media: { url: '/image.exe' },
     category: {
@@ -51,6 +55,10 @@ describe('<ProposalPageHeader />', () => {
     project: { type: { title: 'global.consultation' } },
     form: {
       objectType: 'QUESTION',
+      usingIllustration: true,
+      step: {
+        state: 'CLOSED',
+      },
     },
     media: null,
     category: null,
@@ -72,6 +80,10 @@ describe('<ProposalPageHeader />', () => {
     project: { type: { title: 'global.consultation' } },
     form: {
       objectType: 'QUESTION',
+      usingIllustration: true,
+      step: {
+        state: 'CLOSED',
+      },
     },
     media: null,
     category: null,
@@ -136,6 +148,10 @@ describe('<ProposalPageHeader />', () => {
     project: { type: { title: 'project.types.interpellation' } },
     form: {
       objectType: 'PROPOSAL',
+      usingIllustration: true,
+      step: {
+        state: 'CLOSED',
+      },
     },
     media: null,
     category: null,
@@ -156,6 +172,10 @@ describe('<ProposalPageHeader />', () => {
     project: { type: { title: 'project.types.establishment' } },
     form: {
       objectType: 'ESTABLISHMENT',
+      usingIllustration: true,
+      step: {
+        state: 'CLOSED',
+      },
     },
     media: null,
     category: null,

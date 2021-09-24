@@ -321,6 +321,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
         </Text>
       </span>
     }
+    maxSize="4000000"
     name="media"
     type="image"
   />
@@ -765,6 +766,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         </Text>
       </span>
     }
+    maxSize="4000000"
     name="media"
     type="image"
   />
@@ -1196,6 +1198,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
         </Text>
       </span>
     }
+    maxSize="4000000"
     name="media"
     type="image"
   />
@@ -1588,6 +1591,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         </Text>
       </span>
     }
+    maxSize="4000000"
     name="media"
     type="image"
   />
@@ -1980,6 +1984,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
         </Text>
       </span>
     }
+    maxSize="4000000"
     name="media"
     type="image"
   />
@@ -2372,6 +2377,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         </Text>
       </span>
     }
+    maxSize="4000000"
     name="media"
     type="image"
   />

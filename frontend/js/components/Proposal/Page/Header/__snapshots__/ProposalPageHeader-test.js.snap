@@ -19,6 +19,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
           values={Object {}}
         />
       </a>
+      <div />
     </ProposalPageHeader__HeaderActions>
     <div
       className="default-header"
@@ -87,6 +88,10 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
           "createdAt": "2015-01-01 00:00:00",
           "form": Object {
             "objectType": "QUESTION",
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingIllustration": true,
           },
           "id": "1",
           "media": null,
@@ -127,6 +132,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           values={Object {}}
         />
       </a>
+      <div />
     </ProposalPageHeader__HeaderActions>
     <ProposalPageHeader__Cover
       alt="proposal-illustration"
@@ -199,6 +205,10 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           "createdAt": "2015-01-01 00:00:00",
           "form": Object {
             "objectType": "PROPOSAL",
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingIllustration": true,
           },
           "id": "1",
           "media": Object {
@@ -241,20 +251,19 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           values={Object {}}
         />
       </a>
-      <button
-        id="side-analysis-open-button"
-        type="button"
-      >
-        <Icon
-          color="#0388cc"
-          name="chart"
-          size={16}
-        />
-        <FormattedMessage
-          id="panel.analysis.subtitle"
-          values={Object {}}
-        />
-      </button>
+      <div>
+        <button
+          id="side-analysis-open-button"
+          type="button"
+        >
+          <Icon
+            color="#0388cc"
+            name="chart"
+            size={16}
+          />
+          panel.analysis.subtitle
+        </button>
+      </div>
     </ProposalPageHeader__HeaderActions>
     <ProposalPageHeader__Cover
       alt="proposal-illustration"
@@ -327,6 +336,10 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           "createdAt": "2015-01-01 00:00:00",
           "form": Object {
             "objectType": "PROPOSAL",
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingIllustration": true,
           },
           "id": "1",
           "media": Object {
@@ -369,6 +382,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
           values={Object {}}
         />
       </a>
+      <div />
     </ProposalPageHeader__HeaderActions>
     <div
       className="default-header"
@@ -437,6 +451,10 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
           "createdAt": "2015-01-01 00:00:00",
           "form": Object {
             "objectType": "QUESTION",
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingIllustration": true,
           },
           "id": "1",
           "media": null,
@@ -477,6 +495,7 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
           values={Object {}}
         />
       </a>
+      <div />
     </ProposalPageHeader__HeaderActions>
     <div
       className="default-header"
@@ -545,6 +564,10 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
           "createdAt": "2015-01-01 00:00:00",
           "form": Object {
             "objectType": "ESTABLISHMENT",
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingIllustration": true,
           },
           "id": "1",
           "media": null,
@@ -585,6 +608,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
           values={Object {}}
         />
       </a>
+      <div />
     </ProposalPageHeader__HeaderActions>
     <div
       className="default-header"
@@ -653,6 +677,10 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
           "createdAt": "2015-01-01 00:00:00",
           "form": Object {
             "objectType": "PROPOSAL",
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingIllustration": true,
           },
           "id": "1",
           "media": null,

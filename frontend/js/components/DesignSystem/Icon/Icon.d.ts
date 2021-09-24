@@ -69,6 +69,7 @@ declare export const ICON_NAME = {
     ADD_DRAG: 'ADD_DRAG',
     DUPLICATE: 'DUPLICATE',
     DUPLICATE_O: 'DUPLICATE_O',
+    IMAGE: 'IMAGE',
 };
 
 declare export const ICON_SIZE = {

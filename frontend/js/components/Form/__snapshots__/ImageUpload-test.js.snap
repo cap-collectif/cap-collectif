@@ -27,6 +27,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
       noDragEventsBubbling={false}
       noKeyboard={false}
       onDrop={[Function]}
+      onDropRejected={[Function]}
       preventDropOnDocument={true}
       validator={null}
     >
@@ -120,6 +121,7 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
       noDragEventsBubbling={false}
       noKeyboard={false}
       onDrop={[Function]}
+      onDropRejected={[Function]}
       preventDropOnDocument={true}
       validator={null}
     >

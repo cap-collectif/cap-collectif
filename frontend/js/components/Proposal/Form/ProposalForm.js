@@ -164,6 +164,8 @@ const onUnload = e => {
   e.returnValue = true;
 };
 
+export const ILLUSTRATION_MAX_SIZE = '4000000';
+
 export const memoizeAvailableQuestions: any = memoize(() => {});
 
 export const ExternalLinks: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -815,6 +817,7 @@ export class ProposalForm extends React.Component<Props, State> {
             divClassName="bo_width_747"
             id="proposal_media"
             name="media"
+            maxSize={ILLUSTRATION_MAX_SIZE}
             component={component}
             type="image"
             label={

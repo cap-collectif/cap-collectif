@@ -2,26 +2,32 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import Dropzone from 'react-dropzone';
+import Dropzone, { type FileRejection } from 'react-dropzone';
 import { Button, Col, Row } from 'react-bootstrap';
 import Input from './Input';
 import PreviewMedia from './PreviewMedia';
 import Fetcher, { json } from '../../services/Fetcher';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
-type Props = {
+type Props = {|
   value: Object | Array<Object>,
   onChange: Function,
   id: string,
   className: string,
   multiple: boolean,
-  accept: string,
+  accept?: string | string[],
   maxSize: number,
   minSize: number,
   disablePreview: boolean,
   disabled?: boolean,
+|};
+
+type State = {
+  error: string,
+  size: string,
 };
 
-export class ImageUpload extends React.Component<Props> {
+export class ImageUpload extends React.Component<Props, State> {
   static defaultProps = {
     id: '',
     className: '',
@@ -36,10 +42,15 @@ export class ImageUpload extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     this._deleteCheckbox = React.createRef();
+    this.state = {
+      error: '',
+      size: '',
+    };
   }
 
   onDrop = (acceptedFiles: Array<File>) => {
     const { onChange, multiple, value } = this.props;
+    this.setState({error: ''});
     for (const file of acceptedFiles) {
       const formData = new FormData();
       formData.append('file', file);
@@ -91,6 +102,7 @@ export class ImageUpload extends React.Component<Props> {
       value,
       disabled,
     } = this.props;
+    const { error, size } = this.state;
     const classes = {
       'image-uploader': true,
     };
@@ -136,6 +148,12 @@ export class ImageUpload extends React.Component<Props> {
             accept={accept}
             minSize={minSize}
             maxSize={maxSize}
+            onDropRejected={(fileRejections: Array<FileRejection>) => {
+              this.setState({
+                error: fileRejections[0].errors[0].code,
+                size: (fileRejections[0].file.size / 1000000).toPrecision(2),
+              });
+            }}
             disablePreview={disablePreview}>
             {({ getRootProps, getInputProps }) => (
               <div className="image-uploader__dropzone--fullwidth">
@@ -185,6 +203,12 @@ export class ImageUpload extends React.Component<Props> {
               </Input>
             )}
           </Col>
+        )}
+        {error && error.length > 0 && (
+          <div className="wrapper-error">
+            <Icon name={ICON_NAME.error} size={15} />
+            <FormattedMessage id={error} values={{ size }} />
+          </div>
         )}
       </Row>
     );
