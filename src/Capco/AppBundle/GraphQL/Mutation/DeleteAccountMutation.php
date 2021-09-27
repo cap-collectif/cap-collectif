@@ -83,16 +83,16 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
 
     public function __invoke(Arg $input, User $viewer): array
     {
-        $deleteType = $input['type'];
-        $user = $viewer;
+        $user = $this->getUser($input, $viewer);
+        $userId = GlobalId::toGlobalId('User', $user->getId());
 
-        if ($viewer->isAdmin() && isset($input['userId'])) {
-            $userId = GlobalId::fromGlobalId($input['userId'])['id'];
-            $user = $this->userRepository->find($userId);
-            if (!$user) {
-                throw new UserError('Can not find this userId !');
-            }
-        }
+        $this->deleteAccount($input['type'], $user);
+
+        return ['userId' => $userId];
+    }
+
+    public function deleteAccount(string $deleteType, User $user): void
+    {
         if (DeleteAccountType::HARD === $deleteType && $user) {
             $this->hardDeleteUserContributionsInActiveSteps($user);
             //in order not to reference dead relationships between entities
@@ -103,7 +103,20 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         $this->softDelete($user);
 
         $this->em->flush();
+    }
 
-        return ['userId' => GlobalId::toGlobalId('User', $user->getId())];
+    private function getUser(Arg $input, User $viewer): User
+    {
+        $user = $viewer;
+
+        if ($viewer->isAdmin() && isset($input['userId'])) {
+            $userId = GlobalId::fromGlobalId($input['userId'])['id'];
+            $user = $this->userRepository->find($userId);
+            if (!$user) {
+                throw new UserError('Can not find this userId !');
+            }
+        }
+
+        return $user;
     }
 }

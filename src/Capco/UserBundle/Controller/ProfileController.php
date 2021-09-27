@@ -2,10 +2,13 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
+use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Repository\UserRepository;
@@ -23,7 +26,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Capco\AppBundle\GraphQL\Resolver\User\UserProposalsResolver;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
@@ -35,7 +39,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ProfileController extends Controller
 {
-    private UserProposalsResolver $userProposalsResolver;
     private EventDispatcherInterface $eventDispatcher;
     private UserRepository $userRepository;
     private ReplyRepository $replyRepository;
@@ -51,9 +54,11 @@ class ProfileController extends Controller
     private string $projectDir;
     private TranslatorInterface $translator;
     private EntityManagerInterface $em;
+    private DeleteAccountMutation $deleteAccountMutation;
+    private FranceConnectLogoutHandler $franceConnectLogoutHandler;
+    private RouterInterface $router;
 
     public function __construct(
-        UserProposalsResolver $userProposalsResolver,
         EventDispatcherInterface $eventDispatcher,
         UserRepository $userRepository,
         ArgumentRepository $argumentRepository,
@@ -67,10 +72,12 @@ class ProfileController extends Controller
         UserArchiveRepository $userArchiveRepository,
         TranslatorInterface $translator,
         EntityManagerInterface $em,
+        DeleteAccountMutation $deleteAccountMutation,
+        FranceConnectLogoutHandler $franceConnectLogoutHandler,
+        RouterInterface $router,
         string $fireWall,
         string $projectDir
     ) {
-        $this->userProposalsResolver = $userProposalsResolver;
         $this->eventDispatcher = $eventDispatcher;
         $this->userRepository = $userRepository;
         $this->argumentRepository = $argumentRepository;
@@ -86,6 +93,9 @@ class ProfileController extends Controller
         $this->projectDir = $projectDir;
         $this->translator = $translator;
         $this->em = $em;
+        $this->deleteAccountMutation = $deleteAccountMutation;
+        $this->franceConnectLogoutHandler = $franceConnectLogoutHandler;
+        $this->router = $router;
     }
 
     /**
@@ -396,6 +406,26 @@ class ProfileController extends Controller
             'user' => $user,
             'eventsCount' => $eventsCount,
         ];
+    }
+
+    /**
+     * @Route("/deleteAccount/{type}", name="capco_profile_delete_account", options={"i18n" = false})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function deleteAccount(string $type): RedirectResponse
+    {
+        $redirectUrl = $this->router->generate(
+            'app_homepage',
+            ['deleteType' => $type],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+        $user = $this->getUser();
+        if ($user->isFranceConnectAccount()) {
+            $redirectUrl = $this->franceConnectLogoutHandler->getLogoutUrl($redirectUrl, $user);
+        }
+        $this->deleteAccountMutation->deleteAccount($type, $user);
+
+        return $this->redirect($redirectUrl);
     }
 
     private function loginWithToken(

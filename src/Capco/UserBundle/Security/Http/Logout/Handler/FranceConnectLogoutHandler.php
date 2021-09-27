@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Security\Http\Logout\Handler;
 
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -43,26 +44,38 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
             'franceconnect' === $token->getResourceOwnerName() &&
             $this->toggleManager->isActive('login_franceconnect')
         ) {
-            $logoutURL = $this->resourceOwner->getOption('logout_url');
+            $logoutURL = $this->getLogoutUrl($responseWithRequest->getResponse()->getTargetUrl());
 
-            $parameters = [
-                'post_logout_redirect_uri' => $responseWithRequest->getResponse()->getTargetUrl(),
-                'state' => $this->generateNonce(),
-                'id_token_hint' => $token->getRawToken()['id_token'],
-            ];
-
-            $responseWithRequest->setResponse(
-                new RedirectResponse(
-                    $logoutURL . '?' . http_build_query($parameters, '', '&') ?? '/'
-                )
-            );
+            $responseWithRequest->setResponse(new RedirectResponse($logoutURL));
         }
 
         return $responseWithRequest;
     }
 
+    public function getLogoutUrl(string $redirectUrl, ?User $user = null): string
+    {
+        $logoutURL = $this->resourceOwner->getOption('logout_url');
+
+        $parameters = [
+            'post_logout_redirect_uri' => $redirectUrl,
+            'state' => $this->generateNonce(),
+            'id_token_hint' => $this->getIdToken($user),
+        ];
+
+        return $logoutURL . '?' . http_build_query($parameters, '', '&') ?? '/';
+    }
+
     private function generateNonce(): string
     {
         return md5(microtime(true) . uniqid('', true));
+    }
+
+    private function getIdToken(?User $user = null): string
+    {
+        if ($user && $user->getFranceConnectIdToken()) {
+            return $user->getFranceConnectIdToken();
+        }
+
+        return $this->tokenStorage->getToken()->getRawToken()['id_token'];
     }
 }

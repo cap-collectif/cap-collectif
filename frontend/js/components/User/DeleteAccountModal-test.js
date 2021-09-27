@@ -17,7 +17,6 @@ describe('<DeleteAccountModal />', () => {
   };
 
   const props = {
-    redirectToAdminUrl: false,
     userDeletedIsNotViewer: true,
     handleClose: jest.fn(),
   };

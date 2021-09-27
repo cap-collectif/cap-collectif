@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 class OauthUserProvider extends FOSUBUserProvider
 {
@@ -111,6 +112,7 @@ class OauthUserProvider extends FOSUBUserProvider
 
             // in next time, we can associate franceConnect after manually create account, so we have to dissociate if it's a new account or not
             $user = $this->map($user, $response, $fcConfig->getAllowedData());
+            $user->setFranceConnectIdToken($response->getOAuthToken()->getRawToken()['id_token']);
         }
 
         $user->{$setterId}($response->getUsername());

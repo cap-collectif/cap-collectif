@@ -20,7 +20,6 @@ type Props = {|
   ...RelayProps,
   show: boolean,
   handleClose: () => void,
-  redirectToAdminUrl?: boolean,
   userDeletedIsNotViewer?: boolean,
 |};
 
@@ -49,19 +48,19 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   };
 
   delete = () => {
-    const { redirectToAdminUrl, userDeletedIsNotViewer, viewer } = this.props;
+    const { userDeletedIsNotViewer, viewer } = this.props;
     const { removalType } = this.state;
-    DeleteAccountMutation.commit({
-      input: { type: removalType, userId: viewer.id },
-    }).then(() => {
-      setTimeout(() => {
-        if (redirectToAdminUrl && userDeletedIsNotViewer) {
+    if (userDeletedIsNotViewer) {
+      DeleteAccountMutation.commit({
+        input: { type: removalType, userId: viewer.id },
+      }).then(() => {
+        setTimeout(() => {
           window.location.href = `/admin/capco/user/user/list`;
-        } else {
-          window.location.href = `/logout?deleteType=${removalType}`;
-        }
-      }, 1000);
-    });
+        }, 1000);
+      });
+    } else {
+      window.location.href = `/profile/deleteAccount/${removalType}`;
+    }
   };
 
   render() {

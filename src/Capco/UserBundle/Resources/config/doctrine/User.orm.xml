@@ -52,6 +52,7 @@
 
         <field name="franceConnectId" column="france_connect_id" type="string" length="255" nullable="true" />
         <field name="franceConnectAccessToken" column="france_connect_access_token" type="string" length="255" nullable="true" />
+        <field name="franceConnectIdToken" column="france_connect_id_token" type="string" length="510" nullable="true" />
 
         <field name="linkedInUrl" column="linked_in_url" type="string" length="255" nullable="true" />
 

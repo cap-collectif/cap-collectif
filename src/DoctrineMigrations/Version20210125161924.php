@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Migrations;
 
-use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -51,8 +50,9 @@ final class Version20210125161924 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        $admins = $this->container->get(UserRepository::class)->getAllAdmin();
-        $adminsId = array_map(fn($admin) => $admin->getId(), $admins);
+        $adminsId = $this->connection->fetchAllAssociative(
+            'select id from fos_user where roles like "%\"ROLE_ADMIN\"%";'
+        );
         $q = $this->connection->prepare(
             'UPDATE fos_user SET subscribed_to_proposal_news = true where id IN(?)'
         );
