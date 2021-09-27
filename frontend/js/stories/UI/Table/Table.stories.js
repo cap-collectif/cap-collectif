@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Table, { type TableProps } from '~ds/Table';
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import Link from '~ds/Link/Link';
 import Button from '~ds/Button/Button';
 import Menu from '../../../components/DesignSystem/Menu/Menu';
 import { ICON_NAME } from '~ds/Icon/Icon';
@@ -64,7 +65,9 @@ const Template = (args: TableProps) => (
 
     <Table.Tbody>
       <Table.Tr rowId="123" checkboxLabel="Apple">
-        <Table.Td>Apple</Table.Td>
+        <Table.Td>
+          <Link href="https://apple.com">Apple</Link>
+        </Table.Td>
         <Table.Td>Developer</Table.Td>
         <Table.Td>France</Table.Td>
         <Table.Td isNumeric>123456789</Table.Td>
@@ -75,7 +78,7 @@ const Template = (args: TableProps) => (
           quidem quis ratione rem suscipit voluptatum?
         </Table.Td>
         <Table.Td>M</Table.Td>
-        <Table.Td>
+        <Table.Td visibleOnHover>
           <ButtonGroup>
             <ButtonQuickAction icon="PENCIL" label="edit" variantColor="primary" />
             <ButtonQuickAction icon="TRASH" label="delete" variantColor="danger" />
@@ -84,7 +87,9 @@ const Template = (args: TableProps) => (
       </Table.Tr>
 
       <Table.Tr rowId="456" checkboxLabel="Banana">
-        <Table.Td>Banana</Table.Td>
+        <Table.Td>
+          <Link href="https://banana.com">Banana</Link>
+        </Table.Td>
         <Table.Td>Engineer</Table.Td>
         <Table.Td>China</Table.Td>
         <Table.Td isNumeric>456789123.45</Table.Td>
@@ -95,7 +100,7 @@ const Template = (args: TableProps) => (
           quidem quis ratione rem suscipit voluptatum?
         </Table.Td>
         <Table.Td>{null}</Table.Td>
-        <Table.Td>
+        <Table.Td visibleOnHover>
           <ButtonGroup>
             <ButtonQuickAction icon="PENCIL" label="edit" variantColor="primary" />
             <ButtonQuickAction icon="TRASH" label="delete" variantColor="danger" />
@@ -104,7 +109,9 @@ const Template = (args: TableProps) => (
       </Table.Tr>
 
       <Table.Tr rowId="789" checkboxLabel="Strawberry">
-        <Table.Td>Strawberry</Table.Td>
+        <Table.Td>
+          <Link href="https://strawberry.com">Strawberry</Link>
+        </Table.Td>
         <Table.Td>CEO</Table.Td>
         <Table.Td>Russia</Table.Td>
         <Table.Td isNumeric>789123456</Table.Td>
@@ -115,7 +122,7 @@ const Template = (args: TableProps) => (
           quidem quis ratione rem suscipit voluptatum?
         </Table.Td>
         <Table.Td>F</Table.Td>
-        <Table.Td>
+        <Table.Td visibleOnHover>
           <ButtonGroup>
             <ButtonQuickAction icon="PENCIL" label="edit" variantColor="primary" />
             <ButtonQuickAction icon="TRASH" label="delete" variantColor="danger" />

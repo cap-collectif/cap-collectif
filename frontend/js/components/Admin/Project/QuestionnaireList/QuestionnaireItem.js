@@ -65,7 +65,7 @@ const QuestionnaireItem = ({
           year: 'numeric',
         })}
       </Table.Td>
-      <Table.Td>
+      <Table.Td visibleOnHover>
         <ModalConfirmationDelete
           questionnaire={questionnaire}
           connectionName={connectionName}

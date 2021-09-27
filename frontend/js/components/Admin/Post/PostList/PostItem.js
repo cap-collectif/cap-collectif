@@ -19,12 +19,10 @@ type Props = {|
 
 const FRAGMENT = graphql`
   fragment PostItem_post on Post {
-    id
     title
     adminUrl
     url
     authors {
-      id
       url
       username
     }
@@ -37,7 +35,6 @@ const FRAGMENT = graphql`
         url
       }
       ... on Project {
-        id
         title
         url
       }
@@ -120,7 +117,7 @@ const PostItem = ({ post: postFragment, connectionName }: Props): React.Node => 
             year: 'numeric',
           })}
       </Td>
-      <Td>
+      <Td visibleOnHover>
         <Flex direction="row" justify="space-evenly">
           <ButtonQuickAction
             icon="PREVIEW"
@@ -128,7 +125,6 @@ const PostItem = ({ post: postFragment, connectionName }: Props): React.Node => 
             variantColor="primary"
             label={intl.formatMessage({ id: 'global.preview' })}
             onClick={() => window.open(post.url, '_self')}
-            style={{ opacity: 0 }}
           />
           <PostPostListModalConfirmationDelete post={post} connectionName={connectionName} />
         </Flex>

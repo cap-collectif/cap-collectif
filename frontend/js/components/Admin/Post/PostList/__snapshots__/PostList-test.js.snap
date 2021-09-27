@@ -16,7 +16,7 @@ exports[`<PostList /> should render correctly 1`] = `
       className="sc-bdnxRM dSQJSh"
     >
       <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  FHjiN"
+        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
       >
         <th
           className="sc-bdnxRM ejslJN"
@@ -204,11 +204,11 @@ exports[`<PostList /> should render correctly 1`] = `
       className="sc-bdnxRM dZBmCd"
     >
       <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  FHjiN PostList___StyledTr-NRSIk fZuPOl"
+        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
         id="UG9zdDpwb3N0MTI="
       >
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -224,7 +224,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -239,7 +239,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -262,7 +262,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </div>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -272,7 +272,7 @@ exports[`<PostList /> should render correctly 1`] = `
           global.no.published
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -282,7 +282,7 @@ exports[`<PostList /> should render correctly 1`] = `
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
           style={
             Object {
               "whiteSpace": "initial",
@@ -295,11 +295,6 @@ exports[`<PostList /> should render correctly 1`] = `
             <button
               className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
               onClick={[Function]}
-              style={
-                Object {
-                  "opacity": 0,
-                }
-              }
               type="button"
             >
               <IconMock
@@ -339,11 +334,6 @@ exports[`<PostList /> should render correctly 1`] = `
               onKeyUp={[Function]}
               onMouseDown={[Function]}
               onMouseDownCapture={[Function]}
-              style={
-                Object {
-                  "opacity": 0,
-                }
-              }
               type="button"
             >
               <IconMock
@@ -393,11 +383,11 @@ exports[`<PostList /> should render correctly 1`] = `
         </td>
       </tr>
       <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  FHjiN PostList___StyledTr-NRSIk fZuPOl"
+        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
         id="UG9zdDpwb3N0MTM="
       >
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -413,7 +403,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -428,7 +418,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -451,7 +441,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </div>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -461,7 +451,7 @@ exports[`<PostList /> should render correctly 1`] = `
           global.no.published
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -471,7 +461,7 @@ exports[`<PostList /> should render correctly 1`] = `
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
           style={
             Object {
               "whiteSpace": "initial",
@@ -484,11 +474,6 @@ exports[`<PostList /> should render correctly 1`] = `
             <button
               className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
               onClick={[Function]}
-              style={
-                Object {
-                  "opacity": 0,
-                }
-              }
               type="button"
             >
               <IconMock
@@ -528,11 +513,6 @@ exports[`<PostList /> should render correctly 1`] = `
               onKeyUp={[Function]}
               onMouseDown={[Function]}
               onMouseDownCapture={[Function]}
-              style={
-                Object {
-                  "opacity": 0,
-                }
-              }
               type="button"
             >
               <IconMock

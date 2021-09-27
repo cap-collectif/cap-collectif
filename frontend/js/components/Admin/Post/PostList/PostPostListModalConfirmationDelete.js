@@ -55,7 +55,6 @@ const PostPostListModalConfirmationDelete = ({
           size="md"
           variantColor="danger"
           label={intl.formatMessage({ id: 'admin.global.delete' })}
-          style={{ opacity: 0 }}
         />
       }>
       {({ hide }) => (

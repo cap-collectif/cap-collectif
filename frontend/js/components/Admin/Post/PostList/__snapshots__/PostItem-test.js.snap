@@ -3,7 +3,7 @@
 exports[`<PostItem /> should render correctly 1`] = `
 Array [
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -19,7 +19,7 @@ Array [
     </a>
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -34,7 +34,7 @@ Array [
     </a>
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -66,7 +66,7 @@ Array [
     </div>
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -76,7 +76,7 @@ Array [
     global.published
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -86,7 +86,7 @@ Array [
     2021-08-04 17:50:27
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
     style={
       Object {
         "whiteSpace": "initial",
@@ -99,11 +99,6 @@ Array [
       <button
         className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
         onClick={[Function]}
-        style={
-          Object {
-            "opacity": 0,
-          }
-        }
         type="button"
       >
         <IconMock
@@ -143,11 +138,6 @@ Array [
         onKeyUp={[Function]}
         onMouseDown={[Function]}
         onMouseDownCapture={[Function]}
-        style={
-          Object {
-            "opacity": 0,
-          }
-        }
         type="button"
       >
         <IconMock
@@ -201,7 +191,7 @@ Array [
 exports[`<PostItem /> should render correctly without authors 1`] = `
 Array [
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -217,7 +207,7 @@ Array [
     </a>
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -232,7 +222,7 @@ Array [
     </a>
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -264,7 +254,7 @@ Array [
     </div>
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -274,7 +264,7 @@ Array [
     global.published
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -284,7 +274,7 @@ Array [
     2021-08-04 17:50:27
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
     style={
       Object {
         "whiteSpace": "initial",
@@ -297,11 +287,6 @@ Array [
       <button
         className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
         onClick={[Function]}
-        style={
-          Object {
-            "opacity": 0,
-          }
-        }
         type="button"
       >
         <IconMock
@@ -341,11 +326,6 @@ Array [
         onKeyUp={[Function]}
         onMouseDown={[Function]}
         onMouseDownCapture={[Function]}
-        style={
-          Object {
-            "opacity": 0,
-          }
-        }
         type="button"
       >
         <IconMock

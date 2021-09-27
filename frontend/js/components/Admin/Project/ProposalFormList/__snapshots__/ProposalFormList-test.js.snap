@@ -11,7 +11,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
       className="sc-bdnxRM dSQJSh"
     >
       <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  FHjiN"
+        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
       >
         <th
           className="sc-bdnxRM ejslJN"
@@ -169,11 +169,11 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
       className="sc-bdnxRM dZBmCd"
     >
       <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  FHjiN"
+        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
         id="proposalForm-1"
       >
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -188,7 +188,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -203,7 +203,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -213,7 +213,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -223,7 +223,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           &lt;mock-value-for-field-"createdAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
           style={
             Object {
               "whiteSpace": "initial",
@@ -324,11 +324,11 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
         </td>
       </tr>
       <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  FHjiN"
+        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
         id="proposalForm-2"
       >
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -343,7 +343,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -358,7 +358,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -368,7 +368,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -378,7 +378,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           &lt;mock-value-for-field-"createdAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
           style={
             Object {
               "whiteSpace": "initial",
@@ -494,7 +494,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
       className="sc-bdnxRM dSQJSh"
     >
       <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  FHjiN"
+        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
       >
         <th
           className="sc-bdnxRM ejslJN"
@@ -652,11 +652,11 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
       className="sc-bdnxRM dZBmCd"
     >
       <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  FHjiN"
+        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
         id="proposalForm-1"
       >
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -671,7 +671,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -686,7 +686,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -696,7 +696,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -706,7 +706,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           &lt;mock-value-for-field-"createdAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
           style={
             Object {
               "whiteSpace": "initial",
@@ -807,11 +807,11 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
         </td>
       </tr>
       <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  FHjiN"
+        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
         id="proposalForm-2"
       >
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -826,7 +826,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -841,7 +841,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           </a>
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -851,7 +851,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -861,7 +861,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           &lt;mock-value-for-field-"createdAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM iRZsbe"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
           style={
             Object {
               "whiteSpace": "initial",

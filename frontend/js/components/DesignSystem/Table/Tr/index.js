@@ -20,8 +20,22 @@ type TrProps = {|
 
 const styles = (isLoading: ?boolean, verticalAlign: VerticalAlign) =>
   css({
-    ':hover': isLoading ? {} : { bg: 'gray.100' },
-    '& td': { verticalAlign },
+    ':hover': isLoading
+      ? {}
+      : {
+          bg: 'gray.100',
+
+          '.visible-on-hover': {
+            opacity: 1,
+          },
+        },
+    '& td': {
+      verticalAlign,
+
+      '&.visible-on-hover': {
+        opacity: 0,
+      },
+    },
   });
 
 const Tr = ({

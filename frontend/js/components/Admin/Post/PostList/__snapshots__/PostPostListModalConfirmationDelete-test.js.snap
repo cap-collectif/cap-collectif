@@ -14,11 +14,6 @@ Array [
     onKeyUp={[Function]}
     onMouseDown={[Function]}
     onMouseDownCapture={[Function]}
-    style={
-      Object {
-        "opacity": 0,
-      }
-    }
     type="button"
   >
     <IconMock
@@ -81,11 +76,6 @@ Array [
     onKeyUp={[Function]}
     onMouseDown={[Function]}
     onMouseDownCapture={[Function]}
-    style={
-      Object {
-        "opacity": 0,
-      }
-    }
     type="button"
   >
     <IconMock

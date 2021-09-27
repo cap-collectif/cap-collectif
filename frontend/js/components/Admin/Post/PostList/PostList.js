@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { graphql, type GraphQLTaggedNode, usePaginationFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
-import css from '@styled-system/css';
 import type { PostList_viewer$key } from '~relay/PostList_viewer.graphql';
 import Table from '~ds/Table';
 import Tr from '~ds/Table/Tr';
@@ -11,7 +10,6 @@ import Menu from '../../../DesignSystem/Menu/Menu';
 import Button from '~ds/Button/Button';
 import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import Text from '~ui/Primitives/Text';
-import colors from '~/styles/modules/colors';
 
 export const POST_LIST_PAGINATION = 20;
 
@@ -138,15 +136,7 @@ const PostList = ({ viewer, term, isAdmin, resetTerm }: Props): React.Node => {
           .map(edge => edge.node)
           .filter(Boolean)
           .map(post => (
-            <Tr
-              key={post.id}
-              rowId={post.id}
-              css={css({
-                a: { textDecoration: 'none ', color: colors.gray['900'] },
-                '&:hover a': { textDecoration: 'underline' },
-                '&:hover button': { opacity: '1 !important' },
-                'a:hover': { color: `${colors.blue['500']}!important` },
-              })}>
+            <Tr key={post.id} rowId={post.id}>
               <PostItem post={post} connectionName={posts.__id} />
             </Tr>
           ))}

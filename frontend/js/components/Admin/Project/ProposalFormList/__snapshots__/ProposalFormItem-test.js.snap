@@ -3,7 +3,7 @@
 exports[`<ProposalFormItem /> <TestProposalFormItem /> should render correctly 1`] = `
 Array [
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -18,7 +18,7 @@ Array [
     </a>
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -33,7 +33,7 @@ Array [
     </a>
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -43,7 +43,7 @@ Array [
     2050-03-01 12:00:00
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
     style={
       Object {
         "whiteSpace": "initial",
@@ -53,7 +53,7 @@ Array [
     2050-03-01 12:00:00
   </td>,
   <td
-    className="sc-bdnxRM iRZsbe"
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
     style={
       Object {
         "whiteSpace": "initial",

@@ -102,7 +102,7 @@ const ProposalFormItem = ({
           year: 'numeric',
         })}
       </Table.Td>
-      <Table.Td>
+      <Table.Td visibleOnHover>
         <ButtonGroup>
           <ButtonQuickAction
             icon="DUPLICATE"
