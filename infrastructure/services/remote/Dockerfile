@@ -1,10 +1,6 @@
-FROM node:16-slim AS node
-
-FROM debian:buster AS base
+FROM debian:buster
 
 LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
-
-ARG APP_VERSION="latest"
 
 # Install basic
 RUN set -x \
@@ -216,45 +212,91 @@ COPY infrastructure/services/remote/cron/check_db_schema            /etc/cron.da
 # Daemons
 COPY infrastructure/services/remote/php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
 
-ENV SYMFONY_ENVIRONMENT prod
-ENV SYMFONY_DEBUG false
-ENV SYMFONY_APP_VERSION=$APP_VERSION
+# NodeJS
+ENV NODE_VERSION 16.10.0
+RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
+  && case "${dpkgArch##*-}" in \
+    amd64) ARCH='x64';; \
+    ppc64el) ARCH='ppc64le';; \
+    s390x) ARCH='s390x';; \
+    arm64) ARCH='arm64';; \
+    armhf) ARCH='armv7l';; \
+    i386) ARCH='x86';; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+  esac \
+  # gpg keys listed at https://github.com/nodejs/node#release-keys
+  && set -ex \
+  && for key in \
+    4ED778F539E3634C779C87C6D7062848A1AB005C \
+    94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
+    74F12602B6F1C4E913FAA37AD3A89613643B6201 \
+    71DCFD284A79C3B38668286BC97EC7A07EDE3FC1 \
+    8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600 \
+    C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8 \
+    C82FA3AE1CBEDC6BE46B9360C43CEC45C17AB93C \
+    DD8F2338BAE7501E3DD5AC78C273792F7D83545D \
+    A48C2BEE680E841632CD4E44F07496B3EB3C1762 \
+    108F52B48DB57BB0CC439B2997B01419BD92F80A \
+    B9E2F5981AA6E0CD28160D9FF13993A75599653C \
+  ; do \
+      gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$key" || \
+      gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" ; \
+  done \
+  && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" \
+  && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+  && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
+  && grep " node-v$NODE_VERSION-linux-$ARCH.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
+  && tar -xJf "node-v$NODE_VERSION-linux-$ARCH.tar.xz" -C /usr/local --strip-components=1 --no-same-owner \
+  && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
+  && ln -s /usr/local/bin/node /usr/local/bin/nodejs \
+  # smoke tests
+  && node --version \
+  && npm --version
 
-# make pam_loginuid.so optional for cron
-# see https://github.com/docker/docker/issues/5663#issuecomment-42550548
-RUN sed --regexp-extended --in-place \
-    's/^session\s+required\s+pam_loginuid.so$/session optional pam_loginuid.so/' \
-    /etc/pam.d/cron
+ENV YARN_VERSION 1.22.5
+
+RUN set -ex \
+  && for key in \
+    6A010C5166006599AA17F08146C2130DFD2497F5 \
+  ; do \
+    gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$key" || \
+    gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" ; \
+  done \
+  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
+  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc" \
+  && gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
+  && mkdir -p /opt \
+  && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
+  && ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
+  && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
+  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
+  # smoke test
+  && yarn --version
+
+RUN yarn global add pm2
+
+# Newrelic agent
+ENV NEWRELIC_VERSION=9.16.0.295
+ENV NEWRELIC_NAME=newrelic-php5-$NEWRELIC_VERSION-linux
+ENV NEWRELIC_AGENT_URL=https://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/${NEWRELIC_NAME}.tar.gz
+RUN curl -L $NEWRELIC_AGENT_URL | tar -C /tmp -zx && \
+  export NR_INSTALL_USE_CP_NOT_LN=1 && \
+  export NR_INSTALL_SILENT=1 && \
+  /tmp/$NEWRELIC_NAME/newrelic-install install && \
+  rm -rf /tmp/newrelic-php5-* /tmp/nrinstall*
+
+# RedirectionIO
+WORKDIR /usr/local/bin/
+RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
+RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
 
 # Create Working dir with good rights
 RUN mkdir -p /var/www \
     && chown capco:capco /var/www \
     && chmod 0644 /etc/cron.d/crontab \
     && find /etc/service/ -name "run" -exec chmod +x {} \;
-#RedirectionIO
-WORKDIR /usr/local/bin/
-RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
-RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
+
 WORKDIR /var/www
-
-# NodeJS
-ENV NODE_PATH=/usr/local/lib/node_modules
-
-COPY --from=node /usr/local/bin/node /usr/local/bin/node
-COPY --from=node /usr/local/include/node /usr/local/include/node
-COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
-    ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
-
-# yarn
-ENV YARN_VERSION 1.22.5
-RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
-    && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
-    && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
-    && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
-    && rm yarn-v$YARN_VERSION.tar.gz
-
-RUN yarn global add pm2
 
 # Download PHP dependencies
 COPY composer.json composer.lock ./
@@ -283,31 +325,32 @@ COPY node_modules /var/www/node_modules
 
 RUN mkdir -m 755 -p /tmp/phpstan/cache/PHPStan/
 
+# Symfony env
+ENV SYMFONY_ENVIRONMENT prod
+ENV SYMFONY_DEBUG false
+
 # Maybe chown before copy will be faster
 RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/__generated__ \
     && chown -R capco:capco bin translations src public app templates config fixtures admin-next \
     && mkdir -p var/cache/prod \
     && chmod -R 777 var
 
-# Newrelic agent
-ENV NEWRELIC_VERSION=9.16.0.295
-ENV NEWRELIC_NAME=newrelic-php5-$NEWRELIC_VERSION-linux
-ENV NEWRELIC_AGENT_URL=https://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/${NEWRELIC_NAME}.tar.gz
-
-RUN curl -L $NEWRELIC_AGENT_URL | tar -C /tmp -zx && \
-  export NR_INSTALL_USE_CP_NOT_LN=1 && \
-  export NR_INSTALL_SILENT=1 && \
-  /tmp/$NEWRELIC_NAME/newrelic-install install && \
-  rm -rf /tmp/newrelic-php5-* /tmp/nrinstall*
-
 # Admin-next
 ENV ADMIN_NEXT_PORT 3000
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV production
 
+# make pam_loginuid.so optional for cron
+# see https://github.com/docker/docker/issues/5663#issuecomment-42550548
+RUN sed --regexp-extended --in-place \
+    's/^session\s+required\s+pam_loginuid.so$/session optional pam_loginuid.so/' \
+    /etc/pam.d/cron
+
 # /!\
 # /!\ Beyond this step nothing is cached /!\
 # /!\
+ARG APP_VERSION="latest"
+ENV SYMFONY_APP_VERSION=$APP_VERSION
 
 # Build autoloader and initialize Symfony
 RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
