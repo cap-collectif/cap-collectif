@@ -8,42 +8,37 @@ exports[`<EventMap /> renders correctly 1`] = `
     }
   }
 >
-  <Connect(LeafletMap)
+  <Relay(Connect(LeafletMap))
     defaultMapOptions={
       Object {
         "zoom": 12,
       }
     }
     loading={false}
-    markers={
+    query={
       Object {
-        "edges": Array [
-          Object {
-            "node": Object {
-              "googleMapsAddress": Object {
-                "lat": 47.12345789,
-                "lng": 1.23456789,
+        "$fragmentRefs": null,
+        "$refType": null,
+        "events": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "event1",
               },
-              "id": "event1",
             },
-          },
-          Object {
-            "node": Object {
-              "googleMapsAddress": Object {
-                "lat": 47.1235444789,
-                "lng": 1.23477789,
+            Object {
+              "node": Object {
+                "id": "event2",
               },
-              "id": "event2",
             },
+          ],
+          "pageInfo": Object {
+            "endCursor": "cursor2",
+            "hasNextPage": true,
+            "hasPreviousPage": false,
+            "startCursor": "cursor1",
           },
-        ],
-        "pageInfo": Object {
-          "endCursor": "cursor2",
-          "hasNextPage": true,
-          "hasPreviousPage": false,
-          "startCursor": "cursor1",
         },
-        "totalCount": 5,
       }
     }
   />

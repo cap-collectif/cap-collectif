@@ -1,39 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LeafletMap /> should render a map with markers 1`] = `
-<div
-  style={
-    Object {
-      "position": "relative",
-    }
-  }
->
-  <MapContainer
-    doubleClickZoom={false}
-    gestureHandling={true}
-    id="event-map"
-    maxZoom={22}
-    preferCanvas={true}
-    scrollWheelZoom={false}
-    style={
-      Object {
-        "zIndex": "0",
-      }
-    }
-    zoom={12}
+Array [
+  <div
+    style="position:relative"
   >
-    <ForwardRef(LeafComponent)
-      attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
-      url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
+    <div
+      id="event-map"
+      style="z-index:0"
     />
-    <ForwardRef(ContainerComponent)
-      maxClusterRadius={30}
-      onPopupClose={[Function]}
-      showCoverageOnHover={false}
-      spiderfyOnMaxZoom={true}
-      zoomToBoundsOnClick={true}
-    />
-    <injectIntl(Component) />
-  </MapContainer>
-</div>
+  </div>,
+  ",",
+]
 `;

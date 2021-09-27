@@ -47,7 +47,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         "zIndex": 0,
       }
     }
-    tap={true}
+    tap={false}
     whenCreated={[Function]}
     zoom={12}
     zoomControl={false}
@@ -330,7 +330,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         "zIndex": 0,
       }
     }
-    tap={true}
+    tap={false}
     whenCreated={[Function]}
     zoom={12}
     zoomControl={false}

@@ -75,7 +75,7 @@ export const EventListPage = ({
         `}
         variables={
           ({
-            count: config.isMobile ? 25 : 100,
+            count: config.isMobile ? 25 : 50,
             cursor: null,
             search: null,
             theme: null,

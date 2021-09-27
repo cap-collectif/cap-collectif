@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { EventMap } from './EventMap';
-import { $refType, relayPaginationMock } from '../../../mocks';
+import { $refType, relayPaginationMock, $fragmentRefs } from '~/mocks';
 
 describe('<EventMap />', () => {
   it('renders correctly', () => {
@@ -11,8 +11,8 @@ describe('<EventMap />', () => {
       relay: relayPaginationMock,
       query: {
         $refType,
+        $fragmentRefs,
         events: {
-          totalCount: 5,
           pageInfo: {
             hasNextPage: true,
             hasPreviousPage: false,
@@ -23,19 +23,11 @@ describe('<EventMap />', () => {
             {
               node: {
                 id: 'event1',
-                googleMapsAddress: {
-                  lat: 47.12345789,
-                  lng: 1.23456789,
-                },
               },
             },
             {
               node: {
                 id: 'event2',
-                googleMapsAddress: {
-                  lat: 47.1235444789,
-                  lng: 1.23477789,
-                },
               },
             },
           ],

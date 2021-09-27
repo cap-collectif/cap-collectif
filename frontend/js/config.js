@@ -14,6 +14,9 @@ const isDev = () =>
 // This may not be up to date in admin-next
 export const baseUrl = getBaseUrl();
 
+export const isSafari = typeof window !== 'undefined' &&
+  window.navigator && /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent);
+
 export const getBaseUrlWithAdminNextSupport = () => {
   if (isDev()) {
     return 'https://capco.dev';

@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import 'url-search-params-polyfill';
 import { shouldPolyfill } from '@formatjs/intl-pluralrules/should-polyfill';
 import { shouldPolyfill as relativeShouldPolyfill } from '@formatjs/intl-relativetimeformat/should-polyfill';
+import { isSafari } from '~/config'
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -92,8 +93,6 @@ if (!global.fetch) {
 if (!Modernizr.intl) {
   require('./browserUpdate');
 }
-
-const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 if (isSafari) {
   // polyfill for IntersectionObserver

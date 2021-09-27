@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-import Truncate from 'react-truncate';
 import Card from '~/components/Ui/Card/Card';
 import TagUser from '~/components/Tag/TagUser/TagUser';
 import TagCity from '~/components/Tag/TagCity/TagCity';
@@ -11,6 +10,7 @@ import EventImage from '~/components/Event/EventImage/EventImage';
 import EventMapPreviewContainer from './EventMapPreview.style';
 import type { State } from '~/types';
 import type { EventMapPreview_event } from '~relay/EventMapPreview_event.graphql';
+import Text from '~ui/Primitives/Text';
 
 type EventMapPreviewProps = {
   event: EventMapPreview_event,
@@ -27,7 +27,9 @@ export const EventMapPreview = ({ hasIllustrationDisplayed, event }: EventMapPre
         <Card.Body>
           <Card.Title>
             <a href={url} title={title}>
-              <Truncate lines={2}>{title}</Truncate>
+              <Text m={0} as="div" truncate={100}>
+                {title}
+              </Text>
             </a>
           </Card.Title>
 

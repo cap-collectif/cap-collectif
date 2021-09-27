@@ -21,6 +21,7 @@ import ProposalMapPopover from './ProposalMapPopover';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_proposals.graphql';
 import type { ProposalLeafletMap_proposalForm } from '~relay/ProposalLeafletMap_proposalForm.graphql';
+import { isSafari } from '~/config';
 
 import {
   StyledMap,
@@ -222,10 +223,10 @@ export const ProposalLeafletMap = ({
         }}
         zoomControl={false}
         dragging={!L.Browser.mobile}
-        tap={!L.Browser.mobile}
+        tap={false}
         className={className}
         doubleClickZoom={false}
-        gestureHandling>
+        gestureHandling={!isSafari}>
         <TileLayer
           attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
           url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}

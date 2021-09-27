@@ -15,7 +15,7 @@ type State = {|
   loading: boolean,
 |};
 
-const PAGINATION = 100;
+const PAGINATION = 50;
 
 export class EventMap extends React.Component<Props, State> {
   state = {
@@ -39,10 +39,7 @@ export class EventMap extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      relay,
-      query: { events },
-    } = this.props;
+    const { relay, query } = this.props;
     const { loading } = this.state;
     return (
       <div style={{ position: 'relative' }}>
@@ -60,7 +57,7 @@ export class EventMap extends React.Component<Props, State> {
           </Button>
         )}
         {/* $FlowFixMe */}
-        <LeafletMap loading={loading} markers={events} defaultMapOptions={{ zoom: 12 }} />
+        <LeafletMap loading={loading} query={query} defaultMapOptions={{ zoom: 12 }} />
       </div>
     );
   }
@@ -97,7 +94,6 @@ export default createPaginationContainer(
           isRegistrable: $isRegistrable
           orderBy: $orderBy
         ) @connection(key: "EventMap_events", filters: []) {
-          totalCount
           pageInfo {
             hasNextPage
             endCursor
@@ -107,13 +103,23 @@ export default createPaginationContainer(
           edges {
             node {
               id
-              googleMapsAddress {
-                lat
-                lng
-              }
             }
           }
         }
+        ...LeafletMap_query
+          @arguments(
+            count: $count
+            cursor: $cursor
+            theme: $theme
+            project: $project
+            locale: $locale
+            search: $search
+            userType: $userType
+            isFuture: $isFuture
+            author: $author
+            isRegistrable: $isRegistrable
+            orderBy: $orderBy
+          )
       }
     `,
   },

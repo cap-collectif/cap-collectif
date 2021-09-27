@@ -1,8 +1,10 @@
 // @flow
 /* eslint-env jest */
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'enzyme';
 import { LeafletMap } from './LeafletMap';
+import { $fragmentRefs, $refType } from '~/mocks';
+import { MockProviders } from '~/testUtils';
 
 describe('<LeafletMap />', () => {
   const defaultMapOptions = {
@@ -10,8 +12,9 @@ describe('<LeafletMap />', () => {
     zoom: 12,
   };
 
-  const markers = {
-    marker: {
+  const query = {
+    $refType,
+    events: {
       edges: [
         {
           node: {
@@ -20,6 +23,7 @@ describe('<LeafletMap />', () => {
               lat: 47.12345789,
               lng: 1.23456789,
             },
+            $fragmentRefs,
           },
         },
         {
@@ -29,32 +33,19 @@ describe('<LeafletMap />', () => {
               lat: 47.1235444789,
               lng: 1.23477789,
             },
+            $fragmentRefs,
           },
         },
       ],
     },
   };
 
-  const props = {
-    dispatch: jest.fn(),
-    eventSelected: 'event2',
-    mapTokens: {
-      MAPBOX: {
-        initialPublicToken:
-          '***REMOVED***',
-        publicToken:
-          '***REMOVED***',
-        styleOwner: 'capcollectif',
-        styleId: '***REMOVED***',
-      },
-    },
-  };
-
   it('should render a map with markers', () => {
-    const wrapper = shallow(
-      <LeafletMap defaultMapOptions={defaultMapOptions} {...props} markers={markers} />,
+    const wrapper = render(
+      <MockProviders store={{}}>
+        <LeafletMap defaultMapOptions={defaultMapOptions} loading={false} query={query} />,
+      </MockProviders>,
     );
-    wrapper.setState({ loaded: false });
     expect(wrapper).toMatchSnapshot();
   });
 });

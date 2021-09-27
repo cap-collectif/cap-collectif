@@ -31,7 +31,7 @@ type Props = {|
   +status: string,
 |};
 
-const EVENTS_PAGINATION = 100;
+const EVENTS_PAGINATION = 50;
 
 const MapContainer: StyledComponent<{}, {}, typeof Col> = styled(Col)`
   top: 150px;

@@ -1,74 +1,44 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { connect } from 'react-redux';
-import { fetchQuery_DEPRECATED, graphql } from 'relay-runtime';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { graphql } from 'relay-runtime';
 import { FormattedMessage } from 'react-intl';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import L from 'leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
+import { createFragmentContainer } from 'react-relay';
 import LocateControl from '~/components/Proposal/Map/LocateControl';
 import type { GlobalState, Dispatch } from '~/types';
 import { changeEventSelected } from '~/redux/modules/event';
 import type { MapTokens } from '~/redux/modules/user';
 import type { MapOptions } from '~/components/Proposal/Map/Map.types';
 import EventMapPreview from './EventMapPreview/EventMapPreview';
-import environment from '~/createRelayEnvironment';
-import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
-import type { EventMapPreview_event } from '~relay/EventMapPreview_event.graphql';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
+import type { LeafletMap_query } from '~relay/LeafletMap_query.graphql';
+import { isSafari } from '~/config';
 
 type Props = {|
-  markers: Object | '',
-  mapTokens: MapTokens,
+  query: LeafletMap_query,
   defaultMapOptions: MapOptions,
-  eventSelected: ?string,
-  dispatch: Dispatch,
   loading: boolean,
 |};
 
-type State = {|
-  currentEvent: ?EventMapPreview_event,
-|};
+export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
+  const markers = query.events;
 
-const eventMapPreviewQuery = graphql`
-  query LeafletMapQuery($id: ID!) {
-    node(id: $id) {
-      ... on Event {
-        id
-        ...EventMapPreview_event
-      }
-    }
-  }
-`;
+  const eventSelected: ?string = useSelector((state: GlobalState) => state.event.eventSelected);
+  const mapTokens: MapTokens = useSelector((state: GlobalState) => state.user.mapTokens);
 
-export class LeafletMap extends Component<Props, State> {
-  eventsViewed = [];
+  const dispatch: Dispatch = useDispatch();
 
-  static defaultProps = {
-    markers: '',
-    loading: false,
-    defaultMapOptions: {
-      center: { lat: 48.8586047, lng: 2.3137325 },
-      zoom: 10,
-    },
-  };
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      currentEvent: null,
-    };
-  }
-
-  componentDidMount() {
+  React.useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
-  }
+  }, []);
 
-  getMarkerIcon = (marker: Object) => {
-    const { eventSelected } = this.props;
+  const getMarkerIcon = marker => {
     if (eventSelected && eventSelected === marker.id) {
       return L.icon({
         iconUrl: '/svg/marker-red.svg',
@@ -85,133 +55,130 @@ export class LeafletMap extends Component<Props, State> {
     });
   };
 
-  handleMarkersClick = (marker: Object) => {
-    const { dispatch } = this.props;
-    const { currentEvent } = this.state;
-    const currentMarkerId = marker.id;
+  const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
+  const markersGroup = [];
 
-    dispatch(changeEventSelected(currentMarkerId));
-
-    // load from local cache
-    if (typeof this.eventsViewed[currentMarkerId] !== 'undefined') {
-      this.setState({ currentEvent: this.eventsViewed[currentMarkerId] });
-    } else if (
-      currentEvent === null ||
-      typeof currentEvent !== 'undefined' ||
-      (currentEvent && currentEvent.id) !== currentMarkerId
-    ) {
-      fetchQuery_DEPRECATED(environment, eventMapPreviewQuery, { id: currentMarkerId }).then(
-        data => {
-          // add it in local cache
-          this.eventsViewed[data.node.id] = data.node;
-          this.setState({ currentEvent: data.node });
-        },
-      );
-    }
-  };
-
-  render() {
-    const { loading, markers, defaultMapOptions, eventSelected, mapTokens, dispatch } = this.props;
-    const { currentEvent } = this.state;
-    const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
-    const markersGroup = [];
-
-    if (markers && markers.edges && markers.edges.length > 0) {
-      markers.edges
-        .filter(Boolean)
-        .map(edge => edge.node)
-        .filter(Boolean)
-        .map(marker => {
-          if (marker.googleMapsAddress) {
-            markersGroup.push(L.latLng(marker.googleMapsAddress.lat, marker.googleMapsAddress.lng));
-          }
-        });
-    }
-
-    const bounds = L.latLngBounds(markersGroup);
-
-    return (
-      <div style={{ position: 'relative' }}>
-        {loading ? (
-          <p
-            style={{
-              position: 'absolute',
-              marginLeft: '-50px',
-              left: '50%',
-              top: '50%',
-              color: '#000',
-              zIndex: '1500',
-            }}>
-            <FormattedMessage id="global.loading" />
-          </p>
-        ) : null}
-
-        <MapContainer
-          bounds={bounds.isValid() ? bounds : undefined}
-          zoom={defaultMapOptions.zoom}
-          maxZoom={MAX_MAP_ZOOM}
-          preferCanvas
-          id="event-map"
-          style={loading ? { WebkitFilter: 'blur(5px)', zIndex: '0' } : { zIndex: '0' }}
-          scrollWheelZoom={false}
-          doubleClickZoom={false}
-          gestureHandling>
-          <TileLayer
-            attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-            url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-          />
-          <MarkerClusterGroup
-            spiderfyOnMaxZoom
-            showCoverageOnHover={false}
-            zoomToBoundsOnClick
-            onPopupClose={() => {
-              dispatch(changeEventSelected(null));
-            }}
-            maxClusterRadius={30}>
-            {markers &&
-              markers.edges &&
-              markers.edges.length > 0 &&
-              markers.edges
-                .filter(Boolean)
-                .map(edge => edge.node)
-                .filter(Boolean)
-                .map(marker =>
-                  marker.googleMapsAddress ? (
-                    <Marker
-                      key={marker.id}
-                      // That's not how it's supposed to be done, see https://github.com/YUzhva/react-leaflet-markercluster/issues/91
-                      onClick={() => this.handleMarkersClick(marker)}
-                      position={[marker.googleMapsAddress.lat, marker.googleMapsAddress.lng]}
-                      icon={this.getMarkerIcon(marker)}>
-                      <Popup
-                        autoPanPadding={[50, 50]}
-                        maxWidth={250}
-                        minWidth={250}
-                        className={
-                          eventSelected && eventSelected === marker.id
-                            ? 'event-map-popup'
-                            : 'popup-hidden'
-                        }>
-                        {currentEvent && currentEvent.id === marker.id ? (
-                          <EventMapPreview event={currentEvent} />
-                        ) : (
-                          <Loader />
-                        )}
-                      </Popup>
-                    </Marker>
-                  ) : null,
-                )}
-          </MarkerClusterGroup>
-          <LocateControl />
-        </MapContainer>
-      </div>
-    );
+  if (markers && markers.edges && markers.edges.length > 0) {
+    markers.edges
+      .filter(Boolean)
+      .map(edge => edge.node)
+      .filter(Boolean)
+      .map(marker => {
+        if (marker.googleMapsAddress) {
+          markersGroup.push(L.latLng(marker.googleMapsAddress.lat, marker.googleMapsAddress.lng));
+        }
+      });
   }
-}
 
-const mapStateToProps = (state: GlobalState) => ({
-  eventSelected: state.event.eventSelected,
-  mapTokens: state.user.mapTokens,
+  const bounds = L.latLngBounds(markersGroup);
+
+  return (
+    <div style={{ position: 'relative' }}>
+      {loading ? (
+        <p
+          style={{
+            position: 'absolute',
+            marginLeft: '-50px',
+            left: '50%',
+            top: '50%',
+            color: '#000',
+            zIndex: '1500',
+          }}>
+          <FormattedMessage id="global.loading" />
+        </p>
+      ) : null}
+
+      <MapContainer
+        bounds={bounds.isValid() ? bounds : undefined}
+        zoom={defaultMapOptions.zoom}
+        maxZoom={MAX_MAP_ZOOM}
+        preferCanvas
+        id="event-map"
+        style={loading ? { WebkitFilter: 'blur(5px)', zIndex: '0' } : { zIndex: '0' }}
+        scrollWheelZoom={false}
+        doubleClickZoom={false}
+        gestureHandling={!isSafari}
+        tap={false}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
+          url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
+        />
+        <MarkerClusterGroup
+          spiderfyOnMaxZoom
+          showCoverageOnHover={false}
+          zoomToBoundsOnClick
+          onPopupClose={() => {
+            dispatch(changeEventSelected(null));
+          }}
+          maxClusterRadius={30}>
+          {markers &&
+            markers.edges &&
+            markers.edges.length > 0 &&
+            markers.edges
+              .filter(Boolean)
+              .map(edge => edge.node)
+              .filter(Boolean)
+              .map(marker =>
+                marker.googleMapsAddress ? (
+                  <Marker
+                    key={marker.id}
+                    position={[marker.googleMapsAddress.lat, marker.googleMapsAddress.lng]}
+                    icon={getMarkerIcon(marker)}>
+                    <Popup autoPanPadding={[50, 50]} maxWidth={250} minWidth={250}>
+                      <EventMapPreview event={marker} />
+                    </Popup>
+                  </Marker>
+                ) : null,
+              )}
+        </MarkerClusterGroup>
+        <LocateControl />
+      </MapContainer>
+    </div>
+  );
+};
+
+const Container = connect<any, any, _, _, _, _>()(LeafletMap);
+
+export default createFragmentContainer(Container, {
+  query: graphql`
+    fragment LeafletMap_query on Query
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        theme: { type: "ID" }
+        project: { type: "ID" }
+        locale: { type: "TranslationLocale" }
+        search: { type: "String" }
+        userType: { type: "ID" }
+        isFuture: { type: "Boolean" }
+        author: { type: "ID" }
+        isRegistrable: { type: "Boolean" }
+        orderBy: { type: "EventOrder" }
+      ) {
+      events(
+        first: $count
+        after: $cursor
+        theme: $theme
+        project: $project
+        locale: $locale
+        search: $search
+        userType: $userType
+        isFuture: $isFuture
+        author: $author
+        isRegistrable: $isRegistrable
+        orderBy: $orderBy
+      ) @connection(key: "EventMap_events", filters: []) {
+        edges {
+          node {
+            id
+            googleMapsAddress {
+              lat
+              lng
+            }
+            ...EventMapPreview_event
+          }
+        }
+      }
+    }
+  `,
 });
-
-export default connect<any, any, _, _, _, _>(mapStateToProps)(LeafletMap);

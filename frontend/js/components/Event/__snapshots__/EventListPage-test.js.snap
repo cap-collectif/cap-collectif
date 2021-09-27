@@ -639,13 +639,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
-                  "kind": "ScalarField",
-                  "name": "totalCount",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
                   "concreteType": "PageInfo",
                   "kind": "LinkedField",
                   "name": "pageInfo",
@@ -708,6 +701,13 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "GoogleMapsAddress",
                           "kind": "LinkedField",
                           "name": "googleMapsAddress",
@@ -748,13 +748,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "__typename",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "title",
                           "storageKey": null,
                         },
@@ -763,20 +756,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "url",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "guestListEnabled",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isPresential",
                           "storageKey": null,
                         },
                         Object {
@@ -799,81 +778,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "endAt",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isRecordingPublished",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "Theme",
-                          "kind": "LinkedField",
-                          "name": "themes",
-                          "plural": true,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "__typename",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": null,
-                          "kind": "LinkedField",
-                          "name": "steps",
-                          "plural": true,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "__typename",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "abstractKey": "__isStep",
-                              "kind": "TypeDiscriminator",
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -977,6 +881,95 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "guestListEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isPresential",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isRecordingPublished",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Theme",
+                          "kind": "LinkedField",
+                          "name": "themes",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": null,
+                          "kind": "LinkedField",
+                          "name": "steps",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isStep",
+                              "kind": "TypeDiscriminator",
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "EventReview",
                           "kind": "LinkedField",
                           "name": "review",
@@ -1017,6 +1010,13 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                       "storageKey": null,
                     },
                   ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "totalCount",
                   "storageKey": null,
                 },
               ],
@@ -1617,7 +1617,7 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "78dcc9e92d5d580e00d9794bff230fed",
+          "cacheID": "dd8546fe034db9f173f30cacadc08fbb",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -1732,9 +1732,26 @@ fragment EventListPaginated_query_307oU4 on Query {
   }
 }
 
+fragment EventMapPreview_event on Event {
+  id
+  title
+  url
+  timeRange {
+    startAt
+  }
+  googleMapsAddress {
+    __typename
+    ...TagCity_address
+  }
+  author {
+    ...TagUser_user
+    id
+  }
+  ...EventImage_event
+}
+
 fragment EventMap_query_307oU4 on Query {
   events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
-    totalCount
     pageInfo {
       hasNextPage
       endCursor
@@ -1744,15 +1761,12 @@ fragment EventMap_query_307oU4 on Query {
     edges {
       node {
         id
-        googleMapsAddress {
-          lat
-          lng
-        }
         __typename
       }
       cursor
     }
   }
+  ...LeafletMap_query_307oU4
 }
 
 fragment EventPagePassedEventsPreview_query_qo3MD on Query {
@@ -1801,6 +1815,27 @@ fragment EventPreview_event on Event {
 
 fragment EventRefetch_query_307oU4 on Query {
   ...EventListPaginated_query_307oU4
+}
+
+fragment LeafletMap_query_307oU4 on Query {
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+    edges {
+      node {
+        id
+        googleMapsAddress {
+          lat
+          lng
+        }
+        ...EventMapPreview_event
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
 }
 
 fragment SelectProject_query_2yiOJi on Query {
@@ -1864,7 +1899,7 @@ fragment UserLink_user on User {
     variables={
       Object {
         "author": null,
-        "count": 100,
+        "count": 50,
         "cursor": null,
         "isAuthenticated": false,
         "isFuture": true,
@@ -2523,13 +2558,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
-                  "kind": "ScalarField",
-                  "name": "totalCount",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
                   "concreteType": "PageInfo",
                   "kind": "LinkedField",
                   "name": "pageInfo",
@@ -2592,6 +2620,13 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "GoogleMapsAddress",
                           "kind": "LinkedField",
                           "name": "googleMapsAddress",
@@ -2632,13 +2667,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "__typename",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "title",
                           "storageKey": null,
                         },
@@ -2647,20 +2675,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "url",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "guestListEnabled",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isPresential",
                           "storageKey": null,
                         },
                         Object {
@@ -2683,81 +2697,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "endAt",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isRecordingPublished",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "Theme",
-                          "kind": "LinkedField",
-                          "name": "themes",
-                          "plural": true,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "__typename",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": null,
-                          "kind": "LinkedField",
-                          "name": "steps",
-                          "plural": true,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "__typename",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "abstractKey": "__isStep",
-                              "kind": "TypeDiscriminator",
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -2861,6 +2800,95 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "guestListEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isPresential",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isRecordingPublished",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Theme",
+                          "kind": "LinkedField",
+                          "name": "themes",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": null,
+                          "kind": "LinkedField",
+                          "name": "steps",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isStep",
+                              "kind": "TypeDiscriminator",
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "EventReview",
                           "kind": "LinkedField",
                           "name": "review",
@@ -2901,6 +2929,13 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                       "storageKey": null,
                     },
                   ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "totalCount",
                   "storageKey": null,
                 },
               ],
@@ -3501,7 +3536,7 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "78dcc9e92d5d580e00d9794bff230fed",
+          "cacheID": "dd8546fe034db9f173f30cacadc08fbb",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -3616,9 +3651,26 @@ fragment EventListPaginated_query_307oU4 on Query {
   }
 }
 
+fragment EventMapPreview_event on Event {
+  id
+  title
+  url
+  timeRange {
+    startAt
+  }
+  googleMapsAddress {
+    __typename
+    ...TagCity_address
+  }
+  author {
+    ...TagUser_user
+    id
+  }
+  ...EventImage_event
+}
+
 fragment EventMap_query_307oU4 on Query {
   events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
-    totalCount
     pageInfo {
       hasNextPage
       endCursor
@@ -3628,15 +3680,12 @@ fragment EventMap_query_307oU4 on Query {
     edges {
       node {
         id
-        googleMapsAddress {
-          lat
-          lng
-        }
         __typename
       }
       cursor
     }
   }
+  ...LeafletMap_query_307oU4
 }
 
 fragment EventPagePassedEventsPreview_query_qo3MD on Query {
@@ -3685,6 +3734,27 @@ fragment EventPreview_event on Event {
 
 fragment EventRefetch_query_307oU4 on Query {
   ...EventListPaginated_query_307oU4
+}
+
+fragment LeafletMap_query_307oU4 on Query {
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+    edges {
+      node {
+        id
+        googleMapsAddress {
+          lat
+          lng
+        }
+        ...EventMapPreview_event
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
 }
 
 fragment SelectProject_query_2yiOJi on Query {
@@ -3748,7 +3818,7 @@ fragment UserLink_user on User {
     variables={
       Object {
         "author": null,
-        "count": 100,
+        "count": 50,
         "cursor": null,
         "isAuthenticated": false,
         "isFuture": true,
@@ -4407,13 +4477,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
-                  "kind": "ScalarField",
-                  "name": "totalCount",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
                   "concreteType": "PageInfo",
                   "kind": "LinkedField",
                   "name": "pageInfo",
@@ -4476,6 +4539,13 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "GoogleMapsAddress",
                           "kind": "LinkedField",
                           "name": "googleMapsAddress",
@@ -4516,13 +4586,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "__typename",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "title",
                           "storageKey": null,
                         },
@@ -4531,20 +4594,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "url",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "guestListEnabled",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isPresential",
                           "storageKey": null,
                         },
                         Object {
@@ -4567,81 +4616,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "endAt",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isRecordingPublished",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "Theme",
-                          "kind": "LinkedField",
-                          "name": "themes",
-                          "plural": true,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "__typename",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": null,
-                          "kind": "LinkedField",
-                          "name": "steps",
-                          "plural": true,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "__typename",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "abstractKey": "__isStep",
-                              "kind": "TypeDiscriminator",
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -4745,6 +4719,95 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "guestListEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isPresential",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isRecordingPublished",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Theme",
+                          "kind": "LinkedField",
+                          "name": "themes",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": null,
+                          "kind": "LinkedField",
+                          "name": "steps",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isStep",
+                              "kind": "TypeDiscriminator",
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "EventReview",
                           "kind": "LinkedField",
                           "name": "review",
@@ -4785,6 +4848,13 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                       "storageKey": null,
                     },
                   ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "totalCount",
                   "storageKey": null,
                 },
               ],
@@ -5385,7 +5455,7 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "78dcc9e92d5d580e00d9794bff230fed",
+          "cacheID": "dd8546fe034db9f173f30cacadc08fbb",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -5500,9 +5570,26 @@ fragment EventListPaginated_query_307oU4 on Query {
   }
 }
 
+fragment EventMapPreview_event on Event {
+  id
+  title
+  url
+  timeRange {
+    startAt
+  }
+  googleMapsAddress {
+    __typename
+    ...TagCity_address
+  }
+  author {
+    ...TagUser_user
+    id
+  }
+  ...EventImage_event
+}
+
 fragment EventMap_query_307oU4 on Query {
   events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
-    totalCount
     pageInfo {
       hasNextPage
       endCursor
@@ -5512,15 +5599,12 @@ fragment EventMap_query_307oU4 on Query {
     edges {
       node {
         id
-        googleMapsAddress {
-          lat
-          lng
-        }
         __typename
       }
       cursor
     }
   }
+  ...LeafletMap_query_307oU4
 }
 
 fragment EventPagePassedEventsPreview_query_qo3MD on Query {
@@ -5569,6 +5653,27 @@ fragment EventPreview_event on Event {
 
 fragment EventRefetch_query_307oU4 on Query {
   ...EventListPaginated_query_307oU4
+}
+
+fragment LeafletMap_query_307oU4 on Query {
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+    edges {
+      node {
+        id
+        googleMapsAddress {
+          lat
+          lng
+        }
+        ...EventMapPreview_event
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
 }
 
 fragment SelectProject_query_2yiOJi on Query {
@@ -5632,7 +5737,7 @@ fragment UserLink_user on User {
     variables={
       Object {
         "author": null,
-        "count": 100,
+        "count": 50,
         "cursor": null,
         "isAuthenticated": false,
         "isFuture": true,
