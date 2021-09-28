@@ -12,15 +12,17 @@ class Version20151103115632 extends AbstractMigration
 {
     public function preUp(Schema $schema): void
     {
-        $responses = $this->connection->fetchAll('SELECT id, created_at FROM proposal_response');
+        $responses = $this->connection->fetchAllAssociative(
+            'SELECT id, created_at FROM proposal_response'
+        );
         foreach ($responses as $response) {
-            $proposals = $this->connection->fetchAll(
+            $proposals = $this->connection->fetchAllAssociative(
                 'SELECT id, proposal_form_id FROM proposal WHERE created_at = ?',
                 [$response['created_at']]
             );
             if (\count($proposals) > 0) {
                 $proposal = $proposals[0];
-                $question = $this->connection->fetchAll(
+                $question = $this->connection->fetchAllAssociative(
                     'SELECT id FROM question WHERE proposal_form_id = ?',
                     [$proposal['proposal_form_id']]
                 )[0];

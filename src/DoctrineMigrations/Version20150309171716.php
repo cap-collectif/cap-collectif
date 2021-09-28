@@ -21,7 +21,7 @@ class Version20150309171716 extends AbstractMigration implements ContainerAwareI
      *
      * @api
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -33,20 +33,20 @@ class Version20150309171716 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema): void
     {
-        $menuId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 1');
+        $menuId = $this->connection->fetchOne('SELECT id FROM menu WHERE type = 1');
 
         if (!$menuId) {
             $this->connection->insert('menu', ['type' => 1]);
             $menuId = $this->connection->lastInsertId();
         }
 
-        $menuItemId = $this->connection->fetchColumn(
+        $menuItemId = $this->connection->fetchOne(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
             ['link' => 'events', 'deletable' => 0]
         );
 
         if (!$menuItemId) {
-            $menuItemId = $this->connection->fetchColumn(
+            $menuItemId = $this->connection->fetchOne(
                 'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
                 ['link' => 'event', 'deletable' => 0]
             );

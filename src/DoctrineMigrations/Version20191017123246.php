@@ -20,7 +20,7 @@ final class Version20191017123246 extends AbstractMigration implements Container
     private $generator;
     private $em;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
         $this->em = $container->get('doctrine')->getManager();
@@ -66,7 +66,7 @@ final class Version20191017123246 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        $classificationCategories = $this->connection->fetchAll(
+        $classificationCategories = $this->connection->fetchAllAssociative(
             'SELECT id from classification__category where id = 2'
         );
         $now = new \DateTime();

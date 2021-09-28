@@ -16,7 +16,7 @@ class Version20150910154228 extends AbstractMigration
 
     public function preUp(Schema $schema): void
     {
-        $consultationsOpinions = $this->connection->fetchAll(
+        $consultationsOpinions = $this->connection->fetchAllAssociative(
             '
           SELECT consultationstep_id as step, opiniontype_id as ot FROM consultationstep_opiniontypes
         '
@@ -27,7 +27,7 @@ class Version20150910154228 extends AbstractMigration
             $this->steps[$co['step']]['ots'][] = $co['ot'];
         }
 
-        $consultationTypes = $this->connection->fetchAll(
+        $consultationTypes = $this->connection->fetchAllAssociative(
             '
             SELECT ctot.consultationtype_id as ct, ctot.opiniontype_id as ot, ct.title as ct_title
             FROM consultationtype_opiniontypes ctot
@@ -118,7 +118,7 @@ class Version20150910154228 extends AbstractMigration
                         ['id' => $otid]
                     );
                 } else {
-                    $values = $this->connection->fetchAll(
+                    $values = $this->connection->fetchAllAssociative(
                         'SELECT * from opinion_type WHERE id = ?',
                         [$otid]
                     )[0];
@@ -149,7 +149,7 @@ class Version20150910154228 extends AbstractMigration
 
     public function preDown(Schema $schema): void
     {
-        $consultationTypes = $this->connection->fetchAll(
+        $consultationTypes = $this->connection->fetchAllAssociative(
             '
             SELECT id as ot, consultation_type_id as type FROM opinion_type
         '
@@ -160,7 +160,7 @@ class Version20150910154228 extends AbstractMigration
             $this->cts[$ct['type']][] = $ct['ot'];
         }
 
-        $this->steps = $this->connection->fetchAll(
+        $this->steps = $this->connection->fetchAllAssociative(
             '
             SELECT id as step, consultation_type_id as type FROM step WHERE step_type = ?
         ',

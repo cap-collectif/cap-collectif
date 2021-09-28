@@ -13,7 +13,7 @@ class Version20170905121057 extends AbstractMigration implements ContainerAwareI
     private $generator;
     private $em;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
@@ -30,8 +30,8 @@ class Version20170905121057 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema): void
     {
-        $proposalForms = $this->connection->fetchAll('SELECT * from proposal_form');
-        $districts = $this->connection->fetchAll('SELECT * from district');
+        $proposalForms = $this->connection->fetchAllAssociative('SELECT * from proposal_form');
+        $districts = $this->connection->fetchAllAssociative('SELECT * from district');
         if (0 === \count($proposalForms)) {
             foreach ($districts as $district) {
                 $this->connection->delete('district', ['id' => $district['id']]);
@@ -64,7 +64,7 @@ class Version20170905121057 extends AbstractMigration implements ContainerAwareI
                 $district['id'] = $newDistrictId;
                 $this->connection->insert('district', $district);
                 // We must update district for each proposal
-                $proposals = $this->connection->fetchAll('SELECT * from proposal');
+                $proposals = $this->connection->fetchAllAssociative('SELECT * from proposal');
                 foreach ($proposals as $proposal) {
                     if (
                         $proposal['district_id'] === $previousDistrictId &&

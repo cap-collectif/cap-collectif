@@ -14,7 +14,7 @@ class Version20151125103922 extends AbstractMigration implements ContainerAwareI
 {
     private $container;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -22,7 +22,7 @@ class Version20151125103922 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema): void
     {
         // Find opinions in which opinion type is not correctly set
-        $opinions = $this->connection->fetchAll(
+        $opinions = $this->connection->fetchAllAssociative(
             '
           SELECT o.id as o_id,
             o.step_id as o_step_id,
@@ -44,7 +44,7 @@ class Version20151125103922 extends AbstractMigration implements ContainerAwareI
         );
         foreach ($opinions as $opinion) {
             // Get correct opinion type
-            $ot = $this->connection->fetchAll(
+            $ot = $this->connection->fetchAllAssociative(
                 '
                 SELECT ot.id
                 FROM opinion_type ot
@@ -72,7 +72,7 @@ class Version20151125103922 extends AbstractMigration implements ContainerAwareI
         }
 
         // Then fix opinion types with non unique slug
-        $opinionTypesSlugs = $this->connection->fetchAll(
+        $opinionTypesSlugs = $this->connection->fetchAllAssociative(
             '
             SELECT ot.slug as slug, count(ot.id) as count
             FROM opinion_type ot

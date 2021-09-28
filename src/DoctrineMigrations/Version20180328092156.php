@@ -31,12 +31,12 @@ class Version20180328092156 extends AbstractMigration
             'created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
             'updated_at' => (new \DateTime())->format('Y-m-d H:i:s'),
         ];
-        $request = $this->connection->fetchAll(
+        $request = $this->connection->fetchAllAssociative(
             "SELECT body FROM page WHERE slug = 'charte' LIMIT 1",
             ['']
         );
 
-        $menuItemChart = $this->connection->fetchAll(
+        $menuItemChart = $this->connection->fetchAllAssociative(
             "SELECT * FROM menu_item WHERE link = 'pages/charte' LIMIT 1",
             ['']
         );

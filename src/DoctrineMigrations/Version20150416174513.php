@@ -28,14 +28,14 @@ class Version20150416174513 extends AbstractMigration
         $date = (new \DateTime())->format('Y-m-d H:i:s');
 
         // Force slug generation
-        $types = $this->connection->fetchAll('SELECT id, name FROM user_type ut');
+        $types = $this->connection->fetchAllAssociative('SELECT id, name FROM user_type ut');
         foreach ($types as $type) {
             $slug = Urlizer::urlize($type['name'], '');
             $this->connection->update('user_type', ['slug' => $slug], ['id' => $type['id']]);
         }
 
         // Add menu item
-        $menuId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 2');
+        $menuId = $this->connection->fetchOne('SELECT id FROM menu WHERE type = 2');
 
         if (null == $menuId) {
             $this->connection->insert('menu', ['type' => 2]);

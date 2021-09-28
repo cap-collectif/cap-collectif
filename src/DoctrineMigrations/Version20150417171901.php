@@ -18,7 +18,7 @@ class Version20150417171901 extends AbstractMigration
     public function postUp(Schema $schema): void
     {
         // create footer title and set it to intro title color
-        $header2TitleColor = $this->connection->fetchColumn(
+        $header2TitleColor = $this->connection->fetchOne(
             'SELECT value from site_color where keyname= ?',
             ['color.header2.title']
         );

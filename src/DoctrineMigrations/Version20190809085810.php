@@ -69,10 +69,10 @@ final class Version20190809085810 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->consultationsByStep = $this->connection->fetchAll('
-            SELECT consultation.`id` AS consultation_id, step.id AS step_id, 
-            step.opinion_count, step.trashed_opinion_count, step.opinion_versions_count, 
-            step.trashed_opinion_versions_count, step.argument_count, step.trashed_argument_count, 
+        $this->consultationsByStep = $this->connection->fetchAllAssociative('
+            SELECT consultation.`id` AS consultation_id, step.id AS step_id,
+            step.opinion_count, step.trashed_opinion_count, step.opinion_versions_count,
+            step.trashed_opinion_versions_count, step.argument_count, step.trashed_argument_count,
             step.sources_count, step.trashed_sources_count, step.votes_count, step.contributors_count
             FROM `consultation`
             LEFT JOIN step ON step.id = consultation.step_id

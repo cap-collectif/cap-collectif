@@ -20,7 +20,7 @@ final class Version20191219095408 extends AbstractMigration implements Container
     private $generator;
     private $em;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
         $this->em = $container->get('doctrine')->getManager();
@@ -50,7 +50,7 @@ final class Version20191219095408 extends AbstractMigration implements Container
             'SELECT * FROM site_parameter WHERE keyname = "global.locale"'
         )['value'];
 
-        $parameters = $this->connection->fetchAll('SELECT * FROM site_parameter');
+        $parameters = $this->connection->fetchAllAssociative('SELECT * FROM site_parameter');
         foreach ($parameters as $parameter) {
             if (!\in_array($parameter['keyname'], SiteParameter::NOT_TRANSLATABLE)) {
                 if (!empty($parameter['value'])) {

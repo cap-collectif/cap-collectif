@@ -17,7 +17,7 @@ class Version20171122175657 extends AbstractMigration implements ContainerAwareI
     private $generator;
     private $container;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->container = $container;
@@ -51,8 +51,8 @@ class Version20171122175657 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema): void
     {
-        echo '-> Adding user notifications for existing users...' . PHP_EOL;
-        $users = $this->connection->fetchAll(
+        echo '-> Adding user notifications for existing users...' . \PHP_EOL;
+        $users = $this->connection->fetchAllAssociative(
             'SELECT id, notifications_configuration_id from fos_user'
         );
         foreach ($users as $user) {

@@ -57,7 +57,7 @@ class Version20150204171640 extends AbstractMigration implements ContainerAwareI
 
     public function postDown(Schema $schema): void
     {
-        $blogMenuItemId = $this->connection->fetchColumn(
+        $blogMenuItemId = $this->connection->fetchOne(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
             ['link' => 'blog', 'deletable' => 0]
         );
@@ -74,7 +74,7 @@ class Version20150204171640 extends AbstractMigration implements ContainerAwareI
      *
      * @api
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }

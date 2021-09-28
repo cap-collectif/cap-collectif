@@ -15,7 +15,7 @@ final class Version20200602184400 extends AbstractMigration implements Container
     private $entityManager;
     private $uuidGenerator;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->entityManager = $container->get('doctrine')->getManager();
         $this->uuidGenerator = new UuidGenerator();
@@ -45,7 +45,7 @@ final class Version20200602184400 extends AbstractMigration implements Container
 
         $this->addSql(
             $this->generateInsertSql(
-                $this->connection->fetchColumn('SELECT code FROM locale WHERE is_default=1', [], 0)
+                $this->connection->fetchOne('SELECT code FROM locale WHERE is_default=1', [], 0)
             )
         );
     }

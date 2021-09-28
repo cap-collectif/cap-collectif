@@ -12,7 +12,7 @@ class Version20151208152158 extends AbstractMigration
 {
     public function preUp(Schema $schema): void
     {
-        $opinionTypes = $this->connection->fetchAll(
+        $opinionTypes = $this->connection->fetchAllAssociative(
             '
           SELECT ot.id as id, parent.id as root_id, parent.consultation_step_type_id root_cst
           FROM opinion_type ot

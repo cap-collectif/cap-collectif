@@ -51,7 +51,7 @@ final class Version20190919094007 extends AbstractMigration implements Container
     public function postUp(Schema $schema): void
     {
         $this->write('-> Adding moderation token for existing source...');
-        $sources = $this->connection->fetchAll('SELECT id from source');
+        $sources = $this->connection->fetchAllAssociative('SELECT id from source');
         foreach ($sources as $source) {
             $token = $this->container->get('fos_user.util.token_generator')->generateToken();
             $this->connection->update(
@@ -62,7 +62,7 @@ final class Version20190919094007 extends AbstractMigration implements Container
         }
 
         $this->write('-> Adding moderation token for existing comment...');
-        $comments = $this->connection->fetchAll('SELECT id from comment');
+        $comments = $this->connection->fetchAllAssociative('SELECT id from comment');
         foreach ($comments as $comment) {
             $token = $this->container->get('fos_user.util.token_generator')->generateToken();
             $this->connection->update(
@@ -73,7 +73,7 @@ final class Version20190919094007 extends AbstractMigration implements Container
         }
 
         $this->write('-> Adding moderation token for existing proposal...');
-        $proposals = $this->connection->fetchAll('SELECT id from proposal');
+        $proposals = $this->connection->fetchAllAssociative('SELECT id from proposal');
         foreach ($proposals as $proposal) {
             $token = $this->container->get('fos_user.util.token_generator')->generateToken();
             $this->connection->update(

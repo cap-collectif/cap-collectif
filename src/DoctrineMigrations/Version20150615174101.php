@@ -15,8 +15,8 @@ class Version20150615174101 extends AbstractMigration
 
     public function preUp(Schema $schema): void
     {
-        $this->items = $this->connection->fetchAll('SELECT * FROM menu_item');
-        $this->menus = $this->connection->fetchAll('SELECT * FROM menu');
+        $this->items = $this->connection->fetchAllAssociative('SELECT * FROM menu_item');
+        $this->menus = $this->connection->fetchAllAssociative('SELECT * FROM menu');
 
         foreach ($this->items as &$mi) {
             foreach ($this->menus as $m) {
@@ -50,7 +50,7 @@ class Version20150615174101 extends AbstractMigration
 
     public function preDown(Schema $schema): void
     {
-        $this->items = $this->connection->fetchAll('SELECT * FROM menu_item');
+        $this->items = $this->connection->fetchAllAssociative('SELECT * FROM menu_item');
     }
 
     public function down(Schema $schema): void
@@ -76,7 +76,7 @@ class Version20150615174101 extends AbstractMigration
         $this->connection->insert('menu', ['type' => 1]);
         $this->connection->insert('menu', ['type' => 2]);
 
-        $this->menus = $this->connection->fetchAll('SELECT * FROM menu');
+        $this->menus = $this->connection->fetchAllAssociative('SELECT * FROM menu');
 
         foreach ($this->items as $mi) {
             foreach ($this->menus as $m) {

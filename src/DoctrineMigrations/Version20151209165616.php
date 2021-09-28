@@ -14,7 +14,7 @@ class Version20151209165616 extends AbstractMigration
 
     public function preUp(Schema $schema): void
     {
-        $this->links = $this->connection->fetchAll(
+        $this->links = $this->connection->fetchAllAssociative(
             '
             SELECT id, link_id
             FROM opinion
@@ -57,7 +57,7 @@ class Version20151209165616 extends AbstractMigration
 
     public function preDown(Schema $schema): void
     {
-        $this->links = $this->connection->fetchAll(
+        $this->links = $this->connection->fetchAllAssociative(
             '
             SELECT *
             FROM opinion_relation

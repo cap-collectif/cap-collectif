@@ -18,12 +18,12 @@ class Version20150427184111 extends AbstractMigration
 
     public function preUp(Schema $schema): void
     {
-        $this->steps = $this->connection->fetchAll('SELECT * FROM step');
-        $this->types = $this->connection->fetchAll('SELECT * FROM consultation_types');
-        $this->consultationTypeOpinionTypes = $this->connection->fetchAll(
+        $this->steps = $this->connection->fetchAllAssociative('SELECT * FROM step');
+        $this->types = $this->connection->fetchAllAssociative('SELECT * FROM consultation_types');
+        $this->consultationTypeOpinionTypes = $this->connection->fetchAllAssociative(
             'SELECT * FROM consultation_type_types'
         );
-        $this->opinions = $this->connection->fetchAll('SELECT * FROM opinion');
+        $this->opinions = $this->connection->fetchAllAssociative('SELECT * FROM opinion');
 
         foreach ($this->steps as &$step) {
             switch ($step['type']) {
@@ -40,7 +40,7 @@ class Version20150427184111 extends AbstractMigration
 
                     break;
                 default:
-                    die('unknown step type for step : ' . $step['id']);
+                    exit('unknown step type for step : ' . $step['id']);
             }
         }
 
@@ -175,15 +175,17 @@ class Version20150427184111 extends AbstractMigration
 
     public function preDown(Schema $schema): void
     {
-        $this->steps = $this->connection->fetchAll('SELECT * FROM step');
-        $this->consultationAbstractSteps = $this->connection->fetchAll(
+        $this->steps = $this->connection->fetchAllAssociative('SELECT * FROM step');
+        $this->consultationAbstractSteps = $this->connection->fetchAllAssociative(
             'SELECT * FROM consultation_abstractstep'
         );
-        $this->types = $this->connection->fetchAll('SELECT * FROM consultationstep_opiniontypes');
-        $this->consultationTypeOpinionTypes = $this->connection->fetchAll(
+        $this->types = $this->connection->fetchAllAssociative(
+            'SELECT * FROM consultationstep_opiniontypes'
+        );
+        $this->consultationTypeOpinionTypes = $this->connection->fetchAllAssociative(
             'SELECT * FROM consultationtype_opiniontypes'
         );
-        $this->opinions = $this->connection->fetchAll('SELECT * FROM opinion');
+        $this->opinions = $this->connection->fetchAllAssociative('SELECT * FROM opinion');
 
         foreach ($this->steps as &$step) {
             switch ($step['step_type']) {
@@ -200,7 +202,7 @@ class Version20150427184111 extends AbstractMigration
 
                     break;
                 default:
-                    die('unknown step type for step : ' . $step['id']);
+                    exit('unknown step type for step : ' . $step['id']);
             }
         }
 

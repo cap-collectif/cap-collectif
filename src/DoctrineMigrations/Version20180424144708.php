@@ -33,7 +33,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
 {
     private $container;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -41,7 +41,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
     public function postUp(Schema $schema): void
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $ideas = $this->connection->fetchAll(
+        $ideas = $this->connection->fetchAllAssociative(
             'SELECT id,object,title,author_id,is_enabled,is_trashed,body,theme_id,created_at,updated_at,media_id FROM idea',
             ['']
         );
@@ -50,7 +50,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             // ------* create anonymous users from ideas for proposal votes *------
             // ------********************************************************------
             $this->write('-> searching votes where user is not set then create if not exist');
-            $votesWithoutUser = $this->connection->fetchAll(
+            $votesWithoutUser = $this->connection->fetchAllAssociative(
                 "SELECT id,email,voter_id,username FROM votes WHERE voteType = 'idea' AND voter_id IS NULL",
                 ['']
             );
@@ -140,7 +140,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             // -----------------**************************************************----------------
             // -----------------* import ideas votes & create user if no account *----------------
             // -----------------**************************************************----------------
-            $ideaVotes = $this->connection->fetchAll(
+            $ideaVotes = $this->connection->fetchAllAssociative(
                 'SELECT private,created_at,voter_id,username,email,ip_address FROM votes WHERE idea_id = :id',
                 ['id' => $idea['id']]
             );
@@ -162,7 +162,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             // -----------------***************************************-------------------
             // -----------------* import ideas comments into proposal *-------------------
             // -----------------***************************************-------------------
-            $ideaComments = $this->connection->fetchAll(
+            $ideaComments = $this->connection->fetchAllAssociative(
                 "SELECT id,author_name,author_email,author_id,author_ip,is_enabled,is_trashed,pinned,validated,created_at,updated_at,body  FROM comment WHERE objectType = 'idea' AND idea_id = :id AND parent_id IS NULL",
                 ['id' => $idea['id']]
             );
@@ -183,7 +183,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     ->setCreatedAt(new \DateTime($ideaComment['created_at']))
                     ->setUpdatedAt(new \DateTime($ideaComment['updated_at']))
                     ->setBody($ideaComment['body']);
-                $ideaCommentAnswers = $this->connection->fetchAll(
+                $ideaCommentAnswers = $this->connection->fetchAllAssociative(
                     'SELECT author_name,author_email,author_id,author_ip,is_enabled,is_trashed,pinned,validated,created_at,updated_at,body  FROM comment WHERE parent_id = :id',
                     ['id' => $ideaComment['id']]
                 );
@@ -212,7 +212,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                 // -----------------********************************--------------------
                 // -----------------*     import comments votes    *--------------------
                 // -----------------********************************--------------------
-                $ideaCommentsVotes = $this->connection->fetchAll(
+                $ideaCommentsVotes = $this->connection->fetchAllAssociative(
                     "SELECT updated_at,voter_id FROM votes WHERE voteType = 'comment' AND comment_id = :id",
                     ['id' => $proposalComment->getId()]
                 );
@@ -255,7 +255,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             } elseif (isset($users[$email])) {
                 $users[$email]['vote'][] = $anonymous['id'];
             } elseif ($emailAlreadyUsed) {
-                $haveVotedBeforeSignUp = $this->connection->fetchAll(
+                $haveVotedBeforeSignUp = $this->connection->fetchAllAssociative(
                     "SELECT id FROM votes WHERE voteType = 'idea' AND email = :email",
                     ['email' => $emailAlreadyUsed->getEmail()]
                 );

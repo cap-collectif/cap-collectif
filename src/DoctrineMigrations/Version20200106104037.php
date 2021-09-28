@@ -16,7 +16,9 @@ final class Version20200106104037 extends AbstractMigration
 
     public function preUp(Schema $schema): void
     {
-        static::$sourceCategories = $this->connection->fetchAll('SELECT * from category');
+        static::$sourceCategories = $this->connection->fetchAllAssociative(
+            'SELECT * from category'
+        );
     }
 
     public function up(Schema $schema): void

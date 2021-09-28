@@ -23,7 +23,7 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
      *
      * @api
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -108,7 +108,7 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
         ];
 
         foreach ($newParameters as $values) {
-            $paramId = $this->connection->fetchColumn(
+            $paramId = $this->connection->fetchOne(
                 'SELECT id FROM site_parameter WHERE keyname = :keyname',
                 ['keyname' => $values[0]]
             );
@@ -120,7 +120,7 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
             }
         }
 
-        $menuId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 1');
+        $menuId = $this->connection->fetchOne('SELECT id FROM menu WHERE type = 1');
 
         if (!$menuId) {
             $this->connection->insert('menu', ['type' => 1]);
@@ -141,7 +141,7 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
             $updated,
         ];
 
-        $menuItemId = $this->connection->fetchColumn(
+        $menuItemId = $this->connection->fetchOne(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
             ['link' => $newMenuValues[1], 'deletable' => $newMenuValues[3]]
         );

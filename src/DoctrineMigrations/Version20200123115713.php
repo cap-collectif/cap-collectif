@@ -29,7 +29,7 @@ final class Version20200123115713 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $projects = $this->connection->fetchAll('SELECT id FROM project');
+        $projects = $this->connection->fetchAllAssociative('SELECT id FROM project');
 
         foreach ($projects as $project) {
             $this->connection->update(

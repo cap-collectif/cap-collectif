@@ -17,7 +17,7 @@ final class Version20201012110216 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->abortIf(
-            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
 
@@ -28,7 +28,7 @@ final class Version20201012110216 extends AbstractMigration
     public function down(Schema $schema): void
     {
         $this->abortIf(
-            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
 
@@ -51,8 +51,8 @@ final class Version20201012110216 extends AbstractMigration
 
     private function getUndraftedEntities(string $type): array
     {
-        return $this->connection->fetchAll(
-            "SELECT id, publishedAt, created_at FROM $type WHERE is_draft = false"
+        return $this->connection->fetchAllAssociative(
+            "SELECT id, publishedAt, created_at FROM ${type} WHERE is_draft = false"
         );
     }
 

@@ -19,7 +19,7 @@ final class Version20191125094019 extends AbstractMigration implements Container
     private $em;
     private $generator;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
         $this->em = $this->container->get('doctrine')->getManager();
@@ -47,7 +47,7 @@ final class Version20191125094019 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        $posts = $this->connection->fetchAll('SELECT * FROM blog_post');
+        $posts = $this->connection->fetchAllAssociative('SELECT * FROM blog_post');
         $locale = $this->connection->fetchAssoc(
             'SELECT * FROM site_parameter WHERE keyname = "global.locale"'
         )['value'];

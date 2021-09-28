@@ -53,8 +53,8 @@ final class Version20191219095405 extends AbstractMigration
 
     public function addTranslations(): void
     {
-        $userTypes = $this->connection->fetchAll('SELECT * FROM user_type');
-        $locale = $this->connection->fetchColumn('SELECT code FROM locale WHERE is_default = TRUE');
+        $userTypes = $this->connection->fetchAllAssociative('SELECT * FROM user_type');
+        $locale = $this->connection->fetchOne('SELECT code FROM locale WHERE is_default = TRUE');
         foreach ($userTypes as $userType) {
             $this->connection->insert('user_type_translation', [
                 'translatable_id' => $userType['id'],
@@ -67,8 +67,8 @@ final class Version20191219095405 extends AbstractMigration
 
     public function removeTranslations(): void
     {
-        $locale = $this->connection->fetchColumn('SELECT code FROM locale WHERE is_default = TRUE');
-        $userTypeDefaultTranslations = $this->connection->fetchAll(
+        $locale = $this->connection->fetchOne('SELECT code FROM locale WHERE is_default = TRUE');
+        $userTypeDefaultTranslations = $this->connection->fetchAllAssociative(
             "SELECT * FROM user_type_translation WHERE locale = '" . $locale . "'"
         );
         foreach ($userTypeDefaultTranslations as $userTypeDefaultTranslation) {

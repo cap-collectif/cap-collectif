@@ -19,7 +19,7 @@ final class Version20190623155205 extends AbstractMigration implements Container
     private $em;
     private $projectAuthors;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
@@ -41,7 +41,7 @@ final class Version20190623155205 extends AbstractMigration implements Container
 
     public function up(Schema $schema): void
     {
-        $this->projectAuthors = $this->connection->fetchAll(
+        $this->projectAuthors = $this->connection->fetchAllAssociative(
             '
             SELECT p.author_id, p.id, p.created_at
             FROM project p

@@ -17,7 +17,7 @@ class Version20150428151557 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $menu = $this->connection->fetchColumn('SELECT id from menu where type = ?', [1]);
+        $menu = $this->connection->fetchOne('SELECT id from menu where type = ?', [1]);
 
         $this->connection->update(
             'menu_item',

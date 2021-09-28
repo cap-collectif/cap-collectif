@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
  */
 final class Version20181203164324 extends AbstractMigration implements ContainerAwareInterface
 {
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
@@ -56,7 +56,9 @@ final class Version20181203164324 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        $districts = $this->connection->fetchAll('SELECT id, geojson_style FROM district');
+        $districts = $this->connection->fetchAllAssociative(
+            'SELECT id, geojson_style FROM district'
+        );
 
         foreach ($districts as $district) {
             if (isset($district['geojson_style'])) {
@@ -67,15 +69,15 @@ final class Version20181203164324 extends AbstractMigration implements Container
 
                 $style = $this->connection->insert('style', [
                     'style_type' => 'border',
-                    'color' => isset($jsonStyle->color) ? $jsonStyle->color : null,
-                    'opacity' => isset($jsonStyle->opacity) ? $jsonStyle->opacity : null,
-                    'size' => isset($jsonStyle->weight) ? $jsonStyle->weight : null,
+                    'color' => $jsonStyle->color ?? null,
+                    'opacity' => $jsonStyle->opacity ?? null,
+                    'size' => $jsonStyle->weight ?? null,
                     'enabled' => 1,
                     'id' => $uuidBorderStyle,
                 ]);
                 $style = $this->connection->insert('style', [
                     'style_type' => 'background',
-                    'color' => isset($jsonStyle->color) ? $jsonStyle->color : null,
+                    'color' => $jsonStyle->color ?? null,
                     'opacity' => 0.2,
                     'enabled' => 1,
                     'id' => $uuidBackgroundStyle,

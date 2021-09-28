@@ -7,7 +7,6 @@ namespace Application\Migrations;
 use Capco\AppBundle\Entity\Locale;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -52,7 +51,7 @@ final class Version20201203122444 extends AbstractMigration implements Container
     }
 
     /**
-     * POST UP
+     * POST UP.
      */
     public function postUp(Schema $schema): void
     {
@@ -92,84 +91,9 @@ final class Version20201203122444 extends AbstractMigration implements Container
         }
     }
 
-    private function getOfficialResponsesDataInPosts(): array
-    {
-        return $this->connection->fetchAll(
-            "
-            SELECT
-                bp.id as post_id, bp.is_published, bp.published_at, bp.updated_at, bp.created_at,
-                bpt.body,
-                pp.proposal_id,
-                pd.id as proposal_decision_id
-            FROM
-                blog_post bp
-            JOIN
-                blog_post_translation bpt ON bpt.translatable_id = bp.id
-            JOIN
-                proposal_post pp ON pp.post_id = bp.id
-            LEFT JOIN
-                proposal_decision pd ON pd.post_id = bp.id
-            WHERE
-                title REGEXP \"^[Rr][eé]ponse\"
-                OR title REGEXP \"[Rr]ecevabilité\"
-                OR title REGEXP \"[Vv]alidé\"
-                OR title REGEXP \"[Cc]ommentaire\"
-                OR title REGEXP \"[Cc]onformité\"
-                OR title REGEXP \"[Aa]nalyse\"
-                OR title LIKE \"Conclusion de l'analyse du projet\"
-                OR title LIKE \"Projet non retenu\"            
-            "
-        );
-    }
-
-    private function createOfficialResponseFromPostData(array $data): void
-    {
-        $postId = $data['post_id'];
-        unset($data['post_id']);
-        $proposalDecisionId = $data['proposal_decision_id'];
-        unset($data['proposal_decision_id']);
-        $data['id'] = $this->generator->generate($this->em, null);
-        $this->connection->insert('official_response', $data);
-        $this->addAuthorsToOfficialResponses($postId, $data);
-        if ($proposalDecisionId) {
-            $this->addOfficialResponseInProposalDecision($proposalDecisionId, $data);
-        }
-    }
-
-    private function addAuthorsToOfficialResponses(string $postId, array $data): void
-    {
-        $authorsData = $this->connection->fetchAll(
-            'SELECT user_id FROM blog_post_authors WHERE post_id = ?',
-            [$postId]
-        );
-        foreach ($authorsData as $authorsDatum) {
-            $this->connection->insert('official_response_author', [
-                'user_id' => $authorsDatum['user_id'],
-                'official_response_id' => $data['id'],
-            ]);
-        }
-    }
-
-    private function addOfficialResponseInProposalDecision(
-        string $proposalDecisionId,
-        array $data
-    ): void {
-        $this->connection->update(
-            'proposal_decision',
-            ['official_response_id' => $data['id']],
-            ['id' => $proposalDecisionId]
-        );
-    }
-
-    private function removeDataFromPosts(array $data): void
-    {
-        $this->connection->delete('blog_post', ['id' => $data['post_id']]);
-    }
-
     /**
-     * POST DOWN
+     * POST DOWN.
      */
-
     public function postDown(Schema $schema): void
     {
         //recreate posts that were official responses
@@ -206,10 +130,84 @@ final class Version20201203122444 extends AbstractMigration implements Container
         );
     }
 
+    private function getOfficialResponsesDataInPosts(): array
+    {
+        return $this->connection->fetchAllAssociative(
+            "
+            SELECT
+                bp.id as post_id, bp.is_published, bp.published_at, bp.updated_at, bp.created_at,
+                bpt.body,
+                pp.proposal_id,
+                pd.id as proposal_decision_id
+            FROM
+                blog_post bp
+            JOIN
+                blog_post_translation bpt ON bpt.translatable_id = bp.id
+            JOIN
+                proposal_post pp ON pp.post_id = bp.id
+            LEFT JOIN
+                proposal_decision pd ON pd.post_id = bp.id
+            WHERE
+                title REGEXP \"^[Rr][eé]ponse\"
+                OR title REGEXP \"[Rr]ecevabilité\"
+                OR title REGEXP \"[Vv]alidé\"
+                OR title REGEXP \"[Cc]ommentaire\"
+                OR title REGEXP \"[Cc]onformité\"
+                OR title REGEXP \"[Aa]nalyse\"
+                OR title LIKE \"Conclusion de l'analyse du projet\"
+                OR title LIKE \"Projet non retenu\"
+            "
+        );
+    }
+
+    private function createOfficialResponseFromPostData(array $data): void
+    {
+        $postId = $data['post_id'];
+        unset($data['post_id']);
+        $proposalDecisionId = $data['proposal_decision_id'];
+        unset($data['proposal_decision_id']);
+        $data['id'] = $this->generator->generate($this->em, null);
+        $this->connection->insert('official_response', $data);
+        $this->addAuthorsToOfficialResponses($postId, $data);
+        if ($proposalDecisionId) {
+            $this->addOfficialResponseInProposalDecision($proposalDecisionId, $data);
+        }
+    }
+
+    private function addAuthorsToOfficialResponses(string $postId, array $data): void
+    {
+        $authorsData = $this->connection->fetchAllAssociative(
+            'SELECT user_id FROM blog_post_authors WHERE post_id = ?',
+            [$postId]
+        );
+        foreach ($authorsData as $authorsDatum) {
+            $this->connection->insert('official_response_author', [
+                'user_id' => $authorsDatum['user_id'],
+                'official_response_id' => $data['id'],
+            ]);
+        }
+    }
+
+    private function addOfficialResponseInProposalDecision(
+        string $proposalDecisionId,
+        array $data
+    ): void {
+        $this->connection->update(
+            'proposal_decision',
+            ['official_response_id' => $data['id']],
+            ['id' => $proposalDecisionId]
+        );
+    }
+
+    private function removeDataFromPosts(array $data): void
+    {
+        $this->connection->delete('blog_post', ['id' => $data['post_id']]);
+    }
+
     private function getOfficialResponsesData(): array
     {
-        return $this->connection->fetchAll(
-            "
+        return $this->connection->fetchAllAssociative(
+            '
             SELECT
                 resp.id as official_response_id,
                 resp.body,
@@ -219,8 +217,8 @@ final class Version20201203122444 extends AbstractMigration implements Container
             FROM
                 official_response resp
             LEFT JOIN
-                proposal_decision pd on pd.official_response_id = resp.id 
-            "
+                proposal_decision pd on pd.official_response_id = resp.id
+            '
         );
     }
 
@@ -252,7 +250,7 @@ final class Version20201203122444 extends AbstractMigration implements Container
 
     private function addAuthorsToPosts(string $officialResponseId, string $blogPostId): void
     {
-        $authorsData = $this->connection->fetchAll(
+        $authorsData = $this->connection->fetchAllAssociative(
             'SELECT user_id FROM official_response_author WHERE official_response_id = ?',
             [$officialResponseId]
         );
@@ -279,7 +277,7 @@ final class Version20201203122444 extends AbstractMigration implements Container
         $blogPostTranslationData = [
             'id' => $id,
             'translatable_id' => $blogPostId,
-            'slug' => "Réponse officielle $id",
+            'slug' => "Réponse officielle ${id}",
             'title' => 'Réponse officielle',
             'body' => $data['body'],
             'locale' => $this->em->getRepository(Locale::class)->findDefaultLocale(),

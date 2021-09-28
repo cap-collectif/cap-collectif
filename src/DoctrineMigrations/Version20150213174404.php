@@ -22,7 +22,7 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
      *
      * @api
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -37,13 +37,13 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
         $toggleManager = $this->container->get(Manager::class);
         $toggleManager->activate('themes');
 
-        $themeMIId = $this->connection->fetchColumn(
+        $themeMIId = $this->connection->fetchOne(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
             ['link' => 'themes', 'deletable' => 0]
         );
 
         if (!$themeMIId) {
-            $headerId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 1');
+            $headerId = $this->connection->fetchOne('SELECT id FROM menu WHERE type = 1');
 
             // If we havn't a header yet, we want to get one
             if (!$headerId) {
@@ -80,7 +80,7 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
 
     public function postDown(Schema $schema): void
     {
-        $themeMIId = $this->connection->fetchColumn(
+        $themeMIId = $this->connection->fetchOne(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
             ['link' => 'themes', 'deletable' => 0]
         );

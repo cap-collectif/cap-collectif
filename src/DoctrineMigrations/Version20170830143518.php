@@ -14,11 +14,11 @@ class Version20170830143518 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $proposals = $this->connection->fetchAll('SELECT * FROM proposal');
+        $proposals = $this->connection->fetchAllAssociative('SELECT * FROM proposal');
         $slugify = new Slugify();
         foreach ($proposals as $proposal) {
             if ($proposal['answer_id']) {
-                $answer = $this->connection->fetchAll(
+                $answer = $this->connection->fetchAllAssociative(
                     'SELECT * from answer where answer.id = ' . $proposal['answer_id']
                 )[0];
                 if (!$answer['title']) {

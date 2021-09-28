@@ -14,7 +14,7 @@ class Version20171011142014 extends AbstractMigration
     public function postUp(Schema $schema): void
     {
         // We need every proposal form to have a notification configuration
-        $proposalForms = $this->connection->fetchAll('SELECT * from proposal_form');
+        $proposalForms = $this->connection->fetchAllAssociative('SELECT * from proposal_form');
         foreach ($proposalForms as $proposalForm) {
             if (!$proposalForm['notification_configuration_id']) {
                 $this->connection->insert('notifications_configuration', [
@@ -33,7 +33,7 @@ class Version20171011142014 extends AbstractMigration
         }
 
         // Make sure blog post slug is unique
-        $posts = $this->connection->fetchAll('SELECT * from blog_post');
+        $posts = $this->connection->fetchAllAssociative('SELECT * from blog_post');
         $count = 0;
         foreach ($posts as $post) {
             if ('reponse-officielle' === $post['slug']) {

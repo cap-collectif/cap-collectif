@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Migrations;
 
-use Capco\AppBundle\Entity\Locale;
-use Capco\AppBundle\Entity\SiteParameter;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\EntityManagerInterface;
@@ -63,13 +61,13 @@ final class Version20200818134317 extends AbstractMigration implements Container
 
     private function getDefaultLocale(): string
     {
-        return $this->connection->fetchColumn('SELECT code FROM locale WHERE is_default = 1');
+        return $this->connection->fetchOne('SELECT code FROM locale WHERE is_default = 1');
     }
 
     private function getParameterId(string $parameterKey): ?string
     {
-        $id = $this->connection->fetchColumn(
-            "SELECT id FROM site_parameter WHERE keyname = '$parameterKey'"
+        $id = $this->connection->fetchOne(
+            "SELECT id FROM site_parameter WHERE keyname = '${parameterKey}'"
         );
         if (!$id) {
             return null;
@@ -80,16 +78,14 @@ final class Version20200818134317 extends AbstractMigration implements Container
 
     private function getDefaultValue(string $defaultLocale, array $translations): string
     {
-        return isset($existingTranslations[$defaultLocale])
-            ? $existingTranslations[$defaultLocale]
-            : '';
+        return $existingTranslations[$defaultLocale] ?? '';
     }
 
     private function getExistingTranslations(string $parameterId): array
     {
         $existingTranslations = [];
         $query = $this->connection->query(
-            "SELECT id, value, locale FROM site_parameter_translation WHERE translatable_id = '$parameterId'"
+            "SELECT id, value, locale FROM site_parameter_translation WHERE translatable_id = '${parameterId}'"
         );
         while ($row = $query->fetch()) {
             $existingTranslations[$row['locale']] = $row['value'];
@@ -102,7 +98,7 @@ final class Version20200818134317 extends AbstractMigration implements Container
     {
         $query = $this->connection->query('SELECT code FROM locale');
         $locales = [];
-        while ($code = $query->fetchColumn(0)) {
+        while ($code = $query->fetchOne(0)) {
             $locales[] = $code;
         }
 

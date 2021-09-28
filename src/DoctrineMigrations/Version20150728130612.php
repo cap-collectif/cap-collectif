@@ -24,7 +24,7 @@ class Version20150728130612 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $types = $this->connection->fetchAll('SELECT * FROM opinion_type');
+        $types = $this->connection->fetchAllAssociative('SELECT * FROM opinion_type');
 
         foreach ($types as $type) {
             $this->connection->update(

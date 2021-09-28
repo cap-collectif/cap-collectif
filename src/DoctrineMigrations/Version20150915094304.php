@@ -25,7 +25,7 @@ class Version20150915094304 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $consultationSteps = $this->connection->fetchAll(
+        $consultationSteps = $this->connection->fetchAllAssociative(
             'SELECT id, body FROM step WHERE step_type = ?',
             ['consultation']
         );
@@ -53,7 +53,7 @@ class Version20150915094304 extends AbstractMigration
 
     public function postDown(Schema $schema): void
     {
-        $consultationSteps = $this->connection->fetchAll(
+        $consultationSteps = $this->connection->fetchAllAssociative(
             'SELECT id, body FROM step WHERE step_type = ?',
             ['consultation']
         );

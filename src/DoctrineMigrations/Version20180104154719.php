@@ -31,7 +31,7 @@ class Version20180104154719 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $steps = $this->connection->fetchAll('SELECT id, title from step');
+        $steps = $this->connection->fetchAllAssociative('SELECT id, title from step');
         foreach ($steps as $step) {
             $this->connection->update('step', ['label' => $step['title']], ['id' => $step['id']]);
         }

@@ -18,16 +18,16 @@ class Version20150925074626 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $opinionVotes = $this->connection->fetchAll(
+        $opinionVotes = $this->connection->fetchAllAssociative(
             'SELECT id FROM votes v WHERE v.confirmed = 0 AND v.voteType = "opinion"'
         );
-        $opinionVersionVotes = $this->connection->fetchAll(
+        $opinionVersionVotes = $this->connection->fetchAllAssociative(
             'SELECT id FROM votes v WHERE v.confirmed = 0 AND v.voteType = "opinionVersion"'
         );
-        $argumentVotes = $this->connection->fetchAll(
+        $argumentVotes = $this->connection->fetchAllAssociative(
             'SELECT id FROM votes v WHERE v.confirmed = 0 AND v.voteType = "argument"'
         );
-        $sourceVotes = $this->connection->fetchAll(
+        $sourceVotes = $this->connection->fetchAllAssociative(
             'SELECT id FROM votes v WHERE v.confirmed = 0 AND v.voteType = "source"'
         );
 

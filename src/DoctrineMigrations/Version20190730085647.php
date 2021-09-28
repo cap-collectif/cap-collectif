@@ -41,7 +41,7 @@ final class Version20190730085647 extends AbstractMigration
             'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
-        $this->consultationSteps = $this->connection->fetchAll(
+        $this->consultationSteps = $this->connection->fetchAllAssociative(
             'SELECT id, opinion_count_shown_by_section, title_help_text, description_help_text, moderating_on_create, moderating_on_update
                 FROM step
                 WHERE step.step_type = "consultation"

@@ -52,7 +52,7 @@ class Version20150330151346 extends AbstractMigration
 
     public function postDown(Schema $schema): void
     {
-        $votes = $this->connection->fetchAll('SELECT * FROM votes');
+        $votes = $this->connection->fetchAllAssociative('SELECT * FROM votes');
 
         foreach ($votes as $vote) {
             $type = $vote['voteType'];

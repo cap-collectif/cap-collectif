@@ -31,7 +31,7 @@ class Version20170726162856 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $steps = $this->connection->fetchAll('SELECT * FROM step');
+        $steps = $this->connection->fetchAllAssociative('SELECT * FROM step');
         foreach ($steps as $step) {
             if (null != $step['consultation_step_type_id']) {
                 $this->connection->update(

@@ -19,16 +19,20 @@ class Version20151012111217 extends AbstractMigration
 
     public function preUp(Schema $schema): void
     {
-        $this->consultations = $this->connection->fetchAll('SELECT * FROM consultation');
-        $this->consultation_abstractsteps = $this->connection->fetchAll(
+        $this->consultations = $this->connection->fetchAllAssociative('SELECT * FROM consultation');
+        $this->consultation_abstractsteps = $this->connection->fetchAllAssociative(
             'SELECT * FROM consultation_abstractstep'
         );
-        $this->consultation_events = $this->connection->fetchAll(
+        $this->consultation_events = $this->connection->fetchAllAssociative(
             'SELECT * FROM consultation_event'
         );
-        $this->consultation_posts = $this->connection->fetchAll('SELECT * FROM consultation_post');
-        $this->consultation_types = $this->connection->fetchAll('SELECT * FROM consultation_type');
-        $this->theme_consultations = $this->connection->fetchAll(
+        $this->consultation_posts = $this->connection->fetchAllAssociative(
+            'SELECT * FROM consultation_post'
+        );
+        $this->consultation_types = $this->connection->fetchAllAssociative(
+            'SELECT * FROM consultation_type'
+        );
+        $this->theme_consultations = $this->connection->fetchAllAssociative(
             'SELECT * FROM theme_consultation'
         );
     }
@@ -217,16 +221,22 @@ class Version20151012111217 extends AbstractMigration
 
     public function preDown(Schema $schema): void
     {
-        $this->consultations = $this->connection->fetchAll('SELECT * FROM project');
-        $this->consultation_abstractsteps = $this->connection->fetchAll(
+        $this->consultations = $this->connection->fetchAllAssociative('SELECT * FROM project');
+        $this->consultation_abstractsteps = $this->connection->fetchAllAssociative(
             'SELECT * FROM project_abstractstep'
         );
-        $this->consultation_events = $this->connection->fetchAll('SELECT * FROM project_event');
-        $this->consultation_posts = $this->connection->fetchAll('SELECT * FROM project_post');
-        $this->consultation_types = $this->connection->fetchAll(
+        $this->consultation_events = $this->connection->fetchAllAssociative(
+            'SELECT * FROM project_event'
+        );
+        $this->consultation_posts = $this->connection->fetchAllAssociative(
+            'SELECT * FROM project_post'
+        );
+        $this->consultation_types = $this->connection->fetchAllAssociative(
             'SELECT * FROM consultation_step_type'
         );
-        $this->theme_consultations = $this->connection->fetchAll('SELECT * FROM theme_project');
+        $this->theme_consultations = $this->connection->fetchAllAssociative(
+            'SELECT * FROM theme_project'
+        );
     }
 
     public function down(Schema $schema): void

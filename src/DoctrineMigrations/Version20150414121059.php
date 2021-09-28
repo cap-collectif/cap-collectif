@@ -18,11 +18,11 @@ class Version20150414121059 extends AbstractMigration
     public function postUp(Schema $schema): void
     {
         // create footer2 colors and set footer2 colors to footer colors
-        $footerBgColor = $this->connection->fetchColumn(
+        $footerBgColor = $this->connection->fetchOne(
             'SELECT value from site_color where keyname= ?',
             ['color.footer.bg']
         );
-        $footerTextColor = $this->connection->fetchColumn(
+        $footerTextColor = $this->connection->fetchOne(
             'SELECT value from site_color where keyname= ?',
             ['color.footer.text']
         );
@@ -54,11 +54,11 @@ class Version20150414121059 extends AbstractMigration
         }
 
         // Set footer colors to header2 colors
-        $header2BgColor = $this->connection->fetchColumn(
+        $header2BgColor = $this->connection->fetchOne(
             'SELECT value from site_color where keyname= ?',
             ['color.header2.bg']
         );
-        $header2TextColor = $this->connection->fetchColumn(
+        $header2TextColor = $this->connection->fetchOne(
             'SELECT value from site_color where keyname= ?',
             ['color.header2.text']
         );
@@ -83,11 +83,11 @@ class Version20150414121059 extends AbstractMigration
     public function postDown(Schema $schema): void
     {
         // set footer colors to footer2 colors
-        $footer2BgColor = $this->connection->fetchColumn(
+        $footer2BgColor = $this->connection->fetchOne(
             'SELECT value from site_color where keyname= ?',
             ['color.footer2.bg']
         );
-        $footer2TextColor = $this->connection->fetchColumn(
+        $footer2TextColor = $this->connection->fetchOne(
             'SELECT value from site_color where keyname= ?',
             ['color.footer2.text']
         );

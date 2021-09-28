@@ -12,7 +12,9 @@ class Version20150401111728 extends AbstractMigration
 {
     public function preUp(Schema $schema): void
     {
-        $consultations = $this->connection->fetchAll('SELECT id, body FROM consultation c');
+        $consultations = $this->connection->fetchAllAssociative(
+            'SELECT id, body FROM consultation c'
+        );
         foreach ($consultations as $consultation) {
             $this->connection->update(
                 'step',
@@ -48,7 +50,7 @@ class Version20150401111728 extends AbstractMigration
 
     public function postDown(Schema $schema): void
     {
-        $steps = $this->connection->fetchAll(
+        $steps = $this->connection->fetchAllAssociative(
             'SELECT id, consultation_id, body FROM step WHERE type = 1'
         );
         foreach ($steps as $step) {

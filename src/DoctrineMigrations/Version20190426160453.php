@@ -35,7 +35,7 @@ final class Version20190426160453 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->consultationsStepTypes = $this->connection->fetchAll(
+        $this->consultationsStepTypes = $this->connection->fetchAllAssociative(
             '
             SELECT cst.id, cst.step_id, cst.title, cst.created_at, cst.updated_at
             FROM consultation_step_type cst

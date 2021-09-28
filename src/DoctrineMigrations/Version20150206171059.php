@@ -21,7 +21,7 @@ class Version20150206171059 extends AbstractMigration implements ContainerAwareI
      *
      * @api
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -41,7 +41,7 @@ class Version20150206171059 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema): void
     {
-        $blogMenuItemId = $this->connection->fetchColumn(
+        $blogMenuItemId = $this->connection->fetchOne(
             'SELECT id FROM menu_item WHERE link = :link',
             ['link' => 'blog']
         );

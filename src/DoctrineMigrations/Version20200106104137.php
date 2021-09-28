@@ -19,7 +19,7 @@ final class Version20200106104137 extends AbstractMigration implements Container
     private $em;
     private $generator;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
         $this->em = $container->get('doctrine')->getManager();
@@ -60,7 +60,7 @@ final class Version20200106104137 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        $sourceCategories = $this->connection->fetchAll('SELECT * FROM source_category');
+        $sourceCategories = $this->connection->fetchAllAssociative('SELECT * FROM source_category');
         foreach ($sourceCategories as $sourceCategory) {
             $this->connection->insert('source_category_translation', [
                 'id' => $this->generator->generate($this->em, null),

@@ -103,7 +103,7 @@ final class Version20180806121554 extends AbstractMigration
     public function postUp(Schema $schema): void
     {
         $this->write('--> Migrating subscription type 1 to MINIMAL');
-        $followers = $this->connection->fetchAll(
+        $followers = $this->connection->fetchAllAssociative(
             'SELECT id from user_following WHERE notified_of = 1'
         );
         foreach ($followers as $follower) {
@@ -116,7 +116,7 @@ final class Version20180806121554 extends AbstractMigration
         $this->write('--> Migrated successfully subscription type 1 to MINIMAL!');
 
         $this->write('--> Migrating subscription type 2 to ESSENTIAL');
-        $followers = $this->connection->fetchAll(
+        $followers = $this->connection->fetchAllAssociative(
             'SELECT id from user_following WHERE notified_of = 2'
         );
         foreach ($followers as $follower) {
@@ -129,7 +129,7 @@ final class Version20180806121554 extends AbstractMigration
         $this->write('--> Migrated successfully subscription type 2 to ESSENTIAL!');
 
         $this->write('--> Migrating subscription type 3 to ALL');
-        $followers = $this->connection->fetchAll(
+        $followers = $this->connection->fetchAllAssociative(
             'SELECT id from user_following WHERE notified_of = 3'
         );
         foreach ($followers as $follower) {

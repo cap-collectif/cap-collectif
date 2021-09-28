@@ -16,7 +16,7 @@ class Version20180226163217 extends AbstractMigration implements ContainerAwareI
     private $generator;
     private $em;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
@@ -54,7 +54,9 @@ class Version20180226163217 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema): void
     {
-        $proposals = $this->connection->fetchAll('SELECT id, created_at, author_id from proposal');
+        $proposals = $this->connection->fetchAllAssociative(
+            'SELECT id, created_at, author_id from proposal'
+        );
         foreach ($proposals as $proposal) {
             $uuid = $this->generator->generate($this->em, null);
             $this->connection->insert('user_following_proposal', [

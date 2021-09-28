@@ -20,7 +20,7 @@ final class Version20190320141742 extends AbstractMigration implements Container
     private $generator;
     private $em;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
@@ -41,20 +41,19 @@ final class Version20190320141742 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        $contactBody = $this->connection->fetchColumn(
+        $contactBody = $this->connection->fetchOne(
             'SELECT value FROM site_parameter WHERE keyname = :keyname',
-
             ['keyname' => 'contact.content.body']
         );
 
-        $contactMail = $this->connection->fetchColumn(
+        $contactMail = $this->connection->fetchOne(
             'SELECT value FROM site_parameter WHERE keyname = :keyname',
             ['keyname' => 'admin.mail.contact']
         );
 
         $date = (new \DateTime())->format('Y-m-d H:i:s');
 
-        $contactTitle = $this->connection->fetchColumn(
+        $contactTitle = $this->connection->fetchOne(
             'SELECT value FROM site_parameter WHERE keyname = :keyname',
             ['keyname' => 'contact.title']
         );

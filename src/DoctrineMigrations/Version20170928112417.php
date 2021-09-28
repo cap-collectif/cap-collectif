@@ -22,7 +22,7 @@ class Version20170928112417 extends AbstractMigration
     public function postUp(Schema $schema): void
     {
         // Update reference on each proposal forms
-        $proposalForms = $this->connection->fetchAll('SELECT * FROM proposal_form');
+        $proposalForms = $this->connection->fetchAllAssociative('SELECT * FROM proposal_form');
 
         $count = 0;
         $reference = 1;
@@ -36,7 +36,7 @@ class Version20170928112417 extends AbstractMigration
             ++$reference;
 
             // Update reference on each proposals in proposal form
-            $proposals = $this->connection->fetchAll(
+            $proposals = $this->connection->fetchAllAssociative(
                 'SELECT * FROM proposal WHERE proposal_form_id = "' . $proposalForm['id'] . '"'
             );
 

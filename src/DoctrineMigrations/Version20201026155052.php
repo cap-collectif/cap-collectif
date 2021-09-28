@@ -86,14 +86,14 @@ final class Version20201026155052 extends AbstractMigration
     {
         $categoriesWithDefaultImage = $this->connection
             ->executeQuery(
-                <<<SQL
+                <<<'SQL'
 SELECT proposal_category.id AS proposal_category_id, media__media.provider_metadata FROM proposal_category
 LEFT JOIN category_image ON proposal_category.category_media_id = category_image.id
 LEFT JOIN media__media ON category_image.image_id = media__media.id
 WHERE category_image.is_default = 1
 SQL
             )
-            ->fetchAll();
+            ->fetchAllAssociative();
         $informations = array_map(
             static fn(array $category) => [
                 'proposal_category_id' => $category['proposal_category_id'],
@@ -102,7 +102,7 @@ SQL
             $categoriesWithDefaultImage
         );
 
-        echo '-> Migrating old default images to new format...' . PHP_EOL;
+        echo '-> Migrating old default images to new format...' . \PHP_EOL;
 
         foreach ($informations as $information) {
             $metadata = self::MEDIA_MAPPING[$information['filename']];
@@ -122,7 +122,7 @@ SQL
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
 
@@ -135,7 +135,7 @@ SQL
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
 

@@ -16,11 +16,11 @@ class Version20170317131656 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $form = $this->connection->fetchColumn('SELECT id FROM registration_form');
-        $bottomText = $this->connection->fetchColumn(
+        $form = $this->connection->fetchOne('SELECT id FROM registration_form');
+        $bottomText = $this->connection->fetchOne(
             'SELECT value FROM site_parameter WHERE keyname = "signin.text.bottom"'
         );
-        $topText = $this->connection->fetchColumn(
+        $topText = $this->connection->fetchOne(
             'SELECT value FROM site_parameter WHERE keyname = "signin.text.top"'
         );
 

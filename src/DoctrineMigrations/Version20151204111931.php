@@ -12,7 +12,9 @@ class Version20151204111931 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $users = $this->connection->fetchAll('SELECT id FROM fos_user WHERE slug = ?', ['']);
+        $users = $this->connection->fetchAllAssociative('SELECT id FROM fos_user WHERE slug = ?', [
+            '',
+        ]);
         foreach ($users as $user) {
             $newSlug = substr(md5(uniqid(rand(), true)), 0, 10);
             $this->connection->update('fos_user', ['slug' => $newSlug], ['id' => $user['id']]);

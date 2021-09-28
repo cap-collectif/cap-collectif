@@ -29,7 +29,7 @@ class Version20180202163623 extends AbstractMigration implements ContainerAwareI
     public function postUp(Schema $schema): void
     {
         $this->write('-> Adding moderation token for existing opinions...');
-        $opinions = $this->connection->fetchAll('SELECT id from opinion');
+        $opinions = $this->connection->fetchAllAssociative('SELECT id from opinion');
         foreach ($opinions as $opinion) {
             $token = $this->container->get('fos_user.util.token_generator')->generateToken();
             $this->connection->update(
@@ -40,7 +40,7 @@ class Version20180202163623 extends AbstractMigration implements ContainerAwareI
         }
 
         $this->write('-> Adding moderation token for existing versions...');
-        $versions = $this->connection->fetchAll('SELECT id from opinion_version');
+        $versions = $this->connection->fetchAllAssociative('SELECT id from opinion_version');
         foreach ($versions as $version) {
             $token = $this->container->get('fos_user.util.token_generator')->generateToken();
             $this->connection->update(
@@ -51,7 +51,7 @@ class Version20180202163623 extends AbstractMigration implements ContainerAwareI
         }
 
         $this->write('-> Adding moderation token for existing arguments...');
-        $arguments = $this->connection->fetchAll('SELECT id from argument');
+        $arguments = $this->connection->fetchAllAssociative('SELECT id from argument');
         foreach ($arguments as $argument) {
             $token = $this->container->get('fos_user.util.token_generator')->generateToken();
             $this->connection->update(

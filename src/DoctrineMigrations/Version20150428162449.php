@@ -18,10 +18,9 @@ class Version20150428162449 extends AbstractMigration
     public function postUp(Schema $schema): void
     {
         // create menu active item color
-        $prevColor = $this->connection->fetchColumn(
-            'SELECT value from site_color where keyname= ?',
-            ['color.main_menu.text_active']
-        );
+        $prevColor = $this->connection->fetchOne('SELECT value from site_color where keyname= ?', [
+            'color.main_menu.text_active',
+        ]);
 
         $this->connection->update(
             'site_color',

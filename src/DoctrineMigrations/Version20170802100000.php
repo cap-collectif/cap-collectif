@@ -18,7 +18,7 @@ class Version20170802100000 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $proposals = $this->connection->fetchAll(
+        $proposals = $this->connection->fetchAllAssociative(
             'SELECT id, address FROM proposal WHERE address IS NOT NULL'
         );
 

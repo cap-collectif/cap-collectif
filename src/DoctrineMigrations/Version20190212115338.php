@@ -14,7 +14,7 @@ final class Version20190212115338 extends AbstractMigration
 {
     public function postUp(Schema $schema): void
     {
-        $cookiesList = $this->connection->fetchAll(
+        $cookiesList = $this->connection->fetchAllAssociative(
             'SELECT id FROM site_parameter where keyname = "cookies-list"'
         );
         $date = (new \DateTime())->format('Y-m-d H:i:s');

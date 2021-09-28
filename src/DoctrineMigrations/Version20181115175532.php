@@ -41,7 +41,7 @@ final class Version20181115175532 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $proposalForms = $this->connection->fetchAll(
+        $proposalForms = $this->connection->fetchAllAssociative(
             'SELECT id, summary_help_text, illustration_help_text from proposal_form'
         );
         foreach ($proposalForms as $proposalForm) {

@@ -15,7 +15,7 @@ final class Version20190426160454 extends AbstractMigration
     public function preUp(Schema $schema): void
     {
         $table = 'proposal';
-        $data = $this->connection->fetchAll('SELECT * FROM ' . $table);
+        $data = $this->connection->fetchAllAssociative('SELECT * FROM ' . $table);
         $slugs = array_map(function ($d) {
             return $d['slug'];
         }, $data);

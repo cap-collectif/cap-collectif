@@ -23,7 +23,9 @@ final class Version20190618121022 extends AbstractMigration
     public function preUp(Schema $schema): void
     {
         $table = 'proposal';
-        $proposalDraft = $this->connection->fetchAll("SELECT id FROM ${table} where is_draft = 1");
+        $proposalDraft = $this->connection->fetchAllAssociative(
+            "SELECT id FROM ${table} where is_draft = 1"
+        );
         foreach ($proposalDraft as $proposal) {
             $this->connection->update(
                 $table,

@@ -19,7 +19,7 @@ class Version20150330130028 extends AbstractMigration implements ContainerAwareI
      *
      * @param ContainerInterface|null $container A ContainerInterface instance or null
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -60,11 +60,11 @@ class Version20150330130028 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema): void
     {
-        $arguments_vote = $this->connection->fetchAll('SELECT * FROM argument_vote');
-        $comments_vote = $this->connection->fetchAll('SELECT * FROM comment_vote');
-        $ideas_vote = $this->connection->fetchAll('SELECT * FROM idea_vote');
-        $opinions_vote = $this->connection->fetchAll('SELECT * FROM opinion_vote');
-        $sources_vote = $this->connection->fetchAll('SELECT * FROM source_vote');
+        $arguments_vote = $this->connection->fetchAllAssociative('SELECT * FROM argument_vote');
+        $comments_vote = $this->connection->fetchAllAssociative('SELECT * FROM comment_vote');
+        $ideas_vote = $this->connection->fetchAllAssociative('SELECT * FROM idea_vote');
+        $opinions_vote = $this->connection->fetchAllAssociative('SELECT * FROM opinion_vote');
+        $sources_vote = $this->connection->fetchAllAssociative('SELECT * FROM source_vote');
 
         foreach ($arguments_vote as $vote) {
             $this->connection->insert('votes', [

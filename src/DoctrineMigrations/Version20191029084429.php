@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\Id\UuidGenerator;
@@ -19,7 +18,7 @@ final class Version20191029084429 extends AbstractMigration implements Container
     private $generator;
     private $em;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
@@ -73,7 +72,7 @@ final class Version20191029084429 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        $districts = $this->connection->fetchAll(
+        $districts = $this->connection->fetchAllAssociative(
             'SELECT project_district.project_id, project_district.projectdistrict_id FROM project_district'
         );
         foreach ($districts as $position => $district) {
@@ -93,7 +92,7 @@ final class Version20191029084429 extends AbstractMigration implements Container
 
     public function postDown(Schema $schema): void
     {
-        $districts = $this->connection->fetchAll(
+        $districts = $this->connection->fetchAllAssociative(
             'SELECT project_district_positioner.project_id, project_district_positioner.district_id FROM project_district_positioner'
         );
         foreach ($districts as $district) {

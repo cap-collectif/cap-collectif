@@ -14,7 +14,7 @@ class Version20151105170654 extends AbstractMigration
 
     public function preUp(Schema $schema): void
     {
-        $this->collectSteps = $this->connection->fetchAll(
+        $this->collectSteps = $this->connection->fetchAllAssociative(
             '
             SELECT id, proposal_form_id FROM step
             WHERE step_type = ?

@@ -37,7 +37,9 @@ class Version20180330112444 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $followers = $this->connection->fetchAll('SELECT id from user_following_proposal');
+        $followers = $this->connection->fetchAllAssociative(
+            'SELECT id from user_following_proposal'
+        );
         foreach ($followers as $follower) {
             $this->connection->update(
                 'user_following_proposal',
@@ -46,7 +48,9 @@ class Version20180330112444 extends AbstractMigration
             );
         }
 
-        $proposals = $this->connection->fetchAll('SELECT id, created_at, author_id from proposal');
+        $proposals = $this->connection->fetchAllAssociative(
+            'SELECT id, created_at, author_id from proposal'
+        );
         foreach ($proposals as $proposal) {
             $this->connection->update(
                 'user_following_proposal',

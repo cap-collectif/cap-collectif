@@ -36,7 +36,7 @@ final class Version20190305115017 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $questionnaires = $this->connection->fetchAll('SELECT id from questionnaire');
+        $questionnaires = $this->connection->fetchAllAssociative('SELECT id from questionnaire');
 
         $data = [];
         foreach ($questionnaires as $questionnaire) {

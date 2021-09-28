@@ -16,7 +16,7 @@ class Version20160408103427 extends AbstractMigration
     public function preUp(Schema $schema): void
     {
         $this->connection->exec('DELETE FROM question_choice');
-        $this->questions = $this->connection->fetchAll('SELECT * FROM question');
+        $this->questions = $this->connection->fetchAllAssociative('SELECT * FROM question');
     }
 
     public function up(Schema $schema): void
@@ -106,8 +106,10 @@ class Version20160408103427 extends AbstractMigration
     {
         $this->connection->exec('DELETE FROM question_choice');
         $this->connection->delete('response', ['proposal_id' => null]);
-        $this->questions = $this->connection->fetchAll('SELECT * FROM question');
-        $this->qaq = $this->connection->fetchAll('SELECT * FROM questionnaire_abstractquestion');
+        $this->questions = $this->connection->fetchAllAssociative('SELECT * FROM question');
+        $this->qaq = $this->connection->fetchAllAssociative(
+            'SELECT * FROM questionnaire_abstractquestion'
+        );
         foreach ($this->qaq as $qaq) {
             if (null === $qaq['proposal_form_id']) {
                 $this->connection->delete('response', ['question_id' => $qaq['question_id']]);

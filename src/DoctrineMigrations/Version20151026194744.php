@@ -14,7 +14,7 @@ class Version20151026194744 extends AbstractMigration implements ContainerAwareI
 {
     protected $container;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -34,7 +34,7 @@ class Version20151026194744 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema): void
     {
-        $elements = $this->connection->fetchAll(
+        $elements = $this->connection->fetchAllAssociative(
             '
             SELECT se.id, se.linked_data_id, se.linked_data_class
             FROM synthesis_element se
@@ -43,7 +43,7 @@ class Version20151026194744 extends AbstractMigration implements ContainerAwareI
         );
 
         foreach ($elements as $el) {
-            $ot = $this->connection->fetchAll(
+            $ot = $this->connection->fetchAllAssociative(
                 '
                 SELECT ot.id as id, ot.subtitle as subtitle
                 FROM opinion_type ot

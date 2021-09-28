@@ -14,7 +14,7 @@ class Version20160623163344 extends AbstractMigration
 
     public function preUp(Schema $schema): void
     {
-        $this->selectionStepsProposals = $this->connection->fetchAll(
+        $this->selectionStepsProposals = $this->connection->fetchAllAssociative(
             'SELECT * FROM selectionstep_proposal'
         );
     }
@@ -54,7 +54,9 @@ class Version20160623163344 extends AbstractMigration
 
     public function preDown(Schema $schema): void
     {
-        $this->selectionStepsProposals = $this->connection->fetchAll('SELECT * FROM selection');
+        $this->selectionStepsProposals = $this->connection->fetchAllAssociative(
+            'SELECT * FROM selection'
+        );
     }
 
     public function down(Schema $schema): void

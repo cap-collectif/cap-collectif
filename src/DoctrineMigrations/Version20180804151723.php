@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Application\Migrations;
 
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -12,7 +14,7 @@ final class Version20180804151723 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
 
@@ -23,7 +25,7 @@ final class Version20180804151723 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
 
@@ -32,7 +34,7 @@ final class Version20180804151723 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $projects = $this->connection->fetchAll('SELECT id FROM project');
+        $projects = $this->connection->fetchAllAssociative('SELECT id FROM project');
         foreach ($projects as $project) {
             $this->connection->update(
                 'project',
