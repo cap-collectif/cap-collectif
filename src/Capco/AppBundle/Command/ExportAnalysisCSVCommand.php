@@ -81,32 +81,24 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         'proposal_decision-maker_decision_reason' => 'decision.refusedReason.name',
     ];
 
-    protected const ANALYST_FRAGMENT = <<<'EOF'
-fragment analystInfos on User {
+    protected const USER_INFOS_FRAGMENT = <<<'EOF'
+fragment userInfos on User {
     id
     username
+    isEmailConfirmed
     email
 }
 EOF;
 
-    protected const DECISION_MAKER_FRAGMENT = <<<'EOF'
-fragment decisionMakerInfos on User {
+    protected const USER_INFOS_ANONYMOUS_FRAGMENT = <<<'EOF'
+fragment userInfos on User {
     id
     username
-    email
-}
-EOF;
-
-    protected const SUPERVISOR_FRAGMENT = <<<'EOF'
-fragment supervisorInfos on User {
-    id
-    username
-    email
 }
 EOF;
 
     protected const PROPOSAL_ANALYSIS_FRAGMENT = <<<'EOF'
-    
+
 fragment proposalInfos on Proposal {
   id
   reference
@@ -119,10 +111,7 @@ fragment proposalInfos on Proposal {
   trashedAt
   trashedReason
   author {
-    id
-    username
-    isEmailConfirmed
-    email
+    ...userInfos
     userType{name}
   }
   status{
@@ -136,7 +125,7 @@ fragment proposalInfos on Proposal {
   estimation
   analyses {
     analyst {
-      ...analystInfos
+      ...userInfos
     }
     comment
     state
@@ -163,13 +152,12 @@ fragment proposalInfos on Proposal {
 EOF;
 
     protected static $defaultName = 'capco:export:analysis';
-    protected $em;
-    protected $executor;
-    protected $listener;
-    protected $projectRootDir;
-    protected $userRepository;
-    private $projectRepository;
-    private $header;
+    protected EntityManagerInterface $em;
+    protected Executor $executor;
+    protected GraphQlAclListener $listener;
+    protected string $projectRootDir;
+    protected UserRepository $userRepository;
+    private ProjectRepository $projectRepository;
     private ConnectionTraversor $connectionTraversor;
 
     public function __construct(
@@ -199,7 +187,8 @@ EOF;
         array $project,
         string $delimiter,
         bool $isOnlyDecision,
-        bool $isVerbose
+        bool $isVerbose,
+        bool $projectAdmin = false
     ): void {
         $firstAnalysisStep = $project['node']['firstAnalysisStep'];
         $projectSlug = $project['node']['slug'];
@@ -214,7 +203,7 @@ EOF;
 
         $output->writeln('<fg=green>Generating analysis of project ' . $projectSlug . '...</>');
 
-        $fullPath = $this->getPath($projectSlug, $isOnlyDecision);
+        $fullPath = $this->getPath($projectSlug, $isOnlyDecision, $projectAdmin);
 
         $writer = WriterFactory::create(Type::CSV, $delimiter);
         if (null === $writer) {
@@ -227,10 +216,13 @@ EOF;
             throw new \RuntimeException('Error while opening file: ' . $e->getMessage());
         }
 
+        $headers = $this->computeHeaders($projectAdmin);
+
         $dynamicQuestionHeaderPart = $this->writeHeader(
             $writer,
             $isOnlyDecision,
-            $firstAnalysisStep['form']
+            $firstAnalysisStep['form'],
+            $headers
         );
 
         if (
@@ -245,7 +237,8 @@ EOF;
                     $output,
                     $dynamicQuestionHeaderPart,
                     $isOnlyDecision,
-                    $isVerbose
+                    $isVerbose,
+                    $headers
                 ) {
                     $proposal = $edge['node'];
                     $this->addProposalRow(
@@ -254,6 +247,7 @@ EOF;
                         $proposal,
                         $dynamicQuestionHeaderPart,
                         $isOnlyDecision,
+                        $headers,
                         $isVerbose
                     );
                 },
@@ -272,7 +266,7 @@ EOF;
         }
         $writer->close();
         if (true === $input->getOption('updateSnapshot')) {
-            $this->updateSnapshot(self::getFilename($projectSlug, $isOnlyDecision));
+            $this->updateSnapshot(self::getFilename($projectSlug, $isOnlyDecision, $projectAdmin));
             $output->writeln('<info>Snapshot has been written !</info>');
         }
     }
@@ -280,17 +274,32 @@ EOF;
     /**
      * We have to make sure the string is unique for each step.
      */
-    public static function getFilename(string $projectSlug, bool $isOnlyDecision): string
-    {
+    public static function getFilename(
+        string $projectSlug,
+        bool $isOnlyDecision,
+        bool $projectAdmin = false
+    ): string {
         if ($isOnlyDecision) {
-            return self::getShortenedFilename("project-${projectSlug}-decision");
+            return self::getShortenedFilename(
+                "project-${projectSlug}-decision",
+                '.csv',
+                $projectAdmin
+            );
         }
 
-        return self::getShortenedFilename("project-${projectSlug}-analysis");
+        return self::getShortenedFilename("project-${projectSlug}-analysis", '.csv', $projectAdmin);
     }
 
-    public function writeHeader($writer, bool $isOnlyDecision, array $firstAnalysisStepForm): array
-    {
+    public function writeHeader(
+        $writer,
+        bool $isOnlyDecision,
+        array $firstAnalysisStepForm,
+        array $headers
+    ): array {
+        $proposalHeaders = $headers['proposalHeaders'];
+        $analystHeaders = $headers['analystHeaders'];
+        $decisionHeaders = $headers['decisionHeaders'];
+
         $dynamicQuestionHeaderPart = [];
         if (!$isOnlyDecision) {
             $dynamicQuestionHeaderPart = $this->getDynamicQuestionHeaderForProject(
@@ -299,20 +308,14 @@ EOF;
             $writer->addRow(
                 WriterEntityFactory::createRowFromArray(
                     array_keys(
-                        array_merge(
-                            self::PROPOSAL_DEFAULT_HEADER,
-                            self::ANALYST_DEFAULT_HEADER,
-                            $dynamicQuestionHeaderPart
-                        )
+                        array_merge($proposalHeaders, $analystHeaders, $dynamicQuestionHeaderPart)
                     )
                 )
             );
         } else {
             $writer->addRow(
                 WriterEntityFactory::createRowFromArray(
-                    array_keys(
-                        array_merge(self::PROPOSAL_DEFAULT_HEADER, self::DECISION_DEFAULT_HEADER)
-                    )
+                    array_keys(array_merge($proposalHeaders, $decisionHeaders))
                 )
             );
         }
@@ -326,6 +329,7 @@ EOF;
         array $proposal,
         array $dynamicQuestionHeaderPart,
         bool $isOnlyDecision,
+        array $headers,
         bool $isVerbose = false
     ): void {
         $defaultRowContent = [];
@@ -348,19 +352,25 @@ EOF;
         }
 
         // We iterate over each column of a row to fill them
-        foreach (self::PROPOSAL_DEFAULT_HEADER as $headerKey => $headerPath) {
+        foreach ($headers['proposalHeaders'] as $headerPath) {
             $cellValue = $this->getRowCellValue($proposal, $headerPath);
             $defaultRowContent[] = $cellValue;
         }
 
         if ($isOnlyDecision) {
-            $this->setDecisionRows($writer, $defaultRowContent, $proposal);
+            $this->setDecisionRows(
+                $writer,
+                $defaultRowContent,
+                $proposal,
+                $headers['decisionHeaders']
+            );
         } else {
             $this->setAnalysisRows(
                 $writer,
                 $defaultRowContent,
                 $proposal['analyses'],
-                $dynamicQuestionHeaderPart
+                $dynamicQuestionHeaderPart,
+                $headers['analystHeaders']
             );
         }
     }
@@ -416,10 +426,11 @@ EOF;
     public function setDecisionRows(
         WriterInterface $writer,
         array $defaultRowContent,
-        array $proposal
+        array $proposal,
+        array $decisionHeaders
     ): void {
         $dynamicRowContent = [];
-        foreach (self::DECISION_DEFAULT_HEADER as $headerKey => $headerPath) {
+        foreach ($decisionHeaders as $headerPath) {
             $cellValue = $this->getRowCellValue($proposal, $headerPath);
             $dynamicRowContent[] = \is_array($cellValue)
                 ? $this->formatAuthors($cellValue)
@@ -447,15 +458,16 @@ EOF;
         WriterInterface $writer,
         array $defaultRowContent,
         array $analyses,
-        array $dynamicQuestionHeaderPart
+        array $dynamicQuestionHeaderPart,
+        array $analystHeaders
     ): void {
         foreach ($analyses as $analysis) {
             $dynamicRowContent = [];
-            foreach (self::ANALYST_DEFAULT_HEADER as $headerKey => $headerPath) {
+            foreach ($analystHeaders as $headerPath) {
                 $cellValue = $this->getRowCellValue($analysis, $headerPath);
                 $dynamicRowContent[] = $cellValue;
             }
-            foreach ($dynamicQuestionHeaderPart as $questionTitle => $questionId) {
+            foreach ($dynamicQuestionHeaderPart as $questionId) {
                 $cellValue = $this->getProposalQuestionAnswer($analysis, $questionId);
                 $dynamicRowContent[] = $cellValue;
             }
@@ -487,22 +499,13 @@ EOF;
         $projects = $this->projectRepository->findAllIdsWithSlugs();
         $output->writeln('<info>Starting generation of csv...</info>');
         foreach ($projects as $project) {
+            $projectEntity = $this->projectRepository->find($project['id']);
+            $owner = $projectEntity->getOwner();
+            $isProjectAdmin = $owner && $owner->isOnlyProjectAdmin();
+
             $projectId = GlobalId::toGlobalId('Project', $project['id']);
-            if ($isOnlyDecision) {
-                $data = $this->executor
-                    ->execute('internal', [
-                        'query' => $this->getDecisionGraphQLQuery($projectId),
-                        'variables' => [],
-                    ])
-                    ->toArray();
-            } else {
-                $data = $this->executor
-                    ->execute('internal', [
-                        'query' => $this->getAnalysisGraphQLQuery($projectId),
-                        'variables' => [],
-                    ])
-                    ->toArray();
-            }
+
+            $data = $this->getData($isOnlyDecision, $projectId, null, $isProjectAdmin);
 
             $this->generateProjectProposalsCSV(
                 $input,
@@ -510,8 +513,21 @@ EOF;
                 $data['data'],
                 $delimiter,
                 $isOnlyDecision,
-                $isVerbose
+                $isVerbose,
+                $isProjectAdmin
             );
+
+            if ($isProjectAdmin) {
+                $data = $this->getData($isOnlyDecision, $projectId);
+                $this->generateProjectProposalsCSV(
+                    $input,
+                    $output,
+                    $data['data'],
+                    $delimiter,
+                    $isOnlyDecision,
+                    $isVerbose
+                );
+            }
         }
 
         $output->writeln('Done writing.');
@@ -519,11 +535,14 @@ EOF;
         return 0;
     }
 
-    protected function getDecisionGraphQLQuery(string $projectId, ?string $cursor = null): string
-    {
-        $ANALYST_FRAGMENT = self::ANALYST_FRAGMENT;
-        $DECISION_MAKER_FRAGMENT = self::DECISION_MAKER_FRAGMENT;
-        $SUPERVISOR_FRAGMENT = self::SUPERVISOR_FRAGMENT;
+    protected function getDecisionGraphQLQuery(
+        string $projectId,
+        ?string $cursor = null,
+        bool $projectAdmin = false
+    ): string {
+        $AUTHOR_INFOS_FRAGMENT = $projectAdmin
+            ? self::USER_INFOS_ANONYMOUS_FRAGMENT
+            : self::USER_INFOS_FRAGMENT;
         $PROPOSAL_FRAGMENT = self::PROPOSAL_ANALYSIS_FRAGMENT;
 
         if ($cursor) {
@@ -531,9 +550,7 @@ EOF;
         }
 
         return <<<EOF
-${ANALYST_FRAGMENT}
-${DECISION_MAKER_FRAGMENT}
-${SUPERVISOR_FRAGMENT}
+${AUTHOR_INFOS_FRAGMENT}
 ${PROPOSAL_FRAGMENT}
 {
   node(id: "${projectId}") {
@@ -560,7 +577,7 @@ ${PROPOSAL_FRAGMENT}
               cursor
               node {
                 ...proposalInfos
-                
+
                 assessment{
                   body
                   estimatedCost
@@ -568,10 +585,10 @@ ${PROPOSAL_FRAGMENT}
                   state
                   body
                   supervisor{
-                    ...supervisorInfos
+                    ...userInfos
                   }
                 }
-                
+
                 decision {
                   state
                   refusedReason{
@@ -586,8 +603,8 @@ ${PROPOSAL_FRAGMENT}
                     }
                   }
                   decisionMaker{
-                    ...decisionMakerInfos
-                  }  
+                    ...userInfos
+                  }
                 }
               }
             }
@@ -599,9 +616,15 @@ ${PROPOSAL_FRAGMENT}
 EOF;
     }
 
-    protected function getAnalysisGraphQLQuery(string $projectId, ?string $cursor = null): string
-    {
-        $ANALYST_FRAGMENT = self::ANALYST_FRAGMENT;
+    protected function getAnalysisGraphQLQuery(
+        string $projectId,
+        ?string $cursor = null,
+        bool $projectAdmin = false
+    ): string {
+        $AUTHOR_INFOS_FRAGMENT = $projectAdmin
+            ? self::USER_INFOS_ANONYMOUS_FRAGMENT
+            : self::USER_INFOS_FRAGMENT;
+
         $PROPOSAL_FRAGMENT = self::PROPOSAL_ANALYSIS_FRAGMENT;
 
         if ($cursor) {
@@ -609,7 +632,7 @@ EOF;
         }
 
         return <<<EOF
-${ANALYST_FRAGMENT}
+${AUTHOR_INFOS_FRAGMENT}
 ${PROPOSAL_FRAGMENT}
 {
   node(id: "${projectId}") {
@@ -633,7 +656,7 @@ ${PROPOSAL_FRAGMENT}
             analysisConfiguration {
               evaluationForm {
                 questions {
-                  id  
+                  id
                   title
                 }
               }
@@ -646,11 +669,58 @@ ${PROPOSAL_FRAGMENT}
 EOF;
     }
 
-    protected function getPath(string $projectSlug, bool $isOnlyDecision): string
-    {
+    protected function getPath(
+        string $projectSlug,
+        bool $isOnlyDecision,
+        bool $projectAdmin = false
+    ): string {
         return $this->projectRootDir .
             '/public/export/' .
-            self::getFilename($projectSlug, $isOnlyDecision);
+            self::getFilename($projectSlug, $isOnlyDecision, $projectAdmin);
+    }
+
+    private function computeHeaders(bool $isProjectAdmin): array
+    {
+        $proposalHeaders = self::PROPOSAL_DEFAULT_HEADER;
+        $analystHeaders = self::ANALYST_DEFAULT_HEADER;
+        $decisionHeaders = self::DECISION_DEFAULT_HEADER;
+
+        if ($isProjectAdmin) {
+            unset(
+                $proposalHeaders['proposal_author_email'],
+                $proposalHeaders['proposal_author_isEmailConfirmed'],
+                $analystHeaders['proposal_analyst_email'],
+                $decisionHeaders['proposal_supervisor_email'],
+                $decisionHeaders['proposal_decision-maker_email']
+            );
+        }
+
+        return compact('proposalHeaders', 'analystHeaders', 'decisionHeaders');
+    }
+
+    private function getData(
+        bool $isOnlyDecision,
+        string $projectId,
+        ?string $cursor = null,
+        bool $projectAdmin = false
+    ): array {
+        if ($isOnlyDecision) {
+            $data = $this->executor
+                ->execute('internal', [
+                    'query' => $this->getDecisionGraphQLQuery($projectId, $cursor, $projectAdmin),
+                    'variables' => [],
+                ])
+                ->toArray();
+        } else {
+            $data = $this->executor
+                ->execute('internal', [
+                    'query' => $this->getAnalysisGraphQLQuery($projectId, $cursor, $projectAdmin),
+                    'variables' => [],
+                ])
+                ->toArray();
+        }
+
+        return $data;
     }
 
     private function getDynamicQuestionHeaderForProject(array $form): array

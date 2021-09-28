@@ -150,6 +150,8 @@ Scenario: Admin wants to export proposal analysis
     | --delimiter |,|
   And exported "csv" file with name "project-budget-participatif-idf-analysis.csv" should match its snapshot
   And exported "csv" file with name "project-project-analyse-analysis.csv" should match its snapshot
+  And exported "csv" file with name "project-projet-avec-administrateur-de-projet-analysis.csv" should match its snapshot
+  And exported "csv" file with name "project-projet-avec-administrateur-de-projet-analysis-project-admin.csv" should match its snapshot
   Then the command exit code should be 0
 
 Scenario: Admin wants to export proposal decisions
@@ -159,6 +161,8 @@ Scenario: Admin wants to export proposal decisions
   Then the command exit code should be 0
   And exported "csv" file with name "project-budget-participatif-idf-decision.csv" should match its snapshot
   And exported "csv" file with name "project-project-analyse-decision.csv" should match its snapshot
+  And exported "csv" file with name "project-projet-avec-administrateur-de-projet-decision.csv" should match its snapshot
+  And exported "csv" file with name "project-projet-avec-administrateur-de-projet-decision-project-admin.csv" should match its snapshot
 
 @snapshot
 Scenario: Admin wants to export debate arguments and votes

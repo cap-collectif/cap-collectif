@@ -7,6 +7,7 @@ use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\AppBundle\Security\QuestionnaireVoter;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
@@ -379,7 +380,14 @@ class ProjectController extends Controller
                 $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
             );
         }
-        $filename = ExportAnalysisCSVCommand::getFilename($project->getSlug(), false);
+
+        $isProjectAdmin = $this->getUser()->isOnlyProjectAdmin();
+
+        $filename = ExportAnalysisCSVCommand::getFilename(
+            $project->getSlug(),
+            false,
+            $isProjectAdmin
+        );
         $contentType = 'text/csv';
         $fullPath = $this->exportDir . $filename;
 
@@ -412,7 +420,14 @@ class ProjectController extends Controller
                 $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
             );
         }
-        $filename = ExportAnalysisCSVCommand::getFilename($project->getSlug(), true);
+
+        $isProjectAdmin = $this->getUser()->isOnlyProjectAdmin();
+
+        $filename = ExportAnalysisCSVCommand::getFilename(
+            $project->getSlug(),
+            true,
+            $isProjectAdmin
+        );
         $contentType = 'text/csv';
 
         try {
