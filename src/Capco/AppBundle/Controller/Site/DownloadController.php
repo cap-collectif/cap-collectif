@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Command\ExportDebateCommand;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Entity\Media;
@@ -40,7 +41,7 @@ class DownloadController extends Controller
 
     /**
      * @Route("/debate/{debateId}/download/{type}", name="app_debate_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_PROJECT_ADMIN')")
      */
     public function downloadArgumentsAction(
         Request $request,
@@ -48,7 +49,11 @@ class DownloadController extends Controller
         string $type
     ): Response {
         $debateId = GlobalId::fromGlobalId($debateId)['id'];
-        $fileName = "debate-${debateId}-${type}.csv";
+
+        $user = $this->getUser();
+        $isProjectAdmin = $user->isOnlyProjectAdmin();
+
+        $fileName = ExportDebateCommand::getFilename($debateId, $type, $isProjectAdmin);
         $filePath = $this->projectDir . '/public/export/' . $fileName;
 
         if (!file_exists($filePath)) {

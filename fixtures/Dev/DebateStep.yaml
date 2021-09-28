@@ -61,3 +61,14 @@ Capco\AppBundle\Entity\Steps\DebateStep:
         body: null
         startAt: <identity((new \DateTime('2020-01-01')))>
         endAt: <identity((new \DateTime('2020-10-01')))>
+    debateStepProjectAdmin:
+        __construct: ['@debateProjectAdmin']
+        isAnonymousParticipationAllowed: false
+        id: debateStepProjectAdmin
+        title: debat admin projet ?
+        slug: debat-admin-projet ?
+        label: debat admin projet
+        body: null
+        startAt: <identity((new \DateTime('2020-01-01')))>
+        endAt: <identity((new \DateTime('2020-10-01')))>
+        debateContent: 'hey je suis visible par un admin projet'

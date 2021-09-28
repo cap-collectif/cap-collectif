@@ -11,3 +11,5 @@ Capco\AppBundle\Entity\Debate\Debate:
         id: debateMuti1
     debateMulti2:
         id: debateMulti2
+    debateProjectAdmin:
+        id: debateProjectAdmin

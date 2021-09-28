@@ -463,7 +463,7 @@ Object {
         },
         Object {
           "key": "2020-10-01T00:00:00.000Z",
-          "totalCount": 11,
+          "totalCount": 13,
         },
         Object {
           "key": "2020-11-01T00:00:00.000Z",
@@ -1651,7 +1651,7 @@ Object {
         },
         Object {
           "key": "2015-01-01T00:00:00.000Z",
-          "totalCount": 70,
+          "totalCount": 72,
         },
         Object {
           "key": "2015-02-01T00:00:00.000Z",

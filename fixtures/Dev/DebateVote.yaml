@@ -108,3 +108,18 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         type: FOR
         publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
         createdAt: $publishedAt
+    # Project Admin
+    debateProjectAdminVote1:
+        id: 14523
+        user: '@userJpec'
+        debate: '@debateProjectAdmin'
+        type: FOR
+        publishedAt: <(new \DateTime('2015-01-01 09:04:00'))>
+        createdAt: $publishedAt
+    debateProjectAdminVote2:
+        id: 14524
+        user: '@userMaxime'
+        debate: '@debateProjectAdmin'
+        type: AGAINST
+        publishedAt: <(new \DateTime('2015-01-01 09:04:00'))>
+        createdAt: $publishedAt

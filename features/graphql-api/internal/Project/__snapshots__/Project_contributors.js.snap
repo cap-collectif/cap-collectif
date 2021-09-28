@@ -212,7 +212,7 @@ Object {
             "userType": null,
             "vip": false,
             "votes": Object {
-              "totalCount": 1,
+              "totalCount": 2,
             },
           },
         },

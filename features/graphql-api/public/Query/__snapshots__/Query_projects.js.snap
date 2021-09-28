@@ -28,17 +28,17 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 1,
+            "totalCount": 3,
           },
           "contributionsCount": 1,
           "contributors": Object {
-            "totalCount": 1,
+            "totalCount": 5,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
           "title": "Projet avec administrateur de projet",
           "votes": Object {
-            "totalCount": 0,
+            "totalCount": 2,
           },
         },
       },
@@ -260,17 +260,17 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 1,
+            "totalCount": 3,
           },
           "contributionsCount": 1,
           "contributors": Object {
-            "totalCount": 1,
+            "totalCount": 5,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
           "title": "Projet avec administrateur de projet",
           "votes": Object {
-            "totalCount": 0,
+            "totalCount": 2,
           },
         },
       },

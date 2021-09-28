@@ -9,6 +9,7 @@ use Box\Spout\Writer\CSV\Writer;
 use Capco\AppBundle\Command\Utils\BooleanCell;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -95,23 +96,35 @@ class ExportDebateCommand extends BaseExportCommand
         $this->router = $router;
     }
 
+    public static function getFilename(
+        string $debateId,
+        string $type,
+        bool $projectAdmin = false
+    ): string {
+        if ($projectAdmin) {
+            return self::getShortenedFilename("debate-${debateId}-${type}-project-admin");
+        }
+
+        return self::getShortenedFilename("debate-${debateId}-${type}");
+    }
+
     protected function configure(): void
     {
         parent::configure();
         $this->addOption(
-            '--debate-id',
+            'debate-id',
             'di',
             InputOption::VALUE_OPTIONAL,
             'id of the debate to export'
         );
         $this->addOption(
-            '--arguments-order',
+            'arguments-order',
             'ao',
             InputOption::VALUE_OPTIONAL,
             'order the arguments as PUBLICATION_DESC, PUBLICATION_ASC, VOTES_DESC, VOTES_ASC'
         );
         $this->addOption(
-            '--votes-order',
+            'votes-order',
             'vo',
             InputOption::VALUE_OPTIONAL,
             'order the votes as PUBLICATION_DESC, PUBLICATION_ASC, CREATION_DESC, CREATION_ASC'
@@ -123,12 +136,18 @@ class ExportDebateCommand extends BaseExportCommand
         foreach ($this->getDebateIds($input) as $debateId) {
             $arguments = [];
             $votes = [];
+
+            $debate = $this->debateRepository->find($debateId);
+            $owner = $debate ? $debate->getProject()->getOwner() : null;
+            $isProjectAdmin = $owner && $owner->isOnlyProjectAdmin();
+
             $url = $this->loadDataAndGetUrl(
                 $debateId,
                 $arguments,
                 $votes,
                 $input->getOption('arguments-order'),
-                $input->getOption('votes-order')
+                $input->getOption('votes-order'),
+                $isProjectAdmin
             );
             $this->generateArgumentsAndVotesCSV(
                 $output,
@@ -137,8 +156,31 @@ class ExportDebateCommand extends BaseExportCommand
                 $votes,
                 $url,
                 $input->getOption('delimiter'),
-                $input->getOption('verbose')
+                $input->getOption('verbose'),
+                $isProjectAdmin
             );
+
+            if ($isProjectAdmin) {
+                $arguments = [];
+                $votes = [];
+
+                $url = $this->loadDataAndGetUrl(
+                    $debateId,
+                    $arguments,
+                    $votes,
+                    $input->getOption('arguments-order'),
+                    $input->getOption('votes-order')
+                );
+                $this->generateArgumentsAndVotesCSV(
+                    $output,
+                    $debateId,
+                    $arguments,
+                    $votes,
+                    $url,
+                    $input->getOption('delimiter'),
+                    $input->getOption('verbose')
+                );
+            }
         }
 
         return 0;
@@ -151,7 +193,8 @@ class ExportDebateCommand extends BaseExportCommand
         array $votes,
         string $url,
         string $delimiter,
-        bool $isVerbose
+        bool $isVerbose,
+        bool $projectAdmin = false
     ): void {
         $this->generateCSV(
             $output,
@@ -160,9 +203,19 @@ class ExportDebateCommand extends BaseExportCommand
             $arguments,
             $url,
             $delimiter,
-            $isVerbose
+            $isVerbose,
+            $projectAdmin
         );
-        $this->generateCSV($output, $debateId, 'votes', $votes, $url, $delimiter, $isVerbose);
+        $this->generateCSV(
+            $output,
+            $debateId,
+            'votes',
+            $votes,
+            $url,
+            $delimiter,
+            $isVerbose,
+            $projectAdmin
+        );
     }
 
     private function generateCSV(
@@ -172,10 +225,11 @@ class ExportDebateCommand extends BaseExportCommand
         array $data,
         string $url,
         string $delimiter,
-        bool $isVerbose
+        bool $isVerbose,
+        bool $projectAdmin = false
     ): void {
         $output->writeln("<info>Generating ${type} of debate ${debateId}...</info>");
-        $path = $this->getPath($debateId, $type);
+        $path = $this->getPath($debateId, $type, $projectAdmin);
 
         $writer = WriterFactory::create(Type::CSV, $delimiter);
         if (null === $writer) {
@@ -189,8 +243,8 @@ class ExportDebateCommand extends BaseExportCommand
         }
 
         try {
-            self::addHeader($writer, $type);
-            self::fillDocument($writer, $type, $data, $url, $output, $isVerbose);
+            self::addHeader($writer, $type, $projectAdmin);
+            self::fillDocument($writer, $type, $data, $url, $output, $isVerbose, $projectAdmin);
         } catch (IOException $e) {
             throw new \RuntimeException('Error while writing on file: ' . $e->getMessage());
         }
@@ -200,10 +254,15 @@ class ExportDebateCommand extends BaseExportCommand
         }
     }
 
-    private static function addHeader(Writer $writer, string $type): void
-    {
+    private static function addHeader(
+        Writer $writer,
+        string $type,
+        bool $projectAdmin = false
+    ): void {
         $writer->addRow(
-            WriterEntityFactory::createRowFromArray(array_keys(self::getHeader($type)))
+            WriterEntityFactory::createRowFromArray(
+                array_keys(self::getHeader($type, $projectAdmin))
+            )
         );
     }
 
@@ -213,7 +272,8 @@ class ExportDebateCommand extends BaseExportCommand
         array $data,
         string $url,
         OutputInterface $output,
-        bool $isVerbose
+        bool $isVerbose,
+        bool $projectAdmin = false
     ): void {
         $forCount = 0;
         $againstCount = 0;
@@ -221,7 +281,7 @@ class ExportDebateCommand extends BaseExportCommand
         foreach ($data as $datum) {
             $datum = $datum['node'];
             $datum['url'] = $url;
-            self::addRowToDocument($writer, $datum, $type);
+            self::addRowToDocument($writer, $datum, $type, $projectAdmin);
 
             if ($isVerbose) {
                 if ('FOR' === $datum['type']) {
@@ -241,11 +301,12 @@ class ExportDebateCommand extends BaseExportCommand
     private static function addRowToDocument(
         Writer $writer,
         array $argumentData,
-        string $type
+        string $type,
+        bool $projectAdmin = false
     ): void {
         $rowContent = [];
 
-        foreach (self::getHeader($type) as $headerKey => $headerPath) {
+        foreach (self::getHeader($type, $projectAdmin) as $headerPath) {
             $cellValue = self::getRowCellValue($argumentData, $headerPath);
             $rowContent[] = $cellValue;
         }
@@ -253,14 +314,11 @@ class ExportDebateCommand extends BaseExportCommand
         $writer->addRow(WriterEntityFactory::createRowFromArray($rowContent));
     }
 
-    private function getPath(string $debateId, string $type): string
+    private function getPath(string $debateId, string $type, bool $projectAdmin = false): string
     {
-        return $this->projectRootDir . self::EXPORT_DIR . self::getFilename($debateId, $type);
-    }
-
-    private static function getFilename(string $debateId, string $type): string
-    {
-        return self::getShortenedFilename("debate-${debateId}-${type}");
+        return $this->projectRootDir .
+            self::EXPORT_DIR .
+            self::getFilename($debateId, $type, $projectAdmin);
     }
 
     private static function getRowCellValue(array $data, string $treePath)
@@ -318,8 +376,8 @@ class ExportDebateCommand extends BaseExportCommand
 
     private function getDebateIds(InputInterface $input): array
     {
-        return $input->hasOption('debate')
-            ? [$input->getOption('debate')]
+        return $input->getOption('debate-id')
+            ? [$input->getOption('debate-id')]
             : $this->debateRepository->findAllIds();
     }
 
@@ -328,7 +386,8 @@ class ExportDebateCommand extends BaseExportCommand
         array &$arguments,
         array &$votes,
         ?string $argumentsOrder = null,
-        ?string $votesOrder = null
+        ?string $votesOrder = null,
+        bool $projectAdmin = false
     ): string {
         $globalId = GlobalId::toGlobalId('Debate', $debateId);
 
@@ -342,7 +401,8 @@ class ExportDebateCommand extends BaseExportCommand
                         $argumentCursor,
                         $voteCursor,
                         $argumentsOrder,
-                        $votesOrder
+                        $votesOrder,
+                        $projectAdmin
                     ),
                     'variables' => [],
                 ])
@@ -368,13 +428,25 @@ class ExportDebateCommand extends BaseExportCommand
         return $url;
     }
 
-    private static function getHeader(string $type): array
+    private static function getHeader(string $type, bool $projectAdmin = false): array
     {
-        if ('arguments' === $type) {
-            return self::HEADER_ARGUMENT;
+        $headersArgument = self::HEADER_ARGUMENT;
+        $headersVote = self::HEADER_VOTE;
+
+        if ($projectAdmin) {
+            unset(
+                $headersArgument['argument_author_email'],
+                $headersArgument['argument_author_isEmailConfirmed'],
+                $headersVote['vote_author_email'],
+                $headersVote['vote_author_isEmailConfirmed']
+            );
         }
 
-        return self::HEADER_VOTE;
+        if ('arguments' === $type) {
+            return $headersArgument;
+        }
+
+        return $headersVote;
     }
 
     private static function getGraphQLQuery(
@@ -382,12 +454,19 @@ class ExportDebateCommand extends BaseExportCommand
         ?string $argumentsCursor = null,
         ?string $votesCursor = null,
         ?string $argumentsOrder = null,
-        ?string $votesOrder = null
+        ?string $votesOrder = null,
+        bool $projectAdmin = false
     ): string {
         $argumentsOptions = self::getQueryOptions($argumentsCursor, $argumentsOrder);
         $votesOptions = self::getQueryOptions($votesCursor, $votesOrder);
+        $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = $projectAdmin
+            ? GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_ANONYMOUS_FRAGMENT
+            : GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
 
         return <<<EOF
+{$USER_TYPE_FRAGMENT}
+{$AUTHOR_INFOS_FRAGMENT}
 {
   node(id: "${debateId}") {
     ... on Debate {
@@ -408,14 +487,8 @@ class ExportDebateCommand extends BaseExportCommand
             }
             ... on DebateArgument {
               author {
-                id
-                username
-                isEmailConfirmed
-                email
                 zipCode
-                userType {
-                  name
-                }
+                ...authorInfos
                 consentInternalCommunication
                 consentExternalCommunication
               }
@@ -458,14 +531,8 @@ class ExportDebateCommand extends BaseExportCommand
                 cityName
               }
               author {
-                id
                 zipCode
-                username
-                isEmailConfirmed
-                email
-                userType {
-                  name
-                }
+                ...authorInfos
               }
             }
           }
