@@ -12,10 +12,11 @@ class QuestionnaireVoter extends Voter
     const VIEW = 'view';
     const EDIT = 'edit';
     const DELETE = 'delete';
+    const EXPORT = 'export';
 
     protected function supports($attribute, $subject): bool
     {
-        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::DELETE])) {
+        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::DELETE, self::EXPORT])) {
             return false;
         }
 
@@ -44,6 +45,8 @@ class QuestionnaireVoter extends Voter
                 return $this->canEdit($questionnaire, $viewer);
             case self::DELETE:
                 return $this->canDelete($questionnaire, $viewer);
+            case self::EXPORT:
+                return $this->canExport($questionnaire, $viewer);
             default:
                 return false;
         }
@@ -55,6 +58,11 @@ class QuestionnaireVoter extends Voter
     }
 
     private function canView(Questionnaire $questionnaire, User $viewer): bool
+    {
+        return $this->canDelete($questionnaire, $viewer);
+    }
+
+    private function canExport(Questionnaire $questionnaire, User $viewer): bool
     {
         return $this->canDelete($questionnaire, $viewer);
     }

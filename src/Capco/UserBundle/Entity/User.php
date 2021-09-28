@@ -658,7 +658,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
 
     public function isProjectAdmin(): bool
     {
-        return $this->hasRole(UserRole::ROLE_PROJECT_ADMIN);
+        return $this->hasRole(UserRole::ROLE_PROJECT_ADMIN) || $this->hasRole(UserRole::ROLE_ADMIN);
     }
 
     /**

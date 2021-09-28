@@ -6,28 +6,39 @@ use ArrayObject;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\AppBundle\Security\QuestionnaireVoter;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class QuestionMajorityResponsesByChoicesResolver implements ResolverInterface
 {
     use ResolverTrait;
 
     protected ValueResponseRepository $valueResponseRepository;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(ValueResponseRepository $valueResponseRepository)
-    {
+    public function __construct(
+        ValueResponseRepository $valueResponseRepository,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->valueResponseRepository = $valueResponseRepository;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function __invoke(SimpleQuestion $question, $viewer, ?ArrayObject $context = null): array
-    {
-        $isAuthorized = $this->isAdminOrAuthorized($context, $viewer);
-
-        if (!$isAuthorized) {
-            throw new AccessDeniedException();
-        }
-
+    public function __invoke(
+        SimpleQuestion $question,
+        User $viewer,
+        ?ArrayObject $context = null
+    ): array {
         return $this->valueResponseRepository->countByValue($question->getId());
+    }
+
+    public function isGranted(SimpleQuestion $question): bool
+    {
+        return $this->authorizationChecker->isGranted(
+            QuestionnaireVoter::EXPORT,
+            $question->getQuestionnaire()
+        );
     }
 }
