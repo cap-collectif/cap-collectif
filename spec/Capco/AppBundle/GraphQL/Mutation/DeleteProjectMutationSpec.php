@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Mutation\DeleteProjectMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -18,9 +19,10 @@ class DeleteProjectMutationSpec extends ObjectBehavior
     public function let(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationChecker $authorizationChecker,
+        Indexer $indexer
     ) {
-        $this->beConstructedWith($em, $globalIdResolver, $authorizationChecker);
+        $this->beConstructedWith($em, $globalIdResolver, $authorizationChecker, $indexer);
     }
 
     public function it_is_initializable()
