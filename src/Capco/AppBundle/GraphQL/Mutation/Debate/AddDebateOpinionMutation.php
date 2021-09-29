@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Security\DebateOpinionVoter;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
@@ -12,6 +13,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddDebateOpinionMutation implements MutationInterface
 {
@@ -21,17 +23,20 @@ class AddDebateOpinionMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
     private GlobalIdResolver $globalIdResolver;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
         $this->logger = $logger;
         $this->formFactory = $formFactory;
         $this->globalIdResolver = $globalIdResolver;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Arg $input): array
@@ -64,6 +69,14 @@ class AddDebateOpinionMutation implements MutationInterface
         $this->em->flush();
 
         return ['debateOpinion' => $debateOpinion, 'errorCode' => null];
+    }
+
+    public function isGranted(): bool
+    {
+        return $this->authorizationChecker->isGranted(
+            DebateOpinionVoter::CREATE,
+            new DebateOpinion()
+        );
     }
 
     private function generateErrorPayload(string $message): array

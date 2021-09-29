@@ -10,15 +10,17 @@ use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Mutation\Debate\DeleteDebateOpinionMutation;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteDebateOpinionMutationSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $em,
         LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->beConstructedWith($em, $logger, $globalIdResolver);
+        $this->beConstructedWith($em, $logger, $globalIdResolver, $authorizationChecker);
     }
 
     public function it_is_initializable()

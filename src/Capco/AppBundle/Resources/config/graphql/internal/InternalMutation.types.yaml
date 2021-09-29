@@ -1065,21 +1065,21 @@ InternalMutation:
                     payloadType: DeleteOfficialResponsePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteOfficialResponseMutation", [value, getUser()])'
             addDebateOpinion:
-                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__debate')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateOpinionMutation").isGranted() and hasFeatureFlag("unstable__debate")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddDebateOpinionInput
                     payloadType: AddDebateOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateOpinionMutation", [value])'
             updateDebateOpinion:
-                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__debate')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateOpinionMutation").isGranted(args["input"]["debateOpinionId"], getUser()) and hasFeatureFlag("unstable__debate")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateDebateOpinionInput
                     payloadType: UpdateDebateOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateOpinionMutation", [value])'
             deleteDebateOpinion:
-                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__debate')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateOpinionMutation").isGranted(args["input"]["debateOpinionId"], getUser()) and hasFeatureFlag("unstable__debate")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteDebateOpinionInput

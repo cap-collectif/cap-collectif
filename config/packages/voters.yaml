@@ -31,3 +31,6 @@ services:
     Capco\AppBundle\Security\ProposalVoter:
         tags:
             - { name: security.voter }
+    Capco\AppBundle\Security\DebateOpinionVoter:
+        tags:
+            - { name: security.voter }

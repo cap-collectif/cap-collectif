@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Security\DebateOpinionVoter;
+use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Form\DebateOpinionType;
@@ -11,6 +13,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateDebateOpinionMutation implements MutationInterface
 {
@@ -21,17 +24,20 @@ class UpdateDebateOpinionMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
     private GlobalIdResolver $globalIdResolver;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
         $this->logger = $logger;
         $this->formFactory = $formFactory;
         $this->globalIdResolver = $globalIdResolver;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Arg $input): array
@@ -62,6 +68,16 @@ class UpdateDebateOpinionMutation implements MutationInterface
         $this->em->flush();
 
         return $this->generateSuccessFulPayload($debateOpinion);
+    }
+
+    public function isGranted(string $debateOpinionId, User $viewer): bool
+    {
+        $debateOpinion = $this->globalIdResolver->resolve($debateOpinionId, $viewer);
+        if (!$debateOpinion) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(DebateOpinionVoter::EDIT, $debateOpinion);
     }
 
     private function generateSuccessFulPayload(DebateOpinion $debateOpinion): array

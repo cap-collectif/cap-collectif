@@ -2,12 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Security\DebateOpinionVoter;
+use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteDebateOpinionMutation implements MutationInterface
 {
@@ -16,15 +19,18 @@ class DeleteDebateOpinionMutation implements MutationInterface
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
     private GlobalIdResolver $globalIdResolver;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,
         LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Arg $input): array
@@ -44,6 +50,16 @@ class DeleteDebateOpinionMutation implements MutationInterface
         $this->em->flush();
 
         return $this->generateSuccessFulPayload($debateOpinionId, $debate);
+    }
+
+    public function isGranted(string $debateOpinionId, User $viewer): bool
+    {
+        $debateOpinion = $this->globalIdResolver->resolve($debateOpinionId, $viewer);
+        if (!$debateOpinion) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(DebateOpinionVoter::DELETE, $debateOpinion);
     }
 
     private function generateSuccessFulPayload(string $deletedId, Debate $debate): array

@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Mutation\Debate\UpdateDebateOpinionMutation;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateDebateOpinionMutationSpec extends ObjectBehavior
 {
@@ -19,9 +20,16 @@ class UpdateDebateOpinionMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->beConstructedWith($em, $formFactory, $logger, $globalIdResolver);
+        $this->beConstructedWith(
+            $em,
+            $formFactory,
+            $logger,
+            $globalIdResolver,
+            $authorizationChecker
+        );
     }
 
     public function it_is_initializable()
