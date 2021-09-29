@@ -4,6 +4,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
 <Fragment>
   <Connect(ProposalCreateModal)
     onClose={[Function]}
+    onOpen={[Function]}
     proposalForm={
       Object {
         "$fragmentRefs": null,
@@ -67,6 +68,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in selec
 <Fragment>
   <Connect(ProposalCreateModal)
     onClose={[Function]}
+    onOpen={[Function]}
     proposalForm={
       Object {
         "$fragmentRefs": null,
@@ -101,6 +103,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
 <Fragment>
   <Connect(ProposalCreateModal)
     onClose={[Function]}
+    onOpen={[Function]}
     proposalForm={
       Object {
         "$fragmentRefs": null,
@@ -164,6 +167,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in selection s
 <Fragment>
   <Connect(ProposalCreateModal)
     onClose={[Function]}
+    onOpen={[Function]}
     proposalForm={
       Object {
         "$fragmentRefs": null,
@@ -198,6 +202,7 @@ exports[`<ProposalStepPageHeader /> renders with question context in selection s
 <Fragment>
   <Connect(ProposalCreateModal)
     onClose={[Function]}
+    onOpen={[Function]}
     proposalForm={
       Object {
         "$fragmentRefs": null,

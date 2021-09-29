@@ -11,10 +11,18 @@ import type {
 } from '~relay/CreateProposalMutation.graphql';
 
 const mutation = graphql`
-  mutation CreateProposalMutation($input: CreateProposalInput!) {
+  mutation CreateProposalMutation($input: CreateProposalInput!, $stepId: ID!) {
     createProposal(input: $input) {
       proposal {
         ...DraftProposalPreview_proposal @relay(mask: false)
+        ...ProposalPreview_proposal
+          @arguments(
+            stepId: $stepId
+            isAuthenticated: true
+            isProfileView: false
+            isTipsMeeeEnabled: false
+          )
+        ...ProposalLeafletMap_proposals
         id
         url
         publicationStatus
@@ -49,15 +57,47 @@ const commit = (variables: {
       const edgeID = `client:newTmpNode:${newProposalId}`;
       newNode.setValue(proposal.getValue('title'), 'title');
       newNode.setValue(proposal.getValue('url'), 'url');
+      let newEdge = store.get(edgeID);
+      if (!newEdge) {
+        newEdge = store.create(edgeID, 'ProposalEdge');
+      }
       if (variables.input.draft) {
+        newEdge.setLinkedRecord(newNode, 'node');
         const viewerProposalDrafts = stepProxy.getLinkedRecord('viewerProposalDrafts');
         if (!viewerProposalDrafts) return;
-        let newEdge = store.get(edgeID);
-        if (!newEdge) {
-          newEdge = store.create(edgeID, 'ProposalEdge');
-        }
-        newEdge.setLinkedRecord(newNode, 'node');
         ConnectionHandler.insertEdgeBefore(viewerProposalDrafts, newEdge);
+      } else {
+        const gridConnection = ConnectionHandler.getConnection(
+          stepProxy,
+          'ProposalListViewPaginated_proposals',
+        );
+        const mapConnection = ConnectionHandler.getConnection(
+          stepProxy,
+          'ProposalsDisplayMap_proposals',
+        );
+        newNode.copyFieldsFrom(proposal);
+        newEdge.setLinkedRecord(newNode, 'node');
+        const allProposals = stepProxy.getLinkedRecord('proposals', { first: 0 });
+        if (allProposals) {
+          const allProposalsCount = parseInt(allProposals.getValue('totalCount'), 10);
+          allProposals.setValue(allProposalsCount + 1, 'totalCount');
+        }
+        const proposalHeaderConnection = ConnectionHandler.getConnection(
+          stepProxy,
+          'ProposalStepPageHeader_proposals',
+        );
+        if (proposalHeaderConnection) {
+          const proposalsCount = parseInt(proposalHeaderConnection.getValue('totalCount'), 10);
+          proposalHeaderConnection.setValue(proposalsCount + 1, 'totalCount');
+        }
+        if (gridConnection) {
+          ConnectionHandler.insertEdgeBefore(gridConnection, newEdge);
+          const proposalsGridCount = parseInt(gridConnection.getValue('totalCount'), 10);
+          gridConnection.setValue(proposalsGridCount + 1, 'totalCount');
+        }
+        if (mapConnection) {
+          ConnectionHandler.insertEdgeBefore(mapConnection, newEdge);
+        }
       }
     },
   });

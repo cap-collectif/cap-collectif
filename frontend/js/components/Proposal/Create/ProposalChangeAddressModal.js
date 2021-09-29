@@ -27,7 +27,7 @@ import { getAddressFromLatLng } from '~/utils/googleMapAddress';
 import ProposalMapDiscoverPane from '../Map/ProposalMapDiscoverPane';
 import ProposalMapOutOfAreaPane from '../Map/ProposalMapOutOfAreaPane';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
-import { mapToast } from '~ds/Toast';
+import { mapToast } from '../Map/Map.events';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import ZoomControl from '../Map/ZoomControl';
 

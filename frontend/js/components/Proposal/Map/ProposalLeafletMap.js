@@ -21,7 +21,7 @@ import ProposalMapPopover from './ProposalMapPopover';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_proposals.graphql';
 import type { ProposalLeafletMap_proposalForm } from '~relay/ProposalLeafletMap_proposalForm.graphql';
-import { isSafari } from '~/config';
+import { isSafari, Emitter } from '~/config';
 
 import {
   StyledMap,
@@ -43,11 +43,11 @@ import { geoContains, type GeoJson, convertToGeoJsonStyle } from '~/utils/geojso
 import ProposalMapDiscoverPane from './ProposalMapDiscoverPane';
 import { getAddressFromLatLng } from '~/utils/googleMapAddress';
 import { formName } from '~/components/Proposal/Form/ProposalForm';
-import { mapToast } from '~ds/Toast';
 import ProposalMapOutOfAreaPane from './ProposalMapOutOfAreaPane';
 import ProposalCreateModal from '../Create/ProposalCreateModal';
 import { getProposalLabelByType } from '~/utils/interpellationLabelHelper';
 import Button from '~ds/Button/Button';
+import { mapToast, MapEvents } from './Map.events';
 
 type Props = {|
   proposals: ProposalLeafletMap_proposals,
@@ -152,6 +152,7 @@ export const ProposalLeafletMap = ({
   const mapRef = useRef(null);
   const popupRef = useRef(null);
   const slickRef = useRef(null);
+  const markerRef = useRef(null);
   const [isMobileSliderOpen, setIsMobileSliderOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState<number | null>(null);
   const [address, setAddress] = useState(null);
@@ -163,6 +164,24 @@ export const ProposalLeafletMap = ({
   );
   useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+  }, []);
+
+  useEffect(() => {
+    Emitter.on(MapEvents.OpenPopupOnMap, (addr: MapCenterObject) => {
+      closePopup(mapRef, popupRef);
+      goToPosition(mapRef, addr);
+      if (isMobile) {
+        setInitialSlide(0);
+        setIsMobileSliderOpen(true);
+      } else if (markerRef.current) {
+        markerRef.current.fire('click');
+      }
+    });
+
+    return () => {
+      Emitter.removeAllListeners(MapEvents.OpenPopupOnMap);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!visible) {
@@ -272,6 +291,7 @@ export const ProposalLeafletMap = ({
               return (
                 <Marker
                   key={idx}
+                  ref={!idx ? markerRef : null}
                   position={[mark.address?.lat, mark.address?.lng]}
                   alt={`marker-${idx}`}
                   icon={L.divIcon({

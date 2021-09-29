@@ -1,6 +1,7 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
+import * as hooks from 'react-redux';
 import { shallow } from 'enzyme';
 import { ProposalStepPageHeader } from '~/components/Page/ProposalStepPageHeader';
 import { $fragmentRefs, $refType } from '../../mocks';
@@ -135,6 +136,7 @@ describe('<ProposalStepPageHeader />', () => {
   };
 
   it('renders with proposal context in selection step', () => {
+    jest.spyOn(hooks, 'useDispatch').mockImplementation(() => [{}, jest.fn()]);
     const wrapper = shallow(<ProposalStepPageHeader step={props.step1} />);
     expect(wrapper).toMatchSnapshot();
   });

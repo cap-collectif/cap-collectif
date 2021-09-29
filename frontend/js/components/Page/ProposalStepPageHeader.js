@@ -3,15 +3,19 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
+import { useDispatch } from 'react-redux';
+import { reset } from 'redux-form';
 import {
   isInterpellationContextFromStep,
   isEstablishmentFormStep,
   getProposalLabelByType,
 } from '~/utils/interpellationLabelHelper';
+import type { Dispatch } from '~/types';
 import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql';
 import ProposalCreateModal from '../Proposal/Create/ProposalCreateModal';
 import Button from '~ds/Button/Button';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
+import { formName } from '../Proposal/Form/ProposalForm';
 
 type Props = {
   step: ProposalStepPageHeader_step,
@@ -20,6 +24,7 @@ type Props = {
 export const ProposalStepPageHeader = ({ step }: Props) => {
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const dispatch = useDispatch<Dispatch>();
   const projectType = step.project && step.project.type ? step.project.type.title : null;
   const queryCount = step.proposals.totalCount;
   const total = step.allProposals.totalCount;
@@ -55,6 +60,7 @@ export const ProposalStepPageHeader = ({ step }: Props) => {
         proposalForm={step.form}
         show={isOpen}
         onClose={onClose}
+        onOpen={() => dispatch(reset(formName))}
       />
       <div id="proposal-step-page-header">
         <h3 className="h3 d-ib mb-15">

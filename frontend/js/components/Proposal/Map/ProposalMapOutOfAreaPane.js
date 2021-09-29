@@ -10,7 +10,7 @@ import { theme } from '~/styles/theme';
 import jsxInnerText from '~/utils/jsxInnerText';
 import useTimeout from '~/utils/hooks/useTimeout';
 import { Emitter } from '~/config';
-import { UIEvents } from '~/dispatchers/enums';
+import { MapEvents } from './Map.events';
 
 const Pane = content => (
   <ThemeProvider theme={theme}>
@@ -38,12 +38,12 @@ const ProposalMapOutOfAreaPane = ({ content }: Props): null => {
   );
 
   useEffect(() => {
-    Emitter.on(UIEvents.ToastShowOnMap, () => {
+    Emitter.on(MapEvents.ToastShowOnMap, () => {
       setShow(true);
     });
 
     return () => {
-      Emitter.removeAllListeners(UIEvents.ToastShowOnMap);
+      Emitter.removeAllListeners(MapEvents.ToastShowOnMap);
     };
   }, []);
 

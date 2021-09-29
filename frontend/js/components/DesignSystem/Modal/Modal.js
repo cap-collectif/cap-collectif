@@ -125,7 +125,7 @@ const Modal = ({
     };
   }, [dialog.visible, preventBodyScroll]);
   useEffect(() => {
-    if (dialog.visible) {
+    if (dialog.visible && firstMount.current === true) {
       if (onOpen) {
         onOpen();
       }

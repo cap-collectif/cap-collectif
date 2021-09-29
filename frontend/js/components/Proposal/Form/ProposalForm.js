@@ -65,6 +65,7 @@ import UserListField from '~/components/Admin/Field/UserListField';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import DsButton from '~ds/Button/Button';
 import { toast } from '~/components/DesignSystem/Toast';
+import { mapOpenPopup } from '~/components/Proposal/Map/Map.events';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -291,8 +292,6 @@ const onSubmit = (
       }
       const createdProposal = response.createProposal.proposal;
       window.removeEventListener('beforeunload', onUnload);
-      onSubmitSuccess();
-      const TIMEOUT_BEFORE_REDIRECTION = 5000; // 5s
       const message =
         createdProposal && isInterpellationContextFromProposal(createdProposal)
           ? 'interpellation.create.redirecting'
@@ -303,18 +302,19 @@ const onSubmit = (
           id: values.draft ? 'draft.create.registered' : message,
         }),
       });
+      dispatch(reset(formName));
       if (values.draft) {
         const draftAnchor = document.getElementById('draftAnchor');
         if (draftAnchor) draftAnchor.scrollIntoView({ behavior: 'smooth' });
-        dispatch(reset(formName));
+      } else {
+        const proposalsAnchor = document.getElementById('proposal-step-page-header');
+        if (proposalsAnchor) proposalsAnchor.scrollIntoView({ behavior: 'smooth' });
+        if (values.address) {
+          const address = JSON.parse(values.address.substring(1, values.address.length - 1));
+          if (address?.geometry?.location) mapOpenPopup(address.geometry.location);
+        }
       }
-      // We may have some MySQL replication latency
-      // That's why it's better to wait a bit
-      // before redirecting, to avoid 404s…
-      else
-        setTimeout(() => {
-          window.location.href = createdProposal.url;
-        }, TIMEOUT_BEFORE_REDIRECTION);
+      onSubmitSuccess();
     })
     .catch(e => {
       onSubmitFailed();
