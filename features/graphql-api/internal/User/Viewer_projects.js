@@ -60,8 +60,8 @@ describe('Internal.viewer.projects', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.projects.totalCount).toBe(1);
-    expect(response.viewer.projects.edges).toHaveLength(1);
+    expect(response.viewer.projects.totalCount).toBe(2);
+    expect(response.viewer.projects.edges).toHaveLength(2);
     expect(response.viewer.projects.edges[0].node.owner.username).toBe('Théo QP');
   });
 

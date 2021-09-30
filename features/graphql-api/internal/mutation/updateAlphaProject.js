@@ -1150,7 +1150,7 @@ describe('project access control', () => {
       graphql(
         UpdateAlphaProjectMutation,
         { input: { ...BASE_INPUT, projectId: toGlobalId('Project', 'projectIdf3') } },
-        'internal_theo',
+        'internal_kiroule',
       ),
     ).rejects.toThrowError('Access denied to this field.');
   });

@@ -55,7 +55,7 @@ describe('Internal|create proposal', () => {
     const input = {
       proposalFormId: 'proposalformIdfBP3',
       title: "j'ai des liens facebook et twitter à vendre",
-      body: 'Viens on va trash talk comme des haters sur les RS',
+      body: "Les RS, c'est trop bien pour la vulga scientifique",
       theme: 'theme1',
       category: 'pCategory2',
       address:
@@ -81,7 +81,7 @@ describe('Internal|create proposal', () => {
   const inputIdf = {
     proposalFormId: 'proposalformIdfBP3',
     title: "j'ai des liens facebook et twitter à vendre",
-    body: 'Viens on va trash talk comme des haters sur les RS',
+    body: "Les RS, c'est trop bien pour la vulga scientifique",
     theme: 'theme1',
     category: 'pCategory2',
     address:
@@ -112,9 +112,25 @@ describe('Internal|create proposal', () => {
     expect(response).toMatchSnapshot();
   });
 
-  it('create proposal from back office as user', async () => {
+  it('create proposal from back office as ROLE_PROJECT_ADMIN as owner', async () => {
+    const response = await graphql(
+      createProposalFromBackOffice,
+      { input: inputIdf },
+      'internal_project_admin',
+    );
+
+    expect(response).toMatchSnapshot();
+  });
+
+  it('create proposal from back office as ROLE_PROJECT_ADMIN but not owner', async () => {
     await expect(
       graphql(createProposalFromBackOffice, { input: inputIdf }, 'internal_kiroule'),
+    ).rejects.toThrowError('Access denied to this field.');
+  });
+
+  it('create proposal from back office as user', async () => {
+    await expect(
+      graphql(createProposalFromBackOffice, { input: inputIdf }, 'internal_saitama'),
     ).rejects.toThrowError('Access denied to this field.');
   });
 });

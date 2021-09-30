@@ -387,6 +387,7 @@ Capco\AppBundle\Entity\Project:
         updatedAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
         publishedAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
         visibility: 2
+        owner: '@userTheo'
     projectWithOwner:
         id: 'projectWithOwner'
         owner: '@userTheo'

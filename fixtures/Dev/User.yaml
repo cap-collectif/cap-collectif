@@ -200,6 +200,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
             - 'ROLE_USER'
+            - 'ROLE_PROJECT_ADMIN'
         media: '@ProfilePicKiroule'
         vip: true
         enabled: true

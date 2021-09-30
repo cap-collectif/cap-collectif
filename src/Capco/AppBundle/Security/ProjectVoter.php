@@ -14,13 +14,21 @@ class ProjectVoter extends Voter
     public const EDIT = 'edit';
     public const DELETE = 'delete';
     public const EXPORT = 'export';
+    public const CREATE_PROPOSAL_FROM_BO = 'createProposalFromBo';
 
     protected function supports($attribute, $subject): bool
     {
         if ($subject instanceof Project) {
             return \in_array(
                 $attribute,
-                [self::VIEW, self::EDIT, self::CREATE, self::DELETE, self::EXPORT],
+                [
+                    self::VIEW,
+                    self::EDIT,
+                    self::CREATE,
+                    self::DELETE,
+                    self::EXPORT,
+                    self::CREATE_PROPOSAL_FROM_BO,
+                ],
                 true
             );
         }
@@ -47,6 +55,8 @@ class ProjectVoter extends Voter
                 return $this->canDelete($subject, $viewer);
             case self::EXPORT:
                 return self::canDownloadExport($subject, $viewer);
+            case self::CREATE_PROPOSAL_FROM_BO:
+                return self::canCreateProposalFromBo($subject, $viewer);
         }
 
         return false;
@@ -80,5 +90,10 @@ class ProjectVoter extends Voter
     private static function isAdminOrOwner(Project $project, User $viewer): bool
     {
         return $viewer->isAdmin() || $project->getOwner() === $viewer;
+    }
+
+    private static function canCreateProposalFromBo(Project $project, User $viewer): bool
+    {
+        return $viewer->isAdmin() || $viewer === $project->getOwner();
     }
 }

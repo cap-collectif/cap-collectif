@@ -12,7 +12,9 @@ Object {
                 "username": "admin",
               },
             ],
-            "owner": null,
+            "owner": Object {
+              "username": "Théo QP",
+            },
           },
         },
         Object {

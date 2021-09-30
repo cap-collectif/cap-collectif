@@ -1361,10 +1361,9 @@ InternalMutation:
                     inputType: UpdateProposalSocialNetworksInput
                     payloadType: UpdateProposalSocialNetworksPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalSocialNetworksMutation", [value, getUser()])'
-
             createProposalFromBackOffice:
                 description: 'Create a proposal from back office'
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalFromBackofficeMutation").isGranted(getUser(), args["input"]["proposalFormId"])'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateProposalFromBackOfficeInput

@@ -33,15 +33,15 @@ class ProposalVoter extends Voter
         if (!$viewer instanceof User) {
             return false;
         }
-
-        if (\in_array($attribute, [self::CHANGE_STATUS, self::EDIT])) {
-            return self::isOwnerOrAdmin($subject, $viewer);
+        switch ($attribute) {
+            case self::CHANGE_STATUS:
+            case self::EDIT:
+                return self::isOwnerOrAdmin($subject, $viewer);
+            case self::CHANGE_CONTENT:
+                return self::canChangeContent($subject, $viewer);
+            default:
+                return false;
         }
-        if (self::CHANGE_CONTENT === $attribute) {
-            return self::canChangeContent($subject, $viewer);
-        }
-
-        return false;
     }
 
     private static function canChangeContent(Proposal $proposal, User $viewer): bool
