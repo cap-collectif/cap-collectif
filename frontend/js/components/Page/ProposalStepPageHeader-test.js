@@ -137,27 +137,31 @@ describe('<ProposalStepPageHeader />', () => {
 
   it('renders with proposal context in selection step', () => {
     jest.spyOn(hooks, 'useDispatch').mockImplementation(() => [{}, jest.fn()]);
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step1} />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step1} displayMode="grid" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with interpellation context in selection step', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step2} />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step2} displayMode="grid" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with question context in selection step', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step3} />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step3} displayMode="grid" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with proposal context in collect step', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step4} />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step4} displayMode="grid" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with interpellation context in collect step', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step5} />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step5} displayMode="grid" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('renders with a map view', () => {
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step1} displayMode="map" />);
     expect(wrapper).toMatchSnapshot();
   });
 });

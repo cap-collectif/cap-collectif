@@ -74,7 +74,8 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
         // $FlowFixMe
         <UnpublishedProposalListView step={step} viewer={viewer} />
       )}
-      <ProposalStepPageHeader step={step} />
+      {/**  $FlowFixMe Bug Day Enum : #13394 */}
+      <ProposalStepPageHeader step={step} displayMode={displayMode} />
       <ProposalListFilters step={step} setDisplayMode={setDisplayMode} displayMode={displayMode} />
       <ProposalListView
         displayMap={features.display_map}

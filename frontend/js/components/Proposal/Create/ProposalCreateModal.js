@@ -64,6 +64,7 @@ const ProposalCreateModal = ({
 }: Props): React.Node => {
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>('NORMAL');
   const [errorCount, setErrorCount] = React.useState<number>(0);
+  const [isDraft, setIsDraft] = React.useState<boolean>(false);
   const intl = useIntl();
   const { track } = useAnalytics();
   const proposalForm = useFragment(FRAGMENT, proposalFormFragment);
@@ -125,8 +126,8 @@ const ProposalCreateModal = ({
                       variantSize="big"
                       variant="tertiary"
                       variantColor="primary"
-                      isLoading={submitting}
-                      disabled={pristine}
+                      isLoading={submitting && isDraft}
+                      disabled={pristine || (!isDraft && submitting)}
                       onClick={() => {
                         track('submit_draft_proposal_click', {
                           step_title: proposalForm.step?.title || '',
@@ -134,6 +135,7 @@ const ProposalCreateModal = ({
                           project_title: proposalForm.step?.project?.title || '',
                         });
                         dispatch(change(formName, 'draft', true));
+                        setIsDraft(true);
                         setTimeout(() => {
                           // TODO find a better way
                           // We need to wait validation values to be updated with 'draft'
@@ -147,8 +149,8 @@ const ProposalCreateModal = ({
                       variant="primary"
                       variantColor="primary"
                       id="confirm-proposal-create"
-                      isLoading={submitting}
-                      disabled={pristine || invalid}
+                      isLoading={submitting && !isDraft}
+                      disabled={pristine || invalid || (isDraft && submitting)}
                       onClick={() => {
                         track('submit_proposal_click', {
                           step_title: proposalForm.step?.title || '',
@@ -156,6 +158,7 @@ const ProposalCreateModal = ({
                           project_title: proposalForm.step?.project?.title || '',
                         });
                         dispatch(change(formName, 'draft', false));
+                        setIsDraft(false);
                         setTimeout(() => {
                           // TODO find a better way
                           // We need to wait validation values to be updated with 'draft'

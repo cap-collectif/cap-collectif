@@ -146,6 +146,7 @@ export const ProposalEditModal = ({
 }: Props) => {
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>('NORMAL');
   const [errorCount, setErrorCount] = React.useState<number>(0);
+  const [isDraft, setIsDraft] = React.useState<boolean>(false);
   if (!proposal || !show) return null;
   const pendingRevisions = getProposalPendingRevisions(proposal);
   const isRevisionExpired = isProposalRevisionsExpired(proposal);
@@ -275,10 +276,11 @@ export const ProposalEditModal = ({
                         variantSize="big"
                         variant="tertiary"
                         variantColor="primary"
-                        isLoading={submitting}
-                        disabled={pristine}
+                        isLoading={submitting && isDraft}
+                        disabled={pristine || (!isDraft && submitting)}
                         onClick={() => {
                           dispatch(change(formName, 'draft', true));
+                          setIsDraft(true);
                           setTimeout(() => {
                             // TODO find a better way
                             // We need to wait validation values to be updated with 'draft'
@@ -293,10 +295,11 @@ export const ProposalEditModal = ({
                       variantSize="big"
                       variant="primary"
                       variantColor="primary"
-                      isLoading={submitting}
-                      disabled={invalid || pristine}
+                      isLoading={submitting && !isDraft}
+                      disabled={pristine || invalid || (isDraft && submitting)}
                       onClick={() => {
                         dispatch(change(formName, 'draft', false));
+                        setIsDraft(false);
                         setTimeout(() => {
                           // TODO find a better way
                           // We need to wait validation values to be updated with 'draft'

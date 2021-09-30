@@ -16,14 +16,19 @@ import ProposalCreateModal from '../Proposal/Create/ProposalCreateModal';
 import Button from '~ds/Button/Button';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import { formName } from '../Proposal/Form/ProposalForm';
+import useIsMobile from '~/utils/hooks/useIsMobile';
+import AppBox from '~ui/Primitives/AppBox';
+import type { ProposalViewMode } from '~/redux/modules/proposal';
 
 type Props = {
   step: ProposalStepPageHeader_step,
+  displayMode: ?ProposalViewMode,
 };
 
-export const ProposalStepPageHeader = ({ step }: Props) => {
+export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const isMobile = useIsMobile();
   const dispatch = useDispatch<Dispatch>();
   const projectType = step.project && step.project.type ? step.project.type.title : null;
   const queryCount = step.proposals.totalCount;
@@ -97,19 +102,37 @@ export const ProposalStepPageHeader = ({ step }: Props) => {
           )}
         </h3>
         {step.form && step.kind === 'collect' && (
-          <span className="pull-right mb-20 mt-20">
+          <AppBox
+            as={isMobile ? 'div' : 'span'}
+            my={[0, 20]}
+            position={['fixed', 'relative']}
+            width={['100%', 'unset']}
+            left={[0, 'unset']}
+            p={[4, 0]}
+            zIndex={1000}
+            bottom={[0, 'unset']}
+            bg={['white', 'unset']}
+            boxShadow={['0px 10px 50px rgba(0, 0, 0, 0.15)', 'unset']}
+            borderRadius={['8px 8px 0px 0px', 'unset']}
+            className={isMobile ? '' : 'pull-right'}
+            display={displayMode === 'map' && isMobile ? 'none' : 'block'}>
             <LoginOverlay>
               <Button
+                m="auto"
+                maxWidth="300px"
                 disabled={!step.form?.contribuable}
                 variant="primary"
                 variantColor="primary"
-                variantSize="small"
+                variantSize={isMobile ? 'big' : 'small'}
                 onClick={onOpen}
-                id="add-proposal">
+                id="add-proposal"
+                width={['100%', '']}
+                textAlign="center"
+                display="block">
                 {intl.formatMessage({ id: titleTradKey })}
               </Button>
             </LoginOverlay>
-          </span>
+          </AppBox>
         )}
       </div>
     </>
