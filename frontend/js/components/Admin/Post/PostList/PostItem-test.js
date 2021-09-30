@@ -67,6 +67,7 @@ describe('<PostItem />', () => {
         <PostItem
           post={data.post}
           connectionName="client:VXNlcjp1c2VyMQ==:__PostList_posts_connection"
+          isAdmin
           {...props}
         />
       );

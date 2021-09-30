@@ -19,10 +19,21 @@ import NoResult from './NoResult';
 import QuestionnaireListPlaceholder from './QuestionnaireListPlaceholder';
 import type { QuestionnaireListPageQuery as QuestionnaireListPageQueryType } from '~relay/QuestionnaireListPageQuery.graphql';
 import Button from '~ds/Button/Button';
+import type { QuestionnaireList_viewer$ref } from '~relay/QuestionnaireListPaginationQuery.graphql';
 
 type Props = {|
   +queryReference: PreloadedQuery<QuestionnaireListPageQueryType>,
   +isAdmin: boolean,
+|};
+
+export type Viewer = {|
+  +id: string,
+  +username: ?string,
+  +__typename: string,
+  +allQuestionnaire: {|
+    +totalCount: number,
+  |},
+  +$fragmentRefs: QuestionnaireList_viewer$ref,
 |};
 
 export const QuestionnaireListPageQuery: GraphQLTaggedNode = graphql`
@@ -35,6 +46,8 @@ export const QuestionnaireListPageQuery: GraphQLTaggedNode = graphql`
   ) {
     viewer {
       id
+      username
+      __typename
       allQuestionnaire: questionnaires(affiliations: $affiliations) {
         totalCount
       }
@@ -93,7 +106,7 @@ const QuestionnaireListPage = ({ queryReference, isAdmin }: Props): React.Node =
                 {intl.formatMessage({ id: 'create-questionnaire' })}
               </Button>
               <ModalCreateQuestionnaire
-                viewerId={query.viewer.id}
+                viewer={query.viewer}
                 intl={intl}
                 isAdmin={isAdmin}
                 term={term}
@@ -125,7 +138,7 @@ const QuestionnaireListPage = ({ queryReference, isAdmin }: Props): React.Node =
           </React.Suspense>
         </Flex>
       ) : (
-        <NoResult isAdmin={isAdmin} viewerId={query.viewer.id} term={term} orderBy={orderBy} />
+        <NoResult isAdmin={isAdmin} viewer={query.viewer} term={term} orderBy={orderBy} />
       )}
     </Flex>
   );

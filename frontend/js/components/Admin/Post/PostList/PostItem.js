@@ -11,10 +11,12 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 import colors from '~/styles/modules/colors';
 import PostPostListModalConfirmationDelete from '~/components/Admin/Post/PostList/PostPostListModalConfirmationDelete';
+import Table from '~ds/Table';
 
 type Props = {|
   +post: PostItem_post$key,
   +connectionName: string,
+  +isAdmin: boolean,
 |};
 
 const FRAGMENT = graphql`
@@ -28,6 +30,9 @@ const FRAGMENT = graphql`
     }
     isPublished
     updatedAt
+    owner {
+      username
+    }
     relatedContent {
       __typename
       ... on Theme {
@@ -42,7 +47,7 @@ const FRAGMENT = graphql`
     ...PostPostListModalConfirmationDelete_post
   }
 `;
-const PostItem = ({ post: postFragment, connectionName }: Props): React.Node => {
+const PostItem = ({ post: postFragment, connectionName, isAdmin }: Props): React.Node => {
   const post = useFragment(FRAGMENT, postFragment);
   const intl = useIntl();
   const themes = post.relatedContent.filter(content => content.__typename === 'Theme');
@@ -72,6 +77,7 @@ const PostItem = ({ post: postFragment, connectionName }: Props): React.Node => 
           <Link href={post.authors[0].url}>{post.authors[0].username}</Link>
         )}
       </Td>
+      {isAdmin && <Table.Td>{post.owner?.username}</Table.Td>}
       <Td>
         <Flex direction="column">
           {project && project.title && project.url && (

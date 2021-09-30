@@ -41,6 +41,16 @@ exports[`<ModalCreateProposalForm  /> should renders correctly 1`] = `
   touchOnChange={false}
   updateUnregisteredFields={false}
   validate={[Function]}
-  viewerId="viewer-123"
+  viewer={
+    Object {
+      "$fragmentRefs": null,
+      "__typename": "User",
+      "allProposalForm": Object {
+        "totalCount": 1,
+      },
+      "id": "viewer-123",
+      "username": "toto",
+    }
+  }
 />
 `;

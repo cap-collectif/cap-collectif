@@ -3,11 +3,19 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import ModalCreateQuestionnaire from './ModalCreateQuestionnaire';
-import { intlMock } from '~/mocks';
+import { intlMock, $fragmentRefs } from '~/mocks';
 
 const props = {
   intl: intlMock,
-  viewerId: 'viewer-123',
+  viewer: {
+    id: 'viewer-123',
+    __typename: 'User',
+    username: 'toto',
+    allQuestionnaire: {
+      totalCount: 1,
+    },
+    $fragmentRefs,
+  },
   isAdmin: true,
   orderBy: 'DESC',
   term: 'test de recherche',

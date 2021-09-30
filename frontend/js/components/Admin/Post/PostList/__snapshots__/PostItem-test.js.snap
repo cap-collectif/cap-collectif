@@ -41,6 +41,16 @@ Array [
       }
     }
   >
+    &lt;mock-value-for-field-"username"&gt;
+  </td>,
+  <td
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
     <div
       className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
     >
@@ -220,6 +230,16 @@ Array [
     >
       lbrunet
     </a>
+  </td>,
+  <td
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"

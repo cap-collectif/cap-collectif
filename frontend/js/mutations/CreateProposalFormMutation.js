@@ -8,6 +8,7 @@ import type {
   CreateProposalFormMutationResponse,
   CreateProposalFormMutationVariables,
 } from '~relay/CreateProposalFormMutation.graphql';
+import { type Viewer } from '~/components/Admin/Project/ProposalFormList/ProposalFormListPage';
 
 const mutation = graphql`
   mutation CreateProposalFormMutation($input: CreateProposalFormInput!, $connections: [ID!]!) {
@@ -22,6 +23,7 @@ const mutation = graphql`
 const commit = (
   variables: CreateProposalFormMutationVariables,
   isAdmin: boolean,
+  owner: Viewer,
 ): Promise<CreateProposalFormMutationResponse> =>
   commitMutation(environment, {
     mutation,
@@ -35,6 +37,7 @@ const commit = (
           updatedAt: new Date(),
           step: null,
           adminUrl: '',
+          owner,
         },
       },
     },

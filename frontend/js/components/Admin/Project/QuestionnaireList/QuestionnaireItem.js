@@ -25,6 +25,9 @@ const FRAGMENT = graphql`
         adminAlphaUrl
       }
     }
+    owner {
+      username
+    }
     ...ModalConfirmationDelete_questionnaire
   }
 `;
@@ -51,6 +54,7 @@ const QuestionnaireItem = ({
           questionnaire?.step?.project?.title
         )}
       </Table.Td>
+      {isAdmin && <Table.Td>{questionnaire.owner?.username}</Table.Td>}
       <Table.Td>
         {intl.formatDate(questionnaire.updatedAt, {
           day: 'numeric',

@@ -34,6 +34,9 @@ const FRAGMENT = graphql`
         adminAlphaUrl
       }
     }
+    owner {
+      username
+    }
     ...ModalConfirmationDelete_proposalForm
   }
 `;
@@ -88,6 +91,7 @@ const ProposalFormItem = ({
           proposalForm?.step?.project?.title
         )}
       </Table.Td>
+      {isAdmin && <Table.Td>{proposalForm.owner?.username}</Table.Td>}
       <Table.Td>
         {intl.formatDate(proposalForm.updatedAt, {
           day: 'numeric',

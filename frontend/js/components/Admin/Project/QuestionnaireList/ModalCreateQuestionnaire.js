@@ -14,17 +14,18 @@ import type { QuestionnaireType } from '~relay/CreateQuestionnaireMutation.graph
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import type { Dispatch } from '~/types';
 import { toast } from '~ds/Toast';
+import { type Viewer } from './QuestionnaireListPage';
 
 const formName = 'form-create-questionnaire';
 
 type PropsBefore = {|
   +intl: IntlShape,
-  +viewerId: string,
   +isAdmin: boolean,
   +orderBy: string,
   +term: string,
   +show: boolean,
   +onClose: () => void,
+  +viewer: Viewer,
 |};
 
 type Props = {|
@@ -65,7 +66,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     {
       input,
       connections: [
-        ConnectionHandler.getConnectionID(props.viewerId, 'QuestionnaireList_questionnaires', {
+        ConnectionHandler.getConnectionID(props.viewer.id, 'QuestionnaireList_questionnaires', {
           query: props.term || null,
           affiliations: props.isAdmin ? null : ['OWNER'],
           orderBy: { field: 'CREATED_AT', direction: props.orderBy },
@@ -73,6 +74,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       ],
     },
     props.isAdmin,
+    props.viewer,
   ).then(response => {
     if (!response.createQuestionnaire?.questionnaire) {
       return mutationErrorToast(props.intl);

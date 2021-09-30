@@ -46,6 +46,16 @@ exports[`<ModalCreateQuestionnaire  /> should renders correcty 1`] = `
   touchOnChange={false}
   updateUnregisteredFields={false}
   validate={[Function]}
-  viewerId="viewer-123"
+  viewer={
+    Object {
+      "$fragmentRefs": null,
+      "__typename": "User",
+      "allQuestionnaire": Object {
+        "totalCount": 1,
+      },
+      "id": "viewer-123",
+      "username": "toto",
+    }
+  }
 />
 `;

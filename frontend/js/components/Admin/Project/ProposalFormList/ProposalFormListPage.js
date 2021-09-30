@@ -19,10 +19,21 @@ import ProposalFormListPlaceholder from './ProposalFormListPlaceholder';
 import type { ProposalFormListPageQuery as ProposalFormListPageQueryType } from '~relay/ProposalFormListPageQuery.graphql';
 import NoResult from '~/components/Admin/Project/ProposalFormList/NoResult';
 import Button from '~ds/Button/Button';
+import type { ProposalFormList_viewer$ref } from '~relay/ProposalFormPaginationQuery.graphql';
 
 type Props = {|
   +queryReference: PreloadedQuery<ProposalFormListPageQueryType>,
   +isAdmin: boolean,
+|};
+
+export type Viewer = {|
+  +id: string,
+  +username: ?string,
+  +__typename: string,
+  +allProposalForm: {|
+    +totalCount: number,
+  |},
+  +$fragmentRefs: ProposalFormList_viewer$ref,
 |};
 
 export const ProposalFormListPageQuery: GraphQLTaggedNode = graphql`
@@ -35,6 +46,8 @@ export const ProposalFormListPageQuery: GraphQLTaggedNode = graphql`
   ) {
     viewer {
       id
+      username
+      __typename
       allProposalForm: proposalForms(affiliations: $affiliations) {
         totalCount
       }
@@ -93,7 +106,7 @@ const ProposalFormListPage = ({ queryReference, isAdmin }: Props): React.Node =>
                 {intl.formatMessage({ id: 'create-form' })}
               </Button>
               <ModalCreateProposalForm
-                viewerId={query.viewer.id}
+                viewer={query.viewer}
                 intl={intl}
                 isAdmin={isAdmin}
                 term={term}
@@ -125,7 +138,7 @@ const ProposalFormListPage = ({ queryReference, isAdmin }: Props): React.Node =>
           </React.Suspense>
         </Flex>
       ) : (
-        <NoResult isAdmin={isAdmin} viewerId={query.viewer.id} term={term} orderBy={orderBy} />
+        <NoResult isAdmin={isAdmin} viewer={query.viewer} term={term} orderBy={orderBy} />
       )}
     </Flex>
   );

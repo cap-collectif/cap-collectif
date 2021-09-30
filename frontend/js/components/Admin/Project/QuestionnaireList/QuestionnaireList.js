@@ -93,6 +93,7 @@ const QuestionnaireList = ({
         <Table.Tr>
           <Table.Th>{intl.formatMessage({ id: 'global.title' })}</Table.Th>
           <Table.Th>{intl.formatMessage({ id: 'global.project' })}</Table.Th>
+          {isAdmin && <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>}
           <Table.Th>{intl.formatMessage({ id: 'global.update' })}</Table.Th>
           <Table.Th>
             {({ styles }) => (

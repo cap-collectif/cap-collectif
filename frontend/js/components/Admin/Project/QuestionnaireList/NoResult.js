@@ -8,15 +8,16 @@ import Text from '~ui/Primitives/Text';
 import Button from '~ds/Button/Button';
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
 import ModalCreateQuestionnaire from './ModalCreateQuestionnaire';
+import { type Viewer } from './QuestionnaireListPage';
 
 type Props = {|
   +isAdmin: boolean,
-  +viewerId: string,
+  +viewer: Viewer,
   +term: string,
   +orderBy: string,
 |};
 
-const NoResult = ({ isAdmin, viewerId, term, orderBy }: Props): React.Node => {
+const NoResult = ({ isAdmin, viewer, term, orderBy }: Props): React.Node => {
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
 
@@ -50,7 +51,7 @@ const NoResult = ({ isAdmin, viewerId, term, orderBy }: Props): React.Node => {
             {intl.formatMessage({ id: 'create-questionnaire' })}
           </Button>
           <ModalCreateQuestionnaire
-            viewerId={viewerId}
+            viewer={viewer}
             intl={intl}
             isAdmin={isAdmin}
             term={term}

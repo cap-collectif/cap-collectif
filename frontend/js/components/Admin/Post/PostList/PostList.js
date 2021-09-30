@@ -82,6 +82,7 @@ const PostList = ({ viewer, term, isAdmin, resetTerm }: Props): React.Node => {
           <Table.Th>
             <Text lineHeight="sm">{intl.formatMessage({ id: 'global.authors' })}</Text>
           </Table.Th>
+          {isAdmin && <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>}
           <Table.Th>
             <Text lineHeight="sm">
               {intl.formatMessage({ id: 'global.participative.project' })}
@@ -137,7 +138,7 @@ const PostList = ({ viewer, term, isAdmin, resetTerm }: Props): React.Node => {
           .filter(Boolean)
           .map(post => (
             <Tr key={post.id} rowId={post.id}>
-              <PostItem post={post} connectionName={posts.__id} />
+              <PostItem post={post} connectionName={posts.__id} isAdmin={isAdmin} />
             </Tr>
           ))}
       </Table.Tbody>

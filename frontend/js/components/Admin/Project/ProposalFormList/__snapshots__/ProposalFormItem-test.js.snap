@@ -40,6 +40,16 @@ Array [
       }
     }
   >
+    &lt;mock-value-for-field-"username"&gt;
+  </td>,
+  <td
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
     2050-03-01 12:00:00
   </td>,
   <td

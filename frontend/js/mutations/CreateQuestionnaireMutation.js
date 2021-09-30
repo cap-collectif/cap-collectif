@@ -8,6 +8,7 @@ import type {
   CreateQuestionnaireMutationResponse,
   CreateQuestionnaireMutationVariables,
 } from '~relay/CreateQuestionnaireMutation.graphql';
+import { type Viewer } from '~/components/Admin/Project/QuestionnaireList/QuestionnaireListPage';
 
 const mutation = graphql`
   mutation CreateQuestionnaireMutation($input: CreateQuestionnaireInput!, $connections: [ID!]!) {
@@ -22,6 +23,7 @@ const mutation = graphql`
 const commit = (
   variables: CreateQuestionnaireMutationVariables,
   isAdmin: boolean,
+  owner: Viewer,
 ): Promise<CreateQuestionnaireMutationResponse> =>
   commitMutation(environment, {
     mutation,
@@ -35,6 +37,7 @@ const commit = (
           updatedAt: new Date(),
           step: null,
           adminUrl: '',
+          owner,
         },
       },
     },

@@ -26,6 +26,11 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
         <th
           className="sc-bdnxRM ejslJN"
         >
+          global.owner
+        </th>
+        <th
+          className="sc-bdnxRM ejslJN"
+        >
           global.update
         </th>
         <th
@@ -210,6 +215,16 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
+          &lt;mock-value-for-field-"username"&gt;
+        </td>
+        <td
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          style={
+            Object {
+              "whiteSpace": "initial",
+            }
+          }
+        >
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
@@ -356,6 +371,16 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           >
             &lt;mock-value-for-field-"title"&gt;
           </a>
+        </td>
+        <td
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          style={
+            Object {
+              "whiteSpace": "initial",
+            }
+          }
+        >
+          &lt;mock-value-for-field-"username"&gt;
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"

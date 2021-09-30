@@ -26,6 +26,11 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
         <th
           className="sc-bdnxRM ejslJN"
         >
+          global.owner
+        </th>
+        <th
+          className="sc-bdnxRM ejslJN"
+        >
           global.update
         </th>
         <th
@@ -210,6 +215,16 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             }
           }
         >
+          &lt;mock-value-for-field-"username"&gt;
+        </td>
+        <td
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          style={
+            Object {
+              "whiteSpace": "initial",
+            }
+          }
+        >
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
@@ -322,6 +337,16 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
           >
             &lt;mock-value-for-field-"title"&gt;
           </a>
+        </td>
+        <td
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          style={
+            Object {
+              "whiteSpace": "initial",
+            }
+          }
+        >
+          &lt;mock-value-for-field-"username"&gt;
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
