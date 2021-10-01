@@ -9,19 +9,6 @@ const GeoCodeQueryQuery = /* GraphQL */ `
 `;
 
 describe('Internal|Query.geocode connection', () => {
-  it('fetches the Hellfest address from lat lng', async () => {
-    await expect(
-      graphql(
-        GeoCodeQueryQuery,
-        {
-          latitude: 47.097338,
-          longitude: -1.271171,
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
-
   it('fetches the not found address from lat lng', async () => {
     const response = await graphql(
       GeoCodeQueryQuery,
