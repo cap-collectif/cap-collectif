@@ -3,14 +3,15 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useAnalytics } from 'use-analytics';
 import { useCallback } from 'react';
-import { Modal } from 'react-bootstrap';
 import { Field, isInvalid, isPristine } from 'redux-form';
 import { useSelector, connect } from 'react-redux';
+import Modal from '~ds/Modal/Modal';
 import { formName } from '~/components/Debate/Page/MainActions/DebateStepPageVoteForm';
 import component from '~/components/Form/Field';
 import Button from '~ds/Button/Button';
 import type { GlobalState, Dispatch } from '~/types';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
+import Heading from '~/components/Ui/Primitives/Heading';
 
 type BeforeConnectProps = {|
   +show: boolean,
@@ -60,10 +61,16 @@ export const MobilePublishArgumentModal = ({
       onClose();
     }
   };
+  if (!show) return null;
   return (
-    <Modal bsSize="large" id="publish-argument" onHide={handleClose} show={show}>
-      <Modal.Header closeButton>
-        <Modal.Title>{title}</Modal.Title>
+    <Modal
+      fullSizeOnMobile
+      id="publish-argument"
+      onClose={handleClose}
+      show={show}
+      ariaLabel={title}>
+      <Modal.Header>
+        <Heading as="h4">{title}</Heading>
       </Modal.Header>
       <Modal.Body>
         <form ref={focusInputRef} id={formName}>
