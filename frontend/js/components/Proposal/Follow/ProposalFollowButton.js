@@ -39,7 +39,12 @@ export class ProposalFollowButton extends React.Component<Props, State> {
   };
 
   componentWillReceiveProps(nextProps: Props) {
-    if (this.props !== nextProps) {
+    if (
+      this.props !== nextProps &&
+      this.props.proposal &&
+      this.props.proposal?.id === nextProps.proposal?.id &&
+      this.props.proposal?.viewerIsFollowing !== nextProps.proposal?.viewerIsFollowing
+    ) {
       this.setState({
         isJustFollowed: !!nextProps.proposal?.viewerIsFollowing,
       });
