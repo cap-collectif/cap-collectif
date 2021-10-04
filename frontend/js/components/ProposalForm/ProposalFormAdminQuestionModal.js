@@ -406,14 +406,17 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                     component={component}>
                     <FormattedMessage id="admin.fields.question.random_question_choices" />
                   </Field>
-                  <Field
-                    id={`${member}.isOtherAllowed`}
-                    name={`${member}.isOtherAllowed`}
-                    type="checkbox"
-                    normalize={val => !!val}
-                    component={component}>
-                    <FormattedMessage id="admin.fields.question.other_allowed" />
-                  </Field>
+
+                  {(currentQuestion.type === 'checkbox' || currentQuestion.type === 'radio') && (
+                    <Field
+                      id={`${member}.isOtherAllowed`}
+                      name={`${member}.isOtherAllowed`}
+                      type="checkbox"
+                      normalize={val => !!val}
+                      component={component}>
+                      <FormattedMessage id="admin.fields.question.other_allowed" />
+                    </Field>
+                  )}
                 </div>
               )}
               <Field
