@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
@@ -130,10 +129,6 @@ class ProposalActivitiesResolver extends ActivitiesResolver
 
             /** @var Proposal $proposal */
             foreach ($proposals as $proposal) {
-                $step = $proposal->getStep();
-                if ($step instanceof SelectionStep && $step->isProposalsHidden()) {
-                    continue;
-                }
                 $currentProposal = [];
                 $proposalId = $proposal->getId();
 

@@ -66,11 +66,6 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     private $selections;
 
     /**
-     * @ORM\Column(name="proposals_hidden", type="boolean", nullable=false, options={"default" = false})
-     */
-    private $proposalsHidden = false;
-
-    /**
      * @ORM\Column(name="allowing_progess_steps", type="boolean", options={"default": false})
      */
     private $allowingProgressSteps = false;
@@ -199,21 +194,9 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
         return $proposals;
     }
 
-    public function isProposalsHidden(): bool
-    {
-        return $this->proposalsHidden;
-    }
-
-    public function setProposalsHidden(bool $proposalsHidden): self
-    {
-        $this->proposalsHidden = $proposalsHidden;
-
-        return $this;
-    }
-
     public function canShowProposals(): bool
     {
-        return !$this->isProposalsHidden() || $this->getStartAt() <= new \DateTime();
+        return $this->getStartAt() <= new \DateTime();
     }
 
     public function isParticipative(): bool

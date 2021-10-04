@@ -198,7 +198,6 @@ const onSubmit = (
               s.type === 'SelectionStep'
                 ? s.requirementsReason
                 : undefined,
-            proposalsHidden: s.type === 'SelectionStep' ? s.proposalsHidden : undefined,
             statuses:
               s.type === 'SelectionStep' || s.type === 'CollectStep'
                 ? s.statuses.filter(status => typeof status.name !== 'undefined')
@@ -705,7 +704,6 @@ export default createFragmentContainer(injectIntl(container), {
           voteThreshold
           voteType
           defaultSort
-          proposalsHidden
           allowingProgressSteps
           allowAuthorsToAddNews
           budget

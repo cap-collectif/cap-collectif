@@ -8533,7 +8533,6 @@ input ProjectStepInput {
   votesRanking: Boolean
   voteThreshold: Int
   defaultSort: ProposalSort
-  proposalsHidden: Boolean
   allowAuthorsToAddNews: Boolean
   allowingProgressSteps: Boolean
   statuses: [StepStatusInput]
@@ -12435,7 +12434,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   Whether or not authors can add news on proposals selected in this step
   """
   allowAuthorsToAddNews: Boolean!
-  proposalsHidden: Boolean!
 
   """A list of contributor associated with the consultation."""
   contributors(

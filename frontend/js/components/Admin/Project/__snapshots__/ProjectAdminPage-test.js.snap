@@ -729,13 +729,6 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "proposalsHidden",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
                                 "name": "allowingProgressSteps",
                                 "storageKey": null,
                               },
@@ -1797,7 +1790,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "1e8bee97f9a285a6a1ca51c69839433b",
+        "cacheID": "54f9555301d452a12b271eac0dbbc193",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1988,7 +1981,6 @@ fragment ProjectAdminForm_project on Project {
       voteThreshold
       voteType
       defaultSort
-      proposalsHidden
       allowingProgressSteps
       allowAuthorsToAddNews
       budget
@@ -2953,13 +2945,6 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "proposalsHidden",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
                                 "name": "allowingProgressSteps",
                                 "storageKey": null,
                               },
@@ -4021,7 +4006,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "1e8bee97f9a285a6a1ca51c69839433b",
+        "cacheID": "54f9555301d452a12b271eac0dbbc193",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -4212,7 +4197,6 @@ fragment ProjectAdminForm_project on Project {
       voteThreshold
       voteType
       defaultSort
-      proposalsHidden
       allowingProgressSteps
       allowAuthorsToAddNews
       budget

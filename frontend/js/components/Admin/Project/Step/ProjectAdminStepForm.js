@@ -65,7 +65,6 @@ type Props = {|
     consultations?: Array<{| value: string, label: string |}>,
     statuses?: ?Array<ProposalStepStatus>,
     defaultSort?: ?string,
-    proposalsHidden?: ?boolean,
     votable?: ?boolean,
     votesHelpText?: ?string,
     voteThreshold?: number,
@@ -149,7 +148,6 @@ export type FormValues = {|
   requirements?: Array<Requirement>,
   statuses?: Array<ProposalStepStatus>,
   defaultSort?: ?string,
-  proposalsHidden?: boolean,
   votable?: ?boolean,
   votesHelpText?: ?string,
   voteThreshold?: number,
@@ -238,7 +236,6 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
         url: props.step.url,
         ...formValues,
         requirements,
-        proposalsHidden: formValues.proposalsHidden === 1,
       }),
     );
   } else {
@@ -247,7 +244,6 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
         id: null,
         ...formValues,
         requirements,
-        proposalsHidden: formValues.proposalsHidden === 1,
       }),
     );
   }
@@ -743,7 +739,6 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       // SelectionStep
       statuses: step?.statuses?.length ? step.statuses : [],
       defaultSort: step?.defaultSort?.toUpperCase() || 'RANDOM',
-      proposalsHidden: step?.proposalsHidden ? 1 : 0,
       allowingProgressSteps: step?.allowingProgressSteps || false,
       // CollectStep
       defaultStatus: step?.defaultStatus || null,

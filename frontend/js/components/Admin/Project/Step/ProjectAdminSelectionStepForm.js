@@ -1,10 +1,10 @@
 // @flow
 
 import React from 'react';
-import { Field, FieldArray, arrayPush, change } from 'redux-form';
+import { Field, FieldArray, arrayPush } from 'redux-form';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
-import { Button, ToggleButton } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import component from '~/components/Form/Field';
 import toggle from '~/components/Form/Toggle';
 import select from '~/components/Form/Select';
@@ -76,27 +76,6 @@ export const ProjectAdminSelectionStepForm = ({
       {renderSubSection('global.proposals')}
       <ProjectSmallFieldsContainer>
         <Flex flex="1" direction="row">
-          <Flex flex="1" direction="row" maxWidth="230px">
-            <Field
-              type="radio-buttons"
-              id="step-proposalsHidden"
-              name="proposalsHidden"
-              label={<FormattedMessage id="global.updated.date" />}
-              component={component}>
-              <ToggleButton
-                id="step_now"
-                onClick={() => dispatch(change(formName, 'proposalsHidden', 0))}
-                value={0}>
-                <FormattedMessage id="global.immediate" />
-              </ToggleButton>
-              <ToggleButton
-                id="step_start"
-                value={1}
-                onClick={() => dispatch(change(formName, 'proposalsHidden', 1))}>
-                <FormattedMessage id="step_start" />
-              </ToggleButton>
-            </Field>
-          </Flex>
           <Flex ml={2} width="100%" maxWidth="175px">
             <Field
               labelClassName="control-label"

@@ -30,45 +30,6 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
       flex="1"
     >
       <ForwardRef
-        direction="row"
-        flex="1"
-        maxWidth="230px"
-      >
-        <Field
-          component={[Function]}
-          id="step-proposalsHidden"
-          label={
-            <FormattedMessage
-              id="global.updated.date"
-              values={Object {}}
-            />
-          }
-          name="proposalsHidden"
-          type="radio-buttons"
-        >
-          <ToggleButton
-            id="step_now"
-            onClick={[Function]}
-            value={0}
-          >
-            <FormattedMessage
-              id="global.immediate"
-              values={Object {}}
-            />
-          </ToggleButton>
-          <ToggleButton
-            id="step_start"
-            onClick={[Function]}
-            value={1}
-          >
-            <FormattedMessage
-              id="step_start"
-              values={Object {}}
-            />
-          </ToggleButton>
-        </Field>
-      </ForwardRef>
-      <ForwardRef
         maxWidth="175px"
         ml={2}
         width="100%"
@@ -314,45 +275,6 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
       direction="row"
       flex="1"
     >
-      <ForwardRef
-        direction="row"
-        flex="1"
-        maxWidth="230px"
-      >
-        <Field
-          component={[Function]}
-          id="step-proposalsHidden"
-          label={
-            <FormattedMessage
-              id="global.updated.date"
-              values={Object {}}
-            />
-          }
-          name="proposalsHidden"
-          type="radio-buttons"
-        >
-          <ToggleButton
-            id="step_now"
-            onClick={[Function]}
-            value={0}
-          >
-            <FormattedMessage
-              id="global.immediate"
-              values={Object {}}
-            />
-          </ToggleButton>
-          <ToggleButton
-            id="step_start"
-            onClick={[Function]}
-            value={1}
-          >
-            <FormattedMessage
-              id="step_start"
-              values={Object {}}
-            />
-          </ToggleButton>
-        </Field>
-      </ForwardRef>
       <ForwardRef
         maxWidth="175px"
         ml={2}

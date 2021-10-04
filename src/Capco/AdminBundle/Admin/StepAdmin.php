@@ -385,10 +385,6 @@ class StepAdmin extends CapcoAdmin
         if ($subject instanceof SelectionStep) {
             $formMapper
                 ->with('admin.fields.step.group_selections')
-                ->add('proposalsHidden', CheckboxType::class, [
-                    'label' => 'admin.fields.step.proposals_hidden',
-                    'required' => false,
-                ])
                 ->add('defaultSort', ChoiceType::class, [
                     'label' => 'admin.fields.step.default_sort',
                     'choices' => SelectionStep::$sortLabels,

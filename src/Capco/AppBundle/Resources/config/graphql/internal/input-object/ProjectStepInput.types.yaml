@@ -61,8 +61,6 @@ ProjectStepInput:
             defaultSort:
                 type: 'ProposalSort'
             # SelectionStep fields
-            proposalsHidden:
-                type: 'Boolean'
             allowAuthorsToAddNews:
                 type: 'Boolean'
             allowingProgressSteps:

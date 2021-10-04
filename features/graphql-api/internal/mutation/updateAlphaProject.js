@@ -177,7 +177,6 @@ const BASE_SELECTION_STEP = {
   statuses: [],
   voteType: 'DISABLED',
   defaultSort: 'RANDOM',
-  proposalsHidden: false,
   timeless: false,
   isEnabled: true,
   title: "Le beau titre de l'étape SelectionStep",
