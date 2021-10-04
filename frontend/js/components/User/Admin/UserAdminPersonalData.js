@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { type IntlShape, FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -92,9 +92,7 @@ const onSubmit = (values: FormValue, dispatch: Dispatch, props: Props) => {
     });
 };
 
-export class UserAdminPersonalData extends React.Component<Props> {
-  render() {
-    const {
+export const UserAdminPersonalData = ({
       invalid,
       valid,
       submitSucceeded,
@@ -104,7 +102,9 @@ export class UserAdminPersonalData extends React.Component<Props> {
       error,
       isViewerOrSuperAdmin,
       user,
-    } = this.props;
+    }: Props) => {
+
+    const intl = useIntl();
 
     return (
       <div className="box box-primary container-fluid">
@@ -166,14 +166,17 @@ export class UserAdminPersonalData extends React.Component<Props> {
               id="personal-data-form-gender"
               disabled={!isViewerOrSuperAdmin}
               divClassName="col-sm-4">
+              <option value="">
+                {intl.formatMessage({id: "global.select"})}
+              </option>
               <option value="MALE">
-                <FormattedMessage id="gender.male" />
+                {intl.formatMessage({id: "gender.male"})}
               </option>
               <option value="FEMALE">
-                <FormattedMessage id="gender.female" />
+                {intl.formatMessage({id: "global.female"})}
               </option>
               <option value="OTHER">
-                <FormattedMessage id="gender.other" />
+                {intl.formatMessage({id: "global.plural.other"})}
               </option>
             </Field>
             <div className="clearfix" />
@@ -273,7 +276,6 @@ export class UserAdminPersonalData extends React.Component<Props> {
         </form>
       </div>
     );
-  }
 }
 
 const form = reduxForm({
@@ -301,7 +303,7 @@ const mapStateToProps = (state: State, { user, viewer }: RelayProps) => ({
   isViewerOrSuperAdmin: user.isViewer || viewer.isSuperAdmin,
 });
 
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 // same as PersonalData.js I have to find a solution to merge both in one
 export default createFragmentContainer(container, {

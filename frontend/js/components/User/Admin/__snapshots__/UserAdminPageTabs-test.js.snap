@@ -67,7 +67,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       eventKey={3}
       title="global.data"
     >
-      <Relay(Connect(injectIntl(ReduxForm)))
+      <Relay(Connect(ReduxForm))
         user={
           Object {
             "$fragmentRefs": null,

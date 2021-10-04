@@ -114,28 +114,24 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
         type="select"
       >
         <option
+          value=""
+        >
+          global.select
+        </option>
+        <option
           value="MALE"
         >
-          <FormattedMessage
-            id="gender.male"
-            values={Object {}}
-          />
+          gender.male
         </option>
         <option
           value="FEMALE"
         >
-          <FormattedMessage
-            id="gender.female"
-            values={Object {}}
-          />
+          global.female
         </option>
         <option
           value="OTHER"
         >
-          <FormattedMessage
-            id="gender.other"
-            values={Object {}}
-          />
+          global.plural.other
         </option>
       </Field>
       <div
@@ -408,28 +404,24 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
         type="select"
       >
         <option
+          value=""
+        >
+          global.select
+        </option>
+        <option
           value="MALE"
         >
-          <FormattedMessage
-            id="gender.male"
-            values={Object {}}
-          />
+          gender.male
         </option>
         <option
           value="FEMALE"
         >
-          <FormattedMessage
-            id="gender.female"
-            values={Object {}}
-          />
+          global.female
         </option>
         <option
           value="OTHER"
         >
-          <FormattedMessage
-            id="gender.other"
-            values={Object {}}
-          />
+          global.plural.other
         </option>
       </Field>
       <div
