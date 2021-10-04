@@ -15,6 +15,7 @@ class ProjectVoter extends Voter
     public const DELETE = 'delete';
     public const EXPORT = 'export';
     public const CREATE_PROPOSAL_FROM_BO = 'createProposalFromBo';
+    public const DUPLICATE = 'duplicate';
 
     protected function supports($attribute, $subject): bool
     {
@@ -28,6 +29,7 @@ class ProjectVoter extends Voter
                     self::DELETE,
                     self::EXPORT,
                     self::CREATE_PROPOSAL_FROM_BO,
+                    self::DUPLICATE
                 ],
                 true
             );
@@ -57,6 +59,8 @@ class ProjectVoter extends Voter
                 return self::canDownloadExport($subject, $viewer);
             case self::CREATE_PROPOSAL_FROM_BO:
                 return self::canCreateProposalFromBo($subject, $viewer);
+            case self::DUPLICATE:
+                return self::canDuplicate($subject, $viewer);
         }
 
         return false;
@@ -93,6 +97,11 @@ class ProjectVoter extends Voter
     }
 
     private static function canCreateProposalFromBo(Project $project, User $viewer): bool
+    {
+        return $viewer->isAdmin() || $viewer === $project->getOwner();
+    }
+
+    private static function canDuplicate(Project $project, User $viewer): bool
     {
         return $viewer->isAdmin() || $viewer === $project->getOwner();
     }

@@ -731,7 +731,7 @@ InternalMutation:
                     payloadType: UpdateAlphaProjectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAlphaProjectMutation", [value, getUser()])'
             duplicateProject:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DuplicateProjectMutation").isGranted(args["input"]["id"])'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DuplicateProjectInput

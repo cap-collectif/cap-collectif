@@ -12,10 +12,12 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Security\ProjectVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class DuplicateProjectMutation implements MutationInterface
@@ -26,17 +28,20 @@ class DuplicateProjectMutation implements MutationInterface
 
     private array $cloneStatusReferences;
     private array $cloneStepReferences;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         ProjectRepository $projectRepository,
         TranslatorInterface $translator,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->projectRepository = $projectRepository;
         $this->translator = $translator;
         $this->entityManager = $entityManager;
         $this->cloneStatusReferences = [];
         $this->cloneStepReferences = [];
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Argument $input)
@@ -245,5 +250,11 @@ class DuplicateProjectMutation implements MutationInterface
         $this->cloneStepReferences[$abstractStep->getStep()->getTitle()] = $clonedAbstractStep;
 
         return $clonedAbstractStep;
+    }
+
+    public function isGranted(string $projectId): bool
+    {
+        $project = $this->projectRepository->find($projectId);
+        return $this->authorizationChecker->isGranted(ProjectVoter::DUPLICATE, $project);
     }
 }
