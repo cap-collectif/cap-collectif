@@ -41,6 +41,7 @@ import HomePageProjectsSectionConfigurationApp from '~/startup/HomePageProjectsS
 import SidebarApp from '~/startup/SidebarApp';
 import DashboardPageApp from '~/startup/DashboardPageApp';
 import AdminPostListApp from '~/startup/AdminPostListApp';
+import AdminPostCreateFormApp from '~/startup/AdminPostCreateFormApp';
 import AdminQuestionnaireListApp from '~/startup/AdminQuestionnaireListApp';
 import AdminProposalFormListApp from '~/startup/AdminProposalFormListApp';
 
@@ -86,6 +87,7 @@ ReactOnRails.register({
   SidebarApp,
   DashboardPageApp,
   AdminPostListApp,
+  AdminPostCreateFormApp,
   AdminQuestionnaireListApp,
   AdminProposalFormListApp,
 });

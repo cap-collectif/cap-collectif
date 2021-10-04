@@ -424,7 +424,7 @@ class Post implements
      */
     public function canDisplay()
     {
-        return $this->isPublished;
+        return true;
     }
 
     /**
@@ -462,7 +462,7 @@ class Post implements
 
     public function isIndexable(): bool
     {
-        return $this->getIsPublished();
+        return true;
     }
 
     public static function getElasticsearchPriority(): int

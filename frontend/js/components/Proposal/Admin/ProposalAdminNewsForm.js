@@ -20,7 +20,6 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
 
   render() {
     const { proposal, intl } = this.props;
-
     return (
       <div className="box box-primary container-fluid">
         <div className="box-header">
@@ -69,7 +68,7 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
             <FormattedMessage id="proposal.no_posts" />
           )}
           <ButtonToolbar className="box-content__toolbar">
-            <Button bsStyle="primary" href={`${baseUrl}/admin/capco/app/post/create`}>
+            <Button bsStyle="primary" href={`${baseUrl}/admin/capco/app/post/create?proposalId=${proposal.id}`}>
               <FormattedMessage id="global.add" />
             </Button>
           </ButtonToolbar>
@@ -84,6 +83,7 @@ const container = injectIntl(ProposalAdminNewsForm);
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAdminNewsForm_proposal on Proposal {
+      id
       news {
         totalCount
         edges {

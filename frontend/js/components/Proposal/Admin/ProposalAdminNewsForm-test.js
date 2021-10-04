@@ -10,6 +10,7 @@ describe('<ProposalAdminNewsForm />', () => {
     intl: intlMock,
     proposal: {
       $refType,
+      id: 'proposal 1',
       news: {
         totalCount: 1,
         edges: [
@@ -28,6 +29,7 @@ describe('<ProposalAdminNewsForm />', () => {
     intl: intlMock,
     proposal: {
       $refType,
+      id: 'proposal 1',
       news: {
         totalCount: 0,
         edges: [],

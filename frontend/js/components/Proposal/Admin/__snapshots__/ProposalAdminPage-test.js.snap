@@ -2295,7 +2295,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "05c5e62866ae274ec9d676bd2fdf55dc",
+          "cacheID": "7954699ae2a2b71705ad7095c2d08918",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2531,6 +2531,7 @@ fragment ProposalAdminFollowers_proposal on Proposal {
 }
 
 fragment ProposalAdminNewsForm_proposal on Proposal {
+  id
   news {
     totalCount
     edges {

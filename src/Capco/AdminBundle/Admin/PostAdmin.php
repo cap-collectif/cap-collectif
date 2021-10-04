@@ -20,8 +20,10 @@ use Sonata\Form\Type\DateTimePickerType;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 
-class PostAdmin extends CapcoAdmin
+
+class PostAdmin extends AbstractAdmin
 {
     protected $classnameLabel = 'post';
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
@@ -75,6 +77,12 @@ class PostAdmin extends CapcoAdmin
     {
         if ('list' === $name) {
             return 'CapcoAdminBundle:Post:list.html.twig';
+        }
+        if ('create' === $name) {
+            return 'CapcoAdminBundle:Post:create.html.twig';
+        }
+        if('edit'=== $name){
+            return 'CapcoAdminBundle:Post:edit.html.twig';
         }
 
         return parent::getTemplate($name);

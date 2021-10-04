@@ -134,6 +134,7 @@ export type ParentProps = {|
   isValidDate?: (current: moment) => boolean,
   withCharacterCounter?: boolean,
   dateProps?: DateProps,
+  selectedLanguage?: string,
   maxSize?: number,
   accept?: string | string[],
 |};
@@ -220,6 +221,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     isValidDate,
     withCharacterCounter,
     dateProps,
+    selectedLanguage,
     maxSize,
     accept,
     ...props
@@ -257,6 +259,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           onChange={props.onChange}
           withCharacterCounter={withCharacterCounter}
           maxLength={props.maxLength}
+          selectedLanguage={selectedLanguage}
           {...props}
         />
       );

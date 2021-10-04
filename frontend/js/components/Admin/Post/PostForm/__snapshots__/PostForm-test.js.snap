@@ -1,0 +1,1604 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PostForm/> should render correctly 1`] = `
+<form
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX fTiQlj"
+>
+  <div
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX jfXSVK"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+        htmlFor="FR_FR-title"
+        id="label-FR_FR-title"
+        type="label"
+      >
+        <p
+          className="sc-bdnxRM fvWedV"
+        >
+          global.title
+        </p>
+      </label>
+      <input
+        aria-describedby="label-FR_FR-title "
+        aria-invalid={false}
+        autoFocus={false}
+        className="form-control"
+        disabled={false}
+        id="FR_FR-title"
+        name="FR_FR.FR_FR-title"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder={null}
+        type="text"
+        value="Post FR 1"
+        warnings={null}
+      />
+    </div>
+    <div
+      className="form-group  "
+    >
+      <label
+        className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+        htmlFor="author"
+        id="label-select-author"
+        type="label"
+      >
+        <p
+          className="sc-bdnxRM fvWedV"
+        >
+          global.author
+        </p>
+      </label>
+      <div
+        className=""
+        id="author"
+      >
+        <div
+          className="Select__SelectContainer-bqbDYn select-container"
+        >
+          <div
+            className="react-select-container css-2b097c-container"
+            onKeyDown={[Function]}
+          >
+            <span
+              aria-atomic="false"
+              aria-live="polite"
+              aria-relevant="additions text"
+              className="css-1f43avz-a11yText-A11yText"
+            />
+            <div
+              className="react-select__control css-yk16xz-control"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <div
+                className="react-select__value-container react-select__value-container--is-multi react-select__value-container--has-value css-g1d714-ValueContainer"
+              >
+                <div
+                  className="css-1rhbuit-multiValue react-select__multi-value"
+                >
+                  <div
+                    className="css-12jo7m5 react-select__multi-value__label"
+                  >
+                    lbrunet
+                  </div>
+                  <div
+                    className="css-xb97g8 react-select__multi-value__remove"
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="css-tj5bde-Svg"
+                      focusable="false"
+                      height={14}
+                      viewBox="0 0 20 20"
+                      width={14}
+                    >
+                      <path
+                        d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="css-1rhbuit-multiValue react-select__multi-value"
+                >
+                  <div
+                    className="css-12jo7m5 react-select__multi-value__label"
+                  >
+                    user
+                  </div>
+                  <div
+                    className="css-xb97g8 react-select__multi-value__remove"
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="css-tj5bde-Svg"
+                      focusable="false"
+                      height={14}
+                      viewBox="0 0 20 20"
+                      width={14}
+                    >
+                      <path
+                        d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="css-b8ldur-Input"
+                >
+                  <div
+                    className="react-select__input"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                      }
+                    }
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      aria-labelledby="label-select-author"
+                      autoCapitalize="none"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      disabled={false}
+                      id="react-select-2-input"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      spellCheck="false"
+                      style={
+                        Object {
+                          "background": 0,
+                          "border": 0,
+                          "boxSizing": "content-box",
+                          "color": "inherit",
+                          "fontSize": "inherit",
+                          "label": "input",
+                          "opacity": 1,
+                          "outline": 0,
+                          "padding": 0,
+                          "width": "1px",
+                        }
+                      }
+                      tabIndex="0"
+                      type="text"
+                      value=""
+                    />
+                    <div
+                      style={
+                        Object {
+                          "height": 0,
+                          "left": 0,
+                          "overflow": "scroll",
+                          "position": "absolute",
+                          "top": 0,
+                          "visibility": "hidden",
+                          "whiteSpace": "pre",
+                        }
+                      }
+                    >
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+              >
+                <div
+                  aria-hidden="true"
+                  className="react-select__indicator react-select__loading-indicator css-at12u2-loadingIndicator"
+                >
+                  <span
+                    className="css-1yvy2vo-LoadingDot"
+                  />
+                  <span
+                    className="css-zoievk-LoadingDot"
+                  />
+                  <span
+                    className="css-x748d8-LoadingDot"
+                  />
+                </div>
+                <span
+                  className="react-select__indicator-separator css-1okebmr-indicatorSeparator"
+                />
+                <div
+                  aria-hidden="true"
+                  className="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="css-tj5bde-Svg"
+                    focusable="false"
+                    height={20}
+                    viewBox="0 0 20 20"
+                    width={20}
+                  >
+                    <path
+                      d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div>
+              <input
+                name="author"
+                type="hidden"
+                value="VXNlcjp1c2VyMQ=="
+              />
+              <input
+                name="author"
+                type="hidden"
+                value="VXNlcjp1c2VyNQ=="
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        className="form-group"
+      >
+        <label
+          className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+          htmlFor="FR_FR-abstract"
+          id="label-FR_FR-abstract"
+          type="label"
+        >
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fZdyCs"
+          >
+            <p
+              className="sc-bdnxRM fvWedV"
+            >
+              admin.create.abstract.field
+            </p>
+            <p
+              className="sc-bdnxRM jdhdoe"
+            >
+              global.optional
+            </p>
+          </div>
+        </label>
+        <input
+          aria-describedby="label-FR_FR-abstract "
+          aria-invalid={false}
+          autoFocus={false}
+          className="form-control"
+          disabled={false}
+          id="FR_FR-abstract"
+          name="FR_FR.FR_FR-abstract"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          placeholder={null}
+          type="text"
+          value="Résumé du post FR 1"
+          warnings={null}
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+          htmlFor="FR_FR-body"
+          id="label-FR_FR-body"
+          type="label"
+        >
+          <p
+            className="sc-bdnxRM fvWedV"
+          >
+            admin.general.content
+          </p>
+        </label>
+        <div
+          aria-labelledby="label-FR_FR-body"
+          className="Editor__Container-iWGgom fJXUsY editor "
+          id="FR_FR-body"
+        >
+          <div>
+            <div
+              aria-orientation="horizontal"
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+              id="quill-toolbar"
+              onBlurCapture={[Function]}
+              onFocus={[Function]}
+              onFocusCapture={[Function]}
+              onKeyDown={[Function]}
+              onKeyDownCapture={[Function]}
+              onKeyUpCapture={[Function]}
+              role="menubar"
+            >
+              <span
+                className="sc-bdnxRM hptjof"
+                clip="rect(0px, 0px, 0px, 0px)"
+              >
+                <button
+                  className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
+                  id="quill-toolbar-1"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={0}
+                  type="button"
+                >
+                  aria-editor-skip-toolbar
+                </button>
+              </span>
+              <select
+                aria-label="global.fontsize"
+                className="ql-formats ql-size"
+                id="quill-toolbar-2"
+                onBlurCapture={[Function]}
+                onClick={[Function]}
+                onClickCapture={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPressCapture={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+              >
+                <option
+                  value="small"
+                >
+                  editor.size.small
+                </option>
+                <option
+                  selected={true}
+                  value="normal"
+                >
+                  editor.size.normal
+                </option>
+                <option
+                  value="large"
+                >
+                  editor.size.large
+                </option>
+              </select>
+              <div
+                aria-label="aria-editor-tools-style"
+                className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats ql-editor-button"
+                role="group"
+              >
+                <button
+                  aria-label="global.bold"
+                  className="ql-bold ql-editor-button"
+                  id="quill-toolbar-3"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                />
+                <button
+                  aria-label="global.italic"
+                  className="ql-italic ql-editor-button"
+                  id="quill-toolbar-4"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                />
+                <button
+                  aria-label="global.underline"
+                  className="ql-underline ql-editor-button"
+                  id="quill-toolbar-5"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                />
+                <button
+                  aria-label="global.strike"
+                  className="ql-strike ql-editor-button"
+                  id="quill-toolbar-6"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                />
+              </div>
+              <div
+                aria-label="aria-editor-tools-alignment"
+                className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats"
+                role="group"
+              >
+                <button
+                  aria-label="editor.list"
+                  className="ql-list ql-editor-button"
+                  id="quill-toolbar-7"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                  value="ordered"
+                />
+                <button
+                  aria-label="global.list"
+                  className="ql-list ql-editor-button"
+                  id="quill-toolbar-8"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                  value="bullet"
+                />
+                <button
+                  aria-label="global.delete.indent"
+                  className="ql-indent ql-editor-button"
+                  id="quill-toolbar-9"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                  value="-1"
+                />
+                <button
+                  aria-label="global.indent"
+                  className="ql-indent ql-editor-button"
+                  id="quill-toolbar-10"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                  value="+1"
+                />
+                <select
+                  aria-label="editor.align.title"
+                  className="ql-align"
+                  id="quill-toolbar-11"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                >
+                  <option
+                    aria-label="editor.align.left"
+                    selected={true}
+                  />
+                  <option
+                    aria-label="editor.align.center"
+                    value="center"
+                  />
+                  <option
+                    aria-label="editor.align.right"
+                    value="right"
+                  />
+                  <option
+                    aria-label="editor.align.justify"
+                    value="justify"
+                  />
+                </select>
+              </div>
+              <div
+                aria-label="aria-editor-tools-insertion"
+                className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats"
+                role="group"
+              >
+                <button
+                  aria-label="global.link"
+                  className="ql-link ql-editor-button"
+                  id="quill-toolbar-12"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                />
+                <button
+                  aria-label="global.image"
+                  className="ql-image ql-editor-button"
+                  id="quill-toolbar-13"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                />
+                <button
+                  aria-label="global.video"
+                  className="ql-video ql-editor-button"
+                  id="quill-toolbar-14"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={-1}
+                  type="button"
+                />
+              </div>
+            </div>
+          </div>
+          <div />
+        </div>
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+        htmlFor=""
+        id=""
+        type="label"
+      >
+        <div
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+        >
+          <p
+            className="sc-bdnxRM jcpGyj"
+          >
+            cover-image
+          </p>
+          <p
+            className="sc-bdnxRM jdhdoe"
+          >
+            global.optional
+          </p>
+        </div>
+      </label>
+      <span
+        className="visible-print-block help-block"
+      >
+        document-to-be-attached-to-this-form
+      </span>
+      <div
+        className="hidden-print"
+      >
+        <div
+          className="image-uploader row"
+          id=""
+        >
+          <div
+            className="col-sm-12 col-xs-12"
+          >
+            <div
+              className="image-uploader__dropzone--fullwidth"
+            >
+              <div
+                className="image-uploader__dropzone-label"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragEnter={[Function]}
+                onDragLeave={[Function]}
+                onDragOver={[Function]}
+                onDrop={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                tabIndex={0}
+              >
+                <div>
+                  global.image_uploader.image.dropzone
+                </div>
+                <p
+                  style={
+                    Object {
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  <button
+                    className="image-uploader__btn btn btn-default"
+                    disabled={false}
+                    type="button"
+                  >
+                    <input
+                      accept={
+                        Array [
+                          ".jpg",
+                          ".png",
+                          ".gif",
+                        ]
+                      }
+                      autoComplete="off"
+                      id="_field"
+                      multiple={false}
+                      onChange={[Function]}
+                      onClick={[Function]}
+                      style={
+                        Object {
+                          "display": "none",
+                        }
+                      }
+                      tabIndex={-1}
+                      type="file"
+                    />
+                    global.form.ranking.select
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            className="col-sm-12 col-xs-12"
+          >
+            <p
+              className="h5 text-center"
+            >
+              global.image_uploader.image.preview
+            </p>
+            <div
+              className="image-uploader__preview text-center"
+            >
+              <img
+                alt=""
+                className="img-responsive"
+                src="https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif"
+              />
+            </div>
+            <div
+              className="form-group"
+            >
+              <span
+                className="visible-print-block help-block"
+              >
+                several-possible-answers
+              </span>
+              <span
+                className="form-fields input-group checkbox"
+              >
+                <div
+                  checked={false}
+                  className="Checkbox__CheckboxContainer-eHTpAn kBRCEu text-center checkbox-container"
+                >
+                  <label
+                    className="Labelstyle__LabelContainer-jXVmhf kVLvwp label-container"
+                    htmlFor="_delete"
+                    id="label-checkbox-_delete"
+                    type="checkbox"
+                  >
+                    <IconMock
+                      aria-hidden={true}
+                      className="icon"
+                      height={16}
+                      style={
+                        Object {
+                          "flexShrink": "0",
+                          "verticalAlign": "middle",
+                        }
+                      }
+                      width={16}
+                    />
+                    global.image_uploader.image.delete
+                  </label>
+                  <input
+                    checked={false}
+                    disabled={false}
+                    id="_delete"
+                    name="image-uploader__delete"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                </div>
+              </span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX hoVkKd fGTmtL"
+    >
+      <button
+        className="sc-bdnxRM Button__ButtonInner-dWPVNG bobTHH kFclcg"
+        disabled={true}
+        onClick={[Function]}
+        type="button"
+      >
+        global.save
+      </button>
+      <button
+        aria-controls="id-1"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdnxRM Button__ButtonInner-dWPVNG bobTHH gBZYrd"
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        type="button"
+      >
+        admin.global.delete
+      </button>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-1"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+    </div>
+  </div>
+  <div
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX pejBm PostForm___StyledFlex-jqkkdB jelcwp"
+  >
+    <div
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO jFCIdI"
+    >
+      <div
+        className="sc-bdnxRM dNNlfC"
+        id="volet-1"
+      >
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG gQsGvm jfKDDI"
+          onClick={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
+          />
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+          >
+            <p
+              className="sc-bdnxRM cnNiIQ"
+            >
+              admin.fields.blog_post.group_linked_content
+            </p>
+          </div>
+        </button>
+        <div
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ieKotb PostForm___StyledPanel-btvJdQ heNzHw"
+          style={Object {}}
+        />
+      </div>
+      <div
+        className="sc-bdnxRM dNNlfC"
+        id="volet-2"
+      >
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG gQsGvm jfKDDI"
+          onClick={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
+          />
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+          >
+            <p
+              className="sc-bdnxRM cnNiIQ"
+            >
+              admin.fields.blog_post.group_meta
+            </p>
+          </div>
+        </button>
+        <div
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX jWnvqp PostForm___StyledPanel2-dfYcjq jIITek"
+          style={Object {}}
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+              htmlFor=""
+              id=""
+              type="label"
+            >
+              <p
+                className="sc-bdnxRM koXPa"
+              >
+                global.admin.published_at
+              </p>
+            </label>
+            <div
+              className="rdt DateTime__BasicDateTime-pKfBS hINnoB"
+            >
+              <input
+                className="form-control"
+                onChange={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                type="text"
+                value="2018-11-03 00:00:00"
+              />
+              <div
+                className="rdtPicker"
+              >
+                <div
+                  className="rdtDays"
+                >
+                  <table>
+                    <thead>
+                      <tr>
+                        <th
+                          className="rdtPrev"
+                          onClick={[Function]}
+                        >
+                          <span>
+                            ‹
+                          </span>
+                        </th>
+                        <th
+                          className="rdtSwitch"
+                          colSpan={5}
+                          data-value={10}
+                          onClick={[Function]}
+                        >
+                          novembre 2018
+                        </th>
+                        <th
+                          className="rdtNext"
+                          onClick={[Function]}
+                        >
+                          <span>
+                            ›
+                          </span>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th
+                          className="dow"
+                        >
+                          lu
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          ma
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          me
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          je
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          ve
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          sa
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          di
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="rdtDay rdtOld"
+                          data-value={29}
+                          onClick={[Function]}
+                        >
+                          29
+                        </td>
+                        <td
+                          className="rdtDay rdtOld"
+                          data-value={30}
+                          onClick={[Function]}
+                        >
+                          30
+                        </td>
+                        <td
+                          className="rdtDay rdtOld"
+                          data-value={31}
+                          onClick={[Function]}
+                        >
+                          31
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={1}
+                          onClick={[Function]}
+                        >
+                          1
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={2}
+                          onClick={[Function]}
+                        >
+                          2
+                        </td>
+                        <td
+                          className="rdtDay rdtActive"
+                          data-value={3}
+                          onClick={[Function]}
+                        >
+                          3
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={4}
+                          onClick={[Function]}
+                        >
+                          4
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-value={5}
+                          onClick={[Function]}
+                        >
+                          5
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={6}
+                          onClick={[Function]}
+                        >
+                          6
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={7}
+                          onClick={[Function]}
+                        >
+                          7
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={8}
+                          onClick={[Function]}
+                        >
+                          8
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={9}
+                          onClick={[Function]}
+                        >
+                          9
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={10}
+                          onClick={[Function]}
+                        >
+                          10
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={11}
+                          onClick={[Function]}
+                        >
+                          11
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-value={12}
+                          onClick={[Function]}
+                        >
+                          12
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={13}
+                          onClick={[Function]}
+                        >
+                          13
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={14}
+                          onClick={[Function]}
+                        >
+                          14
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={15}
+                          onClick={[Function]}
+                        >
+                          15
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={16}
+                          onClick={[Function]}
+                        >
+                          16
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={17}
+                          onClick={[Function]}
+                        >
+                          17
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={18}
+                          onClick={[Function]}
+                        >
+                          18
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-value={19}
+                          onClick={[Function]}
+                        >
+                          19
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={20}
+                          onClick={[Function]}
+                        >
+                          20
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={21}
+                          onClick={[Function]}
+                        >
+                          21
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={22}
+                          onClick={[Function]}
+                        >
+                          22
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={23}
+                          onClick={[Function]}
+                        >
+                          23
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={24}
+                          onClick={[Function]}
+                        >
+                          24
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={25}
+                          onClick={[Function]}
+                        >
+                          25
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-value={26}
+                          onClick={[Function]}
+                        >
+                          26
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={27}
+                          onClick={[Function]}
+                        >
+                          27
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={28}
+                          onClick={[Function]}
+                        >
+                          28
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={29}
+                          onClick={[Function]}
+                        >
+                          29
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={30}
+                          onClick={[Function]}
+                        >
+                          30
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={1}
+                          onClick={[Function]}
+                        >
+                          1
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={2}
+                          onClick={[Function]}
+                        >
+                          2
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={3}
+                          onClick={[Function]}
+                        >
+                          3
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={4}
+                          onClick={[Function]}
+                        >
+                          4
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={5}
+                          onClick={[Function]}
+                        >
+                          5
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={6}
+                          onClick={[Function]}
+                        >
+                          6
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={7}
+                          onClick={[Function]}
+                        >
+                          7
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={8}
+                          onClick={[Function]}
+                        >
+                          8
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={9}
+                          onClick={[Function]}
+                        >
+                          9
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td
+                          className="rdtTimeToggle"
+                          colSpan={7}
+                          onClick={[Function]}
+                        >
+                          00:00:00
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <span
+              className="visible-print-block help-block"
+            >
+              several-possible-answers
+            </span>
+            <div
+              checked={true}
+              className="Checkbox__CheckboxContainer-eHTpAn kBRCEu checkbox-container"
+            >
+              <label
+                className="Labelstyle__LabelContainer-jXVmhf kVLvwp label-container"
+                htmlFor="is_published"
+                id="label-checkbox-is_published"
+                type="checkbox"
+              >
+                <IconMock
+                  aria-hidden={true}
+                  className="icon"
+                  height={16}
+                  style={
+                    Object {
+                      "flexShrink": "0",
+                      "verticalAlign": "middle",
+                    }
+                  }
+                  width={16}
+                />
+                <p
+                  className="sc-bdnxRM koXPa"
+                >
+                  global.published
+                </p>
+              </label>
+              <input
+                checked={true}
+                disabled={false}
+                id="is_published"
+                name="is_published"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="checkbox"
+                value={true}
+              />
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <span
+              className="visible-print-block help-block"
+            >
+              several-possible-answers
+            </span>
+            <div
+              checked={true}
+              className="Checkbox__CheckboxContainer-eHTpAn kBRCEu checkbox-container"
+            >
+              <label
+                className="Labelstyle__LabelContainer-jXVmhf kVLvwp label-container"
+                htmlFor="has_comments"
+                id="label-checkbox-has_comments"
+                type="checkbox"
+              >
+                <IconMock
+                  aria-hidden={true}
+                  className="icon"
+                  height={16}
+                  style={
+                    Object {
+                      "flexShrink": "0",
+                      "verticalAlign": "middle",
+                    }
+                  }
+                  width={16}
+                />
+                <p
+                  className="sc-bdnxRM koXPa"
+                >
+                  admin.post.comments_authorised
+                </p>
+              </label>
+              <input
+                checked={true}
+                disabled={false}
+                id="has_comments"
+                name="has_comments"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="checkbox"
+                value={true}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-bdnxRM dNNlfC"
+        id="volet-4"
+      >
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG gQsGvm jfKDDI"
+          onClick={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
+          />
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+          >
+            <p
+              className="sc-bdnxRM cnNiIQ"
+            >
+              admin.fields.blog_post.advanced
+            </p>
+          </div>
+        </button>
+        <div
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX jWnvqp PostForm___StyledPanel3-ggFZcn iuKuEp"
+          style={Object {}}
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+              htmlFor="FR_FR-meta_description"
+              id="label-FR_FR-meta_description"
+              type="label"
+            >
+              <p
+                className="sc-bdnxRM fvWedV"
+              >
+                post.metadescription
+              </p>
+            </label>
+            <textarea
+              aria-describedby="label-FR_FR-meta_description "
+              aria-invalid={false}
+              autoFocus={false}
+              className="form-control"
+              id="FR_FR-meta_description"
+              name="FR_FR.FR_FR-meta_description"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onDragStart={[Function]}
+              onDrop={[Function]}
+              onFocus={[Function]}
+              placeholder={null}
+              type="textarea"
+              value=""
+              warnings={null}
+            />
+            <div
+              className="Notepad__Container-inQLrC cTBqFb visible-print-block"
+            >
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+              htmlFor=""
+              id=""
+              type="label"
+            >
+              <p
+                className="sc-bdnxRM fvWedV"
+              >
+                admin.customcode
+              </p>
+            </label>
+            <textarea
+              aria-describedby=" "
+              aria-invalid={false}
+              autoFocus={false}
+              className="form-control"
+              name="custom_code"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onDragStart={[Function]}
+              onDrop={[Function]}
+              onFocus={[Function]}
+              placeholder="admin.customcode.placeholder"
+              type="textarea"
+              value=""
+              warnings={null}
+            />
+            <div
+              className="Notepad__Container-inQLrC cTBqFb visible-print-block"
+            >
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;

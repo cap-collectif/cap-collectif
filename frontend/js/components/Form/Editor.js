@@ -21,6 +21,7 @@ type Props = {
   currentLanguage: string,
   withCharacterCounter?: boolean,
   maxLength?: string,
+  selectedLanguage?: string,
 };
 
 type State = {|
@@ -95,7 +96,9 @@ export class Editor extends React.Component<Props, State> {
       bounds: '#proposal_form_description',
     };
     this.quill = new Quill(this.editorRef.current, options);
-
+    if (!this.editorRef.current) {
+      return;
+    }
     this.quill.getModule('toolbar').addHandler('image', () => {
       selectLocalImage(this.quill);
     });
@@ -154,14 +157,23 @@ export class Editor extends React.Component<Props, State> {
     this.quill.enable(!disabled);
   }
 
-  componentDidUpdate({ currentLanguage: prevDefaultLanguage, value: prevValue }: Props) {
+  componentDidUpdate({
+    currentLanguage: prevDefaultLanguage,
+    value: prevValue,
+    selectedLanguage: prevSelectedLanguage,
+  }: Props) {
     const {
       initialContent: newInitialContent,
       currentLanguage: newDefaultLanguage,
       value,
+      selectedLanguage,
     } = this.props;
-
     if (prevDefaultLanguage !== newDefaultLanguage) {
+      // On change does not trigger when we change the props value.
+      // So we have to manually trigger this.
+      this.quill.clipboard.dangerouslyPasteHTML(newInitialContent || '');
+    }
+    if (prevSelectedLanguage !== selectedLanguage) {
       // On change does not trigger when we change the props value.
       // So we have to manually trigger this.
       this.quill.clipboard.dangerouslyPasteHTML(newInitialContent || '');

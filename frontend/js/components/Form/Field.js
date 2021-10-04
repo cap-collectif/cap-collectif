@@ -33,6 +33,7 @@ type Props = {|
   autoComplete?: string,
   disableValidation?: boolean,
   hideValidationMessage: boolean,
+  selectedLanguage?: string,
   rows?: number,
   type:
     | 'address'
@@ -161,6 +162,7 @@ class Field extends React.Component<Props> {
       timeConstraints,
       withCharacterCounter,
       dateProps,
+      selectedLanguage,
       maxSize,
       accept,
     } = this.props;
@@ -240,6 +242,7 @@ class Field extends React.Component<Props> {
         timeConstraints={timeConstraints}
         withCharacterCounter={withCharacterCounter}
         dateProps={dateProps}
+        selectedLanguage={selectedLanguage}
         maxSize={maxSize}
         accept={accept}
         {...input}>

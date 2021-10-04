@@ -589,7 +589,7 @@ services:
             [
                 ~,
                 Capco\AppBundle\Entity\Post,
-                Capco\AdminBundle\Controller\CRUDController,
+                Capco\AdminBundle\Controller\PostController,
                 '@security.token_storage',
             ]
         tags:
