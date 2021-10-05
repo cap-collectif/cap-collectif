@@ -132,6 +132,7 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
             onClick={[MockFunction]}
             variant="secondary"
             variantColor="hierarchy"
+            variantSize="big"
           >
             global.cancel
           </Button>
@@ -443,6 +444,7 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
             onClick={[MockFunction]}
             variant="secondary"
             variantColor="hierarchy"
+            variantSize="big"
           >
             global.cancel
           </Button>
@@ -597,6 +599,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
             onClick={[MockFunction]}
             variant="secondary"
             variantColor="hierarchy"
+            variantSize="big"
           >
             global.cancel
           </Button>
@@ -751,6 +754,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
             onClick={[MockFunction]}
             variant="secondary"
             variantColor="hierarchy"
+            variantSize="big"
           >
             global.cancel
           </Button>
@@ -905,6 +909,7 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
             onClick={[MockFunction]}
             variant="secondary"
             variantColor="hierarchy"
+            variantSize="big"
           >
             global.cancel
           </Button>

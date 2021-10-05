@@ -264,6 +264,7 @@ export const ProposalEditModal = ({
                     {proposal.publicationStatus !== 'DRAFT' && (
                       <Button
                         onClick={onClose}
+                        variantSize="big"
                         variant="secondary"
                         variantColor="hierarchy"
                         isLoading={submitting}>
