@@ -29,14 +29,11 @@ type State = {
 
 export const getLabelColorForType = (type: LoginSocialButtonType, color?: string): string => {
   switch (type) {
-    case 'facebook':
-      return 'white';
     case 'openId':
       return color || 'white';
+    case 'facebook':
     case 'saml':
-      return 'white';
     case 'cas':
-      return 'white';
     case 'franceConnect':
       return 'white';
     default:
@@ -97,7 +94,7 @@ export const getButtonContentForType = (type: string): string => {
     case 'saml':
       return 'Saml';
     case 'cas':
-      return 'Cas';
+      return 'ARTUR';
     default:
       return '';
   }

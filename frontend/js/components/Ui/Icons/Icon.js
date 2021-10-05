@@ -41,6 +41,7 @@ export const ICON_NAME = {
   arrowThickCircleDown: 'arrow-thick-circle-down',
   openId: 'openId',
   saml: 'saml',
+  cas: 'cas',
   chevronLeft: 'chevron-left',
   chevronRight: 'chevron-right',
   chevronUp: 'chevron-up',
@@ -299,6 +300,7 @@ const getIcon = name => {
       return <Icons.ArrowThickCircleDown />;
     case 'openId':
     case 'saml':
+    case 'cas':
       return <Icons.OpenId />;
     case 'chevron-left':
       return <Icons.ChevronLeft />;

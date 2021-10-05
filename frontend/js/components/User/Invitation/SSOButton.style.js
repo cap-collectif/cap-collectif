@@ -102,7 +102,7 @@ export const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = 
       height: 60%;
       width: 100%;
       ${props => {
-        if (props.type === 'openId' || props.type === 'saml') {
+        if (props.type === 'openId' || props.type === 'saml' || props.type === 'cas') {
           return 'transform: translate(3px, 2px) scale(1.3);';
         }
       }}
