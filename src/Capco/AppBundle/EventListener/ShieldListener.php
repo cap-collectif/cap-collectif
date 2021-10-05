@@ -15,7 +15,6 @@ class ShieldListener
         // Basics
         'sonata_media_view',
         'sonata_media_download',
-        'capco_metrics',
         '_wdt',
 
         // Login
@@ -24,6 +23,9 @@ class ShieldListener
         'openid_login',
         'franceconnect_login',
         'hwi_oauth_service_redirect',
+        'saml_login',
+        'paris_login',
+        'cas_login',
 
         // Public API
         'graphql_endpoint',

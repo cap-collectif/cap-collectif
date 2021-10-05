@@ -46,7 +46,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/login-saml", name="saml_login", options={"i18n" = false})
+     * @Route("/login-saml", name="saml_login", options={"i18n" = false}, defaults={"_feature_flags" = "login_saml"})
      */
     public function loginSamlAction(Request $request)
     {
@@ -58,7 +58,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/login-cas", name="cas_login", options={"i18n" = false})
+     * @Route("/login-cas", name="cas_login", options={"i18n" = false}, defaults={"_feature_flags" = "login_cas"})
      */
     public function loginCasAction(Request $request, CasHandler $casHandler)
     {
@@ -70,19 +70,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/logout-cas", name="cas_logout", options={"i18n" = false})
-     */
-    public function logoutCasAction(Request $request, CasHandler $casHandler)
-    {
-        $destination =
-            $request->query->get('_destination') ??
-            $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
-
-        return $casHandler->logout($destination);
-    }
-
-    /**
-     * @Route("/login-paris", name="paris_login", options={"i18n" = false})
+     * @Route("/login-paris", name="paris_login", options={"i18n" = false}, defaults={"_feature_flags" = "login_paris"})
      */
     public function loginParisAction(Request $request)
     {
