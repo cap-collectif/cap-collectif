@@ -68,6 +68,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate('zipcode_at_register');
         $this->manager->deactivate('shield_mode');
         $this->manager->deactivate('login_saml');
+        $this->manager->deactivate('login_cas');
         $this->manager->deactivate('restrict_registration_via_email_domain');
         $this->manager->deactivate('login_paris');
         $this->manager->deactivate('allow_users_to_propose_events');
@@ -126,6 +127,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('server_side_rendering');
             $this->manager->deactivate('developer_documentation');
             $this->manager->deactivate('login_saml');
+            $this->manager->deactivate('login_cas');
             $this->manager->deactivate('login_paris');
             $this->manager->deactivate('disconnect_openid');
             $this->manager->deactivate('public_api');

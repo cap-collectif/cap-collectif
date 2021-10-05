@@ -48,6 +48,7 @@ class UserController extends AbstractController
             ) > 0;
 
         $loginSaml = $toggleManager->isActive('login_saml');
+        $loginCas = $toggleManager->isActive('login_cas');
         $loginFacebook = $toggleManager->isActive('login_facebook');
 
         $ssoList = array_filter($ssoConfigurations, function ($sso) {
@@ -65,6 +66,10 @@ class UserController extends AbstractController
 
         if ($loginSaml) {
             $ssoList[] = ['type' => 'saml', 'name' => 'Saml'];
+        }
+
+        if ($loginCas) {
+            $ssoList[] = ['type' => 'cas', 'name' => 'Cas'];
         }
 
         $hasEnabledSSO = $loginFacebook || $loginFranceConnect || \count($ssoList) > 0;

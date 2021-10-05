@@ -12,22 +12,25 @@ trait UserSSOTrait
     use UserSSOParisTrait;
 
     //saml
-    protected ?string $samlId;
+    protected ?string $samlId = null;
+
+    //CAS
+    protected ?string $casId = null;
 
     //facebook
-    protected ?string $facebook_id;
-    protected ?string $facebook_access_token;
-    protected ?string $facebookUrl;
+    protected ?string $facebook_id = null;
+    protected ?string $facebook_access_token = null;
+    protected ?string $facebookUrl = null;
 
     //twitter
-    protected ?string $twitter_id;
-    protected ?string $twitter_access_token;
-    protected ?string $twitterUrl;
+    protected ?string $twitter_id = null;
+    protected ?string $twitter_access_token = null;
+    protected ?string $twitterUrl = null;
 
     //linkedin
-    protected ?string $linkedInUrl;
+    protected ?string $linkedInUrl = null;
 
-    protected ?\DateTime $credentialsExpireAt;
+    protected ?\DateTime $credentialsExpireAt = null;
     protected bool $credentialsExpired = false;
 
     public function setSamlAttributes(string $idp, array $attributes): void
@@ -67,6 +70,18 @@ trait UserSSOTrait
     public function getSamlId(): ?string
     {
         return $this->samlId;
+    }
+
+    public function setCasId(?string $casId): self
+    {
+        $this->casId = $casId;
+
+        return $this;
+    }
+
+    public function getCasId(): ?string
+    {
+        return $this->casId;
     }
 
     public function getFacebookAccessToken(): ?string

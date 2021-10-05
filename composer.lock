@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "008764ff7149f68e1c454d37f327fc31",
+    "content-hash": "5b4a8762ddb4229c641e5ac7590fc769",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -4357,6 +4357,72 @@
             ],
             "description": "A collection of useful form types and extensions for Symfony",
             "time": "2021-02-09T23:33:19+00:00"
+        },
+        {
+            "name": "jasig/phpcas",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/apereo/phpCAS.git",
+                "reference": "ea27d122c4c7114006b33d15668c90f1904d53df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/apereo/phpCAS/zipball/ea27d122c4c7114006b33d15668c90f1904d53df",
+                "reference": "ea27d122c4c7114006b33d15668c90f1904d53df",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=7.0.0",
+                "psr/log": "^1.0.0"
+            },
+            "require-dev": {
+                "monolog/monolog": "^1.0.0",
+                "phpunit/phpunit": ">=4.8.35 <8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "source/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Joachim Fritschi",
+                    "email": "jfritschi@freenet.de",
+                    "homepage": "https://github.com/jfritschi"
+                },
+                {
+                    "name": "Adam Franco",
+                    "homepage": "https://github.com/adamfranco"
+                },
+                {
+                    "name": "Henry Pan",
+                    "homepage": "https://github.com/phy25"
+                }
+            ],
+            "description": "Provides a simple API for authenticating users against a CAS server",
+            "homepage": "https://wiki.jasig.org/display/CASC/phpCAS",
+            "keywords": [
+                "apereo",
+                "cas",
+                "jasig"
+            ],
+            "support": {
+                "issues": "https://github.com/apereo/phpCAS/issues",
+                "source": "https://github.com/apereo/phpCAS/tree/1.4.0"
+            },
+            "time": "2021-05-30T19:53:34+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
@@ -18785,28 +18851,28 @@
     ],
     "aliases": [
         {
-            "alias": "3.30.0",
-            "alias_normalized": "3.30.0.0",
-            "version": "dev-bugfix-3.x",
-            "package": "sonata-project/media-bundle"
-        },
-        {
-            "alias": "2.1.2",
-            "alias_normalized": "2.1.2.0",
+            "package": "alexandresalome/mailcatcher",
             "version": "9999999-dev",
-            "package": "friendsofsymfony/user-bundle"
-        },
-        {
-            "alias": "4.0.2",
-            "alias_normalized": "4.0.2.0",
-            "version": "9999999-dev",
-            "package": "limenius/react-renderer"
-        },
-        {
             "alias": "1.3.0",
-            "alias_normalized": "1.3.0.0",
+            "alias_normalized": "1.3.0.0"
+        },
+        {
+            "package": "friendsofsymfony/user-bundle",
             "version": "9999999-dev",
-            "package": "alexandresalome/mailcatcher"
+            "alias": "2.1.2",
+            "alias_normalized": "2.1.2.0"
+        },
+        {
+            "package": "limenius/react-renderer",
+            "version": "9999999-dev",
+            "alias": "4.0.2",
+            "alias_normalized": "4.0.2.0"
+        },
+        {
+            "package": "sonata-project/media-bundle",
+            "version": "dev-bugfix-3.x",
+            "alias": "3.30.0",
+            "alias_normalized": "3.30.0.0"
         }
     ],
     "minimum-stability": "stable",
@@ -18835,5 +18901,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

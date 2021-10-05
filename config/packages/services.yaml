@@ -126,6 +126,7 @@ services:
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler'
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\ParisLogoutHandler'
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler'
+                - '@Capco\UserBundle\Security\Http\Logout\Handler\CASLogoutHandler'
 
     Capco\UserBundle\OpenID\OptionsModifier\OpenIDOptionsModifier: ~
 
@@ -328,8 +329,14 @@ services:
     Capco\UserBundle\Handler\UserInvitationHandler:
         autowire: true
 
+    Capco\UserBundle\Handler\CasHandler:
+        autowire: true
+        arguments:
+            $environment: '%kernel.environment%'
 
     Capco\UserBundle\Security\SessionWithJsonHandler:
         arguments:
             $redis: '@snc_redis.default'
             $prefix: '%redis_prefix%session_json_new_%kernel.environment%_' # We add env in prefix to allow multi environments sessions in dev
+    Capco\UserBundle\Security\Core\User\CasUserProvider:
+        public: true

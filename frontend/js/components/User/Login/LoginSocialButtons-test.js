@@ -39,6 +39,13 @@ describe('<LoginSocialButtons />', () => {
     },
     ssoList: [],
   };
+  const propsWithFeatureLoginCasActivated = {
+    features: {
+      ...features,
+      login_cas: true,
+    },
+    ssoList: [],
+  };
   const propsWithFeatureLoginOpenIDActivated = {
     features: {
       ...features,
@@ -72,6 +79,7 @@ describe('<LoginSocialButtons />', () => {
       login_gplus: true,
       login_facebook: true,
       login_saml: true,
+      login_cas: true,
       login_franceconnect: true,
     },
     ssoList,
@@ -83,6 +91,7 @@ describe('<LoginSocialButtons />', () => {
       login_gplus: true,
       login_facebook: true,
       login_saml: true,
+      login_cas: true,
       login_franceconnect: true,
       sso_by_pass_auth: true,
     },
@@ -101,6 +110,10 @@ describe('<LoginSocialButtons />', () => {
 
   it('renders only SAML button', () => {
     const wrapper = shallow(<LoginSocialButtons {...propsWithFeatureLoginSamlActivated} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('renders only CAS button', () => {
+    const wrapper = shallow(<LoginSocialButtons {...propsWithFeatureLoginCasActivated} />);
     expect(wrapper).toMatchSnapshot();
   });
 

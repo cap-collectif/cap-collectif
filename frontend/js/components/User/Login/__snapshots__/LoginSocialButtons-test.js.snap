@@ -14,6 +14,9 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
     type="saml"
   />
   <LoginSocialButton
+    type="cas"
+  />
+  <LoginSocialButton
     buttonColor="#ABABAB"
     key="0"
     labelColor="#FFFFFF"
@@ -40,6 +43,30 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
 `;
 
 exports[`<LoginSocialButtons /> renders nothing 1`] = `""`;
+
+exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
+<Fragment>
+  <div
+    className="font-weight-semi-bold"
+  >
+    <FormattedMessage
+      id="authenticate-with"
+      values={Object {}}
+    />
+  </div>
+  <LoginSocialButton
+    type="cas"
+  />
+  <p
+    className="p--centered"
+  >
+    <FormattedMessage
+      id="login.or"
+      values={Object {}}
+    />
+  </p>
+</Fragment>
+`;
 
 exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
 <Fragment>
@@ -155,6 +182,9 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   </div>
   <LoginSocialButton
     type="saml"
+  />
+  <LoginSocialButton
+    type="cas"
   />
   <LoginSocialButton
     buttonColor="#ABABAB"

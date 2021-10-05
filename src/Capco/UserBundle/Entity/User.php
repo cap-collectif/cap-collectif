@@ -49,8 +49,8 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
 
     //personal
     protected $gender;
-    protected ?Media $media;
-    protected ?string $birthPlace;
+    protected ?Media $media = null;
+    protected ?string $birthPlace = null;
 
     //participations
     protected Collection $opinions;
@@ -76,14 +76,14 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected bool $vip = false;
 
     //account security
-    protected ?string $newEmailToConfirm;
-    protected ?string $newEmailConfirmationToken;
-    protected ?\DateTime $emailConfirmationSentAt;
+    protected ?string $newEmailToConfirm = null;
+    protected ?string $newEmailConfirmationToken = null;
+    protected ?\DateTime $emailConfirmationSentAt = null;
     protected bool $phoneConfirmed = false;
-    protected ?string $smsConfirmationCode;
-    protected ?\DateTime $smsConfirmationSentAt;
-    protected ?\DateTime $confirmedAccountAt;
-    protected ?\DateTime $deletedAccountAt;
+    protected ?string $smsConfirmationCode = null;
+    protected ?\DateTime $smsConfirmationSentAt = null;
+    protected ?\DateTime $confirmedAccountAt = null;
+    protected ?\DateTime $deletedAccountAt = null;
     protected bool $remindedAccountConfirmationAfter1Hour = false;
 
     //notifications
@@ -96,9 +96,9 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected Collection $archives;
     protected Collection $responses;
     protected bool $profilePageIndexed = false;
-    protected ?string $websiteUrl;
+    protected ?string $websiteUrl = null;
     private Collection $userGroups;
-    private ?string $resetPasswordToken;
+    private ?string $resetPasswordToken = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="supervisor")

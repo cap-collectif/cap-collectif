@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Mailer\Message\MessagesList;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Handler\CasHandler;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -54,6 +55,30 @@ class DefaultController extends Controller
             $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
 
         return $this->redirect($destination);
+    }
+
+    /**
+     * @Route("/login-cas", name="cas_login", options={"i18n" = false})
+     */
+    public function loginCasAction(Request $request, CasHandler $casHandler)
+    {
+        $destination =
+            $request->query->get('_destination') ??
+            $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
+
+        return $casHandler->login($destination);
+    }
+
+    /**
+     * @Route("/logout-cas", name="cas_logout", options={"i18n" = false})
+     */
+    public function logoutCasAction(Request $request, CasHandler $casHandler)
+    {
+        $destination =
+            $request->query->get('_destination') ??
+            $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
+
+        return $casHandler->logout($destination);
     }
 
     /**

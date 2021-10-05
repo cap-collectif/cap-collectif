@@ -46,6 +46,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "external_project": false,
             "http_redirects": false,
             "import_proposals": false,
+            "login_cas": false,
             "login_facebook": false,
             "login_franceconnect": false,
             "login_gplus": false,

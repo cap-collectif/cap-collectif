@@ -53,6 +53,10 @@ Object {
     },
     Object {
       "enabled": false,
+      "type": "login_cas",
+    },
+    Object {
+      "enabled": false,
       "type": "login_paris",
     },
     Object {

@@ -233,6 +233,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $user->setFacebookData(null);
         $user->setFacebookName(null);
         $user->setFacebookAccessToken(null);
+        $user->setCasId(null);
 
         $user->setTwitterId(null);
         $user->setTwitterUrl(null);

@@ -7,7 +7,13 @@ import SocialIcon from '../Icons/SocialIcon';
 import AppBox from '~ui/Primitives/AppBox';
 import { baseUrl } from '~/config';
 
-export type LoginSocialButtonType = 'facebook' | 'openId' | 'franceConnect' | 'saml' | 'oauth2';
+export type LoginSocialButtonType =
+  | 'facebook'
+  | 'openId'
+  | 'franceConnect'
+  | 'saml'
+  | 'cas'
+  | 'oauth2';
 
 type Props = {|
   type: LoginSocialButtonType,
@@ -29,6 +35,8 @@ export const getLabelColorForType = (type: LoginSocialButtonType, color?: string
       return color || 'white';
     case 'saml':
       return 'white';
+    case 'cas':
+      return 'white';
     case 'franceConnect':
       return 'white';
     default:
@@ -43,6 +51,8 @@ export const getButtonColorForType = (type: LoginSocialButtonType, bgColor?: str
     case 'openId':
       return bgColor || '#1b9bd1';
     case 'saml':
+      return '#7498c0';
+    case 'cas':
       return '#7498c0';
     case 'franceConnect':
       return '#034ea2';
@@ -65,6 +75,9 @@ export const getButtonLinkForType = (
     case 'oauth2':
       return `/login/openid?_destination=${redirectUri}`;
 
+    case 'cas':
+      return `/login-cas?_destination=${destination}`;
+
     case 'saml':
       return `/login-saml?_destination=${destination}`;
 
@@ -83,6 +96,8 @@ export const getButtonContentForType = (type: string): string => {
       return 'Facebook';
     case 'saml':
       return 'Saml';
+    case 'cas':
+      return 'Cas';
     default:
       return '';
   }
@@ -127,7 +142,7 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
       height: 60%;
       width: 100%;
       ${props => {
-        if (props.type === 'openId' || props.type === 'saml') {
+        if (props.type === 'openId' || props.type === 'saml' || props.type === 'cas') {
           return 'transform: translate(3px, 2px) scale(1.3);';
         }
       }}

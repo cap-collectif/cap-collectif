@@ -56,6 +56,7 @@ class FeaturesCategoryResolver
                     Manager::sentry_log,
                     Manager::login_openid,
                     Manager::login_saml,
+                    Manager::login_cas,
                     Manager::login_paris,
                     Manager::login_franceconnect,
                     Manager::unstable__admin_editor,

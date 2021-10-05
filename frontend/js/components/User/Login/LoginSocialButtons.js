@@ -26,6 +26,7 @@ export class LoginSocialButtons extends React.Component<Props> {
       !features.login_facebook &&
       !features.login_gplus &&
       !features.login_saml &&
+      !features.login_cas &&
       !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0) &&
       !features.login_franceconnect
     ) {
@@ -39,6 +40,7 @@ export class LoginSocialButtons extends React.Component<Props> {
           <FormattedMessage id="authenticate-with" />
         </div>
         {features.login_saml && <LoginSocialButton type="saml" />}
+        {features.login_cas && <LoginSocialButton type="cas" />}
         {ssoList.length > 0 &&
           ssoList.map(
             (
