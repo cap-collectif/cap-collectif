@@ -2,7 +2,7 @@
 
 exports[`<PostList /> should render correctly 1`] = `
 <div
-  className="sc-bdnxRM"
+  className="sc-bdnxRM kZFksl"
 >
   <table
     className="sc-bdnxRM jIIBsu"

@@ -2,7 +2,7 @@
 
 exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly when admin 1`] = `
 <div
-  className="sc-bdnxRM"
+  className="sc-bdnxRM kZFksl"
 >
   <table
     className="sc-bdnxRM jIIBsu"
@@ -442,7 +442,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
 
 exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly when admin project 1`] = `
 <div
-  className="sc-bdnxRM"
+  className="sc-bdnxRM kZFksl"
 >
   <table
     className="sc-bdnxRM jIIBsu"

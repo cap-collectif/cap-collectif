@@ -75,7 +75,7 @@ const Table = ({ children, actionBar, selectable, isLoading, onReset, ...props }
             borderColor="gray.150">
             <ActionBar>{actionBar}</ActionBar>
 
-            <AppBox>
+            <AppBox width="100%">
               <AppBox as="table" width="100%" {...props}>
                 {children}
               </AppBox>
@@ -83,8 +83,13 @@ const Table = ({ children, actionBar, selectable, isLoading, onReset, ...props }
             </AppBox>
           </Flex>
         ) : (
-          <AppBox>
-            <AppBox as="table" borderRadius="table" overflow="hidden" width="100%" {...props}>
+          <AppBox width="100%">
+            <AppBox
+              as="table"
+              borderRadius="table"
+              overflow="hidden"
+              width="100%"
+              {...props}>
               {children}
             </AppBox>
 

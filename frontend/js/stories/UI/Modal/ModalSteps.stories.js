@@ -80,9 +80,14 @@ const Template = () => (
         <ModalSteps.ProgressBar />
 
         <ModalSteps.Body>
-          <ModalOne id="one" label="Jaime les pommes" validationLabel="Voir les poires" />
+          <ModalOne
+            id="one"
+            label="Jaime les pommes"
+            validationLabel="Voir les poires"
+            infoUrl="#"
+          />
           <ModalTwo id="two" label="Jaime les poires" validationLabel="Voir la suite" />
-          <ModalThree id="three" validationLabel="Fermer" />
+          <ModalThree id="three" validationLabel="Fermer" infoUrl="#" />
         </ModalSteps.Body>
 
         <ModalSteps.Footer>

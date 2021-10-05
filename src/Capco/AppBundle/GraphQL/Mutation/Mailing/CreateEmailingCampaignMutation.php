@@ -4,9 +4,11 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\MailingList;
+use Capco\AppBundle\Entity\SenderEmail;
 use Capco\AppBundle\Enum\CreateEmailingCampaignErrorCode;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\AppBundle\Repository\SenderEmailRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -20,17 +22,20 @@ class CreateEmailingCampaignMutation implements MutationInterface
     private EntityManagerInterface $entityManager;
     private TranslatorInterface $translator;
     private SiteParameterResolver $siteParams;
+    private SenderEmailRepository $senderEmailRepository;
 
     public function __construct(
         MailingListRepository $mailingListRepository,
         EntityManagerInterface $entityManager,
         TranslatorInterface $translator,
-        SiteParameterResolver $siteParams
+        SiteParameterResolver $siteParams,
+        SenderEmailRepository $senderEmailRepository
     ) {
         $this->mailingListRepository = $mailingListRepository;
         $this->entityManager = $entityManager;
         $this->translator = $translator;
         $this->siteParams = $siteParams;
+        $this->senderEmailRepository = $senderEmailRepository;
     }
 
     public function __invoke(Argument $input)
@@ -54,9 +59,7 @@ class CreateEmailingCampaignMutation implements MutationInterface
         $emailingCampaign->setName(
             $this->translator->trans('global.campaign.new', [], 'CapcoAppBundle')
         );
-        $emailingCampaign->setSenderEmail(
-            $this->siteParams->getValue('admin.mail.notifications.send_address')
-        );
+        $emailingCampaign->setSenderEmail($this->getDefaultEmail());
         $emailingCampaign->setSenderName(
             $this->siteParams->getValue('admin.mail.notifications.send_name') ??
                 $emailingCampaign->getSenderEmail()
@@ -91,5 +94,18 @@ class CreateEmailingCampaignMutation implements MutationInterface
         }
 
         return $mailingList;
+    }
+
+    private function getDefaultEmail(): string 
+    {
+        $senderEmail = $this->senderEmailRepository->getDefault();
+
+        if($senderEmail instanceOf SenderEmail) {
+            $senderEmail = $senderEmail->getAddress();
+        } else {
+            $senderEmail = $this->siteParams->getValue('admin.mail.notifications.send_address');
+        }
+
+        return $senderEmail;
     }
 }

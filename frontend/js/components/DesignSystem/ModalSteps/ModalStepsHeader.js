@@ -27,6 +27,8 @@ const ModalStepsHeader = ({ children, ...rest }: Props) => {
   );
 };
 
+ModalStepsHeader.Label = ModalHeaderLabel;
+
 ModalStepsHeader.displayName = 'ModalSteps.Header';
 
 export default ModalStepsHeader;

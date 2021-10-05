@@ -62,6 +62,16 @@ const baseProps = {
     usersNotConfirmedRefusing: {
       totalCount: 1,
     },
+    senderEmails: [
+      {
+        id: 'senderEmail-123',
+        address: 'sender-email@gmail.com',
+      },
+      {
+        id: 'senderEmail-456',
+        address: 'sender-email2@gmail.com',
+      },
+    ],
   },
 };
 

@@ -13,6 +13,7 @@ export type LinkProps = {|
   target?: string,
   variant?: 'primary' | 'danger' | 'hierarchy',
   truncate?: number,
+  rel?: string,
 |};
 
 export const styles = {

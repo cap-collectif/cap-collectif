@@ -50,6 +50,7 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
     usersRefusing,
     usersConfirmedRefusing,
     usersNotConfirmedRefusing,
+    senderEmails,
   } = query;
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
@@ -98,14 +99,20 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
       <h3>{intl.formatMessage({ id: 'admin-title-parameter-mailing-list' })}</h3>
 
       <Field
-        type="text"
         id="senderEmail"
         name="senderEmail"
+        type="select"
+        clearable={false}
         component={component}
         label={intl.formatMessage({ id: 'sender-address' })}
-        disabled
-        disableValidation={!showError}
-      />
+        placeholder="global.placeholder.email"
+        disableValidation={!showError}>
+        {senderEmails.map(senderEmail => (
+          <option key={senderEmail.id} value={senderEmail.address}>
+            {senderEmail.address}
+          </option>
+        ))}
+      </Field>
 
       <Field
         type="select"
@@ -247,6 +254,10 @@ export default createFragmentContainer(ParameterPage, {
         consentInternalCommunication: false
       ) {
         totalCount
+      }
+      senderEmails {
+        id
+        address
       }
     }
   `,

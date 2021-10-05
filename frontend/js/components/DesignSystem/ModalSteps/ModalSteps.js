@@ -13,7 +13,13 @@ type ModalStepsProps = {|
   +resetStepOnClose?: boolean,
 |};
 
-const ModalSteps = ({ children, defaultStepId, resetStepOnClose, ...rest }: ModalStepsProps) => {
+const ModalSteps = ({
+  children,
+  defaultStepId,
+  resetStepOnClose = true,
+  onClose,
+  ...rest
+}: ModalStepsProps) => {
   const [currentStep, setCurrentStep] = React.useState<number>(0);
   const [stepsRegistered, registerSteps] = React.useState<Step[]>([]);
 
@@ -33,15 +39,22 @@ const ModalSteps = ({ children, defaultStepId, resetStepOnClose, ...rest }: Moda
       : 0;
 
     setCurrentStep(defaultStep);
-
-    return () => {
-      if (resetStepOnClose) setCurrentStep(defaultStep);
-    };
   }, [defaultStepId, resetStepOnClose, stepsRegistered]);
+
+  const handleOnClose = () => {
+    if (resetStepOnClose) {
+      const defaultStep: number = defaultStepId
+        ? stepsRegistered.findIndex(step => step.id === defaultStepId) || 0
+        : 0;
+      setCurrentStep(defaultStep);
+    }
+
+    if (onClose) onClose();
+  };
 
   return (
     <ModalStepsContext.Provider value={context}>
-      <Modal {...rest}>
+      <Modal {...rest} onClose={handleOnClose}>
         {modalProps => (typeof children === 'function' ? children(modalProps) : children)}
       </Modal>
     </ModalStepsContext.Provider>

@@ -5,6 +5,7 @@ export type Step = {|
   +id: string,
   +validationLabel: string,
   +label?: string,
+  +infoUrl?: string,
 |};
 
 export type Context = {|

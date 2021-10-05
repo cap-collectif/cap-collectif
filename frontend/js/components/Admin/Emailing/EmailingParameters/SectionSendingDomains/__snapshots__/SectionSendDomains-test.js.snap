@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render correctly 1`] = `
+<div
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX fDWoMk fGTmtL"
+>
+  <div
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX eGAzNP jFCIdI"
+  >
+    <div
+      className="sc-bdnxRM fziFat"
+    >
+      <p
+        className="sc-bdnxRM gJQnhc"
+      >
+        emailing-service
+      </p>
+      <p
+        className="sc-bdnxRM lhgRuK"
+      >
+        emailing-service-explanation
+         
+        <a
+          className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+          href="https://aide.cap-collectif.com/article/249-authentification-de-votre-domaine-d-envoi"
+          rel="noopener noreferrer"
+          target="blank"
+        >
+          learn.more
+        </a>
+      </p>
+    </div>
+    <button
+      aria-controls="id-1"
+      aria-expanded={false}
+      aria-haspopup="dialog"
+      className="sc-bdnxRM Button__ButtonInner-dWPVNG YWcLE dgvgEZ"
+      onClick={[Function]}
+      onClickCapture={[Function]}
+      onKeyDown={[Function]}
+      onKeyPressCapture={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseDownCapture={[Function]}
+      type="button"
+    >
+      add-a-domain
+    </button>
+    <div
+      aria-label="authentication-sender-domains"
+      aria-modal={true}
+      data-dialog={true}
+      hidden={true}
+      id="id-1"
+      onAnimationEnd={[Function]}
+      onBlur={[Function]}
+      onKeyDown={[Function]}
+      onTransitionEnd={[Function]}
+      role="dialog"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex={-1}
+    />
+  </div>
+  <div
+    className="sc-bdnxRM kZFksl"
+  >
+    <table
+      className="sc-bdnxRM jIIBsu"
+    >
+      <thead
+        className="sc-bdnxRM dSQJSh"
+      >
+        <tr
+          className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
+        >
+          <th
+            className="sc-bdnxRM ejslJN"
+          >
+            global.domain
+          </th>
+          <th
+            className="sc-bdnxRM ejslJN"
+          >
+            global.service
+          </th>
+          <th
+            className="sc-bdnxRM ejslJN"
+          >
+            global.spf
+          </th>
+          <th
+            className="sc-bdnxRM ejslJN"
+          >
+            global.dkim
+          </th>
+          <th
+            className="sc-bdnxRM ejslJN"
+          />
+        </tr>
+      </thead>
+      <tbody
+        className="sc-bdnxRM dZBmCd"
+      >
+        <tr
+          className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
+          id="sender-email-domain-1"
+        >
+          <td
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            test.com
+          </td>
+          <td
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            Mailjet
+          </td>
+          <td
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <IconMock
+              className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG fgFRjg fZkSKg AMDLx icon"
+            />
+          </td>
+          <td
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <IconMock
+              className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG fgFRjg fZkSKg AMDLx icon"
+            />
+          </td>
+          <td
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            -
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

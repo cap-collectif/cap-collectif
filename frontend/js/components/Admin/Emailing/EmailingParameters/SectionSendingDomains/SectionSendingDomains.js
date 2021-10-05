@@ -5,30 +5,43 @@ import { graphql, useFragment } from 'react-relay';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Section from '~ui/BackOffice/Section/Section';
 import Table from '~ds/Table';
-import Button from '~ds/Button/Button';
-import Menu from '~ds/Menu/Menu';
 import AppBox from '~ui/Primitives/AppBox';
-import Icon, { ICON_NAME } from '~ds/Icon/Icon';
+import Icon from '~ds/Icon/Icon';
 import type { SectionSendingDomains_senderEmailDomains$key } from '~relay/SectionSendingDomains_senderEmailDomains.graphql';
+import type { SectionSendingDomains_senderEmails$key } from '~relay/SectionSendingDomains_senderEmails.graphql';
 import { capitalizeFirstLetter } from '~/utils/string';
+import ModalsAddDomain from '../ModalsAddDomain/ModalsAddDomain';
+import ModalConfirmationDomainDelete from '../ModalConfirmationDomainDelete/ModalConfirmationDomainDelete';
+import Link from '~ds/Link/Link';
 
 type Props = {|
   +senderEmailDomains: SectionSendingDomains_senderEmailDomains$key,
+  +senderEmails: SectionSendingDomains_senderEmails$key,
 |};
 
-const FRAGMENT = graphql`
+const FRAGMENT_SENDER_EMAIL_DOMAIN = graphql`
   fragment SectionSendingDomains_senderEmailDomains on SenderEmailDomain @relay(plural: true) {
+    id
     value
     service
     spfValidation
     dkimValidation
+    ...ModalConfirmationDomainDelete_senderEmailDomain
+  }
+`;
+
+const FRAGMENT_SENDER_EMAILS = graphql`
+  fragment SectionSendingDomains_senderEmails on SenderEmail @relay(plural: true) {
+    address
   }
 `;
 
 const SectionSendingDomains = ({
   senderEmailDomains: senderEmailDomainsFragment,
+  senderEmails: senderEmailsFragment,
 }: Props): React.Node => {
-  const senderEmailDomains = useFragment(FRAGMENT, senderEmailDomainsFragment);
+  const senderEmailDomains = useFragment(FRAGMENT_SENDER_EMAIL_DOMAIN, senderEmailDomainsFragment);
+  const senderEmails = useFragment(FRAGMENT_SENDER_EMAILS, senderEmailsFragment);
   const intl = useIntl();
 
   return (
@@ -37,21 +50,20 @@ const SectionSendingDomains = ({
         <AppBox mb={7}>
           <Section.Title>{intl.formatMessage({ id: 'emailing-service' })}</Section.Title>
           <Section.Description>
-            {intl.formatMessage({ id: 'emailing-service-explanation' })}
+            {intl.formatMessage({ id: 'emailing-service-explanation' })}{' '}
+            <Link
+              href="https://aide.cap-collectif.com/article/249-authentification-de-votre-domaine-d-envoi"
+              target="blank"
+              rel="noopener noreferrer">
+              {intl.formatMessage({ id: 'learn.more' })}
+            </Link>
           </Section.Description>
         </AppBox>
 
-        <Button
-          variant="secondary"
-          variantColor="primary"
-          variantSize="small"
-          alignSelf="flex-start"
-          onClick={() => {}}>
-          {intl.formatMessage({ id: 'add-a-domain' })}
-        </Button>
+        <ModalsAddDomain intl={intl} />
       </Flex>
 
-      <Table width="70%">
+      <Table>
         <Table.Thead>
           <Table.Tr>
             <Table.Th>{intl.formatMessage({ id: 'global.domain' })}</Table.Th>
@@ -62,8 +74,8 @@ const SectionSendingDomains = ({
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {senderEmailDomains.map((senderEmailDomain, idx) => (
-            <Table.Tr key={`domain-${idx}`}>
+          {senderEmailDomains.map(senderEmailDomain => (
+            <Table.Tr rowId={senderEmailDomain.id} key={senderEmailDomain.id}>
               <Table.Td>{senderEmailDomain.value}</Table.Td>
               <Table.Td>{capitalizeFirstLetter(senderEmailDomain.service.toLowerCase())}</Table.Td>
               <Table.Td>
@@ -78,24 +90,11 @@ const SectionSendingDomains = ({
                   color={senderEmailDomain.dkimValidation ? 'green.500' : 'red.500'}
                 />
               </Table.Td>
+
               <Table.Td>
-                <Menu>
-                  <Menu.Button>
-                    <Button
-                      rightIcon={ICON_NAME.MORE}
-                      aria-label={intl.formatMessage({ id: 'global.menu' })}
-                      color="gray.500"
-                    />
-                  </Menu.Button>
-                  <Menu.List>
-                    <Menu.ListItem as={Button} onClick={() => {}} color="gray.900">
-                      {intl.formatMessage({ id: 'action_edit' })}
-                    </Menu.ListItem>
-                    <Menu.ListItem as={Button} onClick={() => {}} color="gray.900">
-                      {intl.formatMessage({ id: 'global.delete' })}
-                    </Menu.ListItem>
-                  </Menu.List>
-                </Menu>
+                {!senderEmails.some(senderEmail =>
+                  senderEmail.address.includes(senderEmailDomain.value),
+                ) && <ModalConfirmationDomainDelete senderEmailDomain={senderEmailDomain} />}
               </Table.Td>
             </Table.Tr>
           ))}

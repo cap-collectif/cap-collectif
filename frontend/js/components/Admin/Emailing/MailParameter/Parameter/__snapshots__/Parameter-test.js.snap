@@ -8,14 +8,28 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
     admin-title-parameter-mailing-list
   </h3>
   <Field
+    clearable={false}
     component={[Function]}
     disableValidation={true}
-    disabled={true}
     id="senderEmail"
     label="sender-address"
     name="senderEmail"
-    type="text"
-  />
+    placeholder="global.placeholder.email"
+    type="select"
+  >
+    <option
+      key="senderEmail-123"
+      value="sender-email@gmail.com"
+    >
+      sender-email@gmail.com
+    </option>
+    <option
+      key="senderEmail-456"
+      value="sender-email2@gmail.com"
+    >
+      sender-email2@gmail.com
+    </option>
+  </Field>
   <Field
     component={[Function]}
     disableValidation={true}
@@ -98,14 +112,28 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
     admin-title-parameter-mailing-list
   </h3>
   <Field
+    clearable={false}
     component={[Function]}
     disableValidation={true}
-    disabled={true}
     id="senderEmail"
     label="sender-address"
     name="senderEmail"
-    type="text"
-  />
+    placeholder="global.placeholder.email"
+    type="select"
+  >
+    <option
+      key="senderEmail-123"
+      value="sender-email@gmail.com"
+    >
+      sender-email@gmail.com
+    </option>
+    <option
+      key="senderEmail-456"
+      value="sender-email2@gmail.com"
+    >
+      sender-email2@gmail.com
+    </option>
+  </Field>
   <Field
     component={[Function]}
     disableValidation={true}
@@ -188,14 +216,28 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
     admin-title-parameter-mailing-list
   </h3>
   <Field
+    clearable={false}
     component={[Function]}
     disableValidation={false}
-    disabled={true}
     id="senderEmail"
     label="sender-address"
     name="senderEmail"
-    type="text"
-  />
+    placeholder="global.placeholder.email"
+    type="select"
+  >
+    <option
+      key="senderEmail-123"
+      value="sender-email@gmail.com"
+    >
+      sender-email@gmail.com
+    </option>
+    <option
+      key="senderEmail-456"
+      value="sender-email2@gmail.com"
+    >
+      sender-email2@gmail.com
+    </option>
+  </Field>
   <Field
     component={[Function]}
     disableValidation={false}
@@ -278,14 +320,28 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
     admin-title-parameter-mailing-list
   </h3>
   <Field
+    clearable={false}
     component={[Function]}
     disableValidation={true}
-    disabled={true}
     id="senderEmail"
     label="sender-address"
     name="senderEmail"
-    type="text"
-  />
+    placeholder="global.placeholder.email"
+    type="select"
+  >
+    <option
+      key="senderEmail-123"
+      value="sender-email@gmail.com"
+    >
+      sender-email@gmail.com
+    </option>
+    <option
+      key="senderEmail-456"
+      value="sender-email2@gmail.com"
+    >
+      sender-email2@gmail.com
+    </option>
+  </Field>
   <Field
     component={[Function]}
     disableValidation={true}

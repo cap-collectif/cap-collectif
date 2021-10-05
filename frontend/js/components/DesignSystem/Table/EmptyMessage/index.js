@@ -14,7 +14,7 @@ const EmptyMessage = ({ onReset }: Props) => {
   const intl = useIntl();
 
   return (
-    <Flex direction="column" px={6} py={12} spacing={2}>
+    <Flex direction="column" px={6} py={12} spacing={2} width="100%">
       <Text color="blue.900" {...headingStyles.h3}>
         {intl.formatMessage({ id: 'no-result-found' })}
       </Text>

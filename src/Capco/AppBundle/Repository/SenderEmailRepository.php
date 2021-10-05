@@ -13,4 +13,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class SenderEmailRepository extends EntityRepository
 {
+    public function getDefault(): SenderEmail 
+    {
+        return $this->findOneBy([
+            "isDefault" => true
+        ]);
+    }
 }

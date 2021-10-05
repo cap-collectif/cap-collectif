@@ -39,7 +39,8 @@ const ModalStepsBody = ({ children, ...rest }: Props) => {
       const stepsRegistered: Step[] = React.Children.toArray(children).map(modal => ({
         id: modal.props.id,
         label: modal.props.label,
-        validationLabel: modal.props?.validationLabel || undefined,
+        validationLabel: modal.props?.validationLabel,
+        infoUrl: modal.props?.infoUrl,
       }));
 
       registerSteps(stepsRegistered);
