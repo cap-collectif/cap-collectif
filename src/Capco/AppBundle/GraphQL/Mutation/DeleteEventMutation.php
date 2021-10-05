@@ -11,7 +11,6 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Sonata\MediaBundle\Provider\ImageProvider;
@@ -82,8 +81,6 @@ class DeleteEventMutation extends BaseDeleteMutation
             ->getResult();
 
         $this->em->flush();
-        $this->indexer->remove(ClassUtils::getClass($event), $id);
-        $this->indexer->finishBulk();
 
         $this->publisher->publish(
             'event.delete',

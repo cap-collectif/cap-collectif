@@ -5284,6 +5284,9 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """The event status."""
   reviewStatus: EventReviewStatus
+
+  """The url to export participants"""
+  exportParticipantsUrl: URI
 }
 
 """The affiliation of a user to a event"""
