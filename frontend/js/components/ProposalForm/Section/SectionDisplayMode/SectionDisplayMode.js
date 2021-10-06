@@ -260,7 +260,7 @@ export const SectionDisplayMode = ({
             zoomLevels[9].id,
           );
         } else {
-          const zoomLevel = getZoomDependOfAddress(addressFormatted.type);
+          const zoomLevel = zoom ? { id: zoom } : getZoomDependOfAddress(addressFormatted.type);
           const previewLocationDisplay = getDataFromGoogleAddress(
             addressFormatted,
             addressFormatted.type || 'locality',

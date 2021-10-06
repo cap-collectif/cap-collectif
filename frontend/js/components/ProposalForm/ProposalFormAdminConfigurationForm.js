@@ -379,7 +379,9 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     isMapViewEnabled: values.viewEnabled.isMapViewEnabled,
     objectType: values.objectType,
     mapCenter:
-      values.mapCenter && values.viewEnabled.isMapViewEnabled
+      values.mapCenter &&
+      values.viewEnabled.isMapViewEnabled &&
+      typeof values.mapCenter.json === 'object'
         ? JSON.stringify([values.mapCenter.json])
         : null,
   };
