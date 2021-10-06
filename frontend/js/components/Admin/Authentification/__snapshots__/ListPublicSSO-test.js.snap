@@ -5,7 +5,7 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
   <ListGroup
     className=""
   >
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    <ListPublicSSO__ListGroupItemWithJustifyContentStart>
       <Toggle
         id="toggle-franceConnect"
         label={
@@ -24,8 +24,8 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
         onClose={[Function]}
         show={false}
       />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    </ListPublicSSO__ListGroupItemWithJustifyContentStart>
+    <ListPublicSSO__ListGroupItemWithJustifyContentStart>
       <Toggle
         checked={false}
         id="toggle-facebook"
@@ -38,8 +38,8 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
         }
         onChange={[Function]}
       />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    </ListPublicSSO__ListGroupItemWithJustifyContentStart>
+    <ListPublicSSO__ListGroupItemWithJustifyContentStart>
       <Toggle
         checked={true}
         disabled={true}
@@ -55,7 +55,7 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
           </h5>
         }
       />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    </ListPublicSSO__ListGroupItemWithJustifyContentStart>
   </ListGroup>
 </Fragment>
 `;
@@ -65,7 +65,7 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
   <ListGroup
     className=""
   >
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    <ListPublicSSO__ListGroupItemWithJustifyContentStart>
       <Toggle
         checked={false}
         id="toggle-franceConnect"
@@ -90,8 +90,8 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
         onClose={[Function]}
         show={false}
       />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    </ListPublicSSO__ListGroupItemWithJustifyContentStart>
+    <ListPublicSSO__ListGroupItemWithJustifyContentStart>
       <Toggle
         checked={false}
         id="toggle-facebook"
@@ -104,8 +104,8 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
         }
         onChange={[Function]}
       />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    </ListPublicSSO__ListGroupItemWithJustifyContentStart>
+    <ListPublicSSO__ListGroupItemWithJustifyContentStart>
       <Toggle
         checked={true}
         disabled={true}
@@ -121,7 +121,7 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
           </h5>
         }
       />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    </ListPublicSSO__ListGroupItemWithJustifyContentStart>
   </ListGroup>
 </Fragment>
 `;

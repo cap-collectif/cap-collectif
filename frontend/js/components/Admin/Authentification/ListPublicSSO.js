@@ -33,11 +33,11 @@ export type FranceConnectSSOConfiguration = {|
   +$fragmentRefs: FranceConnectConfigurationModal_ssoConfiguration$ref,
 |};
 
-const ListGroupItemWithJustifyContentEnd: StyledComponent<{}, {}, typeof ListGroupItem> = styled(
+const ListGroupItemWithJustifyContentStart: StyledComponent<{}, {}, typeof ListGroupItem> = styled(
   ListGroupItem,
 )`
   && {
-    justify-content: end;
+    justify-content: start;
   }
 
   .form-group {
@@ -70,7 +70,7 @@ export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) 
   return (
     <>
       <ListGroup>
-        <ListGroupItemWithJustifyContentEnd>
+        <ListGroupItemWithJustifyContentStart>
           <Toggle
             id="toggle-franceConnect"
             checked={features.login_franceconnect && franceConnect?.enabled}
@@ -104,16 +104,16 @@ export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) 
             onClose={handleClose}
             ssoConfiguration={franceConnect}
           />
-        </ListGroupItemWithJustifyContentEnd>
-        <ListGroupItemWithJustifyContentEnd>
+        </ListGroupItemWithJustifyContentStart>
+        <ListGroupItemWithJustifyContentStart>
           <Toggle
             id="toggle-facebook"
             checked={features.login_facebook}
             onChange={() => onToggle('login_facebook', !features.login_facebook)}
             label={<h5 className="mb-0 mt-0">Facebook</h5>}
           />
-        </ListGroupItemWithJustifyContentEnd>
-        <ListGroupItemWithJustifyContentEnd>
+        </ListGroupItemWithJustifyContentStart>
+        <ListGroupItemWithJustifyContentStart>
           <Toggle
             id="toggle-email"
             checked
@@ -124,7 +124,7 @@ export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) 
               </h5>
             }
           />
-        </ListGroupItemWithJustifyContentEnd>
+        </ListGroupItemWithJustifyContentStart>
       </ListGroup>
     </>
   );
