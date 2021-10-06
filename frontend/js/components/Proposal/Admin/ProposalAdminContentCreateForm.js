@@ -72,9 +72,9 @@ const FormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     }
   }
     
-  .bo_width_140 {
+  .bo_width_200 {
     .form-group {
-      max-width: 140px;
+      max-width: 200px;
     }
   } 
    

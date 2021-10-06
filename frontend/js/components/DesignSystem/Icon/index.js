@@ -68,3 +68,4 @@ export { default as ICON_PLACEHOLDER } from './svg/icon_placeholder.svg';
 export { default as DUPLICATE } from './svg/duplicate.svg';
 export { default as DUPLICATE_O } from './svg/duplicate-o.svg';
 export { default as IMAGE } from './svg/image.svg';
+export { default as ERROR } from './svg/error.svg';

@@ -306,7 +306,17 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   <Field
     component={[Function]}
     divClassName="bo_width_747"
-    help="Illustration help"
+    help={
+      <span>
+        Illustration help
+         
+        <FormattedHTMLMessage
+          id="illustration-help-text"
+          tagName="span"
+          values={Object {}}
+        />
+      </span>
+    }
     id="proposal_media"
     label={
       <span>
@@ -751,7 +761,17 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   <Field
     component={[Function]}
     divClassName="bo_width_747"
-    help="Illustration help"
+    help={
+      <span>
+        Illustration help
+         
+        <FormattedHTMLMessage
+          id="illustration-help-text"
+          tagName="span"
+          values={Object {}}
+        />
+      </span>
+    }
     id="proposal_media"
     label={
       <span>
@@ -975,7 +995,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
         "dateFormat": "DD/MM/YYYY HH:mm:ss",
       }
     }
-    divClassName="bo_width_140"
+    divClassName="bo_width_200"
     formName="proposal-form"
     id="proposal-publishedAt"
     label="global.date.text"
@@ -1183,7 +1203,17 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
   <Field
     component={[Function]}
     divClassName="bo_width_747"
-    help="Illustration help"
+    help={
+      <span>
+        Illustration help
+         
+        <FormattedHTMLMessage
+          id="illustration-help-text"
+          tagName="span"
+          values={Object {}}
+        />
+      </span>
+    }
     id="proposal_media"
     label={
       <span>
@@ -1576,7 +1606,17 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   <Field
     component={[Function]}
     divClassName="bo_width_747"
-    help="Illustration help"
+    help={
+      <span>
+        Illustration help
+         
+        <FormattedHTMLMessage
+          id="illustration-help-text"
+          tagName="span"
+          values={Object {}}
+        />
+      </span>
+    }
     id="proposal_media"
     label={
       <span>
@@ -1969,7 +2009,17 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   <Field
     component={[Function]}
     divClassName="bo_width_747"
-    help="Illustration help"
+    help={
+      <span>
+        Illustration help
+         
+        <FormattedHTMLMessage
+          id="illustration-help-text"
+          tagName="span"
+          values={Object {}}
+        />
+      </span>
+    }
     id="proposal_media"
     label={
       <span>
@@ -2362,7 +2412,17 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   <Field
     component={[Function]}
     divClassName="bo_width_747"
-    help="Illustration help"
+    help={
+      <span>
+        Illustration help
+         
+        <FormattedHTMLMessage
+          id="illustration-help-text"
+          tagName="span"
+          values={Object {}}
+        />
+      </span>
+    }
     id="proposal_media"
     label={
       <span>

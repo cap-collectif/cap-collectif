@@ -661,7 +661,7 @@ export class ProposalForm extends React.Component<Props, State> {
               name="publishedAt"
               dateProps={{ dateFormat: 'DD/MM/YYYY HH:mm:ss' }}
               type="datetime"
-              divClassName="bo_width_140"
+              divClassName="bo_width_200"
               formName={formName}
               component={component}
               placeholder="date.placeholder"
@@ -815,9 +815,9 @@ export class ProposalForm extends React.Component<Props, State> {
         {proposalForm.usingIllustration && (
           <Field
             divClassName="bo_width_747"
+            maxSize={ILLUSTRATION_MAX_SIZE}
             id="proposal_media"
             name="media"
-            maxSize={ILLUSTRATION_MAX_SIZE}
             component={component}
             type="image"
             label={
@@ -826,7 +826,12 @@ export class ProposalForm extends React.Component<Props, State> {
                 {optional}
               </span>
             }
-            help={proposalForm.illustrationHelpText}
+            help={
+              <span>
+                {proposalForm.illustrationHelpText}&nbsp;
+                <FormattedHTMLMessage id="illustration-help-text" />
+              </span>
+            }
           />
         )}
         {proposalForm.isUsingAnySocialNetworks && (

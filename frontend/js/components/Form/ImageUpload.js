@@ -7,7 +7,9 @@ import { Button, Col, Row } from 'react-bootstrap';
 import Input from './Input';
 import PreviewMedia from './PreviewMedia';
 import Fetcher, { json } from '../../services/Fetcher';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import AppBox from '~ui/Primitives/AppBox';
+import { colors } from '~/utils/colors';
+import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 
 type Props = {|
   value: Object | Array<Object>,
@@ -50,7 +52,7 @@ export class ImageUpload extends React.Component<Props, State> {
 
   onDrop = (acceptedFiles: Array<File>) => {
     const { onChange, multiple, value } = this.props;
-    this.setState({error: ''});
+    this.setState({ error: '' });
     for (const file of acceptedFiles) {
       const formData = new FormData();
       formData.append('file', file);
@@ -205,10 +207,18 @@ export class ImageUpload extends React.Component<Props, State> {
           </Col>
         )}
         {error && error.length > 0 && (
-          <div className="wrapper-error">
-            <Icon name={ICON_NAME.error} size={15} />
-            <FormattedMessage id={error} values={{ size }} />
-          </div>
+          <Col xs={12} sm={12}>
+            <AppBox mt={4} color={colors.dangerColor} className="wrapper-error">
+              <Icon
+                name={ICON_NAME.ERROR}
+                color={colors.dangerColor}
+                size={ICON_SIZE.SM}
+                verticalAlign="-3px"
+              />
+              &nbsp;
+              <FormattedMessage id={error} values={{ size }} />
+            </AppBox>
+          </Col>
         )}
       </Row>
     );
