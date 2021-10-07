@@ -311,10 +311,13 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     text="admin.label.settings.modules"
                     href="/admin/settings/settings.modules/list"
                   />
-                  <SidebarLink
-                    text="admin.label.settings.notifications"
-                    href="/admin/settings/settings.notifications/list"
-                  />
+                  {(!features.unstable__emailing ||
+                    (features.unstable__emailing && !features.unstable__emailing_parameters)) && (
+                    <SidebarLink
+                      text="admin.label.settings.notifications"
+                      href="/admin/settings/settings.notifications/list"
+                    />
+                  )}
                   <SidebarLink
                     text="admin.label.settings.appearance"
                     href="/admin/settings/settings.appearance/list"

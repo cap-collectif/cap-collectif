@@ -2,23 +2,23 @@
 
 exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render correctly 1`] = `
 <div
-  className="sc-bdnxRM Flex___StyledAppBox-RSPpX fDWoMk fGTmtL"
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX lkufbK fGTmtL"
 >
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX eGAzNP jFCIdI"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX eGAzNP"
   >
     <div
-      className="sc-bdnxRM fziFat"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX cGcQDd jFCIdI"
     >
       <p
         className="sc-bdnxRM gJQnhc"
       >
-        emailing-service
+        authentication-sender-domains-dkim-spf
       </p>
       <p
         className="sc-bdnxRM lhgRuK"
       >
-        emailing-service-explanation
+        authentication-sender-domains-explanation
          
         <a
           className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"

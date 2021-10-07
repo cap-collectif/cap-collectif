@@ -10,7 +10,7 @@ export type SectionProps = {|
 |};
 
 const Section = ({ children, ...rest }: SectionProps) => (
-  <Flex p={6} direction="column" bg="white" borderRadius={2} {...rest}>
+  <Flex p={6} direction="column" bg="white" borderRadius="8px" {...rest}>
     {children}
   </Flex>
 );

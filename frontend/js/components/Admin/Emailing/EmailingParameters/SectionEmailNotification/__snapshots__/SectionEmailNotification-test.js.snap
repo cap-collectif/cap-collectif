@@ -2,7 +2,7 @@
 
 exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should render correctly 1`] = `
 <div
-  className="sc-bdnxRM Flex___StyledAppBox-RSPpX fDWoMk fGTmtL"
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX lkufbK fGTmtL"
 >
   <div
     className="sc-bdnxRM Flex___StyledAppBox-RSPpX eGAzNP jFCIdI"

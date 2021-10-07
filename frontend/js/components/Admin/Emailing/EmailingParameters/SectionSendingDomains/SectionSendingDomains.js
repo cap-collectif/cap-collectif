@@ -5,7 +5,6 @@ import { graphql, useFragment } from 'react-relay';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Section from '~ui/BackOffice/Section/Section';
 import Table from '~ds/Table';
-import AppBox from '~ui/Primitives/AppBox';
 import Icon from '~ds/Icon/Icon';
 import type { SectionSendingDomains_senderEmailDomains$key } from '~relay/SectionSendingDomains_senderEmailDomains.graphql';
 import type { SectionSendingDomains_senderEmails$key } from '~relay/SectionSendingDomains_senderEmails.graphql';
@@ -46,11 +45,13 @@ const SectionSendingDomains = ({
 
   return (
     <Section direction="row" align="stretch" justify="space-between" spacing={4}>
-      <Flex direction="column" width="30%" spacing={2}>
-        <AppBox mb={7}>
-          <Section.Title>{intl.formatMessage({ id: 'emailing-service' })}</Section.Title>
+      <Flex direction="column" width="30%">
+        <Flex direction="column" mb={7} spacing={2}>
+          <Section.Title>
+            {intl.formatMessage({ id: 'authentication-sender-domains-dkim-spf' })}
+          </Section.Title>
           <Section.Description>
-            {intl.formatMessage({ id: 'emailing-service-explanation' })}{' '}
+            {intl.formatMessage({ id: 'authentication-sender-domains-explanation' })}{' '}
             <Link
               href="https://aide.cap-collectif.com/article/249-authentification-de-votre-domaine-d-envoi"
               target="blank"
@@ -58,7 +59,7 @@ const SectionSendingDomains = ({
               {intl.formatMessage({ id: 'learn.more' })}
             </Link>
           </Section.Description>
-        </AppBox>
+        </Flex>
 
         <ModalsAddDomain intl={intl} />
       </Flex>
