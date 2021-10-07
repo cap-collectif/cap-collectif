@@ -18,6 +18,7 @@ const proposal = {
     name: 'Nom du quartier',
   },
   reference: 'Reference',
+  theme: null,
 };
 
 describe('<ProposalPageMetadata />', () => {

@@ -1698,7 +1698,7 @@ input ChangeProposalContentInput {
 
   """The ID of tipsmeee"""
   tipsmeeeId: String
-  estimation: Int
+  estimation: Float
   likers: [ID!]
   clientMutationId: String
 }
@@ -1750,7 +1750,7 @@ type ChangeProposalDecisionPayload {
 input ChangeProposalNotationInput {
   """The proposal id"""
   proposalId: ID!
-  estimation: Int
+  estimation: Float
   likers: [ID!]
   clientMutationId: String
 }
@@ -8799,7 +8799,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     step: ID
   ): ProposalStepStatus
   likers: [User!]!
-  estimation: Int
+  estimation: Float
   media: Media
   district: ProposalDistrict
 

@@ -80,6 +80,7 @@ export const ProposalPageMetadata = ({
   showCategories,
   showDistricts,
   showNullEstimation,
+  showThemes,
 }: Props) => {
   const estimation = !proposal?.estimation && showNullEstimation ? 0 : proposal?.estimation;
 
@@ -91,6 +92,15 @@ export const ProposalPageMetadata = ({
         (showNullEstimation && proposal?.estimation) ||
         !proposal) && (
         <ProposalPageMetadataContainer>
+          {!proposal || (showThemes && proposal?.theme?.title) ? (
+            <MetadataRow
+              name={ICON_NAME.tag}
+              size={10}
+              color={colors.primaryColor}
+              ready={!!proposal}
+              content={proposal?.theme?.title || ''}
+            />
+          ) : null}
           {!proposal || (showCategories && proposal?.category) ? (
             <MetadataRow
               name={ICON_NAME.tag}
@@ -151,6 +161,9 @@ export default createFragmentContainer(ProposalPageMetadata, {
       ...ProposalDetailLikers_proposal
       id
       estimation
+      theme {
+        title
+      }
       likers {
         id
       }
