@@ -45,6 +45,6 @@ ChangeProposalContentInput:
                 type: 'String'
                 description: 'The ID of tipsmeee'
             estimation:
-                type: 'Int'
+                type: 'Float'
             likers:
                 type: '[ID!]'
