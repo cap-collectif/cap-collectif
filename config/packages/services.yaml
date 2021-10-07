@@ -132,6 +132,8 @@ services:
 
     Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier: ~
 
+    Capco\UserBundle\Facebook\FacebookOptionsModifier: ~
+
     Capco\UserBundle\OpenID\OpenIDExtraMapper:
         arguments:
             $instanceName: '%instance_name%'

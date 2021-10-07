@@ -312,6 +312,27 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                           ],
                           "type": "FranceConnectSSOConfiguration",
                         },
+                        Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "clientId",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "secret",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "FacebookSSOConfiguration",
+                        },
                       ],
                       "storageKey": null,
                     },
@@ -324,7 +345,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "69f2552c95a8fa487d8da3cd3b4e41ab",
+          "cacheID": "66cfad71e8e01767f27a85d23a3b3510",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -344,6 +365,25 @@ fragment AuthentificationAdminPageContent_shieldAdminForm on ShieldAdminForm {
 
 fragment AuthentificationAdminPageContent_ssoConfigurations on SSOConfigurationConnection {
   ...ListSSOConfiguration_ssoConfigurations
+}
+
+fragment FacebookConfigurationCard_ssoConfiguration on FacebookSSOConfiguration {
+  ...FacebookConfigurationModal_ssoConfiguration
+  __typename
+  clientId
+  secret
+  enabled
+}
+
+fragment FacebookConfigurationForm_ssoConfiguration on FacebookSSOConfiguration {
+  __typename
+  clientId
+  secret
+  enabled
+}
+
+fragment FacebookConfigurationModal_ssoConfiguration on FacebookSSOConfiguration {
+  ...FacebookConfigurationForm_ssoConfiguration
 }
 
 fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOConfiguration {
@@ -374,6 +414,7 @@ fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection {
       id
       enabled
       ...FranceConnectConfigurationModal_ssoConfiguration
+      ...FacebookConfigurationCard_ssoConfiguration
     }
   }
 }
@@ -747,6 +788,27 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
                           ],
                           "type": "FranceConnectSSOConfiguration",
                         },
+                        Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "clientId",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "secret",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "FacebookSSOConfiguration",
+                        },
                       ],
                       "storageKey": null,
                     },
@@ -759,7 +821,7 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "69f2552c95a8fa487d8da3cd3b4e41ab",
+          "cacheID": "66cfad71e8e01767f27a85d23a3b3510",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -779,6 +841,25 @@ fragment AuthentificationAdminPageContent_shieldAdminForm on ShieldAdminForm {
 
 fragment AuthentificationAdminPageContent_ssoConfigurations on SSOConfigurationConnection {
   ...ListSSOConfiguration_ssoConfigurations
+}
+
+fragment FacebookConfigurationCard_ssoConfiguration on FacebookSSOConfiguration {
+  ...FacebookConfigurationModal_ssoConfiguration
+  __typename
+  clientId
+  secret
+  enabled
+}
+
+fragment FacebookConfigurationForm_ssoConfiguration on FacebookSSOConfiguration {
+  __typename
+  clientId
+  secret
+  enabled
+}
+
+fragment FacebookConfigurationModal_ssoConfiguration on FacebookSSOConfiguration {
+  ...FacebookConfigurationForm_ssoConfiguration
 }
 
 fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOConfiguration {
@@ -809,6 +890,7 @@ fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection {
       id
       enabled
       ...FranceConnectConfigurationModal_ssoConfiguration
+      ...FacebookConfigurationCard_ssoConfiguration
     }
   }
 }

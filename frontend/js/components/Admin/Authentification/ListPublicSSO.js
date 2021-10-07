@@ -7,13 +7,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import Toggle from '~/components/Ui/Toggle/Toggle';
 import ListGroup from '../../Ui/List/ListGroup';
-import type {
-  Dispatch,
-  FeatureToggle,
-  FeatureToggles,
-  SSOConfigurationInterface,
-  State as GlobalState,
-} from '~/types';
+import type { Dispatch, FeatureToggle, FeatureToggles, State as GlobalState } from '~/types';
 import { toggleFeature } from '~/redux/modules/default';
 import { toggleStatus } from '~/mutations/ToggleSSOConfigurationStatusMutation';
 import FranceConnectConfigurationModal from './FranceConnectConfigurationModal';
@@ -21,6 +15,8 @@ import type { ListPublicSSO_ssoConfigurations } from '~relay/ListPublicSSO_ssoCo
 import type { FranceConnectConfigurationModal_ssoConfiguration$ref } from '~relay/FranceConnectConfigurationModal_ssoConfiguration.graphql';
 import FranceConnectTeaserModal from '~/components/Admin/Authentification/FranceConnectTeaserModal';
 import AppBox from '~ui/Primitives/AppBox';
+import FacebookConfigurationCard from '~/components/Admin/Authentification/FacebookConfigurationCard';
+import type { FacebookConfigurationModal_ssoConfiguration$ref } from '~relay/FacebookConfigurationModal_ssoConfiguration.graphql';
 
 type Props = {|
   ssoConfigurations: ListPublicSSO_ssoConfigurations,
@@ -28,9 +24,22 @@ type Props = {|
   onToggle: (feature: FeatureToggle, value: boolean) => void,
 |};
 
+type SSOConfiguration = {|
+  +__typename: string,
+  +id: string,
+  +enabled: boolean,
+  +clientId: ?string,
+  +secret: ?string,
+|};
+
 export type FranceConnectSSOConfiguration = {|
-  ...SSOConfigurationInterface,
+  ...SSOConfiguration,
   +$fragmentRefs: FranceConnectConfigurationModal_ssoConfiguration$ref,
+|};
+
+export type FacebookSSOConfiguration = {|
+  ...SSOConfiguration,
+  +$fragmentRefs: FacebookConfigurationModal_ssoConfiguration$ref,
 |};
 
 const ListGroupItemWithJustifyContentStart: StyledComponent<{}, {}, typeof ListGroupItem> = styled(
@@ -52,7 +61,7 @@ const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, typeof Button> = styled(
   }
 `;
 
-export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) => {
+export const ListPublicSSO = ({ features, ssoConfigurations }: Props) => {
   const [showFranceConnectModal, setShowFranceConnectModal] = useState<boolean>(false);
 
   const handleClose = () => {
@@ -66,6 +75,14 @@ export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) 
       .map(edge => edge.node)
       .filter(Boolean)
       .find(node => node.__typename === 'FranceConnectSSOConfiguration');
+
+  const facebook =
+    ssoConfigurations.edges &&
+    ssoConfigurations.edges
+      .filter(Boolean)
+      .map(edge => edge.node)
+      .filter(Boolean)
+      .find(node => node.__typename === 'FacebookSSOConfiguration');
 
   return (
     <>
@@ -105,14 +122,11 @@ export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) 
             ssoConfiguration={franceConnect}
           />
         </ListGroupItemWithJustifyContentStart>
-        <ListGroupItemWithJustifyContentStart>
-          <Toggle
-            id="toggle-facebook"
-            checked={features.login_facebook}
-            onChange={() => onToggle('login_facebook', !features.login_facebook)}
-            label={<h5 className="mb-0 mt-0">Facebook</h5>}
-          />
-        </ListGroupItemWithJustifyContentStart>
+        {facebook && (
+          <ListGroupItemWithJustifyContentStart>
+            <FacebookConfigurationCard ssoConfiguration={facebook} />
+          </ListGroupItemWithJustifyContentStart>
+        )}
         <ListGroupItemWithJustifyContentStart>
           <Toggle
             id="toggle-email"
@@ -150,10 +164,11 @@ export default connect<any, any, _, _, _, _>(
         edges {
           node {
             ... on SSOConfiguration {
-              __typename
               id
+              __typename
               enabled
               ...FranceConnectConfigurationModal_ssoConfiguration
+              ...FacebookConfigurationCard_ssoConfiguration
             }
           }
         }

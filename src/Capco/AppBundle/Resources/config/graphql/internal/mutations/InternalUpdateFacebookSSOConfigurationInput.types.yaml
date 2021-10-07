@@ -1,0 +1,15 @@
+InternalUpdateFacebookSSOConfigurationInput:
+    type: relay-mutation-input
+    config:
+        name: UpdateFacebookSSOConfigurationInput
+        description: 'Update a Facebook connect configuration'
+        fields:
+            clientId:
+                type: 'String!'
+                description: 'Client ID.'
+            secret:
+                type: 'String!'
+                description: 'Secret key.'
+            enabled:
+                type: 'Boolean!'
+                description: 'True to enable facebook login.'

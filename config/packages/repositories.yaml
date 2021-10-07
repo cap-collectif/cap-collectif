@@ -394,6 +394,11 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:SSO\FranceConnectSSOConfiguration']
 
+    Capco\AppBundle\Repository\FacebookSSOConfigurationRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:SSO\FacebookSSOConfiguration']
+
     Capco\AppBundle\Repository\UserConnectionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true

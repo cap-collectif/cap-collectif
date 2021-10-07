@@ -831,6 +831,14 @@ InternalMutation:
                     payloadType: InternalUpdateFranceConnectSSOConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFranceConnectSSOConfigurationMutation", [value])'
 
+            updateFacebookSSOConfiguration:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: InternalUpdateFacebookSSOConfigurationInput
+                    payloadType: InternalUpdateFacebookSSOConfigurationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFacebookSSOConfigurationMutation", [value])'
+
             # Locale
             updateLocaleStatus:
                 access: "@=hasRole('ROLE_ADMIN')"

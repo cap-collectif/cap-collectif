@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\SSO\FacebookSSOConfiguration:
+    facebook:
+        id: 'facebook'
+        name: 'Facebook'
+        enabled: true
+        clientId: '***REMOVED***'
+        secret: '***REMOVED***'

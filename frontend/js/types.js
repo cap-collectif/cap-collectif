@@ -165,7 +165,7 @@ export type District = {|
 |};
 
 // @TODO: Add more type in the future here.
-export type SSOType = 'oauth2' | 'franceconnect';
+export type SSOType = 'oauth2' | 'franceconnect' | 'facebook';
 
 export type ReduxStoreSSOConfiguration = {|
   name: string,

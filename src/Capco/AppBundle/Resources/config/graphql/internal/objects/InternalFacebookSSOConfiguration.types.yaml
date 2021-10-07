@@ -1,0 +1,23 @@
+InternalFacebookSSOConfiguration:
+    type: object
+    inherits:
+        - Node
+        - InternalSSOConfiguration
+    config:
+        interfaces:
+            - Node
+            - InternalSSOConfiguration
+        name: FacebookSSOConfiguration
+        description: 'Facebook SSO Configuration.'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: FacebookSSOConfiguration
+            clientId:
+                type: 'String'
+                description: 'Client ID.'
+            secret:
+                type: 'String'
+                description: 'Secret key.'

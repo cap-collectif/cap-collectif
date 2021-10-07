@@ -6,4 +6,5 @@ final class SSOType
 {
     public const FRANCE_CONNECT = 'franceconnect';
     public const OAUTH2 = 'oauth2';
+    public const FACEBOOK = 'facebook';
 }

@@ -27,20 +27,6 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
     </ListPublicSSO__ListGroupItemWithJustifyContentStart>
     <ListPublicSSO__ListGroupItemWithJustifyContentStart>
       <Toggle
-        checked={false}
-        id="toggle-facebook"
-        label={
-          <h5
-            className="mb-0 mt-0"
-          >
-            Facebook
-          </h5>
-        }
-        onChange={[Function]}
-      />
-    </ListPublicSSO__ListGroupItemWithJustifyContentStart>
-    <ListPublicSSO__ListGroupItemWithJustifyContentStart>
-      <Toggle
         checked={true}
         disabled={true}
         id="toggle-email"
@@ -89,20 +75,6 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
       <Relay(Connect(ReduxForm))
         onClose={[Function]}
         show={false}
-      />
-    </ListPublicSSO__ListGroupItemWithJustifyContentStart>
-    <ListPublicSSO__ListGroupItemWithJustifyContentStart>
-      <Toggle
-        checked={false}
-        id="toggle-facebook"
-        label={
-          <h5
-            className="mb-0 mt-0"
-          >
-            Facebook
-          </h5>
-        }
-        onChange={[Function]}
       />
     </ListPublicSSO__ListGroupItemWithJustifyContentStart>
     <ListPublicSSO__ListGroupItemWithJustifyContentStart>

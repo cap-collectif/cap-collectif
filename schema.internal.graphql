@@ -5530,6 +5530,33 @@ enum ExternalServiceConfigurationType {
   MAILER
 }
 
+"""Facebook SSO Configuration."""
+type FacebookSSOConfiguration implements Node & SSOConfiguration {
+  """The ID of an object."""
+  id: ID!
+
+  """The name of configured SSO."""
+  name: String!
+
+  """Does this configuration is enabled?"""
+  enabled: Boolean!
+
+  """Profile URL on the SSO side."""
+  profileUrl: URI
+
+  """Color in hexadecimal of SSO button."""
+  buttonColor: Color!
+
+  """Color in hexadecimal of label SSO button."""
+  labelColor: Color!
+
+  """Client ID."""
+  clientId: String
+
+  """Secret key."""
+  secret: String
+}
+
 """A feature flag."""
 type FeatureFlag {
   type: FeatureFlagType!
@@ -6820,6 +6847,7 @@ type Mutation {
   deleteSSOConfiguration(input: DeleteSSOConfigurationInput!): DeleteSSOConfigurationPayload
   toggleSSOConfigurationStatus(input: ToggleSSOConfigurationStatusInput!): ToggleSSOConfigurationStatusPayload
   updateFranceConnectSSOConfiguration(input: UpdateFranceConnectSSOConfigurationInput!): UpdateFranceConnectSSOConfigurationPayload
+  updateFacebookSSOConfiguration(input: UpdateFacebookSSOConfigurationInput!): UpdateFacebookSSOConfigurationPayload
   updateLocaleStatus(input: UpdateLocaleStatusInput!): UpdateLocaleStatusPayload
   setDefaultLocale(input: SetDefaultLocaleInput!): SetDefaultLocalePayload
   setUserDefaultLocale(input: SetUserDefaultLocaleInput!): SetUserDefaultLocalePayload
@@ -13744,6 +13772,24 @@ input UpdateExternalServiceConfigurationInput {
 type UpdateExternalServiceConfigurationPayload {
   externalServiceConfiguration: ExternalServiceConfiguration!
   error: UpdateExternalServiceConfigurationErrorCode
+  clientMutationId: String
+}
+
+input UpdateFacebookSSOConfigurationInput {
+  """Client ID."""
+  clientId: String!
+
+  """Secret key."""
+  secret: String!
+
+  """True to enable facebook login."""
+  enabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateFacebookSSOConfigurationPayload {
+  """The updated Facebook connect configuration."""
+  facebookSSOConfiguration: FacebookSSOConfiguration
   clientMutationId: String
 }
 

@@ -12,8 +12,10 @@ hwi_oauth:
     resource_owners:
         facebook:
             type: facebook
-            client_id: '%facebook_app_id%'
-            client_secret: '%facebook_app_secret%'
+            options_modifier: Capco\UserBundle\Facebook\FacebookOptionsModifier
+            # Parameters below need to be set and must be a non-empty string because of options resolver's validation from library.
+            client_id: 'fake'
+            client_secret: 'fake'
             scope: 'email'
             options:
                 display: page

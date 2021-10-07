@@ -22,6 +22,7 @@ describe('<AccountForm />', () => {
     ...formMock,
     currentLanguage: 'fr-FR',
     features,
+    ssoList: [],
     languageList: [
       { translationKey: 'french', code: 'fr-FR' },
       { translationKey: 'english', code: 'en-GB' },

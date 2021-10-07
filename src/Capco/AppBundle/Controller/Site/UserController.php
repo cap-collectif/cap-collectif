@@ -49,7 +49,6 @@ class UserController extends AbstractController
 
         $loginSaml = $toggleManager->isActive('login_saml');
         $loginCas = $toggleManager->isActive('login_cas');
-        $loginFacebook = $toggleManager->isActive('login_facebook');
 
         $ssoList = array_filter($ssoConfigurations, function ($sso) {
             return $sso instanceof Oauth2SSOConfiguration && true === $sso->isEnabled();
@@ -72,7 +71,7 @@ class UserController extends AbstractController
             $ssoList[] = ['type' => 'cas', 'name' => 'Cas'];
         }
 
-        $hasEnabledSSO = $loginFacebook || $loginFranceConnect || \count($ssoList) > 0;
+        $hasEnabledSSO = $loginFranceConnect || \count($ssoList) > 0;
 
         $invitation = $repository->findOneByToken($token);
 
@@ -94,7 +93,6 @@ class UserController extends AbstractController
             'token',
             'email',
             'baseUrl',
-            'loginFacebook',
             'loginFranceConnect',
             'ssoList',
             'hasEnabledSSO'

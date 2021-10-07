@@ -14,13 +14,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name = "ssoType", type = "string")
  * @ORM\DiscriminatorMap({
  *      "oauth2"           = "Oauth2SSOConfiguration",
- *      "franceconnect"    = "FranceConnectSSOConfiguration"
+ *      "franceconnect"    = "FranceConnectSSOConfiguration",
+ *      "facebook"         = "FacebookSSOConfiguration"
  * })
  */
 abstract class AbstractSSOConfiguration
 {
-    use UuidTrait;
     use EnableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="name", type="string", nullable=false)
@@ -88,7 +89,7 @@ abstract class AbstractSSOConfiguration
         return $this->labelColor;
     }
 
-    public function setLabelColor(string $labelColor = null): void
+    public function setLabelColor(?string $labelColor = null): void
     {
         $this->labelColor = $labelColor;
     }

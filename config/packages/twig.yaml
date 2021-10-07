@@ -10,7 +10,6 @@ twig:
         sentryDsn: '%sentry_dsn%'
         defaultLocale: '%locale%'
         locales: '%locales%'
-        facebook_app_id: '%facebook_app_id%'
         app_version: '%app_version%'
         google_maps_key: '%google_maps_key%'
         # Register here any services accessibles in templates

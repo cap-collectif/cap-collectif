@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Repository\FacebookSSOConfigurationRepository;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
@@ -18,7 +19,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class OauthConnectController extends ConnectController
 {
     protected $featuresForServices = [
-        'facebook' => ['login_facebook'],
         'twitter' => ['login_twitter'],
         'franceconnect' => ['login_franceconnect'],
     ];
@@ -26,6 +26,7 @@ class OauthConnectController extends ConnectController
     protected HttpUtils $httpUtils;
     protected OAuthUtils $authUtils;
     protected Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository;
+    protected FacebookSSOConfigurationRepository $facebookSSOConfigurationRepository;
     protected Manager $manager;
     protected TranslatorInterface $translator;
     protected LoggerInterface $logger;
@@ -34,6 +35,7 @@ class OauthConnectController extends ConnectController
         HttpUtils $httpUtils,
         OAuthUtils $authUtils,
         Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository,
+        FacebookSSOConfigurationRepository $facebookSSOConfigurationRepository,
         Manager $manager,
         TranslatorInterface $translator,
         LoggerInterface $logger
@@ -41,6 +43,7 @@ class OauthConnectController extends ConnectController
         $this->httpUtils = $httpUtils;
         $this->authUtils = $authUtils;
         $this->oauth2SSOConfigurationRepository = $oauth2SSOConfigurationRepository;
+        $this->facebookSSOConfigurationRepository = $facebookSSOConfigurationRepository;
         $this->manager = $manager;
         $this->translator = $translator;
         $this->logger = $logger;
@@ -136,9 +139,11 @@ class OauthConnectController extends ConnectController
     protected function serviceHasEnabledFeature(string $service): bool
     {
         if ('openid' === $service) {
-            return $this->oauth2SSOConfigurationRepository->findOneBy(['enabled' => true])
-                ? true
-                : false;
+            return (bool) $this->oauth2SSOConfigurationRepository->findOneBy(['enabled' => true]);
+        }
+
+        if ('facebook' === $service) {
+            return (bool) $this->facebookSSOConfigurationRepository->findOneBy(['enabled' => true]);
         }
 
         return $this->manager->hasOneActive($this->getFeaturesForService($service));

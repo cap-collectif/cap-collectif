@@ -22,7 +22,7 @@ import colors from '~/utils/colors';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
-import type { State, Dispatch, FeatureToggles } from '../../../types';
+import type { State, Dispatch, FeatureToggles, ReduxStoreSSOConfiguration } from '../../../types';
 import select from '~/components/Form/Select';
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
 import ConfirmPasswordModal, { passwordForm } from '~/components/User/ConfirmPasswordModal';
@@ -52,6 +52,7 @@ type RelayProps = {| viewer: AccountForm_viewer |};
 
 type StateProps = {|
   +features: FeatureToggles,
+  ssoList: Array<ReduxStoreSSOConfiguration>,
 |};
 
 type Props = {|
@@ -262,10 +263,12 @@ export const AccountForm = ({
   languageList,
   viewer,
   loginWithOpenId,
+  ssoList,
 }: Props) => {
   const [showConfirmPasswordModal, setConfirmPasswordModal] = useState(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
   const [showDissociateSsoModal, setShowDissociateSsoModal] = useState(false);
+  const isFacebookLoginEnabled = ssoList.filter(sso => sso.ssoType === 'facebook').length > 0;
 
   const _renderLanguageSection = () => {
     if (features.multilangue) {
@@ -381,16 +384,16 @@ export const AccountForm = ({
   );
 
   const signMethod = () => {
-    if (features.login_franceconnect && !features.login_facebook && !features.login_gplus) {
+    if (features.login_franceconnect && !isFacebookLoginEnabled && !features.login_gplus) {
       return 'Sign-in-method-fc';
     }
-    if (!features.login_franceconnect && features.login_facebook && features.login_gplus) {
+    if (!features.login_franceconnect && isFacebookLoginEnabled && features.login_gplus) {
       return 'Sign-in-method-fb-gp';
     }
-    if (!features.login_franceconnect && !features.login_facebook && features.login_gplus) {
+    if (!features.login_franceconnect && !isFacebookLoginEnabled && features.login_gplus) {
       return 'Sign-in-method-gp';
     }
-    if (!features.login_franceconnect && features.login_facebook && !features.login_gplus) {
+    if (!features.login_franceconnect && isFacebookLoginEnabled && !features.login_gplus) {
       return 'Sign-in-method-fb';
     }
     return 'Sign-in-method';
@@ -457,7 +460,7 @@ export const AccountForm = ({
               </div>
             </AccountContainer>
           </form>
-          {features.login_franceconnect || features.login_facebook || features.login_gplus ? (
+          {features.login_franceconnect || isFacebookLoginEnabled || features.login_gplus ? (
             <SsoGroup>
               <span className="font-weight-bold">
                 <FormattedMessage id="Sign-in-option" />
@@ -510,7 +513,7 @@ export const AccountForm = ({
                     </>
                   </ListGroupItem>
                 )}
-                {features.login_facebook && (
+                {isFacebookLoginEnabled && (
                   <ListGroupItem className="bgc-fa h-70">
                     <SsoDiv>
                       <SsoIcon type="fb">
@@ -577,6 +580,7 @@ const mapStateToProps = (state: State, props: Props) => {
       isFranceConnectAccount: props.viewer.isFranceConnectAccount || null,
     },
     currentValues: selector(state, 'email', 'language'),
+    ssoList: state.default.ssoList,
   };
 };
 

@@ -1,0 +1,8 @@
+InternalUpdateFacebookSSOConfigurationPayload:
+    type: relay-mutation-payload
+    config:
+        name: UpdateFacebookSSOConfigurationPayload
+        fields:
+            facebookSSOConfiguration:
+                type: 'InternalFacebookSSOConfiguration'
+                description: 'The updated Facebook connect configuration.'

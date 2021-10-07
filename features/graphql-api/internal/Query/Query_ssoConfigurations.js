@@ -30,6 +30,10 @@ const InternalQuery = /* GraphQL */ `
             redirectUri
             environment
           }
+          ... on FacebookSSOConfiguration {
+            clientId
+            secret
+          }
         }
       }
     }

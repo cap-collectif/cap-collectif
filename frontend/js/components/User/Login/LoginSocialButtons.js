@@ -23,7 +23,7 @@ export class LoginSocialButtons extends React.Component<Props> {
     const { features, ssoList } = this.props;
 
     if (
-      !features.login_facebook &&
+      !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'facebook').length > 0) &&
       !features.login_gplus &&
       !features.login_saml &&
       !features.login_cas &&
@@ -65,12 +65,13 @@ export class LoginSocialButtons extends React.Component<Props> {
                       <LoginSocialButton key={index} type="franceConnect" />
                     )
                   );
+                case 'facebook':
+                  return <LoginSocialButton type="facebook" />;
                 default:
                   break;
               }
             },
           )}
-        {features.login_facebook && <LoginSocialButton type="facebook" />}
         {!features.sso_by_pass_auth && (
           <p className="p--centered">
             <FormattedMessage id="login.or" />

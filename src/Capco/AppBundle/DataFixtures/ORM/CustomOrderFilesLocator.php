@@ -146,6 +146,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Prod/EventTranslation.yaml',
             $this->fixturesDir . 'Prod/HighlightedContent.yaml',
             $this->fixturesDir . 'Prod/FranceConnectSSOConfiguration.yaml',
+            $this->fixturesDir . 'Prod/FacebookSSOConfiguration.yaml',
             $this->fixturesDir . 'Prod/SenderEmailDomain.yaml',
             $this->fixturesDir . 'Prod/SenderEmail.yaml',
         ];
@@ -279,6 +280,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/ContactFormTranslation.yaml',
             $this->fixturesDir . 'Dev/FranceConnectSSOConfiguration.yaml',
             $this->fixturesDir . 'Dev/Oauth2SSOConfiguration.yaml',
+            $this->fixturesDir . 'Dev/FacebookSSOConfiguration.yaml',
             $this->fixturesDir . 'Dev/UserConnection.yaml',
             $this->fixturesDir . 'Dev/ProjectDistrictPositioner.yaml',
             $this->fixturesDir . 'Dev/DistrictTranslation.yaml',
