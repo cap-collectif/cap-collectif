@@ -1,0 +1,22 @@
+{% set hotjar_id = capco_site_parameter_value('admin.analytics.hotjarid') %}
+{% if hotjar_id %}
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:{{ hotjar_id }},hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+
+    window.hj('identify', '{{ app.user.id }}', {
+        'id': '{{ app.user.id }}',
+        'email': '{{ app.user.email }}',
+        'username': '{{ app.user.username }}',
+        'isAdmin': '{{ app.user.isAdmin() ? "Yes" : "No" }}',
+        'isSuperAdmin': '{{ app.user.isSuperAdmin() ? "Yes" : "No" }}',
+        'isProjectAdmin': '{{ app.user.isOnlyProjectAdmin() ? "Yes" : "No" }}',
+    });
+</script>
+{% endif %}

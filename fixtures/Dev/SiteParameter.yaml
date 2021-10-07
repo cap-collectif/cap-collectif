@@ -407,3 +407,9 @@ Capco\AppBundle\Entity\SiteParameter:
         value: 4b21169e-6a7c-11ea-bc2b-0242ac1a0004
         position: 0
         type: 0
+    SiteParameterAdminHotJarId:
+        keyname: admin.analytics.hotjarid
+        category: settings.global
+        value: null
+        position: 10
+        type: 0

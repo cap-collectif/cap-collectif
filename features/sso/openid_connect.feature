@@ -3,6 +3,7 @@ Feature: Open ID
 
 Background:
   Given feature "login_openid" is enabled
+  # TODO Perf: this should be replaced by a BDD call
   Given I am logged in as super admin
   And I go to the admin shield configuration page
   And I enable toggle "Oauth2"

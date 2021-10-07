@@ -36,6 +36,7 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         'admin.mail.notifications.receive_address',
         'snalytical-tracking-scripts-on-all-pages',
         'ad-scripts-on-all-pages',
+        'admin.analytics.hotjarid',
         'contact.customcode',
         'members.customcode',
         'projects.customcode',
