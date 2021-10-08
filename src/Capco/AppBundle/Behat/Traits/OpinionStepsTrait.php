@@ -33,12 +33,7 @@ trait OpinionStepsTrait
             'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-2',
     ];
-    protected static $opinionWithNoSources = [
-        'projectSlug' => 'croissance-innovation-disruption',
-        'stepSlug' => 'collecte-des-avis',
-        'opinionTypeSlug' => 'les-causes',
-        'opinionSlug' => 'opinion-sans-sources',
-    ];
+
     protected static $version = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
@@ -123,18 +118,6 @@ trait OpinionStepsTrait
     }
 
     /**
-     * @When I go to an opinion with no sources
-     */
-    public function iGoToAnOpinionWithNoSources()
-    {
-        $this->visitPageWithParams(
-            'opinion page',
-            self::$opinionWithNoSources,
-            'opinion-page-tabs'
-        );
-    }
-
-    /**
      * @When I click the show all opinion votes button
      */
     public function iClickTheShowAllOpinionVotesButton()
@@ -167,20 +150,6 @@ trait OpinionStepsTrait
     {
         $this->waitAndThrowOnFailure(3000, "$('#opinion-share-button').length > 0");
         $this->navigationContext->getPage('opinion page')->clickShareButton();
-    }
-
-    /**
-     * @When I go on the sources tab
-     */
-    public function iGoOnTheSourcesTab()
-    {
-        $page = $this->getCurrentPage();
-        $this->waitAndThrowOnFailure(
-            5000,
-            "$('" . $page->getSelector('sources tab') . "').length > 0"
-        );
-        $page->clickSourcesTab();
-        $this->iWait(1);
     }
 
     /**
@@ -511,78 +480,6 @@ trait OpinionStepsTrait
     }
 
     /**
-     * @When I vote for the first source
-     */
-    public function iVoteForTheFirstSource()
-    {
-        $page = $this->getCurrentPage();
-        $wantedVotesCount = $page->getSourceVotesCount() + 1;
-        $this->clickSourceVoteButtonWithLabel('global.ok');
-        $newVotesCount = $page->getSourceVotesCount();
-        Assert::assertEquals(
-            $wantedVotesCount,
-            $newVotesCount,
-            'Source votes number should be increased by 1.'
-        );
-    }
-
-    /**
-     * @When I delete my vote for the first source
-     */
-    public function iDeleteMyVoteForTheFirstSource()
-    {
-        $page = $this->getCurrentPage();
-        $wantedVotesCount = $page->getSourceVotesCount() - 1;
-        $this->clickSourceVoteButtonWithLabel('global.cancel');
-        $newVotesCount = $page->getSourceVotesCount();
-        Assert::assertEquals(
-            $wantedVotesCount,
-            $newVotesCount,
-            'Source votes number should be decreased by 1.'
-        );
-    }
-
-    /**
-     * I create a new source.
-     *
-     * @When I create a new source
-     */
-    public function iCreateANewSource()
-    {
-        $page = $this->getCurrentPage();
-        $this->waitAndThrowOnFailure(
-            2000,
-            "$('" . $page->getSelector('add source button') . "').length > 0"
-        );
-        $page->clickAddSource();
-        $this->iWait(1);
-        $page->fillSourceForm();
-        $page->submitSourceForm();
-        $this->iWait(2);
-    }
-
-    /**
-     * @Then I should see my new source
-     */
-    public function iShouldSeeMyNewSource()
-    {
-        $page = $this->getCurrentPage();
-        $this->assertPageContainsText('global.sources {"num":1}');
-        $sourcesSelector = $page->getSourcesListSelector();
-        $this->assertElementContainsText($sourcesSelector, 'Titre de la source');
-    }
-
-    /**
-     * @Then the create source button should be disabled
-     */
-    public function theCreateSourceButtonShouldBeDisabled()
-    {
-        $page = $this->getCurrentPage();
-        $button = $page->getAddSourceButton();
-        Assert::assertTrue($button->hasAttribute('disabled'));
-    }
-
-    /**
      * @Then the create opinion button should be disabled
      */
     public function theCreateOpinionButtonShouldBeDisabled()
@@ -591,131 +488,6 @@ trait OpinionStepsTrait
         $this->waitAndThrowOnFailure(3000, "$('#btn-add--les-causes').length > 0");
         $button = $page->find('css', '#btn-add--les-causes');
         Assert::assertTrue($button->hasAttribute('disabled'));
-    }
-
-    /**
-     * @When I edit my source
-     */
-    public function iEditMySource()
-    {
-        $page = $this->getCurrentPage();
-        $votesCount = $page->getSourceVotesCount();
-        Assert::assertNotEquals(
-            0,
-            $votesCount,
-            'Source has no votes from the begining, test will not be conclusive.'
-        );
-        $page->clickSourceEditButton();
-        $this->iWait(1);
-        $page->fillSourceBodyField();
-        $this->checkElement('sourceEditCheck');
-        $page->submitSourceEditForm();
-        $this->iWait(2);
-    }
-
-    /**
-     * I edit my source without confirming my votes lost.
-     *
-     * @When I edit my source without confirming my votes lost
-     */
-    public function iEditMySourceWithoutConfirmingMyVotesLost()
-    {
-        $page = $this->getCurrentPage();
-        $this->iWaitElementToAppearOnPage('#source-U291cmNlOnNvdXJjZTM1 .opinion__votes-nb');
-        $votesCount = $page->getSourceVotesCount();
-        Assert::assertNotEquals(
-            0,
-            $votesCount,
-            'Source has no votes from the begining, test will not be conclusive.'
-        );
-        $page->clickSourceEditButton();
-        $this->iWait(1);
-        $page->fillSourceBodyField();
-        $page->submitSourceEditForm();
-        $this->iWait(2);
-    }
-
-    /**
-     * My source should have lost its votes.
-     *
-     * @Then my source should have lost its votes
-     */
-    public function mySourceShouldHaveLostItsVotes()
-    {
-        $page = $this->getCurrentPage();
-        $votesCount = $page->getSourceVotesCount();
-        Assert::assertEquals(
-            0,
-            $votesCount,
-            'Incorrect votes number ' . $votesCount . ' for source after edition.'
-        );
-    }
-
-    /**
-     * I should not see the source edit button.
-     *
-     * @Then I should not see the source edit button
-     */
-    public function iShouldNotSeeTheSourceEditButton()
-    {
-        $this->iShouldNotSeeElementOnPage('source edit button', 'opinion page');
-    }
-
-    /**
-     * I should not see the source delete button.
-     *
-     * @Then I should not see the source delete button
-     */
-    public function iShouldNotSeeTheSourceDeleteButton()
-    {
-        $this->iShouldNotSeeElementOnPage('source delete button', 'opinion page');
-    }
-
-    /**
-     * I should not see the source report button.
-     *
-     * @Then I should not see the source report button
-     */
-    public function iShouldNotSeeTheSourceReportButton()
-    {
-        $this->iShouldNotSeeElementOnPage('source report button', 'opinion page');
-    }
-
-    /**
-     * @When I click the source report button
-     */
-    public function iClickTheSourceReportButton()
-    {
-        $this->waitAndThrowOnFailure(
-            5000,
-            "$('" . $this->getCurrentPage()->getSelector('source report button') . "').length > 0"
-        );
-        $this->getCurrentPage()->clickSourceReportButton();
-        $this->iWait(1);
-    }
-
-    /**
-     * I delete my source.
-     *
-     * @When I delete my source
-     */
-    public function iDeleteMySource()
-    {
-        $page = $this->getCurrentPage();
-        $page->clickSourceDeleteButton();
-        $this->iWait(1);
-        $page->clickSourceConfirmDeletionButton();
-        $this->iWait(1);
-    }
-
-    /**
-     * I should not see my source anymore.
-     *
-     * @Then I should not see my source anymore
-     */
-    public function iShouldNotSeeMySourceAnymore()
-    {
-        $this->assertPageNotContainsText('Ma super source');
     }
 
     // ************************ Opinion versions **************************************
@@ -890,13 +662,6 @@ trait OpinionStepsTrait
             ->isOpen(self::$opinionInClosedStep);
     }
 
-    protected function opinionWithNoSourcesPageIsOpen()
-    {
-        return $this->navigationContext
-            ->getPage('opinion page')
-            ->isOpen(self::$opinionWithNoSources);
-    }
-
     protected function clickArgumentVoteButtonWithLabel($label)
     {
         $page = $this->getCurrentPage();
@@ -907,21 +672,6 @@ trait OpinionStepsTrait
             'Incorrect button label ' . $buttonLabel . ' on argument vote button.'
         );
         $page->clickArgumentVoteButton();
-        $this->iWait(2);
-    }
-
-    // ************************************** Sources ***************************************************
-
-    protected function clickSourceVoteButtonWithLabel($label)
-    {
-        $page = $this->getCurrentPage();
-        $buttonLabel = $page->getSourceVoteButtonLabel();
-        Assert::assertEquals(
-            $label,
-            $buttonLabel,
-            'Incorrect button label ' . $buttonLabel . ' on source vote button.'
-        );
-        $page->clickSourceVoteButton();
         $this->iWait(2);
     }
 
