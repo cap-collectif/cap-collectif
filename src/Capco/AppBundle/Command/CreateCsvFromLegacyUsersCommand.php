@@ -112,11 +112,11 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (
-            !$this->toggleManager->isActive(Manager::export) &&
-            $this->toggleManager->isActive(Manager::export_legacy_users)
+            !$this->toggleManager->isActive(Manager::export) ||
+            !$this->toggleManager->isActive(Manager::export_legacy_users)
         ) {
             $output->writeln('Feature "export" and "export_legacy_users" must be enabled.');
-
+            
             return 1;
         }
 
