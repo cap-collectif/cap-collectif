@@ -13,7 +13,7 @@
         'url':          url('capco_user_profile_show_all', {'slug': user.slug}),
         'type':         'profile',
         'image':        userMedia,
-        'noindex':      user.profilePageIndexed
+        'noindex':      user.isProfilePageNotIndexed()
     } only %}
 {% endblock %}
 
