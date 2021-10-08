@@ -151,6 +151,9 @@ final class ProjectAdmin extends CapcoAdmin
 
     public function getTemplate($name)
     {
+        if ('list' === $name) {
+                return 'CapcoAdminBundle:Project:list.html.twig';
+        }
         if ('edit' === $name) {
             return 'CapcoAdminBundle:Project:edit.html.twig';
         }

@@ -14,3 +14,4 @@ export { default as ERROR } from './svg/error.svg';
 export { default as QUESTIONNAIRE } from './svg/questionnaire.svg';
 export { default as NEWSPAPER } from './svg/newspaper.svg';
 export { default as FORM } from './svg/form.svg';
+export { default as PROJECT } from './svg/project.svg';

@@ -17,6 +17,7 @@ declare export const SPOT_ICON_NAME = {
     QUESTIONNAIRE: 'QUESTIONNAIRE',
     FORM: 'FORM',
     NEWSPAPER: 'NEWSPAPER',
+    PROJECT: 'PROJECT',
 };
 
 declare const SpotIcon: PolymorphicComponent<ComponentProps<SVGElement> & {

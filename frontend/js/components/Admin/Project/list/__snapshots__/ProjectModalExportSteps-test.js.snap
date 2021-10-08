@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectModalExportSteps /> <TestModalConfirmationDelete /> should render correctly 1`] = `
+<div
+  className="sc-bdnxRM egMNHw"
+>
+  <div
+    aria-orientation="vertical"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX ieTJLY MenuList__MenuItems-gmUGHY QxsKs"
+    data-dialog={true}
+    hidden={true}
+    id="id-2"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onBlurCapture={[Function]}
+    onFocus={[Function]}
+    onFocusCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyDownCapture={[Function]}
+    onKeyUpCapture={[Function]}
+    onTransitionEnd={[Function]}
+    role="menu"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "opacity": 0,
+        "outline": "none",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={-1}
+  >
+    <button
+      aria-controls="id-3"
+      aria-expanded={false}
+      aria-haspopup="dialog"
+      className="MenuListItem__MenuItemInner-gIqqDA kvUUcb"
+      id="id-2-1"
+      onBlurCapture={[Function]}
+      onClick={[Function]}
+      onClickCapture={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyPressCapture={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseDownCapture={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      role="menuitem"
+      tabIndex={0}
+      type="button"
+    >
+      <p
+        className="sc-bdnxRM isZYbz"
+      >
+         
+        project.download.button
+         
+      </p>
+    </button>
+    <div
+      aria-label="delete-confirmation"
+      aria-modal={true}
+      data-dialog={true}
+      hidden={true}
+      id="id-3"
+      onAnimationEnd={[Function]}
+      onBlur={[Function]}
+      onKeyDown={[Function]}
+      onTransitionEnd={[Function]}
+      role="dialog"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex={-1}
+    />
+  </div>
+</div>
+`;

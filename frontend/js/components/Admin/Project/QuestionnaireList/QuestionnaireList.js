@@ -70,7 +70,6 @@ const QuestionnaireList = ({
   );
   const { questionnaires } = data;
   const hasQuestionnaire = questionnaires ? questionnaires.totalCount > 0 : false;
-
   React.useEffect(() => {
     if (firstRendered.current) {
       refetch({
