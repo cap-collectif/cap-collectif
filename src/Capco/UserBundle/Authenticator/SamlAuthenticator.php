@@ -42,6 +42,10 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
             return 'email';
         }
 
+        if ('univ-lyon1' === $this->samlIdp) {
+            return 'urn:oid:0.9.2342.19200300.100.1.3'; // mail
+        }
+
         if ('dev' === $this->samlIdp) {
             return 'https://samltest.id/attributes/role';
         }
