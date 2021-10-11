@@ -11,8 +11,9 @@ use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\ProjectVoter;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -22,32 +23,32 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class DuplicateProjectMutation implements MutationInterface
 {
-    private ProjectRepository $projectRepository;
     private TranslatorInterface $translator;
     private EntityManagerInterface $entityManager;
 
     private array $cloneStatusReferences;
     private array $cloneStepReferences;
+    private GlobalIdResolver $globalIdResolver;
     private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
-        ProjectRepository $projectRepository,
+        GlobalIdResolver $globalIdResolver,
         TranslatorInterface $translator,
         EntityManagerInterface $entityManager,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->projectRepository = $projectRepository;
         $this->translator = $translator;
         $this->entityManager = $entityManager;
         $this->cloneStatusReferences = [];
         $this->cloneStepReferences = [];
+        $this->globalIdResolver = $globalIdResolver;
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function __invoke(Argument $input)
+    public function __invoke(Argument $input, User $viewer)
     {
         $projectId = $input->offsetGet('id');
-        $project = $this->projectRepository->find($projectId);
+        $project = $this->globalIdResolver->resolve($projectId, $viewer);
         if (!$project) {
             throw new UserError('This project does not exist.');
         }
@@ -184,6 +185,13 @@ class DuplicateProjectMutation implements MutationInterface
         return ['oldProject' => $project, 'newProject' => $clonedProject];
     }
 
+    public function isGranted(string $projectId, User $viewer): bool
+    {
+        $project = $this->globalIdResolver->resolve($projectId, $viewer);
+
+        return $this->authorizationChecker->isGranted(ProjectVoter::DUPLICATE, $project);
+    }
+
     private function cloneQuestionnaireNotificationConfiguration(
         Questionnaire $originalQuestionnaire,
         Questionnaire $clonedQuestionnaire
@@ -250,11 +258,5 @@ class DuplicateProjectMutation implements MutationInterface
         $this->cloneStepReferences[$abstractStep->getStep()->getTitle()] = $clonedAbstractStep;
 
         return $clonedAbstractStep;
-    }
-
-    public function isGranted(string $projectId): bool
-    {
-        $project = $this->projectRepository->find($projectId);
-        return $this->authorizationChecker->isGranted(ProjectVoter::DUPLICATE, $project);
     }
 }

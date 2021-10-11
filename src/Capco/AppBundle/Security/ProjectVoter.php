@@ -29,7 +29,7 @@ class ProjectVoter extends Voter
                     self::DELETE,
                     self::EXPORT,
                     self::CREATE_PROPOSAL_FROM_BO,
-                    self::DUPLICATE
+                    self::DUPLICATE,
                 ],
                 true
             );
@@ -60,7 +60,7 @@ class ProjectVoter extends Voter
             case self::CREATE_PROPOSAL_FROM_BO:
                 return self::canCreateProposalFromBo($subject, $viewer);
             case self::DUPLICATE:
-                return self::canDuplicate($subject, $viewer);
+                return self::canDuplicate($viewer);
         }
 
         return false;
@@ -101,8 +101,8 @@ class ProjectVoter extends Voter
         return $viewer->isAdmin() || $viewer === $project->getOwner();
     }
 
-    private static function canDuplicate(Project $project, User $viewer): bool
+    private static function canDuplicate(User $viewer): bool
     {
-        return $viewer->isAdmin() || $viewer === $project->getOwner();
+        return $viewer->isSuperAdmin();
     }
 }

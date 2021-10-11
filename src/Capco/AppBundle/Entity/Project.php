@@ -1299,7 +1299,11 @@ class Project implements IndexableInterface
             return true;
         }
 
-        if ($viewer && ($viewer->isSuperAdmin() || \in_array($viewer, $this->getUserAuthors()))) {
+        $isOwner = $this->owner && $this->owner === $viewer;
+        if (
+            $viewer &&
+            ($viewer->isAdmin() || \in_array($viewer, $this->getUserAuthors()) || $isOwner)
+        ) {
             return true;
         }
 

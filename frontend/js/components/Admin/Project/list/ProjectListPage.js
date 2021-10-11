@@ -35,7 +35,7 @@ export const ProjectListPageQuery: GraphQLTaggedNode = graphql`
     viewer {
       id
       username
-      isProjectAdmin
+      isOnlyProjectAdmin
       isSuperAdmin
       allProjects: projects(affiliations: $affiliations) {
         totalCount
@@ -94,7 +94,7 @@ const ProjectListPage = ({ queryReference, isAdmin }: Props): React.Node => {
               term={term}
               query={query}
               initialValues={modalInitialValues}
-              isProjectAdmin={query.viewer.isProjectAdmin}
+              isOnlyProjectAdmin={query.viewer.isOnlyProjectAdmin}
               noResult={false}
             />
             <Input

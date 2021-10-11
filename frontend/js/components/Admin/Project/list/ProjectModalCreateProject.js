@@ -30,7 +30,7 @@ type PropsBefore = {|
   +intl: IntlShape,
   +viewerId: string,
   +isAdmin: boolean,
-  +isProjectAdmin?: boolean,
+  +isOnlyProjectAdmin?: boolean,
   +orderBy: string,
   +term: string,
   +query: ?ProjectModalCreateProject_query$key,
@@ -78,7 +78,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       ],
     },
     props.isAdmin,
-    props.isProjectAdmin,
+    props.isOnlyProjectAdmin,
   )
     .then(response => {
       if (!response.createProject?.project) {
@@ -109,7 +109,7 @@ const ProjectModalCreateProject = ({
   intl,
   query: queryReference,
   noResult,
-  isProjectAdmin,
+  isOnlyProjectAdmin,
 }: Props): React.Node => {
   const data = useFragment(FRAGMENT, queryReference);
   const loadAuthorOptions = () =>
@@ -167,7 +167,7 @@ const ProjectModalCreateProject = ({
                 aria-autocomplete="list"
                 aria-haspopup="true"
                 role="combobox"
-                disabled={isProjectAdmin}
+                disabled={isOnlyProjectAdmin}
                 debounce
                 required
                 autoload

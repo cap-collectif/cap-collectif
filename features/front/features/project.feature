@@ -239,11 +239,6 @@ Scenario: Super Admin can access to all private projects
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
   Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
 
-Scenario: An admin can't access a private project of an other admin
-  Given I am logged in as admin
-  And I go to "https://capco.test/project/project-pour-la-force-visible-par-mauriau-seulement/collect/collecte-des-propositions-pour-la-force"
-  Then I should see 'restricted-access'
-
 Scenario: Admin access to a project accessible for admins only
   Given I am logged in as admin
   And I visited "collect page" with:

@@ -84,10 +84,10 @@ describe('Internal | duplicateProject', () => {
       DuplicateProjectMutation,
       {
         input: {
-          id: 'projectIdf',
+          id: toGlobalId('Project', 'projectIdf'),
         },
       },
-      'internal_admin',
+      'internal_super_admin',
     );
     const newProject = duplicateProjectResponse.duplicateProject.newProject;
     const oldProject = duplicateProjectResponse.duplicateProject.oldProject;
