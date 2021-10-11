@@ -16,10 +16,10 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateRequirementMutation implements MutationInterface
 {
-    private $em;
-    private $requirementRepository;
-    private $userRequirementRepository;
-    private $logger;
+    private EntityManagerInterface $em;
+    private RequirementRepository $requirementRepository;
+    private UserRequirementRepository $userRequirementRepository;
+    private LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,

@@ -2314,6 +2314,27 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                               "kind": "InlineFragment",
                                               "selections": Array [
                                                 Object {
+                                                  "condition": "isAuthenticated",
+                                                  "kind": "Condition",
+                                                  "passingValue": true,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "viewerHasCode",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                },
+                                              ],
+                                              "type": "IdentificationCodeRequirement",
+                                            },
+                                            Object {
+                                              "abstractKey": null,
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
                                                   "alias": null,
                                                   "args": null,
                                                   "kind": "ScalarField",
@@ -2350,7 +2371,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7352e62d2517e2f502e4ee7e4810cafb",
+          "cacheID": "cb8eeec979f93c5e93d0d86f9bbf7506",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2711,6 +2732,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
         }
         ... on PhoneRequirement {
           viewerValue @include(if: $isAuthenticated)
+        }
+        ... on IdentificationCodeRequirement {
+          viewerHasCode @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label
@@ -5140,6 +5164,27 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                               "kind": "InlineFragment",
                                               "selections": Array [
                                                 Object {
+                                                  "condition": "isAuthenticated",
+                                                  "kind": "Condition",
+                                                  "passingValue": true,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "viewerHasCode",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                },
+                                              ],
+                                              "type": "IdentificationCodeRequirement",
+                                            },
+                                            Object {
+                                              "abstractKey": null,
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
                                                   "alias": null,
                                                   "args": null,
                                                   "kind": "ScalarField",
@@ -5176,7 +5221,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7352e62d2517e2f502e4ee7e4810cafb",
+          "cacheID": "cb8eeec979f93c5e93d0d86f9bbf7506",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5537,6 +5582,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
         }
         ... on PhoneRequirement {
           viewerValue @include(if: $isAuthenticated)
+        }
+        ... on IdentificationCodeRequirement {
+          viewerHasCode @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label

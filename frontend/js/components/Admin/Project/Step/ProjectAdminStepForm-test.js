@@ -34,7 +34,7 @@ describe('<ProjectAdminStepForm />', () => {
       startAt: 'date',
       endAt: null,
       title: 'testTitle',
-      type: 'OtherStep',
+      __typename: 'OtherStep',
       timeless: false,
       isAnonymousParticipationAllowed: false,
       customCode: '<>code</>',

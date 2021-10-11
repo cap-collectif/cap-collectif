@@ -39,7 +39,7 @@ export const validate = ({ steps }: StepTypes) => {
 
   /* QuestionnaireStep */
   const questionnaires = steps
-    .filter(s => s.type === 'QuestionnaireStep')
+    .filter(s => s.__typename === 'QuestionnaireStep')
     .map(s => s.questionnaire.value);
 
   if (questionnaires.some((item, index) => questionnaires.indexOf(item) !== index)) {

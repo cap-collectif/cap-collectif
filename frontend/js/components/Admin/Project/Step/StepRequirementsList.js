@@ -18,7 +18,7 @@ import toggle from '~/components/Form/Toggle';
 import InputRequirement from '~/components/Ui/Form/InputRequirement';
 import type { RequirementType } from '~relay/UpdateProjectAlphaMutation.graphql';
 import { RequirementDragItem, CheckboxPlaceholder } from './ProjectAdminStepForm.style';
-import type { Dispatch } from '~/types';
+import type { Dispatch, Uuid } from '~/types';
 
 export type Requirement = {|
   type: RequirementType | string,
@@ -39,7 +39,7 @@ type Props = {|
   onInputDelete: (index: number) => void,
 |};
 
-export const getUId = () =>
+export const getUId = (): Uuid =>
   `_${Math.random()
     .toString(36)
     .substr(2, 9)}`;
@@ -49,7 +49,7 @@ const requirementFactory = (
   checked: boolean,
   label: string,
   id?: ?string,
-) => ({ type, checked, label, id, uniqueId: getUId() });
+): Requirement => ({ type, checked, label, id, uniqueId: getUId() });
 
 export const formatRequirements = (requirements: Array<Requirement>) =>
   requirements
@@ -61,15 +61,29 @@ export const formatRequirements = (requirements: Array<Requirement>) =>
       label: r.type === 'CHECKBOX' ? r.label : null,
     }));
 
-export function createRequirements(step: { type: string, requirements?: ?Array<Requirement> }) {
+const isIdentificationCodeReady = false;
+
+export const doesStepSupportRequirements = (step: {
+  __typename: string,
+  requirements?: ?Array<Requirement>,
+}): boolean => {
+  return !(
+    step.__typename !== 'CollectStep' &&
+    step.__typename !== 'SelectionStep' &&
+    step.__typename !== 'ConsultationStep' &&
+    step.__typename !== 'QuestionnaireStep'
+  );
+};
+
+export function createRequirements(step: {
+  __typename: string,
+  requirements?: ?Array<Requirement>,
+}): Array<Requirement> {
   const requirements = [];
-  if (
-    step.type !== 'CollectStep' &&
-    step.type !== 'SelectionStep' &&
-    step.type !== 'ConsultationStep' &&
-    step.type !== 'RequirementStep'
-  )
+
+  if (!doesStepSupportRequirements(step)) {
     return requirements;
+  }
 
   const initialRequirements = step.requirements || [];
   if (!initialRequirements.some((r: Requirement) => r.type === 'FIRSTNAME'))
@@ -83,6 +97,13 @@ export function createRequirements(step: { type: string, requirements?: ?Array<R
   if (!initialRequirements.some((r: Requirement) => r.type === 'POSTAL_ADDRESS'))
     requirements.push(
       requirementFactory('POSTAL_ADDRESS', false, 'admin.fields.event.address', null),
+    );
+  if (
+    isIdentificationCodeReady &&
+    !initialRequirements.some((r: Requirement) => r.type === 'IDENTIFICATION_CODE')
+  )
+    requirements.push(
+      requirementFactory('IDENTIFICATION_CODE', false, 'identification_code', null),
     );
   initialRequirements.forEach((requirement: Requirement) => {
     switch (requirement.type) {
@@ -110,6 +131,11 @@ export function createRequirements(step: { type: string, requirements?: ?Array<R
       case 'CHECKBOX':
         requirements.push(
           requirementFactory('CHECKBOX', true, requirement?.label || '', requirement.id),
+        );
+        break;
+      case 'IDENTIFICATION_CODE':
+        requirements.push(
+          requirementFactory('IDENTIFICATION_CODE', true, 'identification_code', requirement.id),
         );
         break;
       default:

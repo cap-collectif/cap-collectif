@@ -14,8 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Requirement
 {
-    use UuidTrait;
     use PositionableTrait;
+    use UuidTrait;
 
     public const CHECKBOX = 'CHECKBOX';
     public const FIRSTNAME = 'FIRSTNAME';
@@ -23,6 +23,7 @@ class Requirement
     public const PHONE = 'PHONE';
     public const DATE_OF_BIRTH = 'DATE_OF_BIRTH';
     public const POSTAL_ADDRESS = 'POSTAL_ADDRESS';
+    public const IDENTIFICATION_CODE = 'IDENTIFICATION_CODE';
 
     public static $requirementsLabels = [
         self::CHECKBOX => 'check-box',
@@ -31,24 +32,25 @@ class Requirement
         self::PHONE => 'mobile-phone',
         self::DATE_OF_BIRTH => 'form.label_date_of_birth',
         self::POSTAL_ADDRESS => 'admin.fields.event.address',
+        self::IDENTIFICATION_CODE => 'identification_code',
     ];
 
     /**
      * @ORM\Column(name="type", type="string")
      * @Assert\NotNull()
      */
-    private $type = self::CHECKBOX;
+    private ?string $type = self::CHECKBOX;
 
     /**
      * @ORM\Column(name="label", type="string", nullable=true)
      */
-    private $label;
+    private ?string $label = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="requirements")
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false)
      */
-    private $step;
+    private AbstractStep $step;
 
     public function getType(): string
     {

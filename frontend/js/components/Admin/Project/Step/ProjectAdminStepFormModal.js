@@ -48,7 +48,7 @@ export const ProjectAdminStepFormModal = ({
       <ProjectAdminStepForm
         isCreating={isCreating}
         formName={form}
-        step={{ ...step, type }}
+        step={{ ...step, __typename: type }}
         index={index}
         handleClose={onClose}
         project={project}

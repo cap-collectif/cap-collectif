@@ -3,10 +3,31 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { createMemoryHistory } from 'history';
-import { intlMock, formMock, $refType } from '~/mocks';
+import { intlMock, formMock, $refType, $fragmentRefs } from '~/mocks';
 import { ReplyForm } from './ReplyForm';
 
 describe('<ReplyForm />', () => {
+  const step = {
+    id: 'step1',
+    title: 'Step 1',
+    requirements: {
+      reason: null,
+      totalCount: 3,
+      viewerMeetsTheRequirements: true,
+    },
+    $fragmentRefs,
+  };
+  const stepWithRequirementNotFullFill = {
+    id: 'step1',
+    title: 'Step 1',
+    requirements: {
+      reason: null,
+      totalCount: 3,
+      viewerMeetsTheRequirements: false,
+    },
+    $fragmentRefs,
+  };
+
   const questionnaireProps = {
     multipleRepliesAllowed: true,
     anonymousAllowed: true,
@@ -325,13 +346,14 @@ describe('<ReplyForm />', () => {
     ],
     history: createMemoryHistory(),
     user: null,
+    invalidRequirements: false,
   };
 
   it('should render correctly with equal required and facultative fields', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
-          step: { id: 'step1', title: 'Step 1' },
+          step,
           questions: [requiredText, requiredRadio, facultativeSelect, facultativeRanking],
           ...questionnaireProps,
         }}
@@ -346,7 +368,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
-          step: { id: 'step1', title: 'Step 1' },
+          step,
           questions: [
             requiredText,
             facultativeCheckbox,
@@ -367,7 +389,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
-          step: { id: 'step1', title: 'Step 1' },
+          step,
           questions: [requiredText, requiredRadio, facultativeRanking],
           ...questionnaireProps,
         }}
@@ -382,7 +404,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
-          step: { id: 'step1', title: 'Step 1' },
+          step,
           questions: [requiredText, requiredRadio],
           ...questionnaireProps,
         }}
@@ -397,7 +419,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
-          step: { id: 'step1', title: 'Step 1' },
+          step,
           questions: [facultativeCheckbox, facultativeSelect, facultativeRanking],
           ...questionnaireProps,
         }}
@@ -412,12 +434,47 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
-          step: { id: 'step1', title: 'Step 1' },
+          step,
           questions: [facultativeCheckbox, facultativeSelectWithLotOfChoices, facultativeRanking],
           ...questionnaireProps,
         }}
         reply={null}
         {...props}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with requirements filled', () => {
+    const wrapper = shallow(
+      <ReplyForm
+        questionnaire={{
+          step,
+          questions: [facultativeCheckbox],
+          ...questionnaireProps,
+        }}
+        reply={null}
+        {...props}
+        user={{
+          id: 'connectedUser',
+        }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly with requirements not full filled', () => {
+    const wrapper = shallow(
+      <ReplyForm
+        questionnaire={{
+          step: stepWithRequirementNotFullFill,
+          questions: [facultativeCheckbox],
+          ...questionnaireProps,
+        }}
+        reply={null}
+        {...props}
+        user={{
+          id: 'connectedUser',
+        }}
       />,
     );
     expect(wrapper).toMatchSnapshot();

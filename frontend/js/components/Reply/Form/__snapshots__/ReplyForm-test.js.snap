@@ -1919,3 +1919,410 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
   </form>
 </ReplyFormstyle__ReplyFormContainer>
 `;
+
+exports[`<ReplyForm /> should render correctly with requirements filled 1`] = `
+<ReplyFormstyle__ReplyFormContainer
+  id="reply-form-container"
+>
+  <form
+    id="reply-form"
+    onSubmit={[MockFunction]}
+  >
+    <Uncontrolled(Panel)
+      bsStyle="primary"
+      id="required-conditions"
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <FormattedMessage
+          id="requirements"
+          values={Object {}}
+        />
+         
+        <Label
+          bsClass="label"
+          bsStyle="primary"
+        >
+          <FormattedMessage
+            id="filled"
+            values={Object {}}
+          />
+        </Label>
+      </PanelHeading>
+    </Uncontrolled(Panel)>
+    <FieldArray
+      change={[MockFunction]}
+      component={[Function]}
+      disabled={false}
+      form="formName"
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
+        }
+      }
+      memoize={[Function]}
+      name="responses"
+      questions={
+        Array [
+          Object {
+            "__typename": "MultipleChoiceQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "choices": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "color": null,
+                    "description": "description",
+                    "id": "20",
+                    "image": null,
+                    "title": "Athlétisme",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "color": null,
+                    "description": "description",
+                    "id": "21",
+                    "image": null,
+                    "title": "Natation",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "color": null,
+                    "description": "description",
+                    "id": "22",
+                    "image": null,
+                    "title": "Sports collectifs",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "color": null,
+                    "description": "description",
+                    "id": "23",
+                    "image": null,
+                    "title": "Sports individuels",
+                  },
+                },
+              ],
+              "pageInfo": Object {
+                "hasNextPage": false,
+              },
+              "totalCount": 4,
+            },
+            "description": "description of question",
+            "destinationJumps": Array [],
+            "helpText": "Plusieurs choix sont possibles",
+            "hidden": false,
+            "id": "11",
+            "isOtherAllowed": true,
+            "jumps": Array [],
+            "number": 3,
+            "position": 2,
+            "private": false,
+            "required": false,
+            "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "type": "checkbox",
+            "validationRule": null,
+          },
+        ]
+      }
+      reply={null}
+      responses={
+        Array [
+          Object {
+            "question": "Nelson Monfort parle-t-il:",
+            "value": "Trop fort (Mon sonotone est tout neuf)",
+          },
+          Object {
+            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "value": Object {
+              "labels": Array [
+                "Superman",
+              ],
+              "other": "Pikachu",
+            },
+          },
+        ]
+      }
+      typeForm="questionnaire"
+    />
+    <hr
+      className="mb-30"
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      helpPrint={false}
+      id="formName-reply-private"
+      name="private"
+      type="checkbox"
+      typeForm="questionnaire"
+    >
+      <FormattedMessage
+        id="reply.form.private"
+        values={Object {}}
+      />
+    </Field>
+    <div
+      className="btn-toolbar btn-box sticky"
+    >
+      <ButtonGroup
+        block={false}
+        bsClass="btn-group"
+        className="btn-group"
+        justified={false}
+        vertical={false}
+      >
+        <Connect(SubmitButton)
+          bsStyle="primary"
+          disabled={true}
+          id="formName-submit-create-draft-reply"
+          label="global.save_as_draft"
+          onSubmit={[Function]}
+          type="submit"
+        />
+      </ButtonGroup>
+      <ButtonGroup
+        block={false}
+        bsClass="btn-group"
+        className="btn-group"
+        justified={false}
+        vertical={false}
+      >
+        <Connect(SubmitButton)
+          bsStyle="info"
+          disabled={true}
+          id="formName-submit-create-reply"
+          label="global.send"
+          onSubmit={[Function]}
+          type="submit"
+        />
+      </ButtonGroup>
+    </div>
+  </form>
+</ReplyFormstyle__ReplyFormContainer>
+`;
+
+exports[`<ReplyForm /> should render correctly with requirements not full filled 1`] = `
+<ReplyFormstyle__ReplyFormContainer
+  id="reply-form-container"
+>
+  <form
+    id="reply-form"
+    onSubmit={[MockFunction]}
+  >
+    <Uncontrolled(Panel)
+      bsStyle="primary"
+      id="required-conditions"
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <FormattedMessage
+          id="requirements"
+          values={Object {}}
+        />
+         
+      </PanelHeading>
+      <PanelBody
+        bsClass="panel"
+        collapsible={false}
+      >
+        <WYSIWYGRender
+          value={null}
+        />
+        <Relay(Connect(ReduxForm))
+          step={
+            Object {
+              "$fragmentRefs": null,
+              "id": "step1",
+              "requirements": Object {
+                "reason": null,
+                "totalCount": 3,
+                "viewerMeetsTheRequirements": false,
+              },
+              "title": "Step 1",
+            }
+          }
+        />
+      </PanelBody>
+    </Uncontrolled(Panel)>
+    <FieldArray
+      change={[MockFunction]}
+      component={[Function]}
+      disabled={false}
+      form="formName"
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
+        }
+      }
+      memoize={[Function]}
+      name="responses"
+      questions={
+        Array [
+          Object {
+            "__typename": "MultipleChoiceQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "choices": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "color": null,
+                    "description": "description",
+                    "id": "20",
+                    "image": null,
+                    "title": "Athlétisme",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "color": null,
+                    "description": "description",
+                    "id": "21",
+                    "image": null,
+                    "title": "Natation",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "color": null,
+                    "description": "description",
+                    "id": "22",
+                    "image": null,
+                    "title": "Sports collectifs",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "color": null,
+                    "description": "description",
+                    "id": "23",
+                    "image": null,
+                    "title": "Sports individuels",
+                  },
+                },
+              ],
+              "pageInfo": Object {
+                "hasNextPage": false,
+              },
+              "totalCount": 4,
+            },
+            "description": "description of question",
+            "destinationJumps": Array [],
+            "helpText": "Plusieurs choix sont possibles",
+            "hidden": false,
+            "id": "11",
+            "isOtherAllowed": true,
+            "jumps": Array [],
+            "number": 3,
+            "position": 2,
+            "private": false,
+            "required": false,
+            "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "type": "checkbox",
+            "validationRule": null,
+          },
+        ]
+      }
+      reply={null}
+      responses={
+        Array [
+          Object {
+            "question": "Nelson Monfort parle-t-il:",
+            "value": "Trop fort (Mon sonotone est tout neuf)",
+          },
+          Object {
+            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "value": Object {
+              "labels": Array [
+                "Superman",
+              ],
+              "other": "Pikachu",
+            },
+          },
+        ]
+      }
+      typeForm="questionnaire"
+    />
+    <hr
+      className="mb-30"
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      helpPrint={false}
+      id="formName-reply-private"
+      name="private"
+      type="checkbox"
+      typeForm="questionnaire"
+    >
+      <FormattedMessage
+        id="reply.form.private"
+        values={Object {}}
+      />
+    </Field>
+    <div
+      className="btn-toolbar btn-box sticky"
+    >
+      <ButtonGroup
+        block={false}
+        bsClass="btn-group"
+        className="btn-group"
+        justified={false}
+        vertical={false}
+      >
+        <Connect(SubmitButton)
+          bsStyle="primary"
+          disabled={true}
+          id="formName-submit-create-draft-reply"
+          label="global.save_as_draft"
+          onSubmit={[Function]}
+          type="submit"
+        />
+      </ButtonGroup>
+      <ButtonGroup
+        block={false}
+        bsClass="btn-group"
+        className="btn-group"
+        justified={false}
+        vertical={false}
+      >
+        <Connect(SubmitButton)
+          bsStyle="info"
+          disabled={true}
+          id="formName-submit-create-reply"
+          label="global.send"
+          onSubmit={[Function]}
+          type="submit"
+        />
+      </ButtonGroup>
+    </div>
+  </form>
+</ReplyFormstyle__ReplyFormContainer>
+`;

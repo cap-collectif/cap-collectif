@@ -27,7 +27,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
@@ -40,7 +39,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "closed step 2",
-              "type": "presentation",
               "url": "http://capco/closed-step2/show-link",
             },
             Object {
@@ -53,7 +51,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step 1",
-              "type": "presentation",
               "url": "http://capco/future-step1/show-link",
             },
           ],
@@ -123,7 +120,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
@@ -136,7 +132,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "closed step 2",
-              "type": "presentation",
               "url": "http://capco/closed-step2/show-link",
             },
             Object {
@@ -149,7 +144,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step 1",
-              "type": "presentation",
               "url": "http://capco/future-step1/show-link",
             },
           ],
@@ -178,7 +172,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
@@ -191,7 +184,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "closed step 2",
-              "type": "presentation",
               "url": "http://capco/closed-step2/show-link",
             },
             Object {
@@ -204,7 +196,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step 1",
-              "type": "presentation",
               "url": "http://capco/future-step1/show-link",
             },
           ],
@@ -250,7 +241,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step 1",
-              "type": "presentation",
               "url": "http://capco/future-step1/show-link",
             },
             Object {
@@ -263,7 +253,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step 2",
-              "type": "presentation",
               "url": "http://capco/future-step2/show-link",
             },
           ],
@@ -333,7 +322,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step 1",
-              "type": "presentation",
               "url": "http://capco/future-step1/show-link",
             },
             Object {
@@ -346,7 +334,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step 2",
-              "type": "presentation",
               "url": "http://capco/future-step2/show-link",
             },
           ],
@@ -392,7 +379,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": null,
               "url": "",
             },
             Object {
@@ -405,7 +391,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 2",
-              "type": "collect",
               "url": "http://capco/step2/show-link",
             },
             Object {
@@ -418,7 +403,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
               "url": "http://capco/step1/show-link",
             },
             Object {
@@ -431,7 +415,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step",
-              "type": null,
               "url": "",
             },
           ],
@@ -501,7 +484,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": null,
               "url": "",
             },
             Object {
@@ -514,7 +496,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 2",
-              "type": "collect",
               "url": "http://capco/step2/show-link",
             },
             Object {
@@ -527,7 +508,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
               "url": "http://capco/step1/show-link",
             },
             Object {
@@ -540,7 +520,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step",
-              "type": null,
               "url": "",
             },
           ],
@@ -562,7 +541,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         },
         "timeless": false,
         "title": "Open step 1",
-        "type": "collect",
         "url": "http://capco/step1/show-link",
       }
     }
@@ -586,7 +564,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": null,
             "title": "Closed step",
-            "type": null,
             "url": "",
           },
           Object {
@@ -599,7 +576,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": false,
             "title": "Open step 2",
-            "type": "collect",
             "url": "http://capco/step2/show-link",
           },
           Object {
@@ -612,7 +588,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": false,
             "title": "Open step 1",
-            "type": "collect",
             "url": "http://capco/step1/show-link",
           },
           Object {
@@ -625,7 +600,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": null,
             "title": "Future step",
-            "type": null,
             "url": "",
           },
         ],
@@ -682,7 +656,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": null,
               "url": "",
             },
             Object {
@@ -695,7 +668,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 2",
-              "type": "collect",
               "url": "http://capco/step2/show-link",
             },
             Object {
@@ -708,7 +680,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
               "url": "http://capco/step1/show-link",
             },
             Object {
@@ -721,7 +692,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step",
-              "type": null,
               "url": "",
             },
           ],
@@ -791,7 +761,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": null,
               "url": "",
             },
             Object {
@@ -804,7 +773,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 2",
-              "type": "collect",
               "url": "http://capco/step2/show-link",
             },
             Object {
@@ -817,7 +785,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
               "url": "http://capco/step1/show-link",
             },
             Object {
@@ -830,7 +797,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step",
-              "type": null,
               "url": "",
             },
           ],
@@ -859,7 +825,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": null,
               "url": "",
             },
             Object {
@@ -872,7 +837,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 2",
-              "type": "collect",
               "url": "http://capco/step2/show-link",
             },
             Object {
@@ -885,7 +849,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
               "url": "http://capco/step1/show-link",
             },
             Object {
@@ -898,7 +861,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step",
-              "type": null,
               "url": "",
             },
           ],
@@ -920,7 +882,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         },
         "timeless": false,
         "title": "Open step 1",
-        "type": "collect",
         "url": "http://capco/step1/show-link",
       }
     }
@@ -944,7 +905,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": null,
             "title": "Closed step",
-            "type": null,
             "url": "",
           },
           Object {
@@ -957,7 +917,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": false,
             "title": "Open step 2",
-            "type": "collect",
             "url": "http://capco/step2/show-link",
           },
           Object {
@@ -970,7 +929,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": false,
             "title": "Open step 1",
-            "type": "collect",
             "url": "http://capco/step1/show-link",
           },
           Object {
@@ -983,7 +941,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": null,
             "title": "Future step",
-            "type": null,
             "url": "",
           },
         ],
@@ -1040,7 +997,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": null,
               "url": "",
             },
             Object {
@@ -1053,7 +1009,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step",
-              "type": "presentation",
               "url": "http://capco/step/show-link",
             },
             Object {
@@ -1066,7 +1021,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": true,
               "title": "timeless step",
-              "type": "collect",
               "url": "http://capco/timeless-step/show-link",
             },
             Object {
@@ -1079,7 +1033,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step",
-              "type": null,
               "url": "",
             },
           ],
@@ -1149,7 +1102,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Closed step",
-              "type": null,
               "url": "",
             },
             Object {
@@ -1162,7 +1114,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": false,
               "title": "Open step",
-              "type": "presentation",
               "url": "http://capco/step/show-link",
             },
             Object {
@@ -1175,7 +1126,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": true,
               "title": "timeless step",
-              "type": "collect",
               "url": "http://capco/timeless-step/show-link",
             },
             Object {
@@ -1188,7 +1138,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               },
               "timeless": null,
               "title": "Future step",
-              "type": null,
               "url": "",
             },
           ],
@@ -1210,7 +1159,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         },
         "timeless": true,
         "title": "timeless step",
-        "type": "collect",
         "url": "http://capco/timeless-step/show-link",
       }
     }
@@ -1234,7 +1182,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": null,
             "title": "Closed step",
-            "type": null,
             "url": "",
           },
           Object {
@@ -1247,7 +1194,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": false,
             "title": "Open step",
-            "type": "presentation",
             "url": "http://capco/step/show-link",
           },
           Object {
@@ -1260,7 +1206,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": true,
             "title": "timeless step",
-            "type": "collect",
             "url": "http://capco/timeless-step/show-link",
           },
           Object {
@@ -1273,7 +1218,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             "timeless": null,
             "title": "Future step",
-            "type": null,
             "url": "",
           },
         ],
@@ -1430,7 +1374,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               },
               "timeless": null,
               "title": "Closed step",
-              "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
@@ -1443,7 +1386,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               },
               "timeless": null,
               "title": "closed step 2",
-              "type": "presentation",
               "url": "http://capco/closed-step2/show-link",
             },
           ],
@@ -1513,7 +1455,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               },
               "timeless": null,
               "title": "Closed step",
-              "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
@@ -1526,7 +1467,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               },
               "timeless": null,
               "title": "closed step 2",
-              "type": "presentation",
               "url": "http://capco/closed-step2/show-link",
             },
           ],
@@ -1555,7 +1495,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               },
               "timeless": null,
               "title": "Closed step",
-              "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
@@ -1568,7 +1507,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               },
               "timeless": null,
               "title": "closed step 2",
-              "type": "presentation",
               "url": "http://capco/closed-step2/show-link",
             },
           ],

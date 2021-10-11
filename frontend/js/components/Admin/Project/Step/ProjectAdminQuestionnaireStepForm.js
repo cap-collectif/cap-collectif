@@ -1,18 +1,22 @@
 // @flow
 import * as React from 'react';
 import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
-import { Field } from 'redux-form';
-import { useSelector } from 'react-redux';
-import { useIntl } from 'react-intl';
+import { arrayPush, Field, FieldArray } from 'redux-form';
+import { connect, useSelector } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { FormattedMessage, useIntl } from 'react-intl';
+import component from '~/components/Form/Field';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
 import select from '~/components/Form/Select';
-import renderComponent from '~/components/Form/Field';
+import type { Dispatch, GlobalState } from '~/types';
 import environment from '~/createRelayEnvironment';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
 import { type ProjectAdminQuestionnaireStepFormQuestionnairesQueryResponse } from '~relay/ProjectAdminQuestionnaireStepFormQuestionnairesQuery.graphql';
-import type { GlobalState } from '~/types';
+import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
 
 type Props = {|
+  dispatch: Dispatch,
+  requirements?: Array<Requirement>,
   questionnaire?: {| label: string, value: string |},
 |};
 
@@ -71,7 +75,13 @@ export const loadQuestionnaireOptions = (
   });
 };
 
-export const ProjectAdminQuestionnaireStepForm = ({ questionnaire }: Props) => {
+const formName = 'stepForm';
+
+export const ProjectAdminQuestionnaireStepForm = ({
+  questionnaire,
+  dispatch,
+  requirements,
+}: Props) => {
   const { user } = useSelector((state: GlobalState) => state.user);
   const intl = useIntl();
   const isAdmin = user?.isAdmin || false;
@@ -83,7 +93,7 @@ export const ProjectAdminQuestionnaireStepForm = ({ questionnaire }: Props) => {
         name="footer"
         id="step-footer"
         label={renderLabel('global.footer', intl)}
-        component={renderComponent}
+        component={component}
       />
       {renderSubSection('global.questionnaire')}
       <Field
@@ -103,8 +113,37 @@ export const ProjectAdminQuestionnaireStepForm = ({ questionnaire }: Props) => {
         loadOptions={(term: ?string) => loadQuestionnaireOptions(questionnaire, term, isAdmin)}
         clearable
       />
+      {renderSubSection('requirements')}
+      <FieldArray
+        name="requirements"
+        component={StepRequirementsList}
+        formName={formName}
+        requirements={requirements}
+      />
+      <Button
+        id="js-btn-create-step"
+        bsStyle="primary"
+        className="btn-outline-primary box-content__toolbar mb-20"
+        onClick={() =>
+          dispatch(
+            arrayPush(formName, 'requirements', {
+              uniqueId: getUId(),
+              id: null,
+              type: 'CHECKBOX',
+            }),
+          )
+        }>
+        <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
+      </Button>
+      <Field
+        type="editor"
+        name="requirementsReason"
+        id="step-requirementsReason"
+        label={<FormattedMessage id="reason-for-collection" />}
+        component={component}
+      />
     </>
   );
 };
 
-export default ProjectAdminQuestionnaireStepForm;
+export default connect<any, any, _, _, _, _>()(ProjectAdminQuestionnaireStepForm);

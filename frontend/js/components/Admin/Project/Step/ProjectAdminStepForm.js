@@ -48,7 +48,7 @@ type Props = {|
     id: string,
     label: string,
     title: string,
-    type: string,
+    __typename: string,
     startAt: string,
     endAt: ?string,
     body: string,
@@ -139,7 +139,7 @@ type DebateStepForm = {|
 export type FormValues = {|
   label: string,
   title: string,
-  type: string,
+  __typename: string,
   body: string,
   endAt: ?string,
   startAt: string,
@@ -189,7 +189,7 @@ const getValueDisplayMode = (
 ) => {
   let displayModeEnabled = {};
 
-  if (step.type === 'CollectStep' && !isCreating) {
+  if (step.__typename === 'CollectStep' && !isCreating) {
     displayModeEnabled = {
       isGridViewEnabled: step.form?.isGridViewEnabled,
       isListViewEnabled: step.form?.isListViewEnabled,
@@ -197,7 +197,7 @@ const getValueDisplayMode = (
     };
   }
 
-  if (step.type === 'CollectStep' && isCreating) {
+  if (step.__typename === 'CollectStep' && isCreating) {
     displayModeEnabled = {
       isGridViewEnabled: proposalFormSelected?.isGridViewEnabled,
       isListViewEnabled: proposalFormSelected?.isListViewEnabled,
@@ -205,7 +205,7 @@ const getValueDisplayMode = (
     };
   }
 
-  if (step.type === 'SelectionStep') {
+  if (step.__typename === 'SelectionStep') {
     displayModeEnabled = {
       isGridViewEnabled: project.firstCollectStep?.form?.isGridViewEnabled,
       isListViewEnabled: project.firstCollectStep?.form?.isListViewEnabled,
@@ -255,7 +255,7 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
 
 const validate = (
   {
-    type,
+    __typename,
     label,
     title,
     startAt,
@@ -282,15 +282,15 @@ const validate = (
     errors.startAt = 'global.required';
   }
 
-  if (type === 'QuestionnaireStep') {
+  if (__typename === 'QuestionnaireStep') {
     if (!questionnaire) errors.questionnaire = 'global.required';
   }
 
-  if (type === 'CollectStep') {
+  if (__typename === 'CollectStep') {
     if (!proposalForm) errors.proposalForm = 'global.required';
   }
 
-  if (type === 'ConsultationStep') {
+  if (__typename === 'ConsultationStep') {
     if (!consultations || !consultations.length) errors.consultations = 'global.required';
   }
 
@@ -307,7 +307,7 @@ const validate = (
     }
   }
 
-  if (type === 'DebateStep') {
+  if (__typename === 'DebateStep') {
     errors.question = 'global.required';
   }
 
@@ -371,27 +371,27 @@ export function ProjectAdminStepForm({
   debateType,
 }: Props) {
   const canSetDisplayMode =
-    (step.type === 'SelectionStep' || step.type === 'CollectStep') &&
+    (step.__typename === 'SelectionStep' || step.__typename === 'CollectStep') &&
     (isGridViewEnabled || isListViewEnabled || isMapViewEnabled);
 
   React.useEffect(() => {
     // mainView is not in the reduxForm's initialValues because the proposalForm is selected after.
     // Normally, need to use enableReinitialize but it resets the form...
-    if (mainView && isCreating && step.type === 'CollectStep') {
+    if (mainView && isCreating && step.__typename === 'CollectStep') {
       dispatch(change(stepFormName, 'mainView', mainView));
     }
-  }, [dispatch, isCreating, mainView, step.type]);
+  }, [dispatch, isCreating, mainView, step.__typename]);
 
   return (
     <>
       <Modal.Body>
         <FormContainer onSubmit={handleSubmit} id={form}>
-          {step.type !== 'DebateStep' && renderSubSection('global.general')}
+          {step.__typename !== 'DebateStep' && renderSubSection('global.general')}
 
-          {step.type === 'DebateStep' && (
+          {step.__typename === 'DebateStep' && (
             <>
               <p className="mb-20">
-                <FormattedMessage id="debate.type.question" />
+                <FormattedMessage id="debate.__typename.question" />
               </p>
               <Field
                 type="radio"
@@ -399,7 +399,7 @@ export function ProjectAdminStepForm({
                 id="step-debate-type-face-to-face"
                 component={renderComponent}
                 value="FACE_TO_FACE">
-                <FormattedMessage id="debate.type.face-to-face" />
+                <FormattedMessage id="debate.__typename.face-to-face" />
               </Field>
 
               <Field
@@ -408,7 +408,7 @@ export function ProjectAdminStepForm({
                 id="step-debate-type-wysiwyg"
                 component={renderComponent}
                 value="WYSIWYG">
-                <FormattedMessage id="debate.type.advanced" />
+                <FormattedMessage id="debate.__typename.advanced" />
               </Field>
             </>
           )}
@@ -417,12 +417,14 @@ export function ProjectAdminStepForm({
             type="text"
             name="label"
             id="step-label"
-            placeholder={step.type === 'DebateStep' ? 'placeholderText.debat.menuLabel' : undefined}
+            placeholder={
+              step.__typename === 'DebateStep' ? 'placeholderText.debat.menuLabel' : undefined
+            }
             label={<FormattedMessage id="color.main_menu.text" />}
             component={renderComponent}
           />
 
-          {step.type !== 'DebateStep' && (
+          {step.__typename !== 'DebateStep' && (
             <Field
               type="text"
               name="title"
@@ -432,7 +434,7 @@ export function ProjectAdminStepForm({
             />
           )}
 
-          {step.type === 'DebateStep' && (
+          {step.__typename === 'DebateStep' && (
             <Field
               type="textarea"
               name="title"
@@ -455,13 +457,13 @@ export function ProjectAdminStepForm({
             />
           )}
 
-          {step.type !== 'PresentationStep' && (
+          {step.__typename !== 'PresentationStep' && (
             <>
-              {(step.type === 'SelectionStep' ||
-                step.type === 'CollectStep' ||
-                step.type === 'QuestionnaireStep' ||
-                step.type === 'ConsultationStep' ||
-                step.type === 'DebateStep') && (
+              {(step.__typename === 'SelectionStep' ||
+                step.__typename === 'CollectStep' ||
+                step.__typename === 'QuestionnaireStep' ||
+                step.__typename === 'ConsultationStep' ||
+                step.__typename === 'DebateStep') && (
                 <Field
                   icons
                   component={toggle}
@@ -474,7 +476,7 @@ export function ProjectAdminStepForm({
               {!timeless && renderDateContainer(formName, intl)}
             </>
           )}
-          {step.type === 'DebateStep' && (
+          {step.__typename === 'DebateStep' && (
             <Field
               icons
               component={toggle}
@@ -486,7 +488,7 @@ export function ProjectAdminStepForm({
             />
           )}
 
-          {step.type !== 'DebateStep' && (
+          {step.__typename !== 'DebateStep' && (
             <Field
               type="editor"
               name="body"
@@ -504,16 +506,20 @@ export function ProjectAdminStepForm({
             component={renderComponent}
           />
 
-          {step.type === 'QuestionnaireStep' && (
-            <ProjectAdminQuestionnaireStepForm questionnaire={step.questionnaire} />
+          {step.__typename === 'QuestionnaireStep' && (
+            <ProjectAdminQuestionnaireStepForm
+              questionnaire={step.questionnaire}
+              stepFormName={stepFormName}
+              requirements={requirements}
+            />
           )}
-          {step.type === 'ConsultationStep' && (
+          {step.__typename === 'ConsultationStep' && (
             <ProjectAdminConsultationStepForm
               requirements={requirements}
               consultations={step.consultations}
             />
           )}
-          {step.type === 'SelectionStep' && (
+          {step.__typename === 'SelectionStep' && (
             <ProjectAdminSelectionStepForm
               isBudgetEnabled={isBudgetEnabled}
               isTresholdEnabled={isTresholdEnabled}
@@ -529,9 +535,9 @@ export function ProjectAdminStepForm({
             />
           )}
 
-          {step.type === 'RankingStep' && <ProjectAdminRankingStepForm />}
+          {step.__typename === 'RankingStep' && <ProjectAdminRankingStepForm />}
 
-          {step.type === 'CollectStep' && (
+          {step.__typename === 'CollectStep' && (
             <ProjectAdminCollectStepForm
               isPrivate={isPrivate}
               proposal={step.proposalForm}
@@ -623,9 +629,9 @@ export function ProjectAdminStepForm({
             </ViewsContainer>
           )}
 
-          {step.type === 'DebateStep' && debateType === 'FACE_TO_FACE' && <StepArticle />}
+          {step.__typename === 'DebateStep' && debateType === 'FACE_TO_FACE' && <StepArticle />}
 
-          {step.type === 'DebateStep' && step.debate && isAnonymousParticipationAllowed && (
+          {step.__typename === 'DebateStep' && step.debate && isAnonymousParticipationAllowed && (
             <Accordion>
               <Accordion.Item id="integration-parameter">
                 <Accordion.Button px={0}>
@@ -641,7 +647,7 @@ export function ProjectAdminStepForm({
             </Accordion>
           )}
 
-          {step.type !== 'DebateStep' && renderSubSection('global.publication')}
+          {step.__typename !== 'DebateStep' && renderSubSection('global.publication')}
           <>
             <Field
               component={toggle}
@@ -662,7 +668,7 @@ export function ProjectAdminStepForm({
             )}
           </>
 
-          {step.type !== 'DebateStep' && renderSubSection('global-customization')}
+          {step.__typename !== 'DebateStep' && renderSubSection('global-customization')}
           <CustomCodeArea>
             <Field
               name="customCode"
@@ -709,7 +715,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
     initialValues: {
       // AbstractStep
       url: step?.url ? step.url : null,
-      type: step?.type ? step.type : null,
+      __typename: step?.__typename ? step.__typename : null,
       label: step?.label ? step.label : null,
       body: step?.body ? step.body : null,
       title: step?.title ? step.title : null,
@@ -728,8 +734,8 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       isMapViewEnabled,
       mainView,
       // DebateStep
-      debateType: step.type === 'DebateStep' ? step?.debateType || 'FACE_TO_FACE' : undefined,
-      debateContent: step.type === 'DebateStep' ? step?.debateContent : undefined,
+      debateType: step.__typename === 'DebateStep' ? step?.debateType || 'FACE_TO_FACE' : undefined,
+      debateContent: step.__typename === 'DebateStep' ? step?.debateContent : undefined,
       // QuestionnaireStep
       questionnaire: step?.questionnaire || null,
       footer: step?.footer ? step.footer : null,
@@ -773,15 +779,15 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
     isLimitEnabled: formValueSelector(stepFormName)(state, 'isLimitEnabled') || false,
     isTresholdEnabled: formValueSelector(stepFormName)(state, 'isTresholdEnabled') || false,
     isGridViewEnabled:
-      step.type === 'CollectStep'
+      step.__typename === 'CollectStep'
         ? formValueSelector(stepFormName)(state, 'proposalForm')?.isGridViewEnabled
         : formValueSelector(stepFormName)(state, 'isGridViewEnabled'),
     isListViewEnabled:
-      step.type === 'CollectStep'
+      step.__typename === 'CollectStep'
         ? formValueSelector(stepFormName)(state, 'proposalForm')?.isListViewEnabled
         : formValueSelector(stepFormName)(state, 'isListViewEnabled'),
     isMapViewEnabled:
-      step.type === 'CollectStep'
+      step.__typename === 'CollectStep'
         ? formValueSelector(stepFormName)(state, 'proposalForm')?.isMapViewEnabled
         : formValueSelector(stepFormName)(state, 'isMapViewEnabled'),
     mainView: formValueSelector(stepFormName)(state, 'mainView') || mainView,

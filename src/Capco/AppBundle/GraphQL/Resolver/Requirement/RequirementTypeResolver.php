@@ -10,7 +10,7 @@ use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class RequirementTypeResolver implements ResolverInterface
 {
-    private $typeResolver;
+    private TypeResolver $typeResolver;
 
     public function __construct(TypeResolver $typeResolver)
     {
@@ -36,6 +36,9 @@ class RequirementTypeResolver implements ResolverInterface
         }
         if (Requirement::POSTAL_ADDRESS === $requirement->getType()) {
             return $this->typeResolver->resolve('PostalAddressRequirement');
+        }
+        if (Requirement::IDENTIFICATION_CODE === $requirement->getType()) {
+            return $this->typeResolver->resolve('IdentificationCodeRequirement');
         }
 
         throw new UserError('Could not resolve type of Requirement.');

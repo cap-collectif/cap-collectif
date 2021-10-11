@@ -11,7 +11,7 @@ class RequirementViewerValueResolver implements ResolverInterface
 {
     use ResolverTrait;
 
-    private $userRequirementsRepo;
+    private UserRequirementRepository $userRequirementsRepo;
 
     public function __construct(UserRequirementRepository $userRequirementsRepo)
     {
@@ -39,6 +39,9 @@ class RequirementViewerValueResolver implements ResolverInterface
         }
         if (Requirement::POSTAL_ADDRESS === $requirement->getType()) {
             return $viewer->getPostalAddress();
+        }
+        if (Requirement::IDENTIFICATION_CODE === $requirement->getType()) {
+            return (bool) $viewer->getIdentificationCode();
         }
 
         if (Requirement::CHECKBOX === $requirement->getType()) {

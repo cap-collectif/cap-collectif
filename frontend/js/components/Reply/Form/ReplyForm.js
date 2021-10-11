@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { ButtonGroup } from 'react-bootstrap';
+import { ButtonGroup, Label, Panel } from 'react-bootstrap';
 import {
   change as changeRedux,
   Field,
   FieldArray,
   formValueSelector,
+  isInvalid,
   reduxForm,
   SubmissionError,
 } from 'redux-form';
@@ -33,6 +34,10 @@ import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesVal
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import renderResponses from '~/components/Form/RenderResponses';
 import { analytics } from '~/startup/analytics';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
+import RequirementsForm, {
+  formName as requirementsFormName,
+} from '~/components/Requirements/RequirementsForm';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -44,6 +49,7 @@ type Props = {|
   +history: History,
   +setIsEditingReplyForm?: (isEditing: boolean) => void,
   +setIsShow?: (show: boolean) => void,
+  +invalidRequirements: boolean,
 |};
 
 type FormValues = {|
@@ -222,16 +228,43 @@ export class ReplyForm extends React.Component<Props> {
       responses,
       dispatch,
       reply,
+      user,
+      invalidRequirements,
     } = this.props;
     const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
     const disabled = this.formIsDisabled();
     const isDraft = reply && reply.draft;
 
+    const newReplyOrReplyInDraft = !reply || reply.draft;
+    const replyIsPublishedAndRequirementsAreNotMet =
+      reply && !reply.draft && !questionnaire.step?.requirements?.viewerMeetsTheRequirements;
+    const stepHasRequirement =
+      questionnaire.step?.requirements && questionnaire.step.requirements.totalCount > 0;
+
     return (
       <ReplyFormContainer id="reply-form-container">
         {questionnaire.description && <Description>{questionnaire.description}</Description>}
-
         <form id="reply-form" onSubmit={handleSubmit}>
+          {(newReplyOrReplyInDraft || replyIsPublishedAndRequirementsAreNotMet) &&
+            stepHasRequirement &&
+            user && (
+              <Panel id="required-conditions" bsStyle="primary">
+                <Panel.Heading>
+                  <FormattedMessage id="requirements" />{' '}
+                  {questionnaire.step?.requirements?.viewerMeetsTheRequirements && (
+                    <Label bsStyle="primary">
+                      <FormattedMessage id="filled" />
+                    </Label>
+                  )}
+                </Panel.Heading>
+                {!questionnaire.step?.requirements?.viewerMeetsTheRequirements && (
+                  <Panel.Body>
+                    <WYSIWYGRender value={questionnaire.step?.requirements?.reason} />
+                    <RequirementsForm step={questionnaire.step} />
+                  </Panel.Body>
+                )}
+              </Panel>
+            )}
           <FieldArray
             typeForm={TYPE_FORM.QUESTIONNAIRE}
             name="responses"
@@ -287,7 +320,13 @@ export class ReplyForm extends React.Component<Props> {
                   type="submit"
                   id={`${form}-submit-create-reply`}
                   bsStyle="info"
-                  disabled={(!isDraft && pristine) || invalid || submitting || disabled}
+                  disabled={
+                    invalidRequirements ||
+                    invalid ||
+                    submitting ||
+                    disabled ||
+                    (!isDraft && pristine)
+                  }
                   label={submitting ? 'global.loading' : 'global.send'}
                   onSubmit={() => {
                     analytics.track('submit_reply_click', {
@@ -336,6 +375,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     },
     user: state.user.user,
     form: reply ? getFormNameUpdate(reply.id) : `Create${formName}`,
+    invalidRequirements: isInvalid(requirementsFormName)(state),
   };
 };
 
@@ -376,6 +416,14 @@ export default createFragmentContainer(containerWithRouter, {
       step {
         id
         title
+        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+        ... on RequirementStep {
+          requirements {
+            reason
+            totalCount
+            viewerMeetsTheRequirements @include(if: $isAuthenticated)
+          }
+        }
       }
       viewerReplies @include(if: $isAuthenticated) {
         totalCount

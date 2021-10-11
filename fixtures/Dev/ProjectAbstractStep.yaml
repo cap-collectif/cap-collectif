@@ -139,6 +139,11 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@pstep2'
         project: '@p8'
         position: 1
+    pasRequirement:
+        id: pasRequirement
+        step: '@questionnairestep6'
+        project: '@p8'
+        position: 7
     pas28:
         id: pas28
         step: '@collectstep4'

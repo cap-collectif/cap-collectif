@@ -62,10 +62,10 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
           <strong>{step.title}</strong>
           <br />
           <span className="excerpt">
-            {step.type && <FormattedMessage id={getWordingStep(step.type)} />}
+            {step.__typename && <FormattedMessage id={getWordingStep(step.__typename)} />}
           </span>
 
-          {step.type === 'DebateStep' &&
+          {step.__typename === 'DebateStep' &&
             step.slug &&
             !step.hasOpinionsFilled &&
             step.debateType === 'FACE_TO_FACE' && (
@@ -121,7 +121,7 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
           <ProjectAdminStepFormModal
             onClose={() => setShowEditModal(false)}
             step={step}
-            type={step.type || 'OtherStep'}
+            type={step.__typename || 'OtherStep'}
             show={showEditModal}
             form={formName}
             index={index}

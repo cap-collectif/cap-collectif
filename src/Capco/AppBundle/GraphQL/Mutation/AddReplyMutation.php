@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
@@ -27,6 +28,8 @@ use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddReplyMutation implements MutationInterface
 {
+    public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
+
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private QuestionnaireRepository $questionnaireRepo;
@@ -37,6 +40,7 @@ class AddReplyMutation implements MutationInterface
     private StepUrlResolver $stepUrlResolver;
     private Publisher $publisher;
     private RequestGuesser $requestGuesser;
+    private StepRequirementsResolver $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -48,7 +52,8 @@ class AddReplyMutation implements MutationInterface
         UserNotifier $userNotifier,
         StepUrlResolver $stepUrlResolver,
         Publisher $publisher,
-        RequestGuesser $requestGuesser
+        RequestGuesser $requestGuesser,
+        StepRequirementsResolver $stepRequirementsResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -60,6 +65,7 @@ class AddReplyMutation implements MutationInterface
         $this->stepUrlResolver = $stepUrlResolver;
         $this->publisher = $publisher;
         $this->requestGuesser = $requestGuesser;
+        $this->stepRequirementsResolver = $stepRequirementsResolver;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -81,6 +87,21 @@ class AddReplyMutation implements MutationInterface
             if ((bool) $previousReply) {
                 throw new UserError('Only one reply by user is allowed for this questionnaire.');
             }
+        }
+
+        $step = $questionnaire->getStep();
+
+        if (
+            $step &&
+            !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($user, $step)
+        ) {
+            $this->logger->error(sprintf('%s : You dont meets all the requirements. user => %s; on step => %s', __METHOD__, $user->getId(), $step->getId()));
+
+            return [
+                'questionnaire' => $questionnaire,
+                'reply' => null,
+                'errorCode' => self::REQUIREMENTS_NOT_MET,
+            ];
         }
 
         $reply = (new Reply())

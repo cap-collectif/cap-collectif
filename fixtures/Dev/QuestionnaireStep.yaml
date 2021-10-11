@@ -273,3 +273,13 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
         body: hey
         startAt: <(new \DateTime('2020-09-11'))>
         endAt: <(new \DateTime('2024-09-27'))>
+    questionnairestep6:
+        id: questionnairestep6
+        title: Questionnaire avec des conditions requises
+        label: Faut répondre au questionnaire pour avoir un bonbon
+        body: Compère le Renard se mit un jour en frais,
+            | Et retint à dîner commère la Cicogne.
+            | Le régal fut petit et sans beaucoup d'apprêts
+            | Le galand, pour toute besogne,
+        startAt: <(new \DateTime('2014-09-27'))>
+        endAt: <(new \DateTime('2024-09-27'))>

@@ -7416,6 +7416,27 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                           "kind": "InlineFragment",
                                           "selections": Array [
                                             Object {
+                                              "condition": "isAuthenticated",
+                                              "kind": "Condition",
+                                              "passingValue": true,
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "viewerHasCode",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                            },
+                                          ],
+                                          "type": "IdentificationCodeRequirement",
+                                        },
+                                        Object {
+                                          "abstractKey": null,
+                                          "kind": "InlineFragment",
+                                          "selections": Array [
+                                            Object {
                                               "alias": null,
                                               "args": null,
                                               "kind": "ScalarField",
@@ -7462,7 +7483,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3b6a19525c63bf703d43bd65411b575b",
+          "cacheID": "c6294299a4cd279da7dcba3c34e6841c",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -9568,6 +9589,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
         }
         ... on PhoneRequirement {
           viewerValue @include(if: $isAuthenticated)
+        }
+        ... on IdentificationCodeRequirement {
+          viewerHasCode @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label

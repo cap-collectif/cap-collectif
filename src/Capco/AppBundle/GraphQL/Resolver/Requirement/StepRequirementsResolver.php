@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -15,9 +16,9 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class StepRequirementsResolver implements ResolverInterface
 {
-    private $repository;
-    private $viewerMeetsTheRequirementResolver;
-    private $builder;
+    private RequirementRepository $repository;
+    private ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver;
+    private ConnectionBuilder $builder;
 
     public function __construct(
         RequirementRepository $repository,
@@ -42,6 +43,7 @@ class StepRequirementsResolver implements ResolverInterface
         $connection->setTotalCount(\count($requirements));
 
         if (
+            $step instanceof QuestionnaireStep ||
             $step instanceof SelectionStep ||
             $step instanceof CollectStep ||
             $step instanceof ConsultationStep

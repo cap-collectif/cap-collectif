@@ -28,15 +28,15 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddArgumentMutation implements MutationInterface
 {
-    private $em;
-    private $opinionRepo;
-    private $versionRepo;
-    private $formFactory;
-    private $redisStorage;
-    private $publisher;
-    private $argumentRepo;
-    private $logger;
-    private $stepRequirementsResolver;
+    private EntityManagerInterface $em;
+    private OpinionRepository $opinionRepo;
+    private OpinionVersionRepository $versionRepo;
+    private FormFactoryInterface $formFactory;
+    private RedisStorageHelper $redisStorage;
+    private Publisher $publisher;
+    private ArgumentRepository $argumentRepo;
+    private LoggerInterface $logger;
+    private StepRequirementsResolver $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,

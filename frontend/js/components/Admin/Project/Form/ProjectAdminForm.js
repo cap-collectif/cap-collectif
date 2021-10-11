@@ -40,6 +40,7 @@ import { ProjectBoxContainer } from './ProjectAdminForm.style';
 import { toast } from '~ds/Toast';
 import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
 import { getProjectAdminPath } from '~/components/Admin/Project/ProjectAdminPage.utils';
+import { doesStepSupportRequirements } from '~/components/Admin/Project/Step/StepRequirementsList';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -141,7 +142,7 @@ const onSubmit = (
   props: Props,
 ) => {
   const hasNewDebateStepAdded =
-    steps?.length > 0 ? steps.some(s => !s.id && s.type === 'DebateStep') : false;
+    steps?.length > 0 ? steps.some(s => !s.id && s.__typename === 'DebateStep') : false;
 
   const input = {
     title,
@@ -165,58 +166,57 @@ const onSubmit = (
     steps: steps // I cannot type step properly given the unability to create union Input type
       ? steps.map(({ url, ...s }: any) => {
           delete s.isAnalysisStep;
-
+          const sTypename = s.__typename;
+          delete s.__typename;
           return {
             ...s,
             isGridViewEnabled: undefined,
             isListViewEnabled: undefined,
             isMapViewEnabled: undefined,
             timeless:
-              s.type === 'SelectionStep' ||
-              s.type === 'CollectStep' ||
-              s.type === 'QuestionnaireStep' ||
-              s.type === 'ConsultationStep' ||
-              s.type === 'DebateStep'
+              sTypename === 'SelectionStep' ||
+              sTypename === 'CollectStep' ||
+              sTypename === 'QuestionnaireStep' ||
+              sTypename === 'ConsultationStep' ||
+              sTypename === 'DebateStep'
                 ? s.timeless
                 : undefined,
             isAnonymousParticipationAllowed:
-              s.type === 'DebateStep' ? s.isAnonymousParticipationAllowed : undefined,
+              sTypename === 'DebateStep' ? s.isAnonymousParticipationAllowed : undefined,
             startAt:
               s.startAt && !s.timeless ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
             endAt: s.endAt && !s.timeless ? moment(s.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
             questionnaire: s.questionnaire?.value || undefined,
             proposalForm: s.proposalForm?.value || undefined,
             consultations: s.consultations?.length ? s.consultations.map(c => c.value) : undefined,
-            footer: s.type === 'QuestionnaireStep' ? s.footer : undefined,
-            type: convertTypenameToConcreteStepType(s.type),
+            footer: sTypename === 'QuestionnaireStep' ? s.footer : undefined,
+            type: convertTypenameToConcreteStepType(sTypename),
             mainView:
-              s.type === 'CollectStep' || s.type === 'SelectionStep' ? s.mainView : undefined,
+              sTypename === 'CollectStep' || sTypename === 'SelectionStep' ? s.mainView : undefined,
             requirements: s.requirements?.length ? s.requirements : [],
-            requirementsReason:
-              s.type === 'ConsultationStep' ||
-              s.type === 'CollectStep' ||
-              s.type === 'SelectionStep'
-                ? s.requirementsReason
-                : undefined,
+            requirementsReason: doesStepSupportRequirements(s) ? s.requirementsReason : undefined,
+            proposalsHidden: sTypename === 'SelectionStep' ? s.proposalsHidden : undefined,
             statuses:
-              s.type === 'SelectionStep' || s.type === 'CollectStep'
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.statuses.filter(status => typeof status.name !== 'undefined')
                 : undefined,
             defaultStatus:
-              s.type === 'SelectionStep' || s.type === 'CollectStep'
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.defaultStatus?.value || s.defaultStatus
                 : undefined,
-            private: s.type === 'CollectStep' ? s.private : undefined,
+            private: sTypename === 'CollectStep' ? s.private : undefined,
             defaultSort:
-              s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.defaultSort : undefined,
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
+                ? s.defaultSort
+                : undefined,
             votesHelpText:
-              s.type === 'SelectionStep' || s.type === 'CollectStep'
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.votable
                   ? s.votesHelpText
                   : null
                 : undefined,
             voteType:
-              s.type === 'SelectionStep' || s.type === 'CollectStep'
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? !s.votable
                   ? 'DISABLED'
                   : s.budget && s.isBudgetEnabled
@@ -224,45 +224,48 @@ const onSubmit = (
                   : 'SIMPLE'
                 : undefined,
             budget:
-              s.type === 'SelectionStep' || s.type === 'CollectStep'
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.isBudgetEnabled && s.votable
                   ? s.budget
                   : null
                 : undefined,
             votesLimit:
-              s.type === 'SelectionStep' || s.type === 'CollectStep'
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.isLimitEnabled && s.votable && s.votesLimit
                   ? s.votesLimit
                   : null
                 : undefined,
             votesMin:
-              s.type === 'SelectionStep' || s.type === 'CollectStep'
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.isLimitEnabled && s.votable && s.votesMin
                   ? s.votesMin
                   : null
                 : undefined,
             voteThreshold:
-              s.type === 'SelectionStep' || s.type === 'CollectStep'
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.isTresholdEnabled && s.votable
                   ? s.voteThreshold
                   : null
                 : undefined,
             votesRanking:
-              s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.votesRanking : undefined,
-            allowingProgressSteps: s.type === 'SelectionStep' ? s.allowingProgressSteps : undefined,
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
+                ? s.votesRanking
+                : undefined,
+            allowingProgressSteps:
+              sTypename === 'SelectionStep' ? s.allowingProgressSteps : undefined,
             allowAuthorsToAddNews:
-              s.type === 'SelectionStep' || s.type === 'CollectStep'
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.allowAuthorsToAddNews
                 : undefined,
-            nbOpinionsToDisplay: s.type === 'RankingStep' ? s.nbOpinionsToDisplay : undefined,
-            nbVersionsToDisplay: s.type === 'RankingStep' ? s.nbVersionsToDisplay : undefined,
+            nbOpinionsToDisplay: sTypename === 'RankingStep' ? s.nbOpinionsToDisplay : undefined,
+            nbVersionsToDisplay: sTypename === 'RankingStep' ? s.nbVersionsToDisplay : undefined,
             votable: undefined,
             isBudgetEnabled: undefined,
             isTresholdEnabled: undefined,
             isLimitEnabled: undefined,
             // DebateStep
             articles:
-              s.type === 'DebateStep' ? s.articles.filter(article => article.url) : undefined,
+              sTypename === 'DebateStep' ? s.articles.filter(article => article.url) : undefined,
             debate: undefined,
             slug: undefined,
             hasOpinionsFilled: undefined,
@@ -290,7 +293,7 @@ const onSubmit = (
         } else if (hasNewDebateStepAdded) {
           const lastDebateStepAdded = findLast(
             data.updateAlphaProject.project.steps,
-            step => step.type === 'DebateStep',
+            step => step.__typename === 'DebateStep',
           );
 
           if (lastDebateStepAdded?.debateType === 'FACE_TO_FACE') {
@@ -329,7 +332,7 @@ const onSubmit = (
       } else if (hasNewDebateStepAdded) {
         const lastDebateStepAdded = findLast(
           data.createAlphaProject.project.steps,
-          step => step.type === 'DebateStep',
+          step => step.__typename === 'DebateStep',
         );
 
         toast({
@@ -505,21 +508,23 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
             isBudgetEnabled: !!step.budget,
             isLimitEnabled: !!step.votesLimit,
             isTresholdEnabled: !!step.voteThreshold,
-            isAnalysisStep: step.type === 'SelectionStep' && step.isAnalysisStep,
+            isAnalysisStep: step.__typename === 'SelectionStep' && step.isAnalysisStep,
             defaultSort: step.defaultSort?.toUpperCase() || 'RANDOM',
-            ...getViewEnabled(step.type, step.proposalForm, project?.firstCollectStep?.form),
+            ...getViewEnabled(step.__typename, step.proposalForm, project?.firstCollectStep?.form),
             // DebateStep
             articles:
-              step.type === 'DebateStep'
+              step.__typename === 'DebateStep'
                 ? step?.debate?.articles?.edges?.filter(Boolean).map(edge => edge.node)
                 : [],
             hasOpinionsFilled:
-              step.type === 'DebateStep' ? step?.debate?.opinions.totalCount === 2 : undefined,
+              step.__typename === 'DebateStep'
+                ? step?.debate?.opinions.totalCount === 2
+                : undefined,
             debate: {
               id: step?.debate?.id,
             },
             allowAuthorsToAddNews:
-              step.type === 'SelectionStep' || step.type === 'CollectStep'
+              step.__typename === 'SelectionStep' || step.__typename === 'CollectStep'
                 ? step.allowAuthorsToAddNews
                 : undefined,
           }))
@@ -626,7 +631,7 @@ export default createFragmentContainer(injectIntl(container), {
         id
         body
         timeless
-        type: __typename
+        __typename
         title
         slug
         startAt: timeRange {
@@ -673,18 +678,6 @@ export default createFragmentContainer(injectIntl(container), {
           voteThreshold
           voteType
           budget
-          requirements {
-            reason
-            edges {
-              node {
-                id
-                type: __typename
-                ... on CheckboxRequirement {
-                  label
-                }
-              }
-            }
-          }
         }
         ... on SelectionStep {
           statuses {
@@ -709,18 +702,6 @@ export default createFragmentContainer(injectIntl(container), {
           budget
           mainView
           isAnalysisStep
-          requirements {
-            reason
-            edges {
-              node {
-                id
-                type: __typename
-                ... on CheckboxRequirement {
-                  label
-                }
-              }
-            }
-          }
         }
         ... on ConsultationStep {
           consultations {
@@ -731,34 +712,8 @@ export default createFragmentContainer(injectIntl(container), {
               }
             }
           }
-          requirements {
-            reason
-            edges {
-              node {
-                id
-                type: __typename
-                ... on CheckboxRequirement {
-                  label
-                }
-              }
-            }
-          }
         }
         ... on RequirementStep {
-          requirements {
-            reason
-            edges {
-              node {
-                id
-                type: __typename
-                ... on CheckboxRequirement {
-                  label
-                }
-              }
-            }
-          }
-        }
-        ... on ProposalStep {
           requirements {
             reason
             edges {

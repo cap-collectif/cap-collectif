@@ -55,7 +55,12 @@ class PersonalDataFormType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd',
             ])
-            ->add('gender', ChoiceType::class, ['choices' => array_keys(User::getGenderList())]);
+            ->add('gender', ChoiceType::class, ['choices' => array_keys(User::getGenderList())])
+            ->add('identificationCode', PurifiedTextType::class, [
+                'purify_html' => true,
+                'strip_tags' => true,
+                'purify_html_profile' => 'default',
+            ]);
     }
 
     /**

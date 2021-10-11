@@ -21,3 +21,6 @@ RequirementType:
             POSTAL_ADDRESS:
                 value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::POSTAL_ADDRESS")'
                 description: 'The requirement is a postal address'
+            IDENTIFICATION_CODE:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::IDENTIFICATION_CODE")'
+                description: 'The requirement is an identification code'

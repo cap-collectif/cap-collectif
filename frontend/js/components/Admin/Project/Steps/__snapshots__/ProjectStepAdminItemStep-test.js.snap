@@ -80,13 +80,13 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
         show={false}
         step={
           Object {
+            "__typename": "typeTest",
             "debateType": "FACE_TO_FACE",
             "hasOpinionsFilled": false,
             "id": "1",
             "isAnalysisStep": false,
             "slug": "slugTest",
             "title": "testStep",
-            "type": "typeTest",
             "url": "urlTest",
           }
         }

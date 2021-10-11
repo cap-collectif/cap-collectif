@@ -11,7 +11,7 @@ class ViewerMeetsTheRequirementResolver implements ResolverInterface
 {
     use ResolverTrait;
 
-    private $resolver;
+    private RequirementViewerValueResolver $resolver;
 
     public function __construct(RequirementViewerValueResolver $resolver)
     {

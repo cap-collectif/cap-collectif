@@ -670,6 +670,12 @@ type AddProposalsToStepsPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `addReply` mutation."""
+enum AddReplyErrorCode {
+  """the viewer does not meet requirements"""
+  REQUIREMENTS_NOT_MET
+}
+
 input AddReplyInput {
   """The id of the questionnaire"""
   questionnaireId: ID!
@@ -688,6 +694,7 @@ input AddReplyInput {
 type AddReplyPayload {
   reply: Reply
   questionnaire: Questionnaire
+  errorCode: AddReplyErrorCode
   clientMutationId: String
 }
 
@@ -6042,6 +6049,18 @@ input HomePageProjectsSectionConfigurationTranslationInput {
 """A string containing an IP address."""
 scalar IP
 
+"""Requires an identification code"""
+type IdentificationCodeRequirement implements Node & Requirement {
+  """The ID of an object"""
+  id: ID!
+
+  """Does the viewer meets the requirement ?"""
+  viewerMeetsTheRequirement: Boolean!
+
+  """Does viewer got identification code"""
+  viewerHasCode: Boolean!
+}
+
 input InviteUsersInput {
   """Set the maximum results to return"""
   maxResults: Int = 100
@@ -11031,7 +11050,7 @@ interface QuestionnaireOwner {
 }
 
 """A step inside a project."""
-type QuestionnaireStep implements Node & Step {
+type QuestionnaireStep implements Node & Step & RequirementStep {
   """The ID of an object"""
   id: ID!
 
@@ -11088,6 +11107,17 @@ type QuestionnaireStep implements Node & Step {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+
+  """Requirements for answering the questionnaire"""
+  requirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
   footer: String
 
   """A list of contributor associated with the step."""
@@ -11885,6 +11915,9 @@ enum RequirementType {
 
   """The requirement is a postal address"""
   POSTAL_ADDRESS
+
+  """The requirement is an identification code"""
+  IDENTIFICATION_CODE
 }
 
 """Available errors on resendEmailConfirmationMutation"""
@@ -14203,6 +14236,9 @@ input UpdateProfilePersonalDataInput {
 
   """Your birth place"""
   birthPlace: String
+
+  """Your identification code"""
+  identificationCode: String
   clientMutationId: String
 }
 

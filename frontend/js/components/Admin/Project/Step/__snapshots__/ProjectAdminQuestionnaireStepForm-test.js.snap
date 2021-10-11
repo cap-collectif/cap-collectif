@@ -251,11 +251,25 @@ exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly when admin proj
         }
       >
         <ProjectAdminQuestionnaireStepForm
+          dispatch={[MockFunction]}
           questionnaire={
             Object {
               "label": "questionnaire1",
               "value": "q1id",
             }
+          }
+          requirements={
+            Array [
+              Object {
+                "checked": false,
+                "label": "Sku",
+                "type": "CHECKBOX",
+              },
+              Object {
+                "id": "N$DjtU6G5vx&#p",
+                "type": "LASTNAME",
+              },
+            ]
           }
         />
       </Component>
@@ -515,11 +529,25 @@ exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly with a question
         }
       >
         <ProjectAdminQuestionnaireStepForm
+          dispatch={[MockFunction]}
           questionnaire={
             Object {
               "label": "questionnaire1",
               "value": "q1id",
             }
+          }
+          requirements={
+            Array [
+              Object {
+                "checked": false,
+                "label": "Sku",
+                "type": "CHECKBOX",
+              },
+              Object {
+                "id": "N$DjtU6G5vx&#p",
+                "type": "LASTNAME",
+              },
+            ]
           }
         />
       </Component>
@@ -778,7 +806,22 @@ exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly with no data 1`
           }
         }
       >
-        <ProjectAdminQuestionnaireStepForm />
+        <ProjectAdminQuestionnaireStepForm
+          dispatch={[MockFunction]}
+          requirements={
+            Array [
+              Object {
+                "checked": false,
+                "label": "Sku",
+                "type": "CHECKBOX",
+              },
+              Object {
+                "id": "N$DjtU6G5vx&#p",
+                "type": "LASTNAME",
+              },
+            ]
+          }
+        />
       </Component>
     </Provider>
   </Connect(IntlProvider)>

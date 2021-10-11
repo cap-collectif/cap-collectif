@@ -171,3 +171,14 @@ Capco\AppBundle\Entity\Questionnaire:
         owner: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
         notificationsConfiguration: '@questionnaireNotificationConfigurationProjectWithOwner2'
+    qAvecDesConditionsRequises:
+        id: qAvecDesConditionsRequises
+        title: Votre condition requise favorite
+        description: J'aime les conditions requises pour répondre à un questionnaire, mais laquelle préférez vous ?
+        step: '@questionnairestep6'
+        multipleRepliesAllowed: true
+        anonymousAllowed: true
+        acknowledgeReplies: 1
+        type: 'QUESTIONNAIRE'
+        privateResult: false
+        notificationsConfiguration: '@questionnaireNotificationConfigurationConditionRequise'

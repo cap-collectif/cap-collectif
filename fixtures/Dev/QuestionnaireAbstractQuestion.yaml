@@ -719,3 +719,11 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         questionnaire: '@questionnaireProjectWithOwner'
         question: '@questionnaireProjectOwnerQuestionFoodApple'
         position: 4
+    qaqQuestionnaireConditionRequise1:
+        questionnaire: '@qAvecDesConditionsRequises'
+        question: '@xQuestionConditionRequise1'
+        position: 1
+    qaqQuestionnaireConditionRequise2:
+        questionnaire: '@qAvecDesConditionsRequises'
+        question: '@simpleQuestionQuestionnaireConditionRequise'
+        position: 2

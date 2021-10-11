@@ -114,4 +114,10 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     {
         return true;
     }
+
+    //used in twig to add googlemaps js file
+    public function useAddressOrMap(): bool
+    {
+        return true;
+    }
 }

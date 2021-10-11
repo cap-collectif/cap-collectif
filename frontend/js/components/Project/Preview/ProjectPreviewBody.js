@@ -165,10 +165,10 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
     return (
       step &&
-      (step.type === 'consultation' ||
-        step.type === 'collect' ||
-        step.type === 'questionnaire' ||
-        (step.type === 'selection' && step.votable === true))
+      (step.__typename === 'ConsultationStep' ||
+        step.__typename === 'CollectStep' ||
+        step.__typename === 'QuestionnaireStep' ||
+        (step.__typename === 'SelectionStep' && step.votable === true))
     );
   }
 
@@ -225,7 +225,6 @@ export default createFragmentContainer(ProjectPreviewBody, {
           startAt
           endAt
         }
-        type
         url
         ... on ProposalStep {
           votable

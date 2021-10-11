@@ -8,8 +8,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class UserIsGrantedResolver
 {
-    protected $tokenStorage;
-    protected $logger;
+    protected TokenStorageInterface $tokenStorage;
+    protected LoggerInterface $logger;
 
     public function __construct(TokenStorageInterface $tokenStorage, LoggerInterface $logger)
     {
@@ -20,7 +20,7 @@ class UserIsGrantedResolver
     public function isGranted(
         $user,
         $viewer = null,
-        \ArrayObject $context = null,
+        ?\ArrayObject $context = null,
         array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']
     ): bool {
         if (

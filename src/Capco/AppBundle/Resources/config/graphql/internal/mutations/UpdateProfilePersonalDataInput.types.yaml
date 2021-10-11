@@ -45,3 +45,6 @@ UpdateProfilePersonalDataInput:
             birthPlace:
                 type: 'String'
                 description: 'Your birth place'
+            identificationCode:
+                type: 'String'
+                description: 'Your identification code'

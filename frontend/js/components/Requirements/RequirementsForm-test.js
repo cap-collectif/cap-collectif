@@ -66,6 +66,14 @@ describe('<RequirementsForm />', () => {
             label: 'Offrir mon âme à Voldemort',
           },
         },
+        {
+          node: {
+            __typename: 'IdentificationCodeRequirement',
+            id: 'requirement6',
+            viewerMeetsTheRequirement: false,
+            viewerHasCode: false,
+          },
+        },
       ],
     },
   };
@@ -83,6 +91,7 @@ describe('<RequirementsForm />', () => {
       requirement3: null,
       requirement4: null,
       requirement5: false,
+      requirement6: false,
     };
     const props = { ...formMock, step, isAuthenticated: false };
     const dispatch = jest.fn();
@@ -101,6 +110,7 @@ describe('<RequirementsForm />', () => {
       requirement3: null,
       requirement4: null,
       requirement5: false,
+      requirement6: false,
     };
     const values = {
       requirement1: '0606060606',
@@ -108,6 +118,7 @@ describe('<RequirementsForm />', () => {
       requirement3: 'Aurélien',
       requirement4: 'David',
       requirement5: true,
+      requirement6: true,
     };
     const props = {
       ...formMock,
@@ -135,6 +146,7 @@ describe('<RequirementsForm />', () => {
       requirement3: 'Aurélien',
       requirement4: 'David',
       requirement5: true,
+      requirement6: true,
     };
     expect(validate(values, props)).toMatchSnapshot();
 
@@ -149,6 +161,7 @@ describe('<RequirementsForm />', () => {
       requirement3: null,
       requirement4: null,
       requirement5: false,
+      requirement6: false,
     };
     expect(validate(emptyValues, props)).toMatchSnapshot();
   });

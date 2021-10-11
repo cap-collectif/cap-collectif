@@ -6,10 +6,21 @@ import { ProjectAdminQuestionnaireStepForm } from './ProjectAdminQuestionnaireSt
 import MockProviders from '~/testUtils';
 
 describe('<ProjectAdminQuestionnaireStepForm />', () => {
+  const props = {
+    dispatch: jest.fn(),
+    requirements: [
+      { type: 'CHECKBOX', checked: false, label: 'Sku' },
+      {
+        id: 'N$DjtU6G5vx&#p',
+        type: 'LASTNAME',
+      },
+    ],
+  };
+
   it('renders correctly with no data', () => {
     const wrapper = shallow(
       <MockProviders store={{ user: { user: { isAdmin: true } } }}>
-        <ProjectAdminQuestionnaireStepForm />
+        <ProjectAdminQuestionnaireStepForm {...props} />
       </MockProviders>,
     );
     expect(wrapper).toMatchSnapshot();
@@ -19,6 +30,7 @@ describe('<ProjectAdminQuestionnaireStepForm />', () => {
     const wrapper = shallow(
       <MockProviders store={{ user: { user: { isAdmin: true } } }}>
         <ProjectAdminQuestionnaireStepForm
+          {...props}
           questionnaire={{ label: 'questionnaire1', value: 'q1id' }}
         />
       </MockProviders>,
@@ -30,6 +42,7 @@ describe('<ProjectAdminQuestionnaireStepForm />', () => {
     const wrapper = shallow(
       <MockProviders store={{ user: { user: { isAdmin: false } } }}>
         <ProjectAdminQuestionnaireStepForm
+          {...props}
           questionnaire={{ label: 'questionnaire1', value: 'q1id' }}
         />
       </MockProviders>,

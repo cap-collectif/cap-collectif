@@ -18,7 +18,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class StepTypeResolver implements ResolverInterface
 {
-    private $typeResolver;
+    private TypeResolver $typeResolver;
 
     public function __construct(TypeResolver $typeResolver)
     {

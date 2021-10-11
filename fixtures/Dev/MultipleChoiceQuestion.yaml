@@ -402,3 +402,8 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
         required: false
         type: 8
         randomQuestionChoices: false
+    xQuestionConditionRequise1:
+        id: 3945
+        title: Quelle est conditions requise favorite ?
+        required: true
+        type: 3

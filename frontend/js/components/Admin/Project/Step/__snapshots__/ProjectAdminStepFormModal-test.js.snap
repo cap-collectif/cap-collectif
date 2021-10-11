@@ -34,7 +34,7 @@ exports[`<ProjectAdminStepFormModal /> renders correctly 1`] = `
     }
     step={
       Object {
-        "type": "OtherStep",
+        "__typename": "OtherStep",
       }
     }
   />
@@ -75,7 +75,7 @@ exports[`<ProjectAdminStepFormModal /> renders correctly hided 1`] = `
     }
     step={
       Object {
-        "type": "OtherStep",
+        "__typename": "OtherStep",
       }
     }
   />
@@ -116,8 +116,8 @@ exports[`<ProjectAdminStepFormModal /> renders correctly with step 1`] = `
     }
     step={
       Object {
+        "__typename": "OtherStep",
         "title": "test",
-        "type": "OtherStep",
       }
     }
   />

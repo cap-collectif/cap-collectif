@@ -25,7 +25,7 @@ import type { ProjectStepAdminList_project } from '~relay/ProjectStepAdminList_p
 export type Step = {|
   +id: ?string,
   +title: string,
-  +type: ?string,
+  +__typename: ?string,
   +url: ?string,
   +slug: ?string,
   +debateType: DebateType,

@@ -80,3 +80,18 @@ Capco\AppBundle\Entity\Requirement:
         type: POSTAL_ADDRESS
         position: 1
         step: '@collectstepCorona'
+    requirement18:
+        id: requirement18
+        type: FIRSTNAME
+        position: 1
+        step: '@questionnairestep6'
+    requirement19:
+        id: requirement19
+        type: LASTNAME
+        position: 2
+        step: '@questionnairestep6'
+    requirement20:
+        id: requirement20
+        type: POSTAL_ADDRESS
+        position: 3
+        step: '@questionnairestep6'

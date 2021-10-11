@@ -1,0 +1,9 @@
+AddReplyErrorCode:
+    type: enum
+    config:
+        name: AddReplyErrorCode
+        description: 'Available errors for an `addReply` mutation.'
+        values:
+            REQUIREMENTS_NOT_MET:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddReplyMutation::REQUIREMENTS_NOT_MET")'
+                description: 'the viewer does not meet requirements'

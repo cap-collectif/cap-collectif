@@ -347,6 +347,260 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         ],
                         "type": "Step",
                       },
+                      Object {
+                        "abstractKey": "__isRequirementStep",
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "RequirementConnection",
+                            "kind": "LinkedField",
+                            "name": "requirements",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": null,
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "__typename",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "condition": "isAuthenticated",
+                                        "kind": "Condition",
+                                        "passingValue": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "viewerMeetsTheRequirement",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerDateOfBirth",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "DateOfBirthRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "concreteType": "GoogleMapsAddress",
+                                                "kind": "LinkedField",
+                                                "name": "viewerAddress",
+                                                "plural": false,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "formatted",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "json",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "PostalAddressRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "FirstnameRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "LastnameRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "PhoneRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerHasCode",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "IdentificationCodeRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "label",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "CheckboxRequirement",
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "reason",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "totalCount",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "condition": "isAuthenticated",
+                                "kind": "Condition",
+                                "passingValue": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerMeetsTheRequirements",
+                                    "storageKey": null,
+                                  },
+                                ],
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "RequirementStep",
+                      },
                     ],
                     "storageKey": null,
                   },
@@ -1381,7 +1635,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "cfe56b3cfa8a24bcb6f388785d61beec",
+        "cacheID": "a096445e54d47a9bafc1782adca31075",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -1531,6 +1785,15 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   step {
     id
     title
+    ...RequirementsForm_step_39ngnn
+    ... on RequirementStep {
+      __isRequirementStep: __typename
+      requirements {
+        reason
+        totalCount
+        viewerMeetsTheRequirements @include(if: $isAuthenticated)
+      }
+    }
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
@@ -1642,6 +1905,43 @@ fragment ReplyLink_reply on Reply {
   viewerCanDelete
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
+}
+
+fragment RequirementsForm_step_39ngnn on RequirementStep {
+  __isRequirementStep: __typename
+  requirements {
+    edges {
+      node {
+        __typename
+        id
+        viewerMeetsTheRequirement @include(if: $isAuthenticated)
+        ... on DateOfBirthRequirement {
+          viewerDateOfBirth @include(if: $isAuthenticated)
+        }
+        ... on PostalAddressRequirement {
+          viewerAddress @include(if: $isAuthenticated) {
+            formatted
+            json
+          }
+        }
+        ... on FirstnameRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on LastnameRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on PhoneRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on IdentificationCodeRequirement {
+          viewerHasCode @include(if: $isAuthenticated)
+        }
+        ... on CheckboxRequirement {
+          label
+        }
+      }
+    }
+  }
 }
 
 fragment StepPageFooter_step on QuestionnaireStep {
@@ -2060,6 +2360,260 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                         ],
                         "type": "Step",
                       },
+                      Object {
+                        "abstractKey": "__isRequirementStep",
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "RequirementConnection",
+                            "kind": "LinkedField",
+                            "name": "requirements",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": null,
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "__typename",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "condition": "isAuthenticated",
+                                        "kind": "Condition",
+                                        "passingValue": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "viewerMeetsTheRequirement",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerDateOfBirth",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "DateOfBirthRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "concreteType": "GoogleMapsAddress",
+                                                "kind": "LinkedField",
+                                                "name": "viewerAddress",
+                                                "plural": false,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "formatted",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "json",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "PostalAddressRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "FirstnameRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "LastnameRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "PhoneRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerHasCode",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "IdentificationCodeRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "label",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "CheckboxRequirement",
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "reason",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "totalCount",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "condition": "isAuthenticated",
+                                "kind": "Condition",
+                                "passingValue": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerMeetsTheRequirements",
+                                    "storageKey": null,
+                                  },
+                                ],
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "RequirementStep",
+                      },
                     ],
                     "storageKey": null,
                   },
@@ -3094,7 +3648,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "cfe56b3cfa8a24bcb6f388785d61beec",
+        "cacheID": "a096445e54d47a9bafc1782adca31075",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -3244,6 +3798,15 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   step {
     id
     title
+    ...RequirementsForm_step_39ngnn
+    ... on RequirementStep {
+      __isRequirementStep: __typename
+      requirements {
+        reason
+        totalCount
+        viewerMeetsTheRequirements @include(if: $isAuthenticated)
+      }
+    }
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
@@ -3355,6 +3918,43 @@ fragment ReplyLink_reply on Reply {
   viewerCanDelete
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
+}
+
+fragment RequirementsForm_step_39ngnn on RequirementStep {
+  __isRequirementStep: __typename
+  requirements {
+    edges {
+      node {
+        __typename
+        id
+        viewerMeetsTheRequirement @include(if: $isAuthenticated)
+        ... on DateOfBirthRequirement {
+          viewerDateOfBirth @include(if: $isAuthenticated)
+        }
+        ... on PostalAddressRequirement {
+          viewerAddress @include(if: $isAuthenticated) {
+            formatted
+            json
+          }
+        }
+        ... on FirstnameRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on LastnameRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on PhoneRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on IdentificationCodeRequirement {
+          viewerHasCode @include(if: $isAuthenticated)
+        }
+        ... on CheckboxRequirement {
+          label
+        }
+      }
+    }
+  }
 }
 
 fragment StepPageFooter_step on QuestionnaireStep {
@@ -3773,6 +4373,260 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                         ],
                         "type": "Step",
                       },
+                      Object {
+                        "abstractKey": "__isRequirementStep",
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "RequirementConnection",
+                            "kind": "LinkedField",
+                            "name": "requirements",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": null,
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "__typename",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "condition": "isAuthenticated",
+                                        "kind": "Condition",
+                                        "passingValue": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "viewerMeetsTheRequirement",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerDateOfBirth",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "DateOfBirthRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "concreteType": "GoogleMapsAddress",
+                                                "kind": "LinkedField",
+                                                "name": "viewerAddress",
+                                                "plural": false,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "formatted",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "json",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "PostalAddressRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "FirstnameRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "LastnameRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "PhoneRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerHasCode",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "IdentificationCodeRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "label",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "CheckboxRequirement",
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "reason",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "totalCount",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "condition": "isAuthenticated",
+                                "kind": "Condition",
+                                "passingValue": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerMeetsTheRequirements",
+                                    "storageKey": null,
+                                  },
+                                ],
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "RequirementStep",
+                      },
                     ],
                     "storageKey": null,
                   },
@@ -4807,7 +5661,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "cfe56b3cfa8a24bcb6f388785d61beec",
+        "cacheID": "a096445e54d47a9bafc1782adca31075",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4957,6 +5811,15 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   step {
     id
     title
+    ...RequirementsForm_step_39ngnn
+    ... on RequirementStep {
+      __isRequirementStep: __typename
+      requirements {
+        reason
+        totalCount
+        viewerMeetsTheRequirements @include(if: $isAuthenticated)
+      }
+    }
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
@@ -5068,6 +5931,43 @@ fragment ReplyLink_reply on Reply {
   viewerCanDelete
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
+}
+
+fragment RequirementsForm_step_39ngnn on RequirementStep {
+  __isRequirementStep: __typename
+  requirements {
+    edges {
+      node {
+        __typename
+        id
+        viewerMeetsTheRequirement @include(if: $isAuthenticated)
+        ... on DateOfBirthRequirement {
+          viewerDateOfBirth @include(if: $isAuthenticated)
+        }
+        ... on PostalAddressRequirement {
+          viewerAddress @include(if: $isAuthenticated) {
+            formatted
+            json
+          }
+        }
+        ... on FirstnameRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on LastnameRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on PhoneRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on IdentificationCodeRequirement {
+          viewerHasCode @include(if: $isAuthenticated)
+        }
+        ... on CheckboxRequirement {
+          label
+        }
+      }
+    }
+  }
 }
 
 fragment StepPageFooter_step on QuestionnaireStep {
@@ -5486,6 +6386,260 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         ],
                         "type": "Step",
                       },
+                      Object {
+                        "abstractKey": "__isRequirementStep",
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "RequirementConnection",
+                            "kind": "LinkedField",
+                            "name": "requirements",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": null,
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "__typename",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "condition": "isAuthenticated",
+                                        "kind": "Condition",
+                                        "passingValue": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "viewerMeetsTheRequirement",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerDateOfBirth",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "DateOfBirthRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "concreteType": "GoogleMapsAddress",
+                                                "kind": "LinkedField",
+                                                "name": "viewerAddress",
+                                                "plural": false,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "formatted",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "json",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "PostalAddressRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "FirstnameRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "LastnameRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "PhoneRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerHasCode",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "IdentificationCodeRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "label",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "CheckboxRequirement",
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "reason",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "totalCount",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "condition": "isAuthenticated",
+                                "kind": "Condition",
+                                "passingValue": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerMeetsTheRequirements",
+                                    "storageKey": null,
+                                  },
+                                ],
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "RequirementStep",
+                      },
                     ],
                     "storageKey": null,
                   },
@@ -6520,7 +7674,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "cfe56b3cfa8a24bcb6f388785d61beec",
+        "cacheID": "a096445e54d47a9bafc1782adca31075",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -6670,6 +7824,15 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   step {
     id
     title
+    ...RequirementsForm_step_39ngnn
+    ... on RequirementStep {
+      __isRequirementStep: __typename
+      requirements {
+        reason
+        totalCount
+        viewerMeetsTheRequirements @include(if: $isAuthenticated)
+      }
+    }
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
@@ -6781,6 +7944,43 @@ fragment ReplyLink_reply on Reply {
   viewerCanDelete
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
+}
+
+fragment RequirementsForm_step_39ngnn on RequirementStep {
+  __isRequirementStep: __typename
+  requirements {
+    edges {
+      node {
+        __typename
+        id
+        viewerMeetsTheRequirement @include(if: $isAuthenticated)
+        ... on DateOfBirthRequirement {
+          viewerDateOfBirth @include(if: $isAuthenticated)
+        }
+        ... on PostalAddressRequirement {
+          viewerAddress @include(if: $isAuthenticated) {
+            formatted
+            json
+          }
+        }
+        ... on FirstnameRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on LastnameRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on PhoneRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on IdentificationCodeRequirement {
+          viewerHasCode @include(if: $isAuthenticated)
+        }
+        ... on CheckboxRequirement {
+          label
+        }
+      }
+    }
+  }
 }
 
 fragment StepPageFooter_step on QuestionnaireStep {

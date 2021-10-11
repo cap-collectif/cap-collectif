@@ -6,3 +6,5 @@ AddReplyPayload:
                 type: 'InternalReply'
             questionnaire:
                 type: 'InternalQuestionnaire'
+            errorCode:
+                type: 'AddReplyErrorCode'

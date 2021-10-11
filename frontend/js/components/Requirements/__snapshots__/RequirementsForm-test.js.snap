@@ -45,8 +45,20 @@ exports[`<RequirementsForm /> call api on every value changed 2`] = `
         "type": "@@redux-form/START_SUBMIT",
       },
     ],
+    Array [
+      Object {
+        "meta": Object {
+          "form": "requirements-form",
+        },
+        "type": "@@redux-form/START_SUBMIT",
+      },
+    ],
   ],
   "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
     Object {
       "type": "return",
       "value": undefined,
@@ -220,6 +232,20 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
   >
     Offrir mon âme à Voldemort
   </Field>
+  <Field
+    component={[Function]}
+    divClassName="col-sm-12 col-xs-12"
+    id="requirement6"
+    key="requirement6"
+    label={
+      <FormattedMessage
+        id="identification_code"
+        values={Object {}}
+      />
+    }
+    name="requirement6"
+    type="text"
+  />
 </form>
 `;
 
@@ -234,6 +260,7 @@ Object {
   "requirement3": "global.required",
   "requirement4": "global.required",
   "requirement5": "global.required",
+  "requirement6": "global.required",
 }
 `;
 
@@ -244,5 +271,6 @@ Object {
   "requirement3": "global.required",
   "requirement4": "global.required",
   "requirement5": "global.required",
+  "requirement6": "global.required",
 }
 `;

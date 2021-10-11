@@ -3,11 +3,13 @@ InternalQuestionnaireStep:
     inherits:
         - Node
         - InternalStep
+        - RequirementStep
     config:
         name: QuestionnaireStep
         interfaces:
             - Node
             - InternalStep
+            - RequirementStep
         fields:
             footer:
                 type: String
@@ -21,3 +23,8 @@ InternalQuestionnaireStep:
             questionnaire:
                 type: 'InternalQuestionnaire'
                 description: 'A questionnaire associated with the step.'
+            requirements:
+                type: 'RequirementConnection!'
+                description: 'Requirements for answering the questionnaire'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'

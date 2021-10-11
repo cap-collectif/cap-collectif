@@ -99,7 +99,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected ?string $websiteUrl = null;
     private Collection $userGroups;
     private ?string $resetPasswordToken = null;
-
+    private ?string $identificationCode = null;
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="supervisor")
      */
@@ -933,5 +933,17 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     public function hasPassword(): bool
     {
         return null !== $this->password;
+    }
+
+    public function getIdentificationCode(): ?string
+    {
+        return $this->identificationCode;
+    }
+
+    public function setIdentificationCode(?string $identificationCode): self
+    {
+        $this->identificationCode = $identificationCode;
+
+        return $this;
     }
 }

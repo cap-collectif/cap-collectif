@@ -44,6 +44,12 @@ type Requirement =
       +id: string,
       +viewerMeetsTheRequirement: boolean,
       +viewerValue: ?string,
+    }
+  | {
+      +__typename: 'IdentificationCodeRequirement',
+      +id: string,
+      +viewerMeetsTheRequirement: boolean,
+      +viewerHasCode: boolean,
     };
 
 export type RequirementsForm_step = {|
@@ -167,6 +173,9 @@ export const onChange = (
       if (requirement.__typename === 'PhoneRequirement') {
         input.phone = `+33${newValue.charAt(0) === '0' ? newValue.substring(1) : newValue}`;
       }
+      if (requirement.__typename === 'IdentificationCodeRequirement') {
+        input.identificationCode = newValue;
+      }
 
       // To handle realtime updates
       // we call the api after 1 second inactivity
@@ -205,6 +214,9 @@ const getLabel = (requirement: Requirement) => {
   }
   if (requirement.__typename === 'PostalAddressRequirement') {
     return <FormattedMessage id="admin.fields.event.address" />;
+  }
+  if (requirement.__typename === 'IdentificationCodeRequirement') {
+    return <FormattedMessage id="identification_code" />;
   }
   return '';
 };
@@ -301,6 +313,9 @@ const getRequirementInitialValue = (requirement: Requirement): ?string | boolean
   if (requirement.__typename === 'PostalAddressRequirement') {
     return requirement.viewerAddress ? requirement.viewerAddress.json : null;
   }
+  if (requirement.__typename === 'IdentificationCodeRequirement') {
+    return requirement.viewerHasCode;
+  }
 
   return requirement.viewerValue;
 };
@@ -358,6 +373,9 @@ export default createFragmentContainer(container, {
             }
             ... on PhoneRequirement {
               viewerValue @include(if: $isAuthenticated)
+            }
+            ... on IdentificationCodeRequirement {
+              viewerHasCode @include(if: $isAuthenticated)
             }
             ... on CheckboxRequirement {
               label

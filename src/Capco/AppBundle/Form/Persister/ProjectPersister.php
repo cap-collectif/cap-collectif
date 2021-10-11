@@ -118,9 +118,7 @@ class ProjectPersister
             $this->em->flush();
             $this->stepPersister->persist($project, $steps);
         } catch (DriverException $e) {
-            $this->logger->error(
-                __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()
-            );
+            $this->logger->error(__METHOD__ . ' => ' . $e->getCode() . ' : ' . $e->getMessage());
 
             throw new BadRequestHttpException('Sorry, please retry.');
         }

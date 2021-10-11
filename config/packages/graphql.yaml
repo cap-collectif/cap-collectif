@@ -92,6 +92,7 @@ overblog_graphql:
                     - CheckboxRequirement
                     - FirstnameRequirement
                     - LastnameRequirement
+                    - IdentificationCodeRequirement
                     - DateOfBirthRequirement
                     - PhoneRequirement
                     - PostalAddressRequirement

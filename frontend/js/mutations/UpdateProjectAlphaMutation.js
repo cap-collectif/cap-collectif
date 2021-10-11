@@ -44,7 +44,7 @@ const mutation = graphql`
         steps {
           id
           body
-          type: __typename
+          __typename
           title
           slug
           timeless
@@ -56,27 +56,7 @@ const mutation = graphql`
           }
           label
           isEnabled: enabled
-          ... on CollectStep {
-            requirements {
-              reason
-            }
-          }
-          ... on SelectionStep {
-            requirements {
-              reason
-            }
-          }
-          ... on ConsultationStep {
-            requirements {
-              reason
-            }
-          }
           ... on RequirementStep {
-            requirements {
-              reason
-            }
-          }
-          ... on ProposalStep {
             requirements {
               reason
             }
