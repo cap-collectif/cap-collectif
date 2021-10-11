@@ -21,10 +21,8 @@ type Props = {|
 export class LoginSocialButtons extends React.Component<Props> {
   render() {
     const { features, ssoList } = this.props;
-
     if (
       !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'facebook').length > 0) &&
-      !features.login_gplus &&
       !features.login_saml &&
       !features.login_cas &&
       !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0) &&

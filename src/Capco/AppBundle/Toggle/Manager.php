@@ -20,7 +20,6 @@ class Manager
     public const developer_documentation = 'developer_documentation';
     public const public_api = 'public_api';
     public const login_facebook = 'login_facebook';
-    public const login_gplus = 'login_gplus';
     public const login_paris = 'login_paris';
     public const login_saml = 'login_saml';
     public const login_cas = 'login_cas';
@@ -119,7 +118,6 @@ class Manager
         self::public_api,
         self::votes_min,
         self::login_facebook,
-        self::login_gplus,
         self::login_saml,
         self::login_cas,
         self::login_paris,

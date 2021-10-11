@@ -44,10 +44,6 @@ Object {
       "type": "login_facebook",
     },
     Object {
-      "enabled": true,
-      "type": "login_gplus",
-    },
-    Object {
       "enabled": false,
       "type": "login_saml",
     },

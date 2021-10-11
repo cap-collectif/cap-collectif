@@ -76,7 +76,6 @@ describe('<LoginSocialButtons />', () => {
   const propsWithAllLoginFeaturesLoginActivated = {
     features: {
       ...features,
-      login_gplus: true,
       login_facebook: true,
       login_saml: true,
       login_cas: true,
@@ -88,7 +87,6 @@ describe('<LoginSocialButtons />', () => {
   const propsWithAllLoginFeaturesLoginActivatedAndORSeparatorDisabled = {
     features: {
       ...features,
-      login_gplus: true,
       login_facebook: true,
       login_saml: true,
       login_cas: true,

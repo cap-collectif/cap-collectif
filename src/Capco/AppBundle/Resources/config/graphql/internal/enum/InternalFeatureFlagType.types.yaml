@@ -22,8 +22,6 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::public_api")'
             login_facebook:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_facebook")'
-            login_gplus:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_gplus")'
             login_paris:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_paris")'
             privacy_policy:

@@ -53,7 +53,6 @@ export type FeatureToggles = {
   consent_external_communication: ?boolean,
   consent_internal_communication: ?boolean,
   login_facebook: ?boolean,
-  login_gplus: ?boolean,
   login_saml: ?boolean,
   login_cas: ?boolean,
   login_paris: ?boolean,

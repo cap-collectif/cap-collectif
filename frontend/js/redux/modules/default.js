@@ -54,7 +54,6 @@ export const features: FeatureToggles = {
   blog: false,
   calendar: false,
   login_facebook: false,
-  login_gplus: false,
   privacy_policy: false,
   members_list: false,
   captcha: false,

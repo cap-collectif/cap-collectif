@@ -384,16 +384,10 @@ export const AccountForm = ({
   );
 
   const signMethod = () => {
-    if (features.login_franceconnect && !isFacebookLoginEnabled && !features.login_gplus) {
+    if (features.login_franceconnect && !isFacebookLoginEnabled) {
       return 'Sign-in-method-fc';
     }
-    if (!features.login_franceconnect && isFacebookLoginEnabled && features.login_gplus) {
-      return 'Sign-in-method-fb-gp';
-    }
-    if (!features.login_franceconnect && !isFacebookLoginEnabled && features.login_gplus) {
-      return 'Sign-in-method-gp';
-    }
-    if (!features.login_franceconnect && isFacebookLoginEnabled && !features.login_gplus) {
+    if (!features.login_franceconnect && isFacebookLoginEnabled) {
       return 'Sign-in-method-fb';
     }
     return 'Sign-in-method';
@@ -460,7 +454,7 @@ export const AccountForm = ({
               </div>
             </AccountContainer>
           </form>
-          {features.login_franceconnect || isFacebookLoginEnabled || features.login_gplus ? (
+          {features.login_franceconnect || isFacebookLoginEnabled ? (
             <SsoGroup>
               <span className="font-weight-bold">
                 <FormattedMessage id="Sign-in-option" />

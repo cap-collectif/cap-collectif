@@ -52,7 +52,6 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('themes');
         $this->manager->activate('registration');
         $this->manager->activate('login_facebook');
-        $this->manager->activate('login_gplus');
         $this->manager->activate('user_type');
         $this->manager->activate('members_list');
         $this->manager->activate('projects_form');
@@ -123,7 +122,6 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('display_pictures_in_event_list');
             $this->manager->deactivate('registration');
             $this->manager->deactivate('login_facebook');
-            $this->manager->deactivate('login_gplus');
             $this->manager->deactivate('server_side_rendering');
             $this->manager->deactivate('developer_documentation');
             $this->manager->deactivate('login_saml');
