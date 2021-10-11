@@ -15,6 +15,7 @@ Background:
   And I logout
   Then I should see "global.login"
 
+@database
 Scenario: Display France Connect login screen
   Given I open login modal
   When I follow "FranceConnect"
