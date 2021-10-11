@@ -9,6 +9,7 @@ describe('<LoginModal />', () => {
     submitting: false,
     onClose: jest.fn(),
     onSubmit: jest.fn(),
+    byPassAuth: false,
   };
 
   it('renders an hidden modal if not shown', () => {
@@ -19,6 +20,13 @@ describe('<LoginModal />', () => {
 
   it('renders a visible modal if shown', () => {
     const wrapper = shallow(<LoginModal show {...props} />);
+    expect(wrapper.find('Modal')).toHaveLength(1);
+    expect(wrapper.find('Modal').prop('show')).toEqual(true);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders modal without connection button', () => {
+    const wrapper = shallow(<LoginModal show {...props} byPassAuth />);
     expect(wrapper.find('Modal')).toHaveLength(1);
     expect(wrapper.find('Modal').prop('show')).toEqual(true);
     expect(wrapper).toMatchSnapshot();

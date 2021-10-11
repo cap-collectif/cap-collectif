@@ -15,9 +15,10 @@ type Props = {|
   +show: boolean,
   +onClose: () => void,
   +onSubmit: () => void,
+  +byPassAuth: boolean,
 |};
 
-export const LoginModal = ({ submitting, show, onClose, onSubmit }: Props) => {
+export const LoginModal = ({ submitting, show, onClose, onSubmit, byPassAuth }: Props) => {
   const intl = useIntl();
 
   return (
@@ -39,13 +40,15 @@ export const LoginModal = ({ submitting, show, onClose, onSubmit }: Props) => {
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
-          <Button id="confirm-login" type="submit" disabled={submitting} bsStyle="primary">
-            {submitting ? (
-              <FormattedMessage id="global.loading" />
-            ) : (
-              <FormattedMessage id="global.login_me" />
-            )}
-          </Button>
+          {!byPassAuth && (
+            <Button id="confirm-login" type="submit" disabled={submitting} bsStyle="primary">
+              {submitting ? (
+                <FormattedMessage id="global.loading" />
+              ) : (
+                <FormattedMessage id="global.login_me" />
+              )}
+            </Button>
+          )}
         </Modal.Footer>
       </form>
     </Modal>
@@ -55,7 +58,9 @@ export const LoginModal = ({ submitting, show, onClose, onSubmit }: Props) => {
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting('login')(state),
   show: state.user.showLoginModal || false,
+  byPassAuth: state.default.features.sso_by_pass_auth,
 });
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSubmit: (e: Event) => {
     e.preventDefault();

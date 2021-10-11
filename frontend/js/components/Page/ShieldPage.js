@@ -40,13 +40,11 @@ const getShieldBody = ({
       </>
     );
   }
-  if (byPassAuth && loginWithOpenId) {
-    return (
-      <>
-        <LoginBox prefix="" />
-      </>
-    );
+
+  if (byPassAuth) {
+    return <LoginBox prefix="" />;
   }
+
   return (
     <form id="login-form" onSubmit={onSubmit}>
       <LoginBox prefix="" />
