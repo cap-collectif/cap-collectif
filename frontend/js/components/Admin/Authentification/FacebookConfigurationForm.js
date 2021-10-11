@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type {Dispatch} from "redux";
+import type { Dispatch } from 'redux';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import type { GlobalState } from '~/types';
@@ -13,7 +13,7 @@ import Heading from '~ui/Primitives/Heading';
 import Modal from '~ds/Modal/Modal';
 import Text from '~ui/Primitives/Text';
 import Button from '~ds/Button/Button';
-import type {FacebookConfigurationForm_ssoConfiguration} from "~relay/FacebookConfigurationForm_ssoConfiguration.graphql";
+import type { FacebookConfigurationForm_ssoConfiguration } from '~relay/FacebookConfigurationForm_ssoConfiguration.graphql';
 
 type FormValues = {|
   clientId: string,
@@ -56,7 +56,7 @@ const validate = ({ secret, clientId }: FormValues) => {
 
   if (!clientId) {
     errors.clientId = 'global.required';
-  } else if (clientId.length !== 16 || !/^\d+$/.test(clientId)) {
+  } else if (!/^\d+$/.test(clientId)) {
     errors.clientId = 'facebook-app-id-must-be-16-digits';
   }
 
@@ -79,30 +79,30 @@ export const FacebookConfigurationForm = (props: Props) => {
     submitting,
     valid,
     submitSucceeded,
-    submitFailed
+    submitFailed,
   } = props;
   return (
     <form id={formName} onSubmit={handleSubmit}>
       <Modal.Header>
         <Modal.Header.Label>
-          <FormattedMessage id="authentication-method"/>
+          <FormattedMessage id="authentication-method" />
         </Modal.Header.Label>
         <Heading>
-          <FormattedMessage id="edit-facebook-authentication-method"/>
+          <FormattedMessage id="edit-facebook-authentication-method" />
         </Heading>
       </Modal.Header>
       <Modal.Body>
         <Text>
-          <FormattedHTMLMessage id="edit-facebook-authentication-method-create-app"/>
+          <FormattedHTMLMessage id="edit-facebook-authentication-method-create-app" />
         </Text>
-        <hr/>
+        <hr />
         <Field
           id={`${formName}_clientId`}
           name="clientId"
           type="text"
           required
           component={component}
-          label={<FormattedMessage id="App-ID"/>}
+          label={<FormattedMessage id="App-ID" />}
           placeholder="ex : 1714596595426186"
         />
         <Field
@@ -112,10 +112,10 @@ export const FacebookConfigurationForm = (props: Props) => {
           required
           component={component}
           placeholder="ex : fe7bXXXXXXXXXXXXXXXXXXXXXXXX03xx"
-          label={<FormattedMessage id="App-secret"/>}
+          label={<FormattedMessage id="App-secret" />}
         />
         <Text>
-          <FormattedHTMLMessage id="edit-facebook-authentication-method-find-id-secret"/>
+          <FormattedHTMLMessage id="edit-facebook-authentication-method-find-id-secret" />
         </Text>
       </Modal.Body>
       <Modal.Footer spacing={2}>
@@ -127,7 +127,7 @@ export const FacebookConfigurationForm = (props: Props) => {
           submitting={submitting}
         />
         <Button onClick={hide} variantSize="small" variant="secondary">
-          <FormattedMessage id="global.cancel"/>
+          <FormattedMessage id="global.cancel" />
         </Button>
         <Button
           type="submit"
@@ -136,12 +136,18 @@ export const FacebookConfigurationForm = (props: Props) => {
           variantSize="small"
           disabled={pristine || invalid || submitting}>
           <FormattedMessage
-            id={submitting ? 'global.loading' : ((ssoConfiguration && ssoConfiguration.enabled) ? 'global.save' : 'action_enable')}
+            id={
+              submitting
+                ? 'global.loading'
+                : ssoConfiguration && ssoConfiguration.enabled
+                ? 'global.save'
+                : 'action_enable'
+            }
           />
         </Button>
       </Modal.Footer>
     </form>
-  )
+  );
 };
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
