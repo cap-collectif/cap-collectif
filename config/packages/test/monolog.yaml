@@ -4,6 +4,7 @@ monolog:
             type: stream
             path: php://stderr
             level: warning
+            max_files: 5
         file:
             type: stream
             path: '%kernel.logs_dir%/test.log'

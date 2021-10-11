@@ -4,6 +4,7 @@ monolog:
             type: rotating_file
             path: '%kernel.logs_dir%/dev.log'
             level: debug
+            max_files: 5
         main:
             type: stream
             path: php://stderr

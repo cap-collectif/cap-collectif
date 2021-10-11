@@ -26,6 +26,7 @@
         "compile-graphql": "pipenv run fab local.qa.compile-graphql",
         "dump-graphql-schemas": "pipenv run fab local.qa.graphql-schemas",
         "clean-cache": "rm -rf var/cache/* && pipenv run fab local.app.clear-cache",
+        "clean-logs": "rm -rf var/log/* var/logs/*",
         "generate-graphql-files": "yarn run clean-cache && yarn run compile-graphql && yarn run dump-graphql-schemas",
         "relay": "yarn run generate-graphql-files && yarn run build-relay-schema",
         "relay:watch": "yarn run generate-graphql-files && yarn run build-relay-schema:watch",
