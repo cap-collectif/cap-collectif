@@ -6,8 +6,25 @@
     {{ "global.edit.title"|trans({'name': title|truncate(15) }, 'SonataAdminBundle') }}
 {% endblock %}
 
+{% block sonata_header %}
+    {{ parent() }}
+    {% if app.user.isAdmin == false %}
+        {% block sonata_breadcrumb %}
+            {% if app.user.isAdmin %}
+                {{ parent() }}
+            {% endif %}
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+
 {% block navbar_title %}
     {{ "global.edit.title"|trans({'name': title }, 'SonataAdminBundle') }}
+{% endblock %}
+
+{% block actions %}
+    {% if app.user.isAdmin %}
+        {% include '@SonataAdmin/CRUD/action_buttons.html.twig' %}
+    {% endif %}
 {% endblock %}
 
 {% block form %}

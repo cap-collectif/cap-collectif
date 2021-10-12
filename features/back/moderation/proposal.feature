@@ -68,22 +68,7 @@ Scenario: Logged in admin, wants to view the proposal's followers
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal followers tab
   And I should see 2 ".proposal__follower" elements
-
-@database @elasticsearch
-Scenario: Logged in admin, wants to download followers as CSV
-  Given I am logged in as admin
-  And I go to the admin proposal page with proposalid "proposal10"
-  Then I go to the admin proposal followers tab
-  And I click on button "[id='proposal-follower-export-UHJvcG9zYWw6cHJvcG9zYWwxMA==']"
-  And I follow "export_format_csv"
-
-@database @elasticsearch
-Scenario: Logged in admin, wants to download followers as xlsx
-  Given I am logged in as admin
-  And I go to the admin proposal page with proposalid "proposal10"
-  Then I go to the admin proposal followers tab
-  And I click on button "[id='proposal-follower-export-UHJvcG9zYWw6cHJvcG9zYWwxMA==']"
-  And I follow "project.download.modal.button"
+  
 
 @database @elasticsearch
 Scenario: Logged in admin wants add a proposal realisation step

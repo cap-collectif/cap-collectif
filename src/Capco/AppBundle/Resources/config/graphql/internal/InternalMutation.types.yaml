@@ -331,21 +331,21 @@ InternalMutation:
                     payloadType: InternalAddProposalsFromCsvPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsFromCsvMutation", [value, getUser()])'
             createProposalFusion:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGrantedFusion(args["input"]["fromProposals"], getUser(), "createProposalFusion")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateProposalFusionInput
                     payloadType: CreateProposalFusionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalFusionMutation", [value, getUser()])'
             updateProposalFusion:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGrantedFusion(args["input"]["fromProposals"], getUser(), "updateProposalFusion")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateProposalFusionInput
                     payloadType: UpdateProposalFusionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalFusionMutation", [value , getUser()])'
             changeProposalNotation:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGranted(args["input"]["proposalId"], getUser(), "changeProposalNotation")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: ChangeProposalNotationInput
@@ -394,14 +394,14 @@ InternalMutation:
                     payloadType: UnfollowOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowOpinionMutation", [value, getUser()])'
             selectProposal:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGranted(args["input"]["proposalId"], getUser(), "selectProposal")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: SelectProposalInput
                     payloadType: SelectProposalPayload
                     mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId'], getUser(), value['statusId']])"
             unselectProposal:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGranted(args["input"]["proposalId"], getUser(), "unselectProposal")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UnselectProposalInput
@@ -422,7 +422,7 @@ InternalMutation:
                     payloadType: ChangeCollectStatusPayload
                     mutateAndGetPayload: "@=mutation('changeCollectStatus', [value['proposalId'], getUser(), value['statusId'] ])"
             changeProposalProgressSteps:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGranted(args["input"]["proposalId"], getUser(), "changeProposalProgressSteps")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: ChangeProposalProgressStepsInput
