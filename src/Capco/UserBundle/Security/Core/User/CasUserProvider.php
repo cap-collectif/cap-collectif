@@ -9,12 +9,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * Class CasUserProvider.
+ * Our only CAS for now is https://capcapeb.capeb.fr/
  */
 class CasUserProvider implements UserProviderInterface
 {
     private UserManager $userManager;
-
     private GroupMutation $groupMutation;
 
     public function __construct(UserManager $manager, GroupMutation $groupMutation)
@@ -30,29 +29,24 @@ class CasUserProvider implements UserProviderInterface
     {
         $user = $this->userManager->findUserBy(['casId' => $casId]);
 
-        if (null !== $user) {
-            $user->setCasId($casId);
-            $user->setUsername($casId);
-        } else {
+        if (!$user) {
             $user = $this->userManager->createUser();
             $user->setCasId($casId);
             $user->setUsername($casId);
-            // create fake email, the CAS server does not provide any data except the login
-            $email = $casId . '@fake-email-cap-collectif.com';
+            
+            // We create a fake email because the CAS server does not provide any data except the login
+            $fakeEmail = $casId . '@fake-email-cap-collectif.com';
 
-            $user->setEmail($email);
+            $user->setEmail($fakeEmail);
             $user->setEnabled(true);
+            $this->userManager->updateUser($user);
         }
-        $this->userManager->updateUser($user);
 
         $this->groupMutation->createAndAddUserInGroup($user, 'CAS');
 
         return $user;
     }
 
-    /**
-     * @return UserInterface
-     */
     public function refreshUser(UserInterface $user): ?UserInterface
     {
         if ($user instanceof User) {
