@@ -4,10 +4,11 @@ if [[ -z "${SYMFONY_RABBITMQ_HOST}" || $SYMFONY_RABBITMQ_HOST == "127.0.0.1" ]]
 then
     echo "[$(date -u)][RABBITMQ] Fix permissions on files!"
     chown -R rabbitmq:rabbitmq /var/lib/rabbitmq
-
+    mkdir -p /var/log/rabbitmq
+    chown -R rabbitmq:rabbitmq /var/log/rabbitmq
     echo "[$(date -u)][RABBITMQ] Started!"
 
-    exec rabbitmq-server
+    exec gosu rabbitmq rabbitmq-server
 else
     echo "[$(date -u)][RABBITMQ] Using external server !"
     sleep 99999

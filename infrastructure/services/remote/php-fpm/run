@@ -34,14 +34,14 @@ timeout=1;
 if [[ -z "${SYMFONY_RABBITMQ_HOST}" || $SYMFONY_RABBITMQ_HOST == "127.0.0.1" ]]
 then
     echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
-    while ! (rabbitmqctl cluster_status > /dev/null)
+    while ! (gosu rabbitmq rabbitmqctl cluster_status > /dev/null)
     do
         sleep $timeout
         timeout=$(( $timeout + 1 ))
     done
 
     # When we have fresh instance, capco vhost is not created
-    if rabbitmqctl list_vhosts | grep -q ${SYMFONY_RABBITMQ_VHOST:-capco}; then
+    if gosu rabbitmq rabbitmqctl list_vhosts | grep -q ${SYMFONY_RABBITMQ_VHOST:-capco}; then
         echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
         gosu capco php bin/rabbit vhost:mapping:create --host=${SYMFONY_RABBITMQ_HOST:-127.0.0.1} --vhost=${SYMFONY_RABBITMQ_VHOST:-capco}  --user=${SYMFONY_RABBITMQ_LOGIN:-guest} --password=${SYMFONY_RABBITMQ_PASSWORD:-guest} config/rabbitmq.yaml --quiet
         echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
