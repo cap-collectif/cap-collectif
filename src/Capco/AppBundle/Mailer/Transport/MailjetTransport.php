@@ -7,11 +7,12 @@ use Psr\Http\Message\ResponseInterface;
 
 class MailjetTransport implements \Swift_Transport
 {
-    const API_URL = 'https://api.mailjet.com/v3.1/send';
+    protected const API_URL = 'https://api.mailjet.com/v3.1/send';
 
     protected \Swift_Events_EventDispatcher $dispatcher;
     private ?string $publicKey = null;
     private ?string $privateKey = null;
+    private ?string $lastSentMessageId;
 
     public function __construct(\Swift_Events_EventDispatcher $dispatcher)
     {
@@ -53,6 +54,7 @@ class MailjetTransport implements \Swift_Transport
         &$failedRecipients = null,
         ?\Swift_Events_Event $event = null
     ): int {
+        $this->lastSentMessageId = null;
         $response = (new Client())->post(self::API_URL, $this->createPostOptions($message));
 
         if (200 <= $response->getStatusCode() && $response->getStatusCode() <= 300) {
@@ -93,11 +95,17 @@ class MailjetTransport implements \Swift_Transport
         $this->dispatcher->bindEventListener($plugin);
     }
 
+    public function getLastMessageId(): ?string
+    {
+        return $this->lastSentMessageId;
+    }
+
     private function handleSuccess(
         ResponseInterface $response,
         ?\Swift_Events_Event $event = null
     ): int {
         $responseBody = json_decode($response->getBody()->getContents(), true);
+        $this->lastSentMessageId = $responseBody['Messages'][0]['To'][0]['MessageID'];
         $count = $responseBody['Count'] ?? 0;
         if ($event) {
             $this->handleSuccessEvent($count, $event);

@@ -102,7 +102,7 @@ class Transport implements \Swift_Transport
         return $this;
     }
 
-    private function getTransport()
+    public function getTransport()
     {
         $configuration = $this->getConfiguration();
         if ('mailjet' === $configuration->getValue()) {

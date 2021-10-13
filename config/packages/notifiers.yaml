@@ -3,6 +3,8 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
 
     Capco\AppBundle\Notifier\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Notifier/*'
@@ -33,4 +35,7 @@ services:
         public: true
 
     Capco\AppBundle\Notifier\QuestionnaireReplyNotifier:
+        public: true
+
+    Capco\AppBundle\Notifier\UserInviteNotifier:
         public: true

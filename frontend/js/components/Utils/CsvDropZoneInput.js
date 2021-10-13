@@ -2,11 +2,12 @@
 import React from 'react';
 import type { DropzoneFile } from 'react-dropzone';
 import type { FieldProps } from 'redux-form';
-import { Col, Collapse, ControlLabel, FormGroup, HelpBlock, Row } from 'react-bootstrap';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { Col, ControlLabel, FormGroup, HelpBlock, Row } from 'react-bootstrap';
+import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import FileUpload from '../Form/FileUpload';
 import { CSV_MAX_UPLOAD_SIZE } from '~/components/Event/Admin/AdminImportEventsCsvInput';
+import InfoMessage from '~ds/InfoMessage/InfoMessage';
 
 type FileUploadFieldProps = {
   input: {
@@ -16,8 +17,6 @@ type FileUploadFieldProps = {
   meta: {
     asyncValidating: $PropertyType<$PropertyType<FieldProps, 'meta'>, 'asyncValidating'>,
   },
-  showMoreError?: boolean,
-  onClickShowMoreError?: (event: SyntheticEvent<HTMLButtonElement>) => void,
   onPostDrop: (droppedFiles: Array<DropzoneFile>, input: Object) => void,
   disabled: boolean,
   currentFile: ?DropzoneFile,
@@ -29,10 +28,8 @@ export const CsvDropZoneInput = ({
   onPostDrop,
   disabled,
   currentFile,
-  onClickShowMoreError,
-  showMoreError = false,
 }: FileUploadFieldProps) => {
-  const colWidth = input.value.notFoundEmails && input.value.notFoundEmails.length === 0 ? 12 : 6;
+  const intl = useIntl();
 
   return (
     <FormGroup>
@@ -65,47 +62,54 @@ export const CsvDropZoneInput = ({
               <FormattedHTMLMessage id="document-analysis" /> {currentFile ? currentFile.name : ''}
             </div>
             <Row className="mt-15">
-              <Col xs={12} sm={colWidth} className="text-center">
-                <h4>
-                  <i className="cap cap-check-bubble text-success" />{' '}
-                  <b>
-                    <FormattedMessage
-                      id="count-users-found"
-                      values={{ num: input.value.importedUsers.length }}
-                    />
-                  </b>
-                </h4>
+              <Col className="p-5" xs={12}>
+                <InfoMessage variant="success">
+                  <InfoMessage.Title withIcon>
+                    {intl.formatMessage(
+                      { id: 'count-users-found' },
+                      {
+                        num: input.value.importedUsers.length,
+                      },
+                    )}
+                  </InfoMessage.Title>
+                </InfoMessage>
               </Col>
-              {input.value.notFoundEmails && input.value.notFoundEmails.length > 0 && (
-                <Col xs={12} sm={colWidth} className="text-center">
-                  <h4>
-                    <i className="cap cap-ios-close text-danger" />{' '}
-                    <b>
-                      <FormattedMessage
-                        id="count-untraceable-users"
-                        values={{ num: input.value.notFoundEmails.length }}
-                      />
-                    </b>
-                  </h4>
-                  <Collapse in={showMoreError}>
-                    <ul
-                      style={{ listStyle: 'none', maxHeight: 80, overflowY: 'scroll' }}
-                      className="small">
-                      {input.value.notFoundEmails.map((email: string, key: number) => (
-                        <li key={key}>{email}</li>
-                      ))}
-                    </ul>
-                  </Collapse>
-                  <div
-                    className="text-info"
-                    style={{ cursor: 'pointer' }}
-                    onClick={onClickShowMoreError}
-                    onKeyPress={onClickShowMoreError}
-                    role="button"
-                    tabIndex={0}>
-                    <i className={showMoreError ? 'cap cap-arrow-40' : 'cap cap-arrow-39'} />{' '}
-                    <FormattedMessage id={showMoreError ? 'see-less' : 'global.see'} />
-                  </div>
+              {input.value.invalidLines && input.value.invalidLines.length > 0 && (
+                <Col className="p-5" xs={12}>
+                  <InfoMessage variant="danger">
+                    <InfoMessage.Title withIcon>
+                      {intl.formatMessage(
+                        { id: 'csv-bad-lines-error' },
+                        {
+                          num: input.value.invalidLines.length,
+                          lines:
+                            input.value.invalidLines.length > 1
+                              ? input.value.invalidLines.slice(0, -1).toString()
+                              : input.value.invalidLines.toString(),
+                          last: input.value.invalidLines.pop(),
+                        },
+                      )}
+                    </InfoMessage.Title>
+                  </InfoMessage>
+                </Col>
+              )}
+              {input.value.duplicateLines && input.value.duplicateLines.length > 0 && (
+                <Col className="p-5" xs={12}>
+                  <InfoMessage variant="warning">
+                    <InfoMessage.Title withIcon>
+                      {intl.formatMessage(
+                        { id: 'row-import-duplicates-error' },
+                        {
+                          num: input.value.duplicateLines.length,
+                          lines:
+                            input.value.duplicateLines.length > 1
+                              ? input.value.duplicateLines.slice(0, -1).toString()
+                              : input.value.duplicateLines.toString(),
+                          last: input.value.duplicateLines.pop(),
+                        },
+                      )}
+                    </InfoMessage.Title>
+                  </InfoMessage>
                 </Col>
               )}
             </Row>

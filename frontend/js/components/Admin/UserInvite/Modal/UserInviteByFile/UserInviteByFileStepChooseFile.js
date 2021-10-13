@@ -8,7 +8,6 @@ import { CsvDropZoneInput } from '~/components/Utils/CsvDropZoneInput';
 import { csvToArray } from '~/utils/csvToArray';
 import { useUserInviteModalContext } from '~/components/Admin/UserInvite/Modal/UserInviteModal.context';
 import { isEmail } from '~/services/Validator';
-import useBoolean from '~/utils/hooks/useBoolean';
 import Heading from '~ui/Primitives/Heading';
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import Modal from '~ds/Modal/Modal';
@@ -19,26 +18,37 @@ type Props = {|
   +onCloseButtonClick?: () => void,
 |};
 
-type EmailInput = {| importedUsers: string[], notFoundEmails: string[] |};
+type EmailInput = {| duplicateLines: number[], importedUsers: string[], invalidLines: number[] |};
 
 const getInputFromFile = (content: string): EmailInput => {
-  const rows = [...new Set(csvToArray(content))].filter(Boolean);
+  const contentArray = csvToArray(content);
+  const rows = [...new Set(contentArray)].filter(Boolean);
   const mails = rows.filter(isEmail);
-  const invalid = rows.filter(mail => !isEmail(mail));
+  const invalidLines = rows
+    .filter(mail => !isEmail(mail))
+    .map((mail: string) => {
+      return rows.indexOf(mail);
+    });
+
+  const duplicateLines = mails.reduce((acc, el, i, arr) => {
+    if (arr.indexOf(el) !== i && acc.indexOf(el) < 0) acc.push(i);
+    return acc;
+  }, []);
 
   return {
+    duplicateLines,
     importedUsers: mails,
-    notFoundEmails: invalid,
+    invalidLines,
   };
 };
 
 export const UserInviteByFileStepChooseFile = ({ onCloseButtonClick }: Props): React.Node => {
   const { dispatch } = useUserInviteModalContext();
   const intl = useIntl();
-  const [showMoreError, toggleShowMoreError] = useBoolean();
   const [emails, setEmails] = useState<EmailInput>({
+    duplicateLines: [],
     importedUsers: [],
-    notFoundEmails: [],
+    invalidLines: [],
   });
   const [file, setFile] = useState<?DropzoneFile>(null);
   const isValid = emails.importedUsers.length > 0;
@@ -59,8 +69,6 @@ export const UserInviteByFileStepChooseFile = ({ onCloseButtonClick }: Props): R
             value: emails,
           }}
           name="emails"
-          showMoreError={showMoreError}
-          onClickShowMoreError={toggleShowMoreError}
           meta={{
             asyncValidating: false,
           }}

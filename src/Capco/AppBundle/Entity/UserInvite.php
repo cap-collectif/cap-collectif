@@ -19,6 +19,10 @@ class UserInvite
     use TimestampableTrait;
     use UuidTrait;
 
+    public const SEND_FAILURE = 'send_failure';
+    public const WAITING_SENDING = 'waiting_sending';
+    public const SENT = 'sent';
+
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
@@ -52,6 +56,21 @@ class UserInvite
      * )
      */
     private $groups;
+
+    /**
+     * @ORM\Column(name="internal_status", type="string", nullable=false)
+     */
+    private string $internalStatus = self::WAITING_SENDING;
+
+    /**
+     * @ORM\Column(name="mailjet_id", type="string", nullable=true)
+     */
+    private ?string $mailjetId;
+
+    /**
+     * @ORM\Column(name="mandrill_id", type="string", nullable=true)
+     */
+    private ?string $mandrillId;
 
     public function __construct()
     {
@@ -150,6 +169,42 @@ class UserInvite
     public function setGroups(ArrayCollection $groups): self
     {
         $this->groups = $groups;
+
+        return $this;
+    }
+
+    public function getInternalStatus(): string
+    {
+        return $this->internalStatus;
+    }
+
+    public function setInternalStatus(string $internalStatus): self
+    {
+        $this->internalStatus = $internalStatus;
+
+        return $this;
+    }
+
+    public function getMailjetId(): ?string
+    {
+        return $this->mailjetId;
+    }
+
+    public function setMailjetId(string $mailjetId): self
+    {
+        $this->mailjetId = $mailjetId;
+
+        return $this;
+    }
+
+    public function getMandrillId(): ?string
+    {
+        return $this->mandrillId;
+    }
+
+    public function setMandrillId(?string $mandrillId): self
+    {
+        $this->mandrillId = $mandrillId;
 
         return $this;
     }

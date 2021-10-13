@@ -30,9 +30,11 @@ class QueryUserInvitationsResolver implements ResolverInterface
     public function getConnection(Argument $args): ConnectionInterface
     {
         $totalCount = 0;
+        $term = $args->offsetGet('term');
+        $status = $args->offsetGet('status');
 
-        $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount) {
-            $results = $this->repository->findPaginated($limit, $offset);
+        $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount, $term, $status) {
+            $results = $this->repository->findPaginated($limit, $offset, $term, $status);
 
             $totalCount = \count($results);
 

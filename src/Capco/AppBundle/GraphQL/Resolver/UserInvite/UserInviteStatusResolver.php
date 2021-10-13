@@ -13,6 +13,11 @@ class UserInviteStatusResolver implements ResolverInterface
         if ($userInvite->hasExpired()) {
             return UserInviteStatus::EXPIRED;
         }
+
+        if (UserInvite::SEND_FAILURE === $userInvite->getInternalStatus()) {
+            return UserInviteStatus::FAILED;
+        }
+
         return UserInviteStatus::PENDING;
     }
 }

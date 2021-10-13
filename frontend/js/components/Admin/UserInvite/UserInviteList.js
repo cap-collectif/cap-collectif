@@ -19,9 +19,17 @@ import type {
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 import Tag from '~ds/Tag/Tag';
+import Menu from "~ds/Menu/Menu";
+import Text from "~ui/Primitives/Text";
+import {ICON_NAME} from "~ds/Icon/Icon";
+
+export type Status = "PENDING" | "FAILED" | "ALL" | "EXPIRED";
 
 type Props = {|
-  query: UserInviteList_query$key,
+  +query: UserInviteList_query$key,
+  +status: Status,
+  +setStatus: (status: any) => void,
+  +term: string
 |};
 
 const StatusTag = ({ status }: { status: ?UserInviteStatus }) => {
@@ -29,15 +37,24 @@ const StatusTag = ({ status }: { status: ?UserInviteStatus }) => {
   if (status === 'PENDING')
     return <Tag variant="orange">{intl.formatMessage({ id: 'waiting' })}</Tag>;
   if (status === 'EXPIRED')
-    return <Tag variant="red">{intl.formatMessage({ id: 'global.expired.feminine' })}</Tag>;
+    return <Tag variant="gray">{intl.formatMessage({ id: 'global.expired.feminine' })}</Tag>;
+  if (status === 'FAILED')
+    return <Tag variant="red">{intl.formatMessage({ id: 'sending.failure' })}</Tag>;
   return null;
 };
 
-export const UserInviteList = ({ query: queryFragment }: Props): React.Node => {
+export const UserInviteList = ({ query: queryFragment, status, setStatus, term }: Props): React.Node => {
   const intl = useIntl();
-  const { data, hasNext, loadNext } = usePaginationFragment(FRAGMENT, queryFragment);
+  const { data, hasNext, loadNext, refetch } = usePaginationFragment(FRAGMENT, queryFragment);
   const invitations = data?.userInvitations?.edges?.map(edge => edge?.node).filter(Boolean) ?? [];
   const hasInvitations = invitations.length > 0;
+  const firstRendered = React.useRef(null)
+  React.useEffect(() => {
+    if (firstRendered.current) {
+      refetch({status: status === "ALL" ? null : status, term: term || null})
+    }
+    firstRendered.current = true
+  }, [term, status, refetch])
 
   const groupsText = (userInvite): string => {
     return userInvite?.groups?.edges && userInvite?.groups?.edges?.length > 0
@@ -83,7 +100,35 @@ export const UserInviteList = ({ query: queryFragment }: Props): React.Node => {
             <Table.Th noPlaceholder>{intl.formatMessage({ id: 'global.role' })}</Table.Th>
             <Table.Th noPlaceholder>{intl.formatMessage({ id: 'admin.label.group' })}</Table.Th>
             <Table.Th noPlaceholder>
-              {intl.formatMessage({ id: 'admin.fields.step.group_statuses' })}
+              {({ styles }) => (
+                <Menu>
+                  <Menu.Button as={React.Fragment}>
+                    <Button rightIcon={ICON_NAME.ARROW_DOWN_O} {...styles}>
+                      {intl.formatMessage({ id: 'admin.fields.step.group_statuses' })}
+                    </Button>
+                  </Menu.Button>
+                  <Menu.List>
+                    <Menu.OptionGroup
+                      value={status}
+                      onChange={value => setStatus(((value: any): string))}
+                      type="radio"
+                      title={intl.formatMessage({ id: 'action_show' })}>
+                      <Menu.OptionItem value="ALL">
+                        <Text>{intl.formatMessage({ id: 'global.select_statuses' })}</Text>
+                      </Menu.OptionItem>
+                      <Menu.OptionItem value="EXPIRED">
+                        <Text>{intl.formatMessage({ id: 'global.expired.feminine' })}</Text>
+                      </Menu.OptionItem>
+                      <Menu.OptionItem value="FAILED">
+                        <Text>{intl.formatMessage({ id: 'sending.failure' })}</Text>
+                      </Menu.OptionItem>
+                      <Menu.OptionItem value="PENDING">
+                        <Text>{intl.formatMessage({ id: 'waiting' })}</Text>
+                      </Menu.OptionItem>
+                    </Menu.OptionGroup>
+                  </Menu.List>
+                </Menu>
+              )}
             </Table.Th>
             <Table.Th noPlaceholder> </Table.Th>
           </Table.Tr>

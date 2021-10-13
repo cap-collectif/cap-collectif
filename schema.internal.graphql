@@ -10594,6 +10594,8 @@ type Query {
     """
     after: String
     first: Int = 50
+    term: String = null
+    status: UserInviteStatus = null
   ): UserInviteConnection!
 
   """List all site colors."""
@@ -15513,11 +15515,14 @@ type UserInviteEdge {
 
 """The invitation status"""
 enum UserInviteStatus {
-  """If the invitation is pending"""
+  """The invitation is still pending."""
   PENDING
 
-  """If the invitation is expired"""
+  """The invitation has expired."""
   EXPIRED
+
+  """Sending the invitation failed."""
+  FAILED
 }
 
 """A user's notifications configuration"""

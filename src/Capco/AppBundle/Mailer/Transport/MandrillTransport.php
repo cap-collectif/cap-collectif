@@ -18,30 +18,12 @@ use Swift_MimePart;
  */
 class MandrillTransport implements Swift_Transport
 {
-    /**
-     * @var Swift_Events_EventDispatcher
-     */
-    protected $dispatcher;
-
-    /**
-     * @var string|null
-     */
-    protected $apiKey;
-
-    /**
-     * @var bool|null
-     */
-    protected $async;
-
-    /**
-     * @var array|null
-     */
-    protected $resultApi;
-
-    /**
-     * @var string|null
-     */
-    protected $subAccount;
+    protected Swift_Events_EventDispatcher $dispatcher;
+    protected ?string $apiKey;
+    protected ?bool $async;
+    protected ?array $resultApi;
+    protected ?string $subAccount;
+    private ?string $lastSentMessageId;
 
     public function __construct(Swift_Events_EventDispatcher $dispatcher)
     {
@@ -143,31 +125,30 @@ class MandrillTransport implements Swift_Transport
 
     /**
      * @param null $failedRecipients
-     *
-     * @return int Number of messages sent
      */
     public function send(
         Swift_Mime_SimpleMessage $message,
         &$failedRecipients = null,
         ?Swift_Events_SendEvent $event = null
-    ) {
+    ): int {
         $this->resultApi = null;
-
         $sendCount = 0;
-
         $mandrillMessage = $this->getMandrillMessage($message);
-
         $mandrill = $this->createMandrill();
+        // Always sending messages asynchronously.
+        $this->setAsync(true);
 
-        $this->resultApi = $mandrill->messages->send($mandrillMessage, $this->async);
+        $this->resultApi = $mandrill->messages->send($mandrillMessage, $this->getAsync());
 
         foreach ($this->resultApi as $item) {
-            if ('sent' === $item['status'] || 'queued' === $item['status']) {
+            if ('queued' === $item['status']) {
                 ++$sendCount;
             } else {
                 $failedRecipients[] = $item['email'];
             }
         }
+        // As we only send 1 message, we cant directly hard code the index.
+        $this->lastSentMessageId = $this->resultApi[0]['_id'];
 
         if ($event) {
             if ($sendCount > 0) {
@@ -414,6 +395,11 @@ class MandrillTransport implements Swift_Transport
     public function getResultApi()
     {
         return $this->resultApi;
+    }
+
+    public function getLastMessageId(): ?string
+    {
+        return $this->lastSentMessageId;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Enum\UserInviteStatus;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -18,12 +19,58 @@ class UserInviteRepository extends EntityRepository
     /**
      * @return array{UserInvite}
      */
-    public function findPaginated(?int $limit, ?int $offset): array
+    public function findPaginated(?int $limit, ?int $offset, ?string $term, ?string $status): array
     {
-        return $this->getPaginated($limit, $offset)
-            ->addOrderBy('ui.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+        $qb = $this->getPaginated($limit, $offset);
+        $qb->leftJoin('ui.groups', 'uig');
+        if (null !== $term) {
+            $qb->where(
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb->expr()->like('ui.email', $qb->expr()->literal('%' . $term . '%')),
+                        $qb->expr()->like('uig.title', $qb->expr()->literal('%' . $term . '%'))
+                    )
+            );
+        }
+        if (UserInviteStatus::EXPIRED === $status) {
+            $qb->andWhere(
+                $qb
+                    ->expr()
+                    ->lt(
+                        'ui.expiresAt',
+                        $qb->expr()->literal((new \DateTimeImmutable())->format('Y/m/d H:i:s'))
+                    )
+            );
+        }
+
+        if (UserInviteStatus::FAILED === $status) {
+            $qb->andWhere($qb->expr()->eq('ui.internalStatus', ':failed'))->setParameter(
+                ':failed',
+                UserInvite::SEND_FAILURE
+            );
+        }
+
+        if (UserInviteStatus::PENDING === $status) {
+            $qb->andWhere(
+                $qb
+                    ->expr()
+                    ->andX(
+                        $qb->expr()->eq('ui.internalStatus', ':pending'),
+                        $qb
+                            ->expr()
+                            ->gt(
+                                'ui.expiresAt',
+                                $qb
+                                    ->expr()
+                                    ->literal((new \DateTimeImmutable())->format('Y/m/d H:i:s'))
+                            )
+                    )
+            )->setParameter(':pending', UserInvite::WAITING_SENDING);
+        }
+        $qb->addOrderBy('ui.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -97,6 +144,33 @@ class UserInviteRepository extends EntityRepository
             ->setParameter('group', $group)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findOneByStatusSentOrNotExpired(string $email): ?UserInvite
+    {
+        $qb = $this->createQueryBuilder('ui');
+        $qb->andWhere($qb->expr()->eq('ui.email', ':email'))
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->andX(
+                        $qb
+                            ->expr()
+                            ->orX(
+                                $qb->expr()->eq('ui.internalStatus', ':sent'),
+                                $qb->expr()->eq('ui.internalStatus', ':pending')
+                            ),
+                        $qb->expr()->gte('ui.expiresAt', ':now')
+                    )
+            )
+            ->setParameters([
+                ':email' => $email,
+                ':sent' => UserInvite::SENT,
+                ':pending' => UserInvite::WAITING_SENDING,
+                ':now' => new \DateTimeImmutable(),
+            ]);
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     private function getPaginated(?int $limit, ?int $offset): QueryBuilder

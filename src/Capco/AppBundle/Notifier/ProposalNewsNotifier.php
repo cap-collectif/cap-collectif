@@ -12,13 +12,11 @@ use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ProposalNewsNotifier extends BaseNotifier
 {
     private PostRepository $postRepository;
-    private EntityManagerInterface $entityManager;
     private PostUrlResolver $urlResolver;
     private UserRepository $userRepository;
 
@@ -28,14 +26,12 @@ class ProposalNewsNotifier extends BaseNotifier
         RouterInterface $router,
         PostRepository $postRepository,
         LocaleResolver $localeResolver,
-        EntityManagerInterface $entityManager,
         PostUrlResolver $urlResolver,
         UserRepository $userRepository
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->siteParams = $siteParams;
         $this->postRepository = $postRepository;
-        $this->entityManager = $entityManager;
         $this->urlResolver = $urlResolver;
         $this->userRepository = $userRepository;
     }

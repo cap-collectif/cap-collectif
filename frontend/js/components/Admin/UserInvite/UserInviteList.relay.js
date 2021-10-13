@@ -11,13 +11,20 @@ export type RelayProps = {|
 export type Arguments = {|
   +first: number,
   +cursor?: string,
+  +term?: string,
+  +status: { type: 'UserInviteStatus' },
 |};
 
 export const FRAGMENT: GraphQLTaggedNode = graphql`
   fragment UserInviteList_query on Query
-    @argumentDefinitions(first: { type: "Int", defaultValue: 50 }, cursor: { type: "String" })
+    @argumentDefinitions(
+      first: { type: "Int", defaultValue: 50 }
+      cursor: { type: "String" }
+      term: { type: "String" }
+      status: { type: "UserInviteStatus" }
+    )
     @refetchable(queryName: "UserInviteListQuery") {
-    userInvitations(first: $first, after: $cursor)
+    userInvitations(first: $first, after: $cursor, term: $term, status: $status)
       @connection(key: "UserInviteList_userInvitations") {
       pageInfo {
         hasNextPage

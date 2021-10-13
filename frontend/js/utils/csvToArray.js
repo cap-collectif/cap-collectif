@@ -4,11 +4,16 @@ type Options = {|
   +removeEmptyLines?: boolean,
 |};
 
-export const csvToArray = (content: string, options?: Options) => {
+export const csvToArray = (content: string, options?: Options): Array<string> => {
   let rows = content
     .replace(/\r\n/g, '\n')
     .split('\n')
-    .map<string>(email => email.replace(/['"]+/g, ''));
+    .map<string>(email =>
+      email
+        .replace(/['"]+/g, '')
+        .replace(/\s/g, '')
+        .toLowerCase(),
+    );
 
   if (options?.removeEmptyLines) {
     rows = (rows.filter(row => row !== ''): string[]);

@@ -102,6 +102,9 @@ swarrot:
         user_invite.invitation:
             exchange: capco_direct_exchange
             routing_key: user_invite_invitation
+        user_invite.check:
+            exchange: capco_direct_exchange
+            routing_key: user_invite_check
         debate_article.crawler:
             exchange: capco_direct_exchange
             routing_key: debate_article_crawler
@@ -646,7 +649,24 @@ swarrot:
                   extras:
                       retry_attempts: 3
                       retry_exchange: 'retry'
-                      retry_routing_key_pattern: 'event_review_retry_%%attempt%%'
+                      retry_routing_key_pattern: 'user_invite_invitation_retry_%%attempt%%'
+        user_invite_check:
+            processor: Capco\AppBundle\Processor\UserInvite\UserInviteStatusCheckProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'user_invite_check_retry_%%attempt%%'
         debate_article_crawler:
             processor: Capco\AppBundle\Processor\Debate\DebateArticleCrawlerProcessor
             middleware_stack:

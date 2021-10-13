@@ -456,6 +456,12 @@ InternalQuery:
                     first:
                         type: 'Int'
                         defaultValue: 50
+                    term:
+                        type: 'String'
+                        defaultValue: null
+                    status:
+                        type: 'UserInviteStatus'
+                        defaultValue: null
             siteColors:
                 description: 'List all site colors.'
                 type: '[InternalSiteColor!]!'

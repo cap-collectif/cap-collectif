@@ -60,12 +60,9 @@ class InviteUsersMutation implements MutationInterface
 
         $existingInviteEmails = $this->userInviteRepository->findAllEmails();
         $existingUserEmails = $this->userRepository->findByEmails($emails);
+        $groupEntities = $this->groupRepository->findBy(['id' => $groupIds]);
         $toUpdateEmails = [];
         $newInvitations = [];
-
-        $groupEntities = array_map(function ($groupId) {
-            return $this->groupRepository->find($groupId);
-        }, $groupIds);
 
         $insertions = 0;
         foreach ($emails as $email) {
@@ -93,27 +90,26 @@ class InviteUsersMutation implements MutationInterface
             ++$insertions;
             if (0 === $insertions % self::BATCH_SIZE) {
                 $this->em->flush();
-                $this->em->clear();
+                $this->em->clear(UserInvite::class);
             }
         }
 
         $this->em->flush();
-        $this->em->clear();
+        $this->em->clear(UserInvite::class);
 
         if (\count($toUpdateEmails) > 0) {
-            foreach ($toUpdateEmails as $email) {
-                /** * @var $userInvite UserInvite  */
-                $userInvite = $this->userInviteRepository->findOneBy(['email' => $email]);
+            $userInvites = $this->userInviteRepository->findBy(['email' => $toUpdateEmails]);
+            foreach ($userInvites as $userInvite) {
                 $userInvite->setExpiresAt(new \DateTimeImmutable(self::EXPIRES_AT_PERIOD));
                 $userInvite->setIsAdmin($isAdmin);
                 $userInvite->setIsProjectAdmin($isProjectAdmin);
                 $userInvite->setGroups(new ArrayCollection($groupEntities));
-                $this->em->persist($userInvite);
             }
+            $this->em->flush();
         }
 
         $offset = 0;
-        $newInvitations = array_map(function (UserInvite $invite) use (&$offset) {
+        $newInvitations = array_map(static function (UserInvite $invite) use (&$offset) {
             return new Edge(ConnectionBuilder::offsetToCursor($offset++), $invite);
         }, $newInvitations);
         $newInvitations = \array_slice($newInvitations, 0, $maxResults);
@@ -122,7 +118,7 @@ class InviteUsersMutation implements MutationInterface
         $updatedInvitations =
             0 === \count($toUpdateEmails)
                 ? []
-                : array_map(function (UserInvite $invite) use (&$offset) {
+                : array_map(static function (UserInvite $invite) use (&$offset) {
                     return new Edge(ConnectionBuilder::offsetToCursor($offset++), $invite);
                 }, $this->userInviteRepository->findByEmails($toUpdateEmails));
         $updatedInvitations = \array_slice($updatedInvitations, 0, $maxResults);

@@ -8,7 +8,7 @@
 {% block sonata_breadcrumb %}
 {% endblock %}
 
-{% block form %}
+{% block sonata_page_content %}
     {% include '@CapcoApp/redux_store.html.twig' %}
     {{
         react_render_component('UserInviteAdminPageApp', {

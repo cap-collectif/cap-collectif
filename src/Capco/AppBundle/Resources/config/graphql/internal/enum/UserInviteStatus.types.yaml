@@ -5,7 +5,10 @@ UserInviteStatus:
         values:
             PENDING:
                 value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::PENDING")'
-                description: 'If the invitation is pending'
+                description: 'The invitation is still pending.'
             EXPIRED:
                 value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::EXPIRED")'
-                description: 'If the invitation is expired'
+                description: 'The invitation has expired.'
+            FAILED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::FAILED")'
+                description: 'Sending the invitation failed.'

@@ -86,6 +86,11 @@ class MailerService extends MailerFactory
         return $this->failedRecipients;
     }
 
+    public function getMailerTransport(): \Swift_Transport
+    {
+        return $this->mailer->getTransport();
+    }
+
     private function configureMessage(AbstractMessage $message): AbstractMessage
     {
         if (!$message->getSenderEmail()) {

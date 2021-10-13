@@ -191,6 +191,16 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: user_invite_invitation
+        user_invite_check:
+            durable: true
+            # In case of a large amounts of sent emails,
+            # some of them can be queued by the provider,
+            # in order to avoid overloading the queue we set a delay of 5 seconds.
+            delay: 5000
+            retries: [25, 645, 1225]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: user_invite_check
         debate_article_crawler:
             durable: true
             retries: [25, 125, 625]
