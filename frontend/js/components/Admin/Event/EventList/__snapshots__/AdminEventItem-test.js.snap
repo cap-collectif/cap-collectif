@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PostItem /> should render correctly 1`] = `
+exports[`<AdminEventItem /> should render correctly 1`] = `
 Array [
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -12,36 +12,11 @@ Array [
   >
     <a
       className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-      href="https://localhost:8000/admin/capco/app/post/post12/edit?_locale=fr-FR"
-      title="Post FR 12"
+      href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
+      title="GrenobleWeb2015"
     >
-      Post FR 12
+      GrenobleWeb2015
     </a>
-  </td>,
-  <td
-    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
-    style={
-      Object {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <a
-      className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-      href="https://localhost/profile/lbrunet"
-    >
-      lbrunet
-    </a>
-  </td>,
-  <td
-    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
-    style={
-      Object {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -54,25 +29,15 @@ Array [
     <div
       className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
     >
+      <a
+        className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+        href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
+      >
+        Croissance, innovation, disruption
+      </a>
       <div
         className="sc-bdnxRM Flex___StyledAppBox-RSPpX egukdJ"
-      >
-        <a
-          className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
-          href="https://localhost:8000/themes/immobilier?_locale=fr-FR"
-        >
-          Immobilier
-        </a>
-        <span>
-          ,   
-        </span>
-        <a
-          className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
-          href="https://localhost:8000/themes/justice?_locale=fr-FR"
-        >
-          Justice
-        </a>
-      </div>
+      />
     </div>
   </td>,
   <td
@@ -83,7 +48,15 @@ Array [
       }
     }
   >
-    global.published
+    <p
+      className="sc-bdnxRM jEmSYE"
+    >
+      2032-06-10 00:00:00
+       
+      -
+       
+      2035-03-16 00:00:00
+    </p>
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -93,7 +66,17 @@ Array [
       }
     }
   >
-    2021-08-04 17:50:27
+    -
+  </td>,
+  <td
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    2015-01-03 00:00:00
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN crfCBn visible-on-hover"
@@ -108,6 +91,7 @@ Array [
     >
       <button
         className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
+        href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
         onClick={[Function]}
         type="button"
       >
@@ -126,9 +110,9 @@ Array [
       >
         <p
           className="sc-bdnxRM cZcArZ"
-          title="global.preview"
+          title="global.download"
         >
-          global.preview
+          global.download
         </p>
         <div
           className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
@@ -165,9 +149,9 @@ Array [
       >
         <p
           className="sc-bdnxRM cZcArZ"
-          title="admin.global.delete"
+          title="global.delete"
         >
-          admin.global.delete
+          global.delete
         </p>
         <div
           className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
@@ -198,7 +182,7 @@ Array [
 ]
 `;
 
-exports[`<PostItem /> should render correctly without authors 1`] = `
+exports[`<AdminEventItem /> should render correctly with deleted event 1`] = `
 Array [
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -210,36 +194,11 @@ Array [
   >
     <a
       className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-      href="https://localhost:8000/admin/capco/app/post/post12/edit?_locale=fr-FR"
-      title="Post FR 12"
+      href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
+      title="GrenobleWeb2015"
     >
-      Post FR 12
+      GrenobleWeb2015
     </a>
-  </td>,
-  <td
-    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
-    style={
-      Object {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <a
-      className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-      href="https://localhost/profile/lbrunet"
-    >
-      lbrunet
-    </a>
-  </td>,
-  <td
-    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
-    style={
-      Object {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -252,25 +211,15 @@ Array [
     <div
       className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
     >
+      <a
+        className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+        href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
+      >
+        Croissance, innovation, disruption
+      </a>
       <div
         className="sc-bdnxRM Flex___StyledAppBox-RSPpX egukdJ"
-      >
-        <a
-          className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
-          href="https://localhost:8000/themes/immobilier?_locale=fr-FR"
-        >
-          Immobilier
-        </a>
-        <span>
-          ,   
-        </span>
-        <a
-          className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
-          href="https://localhost:8000/themes/justice?_locale=fr-FR"
-        >
-          Justice
-        </a>
-      </div>
+      />
     </div>
   </td>,
   <td
@@ -281,7 +230,15 @@ Array [
       }
     }
   >
-    global.published
+    <p
+      className="sc-bdnxRM jEmSYE"
+    >
+      2032-06-10 00:00:00
+       
+      -
+       
+      2035-03-16 00:00:00
+    </p>
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -291,7 +248,17 @@ Array [
       }
     }
   >
-    2021-08-04 17:50:27
+    -
+  </td>,
+  <td
+    className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    2015-01-03 00:00:00
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN crfCBn visible-on-hover"
@@ -306,6 +273,7 @@ Array [
     >
       <button
         className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
+        href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
         onClick={[Function]}
         type="button"
       >
@@ -324,9 +292,9 @@ Array [
       >
         <p
           className="sc-bdnxRM cZcArZ"
-          title="global.preview"
+          title="global.download"
         >
-          global.preview
+          global.download
         </p>
         <div
           className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
@@ -363,9 +331,9 @@ Array [
       >
         <p
           className="sc-bdnxRM cZcArZ"
-          title="admin.global.delete"
+          title="global.delete"
         >
-          admin.global.delete
+          global.delete
         </p>
         <div
           className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"

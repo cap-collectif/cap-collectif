@@ -284,6 +284,10 @@ type As = {|
   as?: any,
 |};
 
+type Anchor = {|
+  download?: boolean,
+|};
+
 type Input = {|
   +checked?: boolean,
 |};
@@ -346,6 +350,7 @@ export type AppBoxProps = {|
   ...onFocus,
   ...onClick,
   ...As,
+  ...Anchor,
   ...Input,
   ...CustomStyled,
   ...Accessibility,

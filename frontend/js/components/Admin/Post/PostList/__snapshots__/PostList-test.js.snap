@@ -213,7 +213,7 @@ exports[`<PostList /> should render correctly 1`] = `
         id="UG9zdDpwb3N0MTI="
       >
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -229,7 +229,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </a>
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -244,7 +244,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </a>
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -254,7 +254,7 @@ exports[`<PostList /> should render correctly 1`] = `
           &lt;mock-value-for-field-"username"&gt;
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -277,7 +277,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </div>
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -287,7 +287,7 @@ exports[`<PostList /> should render correctly 1`] = `
           global.no.published
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -297,7 +297,7 @@ exports[`<PostList /> should render correctly 1`] = `
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN crfCBn visible-on-hover"
           style={
             Object {
               "whiteSpace": "initial",
@@ -402,7 +402,7 @@ exports[`<PostList /> should render correctly 1`] = `
         id="UG9zdDpwb3N0MTM="
       >
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -418,7 +418,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </a>
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -433,7 +433,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </a>
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -443,7 +443,7 @@ exports[`<PostList /> should render correctly 1`] = `
           &lt;mock-value-for-field-"username"&gt;
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -466,7 +466,7 @@ exports[`<PostList /> should render correctly 1`] = `
           </div>
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -476,7 +476,7 @@ exports[`<PostList /> should render correctly 1`] = `
           global.no.published
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
             Object {
               "whiteSpace": "initial",
@@ -486,7 +486,7 @@ exports[`<PostList /> should render correctly 1`] = `
           &lt;mock-value-for-field-"updatedAt"&gt;
         </td>
         <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN hRmNQn visible-on-hover"
+          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN crfCBn visible-on-hover"
           style={
             Object {
               "whiteSpace": "initial",

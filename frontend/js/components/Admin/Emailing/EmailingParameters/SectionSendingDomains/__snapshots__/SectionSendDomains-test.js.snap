@@ -110,7 +110,7 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
           id="sender-email-domain-1"
         >
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -120,7 +120,7 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
             test.com
           </td>
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -130,7 +130,7 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
             Mailjet
           </td>
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -142,7 +142,7 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
             />
           </td>
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -154,7 +154,7 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
             />
           </td>
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl hRmNQn"
+            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
             style={
               Object {
                 "whiteSpace": "initial",

@@ -18,9 +18,11 @@ type TdProps = {|
 
 const styles = css({
   a: {
+    textDecoration: 'none ',
     color: 'gray.900',
 
     '&:hover': {
+      textDecoration: 'underline',
       color: 'blue.500',
     },
   },

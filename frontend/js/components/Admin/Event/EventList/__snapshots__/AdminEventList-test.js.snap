@@ -1,11 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly when admin 1`] = `
+exports[`<AdminEventList /> should render correctly 1`] = `
 <div
   className="sc-bdnxRM kZFksl"
 >
   <table
     className="sc-bdnxRM jIIBsu"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
   >
     <thead
       className="sc-bdnxRM dSQJSh"
@@ -14,156 +19,166 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
         className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
       >
         <th
-          className="sc-bdnxRM ejslJN"
+          className="sc-bdnxRM gKGElH"
         >
           global.title
+           
         </th>
         <th
-          className="sc-bdnxRM ejslJN"
+          className="sc-bdnxRM gKGElH"
         >
-          global.project
+          global.participative.project
         </th>
         <th
-          className="sc-bdnxRM ejslJN"
+          className="sc-bdnxRM gKGElH"
+        >
+          <div
+            className="sc-bdnxRM egMNHw"
+          >
+            <button
+              aria-controls="id-2"
+              aria-expanded={false}
+              aria-haspopup="menu"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG kZgVYy jfKDDI"
+              onClick={[Function]}
+              onClickCapture={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyPressCapture={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseDownCapture={[Function]}
+              onMouseEnter={[Function]}
+              type="button"
+            >
+              <p
+                className="sc-bdnxRM iWFasK"
+                style={
+                  Object {
+                    "whiteSpace": "nowrap",
+                  }
+                }
+              >
+                start.date.and.end
+              </p>
+              <IconMock
+                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG bFiFFK fZkSKg AMDLx icon"
+              />
+            </button>
+            <div
+              aria-orientation="vertical"
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX ieTJLY MenuList__MenuItems-gmUGHY QxsKs"
+              data-dialog={true}
+              hidden={true}
+              id="id-2"
+              onAnimationEnd={[Function]}
+              onBlur={[Function]}
+              onBlurCapture={[Function]}
+              onFocus={[Function]}
+              onFocusCapture={[Function]}
+              onKeyDown={[Function]}
+              onKeyDownCapture={[Function]}
+              onKeyUpCapture={[Function]}
+              onTransitionEnd={[Function]}
+              role="menu"
+              style={
+                Object {
+                  "display": "none",
+                  "left": "100%",
+                  "opacity": 0,
+                  "outline": "none",
+                  "position": "fixed",
+                  "top": "100%",
+                }
+              }
+              tabIndex={-1}
+            >
+              <div
+                className="sc-bdnxRM MenuOptionGroup___StyledAppBox-htQLzr  hVghjK"
+                role="group"
+              >
+                <p
+                  className="sc-bdnxRM jKNOoN menu__option__group--title"
+                >
+                  sort-by
+                </p>
+                <button
+                  className="MenuListItem__MenuItemInner-gIqqDA kvUUcb"
+                  id="id-2-1"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={0}
+                >
+                  <input
+                    checked={true}
+                    className="sc-bdnxRM MenuOptionItem___StyledAppBox-kGsnIN jEwVk cYBHaW"
+                    type="radio"
+                  />
+                  <p
+                    className="sc-bdnxRM isZYbz"
+                  >
+                    global.filter_last
+                  </p>
+                  <IconMock
+                    className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG kFTgjR fZkSKg AMDLx icon"
+                  />
+                </button>
+                <button
+                  className="MenuListItem__MenuItemInner-gIqqDA kvUUcb"
+                  id="id-2-2"
+                  onBlurCapture={[Function]}
+                  onClick={[Function]}
+                  onClickCapture={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
+                  role="menuitem"
+                  tabIndex={0}
+                >
+                  <input
+                    checked={false}
+                    className="sc-bdnxRM MenuOptionItem___StyledAppBox-kGsnIN jEwVk cYBHaW"
+                    type="radio"
+                  />
+                  <p
+                    className="sc-bdnxRM isZYbz"
+                  >
+                    global.filter_old
+                  </p>
+                  <IconMock
+                    className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG kFTgjR fZkSKg AMDLx icon"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </th>
+        <th
+          className="sc-bdnxRM gKGElH"
         >
           global.owner
         </th>
         <th
-          className="sc-bdnxRM ejslJN"
+          className="sc-bdnxRM gKGElH"
         >
-          global.update
-        </th>
-        <th
-          className="sc-bdnxRM ejslJN"
-        >
-          <div
-            className="sc-bdnxRM egMNHw"
-          >
-            <button
-              aria-controls="id-2"
-              aria-expanded={false}
-              aria-haspopup="menu"
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kZgVYy jfKDDI"
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              onMouseEnter={[Function]}
-              type="button"
-            >
-              creation
-              <IconMock
-                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG bFiFFK fZkSKg AMDLx icon"
-              />
-            </button>
-            <div
-              aria-orientation="vertical"
-              className="sc-bdnxRM Flex___StyledAppBox-RSPpX ieTJLY MenuList__MenuItems-gmUGHY QxsKs"
-              data-dialog={true}
-              hidden={true}
-              id="id-2"
-              onAnimationEnd={[Function]}
-              onBlur={[Function]}
-              onBlurCapture={[Function]}
-              onFocus={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyUpCapture={[Function]}
-              onTransitionEnd={[Function]}
-              role="menu"
-              style={
-                Object {
-                  "display": "none",
-                  "left": "100%",
-                  "opacity": 0,
-                  "outline": "none",
-                  "position": "fixed",
-                  "top": "100%",
-                }
-              }
-              tabIndex={-1}
-            >
-              <div
-                className="sc-bdnxRM MenuOptionGroup___StyledAppBox-htQLzr  hVghjK"
-                role="group"
-              >
-                <p
-                  className="sc-bdnxRM jKNOoN menu__option__group--title"
-                >
-                  sort-by
-                </p>
-                <button
-                  className="MenuListItem__MenuItemInner-gIqqDA kvUUcb"
-                  id="id-2-1"
-                  onBlurCapture={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onKeyUp={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseMove={[Function]}
-                  role="menuitem"
-                  tabIndex={0}
-                >
-                  <input
-                    checked={true}
-                    className="sc-bdnxRM MenuOptionItem___StyledAppBox-kGsnIN jEwVk cYBHaW"
-                    type="radio"
-                  />
-                  <p
-                    className="sc-bdnxRM isZYbz"
-                  >
-                    global.filter_last
-                  </p>
-                  <IconMock
-                    className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG kFTgjR fZkSKg AMDLx icon"
-                  />
-                </button>
-                <button
-                  className="MenuListItem__MenuItemInner-gIqqDA kvUUcb"
-                  id="id-2-2"
-                  onBlurCapture={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onKeyUp={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseMove={[Function]}
-                  role="menuitem"
-                  tabIndex={0}
-                >
-                  <input
-                    checked={false}
-                    className="sc-bdnxRM MenuOptionItem___StyledAppBox-kGsnIN jEwVk cYBHaW"
-                    type="radio"
-                  />
-                  <p
-                    className="sc-bdnxRM isZYbz"
-                  >
-                    global.filter_old
-                  </p>
-                  <IconMock
-                    className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG kFTgjR fZkSKg AMDLx icon"
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
+          global.updated.date
         </th>
         <th
           className="sc-bdnxRM ejslJN"
@@ -175,7 +190,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
     >
       <tr
         className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
-        id="proposalForm-1"
+        id="RXZlbnQ6ZXZlbnQz"
       >
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -187,9 +202,10 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
         >
           <a
             className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-            href="<mock-value-for-field-\\"adminUrl\\">"
+            href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
+            title="GrenobleWeb2015"
           >
-            &lt;mock-value-for-field-"title"&gt;
+            GrenobleWeb2015
           </a>
         </td>
         <td
@@ -200,12 +216,19 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          <a
-            className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-            href="<mock-value-for-field-\\"adminAlphaUrl\\">"
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
           >
-            &lt;mock-value-for-field-"title"&gt;
-          </a>
+            <a
+              className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+              href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
+            >
+              Croissance, innovation, disruption
+            </a>
+            <div
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX egukdJ"
+            />
+          </div>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -215,7 +238,15 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          &lt;mock-value-for-field-"username"&gt;
+          <p
+            className="sc-bdnxRM jEmSYE"
+          >
+            2032-06-10 00:00:00
+             
+            -
+             
+            2035-03-16 00:00:00
+          </p>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -225,7 +256,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          &lt;mock-value-for-field-"updatedAt"&gt;
+          -
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -235,7 +266,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          &lt;mock-value-for-field-"createdAt"&gt;
+          2015-01-03 00:00:00
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN crfCBn visible-on-hover"
@@ -246,10 +277,11 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           }
         >
           <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX gNHkfZ"
           >
             <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ btn-duplicate"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
+              href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
               onClick={[Function]}
               type="button"
             >
@@ -268,9 +300,9 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             >
               <p
                 className="sc-bdnxRM cZcArZ"
-                title="duplicate"
+                title="global.download"
               >
-                duplicate
+                global.download
               </p>
               <div
                 className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
@@ -340,7 +372,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
       </tr>
       <tr
         className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
-        id="proposalForm-2"
+        id="RXZlbnQ6ZXZlbnQx"
       >
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -352,9 +384,10 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
         >
           <a
             className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-            href="<mock-value-for-field-\\"adminUrl\\">"
+            href="https://capco.dev/admin/capco/app/event/event1/edit?_locale=fr-FR"
+            title="Event with registrations"
           >
-            &lt;mock-value-for-field-"title"&gt;
+            Event with registrations
           </a>
         </td>
         <td
@@ -365,12 +398,35 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          <a
-            className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-            href="<mock-value-for-field-\\"adminAlphaUrl\\">"
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
           >
-            &lt;mock-value-for-field-"title"&gt;
-          </a>
+            <a
+              className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+              href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
+            >
+              Croissance, innovation, disruption
+            </a>
+            <div
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX egukdJ"
+            >
+              <a
+                className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
+                href="https://capco.dev/themes/immobilier?_locale=fr-FR"
+              >
+                Immobilier
+              </a>
+              <span>
+                ,   
+              </span>
+              <a
+                className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
+                href="https://capco.dev/themes/justice?_locale=fr-FR"
+              >
+                Justice
+              </a>
+            </div>
+          </div>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -380,7 +436,15 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          &lt;mock-value-for-field-"username"&gt;
+          <p
+            className="sc-bdnxRM jEmSYE"
+          >
+            2032-03-01 00:00:00
+             
+            -
+             
+            2032-03-10 00:00:00
+          </p>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -390,7 +454,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          &lt;mock-value-for-field-"updatedAt"&gt;
+          -
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -400,7 +464,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          &lt;mock-value-for-field-"createdAt"&gt;
+          2015-01-01 00:00:00
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN crfCBn visible-on-hover"
@@ -411,38 +475,8 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           }
         >
           <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX gNHkfZ"
           >
-            <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ btn-duplicate"
-              onClick={[Function]}
-              type="button"
-            >
-              <IconMock
-                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
-              />
-            </button>
-            <div
-              className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
-              style={
-                Object {
-                  "opacity": 0,
-                  "transform": "scale(0.8) translateZ(0)",
-                }
-              }
-            >
-              <p
-                className="sc-bdnxRM cZcArZ"
-                title="duplicate"
-              >
-                duplicate
-              </p>
-              <div
-                className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                data-popper-arrow={true}
-                id="arrow"
-              />
-            </div>
             <button
               aria-controls="id-4"
               aria-expanded={false}
@@ -503,182 +537,9 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           </div>
         </td>
       </tr>
-    </tbody>
-  </table>
-</div>
-`;
-
-exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly when admin project 1`] = `
-<div
-  className="sc-bdnxRM kZFksl"
->
-  <table
-    className="sc-bdnxRM jIIBsu"
-  >
-    <thead
-      className="sc-bdnxRM dSQJSh"
-    >
       <tr
         className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
-      >
-        <th
-          className="sc-bdnxRM ejslJN"
-        >
-          global.title
-        </th>
-        <th
-          className="sc-bdnxRM ejslJN"
-        >
-          global.project
-        </th>
-        <th
-          className="sc-bdnxRM ejslJN"
-        >
-          global.update
-        </th>
-        <th
-          className="sc-bdnxRM ejslJN"
-        >
-          <div
-            className="sc-bdnxRM egMNHw"
-          >
-            <button
-              aria-controls="id-2"
-              aria-expanded={false}
-              aria-haspopup="menu"
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kZgVYy jfKDDI"
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              onMouseEnter={[Function]}
-              type="button"
-            >
-              creation
-              <IconMock
-                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG bFiFFK fZkSKg AMDLx icon"
-              />
-            </button>
-            <div
-              aria-orientation="vertical"
-              className="sc-bdnxRM Flex___StyledAppBox-RSPpX ieTJLY MenuList__MenuItems-gmUGHY QxsKs"
-              data-dialog={true}
-              hidden={true}
-              id="id-2"
-              onAnimationEnd={[Function]}
-              onBlur={[Function]}
-              onBlurCapture={[Function]}
-              onFocus={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyUpCapture={[Function]}
-              onTransitionEnd={[Function]}
-              role="menu"
-              style={
-                Object {
-                  "display": "none",
-                  "left": "100%",
-                  "opacity": 0,
-                  "outline": "none",
-                  "position": "fixed",
-                  "top": "100%",
-                }
-              }
-              tabIndex={-1}
-            >
-              <div
-                className="sc-bdnxRM MenuOptionGroup___StyledAppBox-htQLzr  hVghjK"
-                role="group"
-              >
-                <p
-                  className="sc-bdnxRM jKNOoN menu__option__group--title"
-                >
-                  sort-by
-                </p>
-                <button
-                  className="MenuListItem__MenuItemInner-gIqqDA kvUUcb"
-                  id="id-2-1"
-                  onBlurCapture={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onKeyUp={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseMove={[Function]}
-                  role="menuitem"
-                  tabIndex={0}
-                >
-                  <input
-                    checked={true}
-                    className="sc-bdnxRM MenuOptionItem___StyledAppBox-kGsnIN jEwVk cYBHaW"
-                    type="radio"
-                  />
-                  <p
-                    className="sc-bdnxRM isZYbz"
-                  >
-                    global.filter_last
-                  </p>
-                  <IconMock
-                    className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG kFTgjR fZkSKg AMDLx icon"
-                  />
-                </button>
-                <button
-                  className="MenuListItem__MenuItemInner-gIqqDA kvUUcb"
-                  id="id-2-2"
-                  onBlurCapture={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onKeyUp={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseMove={[Function]}
-                  role="menuitem"
-                  tabIndex={0}
-                >
-                  <input
-                    checked={false}
-                    className="sc-bdnxRM MenuOptionItem___StyledAppBox-kGsnIN jEwVk cYBHaW"
-                    type="radio"
-                  />
-                  <p
-                    className="sc-bdnxRM isZYbz"
-                  >
-                    global.filter_old
-                  </p>
-                  <IconMock
-                    className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG kFTgjR fZkSKg AMDLx icon"
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
-        </th>
-        <th
-          className="sc-bdnxRM ejslJN"
-        />
-      </tr>
-    </thead>
-    <tbody
-      className="sc-bdnxRM dZBmCd"
-    >
-      <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
-        id="proposalForm-1"
+        id="RXZlbnQ6ZXZlbnQ2"
       >
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -690,48 +551,14 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
         >
           <a
             className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-            href="<mock-value-for-field-\\"adminUrl\\">"
+            href="https://capco.dev/admin/capco/app/event/event6/edit?_locale=fr-FR"
+            title="Event without registrations"
           >
-            &lt;mock-value-for-field-"title"&gt;
+            Event without registrations
           </a>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
-          style={
-            Object {
-              "whiteSpace": "initial",
-            }
-          }
-        >
-          <a
-            className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-            href="<mock-value-for-field-\\"adminAlphaUrl\\">"
-          >
-            &lt;mock-value-for-field-"title"&gt;
-          </a>
-        </td>
-        <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
-          style={
-            Object {
-              "whiteSpace": "initial",
-            }
-          }
-        >
-          &lt;mock-value-for-field-"updatedAt"&gt;
-        </td>
-        <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
-          style={
-            Object {
-              "whiteSpace": "initial",
-            }
-          }
-        >
-          &lt;mock-value-for-field-"createdAt"&gt;
-        </td>
-        <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN crfCBn visible-on-hover"
           style={
             Object {
               "whiteSpace": "initial",
@@ -739,102 +566,13 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           }
         >
           <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
           >
-            <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ btn-duplicate"
-              onClick={[Function]}
-              type="button"
-            >
-              <IconMock
-                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
-              />
-            </button>
             <div
-              className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
-              style={
-                Object {
-                  "opacity": 0,
-                  "transform": "scale(0.8) translateZ(0)",
-                }
-              }
-            >
-              <p
-                className="sc-bdnxRM cZcArZ"
-                title="duplicate"
-              >
-                duplicate
-              </p>
-              <div
-                className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                data-popper-arrow={true}
-                id="arrow"
-              />
-            </div>
-            <button
-              aria-controls="id-3"
-              aria-expanded={false}
-              aria-haspopup="dialog"
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              type="button"
-            >
-              <IconMock
-                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
-              />
-            </button>
-            <div
-              className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
-              style={
-                Object {
-                  "opacity": 0,
-                  "transform": "scale(0.8) translateZ(0)",
-                }
-              }
-            >
-              <p
-                className="sc-bdnxRM cZcArZ"
-                title="global.delete"
-              >
-                global.delete
-              </p>
-              <div
-                className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                data-popper-arrow={true}
-                id="arrow"
-              />
-            </div>
-            <div
-              aria-label="delete-confirmation"
-              aria-modal={true}
-              data-dialog={true}
-              hidden={true}
-              id="id-3"
-              onAnimationEnd={[Function]}
-              onBlur={[Function]}
-              onKeyDown={[Function]}
-              onTransitionEnd={[Function]}
-              role="dialog"
-              style={
-                Object {
-                  "display": "none",
-                }
-              }
-              tabIndex={-1}
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX egukdJ"
             />
           </div>
         </td>
-      </tr>
-      <tr
-        className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
-        id="proposalForm-2"
-      >
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
           style={
@@ -843,12 +581,15 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          <a
-            className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-            href="<mock-value-for-field-\\"adminUrl\\">"
+          <p
+            className="sc-bdnxRM jEmSYE"
           >
-            &lt;mock-value-for-field-"title"&gt;
-          </a>
+            2032-02-01 00:00:00
+             
+            -
+             
+            2040-02-02 00:00:00
+          </p>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -858,12 +599,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          <a
-            className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-            href="<mock-value-for-field-\\"adminAlphaUrl\\">"
-          >
-            &lt;mock-value-for-field-"title"&gt;
-          </a>
+          -
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -873,17 +609,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             }
           }
         >
-          &lt;mock-value-for-field-"updatedAt"&gt;
-        </td>
-        <td
-          className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
-          style={
-            Object {
-              "whiteSpace": "initial",
-            }
-          }
-        >
-          &lt;mock-value-for-field-"createdAt"&gt;
+          2015-01-06 00:00:00
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs deidyN crfCBn visible-on-hover"
@@ -894,10 +620,11 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
           }
         >
           <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX gNHkfZ"
           >
             <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ btn-duplicate"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
+              href="<mock-value-for-field-\\"exportParticipantsUrl\\">"
               onClick={[Function]}
               type="button"
             >
@@ -916,9 +643,9 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
             >
               <p
                 className="sc-bdnxRM cZcArZ"
-                title="duplicate"
+                title="global.download"
               >
-                duplicate
+                global.download
               </p>
               <div
                 className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
@@ -927,7 +654,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
               />
             </div>
             <button
-              aria-controls="id-4"
+              aria-controls="id-5"
               aria-expanded={false}
               aria-haspopup="dialog"
               className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
@@ -970,7 +697,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
               aria-modal={true}
               data-dialog={true}
               hidden={true}
-              id="id-4"
+              id="id-5"
               onAnimationEnd={[Function]}
               onBlur={[Function]}
               onKeyDown={[Function]}
