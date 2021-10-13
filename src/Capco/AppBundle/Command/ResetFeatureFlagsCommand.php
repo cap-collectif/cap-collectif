@@ -104,6 +104,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate(Manager::import_proposals);
         $this->manager->deactivate(Manager::unstable__analytics_page);
         $this->manager->activate(Manager::unstable_project_admin);
+        $this->manager->deactivate(Manager::noindex_on_profiles);
 
         if ('test' === $this->env) {
             $this->manager->activate('votes_min');

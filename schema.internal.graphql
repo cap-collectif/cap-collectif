@@ -5657,6 +5657,9 @@ enum FeatureFlagType {
 
   """Whether or not admin can use the project administrator feature."""
   unstable_project_admin
+
+  """Whether or not profiles can be indexed."""
+  noindex_on_profiles
 }
 
 """Require a firstname"""

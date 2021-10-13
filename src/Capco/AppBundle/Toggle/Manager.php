@@ -11,6 +11,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class Manager
 {
+    public const noindex_on_profiles = 'noindex_on_profiles';
     public const graphql_query_analytics = 'graphql_query_analytics';
     public const new_feature_questionnaire_result = 'new_feature_questionnaire_result';
     public const blog = 'blog';
@@ -108,6 +109,7 @@ class Manager
     ];
 
     public static $toggles = [
+        self::noindex_on_profiles,
         self::graphql_query_analytics,
         self::new_feature_questionnaire_result,
         self::blog,

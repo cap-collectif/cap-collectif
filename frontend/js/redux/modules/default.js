@@ -105,6 +105,7 @@ export const features: FeatureToggles = {
   unstable__analytics_page: false,
   http_redirects: false,
   unstable_project_admin: false,
+  noindex_on_profiles: false,
 };
 
 export const initialState: State = {

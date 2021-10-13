@@ -329,18 +329,20 @@ export class Profile extends Component<Props> {
             <h2>
               <FormattedMessage id="confidentialite.title" />
             </h2>
-            <div className="horizontal_field_with_border_top">
-              <div className="col-sm-3" />
-              <Field
-                id="profilePageIndexed"
-                name="profilePageIndexed"
-                component={component}
-                type="checkbox"
-                labelClassName="font-weight-normal"
-                divClassName="col-sm-8">
-                <FormattedMessage id="user.profile.edit.profilePageIndexed" />
-              </Field>
-            </div>
+            {!features.noindex_on_profiles ? (
+              <div className="horizontal_field_with_border_top">
+                <div className="col-sm-3" />
+                <Field
+                  id="profilePageIndexed"
+                  name="profilePageIndexed"
+                  component={component}
+                  type="checkbox"
+                  labelClassName="font-weight-normal"
+                  divClassName="col-sm-8">
+                  <FormattedMessage id="user.profile.edit.profilePageIndexed" />
+                </Field>
+              </div>
+            ) : null}
             <div className="horizontal_field_with_border_top">
               <div className="col-sm-3" />
               <ButtonToolbar className="col-sm-6 pl-0">

@@ -56,6 +56,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "multilangue": false,
             "new_feature_questionnaire_result": false,
             "newsletter": false,
+            "noindex_on_profiles": false,
             "phone_confirmation": false,
             "privacy_policy": false,
             "profiles": false,

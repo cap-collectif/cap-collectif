@@ -259,16 +259,18 @@ export class UserAdminProfile extends React.Component<Props, State> {
             <h2 className="page-header">
               <FormattedMessage id="confidentialite.title" />
             </h2>
-            <Field
-              id="profilePageIndexed"
-              name="profilePageIndexed"
-              component={component}
-              type="checkbox"
-              disabled={!isViewerOrSuperAdmin}
-              labelClassName="font-weight-normal"
-              divClassName="col-sm-8">
-              <FormattedMessage id="user.profile.edit.profilePageIndexed" />
-            </Field>
+            {!features.noindex_on_profiles ? (
+              <Field
+                id="profilePageIndexed"
+                name="profilePageIndexed"
+                component={component}
+                type="checkbox"
+                disabled={!isViewerOrSuperAdmin}
+                labelClassName="font-weight-normal"
+                divClassName="col-sm-8">
+                <FormattedMessage id="user.profile.edit.profilePageIndexed" />
+              </Field>
+            ) : null}
             <div className="clearfix" />
             <ButtonToolbar className="box-content__toolbar">
               <Button

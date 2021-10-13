@@ -73,6 +73,7 @@ class FeaturesCategoryResolver
                     Manager::import_proposals,
                     Manager::unstable__analytics_page,
                     Manager::unstable_project_admin,
+                    Manager::noindex_on_profiles
                 ],
             ],
         ],

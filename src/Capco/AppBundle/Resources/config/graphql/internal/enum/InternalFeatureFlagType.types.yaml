@@ -150,3 +150,6 @@ InternalFeatureFlagType:
             unstable_project_admin:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable_project_admin")'
                 description: 'Whether or not admin can use the project administrator feature.'
+            noindex_on_profiles:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::noindex_on_profiles")'
+                description: 'Whether or not profiles can be indexed.'

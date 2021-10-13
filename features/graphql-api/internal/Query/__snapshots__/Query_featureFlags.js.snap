@@ -5,6 +5,10 @@ Object {
   "featureFlags": Array [
     Object {
       "enabled": false,
+      "type": "noindex_on_profiles",
+    },
+    Object {
+      "enabled": false,
       "type": "graphql_query_analytics",
     },
     Object {

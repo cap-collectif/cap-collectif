@@ -105,6 +105,7 @@ export type FeatureToggles = {
   unstable__analytics_page: ?boolean,
   unstable_project_admin: ?boolean,
   http_redirects: ?boolean,
+  noindex_on_profiles: ?boolean,
 };
 
 export type FeatureToggle = $Keys<FeatureToggles>;
