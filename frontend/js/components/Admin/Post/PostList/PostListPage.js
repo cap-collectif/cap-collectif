@@ -32,7 +32,7 @@ export const PostListPageQuery: GraphQLTaggedNode = graphql`
   ) {
     viewer {
       id
-      allposts: posts {
+      allposts: posts(affiliations: $affiliations) {
         totalCount
       }
       ...PostList_viewer
