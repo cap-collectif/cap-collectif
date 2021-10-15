@@ -174,7 +174,7 @@ export const onChange = (
         input.phone = `+33${newValue.charAt(0) === '0' ? newValue.substring(1) : newValue}`;
       }
       if (requirement.__typename === 'IdentificationCodeRequirement') {
-        input.identificationCode = newValue;
+        input.userIdentificationCode = newValue;
       }
 
       // To handle realtime updates

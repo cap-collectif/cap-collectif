@@ -14242,7 +14242,7 @@ input UpdateProfilePersonalDataInput {
   birthPlace: String
 
   """Your identification code"""
-  identificationCode: String
+  userIdentificationCode: String
   clientMutationId: String
 }
 

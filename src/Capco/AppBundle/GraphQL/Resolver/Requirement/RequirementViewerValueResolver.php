@@ -41,7 +41,7 @@ class RequirementViewerValueResolver implements ResolverInterface
             return $viewer->getPostalAddress();
         }
         if (Requirement::IDENTIFICATION_CODE === $requirement->getType()) {
-            return (bool) $viewer->getIdentificationCode();
+            return (bool) $viewer->getUserIdentificationCodeValue();
         }
 
         if (Requirement::CHECKBOX === $requirement->getType()) {

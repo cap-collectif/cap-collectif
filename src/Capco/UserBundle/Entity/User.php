@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\UserIdentificationCode;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Proposal;
@@ -99,7 +100,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected ?string $websiteUrl = null;
     private Collection $userGroups;
     private ?string $resetPasswordToken = null;
-    private ?string $identificationCode = null;
+    private ?UserIdentificationCode $userIdentificationCode = null;
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="supervisor")
      */
@@ -935,15 +936,22 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
         return null !== $this->password;
     }
 
-    public function getIdentificationCode(): ?string
+    public function getUserIdentificationCode(): ?UserIdentificationCode
     {
-        return $this->identificationCode;
+        return $this->userIdentificationCode;
     }
 
-    public function setIdentificationCode(?string $identificationCode): self
+    public function setUserIdentificationCode(?UserIdentificationCode $userIdentificationCode): self
     {
-        $this->identificationCode = $identificationCode;
+        $this->userIdentificationCode = $userIdentificationCode;
 
         return $this;
+    }
+
+    public function getUserIdentificationCodeValue(): ?string
+    {
+        return $this->userIdentificationCode
+            ? $this->userIdentificationCode->getIdentificationCode()
+            : null;
     }
 }

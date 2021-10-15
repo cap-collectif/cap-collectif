@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\UserIdentificationCode:
+    code1:
+        identificationCode: DK2AZ554
+    code2:
+        identificationCode: GG2AZR54

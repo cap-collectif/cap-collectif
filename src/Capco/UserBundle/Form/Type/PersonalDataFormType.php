@@ -2,8 +2,10 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Entity\UserIdentificationCode;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\UserBundle\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -56,10 +58,9 @@ class PersonalDataFormType extends AbstractType
                 'format' => 'Y-MM-dd',
             ])
             ->add('gender', ChoiceType::class, ['choices' => array_keys(User::getGenderList())])
-            ->add('identificationCode', PurifiedTextType::class, [
-                'purify_html' => true,
-                'strip_tags' => true,
-                'purify_html_profile' => 'default',
+            ->add('userIdentificationCode', EntityType::class, [
+                'required' => false,
+                'class' => UserIdentificationCode::class,
             ]);
     }
 

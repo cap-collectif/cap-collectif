@@ -113,7 +113,7 @@ Capco\UserBundle\Entity\User:
         updatedAt: <(new \DateTime('2016-01-01'))>
         confirmedAccountAt: <identity((new \DateTime('2016-01-01 00:00:00'))->modify("+ 4 days"))>
         consentInternalCommunication: true
-
+        userIdentificationCode: '@code1'
     user{6..200}:
         id: 'user<current()>'
         username: user<current()>

@@ -169,6 +169,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/UserType.yaml',
             $this->fixturesDir . 'Dev/UserTypeTranslation.yaml',
             $this->fixturesDir . 'Dev/User.yaml',
+            $this->fixturesDir . 'Dev/UserIdentificationCode.yaml',
             $this->fixturesDir . 'Dev/PublicApiToken.yaml',
             $this->fixturesDir . 'Dev/UserArchive.yaml',
             $this->fixturesDir . 'Dev/Page.yaml',
