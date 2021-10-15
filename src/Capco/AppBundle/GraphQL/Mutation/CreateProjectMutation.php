@@ -2,9 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
@@ -32,6 +34,7 @@ class CreateProjectMutation implements MutationInterface
     private UserRepository $userRepository;
     private ProjectTypeRepository $projectTypeRepository;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -40,7 +43,8 @@ class CreateProjectMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         ProjectAuthorTransformer $transformer,
         ProjectTypeRepository $projectTypeRepository,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->logger = $logger;
@@ -49,6 +53,7 @@ class CreateProjectMutation implements MutationInterface
         $this->userRepository = $userRepository;
         $this->projectTypeRepository = $projectTypeRepository;
         $this->authorizationChecker = $authorizationChecker;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -110,6 +115,9 @@ class CreateProjectMutation implements MutationInterface
 
             throw new BadRequestHttpException('Sorry, please retry.');
         }
+
+        $this->indexer->index(ClassUtils::getClass($project), $project->getId());
+        $this->indexer->finishBulk();
 
         return ['project' => $project];
     }
