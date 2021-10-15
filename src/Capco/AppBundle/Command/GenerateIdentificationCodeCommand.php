@@ -178,7 +178,7 @@ class GenerateIdentificationCodeCommand extends Command
         $progress = new ProgressBar($output, $numberOfCodesToGenerate);
 
         $codes = $this->createUniqCodes($numberOfCodesToGenerate, $progress);
-        $fileName = 'generated_codes_' . (new \DateTime())->format('Y-m-d_H:i:s') . '.csv';
+        $fileName = 'generated_codes_' . (new \DateTime())->format('YmdHis') . '.csv';
         $fileName = sprintf('%s/public/export/%s', $this->projectRootDir, $fileName);
         $this->createCsvFileContainingTheGeneratedCodes($codes, $delimiter, $fileName, $output);
         $progress->finish();
@@ -188,8 +188,9 @@ class GenerateIdentificationCodeCommand extends Command
 
     private function makeAUserIdentificationCode(): UserIdentificationCode
     {
-        $userIdentificationCode = strtoupper(uniqid());
-        $userIdentificationCode = substr($userIdentificationCode, 4, self::CODE_MAX_LENGTH);
+        $userIdentificationCode = strtoupper(
+            substr(md5(uniqid(mt_rand(), true)), 0, self::CODE_MAX_LENGTH)
+        );
 
         return (new UserIdentificationCode())->setIdentificationCode($userIdentificationCode);
     }
