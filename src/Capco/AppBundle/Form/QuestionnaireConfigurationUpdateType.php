@@ -24,7 +24,7 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
             ])
             ->add('description', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'user',
             ])
             ->add('questions', CollectionType::class, [
                 'allow_add' => true,

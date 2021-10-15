@@ -36,7 +36,7 @@ abstract class AbstractQuestionType extends AbstractType
         ]);
         $builder->add('description', TextType::class, [
             'purify_html' => true,
-            'purify_html_profile' => 'default',
+            'purify_html_profile' => 'user',
         ]);
         $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, [
             'required' => false,

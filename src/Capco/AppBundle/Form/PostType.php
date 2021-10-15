@@ -14,7 +14,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,7 +28,7 @@ class PostType extends AbstractType
                     'body' => [
                         'required' => true,
                         'purify_html' => true,
-                        'purify_html_profile' => 'default',
+                        'purify_html_profile' => 'user',
                     ],
                     'title' => [
                         'required' => true,
