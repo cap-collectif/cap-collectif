@@ -209,7 +209,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         label: Dépôt
         body: <stripslashes('\<p>\')>Comment participer ? <stripslashes('\</br>\')>Vous êtes cafetier <stripslashes('\:\')> suivez les instructions du formulaire pour pouvoir recevoir des dons pour votre établissement.<stripslashes('\</br>\')> Vous êtes citoyen.ne <stripslashes('\:\')> déposez un don entre 5 et 100 € pour soutenir votre ou vos cafés préféré.s<stripslashes('\</p>\')>
         startAt: <identity((new \DateTime('2020-10-16')))>
-        endAt: <identity((new \DateTime('2021-10-16')))>
+        endAt: <identity((new \DateTime('2031-10-16')))>
         allowAuthorsToAddNews: true
     collectstepIdf3:
         id: collectstepIdf3
@@ -231,4 +231,4 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         label: Dépôt
         body: Ouais le body ouais
         startAt: <identity((new \DateTime('2020-10-16')))>
-        endAt: <identity((new \DateTime('2021-10-16')))>
+        endAt: <identity((new \DateTime('2031-10-16')))>
