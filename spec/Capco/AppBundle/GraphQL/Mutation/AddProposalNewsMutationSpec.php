@@ -9,7 +9,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Form\ProposalPostType;
-use Capco\AppBundle\GraphQL\Error\BaseProposalError;
 use Capco\AppBundle\GraphQL\Mutation\AddProposalNewsMutation;
 use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
@@ -26,7 +25,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddProposalNewsMutationSpec extends ObjectBehavior
 {
@@ -35,7 +33,6 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
-        TranslatorInterface $translator,
         LocaleRepository $localeRepository,
         Publisher $publisher,
         PostUrlResolver $urlResolver
@@ -45,7 +42,6 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
             $formFactory,
             $globalIdResolver,
             $logger,
-            $translator,
             $localeRepository,
             $publisher,
             $urlResolver

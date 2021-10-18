@@ -9,7 +9,6 @@ use Capco\AppBundle\Form\ProposalPostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
-use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -19,20 +18,18 @@ use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UpdateProposalNewsMutation implements MutationInterface
 {
     public const POST_NOT_FOUND = 'POST_NOT_FOUND';
     public const ACCESS_DENIED = 'ACCESS_DENIED';
     public const INVALID_DATA = 'INVALID_DATA';
+    public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
 
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
-    private TranslatorInterface $translator;
-    private LocaleRepository $localeRepository;
     private Publisher $publisher;
 
     public function __construct(
@@ -40,16 +37,12 @@ class UpdateProposalNewsMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
-        TranslatorInterface $translator,
-        LocaleRepository $localeRepository,
         Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->globalIdResolver = $globalIdResolver;
         $this->logger = $logger;
-        $this->translator = $translator;
-        $this->localeRepository = $localeRepository;
         $this->publisher = $publisher;
     }
 
@@ -125,6 +118,10 @@ class UpdateProposalNewsMutation implements MutationInterface
                     $values['translations'][$translation->getLocale()]['abstract']
                 );
             }
+        }
+        $firstProposal = $proposalPost->getProposals()->first();
+        if (!$firstProposal) {
+            throw new UserError(self::PROPOSAL_NOT_FOUND);
         }
 
         $this->em->flush();

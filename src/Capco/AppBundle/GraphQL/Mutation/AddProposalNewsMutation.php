@@ -21,7 +21,6 @@ use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddProposalNewsMutation implements MutationInterface
 {
@@ -31,7 +30,6 @@ class AddProposalNewsMutation implements MutationInterface
     private GlobalIdResolver $globalIdResolver;
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
-    private TranslatorInterface $translator;
     private LocaleRepository $localeRepository;
     private Publisher $publisher;
     private PostUrlResolver $urlResolver;
@@ -41,7 +39,6 @@ class AddProposalNewsMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
-        TranslatorInterface $translator,
         LocaleRepository $localeRepository,
         Publisher $publisher,
         PostUrlResolver $urlResolver
@@ -50,7 +47,6 @@ class AddProposalNewsMutation implements MutationInterface
         $this->formFactory = $formFactory;
         $this->globalIdResolver = $globalIdResolver;
         $this->logger = $logger;
-        $this->translator = $translator;
         $this->localeRepository = $localeRepository;
         $this->publisher = $publisher;
         $this->urlResolver = $urlResolver;

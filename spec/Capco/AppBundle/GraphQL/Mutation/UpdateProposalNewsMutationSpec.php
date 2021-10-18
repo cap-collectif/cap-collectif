@@ -25,7 +25,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UpdateProposalNewsMutationSpec extends ObjectBehavior
 {
@@ -34,8 +33,6 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
-        TranslatorInterface $translator,
-        LocaleRepository $localeRepository,
         Publisher $publisher,
         PostUrlResolver $urlResolver
     ) {
@@ -44,8 +41,6 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
             $formFactory,
             $globalIdResolver,
             $logger,
-            $translator,
-            $localeRepository,
             $publisher,
             $urlResolver
         );

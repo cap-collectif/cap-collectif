@@ -15,3 +15,6 @@ ProposalNewsErrorCode:
             INVALID_DATA:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalNewsMutation::INVALID_DATA")'
                 description: 'Invalid data in submitted form .'
+            PROPOSAL_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalNewsMutation::PROPOSAL_NOT_FOUND")'
+                description: 'No proposal match on your post'

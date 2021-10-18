@@ -9561,7 +9561,7 @@ enum ProposalImportsErrorCode {
 
 """Available errors on proposal news mutation"""
 enum ProposalNewsErrorCode {
-  """No proposal match your id."""
+  """No proposal match on your post"""
   PROPOSAL_NOT_FOUND
 
   """Access denied."""
