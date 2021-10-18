@@ -16,7 +16,12 @@ const AdminEventImportModal = ({ submitting, invalid, pristine }) => {
     <Modal
       ariaLabel={intl.formatMessage({ id: 'modal-add-events-via-file' })}
       disclosure={
-        <Button variant="secondary" variantColor="hierarchy" variantSize="small" mr={6}>
+        <Button
+          id="AdminImportEventsButton-import"
+          variant="secondary"
+          variantColor="hierarchy"
+          variantSize="small"
+          mr={6}>
           {intl.formatMessage({ id: 'import' })}
         </Button>
       }>
@@ -43,6 +48,7 @@ const AdminEventImportModal = ({ submitting, invalid, pristine }) => {
                 {intl.formatMessage({ id: 'cancel' })}
               </Button>
               <Button
+                id="AdminImportEventsButton-submit"
                 variantSize="medium"
                 variant="primary"
                 variantColor="primary"

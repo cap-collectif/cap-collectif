@@ -94,6 +94,7 @@ const AdminEventListPage = ({ queryReference, isAdmin }: Props): React.Node => {
           <Flex direction="row" justify="space-between">
             <Flex direction="row">
               <Button
+                className="event_list_create"
                 variant="primary"
                 variantColor="primary"
                 variantSize="small"

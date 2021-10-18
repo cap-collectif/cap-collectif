@@ -14,7 +14,7 @@ class AdminEventListPage extends Page
     protected $elements = [
         'import button' => '#AdminImportEventsButton-import',
         'import modal submit' => '#AdminImportEventsButton-submit',
-        'add button' => 'a.sonata-action-element',
+        'add button' => '.event_list_create',
     ];
 
     public function clickImportButton()
