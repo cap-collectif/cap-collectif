@@ -58,7 +58,7 @@ trait FranceConnectTrait
     public function IShouldBeDisconnectedFromFranceConnect()
     {
         $this->visit('https://fcp.integ01.dev-franceconnect.fr/traces/');
-        $this->assertPageContainsText("Vous n'êtes pas authentifié auprès de FranceConnect.");
+        $this->waitAndThrowOnFailure(3000, "$('#fc-traces-not-authenticated').length > 0");
     }
 
     /**
