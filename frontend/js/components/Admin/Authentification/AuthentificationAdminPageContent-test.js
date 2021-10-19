@@ -3,28 +3,30 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { AuthentificationAdminPageContent } from './AuthentificationAdminPageContent';
-import { $fragmentRefs, $refType } from '../../../mocks';
+import { $fragmentRefs, $refType } from '~/mocks';
 
 describe('<AuthentificationAdminPageContent />', () => {
   const defaultProps = {
-    ssoConfigurations: {
+    query: {
       ...$refType,
-      edges: [
-        {
-          node: {
-            $fragmentRefs,
-            id: 'oauth2ID',
-            name: 'Open ID Provider',
-            clientId: 'clientId',
-            secret: 'SecretKey',
-            authorizationUrl: 'https://localhost:8888/authorization',
-            accessTokenUrl: 'https://localhost:8888/token',
-            userInfoUrl: 'https://localhost:8888/user',
-            logoutUrl: 'https://localhost:8888/logout',
-            profileUrl: 'https://localhost:8888/profile',
+      ssoConfigurations: {
+        edges: [
+          {
+            node: {
+              $fragmentRefs,
+              id: 'oauth2ID',
+              name: 'Open ID Provider',
+              clientId: 'clientId',
+              secret: 'SecretKey',
+              authorizationUrl: 'https://localhost:8888/authorization',
+              accessTokenUrl: 'https://localhost:8888/token',
+              userInfoUrl: 'https://localhost:8888/user',
+              logoutUrl: 'https://localhost:8888/logout',
+              profileUrl: 'https://localhost:8888/profile',
+            },
           },
-        },
-      ],
+        ],
+      }
     },
     shieldAdminForm: {
       ...$refType,

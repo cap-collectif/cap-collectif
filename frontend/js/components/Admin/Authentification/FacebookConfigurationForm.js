@@ -14,6 +14,7 @@ import Modal from '~ds/Modal/Modal';
 import Text from '~ui/Primitives/Text';
 import Button from '~ds/Button/Button';
 import type { FacebookConfigurationForm_ssoConfiguration } from '~relay/FacebookConfigurationForm_ssoConfiguration.graphql';
+import type {FacebookSSOConfiguration} from './ListPublicSSO'
 
 type FormValues = {|
   clientId: string,
@@ -22,8 +23,10 @@ type FormValues = {|
 |};
 
 type Props = {|
-  ssoConfiguration: FacebookConfigurationForm_ssoConfiguration,
+  ssoConfiguration: ?FacebookConfigurationForm_ssoConfiguration,
+  ssoConfigurationConnectionId: string,
   hide: () => void,
+  setFacebook: (config: FacebookSSOConfiguration) => void,
   ...FormValues,
   ...ReduxFormFormProps,
 |};
@@ -31,15 +34,16 @@ type Props = {|
 const formName = 'facebook-configuration-form';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch<*>, props: Props) => {
-  const { secret, clientId, enabled } = values;
-  const { ssoConfiguration, hide } = props;
+  const { secret, clientId } = values;
+  const { hide, ssoConfigurationConnectionId } = props;
 
   return UpdateFacebookConfigurationMutation.commit({
     input: {
       clientId,
       secret,
-      enabled: ssoConfiguration ? true : enabled,
+      enabled: !!secret && !!clientId
     },
+    connections: [ssoConfigurationConnectionId]
   })
     .then(() => {
       hide();

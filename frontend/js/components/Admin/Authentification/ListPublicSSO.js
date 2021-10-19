@@ -11,7 +11,7 @@ import type { Dispatch, FeatureToggle, FeatureToggles, State as GlobalState } fr
 import { toggleFeature } from '~/redux/modules/default';
 import { toggleStatus } from '~/mutations/ToggleSSOConfigurationStatusMutation';
 import FranceConnectConfigurationModal from './FranceConnectConfigurationModal';
-import type { ListPublicSSO_ssoConfigurations } from '~relay/ListPublicSSO_ssoConfigurations.graphql';
+import type { ListPublicSSO_query } from '~relay/ListPublicSSO_query.graphql';
 import type { FranceConnectConfigurationModal_ssoConfiguration$ref } from '~relay/FranceConnectConfigurationModal_ssoConfiguration.graphql';
 import FranceConnectTeaserModal from '~/components/Admin/Authentification/FranceConnectTeaserModal';
 import AppBox from '~ui/Primitives/AppBox';
@@ -19,12 +19,12 @@ import FacebookConfigurationCard from '~/components/Admin/Authentification/Faceb
 import type { FacebookConfigurationModal_ssoConfiguration$ref } from '~relay/FacebookConfigurationModal_ssoConfiguration.graphql';
 
 type Props = {|
-  ssoConfigurations: ListPublicSSO_ssoConfigurations,
+  query: ListPublicSSO_query,
   features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
 |};
 
-type SSOConfiguration = {|
+export type SSOConfiguration = {|
   +__typename: string,
   +id: string,
   +enabled: boolean,
@@ -61,12 +61,15 @@ const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, typeof Button> = styled(
   }
 `;
 
-export const ListPublicSSO = ({ features, ssoConfigurations }: Props) => {
+export const ListPublicSSO = ({ features, query }: Props) => {
   const [showFranceConnectModal, setShowFranceConnectModal] = useState<boolean>(false);
 
   const handleClose = () => {
     setShowFranceConnectModal(false);
   };
+
+  const { ssoConfigurations } = query;
+  const ssoConfigurationConnectionId = ssoConfigurations.__id;
 
   const franceConnect =
     ssoConfigurations.edges &&
@@ -76,7 +79,7 @@ export const ListPublicSSO = ({ features, ssoConfigurations }: Props) => {
       .filter(Boolean)
       .find(node => node.__typename === 'FranceConnectSSOConfiguration');
 
-  const facebook =
+  const facebookConfig =
     ssoConfigurations.edges &&
     ssoConfigurations.edges
       .filter(Boolean)
@@ -122,11 +125,14 @@ export const ListPublicSSO = ({ features, ssoConfigurations }: Props) => {
             ssoConfiguration={franceConnect}
           />
         </ListGroupItemWithJustifyContentStart>
-        {facebook && (
-          <ListGroupItemWithJustifyContentStart>
-            <FacebookConfigurationCard ssoConfiguration={facebook} />
-          </ListGroupItemWithJustifyContentStart>
-        )}
+
+        <ListGroupItemWithJustifyContentStart>
+          <FacebookConfigurationCard
+            ssoConfiguration={facebookConfig}
+            ssoConfigurationConnectionId={ssoConfigurationConnectionId}
+          />
+        </ListGroupItemWithJustifyContentStart>
+
         <ListGroupItemWithJustifyContentStart>
           <Toggle
             id="toggle-email"
@@ -159,11 +165,12 @@ export default connect<any, any, _, _, _, _>(
   mapDispatchToProps,
 )(
   createFragmentContainer(ListPublicSSO, {
-    ssoConfigurations: graphql`
-      fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection {
-        edges {
-          node {
-            ... on SSOConfiguration {
+    query: graphql`
+      fragment ListPublicSSO_query on Query {
+        ssoConfigurations(first: 100) @connection(key: "ListPublicSSO_ssoConfigurations") {
+          __id
+          edges {
+            node {
               id
               __typename
               enabled

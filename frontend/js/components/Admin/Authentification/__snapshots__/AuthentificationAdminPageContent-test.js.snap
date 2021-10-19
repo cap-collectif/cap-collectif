@@ -15,25 +15,27 @@ exports[`<AuthentificationAdminPageContent /> renders correctly 1`] = `
       }
     }
   />
-  <Connect(Relay(ListSSOConfiguration))
-    ssoConfigurations={
+  <Connect(ListSSOConfiguration)
+    query={
       Object {
-        "edges": Array [
-          Object {
-            "node": Object {
-              "$fragmentRefs": null,
-              "accessTokenUrl": "https://localhost:8888/token",
-              "authorizationUrl": "https://localhost:8888/authorization",
-              "clientId": "clientId",
-              "id": "oauth2ID",
-              "logoutUrl": "https://localhost:8888/logout",
-              "name": "Open ID Provider",
-              "profileUrl": "https://localhost:8888/profile",
-              "secret": "SecretKey",
-              "userInfoUrl": "https://localhost:8888/user",
+        "ssoConfigurations": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "$fragmentRefs": null,
+                "accessTokenUrl": "https://localhost:8888/token",
+                "authorizationUrl": "https://localhost:8888/authorization",
+                "clientId": "clientId",
+                "id": "oauth2ID",
+                "logoutUrl": "https://localhost:8888/logout",
+                "name": "Open ID Provider",
+                "profileUrl": "https://localhost:8888/profile",
+                "secret": "SecretKey",
+                "userInfoUrl": "https://localhost:8888/user",
+              },
             },
-          },
-        ],
+          ],
+        },
       }
     }
   />

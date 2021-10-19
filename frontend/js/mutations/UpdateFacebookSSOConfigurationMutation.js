@@ -9,9 +9,11 @@ import type {
 import type { FacebookConfigurationCard_ssoConfiguration } from '~relay/FacebookConfigurationCard_ssoConfiguration.graphql';
 
 const mutation = graphql`
-  mutation UpdateFacebookSSOConfigurationMutation($input: UpdateFacebookSSOConfigurationInput!) {
+  mutation UpdateFacebookSSOConfigurationMutation($input: UpdateFacebookSSOConfigurationInput! $connections: [ID!]!)
+  {
     updateFacebookSSOConfiguration(input: $input) {
-      facebookSSOConfiguration {
+      facebookSSOConfiguration @prependNode(connections: $connections, edgeTypeName: "SSOConfigurationEdge") {
+        id
         clientId
         secret
         enabled
@@ -30,6 +32,7 @@ const commit = (
 
 export const toggle = (
   ssoConfiguration: FacebookConfigurationCard_ssoConfiguration,
+  connectionId: string
 ): ?Promise<UpdateFacebookSSOConfigurationMutationResponse> => {
   if (ssoConfiguration && ssoConfiguration.clientId && ssoConfiguration.secret) {
     return commit({
@@ -38,6 +41,7 @@ export const toggle = (
         secret: ssoConfiguration.secret,
         enabled: !ssoConfiguration.enabled,
       },
+      connections: [connectionId]
     });
   }
 };

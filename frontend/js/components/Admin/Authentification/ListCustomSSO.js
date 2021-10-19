@@ -6,10 +6,10 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import ListGroup from '../../Ui/List/ListGroup';
 import SSOConfigurationItem from './SSOConfigurationItem';
 import Oauth2SSOConfigurationModal from './Oauth2SSOConfigurationModal';
-import type { ListCustomSSO_ssoConfigurations } from '~relay/ListCustomSSO_ssoConfigurations.graphql';
+import type { ListCustomSSO_query } from '~relay/ListCustomSSO_query.graphql';
 
 type RelayProps = {|
-  +ssoConfigurations: ListCustomSSO_ssoConfigurations,
+  +query: ListCustomSSO_query,
 |};
 
 type Props = {|
@@ -18,12 +18,14 @@ type Props = {|
 
 const CUSTOM_PROVIDERS = ['Oauth2SSOConfiguration'];
 
-export const ListCustomSSO = ({ ssoConfigurations }: Props) => {
+export const ListCustomSSO = ({ query }: Props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleClose = () => {
     setShowModal(false);
   };
+
+  const ssoConfigurations = query?.ssoConfigurations;
 
   const filteredSSOConfigurations =
     ssoConfigurations.edges &&
@@ -60,12 +62,14 @@ export const ListCustomSSO = ({ ssoConfigurations }: Props) => {
 };
 
 export default createFragmentContainer(ListCustomSSO, {
-  ssoConfigurations: graphql`
-    fragment ListCustomSSO_ssoConfigurations on SSOConfigurationConnection {
-      edges {
-        node {
-          __typename
-          ...SSOConfigurationItem_configuration
+  query: graphql`
+    fragment ListCustomSSO_query on Query {
+      ssoConfigurations(first: 100) @connection(key: "ListCustomSSO_ssoConfigurations") {
+        edges {
+          node {
+            __typename
+            ...SSOConfigurationItem_configuration
+          }
         }
       }
     }

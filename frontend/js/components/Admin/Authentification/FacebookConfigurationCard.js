@@ -8,26 +8,27 @@ import type { FacebookConfigurationCard_ssoConfiguration } from '~relay/Facebook
 import AppBox from "~ui/Primitives/AppBox";
 
 type Props = {|
-  ssoConfiguration: FacebookConfigurationCard_ssoConfiguration,
+  ssoConfiguration: ?FacebookConfigurationCard_ssoConfiguration,
+  ssoConfigurationConnectionId: string
 |};
 
-export const FacebookConfigurationCard = ({ ssoConfiguration }: Props) => {
+export const FacebookConfigurationCard = ({ ssoConfiguration, ssoConfigurationConnectionId }: Props) => {
   return (
     <>
-      {ssoConfiguration &&
       <Toggle
         id="toggle-facebook"
         checked={ssoConfiguration?.enabled}
         onChange={() => {
-          toggle(ssoConfiguration);
+          if (ssoConfiguration) {
+            toggle(ssoConfiguration, ssoConfigurationConnectionId)
+          }
         }}
         label={
           <h5 className="mb-0 mt-0">Facebook</h5>
         }
       />
-      }
       <AppBox marginLeft="auto">
-        <FacebookConfigurationModal ssoConfiguration={ssoConfiguration} />
+        <FacebookConfigurationModal ssoConfiguration={ssoConfiguration} ssoConfigurationConnectionId={ssoConfigurationConnectionId}/>
       </AppBox>
     </>
   );

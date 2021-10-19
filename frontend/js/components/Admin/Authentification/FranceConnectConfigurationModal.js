@@ -258,7 +258,7 @@ export const FranceConnectConfigurationModal = ({
 );
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
-  const data = props.ssoConfiguration.allowedData;
+  const data = props.ssoConfiguration?.allowedData ?? [];
   return {
     initialValues: {
       ...props.ssoConfiguration,

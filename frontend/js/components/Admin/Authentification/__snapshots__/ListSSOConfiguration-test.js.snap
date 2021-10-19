@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
+exports[`<ListSSOConfiguration /> <TestListSSOConfiguration> renders correctly with only Public SSO list when user is not a super admin 1`] = `
 <div
   className="box box-primary container-fluid"
 >
@@ -10,144 +10,7 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
     <h3
       className="box-title"
     >
-      <FormattedMessage
-        id="method"
-        values={Object {}}
-      />
-    </h3>
-  </div>
-  <div
-    className="box-content box-content__content-form"
-  >
-    <h4>
-      <FormattedMessage
-        id="global.custom.feminine"
-        values={Object {}}
-      />
-    </h4>
-    <Relay(ListCustomSSO)
-      ssoConfigurations={
-        Object {
-          "edges": Array [],
-        }
-      }
-    />
-    <div
-      className="mt-30"
-    >
-      <h4>
-        <FormattedMessage
-          id="preconfigured"
-          values={Object {}}
-        />
-      </h4>
-      <Connect(Relay(ListPublicSSO))
-        ssoConfigurations={
-          Object {
-            "edges": Array [],
-          }
-        }
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
-<div
-  className="box box-primary container-fluid"
->
-  <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="method"
-        values={Object {}}
-      />
-    </h3>
-  </div>
-  <div
-    className="box-content box-content__content-form"
-  >
-    <h4>
-      <FormattedMessage
-        id="global.custom.feminine"
-        values={Object {}}
-      />
-    </h4>
-    <Relay(ListCustomSSO)
-      ssoConfigurations={
-        Object {
-          "edges": Array [
-            Object {
-              "node": Object {
-                "$fragmentRefs": null,
-                "accessTokenUrl": "https://localhost:8888/token",
-                "authorizationUrl": "https://localhost:8888/authorization",
-                "clientId": "clientId",
-                "id": "oauth2ID",
-                "logoutUrl": "https://localhost:8888/logout",
-                "name": "Open ID Provider",
-                "secret": "SecretKey",
-                "userInfoUrl": "https://localhost:8888/user",
-              },
-            },
-          ],
-        }
-      }
-    />
-    <div
-      className="mt-30"
-    >
-      <h4>
-        <FormattedMessage
-          id="preconfigured"
-          values={Object {}}
-        />
-      </h4>
-      <Connect(Relay(ListPublicSSO))
-        ssoConfigurations={
-          Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "accessTokenUrl": "https://localhost:8888/token",
-                  "authorizationUrl": "https://localhost:8888/authorization",
-                  "clientId": "clientId",
-                  "id": "oauth2ID",
-                  "logoutUrl": "https://localhost:8888/logout",
-                  "name": "Open ID Provider",
-                  "secret": "SecretKey",
-                  "userInfoUrl": "https://localhost:8888/user",
-                },
-              },
-            ],
-          }
-        }
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<ListSSOConfiguration /> renders correctly with only Public SSO list when user is not a super admin 1`] = `
-<div
-  className="box box-primary container-fluid"
->
-  <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="method"
-        values={Object {}}
-      />
+      method
     </h3>
   </div>
   <div
@@ -157,18 +20,863 @@ exports[`<ListSSOConfiguration /> renders correctly with only Public SSO list wh
       className=""
     >
       <h4>
-        <FormattedMessage
-          id="preconfigured"
-          values={Object {}}
-        />
+        preconfigured
       </h4>
-      <Connect(Relay(ListPublicSSO))
-        ssoConfigurations={
-          Object {
-            "edges": Array [],
-          }
-        }
-      />
+      <div
+        className="ListGroup__Container-hRGxhC fjfyPs list-group"
+      >
+        <span
+          className="ListPublicSSO__ListGroupItemWithJustifyContentStart-fmVrTp hnwSlW list-group-item"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC unchecked labelContainer"
+                disabled={false}
+                htmlFor="toggle-franceConnect"
+              >
+                <div
+                  checked={false}
+                  className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                  disabled={false}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <h5
+                    className="mb-0 mt-0"
+                  >
+                    capco.module.login_franceconnect
+                  </h5>
+                </span>
+              </label>
+              <input
+                checked={false}
+                disabled={false}
+                id="toggle-franceConnect"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div
+            className="sc-bdnxRM kMEPpk"
+          >
+            <button
+              aria-controls="id-1"
+              aria-expanded={false}
+              aria-haspopup="dialog"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG bobTHH laeJgQ"
+              onClick={[Function]}
+              onClickCapture={[Function]}
+              onKeyDown={[Function]}
+              onKeyPressCapture={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseDownCapture={[Function]}
+              type="button"
+            >
+              global.install
+            </button>
+            <div
+              aria-label="france.connect.teaser"
+              aria-modal={true}
+              data-dialog={true}
+              hidden={true}
+              id="id-1"
+              onAnimationEnd={[Function]}
+              onBlur={[Function]}
+              onKeyDown={[Function]}
+              onTransitionEnd={[Function]}
+              role="dialog"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+              tabIndex={-1}
+            />
+          </div>
+        </span>
+        <span
+          className="ListPublicSSO__ListGroupItemWithJustifyContentStart-fmVrTp hnwSlW list-group-item"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC unchecked labelContainer"
+                disabled={false}
+                htmlFor="toggle-facebook"
+              >
+                <div
+                  checked={false}
+                  className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                  disabled={false}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <h5
+                    className="mb-0 mt-0"
+                  >
+                    Facebook
+                  </h5>
+                </span>
+              </label>
+              <input
+                checked={false}
+                disabled={false}
+                id="toggle-facebook"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div
+            className="sc-bdnxRM kMEPpk"
+          >
+            <button
+              aria-controls="id-2"
+              aria-expanded={false}
+              aria-haspopup="dialog"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG bobTHH laeJgQ"
+              onClick={[Function]}
+              onClickCapture={[Function]}
+              onKeyDown={[Function]}
+              onKeyPressCapture={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseDownCapture={[Function]}
+              type="button"
+            >
+              Global.configure
+            </button>
+            <div
+              aria-label="facebook-modal-lg"
+              aria-modal={true}
+              data-dialog={true}
+              hidden={true}
+              id="id-2"
+              onAnimationEnd={[Function]}
+              onBlur={[Function]}
+              onKeyDown={[Function]}
+              onTransitionEnd={[Function]}
+              role="dialog"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+              tabIndex={-1}
+            />
+          </div>
+        </span>
+        <span
+          className="ListPublicSSO__ListGroupItemWithJustifyContentStart-fmVrTp hnwSlW list-group-item"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC checked labelContainer"
+                disabled={true}
+                htmlFor="toggle-email"
+              >
+                <div
+                  checked={true}
+                  className="Togglestyle__TogglerWrapper-hIrWcm eJrpzD"
+                  disabled={true}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <h5
+                    className="mb-0 mt-0"
+                  >
+                    global.email
+                  </h5>
+                </span>
+              </label>
+              <input
+                checked={true}
+                disabled={true}
+                id="toggle-email"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should render correctly with empty list 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      method
+    </h3>
+  </div>
+  <div
+    className="box-content box-content__content-form"
+  >
+    <h4>
+      global.custom.feminine
+    </h4>
+    <div
+      className="ListGroup__Container-hRGxhC fjfyPs list-group"
+    >
+      <span
+        className="list-group-item"
+      >
+        <div
+          className="d-flex align-items-center"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC unchecked labelContainer"
+                disabled={false}
+                htmlFor="Oauth2"
+              >
+                <div
+                  checked={false}
+                  className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                  disabled={false}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <div
+                    className="d-flex flex-column"
+                  >
+                    <h5
+                      className="mb-0 mt-0"
+                    >
+                      Oauth2
+                    </h5>
+                    <div
+                      className="color-dark-gray"
+                    >
+                      capco.module.login_openid
+                    </div>
+                  </div>
+                </span>
+              </label>
+              <input
+                checked={false}
+                disabled={false}
+                id="Oauth2"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="btn-toolbar"
+          role="toolbar"
+        >
+          <button
+            className="btn-outline-warning btn btn-warning"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            <i
+              className="fa fa-pencil"
+            />
+             
+            global.edit
+          </button>
+          <button
+            className="btn-outline-danger btn btn-danger"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            <i
+              className="fa fa-trash"
+            />
+          </button>
+        </div>
+      </span>
+    </div>
+    <button
+      className="mt-15 btn btn-primary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      global.add
+    </button>
+    <div
+      className="mt-30"
+    >
+      <h4>
+        preconfigured
+      </h4>
+      <div
+        className="ListGroup__Container-hRGxhC fjfyPs list-group"
+      >
+        <span
+          className="ListPublicSSO__ListGroupItemWithJustifyContentStart-fmVrTp hnwSlW list-group-item"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC unchecked labelContainer"
+                disabled={false}
+                htmlFor="toggle-franceConnect"
+              >
+                <div
+                  checked={false}
+                  className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                  disabled={false}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <h5
+                    className="mb-0 mt-0"
+                  >
+                    capco.module.login_franceconnect
+                  </h5>
+                </span>
+              </label>
+              <input
+                checked={false}
+                disabled={false}
+                id="toggle-franceConnect"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div
+            className="sc-bdnxRM kMEPpk"
+          >
+            <button
+              aria-controls="id-1"
+              aria-expanded={false}
+              aria-haspopup="dialog"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG bobTHH laeJgQ"
+              onClick={[Function]}
+              onClickCapture={[Function]}
+              onKeyDown={[Function]}
+              onKeyPressCapture={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseDownCapture={[Function]}
+              type="button"
+            >
+              global.install
+            </button>
+            <div
+              aria-label="france.connect.teaser"
+              aria-modal={true}
+              data-dialog={true}
+              hidden={true}
+              id="id-1"
+              onAnimationEnd={[Function]}
+              onBlur={[Function]}
+              onKeyDown={[Function]}
+              onTransitionEnd={[Function]}
+              role="dialog"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+              tabIndex={-1}
+            />
+          </div>
+        </span>
+        <span
+          className="ListPublicSSO__ListGroupItemWithJustifyContentStart-fmVrTp hnwSlW list-group-item"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC unchecked labelContainer"
+                disabled={false}
+                htmlFor="toggle-facebook"
+              >
+                <div
+                  checked={false}
+                  className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                  disabled={false}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <h5
+                    className="mb-0 mt-0"
+                  >
+                    Facebook
+                  </h5>
+                </span>
+              </label>
+              <input
+                checked={false}
+                disabled={false}
+                id="toggle-facebook"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div
+            className="sc-bdnxRM kMEPpk"
+          >
+            <button
+              aria-controls="id-2"
+              aria-expanded={false}
+              aria-haspopup="dialog"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG bobTHH laeJgQ"
+              onClick={[Function]}
+              onClickCapture={[Function]}
+              onKeyDown={[Function]}
+              onKeyPressCapture={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseDownCapture={[Function]}
+              type="button"
+            >
+              Global.configure
+            </button>
+            <div
+              aria-label="facebook-modal-lg"
+              aria-modal={true}
+              data-dialog={true}
+              hidden={true}
+              id="id-2"
+              onAnimationEnd={[Function]}
+              onBlur={[Function]}
+              onKeyDown={[Function]}
+              onTransitionEnd={[Function]}
+              role="dialog"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+              tabIndex={-1}
+            />
+          </div>
+        </span>
+        <span
+          className="ListPublicSSO__ListGroupItemWithJustifyContentStart-fmVrTp hnwSlW list-group-item"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC checked labelContainer"
+                disabled={true}
+                htmlFor="toggle-email"
+              >
+                <div
+                  checked={true}
+                  className="Togglestyle__TogglerWrapper-hIrWcm eJrpzD"
+                  disabled={true}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <h5
+                    className="mb-0 mt-0"
+                  >
+                    global.email
+                  </h5>
+                </span>
+              </label>
+              <input
+                checked={true}
+                disabled={true}
+                id="toggle-email"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should render correctly with items 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      method
+    </h3>
+  </div>
+  <div
+    className="box-content box-content__content-form"
+  >
+    <h4>
+      global.custom.feminine
+    </h4>
+    <div
+      className="ListGroup__Container-hRGxhC fjfyPs list-group"
+    >
+      <span
+        className="list-group-item"
+      >
+        <div
+          className="d-flex align-items-center"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC unchecked labelContainer"
+                disabled={false}
+                htmlFor="Oauth2"
+              >
+                <div
+                  checked={false}
+                  className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                  disabled={false}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <div
+                    className="d-flex flex-column"
+                  >
+                    <h5
+                      className="mb-0 mt-0"
+                    >
+                      Oauth2
+                    </h5>
+                    <div
+                      className="color-dark-gray"
+                    >
+                      capco.module.login_openid
+                    </div>
+                  </div>
+                </span>
+              </label>
+              <input
+                checked={false}
+                disabled={false}
+                id="Oauth2"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="btn-toolbar"
+          role="toolbar"
+        >
+          <button
+            className="btn-outline-warning btn btn-warning"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            <i
+              className="fa fa-pencil"
+            />
+             
+            global.edit
+          </button>
+          <button
+            className="btn-outline-danger btn btn-danger"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            <i
+              className="fa fa-trash"
+            />
+          </button>
+        </div>
+      </span>
+    </div>
+    <button
+      className="mt-15 btn btn-primary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      global.add
+    </button>
+    <div
+      className="mt-30"
+    >
+      <h4>
+        preconfigured
+      </h4>
+      <div
+        className="ListGroup__Container-hRGxhC fjfyPs list-group"
+      >
+        <span
+          className="ListPublicSSO__ListGroupItemWithJustifyContentStart-fmVrTp hnwSlW list-group-item"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC unchecked labelContainer"
+                disabled={false}
+                htmlFor="toggle-franceConnect"
+              >
+                <div
+                  checked={false}
+                  className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                  disabled={false}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <h5
+                    className="mb-0 mt-0"
+                  >
+                    capco.module.login_franceconnect
+                  </h5>
+                </span>
+              </label>
+              <input
+                checked={false}
+                disabled={false}
+                id="toggle-franceConnect"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div
+            className="sc-bdnxRM kMEPpk"
+          >
+            <button
+              aria-controls="id-1"
+              aria-expanded={false}
+              aria-haspopup="dialog"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG bobTHH laeJgQ"
+              onClick={[Function]}
+              onClickCapture={[Function]}
+              onKeyDown={[Function]}
+              onKeyPressCapture={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseDownCapture={[Function]}
+              type="button"
+            >
+              global.install
+            </button>
+            <div
+              aria-label="france.connect.teaser"
+              aria-modal={true}
+              data-dialog={true}
+              hidden={true}
+              id="id-1"
+              onAnimationEnd={[Function]}
+              onBlur={[Function]}
+              onKeyDown={[Function]}
+              onTransitionEnd={[Function]}
+              role="dialog"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+              tabIndex={-1}
+            />
+          </div>
+        </span>
+        <span
+          className="ListPublicSSO__ListGroupItemWithJustifyContentStart-fmVrTp hnwSlW list-group-item"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC unchecked labelContainer"
+                disabled={false}
+                htmlFor="toggle-facebook"
+              >
+                <div
+                  checked={false}
+                  className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                  disabled={false}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <h5
+                    className="mb-0 mt-0"
+                  >
+                    Facebook
+                  </h5>
+                </span>
+              </label>
+              <input
+                checked={false}
+                disabled={false}
+                id="toggle-facebook"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div
+            className="sc-bdnxRM kMEPpk"
+          >
+            <button
+              aria-controls="id-2"
+              aria-expanded={false}
+              aria-haspopup="dialog"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG bobTHH laeJgQ"
+              onClick={[Function]}
+              onClickCapture={[Function]}
+              onKeyDown={[Function]}
+              onKeyPressCapture={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseDownCapture={[Function]}
+              type="button"
+            >
+              Global.configure
+            </button>
+            <div
+              aria-label="facebook-modal-lg"
+              aria-modal={true}
+              data-dialog={true}
+              hidden={true}
+              id="id-2"
+              onAnimationEnd={[Function]}
+              onBlur={[Function]}
+              onKeyDown={[Function]}
+              onTransitionEnd={[Function]}
+              role="dialog"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+              tabIndex={-1}
+            />
+          </div>
+        </span>
+        <span
+          className="ListPublicSSO__ListGroupItemWithJustifyContentStart-fmVrTp hnwSlW list-group-item"
+        >
+          <div
+            className="Togglestyle__ToggleContainer-bAFtsA beCpYP toggle-container"
+          >
+            <div>
+              <label
+                className="Togglestyle__LabelContainer-nyUOg gGLUcC checked labelContainer"
+                disabled={true}
+                htmlFor="toggle-email"
+              >
+                <div
+                  checked={true}
+                  className="Togglestyle__TogglerWrapper-hIrWcm eJrpzD"
+                  disabled={true}
+                >
+                  <span
+                    className="circle-toggler"
+                  />
+                </div>
+                <span
+                  className="label-toggler"
+                >
+                  <h5
+                    className="mb-0 mt-0"
+                  >
+                    global.email
+                  </h5>
+                </span>
+              </label>
+              <input
+                checked={true}
+                disabled={true}
+                id="toggle-email"
+                onChange={[Function]}
+                type="checkbox"
+              />
+            </div>
+          </div>
+        </span>
+      </div>
     </div>
   </div>
 </div>

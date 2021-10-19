@@ -9,10 +9,11 @@ import FacebookConfigurationForm from "~/components/Admin/Authentification/Faceb
 import {capitalizeFirstLetter} from "~/utils/string";
 
 type Props = {|
-  ssoConfiguration: FacebookConfigurationModal_ssoConfiguration,
+  ssoConfiguration: ?FacebookConfigurationModal_ssoConfiguration,
+  ssoConfigurationConnectionId: string
 |};
 
-export const FacebookConfigurationModal = ({ssoConfiguration}: Props) => {
+export const FacebookConfigurationModal = ({ssoConfiguration, ssoConfigurationConnectionId}: Props) => {
   const intl = useIntl();
 
   return (
@@ -24,7 +25,7 @@ export const FacebookConfigurationModal = ({ssoConfiguration}: Props) => {
         </Button>
       }>
       {({ hide }) => (
-        <FacebookConfigurationForm ssoConfiguration={ssoConfiguration} hide={hide} />
+        <FacebookConfigurationForm ssoConfiguration={ssoConfiguration} hide={hide} ssoConfigurationConnectionId={ssoConfigurationConnectionId}/>
       )}
     </Modal>
   )

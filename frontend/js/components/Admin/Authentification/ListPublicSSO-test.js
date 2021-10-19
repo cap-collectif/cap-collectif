@@ -10,14 +10,17 @@ describe('<ListPublicSSO />', () => {
   const props = {
     features,
     onToggle: jest.fn(),
-    ssoConfigurations: {
+    query: {
       ...$refType,
+      ssoConfigurations: {
+        edges: []
+      }
     },
   };
 
   it('renders correctly without France Connect', () => {
     const wrapper = shallow(
-      <ListPublicSSO {...props} ssoConfigurations={props.ssoConfigurations} />,
+      <ListPublicSSO {...props} query={props.query} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -27,7 +30,7 @@ describe('<ListPublicSSO />', () => {
       <ListPublicSSO
         features={{ ...features, login_franceconnect: true }}
         onToggle={jest.fn()}
-        ssoConfigurations={props.ssoConfigurations}
+        query={props.query}
       />,
     );
     expect(wrapper).toMatchSnapshot();

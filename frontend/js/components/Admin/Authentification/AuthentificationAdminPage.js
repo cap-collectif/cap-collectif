@@ -25,9 +25,9 @@ const component = ({
     return graphqlError;
   }
   if (props) {
-    if (props.shieldAdminForm !== null && props.ssoConfigurations !== null) {
+    if (props.shieldAdminForm !== null) {
       // $FlowFixMe
-      return <AuthentificationAdminPageContent {...props} />;
+      return <AuthentificationAdminPageContent query={props} shieldAdminForm={props.shieldAdminForm} />;
     }
     return graphqlError;
   }
@@ -43,9 +43,7 @@ export const AuthentificationAdminPage = ({ features }: Props) => (
           shieldAdminForm {
             ...AuthentificationAdminPageContent_shieldAdminForm
           }
-          ssoConfigurations {
-            ...AuthentificationAdminPageContent_ssoConfigurations
-          }
+          ...AuthentificationAdminPageContent_query
         }
       `}
       variables={{

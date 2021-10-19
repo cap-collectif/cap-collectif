@@ -28,6 +28,7 @@ class UpdateFacebookSSOConfigurationMutation implements MutationInterface
         $facebookSSOConfiguration->setClientId($input->offsetGet('clientId'));
         $facebookSSOConfiguration->setSecret($input->offsetGet('secret'));
         $facebookSSOConfiguration->setEnabled($input->offsetGet('enabled'));
+        $facebookSSOConfiguration->setName('Facebook');
 
         $this->em->flush();
 
