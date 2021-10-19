@@ -87,6 +87,7 @@ parameters:
     cas_protocol: '%env(SYMFONY_PHPCAS_CONFIG_PROTOCOL)%'
     cas_log_file_name: '%env(SYMFONY_PHPCAS_CONFIG_LOG_FILE_NAME)%'
     cas_certificate_file: '%env(SYMFONY_PHPCAS_CERTIFICATE_FILE)%'
+    cas_verify_url_profile: '%env(SYMFONY_CAS_VERIFY_URL_PROFILE)%'
     #
     # Default values :
     #
@@ -167,6 +168,7 @@ parameters:
     env(SYMFONY_PHPCAS_CONFIG_PROTOCOL): 'https'
     env(SYMFONY_PHPCAS_CONFIG_LOG_FILE_NAME): 'cas_log'
     env(SYMFONY_PHPCAS_CERTIFICATE_FILE): '***REMOVED***'
+    env(SYMFONY_CAS_VERIFY_URL_PROFILE): '***REMOVED***'
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead

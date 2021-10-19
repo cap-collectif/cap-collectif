@@ -31,6 +31,7 @@ import appStore from '../js/stores/AppStore';
 import AccountProfileFollowingsApp from '../js/startup/AccountProfileFollowingsApp';
 import UserAdminCreateButtonApp from '../js/startup/UserAdminCreateButtonApp';
 import ParisUserNotValidApp from '../js/startup/ParisUserNotValidApp';
+import CasUserNotValidApp from '../js/startup/CasUserNotValidApp';
 import EditProfileApp from '../js/startup/EditProfileApp';
 import PrivacyApp from '../js/startup/PrivacyApp';
 import CookieApp from '../js/startup/CookieApp';
@@ -102,6 +103,7 @@ ReactOnRails.register({
   GroupAdminPageApp,
   UserAdminCreateButtonApp,
   ParisUserNotValidApp,
+  CasUserNotValidApp,
   EditProfileApp,
   CookieManagerApp,
   PrivacyApp,

@@ -209,7 +209,8 @@
         "willdurand/jsonp-callback-validator": "^1.1",
         "maximal/emoji": "^1.0",
         "jasig/phpcas": "^1.4",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-simplexml": "*"
     },
     "require-dev": {
         "behat/behat": "^3.3",

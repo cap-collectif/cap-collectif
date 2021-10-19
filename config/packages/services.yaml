@@ -342,3 +342,8 @@ services:
             $prefix: '%redis_prefix%session_json_new_%kernel.environment%_' # We add env in prefix to allow multi environments sessions in dev
     Capco\UserBundle\Security\Core\User\CasUserProvider:
         public: true
+
+    Capco\UserBundle\Security\Service\CasUserFilter:
+        autowire: true
+        arguments:
+            $url: '%cas_verify_url_profile%'

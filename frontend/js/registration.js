@@ -28,6 +28,7 @@ import AnalysisPageApp from './startup/AnalysisPageApp';
 import ChooseAUsernameApp from './startup/ChooseAUsernameApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ParisUserNotValidApp from './startup/ParisUserNotValidApp';
+import CasUserNotValidApp from '~/startup/CasUserNotValidApp';
 import AccountProfileFollowingsApp from './startup/AccountProfileFollowingsApp';
 import EditProfileApp from './startup/EditProfileApp';
 import CookieContentApp from './startup/CookieContentApp';
@@ -94,6 +95,7 @@ ReactOnRails.register({
   ContactPage,
   ChooseAUsernameApp,
   ParisUserNotValidApp,
+  CasUserNotValidApp,
   ShieldApp,
   HomePageEventsApp,
   PresentationStepEventsApp,

@@ -106,3 +106,7 @@ services:
         autowire: true
         tags:
             - { name: doctrine.event_subscriber, connection: default }
+
+    Capco\AppBundle\EventListener\CasAuthenticationExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
