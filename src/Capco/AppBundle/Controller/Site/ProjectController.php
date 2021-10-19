@@ -7,7 +7,6 @@ use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\AppBundle\Security\QuestionnaireVoter;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
@@ -20,7 +19,6 @@ use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\Resolver\ProjectStatsResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +39,7 @@ use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectController extends Controller
 {
@@ -51,7 +49,6 @@ class ProjectController extends Controller
     private SiteParameterResolver $siteParameterResolver;
     private ProjectUrlResolver $projectUrlResolver;
     private QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver;
-    private ProjectStatsResolver $projectStatResolver;
     private ProjectRepository $projectRepository;
     private OpinionRepository $opinionRepository;
     private OpinionVersionRepository $opinionVersionRepository;
@@ -68,7 +65,6 @@ class ProjectController extends Controller
         RouterInterface $router,
         ProjectUrlResolver $projectUrlResolver,
         SiteParameterResolver $siteParameterResolver,
-        ProjectStatsResolver $projectStatResolver,
         ProjectRepository $projectRepository,
         OpinionRepository $opinionRepository,
         OpinionVersionRepository $opinionVersionRepository,
@@ -88,7 +84,6 @@ class ProjectController extends Controller
         $this->projectUrlResolver = $projectUrlResolver;
         $this->siteParameterResolver = $siteParameterResolver;
         $this->projectRepository = $projectRepository;
-        $this->projectStatResolver = $projectStatResolver;
 
         $this->postRepository = $postRepository;
         $this->contributionResolver = $contributionResolver;

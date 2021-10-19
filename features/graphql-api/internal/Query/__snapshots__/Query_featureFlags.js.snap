@@ -120,7 +120,7 @@ Object {
       "type": "themes",
     },
     Object {
-      "enabled": false,
+      "enabled": true,
       "type": "export",
     },
     Object {

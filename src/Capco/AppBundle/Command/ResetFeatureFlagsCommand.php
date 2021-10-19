@@ -63,7 +63,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate('phone_confirmation');
         $this->manager->activate('server_side_rendering');
         $this->manager->activate('profiles');
-        $this->manager->deactivate('export');
+        $this->manager->activate('export');
         $this->manager->deactivate('zipcode_at_register');
         $this->manager->deactivate('shield_mode');
         $this->manager->deactivate('login_saml');

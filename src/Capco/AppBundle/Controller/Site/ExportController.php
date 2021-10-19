@@ -189,7 +189,7 @@ class ExportController extends Controller
         });
 
         $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+        $response->headers->set('Content-Disposition', "attachment; filename=${fileName}");
 
         return $response;
     }
@@ -292,15 +292,9 @@ class ExportController extends Controller
 
             return new JsonResponse(['errorTranslationKey' => 'file.not-found'], 404);
         }
-        $response = new BinaryFileResponse($absolutePath);
-        $response->headers->set('X-File-Name', $fileName);
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            (new \DateTime())->format('Y-m-d') . '_' . $fileName
-        );
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
 
-        return $response;
+        return $this->file($absolutePath, $fileName);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -21,7 +22,7 @@ class StepExportContributorsResolver implements ResolverInterface
         return $this->router->generate(
             'app_export_step_contributors',
             [
-                'stepId' => $step->getId(),
+                'stepId' => GlobalId::toGlobalId($step->getType(), $step->getId()),
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
