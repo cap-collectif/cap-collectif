@@ -25,6 +25,7 @@ type FormValues = {|
 type PropsBefore = {|
   +project: ProjectModalExportSteps_project$key,
   +intl: IntlShape,
+  +isOnlyProjectAdmin?: boolean,
 |};
 
 type Props = {|
@@ -52,43 +53,60 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   });
 };
 
-const ProjectModalExportSteps = ({ project: projectFragment, handleSubmit }: Props) => {
+const ProjectModalExportSteps = ({
+  project: projectFragment,
+  handleSubmit,
+  isOnlyProjectAdmin,
+}: Props) => {
   const project = useFragment(FRAGMENT, projectFragment);
   const intl = useIntl();
-  const exportChoices = [
-    {
-      id: project.exportContributorsUrl,
-      useIdAsValue: true,
-      label: <FormattedHTMLMessage id="admin.project.list.export.exportContributorsUrl" />,
-    },
-
-    ...project.exportableSteps
-      .map(step => {
-        return [
-          {
-            id: step?.step?.exportStepUrl,
-            useIdAsValue: true,
-            label: (
-              <FormattedHTMLMessage
-                id="admin.project.list.export.step.exportStepUrl"
-                values={{ index: step?.position, stepTitle: step?.step?.title }}
-              />
-            ),
-          },
-          {
-            id: step?.step?.exportContributorsUrl,
-            useIdAsValue: true,
-            label: (
-              <FormattedHTMLMessage
-                id="admin.project.list.export.step.exportContributorsUrl"
-                values={{ index: step?.position, stepTitle: step?.step?.title }}
-              />
-            ),
-          },
-        ].flat();
+  const exportChoices = isOnlyProjectAdmin
+    ? project.exportableSteps.map(step => {
+        return {
+          id: step?.step?.exportStepUrl,
+          useIdAsValue: true,
+          label: (
+            <FormattedHTMLMessage
+              id="admin.project.list.export.step.exportStepUrl"
+              values={{ index: step?.position, stepTitle: step?.step?.title }}
+            />
+          ),
+        };
       })
-      .flat(),
-  ];
+    : [
+        {
+          id: project.exportContributorsUrl,
+          useIdAsValue: true,
+          label: <FormattedHTMLMessage id="admin.project.list.export.exportContributorsUrl" />,
+        },
+
+        ...project.exportableSteps
+          .map(step => {
+            return [
+              {
+                id: step?.step?.exportStepUrl,
+                useIdAsValue: true,
+                label: (
+                  <FormattedHTMLMessage
+                    id="admin.project.list.export.step.exportStepUrl"
+                    values={{ index: step?.position, stepTitle: step?.step?.title }}
+                  />
+                ),
+              },
+              {
+                id: step?.step?.exportContributorsUrl,
+                useIdAsValue: true,
+                label: (
+                  <FormattedHTMLMessage
+                    id="admin.project.list.export.step.exportContributorsUrl"
+                    values={{ index: step?.position, stepTitle: step?.step?.title }}
+                  />
+                ),
+              },
+            ].flat();
+          })
+          .flat(),
+      ];
   return (
     <Modal
       ariaLabel={intl.formatMessage({ id: 'delete-confirmation' })}

@@ -115,6 +115,7 @@ const ProjectListPage = ({ queryReference, isAdmin }: Props): React.Node => {
               isAdmin={isAdmin}
               resetTerm={() => setTerm('')}
               isSuperAdmin={query.viewer.isSuperAdmin}
+              isOnlyProjectAdmin={query.viewer.isOnlyProjectAdmin}
             />
           </React.Suspense>
         </Flex>

@@ -7,7 +7,7 @@ import {
   type PreloadedQuery,
   type GraphQLTaggedNode,
 } from 'react-relay';
-import type { UserInviteAdminPageQuery as UserInviteAdminPageQueryType } from '~relay/UserInviteAdminPageQuery.graphql';
+import { type UserInviteAdminPageQuery as UserInviteAdminPageQueryType } from '~relay/UserInviteAdminPageQuery.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import { headingStyles } from '~ui/Primitives/Heading';
 import { FontWeight } from '~ui/Primitives/constants';

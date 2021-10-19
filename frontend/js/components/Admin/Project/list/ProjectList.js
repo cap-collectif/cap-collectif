@@ -49,6 +49,7 @@ type Props = {|
   +orderBy: string,
   +isAdmin: boolean,
   +isSuperAdmin?: boolean,
+  +isOnlyProjectAdmin?: boolean,
   +resetTerm: () => void,
   +setOrderBy: (orderBy: string) => void,
 |};
@@ -61,6 +62,7 @@ const ProjectList = ({
   orderBy,
   setOrderBy,
   isSuperAdmin,
+  isOnlyProjectAdmin,
 }: Props): React.Node => {
   const intl = useIntl();
   const { data, loadNext, hasNext, refetch } = usePaginationFragment(ProjectListQuery, viewer);
@@ -159,6 +161,7 @@ const ProjectList = ({
                 project={project}
                 connectionName={projects.__id}
                 isSuperAdmin={isSuperAdmin}
+                isOnlyProjectAdmin={isOnlyProjectAdmin}
               />
             </Tr>
           ))}

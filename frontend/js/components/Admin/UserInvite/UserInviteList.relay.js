@@ -20,7 +20,7 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
     @argumentDefinitions(
       first: { type: "Int", defaultValue: 50 }
       cursor: { type: "String" }
-      term: { type: "String" }
+      term: { type: "String", defaultValue: null }
       status: { type: "UserInviteStatus" }
     )
     @refetchable(queryName: "UserInviteListQuery") {

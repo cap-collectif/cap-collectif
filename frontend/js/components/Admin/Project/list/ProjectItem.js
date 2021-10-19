@@ -25,6 +25,7 @@ type Props = {|
   +project: ProjectItem_project$key,
   +connectionName: string,
   +isSuperAdmin?: boolean,
+  +isOnlyProjectAdmin?: boolean,
 |};
 
 const FRAGMENT = graphql`
@@ -82,6 +83,7 @@ const ProjectItem = ({
   project: projectFragment,
   connectionName,
   isSuperAdmin,
+  isOnlyProjectAdmin,
 }: Props): React.Node => {
   const project = useFragment(FRAGMENT, projectFragment);
   const intl = useIntl();
@@ -184,7 +186,11 @@ const ProjectItem = ({
             </Menu.ListItem>
             {(!!project.exportContributorsUrl ||
               (!!project.exportableSteps && project.exportableSteps.length > 0)) && (
-              <ProjectModalExportSteps project={project} intl={intl} />
+              <ProjectModalExportSteps
+                project={project}
+                intl={intl}
+                isOnlyProjectAdmin={isOnlyProjectAdmin}
+              />
             )}
 
             {isSuperAdmin && (
