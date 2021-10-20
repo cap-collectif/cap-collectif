@@ -6,14 +6,13 @@ use GuzzleHttp\Client;
 
 class OccitanieClient
 {
-    public const BASE_URL = 'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne';
-    public const TOKEN_URL = self::BASE_URL . '/protocol/openid-connect/token';
-    public const COUNTER_URL = self::BASE_URL . '/get-user-by-platform/countallusers';
-
     protected string $username;
     protected string $password;
     protected string $clientId;
     protected string $clientSecret;
+    protected string $base_url;
+    protected string $token_url;
+    protected string $counter_url;
 
     public function __construct(
         string $username,
@@ -25,6 +24,14 @@ class OccitanieClient
         $this->password = $password;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
+
+        $this->base_url = 'https://mon-compte-particulier.laregion.fr/auth/realms/mon-compte-particulier';
+        if (getenv('SYMFONY_INSTANCE_NAME') == 'occitanie-test') {
+            $this->base_url = 'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne';
+        }
+        
+        $this->token_url = $this->base_url . '/protocol/openid-connect/token';
+        $this->counter_url = $this->base_url . '/get-user-by-platform/countallusers';
     }
 
     public function get(string $uri, string $token): int
@@ -54,7 +61,7 @@ class OccitanieClient
 
     public function getUserCounters(): int
     {
-        $tokenRequest = $this->post(self::TOKEN_URL, [
+        $tokenRequest = $this->post($this->token_url, [
             'grant_type' => 'password',
             'username' => $this->username,
             'password' => $this->password,
@@ -66,6 +73,6 @@ class OccitanieClient
             throw new \RuntimeException('Token not valid.');
         }
 
-        return $this->get(self::COUNTER_URL, $tokenRequest['access_token']);
+        return $this->get($this->counter_url, $tokenRequest['access_token']);
     }
 }
