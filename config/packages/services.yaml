@@ -347,3 +347,6 @@ services:
         autowire: true
         arguments:
             $url: '%cas_verify_url_profile%'
+
+    Doctrine\ORM\Id\UuidGenerator:
+        public: true

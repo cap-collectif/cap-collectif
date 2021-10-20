@@ -3,10 +3,9 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\Section;
-use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\Resolver\SectionResolver;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Doctrine\ORM\Id\UuidGenerator;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,9 +16,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SectionController extends PositionableController
 {
-    public function __construct()
+    private UuidGenerator $uuidGenerator;
+
+    public function __construct(UuidGenerator $uuidGenerator)
     {
         parent::__construct(SectionResolver::class);
+        $this->uuidGenerator = $uuidGenerator;
     }
 
     /**
@@ -133,11 +135,52 @@ class SectionController extends PositionableController
         $form->setData($existingObject);
         $form->handleRequest($request);
 
+        $buggySections = ['proposals', 'highlight'];
+
         if ($form->isSubmitted()) {
             $isFormValid = $form->isValid();
 
             // persist if the form was valid and if in preview mode the preview was approved
             if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+
+                if(in_array($existingObject->getType(), $buggySections)) {
+                    $em = $this->getDoctrine()->getManager();
+
+                    $conn = $em->getConnection();
+                    $deleteSQL = "DELETE FROM section_translation where translatable_id = :id";
+                    $stmt = $conn->prepare($deleteSQL);
+                    $stmt->execute(['id' => $existingObject->getId()]);
+
+                    $id = $this->uuidGenerator->generate($em, null);
+                    $insertSQL = "INSERT INTO section_translation (title, teaser, body, locale, translatable_id, id) VALUES (:title, :teaser, :body, :locale, :translatable_id, :id)";
+                    $stmt = $conn->prepare($insertSQL);
+                    $stmt->execute([
+                        'title' => $existingObject->getTitle(),
+                        'teaser' => $existingObject->getTeaser(),
+                        'body' => $existingObject->getBody(),
+                        'locale' => $existingObject->getCurrentLocale(),
+                        'translatable_id' => $existingObject->getId(),
+                        'id' => $id
+                    ]);
+
+                    $this->addFlash(
+                        'sonata_flash_success',
+                        $this->trans(
+                            'flash_edit_success',
+                            [
+                                '%name%' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                            ],
+                            'SonataAdminBundle'
+                        )
+                    );
+
+                    return $this->redirectTo($existingObject);
+                }
+
+
+
                 /** @phpstan-var T $submittedObject */
                 $submittedObject = $form->getData();
                 $this->admin->setSubject($submittedObject);

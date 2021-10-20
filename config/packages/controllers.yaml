@@ -82,6 +82,9 @@ services:
     Capco\AdminBundle\Controller\SettingsController:
         public: true
 
+    Capco\AdminBundle\Controller\SectionController:
+        public: true
+
     Capco\AppBundle\Controller\Site\ProjectController:
         public: true
         autowire: true
