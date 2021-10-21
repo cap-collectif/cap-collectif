@@ -1,7 +1,7 @@
 // @flow
-import FileSaver from 'file-saver';
 import type { IntlShape } from 'react-intl';
 import { toast } from '~ds/Toast';
+import saveAs from '~/utils/filesaver';
 
 const downloadCSV = async (url: string, intl: IntlShape) => {
   const response = await fetch(url);
@@ -16,7 +16,7 @@ const downloadCSV = async (url: string, intl: IntlShape) => {
     }
 
     const blob = await response.blob();
-    FileSaver.saveAs(blob, filename);
+    saveAs(blob, filename);
   } else {
     const { errorTranslationKey } = await response.json();
     toast({

@@ -259,7 +259,6 @@
         "fetch": "github/fetch",
         "fetch-cookie": "^0.7.3",
         "file-loader": "^6.2.0",
-        "file-saver": "^2.0.5",
         "flow-bin": "^0.137.0",
         "flow-coverage-report": "^0.8.0",
         "flow-typed": "^3.2.1",

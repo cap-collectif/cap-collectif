@@ -1,9 +1,9 @@
 // @flow
 import React, { useEffect } from 'react';
 import { usePDF } from '@react-pdf/renderer';
-import FileSaver from 'file-saver';
 import moment from 'moment';
 import { useIntl } from 'react-intl';
+import saveAs from '~/utils/filesaver';
 import QuestionnaireAdminResultsPdfDocument from '~/components/Questionnaire/QuestionnaireAdminResultsPdfDocument/QuestionnaireAdminResultsPdfDocument';
 import type {
   QuestionsType,
@@ -61,7 +61,7 @@ const QuestionnaireAdminResultsPdfInstance = ({
 
   useEffect(() => {
     if (instance.blob !== null) {
-      FileSaver.saveAs(instance.blob, filename);
+      saveAs(instance.blob, filename);
       setLoading(false);
       setError(false);
     }
