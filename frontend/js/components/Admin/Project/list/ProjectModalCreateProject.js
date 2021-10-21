@@ -18,6 +18,7 @@ import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { toast } from '~ds/Toast';
 import formatSubmitted from '~/utils/form/formatSubmitted';
 import CreateProjectMutation from '~/mutations/CreateProjectMutation';
+import UserListField from '~/components/Admin/Field/UserListField';
 
 const formName = 'form-create-project';
 
@@ -48,14 +49,6 @@ const FRAGMENT = graphql`
     projectTypes {
       id
       title
-    }
-    users {
-      edges {
-        node {
-          id
-          username
-        }
-      }
     }
   }
 `;
@@ -112,15 +105,7 @@ const ProjectModalCreateProject = ({
   isOnlyProjectAdmin,
 }: Props): React.Node => {
   const data = useFragment(FRAGMENT, queryReference);
-  const loadAuthorOptions = () =>
-    data?.users?.edges
-      ?.filter(Boolean)
-      .map(edge => edge.node)
-      .filter(Boolean)
-      .map(user => ({
-        value: user.id,
-        label: user.username,
-      }));
+
   return (
     <Modal
       overflow="visible"
@@ -154,26 +139,23 @@ const ProjectModalCreateProject = ({
                 component={component}
                 type="text"
               />
-              <Field
-                selectFieldIsObject
+              <UserListField
+                clearable={false}
+                autoload
                 name="author"
                 id="author"
+                disabled={isOnlyProjectAdmin}
+                debounce
+                aria-autocomplete="list"
+                aria-haspopup="true"
+                role="combobox"
                 label={
                   <Text fontSize={2} lineHeight="sm" fontWeight="normal">
                     {intl.formatMessage({ id: 'global.author' })}
                   </Text>
                 }
+                selectFieldIsObject
                 multi
-                aria-autocomplete="list"
-                aria-haspopup="true"
-                role="combobox"
-                disabled={isOnlyProjectAdmin}
-                debounce
-                required
-                autoload
-                component={select}
-                clearable
-                loadOptions={loadAuthorOptions}
               />
 
               <Field

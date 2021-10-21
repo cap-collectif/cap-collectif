@@ -26,6 +26,7 @@ import { toast } from '~ds/Toast';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import formatSubmitted from '~/utils/form/formatSubmitted';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import UserListField from '~/components/Admin/Field/UserListField';
 
 type FormValues = {|
   +[key: TranslationLocale]: {
@@ -84,15 +85,6 @@ const FRAGMENT = graphql`
             id
             title
           }
-        }
-      }
-    }
-    userList: users {
-      totalCount
-      edges {
-        node {
-          id
-          username
         }
       }
     }
@@ -201,15 +193,6 @@ const PostForm = ({
       }
     };
   }, [dirty]);
-  const loadAuthorOptions = () =>
-    data.userList.edges
-      ?.filter(Boolean)
-      .map(edge => edge.node)
-      .filter(Boolean)
-      .map(user => ({
-        value: user.id,
-        label: user.username,
-      }));
 
   const renderLinkedContent = () => {
     if (data.viewer.isAdmin || data.viewer.isSuperAdmin) {
@@ -365,27 +348,25 @@ const PostForm = ({
             type="text"
           />
         </FormSection>
-        <Field
-          selectFieldIsObject
+        <UserListField
+          clearable={false}
+          autoload
           name="author"
           id="author"
+          disabled={!isAdmin}
+          debounce
+          aria-autocomplete="list"
+          aria-haspopup="true"
+          role="combobox"
           label={
             <Text fontSize={2} lineHeight="sm" fontWeight="normal">
               {intl.formatMessage({ id: 'global.author' })}
             </Text>
           }
+          selectFieldIsObject
           multi
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          role="combobox"
-          debounce
-          required
-          autoload
-          disabled={!isAdmin}
-          component={select}
-          clearable
-          loadOptions={loadAuthorOptions}
         />
+
         <FormSection name={selectedLocale}>
           <Field
             name={`${selectedLocale}-abstract`}
