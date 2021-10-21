@@ -53,7 +53,13 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
       flex="1" // we have to manually set a max height in px for the transition to work
       maxHeight={!readMore ? '400px' : '2000px'}
       overflow="hidden"
-      css={{ transition: 'max-height 0.5s ease-out' }}
+      css={{
+        transition: 'max-height 0.5s ease-out',
+        '.ql-video': {
+          width: '100%',
+          aspectRatio: ' 16 / 9',
+        },
+      }}
       position="relative">
       <Tag
         variant={opinion.type === 'FOR' ? 'green' : 'red'}

@@ -341,7 +341,11 @@ form {
     height: auto;
     white-space: normal;
     overflow: visible;
-
+    .ql-video{
+        width: 100%;
+        aspect-ratio: 16 / 9;
+    }
+    
     img {
         max-width: 100%;
     }

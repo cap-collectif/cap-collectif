@@ -2,7 +2,7 @@
 
 exports[`<DebateOpinion /> when the query is on desktop should render a FOR opinion 1`] = `
 <div
-  className="sc-bdnxRM eMovSv DebateOpinion___StyledCard-dZwepn bCbDQU"
+  className="sc-bdnxRM eMovSv DebateOpinion___StyledCard-dZwepn cgdJna"
 >
   <div
     className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
@@ -91,7 +91,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
 
 exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST opinion 1`] = `
 <div
-  className="sc-bdnxRM eMovSv DebateOpinion___StyledCard-dZwepn bCbDQU"
+  className="sc-bdnxRM eMovSv DebateOpinion___StyledCard-dZwepn cgdJna"
 >
   <div
     className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
@@ -180,7 +180,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
 
 exports[`<DebateOpinion /> when the query is on desktop should render with a read more link 1`] = `
 <div
-  className="sc-bdnxRM APGfF DebateOpinion___StyledCard-dZwepn bCbDQU"
+  className="sc-bdnxRM APGfF DebateOpinion___StyledCard-dZwepn cgdJna"
 >
   <div
     className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
@@ -266,7 +266,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
 
 exports[`<DebateOpinion /> when the query is on mobile should render a FOR opinion 1`] = `
 <div
-  className="sc-bdnxRM eMovSv DebateOpinion___StyledCard-dZwepn bCbDQU"
+  className="sc-bdnxRM eMovSv DebateOpinion___StyledCard-dZwepn cgdJna"
 >
   <div
     className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
@@ -362,7 +362,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
 
 exports[`<DebateOpinion /> when the query is on mobile should render with a read more link 1`] = `
 <div
-  className="sc-bdnxRM APGfF DebateOpinion___StyledCard-dZwepn bCbDQU"
+  className="sc-bdnxRM APGfF DebateOpinion___StyledCard-dZwepn cgdJna"
 >
   <div
     className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
