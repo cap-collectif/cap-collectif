@@ -44,7 +44,7 @@ class EmailingCampaignRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->getArrayResult();
+            ->getResult();
     }
 
     public function findPlanned(\DateTimeInterface $sendAt): array

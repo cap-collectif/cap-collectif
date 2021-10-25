@@ -9,3 +9,14 @@ Capco\AppBundle\Entity\MailingList:
         name: 'liste Solidarité COVID-19'
         users: ['@user4', '@user160']
         project: '@projectCorona'
+    emptyMailingListWithOwner:
+        id: emptyMailingListWithOwner
+        name: "J'avoue je sers à rien"
+        users: []
+        owner: '@userTheo'
+    mailingListFromProjectWithOwner:
+        id: mailingListFromProjectWithOwner
+        owner: '@userTheo'
+        name: 'Liste du projet de Théo'
+        users: ['@userJpec', '@userMaxime']
+        project: '@projectWithOwner'

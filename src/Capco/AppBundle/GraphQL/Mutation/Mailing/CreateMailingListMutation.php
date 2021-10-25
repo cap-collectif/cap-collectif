@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\CreateMailingListErrorCode;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -28,10 +29,10 @@ class CreateMailingListMutation implements MutationInterface
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $error = null;
-        $mailingList = $this->createMailingList($input, $error);
+        $mailingList = $this->createMailingList($input, $viewer, $error);
 
         if ($mailingList) {
             try {
@@ -45,7 +46,7 @@ class CreateMailingListMutation implements MutationInterface
         return compact('mailingList', 'error');
     }
 
-    private function createMailingList(Argument $input, ?string &$error): ?MailingList
+    private function createMailingList(Argument $input, User $viewer, ?string &$error): ?MailingList
     {
         $users = $this->getUsers($input, $error);
         if ($error) {
@@ -61,6 +62,7 @@ class CreateMailingListMutation implements MutationInterface
         $mailingList->setName($input->offsetGet('name'));
         $mailingList->setUsers($users);
         $mailingList->setProject($project);
+        $mailingList->setOwner($viewer);
 
         return $mailingList;
     }

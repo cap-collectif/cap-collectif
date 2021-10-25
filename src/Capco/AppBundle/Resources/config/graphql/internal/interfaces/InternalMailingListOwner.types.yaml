@@ -1,0 +1,13 @@
+InternalMailingListOwner:
+    type: interface
+    config:
+        name: MailingListOwner
+        description: 'Represent an owner of a mailing list.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\MailingListOwnerTypeResolver", [value])'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'User ID'
+            username:
+                type: 'String'
+                description: 'User username'

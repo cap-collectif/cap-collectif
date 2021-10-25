@@ -5022,6 +5022,9 @@ type EmailingCampaign implements Node {
 
   """preview of the email"""
   preview: HTML
+
+  """The owner of the emailing campaign."""
+  owner: EmailingCampaignOwner
 }
 
 """A connection to a list of items."""
@@ -5071,6 +5074,15 @@ enum EmailingCampaignOrderField {
   Allows ordering a list of campaign by when they have been sent or shall be sent.
   """
   SEND_AT
+}
+
+"""Represent an owner of an emailing campaign."""
+interface EmailingCampaignOwner {
+  """User ID"""
+  id: ID!
+
+  """User username"""
+  username: String
 }
 
 """The possible status of an emailing campaign"""
@@ -6280,6 +6292,9 @@ type MailingList implements Node {
 
   """false if used in a planned or sent email campaign"""
   isDeletable: Boolean
+
+  """The owner of the mailing list."""
+  owner: MailingListOwner
 }
 
 """A connection to a list of items."""
@@ -6300,6 +6315,15 @@ type MailingListEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+"""Represent an owner of a mailing list."""
+interface MailingListOwner {
+  """User ID"""
+  id: ID!
+
+  """User username"""
+  username: String
 }
 
 """Data corresponding to one majority question choice"""
@@ -14818,14 +14842,14 @@ enum UpdateUserEmailErrorCode {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner {
+type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner {
   """User ID"""
   id: ID!
 
   """The URL to this resource."""
   url: URI!
 
-  """User username."""
+  """User username"""
   username: String
 
   """Whether or not this user is the authenticated user."""

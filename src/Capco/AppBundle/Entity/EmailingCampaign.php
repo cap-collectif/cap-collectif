@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
+use Capco\AppBundle\Traits\OwnerTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EmailingCampaign
 {
+    use OwnerTrait;
     use UuidTrait;
 
     /**

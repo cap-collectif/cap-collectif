@@ -12,6 +12,9 @@ Scenario: GraphQL client wants to create a campaign
         error
         emailingCampaign {
           name
+          owner {
+            username
+          }
           mailingList {
             id
           }
@@ -35,6 +38,9 @@ Scenario: GraphQL client wants to create a campaign
         "error": null,
         "emailingCampaign": {
           "name": "global.campaign.new",
+          "owner": {
+            "username": "admin"
+          },
           "mailingList": null,
           "mailingInternal": null,
           "status": "DRAFT",

@@ -10,6 +10,7 @@ use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\SenderEmailRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -38,9 +39,9 @@ class CreateEmailingCampaignMutation implements MutationInterface
         $this->senderEmailRepository = $senderEmailRepository;
     }
 
-    public function __invoke(Argument $input)
+    public function __invoke(Argument $input, User $viewer)
     {
-        $emailingCampaign = $this->createDefaultCampaign();
+        $emailingCampaign = $this->createDefaultCampaign($viewer);
         if ($mailingListId = $input->offsetGet('mailingList')) {
             if ($error = $this->setMailingListOrError($emailingCampaign, $mailingListId)) {
                 return compact('error');
@@ -53,7 +54,7 @@ class CreateEmailingCampaignMutation implements MutationInterface
         return compact('emailingCampaign');
     }
 
-    private function createDefaultCampaign(): EmailingCampaign
+    private function createDefaultCampaign(User $viewer): EmailingCampaign
     {
         $emailingCampaign = new EmailingCampaign();
         $emailingCampaign->setName(
@@ -64,6 +65,7 @@ class CreateEmailingCampaignMutation implements MutationInterface
             $this->siteParams->getValue('admin.mail.notifications.send_name') ??
                 $emailingCampaign->getSenderEmail()
         );
+        $emailingCampaign->setOwner($viewer);
 
         return $emailingCampaign;
     }
@@ -96,11 +98,11 @@ class CreateEmailingCampaignMutation implements MutationInterface
         return $mailingList;
     }
 
-    private function getDefaultEmail(): string 
+    private function getDefaultEmail(): string
     {
         $senderEmail = $this->senderEmailRepository->getDefault();
 
-        if($senderEmail instanceOf SenderEmail) {
+        if ($senderEmail instanceof SenderEmail) {
             $senderEmail = $senderEmail->getAddress();
         } else {
             $senderEmail = $this->siteParams->getValue('admin.mail.notifications.send_address');

@@ -12,6 +12,9 @@ Scenario: GraphQL client wants to create a mailing list without project
         error
         mailingList {
           name
+          owner {
+            username
+          }
           project {
             title
           }
@@ -47,6 +50,9 @@ Scenario: GraphQL client wants to create a mailing list without project
         "error": null,
         "mailingList": {
           "name": "equipe tech",
+          "owner": {
+            "username": "admin"
+          },
           "project": null,
           "users": {
             "totalCount": 8

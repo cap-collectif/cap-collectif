@@ -32,3 +32,6 @@ MailingList:
             isDeletable:
                 type: 'Boolean'
                 description: 'false if used in a planned or sent email campaign'
+            owner:
+                type: 'InternalMailingListOwner'
+                description: 'The owner of the mailing list.'

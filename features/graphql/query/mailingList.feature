@@ -12,6 +12,9 @@ Scenario: GraphQL client wants to get all mailing lists
         edges {
           node {
             name
+            owner {
+              username
+            }
           }
         }
       }
@@ -23,16 +26,34 @@ Scenario: GraphQL client wants to get all mailing lists
   {
     "data":{
       "mailingLists":{
-        "totalCount":2,
+        "totalCount":4,
         "edges":[
           {
             "node":{
-              "name":"liste Solidarité COVID-19"
+              "name":"J'avoue je sers à rien",
+              "owner": {
+                "username": "Théo QP"
+              }
             }
           },
           {
             "node":{
-              "name":"Les gens qui pèsent dans le capco-game"
+              "name":"liste Solidarité COVID-19",
+              "owner": null
+            }
+          },
+          {
+            "node":{
+              "name":"Liste du projet de Théo",
+              "owner": {
+                "username": "Théo QP"
+              }
+            }
+          },
+          {
+            "node":{
+              "name":"Les gens qui pèsent dans le capco-game",
+              "owner": null
             }
           }
         ]

@@ -1,0 +1,13 @@
+InternalEmailingCampaignOwner:
+    type: interface
+    config:
+        name: EmailingCampaignOwner
+        description: 'Represent an owner of an emailing campaign.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\EmailingCampaignOwnerTypeResolver", [value])'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'User ID'
+            username:
+                type: 'String'
+                description: 'User username'

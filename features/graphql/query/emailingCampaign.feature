@@ -12,6 +12,9 @@ Scenario: GraphQL client wants to get all campaigns
         edges {
           node {
             name
+            owner {
+              username
+            }
             senderEmail
             senderName
             object
@@ -35,11 +38,12 @@ Scenario: GraphQL client wants to get all campaigns
   {
     "data": {
       "emailingCampaigns": {
-        "totalCount":3,
+        "totalCount":4,
         "edges":[
           {
             "node": {
               "name": "Campagne pour remercier les inscrits confirmés",
+              "owner": null,
               "senderEmail": "dev@cap-collectif.com",
               "senderName": "Les devs de capco",
               "object": "Merci",
@@ -55,6 +59,7 @@ Scenario: GraphQL client wants to get all campaigns
           {
             "node": {
               "name": "Campagne pour rappeler aux utilisateurs de confirmer",
+              "owner": null,
               "senderEmail": "dev@cap-collectif.com",
               "senderName": "Les devs de capco",
               "object": "Veuillez confirmer votre email",
@@ -70,6 +75,7 @@ Scenario: GraphQL client wants to get all campaigns
           {
             "node": {
               "name": "On envoie un message à ceux qui ont participé au projet Solidarité COVID-19",
+              "owner": null,
               "senderEmail": "dev@cap-collectif.com",
               "senderName": "Les devs de capco",
               "object": "Second confinement",
@@ -80,6 +86,26 @@ Scenario: GraphQL client wants to get all campaigns
               "mailingInternal": null,
               "mailingList": {
                 "name": "liste Solidarit\u00e9 COVID-19"
+              },
+              "preview": @string@
+            }
+          },
+          {
+            "node": {
+              "name": "Campagne pour le projet avec propriétaire",
+              "owner": {
+                "username": "Théo QP"
+              },
+              "senderEmail": "assistance@cap-collectif.com",
+              "senderName": "Théo qui assiste",
+              "object": "",
+              "content": "",
+              "unlayerConf": null,
+              "sendAt": null,
+              "status": "DRAFT",
+              "mailingInternal": null,
+              "mailingList": {
+                "name": "Liste du projet de Théo"
               },
               "preview": @string@
             }
@@ -157,11 +183,17 @@ Scenario: GraphQL client wants to sort campaigns by sendDate
   {
     "data": {
       "emailingCampaigns": {
-        "totalCount":3,
+        "totalCount":4,
         "edges":[
           {
             "node": {
               "name": "On envoie un message à ceux qui ont participé au projet Solidarité COVID-19",
+              "sendAt": null
+            }
+          },
+          {
+            "node": {
+              "name": "Campagne pour le projet avec propriétaire",
               "sendAt": null
             }
           },

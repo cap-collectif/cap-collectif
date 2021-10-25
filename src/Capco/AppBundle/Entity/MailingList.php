@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\AppBundle\Traits\OwnerTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MailingList
 {
+    use OwnerTrait;
     use UuidTrait;
 
     /**
