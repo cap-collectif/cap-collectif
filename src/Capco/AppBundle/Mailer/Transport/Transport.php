@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Mailer\Transport;
 
 use Capco\AppBundle\Entity\ExternalServiceConfiguration;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
+use Psr\Log\LoggerInterface;
 use Swift_Events_EventListener;
 use Swift_Mime_SimpleMessage;
 
@@ -13,17 +14,20 @@ class Transport implements \Swift_Transport
     private MailjetTransport $mailjetTransport;
     private \Swift_Events_EventDispatcher $dispatcher;
     private ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
+    private LoggerInterface $logger;
 
     public function __construct(
         MandrillTransport $mandrillTransport,
         MailjetTransport $mailjetTransport,
         \Swift_Events_EventDispatcher $dispatcher,
-        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository
+        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
+        LoggerInterface $logger
     ) {
         $this->mandrillTransport = $mandrillTransport;
         $this->mailjetTransport = $mailjetTransport;
         $this->dispatcher = $dispatcher;
         $this->externalServiceConfigurationRepository = $externalServiceConfigurationRepository;
+        $this->logger = $logger;
     }
 
     /**
@@ -105,14 +109,26 @@ class Transport implements \Swift_Transport
     public function getTransport()
     {
         $configuration = $this->getConfiguration();
-        if ('mailjet' === $configuration->getValue()) {
-            return $this->mailjetTransport;
-        }
-        if ('mandrill' === $configuration->getValue()) {
-            return $this->mandrillTransport;
+
+        if ($configuration) {
+            if ('mailjet' === $configuration->getValue()) {
+                return $this->mailjetTransport;
+            }
+            if ('mandrill' === $configuration->getValue()) {
+                return $this->mandrillTransport;
+            }
+
+            $this->logger->error('unknown mailer value : ' . $configuration->getValue());
+        } else {
+            $this->logger->error('no mailer configuration');
         }
 
-        throw new \Exception('unknown mailer value : ' . $configuration->getValue());
+        return $this->getFallbackTransport();
+    }
+
+    private function getFallbackTransport(): \Swift_Transport
+    {
+        return $this->mandrillTransport;
     }
 
     private function getConfiguration(): ?ExternalServiceConfiguration
