@@ -30,7 +30,7 @@ class MailingList
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Project $project;
 
