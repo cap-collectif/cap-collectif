@@ -541,5 +541,5 @@ InternalQuery:
             senderEmails:
                 type: '[SenderEmail!]!'
                 description: 'Get all sending addresses registered'
-                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__emailing')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailResolver", [args])'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN') and hasFeatureFlag('unstable__emailing')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailResolver", [getUser()])'

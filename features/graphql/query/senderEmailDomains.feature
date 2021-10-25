@@ -46,3 +46,34 @@ Scenario: GraphQL admin wants to get all senderEmailDomains
     }
   }
   """
+
+Scenario: GraphQL project owner wants to get all senderEmails and get only default one
+  Given I am logged in to graphql as theo
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "{
+      senderEmails {
+        locale
+        domain
+        address
+        isDefault
+      }
+    }"
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data":{
+      "senderEmails":[
+        {
+          "locale": "assistance",
+          "domain": "cap-collectif.com",
+          "address": "assistance@cap-collectif.com",
+          "isDefault": true
+        }
+      ]
+    }
+  }
+  """

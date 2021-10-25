@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Repository\SenderEmailRepository;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class SenderEmailResolver implements ResolverInterface
@@ -14,8 +15,10 @@ class SenderEmailResolver implements ResolverInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(): array
+    public function __invoke(User $viewer): array
     {
-        return $this->repository->findAll();
+        return $viewer->isAdmin()
+            ? $this->repository->findAll()
+            : [$this->repository->getDefault()];
     }
 }
