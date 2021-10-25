@@ -32,6 +32,16 @@ class MandrillClient
         return $senderEmailDomains;
     }
 
+    public function getSenderEmailDomain(SenderEmailDomain $domain): ?SenderEmailDomain
+    {
+        $data = json_decode($this->post('senders/check-domain', ['domain' => $domain->getValue()])->getBody());
+        $serviceDomain = clone $domain;
+        $serviceDomain->setDkimValidation($data->dkim->valid);
+        $serviceDomain->setSpfValidation($data->spf->valid);
+
+        return $serviceDomain;
+    }
+
     public function createSenderDomain(SenderEmailDomain $domain): SenderEmailDomain
     {
         //when already existing, mandrill api send back the existing domain
