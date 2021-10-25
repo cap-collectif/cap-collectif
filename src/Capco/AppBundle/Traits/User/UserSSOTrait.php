@@ -35,10 +35,6 @@ trait UserSSOTrait
 
     public function setSamlAttributes(string $idp, array $attributes): void
     {
-        if ($this->getId()) {
-            return;
-        }
-
         if ('daher' === $idp) {
             $this->setUsername(
                 $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
