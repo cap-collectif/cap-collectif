@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import {
   usePreloadedQuery,
   graphql,
@@ -14,11 +14,7 @@ import { FontWeight } from '~ui/Primitives/constants';
 import Text from '~ui/Primitives/Text';
 import UserInviteList from '~/components/Admin/UserInvite/UserInviteList';
 import TablePlaceholder from '~ds/Table/placeholder';
-import Input from '~ui/Form/Input/Input';
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
-import Button from '~ds/Button/Button';
-import UserInviteByFileModal from '~/components/Admin/UserInvite/Modal/UserInviteByFile/UserInviteByFileModal';
-import UserInviteByEmailModal from '~/components/Admin/UserInvite/Modal/UserInviteByEmail/UserInviteByEmailModal';
+import UserInviteAdminPageHeader from '~/components/Admin/UserInvite/UserInviteAdminPageHeader';
 
 type Props = {|
   queryReference: PreloadedQuery<UserInviteAdminPageQueryType>,
@@ -31,8 +27,19 @@ export const UserInviteAdminPageQuery: GraphQLTaggedNode = graphql`
     $term: String
     $status: UserInviteStatus
   ) {
+    allInvitations: userInvitations {
+      totalCount
+    }
+    pendingInvitations: userInvitations(status: PENDING) {
+      totalCount
+    }
+    acceptedInvitations: userInvitations(status: ACCEPTED) {
+      totalCount
+    }
     ...UserInviteList_query @arguments(first: $first, cursor: $cursor, term: $term, status: $status)
-    ...UserInviteModalStepChooseRole_query
+    groups {
+      ...UserInviteAdminPageHeader_groups
+    }
   }
 `;
 
@@ -44,18 +51,47 @@ const UserInviteAdminPage = ({ queryReference }: Props): React.Node => {
   );
   const [term, setTerm] = React.useState('');
   const [status, setStatus] = React.useState('ALL');
+  const { allInvitations, pendingInvitations, acceptedInvitations } = query;
 
   return (
     <Flex direction="column" spacing={3}>
-      <Text
-        color="blue.800"
-        {...headingStyles.h4}
-        fontWeight={FontWeight.Semibold}
-        px={6}
-        py={4}
-        bg="white">
-        {intl.formatMessage({ id: 'user-invite-admin-page-title' })}
-      </Text>
+      <Flex direction="row" justify="space-between" align="center" px={6} py={4} bg="white">
+        <Text color="blue.800" {...headingStyles.h4} fontWeight={FontWeight.Semibold}>
+          {intl.formatMessage({ id: 'user-invite-admin-page-title' })}
+        </Text>
+
+        <Flex
+          direction="row"
+          color="blue.800"
+          spacing={4}
+          {...headingStyles.h5}
+          fontWeight={FontWeight.Semibold}>
+          <Text>
+            <Text as="span" color="blue.500" mr={1}>
+              {allInvitations.totalCount}
+            </Text>
+            {intl.formatMessage({ id: 'invitations-count' }, { num: allInvitations.totalCount })}
+          </Text>
+
+          <Text>
+            <Text as="span" color="orange.500" mr={1}>
+              {pendingInvitations.totalCount}
+            </Text>
+            {intl.formatMessage({ id: 'waiting' })}
+          </Text>
+
+          <Text>
+            <Text as="span" color="green.500" mr={1}>
+              {acceptedInvitations.totalCount}
+            </Text>
+
+            {intl.formatMessage(
+              { id: 'accepted-invitations' },
+              { num: acceptedInvitations.totalCount },
+            )}
+          </Text>
+        </Flex>
+      </Flex>
 
       <Flex
         direction="column"
@@ -65,34 +101,7 @@ const UserInviteAdminPage = ({ queryReference }: Props): React.Node => {
         bg="white"
         borderRadius="normal"
         overflow="hidden">
-        <Flex direction="row">
-          <ButtonGroup>
-            <UserInviteByFileModal
-              queryFragment={query}
-              disclosure={
-                <Button variant="secondary" variantSize="small">
-                  <FormattedMessage id="invite-via-file" />
-                </Button>
-              }
-            />
-            <UserInviteByEmailModal
-              queryFragment={query}
-              disclosure={
-                <Button variant="secondary" variantSize="small">
-                  <FormattedMessage id="invite-a-user" />
-                </Button>
-              }
-            />
-            <Input
-              type="text"
-              name="term"
-              id="search-invitation"
-              onChange={(e: SyntheticInputEvent<HTMLInputElement>) => setTerm(e.target.value)}
-              value={term}
-              placeholder={intl.formatMessage({ id: 'search-invitation' })}
-            />
-          </ButtonGroup>
-        </Flex>
+        <UserInviteAdminPageHeader groups={query.groups} term={term} setTerm={setTerm} />
         <React.Suspense fallback={<TablePlaceholder rowsCount={8} columnsCount={4} />}>
           <UserInviteList query={query} status={status} setStatus={setStatus} term={term} />
         </React.Suspense>

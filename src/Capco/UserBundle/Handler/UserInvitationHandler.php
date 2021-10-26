@@ -56,8 +56,6 @@ class UserInvitationHandler
         $user->setConfirmedAccountAt(new \DateTime($now));
 
         $this->em->persist($user);
-        $this->em->remove($invitation);
-
         $this->em->flush();
     }
 }

@@ -19,17 +19,17 @@ import type {
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 import Tag from '~ds/Tag/Tag';
-import Menu from "~ds/Menu/Menu";
-import Text from "~ui/Primitives/Text";
-import {ICON_NAME} from "~ds/Icon/Icon";
+import Menu from '~ds/Menu/Menu';
+import Text from '~ui/Primitives/Text';
+import { ICON_NAME } from '~ds/Icon/Icon';
 
-export type Status = "PENDING" | "FAILED" | "ALL" | "EXPIRED";
+export type Status = 'PENDING' | 'FAILED' | 'ALL' | 'EXPIRED' | 'ACCEPTED';
 
 type Props = {|
   +query: UserInviteList_query$key,
   +status: Status,
   +setStatus: (status: any) => void,
-  +term: string
+  +term: string,
 |};
 
 const StatusTag = ({ status }: { status: ?UserInviteStatus }) => {
@@ -40,21 +40,29 @@ const StatusTag = ({ status }: { status: ?UserInviteStatus }) => {
     return <Tag variant="gray">{intl.formatMessage({ id: 'global.expired.feminine' })}</Tag>;
   if (status === 'FAILED')
     return <Tag variant="red">{intl.formatMessage({ id: 'sending.failure' })}</Tag>;
+  if (status === 'ACCEPTED')
+    return <Tag variant="green">{intl.formatMessage({ id: 'global.accepted.feminine' })}</Tag>;
+
   return null;
 };
 
-export const UserInviteList = ({ query: queryFragment, status, setStatus, term }: Props): React.Node => {
+export const UserInviteList = ({
+  query: queryFragment,
+  status,
+  setStatus,
+  term,
+}: Props): React.Node => {
   const intl = useIntl();
   const { data, hasNext, loadNext, refetch } = usePaginationFragment(FRAGMENT, queryFragment);
   const invitations = data?.userInvitations?.edges?.map(edge => edge?.node).filter(Boolean) ?? [];
   const hasInvitations = invitations.length > 0;
-  const firstRendered = React.useRef(null)
+  const firstRendered = React.useRef(null);
   React.useEffect(() => {
     if (firstRendered.current) {
-      refetch({status: status === "ALL" ? null : status, term: term || null})
+      refetch({ status: status === 'ALL' ? null : status, term: term || null });
     }
-    firstRendered.current = true
-  }, [term, status, refetch])
+    firstRendered.current = true;
+  }, [term, status, refetch]);
 
   const groupsText = (userInvite): string => {
     return userInvite?.groups?.edges && userInvite?.groups?.edges?.length > 0
@@ -125,6 +133,9 @@ export const UserInviteList = ({ query: queryFragment, status, setStatus, term }
                       <Menu.OptionItem value="PENDING">
                         <Text>{intl.formatMessage({ id: 'waiting' })}</Text>
                       </Menu.OptionItem>
+                      <Menu.OptionItem value="ACCEPTED">
+                        <Text>{intl.formatMessage({ id: 'global.accepted.feminine' })}</Text>
+                      </Menu.OptionItem>
                     </Menu.OptionGroup>
                   </Menu.List>
                 </Menu>
@@ -161,7 +172,7 @@ export const UserInviteList = ({ query: queryFragment, status, setStatus, term }
                 <ButtonGroup>
                   <ButtonQuickAction
                     icon="TRASH"
-                    label={intl.formatMessage({id: 'global.delete'})}
+                    label={intl.formatMessage({ id: 'global.delete' })}
                     variantColor="danger"
                     onClick={() => cancelInvite([userInvite?.id])}
                   />

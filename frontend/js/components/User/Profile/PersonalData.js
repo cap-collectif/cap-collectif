@@ -1,21 +1,21 @@
 // @flow
 import React, { Component } from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { Alert, Well, Panel, Button, OverlayTrigger } from 'react-bootstrap';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { Alert, Button, OverlayTrigger, Panel, Well } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import {
-  reduxForm,
+  change,
   Field,
+  formValueSelector,
+  reduxForm,
   SubmissionError,
   unregisterField,
-  change,
-  formValueSelector,
 } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { type PersonalData_viewer } from '~relay/PersonalData_viewer.graphql';
 import AlertForm from '../../Alert/AlertForm';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch, State } from '~/types';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
 import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';

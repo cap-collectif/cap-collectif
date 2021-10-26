@@ -56,7 +56,12 @@ class UserInviteRepository extends EntityRepository
                 $qb
                     ->expr()
                     ->andX(
-                        $qb->expr()->eq('ui.internalStatus', ':pending'),
+                        $qb
+                            ->expr()
+                            ->orX(
+                                $qb->expr()->eq('ui.internalStatus', ':pending'),
+                                $qb->expr()->eq('ui.internalStatus', ':sent')
+                            ),
                         $qb
                             ->expr()
                             ->gt(
@@ -66,7 +71,13 @@ class UserInviteRepository extends EntityRepository
                                     ->literal((new \DateTimeImmutable())->format('Y/m/d H:i:s'))
                             )
                     )
-            )->setParameter(':pending', UserInvite::WAITING_SENDING);
+            )
+                ->setParameter(':pending', UserInvite::WAITING_SENDING)
+                ->setParameter(':sent', UserInvite::SENT);
+        }
+
+        if (UserInviteStatus::ACCEPTED === $status) {
+            $qb->innerJoin('CapcoUserBundle:User', 'u', 'WITH', 'u.email = ui.email');
         }
         $qb->addOrderBy('ui.createdAt', 'DESC');
 

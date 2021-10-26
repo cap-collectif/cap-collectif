@@ -1,0 +1,15 @@
+UserInvitationAvailability:
+    type: object
+    inherits:
+    config:
+        description: 'A user invitation availability.'
+        fields:
+            email:
+                type: 'String!'
+                description: 'The targeted email to be checked for availability'
+            availableForUser:
+                type: 'Boolean!'
+                description: 'Is the email used in a user account.'
+            availableForInvitation:
+                type: 'Boolean!'
+                description: 'Is the email used in an invitation'

@@ -462,6 +462,13 @@ InternalQuery:
                     status:
                         type: 'UserInviteStatus'
                         defaultValue: null
+            userInvitationsAvailabilitySearch:
+                type: 'UserInvitationsAvailabilityConnection!'
+                description: 'Check availability of a given email list among existing users and invitations.'
+                args:
+                    emails:
+                        type: '[String!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserInvitationsAvailabilitySearchQueryResolver", [args])'
             siteColors:
                 description: 'List all site colors.'
                 type: '[InternalSiteColor!]!'

@@ -19,8 +19,6 @@ const mutation = graphql`
         node {
           id
           email
-          isAdmin
-          isProjectAdmin
           status
           groups {
             edges {
@@ -61,6 +59,11 @@ const commit = (variables: InviteUserMutationVariables): Promise<Response> =>
       if (!invitations) return;
       const newInvitations = store.getRootField('inviteUsers').getLinkedRecords('newInvitations');
       newInvitations.forEach(invitation => {
+        const invitationNode = invitation.getLinkedRecord('node');
+        invitationNode
+          .setValue(variables.input.role === 'ROLE_ADMIN', 'isAdmin')
+          .setValue(variables.input.role === 'ROLE_PROJECT_ADMIN', 'isProjectAdmin');
+
         ConnectionHandler.insertEdgeBefore(invitations, invitation);
       });
       if (newInvitations.length > CONNECTION_NODES_PER_PAGE) {

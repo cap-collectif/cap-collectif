@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +24,7 @@ class UserController extends AbstractController
     public function invitation(
         Request $request,
         UserInviteRepository $repository,
+        UserRepository $userRepository,
         EntityManagerInterface $em,
         Manager $toggleManager,
         RouterInterface $router,
@@ -79,6 +81,11 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_homepage');
         }
 
+        $email = $invitation->getEmail();
+        if ($userRepository->findOneByEmail($email)) {
+            return $this->redirectToRoute('app_homepage');
+        }
+
         if ($invitation->hasExpired()) {
             $this->addFlash('danger', 'user-invitation-expired');
             $em->remove($invitation);
@@ -86,8 +93,6 @@ class UserController extends AbstractController
 
             return $this->redirectToRoute('app_homepage');
         }
-
-        $email = $invitation->getEmail();
 
         return compact(
             'token',

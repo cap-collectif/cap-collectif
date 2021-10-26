@@ -1,0 +1,7 @@
+UserInvitationsAvailabilityConnection:
+    type: relay-connection
+    config:
+        nodeType: UserInvitationAvailability
+        connectionFields:
+            totalCount:
+                type: Int!

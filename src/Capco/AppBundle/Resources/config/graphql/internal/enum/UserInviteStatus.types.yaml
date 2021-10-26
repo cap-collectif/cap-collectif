@@ -12,3 +12,6 @@ UserInviteStatus:
             FAILED:
                 value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::FAILED")'
                 description: 'Sending the invitation failed.'
+            ACCEPTED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::ACCEPTED")'
+                description: 'The invitation has been accepted.'

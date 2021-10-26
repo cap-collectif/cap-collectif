@@ -10625,6 +10625,11 @@ type Query {
     status: UserInviteStatus = null
   ): UserInviteConnection!
 
+  """
+  Check availability of a given email list among existing users and invitations.
+  """
+  userInvitationsAvailabilitySearch(emails: [String!]!): UserInvitationsAvailabilityConnection!
+
   """List all site colors."""
   siteColors: [SiteColor!]!
 
@@ -15499,6 +15504,38 @@ type UserError {
   field: [String!]
 }
 
+"""A user invitation availability."""
+type UserInvitationAvailability {
+  """The targeted email to be checked for availability"""
+  email: String!
+
+  """Is the email used in a user account."""
+  availableForUser: Boolean!
+
+  """Is the email used in an invitation"""
+  availableForInvitation: Boolean!
+}
+
+"""A connection to a list of items."""
+type UserInvitationsAvailabilityConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [UserInvitationsAvailabilityEdge]
+}
+
+"""An edge in a connection."""
+type UserInvitationsAvailabilityEdge {
+  """The item at the end of the edge."""
+  node: UserInvitationAvailability
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 """A user invitation"""
 type UserInvite {
   """The ID of an object."""
@@ -15550,6 +15587,9 @@ enum UserInviteStatus {
 
   """Sending the invitation failed."""
   FAILED
+
+  """The invitation has been accepted."""
+  ACCEPTED
 }
 
 """A user's notifications configuration"""
