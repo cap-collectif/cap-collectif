@@ -56,7 +56,7 @@ trait UserSSOTrait
         }
 
         if ('univ-lyon1' === $idp) {
-            $this->setUsername($attributes['urn:oid:2.5.4.42'][0] . $attributes['urn:oid:2.5.4.4'][0]);
+            $this->setUsername($attributes['urn:oid:2.5.4.42'][0] . ' ' . $attributes['urn:oid:2.5.4.4'][0]);
             $this->setEmail($attributes['urn:oid:0.9.2342.19200300.100.1.3'][0]);
             $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['urn:oid:0.9.2342.19200300.100.1.3'][0]));
         }
