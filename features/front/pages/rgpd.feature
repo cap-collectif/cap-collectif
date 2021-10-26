@@ -153,9 +153,10 @@ Scenario: An anonymous wants to change locale through footer in route with param
   And I should see a cookie named "locale"
 
 @international
-Scenario: An anonymous wants to change locale through profile page
+Scenario: A user wants to change locale through profile page
   Given features "multilangue", "profiles" are enabled
   And I go to "/"
+  And I set cookie consent
   And I am logged in as user
   Then I go to "/profile/edit-profile#account"
   And I should not see a cookie named "locale"
