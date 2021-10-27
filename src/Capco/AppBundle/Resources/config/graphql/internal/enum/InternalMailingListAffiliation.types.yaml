@@ -1,0 +1,9 @@
+InternalMailingListAffiliation:
+    type: enum
+    config:
+        name: MailingListAffiliation
+        description: 'The affiliation of a user to a mailing list'
+        values:
+            OWNER:
+                value: '@=constant("Capco\\AppBundle\\Enum\\MailingListAffiliation::OWNER")'
+                description: 'Mailing lists that are owned by the authenticated user.'

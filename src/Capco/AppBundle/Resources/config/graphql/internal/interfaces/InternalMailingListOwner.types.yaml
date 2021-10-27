@@ -11,3 +11,17 @@ InternalMailingListOwner:
             username:
                 type: 'String'
                 description: 'User username'
+            mailingLists:
+                type: 'MailingListConnection!'
+                description: 'Get all mailingLists that the user owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMailingListsResolver", [value, args])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    affiliations:
+                        type: '[InternalMailingListAffiliation!]'
+                        description: |
+                            Array of viewer's affiliation options for mailing lists returned from the connection.
+                            For example, OWNER will include only mailing lists that the current viewer owns.
+                    term:
+                        type: 'String'
+                        description: 'If provided, filter lists by name'

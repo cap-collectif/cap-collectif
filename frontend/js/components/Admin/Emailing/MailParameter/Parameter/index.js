@@ -4,6 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Field } from 'redux-form';
 import { type IntlShape, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
+import { useSelector } from 'react-redux';
 import { Container } from '../common.style';
 import { InstructionContainer, ButtonMembers } from './style';
 import component from '~/components/Form/Field';
@@ -17,6 +18,7 @@ import Tooltip from '~ds/Tooltip/Tooltip';
 import Flex from '~ui/Primitives/Layout/Flex';
 import AppBox from '~ui/Primitives/AppBox';
 import { LineHeight } from '~ui/Primitives/constants';
+import type { GlobalState } from '~/types';
 
 export const DEFAULT_MAILING_LIST = ['REGISTERED', 'CONFIRMED', 'NOT_CONFIRMED'];
 
@@ -43,7 +45,7 @@ export const getWordingMailingInternal = (mailingInternal: string, intl: IntlSha
 export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: Props) => {
   const { mailingList, mailingInternal } = emailingCampaign;
   const {
-    mailingLists,
+    viewer,
     users,
     usersConfirmed,
     usersNotConfirmed,
@@ -52,6 +54,9 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
     usersNotConfirmedRefusing,
     senderEmails,
   } = query;
+  const { mailingLists } = viewer;
+  const { user } = useSelector((state: GlobalState) => state.user);
+  const isAdmin = user ? user.isAdmin : false;
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const hasMailingList = !!mailingList || !!mailingInternal;
@@ -125,10 +130,15 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
         <option value="" disabled>
           {intl.formatMessage({ id: 'select-list' })}
         </option>
-        <option value="REGISTERED">{getWordingMailingInternal('REGISTERED', intl)}</option>
-        <option value="CONFIRMED">{getWordingMailingInternal('CONFIRMED', intl)}</option>
-        <option value="NOT_CONFIRMED">{getWordingMailingInternal('NOT_CONFIRMED', intl)}</option>
-
+        {isAdmin && (
+          <>
+            <option value="REGISTERED">{getWordingMailingInternal('REGISTERED', intl)}</option>
+            <option value="CONFIRMED">{getWordingMailingInternal('CONFIRMED', intl)}</option>
+            <option value="NOT_CONFIRMED">
+              {getWordingMailingInternal('NOT_CONFIRMED', intl)}
+            </option>
+          </>
+        )}
         {mailingLists?.totalCount > 0 &&
           mailingLists?.edges
             ?.filter(Boolean)
@@ -219,13 +229,16 @@ export default createFragmentContainer(ParameterPage, {
     }
   `,
   query: graphql`
-    fragment Parameter_query on Query {
-      mailingLists {
-        totalCount
-        edges {
-          node {
-            id
-            name
+    fragment Parameter_query on Query
+      @argumentDefinitions(affiliations: { type: "[MailingListAffiliation!]" }) {
+      viewer {
+        mailingLists(affiliations: $affiliations) {
+          totalCount
+          edges {
+            node {
+              id
+              name
+            }
           }
         }
       }

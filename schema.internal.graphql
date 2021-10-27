@@ -6297,6 +6297,12 @@ type MailingList implements Node {
   owner: MailingListOwner
 }
 
+"""The affiliation of a user to a mailing list"""
+enum MailingListAffiliation {
+  """Mailing lists that are owned by the authenticated user."""
+  OWNER
+}
+
 """A connection to a list of items."""
 type MailingListConnection {
   totalCount: Int!
@@ -6324,6 +6330,26 @@ interface MailingListOwner {
 
   """User username"""
   username: String
+
+  """Get all mailingLists that the user owns."""
+  mailingLists(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for mailing lists returned from the connection.
+    For example, OWNER will include only mailing lists that the current viewer owns.
+    """
+    affiliations: [MailingListAffiliation!]
+
+    """If provided, filter lists by name"""
+    term: String
+  ): MailingListConnection!
 }
 
 """Data corresponding to one majority question choice"""
@@ -15049,6 +15075,26 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """The ordering direction for proposalForms"""
     orderBy: ProposalFormOrder = {field: CREATED_AT, direction: DESC}
   ): ProposalFormConnection!
+
+  """Get all mailingLists that the user owns."""
+  mailingLists(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for mailing lists returned from the connection.
+    For example, OWNER will include only mailing lists that the current viewer owns.
+    """
+    affiliations: [MailingListAffiliation!]
+
+    """If provided, filter lists by name"""
+    term: String
+  ): MailingListConnection!
 
   """The user's admin edit url"""
   adminUrl: URI!

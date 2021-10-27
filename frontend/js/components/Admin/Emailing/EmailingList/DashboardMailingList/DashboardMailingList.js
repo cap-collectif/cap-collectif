@@ -53,7 +53,8 @@ const DashboardHeader = () => {
 };
 
 export const DashboardMailingList = ({ query, relay }: Props) => {
-  const { mailingLists } = query;
+  const { viewer } = query;
+  const { mailingLists } = viewer;
   const { selectedRows } = usePickableList();
   const { parameters, dispatch, status } = useDashboardMailingListContext();
   const [mailingListSelected, setMailingListSelected] = React.useState<?string>(null);
@@ -151,19 +152,22 @@ export default createPaginationContainer(
           count: { type: "Int" }
           cursor: { type: "String" }
           term: { type: "String", defaultValue: null }
+          affiliations: { type: "[MailingListAffiliation!]" }
         ) {
-        mailingLists(first: $count, after: $cursor, term: $term)
-          @connection(key: "DashboardMailingList_mailingLists", filters: ["term"]) {
-          totalCount
-          pageInfo {
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              id
-              ...MailingListItem_mailingList
-              ...ModalMembers_mailingList
+        viewer {
+          mailingLists(first: $count, after: $cursor, term: $term, affiliations: $affiliations)
+            @connection(key: "DashboardMailingList_mailingLists", filters: ["term"]) {
+            totalCount
+            pageInfo {
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                id
+                ...MailingListItem_mailingList
+                ...ModalMembers_mailingList
+              }
             }
           }
         }
@@ -179,7 +183,7 @@ export default createPaginationContainer(
      * $FlowFixMe
      * */
     getConnectionFromProps(props: Props) {
-      return props.query.mailingLists;
+      return props.query.viewer.mailingLists;
     },
     getFragmentVariables(prevVars) {
       return {
@@ -194,8 +198,14 @@ export default createPaginationContainer(
       };
     },
     query: graphql`
-      query DashboardMailingListPaginatedQuery($count: Int, $cursor: String, $term: String) {
-        ...DashboardMailingList_query @arguments(count: $count, cursor: $cursor, term: $term)
+      query DashboardMailingListPaginatedQuery(
+        $count: Int
+        $cursor: String
+        $term: String
+        $affiliations: [MailingListAffiliation!]
+      ) {
+        ...DashboardMailingList_query
+          @arguments(count: $count, cursor: $cursor, term: $term, affiliations: $affiliations)
       }
     `,
   },

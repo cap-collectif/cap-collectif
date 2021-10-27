@@ -1,10 +1,12 @@
 // @flow
 import * as React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
+import { useSelector } from 'react-redux';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import type { MailParameterQueryQueryResponse } from '~relay/MailParameterQueryQuery.graphql';
 import MailParameterPage from './MailParameterPage';
 import Loader from '~ui/FeedbacksIndicators/Loader';
+import type { GlobalState } from '~/types';
 
 export type Props = {|
   id: string,
@@ -27,22 +29,33 @@ const renderComponent = ({
   return <Loader />;
 };
 
-const MailParameterQuery = ({ id }: Props) => (
-  <QueryRenderer
-    environment={environment}
-    variables={{ emailingCampaignId: id }}
-    query={graphql`
-      query MailParameterQueryQuery($emailingCampaignId: ID!) {
-        ...MailParameterPage_query
-        emailingCampaign: node(id: $emailingCampaignId) {
-          ... on EmailingCampaign {
-            ...MailParameterPage_emailingCampaign
+const MailParameterQuery = ({ id }: Props) => {
+  const { user } = useSelector((state: GlobalState) => state.user);
+  const isAdmin = user ? user.isAdmin : false;
+
+  return (
+    <QueryRenderer
+      environment={environment}
+      variables={{
+        emailingCampaignId: id,
+        affiliations: isAdmin ? null : ['OWNER'],
+      }}
+      query={graphql`
+        query MailParameterQueryQuery(
+          $emailingCampaignId: ID!
+          $affiliations: [MailingListAffiliation!]
+        ) {
+          ...MailParameterPage_query @arguments(affiliations: $affiliations)
+          emailingCampaign: node(id: $emailingCampaignId) {
+            ... on EmailingCampaign {
+              ...MailParameterPage_emailingCampaign
+            }
           }
         }
-      }
-    `}
-    render={renderComponent}
-  />
-);
+      `}
+      render={renderComponent}
+    />
+  );
+};
 
 export default MailParameterQuery;

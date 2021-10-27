@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.viewer.mailingLists admin can get all mailingLists 1`] = `
+Object {
+  "viewer": Object {
+    "mailingLists": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "name": "J'avoue je sers à rien",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "liste Solidarité COVID-19",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "Liste du projet de Théo",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "Les gens qui pèsent dans le capco-game",
+          },
+        },
+      ],
+      "totalCount": 4,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.mailingLists admin can get its mailingLists 1`] = `
+Object {
+  "viewer": Object {
+    "mailingLists": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.mailingLists project owner should get its mailingLists 1`] = `
+Object {
+  "viewer": Object {
+    "mailingLists": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "name": "J'avoue je sers à rien",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "Liste du projet de Théo",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.mailingLists search a mailingList 1`] = `
+Object {
+  "viewer": Object {
+    "mailingLists": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "name": "liste Solidarité COVID-19",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

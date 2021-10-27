@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
+import { useSelector } from 'react-redux';
 import environment from '~/createRelayEnvironment';
 import type {
   EmailingListPageQueryResponse,
@@ -20,6 +21,7 @@ import Tag from '~ds/Tag/Tag';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import Skeleton from '~ds/Skeleton';
+import type { GlobalState } from '~/types';
 
 const listMailingList = ({
   error,
@@ -42,14 +44,18 @@ const listMailingList = ({
 
 export const createQueryVariables = (
   parameters: DashboardParameters,
+  isAdmin: boolean,
 ): EmailingListPageQueryVariables => ({
   count: MAILING_LIST_PAGINATION,
   cursor: null,
   term: parameters.filters.term,
+  affiliations: isAdmin ? null : ['OWNER'],
 });
 
 export const EmailingListPage = () => {
   const { parameters, dispatch } = useDashboardMailingListContext();
+  const { user } = useSelector((state: GlobalState) => state.user);
+  const isAdmin = user ? user.isAdmin : false;
   const intl = useIntl();
 
   React.useEffect(() => {
@@ -85,11 +91,17 @@ export const EmailingListPage = () => {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query EmailingListPageQuery($count: Int, $cursor: String, $term: String) {
-              ...DashboardMailingList_query @arguments(count: $count, cursor: $cursor, term: $term)
+            query EmailingListPageQuery(
+              $count: Int
+              $cursor: String
+              $term: String
+              $affiliations: [MailingListAffiliation!]
+            ) {
+              ...DashboardMailingList_query
+                @arguments(count: $count, cursor: $cursor, term: $term, affiliations: $affiliations)
             }
           `}
-          variables={createQueryVariables(parameters)}
+          variables={createQueryVariables(parameters, isAdmin)}
           render={listMailingList}
         />
       </Content>

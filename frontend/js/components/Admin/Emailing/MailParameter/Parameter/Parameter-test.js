@@ -4,6 +4,11 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ParameterPage } from './index';
 import { $refType, $fragmentRefs } from '~/mocks';
+import MockProviders from '~/testUtils';
+
+const userAdmin = {
+  isAdmin: true,
+};
 
 const baseProps = {
   disabled: false,
@@ -27,22 +32,24 @@ const baseProps = {
   },
   query: {
     $refType,
-    mailingLists: {
-      totalCount: 2,
-      edges: [
-        {
-          node: {
-            id: '1',
-            name: 'Je suis une mailingList',
+    viewer: {
+      mailingLists: {
+        totalCount: 2,
+        edges: [
+          {
+            node: {
+              id: '1',
+              name: 'Je suis une mailingList',
+            },
           },
-        },
-        {
-          node: {
-            id: '2',
-            name: 'Je suis une mailingList aussi',
+          {
+            node: {
+              id: '2',
+              name: 'Je suis une mailingList aussi',
+            },
           },
-        },
-      ],
+        ],
+      },
     },
     users: {
       totalCount: 30,
@@ -96,22 +103,38 @@ const props = {
 
 describe('<ParameterPage />', () => {
   it('should renders correctly', () => {
-    const wrapper = shallow(<ParameterPage {...props.basic} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: userAdmin } }}>
+        <ParameterPage {...props.basic} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should renders correctly when disabled', () => {
-    const wrapper = shallow(<ParameterPage {...props.disabled} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: userAdmin } }}>
+        <ParameterPage {...props.disabled} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should renders correctly when error', () => {
-    const wrapper = shallow(<ParameterPage {...props.withError} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: userAdmin } }}>
+        <ParameterPage {...props.withError} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should renders correctly when mailing list internal selected', () => {
-    const wrapper = shallow(<ParameterPage {...props.withMailingListInternal} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: userAdmin } }}>
+        <ParameterPage {...props.withMailingListInternal} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });
