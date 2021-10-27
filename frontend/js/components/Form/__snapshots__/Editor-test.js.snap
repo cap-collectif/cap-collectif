@@ -29,7 +29,7 @@ exports[`<Editor /> should render correctly with defaultProps 1`] = `
       </span>
       <select
         aria-label="global.fontsize"
-        class="ql-formats ql-size"
+        class="ql-size"
         id="quill-toolbar-2"
         role="menuitem"
         tabindex="0"

@@ -358,7 +358,7 @@ exports[`<PostForm/> should render correctly 1`] = `
               </span>
               <select
                 aria-label="global.fontsize"
-                className="ql-formats ql-size"
+                className="ql-size"
                 id="quill-toolbar-2"
                 onBlurCapture={[Function]}
                 onClick={[Function]}

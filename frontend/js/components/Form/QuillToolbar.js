@@ -25,7 +25,7 @@ const QuillToolbar = ({ onFocus }: Props): React.Node => {
       <MenuItem
         {...menu}
         as="select"
-        className="ql-formats ql-size"
+        className="ql-size"
         aria-label={intl.formatMessage({ id: 'global.fontsize' })}>
         <option value="small">{intl.formatMessage({ id: 'editor.size.small' })}</option>
         <option value="normal" selected>

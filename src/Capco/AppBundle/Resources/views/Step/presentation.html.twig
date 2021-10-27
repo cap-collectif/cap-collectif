@@ -25,8 +25,10 @@
 
     <h2 class="h2">{{ currentStep.title }}</h2>
 
-    <div class="block">
-        {{ currentStep.body | raw }}
+    <div class="block ">
+        <div class="ql-editor">
+            {{ currentStep.body | raw }}
+        </div>
 
         {% if project.ConsultationStepOpen and project.ConsultationStepOpen.canContribute %}
             <p><a class="btn  btn-primary" href="{{ path('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
