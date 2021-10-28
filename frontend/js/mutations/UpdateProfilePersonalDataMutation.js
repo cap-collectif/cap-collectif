@@ -17,6 +17,7 @@ const mutation = graphql`
         ...PersonalData_viewer
         ...UserAdminPersonalData_user
       }
+      errorCode
     }
   }
 `;

@@ -1,0 +1,8 @@
+CheckIdentificationCodeInput:
+    type: relay-mutation-input
+    config:
+        description: 'check if identification code is valid'
+        fields:
+            identificationCode:
+                type: 'String!'
+                description: 'Your identification code to verify your account'

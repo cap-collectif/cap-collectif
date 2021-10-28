@@ -1,0 +1,18 @@
+CheckIdentificationCodeErrorCode:
+    type: enum
+    config:
+        name: CheckIdentificationCodeErrorCode
+        description: 'Available errors for an `checkIdentificationCode` mutation.'
+        values:
+            BAD_CODE:
+                value: '@=constant("Capco\\AppBundle\\Validator\\Constraints\\CheckIdentificationCode::BAD_CODE")'
+                description: 'The validation code is not valid'
+            CODE_ALREADY_USED:
+                value: '@=constant("Capco\\AppBundle\\Validator\\Constraints\\CheckIdentificationCode::CODE_ALREADY_USED")'
+                description: 'The validation code is already used'
+            VIEWER_ALREADY_HAS_A_CODE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CheckIdentificationCodeMutation::VIEWER_ALREADY_HAS_A_CODE")'
+                description: 'The viewer already has an identification code'
+            LIMIT_REACHED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CheckIdentificationCodeMutation::LIMIT_REACHED")'
+                description: 'The viewer reached the limit to try enter an identification code'

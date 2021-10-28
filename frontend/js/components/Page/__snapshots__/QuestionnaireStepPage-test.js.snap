@@ -539,7 +539,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                                 "alias": null,
                                                 "args": null,
                                                 "kind": "ScalarField",
-                                                "name": "viewerHasCode",
+                                                "name": "viewerValue",
                                                 "storageKey": null,
                                               },
                                             ],
@@ -1635,7 +1635,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "a096445e54d47a9bafc1782adca31075",
+        "cacheID": "ede2bfc4ebdb3dded9529528f879610c",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -1934,7 +1934,7 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
-          viewerHasCode @include(if: $isAuthenticated)
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label
@@ -2552,7 +2552,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                                 "alias": null,
                                                 "args": null,
                                                 "kind": "ScalarField",
-                                                "name": "viewerHasCode",
+                                                "name": "viewerValue",
                                                 "storageKey": null,
                                               },
                                             ],
@@ -3648,7 +3648,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "a096445e54d47a9bafc1782adca31075",
+        "cacheID": "ede2bfc4ebdb3dded9529528f879610c",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -3947,7 +3947,7 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
-          viewerHasCode @include(if: $isAuthenticated)
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label
@@ -4565,7 +4565,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                                 "alias": null,
                                                 "args": null,
                                                 "kind": "ScalarField",
-                                                "name": "viewerHasCode",
+                                                "name": "viewerValue",
                                                 "storageKey": null,
                                               },
                                             ],
@@ -5661,7 +5661,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "a096445e54d47a9bafc1782adca31075",
+        "cacheID": "ede2bfc4ebdb3dded9529528f879610c",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -5960,7 +5960,7 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
-          viewerHasCode @include(if: $isAuthenticated)
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label
@@ -6578,7 +6578,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                                 "alias": null,
                                                 "args": null,
                                                 "kind": "ScalarField",
-                                                "name": "viewerHasCode",
+                                                "name": "viewerValue",
                                                 "storageKey": null,
                                               },
                                             ],
@@ -7674,7 +7674,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "a096445e54d47a9bafc1782adca31075",
+        "cacheID": "ede2bfc4ebdb3dded9529528f879610c",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -7973,7 +7973,7 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
-          viewerHasCode @include(if: $isAuthenticated)
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label

@@ -10,8 +10,8 @@ IdentificationCodeRequirement:
             - Requirement
         description: 'Requires an identification code'
         fields:
-            viewerHasCode:
+            viewerValue:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context, [])'
-                type: 'Boolean!'
+                type: 'String'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
-                description: 'Does viewer got identification code'
+                description: "The viewer's identification code"

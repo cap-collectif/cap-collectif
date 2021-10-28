@@ -1,0 +1,9 @@
+UpdateProfilePersonalDataErrorCode:
+    type: enum
+    config:
+        name: UpdateProfilePersonalDataErrorCode
+        description: 'Available errors for an `personalData` mutation.'
+        values:
+            CANT_UPDATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePersonalDataMutation::CANT_UPDATE")'
+                description: 'The update failed'

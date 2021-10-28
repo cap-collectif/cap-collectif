@@ -96,3 +96,7 @@ services:
                   name: validator.constraint_validator,
                   alias: check_debate_anonymous_participation_hash.validator,
               }
+
+    Capco\AppBundle\Validator\Constraints\CheckIdentificationCodeValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: check_identification_code.validator }

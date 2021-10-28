@@ -1385,3 +1385,10 @@ InternalMutation:
                     inputType: UpdateProposalIllustrationInput
                     payloadType: UpdateProposalIllustrationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalIllustrationMutation", [value, getUser()])'
+            checkIdentificationCode:
+                access: '@=hasRole("ROLE_USER")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CheckIdentificationCodeInput
+                    payloadType: CheckIdentificationCodePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CheckIdentificationCodeMutation", [value, getUser()])'

@@ -1,0 +1,10 @@
+CheckIdentificationCodePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            user:
+                type: 'InternalUser!'
+                description: 'The user who the code is checked'
+            errorCode:
+                type: 'CheckIdentificationCodeErrorCode'
+                description: 'The error generated, if any.'

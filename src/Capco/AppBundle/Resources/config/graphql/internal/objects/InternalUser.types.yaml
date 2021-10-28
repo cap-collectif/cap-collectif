@@ -376,3 +376,8 @@ InternalUser:
             hasPassword:
                 type: 'Boolean'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+            userIdentificationCode:
+                type: 'String'
+                resolve: '@=value.getUserIdentificationCodeValue()'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+                description: "The user's identification code value"

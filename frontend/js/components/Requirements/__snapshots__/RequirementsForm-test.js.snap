@@ -45,20 +45,8 @@ exports[`<RequirementsForm /> call api on every value changed 2`] = `
         "type": "@@redux-form/START_SUBMIT",
       },
     ],
-    Array [
-      Object {
-        "meta": Object {
-          "form": "requirements-form",
-        },
-        "type": "@@redux-form/START_SUBMIT",
-      },
-    ],
   ],
   "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
     Object {
       "type": "return",
       "value": undefined,
@@ -167,6 +155,7 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
   <Field
     addonBefore="France +33"
     component={[Function]}
+    disabled={false}
     divClassName="col-sm-12 col-xs-12"
     id="requirement1"
     key="requirement1"
@@ -177,10 +166,12 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
       />
     }
     name="requirement1"
+    placeholder={null}
     type="text"
   />
   <Field
     component={[Function]}
+    disabled={false}
     divClassName="row"
     globalClassName="col-sm-12 col-xs-12"
     id="requirement2"
@@ -192,9 +183,11 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
       />
     }
     name="requirement2"
+    placeholder={null}
   />
   <Field
     component={[Function]}
+    disabled={false}
     divClassName="col-sm-12 col-xs-12"
     id="requirement3"
     key="requirement3"
@@ -205,10 +198,12 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
       />
     }
     name="requirement3"
+    placeholder={null}
     type="text"
   />
   <Field
     component={[Function]}
+    disabled={false}
     divClassName="col-sm-12 col-xs-12"
     id="requirement4"
     key="requirement4"
@@ -219,23 +214,27 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
       />
     }
     name="requirement4"
+    placeholder={null}
     type="text"
   />
   <Field
     component={[Function]}
+    disabled={false}
     divClassName="col-sm-12 col-xs-12"
     id="requirement5"
     key="requirement5"
     label={false}
     name="requirement5"
+    placeholder={null}
     type="checkbox"
   >
     Offrir mon âme à Voldemort
   </Field>
   <Field
     component={[Function]}
+    disabled={null}
     divClassName="col-sm-12 col-xs-12"
-    id="requirement6"
+    id="IdentificationCodeRequirement"
     key="requirement6"
     label={
       <FormattedMessage
@@ -243,7 +242,9 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
         values={Object {}}
       />
     }
-    name="requirement6"
+    minlength={8}
+    name="IdentificationCodeRequirement"
+    placeholder="Ex: 25FOVC10"
     type="text"
   />
 </form>

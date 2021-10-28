@@ -21,6 +21,7 @@ Scenario: User wants to add a reply
             }
           }
         }
+        errorCode
       }
     }",
     "variables": {
@@ -62,8 +63,54 @@ Scenario: User wants to add a reply
                 {"question": {"id":"UXVlc3Rpb246MTM4NQ=="}, "value": @null@},
                 {"question": {"id":"UXVlc3Rpb246Mzk0NA=="}, "value": "{\"labels\":[],\"other\":null}"}
               ]
-          }
+          },
+         "errorCode":null
        }
      }
   }
+  """
+
+@database
+Scenario: User wants to add an answer without fulfilling the requirements
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+   """
+   {
+    "query": "mutation ($input: AddReplyInput!) {
+      addReply(input: $input) {
+        reply {
+          id
+          published
+          responses {
+            question {
+              id
+            }
+            ... on ValueResponse {
+              value
+            }
+          }
+        }
+        questionnaire {
+          id
+        }
+        errorCode
+      }
+    }",
+    "variables": {
+      "input": {
+        "questionnaireId": "UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw==",
+        "draft": false,
+        "responses": [
+            {
+              "question": "UXVlc3Rpb246Mzk0NQ==",
+              "value": "{\"labels\":[\"Nom\"]}"
+            }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {"data":{"addReply":{"reply":null,"questionnaire":{"id":"UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw=="},"errorCode":"REQUIREMENTS_NOT_MET"}}}
   """

@@ -5,3 +5,6 @@ UpdateProfilePersonalDataPayload:
             user:
                 type: 'InternalUser!'
                 description: 'The user who just have been updated'
+            errorCode:
+                type: 'UpdateProfilePersonalDataErrorCode'
+                description: 'The error generated, if any.'

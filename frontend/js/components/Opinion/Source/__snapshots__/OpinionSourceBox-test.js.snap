@@ -796,7 +796,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                                                 "alias": null,
                                                                 "args": null,
                                                                 "kind": "ScalarField",
-                                                                "name": "viewerHasCode",
+                                                                "name": "viewerValue",
                                                                 "storageKey": null,
                                                               },
                                                             ],
@@ -1400,7 +1400,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                                     "alias": null,
                                                     "args": null,
                                                     "kind": "ScalarField",
-                                                    "name": "viewerHasCode",
+                                                    "name": "viewerValue",
                                                     "storageKey": null,
                                                   },
                                                 ],
@@ -1602,7 +1602,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "6d511706d3cf129157ef0f894fd15a0d",
+            "cacheID": "a05373f7d39e245d4a1f7a7d254c8f55",
             "id": null,
             "metadata": Object {},
             "name": "OpinionSourceBoxQuery",
@@ -1879,7 +1879,7 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
-          viewerHasCode @include(if: $isAuthenticated)
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label

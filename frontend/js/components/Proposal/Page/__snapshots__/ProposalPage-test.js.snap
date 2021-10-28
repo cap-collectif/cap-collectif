@@ -7424,7 +7424,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                                   "alias": null,
                                                   "args": null,
                                                   "kind": "ScalarField",
-                                                  "name": "viewerHasCode",
+                                                  "name": "viewerValue",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -7483,7 +7483,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c6294299a4cd279da7dcba3c34e6841c",
+          "cacheID": "61321ac07250c283774966820bb5fb06",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -9591,7 +9591,7 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
-          viewerHasCode @include(if: $isAuthenticated)
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label

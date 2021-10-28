@@ -19,6 +19,10 @@ const mutation = graphql`
           ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)
         }
       }
+      questionnaire {
+        ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+      }
+      errorCode
     }
   }
 `;

@@ -8,7 +8,10 @@ import { fetchQuery_DEPRECATED } from 'relay-runtime';
 import component from '../Form/Field';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
 import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePersonalDataMutation';
-import type { Dispatch, State } from '../../types';
+import CheckIdentificationCodeMutation, {
+  type CheckIdentificationCodeMutationResponse,
+} from '../../mutations/CheckIdentificationCodeMutation';
+import type { Dispatch, State } from '~/types';
 import DateDropdownPicker from '../Form/DateDropdownPicker';
 import environment from '../../createRelayEnvironment';
 
@@ -49,7 +52,7 @@ type Requirement =
       +__typename: 'IdentificationCodeRequirement',
       +id: string,
       +viewerMeetsTheRequirement: boolean,
-      +viewerHasCode: boolean,
+      +viewerValue: ?string,
     };
 
 export type RequirementsForm_step = {|
@@ -72,6 +75,7 @@ export const refetchViewer = graphql`
   query RequirementsForm_userQuery($stepId: ID!, $isAuthenticated: Boolean!) {
     step: node(id: $stepId) {
       ... on RequirementStep {
+        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
         requirements {
           viewerMeetsTheRequirements @include(if: $isAuthenticated)
         }
@@ -79,6 +83,60 @@ export const refetchViewer = graphql`
     }
   }
 `;
+
+const callApiTimeout: { [key: string]: TimeoutID } = {};
+
+const checkIdentificationCode = (identificationCode: string) =>
+  CheckIdentificationCodeMutation.commit({ input: { identificationCode } }).then(
+    (response: CheckIdentificationCodeMutationResponse) => {
+      if (response.checkIdentificationCode?.errorCode) {
+        return response.checkIdentificationCode.errorCode;
+      }
+    },
+  );
+
+const asyncValidate = (values: FormValues, dispatch: Dispatch, props: Props): Promise<*> => {
+  return new Promise((resolve, reject) => {
+    const requirementEdge =
+      props.step.requirements.edges &&
+      props.step.requirements.edges.filter(
+        edge => edge?.node?.__typename === 'IdentificationCodeRequirement',
+      )[0];
+    if (!requirementEdge) {
+      return Promise.resolve();
+    }
+    const requirement = requirementEdge.node;
+    // cast as string, because, some code can be numbers only
+    const newValue = String(values.IdentificationCodeRequirement).toUpperCase();
+    // if viewer has code dont update the requirement
+    if (requirement.viewerValue || newValue.length < 8) {
+      return Promise.resolve();
+    }
+    if (!requirement.viewerValue && newValue.length >= 8) {
+      return checkIdentificationCode(newValue).then(response => {
+        if (response) {
+          const errors = {};
+          errors.IdentificationCodeRequirement = response;
+          reject(errors);
+        } else {
+          dispatch(startSubmit(formName));
+          return UpdateProfilePersonalDataMutation.commit({
+            input: { userIdentificationCode: newValue },
+          }).then(() => {
+            if (props.stepId) {
+              fetchQuery_DEPRECATED(environment, refetchViewer, {
+                stepId: props.stepId,
+                isAuthenticated: props.isAuthenticated,
+              });
+            }
+            dispatch(stopSubmit(formName));
+          });
+        }
+      });
+    }
+    Promise.resolve();
+  });
+};
 
 export const validate = (values: FormValues, props: Props) => {
   const errors = {};
@@ -108,8 +166,6 @@ export const validate = (values: FormValues, props: Props) => {
   return errors;
 };
 
-const callApiTimeout: { [key: string]: TimeoutID } = {};
-
 export const onChange = (
   values: FormValues,
   dispatch: Dispatch,
@@ -120,12 +176,14 @@ export const onChange = (
     if (previousValues[element] !== values[element]) {
       const requirementEdge =
         props.step.requirements.edges &&
-        props.step.requirements.edges.filter(edge => edge?.node?.id === element)[0];
+        props.step.requirements.edges?.filter(edge => edge?.node?.id === element).length > 0
+          ? props.step.requirements.edges?.find(edge => edge?.node?.id === element)
+          : props.step.requirements.edges?.find(edge => edge?.node?.__typename === element);
       if (!requirementEdge) {
         return;
       }
       const requirement = requirementEdge.node;
-
+      const newValue = values[element];
       // Check that the new phone value is valid
       if (
         requirement.__typename === 'PhoneRequirement' &&
@@ -134,12 +192,11 @@ export const onChange = (
         return;
       }
 
-      dispatch(startSubmit(formName));
-      const newValue = values[element];
-
       if (typeof newValue !== 'string') {
         if (requirement.__typename === 'CheckboxRequirement' && typeof newValue === 'boolean') {
           // The user just (un-)checked a box, so we can call our API directly
+          dispatch(startSubmit(formName));
+
           return UpdateRequirementMutation.commit({
             input: {
               requirement: requirement.id,
@@ -147,6 +204,7 @@ export const onChange = (
             },
           }).then(() => {
             dispatch(stopSubmit(formName));
+
             if (props.stepId) {
               fetchQuery_DEPRECATED(environment, refetchViewer, {
                 stepId: props.stepId,
@@ -155,6 +213,10 @@ export const onChange = (
             }
           });
         }
+        return;
+      }
+      // skip identificationCode, the update is in asyncValidate
+      if (requirement.__typename === 'IdentificationCodeRequirement') {
         return;
       }
       const input = {};
@@ -173,10 +235,10 @@ export const onChange = (
       if (requirement.__typename === 'PhoneRequirement') {
         input.phone = `+33${newValue.charAt(0) === '0' ? newValue.substring(1) : newValue}`;
       }
-      if (requirement.__typename === 'IdentificationCodeRequirement') {
-        input.userIdentificationCode = newValue;
-      }
 
+      if (Object.keys(input).length < 1) {
+        return;
+      }
       // To handle realtime updates
       // we call the api after 1 second inactivity
       // on each updated field, using timeout
@@ -184,6 +246,8 @@ export const onChange = (
       if (timeout) {
         clearTimeout(timeout);
       }
+      dispatch(startSubmit(formName));
+
       callApiTimeout[requirement.id] = setTimeout(() => {
         UpdateProfilePersonalDataMutation.commit({ input }).then(() => {
           dispatch(stopSubmit(formName));
@@ -276,11 +340,30 @@ export class RequirementsForm extends React.Component<Props> {
                   addonBefore={
                     requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined
                   }
-                  id={requirement.id}
+                  minlength={
+                    requirement.__typename === 'IdentificationCodeRequirement' ? 8 : undefined
+                  }
+                  id={
+                    requirement.__typename === 'IdentificationCodeRequirement'
+                      ? 'IdentificationCodeRequirement'
+                      : requirement.id
+                  }
                   key={requirement.id}
+                  disabled={
+                    requirement.__typename === 'IdentificationCodeRequirement' &&
+                    requirement.viewerValue
+                  }
+                  placeholder={
+                    requirement.__typename === 'IdentificationCodeRequirement' &&
+                    !requirement.viewerValue
+                      ? 'Ex: 25FOVC10'
+                      : null
+                  }
                   name={
                     requirement.__typename === 'PostalAddressRequirement'
                       ? 'PostalAddressText'
+                      : requirement.__typename === 'IdentificationCodeRequirement'
+                      ? 'IdentificationCodeRequirement'
                       : requirement.id
                   }
                   label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
@@ -297,6 +380,8 @@ export class RequirementsForm extends React.Component<Props> {
 const form = reduxForm({
   onChange,
   validate,
+  asyncValidate,
+  asyncChangeFields: ['IdentificationCodeRequirement'],
   form: formName,
 })(RequirementsForm);
 
@@ -313,10 +398,6 @@ const getRequirementInitialValue = (requirement: Requirement): ?string | boolean
   if (requirement.__typename === 'PostalAddressRequirement') {
     return requirement.viewerAddress ? requirement.viewerAddress.json : null;
   }
-  if (requirement.__typename === 'IdentificationCodeRequirement') {
-    return requirement.viewerHasCode;
-  }
-
   return requirement.viewerValue;
 };
 
@@ -332,6 +413,15 @@ const mapStateToProps = (state: State, { step }: Props) => ({
               ...initialValues,
               PostalAddressText: requirement.viewerAddress
                 ? requirement.viewerAddress.formatted
+                : null,
+              [requirement.id]: getRequirementInitialValue(requirement),
+            };
+          }
+          if (requirement.__typename === 'IdentificationCodeRequirement') {
+            return {
+              ...initialValues,
+              IdentificationCodeRequirement: requirement.viewerValue
+                ? requirement.viewerValue
                 : null,
               [requirement.id]: getRequirementInitialValue(requirement),
             };
@@ -375,7 +465,7 @@ export default createFragmentContainer(container, {
               viewerValue @include(if: $isAuthenticated)
             }
             ... on IdentificationCodeRequirement {
-              viewerHasCode @include(if: $isAuthenticated)
+              viewerValue @include(if: $isAuthenticated)
             }
             ... on CheckboxRequirement {
               label

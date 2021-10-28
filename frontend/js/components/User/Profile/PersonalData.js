@@ -12,7 +12,7 @@ import {
   SubmissionError,
   unregisterField,
 } from 'redux-form';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
 import { type PersonalData_viewer } from '~relay/PersonalData_viewer.graphql';
 import AlertForm from '../../Alert/AlertForm';
 import type { Dispatch, State } from '~/types';
@@ -24,6 +24,8 @@ import UserArchiveRequestButton from './UserArchiveRequestButton';
 import Popover from '../../Utils/Popover';
 import Tooltip from '../../Utils/Tooltip';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
+import Text from '~ui/Primitives/Text';
+import { styleGuideColors } from '~/utils/colors';
 
 type RelayProps = {| viewer: PersonalData_viewer |};
 type Props = {|
@@ -122,6 +124,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
   delete values.isFranceConnectAccount;
   delete values.postalAddressText;
+  delete values.userIdentificationCode;
   const input = {
     ...values,
   };
@@ -193,6 +196,13 @@ const PersonnalDataContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.d
   }
   #project-participation-collected-data {
     display: flex;
+  }
+  .code-privacy {
+    a,
+    a:hover {
+      text-decoration: underline;
+      color: ${styleGuideColors.gray900};
+    }
   }
 `;
 
@@ -782,6 +792,33 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                         </div>
                       )}
+                      {viewer.userIdentificationCode && (
+                        <div className="horizontal_field_with_border_top">
+                          <label
+                            className="col-sm-3 control-label"
+                            htmlFor="personal-data-form-code">
+                            <FormattedMessage id="identification_code" />
+                          </label>
+                          <div>
+                            <Field
+                              id="personal-data-form-code"
+                              divClassName="col-sm-4 col-xs-12"
+                              name="userIdentificationCode"
+                              component={component}
+                              type="text"
+                              disabled
+                            />
+                            <Text
+                              as="div"
+                              className="col-sm-4 col-xs-12 code-privacy"
+                              marginLeft="190px"
+                              width="max-content"
+                              color={styleGuideColors.gray900}>
+                              <FormattedHTMLMessage id="verificationCodeHelp" />
+                            </Text>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                   <>
@@ -859,6 +896,9 @@ const mapStateToProps = (state: State, props: Props) => ({
     gender: props.viewer.gender ? props.viewer.gender : null,
     dateOfBirth: props.viewer.dateOfBirth ? props.viewer.dateOfBirth : null,
     birthPlace: props.viewer.birthPlace ? props.viewer.birthPlace : null,
+    userIdentificationCode: props.viewer.userIdentificationCode
+      ? props.viewer.userIdentificationCode
+      : null,
     isFranceConnectAccount: props.viewer.isFranceConnectAccount || false,
   },
   currentValues: selector(
@@ -898,6 +938,7 @@ export default createFragmentContainer(container, {
       isArchiveReady
       birthPlace
       isFranceConnectAccount
+      userIdentificationCode
       ...UserArchiveRequestButton_viewer
     }
   `,

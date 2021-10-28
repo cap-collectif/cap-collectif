@@ -71,7 +71,7 @@ describe('<RequirementsForm />', () => {
             __typename: 'IdentificationCodeRequirement',
             id: 'requirement6',
             viewerMeetsTheRequirement: false,
-            viewerHasCode: false,
+            viewerValue: null,
           },
         },
       ],
@@ -118,7 +118,7 @@ describe('<RequirementsForm />', () => {
       requirement3: 'Aurélien',
       requirement4: 'David',
       requirement5: true,
-      requirement6: true,
+      requirement6: 'GG2AZR54',
     };
     const props = {
       ...formMock,
@@ -146,7 +146,7 @@ describe('<RequirementsForm />', () => {
       requirement3: 'Aurélien',
       requirement4: 'David',
       requirement5: true,
-      requirement6: true,
+      requirement6: 'GG2AZR54',
     };
     expect(validate(values, props)).toMatchSnapshot();
 
@@ -161,7 +161,7 @@ describe('<RequirementsForm />', () => {
       requirement3: null,
       requirement4: null,
       requirement5: false,
-      requirement6: false,
+      requirement6: null,
     };
     expect(validate(emptyValues, props)).toMatchSnapshot();
   });

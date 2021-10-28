@@ -6,10 +6,13 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTagCloudResolver;
 use Capco\AppBundle\Search\ResponseSearch;
+use DG\BypassFinals;
 use Elastica\ResultSet;
 use Overblog\GraphQLBundle\Definition\Argument;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Cache\CacheItem;
+
+BypassFinals::enable();
 
 class QuestionTagCloudResolverSpec extends ObjectBehavior
 {

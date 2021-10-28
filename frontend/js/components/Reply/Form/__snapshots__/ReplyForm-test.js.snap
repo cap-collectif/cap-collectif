@@ -2159,6 +2159,7 @@ exports[`<ReplyForm /> should render correctly with requirements not full filled
               "title": "Step 1",
             }
           }
+          stepId="step1"
         />
       </PanelBody>
     </Uncontrolled(Panel)>

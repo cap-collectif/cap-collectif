@@ -561,3 +561,90 @@ Scenario: A hacker want to inject HTML into username
     }
   }
   """
+
+@database
+Scenario: User should be able to add identification code, and code is ok
+  Given I am logged in to graphql as pierre
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation UpdateProfilePersonalDataMutation($input: UpdateProfilePersonalDataInput!) {
+      updateProfilePersonalData(input: $input) {
+        user {
+          id
+        }
+        errorCode
+      }
+    }",
+    "variables": {
+      "input": {
+        "userIdentificationCode": "GG2AZR54"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+    {
+       "data":{
+          "updateProfilePersonalData":{
+             "user":{
+                "id":"VXNlcjp1c2VyS2lyb3VsZQ=="
+             },
+             "errorCode":null
+          }
+       }
+    }
+  """
+
+@database
+Scenario: User should be able to add identification code, but code is already used
+  Given I am logged in to graphql as pierre
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation UpdateProfilePersonalDataMutation($input: UpdateProfilePersonalDataInput!) {
+      updateProfilePersonalData(input: $input) {
+        user {
+          id
+        }
+        errorCode
+      }
+    }",
+    "variables": {
+      "input": {
+        "userIdentificationCode": "DK2AZ554"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {"errors":[{"message":"An unknown error occurred.","extensions":{"category":"user"},"locations":[{"line":1,"column":90}],"path":["updateProfilePersonalData"]}],"data":{"updateProfilePersonalData":null}}
+  """
+
+@database
+Scenario: User should be able to add identification code, but the code is wrong
+  Given I am logged in to graphql as pierre
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation UpdateProfilePersonalDataMutation($input: UpdateProfilePersonalDataInput!) {
+      updateProfilePersonalData(input: $input) {
+        user {
+          id
+        }
+        errorCode
+      }
+    }",
+    "variables": {
+      "input": {
+        "userIdentificationCode": "WrongC0de"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {"data":{"updateProfilePersonalData":{"user":{"id":"VXNlcjp1c2VyS2lyb3VsZQ=="},"errorCode":"CANT_UPDATE"}}}
+  """

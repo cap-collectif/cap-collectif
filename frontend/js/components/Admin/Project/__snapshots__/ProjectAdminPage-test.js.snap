@@ -867,6 +867,81 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 "name": "footer",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "type": "QuestionnaireStep",
                           },
@@ -1476,7 +1551,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "d51045502f7df24d501703ff9b8b95bc",
+        "cacheID": "498711efad70e9348efb23cf12f4d650",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1693,6 +1768,19 @@ fragment ProjectAdminForm_project on Project {
         id
       }
       footer
+      requirements {
+        reason
+        edges {
+          node {
+            __typename
+            id
+            type: __typename
+            ... on CheckboxRequirement {
+              label
+            }
+          }
+        }
+      }
     }
     ... on DebateStep {
       isAnonymousParticipationAllowed
@@ -2713,6 +2801,81 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 "name": "footer",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "type": "QuestionnaireStep",
                           },
@@ -3322,7 +3485,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "d51045502f7df24d501703ff9b8b95bc",
+        "cacheID": "498711efad70e9348efb23cf12f4d650",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -3539,6 +3702,19 @@ fragment ProjectAdminForm_project on Project {
         id
       }
       footer
+      requirements {
+        reason
+        edges {
+          node {
+            __typename
+            id
+            type: __typename
+            ... on CheckboxRequirement {
+              label
+            }
+          }
+        }
+      }
     }
     ... on DebateStep {
       isAnonymousParticipationAllowed

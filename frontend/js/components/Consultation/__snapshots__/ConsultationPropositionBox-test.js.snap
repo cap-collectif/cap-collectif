@@ -2322,7 +2322,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                       "alias": null,
                                                       "args": null,
                                                       "kind": "ScalarField",
-                                                      "name": "viewerHasCode",
+                                                      "name": "viewerValue",
                                                       "storageKey": null,
                                                     },
                                                   ],
@@ -2371,7 +2371,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "cb8eeec979f93c5e93d0d86f9bbf7506",
+          "cacheID": "1fa2b0a1bbddcbb97b815db99d6ebecc",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2734,7 +2734,7 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
-          viewerHasCode @include(if: $isAuthenticated)
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label
@@ -5172,7 +5172,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                       "alias": null,
                                                       "args": null,
                                                       "kind": "ScalarField",
-                                                      "name": "viewerHasCode",
+                                                      "name": "viewerValue",
                                                       "storageKey": null,
                                                     },
                                                   ],
@@ -5221,7 +5221,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "cb8eeec979f93c5e93d0d86f9bbf7506",
+          "cacheID": "1fa2b0a1bbddcbb97b815db99d6ebecc",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5584,7 +5584,7 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
-          viewerHasCode @include(if: $isAuthenticated)
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
           label

@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { isInvalid, submit, isSubmitting } from 'redux-form';
+import { isInvalid, submit, isSubmitting, getFormSyncErrors } from 'redux-form';
 import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -93,7 +93,9 @@ export const OpinionCreateModal = ({
 const mapStateToProps = (state: State, props: RelayProps) => ({
   show: state.opinion.showOpinionCreateModal === props.section.id,
   submitting: isSubmitting(formName)(state),
-  invalidRequirements: isInvalid(requirementsFormName)(state),
+  invalidRequirements:
+    isInvalid(requirementsFormName)(state) ||
+    Object.keys(getFormSyncErrors(requirementsFormName)(state)).length > 0,
 });
 
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionCreateModal);

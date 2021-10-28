@@ -95,3 +95,8 @@ Capco\AppBundle\Entity\Requirement:
         type: POSTAL_ADDRESS
         position: 3
         step: '@questionnairestep6'
+    requirement21:
+        id: requirement21
+        type: IDENTIFICATION_CODE
+        position: 4
+        step: '@questionnairestep6'

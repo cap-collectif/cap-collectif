@@ -136,7 +136,7 @@ class ProjectController extends Controller
      */
     public function showTrashedAction(Project $project)
     {
-        if (!$project->canDisplay($this->getUser())) {
+        if (!$project->viewerCanSee($this->getUser())) {
             throw $this->createNotFoundException(
                 $this->translator->trans('project.error.not_found', [], 'CapcoAppBundle')
             );

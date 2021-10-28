@@ -51,7 +51,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
-        $this->__invoke($arguments, $viewer)->shouldBe(['user' => $viewer]);
+        $this->__invoke($arguments, $viewer)->shouldBe(['user' => $viewer, 'errorCode' => null]);
     }
 
     public function it_update_myself_and_viewer_is_super_admin(
@@ -73,7 +73,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
-        $this->__invoke($arguments, $viewer)->shouldBe(['user' => $viewer]);
+        $this->__invoke($arguments, $viewer)->shouldBe(['user' => $viewer, 'errorCode' => null]);
     }
 
     public function it_update_an_other_user_and_viewer_is_super_admin(
@@ -107,7 +107,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
 
-        $this->__invoke($arguments, $viewer)->shouldBe(['user' => $user]);
+        $this->__invoke($arguments, $viewer)->shouldBe(['user' => $user, 'errorCode' => null]);
     }
 
     public function it_update_an_other_user_and_viewer_is_admin(
@@ -156,6 +156,6 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
 
-        $this->__invoke($arguments, $user)->shouldBe(['user' => $user]);
+        $this->__invoke($arguments, $user)->shouldBe(['user' => $user, 'errorCode' => null]);
     }
 }

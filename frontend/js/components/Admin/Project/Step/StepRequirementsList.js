@@ -61,8 +61,6 @@ export const formatRequirements = (requirements: Array<Requirement>) =>
       label: r.type === 'CHECKBOX' ? r.label : null,
     }));
 
-const isIdentificationCodeReady = false;
-
 export const doesStepSupportRequirements = (step: {
   __typename: string,
   requirements?: ?Array<Requirement>,
@@ -87,9 +85,9 @@ export function createRequirements(step: {
 
   const initialRequirements = step.requirements || [];
   if (!initialRequirements.some((r: Requirement) => r.type === 'FIRSTNAME'))
-    requirements.push(requirementFactory('FIRSTNAME', false, 'global.name', null));
+    requirements.push(requirementFactory('FIRSTNAME', false, 'form.label_firstname', null));
   if (!initialRequirements.some((r: Requirement) => r.type === 'LASTNAME'))
-    requirements.push(requirementFactory('LASTNAME', false, 'form.label_firstname', null));
+    requirements.push(requirementFactory('LASTNAME', false, 'global.name', null));
   if (!initialRequirements.some((r: Requirement) => r.type === 'PHONE'))
     requirements.push(requirementFactory('PHONE', false, 'filter.label_phone', null));
   if (!initialRequirements.some((r: Requirement) => r.type === 'DATE_OF_BIRTH'))
@@ -98,22 +96,19 @@ export function createRequirements(step: {
     requirements.push(
       requirementFactory('POSTAL_ADDRESS', false, 'admin.fields.event.address', null),
     );
-  if (
-    isIdentificationCodeReady &&
-    !initialRequirements.some((r: Requirement) => r.type === 'IDENTIFICATION_CODE')
-  )
+  if (!initialRequirements.some((r: Requirement) => r.type === 'IDENTIFICATION_CODE'))
     requirements.push(
       requirementFactory('IDENTIFICATION_CODE', false, 'identification_code', null),
     );
   initialRequirements.forEach((requirement: Requirement) => {
     switch (requirement.type) {
       case 'FIRSTNAME':
-        requirements.push(requirementFactory('FIRSTNAME', true, 'global.name', requirement.id));
+        requirements.push(
+          requirementFactory('FIRSTNAME', true, 'form.label_firstname', requirement.id),
+        );
         break;
       case 'LASTNAME':
-        requirements.push(
-          requirementFactory('LASTNAME', true, 'form.label_firstname', requirement.id),
-        );
+        requirements.push(requirementFactory('LASTNAME', true, 'global.name', requirement.id));
         break;
       case 'PHONE':
         requirements.push(requirementFactory('PHONE', true, 'filter.label_phone', requirement.id));

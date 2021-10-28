@@ -13,4 +13,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserIdentificationCodeRepository extends EntityRepository
 {
+    public function findCodeUsedOrNot(string $code)
+    {
+        $qb = $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery(
+                'select uic.identification_code, fu.id as isUsed from user_identification_code uic left join fos_user fu ON fu.user_identification_code = uic.identification_code where uic.identification_code = ?',
+                [$code]
+            );
+
+        return $qb->fetchAssociative();
+    }
 }

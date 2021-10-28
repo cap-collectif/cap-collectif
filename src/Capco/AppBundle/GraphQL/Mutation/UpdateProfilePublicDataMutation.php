@@ -27,12 +27,12 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
         parent::__construct($em, $formFactory, $logger, $userRepository);
     }
 
-    public function __invoke(Argument $input, User $user): array
+    public function __invoke(Argument $input, User $viewer): array
     {
-        $this->user = $user;
+        $this->user = $viewer;
         $this->arguments = $input->getArrayCopy();
         if (isset($this->arguments[self::USER_ID])) {
-            parent::__invoke($input, $user);
+            parent::__invoke($input, $viewer);
         }
 
         if (!$this->toggleManager->isActive('user_type')) {

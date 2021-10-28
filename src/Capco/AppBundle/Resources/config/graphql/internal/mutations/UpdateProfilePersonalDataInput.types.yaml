@@ -47,4 +47,4 @@ UpdateProfilePersonalDataInput:
                 description: 'Your birth place'
             userIdentificationCode:
                 type: 'String'
-                description: 'Your identification code'
+                description: 'Your identification code to verify your account'

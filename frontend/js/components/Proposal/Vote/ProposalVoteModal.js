@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
 import { ConnectionHandler, fetchQuery_DEPRECATED } from 'relay-runtime';
 import { Modal, Panel, Label } from 'react-bootstrap';
-import { submit, isPristine, isInvalid } from 'redux-form';
+import { submit, isPristine, isInvalid, getFormSyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import { closeVoteModal, vote } from '../../../redux/modules/proposal';
+import { closeVoteModal, vote } from '~/redux/modules/proposal';
 import ProposalsUserVotesTable, { getFormName } from '../../Project/Votes/ProposalsUserVotesTable';
 import environment from '~/createRelayEnvironment';
 import type { GlobalState, Dispatch } from '~/types';
@@ -317,7 +317,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
   ),
   isSubmitting: !!state.proposal.isVoting,
   pristine: isPristine(getFormName(props.step))(state),
-  invalid: isInvalid(formName)(state),
+  invalid: isInvalid(formName)(state) || Object.keys(getFormSyncErrors(formName)(state)).length > 0,
   viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
   isAuthenticated: !!state.user.user,
 });

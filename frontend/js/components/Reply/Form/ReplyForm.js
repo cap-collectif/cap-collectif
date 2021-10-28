@@ -7,8 +7,10 @@ import {
   Field,
   FieldArray,
   formValueSelector,
+  getFormSyncErrors,
   isInvalid,
   reduxForm,
+  setSubmitFailed,
   SubmissionError,
 } from 'redux-form';
 import { withRouter } from 'react-router-dom';
@@ -38,6 +40,7 @@ import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import RequirementsForm, {
   formName as requirementsFormName,
 } from '~/components/Requirements/RequirementsForm';
+import { toast } from '~ds/Toast';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -58,6 +61,8 @@ type FormValues = {|
   draft: boolean,
 |};
 
+export const formName = 'ReplyForm';
+
 const onUnload = e => {
   // $FlowFixMe voir https://github.com/facebook/flow/issues/3690
   e.returnValue = true;
@@ -65,7 +70,7 @@ const onUnload = e => {
 
 const memoizeAvailableQuestions: any = memoize(() => {});
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: GlobalState) => {
   const { questionnaire, reply, history, setIsShow } = props;
   const data = {};
 
@@ -121,7 +126,16 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     },
     isAuthenticated: true,
   })
-    .then(() => {
+    .then(response => {
+      if (response.addReply?.errorCode && response.addReply?.errorCode === 'REQUIREMENTS_NOT_MET') {
+        toast({
+          variant: 'danger',
+          content: props.intl.formatMessage({ id: 'add_reply_requirements_not_met' }),
+        });
+
+        setSubmitFailed(formName)(state);
+        return;
+      }
       AppDispatcher.dispatch({
         actionType: 'UPDATE_ALERT',
         alert: {
@@ -164,8 +178,6 @@ const validate = (values: FormValues, props: Props) => {
 
   return errors;
 };
-
-export const formName = 'ReplyForm';
 
 export const getFormNameUpdate = (id: string) => `Update${formName}-${id}`;
 
@@ -257,12 +269,13 @@ export class ReplyForm extends React.Component<Props> {
                     </Label>
                   )}
                 </Panel.Heading>
-                {!questionnaire.step?.requirements?.viewerMeetsTheRequirements && (
-                  <Panel.Body>
-                    <WYSIWYGRender value={questionnaire.step?.requirements?.reason} />
-                    <RequirementsForm step={questionnaire.step} />
-                  </Panel.Body>
-                )}
+                {questionnaire.step &&
+                  !questionnaire.step?.requirements?.viewerMeetsTheRequirements && (
+                    <Panel.Body>
+                      <WYSIWYGRender value={questionnaire.step?.requirements?.reason} />
+                      <RequirementsForm step={questionnaire.step} stepId={questionnaire.step.id} />
+                    </Panel.Body>
+                  )}
               </Panel>
             )}
           <FieldArray
@@ -303,7 +316,7 @@ export class ReplyForm extends React.Component<Props> {
                   <SubmitButton
                     type="submit"
                     id={`${form}-submit-create-draft-reply`}
-                    disabled={pristine || submitting || disabled}
+                    disabled={pristine || submitting || disabled || invalidRequirements}
                     bsStyle="primary"
                     label={submitting ? 'global.loading' : 'global.save_as_draft'}
                     onSubmit={() => {
@@ -375,7 +388,9 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     },
     user: state.user.user,
     form: reply ? getFormNameUpdate(reply.id) : `Create${formName}`,
-    invalidRequirements: isInvalid(requirementsFormName)(state),
+    invalidRequirements:
+      isInvalid(requirementsFormName)(state) ||
+      Object.keys(getFormSyncErrors(requirementsFormName)(state)).length > 0,
   };
 };
 

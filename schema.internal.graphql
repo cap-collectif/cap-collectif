@@ -1879,6 +1879,36 @@ type ChangeVersionPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `checkIdentificationCode` mutation."""
+enum CheckIdentificationCodeErrorCode {
+  """The validation code is not valid"""
+  BAD_CODE
+
+  """The validation code is already used"""
+  CODE_ALREADY_USED
+
+  """The viewer already has an identification code"""
+  VIEWER_ALREADY_HAS_A_CODE
+
+  """The viewer reached the limit to try enter an identification code"""
+  LIMIT_REACHED
+}
+
+input CheckIdentificationCodeInput {
+  """Your identification code to verify your account"""
+  identificationCode: String!
+  clientMutationId: String
+}
+
+type CheckIdentificationCodePayload {
+  """The user who the code is checked"""
+  user: User!
+
+  """The error generated, if any."""
+  errorCode: CheckIdentificationCodeErrorCode
+  clientMutationId: String
+}
+
 """Requires the viewer to check a box"""
 type CheckboxRequirement implements Node & Requirement {
   """The ID of an object"""
@@ -6071,8 +6101,8 @@ type IdentificationCodeRequirement implements Node & Requirement {
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
 
-  """Does viewer got identification code"""
-  viewerHasCode: Boolean!
+  """The viewer's identification code"""
+  viewerValue: String
 }
 
 input InviteUsersInput {
@@ -7043,6 +7073,7 @@ type Mutation {
 
   """Update illustration on a proposal"""
   updateProposalIllustration(input: UpdateProposalIllustrationInput!): UpdateProposalIllustrationPayload
+  checkIdentificationCode(input: CheckIdentificationCodeInput!): CheckIdentificationCodePayload
 }
 
 """A connection to a list of items."""
@@ -14251,6 +14282,12 @@ type UpdateProfilePayload {
   clientMutationId: String
 }
 
+"""Available errors for an `personalData` mutation."""
+enum UpdateProfilePersonalDataErrorCode {
+  """The update failed"""
+  CANT_UPDATE
+}
+
 input UpdateProfilePersonalDataInput {
   """
   (ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.
@@ -14296,7 +14333,7 @@ input UpdateProfilePersonalDataInput {
   """Your birth place"""
   birthPlace: String
 
-  """Your identification code"""
+  """Your identification code to verify your account"""
   userIdentificationCode: String
   clientMutationId: String
 }
@@ -14304,6 +14341,9 @@ input UpdateProfilePersonalDataInput {
 type UpdateProfilePersonalDataPayload {
   """The user who just have been updated"""
   user: User!
+
+  """The error generated, if any."""
+  errorCode: UpdateProfilePersonalDataErrorCode
   clientMutationId: String
 }
 
@@ -15475,6 +15515,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   birthPlace: String
   isFranceConnectAccount: Boolean
   hasPassword: Boolean
+
+  """The user's identification code value"""
+  userIdentificationCode: String
 }
 
 """A connection to a list of items."""

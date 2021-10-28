@@ -6,10 +6,8 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
-use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
@@ -36,8 +34,6 @@ class AddReplyMutation implements MutationInterface
     private ResponsesFormatter $responsesFormatter;
     private LoggerInterface $logger;
     private ReplyRepository $replyRepo;
-    private UserNotifier $userNotifier;
-    private StepUrlResolver $stepUrlResolver;
     private Publisher $publisher;
     private RequestGuesser $requestGuesser;
     private StepRequirementsResolver $stepRequirementsResolver;
@@ -49,8 +45,6 @@ class AddReplyMutation implements MutationInterface
         QuestionnaireRepository $questionnaireRepo,
         ResponsesFormatter $responsesFormatter,
         LoggerInterface $logger,
-        UserNotifier $userNotifier,
-        StepUrlResolver $stepUrlResolver,
         Publisher $publisher,
         RequestGuesser $requestGuesser,
         StepRequirementsResolver $stepRequirementsResolver
@@ -61,8 +55,6 @@ class AddReplyMutation implements MutationInterface
         $this->questionnaireRepo = $questionnaireRepo;
         $this->responsesFormatter = $responsesFormatter;
         $this->logger = $logger;
-        $this->userNotifier = $userNotifier;
-        $this->stepUrlResolver = $stepUrlResolver;
         $this->publisher = $publisher;
         $this->requestGuesser = $requestGuesser;
         $this->stepRequirementsResolver = $stepRequirementsResolver;
@@ -95,7 +87,14 @@ class AddReplyMutation implements MutationInterface
             $step &&
             !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($user, $step)
         ) {
-            $this->logger->error(sprintf('%s : You dont meets all the requirements. user => %s; on step => %s', __METHOD__, $user->getId(), $step->getId()));
+            $this->logger->error(
+                sprintf(
+                    '%s : You dont meets all the requirements. user => %s; on step => %s',
+                    __METHOD__,
+                    $user->getId(),
+                    $step->getId()
+                )
+            );
 
             return [
                 'questionnaire' => $questionnaire,
@@ -136,7 +135,7 @@ class AddReplyMutation implements MutationInterface
             );
         }
 
-        return ['questionnaire' => $questionnaire, 'reply' => $reply];
+        return ['questionnaire' => $questionnaire, 'reply' => $reply, 'errorCode' => null];
     }
 
     private function handleErrors(FormInterface $form): void

@@ -4,19 +4,34 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PersonalDataFormType;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Error\UserError;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 {
-    public function __invoke(Argument $input, User $user): array
+    public const CANT_UPDATE = 'CANT_UPDATE';
+
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactoryInterface $formFactory,
+        LoggerInterface $logger,
+        UserRepository $userRepository
+    ) {
+        parent::__construct($em, $formFactory, $logger, $userRepository);
+    }
+
+    public function __invoke(Argument $input, User $viewer): array
     {
-        $this->user = $user;
+        $this->user = $viewer;
         $this->arguments = $input->getArrayCopy();
 
         // it an update from BO
         if (isset($this->arguments[self::USER_ID])) {
-            parent::__invoke($input, $user);
+            parent::__invoke($input, $viewer);
         }
 
         $form = $this->formFactory->create(PersonalDataFormType::class, $this->user);
@@ -28,13 +43,18 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
         }
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
-
-            throw new UserError('Can\'t update !');
+            return [
+                'user' => $this->user,
+                'errorCode' => self::CANT_UPDATE,
+            ];
         }
 
-        $this->em->flush();
+        try {
+            $this->em->flush();
+        } catch (\Exception $exception) {
+            throw new UserError();
+        }
 
-        return [self::USER => $this->user];
+        return [self::USER => $this->user, 'errorCode' => null];
     }
 }

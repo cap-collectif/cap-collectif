@@ -501,6 +501,8 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
                   ? 'DATE_OF_BIRTH'
                   : edge?.node?.type === 'PostalAddressRequirement'
                   ? 'POSTAL_ADDRESS'
+                  : edge?.node?.type === 'IdentificationCodeRequirement'
+                  ? 'IDENTIFICATION_CODE'
                   : edge?.node?.type.slice(0, -11).toUpperCase(),
             })),
             requirementsReason: step.requirements?.reason || null,
@@ -733,6 +735,18 @@ export default createFragmentContainer(injectIntl(container), {
             label: title
           }
           footer
+          requirements {
+            reason
+            edges {
+              node {
+                id
+                type: __typename
+                ... on CheckboxRequirement {
+                  label
+                }
+              }
+            }
+          }
         }
         ... on DebateStep {
           isAnonymousParticipationAllowed

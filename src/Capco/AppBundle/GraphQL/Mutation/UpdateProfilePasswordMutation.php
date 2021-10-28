@@ -31,7 +31,7 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
         parent::__construct($em, $formFactory, $logger, $userRepository);
     }
 
-    public function __invoke(Argument $input, User $user): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $arguments = $input->getArrayCopy();
         $form = $this->formFactory->create(ChangePasswordFormType::class, null, [
@@ -47,20 +47,20 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
-            return [self::USER => $user, 'error' => 'fos_user.password.not_current'];
+            return [self::USER => $viewer, 'error' => 'fos_user.password.not_current'];
         }
         $this->logger->debug(__METHOD__ . ' : ' . (string) $form->isValid());
-        $user->setPlainPassword($arguments['new_password']);
-        $this->userManager->updateUser($user);
+        $viewer->setPlainPassword($arguments['new_password']);
+        $this->userManager->updateUser($viewer);
         $this->publisher->publish(
             'user.password',
             new Message(
                 json_encode([
-                    'userId' => $user->getId(),
+                    'userId' => $viewer->getId(),
                 ])
             )
         );
 
-        return [self::USER => $user];
+        return [self::USER => $viewer];
     }
 }

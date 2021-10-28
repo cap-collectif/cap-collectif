@@ -23,6 +23,7 @@ describe('<PersonalData />', () => {
     gender: 'MALE',
     birthPlace: 'Loguetown',
     isFranceConnectAccount: false,
+    userIdentificationCode: 'ADD45B4H',
   };
 
   const props1 = {
@@ -106,6 +107,7 @@ describe('<PersonalData />', () => {
     gender: 'MALE',
     birthPlace: 'Paris',
     isFranceConnectAccount: false,
+    userIdentificationCode: 'ADD45B4H',
   };
   const props3 = {
     ...formMock,
@@ -155,6 +157,7 @@ describe('<PersonalData />', () => {
     city: 'Paris',
     birthPlace: 'Paris',
     isFranceConnectAccount: false,
+    userIdentificationCode: null,
   };
 
   afterEach(() => {
