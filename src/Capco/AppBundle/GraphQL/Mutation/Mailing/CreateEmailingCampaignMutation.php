@@ -39,11 +39,11 @@ class CreateEmailingCampaignMutation implements MutationInterface
         $this->senderEmailRepository = $senderEmailRepository;
     }
 
-    public function __invoke(Argument $input, User $viewer)
+    public function __invoke(Argument $input, User $viewer): array
     {
         $emailingCampaign = $this->createDefaultCampaign($viewer);
         if ($mailingListId = $input->offsetGet('mailingList')) {
-            if ($error = $this->setMailingListOrError($emailingCampaign, $mailingListId)) {
+            if ($error = $this->setMailingListOrError($emailingCampaign, $mailingListId, $viewer)) {
                 return compact('error');
             }
         }
@@ -60,6 +60,7 @@ class CreateEmailingCampaignMutation implements MutationInterface
         $emailingCampaign->setName(
             $this->translator->trans('global.campaign.new', [], 'CapcoAppBundle')
         );
+        $emailingCampaign->setOwner($viewer);
         $emailingCampaign->setSenderEmail($this->getDefaultEmail());
         $emailingCampaign->setSenderName(
             $this->siteParams->getValue('admin.mail.notifications.send_name') ??
@@ -72,11 +73,12 @@ class CreateEmailingCampaignMutation implements MutationInterface
 
     private function setMailingListOrError(
         EmailingCampaign $emailingCampaign,
-        string $mailingListId
+        string $mailingListId,
+        User $viewer
     ): ?string {
-        if (\in_array($mailingListId, EmailingCampaignInternalList::ALL)) {
+        if ($viewer->isAdmin() && \in_array($mailingListId, EmailingCampaignInternalList::ALL)) {
             $emailingCampaign->setMailingInternal($mailingListId);
-        } elseif ($mailingList = $this->findMailingList($mailingListId)) {
+        } elseif ($mailingList = $this->findMailingList($mailingListId, $viewer)) {
             $emailingCampaign->setMailingList($mailingList);
             $mailingList->setIsDeletable(false);
         } else {
@@ -86,16 +88,17 @@ class CreateEmailingCampaignMutation implements MutationInterface
         return null;
     }
 
-    private function findMailingList(string $globalId): ?MailingList
+    private function findMailingList(string $globalId, User $viewer): ?MailingList
     {
-        $mailingList = null;
-
         $id = GlobalId::fromGlobalId($globalId)['id'];
         if ($id) {
             $mailingList = $this->mailingListRepository->find($id);
+            if ($mailingList && ($viewer->isAdmin() || $mailingList->getOwner() === $viewer)) {
+                return $mailingList;
+            }
         }
 
-        return $mailingList;
+        return null;
     }
 
     private function getDefaultEmail(): string

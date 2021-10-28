@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
-use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\UpdateEmailingCampaignErrorCode;
 use Capco\AppBundle\Form\EmailingCampaignType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -41,11 +40,10 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     public function __invoke(Argument $input, User $viewer): array
     {
         $error = null;
-        $emailingCampaign = null;
 
         try {
             $emailingCampaign = $this->getCampaign($input, $viewer);
-            $this->preventListError($input, $emailingCampaign);
+            $this->preventListError($input, $emailingCampaign, $viewer);
             self::handleSendAt($input, $emailingCampaign);
 
             $form = $this->formFactory->create(EmailingCampaignType::class, $emailingCampaign);
@@ -94,8 +92,11 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         }
     }
 
-    private function preventListError(Argument $input, EmailingCampaign $emailingCampaign): void
-    {
+    private function preventListError(
+        Argument $input,
+        EmailingCampaign $emailingCampaign,
+        User $viewer
+    ): void {
         $mailingListGlobalId = $input->offsetGet('mailingList');
         $mailingInternal = $input->offsetGet('mailingInternal');
         if ($mailingListGlobalId && $mailingInternal) {
@@ -103,9 +104,15 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         }
         if ($mailingListGlobalId) {
             $mailingList = $this->getMailingList($mailingListGlobalId);
+            if (!$mailingList || (!$viewer->isAdmin() && $mailingList->getOwner() !== $viewer)) {
+                throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
+            }
             $mailingList->addEmailingCampaign($emailingCampaign);
         }
-        if ($mailingInternal && !EmailingCampaignInternalList::isValid($mailingInternal)) {
+        if (
+            $mailingInternal &&
+            (!$viewer->isAdmin() || !EmailingCampaignInternalList::isValid($mailingInternal))
+        ) {
             throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
         }
     }

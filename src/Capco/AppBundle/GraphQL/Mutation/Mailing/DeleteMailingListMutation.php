@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Enum\DeleteMailingListErrorCode;
 use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -22,12 +23,12 @@ class DeleteMailingListMutation implements MutationInterface
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $error = null;
         $deletedIds = [];
 
-        $mailingLists = $this->getMailingLists($input, $error);
+        $mailingLists = $this->getMailingLists($input, $viewer, $error);
 
         if (null === $error) {
             try {
@@ -44,7 +45,7 @@ class DeleteMailingListMutation implements MutationInterface
         return compact('error', 'deletedIds');
     }
 
-    private function getMailingLists(Argument $input, ?string &$error): array
+    private function getMailingLists(Argument $input, User $viewer, ?string &$error): array
     {
         $mailingLists = [];
         foreach ($input->offsetGet('ids') as $globalId) {
@@ -56,7 +57,10 @@ class DeleteMailingListMutation implements MutationInterface
             }
 
             $mailingList = $this->repository->find($id);
-            if (null === $mailingList) {
+            if (
+                null === $mailingList ||
+                (!$viewer->isAdmin() && $mailingList->getOwner() !== $viewer)
+            ) {
                 $error = DeleteMailingListErrorCode::ID_NOT_FOUND;
 
                 return [];

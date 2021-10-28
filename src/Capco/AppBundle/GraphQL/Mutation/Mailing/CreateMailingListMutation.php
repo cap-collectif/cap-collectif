@@ -53,7 +53,7 @@ class CreateMailingListMutation implements MutationInterface
             return null;
         }
 
-        $project = $this->getProject($input, $error);
+        $project = $this->getProject($input, $viewer, $error);
         if ($error) {
             return null;
         }
@@ -61,6 +61,7 @@ class CreateMailingListMutation implements MutationInterface
         $mailingList = new MailingList();
         $mailingList->setName($input->offsetGet('name'));
         $mailingList->setUsers($users);
+        $mailingList->setOwner($viewer);
         $mailingList->setProject($project);
         $mailingList->setOwner($viewer);
 
@@ -94,7 +95,7 @@ class CreateMailingListMutation implements MutationInterface
         return $users;
     }
 
-    private function getProject(Argument $input, ?string &$error): ?Project
+    private function getProject(Argument $input, User $viewer, ?string &$error): ?Project
     {
         if (!$input->offsetExists('project')) {
             return null;
@@ -108,7 +109,7 @@ class CreateMailingListMutation implements MutationInterface
         }
 
         $project = $this->projectRepository->find($projectId);
-        if (null === $project) {
+        if (null === $project || (!$viewer->isAdmin() && $project->getOwner() !== $viewer)) {
             $error = CreateMailingListErrorCode::ID_NOT_FOUND_PROJECT;
 
             return null;

@@ -22,7 +22,9 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
 
     protected function findCampaignFromGlobalId(string $globalId, User $viewer): ?EmailingCampaign
     {
-        return $this->resolver->resolve($globalId, $viewer);
+        $campaign = $this->resolver->resolve($globalId, $viewer);
+
+        return $viewer->isAdmin() || $campaign->getOwner() === $viewer ? $campaign : null;
     }
 
     protected function getPlannedCampaign(Argument $input, User $viewer): EmailingCampaign

@@ -1003,56 +1003,56 @@ InternalMutation:
                     payloadType: InternalRemoveSsoPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveSsoConnectionMutation", [value, getUser(), serv("request_stack")])'
             createMailingList:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateMailingListInput
                     payloadType: CreateMailingListPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateMailingListMutation", [value, getUser()])'
             deleteMailingList:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteMailingListInput
                     payloadType: DeleteMailingListPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteMailingListMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteMailingListMutation", [value, getUser()])'
             createEmailingCampaign:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateEmailingCampaignInput
                     payloadType: CreateEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateEmailingCampaignMutation", [value, getUser()])'
             deleteEmailingCampaigns:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteEmailingCampaignsInput
                     payloadType: DeleteEmailingCampaignsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteEmailingCampaignsMutation", [value, getUser()])'
             updateEmailingCampaign:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateEmailingCampaignInput
                     payloadType: UpdateEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\UpdateEmailingCampaignMutation", [value, getUser()])'
             sendEmailingCampaign:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: SendEmailingCampaignInput
                     payloadType: SendEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\SendEmailingCampaignMutation", [value, getUser()])'
             testEmailingCampaign:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: TestEmailingCampaignInput
                     payloadType: TestEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\TestEmailingCampaignMutation", [value, getUser()])'
             cancelEmailingCampaign:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CancelEmailingCampaignInput

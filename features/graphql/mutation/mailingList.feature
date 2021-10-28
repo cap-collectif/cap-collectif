@@ -2,8 +2,8 @@
 Feature: mailingList
 
 @database
-Scenario: GraphQL client wants to create a mailing list without project
-  Given I am logged in to graphql as admin
+Scenario: GraphQL project owner wants to create a mailing list without project
+  Given I am logged in to graphql as theo
   And I send a GraphQL POST request:
   """
   {
@@ -51,7 +51,7 @@ Scenario: GraphQL client wants to create a mailing list without project
         "mailingList": {
           "name": "equipe tech",
           "owner": {
-            "username": "admin"
+            "username": "Théo QP"
           },
           "project": null,
           "users": {
@@ -65,7 +65,7 @@ Scenario: GraphQL client wants to create a mailing list without project
   """
 
 @database
-Scenario: GraphQL client wants to create a mailing list from project
+Scenario: GraphQL admin wants to create a mailing list from project
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
@@ -125,7 +125,67 @@ Scenario: GraphQL client wants to create a mailing list from project
   """
 
 @database
-Scenario: GraphQL client wants to delete a mailing list
+Scenario: GraphQL project owner wants to create a mailing list from its project
+  Given I am logged in to graphql as theo
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CreateMailingListInput!) {
+      createMailingList(input: $input) {
+        error
+        mailingList {
+          name
+          project {
+            title
+          }
+          users {
+            totalCount
+          }
+          isDeletable
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "name": "equipe tech",
+        "userIds": [
+         "VXNlcjp1c2VyTWlja2FlbA==",
+          "VXNlcjp1c2VyU3B5bA==",
+          "VXNlcjp1c2VyQWd1aQ==",
+          "VXNlcjp1c2VyVGhlbw==",
+          "VXNlcjp1c2VyT21hcg==",
+          "VXNlcjp1c2VySmVhbg==",
+          "VXNlcjp1c2VyTWF4aW1l",
+          "VXNlcjp1c2VyVmluY2VudA=="
+        ],
+        "project": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "createMailingList": {
+        "error": null,
+        "mailingList": {
+          "name": "equipe tech",
+          "project": {
+            "title": "Projet avec administrateur de projet"
+          },
+          "users": {
+            "totalCount": 8
+          },
+          "isDeletable": true
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL admin wants to delete a mailing list
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
@@ -150,6 +210,37 @@ Scenario: GraphQL client wants to delete a mailing list
       "deleteMailingList": {
         "error": null,
         "deletedIds": ["TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0"]
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL project owner wants to delete its mailing list
+  Given I am logged in to graphql as theo
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: DeleteMailingListInput!) {
+      deleteMailingList(input: $input) {
+        error
+        deletedIds
+      }
+    }",
+    "variables": {
+      "input": {
+        "ids": ["TWFpbGluZ0xpc3Q6ZW1wdHlNYWlsaW5nTGlzdFdpdGhPd25lcg=="]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "deleteMailingList": {
+        "error": null,
+        "deletedIds": ["TWFpbGluZ0xpc3Q6ZW1wdHlNYWlsaW5nTGlzdFdpdGhPd25lcg=="]
       }
     }
   }
@@ -256,6 +347,56 @@ Scenario: GraphQL client wants to create a mailing but send wrong project id
   }
   """
 
+Scenario: GraphQL project owner wants to create a mailing list from other one project
+  Given I am logged in to graphql as theo
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CreateMailingListInput!) {
+      createMailingList(input: $input) {
+        error
+        mailingList {
+          name
+          project {
+            title
+          }
+          users {
+            totalCount
+          }
+          isDeletable
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "name": "equipe tech",
+        "userIds": [
+         "VXNlcjp1c2VyTWlja2FlbA==",
+          "VXNlcjp1c2VyU3B5bA==",
+          "VXNlcjp1c2VyQWd1aQ==",
+          "VXNlcjp1c2VyVGhlbw==",
+          "VXNlcjp1c2VyT21hcg==",
+          "VXNlcjp1c2VySmVhbg==",
+          "VXNlcjp1c2VyTWF4aW1l",
+          "VXNlcjp1c2VyVmluY2VudA=="
+        ],
+        "project": "UHJvamVjdDpwcm9qZWN0Q29yb25h"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "createMailingList": {
+        "error": "ID_NOT_FOUND_PROJECT",
+        "mailingList": null
+      }
+    }
+  }
+  """
+
 Scenario: GraphQL client wants to delete a mailing list but provide wrong id
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -270,6 +411,36 @@ Scenario: GraphQL client wants to delete a mailing list but provide wrong id
     "variables": {
       "input": {
         "ids": ["TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0", "wrongId"]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "deleteMailingList": {
+        "error": "ID_NOT_FOUND",
+        "deletedIds": []
+      }
+    }
+  }
+  """
+
+Scenario: GraphQL project owner wants to delete other one mailing list
+  Given I am logged in to graphql as theo
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: DeleteMailingListInput!) {
+      deleteMailingList(input: $input) {
+        error
+        deletedIds
+      }
+    }",
+    "variables": {
+      "input": {
+        "ids": ["TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0"]
       }
     }
   }
