@@ -455,3 +455,39 @@ Object {
   },
 }
 `;
+
+exports[`Internal.projects.contributors project owner checks the internal communication consent of contributors 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "consentInternalCommunication": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "consentInternalCommunication": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "consentInternalCommunication": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "consentInternalCommunication": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "consentInternalCommunication": true,
+          },
+        },
+      ],
+    },
+  },
+}
+`;

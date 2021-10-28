@@ -42,6 +42,22 @@ const ProjectContributorsQuery = /* GraphQL */ `
   }
 `;
 
+const ProjectContributorsConsentQuery = /* GraphQL */ `
+  query ProjectContributors($projectId: ID!) {
+    project: node(id: $projectId) {
+      ... on Project {
+        contributors {
+          edges {
+            node {
+              consentInternalCommunication
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 describe('Internal.projects.contributors', () => {
   it('fetches contributors filtered by project, step, user type, vip', async () => {
     await expect(
@@ -159,5 +175,17 @@ describe('Internal.projects.contributors', () => {
       'internal_user',
     );
     expect(response.project.contributors.totalCount).toBe(0);
+  });
+
+  it('project owner checks the internal communication consent of contributors', async () => {
+    await expect(
+      graphql(
+        ProjectContributorsConsentQuery,
+        {
+          projectId: toGlobalId('Project', 'projectWithOwner'),
+        },
+        'internal_theo',
+      ),
+    ).resolves.toMatchSnapshot();
   });
 });
