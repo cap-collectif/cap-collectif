@@ -64,7 +64,8 @@ const createCampaign = () => {
 };
 
 const DashboardHeader = ({ query, showModalDelete }: HeaderProps) => {
-  const { campaigns } = query;
+  const { viewer } = query;
+  const { campaigns } = viewer;
   const { selectedRows, rowsCount } = usePickableList();
   const { dispatch, parameters } = useDashboardCampaignContext();
 
@@ -129,7 +130,8 @@ const DashboardHeader = ({ query, showModalDelete }: HeaderProps) => {
 };
 
 export const DashboardCampaign = ({ query, relay }: Props) => {
-  const { campaigns, campaignsAll, campaignsDraft, campaignsSent, campaignsPlanned } = query;
+  const { viewer } = query;
+  const { campaigns, campaignsAll, campaignsDraft, campaignsSent, campaignsPlanned } = viewer;
   const intl = useIntl();
   const { selectedRows } = usePickableList();
   const { parameters, dispatch, status } = useDashboardCampaignContext();
@@ -254,38 +256,46 @@ export default createPaginationContainer(
             defaultValue: { field: SEND_AT, direction: DESC }
           }
           status: { type: EmailingCampaignStatusFilter, defaultValue: null }
+          affiliations: { type: "[EmailingCampaignAffiliation!]" }
         ) {
-        campaigns: emailingCampaigns(
-          first: $count
-          after: $cursor
-          term: $term
-          orderBy: $orderBy
-          status: $status
-        ) @connection(key: "DashboardCampaign_campaigns", filters: ["term", "orderBy", "status"]) {
-          totalCount
-          pageInfo {
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              id
-              status
-              ...CampaignItem_campaign
+        viewer {
+          campaigns: emailingCampaigns(
+            first: $count
+            after: $cursor
+            term: $term
+            orderBy: $orderBy
+            status: $status
+            affiliations: $affiliations
+          )
+            @connection(
+              key: "DashboardCampaign_campaigns"
+              filters: ["term", "orderBy", "status"]
+            ) {
+            totalCount
+            pageInfo {
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                id
+                status
+                ...CampaignItem_campaign
+              }
             }
           }
-        }
-        campaignsAll: emailingCampaigns(status: null) {
-          totalCount
-        }
-        campaignsDraft: emailingCampaigns(status: DRAFT) {
-          totalCount
-        }
-        campaignsSent: emailingCampaigns(status: SENT) {
-          totalCount
-        }
-        campaignsPlanned: emailingCampaigns(status: PLANNED) {
-          totalCount
+          campaignsAll: emailingCampaigns(status: null) {
+            totalCount
+          }
+          campaignsDraft: emailingCampaigns(status: DRAFT) {
+            totalCount
+          }
+          campaignsSent: emailingCampaigns(status: SENT) {
+            totalCount
+          }
+          campaignsPlanned: emailingCampaigns(status: PLANNED) {
+            totalCount
+          }
         }
       }
     `,
@@ -299,7 +309,7 @@ export default createPaginationContainer(
      * $FlowFixMe
      * */
     getConnectionFromProps(props: Props) {
-      return props.query.campaigns;
+      return props.query.viewer.campaigns;
     },
     getFragmentVariables(prevVars) {
       return {
@@ -320,6 +330,7 @@ export default createPaginationContainer(
         $term: String
         $orderBy: EmailingCampaignOrder
         $status: EmailingCampaignStatusFilter
+        $affiliations: [EmailingCampaignAffiliation!]
       ) {
         ...DashboardCampaign_query
           @arguments(
@@ -328,6 +339,7 @@ export default createPaginationContainer(
             term: $term
             orderBy: $orderBy
             status: $status
+            affiliations: $affiliations
           )
       }
     `,

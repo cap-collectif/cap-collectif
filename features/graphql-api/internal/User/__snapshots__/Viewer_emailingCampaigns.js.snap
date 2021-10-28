@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.viewer.emailingCampaigns admin can get all campaigns 1`] = `
+Object {
+  "viewer": Object {
+    "emailingCampaigns": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "name": "Campagne pour remercier les inscrits confirmés",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "Campagne pour rappeler aux utilisateurs de confirmer",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "On envoie un message à ceux qui ont participé au projet Solidarité COVID-19",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "Campagne pour le projet avec propriétaire",
+          },
+        },
+      ],
+      "totalCount": 4,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.emailingCampaigns admin can get its campaigns 1`] = `
+Object {
+  "viewer": Object {
+    "emailingCampaigns": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.emailingCampaigns project owner should get its campaigns 1`] = `
+Object {
+  "viewer": Object {
+    "emailingCampaigns": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "name": "Campagne pour le projet avec propriétaire",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.emailingCampaigns search a campaign 1`] = `
+Object {
+  "viewer": Object {
+    "emailingCampaigns": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "name": "On envoie un message à ceux qui ont participé au projet Solidarité COVID-19",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

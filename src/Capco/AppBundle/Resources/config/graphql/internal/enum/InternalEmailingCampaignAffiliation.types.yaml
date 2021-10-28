@@ -1,0 +1,9 @@
+InternalEmailingCampaignAffiliation:
+    type: enum
+    config:
+        name: EmailingCampaignAffiliation
+        description: 'The affiliation of a user to an emailing campaign'
+        values:
+            OWNER:
+                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignAffiliation::OWNER")'
+                description: 'Emailing campaigns that are owned by the authenticated user.'

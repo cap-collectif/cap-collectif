@@ -11,3 +11,28 @@ InternalEmailingCampaignOwner:
             username:
                 type: 'String'
                 description: 'User username'
+            emailingCampaigns:
+                type: 'EmailingCampaignConnection!'
+                description: 'Get all emailing campaigns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEmailingCampaignsResolver", [value, args])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    status:
+                        type: 'EmailingCampaignStatusFilter'
+                        description: 'optional filter by status'
+                    orderBy:
+                        type: 'EmailingCampaignOrder'
+                        defaultValue:
+                            {
+                                field: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignOrderField::SEND_AT")',
+                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                            }
+                        description: 'The ordering direction for sending date'
+                    affiliations:
+                        type: '[InternalEmailingCampaignAffiliation!]'
+                        description: |
+                            Array of viewer's affiliation options for mailing campaigns returned from the connection.
+                            For example, OWNER will include only mailing lists that the current viewer owns.
+                    term:
+                        type: 'String'
+                        description: 'If provided, filter campaigns by name'

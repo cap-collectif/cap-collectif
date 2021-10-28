@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
+import { useSelector } from 'react-redux';
 import environment from '~/createRelayEnvironment';
 import { Container, Header, Content } from './EmailingCampaignPage.style';
 import DashboardCampaign from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign';
@@ -16,6 +17,7 @@ import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import { createQueryVariables } from './utils';
 import Skeleton from '~ds/Skeleton';
+import type { GlobalState } from '~/types';
 
 const listCampaign = ({
   error,
@@ -47,6 +49,8 @@ const listCampaign = ({
 export const EmailingCampaignPage = () => {
   const { parameters, dispatch } = useDashboardCampaignContext();
   const intl = useIntl();
+  const { user } = useSelector((state: GlobalState) => state.user);
+  const isAdmin = user ? user.isAdmin : false;
 
   React.useEffect(() => {
     dispatch({
@@ -87,6 +91,7 @@ export const EmailingCampaignPage = () => {
               $term: String
               $orderBy: EmailingCampaignOrder
               $status: EmailingCampaignStatusFilter
+              $affiliations: [EmailingCampaignAffiliation!]
             ) {
               ...DashboardCampaign_query
                 @arguments(
@@ -95,10 +100,11 @@ export const EmailingCampaignPage = () => {
                   term: $term
                   orderBy: $orderBy
                   status: $status
+                  affiliations: $affiliations
                 )
             }
           `}
-          variables={createQueryVariables(parameters)}
+          variables={createQueryVariables(parameters, isAdmin)}
           render={({ error, props, retry }) => listCampaign({ error, props, retry, parameters })}
         />
       </Content>

@@ -35,7 +35,7 @@ const commit = (variables: Variables): Promise<DeleteEmailingCampaignMutationRes
     variables,
     updater: store => {
       const { parametersConnection } = variables;
-      const { term, orderBy, status } = createQueryVariables(parametersConnection);
+      const { term, orderBy, status } = createQueryVariables(parametersConnection, true);
       const root = store.get('client:root');
       const allCountCampaignsDeleted = {
         SENT: 0,

@@ -5057,6 +5057,12 @@ type EmailingCampaign implements Node {
   owner: EmailingCampaignOwner
 }
 
+"""The affiliation of a user to an emailing campaign"""
+enum EmailingCampaignAffiliation {
+  """Emailing campaigns that are owned by the authenticated user."""
+  OWNER
+}
+
 """A connection to a list of items."""
 type EmailingCampaignConnection {
   totalCount: Int!
@@ -5113,6 +5119,32 @@ interface EmailingCampaignOwner {
 
   """User username"""
   username: String
+
+  """Get all emailing campaigns."""
+  emailingCampaigns(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """optional filter by status"""
+    status: EmailingCampaignStatusFilter
+
+    """The ordering direction for sending date"""
+    orderBy: EmailingCampaignOrder = {field: SEND_AT, direction: DESC}
+
+    """
+    Array of viewer's affiliation options for mailing campaigns returned from the connection.
+    For example, OWNER will include only mailing lists that the current viewer owns.
+    """
+    affiliations: [EmailingCampaignAffiliation!]
+
+    """If provided, filter campaigns by name"""
+    term: String
+  ): EmailingCampaignConnection!
 }
 
 """The possible status of an emailing campaign"""
@@ -15135,6 +15167,32 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """If provided, filter lists by name"""
     term: String
   ): MailingListConnection!
+
+  """Get all emailing campaigns."""
+  emailingCampaigns(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """optional filter by status"""
+    status: EmailingCampaignStatusFilter
+
+    """The ordering direction for sending date"""
+    orderBy: EmailingCampaignOrder = {field: SEND_AT, direction: DESC}
+
+    """
+    Array of viewer's affiliation options for mailing campaigns returned from the connection.
+    For example, OWNER will include only mailing lists that the current viewer owns.
+    """
+    affiliations: [EmailingCampaignAffiliation!]
+
+    """If provided, filter campaigns by name"""
+    term: String
+  ): EmailingCampaignConnection!
 
   """The user's admin edit url"""
   adminUrl: URI!

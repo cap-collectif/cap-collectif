@@ -7,6 +7,7 @@ export const CAMPAIGN_PAGINATION = 30;
 
 export const createQueryVariables = (
   parameters: DashboardParameters,
+  isAdmin: boolean,
 ): EmailingCampaignPageQueryVariables => ({
   count: CAMPAIGN_PAGINATION,
   cursor: null,
@@ -16,4 +17,5 @@ export const createQueryVariables = (
     direction: parameters.sort === ORDER_BY.NEWEST ? 'DESC' : 'ASC',
   },
   status: parameters.filters.state === 'ALL' ? null : parameters.filters.state,
+  affiliations: isAdmin ? null : ['OWNER'],
 });

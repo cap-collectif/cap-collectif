@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
+use Capco\AppBundle\Enum\EmailingCampaignAffiliation;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -24,7 +26,9 @@ class EmailingCampaignRepository extends EntityRepository
         ?string $status,
         ?string $orderByField,
         ?string $orderByDirection,
-        ?string $search
+        ?string $search,
+        array $affiliations = [],
+        ?User $user = null
     ): array {
         $qb = $this->createQueryBuilder('ec');
         $qb->leftJoin('ec.mailingList', 'ml')->select('ec', 'ml');
@@ -38,6 +42,13 @@ class EmailingCampaignRepository extends EntityRepository
         }
         if ($orderByField && $orderByDirection) {
             $qb->orderBy('ec.' . self::ORDERS[$orderByField], $orderByDirection);
+        }
+        if (
+            $affiliations &&
+            \in_array(EmailingCampaignAffiliation::OWNER, $affiliations) &&
+            $user
+        ) {
+            $qb->andWhere('ml.owner = :user')->setParameter('user', $user);
         }
 
         return $qb

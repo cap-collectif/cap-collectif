@@ -25,7 +25,7 @@ PreviewUser:
             consentInternalCommunication:
                 type: 'Boolean'
                 description: 'Whether or not this user consent internal communication.'
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context, ["ROLE_PROJECT_ADMIN"])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context, ["ROLE_PROJECT_ADMIN", "ROLE_ADMIN"])'
             avatarUrl:
                 type: 'URI'
                 description: "The user's public avatar URL."
