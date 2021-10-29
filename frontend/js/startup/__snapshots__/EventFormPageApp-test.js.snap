@@ -11,6 +11,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
       size={40}
     />
   }
+  isAdmin={true}
   isAuthenticated={false}
 >
   <Providers>
@@ -21,6 +22,11 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
           "fragment": Object {
             "abstractKey": null,
             "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "affiliations",
+              },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
@@ -65,14 +71,20 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                 "storageKey": null,
               },
               Object {
-                "args": null,
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "affiliations",
+                    "variableName": "affiliations",
+                  },
+                ],
                 "kind": "FragmentSpread",
                 "name": "EventFormPage_query",
               },
             ],
             "type": "Query",
           },
-          "hash": "15a154613a6bee8e5c44ae4bc4f62b44",
+          "hash": "597251c82a8680ad8a1709d767f50fdd",
           "kind": "Request",
           "operation": Object {
             "argumentDefinitions": Array [
@@ -85,6 +97,11 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "isAuthenticated",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "affiliations",
               },
             ],
             "kind": "Operation",
@@ -580,63 +597,42 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
               },
               Object {
                 "alias": null,
-                "args": Array [
-                  Object {
-                    "kind": "Literal",
-                    "name": "withEventOnly",
-                    "value": false,
-                  },
-                ],
-                "concreteType": "ProjectConnection",
+                "args": null,
+                "concreteType": "User",
                 "kind": "LinkedField",
-                "name": "projects",
+                "name": "viewer",
                 "plural": false,
                 "selections": Array [
                   Object {
                     "alias": null,
-                    "args": null,
-                    "concreteType": "ProjectEdge",
+                    "args": Array [
+                      Object {
+                        "kind": "Variable",
+                        "name": "affiliations",
+                        "variableName": "affiliations",
+                      },
+                    ],
+                    "concreteType": "ProjectConnection",
                     "kind": "LinkedField",
-                    "name": "edges",
-                    "plural": true,
+                    "name": "projects",
+                    "plural": false,
                     "selections": Array [
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Project",
+                        "concreteType": "ProjectEdge",
                         "kind": "LinkedField",
-                        "name": "node",
-                        "plural": false,
+                        "name": "edges",
+                        "plural": true,
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": null,
+                            "concreteType": "Project",
                             "kind": "LinkedField",
-                            "name": "steps",
-                            "plural": true,
+                            "name": "node",
+                            "plural": false,
                             "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "__typename",
-                                "storageKey": null,
-                              },
                               Object {
                                 "alias": null,
                                 "args": null,
@@ -651,6 +647,38 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                                 "name": "title",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": null,
+                                "kind": "LinkedField",
+                                "name": "steps",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "storageKey": null,
                           },
@@ -660,17 +688,6 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                     ],
                     "storageKey": null,
                   },
-                ],
-                "storageKey": "projects(withEventOnly:false)",
-              },
-              Object {
-                "alias": null,
-                "args": null,
-                "concreteType": "User",
-                "kind": "LinkedField",
-                "name": "viewer",
-                "plural": false,
-                "selections": Array [
                   Object {
                     "alias": null,
                     "args": null,
@@ -689,7 +706,21 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
+                    "name": "isOnlyProjectAdmin",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
                     "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "displayName",
                     "storageKey": null,
                   },
                 ],
@@ -698,7 +729,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "e1bf319e1a17af6cc26e5341ea028241",
+            "cacheID": "8dcf6cc9df92b3686c3a699e08416b24",
             "id": null,
             "metadata": Object {},
             "name": "EventFormPageAppQuery",
@@ -706,13 +737,14 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
             "text": "query EventFormPageAppQuery(
   $eventId: ID!
   $isAuthenticated: Boolean!
+  $affiliations: [ProjectAffiliation!]
 ) {
   event: node(id: $eventId) {
     __typename
     ...EventFormPage_event_39ngnn
     id
   }
-  ...EventFormPage_query
+  ...EventFormPage_query_k3vj0
 }
 
 fragment EventFormPage_event_39ngnn on Event {
@@ -739,8 +771,8 @@ fragment EventFormPage_event_39ngnn on Event {
   ...EventForm_event
 }
 
-fragment EventFormPage_query on Query {
-  ...EventForm_query
+fragment EventFormPage_query_k3vj0 on Query {
+  ...EventForm_query_k3vj0
   viewer {
     isSuperAdmin
     isAdmin
@@ -815,19 +847,21 @@ fragment EventForm_event on Event {
   adminAuthorizeDataTransfer
 }
 
-fragment EventForm_query on Query {
+fragment EventForm_query_k3vj0 on Query {
   ...SelectTheme_query
-  ...SelectProject_query
-  ...SelectStep_query
   viewer {
+    ...SelectProject_viewer_k3vj0
+    ...SelectStep_viewer_k3vj0
     isAdmin
     isSuperAdmin
+    isOnlyProjectAdmin
     id
+    displayName
   }
 }
 
-fragment SelectProject_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectProject_viewer_k3vj0 on User {
+  projects(affiliations: $affiliations) {
     edges {
       node {
         id
@@ -837,8 +871,8 @@ fragment SelectProject_query on Query {
   }
 }
 
-fragment SelectStep_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectStep_viewer_k3vj0 on User {
+  projects(affiliations: $affiliations) {
     edges {
       node {
         id
@@ -866,6 +900,7 @@ fragment SelectTheme_query on Query {
       render={[Function]}
       variables={
         Object {
+          "affiliations": null,
           "eventId": "eventGlobalId1",
           "isAuthenticated": false,
         }

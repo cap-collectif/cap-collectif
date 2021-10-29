@@ -47,6 +47,10 @@ const defaultProps = {
     viewer: {
       isSuperAdmin: false,
       isAdmin: true,
+      isOnlyProjectAdmin: false,
+      id: 'VXNlcjp1c2VyVGhlbw==',
+      displayName: 'Théo QP',
+      $fragmentRefs,
     },
     $fragmentRefs,
     $refType,

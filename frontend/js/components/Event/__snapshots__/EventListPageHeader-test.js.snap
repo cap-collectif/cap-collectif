@@ -558,63 +558,36 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
               },
               Object {
                 "alias": null,
-                "args": Array [
-                  Object {
-                    "kind": "Literal",
-                    "name": "withEventOnly",
-                    "value": false,
-                  },
-                ],
-                "concreteType": "ProjectConnection",
+                "args": null,
+                "concreteType": "User",
                 "kind": "LinkedField",
-                "name": "projects",
+                "name": "viewer",
                 "plural": false,
                 "selections": Array [
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "ProjectEdge",
+                    "concreteType": "ProjectConnection",
                     "kind": "LinkedField",
-                    "name": "edges",
-                    "plural": true,
+                    "name": "projects",
+                    "plural": false,
                     "selections": Array [
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Project",
+                        "concreteType": "ProjectEdge",
                         "kind": "LinkedField",
-                        "name": "node",
-                        "plural": false,
+                        "name": "edges",
+                        "plural": true,
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": null,
+                            "concreteType": "Project",
                             "kind": "LinkedField",
-                            "name": "steps",
-                            "plural": true,
+                            "name": "node",
+                            "plural": false,
                             "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "__typename",
-                                "storageKey": null,
-                              },
                               Object {
                                 "alias": null,
                                 "args": null,
@@ -629,6 +602,38 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                                 "name": "title",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": null,
+                                "kind": "LinkedField",
+                                "name": "steps",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "storageKey": null,
                           },
@@ -638,17 +643,6 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                     ],
                     "storageKey": null,
                   },
-                ],
-                "storageKey": "projects(withEventOnly:false)",
-              },
-              Object {
-                "alias": null,
-                "args": null,
-                "concreteType": "User",
-                "kind": "LinkedField",
-                "name": "viewer",
-                "plural": false,
-                "selections": Array [
                   Object {
                     "alias": null,
                     "args": null,
@@ -667,7 +661,21 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
+                    "name": "isOnlyProjectAdmin",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
                     "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "displayName",
                     "storageKey": null,
                   },
                 ],
@@ -678,7 +686,7 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
         ],
       },
       "params": Object {
-        "cacheID": "f7829540e1abddbb8eb048602a2cd67c",
+        "cacheID": "93c4cf9628d5b9fe6356053d4fd675b9",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -772,17 +780,19 @@ fragment EventForm_event on Event {
 
 fragment EventForm_query on Query {
   ...SelectTheme_query
-  ...SelectProject_query
-  ...SelectStep_query
   viewer {
+    ...SelectProject_viewer_3ggdEH
+    ...SelectStep_viewer_3ggdEH
     isAdmin
     isSuperAdmin
+    isOnlyProjectAdmin
     id
+    displayName
   }
 }
 
-fragment SelectProject_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectProject_viewer_3ggdEH on User {
+  projects {
     edges {
       node {
         id
@@ -792,8 +802,8 @@ fragment SelectProject_query on Query {
   }
 }
 
-fragment SelectStep_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectStep_viewer_3ggdEH on User {
+  projects {
     edges {
       node {
         id
@@ -1386,63 +1396,36 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
               },
               Object {
                 "alias": null,
-                "args": Array [
-                  Object {
-                    "kind": "Literal",
-                    "name": "withEventOnly",
-                    "value": false,
-                  },
-                ],
-                "concreteType": "ProjectConnection",
+                "args": null,
+                "concreteType": "User",
                 "kind": "LinkedField",
-                "name": "projects",
+                "name": "viewer",
                 "plural": false,
                 "selections": Array [
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "ProjectEdge",
+                    "concreteType": "ProjectConnection",
                     "kind": "LinkedField",
-                    "name": "edges",
-                    "plural": true,
+                    "name": "projects",
+                    "plural": false,
                     "selections": Array [
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Project",
+                        "concreteType": "ProjectEdge",
                         "kind": "LinkedField",
-                        "name": "node",
-                        "plural": false,
+                        "name": "edges",
+                        "plural": true,
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": null,
+                            "concreteType": "Project",
                             "kind": "LinkedField",
-                            "name": "steps",
-                            "plural": true,
+                            "name": "node",
+                            "plural": false,
                             "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "__typename",
-                                "storageKey": null,
-                              },
                               Object {
                                 "alias": null,
                                 "args": null,
@@ -1457,6 +1440,38 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                                 "name": "title",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": null,
+                                "kind": "LinkedField",
+                                "name": "steps",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "storageKey": null,
                           },
@@ -1466,17 +1481,6 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                     ],
                     "storageKey": null,
                   },
-                ],
-                "storageKey": "projects(withEventOnly:false)",
-              },
-              Object {
-                "alias": null,
-                "args": null,
-                "concreteType": "User",
-                "kind": "LinkedField",
-                "name": "viewer",
-                "plural": false,
-                "selections": Array [
                   Object {
                     "alias": null,
                     "args": null,
@@ -1495,7 +1499,21 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
+                    "name": "isOnlyProjectAdmin",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
                     "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "displayName",
                     "storageKey": null,
                   },
                 ],
@@ -1506,7 +1524,7 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
         ],
       },
       "params": Object {
-        "cacheID": "f7829540e1abddbb8eb048602a2cd67c",
+        "cacheID": "93c4cf9628d5b9fe6356053d4fd675b9",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -1600,17 +1618,19 @@ fragment EventForm_event on Event {
 
 fragment EventForm_query on Query {
   ...SelectTheme_query
-  ...SelectProject_query
-  ...SelectStep_query
   viewer {
+    ...SelectProject_viewer_3ggdEH
+    ...SelectStep_viewer_3ggdEH
     isAdmin
     isSuperAdmin
+    isOnlyProjectAdmin
     id
+    displayName
   }
 }
 
-fragment SelectProject_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectProject_viewer_3ggdEH on User {
+  projects {
     edges {
       node {
         id
@@ -1620,8 +1640,8 @@ fragment SelectProject_query on Query {
   }
 }
 
-fragment SelectStep_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectStep_viewer_3ggdEH on User {
+  projects {
     edges {
       node {
         id
@@ -2214,63 +2234,36 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
               },
               Object {
                 "alias": null,
-                "args": Array [
-                  Object {
-                    "kind": "Literal",
-                    "name": "withEventOnly",
-                    "value": false,
-                  },
-                ],
-                "concreteType": "ProjectConnection",
+                "args": null,
+                "concreteType": "User",
                 "kind": "LinkedField",
-                "name": "projects",
+                "name": "viewer",
                 "plural": false,
                 "selections": Array [
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "ProjectEdge",
+                    "concreteType": "ProjectConnection",
                     "kind": "LinkedField",
-                    "name": "edges",
-                    "plural": true,
+                    "name": "projects",
+                    "plural": false,
                     "selections": Array [
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Project",
+                        "concreteType": "ProjectEdge",
                         "kind": "LinkedField",
-                        "name": "node",
-                        "plural": false,
+                        "name": "edges",
+                        "plural": true,
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": null,
+                            "concreteType": "Project",
                             "kind": "LinkedField",
-                            "name": "steps",
-                            "plural": true,
+                            "name": "node",
+                            "plural": false,
                             "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "__typename",
-                                "storageKey": null,
-                              },
                               Object {
                                 "alias": null,
                                 "args": null,
@@ -2285,6 +2278,38 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                                 "name": "title",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": null,
+                                "kind": "LinkedField",
+                                "name": "steps",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "storageKey": null,
                           },
@@ -2294,17 +2319,6 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                     ],
                     "storageKey": null,
                   },
-                ],
-                "storageKey": "projects(withEventOnly:false)",
-              },
-              Object {
-                "alias": null,
-                "args": null,
-                "concreteType": "User",
-                "kind": "LinkedField",
-                "name": "viewer",
-                "plural": false,
-                "selections": Array [
                   Object {
                     "alias": null,
                     "args": null,
@@ -2323,7 +2337,21 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
+                    "name": "isOnlyProjectAdmin",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
                     "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "displayName",
                     "storageKey": null,
                   },
                 ],
@@ -2334,7 +2362,7 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "f7829540e1abddbb8eb048602a2cd67c",
+        "cacheID": "93c4cf9628d5b9fe6356053d4fd675b9",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -2428,17 +2456,19 @@ fragment EventForm_event on Event {
 
 fragment EventForm_query on Query {
   ...SelectTheme_query
-  ...SelectProject_query
-  ...SelectStep_query
   viewer {
+    ...SelectProject_viewer_3ggdEH
+    ...SelectStep_viewer_3ggdEH
     isAdmin
     isSuperAdmin
+    isOnlyProjectAdmin
     id
+    displayName
   }
 }
 
-fragment SelectProject_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectProject_viewer_3ggdEH on User {
+  projects {
     edges {
       node {
         id
@@ -2448,8 +2478,8 @@ fragment SelectProject_query on Query {
   }
 }
 
-fragment SelectStep_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectStep_viewer_3ggdEH on User {
+  projects {
     edges {
       node {
         id
@@ -3042,63 +3072,36 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
               },
               Object {
                 "alias": null,
-                "args": Array [
-                  Object {
-                    "kind": "Literal",
-                    "name": "withEventOnly",
-                    "value": false,
-                  },
-                ],
-                "concreteType": "ProjectConnection",
+                "args": null,
+                "concreteType": "User",
                 "kind": "LinkedField",
-                "name": "projects",
+                "name": "viewer",
                 "plural": false,
                 "selections": Array [
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "ProjectEdge",
+                    "concreteType": "ProjectConnection",
                     "kind": "LinkedField",
-                    "name": "edges",
-                    "plural": true,
+                    "name": "projects",
+                    "plural": false,
                     "selections": Array [
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Project",
+                        "concreteType": "ProjectEdge",
                         "kind": "LinkedField",
-                        "name": "node",
-                        "plural": false,
+                        "name": "edges",
+                        "plural": true,
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": null,
+                            "concreteType": "Project",
                             "kind": "LinkedField",
-                            "name": "steps",
-                            "plural": true,
+                            "name": "node",
+                            "plural": false,
                             "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "__typename",
-                                "storageKey": null,
-                              },
                               Object {
                                 "alias": null,
                                 "args": null,
@@ -3113,6 +3116,38 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                                 "name": "title",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": null,
+                                "kind": "LinkedField",
+                                "name": "steps",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "storageKey": null,
                           },
@@ -3122,17 +3157,6 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                     ],
                     "storageKey": null,
                   },
-                ],
-                "storageKey": "projects(withEventOnly:false)",
-              },
-              Object {
-                "alias": null,
-                "args": null,
-                "concreteType": "User",
-                "kind": "LinkedField",
-                "name": "viewer",
-                "plural": false,
-                "selections": Array [
                   Object {
                     "alias": null,
                     "args": null,
@@ -3151,7 +3175,21 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
+                    "name": "isOnlyProjectAdmin",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
                     "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "displayName",
                     "storageKey": null,
                   },
                 ],
@@ -3162,7 +3200,7 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "f7829540e1abddbb8eb048602a2cd67c",
+        "cacheID": "93c4cf9628d5b9fe6356053d4fd675b9",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -3256,17 +3294,19 @@ fragment EventForm_event on Event {
 
 fragment EventForm_query on Query {
   ...SelectTheme_query
-  ...SelectProject_query
-  ...SelectStep_query
   viewer {
+    ...SelectProject_viewer_3ggdEH
+    ...SelectStep_viewer_3ggdEH
     isAdmin
     isSuperAdmin
+    isOnlyProjectAdmin
     id
+    displayName
   }
 }
 
-fragment SelectProject_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectProject_viewer_3ggdEH on User {
+  projects {
     edges {
       node {
         id
@@ -3276,8 +3316,8 @@ fragment SelectProject_query on Query {
   }
 }
 
-fragment SelectStep_query on Query {
-  projects(withEventOnly: false) {
+fragment SelectStep_viewer_3ggdEH on User {
+  projects {
     edges {
       node {
         id

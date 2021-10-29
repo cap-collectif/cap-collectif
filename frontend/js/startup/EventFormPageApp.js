@@ -17,47 +17,55 @@ const EventFormPage = lazy(() =>
 type Props = {|
   +eventId: string,
   +isAuthenticated: boolean,
+  +isAdmin: boolean,
 |};
 
-export default ({ eventId, isAuthenticated }: Props) => (
-  <Suspense fallback={<Loader />}>
-    <Providers>
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query EventFormPageAppQuery($eventId: ID!, $isAuthenticated: Boolean!) {
-            event: node(id: $eventId) {
-              ...EventFormPage_event @arguments(isAuthenticated: $isAuthenticated)
+export default ({ eventId, isAuthenticated, isAdmin }: Props) => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <Providers>
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query EventFormPageAppQuery(
+              $eventId: ID!
+              $isAuthenticated: Boolean!
+              $affiliations: [ProjectAffiliation!]
+            ) {
+              event: node(id: $eventId) {
+                ...EventFormPage_event @arguments(isAuthenticated: $isAuthenticated)
+              }
+              ...EventFormPage_query @arguments(affiliations: $affiliations)
             }
-            ...EventFormPage_query
+          `}
+          variables={
+            ({
+              eventId,
+              isAuthenticated,
+              affiliations: isAdmin ? null : ['OWNER'],
+            }: EventFormPageAppQueryVariables)
           }
-        `}
-        variables={
-          ({
-            eventId,
-            isAuthenticated,
-          }: EventFormPageAppQueryVariables)
-        }
-        render={({
-          error,
-          props,
-        }: {
-          ...ReactRelayReadyState,
-          +props: ?EventFormPageAppQueryResponse,
-        }) => {
-          if (error) {
-            return graphqlError;
-          }
-          if (props) {
-            return <EventFormPage event={props.event} query={props} />;
-          }
-          return (
-            <Row>
-              <Loader />
-            </Row>
-          );
-        }}
-      />
-    </Providers>
-  </Suspense>
-);
+          render={({
+            error,
+            props,
+          }: {
+            ...ReactRelayReadyState,
+            +props: ?EventFormPageAppQueryResponse,
+          }) => {
+            if (error) {
+              return graphqlError;
+            }
+            if (props) {
+              return <EventFormPage event={props.event} query={props} />;
+            }
+            return (
+              <Row>
+                <Loader />
+              </Row>
+            );
+          }}
+        />
+      </Providers>
+    </Suspense>
+  );
+};

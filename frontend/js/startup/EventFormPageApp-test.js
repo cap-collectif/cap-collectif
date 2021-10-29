@@ -8,6 +8,7 @@ describe('<EventFormPageApp />', () => {
   const defaultProps = {
     eventId: 'eventGlobalId1',
     isAuthenticated: false,
+    isAdmin: true,
   };
 
   it('should render correctly with defaultProps', () => {

@@ -26,12 +26,12 @@ import type { EventForm_query } from '~relay/EventForm_query.graphql';
 import component from '~/components/Form/Field';
 import UserListField from '~/components//Admin/Field/UserListField';
 import SelectTheme from '~/components//Utils/SelectTheme';
-import SelectProject from '~/components//Utils/SelectProject';
+import SelectProject from '~/components/Event/Form/SelectProject';
 import select from '~/components/Form/Select';
 import approve from '~/components/Form/Approve';
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 import { getTranslation } from '~/services/Translation';
-import SelectStep from '~/components/Utils/SelectStep';
+import SelectStep from '~/components/Event/Form/SelectStep';
 import colors from '~/utils/colors';
 import { InformationIcon } from '~/components/Admin/Project/Content/ProjectContentAdminForm';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
@@ -184,6 +184,13 @@ export const validate = (values: FormValues, props: Props) => {
       errors[value] = 'fill-field';
     }
   });
+
+  if (props.query.viewer.isOnlyProjectAdmin) {
+    if (!values.projects || values.projects.length === 0) {
+      errors.projects = 'fill-field';
+    }
+  }
+
   if (values.guestListEnabled && values.link) {
     errors.link = 'error-alert-choosing-subscription-mode';
   }
@@ -200,7 +207,6 @@ export const validate = (values: FormValues, props: Props) => {
   if (values.metadescription !== null && values?.metadescription?.length > 160) {
     errors.metadescription = { id: 'characters-maximum', values: { quantity: 160 } };
   }
-
   return errors;
 };
 
@@ -374,14 +380,14 @@ export const EventForm = ({
             type="text"
             id="event_title"
           />
-          {query.viewer.isAdmin && !isFrontendView && (
+          {!isFrontendView && (
             <UserListField
               clearable={false}
               label={<FormattedMessage id="global.author" />}
               ariaControls="EventForm-filter-user-listbox"
               inputClassName="fake-inputClassName"
               autoload
-              disabled={!query.viewer.isAdmin || isDisabled()}
+              disabled={query.viewer.isOnlyProjectAdmin || isDisabled()}
               id="event_author"
               name="author"
               placeholder={intl.formatMessage({ id: 'select-author' })}
@@ -562,16 +568,17 @@ export const EventForm = ({
           />
         )}
         <SelectProject
-          query={query}
+          query={query.viewer}
           multi
           clearable
           name="projects"
           label="admin.fields.theme.projects_count"
           placeholder="select-project"
           optional={isFrontendView}
+          disabled={false}
         />
         <SelectStep
-          query={query}
+          query={query.viewer}
           multi
           clearable
           projectIds={selectedProjectIds}
@@ -607,7 +614,7 @@ export const EventForm = ({
                   id="event_link"
                 />
               )}
-            {query.viewer.isAdmin && !isFrontendView && (
+            {!query.viewer.isOnlyProjectAdmin && !isFrontendView && (
               <Field
                 name="adminAuthorizeDataTransfer"
                 id="event_adminAuthorizeDataTransfer"
@@ -859,6 +866,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
       authorAgreeToUsePersonalDataForEventOnly: false,
       isPresential: true,
       guestListEnabled: false,
+      author: { value: props.query.viewer.id, label: props.query.viewer.displayName },
     },
   };
 };
@@ -867,13 +875,17 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form
 
 export default createFragmentContainer(container, {
   query: graphql`
-    fragment EventForm_query on Query {
+    fragment EventForm_query on Query
+      @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
       ...SelectTheme_query
-      ...SelectProject_query
-      ...SelectStep_query
       viewer {
+        ...SelectProject_viewer @arguments(affiliations: $affiliations)
+        ...SelectStep_viewer @arguments(affiliations: $affiliations)
         isAdmin
         isSuperAdmin
+        isOnlyProjectAdmin
+        id
+        displayName
       }
     }
   `,

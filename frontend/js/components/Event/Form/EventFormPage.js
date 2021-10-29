@@ -395,8 +395,9 @@ export const EventFormCreatePage = connect<any, any, _, _, _, _>(mapStateToProps
 
 export default createFragmentContainer(EventFormCreatePage, {
   query: graphql`
-    fragment EventFormPage_query on Query {
-      ...EventForm_query
+    fragment EventFormPage_query on Query
+      @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
+      ...EventForm_query @arguments(affiliations: $affiliations)
       viewer {
         isSuperAdmin
         isAdmin

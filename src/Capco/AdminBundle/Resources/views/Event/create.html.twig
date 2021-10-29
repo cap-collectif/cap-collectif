@@ -19,7 +19,8 @@
     {{ react_render_component('EventFormPageApp', {
         'props': {
             eventId: '',
-            'isAuthenticated': is_granted('ROLE_USER')
+            'isAuthenticated': is_granted('ROLE_USER'),
+            'isAdmin': app.user.isAdmin or app.user.isSuperAdmin,
         },
         'rendering': 'client_side'
     }) }}

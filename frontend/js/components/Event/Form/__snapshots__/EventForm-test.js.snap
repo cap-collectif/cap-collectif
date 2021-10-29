@@ -223,8 +223,9 @@ exports[`<EventForm /> it does not render toggle on frontend even with remote ev
         </EventForm__TitleHint>
       </h3>
     </div>
-    <Relay(injectIntl(SelectProject))
+    <SelectProject
       clearable={true}
+      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -233,15 +234,15 @@ exports[`<EventForm /> it does not render toggle on frontend even with remote ev
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
-    <Relay(injectIntl(SelectStep))
+    <SelectStep
       clearable={true}
       disabled={true}
       label="project.show.meta.step.title"
@@ -252,11 +253,11 @@ exports[`<EventForm /> it does not render toggle on frontend even with remote ev
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
@@ -609,8 +610,9 @@ exports[`<EventForm /> it renders correctly a remote event 1`] = `
         </EventForm__TitleHint>
       </h3>
     </div>
-    <Relay(injectIntl(SelectProject))
+    <SelectProject
       clearable={true}
+      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -619,15 +621,15 @@ exports[`<EventForm /> it renders correctly a remote event 1`] = `
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
-    <Relay(injectIntl(SelectStep))
+    <SelectStep
       clearable={true}
       disabled={true}
       label="project.show.meta.step.title"
@@ -638,11 +640,11 @@ exports[`<EventForm /> it renders correctly a remote event 1`] = `
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
@@ -1130,8 +1132,9 @@ exports[`<EventForm /> it renders correctly on BO a toggle with remote event ena
         </EventForm__TitleHint>
       </h3>
     </div>
-    <Relay(injectIntl(SelectProject))
+    <SelectProject
       clearable={true}
+      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -1140,15 +1143,15 @@ exports[`<EventForm /> it renders correctly on BO a toggle with remote event ena
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
-    <Relay(injectIntl(SelectStep))
+    <SelectStep
       clearable={true}
       disabled={true}
       label="project.show.meta.step.title"
@@ -1159,11 +1162,11 @@ exports[`<EventForm /> it renders correctly on BO a toggle with remote event ena
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
@@ -1618,8 +1621,9 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         </EventForm__TitleHint>
       </h3>
     </div>
-    <Relay(injectIntl(SelectProject))
+    <SelectProject
       clearable={true}
+      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -1628,15 +1632,15 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
-    <Relay(injectIntl(SelectStep))
+    <SelectStep
       clearable={true}
       disabled={true}
       label="project.show.meta.step.title"
@@ -1647,11 +1651,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
@@ -2106,8 +2110,9 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         </EventForm__TitleHint>
       </h3>
     </div>
-    <Relay(injectIntl(SelectProject))
+    <SelectProject
       clearable={true}
+      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -2116,15 +2121,15 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
-    <Relay(injectIntl(SelectStep))
+    <SelectStep
       clearable={true}
       disabled={true}
       label="project.show.meta.step.title"
@@ -2135,11 +2140,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
@@ -2594,8 +2599,9 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         </EventForm__TitleHint>
       </h3>
     </div>
-    <Relay(injectIntl(SelectProject))
+    <SelectProject
       clearable={true}
+      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -2604,15 +2610,15 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
-    <Relay(injectIntl(SelectStep))
+    <SelectStep
       clearable={true}
       disabled={true}
       label="project.show.meta.step.title"
@@ -2623,11 +2629,11 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       query={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
-          "viewer": Object {
-            "isAdmin": true,
-            "isSuperAdmin": false,
-          },
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
         }
       }
     />
