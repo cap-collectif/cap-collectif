@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|UserInvitationsAvailabilitySearch should fetch the already used email addresses among the given ones 1`] = `
+Object {
+  "userInvitationsAvailabilitySearch": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "availableForInvitation": false,
+          "availableForUser": false,
+          "email": "theo@cap-collectif.com",
+        },
+      },
+      Object {
+        "node": Object {
+          "availableForInvitation": false,
+          "availableForUser": true,
+          "email": "rem@chan.com",
+        },
+      },
+      Object {
+        "node": Object {
+          "availableForInvitation": false,
+          "availableForUser": true,
+          "email": "ram@chan.com",
+        },
+      },
+    ],
+    "totalCount": 3,
+  },
+}
+`;
+
+exports[`Internal|UserInvitationsAvailabilitySearch should not fetch already used email addresses among the new ones 1`] = `
+Object {
+  "userInvitationsAvailabilitySearch": Object {
+    "edges": Array [],
+    "totalCount": 0,
+  },
+}
+`;

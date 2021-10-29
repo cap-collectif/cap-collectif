@@ -24,16 +24,24 @@
         </h1>
 
         <p style="margin: 0;line-height: 22px;">
-            {{ 'global-hello'|trans({}, 'CapcoAppBundle', user_locale) | raw }} 👋,<br />
+            {{ 'global-hello'|trans({}, 'CapcoAppBundle', user_locale) | raw }} 👋,<br/>
+        </p>
+
+        <p style="color: #A2ABB4">{{ invitationMessage | raw }}</p>
+
+        <p>
             {{ 'click-button-accept-invitation'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
         </p>
 
         <p style="margin: 20px 0">
-            <a href="{{invitationUrl}}" style="display: inline-block;color:{{ btnText }};padding:18px 24px;border-radius:4px;background-color: {{ btnBg }};font-weight: bold;">{{ 'accept-invitation'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</a>
+            <a href="{{ invitationUrl }}"
+               style="display: inline-block;color:{{ btnText }};padding:18px 24px;border-radius:4px;background-color: {{ btnBg }};font-weight: bold;">{{ 'accept-invitation'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</a>
         </p>
 
-        <p style="margin:0;line-height: 22px;">{{ 'or-copy-past-url'|trans({}, 'CapcoAppBundle', user_locale) | raw }}:<br/>
-            <a href="{{invitationUrl}}" style="display: inline-block;margin-top: 4px;color: {{ linkText }}">{{ invitationUrl }}</a>
+        <p style="margin:0;line-height: 22px;">{{ 'or-copy-past-url'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+            :<br/>
+            <a href="{{ invitationUrl }}"
+               style="display: inline-block;margin-top: 4px;color: {{ linkText }}">{{ invitationUrl }}</a>
         </p>
     </div>
 {% endblock %}

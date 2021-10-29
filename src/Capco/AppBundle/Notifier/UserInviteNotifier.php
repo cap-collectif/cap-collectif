@@ -50,6 +50,7 @@ final class UserInviteNotifier extends BaseNotifier
             $invite,
             [
                 'organizationName' => $this->siteParams->getValue('global.site.organization_name'),
+                'invitationMessage' => $invite->getMessage(),
                 'invitationUrl' => $this->router->generate(
                     'capco_app_user_invitation',
                     ['token' => $invite->getToken()],

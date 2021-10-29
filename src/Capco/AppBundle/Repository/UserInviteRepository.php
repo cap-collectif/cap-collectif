@@ -52,6 +52,8 @@ class UserInviteRepository extends EntityRepository
         }
 
         if (UserInviteStatus::PENDING === $status) {
+            $qb->leftJoin('CapcoUserBundle:User', 'u', 'WITH', 'u.email = ui.email');
+            $qb->andWhere($qb->expr()->isNull('u'));
             $qb->andWhere(
                 $qb
                     ->expr()
@@ -79,6 +81,7 @@ class UserInviteRepository extends EntityRepository
         if (UserInviteStatus::ACCEPTED === $status) {
             $qb->innerJoin('CapcoUserBundle:User', 'u', 'WITH', 'u.email = ui.email');
         }
+
         $qb->addOrderBy('ui.createdAt', 'DESC');
 
         return $qb->getQuery()->getResult();

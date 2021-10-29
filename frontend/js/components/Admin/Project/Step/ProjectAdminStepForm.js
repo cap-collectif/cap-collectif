@@ -3,25 +3,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Modal, Button } from 'react-bootstrap';
-import { submit, reduxForm, Field, arrayPush, change, formValueSelector } from 'redux-form';
-import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
+import { Button, Modal } from 'react-bootstrap';
+import { arrayPush, change, Field, formValueSelector, reduxForm, submit } from 'redux-form';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
 import toggle from '~/components/Form/Toggle';
 import renderComponent from '~/components/Form/Field';
-import type { Dispatch, GlobalState, FeatureToggles } from '~/types';
+import type { Dispatch, FeatureToggles, GlobalState } from '~/types';
 import { PermalinkWrapper } from '../Form/ProjectAdminForm.style';
 import ProjectAdminQuestionnaireStepForm from './ProjectAdminQuestionnaireStepForm';
 import ProjectAdminConsultationStepForm from './ProjectAdminConsultationStepForm';
 import {
-  FormContainer,
-  DateContainer,
   CustomCodeArea,
+  DateContainer,
+  FormContainer,
   LabelField,
   LabelView,
   ViewsContainer,
 } from './ProjectAdminStepForm.style';
-import { createRequirements, type Requirement, formatRequirements } from './StepRequirementsList';
+import { createRequirements, formatRequirements, type Requirement } from './StepRequirementsList';
 import ProjectAdminSelectionStepForm from './ProjectAdminSelectionStepForm';
 import { type ProposalStepStatus } from './StepStatusesList';
 import type { ProjectAdminStepForm_project } from '~relay/ProjectAdminStepForm_project.graphql';
@@ -33,8 +33,8 @@ import IconListView from '~svg/list_view.svg';
 import IconGridView from '~svg/grid_view.svg';
 import IconMapView from '~svg/map_view.svg';
 import type { ProposalViewMode } from '~/redux/modules/proposal';
-import StepArticle from '~/components/Admin/Project/Step/StepArticle/StepArticle';
 import type { Articles } from '~/components/Admin/Project/Step/StepArticle/StepArticle';
+import StepArticle from '~/components/Admin/Project/Step/StepArticle/StepArticle';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
 import type { DebateType } from '~relay/DebateStepPageLogic_query.graphql';
 import Accordion from '~ds/Accordion';

@@ -58,8 +58,6 @@ class UserInvitationsAvailabilitySearchQueryResolver implements ResolverInterfac
                     'availableForUser' => true,
                     'availableForInvitation' => false,
                 ];
-
-                continue;
             }
         }
 

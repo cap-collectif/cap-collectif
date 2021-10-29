@@ -12,6 +12,7 @@ use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
@@ -46,12 +47,25 @@ class InviteUsersMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
-        list($emails, $role, $maxResults, $groupIds) = [
+        list($emails, $role, $maxResults, $groupIds, $message, $redirectionUrl) = [
             array_filter($args->offsetGet('emails')),
             $args->offsetGet('role'),
             $args->offsetGet('maxResults'),
             $args->offsetGet('groups'),
+            $args->offsetGet('message'),
+            $args->offsetGet('redirectionUrl'),
         ];
+
+        $hostname = getenv('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST');
+        if ($redirectionUrl && !preg_match('/' . $hostname . '/i', $redirectionUrl)) {
+            throw new UserError(
+                'The hostname provided does not match a platform name from Cap Collectif'
+            );
+        }
+
+        if (null !== $message && \strlen($message) >= 500) {
+            throw new UserError('The message length cannot exceed 500 characters.');
+        }
 
         $isAdmin = UserRole::ROLE_ADMIN === $role;
         $isProjectAdmin =
@@ -79,6 +93,8 @@ class InviteUsersMutation implements MutationInterface
                 ->setIsAdmin($isAdmin)
                 ->setIsProjectAdmin($isProjectAdmin)
                 ->setToken($this->tokenGenerator->generateToken())
+                ->setMessage($message)
+                ->setRedirectionUrl($redirectionUrl)
                 ->setExpiresAt((new \DateTimeImmutable())->modify(self::EXPIRES_AT_PERIOD));
 
             foreach ($groupEntities as $groupEntity) {
@@ -100,10 +116,13 @@ class InviteUsersMutation implements MutationInterface
         if (\count($toUpdateEmails) > 0) {
             $userInvites = $this->userInviteRepository->findBy(['email' => $toUpdateEmails]);
             foreach ($userInvites as $userInvite) {
-                $userInvite->setExpiresAt(new \DateTimeImmutable(self::EXPIRES_AT_PERIOD));
-                $userInvite->setIsAdmin($isAdmin);
-                $userInvite->setIsProjectAdmin($isProjectAdmin);
-                $userInvite->setGroups(new ArrayCollection($groupEntities));
+                $userInvite
+                    ->setExpiresAt(new \DateTimeImmutable(self::EXPIRES_AT_PERIOD))
+                    ->setIsAdmin($isAdmin)
+                    ->setIsProjectAdmin($isProjectAdmin)
+                    ->setGroups(new ArrayCollection($groupEntities))
+                    ->setMessage($message)
+                    ->setRedirectionUrl($redirectionUrl);
             }
             $this->em->flush();
         }

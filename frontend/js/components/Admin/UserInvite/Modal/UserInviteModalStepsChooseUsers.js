@@ -3,36 +3,20 @@ import * as React from 'react';
 import { useState } from 'react';
 import { type IntlShape, useIntl } from 'react-intl';
 import type { DropzoneFile } from 'react-dropzone';
-import { change, Field } from 'redux-form';
-import { fetchQuery, graphql } from 'react-relay';
+import { change, Field, getFormAsyncErrors } from 'redux-form';
+import { useSelector } from 'react-redux';
 import Flex from '~ui/Primitives/Layout/Flex';
 import { CsvDropZoneInput } from '~/components/Utils/CsvDropZoneInput';
 import { csvToArray } from '~/utils/csvToArray';
 import { isEmail } from '~/services/Validator';
-import type { Dispatch } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 import component from '~/components/Form/Field';
 import { type Step } from '~/components/DesignSystem/ModalSteps/ModalSteps.context';
-import environment from '~/createRelayEnvironment';
-import { emailSeparator } from '~/components/Admin/UserInvite/Modal/UserInviteModalSteps';
 import InlineList from '~ds/InlineList/InlineList';
 import Text from '~ui/Primitives/Text';
+import { FontWeight } from '~ui/Primitives/constants';
 
 type EmailInput = {| duplicateLines: number[], importedUsers: string[], invalidLines: number[] |};
-
-const USER_FETCH_QUERY = graphql`
-  query UserInviteModalStepsChooseUsersAvailabilitySearchQuery($emails: [String!]!) {
-    userInvitationsAvailabilitySearch(emails: $emails) {
-      totalCount
-      edges {
-        node {
-          email
-          availableForUser
-          availableForInvitation
-        }
-      }
-    }
-  }
-`;
 
 const getInputFromFile = (content: string): EmailInput => {
   const contentArray = csvToArray(content);
@@ -57,13 +41,23 @@ const getInputFromFile = (content: string): EmailInput => {
 };
 
 const renderUsedEmails = (usedEmails: String[], intl: IntlShape) => {
-  if (usedEmails.length > 0 && usedEmails.length < 5) {
+  if (usedEmails.length > 0) {
+    if (usedEmails.length === 1) {
+      return (
+        <Flex direction="row">
+          <Text color="gray.400">
+            {intl.formatMessage({ id: 'invitations.already-used-email' }, { email: usedEmails[0] })}
+          </Text>
+        </Flex>
+      );
+    }
+
     return (
       <Flex direction="column">
-        <Text color="gray.500">
+        <Text color="gray.400">
           {intl.formatMessage({ id: 'invitations.already-used-emails' })} &nbsp;
         </Text>
-        <InlineList color="gray.500" separator=",">
+        <InlineList color="gray.400" separator=",">
           {usedEmails.map(email => (
             <Text>{email}</Text>
           ))}
@@ -71,16 +65,7 @@ const renderUsedEmails = (usedEmails: String[], intl: IntlShape) => {
       </Flex>
     );
   }
-  if (usedEmails.length >= 5) {
-    return (
-      <Flex color="gray.500">
-        {intl.formatMessage(
-          { id: 'invitations.already-used-more-emails' },
-          { num: usedEmails.length },
-        )}
-      </Flex>
-    );
-  }
+
   return null;
 };
 
@@ -92,29 +77,21 @@ type Props = {|
 export const UserInviteModalStepsChooseUsers = ({ dispatch }: Props): React.Node => {
   const intl = useIntl();
   const [file, setFile] = useState<?DropzoneFile>(null);
-  const [usedEmails, setUsedEmails] = useState([]);
+  const asyncErrorsData =
+    useSelector((state: GlobalState) => getFormAsyncErrors('form-user-invitation')(state)) ?? null;
+  const usedEmails =
+    asyncErrorsData !== null && asyncErrorsData?._inputEmails && asyncErrorsData?._inputEmails?.data
+      ? asyncErrorsData._inputEmails.data
+      : [];
 
   return (
     <Flex direction="column" spacing={4}>
       <Field
-        onChange={(e, value) => {
-          const emails = value.split(emailSeparator);
-          const formattedInputEmails = emails.filter(email => isEmail(email));
-          if (formattedInputEmails.length > 0) {
-            fetchQuery(environment, USER_FETCH_QUERY, { emails: formattedInputEmails }).subscribe({
-              next: response => {
-                const invitationsAvailabilitiesData = response.userInvitationsAvailabilitySearch;
-                if (invitationsAvailabilitiesData.totalCount > 0) {
-                  const duplicateEmails = invitationsAvailabilitiesData.edges.map(item => {
-                    return item.node.email;
-                  });
-                  setUsedEmails(duplicateEmails);
-                }
-              },
-            });
-          }
-        }}
-        label={intl.formatMessage({ id: 'entering-email-addresses' })}
+        label={
+          <Text fontWeight={FontWeight.Semibold}>
+            {intl.formatMessage({ id: 'entering-email-addresses' })}
+          </Text>
+        }
         id="inputEmails"
         type="text"
         name="inputEmails"
@@ -122,7 +99,7 @@ export const UserInviteModalStepsChooseUsers = ({ dispatch }: Props): React.Node
         component={component}
       />
       {renderUsedEmails(usedEmails, intl)}
-      <Text fontWeight={400}>{intl.formatMessage({ id: 'import-csv-file' })}</Text>
+      <Text fontWeight={FontWeight.Semibold}>{intl.formatMessage({ id: 'import-csv-file' })}</Text>
       <Field
         name="csvEmails"
         component={CsvDropZoneInput}

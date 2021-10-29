@@ -6149,6 +6149,12 @@ input InviteUsersInput {
 
   """Users will be invited to join these groups"""
   groups: [ID]!
+
+  """The custom message of the invitation"""
+  message: String
+
+  """the URL to which the user will be redirected"""
+  redirectionUrl: URI
   clientMutationId: String
 }
 

@@ -72,6 +72,16 @@ class UserInvite
      */
     private ?string $mandrillId;
 
+    /**
+     * @ORM\Column(type="string", length=500 ,nullable=true, name="message")
+     */
+    private ?string $message;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, name="redirection_url")
+     */
+    private ?string $redirectionUrl;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -205,6 +215,30 @@ class UserInvite
     public function setMandrillId(?string $mandrillId): self
     {
         $this->mandrillId = $mandrillId;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function getRedirectionUrl(): ?string
+    {
+        return $this->redirectionUrl;
+    }
+
+    public function setRedirectionUrl(?string $redirectionUrl): self
+    {
+        $this->redirectionUrl = $redirectionUrl;
 
         return $this;
     }

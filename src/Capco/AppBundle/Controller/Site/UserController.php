@@ -83,6 +83,10 @@ class UserController extends AbstractController
 
         $email = $invitation->getEmail();
         if ($userRepository->findOneByEmail($email)) {
+            if ($redirectionUrl = $invitation->getRedirectionUrl()) {
+                return $this->redirect($redirectionUrl);
+            }
+
             return $this->redirectToRoute('app_homepage');
         }
 

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { formValueSelector, reduxForm, reset, submit } from 'redux-form';
-import { graphql, useFragment } from 'react-relay';
+import { fetchQuery, graphql, useFragment } from 'react-relay';
 import { useDispatch, useSelector } from 'react-redux';
 import { type IntlShape } from 'react-intl';
 import ModalSteps from '~ds/ModalSteps/ModalSteps';
@@ -17,9 +17,26 @@ import { ICON_NAME } from '~ds/Icon/Icon';
 import { toast } from '~ds/Toast';
 import { isEmail } from '~/services/Validator';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
+import environment from '~/createRelayEnvironment';
 
 const formName = 'form-user-invitation';
+const maxEmails = 5;
 export const emailSeparator = ',';
+
+const USER_FETCH_QUERY = graphql`
+  query UserInviteModalStepsAvailabilitySearchQuery($emails: [String!]!) {
+    userInvitationsAvailabilitySearch(emails: $emails) {
+      totalCount
+      edges {
+        node {
+          email
+          availableForUser
+          availableForInvitation
+        }
+      }
+    }
+  }
+`;
 
 const onSubmit = (values, dispatch, props) => {
   const emails = values.csvEmails.importedUsers.concat(values.inputEmails.split(emailSeparator));
@@ -28,6 +45,8 @@ const onSubmit = (values, dispatch, props) => {
     emails,
     role: values.role,
     groups: values.groups.map(group => group.value),
+    message: values.message,
+    redirectionUrl: values.redirectionUrl,
   };
   return InviteUserMutation.commit({
     input,
@@ -43,7 +62,7 @@ const onSubmit = (values, dispatch, props) => {
     });
 };
 
-const asyncValidate = (values: { inputEmails: string }) => {
+const asyncValidate = (values: { inputEmails: string, redirectionUrl: string }) => {
   if (values.inputEmails !== '') {
     const emails = values.inputEmails.split(emailSeparator);
     const formattedWrongInputEmails = emails.filter(email => !isEmail(email));
@@ -52,8 +71,56 @@ const asyncValidate = (values: { inputEmails: string }) => {
         reject({ inputEmails: 'input-emails-wrong-format' });
       });
     }
-    return new Promise(resolve => resolve());
+
+    if (emails.length > maxEmails) {
+      return new Promise((resolve, reject) => {
+        reject({ inputEmails: 'input-emails-max-reached' });
+      });
+    }
+
+    const formattedInputEmails = emails.filter(email => isEmail(email));
+    if (formattedInputEmails.length > 0) {
+      return new Promise((resolve, reject) => {
+        fetchQuery(environment, USER_FETCH_QUERY, { emails: formattedInputEmails }).subscribe({
+          next: response => {
+            const invitationsAvailabilitiesData = response.userInvitationsAvailabilitySearch;
+            if (invitationsAvailabilitiesData.totalCount > 0) {
+              const duplicateEmails = invitationsAvailabilitiesData.edges.filter(
+                item => !item.node.availableForUser,
+              );
+              if (duplicateEmails.length > 0) {
+                if (emails.length > 1 && duplicateEmails.length === emails.length) {
+                  reject({ inputEmails: 'input-email-already-used' });
+                }
+
+                if (
+                  (emails.length > 0 && duplicateEmails.length === 1) ||
+                  (emails.length > 0 && duplicateEmails.length < emails.length)
+                ) {
+                  reject({
+                    _inputEmails: {
+                      data: duplicateEmails.map(item => item.node.email),
+                    },
+                  });
+                }
+              }
+            }
+            resolve();
+          },
+        });
+      });
+    }
   }
+
+  if (values.redirectionUrl !== '') {
+    const hostname = new RegExp(window.location.hostname);
+    if (!hostname.test(values.redirectionUrl)) {
+      return new Promise((resolve, reject) => {
+        reject({ redirectionUrl: 'input-redirection-url-match-error' });
+      });
+    }
+  }
+
   return new Promise(resolve => resolve());
 };
 
@@ -130,9 +197,10 @@ export const UserInviteModalSteps = ({
           </ModalSteps.Body>
 
           <ModalSteps.Footer>
-            <ModalSteps.Footer.BackButton variantColor="primary" />
-            <ModalSteps.Footer.ContinueButton variant="primary" disabled={!hasEmails || invalid} />
+            <ModalSteps.Footer.BackButton />
+            <ModalSteps.Footer.ContinueButton disabled={!hasEmails || invalid} />
             <ModalSteps.Footer.ValidationButton
+              disabled={invalid}
               onClick={() => {
                 dispatch(submit(formName));
                 hide();
@@ -156,8 +224,10 @@ export default (reduxForm({
       importedUsers: [],
       invalidLines: [],
     },
+    message: '',
+    redirectionUrl: '',
   },
   onSubmit,
   asyncValidate,
-  asyncBlurFields: ['inputEmails'],
+  asyncBlurFields: ['inputEmails', 'redirectionUrl'],
 })(UserInviteModalSteps): React.AbstractComponent<BeforeProps>);

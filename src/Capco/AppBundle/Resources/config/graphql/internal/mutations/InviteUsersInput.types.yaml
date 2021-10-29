@@ -16,3 +16,9 @@ InviteUsersInput:
             groups:
                 type: '[ID]!'
                 description: 'Users will be invited to join these groups'
+            message:
+                type: 'String'
+                description: 'The custom message of the invitation'
+            redirectionUrl:
+                type: 'URI'
+                description: 'the URL to which the user will be redirected'
