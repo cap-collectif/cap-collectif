@@ -68,6 +68,8 @@ describe('<ProposalLeafletMap />', () => {
     proposalForm: { $fragmentRefs, $refType, objectType: 'PROPOSAL', contribuable: true },
     projectType: 'PROPOSAL',
     isCollectStep: true,
+    btnBgColor: '#4EE323',
+    btnTextColor: '##FFF',
   };
 
   it('should render a map with only valid markers', () => {

@@ -135,8 +135,12 @@ describe('<ProposalStepPageHeader />', () => {
     },
   };
 
-  it('renders with proposal context in selection step', () => {
+  beforeEach(() => {
     jest.spyOn(hooks, 'useDispatch').mockImplementation(() => [{}, jest.fn()]);
+    jest.spyOn(hooks, 'useSelector').mockImplementation(() => [{}, jest.fn()]);
+  });
+
+  it('renders with proposal context in selection step', () => {
     const wrapper = shallow(<ProposalStepPageHeader step={props.step1} displayMode="grid" />);
     expect(wrapper).toMatchSnapshot();
   });

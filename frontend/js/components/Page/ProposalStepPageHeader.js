@@ -3,14 +3,14 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { reset } from 'redux-form';
 import {
   isInterpellationContextFromStep,
   isEstablishmentFormStep,
   getProposalLabelByType,
 } from '~/utils/interpellationLabelHelper';
-import type { Dispatch } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql';
 import ProposalCreateModal from '../Proposal/Create/ProposalCreateModal';
 import Button from '~ds/Button/Button';
@@ -30,6 +30,10 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const isMobile = useIsMobile();
   const dispatch = useDispatch<Dispatch>();
+  const { btnBgColor, btnTextColor } = useSelector((state: GlobalState) => ({
+    btnBgColor: state.default.parameters['color.btn.primary.bg'],
+    btnTextColor: state.default.parameters['color.btn.primary.text'],
+  }));
   const projectType = step.project && step.project.type ? step.project.type.title : null;
   const queryCount = step.proposals.totalCount;
   const total = step.allProposals.totalCount;
@@ -121,8 +125,8 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
                 m="auto"
                 maxWidth="300px"
                 disabled={!step.form?.contribuable}
-                variant="primary"
-                variantColor="primary"
+                bg={btnBgColor}
+                color={btnTextColor}
                 variantSize={isMobile ? 'big' : 'small'}
                 onClick={onOpen}
                 id="add-proposal"

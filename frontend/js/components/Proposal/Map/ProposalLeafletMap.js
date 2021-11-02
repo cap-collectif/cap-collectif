@@ -66,6 +66,8 @@ type Props = {|
   projectType: ?string,
   proposalForm: ProposalLeafletMap_proposalForm,
   isCollectStep?: boolean,
+  btnBgColor: string,
+  btnTextColor: string,
 |};
 
 const goToPosition = (mapRef: MapRef, address: ?MapCenterObject) =>
@@ -139,6 +141,8 @@ export const ProposalLeafletMap = ({
   projectType,
   proposalForm,
   isCollectStep,
+  btnBgColor,
+  btnTextColor,
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
@@ -259,8 +263,8 @@ export const ProposalLeafletMap = ({
           className="popup-proposal">
           <LoginOverlay placement="top">
             <Button
-              variant="primary"
-              variantColor="primary"
+              bg={btnBgColor}
+              color={btnTextColor}
               variantSize="small"
               onClick={onOpen}
               disabled={!proposalForm?.contribuable}>
@@ -379,6 +383,8 @@ ProposalLeafletMap.defaultProps = {
 const mapStateToProps = (state: State) => ({
   mapTokens: state.user.mapTokens,
   shouldDisplayPictures: state.default.features.display_pictures_in_depository_proposals_list,
+  btnBgColor: state.default.parameters['color.btn.primary.bg'],
+  btnTextColor: state.default.parameters['color.btn.primary.text'],
 });
 
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalLeafletMap);

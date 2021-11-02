@@ -148,8 +148,6 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
           maxWidth="300px"
           onClick={[Function]}
           textAlign="center"
-          variant="primary"
-          variantColor="primary"
           variantSize="small"
           width={
             Array [
@@ -314,8 +312,6 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
           maxWidth="300px"
           onClick={[Function]}
           textAlign="center"
-          variant="primary"
-          variantColor="primary"
           variantSize="small"
           width={
             Array [
