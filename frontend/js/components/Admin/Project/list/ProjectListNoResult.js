@@ -19,6 +19,7 @@ type Props = {|
     +author?: ?any,
     +type?: ?string,
   |},
+  +isOnlyProjectAdmin: boolean,
 |};
 
 const ProjectListNoResult = ({
@@ -28,6 +29,7 @@ const ProjectListNoResult = ({
   term,
   modalInitialValues,
   viewerId,
+  isOnlyProjectAdmin,
 }: Props): React.Node => {
   const intl = useIntl();
   return (
@@ -58,6 +60,7 @@ const ProjectListNoResult = ({
           term={term}
           query={query}
           initialValues={modalInitialValues}
+          isOnlyProjectAdmin={isOnlyProjectAdmin}
           noResult
         />
       </Flex>

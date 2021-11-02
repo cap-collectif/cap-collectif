@@ -127,6 +127,7 @@ const ProjectListPage = ({ queryReference, isAdmin }: Props): React.Node => {
           modalInitialValues={modalInitialValues}
           query={query}
           viewerId={query.viewer.id}
+          isOnlyProjectAdmin={query.viewer.isOnlyProjectAdmin}
         />
       )}
     </Flex>
