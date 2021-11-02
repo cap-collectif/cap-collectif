@@ -41,6 +41,7 @@ const FRAGMENT = graphql`
       position
       step {
         title
+        __typename
         exportStepUrl
         exportContributorsUrl
       }
@@ -52,7 +53,22 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     await downloadCSV(url, props.intl);
   });
 };
-
+const getSteptrad = step => {
+  if (step?.step.__typename === 'QuestionnaireStep') {
+    return (
+      <FormattedHTMLMessage
+        id="admin.project.list.export.step.exportStepUrl"
+        values={{ index: step?.position, stepTitle: step?.step?.title }}
+      />
+    );
+  }
+  return (
+    <FormattedHTMLMessage
+      id="admin.project.list.export.step.exportStepUrl.alt"
+      values={{ index: step?.position, stepTitle: step?.step?.title }}
+    />
+  );
+};
 const ProjectModalExportSteps = ({
   project: projectFragment,
   handleSubmit,
@@ -65,12 +81,7 @@ const ProjectModalExportSteps = ({
         return {
           id: step?.step?.exportStepUrl,
           useIdAsValue: true,
-          label: (
-            <FormattedHTMLMessage
-              id="admin.project.list.export.step.exportStepUrl"
-              values={{ index: step?.position, stepTitle: step?.step?.title }}
-            />
-          ),
+          label: getSteptrad(step),
         };
       })
     : [
@@ -86,12 +97,7 @@ const ProjectModalExportSteps = ({
               {
                 id: step?.step?.exportStepUrl,
                 useIdAsValue: true,
-                label: (
-                  <FormattedHTMLMessage
-                    id="admin.project.list.export.step.exportStepUrl"
-                    values={{ index: step?.position, stepTitle: step?.step?.title }}
-                  />
-                ),
+                label: getSteptrad(step),
               },
               {
                 id: step?.step?.exportContributorsUrl,
