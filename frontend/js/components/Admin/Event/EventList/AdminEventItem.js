@@ -152,7 +152,7 @@ const AdminEventItem = ({ event: eventFragment, isAdmin }: Props): React.Node =>
               }}
             />
           )}
-          {event.reviewStatus !== 'DELETED' && <AdminEventModalConfirmationDelete event={event} />}
+          <AdminEventModalConfirmationDelete event={event} />
         </Flex>
       </Td>
     </React.Fragment>

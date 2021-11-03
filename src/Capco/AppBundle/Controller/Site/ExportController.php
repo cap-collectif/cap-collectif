@@ -2,8 +2,12 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Box\Spout\Common\Type;
+use Box\Spout\Common\Creator\HelperFactory;
+use Box\Spout\Common\Helper\GlobalFunctionsHelper;
 use Box\Spout\Writer\Common\Creator;
+use Box\Spout\Writer\Common\Entity\Options;
+use Box\Spout\Writer\CSV\Manager\OptionsManager as CSVOptionsManager;
+use Box\Spout\Writer\CSV\Writer as CSVWriter;
 use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
@@ -14,7 +18,10 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\Utils\Text;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
@@ -34,6 +41,7 @@ use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,6 +61,7 @@ class ExportController extends Controller
     private GlobalIdResolver $globalIdResolver;
     private KernelInterface $kernel;
     private string $locale;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         GraphQlAclListener $aclListener,
@@ -64,6 +73,7 @@ class ExportController extends Controller
         AbstractStepRepository $abstractStepRepository,
         GlobalIdResolver $globalIdResolver,
         KernelInterface $kernel,
+        AuthorizationCheckerInterface $authorizationChecker,
         string $exportDir,
         string $locale
     ) {
@@ -78,15 +88,28 @@ class ExportController extends Controller
         $this->globalIdResolver = $globalIdResolver;
         $this->kernel = $kernel;
         $this->locale = $locale;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
      * @Route("/export-event-participants/{eventId}", name="app_export_event_participants", options={"i18n" = false})
-     * @Entity("event", options={"mapping": {"eventId": "id"}})
-     * @Security("has_role('ROLE_ADMIN')")
      */
-    public function downloadEventParticipantsAction(Event $event): StreamedResponse
-    {
+    public function downloadEventParticipantsAction(
+        string $eventId,
+        EventRepository $eventRepository,
+        EntityManagerInterface $em
+    ): StreamedResponse {
+        $user = $this->getUser();
+
+        if ($user->isProjectAdmin()) {
+            if ($em->getFilters()->isEnabled('softdeleted')) {
+                $em->getFilters()->disable('softdeleted');
+            }
+        }
+
+        $event = $eventRepository->find($eventId);
+        $this->denyAccessUnlessGranted(EventVoter::EXPORT, $event);
+
         $this->aclListener->disableAcl();
 
         $data = $this->executor
@@ -105,7 +128,15 @@ class ExportController extends Controller
             '-registeredAttendees-' .
             $event->getSlug() .
             '.csv';
-        $writer = Creator\WriterFactory::createFromType(Type::CSV);
+
+        $optionsManager = new CSVOptionsManager();
+        $optionsManager->setOption(Options::FIELD_DELIMITER, ';');
+        $globalFunctionsHelper = new GlobalFunctionsHelper();
+
+        $helperFactory = new HelperFactory();
+
+        $writer = new CSVWriter($optionsManager, $globalFunctionsHelper, $helperFactory);
+
         $response = new StreamedResponse(function () use ($writer, $data, $event) {
             $writer->openToFile('php://output');
             $writer->addRow(

@@ -68,6 +68,7 @@ mappings:
                 id:
                     type: keyword
         vip: { type: boolean }
+        isOnlyProjectAdmin: { type: boolean }
         participationsCountByProject: &ContributionProject
             type: nested
             properties:
@@ -84,6 +85,7 @@ mappings:
                                 userType:
                                     properties:
                                         id: { type: keyword }
+                                isOnlyProjectAdmin: { type: boolean }
                         locale: &Locale
                             properties:
                                 id: { type: keyword }

@@ -125,23 +125,9 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "review": null,
-          "title": "Evenement owned par un owner",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
           "review": null,
           "title": "Il n'y a pas que le budget participatif dans la vie",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "review": null,
-          "title": "evenement cosmopolite",
         },
       },
       Object {
@@ -170,7 +156,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;

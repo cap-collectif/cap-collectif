@@ -236,6 +236,7 @@ export const EventForm = ({
   const isDisabled = (adminCanEdit = false): boolean => {
     if (
       query.viewer.isSuperAdmin ||
+      query.viewer.isOnlyProjectAdmin ||
       (query.viewer.isAdmin && !features.allow_users_to_propose_events)
     ) {
       return false;
@@ -650,7 +651,7 @@ export const EventForm = ({
               </div>
             </div>
           )}
-          {query.viewer.isAdmin && !isFrontendView && (
+          {(query.viewer.isAdmin || query.viewer.isOnlyProjectAdmin) && !isFrontendView && (
             <div>
               <div className="box-header pt-0">
                 <h3 className="box-title">

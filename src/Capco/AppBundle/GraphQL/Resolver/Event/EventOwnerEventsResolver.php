@@ -53,7 +53,8 @@ class EventOwnerEventsResolver implements ResolverInterface
                     $orderBy,
                     $affiliations,
                     $viewer,
-                    $onlyWhenAuthor
+                    $onlyWhenAuthor,
+                    true
                 );
             });
 

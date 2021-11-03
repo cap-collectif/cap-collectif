@@ -16,6 +16,7 @@ class EventVoter extends Voter
     const VIEW_ADMIN = 'viewAdmin';
     const EDIT = 'edit';
     const DELETE = 'delete';
+    const EXPORT = 'export';
 
     private Manager $manager;
 
@@ -33,6 +34,7 @@ class EventVoter extends Voter
                 self::VIEW_ADMIN,
                 self::EDIT,
                 self::DELETE,
+                self::EXPORT,
             ])
         ) {
             return false;
@@ -67,6 +69,8 @@ class EventVoter extends Voter
                 return $this->canEdit($event, $viewer);
             case self::DELETE:
                 return $this->canDelete($event, $viewer);
+            case self::EXPORT:
+                return $this->canExport($event, $viewer);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -105,6 +109,18 @@ class EventVoter extends Voter
     private function canEdit(Event $event, ?User $viewer): bool
     {
         return $this->canDelete($event, $viewer);
+    }
+
+    private function canExport(Event $event, ?User $viewer): bool
+    {
+        if ($viewer->isAdmin()) {
+            return true;
+        }
+        if ($viewer->isProjectAdmin() && $event->getOwner() === $viewer) {
+            return true;
+        }
+
+        return false;
     }
 
     private function canDelete(Event $event, ?User $viewer): bool

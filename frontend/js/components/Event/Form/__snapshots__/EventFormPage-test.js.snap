@@ -44,6 +44,7 @@ exports[`<EventAdminFormPage /> it renders correctly with translations 1`] = `
           "$refType": null,
           "viewer": Object {
             "isAdmin": false,
+            "isOnlyProjectAdmin": false,
             "isSuperAdmin": false,
           },
         }
@@ -121,6 +122,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
           "$refType": null,
           "viewer": Object {
             "isAdmin": false,
+            "isOnlyProjectAdmin": false,
             "isSuperAdmin": false,
           },
         }
@@ -198,6 +200,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
           "$refType": null,
           "viewer": Object {
             "isAdmin": false,
+            "isOnlyProjectAdmin": false,
             "isSuperAdmin": false,
           },
         }
@@ -275,6 +278,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
           "$refType": null,
           "viewer": Object {
             "isAdmin": false,
+            "isOnlyProjectAdmin": false,
             "isSuperAdmin": false,
           },
         }
@@ -352,6 +356,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
           "$refType": null,
           "viewer": Object {
             "isAdmin": false,
+            "isOnlyProjectAdmin": false,
             "isSuperAdmin": true,
           },
         }
@@ -422,6 +427,7 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
           "$refType": null,
           "viewer": Object {
             "isAdmin": false,
+            "isOnlyProjectAdmin": false,
             "isSuperAdmin": true,
           },
         }

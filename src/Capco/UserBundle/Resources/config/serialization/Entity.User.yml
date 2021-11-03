@@ -61,3 +61,6 @@ Capco\UserBundle\Entity\User:
     elasticsearchTypeName:
       serialized_name: objectType
       groups: [Elasticsearch]
+    isOnlyProjectAdmin:
+      serialized_name: isOnlyProjectAdmin
+      groups: [Elasticsearch]

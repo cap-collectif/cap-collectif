@@ -102,7 +102,7 @@ class ChangeEventMutation implements MutationInterface
         $this->indexer->index(ClassUtils::getClass($event), $event->getId());
         $this->indexer->finishBulk();
 
-        if (!$viewer->isAdmin()) {
+        if (!$viewer->isProjectAdmin()) {
             $this->publisher->publish(
                 'event.update',
                 new Message(

@@ -283,6 +283,7 @@ export class EventFormPage extends React.Component<Props, State> {
     }
     if (
       query.viewer.isSuperAdmin ||
+      query.viewer.isOnlyProjectAdmin ||
       (event?.review?.status !== 'REFUSED' && event?.deletedAt === null && query.viewer.isAdmin)
     ) {
       return (
@@ -401,6 +402,7 @@ export default createFragmentContainer(EventFormCreatePage, {
       viewer {
         isSuperAdmin
         isAdmin
+        isOnlyProjectAdmin
       }
     }
   `,

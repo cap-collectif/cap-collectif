@@ -92,6 +92,7 @@ class UserNormalizer implements
                     'userType' => $object->getUserType()
                         ? ['id' => $object->getUserType()->getId()]
                         : null,
+                    'isOnlyProjectAdmin' => $object->isOnlyProjectAdmin(),
                 ];
             }
         }

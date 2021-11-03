@@ -729,7 +729,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "8dcf6cc9df92b3686c3a699e08416b24",
+            "cacheID": "b73a3ee5b29776702a9e625656cc60de",
             "id": null,
             "metadata": Object {},
             "name": "EventFormPageAppQuery",
@@ -776,6 +776,7 @@ fragment EventFormPage_query_k3vj0 on Query {
   viewer {
     isSuperAdmin
     isAdmin
+    isOnlyProjectAdmin
     id
   }
 }

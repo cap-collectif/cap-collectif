@@ -86,7 +86,7 @@ class GlobalIdResolver
             $user = $userOrAnon;
         }
 
-        if ($user && $user->isAdmin()) {
+        if ($user && $user->isProjectAdmin()) {
             // If user is an admin, we allow to retrieve softdeleted nodes
             if ($this->entityManager->getFilters()->isEnabled('softdeleted')) {
                 $this->entityManager->getFilters()->disable('softdeleted');

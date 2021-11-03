@@ -19,7 +19,12 @@ class StepEventsResolver implements ResolverInterface
 
     public function __invoke(AbstractStep $step, Arg $input): Connection
     {
-        $events = $step->getEvents()->toArray();
+        $events = $step
+            ->getEvents()
+            ->filter(function ($event) {
+                return $event->isEnabledOrApproved();
+            })
+            ->toArray();
 
         usort($events, function ($a, $b) {
             return $a->getStartAt() <=> $b->getStartAt();

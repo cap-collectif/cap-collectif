@@ -30,6 +30,7 @@ const defaultProps = {
     viewer: {
       isSuperAdmin: true,
       isAdmin: false,
+      isOnlyProjectAdmin: false,
     },
     $fragmentRefs,
     $refType,
@@ -60,6 +61,7 @@ describe('<EventAdminFormPage />', () => {
         viewer: {
           isSuperAdmin: false,
           isAdmin: false,
+          isOnlyProjectAdmin: false,
         },
         $fragmentRefs,
         $refType,
@@ -101,6 +103,7 @@ describe('<EventAdminFormPage />', () => {
         viewer: {
           isSuperAdmin: false,
           isAdmin: false,
+          isOnlyProjectAdmin: false,
         },
         $fragmentRefs,
         $refType,
@@ -133,6 +136,7 @@ describe('<EventAdminFormPage />', () => {
         viewer: {
           isSuperAdmin: false,
           isAdmin: false,
+          isOnlyProjectAdmin: false,
         },
         $fragmentRefs,
         $refType,
@@ -180,6 +184,7 @@ describe('<EventAdminFormPage />', () => {
         viewer: {
           isSuperAdmin: false,
           isAdmin: false,
+          isOnlyProjectAdmin: false,
         },
         $fragmentRefs,
         $refType,

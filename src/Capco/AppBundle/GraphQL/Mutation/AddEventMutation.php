@@ -111,15 +111,14 @@ class AddEventMutation implements MutationInterface
         }
 
         $event = new Event();
+        $event->setOwner($viewer);
+        $event->setAuthor($author);
 
-        if ($viewer->isAdmin() || $viewer->isProjectAdmin()) {
-            $event->setOwner($viewer);
-            $event->setAuthor($author);
+        if ($viewer->isProjectAdmin()) {
             $event->setEnabled(true);
         }
 
         if ($viewer->isOnlyUser()) {
-            $event->setAuthor($viewer);
             $event->setReview(new EventReview());
         }
 
@@ -158,7 +157,7 @@ class AddEventMutation implements MutationInterface
 
         $this->indexer->index(ClassUtils::getClass($event), $event->getId());
         $this->indexer->finishBulk();
-        if (!$viewer->isAdmin()) {
+        if (!$viewer->isProjectAdmin()) {
             $this->publisher->publish(
                 'event.create',
                 new Message(

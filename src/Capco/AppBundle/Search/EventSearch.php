@@ -55,7 +55,8 @@ class EventSearch extends Search
         array $orderBy,
         ?array $affiliations = null,
         ?User $user = null,
-        ?bool $onlyWhenAuthor = false
+        ?bool $onlyWhenAuthor = false,
+        ?bool $showProjectAdmin = false
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
@@ -103,6 +104,10 @@ class EventSearch extends Search
                 default:
                     break;
             }
+        }
+
+        if (!$showProjectAdmin) {
+            $boolQuery->addFilter(new Term(['author.isOnlyProjectAdmin' => ['value' => false]]));
         }
 
         $filters = $this->getFilters($providedFilters);

@@ -348,7 +348,7 @@ InternalQuery:
                         description: 'Search by term.'
             availableLocales:
                 description: 'List all locales on the platform.'
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 args:
                     includeDisabled:
                         type: 'Boolean'

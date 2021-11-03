@@ -19,23 +19,8 @@ Object {
           ],
         },
       },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "translations": Array [
-            Object {
-              "locale": "en-GB",
-              "title": "cosmopolite event",
-            },
-            Object {
-              "locale": "fr-FR",
-              "title": "evenement cosmopolite",
-            },
-          ],
-        },
-      },
     ],
-    "totalCount": 2,
+    "totalCount": 1,
   },
 }
 `;
@@ -215,37 +200,11 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "translations": Array [
-            Object {
-              "locale": "fr-FR",
-              "title": "Evenement owned par un owner",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
           "translations": Array [
             Object {
               "locale": "fr-FR",
               "title": "Il n'y a pas que le budget participatif dans la vie",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "translations": Array [
-            Object {
-              "locale": "en-GB",
-              "title": "cosmopolite event",
-            },
-            Object {
-              "locale": "fr-FR",
-              "title": "evenement cosmopolite",
             },
           ],
         },
@@ -284,7 +243,7 @@ Object {
         },
       },
     ],
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;
@@ -308,12 +267,6 @@ Object {
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
-          "isPresential": true,
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
           "isPresential": true,
         },
       },
@@ -390,7 +343,7 @@ Object {
         },
       },
     ],
-    "totalCount": 16,
+    "totalCount": 15,
   },
 }
 `;
@@ -413,12 +366,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "isPresential": false,
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
           "isPresential": false,
         },
@@ -430,7 +377,7 @@ Object {
         },
       },
     ],
-    "totalCount": 5,
+    "totalCount": 4,
   },
 }
 `;
@@ -625,19 +572,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement owned par un owner",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
           "projects": Array [
             Object {
@@ -647,15 +581,6 @@ Object {
           "review": null,
           "themes": Array [],
           "title": "Il n'y a pas que le budget participatif dans la vie",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "projects": Array [],
-          "review": null,
-          "themes": Array [],
-          "title": "evenement cosmopolite",
         },
       },
       Object {
@@ -701,7 +626,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;
@@ -896,19 +821,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement owned par un owner",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
           "projects": Array [
             Object {
@@ -918,15 +830,6 @@ Object {
           "review": null,
           "themes": Array [],
           "title": "Il n'y a pas que le budget participatif dans la vie",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "projects": Array [],
-          "review": null,
-          "themes": Array [],
-          "title": "evenement cosmopolite",
         },
       },
       Object {
@@ -972,7 +875,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;
@@ -1167,19 +1070,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement owned par un owner",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
           "projects": Array [
             Object {
@@ -1189,15 +1079,6 @@ Object {
           "review": null,
           "themes": Array [],
           "title": "Il n'y a pas que le budget participatif dans la vie",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "projects": Array [],
-          "review": null,
-          "themes": Array [],
-          "title": "evenement cosmopolite",
         },
       },
       Object {
@@ -1243,7 +1124,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;
@@ -1452,19 +1333,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement owned par un owner",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
           "projects": Array [
             Object {
@@ -1474,15 +1342,6 @@ Object {
           "review": null,
           "themes": Array [],
           "title": "Il n'y a pas que le budget participatif dans la vie",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "projects": Array [],
-          "review": null,
-          "themes": Array [],
-          "title": "evenement cosmopolite",
         },
       },
       Object {
@@ -1528,7 +1387,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 7,
+    "totalCount": 5,
   },
 }
 `;
@@ -1566,7 +1425,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxODgzNTk5MjAwMDAwO2k6MTtpOjE4NjcxODY4MDAwMDA7aToyO2k6MTQyMDY3MTYwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;
@@ -1604,7 +1463,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxNTY1MTI4ODAwMDAwO2k6MTtpOjkyMjMzNzIwMzY4NTQ3NzU4MDc7aToyO2k6MTQyMTAxNzIwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;
@@ -1642,7 +1501,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToyMDU3NjEyNDAwMDAwO2k6MTtpOjE5NzA0MzEyMDAwMDA7aToyO2k6MTQyMDIzOTYwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;
@@ -1680,7 +1539,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxOTU5MjAyODAwMDAwO2k6MTtpOjIyMTE3NTAwMDAwMDA7aToyO2k6MTQyMDQ5ODgwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;
@@ -2093,31 +1952,6 @@ Object {
       Object {
         "node": Object {
           "author": Object {
-            "id": "VXNlcjp1c2VyVGhlbw==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": null,
-          },
-          "body": "Event body",
-          "createdAt": "2020-05-28 00:00:00",
-          "enabled": true,
-          "endAt": null,
-          "fullAddress": "",
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "lat": null,
-          "link": null,
-          "lng": null,
-          "startAt": "2020-05-28 00:00:00",
-          "title": "Evenement owned par un owner",
-          "updatedAt": null,
-          "url": "https://capco.test/events/evenement-owned-par-un-owner",
-          "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": Object {
             "id": "VXNlcjp1c2VyU3B5bA==",
             "responses": Object {
               "edges": Array [],
@@ -2139,25 +1973,6 @@ Object {
           "title": "Il n'y a pas que le budget participatif dans la vie",
           "updatedAt": null,
           "url": "https://capco.test/events/il-ny-a-pas-que-le-budget-participatif-dans-la-vie",
-          "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": null,
-          "body": "va donc, cosmopolite",
-          "createdAt": "2020-02-28 00:00:00",
-          "enabled": true,
-          "endAt": null,
-          "fullAddress": "",
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "lat": null,
-          "link": null,
-          "lng": null,
-          "startAt": "2020-02-17 00:00:00",
-          "title": "evenement cosmopolite",
-          "updatedAt": null,
-          "url": "https://capco.test/events/evenement-cosmopolite",
           "zipCode": null,
         },
       },
@@ -2247,7 +2062,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 21,
+    "totalCount": 19,
   },
 }
 `;
