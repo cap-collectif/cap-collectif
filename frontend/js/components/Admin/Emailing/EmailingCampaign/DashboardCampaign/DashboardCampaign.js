@@ -284,16 +284,16 @@ export default createPaginationContainer(
               }
             }
           }
-          campaignsAll: emailingCampaigns(status: null) {
+          campaignsAll: emailingCampaigns(status: null, affiliations: $affiliations) {
             totalCount
           }
-          campaignsDraft: emailingCampaigns(status: DRAFT) {
+          campaignsDraft: emailingCampaigns(status: DRAFT, affiliations: $affiliations) {
             totalCount
           }
-          campaignsSent: emailingCampaigns(status: SENT) {
+          campaignsSent: emailingCampaigns(status: SENT, affiliations: $affiliations) {
             totalCount
           }
-          campaignsPlanned: emailingCampaigns(status: PLANNED) {
+          campaignsPlanned: emailingCampaigns(status: PLANNED, affiliations: $affiliations) {
             totalCount
           }
         }

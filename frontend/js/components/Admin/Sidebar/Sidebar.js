@@ -392,7 +392,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
-            {features.unstable__emailing && isAdmin ? (
+            {features.unstable__emailing ? (
               <SidebarAccordionItem id="emailing">
                 <SidebarButton
                   icon={ICON_NAME.ENVELOPE_O}
@@ -402,7 +402,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
                   <SidebarLink text="admin-menu-campaign-list" href="/admin/mailingCampaign/list" />
                   <SidebarLink text="admin-menu-emailing-list" href="/admin/mailingList/list" />
-                  {features.unstable__emailing_parameters ? (
+                  {features.unstable__emailing_parameters && isAdmin ? (
                     <SidebarLink
                       text="admin-menu-parameters"
                       href="/admin/mailingParameters/list"

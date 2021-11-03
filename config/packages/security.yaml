@@ -22,6 +22,8 @@ security:
         - { path: ^/admin/capco/app/questionnaire, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/dashboard, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/core/get-autocomplete-items, roles: ROLE_PROJECT_ADMIN }
+        - { path: ^/admin/mailingList/, roles: ROLE_PROJECT_ADMIN }
+        - { path: ^/admin/mailingCampaign/, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
     providers:
         fos_userbundle:

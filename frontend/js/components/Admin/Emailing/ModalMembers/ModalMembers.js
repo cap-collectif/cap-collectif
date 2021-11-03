@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import { Modal } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { type ModalMembers_mailingList } from '~relay/ModalMembers_mailingList.graphql';
 import { ModalContainer } from '~/components/Admin/Emailing/MailParameter/common.style';
 import environment, { graphqlError } from '~/createRelayEnvironment';
@@ -9,6 +10,7 @@ import type { ModalMembersQueryResponse } from '~relay/ModalMembersQuery.graphql
 import Members from '~/components/Admin/Emailing/ModalMembers/Members';
 import Spinner from '~ds/Spinner/Spinner';
 import Flex from '~ui/Primitives/Layout/Flex';
+import type { GlobalState } from '~/types';
 
 type Props = {|
   onClose: () => void,
@@ -40,9 +42,12 @@ const renderMembers = ({
 };
 
 export const ModalMembers = ({ show, onClose, mailingList }: Props) => {
+  const { user } = useSelector((state: GlobalState) => state.user);
+
   if (!mailingList) return null;
 
   const { id, name } = mailingList;
+  const isAdmin = user ? user.isAdmin : false;
 
   return (
     <ModalContainer
@@ -58,15 +63,21 @@ export const ModalMembers = ({ show, onClose, mailingList }: Props) => {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ModalMembersQuery($count: Int, $cursor: String, $mailingListId: ID!) {
+            query ModalMembersQuery(
+              $count: Int
+              $cursor: String
+              $mailingListId: ID!
+              $isAdmin: Boolean!
+            ) {
               mailingList: node(id: $mailingListId) {
                 ... on MailingList {
-                  ...Members_mailingList @arguments(count: $count, cursor: $cursor)
+                  ...Members_mailingList
+                    @arguments(count: $count, cursor: $cursor, isAdmin: $isAdmin)
                 }
               }
             }
           `}
-          variables={{ mailingListId: id, count: 10 }}
+          variables={{ mailingListId: id, count: 10, isAdmin }}
           render={({ error, props, retry }) => renderMembers({ error, props, retry })}
         />
       </Modal.Body>

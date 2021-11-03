@@ -61,7 +61,7 @@ export const Members = ({ mailingList, relay }: Props) => {
           .filter(Boolean)
           .map(member => (
             <AppBox as="li" key={member.id} mb={3}>
-              {member.email}
+              {member.email ?? member.username}
             </AppBox>
           ))}
       </InfiniteScroll>
@@ -74,7 +74,11 @@ export default createPaginationContainer(
   {
     mailingList: graphql`
       fragment Members_mailingList on MailingList
-        @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
+        @argumentDefinitions(
+          count: { type: "Int!" }
+          cursor: { type: "String" }
+          isAdmin: { type: "Boolean!" }
+        ) {
         id
         allMembers: users(consentInternalCommunicationOnly: false) {
           totalCount
@@ -88,7 +92,8 @@ export default createPaginationContainer(
           edges {
             node {
               id
-              email
+              email @include(if: $isAdmin)
+              username
             }
           }
         }
@@ -111,18 +116,24 @@ export default createPaginationContainer(
         ...prevVars,
       };
     },
-    getVariables(props: Props, { count, cursor }, fragmentVariables) {
+    getVariables(props: Props, { count, cursor, isAdmin }, fragmentVariables) {
       return {
         ...fragmentVariables,
         count,
         cursor,
+        isAdmin,
         mailingListId: props.mailingList.id,
       };
     },
     query: graphql`
-      query MembersPaginatedQuery($mailingListId: ID!, $count: Int!, $cursor: String) {
+      query MembersPaginatedQuery(
+        $mailingListId: ID!
+        $count: Int!
+        $cursor: String
+        $isAdmin: Boolean!
+      ) {
         mailingList: node(id: $mailingListId) {
-          ...Members_mailingList @arguments(count: $count, cursor: $cursor)
+          ...Members_mailingList @arguments(count: $count, cursor: $cursor, isAdmin: $isAdmin)
         }
       }
     `,

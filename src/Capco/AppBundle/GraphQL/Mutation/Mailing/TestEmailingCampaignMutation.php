@@ -65,6 +65,7 @@ class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
             'baseUrl' => $this->router->generate('app_homepage'),
             'siteUrl' => $this->router->generate('app_homepage'),
             'siteName' => $this->siteParams->getValue('global.site.fullname'),
+            'unsubscribeUrl' => $this->router->generate('app_homepage'),
         ]);
     }
 

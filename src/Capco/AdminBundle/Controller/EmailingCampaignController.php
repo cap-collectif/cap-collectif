@@ -3,8 +3,8 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,7 +53,17 @@ class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDCont
 
     private function getEmailingCampaignFromGlobalId(string $globalId): ?EmailingCampaign
     {
-        return $this->admin->getObject(GlobalId::fromGlobalId($globalId)['id']);
+        $campaign = $this->admin->getObject(GlobalId::fromGlobalId($globalId)['id']);
+
+        $viewer = $this->getUser();
+        if (
+            !($viewer instanceof User) ||
+            (!$viewer->isAdmin() && $campaign->getOwner() !== $viewer)
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $campaign;
     }
 
     private function renderEdit(EmailingCampaign $emailingCampaign): Response

@@ -22,12 +22,14 @@ const baseProps = {
           node: {
             id: 'user-123',
             email: 'jean@cap-collectif.com',
+            username: 'jean',
           },
         },
         {
           node: {
             id: 'user-456',
             email: 'jean-peut-plus@cap-collectif.com',
+            username: 'jpp',
           },
         },
       ],
