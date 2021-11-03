@@ -265,6 +265,7 @@ export const ProposalLeafletMap = ({
             <Button
               bg={btnBgColor}
               color={btnTextColor}
+              opacity={!proposalForm?.contribuable ? 0.5 : 1}
               variantSize="small"
               onClick={onOpen}
               disabled={!proposalForm?.contribuable}>

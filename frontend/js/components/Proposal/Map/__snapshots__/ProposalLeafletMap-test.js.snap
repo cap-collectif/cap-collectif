@@ -76,6 +76,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
           color="##FFF"
           disabled={false}
           onClick={[Function]}
+          opacity={1}
           variantSize="small"
         >
           proposal.add
@@ -359,6 +360,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
           color="##FFF"
           disabled={false}
           onClick={[Function]}
+          opacity={1}
           variantSize="small"
         >
           proposal.add

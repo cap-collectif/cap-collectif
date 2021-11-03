@@ -147,6 +147,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
           m="auto"
           maxWidth="300px"
           onClick={[Function]}
+          opacity={1}
           textAlign="center"
           variantSize="small"
           width={
@@ -311,6 +312,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
           m="auto"
           maxWidth="300px"
           onClick={[Function]}
+          opacity={1}
           textAlign="center"
           variantSize="small"
           width={

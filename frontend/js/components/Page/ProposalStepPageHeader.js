@@ -125,6 +125,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
                 m="auto"
                 maxWidth="300px"
                 disabled={!step.form?.contribuable}
+                opacity={!step.form?.contribuable ? 0.5 : 1}
                 bg={btnBgColor}
                 color={btnTextColor}
                 variantSize={isMobile ? 'big' : 'small'}
