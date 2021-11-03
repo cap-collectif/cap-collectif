@@ -17,7 +17,9 @@ class QuestionnaireStepFormType extends AbstractStepFormType
             ->add('questionnaire', RelayNodeType::class, [
                 'class' => Questionnaire::class,
             ])
-            ->add('footer');
+            ->add('footer')
+            ->add('isAnonymousParticipationAllowed')
+            ->add('collectParticipantsEmail');
     }
 
     public function configureOptions(OptionsResolver $resolver)

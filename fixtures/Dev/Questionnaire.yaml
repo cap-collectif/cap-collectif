@@ -182,3 +182,16 @@ Capco\AppBundle\Entity\Questionnaire:
         type: 'QUESTIONNAIRE'
         privateResult: false
         notificationsConfiguration: '@questionnaireNotificationConfigurationConditionRequise'
+    questionnaireAnonymous:
+        id: questionnaireAnonymous
+        title: Questionnaire avec participants anonyme
+        description: Questionnaire avec participants anonyme
+        step: '@qStepProjectAnonymousQuestionnaire'
+        multipleRepliesAllowed: true
+        anonymousAllowed: true
+        acknowledgeReplies: 1
+        type: 'QUESTIONNAIRE'
+        privateResult: true
+        owner: '@user1'
+        createdAt: <(new \DateTime('2020-09-11'))>
+        notificationsConfiguration: '@qNotifConfigAnonymousQuestionnaire'

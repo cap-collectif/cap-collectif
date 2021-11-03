@@ -727,3 +727,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         questionnaire: '@qAvecDesConditionsRequises'
         question: '@simpleQuestionQuestionnaireConditionRequise'
         position: 2
+    qaqProjectWithAnonymousQuestionnaire1:
+        questionnaire: '@questionnaireAnonymous'
+        question: '@simpleQuestionAnonymousQuestionnaire'
+        position: 1

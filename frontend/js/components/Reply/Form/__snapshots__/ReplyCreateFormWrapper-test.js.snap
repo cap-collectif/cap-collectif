@@ -11,6 +11,9 @@ exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form
         "id": "123",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": false,
+        },
         "viewerReplies": Object {
           "totalCount": 1,
         },
@@ -52,6 +55,9 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         "id": "123",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": false,
+        },
         "viewerReplies": Object {
           "totalCount": 2,
         },
@@ -102,6 +108,9 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         "id": "123",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": false,
+        },
         "viewerReplies": Object {
           "totalCount": 1,
         },
@@ -124,6 +133,34 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
         "id": "123",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": false,
+        },
+        "viewerReplies": Object {
+          "totalCount": 1,
+        },
+      }
+    }
+    reply={null}
+    setIsShow={[MockFunction]}
+  />
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+`;
+
+exports[`<ReplyCreateFormWrapper /> should render no alert when anonymous particpants are allowed 1`] = `
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "contribuable": true,
+        "id": "123",
+        "multipleRepliesAllowed": true,
+        "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": true,
+        },
         "viewerReplies": Object {
           "totalCount": 1,
         },

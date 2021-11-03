@@ -502,3 +502,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1402
         title: Autres conditions requise (séparer par une ,)
         type: 0 # text
+    simpleQuestionAnonymousQuestionnaire:
+        id: 1403
+        title: Comment ça va ?
+        type: 0 # number

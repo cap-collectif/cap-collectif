@@ -28,6 +28,24 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0V2l0aEFub255bW91c1F1ZXN0aW9ubmFpcmU=",
+          "title": "Projet avec questionnaire anonyme",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "contributions": Object {
             "totalCount": 3,
           },
           "contributionsCount": 1,
@@ -43,7 +61,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -63,7 +81,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -82,32 +100,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 2,
-          },
-          "contributionsCount": 2,
-          "contributors": Object {
-            "totalCount": 1,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/cafe.png",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0Q2FmZXRpZXI=",
-          "title": "Sauvons nos cafés",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjc=",
       "hasNextPage": true,
     },
-    "totalCount": 40,
+    "totalCount": 41,
   },
 }
 `;
@@ -207,7 +205,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 35,
+    "totalCount": 36,
   },
 }
 `;
@@ -260,6 +258,24 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0V2l0aEFub255bW91c1F1ZXN0aW9ubmFpcmU=",
+          "title": "Projet avec questionnaire anonyme",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "contributions": Object {
             "totalCount": 3,
           },
           "contributionsCount": 1,
@@ -275,7 +291,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -294,32 +310,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 0,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 0,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/oculus.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0T2N1bHVzUXVlc3Q=",
-          "title": "Débat sur l'Oculus Quest",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 35,
+    "totalCount": 36,
   },
 }
 `;

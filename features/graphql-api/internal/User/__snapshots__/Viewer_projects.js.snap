@@ -51,6 +51,18 @@ Object {
           "node": Object {
             "authors": Array [
               Object {
+                "username": "lbrunet",
+              },
+            ],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
                 "username": "Théo QP",
               },
             ],
@@ -403,7 +415,7 @@ Object {
           },
         },
       ],
-      "totalCount": 41,
+      "totalCount": 42,
     },
   },
 }
@@ -728,6 +740,12 @@ Object {
         Object {
           "node": Object {
             "publishedAt": "2020-06-19 13:00:00",
+            "title": "Projet avec questionnaire anonyme",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-19 13:00:00",
             "title": "Projet avec administrateur de projet",
           },
         },
@@ -750,7 +768,7 @@ Object {
           },
         },
       ],
-      "totalCount": 41,
+      "totalCount": 42,
     },
   },
 }

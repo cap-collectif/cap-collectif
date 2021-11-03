@@ -82,6 +82,7 @@ class Manager
     public const import_proposals = 'import_proposals';
     public const unstable__analytics_page = 'unstable__analytics_page';
     public const unstable_project_admin = 'unstable_project_admin';
+    public const unstable_anonymous_questionnaire = 'unstable_anonymous_questionnaire';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -179,6 +180,7 @@ class Manager
         self::import_proposals,
         self::unstable__analytics_page,
         self::unstable_project_admin,
+        self::unstable_anonymous_questionnaire,
     ];
 
     protected ToggleManager $toggleManager;

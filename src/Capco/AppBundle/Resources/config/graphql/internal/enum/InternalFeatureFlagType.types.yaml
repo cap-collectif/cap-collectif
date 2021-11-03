@@ -153,3 +153,6 @@ InternalFeatureFlagType:
             noindex_on_profiles:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::noindex_on_profiles")'
                 description: 'Whether or not profiles can be indexed.'
+            unstable_anonymous_questionnaire:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable_anonymous_questionnaire")'
+                description: 'Whether or not admin can create anonymous questionnaire.'

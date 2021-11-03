@@ -88,3 +88,7 @@ Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfi
         onQuestionnaireReplyCreate: true
         onQuestionnaireReplyUpdate: true
         onQuestionnaireReplyDelete: true
+    qNotifConfigAnonymousQuestionnaire:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false

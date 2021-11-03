@@ -942,6 +942,20 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 ],
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isAnonymousParticipationAllowed",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "collectParticipantsEmail",
+                                "storageKey": null,
+                              },
                             ],
                             "type": "QuestionnaireStep",
                           },
@@ -1551,7 +1565,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "498711efad70e9348efb23cf12f4d650",
+        "cacheID": "d69e223a39979d68214f8f11713dac69",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1781,6 +1795,8 @@ fragment ProjectAdminForm_project on Project {
           }
         }
       }
+      isAnonymousParticipationAllowed
+      collectParticipantsEmail
     }
     ... on DebateStep {
       isAnonymousParticipationAllowed
@@ -2876,6 +2892,20 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 ],
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isAnonymousParticipationAllowed",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "collectParticipantsEmail",
+                                "storageKey": null,
+                              },
                             ],
                             "type": "QuestionnaireStep",
                           },
@@ -3485,7 +3515,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "498711efad70e9348efb23cf12f4d650",
+        "cacheID": "d69e223a39979d68214f8f11713dac69",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -3715,6 +3745,8 @@ fragment ProjectAdminForm_project on Project {
           }
         }
       }
+      isAnonymousParticipationAllowed
+      collectParticipantsEmail
     }
     ... on DebateStep {
       isAnonymousParticipationAllowed

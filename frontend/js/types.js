@@ -106,6 +106,7 @@ export type FeatureToggles = {
   unstable_project_admin: ?boolean,
   http_redirects: ?boolean,
   noindex_on_profiles: ?boolean,
+  unstable_anonymous_questionnaire: ?boolean,
 };
 
 export type FeatureToggle = $Keys<FeatureToggles>;

@@ -28,3 +28,9 @@ InternalQuestionnaireStep:
                 description: 'Requirements for answering the questionnaire'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
+            isAnonymousParticipationAllowed:
+                description: 'Does the questionnaire allow anonymous users to participate ?'
+                type: 'Boolean!'
+            collectParticipantsEmail:
+                description: 'Does the questionnaire allow to collect anonymous users email ?'
+                type: 'Boolean!'

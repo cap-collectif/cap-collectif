@@ -15,6 +15,7 @@ describe('<ReplyForm />', () => {
       totalCount: 3,
       viewerMeetsTheRequirements: true,
     },
+    isAnonymousParticipationAllowed: false,
     $fragmentRefs,
   };
   const stepWithRequirementNotFullFill = {
@@ -25,6 +26,7 @@ describe('<ReplyForm />', () => {
       totalCount: 3,
       viewerMeetsTheRequirements: false,
     },
+    isAnonymousParticipationAllowed: false,
     $fragmentRefs,
   };
 
@@ -475,6 +477,21 @@ describe('<ReplyForm />', () => {
         user={{
           id: 'connectedUser',
         }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly when anonymous participation is allowed', () => {
+    const wrapper = shallow(
+      <ReplyForm
+        questionnaire={{
+          step: { ...step, isAnonymousParticipationAllowed: true },
+          questions: [requiredText],
+          ...questionnaireProps,
+        }}
+        reply={null}
+        {...props}
       />,
     );
     expect(wrapper).toMatchSnapshot();

@@ -5734,6 +5734,9 @@ enum FeatureFlagType {
 
   """Whether or not profiles can be indexed."""
   noindex_on_profiles
+
+  """Whether or not admin can create anonymous questionnaire."""
+  unstable_anonymous_questionnaire
 }
 
 """Require a firstname"""
@@ -8716,12 +8719,13 @@ input ProjectStepInput {
   defaultStatus: ID
   questionnaire: ID
   footer: HTML
+  collectParticipantsEmail: Boolean
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
-  isAnonymousParticipationAllowed: Boolean
   articles: [DebateArticleInput]
   debateType: DebateType
   debateContent: String
+  isAnonymousParticipationAllowed: Boolean
 }
 
 """Label of a Project."""
@@ -11261,6 +11265,12 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
 
   """A questionnaire associated with the step."""
   questionnaire: Questionnaire
+
+  """Does the questionnaire allow anonymous users to participate ?"""
+  isAnonymousParticipationAllowed: Boolean!
+
+  """Does the questionnaire allow to collect anonymous users email ?"""
+  collectParticipantsEmail: Boolean!
 }
 
 """Available questionnaire types."""

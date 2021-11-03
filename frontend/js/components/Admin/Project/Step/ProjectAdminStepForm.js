@@ -6,6 +6,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Modal } from 'react-bootstrap';
 import { arrayPush, change, Field, formValueSelector, reduxForm, submit } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import styled from 'styled-components';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
 import toggle from '~/components/Form/Toggle';
 import renderComponent from '~/components/Form/Field';
@@ -40,6 +41,9 @@ import type { DebateType } from '~relay/DebateStepPageLogic_query.graphql';
 import Accordion from '~ds/Accordion';
 import Heading from '~ui/Primitives/Heading';
 import DebateWidgetForm from '~/components/Admin/Project/Step/DebateWidgetForm/DebateWidgetForm';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import Text from '~ui/Primitives/Text';
+import AppBox from '~/components/Ui/Primitives/AppBox';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -103,6 +107,7 @@ type Props = {|
     },
     debateType?: DebateType,
     debateContent?: string,
+    collectParticipantsEmail?: boolean,
   },
   intl: IntlShape,
   formName: string,
@@ -345,6 +350,13 @@ const renderDateContainer = (formName: string, intl: IntlShape) => (
   </DateContainer>
 );
 
+const AppBoxNoMargin = styled(AppBox)`
+  .form-group,
+  .form-group label {
+    margin-bottom: 0 !important;
+  }
+`;
+
 export function ProjectAdminStepForm({
   step,
   handleSubmit,
@@ -373,6 +385,9 @@ export function ProjectAdminStepForm({
   const canSetDisplayMode =
     (step.__typename === 'SelectionStep' || step.__typename === 'CollectStep') &&
     (isGridViewEnabled || isListViewEnabled || isMapViewEnabled);
+
+  const unstable_anonymous_questionnaire = useFeatureFlag('unstable_anonymous_questionnaire');
+
 
   React.useEffect(() => {
     // mainView is not in the reduxForm's initialValues because the proposalForm is selected after.
@@ -474,6 +489,33 @@ export function ProjectAdminStepForm({
                 />
               )}
               {!timeless && renderDateContainer(formName, intl)}
+            </>
+          )}
+          {step.__typename === 'QuestionnaireStep' && unstable_anonymous_questionnaire && (
+            <>
+              <Field
+                component={toggle}
+                name="isAnonymousParticipationAllowed"
+                id="step-isAnonymousParticipationAllowed"
+                normalize={val => !!val}
+                label={<FormattedMessage id="allow-debate-anonymous-participation" />}
+              />
+              {isAnonymousParticipationAllowed && (
+                <AppBoxNoMargin ml={4} mb={5}>
+                  <Field
+                    name="collectParticipantsEmail"
+                    component={renderComponent}
+                    type="checkbox"
+                    id="collectParticipantsEmail">
+                    <Text color="gray.900">
+                      {intl.formatMessage({ id: 'collect-particpants-email' })}
+                    </Text>
+                  </Field>
+                  <Text ml="2.5rem" color="gray.700">
+                    {intl.formatMessage({ id: 'collect-particpants-email-help' })}
+                  </Text>
+                </AppBoxNoMargin>
+              )}
             </>
           )}
           {step.__typename === 'DebateStep' && (
@@ -739,6 +781,9 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       // QuestionnaireStep
       questionnaire: step?.questionnaire || null,
       footer: step?.footer ? step.footer : null,
+      collectParticipantsEmail: step?.collectParticipantsEmail
+        ? step.collectParticipantsEmail
+        : undefined,
       // ConsultationStep
       consultations: step?.consultations || [],
       requirements: step ? createRequirements(step) : [],

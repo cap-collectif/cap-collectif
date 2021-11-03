@@ -147,3 +147,7 @@ Capco\AppBundle\Entity\ProjectAuthor:
         createdAt: <(new \DateTime('2020-09-01'))>
         user: '@userTheo'
         project: '@projectWithOwner'
+    pa38:
+        createdAt: <(new \DateTime('2020-09-01'))>
+        user: '@user1'
+        project: '@projectWithAnonymousQuestionnaire'

@@ -106,6 +106,7 @@ export const features: FeatureToggles = {
   http_redirects: false,
   unstable_project_admin: false,
   noindex_on_profiles: false,
+  unstable_anonymous_questionnaire: false,
 };
 
 export const initialState: State = {

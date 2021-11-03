@@ -22,52 +22,39 @@ const ReplyCreateFormWrapperContainer: StyledComponent<{}, {}, HTMLDivElement> =
   margin-top: 35px;
 `;
 
-export class ReplyCreateFormWrapper extends React.Component<Props> {
-  formIsDisabled() {
-    const { questionnaire, user } = this.props;
-    return (
-      !questionnaire.contribuable ||
-      !user ||
-      (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
-      (questionnaire.viewerReplies &&
-        questionnaire.viewerReplies.totalCount > 0 &&
-        !questionnaire.multipleRepliesAllowed)
-    );
-  }
+export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props) => {
+  const isAnonymousParticipationAllowed = questionnaire?.step?.isAnonymousParticipationAllowed;
 
-  render() {
-    const { questionnaire, user, setIsShow } = this.props;
+  const formIsDisabled = questionnaire.contribuable &&
+    questionnaire.viewerReplies &&
+    questionnaire.viewerReplies.totalCount > 0 &&
+    !questionnaire.multipleRepliesAllowed;
 
-    return (
-      <ReplyCreateFormWrapperContainer>
-        {questionnaire.contribuable && !user ? (
-          <Alert bsStyle="warning" className="hidden-print text-center">
+  return (
+    <ReplyCreateFormWrapperContainer>
+      {questionnaire.contribuable && !user && !isAnonymousParticipationAllowed ? (
+        <Alert bsStyle="warning" className="hidden-print text-center">
+          <strong>
+            <FormattedMessage id="reply.not_logged_in.error" />
+          </strong>
+          <RegistrationButton bsStyle="primary" style={{ marginLeft: '10px' }} />
+          <LoginButton style={{ marginLeft: 5 }} />
+        </Alert>
+      ) : (formIsDisabled && (
+          <Alert bsStyle="warning" className="hidden-print">
             <strong>
-              <FormattedMessage id="reply.not_logged_in.error" />
+              <FormattedMessage id="reply.user_has_reply.reason" />
             </strong>
-            <RegistrationButton bsStyle="primary" style={{ marginLeft: '10px' }} />
-            <LoginButton style={{ marginLeft: 5 }} />
+            <p>
+              <FormattedMessage id="reply.user_has_reply.error" />
+            </p>
           </Alert>
-        ) : (
-          questionnaire.contribuable &&
-          questionnaire.viewerReplies &&
-          questionnaire.viewerReplies.totalCount > 0 &&
-          !questionnaire.multipleRepliesAllowed && (
-            <Alert bsStyle="warning" className="hidden-print">
-              <strong>
-                <FormattedMessage id="reply.user_has_reply.reason" />
-              </strong>
-              <p>
-                <FormattedMessage id="reply.user_has_reply.error" />
-              </p>
-            </Alert>
-          )
-        )}
-        <ReplyForm questionnaire={questionnaire} reply={null} setIsShow={setIsShow} />
-      </ReplyCreateFormWrapperContainer>
-    );
-  }
-}
+        )
+      )}
+      <ReplyForm questionnaire={questionnaire} reply={null} setIsShow={setIsShow} />
+    </ReplyCreateFormWrapperContainer>
+  );
+};
 
 const mapStateToProps = (state: GlobalState) => ({
   user: state.user.user,
@@ -85,6 +72,9 @@ export default createFragmentContainer(container, {
       contribuable
       viewerReplies @include(if: $isAuthenticated) {
         totalCount
+      }
+      step {
+        isAnonymousParticipationAllowed
       }
       ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
     }

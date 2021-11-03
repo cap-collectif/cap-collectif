@@ -182,7 +182,9 @@ const onSubmit = (
                 ? s.timeless
                 : undefined,
             isAnonymousParticipationAllowed:
-              sTypename === 'DebateStep' ? s.isAnonymousParticipationAllowed : undefined,
+              sTypename === 'DebateStep' || sTypename === 'QuestionnaireStep'
+                ? s.isAnonymousParticipationAllowed
+                : undefined,
             startAt:
               s.startAt && !s.timeless ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
             endAt: s.endAt && !s.timeless ? moment(s.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
@@ -747,6 +749,8 @@ export default createFragmentContainer(injectIntl(container), {
               }
             }
           }
+          isAnonymousParticipationAllowed
+          collectParticipantsEmail
         }
         ... on DebateStep {
           isAnonymousParticipationAllowed

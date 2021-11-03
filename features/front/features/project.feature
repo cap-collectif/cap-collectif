@@ -9,9 +9,9 @@ Scenario: Can not sort or filter if feature projects_form is disabled
 Scenario: Project can be sorted by published date
   Given feature "projects_form" is enabled
   And I visited "projects page"
-  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MQ==']" to appear on current page
+  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MjY=']" to appear on current page
   And I select "opinion.sort.last" from "project-sorting"
-  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MQ==']" to appear on current page
+  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MjY=']" to appear on current page
   And I click the ".see-more-projects-button.ml-15" element
   And I wait 2 seconds
   Then "Transformation numérique des relations" should be before "Projet vide" for selector ".project-preview .card__title a"
@@ -22,7 +22,7 @@ Scenario: Project can be sorted by contributions number
   Given feature "projects_form" is enabled
   And I visited "projects page"
   And I select "opinion.sort.last" from "project-sorting"
-  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MQ==']" to appear on current page
+  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MjY=']" to appear on current page
   And I select "argument.sort.popularity" from "project-sorting"
   And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0NQ==']" to appear on current page
   And I click the ".see-more-projects-button.ml-15" element

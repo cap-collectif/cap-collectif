@@ -283,6 +283,10 @@ Object {
       "enabled": true,
       "type": "unstable_project_admin",
     },
+    Object {
+      "enabled": false,
+      "type": "unstable_anonymous_questionnaire",
+    },
   ],
 }
 `;

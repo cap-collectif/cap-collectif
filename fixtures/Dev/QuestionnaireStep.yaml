@@ -283,3 +283,11 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
             | Le galand, pour toute besogne,
         startAt: <(new \DateTime('2014-09-27'))>
         endAt: <(new \DateTime('2024-09-27'))>
+    qStepProjectAnonymousQuestionnaire:
+        id: qStepProjectAnonymousQuestionnaire
+        title: Questionnaire step anonymous
+        label: Questionnaire step anonymous
+        body: hey
+        isAnonymousParticipationAllowed: true
+        startAt: <(new \DateTime('2020-09-11'))>
+        endAt: <(new \DateTime('2024-09-27'))>

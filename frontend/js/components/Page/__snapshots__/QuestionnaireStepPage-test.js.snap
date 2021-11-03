@@ -188,6 +188,13 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "isAnonymousParticipationAllowed",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "title",
                         "storageKey": null,
                       },
@@ -1635,7 +1642,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "ede2bfc4ebdb3dded9529528f879610c",
+        "cacheID": "f237c10b9afc56eca438badb709e77e6",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -1771,6 +1778,10 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
   }
+  step {
+    isAnonymousParticipationAllowed
+    id
+  }
   ...ReplyForm_questionnaire_39ngnn
 }
 
@@ -1794,6 +1805,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
         viewerMeetsTheRequirements @include(if: $isAuthenticated)
       }
     }
+    isAnonymousParticipationAllowed
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
@@ -2201,6 +2213,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "isAnonymousParticipationAllowed",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "title",
                         "storageKey": null,
                       },
@@ -3648,7 +3667,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "ede2bfc4ebdb3dded9529528f879610c",
+        "cacheID": "f237c10b9afc56eca438badb709e77e6",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -3784,6 +3803,10 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
   }
+  step {
+    isAnonymousParticipationAllowed
+    id
+  }
   ...ReplyForm_questionnaire_39ngnn
 }
 
@@ -3807,6 +3830,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
         viewerMeetsTheRequirements @include(if: $isAuthenticated)
       }
     }
+    isAnonymousParticipationAllowed
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
@@ -4214,6 +4238,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "isAnonymousParticipationAllowed",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "title",
                         "storageKey": null,
                       },
@@ -5661,7 +5692,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "ede2bfc4ebdb3dded9529528f879610c",
+        "cacheID": "f237c10b9afc56eca438badb709e77e6",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -5797,6 +5828,10 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
   }
+  step {
+    isAnonymousParticipationAllowed
+    id
+  }
   ...ReplyForm_questionnaire_39ngnn
 }
 
@@ -5820,6 +5855,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
         viewerMeetsTheRequirements @include(if: $isAuthenticated)
       }
     }
+    isAnonymousParticipationAllowed
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
@@ -6227,6 +6263,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "isAnonymousParticipationAllowed",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "title",
                         "storageKey": null,
                       },
@@ -7674,7 +7717,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "ede2bfc4ebdb3dded9529528f879610c",
+        "cacheID": "f237c10b9afc56eca438badb709e77e6",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -7810,6 +7853,10 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
   }
+  step {
+    isAnonymousParticipationAllowed
+    id
+  }
   ...ReplyForm_questionnaire_39ngnn
 }
 
@@ -7833,6 +7880,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
         viewerMeetsTheRequirements @include(if: $isAuthenticated)
       }
     }
+    isAnonymousParticipationAllowed
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount

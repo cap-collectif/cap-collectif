@@ -45,17 +45,29 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with isOnlyProje
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        id="questionnaire_anonymous"
-        name="anonymousAllowed"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="reply-anonymously"
-          values={Object {}}
-        />
-      </Field>
+      <QuestionnaireAdminParametersForm__AppBoxNoMargin>
+        <Field
+          component={[Function]}
+          id="questionnaire_anonymous"
+          name="anonymousAllowed"
+          type="checkbox"
+        >
+          <Text
+            color="gray.900"
+            fontWeight={600}
+          >
+            allow-user-to-hide-his-contribution
+          </Text>
+        </Field>
+        <Text
+          color="gray.700"
+          fontSize={2}
+          mb={4}
+          ml="2.5rem"
+        >
+          allow-user-to-hide-his-contribution-help
+        </Text>
+      </QuestionnaireAdminParametersForm__AppBoxNoMargin>
       <Field
         component={[Function]}
         id="questionnaire_multiple"
@@ -155,17 +167,29 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with private res
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        id="questionnaire_anonymous"
-        name="anonymousAllowed"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="reply-anonymously"
-          values={Object {}}
-        />
-      </Field>
+      <QuestionnaireAdminParametersForm__AppBoxNoMargin>
+        <Field
+          component={[Function]}
+          id="questionnaire_anonymous"
+          name="anonymousAllowed"
+          type="checkbox"
+        >
+          <Text
+            color="gray.900"
+            fontWeight={600}
+          >
+            allow-user-to-hide-his-contribution
+          </Text>
+        </Field>
+        <Text
+          color="gray.700"
+          fontSize={2}
+          mb={4}
+          ml="2.5rem"
+        >
+          allow-user-to-hide-his-contribution-help
+        </Text>
+      </QuestionnaireAdminParametersForm__AppBoxNoMargin>
       <Field
         component={[Function]}
         id="questionnaire_multiple"
@@ -309,17 +333,29 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with private res
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        id="questionnaire_anonymous"
-        name="anonymousAllowed"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="reply-anonymously"
-          values={Object {}}
-        />
-      </Field>
+      <QuestionnaireAdminParametersForm__AppBoxNoMargin>
+        <Field
+          component={[Function]}
+          id="questionnaire_anonymous"
+          name="anonymousAllowed"
+          type="checkbox"
+        >
+          <Text
+            color="gray.900"
+            fontWeight={600}
+          >
+            allow-user-to-hide-his-contribution
+          </Text>
+        </Field>
+        <Text
+          color="gray.700"
+          fontSize={2}
+          mb={4}
+          ml="2.5rem"
+        >
+          allow-user-to-hide-his-contribution-help
+        </Text>
+      </QuestionnaireAdminParametersForm__AppBoxNoMargin>
       <Field
         component={[Function]}
         id="questionnaire_multiple"
@@ -463,17 +499,29 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with public resu
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        id="questionnaire_anonymous"
-        name="anonymousAllowed"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="reply-anonymously"
-          values={Object {}}
-        />
-      </Field>
+      <QuestionnaireAdminParametersForm__AppBoxNoMargin>
+        <Field
+          component={[Function]}
+          id="questionnaire_anonymous"
+          name="anonymousAllowed"
+          type="checkbox"
+        >
+          <Text
+            color="gray.900"
+            fontWeight={600}
+          >
+            allow-user-to-hide-his-contribution
+          </Text>
+        </Field>
+        <Text
+          color="gray.700"
+          fontSize={2}
+          mb={4}
+          ml="2.5rem"
+        >
+          allow-user-to-hide-his-contribution-help
+        </Text>
+      </QuestionnaireAdminParametersForm__AppBoxNoMargin>
       <Field
         component={[Function]}
         id="questionnaire_multiple"
@@ -617,17 +665,29 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with public resu
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        id="questionnaire_anonymous"
-        name="anonymousAllowed"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="reply-anonymously"
-          values={Object {}}
-        />
-      </Field>
+      <QuestionnaireAdminParametersForm__AppBoxNoMargin>
+        <Field
+          component={[Function]}
+          id="questionnaire_anonymous"
+          name="anonymousAllowed"
+          type="checkbox"
+        >
+          <Text
+            color="gray.900"
+            fontWeight={600}
+          >
+            allow-user-to-hide-his-contribution
+          </Text>
+        </Field>
+        <Text
+          color="gray.700"
+          fontSize={2}
+          mb={4}
+          ml="2.5rem"
+        >
+          allow-user-to-hide-his-contribution-help
+        </Text>
+      </QuestionnaireAdminParametersForm__AppBoxNoMargin>
       <Field
         component={[Function]}
         id="questionnaire_multiple"

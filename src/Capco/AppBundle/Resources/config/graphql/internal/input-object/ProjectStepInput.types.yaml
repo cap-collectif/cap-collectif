@@ -83,17 +83,20 @@ ProjectStepInput:
                 type: 'ID'
             footer:
                 type: 'HTML'
+            collectParticipantsEmail:
+                type: 'Boolean'
             # RankingStep
             nbOpinionsToDisplay:
                 type: 'Int'
             nbVersionsToDisplay:
                 type: 'Int'
             # DebateStep
-            isAnonymousParticipationAllowed:
-                type: 'Boolean'
             articles:
                 type: '[DebateArticleInput]'
             debateType:
                 type: 'DebateType'
             debateContent:
                 type: 'String'
+            # DebateStep && QuestionnaireStep
+            isAnonymousParticipationAllowed:
+                type: 'Boolean'

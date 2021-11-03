@@ -37,6 +37,9 @@ const baseProps = {
       totalCount: 1,
     },
     phoneConfirmationRequired: false,
+    step: {
+      isAnonymousParticipationAllowed: false,
+    },
   },
   setIsShow: jest.fn(),
 };
@@ -65,10 +68,24 @@ const props = {
     ...baseProps,
     user: null,
   },
+  anonymousParticipantsAllowed: {
+    ...baseProps,
+    questionnaire: {
+      ...baseProps.questionnaire,
+      step: {
+        isAnonymousParticipationAllowed: true,
+      },
+    },
+  },
 };
 describe('<ReplyCreateFormWrapper />', () => {
   it('should render no alert an an enabled form', () => {
     const wrapper = shallow(<ReplyCreateFormWrapper {...props.basic} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render no alert when anonymous particpants are allowed', () => {
+    const wrapper = shallow(<ReplyCreateFormWrapper {...props.anonymousParticipantsAllowed} />);
     expect(wrapper).toMatchSnapshot();
   });
 

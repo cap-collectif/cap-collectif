@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { ButtonGroup, Label, Panel } from 'react-bootstrap';
+import { Label, Panel } from 'react-bootstrap';
 import {
   change as changeRedux,
   Field,
@@ -214,6 +214,10 @@ export class ReplyForm extends React.Component<Props> {
   formIsDisabled() {
     const { questionnaire, user, reply } = this.props;
 
+    if (questionnaire?.step?.isAnonymousParticipationAllowed) {
+      return false;
+    }
+
     return (
       !questionnaire.contribuable ||
       !user ||
@@ -293,7 +297,7 @@ export class ReplyForm extends React.Component<Props> {
             memoize={memoizeAvailableQuestions}
           />
 
-          {questionnaire.anonymousAllowed && (
+          {questionnaire.anonymousAllowed && !!user && (
             <>
               <hr className="mb-30" />
               <Field
@@ -311,44 +315,36 @@ export class ReplyForm extends React.Component<Props> {
 
           {(!reply || reply.viewerCanUpdate) && (
             <div className="btn-toolbar btn-box sticky">
-              {(!reply || isDraft) && questionnaire.type === 'QUESTIONNAIRE' && (
-                <ButtonGroup className="btn-group">
-                  <SubmitButton
-                    type="submit"
-                    id={`${form}-submit-create-draft-reply`}
-                    disabled={pristine || submitting || disabled || invalidRequirements}
-                    bsStyle="primary"
-                    label={submitting ? 'global.loading' : 'global.save_as_draft'}
-                    onSubmit={() => {
-                      analytics.track('submit_draft_reply_click', {
-                        stepName: questionnaire.step?.title || '',
-                      });
-                      dispatch(changeRedux(form, 'draft', true));
-                    }}
-                  />
-                </ButtonGroup>
-              )}
-              <ButtonGroup className="btn-group">
+              {(!reply || isDraft) && questionnaire.type === 'QUESTIONNAIRE' && !!user && (
                 <SubmitButton
                   type="submit"
-                  id={`${form}-submit-create-reply`}
-                  bsStyle="info"
-                  disabled={
-                    invalidRequirements ||
-                    invalid ||
-                    submitting ||
-                    disabled ||
-                    (!isDraft && pristine)
-                  }
-                  label={submitting ? 'global.loading' : 'global.send'}
+                  id={`${form}-submit-create-draft-reply`}
+                  disabled={pristine || submitting || disabled || invalidRequirements}
+                  bsStyle="primary"
+                  label={submitting ? 'global.loading' : 'global.save_as_draft'}
                   onSubmit={() => {
-                    analytics.track('submit_reply_click', {
+                    analytics.track('submit_draft_reply_click', {
                       stepName: questionnaire.step?.title || '',
                     });
-                    dispatch(changeRedux(form, 'draft', false));
+                    dispatch(changeRedux(form, 'draft', true));
                   }}
                 />
-              </ButtonGroup>
+              )}
+              <SubmitButton
+                type="submit"
+                id={`${form}-submit-create-reply`}
+                bsStyle="info"
+                disabled={
+                  invalidRequirements || invalid || submitting || disabled || (!isDraft && pristine)
+                }
+                label={submitting ? 'global.loading' : 'global.send'}
+                onSubmit={() => {
+                  analytics.track('submit_reply_click', {
+                    stepName: questionnaire.step?.title || '',
+                  });
+                  dispatch(changeRedux(form, 'draft', false));
+                }}
+              />
             </div>
           )}
 
@@ -439,6 +435,7 @@ export default createFragmentContainer(containerWithRouter, {
             viewerMeetsTheRequirements @include(if: $isAuthenticated)
           }
         }
+        isAnonymousParticipationAllowed
       }
       viewerReplies @include(if: $isAuthenticated) {
         totalCount
