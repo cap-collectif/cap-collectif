@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useIntl, FormattedHTMLMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
 import Heading from '~ui/Primitives/Heading';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -22,20 +22,18 @@ const AdminEventListNoResult = (): React.Node => {
       borderRadius="normal">
       <SpotIcon name={SPOT_ICON_NAME.CALENDAR} size="lg" />
 
-      <Flex direction="column" color="blue.900" align="flex-start" maxWidth="30%">
+      <Flex direction="column" color="blue.900" align="flex-start" width="300px">
         <Heading as="h3" mb={2}>
-          <FormattedHTMLMessage id="admin.event.noresult.heading" />
+          {intl.formatMessage({ id: 'admin.event.noresult.heading' })}
         </Heading>
-        <Text mb={8}>
-          <FormattedHTMLMessage id="admin.event.noresult.body" />
-        </Text>
+        <Text mb={8}>{intl.formatMessage({ id: 'admin.event.noresult.body' })}</Text>
+
         <Button
           variant="primary"
           variantColor="primary"
           variantSize="big"
           leftIcon="ADD"
-          onClick={() => window.open('/admin/capco/app/event/create', '_self')}
-          mr={6}>
+          onClick={() => window.open('/admin/capco/app/event/create', '_self')}>
           {intl.formatMessage({ id: 'admin-create-event' })}
         </Button>
       </Flex>

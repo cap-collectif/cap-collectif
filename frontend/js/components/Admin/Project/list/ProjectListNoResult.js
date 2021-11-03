@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useIntl, FormattedHTMLMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 import Heading from '~ui/Primitives/Heading';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
@@ -32,6 +32,7 @@ const ProjectListNoResult = ({
   isOnlyProjectAdmin,
 }: Props): React.Node => {
   const intl = useIntl();
+
   return (
     <Flex
       direction="row"
@@ -44,13 +45,11 @@ const ProjectListNoResult = ({
       borderRadius="normal">
       <SpotIcon name={SPOT_ICON_NAME.PROJECT} size="lg" />
 
-      <Flex direction="column" color="blue.900" align="flex-start">
-        <Heading as="h3" fontSize={5} mb={2}>
-          <FormattedHTMLMessage id="publish.first.project" />
+      <Flex direction="column" color="blue.900" align="flex-start" width="300px">
+        <Heading as="h3" mb={2}>
+          {intl.formatMessage({ id: 'publish.first.project' })}
         </Heading>
-        <Text mb={8} fontSize={4}>
-          <FormattedHTMLMessage id="project.first.description" />
-        </Text>
+        <Text mb={8}>{intl.formatMessage({ id: 'project.first.description' })}</Text>
 
         <ProjectModalCreateProject
           viewerId={viewerId}

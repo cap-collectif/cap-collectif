@@ -22,23 +22,20 @@ const PostPostListNoResult = (): React.Node => {
       borderRadius="normal">
       <SpotIcon name={SPOT_ICON_NAME.NEWSPAPER} size="lg" />
 
-      <Flex direction="column" color="blue.900" align="flex-start" maxWidth="30%">
+      <Flex direction="column" color="blue.900" align="flex-start" width="300px">
         <Heading as="h3" mb={2}>
           {intl.formatMessage({ id: 'admin.post.noresult.heading' })}
         </Heading>
         <Text mb={8}>{intl.formatMessage({ id: 'admin.post.noresult.body' })}</Text>
 
-        <>
-          <Button
-            variant="primary"
-            variantColor="primary"
-            variantSize="small"
-            leftIcon="ADD"
-            onClick={() => window.open('/admin/capco/app/post/create', '_self')}
-            mr={8}>
-            {intl.formatMessage({ id: 'admin-create-post' })}
-          </Button>
-        </>
+        <Button
+          variant="primary"
+          variantColor="primary"
+          variantSize="big"
+          leftIcon="ADD"
+          onClick={() => window.open('/admin/capco/app/post/create', '_self')}>
+          {intl.formatMessage({ id: 'admin-create-post' })}
+        </Button>
       </Flex>
     </Flex>
   );

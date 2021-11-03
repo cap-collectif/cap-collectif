@@ -733,13 +733,14 @@ export const getDifferenceFiltersAnalysis = (
 export const getWordingEmpty = (
   hasSelectedFilters: boolean,
   filters: $PropertyType<ProjectAdminPageState, 'filters'>,
-) => {
+): string => {
   if (hasSelectedFilters) return 'proposition.list.help.text.no.search.result';
 
   switch (filters.state) {
     case 'ALL':
-    case 'PUBLISHED':
       return 'help.text.section.all.empty';
+    case 'PUBLISHED':
+      return 'help.text.section.published.empty';
     case 'DRAFT':
       return 'help.text.section.draft.empty';
     case 'TRASHED':

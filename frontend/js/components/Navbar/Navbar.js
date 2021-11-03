@@ -162,7 +162,7 @@ export const Navbar = ({
                 </S.NavigationHeader>
                 <NavbarToggle onClick={setAriaExpanded} expanded={expanded} />
 
-                {desktop && logoLoaded && (
+                {desktop && (!logo || (logo && logoLoaded)) && (
                   <S.NavigationContentDesktop>
                     {items.length > 0 && <TabsBar items={items} />}
 

@@ -33,13 +33,11 @@ const NoResult = ({ isAdmin, viewer, term, orderBy }: Props): React.Node => {
       borderRadius="normal">
       <SpotIcon name={SPOT_ICON_NAME.FORM} size="lg" />
 
-      <Flex direction="column" color="blue.900" align="flex-start" maxWidth="20%">
+      <Flex direction="column" color="blue.900" align="flex-start" width="300px">
         <Heading as="h3" mb={2}>
           {intl.formatMessage({ id: 'publish-first-proposal-form' })}
         </Heading>
-        <Text mb={8} maxWidth="80%">
-          {intl.formatMessage({ id: 'proposal-form-description' })}
-        </Text>
+        <Text mb={8}>{intl.formatMessage({ id: 'proposal-form-description' })}</Text>
 
         <>
           <Button

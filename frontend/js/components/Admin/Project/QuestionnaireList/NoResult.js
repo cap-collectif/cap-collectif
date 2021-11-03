@@ -33,13 +33,11 @@ const NoResult = ({ isAdmin, viewer, term, orderBy }: Props): React.Node => {
       borderRadius="normal">
       <SpotIcon name={SPOT_ICON_NAME.QUESTIONNAIRE} size="lg" />
 
-      <Flex direction="column" color="blue.900" align="flex-start" maxWidth="30%">
+      <Flex direction="column" color="blue.900" align="flex-start" maxWidth="300px">
         <Heading as="h3" mb={2}>
           {intl.formatMessage({ id: 'publish-first-questionnaire' })}
         </Heading>
-        <Text mb={8} maxWidth="60%">
-          {intl.formatMessage({ id: 'questionnaire-description' })}
-        </Text>
+        <Text mb={8}>{intl.formatMessage({ id: 'questionnaire-description' })}</Text>
 
         <>
           <Button

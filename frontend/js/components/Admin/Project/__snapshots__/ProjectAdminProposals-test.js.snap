@@ -6687,7 +6687,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           state="PUBLISHED"
         >
           <FormattedMessage
-            id="help.text.section.all.empty"
+            id="help.text.section.published.empty"
             tagName="p"
             values={Object {}}
           />
@@ -6904,7 +6904,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           state="PUBLISHED"
         >
           <FormattedMessage
-            id="help.text.section.all.empty"
+            id="help.text.section.published.empty"
             tagName="p"
             values={Object {}}
           />
