@@ -141,7 +141,6 @@ class PostRepository extends EntityRepository
                     ->expr()
                     ->orX(
                         $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC),
-                        $qb->expr()->isNull('c')
                     )
             );
             if (!empty($viewer->getUserGroupIds())) {
