@@ -5718,7 +5718,7 @@ enum FeatureFlagType {
   unstable__new_consultation_page
 
   """Whether or not the new project card is active."""
-  unstable__new_project_card
+  new_project_card
 
   """Secret export of users."""
   export_legacy_users

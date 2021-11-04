@@ -21,7 +21,7 @@ type Props = {|
 
 export const ProjectPreview = ({ project, hasSecondTitle, features, isProjectsPage }: Props) => {
   const projectID = project.id ? `project-preview-${project.id}` : 'project-preview';
-  if (features.unstable__new_project_card)
+  if (features.new_project_card)
     return (
       <Flex mt={7} mb={7} mr={5} ml={5}>
         <ProjectCard project={project} isProjectsPage={isProjectsPage} />

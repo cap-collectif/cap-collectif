@@ -265,7 +265,7 @@ Object {
     },
     Object {
       "enabled": true,
-      "type": "unstable__new_project_card",
+      "type": "new_project_card",
     },
     Object {
       "enabled": false,

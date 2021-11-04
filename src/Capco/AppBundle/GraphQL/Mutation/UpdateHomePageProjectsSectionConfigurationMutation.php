@@ -62,8 +62,7 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
         $arguments['sectionProjects'] = $sectionProjectsFormInput;
         LocaleUtils::indexTranslations($arguments);
 
-        $maxProjectsDisplay =
-            true === $this->manager->isActive(Manager::unstable__new_project_card) ? 9 : 8;
+        $maxProjectsDisplay = true === $this->manager->isActive(Manager::new_project_card) ? 9 : 8;
 
         if ($nbObjects > $maxProjectsDisplay) {
             return [

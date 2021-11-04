@@ -100,7 +100,7 @@ export type FeatureToggles = {
   unstable__debate: ?boolean,
   unstable__tipsmeee: ?boolean,
   unstable__new_consultation_page: ?boolean,
-  unstable__new_project_card: ?boolean,
+  new_project_card: ?boolean,
   import_proposals: ?boolean,
   unstable__analytics_page: ?boolean,
   unstable_project_admin: ?boolean,

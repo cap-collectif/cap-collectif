@@ -27,7 +27,7 @@ class ToggleSubscriber implements EventSubscriberInterface
     public function onFeatureToggle(ToggleFeatureEvent $event)
     {
         $toggle = $event->getToggle();
-        if ('unstable__new_project_card' === $toggle->getName()) {
+        if ('new_project_card' === $toggle->getName()) {
             $status = $toggle->getStatus();
             $maxProjects = null;
             if (Toggle::ALWAYS_ACTIVE === $status) {

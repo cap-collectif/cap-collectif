@@ -76,11 +76,7 @@ class ProjectsList extends React.Component<Props> {
         />
       );
     }
-    return features.unstable__new_project_card ? (
-      <ProjectsListPlaceholder count={limit} />
-    ) : (
-      <Loader />
-    );
+    return features.new_project_card ? <ProjectsListPlaceholder count={limit} /> : <Loader />;
   };
 
   render() {

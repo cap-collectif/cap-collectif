@@ -57,7 +57,7 @@ const CustomProjectList = ({ projectsCount, features }: Props) => {
             />
           );
         }
-        return features.unstable__new_project_card ? (
+        return features.new_project_card ? (
           <ProjectsListPlaceholder count={projectsCount} />
         ) : (
           <Loader />

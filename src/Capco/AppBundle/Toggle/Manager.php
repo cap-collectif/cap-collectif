@@ -77,7 +77,7 @@ class Manager
     public const proposal_revisions = 'proposal_revisions';
     public const unstable__tipsmeee = 'unstable__tipsmeee';
     public const unstable__new_consultation_page = 'unstable__new_consultation_page';
-    public const unstable__new_project_card = 'unstable__new_project_card';
+    public const new_project_card = 'new_project_card';
     public const export_legacy_users = 'export_legacy_users';
     public const import_proposals = 'import_proposals';
     public const unstable__analytics_page = 'unstable__analytics_page';
@@ -107,6 +107,7 @@ class Manager
         self::restrict_connection,
         self::public_api,
         self::developer_documentation,
+        self::new_project_card,
     ];
 
     public static $toggles = [
@@ -175,7 +176,7 @@ class Manager
         self::proposal_revisions,
         self::unstable__tipsmeee,
         self::unstable__new_consultation_page,
-        self::unstable__new_project_card,
+        self::new_project_card,
         self::export_legacy_users,
         self::import_proposals,
         self::unstable__analytics_page,

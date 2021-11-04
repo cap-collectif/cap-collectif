@@ -32,7 +32,7 @@ const renderPreview = homePageProjectsSectionConfiguration => {
 const CustomProjectListView = ({ homePageProjectsSectionConfiguration, features }: Props) => {
   return (
     <>
-      {features.unstable__new_project_card ? (
+      {features.new_project_card ? (
         <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}>
           {renderPreview(homePageProjectsSectionConfiguration)}
         </Grid>

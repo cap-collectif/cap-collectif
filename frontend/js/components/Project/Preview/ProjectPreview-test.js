@@ -24,10 +24,7 @@ describe('<ProjectPreview />', () => {
   });
   it('should render correctly with the new card type', () => {
     const wrapper = shallow(
-      <ProjectPreview
-        {...defaultProject}
-        features={{ ...features, unstable__new_project_card: true }}
-      />,
+      <ProjectPreview {...defaultProject} features={{ ...features, new_project_card: true }} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

@@ -99,7 +99,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate(Manager::unstable__debate);
         $this->manager->activate(Manager::proposal_revisions);
         $this->manager->activate(Manager::unstable__new_consultation_page);
-        $this->manager->activate(Manager::unstable__new_project_card);
+        $this->manager->activate(Manager::new_project_card);
         $this->manager->deactivate(Manager::export_legacy_users);
         $this->manager->activate(Manager::import_proposals);
         $this->manager->deactivate(Manager::unstable__analytics_page);
@@ -142,7 +142,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::proposal_revisions);
             $this->manager->deactivate(Manager::unstable__tipsmeee);
             $this->manager->deactivate(Manager::unstable__new_consultation_page);
-            $this->manager->deactivate(Manager::unstable__new_project_card);
+            $this->manager->deactivate(Manager::new_project_card);
             $this->manager->deactivate(Manager::export_legacy_users);
             $this->manager->deactivate(Manager::import_proposals);
             $this->manager->deactivate(Manager::unstable__analytics_page);

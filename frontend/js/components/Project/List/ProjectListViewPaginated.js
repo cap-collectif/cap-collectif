@@ -42,7 +42,7 @@ export const ProjectListViewPaginated = ({
     if (query.projects.edges.length > 0) {
       return (
         <div>
-          {features.unstable__new_project_card ? (
+          {features.new_project_card ? (
             <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}>
               {renderPreview(query, isProjectsPage)}
             </Grid>
@@ -55,7 +55,7 @@ export const ProjectListViewPaginated = ({
                 className="see-more-projects-button ml-15"
                 disabled={loading}
                 css={{
-                  margin: features.unstable__new_project_card ? 'auto' : '',
+                  margin: features.new_project_card ? 'auto' : '',
                   display: 'block',
                 }}
                 onClick={() => {
