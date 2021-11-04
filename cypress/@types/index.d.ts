@@ -40,5 +40,7 @@ declare namespace Cypress {
     login(options: LoginOptions): Chainable<any>
     confirmRecaptcha(): Chainable<void>
     loginAs(username: LoginAsUsernames): Chainable<any>
+    directLoginAs(username: LoginAsUsernames): Chainable<any>
+    directLogin(options: LoginOptions): Chainable<any>
   }
 }

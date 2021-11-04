@@ -1,3 +1,25 @@
+const LoginAsData = (email: string) => {
+  switch (email) {
+    case 'admin':
+      return {
+        email: 'admin@test.com',
+        password: 'admin',
+      }
+    case 'super_admin':
+      return {
+        email: 'lbrunet@cap-collectif.com',
+        password: 'toto',
+      }
+    case 'user':
+      return {
+        email: 'user@test.com',
+        password: 'user',
+      }
+    default:
+      throw new Error(`Unsupported email: ${email}`)
+  }
+}
+
 Cypress.Commands.add('login', ({ email, password }: Cypress.LoginOptions) => {
   cy.intercept('POST', '/login_check').as('LoginRequest')
   cy.url().then(url => {
@@ -35,23 +57,42 @@ Cypress.Commands.add('login', ({ email, password }: Cypress.LoginOptions) => {
 })
 
 Cypress.Commands.add('loginAs', (email: Cypress.LoginAsUsernames) => {
-  switch (email) {
-    case 'admin':
-      return cy.login({
-        email: 'admin@test.com',
-        password: 'admin',
+  return cy.login(LoginAsData(email))
+})
+
+Cypress.Commands.add('directLogin', ({ email, password }: Cypress.LoginOptions) => {
+  cy.session([email, password], () => {
+    cy.url().then(url => {
+      if (url === 'about:blank') {
+        cy.visit('/')
+      }
+    })
+
+    const log = Cypress.log({
+      name: 'login',
+      displayName: 'LOGIN',
+      message: [`🔐 Authenticating | ${email}`],
+      autoEnd: false,
+    })
+
+    cy.request('POST', '/login_check', { username: email, password }).then(response => {
+      expect(response.status).to.eq(200)
+      log.set({
+        consoleProps() {
+          return {
+            email,
+            password,
+          }
+        },
       })
-    case 'super_admin':
-      return cy.login({
-        email: 'lbrunet@cap-collectif.com',
-        password: 'toto',
-      })
-    case 'user':
-      return cy.login({
-        email: 'user@test.com',
-        password: 'user',
-      })
-    default:
-      throw new Error(`Unsupported email: ${email}`)
-  }
+
+      log.snapshot('after')
+      log.end()
+    })
+    cy.getCookie('PHPSESSID').should('exist')
+  })
+})
+
+Cypress.Commands.add('directLoginAs', (email: Cypress.LoginAsUsernames) => {
+  return cy.directLogin(LoginAsData(email))
 })

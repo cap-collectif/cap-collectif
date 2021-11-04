@@ -8,7 +8,7 @@ describe('Debate', () => {
   describe('Logged-in', () => {
     beforeEach(() => {
       cy.task('db:restore')
-      cy.loginAs('user')
+      cy.directLoginAs('user')
       DebatePage.visitCannabisDebate()
     })
     it('should correctly vote for a debate', () => {

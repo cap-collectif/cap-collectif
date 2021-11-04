@@ -2,7 +2,7 @@ import { AdminProjectsPage } from '../pages'
 
 describe('Admin projects', () => {
   beforeEach(() => {
-    cy.login({
+    cy.directLogin({
       email: 'theo@cap-collectif.com',
       password: 'toto',
     })
