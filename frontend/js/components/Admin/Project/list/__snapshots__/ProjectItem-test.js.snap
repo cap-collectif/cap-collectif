@@ -49,16 +49,12 @@ Array [
       }
     }
   >
-    <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+    <a
+      className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+      href="https://capco.dev/profile/admin"
     >
-      <a
-        className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-        href="https://capco.dev/profile/admin"
-      >
-        admin
-      </a>
-    </div>
+      admin
+    </a>
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -354,16 +350,7 @@ Array [
       }
     }
   >
-    <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
-    >
-      <a
-        className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-        href="https://capco.dev/profile/admin"
-      >
-        admin
-      </a>
-    </div>
+    -
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -659,16 +646,12 @@ Array [
       }
     }
   >
-    <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+    <a
+      className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+      href="https://capco.dev/profile/admin"
     >
-      <a
-        className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-        href="https://capco.dev/profile/admin"
-      >
-        admin
-      </a>
-    </div>
+      admin
+    </a>
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -839,54 +822,6 @@ Array [
             className="sc-bdnxRM isZYbz"
           >
              
-            project.download.button
-             
-          </p>
-        </button>
-        <div
-          aria-label="delete-confirmation"
-          aria-modal={true}
-          data-dialog={true}
-          hidden={true}
-          id="id-3"
-          onAnimationEnd={[Function]}
-          onBlur={[Function]}
-          onKeyDown={[Function]}
-          onTransitionEnd={[Function]}
-          role="dialog"
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-          tabIndex={-1}
-        />
-        <button
-          aria-controls="id-4"
-          aria-expanded={false}
-          aria-haspopup="dialog"
-          className="MenuListItem__MenuItemInner-gIqqDA kvUUcb"
-          id="id-2-3"
-          onBlurCapture={[Function]}
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyPressCapture={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onMouseMove={[Function]}
-          role="menuitem"
-          tabIndex={0}
-          type="button"
-        >
-          <p
-            className="sc-bdnxRM isZYbz"
-          >
-             
             admin.global.delete
              
           </p>
@@ -896,7 +831,7 @@ Array [
           aria-modal={true}
           data-dialog={true}
           hidden={true}
-          id="id-4"
+          id="id-3"
           onAnimationEnd={[Function]}
           onBlur={[Function]}
           onKeyDown={[Function]}
@@ -937,23 +872,7 @@ Array [
       </a>
       <div
         className="sc-bdnxRM Flex___StyledAppBox-RSPpX egukdJ"
-      >
-        <a
-          className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
-          href="https://capco.dev/themes/immobilier?_locale=fr-FR"
-        >
-          Immobilier
-        </a>
-        <span>
-          ,   
-        </span>
-        <a
-          className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
-          href="https://capco.dev/themes/transport?_locale=fr-FR"
-        >
-          Transport
-        </a>
-      </div>
+      />
     </div>
   </td>,
   <td
@@ -964,16 +883,12 @@ Array [
       }
     }
   >
-    <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+    <a
+      className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+      href="https://capco.dev/profile/admin"
     >
-      <a
-        className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-        href="https://capco.dev/profile/admin"
-      >
-        admin
-      </a>
-    </div>
+      admin
+    </a>
   </td>,
   <td
     className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"

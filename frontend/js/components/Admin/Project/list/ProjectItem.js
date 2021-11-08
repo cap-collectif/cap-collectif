@@ -37,10 +37,10 @@ const FRAGMENT = graphql`
       title
       url
     }
-    authors {
+    owner {
       id
-      url
       username
+      url
     }
     visibility
     publishedAt
@@ -127,27 +127,11 @@ const ProjectItem = ({
         </Flex>
       </Td>
       <Td>
-        <Flex direction="row">
-          {!!project.authors &&
-            project.authors.length > 0 &&
-            project.authors.map((author, index) => {
-              if (author && author.username && author.url) {
-                if (index + 1 < project.authors.length) {
-                  return (
-                    <React.Fragment key={author.url}>
-                      <Link href={author?.url}>{author?.username}</Link>
-                      <span>, &nbsp; </span>
-                    </React.Fragment>
-                  );
-                }
-                return (
-                  <Link key={author.url} href={author?.url}>
-                    {author?.username}
-                  </Link>
-                );
-              }
-            })}
-        </Flex>
+        {project?.owner?.id && (
+          <Link key={project?.owner?.id} href={project?.owner?.url}>
+            {project?.owner?.username}
+          </Link>
+        )}
       </Td>
       <Td>
         {project.visibility === 'PUBLIC' && (

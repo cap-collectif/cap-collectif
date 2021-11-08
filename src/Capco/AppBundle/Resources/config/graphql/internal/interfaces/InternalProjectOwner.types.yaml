@@ -7,12 +7,18 @@ InternalProjectOwner:
         fields:
             id:
                 type: 'ID!'
+                description: 'The owner id.'
             username:
                 type: 'String'
+                description: 'The owner username.'
+            url:
+                type: 'URI!'
+                description: 'The owner profile URL.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", [value])'
             projects:
                 type: 'InternalProjectConnection!'
                 description: 'Get all projects that the user owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProjectOwnerProjectsResolver", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     affiliations:

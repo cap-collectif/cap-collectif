@@ -13,6 +13,11 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
       id
       username
     }
+    owner {
+      id
+      username
+      url
+    }
     restrictedViewers {
       edges {
         node {
@@ -1168,5 +1173,20 @@ describe('project access control', () => {
         'internal_theo',
       ),
     ).rejects.toThrowError('Access denied to this field.');
+  });
+
+  it('should not update the owner when admin edit a owned project ', async () => {
+    const response = await graphql(
+      UpdateAlphaProjectMutation,
+      {
+        input: {
+          ...BASE_INPUT,
+          projectId: toGlobalId('Project', 'projectWithOwner'),
+        },
+      },
+      'internal_admin',
+    );
+
+    expect(response.updateAlphaProject.project.owner.username).toBe('Théo QP');
   });
 });

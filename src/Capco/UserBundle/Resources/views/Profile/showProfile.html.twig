@@ -62,7 +62,7 @@
         {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
     {% endif %}
     {% if projectsCount is not defined %}
-        {% set projectsCount = userProjectsResolver.__invoke(user).totalCount %}
+        {% set projectsCount = projectOwnerProjectsResolver.__invoke(user).totalCount %}
     {% endif %}
     {% if sourcesCount is not defined %}
         {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}

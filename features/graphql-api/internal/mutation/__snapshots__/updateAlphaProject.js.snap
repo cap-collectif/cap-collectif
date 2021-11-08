@@ -24,6 +24,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -157,6 +162,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -266,6 +276,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -332,6 +347,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -389,6 +409,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -442,6 +467,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -495,6 +525,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -552,6 +587,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -631,6 +671,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -691,6 +736,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -746,6 +796,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -819,6 +874,11 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+        "url": "https://capco.test/profile/admin",
+        "username": "admin",
+      },
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -875,6 +935,7 @@ Object {
       "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
       "isExternal": false,
       "opinionCanBeFollowed": true,
+      "owner": null,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],

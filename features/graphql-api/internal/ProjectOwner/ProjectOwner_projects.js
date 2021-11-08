@@ -1,6 +1,6 @@
 /* eslint-env jest */
-const ViewerProjectsAffiliationsQuery = /* GraphQL */ `
-  query ViewerProjectsQuery($affiliations: [ProjectAffiliation!]) {
+const ProjectOwnerProjectsAffiliationsQuery = /* GraphQL */ `
+  query ProjectOwnerProjectsQuery($affiliations: [ProjectAffiliation!]) {
     viewer {
       projects(affiliations: $affiliations) {
         totalCount
@@ -19,8 +19,8 @@ const ViewerProjectsAffiliationsQuery = /* GraphQL */ `
   }
 `;
 
-const ViewerProjectsSearchQuery = /* GraphQL */ `
-  query ViewerProjectsQuery($query: String) {
+const ProjectOwnerProjectsSearchQuery = /* GraphQL */ `
+  query ProjectOwnerProjectsQuery($query: String) {
     viewer {
       projects(query: $query) {
         totalCount
@@ -34,8 +34,8 @@ const ViewerProjectsSearchQuery = /* GraphQL */ `
   }
 `;
 
-const ViewerProjectsOrderQuery = /* GraphQL */ `
-  query ViewerProjectsQuery($order: ProjectOwnerProjectOrder) {
+const ProjectOwnerProjectsOrderQuery = /* GraphQL */ `
+  query ProjectOwnerProjectsQuery($order: ProjectOwnerProjectOrder) {
     viewer {
       projects(orderBy: $order) {
         totalCount
@@ -53,7 +53,7 @@ const ViewerProjectsOrderQuery = /* GraphQL */ `
 describe('Internal.viewer.projects', () => {
   it('should correctly fetch projects that a user owns when given the `OWNER` affiliations', async () => {
     const response = await graphql(
-      ViewerProjectsAffiliationsQuery,
+      ProjectOwnerProjectsAffiliationsQuery,
       {
         affiliations: ['OWNER'],
       },
@@ -68,7 +68,7 @@ describe('Internal.viewer.projects', () => {
   it('should fetch all projects when no affiliations given', async () => {
     await expect(
       graphql(
-        ViewerProjectsAffiliationsQuery,
+        ProjectOwnerProjectsAffiliationsQuery,
         {
           affiliations: [],
         },
@@ -80,7 +80,7 @@ describe('Internal.viewer.projects', () => {
   it('should filter projects by a given search query', async () => {
     await expect(
       graphql(
-        ViewerProjectsSearchQuery,
+        ProjectOwnerProjectsSearchQuery,
         {
           query: 'project',
         },
@@ -92,7 +92,7 @@ describe('Internal.viewer.projects', () => {
   it('should sort projects by a given field and direction', async () => {
     await expect(
       graphql(
-        ViewerProjectsOrderQuery,
+        ProjectOwnerProjectsOrderQuery,
         {
           order: {
             direction: 'ASC',
@@ -107,7 +107,7 @@ describe('Internal.viewer.projects', () => {
   it('should filter project by author', async () => {
     await expect(
       graphql(
-        ViewerProjectsAffiliationsQuery,
+        ProjectOwnerProjectsAffiliationsQuery,
         {
           affiliations: ['AUTHOR'],
         },

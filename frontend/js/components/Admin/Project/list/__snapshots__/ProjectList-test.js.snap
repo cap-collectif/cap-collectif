@@ -229,16 +229,12 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           }
         >
-          <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+          <a
+            className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+            href="<mock-value-for-field-\\"url\\">"
           >
-            <a
-              className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-              href="<mock-value-for-field-\\"url\\">"
-            >
-              &lt;mock-value-for-field-"username"&gt;
-            </a>
-          </div>
+            &lt;mock-value-for-field-"username"&gt;
+          </a>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -518,16 +514,12 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           }
         >
-          <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+          <a
+            className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+            href="<mock-value-for-field-\\"url\\">"
           >
-            <a
-              className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-              href="<mock-value-for-field-\\"url\\">"
-            >
-              &lt;mock-value-for-field-"username"&gt;
-            </a>
-          </div>
+            &lt;mock-value-for-field-"username"&gt;
+          </a>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -807,16 +799,12 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           }
         >
-          <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+          <a
+            className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+            href="<mock-value-for-field-\\"url\\">"
           >
-            <a
-              className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-              href="<mock-value-for-field-\\"url\\">"
-            >
-              &lt;mock-value-for-field-"username"&gt;
-            </a>
-          </div>
+            &lt;mock-value-for-field-"username"&gt;
+          </a>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
@@ -1096,16 +1084,12 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           }
         >
-          <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+          <a
+            className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+            href="<mock-value-for-field-\\"url\\">"
           >
-            <a
-              className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
-              href="<mock-value-for-field-\\"url\\">"
-            >
-              &lt;mock-value-for-field-"username"&gt;
-            </a>
-          </div>
+            &lt;mock-value-for-field-"username"&gt;
+          </a>
         </td>
         <td
           className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"

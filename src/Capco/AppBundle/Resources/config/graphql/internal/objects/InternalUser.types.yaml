@@ -323,6 +323,7 @@ InternalUser:
             responses:
                 type: 'InternalResponseConnection!'
             url:
+                description: 'The user profile URL.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", [value])'
             isAdmin:
                 type: 'Boolean!'

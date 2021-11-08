@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class UserProjectsResolver implements ResolverInterface
+class ProjectOwnerProjectsResolver implements ResolverInterface
 {
     private ProjectSearch $projectSearch;
 
@@ -47,8 +47,17 @@ class UserProjectsResolver implements ResolverInterface
             $user,
             &$totalCount
         ) {
-            $response = $this->projectSearch->searchProjects($offset, $limit, $orderBy, $query, $filters, $affiliations, $user);
+            $response = $this->projectSearch->searchProjects(
+                $offset,
+                $limit,
+                $orderBy,
+                $query,
+                $filters,
+                $affiliations,
+                $user
+            );
             $totalCount = $response['count'];
+
             return $response['projects'];
         });
 
@@ -64,6 +73,7 @@ class UserProjectsResolver implements ResolverInterface
         if ($args->offsetExists('status') && '' !== $args['status']) {
             $filters['projectStatus'] = $args->offsetGet('status');
         }
+
         return $filters;
     }
 }

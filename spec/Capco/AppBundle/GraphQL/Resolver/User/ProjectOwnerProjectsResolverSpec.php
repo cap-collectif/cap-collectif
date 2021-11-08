@@ -3,14 +3,14 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\GraphQL\Resolver\User\UserProjectsResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\ProjectOwnerProjectsResolver;
 use Capco\AppBundle\Search\ProjectSearch;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use PhpSpec\ObjectBehavior;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 
-class UserProjectsResolverSpec extends ObjectBehavior
+class ProjectOwnerProjectsResolverSpec extends ObjectBehavior
 {
     public function let(ProjectSearch $projectSearch)
     {
@@ -19,7 +19,7 @@ class UserProjectsResolverSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(UserProjectsResolver::class);
+        $this->shouldHaveType(ProjectOwnerProjectsResolver::class);
     }
 
     public function it_should_fetch_user_projects(
@@ -33,7 +33,6 @@ class UserProjectsResolverSpec extends ObjectBehavior
             'field' => 'PUBLISHED_AT',
             'direction' => 'ASC',
         ];
-
 
         $affiliations = ['OWNER'];
         $query = 'project';
@@ -51,19 +50,11 @@ class UserProjectsResolverSpec extends ObjectBehavior
 
         $response = [
             'count' => 1,
-            'projects' => [$project]
+            'projects' => [$project],
         ];
 
         $projectSearch
-            ->searchProjects(
-                $offset,
-                $limit,
-                $orderBy,
-                $query,
-                $filters,
-                $affiliations,
-                $user
-            )
+            ->searchProjects($offset, $limit, $orderBy, $query, $filters, $affiliations, $user)
             ->shouldBeCalled()
             ->willReturn($response);
 

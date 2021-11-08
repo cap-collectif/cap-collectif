@@ -69,7 +69,6 @@ class ProjectPersister
                 throw new UserError('Access denied to this field.');
             }
 
-            $project->setOwner($viewer);
             unset($arguments['projectId']);
         }
 

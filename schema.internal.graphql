@@ -8631,8 +8631,14 @@ enum ProjectOrderField {
 
 """Represent an owner of a project."""
 interface ProjectOwner {
+  """The owner id."""
   id: ID!
+
+  """The owner username."""
   username: String
+
+  """The owner profile URL."""
+  url: URI!
 
   """Get all projects that the user owns."""
   projects(
@@ -14965,7 +14971,7 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   """User ID"""
   id: ID!
 
-  """The URL to this resource."""
+  """The user profile URL."""
   url: URI!
 
   """User username"""

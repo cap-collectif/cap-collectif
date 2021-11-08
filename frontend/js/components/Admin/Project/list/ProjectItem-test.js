@@ -15,6 +15,7 @@ import type { ProjectItemTestQuery } from '~relay/ProjectItemTestQuery.graphql';
 describe('<ProjectItem />', () => {
   let environment;
   let TestComponent;
+  let testComponentTree;
 
   const defaultMockResolvers = {
     Project: () => ({
@@ -32,13 +33,11 @@ describe('<ProjectItem />', () => {
           url: 'https://capco.dev/themes/transport?_locale=fr-FR',
         },
       ],
-      authors: [
-        {
-          id: 'VXNlcjp1c2VyQWRtaW4=',
-          url: 'https://capco.dev/profile/admin',
-          username: 'admin',
-        },
-      ],
+      owner: {
+        id: 'VXNlcjp1c2VyQWRtaW4=',
+        url: 'https://capco.dev/profile/admin',
+        username: 'admin',
+      },
       visibility: 'PUBLIC',
       publishedAt: '2014-12-30 00:00:00',
       url:
@@ -113,14 +112,14 @@ describe('<ProjectItem />', () => {
         <TestRenderer {...props} />
       </RelaySuspensFragmentTest>
     );
-    environment.mock.queueOperationResolver(operation =>
-      MockPayloadGenerator.generate(operation, defaultMockResolvers),
-    );
   });
 
   it('should render correctly', () => {
-    const wrapper = ReactTestRenderer.create(<TestComponent />);
-    expect(wrapper).toMatchSnapshot();
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, defaultMockResolvers),
+    );
+    testComponentTree = ReactTestRenderer.create(<TestComponent />);
+    expect(testComponentTree).toMatchSnapshot();
   });
   it('should render correctly without authors', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -141,7 +140,7 @@ describe('<ProjectItem />', () => {
               url: 'https://capco.dev/themes/transport?_locale=fr-FR',
             },
           ],
-          authors: [],
+          owner: null,
           visibility: 'PUBLIC',
           publishedAt: '2014-12-30 00:00:00',
           url:
@@ -187,8 +186,8 @@ describe('<ProjectItem />', () => {
         }),
       }),
     );
-    const wrapper = ReactTestRenderer.create(<TestComponent />);
-    expect(wrapper).toMatchSnapshot();
+    testComponentTree = ReactTestRenderer.create(<TestComponent />);
+    expect(testComponentTree).toMatchSnapshot();
   });
   it('should render correctly without themes', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -198,13 +197,11 @@ describe('<ProjectItem />', () => {
           id: 'UHJvamVjdDpwcm9qZWN0Mg==',
           title: "Stratégie technologique de l'Etat et services publics",
           themes: [],
-          authors: [
-            {
-              id: 'VXNlcjp1c2VyQWRtaW4=',
-              url: 'https://capco.dev/profile/admin',
-              username: 'admin',
-            },
-          ],
+          owner: {
+            id: 'VXNlcjp1c2VyQWRtaW4=',
+            url: 'https://capco.dev/profile/admin',
+            username: 'admin',
+          },
           visibility: 'PUBLIC',
           publishedAt: '2014-12-30 00:00:00',
           url:
@@ -250,8 +247,8 @@ describe('<ProjectItem />', () => {
         }),
       }),
     );
-    const wrapper = ReactTestRenderer.create(<TestComponent />);
-    expect(wrapper).toMatchSnapshot();
+    testComponentTree = ReactTestRenderer.create(<TestComponent />);
+    expect(testComponentTree).toMatchSnapshot();
   });
   it('should render correctly without exportable steps', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -272,13 +269,11 @@ describe('<ProjectItem />', () => {
               url: 'https://capco.dev/themes/transport?_locale=fr-FR',
             },
           ],
-          authors: [
-            {
-              id: 'VXNlcjp1c2VyQWRtaW4=',
-              url: 'https://capco.dev/profile/admin',
-              username: 'admin',
-            },
-          ],
+          owner: {
+            id: 'VXNlcjp1c2VyQWRtaW4=',
+            url: 'https://capco.dev/profile/admin',
+            username: 'admin',
+          },
           visibility: 'PUBLIC',
           publishedAt: '2014-12-30 00:00:00',
           url:
@@ -296,7 +291,7 @@ describe('<ProjectItem />', () => {
         }),
       }),
     );
-    const wrapper = ReactTestRenderer.create(<TestComponent />);
-    expect(wrapper).toMatchSnapshot();
+    testComponentTree = ReactTestRenderer.create(<TestComponent />);
+    expect(testComponentTree).toMatchSnapshot();
   });
 });
