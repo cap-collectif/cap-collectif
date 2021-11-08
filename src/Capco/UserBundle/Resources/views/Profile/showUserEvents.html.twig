@@ -10,7 +10,8 @@
         'description': user.biography,
         'url':         url('capco_user_profile_show_events', {'slug': user.slug}),
         'type':        'profile',
-        'image':       userMedia
+        'image':       userMedia,
+        'noindex':      user.isProfilePageNotIndexed() or is_feature_enabled(constant('Capco\\AppBundle\\Toggle\\Manager::noindex_on_profiles'))
     } only %}
 {% endblock %}
 
