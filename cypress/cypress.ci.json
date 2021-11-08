@@ -1,6 +1,6 @@
 {
   "$schema": "https://on.cypress.io/cypress.schema.json",
-  "video": false,
+  "screenshotsFolder": "./screenshots",
   "screenshotOnRunFailure": true,
-  "videoUploadOnPasses": false
+  "video": false
 }
