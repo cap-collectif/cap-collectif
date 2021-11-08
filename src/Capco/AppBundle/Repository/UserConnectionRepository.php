@@ -54,20 +54,22 @@ class UserConnectionRepository extends EntityRepository
         return $this->countAttemptByEmail($email, false, true);
     }
 
-    public function countFailedAttemptByEmailAndIPInLastHour(string $email, string $ip): int
+    public function countFailedAttemptByEmailAndIPInLastHour(string $email, ?string $ip): int
     {
         $qb = $this->createQueryBuilder('c')
             ->select('count(c)')
             ->andWhere('c.email = :email')
             ->andWhere('c.success = :successful')
-            ->andWhere('c.ipAddress = :ip')
             ->setParameter('email', $email)
-            ->setParameter('ip', $ip)
             ->setParameter('successful', false)
             ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR)
             ->andWhere('c.datetime BETWEEN :from AND :to')
             ->setParameter('from', new \DateTime('-1 hour'))
             ->setParameter('to', new \DateTime());
+
+        if ($ip) {
+            $qb->setParameter('ip', $ip)->andWhere('c.ipAddress = :ip');
+        }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
