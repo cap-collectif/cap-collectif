@@ -110,3 +110,7 @@ services:
         public: true
 
     Capco\AppBundle\GraphQL\Resolver\Participant\IsViewerParticipatingAtEventResolver: ~
+
+    Capco\AppBundle\Mailer\SenderEmailResolver:
+        public: true
+        lazy: true

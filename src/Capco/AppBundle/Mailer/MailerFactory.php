@@ -18,15 +18,18 @@ class MailerFactory
     protected TranslatorInterface $translator;
     protected SiteParameterResolver $siteParams;
     protected RouterInterface $router;
+    protected SenderEmailResolver $senderEmailResolver;
 
     public function __construct(
         TranslatorInterface $translator,
         SiteParameterResolver $siteParams,
-        RouterInterface $router
+        RouterInterface $router,
+        SenderEmailResolver $senderEmailResolver
     ) {
         $this->translator = $translator;
         $this->siteParams = $siteParams;
         $this->router = $router;
+        $this->senderEmailResolver = $senderEmailResolver;
     }
 
     public function createMessage(
@@ -79,7 +82,7 @@ class MailerFactory
 
     protected function setDefaultSender(AbstractMessage $message): void
     {
-        $senderEmail = $this->siteParams->getValue('admin.mail.notifications.send_address');
+        $senderEmail = $this->senderEmailResolver->__invoke();
         $senderName = $this->siteParams->getValue('admin.mail.notifications.send_name');
         $message->setSenderEmail($senderEmail);
         $message->setSenderName($senderName);

@@ -26,9 +26,10 @@ class MailerService extends MailerFactory
         TranslatorInterface $translator,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
+        SenderEmailResolver $senderEmailResolver,
         TokenManager $tokenManager
     ) {
-        parent::__construct($translator, $siteParams, $router);
+        parent::__construct($translator, $siteParams, $router, $senderEmailResolver);
         $this->mailer = $mailer;
         $this->templating = $templating;
         $this->tokenManager = $tokenManager;
