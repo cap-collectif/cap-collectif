@@ -27,13 +27,13 @@ export const UserInviteAdminPageQuery: GraphQLTaggedNode = graphql`
     $term: String
     $status: UserInviteStatus
   ) {
-    allInvitations: userInvitations {
+    allInvitations: userInvitations(first: 0) {
       totalCount
     }
-    pendingInvitations: userInvitations(status: PENDING) {
+    pendingInvitations: userInvitations(status: PENDING, first: 0) {
       totalCount
     }
-    acceptedInvitations: userInvitations(status: ACCEPTED) {
+    acceptedInvitations: userInvitations(status: ACCEPTED, first: 0) {
       totalCount
     }
     ...UserInviteList_query @arguments(first: $first, cursor: $cursor, term: $term, status: $status)

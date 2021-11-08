@@ -33,56 +33,18 @@ class UserInviteRepository extends EntityRepository
                     )
             );
         }
-        if (UserInviteStatus::EXPIRED === $status) {
-            $qb->andWhere(
-                $qb
-                    ->expr()
-                    ->lt(
-                        'ui.expiresAt',
-                        $qb->expr()->literal((new \DateTimeImmutable())->format('Y/m/d H:i:s'))
-                    )
-            );
-        }
 
-        if (UserInviteStatus::FAILED === $status) {
-            $qb->andWhere($qb->expr()->eq('ui.internalStatus', ':failed'))->setParameter(
-                ':failed',
-                UserInvite::SEND_FAILURE
-            );
-        }
-
-        if (UserInviteStatus::PENDING === $status) {
-            $qb->leftJoin('CapcoUserBundle:User', 'u', 'WITH', 'u.email = ui.email');
-            $qb->andWhere($qb->expr()->isNull('u'));
-            $qb->andWhere(
-                $qb
-                    ->expr()
-                    ->andX(
-                        $qb
-                            ->expr()
-                            ->orX(
-                                $qb->expr()->eq('ui.internalStatus', ':pending'),
-                                $qb->expr()->eq('ui.internalStatus', ':sent')
-                            ),
-                        $qb
-                            ->expr()
-                            ->gt(
-                                'ui.expiresAt',
-                                $qb
-                                    ->expr()
-                                    ->literal((new \DateTimeImmutable())->format('Y/m/d H:i:s'))
-                            )
-                    )
-            )
-                ->setParameter(':pending', UserInvite::WAITING_SENDING)
-                ->setParameter(':sent', UserInvite::SENT);
-        }
-
-        if (UserInviteStatus::ACCEPTED === $status) {
-            $qb->innerJoin('CapcoUserBundle:User', 'u', 'WITH', 'u.email = ui.email');
-        }
-
+        $qb = $this->filterByStatus($qb, $status);
         $qb->addOrderBy('ui.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getInvitationsCount(?string $status): array
+    {
+        $qb = $this->createQueryBuilder('ui');
+        $qb->select($qb->expr()->count('ui'));
+        $qb = $this->filterByStatus($qb, $status);
 
         return $qb->getQuery()->getResult();
     }
@@ -187,10 +149,67 @@ class UserInviteRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
+    private function filterByStatus(QueryBuilder $qb, ?string $status): QueryBuilder
+    {
+        if (UserInviteStatus::EXPIRED === $status) {
+            $qb->andWhere(
+                $qb
+                    ->expr()
+                    ->lt(
+                        'ui.expiresAt',
+                        $qb->expr()->literal((new \DateTimeImmutable())->format('Y/m/d H:i:s'))
+                    )
+            );
+        }
+
+        if (UserInviteStatus::FAILED === $status) {
+            $qb->andWhere($qb->expr()->eq('ui.internalStatus', ':failed'))->setParameter(
+                ':failed',
+                UserInvite::SEND_FAILURE
+            );
+        }
+
+        if (UserInviteStatus::PENDING === $status) {
+            $qb->leftJoin('CapcoUserBundle:User', 'u', 'WITH', 'u.email = ui.email');
+            $qb->andWhere($qb->expr()->isNull('u'));
+            $qb->andWhere(
+                $qb
+                    ->expr()
+                    ->andX(
+                        $qb
+                            ->expr()
+                            ->orX(
+                                $qb->expr()->eq('ui.internalStatus', ':pending'),
+                                $qb->expr()->eq('ui.internalStatus', ':sent')
+                            ),
+                        $qb
+                            ->expr()
+                            ->gt(
+                                'ui.expiresAt',
+                                $qb
+                                    ->expr()
+                                    ->literal((new \DateTimeImmutable())->format('Y/m/d H:i:s'))
+                            )
+                    )
+            )
+                ->setParameter(':pending', UserInvite::WAITING_SENDING)
+                ->setParameter(':sent', UserInvite::SENT);
+        }
+
+        if (UserInviteStatus::ACCEPTED === $status) {
+            $qb->innerJoin('CapcoUserBundle:User', 'u', 'WITH', 'u.email = ui.email');
+        }
+
+        return $qb;
+    }
+
     private function getPaginated(?int $limit, ?int $offset): QueryBuilder
     {
-        return $this->createQueryBuilder('ui')
-            ->setFirstResult($offset ?? 0)
-            ->setMaxResults($limit ?? 50);
+        $qb = $this->createQueryBuilder('ui')->setFirstResult($offset ?? 0);
+        if (0 !== $limit) {
+            $qb->setMaxResults($limit ?? 50);
+        }
+
+        return $qb;
     }
 }

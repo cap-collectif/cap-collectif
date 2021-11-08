@@ -63,7 +63,7 @@ class InviteUsersMutation implements MutationInterface
             );
         }
 
-        if (null !== $message && \strlen($message) >= 500) {
+        if (null !== $message && mb_strlen($message) > 500) {
             throw new UserError('The message length cannot exceed 500 characters.');
         }
 

@@ -450,7 +450,7 @@ InternalQuery:
                 description: 'List all invited users.'
                 type: 'UserInviteConnection!'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserInvitationsResolver", [args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserInvitationsResolver", [args, info])'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     first:

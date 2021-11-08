@@ -18,15 +18,6 @@ const mutation = graphql`
         cursor
         node {
           id
-          email
-          status
-          groups {
-            edges {
-              node {
-                title
-              }
-            }
-          }
         }
       }
       updatedInvitations {
@@ -58,12 +49,29 @@ const commit = (variables: InviteUserMutationVariables): Promise<Response> =>
       const invitations = ConnectionHandler.getConnection(root, 'UserInviteList_userInvitations');
       if (!invitations) return;
       const newInvitations = store.getRootField('inviteUsers').getLinkedRecords('newInvitations');
-      newInvitations.forEach(invitation => {
+      newInvitations.forEach((invitation, i) => {
         const invitationNode = invitation.getLinkedRecord('node');
         invitationNode
+          .setValue(variables.input.emails[i], 'email')
           .setValue(variables.input.role === 'ROLE_ADMIN', 'isAdmin')
-          .setValue(variables.input.role === 'ROLE_PROJECT_ADMIN', 'isProjectAdmin');
-
+          .setValue(variables.input.role === 'ROLE_PROJECT_ADMIN', 'isProjectAdmin')
+          .setValue('PENDING', 'status');
+        const groupConnection = store.create(
+          `client:tmpGroupConnection:${invitationNode.getValue('id') + i}`,
+          'GroupConnection',
+        );
+        groupConnection.setLinkedRecords([], 'edges');
+        variables.input.groups.forEach(group => {
+          const groupNode = store.get(group);
+          const groupEdge = ConnectionHandler.createEdge(
+            store,
+            groupConnection,
+            groupNode,
+            'GroupEdge',
+          );
+          ConnectionHandler.insertEdgeAfter(groupConnection, groupEdge);
+        });
+        invitationNode.setLinkedRecord(groupConnection, 'groups');
         ConnectionHandler.insertEdgeBefore(invitations, invitation);
       });
       if (newInvitations.length > CONNECTION_NODES_PER_PAGE) {

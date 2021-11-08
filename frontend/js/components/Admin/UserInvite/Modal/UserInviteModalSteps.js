@@ -39,7 +39,11 @@ const USER_FETCH_QUERY = graphql`
 `;
 
 const onSubmit = (values, dispatch, props) => {
-  const emails = values.csvEmails.importedUsers.concat(values.inputEmails.split(emailSeparator));
+  let emails = values.csvEmails.importedUsers;
+  // split() returns an array with an empty string if there are no values.
+  if (values.inputEmails.split(emailSeparator)[0].length > 0) {
+    emails = emails.concat(values.inputEmails.split(emailSeparator));
+  }
   const input = {
     maxResults: INVITE_USERS_MAX_RESULTS,
     emails,
