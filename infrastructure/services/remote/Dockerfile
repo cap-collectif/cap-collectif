@@ -334,7 +334,9 @@ ENV SYMFONY_DEBUG false
 RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/__generated__ \
     && chown -R capco:capco bin translations src public app templates config fixtures admin-next \
     && mkdir -p var/cache/prod \
-    && chmod -R 777 var
+    && mkdir -p var/cache/prod/translations \
+    && chmod -R 777 var \
+    && chown -R capco:capco var
 
 # Admin-next
 ENV ADMIN_NEXT_PORT 3000
