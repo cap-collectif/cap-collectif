@@ -691,20 +691,14 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
         return false;
     }
 
-    // TODO: Why the hell is this reversed in db… https://github.com/cap-collectif/platform/issues/13455
-    public function isProfilePageNotIndexed(): bool
+    public function isProfilePageIndexed(): bool
     {
         return $this->profilePageIndexed;
     }
 
-    public function isProfilePageIndexed(): bool
+    public function setProfilePageIndexed(bool $profilePageIndexed): void
     {
-        return !$this->profilePageIndexed;
-    }
-
-    public function setProfilePageIndexed(bool $profilePageIndexed = true): void
-    {
-        $this->profilePageIndexed = !$profilePageIndexed;
+        $this->profilePageIndexed = $profilePageIndexed;
     }
 
     public function getNotificationsConfiguration(): UserNotificationsConfiguration

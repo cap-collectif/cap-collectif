@@ -199,7 +199,7 @@ InternalUser:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value, getUser()])'
                 description: 'Total of contributions count'
             profilePageIndexed:
-                type: 'Boolean'
+                type: 'Boolean!'
                 description: 'Whether or not this user profile page is indexed.'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             neighborhood:

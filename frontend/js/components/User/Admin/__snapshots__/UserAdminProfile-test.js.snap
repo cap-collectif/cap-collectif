@@ -215,7 +215,7 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
         divClassName="col-sm-8"
         id="profilePageIndexed"
         labelClassName="font-weight-normal"
-        name="profilePageIndexed"
+        name="doNotIndexProfile"
         type="checkbox"
       >
         <FormattedMessage
@@ -446,7 +446,7 @@ exports[`<UserAdminProfile/> should render, with user not confirmed by email adn
         divClassName="col-sm-8"
         id="profilePageIndexed"
         labelClassName="font-weight-normal"
-        name="profilePageIndexed"
+        name="doNotIndexProfile"
         type="checkbox"
       >
         <FormattedMessage

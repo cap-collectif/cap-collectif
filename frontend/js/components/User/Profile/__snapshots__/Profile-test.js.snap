@@ -296,7 +296,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
           divClassName="col-sm-8"
           id="profilePageIndexed"
           labelClassName="font-weight-normal"
-          name="profilePageIndexed"
+          name="doNotIndexProfile"
           type="checkbox"
         >
           <FormattedMessage
@@ -611,7 +611,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
           divClassName="col-sm-8"
           id="profilePageIndexed"
           labelClassName="font-weight-normal"
-          name="profilePageIndexed"
+          name="doNotIndexProfile"
           type="checkbox"
         >
           <FormattedMessage

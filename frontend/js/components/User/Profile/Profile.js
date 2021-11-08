@@ -86,8 +86,15 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const media =
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   delete values.media;
+
+  const profilePageIndexed = typeof values.doNotIndexProfile !== 'undefined' ? !values.doNotIndexProfile : props.viewer.profilePageIndexed;
+  if(typeof values.doNotIndexProfile !== 'undefined') {
+    delete values.doNotIndexProfile;
+  }
+
   const input = {
     ...values,
+    profilePageIndexed,
     media,
   };
 
@@ -334,7 +341,7 @@ export class Profile extends Component<Props> {
                 <div className="col-sm-3" />
                 <Field
                   id="profilePageIndexed"
-                  name="profilePageIndexed"
+                  name="doNotIndexProfile"
                   component={component}
                   type="checkbox"
                   labelClassName="font-weight-normal"
@@ -378,7 +385,7 @@ const mapStateToProps = (state: State, props: Props) => ({
     facebookUrl: props.viewer.facebookUrl ? props.viewer.facebookUrl : null,
     linkedInUrl: props.viewer.linkedInUrl ? props.viewer.linkedInUrl : null,
     twitterUrl: props.viewer.twitterUrl ? props.viewer.twitterUrl : null,
-    profilePageIndexed: props.viewer.profilePageIndexed ? props.viewer.profilePageIndexed : null,
+    doNotIndexProfile: !props.viewer.profilePageIndexed,
     userType: props.viewer.userType ? props.viewer.userType.id : null,
     neighborhood: props.viewer.neighborhood ? props.viewer.neighborhood : null,
     media: props.viewer ? props.viewer.media : undefined,

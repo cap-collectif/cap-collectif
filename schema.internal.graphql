@@ -15384,7 +15384,7 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   contributionsCount: Int!
 
   """Whether or not this user profile page is indexed."""
-  profilePageIndexed: Boolean
+  profilePageIndexed: Boolean!
 
   """Your localisation"""
   neighborhood: String

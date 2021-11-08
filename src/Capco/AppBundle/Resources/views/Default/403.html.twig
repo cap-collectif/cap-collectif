@@ -1,6 +1,5 @@
 {% set page_class = "home-page" %}
 {% extends "CapcoAppBundle::base.html.twig" %}
-
 {% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}
 {% set jumbotron_body = capco_site_parameter_value('homepage.jumbotron.body') %}
 {% set meta_description = capco_site_parameter_value('homepage.metadescription') %}
@@ -14,7 +13,8 @@
         'title':       jumbotron_title ?: siteName,
         'description': meta_description,
         'url':         url('app_homepage'),
-        'image':       image
+        'image':       image,
+        'noindex': true
     } only %}
 {% endblock %}
 

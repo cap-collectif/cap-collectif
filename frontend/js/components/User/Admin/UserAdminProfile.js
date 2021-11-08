@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import type { Dispatch, State, GlobalState } from '../../../types';
+import type { Dispatch, State, GlobalState } from '~/types';
 import type { UserAdminProfile_user } from '~relay/UserAdminProfile_user.graphql';
 import type { UserAdminProfile_viewer } from '~relay/UserAdminProfile_viewer.graphql';
 import component from '../../Form/Field';
@@ -31,7 +31,7 @@ type FormValues = {|
   +facebookUrl: ?string,
   +linkedInUrl: ?string,
   +twitterUrl: ?string,
-  +profilePageIndexed: ?boolean,
+  doNotIndexProfile: ?boolean,
   userType: string,
   +neighborhood: ?string,
   +isViewer: boolean,
@@ -95,9 +95,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const media =
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const userId = props.user.id;
-  const { id, isViewer, url, ...rest } = values;
+  const profilePageIndexed = typeof values.doNotIndexProfile !== 'undefined' ? !values.doNotIndexProfile : props.user.profilePageIndexed;
+  const { id, isViewer, url,doNotIndexProfile, ...rest } = values;
+
   const input = {
     ...rest,
+    profilePageIndexed,
     media,
     userId,
     userType: values.userType || null,
@@ -262,7 +265,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
             {!features.noindex_on_profiles ? (
               <Field
                 id="profilePageIndexed"
-                name="profilePageIndexed"
+                name="doNotIndexProfile"
                 component={component}
                 type="checkbox"
                 disabled={!isViewerOrSuperAdmin}
@@ -314,7 +317,7 @@ const mapStateToProps = (state: GlobalState, { user, viewer }: RelayProps) => ({
     facebookUrl: user.facebookUrl ? user.facebookUrl : null,
     linkedInUrl: user.linkedInUrl ? user.linkedInUrl : null,
     twitterUrl: user.twitterUrl ? user.twitterUrl : null,
-    profilePageIndexed: user.profilePageIndexed ? user.profilePageIndexed : null,
+    doNotIndexProfile: !user.profilePageIndexed,
     userType: user.userType ? user.userType.id : null,
     neighborhood: user.neighborhood ? user.neighborhood : null,
     media: user ? user.media : undefined,
