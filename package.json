@@ -50,7 +50,8 @@
     },
     "workspaces": [
         "packages/*",
-        "admin-next"
+        "admin-next",
+        "cypress"
     ],
     "pre-commit": "precommit",
     "flow-coverage-report": {
