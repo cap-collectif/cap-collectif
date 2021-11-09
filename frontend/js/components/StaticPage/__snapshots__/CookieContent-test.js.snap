@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CookieContent /> should render correctly with 1 cookie type 1`] = `
+exports[`<CookieContent /> should render correctly with 1 cookie type and no script 1`] = `
 <div>
   <div>
     <FormattedHTMLMessage
@@ -14,7 +14,7 @@ exports[`<CookieContent /> should render correctly with 1 cookie type 1`] = `
     />
   </div>
   <FormattedHTMLMessage
-    id="cookies-page-texte-part1-2"
+    id="cookies-page-texte-part1-2-noScript"
     tagName="span"
     values={
       Object {

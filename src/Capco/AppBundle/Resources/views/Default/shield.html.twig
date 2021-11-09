@@ -6,11 +6,13 @@
     {# Footer #}
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
     {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
-    {{ react_render_component('CookieManagerApp', {
-        'props': {
-            'isLink': false,
-        }
-    }) }}
+    {%  if ads_js or analytic_js %}
+        {{ react_render_component('CookieManagerApp', {
+            'props': {
+                'isLink': false,
+            }
+        }) }}
+    {%  endif %}
     <style>body {
             background-color: #F6F6F6
         }</style>
@@ -50,12 +52,13 @@
                 {% endif %}
                     <span class="list-separator">•</span>
                     <li>
-                        {{ react_render_component('CookieManagerApp', {
-                            'props': {
-                                'isLink':  true,
-                                'withListSeparator':  false,
-                            }
-                        }) }}
+                        {%  if ads_js or analytic_js %}
+                            {{ react_render_component('CookieManagerApp', {
+                                'props': {
+                                    'isLink':  true,
+                                    'withListSeparator':  false,                                }
+                            }) }}
+                        {%  endif %}
                     </li>
             </ul>
         </div>

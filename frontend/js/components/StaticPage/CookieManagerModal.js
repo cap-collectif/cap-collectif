@@ -68,6 +68,10 @@ export const CookieManagerModal = ({
     onClose();
   };
 
+  if(!analyticsJs && !adJs){
+    return null;
+  }
+
   return (
     <div className="cookie-manager">
       {isLink ? (

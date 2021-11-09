@@ -42,7 +42,7 @@ export class CookieContent extends React.Component<Props, State> {
   render() {
     const { analyticsJs, adJs, cookiesList } = this.props;
     const cookies = getCookieType(analyticsJs, adJs);
-
+    const hasScript = analyticsJs || adJs;
     return (
       <div>
         {cookies.cookieType > 0 ? (
@@ -60,7 +60,10 @@ export class CookieContent extends React.Component<Props, State> {
             />
           </div>
         )}
-        <FormattedHTMLMessage id="cookies-page-texte-part1-2" values={{ platformLink: baseUrl }} />
+        <FormattedHTMLMessage
+          id={hasScript ? 'cookies-page-texte-part1-2' : 'cookies-page-texte-part1-2-noScript'}
+          values={{ platformLink: baseUrl }}
+        />
         <FormattedHTMLMessage
           id="cookies-page-texte-tmp-part1-3"
           values={{ platformLink: baseUrl, nbCookies: cookies.nbCookies }}

@@ -32,7 +32,7 @@ describe('<CookieContent />', () => {
     const wrapper = shallow(<CookieContent {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
-  it('should render correctly with 1 cookie type', () => {
+  it('should render correctly with 1 cookie type and no script', () => {
     const props = {
       analyticsJs: '',
       adJs: '',

@@ -19,12 +19,13 @@
     {# Footer #}
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
     {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
+    {%  if ads_js or analytic_js %}
         {{ react_render_component('CookieManagerApp', {
             'props': {
                 'isLink': false,
             }
         }) }}
-
+    {%  endif %}
     {% include '@CapcoApp/Default/footer.html.twig' %}
 
 {% endblock %}
