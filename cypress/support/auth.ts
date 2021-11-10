@@ -10,6 +10,11 @@ const LoginAsData = (email: string) => {
         email: 'lbrunet@cap-collectif.com',
         password: 'toto',
       }
+    case 'project_owner':
+      return {
+        email: 'theo@cap-collectif.com',
+        password: 'toto',
+      }
     case 'user':
       return {
         email: 'user@test.com',

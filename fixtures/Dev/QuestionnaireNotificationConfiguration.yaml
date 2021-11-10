@@ -92,3 +92,7 @@ Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfi
         onQuestionnaireReplyCreate: false
         onQuestionnaireReplyUpdate: false
         onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationOwnerWithtoutStep:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false

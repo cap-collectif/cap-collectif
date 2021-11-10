@@ -1,25 +1,60 @@
-import { AdminProjectsPage } from '../pages'
+import { AdminProjectsListPage, AdminProjectPage, AdminDashboardPage } from '../pages'
 
 describe('Admin projects', () => {
   beforeEach(() => {
-    cy.directLogin({
-      email: 'theo@cap-collectif.com',
-      password: 'toto',
-    })
+    cy.directLoginAs('project_owner')
   })
-  // it('should allow a project admin to go to the back-office projects list page', () => {
-  //   AdminProjectsPage.visit()
-  //   cy.contains('Projet avec administrateur de projet').should('exist')
-  // })
-  // it('should redirect a project admin when going to the admin dashboard page', () => {
-  //   cy.visit('/admin/dashboard')
-  //   cy.url().should('not.contain', '/admin/dashboard')
-  //   cy.url().should('contain', AdminProjectsPage.path)
-  // })
-  // it('should redirect a project admin when navigating to back office from the main menu', () => {
-  //   cy.get('#navbar-username').click()
-  //   cy.contains('global.administration').click()
-  //   cy.url().should('not.contain', '/admin/dashboard')
-  //   cy.url().should('contain', AdminProjectsPage.path)
-  // })
+  it('should allow a project admin to go to the back-office projects list page', () => {
+    AdminProjectsListPage.visit()
+    AdminProjectsListPage.checkProjectExistence('Projet avec administrateur de projet')
+  })
+  it('should redirect a project admin when going to the admin dashboard page', () => {
+    AdminDashboardPage.visit()
+    cy.url().should('not.contain', AdminDashboardPage.path)
+    cy.url().should('contain', AdminProjectsListPage.path)
+  })
+  it('should redirect a project admin when navigating to back office from the main menu', () => {
+    cy.visit('/')
+    AdminDashboardPage.clickAdminLink()
+    cy.url().should('not.contain', AdminDashboardPage.path)
+    cy.url().should('contain', AdminProjectsListPage.path)
+  })
+})
+describe('Mutations', () => {
+  beforeEach(() => {
+    cy.task('db:restore')
+    cy.directLoginAs('project_owner')
+  })
+  it('should allow a project admin to add his proposalform', () => {
+    cy.interceptGraphQLOperation({ operationName: 'UpdateProjectAlphaMutation' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectAdminPageQuery' })
+    AdminProjectPage.visit('projectWithOwner')
+    cy.wait('@ProjectAdminPageQuery')
+    AdminProjectPage.openAddModal()
+    AdminProjectPage.collectStepSelector.click()
+    AdminProjectPage.fillStepInputs('title', 'label')
+    cy.assertReactSelectOptionCount('#step-proposalForm', 1)
+    cy.selectReactSelectOption('div[id="step-proposalForm"]', 'Formulaire avec propriétaire')
+    AdminProjectPage.submitStepModal()
+    AdminProjectPage.checkStepListLength(7)
+    AdminProjectPage.save()
+    cy.wait('@UpdateProjectAlphaMutation')
+    cy.contains('global.saved')
+  })
+  it('should allow a project admin to add his questionnaire', () => {
+    cy.interceptGraphQLOperation({ operationName: 'UpdateProjectAlphaMutation' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectAdminPageQuery' })
+    AdminProjectPage.visit('projectWithOwner')
+    cy.wait('@ProjectAdminPageQuery')
+    AdminProjectPage.openAddModal()
+    AdminProjectPage.questionnaireSelector.click()
+    AdminProjectPage.fillStepInputs('title', 'label')
+    cy.assertReactSelectOptionCount('#step-questionnaire', 1)
+    cy.selectReactSelectOption('#step-questionnaire', 'Questionnaire visible par un owner sans step')
+    AdminProjectPage.submitStepModal()
+    AdminProjectPage.checkStepListLength(7)
+    AdminProjectPage.save()
+    cy.wait('@UpdateProjectAlphaMutation')
+    cy.contains('global.saved')
+  })
 })

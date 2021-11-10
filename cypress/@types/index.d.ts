@@ -30,13 +30,15 @@ declare namespace Cypress {
     email: string
     password: string
   }
-  type LoginAsUsernames = 'admin' | 'super_admin' | 'user'
+  type LoginAsUsernames = 'admin' | 'super_admin' | 'project_owner' | 'user'
   interface cy {
     appendOperationToGraphQLFetch(): void
   }
   interface Chainable {
     task(event: 'db:restore', arg?: any, options?: Partial<Loggable & Timeoutable>): Chainable<any>
     interceptGraphQLOperation(options: InterceptGraphQLOperationOptions): Chainable<null>
+    assertReactSelectOptionCount(selector: string, value: number): Chainable<any>
+    selectReactSelectOption(selector: string, query: string): Chainable<any>
     login(options: LoginOptions): Chainable<any>
     confirmRecaptcha(): Chainable<void>
     loginAs(username: LoginAsUsernames): Chainable<any>

@@ -1,4 +1,4 @@
-export default new (class AdminProjectsPage {
+export default new (class AdminProjectsListPage {
   get cy() {
     return cy
   }
@@ -9,5 +9,9 @@ export default new (class AdminProjectsPage {
 
   visit() {
     return this.cy.visit(this.path)
+  }
+
+  checkProjectExistence(projectName: string) {
+    this.cy.contains(projectName).should('exist')
   }
 })()

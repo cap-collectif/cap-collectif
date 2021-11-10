@@ -17,8 +17,14 @@ Object {
             "title": "Questionnaire pour budget participatif disponible",
           },
         },
+        Object {
+          "node": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3duZXJXaXRob3V0U3RlcA==",
+            "title": "Questionnaire visible par un owner sans step",
+          },
+        },
       ],
-      "totalCount": 2,
+      "totalCount": 3,
     },
   },
 }

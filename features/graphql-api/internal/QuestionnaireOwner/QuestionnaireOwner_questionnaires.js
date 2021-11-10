@@ -90,9 +90,11 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(2);
-    expect(response.viewer.questionnaires.edges).toHaveLength(2);
+    expect(response.viewer.questionnaires.totalCount).toBe(3);
+    expect(response.viewer.questionnaires.edges).toHaveLength(3);
     expect(response.viewer.questionnaires.edges[0].node.owner.username).toBe('Théo QP');
+    expect(response.viewer.questionnaires.edges[1].node.owner.username).toBe('Théo QP');
+    expect(response.viewer.questionnaires.edges[2].node.owner.username).toBe('Théo QP');
   });
 
   it('should correctly fetch all questionnaires if no affiliations given.', async () => {
@@ -104,8 +106,8 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(23);
-    expect(response.viewer.questionnaires.edges).toHaveLength(23);
+    expect(response.viewer.questionnaires.totalCount).toBe(24);
+    expect(response.viewer.questionnaires.edges).toHaveLength(24);
   });
 
   it('should correctly filter questionnaires by a given `query`', async () => {
@@ -118,11 +120,8 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(1);
-    expect(response.viewer.questionnaires.edges).toHaveLength(1);
-    expect(response.viewer.questionnaires.edges[0].node.title).toBe(
-      'Questionnaire visible par un owner',
-    );
+    expect(response.viewer.questionnaires.totalCount).toBe(2);
+    expect(response.viewer.questionnaires.edges).toHaveLength(2);
   });
 
   it('should correctly fetch all questionnaires if given `query` is empty', async () => {
@@ -135,8 +134,8 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(2);
-    expect(response.viewer.questionnaires.edges).toHaveLength(2);
+    expect(response.viewer.questionnaires.totalCount).toBe(3);
+    expect(response.viewer.questionnaires.edges).toHaveLength(3);
   });
 
   it('should correctly order questionnaires by a given field and direction', async () => {
@@ -149,11 +148,12 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(2);
-    expect(response.viewer.questionnaires.edges).toHaveLength(2);
+    expect(response.viewer.questionnaires.totalCount).toBe(3);
+    expect(response.viewer.questionnaires.edges).toHaveLength(3);
 
     expect(response.viewer.questionnaires.edges[0].node.createdAt).toBe('2019-09-11 00:00:00');
     expect(response.viewer.questionnaires.edges[1].node.createdAt).toBe('2020-09-11 00:00:00');
+    expect(response.viewer.questionnaires.edges[2].node.createdAt).toBe('2020-09-11 00:00:00');
   });
 
   it('should correctly fetch all available questionnaires.', async () => {
