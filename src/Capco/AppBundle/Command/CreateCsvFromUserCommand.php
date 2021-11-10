@@ -95,13 +95,12 @@ fragment commentInfos on Comment {
 EOF;
 
     protected static $defaultName = 'capco:export:user';
-
-    protected $userRepository;
-    protected $userArchiveRepository;
-    protected $em;
-    protected $executor;
-    protected $listener;
-    protected $projectRootDir;
+    protected UserRepository $userRepository;
+    protected UserArchiveRepository $userArchiveRepository;
+    protected EntityManagerInterface $em;
+    protected Executor $executor;
+    protected GraphQlAclListener $listener;
+    protected string $projectRootDir;
 
     public function __construct(
         UserRepository $userRepository,
@@ -721,6 +720,7 @@ EOF;
       comments {
         totalCount
       }
+      userIdentificationCode
     }
   }
 }

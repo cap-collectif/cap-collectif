@@ -22,7 +22,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
 
     const SQL_QUERY = <<<'EOF'
     select * from (
-    (select 'id', 'username', 'email', 'emailConfirmed', 'role','createdAt', 'updatedAt','lastLogin' , 'enabled','confirmedAccountAt' ,'locked', 'gender', 'firstname', 'lastname','dateOfBirth', 'websiteUrl' ,'biography',  'address','deletedAccountAt' , 'facebookId' , 'status', 'internalComm' , 'externalComm')
+    (select 'id', 'username', 'email', 'emailConfirmed', 'role','createdAt', 'updatedAt','lastLogin' , 'enabled','confirmedAccountAt' ,'locked', 'gender', 'firstname', 'lastname','dateOfBirth', 'websiteUrl' ,'biography',  'address','deletedAccountAt' , 'facebookId' , 'status', 'internalComm' , 'externalComm', 'userIdentificationCode')
     UNION  (select DISTINCT(u.id), IFNULL(u.username, '') as username, u.email, IF(ISNULL(u.confirmation_token), 'YES', 'NO') as emailConfirmed,
     CASE
         WHEN u.roles LIKE '%%ROLE_ADMIN%%' THEN "Administrateur"
@@ -31,7 +31,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         ELSE 'Utilisateur'
      END AS role, u.created_at as createdAt, IFNULL(u.updated_at, '') as updatedAt, IFNULL(u.last_login, '') as lastLogin,
      IF(u.enabled = 0 , 'NO', 'YES') as enabled, IFNULL(u.confirmed_account_at, '') as confirmedAccountAt,
-     IF(u.locked = 0 , 'NO', 'YES') as locked,IFNULL(u.gender, '') as gender, IFNULL(u.firstname, '') as firstname, IFNULL(u.lastname, '') as lastname, IFNULL(u.date_of_birth, '') as dateOfBirth, IFNULL(u.website_url, '') as websiteUrl, IFNULL(u.biography, ''), IFNULL(u.address, ''), IFNULL(u.deleted_account_at, '') as deletedAccountAt, IFNULL(u.facebook_id, '') as facebookId, IFNULL(utt.name, ''), IF(u.consent_internal_communication = 0 , 'NO', 'YES') as internalComm, IF(u.consent_external_communication = 0 , 'NO', 'YES') as externalComm from fos_user u left join user_type ut on u.user_type_id = ut.id left join user_type_translation utt on utt.translatable_id  = ut.id WHERE  u.roles not like "%s" AND (utt.locale = "%s" OR utt.locale IS NULL) ORDER BY u.created_at )
+     IF(u.locked = 0 , 'NO', 'YES') as locked,IFNULL(u.gender, '') as gender, IFNULL(u.firstname, '') as firstname, IFNULL(u.lastname, '') as lastname, IFNULL(u.date_of_birth, '') as dateOfBirth, IFNULL(u.website_url, '') as websiteUrl, IFNULL(u.biography, ''), IFNULL(u.address, ''), IFNULL(u.deleted_account_at, '') as deletedAccountAt, IFNULL(u.facebook_id, '') as facebookId, IFNULL(utt.name, ''), IF(u.consent_internal_communication = 0 , 'NO', 'YES') as internalComm, IF(u.consent_external_communication = 0 , 'NO', 'YES') as externalComm, IFNULL(u.user_identification_code, '') as userIdentificationCode from fos_user u left join user_type ut on u.user_type_id = ut.id left join user_type_translation utt on utt.translatable_id  = ut.id WHERE  u.roles not like "%s" AND (utt.locale = "%s" OR utt.locale IS NULL) ORDER BY u.created_at )
     ) a;
 EOF;
 

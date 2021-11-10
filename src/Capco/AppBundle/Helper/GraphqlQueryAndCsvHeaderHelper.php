@@ -34,6 +34,7 @@ class GraphqlQueryAndCsvHeaderHelper
     city
     phone
     url
+    userIdentificationCode
 ';
 
     public const USER_HEADERS = [
@@ -61,6 +62,7 @@ class GraphqlQueryAndCsvHeaderHelper
         'user_postalAddress',
         'user_phone',
         'user_profileUrl',
+        'userIdentificationCode',
     ];
 
     public const USER_HEADERS_EVENTS = [

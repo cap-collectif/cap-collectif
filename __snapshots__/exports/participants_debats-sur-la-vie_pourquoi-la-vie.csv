@@ -1,6 +1,6 @@
-﻿user_id,user_email,user_userName,user_TypeName,user_createdAt,user_updatedAt,user_lastLogin,user_rolesText,user_consentExternalCommunication,user_enabled,user_isEmailConfirmed,user_locked,user_phoneConfirmed,user_gender,user_websiteUrl,user_biography,user_zipCode,user_city,user_firstname,user_lastname,user_dateOfBirth,user_postalAddress,user_phone,user_profileUrl
-VXNlcjp1c2VyMTE=,user11@cap-collectif.com,user11,Citoyen,"2017-01-01 00:11:00",,,Utilisateur,,1,1,,,,,,,,firstname11,lastname11,,,,https://capco.dev/profile/user11
-VXNlcjp1c2VyMTA=,user10@cap-collectif.com,user10,Citoyen,"2017-01-01 00:10:00",,,Utilisateur,,1,1,,,,,,,,firstname10,lastname10,,,,https://capco.dev/profile/user10
-VXNlcjp1c2VyOQ==,user9@cap-collectif.com,user9,Citoyen,"2017-01-01 00:09:00",,,Utilisateur,,1,1,,,,,,,,firstname9,lastname9,,,,https://capco.dev/profile/user9
-VXNlcjp1c2VyOA==,user8@cap-collectif.com,user8,Citoyen,"2017-01-01 00:08:00",,,Utilisateur,,1,1,,,,,,,,firstname8,lastname8,,,,https://capco.dev/profile/user8
-VXNlcjp1c2VyNw==,user7@cap-collectif.com,user7,Citoyen,"2017-01-01 00:07:00",,,Utilisateur,,1,1,,,,,,,,firstname7,lastname7,,,,https://capco.dev/profile/user7
+﻿user_id,user_email,user_userName,user_TypeName,user_createdAt,user_updatedAt,user_lastLogin,user_rolesText,user_consentExternalCommunication,user_enabled,user_isEmailConfirmed,user_locked,user_phoneConfirmed,user_gender,user_websiteUrl,user_biography,user_zipCode,user_city,user_firstname,user_lastname,user_dateOfBirth,user_postalAddress,user_phone,user_profileUrl,userIdentificationCode
+VXNlcjp1c2VyMTE=,user11@cap-collectif.com,user11,Citoyen,"2017-01-01 00:11:00",,,Utilisateur,,1,1,,,,,,,,firstname11,lastname11,,,,https://capco.dev/profile/user11,
+VXNlcjp1c2VyMTA=,user10@cap-collectif.com,user10,Citoyen,"2017-01-01 00:10:00",,,Utilisateur,,1,1,,,,,,,,firstname10,lastname10,,,,https://capco.dev/profile/user10,
+VXNlcjp1c2VyOQ==,user9@cap-collectif.com,user9,Citoyen,"2017-01-01 00:09:00",,,Utilisateur,,1,1,,,,,,,,firstname9,lastname9,,,,https://capco.dev/profile/user9,
+VXNlcjp1c2VyOA==,user8@cap-collectif.com,user8,Citoyen,"2017-01-01 00:08:00",,,Utilisateur,,1,1,,,,,,,,firstname8,lastname8,,,,https://capco.dev/profile/user8,
+VXNlcjp1c2VyNw==,user7@cap-collectif.com,user7,Citoyen,"2017-01-01 00:07:00",,,Utilisateur,,1,1,,,,,,,,firstname7,lastname7,,,,https://capco.dev/profile/user7,

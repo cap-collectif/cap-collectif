@@ -132,6 +132,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
                             : null,
                         $contributor['phone'],
                         $contributor['url'],
+                        $contributor['userIdentificationCode'],
                     ])
                 );
             },

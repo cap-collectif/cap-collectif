@@ -47,6 +47,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         'city',
         'phone',
         'profileUrl',
+        'userIdentificationCode',
     ];
     /**
      * @var WriterInterface
@@ -158,6 +159,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                             $contributor['city'],
                             $contributor['phone'],
                             $contributor['url'],
+                            $contributor['userIdentificationCode'],
                         ]
                     );
                     $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));

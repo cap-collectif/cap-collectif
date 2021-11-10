@@ -1,4 +1,4 @@
-﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl
-VXNlcjp1c2VySWFu,ian@cap-collectif.com,"Ian apprenti DevOps",,"2020-03-09 09:30:00",,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/ianapprentidevops
-VXNlcjp1c2VySmVhbg==,jean@cap-collectif.com,Juan,Citoyen,"2018-09-03 09:30:00",,,"Super Admin|Utilisateur",No,Yes,Yes,No,No,,,,"Yrf pungf qbzvarebag ovragbg yr zbaqr.",,,,,https://capco.dev/profile/juan1
-VXNlcjp1c2VyS2lyb3VsZQ==,pierre@cap-collectif.com,ptondereau,Citoyen,"2015-01-12 00:00:00",,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/ptondereau
+﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl,userIdentificationCode
+VXNlcjp1c2VySWFu,ian@cap-collectif.com,"Ian apprenti DevOps",,"2020-03-09 09:30:00",,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/ianapprentidevops,
+VXNlcjp1c2VySmVhbg==,jean@cap-collectif.com,Juan,Citoyen,"2018-09-03 09:30:00",,,"Super Admin|Utilisateur",No,Yes,Yes,No,No,,,,"Yrf pungf qbzvarebag ovragbg yr zbaqr.",,,,,https://capco.dev/profile/juan1,
+VXNlcjp1c2VyS2lyb3VsZQ==,pierre@cap-collectif.com,ptondereau,Citoyen,"2015-01-12 00:00:00",,,"Utilisateur|Créateur de projet",No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/ptondereau,
