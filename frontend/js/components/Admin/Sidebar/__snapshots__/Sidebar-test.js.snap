@@ -80,7 +80,7 @@ exports[`<Sidebar /> renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="sc-bdnxRM Flex___StyledAppBox-RSPpX lglZEl Sidebar___StyledFlex-lcxgAl hsycRo"
+      class="sc-bdnxRM Flex___StyledAppBox-RSPpX lglZEl Sidebar___StyledFlex-lcxgAl jPnYit"
     >
       <div
         class="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
@@ -326,7 +326,7 @@ exports[`<Sidebar /> renders when the user is a project admin and not an admin 1
       </button>
     </div>
     <div
-      class="sc-bdnxRM Flex___StyledAppBox-RSPpX lglZEl Sidebar___StyledFlex-lcxgAl hsycRo"
+      class="sc-bdnxRM Flex___StyledAppBox-RSPpX lglZEl Sidebar___StyledFlex-lcxgAl jPnYit"
     >
       <div
         class="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"

@@ -141,6 +141,9 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
             overflowY: 'scroll',
             msOverflowStyle: 'none',
             scrollbarWidth: 'none',
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
           }}>
           <Accordion spacing={0} defaultAccordion={defaultAccordion}>
             {isAdmin ? (
