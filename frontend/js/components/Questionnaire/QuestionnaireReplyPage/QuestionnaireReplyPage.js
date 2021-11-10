@@ -26,7 +26,9 @@ export const queryReply = graphql`
       id
       ... on Reply {
         createdAt
-        publishedAt
+        ...on UserReply {
+            publishedAt
+        }
         questionnaire {
           ...ReplyForm_questionnaire
         }

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Reply;
@@ -36,13 +37,13 @@ class AbstractResponseRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getByReply(Reply $reply, bool $showPrivate = false): iterable
+    public function getByReply(ReplyInterface $reply, bool $showPrivate = false): iterable
     {
         $qb = $this->createQueryBuilder('r')
             ->addSelect('question')
             ->leftJoin('r.question', 'question')
             ->leftJoin('question.questionnaireAbstractQuestion', 'questionnaire_abstract_question')
-            ->andWhere('r.reply = :reply')
+            ->andWhere('r.reply = :reply OR r.replyAnonymous = :reply')
             ->orderBy('questionnaire_abstract_question.position', 'ASC')
             ->setParameter('reply', $reply->getId());
         if (!$showPrivate) {

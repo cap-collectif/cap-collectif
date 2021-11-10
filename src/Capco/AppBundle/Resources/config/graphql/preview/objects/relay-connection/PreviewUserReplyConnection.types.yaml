@@ -1,8 +1,8 @@
-PreviewReplyConnection:
+PreviewUserReplyConnection:
     type: relay-connection
     config:
-        name: ReplyConnection
-        nodeType: PreviewReply!
+        name: UserReplyConnection
+        nodeType: PreviewUserReply!
         connectionFields:
             totalCount:
                 type: Int!

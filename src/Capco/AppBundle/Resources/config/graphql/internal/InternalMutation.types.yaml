@@ -172,27 +172,45 @@ InternalMutation:
                     inputType: DeleteVersionInput
                     payloadType: DeleteVersionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteVersionMutation", [value, getUser()])'
-            addReply:
+            addUserReply:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: AddReplyInput
-                    payloadType: AddReplyPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddReplyMutation", [value, getUser()])'
-            updateReply:
+                    inputType: AddUserReplyInput
+                    payloadType: AddUserReplyPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUserReplyMutation", [value, getUser()])'
+            updateUserReply:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: UpdateReplyInput
-                    payloadType: UpdateReplyPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateReplyMutation", [value, getUser()])'
-            deleteReply:
+                    inputType: UpdateUserReplyInput
+                    payloadType: UpdateUserReplyPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserReplyMutation", [value, getUser()])'
+            deleteUserReply:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: DeleteReplyInput
-                    payloadType: DeleteReplyPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteReplyMutation", [value["id"], getUser()])'
+                    inputType: DeleteUserReplyInput
+                    payloadType: DeleteUserReplyPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteUserReplyMutation", [value["id"], getUser()])'
+            addAnonymousReply:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddAnonymousReplyInput
+                    payloadType: AddAnonymousReplyPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddAnonymousReplyMutation", [value])'
+            updateAnonymousReply:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateAnonymousReplyInput
+                    payloadType: UpdateAnonymousReplyPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAnonymousReplyMutation", [value])'
+            deleteAnonymousReply:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteAnonymousReplyInput
+                    payloadType: DeleteAnonymousReplyPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAnonymousReplyMutation", [value])'
             # User notifications
             changeUserNotificationsConfiguration:
                 access: "@=hasRole('ROLE_USER')"

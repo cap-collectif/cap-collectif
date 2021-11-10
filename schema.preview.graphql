@@ -1455,7 +1455,7 @@ type Questionnaire implements Node {
 
     """(ROLE_ADMIN only) Select also draft replies."""
     includeDraft: Boolean = false
-  ): ReplyConnection!
+  ): UserReplyConnection!
 }
 
 """A step is a part of a project."""
@@ -1488,63 +1488,6 @@ type QuestionnaireStep implements Node & Step {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): UserConnection!
-}
-
-"""Represents a user's answer to a questionnaire."""
-type Reply implements Node & Publishable {
-  """The ID of an object."""
-  id: ID!
-
-  """Whether or not the entity is published."""
-  published: Boolean!
-
-  """Identifies when the entity can no more be published."""
-  publishableUntil: DateTime
-
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
-
-  """Reason that the entity is not published."""
-  notPublishedReason: NotPublishedReason
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """Whether or not the entity is a draft."""
-  draft: Boolean!
-
-  """Identifies when the entity was undraft at."""
-  undraftAt: DateTime
-
-  """The responses of the reply."""
-  responses: [Response]!
-
-  """The author of the contribution."""
-  author: User!
-}
-
-"""A connection to a list of items."""
-type ReplyConnection {
-  """Identifies the total count of items in the connection."""
-  totalCount: Int!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """Information to aid in pagination."""
-  edges: [ReplyEdge]
-}
-
-"""An edge in a connection."""
-type ReplyEdge {
-  """The item at the end of the edge."""
-  node: Reply!
-
-  """A cursor for use in pagination."""
-  cursor: String!
 }
 
 """A response to a question."""
@@ -1943,6 +1886,63 @@ enum UserOrderField {
 
   """Allowing ordering a list of user by their activity."""
   ACTIVITY
+}
+
+"""Represents a user answer to a questionnaire."""
+type UserReply implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Whether or not the entity is a draft."""
+  draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
+
+  """The responses of the reply."""
+  responses: [Response]!
+
+  """The author of the contribution."""
+  author: User!
+}
+
+"""A connection to a list of items."""
+type UserReplyConnection {
+  """Identifies the total count of items in the connection."""
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [UserReplyEdge]
+}
+
+"""An edge in a connection."""
+type UserReplyEdge {
+  """The item at the end of the edge."""
+  node: UserReply!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """A type of person"""

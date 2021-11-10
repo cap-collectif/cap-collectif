@@ -1,0 +1,8 @@
+DeleteAnonymousReplyInput:
+    type: relay-mutation-input
+    config:
+        description: 'Delete an anonymous reply'
+        fields:
+            hashedToken:
+                type: 'String!'
+                description: 'The hashed token of the reply'

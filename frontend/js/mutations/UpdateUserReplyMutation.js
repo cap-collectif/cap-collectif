@@ -3,13 +3,13 @@ import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  UpdateReplyMutationVariables,
-  UpdateReplyMutationResponse,
-} from '~relay/UpdateReplyMutation.graphql';
+  UpdateUserReplyMutationVariables,
+  UpdateUserReplyMutationResponse,
+} from '~relay/UpdateUserReplyMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateReplyMutation($input: UpdateReplyInput!) {
-    updateReply(input: $input) {
+  mutation UpdateUserReplyMutation($input: UpdateUserReplyInput!) {
+    updateUserReply(input: $input) {
       reply {
         id
         ...ReplyForm_reply
@@ -19,7 +19,9 @@ const mutation = graphql`
   }
 `;
 
-const commit = (variables: UpdateReplyMutationVariables): Promise<UpdateReplyMutationResponse> =>
+const commit = (
+  variables: UpdateUserReplyMutationVariables,
+): Promise<UpdateUserReplyMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,

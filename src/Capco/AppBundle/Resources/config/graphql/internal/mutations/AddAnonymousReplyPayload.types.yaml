@@ -1,0 +1,13 @@
+AddAnonymousReplyPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            reply:
+                type: 'InternalAnonymousReply'
+                description: 'The created reply'
+            questionnaire:
+                type: 'InternalQuestionnaire'
+                description: 'The associated questionnaire'
+            token:
+                type: 'String!'
+                description: 'The reply token'

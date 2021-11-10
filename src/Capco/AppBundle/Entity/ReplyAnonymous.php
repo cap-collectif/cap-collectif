@@ -2,20 +2,16 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
-use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
-use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TokenTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,30 +19,20 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="reply", indexes={
- *     @ORM\Index(name="idx_author", columns={"id", "author_id"}),
- *     @ORM\Index(name="idx_questionnaire_published", columns={"id", "questionnaire_id", "published", "is_draft", "publishedAt"}),
- *     @ORM\Index(name="idx_author_draft", columns={"id", "questionnaire_id", "author_id", "private", "is_draft"})
+ * @ORM\Table(name="reply_anonymous", indexes={
+ *     @ORM\Index(name="idx_questionnaire_published", columns={"id", "questionnaire_id", "published", "publishedAt"}),
  * })
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyAnonymousRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class Reply implements ReplyInterface, Publishable, DraftableInterface
+class ReplyAnonymous implements ReplyInterface
 {
     use AuthorInformationTrait;
-    use DraftableTrait;
     use HasResponsesTrait;
-    use PrivatableTrait;
     use PublishableTrait;
     use TimestampableTrait;
+    use TokenTrait;
     use UuidTrait;
-
-    /**
-     * @Assert\NotNull()
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="replies")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     */
-    private $author;
 
     /**
      * @Assert\NotNull()
@@ -58,7 +44,7 @@ class Reply implements ReplyInterface, Publishable, DraftableInterface
     /**
      * @ORM\OneToMany(
      *  targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse",
-     *  mappedBy="reply",
+     *  mappedBy="replyAnonymous",
      *  cascade={"persist", "remove"},
      *  orphanRemoval=true
      * )
@@ -69,7 +55,12 @@ class Reply implements ReplyInterface, Publishable, DraftableInterface
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    private \DateTimeInterface $updatedAt;
+
+    /**
+     * @ORM\Column(name="participant_email", type="string", nullable=true)
+     */
+    private ?string $participantEmail;
 
     public function __construct()
     {
@@ -90,18 +81,6 @@ class Reply implements ReplyInterface, Publishable, DraftableInterface
     public function getRelated()
     {
         return null;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
     }
 
     public function getQuestionnaire(): ?Questionnaire
@@ -133,14 +112,24 @@ class Reply implements ReplyInterface, Publishable, DraftableInterface
         return $questionnaire ? $questionnaire->getRealQuestions() : new ArrayCollection();
     }
 
-    public function setResponseOn(AbstractResponse $response)
+    public function setResponseOn(AbstractResponse $response): void
     {
-        $response->setReply($this);
+        $response->setReplyAnonymous($this);
     }
 
-    public function viewerCanSee(User $viewer): bool
+    /**
+     * @return string
+     */
+    public function getParticipantEmail(): ?string
     {
-        return $viewer === $this->getAuthor();
+        return $this->participantEmail;
+    }
+
+    public function setParticipantEmail(?string $participantEmail = null): self
+    {
+        $this->participantEmail = $participantEmail;
+
+        return $this;
     }
 
     /**
@@ -159,13 +148,12 @@ class Reply implements ReplyInterface, Publishable, DraftableInterface
 
     public static function getElasticsearchTypeName(): string
     {
-        return 'reply';
+        return 'replyAnonymous';
     }
 
     public static function getElasticsearchSerializationGroups(): array
     {
         return [
-            'ElasticsearchReplyNestedAuthor',
             'ElasticsearchReply',
             'ElasticsearchReplyNestedStep',
             'ElasticsearchReplyNestedProject',

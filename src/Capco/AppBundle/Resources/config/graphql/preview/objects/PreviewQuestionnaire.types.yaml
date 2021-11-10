@@ -10,7 +10,7 @@ PreviewQuestionnaire:
                 description: 'The list of questions of the questionnaire.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", [value])'
             replies:
-                type: 'PreviewReplyConnection!'
+                type: 'PreviewUserReplyConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     includeUnpublished:

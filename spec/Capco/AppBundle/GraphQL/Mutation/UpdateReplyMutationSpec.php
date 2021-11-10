@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Capco\AppBundle\GraphQL\Mutation\UpdateReplyMutation;
+use Capco\AppBundle\GraphQL\Mutation\UpdateUserReplyMutation;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -50,7 +50,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(UpdateReplyMutation::class);
+        $this->shouldHaveType(UpdateUserReplyMutation::class);
     }
 
     public function it_should_published_a_draft(
@@ -229,10 +229,10 @@ class UpdateReplyMutationSpec extends ObjectBehavior
 
         $responsesFormatter->format($values['responses'])->shouldBeCalled();
 
-        $formFactory->create(ReplyType::class, $reply, ['anonymousAllowed' => true])->willReturn($form);
-        $form
-            ->submit(['draft' => false, 'responses' => []], false)
-            ->willReturn(null);
+        $formFactory
+            ->create(ReplyType::class, $reply, ['anonymousAllowed' => true])
+            ->willReturn($form);
+        $form->submit(['draft' => false, 'responses' => []], false)->willReturn(null);
         $form->isValid()->willReturn(false);
         $form->getErrors()->willReturn([]);
         $form->all()->willReturn([]);

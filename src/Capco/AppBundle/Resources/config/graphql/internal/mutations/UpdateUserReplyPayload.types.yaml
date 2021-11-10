@@ -1,7 +1,7 @@
-UpdateReplyPayload:
+UpdateUserReplyPayload:
     type: relay-mutation-payload
     config:
         fields:
             reply:
-                type: 'InternalReply'
+                type: 'InternalUserReply'
                 description: 'Update a reply'

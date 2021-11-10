@@ -1,0 +1,11 @@
+UpdateAnonymousReplyInput:
+    type: relay-mutation-input
+    config:
+        description: 'input of UpdateAnonymousReply'
+        fields:
+            hashedToken:
+                type: 'String!'
+                description: 'The hashed token of the reply'
+            responses:
+                type: '[ResponseInput!]!'
+                description: 'The responses to the questionnaire questions'

@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Capco\AppBundle\Utils\RequestGuesser;
 
-class AddReplyMutation implements MutationInterface
+class AddUserReplyMutation implements MutationInterface
 {
     public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
 

@@ -20,6 +20,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\SourceVote;
+use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
@@ -27,10 +28,12 @@ use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 class ConsultationTypeResolver implements ResolverInterface
 {
     private $typeResolver;
+    private ReplyTypeResolver $replyTypeResolver;
 
-    public function __construct(TypeResolver $typeResolver)
+    public function __construct(TypeResolver $typeResolver, ReplyTypeResolver $replyTypeResolver)
     {
         $this->typeResolver = $typeResolver;
+        $this->replyTypeResolver = $replyTypeResolver;
     }
 
     public function __invoke($data)
@@ -94,7 +97,7 @@ class ConsultationTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalProposalVote');
         }
         if ($data instanceof Reply) {
-            return $this->typeResolver->resolve('InternalReply');
+            return $this->replyTypeResolver->__invoke($data);
         }
         if ($data instanceof Answer) {
             return $this->typeResolver->resolve('Answer');

@@ -1,0 +1,8 @@
+DeleteAnonymousReplyPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            questionnaireId:
+                type: 'ID!'
+            replyId:
+                type: 'ID!'

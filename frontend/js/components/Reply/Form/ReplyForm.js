@@ -25,8 +25,8 @@ import type { ResponsesInReduxForm } from '~/components/Form/Form.type';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import SubmitButton from '~/components/Form/SubmitButton';
 import AlertForm from '~/components/Alert/AlertForm';
-import AddReplyMutation from '~/mutations/AddReplyMutation';
-import UpdateReplyMutation from '~/mutations/UpdateReplyMutation';
+import AddUserReplyMutation from '~/mutations/AddUserReplyMutation';
+import UpdateUserReplyMutation from '~/mutations/UpdateUserReplyMutation';
 import AppDispatcher from '~/dispatchers/AppDispatcher';
 import { UPDATE_ALERT, TYPE_ALERT } from '~/constants/AlertConstants';
 import Description from '~/components/Ui/Form/Description/Description';
@@ -84,12 +84,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
   if (reply) {
     data.replyId = reply.id;
 
-    return UpdateReplyMutation.commit({
+    return UpdateUserReplyMutation.commit({
       input: {
         replyId: reply.id,
         responses: data.responses,
         private: data.private,
-        draft: typeof values.draft !== 'undefined' ? values.draft : reply.draft,
+        draft: typeof values.draft !== 'undefined' ? values.draft : !!reply.draft,
       },
     })
       .then(() => {
@@ -117,7 +117,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
     data.private = values.private;
   }
 
-  return AddReplyMutation.commit({
+  return AddUserReplyMutation.commit({
     input: {
       questionnaireId: data.questionnaireId,
       responses: data.responses,
@@ -127,7 +127,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
     isAuthenticated: true,
   })
     .then(response => {
-      if (response.addReply?.errorCode && response.addReply?.errorCode === 'REQUIREMENTS_NOT_MET') {
+      if (
+        response.addUserReply?.errorCode &&
+        response.addUserReply?.errorCode === 'REQUIREMENTS_NOT_MET'
+      ) {
         toast({
           variant: 'danger',
           content: props.intl.formatMessage({ id: 'add_reply_requirements_not_met' }),
@@ -406,9 +409,11 @@ export default createFragmentContainer(containerWithRouter, {
     fragment ReplyForm_reply on Reply
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
-      private
-      draft
-      viewerCanUpdate
+      ...on UserReply {
+          draft
+          private
+          viewerCanUpdate
+      }
       responses {
         ...responsesHelper_response @relay(mask: false)
       }

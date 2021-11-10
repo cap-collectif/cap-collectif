@@ -229,6 +229,30 @@ interface AbstractDebateVote {
   widgetOriginUrl: URI
 }
 
+input AddAnonymousReplyInput {
+  """The id of the questionnaire"""
+  questionnaireId: ID!
+
+  """The responses to the questionnaire questions"""
+  responses: [ResponseInput!]!
+
+  """The participant email"""
+  participantEmail: Email
+  clientMutationId: String
+}
+
+type AddAnonymousReplyPayload {
+  """The created reply"""
+  reply: AnonymousReply
+
+  """The associated questionnaire"""
+  questionnaire: Questionnaire
+
+  """The reply token"""
+  token: String!
+  clientMutationId: String
+}
+
 input AddArgumentInput {
   """The Argumentable ID to argue."""
   argumentableId: ID!
@@ -670,34 +694,6 @@ type AddProposalsToStepsPayload {
   clientMutationId: String
 }
 
-"""Available errors for an `addReply` mutation."""
-enum AddReplyErrorCode {
-  """the viewer does not meet requirements"""
-  REQUIREMENTS_NOT_MET
-}
-
-input AddReplyInput {
-  """The id of the questionnaire"""
-  questionnaireId: ID!
-
-  """The responses to the questionnaire questions"""
-  responses: [ResponseInput]
-
-  """Anonymous or not."""
-  private: Boolean
-
-  """If true will create a draft reply."""
-  draft: Boolean! = false
-  clientMutationId: String
-}
-
-type AddReplyPayload {
-  reply: Reply
-  questionnaire: Questionnaire
-  errorCode: AddReplyErrorCode
-  clientMutationId: String
-}
-
 input AddSourceInput {
   """The Sourceable ID to source."""
   sourceableId: ID!
@@ -733,6 +729,34 @@ input AddSourceVoteInput {
 type AddSourceVotePayload {
   voteEdge: SourceVoteEdge
   viewer: User!
+  clientMutationId: String
+}
+
+"""Available errors for an `addUserReply` mutation."""
+enum AddUserReplyErrorCode {
+  """the viewer does not meet requirements"""
+  REQUIREMENTS_NOT_MET
+}
+
+input AddUserReplyInput {
+  """The id of the questionnaire"""
+  questionnaireId: ID!
+
+  """The responses to the questionnaire questions"""
+  responses: [ResponseInput]
+
+  """Anonymous or not."""
+  private: Boolean
+
+  """If true will create a draft reply."""
+  draft: Boolean! = false
+  clientMutationId: String
+}
+
+type AddUserReplyPayload {
+  reply: UserReply
+  questionnaire: Questionnaire
+  errorCode: AddUserReplyErrorCode
   clientMutationId: String
 }
 
@@ -877,6 +901,45 @@ type AnalysisConfiguration {
   Indicates whether or not a proposal has been processed on effectiveDate
   """
   effectiveDateProcessed: Boolean
+}
+
+"""Represents an answer from a non-registered to a questionnaire."""
+type AnonymousReply implements Reply & Node {
+  """The ID of an object"""
+  id: ID!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The url of the reply."""
+  url: URI!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """The responses of the reply."""
+  responses: [Response]!
+
+  """Identifies the form where the contribution was submitted."""
+  questionnaire: Questionnaire!
+  participant_email: Email
 }
 
 """A contribution"""
@@ -2871,6 +2934,9 @@ enum ContributionType {
 
   """Get contributions that are debate argument."""
   DEBATEARGUMENT
+
+  """Get contributions that are a reply anonymous"""
+  REPLY_ANONYMOUS
 }
 
 """A contribution with an author"""
@@ -4405,15 +4471,6 @@ enum DebateVoteOrderField {
   CREATED_AT
 }
 
-"""Entities that can be deleted."""
-interface Deletable {
-  """The ID of an object"""
-  id: ID!
-
-  """Check if the current viewer can delete this object"""
-  viewerCanDelete: Boolean!
-}
-
 """Available errors on DeleteAccountByEmail mutation."""
 enum DeleteAccountByEmailErrorCode {
   """The given email does not correspond to an existing user."""
@@ -4460,6 +4517,18 @@ enum DeleteAccountType {
 
   """Anonymize the user and delete his content"""
   HARD
+}
+
+input DeleteAnonymousReplyInput {
+  """The hashed token of the reply"""
+  hashedToken: String!
+  clientMutationId: String
+}
+
+type DeleteAnonymousReplyPayload {
+  questionnaireId: ID!
+  replyId: ID!
+  clientMutationId: String
 }
 
 input DeleteArgumentInput {
@@ -4794,17 +4863,6 @@ type DeleteQuestionnairePayload {
   clientMutationId: String
 }
 
-input DeleteReplyInput {
-  """The id of the reply"""
-  id: ID!
-  clientMutationId: String
-}
-
-type DeleteReplyPayload {
-  questionnaire: Questionnaire!
-  clientMutationId: String
-}
-
 input DeleteSSOConfigurationInput {
   """The ID of SSO Configuration that needs to be deleted."""
   id: ID!
@@ -4867,6 +4925,17 @@ input DeleteUserInGroupInput {
 
 type DeleteUserInGroupPayload {
   group: Group!
+  clientMutationId: String
+}
+
+input DeleteUserReplyInput {
+  """The id of the reply"""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteUserReplyPayload {
+  questionnaire: Questionnaire!
   clientMutationId: String
 }
 
@@ -6898,9 +6967,12 @@ type Mutation {
   deleteSource(input: DeleteSourceInput!): DeleteSourcePayload
   deleteOpinion(input: DeleteOpinionInput!): DeleteOpinionPayload
   deleteVersion(input: DeleteVersionInput!): DeleteVersionPayload
-  addReply(input: AddReplyInput!): AddReplyPayload
-  updateReply(input: UpdateReplyInput!): UpdateReplyPayload
-  deleteReply(input: DeleteReplyInput!): DeleteReplyPayload
+  addUserReply(input: AddUserReplyInput!): AddUserReplyPayload
+  updateUserReply(input: UpdateUserReplyInput!): UpdateUserReplyPayload
+  deleteUserReply(input: DeleteUserReplyInput!): DeleteUserReplyPayload
+  addAnonymousReply(input: AddAnonymousReplyInput!): AddAnonymousReplyPayload
+  updateAnonymousReply(input: UpdateAnonymousReplyInput!): UpdateAnonymousReplyPayload
+  deleteAnonymousReply(input: DeleteAnonymousReplyInput!): DeleteAnonymousReplyPayload
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   addOpinionVote(input: AddOpinionVoteInput!): AddOpinionVotePayload
   removeOpinionVote(input: RemoveOpinionVoteInput!): RemoveOpinionVotePayload
@@ -11743,30 +11815,24 @@ type RemoveSsoPayload {
   clientMutationId: String
 }
 
-"""Represents a user's answer to a questionnaire."""
-type Reply implements Node & Publishable & Updatable & Draftable & Contribution & UniformResourceLocatable & Deletable {
-  """Check if the current viewer can update this object"""
-  viewerCanUpdate: Boolean!
-
-  """The ID of an object."""
+"""Represents an answer to a questionnaire."""
+interface Reply {
+  """The ID of an object"""
   id: ID!
-
-  """Check if the current viewer can delete this object"""
-  viewerCanDelete: Boolean!
-
-  """Whether or not the entity is a draft."""
-  draft: Boolean!
-
-  """Identifies when the entity was undraft at."""
-  undraftAt: DateTime
 
   """
   Return the related contribution if the contribution is related to another.
   """
   related: Contribution
 
-  """The URL to this resource."""
+  """The url of the reply."""
   url: URI!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -11780,21 +11846,8 @@ type Reply implements Node & Publishable & Updatable & Draftable & Contribution 
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
   """The responses of the reply."""
   responses: [Response]!
-
-  """The author of the contribution."""
-  author: User!
-  private: Boolean!
-
-  """The reply status."""
-  publicationStatus: ReplyPublicationStatus!
 
   """Identifies the form where the contribution was submitted."""
   questionnaire: Questionnaire!
@@ -13676,12 +13729,6 @@ type UnsubscribeToEventAsRegisteredPayload {
   clientMutationId: String
 }
 
-"""Entities that can be updated."""
-interface Updatable {
-  """Check if the current viewer can update this object"""
-  viewerCanUpdate: Boolean!
-}
-
 input UpdateAlphaProjectInput {
   """The project title"""
   title: String!
@@ -13747,6 +13794,21 @@ input UpdateAlphaProjectInput {
 type UpdateAlphaProjectPayload {
   """The created project"""
   project: Project
+  clientMutationId: String
+}
+
+input UpdateAnonymousReplyInput {
+  """The hashed token of the reply"""
+  hashedToken: String!
+
+  """The responses to the questionnaire questions"""
+  responses: [ResponseInput!]!
+  clientMutationId: String
+}
+
+type UpdateAnonymousReplyPayload {
+  """The updated AnonymousReply"""
+  reply: AnonymousReply
   clientMutationId: String
 }
 
@@ -14839,27 +14901,6 @@ type UpdateRegistrationPagePayload {
   clientMutationId: String
 }
 
-input UpdateReplyInput {
-  """The id of the reply"""
-  replyId: ID!
-
-  """The responses to the questionnaire questions"""
-  responses: [ResponseInput]
-
-  """Anonymous or not."""
-  private: Boolean
-
-  """If true will create a draft reply."""
-  draft: Boolean! = false
-  clientMutationId: String
-}
-
-type UpdateReplyPayload {
-  """Update a reply"""
-  reply: Reply
-  clientMutationId: String
-}
-
 input UpdateRequirementInput {
   """The Node ID of the requirement to modify."""
   requirement: ID!
@@ -14964,6 +15005,27 @@ enum UpdateUserEmailErrorCode {
 
   """Unauthorized email domain."""
   UNAUTHORIZED_EMAIL_DOMAIN
+}
+
+input UpdateUserReplyInput {
+  """The id of the reply"""
+  replyId: ID!
+
+  """The responses to the questionnaire questions"""
+  responses: [ResponseInput!]!
+
+  """Anonymous or not."""
+  private: Boolean
+
+  """If true will create a draft reply."""
+  draft: Boolean! = false
+  clientMutationId: String
+}
+
+type UpdateUserReplyPayload {
+  """Update a reply"""
+  reply: UserReply
+  clientMutationId: String
 }
 
 """A user is an individual's account."""
@@ -15785,6 +15847,65 @@ enum UserOrderField {
 
   """Allowing ordering a list of user by their activity."""
   ACTIVITY
+}
+
+"""Represents a user answer to a questionnaire."""
+type UserReply implements Node & Reply & Publishable & Contribution & Draftable {
+  """The ID of an object"""
+  id: ID!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Whether or not the entity is a draft."""
+  draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
+
+  """The responses of the reply."""
+  responses: [Response]!
+
+  """The author of the Reply."""
+  author: User!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The url of the reply."""
+  url: URI!
+
+  """Identifies the form where the contribution was submitted."""
+  questionnaire: Questionnaire!
+
+  """Whether or not the current viewer can delete the reply."""
+  viewerCanDelete: Boolean!
+
+  """Whether or not the current viewer can update the reply."""
+  viewerCanUpdate: Boolean!
+
+  """Whether or not the reply is private."""
+  private: Boolean!
+
+  """The reply status."""
+  publicationStatus: ReplyPublicationStatus!
 }
 
 """4 possible values"""

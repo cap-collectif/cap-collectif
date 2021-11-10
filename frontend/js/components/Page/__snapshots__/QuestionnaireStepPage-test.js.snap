@@ -1271,7 +1271,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Reply",
+                                "concreteType": null,
                                 "kind": "LinkedField",
                                 "name": "node",
                                 "plural": false,
@@ -1280,8 +1280,19 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
                                     "name": "id",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isReply",
+                                    "kind": "TypeDiscriminator",
                                   },
                                   Object {
                                     "alias": null,
@@ -1298,25 +1309,32 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                     "storageKey": null,
                                   },
                                   Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "private",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "draft",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "viewerCanDelete",
-                                    "storageKey": null,
+                                    "abstractKey": null,
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "draft",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "viewerCanDelete",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "private",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "UserReply",
                                   },
                                   Object {
                                     "abstractKey": "__isPublishable",
@@ -1642,7 +1660,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "f237c10b9afc56eca438badb709e77e6",
+        "cacheID": "1fd13b7c1932a2cb9eb7adad8e296caf",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -1667,6 +1685,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
 }
 
 fragment DeleteReplyModal_reply on Reply {
+  __isReply: __typename
   id
 }
 
@@ -1694,6 +1713,7 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         id
       }
     }
@@ -1811,6 +1831,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         id
       }
     }
@@ -1909,12 +1930,15 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
 }
 
 fragment ReplyLink_reply on Reply {
+  __isReply: __typename
   id
   createdAt
   publishedAt
-  private
-  draft
-  viewerCanDelete
+  ... on UserReply {
+    draft
+    viewerCanDelete
+    private
+  }
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
 }
@@ -2004,6 +2028,7 @@ fragment UserReplies_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         ...ReplyLink_reply
         id
       }
@@ -3296,7 +3321,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Reply",
+                                "concreteType": null,
                                 "kind": "LinkedField",
                                 "name": "node",
                                 "plural": false,
@@ -3305,8 +3330,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
                                     "name": "id",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isReply",
+                                    "kind": "TypeDiscriminator",
                                   },
                                   Object {
                                     "alias": null,
@@ -3323,25 +3359,32 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                     "storageKey": null,
                                   },
                                   Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "private",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "draft",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "viewerCanDelete",
-                                    "storageKey": null,
+                                    "abstractKey": null,
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "draft",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "viewerCanDelete",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "private",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "UserReply",
                                   },
                                   Object {
                                     "abstractKey": "__isPublishable",
@@ -3667,7 +3710,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "f237c10b9afc56eca438badb709e77e6",
+        "cacheID": "1fd13b7c1932a2cb9eb7adad8e296caf",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -3692,6 +3735,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
 }
 
 fragment DeleteReplyModal_reply on Reply {
+  __isReply: __typename
   id
 }
 
@@ -3719,6 +3763,7 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         id
       }
     }
@@ -3836,6 +3881,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         id
       }
     }
@@ -3934,12 +3980,15 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
 }
 
 fragment ReplyLink_reply on Reply {
+  __isReply: __typename
   id
   createdAt
   publishedAt
-  private
-  draft
-  viewerCanDelete
+  ... on UserReply {
+    draft
+    viewerCanDelete
+    private
+  }
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
 }
@@ -4029,6 +4078,7 @@ fragment UserReplies_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         ...ReplyLink_reply
         id
       }
@@ -5321,7 +5371,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Reply",
+                                "concreteType": null,
                                 "kind": "LinkedField",
                                 "name": "node",
                                 "plural": false,
@@ -5330,8 +5380,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
                                     "name": "id",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isReply",
+                                    "kind": "TypeDiscriminator",
                                   },
                                   Object {
                                     "alias": null,
@@ -5348,25 +5409,32 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                     "storageKey": null,
                                   },
                                   Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "private",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "draft",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "viewerCanDelete",
-                                    "storageKey": null,
+                                    "abstractKey": null,
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "draft",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "viewerCanDelete",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "private",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "UserReply",
                                   },
                                   Object {
                                     "abstractKey": "__isPublishable",
@@ -5692,7 +5760,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "f237c10b9afc56eca438badb709e77e6",
+        "cacheID": "1fd13b7c1932a2cb9eb7adad8e296caf",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -5717,6 +5785,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
 }
 
 fragment DeleteReplyModal_reply on Reply {
+  __isReply: __typename
   id
 }
 
@@ -5744,6 +5813,7 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         id
       }
     }
@@ -5861,6 +5931,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         id
       }
     }
@@ -5959,12 +6030,15 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
 }
 
 fragment ReplyLink_reply on Reply {
+  __isReply: __typename
   id
   createdAt
   publishedAt
-  private
-  draft
-  viewerCanDelete
+  ... on UserReply {
+    draft
+    viewerCanDelete
+    private
+  }
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
 }
@@ -6054,6 +6128,7 @@ fragment UserReplies_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         ...ReplyLink_reply
         id
       }
@@ -7346,7 +7421,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Reply",
+                                "concreteType": null,
                                 "kind": "LinkedField",
                                 "name": "node",
                                 "plural": false,
@@ -7355,8 +7430,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
                                     "name": "id",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isReply",
+                                    "kind": "TypeDiscriminator",
                                   },
                                   Object {
                                     "alias": null,
@@ -7373,25 +7459,32 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                     "storageKey": null,
                                   },
                                   Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "private",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "draft",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "viewerCanDelete",
-                                    "storageKey": null,
+                                    "abstractKey": null,
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "draft",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "viewerCanDelete",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "private",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "UserReply",
                                   },
                                   Object {
                                     "abstractKey": "__isPublishable",
@@ -7717,7 +7810,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "f237c10b9afc56eca438badb709e77e6",
+        "cacheID": "1fd13b7c1932a2cb9eb7adad8e296caf",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -7742,6 +7835,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
 }
 
 fragment DeleteReplyModal_reply on Reply {
+  __isReply: __typename
   id
 }
 
@@ -7769,6 +7863,7 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         id
       }
     }
@@ -7886,6 +7981,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         id
       }
     }
@@ -7984,12 +8080,15 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
 }
 
 fragment ReplyLink_reply on Reply {
+  __isReply: __typename
   id
   createdAt
   publishedAt
-  private
-  draft
-  viewerCanDelete
+  ... on UserReply {
+    draft
+    viewerCanDelete
+    private
+  }
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
 }
@@ -8079,6 +8178,7 @@ fragment UserReplies_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
+        __typename
         ...ReplyLink_reply
         id
       }

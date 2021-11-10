@@ -7,8 +7,8 @@ Scenario: User wants to add a reply
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: AddReplyInput!) {
-      addReply(input: $input) {
+    "query": "mutation ($input: AddUserReplyInput!) {
+      addUserReply(input: $input) {
         reply {
           id
           published
@@ -46,7 +46,7 @@ Scenario: User wants to add a reply
   """
   {
     "data": {
-      "addReply": {
+      "addUserReply": {
           "reply": {
               "id": @string@,
               "published": true,
@@ -76,8 +76,8 @@ Scenario: User wants to add an answer without fulfilling the requirements
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: AddReplyInput!) {
-      addReply(input: $input) {
+    "query": "mutation ($input: AddUserReplyInput!) {
+      addUserReply(input: $input) {
         reply {
           id
           published
@@ -112,5 +112,5 @@ Scenario: User wants to add an answer without fulfilling the requirements
   """
   Then the JSON response should match:
   """
-  {"data":{"addReply":{"reply":null,"questionnaire":{"id":"UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw=="},"errorCode":"REQUIREMENTS_NOT_MET"}}}
+  {"data":{"addUserReply":{"reply":null,"questionnaire":{"id":"UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw=="},"errorCode":"REQUIREMENTS_NOT_MET"}}}
   """

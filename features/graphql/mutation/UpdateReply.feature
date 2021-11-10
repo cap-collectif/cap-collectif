@@ -7,8 +7,8 @@ Scenario: Author wants to update his reply
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: UpdateReplyInput!) {
-      updateReply(input: $input) {
+    "query": "mutation ($input: UpdateUserReplyInput!) {
+      updateUserReply(input: $input) {
         reply {
           id
           published
@@ -45,7 +45,7 @@ Scenario: Author wants to update his reply
   """
   {
     "data": {
-      "updateReply": {
+      "updateUserReply": {
         "reply": {
           "id": "UmVwbHk6cmVwbHky",
           "published": true,
@@ -141,8 +141,8 @@ Scenario: User wants to published a reply in draft
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: UpdateReplyInput!) {
-      updateReply(input: $input) {
+    "query": "mutation ($input: UpdateUserReplyInput!) {
+      updateUserReply(input: $input) {
         reply {
           id
           published
@@ -180,7 +180,7 @@ Scenario: User wants to published a reply in draft
   """
   {
    "data":{
-      "updateReply":{
+      "updateUserReply":{
          "reply":{
             "id":"UmVwbHk6cmVwbHk5",
             "published":true,

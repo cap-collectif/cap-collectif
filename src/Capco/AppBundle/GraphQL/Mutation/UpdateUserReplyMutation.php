@@ -17,16 +17,14 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class UpdateReplyMutation implements MutationInterface
+class UpdateUserReplyMutation implements MutationInterface
 {
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private ResponsesFormatter $responsesFormatter;
     private ReplyRepository $replyRepo;
-    private StepUrlResolver $stepUrlResolver;
     private Publisher $publisher;
 
     public function __construct(
@@ -34,14 +32,12 @@ class UpdateReplyMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         ReplyRepository $replyRepo,
         ResponsesFormatter $responsesFormatter,
-        StepUrlResolver $stepUrlResolver,
         Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->replyRepo = $replyRepo;
         $this->responsesFormatter = $responsesFormatter;
-        $this->stepUrlResolver = $stepUrlResolver;
         $this->publisher = $publisher;
     }
 

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Traits;
 
+use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
@@ -73,7 +74,7 @@ trait ResponsesResolverTrait
         return $responses;
     }
 
-    private function getResponsesForReply(Reply $reply): Collection
+    private function getResponsesForReply(ReplyInterface $reply): Collection
     {
         $responses = new ArrayCollection(
             $this->abstractResponseRepository->getByReply($reply, true) ?? []

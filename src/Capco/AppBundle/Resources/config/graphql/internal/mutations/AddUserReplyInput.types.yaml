@@ -1,7 +1,7 @@
-AddReplyInput:
+AddUserReplyInput:
     type: relay-mutation-input
     config:
-        description: 'Create a reply'
+        description: 'Create an authenticated user reply'
         fields:
             questionnaireId:
                 type: 'ID!'

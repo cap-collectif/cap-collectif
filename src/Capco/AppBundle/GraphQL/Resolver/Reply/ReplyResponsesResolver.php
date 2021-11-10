@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
+use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
+use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Psr\Log\LoggerInterface;
@@ -25,30 +27,38 @@ class ReplyResponsesResolver implements ResolverInterface
         $this->abstractResponseRepository = $abstractResponseRepository;
     }
 
-    public function __invoke(Reply $reply, $viewer, \ArrayObject $context): iterable
+    public function __invoke(ReplyInterface $reply, $viewer, \ArrayObject $context): iterable
     {
         $skipVerification =
             $context &&
             $context->offsetExists('disable_acl') &&
             true === $context->offsetGet('disable_acl');
 
-        $author = $reply->getAuthor();
+        $responses = [];
 
-        if (
-            !$skipVerification &&
-            $reply->getQuestionnaire()->isPrivateResult() &&
-            (!$viewer || (!$viewer->isAdmin() && $viewer->getId() !== $author->getId()))
-        ) {
-            $this->logger->warn('Tried to access private responses on a reply.');
+        if ($reply instanceof Reply) {
+            $author = $reply->getAuthor();
 
-            return [];
+            if (
+                !$skipVerification &&
+                $reply->getQuestionnaire()->isPrivateResult() &&
+                (!$viewer || (!$viewer->isAdmin() && $viewer->getId() !== $author->getId()))
+            ) {
+                $this->logger->warn('Tried to access private responses on a reply.');
+
+                return [];
+            }
+            $responses = $this->filterVisibleResponses(
+                $this->getResponsesForReply($reply),
+                $author,
+                $viewer,
+                $context
+            );
         }
-        $responses = $this->filterVisibleResponses(
-            $this->getResponsesForReply($reply),
-            $author,
-            $viewer,
-            $context
-        );
+        elseif ($reply instanceof ReplyAnonymous) {
+            $responses = $this->getResponsesForReply($reply);
+        }
+
         $iterator = $responses->getIterator();
         $responsesArray = iterator_to_array($iterator);
 

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
@@ -9,6 +10,7 @@ use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
+use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -80,6 +82,7 @@ class GlobalIdResolver
         $user = null;
         if (empty($uuidOrGlobalId)) {
             return null;
+
         }
 
         if ($userOrAnon instanceof User) {
@@ -181,6 +184,9 @@ class GlobalIdResolver
                 case 'Reply':
                     $node = $this->container->get(ReplyRepository::class)->find($uuid);
 
+                    if (!$node) {
+                        $node = $this->container->get(ReplyAnonymousRepository::class)->find($uuid);
+                    }
                     break;
                 case 'ContactForm':
                     $node = $this->container->get(ContactFormRepository::class)->find($uuid);

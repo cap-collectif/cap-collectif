@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\ContributionType;
@@ -39,6 +40,7 @@ class ContributionSearch extends Search
         ContributionType::SOURCE => Source::class,
         ContributionType::REPLY => Reply::class,
         ContributionType::PROPOSAL => Proposal::class,
+        ContributionType::REPLY_ANONYMOUS => ReplyAnonymous::class,
     ];
 
     private $entityManager;
@@ -412,6 +414,7 @@ class ContributionSearch extends Search
             Source::getElasticsearchTypeName(),
             Proposal::getElasticsearchTypeName(),
             Reply::getElasticsearchTypeName(),
+            ReplyAnonymous::getElasticsearchTypeName(),
         ];
 
         if (!$inConsultation) {

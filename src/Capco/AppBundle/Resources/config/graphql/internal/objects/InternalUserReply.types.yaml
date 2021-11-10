@@ -1,0 +1,33 @@
+InternalUserReply:
+    type: object
+    inherits:
+        - PreviewUserReply
+        - InternalReply
+        - Deletable
+        - Draftable
+        - Updatable
+    config:
+        interfaces:
+            - InternalReply
+            - PublicPublishable
+            - Contribution
+            - Draftable
+        name: UserReply
+        description: "Represents a user answer to a questionnaire."
+        fields:
+            author:
+                type: 'InternalUser!'
+                description: 'The author of the Reply.'
+            viewerCanUpdate:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanUpdateResolver", [value, getUser()])'
+                description: 'Whether or not the current viewer can update the reply.'
+            viewerCanDelete:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, getUser()])'
+                description: 'Whether or not the current viewer can delete the reply.'
+            private:
+                type: 'Boolean!'
+                description: 'Whether or not the reply is private.'
+            publicationStatus:
+                type: 'ReplyPublicationStatus!'
+                description: 'The reply status.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyPublicationStatusResolver", [value])'

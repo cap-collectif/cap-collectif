@@ -13,11 +13,11 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class DeleteReplyMutation implements MutationInterface
+class DeleteUserReplyMutation implements MutationInterface
 {
-    private $em;
-    private $replyRepo;
-    private $publisher;
+    private EntityManagerInterface $em;
+    private ReplyRepository $replyRepo;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,

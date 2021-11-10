@@ -1,13 +1,13 @@
-UpdateReplyInput:
+UpdateUserReplyInput:
     type: relay-mutation-input
     config:
-        description: 'Update a reply'
+        description: 'Update an authenticated user reply'
         fields:
             replyId:
                 type: 'ID!'
                 description: 'The id of the reply'
             responses:
-                type: '[ResponseInput]'
+                type: '[ResponseInput!]!'
                 description: 'The responses to the questionnaire questions'
             private:
                 type: 'Boolean'

@@ -1,0 +1,8 @@
+UpdateAnonymousReplyPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of UpdateAnonymousReply'
+        fields:
+            reply:
+                type: 'InternalAnonymousReply'
+                description: 'The updated AnonymousReply'

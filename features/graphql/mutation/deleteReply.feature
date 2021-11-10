@@ -7,8 +7,8 @@ Scenario: User can delete his reply
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: DeleteReplyInput!) {
-      deleteReply(input: $input) {
+    "query": "mutation ($input: DeleteUserReplyInput!) {
+      deleteUserReply(input: $input) {
         questionnaire {
           id
           viewerReplies {
@@ -32,7 +32,7 @@ Scenario: User can delete his reply
   """
   {
     "data":{
-      "deleteReply":{
+      "deleteUserReply":{
         "questionnaire":{
           "id":"UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
           "viewerReplies":{
@@ -61,8 +61,8 @@ Scenario: User can not delete the reply of someone else
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: DeleteReplyInput!) {
-      deleteReply(input: $input) {
+    "query": "mutation ($input: DeleteUserReplyInput!) {
+      deleteUserReply(input: $input) {
         questionnaire {
           id
         }
@@ -82,7 +82,7 @@ Scenario: User can not delete the reply of someone else
       {"message":"You are not the author of this reply","@*@": "@*@"}
     ],
     "data": {
-      "deleteReply": null
+      "deleteUserReply": null
     }
   }
   """

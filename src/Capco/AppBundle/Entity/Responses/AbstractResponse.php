@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -68,6 +69,12 @@ abstract class AbstractResponse implements IndexableInterface
      * @ORM\JoinColumn(name="reply_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $reply;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ReplyAnonymous", inversedBy="responses", cascade={"persist"})
+     * @ORM\JoinColumn(name="reply_anonymous_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private $replyAnonymous;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", inversedBy="responses", cascade={"persist"})
@@ -146,6 +153,17 @@ abstract class AbstractResponse implements IndexableInterface
     {
         $this->reply = $reply;
 
+        return $this;
+    }
+
+    public function getReplyAnonymous(): ?ReplyAnonymous
+    {
+        return $this->replyAnonymous;
+    }
+
+    public function setReplyAnonymous(?ReplyAnonymous $replyAnonymous = null): self
+    {
+        $this->replyAnonymous = $replyAnonymous;
         return $this;
     }
 

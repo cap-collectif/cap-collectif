@@ -14,6 +14,7 @@ final class ContributionType implements EnumType
     public const PROPOSAL = 'PROPOSAL';
     public const REPLY = 'REPLY';
     public const VOTE = 'VOTE';
+    public const REPLY_ANONYMOUS = 'REPLY_ANONYMOUS';
 
     public static function isValid($value): bool
     {
@@ -32,6 +33,7 @@ final class ContributionType implements EnumType
             self::PROPOSAL,
             self::REPLY,
             self::VOTE,
+            self::REPLY_ANONYMOUS,
         ];
     }
 

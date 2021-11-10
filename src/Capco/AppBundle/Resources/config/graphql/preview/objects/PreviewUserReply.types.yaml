@@ -1,4 +1,4 @@
-PreviewReply:
+PreviewUserReply:
     type: object
     inherits:
         - Node
@@ -6,11 +6,10 @@ PreviewReply:
         - Timestampable
         - Draftable
     config:
-        name: Reply
-        description: "Represents a user's answer to a questionnaire."
         interfaces:
             - Node
-            - PublicPublishable
+        name: UserReply
+        description: "Represents a user answer to a questionnaire."
         fields:
             id:
                 description: 'The ID of an object.'

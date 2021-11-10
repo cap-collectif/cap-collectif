@@ -1,7 +1,7 @@
-DeleteReplyInput:
+DeleteUserReplyInput:
     type: relay-mutation-input
     config:
-        description: 'Delete a reply'
+        description: 'Delete an authenticated user reply'
         fields:
             id:
                 type: 'ID!'

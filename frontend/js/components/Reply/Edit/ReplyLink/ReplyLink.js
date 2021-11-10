@@ -86,9 +86,11 @@ export default createFragmentContainer(ReplyLink, {
       id
       createdAt
       publishedAt
-      private
-      draft
-      viewerCanDelete
+      ... on UserReply {
+          draft
+          viewerCanDelete
+          private
+      }
       ...DeleteReplyModal_reply
       ...UnpublishedLabel_publishable
     }

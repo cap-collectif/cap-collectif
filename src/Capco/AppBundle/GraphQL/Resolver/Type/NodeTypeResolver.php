@@ -3,10 +3,13 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\ReplyAnonymous;
+use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
 use Capco\AppBundle\Entity\Source;
@@ -53,19 +56,23 @@ class NodeTypeResolver implements ResolverInterface
     private TypeResolver $typeResolver;
     private RequirementTypeResolver $requirementTypeResolver;
     private QuestionTypeResolver $questionTypeResolver;
+    private ReplyTypeResolver $replyTypeResolver;
 
     public function __construct(
         TypeResolver $typeResolver,
         RequirementTypeResolver $requirementTypeResolver,
-        QuestionTypeResolver $questionTypeResolver
+        QuestionTypeResolver $questionTypeResolver,
+        ReplyTypeResolver $replyTypeResolver
     ) {
         $this->typeResolver = $typeResolver;
         $this->requirementTypeResolver = $requirementTypeResolver;
         $this->questionTypeResolver = $questionTypeResolver;
+        $this->replyTypeResolver = $replyTypeResolver;
     }
 
     public function __invoke($node): Type
     {
+
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($node instanceof Project) {
@@ -211,12 +218,8 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalEvent');
         }
 
-        if ($node instanceof Reply) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewReply');
-            }
-
-            return $this->typeResolver->resolve('InternalReply');
+        if ($node instanceof ReplyInterface) {
+            return $this->replyTypeResolver->__invoke($node);
         }
 
         if ($node instanceof Follower) {

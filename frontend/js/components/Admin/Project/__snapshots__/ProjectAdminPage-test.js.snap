@@ -870,6 +870,20 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "isAnonymousParticipationAllowed",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "collectParticipantsEmail",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "RequirementConnection",
                                 "kind": "LinkedField",
                                 "name": "requirements",
@@ -940,20 +954,6 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                     "storageKey": null,
                                   },
                                 ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isAnonymousParticipationAllowed",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "collectParticipantsEmail",
                                 "storageKey": null,
                               },
                             ],
@@ -1565,7 +1565,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "d69e223a39979d68214f8f11713dac69",
+        "cacheID": "9359bd3d77e3377f9ff7d228cd56a2fd",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1782,6 +1782,8 @@ fragment ProjectAdminForm_project on Project {
         id
       }
       footer
+      isAnonymousParticipationAllowed
+      collectParticipantsEmail
       requirements {
         reason
         edges {
@@ -1795,8 +1797,6 @@ fragment ProjectAdminForm_project on Project {
           }
         }
       }
-      isAnonymousParticipationAllowed
-      collectParticipantsEmail
     }
     ... on DebateStep {
       isAnonymousParticipationAllowed
@@ -2820,6 +2820,20 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "isAnonymousParticipationAllowed",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "collectParticipantsEmail",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "RequirementConnection",
                                 "kind": "LinkedField",
                                 "name": "requirements",
@@ -2890,20 +2904,6 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                     "storageKey": null,
                                   },
                                 ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isAnonymousParticipationAllowed",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "collectParticipantsEmail",
                                 "storageKey": null,
                               },
                             ],
@@ -3515,7 +3515,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "d69e223a39979d68214f8f11713dac69",
+        "cacheID": "9359bd3d77e3377f9ff7d228cd56a2fd",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -3732,6 +3732,8 @@ fragment ProjectAdminForm_project on Project {
         id
       }
       footer
+      isAnonymousParticipationAllowed
+      collectParticipantsEmail
       requirements {
         reason
         edges {
@@ -3745,8 +3747,6 @@ fragment ProjectAdminForm_project on Project {
           }
         }
       }
-      isAnonymousParticipationAllowed
-      collectParticipantsEmail
     }
     ... on DebateStep {
       isAnonymousParticipationAllowed

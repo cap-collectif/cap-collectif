@@ -737,6 +737,8 @@ export default createFragmentContainer(injectIntl(container), {
             label: title
           }
           footer
+          isAnonymousParticipationAllowed
+          collectParticipantsEmail
           requirements {
             reason
             edges {

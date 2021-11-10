@@ -114,3 +114,4 @@ overblog_graphql:
                     - InternalMajorityQuestion
                     - InternalTimeRange
                     - InternalProposalVoteConnection
+                    - InternalAnonymousReply

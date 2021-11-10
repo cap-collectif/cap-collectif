@@ -17,6 +17,11 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:Reply']
 
+    Capco\AppBundle\Repository\ReplyAnonymousRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:ReplyAnonymous']
+
     Capco\AppBundle\Repository\ArgumentVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true

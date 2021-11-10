@@ -1,10 +1,10 @@
-AddReplyPayload:
+AddUserReplyPayload:
     type: relay-mutation-payload
     config:
         fields:
             reply:
-                type: 'InternalReply'
+                type: 'InternalUserReply'
             questionnaire:
                 type: 'InternalQuestionnaire'
             errorCode:
-                type: 'AddReplyErrorCode'
+                type: 'AddUserReplyErrorCode'

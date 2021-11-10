@@ -27,3 +27,6 @@ ContributionType:
             DEBATEARGUMENT:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::DEBATEARGUMENT")'
                 description: 'Get contributions that are debate argument.'
+            REPLY_ANONYMOUS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::REPLY_ANONYMOUS")'
+                description: 'Get contributions that are a reply anonymous'

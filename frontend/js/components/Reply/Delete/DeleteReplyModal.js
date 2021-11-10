@@ -7,7 +7,7 @@ import type { DeleteReplyModal_reply } from '~relay/DeleteReplyModal_reply.graph
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import AppDispatcher from '~/dispatchers/AppDispatcher';
-import DeleteReplyMutation from '~/mutations/DeleteReplyMutation';
+import DeleteUserReplyMutation from '~/mutations/DeleteUserReplyMutation';
 import { UPDATE_ALERT } from '~/constants/AlertConstants';
 
 type Props = {|
@@ -23,7 +23,7 @@ export const DeleteReplyModal = ({ reply, onClose, show }: Props) => {
   const handleSubmit = () => {
     setIsSubmitting(true);
 
-    DeleteReplyMutation.commit({ input: { id: reply.id }, isAuthenticated: true })
+    DeleteUserReplyMutation.commit({ input: { id: reply.id }, isAuthenticated: true })
       .then(() => {
         onClose();
         AppDispatcher.dispatch({
