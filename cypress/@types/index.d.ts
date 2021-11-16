@@ -39,6 +39,7 @@ declare namespace Cypress {
     interceptGraphQLOperation(options: InterceptGraphQLOperationOptions): Chainable<null>
     assertReactSelectOptionCount(selector: string, value: number): Chainable<any>
     selectReactSelectOption(selector: string, query: string): Chainable<any>
+    checkAccessDenied(url: string): Chainable<any>
     login(options: LoginOptions): Chainable<any>
     confirmRecaptcha(): Chainable<void>
     loginAs(username: LoginAsUsernames): Chainable<any>

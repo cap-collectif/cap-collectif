@@ -39,4 +39,10 @@ describe('Project Owner', () => {
       cy.contains('global.saved')
     })
   })
+  describe('Authorization', () => {
+    it('should display an unauthorized screen when admin project attempt to edit a project that he does not own', () => {
+      cy.directLoginAs('project_owner')
+      cy.checkAccessDenied('/admin/alpha/project/projectWithAnonymousQuestionnaire/edit')
+    })
+  })
 })
