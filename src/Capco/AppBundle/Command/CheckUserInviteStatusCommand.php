@@ -8,7 +8,9 @@ use Capco\AppBundle\Repository\UserInviteRepository;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckUserInviteStatusCommand extends Command
@@ -30,15 +32,27 @@ class CheckUserInviteStatusCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('capco:check:user-invite-status')->setDescription(
-            'Check status of already sent UserInvite.'
-        );
+        $this->setName('capco:check:user-invite-status')
+            ->setDescription('Check status of already sent UserInvite.')
+            ->addOption('status', 's', InputOption::VALUE_OPTIONAL, 'Filter invitations by status');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        if (
+            ($optionStatus = $input->getOption('status')) &&
+            !\in_array(
+                $optionStatus,
+                [UserInvite::WAITING_SENDING, UserInvite::SENT, UserInvite::SEND_FAILURE],
+                true
+            )
+        ) {
+            throw new InvalidOptionException(
+                'The given status does not match anny existing UserInvite status.'
+            );
+        }
         /** @var UserInvite[] $invitations */
-        $invitations = $this->inviteRepository->getNotExpiredInvitationsByStatus();
+        $invitations = $this->inviteRepository->getNotExpiredInvitationsByStatus($optionStatus);
         $output->writeln('<info>' . \count($invitations) . ' invitations to re-publish.</info>');
         foreach ($invitations as $invitation) {
             $output->writeln(
