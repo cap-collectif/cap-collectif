@@ -46,7 +46,7 @@
         "precommit": "flow status && lint-staged",
         "cy:open": "yarn --cwd cypress cy:open",
         "cy:run": "yarn --cwd cypress cy:run",
-        "cy:run:cy": "yarn --cwd cypress cy:run:ci"
+        "cy:run:ci": "yarn --cwd cypress cy:run:ci"
     },
     "workspaces": [
         "packages/*",

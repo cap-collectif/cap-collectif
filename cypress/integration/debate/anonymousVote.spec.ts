@@ -1,26 +1,7 @@
-import { DebatePage } from '../pages'
+import { DebatePage } from '~e2e-pages/index'
 
 describe('Debate', () => {
-  it('should correctly show a debate', () => {
-    DebatePage.visitCannabisDebate()
-    cy.contains('Pour ou contre la légalisation du Cannabis ?').should('exist')
-  })
-  describe('Logged-in', () => {
-    beforeEach(() => {
-      cy.task('db:restore')
-      cy.directLoginAs('user')
-      DebatePage.visitCannabisDebate()
-    })
-    it('should correctly vote for a debate', () => {
-      DebatePage.forButton.click({ force: true })
-      cy.contains('thanks-for-your-vote').should('exist')
-    })
-    it('should correctly vote against a debate', () => {
-      DebatePage.againstButton.click({ force: true })
-      cy.contains('thanks-for-your-vote').should('exist')
-    })
-  })
-  describe('Anonymous', () => {
+  describe('Anonymous vote', () => {
     beforeEach(() => {
       cy.task('db:restore')
       DebatePage.visitCannabisDebate()

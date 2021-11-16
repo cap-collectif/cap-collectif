@@ -1,19 +1,24 @@
 {
     "name": "cypress",
     "version": "1.0.0",
-    "description": "",
+    "description": "cypress tests for platform CI",
+    "license": "proprietary",
     "main": "index.js",
     "scripts": {
         "lint": "eslint --cache --fix --report-unused-disable-directives {support,plugins,pages}",
         "cy:open": "cypress open",
         "cy:run": "cross-env NODE_ENV=development cypress run",
+        "cy:run:debate": "yarn cy:run --spec 'integration/debate/*.spec.ts'",
+        "cy:run:project-owner": "yarn cy:run --spec 'integration/projectOwner/*.spec.ts'",
         "cy:run:ci": "NODE_ENV=ci cypress run",
+        "cy:run:debate:ci": "NODE_ENV=ci cypress run --spec 'integration/debate/*.spec.ts'",
+        "cy:run:project-owner:ci": "NODE_ENV=ci cypress run --spec 'integration/projectOwner/*.spec.ts'",
         "cy:verify": "cypress verify",
         "cy:info": "cypress info",
         "cy:version": "cypress version"
     },
     "keywords": [],
-    "author": "Omar Jbara",
+    "author": "Cap-Collectif",
     "dependencies": {
         "cross-env": "^7.0.3",
         "cypress": "^8.7.0",
