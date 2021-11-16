@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Mailer\Transport\MailjetTransport;
+use Capco\AppBundle\Mailer\Transport\MandrillTransport;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -241,5 +243,18 @@ class UserInvite
         $this->redirectionUrl = $redirectionUrl;
 
         return $this;
+    }
+
+    public function getProvider(): ?string
+    {
+        if ($this->mailjetId) {
+            return MailjetTransport::class;
+        }
+
+        if ($this->mandrillId) {
+            return MandrillTransport::class;
+        }
+
+        return null;
     }
 }

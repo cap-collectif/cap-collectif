@@ -10,6 +10,7 @@ use Capco\AppBundle\Mailer\Transport\MailjetTransport;
 use Capco\AppBundle\Mailer\Transport\MandrillTransport;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 
@@ -19,17 +20,20 @@ class UserInviteStatusCheckProcessor implements ProcessorInterface
     private UserInviteRepository $repository;
     private MailjetClient $mailjetClient;
     private MandrillClient $mandrillClient;
+    private LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UserInviteRepository $repository,
         MailjetClient $mailjetClient,
-        MandrillClient $mandrillClient
+        MandrillClient $mandrillClient,
+        LoggerInterface $logger
     ) {
         $this->entityManager = $entityManager;
         $this->repository = $repository;
         $this->mailjetClient = $mailjetClient;
         $this->mandrillClient = $mandrillClient;
+        $this->logger = $logger;
     }
 
     public function process(Message $message, array $options): bool
@@ -54,10 +58,15 @@ class UserInviteStatusCheckProcessor implements ProcessorInterface
                 );
             }
 
-            $invite->setInternalStatus(
-                \in_array($messageStatus, ['sent', 'opened', 'clicked'])
-                    ? UserInvite::SENT
-                    : UserInvite::SEND_FAILURE
+            $inviteStatus = \in_array($messageStatus, ['sent', 'opened', 'clicked'], true)
+                ? UserInvite::SENT
+                : UserInvite::SEND_FAILURE;
+            $invite->setInternalStatus($inviteStatus);
+            $this->logger->info(
+                '[USER-INVITE] invitation with id ' .
+                    $invite->getId() .
+                    ' got status : ' .
+                    $inviteStatus
             );
         }
 
@@ -73,8 +82,13 @@ class UserInviteStatusCheckProcessor implements ProcessorInterface
                 );
             }
 
-            $invite->setInternalStatus(
-                'sent' === $messageStatus ? UserInvite::SENT : UserInvite::SEND_FAILURE
+            $inviteStatus = 'sent' === $messageStatus ? UserInvite::SENT : UserInvite::SEND_FAILURE;
+            $invite->setInternalStatus($inviteStatus);
+            $this->logger->info(
+                '[USER-INVITE] invitation with id ' .
+                    $invite->getId() .
+                    ' got status : ' .
+                    $inviteStatus
             );
         }
 

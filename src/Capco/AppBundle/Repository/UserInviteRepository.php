@@ -62,6 +62,31 @@ class UserInviteRepository extends EntityRepository
         return array_map(fn($row) => $row['email'], $results);
     }
 
+    public function getNotExpiredInvitationsByStatus(
+        ?string $status = UserInvite::WAITING_SENDING
+    ): array {
+        $qb = $this->createQueryBuilder('ui');
+        $qb->andWhere(
+            $qb
+                ->expr()
+                ->andX(
+                    $qb->expr()->eq('ui.internalStatus', ':status'),
+                    $qb->expr()->gt('ui.expiresAt', ':now'),
+                    $qb
+                        ->expr()
+                        ->orX(
+                            $qb->expr()->isNotNull('ui.mailjetId'),
+                            $qb->expr()->isNotNull('ui.mandrillId')
+                        )
+                )
+        )->setParameters([
+            ':now' => new \DateTimeImmutable(),
+            ':status' => $status,
+        ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
     /**
      * @return UserInvite[]
      */

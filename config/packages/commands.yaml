@@ -89,3 +89,8 @@ services:
     Capco\AppBundle\Command\Migrations\FindDuplicatesSsoUsersCommand:
         arguments:
             $name: 'capco:find:duplicate-sso'
+
+    Capco\AppBundle\Command\CheckUserInviteStatusCommand:
+        arguments:
+            $name: 'capco:check:invite-user-status'
+            $publisher: '@swarrot.publisher'
