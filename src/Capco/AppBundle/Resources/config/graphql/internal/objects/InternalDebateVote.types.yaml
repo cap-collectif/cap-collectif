@@ -3,6 +3,7 @@ InternalDebateVote:
     inherits:
         - Node
         - InternalAbstractDebateVote
+        - InternalVote
         - PublicPublishable
     config:
         name: DebateVote
@@ -10,6 +11,7 @@ InternalDebateVote:
         interfaces:
             - Node
             - InternalAbstractDebateVote
+            - InternalVote
             - PublicPublishable
         fields:
             id:

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Vote;
 
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
+use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\OpinionVote;
@@ -58,6 +59,9 @@ class VoteTypeResolver implements ResolverInterface
         }
         if ($node instanceof CommentVote) {
             return $this->typeResolver->resolve('CommentVote');
+        }
+        if ($node instanceof DebateVote) {
+            return $this->typeResolver->resolve('InternalDebateVote');
         }
         if ($node instanceof DebateArgumentVote || $node instanceof DebateAnonymousArgumentVote) {
             return $this->typeResolver->resolve('InternalDebateArgumentVote');

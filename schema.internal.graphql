@@ -4395,7 +4395,7 @@ enum DebateType {
 }
 
 """A debate vote."""
-type DebateVote implements Node & AbstractDebateVote & Publishable {
+type DebateVote implements Node & AbstractDebateVote & Vote & Publishable {
   """The ID of an object."""
   id: ID!
 
@@ -4423,14 +4423,23 @@ type DebateVote implements Node & AbstractDebateVote & Publishable {
   """The URL of widget from which the debate's vote was added, if any."""
   widgetOriginUrl: URI
 
+  """The author of the vote."""
+  author: User!
+
+  """The contribution that was voted."""
+  related: Contribution
+
+  """Returns Type of vote"""
+  kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
+
   """Identifies when the entity can no more be published."""
   publishableUntil: DateTime
 
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
-
-  """The author of the vote."""
-  author: User!
 
   """The formatted geolocalization informations."""
   geoip: FormattedGeolocalization
