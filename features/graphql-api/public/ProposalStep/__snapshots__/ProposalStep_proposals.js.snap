@@ -48,7 +48,7 @@ Object {
         "endCursor": "YTozOntpOjA7aTo3O2k6MTtpOjE0ODU5MDM3NzAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjUiO30=",
         "hasNextPage": true,
       },
-      "totalCount": 5,
+      "totalCount": 6,
     },
   },
 }
@@ -102,7 +102,7 @@ Object {
         "endCursor": "YTozOntpOjA7aTozO2k6MTtpOjE0ODU5MDM3NzAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjUiO30=",
         "hasNextPage": true,
       },
-      "totalCount": 5,
+      "totalCount": 6,
     },
   },
 }
@@ -573,7 +573,6 @@ Object {
 }
 `;
 
-
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step and a status "En cours" with a cursor 1`] = `
 Object {
   "node": Object {
@@ -637,7 +636,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNDg1OTAzODIxMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEzOSI7fQ==",
         "hasNextPage": true,
       },
-      "totalCount": 5,
+      "totalCount": 6,
     },
   },
 }
@@ -677,6 +676,25 @@ Object {
             "createdAt": "2017-02-01 00:03:41",
             "district": null,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMzk=",
+            "published": true,
+            "publishedAt": "2017-02-01 00:03:41",
+            "status": null,
+            "votes": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM4MjEwMDA7aToyO3M6MTQ6InByb3Bvc2FsMTM5YmlzIjt9",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:03:41",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMzliaXM=",
             "published": true,
             "publishedAt": "2017-02-01 00:03:41",
             "status": null,
@@ -748,7 +766,7 @@ Object {
         "endCursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NjAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjQiO30=",
         "hasNextPage": false,
       },
-      "totalCount": 5,
+      "totalCount": 6,
     },
   },
 }

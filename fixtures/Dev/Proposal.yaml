@@ -980,6 +980,17 @@ Capco\AppBundle\Entity\Proposal:
         updatedAt: <(new \DateTime('2017-02-01 00:03:41'))>
         publishedAt: <(new \DateTime('2017-02-01 00:03:41'))>
         undraftAt: $publishedAt
+    proposal139bis:
+        id: proposal139bis
+        title: Proposition de Jean Duplicate 2
+        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        author: '@userJeanDuplicates'
+        proposalForm: '@proposalFormVoteClassement'
+        reference: 555555
+        createdAt: <(new \DateTime('2017-02-01 00:03:41'))>
+        updatedAt: <(new \DateTime('2017-02-01 00:03:41'))>
+        publishedAt: <(new \DateTime('2017-02-01 00:03:41'))>
+        undraftAt: $publishedAt
     lePetitCafe:
         id: lePetitCafe
         address: '[{"address_components": [  {"long_name": "6","short_name": "6","types": [ "street_number" ] },  {"long_name": "Rue Descartes","short_name": "Rue Descartes","types": [ "route" ] },  {"long_name": "Paris","short_name": "Paris","types": [ "locality", "political" ] },  {"long_name": "Département de Paris","short_name": "Département de Paris","types": [ "administrative_area_level_2", "political" ] },  {"long_name": "Île-de-France","short_name": "IDF","types": [ "administrative_area_level_1", "political" ] },  {"long_name": "France","short_name": "FR","types": [ "country", "political" ] },  {"long_name": "75005","short_name": "75005","types": [ "postal_code" ] }],"formatted_address": "6 Rue Descartes, 75005 Paris, France","geometry": {  "bounds": {"northeast": { "lat": 48.847207, "lng": 2.3485302 },"southwest": { "lat": 48.8470684, "lng": 2.3483977 } },  "location": {"lat": 48.8471578,"lng": 2.3484722 },  "location_type": "ROOFTOP",  "viewport": {"northeast": { "lat": 48.8484866802915, "lng": 2.349812930291502 },"southwest": { "lat": 48.8457887197085, "lng": 2.347114969708498 } }},"place_id": "ChIJNYpNEuZx5kcRceTkIv6AC1k","types": [ "premise" ]} ]'

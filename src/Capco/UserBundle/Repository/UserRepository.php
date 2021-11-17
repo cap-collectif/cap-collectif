@@ -1224,9 +1224,9 @@ EOF;
         $stmt = $this->getEntityManager()
             ->getConnection()
             ->prepare($sql);
-        $stmt->execute();
+        $result = $stmt->executeQuery();
 
-        return $stmt->fetchAllAssociative();
+        return $result->fetchAllAssociative();
     }
 
     public function prefixUserSSoId(string $userId, string $ssoFieldName, int $key)
@@ -1237,7 +1237,7 @@ EOF;
             ->update()
             ->set(
                 'u.' . $ssoFieldName,
-                $qb->expr()->concat($qb->expr()->literal("duplicate-$key-"), 'u.' . $ssoFieldName)
+                $qb->expr()->concat($qb->expr()->literal("duplicate-${key}-"), 'u.' . $ssoFieldName)
             )
             ->where('u.id = :userId')
             ->setParameter('userId', $userId)

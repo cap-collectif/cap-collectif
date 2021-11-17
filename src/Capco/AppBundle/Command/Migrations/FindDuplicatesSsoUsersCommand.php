@@ -199,7 +199,7 @@ class FindDuplicatesSsoUsersCommand extends Command
     }
 
     private function choiceWhatToDoIfUsersGotContributions(
-        $usersWithContributions,
+        array $usersWithContributions,
         InputInterface $input,
         OutputInterface $output,
         HelperInterface $helper,
@@ -221,11 +221,12 @@ class FindDuplicatesSsoUsersCommand extends Command
         $question = new ChoiceQuestion(
             'What do you want to do ?' . \PHP_EOL,
             [
-                'Back to the beginning',
+                '1 Back to the beginning',
                 sprintf(
-                    'Prefixed accounts sso_id with the fewer contributions to block accounts. So we keep account with id %s and will block others',
+                    '2 Prefixed accounts sso_id with the fewer contributions to block accounts. So we keep account with id %s and will block others',
                     $userToKeep['userId']
                 ),
+                '3 Prefix the sso_id accounts with the chosen id. So we keep the account with id picked and block the others.',
             ],
             0
         );
@@ -234,7 +235,29 @@ class FindDuplicatesSsoUsersCommand extends Command
         if ('Back to the beginning' === $choice) {
             $this->execute($input, $output);
         }
+        if ('3' === $choice[0]) {
+            $this->pickUserToPrefixAndBlock(
+                $usersWithContributions,
+                $input,
+                $output,
+                $helper,
+                $io,
+                $sso
+            );
+        }
 
+        $this->blockUsers($usersWithContributions, $input, $output, $helper, $io, $sso, $keyToKeep);
+    }
+
+    private function blockUsers(
+        array $usersWithContributions,
+        InputInterface $input,
+        OutputInterface $output,
+        HelperInterface $helper,
+        SymfonyStyle $io,
+        string $sso,
+        int $keyToKeep
+    ) {
         unset($usersWithContributions[$keyToKeep]);
         $io->warning('This users will be blocked');
 
@@ -277,6 +300,35 @@ class FindDuplicatesSsoUsersCommand extends Command
             $this->logger->error($exception->getMessage());
             $this->execute($input, $output);
         }
+    }
+
+    private function pickUserToPrefixAndBlock(
+        array $usersWithContributions,
+        InputInterface $input,
+        OutputInterface $output,
+        HelperInterface $helper,
+        SymfonyStyle $io,
+        string $sso
+    ) {
+        $question = new Question(
+            sprintf(
+                'Please enter the userId to keep, default : %s (column %d)' . \PHP_EOL,
+                $usersWithContributions[0]['userId'],
+                0
+            ),
+            $usersWithContributions[0]['userId']
+        );
+
+        $userIdToKeep = $helper->ask($input, $output, $question);
+        $userToKeep = null;
+        $keyToKeep = null;
+        foreach ($usersWithContributions as $key => $user) {
+            if ($user['userId'] === $userIdToKeep) {
+                $userToKeep = $user;
+                $keyToKeep = $key;
+            }
+        }
+        $this->blockUsers($usersWithContributions, $input, $output, $helper, $io, $sso, $keyToKeep);
     }
 
     private function getSsoFieldName(string $sso): string
