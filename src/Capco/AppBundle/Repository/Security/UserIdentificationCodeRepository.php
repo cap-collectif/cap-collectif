@@ -1,8 +1,8 @@
 <?php
 
-namespace Capco\AppBundle\Repository;
+namespace Capco\AppBundle\Repository\Security;
 
-use Capco\AppBundle\Entity\UserIdentificationCode;
+use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Doctrine\ORM\EntityRepository;
 
 /**

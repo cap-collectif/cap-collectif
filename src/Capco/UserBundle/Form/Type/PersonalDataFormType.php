@@ -2,7 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Capco\AppBundle\Entity\UserIdentificationCode;
+use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

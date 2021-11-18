@@ -181,7 +181,7 @@
         <field name="consentExternalCommunication" column="consent_external_communication" type="boolean" nullable="false" />
         <field name="consentInternalCommunication" column="consent_internal_communication" type="boolean" nullable="false" />
         <field name="birthPlace" column="birth_place" type="string" length="255" nullable="true" />
-        <one-to-one field="userIdentificationCode" target-entity="Capco\AppBundle\Entity\UserIdentificationCode" >
+        <one-to-one field="userIdentificationCode" target-entity="Capco\AppBundle\Entity\Security\UserIdentificationCode" >
             <join-column name="user_identification_code" referenced-column-name="identification_code"/>
         </one-to-one>
     </entity>

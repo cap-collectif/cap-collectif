@@ -627,8 +627,14 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:SenderEmail']
 
-    Capco\AppBundle\Repository\UserIdentificationCodeRepository:
+    Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        arguments: ['CapcoAppBundle:UserIdentificationCode']
+        arguments: ['CapcoAppBundle:Security\UserIdentificationCode']
+
+    Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:Security\UserIdentificationCodeList']

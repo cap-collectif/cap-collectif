@@ -1,5 +1,7 @@
-Capco\AppBundle\Entity\UserIdentificationCode:
+Capco\AppBundle\Entity\Security\UserIdentificationCode:
     code1:
         identificationCode: DK2AZ554
+        list: '@newList'
     code2:
         identificationCode: GG2AZR54
+        list: '@newList'

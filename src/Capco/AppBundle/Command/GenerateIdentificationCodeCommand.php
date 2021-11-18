@@ -4,13 +4,16 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
-use Capco\AppBundle\Entity\UserIdentificationCode;
-use Capco\AppBundle\Repository\UserIdentificationCodeRepository;
+use Capco\AppBundle\Entity\Security\UserIdentificationCode;
+use Capco\AppBundle\Entity\Security\UserIdentificationCodeList;
+use Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository;
+use Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,25 +26,30 @@ class GenerateIdentificationCodeCommand extends Command
     private LoggerInterface $logger;
     private EntityManagerInterface $em;
     private UserIdentificationCodeRepository $userIdentificationCodeRepository;
+    private UserIdentificationCodeListRepository $userIdentificationCodeListRepository;
 
     public function __construct(
         EntityManagerInterface $em,
         string $projectRootDir,
         LoggerInterface $logger,
-        UserIdentificationCodeRepository $userIdentificationCodeRepository
+        UserIdentificationCodeRepository $userIdentificationCodeRepository,
+        UserIdentificationCodeListRepository $userIdentificationCodeListRepository
     ) {
         parent::__construct(self::COMMAND_NAME);
         $this->em = $em;
         $this->projectRootDir = $projectRootDir;
         $this->logger = $logger;
         $this->userIdentificationCodeRepository = $userIdentificationCodeRepository;
+        $this->userIdentificationCodeListRepository = $userIdentificationCodeListRepository;
     }
 
     public function createUniqCodes(
+        string $listName,
         int $numberOfCodesToGenerate,
         ProgressBar $progress
     ): ArrayCollection {
         $existingCodes = $this->userIdentificationCodeRepository->findAll();
+        $list = $this->getOrCreateList($listName);
         $existingIdentificationCode = array_map(function (UserIdentificationCode $existingCode) {
             return $existingCode->getIdentificationCode();
         }, $existingCodes);
@@ -54,6 +62,7 @@ class GenerateIdentificationCodeCommand extends Command
                 $newUserIdentificationCodes,
                 $existingIdentificationCode
             );
+            $userIdentificationCode->setList($list);
             $this->em->persist($userIdentificationCode);
             $newUserIdentificationCodes->add($userIdentificationCode);
             $progress->advance();
@@ -155,6 +164,7 @@ class GenerateIdentificationCodeCommand extends Command
     protected function configure(): void
     {
         $this->setDescription('Generate identification code and create csv');
+        $this->addArgument('name', InputArgument::REQUIRED, 'name of the new list to be created');
         $this->addOption(
             'number',
             'num',
@@ -177,7 +187,7 @@ class GenerateIdentificationCodeCommand extends Command
         $numberOfCodesToGenerate = $input->getOption('number');
         $progress = new ProgressBar($output, $numberOfCodesToGenerate);
 
-        $codes = $this->createUniqCodes($numberOfCodesToGenerate, $progress);
+        $codes = $this->createUniqCodes($input->getArgument('name'), $numberOfCodesToGenerate, $progress);
         $fileName = 'generated_codes_' . (new \DateTime())->format('YmdHis') . '.csv';
         $fileName = sprintf('%s/public/export/%s', $this->projectRootDir, $fileName);
         $this->createCsvFileContainingTheGeneratedCodes($codes, $delimiter, $fileName, $output);
@@ -193,5 +203,17 @@ class GenerateIdentificationCodeCommand extends Command
         );
 
         return (new UserIdentificationCode())->setIdentificationCode($userIdentificationCode);
+    }
+
+    private function getOrCreateList(string $newListName): UserIdentificationCodeList
+    {
+        $list = $this->userIdentificationCodeListRepository->findOneBy([]);
+        if (null === $list) {
+            $list = new UserIdentificationCodeList();
+            $list->setName($newListName);
+            $this->em->persist($list);
+        }
+
+        return $list;
     }
 }

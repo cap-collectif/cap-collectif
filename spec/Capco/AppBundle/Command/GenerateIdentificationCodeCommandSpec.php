@@ -3,8 +3,9 @@
 namespace spec\Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\GenerateIdentificationCodeCommand;
-use Capco\AppBundle\Entity\UserIdentificationCode;
-use Capco\AppBundle\Repository\UserIdentificationCodeRepository;
+use Capco\AppBundle\Entity\Security\UserIdentificationCode;
+use Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository;
+use Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
@@ -15,9 +16,16 @@ class GenerateIdentificationCodeCommandSpec extends ObjectBehavior
     public function let(
         EntityManagerInterface $em,
         LoggerInterface $logger,
-        UserIdentificationCodeRepository $userIdentificationCodeRepository
+        UserIdentificationCodeRepository $userIdentificationCodeRepository,
+        UserIdentificationCodeListRepository $userIdentificationCodeListRepository
     ) {
-        $this->beConstructedWith($em, 'public/export', $logger, $userIdentificationCodeRepository);
+        $this->beConstructedWith(
+            $em,
+            'public/export',
+            $logger,
+            $userIdentificationCodeRepository,
+            $userIdentificationCodeListRepository
+        );
     }
 
     public function it_is_initializable()

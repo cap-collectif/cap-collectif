@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\Security\UserIdentificationCodeList:
+    newList:
+        id: newList
+        name: Nouvelle Liste
+        owner: '@userTheo'
