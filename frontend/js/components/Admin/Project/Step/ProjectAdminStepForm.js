@@ -388,7 +388,6 @@ export function ProjectAdminStepForm({
 
   const unstable_anonymous_questionnaire = useFeatureFlag('unstable_anonymous_questionnaire');
 
-
   React.useEffect(() => {
     // mainView is not in the reduxForm's initialValues because the proposalForm is selected after.
     // Normally, need to use enableReinitialize but it resets the form...
@@ -396,6 +395,10 @@ export function ProjectAdminStepForm({
       dispatch(change(stepFormName, 'mainView', mainView));
     }
   }, [dispatch, isCreating, mainView, step.__typename]);
+
+  const hasCheckedRequirements = requirements
+    ? requirements.some(requirement => requirement.checked)
+    : false;
 
   return (
     <>
@@ -499,6 +502,7 @@ export function ProjectAdminStepForm({
                 id="step-isAnonymousParticipationAllowed"
                 normalize={val => !!val}
                 label={<FormattedMessage id="allow-debate-anonymous-participation" />}
+                disabled={hasCheckedRequirements}
               />
               {isAnonymousParticipationAllowed && (
                 <AppBoxNoMargin ml={4} mb={5}>
@@ -553,6 +557,7 @@ export function ProjectAdminStepForm({
               questionnaire={step.questionnaire}
               stepFormName={stepFormName}
               requirements={requirements}
+              isAnonymousParticipationAllowed={isAnonymousParticipationAllowed}
             />
           )}
           {step.__typename === 'ConsultationStep' && (

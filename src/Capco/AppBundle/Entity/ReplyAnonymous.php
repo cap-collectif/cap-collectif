@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
@@ -25,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyAnonymousRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class ReplyAnonymous implements ReplyInterface
+class ReplyAnonymous extends AbstractReply
 {
     use AuthorInformationTrait;
     use HasResponsesTrait;
@@ -132,31 +131,13 @@ class ReplyAnonymous implements ReplyInterface
         return $this;
     }
 
-    /**
-     * Tells if this object MUST be sent to Elasticsearch.
-     * If FALSE, we force the removal from ES.
-     */
-    public function isIndexable(): bool
+    public function isDraft(): bool
     {
-        return true;
+        return false;
     }
 
-    public static function getElasticsearchPriority(): int
-    {
-        return 4;
-    }
-
-    public static function getElasticsearchTypeName(): string
+    public function getType(): string
     {
         return 'replyAnonymous';
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return [
-            'ElasticsearchReply',
-            'ElasticsearchReplyNestedStep',
-            'ElasticsearchReplyNestedProject',
-        ];
     }
 }

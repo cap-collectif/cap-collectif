@@ -14,7 +14,13 @@ const reply = {
   draft: false,
   viewerCanDelete: true,
   $fragmentRefs,
+  __typename: 'UserReply',
 };
+
+const questionnaire = {
+  $refType,
+  $fragmentRefs,
+}
 
 const notContribuableReply = {
   ...reply,
@@ -23,27 +29,27 @@ const notContribuableReply = {
 
 describe('<ReplyLink />', () => {
   it('render a reply in a contribuable questionnaire', () => {
-    const wrapper = shallow(<ReplyLink reply={reply} />);
+    const wrapper = shallow(<ReplyLink reply={reply} questionnaire={questionnaire} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render a draft reply in a contribuable questionnaire', () => {
-    const wrapper = shallow(<ReplyLink reply={{ ...reply, draft: true, publishedAt: null }} />);
+    const wrapper = shallow(<ReplyLink reply={{ ...reply, draft: true, publishedAt: null }} questionnaire={questionnaire} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('render a private reply in a contribuable questionnaire', () => {
-    const wrapper = shallow(<ReplyLink reply={{ ...reply, private: true }} />);
+    const wrapper = shallow(<ReplyLink reply={{ ...reply, private: true }} questionnaire={questionnaire} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render a reply in a closed questionnaire', () => {
-    const wrapper = shallow(<ReplyLink reply={notContribuableReply} />);
+    const wrapper = shallow(<ReplyLink reply={notContribuableReply} questionnaire={questionnaire} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render a draft reply in a closed questionnaire', () => {
     const wrapper = shallow(
-      <ReplyLink reply={{ ...notContribuableReply, draft: true, publishedAt: null }} />,
+      <ReplyLink reply={{ ...notContribuableReply, draft: true, publishedAt: null }} questionnaire={questionnaire} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

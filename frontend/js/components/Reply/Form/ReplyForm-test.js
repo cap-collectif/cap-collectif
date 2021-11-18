@@ -16,18 +16,16 @@ describe('<ReplyForm />', () => {
       viewerMeetsTheRequirements: true,
     },
     isAnonymousParticipationAllowed: false,
+    collectParticipantsEmail: false,
     $fragmentRefs,
   };
   const stepWithRequirementNotFullFill = {
-    id: 'step1',
-    title: 'Step 1',
+    ...step,
     requirements: {
       reason: null,
       totalCount: 3,
       viewerMeetsTheRequirements: false,
     },
-    isAnonymousParticipationAllowed: false,
-    $fragmentRefs,
   };
 
   const questionnaireProps = {
@@ -349,6 +347,10 @@ describe('<ReplyForm />', () => {
     history: createMemoryHistory(),
     user: null,
     invalidRequirements: false,
+    isAnonymousReply: false,
+    anonymousRepliesIds: ['abc', 'def'],
+    isAuthenticated: true,
+    platformName: 'capco',
   };
 
   it('should render correctly with equal required and facultative fields', () => {

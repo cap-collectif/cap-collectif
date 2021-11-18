@@ -19,6 +19,7 @@ import { type QuestionnaireReplyPage_questionnaire } from '~relay/QuestionnaireR
 import type { Dispatch, GlobalState, ResultPreloadQuery } from '~/types';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context';
+import CookieMonster from '~/CookieMonster';
 
 export const queryReply = graphql`
   query QuestionnaireReplyPageQuery($isAuthenticated: Boolean!, $replyId: ID!) {
@@ -26,9 +27,7 @@ export const queryReply = graphql`
       id
       ... on Reply {
         createdAt
-        ...on UserReply {
-            publishedAt
-        }
+        publishedAt
         questionnaire {
           ...ReplyForm_questionnaire
         }
@@ -39,12 +38,12 @@ export const queryReply = graphql`
 `;
 
 type Props = {|
-  questionnaire: ?QuestionnaireReplyPage_questionnaire,
-  dataPrefetch: ?ResultPreloadQuery,
-  submitReplyForm: (replyId: string) => void,
-  resetReplyForm: (replyId: string) => void,
-  match: Match,
-  isAuthenticated: boolean,
+  +questionnaire: ?QuestionnaireReplyPage_questionnaire,
+  +dataPrefetch: ?ResultPreloadQuery,
+  +submitReplyForm: (replyId: string) => void,
+  +resetReplyForm: (replyId: string) => void,
+  +match: Match,
+  +isAuthenticated: boolean,
 |};
 
 const QuestionnaireReplyPageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -82,7 +81,7 @@ export const QuestionnaireReplyPage = ({
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const [isEditingReplyForm, setIsEditingReplyForm] = useState<boolean>(false);
-  const { preloadReply } = React.useContext(QuestionnaireStepPageContext);
+  const { preloadReply, anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext);
   const history = useHistory();
 
   // Skip query when data preloaded is used
@@ -102,6 +101,8 @@ export const QuestionnaireReplyPage = ({
   const reply = propsPrefetch ? propsPrefetch?.reply : propsQuery?.reply;
 
   if (!reply || !questionnaire) return <Loader />;
+
+  const isAnonymousReply = CookieMonster.hasAnonymousReplyCookie(questionnaire?.id, reply?.id);
 
   return (
     <QuestionnaireReplyPageContainer>
@@ -147,6 +148,8 @@ export const QuestionnaireReplyPage = ({
         questionnaire={reply.questionnaire}
         reply={reply}
         setIsEditingReplyForm={setIsEditingReplyForm}
+        isAnonymousReply={isAnonymousReply}
+        anonymousRepliesIds={anonymousRepliesIds}
       />
       {questionnaire.step && <StepPageFooter step={questionnaire.step} />}
       <LeavePageModal
@@ -198,6 +201,7 @@ export default createFragmentContainer(containerConnect, {
           }
         }
       }
+      id
     }
   `,
 });

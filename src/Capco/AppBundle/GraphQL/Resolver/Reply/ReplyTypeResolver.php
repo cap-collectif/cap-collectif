@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
-use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use GraphQL\Type\Definition\Type;
@@ -19,14 +19,15 @@ class ReplyTypeResolver implements ResolverInterface
         $this->typeResolver = $typeResolver;
     }
 
-    public function __invoke(ReplyInterface $reply): Type
+    public function __invoke(AbstractReply $reply): Type
     {
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($reply instanceof Reply) {
-            if ($currentSchemaName === 'preview') {
+            if ('preview' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PreviewUserReply');
             }
+
             return $this->typeResolver->resolve('InternalUserReply');
         }
         if ($reply instanceof ReplyAnonymous) {

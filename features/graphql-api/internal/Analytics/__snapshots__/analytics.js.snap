@@ -239,7 +239,7 @@ Object {
         },
         Object {
           "key": "2016-02-01T00:00:00.000Z",
-          "totalCount": 42,
+          "totalCount": 43,
         },
         Object {
           "key": "2016-03-01T00:00:00.000Z",
@@ -287,7 +287,7 @@ Object {
         },
         Object {
           "key": "2017-02-01T00:00:00.000Z",
-          "totalCount": 42,
+          "totalCount": 43,
         },
         Object {
           "key": "2017-03-01T00:00:00.000Z",

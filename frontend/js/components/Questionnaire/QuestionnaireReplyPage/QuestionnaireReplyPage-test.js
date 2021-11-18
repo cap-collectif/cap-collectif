@@ -26,6 +26,7 @@ const baseProps = {
   submitReplyForm: jest.fn(),
   resetReplyForm: jest.fn(),
   questionnaire: {
+    id: 'abc',
     step: {
       $fragmentRefs,
     },

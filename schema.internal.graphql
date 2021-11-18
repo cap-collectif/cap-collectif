@@ -4535,7 +4535,7 @@ input DeleteAnonymousReplyInput {
 }
 
 type DeleteAnonymousReplyPayload {
-  questionnaireId: ID!
+  questionnaire: Questionnaire!
   replyId: ID!
   clientMutationId: String
 }
@@ -4945,6 +4945,7 @@ input DeleteUserReplyInput {
 
 type DeleteUserReplyPayload {
   questionnaire: Questionnaire!
+  replyId: ID!
   clientMutationId: String
 }
 

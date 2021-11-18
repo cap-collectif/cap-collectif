@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
-use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Model\Publishable;
@@ -31,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class Reply implements ReplyInterface, Publishable, DraftableInterface
+class Reply extends AbstractReply implements Publishable, DraftableInterface
 {
     use AuthorInformationTrait;
     use DraftableTrait;
@@ -69,7 +68,7 @@ class Reply implements ReplyInterface, Publishable, DraftableInterface
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    private \DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -143,32 +142,8 @@ class Reply implements ReplyInterface, Publishable, DraftableInterface
         return $viewer === $this->getAuthor();
     }
 
-    /**
-     * Tells if this object MUST be sent to Elasticsearch.
-     * If FALSE, we force the removal from ES.
-     */
-    public function isIndexable(): bool
-    {
-        return true;
-    }
-
-    public static function getElasticsearchPriority(): int
-    {
-        return 4;
-    }
-
-    public static function getElasticsearchTypeName(): string
+    public function getType(): string
     {
         return 'reply';
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return [
-            'ElasticsearchReplyNestedAuthor',
-            'ElasticsearchReply',
-            'ElasticsearchReplyNestedStep',
-            'ElasticsearchReplyNestedProject',
-        ];
     }
 }

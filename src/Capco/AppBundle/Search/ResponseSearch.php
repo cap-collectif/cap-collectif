@@ -41,13 +41,27 @@ class ResponseSearch extends Search
             ->setSize(0)
             ->setTrackTotalHits(true);
         $this->addObjectTypeFilter($query, $this->type);
-        $agg = new Cardinality('participants');
-        $agg->setField('reply.author.id');
-        $query->addAggregation($agg);
-        $resultSet = $this->index->search($query);
-        $aggregation = $resultSet->getAggregation('participants');
 
-        return $aggregation['value'];
+        $authenticatedParticipantsAggs = new Cardinality('authenticatedParticipants');
+        $authenticatedParticipantsAggs->setField('reply.author.id');
+        $query->addAggregation($authenticatedParticipantsAggs);
+
+        $allParticipantsAggs = new Terms('allParticipants');
+        $allParticipantsAggs->setField('reply.replyType');
+        $query->addAggregation($allParticipantsAggs);
+
+        $resultSet = $this->index->search($query);
+        $authenticatedParticipants = $resultSet->getAggregation('authenticatedParticipants');
+        $allParticipants = $resultSet->getAggregation('allParticipants');
+
+        $anonymousParticipantsCount = 0;
+        foreach ($allParticipants['buckets'] as $bucket) {
+            if ('replyAnonymous' === $bucket['key']) {
+                $anonymousParticipantsCount = $bucket['doc_count'];
+            }
+        }
+
+        return $authenticatedParticipants['value'] + $anonymousParticipantsCount;
     }
 
     public function getResponsesByQuestion(

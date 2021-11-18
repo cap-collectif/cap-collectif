@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Elastica\Aggregation\Cardinality;
+use Elastica\Aggregation\Terms as AggregationTerms;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
@@ -54,18 +55,33 @@ class ReplySearch extends Search
             ->addFilter(new Term(['published' => true]));
 
         $query = new Query($boolQuery);
-        $this->addObjectTypeFilter($query, $this->type);
+
+        $this->addObjectTypeFilter($query, 'reply');
+
         $query
             ->setSource(['id'])
             ->setSize(0)
             ->setTrackTotalHits(true);
 
-        $agg = new Cardinality('participants');
-        $agg->setField('author.id');
-        $query->addAggregation($agg);
-        $resultSet = $this->index->search($query);
-        $aggregation = $resultSet->getAggregation('participants');
+        $authenticatedParticipantsAggs = new Cardinality('authenticatedParticipants');
+        $authenticatedParticipantsAggs->setField('author.id');
+        $query->addAggregation($authenticatedParticipantsAggs);
 
-        return $aggregation['value'];
+        $allParticipantsAggs = new AggregationTerms('allParticipants');
+        $allParticipantsAggs->setField('replyType');
+        $query->addAggregation($allParticipantsAggs);
+
+        $resultSet = $this->index->search($query);
+        $authenticatedParticipants = $resultSet->getAggregation('authenticatedParticipants');
+        $allParticipants = $resultSet->getAggregation('allParticipants');
+
+        $anonymousParticipantsCount = 0;
+        foreach ($allParticipants['buckets'] as $bucket) {
+            if ('replyAnonymous' === $bucket['key']) {
+                $anonymousParticipantsCount = $bucket['doc_count'];
+            }
+        }
+
+        return $authenticatedParticipants['value'] + $anonymousParticipantsCount;
     }
 }

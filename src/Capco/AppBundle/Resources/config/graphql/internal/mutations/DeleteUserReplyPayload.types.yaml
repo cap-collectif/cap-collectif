@@ -4,3 +4,5 @@ DeleteUserReplyPayload:
         fields:
             questionnaire:
                 type: 'InternalQuestionnaire!'
+            replyId:
+                type: 'ID!'

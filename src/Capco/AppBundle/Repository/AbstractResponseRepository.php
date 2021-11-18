@@ -2,10 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
-use Capco\AppBundle\Entity\Reply;
 use Doctrine\ORM\EntityRepository;
 
 class AbstractResponseRepository extends EntityRepository
@@ -37,7 +36,7 @@ class AbstractResponseRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getByReply(ReplyInterface $reply, bool $showPrivate = false): iterable
+    public function getByReply(AbstractReply $reply, bool $showPrivate = false): iterable
     {
         $qb = $this->createQueryBuilder('r')
             ->addSelect('question')

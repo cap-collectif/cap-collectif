@@ -69,6 +69,6 @@ class DeleteUserReplyMutation implements MutationInterface
             );
         }
 
-        return ['questionnaire' => $questionnaire];
+        return ['questionnaire' => $questionnaire, 'replyId' => $id];
     }
 }

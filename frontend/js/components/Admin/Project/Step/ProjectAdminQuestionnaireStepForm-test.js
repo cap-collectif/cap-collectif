@@ -15,6 +15,7 @@ describe('<ProjectAdminQuestionnaireStepForm />', () => {
         type: 'LASTNAME',
       },
     ],
+    isAnonymousParticipationAllowed: false,
   };
 
   it('renders correctly with no data', () => {
@@ -43,6 +44,19 @@ describe('<ProjectAdminQuestionnaireStepForm />', () => {
       <MockProviders store={{ user: { user: { isAdmin: false } } }}>
         <ProjectAdminQuestionnaireStepForm
           {...props}
+          questionnaire={{ label: 'questionnaire1', value: 'q1id' }}
+        />
+      </MockProviders>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not render requirements when anonymous participation is checked', () => {
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: false } } }}>
+        <ProjectAdminQuestionnaireStepForm
+          {...props}
+          isAnonymousParticipationAllowed
           questionnaire={{ label: 'questionnaire1', value: 'q1id' }}
         />
       </MockProviders>,

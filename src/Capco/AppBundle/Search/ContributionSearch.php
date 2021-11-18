@@ -40,7 +40,6 @@ class ContributionSearch extends Search
         ContributionType::SOURCE => Source::class,
         ContributionType::REPLY => Reply::class,
         ContributionType::PROPOSAL => Proposal::class,
-        ContributionType::REPLY_ANONYMOUS => ReplyAnonymous::class,
     ];
 
     private $entityManager;
@@ -384,13 +383,29 @@ class ContributionSearch extends Search
         bool $inConsultation = false,
         bool $includeTrashed = false
     ): void {
-        $query
-            ->addFilter(
-                new Query\Terms(
-                    'objectType',
-                    $contributionTypes ?: $this->getContributionElasticsearchTypes($inConsultation)
+
+        if ($contributionTypes && in_array('replyAnonymous', $contributionTypes)) {
+            $query
+                ->addFilter(
+                    new Query\Terms(
+                        'objectType',
+                        ['reply']
+                    )
                 )
-            )
+                ->addFilter(
+                    new Query\Term(['replyType' => ['value' => 'replyAnonymous']])
+                );
+        } else {
+            $query
+                ->addFilter(
+                    new Query\Terms(
+                        'objectType',
+                        $contributionTypes ?: $this->getContributionElasticsearchTypes($inConsultation)
+                    )
+                );
+        }
+
+        $query
             ->addMustNot(
                 array_merge(
                     [

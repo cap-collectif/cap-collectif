@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React from 'react';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
@@ -7,29 +7,26 @@ import { Link } from 'react-router-dom';
 import type { ReplyLink_reply } from '~relay/ReplyLink_reply.graphql';
 import ReplyDraftLabel from '../ReplyDraftLabel';
 import UnpublishedLabel from '~/components/Publishable/UnpublishedLabel';
-import Icon from '~/components/Ui/Icons/Icon';
 import DeleteReplyModal from '~/components/Reply/Delete/DeleteReplyModal';
 import ReplyLinkContainer from './ReplyLink.style';
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context';
+import type { ReplyLink_questionnaire } from '~relay/ReplyLink_questionnaire.graphql';
 
 type Props = {|
-  reply: ReplyLink_reply,
+  +reply: ReplyLink_reply,
+  +questionnaire: ReplyLink_questionnaire,
 |};
 
-const TYPE_MODAL: {
-  EDIT: 'EDIT',
-  DELETE: 'DELETE',
-} = {
-  EDIT: 'EDIT',
-  DELETE: 'DELETE',
-};
-
-export const ReplyLink = ({ reply }: Props) => {
-  const [currentOpenModal, setCurrentOpenModal] = useState<$Values<typeof TYPE_MODAL> | null>(null);
+export const ReplyLink = ({ reply, questionnaire }: Props) => {
   const { preloadReply } = React.useContext(QuestionnaireStepPageContext);
 
+  const isAnonymousReply = reply?.__typename === 'AnonymousReply';
+
   return (
-    <ReplyLinkContainer onMouseEnter={() => preloadReply(reply.id)}>
+    <ReplyLinkContainer
+      onMouseEnter={() => {
+        if (!isAnonymousReply) return preloadReply(reply.id);
+      }}>
       <div>
         <Link to={`/replies/${reply.id}`}>
           <FormattedMessage
@@ -57,39 +54,32 @@ export const ReplyLink = ({ reply }: Props) => {
         &nbsp;
         {reply.draft && <ReplyDraftLabel draft={reply.draft} />}
         &nbsp;
-        {!reply.draft && <UnpublishedLabel publishable={reply} />}
+        {!reply.draft && !isAnonymousReply && <UnpublishedLabel publishable={reply} />}
       </div>
 
-      {reply.viewerCanDelete && (
-        <button
-          type="button"
-          className="btn-delete"
-          onClick={() => setCurrentOpenModal(TYPE_MODAL.DELETE)}>
-          <Icon name="trash" size={16} viewBox="0 0 16 16" />
-        </button>
-      )}
-
-      {reply.viewerCanDelete && (
-        <DeleteReplyModal
-          reply={reply}
-          show={currentOpenModal === TYPE_MODAL.DELETE}
-          onClose={() => setCurrentOpenModal(null)}
-        />
+      {(reply.viewerCanDelete || isAnonymousReply) && (
+        <DeleteReplyModal reply={reply} questionnaire={questionnaire} />
       )}
     </ReplyLinkContainer>
   );
 };
 
 export default createFragmentContainer(ReplyLink, {
+  questionnaire: graphql`
+    fragment ReplyLink_questionnaire on Questionnaire {
+      ...DeleteReplyModal_questionnaire
+    }
+  `,
   reply: graphql`
     fragment ReplyLink_reply on Reply {
+      __typename
       id
       createdAt
       publishedAt
       ... on UserReply {
-          draft
-          viewerCanDelete
-          private
+        draft
+        viewerCanDelete
+        private
       }
       ...DeleteReplyModal_reply
       ...UnpublishedLabel_publishable

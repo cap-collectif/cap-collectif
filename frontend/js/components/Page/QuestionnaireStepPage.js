@@ -15,6 +15,7 @@ import QuestionnaireReplyPage, {
 import { baseUrl } from '~/config';
 import ScrollToTop from '~/components/Utils/ScrollToTop';
 import { QuestionnaireStepPageContext, type Context } from './QuestionnaireStepPage.context';
+import CookieMonster from '~/CookieMonster';
 
 export type PropsNotConnected = {|
   +questionnaireId: ?string,
@@ -74,7 +75,7 @@ const component = ({
 
             <Switch>
               <Route exact path="/">
-                <QuestionnaireStepTabs questionnaire={questionnaire} />
+                <QuestionnaireStepTabs questionnaire={questionnaire} query={props} />
               </Route>
 
               <Route
@@ -107,13 +108,15 @@ export const QuestionnaireStepPage = ({
   isPrivateResult,
 }: Props) => {
   const [replyPrefetch, setReplyPrefetch] = React.useState(null);
+  const anonymousRepliesIds = React.useMemo(() => questionnaireId ? CookieMonster.getAnonymousRepliesIds(questionnaireId) : [], [questionnaireId]);
 
   const context = React.useMemo(
     () => ({
       preloadReply: (replyId: string, skipPreload?: boolean) =>
         preloadQueryReply(isAuthenticated, replyId, setReplyPrefetch, skipPreload),
+      anonymousRepliesIds,
     }),
-    [isAuthenticated],
+    [isAuthenticated, anonymousRepliesIds],
   );
 
   return questionnaireId ? (
@@ -123,7 +126,9 @@ export const QuestionnaireStepPage = ({
         query QuestionnaireStepPageQuery(
           $id: ID!
           $isAuthenticated: Boolean!
+          $isNotAuthenticated: Boolean!
           $enableResults: Boolean!
+          $anonymousRepliesIds: [ID!]!
         ) {
           questionnaire: node(id: $id) {
             ... on Questionnaire {
@@ -135,12 +140,19 @@ export const QuestionnaireStepPage = ({
             ...QuestionnaireStepTabs_questionnaire
               @arguments(isAuthenticated: $isAuthenticated, enableResults: $enableResults)
           }
+          ...QuestionnaireStepTabs_query
+            @arguments(
+              anonymousRepliesIds: $anonymousRepliesIds
+              isNotAuthenticated: $isNotAuthenticated
+            )
         }
       `}
       variables={{
         id: questionnaireId,
         isAuthenticated,
+        isNotAuthenticated: !isAuthenticated,
         enableResults: enableResults && !isPrivateResult,
+        anonymousRepliesIds,
       }}
       render={({ error, props, retry }) =>
         component({ error, props, retry, context, dataPrefetch: replyPrefetch })

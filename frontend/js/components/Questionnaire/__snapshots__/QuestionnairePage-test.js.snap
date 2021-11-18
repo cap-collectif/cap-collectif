@@ -10,6 +10,12 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
     }
   />
   <Relay(UserReplies)
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -57,6 +63,12 @@ exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`]
     }
   />
   <Relay(UserReplies)
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -101,6 +113,12 @@ exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
     }
   />
   <Relay(UserReplies)
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     questionnaire={
       Object {
         "$fragmentRefs": null,

@@ -60,6 +60,9 @@ describe('<ProjectCard />', () => {
     contributors: {
       totalCount: 5,
     },
+    anonymousReplies: {
+      totalCount: 10,
+    },
     districts: {
       totalCount: 0,
       edges: [],

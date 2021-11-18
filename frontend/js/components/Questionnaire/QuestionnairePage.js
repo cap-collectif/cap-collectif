@@ -8,11 +8,13 @@ import StepPageHeader from '../Steps/Page/StepPageHeader/StepPageHeader';
 import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
 import StepPageFooter from '../Steps/Page/StepPageFooter';
 import { type QuestionnairePage_questionnaire } from '~relay/QuestionnairePage_questionnaire.graphql';
+import { type QuestionnairePage_query } from '~relay/QuestionnairePage_query.graphql';
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 
 type Props = {|
-  questionnaire: ?QuestionnairePage_questionnaire,
+  +questionnaire: ?QuestionnairePage_questionnaire,
+  +query: ?QuestionnairePage_query,
 |};
 
 export const QuestionnaireContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -36,34 +38,36 @@ export const QuestionnaireContainer: StyledComponent<{}, {}, HTMLDivElement> = s
   }
 `;
 
-const hasViewerReplies = viewerReplies => viewerReplies && viewerReplies.totalCount > 0;
-
-export const QuestionnairePage = ({ questionnaire }: Props) => {
+export const QuestionnairePage = ({ questionnaire, query }: Props) => {
   const [isShow, setIsShow] = useState(false);
 
-  return questionnaire ? (
+  const hasAnonymousReplies = query?.anonymousReplies ? query.anonymousReplies.filter(Boolean).length > 0 : false;
+  const hasViewerReplies = questionnaire?.viewerReplies && questionnaire.viewerReplies.totalCount > 0;
+  const hasReplies = hasAnonymousReplies || hasViewerReplies;
+
+  const showAnswerOnceText = !questionnaire?.multipleRepliesAllowed && hasReplies;
+  const showAnswerAgainButton = questionnaire?.multipleRepliesAllowed && !isShow && hasReplies;
+  const showCreateForm = (questionnaire?.multipleRepliesAllowed && isShow) || !hasReplies;
+
+  return questionnaire && query ? (
     <QuestionnaireContainer>
       {questionnaire.step && <StepPageHeader step={questionnaire.step} />}
-      <UserReplies questionnaire={questionnaire} />
+      <UserReplies questionnaire={questionnaire} query={query} />
 
-      {!questionnaire.multipleRepliesAllowed && hasViewerReplies(questionnaire.viewerReplies) && (
+      {showAnswerOnceText && (
         <div className="wrapper-replies-max">
           <Icon name={ICON_NAME.information} size={16} color={colors.infoColor} />
           <FormattedMessage id="reply.user_has_reply.error" />
         </div>
       )}
 
-      {questionnaire.multipleRepliesAllowed &&
-        !isShow &&
-        hasViewerReplies(questionnaire.viewerReplies) && (
-          <button type="button" onClick={() => setIsShow(true)} className="btn-answer-again">
-            <FormattedMessage id="answer-again" />
-          </button>
-        )}
+      {showAnswerAgainButton && (
+        <button type="button" onClick={() => setIsShow(true)} className="btn-answer-again">
+          <FormattedMessage id="answer-again" />
+        </button>
+      )}
 
-      {((questionnaire.multipleRepliesAllowed && isShow) ||
-        (questionnaire.viewerReplies && questionnaire.viewerReplies.totalCount === 0) ||
-        !questionnaire.viewerReplies) && (
+      {showCreateForm && (
         <ReplyCreateFormWrapper questionnaire={questionnaire} setIsShow={setIsShow} />
       )}
 
@@ -88,6 +92,22 @@ export default createFragmentContainer(container, {
       }
       ...ReplyCreateFormWrapper_questionnaire @arguments(isAuthenticated: $isAuthenticated)
       ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+    }
+  `,
+  query: graphql`
+    fragment QuestionnairePage_query on Query
+      @argumentDefinitions(
+        anonymousRepliesIds: { type: "[ID!]!" }
+        isNotAuthenticated: { type: "Boolean!" }
+      ) {
+      ...UserReplies_query
+        @arguments(
+          anonymousRepliesIds: $anonymousRepliesIds
+          isNotAuthenticated: $isNotAuthenticated
+        )
+      anonymousReplies: nodes(ids: $anonymousRepliesIds) @include(if: $isNotAuthenticated) {
+        __typename
+      }
     }
   `,
 });

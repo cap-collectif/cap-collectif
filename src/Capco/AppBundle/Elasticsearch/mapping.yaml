@@ -154,6 +154,7 @@ mappings:
         title: *text_analysis_highlighted
         authors: *Author
         owner: *Author
+        replyType: { type: keyword }
         visibility: { type: long }
         districts:
             properties:
@@ -347,6 +348,7 @@ mappings:
                 createdAt: { type: date }
                 published: { type: boolean }
                 draft: { type: boolean }
+                replyType: { type: keyword }
         questionnaire:
             properties:
                 id: { type: keyword }

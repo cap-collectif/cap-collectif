@@ -227,3 +227,44 @@ Scenario: GraphQL client wants to get question's participants
     }
   }
   """
+
+Scenario: GraphQL client wants to get anonymous questionnaire question's participants
+  Given I am logged in to graphql as user
+  When I send a GraphQL request:
+  """
+  {
+      questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz") {
+        ... on Questionnaire {
+          participants {
+            totalCount
+          }
+          questions {
+            id
+            participants {
+             totalCount
+            }
+          }
+        }
+      }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "questionnaire": {
+        "participants": {
+          "totalCount": 2
+        },
+        "questions": [
+          {
+            "id": "UXVlc3Rpb246MTQwMw==",
+            "participants": {
+              "totalCount": 2
+            }
+          }
+        ]
+      }
+    }
+  }
+  """

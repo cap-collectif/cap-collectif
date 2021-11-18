@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalEvaluation;
@@ -144,6 +145,15 @@ abstract class AbstractResponse implements IndexableInterface
         return $this;
     }
 
+    public function getReplyOrReplyAnonymous(): ?AbstractReply
+    {
+        if ($this->replyAnonymous) {
+            return $this->replyAnonymous;
+        }
+
+        return $this->reply;
+    }
+
     public function getReply(): ?Reply
     {
         return $this->reply;
@@ -164,6 +174,7 @@ abstract class AbstractResponse implements IndexableInterface
     public function setReplyAnonymous(?ReplyAnonymous $replyAnonymous = null): self
     {
         $this->replyAnonymous = $replyAnonymous;
+
         return $this;
     }
 

@@ -12,6 +12,12 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`
       title="global.questionnaire"
     >
       <Relay(injectIntl(QuestionnairePage))
+        query={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
         questionnaire={
           Object {
             "$fragmentRefs": null,
@@ -44,6 +50,12 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is public 1`]
   id="QuestionnaireStepTabs"
 >
   <Relay(injectIntl(QuestionnairePage))
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -60,6 +72,12 @@ exports[`<QuestionnaireStepTabs /> renders correctly when results are disabled 1
   id="QuestionnaireStepTabs"
 >
   <Relay(injectIntl(QuestionnairePage))
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     questionnaire={
       Object {
         "$fragmentRefs": null,

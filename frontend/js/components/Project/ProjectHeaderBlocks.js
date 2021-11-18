@@ -34,6 +34,9 @@ const FRAGMENT = graphql`
     replies: contributions(type: REPLY) {
       totalCount
     }
+    repliesAnonymous: contributions(type: REPLY_ANONYMOUS) {
+      totalCount
+    }
     argument: contributions(type: ARGUMENT) {
       totalCount
     }
@@ -153,9 +156,9 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
         <ProjectHeaderLayout.Block
           title={intl.formatMessage(
             { id: 'project.preview.counters.contributors' },
-            { num: data.contributors.totalCount + data.anonymousVotes.totalCount },
+            { num: data.contributors.totalCount + data.anonymousVotes.totalCount + data.repliesAnonymous.totalCount },
           )}
-          content={data.contributors.totalCount + data.anonymousVotes.totalCount}
+          content={data.contributors.totalCount + data.anonymousVotes.totalCount + data.repliesAnonymous.totalCount}
         />
       )}
     </ProjectHeaderLayout.Blocks>

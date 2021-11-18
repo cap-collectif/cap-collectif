@@ -6,29 +6,29 @@ import { QuestionnaireStepTabs } from './QuestionnaireStepTabs';
 import { $fragmentRefs, $refType, intlMock } from '../../mocks';
 
 describe('<QuestionnaireStepTabs />', () => {
+  const baseProps = {
+    intl: intlMock,
+    enableResults: true,
+    questionnaire: {
+      privateResult: true,
+      $refType,
+      $fragmentRefs,
+    },
+    query: {
+      $refType,
+      $fragmentRefs,
+    },
+  };
+
   it('renders correctly questionnaire is public', () => {
-    const props = {
-      intl: intlMock,
-      enableResults: true,
-      questionnaire: {
-        privateResult: true,
-        $refType,
-        $fragmentRefs,
-      },
-    };
-    const wrapper = shallow(<QuestionnaireStepTabs {...props} />);
+    const wrapper = shallow(<QuestionnaireStepTabs {...baseProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly when results are disabled', () => {
     const props = {
-      intl: intlMock,
+      ...baseProps,
       enableResults: false,
-      questionnaire: {
-        privateResult: true,
-        $refType,
-        $fragmentRefs,
-      },
     };
     const wrapper = shallow(<QuestionnaireStepTabs {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -36,12 +36,10 @@ describe('<QuestionnaireStepTabs />', () => {
 
   it('renders correctly questionnaire is private', () => {
     const props = {
-      intl: intlMock,
-      enableResults: true,
+      ...baseProps,
       questionnaire: {
+        ...baseProps.questionnaire,
         privateResult: false,
-        $refType,
-        $fragmentRefs,
       },
     };
     const wrapper = shallow(<QuestionnaireStepTabs {...props} />);

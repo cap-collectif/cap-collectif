@@ -17,6 +17,10 @@ const props = {
     $refType,
     $fragmentRefs,
   },
+  query: {
+    $refType,
+    $fragmentRefs,
+  },
 };
 
 const propsWithMultipleRepliesAllowed = {

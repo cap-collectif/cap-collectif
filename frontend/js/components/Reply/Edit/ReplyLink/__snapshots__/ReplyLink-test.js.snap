@@ -69,23 +69,18 @@ exports[`<ReplyLink /> render a draft reply in a contribuable questionnaire 1`] 
     />
      
   </div>
-  <button
-    className="btn-delete"
-    onClick={[Function]}
-    type="button"
-  >
-    <Icon
-      name="trash"
-      size={16}
-      viewBox="0 0 16 16"
-    />
-  </button>
   <Relay(DeleteReplyModal)
-    onClose={[Function]}
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     reply={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "__typename": "UserReply",
         "createdAt": "2016-03-01 10:11:12",
         "draft": true,
         "id": "replay1",
@@ -94,7 +89,6 @@ exports[`<ReplyLink /> render a draft reply in a contribuable questionnaire 1`] 
         "viewerCanDelete": true,
       }
     }
-    show={false}
   />
 </ReplyLinkstyle__ReplyLinkContainer>
 `;
@@ -137,6 +131,7 @@ exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "__typename": "UserReply",
           "createdAt": "2016-03-01 10:11:12",
           "draft": false,
           "id": "replay1",
@@ -147,23 +142,18 @@ exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`
       }
     />
   </div>
-  <button
-    className="btn-delete"
-    onClick={[Function]}
-    type="button"
-  >
-    <Icon
-      name="trash"
-      size={16}
-      viewBox="0 0 16 16"
-    />
-  </button>
   <Relay(DeleteReplyModal)
-    onClose={[Function]}
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     reply={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "__typename": "UserReply",
         "createdAt": "2016-03-01 10:11:12",
         "draft": false,
         "id": "replay1",
@@ -172,7 +162,6 @@ exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`
         "viewerCanDelete": true,
       }
     }
-    show={false}
   />
 </ReplyLinkstyle__ReplyLinkContainer>
 `;
@@ -211,6 +200,7 @@ exports[`<ReplyLink /> render a reply in a closed questionnaire 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "__typename": "UserReply",
           "createdAt": "2016-03-01 10:11:12",
           "draft": false,
           "id": "replay1",
@@ -258,6 +248,7 @@ exports[`<ReplyLink /> render a reply in a contribuable questionnaire 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "__typename": "UserReply",
           "createdAt": "2016-03-01 10:11:12",
           "draft": false,
           "id": "replay1",
@@ -268,23 +259,18 @@ exports[`<ReplyLink /> render a reply in a contribuable questionnaire 1`] = `
       }
     />
   </div>
-  <button
-    className="btn-delete"
-    onClick={[Function]}
-    type="button"
-  >
-    <Icon
-      name="trash"
-      size={16}
-      viewBox="0 0 16 16"
-    />
-  </button>
   <Relay(DeleteReplyModal)
-    onClose={[Function]}
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     reply={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "__typename": "UserReply",
         "createdAt": "2016-03-01 10:11:12",
         "draft": false,
         "id": "replay1",
@@ -293,7 +279,6 @@ exports[`<ReplyLink /> render a reply in a contribuable questionnaire 1`] = `
         "viewerCanDelete": true,
       }
     }
-    show={false}
   />
 </ReplyLinkstyle__ReplyLinkContainer>
 `;

@@ -27,3 +27,6 @@ Capco\AppBundle\Entity\Reply:
         elasticsearchTypeName:
             serialized_name: objectType
             groups: [ElasticsearchReply]
+        getType:
+            serialized_name: replyType
+            groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]

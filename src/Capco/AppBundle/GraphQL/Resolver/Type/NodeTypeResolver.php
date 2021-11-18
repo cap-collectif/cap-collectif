@@ -2,13 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
-use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
-use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
@@ -72,7 +70,6 @@ class NodeTypeResolver implements ResolverInterface
 
     public function __invoke($node): Type
     {
-
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($node instanceof Project) {
@@ -218,7 +215,7 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalEvent');
         }
 
-        if ($node instanceof ReplyInterface) {
+        if ($node instanceof AbstractReply) {
             return $this->replyTypeResolver->__invoke($node);
         }
 

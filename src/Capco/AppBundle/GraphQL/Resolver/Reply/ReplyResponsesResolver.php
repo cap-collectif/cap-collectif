@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
-use Capco\AppBundle\Entity\Interfaces\ReplyInterface;
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
@@ -27,7 +27,7 @@ class ReplyResponsesResolver implements ResolverInterface
         $this->abstractResponseRepository = $abstractResponseRepository;
     }
 
-    public function __invoke(ReplyInterface $reply, $viewer, \ArrayObject $context): iterable
+    public function __invoke(AbstractReply $reply, $viewer, \ArrayObject $context): iterable
     {
         $skipVerification =
             $context &&
@@ -54,8 +54,7 @@ class ReplyResponsesResolver implements ResolverInterface
                 $viewer,
                 $context
             );
-        }
-        elseif ($reply instanceof ReplyAnonymous) {
+        } elseif ($reply instanceof ReplyAnonymous) {
             $responses = $this->getResponsesForReply($reply);
         }
 

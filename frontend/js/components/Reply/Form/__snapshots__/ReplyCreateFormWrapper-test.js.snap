@@ -3,6 +3,7 @@
 exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form is not contribuable 1`] = `
 <ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
   <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -47,6 +48,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
     </p>
   </Alert>
   <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -100,6 +102,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
     />
   </Alert>
   <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -125,6 +128,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
 exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`] = `
 <ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
   <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -150,6 +154,7 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
 exports[`<ReplyCreateFormWrapper /> should render no alert when anonymous particpants are allowed 1`] = `
 <ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
   <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
     questionnaire={
       Object {
         "$fragmentRefs": null,

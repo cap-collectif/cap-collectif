@@ -1,21 +1,24 @@
 Capco\AppBundle\Entity\ReplyAnonymous:
-  attributes:
-    id:
-      groups: [Replies, ElasticsearchReply, ElasticsearchResponseNestedReply]
-    responses:
-      groups: [Replies]
-    createdAt:
-      groups: [Replies, ElasticsearchReply, ElasticsearchResponseNestedReply]
-    updatedAt:
-      groups: [Replies]
-    published:
-      groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
-    draft:
-      groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
-    getProject:
-      type: object
-      serialized_name: project
-      groups: [ElasticsearchReplyNestedProject]
-    elasticsearchTypeName:
-      serialized_name: objectType
-      groups: [ElasticsearchReply]
+    attributes:
+        id:
+            groups: [Replies, ElasticsearchReply, ElasticsearchResponseNestedReply]
+        createdAt:
+            groups: [Replies, ElasticsearchReply, ElasticsearchResponseNestedReply]
+        published:
+            groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
+        draft:
+            groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
+        getProject:
+            type: object
+            serialized_name: project
+            groups: [ElasticsearchReplyNestedProject]
+        getStep:
+            type: object
+            serialized_name: step
+            groups: [ElasticsearchReplyNestedStep]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchReply]
+        getType:
+            serialized_name: replyType
+            groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]

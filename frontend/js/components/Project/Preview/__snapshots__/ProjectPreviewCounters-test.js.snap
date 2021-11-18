@@ -24,7 +24,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters when projec
       icon="cap-user-2-1"
       label="project.preview.counters.contributors"
       showZero={true}
-      value={60}
+      value={72}
     />
     <ProjectRestrictedAccessFragment
       icon="cap-lock-2-1"
@@ -33,6 +33,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters when projec
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "anonymousReplies": Object {
+            "totalCount": 12,
+          },
           "anonymousVotes": Object {
             "totalCount": 12,
           },
@@ -90,7 +93,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
       icon="cap-user-2-1"
       label="project.preview.counters.contributors"
       showZero={true}
-      value={60}
+      value={72}
     />
     <ProjectHeaderDistrictsList
       breakingNumber={1}
@@ -98,6 +101,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "anonymousReplies": Object {
+            "totalCount": 12,
+          },
           "anonymousVotes": Object {
             "totalCount": 12,
           },
@@ -160,6 +166,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "anonymousReplies": Object {
+            "totalCount": 12,
+          },
           "anonymousVotes": Object {
             "totalCount": 12,
           },
@@ -243,7 +252,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
       icon="cap-user-2-1"
       label="project.preview.counters.contributors"
       showZero={true}
-      value={60}
+      value={72}
     />
     <ProjectRestrictedAccessFragment
       icon="cap-lock-2-1"
@@ -252,6 +261,9 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "anonymousReplies": Object {
+            "totalCount": 12,
+          },
           "anonymousVotes": Object {
             "totalCount": 12,
           },

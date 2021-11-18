@@ -32,14 +32,12 @@ class DeleteAnonymousReplyMutation implements MutationInterface
             throw new UserError('Reply not found');
         }
 
-        $questionnaire = $reply->getQuestionnaire();
         $replyId = GlobalId::toGlobalId('Reply', $reply->getId());
-        $questionnaireId = GlobalId::toGlobalId('Questionnaire', $questionnaire->getId());
+        $questionnaire = $reply->getQuestionnaire();
 
         $this->em->remove($reply);
         $this->em->flush();
 
-
-        return ['replyId' => $replyId, 'questionnaireId' => $questionnaireId];
+        return ['replyId' => $replyId, 'questionnaire' => $questionnaire];
     }
 }

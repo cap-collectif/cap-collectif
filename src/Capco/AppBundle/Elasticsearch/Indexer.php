@@ -3,6 +3,9 @@
 namespace Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Entity\District\AbstractDistrict;
+use Capco\AppBundle\Entity\AbstractReply;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Elastica\Bulk;
 use Elastica\Index;
@@ -218,6 +221,7 @@ class Indexer
         }
 
         $this->classes['comment'] = Comment::class;
+        $this->classes['reply'] = AbstractReply::class;
         $this->classes['vote'] = AbstractVote::class;
         $this->classes['response'] = AbstractResponse::class;
         $this->classes['district'] = AbstractDistrict::class;
@@ -306,14 +310,30 @@ class Indexer
                 ->orderBy('a.id')
                 ->getQuery();
         }
-        $iterableResult = $query->iterate();
+
+        $replies = [];
+        if (AbstractReply::class === $class) {
+            $userReplies = $this->em->getRepository(Reply::class)->findAll();
+            $anonReplyQuery = $this->em->getRepository(ReplyAnonymous::class)->findAll();
+
+            $replies = array_merge($userReplies, $anonReplyQuery);
+            $iterableResult = array_map(function ($result) {
+                return [$result];
+            }, $replies);
+        } else {
+            $iterableResult = $query->iterate();
+        }
 
         if ($output) {
-            $count = $repository
-                ->createQueryBuilder('a')
-                ->select('count(a)')
-                ->getQuery()
-                ->getSingleScalarResult();
+            if (AbstractReply::class === $class) {
+                $count = \count($replies);
+            } else {
+                $count = $repository
+                    ->createQueryBuilder('a')
+                    ->select('count(a)')
+                    ->getQuery()
+                    ->getSingleScalarResult();
+            }
             $output->writeln(\PHP_EOL . "<info> Indexing ${count} ${class}</info>");
             $progress = new ProgressBar($output, $count);
             $progress->start();

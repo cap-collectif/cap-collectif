@@ -11,14 +11,8 @@ Scenario: User can delete his reply
       deleteUserReply(input: $input) {
         questionnaire {
           id
-          viewerReplies {
-            edges {
-              node {
-                id
-              }
-            }
-          }
         }
+        replyId
       }
     }",
     "variables": {
@@ -30,29 +24,7 @@ Scenario: User can delete his reply
   """
   Then the JSON response should match:
   """
-  {
-    "data":{
-      "deleteUserReply":{
-        "questionnaire":{
-          "id":"UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
-          "viewerReplies":{
-            "edges":[
-              {
-                "node":{
-                  "id":"UmVwbHk6cmVwbHk5"
-                }
-              },
-              {
-                "node":{
-                  "id":"UmVwbHk6cmVwbHky"
-                }
-              }
-            ]
-          }
-        }
-      }
-    }
-  }
+  {"data":{"deleteUserReply":{"questionnaire": {"id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ=="} ,"replyId": "UmVwbHk6cmVwbHk1"}}}
   """
 
 @security

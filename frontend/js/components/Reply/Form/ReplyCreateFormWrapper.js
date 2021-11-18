@@ -11,21 +11,24 @@ import RegistrationButton from '~/components/User/Registration/RegistrationButto
 import ReplyForm from './ReplyForm';
 import { type User } from '~/redux/modules/user';
 import type { GlobalState } from '~/types';
+import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context';
 
-type Props = {
-  questionnaire: ReplyCreateFormWrapper_questionnaire,
-  user: ?User,
-  setIsShow: (show: boolean) => void,
-};
+type Props = {|
+  +questionnaire: ReplyCreateFormWrapper_questionnaire,
+  +user: ?User,
+  +setIsShow: (show: boolean) => void,
+|};
 
 const ReplyCreateFormWrapperContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   margin-top: 35px;
 `;
 
 export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props) => {
+  const { anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext);
   const isAnonymousParticipationAllowed = questionnaire?.step?.isAnonymousParticipationAllowed;
 
-  const formIsDisabled = questionnaire.contribuable &&
+  const formIsDisabled =
+    questionnaire.contribuable &&
     questionnaire.viewerReplies &&
     questionnaire.viewerReplies.totalCount > 0 &&
     !questionnaire.multipleRepliesAllowed;
@@ -40,7 +43,8 @@ export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props
           <RegistrationButton bsStyle="primary" style={{ marginLeft: '10px' }} />
           <LoginButton style={{ marginLeft: 5 }} />
         </Alert>
-      ) : (formIsDisabled && (
+      ) : (
+        formIsDisabled && (
           <Alert bsStyle="warning" className="hidden-print">
             <strong>
               <FormattedMessage id="reply.user_has_reply.reason" />
@@ -51,7 +55,12 @@ export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props
           </Alert>
         )
       )}
-      <ReplyForm questionnaire={questionnaire} reply={null} setIsShow={setIsShow} />
+      <ReplyForm
+        questionnaire={questionnaire}
+        reply={null}
+        setIsShow={setIsShow}
+        anonymousRepliesIds={anonymousRepliesIds}
+      />
     </ReplyCreateFormWrapperContainer>
   );
 };

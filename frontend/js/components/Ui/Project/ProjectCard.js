@@ -124,7 +124,9 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
                     ICON_NAME.USER_O,
                     project.isExternal
                       ? project.externalParticipantsCount || 0
-                      : project.contributors.totalCount + project.anonymousVotes.totalCount,
+                      : project.contributors.totalCount +
+                          project.anonymousVotes.totalCount +
+                          project.anonymousReplies?.totalCount,
                     project.archived,
                   )) ||
                   null}
@@ -177,6 +179,9 @@ export default createFragmentContainer(
           totalCount
         }
         contributors {
+          totalCount
+        }
+        anonymousReplies: contributions(type: REPLY_ANONYMOUS) {
           totalCount
         }
         hasParticipativeStep

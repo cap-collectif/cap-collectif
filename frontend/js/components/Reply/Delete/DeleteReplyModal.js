@@ -1,81 +1,114 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Modal } from 'react-bootstrap';
 import type { DeleteReplyModal_reply } from '~relay/DeleteReplyModal_reply.graphql';
-import SubmitButton from '../../Form/SubmitButton';
-import CloseButton from '../../Form/CloseButton';
-import AppDispatcher from '~/dispatchers/AppDispatcher';
+import DeleteAnonymousReplyMutation from '~/mutations/DeleteAnonymousReplyMutation';
 import DeleteUserReplyMutation from '~/mutations/DeleteUserReplyMutation';
-import { UPDATE_ALERT } from '~/constants/AlertConstants';
+import CookieMonster from '~/CookieMonster';
+import Button from '~ds/Button/Button';
+import Modal from '~ds/Modal/Modal';
+import Heading from '~ui/Primitives/Heading';
+import Text from '~ui/Primitives/Text';
+import Icon from '~ui/Icons/Icon';
+import { toast } from '~ds/Toast';
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
+import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context';
+import type { DeleteReplyModal_questionnaire } from '~relay/DeleteReplyModal_questionnaire.graphql';
 
 type Props = {|
   +reply: DeleteReplyModal_reply,
-  +show: boolean,
-  +onClose: () => void,
+  +questionnaire: DeleteReplyModal_questionnaire,
 |};
 
-export const DeleteReplyModal = ({ reply, onClose, show }: Props) => {
-  const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
+export const DeleteReplyModal = ({ reply, questionnaire }: Props) => {
   const intl = useIntl();
 
-  const handleSubmit = () => {
-    setIsSubmitting(true);
+  const { anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext);
+  const isAnonymousReply = reply.__typename === 'AnonymousReply';
 
-    DeleteUserReplyMutation.commit({ input: { id: reply.id }, isAuthenticated: true })
+  const handleSubmit = onClose => {
+    const hashedToken = CookieMonster.getHashedAnonymousReplyCookie(questionnaire.id, reply.id);
+    onClose();
+    if (isAnonymousReply && hashedToken) {
+      return DeleteAnonymousReplyMutation.commit({
+        input: {
+          hashedToken,
+        },
+        anonymousRepliesIds,
+      }).then(response => {
+        if (response?.deleteAnonymousReply?.replyId) {
+          CookieMonster.removeAnonymousReplyCookie(questionnaire.id, reply.id);
+          toast({
+            variant: 'success',
+            content: intl.formatHTMLMessage({ id: 'reply.request.delete.success' }),
+          });
+        }
+      });
+    }
+
+    DeleteUserReplyMutation.commit({ input: { id: reply.id } })
       .then(() => {
         onClose();
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'reply.request.delete.success' },
+        toast({
+          variant: 'success',
+          content: intl.formatHTMLMessage({ id: 'reply.request.delete.success' }),
         });
-        setIsSubmitting(false);
       })
       .catch(() => {
-        setIsSubmitting(false);
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: 'global.failure' },
-        });
+        mutationErrorToast(intl);
       });
   };
 
   return (
     <Modal
-      id={`delete-reply-modal-${reply.id}`}
-      className="reply__modal--delete"
-      animation={false}
-      show={show}
-      onHide={onClose}
-      bsSize="large"
-      aria-labelledby="contained-modal-title-lg">
-      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
-        <Modal.Title id="contained-modal-title-lg">
-          <FormattedMessage id="global.delete" />
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <FormattedMessage id="reply.delete.confirm" tagName="p" />
-      </Modal.Body>
-      <Modal.Footer>
-        <CloseButton onClose={onClose} />
-        <SubmitButton
-          id={`reply-confirm-delete-button${reply.id}`}
-          className="reply__confirm-delete-btn"
-          isSubmitting={isSubmitting}
-          onSubmit={handleSubmit}
-          label="global.delete"
-          bsStyle="danger"
-        />
-      </Modal.Footer>
+      scrollBehavior="inside"
+      ariaLabel={intl.formatMessage({ id: 'delete-reply-modal' })}
+      disclosure={
+        <button type="button" className="btn-delete">
+          <Icon name="trash" size={16} viewBox="0 0 16 16" />
+        </button>
+      }>
+      {({ hide }) => (
+        <>
+          <Modal.Header>
+            <Heading>{intl.formatMessage({ id: 'delete-confirmation' })}</Heading>
+          </Modal.Header>
+          <Modal.Body>
+            <Text>{intl.formatMessage({ id: 'reply.delete.confirm' })}</Text>
+          </Modal.Body>
+          <Modal.Footer spacing={2}>
+            <Button
+              onClick={hide}
+              variantSize="small"
+              variant="secondary"
+              variantColor="hierarchy"
+              color="gray.400">
+              {intl.formatMessage({ id: 'global.cancel' })}
+            </Button>
+            <Button
+              variantSize="small"
+              variant="primary"
+              variantColor="danger"
+              onClick={() => handleSubmit(hide)}>
+              {intl.formatMessage({ id: 'global.delete' })}
+            </Button>
+          </Modal.Footer>
+        </>
+      )}
     </Modal>
   );
 };
 
 export default createFragmentContainer(DeleteReplyModal, {
+  questionnaire: graphql`
+    fragment DeleteReplyModal_questionnaire on Questionnaire {
+      id
+    }
+  `,
   reply: graphql`
     fragment DeleteReplyModal_reply on Reply {
+      __typename
       id
     }
   `,

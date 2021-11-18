@@ -85,7 +85,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
       className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
       id=""
     >
-      46
+      88
     </h2>
     <p
       className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
@@ -181,7 +181,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
       className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
       id=""
     >
-      46
+      88
     </h2>
     <p
       className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
@@ -277,7 +277,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
       className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
       id=""
     >
-      46
+      88
     </h2>
     <p
       className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"

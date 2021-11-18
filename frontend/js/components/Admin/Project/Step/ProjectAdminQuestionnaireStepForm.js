@@ -18,6 +18,7 @@ type Props = {|
   dispatch: Dispatch,
   requirements?: Array<Requirement>,
   questionnaire?: {| label: string, value: string |},
+  isAnonymousParticipationAllowed: boolean,
 |};
 
 export const getAvailableQuestionnaires = graphql`
@@ -81,6 +82,7 @@ export const ProjectAdminQuestionnaireStepForm = ({
   questionnaire,
   dispatch,
   requirements,
+  isAnonymousParticipationAllowed,
 }: Props) => {
   const { user } = useSelector((state: GlobalState) => state.user);
   const intl = useIntl();
@@ -113,35 +115,39 @@ export const ProjectAdminQuestionnaireStepForm = ({
         loadOptions={(term: ?string) => loadQuestionnaireOptions(questionnaire, term, isAdmin)}
         clearable
       />
-      {renderSubSection('requirements')}
-      <FieldArray
-        name="requirements"
-        component={StepRequirementsList}
-        formName={formName}
-        requirements={requirements}
-      />
-      <Button
-        id="js-btn-create-step"
-        bsStyle="primary"
-        className="btn-outline-primary box-content__toolbar mb-20"
-        onClick={() =>
-          dispatch(
-            arrayPush(formName, 'requirements', {
-              uniqueId: getUId(),
-              id: null,
-              type: 'CHECKBOX',
-            }),
-          )
-        }>
-        <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
-      </Button>
-      <Field
-        type="editor"
-        name="requirementsReason"
-        id="step-requirementsReason"
-        label={<FormattedMessage id="reason-for-collection" />}
-        component={component}
-      />
+      {!isAnonymousParticipationAllowed && (
+        <>
+          {renderSubSection('requirements')}
+          <FieldArray
+            name="requirements"
+            component={StepRequirementsList}
+            formName={formName}
+            requirements={requirements}
+          />
+          <Button
+            id="js-btn-create-step"
+            bsStyle="primary"
+            className="btn-outline-primary box-content__toolbar mb-20"
+            onClick={() =>
+              dispatch(
+                arrayPush(formName, 'requirements', {
+                  uniqueId: getUId(),
+                  id: null,
+                  type: 'CHECKBOX',
+                }),
+              )
+            }>
+            <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
+          </Button>
+          <Field
+            type="editor"
+            name="requirementsReason"
+            id="step-requirementsReason"
+            label={<FormattedMessage id="reason-for-collection" />}
+            component={component}
+          />
+        </>
+      )}
     </>
   );
 };

@@ -44,16 +44,21 @@ class ProjectContributionResolver implements ResolverInterface
                     $order = 'last';
                 }
 
-                $filters['_type'] = $args->offsetGet('type')
-                    ? [
-                        \call_user_func([
-                            ContributionSearch::CONTRIBUTION_TYPE_CLASS_MAPPING[
+                if ($args->offsetGet('type') === 'REPLY_ANONYMOUS') {
+                    $filters['_type'] = ['replyAnonymous'];
+                } else {
+                    $filters['_type'] = $args->offsetGet('type')
+                        ? [
+                            \call_user_func([
+                                ContributionSearch::CONTRIBUTION_TYPE_CLASS_MAPPING[
                                 $args->offsetGet('type')
-                            ],
-                            'getElasticsearchTypeName',
-                        ]),
-                    ]
-                    : null;
+                                ],
+                                'getElasticsearchTypeName',
+                            ]),
+                        ]
+                        : null;
+                }
+
                 $response = $this->contributionSearch->getContributionsByProject(
                     $project->getId(),
                     $order,
