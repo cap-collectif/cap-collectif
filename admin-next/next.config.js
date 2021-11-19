@@ -9,6 +9,11 @@ const nextConfig = {
   // TODO enable this
   reactStrictMode: false,
   basePath: process.argv.includes('dev') ? '' : '/admin-next',
+  i18n: {
+    localeDetection: true,
+    defaultLocale: 'fr-FR',
+    locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC'],
+  },
   experimental: {
     externalDir: true,
   },

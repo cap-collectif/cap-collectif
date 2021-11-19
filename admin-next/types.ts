@@ -1,15 +1,97 @@
 export type SymfonyEnv = 'dev' | 'prod' | 'test';
 
 export type PageProps = {
-    viewerSession: ViewerSession;
-    appVersion: string;
+    viewerSession: ViewerSession,
+    appVersion: string,
 };
 
+export enum Locale {
+    frFR = "fr-FR",
+    enGB = "en-GB",
+    esES = "es-ES",
+    deDE = "de-DE",
+    nlNL = "nl-NL",
+    svSE = "sv-SE",
+    ocOC = "oc-OC",
+    euEU = "eu-EU",
+}
+
 export type ViewerSession = {
-    email: string;
-    username: string;
-    id: string;
-    isAdmin: boolean;
-    isSuperAdmin: boolean;
-    isProjectAdmin: boolean;
+    email: string,
+    username: string,
+    id: string,
+    isAdmin: boolean,
+    isSuperAdmin: boolean,
+    isProjectAdmin: boolean,
+};
+
+export type FeatureFlags = {
+    report_browers_errors_to_sentry: boolean,
+    unstable__remote_events: boolean,
+    login_saml: boolean,
+    login_paris: boolean,
+    disconnect_openid: boolean,
+    votes_min: boolean,
+    blog: boolean,
+    calendar: boolean,
+    login_facebook: boolean,
+    login_gplus: boolean,
+    privacy_policy: boolean,
+    members_list: boolean,
+    captcha: boolean,
+    unstable__admin_editor: boolean,
+    new_feature_questionnaire_result: boolean,
+    consent_external_communication: boolean,
+    consent_internal_communication: boolean,
+    newsletter: boolean,
+    profiles: boolean,
+    projects_form: boolean,
+    project_trash: boolean,
+    search: boolean,
+    share_buttons: boolean,
+    shield_mode: boolean,
+    registration: boolean,
+    phone_confirmation: boolean,
+    reporting: boolean,
+    themes: boolean,
+    districts: boolean,
+    user_type: boolean,
+    votes_evolution: boolean,
+    restrict_registration_via_email_domain: boolean,
+    export: boolean,
+    server_side_rendering: boolean,
+    zipcode_at_register: boolean,
+    consultation_plan: boolean,
+    display_map: boolean,
+    sso_by_pass_auth: boolean,
+    allow_users_to_propose_events: boolean,
+    secure_password: boolean,
+    restrict_connection: boolean,
+    login_franceconnect: boolean,
+    read_more: boolean,
+    display_pictures_in_depository_proposals_list: boolean,
+    external_project: boolean,
+    app_news: boolean,
+    multilangue: boolean,
+    display_pictures_in_event_list: boolean,
+    unstable__analysis: boolean,
+    majority_vote_question: boolean,
+    unstable__emailing: boolean,
+    unstable__emailing_parameters: boolean,
+    proposal_revisions: boolean,
+    unstable__debate: boolean,
+    unstable__tipsmeee: boolean,
+    unstable__new_consultation_page: boolean,
+    unstable__new_project_card: boolean,
+    import_proposals: boolean,
+    unstable__analytics_page: boolean,
+    http_redirects: boolean,
+    unstable_project_admin: boolean,
+};
+
+export type IntlType = {
+    locale: Locale
+    messages: {
+        [key: string]: string,
+    },
 };

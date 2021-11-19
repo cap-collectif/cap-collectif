@@ -1,9 +1,7 @@
-import { FC } from 'react';
+import React from 'react';
 import App, { AppProps } from 'next/app';
-import moment from 'moment';
 import { NextApiResponse } from 'next';
-import Providers from '~/startup/Providers';
-import appStore from '~/stores/AppStore';
+import { createGlobalStyle } from 'styled-components';
 import frMessages from '~/../../translations/fr-FR.json';
 import enMessages from '~/../../translations/en-GB.json';
 import esMessages from '~/../../translations/es-ES.json';
@@ -12,13 +10,29 @@ import deMessages from '~/../../translations/de-DE.json';
 import svMessages from '~/../../translations/sv-SE.json';
 import ocMessages from '~/../../translations/oc-OC.json';
 import euMessages from '~/../../translations/eu-EU.json';
+
+import Providers from '../utils/providers';
+
 import getSessionCookieFromReq from '../utils/request-helper';
 import getSessionFromSessionCookie from '../utils/session-resolver';
 import getViewerJsonFromRedisSession from '../utils/session-decoder';
-import { __isDev__ } from '../config';
+import getFeatureFlags from '../utils/feature-flags-resolver';
+
+import { __isDev__, __isTest__ } from '../config';
+
+const messages = {
+    'fr-FR': frMessages,
+    'en-GB': enMessages,
+    'es-ES': esMessages,
+    'de-DE': deMessages,
+    'nl-NL': nlMessages,
+    'sv-SE': svMessages,
+    'oc-OC': ocMessages,
+    'eu-EU': euMessages,
+};
 
 // We use this component to only render when window is available (it's used by our Redux store)
-const SafeHydrate: FC<{}> = ({ children }) => {
+const SafeHydrate: React.FC<{}> = ({ children }) => {
     return (
         <div suppressHydrationWarning>
             {typeof window === 'undefined' || typeof document === 'undefined' ? null : children}
@@ -26,11 +40,18 @@ const SafeHydrate: FC<{}> = ({ children }) => {
     );
 };
 
+const GlobalCSS = createGlobalStyle`
+  html {
+    font-size: 14px;
+  }
+`;
+
 // This is the entrypoint where we inject all providers and shared data
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <SafeHydrate>
-            <Providers unstable__AdminNextstore={appStore(pageProps.store)}>
+            <Providers featureFlags={pageProps.featureFlags} intl={pageProps.store.intl}>
+                <GlobalCSS />
                 <Component {...pageProps} />
             </Providers>
         </SafeHydrate>
@@ -50,7 +71,7 @@ const redirectOnError = (res: NextApiResponse, devErrorMessage: string) => {
 MyApp.getInitialProps = async appContext => {
     const appProps = await App.getInitialProps(appContext);
     const context = appContext.ctx;
-    const { req, res, err } = context;
+    const { req, res, err, locale } = context;
     const pageProps = { store: { intl: {} } };
 
     // If we are on error page we skip this step.
@@ -95,26 +116,17 @@ MyApp.getInitialProps = async appContext => {
     // Success ! We inject a `viewerSession` props on every page.
     pageProps.viewerSession = viewerJson;
 
-    // TODO: this sould be dynamic, I will refactor this part in next PR.
-    const locale = 'fr-FR';
-
-    const messages = {
-        fr: frMessages,
-        en: enMessages,
-        es: esMessages,
-        de: deMessages,
-        nl: nlMessages,
-        sv: svMessages,
-        oc: ocMessages,
-        eu: euMessages,
-    };
-
+    // We inject `intl` data based on the request locale.
     const intl = {
         locale,
-        // TODO: this sould be dynamic
-        messages: messages['fr'],
+        // For tests we disable translations
+        messages: __isTest__ ? {} : messages[locale] || messages['fr-FR'],
     };
-    pageProps.store = { intl, user: { user: viewerJson } };
+
+    pageProps.store = { intl };
+
+    const featureFlags = getFeatureFlags();
+    pageProps.featureFlags = featureFlags;
     pageProps.appVersion = process.env.SYMFONY_APP_VERSION || 'dev';
 
     return { ...appProps, pageProps };

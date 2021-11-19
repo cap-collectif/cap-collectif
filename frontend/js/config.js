@@ -14,14 +14,23 @@ const isDev = () =>
 // This may not be up to date in admin-next
 export const baseUrl = getBaseUrl();
 
-export const isSafari = typeof window !== 'undefined' &&
-  window.navigator && /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent);
+export const isSafari =
+  typeof window !== 'undefined' &&
+  window.navigator &&
+  /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent);
 
 export const getBaseUrlWithAdminNextSupport = () => {
   if (isDev()) {
     return 'https://capco.dev';
   }
   return getBaseUrl();
+};
+
+export const getAdminNextUrl = () => {
+  if (isDev()) {
+    return 'https://admin-next.capco.dev:3001';
+  }
+  return `${getBaseUrl()}/admin-next`;
 };
 
 const isTest = () => getBaseUrl() === 'https://capco.test';
