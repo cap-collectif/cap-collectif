@@ -17,7 +17,7 @@ class UserIdentificationCode
     private string $identificationCode;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserIdentificationCodeList")
+     * @ORM\ManyToOne(targetEntity="UserIdentificationCodeList", inversedBy="codes")
      * @ORM\JoinColumn(name="list_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private ?UserIdentificationCodeList $list;

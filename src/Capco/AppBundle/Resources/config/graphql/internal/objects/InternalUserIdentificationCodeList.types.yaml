@@ -1,0 +1,22 @@
+InternalUserIdentificationCodeList:
+    type: object
+    config:
+        name: UserIdentificationCodeList
+        description: 'A list of userIdentificationCodes.'
+        fields:
+            id:
+                type: ID!
+                description: 'The global id of the list.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: UserIdentificationCodeList
+            name:
+                type: String!
+                description: 'The name of the list.'
+            codesCount:
+                type: Int!
+                description: 'The count of codes in the list.'
+            alreadyUsedCount:
+                type: Int!
+                description: 'The count of codes in the list already used.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\AlreadyUsedUserIdentificationCodesCountResolver", [value, args])'

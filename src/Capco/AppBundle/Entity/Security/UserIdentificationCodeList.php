@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Security;
 
 use Capco\AppBundle\Traits\OwnerTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -21,6 +22,16 @@ class UserIdentificationCodeList
      */
     private string $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserIdentificationCode::class, mappedBy="list")
+     */
+    private Collection $codes;
+
+    public function __construct()
+    {
+        $this->codes = new ArrayCollection();
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -31,5 +42,15 @@ class UserIdentificationCodeList
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getCodes(): Collection
+    {
+        return $this->codes;
+    }
+
+    public function getCodesCount(): int
+    {
+        return $this->getCodes()->count();
     }
 }

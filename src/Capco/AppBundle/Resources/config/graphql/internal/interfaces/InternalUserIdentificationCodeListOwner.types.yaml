@@ -1,0 +1,12 @@
+InternalUserIdentificationCodeListOwner:
+    type: interface
+    config:
+        name: UserIdentificationCodeListOwner
+        description: 'Represent an owner of an UserIdentificationCodeList.'
+        fields:
+            userIdentificationCodeLists:
+                type: 'InternalUserIdentificationCodeListConnection!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Get all userIdentificationCodeLists'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserIdentificationCodeListResolver", [value, args])'
+                argsBuilder: 'Relay::ForwardConnection'

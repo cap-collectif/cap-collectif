@@ -1,0 +1,8 @@
+InternalUserIdentificationCodeListConnection:
+    type: relay-connection
+    config:
+        name: UserIdentificationCodeListConnection
+        nodeType: InternalUserIdentificationCodeList!
+        connectionFields:
+            totalCount:
+                type: Int!

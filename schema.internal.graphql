@@ -14914,7 +14914,7 @@ type UpdateUserReplyPayload {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner {
+type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner & UserIdentificationCodeListOwner {
   """User ID"""
   id: ID!
 
@@ -15162,6 +15162,17 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """If provided, filter campaigns by name"""
     term: String
   ): EmailingCampaignConnection!
+
+  """Get all userIdentificationCodeLists"""
+  userIdentificationCodeLists(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): UserIdentificationCodeListConnection!
 
   """The user's admin edit url"""
   adminUrl: URI!
@@ -15618,6 +15629,55 @@ type UserError {
 
   """Path to input field which caused the error."""
   field: [String!]
+}
+
+"""A list of userIdentificationCodes."""
+type UserIdentificationCodeList {
+  """The global id of the list."""
+  id: ID!
+
+  """The name of the list."""
+  name: String!
+
+  """The count of codes in the list."""
+  codesCount: Int!
+
+  """The count of codes in the list already used."""
+  alreadyUsedCount: Int!
+}
+
+"""A connection to a list of items."""
+type UserIdentificationCodeListConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [UserIdentificationCodeListEdge]
+}
+
+"""An edge in a connection."""
+type UserIdentificationCodeListEdge {
+  """The item at the end of the edge."""
+  node: UserIdentificationCodeList!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Represent an owner of an UserIdentificationCodeList."""
+interface UserIdentificationCodeListOwner {
+  """Get all userIdentificationCodeLists"""
+  userIdentificationCodeLists(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): UserIdentificationCodeListConnection!
 }
 
 """A user invitation availability."""

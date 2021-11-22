@@ -10,6 +10,7 @@ InternalUser:
         - InternalProposalFormOwner
         - InternalMailingListOwner
         - InternalEmailingCampaignOwner
+        - InternalUserIdentificationCodeListOwner
     config:
         description: "A user is an individual's account."
         name: User
@@ -21,6 +22,7 @@ InternalUser:
             - InternalProposalFormOwner
             - InternalMailingListOwner
             - InternalEmailingCampaignOwner
+            - InternalUserIdentificationCodeListOwner
         fields:
             adminUrl:
                 type: 'URI!'
