@@ -6,9 +6,6 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\EventListener\PreFillProposalFormSubscriber;
-use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryResolver;
-use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromSiretQueryResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Capco\AppBundle\Toggle\Manager;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
@@ -22,19 +19,13 @@ class ProposalType extends AbstractType
 {
     protected Manager $toggleManager;
     private RedisCache $cache;
-    private AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver;
-    private AutoCompleteFromSiretQueryResolver $autoCompleteFromSiretQueryResolver;
 
     public function __construct(
         RedisCache $cache,
-        AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver,
-        AutoCompleteFromSiretQueryResolver $autoCompleteFromSiretQueryResolver,
         Manager $toggleManager
     ) {
         $this->toggleManager = $toggleManager;
         $this->cache = $cache;
-        $this->autoCompleteDocQueryResolver = $autoCompleteDocQueryResolver;
-        $this->autoCompleteFromSiretQueryResolver = $autoCompleteFromSiretQueryResolver;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -96,14 +87,6 @@ class ProposalType extends AbstractType
         ]);
 
         $builder->add('media');
-
-        $builder->addEventSubscriber(
-            new PreFillProposalFormSubscriber(
-                $this->cache,
-                $this->autoCompleteDocQueryResolver,
-                $this->autoCompleteFromSiretQueryResolver
-            )
-        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

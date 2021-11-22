@@ -442,6 +442,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         $values = $this::hydrateSocialNetworks($values, $proposal, $proposalForm);
 
         /** @var Form $form */
+        // delete field siret and rna from form ?
         $form = $this->formFactory->create(ProposalAdminType::class, $proposal, [
             'proposalForm' => $proposalForm,
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],

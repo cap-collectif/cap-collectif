@@ -92,23 +92,6 @@ services:
             $locale: '%locale%'
             $locales: '%locales%'
 
-    Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromIdQueryResolver:
-        arguments:
-            $apiToken: '%api_enterprise_token%'
-        public: true
-
-    Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryResolver:
-        arguments:
-            $apiToken: '%api_enterprise_token%'
-            $rootDir: '%kernel.project_dir%'
-        public: true
-
-    Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromSiretQueryResolver:
-        arguments:
-            $apiToken: '%api_enterprise_token%'
-            $rootDir: '%kernel.project_dir%'
-        public: true
-
     Capco\AppBundle\GraphQL\Resolver\Participant\IsViewerParticipatingAtEventResolver: ~
 
     Capco\AppBundle\Mailer\SenderEmailResolver:

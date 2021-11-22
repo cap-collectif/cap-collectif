@@ -389,38 +389,6 @@ InternalQuery:
                         description: 'Retrieve consultation where title match term param.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\AvailableConsultationsQueryResolver", [args["term"]])'
 
-            apiEnterpriseAutocompleteFromSiret:
-                description: 'Autocomplete several fields based on siret'
-                args:
-                    siret:
-                        type: 'String!'
-                        description: 'siret of the legal institution'
-                    type:
-                        type: 'APIEnterpriseType!'
-                        description: 'type of the legal institution'
-                type: 'APIEnterpriseResult'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\APIEnterprise\\AutoCompleteFromSiretQueryResolver", [args])'
-
-            apiEnterpriseAutocompleteFromId:
-                description: 'Autocomplete several fields based on id'
-                args:
-                    id:
-                        type: 'String!'
-                        description: 'id of the legal institution'
-                type: 'APIEnterpriseAssociation'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\APIEnterprise\\AutoCompleteFromIdQueryResolver", [args])'
-
-            fetchAPIEnterpriseDocuments:
-                description: 'Fetch documents with an id'
-                args:
-                    id:
-                        type: 'String!'
-                        description: 'Get heavy documents for a legal instance.'
-                    type:
-                        type: 'APIEnterpriseType!'
-                        description: 'type of the legal instance'
-                type: 'APIEnterpriseDocuments'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\APIEnterprise\\AutoCompleteDocQueryResolver", [args])'
             viewerAssignedProjectsToAnalyse:
                 description: 'Fetch projects with assignment'
                 access: "@=hasRole('ROLE_USER')"

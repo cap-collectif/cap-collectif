@@ -52,10 +52,6 @@ import {
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import renderResponses from '~/components/Form/RenderResponses';
-import {
-  handleVisibilityAccordingToType,
-  TRIGGER_FOR_IDS,
-} from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import config from '~/config';
 import Text from '~ui/Primitives/Text';
@@ -423,20 +419,11 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const { responses, proposalForm, dispatch, intl, isBackOfficeInput } = this.props;
+    const { isBackOfficeInput } = this.props;
     if (isBackOfficeInput) {
       window.removeEventListener('beforeunload', onUnload);
     } else {
       window.addEventListener('beforeunload', onUnload);
-    }
-    if (TRIGGER_FOR_IDS.includes(proposalForm.id)) {
-      handleVisibilityAccordingToType(
-        intl,
-        dispatch,
-        proposalForm.questions,
-        responses,
-        proposalForm.id,
-      );
     }
   }
 

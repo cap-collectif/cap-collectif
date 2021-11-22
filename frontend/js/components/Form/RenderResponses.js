@@ -23,8 +23,6 @@ import environment from '~/createRelayEnvironment';
 import select from '~/components/Form/Select';
 import getAvailableQuestionsIds from '~/utils/form/getAvailableQuestionsIds';
 import { MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY } from '~/utils/responsesHelper';
-import { triggerAutocompleteAPIEnterprise } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
-import type { Dispatch } from '~/types';
 import Section from '~/components/Form/Section/Section';
 
 const mapQuestionChoicesToOptions = (question: Question) =>
@@ -69,10 +67,9 @@ const RenderResponses = ({
   form,
   change,
   disabled,
-  dispatch,
   typeForm = TYPE_FORM.DEFAULT,
   availableQuestions: oldAvailableQuestions = [],
-  divClassName='',
+  divClassName = '',
   memoize,
 }: {
   ...FieldArrayProps,
@@ -82,7 +79,6 @@ const RenderResponses = ({
   form: string,
   intl: IntlShape,
   disabled: boolean,
-  dispatch: Dispatch,
   typeForm: $Values<typeof TYPE_FORM>,
   availableQuestions: Array<string>,
   divClassName?: string,
@@ -288,13 +284,9 @@ const RenderResponses = ({
                       help={field.helpText}
                       isOtherAllowed={field.isOtherAllowed}
                       label={label}
-                      disabled={disabled}
+                      disabled
                       value={response}
                       typeForm={typeForm}
-                      onChange={event => {
-                        triggerAutocompleteAPIEnterprise(dispatch, event, questions, intl);
-                        setLastQuestionType(field.type);
-                      }}
                     />
                   </PrivateBox>
                 </div>
