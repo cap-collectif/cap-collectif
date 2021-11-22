@@ -30,11 +30,6 @@ class DebateVote extends AbstractVote
      */
     private Debate $debate;
 
-    public function getRelated(): Debate
-    {
-        return $this->getDebate();
-    }
-
     public function getStep(): ?DebateStep
     {
         return $this->getDebate()->getStep();

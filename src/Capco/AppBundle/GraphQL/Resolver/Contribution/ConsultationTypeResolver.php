@@ -2,16 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Contribution;
 
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionVersionVote;
-use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -19,8 +18,8 @@ use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\Vote\VoteTypeResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
@@ -29,11 +28,16 @@ class ConsultationTypeResolver implements ResolverInterface
 {
     private $typeResolver;
     private ReplyTypeResolver $replyTypeResolver;
+    private VoteTypeResolver $voteTypeResolver;
 
-    public function __construct(TypeResolver $typeResolver, ReplyTypeResolver $replyTypeResolver)
-    {
+    public function __construct(
+        TypeResolver $typeResolver,
+        ReplyTypeResolver $replyTypeResolver,
+        VoteTypeResolver $voteTypeResolver
+    ) {
         $this->typeResolver = $typeResolver;
         $this->replyTypeResolver = $replyTypeResolver;
+        $this->voteTypeResolver = $voteTypeResolver;
     }
 
     public function __invoke($data)
@@ -46,9 +50,6 @@ class ConsultationTypeResolver implements ResolverInterface
             }
 
             return $this->typeResolver->resolve('InternalOpinion');
-        }
-        if ($data instanceof OpinionVote) {
-            return $this->typeResolver->resolve('OpinionVote');
         }
         if ($data instanceof OpinionVersion) {
             if ('preview' === $currentSchemaName) {
@@ -67,18 +68,12 @@ class ConsultationTypeResolver implements ResolverInterface
 
             return $this->typeResolver->resolve('InternalArgument');
         }
-        if ($data instanceof ArgumentVote) {
-            return $this->typeResolver->resolve('ArgumentVote');
-        }
         if ($data instanceof Source) {
             if ('preview' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PreviewSource');
             }
 
             return $this->typeResolver->resolve('InternalSource');
-        }
-        if ($data instanceof SourceVote) {
-            return $this->typeResolver->resolve('SourceVote');
         }
         if ($data instanceof Reporting) {
             return $this->typeResolver->resolve('Reporting');
@@ -110,6 +105,9 @@ class ConsultationTypeResolver implements ResolverInterface
         }
         if ($data instanceof DebateAnonymousArgument) {
             return $this->typeResolver->resolve('InternalDebateAnonymousArgument');
+        }
+        if ($data instanceof AbstractVote) {
+            return $this->voteTypeResolver->__invoke($data);
         }
 
         throw new UserError('Could not resolve type of Contribution.');
