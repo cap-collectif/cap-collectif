@@ -10,7 +10,6 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -65,16 +64,8 @@ class DownloadController extends Controller
         }
         $date = (new \DateTime())->format('Y-m-d');
 
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($filePath);
-        $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $date . '_' . $fileName
-        );
+        $response = $this->file($filePath, $date . '_' . $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
     }

@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class ProposalController extends CRUDController
 {
@@ -32,24 +31,15 @@ class ProposalController extends CRUDController
 
         $export = $followerResolver->exportProposalFollowers($proposal, $_format);
         $filename = $export['filename'];
-        $content = $export['content'];
+        $absolutePath = $export['absolutePath'];
 
         $contentType = 'text/csv';
         if (TYPE::XLSX === $_format) {
             $contentType = 'application/vnd.ms-excel';
         }
 
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new Response($content);
-        $disposition = $response->headers->makeDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $filename
-        );
-
-        $response->headers->set('Content-Disposition', $disposition);
+        $response = $this->file($absolutePath, $filename);
         $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
     }

@@ -15,10 +15,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -106,17 +104,8 @@ class EventController extends Controller
         $contentType = 'text/csv';
 
         $date = (new \DateTime())->format('Y-m-d');
-
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($path . $filename);
-        $response->headers->set('X-Accel-Redirect', '/export/' . $filename);
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $date . '_' . $filename
-        );
+        $response = $this->file($path . $filename, $date . '_' . $filename);
         $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
     }

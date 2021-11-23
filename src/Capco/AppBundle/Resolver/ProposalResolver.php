@@ -87,7 +87,7 @@ class ProposalResolver
         $content = file_get_contents($absolutePath);
         $this->deleteFile($absolutePath);
 
-        return ['content' => $content, 'filename' => $filename];
+        return ['content' => $content, 'filename' => $filename, 'absolutePath' => $absolutePath];
     }
 
     public function deleteFile(string $filename): bool

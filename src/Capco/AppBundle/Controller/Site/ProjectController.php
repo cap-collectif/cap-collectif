@@ -27,8 +27,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -184,12 +182,10 @@ class ProjectController extends Controller
         );
 
         try {
-            return $this->streamResponse(
-                $request,
-                $filePath,
-                'application/vnd.ms-excel',
-                $fileName
-            );
+            $response = $this->file($filePath, $fileName);
+            $response->headers->set('Content-Type', 'application/vnd.ms-excel' . '; charset=utf-8');
+
+            return $response;
         } catch (FileNotFoundException $exception) {
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
@@ -230,12 +226,10 @@ class ProjectController extends Controller
         $contentType = $isCSV ? 'text/csv' : 'application/vnd.ms-excel';
 
         try {
-            return $this->streamResponse(
-                $request,
-                $this->exportDir . $filename,
-                $contentType,
-                $filename
-            );
+            $response = $this->file($this->exportDir . $filename, $filename);
+            $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
+
+            return $response;
         } catch (FileNotFoundException $exception) {
             return new JsonResponse(
                 ['errorTranslationKey' => 'project.download.not_yet_generated'],
@@ -387,7 +381,10 @@ class ProjectController extends Controller
         $fullPath = $this->exportDir . $filename;
 
         try {
-            return $this->streamResponse($request, $fullPath, $contentType, $filename);
+            $response = $this->file($fullPath, $filename);
+            $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
+
+            return $response;
         } catch (FileNotFoundException $exception) {
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
@@ -426,12 +423,10 @@ class ProjectController extends Controller
         $contentType = 'text/csv';
 
         try {
-            return $this->streamResponse(
-                $request,
-                $this->exportDir . $filename,
-                $contentType,
-                $filename
-            );
+            $response = $this->file($this->exportDir . $filename, $filename);
+            $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
+
+            return $response;
         } catch (FileNotFoundException $exception) {
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
@@ -446,31 +441,5 @@ class ProjectController extends Controller
 
             return $this->redirect($referer ?? $homePageUrl);
         }
-    }
-
-    /**
-     * @throws FileNotFoundException
-     */
-    private function streamResponse(
-        Request $request,
-        string $filePath,
-        string $contentType,
-        string $fileName
-    ): BinaryFileResponse {
-        $date = (new \DateTime())->format('Y-m-d');
-
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($filePath);
-        $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
-        $response->headers->set('X-File-Name', $fileName);
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $date . '_' . $fileName
-        );
-        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
-
-        return $response;
     }
 }

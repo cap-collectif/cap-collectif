@@ -10,8 +10,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Capco\UserBundle\Repository\UserRepository;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Process\Process;
@@ -65,19 +63,10 @@ class UserController extends CRUDController
         }
 
         $contentType = 'text/csv';
-
         $date = date('Y-m-d');
 
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($absolutePath);
-        $response->headers->set('X-Accel-Redirect', '/export/' . $filename);
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $date . '_' . $filename
-        );
+        $response = $this->file($absolutePath, $date . '_' . $filename);
         $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
     }
@@ -104,19 +93,10 @@ class UserController extends CRUDController
         }
         $absolutePath = $path . $filename;
         $contentType = 'text/csv';
-
         $date = date('Y-m-d');
 
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($absolutePath);
-        $response->headers->set('X-Accel-Redirect', '/export/' . $filename);
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $date . '_' . $filename
-        );
+        $response = $this->file($absolutePath, $date . '_' . $filename);
         $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
     }

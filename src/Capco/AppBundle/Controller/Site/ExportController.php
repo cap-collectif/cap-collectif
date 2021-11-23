@@ -29,11 +29,9 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -249,16 +247,8 @@ class ExportController extends Controller
 
             return $this->redirect($request->headers->get('referer'));
         }
-
-        $contentType = 'text/csv';
-
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($this->exportDir . $fileName);
-        $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
-        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
+        $response = $this->file($this->exportDir . $fileName, $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;
     }
@@ -278,17 +268,8 @@ class ExportController extends Controller
                 404
             );
         }
-
-        $contentType = 'text/csv';
-
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($this->exportDir . $fileName);
-        $response->headers->set('X-File-Name', $fileName);
-        $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
-        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
+        $response = $this->file($this->exportDir . $fileName, $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;
     }
@@ -325,7 +306,10 @@ class ExportController extends Controller
         }
         $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
 
-        return $this->file($absolutePath, $fileName);
+        $response = $this->file($absolutePath, $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        return $response;
     }
 
     /**
@@ -366,10 +350,7 @@ class ExportController extends Controller
 
             return $this->redirect($request->headers->get('referer'));
         }
-
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($filePath);
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
+        $response = $this->file($filePath, $filename);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;
