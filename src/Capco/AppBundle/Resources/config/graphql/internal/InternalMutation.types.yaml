@@ -1410,3 +1410,10 @@ InternalMutation:
                     inputType: CheckIdentificationCodeInput
                     payloadType: CheckIdentificationCodePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CheckIdentificationCodeMutation", [value, getUser()])'
+            deleteUserIdentificationCodeList:
+                access: '@=hasRole("ROLE_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteUserIdentificationCodeListInput
+                    payloadType: DeleteUserIdentificationCodeListPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Security\\DeleteUserIdentificationCodeListMutation", [value])'

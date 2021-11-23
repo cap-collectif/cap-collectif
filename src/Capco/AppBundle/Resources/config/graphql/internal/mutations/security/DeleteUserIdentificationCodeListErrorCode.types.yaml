@@ -1,0 +1,9 @@
+DeleteUserIdentificationCodeListErrorCode:
+    type: enum
+    config:
+        name: DeleteUserIdentificationCodeListErrorCode
+        description: 'Available errors in deleteUserIdentificationCodeList mutation.'
+        values:
+            NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Security\\DeleteUserIdentificationCodeListMutation::NOT_FOUND")'
+                description: 'No UserIdentificationCodeList match the given global id.'

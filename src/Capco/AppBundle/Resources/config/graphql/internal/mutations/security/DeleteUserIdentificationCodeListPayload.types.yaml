@@ -1,0 +1,11 @@
+DeleteUserIdentificationCodeListPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of the deleteUserIdentificationCodeList mutation.'
+        fields:
+            id:
+                type: 'ID'
+                description: 'The id of the list just deleted, if successful.'
+            errorCode:
+                type: 'DeleteUserIdentificationCodeListErrorCode'
+                description: 'The error code, if failing.'

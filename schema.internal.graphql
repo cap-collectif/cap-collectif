@@ -4822,6 +4822,27 @@ type DeleteSourcePayload {
   clientMutationId: String
 }
 
+"""Available errors in deleteUserIdentificationCodeList mutation."""
+enum DeleteUserIdentificationCodeListErrorCode {
+  """No UserIdentificationCodeList match the given global id."""
+  NOT_FOUND
+}
+
+input DeleteUserIdentificationCodeListInput {
+  """Global id of the list to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteUserIdentificationCodeListPayload {
+  """The id of the list just deleted, if successful."""
+  id: ID
+
+  """The error code, if failing."""
+  errorCode: DeleteUserIdentificationCodeListErrorCode
+  clientMutationId: String
+}
+
 input DeleteUserInGroupInput {
   """The user id"""
   userId: ID!
@@ -7096,6 +7117,7 @@ type Mutation {
   """Update illustration on a proposal"""
   updateProposalIllustration(input: UpdateProposalIllustrationInput!): UpdateProposalIllustrationPayload
   checkIdentificationCode(input: CheckIdentificationCodeInput!): CheckIdentificationCodePayload
+  deleteUserIdentificationCodeList(input: DeleteUserIdentificationCodeListInput!): DeleteUserIdentificationCodeListPayload
 }
 
 """A connection to a list of items."""

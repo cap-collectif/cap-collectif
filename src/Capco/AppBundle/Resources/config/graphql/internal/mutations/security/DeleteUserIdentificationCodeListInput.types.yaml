@@ -1,0 +1,8 @@
+DeleteUserIdentificationCodeListInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteUserIdentificationCodeList mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'Global id of the list to delete.'
