@@ -32,6 +32,13 @@ class UserRepository extends EntityRepository
 {
     use LocaleRepositoryTrait;
 
+    public function findFacebookUsers(): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb->where('u.facebook_id IS NOT NULL')->getQuery()->getResult();
+    }
+
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('u');

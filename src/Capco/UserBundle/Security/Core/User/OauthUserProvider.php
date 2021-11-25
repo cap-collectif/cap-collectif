@@ -15,7 +15,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
-use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 class OauthUserProvider extends FOSUBUserProvider
 {
@@ -75,7 +74,10 @@ class OauthUserProvider extends FOSUBUserProvider
     // TODO we need a unit test on France Connect behavior
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
     {
-        $email = $response->getEmail() ?: 'twitter_' . $response->getUsername();
+        $ressourceOwner = $response->getResourceOwner();
+        $serviceName = $ressourceOwner->getName();
+
+        $email = $response->getEmail() ?: $serviceName . '_' . $response->getUsername();
         $this->debug($response);
         $username =
             $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
@@ -91,9 +93,6 @@ class OauthUserProvider extends FOSUBUserProvider
             $this->userInvitationHandler->handleUserInvite($user);
         }
 
-        $ressourceOwner = $response->getResourceOwner();
-
-        $serviceName = $ressourceOwner->getName();
         $setter = 'set' . ucfirst($serviceName);
         $setterId = 'openid' === $serviceName ? $setter : $setter . 'Id';
         $setterToken = $setter . 'AccessToken';

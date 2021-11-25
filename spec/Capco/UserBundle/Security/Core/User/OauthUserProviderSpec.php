@@ -3,6 +3,7 @@
 namespace spec\Capco\UserBundle\Security\Core\User;
 
 use Capco\UserBundle\Handler\UserInvitationHandler;
+use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\FacebookResourceOwner;
 use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Elasticsearch\Indexer;
@@ -90,6 +91,49 @@ class OauthUserProviderSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($user);
         $extraMapper->map($user, $response)->shouldBeCalled();
+
+        // We flush the new values.
+        $userManager->updateUser($user)->shouldBeCalled();
+
+        $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+    }
+
+    public function it_load_new_facebook_user(
+        UserResponseInterface $response,
+        UserRepository $userRepository,
+        FacebookResourceOwner $ressourceOwner,
+        UserManagerInterface $userManager,
+        User $user
+    ) {
+        $this->generateGenericFacebookResponse($response, $ressourceOwner);
+
+        // We try to find a user that match the criterias, but could not find one.
+        $userRepository
+            ->findByAccessTokenOrUsername('facebook_access_token', '2081576388576162')
+            ->willReturn(null);
+        $userRepository->findOneByEmail('facebook_2081576388576162')->willReturn(null);
+
+        $userManager
+            ->createUser()
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user->getId()->willReturn('<some uuid>');
+
+        // Here we assert right values are set for the user.
+        $user->setFacebookId('2081576388576162')->shouldBeCalled();
+        $user->setFacebookAccessToken('facebook_access_token')->shouldBeCalled();
+        $user
+            ->setUsername('facebook_user')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setEmail('facebook_2081576388576162')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setEnabled(true)
+            ->shouldBeCalled()
+            ->willReturn($user);
 
         // We flush the new values.
         $userManager->updateUser($user)->shouldBeCalled();
@@ -265,6 +309,20 @@ class OauthUserProviderSpec extends ObjectBehavior
         $response->getNickname()->willReturn('openid_user');
         $response->getAccessToken()->willReturn('openid_access_token');
         $response->getUsername()->willReturn('openid_id');
+        $response->getResourceOwner()->willReturn($ressourceOwner);
+        $response->getLastName()->willReturn('Smith');
+        $response->getFirstName()->willReturn('jean');
+    }
+
+    private function generateGenericFacebookResponse(
+        UserResponseInterface $response,
+        FacebookResourceOwner $ressourceOwner
+    ) {
+        $ressourceOwner->getName()->willReturn('facebook');
+        $response->getEmail()->willReturn(null);
+        $response->getNickname()->willReturn('facebook_user');
+        $response->getAccessToken()->willReturn('facebook_access_token');
+        $response->getUsername()->willReturn('2081576388576162');
         $response->getResourceOwner()->willReturn($ressourceOwner);
         $response->getLastName()->willReturn('Smith');
         $response->getFirstName()->willReturn('jean');
