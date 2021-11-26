@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { PageProps } from '../types';
+import { Text } from '@cap-collectif/ui';
 import Layout from '../components/Layout/Layout';
 import { useIntl } from 'react-intl';
 
@@ -8,13 +9,9 @@ const Index: NextPage<PageProps> = ({ viewerSession }) => {
 
     return (
         <Layout>
-            <p style={{ textAlgin: 'center' }}>Bienvenue: {JSON.stringify(viewerSession)}</p>
-            {'You can try hot module reloading with: '}
-            <a href="/emails">Emails</a>
-            {' | '}
-            <a href="/dashboard">
-                {intl.formatMessage({ id: 'capco.module.unstable__analytics_page' })}
-            </a>
+            <Text>
+                {intl.formatMessage({ id: 'global-hello' })}: {JSON.stringify(viewerSession)}
+            </Text>
         </Layout>
     );
 };

@@ -19197,6 +19197,13 @@ relay-compiler-language-js-flow-uncommented@^2.0.0:
   resolved "https://registry.yarnpkg.com/relay-compiler-language-js-flow-uncommented/-/relay-compiler-language-js-flow-uncommented-2.0.0.tgz#e31522fff3f070d6465cfdd0b1a85c910b8655d9"
   integrity sha512-yyTB0ZaHwUahGukYNH7wR/nQccoBHZ3vCmVpIGDAbt+8H7y3wyJbRW4R6a8/85a8ycV2CLEo+gK8UVWNpFck9g==
 
+relay-compiler-language-typescript@^15.0.0:
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/relay-compiler-language-typescript/-/relay-compiler-language-typescript-15.0.0.tgz#565900106eeb7150d70c5792ef092a2807a8e25e"
+  integrity sha512-vx6V+uBJLIyzTFz1fFiuS0J+L81juGUComb5emKNaYGZRWOPSalxyS+0/I6umrNChNDFB5uLuTnAqxia4+ZMBg==
+  dependencies:
+    invariant "^2.2.4"
+
 relay-compiler@11.0.0:
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/relay-compiler/-/relay-compiler-11.0.0.tgz#265bded552b0938ad597ea14b9488e3d818b99cf"

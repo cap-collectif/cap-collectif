@@ -1,6 +1,7 @@
 import { commitLocalUpdate } from 'react-relay';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import executeFunction from '~/network/executeFunction';
+import { FeatureFlags } from '../types';
 
 const store = new Store(new RecordSource());
 const network = Network.create(executeFunction);
@@ -10,7 +11,7 @@ const environment = new Environment({
     store,
 });
 
-const getEnvironment = featureFlags => {
+const getEnvironment = (featureFlags: FeatureFlags) => {
     commitLocalUpdate(environment, storeProxy => {
         const newfeatureFlagsRecords = Object.keys(featureFlags).map(key => {
             const enabled = featureFlags[key];

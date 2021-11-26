@@ -9,7 +9,9 @@
     "start": "next start -p ${ADMIN_NEXT_PORT:=3000}",
     "lint": "next lint",
     "prettier": "prettier --write {pages,utils,.}/*.{ts,tsx,js}",
-    "test": "jest"
+    "test": "jest",
+    "relay": "relay-compiler --src ./ --schema ../schema.internal.graphql --language typescript --artifactDirectory ./__generated__",
+    "relay:watch": "relay-compiler --src ./ --schema ../schema.internal.graphql --language typescript --artifactDirectory ./__generated__ --watch"
   },
   "dependencies": {
     "@babel/preset-flow": "^7.14.5",
@@ -29,6 +31,7 @@
     "eslint": "^7.30.0",
     "eslint-config-next": "^11.0.1",
     "local-ssl-proxy": "1.3.0",
+    "relay-compiler-language-typescript": "^15.0.0",
     "typescript": "^4.3.5"
   }
 }

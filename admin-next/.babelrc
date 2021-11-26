@@ -8,6 +8,6 @@
         "next/babel"
     ],
     "plugins": [
-        ["relay", { "artifactDirectory": "../frontend/js/__generated__/~relay" }]
+        ["relay", { "artifactDirectory": "./__generated__" }]
     ]
 }
