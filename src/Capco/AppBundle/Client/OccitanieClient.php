@@ -24,12 +24,8 @@ class OccitanieClient
         $this->password = $password;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
-
-        $this->base_url = 'https://mon-compte-particulier.laregion.fr/auth/realms/mon-compte-particulier';
-        if (getenv('SYMFONY_INSTANCE_NAME') == 'occitanie-test') {
-            $this->base_url = 'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne';
-        }
-        
+        $this->base_url =
+            'https://mon-compte-particulier.laregion.fr/auth/realms/mon-compte-particulier';
         $this->token_url = $this->base_url . '/protocol/openid-connect/token';
         $this->counter_url = $this->base_url . '/get-user-by-platform/countallusers';
     }
