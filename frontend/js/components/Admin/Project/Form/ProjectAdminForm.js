@@ -752,7 +752,6 @@ export default createFragmentContainer(injectIntl(container), {
             }
           }
           isAnonymousParticipationAllowed
-          collectParticipantsEmail
         }
         ... on DebateStep {
           isAnonymousParticipationAllowed

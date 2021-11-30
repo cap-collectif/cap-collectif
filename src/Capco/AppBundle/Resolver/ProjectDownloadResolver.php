@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Enum\MajorityVoteTypeEnum;
 use Capco\AppBundle\Utils\Text;
 use Liuggio\ExcelBundle\Factory;
@@ -67,6 +68,9 @@ class ProjectDownloadResolver
             'anonymous',
             'draft',
             'undraft_at',
+            'account',
+            'noAccount_email',
+            'internalComm',
         ];
 
         if ($projectAdmin) {
@@ -107,9 +111,15 @@ class ProjectDownloadResolver
         bool $projectAdmin = false
     ): array {
         $this->data = [];
-        $replies = $this->em
+        $userReplies = $this->em
             ->getRepository(Reply::class)
             ->getEnabledByQuestionnaireAsArray($questionnaire);
+
+        $anonymousReplies = $this->em
+            ->getRepository(ReplyAnonymous::class)
+            ->getEnabledByQuestionnaireAsArray($questionnaire);
+
+        $replies = array_merge($userReplies, $anonymousReplies);
 
         $this->getRepliesData($replies, $projectAdmin);
 
@@ -147,19 +157,25 @@ class ProjectDownloadResolver
 
     private function getReplyItem(array $reply, array $responses, bool $projectAdmin = false): array
     {
+        $isAnonymousReply = !isset($reply['author']);
+        $participantEmail = $isAnonymousReply ? $reply['participantEmail'] : '';
+
         $item = [
             'id' => $reply['id'],
             'published' => $this->booleanToString($reply['published']),
             'published_at' => $this->dateToString($reply['publishedAt']),
-            'author' => $reply['author']['username'],
-            'author_id' => $reply['author']['id'],
-            'author_email' => $reply['author']['email'],
-            'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
+            'author' => $isAnonymousReply ? '' : $reply['author']['username'],
+            'author_id' => $isAnonymousReply ? '' : $reply['author']['id'],
+            'author_email' => $isAnonymousReply ? '' : $reply['author']['email'],
+            'phone' => (!$isAnonymousReply && $reply['author']['phone']) ? (string) $reply['author']['phone'] : '',
             'created_at' => $this->dateToString($reply['createdAt']),
             'updated_at' => $this->dateToString($reply['updatedAt']),
-            'anonymous' => $this->booleanToString($reply['private']),
-            'draft' => $this->booleanToString($reply['draft']),
-            'undraft_at' => $this->dateToString($reply['undraftAt']),
+            'anonymous' => $isAnonymousReply ? '' : $this->booleanToString($reply['private']),
+            'draft' => $isAnonymousReply ? '' : $this->booleanToString($reply['draft']),
+            'undraft_at' => $isAnonymousReply ? '' : $this->dateToString($reply['undraftAt']),
+            'account' => $this->booleanToString(!$isAnonymousReply),
+            'noAccount_email' => $participantEmail,
+            'internalComm' => $this->booleanToString(!empty($participantEmail)),
         ];
 
         if ($projectAdmin) {

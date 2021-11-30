@@ -74,7 +74,7 @@ class ParametersRuntime implements RuntimeExtensionInterface
         $defaultLocale = $this->siteParameterResolver->getDefaultLocale();
         $locale = $request ? $request->getLocale() : $defaultLocale;
 
-        $cachedItem = $this->cache->getItem(self::CACHE_KEY.$locale);
+        $cachedItem = $this->cache->getItem(self::CACHE_KEY . $locale);
 
         if (!$cachedItem->isHit()) {
             $slug = strtolower($this->translator->trans('charter', [], 'CapcoAppBundle'));
@@ -85,6 +85,7 @@ class ParametersRuntime implements RuntimeExtensionInterface
                 'contact.metadescription',
                 'global.site.organization_name',
                 'global.site.communication_from',
+                'global.site.fullname',
                 'snalytical-tracking-scripts-on-all-pages',
                 'ad-scripts-on-all-pages',
                 'cookies-list',

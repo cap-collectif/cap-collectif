@@ -838,7 +838,7 @@ type AnonymousReply implements Reply & Node {
 
   """Identifies the form where the contribution was submitted."""
   questionnaire: Questionnaire!
-  participant_email: Email
+  participantEmail: Email
 }
 
 """A contribution"""

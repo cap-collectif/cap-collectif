@@ -25,7 +25,7 @@ describe('<AlertForm />', () => {
   const submitFailedForm = {
     valid: true,
     invalid: false,
-    submitting: false,
+    submitting: true,
     submitSucceeded: false,
     submitFailed: true,
   };

@@ -9,5 +9,5 @@ InternalAnonymousReply:
         name: AnonymousReply
         description: 'Represents an answer from a non-registered to a questionnaire.'
         fields:
-            participant_email:
+            participantEmail:
                 type: 'Email'

@@ -786,9 +786,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       // QuestionnaireStep
       questionnaire: step?.questionnaire || null,
       footer: step?.footer ? step.footer : null,
-      collectParticipantsEmail: step?.collectParticipantsEmail
-        ? step.collectParticipantsEmail
-        : undefined,
+      collectParticipantsEmail: step?.collectParticipantsEmail !== undefined ? step.collectParticipantsEmail : step.__typename === 'QuestionnaireStep' ? true : undefined,
       // ConsultationStep
       consultations: step?.consultations || [],
       requirements: step ? createRequirements(step) : [],

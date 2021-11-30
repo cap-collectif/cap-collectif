@@ -15,6 +15,7 @@ class AbstractResponseRepository extends EntityRepository
             ->addSelect('question')
             ->leftJoin('r.question', 'question')
             ->andWhere('r.reply = :reply')
+            ->orWhere('r.replyAnonymous = :reply')
             ->setParameter('reply', $replyId);
 
         return $qb->getQuery()->getArrayResult();

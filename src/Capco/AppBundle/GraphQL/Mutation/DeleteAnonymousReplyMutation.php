@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -13,13 +15,16 @@ class DeleteAnonymousReplyMutation implements MutationInterface
 {
     private EntityManagerInterface $em;
     private ReplyAnonymousRepository $replyAnonymousRepository;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
-        ReplyAnonymousRepository $replyAnonymousRepository
+        ReplyAnonymousRepository $replyAnonymousRepository,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->replyAnonymousRepository = $replyAnonymousRepository;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $args): array
@@ -34,6 +39,9 @@ class DeleteAnonymousReplyMutation implements MutationInterface
 
         $replyId = GlobalId::toGlobalId('Reply', $reply->getId());
         $questionnaire = $reply->getQuestionnaire();
+
+        $this->indexer->remove(AbstractReply::class, $reply->getId());
+        $this->indexer->finishBulk();
 
         $this->em->remove($reply);
         $this->em->flush();

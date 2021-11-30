@@ -16,5 +16,11 @@ use Doctrine\ORM\EntityRepository;
  * @method ReplyAnonymous[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) */
 class ReplyAnonymousRepository extends EntityRepository
 {
-    
+    public function getEnabledByQuestionnaireAsArray(Questionnaire $questionnaire): array
+    {
+        $qb = $this->createQueryBuilder('replyAnonymous')
+            ->andWhere('replyAnonymous.questionnaire = :questionnaire')
+            ->setParameter('questionnaire', $questionnaire);
+        return $qb->getQuery()->getArrayResult();
+    }
 }

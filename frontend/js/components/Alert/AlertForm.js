@@ -42,7 +42,7 @@ export const AlertForm = ({
   return (
     <div className="d-ib">
       {valid && submitSucceeded && !submitting && <AlertFormSucceededMessage />}
-      {submitFailed && (
+      {submitting && submitFailed && (
         <div className="alert__form_server-failed-message">
           <i className="cap cap-ios-close-outline" />{' '}
           <FormattedHTMLMessage id="global.error.server.form" />

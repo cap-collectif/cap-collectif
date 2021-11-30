@@ -28,6 +28,7 @@ describe('<GroupAdminUsers />', () => {
     userIsDeleted: true,
     userIsNotDeleted: false,
     submitFailed: false,
+    submitting: true,
     submitSucceeded: false,
   };
 
@@ -36,6 +37,7 @@ describe('<GroupAdminUsers />', () => {
     userIsDeleted: false,
     userIsNotDeleted: true,
     submitFailed: false,
+    submitting: true,
     submitSucceeded: false,
   };
 
@@ -52,6 +54,7 @@ describe('<GroupAdminUsers />', () => {
     userIsDeleted: false,
     userIsNotDeleted: false,
     submitFailed: true,
+    submitting: true,
     submitSucceeded: false,
   };
 

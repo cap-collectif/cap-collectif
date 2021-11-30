@@ -4,6 +4,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { Label, Panel } from 'react-bootstrap';
 import {
   change as changeRedux,
+  stopSubmit,
   Field,
   FieldArray,
   formValueSelector,
@@ -337,6 +338,7 @@ export class ReplyForm extends React.Component<Props, State> {
     analytics.track('submit_reply_click', {
       stepName: questionnaire.step?.title || '',
     });
+    dispatch(stopSubmit(form));
     Promise.resolve(dispatch(changeRedux(form, 'draft', false))).then(() => {
       dispatch(submit(form));
     });
@@ -449,7 +451,12 @@ export class ReplyForm extends React.Component<Props, State> {
                 component={renderComponent}
               />
               <Text color="neutral.gray.700">
-                {intl.formatMessage({ id: 'anonymous.questionnaire.collect.email.infos' })}
+                {intl.formatMessage(
+                  { id: 'information-for-the-newsletter-registration-form' },
+                  {
+                    organisationName: platformName,
+                  },
+                )}
               </Text>
             </ParticipantEmailWrapper>
           )}
@@ -468,6 +475,29 @@ export class ReplyForm extends React.Component<Props, State> {
                 <FormattedMessage id="reply.form.private" />
               </Field>
             </>
+          )}
+
+          {this.state.captcha.visible && (
+            <Flex direction="column" align="center">
+              <Text
+                css={css({
+                  mb: `${SPACES_SCALES[6]} !important`,
+                })}
+                textAlign="center"
+                className="recaptcha-message"
+                color="neutral-gray.700">
+                {intl.formatMessage({ id: 'captcha.check' })}
+              </Text>
+              <Captcha
+                style={{ transformOrigin: 'center' }}
+                value={this.state.captcha.value}
+                onChange={value => {
+                  this.setState(state => ({
+                    captcha: { ...state.captcha, value },
+                  }));
+                }}
+              />
+            </Flex>
           )}
 
           {(!reply || reply.viewerCanUpdate || isAnonymousReply) && (
@@ -496,7 +526,7 @@ export class ReplyForm extends React.Component<Props, State> {
                 }
                 label={submitting ? 'global.loading' : 'global.send'}
                 onSubmit={() => {
-                  if (!reply?.id && !isAuthenticated) {
+                  if (!reply?.id && !isAuthenticated && this.state.captcha.value === null) {
                     this.setState(state => ({
                       captcha: { ...state.captcha, visible: true },
                     }));
@@ -505,28 +535,6 @@ export class ReplyForm extends React.Component<Props, State> {
                   }
                 }}
               />
-              {this.state.captcha.visible && (
-                <Flex direction="column" align="center">
-                  <Text
-                    css={css({
-                      mb: `${SPACES_SCALES[6]} !important`,
-                    })}
-                    textAlign="center"
-                    className="recaptcha-message"
-                    color="neutral-gray.700">
-                    {intl.formatMessage({ id: 'captcha.check' })}
-                  </Text>
-                  <Captcha
-                    style={{ transformOrigin: 'center' }}
-                    value={this.state.captcha.value}
-                    onChange={value => {
-                      this.setState(state => ({
-                        captcha: { ...state.captcha, value },
-                      }));
-                    }}
-                  />
-                </Flex>
-              )}
             </div>
           )}
 
@@ -571,7 +579,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     invalidRequirements:
       isInvalid(requirementsFormName)(state) ||
       Object.keys(getFormSyncErrors(requirementsFormName)(state)).length > 0,
-    platformName: state.default.parameters['global.site.organization_name'],
+    platformName: state.default.parameters['global.site.fullname'],
   };
 };
 

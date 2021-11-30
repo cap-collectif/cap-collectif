@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\AbstractReply;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
@@ -18,15 +20,18 @@ class DeleteUserReplyMutation implements MutationInterface
     private EntityManagerInterface $em;
     private ReplyRepository $replyRepo;
     private Publisher $publisher;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
         ReplyRepository $replyRepo,
-        Publisher $publisher
+        Publisher $publisher,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->replyRepo = $replyRepo;
         $this->publisher = $publisher;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(string $id, User $viewer): array
@@ -43,6 +48,9 @@ class DeleteUserReplyMutation implements MutationInterface
         }
 
         $questionnaire = $reply->getQuestionnaire();
+
+        $this->indexer->remove(AbstractReply::class, $reply->getId());
+        $this->indexer->finishBulk();
 
         $this->em->remove($reply);
         $this->em->flush();
