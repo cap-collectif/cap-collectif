@@ -65,6 +65,7 @@ Scenario: Logged in admin wants to edit my password in back office
   When I fill in the following:
     | current_password          | admin       |
     | new_password              | a      |
+  And I wait 2 seconds
   Then I should see "at-least-8-characters-one-digit-one-uppercase-one-lowercase"
   Then I fill in the following:
     | new_password              | totoCapco2019 |

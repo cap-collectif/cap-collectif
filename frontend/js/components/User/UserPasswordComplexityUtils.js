@@ -4,6 +4,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { OverlayTrigger, ProgressBar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
+import debounce from 'debounce-promise';
 import { change, formValueSelector, getFormAsyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 import CheckCircle from '../Ui/Icons/CheckCircle';
@@ -155,7 +156,7 @@ const getPasswordComplexityScore = graphql`
   }
 `;
 
-export const asyncPasswordValidate = (
+const asyncPasswordValidateLogic = (
   formName: string,
   passwordFieldName: string,
   values: Object,
@@ -187,6 +188,8 @@ export const asyncPasswordValidate = (
     resolve();
   });
 };
+
+export const asyncPasswordValidate = debounce(asyncPasswordValidateLogic, 1000);
 
 export class UserPasswordComplexityField extends Component<Props> {
   getMatchingPasswordSecurityAttributes(passwordComplexityScore: number) {

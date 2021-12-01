@@ -47,6 +47,7 @@ Scenario: Logged in user wants to change his password to a too short password
     | password-form-current      | user   |
     | password-form-new          | 1234   |
     | password-form-confirmation | 1234   |
+  And I wait 2 seconds
   And I should see "at-least-8-characters-one-uppercase-one-lowercase"
   And I should see "global.invalid.form"
 

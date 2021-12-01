@@ -10,14 +10,17 @@ Scenario: Admin wants to enable his account and set his password
   When I fill in the following:
     | password-form-new  | a |
     | password-form-confirmation | a |
+  And I wait 2 seconds
   And I should see "at-least-8-characters-one-digit-one-uppercase-one-lowercase"
   When I fill in the following:
     | new_password  | a |
     | new_password_confirmation | q |
+  And I wait 2 seconds
   Then I should see "fos_user.password.mismatch"
   When I fill in the following:
     | new_password  | Toto91toto  |
     | new_password_confirmation | Toto91toto  |
+  And I wait 2 seconds
   And I press "reset-content-confirm"
   And I wait "global.loading" to disappear on current page
   Then I should be redirected to "/"
