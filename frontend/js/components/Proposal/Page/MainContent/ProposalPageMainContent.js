@@ -87,7 +87,10 @@ export default createFragmentContainer(
   {
     proposal: graphql`
       fragment ProposalPageMainContent_proposal on Proposal
-        @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
+        @argumentDefinitions(
+          isTipsMeeeEnabled: { type: "Boolean!" }
+          isAuthenticated: { type: "Boolean!" }
+        ) {
         tipsmeeeId @include(if: $isTipsMeeeEnabled)
         ...ProposalPageFusionInformations_proposal
         ...ProposalPageTopDonators_proposal @include(if: $isTipsMeeeEnabled)
@@ -97,7 +100,11 @@ export default createFragmentContainer(
         ...ProposalPageCustomSections_proposal
         ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
         ...ProposalPageMainAside_proposal
-          @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
+          @arguments(
+            stepId: $stepId
+            isTipsMeeeEnabled: $isTipsMeeeEnabled
+            isAuthenticated: $isAuthenticated
+          )
         ...ProposalPageNews_proposal @arguments(isAuthenticated: $isAuthenticated)
         ...ProposalPageDiscussions_proposal
         ...ProposalVoteButtonWrapperFragment_proposal

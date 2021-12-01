@@ -2060,13 +2060,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "viewerDidAuthor",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
                       "name": "isProposalUsingAnySocialNetworks",
                       "storageKey": null,
                     },
@@ -3702,6 +3695,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "kind": "Condition",
                       "passingValue": true,
                       "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "viewerDidAuthor",
+                          "storageKey": null,
+                        },
                         Object {
                           "alias": null,
                           "args": Array [
@@ -7483,7 +7483,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "61321ac07250c283774966820bb5fb06",
+          "cacheID": "df18aeaaf4c5d27ce01f83aa87784afd",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8496,7 +8496,7 @@ fragment ProposalPageAlert_proposal on Proposal {
   trashedReason
 }
 
-fragment ProposalPageAside_proposal_zqPYL on Proposal {
+fragment ProposalPageAside_proposal_3F3xMA on Proposal {
   ...ProposalPageMetadata_proposal
   ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
   tipsmeeeId @include(if: $isTipsMeeeEnabled)
@@ -8509,9 +8509,9 @@ fragment ProposalPageAside_proposal_zqPYL on Proposal {
     ...ProposalPageVoteThreshold_step
     id
   }
-  viewerDidAuthor
+  viewerDidAuthor @include(if: $isAuthenticated)
   isProposalUsingAnySocialNetworks
-  ...ProposalSocialNetworkLinks_proposal
+  ...ProposalSocialNetworkLinks_proposal_39ngnn
   form {
     step {
       state
@@ -8857,9 +8857,9 @@ fragment ProposalPageLogic_query_2JM5Hk on Query {
   }
   proposal: node(id: $proposalId) {
     __typename
-    ...ProposalPageAside_proposal_zqPYL
+    ...ProposalPageAside_proposal_3F3xMA
     ...ProposalDraftAlert_proposal
-    ...ProposalPageMainContent_proposal_4iFR9m
+    ...ProposalPageMainContent_proposal_1lypTn
     ...ProposalPageAlert_proposal
     ...ProposalPageTabs_proposal_zqPYL
     ...ProposalPageVotes_proposal
@@ -8867,7 +8867,7 @@ fragment ProposalPageLogic_query_2JM5Hk on Query {
     ...ProposalPageFollowers_proposal
     ...ProposalPageDonators_proposal_4iFR9m
     ...ProposalPageHeader_proposal_19sAkT
-    ...ProposalPageMainAside_proposal_zqPYL @include(if: $isAuthenticated)
+    ...ProposalPageMainAside_proposal_3F3xMA @include(if: $isAuthenticated)
     ...ProposalAnalysisPanel_proposal_2uwUKI @include(if: $isAuthenticated)
     ... on Proposal {
       id
@@ -8889,13 +8889,13 @@ fragment ProposalPageLogic_query_2JM5Hk on Query {
   }
 }
 
-fragment ProposalPageMainAside_proposal_zqPYL on Proposal {
+fragment ProposalPageMainAside_proposal_3F3xMA on Proposal {
   id
   ...ProposalPageMetadata_proposal
   ...ProposalPageAdvancement_proposal
   ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
   ...ProposalPageVoteThreshold_proposal_2r3fA4
-  ...ProposalSocialNetworkLinks_proposal
+  ...ProposalSocialNetworkLinks_proposal_39ngnn
   isProposalUsingAnySocialNetworks
   currentVotableStep {
     __typename
@@ -8913,7 +8913,7 @@ fragment ProposalPageMainAside_proposal_zqPYL on Proposal {
   }
 }
 
-fragment ProposalPageMainContent_proposal_4iFR9m on Proposal {
+fragment ProposalPageMainContent_proposal_1lypTn on Proposal {
   tipsmeeeId @include(if: $isTipsMeeeEnabled)
   ...ProposalPageTopDonators_proposal @include(if: $isTipsMeeeEnabled)
   ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
@@ -8922,7 +8922,7 @@ fragment ProposalPageMainContent_proposal_4iFR9m on Proposal {
   ...ProposalPageDescription_proposal
   ...ProposalPageLocalisation_proposal
   ...ProposalPageCustomSections_proposal
-  ...ProposalPageMainAside_proposal_zqPYL
+  ...ProposalPageMainAside_proposal_3F3xMA
   ...ProposalPageNews_proposal_39ngnn
   ...ProposalPageDiscussions_proposal
   ...ProposalVoteButtonWrapperFragment_proposal_Q37Wz
@@ -9252,8 +9252,8 @@ fragment ProposalRevision_proposal on Proposal {
   ...ProposalRevisionModalForm_proposal
 }
 
-fragment ProposalSocialNetworkLinks_proposal on Proposal {
-  viewerDidAuthor
+fragment ProposalSocialNetworkLinks_proposal_39ngnn on Proposal {
+  viewerDidAuthor @include(if: $isAuthenticated)
   twitterUrl
   webPageUrl
   facebookUrl

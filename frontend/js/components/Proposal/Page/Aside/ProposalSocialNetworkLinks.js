@@ -4,6 +4,7 @@ import { graphql, useFragment } from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { FormattedMessage, useIntl } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
+import { useSelector } from 'react-redux';
 import { Card } from '~/components/Proposal/Page/ProposalPage.style';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import type { ProposalSocialNetworkLinks_proposal$key } from '~relay/ProposalSocialNetworkLinks_proposal.graphql';
@@ -19,8 +20,9 @@ type Props = {|
 |};
 
 const FRAGMENT = graphql`
-  fragment ProposalSocialNetworkLinks_proposal on Proposal {
-    viewerDidAuthor
+  fragment ProposalSocialNetworkLinks_proposal on Proposal
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    viewerDidAuthor @include(if: $isAuthenticated)
     twitterUrl
     webPageUrl
     facebookUrl
@@ -82,6 +84,7 @@ export const ProposalSocialNetworkLinks = ({ proposal: proposalFragment }: Props
   let socialNetworks = proposal.form.socialNetworksUsed;
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const isAuthenticated = useSelector(state => state.user.user) != null;
   // because webPage is the only one SN who have a translation
   if (!proposal.form.usingWebPage) {
     socialNetworks = socialNetworks.substr(2);
@@ -179,6 +182,7 @@ export const ProposalSocialNetworkLinks = ({ proposal: proposalFragment }: Props
               proposalType={proposal}
               initialValues={initialValues}
               proposalId={proposal.id}
+              isAuthenticated={isAuthenticated}
             />
           </>
         )}

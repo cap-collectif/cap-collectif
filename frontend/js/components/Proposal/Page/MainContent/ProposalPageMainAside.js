@@ -92,13 +92,17 @@ export default createFragmentContainer(
   {
     proposal: graphql`
       fragment ProposalPageMainAside_proposal on Proposal
-        @argumentDefinitions(stepId: { type: "ID!" }, isTipsMeeeEnabled: { type: "Boolean!" }) {
+        @argumentDefinitions(
+          stepId: { type: "ID!" }
+          isTipsMeeeEnabled: { type: "Boolean!" }
+          isAuthenticated: { type: "Boolean!" }
+        ) {
         id
         ...ProposalPageMetadata_proposal
         ...ProposalPageAdvancement_proposal
         ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
         ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
-        ...ProposalSocialNetworkLinks_proposal
+        ...ProposalSocialNetworkLinks_proposal @arguments(isAuthenticated: $isAuthenticated)
         isProposalUsingAnySocialNetworks
         currentVotableStep {
           votesRanking

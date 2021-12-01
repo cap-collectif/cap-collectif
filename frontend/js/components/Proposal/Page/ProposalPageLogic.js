@@ -261,9 +261,14 @@ export default createFragmentContainer(
         }
         proposal: node(id: $proposalId) {
           ...ProposalPageAside_proposal
-            @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
+            @arguments(
+              stepId: $stepId
+              isTipsMeeeEnabled: $isTipsMeeeEnabled
+              isAuthenticated: $isAuthenticated
+            )
           ...ProposalDraftAlert_proposal
-          ...ProposalPageMainContent_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)
+          ...ProposalPageMainContent_proposal
+            @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled, isAuthenticated: $isAuthenticated)
           ...ProposalPageAlert_proposal
           ...ProposalPageTabs_proposal
             @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
@@ -278,7 +283,11 @@ export default createFragmentContainer(
               isTipsMeeeEnabled: $isTipsMeeeEnabled
             )
           ...ProposalPageMainAside_proposal
-            @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
+            @arguments(
+              stepId: $stepId
+              isTipsMeeeEnabled: $isTipsMeeeEnabled
+              isAuthenticated: $isAuthenticated
+            )
             @include(if: $isAuthenticated)
           ...ProposalAnalysisPanel_proposal
             @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)

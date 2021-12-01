@@ -8,7 +8,10 @@ import type {
 } from '~relay/UpdateProposalSocialNetworksMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateProposalSocialNetworksMutation($input: UpdateProposalSocialNetworksInput!) {
+  mutation UpdateProposalSocialNetworksMutation(
+    $input: UpdateProposalSocialNetworksInput!
+    $isAuthenticated: Boolean!
+  ) {
     updateProposalSocialNetworks(input: $input) {
       proposal {
         id
@@ -18,7 +21,7 @@ const mutation = graphql`
         instagramUrl
         linkedInUrl
         youtubeUrl
-        ...ProposalSocialNetworkLinks_proposal
+        ...ProposalSocialNetworkLinks_proposal @arguments(isAuthenticated: $isAuthenticated)
         ...ModalProposalSocialNetworks_proposal
       }
       errorCode

@@ -73,9 +73,14 @@ type Props = {|
   +onClose: () => void,
   +initialValues: FormValues,
   +proposalId: string,
+  +isAuthenticated: boolean,
 |};
 
-const onSubmit = (values: FormValues, _dispatch, { proposalId, proposalType }: Props) => {
+const onSubmit = (
+  values: FormValues,
+  _dispatch,
+  { proposalId, proposalType, isAuthenticated }: Props,
+) => {
   const data = {
     twitterUrl: values.twitterUrl || null,
     facebookUrl: values.facebookUrl || null,
@@ -87,6 +92,7 @@ const onSubmit = (values: FormValues, _dispatch, { proposalId, proposalType }: P
   };
   return UpdateProposalSocialNetworksMutation.commit({
     input: data,
+    isAuthenticated,
   })
     .then(response => {
       if (
