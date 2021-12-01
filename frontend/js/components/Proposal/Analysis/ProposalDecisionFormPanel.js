@@ -59,7 +59,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     proposalId: proposal.id,
     body: values.body,
     authors: values.authors.map(author => author.value),
-    estimatedCost: values.estimatedCost ?? 0,
+    estimatedCost:
+      typeof values.estimatedCost === 'number' && !Number.isNaN(values.estimatedCost)
+        ? values.estimatedCost
+        : 0,
     isApproved:
       values.isApproved === 'FAVOURABLE'
         ? true
