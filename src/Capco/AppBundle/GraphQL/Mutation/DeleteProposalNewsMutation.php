@@ -50,6 +50,9 @@ class DeleteProposalNewsMutation implements MutationInterface
             $proposalPost = $this->getPost($input, $viewer);
             $id = $input->offsetGet('postId');
             $proposal = $proposalPost->getProposals()->first();
+            if(!$proposal) {
+                throw new UserError(UpdateProposalNewsMutation::PROPOSAL_NOT_FOUND);
+            }
             $proposalName = $proposal->getTitle();
             $projectName = $proposal->getProject()->getTitle();
             $proposalPostAuthor = $proposalPost
