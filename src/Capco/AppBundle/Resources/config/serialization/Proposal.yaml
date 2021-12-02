@@ -36,7 +36,7 @@ Capco\AppBundle\Entity\Proposal:
         category:
             groups: [Proposals, ElasticsearchProposal]
         estimation:
-            groups: [Proposals]
+            groups: [Proposals, ElasticsearchProposal]
         comments:
             groups: [Proposals]
         isDraft:
