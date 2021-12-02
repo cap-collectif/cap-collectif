@@ -315,11 +315,10 @@ class OpinionRepository extends EntityRepository
 
         $qb = $this->handleOpinionVisibility($qb, $viewer);
 
-        return // ->useResultCache(true, 60)
-            $qb
-                ->getQuery()
-                ->useQueryCache(true)
-                ->getSingleScalarResult();
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
     }
 
     public function countByStep(AbstractStep $step, bool $includeTrashed = false): int

@@ -15,7 +15,6 @@ use Twig\Extension\RuntimeExtensionInterface;
 class FooterRuntime implements RuntimeExtensionInterface
 {
     public const CACHE_KEY_LEGALS = 'getLegalsPages';
-    public const CACHE_KEY_LINKS = 'getFooterLinks';
     public const CACHE_KEY_SOCIAL_NETWORKS = 'getFooterSocialNetworks';
 
     protected $menuItemRepository;
@@ -64,13 +63,19 @@ class FooterRuntime implements RuntimeExtensionInterface
             $links[$index]->getLink();
     }
 
+    public static function generateFooterLegalCacheKey(string $locale): string
+    {
+        return self::CACHE_KEY_LEGALS . '-' . $locale;
+    }
+
     public function getLegalsPages()
     {
         $request = $this->requestStack->getCurrentRequest();
 
         $cachedItem = $this->cache->getItem(
-            self::CACHE_KEY_LEGALS . ($request ? $request->getLocale() : '')
+            self::generateFooterLegalCacheKey($request ? $request->getLocale() : '')
         );
+
         if (!$cachedItem->isHit()) {
             /** @var SiteParameter $cookies */
             $cookies = $this->siteParameterRepository->findOneByKeyname('cookies-list');
@@ -88,12 +93,16 @@ class FooterRuntime implements RuntimeExtensionInterface
         return $cachedItem->get();
     }
 
+    public static function generateFooterSocialNetworksCacheKey(string $locale): string
+    {
+        return self::CACHE_KEY_SOCIAL_NETWORKS . '-' . $locale;
+    }
+
     public function getFooterSocialNetworks(): array
     {
         $request = $this->requestStack->getCurrentRequest();
-
         $cachedItem = $this->cache->getItem(
-            self::CACHE_KEY_SOCIAL_NETWORKS . ($request ? $request->getLocale() : '')
+            self::generateFooterSocialNetworksCacheKey($request ? $request->getLocale() : '')
         );
 
         if (!$cachedItem->isHit()) {

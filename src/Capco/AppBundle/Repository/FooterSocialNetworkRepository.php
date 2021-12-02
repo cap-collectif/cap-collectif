@@ -9,6 +9,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class FooterSocialNetworkRepository extends EntityRepository
 {
+    public static function getEnabledCacheKey()
+    {
+        return 'FooterSocialNetworkRepository_getEnabled_resultcache_';
+    }
+
     public function getEnabled(): array
     {
         $qb = $this->createQueryBuilder('s')
@@ -20,7 +25,7 @@ class FooterSocialNetworkRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->useResultCache(true, 60)
+            ->enableResultCache(60, self::getEnabledCacheKey())
             ->getArrayResult();
     }
 }

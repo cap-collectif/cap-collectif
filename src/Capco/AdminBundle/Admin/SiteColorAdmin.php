@@ -2,9 +2,10 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Capco\AppBundle\Repository\SiteColorRepository;
 
 class SiteColorAdmin extends AbstractAdmin
 {
@@ -28,6 +29,15 @@ class SiteColorAdmin extends AbstractAdmin
         }
 
         return parent::toString($object);
+    }
+
+    public function postUpdate($object)
+    {
+        $entityManager = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager');
+        $cacheDriver = $entityManager->getConfiguration()->getResultCacheImpl();
+        $cacheDriver->delete(SiteColorRepository::getValuesIfEnabledCacheKey());
     }
 
     protected function configureFormFields(FormMapper $formMapper)

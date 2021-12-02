@@ -28,6 +28,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
     private Manager $toggleManager;
     private SiteParameterRepository $siteParameterRepository;
     private RedisCache $cache;
+    private UpdateSiteParameterMutation $updateSiteParameterMutation;
 
     public function __construct(
         RedisCache $cache,
@@ -35,7 +36,8 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         EntityManagerInterface $em,
         MediaRepository $mediaRepository,
         SiteParameterRepository $siteParameterRepository,
-        Manager $toggleManager
+        Manager $toggleManager,
+        UpdateSiteParameterMutation $updateSiteParameterMutation
     ) {
         $this->siteImageRepository = $siteImageRepository;
         $this->mediaRepository = $mediaRepository;
@@ -43,6 +45,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         $this->siteParameterRepository = $siteParameterRepository;
         $this->toggleManager = $toggleManager;
         $this->cache = $cache;
+        $this->updateSiteParameterMutation = $updateSiteParameterMutation;
     }
 
     public function __invoke(Argument $input): array
@@ -85,6 +88,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
             );
         }
         $this->cleanOldTranslations($parameter, $newTranslations);
+        $this->updateSiteParameterMutation->invalidateCache($parameter);
 
         return $parameter;
     }
@@ -130,6 +134,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
             $this->cache->deleteItem(ParametersRuntime::CACHE_KEY . $locale);
         }
 
+        $this->updateSiteParameterMutation->invalidateCache($parameter);
         return $parameter;
     }
 
@@ -146,6 +151,9 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         $media = $mediaId ? $this->mediaRepository->find($mediaId) : null;
         $siteImage->setMedia($media);
         $siteImage->setIsEnabled(null !== $media);
+
+        $cacheDriver = $this->em->getConfiguration()->getResultCacheImpl();
+        $cacheDriver->delete(SiteImageRepository::getValuesIfEnabledCacheKey());
 
         return $media;
     }

@@ -95,14 +95,11 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
     public function isGrantedFusion(array $ids, ?User $viewer, string $accessType): bool
     {
-        $proposals = array_map(function($id) use ($viewer) {
+        $proposals = array_map(function ($id) use ($viewer) {
             return $this->getProposal($id, $viewer);
         }, $ids);
 
-        return $this->authorizationChecker->isGranted(
-            $accessType,
-            $proposals
-        );
+        return $this->authorizationChecker->isGranted($accessType, $proposals);
     }
 
     public function changeNotation(Argument $input, $user)
@@ -180,6 +177,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         }
 
         $this->em->flush();
+        $this->invalidateCache($proposal);
 
         return ['proposal' => $proposal];
     }
@@ -207,6 +205,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                 ])
             )
         );
+
+        $this->invalidateCache($proposal);
 
         // Synchronously index
         $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
@@ -257,6 +257,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             )
         );
 
+        $this->invalidateCache($proposal);
+
         // Synchronously index
         $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $this->indexer->finishBulk();
@@ -284,6 +286,9 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             \is_array($proposalId) ? $proposalId['id'] : $proposalId,
             $user
         );
+
+        $this->invalidateCache($proposal);
+
         // Synchronously index
         $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $this->indexer->finishBulk();
@@ -333,6 +338,9 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                 ])
             )
         );
+
+        $this->invalidateCache($proposal);
+
         // Synchronously index
         $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $this->indexer->finishBulk();
@@ -387,6 +395,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         }
 
         $this->em->flush();
+
+        $this->invalidateCache($proposal);
 
         // Synchronously index
         $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
@@ -501,6 +511,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             $this->proposalLikersDataLoader->invalidate($proposal);
         }
 
+        $this->invalidateCache($proposal);
+
         $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $this->indexer->finishBulk();
 
@@ -593,6 +605,12 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         }
 
         return $values;
+    }
+
+    public function invalidateCache(Proposal $proposal): void
+    {
+        $cacheDriver = $this->em->getConfiguration()->getResultCacheImpl();
+        $cacheDriver->delete(ProposalRepository::getOneBySlugCacheKey($proposal->getSlug()));
     }
 
     private function shouldBeDraft(

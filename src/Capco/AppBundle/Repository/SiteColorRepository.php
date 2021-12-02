@@ -4,11 +4,13 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-/**
- * SiteParameterRepository.
- */
 class SiteColorRepository extends EntityRepository
 {
+    public static function getValuesIfEnabledCacheKey()
+    {
+        return 'SiteColorRepository_getValuesIfEnabled_resultcache_';
+    }
+
     public function getValuesIfEnabled()
     {
         return $this->getEntityManager()
@@ -19,7 +21,7 @@ class SiteColorRepository extends EntityRepository
             ->groupBy('p.keyname')
             ->getQuery()
             ->useQueryCache(true)
-            ->useResultCache(true, 60)
+            ->enableResultCache(60, self::getValuesIfEnabledCacheKey())
             ->getResult();
     }
 }

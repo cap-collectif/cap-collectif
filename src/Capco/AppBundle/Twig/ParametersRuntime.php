@@ -68,13 +68,17 @@ class ParametersRuntime implements RuntimeExtensionInterface
         }, array_keys($flags));
     }
 
+    public static function getCacheKey(string $locale): string
+    {
+        return self::CACHE_KEY.$locale;
+    }
+
     public function getSiteParameters(): array
     {
         $request = $this->requestStack->getCurrentRequest();
         $defaultLocale = $this->siteParameterResolver->getDefaultLocale();
         $locale = $request ? $request->getLocale() : $defaultLocale;
-
-        $cachedItem = $this->cache->getItem(self::CACHE_KEY . $locale);
+        $cachedItem = $this->cache->getItem(self::getCacheKey($locale));
 
         if (!$cachedItem->isHit()) {
             $slug = strtolower($this->translator->trans('charter', [], 'CapcoAppBundle'));

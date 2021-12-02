@@ -2,11 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Capco\AppBundle\Repository\SiteImageRepository;
 
 class SiteImageAdmin extends AbstractAdmin
 {
@@ -29,6 +30,15 @@ class SiteImageAdmin extends AbstractAdmin
         }
 
         return parent::toString($object);
+    }
+
+    public function postUpdate($object)
+    {
+        $entityManager = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager');
+        $cacheDriver = $entityManager->getConfiguration()->getResultCacheImpl();
+        $cacheDriver->delete(SiteImageRepository::getValuesIfEnabledCacheKey());
     }
 
     // For mosaic view

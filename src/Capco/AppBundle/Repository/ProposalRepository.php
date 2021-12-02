@@ -51,6 +51,11 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public static function getOneBySlugCacheKey(string $id)
+    {
+        return 'SiteImageRepository_getValuesIfEnabled_resultcache_' . $id;
+    }
+
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -78,7 +83,7 @@ class ProposalRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->useResultCache(true, 60)
+            ->enableResultCache(60, self::getOneBySlugCacheKey($slug))
             ->getOneOrNullResult();
     }
 

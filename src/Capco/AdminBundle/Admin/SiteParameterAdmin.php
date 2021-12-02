@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation;
 
 class SiteParameterAdmin extends AbstractAdmin
 {
@@ -33,6 +34,16 @@ class SiteParameterAdmin extends AbstractAdmin
         }
 
         return parent::toString($object);
+    }
+
+    public function postPersist($object)
+    {
+        $this->getConfigurationPool()->getContainer()->get(UpdateSiteParameterMutation::class)->invalidateCache($object);
+    }
+
+    public function postUpdate($object)
+    {
+        $this->getConfigurationPool()->getContainer()->get(UpdateSiteParameterMutation::class)->invalidateCache($object);
     }
 
     protected function getHelpText(?string $text = null): ?string

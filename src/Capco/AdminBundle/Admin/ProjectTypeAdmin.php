@@ -2,11 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Capco\AppBundle\Repository\ProjectTypeRepository;
 
 class ProjectTypeAdmin extends AbstractAdmin
 {
@@ -22,6 +23,15 @@ class ProjectTypeAdmin extends AbstractAdmin
         unset($actions['delete']);
 
         return $actions;
+    }
+
+    public function postUpdate($object)
+    {
+        $entityManager = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager');
+        $cacheDriver = $entityManager->getConfiguration()->getResultCacheImpl();
+        $cacheDriver->delete(ProjectTypeRepository::findAllCacheKey());
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

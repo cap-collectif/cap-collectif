@@ -34,7 +34,7 @@ class MenuItemRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getParentItems($menu, string $env = null)
+    public function getParentItems($menu)
     {
         $qb = $this->createQueryBuilder('i')
             ->addSelect('page')
@@ -45,15 +45,10 @@ class MenuItemRepository extends EntityRepository
 
         $qb = $this->whereIsEnabled($qb);
 
-        if ('dev' !== $env || 'test' !== $env) {
-            return $qb
-                ->getQuery()
-                ->useQueryCache(true)
-                ->useResultCache(true, 60)
-                ->getResult();
-        }
-
-        return $qb->getQuery()->getResult();
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getResult();
     }
 
     public function getChildItems($menu)

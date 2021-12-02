@@ -33,6 +33,11 @@ class SiteImageRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
+    public static function getValuesIfEnabledCacheKey()
+    {
+        return 'SiteImageRepository_getValuesIfEnabled_resultcache_';
+    }
+
     public function getValuesIfEnabled()
     {
         return $this->getEntityManager()
@@ -44,7 +49,7 @@ class SiteImageRepository extends EntityRepository
             ->groupBy('p.keyname')
             ->getQuery()
             ->useQueryCache(true)
-            ->useResultCache(true, 60)
+            ->enableResultCache(60, self::getValuesIfEnabledCacheKey())
             ->getResult();
     }
 }

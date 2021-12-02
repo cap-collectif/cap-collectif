@@ -2,18 +2,21 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 
 class ProjectTypeRepository extends EntityRepository
 {
+    public static function findAllCacheKey()
+    {
+        return 'ProjectTypeRepository_findAll_resultcache_';
+    }
+
     public function findAll()
     {
         return $this->createQueryBuilder('p')
             ->getQuery()
             ->useQueryCache(true)
-            ->useResultCache(true, 60)
+            ->enableResultCache(60, self::findAllCacheKey())
             ->getArrayResult();
     }
 }

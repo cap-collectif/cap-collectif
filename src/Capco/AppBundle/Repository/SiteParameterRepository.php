@@ -13,6 +13,16 @@ class SiteParameterRepository extends EntityRepository
 {
     public const REGISTRATION_PAGE_CODE_KEYNAME = 'registration.customcode';
 
+    public static function getValuesIfEnabledCacheKey(string $locale): string
+    {
+        return 'SiteParameterRepository_getValuesIfEnabled_resultcache_' . $locale;
+    }
+
+    public static function getValueCacheKey(string $locale, string $keyname): string
+    {
+        return 'SiteParameterRepository_getValue_resultcache_' . $locale . $keyname;
+    }
+
     public function getValuesIfEnabled(string $locale): array
     {
         return $this->getEntityManager()
@@ -25,7 +35,7 @@ class SiteParameterRepository extends EntityRepository
             ->setParameter('locale', $locale)
             ->getQuery()
             ->useQueryCache(true)
-            ->useResultCache(true, 60)
+            ->enableResultCache(60, self::getValuesIfEnabledCacheKey($locale))
             ->getResult();
     }
 
@@ -38,7 +48,7 @@ class SiteParameterRepository extends EntityRepository
             ->andWhere('p.keyname = :keyname')
             ->setParameter('keyname', $keyname);
 
-        if (in_array($keyname, SiteParameter::NOT_TRANSLATABLE)) {
+        if (\in_array($keyname, SiteParameter::NOT_TRANSLATABLE)) {
             $qb->select('p.value');
         } else {
             $qb->select('t.value')
@@ -49,7 +59,7 @@ class SiteParameterRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->useResultCache(true, 60)
+            ->enableResultCache(60, self::getValueCacheKey($locale, $keyname))
             ->getSingleResult()['value'];
     }
 }

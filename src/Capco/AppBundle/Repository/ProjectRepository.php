@@ -61,6 +61,11 @@ class ProjectRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public static function getOneWithoutVisibilityCacheKey(string $slug): string
+    {
+        return 'ProjectRepository_getOneWithoutVisibility_resultcache_' . $slug;
+    }
+
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -81,7 +86,7 @@ class ProjectRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->useResultCache(true, 60)
+            ->enableResultCache(60, self::getOneWithoutVisibilityCacheKey($slug))
             ->getOneOrNullResult();
     }
 
@@ -174,11 +179,11 @@ class ProjectRepository extends EntityRepository
     public function getSearchResults(
         int $nbByPage = 8,
         int $page = 1,
-            $theme = null,
-            $sort = null,
-            $term = null,
-            $type = null,
-            $viewer = null
+        $theme = null,
+        $sort = null,
+        $term = null,
+        $type = null,
+        $viewer = null
     ): Paginator {
         if ($page < 1) {
             throw new \InvalidArgumentException(

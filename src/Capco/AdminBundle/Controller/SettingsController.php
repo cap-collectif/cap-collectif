@@ -115,8 +115,8 @@ class SettingsController extends Controller
     /**
      * @Route("/admin/features/{toggle}/switch", name="capco_admin_feature_switch")
      * @Template()
-     *
-     * @param mixed $toggle
+     * 
+     * TODO this is a security breach (GET request), delete me when we rebuild features page.
      */
     public function switchToggleAction(string $toggle): RedirectResponse
     {

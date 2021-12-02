@@ -105,9 +105,7 @@ class DefaultController extends Controller
             return $this->createNotFoundException();
         }
 
-        return [
-            'cookiesList' => html_entity_decode($cookiesList),
-        ];
+        return [];
     }
 
     /**

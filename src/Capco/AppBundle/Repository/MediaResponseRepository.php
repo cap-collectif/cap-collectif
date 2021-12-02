@@ -70,7 +70,7 @@ class MediaResponseRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->useQueryCache(true); // ->useResultCache(true, 60)
+            ->useQueryCache(true);
 
         return new Paginator($query);
     }

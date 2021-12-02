@@ -69,7 +69,7 @@ class ValueResponseRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->useQueryCache(true); // ->useResultCache(true, 60)
+            ->useQueryCache(true);
 
         return new Paginator($query);
     }
@@ -89,7 +89,7 @@ class ValueResponseRepository extends EntityRepository
         }
         $qb->setParameter('question', $question);
 
-        $query = $qb->getQuery()->useQueryCache(true); // ->useResultCache(true, 60)
+        $query = $qb->getQuery()->useQueryCache(true);
 
         return $query->getResult();
     }

@@ -9,25 +9,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 class CollectStepRepository extends AbstractStepRepository
 {
     /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function getOneBySlug(string $slug): ?CollectStep
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('proposalForm', 'district')
-            ->leftJoin('cs.proposalForm', 'proposalForm')
-            ->leftJoin('proposalForm.districts', 'district')
-            ->andWhere('cs.slug = :slug')
-            ->setParameter('slug', $slug);
-
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->useResultCache(true, 60)
-            ->getOneOrNullResult();
-    }
-
-    /**
      * Get last enabled collect steps.
      *
      * @param int $limit

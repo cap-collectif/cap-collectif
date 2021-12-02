@@ -2,13 +2,14 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\FooterSocialNetwork;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Capco\AppBundle\Entity\FooterSocialNetwork;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
 
 class FooterSocialNetworkAdmin extends AbstractAdmin
 {
@@ -17,6 +18,15 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
+
+    public function postUpdate($object)
+    {
+        $entityManager = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager');
+        $cacheDriver = $entityManager->getConfiguration()->getResultCacheImpl();
+        $cacheDriver->delete(FooterSocialNetworkRepository::getEnabledCacheKey());
+    }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
