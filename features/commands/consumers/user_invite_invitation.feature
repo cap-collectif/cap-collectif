@@ -6,7 +6,7 @@ Scenario: A user invitation is asynchronous
   Given I publish in "user_invite_invitation" with message below:
   """
   {
-    "id": "remInvitation"
+    "id": "remEmailMessage"
   }
   """
   And I consume 1 messages in "user_invite_invitation"

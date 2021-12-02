@@ -40,3 +40,19 @@ Capco\AppBundle\Entity\UserInvite:
         isAdmin: false
         isProjectAdmin: false
         groups: ['@group1']
+    acceptedInvitation:
+        id: 'acceptedInvitation'
+        createdAt: <(new \DateTime('2020-03-04 00:00:51'))>
+        email: 'theo@cap-collectif.com'
+        expiresAt: <(new \DateTime('2030-01-01 00:00:10'))>
+        isAdmin: true
+        isProjectAdmin: true
+        token: 'acceptedtoken'
+    failedInvitation:
+        id: 'failedInvitation'
+        createdAt: <(new \DateTime('2020-03-04 00:00:51'))>
+        email: 'failed@invitation.com'
+        expiresAt: <(new \DateTime('2030-01-01 00:00:10'))>
+        isAdmin: false
+        isProjectAdmin: false
+        token: 'failedtoken'

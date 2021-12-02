@@ -3,6 +3,6 @@ CancelUserInvitationsInput:
     config:
         description: 'Input of cancelUserInvitations mutation'
         fields:
-            invitationsIds:
-                type: '[ID!]!'
+            invitationsEmails:
+                type: '[String!]!'
                 description: 'The list of invitations to cancel'

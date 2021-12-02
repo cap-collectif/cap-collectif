@@ -37,5 +37,5 @@ services:
     Capco\AppBundle\Notifier\QuestionnaireReplyNotifier:
         public: true
 
-    Capco\AppBundle\Notifier\UserInviteNotifier:
+    Capco\AppBundle\Notifier\UserInviteEmailMessageNotifier:
         public: true

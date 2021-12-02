@@ -4,6 +4,9 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Entity\UserInviteEmailMessage;
+use Capco\AppBundle\Mailer\Transport\MailjetTransport;
+use Capco\AppBundle\Mailer\Transport\MandrillTransport;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -43,7 +46,11 @@ class CheckUserInviteStatusCommand extends Command
             ($optionStatus = $input->getOption('status')) &&
             !\in_array(
                 $optionStatus,
-                [UserInvite::WAITING_SENDING, UserInvite::SENT, UserInvite::SEND_FAILURE],
+                [
+                    UserInviteEmailMessage::WAITING_SENDING,
+                    UserInviteEmailMessage::SENT,
+                    UserInviteEmailMessage::SEND_FAILURE,
+                ],
                 true
             )
         ) {
@@ -58,12 +65,17 @@ class CheckUserInviteStatusCommand extends Command
             $output->writeln(
                 '<info>Re-publishing invitation with id : ' . $invitation->getId() . '</info>'
             );
+            /** @var UserInviteEmailMessage $lastEmailMessage */
+            $lastEmailMessage = $invitation->getEmailMessages()->last();
+            $usedProviderClass = $lastEmailMessage->getMailjetId()
+                ? MailjetTransport::class
+                : MandrillTransport::class;
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::USER_INVITE_CHECK,
                 new Message(
                     json_encode([
-                        'id' => $invitation->getId(),
-                        'provider' => $invitation->getProvider(),
+                        'id' => $lastEmailMessage->getId(),
+                        'provider' => $usedProviderClass,
                     ])
                 )
             );

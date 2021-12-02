@@ -18,7 +18,7 @@ type VariantIcon = {|
 
 type InfoMessageTitleProps = {|
   ...FlexProps,
-  +children: string,
+  +children: React.Node,
   +variant?: Variant,
   +withIcon?: boolean,
 |};

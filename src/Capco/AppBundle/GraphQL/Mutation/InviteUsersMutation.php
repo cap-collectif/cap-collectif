@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Repository\GroupRepository;
@@ -19,7 +20,6 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
 class InviteUsersMutation implements MutationInterface
 {
-    private const EXPIRES_AT_PERIOD = '+ 7 days';
     private const BATCH_SIZE = 800;
 
     private TokenGeneratorInterface $tokenGenerator;
@@ -95,7 +95,8 @@ class InviteUsersMutation implements MutationInterface
                 ->setToken($this->tokenGenerator->generateToken())
                 ->setMessage($message)
                 ->setRedirectionUrl($redirectionUrl)
-                ->setExpiresAt((new \DateTimeImmutable())->modify(self::EXPIRES_AT_PERIOD));
+                ->setExpiresAt((new \DateTimeImmutable())->modify(UserInvite::EXPIRES_AT_PERIOD));
+            $invitation->addEmailMessage(new UserInviteEmailMessage($invitation));
 
             foreach ($groupEntities as $groupEntity) {
                 $invitation->addGroup($groupEntity);
@@ -117,7 +118,7 @@ class InviteUsersMutation implements MutationInterface
             $userInvites = $this->userInviteRepository->findBy(['email' => $toUpdateEmails]);
             foreach ($userInvites as $userInvite) {
                 $userInvite
-                    ->setExpiresAt(new \DateTimeImmutable(self::EXPIRES_AT_PERIOD))
+                    ->setExpiresAt(new \DateTimeImmutable(UserInvite::EXPIRES_AT_PERIOD))
                     ->setIsAdmin($isAdmin)
                     ->setIsProjectAdmin($isProjectAdmin)
                     ->setGroups(new ArrayCollection($groupEntities))

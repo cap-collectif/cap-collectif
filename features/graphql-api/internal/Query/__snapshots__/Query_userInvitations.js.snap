@@ -6,6 +6,22 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "email": "theo@cap-collectif.com",
+          "id": "VXNlckludml0ZTphY2NlcHRlZEludml0YXRpb24=",
+          "isAdmin": true,
+          "isProjectAdmin": true,
+        },
+      },
+      Object {
+        "node": Object {
+          "email": "failed@invitation.com",
+          "id": "VXNlckludml0ZTpmYWlsZWRJbnZpdGF0aW9u",
+          "isAdmin": false,
+          "isProjectAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
           "email": "user-invited-in-group@gmail.com",
           "id": "VXNlckludml0ZTp1c2VyR3JvdXBJbnZpdGF0aW9u",
           "isAdmin": false,

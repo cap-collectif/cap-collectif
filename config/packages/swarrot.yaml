@@ -651,7 +651,7 @@ swarrot:
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'user_invite_invitation_retry_%%attempt%%'
         user_invite_check:
-            processor: Capco\AppBundle\Processor\UserInvite\UserInviteStatusCheckProcessor
+            processor: Capco\AppBundle\Processor\UserInvite\UserInviteEmailMessageStatusCheckProcessor
             middleware_stack:
                 - configurator: swarrot.processor.signal_handler
                 - configurator: swarrot.processor.max_execution_time

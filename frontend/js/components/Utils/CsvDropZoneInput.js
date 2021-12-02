@@ -78,17 +78,17 @@ export const CsvDropZoneInput = ({
                 <Col className="p-5" xs={12}>
                   <InfoMessage variant="danger">
                     <InfoMessage.Title withIcon>
-                      {intl.formatMessage(
-                        { id: 'csv-bad-lines-error' },
-                        {
+                      <FormattedHTMLMessage
+                        id="csv-bad-lines-error"
+                        values={{
                           num: input.value.invalidLines.length,
                           lines:
                             input.value.invalidLines.length > 1
                               ? input.value.invalidLines.slice(0, -1).toString()
                               : input.value.invalidLines.toString(),
                           last: input.value.invalidLines.pop(),
-                        },
-                      )}
+                        }}
+                      />
                     </InfoMessage.Title>
                   </InfoMessage>
                 </Col>

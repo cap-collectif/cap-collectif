@@ -1,0 +1,57 @@
+Capco\AppBundle\Entity\UserInviteEmailMessage:
+    remEmailMessage:
+        __construct: ['@remInvitation']
+        id: 'remEmailMessage'
+        createdAt: <(new \DateTime('2020-03-01 00:00:51'))>
+        internalStatus: 'waiting_sending'
+        mailerId: 'message1'
+        mailerType: 'mandrill'
+    expiredEmailMessage:
+        __construct: ['@expiredInvitation']
+        id: 'expiredEmailMessage'
+        createdAt: <(new \DateTime('2020-03-01 00:00:51'))>
+        internalStatus: 'sent'
+        mailerId: 'message2'
+        mailerType: 'mandrill'
+    projectAdminEmailMessage:
+        __construct: ['@projectAdminInvitation']
+        id: 'projectAdminEmailMessage'
+        createdAt: <(new \DateTime('2020-03-01 00:00:51'))>
+        internalStatus: 'waiting_sending'
+        mailerId: 'message3'
+        mailerType: 'mandrill'
+    userGroupEmailMessage:
+        __construct: ['@userGroupInvitation']
+        id: 'userGroupEmailMessage'
+        createdAt: <(new \DateTime('2020-03-01 00:00:51'))>
+        internalStatus: 'waiting_sending'
+        mailerId: 'message4'
+        mailerType: 'mandrill'
+    acceptedEmailMessage:
+        __construct: ['@acceptedInvitation']
+        id: 'acceptedInvitation2'
+        createdAt: <(new \DateTime('2020-03-01 00:00:51'))>
+        internalStatus: 'sent'
+        mailerId: 'message5'
+        mailerType: 'mandrill'
+    expiredEmailMessage2:
+        __construct: ['@acceptedInvitation']
+        id: 'acceptedInvitation1'
+        createdAt: <(new \DateTime('2019-03-01 00:00:51'))>
+        internalStatus: 'sent'
+        mailerId: 'message6'
+        mailerType: 'mandrill'
+    failedEmailMessage:
+        __construct: ['@failedInvitation']
+        id: 'failedInvitation'
+        createdAt: <(new \DateTime('2020-03-01 00:00:51'))>
+        internalStatus: 'send_failure'
+        mailerId: 'message7'
+        mailerType: 'mandrill'
+    ramEmailMessage:
+        __construct: ['@remInvitation']
+        id: 'ramEmailMessage'
+        createdAt: <(new \DateTime('2020-03-02 00:00:51'))>
+        internalStatus: 'waiting_sending'
+        mailerId: 'message8'
+        mailerType: 'mandrill'

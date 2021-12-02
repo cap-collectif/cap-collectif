@@ -1370,7 +1370,7 @@ type CancelEmailingCampaignPayload {
 
 input CancelUserInvitationsInput {
   """The list of invitations to cancel"""
-  invitationsIds: [ID!]!
+  invitationsEmails: [String!]!
   clientMutationId: String
 }
 
@@ -7017,6 +7017,9 @@ type Mutation {
   """Cancel user invitation in the application"""
   cancelUserInvitations(input: CancelUserInvitationsInput!): CancelUserInvitationsPayload
 
+  """Relaunch invitations for the given users."""
+  relaunchUserInvitations(input: RelaunchUserInvitationsInput!): RelaunchUserInvitationsPayload
+
   """Reset password"""
   resetPassword(input: ResetPasswordInput!): ResetPasswordPayload
   removeSso(input: RemoveSsoInput!): RemoveSsoPayload
@@ -11477,6 +11480,18 @@ type RegistrationFormTranslation {
   bottomText: String
 }
 
+input RelaunchUserInvitationsInput {
+  """emails of existing invitations to relaunch."""
+  emails: [String!]!
+  clientMutationId: String
+}
+
+type RelaunchUserInvitationsPayload {
+  """The relaunched invitations edge"""
+  relaunchedInvitations: [UserInviteEdge!]!
+  clientMutationId: String
+}
+
 type RemainingTime {
   """Number of days remaining"""
   days: Int
@@ -15753,6 +15768,9 @@ type UserInvite {
 
   """The groups associated to the invite"""
   groups: GroupConnection!
+
+  """Number of relaunch for this invitation."""
+  relaunchCount: Int!
 }
 
 """A connection to a list of items."""

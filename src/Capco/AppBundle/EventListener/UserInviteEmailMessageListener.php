@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 
-class UserInviteListener
+class UserInviteEmailMessageListener
 {
     private Publisher $publisher;
     private LoggerInterface $logger;
@@ -20,7 +20,7 @@ class UserInviteListener
         $this->logger = $logger;
     }
 
-    public function postPersist(UserInvite $entity, LifecycleEventArgs $args): void
+    public function postPersist(UserInviteEmailMessage $entity, LifecycleEventArgs $args): void
     {
         try {
             $this->publisher->publish(

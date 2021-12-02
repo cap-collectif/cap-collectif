@@ -8,6 +8,6 @@ class EnumSSOEnvironmentType extends AbstractEnumType
     public const TESTING = 'TESTING';
     public const PRODUCTION = 'PRODUCTION';
 
-    protected $name = 'enum_sso_environment';
-    protected $values = [self::TESTING, self::PRODUCTION, self::NONE];
+    protected string $name = 'enum_sso_environment';
+    protected array $values = [self::TESTING, self::PRODUCTION, self::NONE];
 }

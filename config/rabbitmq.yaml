@@ -195,9 +195,8 @@
             durable: true
             # In case of a large amounts of sent emails,
             # some of them can be queued by the provider,
-            # in order to avoid overloading the queue we set a delay of 5 seconds.
-            delay: 5000
-            retries: [25, 645, 1225]
+            # so we set multiples retries with bigger interval each time.
+            retries: [600, 1800, 3600, 43200, 86400, 172800]
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: user_invite_check

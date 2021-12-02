@@ -13,10 +13,7 @@ const CancelUserInvitationsMutation = /* GraphQL */ `
 
 describe('Internal|cancelUserInvitations mutation access control', () => {
   const input = {
-    invitationsIds: [
-      toGlobalId('UserInvite', "Blah blah blah d'la pookie"),
-      toGlobalId('UserInvite', "Ferme la porte, t'as la pookie dans l'side"),
-    ],
+    invitationsEmails: ['blablapookie@pookie.com', 'danslside@pookie.com'],
   };
   it('should not throw an error when the flag is activated and the user has ROLE_ADMIN', async () => {
     expect.assertions(1);
@@ -35,7 +32,7 @@ describe('Internal|cancelUserInvitations mutation', () => {
       CancelUserInvitationsMutation,
       {
         input: {
-          invitationsIds: [remInvitationId, ramInvitationId],
+          invitationsEmails: ['rem@chan.com', 'ram@chan.com'],
         },
       },
       'internal_super_admin',

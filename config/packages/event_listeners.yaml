@@ -90,7 +90,7 @@ services:
         tags:
             - kernel.event_subscriber
 
-    Capco\AppBundle\EventListener\UserInviteListener:
+    Capco\AppBundle\EventListener\UserInviteEmailMessageListener:
         tags:
             - { name: doctrine.orm.entity_listener, lazy: true }
 

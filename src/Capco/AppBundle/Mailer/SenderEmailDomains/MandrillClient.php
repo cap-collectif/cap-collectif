@@ -10,6 +10,11 @@ use Psr\Http\Message\ResponseInterface;
 class MandrillClient
 {
     public const BASE_URL = 'https://mandrillapp.com/api/1.0/';
+
+    // https://mailchimp.com/developer/transactional/api/messages/get-message-info/
+    public const STATUS_SENT = 'sent';
+    public const STATUS_QUEUED = 'queued';
+
     public Client $client;
 
     private string $key;
@@ -34,7 +39,9 @@ class MandrillClient
 
     public function getSenderEmailDomain(SenderEmailDomain $domain): ?SenderEmailDomain
     {
-        $data = json_decode($this->post('senders/check-domain', ['domain' => $domain->getValue()])->getBody());
+        $data = json_decode(
+            $this->post('senders/check-domain', ['domain' => $domain->getValue()])->getBody()
+        );
         $serviceDomain = clone $domain;
         $serviceDomain->setDkimValidation($data->dkim->valid);
         $serviceDomain->setSpfValidation($data->spf->valid);

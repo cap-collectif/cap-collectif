@@ -30,8 +30,8 @@ class EventReviewRefusedReasonType extends AbstractEnumType
         self::OFF_TOPIC => 'reporting.status.off_topic',
     ];
 
-    protected $name = 'enum_event_review_refused_reason';
-    protected $values = [
+    protected string $name = 'enum_event_review_refused_reason';
+    protected array $values = [
         self::SEX,
         self::OFFENDING,
         self::SPAM,

@@ -1,0 +1,8 @@
+RelaunchUserInvitationsInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of relaunchUserInvitations mutation'
+        fields:
+            emails:
+                type: '[String!]!'
+                description: 'emails of existing invitations to relaunch.'

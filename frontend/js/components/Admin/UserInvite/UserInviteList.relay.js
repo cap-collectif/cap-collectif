@@ -38,6 +38,7 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
           isAdmin
           isProjectAdmin
           status
+          relaunchCount
           groups {
             edges {
               node {

@@ -14,6 +14,7 @@ doctrine:
             enum_event_review_refused_reason: Capco\AppBundle\DBAL\Enum\EventReviewRefusedReasonType
             enum_event_review_status: Capco\AppBundle\DBAL\Enum\EventReviewStatusType
             enum_proposal_revision_state: Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType
+            enum_mailer_type: Capco\AppBundle\DBAL\Enum\MailerType
         mapping_types:
             enum: string
         profiling_collect_schema_errors: false
@@ -33,6 +34,7 @@ doctrine:
                 RAND: Capco\AppBundle\DQL\RandFunction
             string_functions:
                 FIELD: Capco\AppBundle\DQL\FieldFunction
+                FIRST: Capco\AppBundle\DQL\FirstFunction
         mappings:
             tree:
                 type: annotation
@@ -49,4 +51,4 @@ doctrine:
                 type: annotation
                 alias: Gedmo
                 prefix: Gedmo\Translatable\Entity
-                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/src/Translatable/Entity/MappedSuperclass"
+                dir: '%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/src/Translatable/Entity/MappedSuperclass'

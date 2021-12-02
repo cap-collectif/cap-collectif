@@ -4,8 +4,10 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\Enum\UserInviteStatus;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -22,19 +24,7 @@ class UserInviteRepository extends EntityRepository
     public function findPaginated(?int $limit, ?int $offset, ?string $term, ?string $status): array
     {
         $qb = $this->getPaginated($limit, $offset);
-        $qb->leftJoin('ui.groups', 'uig');
-        if (null !== $term) {
-            $qb->where(
-                $qb
-                    ->expr()
-                    ->orX(
-                        $qb->expr()->like('ui.email', $qb->expr()->literal('%' . $term . '%')),
-                        $qb->expr()->like('uig.title', $qb->expr()->literal('%' . $term . '%'))
-                    )
-            );
-        }
-
-        $qb = $this->filterByStatus($qb, $status);
+        $qb = $this->filterByStatus($qb, $status, $term);
         $qb->addOrderBy('ui.createdAt', 'DESC');
 
         return $qb->getQuery()->getResult();
@@ -63,26 +53,28 @@ class UserInviteRepository extends EntityRepository
     }
 
     public function getNotExpiredInvitationsByStatus(
-        ?string $status = UserInvite::WAITING_SENDING
+        ?string $status = UserInviteEmailMessage::WAITING_SENDING
     ): array {
         $qb = $this->createQueryBuilder('ui');
-        $qb->andWhere(
-            $qb
-                ->expr()
-                ->andX(
-                    $qb->expr()->eq('ui.internalStatus', ':status'),
-                    $qb->expr()->gt('ui.expiresAt', ':now'),
-                    $qb
-                        ->expr()
-                        ->orX(
-                            $qb->expr()->isNotNull('ui.mailjetId'),
-                            $qb->expr()->isNotNull('ui.mandrillId')
-                        )
-                )
-        )->setParameters([
-            ':now' => new \DateTimeImmutable(),
-            ':status' => $status,
-        ]);
+        $qb->leftJoin(
+            'ui.emailMessages',
+            'em',
+            Join::WITH,
+            'em = FIRST(SELECT uiem FROM CapcoAppBundle:UserInviteEmailMessage uiem WHERE uiem.invitation = ui.id ORDER BY uiem.createdAt DESC)'
+        )
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->andX(
+                        $qb->expr()->gt('ui.expiresAt', ':now'),
+                        $qb->expr()->isNotNull('em.mailerId'),
+                        $qb->expr()->eq('em.internalStatus', ':status')
+                    )
+            )
+            ->setParameters([
+                ':now' => new \DateTimeImmutable(),
+                ':status' => $status,
+            ]);
 
         return $qb->getQuery()->getResult();
     }
@@ -147,35 +139,49 @@ class UserInviteRepository extends EntityRepository
             ->getResult();
     }
 
-    public function findOneByStatusSentOrNotExpired(string $email): ?UserInvite
+    public function getExpiredInvitationByEmails(array $emails): array
     {
         $qb = $this->createQueryBuilder('ui');
-        $qb->andWhere($qb->expr()->eq('ui.email', ':email'))
-            ->andWhere(
-                $qb
-                    ->expr()
-                    ->andX(
-                        $qb
-                            ->expr()
-                            ->orX(
-                                $qb->expr()->eq('ui.internalStatus', ':sent'),
-                                $qb->expr()->eq('ui.internalStatus', ':pending')
-                            ),
-                        $qb->expr()->gte('ui.expiresAt', ':now')
-                    )
-            )
-            ->setParameters([
-                ':email' => $email,
-                ':sent' => UserInvite::SENT,
-                ':pending' => UserInvite::WAITING_SENDING,
-                ':now' => new \DateTimeImmutable(),
-            ]);
+        $qb->andWhere(
+            $qb
+                ->expr()
+                ->andX(
+                    $qb->expr()->in('ui.email', ':emails'),
+                    $qb->expr()->lte('ui.expiresAt', ':now')
+                )
+        )->setParameters([
+            ':emails' => $emails,
+            ':now' => new \DateTimeImmutable(),
+        ]);
 
-        return $qb->getQuery()->getOneOrNullResult();
+        return $qb->getQuery()->getResult();
     }
 
-    private function filterByStatus(QueryBuilder $qb, ?string $status): QueryBuilder
-    {
+    private function filterByStatus(
+        QueryBuilder $qb,
+        ?string $status = null,
+        ?string $term = null
+    ): QueryBuilder {
+        // We need to get the internal status value from the last UserInviteEmailMessage related to each UserInvite.
+        // LIMIT 1 is set by default.
+        $qb->leftJoin(
+            'ui.emailMessages',
+            'em',
+            Join::WITH,
+            'em = FIRST(SELECT uiem FROM CapcoAppBundle:UserInviteEmailMessage uiem WHERE uiem.invitation = ui.id ORDER BY uiem.createdAt DESC)'
+        );
+        $qb->leftJoin('ui.groups', 'uig');
+        if (null !== $term) {
+            $qb->where(
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb->expr()->like('ui.email', $qb->expr()->literal('%' . $term . '%')),
+                        $qb->expr()->like('uig.title', $qb->expr()->literal('%' . $term . '%'))
+                    )
+            );
+        }
+
         if (UserInviteStatus::EXPIRED === $status) {
             $qb->andWhere(
                 $qb
@@ -188,14 +194,14 @@ class UserInviteRepository extends EntityRepository
         }
 
         if (UserInviteStatus::FAILED === $status) {
-            $qb->andWhere($qb->expr()->eq('ui.internalStatus', ':failed'))->setParameter(
+            $qb->andWhere($qb->expr()->eq('em.internalStatus', ':failed'))->setParameter(
                 ':failed',
-                UserInvite::SEND_FAILURE
+                UserInviteEmailMessage::SEND_FAILURE
             );
         }
 
         if (UserInviteStatus::PENDING === $status) {
-            $qb->leftJoin('CapcoUserBundle:User', 'u', 'WITH', 'u.email = ui.email');
+            $qb->leftJoin('CapcoUserBundle:User', 'u', Join::WITH, 'u.email = ui.email');
             $qb->andWhere($qb->expr()->isNull('u'));
             $qb->andWhere(
                 $qb
@@ -204,8 +210,8 @@ class UserInviteRepository extends EntityRepository
                         $qb
                             ->expr()
                             ->orX(
-                                $qb->expr()->eq('ui.internalStatus', ':pending'),
-                                $qb->expr()->eq('ui.internalStatus', ':sent')
+                                $qb->expr()->eq('em.internalStatus', ':pending'),
+                                $qb->expr()->eq('em.internalStatus', ':sent')
                             ),
                         $qb
                             ->expr()
@@ -217,12 +223,12 @@ class UserInviteRepository extends EntityRepository
                             )
                     )
             )
-                ->setParameter(':pending', UserInvite::WAITING_SENDING)
-                ->setParameter(':sent', UserInvite::SENT);
+                ->setParameter(':pending', UserInviteEmailMessage::WAITING_SENDING)
+                ->setParameter(':sent', UserInviteEmailMessage::SENT);
         }
 
         if (UserInviteStatus::ACCEPTED === $status) {
-            $qb->innerJoin('CapcoUserBundle:User', 'u', 'WITH', 'u.email = ui.email');
+            $qb->innerJoin('CapcoUserBundle:User', 'u', Join::WITH, 'u.email = ui.email');
         }
 
         return $qb;

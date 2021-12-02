@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Repository\UserInviteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -11,18 +12,21 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class CancelUserInvitationsMutation implements MutationInterface
 {
     private EntityManagerInterface $em;
+    private UserInviteRepository $repository;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, UserInviteRepository $repository)
     {
         $this->em = $em;
+        $this->repository = $repository;
     }
 
     public function __invoke(Argument $args): array
     {
-        $invitationsIds = $args->offsetGet('invitationsIds');
-        $decodedInvitationsIds = array_map(
-            fn(string $globalId) => GlobalId::fromGlobalId($globalId)['id'],
-            $invitationsIds
+        $invitationsEmails = $args->offsetGet('invitationsEmails');
+        $invitations = $this->repository->findByEmails($invitationsEmails);
+        $invitationsIds = array_map(
+            fn(UserInvite $invitation) => $invitation->getId(),
+            $invitations
         );
 
         $entity = UserInvite::class;
@@ -33,9 +37,14 @@ DELETE ${entity} ui WHERE ui.id IN (:ids)
 DQL
             )
             ->execute([
-                'ids' => $decodedInvitationsIds,
+                'ids' => $invitationsIds,
             ]);
 
-        return ['cancelledInvitationsIds' => $invitationsIds];
+        $encodedInvitationsIds = array_map(
+            fn(string $invitationId) => GlobalId::toGlobalId('UserInvite', $invitationId),
+            $invitationsIds
+        );
+
+        return ['cancelledInvitationsIds' => $encodedInvitationsIds];
     }
 }

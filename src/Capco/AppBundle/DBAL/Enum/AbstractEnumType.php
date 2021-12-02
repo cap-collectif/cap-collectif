@@ -7,10 +7,10 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 abstract class AbstractEnumType extends Type
 {
-    protected $name;
-    protected $values = [];
+    protected string $name;
+    protected array $values = [];
 
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         $array_map = [];
         foreach ($this->values as $key => $val) {

@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Mailer\Transport\MailjetTransport;
-use Capco\AppBundle\Mailer\Transport\MandrillTransport;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -13,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=UserInviteRepository::class)
- * @ORM\EntityListeners({"Capco\AppBundle\EventListener\UserInviteListener"})
  * @ORM\Table(name="user_invite")
  */
 class UserInvite
@@ -21,9 +18,7 @@ class UserInvite
     use TimestampableTrait;
     use UuidTrait;
 
-    public const SEND_FAILURE = 'send_failure';
-    public const WAITING_SENDING = 'waiting_sending';
-    public const SENT = 'sent';
+    public const EXPIRES_AT_PERIOD = '+ 7 days';
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -60,21 +55,6 @@ class UserInvite
     private $groups;
 
     /**
-     * @ORM\Column(name="internal_status", type="string", nullable=false)
-     */
-    private string $internalStatus = self::WAITING_SENDING;
-
-    /**
-     * @ORM\Column(name="mailjet_id", type="string", nullable=true)
-     */
-    private ?string $mailjetId;
-
-    /**
-     * @ORM\Column(name="mandrill_id", type="string", nullable=true)
-     */
-    private ?string $mandrillId;
-
-    /**
      * @ORM\Column(type="string", length=500 ,nullable=true, name="message")
      */
     private ?string $message;
@@ -84,9 +64,15 @@ class UserInvite
      */
     private ?string $redirectionUrl;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\UserInviteEmailMessage", mappedBy="invitation", cascade={"persist"})
+     */
+    private $emailMessages;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
+        $this->emailMessages = new ArrayCollection();
     }
 
     public function getEmail(): ?string
@@ -185,42 +171,6 @@ class UserInvite
         return $this;
     }
 
-    public function getInternalStatus(): string
-    {
-        return $this->internalStatus;
-    }
-
-    public function setInternalStatus(string $internalStatus): self
-    {
-        $this->internalStatus = $internalStatus;
-
-        return $this;
-    }
-
-    public function getMailjetId(): ?string
-    {
-        return $this->mailjetId;
-    }
-
-    public function setMailjetId(string $mailjetId): self
-    {
-        $this->mailjetId = $mailjetId;
-
-        return $this;
-    }
-
-    public function getMandrillId(): ?string
-    {
-        return $this->mandrillId;
-    }
-
-    public function setMandrillId(?string $mandrillId): self
-    {
-        $this->mandrillId = $mandrillId;
-
-        return $this;
-    }
-
     public function getMessage(): ?string
     {
         return $this->message;
@@ -245,16 +195,24 @@ class UserInvite
         return $this;
     }
 
-    public function getProvider(): ?string
+    public function getEmailMessages(): Collection
     {
-        if ($this->mailjetId) {
-            return MailjetTransport::class;
+        return $this->emailMessages;
+    }
+
+    public function getRelaunchCount(): int
+    {
+        // We do not count the first email message as its count for
+        // the first message sent when the invitation is created
+        return $this->getEmailMessages()->count() - 1;
+    }
+
+    public function addEmailMessage(UserInviteEmailMessage $emailMessage): self
+    {
+        if (!$this->groups->contains($emailMessage)) {
+            $this->emailMessages[] = $emailMessage;
         }
 
-        if ($this->mandrillId) {
-            return MandrillTransport::class;
-        }
-
-        return null;
+        return $this;
     }
 }

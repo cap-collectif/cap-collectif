@@ -21,6 +21,6 @@ class EventReviewStatusType extends AbstractEnumType
         self::DELETED => 'global.deleted',
     ];
 
-    protected $name = 'enum_event_review_status';
-    protected $values = [self::AWAITING, self::REFUSED, self::APPROVED, self::NONE];
+    protected string $name = 'enum_event_review_status';
+    protected array $values = [self::AWAITING, self::REFUSED, self::APPROVED, self::NONE];
 }

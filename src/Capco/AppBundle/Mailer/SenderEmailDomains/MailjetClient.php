@@ -10,6 +10,13 @@ use Psr\Http\Message\ResponseInterface;
 class MailjetClient
 {
     public const BASE_URL = 'https://api.mailjet.com/v3/REST/';
+
+    // https://documentation.mailjet.com/hc/fr/articles/360048398994-Statut-des-emails-explication-de-toutes-les-m%C3%A9triques-
+    public const STATUS_SENT = 'sent';
+    public const STATUS_OPENED = 'opened';
+    public const STATUS_CLICKED = 'clicked';
+    public const STATUS_QUEUED = 'queued';
+
     public Client $client;
 
     private string $publicKey;

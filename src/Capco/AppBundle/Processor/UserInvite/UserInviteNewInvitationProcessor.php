@@ -2,33 +2,34 @@
 
 namespace Capco\AppBundle\Processor\UserInvite;
 
-use Capco\AppBundle\Notifier\UserInviteNotifier;
-use Capco\AppBundle\Repository\UserInviteRepository;
+use Capco\AppBundle\Notifier\UserInviteEmailMessageNotifier;
+use Capco\AppBundle\Repository\UserInviteEmailMessageRepository;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 
 class UserInviteNewInvitationProcessor implements ProcessorInterface
 {
-    private UserInviteRepository $repository;
-    private UserInviteNotifier $notifier;
+    private UserInviteEmailMessageNotifier $notifier;
+    private UserInviteEmailMessageRepository $emailMessageRepository;
 
-    public function __construct(UserInviteRepository $repository, UserInviteNotifier $notifier)
-    {
-        $this->repository = $repository;
+    public function __construct(
+        UserInviteEmailMessageRepository $emailMessageRepository,
+        UserInviteEmailMessageNotifier $notifier
+    ) {
         $this->notifier = $notifier;
+        $this->emailMessageRepository = $emailMessageRepository;
     }
 
     public function process(Message $message, array $options): bool
     {
         $json = json_decode($message->getBody(), true);
         $id = $json['id'];
-        $userInvite = $this->repository->find($id);
-        if (!$userInvite) {
-            throw new \RuntimeException('Unable to find userInvite with id : ' . $id);
+        $userInviteEmailMessage = $this->emailMessageRepository->find($id);
+        if (!$userInviteEmailMessage) {
+            throw new \RuntimeException('Unable to find UserInviteEmailMessage with id : ' . $id);
         }
 
-        $this->notifier->onNewInvitation($userInvite);
-
-        return true;
+        // $delivered is always true in UserInviteEmailMessageNotifier.
+        return $this->notifier->onNewInvitation($userInviteEmailMessage);
     }
 }

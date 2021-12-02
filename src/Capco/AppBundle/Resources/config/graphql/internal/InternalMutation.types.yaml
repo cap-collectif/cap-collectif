@@ -1006,6 +1006,14 @@ InternalMutation:
                     inputType: CancelUserInvitationsInput
                     payloadType: CancelUserInvitationsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CancelUserInvitationsMutation", [value])'
+            relaunchUserInvitations:
+                description: 'Relaunch invitations for the given users.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: RelaunchUserInvitationsInput
+                    payloadType: RelaunchUserInvitationsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RelaunchUserInvitationsMutation", [value])'
             resetPassword:
                 description: 'Reset password'
                 builder: 'Relay::Mutation'

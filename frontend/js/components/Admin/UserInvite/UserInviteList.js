@@ -22,6 +22,8 @@ import Tag from '~ds/Tag/Tag';
 import Menu from '~ds/Menu/Menu';
 import Text from '~ui/Primitives/Text';
 import { ICON_NAME } from '~ds/Icon/Icon';
+import Flex from '~ui/Primitives/Layout/Flex';
+import { UserInviteRelaunchInvitations } from '~/components/Admin/UserInvite/Modal/UserInviteRelaunchInvitations';
 
 export type Status = 'PENDING' | 'FAILED' | 'ALL' | 'EXPIRED' | 'ACCEPTED';
 
@@ -73,11 +75,11 @@ export const UserInviteList = ({
       : '-';
   };
 
-  const cancelInvite = async invitationsIds => {
+  const cancelInvite = async invitationsEmails => {
     try {
       await CancelUserInvitationsMutation.commit({
         input: {
-          invitationsIds,
+          invitationsEmails,
         },
       });
     } catch (e) {
@@ -93,15 +95,27 @@ export const UserInviteList = ({
       <Table
         selectable
         isLoading={!hasInvitations}
-        actionBar={({ selectedRows }) => (
-          <Button
-            variantSize="small"
-            variant="secondary"
-            variantColor="danger"
-            onClick={() => cancelInvite(selectedRows)}>
-            {intl.formatMessage({ id: 'global.remove' })}
-          </Button>
-        )}>
+        actionBar={({ selectedRows }) => {
+          const invitationsToRelaunch = invitations.filter(
+            invitation =>
+              selectedRows.includes(invitation?.email) && invitation.status === 'EXPIRED',
+          );
+          return (
+            <Flex direction="row" justify="space-between">
+              <Button
+                mr={6}
+                variantSize="small"
+                variant="secondary"
+                variantColor="danger"
+                onClick={() => {
+                  cancelInvite(selectedRows);
+                }}>
+                {intl.formatMessage({ id: 'global.remove' })}
+              </Button>
+              <UserInviteRelaunchInvitations invitations={invitationsToRelaunch} />
+            </Flex>
+          );
+        }}>
         <Table.Thead>
           <Table.Tr>
             <Table.Th noPlaceholder>{intl.formatMessage({ id: 'global.invitations' })}</Table.Th>
@@ -151,7 +165,10 @@ export const UserInviteList = ({
           }}
           hasMore={hasNext}>
           {invitations.map(userInvite => (
-            <Table.Tr key={userInvite?.id} rowId={userInvite?.id} checkboxLabel={userInvite?.email}>
+            <Table.Tr
+              key={userInvite?.id}
+              rowId={userInvite?.email}
+              checkboxLabel={userInvite?.email}>
               <Table.Td>{userInvite?.email}</Table.Td>
               <Table.Td>
                 {(() => {
@@ -174,7 +191,7 @@ export const UserInviteList = ({
                     icon="TRASH"
                     label={intl.formatMessage({ id: 'global.delete' })}
                     variantColor="danger"
-                    onClick={() => cancelInvite([userInvite?.id])}
+                    onClick={() => cancelInvite([userInvite?.email])}
                   />
                 </ButtonGroup>
               </Table.Td>
