@@ -152,39 +152,6 @@ p img {
 }
 
 /* ===============================================================
-    Project
-================================================================*/
-
-.project__header {
-    &__title {
-        text-align: center;
-    }
-
-    &__media {
-        display: flex;
-        flex-direction: column;
-        line-height: initial;
-        margin-bottom: 0;
-
-        .img-circle {
-            margin-bottom: 7pt;
-        }
-    }
-}
-
-.project__step-dates {
-    text-align: center;
-
-    .d-ib {
-        display: inline-block;
-    }
-
-    .mr-15 {
-        margin-right: 11pt;
-    }
-}
-
-/* ===============================================================
     Questionnaire
 ================================================================*/
 

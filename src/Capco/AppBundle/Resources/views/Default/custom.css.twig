@@ -165,33 +165,11 @@
         border-color: {{ btnPrimary | raw }};
     }
 
-    .navbar--sub .navbar__step-nb {
-        color: {{ btnPrimary | raw }};
-    }
-
-    .navbar__step .excerpt span.badge {
-        background-color: {{ btnPrimary | raw }};
-    }
-
-    .step-tabs__list ul li.active .navbar__step-nb {
-        background-color: {{ btnPrimary | raw }};
-        border-color: {{ btnPrimary | raw }};
-    }
-
-    .step-tabs__list ul li.active a {
-        border-bottom-color: {{ btnPrimary | raw }};
-    }
 
     .status--primary, .custom-primary-bgcolor {
         background-color: {{ btnPrimary | raw }};
     }
-
-    @media (max-width: 767px ) {
-        .step-tabs__list ul li.active .navbar__step-title,
-        .step-tabs__list ul li.active .navbar__step-nb_small {
-            color: {{ btnPrimary | raw }};
-        }
-    }
+    
 
     @media (max-width: 991px ) {
         .stacked-nav__header, .consultation-plan_close .btn-link {
@@ -215,14 +193,6 @@
     .developers__container .nav-tabs li.active a,
     .developers__container .nav-tabs li.active a:hover {
         border-bottom: 1px solid {{ link | raw }};
-    }
-
-    .counters-nav li .value {
-        color: {{ btnPrimary | raw }};
-    }
-
-    .counters-nav > li > a:hover .category {
-        color: {{ linkHover | raw }};
     }
 
     .nav-pills > li + li {
