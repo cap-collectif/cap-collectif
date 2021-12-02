@@ -48,6 +48,7 @@ import AppBox from '~/components/Ui/Primitives/AppBox';
 type Props = {|
   ...ReduxFormFormProps,
   handleClose?: () => {},
+  features: FeatureToggles,
   step: {
     id: string,
     label: string,
@@ -240,6 +241,8 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
         id: props.step.id,
         url: props.step.url,
         ...formValues,
+        votesLimit: formValues.isLimitEnabled ? formValues.votesLimit : null,
+        votesMin: formValues.isLimitEnabled ? formValues.votesMin : null,
         requirements,
       }),
     );
@@ -248,6 +251,8 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
       arrayPush(props.formName, 'steps', {
         id: null,
         ...formValues,
+        votesLimit: formValues.isLimitEnabled ? formValues.votesLimit : null,
+        votesMin: formValues.isLimitEnabled ? formValues.votesMin : null,
         requirements,
       }),
     );
@@ -271,7 +276,7 @@ const validate = (
     proposalForm,
     votesRanking,
   }: FormValues,
-  features: FeatureToggles,
+  { features }: Props,
 ) => {
   const errors = {};
 
@@ -299,7 +304,7 @@ const validate = (
     if (!consultations || !consultations.length) errors.consultations = 'global.required';
   }
 
-  if (votesRanking && features.votes_min) {
+  if (features.votes_min) {
     if (
       votesLimit != null &&
       parseInt(votesLimit, 10) < parseInt(votesMin, 10) &&
@@ -317,7 +322,7 @@ const validate = (
   }
 
   // eslint-disable-next-line no-restricted-globals
-  if (!features.votes_min && isNaN(parseInt(votesLimit, 10))) {
+  if (features.votes_min && isNaN(parseInt(votesLimit, 10)) && votesLimit) {
     errors.votesLimit = 'maximum-vote-must-be-greater-than-or-equal';
   }
 
@@ -759,6 +764,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
     formValueSelector(stepFormName)(state, 'proposalForm'),
   );
   return {
+    features: state.default.features,
     initialValues: {
       // AbstractStep
       url: step?.url ? step.url : null,
@@ -786,7 +792,12 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       // QuestionnaireStep
       questionnaire: step?.questionnaire || null,
       footer: step?.footer ? step.footer : null,
-      collectParticipantsEmail: step?.collectParticipantsEmail !== undefined ? step.collectParticipantsEmail : step.__typename === 'QuestionnaireStep' ? true : undefined,
+      collectParticipantsEmail:
+        step?.collectParticipantsEmail !== undefined
+          ? step.collectParticipantsEmail
+          : step.__typename === 'QuestionnaireStep'
+          ? true
+          : undefined,
       // ConsultationStep
       consultations: step?.consultations || [],
       requirements: step ? createRequirements(step) : [],
@@ -819,7 +830,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       allowAuthorsToAddNews: step?.allowAuthorsToAddNews || false,
       budget: step?.budget || null,
       isBudgetEnabled: step?.isBudgetEnabled || false,
-      isLimitEnabled: step?.isLimitEnabled || false,
+      isLimitEnabled: step?.votesMin !== null || step?.votesLimit !== null || false,
       isTresholdEnabled: step?.isTresholdEnabled || false,
       private: step?.private || false,
     },

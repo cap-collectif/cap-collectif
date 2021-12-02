@@ -4,10 +4,12 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminStepForm } from './ProjectAdminStepForm';
 import { formMock, intlMock, $refType } from '~/mocks';
+import { features } from '~/redux/modules/default';
 
 describe('<ProjectAdminStepForm />', () => {
   const defaultProps = {
     ...formMock,
+    features,
     isCreating: false,
     intl: intlMock,
     formName: 'ProjectAdminForm',
