@@ -40,7 +40,7 @@ exports[`<ProposalList /> should render a collectStep establishment list 1`] = `
         "$fragmentRefs": null,
         "$refType": null,
         "form": Object {
-          "objectType": "PROPOSAL",
+          "objectType": "ESTABLISHMENT",
         },
         "id": "1",
         "project": Object {
@@ -146,6 +146,17 @@ exports[`<ProposalList /> should render a collectStep with empty interpellation 
 >
   <FormattedMessage
     id="interpellation.empty"
+    values={Object {}}
+  />
+</p>
+`;
+
+exports[`<ProposalList /> should render a collectStep with empty question list 1`] = `
+<p
+  className="p--centered mb-40"
+>
+  <FormattedMessage
+    id="question.empty"
     values={Object {}}
   />
 </p>

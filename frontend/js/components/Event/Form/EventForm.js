@@ -139,7 +139,7 @@ export type FormValues = {|
   guestListEnabled: boolean,
   link: ?string,
   addressJson: ?string,
-  address: ?string,
+  addressText: ?string,
   enabled: boolean,
   media: ?{
     id: string,
@@ -432,7 +432,7 @@ export const EventForm = ({
                 dispatch(
                   change(
                     formName,
-                    'address',
+                    'addressJson',
                     addressComplete ? JSON.stringify([addressComplete]) : addressComplete,
                   ),
                 ),
@@ -830,6 +830,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
           props.event && props.event.googleMapsAddress
             ? props.event.googleMapsAddress.formatted
             : null,
+        addressJson:
+          props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
         recordingUrl: props.event && props.event.recordingUrl,
         isPresential: props.event ? props.event.isPresential : true,
         animator:
@@ -837,8 +839,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
             ? { value: props.event.animator.id, label: props.event.animator.displayName }
             : null,
         isRecordingPublished: props.event && props.event.isRecordingPublished,
-        addressJson:
-          props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
         translations: props.event && props.event.translations ? props.event.translations : [],
       },
       currentValues: selector(

@@ -30,7 +30,9 @@
         </div>
     {% endif %}
     <div class="block">
-        {{ currentStep.body | raw }}
+        <div class="ql-editor">
+            {{ currentStep.body | raw }}
+        </div>
     </div>
 {% endblock %}
 {% block javascripts %}

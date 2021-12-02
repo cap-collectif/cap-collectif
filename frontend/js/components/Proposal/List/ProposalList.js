@@ -10,11 +10,7 @@ import VisibilityBox from '../../Utils/VisibilityBox';
 import type { ProposalList_step } from '~relay/ProposalList_step.graphql';
 import type { ProposalList_viewer } from '~relay/ProposalList_viewer.graphql';
 import type { ProposalList_proposals } from '~relay/ProposalList_proposals.graphql';
-import type { ProposalViewMode } from '../../../redux/modules/proposal';
-import {
-  isEstablishmentFormStep,
-  isInterpellationContextFromStep,
-} from '~/utils/interpellationLabelHelper';
+import type { ProposalViewMode } from '~/redux/modules/proposal';
 
 type Props = {
   step: ?ProposalList_step,
@@ -49,6 +45,20 @@ const renderProposalListTableView = (proposals, step) => (
   <ProposalListTable step={step} proposals={proposals} />
 );
 
+const getEmptyWordingProposalList = (step: ?ProposalList_step): string => {
+  if (step && step.form) {
+    if (step.form.objectType === 'ESTABLISHMENT') return 'establishment.empty';
+    if (
+      step.form.objectType === 'PROPOSAL' &&
+      step.project?.type?.title === 'project.types.interpellation'
+    )
+      return 'interpellation.empty';
+    if (step.form.objectType === 'QUESTION') return 'question.empty';
+  }
+
+  return 'proposal.empty';
+};
+
 export class ProposalList extends React.Component<Props> {
   render() {
     const { step, proposals, viewer, view } = this.props;
@@ -56,15 +66,7 @@ export class ProposalList extends React.Component<Props> {
     if (proposals.totalCount === 0) {
       return (
         <p className="p--centered mb-40">
-          <FormattedMessage
-            id={
-              step && isEstablishmentFormStep(step)
-                ? 'establishment.empty'
-                : step && isInterpellationContextFromStep(step)
-                ? 'interpellation.empty'
-                : 'proposal.empty'
-            }
-          />
+          <FormattedMessage id={getEmptyWordingProposalList(step)} />
         </p>
       );
     }

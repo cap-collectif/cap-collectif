@@ -98,7 +98,21 @@ describe('<ProposalList />', () => {
 
   const collectEstablishmentStep = {
     form: {
-      objectType: 'PROPOSAL',
+      objectType: 'ESTABLISHMENT',
+    },
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
+    $refType,
+    $fragmentRefs,
+    id: '1',
+  };
+
+  const collectQuestionStep = {
+    form: {
+      objectType: 'QUESTION',
     },
     project: {
       type: {
@@ -127,6 +141,13 @@ describe('<ProposalList />', () => {
   it('should render a collectStep with empty interpellation list', () => {
     const wrapper = shallow(
       <ProposalList proposals={proposals} step={collectInterpellationStep} viewer={null} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a collectStep with empty question list', () => {
+    const wrapper = shallow(
+      <ProposalList proposals={proposals} step={collectQuestionStep} viewer={null} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

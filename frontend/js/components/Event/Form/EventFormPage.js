@@ -73,8 +73,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     : false;
   const commentable = values.commentable ? values.commentable : false;
   const enabled = values.enabled ? values.enabled : false;
-  const addressJson = values.address;
-  delete values.address;
+  const addressJson = values.addressJson || null;
 
   const translation = {
     locale: props.currentLanguage,
@@ -145,7 +144,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
   const commentable = values.commentable ? values.commentable : false;
   const enabled = values.enabled ? values.enabled : false;
-  const addressJson = values.address || null;
+  const addressJson = values.addressJson || null;
 
   const translation = {
     locale: props.currentLanguage,
