@@ -1,13 +1,13 @@
 parameters:
     database_driver: '%env(SYMFONY_DATABASE_DRIVER)%'
     database_host: '%env(SYMFONY_DATABASE_HOST)%'
-    database_port: '%env(SYMFONY_DATABASE_PORT)%'
+    database_port: '%env(int:SYMFONY_DATABASE_PORT)%'
     database_name: '%env(SYMFONY_DATABASE_NAME)%'
     database_user: '%env(SYMFONY_DATABASE_USER)%'
     database_password: '%env(SYMFONY_DATABASE_PASSWORD)%'
     database_version: '%env(SYMFONY_DATABASE_VERSION)%'
     rabbitmq_host: '%env(SYMFONY_RABBITMQ_HOST)%'
-    rabbitmq_port: '%env(SYMFONY_RABBITMQ_PORT)%'
+    rabbitmq_port: '%env(int:SYMFONY_RABBITMQ_PORT)%'
     rabbitmq_nodename: '%env(SYMFONY_RABBITMQ_NODENAME)%'
     rabbitmq_vhost: '%env(SYMFONY_RABBITMQ_VHOST)%'
     rabbitmq_login: '%env(SYMFONY_RABBITMQ_LOGIN)%'
@@ -22,7 +22,6 @@ parameters:
     app_version: '%env(SYMFONY_APP_VERSION)%'
     locale: '%env(SYMFONY_LOCALE)%'
     secret: '%env(SYMFONY_SECRET)%'
-    api_enterprise_token: '%env(API_ENTERPRISE_TOKEN)%'
     use_assetic_controller: '%env(SYMFONY_USE_ASSETIC_CONTROLLER)%'
     google_app_id: '%env(SYMFONY_GOOGLE_APP_ID)%'
     google_app_secret: '%env(SYMFONY_GOOGLE_APP_SECRET)%'
@@ -39,10 +38,10 @@ parameters:
     twilio_number: '%env(SYMFONY_TWILIO_NUMBER)%'
     disable_mail_delivery: false
     sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
-    google_maps_key: ***REMOVED***
+    google_maps_key: '%env(SYMFONY_GOOGLE_MAP_KEY)%'
     mapbox_secret_key: '%env(SYMFONY_MAPBOX_SECRET_KEY)%'
     locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC']
-    google_maps_key_server: '***REMOVED***'
+    google_maps_key_server: '%env(SYMFONY_GOOGLE_MAP_SERVER_KEY)%'
     jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
     mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
     mailjet_public_key: '%env(SYMFONY_MAILJET_PUBLIC_KEY)%'
@@ -50,7 +49,6 @@ parameters:
     instance_name: '%env(SYMFONY_INSTANCE_NAME)%'
     sentry_log_level: '%env(SYMFONY_SENTRY_LOG_LEVEL)%'
     sonata_translation.admin.extension.knplabs_translatable.class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension
-    loco_key: ***REMOVED***
     knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
     knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
     knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
@@ -59,6 +57,7 @@ parameters:
     newrelic_license_key: '%env(SYMFONY_NEWRELIC_LICENSE_KEY)%'
     agent_tcp: 'tcp://127.0.0.1:10301'
     agent_unix: 'unix:///var/run/redirectionio_agent.sock'
+    # TODO remove me (https://github.com/cap-collectif/platform/issues/13274)
     jitsi_jwt_key: '***REMOVED***'
     jitsi_encryption_key: '***REMOVED***'
     jitsi_hex_iv: '***REMOVED***'
@@ -75,7 +74,7 @@ parameters:
     occitanie_client_id: '%env(SYMFONY_OCCITANIE_CLIENT_ID)%'
     occitanie_client_secret: '%env(SYMFONY_OCCITANIE_CLIENT_SECRET)%'
     tipsmeee_api_key: '%env(SYMFONY_TIPSMEEE_API_KEY)%'
-    slack_jpec_ghost: '***REMOVED***'
+    slack_jpec_ghost: '%env(SLACK_JPEC_GHOST)%'
     panther_url: '%env(SYMFONY_PANTHER_URL)%'
     panther_token: '%env(SYMFONY_PANTHER_TOKEN)%'
     cloudflare_elastic_username: '%env(SYMFONY_CLOUDFLARE_ELASTIC_USERNAME)%'
@@ -91,7 +90,8 @@ parameters:
     #
     # Default values :
     #
-    env(API_ENTERPRISE_TOKEN): ***REMOVED***.***REMOVED***
+    env(SYMFONY_GOOGLE_MAP_KEY): '***REMOVED***'
+    env(SYMFONY_GOOGLE_MAP_SERVER_KEY): '***REMOVED***'
     env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
     env(SYMFONY_DATABASE_DRIVER): pdo_mysql
     env(SYMFONY_DATABASE_HOST): 127.0.0.1

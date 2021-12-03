@@ -4,6 +4,7 @@ swarrot:
     connections:
         rabbitmq:
             host: '%rabbitmq_host%'
+            # Please fix this to use '%rabbitmq_port%'
             port: 5672
             login: '%rabbitmq_login%'
             password: '%rabbitmq_password%'

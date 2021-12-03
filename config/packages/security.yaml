@@ -70,7 +70,7 @@ security:
             remember_me:
                 always_remember_me: false
                 secret: '%remember_secret%'
-                lifetime: 31536000
+                lifetime: '%env(SYMFONY_SESSION_TIMEOUT_SECONDS)%'
                 path: /
                 domain: ~
             logout:
