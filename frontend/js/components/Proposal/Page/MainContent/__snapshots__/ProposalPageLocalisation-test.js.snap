@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageLocalisation /> should render correctly 1`] = `
+<ProposalPagestyle__Card>
+  <ProposalPagestyle__CategoryContainer>
+    <ProposalPagestyle__CategoryTitle>
+      <ProposalPagestyle__CategoryCircledIcon>
+        <Icon
+          color="#6c757d"
+          name="pin"
+          size={20}
+        />
+      </ProposalPagestyle__CategoryCircledIcon>
+      <FormattedMessage
+        id="form.label_neighborhood"
+        tagName="h3"
+        values={Object {}}
+      />
+    </ProposalPagestyle__CategoryTitle>
+    <Skeleton
+      isLoaded={true}
+      placeholder={<Placeholder />}
+    >
+      <div
+        className="proposal-map__block"
+      >
+        <p>
+          111 Avenue Jean Jaurès, 69007 Lyon, France
+        </p>
+        <MapContainer
+          center={
+            Object {
+              "lat": 45.742842,
+              "lng": 4.84068000000002,
+            }
+          }
+          doubleClickZoom={false}
+          gestureHandling={true}
+          maxZoom={22}
+          style={
+            Object {
+              "height": 175,
+              "width": "100%",
+            }
+          }
+          zoom={16}
+        >
+          <ForwardRef(LeafComponent)
+            attribution="© <a href\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
+            url="https://api.mapbox.com/styles/v1/string/string/tiles/256/{z}/{x}/{y}?access_token=string"
+          />
+          <ForwardRef(ContainerComponent)
+            position={
+              Array [
+                45.742842,
+                4.84068000000002,
+              ]
+            }
+          />
+        </MapContainer>
+      </div>
+    </Skeleton>
+  </ProposalPagestyle__CategoryContainer>
+</ProposalPagestyle__Card>
+`;

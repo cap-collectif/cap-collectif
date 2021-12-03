@@ -1136,6 +1136,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingAddress",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": null,
                           "kind": "LinkedField",
                           "name": "questions",
@@ -1878,13 +1885,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "categoryHelpText",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "usingAddress",
                           "storageKey": null,
                         },
                         Object {
@@ -7483,7 +7483,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "df18aeaaf4c5d27ce01f83aa87784afd",
+          "cacheID": "842168c288bb20fa61869940be8e1a49",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8835,6 +8835,10 @@ fragment ProposalPageHeader_viewer_4ESFbG on User {
 
 fragment ProposalPageLocalisation_proposal on Proposal {
   id
+  form {
+    usingAddress
+    id
+  }
   address {
     formatted
     lat

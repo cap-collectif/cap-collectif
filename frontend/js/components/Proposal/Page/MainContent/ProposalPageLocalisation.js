@@ -49,7 +49,10 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
   if (!mapTokens) return null;
   const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
-  if (proposal && !(proposal?.address && config.canUseDOM)) return null;
+  if (!proposal || !config.canUseDOM || !proposal.address || !proposal.form.usingAddress) {
+    return null;
+  }
+
   return (
     <Card>
       <CategoryContainer>
@@ -82,12 +85,15 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
                 />
                 <Marker
                   position={[proposal?.address.lat, proposal?.address.lng]}
-                  icon={L.icon({
-                    iconUrl: '/svg/marker.svg',
-                    iconSize: [40, 40],
-                    iconAnchor: [20, 40],
-                    popupAnchor: [0, -40],
-                  })}
+                  icon={
+                    L &&
+                    L.icon({
+                      iconUrl: '/svg/marker.svg',
+                      iconSize: [40, 40],
+                      iconAnchor: [20, 40],
+                      popupAnchor: [0, -40],
+                    })
+                  }
                 />
               </MapContainer>
             </div>
@@ -108,6 +114,9 @@ export default createFragmentContainer(
     proposal: graphql`
       fragment ProposalPageLocalisation_proposal on Proposal {
         id
+        form {
+          usingAddress
+        }
         address {
           formatted
           lat
