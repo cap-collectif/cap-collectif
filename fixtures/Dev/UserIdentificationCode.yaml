@@ -2,6 +2,24 @@ Capco\AppBundle\Entity\Security\UserIdentificationCode:
     code1:
         identificationCode: DK2AZ554
         list: '@newList'
+        title: Mlle
+        firstname: Utilisateur
+        lastname: authentifier
+        address1: '12 rue des boulets'
+        address2: '2ieme etages'
+        zip_code: '75012'
+        city: 'Paris'
+        country: 'France'
+        email: user@test.com
     code2:
         identificationCode: GG2AZR54
         list: '@newList'
+        title: M
+        firstname: Jean-Michel
+        lastname: Dupuis
+        address1: '15 rue des marguerites'
+        address2: '2ieme etages'
+        address3: 'appt 4'
+        zip_code: '94400'
+        city: 'Vitry s/Seine'
+        country: 'France'

@@ -1,0 +1,8 @@
+CreateUserIdentificationCodeListPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of the createUserIdentificationCodeList mutation.'
+        fields:
+            userIdentificationCodeList:
+                type: 'InternalUserIdentificationCodeList'
+                description: 'The successfully created list'

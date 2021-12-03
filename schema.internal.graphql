@@ -3478,6 +3478,54 @@ type CreateSenderEmailPayload {
   clientMutationId: String
 }
 
+input CreateUserIdentificationCodeListInput {
+  """Name of the list to create."""
+  name: String!
+
+  """Data for the codes creation."""
+  data: [CreateUserIdentificationCodeListInputDatum!]!
+  clientMutationId: String
+}
+
+"""A person for whom a code must be created."""
+input CreateUserIdentificationCodeListInputDatum {
+  """The title of the person : m, mme, mlle, me, dr..."""
+  title: String!
+
+  """The firstname of the person."""
+  firstname: String!
+
+  """The lastname of the person."""
+  lastname: String!
+
+  """The address of the person."""
+  address1: String!
+
+  """Complementary address, if needed."""
+  address2: String
+
+  """Complementary address, if needed."""
+  address3: String
+
+  """Zip code of the person."""
+  zipCode: String!
+
+  """City of the person."""
+  city: String!
+
+  """Country of the person."""
+  country: String!
+
+  """email of the person."""
+  email: String
+}
+
+type CreateUserIdentificationCodeListPayload {
+  """The successfully created list"""
+  userIdentificationCodeList: UserIdentificationCodeList
+  clientMutationId: String
+}
+
 input CreateUserInput {
   """The user's username"""
   username: String!
@@ -7121,6 +7169,7 @@ type Mutation {
   updateProposalIllustration(input: UpdateProposalIllustrationInput!): UpdateProposalIllustrationPayload
   checkIdentificationCode(input: CheckIdentificationCodeInput!): CheckIdentificationCodePayload
   deleteUserIdentificationCodeList(input: DeleteUserIdentificationCodeListInput!): DeleteUserIdentificationCodeListPayload
+  createUserIdentificationCodeList(input: CreateUserIdentificationCodeListInput!): CreateUserIdentificationCodeListPayload
 }
 
 """A connection to a list of items."""

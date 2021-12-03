@@ -23,7 +23,7 @@ class UserIdentificationCodeList
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=UserIdentificationCode::class, mappedBy="list")
+     * @ORM\OneToMany(targetEntity=UserIdentificationCode::class, mappedBy="list", cascade={"persist"})
      */
     private Collection $codes;
 

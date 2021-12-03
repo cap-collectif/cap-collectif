@@ -1,0 +1,35 @@
+CreateUserIdentificationCodeListInputDatum:
+    type: input-object
+    config:
+        description: 'A person for whom a code must be created.'
+        fields:
+            title:
+                type: 'String!'
+                description: 'The title of the person : m, mme, mlle, me, dr...'
+            firstname:
+                type: 'String!'
+                description: 'The firstname of the person.'
+            lastname:
+                type: 'String!'
+                description: 'The lastname of the person.'
+            address1:
+                type: 'String!'
+                description: 'The address of the person.'
+            address2:
+                type: 'String'
+                description: 'Complementary address, if needed.'
+            address3:
+                type: 'String'
+                description: 'Complementary address, if needed.'
+            zipCode:
+                type: 'String!'
+                description: 'Zip code of the person.'
+            city:
+                type: 'String!'
+                description: 'City of the person.'
+            country:
+                type: 'String!'
+                description: 'Country of the person.'
+            email:
+                type: 'String'
+                description: 'email of the person.'

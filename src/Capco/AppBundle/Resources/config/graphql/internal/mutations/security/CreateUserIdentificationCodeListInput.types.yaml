@@ -1,0 +1,11 @@
+CreateUserIdentificationCodeListInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createUserIdentificationCodeList mutation.'
+        fields:
+            name:
+                type: 'String!'
+                description: 'Name of the list to create.'
+            data:
+                type: '[CreateUserIdentificationCodeListInputDatum!]!'
+                description: 'Data for the codes creation.'

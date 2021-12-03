@@ -27,6 +27,16 @@ class UserIdentificationCodeRepository extends EntityRepository
         return $qb->fetchAssociative();
     }
 
+    public function getPlainCodes(): array
+    {
+        $data = $this->createQueryBuilder('uic')
+            ->select('uic.identificationCode')
+            ->getQuery()
+            ->getArrayResult();
+
+        return array_column($data, 'identificationCode');
+    }
+
     public function countCodeUsedInList(UserIdentificationCodeList $list): int
     {
         $qb = $this->createQueryBuilder('uic')
