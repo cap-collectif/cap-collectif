@@ -76,7 +76,6 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         if ($this->id) {
             parent::__clone();
             if ($proposalForm = $this->getProposalForm()) {
-                $proposalForm->setCloneEnable(true);
                 $clonedProposalForm = clone $proposalForm;
                 $clonedProposalForm->setStep($this);
                 $this->proposalForm = $clonedProposalForm;

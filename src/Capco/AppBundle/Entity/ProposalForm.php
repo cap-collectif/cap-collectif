@@ -58,10 +58,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
      */
     protected ?\DateTime $updatedAt = null;
 
-    // Sonata always triggering _clone so we had to do this :/
-    //@todo change this https://github.com/cap-collectif/platform/issues/5700
-    protected bool $cloneEnable = false;
-
     /**
      * @ORM\Column(name="grid_view_enabled", type="boolean", nullable=false, options={"default": true})
      */
@@ -293,69 +289,55 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
 
     public function __clone()
     {
-        if ($this->cloneEnable) {
-            if ($this->id) {
-                $this->id = null;
-                $this->step = null;
-                $this->reference = null;
-                $this->createdAt = new \DateTime();
-                $this->updatedAt = new \DateTime();
-                $this->proposals = new ArrayCollection();
+        if ($this->id) {
+            $this->id = null;
+            $this->step = null;
+            $this->reference = null;
+            $this->createdAt = new \DateTime();
+            $this->updatedAt = new \DateTime();
+            $this->proposals = new ArrayCollection();
 
-                if ($this->evaluationForm) {
-                    /** @var Questionnaire $clonedEvaluationForm */
-                    $clonedEvaluationForm = clone $this->evaluationForm;
-                    $clonedEvaluationForm->setProposalForm($this);
-                    $this->setEvaluationForm($clonedEvaluationForm);
-                }
-
-                if ($this->analysisConfiguration) {
-                    /** @var AnalysisConfiguration $clonedAnalysisConfig */
-                    $clonedAnalysisConfig = clone $this->analysisConfiguration;
-                    $clonedAnalysisConfig->setProposalForm($this);
-                } else {
-                    $this->analysisConfiguration = null;
-                }
-
-                $questionsClone = $this->cloneProposalFormQuestions();
-
-                $districtsClone = new ArrayCollection();
-                foreach ($this->districts as $district) {
-                    $itemClone = clone $district;
-                    $itemClone->setForm($this);
-                    $districtsClone->add($itemClone);
-                }
-
-                $categoriesClone = new ArrayCollection();
-                foreach ($this->categories as $category) {
-                    $itemClone = clone $category;
-                    $itemClone->setForm($this);
-                    $categoriesClone->add($itemClone);
-                }
-
-                $this->questions = $questionsClone;
-                $this->categories = $categoriesClone;
-                $this->districts = $districtsClone;
-                $this->initializeNotificationConfiguration();
+            if ($this->evaluationForm) {
+                /** @var Questionnaire $clonedEvaluationForm */
+                $clonedEvaluationForm = clone $this->evaluationForm;
+                $clonedEvaluationForm->setProposalForm($this);
+                $this->setEvaluationForm($clonedEvaluationForm);
             }
+
+            if ($this->analysisConfiguration) {
+                /** @var AnalysisConfiguration $clonedAnalysisConfig */
+                $clonedAnalysisConfig = clone $this->analysisConfiguration;
+                $clonedAnalysisConfig->setProposalForm($this);
+            } else {
+                $this->analysisConfiguration = null;
+            }
+
+            $questionsClone = $this->cloneProposalFormQuestions();
+
+            $districtsClone = new ArrayCollection();
+            foreach ($this->districts as $district) {
+                $itemClone = clone $district;
+                $itemClone->setForm($this);
+                $districtsClone->add($itemClone);
+            }
+
+            $categoriesClone = new ArrayCollection();
+            foreach ($this->categories as $category) {
+                $itemClone = clone $category;
+                $itemClone->setForm($this);
+                $categoriesClone->add($itemClone);
+            }
+
+            $this->questions = $questionsClone;
+            $this->categories = $categoriesClone;
+            $this->districts = $districtsClone;
+            $this->initializeNotificationConfiguration();
         }
     }
 
     public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New ProposalForm';
-    }
-
-    public function isCloneEnable(): bool
-    {
-        return $this->cloneEnable;
-    }
-
-    public function setCloneEnable(bool $value): self
-    {
-        $this->cloneEnable = $value;
-
-        return $this;
     }
 
     public function initializeNotificationConfiguration(): void
