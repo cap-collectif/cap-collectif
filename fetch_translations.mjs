@@ -5,7 +5,7 @@ import chalk from 'chalk';
 // This key provides read-only access to our translations.
 // It's suitable for deployment scripts and sharing download links with colleagues.
 // So we can keep it here.
-const LOCO_READ_ONLY_KEY = '926rGROkivvAoIO3ZJ0HiOh4529fIca3';
+const LOCO_READ_ONLY_KEY = 'UdTAAZySXEx3EYrJfvD8byxPgOX76Vvf';
 
 const locales = ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC'];
 const domains = [
