@@ -12,6 +12,9 @@ InternalAddEventsPayload:
             notFoundThemes:
                 type: '[ID]!'
                 description: "List of themes ID that didn't match an existing themes."
+            notFoundProjects:
+                type: '[ID]!'
+                description: "List of projects ID that didn't match an existing projects."
             brokenDates:
                 type: '[String]!'
                 description: "List of dates that didn't got the good format"

@@ -10,9 +10,9 @@ InternalEventInput:
             authorEmail:
                 type: 'String!'
             themes:
-                type: '[ID!]!'
+                type: '[String!]!'
             projects:
-                type: '[ID!]!'
+                type: '[String!]!'
             guestListEnabled:
                 type: 'Boolean!'
             enabled:

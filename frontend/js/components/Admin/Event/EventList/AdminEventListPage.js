@@ -113,7 +113,7 @@ const AdminEventListPage = ({ queryReference, isAdmin }: Props): React.Node => {
               />
             </Flex>
             <Flex direction="row">
-              <AdminEventImportModal />
+              <AdminEventImportModal intl={intl} />
               <Button
                 as="a"
                 variant="secondary"

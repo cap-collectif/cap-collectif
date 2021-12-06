@@ -1,17 +1,50 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape } from 'react-intl';
+import { submit } from 'redux-form';
 import { useDispatch } from 'react-redux';
-import { reduxForm, submit } from 'redux-form';
 import Button from '~ds/Button/Button';
 import Modal from '~ds/Modal/Modal';
 import Heading from '~ui/Primitives/Heading';
-import AdminImportEventsForm, { formName } from '~/components/Event/Admin/AdminImportEventsForm';
+import AdminImportEventsForm, {
+  formName,
+  type SubmittedFormValue,
+  type Props as AdminImportEventsFormProps,
+} from '~/components/Event/Admin/AdminImportEventsForm';
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import { toast } from '~ds/Toast';
+import type { Dispatch } from '~/types';
+import AddEventsMutation from '~/mutations/AddEventsMutation';
 
-const AdminEventImportModal = ({ submitting, invalid, pristine }) => {
+type Props = {|
+  +intl: IntlShape,
+|};
+
+export const onSubmit = (
+  values: SubmittedFormValue,
+  dispatch: Dispatch,
+  props: AdminImportEventsFormProps,
+) => {
+  const { onClose, reset, intl } = props;
+  const variables = {
+    input: {
+      events: values.events.data,
+      dryRun: false,
+    },
+  };
+
+  return AddEventsMutation.commit(variables).then(() => {
+    reset();
+    onClose();
+    toast({
+      variant: 'success',
+      content: intl.formatMessage({ id: 'events-successfully-imported' }),
+    });
+  });
+};
+
+const AdminEventImportModal = ({ intl }: Props) => {
   const dispatch = useDispatch();
-  const intl = useIntl();
   return (
     <Modal
       ariaLabel={intl.formatMessage({ id: 'modal-add-events-via-file' })}
@@ -36,7 +69,7 @@ const AdminEventImportModal = ({ submitting, invalid, pristine }) => {
             <p>
               <FormattedMessage id="import-events-helptext" />
             </p>
-            <AdminImportEventsForm onClose={() => hide()} />
+            <AdminImportEventsForm onClose={hide} onSubmit={onSubmit} />
           </Modal.Body>
           <Modal.Footer>
             <ButtonGroup>
@@ -52,7 +85,6 @@ const AdminEventImportModal = ({ submitting, invalid, pristine }) => {
                 variantSize="medium"
                 variant="primary"
                 variantColor="primary"
-                disabled={submitting || invalid || pristine}
                 onClick={() => dispatch(submit(formName))}>
                 {intl.formatMessage({ id: 'import' })}
               </Button>
@@ -64,6 +96,4 @@ const AdminEventImportModal = ({ submitting, invalid, pristine }) => {
   );
 };
 
-export default reduxForm({
-  form: formName,
-})(AdminEventImportModal);
+export default AdminEventImportModal;

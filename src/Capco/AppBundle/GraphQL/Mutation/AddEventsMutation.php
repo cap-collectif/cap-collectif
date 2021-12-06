@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\EventTranslation;
 use Capco\AppBundle\Form\EventType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -24,19 +25,22 @@ class AddEventsMutation implements MutationInterface
     private UserRepository $userRepo;
     private ThemeRepository $themeRepo;
     private LocaleRepository $localeRepository;
+    private ProjectRepository $projectRepository;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         UserRepository $userRepo,
         ThemeRepository $themeRepo,
-        LocaleRepository $localeRepository
+        LocaleRepository $localeRepository,
+        ProjectRepository $projectRepository
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->userRepo = $userRepo;
         $this->themeRepo = $themeRepo;
         $this->localeRepository = $localeRepository;
+        $this->projectRepository = $projectRepository;
     }
 
     public function __invoke(Arg $input): array
@@ -44,6 +48,7 @@ class AddEventsMutation implements MutationInterface
         $importedEvents = [];
         $notFoundEmails = [];
         $notFoundThemes = [];
+        $notFoundProjects = [];
         $brokenDates = [];
 
         foreach ($input->offsetGet('events') as $eventInput) {
@@ -56,17 +61,38 @@ class AddEventsMutation implements MutationInterface
             /** @var User $user */
             $author = $this->userRepo->findOneByEmail($eventInput['authorEmail']);
 
+            $eventInput['startAt'] = $this->parseStringDate($eventInput['startAt']);
+            $eventInput['endAt'] = $this->parseStringDate($eventInput['endAt']);
+
             if ($author) {
                 unset($eventInput['authorEmail']);
 
                 if (\is_array($eventInput['themes']) && !empty($eventInput['themes'])) {
-                    foreach ($eventInput['themes'] as $key => $themeId) {
-                        $theme = $this->themeRepo->find($themeId);
+                    $themeIds = [];
+                    foreach ($eventInput['themes'] as $key => $themeTitle) {
+                        $theme = $this->themeRepo->findOneWithTitle($themeTitle);
                         if (!$theme) {
-                            $notFoundThemes[] = $themeId;
+                            $notFoundThemes[] = $themeTitle;
                             unset($eventInput['themes'][$key]);
+                            continue;
                         }
+                        $themeIds[] = $theme->getId();
                     }
+                    $eventInput['themes'] = $themeIds;
+                }
+
+                if (\is_array($eventInput['projects']) && !empty($eventInput['projects'])) {
+                    $projectIds = [];
+                    foreach ($eventInput['projects'] as $key => $projectTitle) {
+                        $project = $this->projectRepository->findOneBy(['title' => $projectTitle]);
+                        if (!$project) {
+                            $notFoundProjects[] = $projectTitle;
+                            unset($eventInput['projects'][$key]);
+                            continue;
+                        }
+                        $projectIds[] = $project->getId();
+                    }
+                    $eventInput['projects'] = $projectIds;
                 }
 
                 if (
@@ -143,6 +169,7 @@ class AddEventsMutation implements MutationInterface
             'userErrors' => [],
             'notFoundEmails' => array_unique($notFoundEmails),
             'notFoundThemes' => array_unique($notFoundThemes),
+            'notFoundProjects' => array_unique($notFoundProjects),
             'brokenDates' => array_unique($brokenDates),
         ];
     }
@@ -178,5 +205,12 @@ class AddEventsMutation implements MutationInterface
         }
 
         return $values;
+    }
+
+
+    private function parseStringDate(string $stringDate): string
+    {
+       $stringDate = str_replace('/', '-', $stringDate);
+       return (new \DateTime($stringDate))->format('Y-m-d H:i:s');
     }
 }

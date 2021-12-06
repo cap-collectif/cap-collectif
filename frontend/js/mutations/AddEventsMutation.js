@@ -15,6 +15,7 @@ const mutation = graphql`
       }
       notFoundEmails
       notFoundThemes
+      notFoundProjects
       brokenDates
     }
   }
@@ -23,7 +24,7 @@ const mutation = graphql`
 const commit = (variables: AddEventsMutationVariables): Promise<AddEventsMutationResponse> =>
   commitMutation(environment, {
     mutation,
-    variables,
+    variables
   });
 
 export default { commit };

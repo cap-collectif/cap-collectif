@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { reduxForm, Field, change } from 'redux-form';
 import type { DropzoneFile } from 'react-dropzone';
 import Papa from 'papaparse';
@@ -12,9 +12,11 @@ import type {
 } from '~relay/AddEventsMutation.graphql';
 import { AdminImportEventsCsvInput, HEADERS } from './AdminImportEventsCsvInput';
 
-type Props = ReduxFormFormProps & {|
+export type Props = ReduxFormFormProps & {|
   handleSubmit: () => void,
   onClose: () => void,
+  intl: IntlShape,
+  onSubmit: () => void,
 |};
 
 type State = {|
@@ -22,7 +24,7 @@ type State = {|
   files: ?Array<DropzoneFile>,
 |};
 
-type SubmittedFormValue = {|
+export type SubmittedFormValue = {|
   events: {
     data: Array<Object>,
   },
@@ -48,8 +50,8 @@ const prepareVariablesFromAnalyzedFile = (
       data.guestListEnabled = data.guestListEnabled === 'true';
       data.enabled = data.enabled === 'true';
       data.commentable = data.commentable === 'true';
-      data.themes = data.themes.split(',')[0] === '' ? [] : data.themes.split(',');
-      data.projects = data.projects.split(',')[0] === '' ? [] : data.projects.split(',');
+      data.themes = data.themes.split('/')[0] === '' ? [] : data.themes.split('/');
+      data.projects = data.projects.split('/')[0] === '' ? [] : data.projects.split('/');
       return data;
     });
 
@@ -59,20 +61,6 @@ const prepareVariablesFromAnalyzedFile = (
       dryRun,
     },
   };
-};
-
-const onSubmit = (values: SubmittedFormValue, dispatch: Dispatch, { onClose, reset }: Props) => {
-  const variables = {
-    input: {
-      events: values.events.data,
-      dryRun: false,
-    },
-  };
-
-  return AddEventsMutation.commit(variables).then(() => {
-    reset();
-    onClose();
-  });
 };
 
 const asyncValidate = (
@@ -91,13 +79,20 @@ const asyncValidate = (
       return;
     }
     if (response.addEvents) {
-      const { importedEvents, notFoundEmails, notFoundThemes, brokenDates } = response.addEvents;
+      const {
+        importedEvents,
+        notFoundEmails,
+        notFoundThemes,
+        notFoundProjects,
+        brokenDates,
+      } = response.addEvents;
       dispatch(
         change(formName, 'events', {
           data: variables.input.events,
           importedEvents,
           notFoundEmails,
           notFoundThemes,
+          notFoundProjects,
           brokenDates,
         }),
       );
@@ -125,10 +120,10 @@ export class AdminImportEventsForm extends React.Component<Props, State> {
   };
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, onSubmit } = this.props;
     const { analyzed, files } = this.state;
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Field
             name="events"
@@ -148,7 +143,6 @@ export class AdminImportEventsForm extends React.Component<Props, State> {
 }
 
 const form = reduxForm({
-  onSubmit,
   form: formName,
   asyncValidate,
   shouldAsyncValidate: ({ trigger }: { trigger: string }) => {

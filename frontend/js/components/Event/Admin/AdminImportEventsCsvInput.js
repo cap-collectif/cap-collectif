@@ -33,6 +33,28 @@ export const HEADERS = [
   'link',
 ];
 
+const EXAMPLE_ROW = [
+  "Titre de l'event",
+  "Contenu de l'event",
+  'admin@cap-collectif.com',
+  '2010-05-20 00:00:00',
+  '2010-07-24 00:00:00',
+  'true',
+  '25 rue claude tillier',
+  '75012',
+  'Paris',
+  'France',
+  'titre du theme1/titre du theme2',
+  'titre du projet1/titre du projet2',
+  'true',
+  'true',
+  '',
+  '',
+  '',
+];
+
+const csvData = encodeURI(`${HEADERS.join(';')}\n${EXAMPLE_ROW.join(';')}`);
+
 export const CSV_MAX_UPLOAD_SIZE = 8000000; // 8 Mo
 export const AdminImportEventsCsvInput = ({
   input,
@@ -51,7 +73,7 @@ export const AdminImportEventsCsvInput = ({
         <FormattedHTMLMessage
           id="csv-file-helptext"
           values={{
-            link: encodeURI(`data:text/csv;charset=utf-8,${HEADERS.join(';')}`),
+            link: `data:text/csv;charset=utf-8,${csvData}`,
           }}
         />
       </HelpBlock>
@@ -121,6 +143,26 @@ export const AdminImportEventsCsvInput = ({
                       className="small">
                       {input.value.notFoundThemes.map((themes: string, key: number) => (
                         <li key={key}>{themes}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {input.value.notFoundProjects && input.value.notFoundProjects.length > 0 && (
+                  <div>
+                    <h4>
+                      <i className="cap cap-ios-close text-danger" />{' '}
+                      <b>
+                        <FormattedMessage
+                          id="count-untraceable-projects"
+                          values={{ num: input.value.notFoundProjects.length }}
+                        />
+                      </b>
+                    </h4>
+                    <ul
+                      style={{ listStyle: 'none', maxHeight: 80, overflowY: 'scroll' }}
+                      className="small">
+                      {input.value.notFoundProjects.map((projects: string, key: number) => (
+                        <li key={key}>{projects}</li>
                       ))}
                     </ul>
                   </div>

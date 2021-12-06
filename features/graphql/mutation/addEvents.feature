@@ -45,8 +45,8 @@ Scenario: An admin wants to add a list of events with dry run
             "startAt": "2018-03-07 00:00:00",
             "endAt": "2018-03-16 00:00:00",
             "authorEmail": "aurelien@cap-collectif.com",
-            "themes": ["theme1"],
-            "projects": ["UHJvamVjdDpwcm9qZWN0MQ==","UHJvamVjdDpwcm9qZWN0Mg=="],
+            "themes": ["Immobilier"],
+            "projects": ["Projet externe","Croissance, innovation, disruption"],
             "address": "25 rue Claude Tillier",
             "zipCode": "75012",
             "commentable": false,
@@ -93,10 +93,10 @@ Scenario: An admin wants to add a list of events with dry run
             ],
             "projects": [
               {
-                "id": "UHJvamVjdDpwcm9qZWN0MQ=="
+                "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q="
               },
               {
-                "id": "UHJvamVjdDpwcm9qZWN0Mg=="
+                "id": "UHJvamVjdDpwcm9qZWN0MQ=="
               }
             ],
             "commentable": false,

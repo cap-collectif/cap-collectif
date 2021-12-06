@@ -462,6 +462,9 @@ type AddEventsPayload {
   """List of themes ID that didn't match an existing themes."""
   notFoundThemes: [ID]!
 
+  """List of projects ID that didn't match an existing projects."""
+  notFoundProjects: [ID]!
+
   """List of dates that didn't got the good format"""
   brokenDates: [String]!
   clientMutationId: String
@@ -5447,8 +5450,8 @@ input EventInput {
   startAt: String
   endAt: String
   authorEmail: String!
-  themes: [ID!]!
-  projects: [ID!]!
+  themes: [String!]!
+  projects: [String!]!
   guestListEnabled: Boolean!
   enabled: Boolean!
   commentable: Boolean!
