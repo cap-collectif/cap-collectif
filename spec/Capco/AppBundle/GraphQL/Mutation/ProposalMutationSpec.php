@@ -20,8 +20,10 @@ use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -89,6 +91,8 @@ class ProposalMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalidResolver,
         Manager $toggleManager,
         ProposalSocialNetworks $proposalSocialNetworks,
+        Cache $cacheDriver,
+        Configuration $configuration,
         $wasDraft = true
     ) {
         $this->setContainer($container);
@@ -164,6 +168,13 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $em->flush()->shouldBeCalled();
 
+        $em->getConfiguration()->willReturn($configuration);
+        $configuration->getResultCacheImpl()->willReturn($cacheDriver);
+
+        $slug = 'abc';
+        $proposal->getSlug()->willReturn($slug);
+        $cacheDriver->delete(ProposalRepository::getOneBySlugCacheKey($slug));
+
         $indexer
             ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal21')
             ->shouldBeCalled();
@@ -191,6 +202,8 @@ class ProposalMutationSpec extends ObjectBehavior
         ProposalRevision $proposalRevision4,
         ProposalSocialNetworks $proposalSocialNetworks,
         Manager $toggleManager,
+        Cache $cacheDriver,
+        Configuration $configuration,
         $wasDraft = false
     ) {
         $this->setContainer($container);
@@ -306,6 +319,13 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $em->flush()->shouldBeCalled();
 
+        $em->getConfiguration()->willReturn($configuration);
+        $configuration->getResultCacheImpl()->willReturn($cacheDriver);
+
+        $slug = 'abc';
+        $proposal->getSlug()->willReturn($slug);
+        $cacheDriver->delete(ProposalRepository::getOneBySlugCacheKey($slug));
+
         $indexer
             ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal10')
             ->shouldBeCalled();
@@ -328,7 +348,9 @@ class ProposalMutationSpec extends ObjectBehavior
         Container $container,
         GlobalIdResolver $globalidResolver,
         ProposalSocialNetworks $proposalSocialNetworks,
-        Manager $toggleManager
+        Manager $toggleManager,
+        Cache $cacheDriver,
+        Configuration $configuration
     ) {
         $this->setContainer($container);
 
@@ -409,6 +431,13 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $em->flush()->shouldBeCalled();
 
+        $em->getConfiguration()->willReturn($configuration);
+        $configuration->getResultCacheImpl()->willReturn($cacheDriver);
+
+        $slug = 'abc';
+        $proposal->getSlug()->willReturn($slug);
+        $cacheDriver->delete(ProposalRepository::getOneBySlugCacheKey($slug));
+
         $indexer
             ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal10')
             ->shouldBeCalled();
@@ -431,7 +460,9 @@ class ProposalMutationSpec extends ObjectBehavior
         Container $container,
         GlobalIdResolver $globalidResolver,
         ProposalSocialNetworks $proposalSocialNetworks,
-        Manager $toggleManager
+        Manager $toggleManager,
+        Cache $cacheDriver,
+        Configuration $configuration
     ) {
         $this->setContainer($container);
 
@@ -509,6 +540,13 @@ class ProposalMutationSpec extends ObjectBehavior
         $form->remove('author')->shouldNotBeCalled();
 
         $em->flush()->shouldBeCalled();
+
+        $em->getConfiguration()->willReturn($configuration);
+        $configuration->getResultCacheImpl()->willReturn($cacheDriver);
+
+        $slug = 'abc';
+        $proposal->getSlug()->willReturn($slug);
+        $cacheDriver->delete(ProposalRepository::getOneBySlugCacheKey($slug));
 
         $indexer
             ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal10')

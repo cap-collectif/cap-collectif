@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Type;
 
+use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
 use PhpSpec\ObjectBehavior;
 use GraphQL\Type\Definition\Type;
 use Capco\AppBundle\Entity\Debate\Debate;
@@ -19,9 +20,10 @@ class NodeTypeResolverSpec extends ObjectBehavior
     public function let(
         TypeResolver $typeResolver,
         RequirementTypeResolver $requirementTypeResolver,
-        QuestionTypeResolver $questionTypeResolver
+        QuestionTypeResolver $questionTypeResolver,
+        ReplyTypeResolver $replyTypeResolver
     ) {
-        $this->beConstructedWith($typeResolver, $requirementTypeResolver, $questionTypeResolver);
+        $this->beConstructedWith($typeResolver, $requirementTypeResolver, $questionTypeResolver, $replyTypeResolver);
     }
 
     public function it_is_initializable(): void

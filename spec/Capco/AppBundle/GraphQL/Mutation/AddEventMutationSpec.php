@@ -143,7 +143,6 @@ class AddEventMutationSpec extends ObjectBehavior
         Form $form,
         Indexer $indexer,
         Event $event,
-        Publisher $publisher,
         GlobalIdResolver $globalIdResolver,
         User $author
     ) {
@@ -162,13 +161,12 @@ class AddEventMutationSpec extends ObjectBehavior
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(true);
-        $viewer->isSuperAdmin()->willReturn(false);
         $viewer->isProjectAdmin()->willReturn(false);
-        $viewer->isOnlyUser()->willReturn(true);
+        $viewer->isOnlyUser()->willReturn(false);
 
         $globalIdResolver->resolve($values['author'], $viewer)->willReturn($author);
 
-        $event->getAuthor()->willReturn($viewer);
+        $event->getAuthor()->willReturn($author);
 
         $form
             ->submit(
@@ -193,7 +191,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $payload['userErrors']->shouldBe([]);
         $payload['eventEdge']->shouldHaveType(Edge::class);
         $payload['eventEdge']->node->shouldHaveType(Event::class);
-        $payload['eventEdge']->node->getAuthor()->shouldBe($viewer);
+        $payload['eventEdge']->node->getAuthor()->shouldBe($author);
     }
 
     public function it_try_to_persists_new_event_with_customCode_as_user(

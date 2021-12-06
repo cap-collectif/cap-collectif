@@ -53,7 +53,8 @@ class EventOwnerEventsResolverSpec extends ObjectBehavior
                 ],
                 null,
                 $viewer,
-                false
+                false,
+                true
             )
             ->shouldBeCalled()
             ->willReturn($paginatedResult);

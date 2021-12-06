@@ -7,11 +7,14 @@ use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
 use Capco\AppBundle\GraphQL\Mutation\UpdateShieldAdminFormMutation;
+use Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
+use Doctrine\Common\Cache\Cache;
+use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -26,7 +29,8 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         MediaRepository $mediaRepository,
         SiteParameterRepository $siteParameterRepository,
-        Manager $toggleManager
+        Manager $toggleManager,
+        UpdateSiteParameterMutation $updateSiteParameterMutation
     ) {
         $this->beConstructedWith(
             $cache,
@@ -34,7 +38,8 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
             $em,
             $mediaRepository,
             $siteParameterRepository,
-            $toggleManager
+            $toggleManager,
+            $updateSiteParameterMutation
         );
     }
 
@@ -53,7 +58,9 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         EntityRepository $siteParameterTranslationRepository,
         Manager $toggleManager,
         SiteParameter $currentIntroductionParameter,
-        Arg $arguments
+        Arg $arguments,
+        Cache $cacheDriver,
+        Configuration $configuration
     ): void {
         $shieldMode = true;
         $introduction = '';
@@ -85,6 +92,10 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $siteImage->setIsEnabled(null !== $media)->shouldBeCalled();
         $siteImage->getMedia()->willReturn($media);
         $siteImage->getIsEnabled()->willReturn(true);
+
+        $em->getConfiguration()->willReturn($configuration);
+        $configuration->getResultCacheImpl()->willReturn($cacheDriver);
+        $cacheDriver->delete('SiteImageRepository_getValuesIfEnabled_resultcache_');
 
         $toggleManager
             ->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)
@@ -128,7 +139,9 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         EntityRepository $siteParameterTranslationRepository,
         Manager $toggleManager,
         SiteParameter $currentIntroductionParameter,
-        Arg $arguments
+        Arg $arguments,
+        Cache $cacheDriver,
+        Configuration $configuration
     ): void {
         $shieldMode = true;
         $introduction = '';
@@ -159,6 +172,10 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $siteImage->setIsEnabled(null !== $media)->shouldBeCalled();
         $siteImage->getMedia()->willReturn($media);
         $siteImage->getIsEnabled()->willReturn(false);
+
+        $em->getConfiguration()->willReturn($configuration);
+        $configuration->getResultCacheImpl()->willReturn($cacheDriver);
+        $cacheDriver->delete('SiteImageRepository_getValuesIfEnabled_resultcache_');
 
         $toggleManager
             ->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)
@@ -201,7 +218,9 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         EntityRepository $siteParameterTranslationRepository,
         Manager $toggleManager,
         SiteParameter $currentIntroductionParameter,
-        Arg $arguments
+        Arg $arguments,
+        Cache $cacheDriver,
+        Configuration $configuration
     ): void {
         $introduction = 'oui';
         $shieldMode = true;
@@ -236,6 +255,10 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $siteImage->setIsEnabled(null !== $media)->shouldBeCalled();
         $siteImage->getMedia()->willReturn($media);
         $siteImage->getIsEnabled()->willReturn(false);
+
+        $em->getConfiguration()->willReturn($configuration);
+        $configuration->getResultCacheImpl()->willReturn($cacheDriver);
+        $cacheDriver->delete('SiteImageRepository_getValuesIfEnabled_resultcache_');
 
         $toggleManager
             ->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)

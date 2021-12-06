@@ -63,7 +63,7 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
         EntityManagerInterface $entityManager
     ): void {
         $response = $this->initResponse($response, $body, 'sent', MailjetTransport::class);
-        $emailMessage->getMailjetId()->willReturn('456');
+        $emailMessage->getMailerId()->willReturn('456');
         $mailjetClient->get('message/456')->willReturn($response);
         $emailMessage
             ->setInternalStatus(UserInviteEmailMessage::SENT)
@@ -82,7 +82,7 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
     ): void {
         $response = $this->initResponse($response, $body, 'queued', MailjetTransport::class);
         $mailjetClient->get('message/456')->willReturn($response);
-        $emailMessage->getMailjetId()->willReturn('456');
+        $emailMessage->getMailerId()->willReturn('456');
         $this->shouldThrow(
             new UserInviteMessageQueuedException(
                 UserInviteMessageQueuedException::MESSAGE_DEFAULT_QUEUED
@@ -100,7 +100,7 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
         $response = $this->initResponse($response, $body, 'bounced', MailjetTransport::class);
         $mailjetClient->get('message/456')->willReturn($response);
         $emailMessage->getId()->willReturn('123');
-        $emailMessage->getMailjetId()->willReturn('456');
+        $emailMessage->getMailerId()->willReturn('456');
         $emailMessage
             ->setInternalStatus(UserInviteEmailMessage::SEND_FAILURE)
             ->shouldBeCalled()
@@ -123,7 +123,7 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($emailMessage);
         $emailMessage->getId()->willReturn('123');
-        $emailMessage->getMandrillId()->willReturn('456');
+        $emailMessage->getMailerId()->willReturn('456');
         $entityManager->flush()->shouldBeCalled();
         $this->onStatusCheckInvitation($emailMessage, MandrillTransport::class);
     }
@@ -135,7 +135,7 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
         Stream $body
     ): void {
         $response = $this->initResponse($response, $body, 'queued', MandrillTransport::class);
-        $emailMessage->getMandrillId()->willReturn('456');
+        $emailMessage->getMailerId()->willReturn('456');
         $mandrillClient->post('messages/info', ['id' => 456])->willReturn($response);
         $this->shouldThrow(
             new UserInviteMessageQueuedException(
@@ -157,7 +157,7 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
             ->setInternalStatus(UserInviteEmailMessage::SEND_FAILURE)
             ->shouldBeCalled()
             ->willReturn($emailMessage);
-        $emailMessage->getMandrillId()->willReturn('456');
+        $emailMessage->getMailerId()->willReturn('456');
         $emailMessage->getId()->willReturn('123');
         $entityManager->flush()->shouldBeCalled();
         $this->onStatusCheckInvitation($emailMessage, MandrillTransport::class);

@@ -28,14 +28,13 @@ use Symfony\Component\Form\FormInterface;
 
 BypassFinals::enable();
 
-class UpdateReplyMutationSpec extends ObjectBehavior
+class UpdateUserReplyMutationSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ReplyRepository $replyRepo,
         ResponsesFormatter $responsesFormatter,
-        StepUrlResolver $stepUrlResolver,
         Publisher $publisher
     ) {
         $this->beConstructedWith(
@@ -43,7 +42,6 @@ class UpdateReplyMutationSpec extends ObjectBehavior
             $formFactory,
             $replyRepo,
             $responsesFormatter,
-            $stepUrlResolver,
             $publisher
         );
     }

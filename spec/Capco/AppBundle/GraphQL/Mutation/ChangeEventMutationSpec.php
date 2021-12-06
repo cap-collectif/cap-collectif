@@ -10,7 +10,6 @@ use Capco\AppBundle\Security\EventVoter;
 use DateTime;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
@@ -32,7 +31,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactory $formFactory,
-        LoggerInterface $logger,
         AddEventMutation $addEventMutation,
         Indexer $indexer,
         Publisher $publisher,
@@ -42,7 +40,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
             $globalIdResolver,
             $em,
             $formFactory,
-            $logger,
             $addEventMutation,
             $indexer,
             $publisher,
@@ -79,6 +76,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         ];
 
         $viewer->isAdmin()->willReturn(true);
+        $viewer->isProjectAdmin()->willReturn(true);
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
@@ -132,6 +130,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         ];
 
         $viewer->isAdmin()->willReturn(true);
+        $viewer->isProjectAdmin()->willReturn(true);
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
@@ -182,6 +181,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
             ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
+        $viewer->isProjectAdmin()->willReturn(false);
         $input
             ->getArrayCopy()
             ->shouldBeCalled()
@@ -247,6 +247,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         ];
 
         $viewer->isAdmin()->willReturn(false);
+        $viewer->isProjectAdmin()->willReturn(false);
         $arguments->getArrayCopy()->willReturn($values);
 
         $reviewer->isAdmin()->willReturn(true);

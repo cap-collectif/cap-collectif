@@ -24,7 +24,6 @@ class ChangeEventMutation implements MutationInterface
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
     private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
     private Indexer $indexer;
     private Publisher $publisher;
     private AuthorizationCheckerInterface $authorizationChecker;
@@ -34,7 +33,6 @@ class ChangeEventMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        LoggerInterface $logger,
         AddEventMutation $addEventMutation,
         Indexer $indexer,
         Publisher $publisher,
@@ -43,7 +41,6 @@ class ChangeEventMutation implements MutationInterface
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->formFactory = $formFactory;
-        $this->logger = $logger;
         $this->indexer = $indexer;
         $this->publisher = $publisher;
         $this->authorizationChecker = $authorizationChecker;

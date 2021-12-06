@@ -44,7 +44,7 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         $this->firstCallOfCache($cachedItem, $cache);
         $error->count()->willReturn(0);
         $validator
-            ->validate('UnSuperCode', Argument::type(CheckIdentificationCode::class))
+            ->validate('UNSUPERCODE', Argument::type(CheckIdentificationCode::class))
             ->willReturn($error);
 
         $this->__invoke($arguments, $viewer)->shouldBe([
@@ -63,7 +63,7 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         RedisCache $cache
     ) {
         $this->initMutation($arguments, $viewer, $validator, $violationList);
-        $viewer->getUserIdentificationCodeValue()->willReturn('UnSuperCode');
+        $viewer->getUserIdentificationCodeValue()->willReturn('UNSUPERCODE');
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'user' => $viewer,
@@ -104,7 +104,7 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
     ) {
         $this->initMutation($arguments, $viewer, $validator, $violationList);
         $validator
-            ->validate('UnSuperCode', Argument::type(CheckIdentificationCode::class))
+            ->validate('UNSUPERCODE', Argument::type(CheckIdentificationCode::class))
             ->willReturn($violationList);
         $this->firstCallOfCache($cachedItem, $cache);
 
@@ -181,12 +181,12 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $violationList
     ) {
-        $argumentsValues = ['identificationCode' => 'UnSuperCode'];
+        $argumentsValues = ['identificationCode' => 'UNSUPERCODE'];
         $arguments->getArrayCopy()->willReturn($argumentsValues);
         $viewer->getId()->willReturn('viewerId');
         $viewer->getUserIdentificationCodeValue()->willReturn(null);
         $validator
-            ->validate('UnSuperCode', Argument::type(CheckIdentificationCode::class))
+            ->validate('UNSUPERCODE', Argument::type(CheckIdentificationCode::class))
             ->willReturn($violationList);
     }
 
