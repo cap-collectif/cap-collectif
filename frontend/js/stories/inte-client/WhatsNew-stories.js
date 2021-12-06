@@ -26,7 +26,7 @@ const news = [
   },
 ];
 
-storiesOf('Inté client|WhatsNew', module).add(
+storiesOf('Inté client/WhatsNew', module).add(
   'Default',
   () => (
     <div style={{ maxWidth: '1100px', margin: 'auto' }}>
