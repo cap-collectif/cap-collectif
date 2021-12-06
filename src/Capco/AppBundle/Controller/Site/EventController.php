@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -92,12 +93,10 @@ class EventController extends Controller
         $csvFile = 'events.csv';
 
         if (!file_exists($path . $csvFile)) {
-            // We create a session for flashBag
-            $flashBag = $this->session->getFlashBag();
-
-            $flashBag->add('danger', $this->tranlator->trans('project.download.not_yet_generated'));
-
-            return $this->redirect($request->headers->get('referer'));
+            return new JsonResponse(
+                ['errorTranslationKey' => 'project.download.not_yet_generated'],
+                404
+            );
         }
 
         $filename = $csvFile;

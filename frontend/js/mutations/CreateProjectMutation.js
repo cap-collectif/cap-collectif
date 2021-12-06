@@ -24,6 +24,7 @@ const commit = (
   variables: CreateProjectMutationVariables,
   isAdmin: boolean,
   isProjectAdmin?: boolean,
+  hasProject: boolean,
 ): Promise<CreateProjectMutationResponse> => {
   return commitMutation(environment, {
     mutation,
@@ -43,6 +44,7 @@ const commit = (
       },
     },
     updater: (store: RecordSourceSelectorProxy) => {
+      if (!hasProject) return;
       const payload = store.getRootField('createProject');
       if (!payload) return;
       const errorCode = payload.getValue('errorCode');
@@ -51,7 +53,7 @@ const commit = (
       const rootFields = store.getRoot();
       const viewer = rootFields.getLinkedRecord('viewer');
       if (!viewer) return;
-      const projects = viewer.getLinkedRecord('project', {
+      const projects = viewer.getLinkedRecord('projects', {
         affiliations: isAdmin ? null : ['OWNER'],
       });
       if (!projects) return;

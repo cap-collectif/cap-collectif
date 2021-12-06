@@ -25,6 +25,7 @@ type PropsBefore = {|
   +term: string,
   +show: boolean,
   +onClose: () => void,
+  +hasProposalForm: boolean,
 |};
 
 type Props = {|
@@ -69,9 +70,16 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     },
     props.isAdmin,
     props.viewer,
+    props.hasProposalForm,
   ).then(response => {
     if (!response.createProposalForm?.proposalForm) {
       return mutationErrorToast(props.intl);
+    }
+
+    const adminUrl = response.createProposalForm?.proposalForm.adminUrl;
+    if (!props.hasProposalForm && adminUrl) {
+      dispatch(reset(formName));
+      window.location.href = adminUrl;
     }
 
     toast({

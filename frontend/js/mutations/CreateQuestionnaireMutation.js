@@ -15,6 +15,7 @@ const mutation = graphql`
     createQuestionnaire(input: $input) {
       questionnaire @prependNode(connections: $connections, edgeTypeName: "QuestionnaireEdge") {
         ...QuestionnaireItem_questionnaire
+        adminUrl
       }
     }
   }
@@ -24,6 +25,7 @@ const commit = (
   variables: CreateQuestionnaireMutationVariables,
   isAdmin: boolean,
   owner: Viewer,
+  hasQuestionnaire: boolean,
 ): Promise<CreateQuestionnaireMutationResponse> =>
   commitMutation(environment, {
     mutation,
@@ -42,6 +44,9 @@ const commit = (
       },
     },
     updater: (store: RecordSourceSelectorProxy) => {
+      if (!hasQuestionnaire) {
+        return;
+      }
       const payload = store.getRootField('createQuestionnaire');
       if (!payload) return;
       const errorCode = payload.getValue('errorCode');

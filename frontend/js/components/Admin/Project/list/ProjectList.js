@@ -94,9 +94,13 @@ const ProjectList = ({
               {intl.formatMessage({ id: 'admin.fields.proposal.project' })}
             </Text>
           </Table.Th>
-          <Table.Th>
-            <Text lineHeight="sm">{intl.formatMessage({ id: 'admin.projects.list.author' })}</Text>
-          </Table.Th>
+          {isAdmin && (
+            <Table.Th>
+              <Text lineHeight="sm">
+                {intl.formatMessage({ id: 'admin.projects.list.author' })}
+              </Text>
+            </Table.Th>
+          )}
           <Table.Th>
             <Text lineHeight="sm">
               {intl.formatMessage({ id: 'admin.settings.header.access' })}
@@ -161,6 +165,7 @@ const ProjectList = ({
                 project={project}
                 connectionName={projects.__id}
                 isSuperAdmin={isSuperAdmin}
+                isAdmin={isAdmin}
                 isOnlyProjectAdmin={isOnlyProjectAdmin}
               />
             </Tr>

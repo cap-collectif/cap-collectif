@@ -64,6 +64,7 @@ const ProjectListPage = ({ queryReference, isAdmin }: Props): React.Node => {
       label: query.viewer.username,
     },
   };
+  const hasProjects = query.viewer.allProjects.totalCount > 0;
   return (
     <Flex direction="column" spacing={6}>
       <Text
@@ -76,7 +77,7 @@ const ProjectListPage = ({ queryReference, isAdmin }: Props): React.Node => {
         {intl.formatMessage({ id: 'global.all.projects' })}
       </Text>
 
-      {query.viewer.allProjects.totalCount > 0 ? (
+      {hasProjects ? (
         <Flex
           direction="column"
           p={8}
@@ -96,6 +97,7 @@ const ProjectListPage = ({ queryReference, isAdmin }: Props): React.Node => {
               initialValues={modalInitialValues}
               isOnlyProjectAdmin={query.viewer.isOnlyProjectAdmin}
               noResult={false}
+              hasProjects={hasProjects}
             />
             <Input
               type="text"
@@ -128,6 +130,7 @@ const ProjectListPage = ({ queryReference, isAdmin }: Props): React.Node => {
           query={query}
           viewerId={query.viewer.id}
           isOnlyProjectAdmin={query.viewer.isOnlyProjectAdmin}
+          hasProjects={hasProjects}
         />
       )}
     </Flex>

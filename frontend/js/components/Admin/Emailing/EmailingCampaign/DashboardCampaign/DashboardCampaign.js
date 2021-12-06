@@ -237,7 +237,7 @@ export const DashboardCampaign = ({ query, relay }: Props) => {
       </PickableList>
 
       <ModalConfirmDelete show={isOpen} onClose={onClose} campaignsIds={selectedRows} />
-      <ModalOnboarding />
+      <ModalOnboarding isOnlyProjectAdmin={viewer.isOnlyProjectAdmin} />
     </>
   );
 };
@@ -259,6 +259,7 @@ export default createPaginationContainer(
           affiliations: { type: "[EmailingCampaignAffiliation!]" }
         ) {
         viewer {
+          isOnlyProjectAdmin
           campaigns: emailingCampaigns(
             first: $count
             after: $cursor

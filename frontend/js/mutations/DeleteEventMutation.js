@@ -10,6 +10,16 @@ import type {
   DeleteEventMutationResponse,
 } from '~relay/DeleteEventMutation.graphql';
 
+type Variables = {|
+  ...DeleteEventMutationVariables,
+  +affiliations?: ?(string[]),
+|};
+
+type ConnectionArgs = {|
+  +status: string,
+  affiliations?: ?(string[]),
+|};
+
 const mutation = graphql`
   mutation DeleteEventMutation($input: DeleteEventInput!) {
     deleteEvent(input: $input) {
@@ -18,7 +28,7 @@ const mutation = graphql`
   }
 `;
 
-const commit = (variables: DeleteEventMutationVariables): Promise<DeleteEventMutationResponse> =>
+const commit = (variables: Variables): Promise<DeleteEventMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
@@ -28,6 +38,7 @@ const commit = (variables: DeleteEventMutationVariables): Promise<DeleteEventMut
       },
     },
     updater: (store: RecordSourceSelectorProxy) => {
+      const affiliations = variables?.affiliations;
       // Create new node
       const newNode = store.get(variables.input.eventId);
       if (!newNode) return;
@@ -40,9 +51,12 @@ const commit = (variables: DeleteEventMutationVariables): Promise<DeleteEventMut
       const viewer = rootFields.getLinkedRecord('viewer');
       if (!viewer) return;
 
-      const deletedConnection = viewer.getLinkedRecord('events', {
-        status: 'DELETED',
-      });
+      const connectionArgs: ConnectionArgs = { status: 'DELETED' };
+      if (affiliations) {
+        connectionArgs.affiliations = affiliations;
+      }
+
+      const deletedConnection = viewer.getLinkedRecord('events', connectionArgs);
       if (!deletedConnection) return;
 
       ConnectionHandler.insertEdgeAfter(deletedConnection, newEdge);

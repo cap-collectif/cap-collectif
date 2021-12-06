@@ -15,6 +15,7 @@ const mutation = graphql`
     createProposalForm(input: $input) {
       proposalForm @prependNode(connections: $connections, edgeTypeName: "ProposalFormEdge") {
         ...ProposalFormItem_proposalForm
+        adminUrl
       }
     }
   }
@@ -24,6 +25,7 @@ const commit = (
   variables: CreateProposalFormMutationVariables,
   isAdmin: boolean,
   owner: Viewer,
+  hasProposalForm: boolean,
 ): Promise<CreateProposalFormMutationResponse> =>
   commitMutation(environment, {
     mutation,
@@ -42,6 +44,7 @@ const commit = (
       },
     },
     updater: (store: RecordSourceSelectorProxy) => {
+      if (!hasProposalForm) return;
       const payload = store.getRootField('createProposalForm');
       if (!payload) return;
       const errorCode = payload.getValue('errorCode');

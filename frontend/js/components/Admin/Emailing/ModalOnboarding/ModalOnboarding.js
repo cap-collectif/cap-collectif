@@ -16,12 +16,20 @@ import { FontWeight } from '~ui/Primitives/constants';
 
 const needModalOnboarding = (): boolean => !localStorage.getItem('emailing_discover');
 
-const ModalOnboarding = () => {
+type Props = {|
+  +isOnlyProjectAdmin: boolean,
+|};
+
+const ModalOnboarding = ({ isOnlyProjectAdmin }: Props) => {
   const intl = useIntl();
   const isDefaultOpen = needModalOnboarding();
   const { isOpen, onClose } = useDisclosure(isDefaultOpen);
 
   if (isDefaultOpen) localStorage.setItem('emailing_discover', 'true');
+
+  const announcementTranslationKey = isOnlyProjectAdmin
+    ? 'announcement.emailing.new.tool.project.admin'
+    : 'announcement.emailing.new.tool';
 
   return (
     <ModalContainer
@@ -49,7 +57,7 @@ const ModalOnboarding = () => {
               {intl.formatMessage({ id: 'welcome.new.emailing.tool' })}
             </Heading>
             <Text color="gray.700" mb={4}>
-              {intl.formatMessage({ id: 'announcement.emailing.new.tool' })}
+              {intl.formatMessage({ id: announcementTranslationKey })}
             </Text>
             <Text color="gray.700">
               {intl.formatMessage({ id: 'consult-help-center-new-feature' })}

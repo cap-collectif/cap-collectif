@@ -26,6 +26,7 @@ type PropsBefore = {|
   +show: boolean,
   +onClose: () => void,
   +viewer: Viewer,
+  +hasQuestionnaire: boolean,
 |};
 
 type Props = {|
@@ -75,9 +76,16 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     },
     props.isAdmin,
     props.viewer,
+    props.hasQuestionnaire,
   ).then(response => {
     if (!response.createQuestionnaire?.questionnaire) {
       return mutationErrorToast(props.intl);
+    }
+
+    const adminUrl = response.createQuestionnaire?.questionnaire?.adminUrl;
+    if (!props.hasQuestionnaire && adminUrl) {
+      dispatch(reset(formName));
+      window.location.href = adminUrl;
     }
 
     toast({

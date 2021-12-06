@@ -72,12 +72,16 @@ const PostItem = ({ post: postFragment, connectionName, isAdmin }: Props): React
           </Link>
         )}
       </Td>
-      <Td>
-        {post.authors.length > 0 && (
-          <Link href={post.authors[0].url}>{post.authors[0].username}</Link>
-        )}
-      </Td>
-      {isAdmin && <Table.Td>{post.owner?.username}</Table.Td>}
+      {isAdmin && (
+        <>
+          <Td>
+            {post.authors.length > 0 && (
+              <Link href={post.authors[0].url}>{post.authors[0].username}</Link>
+            )}
+          </Td>
+          <Table.Td>{post.owner?.username}</Table.Td>
+        </>
+      )}
       <Td>
         <Flex direction="column">
           {project && project.title && project.url && (

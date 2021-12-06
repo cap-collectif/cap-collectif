@@ -37,6 +37,7 @@ type PropsBefore = {|
   +query: ?ProjectModalCreateProject_query$key,
   +initialValues: FormValues,
   +noResult?: boolean,
+  +hasProjects: boolean,
 |};
 
 type Props = {|
@@ -72,10 +73,16 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     },
     props.isAdmin,
     props.isOnlyProjectAdmin,
+    props.hasProjects,
   )
     .then(response => {
       if (!response.createProject?.project) {
         return mutationErrorToast(props.intl);
+      }
+      const adminUrl = response.createProject?.project.adminAlphaUrl;
+      if (!props.hasProjects && adminUrl) {
+        dispatch(reset(formName));
+        window.location.href = adminUrl;
       }
       toast({
         variant: 'success',

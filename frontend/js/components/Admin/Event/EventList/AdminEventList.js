@@ -62,17 +62,19 @@ const AdminEventList = ({ viewer, term, isAdmin, status, resetFilters }: Props):
   const { events } = data;
   const firstRendered = React.useRef(null);
   const hasEvents = events ? events.totalCount > 0 : false;
+  const affiliations = React.useMemo(() => (isAdmin ? null : ['OWNER']), [isAdmin]);
+
   React.useEffect(() => {
     if (firstRendered.current) {
       refetch({
         term: term || null,
         status: status !== 'ALL' ? status : null,
-        affiliations: isAdmin ? null : ['OWNER'],
+        affiliations,
         orderBy: { field: 'START_AT', direction: orderBy },
       });
     }
     firstRendered.current = true;
-  }, [term, isAdmin, refetch, orderBy, status]);
+  }, [term, isAdmin, refetch, orderBy, status, affiliations]);
   return (
     <Table
       style={{ border: 'none' }}
@@ -137,7 +139,7 @@ const AdminEventList = ({ viewer, term, isAdmin, status, resetFilters }: Props):
           .filter(Boolean)
           .map(event => (
             <Tr key={event.id} rowId={event.id}>
-              <AdminEventItem isAdmin={isAdmin} event={event} />
+              <AdminEventItem isAdmin={isAdmin} event={event} affiliations={affiliations} />
             </Tr>
           ))}
       </Table.Tbody>

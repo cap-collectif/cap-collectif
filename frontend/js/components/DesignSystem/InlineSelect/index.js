@@ -22,7 +22,7 @@ type Props = {|
   ...AppBoxProps,
   +value?: string | null,
   +onChange?: (value: string) => void,
-  +children: React.ChildrenArray<React.Element<typeof InlineSelectChoice>>,
+  +children: React.Node,
 |};
 
 export const useInlineSelect = (): Context => {

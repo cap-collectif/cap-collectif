@@ -49,6 +49,8 @@ class DeleteEventMutation extends BaseDeleteMutation
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($id, $viewer);
 
+        $owner = $event->getOwner();
+
         $eventParticipants = $this->registration->getAllParticipantsInEvent($event);
         $eventMedia = $event->getMedia();
         if ($eventMedia) {
@@ -80,7 +82,14 @@ class DeleteEventMutation extends BaseDeleteMutation
             ->getQuery()
             ->getResult();
 
+        if ($owner) {
+            $event->setOwner($owner);
+        }
+
         $this->em->flush();
+
+        $this->indexer->index(Event::class, $event->getId());
+        $this->indexer->finishBulk();
 
         $this->publisher->publish(
             'event.delete',

@@ -67,7 +67,7 @@ const onSubmit = (
       }
     });
   }
-  return CreateProjectMutation.commit({ input, connections: [] }, true).then(data => {
+  return CreateProjectMutation.commit({ input, connections: [] }, true, false, false).then(data => {
     if (data.createProject && data.createProject.project) {
       window.location.href = data.createProject.project.adminAlphaUrl;
       AppDispatcher.dispatch({

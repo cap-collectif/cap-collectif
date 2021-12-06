@@ -8,6 +8,7 @@ exports[`<ModalCreateProposalForm  /> should renders correctly 1`] = `
   form="form-create-proposalForm"
   forwardedRef={null}
   getFormState={[Function]}
+  hasProposalForm={false}
   intl={
     Object {
       "formatDate": [Function],

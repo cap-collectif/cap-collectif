@@ -70,6 +70,8 @@ exports[`<DashboardMailingList /> should renders correctly 1`] = `
       />
     </PickableList.Body>
   </PickableList>
-  <ModalOnboarding />
+  <ModalOnboarding
+    isOnlyProjectAdmin={false}
+  />
 </Fragment>
 `;

@@ -15,9 +15,10 @@ type Props = {|
   +viewer: Viewer,
   +term: string,
   +orderBy: string,
+  +hasProposalForm: boolean,
 |};
 
-const NoResult = ({ isAdmin, viewer, term, orderBy }: Props): React.Node => {
+const NoResult = ({ isAdmin, viewer, term, orderBy, hasProposalForm }: Props): React.Node => {
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
 
@@ -56,6 +57,7 @@ const NoResult = ({ isAdmin, viewer, term, orderBy }: Props): React.Node => {
             orderBy={orderBy}
             onClose={onClose}
             show={isOpen}
+            hasProposalForm={hasProposalForm}
           />
         </>
       </Flex>

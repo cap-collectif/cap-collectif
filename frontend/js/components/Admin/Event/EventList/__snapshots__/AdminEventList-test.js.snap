@@ -310,63 +310,6 @@ exports[`<AdminEventList /> should render correctly 1`] = `
                 id="arrow"
               />
             </div>
-            <button
-              aria-controls="id-3"
-              aria-expanded={false}
-              aria-haspopup="dialog"
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              type="button"
-            >
-              <IconMock
-                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
-              />
-            </button>
-            <div
-              className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
-              style={
-                Object {
-                  "opacity": 0,
-                  "transform": "scale(0.8) translateZ(0)",
-                }
-              }
-            >
-              <p
-                className="sc-bdnxRM cZcArZ"
-                title="global.delete"
-              >
-                global.delete
-              </p>
-              <div
-                className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                data-popper-arrow={true}
-                id="arrow"
-              />
-            </div>
-            <div
-              aria-label="delete-confirmation"
-              aria-modal={true}
-              data-dialog={true}
-              hidden={true}
-              id="id-3"
-              onAnimationEnd={[Function]}
-              onBlur={[Function]}
-              onKeyDown={[Function]}
-              onTransitionEnd={[Function]}
-              role="dialog"
-              style={
-                Object {
-                  "display": "none",
-                }
-              }
-              tabIndex={-1}
-            />
           </div>
         </td>
       </tr>
@@ -476,65 +419,7 @@ exports[`<AdminEventList /> should render correctly 1`] = `
         >
           <div
             className="sc-bdnxRM Flex___StyledAppBox-RSPpX gNHkfZ"
-          >
-            <button
-              aria-controls="id-4"
-              aria-expanded={false}
-              aria-haspopup="dialog"
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              type="button"
-            >
-              <IconMock
-                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
-              />
-            </button>
-            <div
-              className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
-              style={
-                Object {
-                  "opacity": 0,
-                  "transform": "scale(0.8) translateZ(0)",
-                }
-              }
-            >
-              <p
-                className="sc-bdnxRM cZcArZ"
-                title="global.delete"
-              >
-                global.delete
-              </p>
-              <div
-                className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                data-popper-arrow={true}
-                id="arrow"
-              />
-            </div>
-            <div
-              aria-label="delete-confirmation"
-              aria-modal={true}
-              data-dialog={true}
-              hidden={true}
-              id="id-4"
-              onAnimationEnd={[Function]}
-              onBlur={[Function]}
-              onKeyDown={[Function]}
-              onTransitionEnd={[Function]}
-              role="dialog"
-              style={
-                Object {
-                  "display": "none",
-                }
-              }
-              tabIndex={-1}
-            />
-          </div>
+          />
         </td>
       </tr>
       <tr
@@ -653,63 +538,6 @@ exports[`<AdminEventList /> should render correctly 1`] = `
                 id="arrow"
               />
             </div>
-            <button
-              aria-controls="id-5"
-              aria-expanded={false}
-              aria-haspopup="dialog"
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              type="button"
-            >
-              <IconMock
-                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
-              />
-            </button>
-            <div
-              className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
-              style={
-                Object {
-                  "opacity": 0,
-                  "transform": "scale(0.8) translateZ(0)",
-                }
-              }
-            >
-              <p
-                className="sc-bdnxRM cZcArZ"
-                title="global.delete"
-              >
-                global.delete
-              </p>
-              <div
-                className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                data-popper-arrow={true}
-                id="arrow"
-              />
-            </div>
-            <div
-              aria-label="delete-confirmation"
-              aria-modal={true}
-              data-dialog={true}
-              hidden={true}
-              id="id-5"
-              onAnimationEnd={[Function]}
-              onBlur={[Function]}
-              onKeyDown={[Function]}
-              onTransitionEnd={[Function]}
-              role="dialog"
-              style={
-                Object {
-                  "display": "none",
-                }
-              }
-              tabIndex={-1}
-            />
           </div>
         </td>
       </tr>

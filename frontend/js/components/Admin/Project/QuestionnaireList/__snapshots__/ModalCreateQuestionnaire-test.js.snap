@@ -8,6 +8,7 @@ exports[`<ModalCreateQuestionnaire  /> should renders correcty 1`] = `
   form="form-create-questionnaire"
   forwardedRef={null}
   getFormState={[Function]}
+  hasQuestionnaire={false}
   initialValues={
     Object {
       "type": "QUESTIONNAIRE",

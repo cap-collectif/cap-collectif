@@ -138,7 +138,7 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
             .find(m => m.id === mailingListSelected)}
         />
       )}
-      <ModalOnboarding />
+      <ModalOnboarding isOnlyProjectAdmin={viewer.isOnlyProjectAdmin} />
     </>
   );
 };
@@ -155,6 +155,7 @@ export default createPaginationContainer(
           affiliations: { type: "[MailingListAffiliation!]" }
         ) {
         viewer {
+          isOnlyProjectAdmin
           mailingLists(first: $count, after: $cursor, term: $term, affiliations: $affiliations)
             @connection(key: "DashboardMailingList_mailingLists", filters: ["term"]) {
             totalCount

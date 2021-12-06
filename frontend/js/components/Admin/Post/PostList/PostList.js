@@ -79,10 +79,14 @@ const PostList = ({ viewer, term, isAdmin, resetTerm }: Props): React.Node => {
           <Table.Th>
             <Text lineHeight="sm">{intl.formatMessage({ id: 'global.title' })}</Text>
           </Table.Th>
-          <Table.Th>
-            <Text lineHeight="sm">{intl.formatMessage({ id: 'global.authors' })}</Text>
-          </Table.Th>
-          {isAdmin && <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>}
+          {isAdmin && (
+            <>
+              <Table.Th>
+                <Text lineHeight="sm">{intl.formatMessage({ id: 'global.authors' })}</Text>
+              </Table.Th>
+              <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>
+            </>
+          )}
           <Table.Th>
             <Text lineHeight="sm">
               {intl.formatMessage({ id: 'global.participative.project' })}

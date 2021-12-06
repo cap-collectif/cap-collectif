@@ -21,6 +21,7 @@ const props = {
   term: 'test de recherche',
   show: true,
   onClose: jest.fn(),
+  hasProposalForm: false,
 };
 
 describe('<ModalCreateProposalForm  />', () => {

@@ -61,6 +61,7 @@ describe('<ProjectModalCreateProject />', () => {
             orderBy="DESC"
             term=""
             initialValues={modalInitialValues}
+            hasProjects={false}
             {...componentProps}
           />
         );

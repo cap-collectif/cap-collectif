@@ -41,7 +41,13 @@ describe('<AdminEventModalConfirmationDelete />', () => {
       const data = useLazyLoadQuery<AdminEventModalConfirmationDeleteTestQuery>(query, variables);
 
       if (data?.event) {
-        return <AdminEventModalConfirmationDelete event={data?.event} {...componentProps} />;
+        return (
+          <AdminEventModalConfirmationDelete
+            event={data?.event}
+            {...componentProps}
+            affiliations={null}
+          />
+        );
       }
 
       return null;

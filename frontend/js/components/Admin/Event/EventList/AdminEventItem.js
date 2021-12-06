@@ -16,6 +16,7 @@ import downloadCSV from '~/components/Utils/downloadCSV';
 type Props = {|
   +event: AdminEventItem_event$key,
   +isAdmin: boolean,
+  +affiliations: ?(string[]),
 |};
 
 const FRAGMENT = graphql`
@@ -24,6 +25,7 @@ const FRAGMENT = graphql`
     title
     adminUrl
     reviewStatus
+    deletedAt
     projects {
       id
       title
@@ -47,7 +49,7 @@ const FRAGMENT = graphql`
     ...AdminEventModalConfirmationDelete_event
   }
 `;
-const AdminEventItem = ({ event: eventFragment, isAdmin }: Props): React.Node => {
+const AdminEventItem = ({ event: eventFragment, isAdmin, affiliations }: Props): React.Node => {
   const event = useFragment(FRAGMENT, eventFragment);
   const intl = useIntl();
   const project = event.projects[0];
@@ -152,7 +154,9 @@ const AdminEventItem = ({ event: eventFragment, isAdmin }: Props): React.Node =>
               }}
             />
           )}
-          <AdminEventModalConfirmationDelete event={event} />
+          {event.deletedAt === null && (
+            <AdminEventModalConfirmationDelete event={event} affiliations={affiliations} />
+          )}
         </Flex>
       </Td>
     </React.Fragment>

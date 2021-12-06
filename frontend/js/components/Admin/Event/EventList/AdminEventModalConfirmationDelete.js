@@ -15,6 +15,7 @@ import type { AdminEventModalConfirmationDelete_event$key } from '~relay/AdminEv
 
 type Props = {|
   +event: AdminEventModalConfirmationDelete_event$key,
+  +affiliations: ?(string[]),
 |};
 
 const FRAGMENT = graphql`
@@ -24,12 +25,17 @@ const FRAGMENT = graphql`
   }
 `;
 
-const deleteEvent = (eventId: string, hide: () => void, intl: IntlShape) => {
+const deleteEvent = (
+  eventId: string,
+  hide: () => void,
+  intl: IntlShape,
+  affiliations: ?(string[]),
+) => {
   const input = {
     eventId,
   };
   hide();
-  return DeleteEventMutation.commit({ input })
+  return DeleteEventMutation.commit({ input, affiliations })
     .then(() =>
       toast({
         variant: 'success',
@@ -39,7 +45,10 @@ const deleteEvent = (eventId: string, hide: () => void, intl: IntlShape) => {
     .catch(() => mutationErrorToast(intl));
 };
 
-const AdminEventModalConfirmationDelete = ({ event: eventFragment }: Props): React.Node => {
+const AdminEventModalConfirmationDelete = ({
+  event: eventFragment,
+  affiliations,
+}: Props): React.Node => {
   const event = useFragment(FRAGMENT, eventFragment);
   const intl = useIntl();
   return (
@@ -79,7 +88,7 @@ const AdminEventModalConfirmationDelete = ({ event: eventFragment }: Props): Rea
                 variantSize="medium"
                 variant="primary"
                 variantColor="danger"
-                onClick={() => deleteEvent(event.id, hide, intl)}>
+                onClick={() => deleteEvent(event.id, hide, intl, affiliations)}>
                 {intl.formatMessage({ id: 'global.delete' })}
               </Button>
             </ButtonGroup>

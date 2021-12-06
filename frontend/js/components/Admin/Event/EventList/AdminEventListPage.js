@@ -19,6 +19,7 @@ import AdminEventList from '~/components/Admin/Event/EventList/AdminEventList';
 import InlineSelect from '~ds/InlineSelect';
 import AdminEventImportModal from '~/components/Admin/Event/EventList/AdminEventImportModal';
 import AdminEventListNoResult from '~/components/Admin/Event/EventList/AdminEventListNoResult';
+import downloadCSV from '~/components/Utils/downloadCSV';
 
 type Props = {|
   +queryReference: PreloadedQuery<AdminEventListPageQueryType>,
@@ -71,6 +72,10 @@ const AdminEventListPage = ({ queryReference, isAdmin }: Props): React.Node => {
     queryReference,
   );
 
+  const exportEvents = async () => {
+    await downloadCSV('/events/download', intl);
+  };
+
   return (
     <Flex direction="column" spacing={6}>
       <Text
@@ -115,11 +120,10 @@ const AdminEventListPage = ({ queryReference, isAdmin }: Props): React.Node => {
             <Flex direction="row">
               <AdminEventImportModal intl={intl} />
               <Button
-                as="a"
                 variant="secondary"
                 variantColor="primary"
                 variantSize="small"
-                href="/events/download">
+                onClick={() => exportEvents()}>
                 {intl.formatMessage({ id: 'global.export' })}
               </Button>
             </Flex>
@@ -137,24 +141,28 @@ const AdminEventListPage = ({ queryReference, isAdmin }: Props): React.Node => {
                 { number: query.viewer.allEvents.totalCount },
               )}
             </InlineSelect.Choice>
-            <InlineSelect.Choice value="AWAITING">
-              {intl.formatMessage(
-                { id: 'event.filter.waiting' },
-                { number: query.viewer.awaiting.totalCount },
-              )}
-            </InlineSelect.Choice>
-            <InlineSelect.Choice value="APPROVED">
-              {intl.formatMessage(
-                { id: 'event.filter.approved' },
-                { number: query.viewer.approved.totalCount },
-              )}
-            </InlineSelect.Choice>
-            <InlineSelect.Choice value="REFUSED">
-              {intl.formatMessage(
-                { id: 'events.filter.refused' },
-                { number: query.viewer.refused.totalCount },
-              )}
-            </InlineSelect.Choice>
+            {isAdmin && (
+              <>
+                <InlineSelect.Choice value="AWAITING">
+                  {intl.formatMessage(
+                    { id: 'event.filter.waiting' },
+                    { number: query.viewer.awaiting.totalCount },
+                  )}
+                </InlineSelect.Choice>
+                <InlineSelect.Choice value="APPROVED">
+                  {intl.formatMessage(
+                    { id: 'event.filter.approved' },
+                    { number: query.viewer.approved.totalCount },
+                  )}
+                </InlineSelect.Choice>
+                <InlineSelect.Choice value="REFUSED">
+                  {intl.formatMessage(
+                    { id: 'events.filter.refused' },
+                    { number: query.viewer.refused.totalCount },
+                  )}
+                </InlineSelect.Choice>
+              </>
+            )}
             <InlineSelect.Choice value="DELETED">
               {intl.formatMessage(
                 { id: 'event.filter.deleted' },

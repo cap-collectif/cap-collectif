@@ -62,7 +62,7 @@ describe('<AdminEventItem />', () => {
     const TestRenderer = props => {
       const data = useLazyLoadQuery<AdminEventItemTestQuery>(query, queryVariables);
       if (!data.event) return null;
-      return <AdminEventItem event={data.event} isAdmin {...props} />;
+      return <AdminEventItem event={data.event} isAdmin {...props} affiliations={null} />;
     };
     TestComponent = props => (
       <RelaySuspensFragmentTest environment={environment}>

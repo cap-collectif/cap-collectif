@@ -10,6 +10,7 @@ const baseProps = {
   query: {
     $refType,
     viewer: {
+      isOnlyProjectAdmin: false,
       campaigns: {
         totalCount: 2,
         pageInfo: {
@@ -57,6 +58,7 @@ const props = {
     query: {
       ...baseProps.query,
       viewer: {
+        isOnlyProjectAdmin: false,
         campaigns: {
           totalCount: 2,
           pageInfo: {

@@ -26,6 +26,7 @@ type Props = {|
   +connectionName: string,
   +isSuperAdmin?: boolean,
   +isOnlyProjectAdmin?: boolean,
+  +isAdmin?: boolean,
 |};
 
 const FRAGMENT = graphql`
@@ -84,6 +85,7 @@ const ProjectItem = ({
   connectionName,
   isSuperAdmin,
   isOnlyProjectAdmin,
+  isAdmin,
 }: Props): React.Node => {
   const project = useFragment(FRAGMENT, projectFragment);
   const intl = useIntl();
@@ -126,13 +128,13 @@ const ProjectItem = ({
           </Flex>
         </Flex>
       </Td>
-      <Td>
-        {project?.owner?.id && (
+      {isAdmin && project?.owner?.id && (
+        <Td>
           <Link key={project?.owner?.id} href={project?.owner?.url}>
             {project?.owner?.username}
           </Link>
-        )}
-      </Td>
+        </Td>
+      )}
       <Td>
         {project.visibility === 'PUBLIC' && (
           <Tag variant="green">{intl.formatMessage({ id: 'public-everybody' })}</Tag>
@@ -140,7 +142,7 @@ const ProjectItem = ({
         {project.visibility === 'CUSTOM' && (
           <Tag variant="aqua">{intl.formatMessage({ id: 'global.customized' })}</Tag>
         )}
-        {project.visibility === 'ME' && project.visibility === 'ADMIN' && (
+        {(project.visibility === 'ME' || project.visibility === 'ADMIN') && (
           <Tag variant="gray">{intl.formatMessage({ id: 'private' })}</Tag>
         )}
       </Td>

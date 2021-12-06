@@ -135,6 +135,7 @@ exports[`<DashboardCampaign /> should renders correctly 1`] = `
               "campaignsSent": Object {
                 "totalCount": 1,
               },
+              "isOnlyProjectAdmin": false,
             },
           }
         }
@@ -173,7 +174,9 @@ exports[`<DashboardCampaign /> should renders correctly 1`] = `
     onClose={[Function]}
     show={false}
   />
-  <ModalOnboarding />
+  <ModalOnboarding
+    isOnlyProjectAdmin={false}
+  />
 </Fragment>
 `;
 
@@ -295,6 +298,7 @@ exports[`<DashboardCampaign /> should renders correctly with no campaigns 1`] = 
               "campaignsSent": Object {
                 "totalCount": 0,
               },
+              "isOnlyProjectAdmin": false,
             },
           }
         }
@@ -308,6 +312,8 @@ exports[`<DashboardCampaign /> should renders correctly with no campaigns 1`] = 
     onClose={[Function]}
     show={false}
   />
-  <ModalOnboarding />
+  <ModalOnboarding
+    isOnlyProjectAdmin={false}
+  />
 </Fragment>
 `;

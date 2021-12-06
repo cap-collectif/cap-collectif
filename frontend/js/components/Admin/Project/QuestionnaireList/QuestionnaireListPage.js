@@ -73,6 +73,8 @@ const QuestionnaireListPage = ({ queryReference, isAdmin }: Props): React.Node =
     queryReference,
   );
 
+  const hasQuestionnaire = query.viewer.allQuestionnaire.totalCount > 0;
+
   return (
     <Flex direction="column">
       <Text
@@ -85,7 +87,7 @@ const QuestionnaireListPage = ({ queryReference, isAdmin }: Props): React.Node =
         {intl.formatMessage({ id: 'global.questionnaire' })}
       </Text>
 
-      {query.viewer.allQuestionnaire.totalCount > 0 ? (
+      {hasQuestionnaire ? (
         <Flex
           direction="column"
           p={8}
@@ -113,6 +115,7 @@ const QuestionnaireListPage = ({ queryReference, isAdmin }: Props): React.Node =
                 orderBy={orderBy}
                 show={isOpen}
                 onClose={onClose}
+                hasQuestionnaire={hasQuestionnaire}
               />
             </>
 
@@ -138,7 +141,13 @@ const QuestionnaireListPage = ({ queryReference, isAdmin }: Props): React.Node =
           </React.Suspense>
         </Flex>
       ) : (
-        <NoResult isAdmin={isAdmin} viewer={query.viewer} term={term} orderBy={orderBy} />
+        <NoResult
+          isAdmin={isAdmin}
+          viewer={query.viewer}
+          term={term}
+          orderBy={orderBy}
+          hasQuestionnaire={hasQuestionnaire}
+        />
       )}
     </Flex>
   );

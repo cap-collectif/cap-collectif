@@ -73,6 +73,7 @@ const ProposalFormListPage = ({ queryReference, isAdmin }: Props): React.Node =>
     queryReference,
   );
 
+  const hasProposalForm = query.viewer.allProposalForm.totalCount > 0;
   return (
     <Flex direction="column">
       <Text
@@ -85,7 +86,7 @@ const ProposalFormListPage = ({ queryReference, isAdmin }: Props): React.Node =>
         {intl.formatMessage({ id: 'admin.label.proposal_form' })}
       </Text>
 
-      {query.viewer.allProposalForm.totalCount > 0 ? (
+      {hasProposalForm ? (
         <Flex
           direction="column"
           p={8}
@@ -113,6 +114,7 @@ const ProposalFormListPage = ({ queryReference, isAdmin }: Props): React.Node =>
                 orderBy={orderBy}
                 onClose={onClose}
                 show={isOpen}
+                hasProposalForm={hasProposalForm}
               />
             </>
 
@@ -138,7 +140,13 @@ const ProposalFormListPage = ({ queryReference, isAdmin }: Props): React.Node =>
           </React.Suspense>
         </Flex>
       ) : (
-        <NoResult isAdmin={isAdmin} viewer={query.viewer} term={term} orderBy={orderBy} />
+        <NoResult
+          isAdmin={isAdmin}
+          viewer={query.viewer}
+          term={term}
+          orderBy={orderBy}
+          hasProposalForm={hasProposalForm}
+        />
       )}
     </Flex>
   );

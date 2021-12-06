@@ -10,6 +10,7 @@ const baseProps = {
   query: {
     $refType,
     viewer: {
+      isOnlyProjectAdmin: false,
       mailingLists: {
         totalCount: 2,
         pageInfo: {
