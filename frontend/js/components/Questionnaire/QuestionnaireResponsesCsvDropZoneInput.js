@@ -59,7 +59,7 @@ export const QuestionnaireResponsesCsvDropZoneInput = ({
       <Loader show={asyncValidating}>
         <FileUpload
           name={input.name}
-          accept={['.csv', 'text/csv']}
+          accept="text/csv"
           multiple={false}
           maxSize={CSV_MAX_UPLOAD_SIZE}
           inputProps={{ id: 'csv-file_field' }}

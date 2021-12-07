@@ -748,9 +748,11 @@ exports[`<PostForm/> should render correctly 1`] = `
                     <input
                       accept={
                         Array [
-                          ".jpg",
-                          ".png",
-                          ".gif",
+                          "image/png",
+                          "image/svg+xml",
+                          "image/webp",
+                          "image/gif",
+                          "image/jpeg",
                         ]
                       }
                       autoComplete="off"

@@ -44,6 +44,40 @@ Scenario: GraphQL client wants to get a particular map token given its provider
       "mapToken": {
         "_id": "mapboxToken",
         "publicToken": @string@,
+        "secretToken": @null@
+      }
+    },
+    "extensions": {
+      "warnings": [
+        {
+          "message": "Access denied to this field.",
+          "@*@": "@*@"
+        },
+        @...@
+      ]
+    }
+  }
+  """
+
+Scenario: GraphQL admin client wants to get a particular map token given its provider
+  Given I am logged in to graphql as admin
+  And I send a GraphQL request:
+  """
+  {
+    mapToken (provider: MAPBOX) {
+      _id
+      publicToken
+      secretToken
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "mapToken": {
+        "_id": "mapboxToken",
+        "publicToken": @string@,
         "secretToken": @string@
       }
     }

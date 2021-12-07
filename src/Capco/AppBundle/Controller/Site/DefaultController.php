@@ -50,11 +50,7 @@ class DefaultController extends Controller
      */
     public function loginSamlAction(Request $request)
     {
-        $destination =
-            $request->query->get('_destination') ??
-            $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
-
-        return $this->redirect($destination);
+        return $this->redirect($this->getSafeRedirectDestinationFromRequest($request));
     }
 
     /**
@@ -62,11 +58,7 @@ class DefaultController extends Controller
      */
     public function loginCasAction(Request $request, CasHandler $casHandler)
     {
-        $destination =
-            $request->query->get('_destination') ??
-            $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
-
-        return $casHandler->login($destination);
+        return $casHandler->login($this->getSafeRedirectDestinationFromRequest($request));
     }
 
     /**
@@ -74,11 +66,7 @@ class DefaultController extends Controller
      */
     public function loginParisAction(Request $request)
     {
-        $destination =
-            $request->query->get('_destination') ??
-            $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
-
-        return $this->redirect($destination);
+        return $this->redirect($this->getSafeRedirectDestinationFromRequest($request));
     }
 
     /**
@@ -322,5 +310,25 @@ class DefaultController extends Controller
         }
 
         return $this->render($template, ['data' => $strToArray]);
+    }
+
+    /**
+     * Security check to allow only the platform URL.
+     */
+    private function getSafeRedirectDestinationFromRequest(Request $request): string
+    {
+        $destination = $request->query->get('_destination');
+        $homePageUrl = $this->generateUrl('app_homepage', [], true);
+
+        if (!$destination) {
+            return $homePageUrl;
+        }
+
+        // Important security check to allow only redirect to an URL of this website.
+        if (!str_contains($destination, $homePageUrl)) {
+            return $homePageUrl;
+        }
+
+        return $destination;
     }
 }

@@ -12,6 +12,17 @@ const status = (response: Object): Object | Error => {
   });
 };
 
+const status201 = (response: Object): Object | Error => {
+  if (response.status === 201) {
+    return response;
+  }
+  return response.json().then(res => {
+    const error: Object = new Error(response.statusText);
+    error.response = res;
+    throw error;
+  });
+};
+
 export const json = (response: Object) => response.json();
 
 export const createHeaders = (): { [string]: string } => {
@@ -58,7 +69,7 @@ class Fetcher {
       credentials: 'same-origin',
       headers: createFormDataHeaders(),
       body,
-    }).then(status);
+    }).then(status201);
   }
 
   post(uri: string, body: ?Object = {}) {

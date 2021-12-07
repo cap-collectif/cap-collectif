@@ -42,31 +42,7 @@ import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInpu
 import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority';
 import type { MajorityProperty } from '~ui/Form/Input/Majority/Majority';
 import type { BsSize, ValidationState } from '~/types/ReactBootstrap.type';
-
-const acceptedMimeTypes = [
-  'image/*',
-  'application/pdf',
-  'application/x-pdf',
-  'application/txt',
-  'application/rtf',
-  'text/rtf',
-  'text/plain',
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  'application/vnd.ms-excel',
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  'application/vnd.ms-powerpoint',
-  'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-  'application/vnd.oasis.opendocument.text',
-  'application/vnd.oasis.opendocument.graphics',
-  'application/vnd.oasis.opendocument.presentation',
-  'application/vnd.oasis.opendocument.spreadsheet',
-  'application/vnd.oasis.opendocument.chart',
-  'application/vnd.oasis.opendocument.formula',
-  'application/vnd.oasis.opendocument.database',
-  'text/csv',
-  'application/xml',
-];
+import { ALLEWED_IMAGE_MIMETYPES, ALLOWED_MIMETYPES } from '~/config';
 
 export type ParentProps = {|
   name?: ?string,
@@ -276,7 +252,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             className={props.className}
             value={value}
             onChange={props.onChange}
-            accept={accept && accept.length > 0 ? accept : ['.jpg', '.png', '.gif']}
+            accept={ALLEWED_IMAGE_MIMETYPES}
             maxSize={maxSize}
             preview={props.image}
             {...props}
@@ -306,7 +282,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             className={props.className}
             value={value}
             onChange={props.onChange}
-            accept={acceptedMimeTypes.join()}
+            accept={ALLOWED_MIMETYPES.join()}
             maxSize={maxSize}
             disablePreview
             multiple

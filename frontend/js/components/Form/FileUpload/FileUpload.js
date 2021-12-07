@@ -8,35 +8,10 @@ import FileUploadContainer from './FileUpload.style';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import type { FileInfo } from '~/components/Ui/File/File';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import { ALLOWED_MIMETYPES } from '~/config';
 
 const MAX_FILE = 5;
 const MAX_FILE_SIZE = 10000000; // 10 Mo
-
-const acceptedFiles = [
-  '.pdf',
-  '.txt',
-  '.rtf',
-  '.doc',
-  '.docx',
-  '.xls',
-  '.xlsx',
-  '.ppt',
-  '.pttx',
-  '.odt',
-  '.odg',
-  '.odp',
-  '.ods',
-  '.odc',
-  '.odf',
-  '.odb',
-  '.csv',
-  '.xml',
-  '.jpg',
-  '.jpeg',
-  '.png',
-  '.bmp',
-  '.tiff',
-];
 
 const ERROR_TYPE = {
   DEFAULT: ['impossible-to-download-document', 'unavailable-selected-file'],
@@ -72,7 +47,7 @@ const FileUpload = ({ id, typeForm, className, onChange, disabled, value }: Prop
         onChange={onChange}
         setError={setErrors}
         errors={ERROR_TYPE}
-        accept={acceptedFiles}
+        accept={ALLOWED_MIMETYPES}
         disabled={disabled || value?.length === MAX_FILE}
         value={value}
         maxSize={MAX_FILE_SIZE}

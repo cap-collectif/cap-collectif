@@ -4,10 +4,7 @@ namespace Capco\AppBundle\Behat;
 
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Manager\LogManager;
 use Coduo\PHPMatcher\PHPMatcher;
-use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\Assert;
 use Psr\Http\Message\ResponseInterface;
@@ -259,15 +256,57 @@ EOF;
     }
 
     /**
-     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with attached file$/
+     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with attached PDF file$/
      */
-    public function iUploadFile(string $method, string $url)
+    public function iUploadPDFFile(string $method, string $url)
+    {
+        $body = [];
+        $body[] = [
+            'name' => 'file',
+            'contents' => fopen('/var/www/features/files/document.pdf', 'r'),
+            'filename' => 'document.pdf',
+        ];
+        $this->uploadFile($method, $url, $body);
+    }
+
+    /**
+     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with attached image file$/
+     */
+    public function iUploadImageFile(string $method, string $url)
     {
         $body = [];
         $body[] = [
             'name' => 'file',
             'contents' => fopen('/var/www/features/files/image.jpg', 'r'),
             'filename' => 'image.jpg',
+        ];
+        $this->uploadFile($method, $url, $body);
+    }
+
+    /**
+     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with a stored XSS file$/
+     */
+    public function iUploadXSSFile(string $method, string $url)
+    {
+        $body = [];
+        $body[] = [
+            'name' => 'file',
+            'contents' => fopen('/var/www/features/files/stored_xss', 'r'),
+            'filename' => 'stored_xss',
+        ];
+        $this->uploadFile($method, $url, $body);
+    }
+
+    /**
+     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with a stored XSS HTML file$/
+     */
+    public function iUploadXSSHTMLFile(string $method, string $url)
+    {
+        $body = [];
+        $body[] = [
+            'name' => 'file',
+            'contents' => fopen('/var/www/features/files/stored_xss.html', 'r'),
+            'filename' => 'stored_xss.html',
         ];
         $this->uploadFile($method, $url, $body);
     }

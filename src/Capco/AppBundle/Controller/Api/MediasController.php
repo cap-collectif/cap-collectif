@@ -8,25 +8,62 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MediasController extends AbstractController
 {
-    //TODO: Sécurité : Penser à sécuriser l'API d'upload de fichier désormais publique (un utilisateur non enregistré doit
-    // pouvoir uploader un fichier dans le formulaire d'inscription s'il y a un type de question média
+    private const ALLOWED_MIMETYPES = [
+        'image/png', // .png
+        'image/svg+xml', // .svg
+        'image/webp', // .webp
+        'image/gif', // .gif
+        'image/jpeg', // .jpeg .jpg
+        'application/csv', // .csv
+        'application/pdf', // .pdf
+        'application/msword', // .doc
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+        'application/vnd.ms-excel', // .xls
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+        'application/vnd.ms-powerpoint', // .ppt
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
+        'application/vnd.oasis.opendocument.text', // .odt
+        'application/vnd.oasis.opendocument.presentation', // .odp
+        'application/vnd.oasis.opendocument.spreadsheet', // .ods
+    ];
+
+    private ValidatorInterface $validator;
+    private MediaManager $mediaManager;
+    private MediaExtension $mediaExtension;
+
+    public function __construct(
+        ValidatorInterface $validator,
+        MediaManager $mediaManager,
+        MediaExtension $mediaExtension
+    ) {
+        $this->validator = $validator;
+        $this->mediaManager = $mediaManager;
+        $this->mediaExtension = $mediaExtension;
+    }
 
     /**
      * @Route("/files", name="upload_files", options={"i18n" = false})
      */
     public function postMediaAction(Request $request): JsonResponse
     {
-        $uploadedMedia = $request->files->get('file');
-        $mediaManager = $this->get(MediaManager::class);
+        /** @var UploadedFile $uploadedFile */
+        $uploadedFile = $request->files->get('file');
 
-        if (!$uploadedMedia) {
+        if (!$uploadedFile) {
             return $this->json(['errorCode' => 'NO_MEDIA_FOUND']);
         }
 
-        $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
+        if (!$this->validateUploadedFile($uploadedFile)) {
+            return $this->json(['errorCode' => 'FILE_NOT_ALLOWED']);
+        }
+
+        $media = $this->mediaManager->createFileFromUploadedFile($uploadedFile);
 
         return $this->json(
             [
@@ -35,7 +72,7 @@ class MediasController extends AbstractController
                 'size' => self::formatBytes($media->getSize()),
                 'url' =>
                     $request->getUriForPath('/media') .
-                    $this->get(MediaExtension::class)->path($media, 'reference'),
+                    $this->mediaExtension->path($media, 'reference'),
             ],
             201
         );
@@ -47,5 +84,20 @@ class MediasController extends AbstractController
         $power = $bytes > 0 ? floor(log($bytes, 1024)) : 0;
 
         return number_format($bytes / 1024 ** $power, 1) . ' ' . $units[$power];
+    }
+
+    /**
+     * For security reasons, we have to check the file size and type.
+     */
+    private function validateUploadedFile(UploadedFile $file): bool
+    {
+        $violations = $this->validator->validate($file, [
+            new File([
+                'maxSize' => '10M',
+                'mimeTypes' => self::ALLOWED_MIMETYPES,
+            ]),
+        ]);
+
+        return 0 === \count($violations);
     }
 }

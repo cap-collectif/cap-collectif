@@ -117,6 +117,24 @@ sonata_media:
         image:
             thumbnail: sonata.media.thumbnail.liip_imagine
             adapter: sonata.media.adapter.image.imagick
+            allowed_extensions:
+                [
+                    'png',
+                    'svg',
+                    'webp',
+                    'gif',
+                    'jpeg',
+                    'jpg',
+                    'jfif',
+                ]
+            allowed_mime_types:
+                [
+                    'image/png',
+                    'image/svg+xml',
+                    'image/webp',
+                    'image/gif',
+                    'image/jpeg',
+                ]
         vimeo:
             thumbnail: sonata.media.thumbnail.liip_imagine
         youtube:
@@ -132,39 +150,34 @@ sonata_media:
             thumbnail: sonata.media.thumbnail.format
             allowed_extensions:
                 [
+                    'png',
+                    'svg',
+                    'webp',
+                    'gif',
+                    'jpeg',
+                    'jpg',
+                    'jfif',
+                    'csv',
                     'pdf',
-                    'txt',
-                    'rtf',
                     'doc',
                     'docx',
                     'xls',
                     'xlsx',
                     'ppt',
-                    'pttx',
+                    'pptx',
                     'odt',
-                    'odg',
                     'odp',
                     'ods',
-                    'odc',
-                    'odf',
-                    'odb',
-                    'csv',
-                    'xml',
-                    'jpg',
-                    'jpeg',
-                    'png',
-                    'bmp',
-                    'tiff',
                 ]
             allowed_mime_types:
                 [
+                    'image/png',
+                    'image/svg+xml',
+                    'image/webp',
+                    'image/gif',
+                    'image/jpeg',
+                    'text/csv',
                     'application/pdf',
-                    'application/x-pdf',
-                    'application/rtf',
-                    'text/html',
-                    'text/rtf',
-                    'text/plain',
-                    'image/*',
                     'application/msword',
                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                     'application/vnd.ms-excel',
@@ -172,14 +185,8 @@ sonata_media:
                     'application/vnd.ms-powerpoint',
                     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
                     'application/vnd.oasis.opendocument.text',
-                    'application/vnd.oasis.opendocument.graphics',
                     'application/vnd.oasis.opendocument.presentation',
                     'application/vnd.oasis.opendocument.spreadsheet',
-                    'application/vnd.oasis.opendocument.chart',
-                    'application/vnd.oasis.opendocument.formula',
-                    'application/vnd.oasis.opendocument.database',
-                    'text/csv',
-                    'application/xml',
                 ]
     cdn:
         server:

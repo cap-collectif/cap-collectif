@@ -18,6 +18,7 @@ MapToken:
             secretToken:
                 type: 'String'
                 description: 'The secret token'
+                access: "@=hasRole('ROLE_ADMIN')"
             provider:
                 type: 'MapTokenProvider'
                 description: 'The corresponding provider in which belongs the token'
