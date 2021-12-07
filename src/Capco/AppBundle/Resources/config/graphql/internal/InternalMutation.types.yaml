@@ -211,6 +211,13 @@ InternalMutation:
                     inputType: DeleteAnonymousReplyInput
                     payloadType: DeleteAnonymousReplyPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAnonymousReplyMutation", [value])'
+            deleteReplies:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteRepliesMutation").isGranted(args["input"]["replyIds"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteRepliesInput
+                    payloadType: DeleteRepliesPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteRepliesMutation", [value])'
             # User notifications
             changeUserNotificationsConfiguration:
                 access: "@=hasRole('ROLE_USER')"

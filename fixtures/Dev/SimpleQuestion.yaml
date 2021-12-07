@@ -506,3 +506,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1403
         title: Comment ça va ?
         type: 0 # number
+    simpleQuestionOwnerAnonymousQuestionnaire:
+        id: 1404
+        title: Comment ça va ?
+        type: 0 # number

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteReplies should delete reply and anon reply as admin. 1`] = `
+Object {
+  "deleteReplies": Object {
+    "replyIds": Array [
+      "UmVwbHk6cmVwbHlRdWVzdGlvbm5haXJlQW5vbg==",
+      "UmVwbHk6cmVwbHlBbm9ueW1vdXMx",
+    ],
+  },
+}
+`;
+
+exports[`mutations.deleteReplies should delete reply and anon reply as project owner 1`] = `
+Object {
+  "deleteReplies": Object {
+    "replyIds": Array [
+      "UmVwbHk6cmVwbHlRdWVzdGlvbm5haXJlQW5vblBPd25lcg==",
+      "UmVwbHk6cmVwbHlBbm9uUXVlc3Rpb25uYWlyZUFub25QT3duZXI=",
+    ],
+  },
+}
+`;

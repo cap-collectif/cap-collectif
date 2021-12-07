@@ -227,7 +227,6 @@ Scenario: GraphQL client wants to get question's participants
     }
   }
   """
-
 Scenario: GraphQL client wants to get anonymous questionnaire question's participants
   Given I am logged in to graphql as user
   When I send a GraphQL request:
@@ -254,7 +253,7 @@ Scenario: GraphQL client wants to get anonymous questionnaire question's partici
     "data": {
       "questionnaire": {
         "participants": {
-          "totalCount": 2
+          "totalCount": 3
         },
         "questions": [
           {

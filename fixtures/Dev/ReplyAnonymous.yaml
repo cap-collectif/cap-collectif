@@ -14,3 +14,10 @@ Capco\AppBundle\Entity\ReplyAnonymous:
         createdAt: <(new \DateTime('2017-03-01'))>
         updatedAt: <(new \DateTime('2017-03-01'))>
         token: 'def'
+    replyAnonQuestionnaireAnonPOwner:
+        id: 'replyAnonQuestionnaireAnonPOwner'
+        questionnaire: '@questionnaireProjectOwnerAnonymous'
+        publishedAt: <(new \DateTime('2018-03-01'))>
+        createdAt: <(new \DateTime('2018-03-01'))>
+        updatedAt: <(new \DateTime('2018-03-01'))>
+        token: 'ghi'

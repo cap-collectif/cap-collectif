@@ -159,7 +159,6 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                   )}
                   <SidebarLink text="admin.label.proposal" href="/admin/capco/app/proposal/list" />
                   <SidebarLink text="admin.label.opinion" href="/admin/capco/app/opinion/list" />
-                  <SidebarLink text="admin.label.reply" href="/admin/capco/app/reply/list" />
                   <SidebarLink
                     text="admin.label.opinion_version"
                     href="/admin/capco/app/opinionversion/list"

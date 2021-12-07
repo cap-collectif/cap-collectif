@@ -26,3 +26,10 @@ InternalReply:
             url:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
                 description: 'The url of the reply.'
+            adminUrl:
+                type: 'URI'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyAdminUrlResolver", [value])'
+                description: 'The admin url of the reply.'
+            status:
+                type: 'ReplyStatus'
+                description: 'The status of the reply.'

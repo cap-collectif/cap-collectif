@@ -9,12 +9,15 @@ Capco\AppBundle\Entity\Reply:
         createdAt:
             groups: [Replies, ElasticsearchReply, ElasticsearchResponseNestedReply]
         updatedAt:
-            groups: [Replies]
+            groups: [Replies, ElasticsearchReply, ElasticsearchResponseNestedReply]
         private:
             groups: [Replies, ElasticsearchReply]
         published:
             groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
         draft:
+            groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
+        getStatus:
+            serialized_name: replyStatus
             groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
         getProject:
             type: object

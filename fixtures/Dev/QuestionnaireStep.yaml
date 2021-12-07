@@ -291,3 +291,11 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
         isAnonymousParticipationAllowed: true
         startAt: <(new \DateTime('2020-09-11'))>
         endAt: <(new \DateTime('2024-09-27'))>
+    qStepOwnerAnonQuestionnaire:
+        id: qStepOwnerAnonQuestionnaire
+        title: Questionnaire step anonymous project owner
+        label: Questionnaire step anonymous project owner
+        body: hey
+        isAnonymousParticipationAllowed: true
+        startAt: <(new \DateTime('2020-09-11'))>
+        endAt: <(new \DateTime('2024-09-27'))>

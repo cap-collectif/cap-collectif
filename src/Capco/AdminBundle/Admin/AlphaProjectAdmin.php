@@ -75,8 +75,15 @@ class AlphaProjectAdmin extends CapcoAdmin
             'editProposals',
             $this->getRouterIdParameter() . '/contributions/proposals'
         );
+        $collection->add(
+            'editQuestionnaireReplies',
+            $this->getRouterIdParameter() . '/contributions/questionnaire/{slug}'
+        );
         $collection->add('editParticipants', $this->getRouterIdParameter() . '/participants');
-        $collection->add('createProposal', $this->getRouterIdParameter() . '/contributions/proposals/{stepId}/create');
+        $collection->add(
+            'createProposal',
+            $this->getRouterIdParameter() . '/contributions/proposals/{stepId}/create'
+        );
 
         $collection->clearExcept([
             'create',
@@ -88,6 +95,7 @@ class AlphaProjectAdmin extends CapcoAdmin
             'editProposals',
             'editParticipants',
             'createProposal',
+            'editQuestionnaireReplies',
         ]);
     }
 }

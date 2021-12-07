@@ -28,11 +28,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 2,
+            "totalCount": 3,
           },
-          "contributionsCount": 2,
+          "contributionsCount": 3,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 1,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0V2l0aEFub255bW91c1F1ZXN0aW9ubmFpcmU=",
@@ -46,11 +46,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 3,
-          },
-          "contributionsCount": 1,
-          "contributors": Object {
             "totalCount": 5,
+          },
+          "contributionsCount": 3,
+          "contributors": Object {
+            "totalCount": 6,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
@@ -258,11 +258,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 2,
+            "totalCount": 3,
           },
-          "contributionsCount": 2,
+          "contributionsCount": 3,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 1,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0V2l0aEFub255bW91c1F1ZXN0aW9ubmFpcmU=",
@@ -276,11 +276,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 3,
-          },
-          "contributionsCount": 1,
-          "contributors": Object {
             "totalCount": 5,
+          },
+          "contributionsCount": 3,
+          "contributors": Object {
+            "totalCount": 6,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",

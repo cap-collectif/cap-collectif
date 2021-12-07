@@ -831,6 +831,18 @@ class Project implements IndexableInterface
         return null;
     }
 
+    public function getFirstQuestionnaireStep(): ?QuestionnaireStep
+    {
+        /** @var ProjectAbstractStep $step */
+        foreach ($this->steps as $step) {
+            if ($step->getStep() && $step->getStep()->isQuestionnaireStep()) {
+                return $step->getStep();
+            }
+        }
+
+        return null;
+    }
+
     public function getFirstAnalysisStep(): ?AbstractStep
     {
         foreach ($this->getSteps() as $step) {

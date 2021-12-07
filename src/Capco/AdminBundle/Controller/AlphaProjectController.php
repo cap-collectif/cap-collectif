@@ -14,17 +14,20 @@ class AlphaProjectController extends \Sonata\AdminBundle\Controller\CRUDControll
     public function createProposalAction(string $stepId): Response
     {
         /** @var Project $project */
-        $project =  $this->admin->getSubject();
-        if ($project->getProjectType()->getTitle() !== 'project.types.participatoryBudgeting') {
+        $project = $this->admin->getSubject();
+        if ('project.types.participatoryBudgeting' !== $project->getProjectType()->getTitle()) {
             throw new NotFoundHttpException();
         }
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:createProposal.html.twig', [
-            'object' => $this->admin->getSubject(),
-            'form' => $this->admin->getForm()->createView(),
-            'action' => 'create',
-            'stepId' => $stepId
-        ]);
+        return $this->renderWithExtraParams(
+            'CapcoAdminBundle:AlphaProject:createProposal.html.twig',
+            [
+                'object' => $this->admin->getSubject(),
+                'form' => $this->admin->getForm()->createView(),
+                'action' => 'create',
+                'stepId' => $stepId,
+            ]
+        );
     }
 
     public function editAnalysisAction(): Response
@@ -50,6 +53,17 @@ class AlphaProjectController extends \Sonata\AdminBundle\Controller\CRUDControll
     }
 
     public function editProposalsAction()
+    {
+        $this->throwIfNoAccess();
+
+        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+            'object' => $this->admin->getSubject(),
+            'form' => $this->admin->getForm()->createView(),
+            'action' => 'edit',
+        ]);
+    }
+
+    public function editQuestionnaireRepliesAction()
     {
         $this->throwIfNoAccess();
 

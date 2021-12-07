@@ -39,6 +39,31 @@ InternalQuestionnaire:
                 type: 'QuestionnaireNotificationConfiguration!'
             replies:
                 type: 'InternalReplyConnection!'
+            adminReplies:
+                type: 'InternalReplyConnection!'
+                description: 'List of replies used in contributions admin page'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    term:
+                        type: String
+                        description: 'Filter replies by a given query'
+                    orderBy:
+                        type: 'ReplyOrder'
+                        defaultValue:
+                            {
+                                field: '@=constant("Capco\\AppBundle\\Enum\\ReplyOrderField::CREATED_AT")',
+                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                            }
+                        description: 'The ordering direction for questionnaires'
+                    includePublished:
+                        description: 'Select also published replies.'
+                        type: Boolean
+                        defaultValue: true
+                    filterStatus:
+                        description: 'Filter by status'
+                        type: '[ReplyStatus]'
+                        defaultValue: '@=constant("Capco\\AppBundle\\Enum\\ReplyStatus::DEFAULT_STATUSES")'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminRepliesResolver", [value, args, getUser()])'
             privateResult:
                 type: 'Boolean!'
                 description: 'Results of survey are private'

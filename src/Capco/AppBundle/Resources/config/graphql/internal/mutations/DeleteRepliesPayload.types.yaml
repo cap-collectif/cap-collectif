@@ -1,0 +1,6 @@
+DeleteRepliesPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            replyIds:
+                type: '[ID!]!'

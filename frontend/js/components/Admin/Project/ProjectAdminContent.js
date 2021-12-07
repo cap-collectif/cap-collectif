@@ -57,12 +57,24 @@ const getRouteContributionPath = (
 ): string => {
   const collectSteps = project.steps.filter(step => step.__typename === 'CollectStep');
   const debateSteps = project.steps.filter(step => step.__typename === 'DebateStep');
+  const questionnaireSteps = project.steps.filter(step => step.__typename === 'QuestionnaireStep');
 
   const hasCollectStep = collectSteps.length > 0;
   const hasDebateStep = debateSteps.length > 0;
+  const hasquestionnaireSteps = questionnaireSteps.length > 0;
 
-  const onlyDebateStep = !hasCollectStep && debateSteps.length === 1 && !!project.firstDebateStep;
-  const onlyCollectStep = !hasDebateStep && collectSteps.length === 1 && firstCollectStepId;
+  const onlyDebateStep =
+    !hasCollectStep &&
+    !hasquestionnaireSteps &&
+    debateSteps.length === 1 &&
+    !!project.firstDebateStep;
+  const onlyCollectStep =
+    !hasDebateStep && !hasquestionnaireSteps && collectSteps.length === 1 && firstCollectStepId;
+  const onlyQuestionnaireStep =
+    !hasCollectStep &&
+    !hasDebateStep &&
+    questionnaireSteps.length === 1 &&
+    !!project.firstQuestionnaireStep;
 
   if (onlyCollectStep && firstCollectStepId) {
     return getContributionsPath(baseUrlContributions, 'CollectStep', firstCollectStepId);
@@ -74,6 +86,15 @@ const getRouteContributionPath = (
       'DebateStep',
       project.firstDebateStep.id,
       project.firstDebateStep.slug,
+    );
+  }
+
+  if (onlyQuestionnaireStep && project.firstQuestionnaireStep) {
+    return getContributionsPath(
+      baseUrlContributions,
+      'QuestionnaireStep',
+      project.firstQuestionnaireStep.id,
+      project.firstQuestionnaireStep.slug,
     );
   }
 
@@ -193,6 +214,12 @@ export const ProjectAdminContent = ({
       isPublishedVote: null,
       countVotePagination: VOTE_PAGINATION,
       cursorVotePagination: null,
+      // QuestionnaireStep
+      countRepliesPagination: 20,
+      cursorRepliesPagination: null,
+      repliesTerm: null,
+      repliesOrderBy: { field: 'CREATED_AT', direction: 'DESC' },
+      repliesFilterStatus: ['PUBLISHED', 'DRAFT', 'NOT_PUBLISHED', 'PENDING'],
     },
     { fetchPolicy: 'store-or-network' },
   );
@@ -334,6 +361,10 @@ export default createFragmentContainer(
           slug
         }
         firstDebateStep {
+          id
+          slug
+        }
+        firstQuestionnaireStep {
           id
           slug
         }

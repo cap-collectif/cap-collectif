@@ -11,12 +11,17 @@ import SpotIcon, { SPOT_ICON_NAME, SPOT_ICON_SIZE } from '~ds/SpotIcon/SpotIcon'
 
 const getIllustrationStep = (
   type: string,
-): typeof SPOT_ICON_NAME.BULB_SKETCH | typeof SPOT_ICON_NAME.USER_DISCUSS => {
+):
+  | typeof SPOT_ICON_NAME.BULB_SKETCH
+  | typeof SPOT_ICON_NAME.USER_DISCUSS
+  | typeof SPOT_ICON_NAME.QUESTIONNAIRE => {
   switch (type) {
     case 'CollectStep':
       return SPOT_ICON_NAME.BULB_SKETCH;
     case 'DebateStep':
       return SPOT_ICON_NAME.USER_DISCUSS;
+    case 'QuestionnaireStep':
+      return SPOT_ICON_NAME.QUESTIONNAIRE;
     default:
       return '';
   }

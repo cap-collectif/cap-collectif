@@ -1,0 +1,13 @@
+ReplyOrder:
+    type: input-object
+    config:
+        description: 'Ways in which lists of replies can be ordered upon return.'
+        fields:
+            field:
+                type: 'ReplyOrderField!'
+                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\ReplyOrderField::CREATED_AT")'
+                description: The field to order reply by.
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")'
+                description: The ordering direction.

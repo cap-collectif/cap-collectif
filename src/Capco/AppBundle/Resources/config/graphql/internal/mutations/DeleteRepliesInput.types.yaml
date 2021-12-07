@@ -1,0 +1,8 @@
+DeleteRepliesInput:
+    type: relay-mutation-input
+    config:
+        description: 'Delete multiple replies'
+        fields:
+            replyIds:
+                type: '[ID!]!'
+                description: 'The list of replies ID to delete'

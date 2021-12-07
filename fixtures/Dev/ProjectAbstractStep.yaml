@@ -444,3 +444,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@qStepProjectAnonymousQuestionnaire'
         project: '@projectWithAnonymousQuestionnaire'
         position: 6
+    pasWithAnonQuestionnaireOwner:
+        id: pasWithAnonQuestionnaireOwner
+        step: '@qStepOwnerAnonQuestionnaire'
+        project: '@projectWithOwner'
+        position: 6

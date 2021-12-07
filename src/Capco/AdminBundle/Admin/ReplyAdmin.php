@@ -127,6 +127,7 @@ class ReplyAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create');
+        $collection->remove('list');
         $collection->remove('edit');
     }
 }

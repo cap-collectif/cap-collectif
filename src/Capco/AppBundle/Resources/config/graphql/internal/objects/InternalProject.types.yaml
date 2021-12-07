@@ -76,6 +76,10 @@ InternalProject:
                 type: InternalDebateStep
                 resolve: '@=value.getFirstDebateStep()'
                 description: 'Identifies the first debate step of the project, if any.'
+            firstQuestionnaireStep:
+                type: InternalQuestionnaireStep
+                resolve: '@=value.getFirstQuestionnaireStep()'
+                description: 'Identifies the first questionnaire step of the project, if any.'
             firstAnalysisStep:
                 type: ProposalStep
                 resolve: '@=value.getFirstAnalysisStep()'

@@ -34,3 +34,6 @@ services:
     Capco\AppBundle\Security\DebateOpinionVoter:
         tags:
             - { name: security.voter }
+    Capco\AppBundle\Security\ReplyVoter:
+        tags:
+            - { name: security.voter }

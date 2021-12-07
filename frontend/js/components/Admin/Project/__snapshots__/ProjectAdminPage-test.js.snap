@@ -1101,6 +1101,31 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "concreteType": "QuestionnaireStep",
+                        "kind": "LinkedField",
+                        "name": "firstQuestionnaireStep",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "slug",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": null,
                         "kind": "LinkedField",
                         "name": "firstAnalysisStep",
@@ -1565,7 +1590,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "9359bd3d77e3377f9ff7d228cd56a2fd",
+        "cacheID": "58e7aa13ed2583b148c53fef8cc59a0b",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1601,6 +1626,10 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
     slug
   }
   firstDebateStep {
+    id
+    slug
+  }
+  firstQuestionnaireStep {
     id
     slug
   }
@@ -3051,6 +3080,31 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "concreteType": "QuestionnaireStep",
+                        "kind": "LinkedField",
+                        "name": "firstQuestionnaireStep",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "slug",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": null,
                         "kind": "LinkedField",
                         "name": "firstAnalysisStep",
@@ -3515,7 +3569,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "9359bd3d77e3377f9ff7d228cd56a2fd",
+        "cacheID": "58e7aa13ed2583b148c53fef8cc59a0b",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -3551,6 +3605,10 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
     slug
   }
   firstDebateStep {
+    id
+    slug
+  }
+  firstQuestionnaireStep {
     id
     slug
   }

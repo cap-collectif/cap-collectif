@@ -90,8 +90,8 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(3);
-    expect(response.viewer.questionnaires.edges).toHaveLength(3);
+    expect(response.viewer.questionnaires.totalCount).toBe(4);
+    expect(response.viewer.questionnaires.edges).toHaveLength(4);
     expect(response.viewer.questionnaires.edges[0].node.owner.username).toBe('Théo QP');
     expect(response.viewer.questionnaires.edges[1].node.owner.username).toBe('Théo QP');
     expect(response.viewer.questionnaires.edges[2].node.owner.username).toBe('Théo QP');
@@ -106,8 +106,8 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(24);
-    expect(response.viewer.questionnaires.edges).toHaveLength(24);
+    expect(response.viewer.questionnaires.totalCount).toBe(25);
+    expect(response.viewer.questionnaires.edges).toHaveLength(25);
   });
 
   it('should correctly filter questionnaires by a given `query`', async () => {
@@ -134,8 +134,8 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(3);
-    expect(response.viewer.questionnaires.edges).toHaveLength(3);
+    expect(response.viewer.questionnaires.totalCount).toBe(4);
+    expect(response.viewer.questionnaires.edges).toHaveLength(4);
   });
 
   it('should correctly order questionnaires by a given field and direction', async () => {
@@ -148,8 +148,8 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(3);
-    expect(response.viewer.questionnaires.edges).toHaveLength(3);
+    expect(response.viewer.questionnaires.totalCount).toBe(4);
+    expect(response.viewer.questionnaires.edges).toHaveLength(4);
 
     expect(response.viewer.questionnaires.edges[0].node.createdAt).toBe('2019-09-11 00:00:00');
     expect(response.viewer.questionnaires.edges[1].node.createdAt).toBe('2020-09-11 00:00:00');

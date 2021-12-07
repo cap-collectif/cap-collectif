@@ -1,0 +1,1480 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Questionnaire.adminReplies should fetch all replies given all status filters 1`] = `
+Object {
+  "node": Object {
+    "adminReplies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEw",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEx",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEy",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEz",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE0",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE1",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTI=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTM=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTQ=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTU=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTY=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTc=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTg=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user150@cap-collectif.com",
+              "username": "user150",
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTk=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user@test.com",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2019-03-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user@test.com",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZA==",
+            "notPublishedReason": "AUTHOR_CONFIRMED_TOO_LATE",
+            "published": false,
+            "status": "NOT_PUBLISHED",
+            "updatedAt": "2019-03-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user@test.com",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZEFuZERyYWZ0",
+            "notPublishedReason": null,
+            "published": false,
+            "status": "DRAFT",
+            "updatedAt": "2019-03-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user_not_confirmed@test.com",
+              "username": "user_not_confirmed",
+            },
+            "createdAt": "2016-03-07 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHk3",
+            "notPublishedReason": "WAITING_AUTHOR_CONFIRMATION",
+            "published": false,
+            "status": "PENDING",
+            "updatedAt": "2019-03-07 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user_updating_email@test.com",
+              "username": "user_updating_email",
+            },
+            "createdAt": "2016-03-06 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHk2",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2019-03-06 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "admin@test.com",
+              "username": "admin",
+            },
+            "createdAt": "2016-03-05 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk1",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "DRAFT",
+            "updatedAt": "2019-03-05 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "admin@test.com",
+              "username": "admin",
+            },
+            "createdAt": "2016-03-05 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk5",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "DRAFT",
+            "updatedAt": "2016-03-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "admin@test.com",
+              "username": "admin",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHky",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2019-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user10@cap-collectif.com",
+              "username": "user10",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEw",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user11@cap-collectif.com",
+              "username": "user11",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEx",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user12@cap-collectif.com",
+              "username": "user12",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEy",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user13@cap-collectif.com",
+              "username": "user13",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEz",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user14@cap-collectif.com",
+              "username": "user14",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE0",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user15@cap-collectif.com",
+              "username": "user15",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE1",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user16@cap-collectif.com",
+              "username": "user16",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE2",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user17@cap-collectif.com",
+              "username": "user17",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE3",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user18@cap-collectif.com",
+              "username": "user18",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE4",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user19@cap-collectif.com",
+              "username": "user19",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE5",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user20@cap-collectif.com",
+              "username": "user20",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTIw",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user6@cap-collectif.com",
+              "username": "user6",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTY=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user7@cap-collectif.com",
+              "username": "user7",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTc=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user8@cap-collectif.com",
+              "username": "user8",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTg=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "user9@cap-collectif.com",
+              "username": "user9",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTk=",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "msantostefano@cap-collectif.com",
+              "username": "welcomattic",
+            },
+            "createdAt": "2016-03-01 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHkx",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2016-03-01 00:00:00",
+          },
+        },
+      ],
+      "totalCount": 39,
+    },
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+    "title": "Votre avis sur les JO 2024 à Paris",
+  },
+}
+`;
+
+exports[`Internal|Questionnaire.adminReplies should fetch empty replies when no filters given 1`] = `
+Object {
+  "node": Object {
+    "adminReplies": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+  },
+}
+`;
+
+exports[`Internal|Questionnaire.adminReplies should fetch replies ordered by updatedAt ASC 1`] = `
+Object {
+  "node": Object {
+    "adminReplies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-01 00:00:00",
+            "id": "UmVwbHk6cmVwbHkx",
+            "publishedAt": "2016-03-01 00:00:00",
+            "updatedAt": "2016-03-01 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEw",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEx",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEy",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEz",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE0",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE1",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE2",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE3",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE4",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE5",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTIw",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTY=",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTc=",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTg=",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTk=",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-05 00:00:00",
+            "id": "UmVwbHk6cmVwbHk5",
+            "publishedAt": "2016-03-22 00:00:00",
+            "updatedAt": "2016-03-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-02 00:00:00",
+            "id": "UmVwbHk6cmVwbHky",
+            "publishedAt": "2016-03-02 00:00:00",
+            "updatedAt": "2019-03-02 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-05 00:00:00",
+            "id": "UmVwbHk6cmVwbHk1",
+            "publishedAt": "2016-03-05 00:00:00",
+            "updatedAt": "2019-03-05 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-06 00:00:00",
+            "id": "UmVwbHk6cmVwbHk2",
+            "publishedAt": "2016-03-06 00:00:00",
+            "updatedAt": "2019-03-06 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2016-03-07 00:00:00",
+            "id": "UmVwbHk6cmVwbHk3",
+            "publishedAt": null,
+            "updatedAt": "2019-03-07 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
+            "publishedAt": "2019-03-20 00:00:00",
+            "updatedAt": "2019-03-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZA==",
+            "publishedAt": null,
+            "updatedAt": "2019-03-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZEFuZERyYWZ0",
+            "publishedAt": null,
+            "updatedAt": "2019-03-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEw",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEx",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEy",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEz",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE0",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE1",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTI=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTM=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTQ=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTU=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTY=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTc=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTg=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTk=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+      ],
+      "totalCount": 39,
+    },
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+  },
+}
+`;
+
+exports[`Internal|Questionnaire.adminReplies should only fetch draft replies 1`] = `
+Object {
+  "node": Object {
+    "adminReplies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZEFuZERyYWZ0",
+            "published": false,
+            "status": "DRAFT",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk1",
+            "published": true,
+            "status": "DRAFT",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk5",
+            "published": true,
+            "status": "DRAFT",
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+  },
+}
+`;
+
+exports[`Internal|Questionnaire.adminReplies should only fetch pending replies 1`] = `
+Object {
+  "node": Object {
+    "adminReplies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHk3",
+            "published": false,
+            "status": "PENDING",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+  },
+}
+`;
+
+exports[`Internal|Questionnaire.adminReplies should only fetch published replies 1`] = `
+Object {
+  "node": Object {
+    "adminReplies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEw",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEx",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEy",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEz",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE0",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE1",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTI=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTM=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTQ=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTU=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTY=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTc=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTg=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTk=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHk2",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHky",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEw",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEx",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEy",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEz",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE0",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE1",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE2",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE3",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE4",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE5",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTIw",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTY=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTc=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTg=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTk=",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHkx",
+            "published": true,
+            "status": "PUBLISHED",
+          },
+        },
+      ],
+      "totalCount": 34,
+    },
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+  },
+}
+`;
+
+exports[`Internal|Questionnaire.adminReplies should only fetch replies authored by admin 1`] = `
+Object {
+  "node": Object {
+    "adminReplies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "admin@test.com",
+              "username": "admin",
+            },
+            "createdAt": "2016-03-05 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk1",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "DRAFT",
+            "updatedAt": "2019-03-05 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "admin@test.com",
+              "username": "admin",
+            },
+            "createdAt": "2016-03-05 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk5",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "DRAFT",
+            "updatedAt": "2016-03-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "author": Object {
+              "email": "admin@test.com",
+              "username": "admin",
+            },
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHky",
+            "notPublishedReason": null,
+            "published": true,
+            "status": "PUBLISHED",
+            "updatedAt": "2019-03-02 00:00:00",
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+    "title": "Votre avis sur les JO 2024 à Paris",
+  },
+}
+`;
+
+exports[`Internal|Questionnaire.adminReplies should only fetch unpublished replies 1`] = `
+Object {
+  "node": Object {
+    "adminReplies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZA==",
+            "published": false,
+            "status": "NOT_PUBLISHED",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+  },
+}
+`;

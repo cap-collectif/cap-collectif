@@ -207,3 +207,15 @@ Capco\AppBundle\Entity\Questionnaire:
         owner: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
         notificationsConfiguration: '@questionnaireNotificationConfigurationOwnerWithtoutStep'
+    questionnaireProjectOwnerAnonymous:
+        id: questionnaireProjectOwnerAnonymous
+        title: Questionnaire anonynyme owner
+        step: '@qStepOwnerAnonQuestionnaire'
+        multipleRepliesAllowed: true
+        anonymousAllowed: true
+        acknowledgeReplies: 1
+        type: 'QUESTIONNAIRE'
+        privateResult: true
+        owner: '@userTheo'
+        createdAt: <(new \DateTime('2020-09-11'))>
+        notificationsConfiguration: '@questionnaireNotificationConfigurationOwnerAnonymous'

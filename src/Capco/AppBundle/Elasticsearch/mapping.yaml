@@ -344,9 +344,11 @@ mappings:
                 id: { type: keyword }
                 author: *Author
                 createdAt: { type: date }
+                updatedAt: { type: date }
                 published: { type: boolean }
                 draft: { type: boolean }
                 replyType: { type: keyword }
+                replyStatus: { type: keyword }
         questionnaire:
             properties:
                 id: { type: keyword }
@@ -355,6 +357,7 @@ mappings:
 
         followedAt: { type: date }
 
+        replyStatus: { type: keyword }
         #
         # This allow ous to monitore the usage of our API.
         #

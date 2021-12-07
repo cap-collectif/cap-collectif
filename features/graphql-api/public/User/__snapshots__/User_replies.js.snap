@@ -24,7 +24,7 @@ exports[`User.replies connection fetches a user's published, non-draft, public r
 Object {
   "node": Object {
     "replies": Object {
-      "totalCount": 0,
+      "totalCount": 2,
     },
   },
 }

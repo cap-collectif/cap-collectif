@@ -143,6 +143,17 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function hydrateFromIdsByTerm(array $ids, string $term): array
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb->where('r.id IN (:ids)')
+            ->join('r.author', 'a')
+            ->andWhere('a.username LIKE :term')
+            ->setParameters(['ids' => $ids, 'term' => "%{$term}%"])
+        ;
+        return $qb->getQuery()->getResult();
+    }
+
     public function findByQuestionnaire(
         Questionnaire $questionnaire,
         int $offset,

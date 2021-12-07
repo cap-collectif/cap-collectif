@@ -10,7 +10,7 @@ import Text from '~ui/Primitives/Text';
 import Heading from '~ui/Primitives/Heading';
 import { clearToasts } from '~ds/Toast';
 
-export const STEP_CONTRIBUTIONS = ['CollectStep', 'DebateStep'];
+export const STEP_CONTRIBUTIONS = ['CollectStep', 'DebateStep', 'QuestionnaireStep'];
 
 export const getContributionsPath = (
   baseUrl: string,
@@ -23,6 +23,8 @@ export const getContributionsPath = (
       return `${baseUrl}/proposals${stepId ? `?step=${encodeURIComponent(stepId)}` : ''}`;
     case 'DebateStep':
       return `${baseUrl}/debate/${stepSlug || ':stepSlug'}`;
+    case 'QuestionnaireStep':
+      return `${baseUrl}/questionnaire/${stepSlug || ':stepSlug'}`;
     default:
       return baseUrl;
   }

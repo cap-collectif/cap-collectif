@@ -12,6 +12,7 @@ import { ProjectAdminDebateProvider } from './ProjectAdminDebate/ProjectAdminDeb
 import ProjectAdminDebate from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate';
 import ContributionsPlaceholder from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/ContributionsPlaceholder';
 import Skeleton from '~ds/Skeleton';
+import ReplyListPage from '~/components/Admin/Project/ReplyList/ReplyListPage';
 
 type Props = {|
   +dataPrefetch: ResultPreloadQuery,
@@ -44,6 +45,12 @@ export const queryContributions = graphql`
     $isPublishedVote: Boolean
     $countVotePagination: Int!
     $cursorVotePagination: String
+    # ARGUMENTS OF ReplyListPage_questionnaireStep
+    $countRepliesPagination: Int!
+    $cursorRepliesPagination: String
+    $repliesTerm: String
+    $repliesOrderBy: ReplyOrder
+    $repliesFilterStatus: [ReplyStatus]
   ) {
     project: node(id: $projectId) {
       ... on Project {
@@ -71,6 +78,14 @@ export const queryContributions = graphql`
             }
           }
           ...ProjectAdminDebate_debateStep
+          ...ReplyListPage_questionnaireStep
+            @arguments(
+              countRepliesPagination: $countRepliesPagination
+              cursorRepliesPagination: $cursorRepliesPagination
+              repliesTerm: $repliesTerm
+              repliesOrderBy: $repliesOrderBy
+              repliesFilterStatus: $repliesFilterStatus
+            )
         }
         ...NoContributionsStep_project
         ...IndexContributions_project
@@ -106,15 +121,15 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
 
   const collectSteps = project?.steps.filter(step => step.__typename === 'CollectStep') || [];
   const debateSteps = project?.steps.filter(step => step.__typename === 'DebateStep') || [];
+  const questionnaireSteps =
+    project?.steps.filter(step => step.__typename === 'QuestionnaireStep') || [];
 
   const hasCollectStep = collectSteps.length > 0;
   const hasDebateStep = debateSteps.length > 0;
-  const hasAtLeastOneContributionsStep = hasCollectStep || hasDebateStep;
+  const hasQuestionnaireSteps = questionnaireSteps.length > 0;
+  const hasAtLeastOneContributionsStep = hasCollectStep || hasDebateStep || hasQuestionnaireSteps;
 
-  const hasIndex =
-    collectSteps.length > 1 ||
-    debateSteps.length > 1 ||
-    (collectSteps.length >= 1 && debateSteps.length >= 1);
+  const hasIndex = collectSteps.length + debateSteps.length + questionnaireSteps.length > 1;
 
   return (
     <AppBox m={5}>
@@ -158,6 +173,21 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
                 {...routeProps}
               />
             </ProjectAdminDebateProvider>
+          )}
+        />
+
+        <Route
+          path={getContributionsPath(baseUrl, 'QuestionnaireStep')}
+          component={routeProps => (
+            <ReplyListPage
+              questionnaireStep={
+                project?.steps.find(({ slug }) => {
+                  return slug === routeProps.match.params.stepSlug;
+                }) || null
+              }
+              hasContributionsStep={hasIndex}
+              baseUrl={baseUrl}
+            />
           )}
         />
       </Switch>

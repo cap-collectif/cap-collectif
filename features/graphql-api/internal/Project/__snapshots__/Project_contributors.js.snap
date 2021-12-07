@@ -486,6 +486,11 @@ Object {
             "consentInternalCommunication": true,
           },
         },
+        Object {
+          "node": Object {
+            "consentInternalCommunication": true,
+          },
+        },
       ],
     },
   },

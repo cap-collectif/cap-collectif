@@ -100,6 +100,22 @@ Capco\AppBundle\Entity\Reply:
         createdAt: <(new \DateTime('2019-03-20'))>
         updatedAt: <(new \DateTime('2019-03-20'))>
         undraftAt: $publishedAt
+    replyUnpublished:
+        id: 'replyUnpublished'
+        author: '@user5'
+        draft: 0
+        private: false
+        questionnaire: '@questionnaire1'
+        createdAt: <(new \DateTime('2019-03-20'))>
+        updatedAt: <(new \DateTime('2019-03-20'))>
+    replyUnpublishedAndDraft:
+        id: 'replyUnpublishedAndDraft'
+        author: '@user5'
+        draft: 1
+        private: false
+        questionnaire: '@questionnaire1'
+        createdAt: <(new \DateTime('2019-03-20'))>
+        updatedAt: <(new \DateTime('2019-03-20'))>
     replyAdmin:
         id: 'replyAdmin'
         author: '@user4'
@@ -134,6 +150,22 @@ Capco\AppBundle\Entity\Reply:
         draft: 0
         author: '@user<current()>'
         questionnaire: '@questionnaire1'
+        publishedAt: <(new \DateTime('2016-03-02'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+    replyQuestionnaireAnonPOwner:
+        id: 'replyQuestionnaireAnonPOwner'
+        draft: 0
+        author: '@user1'
+        questionnaire: '@questionnaireProjectOwnerAnonymous'
+        publishedAt: <(new \DateTime('2016-03-02'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+    replyQuestionnaireAnon:
+        id: 'replyQuestionnaireAnon'
+        draft: 0
+        author: '@user1'
+        questionnaire: '@questionnaireAnonymous'
         publishedAt: <(new \DateTime('2016-03-02'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt

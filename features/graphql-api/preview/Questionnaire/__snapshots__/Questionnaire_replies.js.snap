@@ -4,13 +4,13 @@ exports[`Preview|Questionnaire.replies connection fetches all replies counters a
 Object {
   "node": Object {
     "allReplies": Object {
-      "totalCount": 37,
+      "totalCount": 39,
     },
     "publishedAndDraftReplies": Object {
       "totalCount": 36,
     },
     "publishedAndUnpublishedReplies": Object {
-      "totalCount": 35,
+      "totalCount": 36,
     },
     "publishedReplies": Object {
       "totalCount": 34,
@@ -3916,6 +3916,26 @@ Object {
           },
         },
         Object {
+          "cursor": "YToyOntpOjA7aToxNTUzMDM2NDAwMDAwO2k6MTtzOjE2OiJyZXBseVVucHVibGlzaGVkIjt9",
+          "node": Object {
+            "createdAt": "2019-03-20 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZA==",
+            "published": false,
+            "publishedAt": null,
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUzMDM2NDAwMDAwO2k6MTtzOjI0OiJyZXBseVVucHVibGlzaGVkQW5kRHJhZnQiO30=",
+          "node": Object {
+            "createdAt": "2019-03-20 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZEFuZERyYWZ0",
+            "published": false,
+            "publishedAt": null,
+          },
+        },
+        Object {
           "cursor": "YToyOntpOjA7aToxNDU3MzA1MjAwMDAwO2k6MTtzOjY6InJlcGx5NyI7fQ==",
           "node": Object {
             "createdAt": "2016-03-07 00:00:00",
@@ -4130,7 +4150,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNDU2Nzg2ODAwMDAwO2k6MTtzOjY6InJlcGx5MSI7fQ==",
         "hasNextPage": false,
       },
-      "totalCount": 37,
+      "totalCount": 39,
     },
   },
 }

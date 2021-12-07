@@ -841,6 +841,12 @@ type AnonymousReply implements Reply & Node {
 
   """Identifies the form where the contribution was submitted."""
   questionnaire: Questionnaire!
+
+  """The admin url of the reply."""
+  adminUrl: URI
+
+  """The status of the reply."""
+  status: ReplyStatus
   participantEmail: Email
 }
 
@@ -4822,6 +4828,17 @@ type DeleteQuestionnairePayload {
   clientMutationId: String
 }
 
+input DeleteRepliesInput {
+  """The list of replies ID to delete"""
+  replyIds: [ID!]!
+  clientMutationId: String
+}
+
+type DeleteRepliesPayload {
+  replyIds: [ID!]!
+  clientMutationId: String
+}
+
 input DeleteSSOConfigurationInput {
   """The ID of SSO Configuration that needs to be deleted."""
   id: ID!
@@ -6954,6 +6971,7 @@ type Mutation {
   addAnonymousReply(input: AddAnonymousReplyInput!): AddAnonymousReplyPayload
   updateAnonymousReply(input: UpdateAnonymousReplyInput!): UpdateAnonymousReplyPayload
   deleteAnonymousReply(input: DeleteAnonymousReplyInput!): DeleteAnonymousReplyPayload
+  deleteReplies(input: DeleteRepliesInput!): DeleteRepliesPayload
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   addOpinionVote(input: AddOpinionVoteInput!): AddOpinionVotePayload
   removeOpinionVote(input: RemoveOpinionVoteInput!): RemoveOpinionVotePayload
@@ -8449,6 +8467,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """Identifies the first debate step of the project, if any."""
   firstDebateStep: DebateStep
+
+  """Identifies the first questionnaire step of the project, if any."""
+  firstQuestionnaireStep: QuestionnaireStep
 
   """Identifies the first analysis step of the project, if any."""
   firstAnalysisStep: ProposalStep
@@ -11106,6 +11127,29 @@ type Questionnaire implements Node {
   type: QuestionnaireType!
   notificationsConfiguration: QuestionnaireNotificationConfiguration!
 
+  """List of replies used in contributions admin page"""
+  adminReplies(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter replies by a given query"""
+    term: String
+
+    """The ordering direction for questionnaires"""
+    orderBy: ReplyOrder = {field: CREATED_AT, direction: DESC}
+
+    """Select also published replies."""
+    includePublished: Boolean = true
+
+    """Filter by status"""
+    filterStatus: [ReplyStatus] = [PUBLISHED, PENDING, NOT_PUBLISHED, DRAFT]
+  ): ReplyConnection!
+
   """Results of survey are private"""
   privateResult: Boolean!
   exportResultsUrl: URI!
@@ -11825,6 +11869,12 @@ interface Reply {
 
   """Identifies the form where the contribution was submitted."""
   questionnaire: Questionnaire!
+
+  """The admin url of the reply."""
+  adminUrl: URI
+
+  """The status of the reply."""
+  status: ReplyStatus
 }
 
 """A connection to a list of items."""
@@ -11848,6 +11898,24 @@ type ReplyEdge {
   cursor: String!
 }
 
+"""Ways in which lists of replies can be ordered upon return."""
+input ReplyOrder {
+  """The field to order reply by."""
+  field: ReplyOrderField! = CREATED_AT
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Properties by which replies can be ordered"""
+enum ReplyOrderField {
+  """Allows ordering a list of replies by when they have been updated."""
+  UPDATED_AT
+
+  """Allows ordering a list of replies by when they have been created."""
+  CREATED_AT
+}
+
 """Available statuses"""
 enum ReplyPublicationStatus {
   """Publicly visible"""
@@ -11855,6 +11923,23 @@ enum ReplyPublicationStatus {
 
   """Draft, not publicly visible, only showed for his author."""
   DRAFT
+}
+
+"""Available status for a reply"""
+enum ReplyStatus {
+  """The reply is published."""
+  PUBLISHED
+
+  """
+  The author confirmed his account too late or the step is already closed
+  """
+  NOT_PUBLISHED
+
+  """The reply is in draft."""
+  DRAFT
+
+  """The author has not confirmed his account yet."""
+  PENDING
 }
 
 """A connection to a list of items."""
@@ -15931,6 +16016,12 @@ type UserReply implements Node & Reply & Publishable & Contribution & Draftable 
 
   """Identifies the form where the contribution was submitted."""
   questionnaire: Questionnaire!
+
+  """The admin url of the reply."""
+  adminUrl: URI
+
+  """The status of the reply."""
+  status: ReplyStatus
 
   """Whether or not the current viewer can delete the reply."""
   viewerCanDelete: Boolean!
