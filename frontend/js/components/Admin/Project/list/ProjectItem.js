@@ -128,11 +128,13 @@ const ProjectItem = ({
           </Flex>
         </Flex>
       </Td>
-      {isAdmin && project?.owner?.id && (
+      {isAdmin && (
         <Td>
-          <Link key={project?.owner?.id} href={project?.owner?.url}>
-            {project?.owner?.username}
-          </Link>
+          {project?.owner?.url && (
+            <Link key={project?.owner?.id} href={project?.owner?.url}>
+              {project?.owner?.username}
+            </Link>
+          )}
         </Td>
       )}
       <Td>
