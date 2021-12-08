@@ -74,10 +74,15 @@ const getFeatureFlags = async (): FeatureFlags => {
 
     for (const flag of Object.keys(featureFlags)) {
         const flagKey = getRedisFeatureFlagKey(flag);
-        featureFlags[flag] = await redisClient.get(flagKey);
+        const encodedPHPFlag = await redisClient.get(flagKey);
+        featureFlags[flag] = decodePHPFlag(encodedPHPFlag);
     }
 
     return featureFlags;
 };
+
+export const decodePHPFlag = (encodedFlag: string): boolean => {
+    return encodedFlag.includes('i:1;}');
+}
 
 export default getFeatureFlags;
