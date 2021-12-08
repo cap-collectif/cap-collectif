@@ -5,14 +5,13 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Form\ReplyAnonymousType;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserErrors;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -26,7 +25,7 @@ class AddAnonymousReplyMutation implements MutationInterface
     private LoggerInterface $logger;
     private RequestGuesser $requestGuesser;
     private TokenGeneratorInterface $tokenGenerator;
-    private QuestionnaireRepository $questionnaireRepository;
+    private GlobalIdResolver $globalIdResolver;
 
 
     public function __construct(
@@ -36,7 +35,7 @@ class AddAnonymousReplyMutation implements MutationInterface
         LoggerInterface $logger,
         RequestGuesser $requestGuesser,
         TokenGeneratorInterface $tokenGenerator,
-        QuestionnaireRepository $questionnaireRepository
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -44,17 +43,15 @@ class AddAnonymousReplyMutation implements MutationInterface
         $this->logger = $logger;
         $this->requestGuesser = $requestGuesser;
         $this->tokenGenerator = $tokenGenerator;
-        $this->questionnaireRepository = $questionnaireRepository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input): array
     {
         $values = $input->getArrayCopy();
 
-        $questionnaireId = GlobalId::fromGlobalId($values['questionnaireId'])['id'];
-
         /** @var Questionnaire $questionnaire */
-        $questionnaire = $this->questionnaireRepository->find($questionnaireId);
+        $questionnaire = $this->globalIdResolver->resolve($values['questionnaireId'], null);
         unset($values['questionnaireId']);
 
         $participantEmail = $values['participantEmail'] ?? null;

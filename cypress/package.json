@@ -13,6 +13,7 @@
         "cy:run:ci": "NODE_ENV=ci cypress run",
         "cy:run:debate:ci": "NODE_ENV=ci cypress run --spec 'integration/debate/*.spec.ts'",
         "cy:run:project-owner:ci": "NODE_ENV=ci cypress run --spec 'integration/projectOwner/*.spec.ts'",
+        "cy:run:questionnaire:ci": "NODE_ENV=ci cypress run --spec 'integration/questionnaire/*.spec.ts'",
         "cy:verify": "cypress verify",
         "cy:info": "cypress info",
         "cy:version": "cypress version"

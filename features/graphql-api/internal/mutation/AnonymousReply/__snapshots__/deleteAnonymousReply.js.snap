@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteAnonymousReply should delete an anonymous reply 1`] = `
+Object {
+  "deleteAnonymousReply": Object {
+    "questionnaire": Object {
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz",
+    },
+    "replyId": "UmVwbHk6cmVwbHlBbm9ueW1vdXMx",
+  },
+}
+`;

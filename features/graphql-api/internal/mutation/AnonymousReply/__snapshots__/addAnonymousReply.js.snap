@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addAnonymousReply should create an anonymous reply 1`] = `
+Object {
+  "addAnonymousReply": Object {
+    "questionnaire": Object {
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz",
+    },
+    "reply": Object {
+      "__typename": "AnonymousReply",
+      "id": Any<String>,
+      "participantEmail": null,
+    },
+    "token": Any<String>,
+  },
+}
+`;
+
+exports[`mutations.addAnonymousReply should create an anonymous reply with participantEmail 1`] = `
+Object {
+  "addAnonymousReply": Object {
+    "questionnaire": Object {
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz",
+    },
+    "reply": Object {
+      "__typename": "AnonymousReply",
+      "id": Any<String>,
+      "participantEmail": "abc@cap-collectif.com",
+    },
+    "token": Any<String>,
+  },
+}
+`;
