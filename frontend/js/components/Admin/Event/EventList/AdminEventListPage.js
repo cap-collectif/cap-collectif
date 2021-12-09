@@ -119,13 +119,17 @@ const AdminEventListPage = ({ queryReference, isAdmin }: Props): React.Node => {
             </Flex>
             <Flex direction="row">
               <AdminEventImportModal intl={intl} />
-              <Button
-                variant="secondary"
-                variantColor="primary"
-                variantSize="small"
-                onClick={() => exportEvents()}>
-                {intl.formatMessage({ id: 'global.export' })}
-              </Button>
+              {
+                isAdmin && (
+                  <Button
+                    variant="secondary"
+                    variantColor="primary"
+                    variantSize="small"
+                    onClick={() => exportEvents()}>
+                    {intl.formatMessage({ id: 'global.export' })}
+                  </Button>
+                )
+              }
             </Flex>
           </Flex>
           <InlineSelect
