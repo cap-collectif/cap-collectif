@@ -168,6 +168,10 @@ const onSubmit = (
           delete s.isAnalysisStep;
           const sTypename = s.__typename;
           delete s.__typename;
+          const requirements =
+            s.requirements?.length > 0
+              ? s.requirements.filter(req => Object.keys(req).length > 0)
+              : [];
           return {
             ...s,
             isGridViewEnabled: undefined,
@@ -195,7 +199,7 @@ const onSubmit = (
             type: convertTypenameToConcreteStepType(sTypename),
             mainView:
               sTypename === 'CollectStep' || sTypename === 'SelectionStep' ? s.mainView : undefined,
-            requirements: s.requirements?.length ? s.requirements : [],
+            requirements,
             requirementsReason: doesStepSupportRequirements(s) ? s.requirementsReason : undefined,
             proposalsHidden: sTypename === 'SelectionStep' ? s.proposalsHidden : undefined,
             statuses:
@@ -417,7 +421,8 @@ const renderProjectSave = ({
           id="submit-project-content"
           type="submit"
           disabled={invalid || submitting || pristine}
-          bsStyle="primary">
+          bsStyle="primary"
+        >
           {submitting ? (
             <FormattedMessage id="global.loading" />
           ) : (
