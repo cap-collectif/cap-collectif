@@ -17,9 +17,10 @@
     "paths": {
       "~ui/*": ["../frontend/js/components/Ui/*"],
       "~ds/*": ["../frontend/js/components/DesignSystem/*"],
-      "~/*": ["../frontend/js/*"]
+      "~/*": ["../frontend/js/*"],
+      "@relay/*": ["./__generated__/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.graphql"],
   "exclude": ["node_modules"]
 }

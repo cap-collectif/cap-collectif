@@ -9,6 +9,7 @@ import EarthIcon from '../../Ui/Icons/EarthIcon';
 import type { AdminRightNavbar_query } from '~relay/AdminRightNavbar_query.graphql';
 import type { FeatureToggles, GlobalState } from '~/types';
 import colors from '../../../utils/colors';
+import CookieMonster from '~/CookieMonster';
 
 export type Props = {|
   query: AdminRightNavbar_query,
@@ -94,7 +95,12 @@ const AdminRightNavbar = ({ localesData, currentLocale, features, query }: Props
         title={<EarthIcon />}>
         {localesData &&
           localesData.map(localeData => (
-            <MenuLocaleItem href={localeData.path} key={localeData.locale}>
+            <MenuLocaleItem
+              href={localeData.path}
+              key={localeData.locale}
+              onSelect={() => {
+                CookieMonster.setLocale(localeData.locale);
+              }}>
               {localeData.locale === currentLocale ? (
                 <i className="cap-android-done mr-10" />
               ) : (

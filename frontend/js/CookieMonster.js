@@ -1,6 +1,7 @@
 /* eslint-disable */
 // @flow
 import type { ForOrAgainstValue } from '~relay/AddDebateAnonymousVoteMutation.graphql';
+import { baseUrl } from '~/config';
 
 const DEBATE_ANONYMOUS_VOTES_NAME = 'CapcoAnonVotes';
 
@@ -174,12 +175,15 @@ class CookieMonster {
     });
   };
 
-  getAnonymousRepliesCookie = (questionnaireId: string, replyId: string): AnonymousReplyArgument | null => {
+  getAnonymousRepliesCookie = (
+    questionnaireId: string,
+    replyId: string,
+  ): AnonymousReplyArgument | null => {
     const args: ReplyAnonymousArgumentsCookie = Cookies.get(REPLY_ANONYMOUS_NAME)
       ? JSON.parse(atob(Cookies.get(REPLY_ANONYMOUS_NAME)))
       : {};
     if (questionnaireId in args) {
-      return args[questionnaireId].find(reply => reply.replyId === replyId) ?? null
+      return args[questionnaireId].find(reply => reply.replyId === replyId) ?? null;
     }
     return null;
   };
@@ -191,7 +195,7 @@ class CookieMonster {
     if (questionnaireId in args) {
       return args[questionnaireId].map(reply => reply.replyId);
     }
-    return []
+    return [];
   };
 
   getHashedAnonymousReplyCookie = (questionnaireId: string, replyId: string): string | null => {
@@ -200,7 +204,9 @@ class CookieMonster {
       : {};
 
     if (args[questionnaireId]) {
-      const arg: ?AnonymousReplyArgument = args[questionnaireId].find(reply => reply.replyId === replyId);
+      const arg: ?AnonymousReplyArgument = args[questionnaireId].find(
+        reply => reply.replyId === replyId,
+      );
       if (arg?.token) {
         return btoa(`${arg.token}`);
       }
@@ -208,9 +214,13 @@ class CookieMonster {
     return null;
   };
 
-  hasAnonymousReplyCookie = (questionnaireId: string, replyId: string): boolean => !!this.getAnonymousRepliesCookie(questionnaireId, replyId);
+  hasAnonymousReplyCookie = (questionnaireId: string, replyId: string): boolean =>
+    !!this.getAnonymousRepliesCookie(questionnaireId, replyId);
 
-  addAnonymousReplyCookie = (questionnaireId: string, { token, replyId }: AnonymousReplyArgument): void => {
+  addAnonymousReplyCookie = (
+    questionnaireId: string,
+    { token, replyId }: AnonymousReplyArgument,
+  ): void => {
     const args: ReplyAnonymousArgumentsCookie = Cookies.get(REPLY_ANONYMOUS_NAME)
       ? JSON.parse(atob(Cookies.get(REPLY_ANONYMOUS_NAME)))
       : {};
@@ -220,14 +230,14 @@ class CookieMonster {
         {
           replyId,
           token,
-        }
+        },
       ];
     } else {
       args[questionnaireId] = [
         {
           replyId,
           token,
-        }
+        },
       ];
     }
 
@@ -244,7 +254,7 @@ class CookieMonster {
       : {};
     if (questionnaireId in args) {
       const replies = args[questionnaireId].filter(reply => reply.replyId !== replyId);
-      args[questionnaireId] = replies
+      args[questionnaireId] = replies;
     }
     Cookies.set(REPLY_ANONYMOUS_NAME, btoa(JSON.stringify(args)), {
       expires: 395,
@@ -483,7 +493,12 @@ class CookieMonster {
   };
 
   setCookieWithExpirationDate = (value: any, type: string, duration: number) => {
-    Cookies.set(type, value, { expires: duration, secure: true, sameSite: 'Strict' });
+    Cookies.set(type, value, {
+      expires: duration,
+      secure: true,
+      sameSite: 'Strict',
+      domain: window.location.host,
+    });
     return true;
   };
 

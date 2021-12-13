@@ -103,3 +103,5 @@ nohup.out
 /.env.*.local
 
 .now
+
+.kube

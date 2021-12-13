@@ -8,7 +8,10 @@ const nextConfig = {
   webpack5: false,
   // TODO enable this
   reactStrictMode: false,
-  basePath: process.argv.includes('dev') ? '' : '/admin-next',
+  basePath: process.env.SYMFONY_ENV === 'prod' ? '/admin-next' : '',
+  env: {
+    PRODUCTION: process.env.SYMFONY_ENV === 'prod',
+  },
   i18n: {
     localeDetection: true,
     defaultLocale: 'fr-FR',

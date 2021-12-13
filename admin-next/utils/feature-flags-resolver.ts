@@ -5,6 +5,10 @@ const getRedisFeatureFlagKey = (flag: string) => {
     return `feature_toggle__TOGGLE__${flag}`;
 };
 
+export const decodePHPFlag = (encodedFlag: string): boolean => {
+    return encodedFlag.includes('i:1;}');
+};
+
 const getFeatureFlags = async (): FeatureFlags => {
     const redisClient = await getRedisClient();
 
@@ -74,15 +78,11 @@ const getFeatureFlags = async (): FeatureFlags => {
 
     for (const flag of Object.keys(featureFlags)) {
         const flagKey = getRedisFeatureFlagKey(flag);
-        const encodedPHPFlag = await redisClient.get(flagKey);
-        featureFlags[flag] = decodePHPFlag(encodedPHPFlag);
+        const encodedPHPFlag: string | null = await redisClient.get(flagKey);
+        featureFlags[flag] = encodedPHPFlag ? decodePHPFlag(encodedPHPFlag) : !!encodedPHPFlag;
     }
 
     return featureFlags;
 };
-
-export const decodePHPFlag = (encodedFlag: string): boolean => {
-    return encodedFlag.includes('i:1;}');
-}
 
 export default getFeatureFlags;

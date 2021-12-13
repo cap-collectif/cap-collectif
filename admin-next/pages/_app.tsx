@@ -1,7 +1,6 @@
 import React from 'react';
 import App, { AppProps } from 'next/app';
 import { NextApiResponse } from 'next';
-import { createGlobalStyle } from 'styled-components';
 import frMessages from '~/../../translations/fr-FR.json';
 import enMessages from '~/../../translations/en-GB.json';
 import esMessages from '~/../../translations/es-ES.json';
@@ -12,13 +11,15 @@ import ocMessages from '~/../../translations/oc-OC.json';
 import euMessages from '~/../../translations/eu-EU.json';
 
 import Providers from '../utils/providers';
-
+import GlobalCSS from '../styles/GlobalCSS';
+import Fonts from '../styles/Fonts';
 import getSessionCookieFromReq from '../utils/request-helper';
 import getSessionFromSessionCookie from '../utils/session-resolver';
 import getViewerJsonFromRedisSession from '../utils/session-decoder';
 import getFeatureFlags from '../utils/feature-flags-resolver';
 
-import { __isDev__, __isTest__ } from '../config';
+import { __isTest__ } from '../config';
+import { getLocaleFromReq } from '../utils/locale-helper';
 
 const messages = {
     'fr-FR': frMessages,
@@ -40,18 +41,17 @@ const SafeHydrate: React.FC<{}> = ({ children }) => {
     );
 };
 
-const GlobalCSS = createGlobalStyle`
-  html {
-    font-size: 14px;
-  }
-`;
-
 // This is the entrypoint where we inject all providers and shared data
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <SafeHydrate>
-            <Providers featureFlags={pageProps.featureFlags} intl={pageProps.store.intl}>
+            <Providers
+                featureFlags={pageProps.featureFlags}
+                intl={pageProps.intl}
+                viewerSession={pageProps.viewerSession}
+            >
                 <GlobalCSS />
+                <Fonts />
                 <Component {...pageProps} />
             </Providers>
         </SafeHydrate>
@@ -59,9 +59,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 const redirectOnError = (res: NextApiResponse, devErrorMessage: string) => {
-    if (__isDev__) {
-        throw new Error(devErrorMessage);
-    }
+    throw new Error(devErrorMessage);
+
     // In production we redirect to the frontend homepage.
     res.writeHead(301, { Location: '/' });
     res.end();
@@ -71,8 +70,8 @@ const redirectOnError = (res: NextApiResponse, devErrorMessage: string) => {
 MyApp.getInitialProps = async appContext => {
     const appProps = await App.getInitialProps(appContext);
     const context = appContext.ctx;
-    const { req, res, err, locale } = context;
-    const pageProps = { store: { intl: {} } };
+    const { req, res } = context;
+    const pageProps = { intl: {} };
 
     // If we are on error page we skip this step.
     if (req.url === '/500' || req.url === '/400') {
@@ -116,17 +115,14 @@ MyApp.getInitialProps = async appContext => {
     // Success ! We inject a `viewerSession` props on every page.
     pageProps.viewerSession = viewerJson;
 
-    // We inject `intl` data based on the request locale.
-    const intl = {
-        locale,
+    const locale = getLocaleFromReq(req);
+    pageProps.intl = {
+        locale: locale || 'fr-FR',
         // For tests we disable translations
         messages: __isTest__ ? {} : messages[locale] || messages['fr-FR'],
     };
 
-    pageProps.store = { intl };
-
-    const featureFlags = getFeatureFlags();
-    pageProps.featureFlags = featureFlags;
+    pageProps.featureFlags = await getFeatureFlags();
     pageProps.appVersion = process.env.SYMFONY_APP_VERSION || 'dev';
 
     return { ...appProps, pageProps };

@@ -2445,6 +2445,26 @@
     readdirp "^2.2.1"
     upath "^1.1.1"
 
+"@node-redis/client@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@node-redis/client/-/client-1.0.0.tgz#25f6773c3a6997367772dc4d0eacd6e954063490"
+  integrity sha512-DWDMeZELXG3rOGzCKfJEHCkCP6rgiA1H+oqj2N0NR4Q0fQUYMxTsyoqt80GpdYLilUW6zoCiQl9yL3vJhGhiCA==
+  dependencies:
+    cluster-key-slot "1.1.0"
+    generic-pool "3.8.2"
+    redis-parser "3.0.0"
+    yallist "4.0.0"
+
+"@node-redis/json@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@node-redis/json/-/json-1.0.0.tgz#11ba5882ac1f3226a8042f5de318c94bad520802"
+  integrity sha512-6e4qjbHODfr/KFsHYvkbfNui/kedVz+cG7Hz8oNbZM3p68QLf3A8FjcPYzixBp/QbvPeOSLgj39DjVEqjKkqkw==
+
+"@node-redis/search@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@node-redis/search/-/search-1.0.0.tgz#3926c5cb0276cfa2d0ed6a92fd654743ee4ef188"
+  integrity sha512-f0Cw83X5+bpDIDTNSpd3YA+ckV3kwSv/NfcKhHRPGDQXFqyMLO0Q+2t8EMQncvsMRWduURsR4nqMYGzXae1ZCA==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -4211,6 +4231,11 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
+
+"@types/cookie@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.4.1.tgz#bfd02c1f2224567676c1545199f87c3a861d878d"
+  integrity sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==
 
 "@types/d3-path@^2":
   version "2.0.1"
@@ -11337,6 +11362,11 @@ gaze@^1.0.0:
   dependencies:
     globule "^1.0.0"
 
+generic-pool@3.8.2:
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/generic-pool/-/generic-pool-3.8.2.tgz#aab4f280adb522fdfbdc5e5b64d718d3683f04e9"
+  integrity sha512-nGToKy6p3PAbYQ7p1UlWl6vSPwfwU6TMSWK7TTu+WUY4ZjyZQGniGGt2oNVvyNSpyZYSB43zMXVLcBm08MTMkg==
+
 gensync@^1.0.0-beta.1, gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
@@ -15909,6 +15939,14 @@ nomnom@^1.8.1:
     chalk "~0.4.0"
     underscore "~1.6.0"
 
+nookies@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/nookies/-/nookies-2.5.2.tgz#cc55547efa982d013a21475bd0db0c02c1b35b27"
+  integrity sha512-x0TRSaosAEonNKyCrShoUaJ5rrT5KHRNZ5DwPCuizjgrnkpE5DRf3VL7AyyQin4htict92X1EQ7ejDbaHDVdYA==
+  dependencies:
+    cookie "^0.4.1"
+    set-cookie-parser "^2.4.6"
+
 nopt@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-5.0.0.tgz#530942bb58a512fccafe53fe210f13a25355dc88"
@@ -19189,14 +19227,14 @@ redis-parser@3.0.0:
   dependencies:
     redis-errors "^1.0.0"
 
-redis@^4.0.0-next.5:
-  version "4.0.0-next.5"
-  resolved "https://registry.yarnpkg.com/redis/-/redis-4.0.0-next.5.tgz#515be92f7a4f0058a3266d6c9f5429ca55db1d90"
-  integrity sha512-+DZnJ2TL6kx9wvqcwmZVvU0kDcMbsOy49jcnw+Z8+hCjp6RmUUqnyPedK1Sl110n1muwp6GLr3wtqepuYJ/GJw==
+redis@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/redis/-/redis-4.0.0.tgz#faefb8f156c231cacdd7b0ea854d91e92d3ea7d4"
+  integrity sha512-LtV6+h0F/e3F4mtDKKGZIl/ekEjsiqX2E0hmtNqjGqXj3wYi/nAfeVNWKRa7wFuJ+nkqwXATFGvu6h2fLCgA1A==
   dependencies:
-    cluster-key-slot "1.1.0"
-    redis-parser "3.0.0"
-    yallist "4.0.0"
+    "@node-redis/client" "^1.0.0"
+    "@node-redis/json" "^1.0.0"
+    "@node-redis/search" "^1.0.0"
 
 reduce-css-calc@^2.1.8:
   version "2.1.8"
@@ -20113,6 +20151,11 @@ set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha1-BF+XgtARrppoA93TgrJDkrPYkPc=
+
+set-cookie-parser@^2.4.6:
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.4.8.tgz#d0da0ed388bc8f24e706a391f9c9e252a13c58b2"
+  integrity sha512-edRH8mBKEWNVIVMKejNnuJxleqYE/ZSdcT8/Nem9/mmosx12pctd80s2Oy00KNZzrogMZS5mauK2/ymL1bvlvg==
 
 set-value@^2.0.0, set-value@^2.0.1:
   version "2.0.1"
