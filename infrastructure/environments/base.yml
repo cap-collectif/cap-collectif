@@ -8,7 +8,6 @@ services:
       cache_from:
         - 'capco_application'
     ports:
-      - '80:80'
       - '443:443'
       - '1337:1337'
       - '1664:1664'
