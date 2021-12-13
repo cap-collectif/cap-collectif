@@ -1,9 +1,9 @@
 from functools import wraps
 from sys import platform as _platform
-from yaml import load, dump
 from fabric import Config, Connection
 from invoke import run
 
+import yaml
 import os
 
 environments = {}
@@ -111,14 +111,14 @@ def merge_infra_files():
         stream = open(Config.root_dir + '/' + file, 'r')
 
         if output is None:
-            output = load(stream)
+            output = yaml.safe_load(stream)
         else:
-            output = merge(load(stream), output)
+            output = merge(yaml.safe_load(stream), output)
 
         stream.close()
 
     outputStream = open(Config.root_dir + '/' + Config.temporary_file, 'w')
-    dump(output, outputStream)
+    yaml.safe_dump(output, outputStream)
     outputStream.close()
 
     if not Config.local:
