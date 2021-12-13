@@ -4,19 +4,23 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Command\ExportDebateCommand;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Entity\Security\UserIdentificationCodeList;
+use Capco\AppBundle\Generator\CSV\IdentificationCodeListCSVGenerator;
+use Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository;
 use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Entity\Media;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class DownloadController extends Controller
@@ -24,17 +28,20 @@ class DownloadController extends Controller
     private LoggerInterface $logger;
     private SessionInterface $session;
     private TranslatorInterface $translator;
+    private UserIdentificationCodeListRepository $userIdentificationCodeListRepository;
     private string $projectDir;
 
     public function __construct(
         LoggerInterface $logger,
         SessionInterface $session,
         TranslatorInterface $translator,
+        UserIdentificationCodeListRepository $userIdentificationCodeListRepository,
         string $projectDir
     ) {
         $this->logger = $logger;
         $this->session = $session;
         $this->translator = $translator;
+        $this->userIdentificationCodeListRepository = $userIdentificationCodeListRepository;
         $this->projectDir = $projectDir;
     }
 
@@ -116,5 +123,29 @@ class DownloadController extends Controller
         }
 
         return new Response('Sorry, you are not allowed to see this file.');
+    }
+
+    /**
+     * @Route("/identificationCodesList/{listId}/download.csv", name="app_identification_codes_list_download", options={"i18n" = false})
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function downloadIdentificationCodesListAction(string $listId): Response
+    {
+        $list = $this->getUserIdentificationCodeList($listId);
+
+        return IdentificationCodeListCSVGenerator::generateFromList($list);
+    }
+
+    private function getUserIdentificationCodeList(string $globalId): UserIdentificationCodeList
+    {
+        $decoded = GlobalId::fromGlobalId($globalId);
+        if (isset($decoded['id'])) {
+            $list = $this->userIdentificationCodeListRepository->find($decoded['id']);
+            if ($list) {
+                return $list;
+            }
+        }
+
+        throw new NotFoundHttpException('no list matching id');
     }
 }

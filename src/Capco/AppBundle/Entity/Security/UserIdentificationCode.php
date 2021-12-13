@@ -248,4 +248,20 @@ class UserIdentificationCode
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            $this->getTitle() ?? '',
+            $this->getFirstname() ?? '',
+            $this->getLastname() ?? '',
+            $this->getAddress1() ?? '',
+            $this->getAddress2() ?? '',
+            $this->getAddress3() ?? '',
+            $this->getZipCode() ?? '',
+            $this->getCity() ?? '',
+            $this->getCountry() ?? '',
+            $this->getIdentificationCode() ?? '',
+        ];
+    }
 }
