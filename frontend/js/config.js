@@ -38,7 +38,6 @@ const isTest = () => getBaseUrl() === 'https://capco.test';
 export const ALLEWED_IMAGE_MIMETYPES = [
   'image/png', // .png
   'image/svg+xml', // .svg
-  'image/webp', // .webp
   'image/gif', // .gif
   'image/jpeg', // .jpeg .jpg
 ];

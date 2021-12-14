@@ -131,7 +131,6 @@ sonata_media:
                 [
                     'image/png',
                     'image/svg+xml',
-                    'image/webp',
                     'image/gif',
                     'image/jpeg',
                 ]
@@ -173,7 +172,6 @@ sonata_media:
                 [
                     'image/png',
                     'image/svg+xml',
-                    'image/webp',
                     'image/gif',
                     'image/jpeg',
                     'text/csv',

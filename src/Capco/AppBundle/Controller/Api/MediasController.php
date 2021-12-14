@@ -17,7 +17,6 @@ class MediasController extends AbstractController
     private const ALLOWED_MIMETYPES = [
         'image/png', // .png
         'image/svg+xml', // .svg
-        'image/webp', // .webp
         'image/gif', // .gif
         'image/jpeg', // .jpeg .jpg
         'application/csv', // .csv

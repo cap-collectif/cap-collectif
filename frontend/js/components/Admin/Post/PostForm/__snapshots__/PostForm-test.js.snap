@@ -750,7 +750,6 @@ exports[`<PostForm/> should render correctly 1`] = `
                         Array [
                           "image/png",
                           "image/svg+xml",
-                          "image/webp",
                           "image/gif",
                           "image/jpeg",
                         ]
