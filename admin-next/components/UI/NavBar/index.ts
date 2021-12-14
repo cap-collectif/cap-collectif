@@ -1,2 +1,2 @@
-export { NavBar as default } from './NavBar';
+export { NavBar } from './NavBar';
 export type { NavBarProps } from './NavBar';

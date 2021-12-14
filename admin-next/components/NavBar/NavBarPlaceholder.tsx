@@ -1,4 +1,4 @@
-import NavBar from '../UI/NavBar';
+import { NavBar } from '../UI/NavBar';
 import { Skeleton } from '@cap-collectif/ui';
 import { FC } from 'react';
 

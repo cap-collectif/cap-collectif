@@ -9,8 +9,8 @@ import {
     Spinner,
     Text,
 } from '@cap-collectif/ui';
-import NavBarUI from '../UI/NavBar';
-import { formatCodeToLocale, setLocaleCookie } from '../../utils/locale-helper';
+import { NavBar as NavBarUI } from '@ui/NavBar';
+import { formatCodeToLocale, setLocaleCookie } from '@utils/locale-helper';
 import { getBaseUrlWithAdminNextSupport } from '~/config';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { useIntl } from 'react-intl';

@@ -30,7 +30,7 @@ export const NavBar: React.FC<NavBarProps> & SubComponents = ({
     pl={6}
     height={11}
     className={cn('navBar', className)}
-    border="normal"
+    borderBottom="normal"
     borderColor="gray.150"
     {...props}
   >

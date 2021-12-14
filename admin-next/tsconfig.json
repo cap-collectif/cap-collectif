@@ -18,7 +18,9 @@
       "~ui/*": ["../frontend/js/components/Ui/*"],
       "~ds/*": ["../frontend/js/components/DesignSystem/*"],
       "~/*": ["../frontend/js/*"],
-      "@relay/*": ["./__generated__/*"]
+      "@relay/*": ["./__generated__/*"],
+      "@ui/*": ["./components/UI/*"],
+      "@utils/*": ["./utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.graphql"],
