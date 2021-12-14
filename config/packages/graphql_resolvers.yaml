@@ -43,6 +43,10 @@ services:
         autowire: true
         public: true
 
+    Capco\AppBundle\GraphQL\Resolver\ViewerCanSeeAnalysisUrlResolver:
+        autowire: true
+        public: true
+
     # Public services :
     Capco\AppBundle\GraphQL\Deprecation:
         autowire: true

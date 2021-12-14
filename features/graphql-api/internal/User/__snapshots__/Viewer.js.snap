@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.viewer.posts should correctly fetch admin viewer 1`] = `
+Object {
+  "viewer": Object {
+    "adminHomeUrl": "https://capco.test/admin/dashboard?_locale=fr-FR",
+    "analysisUrl": "https://capco.test/evaluations",
+    "openidId": "openidId",
+    "url": "https://capco.test/profile/admin",
+  },
+}
+`;
+
+exports[`Internal.viewer.posts should correctly fetch analyst viewer 1`] = `
+Object {
+  "viewer": Object {
+    "adminHomeUrl": "https://capco.test/admin/dashboard?_locale=fr-FR",
+    "analysisUrl": "https://capco.test/evaluations",
+    "openidId": null,
+    "url": "https://capco.test/profile/analyst",
+  },
+}
+`;
+
+exports[`Internal.viewer.posts should correctly fetch evaluer viewer 1`] = `
+Object {
+  "viewer": Object {
+    "adminHomeUrl": "https://capco.test/admin/dashboard?_locale=fr-FR",
+    "analysisUrl": "https://capco.test/evaluations",
+    "openidId": null,
+    "url": "https://capco.test/profile/ptondereau",
+  },
+}
+`;
+
+exports[`Internal.viewer.posts should correctly fetch project admin viewer 1`] = `
+Object {
+  "viewer": Object {
+    "adminHomeUrl": "https://capco.test/admin/dashboard?_locale=fr-FR",
+    "analysisUrl": "https://capco.test/evaluations",
+    "openidId": "openidIdTheo",
+    "url": "https://capco.test/profile/theoqp",
+  },
+}
+`;
+
+exports[`Internal.viewer.posts should correctly fetch supervisor viewer 1`] = `
+Object {
+  "viewer": Object {
+    "adminHomeUrl": "https://capco.test/admin/dashboard?_locale=fr-FR",
+    "analysisUrl": "https://capco.test/evaluations",
+    "openidId": null,
+    "url": "https://capco.test/profile/supervisor",
+  },
+}
+`;
+
+exports[`Internal.viewer.posts should correctly fetch theo viewer 1`] = `
+Object {
+  "viewer": Object {
+    "adminHomeUrl": "https://capco.test/admin/dashboard?_locale=fr-FR",
+    "analysisUrl": "https://capco.test/evaluations",
+    "openidId": "openidIdTheo",
+    "url": "https://capco.test/profile/theoqp",
+  },
+}
+`;

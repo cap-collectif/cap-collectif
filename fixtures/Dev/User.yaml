@@ -16,7 +16,6 @@ Capco\UserBundle\Entity\User:
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
         confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
         consentInternalCommunication: true
-
     user2:
         id: 'user2'
         username: sfavot
@@ -70,6 +69,7 @@ Capco\UserBundle\Entity\User:
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 3 days"))>
         notificationsConfiguration: '@adminNotificationConfiguration'
         subscribedToProposalNews: true
+        openId: 'openidId'
 
     user666:
         id: 'adminCapco'
@@ -585,6 +585,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <(new \DateTime('2019-06-03 09:30:00'))>
         consentInternalCommunication: true
+        openId: 'openidIdTheo'
     userJpec:
         id: 'userJpec'
         username: Jpec

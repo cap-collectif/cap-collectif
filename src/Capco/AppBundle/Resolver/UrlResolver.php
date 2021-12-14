@@ -263,4 +263,14 @@ class UrlResolver
             $referenceType
         );
     }
+
+    public function getAnalysisUrl(): string
+    {
+        return $this->router->generate('user_evaluations', [], RouterInterface::ABSOLUTE_URL);
+    }
+
+    public function getAdminHomeUrl(): string
+    {
+        return $this->router->generate('sonata_admin_dashboard', [], RouterInterface::ABSOLUTE_URL);
+    }
 }

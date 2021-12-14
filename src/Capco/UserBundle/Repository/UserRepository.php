@@ -36,7 +36,10 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u');
 
-        return $qb->where('u.facebook_id IS NOT NULL')->getQuery()->getResult();
+        return $qb
+            ->where('u.facebook_id IS NOT NULL')
+            ->getQuery()
+            ->getResult();
     }
 
     public function hydrateFromIds(array $ids): array
@@ -230,7 +233,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(
-                'SELECT u.id, count(distinct s) as sources_count
+                'SELECT u.id, count(distinct s) AS sources_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Source s WITH s.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
@@ -260,7 +263,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(
-                'SELECT u.id, count(distinct a) as arguments_count
+                'SELECT u.id, count(distinct a) AS arguments_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
@@ -304,7 +307,7 @@ class UserRepository extends EntityRepository
     public function findProjectOpinionContributorsWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct opinions) as opinions_count')
+            ->select('u.id', 'count(distinct opinions) AS opinions_count')
             ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.published = 1')
             ->leftJoin('opinions.consultation', 'consultation')
             ->leftJoin('consultation.step', 'step', 'WITH', 'step.isEnabled = 1')
@@ -319,7 +322,7 @@ class UserRepository extends EntityRepository
     public function findProjectProposalContributorsWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct proposals) as proposals_count')
+            ->select('u.id', 'count(distinct proposals) AS proposals_count')
             ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.published = 1')
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->leftJoin('proposalForm.step', 'step', 'WITH', 'step.isEnabled = 1')
@@ -340,7 +343,7 @@ class UserRepository extends EntityRepository
             ? '(replies.published = 1 AND replies.private = 0)'
             : 'replies.published = 1';
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct replies) as replies_count')
+            ->select('u.id', 'count(distinct replies) AS replies_count')
             ->leftJoin('u.replies', 'replies', 'WITH', $replyWith)
             ->leftJoin('replies.questionnaire', 'questionnaire')
             ->leftJoin('questionnaire.step', 'step', 'WITH', 'step.isEnabled = 1')
@@ -355,7 +358,7 @@ class UserRepository extends EntityRepository
     public function findProjectVersionContributorsWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct versions) as versions_count')
+            ->select('u.id', 'count(distinct versions) AS versions_count')
             ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.published = 1')
             ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.published = 1')
             ->leftJoin('opinions.consultation', 'consultation')
@@ -371,7 +374,7 @@ class UserRepository extends EntityRepository
     public function findProjectOpinionVotersWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct opinions_votes) as opinions_votes_count')
+            ->select('u.id', 'count(distinct opinions_votes) AS opinions_votes_count')
             ->leftJoin(
                 'CapcoAppBundle:OpinionVote',
                 'opinions_votes',
@@ -402,7 +405,7 @@ class UserRepository extends EntityRepository
     public function findProjectVersionVotersWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct versions_votes) as versions_votes_count')
+            ->select('u.id', 'count(distinct versions_votes) AS versions_votes_count')
             ->leftJoin(
                 'CapcoAppBundle:OpinionVersionVote',
                 'versions_votes',
@@ -444,7 +447,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(
-                'SELECT u.id, count(distinct av) as arguments_votes_count
+                'SELECT u.id, count(distinct av) AS arguments_votes_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
           LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
@@ -472,7 +475,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(
-                'SELECT u.id, count(distinct sv) as sources_votes_count
+                'SELECT u.id, count(distinct sv) AS sources_votes_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
@@ -503,7 +506,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $voteWith = $excludePrivate ? '(pv.user = u AND pv.private = 0)' : 'pv.user = u';
         $rawQuery =
-            'SELECT u.id, count(distinct pv) as proposals_votes_count
+            'SELECT u.id, count(distinct pv) AS proposals_votes_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH ' .
             $voteWith .
@@ -554,7 +557,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(
-                'SELECT u.id, count(distinct s) as sources_count
+                'SELECT u.id, count(distinct s) AS sources_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Source s WITH s.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
@@ -582,7 +585,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(
-                'SELECT u.id, count(distinct a) as arguments_count
+                'SELECT u.id, count(distinct a) AS arguments_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
@@ -608,7 +611,7 @@ class UserRepository extends EntityRepository
     public function findConsultationStepOpinionContributorsWithCount(ConsultationStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct opinions) as opinions_count')
+            ->select('u.id', 'count(distinct opinions) AS opinions_count')
             ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.published = 1')
             ->innerJoin(
                 'opinions.consultation',
@@ -625,7 +628,7 @@ class UserRepository extends EntityRepository
     public function findCollectStepProposalContributorsWithCount(CollectStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct proposals) as proposals_count')
+            ->select('u.id', 'count(distinct proposals) AS proposals_count')
             ->leftJoin(
                 'u.proposals',
                 'proposals',
@@ -643,7 +646,7 @@ class UserRepository extends EntityRepository
     public function findQuestionnaireStepReplyContributorsWithCount(QuestionnaireStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct replies) as replies_count')
+            ->select('u.id', 'count(distinct replies) AS replies_count')
             ->leftJoin('u.replies', 'replies', 'WITH', 'replies.published = 1')
             ->leftJoin('replies.questionnaire', 'questionnaire')
             ->where('questionnaire.step = :step')
@@ -656,7 +659,7 @@ class UserRepository extends EntityRepository
     public function findConsultationStepVersionContributorsWithCount(ConsultationStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct versions) as versions_count')
+            ->select('u.id', 'count(distinct versions) AS versions_count')
             ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.published = 1')
             ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.published = 1')
             ->innerJoin(
@@ -674,7 +677,7 @@ class UserRepository extends EntityRepository
     public function findConsultationStepOpinionVotersWithCount(ConsultationStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct opinions_votes) as opinions_votes_count')
+            ->select('u.id', 'count(distinct opinions_votes) AS opinions_votes_count')
             ->leftJoin(
                 'CapcoAppBundle:OpinionVote',
                 'opinions_votes',
@@ -703,7 +706,7 @@ class UserRepository extends EntityRepository
     public function findConsultationStepVersionVotersWithCount(ConsultationStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct versions_votes) as versions_votes_count')
+            ->select('u.id', 'count(distinct versions_votes) AS versions_votes_count')
             ->leftJoin(
                 'CapcoAppBundle:OpinionVersionVote',
                 'versions_votes',
@@ -743,7 +746,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(
-                'SELECT u.id, count(distinct av) as arguments_votes_count
+                'SELECT u.id, count(distinct av) AS arguments_votes_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
           LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
@@ -772,7 +775,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(
-                'SELECT u.id, count(distinct sv) as sources_votes_count
+                'SELECT u.id, count(distinct sv) AS sources_votes_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
@@ -801,7 +804,7 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(
-                'SELECT u.id, count(distinct pv) as proposals_votes_count
+                'SELECT u.id, count(distinct pv) AS proposals_votes_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH (pv.user = u AND pv.selectionStep = :step)
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
@@ -858,7 +861,7 @@ class UserRepository extends EntityRepository
             ->createQueryBuilder()
             ->select(['u.id, u.email, u.username, u.firstname, u.lastname, u.slug'])
             ->from('CapcoUserBundle:User', 'u')
-            ->addSelect(' f.followedAt, utt.name as userTypeName, p.slug as proposalSlug')
+            ->addSelect(' f.followedAt, utt.name AS userTypeName, p.slug AS proposalSlug')
             ->join('u.followingContributions', 'f')
             ->join('f.proposal', 'p')
             ->join('u.userType', 'ut')
@@ -925,7 +928,7 @@ class UserRepository extends EntityRepository
 
                 break;
             case 'RANDOM':
-                $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
+                $qb->addSelect('RAND() AS HIDDEN rand')->addOrderBy('rand');
 
                 break;
             case 'FOLLOWED_AT':
@@ -1086,7 +1089,7 @@ class UserRepository extends EntityRepository
         $query = $this->createQueryBuilder('u');
 
         return $query
-            ->select('u as user, p.id')
+            ->select('u AS user, p.id')
             ->leftJoin('u.proposals', 'p')
             ->where('p.id IN (:ids)')
             ->setParameter('ids', $proposalsId)
@@ -1177,21 +1180,21 @@ class UserRepository extends EntityRepository
     public function getAssignedUsersOnProposal(Proposal $proposal, string $revisedAt)
     {
         $sql = <<<'EOF'
-    select ps.supervisor_id as "assignedUser" FROM proposal_supervisor ps
+    SELECT ps.supervisor_id AS "assignedUser" FROM proposal_supervisor ps
     LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id
-    where proposal_id = :proposalId
+    WHERE proposal_id = :proposalId
     UNION
-    select pa.analyst_id as "assignedUser"  FROM proposal_analyst pa
+    SELECT pa.analyst_id AS "assignedUser"  FROM proposal_analyst pa
     LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id
-    where proposal_id = :proposalId
+    WHERE proposal_id = :proposalId
     UNION
-    select pdm.decision_maker_id as "assignedUser" FROM proposal_decision_maker pdm
+    SELECT pdm.decision_maker_id AS "assignedUser" FROM proposal_decision_maker pdm
     LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id
-    where proposal_id = :proposalId
+    WHERE proposal_id = :proposalId
     UNION
-    select pr.author_id as "assignedUser" FROM proposal_revision pr
+    SELECT pr.author_id AS "assignedUser" FROM proposal_revision pr
     LEFT JOIN fos_user fu4 ON pr.author_id = fu4.id
-    where proposal_id = :proposalId and revised_at = :revisedAt
+    WHERE proposal_id = :proposalId and revised_at = :revisedAt
 EOF;
 
         $stmt = $this->getEntityManager()
@@ -1207,23 +1210,23 @@ EOF;
     public function findDuplicatesUsers()
     {
         $sql = <<<'EOF'
-    select u.id as userId, u.france_connect_id as sso_id, u.email as email, COUNT(u.id) as duplicates, 'franceConnect' SSO  FROM fos_user u
-    where france_connect_id IS NOT NULL
+    SELECT u.id AS userId, u.france_connect_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'franceConnect' SSO  FROM fos_user u
+    WHERE france_connect_id IS NOT NULL
     GROUP BY u.france_connect_id
     HAVING duplicates > 1
     UNION
-    select u.id as userId, u.twitter_id as sso_id, u.email as email, COUNT(u.id) as duplicates, 'twitter' SSO  FROM fos_user u
-    where twitter_id IS NOT NULL
+    SELECT u.id AS userId, u.twitter_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'twitter' SSO  FROM fos_user u
+    WHERE twitter_id IS NOT NULL
     GROUP BY u.twitter_id
     HAVING duplicates > 1
     UNION
-    select u.id as userId, u.facebook_id as sso_id, u.email as email, COUNT(u.id) as duplicates, 'facebook' SSO  FROM fos_user u
-    where facebook_id IS NOT NULL
+    SELECT u.id AS userId, u.facebook_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'facebook' SSO  FROM fos_user u
+    WHERE facebook_id IS NOT NULL
     GROUP BY u.facebook_id
     HAVING duplicates > 1
     UNION
-    select u.id as userId, u.openid_id as sso_id, u.email as email, COUNT(u.id) as duplicates, 'openId'  SSO  FROM fos_user u
-    where openid_id IS NOT NULL
+    SELECT u.id AS userId, u.openid_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'openId'  SSO  FROM fos_user u
+    WHERE openid_id IS NOT NULL
     GROUP BY u.openid_id
     HAVING duplicates > 1
 EOF;
@@ -1258,10 +1261,10 @@ EOF;
 
         return $qb
             ->select(
-                'u.id as userId',
-                'u.franceConnectId as france_connect_id',
+                'u.id AS userId',
+                'u.franceConnectId AS france_connect_id',
                 'u.email',
-                'COUNT(u.id) as duplicates'
+                'COUNT(u.id) AS duplicates'
             )
             ->where('u.franceConnectId IS NOT NULL')
             ->groupBy('u.franceConnectId')
@@ -1275,7 +1278,7 @@ EOF;
         $qb = $this->createQueryBuilder('u');
 
         return $qb
-            ->select('u.id as userId', 'u.facebook_id', 'u.email', 'COUNT(u.id) as duplicates')
+            ->select('u.id AS userId', 'u.facebook_id', 'u.email', 'COUNT(u.id) AS duplicates')
             ->where('u.facebook_id IS NOT NULL')
             ->groupBy('u.facebook_id')
             ->having('duplicates > 1')
@@ -1288,7 +1291,7 @@ EOF;
         $qb = $this->createQueryBuilder('u');
 
         return $qb
-            ->select('u.id as userId', 'u.twitter_id', 'u.email', 'COUNT(u.id) as duplicates')
+            ->select('u.id AS userId', 'u.twitter_id', 'u.email', 'COUNT(u.id) AS duplicates')
             ->where('u.twitter_id IS NOT NULL')
             ->groupBy('u.twitter_id')
             ->having('duplicates > 1')
@@ -1302,10 +1305,10 @@ EOF;
 
         return $qb
             ->select(
-                'u.id as userId',
-                'u.openId as openid_id',
+                'u.id AS userId',
+                'u.openId AS openid_id',
                 'u.email',
-                'COUNT(u.id) as duplicates'
+                'COUNT(u.id) AS duplicates'
             )
             ->where('u.openId IS NOT NULL')
             ->groupBy('u.openId')
@@ -1319,7 +1322,7 @@ EOF;
         $qb = $this->createQueryBuilder('u');
 
         return $qb
-            ->select('u.id as userId', 'u.franceConnectId as france_connect_id', 'u.email')
+            ->select('u.id AS userId', 'u.franceConnectId AS france_connect_id', 'u.email')
             ->where('u.franceConnectId = :fcId')
             ->setParameter('fcId', $franceConnectId)
             ->getQuery()
@@ -1331,7 +1334,7 @@ EOF;
         $qb = $this->createQueryBuilder('u');
 
         return $qb
-            ->select('u.id as userId', 'u.facebook_id', 'u.email')
+            ->select('u.id AS userId', 'u.facebook_id', 'u.email')
             ->where('u.facebook_id = :fbId')
             ->setParameter('fbId', $facebookId)
             ->getQuery()
@@ -1343,7 +1346,7 @@ EOF;
         $qb = $this->createQueryBuilder('u');
 
         return $qb
-            ->select('u.id as userId', 'u.twitter_id', 'u.email')
+            ->select('u.id AS userId', 'u.twitter_id', 'u.email')
             ->where('u.twitter_id = :twitterId')
             ->setParameter('twitterId', $twitterId)
             ->getQuery()
@@ -1355,11 +1358,35 @@ EOF;
         $qb = $this->createQueryBuilder('u');
 
         return $qb
-            ->select('u.id as userId', 'u.openId as openId_id', 'u.email')
+            ->select('u.id AS userId', 'u.openId AS openId_id', 'u.email')
             ->where('u.openId = :openId')
             ->setParameter('openId', $samlId)
             ->getQuery()
             ->getResult();
+    }
+
+    public function isAssignedUsersOnProposal(User $user)
+    {
+        $sql = <<<'EOF'
+    SELECT ps.supervisor_id AS "assignedUser" FROM proposal_supervisor ps
+    LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id
+    WHERE supervisor_id = :userid
+    UNION
+    SELECT pa.analyst_id AS "assignedUser"  FROM proposal_analyst pa
+    LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id
+    WHERE analyst_id = :userid
+    UNION
+    SELECT pdm.decision_maker_id AS "assignedUser" FROM proposal_decision_maker pdm
+    LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id
+    WHERE decision_maker_id = :userid
+EOF;
+
+        $stmt = $this->getEntityManager()
+            ->getConnection()
+            ->prepare($sql);
+        $stmt->bindValue('userid', $user->getId());
+
+        return $stmt->executeQuery()->fetchAllAssociative();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder
