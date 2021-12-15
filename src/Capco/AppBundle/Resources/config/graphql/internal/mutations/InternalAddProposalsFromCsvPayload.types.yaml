@@ -6,6 +6,9 @@ InternalAddProposalsFromCsvPayload:
             importedProposals:
                 type: 'InternalProposalConnection'
                 description: 'List of imported proposals.'
+            importedProposalsArray:
+                type: '[InternalProposal]'
+                description: 'List of imported proposals.'
             badLines:
                 type: '[Int]!'
                 description: 'List of bad lines.'
@@ -21,3 +24,6 @@ InternalAddProposalsFromCsvPayload:
             importableProposals:
                 type: 'Int!'
                 description: 'Number of importable proposals.'
+            project:
+                type: 'InternalProject'
+                description: 'the project proposals'

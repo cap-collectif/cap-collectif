@@ -305,6 +305,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
           submitting={false}
           touch={[MockFunction]}
           untouch={[MockFunction]}
+          updateSyncErrors={[MockFunction]}
           valid={true}
           warning={null}
         />
@@ -634,6 +635,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
           submitting={false}
           touch={[MockFunction]}
           untouch={[MockFunction]}
+          updateSyncErrors={[MockFunction]}
           valid={true}
           warning={null}
         />

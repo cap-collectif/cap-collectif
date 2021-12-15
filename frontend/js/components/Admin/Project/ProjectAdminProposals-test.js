@@ -44,6 +44,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
         },
       ],
       form: {
+        id: 'form1',
         usingThemes: false,
         categories: [
           {
@@ -468,6 +469,7 @@ const DEFAULT_PROJECT = {
         },
       ],
       form: {
+        id: 'form2',
         usingThemes: false,
         categories: [
           {

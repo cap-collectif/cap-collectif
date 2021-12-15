@@ -58,6 +58,7 @@ export const formMock: ReduxFormFormProps = {
   submitSucceeded: false,
   touch: jest.fn(),
   untouch: jest.fn(),
+  updateSyncErrors: jest.fn(),
   valid: true,
   warning: null,
 };

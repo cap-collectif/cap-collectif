@@ -212,7 +212,7 @@ class ImportProposalsFromCsvCommand extends Command
                 }
 
                 $district = $this->districtRepository->findDistrictByName(
-                    trim($row[$this->headers['district_name']])
+                    trim($row[$this->headers['district_name']]), $this->proposalForm
                 );
 
                 $status = $this->statusRepository->findOneBy([

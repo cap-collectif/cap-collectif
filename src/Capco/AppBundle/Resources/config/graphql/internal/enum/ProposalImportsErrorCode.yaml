@@ -13,3 +13,6 @@ ProposalImportsErrorCode:
             EMPTY_FILE:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsFromCsvMutation::EMPTY_FILE")'
                 description: 'Given CSV file is empty'
+            TOO_MUCH_LINES:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsFromCsvMutation::TOO_MUCH_LINES")'
+                description: 'Given CSV file contain over 501 lines'

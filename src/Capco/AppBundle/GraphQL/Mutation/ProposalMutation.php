@@ -519,6 +519,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         return ['proposal' => $proposal];
     }
 
+    /** TODO use social networks validator */
     public static function hydrateSocialNetworks(
         array $values,
         Proposal $proposal,

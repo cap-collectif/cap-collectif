@@ -13,6 +13,7 @@ use Capco\MediaBundle\Repository\MediaRepository;
 use DG\BypassFinals;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 
@@ -48,7 +49,9 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         MediaRepository $mediaRepository,
         Media $media,
         ImportProposalsFromCsv $importProposalsFromCsv,
-        ProposalFormRepository $proposalFormRepository
+        ProposalFormRepository $proposalFormRepository,
+        ConnectionInterface $connection,
+        ConnectionBuilder $connectionBuilder
     ) {
         $input->offsetGet('csvToImport')->willReturn('MediaUUID');
         $media->getProviderReference()->willReturn('filename.csv');
@@ -62,10 +65,16 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
 
         $input->offsetGet('proposalFormId')->willReturn('badUUID');
         $proposalFormRepository->find('badUUID')->willReturn(null);
+        $connection->setTotalCount(0)->shouldBeCalled();
 
+        $connectionBuilder
+            ->connectionFromArray([], \Prophecy\Argument::type(Arg::class))
+            ->willReturn($connection)
+            ->shouldBeCalled();
         $fail = [
             'importableProposals' => 0,
-            'importedProposals' => [],
+            'importedProposals' => $connection,
+            'importedProposalsArray' => [],
             'badLines' => [],
             'duplicates' => [],
             'mandatoryMissing' => [],
@@ -82,7 +91,9 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ImportProposalsFromCsv $importProposalsFromCsv,
         ProposalForm $proposalForm,
         ProposalFormRepository $proposalFormRepository,
-        CollectStep $step
+        CollectStep $step,
+        ConnectionInterface $connection,
+        ConnectionBuilder $connectionBuilder
     ) {
         BypassFinals::enable();
 
@@ -103,12 +114,19 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $importProposalsFromCsv->setProposalForm($proposalForm)->shouldBeCalled();
         $proposalForm->getStep()->willReturn($step);
         $importProposalsFromCsv
-            ->import(false, true)
+            ->import(false, true, false)
             ->willThrow(new \RuntimeException('EMPTY_FILE'));
+        $connection->setTotalCount(0)->shouldBeCalled();
+
+        $connectionBuilder
+            ->connectionFromArray([], \Prophecy\Argument::type(Arg::class))
+            ->willReturn($connection)
+            ->shouldBeCalled();
 
         $fail = [
             'importableProposals' => 0,
-            'importedProposals' => [],
+            'importedProposals' => $connection,
+            'importedProposalsArray' => [],
             'badLines' => [],
             'duplicates' => [],
             'mandatoryMissing' => [],
@@ -125,7 +143,9 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ImportProposalsFromCsv $importProposalsFromCsv,
         ProposalForm $proposalForm,
         ProposalFormRepository $proposalFormRepository,
-        CollectStep $step
+        CollectStep $step,
+        ConnectionInterface $connection,
+        ConnectionBuilder $connectionBuilder
     ) {
         BypassFinals::enable();
 
@@ -146,12 +166,20 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $importProposalsFromCsv->setProposalForm($proposalForm)->shouldBeCalled();
         $proposalForm->getStep()->willReturn($step);
         $importProposalsFromCsv
-            ->import(false, true)
+            ->import(false, true, false)
             ->willThrow(new \RuntimeException('BAD_DATA_MODEL'));
+
+        $connection->setTotalCount(0)->shouldBeCalled();
+
+        $connectionBuilder
+            ->connectionFromArray([], \Prophecy\Argument::type(Arg::class))
+            ->willReturn($connection)
+            ->shouldBeCalled();
 
         $fail = [
             'importableProposals' => 0,
-            'importedProposals' => [],
+            'importedProposals' => $connection,
+            'importedProposalsArray' => [],
             'badLines' => [],
             'duplicates' => [],
             'mandatoryMissing' => [],
@@ -189,7 +217,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $importProposalsFromCsv->setProposalForm($proposalForm)->shouldBeCalled();
         $proposalForm->getStep()->willReturn($step);
         $importProposalsFromCsv
-            ->import(false, true)
+            ->import(false, true, false)
             ->willThrow(new \RuntimeException('STEP_NOT_FOUND'));
 
         $this->shouldThrow(new \RuntimeException('STEP_NOT_FOUND'))->during('__invoke', [$input]);

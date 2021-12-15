@@ -12,9 +12,11 @@ use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Enum\MajorityVoteTypeEnum;
 use Capco\AppBundle\GraphQL\Mutation\AddProposalsFromCsvMutation;
 use Capco\AppBundle\GraphQL\Mutation\ProposalMutation;
 use Capco\AppBundle\Manager\MediaManager;
@@ -23,6 +25,7 @@ use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Utils\Map;
 use Capco\AppBundle\Utils\SpoutHelper;
 use Capco\AppBundle\Utils\Text;
@@ -35,9 +38,12 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 use Maximal\Emoji\Detector;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ImportProposalsFromCsv
 {
+    use TranslationTrait;
     private ?string $projectDir;
     private ?string $filePath;
     private ?string $delimiter;
@@ -61,6 +67,8 @@ class ImportProposalsFromCsv
     private array $mandatoryMissing = [];
     private ?Proposal $lastEntity = null;
     private TokenGeneratorInterface $tokenGenerator;
+    private ValidatorInterface $validator;
+    private TranslatorInterface $translator;
 
     public function __construct(
         MediaManager $mediaManager,
@@ -75,6 +83,8 @@ class ImportProposalsFromCsv
         Indexer $indexer,
         LoggerInterface $logger,
         TokenGeneratorInterface $tokenGenerator,
+        ValidatorInterface $validator,
+        TranslatorInterface $translator,
         string $projectDir
     ) {
         $this->mediaManager = $mediaManager;
@@ -90,6 +100,8 @@ class ImportProposalsFromCsv
         $this->logger = $logger;
         $this->tokenGenerator = $tokenGenerator;
         $this->projectDir = $projectDir;
+        $this->validator = $validator;
+        $this->translator = $translator;
     }
 
     public function setProposalForm(ProposalForm $proposalForm): void
@@ -115,24 +127,26 @@ class ImportProposalsFromCsv
     public function import(
         bool $dryRun = true,
         bool $skipDuplicateLines = true,
+        bool $isCli = true,
         ?OutputInterface $output = null
     ): array {
-        $this->setCustomFields($this->proposalForm->getCustomFields());
+        $this->setCustomFields($this->proposalForm->getCustomFields($isCli));
         $this->headers = array_flip(
-            array_merge(
-                $this->proposalForm->getFieldsUsed(),
-                $this->proposalForm->getCustomFields()
-            )
+            array_merge($this->proposalForm->getFieldsUsed($isCli), $this->customFields)
         );
         $reader = $this->getRecords();
+        /** @var \Box\Spout\Reader\CSV\RowIterator $rows */
         $rows = $reader
             ->getSheetIterator()
             ->current()
             ->getRowIterator();
         $rows->rewind();
-        $count = \count(iterator_to_array($rows));
+        $countRows = iterator_count($rows);
+        if (!$isCli && $countRows > AddProposalsFromCsvMutation::MAX_LINES) {
+            throw new \RuntimeException(AddProposalsFromCsvMutation::TOO_MUCH_LINES);
+        }
 
-        if (0 === $count) {
+        if ($countRows < 2) {
             throw new \RuntimeException(AddProposalsFromCsvMutation::EMPTY_FILE);
         }
         $rows->rewind();
@@ -149,11 +163,16 @@ class ImportProposalsFromCsv
             ? $this->getDuplicates($associativeRowsWithHeaderLine)
             : [];
         if ($output) {
-            $progress = new ProgressBar($output, $count - 1);
+            $progress = new ProgressBar($output, $countRows - 1);
             $progress->start();
         }
         $this->importableProposals = 0;
-        $this->loopRows($associativeRowsWithHeaderLine, $duplicateLinesToBeSkipped, $dryRun);
+        $this->loopRows(
+            $associativeRowsWithHeaderLine,
+            $duplicateLinesToBeSkipped,
+            $dryRun,
+            $isCli
+        );
 
         if (!$dryRun && !empty($this->createdProposals)) {
             try {
@@ -161,10 +180,12 @@ class ImportProposalsFromCsv
                     $this->om->persist($proposal);
                 }
                 $this->om->flush();
+
                 foreach ($this->createdProposals as $proposal) {
                     $this->indexer->index(Proposal::class, $proposal->getId());
                 }
                 $this->indexer->finishBulk();
+
                 if ($output) {
                     $progress->finish();
                 }
@@ -186,26 +207,68 @@ class ImportProposalsFromCsv
         ];
     }
 
+    // TODO MEDIA Question
     public function checkIfCustomQuestionResponseIsValid(array $row, int $key): bool
     {
         foreach ($this->customFields as $questionTitle) {
             $question = $this->proposalForm->getQuestionByTitle($questionTitle);
-            if (
-                $question instanceof MultipleChoiceQuestion &&
-                \in_array($question->getType(), [
-                    AbstractQuestion::QUESTION_TYPE_RADIO,
-                    AbstractQuestion::QUESTION_TYPE_BUTTON,
-                    AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION,
-                ]) &&
-                !$question->isChoiceValid(trim($row[$questionTitle])) &&
-                !$question->isOtherAllowed()
-            ) {
-                $this->badData = $this->incrementBadData($this->badData, $key);
-                $this->logger->error(
-                    sprintf('bad data for question %s in line %d', trim($questionTitle), $key)
-                );
+            switch ($question->getType()) {
+                case AbstractQuestion::QUESTION_TYPE_SELECT:
+                case AbstractQuestion::QUESTION_TYPE_RADIO:
+                case AbstractQuestion::QUESTION_TYPE_BUTTON:
+                    if (
+                        $question instanceof MultipleChoiceQuestion &&
+                        !$question->isChoiceValid(trim($row[$questionTitle])) &&
+                        !$question->isOtherAllowed()
+                    ) {
+                        $this->badData = $this->incrementBadData($this->badData, $key);
+                        $this->logger->error(
+                            sprintf(
+                                'bad data for question %s in line %d',
+                                trim($questionTitle),
+                                $key
+                            )
+                        );
 
-                return false;
+                        return false;
+                    }
+
+                    break;
+                case AbstractQuestion::QUESTION_TYPE_NUMBER:
+                    if (!empty($row[$questionTitle]) && !is_numeric($row[$questionTitle])) {
+                        $this->badData = $this->incrementBadData($this->badData, $key);
+                        $this->logger->error(
+                            sprintf(
+                                'bad data for question %s in line %d',
+                                trim($questionTitle),
+                                $key
+                            )
+                        );
+
+                        return false;
+                    }
+
+                    break;
+                case AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION:
+                    $majorityJudgementKeys = MajorityVoteTypeEnum::getI18nKeys();
+                    $csvValue = ucfirst(strtolower($row[$questionTitle]));
+                    $translationExist = $this->doesTranslationExist($csvValue);
+                    $translationsFlipped = array_flip($this->getAllTranslationKey());
+                    if (
+                        !$translationExist ||
+                        !\in_array($translationsFlipped[$csvValue], $majorityJudgementKeys)
+                    ) {
+                        $this->badData = $this->incrementBadData($this->badData, $key);
+                        $this->logger->error(
+                            sprintf(
+                                'bad data for question %s in line %d',
+                                trim($questionTitle),
+                                $key
+                            )
+                        );
+
+                        return false;
+                    }
             }
         }
 
@@ -258,7 +321,7 @@ class ImportProposalsFromCsv
     private function setProposalReferenceAndModerationToken(Proposal $proposal): void
     {
         if (!$this->lastEntity) {
-            $this->lastEntity = $this->proposalRepository->findOneBy([], ['reference' => 'DESC']);
+            $this->lastEntity = $this->proposalRepository->findOneBy([], ['createdAt' => 'DESC']);
         }
         if (null === $this->lastEntity) {
             $proposal->setReference(1);
@@ -298,8 +361,12 @@ class ImportProposalsFromCsv
         return $duplicateLinesToBeSkipped;
     }
 
-    private function loopRows(array $rows, array $duplicateLinesToBeSkipped, bool $dryRun = true)
-    {
+    private function loopRows(
+        array $rows,
+        array $duplicateLinesToBeSkipped,
+        bool $dryRun = true,
+        bool $isCli = false
+    ) {
         foreach ($rows as $key => $row) {
             $isCurrentLineFail = false;
             // array start at 0, csv start at 1
@@ -327,79 +394,21 @@ class ImportProposalsFromCsv
             }
 
             try {
-                $category = $media = $theme = $district = null;
                 foreach ($row as &$column) {
                     if (Detector::containsEmoji($column)) {
                         $column = Detector::removeEmoji($column);
                     }
                 }
-                if ($this->proposalForm->isUsingDistrict() && !empty($row['district'])) {
-                    if (
-                        !($district = $this->districtRepository->findDistrictByName(
-                            trim($row['district'])
-                        ))
-                    ) {
-                        $isCurrentLineFail = true;
-                        $this->badData = $this->incrementBadData($this->badData, $key);
-                        $this->logger->error('bad data district in line ' . $key);
-                    }
-                }
-                $status = $this->proposalForm->getStep()->getDefaultStatus();
-                if (isset($row['status']) && !empty($row['status'])) {
-                    if (
-                        !($status = $this->statusRepository->findOneBy([
-                            'name' => trim($row['status']),
-                            'step' => $this->proposalForm->getStep(),
-                        ]))
-                    ) {
-                        $isCurrentLineFail = true;
-                        $this->badData = $this->incrementBadData($this->badData, $key);
-                        $this->logger->error('bad data statute in line ' . $key);
-                    }
-                }
-                if ($this->proposalForm->isUsingThemes() && !empty($row['theme'])) {
-                    if (!($theme = $this->themeRepository->findOneWithTitle(trim($row['theme'])))) {
-                        $this->badData = $this->incrementBadData($this->badData, $key);
-                        $isCurrentLineFail = true;
-                        $this->logger->error('bad data theme in line ' . $key);
-                    }
-                }
-                if ($this->proposalForm->isUsingCategories() && !empty($row['category'])) {
-                    if (
-                        !($category = $this->proposalCategoryRepository->findOneBy([
-                            'name' => trim($row['category']),
-                            'form' => $this->proposalForm,
-                        ]))
-                    ) {
-                        $this->badData = $this->incrementBadData($this->badData, $key);
-                        $isCurrentLineFail = true;
-                        $this->logger->error(
-                            sprintf(
-                                'bad data category in line %d, for category %s',
-                                $key,
-                                trim($row['category'])
-                            )
-                        );
-                    }
-                }
-                if (!($author = $this->userRepository->findOneByEmail(trim($row['author'])))) {
-                    $this->badData = $this->incrementBadData($this->badData, $key);
-                    $isCurrentLineFail = true;
-                    $this->logger->error('bad data author in line ' . $key);
-                }
-                if ($this->proposalForm->isUsingIllustration() && !empty($row['media_url'])) {
-                    if (!($media = $this->getMedia($row['media_url']))) {
-                        $this->badData = $this->incrementBadData($this->badData, $key);
-                        $isCurrentLineFail = true;
-                        $this->logger->error('bad data media_url in line ' . $key);
-                    }
-                }
-                if (
-                    \count($this->proposalForm->getCustomFields()) > 0 &&
-                    !$this->checkIfCustomQuestionResponseIsValid($row, $key)
-                ) {
-                    $isCurrentLineFail = true;
-                }
+                list(
+                    'isCurrentLineFail' => $isCurrentLineFail,
+                    'author' => $author,
+                    'category' => $category,
+                    'theme' => $theme,
+                    'district' => $district,
+                    'media' => $media,
+                    'status' => $status,
+                    'address' => $address,
+                ) = $this->verifyData($row, $dryRun, $isCli, $isCurrentLineFail, $key);
             } catch (\Exception $exception) {
                 $this->logger->error($exception->getMessage());
 
@@ -413,12 +422,134 @@ class ImportProposalsFromCsv
                     $status,
                     $theme,
                     $category,
-                    $media
+                    $media,
+                    $address
                 );
             } elseif ($dryRun && $author && !$isCurrentLineFail) {
                 ++$this->importableProposals;
             }
         }
+    }
+
+    private function verifyData(
+        array $row,
+        bool $dryRun,
+        bool $isCli,
+        bool $isCurrentLineFail,
+        int $key
+    ): array {
+        $address = $category = $media = $theme = $district = null;
+        $status = $this->proposalForm->getStep()->getDefaultStatus();
+
+        if ($this->proposalForm->getUsingAddress() && !empty($row['address'])) {
+            if (Text::isJSON($row['address'])) {
+                $address = json_decode($row['address'], true);
+                if (!isset($address[0]['address_components'])) {
+                    $isCurrentLineFail = true;
+                    $this->badData = $this->incrementBadData($this->badData, $key);
+                    $this->logger->error('bad data address in line ' . $key);
+                }
+                $address = $row['address'];
+            } else {
+                $address = $this->map->getFormattedAddress($row['address']);
+                if (!$address) {
+                    $isCurrentLineFail = true;
+                    $this->badData = $this->incrementBadData($this->badData, $key);
+                    $this->logger->error('bad data address in line ' . $key);
+                }
+            }
+        }
+        if ($this->proposalForm->isUsingDistrict() && !empty($row['district'])) {
+            if (
+                !($district = $this->districtRepository->findDistrictByName(
+                    trim($row['district']),
+                    $this->proposalForm
+                ))
+            ) {
+                $isCurrentLineFail = true;
+                $this->badData = $this->incrementBadData($this->badData, $key);
+                $this->logger->error('bad data district in line ' . $key);
+            }
+        }
+        if (isset($row['status']) && !empty($row['status'])) {
+            if (
+                !($status = $this->statusRepository->findOneBy([
+                    'name' => trim($row['status']),
+                    'step' => $this->proposalForm->getStep(),
+                ]))
+            ) {
+                $isCurrentLineFail = true;
+                $this->badData = $this->incrementBadData($this->badData, $key);
+                $this->logger->error('bad data statute in line ' . $key);
+            }
+        }
+        if ($this->proposalForm->isUsingThemes() && !empty($row['theme'])) {
+            if (!($theme = $this->themeRepository->findOneWithTitle(trim($row['theme'])))) {
+                $this->badData = $this->incrementBadData($this->badData, $key);
+                $isCurrentLineFail = true;
+                $this->logger->error('bad data theme in line ' . $key);
+            }
+        }
+        if ($this->proposalForm->isUsingCategories() && !empty($row['category'])) {
+            if (
+                !($category = $this->proposalCategoryRepository->findOneBy([
+                    'name' => trim($row['category']),
+                    'form' => $this->proposalForm,
+                ]))
+            ) {
+                $this->badData = $this->incrementBadData($this->badData, $key);
+                $isCurrentLineFail = true;
+                $this->logger->error(
+                    sprintf(
+                        'bad data category in line %d, for category %s',
+                        $key,
+                        trim($row['category'])
+                    )
+                );
+            }
+        }
+        if (!($author = $this->userRepository->findOneByEmail(trim($row['author'])))) {
+            $this->badData = $this->incrementBadData($this->badData, $key);
+            $isCurrentLineFail = true;
+            $this->logger->error('bad data author in line ' . $key);
+        }
+        if ($this->proposalForm->isUsingIllustration() && !empty($row['media_url']) && $isCli) {
+            if (!($media = $this->getMedia($row['media_url'], $dryRun))) {
+                $this->badData = $this->incrementBadData($this->badData, $key);
+                $isCurrentLineFail = true;
+                $this->logger->error('bad data media_url in line ' . $key);
+            }
+        }
+        if (
+            $this->proposalForm->isUsingAnySocialNetworks() &&
+            !$this->proposalForm->checkIfSocialNetworksAreGood($row, $this->validator)
+        ) {
+            $this->badData = $this->incrementBadData($this->badData, $key);
+            $isCurrentLineFail = true;
+            $this->logger->error('bad data social_networks_url in line ' . $key);
+        }
+        if (
+            \count($this->customFields) > 0 &&
+            !$this->checkIfCustomQuestionResponseIsValid($row, $key)
+        ) {
+            $isCurrentLineFail = true;
+        }
+        if (!empty($row['cost']) && !is_numeric($row['cost'])) {
+            $this->badData = $this->incrementBadData($this->badData, $key);
+            $isCurrentLineFail = true;
+            $this->logger->error('bad data cost in line ' . $key);
+        }
+
+        return compact(
+            'isCurrentLineFail',
+            'author',
+            'media',
+            'category',
+            'theme',
+            'district',
+            'address',
+            'status'
+        );
     }
 
     private function incrementBadData(array $badData, int $line): array
@@ -432,7 +563,7 @@ class ImportProposalsFromCsv
         return $badData;
     }
 
-    private function getMedia(?string $url): ?Media
+    private function getMedia(?string $url, $dryRun = false): ?Media
     {
         if ($url && filter_var($url, \FILTER_VALIDATE_URL)) {
             $mediaBinaryFile = @file_get_contents($url);
@@ -448,7 +579,7 @@ class ImportProposalsFromCsv
                 $this->logger->error('Error on create file ' . $filePath);
             }
 
-            return $this->mediaManager->createImageFromPath($filePath, $mediaName);
+            return $this->mediaManager->createImageFromPath($filePath, $mediaName, $dryRun);
         }
 
         return null;
@@ -461,7 +592,8 @@ class ImportProposalsFromCsv
         ?Status $status,
         ?Theme $theme,
         ?ProposalCategory $category,
-        ?Media $media
+        ?Media $media,
+        ?string $address
     ): Proposal {
         $proposal = (new Proposal())
             ->setTitle(Text::escapeHtml($row['title']))
@@ -475,17 +607,17 @@ class ImportProposalsFromCsv
         if (isset($row['cost']) && is_numeric($row['cost'])) {
             $proposal->setEstimation($row['cost']);
         }
-        if ($this->proposalForm->getUsingAddress() && !empty($row['address'])) {
-            if (Text::isJSON($row['address'])) {
-                $proposal->setAddress($row['address']);
-            } else {
-                $proposal->setAddress($this->map->getFormattedAddress($row['address']));
-            }
+        if ($this->proposalForm->getUsingAddress() && $address) {
+            $proposal->setAddress($address);
         }
         if ($this->proposalForm->isUsingTipsmeee()) {
             $proposal->setTipsmeeeId($row['tipsmeeee']);
         }
-        if ($this->proposalForm->isUsingEstimation() && !empty($row['estimation'])) {
+        if (
+            $this->proposalForm->isUsingEstimation() &&
+            !empty($row['estimation']) &&
+            is_numeric($row['estimation'])
+        ) {
             $proposal->setEstimation((float) $row['estimation']);
         }
 
@@ -511,19 +643,16 @@ class ImportProposalsFromCsv
         }
         $this->setProposalReferenceAndModerationToken($proposal);
 
-        if (\count($this->proposalForm->getCustomFields()) > 0) {
+        if (\count($this->customFields) > 0) {
             foreach ($this->customFields as $questionTitle) {
                 $question = $this->proposalForm->getQuestionByTitle($questionTitle);
                 $response = new ValueResponse();
-                // SimpleQuestion and MultipleChoiceQuestion - Select
                 $value = trim($row[$questionTitle]) ?? '';
-
                 if (
                     $question instanceof MultipleChoiceQuestion &&
                     \in_array($question->getType(), [
                         AbstractQuestion::QUESTION_TYPE_RADIO,
                         AbstractQuestion::QUESTION_TYPE_BUTTON,
-                        AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION,
                     ])
                 ) {
                     $value = sprintf(
@@ -538,7 +667,19 @@ class ImportProposalsFromCsv
                             );
                         }
                     }
+                } elseif ($question instanceof SimpleQuestion) {
+                    if ('number' === $question->getInputType()) {
+                        $value = (float) trim($row[$questionTitle]);
+                    } elseif (
+                        AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $question->getType()
+                    ) {
+                        $csvValue = ucfirst(strtolower($row[$questionTitle]));
+                        $translationsFlipped = array_flip($this->getAllTranslationKey());
+                        $csvKeyFromValue = $translationsFlipped[$csvValue];
+                        $value = MajorityVoteTypeEnum::getCodeFromTranslationKey($csvKeyFromValue);
+                    }
                 }
+
                 $response = $response->setQuestion($question)->setValue($value);
                 $proposal->addResponse($response);
             }

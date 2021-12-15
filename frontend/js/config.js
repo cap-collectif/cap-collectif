@@ -46,6 +46,9 @@ export const ALLEWED_IMAGE_MIMETYPES = [
 export const ALLOWED_MIMETYPES = [
   ...ALLEWED_IMAGE_MIMETYPES,
   'text/csv', // .csv
+  'application/x-PhpStorm-csv-file', // .csv
+  'text/anytext', // .csv
+  'text/comma-separated-values', // .csv
   'application/pdf', // .pdf
   'application/msword', // .doc
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx

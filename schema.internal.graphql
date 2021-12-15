@@ -552,6 +552,9 @@ type AddProposalsFromCsvPayload {
   """List of imported proposals."""
   importedProposals: ProposalConnection
 
+  """List of imported proposals."""
+  importedProposalsArray: [Proposal]
+
   """List of bad lines."""
   badLines: [Int]!
 
@@ -566,6 +569,9 @@ type AddProposalsFromCsvPayload {
 
   """Number of importable proposals."""
   importableProposals: Int!
+
+  """the project proposals"""
+  project: Project
   clientMutationId: String
 }
 
@@ -9765,6 +9771,9 @@ enum ProposalImportsErrorCode {
 
   """Given CSV file is empty"""
   EMPTY_FILE
+
+  """Given CSV file contain over 501 lines"""
+  TOO_MUCH_LINES
 }
 
 """Available errors on proposal news mutation"""

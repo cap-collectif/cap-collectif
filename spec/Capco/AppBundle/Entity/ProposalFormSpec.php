@@ -131,7 +131,6 @@ class ProposalFormSpec extends ObjectBehavior
         ]);
 
         $fields = [
-            'Ajoutez un document' => 'URL',
             'Ajoutez un texte' => 'texte brut',
             'Question multiple à choix unique' => 'choice 1',
             'Description' => 'texte brut ou html',
@@ -142,7 +141,6 @@ class ProposalFormSpec extends ObjectBehavior
 
         $this->getFieldsType($questions, false)->shouldReturn($fields);
         $fields = [
-            'Ajoutez un document' => 'URL',
             'Ajoutez un texte' => 'texte brut',
             'Question multiple à choix unique' => 'choice 2',
             'Description' => 'texte brut ou html',

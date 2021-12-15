@@ -27,6 +27,8 @@ use Psr\Log\LoggerInterface;
 
 class AddProposalsFromCsvMutation implements MutationInterface
 {
+    public const TOO_MUCH_LINES = 'TOO_MUCH_LINES';
+    public const MAX_LINES = 501;
     public const EMPTY_FILE = 'EMPTY_FILE';
     public const BAD_DATA_MODEL = 'BAD_DATA_MODEL';
     public const PROPOSAL_FORM_NOT_FOUND = 'PROPOSAL_FORM_NOT_FOUND';
@@ -75,10 +77,12 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $this->importProposalsFromCsv->setDelimiter($input->offsetGet('delimiter'));
         /** @var ProposalForm $proposalForm */
         $proposalForm = $this->proposalFormRepository->find($input->offsetGet('proposalFormId'));
+
         if (!$proposalForm) {
             return [
                 'importableProposals' => 0,
-                'importedProposals' => [],
+                'importedProposals' => $this->getConnection([], $input),
+                'importedProposalsArray' => [],
                 'badLines' => [],
                 'duplicates' => [],
                 'mandatoryMissing' => [],
@@ -89,9 +93,9 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $dryRun = $input->offsetGet('dryRun');
 
         try {
-            $proposals = $this->importProposalsFromCsv->import($dryRun, true);
+            $proposals = $this->importProposalsFromCsv->import($dryRun, true, false);
             $this->em->remove($media);
-
+            $importedProposalsArray = $proposals['importedProposals'];
             $proposals['importedProposals'] = $this->getConnection(
                 $proposals['importedProposals'],
                 $input
@@ -100,17 +104,20 @@ class AddProposalsFromCsvMutation implements MutationInterface
             return [
                 'importableProposals' => $proposals['importableProposals'],
                 'importedProposals' => $proposals['importedProposals'],
+                'importedProposalsArray' => $importedProposalsArray,
                 'badLines' => array_keys($proposals['badLines']),
                 'duplicates' => $proposals['duplicates'],
                 'mandatoryMissing' => array_keys($proposals['mandatoryMissing']),
                 'errorCode' => null,
+                'project' => $proposalForm->getProject(),
             ];
         } catch (\RuntimeException $exception) {
             switch ($exception->getMessage()) {
                 case self::EMPTY_FILE:
                     return [
                         'importableProposals' => 0,
-                        'importedProposals' => [],
+                        'importedProposals' => $this->getConnection([], $input),
+                        'importedProposalsArray' => [],
                         'badLines' => [],
                         'duplicates' => [],
                         'mandatoryMissing' => [],
@@ -119,11 +126,22 @@ class AddProposalsFromCsvMutation implements MutationInterface
                 case self::BAD_DATA_MODEL:
                     return [
                         'importableProposals' => 0,
-                        'importedProposals' => [],
+                        'importedProposals' => $this->getConnection([], $input),
+                        'importedProposalsArray' => [],
                         'badLines' => [],
                         'duplicates' => [],
                         'mandatoryMissing' => [],
                         'errorCode' => self::BAD_DATA_MODEL,
+                    ];
+                case self::TOO_MUCH_LINES:
+                    return [
+                        'importableProposals' => 0,
+                        'importedProposals' => $this->getConnection([], $input),
+                        'importedProposalsArray' => [],
+                        'badLines' => [],
+                        'duplicates' => [],
+                        'mandatoryMissing' => [],
+                        'errorCode' => self::TOO_MUCH_LINES,
                     ];
             }
 
@@ -131,7 +149,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
         }
     }
 
-    protected function getConnection(array $proposals, Argument $args): ConnectionInterface
+    public function getConnection(array $proposals, Argument $args): ConnectionInterface
     {
         $connection = $this->connectionBuilder->connectionFromArray(
             array_values($proposals),

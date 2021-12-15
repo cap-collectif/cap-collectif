@@ -47,7 +47,6 @@ class DeleteProposalMutation implements MutationInterface
         }
 
         $author = $proposal->getAuthor();
-
         $this->em->remove($proposal); // softdeleted
         $this->em->flush();
 

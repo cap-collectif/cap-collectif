@@ -711,7 +711,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     {
         $label = $this->getTitle();
         if ($this->getStep()) {
-            $label = $this->getStep()->getTitle() . ' - ' . $label;
+            $label = $this->getStep()->getTitle().' - '.$label;
         }
 
         return $label;
@@ -1015,7 +1015,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getFieldsUsed(): array
+    public function getFieldsUsed(bool $isCliModel = false): array
     {
         $fields = ['title', 'author', 'cost'];
         if ($this->usingAddress) {
@@ -1033,7 +1033,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         if ($this->usingTipsmeee) {
             $fields = array_merge($fields, ['tipsmeee']);
         }
-        if ($this->usingIllustration) {
+        if ($isCliModel && $this->usingIllustration) {
             $fields = array_merge($fields, ['media_url']);
         }
         if ($this->usingDescription) {
@@ -1098,14 +1098,15 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $fields;
     }
 
-    public function getCustomFields(): array
+    public function getCustomFields(bool $isCliModel): array
     {
         $fields = [];
         /** @var AbstractQuestion $question */
         foreach ($this->getRealQuestions() as $question) {
             if (
                 !\in_array($question->getTitle(), $fields) &&
-                ($question instanceof SimpleQuestion || $question instanceof MediaQuestion)
+                ($question instanceof SimpleQuestion ||
+                    ($question instanceof MediaQuestion && $isCliModel))
             ) {
                 $fields = array_merge($fields, [$question->getTitle()]);
             }
@@ -1116,7 +1117,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                     AbstractQuestion::QUESTION_TYPE_RADIO,
                     AbstractQuestion::QUESTION_TYPE_SELECT,
                     AbstractQuestion::QUESTION_TYPE_BUTTON,
-                    AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION,
                 ])
             ) {
                 $fields = array_merge($fields, [$question->getTitle()]);
@@ -1126,12 +1126,12 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $fields;
     }
 
-    public function getFieldsType(Collection $questions, bool $nextChoice = false): array
+    public function getFieldsType(Collection $questions, bool $nextChoice = false, bool $isCliModel = false): array
     {
         $fields = [];
         /** @var AbstractQuestion $question */
         foreach ($questions as $question) {
-            if ($question instanceof SimpleQuestion || $question instanceof MediaQuestion) {
+            if ($question instanceof SimpleQuestion || ($question instanceof MediaQuestion && $isCliModel) ) {
                 $type = 'texte brut';
                 if ($question instanceof MediaQuestion) {
                     $type = 'URL';
@@ -1161,7 +1161,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                     AbstractQuestion::QUESTION_TYPE_RADIO,
                     AbstractQuestion::QUESTION_TYPE_SELECT,
                     AbstractQuestion::QUESTION_TYPE_BUTTON,
-                    AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION,
                 ])
             ) {
                 $choices = $question->getChoices()->toArray();
@@ -1169,9 +1168,9 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                     $nextChoice && \count($choices) > 1
                         ? $choices[1]->getTitle()
                         : $question
-                            ->getChoices()
-                            ->first()
-                            ->getTitle();
+                        ->getChoices()
+                        ->first()
+                        ->getTitle();
 
                 $fields[$question->getTitle()] = $type;
             }
@@ -1190,7 +1189,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         array &$cloneReferences,
         QuestionnaireAbstractQuestion $qaq
     ): QuestionnaireAbstractQuestion {
-        $key = $qaq->getQuestion()->getTitle() . $qaq->getQuestion()->getPosition();
+        $key = $qaq->getQuestion()->getTitle().$qaq->getQuestion()->getPosition();
         if (\array_key_exists($key, $cloneReferences)) {
             return $cloneReferences[$key];
         }
@@ -1275,9 +1274,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                                 ->getQuestionnaireAbstractQuestion();
                             $clonedJumpQaq->setProposalForm($this);
                             $clonedJump->setDestination($clonedJumpQaq->getQuestion());
-                            $cloneReferences[
-                                $clonedJumpQaq->getQuestion()->getTitle()
-                            ] = $clonedJumpQaq;
+                            $cloneReferences[$clonedJumpQaq->getQuestion()->getTitle()] = $clonedJumpQaq;
                         }
                         $clonedJumps->add($clonedJump);
                     }

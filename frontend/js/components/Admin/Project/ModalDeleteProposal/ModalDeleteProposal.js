@@ -56,7 +56,6 @@ const onSubmit = (
 
 const ModalDeleteProposal = ({ onClose, show, handleSubmit, dispatch }: Props) => {
   const intl = useIntl();
-
   return (
     <ModalDeleteProposalContainer
       animation={false}

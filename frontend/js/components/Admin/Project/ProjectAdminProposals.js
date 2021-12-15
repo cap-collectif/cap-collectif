@@ -776,6 +776,7 @@ export const ProjectAdminProposals = ({
   const steps = getFormattedStepsChoicesForProject(project);
   const selectedStepId: ProposalsStepValues = parameters.filters.step;
   const selectedStep: ?StepFilter = steps.find(({ id }) => id === selectedStepId);
+  const proposalFormId: string = selectedStep?.form.id || '';
 
   const [proposalSelected, setProposalSelected] = React.useState<?string>(null);
   const [proposalModalDelete, setProposalModalDelete] = React.useState<?AnalysisProposal_proposal>(
@@ -793,7 +794,7 @@ export const ProjectAdminProposals = ({
   }, [relay]);
 
   const loadAll = React.useCallback(() => {
-    if (!loading) {
+    if (!loading && project.proposals.totalCount) {
       toast({
         variant: 'loading',
         content: intl.formatMessage({ id: 'loading-contributions' }),
@@ -857,8 +858,13 @@ export const ProjectAdminProposals = ({
             />
           </div>
           <ButtonGroup>
-            {selectedStepId && project?.type?.title === 'project.types.participatoryBudgeting' && (
-              <ImportButton selectedStepId={selectedStepId} />
+            {selectedStepId && selectedStep?.type === 'CollectStep' && selectedStep?.form?.id && (
+              <ImportButton
+                selectedStepId={selectedStepId}
+                proposalFormId={proposalFormId}
+                projectId={project.id}
+                viewerIsAdmin={viewerIsAdmin}
+              />
             )}
             {viewerIsAdmin && project.exportableSteps && (
               <NewExportButton
@@ -1049,6 +1055,7 @@ const container = createPaginationContainer(
               color
             }
             form {
+              id
               usingThemes
               districts {
                 id
@@ -1069,6 +1076,7 @@ const container = createPaginationContainer(
               color
             }
             form {
+              id
               usingThemes
               districts {
                 id

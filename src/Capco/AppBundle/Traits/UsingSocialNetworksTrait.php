@@ -2,7 +2,10 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 trait UsingSocialNetworksTrait
 {
@@ -116,6 +119,33 @@ trait UsingSocialNetworksTrait
             $this->usingFacebook ||
             $this->usingInstagram ||
             $this->usingLinkedIn;
+    }
+
+    public function checkIfSocialNetworksAreGood(array $row, ValidatorInterface $validator): bool
+    {
+        $socialNetworks = [
+            'webPageUrl',
+            'facebookUrl',
+            'twitterUrl',
+            'instagramUrl',
+            'linkedInUrl',
+            'youtubeUrl',
+        ];
+        foreach ($socialNetworks as $socialNetwork) {
+            if (isset($row[$socialNetwork]) && empty($row[$socialNetwork])) {
+                continue;
+            }
+            /** @var ConstraintViolationListInterface $isValid */
+            $isValid = $validator->validate(
+                $row[$socialNetwork],
+                new IsSocialNetworkUrl(['social_network' => $socialNetwork])
+            );
+            if ($isValid->count() > 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function getSocialNetworksUsed(): string

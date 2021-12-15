@@ -8,10 +8,17 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class IsSocialNetworkUrlValidator extends ConstraintValidator
 {
-    public $patterns = [
-        'facebook' => '#^(?:https?:\/\/)?(?:www\.)?facebook\.com\/[A-Za-z0-9\.]+\/?#i',
-        'twitter' => '#^(?:https?:\/\/)?twitter\.com\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
-        'gplus' => '#^(?:https?:\/\/)?plus\.google\.com\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
+    public array $patterns = [
+        'facebookUrl' =>
+            '#^(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/[A-Za-z0-9\.]+\/?#i',
+        'twitterUrl' =>
+            '#^(?:https?:\/\/)?(?:www\.)?(mbasic.twitter|m\.twitter|twitter)\.(com|me)\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
+        'instagramUrl' =>
+            '#^(?:https?:\/\/)?(?:www\.)?(mbasic.instagram|m\.instagram|instagram)\.(com|me)\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
+        'youtubeUrl' =>
+            '#^(?:https?:\/\/)?(?:www\.)?(mbasic.youtube|m\.youtube|youtube)\.(com|me)\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
+        'linkedinUrl' =>
+            '#^(?:https?:\/\/)?(?:www\.)?(mbasic.linkedin|m\.linkedin|linkedin)\.(com|me)\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
     ];
 
     public function validate($value, Constraint $constraint)
@@ -27,13 +34,22 @@ class IsSocialNetworkUrlValidator extends ConstraintValidator
         if (!\in_array($constraint->social_network, $constraint->authorizedNetworks, true)) {
             return;
         }
+        $pattern = null;
+        if (isset($this->patterns[$constraint->social_network])) {
+            $pattern = $this->patterns[$constraint->social_network];
+        }
 
-        $pattern = $this->patterns[$constraint->social_network];
-
-        if (1 === preg_match($pattern, strtolower($value))) {
+        if ($pattern && 1 === preg_match($pattern, strtolower($value))) {
             return;
         }
 
-        $this->context->addViolation($constraint->getMessage(), []);
+        if (
+            'webPageUrl' === $constraint->social_network &&
+            filter_var($value, \FILTER_VALIDATE_URL)
+        ) {
+            return;
+        }
+
+        $this->context->buildViolation($constraint->getMessage())->addViolation();
     }
 }

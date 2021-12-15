@@ -1,3 +1,5 @@
+import { UpdateSyncErrors } from "redux-form/lib/actions.types";
+
 type ReduxFormFormProps = {|
   anyTouched: boolean,
   array: {
@@ -40,6 +42,7 @@ type ReduxFormFormProps = {|
   submitSucceeded: boolean,
   touch: (...fields: string[]) => void,
   untouch: (...fields: string[]) => void,
+  updateSyncErrors: () => void,
   valid: boolean,
   warning: any
   |}
@@ -207,6 +210,7 @@ declare module 'redux-form' {
     touchAll: () => void,
     untouch: (...fields: Array<string>) => void,
     untouchAll: () => void,
+    updateSyncErrors: () => void,
     valid: boolean,
     values: Object
   };
@@ -269,6 +273,7 @@ declare module 'redux-form' {
     reset: Function,             // action to reset the form data to previously initialized values
     touch: Function,             // action to mark fields as touched
     untouch: Function,           // action to mark fields as untouched
+    updateSyncErrors: Function,  // action to trigger form error
   };
 
   declare function getValues(state: any): any;
@@ -437,7 +442,6 @@ declare module 'redux-form' {
     declare export class SubmissionError {
       constructor(errors: Object): void;
     }
-  
     declare export function values(
       config: {
         form: string,
@@ -476,4 +480,5 @@ declare module 'redux-form' {
     declare export var touch: Touch;
     declare export var unregisterField: UnregisterField;
     declare export var untouch: Untouch;
+    declare export var updateSyncErrors: UpdateSyncErrors;
 }

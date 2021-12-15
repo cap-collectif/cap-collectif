@@ -54,6 +54,12 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
                 false,
                 InputOption::VALUE_NONE,
                 'set this option to force export if feature toggle "export" is disabled'
+            )
+            ->addOption(
+                'isCliModel',
+                false,
+                InputOption::VALUE_NONE,
+                'if true, generate model for cli import'
             );
     }
 
@@ -61,6 +67,7 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
     {
         $proposalFormId = $input->getArgument('proposal-form');
         $delimiter = $input->getOption('delimiter');
+        $isCliModel = filter_var($input->getOption('isCliModel'), \FILTER_VALIDATE_BOOLEAN);
 
         // @var ProposalForm $proposalForm
         $proposalForm = $this->proposalFormRepository->find($proposalFormId);
@@ -82,12 +89,15 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
             '_vierge.csv';
         setlocale(\LC_CTYPE, str_replace('-', '_', $this->locale));
         $filename = iconv('UTF-8', 'ASCII//TRANSLIT', $filename);
-        $header = array_merge($proposalForm->getFieldsUsed(), $proposalForm->getCustomFields());
+        $header = array_merge(
+            $proposalForm->getFieldsUsed($isCliModel),
+            $proposalForm->getCustomFields($isCliModel)
+        );
         $writer = WriterFactory::create('csv', $delimiter);
         $fileName = '/tmp/' . $filename;
         $writer->openToFile($fileName);
         $writer->addRow(WriterEntityFactory::createRowFromArray($header));
-        $this->addRowExample($writer, $header, $proposalForm);
+        $this->addRowExample($writer, $header, $proposalForm, false, $isCliModel);
         $writer->close();
         $this->executeSnapshot($input, $output, $filename, true, true);
 
@@ -98,7 +108,8 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
         WriterInterface &$writer,
         array $initHeader,
         ProposalForm $proposalForm,
-        $next = false
+        $next = false,
+        $isCliModel = false
     ) {
         $email = !$next ? 'jean.dupont@email.com' : 'julie.martin@email.com';
         // title, email, cost
@@ -162,7 +173,7 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
             $example = array_merge($example, ['URL']);
         }
         foreach (
-            $proposalForm->getFieldsType($proposalForm->getRealQuestions(), $next)
+            $proposalForm->getFieldsType($proposalForm->getRealQuestions(), $next, $isCliModel)
             as $field => $type
         ) {
             $example = array_merge($example, [$type]);
@@ -171,7 +182,7 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
         $writer->addRow(WriterEntityFactory::createRowFromArray($example));
 
         if (!$next) {
-            $this->addRowExample($writer, $initHeader, $proposalForm, true);
+            $this->addRowExample($writer, $initHeader, $proposalForm, true, $isCliModel);
         }
     }
 }

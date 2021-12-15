@@ -270,6 +270,34 @@ EOF;
     }
 
     /**
+     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with attached CSV COMMA file$/
+     */
+    public function iUploadCSVCOMMAFile(string $method, string $url)
+    {
+        $body = [];
+        $body[] = [
+            'name' => 'file',
+            'contents' => fopen('/var/www/features/files/CSV_COMMA.csv', 'r'),
+            'filename' => 'CSV_COMMA.csv',
+        ];
+        $this->uploadFile($method, $url, $body);
+    }
+
+    /**
+     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with attached CSV SEMICOLON file$/
+     */
+    public function iUploadCSVSEMICOLONFile(string $method, string $url)
+    {
+        $body = [];
+        $body[] = [
+            'name' => 'file',
+            'contents' => fopen('/var/www/features/files/CSV_SEMICOLON.csv', 'r'),
+            'filename' => 'CSV_SEMICOLON.csv',
+        ];
+        $this->uploadFile($method, $url, $body);
+    }
+
+    /**
      * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with attached image file$/
      */
     public function iUploadImageFile(string $method, string $url)

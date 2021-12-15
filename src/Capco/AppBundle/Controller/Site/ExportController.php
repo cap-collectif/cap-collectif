@@ -327,6 +327,7 @@ class ExportController extends Controller
             [
                 'capco:import-proposals:generate-header-csv' => [
                     'proposal-form' => $proposalFormId,
+                    '--isCliModel' => false,
                 ],
             ],
             $output

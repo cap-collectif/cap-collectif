@@ -66,6 +66,7 @@ exports[`<ProjectExternalAdminPage /> renders correctly empty 1`] = `
         submitting={false}
         touch={[MockFunction]}
         untouch={[MockFunction]}
+        updateSyncErrors={[MockFunction]}
         valid={true}
         warning={null}
       />
@@ -145,6 +146,7 @@ exports[`<ProjectExternalAdminPage /> renders correctly with a project 1`] = `
         submitting={false}
         touch={[MockFunction]}
         untouch={[MockFunction]}
+        updateSyncErrors={[MockFunction]}
         valid={true}
         warning={null}
       />

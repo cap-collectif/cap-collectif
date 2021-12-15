@@ -12,13 +12,13 @@ use Capco\AppBundle\Model\Translation;
  */
 trait TranslationTrait
 {
-    protected $locale;
+    protected ?string $locale;
 
     /**
      * Will be mapped to translatable entity
      * by TranslatableSubscriber.
      */
-    protected $translatable;
+    protected Translatable $translatable;
 
     public function setTranslatable(Translatable $translatable): self
     {
@@ -67,5 +67,30 @@ trait TranslationTrait
         }
 
         return true;
+    }
+
+    public function doesTranslationExist(string $translation, $domain = 'CapcoAppBundle'): bool
+    {
+        $allTranslatableKeysFlipped = array_flip($this->getAllTranslationKey($domain));
+
+        return isset($allTranslatableKeysFlipped[$translation]);
+    }
+
+    public function doesTranslationKeyExist(string $translation, $domain = 'CapcoAppBundle'): bool
+    {
+        $allTranslatableKeys = $this->getAllTranslationKey($domain);
+
+        return isset($allTranslatableKeys[$translation]);
+    }
+
+    public function getAllTranslationKey($domain = 'CapcoAppBundle'): array
+    {
+        if (!property_exists($this, 'translator')) {
+            return [];
+        }
+
+        $allTranslatableKeys = $this->translator->getCatalogue()->all();
+
+        return $allTranslatableKeys[$domain];
     }
 }

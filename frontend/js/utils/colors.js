@@ -85,7 +85,10 @@ export const styleGuideColors = {
   orange150: '#FFF3E0',
   yellow700: '#a87e00',
   green500: '#46d267',
+  red100: '#FEFBFB',
+  red200: '#F6CBCF',
   red500: '#dd3c4c',
+
 };
 
 export const socialColors = {

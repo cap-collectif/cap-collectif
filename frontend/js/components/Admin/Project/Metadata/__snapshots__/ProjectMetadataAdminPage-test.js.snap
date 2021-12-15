@@ -78,6 +78,7 @@ exports[`<ProjectMetadataAdminPage /> renders correctly 1`] = `
         submitting={false}
         touch={[MockFunction]}
         untouch={[MockFunction]}
+        updateSyncErrors={[MockFunction]}
         valid={true}
         warning={null}
       />

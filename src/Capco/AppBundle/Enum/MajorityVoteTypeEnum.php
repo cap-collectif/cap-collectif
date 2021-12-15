@@ -28,6 +28,42 @@ final class MajorityVoteTypeEnum implements EnumType
         ];
     }
 
+    public static function getCodeFromTranslationKey(string $translationKey): string
+    {
+        if ('very-well' === $translationKey) {
+            return self::VERY_WELL;
+        }
+        if ('well' === $translationKey) {
+            return self::WELL;
+        }
+        if ('global-well-enough' === $translationKey) {
+            return self::WELL_ENOUGH;
+        }
+        if ('global-passable' === $translationKey) {
+            return self::PASSABLE;
+        }
+        if ('global-not-passable' === $translationKey) {
+            return self::NOT_PASSABLE;
+        }
+        if ('global-reject' === $translationKey) {
+            return self::REJECTED;
+        }
+
+        return '';
+    }
+
+    public static function getI18nKeys()
+    {
+        return [
+            'very-well',
+            'global-well',
+            'global-well-enough',
+            'global-passable',
+            'global-not-passable',
+            'global-reject',
+        ];
+    }
+
     public static function getAvailableTypesToString(): string
     {
         return implode(' | ', self::getAvailableTypes());

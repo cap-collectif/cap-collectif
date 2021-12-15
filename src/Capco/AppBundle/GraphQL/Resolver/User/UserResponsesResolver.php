@@ -11,7 +11,7 @@ class UserResponsesResolver implements ResolverInterface
 {
     use ResponsesResolverTrait;
 
-    private $builder;
+    private ConnectionBuilder $builder;
 
     public function __construct(ConnectionBuilder $builder)
     {

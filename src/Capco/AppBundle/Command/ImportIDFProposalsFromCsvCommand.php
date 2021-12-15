@@ -76,7 +76,12 @@ class ImportIDFProposalsFromCsvCommand extends Command
         $this->importProposalsFromCsv->setProposalForm($proposalForm);
 
         try {
-            $result = $this->importProposalsFromCsv->import($dryRun, $skipDuplicateLines, $output);
+            $result = $this->importProposalsFromCsv->import(
+                $dryRun,
+                $skipDuplicateLines,
+                true,
+                $output
+            );
 
             $output->writeln(
                 '<info>' . $result['importableProposals'] . ' proposals are importable.</info>'

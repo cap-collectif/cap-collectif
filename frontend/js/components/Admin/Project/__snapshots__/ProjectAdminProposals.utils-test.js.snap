@@ -64,6 +64,29 @@ Array [
 exports[`ProjectAdminProposals utils functions should get a correctly formatted steps choices for a given project 1`] = `
 Array [
   Object {
+    "form": Object {
+      "categories": Array [
+        Object {
+          "id": "pCategory1",
+          "name": "Aménagement",
+        },
+        Object {
+          "id": "pCategory2",
+          "name": "Politique",
+        },
+      ],
+      "districts": Array [
+        Object {
+          "id": "district1",
+          "name": "Mon beau quartier",
+        },
+        Object {
+          "id": "district2",
+          "name": "Noisyzoo",
+        },
+      ],
+      "usingThemes": false,
+    },
     "hasTheme": false,
     "id": "cstep1",
     "label": "step label",
@@ -73,6 +96,29 @@ Array [
     "votesRanking": false,
   },
   Object {
+    "form": Object {
+      "categories": Array [
+        Object {
+          "id": "pCategory1",
+          "name": "Aménagement",
+        },
+        Object {
+          "id": "pCategory2",
+          "name": "Politique",
+        },
+      ],
+      "districts": Array [
+        Object {
+          "id": "district1",
+          "name": "Mon beau quartier",
+        },
+        Object {
+          "id": "district2",
+          "name": "Noisyzoo",
+        },
+      ],
+      "usingThemes": false,
+    },
     "hasTheme": false,
     "id": "sstep1",
     "label": "step label",

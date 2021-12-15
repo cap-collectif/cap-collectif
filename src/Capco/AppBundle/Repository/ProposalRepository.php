@@ -714,6 +714,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.proposalForm = :form')
             ->andWhere('proposal.title = :title')
             ->andWhere('author.email = :user')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('proposal.trashedAt IS NULL')
             ->setParameter('form', $proposalForm)
             ->setParameter('title', $title)
             ->setParameter('user', $authorEmail);

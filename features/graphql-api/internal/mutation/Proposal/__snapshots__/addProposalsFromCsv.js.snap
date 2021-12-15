@@ -5,7 +5,7 @@ Object {
   "addProposalsFromCsv": Object {
     "badLines": Array [
       2,
-      3,
+      4,
     ],
     "duplicates": Array [
       5,
@@ -17,9 +17,9 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "facebookUrl": "https://facebook.com/user/toto",
-            "title": "test OK",
-            "webPageUrl": "https://perdu.com",
+            "facebookUrl": null,
+            "title": "titre de la proposition qui fail bad image url",
+            "webPageUrl": null,
           },
         },
       ],
@@ -36,7 +36,7 @@ Object {
   "addProposalsFromCsv": Object {
     "badLines": Array [
       2,
-      3,
+      4,
     ],
     "duplicates": Array [
       5,

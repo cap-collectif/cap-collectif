@@ -4,12 +4,14 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Twig\MediaExtension;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MediasController extends AbstractController
@@ -20,10 +22,16 @@ class MediasController extends AbstractController
         'image/gif', // .gif
         'image/jpeg', // .jpeg .jpg
         'application/csv', // .csv
+        'text/csv', // .csv
+        'text/plain', // .csv
+        'application/x-PhpStorm-csv-file', // .csv
+        'text/anytext', // .csv
+        'text/comma-separated-values', // .csv
         'application/pdf', // .pdf
         'application/msword', // .doc
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
         'application/vnd.ms-excel', // .xls
+        'application/vnd.msexcel',
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
         'application/vnd.ms-powerpoint', // .ppt
         'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
@@ -35,15 +43,19 @@ class MediasController extends AbstractController
     private ValidatorInterface $validator;
     private MediaManager $mediaManager;
     private MediaExtension $mediaExtension;
+    private LoggerInterface $logger;
+    private ?ConstraintViolationListInterface $fileUploadViolations;
 
     public function __construct(
         ValidatorInterface $validator,
         MediaManager $mediaManager,
-        MediaExtension $mediaExtension
+        MediaExtension $mediaExtension,
+        LoggerInterface $logger
     ) {
         $this->validator = $validator;
         $this->mediaManager = $mediaManager;
         $this->mediaExtension = $mediaExtension;
+        $this->logger = $logger;
     }
 
     /**
@@ -59,6 +71,14 @@ class MediasController extends AbstractController
         }
 
         if (!$this->validateUploadedFile($uploadedFile)) {
+            $this->logger->error(
+                __METHOD__ .
+                    ' : ' .
+                    $uploadedFile->getMimeType() .
+                    ' ' .
+                    var_export($this->fileUploadViolations->get(0), true)
+            );
+
             return $this->json(['errorCode' => 'FILE_NOT_ALLOWED']);
         }
 
@@ -97,6 +117,18 @@ class MediasController extends AbstractController
             ]),
         ]);
 
-        return 0 === \count($violations);
+        $this->setFileUploadViolations($violations);
+
+        return 0 === $violations->count();
+    }
+
+    private function setFileUploadViolations($fileUploadViolations)
+    {
+        $this->fileUploadViolations = $fileUploadViolations;
+    }
+
+    private function getFileUploadViolations()
+    {
+        return $this->fileUploadViolations;
     }
 }

@@ -22,6 +22,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 BypassFinals::enable();
 
@@ -39,7 +41,9 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
         ThemeRepository $themeRepository,
         Indexer $indexer,
         LoggerInterface $logger,
-        TokenGeneratorInterface $tokenGenerator
+        TokenGeneratorInterface $tokenGenerator,
+        ValidatorInterface $validator,
+        TranslatorInterface $translator
     ) {
         $this->beConstructedWith(
             $mediaManager,
@@ -54,6 +58,8 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
             $indexer,
             $logger,
             $tokenGenerator,
+            $validator,
+            $translator,
             '/var/www/tmp'
         );
     }

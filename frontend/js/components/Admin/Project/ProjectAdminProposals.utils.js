@@ -43,6 +43,9 @@ export type StepFilter = {|
   +type: string,
   +votesRanking: boolean,
   +votable: boolean,
+  +form: {
+    id: Uuid,
+  },
   +label: string,
 |};
 
@@ -266,6 +269,7 @@ export const getFormattedStepsChoicesForProject = (
       votesRanking: step.votesRanking || false,
       votable: step.votable || false,
       type: step.__typename,
+      form: step.form,
       label: step.label,
     })): any): $ReadOnlyArray<StepFilter>);
 };

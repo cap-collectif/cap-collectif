@@ -57,7 +57,8 @@ class MediaManager
 
     public function createImageFromPath(
         string $path,
-        ?string $mediaName,
+        ?string $mediaName = null,
+        bool $dryRun = false,
         string $context = 'default'
     ): Media {
         /** @var Media $media */
@@ -68,8 +69,9 @@ class MediaManager
         $media->setEnabled(true);
         $media->setName($mediaName);
         $media->setProviderReference($mediaName);
-
-        $this->mediaManager->save($media);
+        if (!$dryRun) {
+            $this->mediaManager->save($media);
+        }
 
         return $media;
     }
