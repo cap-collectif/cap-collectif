@@ -2,11 +2,14 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
-import { Bar, BarChart, ResponsiveContainer, LabelList, XAxis, YAxis } from 'recharts';
+import ColorHash from 'color-hash';
+import { Bar, BarChart, ResponsiveContainer, LabelList, XAxis, YAxis, Cell } from 'recharts';
 import styled from 'styled-components';
 import type { StyledComponent } from 'styled-components';
 import type { QuestionnaireAdminResultsBarChart_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsBarChart_multipleChoiceQuestion.graphql';
 import { cleanMultipleChoiceQuestion } from '~/utils/cleanMultipleChoiceQuestion';
+
+const hash = new ColorHash();
 
 type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsBarChart_multipleChoiceQuestion,
@@ -56,7 +59,9 @@ export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
               width={this.getYAxisWidth(data)}
             />{' '}
             <Bar dataKey="value" maxBarSize={30} fill={backgroundColor}>
-              {' '}
+              {data.map((answer, idx) => (
+                <Cell fill={hash.hex(answer.name?.trim() || '')} key={idx} />
+              ))}
               <LabelList dataKey="value" position="right" />
             </Bar>
           </BarChart>

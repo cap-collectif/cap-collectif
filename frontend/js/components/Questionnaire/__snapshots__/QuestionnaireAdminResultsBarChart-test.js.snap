@@ -117,7 +117,22 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
         xAxisId={0}
         yAxisId={0}
       >
-         
+        <Cell
+          fill="#8440bf"
+          key="0"
+        />
+        <Cell
+          fill="#8e40bf"
+          key="1"
+        />
+        <Cell
+          fill="#392d86"
+          key="2"
+        />
+        <Cell
+          fill="#79ced2"
+          key="3"
+        />
         <LabelList
           dataKey="value"
           position="right"
@@ -242,7 +257,18 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other r
         xAxisId={0}
         yAxisId={0}
       >
-         
+        <Cell
+          fill="#8440bf"
+          key="0"
+        />
+        <Cell
+          fill="#8e40bf"
+          key="1"
+        />
+        <Cell
+          fill="#392d86"
+          key="2"
+        />
         <LabelList
           dataKey="value"
           position="right"
