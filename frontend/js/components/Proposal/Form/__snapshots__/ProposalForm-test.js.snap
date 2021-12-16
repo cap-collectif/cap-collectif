@@ -243,7 +243,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     }
     name="body"
     placeholder={null}
-    type="editor"
+    type="editor-ds"
   />
   <FieldArray
     change={[MockFunction]}
@@ -302,6 +302,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
       ]
     }
     responses={Array []}
+    unstable__enableCapcoUiDs={true}
   />
   <Field
     component={[Function]}
@@ -698,7 +699,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     }
     name="body"
     placeholder={null}
-    type="editor"
+    type="editor-ds"
   />
   <FieldArray
     change={[MockFunction]}
@@ -757,6 +758,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
       ]
     }
     responses={Array []}
+    unstable__enableCapcoUiDs={true}
   />
   <Field
     component={[Function]}
@@ -1140,7 +1142,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     }
     name="body"
     placeholder="describe-your-project-in-details"
-    type="editor"
+    type="editor-ds"
   />
   <FieldArray
     change={[MockFunction]}
@@ -1199,6 +1201,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
       ]
     }
     responses={Array []}
+    unstable__enableCapcoUiDs={true}
   />
   <Field
     component={[Function]}
@@ -1543,7 +1546,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     }
     name="body"
     placeholder={null}
-    type="editor"
+    type="editor-ds"
   />
   <FieldArray
     change={[MockFunction]}
@@ -1602,6 +1605,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
       ]
     }
     responses={Array []}
+    unstable__enableCapcoUiDs={true}
   />
   <Field
     component={[Function]}
@@ -1946,7 +1950,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     }
     name="body"
     placeholder={null}
-    type="editor"
+    type="editor-ds"
   />
   <FieldArray
     change={[MockFunction]}
@@ -2005,6 +2009,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
       ]
     }
     responses={Array []}
+    unstable__enableCapcoUiDs={true}
   />
   <Field
     component={[Function]}
@@ -2349,7 +2354,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     }
     name="body"
     placeholder={null}
-    type="editor"
+    type="editor-ds"
   />
   <FieldArray
     change={[MockFunction]}
@@ -2408,6 +2413,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       ]
     }
     responses={Array []}
+    unstable__enableCapcoUiDs={true}
   />
   <Field
     component={[Function]}

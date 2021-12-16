@@ -1,5 +1,4 @@
 // @flow
-// Legacy : https://github.com/cap-collectif/platform/issues/13829
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -7,14 +6,14 @@ import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import RemoveCommentVoteMutation from '../../mutations/RemoveCommentVoteMutation';
 import AddCommentVoteMutation from '../../mutations/AddCommentVoteMutation';
-import NewLoginOverlay from '../Utils/NewLoginOverlay';
+import LoginOverlay from '../Utils/LoginOverlay';
 import UnpublishedTooltip from '../Publishable/UnpublishedTooltip';
-import type { CommentVoteButton_comment } from '~relay/CommentVoteButton_comment.graphql';
+import type { CommentVoteButtonLegacy_comment } from '~relay/CommentVoteButtonLegacy_comment.graphql';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
 
 type Props = {|
-  +comment: CommentVoteButton_comment,
+  +comment: CommentVoteButtonLegacy_comment,
 |};
 
 const VoteButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
@@ -40,7 +39,7 @@ const VoteButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
   }
 `;
 
-class CommentVoteButton extends React.Component<Props> {
+class CommentVoteButtonLegacy extends React.Component<Props> {
   target: null;
 
   deleteVote = () => {
@@ -96,12 +95,12 @@ class CommentVoteButton extends React.Component<Props> {
     }
 
     return (
-      <NewLoginOverlay>
+      <LoginOverlay>
         <VoteButton type="button" onClick={this.vote}>
           <Icon name={ICON_NAME.like} size={15} color={colors.secondaryGray} opacity={0.5} />
           {comment.votes.totalCount} <FormattedMessage id="global.ok" />
         </VoteButton>
-      </NewLoginOverlay>
+      </LoginOverlay>
     );
   };
 
@@ -114,9 +113,9 @@ class CommentVoteButton extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(CommentVoteButton, {
+export default createFragmentContainer(CommentVoteButtonLegacy, {
   comment: graphql`
-    fragment CommentVoteButton_comment on Comment
+    fragment CommentVoteButtonLegacy_comment on Comment
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       author {

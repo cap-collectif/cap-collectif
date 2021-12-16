@@ -8,22 +8,20 @@ import { isSubmitting, submit, change, isInvalid, isPristine } from 'redux-form'
 import { Button as BsButton } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import cn from 'classnames';
+import { Button, Heading, ButtonGroup, Modal, CapUIModalSize } from '@cap-collectif/ui';
 import ProposalForm, { formName } from '../Form/ProposalForm';
 import ProposalDraftAlert from '../Page/ProposalDraftAlert';
 import type { Dispatch, GlobalState } from '~/types';
-import Button from '~ds/Button/Button';
-import Modal from '~ds/Modal/Modal';
-import Heading from '~ui/Primitives/Heading';
 import type {
   ProposalEditModal_proposal,
   ProposalRevisionState,
 } from '~relay/ProposalEditModal_proposal.graphql';
 import { ProposalRevisionItem } from '~/shared/ProposalRevision/Modal/ProposalRevisionModalForm.style';
 import { pxToRem } from '~/utils/styles/mixins';
+import ResetCss from '~/utils/ResetCss';
 import Collapsable from '~ui/Collapsable';
 import { mediaQueryMobile } from '~/utils/sizes';
 import colors from '~/styles/modules/colors';
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import ProposalOtherPanelsModal from '../Create/ProposalOtherPanelsModal';
 
 type Props = {|
@@ -154,7 +152,8 @@ export const ProposalEditModal = ({
 
   return (
     <ModalProposalEditContainer
-      fullPageScrollable
+      size={CapUIModalSize.Lg}
+      fullSizeOnMobile
       show={show}
       dialogClassName={cn('custom-modal-dialog', { 'expired-revision': isRevisionExpired })}
       hideCloseButton={modalState === 'LEAVE'}
@@ -182,16 +181,17 @@ export const ProposalEditModal = ({
         </>
       ) : (
         <>
-          <Modal.Header
-            closeLabel={intl.formatMessage({ id: 'close.modal' })}
-            pb={['', 8]}
-            borderBottom={['', `1px solid ${colors.gray[200]}`]}>
-            <Heading>
-              {intl.formatMessage({
-                id: hasPendingRevisions ? 'review-my-proposal' : 'global.edit',
-              })}
-            </Heading>
-          </Modal.Header>
+          <ResetCss>
+            <Modal.Header
+              closeLabel={intl.formatMessage({ id: 'close.modal' })}
+              borderBottom={['', `1px solid ${colors.gray[200]}`]}>
+              <Heading>
+                {intl.formatMessage({
+                  id: hasPendingRevisions ? 'review-my-proposal' : 'global.edit',
+                })}
+              </Heading>
+            </Modal.Header>
+          </ResetCss>
           <AnimatePresence>
             <ProposalOtherPanelsModal
               proposalForm={proposal.form}
@@ -209,7 +209,7 @@ export const ProposalEditModal = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, display: 'block' }}
                 exit={{ opacity: 0, display: 'none' }}>
-                <Modal.Body>
+                <Modal.Body height="unset">
                   <ProposalDraftAlert proposal={proposal} mb={6} />
                   {hasPendingRevisions && (
                     <ProposalRevisionItem as="div" className="mb-10">
@@ -259,7 +259,7 @@ export const ProposalEditModal = ({
                     }}
                   />
                 </Modal.Body>
-                <Modal.Footer pt={['', 4]} borderTop={['', `1px solid ${colors.gray[200]}`]}>
+                <Modal.Footer borderTop={['', `1px solid ${colors.gray[200]}`]}>
                   <ButtonGroup>
                     {proposal.publicationStatus !== 'DRAFT' && (
                       <Button
@@ -310,7 +310,7 @@ export const ProposalEditModal = ({
                       {intl.formatMessage({ id: 'global.publish' })}
                     </Button>
                   </ButtonGroup>
-                </Modal.Footer>{' '}
+                </Modal.Footer>
               </motion.div>
             )}
           </AnimatePresence>

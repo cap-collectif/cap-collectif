@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import NewEditor from './Editor';
 import LegacyEditor from '../Form/Editor';
+import LegacyEditorDs from '../Form/EditorDs';
 import { uploadLocalImagePlugin, attachFilePlugin } from './plugins/upload';
 import type { GlobalState } from '../../types';
 
@@ -23,7 +24,11 @@ class EditorBehindFeatureFlag extends React.Component<Props> {
   render() {
     const { isNewEditorEnabled, initialContent } = this.props;
     if (!isNewEditorEnabled) {
-      return <LegacyEditor {...this.props} value={initialContent} />;
+      return this.props.unstable__enableCapcoUiDs ? (
+        <LegacyEditorDs {...this.props} value={initialContent} />
+      ) : (
+        <LegacyEditor {...this.props} value={initialContent} />
+      );
     }
     return (
       <NewEditor

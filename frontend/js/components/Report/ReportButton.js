@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
-import LoginOverlay from '../Utils/LoginOverlay';
+import LoginOverlay from '../Utils/NewLoginOverlay';
 import { type State } from '~/types';
 import { type BsSize } from '~/types/ReactBootstrap.type';
 

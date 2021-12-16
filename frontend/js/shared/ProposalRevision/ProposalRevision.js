@@ -19,9 +19,15 @@ type Props = {|
   ...RelayProps,
   +isAdminView?: boolean,
   +children?: React.Node | ((openModal: () => void) => React.Node),
+  +unstable__enableCapcoUiDs?: boolean,
 |};
 
-export const ProposalRevision = ({ proposal: proposalFragment, children, isAdminView }: Props) => {
+export const ProposalRevision = ({
+  proposal: proposalFragment,
+  children,
+  isAdminView,
+  unstable__enableCapcoUiDs,
+}: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const proposal = useFragment(FRAGMENT, proposalFragment);
   return (
@@ -32,6 +38,7 @@ export const ProposalRevision = ({ proposal: proposalFragment, children, isAdmin
           proposal={proposal}
           show={isOpen}
           onClose={onClose}
+          unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
         />
       )}
       {typeof children === 'function' ? children(onOpen) : children}

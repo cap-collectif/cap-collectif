@@ -34,14 +34,14 @@ exports[`<ProposalPageNews /> should render correctly and add news is not allow 
       }
       show={false}
     />
-    <ForwardRef>
+    <Flex>
       <ProposalPagestyle__CategoryTitle>
         <ProposalPagestyle__CategoryCircledIcon
           paddingLeft={9}
         >
           <Icon
             color="#6c757d"
-            name="newspaper"
+            name="NEWSPAPER"
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
@@ -52,8 +52,8 @@ exports[`<ProposalPageNews /> should render correctly and add news is not allow 
           />
         </h3>
       </ProposalPagestyle__CategoryTitle>
-      <AppBox />
-    </ForwardRef>
+      <Box />
+    </Flex>
     <ProposalPageNews__NewsCardHolder>
       <Relay(NewsCard)
         post={
@@ -112,14 +112,14 @@ exports[`<ProposalPageNews /> should render correctly and add news is not allow 
       }
       show={false}
     />
-    <ForwardRef>
+    <Flex>
       <ProposalPagestyle__CategoryTitle>
         <ProposalPagestyle__CategoryCircledIcon
           paddingLeft={9}
         >
           <Icon
             color="#6c757d"
-            name="newspaper"
+            name="NEWSPAPER"
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
@@ -130,8 +130,8 @@ exports[`<ProposalPageNews /> should render correctly and add news is not allow 
           />
         </h3>
       </ProposalPagestyle__CategoryTitle>
-      <AppBox />
-    </ForwardRef>
+      <Box />
+    </Flex>
     <ProposalPageNews__NewsCardHolder>
       <Relay(NewsCard)
         post={
@@ -190,14 +190,14 @@ exports[`<ProposalPageNews /> should render correctly with viewerDidAuthor 1`] =
       }
       show={false}
     />
-    <ForwardRef>
+    <Flex>
       <ProposalPagestyle__CategoryTitle>
         <ProposalPagestyle__CategoryCircledIcon
           paddingLeft={9}
         >
           <Icon
             color="#6c757d"
-            name="newspaper"
+            name="NEWSPAPER"
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
@@ -208,7 +208,7 @@ exports[`<ProposalPageNews /> should render correctly with viewerDidAuthor 1`] =
           />
         </h3>
       </ProposalPagestyle__CategoryTitle>
-      <AppBox>
+      <Box>
         <Button
           className="mb-20"
           id="add-proposal-news"
@@ -223,8 +223,8 @@ exports[`<ProposalPageNews /> should render correctly with viewerDidAuthor 1`] =
             values={Object {}}
           />
         </Button>
-      </AppBox>
-    </ForwardRef>
+      </Box>
+    </Flex>
     <ProposalPageNews__NewsCardHolder>
       <Relay(NewsCard)
         post={
@@ -268,14 +268,14 @@ exports[`<ProposalPageNews /> should render correctly without news and  with vie
       }
       show={false}
     />
-    <ForwardRef>
+    <Flex>
       <ProposalPagestyle__CategoryTitle>
         <ProposalPagestyle__CategoryCircledIcon
           paddingLeft={9}
         >
           <Icon
             color="#6c757d"
-            name="newspaper"
+            name="NEWSPAPER"
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
@@ -286,18 +286,15 @@ exports[`<ProposalPageNews /> should render correctly without news and  with vie
           />
         </h3>
       </ProposalPagestyle__CategoryTitle>
-      <AppBox />
-    </ForwardRef>
+      <Box />
+    </Flex>
     <ProposalPageNews__NewsCardHolder>
       <Card
         alignContent="center"
         as={
           Object {
             "$$typeof": Symbol(react.forward_ref),
-            "__docgenInfo": Object {
-              "description": "",
-              "methods": Array [],
-            },
+            "displayName": "Flex",
             "render": [Function],
           }
         }
@@ -314,7 +311,7 @@ exports[`<ProposalPageNews /> should render correctly without news and  with vie
       >
         <Icon
           color="#BEC4CB"
-          name="newspaper2"
+          name="NEWSPAPER"
           size={40}
         />
         <h4
@@ -395,14 +392,14 @@ exports[`<ProposalPageNews /> should render correctly without viewerDidAuthor 1`
       }
       show={false}
     />
-    <ForwardRef>
+    <Flex>
       <ProposalPagestyle__CategoryTitle>
         <ProposalPagestyle__CategoryCircledIcon
           paddingLeft={9}
         >
           <Icon
             color="#6c757d"
-            name="newspaper"
+            name="NEWSPAPER"
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
@@ -413,8 +410,8 @@ exports[`<ProposalPageNews /> should render correctly without viewerDidAuthor 1`
           />
         </h3>
       </ProposalPagestyle__CategoryTitle>
-      <AppBox />
-    </ForwardRef>
+      <Box />
+    </Flex>
     <ProposalPageNews__NewsCardHolder>
       <Relay(NewsCard)
         post={

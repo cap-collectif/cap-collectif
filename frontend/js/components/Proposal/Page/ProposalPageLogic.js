@@ -6,6 +6,7 @@ import { useScrollYPosition } from 'react-use-scroll-position';
 import styled, { type StyledComponent } from 'styled-components';
 import { Tab } from 'react-bootstrap';
 import { useResize } from '@liinkiing/react-hooks'; // TODO: find a better library
+import { Box } from '@cap-collectif/ui';
 import colors from '~/utils/colors';
 import ProposalVoteBasketWidget from '~/components/Proposal/Vote/ProposalVoteBasketWidget';
 import ProposalPageHeader from './Header/ProposalPageHeader';
@@ -22,7 +23,6 @@ import ProposalPageBlog from './Blog/ProposalPageBlog';
 import ProposalPageFollowers from './Followers/ProposalPageFollowers';
 import ProposalDraftAlert from './ProposalDraftAlert';
 import ProposalPageDonators from '~/components/Proposal/Page/Donators/ProposalPageDonators';
-import AppBox from '~/components/Ui/Primitives/AppBox';
 
 export type Props = {|
   query: ProposalPageLogic_query,
@@ -134,9 +134,9 @@ export const ProposalPageLogic = ({
           votesPageUrl={votesPageUrl}
         />
       )}
-      <AppBox bg="white" pt={[0, 5]}>
+      <Box bg="white" pt={[0, 5]}>
         <ProposalDraftAlert proposal={proposal} message="draft-visible-by-you" />
-      </AppBox>
+      </Box>
       <Tab.Container
         id="proposal-page-tabs"
         activeKey={tabKey}

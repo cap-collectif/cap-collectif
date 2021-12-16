@@ -59,7 +59,7 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
       />
     </Body>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButton)
+      <Relay(CommentVoteButtonLegacy)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -202,7 +202,7 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
       />
     </Body>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButton)
+      <Relay(CommentVoteButtonLegacy)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -345,7 +345,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
       />
     </Body>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButton)
+      <Relay(CommentVoteButtonLegacy)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -504,7 +504,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
       />
     </Body>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButton)
+      <Relay(CommentVoteButtonLegacy)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -670,7 +670,7 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
       />
     </Body>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButton)
+      <Relay(CommentVoteButtonLegacy)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -822,7 +822,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
       />
     </Body>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButton)
+      <Relay(CommentVoteButtonLegacy)
         comment={
           Object {
             "$fragmentRefs": null,

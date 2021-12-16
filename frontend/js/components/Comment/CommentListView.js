@@ -15,6 +15,7 @@ type Props = {|
   +order: CommentOrderBy,
   +relay: RelayRefetchProp,
   +useBodyColor: boolean,
+  +unstable__enableCapcoUiDs?: boolean,
 |};
 
 type State = {|
@@ -80,13 +81,14 @@ export class CommentListView extends React.Component<Props, State> {
       return <Loader />;
     }
 
-    const { commentable, useBodyColor } = this.props;
+    const { commentable, useBodyColor, unstable__enableCapcoUiDs } = this.props;
 
     return (
       <CommentListViewPaginated
         commentable={commentable}
         highlightedComment={highlightedComment}
         useBodyColor={useBodyColor}
+        unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
       />
     );
   }

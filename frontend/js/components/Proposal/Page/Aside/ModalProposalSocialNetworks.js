@@ -4,19 +4,23 @@ import { graphql, useFragment } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Field, reduxForm, SubmissionError, submit } from 'redux-form';
 import css from '@styled-system/css';
+import {
+  Box,
+  Text,
+  Button,
+  ButtonGroup,
+  Heading,
+  toast,
+  Modal,
+  CapUIModalSize,
+} from '@cap-collectif/ui';
 import type { Dispatch } from '~/types';
-import Modal from '~ds/Modal/Modal';
-import Button from '~ds/Button/Button';
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
-import Heading from '~ui/Primitives/Heading';
-import Text from '~ui/Primitives/Text';
-import { toast } from '~ds/Toast';
+import ResetCss from '~/utils/ResetCss';
 import type {
   ModalProposalSocialNetworks_proposal$key,
   ModalProposalSocialNetworks_proposal,
 } from '~relay/ModalProposalSocialNetworks_proposal.graphql';
 import colors from '~/utils/colors';
-import AppBox from '~ui/Primitives/AppBox';
 import component from '~/components/Form/Field';
 import UpdateProposalSocialNetworksMutation from '~/mutations/UpdateProposalSocialNetworksMutation';
 import { isUrl } from '~/services/Validator';
@@ -189,34 +193,37 @@ const ModalProposalSocialNetworks = ({
   const intl = useIntl();
   return (
     <Modal
+      size={CapUIModalSize.Md}
       show={show}
       onClose={onClose}
       ariaLabel={intl.formatMessage({ id: 'global.visitor.dynamic' })}
       width={['100%', '720px']}>
-      <Modal.Header paddingY={6} borderBottom={`1px solid ${colors.borderColor}`}>
-        <Text
-          fontSize="11px"
-          color="gray.500"
-          lineHeight="16px"
-          fontWeight="bold"
-          css={css({
-            span: {
-              textTransform: 'uppercase',
-            },
-          })}>
-          <span>
-            {proposal.isProposalUsingAnySocialNetworks
-              ? intl.formatMessage({ id: 'edit-external-links' })
-              : intl.formatMessage({ id: 'add-external-links' })}
-          </span>
-        </Text>
-        <Heading as="h4" color="blue.900">
-          {intl.formatMessage({ id: 'find-us' })}
-        </Heading>
-      </Modal.Header>
+      <ResetCss>
+        <Modal.Header paddingY={6} borderBottom={`1px solid ${colors.borderColor}`}>
+          <Text
+            fontSize="11px"
+            color="gray.500"
+            lineHeight="16px"
+            fontWeight="bold"
+            css={css({
+              span: {
+                textTransform: 'uppercase',
+              },
+            })}>
+            <span>
+              {proposal.isProposalUsingAnySocialNetworks
+                ? intl.formatMessage({ id: 'edit-external-links' })
+                : intl.formatMessage({ id: 'add-external-links' })}
+            </span>
+          </Text>
+          <Heading as="h4" color="blue.900">
+            {intl.formatMessage({ id: 'find-us' })}
+          </Heading>
+        </Modal.Header>
+      </ResetCss>
       <Modal.Body spacing={5}>
         <form id={formName}>
-          <AppBox
+          <Box
             backgroundColor="white"
             mb="48px"
             css={css({
@@ -286,7 +293,7 @@ const ModalProposalSocialNetworks = ({
                 placeholder="https://youtube.com/channel/pseudo"
               />
             )}
-          </AppBox>
+          </Box>
         </form>
       </Modal.Body>
       <Modal.Footer

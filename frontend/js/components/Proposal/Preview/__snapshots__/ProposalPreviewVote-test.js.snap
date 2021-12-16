@@ -2,7 +2,7 @@
 
 exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
 <ProposalPreviewVote__Container>
-  <Relay(ProposalVoteButtonWrapperFragment)
+  <Relay(ProposalVoteButtonWrapperFragmentLegacy)
     className="proposal__preview__vote mr-15"
     id="proposal-vote-btn-1"
     proposal={

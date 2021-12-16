@@ -1,24 +1,29 @@
 // @flow
+// Legacy : https://github.com/cap-collectif/platform/issues/13828
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { reset } from 'redux-form';
 import { useDispatch } from 'react-redux';
-import { Flex, Text, Button, ButtonGroup, Modal } from '@cap-collectif/ui';
+import Button from '~ds/Button/Button';
+import Modal from '~ds/Modal/Modal';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import { formName } from '../Form/ProposalForm';
 import type { Dispatch } from '~/types';
 import colors from '~/styles/modules/colors';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Text from '~ui/Primitives/Text';
 
 type Props = {|
   +onClose: () => void,
   +resetModalState: () => void,
 |};
 
-const ProposalLeaveModal = ({ onClose, resetModalState }: Props): React.Node => {
+const ProposalLeaveModalLegacy = ({ onClose, resetModalState }: Props): React.Node => {
   const intl = useIntl();
   const dispatch: Dispatch = useDispatch();
   return (
     <>
-      <Modal.Body height="unset">
+      <Modal.Body>
         <Flex direction="column" alignItems="center" my={[0, '20%']}>
           <Text textAlign="center" fontSize={33} mb={8}>
             <span className="d-b emoji-container" role="img" aria-label="Door">
@@ -59,4 +64,4 @@ const ProposalLeaveModal = ({ onClose, resetModalState }: Props): React.Node => 
   );
 };
 
-export default ProposalLeaveModal;
+export default ProposalLeaveModalLegacy;

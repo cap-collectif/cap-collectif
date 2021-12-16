@@ -1533,7 +1533,7 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/ui@^0.4.1":
+"@cap-collectif/ui@^0.4.2":
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-0.4.2.tgz#2bf5d21bd2979effcc2876820f5dd94deb4105e4"
   integrity sha512-LoNaQ4dJwVysJRqtu7XWyJAgOYL6o9wykOybEonFuu2qN1FrikrdOnVxkjTJWPslPPJvSHUkpHsx76q6k0w8jw==
@@ -18917,6 +18917,11 @@ react-helmet-async@^1.0.2, react-helmet-async@^1.0.7:
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
+
+react-hook-form@^7.19.5:
+  version "7.19.5"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.19.5.tgz#cc6087419facf2fb57d47d5b0d4a8ca63201298f"
+  integrity sha512-+M9gd0nWWASuEitf5PQGOGNElnHknzY3rGISrPDXwsOmZb7c/jyvkRUqk4OJXaZit1ZwesSv+EysttdAeFEfmw==
 
 react-hotkeys-hook@^3.4.4:
   version "3.4.4"

@@ -5,9 +5,9 @@ import styled, { type StyledComponent } from 'styled-components';
 import { graphql } from 'react-relay';
 import { useFragment } from 'relay-hooks';
 import moment from 'moment';
+import { Card } from '@cap-collectif/ui';
 import type { ProposalPageDonators_proposal$key } from '~relay/ProposalPageDonators_proposal.graphql';
 import { CategoryTitle } from '~/components/Proposal/Page/ProposalPage.style';
-import Card from '~ui/Card/Card';
 import { DATE_LONG_LOCALIZED_FORMAT } from '~/shared/date';
 import { styleGuideColors } from '~/utils/colors';
 

@@ -306,6 +306,7 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
             "id": "id",
           }
         }
+        unstable__enableCapcoUiDs={true}
       >
         <Component />
       </ProposalRevision>

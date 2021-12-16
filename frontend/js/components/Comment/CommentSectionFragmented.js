@@ -8,7 +8,7 @@ type Props = {|
   +commentable: CommentSectionFragmented_commentable,
   +isAuthenticated: boolean,
   +useBodyColor: boolean,
-  newDesign?: boolean,
+  unstable__enableCapcoUiDs?: boolean,
 |};
 
 export class CommentSectionFragmented extends React.Component<Props> {
@@ -17,7 +17,7 @@ export class CommentSectionFragmented extends React.Component<Props> {
   };
 
   render() {
-    const { isAuthenticated, useBodyColor, commentable, newDesign } = this.props;
+    const { isAuthenticated, useBodyColor, commentable, unstable__enableCapcoUiDs } = this.props;
 
     if (!commentable) {
       return null;
@@ -29,7 +29,7 @@ export class CommentSectionFragmented extends React.Component<Props> {
           commentable={commentable}
           isAuthenticated={isAuthenticated}
           useBodyColor={useBodyColor}
-          newDesign={newDesign}
+          unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
         />
       </div>
     );

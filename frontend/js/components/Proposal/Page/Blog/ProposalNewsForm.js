@@ -76,7 +76,7 @@ export const ProposalNewsForm = ({ handleSubmit }: Props) => {
       <Field
         name="body"
         component={component}
-        type="editor"
+        type="editor-ds"
         id="proposal_news_body"
         label={<FormattedMessage id="proposal-news-body-field" />}
       />

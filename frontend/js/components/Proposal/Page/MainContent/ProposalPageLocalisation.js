@@ -5,6 +5,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
+import { Box, Skeleton } from '@cap-collectif/ui';
 import colors from '~/utils/colors';
 import config from '~/config';
 import type { MapTokens } from '~/redux/modules/user';
@@ -21,8 +22,6 @@ import {
   CategoryCircledIcon,
   CategoryTitle,
 } from '~/components/Proposal/Page/ProposalPage.style';
-import Skeleton from '~ds/Skeleton';
-import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {
   proposal: ProposalPageLocalisation_proposal,
@@ -32,10 +31,10 @@ type Props = {
 let L;
 
 const Placeholder = () => (
-  <AppBox ml={4}>
+  <Box ml={4}>
     <Skeleton.Text width="100%" size="sm" mb={4} />
     <Skeleton.Text width="100%" height="130px" />
-  </AppBox>
+  </Box>
 );
 
 export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {

@@ -997,7 +997,7 @@ exports[`<CommentSection /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "edd6394be0ad62412d47ba5a089b4f4d",
+          "cacheID": "c5982053b051c05af01b6bf2ea0dbc2f",
           "id": null,
           "metadata": Object {},
           "name": "CommentSectionQuery",
@@ -1134,6 +1134,22 @@ fragment CommentReportButton_comment_39ngnn on Comment {
   }
 }
 
+fragment CommentVoteButtonLegacy_comment_39ngnn on Comment {
+  id
+  author {
+    isViewer @include(if: $isAuthenticated)
+    id
+  }
+  votes(first: 0) {
+    totalCount
+  }
+  viewerHasVote @include(if: $isAuthenticated)
+  viewerVote @include(if: $isAuthenticated) {
+    id
+    ...UnpublishedTooltip_publishable
+  }
+}
+
 fragment CommentVoteButton_comment_39ngnn on Comment {
   id
   author {
@@ -1168,6 +1184,7 @@ fragment Comment_comment_39ngnn on Comment {
   ...CommentBody_comment
   ...CommentEdit_comment_39ngnn
   ...CommentVoteButton_comment_39ngnn
+  ...CommentVoteButtonLegacy_comment_39ngnn
   ...CommentReportButton_comment_39ngnn
   ...CommentForm_commentable
 }

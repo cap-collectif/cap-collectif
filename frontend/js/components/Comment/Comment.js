@@ -6,6 +6,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import UserAvatar from '../User/UserAvatar';
 import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
+import CommentVoteButtonLegacy from './CommentVoteButtonLegacy';
 import CommentVoteButton from './CommentVoteButton';
 import CommentReportButton from './CommentReportButton';
 import CommentEdit from './CommentEdit';
@@ -23,6 +24,7 @@ type Props = {|
   +isHighlighted?: ?boolean,
   +disabledButton?: ?boolean,
   +useBodyColor: boolean,
+  +unstable__enableCapcoUiDs?: boolean,
 |};
 
 const AnswerButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
@@ -58,7 +60,13 @@ export class Comment extends React.Component<Props, State> {
   };
 
   render() {
-    const { comment, isHighlighted, useBodyColor, disabledButton } = this.props;
+    const {
+      comment,
+      isHighlighted,
+      useBodyColor,
+      disabledButton,
+      unstable__enableCapcoUiDs,
+    } = this.props;
     const { answerFormShown } = this.state;
 
     return (
@@ -74,7 +82,11 @@ export class Comment extends React.Component<Props, State> {
           </Media.Body>
           {!disabledButton && (
             <CommentBottom>
-              <CommentVoteButton comment={comment} />
+              {unstable__enableCapcoUiDs ? (
+                <CommentVoteButton comment={comment} />
+              ) : (
+                <CommentVoteButtonLegacy comment={comment} />
+              )}
               <AnswerButton onClick={this.focusAnswer}>
                 <Icon name={ICON_NAME.navigationLeft} size={15} color={colors.darkGray} />
                 <FormattedMessage id="global.answer" />
@@ -113,6 +125,7 @@ export default createFragmentContainer(Comment, {
       ...CommentBody_comment
       ...CommentEdit_comment @arguments(isAuthenticated: $isAuthenticated)
       ...CommentVoteButton_comment @arguments(isAuthenticated: $isAuthenticated)
+      ...CommentVoteButtonLegacy_comment @arguments(isAuthenticated: $isAuthenticated)
       ...CommentReportButton_comment @arguments(isAuthenticated: $isAuthenticated)
       ...CommentForm_commentable
     }

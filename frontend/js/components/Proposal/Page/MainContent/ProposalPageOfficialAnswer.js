@@ -4,6 +4,7 @@ import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
+import { Box, Skeleton } from '@cap-collectif/ui';
 import BodyText from '~/components/Ui/Boxes/BodyText';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
@@ -18,8 +19,6 @@ import {
   CategoryCircledIcon,
   CategoryTitle,
 } from '~/components/Proposal/Page/ProposalPage.style';
-import Skeleton from '~ds/Skeleton';
-import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {
   proposal: ?ProposalPageOfficialAnswer_proposal,
@@ -67,10 +66,10 @@ const DecidorDefaultAvatar: StyledComponent<{}, {}, typeof DefaultAvatar> = styl
 `;
 
 const Placeholder = () => (
-  <AppBox ml={4}>
+  <Box ml={4}>
     <Skeleton.Text width="100%" size="sm" mb={4} />
     <Skeleton.Text width="50%" size="sm" />
-  </AppBox>
+  </Box>
 );
 
 export const ProposalPageOfficialAnswer = ({ proposal }: Props) => {

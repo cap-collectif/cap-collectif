@@ -1,4 +1,5 @@
 // @flow
+// Legacy : https://github.com/cap-collectif/platform/issues/13828
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -26,7 +27,6 @@ import {
   Button,
 } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
-import { toast, Button as DsButton, Text, Icon, CapUIIcon, CapUIIconSize } from '@cap-collectif/ui';
 import { styleGuideColors } from '~/utils/colors';
 import component from '~/components/Form/Field';
 import type {
@@ -37,8 +37,8 @@ import type {
   ProposalFormAvailableDistrictsForLocalisationQueryResponse,
   ProposalFormAvailableDistrictsForLocalisationQueryVariables,
 } from '~relay/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
-import type { ProposalForm_proposal } from '~relay/ProposalForm_proposal.graphql';
-import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
+import type { ProposalFormLegacy_proposal } from '~relay/ProposalFormLegacy_proposal.graphql';
+import type { ProposalFormLegacy_proposalForm } from '~relay/ProposalFormLegacy_proposalForm.graphql';
 import type { GlobalState, Dispatch, FeatureToggles, Uuid } from '~/types';
 import CreateProposalMutation from '~/mutations/CreateProposalMutation';
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation';
@@ -55,13 +55,17 @@ import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesVal
 import renderResponses from '~/components/Form/RenderResponses';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import config from '~/config';
+import Text from '~ui/Primitives/Text';
 import { formatGeoJsons, geoContains, type GeoJson } from '~/utils/geojson';
 import { ProposalFormMapPreview } from './ProposalFormMapPreview';
 import UserListField from '~/components/Admin/Field/UserListField';
+import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
+import DsButton from '~ds/Button/Button';
+import { toast } from '~/components/DesignSystem/Toast';
 import { mapOpenPopup } from '~/components/Proposal/Map/Map.events';
 
 const getAvailableDistrictsQuery = graphql`
-  query ProposalFormAvailableDistrictsForLocalisationQuery(
+  query ProposalFormLegacyAvailableDistrictsForLocalisationQuery(
     $proposalFormId: ID!
     $latitude: Float!
     $longitude: Float!
@@ -78,7 +82,7 @@ const getAvailableDistrictsQuery = graphql`
 `;
 
 const searchProposalsQuery = graphql`
-  query ProposalFormSearchProposalsQuery($proposalFormId: ID!, $term: String!) {
+  query ProposalFormLegacySearchProposalsQuery($proposalFormId: ID!, $term: String!) {
     form: node(id: $proposalFormId) {
       ... on ProposalForm {
         proposals(term: $term, first: 5) {
@@ -104,8 +108,8 @@ export const formName = 'proposal-form';
 export const EDIT_MODAL_ANCHOR = '#edit-proposal';
 
 type RelayProps = {|
-  +proposalForm: ProposalForm_proposalForm,
-  +proposal: ?ProposalForm_proposal,
+  +proposalForm: ProposalFormLegacy_proposalForm,
+  +proposal: ?ProposalFormLegacy_proposal,
 |};
 
 export type Props = {|
@@ -379,7 +383,7 @@ type State = {
   districtIdsFilteredByAddress: Array<string>,
 };
 
-export class ProposalForm extends React.Component<Props, State> {
+export class ProposalFormLegacy extends React.Component<Props, State> {
   loadTitleSuggestions = debounce((title: string) => {
     const { proposal: currentProposal, proposalForm } = this.props;
     this.setState({ isLoadingTitleSuggestions: true });
@@ -649,7 +653,7 @@ export class ProposalForm extends React.Component<Props, State> {
               formName={formName}
               component={component}
               placeholder="date.placeholder"
-              addonAfter={<Icon name={CapUIIcon.Calendar} size={CapUIIconSize.Sm} />}
+              addonAfter={<Icon name={ICON_NAME.CALENDAR} size={ICON_SIZE.SM} />}
             />
           </>
         )}
@@ -766,7 +770,7 @@ export class ProposalForm extends React.Component<Props, State> {
         {proposalForm.usingDescription && (
           <Field
             id="proposal_body"
-            type="editor-ds"
+            type="editor"
             name="body"
             component={component}
             placeholder={
@@ -795,7 +799,6 @@ export class ProposalForm extends React.Component<Props, State> {
           responses={responses}
           availableQuestions={availableQuestions}
           memoize={memoizeAvailableQuestions}
-          unstable__enableCapcoUiDs
         />
         {proposalForm.usingIllustration && (
           <Field
@@ -1001,13 +1004,13 @@ const form = reduxForm({
   validate,
   onSubmit,
   destroyOnUnmount: false,
-})(ProposalForm);
+})(ProposalFormLegacy);
 
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalForm_proposal on Proposal
+    fragment ProposalFormLegacy_proposal on Proposal
       @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
       id
       title
@@ -1048,7 +1051,7 @@ export default createFragmentContainer(container, {
     }
   `,
   proposalForm: graphql`
-    fragment ProposalForm_proposalForm on ProposalForm {
+    fragment ProposalFormLegacy_proposalForm on ProposalForm {
       id
       description
       suggestingSimilarProposals

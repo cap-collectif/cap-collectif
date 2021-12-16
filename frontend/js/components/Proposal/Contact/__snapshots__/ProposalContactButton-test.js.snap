@@ -2,7 +2,7 @@
 
 exports[`<ProposalContactButton /> renders correctly 1`] = `
 <Fragment>
-  <Connect(ReduxForm)
+  <Connect(ProposalContactModal)
     authorName="Gisele"
     onClose={[Function]}
     proposalId="proposalId324Z"

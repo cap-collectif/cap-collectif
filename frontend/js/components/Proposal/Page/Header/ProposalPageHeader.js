@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import moment from 'moment';
 import styled, { type StyledComponent } from 'styled-components';
+import { Button, Box, Flex, Skeleton } from '@cap-collectif/ui';
 import colors from '~/utils/colors';
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes';
 import type { GlobalState } from '~/types';
@@ -17,10 +18,7 @@ import UserAvatar from '~/components/User/UserAvatar';
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
-import Skeleton from '~ds/Skeleton';
-import Flex from '~ui/Primitives/Layout/Flex';
-import AppBox from '~ui/Primitives/AppBox';
-import Button from '~ds/Button/Button';
+
 import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration';
 
 type Props = {
@@ -159,10 +157,10 @@ const HeaderActions: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 const AvatarPlaceholder = () => (
   <Flex direction="row" align="center">
     <Skeleton.Circle mb={1} size="45px" />
-    <AppBox ml={4}>
+    <Box ml={4}>
       <Skeleton.Text size="sm" mb={2} width="115px" />
       <Skeleton.Text size="sm" width="200px" />
-    </AppBox>
+    </Box>
   </Flex>
 );
 
@@ -225,25 +223,28 @@ export const ProposalPageHeader = ({
                 {intl.formatMessage({ id: 'panel.analysis.subtitle' })}
               </button>
             )}
-            {proposal?.form?.usingIllustration && proposal.author.isViewer && proposal.form.step && proposal.form.step.state === 'CLOSED' && (
-              <>
-                <Button
-                  id="edit-illustration"
-                  onClick={onOpen}
-                  variant="secondary"
-                  variantColor="primary"
-                  variantSize="small"
-                  leftIcon="IMAGE">
-                  {intl.formatMessage({ id: 'edit-image' })}
-                </Button>
-                <ModalProposalIllustration
-                  show={isOpen}
-                  initialValues={proposalIllustrationInitialValues}
-                  onClose={onClose}
-                  proposalId={proposal.id}
-                />
-              </>
-            )}
+            {proposal?.form?.usingIllustration &&
+              proposal.author.isViewer &&
+              proposal.form.step &&
+              proposal.form.step.state === 'CLOSED' && (
+                <>
+                  <Button
+                    id="edit-illustration"
+                    onClick={onOpen}
+                    variant="secondary"
+                    variantColor="primary"
+                    variantSize="small"
+                    leftIcon="PICTURE_O">
+                    {intl.formatMessage({ id: 'edit-image' })}
+                  </Button>
+                  <ModalProposalIllustration
+                    show={isOpen}
+                    initialValues={proposalIllustrationInitialValues}
+                    onClose={onClose}
+                    proposalId={proposal.id}
+                  />
+                </>
+              )}
           </div>
         </HeaderActions>
         {proposal?.media?.url || proposal?.category?.categoryImage?.image?.url ? (

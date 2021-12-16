@@ -278,7 +278,7 @@ export const ProposalAnalysisFormPanel = ({
             <FormattedMessage id="global.finish" />
           </ValidateButton>
           {proposalRevisionsEnabled && (
-            <ProposalRevision proposal={proposal}>
+            <ProposalRevision proposal={proposal} unstable__enableCapcoUiDs>
               {openModal => (
                 <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
                   <FormattedMessage id="request.author.review" />

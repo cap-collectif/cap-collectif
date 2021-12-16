@@ -2,6 +2,7 @@
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import { Box, Skeleton } from '@cap-collectif/ui';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
@@ -13,18 +14,16 @@ import {
   CategoryCircledIcon,
   CategoryTitle,
 } from '~/components/Proposal/Page/ProposalPage.style';
-import AppBox from '~ui/Primitives/AppBox';
-import Skeleton from '~ds/Skeleton';
 
 type Props = {
   proposal: ?ProposalPageDescription_proposal,
 };
 
 const Placeholder = () => (
-  <AppBox ml={4}>
+  <Box ml={4}>
     <Skeleton.Text size="sm" width="100%" mb={4} />
     <Skeleton.Text size="sm" width="50%" />
-  </AppBox>
+  </Box>
 );
 
 export const ProposalPageDescription = ({ proposal }: Props) => {

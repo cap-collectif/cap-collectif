@@ -71,6 +71,7 @@ const RenderResponses = ({
   availableQuestions: oldAvailableQuestions = [],
   divClassName = '',
   memoize,
+  unstable__enableCapcoUiDs,
 }: {
   ...FieldArrayProps,
   questions: Questions,
@@ -83,6 +84,7 @@ const RenderResponses = ({
   availableQuestions: Array<string>,
   divClassName?: string,
   memoize: any,
+  unstable__enableCapcoUiDs?: boolean,
 }) => {
   const [lastQuestionType, setLastQuestionType] = useState<?QuestionType>(null);
   const [isModePrint, setModePrint] = useState<boolean>(false);
@@ -349,7 +351,11 @@ const RenderResponses = ({
                       divClassName="reduced"
                       name={`${member}.value`}
                       id={`${cleanDomId(`${form}-${member}`)}`}
-                      type={field.type}
+                      type={
+                        unstable__enableCapcoUiDs && field.type === 'editor'
+                          ? 'editor-ds'
+                          : field.type
+                      }
                       // $FlowFixMe
                       component={component}
                       description={field.description}

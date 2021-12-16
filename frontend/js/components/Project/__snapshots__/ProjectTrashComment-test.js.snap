@@ -959,7 +959,7 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "a56397829893394aefc256115709990a",
+          "cacheID": "b7fa05924cb807496b7ca5f0ace8e036",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashCommentQuery",
@@ -1083,6 +1083,22 @@ fragment CommentTrashedListPaginated_project_1G22uz on Project {
   }
 }
 
+fragment CommentVoteButtonLegacy_comment_39ngnn on Comment {
+  id
+  author {
+    isViewer @include(if: $isAuthenticated)
+    id
+  }
+  votes(first: 0) {
+    totalCount
+  }
+  viewerHasVote @include(if: $isAuthenticated)
+  viewerVote @include(if: $isAuthenticated) {
+    id
+    ...UnpublishedTooltip_publishable
+  }
+}
+
 fragment CommentVoteButton_comment_39ngnn on Comment {
   id
   author {
@@ -1117,6 +1133,7 @@ fragment Comment_comment_39ngnn on Comment {
   ...CommentBody_comment
   ...CommentEdit_comment_39ngnn
   ...CommentVoteButton_comment_39ngnn
+  ...CommentVoteButtonLegacy_comment_39ngnn
   ...CommentReportButton_comment_39ngnn
   ...CommentForm_commentable
 }

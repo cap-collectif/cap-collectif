@@ -1774,7 +1774,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "635edc4eeb1d1935b8b8b235a9631922",
+            "cacheID": "18b775493277ebba1134e75cee82b5ec",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashQuery",
@@ -1908,6 +1908,22 @@ fragment CommentTrashedListPaginated_project_1G22uz on Project {
   }
 }
 
+fragment CommentVoteButtonLegacy_comment_39ngnn on Comment {
+  id
+  author {
+    isViewer @include(if: $isAuthenticated)
+    id
+  }
+  votes(first: 0) {
+    totalCount
+  }
+  viewerHasVote @include(if: $isAuthenticated)
+  viewerVote @include(if: $isAuthenticated) {
+    id
+    ...UnpublishedTooltip_publishable
+  }
+}
+
 fragment CommentVoteButton_comment_39ngnn on Comment {
   id
   author {
@@ -1942,6 +1958,7 @@ fragment Comment_comment_39ngnn on Comment {
   ...CommentBody_comment
   ...CommentEdit_comment_39ngnn
   ...CommentVoteButton_comment_39ngnn
+  ...CommentVoteButtonLegacy_comment_39ngnn
   ...CommentReportButton_comment_39ngnn
   ...CommentForm_commentable
 }
@@ -1985,7 +2002,7 @@ fragment ProposalDetailLikers_proposal on Proposal {
   ...ProposalDetailLikersModal_proposal
 }
 
-fragment ProposalFollowButton_proposal_39ngnn on Proposal {
+fragment ProposalFollowButtonLegacy_proposal_39ngnn on Proposal {
   id
   viewerIsFollowing @include(if: $isAuthenticated)
   viewerFollowingConfiguration @include(if: $isAuthenticated)
@@ -2022,7 +2039,7 @@ fragment ProposalPreviewBody_proposal_3UaCIZ on Proposal {
   ...ProposalPreviewUser_proposal
   ...ProposalDetailEstimation_proposal
   ...ProposalDetailLikers_proposal
-  ...ProposalFollowButton_proposal_39ngnn
+  ...ProposalFollowButtonLegacy_proposal_39ngnn
 }
 
 fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {

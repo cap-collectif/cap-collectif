@@ -1,12 +1,16 @@
 // @flow
+// Legacy : https://github.com/cap-collectif/platform/issues/13828
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { reset, isSubmitting, submit } from 'redux-form';
 import { useDispatch, connect } from 'react-redux';
-import { Flex, Text, Button, Modal } from '@cap-collectif/ui';
+import Button from '~ds/Button/Button';
+import Modal from '~ds/Modal/Modal';
 import { formName } from '../Form/ProposalForm';
 import type { Dispatch, GlobalState } from '~/types';
 import colors from '~/styles/modules/colors';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Text from '~ui/Primitives/Text';
 
 type Props = {|
   +onClose: () => void,
@@ -15,7 +19,7 @@ type Props = {|
   +submitting: boolean,
 |};
 
-const ProposalErrorModal = ({
+const ProposalErrorModalLegacy = ({
   onClose,
   resetModalState,
   allowRetry,
@@ -77,4 +81,4 @@ const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
 });
 
-export default connect<any, any, _, _, _, _>(mapStateToProps)(ProposalErrorModal);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ProposalErrorModalLegacy);

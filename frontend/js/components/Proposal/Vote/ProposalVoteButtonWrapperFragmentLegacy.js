@@ -1,27 +1,28 @@
 // @flow
+// Legacy : https://github.com/cap-collectif/platform/issues/13828
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import cn from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalVoteButton from './ProposalVoteButton';
 import VoteButtonOverlay from './VoteButtonOverlay';
-import LoginOverlay from '../../Utils/NewLoginOverlay';
-import type { ProposalVoteButtonWrapperFragment_proposal } from '~relay/ProposalVoteButtonWrapperFragment_proposal.graphql';
-import type { ProposalVoteButtonWrapperFragment_step } from '~relay/ProposalVoteButtonWrapperFragment_step.graphql';
+import LoginOverlay from '../../Utils/LoginOverlay';
+import type { ProposalVoteButtonWrapperFragmentLegacy_proposal } from '~relay/ProposalVoteButtonWrapperFragmentLegacy_proposal.graphql';
+import type { ProposalVoteButtonWrapperFragmentLegacy_step } from '~relay/ProposalVoteButtonWrapperFragmentLegacy_step.graphql';
 import HoverObserver from '../../Utils/HoverObserver';
-import type { ProposalVoteButtonWrapperFragment_viewer } from '~relay/ProposalVoteButtonWrapperFragment_viewer.graphql';
+import type { ProposalVoteButtonWrapperFragmentLegacy_viewer } from '~relay/ProposalVoteButtonWrapperFragmentLegacy_viewer.graphql';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 
 type Props = {
-  proposal: ProposalVoteButtonWrapperFragment_proposal,
-  viewer: ?ProposalVoteButtonWrapperFragment_viewer,
-  step: ?ProposalVoteButtonWrapperFragment_step,
+  proposal: ProposalVoteButtonWrapperFragmentLegacy_proposal,
+  viewer: ?ProposalVoteButtonWrapperFragmentLegacy_viewer,
+  step: ?ProposalVoteButtonWrapperFragmentLegacy_step,
   id: string,
   className: string,
   disabled?: boolean,
 };
 
-export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
+export class ProposalVoteButtonWrapperFragmentLegacy extends React.Component<Props> {
   static defaultProps = {
     id: '',
     className: '',
@@ -113,9 +114,9 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
+export default createFragmentContainer(ProposalVoteButtonWrapperFragmentLegacy, {
   viewer: graphql`
-    fragment ProposalVoteButtonWrapperFragment_viewer on User
+    fragment ProposalVoteButtonWrapperFragmentLegacy_viewer on User
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
       id
       proposalVotes(stepId: $stepId) @include(if: $isAuthenticated) {
@@ -125,7 +126,7 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
     }
   `,
   proposal: graphql`
-    fragment ProposalVoteButtonWrapperFragment_proposal on Proposal
+    fragment ProposalVoteButtonWrapperFragmentLegacy_proposal on Proposal
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
       id
       estimation
@@ -136,7 +137,7 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
   `,
 
   step: graphql`
-    fragment ProposalVoteButtonWrapperFragment_step on ProposalStep
+    fragment ProposalVoteButtonWrapperFragmentLegacy_step on ProposalStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       title

@@ -108,7 +108,7 @@ export const ProposalPageHeaderButtons = ({
     : false;
   return (
     <Buttons>
-      <ProposalEditModal proposal={proposal} show={isOpen} onClose={onClose} />
+      {isOpen && <ProposalEditModal proposal={proposal} show={isOpen} onClose={onClose} />}
       <ProposalDeleteModal proposal={proposal} />
 
       <>

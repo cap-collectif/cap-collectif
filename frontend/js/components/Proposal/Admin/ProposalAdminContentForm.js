@@ -24,6 +24,7 @@ import AlertForm from '../../Alert/AlertForm';
 import ProposalFusionEditModal from './ProposalFusionEditModal';
 import type { ProposalAdminContentForm_proposal } from '~relay/ProposalAdminContentForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
+import type { ProposalFormLegacy_proposalForm } from '~relay/ProposalFormLegacy_proposalForm.graphql';
 import type { FormValues as FrontendFormValues } from '../Form/ProposalForm';
 import type { Dispatch, FeatureToggles, GlobalState, Uuid } from '~/types';
 import UserListField from '../../Admin/Field/UserListField';
@@ -231,6 +232,7 @@ export const checkProposalContent = (
   values: FormValues | FrontendFormValues | BackOfficeFormValues,
   proposalForm:
     | ProposalForm_proposalForm
+    | ProposalFormLegacy_proposalForm
     | $PropertyType<ProposalAdminContentForm_proposal, 'form'>,
   features: FeatureToggles,
   intl: IntlShape,
@@ -291,7 +293,7 @@ const memoizeAvailableQuestions: any = memoize(() => {});
 
 export const validateProposalContent = (
   values: FormValues | FrontendFormValues | BackOfficeFormValues,
-  proposalForm: ProposalForm_proposalForm,
+  proposalForm: ProposalForm_proposalForm | ProposalFormLegacy_proposalForm,
   features: FeatureToggles,
   intl: IntlShape,
   isDraft: boolean,

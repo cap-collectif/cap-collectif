@@ -15,6 +15,7 @@ Scenario: Logged in user wants to create a proposal with theme
   And I go to "/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/nouvelle-proposition-creee"
   And I should see my new proposal
   Then I should see text matching "proposal.tabs.followers"
+  And I wait 10 seconds
   And I click the "#proposal-page-tabs-tab-followers" element
   And I should see my subscription as "user" in the proposal followers list
 

@@ -3,14 +3,10 @@ import * as React from 'react';
 import { useIntl, type IntlShape, injectIntl, FormattedHTMLMessage } from 'react-intl';
 import { reduxForm, submit, Field } from 'redux-form';
 import { connect } from 'react-redux';
+import { Button, ButtonGroup, Box, Heading, toast, Modal, CapUIModalSize } from '@cap-collectif/ui';
 import type { Dispatch } from '~/types';
-import Modal from '~ds/Modal/Modal';
-import Button from '~ds/Button/Button';
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
-import Heading from '~ui/Primitives/Heading';
-import { toast } from '~ds/Toast';
 import colors from '~/utils/colors';
-import AppBox from '~ui/Primitives/AppBox';
+import ResetCss from '~/utils/ResetCss';
 import component from '~/components/Form/Field';
 import UpdateProposalIllustrationMutation from '~/mutations/UpdateProposalIllustrationMutation';
 import { ILLUSTRATION_MAX_SIZE } from '~/components/Proposal/Form/ProposalForm';
@@ -70,18 +66,21 @@ const ModalProposalIllustration = ({
   const intl = useIntl();
   return (
     <Modal
+      size={CapUIModalSize.Md}
       show={show}
       onClose={onClose}
       ariaLabel={intl.formatMessage({ id: 'global.visitor.dynamic' })}
       width={['100%', '720px']}>
-      <Modal.Header paddingY={6} borderBottom={`1px solid ${colors.borderColor}`}>
-        <Heading as="h4" color="blue.900">
-          {intl.formatMessage({ id: 'edit-cover-image' })}
-        </Heading>
-      </Modal.Header>
+      <ResetCss>
+        <Modal.Header paddingY={6} borderBottom={`1px solid ${colors.borderColor}`}>
+          <Heading as="h4" color="blue.900">
+            {intl.formatMessage({ id: 'edit-cover-image' })}
+          </Heading>
+        </Modal.Header>
+      </ResetCss>
       <Modal.Body spacing={5}>
         <form id={formName}>
-          <AppBox backgroundColor="white" mb="48px">
+          <Box backgroundColor="white" mb="48px">
             <Field
               maxSize={ILLUSTRATION_MAX_SIZE}
               id="proposal_media"
@@ -90,7 +89,7 @@ const ModalProposalIllustration = ({
               type="image"
               help={<FormattedHTMLMessage id="illustration-help-text" />}
             />
-          </AppBox>
+          </Box>
         </form>
       </Modal.Body>
       <Modal.Footer

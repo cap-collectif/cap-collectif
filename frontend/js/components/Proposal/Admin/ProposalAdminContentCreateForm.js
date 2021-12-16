@@ -23,12 +23,12 @@ import AppBox from '~ui/Primitives/AppBox';
 import Heading from '~ui/Primitives/Heading';
 import type { ProposalAdminContentCreateForm_proposalForm } from '~relay/ProposalAdminContentCreateForm_proposalForm.graphql';
 import Help from '~ui/Form/Help/Help';
-import ProposalForm, {
+import ProposalFormLegacy, {
   formName,
   type FormValues,
   memoizeAvailableQuestions,
   type Props as ProposalFormProps,
-} from '~/components/Proposal/Form/ProposalForm';
+} from '~/components/Proposal/Form/ProposalFormLegacy';
 import ConfirmModal from '~ds/Modal/ConfirmModal';
 import Button from '~ds/Button/Button';
 import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
@@ -306,7 +306,7 @@ export const ProposalAdminContentCreateForm = ({
           <Help>{intl.formatMessage({ id: 'new-proposal-help-text' })}</Help>
         </AppBox>
         <FormContainer>
-          <ProposalForm
+          <ProposalFormLegacy
             proposalForm={proposalForm}
             proposal={null}
             isBackOfficeInput
@@ -417,7 +417,7 @@ export default createFragmentContainer(container, {
           title
         }
       }
-      ...ProposalForm_proposalForm
+      ...ProposalFormLegacy_proposalForm
     }
   `,
 });

@@ -52,6 +52,7 @@ type Props = {|
   +children?: React.Node,
   +onClose: () => void,
   +viewer: User,
+  +unstable__enableCapcoUiDs?: boolean,
 |} & FormProps;
 
 const formName = 'proposal-revision-form';
@@ -135,6 +136,7 @@ const ProposalRevisionModalForm = ({
   isAdminView,
   proposal,
   viewer,
+  unstable__enableCapcoUiDs,
 }: Props) => {
   const intl = useIntl();
   const [showAvailableRevisions, toggleAvailableRevisions] = useToggle(
@@ -229,7 +231,7 @@ const ProposalRevisionModalForm = ({
             <Field
               name="body"
               component={component}
-              type="admin-editor"
+              type={unstable__enableCapcoUiDs ? 'admin-editor-ds' : 'admin-editor'}
               id="proposal_revision_body"
               placeholder={intl.formatMessage({ id: 'review.request.description' })}
               label={<FormattedMessage id="additional-information" />}

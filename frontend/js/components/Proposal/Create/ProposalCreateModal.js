@@ -10,11 +10,11 @@ import Button from '~ds/Button/Button';
 import Modal from '~ds/Modal/Modal';
 import Heading from '~ui/Primitives/Heading';
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
-import ProposalForm, { formName } from '../Form/ProposalForm';
+import ProposalFormLegacy, { formName } from '../Form/ProposalFormLegacy';
 import type { ProposalCreateModal_proposalForm$key } from '~relay/ProposalCreateModal_proposalForm.graphql';
 import type { Dispatch, GlobalState } from '~/types';
 import colors from '~/styles/modules/colors';
-import ProposalOtherPanelsModal from './ProposalOtherPanelsModal';
+import ProposalOtherPanelsModalLegacy from './ProposalOtherPanelsModalLegacy';
 
 type Props = {|
   +proposalForm: ProposalCreateModal_proposalForm$key,
@@ -39,8 +39,8 @@ const FRAGMENT = graphql`
         title
       }
     }
-    ...ProposalForm_proposalForm
-    ...ProposalOtherPanelsModal_proposalForm
+    ...ProposalFormLegacy_proposalForm
+    ...ProposalOtherPanelsModalLegacy_proposalForm
   }
 `;
 
@@ -88,7 +88,7 @@ const ProposalCreateModal = ({
             <Heading>{intl.formatMessage({ id: title })}</Heading>
           </Modal.Header>
           <AnimatePresence>
-            <ProposalOtherPanelsModal
+            <ProposalOtherPanelsModalLegacy
               proposalForm={proposalForm}
               errorCount={errorCount}
               onClose={onClose}
@@ -105,7 +105,7 @@ const ProposalCreateModal = ({
                 animate={{ opacity: 1, display: 'block' }}
                 exit={{ opacity: 0, display: 'none' }}>
                 <Modal.Body>
-                  <ProposalForm
+                  <ProposalFormLegacy
                     onAddressEdit={() => setModalState('MAP')}
                     proposalForm={proposalForm}
                     proposal={null}

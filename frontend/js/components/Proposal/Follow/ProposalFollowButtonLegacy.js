@@ -1,4 +1,5 @@
 // @flow
+// Legacy : https://github.com/cap-collectif/platform/issues/13828
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
@@ -16,15 +17,15 @@ import {
 import { FormattedMessage } from 'react-intl';
 import FollowProposalMutation from '../../../mutations/FollowProposalMutation';
 import UpdateFollowProposalMutation from '../../../mutations/UpdateFollowProposalMutation';
-import type { ProposalFollowButton_proposal } from '~relay/ProposalFollowButton_proposal.graphql';
+import type { ProposalFollowButtonLegacy_proposal } from '~relay/ProposalFollowButtonLegacy_proposal.graphql';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
-import LoginOverlay from '../../Utils/NewLoginOverlay';
+import LoginOverlay from '../../Utils/LoginOverlay';
 import Popover from '../../Utils/Popover';
 
 import type { SubscriptionTypeValue } from '~relay/UpdateFollowProposalMutation.graphql';
 
 type Props = {|
-  +proposal: ?ProposalFollowButton_proposal,
+  +proposal: ?ProposalFollowButtonLegacy_proposal,
   isAuthenticated: boolean,
 |};
 
@@ -32,7 +33,7 @@ type State = {
   isJustFollowed: boolean,
 };
 
-export class ProposalFollowButton extends React.Component<Props, State> {
+export class ProposalFollowButtonLegacy extends React.Component<Props, State> {
   // We could move this state to relay client store
   state = {
     isJustFollowed: false,
@@ -51,7 +52,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
     }
   }
 
-  changeFollowType(proposal: ProposalFollowButton_proposal, type: SubscriptionTypeValue) {
+  changeFollowType(proposal: ProposalFollowButtonLegacy_proposal, type: SubscriptionTypeValue) {
     if (
       proposal.viewerIsFollowing &&
       proposal.viewerFollowingConfiguration !== null &&
@@ -214,9 +215,9 @@ export class ProposalFollowButton extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(ProposalFollowButton, {
+export default createFragmentContainer(ProposalFollowButtonLegacy, {
   proposal: graphql`
-    fragment ProposalFollowButton_proposal on Proposal
+    fragment ProposalFollowButtonLegacy_proposal on Proposal
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       viewerIsFollowing @include(if: $isAuthenticated)

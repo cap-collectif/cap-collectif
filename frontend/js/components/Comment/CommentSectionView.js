@@ -15,7 +15,7 @@ type Props = {|
   +commentable: CommentSectionFragmented_commentable,
   +isAuthenticated: boolean,
   +useBodyColor: boolean,
-  newDesign?: boolean,
+  unstable__enableCapcoUiDs?: boolean,
 |};
 
 const SortBy: StyledComponent<{}, {}, typeof Col> = styled(Col)`
@@ -55,11 +55,11 @@ const filters = {
 
 export function CommentSectionView(props: Props) {
   const [order, setOrder] = useState<CommentOrderBy>('last');
-  const { isAuthenticated, intl, useBodyColor, commentable, newDesign } = props;
+  const { isAuthenticated, intl, useBodyColor, commentable, unstable__enableCapcoUiDs } = props;
 
   return (
     <div>
-      {newDesign ? null : (
+      {unstable__enableCapcoUiDs ? null : (
         <h3>
           <FormattedMessage id="proposal.tabs.comments" />
         </h3>
@@ -103,6 +103,7 @@ export function CommentSectionView(props: Props) {
         order={order}
         commentable={commentable}
         useBodyColor={useBodyColor}
+        unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
       />
     </div>
   );

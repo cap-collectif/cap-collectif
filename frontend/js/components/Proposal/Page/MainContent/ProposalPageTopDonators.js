@@ -4,6 +4,7 @@ import { useFragment } from 'relay-hooks';
 import { graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
+import { Skeleton } from '@cap-collectif/ui';
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { ProposalPageTopDonators_proposal$key } from '~relay/ProposalPageTopDonators_proposal.graphql';
@@ -13,7 +14,6 @@ import {
   CategoryCircledIcon,
   CategoryTitle,
 } from '~/components/Proposal/Page/ProposalPage.style';
-import Skeleton from '~ds/Skeleton';
 
 type Props = {
   proposal: ?ProposalPageTopDonators_proposal$key,

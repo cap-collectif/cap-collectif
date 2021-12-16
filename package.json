@@ -143,7 +143,7 @@
         },
         {
             "path": "./public/js/admin.js",
-            "maxSize": "100 KB"
+            "maxSize": "200 KB"
         },
         {
             "path": "./public/js/front.js",
@@ -184,7 +184,7 @@
         "@babel/preset-flow": "^7.0.0",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-stage-0": "^7.0.0",
-        "@cap-collectif/ui": "^0.4.1",
+        "@cap-collectif/ui": "^0.4.2",
         "@emotion/cache": "^10.0.29",
         "@emotion/core": "^10.0.35",
         "@formatjs/intl-pluralrules": "^4.1.0",
@@ -332,6 +332,7 @@
         "react-dropzone": "^11.3.4",
         "react-error-boundary": "^3.1.3",
         "react-google-recaptcha": "^1.0.5",
+        "react-hook-form": "^7.19.5",
         "react-infinite-scroller": "^1.2.4",
         "react-intl": "https://github.com/cap-collectif/react-intl#a224d16c7a37884328676e9608987601a7c26205",
         "react-intl-redux": "^2.0.2",

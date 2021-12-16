@@ -37,7 +37,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
         isLoaded={true}
         placeholder={<AvatarPlaceholder />}
       >
-        <ForwardRef
+        <Flex
           direction="row"
         >
           <Relay(Connect(UserAvatar))
@@ -70,7 +70,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
               </span>
             </div>
           </ProposalPageHeader__About>
-        </ForwardRef>
+        </Flex>
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
@@ -146,7 +146,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
         isLoaded={true}
         placeholder={<AvatarPlaceholder />}
       >
-        <ForwardRef
+        <Flex
           direction="row"
         >
           <Relay(Connect(UserAvatar))
@@ -179,7 +179,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
               </span>
             </div>
           </ProposalPageHeader__About>
-        </ForwardRef>
+        </Flex>
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
@@ -277,7 +277,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
         isLoaded={true}
         placeholder={<AvatarPlaceholder />}
       >
-        <ForwardRef
+        <Flex
           direction="row"
         >
           <Relay(Connect(UserAvatar))
@@ -310,7 +310,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
               </span>
             </div>
           </ProposalPageHeader__About>
-        </ForwardRef>
+        </Flex>
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
@@ -400,7 +400,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
         isLoaded={true}
         placeholder={<AvatarPlaceholder />}
       >
-        <ForwardRef
+        <Flex
           direction="row"
         >
           <Relay(Connect(UserAvatar))
@@ -433,7 +433,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
               </span>
             </div>
           </ProposalPageHeader__About>
-        </ForwardRef>
+        </Flex>
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
@@ -513,7 +513,7 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
         isLoaded={true}
         placeholder={<AvatarPlaceholder />}
       >
-        <ForwardRef
+        <Flex
           direction="row"
         >
           <Relay(Connect(UserAvatar))
@@ -546,7 +546,7 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
               </span>
             </div>
           </ProposalPageHeader__About>
-        </ForwardRef>
+        </Flex>
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
@@ -626,7 +626,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
         isLoaded={true}
         placeholder={<AvatarPlaceholder />}
       >
-        <ForwardRef
+        <Flex
           direction="row"
         >
           <Relay(Connect(UserAvatar))
@@ -659,7 +659,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
               </span>
             </div>
           </ProposalPageHeader__About>
-        </ForwardRef>
+        </Flex>
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))

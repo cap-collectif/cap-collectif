@@ -1,4 +1,5 @@
 // @flow
+// Legacy : https://github.com/cap-collectif/platform/issues/13828
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { change, formValueSelector } from 'redux-form';
@@ -7,13 +8,15 @@ import { renderToString } from 'react-dom/server';
 import { useDispatch, useSelector, connect } from 'react-redux';
 import { graphql, useFragment } from 'react-relay';
 import { MapContainer, Marker, TileLayer, GeoJSON } from 'react-leaflet';
-import { Flex, Button, Modal, Box } from '@cap-collectif/ui';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
+import Button from '~ds/Button/Button';
+import Modal from '~ds/Modal/Modal';
 import { formName } from '../Form/ProposalForm';
 import type { Dispatch, GlobalState } from '~/types';
+import Flex from '~ui/Primitives/Layout/Flex';
 import type { MapProps, MapCenterObject } from '~/components/Proposal/Map/Map.types';
 import type { MapTokens } from '~/redux/modules/user';
-import type { ProposalChangeAddressModal_proposalForm$key } from '~relay/ProposalChangeAddressModal_proposalForm.graphql';
+import type { ProposalChangeAddressModalLegacy_proposalForm$key } from '~relay/ProposalChangeAddressModalLegacy_proposalForm.graphql';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import 'leaflet/dist/leaflet.css';
 import { colors as dsColors } from '~/styles/modules/colors';
@@ -26,6 +29,7 @@ import ProposalMapDiscoverPane from '../Map/ProposalMapDiscoverPane';
 import ProposalMapOutOfAreaPane from '../Map/ProposalMapOutOfAreaPane';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import { mapToast } from '../Map/Map.events';
+import AppBox from '~/components/Ui/Primitives/AppBox';
 import ZoomControl from '../Map/ZoomControl';
 
 let L;
@@ -33,7 +37,7 @@ let L;
 type OwnProps = {|
   +onClose: () => void,
   +resetModalState: () => void,
-  +proposalForm: ProposalChangeAddressModal_proposalForm$key,
+  +proposalForm: ProposalChangeAddressModalLegacy_proposalForm$key,
 |};
 
 type StateProps = {|
@@ -48,7 +52,7 @@ type Props = {|
 |};
 
 const FRAGMENT = graphql`
-  fragment ProposalChangeAddressModal_proposalForm on ProposalForm {
+  fragment ProposalChangeAddressModalLegacy_proposalForm on ProposalForm {
     id
     proposalInAZoneRequired
     mapCenter {
@@ -93,7 +97,7 @@ const flyToPosition = (mapRef, lat: number, lng: number) => {
   }
 };
 
-const ProposalChangeAddressModal = ({
+const ProposalChangeAddressModalLegacy = ({
   resetModalState,
   proposalForm: proposalFormFragment,
   addressValue,
@@ -127,8 +131,8 @@ const ProposalChangeAddressModal = ({
   };
   return (
     <>
-      <Modal.Body p={0} pt={0} position="relative" height="unset">
-        <Box
+      <Modal.Body p={0} position="relative">
+        <AppBox
           css={{
             '.address-container': {
               position: 'absolute',
@@ -271,7 +275,7 @@ const ProposalChangeAddressModal = ({
             />
             {!L.Browser.mobile && <ZoomControl position="bottomright" />}
           </MapContainer>
-        </Box>
+        </AppBox>
       </Modal.Body>
       <Modal.Footer spacing={2} pt={4} borderTop={`1px solid ${colors.gray[200]}`}>
         <Flex justifyContent="space-between" width="100%">
@@ -315,4 +319,6 @@ const mapStateToProps = (state: GlobalState) => ({
   category: selector(state, 'category'),
 });
 
-export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(ProposalChangeAddressModal);
+export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(
+  ProposalChangeAddressModalLegacy,
+);

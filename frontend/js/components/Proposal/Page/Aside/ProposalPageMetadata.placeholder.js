@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Skeleton from '~ds/Skeleton';
+import { Skeleton } from '@cap-collectif/ui';
 
 export const MetadataPlaceHolder = ({
   ready,

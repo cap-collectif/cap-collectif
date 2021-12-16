@@ -3,12 +3,11 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
+import { Box, Skeleton } from '@cap-collectif/ui';
 import colors from '~/utils/colors';
 import ProposalDetailAdvancement, { type Step } from '../../Detail/ProposalDetailAdvancement';
 import type { ProposalPageAdvancement_proposal } from '~relay/ProposalPageAdvancement_proposal.graphql';
 import { Card } from '~/components/Proposal/Page/ProposalPage.style';
-import AppBox from '~ui/Primitives/AppBox';
-import Skeleton from '~ds/Skeleton';
 
 type Props = { proposal: ProposalPageAdvancement_proposal };
 
@@ -50,10 +49,10 @@ const AdvancementStepPlaceholderContainer: StyledComponent<
 const AdvancementStepPlaceholder = ({ isLast }: { isLast?: boolean }) => (
   <AdvancementStepPlaceholderContainer isLast={isLast}>
     <div />
-    <AppBox ml={4}>
+    <Box ml={4}>
       <Skeleton.Text size="sm" width="115px" mb={3} />
       <Skeleton.Text height="12px" width="150px" />
-    </AppBox>
+    </Box>
   </AdvancementStepPlaceholderContainer>
 );
 

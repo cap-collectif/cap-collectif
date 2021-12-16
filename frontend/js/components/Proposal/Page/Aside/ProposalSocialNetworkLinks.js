@@ -5,14 +5,10 @@ import { useDisclosure } from '@liinkiing/react-hooks';
 import { FormattedMessage, useIntl } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { useSelector } from 'react-redux';
+import { Button, Box, Flex, Icon, CapUIIcon, CapUIIconSize, Text } from '@cap-collectif/ui';
+import Help from '~/components/Ui/Form/Help/Help';
 import { Card } from '~/components/Proposal/Page/ProposalPage.style';
-import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import type { ProposalSocialNetworkLinks_proposal$key } from '~relay/ProposalSocialNetworkLinks_proposal.graphql';
-import Text from '~ui/Primitives/Text';
-import AppBox from '~ui/Primitives/AppBox';
-import Button from '~ds/Button/Button';
-import Help from '~ui/Form/Help/Help';
-import Flex from '~ui/Primitives/Layout/Flex';
 import ModalProposalSocialNetworks from './ModalProposalSocialNetworks';
 
 type Props = {|
@@ -110,12 +106,12 @@ export const ProposalSocialNetworkLinks = ({ proposal: proposalFragment }: Props
           <Flex wrap="wrap" mt={4} overflowX="auto" width="280px">
             {proposal.form.usingTwitter && proposal.twitterUrl && (
               <a href={proposal.twitterUrl} rel="noreferrer" target="_blank">
-                <Icon size={ICON_SIZE.LG} name={ICON_NAME.SN_TWITTER} />
+                <Icon size={CapUIIconSize.Lg} name={CapUIIcon.TwitterColored} />
               </a>
             )}
             {proposal.form.usingFacebook && proposal.facebookUrl && (
               <a href={proposal.facebookUrl} rel="noreferrer" target="_blank">
-                <Icon size={ICON_SIZE.LG} name={ICON_NAME.SN_FACEBOOK} />
+                <Icon size={CapUIIconSize.Lg} name={CapUIIcon.FacebookColored} />
               </a>
             )}
             {proposal.form.usingInstagram && proposal.instagramUrl && (
@@ -125,17 +121,17 @@ export const ProposalSocialNetworkLinks = ({ proposal: proposalFragment }: Props
             )}
             {proposal.form.usingLinkedIn && proposal.linkedInUrl && (
               <a href={proposal.linkedInUrl} rel="noreferrer" target="_blank">
-                <Icon size={ICON_SIZE.LG} name={ICON_NAME.SN_LINKEDIN} />
+                <Icon size={CapUIIconSize.Lg} name={CapUIIcon.LinkedinColored} />
               </a>
             )}
             {proposal.form.usingYoutube && proposal.youtubeUrl && (
               <a href={proposal.youtubeUrl} rel="noreferrer" target="_blank">
-                <Icon size={ICON_SIZE.LG} name={ICON_NAME.SN_YOUTUBE} />
+                <Icon size={CapUIIconSize.Lg} name={CapUIIcon.YoutubeColored} />
               </a>
             )}
             {proposal.form.usingWebPage && proposal.webPageUrl && (
               <a href={proposal.webPageUrl} rel="noreferrer" target="_blank">
-                <Icon size={ICON_SIZE.LG} name={ICON_NAME.SN_WEBPAGE} />
+                <Icon size={CapUIIconSize.Lg} name={CapUIIcon.WebColored} />
               </a>
             )}
           </Flex>
@@ -146,24 +142,24 @@ export const ProposalSocialNetworkLinks = ({ proposal: proposalFragment }: Props
               {proposal.form.usingWebPage && <FormattedMessage id="form.label_website" />}
               {socialNetworks}
             </Help>
-            <AppBox>
+            <Box>
               {Array.from(Array(proposal.form.numberOfUsedSocialNetworks), () => (
                 <Icon
-                  size={ICON_SIZE.LG}
+                  size={CapUIIconSize.Lg}
                   padding={0}
                   mr={6}
                   mb={4}
-                  name={ICON_NAME.ICON_PLACEHOLDER}
+                  name={CapUIIcon.WebColored} // TODO https://github.com/cap-collectif/ui/issues/153
                 />
               ))}
-            </AppBox>
+            </Box>
           </SNPlaceHolder>
         )}
         {proposal.form.step && proposal.form.step.state === 'CLOSED' && proposal.viewerDidAuthor && (
           <>
             <Button
               leftIcon={
-                proposal.isProposalUsingAnySocialNetworks ? ICON_NAME.PENCIL : ICON_NAME.ADD
+                proposal.isProposalUsingAnySocialNetworks ? CapUIIcon.Pencil : CapUIIcon.Add
               }
               justifyContent="center"
               width="256px"

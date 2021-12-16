@@ -63,7 +63,7 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly 1`] = `
           />
         }
         name="officialResponse"
-        type="editor"
+        type="editor-ds"
       />
     </ProposalAnalysisFormPanel__AnalysisForm>
     <ProposalAnalysisFormPanel__Validation
@@ -211,7 +211,7 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly with proposal revis
           />
         }
         name="officialResponse"
-        type="editor"
+        type="editor-ds"
       />
     </ProposalAnalysisFormPanel__AnalysisForm>
     <ProposalAnalysisFormPanel__Validation
@@ -290,6 +290,7 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly with proposal revis
             "id": "id",
           }
         }
+        unstable__enableCapcoUiDs={true}
       >
         <Component />
       </ProposalRevision>

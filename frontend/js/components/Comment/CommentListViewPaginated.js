@@ -11,11 +11,19 @@ type Props = {|
   +commentable: CommentListViewPaginated_commentable,
   +highlightedComment: ?string,
   +useBodyColor: boolean,
+  +unstable__enableCapcoUiDs?: boolean,
 |};
 
 export class CommentListViewPaginated extends React.Component<Props> {
   render() {
-    const { intl, commentable, relay, highlightedComment, useBodyColor } = this.props;
+    const {
+      intl,
+      commentable,
+      relay,
+      highlightedComment,
+      useBodyColor,
+      unstable__enableCapcoUiDs,
+    } = this.props;
     if (!commentable.comments || commentable.comments.totalCount === 0) {
       return null;
     }
@@ -34,6 +42,7 @@ export class CommentListViewPaginated extends React.Component<Props> {
                 comment={node}
                 useBodyColor={useBodyColor}
                 isHighlighted={node.id === highlightedComment}
+                unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
               />
             ))}
         {relay.hasMore() && (

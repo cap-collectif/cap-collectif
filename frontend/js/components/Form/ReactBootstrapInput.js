@@ -12,6 +12,7 @@ import DateTime, {
   type TimeConstraintsProps,
 } from './DateTime';
 import Editor from './Editor';
+import EditorDs from './EditorDs';
 import AdminEditor from '../AdminEditor';
 import Ranking from './Ranking/Ranking';
 import MultipleCheckbox from './MultipleCheckbox/MultipleCheckbox';
@@ -226,7 +227,22 @@ class ReactBootstrapInput extends React.Component<Props> {
       );
     }
 
-    if (type === 'admin-editor') {
+    if (type === 'editor-ds') {
+      return (
+        <React.Fragment>
+          <EditorDs
+            value={value}
+            className={wrapperClassName}
+            withCharacterCounter={withCharacterCounter}
+            maxLength={props.maxLength}
+            {...props}
+          />
+          <Notepad />
+        </React.Fragment>
+      );
+    }
+
+    if (type === 'admin-editor' || type === 'admin-editor-ds') {
       return (
         <AdminEditor
           id={props.id}
@@ -236,6 +252,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           withCharacterCounter={withCharacterCounter}
           maxLength={props.maxLength}
           selectedLanguage={selectedLanguage}
+          unstable__enableCapcoUiDs={type === 'admin-editor-ds'}
           {...props}
         />
       );

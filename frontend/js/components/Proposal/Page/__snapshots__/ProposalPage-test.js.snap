@@ -7483,7 +7483,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "842168c288bb20fa61869940be8e1a49",
+          "cacheID": "7273d6557e310700e8c58ddd080e97af",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7626,6 +7626,22 @@ fragment CommentSectionFragmented_commentable_39ngnn on Commentable {
   ...CommentForm_commentable
 }
 
+fragment CommentVoteButtonLegacy_comment_39ngnn on Comment {
+  id
+  author {
+    isViewer @include(if: $isAuthenticated)
+    id
+  }
+  votes(first: 0) {
+    totalCount
+  }
+  viewerHasVote @include(if: $isAuthenticated)
+  viewerVote @include(if: $isAuthenticated) {
+    id
+    ...UnpublishedTooltip_publishable
+  }
+}
+
 fragment CommentVoteButton_comment_39ngnn on Comment {
   id
   author {
@@ -7660,6 +7676,7 @@ fragment Comment_comment_39ngnn on Comment {
   ...CommentBody_comment
   ...CommentEdit_comment_39ngnn
   ...CommentVoteButton_comment_39ngnn
+  ...CommentVoteButtonLegacy_comment_39ngnn
   ...CommentReportButton_comment_39ngnn
   ...CommentForm_commentable
 }

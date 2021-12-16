@@ -4,14 +4,9 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { NavItem } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import { Button, Box, Flex, Card, Text, Icon, CapUIIcon } from '@cap-collectif/ui';
 import colors from '~/utils/colors';
-import AppBox from '~ui/Primitives/AppBox';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Card from '~ds/Card/Card';
 import NewsCard from '~/components/Ui/News/NewsCard';
-import Text from '~ui/Primitives/Text';
-import Button from '~ds/Button/Button';
 import type { ProposalPageNews_proposal } from '~relay/ProposalPageNews_proposal.graphql';
 import {
   Card as LegacyCard,
@@ -74,13 +69,13 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
         <Flex>
           <CategoryTitle>
             <CategoryCircledIcon paddingLeft={9}>
-              <Icon name={ICON_NAME.newspaper} size={20} color={colors.secondaryGray} />
+              <Icon name={CapUIIcon.Newspaper} size={20} color={colors.secondaryGray} />
             </CategoryCircledIcon>
             <h3>
               <FormattedMessage id={checkNews ? 'menu.news' : 'proposal.admin.news'} />
             </h3>
           </CategoryTitle>
-          <AppBox>
+          <Box>
             {checkNews && proposal.isProposalAuthorAllowedToAddNews && viewerIsAuthor && (
               <>
                 <Button
@@ -95,7 +90,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
                 </Button>
               </>
             )}
-          </AppBox>
+          </Box>
         </Flex>
         <NewsCardHolder>
           {news && news.length > 0 ? (
@@ -104,7 +99,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
               {news && news.length > 1 && <NewsCard post={news[1] || null} />}
               {news && news.length > 2 && (
                 <NavItem eventKey="blog" onClick={goToBlog}>
-                  <Icon name={ICON_NAME.plus} size={16} color="currentColor" />
+                  <Icon name={CapUIIcon.Add} size={16} color="currentColor" />
                   <FormattedMessage id="global.more" />
                 </NavItem>
               )}
@@ -125,7 +120,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
                 height="100%"
                 pt={70}
                 pb={91}>
-                <Icon name={ICON_NAME.newspaper2} size={40} color="#BEC4CB" />
+                <Icon name={CapUIIcon.Newspaper} size={40} color="#BEC4CB" />
                 <h4 color="gray.900">
                   <FormattedMessage id="add-proposal-news" />
                 </h4>

@@ -11,7 +11,7 @@ type Props = {
   proposal: ProposalPageComments_proposal,
   className: string,
   isAuthenticated: boolean,
-  newDesign?: boolean,
+  unstable__enableCapcoUiDs?: boolean,
 };
 
 class ProposalPageComments extends React.Component<Props> {
@@ -20,10 +20,10 @@ class ProposalPageComments extends React.Component<Props> {
   };
 
   render() {
-    const { className, proposal, isAuthenticated, newDesign } = this.props;
+    const { className, proposal, isAuthenticated, unstable__enableCapcoUiDs } = this.props;
     if (!proposal) return null;
     const classes = {
-      proposal__comments: !newDesign,
+      proposal__comments: !unstable__enableCapcoUiDs,
       [className]: true,
     };
 
@@ -34,7 +34,7 @@ class ProposalPageComments extends React.Component<Props> {
             isAuthenticated={isAuthenticated}
             commentable={proposal}
             useBodyColor
-            newDesign={newDesign}
+            unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
           />
         )}
       </div>

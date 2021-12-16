@@ -50,7 +50,7 @@ exports[`<ProposalNewsForm /> should render correctly 1`] = `
       />
     }
     name="body"
-    type="editor"
+    type="editor-ds"
   />
   <Field
     component={[Function]}
@@ -117,7 +117,7 @@ exports[`<ProposalNewsForm /> should render correctly with post 1`] = `
       />
     }
     name="body"
-    type="editor"
+    type="editor-ds"
   />
   <Field
     component={[Function]}

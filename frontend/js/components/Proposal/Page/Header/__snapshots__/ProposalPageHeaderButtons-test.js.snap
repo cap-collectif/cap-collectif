@@ -2,33 +2,6 @@
 
 exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
 <ProposalPageHeaderButtons__Buttons>
-  <Relay(Connect(injectIntl(ProposalEditModal)))
-    onClose={[Function]}
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "author": Object {
-          "displayName": "flex",
-          "id": "authorid",
-          "slug": "metal",
-        },
-        "contribuable": true,
-        "form": Object {
-          "canContact": true,
-          "contribuable": true,
-        },
-        "id": "proposalId",
-        "pendingRevisions": Object {
-          "totalCount": 0,
-        },
-        "publicationStatus": "PUBLISHED",
-        "title": "OEEEEE",
-        "url": "/slash",
-      }
-    }
-    show={false}
-  />
   <Relay(Connect(ProposalDeleteModal))
     proposal={
       Object {

@@ -139,7 +139,7 @@ export const ProposalAssessmentFormPanel = ({
           )}
 
           <Field
-            type="editor"
+            type="editor-ds"
             name="officialResponse"
             id="proposalAssessment-officialResponse"
             label={<FormattedMessage id="official.reply.draft" />}
@@ -195,7 +195,7 @@ export const ProposalAssessmentFormPanel = ({
             <FormattedMessage id="validate" />
           </ValidateButton>
           {proposalRevisionsEnabled && (
-            <ProposalRevision proposal={proposal}>
+            <ProposalRevision proposal={proposal} unstable__enableCapcoUiDs>
               {openModal => (
                 <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
                   <FormattedMessage id="request.author.review" />

@@ -32,7 +32,7 @@ export const ProposalPageDiscussions = ({ proposal }: Props) => {
           </h3>
         </CategoryTitle>
         {proposal?.publicationStatus !== 'DRAFT' && (
-          <ProposalPageComments proposal={proposal} newDesign />
+          <ProposalPageComments proposal={proposal} unstable__enableCapcoUiDs />
         )}
       </CategoryContainer>
     </Card>

@@ -7,10 +7,13 @@ const ProposalPage = lazy(() =>
   import(/* webpackChunkName: "ProposalPage" */ '~/components/Proposal/Page/ProposalPage'),
 );
 
-export default (props: Props) => (
-  <Suspense fallback={null}>
-    <Providers>
-      <ProposalPage {...props} />
-    </Providers>
-  </Suspense>
-);
+export default (props: Props) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px';
+  return (
+    <Suspense fallback={null}>
+      <Providers designSystem resetCSS={false}>
+        <ProposalPage {...props} />
+      </Providers>
+    </Suspense>
+  );
+};

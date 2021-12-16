@@ -153,7 +153,7 @@ export const ProposalDecisionFormPanel = ({
               ariaControls="EventListFilters-filter-author-listbox"
             />
             <Field
-              type="editor"
+              type="editor-ds"
               name="body"
               id="proposalDecision-body"
               label={<FormattedMessage id="global.contenu" />}
@@ -245,7 +245,7 @@ export const ProposalDecisionFormPanel = ({
             <FormattedMessage id="validate" />
           </ValidateButton>
           {proposalRevisionsEnabled && (
-            <ProposalRevision proposal={proposal}>
+            <ProposalRevision proposal={proposal} unstable__enableCapcoUiDs>
               {openModal => (
                 <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
                   <FormattedMessage id="request.author.review" />

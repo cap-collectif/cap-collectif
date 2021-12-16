@@ -2,9 +2,10 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
+import { InfoMessage } from '@cap-collectif/ui';
+// Waiting for flow type on DS
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import type { ProposalDraftAlert_proposal } from '~relay/ProposalDraftAlert_proposal.graphql';
-import InfoMessage from '~ds/InfoMessage/InfoMessage';
 
 type Props = {|
   ...AppBoxProps,

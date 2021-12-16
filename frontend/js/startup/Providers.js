@@ -7,6 +7,7 @@ import { AnalyticsProvider } from 'use-analytics';
 import { Provider as ReduxProvider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import { RelayEnvironmentProvider } from 'react-relay';
+import { CapUIProvider } from '@cap-collectif/ui';
 import IntlProvider from './IntlProvider';
 import { theme } from '~/styles/theme';
 import { analytics } from './analytics';
@@ -16,9 +17,14 @@ if (typeof window !== 'undefined' && window.sentryDsn) {
   Sentry.init({ dsn: window.sentryDsn });
 }
 
-type Props = {| children: React.Node, unstable__AdminNextstore?: Object |};
+type Props = {|
+  children: React.Node,
+  unstable__AdminNextstore?: Object,
+  designSystem?: boolean,
+  resetCSS?: boolean,
+|};
 
-const Providers = ({ children, unstable__AdminNextstore }: Props) => {
+const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS }: Props) => {
   const store = unstable__AdminNextstore ?? ReactOnRails.getStore('appStore');
   analytics.ready(() => {
     const state = store && store.getState();
@@ -47,15 +53,19 @@ const Providers = ({ children, unstable__AdminNextstore }: Props) => {
       }
     });
   }
+  const Theme = designSystem ? CapUIProvider : ThemeProvider;
 
   return (
     <ReduxProvider store={store}>
       <IntlProvider timeZone={timeZone}>
         <RelayEnvironmentProvider environment={environment}>
           <AnalyticsProvider instance={analytics}>
-            <ThemeProvider theme={theme}>
+            {/** $FlowFixMe resetCSS props is only temporary */}
+            <Theme
+              theme={designSystem ? undefined : theme}
+              resetCSS={designSystem ? resetCSS : undefined}>
               <MotionConfig features={[AnimationFeature, ExitFeature]}>{children}</MotionConfig>
-            </ThemeProvider>
+            </Theme>
           </AnalyticsProvider>
         </RelayEnvironmentProvider>
       </IntlProvider>
