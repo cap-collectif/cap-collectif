@@ -6,16 +6,16 @@ const transactionsMap = {};
 
 const relayTransactionLogger = (event: LogEvent) => {
   if (event.name === 'network.start') {
-    const { transactionID, variables } = event;
+    const { networkRequestId, variables } = event;
     const { name } = event.params;
 
-    const idName = `[${transactionID}] Relay Modern: ${name}`;
-    transactionsMap[transactionID] = { idName, name, variables };
+    const idName = `[${networkRequestId}] Relay Modern: ${name}`;
+    transactionsMap[networkRequestId] = { idName, name, variables };
 
     console.time(idName);
   } else if (event.name === 'network.error') {
-    const { transactionID, error } = event;
-    const { idName, name, variables } = transactionsMap[transactionID];
+    const { networkRequestId, error } = event;
+    const { idName, name, variables } = transactionsMap[networkRequestId];
 
     console.groupCollapsed(`%c${idName}`, 'color:red');
     console.timeEnd(idName);
@@ -26,8 +26,8 @@ const relayTransactionLogger = (event: LogEvent) => {
     }
     console.groupEnd();
   } else if (event.name === 'network.next') {
-    const { transactionID, response } = event;
-    const { idName, name, variables } = transactionsMap[transactionID];
+    const { networkRequestId, response } = event;
+    const { idName, name, variables } = transactionsMap[networkRequestId];
 
     console.groupCollapsed(`${idName}`);
     console.timeEnd(idName);

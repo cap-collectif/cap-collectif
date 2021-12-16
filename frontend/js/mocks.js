@@ -120,6 +120,8 @@ const environment = {
   getVariablesFromObject: jest.fn(),
   getVariablesFromPluralFragment: jest.fn(),
   requiredFieldLogger: jest.fn(),
+  revertUpdate: jest.fn(),
+  replaceUpdate: jest.fn(),
 };
 
 export const relayPaginationMock: RelayPaginationProp = {
@@ -138,6 +140,5 @@ export const relayRefetchMock: RelayRefetchProp = {
 export const googleAddressMock = {
   lat: 43.6424564,
   lng: -79.3755156,
-  json:
-    '[{"formatted_address":"10 Yonge St, Toronto, ON M5E 1R4, Canada","geometry":{"location":{"lat":43.6424564,"lng":-79.3755156},"location_type":"ROOFTOP","viewport":{"south":43.6411074197085,"west":-79.37686458029151,"north":43.6438053802915,"east":-79.37416661970849}},"types":["street_address"],"address_components":[{"long_name":"10","short_name":"10","types":["street_number"]},{"long_name":"Yonge Street","short_name":"Yonge St","types":["route"]},{"long_name":"Old Toronto","short_name":"Old Toronto","types":["political","sublocality","sublocality_level_1"]},{"long_name":"Toronto","short_name":"Toronto","types":["locality","political"]},{"long_name":"Toronto Division","short_name":"Toronto Division","types":["administrative_area_level_2","political"]},{"long_name":"Ontario","short_name":"ON","types":["administrative_area_level_1","political"]},{"long_name":"Canada","short_name":"CA","types":["country","political"]},{"long_name":"M5E 1R4","short_name":"M5E 1R4","types":["postal_code"]}],"place_id":"ChIJrbgtxSvL1IkR2xGe7JZyuw0","plus_code":{"compound_code":"JJRF+XQ Toronto, ON, Canada","global_code":"87M2JJRF+XQ"}}]',
+  json: '[{"formatted_address":"10 Yonge St, Toronto, ON M5E 1R4, Canada","geometry":{"location":{"lat":43.6424564,"lng":-79.3755156},"location_type":"ROOFTOP","viewport":{"south":43.6411074197085,"west":-79.37686458029151,"north":43.6438053802915,"east":-79.37416661970849}},"types":["street_address"],"address_components":[{"long_name":"10","short_name":"10","types":["street_number"]},{"long_name":"Yonge Street","short_name":"Yonge St","types":["route"]},{"long_name":"Old Toronto","short_name":"Old Toronto","types":["political","sublocality","sublocality_level_1"]},{"long_name":"Toronto","short_name":"Toronto","types":["locality","political"]},{"long_name":"Toronto Division","short_name":"Toronto Division","types":["administrative_area_level_2","political"]},{"long_name":"Ontario","short_name":"ON","types":["administrative_area_level_1","political"]},{"long_name":"Canada","short_name":"CA","types":["country","political"]},{"long_name":"M5E 1R4","short_name":"M5E 1R4","types":["postal_code"]}],"place_id":"ChIJrbgtxSvL1IkR2xGe7JZyuw0","plus_code":{"compound_code":"JJRF+XQ Toronto, ON, Canada","global_code":"87M2JJRF+XQ"}}]',
 };

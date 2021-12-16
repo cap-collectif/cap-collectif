@@ -37,6 +37,13 @@ unnecessary-optional-chain=off
 .*/node_modules/relay-runtime/store/RelayModernQueryExecutor.js.flow
 .*/node_modules/relay-runtime/store/RelayReferenceMarker.js.flow
 .*/node_modules/relay-runtime/util/createPayloadFor3DField.js.flow
+.*/node_modules/relay-runtime/util/getFragmentIdentifier.js.flow
+.*/node_modules/relay-runtime/store/RelayResponseNormalizer.js.flow
+.*/node_modules/relay-runtime/network/RelayQueryResponseCache.js.flow
+.*/node_modules/relay-runtime/mutations/RelayRecordProxy.js.flow
+.*/node_modules/relay-test-utils/RelayMockPayloadGenerator.js.flow
+.*/node_modules/relay-runtime/handlers/connection/ConnectionHandler.js.flow
+.*/node_modules/relay-runtime/store/RelayStoreUtils.js.flow
 
 [ignore]
 ; ignore module source to prefer libdef

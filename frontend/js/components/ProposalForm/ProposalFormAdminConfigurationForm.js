@@ -353,14 +353,18 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       delete question.importedResponses;
     }
   });
+  const {
+    id,
+    __id,
+    __fragmentOwner,
+    __fragments,
+    viewEnabled,
+    address,
+    __isWithinUnmatchedTypeRefinement,
+    ...rest
+  } = values;
   const input = {
-    ...values,
-    id: undefined,
-    __id: undefined,
-    __fragmentOwner: undefined,
-    __fragments: undefined,
-    viewEnabled: undefined,
-    address: undefined,
+    ...rest,
     usingTipsmeee: features.unstable__tipsmeee ? values.usingTipsmeee : undefined,
     tipsmeeeHelpText: features.unstable__tipsmeee ? values.tipsmeeeHelpText : undefined,
     proposalFormId: props.proposalForm.id,
