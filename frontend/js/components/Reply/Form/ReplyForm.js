@@ -118,11 +118,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
     if (isAnonymousReply) {
       const hashedToken = CookieMonster.getHashedAnonymousReplyCookie(questionnaire.id, reply.id);
       if (!hashedToken) return;
+      data.participantEmail = values.participantEmail;
 
       return UpdateAnonymousReplyMutation.commit({
         input: {
           hashedToken,
           responses: data.responses,
+          participantEmail: data.participantEmail
         },
       })
         .then(() => {
@@ -289,7 +291,7 @@ export class ReplyForm extends React.Component<Props, State> {
     super();
     this.state = {
       captcha: {
-        visible: false,
+        visible: true,
         value: null,
       },
     };
@@ -299,13 +301,8 @@ export class ReplyForm extends React.Component<Props, State> {
     reply: null,
   };
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    const { dirty, setIsEditingReplyForm, dispatch, reply, questionnaire, form } = this.props;
-    const { captcha } = this.state;
-
-    if (prevState.captcha.value === null && captcha.value !== null) {
-      this.submitReply(reply, questionnaire, form, dispatch);
-    }
+  componentDidUpdate(prevProps: Props) {
+    const { dirty, setIsEditingReplyForm } = this.props;
 
     if (prevProps.dirty === false && dirty === true) {
       window.addEventListener('beforeunload', onUnload);
@@ -393,6 +390,15 @@ export class ReplyForm extends React.Component<Props, State> {
     const stepHasRequirement =
       questionnaire.step?.requirements && questionnaire.step.requirements.totalCount > 0;
 
+    const disabledSubmitBtn = () => {
+      const isDisabled =
+        invalidRequirements || invalid || submitting || disabled || (!isDraft && pristine);
+      if (!isAuthenticated && !reply) {
+        return isDisabled || !this.state.captcha.value;
+      }
+      return isDisabled;
+    };
+
     return (
       <ReplyFormContainer id="reply-form-container">
         {questionnaire.description && <Description>{questionnaire.description}</Description>}
@@ -433,12 +439,12 @@ export class ReplyForm extends React.Component<Props, State> {
             memoize={memoizeAvailableQuestions}
           />
 
-          {!reply?.id && !isAuthenticated && questionnaire.step?.collectParticipantsEmail && (
+          {!isAuthenticated && questionnaire.step?.collectParticipantsEmail && (
             <ParticipantEmailWrapper mb={4}>
-              <Text fontSize="20px" color="gray.900" fontWeight={600}>
+              <Text fontSize="20px" color="gray.900" fontWeight={600} fontFamily="inherit">
                 {intl.formatMessage({ id: 'your-email-address' })}
               </Text>
-              <Text fontSize={2} color="gray.800">
+              <Text color="gray.800" fontFamily="inherit">
                 {intl.formatMessage(
                   { id: 'anonymous.questionnaire.collect.email.help' },
                   { platform: platformName },
@@ -450,7 +456,7 @@ export class ReplyForm extends React.Component<Props, State> {
                 helpPrint={false}
                 component={renderComponent}
               />
-              <Text color="neutral.gray.700">
+              <Text color="neutral.gray.700" fontFamily="inherit">
                 {intl.formatMessage(
                   { id: 'information-for-the-newsletter-registration-form' },
                   {
@@ -477,7 +483,7 @@ export class ReplyForm extends React.Component<Props, State> {
             </>
           )}
 
-          {this.state.captcha.visible && (
+          {this.state.captcha.visible && !isAuthenticated && !reply && (
             <Flex direction="column" align="center">
               <Text
                 css={css({
@@ -518,21 +524,13 @@ export class ReplyForm extends React.Component<Props, State> {
                 />
               )}
               <SubmitButton
-                type="button"
+                type="submit"
                 id={`${form}-submit-create-reply`}
                 bsStyle="info"
-                disabled={
-                  invalidRequirements || invalid || submitting || disabled || (!isDraft && pristine)
-                }
+                disabled={disabledSubmitBtn()}
                 label={submitting ? 'global.loading' : 'global.send'}
                 onSubmit={() => {
-                  if (!reply?.id && !isAuthenticated && this.state.captcha.value === null) {
-                    this.setState(state => ({
-                      captcha: { ...state.captcha, visible: true },
-                    }));
-                  } else {
-                    this.submitReply(reply, questionnaire, form, dispatch);
-                  }
+                  this.submitReply(reply, questionnaire, form, dispatch);
                 }}
               />
             </div>
@@ -571,7 +569,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
       responses: defaultResponses,
       draft: reply ? reply.draft : true,
       private: reply ? reply.private : false,
-      participantEmail: null,
+      participantEmail: reply ? reply.participantEmail : null,
     },
     user: state.user.user,
     isAuthenticated: !!state.user.user,
@@ -598,12 +596,15 @@ const containerWithRouter = withRouter(container);
 export default createFragmentContainer(containerWithRouter, {
   reply: graphql`
     fragment ReplyForm_reply on Reply
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       ... on UserReply {
         draft
         private
         viewerCanUpdate
+      }
+      ... on AnonymousReply {
+        participantEmail
       }
       responses {
         ...responsesHelper_response @relay(mask: false)
@@ -612,7 +613,7 @@ export default createFragmentContainer(containerWithRouter, {
   `,
   questionnaire: graphql`
     fragment ReplyForm_questionnaire on Questionnaire
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       anonymousAllowed
       description

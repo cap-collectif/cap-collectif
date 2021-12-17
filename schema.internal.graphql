@@ -13871,6 +13871,9 @@ input UpdateAnonymousReplyInput {
 
   """The responses to the questionnaire questions"""
   responses: [ResponseInput!]!
+
+  """The participant email"""
+  participantEmail: Email
   clientMutationId: String
 }
 

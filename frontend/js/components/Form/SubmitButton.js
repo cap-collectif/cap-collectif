@@ -21,7 +21,6 @@ type Props = {
   loginOverlay: boolean,
   user?: User,
   children?: any,
-  type: string
 };
 
 class SubmitButton extends React.Component<Props> {
@@ -33,7 +32,6 @@ class SubmitButton extends React.Component<Props> {
     style: {},
     disabled: false,
     loginOverlay: false,
-    type: 'submit'
   };
 
   onClick = () => {
@@ -58,13 +56,11 @@ class SubmitButton extends React.Component<Props> {
       style,
       children,
       loading,
-      type
     } = this.props;
     return (
       <LoginOverlay enabled={loginOverlay}>
         <button
-          /* eslint-disable-next-line react/button-has-type */
-          type={type}
+          type="submit"
           id={id}
           disabled={isSubmitting || disabled}
           onClick={this.onClick}

@@ -41,8 +41,11 @@ export const QuestionnaireContainer: StyledComponent<{}, {}, HTMLDivElement> = s
 export const QuestionnairePage = ({ questionnaire, query }: Props) => {
   const [isShow, setIsShow] = useState(false);
 
-  const hasAnonymousReplies = query?.anonymousReplies ? query.anonymousReplies.filter(Boolean).length > 0 : false;
-  const hasViewerReplies = questionnaire?.viewerReplies && questionnaire.viewerReplies.totalCount > 0;
+  const hasAnonymousReplies = query?.anonymousReplies
+    ? query.anonymousReplies.filter(Boolean).length > 0
+    : false;
+  const hasViewerReplies =
+    questionnaire?.viewerReplies && questionnaire.viewerReplies.totalCount > 0;
   const hasReplies = hasAnonymousReplies || hasViewerReplies;
 
   const showAnswerOnceText = !questionnaire?.multipleRepliesAllowed && hasReplies;

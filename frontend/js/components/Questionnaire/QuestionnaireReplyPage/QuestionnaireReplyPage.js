@@ -113,12 +113,7 @@ export const QuestionnaireReplyPage = ({
         onClick={() => (isEditingReplyForm ? onOpen : history.replace('/'))}
         className="btn-goBack">
         <Icon name={ICON_NAME.chevronLeft} size={10} />
-        <FormattedMessage
-          id="reply.show.title"
-          values={{
-            num: questionnaire.viewerReplies ? questionnaire.viewerReplies.totalCount : 0,
-          }}
-        />
+        <FormattedMessage id="global.back" />
       </button>
 
       <p className="date-reply">

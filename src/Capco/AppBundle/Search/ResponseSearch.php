@@ -35,6 +35,15 @@ class ResponseSearch extends Search
         bool $withNotConfirmedUser = false
     ): int {
         $boolQuery = $this->getNoEmptyResultQueryBuilder($question, $withNotConfirmedUser);
+
+        // we are applying the same filters as getResponsesByQuestion to avoid counting participant that does not reply to optionnal question
+        $boolQuery->addFilter(
+            (new BoolQuery())->addShould([
+                (new BoolQuery())->addFilter(new Exists('objectValue.labels')),
+                (new BoolQuery())->addFilter(new Exists('objectValue.other')),
+                (new BoolQuery())->addFilter(new Exists('textValue')),
+            ])
+        );
         $query = new Query($boolQuery);
         $query
             ->setSource(['id'])

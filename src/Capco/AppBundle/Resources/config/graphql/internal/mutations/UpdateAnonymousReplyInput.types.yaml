@@ -9,3 +9,6 @@ UpdateAnonymousReplyInput:
             responses:
                 type: '[ResponseInput!]!'
                 description: 'The responses to the questionnaire questions'
+            participantEmail:
+                type: 'Email'
+                description: 'The participant email'
