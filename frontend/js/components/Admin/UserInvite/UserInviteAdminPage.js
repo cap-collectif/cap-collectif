@@ -37,9 +37,7 @@ export const UserInviteAdminPageQuery: GraphQLTaggedNode = graphql`
       totalCount
     }
     ...UserInviteList_query @arguments(first: $first, cursor: $cursor, term: $term, status: $status)
-    groups {
-      ...UserInviteAdminPageHeader_groups
-    }
+    ...UserInviteAdminPageHeader_query
   }
 `;
 
@@ -101,7 +99,7 @@ const UserInviteAdminPage = ({ queryReference }: Props): React.Node => {
         bg="white"
         borderRadius="normal"
         overflow="hidden">
-        <UserInviteAdminPageHeader groups={query.groups} term={term} setTerm={setTerm} />
+        <UserInviteAdminPageHeader query={query} term={term} setTerm={setTerm} />
         <React.Suspense fallback={<TablePlaceholder rowsCount={8} columnsCount={4} />}>
           <UserInviteList query={query} status={status} setStatus={setStatus} term={term} />
         </React.Suspense>

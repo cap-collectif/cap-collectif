@@ -86,23 +86,37 @@ class UserRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
-    public function countUsersInGroup(Group $group): int
+    public function countUsersInGroup(Group $group, ?bool $consentInternalCommunication = null): int
     {
         $qb = $this->createQueryBuilder('u');
         $qb->select('COUNT(u.id)')
             ->innerJoin('u.userGroups', 'ug')
             ->andWhere('ug.group = :group')
             ->setParameter('group', $group);
+        if (null !== $consentInternalCommunication) {
+            $qb->andWhere(
+                'u.consentInternalCommunication = :consentInternalCommunication'
+            )->setParameter('consentInternalCommunication', $consentInternalCommunication);
+        }
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getUsersInGroup(Group $group, int $offset = 0, int $limit = 1000): array
-    {
+    public function getUsersInGroup(
+        Group $group,
+        int $offset = 0,
+        int $limit = 1000,
+        ?bool $consentInternalCommunication = null
+    ): array {
         $qb = $this->createQueryBuilder('u');
         $qb->innerJoin('u.userGroups', 'ug')
             ->andWhere('ug.group = :group')
             ->setParameter('group', $group);
+        if (null !== $consentInternalCommunication) {
+            $qb->andWhere(
+                'u.consentInternalCommunication = :consentInternalCommunication'
+            )->setParameter('consentInternalCommunication', $consentInternalCommunication);
+        }
         $qb->setFirstResult($offset)->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();

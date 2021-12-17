@@ -6109,6 +6109,12 @@ type Group implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
+
+    """Filter the list by email confirmation"""
+    emailConfirmed: Boolean = null
+
+    """Filter the list by consent to internal communication"""
+    consentInternalCommunication: Boolean = null
   ): UserConnection!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -10633,7 +10639,15 @@ type Query {
   ): [Consultation!]!
 
   """Lookup groups."""
-  groups: [Group!]!
+  groups(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): GroupConnection!
 
   """Lookup forms."""
   proposalForms: [ProposalForm]!

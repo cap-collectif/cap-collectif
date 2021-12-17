@@ -41,18 +41,25 @@ type Props = {|
 export const getGroups = graphql`
   query ProjectAccessAdminFormGroupsQuery {
     groups {
-      id
-      title
+      edges {
+        node {
+          id
+          title
+        }
+      }
     }
   }
 `;
 
 export const loadGroupOptions = (initialGroups: ?Array<{| label: string, value: string |}>) => {
   return fetchQuery_DEPRECATED(environment, getGroups, {}).then(data => {
-    const groups = data.groups.map(c => ({
-      value: c.id,
-      label: c.title,
-    }));
+    const groups = data.groups?.edges
+      ?.map(edge => edge.node)
+      .filter(Boolean)
+      .map(g => ({
+        value: g.id,
+        label: g.title,
+      }));
     if (initialGroups?.length)
       initialGroups.forEach(consultation => {
         if (!groups.some(c => c.value === consultation.value)) groups.push(consultation);

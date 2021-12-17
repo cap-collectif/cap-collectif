@@ -9,27 +9,33 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import Select from '~/components/Form/Select';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
-import type { UserInviteModalStepsChooseRole_groups$key } from '~relay/UserInviteModalStepsChooseRole_groups.graphql';
+import type { UserInviteModalStepsChooseRole_query$key } from '~relay/UserInviteModalStepsChooseRole_query.graphql';
 import component from '~/components/Form/Field';
 import { type Step } from '~/components/DesignSystem/ModalSteps/ModalSteps.context';
 import type { GlobalState } from '~/types';
 
 const FRAGMENT = graphql`
-  fragment UserInviteModalStepsChooseRole_groups on Group @relay(plural: true) {
-    id
-    title
+  fragment UserInviteModalStepsChooseRole_query on Query {
+    groups {
+      edges {
+        node {
+          id
+          title
+        }
+      }
+    }
   }
 `;
 
 type Props = {|
   ...Step,
-  +groups: UserInviteModalStepsChooseRole_groups$key,
+  +query: UserInviteModalStepsChooseRole_query$key,
 |};
 
-export const UserInviteModalStepsChooseRole = ({ groups: groupsFragment }: Props): React.Node => {
+export const UserInviteModalStepsChooseRole = ({ query: queryFragment }: Props): React.Node => {
   const intl = useIntl();
   const hasProjectAdminFeature = useFeatureFlag('unstable_project_admin');
-  const groupsData = useFragment(FRAGMENT, groupsFragment);
+  const groupsData = useFragment(FRAGMENT, queryFragment);
   const message = useSelector((state: GlobalState) =>
     formValueSelector('form-user-invitation')(state, 'message'),
   );
@@ -60,9 +66,18 @@ export const UserInviteModalStepsChooseRole = ({ groups: groupsFragment }: Props
       <Field
         name="groups"
         component={Select}
-        options={groupsData.map(({ id, title }) => {
-          return { value: id, label: title };
-        })}
+        options={
+          groupsData?.groups?.edges
+            ? groupsData.groups.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map(g => ({
+                  value: g.id,
+                  label: g.title,
+                }))
+            : []
+        }
         multi
       />
       <Flex direction="row">

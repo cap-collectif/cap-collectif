@@ -12,8 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class UserGroupsResolver implements ResolverInterface
 {
-    protected $userGroupRepo;
-    protected $groupRepo;
+    protected UserGroupRepository $userGroupRepo;
+    protected GroupRepository $groupRepo;
 
     public function __construct(UserGroupRepository $userGroupRepo, GroupRepository $groupRepo)
     {

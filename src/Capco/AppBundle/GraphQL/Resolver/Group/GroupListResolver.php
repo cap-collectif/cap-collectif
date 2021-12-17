@@ -3,19 +3,28 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Group;
 
 use Capco\AppBundle\Repository\GroupRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class GroupListResolver implements ResolverInterface
 {
-    private $groupRepository;
+    private GroupRepository $groupRepository;
 
     public function __construct(GroupRepository $groupRepository)
     {
         $this->groupRepository = $groupRepository;
     }
 
-    public function __invoke(): array
+    public function __invoke(Argument $args): Connection
     {
-        return $this->groupRepository->findAll();
+        $paginator = new Paginator(function () {
+            return $this->groupRepository->findAll();
+        });
+
+        $totalCount = $this->groupRepository->countAll();
+
+        return $paginator->auto($args, $totalCount);
     }
 }

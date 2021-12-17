@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
 class GroupUsersResolver implements ResolverInterface
 {
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
@@ -23,12 +23,23 @@ class GroupUsersResolver implements ResolverInterface
         if (!$args) {
             $args = new Argument(['first' => 100]);
         }
-
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($group) {
-            return $this->userRepository->getUsersInGroup($group, $offset, $limit);
+        $consentInternalCommunication = $args['consentInternalCommunication'];
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+            $group,
+            $consentInternalCommunication
+        ) {
+            return $this->userRepository->getUsersInGroup(
+                $group,
+                $offset,
+                $limit,
+                $consentInternalCommunication
+            );
         });
 
-        $totalCount = $this->userRepository->countUsersInGroup($group);
+        $totalCount = $this->userRepository->countUsersInGroup(
+            $group,
+            $consentInternalCommunication
+        );
 
         return $paginator->auto($args, $totalCount);
     }

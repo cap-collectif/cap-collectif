@@ -10,6 +10,7 @@ use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\AppBundle\Repository\UserGroupRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -293,6 +294,10 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container->get(ProposalRevisionRepository::class)->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get(UserGroupRepository::class)->find($uuid);
         }
 
         // TODO remove me.

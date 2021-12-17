@@ -18,6 +18,15 @@ Group:
             users:
                 type: 'InternalUserConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    emailConfirmed:
+                        type: 'Boolean'
+                        defaultValue: null
+                        description: 'Filter the list by email confirmation'
+                    consentInternalCommunication:
+                        type: 'Boolean'
+                        defaultValue: null
+                        description: 'Filter the list by consent to internal communication'
                 description: 'Get all users of the group.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupUsersResolver", [value, args])'
             createdAt:

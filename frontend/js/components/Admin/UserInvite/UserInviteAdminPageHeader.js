@@ -5,31 +5,27 @@ import { graphql, useFragment } from 'react-relay';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Input from '~ui/Form/Input/Input';
 import ModalStepsUserInvitation from '~/components/Admin/UserInvite/Modal/UserInviteModalSteps';
-import type { UserInviteAdminPageHeader_groups$key } from '~relay/UserInviteAdminPageHeader_groups.graphql';
+import type { UserInviteAdminPageHeader_query$key } from '~relay/UserInviteAdminPageHeader_query.graphql';
 
 type Props = {|
-  +groups: UserInviteAdminPageHeader_groups$key,
+  +query: UserInviteAdminPageHeader_query$key,
   +term: string,
   +setTerm: (term: string) => void,
 |};
 
 const FRAGMENT = graphql`
-  fragment UserInviteAdminPageHeader_groups on Group @relay(plural: true) {
-    ...UserInviteModalSteps_groups
+  fragment UserInviteAdminPageHeader_query on Query {
+    ...UserInviteModalSteps_query
   }
 `;
 
-const UserInviteAdminPageHeader = ({
-  groups: groupsFragment,
-  term,
-  setTerm,
-}: Props): React.Node => {
+const UserInviteAdminPageHeader = ({ query: queryFragment, term, setTerm }: Props): React.Node => {
   const intl = useIntl();
-  const groups = useFragment(FRAGMENT, groupsFragment);
+  const query = useFragment(FRAGMENT, queryFragment);
 
   return (
     <Flex direction="row" spacing={4}>
-      <ModalStepsUserInvitation groups={groups} intl={intl} />
+      <ModalStepsUserInvitation query={query} intl={intl} />
       <Input
         type="text"
         name="term"

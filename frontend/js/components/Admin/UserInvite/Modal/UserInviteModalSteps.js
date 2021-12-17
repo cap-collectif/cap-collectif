@@ -11,7 +11,7 @@ import type { Dispatch, GlobalState } from '~/types';
 import UserInviteModalStepsChooseUsers from '~/components/Admin/UserInvite/Modal/UserInviteModalStepsChooseUsers';
 import UserInviteModalStepsChooseRole from '~/components/Admin/UserInvite/Modal/UserInviteModalStepsChooseRole';
 import UserInviteModalStepsSendingConfirmation from '~/components/Admin/UserInvite/Modal/UserInviteModalStepsSendingConfirmation';
-import type { UserInviteModalSteps_groups$key } from '~relay/UserInviteModalSteps_groups.graphql';
+import type { UserInviteModalSteps_query$key } from '~relay/UserInviteModalSteps_query.graphql';
 import InviteUserMutation, { INVITE_USERS_MAX_RESULTS } from '~/mutations/InviteUserMutation';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import { toast } from '~ds/Toast';
@@ -129,13 +129,13 @@ const asyncValidate = (values: { inputEmails: string, redirectionUrl: string }) 
 };
 
 const FRAGMENT = graphql`
-  fragment UserInviteModalSteps_groups on Group @relay(plural: true) {
-    ...UserInviteModalStepsChooseRole_groups
+  fragment UserInviteModalSteps_query on Query {
+    ...UserInviteModalStepsChooseRole_query
   }
 `;
 
 type BeforeProps = {|
-  +groups: UserInviteModalSteps_groups$key,
+  +query: UserInviteModalSteps_query$key,
   +intl: IntlShape,
 |};
 
@@ -145,12 +145,12 @@ type Props = {|
 |};
 
 export const UserInviteModalSteps = ({
-  groups: groupsFragment,
+  query: queryFragment,
   intl,
   ...props
 }: Props): React.Node => {
   const dispatch = useDispatch<Dispatch>();
-  const groups = useFragment(FRAGMENT, groupsFragment);
+  const query = useFragment(FRAGMENT, queryFragment);
   const csvEmails = useSelector((state: GlobalState) =>
     formValueSelector('form-user-invitation')(state, 'csvEmails'),
   );
@@ -189,7 +189,7 @@ export const UserInviteModalSteps = ({
               validationLabel={intl.formatMessage({ id: 'setup-invitation' })}
             />
             <UserInviteModalStepsChooseRole
-              groups={groups}
+              query={query}
               id="choose-role"
               label={intl.formatMessage({ id: 'user-invite-settings' })}
               validationLabel={intl.formatMessage({ id: 'confirm-sending-invitation' })}

@@ -57,4 +57,12 @@ class GroupRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleScalarResult();
     }
+
+    public function countAll(): int
+    {
+        return (int) $this->createQueryBuilder('g')
+            ->select('count(g.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

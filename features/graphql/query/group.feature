@@ -8,8 +8,39 @@ Scenario: GraphQL client wants to list groups
   {
     "query": "query {
       groups {
-        id
-        title
+        edges {
+          node {
+            id
+            title
+            users {
+              totalCount
+              edges {
+                node {
+                  username
+                  consentInternalCommunication
+                }
+              }
+            }
+            usersConsent: users(consentInternalCommunication: true) {
+              totalCount
+              edges {
+                node {
+                  username
+                  consentInternalCommunication
+                }
+              }
+            }
+            notConsentingUsers: users(consentInternalCommunication: false) {
+              totalCount
+              edges {
+                node {
+                  username
+                  consentInternalCommunication
+                }
+              }
+            }
+          }
+        }
       }
     }"
   }
@@ -17,14 +48,76 @@ Scenario: GraphQL client wants to list groups
   Then the JSON response should match:
   """
   {
-    "data": {
-      "groups": [
-        {
-          "id": @string@,
-          "title": @string@
-        },
-        @...@
-      ]
-    }
+     "data":{
+        "groups":{
+           "edges":[
+              {
+               "node":{
+                  "id":"group1",
+                  "title":"Super-administrateur",
+                  "users":{
+                     "totalCount":5,
+                     "edges":[
+                        {
+                           "node":{
+                              "username":"lbrunet",
+                              "consentInternalCommunication":true
+                           }
+                        },
+                        {
+                           "node":{
+                              "username":"sfavot",
+                              "consentInternalCommunication":false
+                           }
+                        },
+                        @...@
+                     ]
+                  },
+                  "usersConsent":{
+                     "totalCount":3,
+                     "edges":[
+                        {
+                           "node":{
+                              "username":"lbrunet",
+                              "consentInternalCommunication":true
+                           }
+                        },
+                        {
+                           "node":{
+                              "username":"user",
+                              "consentInternalCommunication":true
+                           }
+                        },
+                        {
+                           "node":{
+                              "username":"spyl",
+                              "consentInternalCommunication":true
+                           }
+                        }
+                     ]
+                  },
+                  "notConsentingUsers":{
+                     "totalCount":2,
+                     "edges":[
+                        {
+                           "node":{
+                              "username":"sfavot",
+                              "consentInternalCommunication":false
+                           }
+                        },
+                        {
+                           "node":{
+                              "username":"welcomattic",
+                              "consentInternalCommunication":false
+                           }
+                        }
+                     ]
+                  }
+               }
+              },
+              @...@
+           ]
+        }
+     }
   }
   """

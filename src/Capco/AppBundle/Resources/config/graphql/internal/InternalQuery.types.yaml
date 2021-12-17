@@ -239,9 +239,10 @@ InternalQuery:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", [args])'
             groups:
                 description: 'Lookup groups.'
-                type: '[Group!]!'
+                type: 'GroupConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
                 access: "@=hasRole('ROLE_PROJECT_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver")'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver", [args])'
             proposalForms:
                 description: 'Lookup forms.'
                 type: '[ProposalForm]!'
