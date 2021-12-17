@@ -15742,15 +15742,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
   """The user's identification code value"""
   userIdentificationCode: String
-
-  """The user's openidId value"""
-  openidId: String
-
-  """The analysis url if connected"""
-  analysisUrl: URI!
-
-  """The admin url if connected"""
-  adminHomeUrl: URI!
 }
 
 """A connection to a list of items."""
