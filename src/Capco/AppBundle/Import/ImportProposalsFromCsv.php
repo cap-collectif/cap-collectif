@@ -44,6 +44,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ImportProposalsFromCsv
 {
     use TranslationTrait;
+
     private ?string $projectDir;
     private ?string $filePath;
     private ?string $delimiter;
@@ -250,24 +251,26 @@ class ImportProposalsFromCsv
 
                     break;
                 case AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION:
-                    $majorityJudgementKeys = MajorityVoteTypeEnum::getI18nKeys();
-                    $csvValue = ucfirst(strtolower($row[$questionTitle]));
-                    $translationExist = $this->doesTranslationExist($csvValue);
-                    $translationsFlipped = array_flip($this->getAllTranslationKey());
-                    if (
-                        !$translationExist ||
-                        !\in_array($translationsFlipped[$csvValue], $majorityJudgementKeys)
-                    ) {
-                        $this->badData = $this->incrementBadData($this->badData, $key);
-                        $this->logger->error(
-                            sprintf(
-                                'bad data for question %s in line %d',
-                                trim($questionTitle),
-                                $key
-                            )
-                        );
+                    if (!empty($row[$questionTitle])) {
+                        $majorityJudgementKeys = MajorityVoteTypeEnum::getI18nKeys();
+                        $csvValue = ucfirst(strtolower($row[$questionTitle]));
+                        $translationExist = $this->doesTranslationExist($csvValue);
+                        $translationsFlipped = array_flip($this->getAllTranslationKey());
+                        if (
+                            !$translationExist ||
+                            !\in_array($translationsFlipped[$csvValue], $majorityJudgementKeys)
+                        ) {
+                            $this->badData = $this->incrementBadData($this->badData, $key);
+                            $this->logger->error(
+                                sprintf(
+                                    'bad data for question %s in line %d',
+                                    trim($questionTitle),
+                                    $key
+                                )
+                            );
 
-                        return false;
+                            return false;
+                        }
                     }
             }
         }
@@ -671,7 +674,9 @@ class ImportProposalsFromCsv
                     if ('number' === $question->getInputType()) {
                         $value = (float) trim($row[$questionTitle]);
                     } elseif (
-                        AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $question->getType()
+                        AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION ===
+                            $question->getType() &&
+                        !empty($row[$questionTitle])
                     ) {
                         $csvValue = ucfirst(strtolower($row[$questionTitle]));
                         $translationsFlipped = array_flip($this->getAllTranslationKey());

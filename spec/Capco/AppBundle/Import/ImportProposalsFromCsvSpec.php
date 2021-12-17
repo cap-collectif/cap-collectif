@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Import\ImportProposalsFromCsv;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
@@ -91,8 +92,27 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
         $this->checkIfCustomQuestionResponseIsValid($row, 2)->shouldReturn(true);
     }
 
-    private function intializeChoiceTest(array $row, ProposalForm $proposalForm, AbstractQuestion $question, QuestionChoice $goodChoice)
+    public function it_check_majority_question(ProposalForm $proposalForm, SimpleQuestion $question)
     {
+        $customFields = ['majority decision'];
+        $proposalForm->getQuestionByTitle('majority decision')->willReturn($question);
+        $question->setTitle('majority decision');
+        $question->getType()->willReturn(AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION);
+        $row['majority decision'] = '';
+        $this->setCustomFields($customFields);
+        $this->setProposalForm($proposalForm);
+
+        $proposalForm->getQuestions()->willReturn(new ArrayCollection([$question]));
+
+        $this->checkIfCustomQuestionResponseIsValid($row, 2)->shouldReturn(true);
+    }
+
+    private function intializeChoiceTest(
+        array $row,
+        ProposalForm $proposalForm,
+        AbstractQuestion $question,
+        QuestionChoice $goodChoice
+    ) {
         $customFields = ['question with bad choice'];
         $proposalForm->getQuestionByTitle('question with bad choice')->willReturn($question);
         $question->setTitle('question with bad choice');
