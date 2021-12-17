@@ -8,7 +8,7 @@ Scenario: Logged in admin wants to tests all admin list page
   Then I go to the admin opinion list page
   And I should not see "error.500"
 
-Scenario: Logged in admin wants to test admin dashboard
+Scenario: Logged in admin wants to access admin dashboard
   Given I am logged in as admin
   And I go to the admin dashboard page
   And I should not see "error.500"

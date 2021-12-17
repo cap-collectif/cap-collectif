@@ -1525,8 +1525,6 @@ class ApplicationContext extends UserContext
             'bo-moderation',
             'core-features',
             'consultation',
-            'bo-parameter',
-            'bo-content',
             'bo-project',
             'core-pages',
             'core-user',

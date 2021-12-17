@@ -10,6 +10,10 @@ trait AdminGeneralTait
     public function iGoToTheAdminGeneralListPage()
     {
         $this->iVisitedPage('AdminGeneralListPage');
+        $this->waitAndThrowOnFailure(
+            5000,
+            "document.body.innerHTML.toString().indexOf('admin.label.settings.global') > -1"
+        );
     }
 
     /**
