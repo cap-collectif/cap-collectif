@@ -384,3 +384,8 @@ InternalUser:
                 resolve: '@=value.getUserIdentificationCodeValue()'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 description: "The user's identification code value"
+            openidId:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+                resolve: '@=value.getOpenId()'
+                description: "The user's openidId value"

@@ -22,7 +22,6 @@ class LocaleController extends AbstractController
     private PageRepository $pageRepository;
     private RouterInterface $router;
     private SetUserDefaultLocaleMutation $userDefaultLocaleMutation;
-    private DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader;
     private TranslatorInterface $translator;
     private LoggerInterface $logger;
 
@@ -30,7 +29,6 @@ class LocaleController extends AbstractController
         LocaleRepository $localeRepository,
         PageRepository $pageRepository,
         RouterInterface $router,
-        DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader,
         SetUserDefaultLocaleMutation $userDefaultLocaleMutation,
         TranslatorInterface $translator,
         LoggerInterface $logger
@@ -39,7 +37,6 @@ class LocaleController extends AbstractController
         $this->pageRepository = $pageRepository;
         $this->router = $router;
         $this->userDefaultLocaleMutation = $userDefaultLocaleMutation;
-        $this->defaultLocaleCodeDataloader = $defaultLocaleCodeDataloader;
         $this->translator = $translator;
         $this->logger = $logger;
     }

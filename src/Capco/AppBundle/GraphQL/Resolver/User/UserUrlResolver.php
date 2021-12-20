@@ -9,7 +9,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class UserUrlResolver implements ResolverInterface
 {
-    protected $router;
+    protected RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {

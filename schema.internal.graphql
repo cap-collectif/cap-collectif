@@ -15756,6 +15756,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
   """The user's identification code value"""
   userIdentificationCode: String
+
+  """The user's openidId value"""
+  openidId: String
 }
 
 """A connection to a list of items."""
