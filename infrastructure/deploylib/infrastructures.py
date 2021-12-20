@@ -74,3 +74,10 @@ def ensure_vm_is_up():
         machine_running = run('dinghy status').stdout
         if machine_running.splitlines()[0].strip() != 'VM: running':
             run('dinghy up --no-proxy')
+    if Config.docker_for_mac:
+        docker_running = run('docker ps', warn=True)
+        if docker_running.stderr:
+            print('[Info] Launching docker for mac !' + color_white)
+            run('open /Applications/Docker.app')
+            time.sleep(5)
+            print('[Info] docker for mac should be up !' + color_white)

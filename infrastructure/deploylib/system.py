@@ -1,5 +1,4 @@
 from sys import platform as _platform
-from infrastructure.deploylib.infrastructures import ensure_vm_is_up
 from fabric import Connection, Config
 from invoke import run
 import os
@@ -8,6 +7,7 @@ import os
 color_cyan = '\033[96m'
 color_white = '\033[0m'
 color_yellow = '\033[93m'
+
 
 def linux_docker_install(force=False):
     """
@@ -77,26 +77,6 @@ def symfony_bin_install(force=False):
         print(color_yellow + 'You already have the required dependencies (PHP, Symfony binary and Composer)' + color_white)
 
 
-def docker_macos_mountnfs():
-    """
-    Mount nfs shared folder on docker-machine
-    """
-    if not Config.docker_machine:
-        return
-
-    run('VBoxManage sharedfolder remove capco --name Users', warn=True)
-
-    ensure_vm_is_up()
-    Connection.host = 'docker@%s' % run('docker-machine ip capco', warn=True).stdout
-    key_filename = '~/.docker/machine/machines/capco/id_rsa'
-    Config.shell = "/bin/sh -c"
-    Config.local_dir = os.getcwd()
-
-    run('sudo umount %s' % Config.local_dir, warn=True)
-    run('sudo /usr/local/etc/init.d/nfs-client start', warn=True)
-    run('sudo mkdir -p %s && sudo mount -t nfs -o rw 192.168.99.1:%s %s' % (Config.local_dir, Config.local_dir, Config.local_dir), warn=True)
-
-
 def configure_vhosts(mode='symfony_bin'):
     """
     Update /etc/hosts file with domains
@@ -137,7 +117,7 @@ def configure_vhosts(mode='symfony_bin'):
         if not run('cat /etc/hosts | grep %s | grep %s' % (domain, '127.0.0.1'), warn=True).stdout:
             print(color_cyan + '%s should point to %s in /etc/hosts' % (domain, '127.0.0.1') + color_white)
             run('echo "%s %s" | sudo tee -a /etc/hosts' % ('127.0.0.1', domain), warn=True)
- 
+
 
 def generate_ssl():
     """

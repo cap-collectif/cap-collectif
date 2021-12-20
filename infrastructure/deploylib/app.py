@@ -13,7 +13,6 @@ def setup_env_vars():
     """
     Set the correct values for the .env.local file
     """
-    asset_host = 'assets.cap.co'
     variables = """APP_ENV=dev
 SYMFONY_ENV=dev
 SYMFONY_DATABASE_HOST={host}
@@ -22,8 +21,8 @@ SYMFONY_ELASTICSEARCH_HOST={host}
 SYMFONY_RABBITMQ_HOST={host}
 SYMFONY_RABBITMQ_NODENAME={host}
 SYMFONY_ASSETS_HOST={asset_host}""" \
-        .format(host=Config.local_ip, asset_host=asset_host)
-    run('echo "%s" >> .env.local' % variables)
+        .format(host=Config.local_ip, asset_host=Config.asset_host)
+    run('echo "%s" > .env.local' % variables)
 
 
 def prepare_php(environment='dev'):

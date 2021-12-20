@@ -15,12 +15,6 @@ def dinghy_install(ctx, force=False):
 
 
 @task
-def docker_macos_mountnfs(ctx):
-    environments.local()
-    system.docker_macos_mountnfs()
-
-
-@task
 def generate_ssl(ctx):
     environments.local()
     system.generate_ssl()

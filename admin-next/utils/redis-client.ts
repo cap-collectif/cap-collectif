@@ -6,7 +6,7 @@ export const getRedisHost = async (): string => {
     if (__isDev__) {
         const { error, stdout } = await exec(`dinghy ip`);
         if (error) {
-            // We are on linux if no dinghy.
+            // We are on linux / docker for mac if no dinghy.
             return '127.0.0.1';
         }
         // Only in development and on MacOS, we must use dinghy IP.

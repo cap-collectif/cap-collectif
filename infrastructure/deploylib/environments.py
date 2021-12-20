@@ -37,7 +37,8 @@ def local():
             print("Using dinghy")
             localmac_dinghy()
         else:
-            print("Dinghy not found !")
+            print("Using docker for mac, please make sur you have at least 6GB of RAM on VM (for ES).")
+            localmac_dockerformac()
     Connection.host = 'docker@localhost'
     Config.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']
     Config.shell = "/bin/sh -c"
@@ -49,6 +50,14 @@ def localmac_dinghy():
     Connection.host = 'docker@192.168.99.100'
     Config.dinghy = True
     Config.local_ip = run('dinghy ip', hide=True, warn=True).stdout
+    Config.asset_host = 'assets.cap.co'
+
+
+def localmac_dockerformac():
+    Config.local = True
+    Config.docker_for_mac = True
+    Config.local_ip = '127.0.0.1'
+    Config.asset_host = 'capco.dev'
 
 
 def locallinux():
@@ -144,6 +153,8 @@ Config.www_app = '/var/www/'
 Config.local = False
 Config.dinghy = False
 Config.docker_machine = False
+Config.docker_for_mac = False
+Config.assets_host = ''
 Config.build_at_up = True
 Config.lxc = False
 Config.root_dir = os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../..')
