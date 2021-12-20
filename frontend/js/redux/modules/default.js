@@ -107,6 +107,7 @@ export const features: FeatureToggles = {
   unstable_project_admin: false,
   noindex_on_profiles: false,
   unstable_anonymous_questionnaire: false,
+  twilio: false,
 };
 
 export const initialState: State = {

@@ -5810,6 +5810,9 @@ enum FeatureFlagType {
 
   """Whether or not admin can create anonymous questionnaire."""
   unstable_anonymous_questionnaire
+
+  """Whether or not the twilio service is enabled."""
+  twilio
 }
 
 """Require a firstname"""
@@ -7806,6 +7809,15 @@ type PhoneRequirement implements Node & Requirement {
 
   """The phone of the viewer."""
   viewerValue: String
+}
+
+"""Requires a validated phone number"""
+type PhoneVerifiedRequirement implements Node & Requirement {
+  """The ID of an object"""
+  id: ID!
+
+  """Does the viewer meets the requirement ?"""
+  viewerMeetsTheRequirement: Boolean!
 }
 
 """Represent a set of analytics for a platform"""
@@ -12197,6 +12209,9 @@ enum RequirementType {
 
   """The requirement is an identification code"""
   IDENTIFICATION_CODE
+
+  """The requirement is an verified phone number"""
+  PHONE_VERIFIED
 }
 
 """Available errors on resendEmailConfirmationMutation"""

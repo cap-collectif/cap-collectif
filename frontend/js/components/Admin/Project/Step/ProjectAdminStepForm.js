@@ -763,6 +763,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
     isCreating,
     formValueSelector(stepFormName)(state, 'proposalForm'),
   );
+  const twilioEnabled = state.default.features.twilio;
   return {
     features: state.default.features,
     initialValues: {
@@ -800,7 +801,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
           : undefined,
       // ConsultationStep
       consultations: step?.consultations || [],
-      requirements: step ? createRequirements(step) : [],
+      requirements: step ? createRequirements(step, twilioEnabled) : [],
       // SelectionStep
       statuses: step?.statuses?.length ? step.statuses : [],
       defaultSort: step?.defaultSort?.toUpperCase() || 'RANDOM',

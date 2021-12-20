@@ -97,6 +97,7 @@ overblog_graphql:
                     - DateOfBirthRequirement
                     - PhoneRequirement
                     - PostalAddressRequirement
+                    - PhoneVerifiedRequirement
                     - OpinionOrVersion
                     - OtherStep
                     - PresentationStep

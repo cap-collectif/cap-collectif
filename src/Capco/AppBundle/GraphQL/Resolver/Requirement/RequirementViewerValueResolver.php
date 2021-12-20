@@ -43,6 +43,9 @@ class RequirementViewerValueResolver implements ResolverInterface
         if (Requirement::IDENTIFICATION_CODE === $requirement->getType()) {
             return $viewer->getUserIdentificationCodeValue();
         }
+        if (Requirement::PHONE_VERIFIED === $requirement->getType()) {
+            return $viewer->isPhoneConfirmed();
+        }
 
         if (Requirement::CHECKBOX === $requirement->getType()) {
             $found = $this->userRequirementsRepo->findOneBy([

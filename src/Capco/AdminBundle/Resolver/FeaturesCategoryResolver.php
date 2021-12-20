@@ -74,6 +74,7 @@ class FeaturesCategoryResolver
                     Manager::unstable_project_admin,
                     Manager::noindex_on_profiles,
                     Manager::unstable_anonymous_questionnaire,
+                    Manager::twilio,
                 ],
             ],
         ],

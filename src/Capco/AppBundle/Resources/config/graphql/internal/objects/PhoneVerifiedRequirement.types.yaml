@@ -1,0 +1,11 @@
+PhoneVerifiedRequirement:
+    type: object
+    inherits:
+        - Node
+        - Requirement
+    config:
+        name: PhoneVerifiedRequirement
+        interfaces:
+            - Node
+            - Requirement
+        description: 'Requires a validated phone number'

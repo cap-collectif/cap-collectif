@@ -40,6 +40,9 @@ class RequirementTypeResolver implements ResolverInterface
         if (Requirement::IDENTIFICATION_CODE === $requirement->getType()) {
             return $this->typeResolver->resolve('IdentificationCodeRequirement');
         }
+        if (Requirement::PHONE_VERIFIED === $requirement->getType()) {
+            return $this->typeResolver->resolve('PhoneVerifiedRequirement');
+        }
 
         throw new UserError('Could not resolve type of Requirement.');
     }

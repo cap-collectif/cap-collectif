@@ -24,3 +24,6 @@ RequirementType:
             IDENTIFICATION_CODE:
                 value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::IDENTIFICATION_CODE")'
                 description: 'The requirement is an identification code'
+            PHONE_VERIFIED:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::PHONE_VERIFIED")'
+                description: 'The requirement is an verified phone number'

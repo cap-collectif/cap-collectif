@@ -156,3 +156,6 @@ InternalFeatureFlagType:
             unstable_anonymous_questionnaire:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable_anonymous_questionnaire")'
                 description: 'Whether or not admin can create anonymous questionnaire.'
+            twilio:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::twilio")'
+                description: 'Whether or not the twilio service is enabled.'

@@ -53,6 +53,12 @@ type Requirement =
       +id: string,
       +viewerMeetsTheRequirement: boolean,
       +viewerValue: ?string,
+    }
+  | {
+      +__typename: 'PhoneVerifiedRequirement',
+      +id: string,
+      +viewerMeetsTheRequirement: boolean,
+      +viewerValue: ?string,
     };
 
 export type RequirementsForm_step = {|
@@ -282,6 +288,9 @@ const getLabel = (requirement: Requirement) => {
   if (requirement.__typename === 'IdentificationCodeRequirement') {
     return <FormattedMessage id="identification_code" />;
   }
+  if (requirement.__typename === 'PhoneVerifiedRequirement') {
+    return <FormattedMessage id="verify.number.sms" />;
+  }
   return '';
 };
 
@@ -312,6 +321,10 @@ const getFormProps = (requirement: Requirement, change: any) => {
 export class RequirementsForm extends React.Component<Props> {
   render() {
     const { step, submitting, submitSucceeded, change } = this.props;
+    const requirements = step.requirements?.edges
+      ?.filter(Boolean)
+      .map(edge => edge.node)
+      .filter(requirement => requirement.__typename !== 'PhoneVerifiedRequirement');
     return (
       <form>
         <div className="col-sm-12 col-xs-12 alert__form_succeeded-message">
@@ -330,48 +343,47 @@ export class RequirementsForm extends React.Component<Props> {
             </div>
           ) : null}
         </div>
-        {step.requirements.edges &&
-          step.requirements.edges
-            .filter(Boolean)
-            .map(edge => edge.node)
-            .map(requirement => {
-              return (
-                <Field
-                  addonBefore={
-                    requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined
-                  }
-                  minlength={
-                    requirement.__typename === 'IdentificationCodeRequirement' ? 8 : undefined
-                  }
-                  id={
-                    requirement.__typename === 'IdentificationCodeRequirement'
-                      ? 'IdentificationCodeRequirement'
-                      : requirement.id
-                  }
-                  key={requirement.id}
-                  disabled={
-                    requirement.__typename === 'IdentificationCodeRequirement' &&
-                    requirement.viewerValue
-                  }
-                  placeholder={
-                    requirement.__typename === 'IdentificationCodeRequirement' &&
-                    !requirement.viewerValue
-                      ? 'Ex: 25FOVC10'
-                      : null
-                  }
-                  name={
-                    requirement.__typename === 'PostalAddressRequirement'
-                      ? 'PostalAddressText'
-                      : requirement.__typename === 'IdentificationCodeRequirement'
-                      ? 'IdentificationCodeRequirement'
-                      : requirement.id
-                  }
-                  label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
-                  {...getFormProps(requirement, change)}>
-                  {requirement.__typename === 'CheckboxRequirement' ? requirement.label : null}
-                </Field>
-              );
-            })}
+        {requirements &&
+          requirements.length > 0 &&
+          requirements.map(requirement => {
+            return (
+              <Field
+                addonBefore={
+                  requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined
+                }
+                minlength={
+                  requirement.__typename === 'IdentificationCodeRequirement' ? 8 : undefined
+                }
+                id={
+                  requirement.__typename === 'IdentificationCodeRequirement'
+                    ? 'IdentificationCodeRequirement'
+                    : requirement.id
+                }
+                key={requirement.id}
+                disabled={
+                  requirement.__typename === 'IdentificationCodeRequirement' &&
+                  requirement.viewerValue
+                }
+                placeholder={
+                  requirement.__typename === 'IdentificationCodeRequirement' &&
+                  !requirement.viewerValue
+                    ? 'Ex: 25FOVC10'
+                    : null
+                }
+                name={
+                  requirement.__typename === 'PostalAddressRequirement'
+                    ? 'PostalAddressText'
+                    : requirement.__typename === 'IdentificationCodeRequirement'
+                    ? 'IdentificationCodeRequirement'
+                    : requirement.id
+                }
+                label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
+                {...getFormProps(requirement, change)}
+              >
+                {requirement.__typename === 'CheckboxRequirement' ? requirement.label : null}
+              </Field>
+            );
+          })}
       </form>
     );
   }

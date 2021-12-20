@@ -510,6 +510,8 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
                   ? 'POSTAL_ADDRESS'
                   : edge?.node?.type === 'IdentificationCodeRequirement'
                   ? 'IDENTIFICATION_CODE'
+                  : edge?.node?.type === 'PhoneVerified'
+                  ? 'PHONE_VERIFIED'
                   : edge?.node?.type.slice(0, -11).toUpperCase(),
             })),
             requirementsReason: step.requirements?.reason || null,

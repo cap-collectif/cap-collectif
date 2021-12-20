@@ -24,6 +24,7 @@ class Requirement
     public const DATE_OF_BIRTH = 'DATE_OF_BIRTH';
     public const POSTAL_ADDRESS = 'POSTAL_ADDRESS';
     public const IDENTIFICATION_CODE = 'IDENTIFICATION_CODE';
+    public const PHONE_VERIFIED = 'PHONE_VERIFIED';
 
     public static $requirementsLabels = [
         self::CHECKBOX => 'check-box',
@@ -33,6 +34,7 @@ class Requirement
         self::DATE_OF_BIRTH => 'form.label_date_of_birth',
         self::POSTAL_ADDRESS => 'admin.fields.event.address',
         self::IDENTIFICATION_CODE => 'identification_code',
+        self::PHONE_VERIFIED => 'verify.number.sms',
     ];
 
     /**

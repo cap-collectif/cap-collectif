@@ -83,6 +83,7 @@ class Manager
     public const unstable__analytics_page = 'unstable__analytics_page';
     public const unstable_project_admin = 'unstable_project_admin';
     public const unstable_anonymous_questionnaire = 'unstable_anonymous_questionnaire';
+    public const twilio = 'twilio';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -182,6 +183,7 @@ class Manager
         self::unstable__analytics_page,
         self::unstable_project_admin,
         self::unstable_anonymous_questionnaire,
+        self::twilio,
     ];
 
     protected ToggleManager $toggleManager;

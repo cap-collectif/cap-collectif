@@ -76,12 +76,14 @@ export const doesStepSupportRequirements = (step: {
 export function createRequirements(step: {
   __typename: string,
   requirements?: ?Array<Requirement>,
-}): Array<Requirement> {
+},   twilioEnabled: ?boolean): Array<Requirement> {
   const requirements = [];
 
   if (!doesStepSupportRequirements(step)) {
     return requirements;
   }
+
+  const isSupportingPhoneVerifiedRequirement = step.__typename === 'CollectStep' && twilioEnabled;
 
   const initialRequirements = step.requirements || [];
   if (!initialRequirements.some((r: Requirement) => r.type === 'FIRSTNAME'))
@@ -100,7 +102,12 @@ export function createRequirements(step: {
     requirements.push(
       requirementFactory('IDENTIFICATION_CODE', false, 'identification_code', null),
     );
+  if (!initialRequirements.some((r: Requirement) => r.type === 'PHONE_VERIFIED') && isSupportingPhoneVerifiedRequirement)
+    requirements.push(requirementFactory('PHONE_VERIFIED', false, 'verify.number.sms', null));
   initialRequirements.forEach((requirement: Requirement) => {
+    if (requirement.type === 'PHONE_VERIFIED' && isSupportingPhoneVerifiedRequirement) {
+      requirements.push(requirementFactory('PHONE_VERIFIED', true, 'verify.number.sms', requirement.id));
+    }
     switch (requirement.type) {
       case 'FIRSTNAME':
         requirements.push(

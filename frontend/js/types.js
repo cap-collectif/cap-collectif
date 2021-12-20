@@ -107,6 +107,7 @@ export type FeatureToggles = {
   http_redirects: ?boolean,
   noindex_on_profiles: ?boolean,
   unstable_anonymous_questionnaire: ?boolean,
+  twilio: ?boolean,
 };
 
 export type FeatureToggle = $Keys<FeatureToggles>;
