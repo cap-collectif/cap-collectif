@@ -39,10 +39,7 @@ type Props = {|
   onInputDelete: (index: number) => void,
 |};
 
-export const getUId = (): Uuid =>
-  `_${Math.random()
-    .toString(36)
-    .substr(2, 9)}`;
+export const getUId = (): Uuid => `_${Math.random().toString(36).substr(2, 9)}`;
 
 const requirementFactory = (
   type: RequirementType,
@@ -65,7 +62,7 @@ export const doesStepSupportRequirements = (step: {
   __typename: string,
   requirements?: ?Array<Requirement>,
 }): boolean => {
-  return !(
+  return (
     step.__typename !== 'CollectStep' &&
     step.__typename !== 'SelectionStep' &&
     step.__typename !== 'ConsultationStep' &&
@@ -73,10 +70,13 @@ export const doesStepSupportRequirements = (step: {
   );
 };
 
-export function createRequirements(step: {
-  __typename: string,
-  requirements?: ?Array<Requirement>,
-},   twilioEnabled: ?boolean): Array<Requirement> {
+export function createRequirements(
+  step: {
+    __typename: string,
+    requirements?: ?Array<Requirement>,
+  },
+  twilioEnabled: ?boolean,
+): Array<Requirement> {
   const requirements = [];
 
   if (!doesStepSupportRequirements(step)) {
@@ -102,11 +102,16 @@ export function createRequirements(step: {
     requirements.push(
       requirementFactory('IDENTIFICATION_CODE', false, 'identification_code', null),
     );
-  if (!initialRequirements.some((r: Requirement) => r.type === 'PHONE_VERIFIED') && isSupportingPhoneVerifiedRequirement)
+  if (
+    !initialRequirements.some((r: Requirement) => r.type === 'PHONE_VERIFIED') &&
+    isSupportingPhoneVerifiedRequirement
+  )
     requirements.push(requirementFactory('PHONE_VERIFIED', false, 'verify.number.sms', null));
   initialRequirements.forEach((requirement: Requirement) => {
     if (requirement.type === 'PHONE_VERIFIED' && isSupportingPhoneVerifiedRequirement) {
-      requirements.push(requirementFactory('PHONE_VERIFIED', true, 'verify.number.sms', requirement.id));
+      requirements.push(
+        requirementFactory('PHONE_VERIFIED', true, 'verify.number.sms', requirement.id),
+      );
     }
     switch (requirement.type) {
       case 'FIRSTNAME':
