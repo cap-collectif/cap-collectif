@@ -8,7 +8,6 @@ describe('<DeleteButtonPopover />', () => {
   it('renders correctly', () => {
     const props = {
       handleValidate: jest.fn(),
-      handleCancel: jest.fn(),
       id: '<mock-id/>',
     };
     const wrapper = shallow(<DeleteButtonPopover {...props} />);

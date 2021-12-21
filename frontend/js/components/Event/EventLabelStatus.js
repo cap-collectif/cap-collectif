@@ -3,12 +3,11 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import { OverlayTrigger } from 'react-bootstrap';
 import type {
   EventLabelStatus_event,
   EventReviewStatus,
 } from '~relay/EventLabelStatus_event.graphql';
-import Popover from '~/components/Utils/Popover';
+import Popover from '~ds/Popover';
 import colors from '~/utils/colors';
 import EyeBar from '../Ui/Icons/EyeBar';
 
@@ -63,29 +62,30 @@ const getOverlayMessage = (status: EventReviewStatus) => {
 
 export const EventLabelStatus = ({ event }: Props) =>
   event.review ? (
-    <OverlayTrigger
-      placement="top"
-      overlay={
-        event.review && event.review.status !== 'APPROVED' ? (
-          <Popover placement="top" id="event-status-popover">
+    <Popover placement="top" trigger={['mouseenter']}>
+      <Popover.Trigger>
+        <LabelStatus
+          id="event-label-status"
+          color={event.review ? getLabelColor(event.review.status) : ''}>
+          {event.review &&
+            (event.review.status === 'REFUSED' || event.review.status === 'AWAITING') && (
+              <EyeBar className="mr-5" color="#fff" />
+            )}
+          <FormattedMessage id={getLabelMessage(event.review.status)} />
+        </LabelStatus>
+      </Popover.Trigger>
+      {event.review && event.review.status !== 'APPROVED' ? (
+        <Popover.Content>
+          <Popover.Body>
             <FormattedMessage id="global.private" />
             <br /> <br />
             <FormattedMessage id={event.review ? getOverlayMessage(event.review.status) : ''} />
-          </Popover>
-        ) : (
-          <></>
-        )
-      }>
-      <LabelStatus
-        id="event-label-status"
-        color={event.review ? getLabelColor(event.review.status) : ''}>
-        {event.review &&
-          (event.review.status === 'REFUSED' || event.review.status === 'AWAITING') && (
-            <EyeBar className="mr-5" color="#fff" />
-          )}
-        <FormattedMessage id={getLabelMessage(event.review.status)} />
-      </LabelStatus>
-    </OverlayTrigger>
+          </Popover.Body>
+        </Popover.Content>
+      ) : (
+        <></>
+      )}
+    </Popover>
   ) : null;
 
 export default createFragmentContainer(EventLabelStatus, {

@@ -1,37 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventLabelStatus /> renders correcty event approved  1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={<React.Fragment />}
+<Popover
   placement="top"
   trigger={
     Array [
-      "hover",
-      "focus",
+      "mouseenter",
     ]
   }
 >
-  <EventLabelStatus__LabelStatus
-    color="#088A20"
-    id="event-label-status"
-  >
-    <FormattedMessage
-      id="approved"
-      values={Object {}}
-    />
-  </EventLabelStatus__LabelStatus>
-</OverlayTrigger>
+  <Popover.Trigger>
+    <EventLabelStatus__LabelStatus
+      color="#088A20"
+      id="event-label-status"
+    >
+      <FormattedMessage
+        id="approved"
+        values={Object {}}
+      />
+    </EventLabelStatus__LabelStatus>
+  </Popover.Trigger>
+</Popover>
 `;
 
 exports[`<EventLabelStatus /> renders correcty event event waiting 1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={
-    <CapcoPopover
-      id="event-status-popover"
-      placement="top"
+<Popover
+  placement="top"
+  trigger={
+    Array [
+      "mouseenter",
+    ]
+  }
+>
+  <Popover.Trigger>
+    <EventLabelStatus__LabelStatus
+      color="#f09200"
+      id="event-label-status"
     >
+      <EyeBar
+        className="mr-5"
+        color="#fff"
+        size={16}
+      />
+      <FormattedMessage
+        id="waiting-examination"
+        values={Object {}}
+      />
+    </EventLabelStatus__LabelStatus>
+  </Popover.Trigger>
+  <Popover.Content>
+    <Popover.Body>
       <FormattedMessage
         id="global.private"
         values={Object {}}
@@ -43,41 +61,38 @@ exports[`<EventLabelStatus /> renders correcty event event waiting 1`] = `
         id="event-preview-waiting-exam"
         values={Object {}}
       />
-    </CapcoPopover>
-  }
-  placement="top"
-  trigger={
-    Array [
-      "hover",
-      "focus",
-    ]
-  }
->
-  <EventLabelStatus__LabelStatus
-    color="#f09200"
-    id="event-label-status"
-  >
-    <EyeBar
-      className="mr-5"
-      color="#fff"
-      size={16}
-    />
-    <FormattedMessage
-      id="waiting-examination"
-      values={Object {}}
-    />
-  </EventLabelStatus__LabelStatus>
-</OverlayTrigger>
+    </Popover.Body>
+  </Popover.Content>
+</Popover>
 `;
 
 exports[`<EventLabelStatus /> renders correcty event refused 1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={
-    <CapcoPopover
-      id="event-status-popover"
-      placement="top"
+<Popover
+  placement="top"
+  trigger={
+    Array [
+      "mouseenter",
+    ]
+  }
+>
+  <Popover.Trigger>
+    <EventLabelStatus__LabelStatus
+      color="#dc3545"
+      id="event-label-status"
     >
+      <EyeBar
+        className="mr-5"
+        color="#fff"
+        size={16}
+      />
+      <FormattedMessage
+        id="refused"
+        values={Object {}}
+      />
+    </EventLabelStatus__LabelStatus>
+  </Popover.Trigger>
+  <Popover.Content>
+    <Popover.Body>
       <FormattedMessage
         id="global.private"
         values={Object {}}
@@ -89,29 +104,7 @@ exports[`<EventLabelStatus /> renders correcty event refused 1`] = `
         id="event-preview-refused-by-admin"
         values={Object {}}
       />
-    </CapcoPopover>
-  }
-  placement="top"
-  trigger={
-    Array [
-      "hover",
-      "focus",
-    ]
-  }
->
-  <EventLabelStatus__LabelStatus
-    color="#dc3545"
-    id="event-label-status"
-  >
-    <EyeBar
-      className="mr-5"
-      color="#fff"
-      size={16}
-    />
-    <FormattedMessage
-      id="refused"
-      values={Object {}}
-    />
-  </EventLabelStatus__LabelStatus>
-</OverlayTrigger>
+    </Popover.Body>
+  </Popover.Content>
+</Popover>
 `;

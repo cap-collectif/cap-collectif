@@ -186,10 +186,15 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
           <span>
             Comic Sans MS
           </span>
-          <ButtonPopover
-            id="4"
+          <Popover
             placement="right"
             trigger={
+              Array [
+                "click",
+              ]
+            }
+          >
+            <Popover.Trigger>
               <button
                 className="btn-remove"
                 type="button"
@@ -203,12 +208,14 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
                   values={Object {}}
                 />
               </button>
-            }
-          >
-            <FontPopover
-              onConfirm={[Function]}
-            />
-          </ButtonPopover>
+            </Popover.Trigger>
+            <Popover.Content
+              id="4-popover"
+              padding="9px 14px"
+            >
+              <Component />
+            </Popover.Content>
+          </Popover>
         </FontUseFormstyle__FontNameContainer>
         <td
           className="radio__cell"

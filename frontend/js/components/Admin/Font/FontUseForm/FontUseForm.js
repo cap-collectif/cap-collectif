@@ -4,13 +4,13 @@ import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
 import { SubmissionError } from 'redux-form';
 import { type FontAdminContent_fonts } from '~relay/FontAdminContent_fonts.graphql';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
-import ButtonPopover, { PLACEMENT } from '~/components/Ui/Button/ButtonPopover';
 import FontUseFormContainer, { FontNameContainer } from './FontUseForm.style';
 import FontPopover from '../FontPopover/FontPopover';
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
 import ChangeFontMutation from '~/mutations/ChangeFontMutation';
 import DeleteFontMutation from '~/mutations/DeleteFontMutation';
 import config from '~/config';
+import Popover from '~ds/Popover';
 
 type Props = {|
   intl: IntlShape,
@@ -83,7 +83,7 @@ const onDeleteFont = (id: string, fonts, intl) => {
     nextHeadingFont = !isCheckedHeading ? currentHeadingFont.id : defaultFont.id;
   }
 
-  return DeleteFontMutation.commit(
+  DeleteFontMutation.commit(
     {
       input: {
         id,
@@ -141,21 +141,28 @@ export const FontUseForm = ({ fonts, fontLoading, intl }: Props) => {
                 <span>{f.name}</span>
 
                 {f.isCustom && (
-                  <ButtonPopover
-                    id={f.id}
-                    placement={config.isMobile ? PLACEMENT.TOP : PLACEMENT.RIGHT}
-                    trigger={
+                  <Popover placement={config.isMobile ? 'top' : 'right'} trigger={['click']}>
+                    <Popover.Trigger>
                       <button type="button" className="btn-remove">
                         <Icon name={ICON_NAME.trash} size={16} />
                         <FormattedMessage id="global.delete" />
                       </button>
-                    }>
-                    <FontPopover
-                      onConfirm={() => {
-                        onDeleteFont(f.id, fonts, intl);
-                      }}
-                    />
-                  </ButtonPopover>
+                    </Popover.Trigger>
+                    <Popover.Content id={`${f.id}-popover`} padding="9px 14px">
+                      {({ closePopover }) => (
+                        <React.Fragment>
+                          <Popover.Body mb={0}>
+                            <FontPopover
+                              onConfirm={() => {
+                                onDeleteFont(f.id, fonts, intl);
+                              }}
+                              onClose={closePopover}
+                            />
+                          </Popover.Body>
+                        </React.Fragment>
+                      )}
+                    </Popover.Content>
+                  </Popover>
                 )}
               </FontNameContainer>
 
