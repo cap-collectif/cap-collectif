@@ -3493,6 +3493,30 @@ type CreateSenderEmailPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `createTwilioServiceMutation` mutation."""
+enum CreateTwilioServiceErrorCode {
+  """The service could not be created"""
+  COULD_NOT_CREATE_SERVICE
+
+  """The given sender name is invalid"""
+  INVALID_SENDER_NAME
+}
+
+input CreateTwilioServiceInput {
+  """The name given to the service."""
+  serviceName: String!
+  clientMutationId: String
+}
+
+type CreateTwilioServicePayload {
+  """The error code, if failing."""
+  errorCode: CreateTwilioServiceErrorCode
+
+  """The created service name."""
+  serviceName: String
+  clientMutationId: String
+}
+
 input CreateUserIdentificationCodeListInput {
   """Name of the list to create."""
   name: String!
@@ -5682,6 +5706,15 @@ type ExternalServiceConfiguration {
 enum ExternalServiceConfigurationType {
   """Choice of the external mailer client : mandrill or mailjet."""
   MAILER
+
+  """Twilio service Id."""
+  TWILIO_SERVICE_ID
+
+  """Twilio alpha sender Id."""
+  TWILIO_ALPHA_SENDER_ID
+
+  """Twilio alpha sender name."""
+  TWILIO_ALPHA_SENDER_NAME
 }
 
 """Facebook SSO Configuration."""
@@ -7206,6 +7239,8 @@ type Mutation {
   checkIdentificationCode(input: CheckIdentificationCodeInput!): CheckIdentificationCodePayload
   deleteUserIdentificationCodeList(input: DeleteUserIdentificationCodeListInput!): DeleteUserIdentificationCodeListPayload
   createUserIdentificationCodeList(input: CreateUserIdentificationCodeListInput!): CreateUserIdentificationCodeListPayload
+  createTwilioServiceMutation(input: CreateTwilioServiceInput!): CreateTwilioServicePayload
+  updateTwilioAlphaSenderMutation(input: UpdateTwilioAlphaSenderInput!): UpdateTwilioAlphaSenderPayload
 }
 
 """A connection to a list of items."""
@@ -15075,6 +15110,30 @@ type UpdateSiteParameterPayload {
 
   """The error generated, if any."""
   errorCode: UpdateSiteParameterErrorCode
+  clientMutationId: String
+}
+
+"""Available errors for an `updateTwilioAlphaSenderMutation` mutation."""
+enum UpdateTwilioAlphaSenderErrorCode {
+  """The alpha sender name could not be updated"""
+  COULD_NOT_UPDATE_ALPHA_SENDER
+
+  """The alpha sender id was not found"""
+  ALPHA_SENDER_ID_NOT_FOUND
+}
+
+input UpdateTwilioAlphaSenderInput {
+  """The updated alpha sender name."""
+  alphaSenderName: String!
+  clientMutationId: String
+}
+
+type UpdateTwilioAlphaSenderPayload {
+  """The error code, if failing."""
+  errorCode: UpdateTwilioAlphaSenderErrorCode
+
+  """The updated alpha sender name."""
+  alphaSenderName: String
   clientMutationId: String
 }
 

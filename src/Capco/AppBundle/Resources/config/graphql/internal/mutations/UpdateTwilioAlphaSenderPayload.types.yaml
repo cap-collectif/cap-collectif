@@ -1,0 +1,11 @@
+UpdateTwilioAlphaSenderPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of the updateTwilioAlphaSenderMutation mutation.'
+        fields:
+            errorCode:
+                type: 'UpdateTwilioAlphaSenderErrorCode'
+                description: 'The error code, if failing.'
+            alphaSenderName:
+                type: 'String'
+                description: 'The updated alpha sender name.'

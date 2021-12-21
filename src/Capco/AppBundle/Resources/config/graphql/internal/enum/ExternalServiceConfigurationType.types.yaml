@@ -6,3 +6,12 @@ ExternalServiceConfigurationType:
             MAILER:
                 value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TYPE_MAILER")'
                 description: 'Choice of the external mailer client : mandrill or mailjet.'
+            TWILIO_SERVICE_ID:
+                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TWILIO_SERVICE_ID")'
+                description: 'Twilio service Id.'
+            TWILIO_ALPHA_SENDER_ID:
+                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TWILIO_ALPHA_SENDER_ID")'
+                description: 'Twilio alpha sender Id.'
+            TWILIO_ALPHA_SENDER_NAME:
+                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TWILIO_ALPHA_SENDER_NAME")'
+                description: 'Twilio alpha sender name.'

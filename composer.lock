@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de9cbadac88424212089618f3625e31b",
+    "content-hash": "6608da71fe708881ff7d0da133a18dae",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -15410,6 +15410,60 @@
             "time": "2021-09-17T08:39:54+00:00"
         },
         {
+            "name": "twilio/sdk",
+            "version": "6.32.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twilio/twilio-php.git",
+                "reference": "d4a5ad22e761a14c5e355debb88a6f17640b247c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/d4a5ad22e761a14c5e355debb88a6f17640b247c",
+                "reference": "d4a5ad22e761a14c5e355debb88a6f17640b247c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.3 || ^7.0",
+                "phpunit/phpunit": ">=4.5",
+                "theseer/phpdox": "^0.12.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Twilio\\": "src/Twilio/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Twilio API Team",
+                    "email": "api@twilio.com"
+                }
+            ],
+            "description": "A PHP wrapper for Twilio's API",
+            "homepage": "http://github.com/twilio/twilio-php",
+            "keywords": [
+                "api",
+                "sms",
+                "twilio"
+            ],
+            "support": {
+                "issues": "https://github.com/twilio/twilio-php/issues",
+                "source": "https://github.com/twilio/twilio-php/tree/6.32.0"
+            },
+            "time": "2021-12-15T20:48:09+00:00"
+        },
+        {
             "name": "webfactory/icu-translation-bundle",
             "version": "dev-master",
             "source": {
@@ -19001,28 +19055,28 @@
     ],
     "aliases": [
         {
-            "alias": "3.30.0",
-            "alias_normalized": "3.30.0.0",
-            "version": "dev-bugfix-3.x",
-            "package": "sonata-project/media-bundle"
-        },
-        {
-            "alias": "2.1.2",
-            "alias_normalized": "2.1.2.0",
+            "package": "alexandresalome/mailcatcher",
             "version": "9999999-dev",
-            "package": "friendsofsymfony/user-bundle"
-        },
-        {
-            "alias": "4.0.2",
-            "alias_normalized": "4.0.2.0",
-            "version": "9999999-dev",
-            "package": "limenius/react-renderer"
-        },
-        {
             "alias": "1.3.0",
-            "alias_normalized": "1.3.0.0",
+            "alias_normalized": "1.3.0.0"
+        },
+        {
+            "package": "friendsofsymfony/user-bundle",
             "version": "9999999-dev",
-            "package": "alexandresalome/mailcatcher"
+            "alias": "2.1.2",
+            "alias_normalized": "2.1.2.0"
+        },
+        {
+            "package": "limenius/react-renderer",
+            "version": "9999999-dev",
+            "alias": "4.0.2",
+            "alias_normalized": "4.0.2.0"
+        },
+        {
+            "package": "sonata-project/media-bundle",
+            "version": "dev-bugfix-3.x",
+            "alias": "3.30.0",
+            "alias_normalized": "3.30.0.0"
         }
     ],
     "minimum-stability": "stable",
@@ -19053,5 +19107,5 @@
         "ext-simplexml": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

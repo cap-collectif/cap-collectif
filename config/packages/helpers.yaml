@@ -10,3 +10,8 @@ services:
 
     Capco\AppBundle\Helper\RedisStorageHelper:
         arguments: ['@snc_redis.default']
+
+    Capco\AppBundle\Helper\TwilioClient:
+        arguments:
+            $twilioSid: '%twilio_sid%'
+            $twilioToken: '%twilio_token%'

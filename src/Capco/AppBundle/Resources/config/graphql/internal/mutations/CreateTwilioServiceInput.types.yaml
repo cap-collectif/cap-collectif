@@ -1,0 +1,8 @@
+CreateTwilioServiceInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createTwilioServiceMutation mutation.'
+        fields:
+            serviceName:
+                type: 'String!'
+                description: 'The name given to the service.'

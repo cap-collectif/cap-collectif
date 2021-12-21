@@ -1439,3 +1439,15 @@ InternalMutation:
                     inputType: CreateUserIdentificationCodeListInput
                     payloadType: CreateUserIdentificationCodeListPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Security\\CreateUserIdentificationCodeListMutation", [value, getUser()])'
+            createTwilioServiceMutation:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateTwilioServiceInput
+                    payloadType: CreateTwilioServicePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateTwilioServiceMutation", [value, getUser()])'
+            updateTwilioAlphaSenderMutation:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateTwilioAlphaSenderInput
+                    payloadType: UpdateTwilioAlphaSenderPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateTwilioAlphaSenderMutation", [value, getUser()])'

@@ -15,7 +15,16 @@ class ExternalServiceConfiguration
     public const MAILER_MAILJET = 'mailjet';
     public const TYPE_MAILER = 'mailer';
 
-    public const TYPES = [self::TYPE_MAILER];
+    public const TWILIO_SERVICE_ID = 'twilio_service_id';
+    public const TWILIO_ALPHA_SENDER_ID = 'twilio_alpha_sender_id';
+    public const TWILIO_ALPHA_SENDER_NAME = 'twilio_alpha_sender_name';
+
+    public const TYPES = [
+        self::TYPE_MAILER,
+        self::TWILIO_SERVICE_ID,
+        self::TWILIO_ALPHA_SENDER_ID,
+        self::TWILIO_ALPHA_SENDER_NAME,
+    ];
     public const AVAILABLE_VALUES = [
         self::TYPE_MAILER => [self::MAILER_MANDRILL, self::MAILER_MAILJET],
     ];
