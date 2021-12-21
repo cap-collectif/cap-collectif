@@ -7,16 +7,14 @@ import { connect } from 'react-redux';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import ProjectStepAdminList from './ProjectStepAdminList';
 import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal';
-import {
-  ProjectBoxHeader,
-  StepMenuItem,
-  ProjectBoxContainer,
-  StepCreateButton,
-} from '../Form/ProjectAdminForm.style';
+import { ProjectBoxHeader, ProjectBoxContainer } from '../Form/ProjectAdminForm.style';
 import { STEP_TYPES } from '~/constants/StepTypeConstants';
 import { type StepTypes } from '../Form/ProjectAdminForm';
 import type { ProjectStepAdmin_project } from '~relay/ProjectStepAdmin_project.graphql';
 import type { GlobalState } from '~/types';
+import Menu from '../../../DesignSystem/Menu/Menu';
+import Button from '~ds/Button/Button';
+import Text from '~ui/Primitives/Text';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -97,28 +95,36 @@ export const ProjectStepAdmin = ({ form, project, hasFeatureDebate, viewerIsAdmi
                 form={form}
                 project={project}
               />
-              <StepCreateButton
-                id="js-btn-create-step"
-                bsStyle="primary"
-                title={
-                  <>
-                    <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
-                  </>
-                }>
-                {stepTypes
-                  .filter(st => st.value !== 'RankingStep')
-                  .map((st, idx) => (
-                    <StepMenuItem
-                      key={idx}
-                      id={st.label}
-                      onClick={() => {
-                        setStepType(st.value);
-                        displayAddStepModal(true);
-                      }}>
-                      <FormattedMessage id={st.label} />
-                    </StepMenuItem>
-                  ))}
-              </StepCreateButton>
+              <Menu closeOnSelect placement="bottom-start">
+                <Menu.Button>
+                  <Button
+                    id="js-btn-create-step"
+                    variant="secondary"
+                    variantSize="small"
+                    variantColor="primary">
+                    <i className="fa fa-plus-circle" style={{ marginRight: '4px' }} />
+                    <FormattedMessage id="global.add" />
+                  </Button>
+                </Menu.Button>
+                <Menu.List id="create-step-list">
+                  {stepTypes
+                    .filter(st => st.value !== 'RankingStep')
+                    .map((st, idx) => (
+                      <Menu.ListItem
+                        as="li"
+                        key={idx}
+                        id={st.label}
+                        onClick={() => {
+                          setStepType(st.value);
+                          displayAddStepModal(true);
+                        }}>
+                        <Text>
+                          <FormattedMessage id={st.label} />
+                        </Text>
+                      </Menu.ListItem>
+                    ))}
+                </Menu.List>
+              </Menu>
             </ButtonToolbar>
           </div>
         </div>

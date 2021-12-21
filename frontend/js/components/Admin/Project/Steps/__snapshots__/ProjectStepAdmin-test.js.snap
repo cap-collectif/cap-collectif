@@ -63,83 +63,114 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             step={null}
             type="OtherStep"
           />
-          <ProjectAdminFormstyle__StepCreateButton
-            bsStyle="primary"
-            id="js-btn-create-step"
-            title={
-              <React.Fragment>
+          <Menu
+            closeOnSelect={true}
+            placement="bottom-start"
+          >
+            <Menu.Button>
+              <Button
+                id="js-btn-create-step"
+                variant="secondary"
+                variantColor="primary"
+                variantSize="small"
+              >
                 <i
                   className="fa fa-plus-circle"
+                  style={
+                    Object {
+                      "marginRight": "4px",
+                    }
+                  }
                 />
-                 
                 <FormattedMessage
                   id="global.add"
                   values={Object {}}
                 />
-              </React.Fragment>
-            }
-          >
-            <ProjectAdminFormstyle__StepMenuItem
-              id="presentation_step"
-              key="0"
-              onClick={[Function]}
+              </Button>
+            </Menu.Button>
+            <Menu.List
+              id="create-step-list"
             >
-              <FormattedMessage
+              <Menu.ListItem
+                as="li"
                 id="presentation_step"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="collect_step"
-              key="1"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="0"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="presentation_step"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="collect_step"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="selection_step"
-              key="2"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="1"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="collect_step"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="selection_step"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.consultation"
-              key="3"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="2"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="selection_step"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="global.consultation"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.questionnaire"
-              key="4"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="3"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.consultation"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="global.questionnaire"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.custom.feminine"
-              key="5"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="4"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.questionnaire"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="global.custom.feminine"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-          </ProjectAdminFormstyle__StepCreateButton>
+                key="5"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.custom.feminine"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+            </Menu.List>
+          </Menu>
         </ButtonToolbar>
       </div>
     </div>
@@ -210,73 +241,101 @@ exports[`<ProjectStepAdmin /> renders correctly with isAdmin false 1`] = `
             step={null}
             type="OtherStep"
           />
-          <ProjectAdminFormstyle__StepCreateButton
-            bsStyle="primary"
-            id="js-btn-create-step"
-            title={
-              <React.Fragment>
+          <Menu
+            closeOnSelect={true}
+            placement="bottom-start"
+          >
+            <Menu.Button>
+              <Button
+                id="js-btn-create-step"
+                variant="secondary"
+                variantColor="primary"
+                variantSize="small"
+              >
                 <i
                   className="fa fa-plus-circle"
+                  style={
+                    Object {
+                      "marginRight": "4px",
+                    }
+                  }
                 />
-                 
                 <FormattedMessage
                   id="global.add"
                   values={Object {}}
                 />
-              </React.Fragment>
-            }
-          >
-            <ProjectAdminFormstyle__StepMenuItem
-              id="presentation_step"
-              key="0"
-              onClick={[Function]}
+              </Button>
+            </Menu.Button>
+            <Menu.List
+              id="create-step-list"
             >
-              <FormattedMessage
+              <Menu.ListItem
+                as="li"
                 id="presentation_step"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="collect_step"
-              key="1"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="0"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="presentation_step"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="collect_step"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="selection_step"
-              key="2"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="1"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="collect_step"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="selection_step"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.questionnaire"
-              key="3"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="2"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="selection_step"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="global.questionnaire"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.custom.feminine"
-              key="4"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="3"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.questionnaire"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="global.custom.feminine"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-          </ProjectAdminFormstyle__StepCreateButton>
+                key="4"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.custom.feminine"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+            </Menu.List>
+          </Menu>
         </ButtonToolbar>
       </div>
     </div>
@@ -347,93 +406,127 @@ exports[`<ProjectStepAdmin /> renders correctly without feature debate 1`] = `
             step={null}
             type="OtherStep"
           />
-          <ProjectAdminFormstyle__StepCreateButton
-            bsStyle="primary"
-            id="js-btn-create-step"
-            title={
-              <React.Fragment>
+          <Menu
+            closeOnSelect={true}
+            placement="bottom-start"
+          >
+            <Menu.Button>
+              <Button
+                id="js-btn-create-step"
+                variant="secondary"
+                variantColor="primary"
+                variantSize="small"
+              >
                 <i
                   className="fa fa-plus-circle"
+                  style={
+                    Object {
+                      "marginRight": "4px",
+                    }
+                  }
                 />
-                 
                 <FormattedMessage
                   id="global.add"
                   values={Object {}}
                 />
-              </React.Fragment>
-            }
-          >
-            <ProjectAdminFormstyle__StepMenuItem
-              id="presentation_step"
-              key="0"
-              onClick={[Function]}
+              </Button>
+            </Menu.Button>
+            <Menu.List
+              id="create-step-list"
             >
-              <FormattedMessage
+              <Menu.ListItem
+                as="li"
                 id="presentation_step"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="collect_step"
-              key="1"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="0"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="presentation_step"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="collect_step"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="selection_step"
-              key="2"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="1"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="collect_step"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="selection_step"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.debate"
-              key="3"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="2"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="selection_step"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="global.debate"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.consultation"
-              key="4"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="3"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.debate"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="global.consultation"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.questionnaire"
-              key="5"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="4"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.consultation"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="global.questionnaire"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.custom.feminine"
-              key="6"
-              onClick={[Function]}
-            >
-              <FormattedMessage
+                key="5"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.questionnaire"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
                 id="global.custom.feminine"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-          </ProjectAdminFormstyle__StepCreateButton>
+                key="6"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.custom.feminine"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+            </Menu.List>
+          </Menu>
         </ButtonToolbar>
       </div>
     </div>
