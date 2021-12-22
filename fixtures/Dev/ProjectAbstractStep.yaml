@@ -449,3 +449,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@qStepOwnerAnonQuestionnaire'
         project: '@projectWithOwner'
         position: 6
+    pasWithPhoneVerifiedRequirement:
+        id: pasWithPhoneVerifiedRequirement
+        step: '@collectSPhoneVerifRequire'
+        project: '@projectWithPhoneVerifiedRequirement'
+        position: 1

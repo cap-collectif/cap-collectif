@@ -7241,6 +7241,7 @@ type Mutation {
   createUserIdentificationCodeList(input: CreateUserIdentificationCodeListInput!): CreateUserIdentificationCodeListPayload
   createTwilioServiceMutation(input: CreateTwilioServiceInput!): CreateTwilioServicePayload
   updateTwilioAlphaSenderMutation(input: UpdateTwilioAlphaSenderInput!): UpdateTwilioAlphaSenderPayload
+  sendSmsPhoneValidationCode(input: SendSmsPhoneValidationCodeInput!): SendSmsPhoneValidationCodePayload
 }
 
 """A connection to a list of items."""
@@ -12934,6 +12935,34 @@ type SendEmailingCampaignPayload {
 
   """The error code, if any"""
   error: SendEmailingCampaignErrorCode
+  clientMutationId: String
+}
+
+"""Available errors for an `sendSmsPhoneValidationCode` mutation."""
+enum SendSmsPhoneValidationCodeErrorCode {
+  """The sms could not be delivered"""
+  UNDELIVERED
+
+  """The given number is invalid"""
+  INVALID_NUMBER
+
+  """The user reached the retry limit of 2 within a minute"""
+  RETRY_LIMIT_REACHED
+
+  """The user has already confirmed his phone number"""
+  PHONE_ALREADY_CONFIRMED
+
+  """The twilio messaging service needs to be created"""
+  MESSAGING_SERVICE_ID_NOT_FOUND
+}
+
+input SendSmsPhoneValidationCodeInput {
+  clientMutationId: String
+}
+
+type SendSmsPhoneValidationCodePayload {
+  """The error code, if failing."""
+  errorCode: SendSmsPhoneValidationCodeErrorCode
   clientMutationId: String
 }
 

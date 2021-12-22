@@ -63,8 +63,8 @@ Capco\UserBundle\Entity\User:
         roles:
             - 'ROLE_ADMIN'
         vip: true
-        phoneConfirmed: true
         phone: '+33675492871'
+        phoneConfirmed: true
         enabled: true
         postalAddress: '[{"address_components":[{"long_name":"26","short_name":"26","types":["street_number"]},{"long_name":"Rue Claude Tillier","short_name":"Rue Claude Tillier","types":["route"]},{"long_name":"Paris","short_name":"Paris","types":["locality","political"]},{"long_name":"Département de Paris","short_name":"Département de Paris","types":["administrative_area_level_2","political"]},{"long_name":"Île-de-France","short_name":"IDF","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"75012","short_name":"75012","types":["postal_code"]}],"formatted_address":"26 Rue Claude Tillier, 75012 Paris, France","geometry":{"location":{"lat":48.84865730000001,"lng":2.3889227},"location_type":"ROOFTOP","viewport":{"south":48.84730831970851,"west":2.387573719708498,"north":48.85000628029151,"east":2.390271680291502}},"place_id":"ChIJrW-3zAxy5kcRvzuJuCmZqf0","plus_code":{"compound_code":"R9XQ+FH Paris, France","global_code":"8FW4R9XQ+FH"},"types":["street_address"]}]'
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 3 days"))>
@@ -82,8 +82,8 @@ Capco\UserBundle\Entity\User:
         roles:
             - 'ROLE_ADMIN'
         vip: true
-        phoneConfirmed: true
         phone: '+33675492871'
+        phoneConfirmed: true
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
         subscribedToProposalNews: true
@@ -105,8 +105,8 @@ Capco\UserBundle\Entity\User:
         birthPlace: Skipiéa
         roles:
             - 'ROLE_USER'
-        phoneConfirmed: true
         phone: '+33635492871'
+        phoneConfirmed: true
         gender: 'f'
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 5 days"))>
@@ -709,3 +709,20 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <(new \DateTime('1945-02-06 00:00:00'))>
         biography: Laurent Alexandre, né le 10 juin 1960 à Paris, haut fonctionnaire et médecin de formation, est un entrepreneur, écrivain et militant politique français.
+    userWithConfirmedPhone:
+        id: 'userWithConfirmedPhone'
+        username: userWithConfirmedPhone
+        firstname: userWithConfirmedPhone
+        lastname: userWithConfirmedPhone
+        email: userWithConfirmedPhone@cap-collectif.com
+        phone: '+3300000000'
+        phoneConfirmed: true
+        userType: '@UserType1'
+        plainPassword: toto
+        roles:
+            - 'ROLE_ADMIN'
+        enabled: true
+        birthPlace: Paris
+        createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
+        confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
+        consentInternalCommunication: true

@@ -451,3 +451,10 @@ Capco\AppBundle\Entity\ProposalForm:
         description: J'appartiens à userTheo
         owner: '@userTheo'
         reference: 25
+    proposalFormPhoneRequired:
+        id: proposalFormPhoneRequired
+        title: Formulaire avec propriétaire SMS condition requise
+        description: form lié à une étape avec une condition requise SMS
+        step: '@collectSPhoneVerifRequire'
+        owner: '@user1'
+        reference: 26

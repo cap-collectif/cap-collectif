@@ -1,0 +1,29 @@
+Capco\AppBundle\Entity\UserPhoneVerificationSms:
+    userPhoneVerifSmsNotExpired:
+        id: 'userPhoneVerifSmsNotExpired'
+        user: '@user1'
+        code: '123456'
+        status: 'accepted'
+        createdAt: <(new \DateTime('2021-12-08 17:01:53'))>
+        expiresAt: <(new \DateTime('2090-12-08 17:01:53'))>
+    userPhoneVerifSmsNotExpired2:
+        id: 'userPhoneVerifSmsNotExpired2'
+        user: '@userKiroule'
+        code: '123456'
+        status: 'accepted'
+        createdAt: <(new \DateTime('2021-12-08 17:01:53'))>
+        expiresAt: <(new \DateTime('2090-12-08 17:01:53'))>
+    userPhoneVerifSmsAlreadyConfirmed:
+        id: 'userPhoneVerifSmsAlreadyConfirmed'
+        user: '@userWithConfirmedPhone'
+        code: '123456'
+        status: 'accepted'
+        createdAt: <(new \DateTime('2021-12-08 17:01:53'))>
+        expiresAt: <(new \DateTime('2090-12-08 17:01:53'))>
+    userPhoneVerifSmsExpired:
+        id: 'userPhoneVerifSmsExpired'
+        user: '@userSpyl'
+        code: '123456'
+        status: 'accepted'
+        createdAt: <(new \DateTime('2021-12-08 17:01:53'))>
+        expiresAt: <(new \DateTime('2010-12-08 17:01:53'))>

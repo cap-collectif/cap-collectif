@@ -495,7 +495,7 @@ Object {
         },
         Object {
           "key": "2021-06-01T00:00:00.000Z",
-          "totalCount": 4,
+          "totalCount": 5,
         },
         Object {
           "key": "2021-07-01T00:00:00.000Z",
@@ -985,7 +985,7 @@ Object {
       "values": Array [
         Object {
           "key": "2014-12-01T00:00:00.000Z",
-          "totalCount": 2,
+          "totalCount": 3,
         },
         Object {
           "key": "2015-01-01T00:00:00.000Z",
@@ -2470,7 +2470,7 @@ Object {
       "values": Array [
         Object {
           "key": "2014-12-01T00:00:00.000Z",
-          "totalCount": 2,
+          "totalCount": 3,
         },
         Object {
           "key": "2015-01-01T00:00:00.000Z",

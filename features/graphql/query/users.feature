@@ -36,22 +36,22 @@ Scenario: GraphQL admin wants to get count of all users and have figures of emai
     {
       "data": {
         "users": {
-          "totalCount": 228
+          "totalCount": 229
         },
         "usersNotConfirmed": {
           "totalCount": 2
         },
         "usersConfirmed": {
-          "totalCount": 226
+          "totalCount": 227
         },
         "usersWithDisabled": {
-          "totalCount": 230
+          "totalCount": 231
         },
         "usersWithSuperAdmin": {
-          "totalCount": 237
+          "totalCount": 238
         },
         "usersWithConsentInternalCommunication": {
-          "totalCount": 199
+          "totalCount": 200
         },
         "usersWithoutConsentInternalCommunication": {
           "totalCount": 29

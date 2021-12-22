@@ -1451,3 +1451,10 @@ InternalMutation:
                     inputType: UpdateTwilioAlphaSenderInput
                     payloadType: UpdateTwilioAlphaSenderPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateTwilioAlphaSenderMutation", [value, getUser()])'
+            sendSmsPhoneValidationCode:
+                access: '@=hasRole("ROLE_USER")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: SendSmsPhoneValidationCodeInput
+                    payloadType: SendSmsPhoneValidationCodePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Requirement\\SendSmsPhoneValidationCodeMutation", [value, getUser()])'

@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\UserPhoneVerificationSms;
 use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
@@ -106,6 +107,8 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
      */
     private Collection $supervisedProposals;
 
+    private Collection $userPhoneVerificationSms;
+
     public function __construct()
     {
         parent::__construct();
@@ -125,6 +128,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
         $this->notificationsConfiguration = new UserNotificationsConfiguration();
         $this->archives = new ArrayCollection();
         $this->supervisedProposals = new ArrayCollection();
+        $this->userPhoneVerificationSms = new ArrayCollection();
     }
 
     public function hydrate(array $data): self
@@ -187,6 +191,28 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     public function getResponses(): Collection
     {
         return $this->responses;
+    }
+
+    public function addUserPhoneVerificationSms(UserPhoneVerificationSms $sms): self
+    {
+        if (!$this->userPhoneVerificationSms->contains($sms)) {
+            $this->userPhoneVerificationSms[] = $sms;
+            $sms->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserPhoneVerificationSms(UserPhoneVerificationSms $sms): self
+    {
+        $this->userPhoneVerificationSms->removeElement($sms);
+
+        return $this;
+    }
+
+    public function getUserPhoneVerificationSms(): Collection
+    {
+        return $this->userPhoneVerificationSms;
     }
 
     public function getResponsesArray(): iterable

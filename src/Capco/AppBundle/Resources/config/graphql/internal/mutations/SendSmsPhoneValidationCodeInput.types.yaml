@@ -1,0 +1,4 @@
+SendSmsPhoneValidationCodeInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of sendSmsPhoneValidationCode mutation.'

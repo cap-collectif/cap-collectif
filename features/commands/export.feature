@@ -93,7 +93,7 @@ Scenario: Admin wants to export users
   And exported "csv" file with name "users.csv" should match its snapshot
   Then the command exit code should be 0
 
-Scenario: Admin wants to export users
+Scenario: Admin wants to export legacy users
   Given feature "export_legacy_users" is enabled
   Then I run a command "capco:export:legacyUsers" with parameters:
     | --delimiter |,|

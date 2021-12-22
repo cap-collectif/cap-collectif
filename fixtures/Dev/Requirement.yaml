@@ -100,3 +100,8 @@ Capco\AppBundle\Entity\Requirement:
         type: IDENTIFICATION_CODE
         position: 4
         step: '@questionnairestep6'
+    requirementPhoneVerified:
+        id: requirementPhoneVerified
+        type: PHONE_VERIFIED
+        position: 1
+        step: '@collectSPhoneVerifRequire'

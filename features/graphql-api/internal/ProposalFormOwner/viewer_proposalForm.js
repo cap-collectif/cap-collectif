@@ -55,7 +55,7 @@ describe('Internal | viewer_proposalForm', () => {
       { availableOnly: false },
       'internal_admin',
     );
-    expect(response.viewer.proposalForms.totalCount).toBe(27);
+    expect(response.viewer.proposalForms.totalCount).toBe(28);
   });
   it('admin get all available proposalForms', async () => {
     const response = await graphql(

@@ -184,6 +184,7 @@
         <one-to-one field="userIdentificationCode" target-entity="Capco\AppBundle\Entity\Security\UserIdentificationCode" >
             <join-column name="user_identification_code" referenced-column-name="identification_code" on-delete="SET NULL"/>
         </one-to-one>
+        <one-to-many field="userPhoneVerificationSms" target-entity="Capco\AppBundle\Entity\UserPhoneVerificationSms" mapped-by="user" />
     </entity>
 
 </doctrine-mapping>

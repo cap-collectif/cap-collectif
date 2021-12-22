@@ -1,0 +1,21 @@
+SendSmsPhoneValidationCodeErrorCode:
+    type: enum
+    config:
+        name: SendSmsPhoneValidationCodeErrorCode
+        description: 'Available errors for an `sendSmsPhoneValidationCode` mutation.'
+        values:
+            UNDELIVERED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Requirement\\SendSmsPhoneValidationCodeMutation::UNDELIVERED")'
+                description: 'The sms could not be delivered'
+            INVALID_NUMBER:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Requirement\\SendSmsPhoneValidationCodeMutation::INVALID_NUMBER")'
+                description: 'The given number is invalid'
+            RETRY_LIMIT_REACHED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Requirement\\SendSmsPhoneValidationCodeMutation::RETRY_LIMIT_REACHED")'
+                description: 'The user reached the retry limit of 2 within a minute'
+            PHONE_ALREADY_CONFIRMED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Requirement\\SendSmsPhoneValidationCodeMutation::PHONE_ALREADY_CONFIRMED")'
+                description: 'The user has already confirmed his phone number'
+            MESSAGING_SERVICE_ID_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Requirement\\SendSmsPhoneValidationCodeMutation::MESSAGING_SERVICE_ID_NOT_FOUND")'
+                description: 'The twilio messaging service needs to be created'

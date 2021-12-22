@@ -232,3 +232,11 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         body: Ouais le body ouais
         startAt: <identity((new \DateTime('2020-10-16')))>
         endAt: <identity((new \DateTime('2031-10-16')))>
+    collectSPhoneVerifRequire:
+        id: collectSPhoneVerifRequire
+        title: Budget participatif du projet avec condition requise SMS
+        label: Dépôt
+        body: Body de l'étape
+        voteType: 1
+        startAt: <identity((new \DateTime('2020-10-16')))>
+        endAt: <identity((new \DateTime('2031-10-16')))>

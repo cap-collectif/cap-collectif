@@ -163,6 +163,18 @@ Object {
           "node": Object {
             "authors": Array [
               Object {
+                "username": "lbrunet",
+              },
+            ],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
                 "username": "admin",
               },
             ],
@@ -415,7 +427,7 @@ Object {
           },
         },
       ],
-      "totalCount": 42,
+      "totalCount": 43,
     },
   },
 }
@@ -673,6 +685,12 @@ Object {
         },
         Object {
           "node": Object {
+            "publishedAt": "2017-06-19 13:00:00",
+            "title": "Projet condition requise SMS",
+          },
+        },
+        Object {
+          "node": Object {
             "publishedAt": "2018-12-07 00:00:00",
             "title": "Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH",
           },
@@ -768,7 +786,7 @@ Object {
           },
         },
       ],
-      "totalCount": 42,
+      "totalCount": 43,
     },
   },
 }

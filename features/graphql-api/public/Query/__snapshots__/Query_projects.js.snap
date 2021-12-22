@@ -105,7 +105,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjc=",
       "hasNextPage": true,
     },
-    "totalCount": 41,
+    "totalCount": 42,
   },
 }
 `;
@@ -205,7 +205,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 36,
+    "totalCount": 37,
   },
 }
 `;
@@ -315,7 +315,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 36,
+    "totalCount": 37,
   },
 }
 `;

@@ -151,3 +151,7 @@ Capco\AppBundle\Entity\ProjectAuthor:
         createdAt: <(new \DateTime('2020-09-01'))>
         user: '@user1'
         project: '@projectWithAnonymousQuestionnaire'
+    pa39:
+        createdAt: <(new \DateTime('2020-09-01'))>
+        user: '@user1'
+        project: '@projectWithPhoneVerifiedRequirement'

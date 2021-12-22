@@ -9,10 +9,17 @@ use Twilio\Rest\Messaging\V1\Service\AlphaSenderInstance;
 use Twilio\Rest\Messaging\V1\ServiceInstance;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Twilio\Rest\Api\V2010\Account\MessageInstance;
 
 class TwilioClient
 {
     private const SENDER_NAME_MAX_LENGTH = 11;
+
+    // see https://www.twilio.com/docs/api/errors
+    public const ERRORS = [
+        'INVALID_TO_NUMBER' => 21211
+    ];
+
 
     private Client $client;
     private ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
@@ -23,6 +30,14 @@ class TwilioClient
         $this->client = new Client($twilioSid, $twilioToken);
         $this->externalServiceConfigurationRepository = $externalServiceConfigurationRepository;
         $this->validator = $validator;
+    }
+
+    public function send(string $to, string $body, string $messagingServiceSid): MessageInstance
+    {
+        return $this->client->messages->create($to, [
+            'messagingServiceSid' => $messagingServiceSid,
+            'body' => $body,
+        ]);
     }
 
     /**
@@ -39,7 +54,10 @@ class TwilioClient
     public function createAlphaSender(string $senderName): AlphaSenderInstance
     {
         $serviceId = $this->getServiceId();
-        return $this->client->messaging->v1->services($serviceId)->alphaSenders->create($senderName);
+
+        return $this->client->messaging->v1
+            ->services($serviceId)
+            ->alphaSenders->create($senderName);
     }
 
     /**
@@ -48,15 +66,20 @@ class TwilioClient
     public function deleteAlphaSender(string $alphaSenderSid): bool
     {
         $serviceId = $this->getServiceId();
-        return $this->client->messaging->v1->services($serviceId)
+
+        return $this->client->messaging->v1
+            ->services($serviceId)
             ->alphaSenders($alphaSenderSid)
             ->delete();
     }
 
-    public function getServiceId(): string
+    public function getServiceId(): ?string
     {
-        $config = $this->externalServiceConfigurationRepository->findOneBy(['type' => 'twilio_service_id']);
-        return $config->getValue();
+        $config = $this->externalServiceConfigurationRepository->findOneBy([
+            'type' => 'twilio_service_id',
+        ]);
+
+        return $config ? $config->getValue() : null;
     }
 
     /**
