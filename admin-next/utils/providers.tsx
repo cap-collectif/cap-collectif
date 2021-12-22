@@ -11,14 +11,15 @@ type ProvidersProps = {
     featureFlags: FeatureFlags
     intl: IntlType
     viewerSession: ViewerSession
+    appVersion: string
 };
 
-const Providers: React.FC<ProvidersProps> = ({ children,  intl, featureFlags , viewerSession}) => {
+const Providers: React.FC<ProvidersProps> = ({ children,  intl, featureFlags , viewerSession, appVersion}) => {
     return (
         <RelayEnvironmentProvider environment={getEnvironment(featureFlags)}>
             <IntlProvider locale={intl.locale} messages={intl.messages}>
                 <CapUIProvider>
-                    <AppProvider viewerSession={viewerSession}>
+                    <AppProvider viewerSession={viewerSession} appVersion={appVersion}>
                         {children}
                     </AppProvider>
                 </CapUIProvider>

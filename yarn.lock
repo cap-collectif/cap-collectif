@@ -1533,10 +1533,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/ui@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-0.4.2.tgz#2bf5d21bd2979effcc2876820f5dd94deb4105e4"
-  integrity sha512-LoNaQ4dJwVysJRqtu7XWyJAgOYL6o9wykOybEonFuu2qN1FrikrdOnVxkjTJWPslPPJvSHUkpHsx76q6k0w8jw==
+"@cap-collectif/ui@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-0.5.0.tgz#0c9121a61ace590bdf815264e5ec6e146ebb18d5"
+  integrity sha512-5PnRYgNGeeLsR88uwp/Ur1yDTdXtt8SvKfntW7epmKRIeoVapNj1p4H6D2BIAihIKnkXKksoOPVO3WZBiQHFCw==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
@@ -1545,6 +1545,7 @@
     deepmerge "^4.2.2"
     framer-motion "^4.1.17"
     react-dates "^21.8.0"
+    react-dropzone "^11.4.2"
     react-hotkeys-hook "^3.4.4"
     react-infinite-scroller "^1.2.4"
     react-select "^5.2.1"
@@ -18859,6 +18860,15 @@ react-dropzone@^11.3.4:
   version "11.3.4"
   resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-11.3.4.tgz#aeb098df5c4491e165042c9f0b5e2e7185484740"
   integrity sha512-B1nzNRZ4F1cnrfEC0T6KXeBN1mCPinu4JCoTrp7NjB+442KSPxqfDrw41QIA2kAwlYs1+wj/0BTedeM5hc2+xw==
+  dependencies:
+    attr-accept "^2.2.1"
+    file-selector "^0.2.2"
+    prop-types "^15.7.2"
+
+react-dropzone@^11.4.2:
+  version "11.4.2"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-11.4.2.tgz#1eb99e9def4cc7520f4f58e85c853ce52c483d56"
+  integrity sha512-ocYzYn7Qgp0tFc1gQtUTOaHHSzVTwhWHxxY+r7cj2jJTPfMTZB5GWSJHdIVoxsl+EQENpjJ/6Zvcw0BqKZQ+Eg==
   dependencies:
     attr-accept "^2.2.1"
     file-selector "^0.2.2"

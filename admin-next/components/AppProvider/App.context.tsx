@@ -3,6 +3,7 @@ import { ViewerSession } from '../../types';
 
 type AppContext = {
     viewerSession: ViewerSession,
+    appVersion: string,
 };
 
 export const AppContext = React.createContext<AppContext>({
@@ -14,6 +15,7 @@ export const AppContext = React.createContext<AppContext>({
         isSuperAdmin: false,
         isProjectAdmin: false,
     },
+    appVersion: '',
 });
 
 export const useAppContext = (): AppContext => {

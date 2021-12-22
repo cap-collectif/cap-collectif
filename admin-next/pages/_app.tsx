@@ -49,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 featureFlags={pageProps.featureFlags}
                 intl={pageProps.intl}
                 viewerSession={pageProps.viewerSession}
+                appVersion={pageProps.appVersion}
             >
                 <GlobalCSS />
                 <Fonts />

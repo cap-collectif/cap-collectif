@@ -6,6 +6,7 @@ export const getRedisHost = async (): string => {
     if (__isDev__) {
         const { error, stdout } = await exec(`dinghy ip`);
         if (error) {
+            console.info('Redis is using your docker IP: 127.0.0.1');
             // We are on linux / docker for mac if no dinghy.
             return '127.0.0.1';
         }

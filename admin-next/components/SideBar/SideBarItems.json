@@ -1,0 +1,429 @@
+[
+    {
+        "id": "contributions",
+        "title": "global.contribution",
+        "icon": "PEN",
+        "featuresRequired": [],
+        "rolesRequired": ["admin"],
+        "items": [
+            {
+                "title": "admin.label.reporting",
+                "href": "/admin/reporting",
+                "rolesRequired": [],
+                "featuresRequired": ["reporting"]
+            },
+            {
+                "title": "admin.label.proposal",
+                "href": "/admin/capco/app/proposal/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.opinion",
+                "href": "/admin/capco/app/opinion/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.opinion_version",
+                "href": "/admin/capco/app/opinionversion/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.argument",
+                "href": "/admin/capco/app/argument/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.source",
+                "href": "/admin/capco/app/source/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.comment",
+                "href": "/admin/capco/app/comment/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            }
+        ]
+    },
+    {
+        "id": "content",
+        "title": "admin.group.content",
+        "icon": "FOLDER_O",
+        "featuresRequired": [],
+        "rolesRequired": [],
+        "items": [
+            {
+                "title": "admin.label.highlighted",
+                "href": "/admin/capco/app/highlightedcontent/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.theme",
+                "href": "/admin/capco/app/theme/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.post",
+                "href": "/admin/capco/app/post/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.events",
+                "href": "/admin/capco/app/event/list",
+                "rolesRequired": [],
+                "featuresRequired": ["calendar"]
+            },
+            {
+                "title": "admin.label.video",
+                "href": "/admin/capco/app/video/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.page",
+                "href": "/admin/capco/app/page/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            },
+            {
+                "title": "media",
+                "href": "/admin/capco/media/media/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            }
+        ]
+    },
+    {
+        "id": "projects",
+        "title": "admin.group.project",
+        "icon": "BOOK_STAR_O",
+        "featuresRequired": [],
+        "rolesRequired": [],
+        "items": [
+            {
+                "title": "admin.label.project",
+                "href": "/admin/capco/app/project/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.appendix",
+                "href": "/admin/capco/app/appendixtype/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.category",
+                "href": "/admin/capco/app/sourcecategory/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.consultation",
+                "href": "/admin/capco/app/consultation/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.proposal_form",
+                "href": "/admin/capco/app/proposalform/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.questionnaire",
+                "href": "/admin/capco/app/questionnaire/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.types",
+                "href": "/admin/capco/app/projecttype/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            }
+        ]
+    },
+    {
+        "id": "users",
+        "title": "sonata.admin.group.user",
+        "icon": "USER_O",
+        "featuresRequired": [],
+        "rolesRequired": ["admin"],
+        "items": [
+            {
+                "title": "global.select_user.type",
+                "href": "/admin/capco/user/user/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin-menu-invite-users-label",
+                "href": "/admin/capco/user/invite/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.group",
+                "href": "/admin/capco/app/group/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.user_type",
+                "href": "/admin/capco/user/usertype/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.newsletter_subscription",
+                "href": "/admin/capco/app/newslettersubscription/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            }
+        ]
+    },
+    {
+        "id": "settings",
+        "title": "admin.group.parameters",
+        "icon": "COG",
+        "featuresRequired": [],
+        "rolesRequired": ["admin"],
+        "items": [
+            {
+                "title": "admin.label.menu_item",
+                "href": "/admin/capco/app/menuitem/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.social_network",
+                "href": "/admin/capco/app/socialnetwork/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.footer_social_network",
+                "href": "/admin/capco/app/footersocialnetwork/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.project_district",
+                "href": "/admin/capco/app/district-projectdistrict/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.fields.proposal_form.map",
+                "href": "/admin/map/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "global-languages",
+                "href": "/admin/locale/list",
+                "rolesRequired": [],
+                "featuresRequired": ["multilangue"]
+            },
+            {
+                "title": "custom-url",
+                "href": "/admin/redirect/list",
+                "rolesRequired": [],
+                "featuresRequired": ["http_redirects"]
+            },
+            {
+                "title": "website-icon",
+                "href": "/admin/favicon/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "global-typeface",
+                "href": "/admin/font/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.settings.global",
+                "href": "/admin/settings/settings.global/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.settings.performance",
+                "href": "/admin/settings/settings.performance/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.settings.modules",
+                "href": "/admin/settings/settings.modules/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.settings.notifications",
+                "href": "/admin/settings/settings.notifications/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.settings.appearance",
+                "href": "/admin/settings/settings.appearance/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            }
+        ]
+    },
+    {
+        "id": "pages",
+        "title": "admin.group.pages",
+        "icon": "FILE_O",
+        "featuresRequired": [],
+        "rolesRequired": ["admin"],
+        "items": [
+            {
+                "title": "admin.label.section",
+                "href": "/admin/capco/app/section/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.contact",
+                "href": "/admin/contact/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.homepage",
+                "href": "/admin/settings/pages.homepage/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.blog",
+                "href": "/admin/settings/pages.blog/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.events",
+                "href": "/admin/settings/pages.events/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.themes",
+                "href": "/admin/settings/pages.themes/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.projects",
+                "href": "/admin/settings/pages.projects/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.registration",
+                "href": "/admin/settings/pages.registration/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.members",
+                "href": "/admin/settings/pages.members/list",
+                "rolesRequired": [],
+                "featuresRequired": ["members_list"]
+            },
+            {
+                "title": "admin.label.pages.login",
+                "href": "/admin/settings/pages.login/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.footer",
+                "href": "/admin/settings/pages.footer/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.cookies",
+                "href": "/admin/settings/pages.cookies/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.privacy",
+                "href": "/admin/settings/pages.privacy/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.legal",
+                "href": "/admin/settings/pages.legal/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.charter",
+                "href": "/admin/settings/pages.charter/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin.label.pages.shield",
+                "href": "/admin/settings/pages.shield/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            }
+        ]
+    },
+    {
+        "id": "emailing",
+        "title": "admin.group.emailing",
+        "icon": "ENVELOPE_O",
+        "featuresRequired": ["unstable__emailing"],
+        "rolesRequired": ["admin"],
+        "items": [
+            {
+                "title": "admin-menu-campaign-list",
+                "href": "/admin/mailingCampaign/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin-menu-emailing-list",
+                "href": "/admin/mailingList/list",
+                "rolesRequired": [],
+                "featuresRequired": []
+            },
+            {
+                "title": "admin-menu-parameters",
+                "href": "/admin/mailingParameters/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": ["unstable__emailing_parameters"]
+            }
+        ]
+    },
+    {
+        "id": "analytics",
+        "title": "admin.label.analytics",
+        "icon": "PIE_CHART",
+        "featuresRequired": ["unstable__analytics_page"],
+        "rolesRequired": [],
+        "href": "/admin/capco/analytics/list",
+        "beta": true,
+        "items": []
+    }
+]

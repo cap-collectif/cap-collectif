@@ -1,3 +1,5 @@
+const path = require('path');
+
 const EXLUDED_DOCGEN_PROPS = [
   'as',
   'gap',
@@ -69,5 +71,13 @@ module.exports = {
         return true;
       },
     },
+  },
+  webpackFinal: async config => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@ui': path.resolve(__dirname, '../components/UI'),
+    };
+
+    return config;
   },
 };

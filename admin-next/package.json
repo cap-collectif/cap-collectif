@@ -12,7 +12,7 @@
     "test": "jest",
     "relay": "relay-compiler --src ./ --schema ../schema.internal.graphql --language typescript --artifactDirectory ./__generated__",
     "relay:watch": "relay-compiler --src ./ --schema ../schema.internal.graphql --language typescript --artifactDirectory ./__generated__ --watch",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} --auto-accept-changes"
   },

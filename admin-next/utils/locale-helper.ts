@@ -16,12 +16,7 @@ export function getLocaleFromReq(req: NextApiRequest): string | undefined | null
 }
 
 export function setLocaleCookie(locale: string): void {
-    setCookie(null, LOCALE_COOKIE_NAME, locale, {
-        domain: process.env.PRODUCTION ? window.location.host : '.capco.dev',
-        expires: CookieHelper.getDateDifference(undefined, undefined, 1),
-        secure: true,
-        sameSite: 'strict',
-    });
+    CookieHelper.setCookie(LOCALE_COOKIE_NAME, locale);
 }
 
 // from fr-FR to FR_FR

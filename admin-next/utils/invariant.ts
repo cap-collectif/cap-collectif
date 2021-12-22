@@ -20,14 +20,14 @@
 
 const invariant = (
     condition: boolean,
-    format: any,
-    a: any,
-    b: any,
-    c: any,
-    d: any,
-    e: any,
-    f: any,
-) => {
+    format: string,
+    a?: any,
+    b?: any,
+    c?: any,
+    d?: any,
+    e?: any,
+    f?: any,
+): void => {
     if (!process.env.PRODUCTION) {
         if (format === undefined) {
             throw new Error('invariant requires an error message argument');
