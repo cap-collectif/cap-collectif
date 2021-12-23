@@ -43,19 +43,12 @@ type Requirement =
       +label: string,
     }
   | {
-      +__typename: 'FirstnameRequirement' | 'LastnameRequirement' | 'PhoneRequirement',
-      +id: string,
-      +viewerMeetsTheRequirement: boolean,
-      +viewerValue: ?string,
-    }
-  | {
-      +__typename: 'IdentificationCodeRequirement',
-      +id: string,
-      +viewerMeetsTheRequirement: boolean,
-      +viewerValue: ?string,
-    }
-  | {
-      +__typename: 'PhoneVerifiedRequirement',
+      +__typename:
+        | 'FirstnameRequirement'
+        | 'LastnameRequirement'
+        | 'PhoneRequirement'
+        | 'IdentificationCodeRequirement'
+        | 'PhoneVerifiedRequirement',
       +id: string,
       +viewerMeetsTheRequirement: boolean,
       +viewerValue: ?string,
@@ -378,8 +371,7 @@ export class RequirementsForm extends React.Component<Props> {
                     : requirement.id
                 }
                 label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
-                {...getFormProps(requirement, change)}
-              >
+                {...getFormProps(requirement, change)}>
                 {requirement.__typename === 'CheckboxRequirement' ? requirement.label : null}
               </Field>
             );
@@ -451,7 +443,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 export default createFragmentContainer(container, {
   step: graphql`
     fragment RequirementsForm_step on RequirementStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       requirements {
         edges {
           node {

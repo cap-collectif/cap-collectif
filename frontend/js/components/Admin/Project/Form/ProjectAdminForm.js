@@ -143,7 +143,6 @@ const onSubmit = (
 ) => {
   const hasNewDebateStepAdded =
     steps?.length > 0 ? steps.some(s => !s.id && s.__typename === 'DebateStep') : false;
-
   const input = {
     title,
     authors: formatAuthors(authors),
@@ -167,6 +166,7 @@ const onSubmit = (
       ? steps.map(({ url, ...s }: any) => {
           delete s.isAnalysisStep;
           const sTypename = s.__typename;
+          const stepSupportRequirements = doesStepSupportRequirements(s);
           delete s.__typename;
           const requirements =
             s.requirements?.length > 0
@@ -200,7 +200,7 @@ const onSubmit = (
             mainView:
               sTypename === 'CollectStep' || sTypename === 'SelectionStep' ? s.mainView : undefined,
             requirements,
-            requirementsReason: doesStepSupportRequirements(s) ? s.requirementsReason : undefined,
+            requirementsReason: stepSupportRequirements ? s.requirementsReason : undefined,
             proposalsHidden: sTypename === 'SelectionStep' ? s.proposalsHidden : undefined,
             statuses:
               sTypename === 'SelectionStep' || sTypename === 'CollectStep'
@@ -421,8 +421,7 @@ const renderProjectSave = ({
           id="submit-project-content"
           type="submit"
           disabled={invalid || submitting || pristine}
-          bsStyle="primary"
-        >
+          bsStyle="primary">
           {submitting ? (
             <FormattedMessage id="global.loading" />
           ) : (

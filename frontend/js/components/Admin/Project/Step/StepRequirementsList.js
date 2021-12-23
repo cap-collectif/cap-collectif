@@ -63,10 +63,10 @@ export const doesStepSupportRequirements = (step: {
   requirements?: ?Array<Requirement>,
 }): boolean => {
   return (
-    step.__typename !== 'CollectStep' &&
-    step.__typename !== 'SelectionStep' &&
-    step.__typename !== 'ConsultationStep' &&
-    step.__typename !== 'QuestionnaireStep'
+    step.__typename === 'CollectStep' ||
+    step.__typename === 'SelectionStep' ||
+    step.__typename === 'ConsultationStep' ||
+    step.__typename === 'QuestionnaireStep'
   );
 };
 
@@ -78,7 +78,6 @@ export function createRequirements(
   twilioEnabled: ?boolean,
 ): Array<Requirement> {
   const requirements = [];
-
   if (!doesStepSupportRequirements(step)) {
     return requirements;
   }
