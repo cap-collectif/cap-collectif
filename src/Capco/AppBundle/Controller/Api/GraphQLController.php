@@ -105,11 +105,11 @@ class GraphQLController extends BaseController
 
     private function addCORSAndCacheHeadersIfNeeded(Response $response, Request $request): void
     {
-        // We make sure to handle CORS for the MacOS Symfony proxy (It's not needed on Linux)…
-        if ('dev' === $this->env && $request->headers->has('Origin')) {
+        // We make sure to handle CORS correctly in development/testing
+        if ('dev' === $this->env || 'test' === $this->env) {
             $response->headers->set(
                 'Access-Control-Allow-Origin',
-                $request->headers->get('Origin'),
+                $request->headers->get('Origin') ?? '*',
                 true
             );
             $response->headers->set('Access-Control-Allow-Credentials', 'true', true);
@@ -119,7 +119,7 @@ class GraphQLController extends BaseController
                 true
             );
             $response->headers->set('Access-Control-Allow-Methods', 'OPTIONS, POST', true);
-            $response->headers->set('Access-Control-Max-Age', '86400', true);
+            $response->headers->set('Access-Control-Max-Age', '3600', true);
         }
 
         // We had Cache headers here
