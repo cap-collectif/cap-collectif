@@ -10605,6 +10605,11 @@ type Query {
 
     """Filter the list by consent to internal communication"""
     consentInternalCommunication: Boolean = null
+
+    """Filter the list by project admins"""
+    onlyProjectAdmins: Boolean = null
+
+    """Ordering options for users returning from the connection."""
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
   ): UserConnection!
 

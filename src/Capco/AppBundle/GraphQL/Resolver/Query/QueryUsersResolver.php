@@ -41,6 +41,8 @@ class QueryUsersResolver implements ResolverInterface
         $includeDisabled = isset($args['withDisabled']) && true === $args['withDisabled'];
         $emailConfirmed = $args['emailConfirmed'];
         $consentInternalCommunication = $args['consentInternalCommunication'];
+        $onlyProjectAdmins = $args['onlyProjectAdmins'];
+
         $orderBy = $args->offsetExists('orderBy')
             ? $args->offsetGet('orderBy')
             : ['field' => SortField::CREATED_AT, 'direction' => OrderDirection::DESC];
@@ -50,7 +52,8 @@ class QueryUsersResolver implements ResolverInterface
             $includeSuperAdmin,
             $includeDisabled,
             $emailConfirmed,
-            $consentInternalCommunication
+            $consentInternalCommunication,
+            $onlyProjectAdmins
         ) {
             return $this->userSearch->getAllUsers(
                 $limit,
@@ -59,7 +62,8 @@ class QueryUsersResolver implements ResolverInterface
                 $includeSuperAdmin,
                 $includeDisabled,
                 $emailConfirmed,
-                $consentInternalCommunication
+                $consentInternalCommunication,
+                $onlyProjectAdmins
             );
         });
 

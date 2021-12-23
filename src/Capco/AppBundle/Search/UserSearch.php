@@ -89,7 +89,8 @@ class UserSearch extends Search
         bool $showSuperAdmin = false,
         bool $includeDisabled = false,
         ?bool $emailConfirmed = null,
-        ?bool $consentInternalCommunication = null
+        ?bool $consentInternalCommunication = null,
+        ?bool $onlyProjectAdmins = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         if (!$showSuperAdmin) {
@@ -107,6 +108,12 @@ class UserSearch extends Search
         if (null !== $consentInternalCommunication) {
             $boolQuery->addFilter(
                 new Term(['isConsentInternalCommunication' => $consentInternalCommunication])
+            );
+        }
+
+        if (null !== $onlyProjectAdmins) {
+            $boolQuery->addFilter(
+                new Term(['isOnlyProjectAdmin' => $onlyProjectAdmins])
             );
         }
 

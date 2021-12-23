@@ -200,8 +200,13 @@ InternalQuery:
                         type: 'Boolean'
                         defaultValue: null
                         description: 'Filter the list by consent to internal communication'
+                    onlyProjectAdmins:
+                        type: 'Boolean'
+                        defaultValue: null
+                        description: 'Filter the list by project admins'
                     orderBy:
                         type: 'UserOrder'
+                        description: 'Ordering options for users returning from the connection.'
                         defaultValue:
                             {
                                 field: '@=constant("Capco\\AppBundle\\Enum\\SortField::CREATED_AT")',
