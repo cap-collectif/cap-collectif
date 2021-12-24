@@ -145,9 +145,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 const formName = 'proposal-analysis-form';
 
 const validate = (values: FormValues, { proposal, intl }: Props) => {
-  const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
-    'availableQuestions',
-  );
+  const availableQuestions: Array<string> =
+    memoizeAvailableQuestions.cache.get('availableQuestions');
 
   const responsesError = validateResponses(
     proposal?.form?.analysisConfiguration?.evaluationForm?.questions || [],
@@ -179,9 +178,8 @@ export const ProposalAnalysisFormPanel = ({
   proposalRevisionsEnabled,
 }: Props) => {
   const [status, setStatus] = useState(initialStatus);
-  const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
-    'availableQuestions',
-  );
+  const availableQuestions: Array<string> =
+    memoizeAvailableQuestions.cache.get('availableQuestions');
   return (
     <>
       <form id={formName} style={{ opacity: disabled ? '0.5' : '1' }}>
@@ -200,6 +198,7 @@ export const ProposalAnalysisFormPanel = ({
             availableQuestions={availableQuestions}
             memoize={memoizeAvailableQuestions}
             disabled={disabled}
+            unstable__enableCapcoUiDs
           />
         </AnalysisForm>
         <Validation>
@@ -325,7 +324,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAnalysisFormPanel_proposal on Proposal
-      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
+    @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       id
       ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
       ...ProposalRevisionPanel_proposal @include(if: $proposalRevisionsEnabled)

@@ -36,6 +36,7 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly 1`] = `
         questions={Array []}
         responses={Array []}
         typeForm="questionnaire"
+        unstable__enableCapcoUiDs={true}
       />
     </ProposalAnalysisFormPanel__AnalysisForm>
     <ProposalAnalysisFormPanel__Validation>
@@ -192,6 +193,7 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
         questions={Array []}
         responses={Array []}
         typeForm="questionnaire"
+        unstable__enableCapcoUiDs={true}
       />
     </ProposalAnalysisFormPanel__AnalysisForm>
     <ProposalAnalysisFormPanel__Validation>
