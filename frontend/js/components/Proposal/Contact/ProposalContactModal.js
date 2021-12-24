@@ -85,7 +85,7 @@ export const ProposalContactModal = ({
             id="ProposalFormContactModal-senderName"
             type="text"
             control={control}
-            minLength="2"
+            minLength={2}
             required
             name="senderName"
           />

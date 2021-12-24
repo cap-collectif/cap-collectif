@@ -1,5 +1,4 @@
 import cookie from 'cookie';
-import { setCookie } from 'nookies';
 import CookieHelper from './cookie-helper';
 import { NextApiRequest } from 'next';
 

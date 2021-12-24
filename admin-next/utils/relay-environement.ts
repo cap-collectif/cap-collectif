@@ -6,7 +6,7 @@ import { FeatureFlags } from '../types';
 const store = new Store(new RecordSource());
 const network = Network.create(executeFunction);
 
-const environment = new Environment({
+export const environment = new Environment({
     network,
     store,
 });

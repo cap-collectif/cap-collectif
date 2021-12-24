@@ -1,48 +1,47 @@
-import cn from 'classnames'
-import * as React from 'react'
+import cn from 'classnames';
+import * as React from 'react';
 
-import { Flex, FlexProps } from '@cap-collectif/ui'
-import NavBarItem from './item/NavBarItem'
-import NavBarTitle from './title/NavBarTitle'
+import { Flex, FlexProps } from '@cap-collectif/ui';
+import NavBarItem from './item/NavBarItem';
+import NavBarTitle from './title/NavBarTitle';
 import NavBarList from './list/NavBarList';
 import NavBarData from './data/NavBarData';
 
 export interface NavBarProps extends FlexProps {}
 
 type SubComponents = {
-  Title: typeof NavBarTitle
-  List: typeof NavBarList
-  Item: typeof NavBarItem
-  Data: typeof NavBarData
-}
+    Title: typeof NavBarTitle,
+    List: typeof NavBarList,
+    Item: typeof NavBarItem,
+    Data: typeof NavBarData,
+};
 
 export const NavBar: React.FC<NavBarProps> & SubComponents = ({
-  children,
-  className,
-  ...props
+    children,
+    className,
+    ...props
 }) => (
-  <Flex
-    as="nav"
-    direction="row"
-    bg="white"
-    justify="space-between"
-    align="center"
-    pl={6}
-    height={11}
-    className={cn('navBar', className)}
-    borderBottom="normal"
-    borderColor="gray.150"
-    {...props}
-  >
-    {children}
-  </Flex>
-)
+    <Flex
+        as="nav"
+        direction="row"
+        bg="white"
+        justify="space-between"
+        align="center"
+        pl={6}
+        minHeight={11}
+        className={cn('navBar', className)}
+        borderBottom="normal"
+        borderColor="gray.150"
+        {...props}>
+        {children}
+    </Flex>
+);
 
-NavBar.displayName = 'NavBar'
+NavBar.displayName = 'NavBar';
 
-NavBar.Title = NavBarTitle
-NavBar.List = NavBarList
-NavBar.Item = NavBarItem
-NavBar.Data = NavBarData
+NavBar.Title = NavBarTitle;
+NavBar.List = NavBarList;
+NavBar.Item = NavBarItem;
+NavBar.Data = NavBarData;
 
-export default NavBar
+export default NavBar;

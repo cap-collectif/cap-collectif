@@ -1533,10 +1533,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/ui@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-0.5.0.tgz#0c9121a61ace590bdf815264e5ec6e146ebb18d5"
-  integrity sha512-5PnRYgNGeeLsR88uwp/Ur1yDTdXtt8SvKfntW7epmKRIeoVapNj1p4H6D2BIAihIKnkXKksoOPVO3WZBiQHFCw==
+"@cap-collectif/ui@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-0.6.0.tgz#9959e338f9cf91ee70328b032d1791441e26251f"
+  integrity sha512-WFhIyCCMU2w3LV+y7/nbDrVXuKWxkchv5aJkdcxZRTurMIMbhjMeDLzySUuVmhlXTIAXDAkOIjfPa+ic0tYoYg==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
@@ -4662,6 +4662,11 @@
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@types/d3-time/-/d3-time-2.1.1.tgz#743fdc821c81f86537cbfece07093ac39b4bc342"
   integrity sha512-9MVYlmIgmRR31C5b4FVSWtuMmBHh2mOWQYfl7XAYOa8dsnb7iEmUmRSWSFgXFtkjxO65d7hTUHQC+RhR/9IWFg==
+
+"@types/debounce-promise@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@types/debounce-promise/-/debounce-promise-3.1.4.tgz#bf10eead11724e666ea541df1c9d3969677a505b"
+  integrity sha512-9SEVY3nsz+uMN2DwDocftB5TAgZe7D0cOzxxRhpotWs6T4QFqRaTXpXbOSzbk31/7iYcfCkJJPwWGzTxyuGhCg==
 
 "@types/emoji-regex@^8.0.0":
   version "8.0.0"

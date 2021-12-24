@@ -24,8 +24,8 @@ export type Props = {|
   label?: string | any,
   type: ?string,
   onChange?: any,
-  maxLength?: string,
-  minLength?: string,
+  maxLength?: number,
+  minLength?: number,
   onBlur?: any,
   maxSize?: number,
   accept?: string | string[],
@@ -36,38 +36,38 @@ export type Props = {|
 const FieldInput = ({ label, guideline, name, control, ...props }: Props) => {
   const intl = useIntl();
 
-  const renderInputGroup = ({ value, type, maxSize, accept, register, ...rest }: Object, field) => {
+  const renderInputGroup = ({ type, maxSize, accept, ...rest }: Object, field) => {
     if (typeof rest.placeholder === 'string' || rest.placeholder instanceof String) {
       rest.placeholder = intl.formatMessage({ id: rest.placeholder });
     }
 
     if (type === 'text' || type === 'email') {
-      return <Input value={value} {...rest} {...field} />;
+      return <Input {...rest} {...field} />;
     }
 
     if (type === 'textarea') {
-      return <TextArea value={value} {...rest} {...field} />;
+      return <TextArea {...rest} {...field} />;
     }
 
     if (type === 'captcha') {
-      return <Captcha value={value} {...rest} {...field} />;
+      return <Captcha {...rest} {...field} />;
     }
   };
 
-  const required = props.required ? intl.formatMessage({ id: 'global.required' }) : null;
+  const required = props.required ? intl.formatMessage({ id: 'global.required' }) : undefined;
 
   const validateEmail =
     props.type === 'email'
       ? (value: string) =>
           isEmail(value) || intl.formatMessage({ id: 'global.constraints.email.invalid' })
-      : null;
+      : undefined;
 
   const minLength = props.minLength
     ? {
         value: props.minLength,
         message: intl.formatMessage({ id: 'two-characters-minimum-required' }),
       }
-    : null;
+    : undefined;
 
   const rules = {
     required,
@@ -82,7 +82,7 @@ const FieldInput = ({ label, guideline, name, control, ...props }: Props) => {
       render={({ field, fieldState: { invalid, error }, formState: { touchedFields } }) => {
         const isInvalid = invalid && touchedFields[name];
         return (
-          <FormControl variantSize="md" isRequired={props.required} isInvalid={isInvalid} mb={5}>
+          <FormControl variantSize="md" isRequired={props.required} isInvalid={isInvalid} mb={4}>
             {label && <FormLabel label={label} htmlFor={props.id} />}
             {guideline && <FormGuideline>{guideline}</FormGuideline>}
             {renderInputGroup(props, field)}

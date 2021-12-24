@@ -147,7 +147,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
             values={Object {}}
           />
         }
-        minLength="2"
+        minLength={2}
         name="senderName"
         required={true}
         type="text"

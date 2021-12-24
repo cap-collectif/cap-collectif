@@ -25,8 +25,7 @@ const Index: NextPage<PageProps> = ({ viewerSession }) => {
                     },
                     label: 'proposals',
                 },
-            ]}
-        >
+            ]}>
             <Text>
                 {intl.formatMessage({ id: 'global-hello' })}: {JSON.stringify(viewerSession)}
             </Text>

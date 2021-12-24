@@ -81,7 +81,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                             <NavBar title={navTitle} data={navData} />
                         </React.Suspense>
 
-                        <Box p={6} className="container-content">
+                        <Box p={6} className="container-content" overflowY="scroll">
                             {children}
                         </Box>
                     </Flex>
