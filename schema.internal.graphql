@@ -5760,6 +5760,7 @@ enum FeatureFlagType {
   consent_external_communication
   developer_documentation
   public_api
+  graphql_introspection
   login_facebook
   login_paris
   privacy_policy

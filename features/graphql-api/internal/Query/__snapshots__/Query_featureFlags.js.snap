@@ -41,6 +41,10 @@ Object {
     },
     Object {
       "enabled": true,
+      "type": "graphql_introspection",
+    },
+    Object {
+      "enabled": true,
       "type": "votes_min",
     },
     Object {

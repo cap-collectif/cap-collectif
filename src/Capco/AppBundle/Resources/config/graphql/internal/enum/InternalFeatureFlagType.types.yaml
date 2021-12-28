@@ -20,6 +20,8 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::developer_documentation")'
             public_api:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::public_api")'
+            graphql_introspection:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::graphql_introspection")'
             login_facebook:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_facebook")'
             login_paris:

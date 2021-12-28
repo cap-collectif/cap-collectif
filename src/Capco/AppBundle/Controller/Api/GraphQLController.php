@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Toggle\Manager;
+use Overblog\GraphQLBundle\Request\Parser;
+use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
-use Psr\Log\LoggerInterface;
-use Overblog\GraphQLBundle\Request\Parser;
 use Overblog\GraphQLBundle\Request\ParserInterface;
-use Overblog\GraphQLBundle\Request\Executor;
+use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
 
 class GraphQLController extends BaseController
 {
@@ -22,6 +23,8 @@ class GraphQLController extends BaseController
     private Executor $requestExecutor;
     private Parser $requestParser;
     private LoggerInterface $logger;
+    private Manager $manager;
+
     private string $env;
 
     public function __construct(
@@ -29,6 +32,7 @@ class GraphQLController extends BaseController
         Executor $requestExecutor,
         Parser $requestParser,
         LoggerInterface $logger,
+        Manager $manager,
         string $env
     ) {
         parent::__construct($batchParser, $requestExecutor, $requestParser, false, false);
@@ -36,6 +40,7 @@ class GraphQLController extends BaseController
         $this->requestExecutor = $requestExecutor;
         $this->requestParser = $requestParser;
         $this->logger = $logger;
+        $this->manager = $manager;
         $this->env = $env;
     }
 
@@ -80,6 +85,10 @@ class GraphQLController extends BaseController
             $this->addCORSAndCacheHeadersIfNeeded($response, $request);
 
             return $response;
+        }
+
+        if ($this->manager->isActive(Manager::graphql_introspection)) {
+            $this->requestExecutor->enableIntrospectionQuery();
         }
 
         $payload = $this->processQuery($request, $schemaName, $batched);

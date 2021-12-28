@@ -14,7 +14,7 @@ overblog_graphql:
         logger_service: logger # the service to use to log
     # TODO enable this:
     security:
-        enable_introspection: '%graphql_enable_introspection%'
+        enable_introspection: false
         query_max_depth: false
         query_max_complexity: false
     services:

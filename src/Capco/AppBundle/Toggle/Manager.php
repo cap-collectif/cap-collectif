@@ -20,6 +20,7 @@ class Manager
     public const consent_external_communication = 'consent_external_communication';
     public const developer_documentation = 'developer_documentation';
     public const public_api = 'public_api';
+    public const graphql_introspection = 'graphql_introspection';
     public const login_facebook = 'login_facebook';
     public const login_paris = 'login_paris';
     public const login_saml = 'login_saml';
@@ -107,6 +108,7 @@ class Manager
         self::secure_password,
         self::restrict_connection,
         self::public_api,
+        self::graphql_introspection,
         self::developer_documentation,
         self::new_project_card,
     ];
@@ -121,6 +123,7 @@ class Manager
         self::consent_external_communication,
         self::developer_documentation,
         self::public_api,
+        self::graphql_introspection,
         self::votes_min,
         self::login_facebook,
         self::login_saml,

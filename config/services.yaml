@@ -15,7 +15,6 @@ parameters:
     saml_sp: '%env(SYMFONY_SAML_SP)%'
     redis_prefix: '%env(SYMFONY_REDIS_PREFIX)%'
     redis_dsn: '%env(SYMFONY_REDIS_HOST)%'
-    graphql_enable_introspection: '%env(SYMFONY_GRAPHQL_ENABLE_INTROSPECTION)%'
     elasticsearch_host: '%env(SYMFONY_ELASTICSEARCH_HOST)%'
     elasticsearch_index: '%env(SYMFONY_ELASTICSEARCH_INDEX)%'
     elasticsearch_password: '%env(SYMFONY_ELASTICSEARCH_PASSWORD)%'
@@ -93,7 +92,6 @@ parameters:
     #
     env(SYMFONY_GOOGLE_MAP_KEY): '***REMOVED***'
     env(SYMFONY_GOOGLE_MAP_SERVER_KEY): '***REMOVED***'
-    env(SYMFONY_GRAPHQL_ENABLE_INTROSPECTION): True
     env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
     env(SYMFONY_DATABASE_DRIVER): pdo_mysql
     env(SYMFONY_DATABASE_HOST): 127.0.0.1
