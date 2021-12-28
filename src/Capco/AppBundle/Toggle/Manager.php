@@ -85,6 +85,7 @@ class Manager
     public const unstable_project_admin = 'unstable_project_admin';
     public const unstable_anonymous_questionnaire = 'unstable_anonymous_questionnaire';
     public const twilio = 'twilio';
+    public const unstable__paper_vote = 'unstable__paper_vote';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -111,6 +112,7 @@ class Manager
         self::graphql_introspection,
         self::developer_documentation,
         self::new_project_card,
+        self::unstable__paper_vote,
     ];
 
     public static $toggles = [
@@ -187,6 +189,7 @@ class Manager
         self::unstable_project_admin,
         self::unstable_anonymous_questionnaire,
         self::twilio,
+        self::unstable__paper_vote,
     ];
 
     protected ToggleManager $toggleManager;

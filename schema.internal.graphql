@@ -5847,6 +5847,9 @@ enum FeatureFlagType {
 
   """Whether or not the twilio service is enabled."""
   twilio
+
+  """Whether or not the paper vote is enabled."""
+  unstable__paper_vote
 }
 
 """Require a firstname"""

@@ -161,3 +161,6 @@ InternalFeatureFlagType:
             twilio:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::twilio")'
                 description: 'Whether or not the twilio service is enabled.'
+            unstable__paper_vote:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__paper_vote")'
+                description: 'Whether or not the paper vote is enabled.'

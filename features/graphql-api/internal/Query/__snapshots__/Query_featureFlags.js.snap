@@ -295,6 +295,10 @@ Object {
       "enabled": false,
       "type": "twilio",
     },
+    Object {
+      "enabled": false,
+      "type": "unstable__paper_vote",
+    },
   ],
 }
 `;
