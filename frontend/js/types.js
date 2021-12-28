@@ -96,7 +96,6 @@ export type FeatureToggles = {
   unstable__emailing: ?boolean,
   unstable__emailing_parameters: ?boolean,
   proposal_revisions: ?boolean,
-  unstable__debate: ?boolean,
   unstable__tipsmeee: ?boolean,
   unstable__new_consultation_page: ?boolean,
   new_project_card: ?boolean,

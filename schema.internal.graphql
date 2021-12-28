@@ -5812,9 +5812,6 @@ enum FeatureFlagType {
   votes_min
   unstable__emailing
   unstable__emailing_parameters
-
-  """Whether or not an admin can use `DebateStep`. Used in dev only."""
-  unstable__debate
   proposal_revisions
 
   """Whether or not an admin can use `TIPSmeee`. Used in dev only."""

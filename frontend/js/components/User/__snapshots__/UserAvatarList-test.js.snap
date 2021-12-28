@@ -80,7 +80,6 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "unstable__admin_editor": false,
             "unstable__analysis": false,
             "unstable__analytics_page": false,
-            "unstable__debate": false,
             "unstable__emailing": false,
             "unstable__emailing_parameters": false,
             "unstable__new_consultation_page": false,

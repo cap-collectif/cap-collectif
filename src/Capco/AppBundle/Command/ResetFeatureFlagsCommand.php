@@ -97,7 +97,6 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('unstable__remote_events');
         $this->manager->deactivate('unstable__emailing');
         $this->manager->deactivate(Manager::unstable__emailing_parameters);
-        $this->manager->activate(Manager::unstable__debate);
         $this->manager->activate(Manager::proposal_revisions);
         $this->manager->activate(Manager::unstable__new_consultation_page);
         $this->manager->activate(Manager::new_project_card);
@@ -140,7 +139,6 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->activate('shield_mode');
             $this->manager->deactivate('multilangue');
             $this->manager->deactivate('unstable__analysis');
-            $this->manager->deactivate(Manager::unstable__debate);
             $this->manager->deactivate(Manager::proposal_revisions);
             $this->manager->deactivate(Manager::unstable__tipsmeee);
             $this->manager->deactivate(Manager::unstable__new_consultation_page);

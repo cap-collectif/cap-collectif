@@ -1106,35 +1106,35 @@ InternalMutation:
                     payloadType: DeleteOfficialResponsePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteOfficialResponseMutation", [value, getUser()])'
             addDebateOpinion:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateOpinionMutation").isGranted() and hasFeatureFlag("unstable__debate")'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateOpinionMutation").isGranted()'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddDebateOpinionInput
                     payloadType: AddDebateOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateOpinionMutation", [value])'
             updateDebateOpinion:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateOpinionMutation").isGranted(args["input"]["debateOpinionId"], getUser()) and hasFeatureFlag("unstable__debate")'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateOpinionMutation").isGranted(args["input"]["debateOpinionId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateDebateOpinionInput
                     payloadType: UpdateDebateOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateOpinionMutation", [value])'
             deleteDebateOpinion:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateOpinionMutation").isGranted(args["input"]["debateOpinionId"], getUser()) and hasFeatureFlag("unstable__debate")'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateOpinionMutation").isGranted(args["input"]["debateOpinionId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteDebateOpinionInput
                     payloadType: DeleteDebateOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateOpinionMutation", [value])'
             addDebateVote:
-                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddDebateVoteInput
                     payloadType: AddDebateVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateVoteMutation", [value, getUser()])'
             removeDebateVote:
-                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                access: "@=hasRole('ROLE_USER')"
                 description: 'Delete a debate vote from the current user, will also delete the debate argument, if any.'
                 builder: 'Relay::Mutation'
                 builderConfig:
@@ -1142,56 +1142,53 @@ InternalMutation:
                     payloadType: RemoveDebateVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateVoteMutation", [value, getUser()])'
             createDebateArgument:
-                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateDebateArgumentInput
                     payloadType: CreateDebateArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\CreateDebateArgumentMutation", [value, getUser()])'
             updateDebateArgument:
-                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateDebateArgumentInput
                     payloadType: UpdateDebateArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateArgumentMutation", [value, getUser()])'
             deleteDebateArgument:
-                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteDebateArgumentInput
                     payloadType: DeleteDebateArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateArgumentMutation", [value, getUser()])'
             createDebateAnonymousArgument:
-                access: "@=hasFeatureFlag('unstable__debate')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateDebateAnonymousArgumentInput
                     payloadType: CreateDebateAnonymousArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\CreateDebateAnonymousArgumentMutation", [value])'
             deleteDebateAnonymousArgument:
-                access: "@=hasFeatureFlag('unstable__debate')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteDebateAnonymousArgumentInput
                     payloadType: DeleteDebateAnonymousArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateAnonymousArgumentMutation", [value])'
             sendConfirmationEmailDebateAnonymousArgument:
-                access: "@=hasFeatureFlag('unstable__debate')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: SendConfirmationEmailDebateAnonymousArgumentInput
                     payloadType: SendConfirmationEmailDebateAnonymousArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\SendConfirmationEmailDebateAnonymousArgumentMutation", [value])'
             addDebateArgumentVote:
-                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddDebateArgumentVoteInput
                     payloadType: AddDebateArgumentVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateArgumentVoteMutation", [value, getUser()])'
             removeDebateArgumentVote:
-                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: RemoveDebateArgumentVoteInput
@@ -1247,14 +1244,12 @@ InternalMutation:
                     payloadType: DeleteProposalNewsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProposalNewsMutation", [value, getUser()])'
             addDebateAnonymousVote:
-                access: "hasFeatureFlag('unstable__debate')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddDebateAnonymousVoteInput
                     payloadType: AddDebateAnonymousVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateAnonymousVoteMutation", [value])'
             removeDebateAnonymousVote:
-                access: "hasFeatureFlag('unstable__debate')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: RemoveDebateAnonymousVoteInput

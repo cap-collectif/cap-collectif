@@ -196,7 +196,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     valid={true}
     warning={null}
   />
-  <Relay(Connect(ProjectStepAdmin))
+  <Relay(ProjectStepAdmin)
     anyTouched={false}
     array={
       Object {
@@ -372,7 +372,6 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "unstable__admin_editor": false,
         "unstable__analysis": false,
         "unstable__analytics_page": false,
-        "unstable__debate": false,
         "unstable__emailing": false,
         "unstable__emailing_parameters": false,
         "unstable__new_consultation_page": false,
@@ -634,7 +633,6 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "unstable__admin_editor": false,
         "unstable__analysis": false,
         "unstable__analytics_page": false,
-        "unstable__debate": false,
         "unstable__emailing": false,
         "unstable__emailing_parameters": false,
         "unstable__new_consultation_page": false,

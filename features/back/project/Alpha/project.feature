@@ -53,7 +53,7 @@ Scenario: Logged in admin wants to add questionnaire step to a project
   Then I go to "/admin/alpha/project/project4/edit"
   And I wait "#projectAdminForm" to appear on current page
   And I click the "#js-btn-create-step" element
-  And I click the "#create-step-list li:nth-child(5)" element
+  And I click the "#create-step-list li:nth-child(6)" element
   And I wait "#contained-modal-title-lg" to appear on current page
   And I fill in the following:
     | step-label    | QuestionnaireStepLabel      |
@@ -78,7 +78,7 @@ Scenario: Logged in admin wants to add consultation step to a project
   Then I go to "/admin/alpha/project/project4/edit"
   And I wait "#projectAdminForm" to appear on current page
   And I click the "#js-btn-create-step" element
-  And I click the "#create-step-list li:nth-child(4)" element
+  And I click the "#create-step-list li:nth-child(5)" element
   And I wait "#contained-modal-title-lg" to appear on current page
   And I fill in the following:
     | step-label    | ConsultationStepLabel      |

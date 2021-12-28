@@ -65,7 +65,6 @@ class FeaturesCategoryResolver
                     Manager::http_redirects,
                     Manager::unstable__emailing,
                     Manager::unstable__emailing_parameters,
-                    Manager::unstable__debate,
                     Manager::proposal_revisions,
                     Manager::unstable__new_consultation_page,
                     Manager::import_proposals,

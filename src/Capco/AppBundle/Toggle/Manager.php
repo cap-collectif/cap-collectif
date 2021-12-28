@@ -73,7 +73,6 @@ class Manager
     public const unstable__remote_events = 'unstable__remote_events';
     public const unstable__emailing = 'unstable__emailing';
     public const unstable__emailing_parameters = 'unstable__emailing_parameters';
-    public const unstable__debate = 'unstable__debate';
     public const proposal_revisions = 'proposal_revisions';
     public const unstable__tipsmeee = 'unstable__tipsmeee';
     public const unstable__new_consultation_page = 'unstable__new_consultation_page';
@@ -176,7 +175,6 @@ class Manager
         self::unstable__remote_events,
         self::unstable__emailing,
         self::unstable__emailing_parameters,
-        self::unstable__debate,
         self::proposal_revisions,
         self::unstable__tipsmeee,
         self::unstable__new_consultation_page,

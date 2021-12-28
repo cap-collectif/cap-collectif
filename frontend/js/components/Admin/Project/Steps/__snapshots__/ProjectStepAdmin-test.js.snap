@@ -132,8 +132,21 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
               </Menu.ListItem>
               <Menu.ListItem
                 as="li"
-                id="global.consultation"
+                id="global.debate"
                 key="3"
+                onClick={[Function]}
+              >
+                <Text>
+                  <FormattedMessage
+                    id="global.debate"
+                    values={Object {}}
+                  />
+                </Text>
+              </Menu.ListItem>
+              <Menu.ListItem
+                as="li"
+                id="global.consultation"
+                key="4"
                 onClick={[Function]}
               >
                 <Text>
@@ -146,7 +159,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
               <Menu.ListItem
                 as="li"
                 id="global.questionnaire"
-                key="4"
+                key="5"
                 onClick={[Function]}
               >
                 <Text>
@@ -159,7 +172,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
               <Menu.ListItem
                 as="li"
                 id="global.custom.feminine"
-                key="5"
+                key="6"
                 onClick={[Function]}
               >
                 <Text>
@@ -310,171 +323,6 @@ exports[`<ProjectStepAdmin /> renders correctly with isAdmin false 1`] = `
               </Menu.ListItem>
               <Menu.ListItem
                 as="li"
-                id="global.questionnaire"
-                key="3"
-                onClick={[Function]}
-              >
-                <Text>
-                  <FormattedMessage
-                    id="global.questionnaire"
-                    values={Object {}}
-                  />
-                </Text>
-              </Menu.ListItem>
-              <Menu.ListItem
-                as="li"
-                id="global.custom.feminine"
-                key="4"
-                onClick={[Function]}
-              >
-                <Text>
-                  <FormattedMessage
-                    id="global.custom.feminine"
-                    values={Object {}}
-                  />
-                </Text>
-              </Menu.ListItem>
-            </Menu.List>
-          </Menu>
-        </ButtonToolbar>
-      </div>
-    </div>
-  </ProjectAdminFormstyle__ProjectBoxContainer>
-</div>
-`;
-
-exports[`<ProjectStepAdmin /> renders correctly without feature debate 1`] = `
-<div
-  className="col-md-12"
->
-  <ProjectAdminFormstyle__ProjectBoxContainer
-    className="box container-fluid"
-  >
-    <ProjectAdminFormstyle__ProjectBoxHeader>
-      <h4>
-        <FormattedMessage
-          id="project.show.meta.step.title"
-          values={Object {}}
-        />
-      </h4>
-    </ProjectAdminFormstyle__ProjectBoxHeader>
-    <div
-      className="box-content"
-    >
-      <div
-        className="form-group"
-        id="project_form_admin_steps_panel"
-      >
-        <FieldArray
-          component={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "__ComponentClass": Object {
-                "$$typeof": Symbol(react.memo),
-                "WrappedComponent": [Function],
-                "compare": null,
-                "displayName": "Connect(ProjectStepAdminList)",
-                "type": [Function],
-              },
-              "displayName": "Relay(Connect(ProjectStepAdminList))",
-              "render": [Function],
-            }
-          }
-          formName="testForm"
-          name="steps"
-          project={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-            }
-          }
-        />
-        <ButtonToolbar
-          bsClass="btn-toolbar"
-        >
-          <Relay(ProjectAdminStepFormModal)
-            form="testForm"
-            isCreating={true}
-            onClose={[Function]}
-            project={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-              }
-            }
-            show={false}
-            step={null}
-            type="OtherStep"
-          />
-          <Menu
-            closeOnSelect={true}
-            placement="bottom-start"
-          >
-            <Menu.Button>
-              <Button
-                id="js-btn-create-step"
-                variant="secondary"
-                variantColor="primary"
-                variantSize="small"
-              >
-                <i
-                  className="fa fa-plus-circle"
-                  style={
-                    Object {
-                      "marginRight": "4px",
-                    }
-                  }
-                />
-                <FormattedMessage
-                  id="global.add"
-                  values={Object {}}
-                />
-              </Button>
-            </Menu.Button>
-            <Menu.List
-              id="create-step-list"
-            >
-              <Menu.ListItem
-                as="li"
-                id="presentation_step"
-                key="0"
-                onClick={[Function]}
-              >
-                <Text>
-                  <FormattedMessage
-                    id="presentation_step"
-                    values={Object {}}
-                  />
-                </Text>
-              </Menu.ListItem>
-              <Menu.ListItem
-                as="li"
-                id="collect_step"
-                key="1"
-                onClick={[Function]}
-              >
-                <Text>
-                  <FormattedMessage
-                    id="collect_step"
-                    values={Object {}}
-                  />
-                </Text>
-              </Menu.ListItem>
-              <Menu.ListItem
-                as="li"
-                id="selection_step"
-                key="2"
-                onClick={[Function]}
-              >
-                <Text>
-                  <FormattedMessage
-                    id="selection_step"
-                    values={Object {}}
-                  />
-                </Text>
-              </Menu.ListItem>
-              <Menu.ListItem
-                as="li"
                 id="global.debate"
                 key="3"
                 onClick={[Function]}
@@ -488,21 +336,8 @@ exports[`<ProjectStepAdmin /> renders correctly without feature debate 1`] = `
               </Menu.ListItem>
               <Menu.ListItem
                 as="li"
-                id="global.consultation"
-                key="4"
-                onClick={[Function]}
-              >
-                <Text>
-                  <FormattedMessage
-                    id="global.consultation"
-                    values={Object {}}
-                  />
-                </Text>
-              </Menu.ListItem>
-              <Menu.ListItem
-                as="li"
                 id="global.questionnaire"
-                key="5"
+                key="4"
                 onClick={[Function]}
               >
                 <Text>
@@ -515,7 +350,7 @@ exports[`<ProjectStepAdmin /> renders correctly without feature debate 1`] = `
               <Menu.ListItem
                 as="li"
                 id="global.custom.feminine"
-                key="6"
+                key="5"
                 onClick={[Function]}
               >
                 <Text>

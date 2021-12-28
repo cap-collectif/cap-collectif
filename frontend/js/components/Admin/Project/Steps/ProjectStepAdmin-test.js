@@ -9,7 +9,6 @@ const baseProps = {
   ...formMock,
   intl: intlMock,
   form: 'testForm',
-  hasFeatureDebate: false,
   project: {
     $fragmentRefs,
     $refType,
@@ -19,20 +18,11 @@ const baseProps = {
 
 const props = {
   basic: baseProps,
-  withFeatureDebate: {
-    ...baseProps,
-    hasFeatureDebate: true,
-  },
 };
 
 describe('<ProjectStepAdmin />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<ProjectStepAdmin {...props.basic} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly without feature debate', () => {
-    const wrapper = shallow(<ProjectStepAdmin {...props.withFeatureDebate} />);
     expect(wrapper).toMatchSnapshot();
   });
 

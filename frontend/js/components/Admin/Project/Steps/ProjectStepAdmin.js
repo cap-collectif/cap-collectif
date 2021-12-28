@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import ProjectStepAdminList from './ProjectStepAdminList';
 import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal';
@@ -11,7 +10,6 @@ import { ProjectBoxHeader, ProjectBoxContainer } from '../Form/ProjectAdminForm.
 import { STEP_TYPES } from '~/constants/StepTypeConstants';
 import { type StepTypes } from '../Form/ProjectAdminForm';
 import type { ProjectStepAdmin_project } from '~relay/ProjectStepAdmin_project.graphql';
-import type { GlobalState } from '~/types';
 import Menu from '../../../DesignSystem/Menu/Menu';
 import Button from '~ds/Button/Button';
 import Text from '~ui/Primitives/Text';
@@ -21,7 +19,6 @@ type Props = {|
   form: string,
   intl: IntlShape,
   project: ProjectStepAdmin_project,
-  hasFeatureDebate: boolean,
   viewerIsAdmin: boolean,
 |};
 
@@ -47,7 +44,7 @@ export const validate = ({ steps }: StepTypes) => {
   return errors;
 };
 
-export const ProjectStepAdmin = ({ form, project, hasFeatureDebate, viewerIsAdmin }: Props) => {
+export const ProjectStepAdmin = ({ form, project, viewerIsAdmin }: Props) => {
   const [stepType, setStepType] = useState('OtherStep');
   const [showAddStepModal, displayAddStepModal] = useState(false);
 
@@ -58,16 +55,12 @@ export const ProjectStepAdmin = ({ form, project, hasFeatureDebate, viewerIsAdmi
       excludedSteps.push('ConsultationStep');
     }
 
-    if (!hasFeatureDebate) {
-      excludedSteps.push('DebateStep');
-    }
-
     if (excludedSteps.length > 0) {
       return STEP_TYPES.filter(step => !excludedSteps.includes(step.value));
     }
 
     return STEP_TYPES;
-  }, [hasFeatureDebate, viewerIsAdmin]);
+  }, [viewerIsAdmin]);
 
   return (
     <div className="col-md-12">
@@ -133,13 +126,7 @@ export const ProjectStepAdmin = ({ form, project, hasFeatureDebate, viewerIsAdmi
   );
 };
 
-const mapStateToProps = (state: GlobalState) => ({
-  hasFeatureDebate: state.default.features.unstable__debate || false,
-});
-
-const ProjectStepAdminConnected = connect<any, any, _, _, _, _>(mapStateToProps)(ProjectStepAdmin);
-
-export default createFragmentContainer(ProjectStepAdminConnected, {
+export default createFragmentContainer(ProjectStepAdmin, {
   project: graphql`
     fragment ProjectStepAdmin_project on Project {
       ...ProjectAdminStepFormModal_project
