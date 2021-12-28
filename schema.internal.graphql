@@ -5810,7 +5810,6 @@ enum FeatureFlagType {
   display_map
   unstable__remote_events
   votes_min
-  majority_vote_question
   unstable__emailing
   unstable__emailing_parameters
 

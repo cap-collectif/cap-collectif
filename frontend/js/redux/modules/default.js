@@ -93,7 +93,6 @@ export const features: FeatureToggles = {
   multilangue: false,
   display_pictures_in_event_list: false,
   unstable__analysis: false,
-  majority_vote_question: false,
   unstable__emailing: false,
   unstable__emailing_parameters: false,
   proposal_revisions: false,

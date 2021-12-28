@@ -4663,11 +4663,6 @@
   resolved "https://registry.yarnpkg.com/@types/d3-time/-/d3-time-2.1.1.tgz#743fdc821c81f86537cbfece07093ac39b4bc342"
   integrity sha512-9MVYlmIgmRR31C5b4FVSWtuMmBHh2mOWQYfl7XAYOa8dsnb7iEmUmRSWSFgXFtkjxO65d7hTUHQC+RhR/9IWFg==
 
-"@types/debounce-promise@^3.1.4":
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/@types/debounce-promise/-/debounce-promise-3.1.4.tgz#bf10eead11724e666ea541df1c9d3969677a505b"
-  integrity sha512-9SEVY3nsz+uMN2DwDocftB5TAgZe7D0cOzxxRhpotWs6T4QFqRaTXpXbOSzbk31/7iYcfCkJJPwWGzTxyuGhCg==
-
 "@types/emoji-regex@^8.0.0":
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/@types/emoji-regex/-/emoji-regex-8.0.0.tgz#df215c9ff818e071087fb8e7e6e74c4cb42a1303"

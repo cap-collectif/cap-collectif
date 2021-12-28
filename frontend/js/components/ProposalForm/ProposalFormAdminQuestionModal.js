@@ -36,7 +36,6 @@ type Props = {|
   currentQuestion: Question,
   intl: IntlShape,
   isSuperAdmin: boolean,
-  enableMajorityQuestion: boolean,
   questionsIds: $ReadOnlyArray<string>,
   ...ParentProps,
 |};
@@ -149,7 +148,6 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
       intl,
       validationRuleType,
       currentQuestion,
-      enableMajorityQuestion,
       formErrors,
       isSuperAdmin,
     } = this.props;
@@ -256,11 +254,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                 <option value="select">
                   {intl.formatMessage({ id: 'global.question.types.select' })}
                 </option>
-                {enableMajorityQuestion && (
-                  <option value="majority">
-                    {intl.formatMessage({ id: 'majority-decision' })}
-                  </option>
-                )}
+                <option value="majority">{intl.formatMessage({ id: 'majority-decision' })}</option>
               </optgroup>
               <optgroup
                 label={intl.formatMessage({ id: 'global.question.types.multiple_multiple' })}>
@@ -364,7 +358,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
               </div>
             )}
 
-            {currentQuestion && currentQuestion.type === 'majority' && enableMajorityQuestion && (
+            {currentQuestion && currentQuestion.type === 'majority' && (
               <MajorityContainer>
                 <p className="preview-text">
                   <FormattedMessage id="global.preview" />
@@ -524,7 +518,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
   return {
-    enableMajorityQuestion: state.default.features.majority_vote_question,
     currentQuestion: selector(state, `${props.member}`),
     type: selector(state, `${props.member}.type`),
     isRangeBetween: selector(state, `${props.member}.isRangeBetween`),

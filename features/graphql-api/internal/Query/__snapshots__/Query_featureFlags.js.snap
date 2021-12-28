@@ -241,10 +241,6 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "majority_vote_question",
-    },
-    Object {
-      "enabled": false,
       "type": "unstable__emailing",
     },
     Object {

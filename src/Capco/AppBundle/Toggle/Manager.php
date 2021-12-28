@@ -71,7 +71,6 @@ class Manager
     public const phone_confirmation = 'phone_confirmation';
     public const reporting = 'reporting';
     public const unstable__remote_events = 'unstable__remote_events';
-    public const majority_vote_question = 'majority_vote_question';
     public const unstable__emailing = 'unstable__emailing';
     public const unstable__emailing_parameters = 'unstable__emailing_parameters';
     public const unstable__debate = 'unstable__debate';
@@ -175,7 +174,6 @@ class Manager
         self::http_redirects,
         self::report_browers_errors_to_sentry,
         self::unstable__remote_events,
-        self::majority_vote_question,
         self::unstable__emailing,
         self::unstable__emailing_parameters,
         self::unstable__debate,

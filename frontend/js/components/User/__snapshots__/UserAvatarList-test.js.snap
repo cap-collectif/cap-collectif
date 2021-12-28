@@ -51,7 +51,6 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "login_franceconnect": false,
             "login_paris": false,
             "login_saml": false,
-            "majority_vote_question": false,
             "members_list": false,
             "multilangue": false,
             "new_feature_questionnaire_result": false,
