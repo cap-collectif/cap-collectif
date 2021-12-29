@@ -325,17 +325,17 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
   {
     project: graphql`
       fragment ProjectAdminParticipants_project on Project
-        @argumentDefinitions(
-          viewerIsAdmin: { type: "Boolean!" }
-          projectId: { type: "ID!" }
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-          orderBy: { type: "UserOrder!", defaultValue: { field: ACTIVITY, direction: DESC } }
-          term: { type: "String", defaultValue: null }
-          userType: { type: "ID" }
-          step: { type: "ID" }
-          contribuableId: { type: "ID" }
-        ) {
+      @argumentDefinitions(
+        viewerIsAdmin: { type: "Boolean!" }
+        projectId: { type: "ID!" }
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        orderBy: { type: "UserOrder!", defaultValue: { field: ACTIVITY, direction: DESC } }
+        term: { type: "String", defaultValue: null }
+        userType: { type: "ID" }
+        step: { type: "ID" }
+        contribuableId: { type: "ID" }
+      ) {
         id
         title
         steps {
@@ -465,7 +465,7 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
 );
 
 const mapStateToProps = (state: GlobalState) => ({
-  hasFeatureEmail: state.default.features.unstable__emailing || false,
+  hasFeatureEmail: state.default.features.beta__emailing || false,
   viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
 });
 

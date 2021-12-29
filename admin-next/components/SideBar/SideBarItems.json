@@ -420,7 +420,7 @@
         "id": "analytics",
         "title": "admin.label.analytics",
         "icon": "PIE_CHART",
-        "featuresRequired": ["unstable__analytics_page"],
+        "featuresRequired": ["beta__analytics_page"],
         "rolesRequired": [],
         "href": "/admin/capco/analytics/list",
         "beta": true,

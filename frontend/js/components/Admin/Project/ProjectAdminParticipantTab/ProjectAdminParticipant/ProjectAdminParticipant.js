@@ -32,7 +32,7 @@ type Props = {|
 const ProjectAdminParticipant = ({ participant, selected }: Props) => {
   const intl = useIntl();
   const { dispatch } = useProjectAdminParticipantsContext();
-  const hasFeatureEmail = useFeatureFlag('unstable__emailing');
+  const hasFeatureEmail = useFeatureFlag('beta__emailing');
 
   const {
     id,
@@ -152,7 +152,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
 const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminParticipant, {
   participant: graphql`
     fragment ProjectAdminParticipant_participant on User
-      @argumentDefinitions(contribuableId: { type: "ID" }, viewerIsAdmin: { type: "Boolean!" }) {
+    @argumentDefinitions(contribuableId: { type: "ID" }, viewerIsAdmin: { type: "Boolean!" }) {
       id
       username
       firstname

@@ -2,7 +2,7 @@
 Feature: SenderEmailDomain mutations
 
 Background:
-  Given feature "unstable__emailing" is enabled
+  Given feature "beta__emailing" is enabled
 
 Scenario: Admin wants to add a new SenderEmailDomain but already exists
   Given I am logged in to graphql as admin

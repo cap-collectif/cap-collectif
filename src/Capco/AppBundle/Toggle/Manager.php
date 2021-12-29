@@ -13,7 +13,7 @@ class Manager
 {
     public const noindex_on_profiles = 'noindex_on_profiles';
     public const graphql_query_analytics = 'graphql_query_analytics';
-    public const new_feature_questionnaire_result = 'new_feature_questionnaire_result';
+    public const beta__questionnaire_result = 'beta__questionnaire_result';
     public const blog = 'blog';
     public const calendar = 'calendar';
     public const captcha = 'captcha';
@@ -63,23 +63,23 @@ class Manager
     public const login_openid = 'login_openid';
     public const versions = 'versions';
     public const multilangue = 'multilangue';
-    public const unstable__admin_editor = 'unstable__admin_editor';
+    public const beta__admin_editor = 'beta__admin_editor';
     public const http_redirects = 'http_redirects';
     public const report_browers_errors_to_sentry = 'report_browers_errors_to_sentry';
     public const phone_confirmation = 'phone_confirmation';
     public const reporting = 'reporting';
     public const unstable__remote_events = 'unstable__remote_events';
-    public const unstable__emailing = 'unstable__emailing';
-    public const unstable__emailing_parameters = 'unstable__emailing_parameters';
+    public const beta__emailing = 'beta__emailing';
+    public const beta__emailing_parameters = 'beta__emailing_parameters';
     public const proposal_revisions = 'proposal_revisions';
     public const unstable__tipsmeee = 'unstable__tipsmeee';
     public const unstable__new_consultation_page = 'unstable__new_consultation_page';
     public const new_project_card = 'new_project_card';
     public const export_legacy_users = 'export_legacy_users';
     public const import_proposals = 'import_proposals';
-    public const unstable__analytics_page = 'unstable__analytics_page';
-    public const unstable_project_admin = 'unstable_project_admin';
-    public const unstable_anonymous_questionnaire = 'unstable_anonymous_questionnaire';
+    public const beta__analytics_page = 'beta__analytics_page';
+    public const unstable__project_admin = 'unstable__project_admin';
+    public const unstable__anonymous_questionnaire = 'unstable__anonymous_questionnaire';
     public const twilio = 'twilio';
     public const unstable__paper_vote = 'unstable__paper_vote';
 
@@ -114,7 +114,7 @@ class Manager
     public static $toggles = [
         self::noindex_on_profiles,
         self::graphql_query_analytics,
-        self::new_feature_questionnaire_result,
+        self::beta__questionnaire_result,
         self::blog,
         self::calendar,
         self::captcha,
@@ -165,21 +165,21 @@ class Manager
         self::external_project,
         self::sentry_log,
         self::multilangue,
-        self::unstable__admin_editor,
+        self::beta__admin_editor,
         self::http_redirects,
         self::report_browers_errors_to_sentry,
         self::unstable__remote_events,
-        self::unstable__emailing,
-        self::unstable__emailing_parameters,
+        self::beta__emailing,
+        self::beta__emailing_parameters,
         self::proposal_revisions,
         self::unstable__tipsmeee,
         self::unstable__new_consultation_page,
         self::new_project_card,
         self::export_legacy_users,
         self::import_proposals,
-        self::unstable__analytics_page,
-        self::unstable_project_admin,
-        self::unstable_anonymous_questionnaire,
+        self::beta__analytics_page,
+        self::unstable__project_admin,
+        self::unstable__anonymous_questionnaire,
         self::twilio,
         self::unstable__paper_vote,
     ];

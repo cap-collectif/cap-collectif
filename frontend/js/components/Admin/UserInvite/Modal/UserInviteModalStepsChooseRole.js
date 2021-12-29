@@ -34,7 +34,7 @@ type Props = {|
 
 export const UserInviteModalStepsChooseRole = ({ query: queryFragment }: Props): React.Node => {
   const intl = useIntl();
-  const hasProjectAdminFeature = useFeatureFlag('unstable_project_admin');
+  const hasProjectAdminFeature = useFeatureFlag('unstable__project_admin');
   const groupsData = useFragment(FRAGMENT, queryFragment);
   const message = useSelector((state: GlobalState) =>
     formValueSelector('form-user-invitation')(state, 'message'),

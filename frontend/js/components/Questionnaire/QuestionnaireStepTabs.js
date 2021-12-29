@@ -40,7 +40,7 @@ export class QuestionnaireStepTabs extends React.Component<Props> {
   }
 }
 const mapStateToProps = (state: GlobalState) => ({
-  enableResults: state.default.features.new_feature_questionnaire_result,
+  enableResults: state.default.features.beta__questionnaire_result,
 });
 
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(QuestionnaireStepTabs));
@@ -48,10 +48,10 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(Ques
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment QuestionnaireStepTabs_questionnaire on Questionnaire
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean!" }
-        enableResults: { type: "Boolean!" }
-      ) {
+    @argumentDefinitions(
+      isAuthenticated: { type: "Boolean!" }
+      enableResults: { type: "Boolean!" }
+    ) {
       privateResult
       ...QuestionnairePage_questionnaire @arguments(isAuthenticated: $isAuthenticated)
       ...QuestionnaireResults_questionnaire @include(if: $enableResults)
@@ -59,10 +59,10 @@ export default createFragmentContainer(container, {
   `,
   query: graphql`
     fragment QuestionnaireStepTabs_query on Query
-      @argumentDefinitions(
-        anonymousRepliesIds: { type: "[ID!]!" }
-        isNotAuthenticated: { type: "Boolean!" }
-      ) {
+    @argumentDefinitions(
+      anonymousRepliesIds: { type: "[ID!]!" }
+      isNotAuthenticated: { type: "Boolean!" }
+    ) {
       ...QuestionnairePage_query
         @arguments(
           anonymousRepliesIds: $anonymousRepliesIds

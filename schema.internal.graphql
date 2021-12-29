@@ -5753,7 +5753,7 @@ type FeatureFlag {
 """The possible types for a feature flag."""
 enum FeatureFlagType {
   graphql_query_analytics
-  new_feature_questionnaire_result
+  beta__questionnaire_result
   blog
   calendar
   captcha
@@ -5797,7 +5797,7 @@ enum FeatureFlagType {
   external_project
   sentry_log
   multilangue
-  unstable__admin_editor
+  beta__admin_editor
   http_redirects
   report_browers_errors_to_sentry
   login_saml
@@ -5808,8 +5808,8 @@ enum FeatureFlagType {
   display_map
   unstable__remote_events
   votes_min
-  unstable__emailing
-  unstable__emailing_parameters
+  beta__emailing
+  beta__emailing_parameters
   proposal_revisions
 
   """Whether or not an admin can use `TIPSmeee`. Used in dev only."""
@@ -5828,16 +5828,16 @@ enum FeatureFlagType {
   import_proposals
 
   """Whether or not the analytics page is visible in BO."""
-  unstable__analytics_page
+  beta__analytics_page
 
   """Whether or not admin can use the project administrator feature."""
-  unstable_project_admin
+  unstable__project_admin
 
   """Whether or not profiles can be indexed."""
   noindex_on_profiles
 
   """Whether or not admin can create anonymous questionnaire."""
-  unstable_anonymous_questionnaire
+  unstable__anonymous_questionnaire
 
   """Whether or not the twilio service is enabled."""
   twilio

@@ -333,7 +333,7 @@ const form = reduxForm({
 const mapStateToProps = (state: State, props: RelayProps) => {
   const questionnaire = formatChoices(props.questionnaire);
   return {
-    questionnaireResultsEnabled: state.default.features.new_feature_questionnaire_result,
+    questionnaireResultsEnabled: state.default.features.beta__questionnaire_result,
     initialValues: {
       title: questionnaire.title,
       description: questionnaire.description,

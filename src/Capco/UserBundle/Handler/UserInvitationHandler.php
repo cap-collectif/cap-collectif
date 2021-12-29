@@ -41,7 +41,7 @@ class UserInvitationHandler
         }
 
         if (
-            $this->manager->isActive(Manager::unstable_project_admin) &&
+            $this->manager->isActive(Manager::unstable__project_admin) &&
             $invitation->isProjectAdmin()
         ) {
             $user->addRole(UserRole::ROLE_PROJECT_ADMIN);

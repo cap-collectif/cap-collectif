@@ -313,8 +313,8 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     text="admin.label.settings.modules"
                     href="/admin/settings/settings.modules/list"
                   />
-                  {(!features.unstable__emailing ||
-                    (features.unstable__emailing && !features.unstable__emailing_parameters)) && (
+                  {(!features.beta__emailing ||
+                    (features.beta__emailing && !features.beta__emailing_parameters)) && (
                     <SidebarLink
                       text="admin.label.settings.notifications"
                       href="/admin/settings/settings.notifications/list"
@@ -394,7 +394,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
-            {features.unstable__emailing ? (
+            {features.beta__emailing ? (
               <SidebarAccordionItem id="emailing">
                 <SidebarButton
                   icon={ICON_NAME.ENVELOPE_O}
@@ -404,7 +404,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
                   <SidebarLink text="admin-menu-campaign-list" href="/admin/mailingCampaign/list" />
                   <SidebarLink text="admin-menu-emailing-list" href="/admin/mailingList/list" />
-                  {features.unstable__emailing_parameters && isAdmin ? (
+                  {features.beta__emailing_parameters && isAdmin ? (
                     <SidebarLink
                       text="admin-menu-parameters"
                       href="/admin/mailingParameters/list"
@@ -415,7 +415,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
             ) : null}
           </Accordion>
 
-          {features.unstable__analytics_page ? (
+          {features.beta__analytics_page ? (
             <SidebarLink
               text="admin.label.analytics"
               href="/admin/capco/analytics/list"

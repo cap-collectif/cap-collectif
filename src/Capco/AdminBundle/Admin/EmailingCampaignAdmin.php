@@ -12,7 +12,7 @@ class EmailingCampaignAdmin extends AbstractAdmin
 
     public function getFeatures(): array
     {
-        return ['unstable__emailing'];
+        return ['beta__emailing'];
     }
 
     public function getTemplate($name)

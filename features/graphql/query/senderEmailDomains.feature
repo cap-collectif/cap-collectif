@@ -2,7 +2,7 @@
 Feature: SenderEmailDomain
 
 Background:
-  Given feature "unstable__emailing" is enabled
+  Given feature "beta__emailing" is enabled
 
 Scenario: GraphQL admin wants to get all senderEmailDomains
   Given I am logged in to graphql as admin

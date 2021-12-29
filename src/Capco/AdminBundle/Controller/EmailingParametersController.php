@@ -16,7 +16,7 @@ class EmailingParametersController extends \Sonata\AdminBundle\Controller\CRUDCo
 
     private function isFeatureActivated(): bool
     {
-        return $this->get(Manager::class)->isActive(Manager::unstable__emailing_parameters);
+        return $this->get(Manager::class)->isActive(Manager::beta__emailing_parameters);
     }
 
     private function redirectToHome(): RedirectResponse

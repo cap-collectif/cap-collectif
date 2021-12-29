@@ -39,7 +39,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $email = 'ram@chan.com';
         $user->getEmail()->willReturn($email);
 
-        $manager->isActive(Manager::unstable_project_admin)->willReturn(false);
+        $manager->isActive(Manager::unstable__project_admin)->willReturn(false);
 
         $invitation = (new UserInvite())->setEmail($email)->setIsAdmin(false);
         $userInviteRepository->findOneByEmailAndNotExpired($email)->willReturn($invitation);
@@ -64,7 +64,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $email = 'toto@project_admin.com';
         $user->getEmail()->willReturn($email);
 
-        $manager->isActive(Manager::unstable_project_admin)->willReturn(true);
+        $manager->isActive(Manager::unstable__project_admin)->willReturn(true);
 
         $invitation = (new UserInvite())
             ->setEmail($email)
@@ -101,7 +101,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
             ->setIsProjectAdmin(false)
             ->setIsAdmin(true);
 
-        $manager->isActive(Manager::unstable_project_admin)->willReturn(false);
+        $manager->isActive(Manager::unstable__project_admin)->willReturn(false);
 
         $userInviteRepository->findOneByEmailAndNotExpired($email)->willReturn($invitation);
 
@@ -136,7 +136,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $email = 'user-invited-in-group@gmail.com';
         $user->getEmail()->willReturn($email);
 
-        $manager->isActive(Manager::unstable_project_admin)->willReturn(false);
+        $manager->isActive(Manager::unstable__project_admin)->willReturn(false);
 
         $invitation->isAdmin()->willReturn(false);
         $invitation->getEmail()->willReturn($email);

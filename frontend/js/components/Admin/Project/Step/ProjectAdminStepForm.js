@@ -391,7 +391,7 @@ export function ProjectAdminStepForm({
     (step.__typename === 'SelectionStep' || step.__typename === 'CollectStep') &&
     (isGridViewEnabled || isListViewEnabled || isMapViewEnabled);
 
-  const unstable_anonymous_questionnaire = useFeatureFlag('unstable_anonymous_questionnaire');
+  const unstable__anonymous_questionnaire = useFeatureFlag('unstable__anonymous_questionnaire');
 
   React.useEffect(() => {
     // mainView is not in the reduxForm's initialValues because the proposalForm is selected after.
@@ -499,7 +499,7 @@ export function ProjectAdminStepForm({
               {!timeless && renderDateContainer(formName, intl)}
             </>
           )}
-          {step.__typename === 'QuestionnaireStep' && unstable_anonymous_questionnaire && (
+          {step.__typename === 'QuestionnaireStep' && unstable__anonymous_questionnaire && (
             <>
               <Field
                 component={toggle}

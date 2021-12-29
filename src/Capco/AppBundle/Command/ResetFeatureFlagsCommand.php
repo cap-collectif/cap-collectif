@@ -83,7 +83,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('graphql_introspection');
         $this->manager->activate('votes_min');
         $this->manager->activate('consent_internal_communication');
-        $this->manager->activate('new_feature_questionnaire_result');
+        $this->manager->activate('beta__questionnaire_result');
         $this->manager->activate('multilangue');
         $this->manager->activate('http_redirects');
         $this->manager->deactivate('login_franceconnect');
@@ -94,15 +94,15 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('sentry_log');
         $this->manager->activate('remind_user_account_confirmation');
         $this->manager->activate('unstable__remote_events');
-        $this->manager->deactivate('unstable__emailing');
-        $this->manager->deactivate(Manager::unstable__emailing_parameters);
+        $this->manager->deactivate('beta__emailing');
+        $this->manager->deactivate(Manager::beta__emailing_parameters);
         $this->manager->activate(Manager::proposal_revisions);
         $this->manager->activate(Manager::unstable__new_consultation_page);
         $this->manager->activate(Manager::new_project_card);
         $this->manager->deactivate(Manager::export_legacy_users);
         $this->manager->activate(Manager::import_proposals);
-        $this->manager->deactivate(Manager::unstable__analytics_page);
-        $this->manager->activate(Manager::unstable_project_admin);
+        $this->manager->deactivate(Manager::beta__analytics_page);
+        $this->manager->activate(Manager::unstable__project_admin);
         $this->manager->deactivate(Manager::noindex_on_profiles);
         $this->manager->deactivate(Manager::unstable__paper_vote);
 
@@ -115,7 +115,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('unstable__remote_events');
             $this->manager->deactivate(Manager::export_legacy_users);
             $this->manager->deactivate(Manager::import_proposals);
-            $this->manager->deactivate(Manager::unstable__analytics_page);
+            $this->manager->deactivate(Manager::beta__analytics_page);
         }
 
         if ('prod' === $this->env) {
@@ -143,8 +143,8 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::new_project_card);
             $this->manager->deactivate(Manager::export_legacy_users);
             $this->manager->deactivate(Manager::import_proposals);
-            $this->manager->deactivate(Manager::unstable__analytics_page);
-            $this->manager->deactivate(Manager::unstable_project_admin);
+            $this->manager->deactivate(Manager::beta__analytics_page);
+            $this->manager->deactivate(Manager::unstable__project_admin);
         }
 
         $output->writeln('<info>Feature flags reseted ! </info>');

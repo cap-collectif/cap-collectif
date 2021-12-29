@@ -50,7 +50,7 @@ export class QuestionnaireAdminPageTabs extends Component<Props> {
 }
 
 const mapStateToProps = (state: State) => ({
-  enableResultsTab: state.default.features.new_feature_questionnaire_result,
+  enableResultsTab: state.default.features.beta__questionnaire_result,
 });
 
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(

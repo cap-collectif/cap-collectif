@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectAdminParticipant /> should render a non-selectable list when "unstable__emailing" is disabled 1`] = `
+exports[`<ProjectAdminParticipant /> should render a non-selectable list when "beta__emailing" is disabled 1`] = `
 <div
   className="styles__Container-fmnQRi kkTtPG ProjectAdminParticipantstyle__Container-gABQlB iirJBD pickableList-row"
 >
@@ -135,7 +135,7 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "u
 </div>
 `;
 
-exports[`<ProjectAdminParticipant /> should render a selectable list when "unstable__emailing" is enabled 1`] = `
+exports[`<ProjectAdminParticipant /> should render a selectable list when "beta__emailing" is enabled 1`] = `
 <div
   className="styles__Container-fmnQRi kkTtPG ProjectAdminParticipantstyle__Container-gABQlB iirJBD pickableList-row"
 >

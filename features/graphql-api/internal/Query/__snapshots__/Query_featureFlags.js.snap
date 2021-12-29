@@ -13,7 +13,7 @@ Object {
     },
     Object {
       "enabled": true,
-      "type": "new_feature_questionnaire_result",
+      "type": "beta__questionnaire_result",
     },
     Object {
       "enabled": true,
@@ -217,7 +217,7 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "unstable__admin_editor",
+      "type": "beta__admin_editor",
     },
     Object {
       "enabled": true,
@@ -233,11 +233,11 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "unstable__emailing",
+      "type": "beta__emailing",
     },
     Object {
       "enabled": false,
-      "type": "unstable__emailing_parameters",
+      "type": "beta__emailing_parameters",
     },
     Object {
       "enabled": true,
@@ -265,15 +265,15 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "unstable__analytics_page",
+      "type": "beta__analytics_page",
     },
     Object {
       "enabled": true,
-      "type": "unstable_project_admin",
+      "type": "unstable__project_admin",
     },
     Object {
       "enabled": false,
-      "type": "unstable_anonymous_questionnaire",
+      "type": "unstable__anonymous_questionnaire",
     },
     Object {
       "enabled": false,

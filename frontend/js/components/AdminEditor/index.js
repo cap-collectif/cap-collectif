@@ -43,7 +43,7 @@ class EditorBehindFeatureFlag extends React.Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => {
   return {
-    isNewEditorEnabled: !!state.default.features.unstable__admin_editor,
+    isNewEditorEnabled: !!state.default.features.beta__admin_editor,
   };
 };
 

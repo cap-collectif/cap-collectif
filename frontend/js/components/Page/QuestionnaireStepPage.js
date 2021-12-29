@@ -108,7 +108,10 @@ export const QuestionnaireStepPage = ({
   isPrivateResult,
 }: Props) => {
   const [replyPrefetch, setReplyPrefetch] = React.useState(null);
-  const anonymousRepliesIds = React.useMemo(() => questionnaireId ? CookieMonster.getAnonymousRepliesIds(questionnaireId) : [], [questionnaireId]);
+  const anonymousRepliesIds = React.useMemo(
+    () => (questionnaireId ? CookieMonster.getAnonymousRepliesIds(questionnaireId) : []),
+    [questionnaireId],
+  );
 
   const context = React.useMemo(
     () => ({
@@ -163,7 +166,7 @@ export const QuestionnaireStepPage = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: state.user.user !== null,
-  enableResults: state.default.features.new_feature_questionnaire_result || false,
+  enableResults: state.default.features.beta__questionnaire_result || false,
 });
 
 export default connect<Props, PropsNotConnected, _, _, _, _>(mapStateToProps)(

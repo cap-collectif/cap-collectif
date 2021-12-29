@@ -80,7 +80,7 @@ class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDCont
 
     private function isFeatureActivated(): bool
     {
-        return $this->get(Manager::class)->isActive(Manager::unstable__emailing);
+        return $this->get(Manager::class)->isActive(Manager::beta__emailing);
     }
 
     private function redirectToHome(): RedirectResponse
