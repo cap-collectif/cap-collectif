@@ -59,7 +59,6 @@ class FeaturesCategoryResolver
                     Manager::login_paris,
                     Manager::login_franceconnect,
                     Manager::unstable__admin_editor,
-                    Manager::unstable__analysis,
                     Manager::report_browers_errors_to_sentry,
                     Manager::http_redirects,
                     Manager::unstable__emailing,

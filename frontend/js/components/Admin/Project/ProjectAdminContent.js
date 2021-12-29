@@ -143,7 +143,7 @@ const formatNavbarLinks = (
     ),
   });
 
-  if (features.unstable__analysis && project.hasAnalysis) {
+  if (project.hasAnalysis) {
     links.push({
       title: 'proposal.tabs.evaluation',
       url: getProjectAdminPath(project._id, 'ANALYSIS'),
@@ -345,7 +345,7 @@ export default createFragmentContainer(
   {
     project: graphql`
       fragment ProjectAdminContent_project on Project
-        @argumentDefinitions(projectId: { type: "ID!" }) {
+      @argumentDefinitions(projectId: { type: "ID!" }) {
         _id
         id
         title

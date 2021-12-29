@@ -21,21 +21,11 @@ class EvaluationController extends Controller
     public function indexAction(Request $request)
     {
         $viewer = $this->getUser();
-        $toggleManager = $this->get(Manager::class);
+        $viewerCanSeeEvaluationsPageResolver = $this->get(
+            QueryViewerCanSeeEvaluationsPageResolver::class
+        );
 
-        if ($toggleManager->isActive('unstable__analysis')) {
-            $viewerCanSeeEvaluationsPageResolver = $this->get(
-                QueryViewerCanSeeEvaluationsPageResolver::class
-            );
-
-            if (!$viewerCanSeeEvaluationsPageResolver->__invoke($viewer)) {
-                throw $this->createAccessDeniedException();
-            }
-
-            return [];
-        }
-
-        if (!$viewer->isEvaluerOnLegacyTool()) {
+        if (!$viewerCanSeeEvaluationsPageResolver->__invoke($viewer)) {
             throw $this->createAccessDeniedException();
         }
 

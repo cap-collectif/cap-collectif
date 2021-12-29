@@ -39,10 +39,6 @@ class QueryViewerCanSeeEvaluationsPageResolver implements ResolverInterface
     {
         $this->preventNullableViewer($viewer);
 
-        if (!$this->toggleManager->isActive('unstable__analysis')) {
-            return false;
-        }
-
         if (count($this->analystRepo->findBy(['analyst' => $viewer])) > 0) {
             return true;
         }

@@ -96,8 +96,6 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::multilangue")'
             unstable__admin_editor:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__admin_editor")'
-            unstable__analysis:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__analysis")'
             http_redirects:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::http_redirects")'
             report_browers_errors_to_sentry:

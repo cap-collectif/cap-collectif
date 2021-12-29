@@ -109,7 +109,6 @@ export const ProposalPageLogic = ({
       proposal?.viewerCanAnalyse ||
       proposal?.viewerCanEvaluate ||
       proposal?.supervisor?.id === query?.viewer?.id) &&
-    features.unstable__analysis &&
     isAuthenticated;
   const [votesCount, setVotesCount] = useState<number>(proposal?.allVotes?.totalCount || 0);
   const [show, setShow] = useState<MODAL_STATE>('FALSE');
@@ -237,16 +236,16 @@ export default createFragmentContainer(
   {
     query: graphql`
       fragment ProposalPageLogic_query on Query
-        @argumentDefinitions(
-          proposalId: { type: "ID!" }
-          hasVotableStep: { type: "Boolean!" }
-          stepId: { type: "ID!" }
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-          isAuthenticated: { type: "Boolean!" }
-          isTipsMeeeEnabled: { type: "Boolean!" }
-          proposalRevisionsEnabled: { type: "Boolean!" }
-        ) {
+      @argumentDefinitions(
+        proposalId: { type: "ID!" }
+        hasVotableStep: { type: "Boolean!" }
+        stepId: { type: "ID!" }
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        isAuthenticated: { type: "Boolean!" }
+        isTipsMeeeEnabled: { type: "Boolean!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+      ) {
         viewer @include(if: $isAuthenticated) {
           id
           ...ProposalPageHeader_viewer @arguments(hasVotableStep: $hasVotableStep)

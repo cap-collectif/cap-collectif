@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import renderComponent from '../../../Form/Field';
-import type { Dispatch, FeatureToggles } from '../../../../types';
+import type { Dispatch } from '../../../../types';
 import UserListField from '../../Field/UserListField';
 import AppDispatcher from '../../../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../../../constants/AlertConstants';
@@ -25,7 +25,6 @@ type Props = {|
   project: ?ProjectAdminFormDeprecated_project,
   intl: IntlShape,
   formName: string,
-  features: FeatureToggles,
   isAdmin: boolean,
 |};
 
@@ -98,7 +97,7 @@ const validate = ({ title, authors }: FormValues) => {
   react project page is complete.
 */
 export const ProjectAdminFormDeprecated = (props: Props) => {
-  const { handleSubmit, intl, invalid, submitting, pristine, project, features, isAdmin } = props;
+  const { handleSubmit, intl, invalid, submitting, pristine, project, isAdmin } = props;
 
   let noModal = window.location.href.indexOf('?back=alpha') !== -1;
   const isFirstTime = !localStorage.getItem(`projectForm_${project?._id || ''}`);
@@ -110,10 +109,9 @@ export const ProjectAdminFormDeprecated = (props: Props) => {
   const [showModal, setShowModal] = useState(!noModal);
   const [showTopInfo, setShowTopInfo] = useState(noModal);
 
-  const { unstable__analysis } = features;
   return (
     <div className={project && 'col-md-12'}>
-      {!!project && unstable__analysis && showTopInfo && (
+      {!!project && showTopInfo && (
         <ProjectBoxContainer className="box container-fluid" color="#007bff">
           <BoxDeprecated>
             <div>
@@ -135,7 +133,7 @@ export const ProjectAdminFormDeprecated = (props: Props) => {
       )}
       <AlphaProjectModal
         hasAnalysis={project?.hasAnalysis || false}
-        show={!!unstable__analysis && showModal && !!project}
+        show={!!showModal && !!project}
         onClose={() => {
           setShowModal(false);
           setShowTopInfo(true);
@@ -209,7 +207,6 @@ export const ProjectAdminFormDeprecated = (props: Props) => {
 };
 
 const mapStateToProps = (state, { project }: Props) => ({
-  features: state.default.features,
   isAdmin: state.user.user ? state.user.user.isAdmin : false,
   initialValues: {
     authors: project ? project.authors : [],

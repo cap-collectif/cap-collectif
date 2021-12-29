@@ -52,11 +52,6 @@ class ProcessingProposalCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$this->toggle->isActive('unstable__analysis')) {
-            $output->writeln('error : unstable__analysis not enabled');
-
-            return -1;
-        }
         $count = 0;
         $time = $input->getOption('time');
         $shouldSendMessage = $input->getOption('message');

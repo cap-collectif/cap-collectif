@@ -90,7 +90,6 @@ export type FeatureToggles = {
   external_project: ?boolean,
   multilangue: ?boolean,
   display_pictures_in_event_list: ?boolean,
-  unstable__analysis: ?boolean,
   report_browers_errors_to_sentry: ?boolean,
   unstable__emailing: ?boolean,
   unstable__emailing_parameters: ?boolean,

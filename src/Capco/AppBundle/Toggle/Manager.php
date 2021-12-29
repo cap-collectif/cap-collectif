@@ -64,7 +64,6 @@ class Manager
     public const versions = 'versions';
     public const multilangue = 'multilangue';
     public const unstable__admin_editor = 'unstable__admin_editor';
-    public const unstable__analysis = 'unstable__analysis';
     public const http_redirects = 'http_redirects';
     public const report_browers_errors_to_sentry = 'report_browers_errors_to_sentry';
     public const phone_confirmation = 'phone_confirmation';
@@ -167,7 +166,6 @@ class Manager
         self::sentry_log,
         self::multilangue,
         self::unstable__admin_editor,
-        self::unstable__analysis,
         self::http_redirects,
         self::report_browers_errors_to_sentry,
         self::unstable__remote_events,

@@ -3,14 +3,12 @@ import React from 'react';
 import { MemoryRouter, Route, Switch, NavLink } from 'react-router-dom';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
 import ProposalFormAdminConfigurationForm from './ProposalFormAdminConfigurationForm';
 import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationForm';
 import ProposalFormAdminSettingsForm from './ProposalFormAdminSettingsForm';
 import ProposalFormAdminAnalysisConfigurationForm from './ProposalFormAdminAnalysisConfigurationForm';
 import type { ProposalFormAdminPageTabs_proposalForm } from '~relay/ProposalFormAdminPageTabs_proposalForm.graphql';
 import type { ProposalFormAdminPageTabs_query } from '~relay/ProposalFormAdminPageTabs_query.graphql';
-import type { GlobalState } from '~/types';
 import ProposalFormAdminPageTabsContainer, {
   NavContainer,
   NavItem,
@@ -43,15 +41,9 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
   intl: IntlShape,
-  analysisFeatureEnabled: boolean,
 |};
 
-export const ProposalFormAdminPageTabs = ({
-  intl,
-  proposalForm,
-  query,
-  analysisFeatureEnabled,
-}: Props) => (
+export const ProposalFormAdminPageTabs = ({ intl, proposalForm, query }: Props) => (
   <ProposalFormAdminPageTabsContainer id="proposal-form-admin-page">
     <MemoryRouter
       initialEntries={[...Object.values(TABS)].map(v => String(v))}
@@ -92,7 +84,7 @@ export const ProposalFormAdminPageTabs = ({
             </NavLink>
           </NavItem>
 
-          {analysisFeatureEnabled && proposalForm.step && (
+          {proposalForm.step && (
             <NavItem>
               <NavLink to={TABS.ANALYSIS} activeClassName="active" id="link-tab-new-analysis">
                 {intl.formatMessage({ id: 'proposal.tabs.evaluation' })}
@@ -117,7 +109,7 @@ export const ProposalFormAdminPageTabs = ({
           <ProposalFormAdminConfigurationForm proposalForm={proposalForm} query={query} />
         </Route>
 
-        {analysisFeatureEnabled && !!proposalForm.step && (
+        {!!proposalForm.step && (
           <Route path={TABS.ANALYSIS}>
             <ProposalFormAdminAnalysisConfigurationForm proposalForm={proposalForm} />
           </Route>
@@ -135,14 +127,9 @@ export const ProposalFormAdminPageTabs = ({
   </ProposalFormAdminPageTabsContainer>
 );
 
-const mapStateToProps = (state: GlobalState) => ({
-  analysisFeatureEnabled: state.default.features.unstable__analysis,
-});
-
 const withIntl = injectIntl(ProposalFormAdminPageTabs);
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(withIntl);
 
-export default createFragmentContainer(container, {
+export default createFragmentContainer(withIntl, {
   proposalForm: graphql`
     fragment ProposalFormAdminPageTabs_proposalForm on ProposalForm {
       title

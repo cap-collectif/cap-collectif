@@ -221,10 +221,6 @@ Object {
     },
     Object {
       "enabled": true,
-      "type": "unstable__analysis",
-    },
-    Object {
-      "enabled": true,
       "type": "http_redirects",
     },
     Object {

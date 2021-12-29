@@ -17,7 +17,6 @@ describe('<ProposalFormAdminPageTabs />', () => {
   };
 
   const props = {
-    analysisFeatureEnabled: true,
     intl: intlMock,
     proposalForm,
     query: {
@@ -26,10 +25,8 @@ describe('<ProposalFormAdminPageTabs />', () => {
     },
   };
 
-  it('doesnt render a (new) analysis tab, if feature is not enabled', () => {
-    const wrapper = shallow(
-      <ProposalFormAdminPageTabs {...props} analysisFeatureEnabled={false} />,
-    );
+  it('should render correctly', () => {
+    const wrapper = shallow(<ProposalFormAdminPageTabs {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -37,11 +34,6 @@ describe('<ProposalFormAdminPageTabs />', () => {
     const wrapper = shallow(
       <ProposalFormAdminPageTabs {...props} proposalForm={{ ...proposalForm, step: null }} />,
     );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('render a (new) analysis tab', () => {
-    const wrapper = shallow(<ProposalFormAdminPageTabs {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

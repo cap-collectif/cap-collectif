@@ -91,7 +91,6 @@ export const features: FeatureToggles = {
   external_project: false,
   multilangue: false,
   display_pictures_in_event_list: false,
-  unstable__analysis: false,
   unstable__emailing: false,
   unstable__emailing_parameters: false,
   proposal_revisions: false,
