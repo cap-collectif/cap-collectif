@@ -271,9 +271,7 @@
     <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
 {% endblock %}
 {% block javascripts %}
-    {% if is_feature_enabled('app_news') %}
-        {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
-    {% endif %}
+    {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
     <script src="{{ asset('bundles/sonatacore/vendor/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript">
         window.CKEDITOR_BASEPATH = '/js/ckeditor/';

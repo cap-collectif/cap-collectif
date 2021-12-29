@@ -49,7 +49,6 @@ class FeaturesCategoryResolver
                     Manager::indexation,
                     Manager::new_feature_questionnaire_result,
                     Manager::display_pictures_in_event_list,
-                    Manager::app_news,
                     Manager::multilangue,
                     Manager::unstable__remote_events,
                     Manager::unstable__tipsmeee,

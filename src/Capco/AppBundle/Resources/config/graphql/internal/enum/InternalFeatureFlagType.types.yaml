@@ -90,8 +90,6 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::display_pictures_in_event_list")'
             external_project:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::external_project")'
-            app_news:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::app_news")'
             sentry_log:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::sentry_log")'
             multilangue:

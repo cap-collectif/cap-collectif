@@ -322,7 +322,6 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     features={
       Object {
         "allow_users_to_propose_events": false,
-        "app_news": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -583,7 +582,6 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     features={
       Object {
         "allow_users_to_propose_events": false,
-        "app_news": false,
         "blog": false,
         "calendar": false,
         "captcha": false,

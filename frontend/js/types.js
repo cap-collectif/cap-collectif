@@ -88,7 +88,6 @@ export type FeatureToggles = {
   read_more: ?boolean,
   display_pictures_in_depository_proposals_list: ?boolean,
   external_project: ?boolean,
-  app_news: ?boolean,
   multilangue: ?boolean,
   display_pictures_in_event_list: ?boolean,
   unstable__analysis: ?boolean,

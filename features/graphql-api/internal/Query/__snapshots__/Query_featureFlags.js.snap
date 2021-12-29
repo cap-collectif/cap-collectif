@@ -209,10 +209,6 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "app_news",
-    },
-    Object {
-      "enabled": false,
       "type": "sentry_log",
     },
     Object {

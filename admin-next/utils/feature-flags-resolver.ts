@@ -46,7 +46,6 @@ export const defaultFeatureFlags: FeatureFlags = {
     read_more: false,
     display_pictures_in_depository_proposals_list: false,
     external_project: false,
-    app_news: false,
     multilangue: false,
     display_pictures_in_event_list: false,
     unstable__analysis: false,

@@ -73,20 +73,18 @@ const Placeholder: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 
 const AdminRightNavbar = ({ localesData, currentLocale, features, query }: Props) => (
   <Navbar>
-    {features.app_news && (
-      <NavbarItem
-        eventKey={0}
-        noCaret
-        id="admin-beamer-navbar"
-        title={
-          <div
-            className="dropdown-toggle js-notifications-trigger beamerTrigger ml-5"
-            data-toggle="dropdown">
-            <i className="fa fa-bell fa-fw" aria-hidden="true" />
-          </div>
-        }
-      />
-    )}
+    <NavbarItem
+      eventKey={0}
+      noCaret
+      id="admin-beamer-navbar"
+      title={
+        <div
+          className="dropdown-toggle js-notifications-trigger beamerTrigger ml-5"
+          data-toggle="dropdown">
+          <i className="fa fa-bell fa-fw" aria-hidden="true" />
+        </div>
+      }
+    />
     {features.multilangue && (
       <NavbarItem
         pullRight

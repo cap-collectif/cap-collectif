@@ -59,7 +59,6 @@ class Manager
     public const display_pictures_in_depository_proposals_list = 'display_pictures_in_depository_proposals_list';
     public const display_pictures_in_event_list = 'display_pictures_in_event_list';
     public const external_project = 'external_project';
-    public const app_news = 'app_news';
     public const sentry_log = 'sentry_log';
     public const login_openid = 'login_openid';
     public const versions = 'versions';
@@ -165,7 +164,6 @@ class Manager
         self::display_pictures_in_depository_proposals_list,
         self::display_pictures_in_event_list,
         self::external_project,
-        self::app_news,
         self::sentry_log,
         self::multilangue,
         self::unstable__admin_editor,
