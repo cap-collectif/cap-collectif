@@ -1,5 +1,5 @@
-const ProposaPreviewData = /* GraphQL */ `
-  query ProposaPreviewDataQuery($collectStepId: ID!) {
+const ProposalPreviewData = /* GraphQL */ `
+  query ProposalPreviewDataQuery($collectStepId: ID!) {
     node(id: $collectStepId) {
       ... on CollectStep {
         id
@@ -13,6 +13,7 @@ const ProposaPreviewData = /* GraphQL */ `
               address {
                 formatted
               }
+              paperVotesCount
             }
           }
         }
@@ -25,7 +26,7 @@ describe('Preview.proposals', () => {
   it("fetches proposal's data", async () => {
     await expect(
       graphql(
-        ProposaPreviewData,
+        ProposalPreviewData,
         {
           collectStepId: toGlobalId('CollectStep', 'collectstep1'),
         },

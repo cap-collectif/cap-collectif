@@ -729,6 +729,7 @@ Capco\AppBundle\Entity\Proposal:
         updatedAt: $publishedAt
         undraftAt: $publishedAt
         category: '@pCategoryAssigned3'
+        paperVotesCount: 13
     proposal{110..120}:
         id: 'proposal<current()>'
         title: 'Proposal <current()>'

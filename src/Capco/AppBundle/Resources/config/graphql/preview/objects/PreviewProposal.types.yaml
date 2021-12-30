@@ -84,3 +84,6 @@ PreviewProposal:
             bodyText:
                 type: 'String'
                 description: 'Identifies the body of the contribution rendered to text.'
+            paperVotesCount:
+                type: 'Int!'
+                description: 'The count of paper votes outside of the platform.'

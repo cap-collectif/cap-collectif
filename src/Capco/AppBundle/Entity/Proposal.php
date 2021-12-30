@@ -327,6 +327,11 @@ class Proposal implements
      */
     private ?ProposalSocialNetworks $proposalSocialNetworks;
 
+    /**
+     * @ORM\Column(name="paper_votes_count", type="integer")
+     */
+    private int $paperVotesCount = 0;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -1568,6 +1573,18 @@ class Proposal implements
     public function setProposalSocialNetworks(?ProposalSocialNetworks $proposalSocialNetworks): self
     {
         $this->proposalSocialNetworks = $proposalSocialNetworks;
+
+        return $this;
+    }
+
+    public function getPaperVotesCount(): int
+    {
+        return $this->paperVotesCount;
+    }
+
+    public function setPaperVotesCount(int $paperVotesCount): self
+    {
+        $this->paperVotesCount = $paperVotesCount;
 
         return $this;
     }
