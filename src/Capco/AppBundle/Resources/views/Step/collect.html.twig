@@ -53,8 +53,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/sonatacore/vendor/bootstrap/js/dropdown.js') }}"></script>
-    <script src="{{ asset('bundles/sonatacore/vendor/bootstrap/js/modal.js') }}"></script>
     {% if currentStep.useAddressOrMap %}
         {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
     {% endif %}

@@ -13,7 +13,6 @@ const domains = [
     'SonataAdminBundle',
     'SonataMediaBundle',
     'SonataUserBundle',
-    'SonataCoreBundle',
     'messages',
 ];
 

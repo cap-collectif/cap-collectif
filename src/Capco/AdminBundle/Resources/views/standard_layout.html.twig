@@ -180,7 +180,7 @@
                 <section class="content">
                     {% block sonata_admin_content %}
                         {% block notice %}
-                            {% include ['@SonataCore/FlashMessage/render.html.twig', '@SonataTwig/FlashMessage/render.html.twig'] %}
+                            {% include '@SonataTwig/FlashMessage/render.html.twig' %}
                         {% endblock notice %}
                         {% if _preview is not empty %}
                             <div class="sonata-ba-preview">{{ _preview|raw }}</div>
@@ -272,8 +272,12 @@
 {% endblock %}
 {% block javascripts %}
     {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
-    <script src="{{ asset('bundles/sonatacore/vendor/jquery/dist/jquery.min.js') }}"></script>
-    <script type="text/javascript">
+    {#    jquery2 is deprecated but used by bootstrap, remove it when possible #}
+    <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous">
+    </script>    <script type="text/javascript">
         window.CKEDITOR_BASEPATH = '/js/ckeditor/';
         {% include '@CapcoApp/window.js.twig' %}
     </script>
