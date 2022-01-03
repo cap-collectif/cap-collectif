@@ -70,11 +70,12 @@ const validate = (values: Object) => {
     if (values[value] && values[value].length < 2) {
       errors[value] = 'two-characters-minimum-required';
     }
-
-    if (value !== 'biography') {
-      if (values[value] && values[value].length > 256) {
-        errors[value] = '256-characters-maximum-required';
+    if (value === 'biography') {
+      if (values[value] && values[value].length > 1000) {
+        errors[value] = '1000-characters-maximum-required';
       }
+    } else if (values[value] && values[value].length > 256) {
+      errors[value] = '256-characters-maximum-required';
     }
   });
 
@@ -87,8 +88,11 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   delete values.media;
 
-  const profilePageIndexed = typeof values.doNotIndexProfile !== 'undefined' ? !values.doNotIndexProfile : props.viewer.profilePageIndexed;
-  if(typeof values.doNotIndexProfile !== 'undefined') {
+  const profilePageIndexed =
+    typeof values.doNotIndexProfile !== 'undefined'
+      ? !values.doNotIndexProfile
+      : props.viewer.profilePageIndexed;
+  if (typeof values.doNotIndexProfile !== 'undefined') {
     delete values.doNotIndexProfile;
   }
 
