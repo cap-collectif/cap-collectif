@@ -831,7 +831,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       allowAuthorsToAddNews: step?.allowAuthorsToAddNews || false,
       budget: step?.budget || null,
       isBudgetEnabled: step?.isBudgetEnabled || false,
-      isLimitEnabled: step?.votesMin !== null || step?.votesLimit !== null || false,
+      isLimitEnabled: step?.votesMin != null || step?.votesLimit != null || false,
       isTresholdEnabled: step?.isTresholdEnabled || false,
       private: step?.private || false,
     },
