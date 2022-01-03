@@ -1272,6 +1272,7 @@ input ProposalVoteOrder {
 
 """Ordering options for votes returned from the connection."""
 enum ProposalVoteOrderField {
+  """Allows ordering a list of vote by when they were published."""
   PUBLISHED_AT
 }
 

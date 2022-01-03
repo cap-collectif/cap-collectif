@@ -11665,6 +11665,7 @@ type RelaunchUserInvitationsPayload {
   clientMutationId: String
 }
 
+"""Remaining time in days/hours"""
 type RemainingTime {
   """Number of days remaining"""
   days: Int

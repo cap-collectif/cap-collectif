@@ -2,6 +2,7 @@ RemainingTime:
     type: object
     config:
         name: RemainingTime
+        description: 'Remaining time in days/hours'
         fields:
             days:
                 type: 'Int'
