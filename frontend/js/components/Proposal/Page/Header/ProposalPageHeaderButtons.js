@@ -187,10 +187,10 @@ const connector = connect<any, any, _, _, _, _>(mapStateToProps, mapDispatchToPr
 export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   viewer: graphql`
     fragment ProposalPageHeaderButtons_viewer on User
-      @argumentDefinitions(
-        stepId: { type: "ID!" }
-        hasVotableStep: { type: "Boolean", defaultValue: true }
-      ) {
+    @argumentDefinitions(
+      stepId: { type: "ID!" }
+      hasVotableStep: { type: "Boolean", defaultValue: true }
+    ) {
       id
       ...ProposalVoteButtonWrapperFragment_viewer
         @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
@@ -199,7 +199,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   `,
   step: graphql`
     fragment ProposalPageHeaderButtons_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       open
       ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
@@ -207,11 +207,11 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   `,
   proposal: graphql`
     fragment ProposalPageHeaderButtons_proposal on Proposal
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean!" }
-        proposalRevisionsEnabled: { type: "Boolean!" }
-        isTipsMeeeEnabled: { type: "Boolean!" }
-      ) {
+    @argumentDefinitions(
+      isAuthenticated: { type: "Boolean!" }
+      proposalRevisionsEnabled: { type: "Boolean!" }
+      isTipsMeeeEnabled: { type: "Boolean!" }
+    ) {
       id
       url
       title

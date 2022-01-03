@@ -208,6 +208,7 @@ export const ProposalEditModal = ({
                 key="normal"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, display: 'block' }}
+                style={{ overflow: 'scroll' }}
                 exit={{ opacity: 0, display: 'none' }}>
                 <Modal.Body height="unset">
                   <ProposalDraftAlert proposal={proposal} mb={6} />
@@ -331,11 +332,11 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(Prop
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalEditModal_proposal on Proposal
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean!" }
-        proposalRevisionsEnabled: { type: "Boolean!" }
-        isTipsMeeeEnabled: { type: "Boolean!" }
-      ) {
+    @argumentDefinitions(
+      isAuthenticated: { type: "Boolean!" }
+      proposalRevisionsEnabled: { type: "Boolean!" }
+      isTipsMeeeEnabled: { type: "Boolean!" }
+    ) {
       id
       allRevisions: revisions @include(if: $proposalRevisionsEnabled) {
         totalCount

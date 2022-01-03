@@ -59,6 +59,11 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
         }
       }
       key="normal"
+      style={
+        Object {
+          "overflow": "scroll",
+        }
+      }
     >
       <Modal.Body
         height="unset"
@@ -206,6 +211,11 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
         }
       }
       key="normal"
+      style={
+        Object {
+          "overflow": "scroll",
+        }
+      }
     >
       <Modal.Body
         height="unset"
@@ -355,6 +365,11 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
         }
       }
       key="normal"
+      style={
+        Object {
+          "overflow": "scroll",
+        }
+      }
     >
       <Modal.Body
         height="unset"
@@ -502,6 +517,11 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
         }
       }
       key="normal"
+      style={
+        Object {
+          "overflow": "scroll",
+        }
+      }
     >
       <Modal.Body
         height="unset"
@@ -649,6 +669,11 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
         }
       }
       key="normal"
+      style={
+        Object {
+          "overflow": "scroll",
+        }
+      }
     >
       <Modal.Body
         height="unset"
@@ -796,6 +821,11 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
         }
       }
       key="normal"
+      style={
+        Object {
+          "overflow": "scroll",
+        }
+      }
     >
       <Modal.Body
         height="unset"
