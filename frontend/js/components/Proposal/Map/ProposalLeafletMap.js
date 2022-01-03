@@ -222,7 +222,7 @@ export const ProposalLeafletMap = ({
         whenCreated={(map: MapProps) => {
           mapRef.current = map;
           map.on('click', (e: ?{ ...?Event, latlng: MapCenterObject }) => {
-            if (isCollectStep)
+            if (isCollectStep && proposalForm?.contribuable)
               openPopup(mapRef, popupRef, e?.latlng, geoJsons, proposalInAZoneRequired);
             setIsMobileSliderOpen(false);
             isOnCluster = false;
@@ -279,7 +279,7 @@ export const ProposalLeafletMap = ({
           zoomToBoundsOnClick
           onClick={e => {
             if (isCollectStep) {
-              if (isOnCluster)
+              if (isOnCluster && proposalForm?.contribuable)
                 openPopup(mapRef, popupRef, e.latlng, geoJsons, proposalInAZoneRequired);
               else closePopup(mapRef, popupRef);
             }
@@ -343,10 +343,12 @@ export const ProposalLeafletMap = ({
           ))}
         {!isMobile && <ZoomControl position="bottomright" />}
         {hasMore && <ProposalMapLoaderPane hasError={hasError} retry={retry} />}
-        <ProposalMapDiscoverPane
-          show={showDiscoverPane}
-          handleClose={() => setShowDiscoverPane(false)}
-        />
+        {proposalForm?.contribuable && (
+          <ProposalMapDiscoverPane
+            show={showDiscoverPane}
+            handleClose={() => setShowDiscoverPane(false)}
+          />
+        )}
         <ProposalMapOutOfAreaPane
           content={intl.formatHTMLMessage({ id: 'constraints.address_in_zone' })}
         />
