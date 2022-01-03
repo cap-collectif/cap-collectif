@@ -51,7 +51,7 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
         $debate->setStep($this);
     }
 
-    public function getDebate(): Debate
+    public function getDebate(): ?Debate
     {
         return $this->debate;
     }
