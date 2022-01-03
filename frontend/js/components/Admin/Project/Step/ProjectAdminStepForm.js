@@ -775,7 +775,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       title: step?.title ? step.title : null,
       endAt: step?.endAt ? step.endAt : null,
       startAt: step?.startAt || moment(),
-      isEnabled: step?.isEnabled ? step.isEnabled : true,
+      isEnabled: typeof step?.isEnabled !== 'undefined' ? step.isEnabled : true,
       timeless: step?.timeless ? step.timeless : false,
       isAnonymousParticipationAllowed: step?.isAnonymousParticipationAllowed
         ? step.isAnonymousParticipationAllowed
