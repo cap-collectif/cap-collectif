@@ -28,7 +28,7 @@ describe('<EventOnlineThumbnail />', () => {
       <EventOnlineThumbnail
         {...defaultProps}
         hasStarted={false}
-        event={{ ...event, timeRange: { startAt: '2022-04-07 00:00:00' } }}
+        event={{ ...event, timeRange: { startAt: '2025-04-07 00:00:00' } }}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -42,7 +42,7 @@ describe('<EventOnlineThumbnail />', () => {
         event={{
           ...event,
           viewerIsRoomAnimator: true,
-          timeRange: { startAt: '2022-04-07 00:00:00' },
+          timeRange: { startAt: '2025-04-07 00:00:00' },
         }}
       />,
     );

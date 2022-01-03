@@ -28,7 +28,7 @@ exports[`<EventOnlineThumbnail /> it renders correctly when not started 1`] = `
            
           <Component
             unit="year"
-            value={1}
+            value={3}
           />
         </strong>
       </span>
@@ -36,7 +36,7 @@ exports[`<EventOnlineThumbnail /> it renders correctly when not started 1`] = `
         <FormattedDate
           day="numeric"
           month="long"
-          value={2022-04-06T22:00:00.000Z}
+          value={2025-04-06T22:00:00.000Z}
           year="numeric"
         />
          
@@ -44,7 +44,7 @@ exports[`<EventOnlineThumbnail /> it renders correctly when not started 1`] = `
           hour="numeric"
           minute="numeric"
           second="numeric"
-          value={2022-04-06T22:00:00.000Z}
+          value={2025-04-06T22:00:00.000Z}
         />
       </span>
     </EventOnlineThumbnailstyle__Date>
@@ -78,7 +78,7 @@ exports[`<EventOnlineThumbnail /> it renders correctly when not started and anim
            
           <Component
             unit="year"
-            value={1}
+            value={3}
           />
         </strong>
       </span>
@@ -86,7 +86,7 @@ exports[`<EventOnlineThumbnail /> it renders correctly when not started and anim
         <FormattedDate
           day="numeric"
           month="long"
-          value={2022-04-06T22:00:00.000Z}
+          value={2025-04-06T22:00:00.000Z}
           year="numeric"
         />
          
@@ -94,7 +94,7 @@ exports[`<EventOnlineThumbnail /> it renders correctly when not started and anim
           hour="numeric"
           minute="numeric"
           second="numeric"
-          value={2022-04-06T22:00:00.000Z}
+          value={2025-04-06T22:00:00.000Z}
         />
       </span>
     </EventOnlineThumbnailstyle__Date>
