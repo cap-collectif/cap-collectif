@@ -39,8 +39,8 @@ type Props = {|
 |};
 
 export const getGroups = graphql`
-  query ProjectAccessAdminFormGroupsQuery {
-    groups {
+  query ProjectAccessAdminFormGroupsQuery($term: String) {
+    groups(term: $term) {
       edges {
         node {
           id
@@ -51,8 +51,13 @@ export const getGroups = graphql`
   }
 `;
 
-export const loadGroupOptions = (initialGroups: ?Array<{| label: string, value: string |}>) => {
-  return fetchQuery_DEPRECATED(environment, getGroups, {}).then(data => {
+export const loadGroupOptions = (
+  initialGroups: ?Array<{| label: string, value: string |}>,
+  term: string,
+) => {
+  return fetchQuery_DEPRECATED(environment, getGroups, {
+    term,
+  }).then(data => {
     const groups = data.groups?.edges
       ?.map(edge => edge.node)
       .filter(Boolean)
@@ -132,7 +137,7 @@ export const ProjectAccessAdminForm = ({ visibility, initialGroups, isAdmin }: P
             role="combobox"
             aria-autocomplete="list"
             aria-haspopup="true"
-            loadOptions={() => loadGroupOptions(initialGroups)}
+            loadOptions={term => loadGroupOptions(initialGroups, term)}
             clearable
           />
         )}

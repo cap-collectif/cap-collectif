@@ -245,6 +245,10 @@ InternalQuery:
             groups:
                 description: 'Lookup groups.'
                 type: 'GroupConnection!'
+                args:
+                    term:
+                        description: 'The term to filter groups'
+                        type: 'String'
                 argsBuilder: 'Relay::ForwardConnection'
                 access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver", [args])'

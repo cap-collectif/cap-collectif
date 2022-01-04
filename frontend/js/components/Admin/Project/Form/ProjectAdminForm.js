@@ -576,7 +576,7 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
           : null,
     },
     title: formValueSelector(formName)(state, 'title'),
-    initialGroups: formValueSelector(formName)(state, 'restrictedViewersGroups') || [],
+    initialGroups: formValueSelector(formName)(state, 'restrictedViewerGroups') || [],
   };
 };
 

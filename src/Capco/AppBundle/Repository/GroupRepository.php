@@ -65,4 +65,17 @@ class GroupRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function getByTerm(?string $term): array
+    {
+        if (!$term) {
+            return $this->findAll();
+        }
+
+        return $this->createQueryBuilder('g')
+            ->where('g.title LIKE :term')
+            ->setParameters(['term' => "%{$term}%"])
+            ->getQuery()
+            ->getResult();
+    }
 }

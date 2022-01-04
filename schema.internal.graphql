@@ -10701,6 +10701,9 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
+
+    """The term to filter groups"""
+    term: String
   ): GroupConnection!
 
   """Lookup forms."""
