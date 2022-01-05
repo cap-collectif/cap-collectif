@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Security\ProjectVoter;
@@ -15,9 +16,23 @@ class AlphaProjectController extends \Sonata\AdminBundle\Controller\CRUDControll
     {
         /** @var Project $project */
         $project = $this->admin->getSubject();
-        if ('project.types.participatoryBudgeting' !== $project->getProjectType()->getTitle()) {
-            throw new NotFoundHttpException();
+        /** @var ProjectAbstractStep $pStep */
+        foreach ($project->getSteps() as $pStep) {
+            $step = $pStep->getStep();
+            if (!$step) {
+                throw $this->createAccessDeniedException();
+            }
+            $stepEqualSelectedStep = $step->getId() === $stepId ;
+            $stepIsNotCollectStep = $stepEqualSelectedStep && !$step->isCollectStep();
+            if ($stepIsNotCollectStep) {
+                throw $this->createAccessDeniedException();
+            }
+            $collectStepDontHaveProposalForm = $step->isCollectStep() && $stepEqualSelectedStep && !$step->getProposalForm();
+            if ($collectStepDontHaveProposalForm) {
+                throw $this->createAccessDeniedException();
+            }
         }
+        $this->throwIfNoAccess();
 
         return $this->renderWithExtraParams(
             'CapcoAdminBundle:AlphaProject:createProposal.html.twig',
