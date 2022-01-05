@@ -281,6 +281,12 @@
                 "href": "/admin/settings/settings.appearance/list",
                 "rolesRequired": [],
                 "featuresRequired": []
+            },
+            {
+                "title": "secured-participation",
+                "href": "/admin-next/identificationCodes",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
             }
         ]
     },

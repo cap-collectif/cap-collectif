@@ -324,6 +324,10 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     text="admin.label.settings.appearance"
                     href="/admin/settings/settings.appearance/list"
                   />
+                  <SidebarLink
+                    text="secured-participation"
+                    href="/admin-next/identificationCodes"
+                  />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}

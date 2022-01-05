@@ -69,11 +69,11 @@ class IdentificationCodeListCSVGeneratorSpec extends ObjectBehavior
         $response
             ->getContent()
             ->shouldBe(
-                'title,firstname,lastname,address1,address2,address3,zipCode,city,country,id codes' .
+                'title;firstname;lastname;address1;address2;address3;zipCode;city;country;"id codes"' .
                     "\n" .
-                    'm.,Jean,Dupuis,12 rue des Marguerites,,,42001,Fleur-sur-prés,France,XXXXXX' .
+                    'm.;Jean;Dupuis;"12 rue des Marguerites";;;42001;Fleur-sur-prés;France;XXXXXX' .
                     "\n" .
-                    'mme.,Jeanne,Dupuis,12 rue des Marguerites,,,42001,Fleur-sur-prés,France,XXXXXY'
+                    'mme.;Jeanne;Dupuis;"12 rue des Marguerites";;;42001;Fleur-sur-prés;France;XXXXXY'
             );
     }
 }
