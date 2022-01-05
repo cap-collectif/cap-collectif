@@ -32,6 +32,7 @@ describe('<UserAdminPersonalData/>', () => {
     phone: '0666666666',
     phoneConfirmed: true,
     zipCode: '94560',
+    userIdentificationCode: null,
   };
 
   const userIsConfirmed = {
@@ -50,7 +51,8 @@ describe('<UserAdminPersonalData/>', () => {
         {...props1}
         user={userIsConfirmed}
         viewer={viewer}
-        isViewerOrSuperAdmin
+        isViewer={false}
+        isSuperAdmin
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -61,7 +63,8 @@ describe('<UserAdminPersonalData/>', () => {
         {...props1}
         user={userIsNotConfirmed}
         viewer={viewer}
-        isViewerOrSuperAdmin={false}
+        isViewer={false}
+        isSuperAdmin={false}
       />,
     );
     expect(wrapper).toMatchSnapshot();

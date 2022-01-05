@@ -68,6 +68,21 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       title="global.data"
     >
       <Relay(Connect(ReduxForm))
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "formats": Object {},
+            "locale": "fr-FR",
+            "messages": Object {},
+            "now": [Function],
+          }
+        }
         user={
           Object {
             "$fragmentRefs": null,

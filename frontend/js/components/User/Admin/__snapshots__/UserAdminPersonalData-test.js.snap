@@ -258,6 +258,23 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
       <div
         className="clearfix"
       />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="userIdentificationCode"
+        label={
+          <FormattedMessage
+            id="identification_code"
+            values={Object {}}
+          />
+        }
+        name="userIdentificationCode"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"
@@ -545,6 +562,23 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
           values={Object {}}
         />
       </Field>
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="userIdentificationCode"
+        label={
+          <FormattedMessage
+            id="identification_code"
+            values={Object {}}
+          />
+        }
+        name="userIdentificationCode"
+        type="text"
+      />
       <div
         className="clearfix"
       />

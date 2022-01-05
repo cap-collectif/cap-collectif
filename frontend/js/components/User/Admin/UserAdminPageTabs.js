@@ -35,7 +35,7 @@ export class UserAdminPageTabs extends Component<Props> {
             <UserAdminProfile user={user} viewer={viewer} />
           </Tab>
           <Tab eventKey={3} title={intl.formatMessage({ id: 'global.data' })}>
-            <UserAdminPersonalData user={user} viewer={viewer} />
+            <UserAdminPersonalData user={user} viewer={viewer} intl={intl} />
           </Tab>
           <Tab eventKey={4} title={intl.formatMessage({ id: 'global.password' })}>
             <UserAdminPassword user={user} />
