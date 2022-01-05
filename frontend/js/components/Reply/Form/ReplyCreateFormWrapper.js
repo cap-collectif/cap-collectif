@@ -12,6 +12,7 @@ import ReplyForm from './ReplyForm';
 import { type User } from '~/redux/modules/user';
 import type { GlobalState } from '~/types';
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
   +questionnaire: ReplyCreateFormWrapper_questionnaire,
@@ -26,6 +27,9 @@ const ReplyCreateFormWrapperContainer: StyledComponent<{}, {}, HTMLDivElement> =
 export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props) => {
   const { anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext);
   const isAnonymousParticipationAllowed = questionnaire?.step?.isAnonymousParticipationAllowed;
+  const isAnonymousQuestionnaireFeatureEnabled = useFeatureFlag(
+    'unstable__anonymous_questionnaire',
+  );
 
   const formIsDisabled =
     questionnaire.contribuable &&
@@ -33,9 +37,13 @@ export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props
     questionnaire.viewerReplies.totalCount > 0 &&
     !questionnaire.multipleRepliesAllowed;
 
+  const canParticipateAnonymously = isAnonymousQuestionnaireFeatureEnabled
+    ? isAnonymousParticipationAllowed
+    : false;
+
   return (
     <ReplyCreateFormWrapperContainer>
-      {questionnaire.contribuable && !user && !isAnonymousParticipationAllowed ? (
+      {questionnaire.contribuable && !user && !canParticipateAnonymously ? (
         <Alert bsStyle="warning" className="hidden-print text-center">
           <strong>
             <FormattedMessage id="reply.not_logged_in.error" />
@@ -74,7 +82,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(ReplyCreateForm
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment ReplyCreateFormWrapper_questionnaire on Questionnaire
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       multipleRepliesAllowed
       phoneConfirmationRequired

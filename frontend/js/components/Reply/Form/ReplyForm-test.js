@@ -351,6 +351,7 @@ describe('<ReplyForm />', () => {
     anonymousRepliesIds: ['abc', 'def'],
     isAuthenticated: true,
     platformName: 'capco',
+    isAnonymousQuestionnaireFeatureEnabled: false,
   };
 
   it('should render correctly with equal required and facultative fields', () => {
@@ -494,6 +495,7 @@ describe('<ReplyForm />', () => {
         }}
         reply={null}
         {...props}
+        isAnonymousQuestionnaireFeatureEnabled
       />,
     );
     expect(wrapper).toMatchSnapshot();

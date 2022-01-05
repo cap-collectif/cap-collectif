@@ -67,6 +67,7 @@ type Props = {|
   +isAnonymousReply: boolean,
   +anonymousRepliesIds: string[],
   +isAuthenticated: boolean,
+  +isAnonymousQuestionnaireFeatureEnabled: boolean,
 |};
 
 type FormValues = {|
@@ -124,7 +125,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
         input: {
           hashedToken,
           responses: data.responses,
-          participantEmail: data.participantEmail
+          participantEmail: data.participantEmail,
         },
       })
         .then(() => {
@@ -249,9 +250,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
 };
 
 const validate = (values: FormValues, props: Props) => {
-  const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
-    'availableQuestions',
-  );
+  const availableQuestions: Array<string> =
+    memoizeAvailableQuestions.cache.get('availableQuestions');
   const { intl } = props;
   const { questions } = props.questionnaire;
   const { responses } = values;
@@ -342,9 +342,12 @@ export class ReplyForm extends React.Component<Props, State> {
   }
 
   formIsDisabled() {
-    const { questionnaire, user, reply } = this.props;
+    const { questionnaire, user, reply, isAnonymousQuestionnaireFeatureEnabled } = this.props;
 
-    if (questionnaire?.step?.isAnonymousParticipationAllowed) {
+    const canParticipateAnonymously = isAnonymousQuestionnaireFeatureEnabled
+      ? questionnaire?.step?.isAnonymousParticipationAllowed
+      : false;
+    if (canParticipateAnonymously) {
       return false;
     }
 
@@ -379,6 +382,7 @@ export class ReplyForm extends React.Component<Props, State> {
       invalidRequirements,
       platformName,
       isAuthenticated,
+      isAnonymousQuestionnaireFeatureEnabled,
     } = this.props;
     const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
     const disabled = this.formIsDisabled();
@@ -389,6 +393,10 @@ export class ReplyForm extends React.Component<Props, State> {
       reply && !reply.draft && !questionnaire.step?.requirements?.viewerMeetsTheRequirements;
     const stepHasRequirement =
       questionnaire.step?.requirements && questionnaire.step.requirements.totalCount > 0;
+
+    const canParticipateAnonymously = isAnonymousQuestionnaireFeatureEnabled
+      ? questionnaire?.step?.isAnonymousParticipationAllowed
+      : false;
 
     const disabledSubmitBtn = () => {
       const isDisabled =
@@ -439,33 +447,35 @@ export class ReplyForm extends React.Component<Props, State> {
             memoize={memoizeAvailableQuestions}
           />
 
-          {!isAuthenticated && questionnaire.step?.collectParticipantsEmail && (
-            <ParticipantEmailWrapper mb={4}>
-              <Text fontSize="20px" color="gray.900" fontWeight={600} fontFamily="inherit">
-                {intl.formatMessage({ id: 'your-email-address' })}
-              </Text>
-              <Text color="gray.800" fontFamily="inherit">
-                {intl.formatMessage(
-                  { id: 'anonymous.questionnaire.collect.email.help' },
-                  { platform: platformName },
-                )}
-              </Text>
-              <Field
-                type="text"
-                name="participantEmail"
-                helpPrint={false}
-                component={renderComponent}
-              />
-              <Text color="neutral.gray.700" fontFamily="inherit">
-                {intl.formatMessage(
-                  { id: 'information-for-the-newsletter-registration-form' },
-                  {
-                    organisationName: platformName,
-                  },
-                )}
-              </Text>
-            </ParticipantEmailWrapper>
-          )}
+          {!isAuthenticated &&
+            questionnaire.step?.collectParticipantsEmail &&
+            canParticipateAnonymously && (
+              <ParticipantEmailWrapper mb={4}>
+                <Text fontSize="20px" color="gray.900" fontWeight={600} fontFamily="inherit">
+                  {intl.formatMessage({ id: 'your-email-address' })}
+                </Text>
+                <Text color="gray.800" fontFamily="inherit">
+                  {intl.formatMessage(
+                    { id: 'anonymous.questionnaire.collect.email.help' },
+                    { platform: platformName },
+                  )}
+                </Text>
+                <Field
+                  type="text"
+                  name="participantEmail"
+                  helpPrint={false}
+                  component={renderComponent}
+                />
+                <Text color="neutral.gray.700" fontFamily="inherit">
+                  {intl.formatMessage(
+                    { id: 'information-for-the-newsletter-registration-form' },
+                    {
+                      organisationName: platformName,
+                    },
+                  )}
+                </Text>
+              </ParticipantEmailWrapper>
+            )}
 
           {questionnaire.anonymousAllowed && !!user && (
             <>
@@ -483,7 +493,7 @@ export class ReplyForm extends React.Component<Props, State> {
             </>
           )}
 
-          {this.state.captcha.visible && !isAuthenticated && !reply && (
+          {this.state.captcha.visible && !isAuthenticated && !reply && canParticipateAnonymously && (
             <Flex direction="column" align="center">
               <Text
                 css={css({
@@ -574,6 +584,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     user: state.user.user,
     isAuthenticated: !!state.user.user,
     form: reply ? getFormNameUpdate(reply.id) : `Create${formName}`,
+    isAnonymousQuestionnaireFeatureEnabled:
+      state.default.features.unstable__anonymous_questionnaire,
     invalidRequirements:
       isInvalid(requirementsFormName)(state) ||
       Object.keys(getFormSyncErrors(requirementsFormName)(state)).length > 0,
