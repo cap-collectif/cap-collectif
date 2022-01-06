@@ -34,6 +34,9 @@ EmailingCampaign:
             mailingList:
                 type: 'MailingList'
                 description: 'the list of users who shall receive the email'
+            emailingGroup:
+                type: 'Group'
+                description: 'the group of users who shall receive the email'
             mailingInternal:
                 type: 'EmailingCampaignInternalList'
                 description: 'an internal list used instead of a mailing list'

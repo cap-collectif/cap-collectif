@@ -40,13 +40,13 @@ Scenario: GraphQL client wants to get list of users groups who can access to cur
             {
               "cursor": @string@,
               "node": {
-                "id": "group2",
+                "id": "R3JvdXA6Z3JvdXAy",
                 "title": @string@
               }
             },{
               "cursor": @string@,
               "node": {
-                "id": "group3",
+                "id": "R3JvdXA6Z3JvdXAz",
                 "title": @string@
               }
             }

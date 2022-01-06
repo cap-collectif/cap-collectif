@@ -249,6 +249,45 @@ Scenario: GraphQL admin creates a campaign from a mailing list
   """
 
 @database
+Scenario: GraphQL admin creates a campaign from a group
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CreateEmailingCampaignInput!) {
+      createEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          emailingGroup {
+            id
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "emailingGroup": "R3JvdXA6Z3JvdXAy"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "createEmailingCampaign": {
+         "error":null,
+         "emailingCampaign":{
+            "emailingGroup":{
+               "id":"R3JvdXA6Z3JvdXAy"
+            }
+         }
+      }
+    }
+  }
+  """
+
+@database
 Scenario: GraphQL admin wants to create a campaign with a wrong mailing list
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -278,6 +317,43 @@ Scenario: GraphQL admin wants to create a campaign with a wrong mailing list
     "data": {
       "createEmailingCampaign": {
         "error": "ID_NOT_FOUND_MAILING_LIST",
+        "emailingCampaign": null
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL admin wants to create a campaign with both group and organic list
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CreateEmailingCampaignInput!) {
+      createEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          mailingList {
+            id
+          }
+          mailingInternal
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "mailingList": "TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0",
+        "emailingGroup": "R3JvdXA6Z3JvdXAy"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "createEmailingCampaign": {
+        "error": "DOUBLE_LIST",
         "emailingCampaign": null
       }
     }

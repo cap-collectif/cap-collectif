@@ -18,6 +18,9 @@ UpdateEmailingCampaignInput:
             mailingList:
                 type: 'ID'
                 description: 'Id of the mailing list'
+            emailingGroup:
+                type: 'ID'
+                description: 'Id of the group'
             mailingInternal:
                 type: 'ID'
                 description: 'Id of the internal mailing list'

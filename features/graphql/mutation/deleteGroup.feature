@@ -14,7 +14,7 @@ Scenario: GraphQL client wants to delete a group
     }",
     "variables": {
       "input": {
-        "groupId": "group2"
+        "groupId": "R3JvdXA6Z3JvdXAy"
       }
     }
   }

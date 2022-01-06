@@ -55,6 +55,12 @@ class EmailingCampaign
     private ?MailingList $mailingList = null;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="emailingCampaigns")
+     * @ORM\JoinColumn(nullable=true, name="emailing_group")
+     */
+    private ?Group $emailingGroup = null;
+
+    /**
      * @ORM\Column(type="string", name="mailing_internal", length=255, nullable=true)
      */
     private ?string $mailingInternal = null;
@@ -217,5 +223,17 @@ class EmailingCampaign
     public function archive(): void
     {
         $this->setStatus(EmailingCampaignStatus::ARCHIVED);
+    }
+
+    public function getEmailingGroup(): ?Group
+    {
+        return $this->emailingGroup;
+    }
+
+    public function setEmailingGroup(?Group $emailingGroup): self
+    {
+        $this->emailingGroup = $emailingGroup;
+
+        return $this;
     }
 }

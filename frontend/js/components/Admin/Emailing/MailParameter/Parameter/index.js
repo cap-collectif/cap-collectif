@@ -230,7 +230,7 @@ export default createFragmentContainer(ParameterPage, {
   `,
   query: graphql`
     fragment Parameter_query on Query
-      @argumentDefinitions(affiliations: { type: "[MailingListAffiliation!]" }) {
+    @argumentDefinitions(affiliations: { type: "[MailingListAffiliation!]" }) {
       viewer {
         mailingLists(affiliations: $affiliations) {
           totalCount

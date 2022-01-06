@@ -29,7 +29,7 @@ Scenario: GraphQL client wants to get list of users who are in a group
       }
     }",
     "variables": {
-      "groupId": "group3",
+      "groupId": "R3JvdXA6Z3JvdXAz",
       "count": 32,
       "cursor": null
     }

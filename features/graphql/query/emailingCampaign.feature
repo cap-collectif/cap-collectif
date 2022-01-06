@@ -38,7 +38,7 @@ Scenario: GraphQL client wants to get all campaigns
   {
     "data": {
       "emailingCampaigns": {
-        "totalCount":4,
+        "totalCount": 5,
         "edges":[
           {
             "node": {
@@ -56,60 +56,7 @@ Scenario: GraphQL client wants to get all campaigns
               "preview": @string@
             }
           },
-          {
-            "node": {
-              "name": "Campagne pour rappeler aux utilisateurs de confirmer",
-              "owner": null,
-              "senderEmail": "dev@cap-collectif.com",
-              "senderName": "Les devs de capco",
-              "object": "Veuillez confirmer votre email",
-              "content": "<p>Pourquoi vous l'avez toujours pas fait ?</p>",
-              "unlayerConf": null,
-              "sendAt": "2020-10-01 00:00:00",
-              "status": "SENT",
-              "mailingInternal": "NOT_CONFIRMED",
-              "mailingList": null,
-              "preview": @string@
-            }
-          },
-          {
-            "node": {
-              "name": "On envoie un message à ceux qui ont participé au projet Solidarité COVID-19",
-              "owner": null,
-              "senderEmail": "dev@cap-collectif.com",
-              "senderName": "Les devs de capco",
-              "object": "Second confinement",
-              "content": "<p>Je pense qu'on va devoir relancer le projet.</p>",
-              "unlayerConf": "{\"who\":\"agui\"}",
-              "sendAt": null,
-              "status": "DRAFT",
-              "mailingInternal": null,
-              "mailingList": {
-                "name": "liste Solidarit\u00e9 COVID-19"
-              },
-              "preview": @string@
-            }
-          },
-          {
-            "node": {
-              "name": "Campagne pour le projet avec propriétaire",
-              "owner": {
-                "username": "Théo QP"
-              },
-              "senderEmail": "assistance@cap-collectif.com",
-              "senderName": "Théo qui assiste",
-              "object": "",
-              "content": "",
-              "unlayerConf": null,
-              "sendAt": null,
-              "status": "DRAFT",
-              "mailingInternal": null,
-              "mailingList": {
-                "name": "Liste du projet de Théo"
-              },
-              "preview": @string@
-            }
-          }
+           @...@
         ]
       }
     }
@@ -164,7 +111,7 @@ Scenario: GraphQL client wants to sort campaigns by sendDate
       emailingCampaigns(
         orderBy: {
         field: SEND_AT
-          direction: ASC
+          direction: DESC
         }
       ) {
         totalCount
@@ -181,37 +128,26 @@ Scenario: GraphQL client wants to sort campaigns by sendDate
   Then the JSON response should match:
   """
   {
-    "data": {
-      "emailingCampaigns": {
-        "totalCount":4,
-        "edges":[
-          {
-            "node": {
-              "name": "On envoie un message à ceux qui ont participé au projet Solidarité COVID-19",
-              "sendAt": null
-            }
-          },
-          {
-            "node": {
-              "name": "Campagne pour le projet avec propriétaire",
-              "sendAt": null
-            }
-          },
-          {
-            "node": {
-              "name": "Campagne pour rappeler aux utilisateurs de confirmer",
-              "sendAt": "2020-10-01 00:00:00"
-            }
-          },
-          {
-            "node": {
-              "name": "Campagne pour remercier les inscrits confirmés",
-              "sendAt": "2021-01-01 00:00:00"
-            }
-          }
-        ]
-      }
-    }
+     "data":{
+        "emailingCampaigns":{
+           "totalCount":5,
+           "edges":[
+              {
+                 "node":{
+                    "name":"Campagne pour remercier les inscrits confirm\u00e9s",
+                    "sendAt":"2021-01-01 00:00:00"
+                 }
+              },
+              {
+                 "node":{
+                    "name":"Campagne pour rappeler aux utilisateurs de confirmer",
+                    "sendAt":"2020-10-01 00:00:00"
+                 }
+              },
+              @...@
+           ]
+        }
+     }
   }
   """
 

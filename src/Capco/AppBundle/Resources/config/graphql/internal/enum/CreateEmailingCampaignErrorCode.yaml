@@ -7,3 +7,9 @@ CreateEmailingCampaignErrorCode:
             ID_NOT_FOUND_MAILING_LIST:
                 value: '@=constant("Capco\\AppBundle\\Enum\\CreateEmailingCampaignErrorCode::ID_NOT_FOUND_MAILING_LIST")'
                 description: 'No mailing list match your id'
+            ID_NOT_FOUND_GROUP:
+                value: '@=constant("Capco\\AppBundle\\Enum\\CreateEmailingCampaignErrorCode::ID_NOT_FOUND_GROUP")'
+                description: 'No group match your id'
+            DOUBLE_LIST:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateEmailingCampaignErrorCode::DOUBLE_LIST")'
+                description: 'A campaign cannot have both group, internal and organic list'

@@ -18,6 +18,7 @@ import {
   ProjectAccessContainer,
   ProjectBoxContainer,
 } from '../Form/ProjectAdminForm.style';
+import { fromGlobalId } from '~/utils/fromGlobalId';
 
 export type FormValues = {|
   visibility: ProjectVisibility,
@@ -62,7 +63,7 @@ export const loadGroupOptions = (
       ?.map(edge => edge.node)
       .filter(Boolean)
       .map(g => ({
-        value: g.id,
+        value: fromGlobalId(g.id).id,
         label: g.title,
       }));
     if (initialGroups?.length)

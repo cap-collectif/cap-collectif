@@ -244,6 +244,10 @@ class GlobalIdResolver
                     $node = $this->container->get(OfficialResponseRepository::class)->find($uuid);
 
                     break;
+                case 'Group':
+                    $node = $this->container->get(GroupRepository::class)->find($uuid);
+
+                    break;
                 default:
                     break;
             }

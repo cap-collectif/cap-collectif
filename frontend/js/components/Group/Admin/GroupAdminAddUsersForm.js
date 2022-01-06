@@ -3,10 +3,10 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
-import type { Dispatch } from '../../../types';
+import type { Dispatch } from '~/types';
 import UserListField from '../../Admin/Field/UserListField';
 import type { GroupAdminUsers_group } from '~relay/GroupAdminUsers_group.graphql';
-import { groupAdminUsersUserDeletionReset } from '../../../redux/modules/user';
+import { groupAdminUsersUserDeletionReset } from '~/redux/modules/user';
 import AddUsersInGroupMutation from '../../../mutations/AddUsersInGroupMutation';
 
 type Props = {

@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Form\GroupCreateType;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
-use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,12 +21,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 class GroupMutation implements MutationInterface
 {
     private LoggerInterface $logger;
-    private UserManager $userManager;
     private UserRepository $userRepository;
     private GroupRepository $groupRepository;
     private FormFactoryInterface $formFactory;
     private EntityManagerInterface $entityManager;
     private UserGroupRepository $userGroupRepository;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         LoggerInterface $logger,
@@ -35,15 +35,15 @@ class GroupMutation implements MutationInterface
         UserRepository $userRepository,
         UserGroupRepository $userGroupRepository,
         GroupRepository $groupRepository,
-        UserManager $userManager
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->logger = $logger;
         $this->formFactory = $formFactory;
-        $this->userManager = $userManager;
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
         $this->groupRepository = $groupRepository;
         $this->userGroupRepository = $userGroupRepository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function create(Argument $input): array
@@ -66,10 +66,10 @@ class GroupMutation implements MutationInterface
         return ['group' => $group];
     }
 
-    public function update(Argument $input): array
+    public function update(Argument $input, User $user): array
     {
         $arguments = $input->getArrayCopy();
-        $group = $this->groupRepository->find($arguments['groupId']);
+        $group = $this->globalIdResolver->resolve($arguments['groupId'], $user);
 
         if (!$group) {
             throw new UserError(sprintf('Unknown group with id "%d"', $arguments['groupId']));
@@ -91,10 +91,10 @@ class GroupMutation implements MutationInterface
         return ['group' => $group];
     }
 
-    public function delete(string $groupId): array
+    public function delete(string $groupId, User $user): array
     {
         /** @var ?Group $group */
-        $group = $this->groupRepository->find($groupId);
+        $group = $this->globalIdResolver->resolve($groupId, $user);
 
         if (!$group) {
             throw new UserError(sprintf('Unknown group with id "%s"', $groupId));
@@ -111,6 +111,7 @@ class GroupMutation implements MutationInterface
             $this->entityManager->flush();
         } catch (\Exception $e) {
             $this->logger->error(__METHOD__ . ' delete: ' . $group->getId());
+            $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
 
             throw new UserError('Can\'t delete this group.');
         }
@@ -118,12 +119,13 @@ class GroupMutation implements MutationInterface
         return ['deletedGroupTitle' => $group->getTitle()];
     }
 
-    public function deleteUserInGroup(string $userId, string $groupId): array
+    public function deleteUserInGroup(string $userId, string $groupId, $viewer): array
     {
         $userId = GlobalId::fromGlobalId($userId)['id'];
+        $group = $this->globalIdResolver->resolve($groupId, $viewer);
         $userGroup = $this->userGroupRepository->findOneBy([
             'user' => $userId,
-            'group' => $groupId,
+            'group' => $group->getId(),
         ]);
 
         if (!$userGroup) {
@@ -159,13 +161,17 @@ class GroupMutation implements MutationInterface
             $this->entityManager->flush();
         }
 
-        $this->addUsersInGroup([$user->getId()], $group->getId(), false);
+        $this->addUsersInGroup([$user->getId()], $group->getId(), '.anon', false);
     }
 
-    public function addUsersInGroup(array $users, string $groupId, bool $isGlobalID = true): array
-    {
+    public function addUsersInGroup(
+        array $users,
+        string $groupId,
+        $viewer,
+        bool $isGlobalID = true
+    ): array {
         /** @var Group $group */
-        $group = $this->groupRepository->find($groupId);
+        $group = $this->globalIdResolver->resolve($groupId, $viewer);
 
         if (!$group) {
             $error = sprintf('Cannot find the group "%g"', $groupId);

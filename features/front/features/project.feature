@@ -272,10 +272,10 @@ Scenario: Pierre can access to a restricted project to his user group
   And I should see "Agent de la ville"
   And I should see "Utilisateurs"
   And I should see "global.close"
-  When I unfold "group3" group inside restricted access modal
+  When I unfold "R3JvdXA6Z3JvdXAz" group inside restricted access modal
   Then I should see "Utilisateurs"
-  And I should not see "ptondereau" in the "#group3-modal .list-group" element
-  Then I search "ptondereau" in list "#group3-modal .list-group"
+  And I should not see "ptondereau" in the "#R3JvdXA6Z3JvdXAz-modal .list-group" element
+  Then I search "ptondereau" in list "#R3JvdXA6Z3JvdXAz-modal .list-group"
 
 Scenario: User can access project's trashed opinions
   Given feature "project_trash" is enabled

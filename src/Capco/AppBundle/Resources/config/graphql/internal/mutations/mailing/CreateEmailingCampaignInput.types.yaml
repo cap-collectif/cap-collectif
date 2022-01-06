@@ -6,3 +6,6 @@ CreateEmailingCampaignInput:
             mailingList:
                 type: 'ID'
                 description: 'Optional. The mailing list to build the campaign.'
+            emailingGroup:
+                type: 'ID'
+                description: 'Optional. The users group to build the campaign.'

@@ -18,7 +18,7 @@ Scenario: GraphQL client wants to update a group
     }",
     "variables": {
       "input": {
-        "groupId": "group2",
+        "groupId": "R3JvdXA6Z3JvdXAy",
         "title": "Nouveau titre",
         "description": "Nouvelle description"
       }
@@ -31,7 +31,7 @@ Scenario: GraphQL client wants to update a group
     "data": {
       "updateGroup": {
         "group": {
-          "id": "group2",
+          "id": "R3JvdXA6Z3JvdXAy",
           "title": "Nouveau titre",
           "description": "Nouvelle description"
         }

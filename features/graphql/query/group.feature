@@ -53,7 +53,7 @@ Scenario: GraphQL client wants to list groups
            "edges":[
               {
                "node":{
-                  "id":"group1",
+                  "id":"R3JvdXA6Z3JvdXAx",
                   "title":"Super-administrateur",
                   "users":{
                      "totalCount":5,

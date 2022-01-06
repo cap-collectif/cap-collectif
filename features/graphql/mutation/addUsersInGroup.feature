@@ -23,7 +23,7 @@ Scenario: GraphQL client wants to add a user in group
     }",
     "variables": {
       "input": {
-        "groupId": "group2",
+        "groupId": "R3JvdXA6Z3JvdXAy",
         "users": [
           "VXNlcjp1c2VyMTAx"
         ]
@@ -37,7 +37,7 @@ Scenario: GraphQL client wants to add a user in group
     "data": {
       "addUsersInGroup": {
         "group": {
-          "id": "group2",
+          "id": "R3JvdXA6Z3JvdXAy",
           "users": {
               "edges": [
                 {
@@ -76,7 +76,7 @@ Scenario: GraphQL client wants to add multiple users in group
     }",
     "variables": {
       "input": {
-        "groupId": "group2",
+        "groupId": "R3JvdXA6Z3JvdXAy",
         "users": [
           "VXNlcjp1c2VyMTAx",
           "VXNlcjp1c2VyMTA3"
@@ -91,7 +91,7 @@ Scenario: GraphQL client wants to add multiple users in group
     "data": {
       "addUsersInGroup": {
         "group": {
-          "id": "group2",
+          "id": "R3JvdXA6Z3JvdXAy",
           "users": {
             "edges": [
               {

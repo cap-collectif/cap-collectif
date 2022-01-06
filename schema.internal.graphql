@@ -3012,11 +3012,20 @@ type CreateDebateArgumentPayload {
 enum CreateEmailingCampaignErrorCode {
   """No mailing list match your id"""
   ID_NOT_FOUND_MAILING_LIST
+
+  """No group match your id"""
+  ID_NOT_FOUND_GROUP
+
+  """A campaign cannot have both group, internal and organic list"""
+  DOUBLE_LIST
 }
 
 input CreateEmailingCampaignInput {
   """Optional. The mailing list to build the campaign."""
   mailingList: ID
+
+  """Optional. The users group to build the campaign."""
+  emailingGroup: ID
   clientMutationId: String
 }
 
@@ -5138,6 +5147,9 @@ type EmailingCampaign implements Node {
   """the list of users who shall receive the email"""
   mailingList: MailingList
 
+  """the group of users who shall receive the email"""
+  emailingGroup: Group
+
   """an internal list used instead of a mailing list"""
   mailingInternal: EmailingCampaignInternalList
 
@@ -6125,7 +6137,7 @@ enum GoogleMapsAddressType {
 
 """A group of User"""
 type Group implements Node {
-  """The id of the group."""
+  """The ID of an object."""
   id: ID!
 
   """Identifies the group name."""
@@ -14118,7 +14130,7 @@ enum UpdateEmailingCampaignErrorCode {
   """sendAt must be in the future"""
   TOO_LATE
 
-  """A campaign cannot have both internal and organic list"""
+  """A campaign cannot have both group, internal and organic list"""
   DOUBLE_LIST
 
   """No mailing list match your id"""
@@ -14140,6 +14152,9 @@ input UpdateEmailingCampaignInput {
 
   """Id of the mailing list"""
   mailingList: ID
+
+  """Id of the group"""
+  emailingGroup: ID
 
   """Id of the internal mailing list"""
   mailingInternal: ID

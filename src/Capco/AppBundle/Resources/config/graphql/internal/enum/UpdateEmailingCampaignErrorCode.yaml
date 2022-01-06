@@ -15,7 +15,7 @@ UpdateEmailingCampaignErrorCode:
                 description: 'sendAt must be in the future'
             DOUBLE_LIST:
                 value: '@=constant("Capco\\AppBundle\\Enum\\UpdateEmailingCampaignErrorCode::DOUBLE_LIST")'
-                description: 'A campaign cannot have both internal and organic list'
+                description: 'A campaign cannot have both group, internal and organic list'
             MAILING_LIST_NOT_FOUND:
                 value: '@=constant("Capco\\AppBundle\\Enum\\UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND")'
                 description: 'No mailing list match your id'

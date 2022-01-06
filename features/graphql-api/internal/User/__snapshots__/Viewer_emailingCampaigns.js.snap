@@ -17,6 +17,11 @@ Object {
         },
         Object {
           "node": Object {
+            "name": "On envoie un message aux utilisateurs du group Agent de la ville",
+          },
+        },
+        Object {
+          "node": Object {
             "name": "On envoie un message à ceux qui ont participé au projet Solidarité COVID-19",
           },
         },
@@ -26,7 +31,7 @@ Object {
           },
         },
       ],
-      "totalCount": 4,
+      "totalCount": 5,
     },
   },
 }

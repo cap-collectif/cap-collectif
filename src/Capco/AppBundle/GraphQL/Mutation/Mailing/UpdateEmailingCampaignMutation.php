@@ -3,11 +3,13 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
+use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\UpdateEmailingCampaignErrorCode;
 use Capco\AppBundle\Form\EmailingCampaignType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,18 +25,18 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 
     private EntityManagerInterface $entityManager;
     private FormFactoryInterface $formFactory;
-    private MailingListRepository $mailingListRepository;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
         FormFactoryInterface $formFactory,
-        MailingListRepository $mailingListRepository
+        GlobalIdResolver $globalIdResolver
     ) {
         parent::__construct($resolver);
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
-        $this->mailingListRepository = $mailingListRepository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -98,16 +100,24 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         User $viewer
     ): void {
         $mailingListGlobalId = $input->offsetGet('mailingList');
+        $groupListGlobalId = $input->offsetGet('emailingGroup');
         $mailingInternal = $input->offsetGet('mailingInternal');
-        if ($mailingListGlobalId && $mailingInternal) {
+
+        if (($mailingListGlobalId && $mailingInternal) || ($groupListGlobalId && $mailingListGlobalId) || ($groupListGlobalId && $mailingInternal) && ($groupListGlobalId && $mailingInternal && $mailingListGlobalId)) {
             throw new UserError(UpdateEmailingCampaignErrorCode::DOUBLE_LIST);
         }
         if ($mailingListGlobalId) {
-            $mailingList = $this->getMailingList($mailingListGlobalId);
+            $mailingList = $this->globalIdResolver->resolve($mailingListGlobalId, $viewer);
             if (!$mailingList || (!$viewer->isAdmin() && $mailingList->getOwner() !== $viewer)) {
                 throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
             }
             $mailingList->addEmailingCampaign($emailingCampaign);
+        }
+        if ($groupListGlobalId) {
+            $group = $this->globalIdResolver->resolve($groupListGlobalId, $viewer);
+            if (!$group) {
+                throw new UserError(UpdateEmailingCampaignErrorCode::GROUP_NOT_FOUND);
+            }
         }
         if (
             $mailingInternal &&
@@ -115,19 +125,5 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         ) {
             throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
         }
-    }
-
-    private function getMailingList(string $globalId): MailingList
-    {
-        $mailingListId = GlobalId::fromGlobalId($globalId)['id'];
-        if (null === $mailingListId) {
-            throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
-        }
-        $mailingList = $this->mailingListRepository->find($mailingListId);
-        if (null === $mailingList) {
-            throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
-        }
-
-        return $mailingList;
     }
 }

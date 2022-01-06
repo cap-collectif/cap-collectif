@@ -508,3 +508,51 @@ Scenario: GraphQL project owner tries to update its campaign with internal maili
     }
   }
   """
+  
+Scenario: GraphQL admin tries to update its campaign with group
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateEmailingCampaignInput!) {
+      updateEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          name
+          senderEmail
+          senderName
+          emailingGroup {
+            id
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQWdlbnREZUxhVmlsbGVQYXJ0aWNpcGFudHM=",
+        "name": "new name",
+        "senderEmail": "new@cap-collectif.com",
+        "senderName": "new sender name",
+        "emailingGroup": "R3JvdXA6Z3JvdXAy"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "updateEmailingCampaign":{
+           "error":null,
+           "emailingCampaign":{
+              "name":"new name",
+              "senderEmail":"new@cap-collectif.com",
+              "senderName":"new sender name",
+              "emailingGroup":{
+                "id": "R3JvdXA6Z3JvdXAy"
+              }
+           }
+        }
+     }
+  }
+  """

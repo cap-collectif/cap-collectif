@@ -42,3 +42,15 @@ Capco\AppBundle\Entity\EmailingCampaign:
         owner: '@userTheo'
         mailingInternal: null
         status: 'DRAFT'
+    CampaignToAgentDeLaVilleParticipants:
+        id: CampaignToAgentDeLaVilleParticipants
+        name: 'On envoie un message aux utilisateurs du group Agent de la ville'
+        senderEmail: 'dev@cap-collectif.com'
+        senderName: 'Mairie de true ville'
+        object: 'La ville est false'
+        content: <stripslashes('\<p>\')>Veuillez réparer la ville et la remettre à true.<stripslashes('\</p>\')>
+        unlayerConf: '{"who":"agui"}'
+        emailingGroup: '@group2'
+        mailingInternal: null
+        sendAt: null
+        status: 'DRAFT'

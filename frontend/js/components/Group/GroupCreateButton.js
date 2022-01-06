@@ -9,6 +9,7 @@ import SubmitButton from '../Form/SubmitButton';
 import CreateGroupMutation from '../../mutations/CreateGroupMutation';
 import type { CreateGroupMutationResponse } from '~relay/CreateGroupMutation.graphql';
 import GroupForm from './GroupForm';
+import { fromGlobalId } from '~/utils/fromGlobalId';
 
 export type Props = {|
   submit: Function,
@@ -31,8 +32,8 @@ const validate = ({ title }) => {
 const onSubmit = (values: FormValues) =>
   CreateGroupMutation.commit({ input: values }).then((resp: CreateGroupMutationResponse) => {
     if (resp.createGroup) {
-      const groupId = resp.createGroup.group.id;
-      window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/group/${groupId}/edit`;
+      const { id } = fromGlobalId(resp.createGroup.group.id);
+      window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/group/${id}/edit`;
     }
   });
 

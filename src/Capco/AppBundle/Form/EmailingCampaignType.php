@@ -2,9 +2,11 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -39,6 +41,10 @@ class EmailingCampaignType extends AbstractType
             ])
             ->add('mailingInternal', ChoiceType::class, [
                 'choices' => EmailingCampaignInternalList::ALL,
+                'required' => false,
+            ])
+            ->add('emailingGroup', RelayNodeType::class, [
+                'class' => Group::class,
                 'required' => false,
             ])
             ->add('object', PurifiedTextType::class, [

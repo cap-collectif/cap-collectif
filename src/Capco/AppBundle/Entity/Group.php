@@ -26,7 +26,7 @@ class Group
      * @Gedmo\Timestampable(on="change", field={"title", "description"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    protected $updatedAt;
+    protected ?\DateTimeInterface $updatedAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="evaluers")
@@ -57,6 +57,11 @@ class Group
      * @ORM\ManyToMany(targetEntity=UserInvite::class, mappedBy="groups")
      */
     private $userInvites;
+
+    /**
+     * @ORM\OneToMany(targetEntity=EmailingCampaign::class, mappedBy="emailingGroup", orphanRemoval=true)
+     */
+    private Collection $emailingCampaigns;
 
     public function __construct()
     {
@@ -200,6 +205,18 @@ class Group
         if ($this->userInvites->removeElement($userInvite)) {
             $userInvite->removeGroup($this);
         }
+
+        return $this;
+    }
+
+    public function getEmailingCampaigns(): Collection
+    {
+        return $this->emailingCampaigns;
+    }
+
+    public function setEmailingCampaigns(Collection $emailingCampaigns): self
+    {
+        $this->emailingCampaigns = $emailingCampaigns;
 
         return $this;
     }

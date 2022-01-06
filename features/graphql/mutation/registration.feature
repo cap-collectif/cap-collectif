@@ -389,7 +389,7 @@ Scenario: GraphQL client wants to register when invited to a group
             "edges": [
               {
                 "node": {
-                  "id": "group1"
+                  "id": "R3JvdXA6Z3JvdXAx"
                 }
               }
             ]

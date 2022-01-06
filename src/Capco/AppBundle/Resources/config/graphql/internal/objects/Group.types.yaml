@@ -8,7 +8,10 @@ Group:
         description: 'A group of User'
         fields:
             id:
-                description: 'The id of the group.'
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Group
             title:
                 type: 'String'
                 description: 'Identifies the group name.'
