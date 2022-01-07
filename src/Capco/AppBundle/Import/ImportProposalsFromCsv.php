@@ -324,7 +324,10 @@ class ImportProposalsFromCsv
     private function setProposalReferenceAndModerationToken(Proposal $proposal): void
     {
         if (!$this->lastEntity) {
-            $this->lastEntity = $this->proposalRepository->findOneBy([], ['createdAt' => 'DESC']);
+            $this->lastEntity = $this->proposalRepository->findOneBy(
+                [],
+                ['createdAt' => 'DESC', 'reference' => 'DESC']
+            );
         }
         if (null === $this->lastEntity) {
             $proposal->setReference(1);
