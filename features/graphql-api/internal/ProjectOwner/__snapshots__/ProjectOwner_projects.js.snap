@@ -7,6 +7,12 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "authors": Array [],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
             "authors": Array [
               Object {
                 "username": "admin",
@@ -427,7 +433,7 @@ Object {
           },
         },
       ],
-      "totalCount": 43,
+      "totalCount": 44,
     },
   },
 }
@@ -785,8 +791,14 @@ Object {
             "title": "Budget Participatif IdF 3",
           },
         },
+        Object {
+          "node": Object {
+            "publishedAt": "2022-01-03 12:00:00",
+            "title": "Débats ouvert sans vote",
+          },
+        },
       ],
-      "totalCount": 43,
+      "totalCount": 44,
     },
   },
 }

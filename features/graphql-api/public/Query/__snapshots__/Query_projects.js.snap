@@ -8,6 +8,26 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/archived.jpeg",
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=",
+          "title": "Projet Archivé",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributions": Object {
             "totalCount": 196,
           },
           "contributionsCount": 0,
@@ -25,7 +45,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 3,
@@ -43,7 +63,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 5,
@@ -61,7 +81,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -80,32 +100,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 0,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 0,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/oculus.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0T2N1bHVzUXVlc3Q=",
-          "title": "Débat sur l'Oculus Quest",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjc=",
       "hasNextPage": true,
     },
-    "totalCount": 42,
+    "totalCount": 43,
   },
 }
 `;
@@ -205,7 +205,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 37,
+    "totalCount": 38,
   },
 }
 `;
@@ -225,6 +225,26 @@ Object {
             "totalCount": 0,
           },
           "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/providerReference58.jpg",
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9vZA==",
+          "title": "Food project",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "cover": Object {
             "url": "https://capco.test/media/default/0001/01/archived.jpeg",
           },
           "id": "UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=",
@@ -235,7 +255,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
             "totalCount": 196,
@@ -255,7 +275,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 3,
@@ -273,7 +293,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 5,
@@ -290,32 +310,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 2,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 2,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/cereale.png",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0V3lzaXd5Zw==",
-          "title": "Débat Wysiwyg",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 37,
+    "totalCount": 38,
   },
 }
 `;

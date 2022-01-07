@@ -11805,6 +11805,12 @@ type RemoveDebateArgumentVotePayload {
 enum RemoveDebateVoteErrorCode {
   """No `Debate` match your `debateId`."""
   UNKNOWN_DEBATE
+
+  """No `DebateVote` match your `debateId`."""
+  NO_VOTE_FOUND
+
+  """The `Debate` is closed"""
+  CLOSED_DEBATE
 }
 
 input RemoveDebateVoteInput {

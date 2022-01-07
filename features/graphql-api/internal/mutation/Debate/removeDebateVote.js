@@ -43,4 +43,40 @@ describe('Internal|RemoveDebateVote mutation', () => {
     );
     expect(response).toMatchSnapshot();
   });
+  it('Throw unknown debate.', async () => {
+    const response = await graphql(
+      RemoveDebateVoteMutation,
+      {
+        input: {
+          debateId: toGlobalId('Debate', 'debateUnknown'),
+        },
+      },
+      'internal_spylou',
+    );
+    expect(response).toMatchSnapshot();
+  });
+  it('Throw no vote found.', async () => {
+    const response = await graphql(
+      RemoveDebateVoteMutation,
+      {
+        input: {
+          debateId: toGlobalId('Debate', 'debateOpenWithoutVote'),
+        },
+      },
+      'internal_user',
+    );
+    expect(response).toMatchSnapshot();
+  });
+  it('Throw closed debate.', async () => {
+    const response = await graphql(
+      RemoveDebateVoteMutation,
+      {
+        input: {
+          debateId: toGlobalId('Debate', 'debateConfinement'),
+        },
+      },
+      'internal_spylou',
+    );
+    expect(response).toMatchSnapshot();
+  });
 });

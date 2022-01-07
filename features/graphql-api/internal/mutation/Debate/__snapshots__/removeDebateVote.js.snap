@@ -127,3 +127,36 @@ Object {
   },
 }
 `;
+
+exports[`Internal|RemoveDebateVote mutation Throw closed debate. 1`] = `
+Object {
+  "removeDebateVote": Object {
+    "debate": null,
+    "deletedArgumentId": null,
+    "deletedVoteId": null,
+    "errorCode": "CLOSED_DEBATE",
+  },
+}
+`;
+
+exports[`Internal|RemoveDebateVote mutation Throw no vote found. 1`] = `
+Object {
+  "removeDebateVote": Object {
+    "debate": null,
+    "deletedArgumentId": null,
+    "deletedVoteId": null,
+    "errorCode": "NO_VOTE_FOUND",
+  },
+}
+`;
+
+exports[`Internal|RemoveDebateVote mutation Throw unknown debate. 1`] = `
+Object {
+  "removeDebateVote": Object {
+    "debate": null,
+    "deletedArgumentId": null,
+    "deletedVoteId": null,
+    "errorCode": "UNKNOWN_DEBATE",
+  },
+}
+`;

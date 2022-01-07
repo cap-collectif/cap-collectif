@@ -61,8 +61,7 @@ class Debate
     {
         $step = $this->getStep();
         $project = $step->getProject();
-
-        if (!$project->viewerCanSee($viewer)) {
+        if ($project && !$project->viewerCanSee($viewer)) {
             return false;
         }
 

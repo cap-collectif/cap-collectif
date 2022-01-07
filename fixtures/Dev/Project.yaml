@@ -415,3 +415,11 @@ Capco\AppBundle\Entity\Project:
         updatedAt: <identity((new \DateTime('2017-03-19 13:00:00')))>
         publishedAt: <identity((new \DateTime('2017-06-19 13:00:00')))>
         visibility: 2
+    projectDebateOpenWithoutVote:
+        id: 'projectDebateOpenWithoutVote'
+        title: Débats ouvert sans vote
+        projectType: '@projectType9'
+        createdAt: <identity((new \DateTime('2022-01-03 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2

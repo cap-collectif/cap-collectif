@@ -72,3 +72,14 @@ Capco\AppBundle\Entity\Steps\DebateStep:
         startAt: <identity((new \DateTime('2020-01-01')))>
         endAt: <identity((new \DateTime('2020-10-01')))>
         debateContent: 'hey je suis visible par un admin projet'
+    debateStepOpenWithoutVote:
+        __construct: ['@debateOpenWithoutVote']
+        isAnonymousParticipationAllowed: false
+        id: debateStepOpenWithoutVote
+        title: Débat ouver sans vote ?
+        slug: debat-ouvert-sans-vote ?
+        label: debat open without vote
+        body: null
+        startAt: <identity((new \DateTime('2022-01-03 12:00:00')))>
+        endAt: <identity((new \DateTime('2030-10-01')))>
+        debateContent: 'Hey je suis un débat ouvert sans vote'

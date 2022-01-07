@@ -454,3 +454,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@collectSPhoneVerifRequire'
         project: '@projectWithPhoneVerifiedRequirement'
         position: 1
+    pasDebateOpenWithoutVote:
+        id: pasDebateOpenWithoutVote
+        step: '@debateStepOpenWithoutVote'
+        project: '@projectDebateOpenWithoutVote'
+        position: 1
