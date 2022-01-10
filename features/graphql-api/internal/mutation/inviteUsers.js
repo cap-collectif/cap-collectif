@@ -140,7 +140,7 @@ describe('Internal|inviteUsers mutation', () => {
         input: {
           emails: ['mail123@test.com', 'mail456@test.com'],
           role: 'ROLE_USER',
-          groups: ['group1'],
+          groups: ['R3JvdXA6Z3JvdXAx'],
         },
       },
       'internal_super_admin',

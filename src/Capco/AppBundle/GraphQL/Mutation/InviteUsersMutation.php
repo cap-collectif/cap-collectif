@@ -17,6 +17,7 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class InviteUsersMutation implements MutationInterface
 {
@@ -74,6 +75,10 @@ class InviteUsersMutation implements MutationInterface
 
         $existingInviteEmails = $this->userInviteRepository->findAllEmails();
         $existingUserEmails = $this->userRepository->findByEmails($emails);
+
+        $groupIds = array_map(static function (string $groupId) {
+            return GlobalId::fromGlobalId($groupId)['id'];
+        }, $groupIds);
         $groupEntities = $this->groupRepository->findBy(['id' => $groupIds]);
         $toUpdateEmails = [];
         $newInvitations = [];
