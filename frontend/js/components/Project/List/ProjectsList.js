@@ -89,6 +89,7 @@ class ProjectsList extends React.Component<Props> {
       status,
       author,
       onlyPublic,
+      archived
     } = this.initialRenderVars;
 
     return (
@@ -105,6 +106,7 @@ class ProjectsList extends React.Component<Props> {
             $term: String
             $status: ID
             $onlyPublic: Boolean
+            $archived: ProjectArchiveFilter
           ) {
             ...ProjectListView_query
               @arguments(
@@ -117,6 +119,7 @@ class ProjectsList extends React.Component<Props> {
                 status: $status
                 count: $count
                 onlyPublic: $onlyPublic
+                archived: $archived
               )
           }
         `}
@@ -132,6 +135,7 @@ class ProjectsList extends React.Component<Props> {
             field: orderBy,
             direction: 'DESC',
           },
+          archived,
         }}
         render={this.renderProjectList}
       />

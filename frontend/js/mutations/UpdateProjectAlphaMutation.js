@@ -98,6 +98,7 @@ const mutation = graphql`
         externalParticipantsCount
         externalVotesCount
         url
+        archived
         locale {
           id
           traductionKey

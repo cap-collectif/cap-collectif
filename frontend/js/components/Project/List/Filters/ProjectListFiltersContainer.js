@@ -109,6 +109,7 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
   renderFilters() {
     const { projectTypes, projectAuthors, projectDistricts, projects } = this.state;
     const { intl, themes } = this.props;
+
     if (
       projects.totalCount > 1 &&
       (projectTypes.length > 0 ||

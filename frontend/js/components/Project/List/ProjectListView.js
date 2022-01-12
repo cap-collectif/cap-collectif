@@ -11,6 +11,7 @@ import { selector } from './Filters/ProjectListFilters';
 import type {
   ProjectListViewRefetchQueryVariables,
   ProjectOrderField,
+  ProjectArchiveFilter,
 } from '~relay/ProjectListViewRefetchQuery.graphql';
 
 type Props = {
@@ -26,6 +27,7 @@ type Props = {
   paginate: boolean,
   relay: RelayRefetchProp,
   isProjectsPage: boolean,
+  archived: ProjectArchiveFilter
 };
 type State = {
   isRefetching: boolean,
@@ -37,7 +39,7 @@ export class ProjectListView extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    const { district, status, theme, term, orderBy, author, type } = this.props;
+    const { district, status, theme, term, orderBy, author, type, archived } = this.props;
     if (
       prevProps.orderBy !== orderBy ||
       prevProps.author !== author ||
@@ -45,14 +47,15 @@ export class ProjectListView extends React.Component<Props, State> {
       prevProps.district !== district ||
       prevProps.theme !== theme ||
       prevProps.status !== status ||
-      prevProps.term !== term
+      prevProps.term !== term ||
+      prevProps.archived !== archived
     ) {
       this._refetch();
     }
   }
 
   _refetch = () => {
-    const { district, theme, relay, term, orderBy, author, status, type } = this.props;
+    const { district, theme, relay, term, orderBy, author, status, type, archived } = this.props;
     this.setState({ isRefetching: true });
 
     const refetchVariables = () =>
@@ -64,6 +67,7 @@ export class ProjectListView extends React.Component<Props, State> {
         theme,
         term,
         status,
+        archived
       }: ProjectListViewRefetchQueryVariables);
 
     relay.refetch(
@@ -100,6 +104,7 @@ const mapStateToProps = (state: GlobalState) => ({
   type: selector(state, 'type'),
   district: selector(state, 'district'),
   status: selector(state, 'status'),
+  archived: selector(state, 'archived'),
   term: state.project.term,
 });
 
@@ -121,6 +126,7 @@ export default createRefetchContainer(
           status: { type: "ID" }
           term: { type: "String" }
           onlyPublic: { type: "Boolean" }
+          archived: { type: "ProjectArchiveFilter" }
         ) {
         ...ProjectListViewPaginated_query
           @arguments(
@@ -134,6 +140,7 @@ export default createRefetchContainer(
             count: $count
             status: $status
             onlyPublic: $onlyPublic
+            archived: $archived
           )
       }
     `,
@@ -150,6 +157,7 @@ export default createRefetchContainer(
       $status: ID
       $term: String
       $onlyPublic: Boolean
+      $archived: ProjectArchiveFilter
     ) {
       ...ProjectListView_query
         @arguments(
@@ -163,6 +171,7 @@ export default createRefetchContainer(
           count: $count
           status: $status
           onlyPublic: $onlyPublic
+          archived: $archived
         )
     }
   `,

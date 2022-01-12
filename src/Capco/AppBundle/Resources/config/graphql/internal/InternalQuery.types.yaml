@@ -124,6 +124,9 @@ InternalQuery:
                         type: 'String'
                         description: 'code of a Locale to filter by. If non-null, filter projects by locale'
                         defaultValue: null
+                    archived:
+                        type: 'ProjectArchiveFilter'
+                        description: 'If true, only projects with public visibility will be returned.'
             events:
                 type: 'InternalEventConnection!'
                 args:

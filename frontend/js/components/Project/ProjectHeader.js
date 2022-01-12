@@ -10,10 +10,11 @@ import type { ProjectHeader_project$key } from '~relay/ProjectHeader_project.gra
 import ProjectHeaderLayout from '~ui/Project/ProjectHeader';
 import ProjectHeaderAuthorList from '~/components/Project/Authors/ProjectHeaderAuthorList';
 import ProjectHeaderThemeList from '~/components/Project/ProjectHeaderThemeList';
+import ProjectArchivedTag from '~/components/Project/ProjectArchivedTag';
 
 const FRAGMENT = graphql`
   fragment ProjectHeader_project on Project
-    @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
+  @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
     id
     title
     url
@@ -29,6 +30,8 @@ const FRAGMENT = graphql`
     themes {
       id
     }
+    archived
+    visibility
     ...ProjectHeaderThemeList_project
     ...ProjectHeaderAuthorList_project
     ...ProjectHeaderBlocks_project
@@ -49,16 +52,23 @@ const ProjectHeader = ({ project }: Props): React.Node => {
           url={data.video}
           src={data.cover?.url}
           alt={data.cover?.name}
+          isArchived={data.archived}
         />
       );
     }
     if (data.cover) {
-      return <ProjectHeaderLayout.CoverImage src={data.cover.url} alt={data.cover.name} />;
+      return (
+        <ProjectHeaderLayout.CoverImage
+          src={data.cover.url}
+          alt={data.cover.name}
+          isArchived={data.archived}
+        />
+      );
     }
   };
   return (
     <ProjectHeaderLayout>
-      <ProjectHeaderLayout.Cover>
+      <ProjectHeaderLayout.Cover isArchived={data.archived}>
         <ProjectHeaderLayout.Content>
           <ProjectHeaderAuthorList project={data} />
           <ProjectHeaderLayout.Title>{data.title}</ProjectHeaderLayout.Title>
@@ -75,6 +85,7 @@ const ProjectHeader = ({ project }: Props): React.Node => {
         </ProjectHeaderLayout.Content>
         {renderCover()}
         <ProjectRestrictedAccessFragment project={data} />
+        {data.archived && data.visibility === 'PUBLIC' && <ProjectArchivedTag />}
       </ProjectHeaderLayout.Cover>
       <ProjectStepTabs project={data} />
     </ProjectHeaderLayout>

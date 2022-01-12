@@ -24,7 +24,7 @@ const Template = (args: any) => (
   <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
     <Flex width={['100%', '1080px']} justify="center">
       <ProjectHeader>
-        <ProjectHeader.Cover>
+        <ProjectHeader.Cover isArchived={false}>
           <ProjectHeader.Content>
             <ProjectHeader.Authors active>
               <Avatar
@@ -60,7 +60,7 @@ const Template = (args: any) => (
               <ProjectHeader.Social href="#" name="LINK" />
             </ProjectHeader.Socials>
           </ProjectHeader.Content>
-          <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} />
+          <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} isArchived={false} />
         </ProjectHeader.Cover>
         <ProjectHeader.Frise>
           <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
@@ -173,7 +173,7 @@ export const withoutCoverImage = (args: any) => (
   <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
     <Flex width={['100%', '1080px']} justify="center">
       <ProjectHeader>
-        <ProjectHeader.Cover>
+        <ProjectHeader.Cover isArchived={false}>
           <ProjectHeader.Content>
             <ProjectHeader.Authors active>
               <Avatar
@@ -251,7 +251,7 @@ export const withCoverVideo = (args: any) => (
   <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
     <Flex width={['100%', '1080px']} justify="center">
       <ProjectHeader>
-        <ProjectHeader.Cover>
+        <ProjectHeader.Cover isArchived={false}>
           <ProjectHeader.Content>
             <ProjectHeader.Authors active>
               <Avatar
@@ -291,6 +291,7 @@ export const withCoverVideo = (args: any) => (
             url="https://www.youtube.com/embed/gAbi2_n8_Mw"
             src={args.coverURL}
             alt={args.coverURL}
+            isArchived={false}
           />
         </ProjectHeader.Cover>
         <ProjectHeader.Frise>
@@ -334,7 +335,7 @@ export const withCoverVideo = (args: any) => (
 export const withoutFrise = (args: any) => (
   <Flex width={['100%', '1080px']} justify="center">
     <ProjectHeader>
-      <ProjectHeader.Cover>
+      <ProjectHeader.Cover isArchived={false}>
         <ProjectHeader.Content>
           <ProjectHeader.Authors active>
             <Avatar
@@ -370,7 +371,7 @@ export const withoutFrise = (args: any) => (
             <ProjectHeader.Social href="#" name="LINK" />
           </ProjectHeader.Socials>
         </ProjectHeader.Content>
-        <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} />
+        <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} isArchived={false} />
       </ProjectHeader.Cover>
     </ProjectHeader>
   </Flex>
@@ -384,7 +385,7 @@ longTitle.args = {
 export const oneAuthor = (args: any) => (
   <Flex width={['100%', '1080px']} justify="center">
     <ProjectHeader>
-      <ProjectHeader.Cover>
+      <ProjectHeader.Cover isArchived={false}>
         <ProjectHeader.Content>
           <ProjectHeader.Authors active>
             <Avatar
@@ -413,7 +414,7 @@ export const oneAuthor = (args: any) => (
             <ProjectHeader.Social href="#" name="LINK" />
           </ProjectHeader.Socials>
         </ProjectHeader.Content>
-        <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} />
+        <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} isArchived={false} />
       </ProjectHeader.Cover>
       <ProjectHeader.Frise>
         <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
@@ -476,7 +477,7 @@ export const oneAuthor = (args: any) => (
 export const multipleAuthor = (args: any) => (
   <Flex width={['100%', '1080px']} justify="center">
     <ProjectHeader>
-      <ProjectHeader.Cover>
+      <ProjectHeader.Cover isArchived={false}>
         <ProjectHeader.Content>
           <ProjectHeader.Authors active>
             <Avatar
@@ -507,7 +508,7 @@ export const multipleAuthor = (args: any) => (
             <ProjectHeader.Social href="#" name="LINK" />
           </ProjectHeader.Socials>
         </ProjectHeader.Content>
-        <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} />
+        <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} isArchived={false} />
       </ProjectHeader.Cover>
       <ProjectHeader.Frise>
         <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">

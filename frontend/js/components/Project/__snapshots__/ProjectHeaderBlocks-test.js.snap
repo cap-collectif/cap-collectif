@@ -2,7 +2,7 @@
 
 exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
 <ul
-  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox-jUaLZX czlZPR bJxwoi projectHeader__blocks"
+  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox2-cYLuYh czlZPR hengbC projectHeader__blocks"
 >
   <li
     className="sc-bdnxRM ifddLS projectHeader__block"
@@ -98,7 +98,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
 
 exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
 <ul
-  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox-jUaLZX czlZPR bJxwoi projectHeader__blocks"
+  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox2-cYLuYh czlZPR hengbC projectHeader__blocks"
 >
   <li
     className="sc-bdnxRM ifddLS projectHeader__block"
@@ -194,7 +194,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
 
 exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`] = `
 <ul
-  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox-jUaLZX czlZPR bJxwoi projectHeader__blocks"
+  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox2-cYLuYh czlZPR hengbC projectHeader__blocks"
 >
   <li
     className="sc-bdnxRM ifddLS projectHeader__block"

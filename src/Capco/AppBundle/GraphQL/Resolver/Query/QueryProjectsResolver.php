@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
+use Capco\AppBundle\Enum\ProjectArchiveFilter;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
@@ -143,6 +144,9 @@ class QueryProjectsResolver implements ResolverInterface
         }
         if ($args->offsetExists('locale') && '' != $args['locale']) {
             $filters['locale'] = $args['locale'];
+        }
+        if ($args->offsetExists('archived') && !empty($args->offsetGet('archived'))) {
+            $filters['archived'] = $args->offsetGet('archived') === ProjectArchiveFilter::ARCHIVED;
         }
 
         return $filters;

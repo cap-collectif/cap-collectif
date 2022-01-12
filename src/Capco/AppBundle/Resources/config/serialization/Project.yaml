@@ -77,3 +77,5 @@ Capco\AppBundle\Entity\Project:
             groups: [ElasticsearchProject]
         owner:
             groups: [ElasticsearchProject]
+        archived:
+            groups: [ElasticsearchProject]

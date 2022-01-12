@@ -12,7 +12,9 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
     ]
   }
 >
-  <Cover>
+  <Cover
+    isArchived={false}
+  >
     <Content>
       <Authors
         active={true}
@@ -99,6 +101,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
     </Content>
     <CoverImage
       alt="Cover Image"
+      isArchived={false}
       src="/cover.jpg"
     />
   </Cover>

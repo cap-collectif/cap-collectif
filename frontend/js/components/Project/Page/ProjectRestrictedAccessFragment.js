@@ -13,9 +13,8 @@ type Props = {
 
 const FRAGMENT = graphql`
   fragment ProjectRestrictedAccessFragment_project on Project
-    @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
+  @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
     visibility
-
     ...RenderCustomAccess_project @arguments(count: $count, cursor: $cursor)
     ...RenderPrivateAccess_project
   }

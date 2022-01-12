@@ -176,3 +176,10 @@ Capco\AppBundle\Entity\Steps\PresentationStep:
         label: Présentation
         isEnabled: true
         body: Je suis un projet qui contient un administrateur de projet (dit owner en API)
+    pstepProjectArchived:
+        id: pstepProjectArchived
+        slug: presentation-project-archived
+        title: Présentation
+        label: Présentation
+        isEnabled: true
+        body: Je suis un projet archivé

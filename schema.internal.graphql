@@ -8694,6 +8694,15 @@ enum ProjectAffiliation {
   AUTHOR
 }
 
+"""Project archive filter choices."""
+enum ProjectArchiveFilter {
+  """Filters only archived projects."""
+  ARCHIVED
+
+  """Filters only non-archived projects."""
+  ACTIVE
+}
+
 """A connection to a list of items."""
 type ProjectConnection {
   totalCount: Int!
@@ -10542,6 +10551,9 @@ type Query {
 
     """code of a Locale to filter by. If non-null, filter projects by locale"""
     locale: String = null
+
+    """If true, only projects with public visibility will be returned."""
+    archived: ProjectArchiveFilter
   ): ProjectConnection!
 
   """Lookup events."""

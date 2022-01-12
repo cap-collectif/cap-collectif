@@ -86,6 +86,7 @@ mappings:
                                     properties:
                                         id: { type: keyword }
                                 isOnlyProjectAdmin: { type: boolean }
+                        archived: { type: boolean }
                         locale: &Locale
                             properties:
                                 id: { type: keyword }
@@ -152,6 +153,7 @@ mappings:
         title: *text_analysis_highlighted
         authors: *Author
         owner: *Author
+        archived: { type: boolean }
         replyType: { type: keyword }
         visibility: { type: long }
         districts:

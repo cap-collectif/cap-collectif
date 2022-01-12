@@ -9,7 +9,7 @@ describe('<ProjectHeader />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(
       <ProjectHeader>
-        <ProjectHeader.Cover>
+        <ProjectHeader.Cover isArchived={false}>
           <ProjectHeader.Content>
             <ProjectHeader.Authors active>
               <Avatar
@@ -45,7 +45,7 @@ describe('<ProjectHeader />', () => {
               <ProjectHeader.Social href="#" name="LINK" />
             </ProjectHeader.Socials>
           </ProjectHeader.Content>
-          <ProjectHeader.CoverImage src="/cover.jpg" alt="Cover Image" />
+          <ProjectHeader.CoverImage src="/cover.jpg" alt="Cover Image" isArchived={false} />
         </ProjectHeader.Cover>
         <ProjectHeader.Frise>
           <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">

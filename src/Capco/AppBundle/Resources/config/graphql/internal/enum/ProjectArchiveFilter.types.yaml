@@ -1,0 +1,11 @@
+ProjectArchiveFilter:
+    type: enum
+    config:
+        description: 'Project archive filter choices.'
+        values:
+            ARCHIVED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectArchiveFilter::ARCHIVED")'
+                description: 'Filters only archived projects.'
+            ACTIVE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectArchiveFilter::ACTIVE")'
+                description: 'Filters only non-archived projects.'

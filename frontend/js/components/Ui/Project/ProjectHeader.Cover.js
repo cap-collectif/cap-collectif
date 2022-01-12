@@ -20,7 +20,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Modal from '~ds/Modal/Modal';
 import Play from './SVG/Play';
 
-const DefaultCoverImage = () => {
+const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
   const backgroundColor = useSelector(state => state.default.parameters['color.btn.primary.bg']);
   return (
     <Flex
@@ -32,7 +32,11 @@ const DefaultCoverImage = () => {
       overflow="hidden"
       minHeight="270px"
       maxHeight="315px"
-      backgroundColor={backgroundColor}>
+      backgroundColor={backgroundColor}
+      css={{
+        filter: isArchived ? 'grayscale(1)' : null,
+        opacity: isArchived ? '50%' : null,
+      }}>
       <DefaultProjectImage />
     </Flex>
   );
@@ -40,8 +44,9 @@ const DefaultCoverImage = () => {
 type CoverProps = {|
   ...AppBoxProps,
   children: React.Node,
+  isArchived: boolean,
 |};
-export const Cover = ({ children, ...rest }: CoverProps) => {
+export const Cover = ({ children, isArchived, ...rest }: CoverProps) => {
   const validChildren = cleanChildren(children);
   // eslint-disable-next-line no-use-before-define
   const hasCoverImage = validChildren.some(child => child.type === CoverImage);
@@ -51,7 +56,10 @@ export const Cover = ({ children, ...rest }: CoverProps) => {
     validChildren.splice(
       0,
       1,
-      ...[React.cloneElement(validChildren[0], { width: '100%' }), <DefaultCoverImage />],
+      ...[
+        React.cloneElement(validChildren[0], { width: '100%' }),
+        <DefaultCoverImage isArchived={isArchived} />,
+      ],
     );
   }
   return (
@@ -112,8 +120,9 @@ type CoverImageProps = {|
   ...AppBoxProps,
   src: string,
   alt: string,
+  isArchived: boolean,
 |};
-export const CoverImage = ({ src, alt, ...rest }: CoverImageProps) => (
+export const CoverImage = ({ src, alt, isArchived, ...rest }: CoverImageProps) => (
   <AppBox
     className="projectHeader__coverImage"
     width={['100%', '405px']}
@@ -121,6 +130,10 @@ export const CoverImage = ({ src, alt, ...rest }: CoverImageProps) => (
     overflow="hidden"
     minHeight="270px"
     maxHeight="315px"
+    css={{
+      filter: isArchived ? 'grayscale(1)' : null,
+      opacity: isArchived ? '50%' : null,
+    }}
     {...rest}>
     <AppBox
       as="img"
@@ -138,8 +151,9 @@ type CoverVideoProps = {|
   src?: string,
   alt?: string,
   +url: string,
+  +isArchived: boolean,
 |};
-export const CoverVideo = ({ url, src, alt, ...rest }: CoverVideoProps) => {
+export const CoverVideo = ({ url, src, alt, isArchived, ...rest }: CoverVideoProps) => {
   const isMobile = useIsMobile();
   const intl = useIntl();
   const renderButton = () => {
@@ -161,7 +175,7 @@ export const CoverVideo = ({ url, src, alt, ...rest }: CoverVideoProps) => {
     }
     return (
       <AppBox minHeight="270px" maxHeight="315px" width="100%" height="100%" position="relative">
-        <DefaultCoverImage />
+        <DefaultCoverImage isArchived={isArchived} />
         <Play />
       </AppBox>
     );

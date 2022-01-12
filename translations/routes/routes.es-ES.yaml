@@ -32,6 +32,7 @@ app_members_type_sorted: '/members/{userType}/{sort}/{page}'
 app_page_show: '/pages/{slug}'
 app_privacy: /privacy
 app_project: /projects
+app_project_archived: '/projects/archived'
 app_project_consultations_show_consultation: '/project/{projectSlug}/consultation/{stepSlug}/consultation/{consultationSlug}'
 app_project_edit_synthesis: '/project/{projectSlug}/synthesis/{stepSlug}/edition'
 app_project_show: '/projects/{projectSlug}/consultation/{stepSlug}'

@@ -101,6 +101,7 @@ export default createPaginationContainer(
           status: { type: "ID" }
           term: { type: "String" }
           onlyPublic: { type: "Boolean" }
+          archived: { type: "ProjectArchiveFilter" }
         ) {
         projects(
           author: $author
@@ -113,6 +114,7 @@ export default createPaginationContainer(
           status: $status
           term: $term
           onlyPublic: $onlyPublic
+          archived: $archived
         ) @connection(key: "ProjectListViewPaginated_projects", filters: []) {
           edges {
             node {
@@ -158,6 +160,7 @@ export default createPaginationContainer(
         $status: ID
         $term: String
         $onlyPublic: Boolean
+        $archived: ProjectArchiveFilter
       ) {
         ...ProjectListViewPaginated_query
           @arguments(
@@ -170,6 +173,7 @@ export default createPaginationContainer(
             status: $status
             term: $term
             onlyPublic: $onlyPublic
+            archived: $archived
           )
       }
     `,

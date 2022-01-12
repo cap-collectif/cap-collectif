@@ -459,3 +459,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@debateStepOpenWithoutVote'
         project: '@projectDebateOpenWithoutVote'
         position: 1
+    pasProjectArchived:
+        id: pasProjectArchived
+        step: '@pstepProjectArchived'
+        project: '@projectArchived'
+        position: 1

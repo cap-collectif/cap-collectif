@@ -11,7 +11,7 @@ type Props = {|
 const ProjectHeaderPlaceholder = ({ hasError, fetchData }: Props): React.Node => {
   return (
     <ProjectHeader>
-      <ProjectHeader.Cover>
+      <ProjectHeader.Cover isArchived={false}>
         {hasError && <ErrorQuery retry={fetchData} />}
         <ProjectHeader.Content>
           <Skeleton.Circle size={9} />

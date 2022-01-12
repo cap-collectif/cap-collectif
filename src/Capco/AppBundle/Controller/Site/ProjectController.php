@@ -350,6 +350,32 @@ class ProjectController extends Controller
     }
 
     /**
+     * @Route("/projects/archived", name="app_project_archived", options={"i18n" = true})
+     * @Template("CapcoAppBundle:Project:index.html.twig")
+     */
+    public function indexArchivedAction(Request $request)
+    {
+        $parameters = [];
+        $form = $this->createForm(ProjectSearchType::class);
+        $form->submit($request->query->all());
+
+        if ($form->isValid()) {
+            $parameters = $form->getData();
+            $parameters['type'] = $parameters['type'] ? $parameters['type']->getId() : null;
+
+            if (isset($parameters['theme'])) {
+                $parameters['theme'] = $parameters['theme'] ? $parameters['theme']->getId() : null;
+            }
+        }
+
+        $parameters['archived'] = 'archived';
+
+        $limit = (int) $this->siteParameterResolver->getValue('projects.pagination');
+
+        return ['params' => $parameters, 'limit' => $limit];
+    }
+
+    /**
      * @Route("/admin/capco/app/project/{projectId}/preview", name="capco_admin_project_preview", options={"i18n" = false})
      * @Entity("project", options={"mapping": {"projectId": "id"}})
      */

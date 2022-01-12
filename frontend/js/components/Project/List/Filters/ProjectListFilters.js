@@ -13,6 +13,10 @@ import ProjectsListFilterStatus from './ProjectListFilterStatus';
 import ProjectsListFilterDistricts from './ProjectListFilterDistricts';
 import type { ProjectType, ProjectAuthor, ProjectTheme } from './ProjectListFiltersContainer';
 import type { ProjectListFiltersContainerQueryResponse } from '~relay/ProjectListFiltersContainerQuery.graphql';
+import ProjectsListFilterArchived from "~/components/Project/List/Filters/ProjectsListFilterArchived";
+import type {
+  ProjectArchiveFilter,
+} from '~relay/ProjectListViewRefetchQuery.graphql';
 
 const formName = 'ProjectListFilters';
 
@@ -27,6 +31,7 @@ type Props = {
   theme: ?string,
   status: ?string,
   themes: ProjectTheme[],
+  archived: ?ProjectArchiveFilter
 };
 
 class ProjectListFilters extends React.Component<Props> {
@@ -47,7 +52,7 @@ class ProjectListFilters extends React.Component<Props> {
     }
   }
 
-  renderThemeStatus() {
+  renderStatusFilter() {
     const { status, intl } = this.props;
     return <ProjectsListFilterStatus intl={intl} status={status} />;
   }
@@ -63,13 +68,19 @@ class ProjectListFilters extends React.Component<Props> {
     );
   }
 
+  renderStateFilter() {
+    const { archived, intl } = this.props;
+    return <ProjectsListFilterArchived archived={archived} intl={intl}/>
+  }
+
   render() {
     const filters = [];
     filters.push(this.renderTypeFilter());
     filters.push(this.renderThemeFilter());
     filters.push(this.renderAuthorsFilter());
-    filters.push(this.renderThemeStatus());
+    filters.push(this.renderStatusFilter());
     filters.push(this.renderDistrictsFilter());
+    filters.push(this.renderStateFilter());
 
     if (filters.filter(Boolean).length > 0) {
       return (
@@ -88,14 +99,17 @@ class ProjectListFilters extends React.Component<Props> {
 
 export const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState) => ({
-  features: state.default.features,
-  author: selector(state, 'author'),
-  theme: selector(state, 'theme'),
-  type: selector(state, 'type'),
-  status: selector(state, 'status'),
-  district: selector(state, 'district'),
-});
+const mapStateToProps = (state: GlobalState) => {
+  return {
+    features: state.default.features,
+    author: selector(state, 'author'),
+    theme: selector(state, 'theme'),
+    type: selector(state, 'type'),
+    status: selector(state, 'status'),
+    district: selector(state, 'district'),
+    archived: selector(state, 'archived'),
+  }
+};
 
 type FormValues = {|
   +author: ?string,
@@ -103,6 +117,7 @@ type FormValues = {|
   +type: ?string,
   +status: ?string,
   +district: ?string,
+  +archived: ?string,
 |};
 
 export const getInitialValues = (): FormValues => {
@@ -113,6 +128,7 @@ export const getInitialValues = (): FormValues => {
     author: urlSearch.get('author') || null,
     theme: urlSearch.get('theme') || null,
     district: urlSearch.get('district') || null,
+    archived: window.location.pathname === '/projects/archived' ? 'ARCHIVED' : (urlSearch.get('archived') || 'ACTIVE'),
   };
 };
 

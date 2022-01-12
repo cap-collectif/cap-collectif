@@ -58,7 +58,8 @@
         'orderBy': projectReducerData.orderBy|default(null),
         'term': projectReducerData.term|default(null),
         'type': projectReducerData.type|default(null),
-        'theme': projectReducerData.theme|default(null)
+        'theme': projectReducerData.theme|default(null),
+        'archived': projectReducerData.archived|default(null)
     },
 } %}
 {% set state = state|merge(data is defined ? data : {}) %}
