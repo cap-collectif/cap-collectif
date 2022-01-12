@@ -28,6 +28,9 @@ RUN set -x \
         dirmngr \
         netcat \
         vim \
+        nginx \
+        nginx-common \
+        libnginx-mod-http-geoip \
     && \
     localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
     apt-get clean && \
@@ -91,16 +94,6 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
     && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }" \
     && php /tmp/composer-setup.php --version=2.0.7 --no-ansi --install-dir=/usr/local/bin --filename=composer --version=2.0.7 \
     && rm -f /tmp/composer-setup.*
-
-# Install nginx
-RUN wget -O- https://nginx.org/keys/nginx_signing.key | apt-key add - && \
-    echo "deb http://nginx.org/packages/mainline/debian/ buster nginx" > /etc/apt/sources.list.d/nginx.list && \
-    apt-get update && \
-    apt-get install -y -qq --no-install-recommends \
-        nginx \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install redis
 RUN apt-get update -y && \
