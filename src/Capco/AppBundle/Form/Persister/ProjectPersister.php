@@ -56,6 +56,12 @@ class ProjectPersister
 
         $project = (new Project())->setOwner($viewer);
 
+        if (!empty($arguments['restrictedViewerGroups'])) {
+            $arguments['restrictedViewerGroups'] = array_map(function ($groupGlobalId) {
+                return GlobalId::fromGlobalId($groupGlobalId)['id'];
+            }, $arguments['restrictedViewerGroups']);
+        }
+
         if ($editMode) {
             $projectId = GlobalId::fromGlobalId($input->offsetGet('projectId'))['id'];
             $project = $this->repository->find($projectId);

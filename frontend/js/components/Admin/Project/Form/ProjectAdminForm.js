@@ -31,6 +31,7 @@ import ProjectPublishAdminForm, {
 } from '../Publish/ProjectPublishAdminForm';
 import ProjectAccessAdminForm, {
   type FormValues as AccessFormValues,
+  validate as validateProjectAccessAdmin,
 } from '../Access/ProjectAccessAdminForm';
 import ProjectProposalsAdminForm, {
   type FormValues as ProposalsFormValues,
@@ -382,6 +383,8 @@ const validate = (values: FormValues) => {
     steps,
     locale,
     archived,
+    restrictedViewerGroups,
+    visibility,
   } = values;
   return {
     ...validateSteps({ steps }),
@@ -403,6 +406,7 @@ const validate = (values: FormValues) => {
       externalContributionsCount,
     }),
     ...validatePublish({ publishedAt, locale, archived }),
+    ...validateProjectAccessAdmin({ restrictedViewerGroups, visibility }),
   };
 };
 

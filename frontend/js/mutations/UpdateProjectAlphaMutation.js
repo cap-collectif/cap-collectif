@@ -103,6 +103,14 @@ const mutation = graphql`
           traductionKey
           code
         }
+        restrictedViewers {
+          edges {
+            node {
+              value: id
+              label: title
+            }
+          }
+        }
       }
     }
   }

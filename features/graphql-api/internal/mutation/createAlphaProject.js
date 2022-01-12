@@ -788,7 +788,7 @@ it('create a project with group of users as visibility', async () => {
         ...BASE_PROJECT,
         visibility: 'CUSTOM',
         title: 'Je suis un projet simple avec des groupes de users',
-        restrictedViewerGroups: ['group1', 'group5', 'group6'],
+        restrictedViewerGroups: ['R3JvdXA6Z3JvdXAx', 'R3JvdXA6Z3JvdXA1', 'R3JvdXA6Z3JvdXA2'],
       },
     },
     'internal_admin',

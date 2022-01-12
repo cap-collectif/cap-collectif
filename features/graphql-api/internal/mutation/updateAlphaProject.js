@@ -924,7 +924,7 @@ it('update a newly created project and add a group', async () => {
         projectId,
         ...BASE_PROJECT,
         visibility: 'CUSTOM',
-        restrictedViewerGroups: ['group1', 'group5', 'group6'],
+        restrictedViewerGroups: ['R3JvdXA6Z3JvdXAx', 'R3JvdXA6Z3JvdXA1', 'R3JvdXA6Z3JvdXA2'],
       },
     },
     'internal_admin',
@@ -1076,8 +1076,7 @@ describe('project access control', () => {
       },
       {
         id: 'Q29uc3VsdGF0aW9uU3RlcDpjc3RlcFByb2plY3RPd25lcg==',
-        body:
-          "Je suis une belle étape de consultation au sein d'un projet avec un administrateur de projet",
+        body: "Je suis une belle étape de consultation au sein d'un projet avec un administrateur de projet",
         timeless: false,
         type: 'CONSULTATION',
         title: 'Étape de consultation dans un projet avec administrateur de projet',

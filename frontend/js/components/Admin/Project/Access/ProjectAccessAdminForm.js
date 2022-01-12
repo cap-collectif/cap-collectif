@@ -18,7 +18,6 @@ import {
   ProjectAccessContainer,
   ProjectBoxContainer,
 } from '../Form/ProjectAdminForm.style';
-import { fromGlobalId } from '~/utils/fromGlobalId';
 
 export type FormValues = {|
   visibility: ProjectVisibility,
@@ -52,6 +51,17 @@ export const getGroups = graphql`
   }
 `;
 
+export const validate = (props: FormValues) => {
+  const { restrictedViewerGroups, visibility } = props;
+  const errors = {};
+
+  if (visibility === 'CUSTOM' && restrictedViewerGroups.length <= 0) {
+    errors.restrictedViewerGroups = 'global.required';
+  }
+
+  return errors;
+};
+
 export const loadGroupOptions = (
   initialGroups: ?Array<{| label: string, value: string |}>,
   term: string,
@@ -63,7 +73,7 @@ export const loadGroupOptions = (
       ?.map(edge => edge.node)
       .filter(Boolean)
       .map(g => ({
-        value: fromGlobalId(g.id).id,
+        value: g.id,
         label: g.title,
       }));
     if (initialGroups?.length)
