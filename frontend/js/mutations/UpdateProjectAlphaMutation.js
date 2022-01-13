@@ -59,6 +59,15 @@ const mutation = graphql`
           ... on RequirementStep {
             requirements {
               reason
+              edges {
+                node {
+                  id
+                  type: __typename
+                  ... on CheckboxRequirement {
+                    label
+                  }
+                }
+              }
             }
           }
           ... on DebateStep {

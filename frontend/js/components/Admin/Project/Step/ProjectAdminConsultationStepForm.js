@@ -12,11 +12,13 @@ import environment from '~/createRelayEnvironment';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
 import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
 import type { Dispatch } from '~/types';
+import { type FranceConnectAllowedData } from "~/components/Admin/Project/Step/ProjectAdminStepForm";
 
 type Props = {|
   requirements?: Array<Requirement>,
   dispatch: Dispatch,
   consultations: Array<{| label: string, value: string |}>,
+  fcAllowedData: FranceConnectAllowedData,
 |};
 
 export const getAvailableConsultations = graphql`
@@ -52,6 +54,7 @@ export const ProjectAdminConsultationStepForm = ({
   requirements,
   dispatch,
   consultations,
+  fcAllowedData,
 }: Props) => {
   return (
     <>
@@ -82,6 +85,7 @@ export const ProjectAdminConsultationStepForm = ({
         component={StepRequirementsList}
         formName="stepForm"
         requirements={requirements}
+        fcAllowedData={fcAllowedData}
       />
       <Button
         id="js-btn-create-step"

@@ -25,3 +25,4 @@ Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration:
     userInfoUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo'
     logoutUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/logout'
     environment: 'TESTING'
+    ssoType: 'franceconnect'

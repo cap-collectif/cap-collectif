@@ -282,7 +282,6 @@ class ReinitCommand extends Command
             $this->loadToggles($output);
         }
         $output->writeln('<info>Redis is ready !</info>');
-
         $this->em->clear();
 
         $this->recalculateCounters($output);

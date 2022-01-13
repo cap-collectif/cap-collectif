@@ -5,7 +5,6 @@ import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-r
 import { type IntlShape, FormattedMessage } from 'react-intl';
 import renderComponent from '~/components/Form/Field';
 import { type ProjectPublishAdminForm_project } from '~relay/ProjectPublishAdminForm_project.graphql';
-import type { FeatureToggles } from '~/types';
 import select from '~/components/Form/Select';
 import environment from '~/createRelayEnvironment';
 import {
@@ -14,6 +13,7 @@ import {
   PermalinkWrapper,
   ProjectBoxContainer,
 } from '../Form/ProjectAdminForm.style';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export type FormValues = {|
   publishedAt: string,
@@ -27,7 +27,6 @@ export type FormValues = {|
 type Props = {|
   ...ReduxFormFormProps,
   project: ?ProjectPublishAdminForm_project,
-  features: FeatureToggles,
   intl: IntlShape,
 |};
 
@@ -62,56 +61,63 @@ export const validate = (props: FormValues) => {
   return errors;
 };
 
-export const ProjectPublishAdminForm = ({ project, features }: Props) => (
-  <div className="col-md-12">
-    <ProjectBoxContainer className="box container-fluid">
-      <ProjectBoxHeader>
-        <h4>
-          <FormattedMessage id="global.publication" />
-        </h4>
-      </ProjectBoxHeader>
-      <div className="box-content">
-        <ProjectSmallFieldsContainer>
-          <Field
-            label={<FormattedMessage id="global.date.text" />}
-            id="project-publishedAt"
-            name="publishedAt"
-            type="datetime"
-            component={renderComponent}
-            addonAfter={<i className="cap-calendar-2" />}
-          />
-          {features.multilangue && (
+export const ProjectPublishAdminForm = ({ project }: Props) => {
+  const hasFeatureMultilangue = useFeatureFlag('multilangue');
+  return (
+    <div className="col-md-12">
+      <ProjectBoxContainer className="box container-fluid">
+        <ProjectBoxHeader>
+          <h4>
+            <FormattedMessage id="global.publication" />
+          </h4>
+        </ProjectBoxHeader>
+        <div className="box-content">
+          <ProjectSmallFieldsContainer>
             <Field
-              selectFieldIsObject
-              autoload
-              labelClassName="control-label"
-              component={select}
-              id="project-locale"
-              name="locale"
-              label={<FormattedMessage id="form.label_locale" />}
-              role="combobox"
-              aria-autocomplete="list"
-              aria-haspopup="true"
-              loadOptions={loadLocaleOptions}
-              placeholder={<FormattedMessage id="locale.all-locales" />}
+              label={<FormattedMessage id="global.date.text" />}
+              id="project-publishedAt"
+              name="publishedAt"
+              type="datetime"
+              component={renderComponent}
+              addonAfter={<i className="cap-calendar-2" />}
             />
-          )}
-        </ProjectSmallFieldsContainer>
-        <Field id="project-is-archived" type="checkbox" name="archived" component={renderComponent}>
-          <FormattedMessage id="archive.project" />
-        </Field>
-        <PermalinkWrapper>
-          <strong>
-            <FormattedMessage id="permalink" /> :
-          </strong>{' '}
-          <a href={project?.url} target="blank">
-            {project?.url}
-          </a>
-        </PermalinkWrapper>
-      </div>
-    </ProjectBoxContainer>
-  </div>
-);
+            {hasFeatureMultilangue && (
+              <Field
+                selectFieldIsObject
+                autoload
+                labelClassName="control-label"
+                component={select}
+                id="project-locale"
+                name="locale"
+                label={<FormattedMessage id="form.label_locale" />}
+                role="combobox"
+                aria-autocomplete="list"
+                aria-haspopup="true"
+                loadOptions={loadLocaleOptions}
+                placeholder={<FormattedMessage id="locale.all-locales" />}
+              />
+            )}
+          </ProjectSmallFieldsContainer>
+          <Field
+            id="project-is-archived"
+            type="checkbox"
+            name="archived"
+            component={renderComponent}>
+            <FormattedMessage id="archive.project" />
+          </Field>
+          <PermalinkWrapper>
+            <strong>
+              <FormattedMessage id="permalink" /> :
+            </strong>{' '}
+            <a href={project?.url} target="blank">
+              {project?.url}
+            </a>
+          </PermalinkWrapper>
+        </div>
+      </ProjectBoxContainer>
+    </div>
+  );
+};
 
 export default createFragmentContainer(ProjectPublishAdminForm, {
   project: graphql`

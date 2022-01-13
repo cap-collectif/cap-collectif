@@ -252,6 +252,13 @@ exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly when admin proj
       >
         <ProjectAdminQuestionnaireStepForm
           dispatch={[MockFunction]}
+          fcAllowedData={
+            Object {
+              "DATE_OF_BIRTH": false,
+              "FIRSTNAME": true,
+              "LASTNAME": true,
+            }
+          }
           isAnonymousParticipationAllowed={false}
           questionnaire={
             Object {
@@ -531,6 +538,13 @@ exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly with a question
       >
         <ProjectAdminQuestionnaireStepForm
           dispatch={[MockFunction]}
+          fcAllowedData={
+            Object {
+              "DATE_OF_BIRTH": false,
+              "FIRSTNAME": true,
+              "LASTNAME": true,
+            }
+          }
           isAnonymousParticipationAllowed={false}
           questionnaire={
             Object {
@@ -810,6 +824,13 @@ exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly with no data 1`
       >
         <ProjectAdminQuestionnaireStepForm
           dispatch={[MockFunction]}
+          fcAllowedData={
+            Object {
+              "DATE_OF_BIRTH": false,
+              "FIRSTNAME": true,
+              "LASTNAME": true,
+            }
+          }
           isAnonymousParticipationAllowed={false}
           requirements={
             Array [
@@ -1083,6 +1104,13 @@ exports[`<ProjectAdminQuestionnaireStepForm /> should not render requirements wh
       >
         <ProjectAdminQuestionnaireStepForm
           dispatch={[MockFunction]}
+          fcAllowedData={
+            Object {
+              "DATE_OF_BIRTH": false,
+              "FIRSTNAME": true,
+              "LASTNAME": true,
+            }
+          }
           isAnonymousParticipationAllowed={true}
           questionnaire={
             Object {

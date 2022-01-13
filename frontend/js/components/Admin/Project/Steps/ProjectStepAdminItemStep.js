@@ -7,6 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { type Step } from './ProjectStepAdminList';
 import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal';
 import type { ProjectStepAdminItemStep_project } from '~relay/ProjectStepAdminItemStep_project.graphql';
+import type { ProjectStepAdminItemStep_query } from '~relay/ProjectStepAdminItemStep_query.graphql';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import Text from '~ui/Primitives/Text';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -19,6 +20,7 @@ type Props = {|
   formName: string,
   fields: { length: number, map: Function, remove: Function },
   project: ProjectStepAdminItemStep_project,
+  query: ProjectStepAdminItemStep_query,
 |};
 
 const ItemQuestionWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -49,7 +51,14 @@ const onDeleteStep = (fields, index) => {
 const getWordingStep = (type: string) =>
   type === 'DebateStep' ? 'global.debate' : `${type.slice(0, -4).toLowerCase()}_step`;
 
-export const ProjectStepAdminItemStep = ({ step, index, fields, formName, project }: Props) => {
+export const ProjectStepAdminItemStep = ({
+  step,
+  index,
+  fields,
+  formName,
+  project,
+  query,
+}: Props) => {
   const [showEditModal, setShowEditModal] = useState(false);
 
   return (
@@ -126,6 +135,7 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
             form={formName}
             index={index}
             project={project}
+            query={query}
           />
         </ButtonToolbar>
       </Col>
@@ -138,6 +148,11 @@ export default createFragmentContainer(ProjectStepAdminItemStep, {
     fragment ProjectStepAdminItemStep_project on Project {
       _id
       ...ProjectAdminStepFormModal_project
+    }
+  `,
+  query: graphql`
+    fragment ProjectStepAdminItemStep_query on Query {
+      ...ProjectAdminStepFormModal_query
     }
   `,
 });

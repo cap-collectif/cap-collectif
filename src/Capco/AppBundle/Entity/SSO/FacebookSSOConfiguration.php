@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\SSO;
 
-use Capco\AppBundle\Enum\SSOType;
+use Capco\AppBundle\DBAL\Enum\SSOType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +21,11 @@ class FacebookSSOConfiguration extends AbstractSSOConfiguration
      * @ORM\Column(name="secret", type="string", nullable=false)
      */
     protected string $secret = '';
+
+    public function __construct()
+    {
+        $this->ssoType = SSOType::FACEBOOK;
+    }
 
     public function getClientId(): ?string
     {
@@ -46,8 +51,4 @@ class FacebookSSOConfiguration extends AbstractSSOConfiguration
         return $this;
     }
 
-    public function getSsoType(): string
-    {
-        return SSOType::FACEBOOK;
-    }
 }

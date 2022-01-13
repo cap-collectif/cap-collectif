@@ -1,0 +1,17 @@
+FranceConnectRequirement:
+    type: object
+    inherits:
+        - Node
+        - Requirement
+    config:
+        name: FranceConnectRequirement
+        interfaces:
+            - Node
+            - Requirement
+        description: 'Require France Connect authentication'
+        fields:
+            viewerValue:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context, [])'
+                type: 'String'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
+                description: "The viewer's france connect id"

@@ -94,6 +94,7 @@ overblog_graphql:
                     - FirstnameRequirement
                     - LastnameRequirement
                     - IdentificationCodeRequirement
+                    - FranceConnectRequirement
                     - DateOfBirthRequirement
                     - PhoneRequirement
                     - PostalAddressRequirement

@@ -5,3 +5,4 @@ Capco\AppBundle\Entity\SSO\FacebookSSOConfiguration:
         enabled: true
         clientId: '***REMOVED***'
         secret: '***REMOVED***'
+        ssoType: 'facebook'

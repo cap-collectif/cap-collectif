@@ -4,7 +4,6 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminForm } from './ProjectAdminForm';
 import { formMock, intlMock, $refType, $fragmentRefs } from '~/mocks';
-import { features } from '~/redux/modules/default';
 
 describe('<ProjectAdminForm />', () => {
   const defaultProps = {
@@ -48,10 +47,12 @@ describe('<ProjectAdminForm />', () => {
       archived: false,
     },
     viewerIsAdmin: false,
-    features,
     initialGroups: [],
+    query: {
+      $fragmentRefs,
+      $refType,
+    },
   };
-
   it('renders correctly empty', () => {
     const wrapper = shallow(<ProjectAdminForm {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();

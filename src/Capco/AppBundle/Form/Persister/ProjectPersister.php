@@ -10,7 +10,7 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\AlphaProjectFormType;
 use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
-use Doctrine\DBAL\Driver\DriverException;
+use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;

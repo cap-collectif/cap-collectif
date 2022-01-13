@@ -7,6 +7,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { type Step } from './ProjectStepAdminList';
 import ProjectStepAdminItemStep from './ProjectStepAdminItemStep';
 import type { ProjectStepAdminItem_project } from '~relay/ProjectStepAdminItem_project.graphql';
+import type { ProjectStepAdminItem_query } from '~relay/ProjectStepAdminItem_query.graphql';
 import colors from '~/utils/colors';
 
 type Props = {|
@@ -15,6 +16,7 @@ type Props = {|
   fields: { length: number, map: Function, remove: Function },
   formName: string,
   project: ProjectStepAdminItem_project,
+  query: ProjectStepAdminItem_query,
 |};
 
 const Item: StyledComponent<{}, {}, typeof ListGroupItem> = styled(ListGroupItem).attrs({
@@ -23,7 +25,7 @@ const Item: StyledComponent<{}, {}, typeof ListGroupItem> = styled(ListGroupItem
   background-color: ${colors.formBgc};
 `;
 
-export const ProjectStepAdminItem = ({ step, index, fields, formName, project }: Props) => (
+export const ProjectStepAdminItem = ({ step, index, fields, formName, project, query }: Props) => (
   <Draggable key={step.id} draggableId={step.id || `new-step-${index}`} index={index}>
     {(providedDraggable: DraggableProvided) => (
       <div
@@ -37,6 +39,7 @@ export const ProjectStepAdminItem = ({ step, index, fields, formName, project }:
             fields={fields}
             formName={formName}
             project={project}
+            query={query}
           />
         </Item>
       </div>
@@ -48,6 +51,11 @@ export default createFragmentContainer(ProjectStepAdminItem, {
   project: graphql`
     fragment ProjectStepAdminItem_project on Project {
       ...ProjectStepAdminItemStep_project
+    }
+  `,
+  query: graphql`
+    fragment ProjectStepAdminItem_query on Query {
+      ...ProjectStepAdminItemStep_query
     }
   `,
 });

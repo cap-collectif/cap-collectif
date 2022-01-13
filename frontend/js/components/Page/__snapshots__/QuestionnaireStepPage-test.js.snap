@@ -602,6 +602,27 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                         "kind": "InlineFragment",
                                         "selections": Array [
                                           Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "FranceConnectRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
                                             "alias": null,
                                             "args": null,
                                             "kind": "ScalarField",
@@ -1925,7 +1946,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "63e70571583d336988c888860efddf5a",
+        "cacheID": "a77c1f5a2ddae6998c1b97193de9040d",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -2262,6 +2283,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on FranceConnectRequirement {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
@@ -2963,6 +2987,27 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                         "kind": "InlineFragment",
                                         "selections": Array [
                                           Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "FranceConnectRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
                                             "alias": null,
                                             "args": null,
                                             "kind": "ScalarField",
@@ -4286,7 +4331,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "63e70571583d336988c888860efddf5a",
+        "cacheID": "a77c1f5a2ddae6998c1b97193de9040d",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4623,6 +4668,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on FranceConnectRequirement {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
@@ -5324,6 +5372,27 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                         "kind": "InlineFragment",
                                         "selections": Array [
                                           Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "FranceConnectRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
                                             "alias": null,
                                             "args": null,
                                             "kind": "ScalarField",
@@ -6647,7 +6716,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "63e70571583d336988c888860efddf5a",
+        "cacheID": "a77c1f5a2ddae6998c1b97193de9040d",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -6984,6 +7053,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on FranceConnectRequirement {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
@@ -7685,6 +7757,27 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                         "kind": "InlineFragment",
                                         "selections": Array [
                                           Object {
+                                            "condition": "isAuthenticated",
+                                            "kind": "Condition",
+                                            "passingValue": true,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerValue",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                          },
+                                        ],
+                                        "type": "FranceConnectRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
                                             "alias": null,
                                             "args": null,
                                             "kind": "ScalarField",
@@ -9008,7 +9101,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "63e70571583d336988c888860efddf5a",
+        "cacheID": "a77c1f5a2ddae6998c1b97193de9040d",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -9345,6 +9438,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on FranceConnectRequirement {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {

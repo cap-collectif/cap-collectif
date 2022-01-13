@@ -3,36 +3,31 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ListPublicSSO } from './ListPublicSSO';
-import { features } from '../../../redux/modules/default';
-import { $refType } from '../../../mocks';
+import { $refType } from '~/mocks';
+import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils';
 
 describe('<ListPublicSSO />', () => {
   const props = {
-    features,
     onToggle: jest.fn(),
     query: {
       ...$refType,
       ssoConfigurations: {
-        edges: []
-      }
+        edges: [],
+      },
     },
   };
-
+  afterEach(() => {
+    disableFeatureFlags();
+  });
   it('renders correctly without France Connect', () => {
-    const wrapper = shallow(
-      <ListPublicSSO {...props} query={props.query} />,
-    );
+    const wrapper = shallow(<ListPublicSSO {...props} query={props.query} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders all element with France Connect', () => {
-    const wrapper = shallow(
-      <ListPublicSSO
-        features={{ ...features, login_franceconnect: true }}
-        onToggle={jest.fn()}
-        query={props.query}
-      />,
-    );
+    enableFeatureFlags(['login_franceconnect']);
+
+    const wrapper = shallow(<ListPublicSSO onToggle={jest.fn()} query={props.query} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

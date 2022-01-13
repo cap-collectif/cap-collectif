@@ -281,6 +281,12 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "visibility": "ADMIN",
       }
     }
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     reset={[MockFunction]}
     submitFailed={false}
     submitSucceeded={false}
@@ -319,70 +325,6 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     dirty={false}
     dispatch={[MockFunction]}
     error={null}
-    features={
-      Object {
-        "allow_users_to_propose_events": false,
-        "beta__admin_editor": false,
-        "beta__analytics_page": false,
-        "beta__emailing": false,
-        "beta__emailing_parameters": false,
-        "beta__questionnaire_result": false,
-        "blog": false,
-        "calendar": false,
-        "captcha": false,
-        "consent_external_communication": false,
-        "consent_internal_communication": false,
-        "consultation_plan": false,
-        "disconnect_openid": false,
-        "display_map": false,
-        "display_pictures_in_depository_proposals_list": false,
-        "display_pictures_in_event_list": false,
-        "districts": false,
-        "export": false,
-        "external_project": false,
-        "http_redirects": false,
-        "import_proposals": false,
-        "login_cas": false,
-        "login_facebook": false,
-        "login_franceconnect": false,
-        "login_paris": false,
-        "login_saml": false,
-        "members_list": false,
-        "multilangue": false,
-        "new_project_card": false,
-        "newsletter": false,
-        "noindex_on_profiles": false,
-        "phone_confirmation": false,
-        "privacy_policy": false,
-        "profiles": false,
-        "project_trash": false,
-        "projects_form": false,
-        "proposal_revisions": false,
-        "read_more": false,
-        "registration": false,
-        "report_browers_errors_to_sentry": false,
-        "reporting": false,
-        "restrict_connection": false,
-        "restrict_registration_via_email_domain": false,
-        "search": false,
-        "secure_password": false,
-        "server_side_rendering": false,
-        "share_buttons": false,
-        "shield_mode": false,
-        "sso_by_pass_auth": false,
-        "themes": false,
-        "twilio": false,
-        "unstable__anonymous_questionnaire": false,
-        "unstable__new_consultation_page": false,
-        "unstable__project_admin": false,
-        "unstable__remote_events": false,
-        "unstable__tipsmeee": false,
-        "user_type": false,
-        "votes_evolution": false,
-        "votes_min": false,
-        "zipcode_at_register": false,
-      }
-    }
     form="formName"
     formName="projectAdminForm"
     handleSubmit={[MockFunction]}
@@ -442,6 +384,12 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "url": "/project1",
         "video": "dailymotion.com/issou",
         "visibility": "ADMIN",
+      }
+    }
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
       }
     }
     reset={[MockFunction]}
@@ -578,70 +526,6 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     dirty={false}
     dispatch={[MockFunction]}
     error={null}
-    features={
-      Object {
-        "allow_users_to_propose_events": false,
-        "beta__admin_editor": false,
-        "beta__analytics_page": false,
-        "beta__emailing": false,
-        "beta__emailing_parameters": false,
-        "beta__questionnaire_result": false,
-        "blog": false,
-        "calendar": false,
-        "captcha": false,
-        "consent_external_communication": false,
-        "consent_internal_communication": false,
-        "consultation_plan": false,
-        "disconnect_openid": false,
-        "display_map": false,
-        "display_pictures_in_depository_proposals_list": false,
-        "display_pictures_in_event_list": false,
-        "districts": false,
-        "export": false,
-        "external_project": false,
-        "http_redirects": false,
-        "import_proposals": false,
-        "login_cas": false,
-        "login_facebook": false,
-        "login_franceconnect": false,
-        "login_paris": false,
-        "login_saml": false,
-        "members_list": false,
-        "multilangue": false,
-        "new_project_card": false,
-        "newsletter": false,
-        "noindex_on_profiles": false,
-        "phone_confirmation": false,
-        "privacy_policy": false,
-        "profiles": false,
-        "project_trash": false,
-        "projects_form": false,
-        "proposal_revisions": false,
-        "read_more": false,
-        "registration": false,
-        "report_browers_errors_to_sentry": false,
-        "reporting": false,
-        "restrict_connection": false,
-        "restrict_registration_via_email_domain": false,
-        "search": false,
-        "secure_password": false,
-        "server_side_rendering": false,
-        "share_buttons": false,
-        "shield_mode": false,
-        "sso_by_pass_auth": false,
-        "themes": false,
-        "twilio": false,
-        "unstable__anonymous_questionnaire": false,
-        "unstable__new_consultation_page": false,
-        "unstable__project_admin": false,
-        "unstable__remote_events": false,
-        "unstable__tipsmeee": false,
-        "user_type": false,
-        "votes_evolution": false,
-        "votes_min": false,
-        "zipcode_at_register": false,
-      }
-    }
     form="formName"
     handleSubmit={[MockFunction]}
     initialize={[MockFunction]}

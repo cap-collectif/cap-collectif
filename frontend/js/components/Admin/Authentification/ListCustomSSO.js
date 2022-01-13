@@ -28,6 +28,7 @@ export const ListCustomSSO = ({ query }: Props) => {
   const ssoConfigurations = query?.ssoConfigurations;
 
   const filteredSSOConfigurations =
+    ssoConfigurations &&
     ssoConfigurations.edges &&
     ssoConfigurations.edges
       .filter(Boolean)

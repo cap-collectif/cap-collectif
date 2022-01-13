@@ -252,6 +252,13 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for admin 1`] = `
       >
         <ProjectAdminCollectStepForm
           dispatch={[MockFunction]}
+          fcAllowedData={
+            Object {
+              "DATE_OF_BIRTH": false,
+              "FIRSTNAME": true,
+              "LASTNAME": true,
+            }
+          }
           isBudgetEnabled={true}
           isLimitEnabled={false}
           isPrivate={false}
@@ -520,6 +527,13 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for project admin 1`]
       >
         <ProjectAdminCollectStepForm
           dispatch={[MockFunction]}
+          fcAllowedData={
+            Object {
+              "DATE_OF_BIRTH": false,
+              "FIRSTNAME": true,
+              "LASTNAME": true,
+            }
+          }
           isBudgetEnabled={true}
           isLimitEnabled={false}
           isPrivate={false}

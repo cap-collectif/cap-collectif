@@ -45,6 +45,12 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
               "$refType": null,
             }
           }
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
+          }
         />
         <ButtonToolbar
           bsClass="btn-toolbar"
@@ -54,6 +60,12 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             isCreating={true}
             onClose={[Function]}
             project={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+              }
+            }
+            query={
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
@@ -236,6 +248,12 @@ exports[`<ProjectStepAdmin /> renders correctly with isAdmin false 1`] = `
               "$refType": null,
             }
           }
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
+          }
         />
         <ButtonToolbar
           bsClass="btn-toolbar"
@@ -245,6 +263,12 @@ exports[`<ProjectStepAdmin /> renders correctly with isAdmin false 1`] = `
             isCreating={true}
             onClose={[Function]}
             project={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+              }
+            }
+            query={
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,

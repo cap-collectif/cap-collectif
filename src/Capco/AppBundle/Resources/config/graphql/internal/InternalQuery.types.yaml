@@ -339,7 +339,10 @@ InternalQuery:
                 type: 'InternalSSOConfigurationConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'List all SSO Configurations.'
-                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    ssoType:
+                        type: 'SSOType'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SSOConfigurationQueryResolver", [args])'
             sections:
                 type: '[Section!]!'

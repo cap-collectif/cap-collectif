@@ -53,6 +53,13 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with data 1`] = 
         "type": [Function],
       }
     }
+    fcAllowedData={
+      Object {
+        "DATE_OF_BIRTH": false,
+        "FIRSTNAME": true,
+        "LASTNAME": true,
+      }
+    }
     formName="stepForm"
     name="requirements"
     requirements={
@@ -150,6 +157,13 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with no initial 
         "compare": null,
         "displayName": "Connect(StepRequirementsList)",
         "type": [Function],
+      }
+    }
+    fcAllowedData={
+      Object {
+        "DATE_OF_BIRTH": false,
+        "FIRSTNAME": true,
+        "LASTNAME": true,
       }
     }
     formName="stepForm"

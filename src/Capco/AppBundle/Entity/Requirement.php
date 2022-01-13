@@ -25,6 +25,7 @@ class Requirement
     public const POSTAL_ADDRESS = 'POSTAL_ADDRESS';
     public const IDENTIFICATION_CODE = 'IDENTIFICATION_CODE';
     public const PHONE_VERIFIED = 'PHONE_VERIFIED';
+    public const FRANCE_CONNECT = 'FRANCE_CONNECT';
 
     public static $requirementsLabels = [
         self::CHECKBOX => 'check-box',
@@ -35,6 +36,7 @@ class Requirement
         self::POSTAL_ADDRESS => 'admin.fields.event.address',
         self::IDENTIFICATION_CODE => 'identification_code',
         self::PHONE_VERIFIED => 'verify.number.sms',
+        self::FRANCE_CONNECT => 'france_connect',
     ];
 
     /**

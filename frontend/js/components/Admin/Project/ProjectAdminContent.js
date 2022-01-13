@@ -7,8 +7,9 @@ import { BrowserRouter as Router, Link, Route, Switch, useLocation } from 'react
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { type ProjectAdminContent_project } from '~relay/ProjectAdminContent_project.graphql';
+import { type ProjectAdminContent_query } from '~relay/ProjectAdminContent_query.graphql';
 import environment from '~/createRelayEnvironment';
-import type { FeatureToggles, GlobalState } from '~/types';
+import type { GlobalState } from '~/types';
 import ProjectAdminForm from './Form/ProjectAdminForm';
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style';
 import {
@@ -34,11 +35,12 @@ import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminCon
 import { ARGUMENT_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ArgumentTab/ArgumentTab';
 import { VOTE_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/VoteTab/VoteTab';
 import { getProjectAdminPath, getProjectAdminBaseUrl } from './ProjectAdminPage.utils';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
-  +features: FeatureToggles,
   +viewerIsAdmin: boolean,
   +project: ProjectAdminContent_project,
+  +query: ProjectAdminContent_query,
   +firstCollectStepId: ?string,
 |};
 
@@ -103,7 +105,7 @@ const getRouteContributionPath = (
 
 const formatNavbarLinks = (
   project: ProjectAdminContent_project,
-  features: FeatureToggles,
+  query: ProjectAdminContent_query,
   path: string,
   setTitle: string => void,
   firstCollectStepId: ?string,
@@ -165,7 +167,12 @@ const formatNavbarLinks = (
     url: getProjectAdminPath(project._id, 'CONFIGURATION'),
     to: getProjectAdminPath(project._id, 'CONFIGURATION'),
     component: () => (
-      <ProjectAdminForm project={project} onTitleChange={setTitle} viewerIsAdmin={viewerIsAdmin} />
+      <ProjectAdminForm
+        project={project}
+        onTitleChange={setTitle}
+        viewerIsAdmin={viewerIsAdmin}
+        query={query}
+      />
     ),
   });
 
@@ -175,12 +182,13 @@ const formatNavbarLinks = (
 export const ProjectAdminContent = ({
   project,
   firstCollectStepId,
-  features,
   viewerIsAdmin,
+  query,
 }: Props) => {
   const location = useLocation();
   const [title, setTitle] = useState<string>(project.title);
   const path = getProjectAdminBaseUrl(project._id);
+  const hasProjectRevisionEnabled = useFeatureFlag('proposal_revisions');
 
   const dataAnalysisPrefetch = loadQuery();
   dataAnalysisPrefetch.next(
@@ -189,7 +197,7 @@ export const ProjectAdminContent = ({
     {
       projectId: project.id,
       ...queryVariableAnalysis,
-      proposalRevisionsEnabled: features.proposal_revisions ?? false,
+      proposalRevisionsEnabled: hasProjectRevisionEnabled ?? false,
     },
     { fetchPolicy: 'store-or-network' },
   );
@@ -203,7 +211,7 @@ export const ProjectAdminContent = ({
       ...renameInitialVariable(queryVariableProposal(viewerIsAdmin)),
       projectId: project.id,
       proposalStep: firstCollectStepId,
-      proposalRevisionsEnabled: features.proposal_revisions ?? false,
+      proposalRevisionsEnabled: hasProjectRevisionEnabled ?? false,
       // DebateStep (argument)
       countArgumentPagination: ARGUMENT_PAGINATION,
       cursorArgumentPagination: null,
@@ -244,7 +252,7 @@ export const ProjectAdminContent = ({
     () =>
       formatNavbarLinks(
         project,
-        features,
+        query,
         path,
         setTitle,
         firstCollectStepId,
@@ -254,7 +262,7 @@ export const ProjectAdminContent = ({
       ),
     [
       project,
-      features,
+      query,
       path,
       setTitle,
       firstCollectStepId,
@@ -315,7 +323,7 @@ export const ProjectAdminContent = ({
 
 const ProjectAdminRouterWrapper = ({
   project,
-  features,
+  query,
   firstCollectStepId,
   viewerIsAdmin,
 }: {
@@ -327,7 +335,7 @@ const ProjectAdminRouterWrapper = ({
       <ProjectAdminContent
         viewerIsAdmin={viewerIsAdmin}
         project={project}
-        features={features}
+        query={query}
         firstCollectStepId={firstCollectStepId}
       />
     </Router>
@@ -335,7 +343,6 @@ const ProjectAdminRouterWrapper = ({
 );
 
 const mapStateToProps = (state: GlobalState) => ({
-  features: state.default.features,
   viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
   title: formValueSelector('projectAdminForm')(state, 'title'),
 });
@@ -377,6 +384,11 @@ export default createFragmentContainer(
           totalCount
         }
         ...ProjectAdminForm_project
+      }
+    `,
+    query: graphql`
+      fragment ProjectAdminContent_query on Query {
+        ...ProjectAdminForm_query
       }
     `,
   },

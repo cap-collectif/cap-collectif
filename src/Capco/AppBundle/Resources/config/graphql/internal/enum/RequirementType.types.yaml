@@ -27,3 +27,6 @@ RequirementType:
             PHONE_VERIFIED:
                 value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::PHONE_VERIFIED")'
                 description: 'The requirement is an verified phone number'
+            FRANCE_CONNECT:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::FRANCE_CONNECT")'
+                description: 'The requirement is authentication to France Connect'

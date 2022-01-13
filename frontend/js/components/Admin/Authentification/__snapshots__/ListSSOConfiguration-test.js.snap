@@ -41,6 +41,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfiguration> renders correctly w
                   checked={false}
                   className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
                   disabled={false}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -120,6 +121,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfiguration> renders correctly w
                   checked={false}
                   className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
                   disabled={false}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -199,6 +201,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfiguration> renders correctly w
                   checked={true}
                   className="Togglestyle__TogglerWrapper-hIrWcm eJrpzD"
                   disabled={true}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -271,6 +274,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should 
                   checked={false}
                   className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
                   disabled={false}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -367,6 +371,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should 
                   checked={false}
                   className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
                   disabled={false}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -446,6 +451,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should 
                   checked={false}
                   className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
                   disabled={false}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -525,6 +531,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should 
                   checked={true}
                   className="Togglestyle__TogglerWrapper-hIrWcm eJrpzD"
                   disabled={true}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -597,6 +604,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should 
                   checked={false}
                   className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
                   disabled={false}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -693,6 +701,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should 
                   checked={false}
                   className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
                   disabled={false}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -772,6 +781,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should 
                   checked={false}
                   className="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
                   disabled={false}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"
@@ -851,6 +861,7 @@ exports[`<ListSSOConfiguration /> <TestListSSOConfigurationSuperAdmin /> should 
                   checked={true}
                   className="Togglestyle__TogglerWrapper-hIrWcm eJrpzD"
                   disabled={true}
+                  id="TOGGLE_"
                 >
                   <span
                     className="circle-toggler"

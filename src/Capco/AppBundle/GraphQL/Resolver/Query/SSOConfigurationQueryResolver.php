@@ -11,8 +11,8 @@ use Psr\Log\LoggerInterface;
 
 class SSOConfigurationQueryResolver implements ResolverInterface
 {
-    protected $ssoConfigurationRepository;
-    protected $logger;
+    protected AbstractSSOConfigurationRepository $ssoConfigurationRepository;
+    protected LoggerInterface $logger;
 
     public function __construct(
         AbstractSSOConfigurationRepository $ssoConfigurationRepository,
@@ -25,12 +25,19 @@ class SSOConfigurationQueryResolver implements ResolverInterface
     public function __invoke(Arg $args): Connection
     {
         $totalCount = $this->ssoConfigurationRepository->count([]);
-        $paginator = new Paginator(function (int $offset, int $limit) {
+        $input = $args->getArrayCopy();
+        $sso = $input['ssoType'] ?? null;
+        $paginator = new Paginator(function (int $offset, int $limit) use ($sso) {
             try {
-                return $this->ssoConfigurationRepository
-                    ->getPaginated($limit, $offset)
-                    ->getIterator()
-                    ->getArrayCopy();
+                return !$sso
+                    ? $this->ssoConfigurationRepository
+                        ->getPaginated($limit, $offset)
+                        ->getIterator()
+                        ->getArrayCopy()
+                    : $this->ssoConfigurationRepository
+                        ->findSsoByType($limit, $offset, $sso)
+                        ->getIterator()
+                        ->getArrayCopy();
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

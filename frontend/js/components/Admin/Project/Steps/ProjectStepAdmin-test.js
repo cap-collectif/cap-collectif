@@ -13,6 +13,10 @@ const baseProps = {
     $fragmentRefs,
     $refType,
   },
+  query: {
+    $fragmentRefs,
+    $refType,
+  },
   viewerIsAdmin: true,
 };
 

@@ -1,0 +1,20 @@
+SSOType:
+    type: enum
+    config:
+        description: 'Possible SSO Type'
+        values:
+            FRANCE_CONNECT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\SSOType::FRANCE_CONNECT")'
+                description: 'France Connect type.'
+            OAUTH2:
+                value: '@=constant("Capco\\AppBundle\\Enum\\SSOType::OAUTH2")'
+                description: 'Oauth2 type.'
+            FACEBOOK:
+                value: '@=constant("Capco\\AppBundle\\Enum\\SSOType::FACEBOOK")'
+                description: 'Facebook type.'
+            SAML:
+                value: '@=constant("Capco\\AppBundle\\Enum\\SSOType::SAML")'
+                description: 'Saml type.'
+            CAS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\SSOType::CAS")'
+                description: 'CAS type.'

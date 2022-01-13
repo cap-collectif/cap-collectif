@@ -58,10 +58,15 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
               },
             ],
           },
+          Object {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "ProjectAdminContent_query",
+          },
         ],
         "type": "Query",
       },
-      "hash": "c728820bc4cff0182ba6265750e72ad0",
+      "hash": "992da232cea6e607fb2c223e62feae52",
       "kind": "Request",
       "operation": Object {
         "argumentDefinitions": Array [
@@ -79,6 +84,92 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         "kind": "Operation",
         "name": "ProjectAdminPageQuery",
         "selections": Array [
+          Object {
+            "alias": null,
+            "args": Array [
+              Object {
+                "kind": "Literal",
+                "name": "first",
+                "value": 100,
+              },
+              Object {
+                "kind": "Literal",
+                "name": "ssoType",
+                "value": "FRANCE_CONNECT",
+              },
+            ],
+            "concreteType": "SSOConfigurationConnection",
+            "kind": "LinkedField",
+            "name": "ssoConfigurations",
+            "plural": false,
+            "selections": Array [
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "SSOConfigurationEdge",
+                "kind": "LinkedField",
+                "name": "edges",
+                "plural": true,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": null,
+                    "kind": "LinkedField",
+                    "name": "node",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isCompletelyConfigured",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "allowedData",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "enabled",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "FranceConnectSSOConfiguration",
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+            "storageKey": "ssoConfigurations(first:100,ssoType:\\"FRANCE_CONNECT\\")",
+          },
           Object {
             "condition": "isEditMode",
             "kind": "Condition",
@@ -1590,7 +1681,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "58e7aa13ed2583b148c53fef8cc59a0b",
+        "cacheID": "01ca4d51172252542cd9139577cbe31d",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1604,6 +1695,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
     ...ProjectAdminContent_project_2CgS8h
     id
   }
+  ...ProjectAdminContent_query
 }
 
 fragment ProjectAccessAdminForm_project on Project {
@@ -1644,6 +1736,10 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
     totalCount
   }
   ...ProjectAdminForm_project
+}
+
+fragment ProjectAdminContent_query on Query {
+  ...ProjectAdminForm_query
 }
 
 fragment ProjectAdminForm_project on Project {
@@ -1869,8 +1965,28 @@ fragment ProjectAdminForm_project on Project {
   ...ProjectPublishAdminForm_project
 }
 
+fragment ProjectAdminForm_query on Query {
+  ...ProjectStepAdmin_query
+}
+
 fragment ProjectAdminStepFormModal_project on Project {
   ...ProjectAdminStepForm_project
+}
+
+fragment ProjectAdminStepFormModal_query on Query {
+  ssoConfigurations(first: 100, ssoType: FRANCE_CONNECT) {
+    edges {
+      node {
+        __typename
+        ... on FranceConnectSSOConfiguration {
+          isCompletelyConfigured
+          allowedData
+          enabled
+        }
+        id
+      }
+    }
+  }
 }
 
 fragment ProjectAdminStepForm_project on Project {
@@ -1953,17 +2069,34 @@ fragment ProjectStepAdminItemStep_project on Project {
   ...ProjectAdminStepFormModal_project
 }
 
+fragment ProjectStepAdminItemStep_query on Query {
+  ...ProjectAdminStepFormModal_query
+}
+
 fragment ProjectStepAdminItem_project on Project {
   ...ProjectStepAdminItemStep_project
+}
+
+fragment ProjectStepAdminItem_query on Query {
+  ...ProjectStepAdminItemStep_query
 }
 
 fragment ProjectStepAdminList_project on Project {
   ...ProjectStepAdminItem_project
 }
 
+fragment ProjectStepAdminList_query on Query {
+  ...ProjectStepAdminItem_query
+}
+
 fragment ProjectStepAdmin_project on Project {
   ...ProjectAdminStepFormModal_project
   ...ProjectStepAdminList_project
+}
+
+fragment ProjectStepAdmin_query on Query {
+  ...ProjectAdminStepFormModal_query
+  ...ProjectStepAdminList_query
 }
 ",
       },
@@ -2037,10 +2170,15 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
               },
             ],
           },
+          Object {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "ProjectAdminContent_query",
+          },
         ],
         "type": "Query",
       },
-      "hash": "c728820bc4cff0182ba6265750e72ad0",
+      "hash": "992da232cea6e607fb2c223e62feae52",
       "kind": "Request",
       "operation": Object {
         "argumentDefinitions": Array [
@@ -2058,6 +2196,92 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         "kind": "Operation",
         "name": "ProjectAdminPageQuery",
         "selections": Array [
+          Object {
+            "alias": null,
+            "args": Array [
+              Object {
+                "kind": "Literal",
+                "name": "first",
+                "value": 100,
+              },
+              Object {
+                "kind": "Literal",
+                "name": "ssoType",
+                "value": "FRANCE_CONNECT",
+              },
+            ],
+            "concreteType": "SSOConfigurationConnection",
+            "kind": "LinkedField",
+            "name": "ssoConfigurations",
+            "plural": false,
+            "selections": Array [
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "SSOConfigurationEdge",
+                "kind": "LinkedField",
+                "name": "edges",
+                "plural": true,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": null,
+                    "kind": "LinkedField",
+                    "name": "node",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isCompletelyConfigured",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "allowedData",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "enabled",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "FranceConnectSSOConfiguration",
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+            "storageKey": "ssoConfigurations(first:100,ssoType:\\"FRANCE_CONNECT\\")",
+          },
           Object {
             "condition": "isEditMode",
             "kind": "Condition",
@@ -3569,7 +3793,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "58e7aa13ed2583b148c53fef8cc59a0b",
+        "cacheID": "01ca4d51172252542cd9139577cbe31d",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -3583,6 +3807,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
     ...ProjectAdminContent_project_2CgS8h
     id
   }
+  ...ProjectAdminContent_query
 }
 
 fragment ProjectAccessAdminForm_project on Project {
@@ -3623,6 +3848,10 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
     totalCount
   }
   ...ProjectAdminForm_project
+}
+
+fragment ProjectAdminContent_query on Query {
+  ...ProjectAdminForm_query
 }
 
 fragment ProjectAdminForm_project on Project {
@@ -3848,8 +4077,28 @@ fragment ProjectAdminForm_project on Project {
   ...ProjectPublishAdminForm_project
 }
 
+fragment ProjectAdminForm_query on Query {
+  ...ProjectStepAdmin_query
+}
+
 fragment ProjectAdminStepFormModal_project on Project {
   ...ProjectAdminStepForm_project
+}
+
+fragment ProjectAdminStepFormModal_query on Query {
+  ssoConfigurations(first: 100, ssoType: FRANCE_CONNECT) {
+    edges {
+      node {
+        __typename
+        ... on FranceConnectSSOConfiguration {
+          isCompletelyConfigured
+          allowedData
+          enabled
+        }
+        id
+      }
+    }
+  }
 }
 
 fragment ProjectAdminStepForm_project on Project {
@@ -3932,17 +4181,34 @@ fragment ProjectStepAdminItemStep_project on Project {
   ...ProjectAdminStepFormModal_project
 }
 
+fragment ProjectStepAdminItemStep_query on Query {
+  ...ProjectAdminStepFormModal_query
+}
+
 fragment ProjectStepAdminItem_project on Project {
   ...ProjectStepAdminItemStep_project
+}
+
+fragment ProjectStepAdminItem_query on Query {
+  ...ProjectStepAdminItemStep_query
 }
 
 fragment ProjectStepAdminList_project on Project {
   ...ProjectStepAdminItem_project
 }
 
+fragment ProjectStepAdminList_query on Query {
+  ...ProjectStepAdminItem_query
+}
+
 fragment ProjectStepAdmin_project on Project {
   ...ProjectAdminStepFormModal_project
   ...ProjectStepAdminList_project
+}
+
+fragment ProjectStepAdmin_query on Query {
+  ...ProjectAdminStepFormModal_query
+  ...ProjectStepAdminList_query
 }
 ",
       },

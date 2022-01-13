@@ -48,7 +48,8 @@ type Requirement =
         | 'LastnameRequirement'
         | 'PhoneRequirement'
         | 'IdentificationCodeRequirement'
-        | 'PhoneVerifiedRequirement',
+        | 'PhoneVerifiedRequirement'
+        | 'FranceConnectRequirement',
       +id: string,
       +viewerMeetsTheRequirement: boolean,
       +viewerValue: ?string,
@@ -281,6 +282,9 @@ const getLabel = (requirement: Requirement) => {
   if (requirement.__typename === 'IdentificationCodeRequirement') {
     return <FormattedMessage id="identification_code" />;
   }
+  if (requirement.__typename === 'FranceConnectRequirement') {
+    return <FormattedMessage id="france_connect" />;
+  }
   if (requirement.__typename === 'PhoneVerifiedRequirement') {
     return <FormattedMessage id="verify.number.sms" />;
   }
@@ -469,6 +473,9 @@ export default createFragmentContainer(container, {
               viewerValue @include(if: $isAuthenticated)
             }
             ... on IdentificationCodeRequirement {
+              viewerValue @include(if: $isAuthenticated)
+            }
+            ... on FranceConnectRequirement {
               viewerValue @include(if: $isAuthenticated)
             }
             ... on CheckboxRequirement {

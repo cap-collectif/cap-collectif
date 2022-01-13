@@ -2335,6 +2335,27 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                               "kind": "InlineFragment",
                                               "selections": Array [
                                                 Object {
+                                                  "condition": "isAuthenticated",
+                                                  "kind": "Condition",
+                                                  "passingValue": true,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "viewerValue",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                },
+                                              ],
+                                              "type": "FranceConnectRequirement",
+                                            },
+                                            Object {
+                                              "abstractKey": null,
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
                                                   "alias": null,
                                                   "args": null,
                                                   "kind": "ScalarField",
@@ -2371,7 +2392,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "1fa2b0a1bbddcbb97b815db99d6ebecc",
+          "cacheID": "04ae44815f0b8ed62a47e412eb946d48",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2734,6 +2755,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on FranceConnectRequirement {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {
@@ -5185,6 +5209,27 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                               "kind": "InlineFragment",
                                               "selections": Array [
                                                 Object {
+                                                  "condition": "isAuthenticated",
+                                                  "kind": "Condition",
+                                                  "passingValue": true,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "viewerValue",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                },
+                                              ],
+                                              "type": "FranceConnectRequirement",
+                                            },
+                                            Object {
+                                              "abstractKey": null,
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
                                                   "alias": null,
                                                   "args": null,
                                                   "kind": "ScalarField",
@@ -5221,7 +5266,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "1fa2b0a1bbddcbb97b815db99d6ebecc",
+          "cacheID": "04ae44815f0b8ed62a47e412eb946d48",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5584,6 +5629,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on FranceConnectRequirement {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {

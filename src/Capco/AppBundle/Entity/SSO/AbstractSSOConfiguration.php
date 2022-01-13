@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="sso_configuration")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractSSOConfigurationRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name = "ssoType", type = "string")
+ * @ORM\DiscriminatorColumn(name="ssoType", type="enum_sso_type")
  * @ORM\DiscriminatorMap({
  *      "oauth2"           = "Oauth2SSOConfiguration",
  *      "franceconnect"    = "FranceConnectSSOConfiguration",
@@ -47,6 +47,8 @@ abstract class AbstractSSOConfiguration
      * @ORM\Column(name="environment", type="enum_sso_environment", nullable=false, options={"default": "NONE"})
      */
     protected $environment = EnumSSOEnvironmentType::NONE;
+
+    protected $ssoType = null;
 
     public function getName(): string
     {
@@ -111,5 +113,15 @@ abstract class AbstractSSOConfiguration
         return $this;
     }
 
-    abstract public function getSsoType(): string;
+    public function getSsoType():string
+    {
+        return $this->ssoType;
+    }
+
+    public function setSsoType(string $ssoType): self
+    {
+        $this->ssoType = $ssoType;
+
+        return $this;
+    }
 }

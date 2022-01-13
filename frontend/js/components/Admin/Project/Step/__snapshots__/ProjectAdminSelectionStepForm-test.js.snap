@@ -196,6 +196,13 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
         "type": [Function],
       }
     }
+    fcAllowedData={
+      Object {
+        "DATE_OF_BIRTH": false,
+        "FIRSTNAME": true,
+        "LASTNAME": true,
+      }
+    }
     formName="stepForm"
     name="requirements"
     requirements={
@@ -206,7 +213,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
           "type": "CHECKBOX",
         },
         Object {
-          "id": "fumier",
+          "id": "monkey_d",
           "type": "LASTNAME",
         },
       ]
@@ -440,6 +447,13 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
         "compare": null,
         "displayName": "Connect(StepRequirementsList)",
         "type": [Function],
+      }
+    }
+    fcAllowedData={
+      Object {
+        "DATE_OF_BIRTH": false,
+        "FIRSTNAME": true,
+        "LASTNAME": true,
       }
     }
     formName="stepForm"

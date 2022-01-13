@@ -4,16 +4,17 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectPublishAdminForm } from './ProjectPublishAdminForm';
 import { formMock, intlMock, $refType } from '~/mocks';
-import { features } from '~/redux/modules/default';
+import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils';
 
 describe('<ProjectPublishAdminForm />', () => {
   const defaultProps = {
     ...formMock,
     intl: intlMock,
     project: null,
-    features,
   };
-
+  afterEach(() => {
+    disableFeatureFlags();
+  });
   it('renders correctly empty', () => {
     const wrapper = shallow(<ProjectPublishAdminForm {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
@@ -23,7 +24,6 @@ describe('<ProjectPublishAdminForm />', () => {
     const props = {
       ...defaultProps,
     };
-    props.features.multilangue = false;
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -39,9 +39,8 @@ describe('<ProjectPublishAdminForm />', () => {
         locale: null,
         archived: false,
       },
-      features,
     };
-    props.features.multilangue = true;
+    enableFeatureFlags(['multilangue']);
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -60,9 +59,8 @@ describe('<ProjectPublishAdminForm />', () => {
         },
         archived: false,
       },
-      features,
     };
-    props.features.multilangue = true;
+    enableFeatureFlags(['multilangue']);
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

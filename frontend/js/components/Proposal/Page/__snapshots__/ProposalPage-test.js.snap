@@ -7437,6 +7437,27 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                           "kind": "InlineFragment",
                                           "selections": Array [
                                             Object {
+                                              "condition": "isAuthenticated",
+                                              "kind": "Condition",
+                                              "passingValue": true,
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "viewerValue",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                            },
+                                          ],
+                                          "type": "FranceConnectRequirement",
+                                        },
+                                        Object {
+                                          "abstractKey": null,
+                                          "kind": "InlineFragment",
+                                          "selections": Array [
+                                            Object {
                                               "alias": null,
                                               "args": null,
                                               "kind": "ScalarField",
@@ -7483,7 +7504,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7273d6557e310700e8c58ddd080e97af",
+          "cacheID": "a75eedcea0a5dd828e847f0d41b84ed5",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -9612,6 +9633,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on FranceConnectRequirement {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {

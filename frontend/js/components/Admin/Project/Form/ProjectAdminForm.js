@@ -9,10 +9,11 @@ import moment from 'moment';
 import debounce from 'lodash/debounce';
 import findLast from 'lodash/findLast';
 import AlertForm from '../../../Alert/AlertForm';
-import type { Dispatch, FeatureToggles, GlobalState } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 import CreateProjectAlphaMutation from '~/mutations/CreateProjectAlphaMutation';
 import UpdateProjectAlphaMutation from '~/mutations/UpdateProjectAlphaMutation';
 import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
+import { type ProjectAdminForm_query } from '~relay/ProjectAdminForm_query.graphql';
 
 import ProjectStepAdmin, { validate as validateSteps } from '../Steps/ProjectStepAdmin';
 import ProjectExternalAdminPage from '../External/ProjectExternalAdminPage';
@@ -46,7 +47,7 @@ import { doesStepSupportRequirements } from '~/components/Admin/Project/Step/Ste
 type Props = {|
   ...ReduxFormFormProps,
   project: ProjectAdminForm_project,
-  features: FeatureToggles,
+  query: ProjectAdminForm_query,
   intl: IntlShape,
   title: string,
   onTitleChange: string => void,
@@ -456,9 +457,9 @@ export function ProjectAdminForm(props: Props) {
     title,
     onTitleChange,
     project,
-    features,
     initialGroups,
     viewerIsAdmin,
+    query,
     ...rest
   } = props;
   changeTitle(onTitleChange, title);
@@ -475,17 +476,13 @@ export function ProjectAdminForm(props: Props) {
         handleSubmit={handleSubmit}
         form={formName}
         project={project}
+        query={query}
         viewerIsAdmin={viewerIsAdmin}
         {...rest}
       />
       <ProjectAccessAdminForm {...props} formName={formName} initialGroups={initialGroups} />
       <ProjectProposalsAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
-      <ProjectPublishAdminForm
-        project={project}
-        handleSubmit={handleSubmit}
-        features={features}
-        {...rest}
-      />
+      <ProjectPublishAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
       {renderProjectSave(props)}
     </form>
   );
@@ -493,7 +490,6 @@ export function ProjectAdminForm(props: Props) {
 
 const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
   return {
-    features: state.default.features,
     initialValues: {
       archived: project?.archived,
       authors: project ? project.authors : [],
@@ -515,6 +511,8 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
                   ? 'IDENTIFICATION_CODE'
                   : edge?.node?.type === 'PhoneVerified'
                   ? 'PHONE_VERIFIED'
+                  : edge?.node?.type === 'FranceConnectRequirement'
+                  ? 'FRANCE_CONNECT'
                   : edge?.node?.type.slice(0, -11).toUpperCase(),
             })),
             requirementsReason: step.requirements?.reason || null,
@@ -802,6 +800,11 @@ export default createFragmentContainer(injectIntl(container), {
       ...ProjectAccessAdminForm_project
       ...ProjectProposalsAdminForm_project
       ...ProjectPublishAdminForm_project
+    }
+  `,
+  query: graphql`
+    fragment ProjectAdminForm_query on Query {
+      ...ProjectStepAdmin_query
     }
   `,
 });

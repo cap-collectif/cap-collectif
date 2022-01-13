@@ -24,8 +24,16 @@ exports[`<ProjectAdminStepFormModal /> renders correctly 1`] = `
     </ProjectAdminFormstyle__StepModalTitle>
   </ModalHeader>
   <Relay(Connect(injectIntl(ReduxForm)))
+    fcAllowedData={
+      Object {
+        "DATE_OF_BIRTH": false,
+        "FIRSTNAME": false,
+        "LASTNAME": false,
+      }
+    }
     formName="ProjectAdminStepForm"
     handleClose={[MockFunction]}
+    isFranceConnectConfigured={false}
     project={
       Object {
         "$fragmentRefs": null,
@@ -65,8 +73,16 @@ exports[`<ProjectAdminStepFormModal /> renders correctly hided 1`] = `
     </ProjectAdminFormstyle__StepModalTitle>
   </ModalHeader>
   <Relay(Connect(injectIntl(ReduxForm)))
+    fcAllowedData={
+      Object {
+        "DATE_OF_BIRTH": false,
+        "FIRSTNAME": false,
+        "LASTNAME": false,
+      }
+    }
     formName="ProjectAdminStepForm"
     handleClose={[MockFunction]}
+    isFranceConnectConfigured={false}
     project={
       Object {
         "$fragmentRefs": null,
@@ -106,8 +122,16 @@ exports[`<ProjectAdminStepFormModal /> renders correctly with step 1`] = `
     </ProjectAdminFormstyle__StepModalTitle>
   </ModalHeader>
   <Relay(Connect(injectIntl(ReduxForm)))
+    fcAllowedData={
+      Object {
+        "DATE_OF_BIRTH": false,
+        "FIRSTNAME": false,
+        "LASTNAME": false,
+      }
+    }
     formName="ProjectAdminStepForm"
     handleClose={[MockFunction]}
+    isFranceConnectConfigured={false}
     project={
       Object {
         "$fragmentRefs": null,

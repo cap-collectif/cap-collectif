@@ -10,6 +10,7 @@ import { ProjectBoxHeader, ProjectBoxContainer } from '../Form/ProjectAdminForm.
 import { STEP_TYPES } from '~/constants/StepTypeConstants';
 import { type StepTypes } from '../Form/ProjectAdminForm';
 import type { ProjectStepAdmin_project } from '~relay/ProjectStepAdmin_project.graphql';
+import type { ProjectStepAdmin_query } from '~relay/ProjectStepAdmin_query.graphql';
 import Menu from '../../../DesignSystem/Menu/Menu';
 import Button from '~ds/Button/Button';
 import Text from '~ui/Primitives/Text';
@@ -19,6 +20,7 @@ type Props = {|
   form: string,
   intl: IntlShape,
   project: ProjectStepAdmin_project,
+  query: ProjectStepAdmin_query,
   viewerIsAdmin: boolean,
 |};
 
@@ -44,7 +46,7 @@ export const validate = ({ steps }: StepTypes) => {
   return errors;
 };
 
-export const ProjectStepAdmin = ({ form, project, viewerIsAdmin }: Props) => {
+export const ProjectStepAdmin = ({ form, project, viewerIsAdmin, query }: Props) => {
   const [stepType, setStepType] = useState('OtherStep');
   const [showAddStepModal, displayAddStepModal] = useState(false);
 
@@ -77,6 +79,7 @@ export const ProjectStepAdmin = ({ form, project, viewerIsAdmin }: Props) => {
               component={ProjectStepAdminList}
               formName={form}
               project={project}
+              query={query}
             />
             <ButtonToolbar>
               <ProjectAdminStepFormModal
@@ -87,6 +90,7 @@ export const ProjectStepAdmin = ({ form, project, viewerIsAdmin }: Props) => {
                 show={showAddStepModal}
                 form={form}
                 project={project}
+                query={query}
               />
               <Menu closeOnSelect placement="bottom-start">
                 <Menu.Button>
@@ -131,6 +135,12 @@ export default createFragmentContainer(ProjectStepAdmin, {
     fragment ProjectStepAdmin_project on Project {
       ...ProjectAdminStepFormModal_project
       ...ProjectStepAdminList_project
+    }
+  `,
+  query: graphql`
+    fragment ProjectStepAdmin_query on Query {
+      ...ProjectAdminStepFormModal_query
+      ...ProjectStepAdminList_query
     }
   `,
 });

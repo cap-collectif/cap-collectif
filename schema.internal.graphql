@@ -6018,6 +6018,18 @@ enum FranceConnectAllowedData {
   preferred_username
 }
 
+"""Require France Connect authentication"""
+type FranceConnectRequirement implements Node & Requirement {
+  """The ID of an object"""
+  id: ID!
+
+  """Does the viewer meets the requirement ?"""
+  viewerMeetsTheRequirement: Boolean!
+
+  """The viewer's france connect id"""
+  viewerValue: String
+}
+
 """France Connect SSO Configuration."""
 type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
   """The ID of an object."""
@@ -6064,6 +6076,9 @@ type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
 
   """Unattended DataChoice as array."""
   allowedData: [FranceConnectAllowedData!]!
+
+  """Is France Connect completely configured"""
+  isCompletelyConfigured: Boolean!
 }
 
 """3 possible values"""
@@ -10811,6 +10826,7 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
+    ssoType: SSOType
   ): SSOConfigurationConnection!
 
   """List all sections."""
@@ -12288,6 +12304,9 @@ enum RequirementType {
 
   """The requirement is an verified phone number"""
   PHONE_VERIFIED
+
+  """The requirement is authentication to France Connect"""
+  FRANCE_CONNECT
 }
 
 """Available errors on resendEmailConfirmationMutation"""
@@ -12459,6 +12478,24 @@ enum SSOEnvironment {
 
   """Production mode."""
   PRODUCTION
+}
+
+"""Possible SSO Type"""
+enum SSOType {
+  """France Connect type."""
+  FRANCE_CONNECT
+
+  """Oauth2 type."""
+  OAUTH2
+
+  """Facebook type."""
+  FACEBOOK
+
+  """Saml type."""
+  SAML
+
+  """CAS type."""
+  CAS
 }
 
 """A section"""

@@ -16,6 +16,7 @@ import StepVotesFields from './StepVotesFields';
 import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
+import { type FranceConnectAllowedData } from "~/components/Admin/Project/Step/ProjectAdminStepForm";
 
 type Props = {|
   requirements?: Array<Requirement>,
@@ -29,6 +30,7 @@ type Props = {|
   votesLimit: ?number,
   votesRanking: boolean,
   stepFormName: string,
+  fcAllowedData: FranceConnectAllowedData,
 |};
 
 export const renderSortValues = (intl: IntlShape) => [
@@ -56,6 +58,7 @@ export const ProjectAdminSelectionStepForm = ({
   votesRanking,
   votesLimit,
   votesMin,
+  fcAllowedData,
 }: Props) => {
   const intl = useIntl();
   const statusesWithId = statuses?.filter(s => s.id) || [];
@@ -154,6 +157,7 @@ export const ProjectAdminSelectionStepForm = ({
         component={StepRequirementsList}
         formName={formName}
         requirements={requirements}
+        fcAllowedData={fcAllowedData}
       />
       <Button
         id="js-btn-create-step"

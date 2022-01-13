@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Entity\SSO;
 
 use Capco\AppBundle\DBAL\Enum\EnumSSOEnvironmentType;
-use Capco\AppBundle\Enum\SSOType;
+use Capco\AppBundle\DBAL\Enum\SSOType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -81,7 +81,7 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
             'email' => true,
             'preferred_username' => false,
         ];
-
+        $this->ssoType = SSOType::FRANCE_CONNECT;
         $this->setAllowedData($allowedData);
     }
 
@@ -218,8 +218,8 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         return $this;
     }
 
-    public function getSsoType(): string
+    public function isCompletelyConfigured(): bool
     {
-        return SSOType::FRANCE_CONNECT;
+        return $this->clientId && $this->secret;
     }
 }

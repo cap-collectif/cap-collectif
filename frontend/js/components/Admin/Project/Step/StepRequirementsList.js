@@ -19,6 +19,7 @@ import InputRequirement from '~/components/Ui/Form/InputRequirement';
 import type { RequirementType } from '~relay/UpdateProjectAlphaMutation.graphql';
 import { RequirementDragItem, CheckboxPlaceholder } from './ProjectAdminStepForm.style';
 import type { Dispatch, Uuid } from '~/types';
+import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
 
 export type Requirement = {|
   type: RequirementType | string,
@@ -26,11 +27,13 @@ export type Requirement = {|
   label?: ?string,
   id?: ?string,
   uniqueId?: ?string,
+  disabled?: ?boolean,
 |};
 
 type Props = {|
   ...ReduxFormFieldArrayProps,
   requirements: Array<Requirement>,
+  fcAllowedData: FranceConnectAllowedData,
   dispatch: Dispatch,
   formName: string,
   meta?: {| error: ?string |},
@@ -46,7 +49,8 @@ const requirementFactory = (
   checked: boolean,
   label: string,
   id?: ?string,
-): Requirement => ({ type, checked, label, id, uniqueId: getUId() });
+  disabled: ?boolean = false,
+): Requirement => ({ type, checked, label, id, uniqueId: getUId(), disabled });
 
 export const formatRequirements = (requirements: Array<Requirement>) =>
   requirements
@@ -55,6 +59,7 @@ export const formatRequirements = (requirements: Array<Requirement>) =>
       ...r,
       uniqueId: undefined,
       checked: undefined,
+      disabled: undefined,
       label: r.type === 'CHECKBOX' ? r.label : null,
     }));
 
@@ -74,25 +79,26 @@ export function createRequirements(
   step: {
     __typename: string,
     requirements?: ?Array<Requirement>,
-  },
-  twilioEnabled: ?boolean,
-): Array<Requirement> {
+},   twilioEnabled: ?boolean,
+  isFranceConnectConfigured: boolean,
+  isFranceConnectRequirementReady: boolean = false,): Array<Requirement> {
   const requirements = [];
   if (!doesStepSupportRequirements(step)) {
     return requirements;
   }
 
   const isSupportingPhoneVerifiedRequirement = step.__typename === 'CollectStep' && twilioEnabled;
-
   const initialRequirements = step.requirements || [];
   if (!initialRequirements.some((r: Requirement) => r.type === 'FIRSTNAME'))
-    requirements.push(requirementFactory('FIRSTNAME', false, 'form.label_firstname', null));
+    requirements.push(requirementFactory('FIRSTNAME', false, 'form.label_firstname', null, false));
   if (!initialRequirements.some((r: Requirement) => r.type === 'LASTNAME'))
-    requirements.push(requirementFactory('LASTNAME', false, 'global.name', null));
+    requirements.push(requirementFactory('LASTNAME', false, 'global.name', null, false));
   if (!initialRequirements.some((r: Requirement) => r.type === 'PHONE'))
     requirements.push(requirementFactory('PHONE', false, 'filter.label_phone', null));
   if (!initialRequirements.some((r: Requirement) => r.type === 'DATE_OF_BIRTH'))
-    requirements.push(requirementFactory('DATE_OF_BIRTH', false, 'form.label_date_of_birth', null));
+    requirements.push(
+      requirementFactory('DATE_OF_BIRTH', false, 'form.label_date_of_birth', null, false),
+    );
   if (!initialRequirements.some((r: Requirement) => r.type === 'POSTAL_ADDRESS'))
     requirements.push(
       requirementFactory('POSTAL_ADDRESS', false, 'admin.fields.event.address', null),
@@ -106,6 +112,12 @@ export function createRequirements(
     isSupportingPhoneVerifiedRequirement
   )
     requirements.push(requirementFactory('PHONE_VERIFIED', false, 'verify.number.sms', null));
+  if (
+    !initialRequirements.some((r: Requirement) => r.type === 'FRANCE_CONNECT') &&
+    isFranceConnectConfigured &&
+    isFranceConnectRequirementReady
+  )
+    requirements.push(requirementFactory('FRANCE_CONNECT', false, 'france_connect', null));
   initialRequirements.forEach((requirement: Requirement) => {
     if (requirement.type === 'PHONE_VERIFIED' && isSupportingPhoneVerifiedRequirement) {
       requirements.push(
@@ -115,18 +127,38 @@ export function createRequirements(
     switch (requirement.type) {
       case 'FIRSTNAME':
         requirements.push(
-          requirementFactory('FIRSTNAME', true, 'form.label_firstname', requirement.id),
+          requirementFactory(
+            'FIRSTNAME',
+            true,
+            'form.label_firstname',
+            requirement.id,
+            isFranceConnectConfigured && isFranceConnectRequirementReady,
+          ),
         );
         break;
       case 'LASTNAME':
-        requirements.push(requirementFactory('LASTNAME', true, 'global.name', requirement.id));
+        requirements.push(
+          requirementFactory(
+            'LASTNAME',
+            true,
+            'global.name',
+            requirement.id,
+            isFranceConnectConfigured && isFranceConnectRequirementReady,
+          ),
+        );
         break;
       case 'PHONE':
         requirements.push(requirementFactory('PHONE', true, 'filter.label_phone', requirement.id));
         break;
       case 'DATE_OF_BIRTH':
         requirements.push(
-          requirementFactory('DATE_OF_BIRTH', true, 'form.label_date_of_birth', requirement.id),
+          requirementFactory(
+            'DATE_OF_BIRTH',
+            true,
+            'form.label_date_of_birth',
+            requirement.id,
+            isFranceConnectConfigured && isFranceConnectRequirementReady,
+          ),
         );
         break;
       case 'POSTAL_ADDRESS':
@@ -144,6 +176,13 @@ export function createRequirements(
           requirementFactory('IDENTIFICATION_CODE', true, 'identification_code', requirement.id),
         );
         break;
+      case 'FRANCE_CONNECT':
+        if (isFranceConnectConfigured && isFranceConnectRequirementReady) {
+          requirements.push(
+            requirementFactory('FRANCE_CONNECT', true, 'france_connect', requirement.id),
+          );
+        }
+        break;
       default:
     }
   });
@@ -158,7 +197,9 @@ export function StepRequirementsList({
   onInputChange,
   onInputCheck,
   onInputDelete,
+  fcAllowedData,
 }: Props) {
+  const isFranceConnectRequirementReady = false;
   const intl = useIntl();
   const onDragEnd = (result: DropResult) => {
     // dropped outside the list
@@ -168,7 +209,9 @@ export function StepRequirementsList({
 
     dispatch(arrayMove(formName, 'requirements', result.source.index, result.destination.index));
   };
-
+  const lastNameRequirement = requirements.filter(r => r && r.type === 'LASTNAME');
+  const firstNameRequirement = requirements.filter(r => r && r.type === 'FIRSTNAME');
+  const birthDateRequirement = requirements.filter(r => r && r.type === 'DATE_OF_BIRTH');
   return (
     <ListGroup>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -180,6 +223,7 @@ export function StepRequirementsList({
                 if (!requirement) return;
                 const isToggle = requirement.type !== 'CHECKBOX';
                 const id = `requirement.${requirement.id || requirement.uniqueId || ''}`;
+
                 return (
                   <Draggable key={id} draggableId={id} index={index}>
                     {(providedDraggable: DraggableProvided) => (
@@ -192,12 +236,65 @@ export function StepRequirementsList({
                           {isToggle ? (
                             <Field
                               id={`requirement-${index}`}
-                              name={field}
+                              name={requirement.label}
+                              className={requirement.type}
                               component={toggle}
+                              disabled={requirement.disabled}
                               props={{
                                 input: {
                                   value: requirement.checked,
+                                  name: requirement.type,
                                   onChange: () => {
+                                    if (
+                                      requirement.type === 'FRANCE_CONNECT' &&
+                                      isFranceConnectRequirementReady
+                                    ) {
+                                      if (lastNameRequirement && fcAllowedData.LASTNAME === true) {
+                                        Array.from(requirements).forEach(function (r, rIndex) {
+                                          if (r.type === 'LASTNAME') {
+                                            dispatch(
+                                              change(formName, `requirements[${rIndex}]`, {
+                                                ...r,
+                                                checked: false,
+                                                disabled: !requirement.checked,
+                                              }),
+                                            );
+                                          }
+                                        });
+                                      }
+                                      if (
+                                        firstNameRequirement &&
+                                        fcAllowedData.FIRSTNAME === true
+                                      ) {
+                                        Array.from(requirements).forEach(function (r, rIndex) {
+                                          if (r.type === 'FIRSTNAME') {
+                                            dispatch(
+                                              change(formName, `requirements[${rIndex}]`, {
+                                                ...r,
+                                                checked: false,
+                                                disabled: !requirement.checked,
+                                              }),
+                                            );
+                                          }
+                                        });
+                                      }
+                                      if (
+                                        birthDateRequirement &&
+                                        fcAllowedData.DATE_OF_BIRTH === true
+                                      ) {
+                                        Array.from(requirements).forEach(function (r, rIndex) {
+                                          if (r.type === 'DATE_OF_BIRTH') {
+                                            dispatch(
+                                              change(formName, `requirements[${rIndex}]`, {
+                                                ...r,
+                                                checked: false,
+                                                disabled: !requirement.checked,
+                                              }),
+                                            );
+                                          }
+                                        });
+                                      }
+                                    }
                                     onInputCheck(!requirement.checked, field, requirements[index]);
                                   },
                                 },

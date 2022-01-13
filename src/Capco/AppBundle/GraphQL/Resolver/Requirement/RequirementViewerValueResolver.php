@@ -46,6 +46,9 @@ class RequirementViewerValueResolver implements ResolverInterface
         if (Requirement::PHONE_VERIFIED === $requirement->getType()) {
             return $viewer->isPhoneConfirmed();
         }
+        if (Requirement::FRANCE_CONNECT === $requirement->getType()) {
+            return $viewer->getFranceConnectId();
+        }
 
         if (Requirement::CHECKBOX === $requirement->getType()) {
             $found = $this->userRequirementsRepo->findOneBy([

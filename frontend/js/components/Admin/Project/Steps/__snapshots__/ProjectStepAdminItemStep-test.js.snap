@@ -77,6 +77,12 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
             "_id": "project123",
           }
         }
+        query={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
         show={false}
         step={
           Object {

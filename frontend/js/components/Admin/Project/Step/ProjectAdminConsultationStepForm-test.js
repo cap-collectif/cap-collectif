@@ -8,6 +8,7 @@ describe('<ProjectAdminConsultationStepForm />', () => {
   const defaultProps = {
     consultations: [],
     dispatch: jest.fn(),
+    fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
   };
 
   it('renders correctly with no initial data', () => {

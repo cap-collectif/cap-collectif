@@ -13,12 +13,14 @@ import environment from '~/createRelayEnvironment';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
 import { type ProjectAdminQuestionnaireStepFormQuestionnairesQueryResponse } from '~relay/ProjectAdminQuestionnaireStepFormQuestionnairesQuery.graphql';
 import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
+import { type FranceConnectAllowedData } from "~/components/Admin/Project/Step/ProjectAdminStepForm";
 
 type Props = {|
   dispatch: Dispatch,
   requirements?: Array<Requirement>,
   questionnaire?: {| label: string, value: string |},
   isAnonymousParticipationAllowed: boolean,
+  fcAllowedData: FranceConnectAllowedData,
 |};
 
 export const getAvailableQuestionnaires = graphql`
@@ -83,6 +85,7 @@ export const ProjectAdminQuestionnaireStepForm = ({
   dispatch,
   requirements,
   isAnonymousParticipationAllowed,
+  fcAllowedData,
 }: Props) => {
   const { user } = useSelector((state: GlobalState) => state.user);
   const intl = useIntl();
@@ -123,6 +126,7 @@ export const ProjectAdminQuestionnaireStepForm = ({
             component={StepRequirementsList}
             formName={formName}
             requirements={requirements}
+            fcAllowedData={fcAllowedData}
           />
           <Button
             id="js-btn-create-step"

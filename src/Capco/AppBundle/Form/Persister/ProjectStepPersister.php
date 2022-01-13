@@ -160,41 +160,20 @@ class ProjectStepPersister
      */
     private function getFormEntity(array $step): array
     {
-        switch ($step['type']) {
-            case OtherStep::TYPE:
-                $return = [OtherStepFormType::class, new OtherStep()];
-
-                break;
-            case PresentationStep::TYPE:
-                $return = [PresentationStepFormType::class, new PresentationStep()];
-
-                break;
-            case RankingStep::TYPE:
-                $return = [RankingStepFormType::class, new RankingStep()];
-
-                break;
-            case ConsultationStep::TYPE:
-                $return = [ConsultationStepFormType::class, new ConsultationStep()];
-
-                break;
-            case SelectionStep::TYPE:
-                $return = [SelectionStepFormType::class, new SelectionStep()];
-
-                break;
-            case CollectStep::TYPE:
-                $return = [CollectStepFormType::class, new CollectStep()];
-
-                break;
-            case QuestionnaireStep::TYPE:
-                $return = [QuestionnaireStepFormType::class, new QuestionnaireStep()];
-
-                break;
-            case DebateStep::TYPE:
-                $return = [DebateStepFormType::class, new DebateStep(new Debate())];
-
-                break;
-            default:
-                throw new \LogicException(sprintf('Unknown step type given: "%s"', $step['type']));
+        $formTypeConfig = [
+            OtherStep::TYPE => [OtherStepFormType::class, new OtherStep()],
+            PresentationStep::TYPE => [PresentationStepFormType::class, new PresentationStep()],
+            RankingStep::TYPE => [RankingStepFormType::class, new RankingStep()],
+            ConsultationStep::TYPE => [ConsultationStepFormType::class, new ConsultationStep()],
+            SelectionStep::TYPE => [SelectionStepFormType::class, new SelectionStep()],
+            CollectStep::TYPE => [CollectStepFormType::class, new CollectStep()],
+            QuestionnaireStep::TYPE => [QuestionnaireStepFormType::class, new QuestionnaireStep()],
+            DebateStep::TYPE => [DebateStepFormType::class, new DebateStep(new Debate())],
+        ];
+        if (isset($formTypeConfig[$step['type']])) {
+            $return = $formTypeConfig[$step['type']];
+        } else {
+            throw new \LogicException(sprintf('Unknown step type given: "%s"', $step['type']));
         }
 
         if (self::isEditMode($step)) {

@@ -24,6 +24,17 @@ class AbstractSSOConfigurationRepository extends EntityRepository
         return new Paginator($qb);
     }
 
+    public function findSsoByType(int $limit, int $offset, string $type): Paginator
+    {
+        $qb = $this->createQueryBuilder('sso')
+            ->andWhere('sso INSTANCE OF :type')
+            ->setParameter('type', $type)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb);
+    }
+
     public function getPublicList(): array
     {
         $rsm = new ResultSetMapping();

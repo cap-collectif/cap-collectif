@@ -16,6 +16,21 @@ describe('<ProjectAdminStepFormModal />', () => {
       $fragmentRefs,
       $refType,
     },
+    query: {
+      $refType,
+      ssoConfigurations: {
+        edges: [
+          {
+            node: {
+              __typename: 'FranceConnectSSOConfiguration',
+              isCompletelyConfigured: false,
+              allowedData: ['family_name'],
+              enabled: true,
+            },
+          },
+        ],
+      },
+    },
   };
 
   it('renders correctly', () => {

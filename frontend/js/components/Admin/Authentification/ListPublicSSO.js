@@ -7,7 +7,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import Toggle from '~/components/Ui/Toggle/Toggle';
 import ListGroup from '../../Ui/List/ListGroup';
-import type { Dispatch, FeatureToggle, FeatureToggles, State as GlobalState } from '~/types';
+import type { Dispatch, FeatureToggle } from '~/types';
 import { toggleFeature } from '~/redux/modules/default';
 import { toggleStatus } from '~/mutations/ToggleSSOConfigurationStatusMutation';
 import FranceConnectConfigurationModal from './FranceConnectConfigurationModal';
@@ -17,10 +17,10 @@ import FranceConnectTeaserModal from '~/components/Admin/Authentification/France
 import AppBox from '~ui/Primitives/AppBox';
 import FacebookConfigurationCard from '~/components/Admin/Authentification/FacebookConfigurationCard';
 import type { FacebookConfigurationModal_ssoConfiguration$ref } from '~relay/FacebookConfigurationModal_ssoConfiguration.graphql';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
   query: ListPublicSSO_query,
-  features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
 |};
 
@@ -61,9 +61,9 @@ const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, typeof Button> = styled(
   }
 `;
 
-export const ListPublicSSO = ({ features, query }: Props) => {
+export const ListPublicSSO = ({ query }: Props) => {
   const [showFranceConnectModal, setShowFranceConnectModal] = useState<boolean>(false);
-
+  const isFranceConnectEnabled = useFeatureFlag('login_franceconnect');
   const handleClose = () => {
     setShowFranceConnectModal(false);
   };
@@ -93,7 +93,7 @@ export const ListPublicSSO = ({ features, query }: Props) => {
         <ListGroupItemWithJustifyContentStart>
           <Toggle
             id="toggle-franceConnect"
-            checked={features.login_franceconnect && franceConnect?.enabled}
+            checked={isFranceConnectEnabled && franceConnect?.enabled}
             onChange={() => toggleStatus(franceConnect)}
             label={
               <h5 className="mb-0 mt-0">
@@ -102,7 +102,7 @@ export const ListPublicSSO = ({ features, query }: Props) => {
             }
           />
 
-          {features.login_franceconnect && franceConnect?.enabled && (
+          {isFranceConnectEnabled && franceConnect?.enabled && (
             <ButtonWithMarginLeftAuto
               bsStyle="warning"
               className="btn-outline-warning"
@@ -113,7 +113,7 @@ export const ListPublicSSO = ({ features, query }: Props) => {
             </ButtonWithMarginLeftAuto>
           )}
 
-          {!features.login_franceconnect && (
+          {!isFranceConnectEnabled && (
             <AppBox marginLeft="auto">
               <FranceConnectTeaserModal />
             </AppBox>
@@ -150,10 +150,6 @@ export const ListPublicSSO = ({ features, query }: Props) => {
   );
 };
 
-const mapStateToProps = (state: GlobalState) => ({
-  features: state.default.features,
-});
-
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onToggle: (feature: FeatureToggle, value: boolean) => {
     toggleFeature(dispatch, feature, value);
@@ -161,7 +157,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export default connect<any, any, _, _, _, _>(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(
   createFragmentContainer(ListPublicSSO, {

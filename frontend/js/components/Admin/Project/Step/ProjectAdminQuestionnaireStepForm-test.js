@@ -15,6 +15,7 @@ describe('<ProjectAdminQuestionnaireStepForm />', () => {
         type: 'LASTNAME',
       },
     ],
+    fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     isAnonymousParticipationAllowed: false,
   };
 

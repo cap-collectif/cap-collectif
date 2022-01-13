@@ -15,6 +15,7 @@ describe('<ProjectAdminSelectionStepForm />', () => {
     votesLimit: 3,
     votesMin: 1,
     stepFormName: 'defaultForm',
+    fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
   };
 
   it('renders correctly with no initial data', () => {
@@ -36,10 +37,11 @@ describe('<ProjectAdminSelectionStepForm />', () => {
       requirements: [
         { type: 'CHECKBOX', checked: false, label: 'Sku' },
         {
-          id: 'fumier',
+          id: 'monkey_d',
           type: 'LASTNAME',
         },
       ],
+      fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     };
     const wrapper = shallow(<ProjectAdminSelectionStepForm {...props} />);
     expect(wrapper).toMatchSnapshot();

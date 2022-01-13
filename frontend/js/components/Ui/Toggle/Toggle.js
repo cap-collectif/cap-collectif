@@ -75,7 +75,11 @@ const Toggle = ({
           htmlFor={id}
           labelSide={labelSide}
           bold={bold}>
-          <TogglerWrapper disabled={disabled} checked={checked} ref={referenceToggle}>
+          <TogglerWrapper
+            disabled={disabled}
+            checked={checked}
+            ref={referenceToggle}
+            id={`TOGGLE_${name || ''}`}>
             <span className="circle-toggler" />
 
             {tooltip && (

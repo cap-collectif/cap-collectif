@@ -19,6 +19,7 @@ export const ProjectAdminPage = ({ projectId, firstCollectStepId }: Props) => {
           project: node(id: $projectId) @include(if: $isEditMode) {
             ...ProjectAdminContent_project @arguments(projectId: $projectId)
           }
+          ...ProjectAdminContent_query
         }
       `}
       variables={{
@@ -39,6 +40,7 @@ export const ProjectAdminPage = ({ projectId, firstCollectStepId }: Props) => {
           return (
             <ProjectAdminContent
               project={props.project || null}
+              query={props || null}
               firstCollectStepId={firstCollectStepId}
             />
           );

@@ -43,6 +43,9 @@ class RequirementTypeResolver implements ResolverInterface
         if (Requirement::PHONE_VERIFIED === $requirement->getType()) {
             return $this->typeResolver->resolve('PhoneVerifiedRequirement');
         }
+        if (Requirement::FRANCE_CONNECT === $requirement->getType()) {
+            return $this->typeResolver->resolve('FranceConnectRequirement');
+        }
 
         throw new UserError('Could not resolve type of Requirement.');
     }

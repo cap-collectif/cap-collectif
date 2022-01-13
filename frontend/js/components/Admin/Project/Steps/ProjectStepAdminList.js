@@ -21,6 +21,7 @@ import type { GlobalState, Dispatch } from '~/types';
 import ProjectStepAdminItem from './ProjectStepAdminItem';
 import { NoStepsPlaceholder } from '../Form/ProjectAdminForm.style';
 import type { ProjectStepAdminList_project } from '~relay/ProjectStepAdminList_project.graphql';
+import type { ProjectStepAdminList_query } from '~relay/ProjectStepAdminList_query.graphql';
 
 export type Step = {|
   +id: ?string,
@@ -67,6 +68,7 @@ type Props = {|
   formName: string,
   meta?: {| error: ?string |},
   project: ProjectStepAdminList_project,
+  query: ProjectStepAdminList_query,
 |};
 
 export function ProjectStepAdminList(props: Props) {
@@ -81,7 +83,7 @@ export function ProjectStepAdminList(props: Props) {
     dispatch(arrayMove(formName, 'steps', result.source.index, result.destination.index));
   };
 
-  const { fields, steps, formName, meta, project } = props;
+  const { fields, steps, formName, meta, project, query } = props;
   return (
     <>
       <List>
@@ -102,6 +104,7 @@ export function ProjectStepAdminList(props: Props) {
                     fields={fields}
                     formName={formName}
                     project={project}
+                    query={query}
                   />
                 ))}
                 {provided.placeholder}
@@ -134,6 +137,11 @@ export default createFragmentContainer(ProjectStepAdminListConnected, {
   project: graphql`
     fragment ProjectStepAdminList_project on Project {
       ...ProjectStepAdminItem_project
+    }
+  `,
+  query: graphql`
+    fragment ProjectStepAdminList_query on Query {
+      ...ProjectStepAdminItem_query
     }
   `,
 });

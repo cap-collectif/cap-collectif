@@ -8,6 +8,7 @@ export type Props = {|
   input: {
     onChange: (SyntheticInputEvent<HTMLInputElement>) => void,
     value: boolean,
+    name?: string,
   },
   meta?: { touched: boolean, error: ?string },
   label?: string,
@@ -36,6 +37,7 @@ export const Toggle = ({
   <div className={cn('form-group', className)}>
     <ToggleUi
       id={id}
+      name={input.name}
       className={toggleClassName}
       label={label}
       helpText={helpText}

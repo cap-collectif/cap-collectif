@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\SSO;
 
-use Capco\AppBundle\Enum\SSOType;
+use Capco\AppBundle\DBAL\Enum\SSOType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +41,11 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
      * @ORM\Column(name="logout_url", type="text", nullable=true)
      */
     protected $logoutUrl;
+
+    public function __construct()
+    {
+        $this->ssoType = SSOType::OAUTH2;
+    }
 
     public function getClientId(): string
     {
@@ -112,10 +117,5 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
         $this->logoutUrl = $logoutUrl;
 
         return $this;
-    }
-
-    public function getSsoType(): string
-    {
-        return SSOType::OAUTH2;
     }
 }

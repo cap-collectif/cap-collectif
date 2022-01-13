@@ -25,6 +25,10 @@ const defaultProps = {
     $fragmentRefs,
     $refType,
   },
+  query: {
+    $fragmentRefs,
+    $refType,
+  },
 };
 
 describe('<ProjectStepAdminList />', () => {

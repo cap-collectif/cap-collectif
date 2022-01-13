@@ -809,6 +809,27 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                                         "kind": "InlineFragment",
                                                         "selections": Array [
                                                           Object {
+                                                            "condition": "isAuthenticated",
+                                                            "kind": "Condition",
+                                                            "passingValue": true,
+                                                            "selections": Array [
+                                                              Object {
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "kind": "ScalarField",
+                                                                "name": "viewerValue",
+                                                                "storageKey": null,
+                                                              },
+                                                            ],
+                                                          },
+                                                        ],
+                                                        "type": "FranceConnectRequirement",
+                                                      },
+                                                      Object {
+                                                        "abstractKey": null,
+                                                        "kind": "InlineFragment",
+                                                        "selections": Array [
+                                                          Object {
                                                             "alias": null,
                                                             "args": null,
                                                             "kind": "ScalarField",
@@ -1413,6 +1434,27 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
+                                                "condition": "isAuthenticated",
+                                                "kind": "Condition",
+                                                "passingValue": true,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "viewerValue",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                              },
+                                            ],
+                                            "type": "FranceConnectRequirement",
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
                                                 "alias": null,
                                                 "args": null,
                                                 "kind": "ScalarField",
@@ -1602,7 +1644,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "a05373f7d39e245d4a1f7a7d254c8f55",
+            "cacheID": "e909afc62fb5d3a3ac25d9a1ce1cc723",
             "id": null,
             "metadata": Object {},
             "name": "OpinionSourceBoxQuery",
@@ -1879,6 +1921,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on IdentificationCodeRequirement {
+          viewerValue @include(if: $isAuthenticated)
+        }
+        ... on FranceConnectRequirement {
           viewerValue @include(if: $isAuthenticated)
         }
         ... on CheckboxRequirement {

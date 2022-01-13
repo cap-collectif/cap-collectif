@@ -45,6 +45,8 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 
+export type FranceConnectAllowedData =  { FIRSTNAME: boolean, LASTNAME: boolean, DATE_OF_BIRTH: boolean };
+
 type Props = {|
   ...ReduxFormFormProps,
   handleClose?: () => {},
@@ -129,6 +131,8 @@ type Props = {|
   project: ProjectAdminStepForm_project,
   mainView: ?ProposalViewMode,
   debateType?: DebateType,
+  isFranceConnectConfigured: boolean,
+  fcAllowedData: FranceConnectAllowedData,
 |};
 
 type DisplayMode = {
@@ -386,6 +390,7 @@ export function ProjectAdminStepForm({
   mainView,
   isCreating,
   debateType,
+  fcAllowedData,
 }: Props) {
   const canSetDisplayMode =
     (step.__typename === 'SelectionStep' || step.__typename === 'CollectStep') &&
@@ -404,7 +409,6 @@ export function ProjectAdminStepForm({
   const hasCheckedRequirements = requirements
     ? requirements.some(requirement => requirement.checked)
     : false;
-
   return (
     <>
       <Modal.Body>
@@ -562,6 +566,7 @@ export function ProjectAdminStepForm({
               questionnaire={step.questionnaire}
               stepFormName={stepFormName}
               requirements={requirements}
+              fcAllowedData={fcAllowedData}
               isAnonymousParticipationAllowed={isAnonymousParticipationAllowed}
             />
           )}
@@ -569,6 +574,7 @@ export function ProjectAdminStepForm({
             <ProjectAdminConsultationStepForm
               requirements={requirements}
               consultations={step.consultations}
+              fcAllowedData={fcAllowedData}
             />
           )}
           {step.__typename === 'SelectionStep' && (
@@ -584,6 +590,7 @@ export function ProjectAdminStepForm({
               statuses={statuses}
               votable={votable}
               requirements={requirements}
+              fcAllowedData={fcAllowedData}
             />
           )}
 
@@ -604,6 +611,7 @@ export function ProjectAdminStepForm({
               statuses={statuses}
               votable={votable}
               requirements={requirements}
+              fcAllowedData={fcAllowedData}
             />
           )}
 
@@ -756,7 +764,7 @@ export function ProjectAdminStepForm({
   );
 }
 
-const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Props) => {
+const mapStateToProps = (state: GlobalState, { step, isCreating, project, isFranceConnectConfigured }: Props) => {
   const { isGridViewEnabled, isListViewEnabled, isMapViewEnabled, mainView } = getValueDisplayMode(
     step,
     project,
@@ -801,7 +809,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
           : undefined,
       // ConsultationStep
       consultations: step?.consultations || [],
-      requirements: step ? createRequirements(step, twilioEnabled) : [],
+      requirements: step ? createRequirements(step, twilioEnabled, isFranceConnectConfigured) : [],
       // SelectionStep
       statuses: step?.statuses?.length ? step.statuses : [],
       defaultSort: step?.defaultSort?.toUpperCase() || 'RANDOM',
