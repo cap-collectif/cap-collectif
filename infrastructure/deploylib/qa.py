@@ -137,7 +137,7 @@ def save_es_snapshot():
 
 def restore_es_snapshot():
     run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_close"')
-    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false}"')
+    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false,\\\"feature_states\\\":[\\\"geoip\\\"]}"')
     run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_open"')
     run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_aliases" -H "Content-Type: application/json" --data "{\\\"actions\\\":[{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco\\\"}}]}"')
 

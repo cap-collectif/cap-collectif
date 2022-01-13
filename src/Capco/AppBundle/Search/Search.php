@@ -221,26 +221,27 @@ abstract class Search
     {
         if (!$viewer) {
             return [
-                (new BoolQuery())->addShould([
+                (new BoolQuery())->addShould(
                     new Term([
                         "${projectPath}.visibility" => [
                             'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
                         ],
-                    ]),
-                ]),
+                    ])
+                ),
             ];
         }
         $visibility = ProjectVisibilityMode::getProjectVisibilityByRoles($viewer);
 
         return [
-            (new BoolQuery())->addShould([
-                new Term([
-                    "${projectPath}.visibility" => [
-                        'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
-                    ],
-                ]),
-                new Query\Terms("${projectPath}.authors.id", [$viewer->getId()]),
-            ]),
+            (new BoolQuery())
+                ->addShould(new Query\Terms("${projectPath}.authors.id", [$viewer->getId()]))
+                ->addShould(
+                    new Term([
+                        "${projectPath}.visibility" => [
+                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                        ],
+                    ])
+                ),
             (new BoolQuery())
                 ->addFilter(
                     new Term([

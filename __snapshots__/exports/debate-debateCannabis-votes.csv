@@ -1,9 +1,9 @@
 ﻿vote_publishedAt,vote_type,vote_geoip_country_name,vote_geoip_region_name,vote_geoip_city_name,vote_source,vote_author_id,vote_author_zipCode,vote_author_username,vote_author_isEmailConfirmed,vote_author_email,vote_author_userType_name,debate_url
 "2015-01-01 00:00:00",AGAINST,Australia,,,APPLICATION,,,,,,,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis
-"2015-01-01 00:00:00",AGAINST,"United States",Washington,Seattle,"WIDGET : www.figaro.fr",,,,,,,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis
+"2015-01-01 00:00:00",AGAINST,"United States",,,"WIDGET : www.figaro.fr",,,,,,,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis
 "2015-01-01 00:00:00",FOR,Australia,,,APPLICATION,,,,,,,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis
 "2015-01-01 00:00:00",FOR,Australia,,,APPLICATION,,,,,,,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis
-"2015-01-01 00:00:00",FOR,"United States",,,"WIDGET : www.liberation.fr",,,,,,,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis
+"2015-01-01 00:00:00",FOR,"United States",Illinois,Chicago,"WIDGET : www.liberation.fr",,,,,,,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis
 "2015-01-01 09:01:00",AGAINST,,,,APPLICATION,VXNlcjp1c2VyU3B5bA==,,spyl,1,aurelien@cap-collectif.com,Citoyen,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis
 "2015-01-01 09:02:00",FOR,"United States",,,APPLICATION,VXNlcjp1c2VySWFu,,"Ian apprenti DevOps",1,ian@cap-collectif.com,,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis
 "2015-01-01 09:03:00",AGAINST,Canada,,,MAIL,VXNlcjp1c2VyTWlja2FlbA==,,"Dev null",1,mickael@cap-collectif.com,,https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis

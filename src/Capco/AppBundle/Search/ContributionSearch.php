@@ -230,15 +230,18 @@ class ContributionSearch extends Search
             }
         }
         $boolQuery->addFilter(
-            (new BoolQuery())->addShould([
-                (new BoolQuery())
-                    ->addFilter(new Query\Exists('opinion'))
-                    ->addFilter(new Term(['opinion.published' => ['value' => true]])),
-                (new BoolQuery())
-                    ->addFilter(new Query\Exists('opinionVersion'))
-                    ->addFilter(new Term(['opinionVersion.published' => ['value' => true]])),
-                new Query\MatchAll(),
-            ])
+            (new BoolQuery())
+                ->addShould(
+                    (new BoolQuery())
+                        ->addFilter(new Query\Exists('opinionVersion'))
+                        ->addFilter(new Term(['opinionVersion.published' => ['value' => true]]))
+                )
+                ->addShould(
+                    (new BoolQuery())
+                        ->addFilter(new Query\Exists('opinion'))
+                        ->addFilter(new Term(['opinion.published' => ['value' => true]]))
+                )
+                ->addShould(new Query\MatchAll())
         );
 
         $query = new Query($boolQuery);
@@ -383,39 +386,27 @@ class ContributionSearch extends Search
         bool $inConsultation = false,
         bool $includeTrashed = false
     ): void {
-
-        if ($contributionTypes && in_array('replyAnonymous', $contributionTypes)) {
+        if ($contributionTypes && \in_array('replyAnonymous', $contributionTypes)) {
             $query
-                ->addFilter(
-                    new Query\Terms(
-                        'objectType',
-                        ['reply']
-                    )
-                )
-                ->addFilter(
-                    new Query\Term(['replyType' => ['value' => 'replyAnonymous']])
-                );
+                ->addFilter(new Query\Terms('objectType', ['reply']))
+                ->addFilter(new Query\Term(['replyType' => ['value' => 'replyAnonymous']]));
         } else {
-            $query
-                ->addFilter(
-                    new Query\Terms(
-                        'objectType',
-                        $contributionTypes ?: $this->getContributionElasticsearchTypes($inConsultation)
-                    )
-                );
+            $query->addFilter(
+                new Query\Terms(
+                    'objectType',
+                    $contributionTypes ?: $this->getContributionElasticsearchTypes($inConsultation)
+                )
+            );
         }
 
         $query
-            ->addMustNot(
-                array_merge(
-                    [
-                        new Query\Term(['published' => ['value' => false]]),
-                        new Query\Exists('comment'),
-                        new Query\Term(['draft' => ['value' => true]]),
-                    ],
-                    !$includeTrashed ? [new Query\Exists('trashedAt')] : []
-                )
-            );
+            ->addMustNot(new Query\Term(['published' => ['value' => false]]))
+            ->addMustNot(new Query\Exists('comment'))
+            ->addMustNot(new Query\Term(['draft' => ['value' => true]]));
+
+        if (!$includeTrashed) {
+            $query->addMustNot(new Query\Exists('trashedAt'));
+        }
     }
 
     private function getContributionElasticsearchTypes(bool $inConsultation = false): array

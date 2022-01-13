@@ -288,14 +288,17 @@ class AnalyticsSearch
 
         if ($projectId) {
             $boolQuery->addFilter(
-                (new BoolQuery())->addShould([
-                    (new BoolQuery())
-                        ->addMustNot(new Query\Exists('project'))
-                        ->addFilter(new Query\Term(['event.projects.id' => $projectId])),
-                    (new BoolQuery())
-                        ->addMustNot(new Query\Exists('project'))
-                        ->addFilter(new Query\Term(['proposal.project.id' => $projectId])),
-                ])
+                (new BoolQuery())
+                    ->addShould(
+                        (new BoolQuery())
+                            ->addMustNot(new Query\Exists('project'))
+                            ->addFilter(new Query\Term(['event.projects.id' => $projectId]))
+                    )
+                    ->addShould(
+                        (new BoolQuery())
+                            ->addMustNot(new Query\Exists('project'))
+                            ->addFilter(new Query\Term(['proposal.project.id' => $projectId]))
+                    )
             );
         }
 
@@ -355,11 +358,10 @@ class AnalyticsSearch
 
         if ($projectId) {
             $boolQuery->addFilter(
-                (new BoolQuery())->addShould([
-                    new Query\Term(['opinion.project.id' => $projectId]),
-                    new Query\Term(['opinionVersion.project.id' => $projectId]),
-                    new Query\Term(['proposal.project.id' => $projectId]),
-                ])
+                (new BoolQuery())
+                    ->addShould(new Query\Term(['opinion.project.id' => $projectId]))
+                    ->addShould(new Query\Term(['opinionVersion.project.id' => $projectId]))
+                    ->addShould(new Query\Term(['proposal.project.id' => $projectId]))
             );
         }
 
@@ -545,17 +547,22 @@ class AnalyticsSearch
     {
         if ($projectId) {
             $boolQuery->addFilter(
-                (new BoolQuery())->addShould([
-                    (new BoolQuery())
-                        ->addMustNot(new Query\Exists('project'))
-                        ->addFilter(new Query\Term(['event.projects.id' => $projectId])),
-                    (new BoolQuery())
-                        ->addMustNot(new Query\Exists('project'))
-                        ->addFilter(new Query\Term(['proposal.project.id' => $projectId])),
-                    (new BoolQuery())
-                        ->addFilter(new Query\Exists('project'))
-                        ->addFilter(new Query\Term(['project.id' => $projectId])),
-                ])
+                (new BoolQuery())
+                    ->addShould(
+                        (new BoolQuery())
+                            ->addMustNot(new Query\Exists('project'))
+                            ->addFilter(new Query\Term(['event.projects.id' => $projectId]))
+                    )
+                    ->addShould(
+                        (new BoolQuery())
+                            ->addMustNot(new Query\Exists('project'))
+                            ->addFilter(new Query\Term(['proposal.project.id' => $projectId]))
+                    )
+                    ->addShould(
+                        (new BoolQuery())
+                            ->addFilter(new Query\Exists('project'))
+                            ->addFilter(new Query\Term(['project.id' => $projectId]))
+                    )
             );
         }
 

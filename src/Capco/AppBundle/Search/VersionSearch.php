@@ -38,13 +38,17 @@ class VersionSearch extends Search
         bool $isACLDisabled = false
     ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
-        $conditions = [];
-
         if (!$isACLDisabled) {
             if ($viewer && !$viewer->isSuperAdmin()) {
-                $boolQuery
-                    ->addFilter(new BoolQuery())
-                    ->addShould($this->getFiltersForProjectViewerCanSee('project', $viewer));
+                $subBoolQuery = new BoolQuery();
+                $projectViewerCanSeeFilters = $this->getFiltersForProjectViewerCanSee(
+                    'project',
+                    $viewer
+                );
+                foreach ($projectViewerCanSeeFilters as $filter) {
+                    $subBoolQuery->addShould($filter);
+                }
+                $boolQuery->addFilter($subBoolQuery);
             }
 
             if (!$viewer) {

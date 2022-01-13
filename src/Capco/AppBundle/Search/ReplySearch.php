@@ -70,7 +70,7 @@ class ReplySearch extends Search
         if ($filtersStatus) {
             $filterBoolQuery = new BoolQuery();
             foreach ($filtersStatus as $filter) {
-                $filterBoolQuery->addShould([new Term(['replyStatus' => $filter])]);
+                $filterBoolQuery->addShould(new Term(['replyStatus' => $filter]));
             }
             $boolQuery->addFilter($filterBoolQuery);
         }
@@ -84,12 +84,9 @@ class ReplySearch extends Search
         $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
-        $replies = $this->getRepliesHydratedResults(
-            $resultSet,
-            $term
-        );
+        $replies = $this->getRepliesHydratedResults($resultSet, $term);
 
-        $totalCount = $term ? count($replies) : $resultSet->getTotalHits();
+        $totalCount = $term ? \count($replies) : $resultSet->getTotalHits();
 
         return new ElasticsearchPaginatedResult($replies, $cursors, $totalCount);
     }
@@ -165,7 +162,9 @@ class ReplySearch extends Search
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         $results = [];
         foreach ($map as $objectIds) {
-            $replies = $term ? $this->replyRepository->hydrateFromIdsByTerm($objectIds, $term) : $this->replyRepository->hydrateFromIds($objectIds);
+            $replies = $term
+                ? $this->replyRepository->hydrateFromIdsByTerm($objectIds, $term)
+                : $this->replyRepository->hydrateFromIds($objectIds);
             $repliesAnon = $term ? [] : $this->replyAnonymousRepository->hydrateFromIds($objectIds);
             $results = array_merge($repliesAnon, $replies);
         }

@@ -41,9 +41,11 @@ class OpinionSearch extends Search
         $conditions = [];
 
         if ($viewer && !$viewer->isSuperAdmin()) {
-            $conditions[] = (new BoolQuery())->addShould(
-                $this->getFiltersForProjectViewerCanSee('project', $viewer)
-            );
+            $subBoolQuery = new BoolQuery();
+            foreach ($this->getFiltersForProjectViewerCanSee('project', $viewer) as $filter) {
+                $subBoolQuery->addShould($filter);
+            }
+            $conditions[] = $subBoolQuery;
         }
 
         if (!$viewer) {

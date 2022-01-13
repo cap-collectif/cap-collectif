@@ -38,11 +38,10 @@ class ResponseSearch extends Search
 
         // we are applying the same filters as getResponsesByQuestion to avoid counting participant that does not reply to optionnal question
         $boolQuery->addFilter(
-            (new BoolQuery())->addShould([
-                (new BoolQuery())->addFilter(new Exists('objectValue.labels')),
-                (new BoolQuery())->addFilter(new Exists('objectValue.other')),
-                (new BoolQuery())->addFilter(new Exists('textValue')),
-            ])
+            (new BoolQuery())
+                ->addShould((new BoolQuery())->addFilter(new Exists('objectValue.labels')))
+                ->addShould((new BoolQuery())->addFilter(new Exists('objectValue.other')))
+                ->addShould((new BoolQuery())->addFilter(new Exists('textValue')))
         );
         $query = new Query($boolQuery);
         $query
@@ -82,11 +81,10 @@ class ResponseSearch extends Search
     ): ElasticsearchPaginatedResult {
         $boolQuery = $this->getNoEmptyResultQueryBuilder($question, $withNotConfirmedUser);
         $boolQuery->addFilter(
-            (new BoolQuery())->addShould([
-                (new BoolQuery())->addFilter(new Exists('objectValue.labels')),
-                (new BoolQuery())->addFilter(new Exists('objectValue.other')),
-                (new BoolQuery())->addFilter(new Exists('textValue')),
-            ])
+            (new BoolQuery())
+                ->addShould((new BoolQuery())->addFilter(new Exists('objectValue.other')))
+                ->addShould((new BoolQuery())->addFilter(new Exists('objectValue.labels')))
+                ->addShould((new BoolQuery())->addFilter(new Exists('textValue')))
         );
 
         if ($term) {
@@ -146,17 +144,20 @@ class ResponseSearch extends Search
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = (new BoolQuery())->addFilter(
-            (new BoolQuery())->addShould([
-                (new BoolQuery())
-                    ->addMustNot(new Term(['question.type' => ['value' => 'select']]))
-                    ->addFilter(new Exists('objectValue.labels'))
-                    ->addFilter(
-                        new Query\Terms('objectValue.labels', [$questionChoice->getTitle()])
-                    ),
-                (new BoolQuery())->addFilter(
-                    new Query\Term(['textValue.key' => $questionChoice->getTitle()])
-                ),
-            ])
+            (new BoolQuery())
+                ->addShould(
+                    (new BoolQuery())
+                        ->addMustNot(new Term(['question.type' => ['value' => 'select']]))
+                        ->addFilter(new Exists('objectValue.labels'))
+                        ->addFilter(
+                            new Query\Terms('objectValue.labels', [$questionChoice->getTitle()])
+                        )
+                )
+                ->addShould(
+                    (new BoolQuery())->addFilter(
+                        new Query\Term(['textValue.key' => $questionChoice->getTitle()])
+                    )
+                )
         );
 
         if ($question = $questionChoice->getQuestion()) {
@@ -223,10 +224,9 @@ class ResponseSearch extends Search
             ($question instanceof MultipleChoiceQuestion &&
                 AbstractQuestion::QUESTION_TYPE_SELECT === $question->getType())
         ) {
-            $boolQuery->addShould([
-                (new BoolQuery())->addFilter(new Exists('objectValue')),
-                (new BoolQuery())->addFilter(new Exists('textValue')),
-            ]);
+            $boolQuery
+                ->addShould((new BoolQuery())->addFilter(new Exists('objectValue')))
+                ->addShould((new BoolQuery())->addFilter(new Exists('textValue')));
         }
 
         if ($question instanceof SimpleQuestion) {

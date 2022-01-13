@@ -30,6 +30,7 @@ class ProposalFollowerConnection implements ResolverInterface
             $criteria = [
                 'proposal' => $proposal,
             ];
+
             try {
                 $followers = $this->userRepository
                     ->getByCriteriaOrdered($criteria, $orderBy, $limit, $offset)
@@ -37,6 +38,7 @@ class ProposalFollowerConnection implements ResolverInterface
                     ->getArrayCopy();
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
                 throw new \RuntimeException('Find following proposal by user failed');
             }
 

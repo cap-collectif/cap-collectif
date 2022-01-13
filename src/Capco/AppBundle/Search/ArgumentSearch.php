@@ -58,16 +58,14 @@ class ArgumentSearch extends Search
                 $this->getFiltersForProjectViewerCanSee('project', $viewer);
             }
 
-            $boolQuery->addMustNot(
-                array_merge(
-                    [
-                        new Query\Term(['published' => ['value' => false]]),
-                        new Query\Exists('comment'),
-                        new Query\Term(['draft' => ['value' => true]]),
-                    ],
-                    !$includeTrashed ? [new Query\Exists('trashedAt')] : []
-                )
-            );
+            $boolQuery
+                ->addMustNot(new Query\Term(['published' => ['value' => false]]))
+                ->addMustNot(new Query\Exists('comment'))
+                ->addMustNot(new Query\Term(['draft' => ['value' => true]]));
+
+            if (!$includeTrashed) {
+                $boolQuery->addMustNot(new Query\Exists('trashedAt'));
+            }
 
             if (!$includeUnpublished) {
                 $boolQuery->addFilter(new Term(['published' => ['value' => true]]));

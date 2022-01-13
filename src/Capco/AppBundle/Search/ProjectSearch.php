@@ -65,13 +65,11 @@ class ProjectSearch extends Search
             unset($providedFilters['withEventOnly']);
         }
 
-        $locale = null;
         if (isset($providedFilters['locale'])) {
             $localeBoolQuery = new Query\BoolQuery();
-            $localeBoolQuery->addShould([
-                new Term(['locale.id' => ['value' => $providedFilters['locale']]]),
-                (new Query\BoolQuery())->addMustNot(new Exists('locale')),
-            ]);
+            $localeBoolQuery
+                ->addShould(new Term(['locale.id' => ['value' => $providedFilters['locale']]]))
+                ->addShould((new Query\BoolQuery())->addMustNot(new Exists('locale')));
             $boolQuery->addFilter($localeBoolQuery);
             unset($providedFilters['locale']);
         }

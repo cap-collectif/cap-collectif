@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Behat;
 
 use Elastica\Snapshot;
+use Elasticsearch\Endpoints\Indices\Open;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
 use Capco\AppBundle\Utils\Text;
@@ -149,7 +150,7 @@ class ApplicationContext extends UserContext
             REPOSITORY_NAME,
             SNAPSHOT_NAME,
             ['indices' => $this->indexManager->getLiveSearchIndexName()],
-            'true'
+            true
         );
         $this->cookieConsented = !$this->isSuiteWithJS($suite);
     }
@@ -182,11 +183,21 @@ class ApplicationContext extends UserContext
         }
 
         echo 'Restoring ElasticSearch snapshot.' . \PHP_EOL;
+
         /** @var IndexBuilder $indexManager */
         $indexManager = $this->getService(IndexBuilder::class);
         $indexManager->getLiveSearchIndex()->close();
-        $this->snapshot->restoreSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [], 'true');
-        $indexManager->getLiveSearchIndex()->open();
+        $this->snapshot->restoreSnapshot(
+            REPOSITORY_NAME,
+            SNAPSHOT_NAME,
+            [
+                'feature_states' => ['geoip'],
+            ],
+            true
+        );
+        $openRequest = new Open();
+        $openRequest->setParams(['wait_for_active_shards' => 1]);
+        $indexManager->getLiveSearchIndex()->requestEndpoint($openRequest);
         $indexManager->markAsLive(
             $indexManager->getClient()->getIndex($indexManager->getLastIndexRealName())
         );

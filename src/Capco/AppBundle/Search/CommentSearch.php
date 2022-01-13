@@ -99,24 +99,25 @@ class CommentSearch extends Search
     {
         $boolQuery = new BoolQuery();
         $boolQuery->addFilter(
-            (new BoolQuery())->addShould([
-                (new BoolQuery())->addMustNot([new Exists('proposal')]),
-                (new BoolQuery())
-                    ->addFilter(
-                        new Term([
-                            'proposal.project.visibility' => [
-                                'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
-                            ],
-                        ])
-                    )
-                    ->addFilter(new Term(['proposal.visible' => ['value' => true]])),
-            ])
+            (new BoolQuery())
+                ->addShould((new BoolQuery())->addMustNot(new Exists('proposal')))
+                ->addShould(
+                    (new BoolQuery())
+                        ->addFilter(
+                            new Term([
+                                'proposal.project.visibility' => [
+                                    'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                                ],
+                            ])
+                        )
+                        ->addFilter(new Term(['proposal.visible' => ['value' => true]]))
+                )
         );
         $boolQuery
             ->addFilter(new Term(['published' => ['value' => true]]))
             ->addFilter(new Term(['author.id' => ['value' => $author->getId()]]));
 
-        $boolQuery->addMustNot([new Exists('trashedStatus')]);
+        $boolQuery->addMustNot(new Exists('trashedStatus'));
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
@@ -132,23 +133,22 @@ class CommentSearch extends Search
         ];
 
         if ($viewer !== $author && !$viewer->isSuperAdmin()) {
-            $adminSubConditions = [];
             $superAdminSubConditions = $this->getFiltersForProjectViewerCanSee(
                 'proposal.project',
                 $viewer
             );
-            if (!$viewer->isAdmin()) {
-                $adminSubConditions = [new Term(['proposal.visible' => ['value' => true]])];
+            $subBoolQuery = new BoolQuery();
+            $superAdminBoolQuery = new BoolQuery();
+            foreach ($superAdminSubConditions as $superAdminSubCondition) {
+                $superAdminBoolQuery->addShould($superAdminSubCondition);
             }
-            $conditions[] = (new BoolQuery())->addShould([
-                (new BoolQuery())->addMustNot([new Exists('proposal')]),
-                (new BoolQuery())->addMust(
-                    array_merge(
-                        [(new BoolQuery())->addShould($superAdminSubConditions)],
-                        $adminSubConditions
-                    )
-                ),
-            ]);
+            $subBoolQuery->addMust($superAdminBoolQuery)->addMust($superAdminBoolQuery);
+            if (!$viewer->isAdmin()) {
+                $subBoolQuery->addMust(new Term(['proposal.visible' => ['value' => true]]));
+            }
+            $conditions[] = (new BoolQuery())
+                ->addShould((new BoolQuery())->addMustNot(new Exists('proposal')))
+                ->addShould($subBoolQuery);
         }
 
         foreach ($conditions as $condition) {

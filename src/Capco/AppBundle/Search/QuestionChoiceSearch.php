@@ -64,15 +64,18 @@ class QuestionChoiceSearch extends Search
                     $query->setSort(['_score' => ['order' => 'asc'], 'id' => new \stdClass()]);
                 } else {
                     $sanitizedTerm = Sanitizer::escape($term, [' ']);
-                    $boolQuery->addShould([
-                        (new Query\QueryString(
-                            $sanitizedTerm . '~' . self::FUZZINNESS_LEVEL
-                        ))->setFields(['label']),
-                        (new Query\MatchPhrasePrefix())
-                            ->setFieldQuery('label', $sanitizedTerm)
-                            ->setFieldMaxExpansions('label'),
-                        new Query\MatchQuery('label', $sanitizedTerm),
-                    ]);
+                    $boolQuery
+                        ->addShould(
+                            (new Query\MatchPhrasePrefix())
+                                ->setFieldQuery('label', $sanitizedTerm)
+                                ->setFieldMaxExpansions('label')
+                        )
+                        ->addShould(
+                            (new Query\QueryString(
+                                $sanitizedTerm . '~' . self::FUZZINNESS_LEVEL
+                            ))->setFields(['label'])
+                        )
+                        ->addShould(new Query\MatchQuery('label', $sanitizedTerm));
                     $query->setQuery($boolQuery);
                     $query->setSort(['_score' => ['order' => 'desc'], 'id' => new \stdClass()]);
                     $query->setMinScore(0.1);
