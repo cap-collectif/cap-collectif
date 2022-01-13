@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Elastica\Aggregation\AbstractTermsAggregation;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\Terms;
 use Elastica\Index;
@@ -197,11 +198,40 @@ class ResponseSearch extends Search
         $agg = new Terms('tagCloud');
         $agg->setOrder('_count', 'desc');
         $agg->setField('textValue.tag')->setSize($size);
+        $agg = $this->setTagCloudBucketMinOccurrences($agg, $question);
         $query->addAggregation($agg);
         $this->addObjectTypeFilter($query, $this->type);
         $query->setTrackTotalHits(true);
 
         return $this->index->search($query);
+    }
+
+    private function setTagCloudBucketMinOccurrences(
+        AbstractTermsAggregation $agg,
+        AbstractQuestion $question
+    ): AbstractTermsAggregation {
+        $responsesCount = $question->getResponses()->count();
+        // We set a different minimumOccurrences value that depends on the responses count of the question.
+        switch ($responsesCount) {
+            case $responsesCount <= 10:
+                $agg->setMinimumDocumentCount(2);
+
+                break;
+            case $responsesCount <= 20:
+                $agg->setMinimumDocumentCount(3);
+
+                break;
+            case $responsesCount <= 25:
+                $agg->setMinimumDocumentCount(4);
+
+                break;
+            default:
+                $agg->setMinimumDocumentCount(5);
+
+                break;
+        }
+
+        return $agg;
     }
 
     private function getNoEmptyResultQueryBuilder(

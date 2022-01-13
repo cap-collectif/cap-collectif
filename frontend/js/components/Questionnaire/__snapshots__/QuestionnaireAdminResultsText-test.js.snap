@@ -4,83 +4,37 @@ exports[`<QuestionnaireAdminResultsText /> renders correctly simpleQuestion resp
 <div
   className="mb-20"
 >
-  <ForwardRef>
-    <Text
-      fontWeight="600"
-      mr={2}
-      uppercase={true}
-    >
-      <FormattedMessage
-        id="see.by"
-        values={Object {}}
-      />
-    </Text>
-    <Menu>
-      <Menu.Button>
-        <QuestionnaireAdminResultsText___StyledButton
-          color="blue.500"
-          rightIcon="ARROW_DOWN_O"
-          variant="tertiary"
-        >
-          <FormattedMessage
-            id="question.display.tag_cloud"
-            values={Object {}}
-          />
-        </QuestionnaireAdminResultsText___StyledButton>
-      </Menu.Button>
-      <Menu.List
-        aria-label="question.display.tag_cloud"
-      >
-        <Menu.OptionGroup
-          onChange={[Function]}
-          type="radio"
-          value="tagCloud"
-        >
-          <Menu.OptionItem
-            value="tagCloud"
-          >
-            <FormattedMessage
-              id="question.display.tag_cloud"
-              values={Object {}}
-            />
-          </Menu.OptionItem>
-          <Menu.OptionItem
-            value="list"
-          >
-            <FormattedMessage
-              id="question.display.list"
-              values={Object {}}
-            />
-          </Menu.OptionItem>
-        </Menu.OptionGroup>
-      </Menu.List>
-    </Menu>
-  </ForwardRef>
   <div
-    style={
-      Object {
-        "margin": "auto",
-        "marginTop": "20",
-        "maxWidth": 650,
-      }
-    }
+    className="mt-20"
   >
-    <ForwardRef
-      maxSize={45}
-      minSize={12}
-      tags={
-        Array [
-          Object {
-            "marginBottom": -12,
-            "tag": Object {
-              "count": 6,
-              "onClick": [Function],
-              "value": "reponse",
-            },
-          },
-        ]
-      }
-    />
+    <ListGroupFlush
+      striped={true}
+    >
+      <QuestionnaireAdminResultsTextAnswerItem
+        key="8Y97"
+        value="<p><span class=\\"ql-size-large\\">heeey</span></p><p><strong>c'est ma réponse</strong></p>"
+      />
+      <QuestionnaireAdminResultsTextAnswerItem
+        key="865497"
+        value="c'est ma réponse"
+      />
+      <QuestionnaireAdminResultsTextAnswerItem
+        key="8697"
+        value="<p>c'est ma réponse</p>"
+      />
+      <QuestionnaireAdminResultsTextAnswerItem
+        key="898977"
+        value="<p><strong>c'est ma réponse</strong></p>"
+      />
+      <QuestionnaireAdminResultsTextAnswerItem
+        key="97"
+        value="<p>c'est une autre réponse</p>"
+      />
+      <QuestionnaireAdminResultsTextAnswerItem
+        key="89"
+        value="<p>c'est une sixième réponse</p>"
+      />
+    </ListGroupFlush>
   </div>
 </div>
 `;

@@ -27,7 +27,7 @@ export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement
     const [responseSearchTag, setResponseSearchTag] = useState<?{| value: string, count: number |}>(
       null,
     );
-    const [view, setView] = useState<VIEW>('tagCloud');
+    const [view, setView] = useState<VIEW>('list');
     const intl = useIntl();
 
     const tags = useMemo(
@@ -58,44 +58,43 @@ export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement
     if (simpleQuestion?.responses?.edges) {
       return (
         <div className="mb-20">
-          <Flex>
-            <Text uppercase mr={2} fontWeight="600">
-              <FormattedMessage id="see.by" />
-            </Text>
-            <Menu>
-              <Menu.Button>
-                <Button
-                  variant="tertiary"
-                  rightIcon="ARROW_DOWN_O"
-                  color="blue.500"
-                  css={{ textTransform: 'uppercase' }}>
-                  {view === 'list' ? (
-                    <FormattedMessage id="question.display.list" />
-                  ) : (
-                    <FormattedMessage id="question.display.tag_cloud" />
-                  )}
-                </Button>
-              </Menu.Button>
-              <Menu.List
-                aria-label={
-                  view === 'list'
-                    ? intl.formatMessage({ id: 'question.display.list' })
-                    : intl.formatMessage({ id: 'question.display.tag_cloud' })
-                }>
-                <Menu.OptionGroup
-                  onChange={value => setView(value === 'tagCloud' ? 'tagCloud' : 'list')}
-                  type="radio"
-                  value={view}>
-                  <Menu.OptionItem value="tagCloud">
-                    <FormattedMessage id="question.display.tag_cloud" />
-                  </Menu.OptionItem>
-                  <Menu.OptionItem value="list">
-                    <FormattedMessage id="question.display.list" />
-                  </Menu.OptionItem>
-                </Menu.OptionGroup>
-              </Menu.List>
-            </Menu>
-          </Flex>
+          {tags.length >= 3 && (
+            <Flex>
+              <Text uppercase mr={2} fontWeight="600">
+                <FormattedMessage id="see.by" />
+              </Text>
+              <Menu>
+                <Menu.Button>
+                  <Button
+                    variant="tertiary"
+                    variantColor="hierarchy"
+                    rightIcon="ARROW_DOWN_O"
+                    color="blue.500"
+                    css={{ textTransform: 'uppercase' }}>
+                    <FormattedMessage
+                      id={view === 'list' ? 'question.display.list' : 'question.display.tag_cloud'}
+                    />
+                  </Button>
+                </Menu.Button>
+                <Menu.List
+                  aria-label={intl.formatMessage({
+                    id: view === 'list' ? 'question.display.list' : 'question.display.tag_cloud',
+                  })}>
+                  <Menu.OptionGroup
+                    onChange={value => setView(value === 'tagCloud' ? 'tagCloud' : 'list')}
+                    type="radio"
+                    value={view}>
+                    <Menu.OptionItem value="tagCloud">
+                      <FormattedMessage id="question.display.tag_cloud" />
+                    </Menu.OptionItem>
+                    <Menu.OptionItem value="list">
+                      <FormattedMessage id="question.display.list" />
+                    </Menu.OptionItem>
+                  </Menu.OptionGroup>
+                </Menu.List>
+              </Menu>
+            </Flex>
+          )}
           {view === 'list' ? (
             <div className="mt-20">
               <ListGroupFlush striped>
@@ -125,9 +124,11 @@ export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement
               )}
             </div>
           ) : (
-            <div style={{ margin: 'auto', maxWidth: 650, marginTop: '20' }}>
-              <TagCloud tags={tags} minSize={12} maxSize={45} ref={ref} />
-            </div>
+            tags.length >= 3 && (
+              <div style={{ maxWidth: 650, marginTop: '20' }}>
+                <TagCloud tags={tags} minSize={12} maxSize={40} ref={ref} />
+              </div>
+            )
           )}
           {responseSearchTag && (
             <ModalResponseTagSearchResults

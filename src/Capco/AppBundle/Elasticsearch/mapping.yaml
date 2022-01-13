@@ -38,6 +38,7 @@ settings:
                 type: stop
                 tokenizer: standard
                 stopwords: _french_
+                remove_trailing: true
                 filter: ['lowercase', 'icu_folding', 'french_elision']
                 char_filter: ['html_strip']
 

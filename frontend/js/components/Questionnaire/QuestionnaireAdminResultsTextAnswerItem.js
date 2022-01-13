@@ -20,6 +20,12 @@ const TRUNCATED_PREVIEW = 48;
 const alterString = (str: string, substr: string, readMore: boolean) => {
   let text = str;
   const strRegExp = new RegExp(substr, 'gi');
+  if (text.length <= TRUNCATED_LENGTH) {
+    return str.replace(
+      strRegExp,
+      `<span style="font-weight:600;color:${colors.blue[900]};">${substr}</span>`,
+    );
+  }
   const index = text.toLowerCase().indexOf(substr.toLowerCase());
   if (index > TRUNCATED_PREVIEW && !readMore) text = `...${text.substr(index - TRUNCATED_PREVIEW)}`;
   const newIndex = text.toLowerCase().indexOf(substr.toLowerCase());
