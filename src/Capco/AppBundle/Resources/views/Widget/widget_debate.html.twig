@@ -31,5 +31,6 @@
     <script type="text/javascript">
       {% include '@CapcoApp/window.js.twig' %}
     </script>
+    {% if step.customCode is defined and step.customCode != '' %}{{ step.customCode | raw }}{% endif %}
 {% endblock %}
 
