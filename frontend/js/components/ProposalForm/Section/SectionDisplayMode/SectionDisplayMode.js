@@ -45,6 +45,8 @@ export const LOCATION_PARIS = {
   lng: 2.3488,
 };
 
+const ZOOM_CITY = 9;
+
 export const zoomLevels = [
   { id: 1, name: 'map.zoom.world' },
   { id: 2 },
@@ -122,7 +124,7 @@ const getZoomDependOfAddress = (addressType?: AddressType) => {
       return zoomLevels[14];
     case 'locality':
     default:
-      return zoomLevels[9];
+      return zoomLevels[ZOOM_CITY];
   }
 };
 
@@ -244,10 +246,10 @@ export const SectionDisplayMode = ({
   const setAddress = (address: AddressComplete) => setAddressSelected(address);
 
   React.useEffect(() => {
-    if (isMapDisplay && refMap) {
+    if (isMapDisplay && refMap && proposalForm) {
       // default position if no one
       if (!latitude || !longitude || !zoom) {
-        const zoomCity = zoomLevels[9].id;
+        const zoomCity = zoomLevels[ZOOM_CITY].id;
         getLocationUser(LOCATION_PARIS.lat, LOCATION_PARIS.lng, zoomCity);
       } else if (!previewLocation) {
         const addressFormatted = formatAddressFromGoogleAddress(JSON.parse(dataMap.json)[0]);
@@ -257,7 +259,7 @@ export const SectionDisplayMode = ({
           getLocationUser(
             addressFormatted.latLng.lat,
             addressFormatted.latLng.lng,
-            zoomLevels[9].id,
+            zoomLevels[ZOOM_CITY].id,
           );
         } else {
           const zoomLevel = zoom ? { id: zoom } : getZoomDependOfAddress(addressFormatted.type);
@@ -287,6 +289,7 @@ export const SectionDisplayMode = ({
     dataMap,
     previewLocation,
     getLocationUser,
+    proposalForm,
   ]);
 
   React.useEffect(() => {
@@ -311,7 +314,10 @@ export const SectionDisplayMode = ({
 
   React.useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
-  }, []);
+    if (refMap.current) {
+      refMap.current.setZoom(zoom);
+    }
+  }, [zoom, refMap]);
 
   return (
     <Panel id="display-mode">
@@ -507,13 +513,19 @@ export const SectionDisplayMode = ({
   );
 };
 
-const mapStateToProps = (state: GlobalState, { formName }: Props) => {
+const mapStateToProps = (state: GlobalState, { formName, proposalForm }: Props) => {
   const formSelector = formValueSelector(formName);
   return {
-    latitude: formSelector(state, 'mapCenter')?.lat,
-    longitude: formSelector(state, 'mapCenter')?.lng,
-    dataMap: formSelector(state, 'mapCenter'),
-    zoom: formSelector(state, 'zoomMap'),
+    latitude: formSelector(state, 'mapCenter')?.lat
+      ? formSelector(state, 'mapCenter')?.lat
+      : proposalForm?.mapCenter?.lat,
+    longitude: formSelector(state, 'mapCenter')?.lng
+      ? formSelector(state, 'mapCenter')?.lng
+      : proposalForm?.mapCenter?.lng,
+    dataMap: formSelector(state, 'mapCenter')
+      ? formSelector(state, 'mapCenter')
+      : proposalForm?.mapCenter,
+    zoom: formSelector(state, 'zoomMap') ? formSelector(state, 'zoomMap') : proposalForm.zoomMap,
     isMapViewEnabled: formSelector(state, 'viewEnabled')?.isMapViewEnabled,
     errorViewEnabled: getFormSyncErrors(formName)(state)?.viewEnabled,
   };
@@ -527,6 +539,12 @@ export default createFragmentContainer(SectionDisplayModeConnected, {
   proposalForm: graphql`
     fragment SectionDisplayMode_proposalForm on ProposalForm {
       ...PopoverToggleView_proposalForm
+      mapCenter {
+        lat
+        lng
+        json
+      }
+      zoomMap
       step {
         project {
           firstCollectStep {

@@ -1979,7 +1979,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "51ecf93920c84230b5420afe462d7b7b",
+          "cacheID": "5244098b08ec0a2a02e5cf4c5bb8ec2c",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2337,6 +2337,12 @@ fragment ProposalFormAdminSettingsForm_proposalForm on ProposalForm {
 
 fragment SectionDisplayMode_proposalForm on ProposalForm {
   ...PopoverToggleView_proposalForm
+  mapCenter {
+    lat
+    lng
+    json
+  }
+  zoomMap
   step {
     project {
       firstCollectStep {

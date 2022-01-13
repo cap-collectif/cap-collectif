@@ -9,6 +9,7 @@ export type MapCenterObject = {|
 export type MapProps = {
   flyTo: (Array<number>, ?number) => void,
   setView: (Array<number>, ?number) => void,
+  setZoom: (?number) => void,
   panTo: (?Array<number> | null) => void,
   getPanes: () => { markerPane?: { children: Array<HTMLImageElement> } } | null,
   removeLayer: (typeof L.Marker) => void,
