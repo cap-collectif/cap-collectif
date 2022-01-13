@@ -15,7 +15,7 @@ export const defaultFeatureFlags: FeatureFlags = {
     members_list: false,
     captcha: false,
     beta__admin_editor: false,
-    new_feature_questionnaire_result: false,
+    beta__questionnaire_result: false,
     consent_external_communication: false,
     consent_internal_communication: false,
     newsletter: false,
@@ -48,20 +48,31 @@ export const defaultFeatureFlags: FeatureFlags = {
     external_project: false,
     multilangue: false,
     display_pictures_in_event_list: false,
-    unstable__emailing: false,
-    unstable__emailing_parameters: false,
+    beta__emailing: false,
+    beta__emailing_parameters: false,
     proposal_revisions: false,
     unstable__tipsmeee: false,
     unstable__new_consultation_page: false,
-    unstable__new_project_card: false,
     import_proposals: false,
     beta__analytics_page: false,
     http_redirects: false,
-    unstable_project_admin: false,
+    unstable__project_admin: false,
     developer_documentation: false,
     export_legacy_users: false,
     graphql_query_analytics: false,
+    noindex_on_profiles: false,
+    new_project_card: false,
+    indexation: false,
+    twilio: false,
+    remind_user_account_confirmation: false,
+    unstable__anonymous_questionnaire: false,
+    login_cas: false,
+    login_openid: false,
+    public_api: false,
+    sentry_log: false,
+    versions: false,
     unstable__paper_vote: false,
+    graphql_introspection: false,
 };
 
 const getRedisFeatureFlagKey = (flag: string) => {
@@ -69,7 +80,7 @@ const getRedisFeatureFlagKey = (flag: string) => {
 };
 
 export const decodePHPFlag = (encodedFlag: string): boolean => {
-    return encodedFlag.includes('i:1;}');
+    return encodedFlag.includes(';i:2;');
 };
 
 const getFeatureFlags = async (): FeatureFlags => {

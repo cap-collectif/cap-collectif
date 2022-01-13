@@ -184,7 +184,7 @@
         "@babel/preset-flow": "^7.0.0",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-stage-0": "^7.0.0",
-        "@cap-collectif/ui": "^0.6.0",
+        "@cap-collectif/ui": "^0.7.1",
         "@emotion/cache": "^10.0.29",
         "@emotion/core": "^10.0.35",
         "@formatjs/intl-pluralrules": "^4.1.0",

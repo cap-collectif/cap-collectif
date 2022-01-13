@@ -1,0 +1,381 @@
+[
+    {
+        "id": "general",
+        "title": "global.general",
+        "groups": [
+            {
+                "title": "global.users",
+                "description": "description.group.users",
+                "onlySuperAdmin": false,
+                "items": {
+                    "members_list": {
+                        "title": "capco.module.members_list",
+                        "description": "description.module.members_list",
+                        "onlySuperAdmin": false
+                    },
+                    "profiles": {
+                        "title": "capco.module.profiles",
+                        "description": "description.module.profiles",
+                        "onlySuperAdmin": false
+                    },
+                    "noindex_on_profiles": {
+                        "title": "capco.module.noindex_on_profiles",
+                        "description": "description.module.noindex_on_profiles",
+                        "onlySuperAdmin": true
+                    },
+                    "export_legacy_users": {
+                        "title": "capco.module.export_legacy_users",
+                        "description": "",
+                        "onlySuperAdmin": true
+                    }
+                }
+            },
+            {
+
+                "title": "admin.group.others",
+                "description": "description.group.others",
+                "onlySuperAdmin": false,
+                "items": {
+                    "share_buttons": {
+                        "title": "capco.module.share_buttons",
+                        "description": "description.module.share_buttons",
+                        "onlySuperAdmin": false
+                    },
+                    "newsletter": {
+                        "title": "capco.module.newsletter",
+                        "description": "description.module.newsletter",
+                        "onlySuperAdmin": false
+                    },
+                    "external_project": {
+                        "title": "capco.module.external_project",
+                        "description": "description.module.external_project",
+                        "onlySuperAdmin": false
+                    },
+                    "reporting": {
+                        "title": "capco.module.reporting",
+                        "description": "description.module.reporting",
+                        "onlySuperAdmin": false
+                    },
+                    "privacy_policy": {
+                        "title": "capco.module.privacy_policy",
+                        "description": "description.module.privacy-policy",
+                        "onlySuperAdmin": true
+                    },
+                    "export": {
+                        "title": "capco.module.export",
+                        "description": "description.module.export",
+                        "onlySuperAdmin": true
+                    },
+                    "indexation": {
+                        "title": "capco.module.indexation",
+                        "description": "description.module.indexation",
+                        "onlySuperAdmin": true
+                    },
+                    "multilangue": {
+                        "title": "capco.module.multilangue",
+                        "description": "description.module.multilangue",
+                        "onlySuperAdmin": true
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": "custom",
+        "title": "global-customization",
+        "groups": [
+            {
+                "title": "admin.group.display",
+                "description": "description.group.display",
+                "onlySuperAdmin": false,
+                "items": {
+                    "display_pictures_in_depository_proposals_list": {
+                        "title": "capco.module.pictures_proposals",
+                        "description": "description.module.pictures_proposals",
+                        "onlySuperAdmin": false
+                    },
+                    "display_pictures_in_event_list": {
+                        "title": "capco.module.pictures_events",
+                        "description": "description.module.pictures_events",
+                        "onlySuperAdmin": false
+                    },
+                    "new_project_card": {
+                        "title": "capco.module.new_project_card",
+                        "description": "description.module.new_project_card",
+                        "onlySuperAdmin": false
+                    },
+                    "display_map": {
+                        "title": "capco.module.display_map",
+                        "description": "description.module.display_map",
+                        "onlySuperAdmin": false
+                    },
+                    "read_more": {
+                        "title": "capco.module.read_more",
+                        "description": "description.module.read_more",
+                        "onlySuperAdmin": false
+                    },
+                    "search": {
+                        "title": "capco.module.search",
+                        "description": "description.module.search",
+                        "onlySuperAdmin": true
+                    },
+                    "http_redirects": {
+                        "title": "capco.module.http_redirects",
+                        "description": "description.module.http_redirects",
+                        "onlySuperAdmin": true
+                    }
+                }
+            },
+            {
+                "title": "admin.group.content",
+                "description": "description.group.content",
+                "onlySuperAdmin": false,
+                "items": {
+                    "blog": {
+                        "title": "capco.module.blog",
+                        "description": "description.module.blog",
+                        "onlySuperAdmin": false
+                    },
+                    "calendar": {
+                        "title": "capco.module.calendar",
+                        "description": "description.module.calendar",
+                        "onlySuperAdmin": false
+                    },
+                    "unstable__remote_events": {
+                        "title": "capco.module.remote_events",
+                        "description": "",
+                        "onlySuperAdmin": true,
+                        "dependOf": ["calendar"]
+                    },
+                    "themes": {
+                        "title": "capco.module.themes",
+                        "description": "description.module.themes",
+                        "onlySuperAdmin": false
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": "applications-tools",
+        "title": "global.applications.and.tools",
+        "groups": [
+            {
+                "title": "global.collect.step.label",
+                "description": "description.group.collect-step",
+                "onlySuperAdmin": false,
+                "items": {
+                    "districts": {
+                        "title": "global.district",
+                        "description": "description.module.district",
+                        "onlySuperAdmin": false
+                    },
+                    "votes_min": {
+                        "title": "capco.module.vote_min",
+                        "description": "description.module.vote_min",
+                        "onlySuperAdmin": false
+                    },
+                    "unstable__tipsmeee": {
+                        "title": "capco.module.tipsmeee",
+                        "description": "",
+                        "onlySuperAdmin": true
+                    }
+                }
+            },
+            {
+                "title": "global.questionnaire",
+                "description": "description.group.questionnaire",
+                "onlySuperAdmin": true,
+                "items": {
+                    "beta__questionnaire_result": {
+                        "title": "capco.module.questionnaire_result",
+                        "description": "description.module.questionnaire_result",
+                        "onlySuperAdmin": false
+                    }
+                }
+            },
+            {
+                "title": "global.consultation",
+                "description": "description.group.consultation",
+                "onlySuperAdmin": false,
+                "items": {
+                    "consultation_plan": {
+                        "title": "capco.module.consultation_plan",
+                        "description": "description.module.consultation_plan",
+                        "onlySuperAdmin": false
+                    },
+                    "versions": {
+                        "title": "capco.module.versions",
+                        "description": "description.module.versions",
+                        "onlySuperAdmin": false
+                    }
+                }
+            },
+            {
+                "title": "global.external_services",
+                "description": "description.group.external-services",
+                "onlySuperAdmin": true,
+                "items": {
+                    "twilio": {
+                        "title": "capco.module.twilio",
+                        "description": "description.module.twilio",
+                        "onlySuperAdmin": false
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": "infra",
+        "title": "global.infra",
+        "groups": [
+            {
+                "title": "admin.group.authentication",
+                "description": "description.group.authentication",
+                "onlySuperAdmin": true,
+                "items": {
+                    "remind_user_account_confirmation": {
+                        "title": "capco.module.remind_user_account_confirmation",
+                        "description": "description.module.remind_user_account_confirmation",
+                        "onlySuperAdmin": false
+                    },
+                    "login_franceconnect": {
+                        "title": "france_connect",
+                        "description": "description.module.france_connect",
+                        "onlySuperAdmin": false
+                    },
+                    "login.openid": {
+                        "title": "global.openId",
+                        "description": "description.module.openId",
+                        "onlySuperAdmin": false
+                    },
+                    "disconnect_openid": {
+                        "title": "capco.module.disconnect_openid",
+                        "description": "",
+                        "onlySuperAdmin": false,
+                        "dependOf": ["openid"]
+                    },
+                    "login_saml": {
+                        "title": "saml",
+                        "description": "description.module.saml",
+                        "onlySuperAdmin": false
+                    },
+                    "login_paris": {
+                        "title": "mon_compte_paris",
+                        "description": "description.module.mon_compte_paris",
+                        "onlySuperAdmin": false
+                    },
+                    "login_cas": {
+                        "title": "CAS",
+                        "description": "description.module.cas",
+                        "onlySuperAdmin": false
+                    }
+                }
+            },
+            {
+                "title": "API",
+                "description": "description.group.api",
+                "onlySuperAdmin": false,
+                "items": {
+                    "public_api": {
+                        "title": "capco.module.public_api",
+                        "description": "description.module.public_api",
+                        "onlySuperAdmin": false
+                    },
+                    "developer_documentation": {
+                        "title": "capco.module.developer_documentation",
+                        "description": "description.module.developer_documentation",
+                        "onlySuperAdmin": false
+                    }
+                }
+            },
+            {
+                "title": "admin.group.developer",
+                "description": "description.group.developer",
+                "onlySuperAdmin": true,
+                "items": {
+                    "sentry_log": {
+                        "title": "capco.module.sentry_log",
+                        "description": "description.module.sentry_log",
+                        "onlySuperAdmin": false
+                    },
+                    "report_browers_errors_to_sentry": {
+                        "title": "capco.module.report_browers_errors_to_sentry",
+                        "description": "description.module.report_browers_errors_to_sentry",
+                        "onlySuperAdmin": false
+                    },
+                    "beta__analytics_page": {
+                        "title": "capco.module.analytics_page",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "beta__emailing": {
+                        "title": "capco.module.emailing",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "beta__emailing_parameters": {
+                        "title": "capco.module.emailing_parameters",
+                        "description": "description.module.emailing_parameters",
+                        "onlySuperAdmin": false
+                    },
+                    "beta__admin_editor": {
+                        "title": "capco.module.admin_editor",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "unstable__anonymous_questionnaire": {
+                        "title": "capco.module.questionnaire__anonymous",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "unstable__project_admin": {
+                        "title": "capco.module.project_admin",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "import_proposals": {
+                        "title": "capco.module.import_proposals",
+                        "description": "description.module.import_proposals",
+                        "onlySuperAdmin": false
+                    },
+                    "proposal_revisions": {
+                        "title": "capco.module.proposal_revisions",
+                        "description": "description.module.proposal_revisions",
+                        "onlySuperAdmin": false
+                    },
+                    "unstable__new_consultation_page": {
+                        "title": "capco.module.new_consultation_page",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "unstable__paper_vote": {
+                        "title": "capco.module.paper_vote",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "captcha": {
+                        "title": "captcha",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "secure_password": {
+                        "title": "capco.module.secure_password",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "restrict_connection": {
+                        "title": "capco.module.restrict_connection",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
+                    "graphql_introspection": {
+                        "title": "capco.module.graphql_introspection",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    }
+                }
+            }
+        ]
+    }
+]

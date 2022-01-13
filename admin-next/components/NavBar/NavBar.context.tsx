@@ -1,8 +1,10 @@
 import * as React from 'react';
 
+export type SetSaving = (saving: boolean) => void;
+
 type NavBarContext = {
     saving: boolean,
-    setSaving: (saving: boolean) => void,
+    setSaving: SetSaving,
 };
 
 type NavBarProviderProps = {

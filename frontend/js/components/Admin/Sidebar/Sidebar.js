@@ -309,10 +309,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     text="admin.label.settings.performance"
                     href="/admin/settings/settings.performance/list"
                   />
-                  <SidebarLink
-                    text="admin.label.settings.modules"
-                    href="/admin/settings/settings.modules/list"
-                  />
+                  <SidebarLink text="admin.label.settings.modules" href="/admin-next/features" />
                   {(!features.beta__emailing ||
                     (features.beta__emailing && !features.beta__emailing_parameters)) && (
                     <SidebarLink
@@ -379,10 +376,12 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     text="admin.label.pages.cookies"
                     href="/admin/settings/pages.cookies/list"
                   />
-                  <SidebarLink
-                    text="admin.label.pages.privacy"
-                    href="/admin/settings/pages.privacy/list"
-                  />
+                  {features.privacy_policy && (
+                    <SidebarLink
+                      text="admin.label.pages.privacy"
+                      href="/admin/settings/pages.privacy/list"
+                    />
+                  )}
                   <SidebarLink
                     text="admin.label.pages.legal"
                     href="/admin/settings/pages.legal/list"

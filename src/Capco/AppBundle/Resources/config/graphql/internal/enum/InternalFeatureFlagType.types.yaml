@@ -155,3 +155,5 @@ InternalFeatureFlagType:
             unstable__paper_vote:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__paper_vote")'
                 description: 'Whether or not the paper vote is enabled.'
+            versions:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::versions")'

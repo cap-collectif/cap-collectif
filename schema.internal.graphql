@@ -5856,6 +5856,7 @@ enum FeatureFlagType {
 
   """Whether or not the paper vote is enabled."""
   unstable__paper_vote
+  versions
 }
 
 """Require a firstname"""

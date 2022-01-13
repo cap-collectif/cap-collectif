@@ -266,7 +266,7 @@
             },
             {
                 "title": "admin.label.settings.modules",
-                "href": "/admin/settings/settings.modules/list",
+                "href": "/admin-next/features",
                 "rolesRequired": [],
                 "featuresRequired": []
             },
@@ -373,7 +373,7 @@
                 "title": "admin.label.pages.privacy",
                 "href": "/admin/settings/pages.privacy/list",
                 "rolesRequired": [],
-                "featuresRequired": []
+                "featuresRequired": ["privacy_policy"]
             },
             {
                 "title": "admin.label.pages.legal",
