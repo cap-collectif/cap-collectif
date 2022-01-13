@@ -70,6 +70,7 @@ class DeleteUserReplyMutation implements MutationInterface
                             'questionnaire_step_title' => $reply->getStep()->getTitle(),
                             'questionnaire_id' => $reply->getQuestionnaire()->getId(),
                             'author_name' => $reply->getAuthor()->getUsername(),
+                            'is_anon_reply' => false,
                         ],
                         'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_DELETE_STATE,
                     ])

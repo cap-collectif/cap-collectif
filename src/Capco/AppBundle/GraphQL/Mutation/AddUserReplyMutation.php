@@ -123,7 +123,7 @@ class AddUserReplyMutation implements MutationInterface
         $this->em->persist($reply);
         $this->em->flush();
 
-        if ($questionnaire && !$reply->isDraft()) {
+        if ($questionnaire->isNotifyResponseCreate() && !$reply->isDraft()) {
             $this->publisher->publish(
                 'questionnaire.reply',
                 new Message(

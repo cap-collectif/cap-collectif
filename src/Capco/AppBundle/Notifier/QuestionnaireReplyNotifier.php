@@ -2,10 +2,14 @@
 
 namespace Capco\AppBundle\Notifier;
 
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousCreateAdminMessage;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousDeleteAdminMessage;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousUpdateAdminMessage;
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyCreateMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyUpdateMessage;
@@ -44,7 +48,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $this->questionnaireRepository = $questionnaireRepository;
     }
 
-    public function onCreate(Reply $reply): void
+    public function onCreate(AbstractReply $reply): void
     {
         if (!$this->isValidReply($reply)) {
             return;
@@ -60,11 +64,17 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
             return;
         }
-        $userUrl = $this->router->generate(
-            'capco_user_profile_show_all',
-            ['slug' => $reply->getAuthor()->getSlug(), '_locale' => $this->defaultLocale],
-            RouterInterface::ABSOLUTE_URL
-        );
+
+        $isAnonReply = $reply instanceof ReplyAnonymous;
+
+        $userUrl = !$isAnonReply
+            ? $this->router->generate(
+                'capco_user_profile_show_all',
+                ['slug' => $reply->getAuthor()->getSlug(), '_locale' => $this->defaultLocale],
+                RouterInterface::ABSOLUTE_URL
+            )
+            : null;
+
         $configUrl = $this->router->generate(
             'admin_capco_app_questionnaire_edit',
             ['id' => $questionnaire->getId(), '_locale' => $this->defaultLocale],
@@ -99,15 +109,19 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
         if ($questionnaire->isNotifyResponseCreate()) {
             $recipientEmail = $questionnaire->getNotificationsConfiguration()->getEmail();
+            $messageType = $isAnonReply
+                ? QuestionnaireReplyAnonymousCreateAdminMessage::class
+                : QuestionnaireReplyCreateAdminMessage::class;
+
             $this->mailer->createAndSendMessage(
-                QuestionnaireReplyCreateAdminMessage::class,
+                $messageType,
                 $reply,
                 $params,
                 null,
                 $recipientEmail
             );
         }
-        if ($questionnaire->isAcknowledgeReplies()) {
+        if ($questionnaire->isAcknowledgeReplies() && !$isAnonReply) {
             if ($reply->getStep()) {
                 $params['endDate'] = $reply->getStep()->getEndAt()
                     ? $this->getLongDate(
@@ -132,7 +146,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         }
     }
 
-    public function onUpdate(Reply $reply): void
+    public function onUpdate(AbstractReply $reply): void
     {
         if (!$this->isValidReply($reply)) {
             return;
@@ -151,11 +165,15 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             return;
         }
 
-        $userUrl = $this->router->generate(
-            'capco_user_profile_show_all',
-            ['slug' => $reply->getAuthor()->getSlug(), '_locale' => $this->defaultLocale],
-            RouterInterface::ABSOLUTE_URL
-        );
+        $isAnonReply = $reply instanceof ReplyAnonymous;
+
+        $userUrl = !$isAnonReply
+            ? $this->router->generate(
+                'capco_user_profile_show_all',
+                ['slug' => $reply->getAuthor()->getSlug(), '_locale' => $this->defaultLocale],
+                RouterInterface::ABSOLUTE_URL
+            )
+            : null;
         $configUrl = $this->router->generate(
             'admin_capco_app_questionnaire_edit',
             ['id' => $questionnaire->getId(), '_locale' => $this->defaultLocale],
@@ -178,8 +196,12 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
         if ($questionnaire->isNotifyResponseUpdate()) {
             $recipientEmail = $questionnaire->getNotificationsConfiguration()->getEmail();
+            $messageType = $isAnonReply
+                ? QuestionnaireReplyAnonymousUpdateAdminMessage::class
+                : QuestionnaireReplyUpdateAdminMessage::class;
+
             $this->mailer->createAndSendMessage(
-                QuestionnaireReplyUpdateAdminMessage::class,
+                $messageType,
                 $reply,
                 [
                     'date' => $this->getLongDate(
@@ -196,7 +218,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $recipientEmail
             );
         }
-        if ($questionnaire->isAcknowledgeReplies()) {
+        if ($questionnaire->isAcknowledgeReplies() && !$isAnonReply) {
             $params = [
                 'date' => $this->getLongDate(
                     $reply->getUpdatedAt(),
@@ -243,11 +265,16 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     {
         $questionnaire = $this->questionnaireRepository->find($reply['questionnaire_id']);
         $recipientEmail = $questionnaire->getNotificationsConfiguration()->getEmail();
-        $userUrl = $this->router->generate(
-            'capco_user_profile_show_all',
-            ['slug' => $reply['author_slug'], '_locale' => $this->defaultLocale],
-            RouterInterface::ABSOLUTE_URL
-        );
+        $isAnonReply = $reply['is_anon_reply'];
+
+        $userUrl = !$isAnonReply
+            ? $this->router->generate(
+                'capco_user_profile_show_all',
+                ['slug' => $reply['author_slug'], '_locale' => $this->defaultLocale],
+                RouterInterface::ABSOLUTE_URL
+            )
+            : null;
+
         $configUrl = $this->router->generate(
             'admin_capco_app_questionnaire_edit',
             ['id' => $reply['questionnaire_id'], '_locale' => $this->defaultLocale],
@@ -255,8 +282,12 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         );
         $date = \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $reply['deleted_at']);
 
+        $messageType = $isAnonReply
+            ? QuestionnaireReplyAnonymousDeleteAdminMessage::class
+            : QuestionnaireReplyDeleteAdminMessage::class;
+
         return $this->mailer->createAndSendMessage(
-            QuestionnaireReplyDeleteAdminMessage::class,
+            $messageType,
             $reply,
             [
                 'userURL' => $userUrl,
@@ -273,7 +304,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         );
     }
 
-    private function isValidReply(Reply $reply): bool
+    private function isValidReply(AbstractReply $reply): bool
     {
         $questionnaire = $reply->getQuestionnaire();
         if (!$questionnaire) {

@@ -7,12 +7,15 @@ use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Form\ReplyAnonymousType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserErrors;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Capco\AppBundle\Utils\RequestGuesser;
@@ -26,7 +29,7 @@ class AddAnonymousReplyMutation implements MutationInterface
     private RequestGuesser $requestGuesser;
     private TokenGeneratorInterface $tokenGenerator;
     private GlobalIdResolver $globalIdResolver;
-
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -35,7 +38,8 @@ class AddAnonymousReplyMutation implements MutationInterface
         LoggerInterface $logger,
         RequestGuesser $requestGuesser,
         TokenGeneratorInterface $tokenGenerator,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -44,6 +48,7 @@ class AddAnonymousReplyMutation implements MutationInterface
         $this->requestGuesser = $requestGuesser;
         $this->tokenGenerator = $tokenGenerator;
         $this->globalIdResolver = $globalIdResolver;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input): array
@@ -77,6 +82,18 @@ class AddAnonymousReplyMutation implements MutationInterface
 
         $this->em->persist($replyAnonymous);
         $this->em->flush();
+
+        if ($questionnaire->isNotifyResponseCreate()) {
+            $this->publisher->publish(
+                'questionnaire.reply',
+                new Message(
+                    json_encode([
+                        'replyId' => $replyAnonymous->getId(),
+                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE,
+                    ])
+                )
+            );
+        }
 
         return ['questionnaire' => $questionnaire, 'reply' => $replyAnonymous, 'token' => $token];
     }

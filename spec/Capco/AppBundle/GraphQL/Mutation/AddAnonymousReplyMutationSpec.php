@@ -12,6 +12,8 @@ use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -28,9 +30,9 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         RequestGuesser $requestGuesser,
         TokenGeneratorInterface $tokenGenerator,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        Publisher $publisher
     ) {
-
         $this->beConstructedWith(
             $em,
             $formFactory,
@@ -38,7 +40,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
             $logger,
             $requestGuesser,
             $tokenGenerator,
-            $globalIdResolver
+            $globalIdResolver,
+            $publisher
         );
     }
 
@@ -57,52 +60,170 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         Form $form,
         EntityManagerInterface $em
-    )
-    {
+    ) {
         $values = [
-            "questionnaireId" => "abc",
-            "responses" => [
+            'questionnaireId' => 'abc',
+            'responses' => [
                 0 => [
-                    "value" => "koko",
-                    "question" => 1403
-                ]
+                    'value' => 'koko',
+                    'question' => 1403,
+                ],
             ],
-            "participantEmail" => null
+            'participantEmail' => null,
         ];
 
         $userAgent = 'ABC';
         $ip = '1.1.1.1.1.1';
         $token = 'token';
-        $requestGuesser->getUserAgent()->shouldBeCalledOnce()->willReturn($userAgent);
-        $requestGuesser->getClientIp()->shouldBeCalledOnce()->willReturn($ip);
-        $tokenGenerator->generateToken()->shouldBeCalledOnce()->willReturn($token);
+        $requestGuesser
+            ->getUserAgent()
+            ->shouldBeCalledOnce()
+            ->willReturn($userAgent);
+        $requestGuesser
+            ->getClientIp()
+            ->shouldBeCalledOnce()
+            ->willReturn($ip);
+        $tokenGenerator
+            ->generateToken()
+            ->shouldBeCalledOnce()
+            ->willReturn($token);
 
+        $input
+            ->getArrayCopy()
+            ->shouldBeCalledOnce()
+            ->willReturn($values);
+        $globalIdResolver
+            ->resolve('abc', null)
+            ->shouldBeCalledOnce()
+            ->willReturn($questionnaire);
 
-        $input->getArrayCopy()->shouldBeCalledOnce()->willReturn($values);
-        $globalIdResolver->resolve('abc', null)->shouldBeCalledOnce()->willReturn($questionnaire);
-
-        $formattedResponses =  [
+        $formattedResponses = [
             0 => [
-                "value" => "koko",
-                "question" => 1403,
-                "position" => 1,
-                "_type" => "value_response"
-            ]
+                'value' => 'koko',
+                'question' => 1403,
+                'position' => 1,
+                '_type' => 'value_response',
+            ],
         ];
-        $responsesFormatter->format($values['responses'])->shouldBeCalledOnce()->willReturn($formattedResponses);
+        $responsesFormatter
+            ->format($values['responses'])
+            ->shouldBeCalledOnce()
+            ->willReturn($formattedResponses);
 
         $values = [
-            "responses" => $formattedResponses,
-            "participantEmail" => null
+            'responses' => $formattedResponses,
+            'participantEmail' => null,
         ];
 
-        $formFactory->create(ReplyAnonymousType::class, Argument::type(ReplyAnonymous::class))->shouldBeCalledOnce()->willReturn($form);
+        $formFactory
+            ->create(ReplyAnonymousType::class, Argument::type(ReplyAnonymous::class))
+            ->shouldBeCalledOnce()
+            ->willReturn($form);
         $form->submit($values, false)->shouldBeCalledOnce();
         $form->isValid()->willReturn(true);
 
         $em->persist(Argument::type(ReplyAnonymous::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
 
+        $questionnaire->isNotifyResponseCreate()->willReturn(false);
+
+        $payload = $this->__invoke($input);
+        $payload->shouldHaveCount(3);
+        $payload['questionnaire']->shouldBe($questionnaire);
+        $payload['questionnaire']->shouldHaveType(Questionnaire::class);
+        $payload['reply']->shouldHaveType(ReplyAnonymous::class);
+        $payload['token']->shouldBe($token);
+    }
+
+    public function it_should_notify_admin(
+        Arg $input,
+        GlobalIdResolver $globalIdResolver,
+        Questionnaire $questionnaire,
+        RequestGuesser $requestGuesser,
+        TokenGenerator $tokenGenerator,
+        ResponsesFormatter $responsesFormatter,
+        FormFactoryInterface $formFactory,
+        Form $form,
+        EntityManagerInterface $em,
+        Publisher $publisher,
+        ReplyAnonymous $replyAnonymous
+    ) {
+        $values = [
+            'questionnaireId' => 'abc',
+            'responses' => [
+                0 => [
+                    'value' => 'koko',
+                    'question' => 1403,
+                ],
+            ],
+            'participantEmail' => null,
+        ];
+
+        $userAgent = 'ABC';
+        $ip = '1.1.1.1.1.1';
+        $token = 'token';
+        $requestGuesser
+            ->getUserAgent()
+            ->shouldBeCalledOnce()
+            ->willReturn($userAgent);
+        $requestGuesser
+            ->getClientIp()
+            ->shouldBeCalledOnce()
+            ->willReturn($ip);
+        $tokenGenerator
+            ->generateToken()
+            ->shouldBeCalledOnce()
+            ->willReturn($token);
+
+        $input
+            ->getArrayCopy()
+            ->shouldBeCalledOnce()
+            ->willReturn($values);
+        $globalIdResolver
+            ->resolve('abc', null)
+            ->shouldBeCalledOnce()
+            ->willReturn($questionnaire);
+
+        $formattedResponses = [
+            0 => [
+                'value' => 'koko',
+                'question' => 1403,
+                'position' => 1,
+                '_type' => 'value_response',
+            ],
+        ];
+        $responsesFormatter
+            ->format($values['responses'])
+            ->shouldBeCalledOnce()
+            ->willReturn($formattedResponses);
+
+        $values = [
+            'responses' => $formattedResponses,
+            'participantEmail' => null,
+        ];
+
+        $formFactory
+            ->create(ReplyAnonymousType::class, Argument::type(ReplyAnonymous::class))
+            ->shouldBeCalledOnce()
+            ->willReturn($form);
+        $form->submit($values, false)->shouldBeCalledOnce();
+        $form->isValid()->willReturn(true);
+
+        $em->persist(Argument::type(ReplyAnonymous::class))->shouldBeCalledOnce();
+        $em->flush()->shouldBeCalledOnce();
+
+        $questionnaire
+            ->isNotifyResponseCreate()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        $questionnaire
+            ->isNotifyResponseCreate()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+        $publisher
+            ->publish('questionnaire.reply', Argument::type(Message::class))
+            ->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input);
         $payload->shouldHaveCount(3);

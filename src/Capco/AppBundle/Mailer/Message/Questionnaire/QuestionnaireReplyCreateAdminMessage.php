@@ -31,6 +31,7 @@ final class QuestionnaireReplyCreateAdminMessage extends AbstractAdminMessage
             'configUrl' => $params['configURL'],
             'baseUrl' => $params['baseURL'],
             'replyShowUrl' => $params['replyShowURL'],
+            'isAnonReply' => false,
         ];
     }
 

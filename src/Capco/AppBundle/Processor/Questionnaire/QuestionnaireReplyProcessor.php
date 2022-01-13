@@ -2,20 +2,27 @@
 
 namespace Capco\AppBundle\Processor\Questionnaire;
 
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
+use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 
 class QuestionnaireReplyProcessor implements ProcessorInterface
 {
-    private $repository;
-    private $notifier;
+    private ReplyRepository $replyRepository;
+    private QuestionnaireReplyNotifier $notifier;
+    private ReplyAnonymousRepository $replyAnonymousRepository;
 
-    public function __construct(ReplyRepository $repository, QuestionnaireReplyNotifier $notifier)
-    {
-        $this->repository = $repository;
+    public function __construct(
+        ReplyRepository $replyRepository,
+        ReplyAnonymousRepository $replyAnonymousRepository,
+        QuestionnaireReplyNotifier $notifier
+    ) {
+        $this->replyRepository = $replyRepository;
         $this->notifier = $notifier;
+        $this->replyAnonymousRepository = $replyAnonymousRepository;
     }
 
     public function process(Message $message, array $options): bool
@@ -28,9 +35,11 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE:
                 $replyId = $json['replyId'];
 
-                $reply = $this->repository->find($replyId);
+                $reply = $this->getReply($replyId);
                 if (!$reply) {
-                    throw new \RuntimeException('Unable to find reply with id : ' . $replyId);
+                    throw new \RuntimeException(
+                        'Unable to find reply/replyAnonymous with id : ' . $replyId
+                    );
                 }
 
                 QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state
@@ -50,5 +59,15 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
         }
 
         return true;
+    }
+
+    private function getReply(string $replyId): ?AbstractReply
+    {
+        $reply = $this->replyRepository->find($replyId);
+        if (!$reply) {
+            $reply = $this->replyAnonymousRepository->find($replyId);
+        }
+
+        return $reply;
     }
 }

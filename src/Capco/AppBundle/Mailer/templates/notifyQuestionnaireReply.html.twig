@@ -38,31 +38,56 @@
             <div>
                 <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
                     <p style="font-size: 16px">
-                        {% if state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE') %}
-                        {{ 'email.notification.questionnaire.reply.create'|trans({
-                            '{userUrl}': userUrl,
-                            '{userName}': authorName,
-                            '{questionnaireStepTitle}': questionnaireStepTitle,
-                            '{date}': date,
-                            '{time}': time,
-                        }, 'CapcoAppBundle', user_locale) | raw }}
-                        {% elseif  state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE') %}
-                        {{ 'email.notification.questionnaire.reply.update'|trans({
-                            '{userUrl}': userUrl,
-                            '{userName}': authorName,
-                            '{questionnaireStepTitle}': questionnaireStepTitle,
-                            '{date}': date,
-                            '{time}': time,
-                        }, 'CapcoAppBundle', user_locale) | raw }}
-                        {% else %}
-                        {{ 'email.notification.questionnaire.reply.delete'|trans({
-                            '{userUrl}': userUrl,
-                            '{userName}': authorName,
-                            '{questionnaireStepTitle}': questionnaireStepTitle,
-                            '{date}': date,
-                            '{time}': time,
-                        }, 'CapcoAppBundle', user_locale) | raw }}
+                        {% if isAnonReply == false %}
+                            {% if state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE') %}
+                                {{ 'email.notification.questionnaire.reply.create'|trans({
+                                    '{userUrl}': userUrl,
+                                    '{userName}': authorName,
+                                    '{questionnaireStepTitle}': questionnaireStepTitle,
+                                    '{date}': date,
+                                    '{time}': time,
+                                }, 'CapcoAppBundle', user_locale) | raw }}
+                            {% elseif  state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE') %}
+                                {{ 'email.notification.questionnaire.reply.update'|trans({
+                                    '{userUrl}': userUrl,
+                                    '{userName}': authorName,
+                                    '{questionnaireStepTitle}': questionnaireStepTitle,
+                                    '{date}': date,
+                                    '{time}': time,
+                                }, 'CapcoAppBundle', user_locale) | raw }}
+                            {% else %}
+                                {{ 'email.notification.questionnaire.reply.delete'|trans({
+                                    '{userUrl}': userUrl,
+                                    '{userName}': authorName,
+                                    '{questionnaireStepTitle}': questionnaireStepTitle,
+                                    '{date}': date,
+                                    '{time}': time,
+                                }, 'CapcoAppBundle', user_locale) | raw }}
+                            {% endif %}
                         {% endif %}
+
+                        {% if isAnonReply == true %}
+                            {% if state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE') %}
+                                {{ 'email.notification.anon.questionnaire.reply.create'|trans({
+                                    '{questionnaireStepTitle}': questionnaireStepTitle,
+                                    '{date}': date,
+                                    '{time}': time,
+                                }, 'CapcoAppBundle', user_locale) | raw }}
+                            {% elseif  state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE') %}
+                                {{ 'email.notification.anon.questionnaire.reply.update'|trans({
+                                    '{questionnaireStepTitle}': questionnaireStepTitle,
+                                    '{date}': date,
+                                    '{time}': time,
+                                }, 'CapcoAppBundle', user_locale) | raw }}
+                            {% else %}
+                                {{ 'email.notification.anon.questionnaire.reply.delete'|trans({
+                                    '{questionnaireStepTitle}': questionnaireStepTitle,
+                                    '{date}': date,
+                                    '{time}': time,
+                                }, 'CapcoAppBundle', user_locale) | raw }}
+                            {% endif %}
+                        {% endif %}
+
                     </p>
                 </div>
                 {% if

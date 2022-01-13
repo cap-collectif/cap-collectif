@@ -4,14 +4,14 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Form\ReplyAnonymousType;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Form\ReplyType;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -22,17 +22,20 @@ class UpdateAnonymousReplyMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private ResponsesFormatter $responsesFormatter;
     private ReplyAnonymousRepository $replyAnonymousRepository;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ResponsesFormatter $responsesFormatter,
-        ReplyAnonymousRepository $replyAnonymousRepository
+        ReplyAnonymousRepository $replyAnonymousRepository,
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->responsesFormatter = $responsesFormatter;
         $this->replyAnonymousRepository = $replyAnonymousRepository;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input): array
@@ -41,7 +44,24 @@ class UpdateAnonymousReplyMutation implements MutationInterface
         $reply = $this->updateReply($reply, $input);
         $this->em->flush();
 
+        if (self::shouldNotify($reply)) {
+            $this->notify($reply);
+        }
+
         return ['reply' => $reply];
+    }
+
+    private function notify(ReplyAnonymous $reply): void
+    {
+        $this->publisher->publish(
+            'questionnaire.reply',
+            new Message(
+                json_encode([
+                    'replyId' => $reply->getId(),
+                    'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
+                ])
+            )
+        );
     }
 
     private function getReply(Argument $argument): ReplyAnonymous
@@ -75,5 +95,12 @@ class UpdateAnonymousReplyMutation implements MutationInterface
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 
         return $values;
+    }
+
+    private static function shouldNotify(ReplyAnonymous $reply): bool
+    {
+        $questionnaire = $reply->getQuestionnaire();
+
+        return $questionnaire && $questionnaire->isNotifyResponseUpdate();
     }
 }
