@@ -13,7 +13,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
     className="block--shadowed proposal-preview"
     id="proposal-1"
   >
-    <Relay(Connect(ProposalPreviewBody))
+    <Relay(ProposalPreviewBody)
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -115,7 +115,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
     <ProposalPreview__ProposalImage
       bgImage="http://image.mypicture.jpg"
     />
-    <Relay(Connect(ProposalPreviewBody))
+    <Relay(ProposalPreviewBody)
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -217,7 +217,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
     <ProposalPreview__ProposalImage
       bgImage="/svg/img.svg"
     />
-    <Relay(Connect(ProposalPreviewBody))
+    <Relay(ProposalPreviewBody)
       proposal={
         Object {
           "$fragmentRefs": null,

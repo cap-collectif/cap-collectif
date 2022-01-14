@@ -73,16 +73,16 @@ export const CheckboxPlaceholder: StyledComponent<{}, {}, HTMLDivElement> = styl
 `;
 
 export const VoteFieldContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  margin-left: 41px;
   > span {
     line-height: 24px;
   }
   .vote-fields {
     margin-top: 20px;
-    display: flex;
     > div {
       flex: 1;
     }
-    div + span {
+    div + span.label-toggler {
       font-weight: bold;
     }
     input[type='number'] {
@@ -93,11 +93,6 @@ export const VoteFieldContainer: StyledComponent<{}, {}, HTMLDivElement> = style
         width: 85%;
         display: block;
         font-weight: 400;
-      }
-
-      .label-toggler {
-        color: ${colors.black};
-        font-weight: 600;
       }
     }
 

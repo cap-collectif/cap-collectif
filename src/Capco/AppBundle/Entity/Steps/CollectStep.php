@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalSort;
 use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
+use Capco\AppBundle\Traits\SecretBallotTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
@@ -25,6 +26,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
     use TimelessStepTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
+    use SecretBallotTrait;
     public const TYPE = 'collect';
 
     public static $sort = [

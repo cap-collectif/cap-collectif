@@ -49,3 +49,9 @@ ProposalStep:
             form:
                 type: 'ProposalForm'
                 resolve: '@=value.getProposalForm()'
+            isSecretBallot:
+                type: 'Boolean!'
+                description: 'Whether or not secret ballot is enable'
+            publishedVoteDate:
+                type: 'DateTime'
+                description: 'If not null, the date to display vote count'

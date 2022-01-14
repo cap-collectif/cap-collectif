@@ -11,12 +11,18 @@ exports[`<StepArticle /> renders correctly 1`] = `
     fontWeight="bold"
   >
     <p>
-      related.articles
-      <span
-        className="excerpt inline"
+      <Text
+        as="span"
+        fontWeight="bold"
+      >
+        related.articles
+      </Text>
+      <Text
+        as="span"
+        color="gray.500"
+        fontWeight="normal"
       >
         global.optional
-         
         <OverlayTrigger
           defaultOverlayShown={false}
           key="top"
@@ -47,7 +53,7 @@ exports[`<StepArticle /> renders correctly 1`] = `
         >
           <ProjectContentAdminForm__InformationIcon />
         </OverlayTrigger>
-      </span>
+      </Text>
     </p>
   </Text>
   <FieldArray
@@ -80,12 +86,18 @@ exports[`<StepArticle /> renders correctly when no articles 1`] = `
     fontWeight="bold"
   >
     <p>
-      related.articles
-      <span
-        className="excerpt inline"
+      <Text
+        as="span"
+        fontWeight="bold"
+      >
+        related.articles
+      </Text>
+      <Text
+        as="span"
+        color="gray.500"
+        fontWeight="normal"
       >
         global.optional
-         
         <OverlayTrigger
           defaultOverlayShown={false}
           key="top"
@@ -116,7 +128,7 @@ exports[`<StepArticle /> renders correctly when no articles 1`] = `
         >
           <ProjectContentAdminForm__InformationIcon />
         </OverlayTrigger>
-      </span>
+      </Text>
     </p>
   </Text>
   <FieldArray

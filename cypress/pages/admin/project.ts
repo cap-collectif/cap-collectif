@@ -23,6 +23,18 @@ export default new (class AdminProjectPage {
     return this.cy.get('#collect_step')
   }
 
+  get selectionStepSelector() {
+    return this.cy.get('#selection_step')
+  }
+
+  toggleVote() {
+    this.cy.get("label[for='step-votable'] span.circle-toggler").click()
+  }
+
+  toggleSecretBallot() {
+    this.cy.get("label[for='step-secretBallot'] span.circle-toggler").click()
+  }
+
   get questionnaireSelector() {
     return this.cy.contains('global.questionnaire')
   }

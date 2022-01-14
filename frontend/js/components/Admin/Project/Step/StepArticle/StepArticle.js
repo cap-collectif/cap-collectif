@@ -58,7 +58,7 @@ export const StepArticle = ({ dispatch, articles }: Props) => {
   return (
     <Flex direction="column" spacing={4} mb={6}>
       <Text color="gray.900" fontWeight={FontWeight.Bold}>
-        {renderLabel('related.articles', intl, 'helpText.add.press.articles')}
+        {renderLabel('related.articles', intl, 'helpText.add.press.articles', true)}
       </Text>
 
       <FieldArray name="articles" form={stepFormName} component={renderArticles} />

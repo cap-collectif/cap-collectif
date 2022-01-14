@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPreviewFooter } from './ProposalPreviewFooter';
 import { $refType } from '../../../mocks';
-import { features } from '../../../redux/modules/default';
+import { enableFeatureFlags } from '~/testUtils';
 
 describe('<ProposalPreviewFooter />', () => {
   const stepWithVoteActive = {
@@ -70,47 +70,36 @@ describe('<ProposalPreviewFooter />', () => {
 
   it('should render a footer with votes and comments counters', () => {
     const wrapper = shallow(
-      <ProposalPreviewFooter step={stepWithVoteActive} proposal={proposal} features={features} />,
+      <ProposalPreviewFooter step={stepWithVoteActive} proposal={proposal} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a footer with comments counters only', () => {
     const wrapper = shallow(
-      <ProposalPreviewFooter step={stepWithVoteDisabled} proposal={proposal} features={features} />,
+      <ProposalPreviewFooter step={stepWithVoteDisabled} proposal={proposal} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a footer with votes counters only', () => {
     const wrapper = shallow(
-      <ProposalPreviewFooter
-        step={stepWithVoteActive}
-        proposal={proposalNotCommentable}
-        features={features}
-      />,
+      <ProposalPreviewFooter step={stepWithVoteActive} proposal={proposalNotCommentable} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a footer without counters', () => {
     const wrapper = shallow(
-      <ProposalPreviewFooter
-        step={stepWithVoteDisabled}
-        proposal={proposalNotCommentable}
-        features={features}
-      />,
+      <ProposalPreviewFooter step={stepWithVoteDisabled} proposal={proposalNotCommentable} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a footer with donation infos', () => {
+    enableFeatureFlags(['unstable__tipsmeee']);
     const wrapper = shallow(
-      <ProposalPreviewFooter
-        proposal={proposalWithDonations}
-        step={stepWithVoteDisabled}
-        features={{ ...features, unstable__tipsmeee: true }}
-      />,
+      <ProposalPreviewFooter proposal={proposalWithDonations} step={stepWithVoteDisabled} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

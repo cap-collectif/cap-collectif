@@ -38,7 +38,9 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "id": Any<String>,
+          "isSecretBallot": false,
           "private": false,
+          "publishedVoteDate": null,
           "requirements": Object {
             "edges": Array [
               Object {
@@ -68,6 +70,8 @@ Object {
           "defaultSort": "random",
           "enabled": true,
           "id": Any<String>,
+          "isSecretBallot": true,
+          "publishedVoteDate": "2030-01-01 00:00:00",
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,
@@ -149,7 +153,9 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "id": Any<String>,
+          "isSecretBallot": false,
           "private": false,
+          "publishedVoteDate": null,
           "requirements": Object {
             "edges": Array [
               Object {
@@ -195,6 +201,8 @@ Object {
           "defaultSort": "random",
           "enabled": true,
           "id": Any<String>,
+          "isSecretBallot": true,
+          "publishedVoteDate": "2030-01-01 00:00:00",
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,
@@ -268,7 +276,9 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "id": Any<String>,
+          "isSecretBallot": false,
           "private": false,
+          "publishedVoteDate": null,
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,
@@ -637,6 +647,8 @@ Object {
           "defaultSort": "random",
           "enabled": true,
           "id": Any<String>,
+          "isSecretBallot": true,
+          "publishedVoteDate": "2030-01-01 00:00:00",
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,

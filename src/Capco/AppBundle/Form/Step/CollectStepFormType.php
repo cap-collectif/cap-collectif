@@ -10,6 +10,7 @@ use Capco\AppBundle\Form\Type\OrderedCollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class CollectStepFormType extends AbstractStepFormType
 {
@@ -33,6 +34,11 @@ class CollectStepFormType extends AbstractStepFormType
                         ->setName($itemFromUser->getName())
                         ->setColor($itemFromUser->getColor());
                 },
+            ])
+            ->add('secretBallot')
+            ->add('publishedVoteDate', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('defaultSort')
             ->add('defaultStatus')

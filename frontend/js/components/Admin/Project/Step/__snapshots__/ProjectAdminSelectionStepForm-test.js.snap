@@ -5,6 +5,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
   <Connect(StepVotesFields)
     isBudgetEnabled={true}
     isLimitEnabled={true}
+    isSecretBallotEnabled={false}
     isTresholdEnabled={true}
     options={
       Object {
@@ -258,6 +259,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
   <Connect(StepVotesFields)
     isBudgetEnabled={false}
     isLimitEnabled={false}
+    isSecretBallotEnabled={true}
     isTresholdEnabled={false}
     options={
       Object {

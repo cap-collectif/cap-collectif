@@ -11,6 +11,7 @@ describe('<ProjectAdminCollectStepForm />', () => {
     isBudgetEnabled: true,
     isLimitEnabled: false,
     isTresholdEnabled: true,
+    isSecretBallotEnabled: true,
     votable: true,
     isPrivate: false,
     votesRanking: true,

@@ -100,3 +100,9 @@ ProjectStepInput:
             # DebateStep && QuestionnaireStep
             isAnonymousParticipationAllowed:
                 type: 'Boolean'
+            secretBallot:
+                type: 'Boolean'
+                description: 'Whether or not secret ballot is enable'
+            publishedVoteDate:
+                type: 'DateTime'
+                description: 'If not null, the date to display vote count'

@@ -2090,6 +2090,12 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: ProposalVoteOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
+
+  """Whether or not secret ballot is enable"""
+  isSecretBallot: Boolean!
+
+  """If not null, the date to display vote count"""
+  publishedVoteDate: DateTime
   private: Boolean!
   defaultStatus: ProposalStepStatus
 
@@ -5857,6 +5863,9 @@ enum FeatureFlagType {
   """Whether or not the paper vote is enabled."""
   unstable__paper_vote
   versions
+
+  """Whether or not the secret_ballot is enabled."""
+  unstable__secret_ballot
 }
 
 """Require a firstname"""
@@ -8906,6 +8915,12 @@ input ProjectStepInput {
   debateType: DebateType
   debateContent: String
   isAnonymousParticipationAllowed: Boolean
+
+  """Whether or not secret ballot is enable"""
+  secretBallot: Boolean
+
+  """If not null, the date to display vote count"""
+  publishedVoteDate: DateTime
 }
 
 """Label of a Project."""
@@ -10298,6 +10313,12 @@ interface ProposalStep {
     orderBy: ProposalVoteOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
+
+  """Whether or not secret ballot is enable"""
+  isSecretBallot: Boolean!
+
+  """If not null, the date to display vote count"""
+  publishedVoteDate: DateTime
 }
 
 """The given proposal status in a step."""
@@ -12896,6 +12917,12 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: ProposalVoteOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
+
+  """Whether or not secret ballot is enable"""
+  isSecretBallot: Boolean!
+
+  """If not null, the date to display vote count"""
+  publishedVoteDate: DateTime
   position: Int!
 
   """

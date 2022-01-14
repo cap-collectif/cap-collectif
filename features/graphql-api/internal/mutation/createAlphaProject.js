@@ -109,6 +109,8 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
                 }
               }
             }
+            isSecretBallot
+            publishedVoteDate
             statuses {
               id
               name
@@ -175,6 +177,8 @@ const BASE_SELECTION_STEP = {
   title: "Le beau titre de l'étape SelectionStep",
   label: 'SelectionStep',
   mainView: 'grid',
+  secretBallot: true,
+  publishedVoteDate: '2030-01-01 00:00:00',
 };
 
 const BASE_DEBATE_STEP = {

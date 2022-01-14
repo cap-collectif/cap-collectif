@@ -1,34 +1,52 @@
 // @flow
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { HelpBlock } from 'react-bootstrap';
-import { useIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { useIntl, FormattedHTMLMessage } from 'react-intl';
 import { Field, change } from 'redux-form';
+import styled, { type StyledComponent } from 'styled-components';
 import toggle from '~/components/Form/Toggle';
 import component from '~/components/Form/Field';
 import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
 import { VoteFieldContainer } from './ProjectAdminStepForm.style';
-import type { FeatureToggles, State, Dispatch } from '~/types';
+import type { Dispatch } from '~/types';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Text from '~ui/Primitives/Text';
+import { styleGuideColors } from '~/utils/colors';
+import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {|
   ...ReduxFormFieldArrayProps,
   dispatch: Dispatch,
-  features: FeatureToggles,
   stepFormName: string,
   votable: boolean,
   isBudgetEnabled: boolean,
   isTresholdEnabled: boolean,
+  isSecretBallotEnabled: boolean,
   isLimitEnabled: boolean,
   options: {| ranking?: boolean, min: ?number, limit: ?number |},
 |};
 
+const FieldContainer: StyledComponent<{ toggled: boolean }, {}, typeof Flex> = styled(Flex)`
+  .form-group {
+    margin-bottom: 24px;
+  }
+  
+    .toggle-container {
+      .label-toggler {
+        color: ${({ toggled }) => (toggled ? styleGuideColors.gray900 : styleGuideColors.gray600)}};
+        font-weight: 600;
+      }
+    }
+`;
+
 export function StepVotesFields({
-  features,
   votable,
   dispatch,
   isBudgetEnabled,
   isTresholdEnabled,
+  isSecretBallotEnabled,
   isLimitEnabled,
   stepFormName,
   options,
@@ -37,6 +55,9 @@ export function StepVotesFields({
   const [votesLimitState, setVotesLimitState] = useState(options.limit || 3);
   const [votesRankingState, setVotesRankingState] = useState(options.ranking || false);
   const intl = useIntl();
+  const isFeatureSecretBallotEnabled = useFeatureFlag('unstable__secret_ballot');
+  const useVoteMin = useFeatureFlag('votes_min');
+
   return (
     <>
       <ProjectBoxHeader>
@@ -47,26 +68,28 @@ export function StepVotesFields({
             component={toggle}
             name="votable"
             normalize={val => !!val}
-            label={<FormattedMessage id="project_download.values.content_type.vote" />}
+            label={intl.formatMessage({ id: 'project_download.values.content_type.vote' })}
           />
         </h5>
       </ProjectBoxHeader>
       {votable && (
         <VoteFieldContainer>
-          <span className="excerpt">
-            <FormattedMessage id="bo-vote-help" />
-          </span>
-          <div className="vote-fields">
-            <div className="mr-30">
-              <Field
-                component={toggle}
-                labelSide="LEFT"
-                id="step-isBudgetEnabled"
-                name="isBudgetEnabled"
-                normalize={val => !!val}
-                helpText={<FormattedMessage id="budget-help" />}
-                label={<FormattedMessage id="maximum-budget" />}
-              />
+          <Text as="span" color="gray.500" maxWidth="790px">
+            {intl.formatMessage({ id: 'bo-vote-help' })}
+          </Text>
+          <Flex className="vote-fields" justify="space-between">
+            <AppBox maxWidth="50%" mr="79px">
+              <FieldContainer toggled={isBudgetEnabled}>
+                <Field
+                  component={toggle}
+                  labelSide="LEFT"
+                  id="step-isBudgetEnabled"
+                  name="isBudgetEnabled"
+                  normalize={val => !!val}
+                  helpText={intl.formatMessage({ id: 'budget-help' })}
+                  label={intl.formatMessage({ id: 'maximum-budget' })}
+                />
+              </FieldContainer>
               {isBudgetEnabled && (
                 <Field
                   type="number"
@@ -77,15 +100,18 @@ export function StepVotesFields({
                   component={component}
                 />
               )}
-              <Field
-                component={toggle}
-                labelSide="LEFT"
-                id="step-isTresholdEnabled"
-                name="isTresholdEnabled"
-                normalize={val => !!val}
-                helpText={<FormattedMessage id="ceil-help" />}
-                label={<FormattedMessage id="admin.fields.step.vote_threshold.input" />}
-              />
+              <FieldContainer toggled={isTresholdEnabled}>
+                <Field
+                  component={toggle}
+                  labelSide="LEFT"
+                  id="step-isTresholdEnabled"
+                  name="isTresholdEnabled"
+                  normalize={val => !!val}
+                  helpText={intl.formatMessage({ id: 'ceil-help' })}
+                  label={intl.formatMessage({ id: 'admin.fields.step.vote_threshold.input' })}
+                />
+              </FieldContainer>
+
               {isTresholdEnabled && (
                 <Field
                   type="number"
@@ -95,20 +121,23 @@ export function StepVotesFields({
                   component={component}
                 />
               )}
-              <Field
-                icons
-                component={toggle}
-                labelSide="LEFT"
-                id="step-isLimitEnabled"
-                name="isLimitEnabled"
-                normalize={val => !!val}
-                label={<FormattedMessage id="Number-of-votes-per-person" />}
-                helpText={<FormattedMessage id="vote-classement-help" />}
-              />
+              <FieldContainer toggled={isLimitEnabled}>
+                <Field
+                  icons
+                  component={toggle}
+                  labelSide="LEFT"
+                  id="step-isLimitEnabled"
+                  name="isLimitEnabled"
+                  normalize={val => !!val}
+                  label={intl.formatMessage({ id: 'Number-of-votes-per-person' })}
+                  helpText={intl.formatMessage({ id: 'vote-classement-help' })}
+                />
+              </FieldContainer>
+
               {isLimitEnabled && (
-                <div>
-                  <div className="d-flex">
-                    {features.votes_min && (
+                <>
+                  <Flex>
+                    {useVoteMin && (
                       <div className="mr-30 vote-min">
                         <Field
                           type="number"
@@ -117,7 +146,7 @@ export function StepVotesFields({
                           value={votesMinState}
                           name="votesMin"
                           id="step-votesMin"
-                          label={<FormattedMessage id="global-minimum-full" />}
+                          label={intl.formatMessage({ id: 'global-minimum-full' })}
                           component={component}
                           onChange={e => {
                             if (
@@ -141,18 +170,18 @@ export function StepVotesFields({
                       name="votesLimit"
                       id="step-votesLimit"
                       value={votesLimitState}
-                      label={<FormattedMessage id="maximum-vote" />}
+                      label={intl.formatMessage({ id: 'maximum-vote' })}
                       component={component}
                       onChange={e => {
                         if (
-                          features.votes_min &&
+                          useVoteMin &&
                           parseInt(e.target.value, 10) < parseInt(votesMinState, 10)
                         ) {
                           setVotesMinState(e.target.value);
                           dispatch(change(stepFormName, 'votesMin', parseInt(e.target.value, 10)));
                         }
                         // eslint-disable-next-line no-restricted-globals
-                        if (!features.votes_min && isNaN(parseInt(e.target.value, 10))) {
+                        if (!useVoteMin && isNaN(parseInt(e.target.value, 10))) {
                           setVotesLimitState(3);
                           dispatch(change(stepFormName, 'votesLimit', 3));
                         } else if (Number.isNaN(parseInt(e.target.value, 10))) {
@@ -162,8 +191,8 @@ export function StepVotesFields({
                         }
                       }}
                     />
-                  </div>
-                  <div>
+                  </Flex>
+                  <>
                     <Field
                       className="m-0"
                       type="checkbox"
@@ -178,7 +207,7 @@ export function StepVotesFields({
                         setVotesRankingState(e.target.checked);
                         if (
                           e.target.checked &&
-                          features.votes_min &&
+                          useVoteMin &&
                           votesMinState &&
                           (Number.isNaN(votesLimitState) || votesLimitState < votesMinState)
                         ) {
@@ -191,7 +220,7 @@ export function StepVotesFields({
                             setVotesLimitState(3);
                           }
                           if (
-                            (features.votes_min && !votesMinState) ||
+                            (useVoteMin && !votesMinState) ||
                             votesMinState === 0 ||
                             votesMinState === 1
                           ) {
@@ -200,42 +229,73 @@ export function StepVotesFields({
                           }
                         }
                       }}>
-                      <FormattedMessage id="activate-vote-ranking" />
+                      {intl.formatMessage({ id: 'activate-vote-ranking' })}
                     </Field>
-                    <HelpBlock className="excerpt">
+                    <Flex
+                      as="span"
+                      marginTop="8px"
+                      fontWeight="400"
+                      color="gray.700"
+                      marginBottom={votesRankingState ? '0' : '24px'}
+                      className="clear">
                       <FormattedHTMLMessage id="help-text-vote-ranking" />
-                    </HelpBlock>
+                    </Flex>
                     {votesRankingState && (
-                      <strong>
-                        <FormattedMessage
-                          id="help-vote-point"
-                          values={{ points: votesLimitState }}
-                        />
-                      </strong>
+                      <Flex as="span" marginBottom="24px">
+                        <br />
+                        <strong>
+                          {intl.formatMessage(
+                            { id: 'help-vote-point' },
+                            { points: votesLimitState },
+                          )}
+                        </strong>
+                      </Flex>
                     )}
-                  </div>
-                </div>
+                  </>
+                </>
               )}
-            </div>
-            <div>
+              {isFeatureSecretBallotEnabled && (
+                <>
+                  <FieldContainer toggled={isSecretBallotEnabled}>
+                    <Field
+                      component={toggle}
+                      labelSide="LEFT"
+                      id="step-secretBallot"
+                      name="isSecretBallot"
+                      className="toggle-secret-ballot"
+                      normalize={val => !!val}
+                      helpText={intl.formatMessage({ id: 'secret-ballot-body' })}
+                      label={intl.formatMessage({ id: 'secret-ballot' })}
+                    />
+                  </FieldContainer>
+                  {isSecretBallotEnabled && (
+                    <Field
+                      id="step-publishedVoteDate"
+                      component={component}
+                      type="datetime"
+                      name="publishedVoteDate"
+                      label={renderLabel('published-vote-date', intl, undefined, true, '400')}
+                      addonAfter={<i className="cap-calendar-2" />}
+                    />
+                  )}
+                </>
+              )}
+            </AppBox>
+            <AppBox maxWidth="50%">
               <Field
                 type="editor"
                 name="votesHelpText"
                 id="step-votesHelpText"
                 label={renderLabel('admin.fields.step.votesHelpText', intl)}
                 component={component}
-                help={<FormattedMessage id="vote-help" />}
+                help={intl.formatMessage({ id: 'vote-help' })}
               />
-            </div>
-          </div>
+            </AppBox>
+          </Flex>
         </VoteFieldContainer>
       )}
     </>
   );
 }
 
-const mapStateToProps = (state: State) => ({
-  features: state.default.features,
-});
-
-export default connect<any, any, _, _, _, _>(mapStateToProps)(StepVotesFields);
+export default connect<any, any, _, _, _, _>()(StepVotesFields);

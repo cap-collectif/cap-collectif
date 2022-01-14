@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
 import Truncate from 'react-truncate';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -11,7 +10,6 @@ import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
 import Tag from '../../Ui/Labels/Tag';
 import TagsList from '../../Ui/List/TagsList';
-import type { State, FeatureToggles } from '~/types';
 import ProposalFollowButtonLegacy from '../Follow/ProposalFollowButtonLegacy';
 import type { ProposalPreviewBody_proposal } from '~relay/ProposalPreviewBody_proposal.graphql';
 import type { ProposalPreviewBody_step } from '~relay/ProposalPreviewBody_step.graphql';
@@ -20,17 +18,16 @@ import Card from '../../Ui/Card/Card';
 import ProposalPreviewUser from './ProposalPreviewUser';
 import { translateContent, isPredefinedTraductionKey } from '~/utils/ContentTranslator';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {
   proposal: ProposalPreviewBody_proposal,
-  features: FeatureToggles,
   step: ?ProposalPreviewBody_step,
   viewer: ?ProposalPreviewBody_viewer,
 };
 
-export const ProposalPreviewBody = ({ proposal, features, step, viewer }: Props) => {
+export const ProposalPreviewBody = ({ proposal, step, viewer }: Props) => {
   const intl = useIntl();
-
   const summary =
     proposal.summaryOrBodyExcerpt && isPredefinedTraductionKey(proposal.summaryOrBodyExcerpt)
       ? intl.formatMessage({ id: proposal.summaryOrBodyExcerpt })
@@ -58,13 +55,13 @@ export const ProposalPreviewBody = ({ proposal, features, step, viewer }: Props)
           </React.Fragment>
         )}
         <TagsList>
-          {features.themes && showThemes && proposal.theme && (
+          {useFeatureFlag('themes') && showThemes && proposal.theme && (
             <Tag icon="cap cap-tag-1-1 icon--blue">{proposal.theme.title}</Tag>
           )}
           {proposal.category && (
             <Tag icon="cap cap-tag-1-1 icon--blue">{proposal.category.name}</Tag>
           )}
-          {features.districts && proposal.district && (
+          {useFeatureFlag('districts') && proposal.district && (
             <Tag icon="cap cap-marker-1-1 icon--blue">{proposal.district.name}</Tag>
           )}
           {step && (
@@ -117,13 +114,7 @@ export const ProposalPreviewBody = ({ proposal, features, step, viewer }: Props)
   );
 };
 
-const mapStateToProps = (state: State) => ({
-  features: state.default.features,
-});
-
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPreviewBody);
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(ProposalPreviewBody, {
   viewer: graphql`
     fragment ProposalPreviewBody_viewer on User {
       ...ProposalPreviewVote_viewer
@@ -131,10 +122,10 @@ export default createFragmentContainer(container, {
   `,
   proposal: graphql`
     fragment ProposalPreviewBody_proposal on Proposal
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean!" }
-        isProfileView: { type: "Boolean", defaultValue: false }
-      ) {
+    @argumentDefinitions(
+      isAuthenticated: { type: "Boolean!" }
+      isProfileView: { type: "Boolean", defaultValue: false }
+    ) {
       id
       title
       trashed

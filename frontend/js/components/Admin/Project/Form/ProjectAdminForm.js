@@ -256,6 +256,16 @@ const onSubmit = (
                   ? s.voteThreshold
                   : null
                 : undefined,
+            publishedVoteDate:
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
+                ? s.isSecretBallot && s.votable && s.publishedVoteDate
+                  ? moment(s.publishedVoteDate).format('YYYY-MM-DD HH:mm:ss')
+                  : null
+                : undefined,
+            secretBallot:
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
+                ? s.isSecretBallot && s.votable
+                : undefined,
             votesRanking:
               sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.votesRanking
@@ -270,6 +280,8 @@ const onSubmit = (
             nbVersionsToDisplay: sTypename === 'RankingStep' ? s.nbVersionsToDisplay : undefined,
             votable: undefined,
             isBudgetEnabled: undefined,
+            isSecretBallotEnabled: undefined,
+            isSecretBallot: undefined,
             isTresholdEnabled: undefined,
             isLimitEnabled: undefined,
             // DebateStep
@@ -523,6 +535,7 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
             isBudgetEnabled: !!step.budget,
             isLimitEnabled: !!step.votesLimit,
             isTresholdEnabled: !!step.voteThreshold,
+            isSecretBallotEnabled: step.isSecretBallot,
             isAnalysisStep: step.__typename === 'SelectionStep' && step.isAnalysisStep,
             defaultSort: step.defaultSort?.toUpperCase() || 'RANDOM',
             ...getViewEnabled(step.__typename, step.proposalForm, project?.firstCollectStep?.form),
@@ -691,6 +704,8 @@ export default createFragmentContainer(injectIntl(container), {
           votesMin
           votesRanking
           voteThreshold
+          isSecretBallot
+          publishedVoteDate
           voteType
           budget
         }
@@ -710,6 +725,8 @@ export default createFragmentContainer(injectIntl(container), {
           votesMin
           votesRanking
           voteThreshold
+          isSecretBallot
+          publishedVoteDate
           voteType
           defaultSort
           allowingProgressSteps

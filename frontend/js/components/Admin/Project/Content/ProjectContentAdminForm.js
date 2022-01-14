@@ -22,6 +22,7 @@ import {
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { clearToasts } from '~ds/Toast';
 import type { GlobalState } from '~/types';
+import Text from '~ui/Primitives/Text';
 
 type Option = {|
   value: string,
@@ -61,11 +62,19 @@ export const InformationIcon: StyledComponent<{}, {}, ComponentType<any>> = styl
   top: 1px;
 `;
 
-export const renderLabel = (id: string, intl: IntlShape, helpText?: string, optional?: boolean) => (
+export const renderLabel = (
+  id: string,
+  intl: IntlShape,
+  helpText?: string,
+  optional?: boolean,
+  labelWeight?: string,
+) => (
   <p>
-    {intl.formatMessage({ id })}
-    <span className="excerpt inline">
-      {!optional && intl.formatMessage({ id: 'global.optional' })}{' '}
+    <Text as="span" fontWeight={labelWeight || 'bold'}>
+      {intl.formatMessage({ id })}
+    </Text>
+    <Text as="span" color="gray.500" fontWeight="normal">
+      {optional ? intl.formatMessage({ id: 'global.optional' }) : null}
       {helpText && (
         <OverlayTrigger
           key="top"
@@ -78,7 +87,7 @@ export const renderLabel = (id: string, intl: IntlShape, helpText?: string, opti
           <InformationIcon />
         </OverlayTrigger>
       )}
-    </span>
+    </Text>
   </p>
 );
 

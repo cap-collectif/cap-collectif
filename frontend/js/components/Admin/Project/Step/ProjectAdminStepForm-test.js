@@ -45,6 +45,7 @@ describe('<ProjectAdminStepForm />', () => {
       label: 'au bois dormant',
       metaDescription: 'oeoeoe',
       mainView: 'grid',
+      isSecretBallot: false,
     },
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     isFranceConnectConfigured: true,

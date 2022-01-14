@@ -157,3 +157,6 @@ InternalFeatureFlagType:
                 description: 'Whether or not the paper vote is enabled.'
             versions:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::versions")'
+            unstable__secret_ballot:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__secret_ballot")'
+                description: 'Whether or not the secret_ballot is enabled.'

@@ -29,6 +29,7 @@ type Props = {|
   isBudgetEnabled: boolean,
   isTresholdEnabled: boolean,
   isLimitEnabled: boolean,
+  isSecretBallotEnabled: boolean,
   votesMin: ?number,
   votesLimit: ?number,
   votesRanking: boolean,
@@ -91,6 +92,7 @@ export const ProjectAdminCollectStepForm = ({
   isBudgetEnabled,
   isTresholdEnabled,
   isLimitEnabled,
+  isSecretBallotEnabled,
   proposal,
   isPrivate,
   stepFormName,
@@ -200,6 +202,7 @@ export const ProjectAdminCollectStepForm = ({
         isBudgetEnabled={isBudgetEnabled}
         isTresholdEnabled={isTresholdEnabled}
         isLimitEnabled={isLimitEnabled}
+        isSecretBallotEnabled={isSecretBallotEnabled}
       />
 
       {renderSubSection('admin.fields.step.statuses')}

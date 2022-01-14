@@ -85,6 +85,9 @@ type Props = {|
     budget?: number,
     isBudgetEnabled?: ?boolean,
     isTresholdEnabled?: ?boolean,
+    isSecretBallotEnabled?: ?boolean,
+    isSecretBallot: boolean,
+    publishedVoteDate?: ?string,
     isLimitEnabled?: ?boolean,
     allowingProgressSteps?: ?boolean,
     allowAuthorsToAddNews?: ?boolean,
@@ -129,6 +132,8 @@ type Props = {|
   isBudgetEnabled?: boolean,
   isTresholdEnabled?: boolean,
   isLimitEnabled?: boolean,
+  isSecretBallotEnabled?: boolean,
+  publishedVoteDate?: string,
   isPrivate?: ?boolean,
   isGridViewEnabled: boolean,
   isListViewEnabled: boolean,
@@ -173,6 +178,8 @@ export type FormValues = {|
   isBudgetEnabled?: ?boolean,
   isTresholdEnabled?: ?boolean,
   isLimitEnabled?: ?boolean,
+  isSecretBallotEnabled?: ?boolean,
+  secretBallot: boolean,
   allowingProgressSteps?: ?boolean,
   allowAuthorsToAddNews?: ?boolean,
   nbVersionsToDisplay?: ?number,
@@ -358,7 +365,7 @@ const renderDateContainer = (formName: string, intl: IntlShape) => (
       type="datetime"
       name="endAt"
       formName={formName}
-      label={renderLabel('end', intl)}
+      label={renderLabel('end', intl, undefined, true)}
       addonAfter={<i className="cap-calendar-2" />}
     />
   </DateContainer>
@@ -388,6 +395,7 @@ export function ProjectAdminStepForm({
   isBudgetEnabled,
   isTresholdEnabled,
   isLimitEnabled,
+  isSecretBallotEnabled,
   isPrivate,
   isGridViewEnabled,
   isListViewEnabled,
@@ -577,7 +585,7 @@ export function ProjectAdminStepForm({
               type="editor"
               name="body"
               id="step-body"
-              label={renderLabel('proposal.body', intl)}
+              label={renderLabel('proposal.body', intl, undefined, true)}
               component={renderComponent}
             />
           )}
@@ -586,7 +594,7 @@ export function ProjectAdminStepForm({
             name="metaDescription"
             type="textarea"
             id="step-metaDescription"
-            label={renderLabel('global.meta.description', intl, 'admin.help.metadescription')}
+            label={renderLabel('global.meta.description', intl, 'admin.help.metadescription', true)}
             component={renderComponent}
           />
 
@@ -610,6 +618,7 @@ export function ProjectAdminStepForm({
             <ProjectAdminSelectionStepForm
               isBudgetEnabled={isBudgetEnabled}
               isTresholdEnabled={isTresholdEnabled}
+              isSecretBallotEnabled={isSecretBallotEnabled}
               isLimitEnabled={isLimitEnabled}
               stepFormName={stepFormName}
               votesMin={step?.votesMin || 1}
@@ -632,6 +641,7 @@ export function ProjectAdminStepForm({
               isBudgetEnabled={isBudgetEnabled}
               isTresholdEnabled={isTresholdEnabled}
               isLimitEnabled={isLimitEnabled}
+              isSecretBallotEnabled={isSecretBallotEnabled}
               stepFormName={stepFormName}
               votesMin={step?.votesMin || 1}
               votesLimit={step?.votesLimit || null}
@@ -764,7 +774,7 @@ export function ProjectAdminStepForm({
               type="textarea"
               id="step-customCode"
               rows={4}
-              label={renderLabel('admin.customcode', intl, 'admin.help.customcode')}
+              label={renderLabel('admin.customcode', intl, 'admin.help.customcode', true)}
               placeholder='<script type="text/javascript"> </script>'
               component={renderComponent}
             />
@@ -873,11 +883,16 @@ const mapStateToProps = (
       isBudgetEnabled: step?.isBudgetEnabled || false,
       isLimitEnabled: step?.votesMin != null || step?.votesLimit != null || false,
       isTresholdEnabled: step?.isTresholdEnabled || false,
+      isSecretBallotEnabled: step?.isSecretBallotEnabled || false,
+      isSecretBallot: step?.isSecretBallot || false,
+      publishedVoteDate: step?.publishedVoteDate || null,
       private: step?.private || false,
     },
     isBudgetEnabled: formValueSelector(stepFormName)(state, 'isBudgetEnabled') || false,
     isLimitEnabled: formValueSelector(stepFormName)(state, 'isLimitEnabled') || false,
     isTresholdEnabled: formValueSelector(stepFormName)(state, 'isTresholdEnabled') || false,
+    isSecretBallotEnabled: formValueSelector(stepFormName)(state, 'isSecretBallot') || false,
+    publishedVoteDate: formValueSelector(stepFormName)(state, 'publishedVoteDate') || null,
     isGridViewEnabled:
       step.__typename === 'CollectStep'
         ? formValueSelector(stepFormName)(state, 'proposalForm')?.isGridViewEnabled

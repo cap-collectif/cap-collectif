@@ -51,8 +51,10 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "id": Any<String>,
+          "isSecretBallot": false,
           "mainView": "grid",
           "private": false,
+          "publishedVoteDate": null,
           "requirements": Object {
             "edges": Array [
               Object {
@@ -100,7 +102,9 @@ Object {
           "defaultSort": "random",
           "enabled": true,
           "id": Any<String>,
+          "isSecretBallot": true,
           "mainView": "list",
+          "publishedVoteDate": "2030-01-01 00:00:00",
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,
@@ -181,8 +185,10 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "id": Any<String>,
+          "isSecretBallot": false,
           "mainView": "grid",
           "private": false,
+          "publishedVoteDate": null,
           "requirements": Object {
             "edges": Array [
               Object {
@@ -214,7 +220,9 @@ Object {
           "defaultSort": "random",
           "enabled": true,
           "id": Any<String>,
+          "isSecretBallot": true,
           "mainView": "list",
+          "publishedVoteDate": "2030-01-01 00:00:00",
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,
@@ -295,8 +303,10 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "id": Any<String>,
+          "isSecretBallot": false,
           "mainView": "grid",
           "private": false,
+          "publishedVoteDate": null,
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,

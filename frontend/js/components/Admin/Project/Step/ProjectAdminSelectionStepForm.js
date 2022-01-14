@@ -26,6 +26,7 @@ type Props = {|
   isBudgetEnabled: boolean,
   isTresholdEnabled: boolean,
   isLimitEnabled: boolean,
+  isSecretBallotEnabled: boolean,
   votesMin: ?number,
   votesLimit: ?number,
   votesRanking: boolean,
@@ -54,6 +55,7 @@ export const ProjectAdminSelectionStepForm = ({
   isBudgetEnabled,
   isTresholdEnabled,
   isLimitEnabled,
+  isSecretBallotEnabled,
   stepFormName,
   votesRanking,
   votesLimit,
@@ -75,6 +77,7 @@ export const ProjectAdminSelectionStepForm = ({
         isBudgetEnabled={isBudgetEnabled}
         isTresholdEnabled={isTresholdEnabled}
         isLimitEnabled={isLimitEnabled}
+        isSecretBallotEnabled={isSecretBallotEnabled}
       />
       {renderSubSection('global.proposals')}
       <ProjectSmallFieldsContainer>

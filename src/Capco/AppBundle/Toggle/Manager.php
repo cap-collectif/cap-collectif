@@ -82,6 +82,7 @@ class Manager
     public const unstable__anonymous_questionnaire = 'unstable__anonymous_questionnaire';
     public const twilio = 'twilio';
     public const unstable__paper_vote = 'unstable__paper_vote';
+    public const unstable__secret_ballot = 'unstable__secret_ballot';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -109,6 +110,7 @@ class Manager
         self::developer_documentation,
         self::new_project_card,
         self::unstable__paper_vote,
+        self::unstable__secret_ballot,
     ];
 
     public static $toggles = [
@@ -182,6 +184,7 @@ class Manager
         self::unstable__anonymous_questionnaire,
         self::twilio,
         self::unstable__paper_vote,
+        self::unstable__secret_ballot,
     ];
 
     protected ToggleManager $toggleManager;

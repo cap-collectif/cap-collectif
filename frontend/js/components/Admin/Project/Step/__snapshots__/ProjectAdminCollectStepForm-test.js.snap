@@ -262,6 +262,7 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for admin 1`] = `
           isBudgetEnabled={true}
           isLimitEnabled={false}
           isPrivate={false}
+          isSecretBallotEnabled={true}
           isTresholdEnabled={true}
           stepFormName="defaultForm"
           votable={true}
@@ -537,6 +538,7 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for project admin 1`]
           isBudgetEnabled={true}
           isLimitEnabled={false}
           isPrivate={false}
+          isSecretBallotEnabled={true}
           isTresholdEnabled={true}
           stepFormName="defaultForm"
           votable={true}

@@ -94,6 +94,8 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
           name
           color
         }
+        isSecretBallot
+        publishedVoteDate
         defaultSort
       }
       ... on QuestionnaireStep {
@@ -187,6 +189,8 @@ const BASE_SELECTION_STEP = {
   title: "Le beau titre de l'étape SelectionStep",
   label: 'SelectionStep',
   mainView: 'list',
+  secretBallot: true,
+  publishedVoteDate: '2030-01-01 00:00:00',
 };
 
 const BASE_PRESENTATION_STEP = {
