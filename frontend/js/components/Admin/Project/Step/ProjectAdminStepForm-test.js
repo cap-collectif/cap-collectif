@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import { ProjectAdminStepForm } from './ProjectAdminStepForm';
 import { formMock, intlMock, $refType } from '~/mocks';
 import { features } from '~/redux/modules/default';
+import MockProviders from '~/testUtils';
 
 describe('<ProjectAdminStepForm />', () => {
   const defaultProps = {
@@ -47,15 +48,24 @@ describe('<ProjectAdminStepForm />', () => {
     },
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     isFranceConnectConfigured: true,
+    hasIdentificationCodeLists: true,
   };
 
   it('renders correctly', () => {
-    const wrapper = shallow(<ProjectAdminStepForm {...defaultProps} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: true } } }}>
+        <ProjectAdminStepForm {...defaultProps} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly when form creating', () => {
-    const wrapper = shallow(<ProjectAdminStepForm {...defaultProps} isCreating />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: true } } }}>
+        <ProjectAdminStepForm {...defaultProps} isCreating />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

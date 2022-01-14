@@ -1,4225 +1,781 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
-<ReactRelayQueryRenderer
-  environment={"RelayModernEnvironment()"}
-  query={
+<Provider
+  store={
     Object {
-      "fragment": Object {
-        "abstractKey": null,
-        "argumentDefinitions": Array [
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(Symbol.observable): [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)>
+    <Provider>
+      <Component
+        theme={
           Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "isEditMode",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "projectId",
-          },
-        ],
-        "kind": "Fragment",
-        "metadata": null,
-        "name": "ProjectAdminPageQuery",
-        "selections": Array [
-          Object {
-            "condition": "isEditMode",
-            "kind": "Condition",
-            "passingValue": true,
-            "selections": Array [
-              Object {
-                "alias": "project",
-                "args": Array [
-                  Object {
-                    "kind": "Variable",
-                    "name": "id",
-                    "variableName": "projectId",
-                  },
-                ],
-                "concreteType": null,
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": Array [
-                  Object {
-                    "args": Array [
-                      Object {
-                        "kind": "Variable",
-                        "name": "projectId",
-                        "variableName": "projectId",
-                      },
-                    ],
-                    "kind": "FragmentSpread",
-                    "name": "ProjectAdminContent_project",
-                  },
-                ],
-                "storageKey": null,
-              },
+            "borders": Object {
+              "avatar": "2px solid",
+              "button": "1px solid",
+              "card": "1px solid",
+              "normal": "1px solid",
+            },
+            "breakpoints": Array [
+              "767px",
+              "1024px",
             ],
-          },
-          Object {
-            "args": null,
-            "kind": "FragmentSpread",
-            "name": "ProjectAdminContent_query",
-          },
-        ],
-        "type": "Query",
-      },
-      "hash": "992da232cea6e607fb2c223e62feae52",
-      "kind": "Request",
-      "operation": Object {
-        "argumentDefinitions": Array [
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "projectId",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "isEditMode",
-          },
-        ],
-        "kind": "Operation",
-        "name": "ProjectAdminPageQuery",
-        "selections": Array [
-          Object {
-            "alias": null,
-            "args": Array [
-              Object {
-                "kind": "Literal",
-                "name": "first",
-                "value": 100,
+            "colors": Object {
+              "aqua": Object {
+                "100": "#FAFEFE",
+                "150": "#E4F8FC",
+                "200": "#C9F2F8",
+                "300": "#97E6F2",
+                "400": "#65DAEC",
+                "500": "#33CEE6",
+                "600": "#19B0C8",
+                "700": "#138496",
+                "800": "#0C5864",
+                "900": "#062C32",
               },
-              Object {
-                "kind": "Literal",
-                "name": "ssoType",
-                "value": "FRANCE_CONNECT",
+              "black": "#000",
+              "blue": Object {
+                "100": "#FAFCFF",
+                "150": "#E0EFFF",
+                "200": "#C2DFFF",
+                "300": "#8AC2FF",
+                "400": "#52A5FF",
+                "500": "#1A88FF",
+                "600": "#006CE0",
+                "700": "#0051A8",
+                "800": "#003670",
+                "900": "#001B38",
               },
+              "current": "currentColor",
+              "dark": "#30363D",
+              "gray": Object {
+                "100": "#F7F7F8",
+                "150": "#E8EBED",
+                "200": "#DADEE1",
+                "300": "#BEC4CB",
+                "400": "#A2ABB4",
+                "500": "#85919D",
+                "600": "#6B7885",
+                "700": "#545E68",
+                "800": "#3D454C",
+                "900": "#272B30",
+              },
+              "green": Object {
+                "100": "#FBFEFC",
+                "150": "#E4F9E9",
+                "200": "#CEF3D6",
+                "300": "#A1E8B1",
+                "400": "#73DD8C",
+                "500": "#46D267",
+                "600": "#2CB54C",
+                "700": "#218739",
+                "800": "#165A26",
+                "900": "#0B2D13",
+              },
+              "neutral-gray": Object {
+                "100": "#F7F7F7",
+                "150": "#EBEBEB",
+                "200": "#DDDDDD",
+                "300": "#C4C4C4",
+                "400": "#ABABAB",
+                "50": "#FAFAFA",
+                "500": "#919191",
+                "600": "#787878",
+                "700": "#5E5E5E",
+                "800": "#454545",
+                "900": "#2B2B2B",
+              },
+              "orange": Object {
+                "100": "#FFFDFA",
+                "150": "#FFF3E0",
+                "200": "#FFE7C2",
+                "300": "#FFD08A",
+                "400": "#FFBA52",
+                "500": "#FFA31A",
+                "600": "#E08700",
+                "700": "#A86500",
+                "800": "#704300",
+                "900": "#382200",
+              },
+              "red": Object {
+                "100": "#FEFBFB",
+                "150": "#FAE5E7",
+                "200": "#F6CBCF",
+                "300": "#ED9BA4",
+                "400": "#E56C78",
+                "500": "#DD3C4C",
+                "600": "#BF2231",
+                "700": "#8F1925",
+                "800": "#5F1119",
+                "900": "#30080C",
+              },
+              "transparent": "transparent",
+              "white": "#fff",
+              "yellow": Object {
+                "100": "#FFFEFA",
+                "150": "#FFF7E0",
+                "200": "#FFF0C2",
+                "300": "#FFE28A",
+                "400": "#FFDA52",
+                "500": "#FFC61A",
+                "600": "#E0A800",
+                "700": "#A87E00",
+                "800": "#705400",
+                "900": "#382A00",
+              },
+            },
+            "fontSizes": Array [
+              0,
+              "1.100rem",
+              "1.300rem",
+              "1.400rem",
+              "1.800rem",
+              "2.400rem",
+              "3.300rem",
+              "4.400rem",
             ],
-            "concreteType": "SSOConfigurationConnection",
-            "kind": "LinkedField",
-            "name": "ssoConfigurations",
-            "plural": false,
-            "selections": Array [
-              Object {
-                "alias": null,
-                "args": null,
-                "concreteType": "SSOConfigurationEdge",
-                "kind": "LinkedField",
-                "name": "edges",
-                "plural": true,
-                "selections": Array [
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": null,
-                    "kind": "LinkedField",
-                    "name": "node",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "__typename",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "isCompletelyConfigured",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "allowedData",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "enabled",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "FranceConnectSSOConfiguration",
-                      },
-                    ],
-                    "storageKey": null,
-                  },
-                ],
-                "storageKey": null,
-              },
+            "fontWeights": Object {
+              "black": 900,
+              "bold": 700,
+              "extrabold": 800,
+              "hairline": 100,
+              "light": 300,
+              "medium": 500,
+              "normal": 400,
+              "semibold": 600,
+              "thin": 200,
+            },
+            "fonts": Object {
+              "body": "OpenSans, Helvetica, Arial, sans-serif",
+              "content": "OpenSans, Helvetica, Arial, sans-serif",
+              "heading": "OpenSans, Helvetica, Arial, sans-serif",
+              "input": "Roboto, Helvetica, Arial, sans-serif",
+              "label": "OpenSans, Helvetica, Arial, sans-serif",
+              "openSans": "OpenSans, Helvetica, Arial, sans-serif",
+              "roboto": "Roboto, Helvetica, Arial, sans-serif",
+            },
+            "iconSizes": Array [
+              "1.200rem",
+              "1.600rem",
+              "2.400rem",
+              "3.200rem",
+              "4.800rem",
+              "6.400rem",
             ],
-            "storageKey": "ssoConfigurations(first:100,ssoType:\\"FRANCE_CONNECT\\")",
-          },
-          Object {
-            "condition": "isEditMode",
-            "kind": "Condition",
-            "passingValue": true,
-            "selections": Array [
-              Object {
-                "alias": "project",
-                "args": Array [
-                  Object {
-                    "kind": "Variable",
-                    "name": "id",
-                    "variableName": "projectId",
-                  },
-                ],
-                "concreteType": null,
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": Array [
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "__typename",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "id",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "abstractKey": null,
-                    "kind": "InlineFragment",
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "_id",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "title",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "url",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "hasAnalysis",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "adminUrl",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProposalConnection",
-                        "kind": "LinkedField",
-                        "name": "proposals",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "totalCount",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": null,
-                        "kind": "LinkedField",
-                        "name": "steps",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "slug",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "body",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "timeless",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "startAt",
-                            "args": null,
-                            "concreteType": "TimeRange",
-                            "kind": "LinkedField",
-                            "name": "timeRange",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "startAt",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "endAt",
-                            "args": null,
-                            "concreteType": "TimeRange",
-                            "kind": "LinkedField",
-                            "name": "timeRange",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "endAt",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "label",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "customCode",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "metaDescription",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "isEnabled",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "enabled",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "url",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "nbOpinionsToDisplay",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "nbVersionsToDisplay",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "RankingStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "allowAuthorsToAddNews",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "defaultSort",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "mainView",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": "proposalForm",
-                                "args": null,
-                                "concreteType": "ProposalForm",
-                                "kind": "LinkedField",
-                                "name": "form",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "isGridViewEnabled",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "isListViewEnabled",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "isMapViewEnabled",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "private",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProposalStepStatus",
-                                "kind": "LinkedField",
-                                "name": "defaultStatus",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProposalStepStatus",
-                                "kind": "LinkedField",
-                                "name": "statuses",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "color",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votable",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesHelpText",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesLimit",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesMin",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesRanking",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "voteThreshold",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "voteType",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "budget",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "CollectStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProposalStepStatus",
-                                "kind": "LinkedField",
-                                "name": "statuses",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "color",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProposalStepStatus",
-                                "kind": "LinkedField",
-                                "name": "defaultStatus",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votable",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesHelpText",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesLimit",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesMin",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesRanking",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "voteThreshold",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "voteType",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "defaultSort",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "allowingProgressSteps",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "allowAuthorsToAddNews",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "budget",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "mainView",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isAnalysisStep",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "SelectionStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ConsultationConnection",
-                                "kind": "LinkedField",
-                                "name": "consultations",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "ConsultationEdge",
-                                    "kind": "LinkedField",
-                                    "name": "edges",
-                                    "plural": true,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Consultation",
-                                        "kind": "LinkedField",
-                                        "name": "node",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": "value",
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": "label",
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "title",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                        ],
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "ConsultationStep",
-                          },
-                          Object {
-                            "abstractKey": "__isRequirementStep",
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "RequirementConnection",
-                                "kind": "LinkedField",
-                                "name": "requirements",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "reason",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "RequirementEdge",
-                                    "kind": "LinkedField",
-                                    "name": "edges",
-                                    "plural": true,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": null,
-                                        "kind": "LinkedField",
-                                        "name": "node",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "__typename",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": "type",
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "__typename",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "abstractKey": null,
-                                            "kind": "InlineFragment",
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "label",
-                                                "storageKey": null,
-                                              },
-                                            ],
-                                            "type": "CheckboxRequirement",
-                                          },
-                                        ],
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "RequirementStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "Questionnaire",
-                                "kind": "LinkedField",
-                                "name": "questionnaire",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "footer",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isAnonymousParticipationAllowed",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "collectParticipantsEmail",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "RequirementConnection",
-                                "kind": "LinkedField",
-                                "name": "requirements",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "reason",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "RequirementEdge",
-                                    "kind": "LinkedField",
-                                    "name": "edges",
-                                    "plural": true,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": null,
-                                        "kind": "LinkedField",
-                                        "name": "node",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "__typename",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": "type",
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "__typename",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "abstractKey": null,
-                                            "kind": "InlineFragment",
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "label",
-                                                "storageKey": null,
-                                              },
-                                            ],
-                                            "type": "CheckboxRequirement",
-                                          },
-                                        ],
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "QuestionnaireStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isAnonymousParticipationAllowed",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "Debate",
-                                "kind": "LinkedField",
-                                "name": "debate",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "DebateOpinionConnection",
-                                    "kind": "LinkedField",
-                                    "name": "opinions",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "totalCount",
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "DebateArticleConnection",
-                                    "kind": "LinkedField",
-                                    "name": "articles",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "DebateArticleEdge",
-                                        "kind": "LinkedField",
-                                        "name": "edges",
-                                        "plural": true,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "concreteType": "DebateArticle",
-                                            "kind": "LinkedField",
-                                            "name": "node",
-                                            "plural": false,
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "id",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "url",
-                                                "storageKey": null,
-                                              },
-                                            ],
-                                            "storageKey": null,
-                                          },
-                                        ],
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "debateType",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "debateContent",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "DebateStep",
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "DebateStep",
-                        "kind": "LinkedField",
-                        "name": "firstDebateStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "slug",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "QuestionnaireStep",
-                        "kind": "LinkedField",
-                        "name": "firstQuestionnaireStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "slug",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": null,
-                        "kind": "LinkedField",
-                        "name": "firstAnalysisStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "ProposalConnection",
-                            "kind": "LinkedField",
-                            "name": "proposals",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "totalCount",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "UserConnection",
-                        "kind": "LinkedField",
-                        "name": "contributors",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "totalCount",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "metaDescription",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "archived",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "User",
-                        "kind": "LinkedField",
-                        "name": "authors",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": "value",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "label",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "username",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProjectType",
-                        "kind": "LinkedField",
-                        "name": "type",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": "Cover",
-                        "args": null,
-                        "concreteType": "Media",
-                        "kind": "LinkedField",
-                        "name": "cover",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "name",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "size",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "url",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "video",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Theme",
-                        "kind": "LinkedField",
-                        "name": "themes",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": "value",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "label",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "GroupConnection",
-                        "kind": "LinkedField",
-                        "name": "restrictedViewers",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "GroupEdge",
-                            "kind": "LinkedField",
-                            "name": "edges",
-                            "plural": true,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "Group",
-                                "kind": "LinkedField",
-                                "name": "node",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProjectDistrictConnection",
-                        "kind": "LinkedField",
-                        "name": "districts",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "ProjectDistrictEdge",
-                            "kind": "LinkedField",
-                            "name": "edges",
-                            "plural": true,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProjectDistrict",
-                                "kind": "LinkedField",
-                                "name": "node",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "CollectStep",
-                        "kind": "LinkedField",
-                        "name": "firstCollectStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "ProposalForm",
-                            "kind": "LinkedField",
-                            "name": "form",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isGridViewEnabled",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isListViewEnabled",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isMapViewEnabled",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "visibility",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "publishedAt",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "opinionCanBeFollowed",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "isExternal",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "externalLink",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "externalContributionsCount",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "externalParticipantsCount",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "externalVotesCount",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Locale",
-                        "kind": "LinkedField",
-                        "name": "locale",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": "value",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "label",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "traductionKey",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                    ],
-                    "type": "Project",
-                  },
-                ],
-                "storageKey": null,
-              },
+            "letterSpacings": Object {
+              "normal": "0",
+              "tight": "-0.025em",
+              "tighter": "-0.05em",
+              "wide": "0.025em",
+              "wider": "0.05em",
+              "widest": "0.1em",
+            },
+            "lineHeights": Object {
+              "base": "2.400rem",
+              "l": "4.800rem",
+              "m": "3.200rem",
+              "normal": "1rem",
+              "s": "1.800rem",
+              "sm": "1.600rem",
+              "xl": "6.400rem",
+            },
+            "radii": Object {
+              "accordion": 8,
+              "adminSection": 8,
+              "button": 4,
+              "buttonQuickAction": 50,
+              "card": 4,
+              "modal": 5,
+              "normal": 4,
+              "notifications": 4,
+              "placeholder": 4,
+              "popover": 8,
+              "poppin": 8,
+              "project_card": 8,
+              "table": 8,
+              "tags": 4,
+              "toasts": 4,
+              "tooltip": 4,
+            },
+            "shadows": Object {
+              "big": "0 10px 99px rgba(0, 0, 0, 0.302)",
+              "medium": "0 10px 50px rgba(0, 0, 0, 0.15)",
+              "small": "0 2px 8px rgba(0, 0, 0, 0.1)",
+            },
+            "sizes": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
             ],
-          },
-        ],
-      },
-      "params": Object {
-        "cacheID": "01ca4d51172252542cd9139577cbe31d",
-        "id": null,
-        "metadata": Object {},
-        "name": "ProjectAdminPageQuery",
-        "operationKind": "query",
-        "text": "query ProjectAdminPageQuery(
-  $projectId: ID!
-  $isEditMode: Boolean!
-) {
-  project: node(id: $projectId) @include(if: $isEditMode) {
-    __typename
-    ...ProjectAdminContent_project_2CgS8h
-    id
-  }
-  ...ProjectAdminContent_query
-}
-
-fragment ProjectAccessAdminForm_project on Project {
-  visibility
-}
-
-fragment ProjectAdminContent_project_2CgS8h on Project {
-  _id
-  id
-  title
-  url
-  hasAnalysis
-  adminUrl
-  proposals {
-    totalCount
-  }
-  steps {
-    id
-    __typename
-    slug
-  }
-  firstDebateStep {
-    id
-    slug
-  }
-  firstQuestionnaireStep {
-    id
-    slug
-  }
-  firstAnalysisStep {
-    __typename
-    proposals {
-      totalCount
-    }
-    id
-  }
-  contributors {
-    totalCount
-  }
-  ...ProjectAdminForm_project
-}
-
-fragment ProjectAdminContent_query on Query {
-  ...ProjectAdminForm_query
-}
-
-fragment ProjectAdminForm_project on Project {
-  id
-  title
-  metaDescription
-  archived
-  authors {
-    value: id
-    label: username
-    id
-  }
-  type {
-    id
-  }
-  Cover: cover {
-    id
-    name
-    size
-    url
-  }
-  video
-  themes {
-    value: id
-    label: title
-    id
-  }
-  restrictedViewers {
-    edges {
-      node {
-        value: id
-        label: title
-        id
-      }
-    }
-  }
-  districts {
-    edges {
-      node {
-        value: id
-        label: name
-        id
-      }
-    }
-  }
-  firstCollectStep {
-    form {
-      isGridViewEnabled
-      isListViewEnabled
-      isMapViewEnabled
-      id
-    }
-    id
-  }
-  steps {
-    id
-    body
-    timeless
-    __typename
-    title
-    slug
-    startAt: timeRange {
-      startAt
-    }
-    endAt: timeRange {
-      endAt
-    }
-    label
-    customCode
-    metaDescription
-    isEnabled: enabled
-    url
-    ... on RankingStep {
-      nbOpinionsToDisplay
-      nbVersionsToDisplay
-    }
-    ... on CollectStep {
-      allowAuthorsToAddNews
-      defaultSort
-      mainView
-      proposalForm: form {
-        value: id
-        label: title
-        isGridViewEnabled
-        isListViewEnabled
-        isMapViewEnabled
-        id
-      }
-      private
-      defaultStatus {
-        value: id
-        label: name
-        id
-      }
-      statuses {
-        id
-        color
-        name
-      }
-      votable
-      votesHelpText
-      votesLimit
-      votesMin
-      votesRanking
-      voteThreshold
-      voteType
-      budget
-    }
-    ... on SelectionStep {
-      statuses {
-        id
-        color
-        name
-      }
-      defaultStatus {
-        value: id
-        label: name
-        id
-      }
-      votable
-      votesHelpText
-      votesLimit
-      votesMin
-      votesRanking
-      voteThreshold
-      voteType
-      defaultSort
-      allowingProgressSteps
-      allowAuthorsToAddNews
-      budget
-      mainView
-      isAnalysisStep
-    }
-    ... on ConsultationStep {
-      consultations {
-        edges {
-          node {
-            value: id
-            label: title
-            id
+            "space": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
           }
         }
-      }
-    }
-    ... on RequirementStep {
-      __isRequirementStep: __typename
-      requirements {
-        reason
-        edges {
-          node {
-            __typename
-            id
-            type: __typename
-            ... on CheckboxRequirement {
-              label
-            }
-          }
-        }
-      }
-    }
-    ... on QuestionnaireStep {
-      questionnaire {
-        value: id
-        label: title
-        id
-      }
-      footer
-      isAnonymousParticipationAllowed
-      collectParticipantsEmail
-      requirements {
-        reason
-        edges {
-          node {
-            __typename
-            id
-            type: __typename
-            ... on CheckboxRequirement {
-              label
-            }
-          }
-        }
-      }
-    }
-    ... on DebateStep {
-      isAnonymousParticipationAllowed
-      debate {
-        id
-        opinions {
-          totalCount
-        }
-        articles {
-          edges {
-            node {
-              id
-              url
-            }
-          }
-        }
-      }
-      debateType
-      debateContent
-    }
-  }
-  visibility
-  publishedAt
-  opinionCanBeFollowed
-  isExternal
-  externalLink
-  externalContributionsCount
-  externalParticipantsCount
-  externalVotesCount
-  locale {
-    value: id
-    label: traductionKey
-    id
-  }
-  url
-  ...ProjectStepAdmin_project
-  ...ProjectContentAdminForm_project
-  ...ProjectExternalAdminPage_project
-  ...ProjectAccessAdminForm_project
-  ...ProjectProposalsAdminForm_project
-  ...ProjectPublishAdminForm_project
-}
+      >
+        <ProjectAdminPage
+          firstCollectStepId="123456"
+          projectId="oui"
+        />
+      </Component>
+    </Provider>
+  </Connect(IntlProvider)>
+</Provider>
+`;
 
-fragment ProjectAdminForm_query on Query {
-  ...ProjectStepAdmin_query
-}
-
-fragment ProjectAdminStepFormModal_project on Project {
-  ...ProjectAdminStepForm_project
-}
-
-fragment ProjectAdminStepFormModal_query on Query {
-  ssoConfigurations(first: 100, ssoType: FRANCE_CONNECT) {
-    edges {
-      node {
-        __typename
-        ... on FranceConnectSSOConfiguration {
-          isCompletelyConfigured
-          allowedData
-          enabled
-        }
-        id
-      }
-    }
-  }
-}
-
-fragment ProjectAdminStepForm_project on Project {
-  firstCollectStep {
-    form {
-      isGridViewEnabled
-      isListViewEnabled
-      isMapViewEnabled
-      id
-    }
-    id
-  }
-}
-
-fragment ProjectContentAdminForm_project on Project {
-  id
-  title
-  metaDescription
-  authors {
-    value: id
-    label: username
-    id
-  }
-  type {
-    id
-  }
-  Cover: cover {
-    id
-    name
-    size
-    url
-  }
-  video
-  themes {
-    value: id
-    label: title
-    id
-  }
-  districts {
-    edges {
-      node {
-        value: id
-        label: name
-        id
-      }
-    }
-  }
-}
-
-fragment ProjectExternalAdminForm_project on Project {
-  id
-  isExternal
-  externalLink
-  externalContributionsCount
-  externalParticipantsCount
-  externalVotesCount
-}
-
-fragment ProjectExternalAdminPage_project on Project {
-  ...ProjectExternalAdminForm_project
-}
-
-fragment ProjectProposalsAdminForm_project on Project {
-  opinionCanBeFollowed
-}
-
-fragment ProjectPublishAdminForm_project on Project {
-  publishedAt
-  locale {
-    value: id
-    label: traductionKey
-    id
-  }
-  url
-  archived
-}
-
-fragment ProjectStepAdminItemStep_project on Project {
-  _id
-  ...ProjectAdminStepFormModal_project
-}
-
-fragment ProjectStepAdminItemStep_query on Query {
-  ...ProjectAdminStepFormModal_query
-}
-
-fragment ProjectStepAdminItem_project on Project {
-  ...ProjectStepAdminItemStep_project
-}
-
-fragment ProjectStepAdminItem_query on Query {
-  ...ProjectStepAdminItemStep_query
-}
-
-fragment ProjectStepAdminList_project on Project {
-  ...ProjectStepAdminItem_project
-}
-
-fragment ProjectStepAdminList_query on Query {
-  ...ProjectStepAdminItem_query
-}
-
-fragment ProjectStepAdmin_project on Project {
-  ...ProjectAdminStepFormModal_project
-  ...ProjectStepAdminList_project
-}
-
-fragment ProjectStepAdmin_query on Query {
-  ...ProjectAdminStepFormModal_query
-  ...ProjectStepAdminList_query
-}
-",
-      },
-    }
-  }
-  render={[Function]}
-  variables={
+exports[`<ProjectAdminPage /> renders correctly when editing project as project admin 1`] = `
+<Provider
+  store={
     Object {
-      "isEditMode": true,
-      "projectId": "oui",
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(Symbol.observable): [Function],
     }
   }
-/>
+>
+  <Connect(IntlProvider)>
+    <Provider>
+      <Component
+        theme={
+          Object {
+            "borders": Object {
+              "avatar": "2px solid",
+              "button": "1px solid",
+              "card": "1px solid",
+              "normal": "1px solid",
+            },
+            "breakpoints": Array [
+              "767px",
+              "1024px",
+            ],
+            "colors": Object {
+              "aqua": Object {
+                "100": "#FAFEFE",
+                "150": "#E4F8FC",
+                "200": "#C9F2F8",
+                "300": "#97E6F2",
+                "400": "#65DAEC",
+                "500": "#33CEE6",
+                "600": "#19B0C8",
+                "700": "#138496",
+                "800": "#0C5864",
+                "900": "#062C32",
+              },
+              "black": "#000",
+              "blue": Object {
+                "100": "#FAFCFF",
+                "150": "#E0EFFF",
+                "200": "#C2DFFF",
+                "300": "#8AC2FF",
+                "400": "#52A5FF",
+                "500": "#1A88FF",
+                "600": "#006CE0",
+                "700": "#0051A8",
+                "800": "#003670",
+                "900": "#001B38",
+              },
+              "current": "currentColor",
+              "dark": "#30363D",
+              "gray": Object {
+                "100": "#F7F7F8",
+                "150": "#E8EBED",
+                "200": "#DADEE1",
+                "300": "#BEC4CB",
+                "400": "#A2ABB4",
+                "500": "#85919D",
+                "600": "#6B7885",
+                "700": "#545E68",
+                "800": "#3D454C",
+                "900": "#272B30",
+              },
+              "green": Object {
+                "100": "#FBFEFC",
+                "150": "#E4F9E9",
+                "200": "#CEF3D6",
+                "300": "#A1E8B1",
+                "400": "#73DD8C",
+                "500": "#46D267",
+                "600": "#2CB54C",
+                "700": "#218739",
+                "800": "#165A26",
+                "900": "#0B2D13",
+              },
+              "neutral-gray": Object {
+                "100": "#F7F7F7",
+                "150": "#EBEBEB",
+                "200": "#DDDDDD",
+                "300": "#C4C4C4",
+                "400": "#ABABAB",
+                "50": "#FAFAFA",
+                "500": "#919191",
+                "600": "#787878",
+                "700": "#5E5E5E",
+                "800": "#454545",
+                "900": "#2B2B2B",
+              },
+              "orange": Object {
+                "100": "#FFFDFA",
+                "150": "#FFF3E0",
+                "200": "#FFE7C2",
+                "300": "#FFD08A",
+                "400": "#FFBA52",
+                "500": "#FFA31A",
+                "600": "#E08700",
+                "700": "#A86500",
+                "800": "#704300",
+                "900": "#382200",
+              },
+              "red": Object {
+                "100": "#FEFBFB",
+                "150": "#FAE5E7",
+                "200": "#F6CBCF",
+                "300": "#ED9BA4",
+                "400": "#E56C78",
+                "500": "#DD3C4C",
+                "600": "#BF2231",
+                "700": "#8F1925",
+                "800": "#5F1119",
+                "900": "#30080C",
+              },
+              "transparent": "transparent",
+              "white": "#fff",
+              "yellow": Object {
+                "100": "#FFFEFA",
+                "150": "#FFF7E0",
+                "200": "#FFF0C2",
+                "300": "#FFE28A",
+                "400": "#FFDA52",
+                "500": "#FFC61A",
+                "600": "#E0A800",
+                "700": "#A87E00",
+                "800": "#705400",
+                "900": "#382A00",
+              },
+            },
+            "fontSizes": Array [
+              0,
+              "1.100rem",
+              "1.300rem",
+              "1.400rem",
+              "1.800rem",
+              "2.400rem",
+              "3.300rem",
+              "4.400rem",
+            ],
+            "fontWeights": Object {
+              "black": 900,
+              "bold": 700,
+              "extrabold": 800,
+              "hairline": 100,
+              "light": 300,
+              "medium": 500,
+              "normal": 400,
+              "semibold": 600,
+              "thin": 200,
+            },
+            "fonts": Object {
+              "body": "OpenSans, Helvetica, Arial, sans-serif",
+              "content": "OpenSans, Helvetica, Arial, sans-serif",
+              "heading": "OpenSans, Helvetica, Arial, sans-serif",
+              "input": "Roboto, Helvetica, Arial, sans-serif",
+              "label": "OpenSans, Helvetica, Arial, sans-serif",
+              "openSans": "OpenSans, Helvetica, Arial, sans-serif",
+              "roboto": "Roboto, Helvetica, Arial, sans-serif",
+            },
+            "iconSizes": Array [
+              "1.200rem",
+              "1.600rem",
+              "2.400rem",
+              "3.200rem",
+              "4.800rem",
+              "6.400rem",
+            ],
+            "letterSpacings": Object {
+              "normal": "0",
+              "tight": "-0.025em",
+              "tighter": "-0.05em",
+              "wide": "0.025em",
+              "wider": "0.05em",
+              "widest": "0.1em",
+            },
+            "lineHeights": Object {
+              "base": "2.400rem",
+              "l": "4.800rem",
+              "m": "3.200rem",
+              "normal": "1rem",
+              "s": "1.800rem",
+              "sm": "1.600rem",
+              "xl": "6.400rem",
+            },
+            "radii": Object {
+              "accordion": 8,
+              "adminSection": 8,
+              "button": 4,
+              "buttonQuickAction": 50,
+              "card": 4,
+              "modal": 5,
+              "normal": 4,
+              "notifications": 4,
+              "placeholder": 4,
+              "popover": 8,
+              "poppin": 8,
+              "project_card": 8,
+              "table": 8,
+              "tags": 4,
+              "toasts": 4,
+              "tooltip": 4,
+            },
+            "shadows": Object {
+              "big": "0 10px 99px rgba(0, 0, 0, 0.302)",
+              "medium": "0 10px 50px rgba(0, 0, 0, 0.15)",
+              "small": "0 2px 8px rgba(0, 0, 0, 0.1)",
+            },
+            "sizes": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
+            "space": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
+          }
+        }
+      >
+        <ProjectAdminPage
+          firstCollectStepId="123456"
+          projectId="oui"
+        />
+      </Component>
+    </Provider>
+  </Connect(IntlProvider)>
+</Provider>
 `;
 
 exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
-<ReactRelayQueryRenderer
-  environment={"RelayModernEnvironment()"}
-  query={
+<Provider
+  store={
     Object {
-      "fragment": Object {
-        "abstractKey": null,
-        "argumentDefinitions": Array [
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(Symbol.observable): [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)>
+    <Provider>
+      <Component
+        theme={
           Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "isEditMode",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "projectId",
-          },
-        ],
-        "kind": "Fragment",
-        "metadata": null,
-        "name": "ProjectAdminPageQuery",
-        "selections": Array [
-          Object {
-            "condition": "isEditMode",
-            "kind": "Condition",
-            "passingValue": true,
-            "selections": Array [
-              Object {
-                "alias": "project",
-                "args": Array [
-                  Object {
-                    "kind": "Variable",
-                    "name": "id",
-                    "variableName": "projectId",
-                  },
-                ],
-                "concreteType": null,
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": Array [
-                  Object {
-                    "args": Array [
-                      Object {
-                        "kind": "Variable",
-                        "name": "projectId",
-                        "variableName": "projectId",
-                      },
-                    ],
-                    "kind": "FragmentSpread",
-                    "name": "ProjectAdminContent_project",
-                  },
-                ],
-                "storageKey": null,
-              },
+            "borders": Object {
+              "avatar": "2px solid",
+              "button": "1px solid",
+              "card": "1px solid",
+              "normal": "1px solid",
+            },
+            "breakpoints": Array [
+              "767px",
+              "1024px",
             ],
-          },
-          Object {
-            "args": null,
-            "kind": "FragmentSpread",
-            "name": "ProjectAdminContent_query",
-          },
-        ],
-        "type": "Query",
-      },
-      "hash": "992da232cea6e607fb2c223e62feae52",
-      "kind": "Request",
-      "operation": Object {
-        "argumentDefinitions": Array [
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "projectId",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "isEditMode",
-          },
-        ],
-        "kind": "Operation",
-        "name": "ProjectAdminPageQuery",
-        "selections": Array [
-          Object {
-            "alias": null,
-            "args": Array [
-              Object {
-                "kind": "Literal",
-                "name": "first",
-                "value": 100,
+            "colors": Object {
+              "aqua": Object {
+                "100": "#FAFEFE",
+                "150": "#E4F8FC",
+                "200": "#C9F2F8",
+                "300": "#97E6F2",
+                "400": "#65DAEC",
+                "500": "#33CEE6",
+                "600": "#19B0C8",
+                "700": "#138496",
+                "800": "#0C5864",
+                "900": "#062C32",
               },
-              Object {
-                "kind": "Literal",
-                "name": "ssoType",
-                "value": "FRANCE_CONNECT",
+              "black": "#000",
+              "blue": Object {
+                "100": "#FAFCFF",
+                "150": "#E0EFFF",
+                "200": "#C2DFFF",
+                "300": "#8AC2FF",
+                "400": "#52A5FF",
+                "500": "#1A88FF",
+                "600": "#006CE0",
+                "700": "#0051A8",
+                "800": "#003670",
+                "900": "#001B38",
               },
+              "current": "currentColor",
+              "dark": "#30363D",
+              "gray": Object {
+                "100": "#F7F7F8",
+                "150": "#E8EBED",
+                "200": "#DADEE1",
+                "300": "#BEC4CB",
+                "400": "#A2ABB4",
+                "500": "#85919D",
+                "600": "#6B7885",
+                "700": "#545E68",
+                "800": "#3D454C",
+                "900": "#272B30",
+              },
+              "green": Object {
+                "100": "#FBFEFC",
+                "150": "#E4F9E9",
+                "200": "#CEF3D6",
+                "300": "#A1E8B1",
+                "400": "#73DD8C",
+                "500": "#46D267",
+                "600": "#2CB54C",
+                "700": "#218739",
+                "800": "#165A26",
+                "900": "#0B2D13",
+              },
+              "neutral-gray": Object {
+                "100": "#F7F7F7",
+                "150": "#EBEBEB",
+                "200": "#DDDDDD",
+                "300": "#C4C4C4",
+                "400": "#ABABAB",
+                "50": "#FAFAFA",
+                "500": "#919191",
+                "600": "#787878",
+                "700": "#5E5E5E",
+                "800": "#454545",
+                "900": "#2B2B2B",
+              },
+              "orange": Object {
+                "100": "#FFFDFA",
+                "150": "#FFF3E0",
+                "200": "#FFE7C2",
+                "300": "#FFD08A",
+                "400": "#FFBA52",
+                "500": "#FFA31A",
+                "600": "#E08700",
+                "700": "#A86500",
+                "800": "#704300",
+                "900": "#382200",
+              },
+              "red": Object {
+                "100": "#FEFBFB",
+                "150": "#FAE5E7",
+                "200": "#F6CBCF",
+                "300": "#ED9BA4",
+                "400": "#E56C78",
+                "500": "#DD3C4C",
+                "600": "#BF2231",
+                "700": "#8F1925",
+                "800": "#5F1119",
+                "900": "#30080C",
+              },
+              "transparent": "transparent",
+              "white": "#fff",
+              "yellow": Object {
+                "100": "#FFFEFA",
+                "150": "#FFF7E0",
+                "200": "#FFF0C2",
+                "300": "#FFE28A",
+                "400": "#FFDA52",
+                "500": "#FFC61A",
+                "600": "#E0A800",
+                "700": "#A87E00",
+                "800": "#705400",
+                "900": "#382A00",
+              },
+            },
+            "fontSizes": Array [
+              0,
+              "1.100rem",
+              "1.300rem",
+              "1.400rem",
+              "1.800rem",
+              "2.400rem",
+              "3.300rem",
+              "4.400rem",
             ],
-            "concreteType": "SSOConfigurationConnection",
-            "kind": "LinkedField",
-            "name": "ssoConfigurations",
-            "plural": false,
-            "selections": Array [
-              Object {
-                "alias": null,
-                "args": null,
-                "concreteType": "SSOConfigurationEdge",
-                "kind": "LinkedField",
-                "name": "edges",
-                "plural": true,
-                "selections": Array [
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": null,
-                    "kind": "LinkedField",
-                    "name": "node",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "__typename",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "isCompletelyConfigured",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "allowedData",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "enabled",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "FranceConnectSSOConfiguration",
-                      },
-                    ],
-                    "storageKey": null,
-                  },
-                ],
-                "storageKey": null,
-              },
+            "fontWeights": Object {
+              "black": 900,
+              "bold": 700,
+              "extrabold": 800,
+              "hairline": 100,
+              "light": 300,
+              "medium": 500,
+              "normal": 400,
+              "semibold": 600,
+              "thin": 200,
+            },
+            "fonts": Object {
+              "body": "OpenSans, Helvetica, Arial, sans-serif",
+              "content": "OpenSans, Helvetica, Arial, sans-serif",
+              "heading": "OpenSans, Helvetica, Arial, sans-serif",
+              "input": "Roboto, Helvetica, Arial, sans-serif",
+              "label": "OpenSans, Helvetica, Arial, sans-serif",
+              "openSans": "OpenSans, Helvetica, Arial, sans-serif",
+              "roboto": "Roboto, Helvetica, Arial, sans-serif",
+            },
+            "iconSizes": Array [
+              "1.200rem",
+              "1.600rem",
+              "2.400rem",
+              "3.200rem",
+              "4.800rem",
+              "6.400rem",
             ],
-            "storageKey": "ssoConfigurations(first:100,ssoType:\\"FRANCE_CONNECT\\")",
-          },
-          Object {
-            "condition": "isEditMode",
-            "kind": "Condition",
-            "passingValue": true,
-            "selections": Array [
-              Object {
-                "alias": "project",
-                "args": Array [
-                  Object {
-                    "kind": "Variable",
-                    "name": "id",
-                    "variableName": "projectId",
-                  },
-                ],
-                "concreteType": null,
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": Array [
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "__typename",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "id",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "abstractKey": null,
-                    "kind": "InlineFragment",
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "_id",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "title",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "url",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "hasAnalysis",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "adminUrl",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProposalConnection",
-                        "kind": "LinkedField",
-                        "name": "proposals",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "totalCount",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": null,
-                        "kind": "LinkedField",
-                        "name": "steps",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "slug",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "body",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "timeless",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "startAt",
-                            "args": null,
-                            "concreteType": "TimeRange",
-                            "kind": "LinkedField",
-                            "name": "timeRange",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "startAt",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "endAt",
-                            "args": null,
-                            "concreteType": "TimeRange",
-                            "kind": "LinkedField",
-                            "name": "timeRange",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "endAt",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "label",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "customCode",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "metaDescription",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "isEnabled",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "enabled",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "url",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "nbOpinionsToDisplay",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "nbVersionsToDisplay",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "RankingStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "allowAuthorsToAddNews",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "defaultSort",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "mainView",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": "proposalForm",
-                                "args": null,
-                                "concreteType": "ProposalForm",
-                                "kind": "LinkedField",
-                                "name": "form",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "isGridViewEnabled",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "isListViewEnabled",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "isMapViewEnabled",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "private",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProposalStepStatus",
-                                "kind": "LinkedField",
-                                "name": "defaultStatus",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProposalStepStatus",
-                                "kind": "LinkedField",
-                                "name": "statuses",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "color",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votable",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesHelpText",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesLimit",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesMin",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesRanking",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "voteThreshold",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "voteType",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "budget",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "CollectStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProposalStepStatus",
-                                "kind": "LinkedField",
-                                "name": "statuses",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "color",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProposalStepStatus",
-                                "kind": "LinkedField",
-                                "name": "defaultStatus",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votable",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesHelpText",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesLimit",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesMin",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "votesRanking",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "voteThreshold",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "voteType",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "defaultSort",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "allowingProgressSteps",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "allowAuthorsToAddNews",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "budget",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "mainView",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isAnalysisStep",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "SelectionStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ConsultationConnection",
-                                "kind": "LinkedField",
-                                "name": "consultations",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "ConsultationEdge",
-                                    "kind": "LinkedField",
-                                    "name": "edges",
-                                    "plural": true,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Consultation",
-                                        "kind": "LinkedField",
-                                        "name": "node",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": "value",
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": "label",
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "title",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                        ],
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "ConsultationStep",
-                          },
-                          Object {
-                            "abstractKey": "__isRequirementStep",
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "RequirementConnection",
-                                "kind": "LinkedField",
-                                "name": "requirements",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "reason",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "RequirementEdge",
-                                    "kind": "LinkedField",
-                                    "name": "edges",
-                                    "plural": true,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": null,
-                                        "kind": "LinkedField",
-                                        "name": "node",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "__typename",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": "type",
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "__typename",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "abstractKey": null,
-                                            "kind": "InlineFragment",
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "label",
-                                                "storageKey": null,
-                                              },
-                                            ],
-                                            "type": "CheckboxRequirement",
-                                          },
-                                        ],
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "RequirementStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "Questionnaire",
-                                "kind": "LinkedField",
-                                "name": "questionnaire",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "footer",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isAnonymousParticipationAllowed",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "collectParticipantsEmail",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "RequirementConnection",
-                                "kind": "LinkedField",
-                                "name": "requirements",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "reason",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "RequirementEdge",
-                                    "kind": "LinkedField",
-                                    "name": "edges",
-                                    "plural": true,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": null,
-                                        "kind": "LinkedField",
-                                        "name": "node",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "__typename",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": "type",
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "__typename",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "abstractKey": null,
-                                            "kind": "InlineFragment",
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "label",
-                                                "storageKey": null,
-                                              },
-                                            ],
-                                            "type": "CheckboxRequirement",
-                                          },
-                                        ],
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "QuestionnaireStep",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isAnonymousParticipationAllowed",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "Debate",
-                                "kind": "LinkedField",
-                                "name": "debate",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "DebateOpinionConnection",
-                                    "kind": "LinkedField",
-                                    "name": "opinions",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "totalCount",
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "DebateArticleConnection",
-                                    "kind": "LinkedField",
-                                    "name": "articles",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "DebateArticleEdge",
-                                        "kind": "LinkedField",
-                                        "name": "edges",
-                                        "plural": true,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "concreteType": "DebateArticle",
-                                            "kind": "LinkedField",
-                                            "name": "node",
-                                            "plural": false,
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "id",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "url",
-                                                "storageKey": null,
-                                              },
-                                            ],
-                                            "storageKey": null,
-                                          },
-                                        ],
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "debateType",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "debateContent",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "DebateStep",
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "DebateStep",
-                        "kind": "LinkedField",
-                        "name": "firstDebateStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "slug",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "QuestionnaireStep",
-                        "kind": "LinkedField",
-                        "name": "firstQuestionnaireStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "slug",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": null,
-                        "kind": "LinkedField",
-                        "name": "firstAnalysisStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "ProposalConnection",
-                            "kind": "LinkedField",
-                            "name": "proposals",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "totalCount",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "UserConnection",
-                        "kind": "LinkedField",
-                        "name": "contributors",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "totalCount",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "metaDescription",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "archived",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "User",
-                        "kind": "LinkedField",
-                        "name": "authors",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": "value",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "label",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "username",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProjectType",
-                        "kind": "LinkedField",
-                        "name": "type",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": "Cover",
-                        "args": null,
-                        "concreteType": "Media",
-                        "kind": "LinkedField",
-                        "name": "cover",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "name",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "size",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "url",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "video",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Theme",
-                        "kind": "LinkedField",
-                        "name": "themes",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": "value",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "label",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "GroupConnection",
-                        "kind": "LinkedField",
-                        "name": "restrictedViewers",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "GroupEdge",
-                            "kind": "LinkedField",
-                            "name": "edges",
-                            "plural": true,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "Group",
-                                "kind": "LinkedField",
-                                "name": "node",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProjectDistrictConnection",
-                        "kind": "LinkedField",
-                        "name": "districts",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "ProjectDistrictEdge",
-                            "kind": "LinkedField",
-                            "name": "edges",
-                            "plural": true,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "ProjectDistrict",
-                                "kind": "LinkedField",
-                                "name": "node",
-                                "plural": false,
-                                "selections": Array [
-                                  Object {
-                                    "alias": "value",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": "label",
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "CollectStep",
-                        "kind": "LinkedField",
-                        "name": "firstCollectStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "ProposalForm",
-                            "kind": "LinkedField",
-                            "name": "form",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isGridViewEnabled",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isListViewEnabled",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isMapViewEnabled",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "visibility",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "publishedAt",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "opinionCanBeFollowed",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "isExternal",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "externalLink",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "externalContributionsCount",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "externalParticipantsCount",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "externalVotesCount",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Locale",
-                        "kind": "LinkedField",
-                        "name": "locale",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": "value",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": "label",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "traductionKey",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                    ],
-                    "type": "Project",
-                  },
-                ],
-                "storageKey": null,
-              },
+            "letterSpacings": Object {
+              "normal": "0",
+              "tight": "-0.025em",
+              "tighter": "-0.05em",
+              "wide": "0.025em",
+              "wider": "0.05em",
+              "widest": "0.1em",
+            },
+            "lineHeights": Object {
+              "base": "2.400rem",
+              "l": "4.800rem",
+              "m": "3.200rem",
+              "normal": "1rem",
+              "s": "1.800rem",
+              "sm": "1.600rem",
+              "xl": "6.400rem",
+            },
+            "radii": Object {
+              "accordion": 8,
+              "adminSection": 8,
+              "button": 4,
+              "buttonQuickAction": 50,
+              "card": 4,
+              "modal": 5,
+              "normal": 4,
+              "notifications": 4,
+              "placeholder": 4,
+              "popover": 8,
+              "poppin": 8,
+              "project_card": 8,
+              "table": 8,
+              "tags": 4,
+              "toasts": 4,
+              "tooltip": 4,
+            },
+            "shadows": Object {
+              "big": "0 10px 99px rgba(0, 0, 0, 0.302)",
+              "medium": "0 10px 50px rgba(0, 0, 0, 0.15)",
+              "small": "0 2px 8px rgba(0, 0, 0, 0.1)",
+            },
+            "sizes": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
             ],
-          },
-        ],
-      },
-      "params": Object {
-        "cacheID": "01ca4d51172252542cd9139577cbe31d",
-        "id": null,
-        "metadata": Object {},
-        "name": "ProjectAdminPageQuery",
-        "operationKind": "query",
-        "text": "query ProjectAdminPageQuery(
-  $projectId: ID!
-  $isEditMode: Boolean!
-) {
-  project: node(id: $projectId) @include(if: $isEditMode) {
-    __typename
-    ...ProjectAdminContent_project_2CgS8h
-    id
-  }
-  ...ProjectAdminContent_query
-}
-
-fragment ProjectAccessAdminForm_project on Project {
-  visibility
-}
-
-fragment ProjectAdminContent_project_2CgS8h on Project {
-  _id
-  id
-  title
-  url
-  hasAnalysis
-  adminUrl
-  proposals {
-    totalCount
-  }
-  steps {
-    id
-    __typename
-    slug
-  }
-  firstDebateStep {
-    id
-    slug
-  }
-  firstQuestionnaireStep {
-    id
-    slug
-  }
-  firstAnalysisStep {
-    __typename
-    proposals {
-      totalCount
-    }
-    id
-  }
-  contributors {
-    totalCount
-  }
-  ...ProjectAdminForm_project
-}
-
-fragment ProjectAdminContent_query on Query {
-  ...ProjectAdminForm_query
-}
-
-fragment ProjectAdminForm_project on Project {
-  id
-  title
-  metaDescription
-  archived
-  authors {
-    value: id
-    label: username
-    id
-  }
-  type {
-    id
-  }
-  Cover: cover {
-    id
-    name
-    size
-    url
-  }
-  video
-  themes {
-    value: id
-    label: title
-    id
-  }
-  restrictedViewers {
-    edges {
-      node {
-        value: id
-        label: title
-        id
-      }
-    }
-  }
-  districts {
-    edges {
-      node {
-        value: id
-        label: name
-        id
-      }
-    }
-  }
-  firstCollectStep {
-    form {
-      isGridViewEnabled
-      isListViewEnabled
-      isMapViewEnabled
-      id
-    }
-    id
-  }
-  steps {
-    id
-    body
-    timeless
-    __typename
-    title
-    slug
-    startAt: timeRange {
-      startAt
-    }
-    endAt: timeRange {
-      endAt
-    }
-    label
-    customCode
-    metaDescription
-    isEnabled: enabled
-    url
-    ... on RankingStep {
-      nbOpinionsToDisplay
-      nbVersionsToDisplay
-    }
-    ... on CollectStep {
-      allowAuthorsToAddNews
-      defaultSort
-      mainView
-      proposalForm: form {
-        value: id
-        label: title
-        isGridViewEnabled
-        isListViewEnabled
-        isMapViewEnabled
-        id
-      }
-      private
-      defaultStatus {
-        value: id
-        label: name
-        id
-      }
-      statuses {
-        id
-        color
-        name
-      }
-      votable
-      votesHelpText
-      votesLimit
-      votesMin
-      votesRanking
-      voteThreshold
-      voteType
-      budget
-    }
-    ... on SelectionStep {
-      statuses {
-        id
-        color
-        name
-      }
-      defaultStatus {
-        value: id
-        label: name
-        id
-      }
-      votable
-      votesHelpText
-      votesLimit
-      votesMin
-      votesRanking
-      voteThreshold
-      voteType
-      defaultSort
-      allowingProgressSteps
-      allowAuthorsToAddNews
-      budget
-      mainView
-      isAnalysisStep
-    }
-    ... on ConsultationStep {
-      consultations {
-        edges {
-          node {
-            value: id
-            label: title
-            id
+            "space": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
           }
         }
-      }
-    }
-    ... on RequirementStep {
-      __isRequirementStep: __typename
-      requirements {
-        reason
-        edges {
-          node {
-            __typename
-            id
-            type: __typename
-            ... on CheckboxRequirement {
-              label
-            }
-          }
-        }
-      }
-    }
-    ... on QuestionnaireStep {
-      questionnaire {
-        value: id
-        label: title
-        id
-      }
-      footer
-      isAnonymousParticipationAllowed
-      collectParticipantsEmail
-      requirements {
-        reason
-        edges {
-          node {
-            __typename
-            id
-            type: __typename
-            ... on CheckboxRequirement {
-              label
-            }
-          }
-        }
-      }
-    }
-    ... on DebateStep {
-      isAnonymousParticipationAllowed
-      debate {
-        id
-        opinions {
-          totalCount
-        }
-        articles {
-          edges {
-            node {
-              id
-              url
-            }
-          }
-        }
-      }
-      debateType
-      debateContent
-    }
-  }
-  visibility
-  publishedAt
-  opinionCanBeFollowed
-  isExternal
-  externalLink
-  externalContributionsCount
-  externalParticipantsCount
-  externalVotesCount
-  locale {
-    value: id
-    label: traductionKey
-    id
-  }
-  url
-  ...ProjectStepAdmin_project
-  ...ProjectContentAdminForm_project
-  ...ProjectExternalAdminPage_project
-  ...ProjectAccessAdminForm_project
-  ...ProjectProposalsAdminForm_project
-  ...ProjectPublishAdminForm_project
-}
-
-fragment ProjectAdminForm_query on Query {
-  ...ProjectStepAdmin_query
-}
-
-fragment ProjectAdminStepFormModal_project on Project {
-  ...ProjectAdminStepForm_project
-}
-
-fragment ProjectAdminStepFormModal_query on Query {
-  ssoConfigurations(first: 100, ssoType: FRANCE_CONNECT) {
-    edges {
-      node {
-        __typename
-        ... on FranceConnectSSOConfiguration {
-          isCompletelyConfigured
-          allowedData
-          enabled
-        }
-        id
-      }
-    }
-  }
-}
-
-fragment ProjectAdminStepForm_project on Project {
-  firstCollectStep {
-    form {
-      isGridViewEnabled
-      isListViewEnabled
-      isMapViewEnabled
-      id
-    }
-    id
-  }
-}
-
-fragment ProjectContentAdminForm_project on Project {
-  id
-  title
-  metaDescription
-  authors {
-    value: id
-    label: username
-    id
-  }
-  type {
-    id
-  }
-  Cover: cover {
-    id
-    name
-    size
-    url
-  }
-  video
-  themes {
-    value: id
-    label: title
-    id
-  }
-  districts {
-    edges {
-      node {
-        value: id
-        label: name
-        id
-      }
-    }
-  }
-}
-
-fragment ProjectExternalAdminForm_project on Project {
-  id
-  isExternal
-  externalLink
-  externalContributionsCount
-  externalParticipantsCount
-  externalVotesCount
-}
-
-fragment ProjectExternalAdminPage_project on Project {
-  ...ProjectExternalAdminForm_project
-}
-
-fragment ProjectProposalsAdminForm_project on Project {
-  opinionCanBeFollowed
-}
-
-fragment ProjectPublishAdminForm_project on Project {
-  publishedAt
-  locale {
-    value: id
-    label: traductionKey
-    id
-  }
-  url
-  archived
-}
-
-fragment ProjectStepAdminItemStep_project on Project {
-  _id
-  ...ProjectAdminStepFormModal_project
-}
-
-fragment ProjectStepAdminItemStep_query on Query {
-  ...ProjectAdminStepFormModal_query
-}
-
-fragment ProjectStepAdminItem_project on Project {
-  ...ProjectStepAdminItemStep_project
-}
-
-fragment ProjectStepAdminItem_query on Query {
-  ...ProjectStepAdminItemStep_query
-}
-
-fragment ProjectStepAdminList_project on Project {
-  ...ProjectStepAdminItem_project
-}
-
-fragment ProjectStepAdminList_query on Query {
-  ...ProjectStepAdminItem_query
-}
-
-fragment ProjectStepAdmin_project on Project {
-  ...ProjectAdminStepFormModal_project
-  ...ProjectStepAdminList_project
-}
-
-fragment ProjectStepAdmin_query on Query {
-  ...ProjectAdminStepFormModal_query
-  ...ProjectStepAdminList_query
-}
-",
-      },
-    }
-  }
-  render={[Function]}
-  variables={
-    Object {
-      "isEditMode": false,
-      "projectId": "",
-    }
-  }
-/>
+      >
+        <ProjectAdminPage
+          firstCollectStepId={null}
+          projectId={null}
+        />
+      </Component>
+    </Provider>
+  </Connect(IntlProvider)>
+</Provider>
 `;

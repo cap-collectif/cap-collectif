@@ -19,7 +19,7 @@ import StepRequirementsList, { getUId, type Requirement } from './StepRequiremen
 import { renderSortValues } from './ProjectAdminSelectionStepForm';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
-import { type FranceConnectAllowedData } from "~/components/Admin/Project/Step/ProjectAdminStepForm";
+import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
 
 type Props = {|
   requirements?: Array<Requirement>,

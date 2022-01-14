@@ -9,7 +9,11 @@ describe('<ProjectAdminQuestionnaireStepForm />', () => {
   const props = {
     dispatch: jest.fn(),
     requirements: [
-      { type: 'CHECKBOX', checked: false, label: 'Sku' },
+      {
+        type: 'CHECKBOX',
+        checked: false,
+        label: 'Sku',
+      },
       {
         id: 'N$DjtU6G5vx&#p',
         type: 'LASTNAME',

@@ -19,6 +19,7 @@ type Props = {|
   index?: number,
   isCreating?: boolean,
   project: ProjectAdminStepFormModal_project,
+  hasIdentificationCodeLists: boolean,
   query: ProjectAdminStepFormModal_query,
 |};
 
@@ -55,6 +56,7 @@ export const ProjectAdminStepFormModal = ({
   type,
   isCreating,
   project,
+  hasIdentificationCodeLists,
   query,
 }: Props) => {
   const hasLoginFranceConnect = useFeatureFlag('login_franceconnect');
@@ -119,6 +121,7 @@ export const ProjectAdminStepFormModal = ({
         project={project}
         isFranceConnectConfigured={isFranceConnectConfigured}
         fcAllowedData={data}
+        hasIdentificationCodeLists={hasIdentificationCodeLists}
       />
     </StepModalContainer>
   );

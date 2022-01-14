@@ -22,6 +22,7 @@ type Props = {|
   project: ProjectStepAdmin_project,
   query: ProjectStepAdmin_query,
   viewerIsAdmin: boolean,
+  hasIdentificationCodeLists: boolean,
 |};
 
 export const validate = ({ steps }: StepTypes) => {
@@ -46,7 +47,7 @@ export const validate = ({ steps }: StepTypes) => {
   return errors;
 };
 
-export const ProjectStepAdmin = ({ form, project, viewerIsAdmin, query }: Props) => {
+export const ProjectStepAdmin = ({ form, project, viewerIsAdmin, hasIdentificationCodeLists, query }: Props) => {
   const [stepType, setStepType] = useState('OtherStep');
   const [showAddStepModal, displayAddStepModal] = useState(false);
 
@@ -79,6 +80,7 @@ export const ProjectStepAdmin = ({ form, project, viewerIsAdmin, query }: Props)
               component={ProjectStepAdminList}
               formName={form}
               project={project}
+              hasIdentificationCodeLists={hasIdentificationCodeLists}
               query={query}
             />
             <ButtonToolbar>
@@ -90,6 +92,7 @@ export const ProjectStepAdmin = ({ form, project, viewerIsAdmin, query }: Props)
                 show={showAddStepModal}
                 form={form}
                 project={project}
+                hasIdentificationCodeLists={hasIdentificationCodeLists}
                 query={query}
               />
               <Menu closeOnSelect placement="bottom-start">

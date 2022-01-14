@@ -42,6 +42,7 @@ type Props = {|
   +project: ProjectAdminContent_project,
   +query: ProjectAdminContent_query,
   +firstCollectStepId: ?string,
+  +hasIdentificationCodeLists: boolean,
 |};
 
 type Links = Array<{|
@@ -112,6 +113,7 @@ const formatNavbarLinks = (
   dataPrefetchPage,
   location: string,
   viewerIsAdmin: boolean,
+  hasIdentificationCodeLists: boolean,
 ) => {
   const links = [];
   const baseUrlContributions = getProjectAdminPath(project._id, 'CONTRIBUTIONS');
@@ -172,6 +174,8 @@ const formatNavbarLinks = (
         onTitleChange={setTitle}
         viewerIsAdmin={viewerIsAdmin}
         query={query}
+        hasIdentificationCodeLists={hasIdentificationCodeLists}
+
       />
     ),
   });
@@ -182,6 +186,7 @@ const formatNavbarLinks = (
 export const ProjectAdminContent = ({
   project,
   firstCollectStepId,
+  hasIdentificationCodeLists,
   viewerIsAdmin,
   query,
 }: Props) => {
@@ -259,6 +264,7 @@ export const ProjectAdminContent = ({
         dataPrefetchPage,
         location.pathname,
         viewerIsAdmin,
+        hasIdentificationCodeLists
       ),
     [
       project,
@@ -269,6 +275,7 @@ export const ProjectAdminContent = ({
       dataPrefetchPage,
       location.pathname,
       viewerIsAdmin,
+      hasIdentificationCodeLists
     ],
   );
 
@@ -325,6 +332,7 @@ const ProjectAdminRouterWrapper = ({
   project,
   query,
   firstCollectStepId,
+  hasIdentificationCodeLists,
   viewerIsAdmin,
 }: {
   ...Props,
@@ -337,6 +345,7 @@ const ProjectAdminRouterWrapper = ({
         project={project}
         query={query}
         firstCollectStepId={firstCollectStepId}
+        hasIdentificationCodeLists={hasIdentificationCodeLists}
       />
     </Router>
   </RelayEnvironmentProvider>

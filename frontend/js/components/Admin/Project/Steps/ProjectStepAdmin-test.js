@@ -18,6 +18,7 @@ const baseProps = {
     $refType,
   },
   viewerIsAdmin: true,
+  hasIdentificationCodeLists: true,
 };
 
 const props = {

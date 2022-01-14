@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Modal } from 'react-bootstrap';
@@ -45,7 +45,11 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 
-export type FranceConnectAllowedData =  { FIRSTNAME: boolean, LASTNAME: boolean, DATE_OF_BIRTH: boolean };
+export type FranceConnectAllowedData = {
+  FIRSTNAME: boolean,
+  LASTNAME: boolean,
+  DATE_OF_BIRTH: boolean,
+};
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -118,6 +122,7 @@ type Props = {|
   index?: number,
   timeless: boolean,
   isAnonymousParticipationAllowed: boolean,
+  hasIdentificationCodeLists: boolean,
   requirements?: ?Array<Requirement>,
   statuses?: ?Array<ProposalStepStatus>,
   votable?: boolean,
@@ -391,7 +396,10 @@ export function ProjectAdminStepForm({
   isCreating,
   debateType,
   fcAllowedData,
+  hasIdentificationCodeLists,
 }: Props) {
+  const { user } = useSelector((state: GlobalState) => state.user);
+
   const canSetDisplayMode =
     (step.__typename === 'SelectionStep' || step.__typename === 'CollectStep') &&
     (isGridViewEnabled || isListViewEnabled || isMapViewEnabled);
@@ -406,9 +414,30 @@ export function ProjectAdminStepForm({
     }
   }, [dispatch, isCreating, mainView, step.__typename]);
 
-  const hasCheckedRequirements = requirements
-    ? requirements.some(requirement => requirement.checked)
-    : false;
+  const requirementsFiltered = requirements
+    ? requirements
+        .filter(requirement => {
+          return user?.isAdmin || requirement.type !== 'IDENTIFICATION_CODE';
+        })
+        .map(requirement => {
+          if (
+            requirement.type === 'IDENTIFICATION_CODE' &&
+            !hasIdentificationCodeLists &&
+            !requirement.checked
+          ) {
+            return {
+              ...requirement,
+              disabled: true,
+            };
+          }
+
+          return requirement;
+        })
+        .filter(Boolean)
+    : [];
+
+  const hasCheckedRequirements = requirementsFiltered.some(requirement => requirement.checked);
+
   return (
     <>
       <Modal.Body>
@@ -565,14 +594,14 @@ export function ProjectAdminStepForm({
             <ProjectAdminQuestionnaireStepForm
               questionnaire={step.questionnaire}
               stepFormName={stepFormName}
-              requirements={requirements}
+              requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
               isAnonymousParticipationAllowed={isAnonymousParticipationAllowed}
             />
           )}
           {step.__typename === 'ConsultationStep' && (
             <ProjectAdminConsultationStepForm
-              requirements={requirements}
+              requirements={requirementsFiltered}
               consultations={step.consultations}
               fcAllowedData={fcAllowedData}
             />
@@ -589,7 +618,7 @@ export function ProjectAdminStepForm({
               allowAuthorsToAddNews={step.allowAuthorsToAddNews || false}
               statuses={statuses}
               votable={votable}
-              requirements={requirements}
+              requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
             />
           )}
@@ -610,7 +639,7 @@ export function ProjectAdminStepForm({
               allowAuthorsToAddNews={step?.allowAuthorsToAddNews || false}
               statuses={statuses}
               votable={votable}
-              requirements={requirements}
+              requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
             />
           )}
@@ -764,7 +793,10 @@ export function ProjectAdminStepForm({
   );
 }
 
-const mapStateToProps = (state: GlobalState, { step, isCreating, project, isFranceConnectConfigured }: Props) => {
+const mapStateToProps = (
+  state: GlobalState,
+  { step, isCreating, project, isFranceConnectConfigured }: Props,
+) => {
   const { isGridViewEnabled, isListViewEnabled, isMapViewEnabled, mainView } = getValueDisplayMode(
     step,
     project,

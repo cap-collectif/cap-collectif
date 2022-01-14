@@ -25,6 +25,7 @@ const defaultProps = {
     $fragmentRefs,
     $refType,
   },
+  hasIdentificationCodeLists: true,
   query: {
     $fragmentRefs,
     $refType,

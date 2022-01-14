@@ -53,6 +53,7 @@ type Props = {|
   onTitleChange: string => void,
   initialGroups: Array<{| label: string, value: string |}>,
   viewerIsAdmin: boolean,
+  hasIdentificationCodeLists: boolean,
 |};
 
 export type Author = {|
@@ -459,6 +460,7 @@ export function ProjectAdminForm(props: Props) {
     project,
     initialGroups,
     viewerIsAdmin,
+    hasIdentificationCodeLists,
     query,
     ...rest
   } = props;
@@ -478,6 +480,7 @@ export function ProjectAdminForm(props: Props) {
         project={project}
         query={query}
         viewerIsAdmin={viewerIsAdmin}
+        hasIdentificationCodeLists={hasIdentificationCodeLists}
         {...rest}
       />
       <ProjectAccessAdminForm {...props} formName={formName} initialGroups={initialGroups} />

@@ -4,6 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminStepFormModal } from './ProjectAdminStepFormModal';
 import { $fragmentRefs, $refType } from '~/mocks';
+import MockProviders from '~/testUtils';
 
 describe('<ProjectAdminStepFormModal />', () => {
   const defaultProps = {
@@ -16,6 +17,7 @@ describe('<ProjectAdminStepFormModal />', () => {
       $fragmentRefs,
       $refType,
     },
+    hasIdentificationCodeLists: true,
     query: {
       $refType,
       ssoConfigurations: {
@@ -34,7 +36,11 @@ describe('<ProjectAdminStepFormModal />', () => {
   };
 
   it('renders correctly', () => {
-    const wrapper = shallow(<ProjectAdminStepFormModal {...defaultProps} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: true } } }}>
+        <ProjectAdminStepFormModal {...defaultProps} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -43,7 +49,11 @@ describe('<ProjectAdminStepFormModal />', () => {
       ...defaultProps,
       show: false,
     };
-    const wrapper = shallow(<ProjectAdminStepFormModal {...props} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: true } } }}>
+        <ProjectAdminStepFormModal {...props} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -54,7 +64,11 @@ describe('<ProjectAdminStepFormModal />', () => {
         title: 'test',
       },
     };
-    const wrapper = shallow(<ProjectAdminStepFormModal {...props} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: true } } }}>
+        <ProjectAdminStepFormModal {...props} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

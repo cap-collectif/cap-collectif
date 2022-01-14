@@ -68,6 +68,7 @@ type Props = {|
   formName: string,
   meta?: {| error: ?string |},
   project: ProjectStepAdminList_project,
+  hasIdentificationCodeLists: boolean,
   query: ProjectStepAdminList_query,
 |};
 
@@ -83,7 +84,7 @@ export function ProjectStepAdminList(props: Props) {
     dispatch(arrayMove(formName, 'steps', result.source.index, result.destination.index));
   };
 
-  const { fields, steps, formName, meta, project, query } = props;
+  const { fields, steps, formName, meta, project, hasIdentificationCodeLists, query } = props;
   return (
     <>
       <List>
@@ -104,6 +105,7 @@ export function ProjectStepAdminList(props: Props) {
                     fields={fields}
                     formName={formName}
                     project={project}
+                    hasIdentificationCodeLists={hasIdentificationCodeLists}
                     query={query}
                   />
                 ))}

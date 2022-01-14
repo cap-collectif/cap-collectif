@@ -38,6 +38,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             }
           }
           formName="testForm"
+          hasIdentificationCodeLists={true}
           name="steps"
           project={
             Object {
@@ -57,6 +58,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
         >
           <Relay(ProjectAdminStepFormModal)
             form="testForm"
+            hasIdentificationCodeLists={true}
             isCreating={true}
             onClose={[Function]}
             project={
@@ -241,6 +243,7 @@ exports[`<ProjectStepAdmin /> renders correctly with isAdmin false 1`] = `
             }
           }
           formName="testForm"
+          hasIdentificationCodeLists={true}
           name="steps"
           project={
             Object {
@@ -260,6 +263,7 @@ exports[`<ProjectStepAdmin /> renders correctly with isAdmin false 1`] = `
         >
           <Relay(ProjectAdminStepFormModal)
             form="testForm"
+            hasIdentificationCodeLists={true}
             isCreating={true}
             onClose={[Function]}
             project={

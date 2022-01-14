@@ -48,6 +48,7 @@ describe('<ProjectAdminForm />', () => {
     },
     viewerIsAdmin: false,
     initialGroups: [],
+    hasIdentificationCodeLists: true,
     query: {
       $fragmentRefs,
       $refType,

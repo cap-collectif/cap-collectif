@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap';
@@ -20,6 +20,7 @@ import type { RequirementType } from '~relay/UpdateProjectAlphaMutation.graphql'
 import { RequirementDragItem, CheckboxPlaceholder } from './ProjectAdminStepForm.style';
 import type { Dispatch, Uuid } from '~/types';
 import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
+import InfoMessage from '~ds/InfoMessage/InfoMessage';
 
 export type Requirement = {|
   type: RequirementType | string,
@@ -321,6 +322,18 @@ export function StepRequirementsList({
                                 }}
                               />
                             </>
+                          )}
+                          {requirement.disabled && requirement.type === 'IDENTIFICATION_CODE' && (
+                            <InfoMessage variant="info" ml="auto">
+                              <InfoMessage.Title withIcon>
+                                <FormattedHTMLMessage
+                                  id="identification-code-create-reminder"
+                                  values={{
+                                    url: '/admin-next/identificationCodes',
+                                  }}
+                                />
+                              </InfoMessage.Title>
+                            </InfoMessage>
                           )}
                         </RequirementDragItem>
                       </div>

@@ -68,6 +68,7 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
       </Button>
       <Relay(ProjectAdminStepFormModal)
         form="oui"
+        hasIdentificationCodeLists={true}
         index={0}
         onClose={[Function]}
         project={

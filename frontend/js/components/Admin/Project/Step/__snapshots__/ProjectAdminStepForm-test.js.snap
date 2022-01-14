@@ -1,559 +1,851 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
-<Fragment>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <ProjectAdminStepFormstyle__FormContainer
-      id="formName"
-      onSubmit={[MockFunction]}
-    >
-      <ProjectAdminFormstyle__ProjectBoxHeader>
-        <h5>
-          <FormattedMessage
-            id="global.general"
-            values={Object {}}
-          />
-        </h5>
-      </ProjectAdminFormstyle__ProjectBoxHeader>
-      <Field
-        component={[Function]}
-        id="step-label"
-        label={
-          <FormattedMessage
-            id="color.main_menu.text"
-            values={Object {}}
-          />
-        }
-        name="label"
-        type="text"
-      />
-      <Field
-        component={[Function]}
-        id="step-title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
-        name="title"
-        type="text"
-      />
-      <ProjectAdminStepFormstyle__DateContainer>
-        <Field
-          addonAfter={
-            <i
-              className="cap-calendar-2"
-            />
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(Symbol.observable): [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)>
+    <Provider>
+      <Component
+        theme={
+          Object {
+            "borders": Object {
+              "avatar": "2px solid",
+              "button": "1px solid",
+              "card": "1px solid",
+              "normal": "1px solid",
+            },
+            "breakpoints": Array [
+              "767px",
+              "1024px",
+            ],
+            "colors": Object {
+              "aqua": Object {
+                "100": "#FAFEFE",
+                "150": "#E4F8FC",
+                "200": "#C9F2F8",
+                "300": "#97E6F2",
+                "400": "#65DAEC",
+                "500": "#33CEE6",
+                "600": "#19B0C8",
+                "700": "#138496",
+                "800": "#0C5864",
+                "900": "#062C32",
+              },
+              "black": "#000",
+              "blue": Object {
+                "100": "#FAFCFF",
+                "150": "#E0EFFF",
+                "200": "#C2DFFF",
+                "300": "#8AC2FF",
+                "400": "#52A5FF",
+                "500": "#1A88FF",
+                "600": "#006CE0",
+                "700": "#0051A8",
+                "800": "#003670",
+                "900": "#001B38",
+              },
+              "current": "currentColor",
+              "dark": "#30363D",
+              "gray": Object {
+                "100": "#F7F7F8",
+                "150": "#E8EBED",
+                "200": "#DADEE1",
+                "300": "#BEC4CB",
+                "400": "#A2ABB4",
+                "500": "#85919D",
+                "600": "#6B7885",
+                "700": "#545E68",
+                "800": "#3D454C",
+                "900": "#272B30",
+              },
+              "green": Object {
+                "100": "#FBFEFC",
+                "150": "#E4F9E9",
+                "200": "#CEF3D6",
+                "300": "#A1E8B1",
+                "400": "#73DD8C",
+                "500": "#46D267",
+                "600": "#2CB54C",
+                "700": "#218739",
+                "800": "#165A26",
+                "900": "#0B2D13",
+              },
+              "neutral-gray": Object {
+                "100": "#F7F7F7",
+                "150": "#EBEBEB",
+                "200": "#DDDDDD",
+                "300": "#C4C4C4",
+                "400": "#ABABAB",
+                "50": "#FAFAFA",
+                "500": "#919191",
+                "600": "#787878",
+                "700": "#5E5E5E",
+                "800": "#454545",
+                "900": "#2B2B2B",
+              },
+              "orange": Object {
+                "100": "#FFFDFA",
+                "150": "#FFF3E0",
+                "200": "#FFE7C2",
+                "300": "#FFD08A",
+                "400": "#FFBA52",
+                "500": "#FFA31A",
+                "600": "#E08700",
+                "700": "#A86500",
+                "800": "#704300",
+                "900": "#382200",
+              },
+              "red": Object {
+                "100": "#FEFBFB",
+                "150": "#FAE5E7",
+                "200": "#F6CBCF",
+                "300": "#ED9BA4",
+                "400": "#E56C78",
+                "500": "#DD3C4C",
+                "600": "#BF2231",
+                "700": "#8F1925",
+                "800": "#5F1119",
+                "900": "#30080C",
+              },
+              "transparent": "transparent",
+              "white": "#fff",
+              "yellow": Object {
+                "100": "#FFFEFA",
+                "150": "#FFF7E0",
+                "200": "#FFF0C2",
+                "300": "#FFE28A",
+                "400": "#FFDA52",
+                "500": "#FFC61A",
+                "600": "#E0A800",
+                "700": "#A87E00",
+                "800": "#705400",
+                "900": "#382A00",
+              },
+            },
+            "fontSizes": Array [
+              0,
+              "1.100rem",
+              "1.300rem",
+              "1.400rem",
+              "1.800rem",
+              "2.400rem",
+              "3.300rem",
+              "4.400rem",
+            ],
+            "fontWeights": Object {
+              "black": 900,
+              "bold": 700,
+              "extrabold": 800,
+              "hairline": 100,
+              "light": 300,
+              "medium": 500,
+              "normal": 400,
+              "semibold": 600,
+              "thin": 200,
+            },
+            "fonts": Object {
+              "body": "OpenSans, Helvetica, Arial, sans-serif",
+              "content": "OpenSans, Helvetica, Arial, sans-serif",
+              "heading": "OpenSans, Helvetica, Arial, sans-serif",
+              "input": "Roboto, Helvetica, Arial, sans-serif",
+              "label": "OpenSans, Helvetica, Arial, sans-serif",
+              "openSans": "OpenSans, Helvetica, Arial, sans-serif",
+              "roboto": "Roboto, Helvetica, Arial, sans-serif",
+            },
+            "iconSizes": Array [
+              "1.200rem",
+              "1.600rem",
+              "2.400rem",
+              "3.200rem",
+              "4.800rem",
+              "6.400rem",
+            ],
+            "letterSpacings": Object {
+              "normal": "0",
+              "tight": "-0.025em",
+              "tighter": "-0.05em",
+              "wide": "0.025em",
+              "wider": "0.05em",
+              "widest": "0.1em",
+            },
+            "lineHeights": Object {
+              "base": "2.400rem",
+              "l": "4.800rem",
+              "m": "3.200rem",
+              "normal": "1rem",
+              "s": "1.800rem",
+              "sm": "1.600rem",
+              "xl": "6.400rem",
+            },
+            "radii": Object {
+              "accordion": 8,
+              "adminSection": 8,
+              "button": 4,
+              "buttonQuickAction": 50,
+              "card": 4,
+              "modal": 5,
+              "normal": 4,
+              "notifications": 4,
+              "placeholder": 4,
+              "popover": 8,
+              "poppin": 8,
+              "project_card": 8,
+              "table": 8,
+              "tags": 4,
+              "toasts": 4,
+              "tooltip": 4,
+            },
+            "shadows": Object {
+              "big": "0 10px 99px rgba(0, 0, 0, 0.302)",
+              "medium": "0 10px 50px rgba(0, 0, 0, 0.15)",
+              "small": "0 2px 8px rgba(0, 0, 0, 0.1)",
+            },
+            "sizes": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
+            "space": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
           }
-          component={[Function]}
+        }
+      >
+        <ProjectAdminStepForm
+          anyTouched={false}
+          array={
+            Object {
+              "insert": [MockFunction],
+              "move": [MockFunction],
+              "pop": [MockFunction],
+              "push": [MockFunction],
+              "remove": [MockFunction],
+              "removeAll": [MockFunction],
+              "shift": [MockFunction],
+              "splice": [MockFunction],
+              "swap": [MockFunction],
+              "unshift": [MockFunction],
+            }
+          }
+          asyncValidate={[MockFunction]}
+          asyncValidating={false}
+          autofill={[MockFunction]}
+          blur={[MockFunction]}
+          change={[MockFunction]}
+          clearAsyncError={[MockFunction]}
+          clearSubmit={[MockFunction]}
+          destroy={[MockFunction]}
+          dirty={false}
+          dispatch={[MockFunction]}
+          error={null}
+          fcAllowedData={
+            Object {
+              "DATE_OF_BIRTH": false,
+              "FIRSTNAME": true,
+              "LASTNAME": true,
+            }
+          }
+          features={
+            Object {
+              "allow_users_to_propose_events": false,
+              "beta__admin_editor": false,
+              "beta__analytics_page": false,
+              "beta__emailing": false,
+              "beta__emailing_parameters": false,
+              "beta__questionnaire_result": false,
+              "blog": false,
+              "calendar": false,
+              "captcha": false,
+              "consent_external_communication": false,
+              "consent_internal_communication": false,
+              "consultation_plan": false,
+              "disconnect_openid": false,
+              "display_map": false,
+              "display_pictures_in_depository_proposals_list": false,
+              "display_pictures_in_event_list": false,
+              "districts": false,
+              "export": false,
+              "external_project": false,
+              "http_redirects": false,
+              "import_proposals": false,
+              "login_cas": false,
+              "login_facebook": false,
+              "login_franceconnect": false,
+              "login_paris": false,
+              "login_saml": false,
+              "members_list": false,
+              "multilangue": false,
+              "new_project_card": false,
+              "newsletter": false,
+              "noindex_on_profiles": false,
+              "phone_confirmation": false,
+              "privacy_policy": false,
+              "profiles": false,
+              "project_trash": false,
+              "projects_form": false,
+              "proposal_revisions": false,
+              "read_more": false,
+              "registration": false,
+              "report_browers_errors_to_sentry": false,
+              "reporting": false,
+              "restrict_connection": false,
+              "restrict_registration_via_email_domain": false,
+              "search": false,
+              "secure_password": false,
+              "server_side_rendering": false,
+              "share_buttons": false,
+              "shield_mode": false,
+              "sso_by_pass_auth": false,
+              "themes": false,
+              "twilio": false,
+              "unstable__anonymous_questionnaire": false,
+              "unstable__new_consultation_page": false,
+              "unstable__project_admin": false,
+              "unstable__remote_events": false,
+              "unstable__tipsmeee": false,
+              "user_type": false,
+              "votes_evolution": false,
+              "votes_min": false,
+              "zipcode_at_register": false,
+            }
+          }
+          form="formName"
           formName="ProjectAdminForm"
-          id="step-startAt"
-          label={
-            <FormattedMessage
-              id="start"
-              values={Object {}}
-            />
+          handleSubmit={[MockFunction]}
+          hasIdentificationCodeLists={true}
+          initialize={[MockFunction]}
+          initialized={true}
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
           }
-          name="startAt"
-          type="datetime"
+          invalid={false}
+          isAnonymousParticipationAllowed={false}
+          isCreating={false}
+          isFranceConnectConfigured={true}
+          isGridViewEnabled={false}
+          isListViewEnabled={true}
+          isMapViewEnabled={false}
+          mainView="grid"
+          pristine={true}
+          project={
+            Object {
+              "$refType": null,
+              "firstCollectStep": Object {
+                "form": Object {
+                  "isGridViewEnabled": false,
+                  "isListViewEnabled": true,
+                  "isMapViewEnabled": true,
+                },
+              },
+            }
+          }
+          reset={[MockFunction]}
+          step={
+            Object {
+              "__typename": "OtherStep",
+              "body": "TestBody",
+              "customCode": "<>code</>",
+              "endAt": null,
+              "id": "1",
+              "isAnonymousParticipationAllowed": false,
+              "isEnabled": true,
+              "label": "au bois dormant",
+              "mainView": "grid",
+              "metaDescription": "oeoeoe",
+              "startAt": "date",
+              "timeless": false,
+              "title": "testTitle",
+              "url": "/sku",
+            }
+          }
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          timeless={false}
+          touch={[MockFunction]}
+          untouch={[MockFunction]}
+          updateSyncErrors={[MockFunction]}
+          valid={true}
+          warning={null}
         />
-        <Field
-          addonAfter={
-            <i
-              className="cap-calendar-2"
-            />
-          }
-          component={[Function]}
-          formName="ProjectAdminForm"
-          id="step-endAt"
-          label={
-            <p>
-              end
-              <span
-                className="excerpt inline"
-              >
-                global.optional
-                 
-              </span>
-            </p>
-          }
-          name="endAt"
-          type="datetime"
-        />
-      </ProjectAdminStepFormstyle__DateContainer>
-      <Field
-        component={[Function]}
-        id="step-body"
-        label={
-          <p>
-            proposal.body
-            <span
-              className="excerpt inline"
-            >
-              global.optional
-               
-            </span>
-          </p>
-        }
-        name="body"
-        type="editor"
-      />
-      <Field
-        component={[Function]}
-        id="step-metaDescription"
-        label={
-          <p>
-            global.meta.description
-            <span
-              className="excerpt inline"
-            >
-              global.optional
-               
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <_default
-                    className="text-left"
-                    id="tooltip-top"
-                    style={
-                      Object {
-                        "wordBreak": "break-word",
-                      }
-                    }
-                  >
-                    <FormattedHTMLMessage
-                      id="admin.help.metadescription"
-                      tagName="span"
-                      values={Object {}}
-                    />
-                  </_default>
-                }
-                placement="top"
-                trigger={
-                  Array [
-                    "hover",
-                    "focus",
-                  ]
-                }
-              >
-                <ProjectContentAdminForm__InformationIcon />
-              </OverlayTrigger>
-            </span>
-          </p>
-        }
-        name="metaDescription"
-        type="textarea"
-      />
-      <ProjectAdminFormstyle__ProjectBoxHeader>
-        <h5>
-          <FormattedMessage
-            id="global.publication"
-            values={Object {}}
-          />
-        </h5>
-      </ProjectAdminFormstyle__ProjectBoxHeader>
-      <Field
-        component={[Function]}
-        id="step-isEnabled"
-        label={
-          <FormattedMessage
-            id="global.published"
-            values={Object {}}
-          />
-        }
-        name="isEnabled"
-        normalize={[Function]}
-      />
-       
-      <ProjectAdminFormstyle__PermalinkWrapper>
-        <strong>
-          <FormattedMessage
-            id="permalink"
-            values={Object {}}
-          />
-           :
-        </strong>
-         
-        <a
-          href="/sku"
-          target="blank"
-        >
-          /sku
-        </a>
-      </ProjectAdminFormstyle__PermalinkWrapper>
-      <ProjectAdminFormstyle__ProjectBoxHeader>
-        <h5>
-          <FormattedMessage
-            id="global-customization"
-            values={Object {}}
-          />
-        </h5>
-      </ProjectAdminFormstyle__ProjectBoxHeader>
-      <ProjectAdminStepFormstyle__CustomCodeArea>
-        <Field
-          component={[Function]}
-          id="step-customCode"
-          label={
-            <p>
-              admin.customcode
-              <span
-                className="excerpt inline"
-              >
-                global.optional
-                 
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <_default
-                      className="text-left"
-                      id="tooltip-top"
-                      style={
-                        Object {
-                          "wordBreak": "break-word",
-                        }
-                      }
-                    >
-                      <FormattedHTMLMessage
-                        id="admin.help.customcode"
-                        tagName="span"
-                        values={Object {}}
-                      />
-                    </_default>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <ProjectContentAdminForm__InformationIcon />
-                </OverlayTrigger>
-              </span>
-            </p>
-          }
-          name="customCode"
-          placeholder="<script type=\\"text/javascript\\"> </script>"
-          rows={4}
-          type="textarea"
-        />
-      </ProjectAdminStepFormstyle__CustomCodeArea>
-    </ProjectAdminStepFormstyle__FormContainer>
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      disabled={false}
-    >
-      <FormattedMessage
-        id="global.cancel"
-        values={Object {}}
-      />
-    </Button>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      disabled={false}
-      id="step-modal-submit"
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.save"
-        values={Object {}}
-      />
-    </Button>
-  </ModalFooter>
-</Fragment>
+      </Component>
+    </Provider>
+  </Connect(IntlProvider)>
+</Provider>
 `;
 
 exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
-<Fragment>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <ProjectAdminStepFormstyle__FormContainer
-      id="formName"
-      onSubmit={[MockFunction]}
-    >
-      <ProjectAdminFormstyle__ProjectBoxHeader>
-        <h5>
-          <FormattedMessage
-            id="global.general"
-            values={Object {}}
-          />
-        </h5>
-      </ProjectAdminFormstyle__ProjectBoxHeader>
-      <Field
-        component={[Function]}
-        id="step-label"
-        label={
-          <FormattedMessage
-            id="color.main_menu.text"
-            values={Object {}}
-          />
-        }
-        name="label"
-        type="text"
-      />
-      <Field
-        component={[Function]}
-        id="step-title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
-        name="title"
-        type="text"
-      />
-      <ProjectAdminStepFormstyle__DateContainer>
-        <Field
-          addonAfter={
-            <i
-              className="cap-calendar-2"
-            />
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(Symbol.observable): [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)>
+    <Provider>
+      <Component
+        theme={
+          Object {
+            "borders": Object {
+              "avatar": "2px solid",
+              "button": "1px solid",
+              "card": "1px solid",
+              "normal": "1px solid",
+            },
+            "breakpoints": Array [
+              "767px",
+              "1024px",
+            ],
+            "colors": Object {
+              "aqua": Object {
+                "100": "#FAFEFE",
+                "150": "#E4F8FC",
+                "200": "#C9F2F8",
+                "300": "#97E6F2",
+                "400": "#65DAEC",
+                "500": "#33CEE6",
+                "600": "#19B0C8",
+                "700": "#138496",
+                "800": "#0C5864",
+                "900": "#062C32",
+              },
+              "black": "#000",
+              "blue": Object {
+                "100": "#FAFCFF",
+                "150": "#E0EFFF",
+                "200": "#C2DFFF",
+                "300": "#8AC2FF",
+                "400": "#52A5FF",
+                "500": "#1A88FF",
+                "600": "#006CE0",
+                "700": "#0051A8",
+                "800": "#003670",
+                "900": "#001B38",
+              },
+              "current": "currentColor",
+              "dark": "#30363D",
+              "gray": Object {
+                "100": "#F7F7F8",
+                "150": "#E8EBED",
+                "200": "#DADEE1",
+                "300": "#BEC4CB",
+                "400": "#A2ABB4",
+                "500": "#85919D",
+                "600": "#6B7885",
+                "700": "#545E68",
+                "800": "#3D454C",
+                "900": "#272B30",
+              },
+              "green": Object {
+                "100": "#FBFEFC",
+                "150": "#E4F9E9",
+                "200": "#CEF3D6",
+                "300": "#A1E8B1",
+                "400": "#73DD8C",
+                "500": "#46D267",
+                "600": "#2CB54C",
+                "700": "#218739",
+                "800": "#165A26",
+                "900": "#0B2D13",
+              },
+              "neutral-gray": Object {
+                "100": "#F7F7F7",
+                "150": "#EBEBEB",
+                "200": "#DDDDDD",
+                "300": "#C4C4C4",
+                "400": "#ABABAB",
+                "50": "#FAFAFA",
+                "500": "#919191",
+                "600": "#787878",
+                "700": "#5E5E5E",
+                "800": "#454545",
+                "900": "#2B2B2B",
+              },
+              "orange": Object {
+                "100": "#FFFDFA",
+                "150": "#FFF3E0",
+                "200": "#FFE7C2",
+                "300": "#FFD08A",
+                "400": "#FFBA52",
+                "500": "#FFA31A",
+                "600": "#E08700",
+                "700": "#A86500",
+                "800": "#704300",
+                "900": "#382200",
+              },
+              "red": Object {
+                "100": "#FEFBFB",
+                "150": "#FAE5E7",
+                "200": "#F6CBCF",
+                "300": "#ED9BA4",
+                "400": "#E56C78",
+                "500": "#DD3C4C",
+                "600": "#BF2231",
+                "700": "#8F1925",
+                "800": "#5F1119",
+                "900": "#30080C",
+              },
+              "transparent": "transparent",
+              "white": "#fff",
+              "yellow": Object {
+                "100": "#FFFEFA",
+                "150": "#FFF7E0",
+                "200": "#FFF0C2",
+                "300": "#FFE28A",
+                "400": "#FFDA52",
+                "500": "#FFC61A",
+                "600": "#E0A800",
+                "700": "#A87E00",
+                "800": "#705400",
+                "900": "#382A00",
+              },
+            },
+            "fontSizes": Array [
+              0,
+              "1.100rem",
+              "1.300rem",
+              "1.400rem",
+              "1.800rem",
+              "2.400rem",
+              "3.300rem",
+              "4.400rem",
+            ],
+            "fontWeights": Object {
+              "black": 900,
+              "bold": 700,
+              "extrabold": 800,
+              "hairline": 100,
+              "light": 300,
+              "medium": 500,
+              "normal": 400,
+              "semibold": 600,
+              "thin": 200,
+            },
+            "fonts": Object {
+              "body": "OpenSans, Helvetica, Arial, sans-serif",
+              "content": "OpenSans, Helvetica, Arial, sans-serif",
+              "heading": "OpenSans, Helvetica, Arial, sans-serif",
+              "input": "Roboto, Helvetica, Arial, sans-serif",
+              "label": "OpenSans, Helvetica, Arial, sans-serif",
+              "openSans": "OpenSans, Helvetica, Arial, sans-serif",
+              "roboto": "Roboto, Helvetica, Arial, sans-serif",
+            },
+            "iconSizes": Array [
+              "1.200rem",
+              "1.600rem",
+              "2.400rem",
+              "3.200rem",
+              "4.800rem",
+              "6.400rem",
+            ],
+            "letterSpacings": Object {
+              "normal": "0",
+              "tight": "-0.025em",
+              "tighter": "-0.05em",
+              "wide": "0.025em",
+              "wider": "0.05em",
+              "widest": "0.1em",
+            },
+            "lineHeights": Object {
+              "base": "2.400rem",
+              "l": "4.800rem",
+              "m": "3.200rem",
+              "normal": "1rem",
+              "s": "1.800rem",
+              "sm": "1.600rem",
+              "xl": "6.400rem",
+            },
+            "radii": Object {
+              "accordion": 8,
+              "adminSection": 8,
+              "button": 4,
+              "buttonQuickAction": 50,
+              "card": 4,
+              "modal": 5,
+              "normal": 4,
+              "notifications": 4,
+              "placeholder": 4,
+              "popover": 8,
+              "poppin": 8,
+              "project_card": 8,
+              "table": 8,
+              "tags": 4,
+              "toasts": 4,
+              "tooltip": 4,
+            },
+            "shadows": Object {
+              "big": "0 10px 99px rgba(0, 0, 0, 0.302)",
+              "medium": "0 10px 50px rgba(0, 0, 0, 0.15)",
+              "small": "0 2px 8px rgba(0, 0, 0, 0.1)",
+            },
+            "sizes": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
+            "space": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
           }
-          component={[Function]}
+        }
+      >
+        <ProjectAdminStepForm
+          anyTouched={false}
+          array={
+            Object {
+              "insert": [MockFunction],
+              "move": [MockFunction],
+              "pop": [MockFunction],
+              "push": [MockFunction],
+              "remove": [MockFunction],
+              "removeAll": [MockFunction],
+              "shift": [MockFunction],
+              "splice": [MockFunction],
+              "swap": [MockFunction],
+              "unshift": [MockFunction],
+            }
+          }
+          asyncValidate={[MockFunction]}
+          asyncValidating={false}
+          autofill={[MockFunction]}
+          blur={[MockFunction]}
+          change={[MockFunction]}
+          clearAsyncError={[MockFunction]}
+          clearSubmit={[MockFunction]}
+          destroy={[MockFunction]}
+          dirty={false}
+          dispatch={[MockFunction]}
+          error={null}
+          fcAllowedData={
+            Object {
+              "DATE_OF_BIRTH": false,
+              "FIRSTNAME": true,
+              "LASTNAME": true,
+            }
+          }
+          features={
+            Object {
+              "allow_users_to_propose_events": false,
+              "beta__admin_editor": false,
+              "beta__analytics_page": false,
+              "beta__emailing": false,
+              "beta__emailing_parameters": false,
+              "beta__questionnaire_result": false,
+              "blog": false,
+              "calendar": false,
+              "captcha": false,
+              "consent_external_communication": false,
+              "consent_internal_communication": false,
+              "consultation_plan": false,
+              "disconnect_openid": false,
+              "display_map": false,
+              "display_pictures_in_depository_proposals_list": false,
+              "display_pictures_in_event_list": false,
+              "districts": false,
+              "export": false,
+              "external_project": false,
+              "http_redirects": false,
+              "import_proposals": false,
+              "login_cas": false,
+              "login_facebook": false,
+              "login_franceconnect": false,
+              "login_paris": false,
+              "login_saml": false,
+              "members_list": false,
+              "multilangue": false,
+              "new_project_card": false,
+              "newsletter": false,
+              "noindex_on_profiles": false,
+              "phone_confirmation": false,
+              "privacy_policy": false,
+              "profiles": false,
+              "project_trash": false,
+              "projects_form": false,
+              "proposal_revisions": false,
+              "read_more": false,
+              "registration": false,
+              "report_browers_errors_to_sentry": false,
+              "reporting": false,
+              "restrict_connection": false,
+              "restrict_registration_via_email_domain": false,
+              "search": false,
+              "secure_password": false,
+              "server_side_rendering": false,
+              "share_buttons": false,
+              "shield_mode": false,
+              "sso_by_pass_auth": false,
+              "themes": false,
+              "twilio": false,
+              "unstable__anonymous_questionnaire": false,
+              "unstable__new_consultation_page": false,
+              "unstable__project_admin": false,
+              "unstable__remote_events": false,
+              "unstable__tipsmeee": false,
+              "user_type": false,
+              "votes_evolution": false,
+              "votes_min": false,
+              "zipcode_at_register": false,
+            }
+          }
+          form="formName"
           formName="ProjectAdminForm"
-          id="step-startAt"
-          label={
-            <FormattedMessage
-              id="start"
-              values={Object {}}
-            />
+          handleSubmit={[MockFunction]}
+          hasIdentificationCodeLists={true}
+          initialize={[MockFunction]}
+          initialized={true}
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
           }
-          name="startAt"
-          type="datetime"
+          invalid={false}
+          isAnonymousParticipationAllowed={false}
+          isCreating={true}
+          isFranceConnectConfigured={true}
+          isGridViewEnabled={false}
+          isListViewEnabled={true}
+          isMapViewEnabled={false}
+          mainView="grid"
+          pristine={true}
+          project={
+            Object {
+              "$refType": null,
+              "firstCollectStep": Object {
+                "form": Object {
+                  "isGridViewEnabled": false,
+                  "isListViewEnabled": true,
+                  "isMapViewEnabled": true,
+                },
+              },
+            }
+          }
+          reset={[MockFunction]}
+          step={
+            Object {
+              "__typename": "OtherStep",
+              "body": "TestBody",
+              "customCode": "<>code</>",
+              "endAt": null,
+              "id": "1",
+              "isAnonymousParticipationAllowed": false,
+              "isEnabled": true,
+              "label": "au bois dormant",
+              "mainView": "grid",
+              "metaDescription": "oeoeoe",
+              "startAt": "date",
+              "timeless": false,
+              "title": "testTitle",
+              "url": "/sku",
+            }
+          }
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          timeless={false}
+          touch={[MockFunction]}
+          untouch={[MockFunction]}
+          updateSyncErrors={[MockFunction]}
+          valid={true}
+          warning={null}
         />
-        <Field
-          addonAfter={
-            <i
-              className="cap-calendar-2"
-            />
-          }
-          component={[Function]}
-          formName="ProjectAdminForm"
-          id="step-endAt"
-          label={
-            <p>
-              end
-              <span
-                className="excerpt inline"
-              >
-                global.optional
-                 
-              </span>
-            </p>
-          }
-          name="endAt"
-          type="datetime"
-        />
-      </ProjectAdminStepFormstyle__DateContainer>
-      <Field
-        component={[Function]}
-        id="step-body"
-        label={
-          <p>
-            proposal.body
-            <span
-              className="excerpt inline"
-            >
-              global.optional
-               
-            </span>
-          </p>
-        }
-        name="body"
-        type="editor"
-      />
-      <Field
-        component={[Function]}
-        id="step-metaDescription"
-        label={
-          <p>
-            global.meta.description
-            <span
-              className="excerpt inline"
-            >
-              global.optional
-               
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <_default
-                    className="text-left"
-                    id="tooltip-top"
-                    style={
-                      Object {
-                        "wordBreak": "break-word",
-                      }
-                    }
-                  >
-                    <FormattedHTMLMessage
-                      id="admin.help.metadescription"
-                      tagName="span"
-                      values={Object {}}
-                    />
-                  </_default>
-                }
-                placement="top"
-                trigger={
-                  Array [
-                    "hover",
-                    "focus",
-                  ]
-                }
-              >
-                <ProjectContentAdminForm__InformationIcon />
-              </OverlayTrigger>
-            </span>
-          </p>
-        }
-        name="metaDescription"
-        type="textarea"
-      />
-      <ProjectAdminFormstyle__ProjectBoxHeader>
-        <h5>
-          <FormattedMessage
-            id="global.publication"
-            values={Object {}}
-          />
-        </h5>
-      </ProjectAdminFormstyle__ProjectBoxHeader>
-      <Field
-        component={[Function]}
-        id="step-isEnabled"
-        label={
-          <FormattedMessage
-            id="global.published"
-            values={Object {}}
-          />
-        }
-        name="isEnabled"
-        normalize={[Function]}
-      />
-       
-      <ProjectAdminFormstyle__PermalinkWrapper>
-        <strong>
-          <FormattedMessage
-            id="permalink"
-            values={Object {}}
-          />
-           :
-        </strong>
-         
-        <a
-          href="/sku"
-          target="blank"
-        >
-          /sku
-        </a>
-      </ProjectAdminFormstyle__PermalinkWrapper>
-      <ProjectAdminFormstyle__ProjectBoxHeader>
-        <h5>
-          <FormattedMessage
-            id="global-customization"
-            values={Object {}}
-          />
-        </h5>
-      </ProjectAdminFormstyle__ProjectBoxHeader>
-      <ProjectAdminStepFormstyle__CustomCodeArea>
-        <Field
-          component={[Function]}
-          id="step-customCode"
-          label={
-            <p>
-              admin.customcode
-              <span
-                className="excerpt inline"
-              >
-                global.optional
-                 
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <_default
-                      className="text-left"
-                      id="tooltip-top"
-                      style={
-                        Object {
-                          "wordBreak": "break-word",
-                        }
-                      }
-                    >
-                      <FormattedHTMLMessage
-                        id="admin.help.customcode"
-                        tagName="span"
-                        values={Object {}}
-                      />
-                    </_default>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <ProjectContentAdminForm__InformationIcon />
-                </OverlayTrigger>
-              </span>
-            </p>
-          }
-          name="customCode"
-          placeholder="<script type=\\"text/javascript\\"> </script>"
-          rows={4}
-          type="textarea"
-        />
-      </ProjectAdminStepFormstyle__CustomCodeArea>
-    </ProjectAdminStepFormstyle__FormContainer>
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      disabled={false}
-    >
-      <FormattedMessage
-        id="global.cancel"
-        values={Object {}}
-      />
-    </Button>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      disabled={false}
-      id="step-modal-submit"
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.save"
-        values={Object {}}
-      />
-    </Button>
-  </ModalFooter>
-</Fragment>
+      </Component>
+    </Provider>
+  </Connect(IntlProvider)>
+</Provider>
 `;

@@ -16,6 +16,7 @@ type Props = {|
   fields: { length: number, map: Function, remove: Function },
   formName: string,
   project: ProjectStepAdminItem_project,
+  hasIdentificationCodeLists: boolean,
   query: ProjectStepAdminItem_query,
 |};
 
@@ -25,7 +26,7 @@ const Item: StyledComponent<{}, {}, typeof ListGroupItem> = styled(ListGroupItem
   background-color: ${colors.formBgc};
 `;
 
-export const ProjectStepAdminItem = ({ step, index, fields, formName, project, query }: Props) => (
+export const ProjectStepAdminItem = ({ step, index, fields, formName, project, hasIdentificationCodeLists, query }: Props) => (
   <Draggable key={step.id} draggableId={step.id || `new-step-${index}`} index={index}>
     {(providedDraggable: DraggableProvided) => (
       <div
@@ -39,6 +40,7 @@ export const ProjectStepAdminItem = ({ step, index, fields, formName, project, q
             fields={fields}
             formName={formName}
             project={project}
+            hasIdentificationCodeLists={hasIdentificationCodeLists}
             query={query}
           />
         </Item>

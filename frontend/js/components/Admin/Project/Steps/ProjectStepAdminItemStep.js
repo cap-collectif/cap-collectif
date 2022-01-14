@@ -20,6 +20,7 @@ type Props = {|
   formName: string,
   fields: { length: number, map: Function, remove: Function },
   project: ProjectStepAdminItemStep_project,
+  hasIdentificationCodeLists: boolean,
   query: ProjectStepAdminItemStep_query,
 |};
 
@@ -57,6 +58,7 @@ export const ProjectStepAdminItemStep = ({
   fields,
   formName,
   project,
+  hasIdentificationCodeLists,
   query,
 }: Props) => {
   const [showEditModal, setShowEditModal] = useState(false);
@@ -135,6 +137,7 @@ export const ProjectStepAdminItemStep = ({
             form={formName}
             index={index}
             project={project}
+            hasIdentificationCodeLists={hasIdentificationCodeLists}
             query={query}
           />
         </ButtonToolbar>
