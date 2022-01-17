@@ -47,6 +47,7 @@ const deleteVoteFromViewer = (
       } else {
         setErrorCount(0);
         setModalState(STATE.SUCCESS);
+        send('DELETE_VOTE');
       }
     })
     .catch(() => {
@@ -204,7 +205,7 @@ export const ModalDeleteVoteMobile = ({ debate, setShowArgumentForm }: Props): R
 export default (createFragmentContainer(ModalDeleteVoteMobile, {
   debate: graphql`
     fragment ModalDeleteVoteMobile_debate on Debate
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       viewerVote @include(if: $isAuthenticated) {
         type

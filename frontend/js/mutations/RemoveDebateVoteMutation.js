@@ -28,6 +28,12 @@ const mutation = graphql`
         arguments(first: 0, isPublished: true, isTrashed: false) {
           totalCount
         }
+        forArguments: arguments(first: 0, value: FOR, isPublished: true, isTrashed: false) {
+          totalCount
+        }
+        againstArguments: arguments(first: 0, value: AGAINST, isPublished: true, isTrashed: false) {
+          totalCount
+        }
       }
     }
   }

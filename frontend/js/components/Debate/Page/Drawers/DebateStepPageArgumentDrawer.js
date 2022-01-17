@@ -28,7 +28,7 @@ type Props = {|
 
 const ARGUMENT_FRAGMENT = graphql`
   fragment DebateStepPageArgumentDrawer_argument on DebateArgument
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
     id
     author {
       username
@@ -64,6 +64,8 @@ const DebateStepPageArgumentDrawer = ({
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const isViewerAdmin = viewer && viewer.isAdmin;
   const { widget, stepClosed } = useDebateStepPage();
+
+  if (!argument) return null;
 
   const isAuthor = argument.viewerDidAuthor;
 
