@@ -8,6 +8,7 @@ import type { UserBlockProfile_query } from '~relay/UserBlockProfile_query.graph
 import IconLinkBar from '../Icons/IconLinkBar';
 import colors from '../../../utils/colors';
 import DefaultAvatar from '../../User/DefaultAvatar';
+import { MenuListItem } from '~ds/Menu';
 
 export type Props = {|
   +query: UserBlockProfile_query,
@@ -37,25 +38,37 @@ export const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 
 export const UserBlockProfile = ({ query }: Props) => (
   <>
-    <ProfileInfo>
-      {!query.user.media ? (
-        <img src={query.user.media?.url} alt="admin profile" />
-      ) : (
-        <DefaultAvatar size={60} className="img-circle avatar" />
-      )}
-      <div>{query.user.displayName}</div>
-    </ProfileInfo>
+    <MenuListItem as="div" style={{ padding: 0 }}>
+      <ProfileInfo>
+        {!query.user.media ? (
+          <img src={query.user.media?.url} alt="admin profile" />
+        ) : (
+          <DefaultAvatar size={60} className="img-circle avatar" />
+        )}
+        <div>{query.user.displayName}</div>
+      </ProfileInfo>
+    </MenuListItem>
     {query.user.isAdmin && (
-      <IconLinkBar color={colors.darkText} message="navbar.profile" url={query.user.adminUrl}>
-        <ProfileNeutralIcon color={colors.darkText} />
-      </IconLinkBar>
+      <MenuListItem as="div" style={{ padding: 0 }}>
+        <IconLinkBar
+          noBorderTop
+          color={colors.darkText}
+          message="navbar.profile"
+          url={query.user.adminUrl}>
+          <ProfileNeutralIcon color={colors.darkText} />
+        </IconLinkBar>
+      </MenuListItem>
     )}
-    <IconLinkBar
-      color={colors.dangerColor}
-      message="global-disconnect"
-      url={`${window.location.protocol}//${window.location.host}/logout`}>
-      <PowerButtonIcon color={colors.dangerColor} />
-    </IconLinkBar>
+
+    <MenuListItem as="div" style={{ padding: 0 }}>
+      <IconLinkBar
+        noBorderTop
+        color={colors.dangerColor}
+        message="global-disconnect"
+        url={`${window.location.protocol}//${window.location.host}/logout`}>
+        <PowerButtonIcon color={colors.dangerColor} />
+      </IconLinkBar>
+    </MenuListItem>
   </>
 );
 

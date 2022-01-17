@@ -22,11 +22,12 @@ trait AdminSectionTrait
 
     private function selectNthItemFromMultilangueDropdown(int $nth)
     {
-        $dropdown = '#admin-multilangue-dropdown-navbar';
+        $dropdownButton = '#admin-multilangue-dropdown-navbar';
+        $dropdown = '#admin-multilangue-dropdown';
 
-        $this->iWaitElementToAppearOnPage($dropdown);
-        $this->iClickElement($dropdown);
-        $this->iWaitElementToAppearOnPage("${dropdown} + ul > li:nth-of-type(${nth}) > a");
-        $this->iClickElement("${dropdown} + ul > li:nth-of-type(${nth}) > a");
+        $this->iWaitElementToAppearOnPage($dropdownButton);
+        $this->iClickElement($dropdownButton);
+        $this->iWaitElementToAppearOnPage("${dropdown}  > a:nth-of-type(${nth}) ");
+        $this->iClickElement("${dropdown} > a:nth-of-type(${nth}) ");
     }
 }

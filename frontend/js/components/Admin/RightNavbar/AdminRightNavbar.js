@@ -3,13 +3,15 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
-import { NavDropdown, MenuItem } from 'react-bootstrap';
 import UserBlockProfile from '../../Ui/BackOffice/UserBlockProfile';
 import EarthIcon from '../../Ui/Icons/EarthIcon';
 import type { AdminRightNavbar_query } from '~relay/AdminRightNavbar_query.graphql';
 import type { FeatureToggles, GlobalState } from '~/types';
 import colors from '../../../utils/colors';
 import CookieMonster from '~/CookieMonster';
+import Menu from '~ds//Menu/Menu';
+import Button from '~ds/Button/Button';
+import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 
 export type Props = {|
   query: AdminRightNavbar_query,
@@ -28,43 +30,13 @@ const Navbar: StyledComponent<{}, {}, HTMLUListElement> = styled.ul`
   }
 `;
 
-const NavbarItem: StyledComponent<{}, {}, typeof NavDropdown> = styled(NavDropdown)`
+const CustomNavbarItem: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   position: relative;
   float: left;
-  height: 50px;
+  height: 56px;
   width: 55px;
   border-left: 1px solid ${colors.borderColor};
-  padding: 15px 10px;
-
-  a {
-    color: #000;
-
-    :hover {
-      text-decoration: none;
-    }
-  }
-
-  svg {
-    margin-top: 2px;
-    margin-left: 2px;
-  }
-
-  #admin-multilangue-dropdown-navbar {
-    display: flex;
-
-    span {
-      margin-top: 9px;
-      margin-left: 5px;
-    }
-  }
-`;
-
-const MenuLocaleItem: StyledComponent<{}, {}, typeof MenuItem> = styled(MenuItem)`
-  a {
-    color: #000 !important;
-    padding-left: 10px !important;
-    display: flex !important;
-  }
+  padding: 8px;
 `;
 
 const Placeholder: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -73,49 +45,69 @@ const Placeholder: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 
 const AdminRightNavbar = ({ localesData, currentLocale, features, query }: Props) => (
   <Navbar>
-    <NavbarItem
-      eventKey={0}
-      noCaret
-      id="admin-beamer-navbar"
-      title={
-        <div
-          className="dropdown-toggle js-notifications-trigger beamerTrigger ml-5"
-          data-toggle="dropdown">
-          <i className="fa fa-bell fa-fw" aria-hidden="true" />
-        </div>
-      }
-    />
+    <CustomNavbarItem id="admin-beamer-navbar">
+      <div
+        className="dropdown-toggle js-notifications-trigger beamerTrigger ml-5"
+        data-toggle="dropdown">
+        <i className="fa fa-bell fa-fw" aria-hidden="true" />
+      </div>
+    </CustomNavbarItem>
     {features.multilangue && (
-      <NavbarItem
-        pullRight
-        id="admin-multilangue-dropdown-navbar"
-        eventKey={1}
-        title={<EarthIcon />}>
-        {localesData &&
-          localesData.map(localeData => (
-            <MenuLocaleItem
-              href={localeData.path}
-              key={localeData.locale}
-              onSelect={() => {
-                CookieMonster.setLocale(localeData.locale);
-              }}>
-              {localeData.locale === currentLocale ? (
-                <i className="cap-android-done mr-10" />
-              ) : (
-                <Placeholder />
-              )}
-              <span>{localeData.locale}</span>
-            </MenuLocaleItem>
-          ))}
-      </NavbarItem>
+      <Menu placement="bottom-start" as="li">
+        <Menu.Button>
+          <CustomNavbarItem
+            id="admin-multilangue-dropdown-navbar"
+            rightIcon={
+              <Icon name={ICON_NAME.ARROW_DOWN_O} size={ICON_SIZE.SM} color={colors.black} />
+            }
+            variant="tertiary"
+            variantSize="small"
+            variantColor="hierarchy">
+            <EarthIcon color={colors.black} />
+          </CustomNavbarItem>
+        </Menu.Button>
+        <Menu.List id="admin-multilangue-dropdown">
+          {localesData &&
+            localesData.map(localeData => (
+              <Menu.ListItem
+                style={{
+                  color: colors.black,
+                  paddingLeft: '10px',
+                  textDecoration: 'none',
+                }}
+                as="a"
+                href={localeData.path}
+                key={localeData.locale}
+                onClick={() => {
+                  CookieMonster.setLocale(localeData.locale);
+                }}>
+                {localeData.locale === currentLocale ? (
+                  <i className="cap-android-done mr-10" />
+                ) : (
+                  <Placeholder />
+                )}
+                <span style={{ marginLeft: '5px' }}>{localeData.locale}</span>
+              </Menu.ListItem>
+            ))}
+        </Menu.List>
+      </Menu>
     )}
-    <NavbarItem
-      pullRight
-      id="admin-profile-dropdown-navbar"
-      eventKey={2}
-      title={<i className="fa fa-user fa-fw" aria-hidden="true" />}>
-      <UserBlockProfile query={query} />
-    </NavbarItem>
+    <Menu placement="bottom-start" as="li">
+      <Menu.Button id="admin-profile-dropdown-navbar">
+        <CustomNavbarItem
+          rightIcon={
+            <Icon name={ICON_NAME.ARROW_DOWN_O} size={ICON_SIZE.SM} color={colors.black} />
+          }
+          variant="tertiary"
+          variantSize="small"
+          variantColor="hierarchy">
+          <i className="fa fa-user fa-fw" aria-hidden="true" style={{ color: colors.black }} />
+        </CustomNavbarItem>
+      </Menu.Button>
+      <Menu.List>
+        <UserBlockProfile query={query} />
+      </Menu.List>
+    </Menu>
   </Navbar>
 );
 

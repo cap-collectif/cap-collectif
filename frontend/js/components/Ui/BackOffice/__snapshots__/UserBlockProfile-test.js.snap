@@ -2,58 +2,106 @@
 
 exports[`<UserBlockProfile /> renders correctly 1`] = `
 <Fragment>
-  <UserBlockProfile__ProfileInfo>
-    <DefaultAvatar
-      className="img-circle avatar"
-      size={60}
-    />
-    <div>
-      Booba
-    </div>
-  </UserBlockProfile__ProfileInfo>
-  <IconLinkBar
-    color="#333333"
-    message="navbar.profile"
-    url="/user/booba/edit"
+  <Menu.ListItem
+    as="div"
+    style={
+      Object {
+        "padding": 0,
+      }
+    }
   >
-    <ProfileNeutralIcon
+    <UserBlockProfile__ProfileInfo>
+      <DefaultAvatar
+        className="img-circle avatar"
+        size={60}
+      />
+      <div>
+        Booba
+      </div>
+    </UserBlockProfile__ProfileInfo>
+  </Menu.ListItem>
+  <Menu.ListItem
+    as="div"
+    style={
+      Object {
+        "padding": 0,
+      }
+    }
+  >
+    <IconLinkBar
       color="#333333"
-      size={16}
-    />
-  </IconLinkBar>
-  <IconLinkBar
-    color="#dc3545"
-    message="global-disconnect"
-    url="http://localhost/logout"
+      message="navbar.profile"
+      noBorderTop={true}
+      url="/user/booba/edit"
+    >
+      <ProfileNeutralIcon
+        color="#333333"
+        size={16}
+      />
+    </IconLinkBar>
+  </Menu.ListItem>
+  <Menu.ListItem
+    as="div"
+    style={
+      Object {
+        "padding": 0,
+      }
+    }
   >
-    <PowerButtonIcon
+    <IconLinkBar
       color="#dc3545"
-      size={16}
-    />
-  </IconLinkBar>
+      message="global-disconnect"
+      noBorderTop={true}
+      url="http://localhost/logout"
+    >
+      <PowerButtonIcon
+        color="#dc3545"
+        size={16}
+      />
+    </IconLinkBar>
+  </Menu.ListItem>
 </Fragment>
 `;
 
 exports[`<UserBlockProfile /> renders correctly with isAdmin false 1`] = `
 <Fragment>
-  <UserBlockProfile__ProfileInfo>
-    <DefaultAvatar
-      className="img-circle avatar"
-      size={60}
-    />
-    <div>
-      Booba
-    </div>
-  </UserBlockProfile__ProfileInfo>
-  <IconLinkBar
-    color="#dc3545"
-    message="global-disconnect"
-    url="http://localhost/logout"
+  <Menu.ListItem
+    as="div"
+    style={
+      Object {
+        "padding": 0,
+      }
+    }
   >
-    <PowerButtonIcon
+    <UserBlockProfile__ProfileInfo>
+      <DefaultAvatar
+        className="img-circle avatar"
+        size={60}
+      />
+      <div>
+        Booba
+      </div>
+    </UserBlockProfile__ProfileInfo>
+  </Menu.ListItem>
+  <Menu.ListItem
+    as="div"
+    style={
+      Object {
+        "padding": 0,
+      }
+    }
+  >
+    <IconLinkBar
       color="#dc3545"
-      size={16}
-    />
-  </IconLinkBar>
+      message="global-disconnect"
+      noBorderTop={true}
+      url="http://localhost/logout"
+    >
+      <PowerButtonIcon
+        color="#dc3545"
+        size={16}
+      />
+    </IconLinkBar>
+  </Menu.ListItem>
 </Fragment>
 `;
