@@ -10,6 +10,9 @@ Scenario: Admin sends no valid proposal and receives an error
     "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
       removeProposalsFromSteps(input: $input) {
         error
+        steps {
+          id
+        }
         proposals {
           edges {
             node {
@@ -33,6 +36,7 @@ Scenario: Admin sends no valid proposal and receives an error
     "data": {
       "removeProposalsFromSteps": {
         "error": "NO_VALID_PROPOSAL",
+        "steps": [],
         "proposals": {
           "edges": []
         }
@@ -80,6 +84,9 @@ Scenario: Admin wants to remove a proposal not present in a step
     "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
       removeProposalsFromSteps(input: $input) {
         error
+        steps {
+          id
+        }
         proposals {
           edges {
             node {
@@ -108,6 +115,11 @@ Scenario: Admin wants to remove a proposal not present in a step
     "data": {
       "removeProposalsFromSteps": {
         "error": null,
+        "steps": [
+          {
+            "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="
+          }
+        ],
         "proposals": {
           "edges": [
             {
@@ -138,6 +150,9 @@ Scenario: Admin remove a step from two proposals, only one having it
     "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
       removeProposalsFromSteps(input: $input) {
         error
+        steps {
+          id
+        }
         proposals {
           edges {
             node {
@@ -166,6 +181,11 @@ Scenario: Admin remove a step from two proposals, only one having it
     "data": {
       "removeProposalsFromSteps": {
         "error": null,
+        "steps": [
+          {
+            "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="
+          }
+        ],
         "proposals": {
           "edges": [
             {

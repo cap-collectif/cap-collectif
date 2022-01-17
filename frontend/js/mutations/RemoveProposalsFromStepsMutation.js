@@ -1,74 +1,85 @@
 // @flow
 import { graphql } from 'react-relay';
+// eslint-disable-next-line import/no-unresolved
+import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
 import commitMutation from '~/mutations/commitMutation';
 import environment from '~/createRelayEnvironment';
 import type {
   RemoveProposalsFromStepsMutationVariables,
   RemoveProposalsFromStepsMutationResponse,
 } from '~relay/RemoveProposalsFromStepsMutation.graphql';
-import type { ProposalsStepValues } from '~/components/Admin/Project/ProjectAdminPage.reducer';
-
-type Variables = {
-  ...RemoveProposalsFromStepsMutationVariables,
-  step: ProposalsStepValues,
-};
 
 const mutation = graphql`
-  mutation RemoveProposalsFromStepsMutation($input: RemoveProposalsFromStepsInput!, $step: ID!) {
+  mutation RemoveProposalsFromStepsMutation($input: RemoveProposalsFromStepsInput!) {
     removeProposalsFromSteps(input: $input) {
-      proposals {
-        totalCount
-        pageInfo {
-          hasNextPage
-        }
-        edges {
-          node {
-            author {
-              id
-              username
-            }
-            adminUrl
-            publishedAt
-            district {
-              id
-              name
-            }
-            category {
-              id
-              name
-            }
-            reference(full: false)
-            id
-            title
-            status(step: $step) {
-              id
-              name
-              color
-            }
-            form {
-              step {
-                id
-                title
-              }
-            }
-            selections {
-              step {
-                id
-                title
-              }
-            }
-          }
-          cursor
-        }
+      error
+      steps {
+        __typename
+        id
+        title
       }
     }
   }
 `;
 
-const commit = (variables: Variables): Promise<RemoveProposalsFromStepsMutationResponse> =>
+const commit = (
+  variables: RemoveProposalsFromStepsMutationVariables,
+): Promise<RemoveProposalsFromStepsMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
+    optimisticUpdater: (store: RecordSourceSelectorProxy) => {
+      const stepIdsRemoved = variables.input.stepIds;
+
+      variables.input.proposalIds.forEach(proposalId => {
+        const currentProposal = store.get(proposalId);
+
+        if (currentProposal) {
+          const selections = currentProposal.getLinkedRecords('selections');
+
+          const selectionsUpdated =
+            selections?.filter(selection => {
+              const isStepRemoved = stepIdsRemoved.some(
+                stepId => stepId === selection?.getLinkedRecord('step')?.getValue('id'),
+              );
+
+              if (!isStepRemoved) return selection;
+            }) || [];
+
+          currentProposal.setLinkedRecords(selectionsUpdated, 'selections');
+        }
+      });
+    },
+    updater: (store: RecordSourceSelectorProxy) => {
+      const payload = store.getRootField('removeProposalsFromSteps');
+      if (!payload) return;
+      const hasError = payload.getValue('error');
+      if (hasError) return;
+
+      const stepsRemoved = payload.getLinkedRecords('steps');
+
+      variables.input.proposalIds.forEach(proposalId => {
+        const currentProposal = store.get(proposalId);
+
+        if (currentProposal) {
+          const selections = currentProposal.getLinkedRecords('selections');
+
+          if (selections) {
+            const selectionsUpdated = selections.filter(selection => {
+              const isStepRemoved = stepsRemoved?.some(
+                stepRemoved =>
+                  stepRemoved?.getValue('id') ===
+                  selection?.getLinkedRecord('step')?.getValue('id'),
+              );
+
+              if (!isStepRemoved) return selection;
+            });
+
+            currentProposal.setLinkedRecords(selectionsUpdated, 'selections');
+          }
+        }
+      });
+    },
   });
 
 export default { commit };

@@ -10,6 +10,9 @@ Scenario: Admin sends no valid proposal and receives an error
     "query": "mutation ($input: AddProposalsToStepsInput!) {
       addProposalsToSteps(input: $input) {
         error
+        steps {
+          id
+        }
         proposals {
           edges {
             node {
@@ -33,6 +36,7 @@ Scenario: Admin sends no valid proposal and receives an error
     "data": {
       "addProposalsToSteps": {
         "error": "NO_VALID_PROPOSAL",
+        "steps": [],
         "proposals": {
           "edges": []
         }
@@ -50,6 +54,9 @@ Scenario: Admin sends step not matching the project or not a collect step and re
     "query": "mutation ($input: AddProposalsToStepsInput!) {
       addProposalsToSteps(input: $input) {
         error
+        steps {
+          id
+        }
       }
     }",
     "variables": {
@@ -65,7 +72,8 @@ Scenario: Admin sends step not matching the project or not a collect step and re
   {
     "data": {
       "addProposalsToSteps": {
-        "error": "NO_VALID_STEP"
+        "error": "NO_VALID_STEP",
+        "steps": []
       }
     }
   }
@@ -80,6 +88,9 @@ Scenario: Admin add an already present step to a proposal
     "query": "mutation ($input: AddProposalsToStepsInput!) {
       addProposalsToSteps(input: $input) {
         error
+        steps {
+          id
+        }
         proposals {
           edges {
             node {
@@ -108,6 +119,9 @@ Scenario: Admin add an already present step to a proposal
     "data": {
       "addProposalsToSteps": {
         "error": null,
+        "steps": [{
+          "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
+        }],
         "proposals": {
           "edges": [
             {
@@ -138,6 +152,9 @@ Scenario: Admin add a step to two proposals, one already having it. The new step
     "query": "mutation ($input: AddProposalsToStepsInput!) {
       addProposalsToSteps(input: $input) {
         error
+        steps {
+          id
+        }
         proposals {
           edges {
             node {
@@ -169,6 +186,9 @@ Scenario: Admin add a step to two proposals, one already having it. The new step
     "data": {
       "addProposalsToSteps": {
         "error": null,
+        "steps": [{
+          "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="
+        }],
         "proposals": {
           "edges": [
             {

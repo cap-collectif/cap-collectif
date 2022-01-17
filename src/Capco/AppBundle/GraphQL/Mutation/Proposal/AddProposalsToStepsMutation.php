@@ -16,6 +16,7 @@ class AddProposalsToStepsMutation extends AbstractProposalStepMutation implement
     {
         $error = null;
         $proposals = [];
+        $steps = [];
         $this->project = null;
 
         try {
@@ -29,6 +30,7 @@ class AddProposalsToStepsMutation extends AbstractProposalStepMutation implement
         return [
             'proposals' => $this->getConnection($proposals, $args),
             'error' => $error,
+            'steps' => $steps,
         ];
     }
 

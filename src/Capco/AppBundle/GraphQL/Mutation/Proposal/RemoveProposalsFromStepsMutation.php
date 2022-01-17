@@ -14,6 +14,7 @@ class RemoveProposalsFromStepsMutation extends AbstractProposalStepMutation impl
     {
         $error = null;
         $proposals = [];
+        $steps = [];
         $this->project = null;
 
         try {
@@ -27,6 +28,7 @@ class RemoveProposalsFromStepsMutation extends AbstractProposalStepMutation impl
         return [
             'proposals' => $this->getConnection($proposals, $args),
             'error' => $error,
+            'steps' => $steps
         ];
     }
 

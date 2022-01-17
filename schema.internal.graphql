@@ -599,6 +599,9 @@ type AddProposalsToStepsPayload {
 
   """An unsuccessful mutation will return an error message"""
   error: AddProposalsToStepsErrorCode
+
+  """The steps to which proposals have been moved."""
+  steps: [Step!]!
   clientMutationId: String
 }
 
@@ -11939,6 +11942,9 @@ type RemoveProposalsFromStepsPayload {
 
   """An unsuccessful mutation will return an error message"""
   error: RemoveProposalsFromStepsErrorCode
+
+  """The steps from which proposals have been removed."""
+  steps: [Step!]!
   clientMutationId: String
 }
 

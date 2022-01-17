@@ -8,3 +8,6 @@ AddProposalsToStepsPayload:
             error:
                 type: 'AddProposalsToStepsErrorCode'
                 description: 'An unsuccessful mutation will return an error message'
+            steps:
+                type: '[InternalStep!]!'
+                description: 'The steps to which proposals have been moved.'

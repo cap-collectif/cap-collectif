@@ -132,45 +132,48 @@ const assignStepProposals = async (
   stepsAdded: Uuid[],
   stepsRemoved: Uuid[],
   selectedProposalIds: $ReadOnlyArray<Uuid>,
-  stepSelected: ProposalsStepValues,
-  dispatch: any => void,
   intl: IntlShape,
+  allSteps: $ReadOnlyArray<StepFilter>,
 ) => {
-  try {
-    if (selectedProposalIds.length === 1) {
-      toast({
-        variant: 'loading',
-        content: intl.formatMessage({ id: 'loading-contributions' }),
-        position: 'bottom',
-        duration: stepsRemoved.length === 1 && stepsAdded.length === 1 ? 4000 : 2000,
-      });
-    }
-    if (stepsAdded.length > 0) {
-      await AddProposalsToStepsMutation.commit({
-        input: {
-          proposalIds: selectedProposalIds,
-          stepIds: stepsAdded,
-        },
-        step: stepSelected,
-      });
-    }
+  if (selectedProposalIds.length === 1) {
+    toast({
+      variant: 'loading',
+      content: intl.formatMessage({ id: 'loading-contributions' }),
+      position: 'bottom',
+      duration: stepsRemoved.length === 1 && stepsAdded.length === 1 ? 4000 : 2000,
+    });
+  }
 
-    if (stepsRemoved.length > 0) {
-      await RemoveProposalsFromStepsMutation.commit({
-        input: {
-          proposalIds: selectedProposalIds,
-          stepIds: stepsRemoved,
-        },
-        step: stepSelected,
-      });
-    }
-  } catch (e) {
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'moving.contributions.failed',
+  if (stepsAdded.length > 0) {
+    AddProposalsToStepsMutation.commit({
+      input: {
+        proposalIds: selectedProposalIds,
+        stepIds: stepsAdded,
       },
+      allSteps,
+    }).then(response => {
+      if (!response.addProposalsToSteps || response.addProposalsToSteps.error) {
+        toast({
+          variant: 'danger',
+          content: intl.formatMessage({ id: 'moving.contributions.failed' }),
+        });
+      }
+    });
+  }
+
+  if (stepsRemoved.length > 0) {
+    RemoveProposalsFromStepsMutation.commit({
+      input: {
+        proposalIds: selectedProposalIds,
+        stepIds: stepsRemoved,
+      },
+    }).then(response => {
+      if (!response.removeProposalsFromSteps || response.removeProposalsFromSteps.error) {
+        toast({
+          variant: 'danger',
+          content: intl.formatMessage({ id: 'moving.contributions.failed' }),
+        });
+      }
     });
   }
 };
@@ -564,9 +567,8 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
                   selectionSteps.added,
                   selectionSteps.removed,
                   selectedRows,
-                  selectedStepId,
-                  dispatch,
                   intl,
+                  steps,
                 ).then(() => {
                   setOpenConfirmModal(false);
                   setSelectionSteps({
@@ -609,9 +611,8 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
                 selectionSteps.added,
                 selectionSteps.removed,
                 selectedRows,
-                selectedStepId,
-                dispatch,
                 intl,
+                steps,
               ).then(() => {
                 displayToastsAfterStepAssignation(
                   selectionSteps.added,
@@ -768,10 +769,10 @@ export const ProjectAdminProposals = ({
   const hasProposals = project.proposals?.totalCount > 0;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
   const hasNoResultWithFilter = !hasProposals && hasSelectedFilters;
-  const stepDisplay = React.useMemo(() => getStepDisplay(project, parameters.filters.step), [
-    project,
-    parameters.filters.step,
-  ]);
+  const stepDisplay = React.useMemo(
+    () => getStepDisplay(project, parameters.filters.step),
+    [project, parameters.filters.step],
+  );
 
   const steps = getFormattedStepsChoicesForProject(project);
   const selectedStepId: ProposalsStepValues = parameters.filters.step;
@@ -779,9 +780,8 @@ export const ProjectAdminProposals = ({
   const proposalFormId: string = selectedStep?.form.id || '';
 
   const [proposalSelected, setProposalSelected] = React.useState<?string>(null);
-  const [proposalModalDelete, setProposalModalDelete] = React.useState<?AnalysisProposal_proposal>(
-    null,
-  );
+  const [proposalModalDelete, setProposalModalDelete] =
+    React.useState<?AnalysisProposal_proposal>(null);
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const loadMore = React.useCallback(() => {
@@ -1006,24 +1006,21 @@ const container = createPaginationContainer(
   {
     project: graphql`
       fragment ProjectAdminProposals_project on Project
-        @argumentDefinitions(
-          projectId: { type: "ID!" }
-          viewerIsAdmin: { type: "Boolean!" }
-          count: { type: "Int!" }
-          proposalRevisionsEnabled: { type: "Boolean!" }
-          cursor: { type: "String" }
-          orderBy: {
-            type: "ProposalOrder!"
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-          }
-          state: { type: "ProposalsState!", defaultValue: ALL }
-          category: { type: "ID", defaultValue: null }
-          district: { type: "ID", defaultValue: null }
-          theme: { type: "ID", defaultValue: null }
-          status: { type: "ID", defaultValue: null }
-          step: { type: "ID", defaultValue: null }
-          term: { type: "String", defaultValue: null }
-        ) {
+      @argumentDefinitions(
+        projectId: { type: "ID!" }
+        viewerIsAdmin: { type: "Boolean!" }
+        count: { type: "Int!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+        cursor: { type: "String" }
+        orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+        state: { type: "ProposalsState!", defaultValue: ALL }
+        category: { type: "ID", defaultValue: null }
+        district: { type: "ID", defaultValue: null }
+        theme: { type: "ID", defaultValue: null }
+        status: { type: "ID", defaultValue: null }
+        step: { type: "ID", defaultValue: null }
+        term: { type: "String", defaultValue: null }
+      ) {
         id
         adminAlphaUrl
         slug
