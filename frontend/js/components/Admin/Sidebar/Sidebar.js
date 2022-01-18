@@ -210,7 +210,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                   isOpen={isOpen}
                 />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                  <SidebarLink text="admin.label.project" href="/admin/capco/app/project/list" />
+                  <SidebarLink text="admin.label.project" href="/admin-next/projects" />
                   {isAdmin ? (
                     <SidebarLink
                       text="admin.label.appendix"

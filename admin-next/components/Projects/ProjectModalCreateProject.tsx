@@ -22,12 +22,12 @@ import UserListField from 'components/Form/UserListField';
 
 const formName = 'form-create-project';
 
-export type Author = { value: string; label: string | null };
+export type Author = { value: string, label: string | null };
 
 type FormValues = {
-    title: string;
-    author?: Author | Array<Author>;
-    type?: string;
+    title: string,
+    author?: Author | Array<Author>,
+    type?: string,
 };
 
 interface ProjectModalCreateProjectProps {
@@ -174,6 +174,7 @@ const ProjectModalCreateProject: React.FC<ProjectModalCreateProjectProps> = ({
                                     value: type.id,
                                     label: intl.formatMessage({ id: type.title }),
                                 }))}
+                                clearable
                             />
                         </Flex>
                     </Modal.Body>

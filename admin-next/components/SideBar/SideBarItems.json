@@ -110,7 +110,7 @@
         "items": [
             {
                 "title": "admin.label.project",
-                "href": "/admin/capco/app/project/list",
+                "href": "/admin-next/projects",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useIntl, IntlShape } from 'react-intl';
+import { useIntl, IntlShape, FormattedHTMLMessage } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
 import {
     Button,
@@ -47,19 +47,20 @@ const FRAGMENT = graphql`
     }
 `;
 
-const getSteptrad = (
-    step: ProjectModalExportSteps_project['exportableSteps'][number],
-    intl: IntlShape,
-) => {
+const getSteptrad = (step: ProjectModalExportSteps_project['exportableSteps'][number]) => {
     if (step?.step.__typename === 'QuestionnaireStep') {
-        return intl.formatHTMLMessage(
-            { id: 'admin.project.list.export.step.exportStepUrl' },
-            { index: step?.position, stepTitle: step?.step?.title },
+        return (
+            <FormattedHTMLMessage
+                id="admin.project.list.export.step.exportStepUrl"
+                values={{ index: step?.position, stepTitle: step?.step?.title }}
+            />
         );
     }
-    return intl.formatHTMLMessage(
-        { id: 'admin.project.list.export.step.exportStepUrl.alt' },
-        { index: step?.position, stepTitle: step?.step?.title },
+    return (
+        <FormattedHTMLMessage
+            id="admin.project.list.export.step.exportStepUrl.alt"
+            values={{ index: step?.position, stepTitle: step?.step?.title }}
+        />
     );
 };
 const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({
@@ -73,16 +74,16 @@ const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({
               return {
                   id: step?.step?.exportStepUrl,
                   useIdAsValue: true,
-                  label: getSteptrad(step, intl),
+                  label: getSteptrad(step),
               };
           })
         : [
               {
                   id: project.exportContributorsUrl,
                   useIdAsValue: true,
-                  label: intl.formatHTMLMessage({
-                      id: 'admin.project.list.export.exportContributorsUrl',
-                  }),
+                  label: (
+                      <FormattedHTMLMessage id="admin.project.list.export.exportContributorsUrl" />
+                  ),
               },
 
               ...project.exportableSteps
@@ -91,17 +92,19 @@ const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({
                           {
                               id: step?.step?.exportStepUrl,
                               useIdAsValue: true,
-                              label: getSteptrad(step, intl),
+                              label: getSteptrad(step),
                           },
                           {
                               id: step?.step?.exportContributorsUrl,
                               useIdAsValue: true,
-                              label: intl.formatHTMLMessage(
-                                  { id: 'admin.project.list.export.step.exportContributorsUrl' },
-                                  {
-                                      index: step?.position,
-                                      stepTitle: step?.step?.title,
-                                  },
+                              label: (
+                                  <FormattedHTMLMessage
+                                      id="admin.project.list.export.step.exportContributorsUrl"
+                                      values={{
+                                          index: step?.position,
+                                          stepTitle: step?.step?.title,
+                                      }}
+                                  />
                               ),
                           },
                       ].flat();

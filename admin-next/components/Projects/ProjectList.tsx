@@ -5,6 +5,7 @@ import type { ProjectList_viewer$key } from '@relay/ProjectList_viewer.graphql';
 import { Text, Table, Menu, Icon, CapUIIcon } from '@cap-collectif/ui';
 import ProjectItem from 'components/Projects/ProjectItem';
 import EmptyMessage from 'components/UI/Table/EmptyMessage';
+import { useLayoutContext } from 'components/Layout/Layout.context';
 
 export const PROJECT_LIST_PAGINATION = 20;
 
@@ -62,6 +63,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
     const { data, loadNext, hasNext, refetch } = usePaginationFragment(ProjectListQuery, viewer);
     const { projects } = data;
     const firstRendered = React.useRef<true | null>(null);
+    const { contentRef } = useLayoutContext();
     const hasProjects = projects ? projects.totalCount > 0 : false;
     React.useEffect(() => {
         if (firstRendered.current) {
@@ -130,7 +132,8 @@ const ProjectList: React.FC<ProjectListProps> = ({
                 onScrollToBottom={() => {
                     loadNext(PROJECT_LIST_PAGINATION);
                 }}
-                hasMore={hasNext}>
+                hasMore={hasNext}
+                scrollParentRef={contentRef || undefined}>
                 {projects?.edges
                     ?.filter(Boolean)
                     .map(edge => edge?.node)

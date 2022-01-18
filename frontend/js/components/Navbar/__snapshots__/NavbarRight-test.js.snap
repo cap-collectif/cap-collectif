@@ -1197,7 +1197,7 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
       first={[Function]}
       groups={Array []}
       hide={[Function]}
-      href="/admin/capco/app/project/list"
+      href="/admin-next/projects"
       items={Array []}
       last={[Function]}
       loop={false}

@@ -2,37 +2,35 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\Enum\UserRole;
-use Capco\AppBundle\Repository\ProjectDistrictRepository;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalCommentRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\AppBundle\Toggle\Manager;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
+use Capco\AppBundle\Enum\UserRole;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Toggle\Manager;
+use Sonata\Form\Type\CollectionType;
+use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\Form\Validator\ErrorElement;
+use Doctrine\ORM\EntityManagerInterface;
+use Sonata\Form\Type\DateTimePickerType;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\BlockBundle\Meta\Metadata;
-use Sonata\Form\Type\CollectionType;
-use Sonata\Form\Type\DateTimePickerType;
-use Sonata\Form\Validator\ErrorElement;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Symfony\Component\Validator\Constraints\Required;
+use Capco\AppBundle\Repository\ProjectDistrictRepository;
+use Capco\AppBundle\Repository\ProposalCommentRepository;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class ProjectAdmin extends CapcoAdmin
 {
@@ -73,21 +71,6 @@ final class ProjectAdmin extends CapcoAdmin
                 ->addViolation('global.required')
                 ->end();
         }
-    }
-
-    /** @var Project */
-    public function preRemove($object)
-    {
-        foreach ($object->getRealSteps() as $step) {
-            if ($step instanceof CollectStep || $step instanceof SelectionStep) {
-                $step->setDefaultStatus(null);
-            }
-        }
-        $this->entityManager->flush();
-
-        $this->indexer->remove(\get_class($object), $object->getId());
-        $this->indexer->finishBulk();
-        parent::preRemove($object);
     }
 
     public function postUpdate($object)
@@ -152,7 +135,7 @@ final class ProjectAdmin extends CapcoAdmin
     public function getTemplate($name)
     {
         if ('list' === $name) {
-                return 'CapcoAdminBundle:Project:list.html.twig';
+            return 'CapcoAdminBundle:Project:list.html.twig';
         }
         if ('edit' === $name) {
             return 'CapcoAdminBundle:Project:edit.html.twig';

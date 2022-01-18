@@ -10,7 +10,11 @@ export interface CheckboxProps {
     name: string;
     id: string;
     placeholder?: string;
-    choices?: Array<{ id: string | null | undefined, useIdAsValue: boolean, label: string }>;
+    choices?: Array<{
+        id: string | null | undefined,
+        useIdAsValue: boolean,
+        label: string | React.ReactElement,
+    }>;
     value?: Value;
     onChange?: (value: Value) => void;
 }
@@ -35,7 +39,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({ choices, value, id, onChange
             <CheckboxGroup>
                 {choices.map(choice => {
                     const choiceKey = `choice-${choice.id}`;
-                    const choiceValue = choice.useIdAsValue && choice.id ? choice.id : choice.label;
+                    const choiceValue =
+                        choice.useIdAsValue && choice.id ? choice.id : String(choice.label);
 
                     return (
                         <CapCheckbox

@@ -40,8 +40,6 @@ export const SidebarLink = ({
     window.location.href.includes(href) ||
     window.location.href.includes(href.slice(0, -4)) ||
     (window.location.href.includes('/admin/capco/app/reporting') && href === '/admin/reporting') ||
-    (window.location.href.includes('/admin/alpha/project/') &&
-      href === '/admin/capco/app/project/list') ||
     (window.location.href.includes('/admin/capco/app/sitecolor/') &&
       href === '/admin/settings/settings.appearance/list');
 

@@ -54,18 +54,14 @@ Scenario: Logged in admin wants to delete a project
   Given I am logged in as admin
   And I go to the admin project list page
   Then I go to "/admin/capco/app/project/project26/delete"
-  And I wait "button.btn:nth-child(3)" to appear on current page
-  And I click the "button.btn:nth-child(3)" element
-  Then I should be redirected to "/admin/capco/app/project/list"
+  Then I should be redirected to "/admin-next/projects"
 
 @database
 Scenario: Logged in admin wants to delete a project with default status
   Given I am logged in as admin
   And I go to the admin project list page
   Then I go to "/admin/capco/app/project/project6/delete"
-  And I wait "button.btn:nth-child(3)" to appear on current page
-  And I click the "button.btn:nth-child(3)" element
-  Then I should be redirected to "/admin/capco/app/project/list"
+  Then I should be redirected to "/admin-next/projects"
 
   # TODO Decomment once react element visible
 #@database

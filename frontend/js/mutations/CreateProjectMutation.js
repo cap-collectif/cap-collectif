@@ -13,7 +13,6 @@ const mutation = graphql`
   mutation CreateProjectMutation($input: CreateProjectInput!, $connections: [ID!]!) {
     createProject(input: $input) {
       project @prependNode(connections: $connections, edgeTypeName: "ProjectEdge") {
-        ...ProjectItem_project
         adminAlphaUrl
       }
     }

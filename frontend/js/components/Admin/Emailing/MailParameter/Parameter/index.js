@@ -193,7 +193,7 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
           dangerouslySetInnerHTML={{
             __html: intl.formatHTMLMessage(
               { id: 'admin-help-mailing-list-access' },
-              { linkProject: '/admin/capco/app/project/list' },
+              { linkProject: '/admin-next/projects' },
             ),
           }}
         />

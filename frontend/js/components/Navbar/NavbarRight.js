@@ -85,7 +85,7 @@ export const NavbarRight = ({
             {(user.isAdmin || isProjectAdmin) && (
               <MenuItem
                 {...menu}
-                href={user.isAdmin ? '/admin/' : '/admin/capco/app/project/list'}
+                href={user.isAdmin ? '/admin/' : '/admin-next/projects'}
                 as={S.TabsLink}>
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
                 {intl.formatMessage({ id: 'global.administration' })}

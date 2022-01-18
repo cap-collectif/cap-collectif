@@ -24,7 +24,7 @@ const DashboardEmptyState = (): React.Node => {
       <Button
         variant="primary"
         variantSize="big"
-        onClick={() => window.open('/admin/capco/app/project/list', '_self')}>
+        onClick={() => window.open('/admin-next/projects', '_self')}>
         {intl.formatMessage({ id: 'create-a-project' })}
       </Button>
     </AppBox>

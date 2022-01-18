@@ -18,7 +18,7 @@ import getSessionFromSessionCookie from '../utils/session-resolver';
 import getViewerJsonFromRedisSession from '../utils/session-decoder';
 import getFeatureFlags from '../utils/feature-flags-resolver';
 
-import { __isTest__ } from '../config';
+import { __isTest__, __isDev__ } from '../config';
 import { getLocaleFromReq } from '../utils/locale-helper';
 
 const messages = {
@@ -59,10 +59,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 const redirectOnError = (res: NextApiResponse, devErrorMessage: string) => {
-    throw new Error(devErrorMessage);
+    if (__isDev__) {
+        throw new Error(devErrorMessage);
+    }
 
     // In production we redirect to the frontend homepage.
-    res.writeHead(301, { Location: '/' });
+    res.writeHead(302, { Location: '/' });
     res.end();
 };
 
@@ -74,7 +76,7 @@ MyApp.getInitialProps = async appContext => {
     const pageProps = { intl: {} };
 
     // If we are on error page we skip this step.
-    if (req.url === '/500' || req.url === '/400') {
+    if (req?.url === '/500' || req?.url === '/400') {
         return { ...appProps, pageProps };
     }
 

@@ -45,7 +45,6 @@ import AdminPostCreateFormApp from '~/startup/AdminPostCreateFormApp';
 import AdminQuestionnaireListApp from '~/startup/AdminQuestionnaireListApp';
 import AdminProposalFormListApp from '~/startup/AdminProposalFormListApp';
 import AdminEventListApp from '~/startup/AdminEventListApp';
-import AdminProjectListApp from '~/startup/AdminProjectListApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -92,6 +91,5 @@ ReactOnRails.register({
   AdminPostCreateFormApp,
   AdminQuestionnaireListApp,
   AdminProposalFormListApp,
-  AdminProjectListApp,
   AdminEventListApp,
 });

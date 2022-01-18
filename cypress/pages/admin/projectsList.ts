@@ -4,7 +4,7 @@ export default new (class AdminProjectsListPage {
   }
 
   get path() {
-    return '/admin/capco/app/project/list'
+    return '/admin-next/projects'
   }
 
   visit() {

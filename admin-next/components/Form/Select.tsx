@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import debounce from 'utils/debounce-promise';
 import { Select as CapSelect, AsyncSelect } from '@cap-collectif/ui';
 
-export type Option = { value: string; label: string };
+export type Option = { value: string, label: string };
 export type Value = string | Array<{ value: string }> | { value: string } | Option;
 
 const DEBOUNCE_MS = 400;
@@ -29,6 +29,7 @@ export const Select: React.FC<SelectProps> = ({
     noOptionsMessage,
     loadingMessage,
     value,
+    clearable,
     ...rest
 }) => {
     const intl = useIntl();
@@ -40,6 +41,7 @@ export const Select: React.FC<SelectProps> = ({
         return (
             <AsyncSelect
                 {...rest}
+                isClearable={clearable}
                 value={value}
                 loadOptions={loadOptionsDebounced}
                 loadingMessage={() =>
@@ -63,6 +65,7 @@ export const Select: React.FC<SelectProps> = ({
     return (
         <CapSelect
             {...rest}
+            isClearable={clearable}
             options={options}
             noOptionsMessage={() =>
                 noOptionsMessage || intl.formatMessage({ id: 'result-not-found' })

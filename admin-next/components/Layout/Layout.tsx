@@ -12,6 +12,7 @@ import { SideBarProvider } from '@ui/SideBar/SideBar.context';
 import sideBarItems from '../SideBar/SideBarItems.json';
 import { useRouter } from 'next/router';
 import CookieHelper from '@utils/cookie-helper';
+import { LayoutProvider } from './Layout.context';
 
 export interface LayoutProps {
     children: React.ReactNode;
@@ -22,6 +23,7 @@ export interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) => {
     const intl = useIntl();
+    const contentRef = React.useRef(null);
     const { viewerSession, appVersion } = useAppContext();
     const { pathname } = useRouter();
     const menuOpen = sideBarItems.find(sideBarItem => {
@@ -80,10 +82,15 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                         <React.Suspense fallback={<NavBarPlaceholder />}>
                             <NavBar title={navTitle} data={navData} />
                         </React.Suspense>
-
-                        <Box p={6} className="container-content" overflowY="scroll">
-                            {children}
-                        </Box>
+                        <LayoutProvider contentRef={contentRef}>
+                            <Box
+                                p={6}
+                                className="container-content"
+                                overflowY="scroll"
+                                ref={contentRef}>
+                                {children}
+                            </Box>
+                        </LayoutProvider>
                     </Flex>
                 </Flex>
             </SideBarProvider>
