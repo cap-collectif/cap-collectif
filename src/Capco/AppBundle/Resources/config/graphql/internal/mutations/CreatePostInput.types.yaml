@@ -5,6 +5,9 @@ CreatePostInput:
         fields:
             translations:
                 type: '[InternalCreatePostTranslationInput!]'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             authors:
                 type: '[ID!]!'
                 description: 'post authors'

@@ -48,6 +48,9 @@ InternalAnalysisConfiguration:
             body:
                 type: 'HTML'
                 description: 'A text to explain the analysis process.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean!'
             effectiveDateProcessed:
                 type: 'Boolean'
                 description: 'Indicates whether or not a proposal has been processed on effectiveDate'

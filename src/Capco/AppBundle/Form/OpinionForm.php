@@ -25,6 +25,7 @@ class OpinionForm extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'user',
             ])
+            ->add('bodyUsingJoditWysiwyg')
             ->add('appendices', CollectionType::class, [
                 'entry_type' => AppendixType::class,
                 'required' => false,

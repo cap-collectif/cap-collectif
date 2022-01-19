@@ -9,6 +9,12 @@ AddVersionInput:
             title:
                 type: 'String!'
             body:
-                type: 'String!'
+                type: 'HTML!'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             comment:
-                type: 'String'
+                type: 'HTML'
+            commentUsingJoditWysiwyg:
+                description: 'Is the comment using Jodit Wysiwyg.'
+                type: 'Boolean'

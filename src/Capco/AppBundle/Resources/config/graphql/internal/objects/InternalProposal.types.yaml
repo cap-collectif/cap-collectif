@@ -259,3 +259,6 @@ InternalProposal:
             isProposalUsingAnySocialNetworks:
                 type: 'Boolean!'
                 description: 'True if proposal got any social network value and proposal form using any social networks.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean!'

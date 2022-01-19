@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -22,6 +23,7 @@ class AnalysisConfiguration implements Timestampable
     use TextableTrait;
     use TimestampableTrait;
     use UuidTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="analysisConfiguration")

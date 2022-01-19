@@ -17,6 +17,9 @@ CreateProposalInput:
             body:
                 type: 'HTML'
                 description: 'The proposal body'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             summary:
                 type: 'String'
                 description: 'The proposal summary'

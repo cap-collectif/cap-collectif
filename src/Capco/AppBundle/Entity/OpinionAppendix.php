@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -14,9 +15,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionAppendix
 {
-    use UuidTrait;
-    use TimestampableTrait;
     use TextableTrait;
+    use TimestampableTrait;
+    use UuidTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @var \DateTime
@@ -28,7 +30,7 @@ class OpinionAppendix
     /**
      * @ORM\Column(name="body", type="text", nullable=true)
      */
-    private $body = null;
+    private $body;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AppendixType", cascade={"persist"})

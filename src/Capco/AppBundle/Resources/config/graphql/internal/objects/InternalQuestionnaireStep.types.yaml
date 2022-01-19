@@ -34,3 +34,6 @@ InternalQuestionnaireStep:
             collectParticipantsEmail:
                 description: 'Does the questionnaire allow to collect anonymous users email ?'
                 type: 'Boolean!'
+            footerUsingJoditWysiwyg:
+                description: 'Is the questionnaire footer using Jodit Wysiwyg.'
+                type: 'Boolean!'

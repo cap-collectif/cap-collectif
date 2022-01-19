@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Repository\OfficialResponseRepository;
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -21,6 +22,7 @@ class OfficialResponse
     use NullableTextableTrait;
     use TimestampableTrait;
     use UuidTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\Column(name="is_published", type="boolean", options={"default": false})

@@ -18,6 +18,7 @@ class QuestionnaireStepFormType extends AbstractStepFormType
                 'class' => Questionnaire::class,
             ])
             ->add('footer')
+            ->add('footerUsingJoditWysiwyg')
             ->add('isAnonymousParticipationAllowed')
             ->add('collectParticipantsEmail');
     }

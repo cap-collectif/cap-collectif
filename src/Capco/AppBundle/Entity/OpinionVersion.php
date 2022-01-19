@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\HasDiffInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
@@ -40,6 +41,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use TrashableTrait;
     use UuidTrait;
     use VotableOkNokMitigeTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")
@@ -89,6 +91,11 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
      */
     private $followers;
 
+    /**
+     * @ORM\Column(name="comment_using_jodit_wysiwyg", type="boolean", nullable=false, options={"default": false})
+     */
+    private bool $commentUsingJoditWysiwyg = false;
+
     public function __construct()
     {
         $this->arguments = new ArrayCollection();
@@ -101,6 +108,17 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New opinion version';
+    }
+
+    public function isCommentUsingJoditWysiwyg(): bool
+    {
+        return $this->commentUsingJoditWysiwyg;
+    }
+
+    public function setCommentUsingJoditWysiwyg(bool $commentUsingJoditWysiwyg): OpinionVersion
+    {
+        $this->commentUsingJoditWysiwyg = $commentUsingJoditWysiwyg;
+        return $this;
     }
 
     public function getKind(): string

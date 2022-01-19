@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\AnswerableTrait;
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
@@ -46,6 +47,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     use TrashableTrait;
     use UuidTrait;
     use VotableOkNokMitigeTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     public static $sortCriterias = [
         'opinion.sort.positions' => 'positions',

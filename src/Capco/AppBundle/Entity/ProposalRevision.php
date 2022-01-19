@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -19,6 +20,7 @@ class ProposalRevision
     use UuidTrait;
     use TimestampableTrait;
     use TextableTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\Column(name="reason", type="text")
@@ -53,6 +55,8 @@ class ProposalRevision
      * @ORM\Column(name="revised_at", type="datetime", nullable=true)
      */
     private \DateTimeInterface $revisedAt;
+
+
 
     public function getReason(): string
     {

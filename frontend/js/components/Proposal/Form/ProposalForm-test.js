@@ -261,6 +261,7 @@ describe('<ProposalForm />', () => {
       webPageUrl: 'http://cap-collectif.com',
       instagramUrl: 'http://instagram.com',
       linkedInUrl: 'http://linkedin.com',
+      bodyUsingJoditWysiwyg: false,
       $refType,
     },
     geoJsons: [],
@@ -277,7 +278,7 @@ describe('<ProposalForm />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should render a create Proposal form from back office', () => {
-    const wrapper = shallow(<ProposalForm {...props} proposal={null} isBackOfficeInput/>);
+    const wrapper = shallow(<ProposalForm {...props} proposal={null} isBackOfficeInput />);
     expect(wrapper).toMatchSnapshot();
   });
 

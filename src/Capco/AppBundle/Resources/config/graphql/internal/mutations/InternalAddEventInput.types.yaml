@@ -40,6 +40,9 @@ InternalAddEventInput:
                 description: 'The Node ID of the author for this event.'
             translations:
                 type: '[InternalEventTranslationInput!]!'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             authorAgreeToUsePersonalDataForEventOnly:
                 type: 'Boolean'
                 description: 'Author of event agree to use personal data for event only'

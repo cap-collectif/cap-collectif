@@ -70,6 +70,7 @@ const remoteInitialValues = {
 const eventNotComplete = {
   event: {
     id: 'event1',
+    bodyUsingJoditWysiwyg: false,
     timeRange: {
       startAt: '2019-04-21',
       endAt: '',

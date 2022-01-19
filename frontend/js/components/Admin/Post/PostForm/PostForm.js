@@ -48,6 +48,7 @@ type FormValues = {|
   +isProjectAdmin?: ?boolean,
   +isSuperAdmin?: ?boolean,
   +proposalId?: ?string,
+  +bodyUsingJoditWysiwyg?: ?boolean,
 |};
 type OwnProps = {|
   +query: PostForm_query$key,
@@ -130,6 +131,7 @@ const onSubmit = (values, dispatch, props) => {
       isPublished: values.is_published,
       commentable: values.has_comments,
       customCode: values.custom_code,
+      bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg ?? false,
     };
     return UpdatePostMutation.commit({ input: vals })
       .then(() => {
@@ -153,6 +155,7 @@ const onSubmit = (values, dispatch, props) => {
     isPublished: values.is_published,
     commentable: values.has_comments,
     customCode: values.custom_code,
+    bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg ?? false,
   };
   return CreatePostMutation.commit({ input: vals })
     .then(response => {

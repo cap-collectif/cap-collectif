@@ -12,6 +12,9 @@ UpdateDebateOpinionInput:
             body:
                 type: 'HTML'
                 description: 'If provided, update the body value.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             author:
                 type: 'ID'
                 description: 'If a Node ID of a `User` is provided, update the author.'

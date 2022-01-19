@@ -34,6 +34,7 @@ class EventType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
+            ->add('bodyUsingJoditWysiwyg')
             ->add('startAt', DateTimeType::class, [
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd HH:mm:ss',

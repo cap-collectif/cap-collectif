@@ -138,6 +138,7 @@ export type FormValues = {|
   title: ?string,
   summary?: ?string,
   body: ?string,
+  bodyUsingJoditWysiwyg: ?boolean,
   address?: ?string,
   addresstext?: ?string,
   theme?: ?string,
@@ -204,6 +205,7 @@ const onSubmit = (
     title: values.title,
     summary: values.summary,
     body: values.body,
+    bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg,
     address: values.address,
     theme: values.theme,
     category: values.category,
@@ -330,7 +332,7 @@ export const asyncValidate = (values: FormValues) => {
       ? `https://tipsmeee.fra1.digitaloceanspaces.com/datasStage/qrs/qr_${values.tipsmeeeId}.png`
       : `https://tipsmeee.fra1.digitaloceanspaces.com/datas/qrs/qr_${values.tipsmeeeId}.png`;
     // https://stackoverflow.com/questions/34116294/rejecting-promise-when-using-fetch
-    return fetch(tipsmeeeUrl).then(function(res) {
+    return fetch(tipsmeeeUrl).then(function (res) {
       if (res.status === 200 && res.ok) {
         return res;
       }
@@ -535,11 +537,8 @@ export class ProposalFormLegacy extends React.Component<Props, State> {
         ? 'interpellation.suggest_header'
         : 'question.suggest_header';
 
-    const {
-      districtIdsFilteredByAddress,
-      isLoadingTitleSuggestions,
-      titleSuggestions,
-    } = this.state;
+    const { districtIdsFilteredByAddress, isLoadingTitleSuggestions, titleSuggestions } =
+      this.state;
 
     const optional = (
       <Text as="span" fontWeight="normal" color={!isBackOfficeInput ? '#707070' : 'gray.500'}>
@@ -976,6 +975,7 @@ const mapStateToProps = (
       webPageUrl: proposal ? proposal.webPageUrl : null,
       instagramUrl: proposal ? proposal.instagramUrl : null,
       linkedInUrl: proposal ? proposal.linkedInUrl : null,
+      bodyUsingJoditWysiwyg: proposal?.bodyUsingJoditWysiwyg ?? false,
     },
     geoJsons: formatGeoJsons(proposalForm.districts),
     titleValue: selector(state, 'title'),
@@ -1011,10 +1011,11 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalFormLegacy_proposal on Proposal
-      @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
+    @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
       id
       title
       body
+      bodyUsingJoditWysiwyg
       summary
       address {
         json

@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\OwnerTrait;
@@ -39,6 +40,7 @@ class Post implements
     use TimestampableTrait;
     use TranslatableTrait;
     use UuidTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\Column(name="is_published", type="boolean", options={"default": false})
@@ -118,6 +120,7 @@ class Post implements
     {
         return $this->getId() ? $this->translate()->getTitle() : 'New post';
     }
+
 
     public static function getTranslationEntityClass(): string
     {

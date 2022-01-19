@@ -10,8 +10,11 @@ UpdateOpinionInput:
                 type: 'String!'
                 description: 'the opinion title'
             body:
-                type: 'String!'
+                type: 'HTML!'
                 description: 'the opinion body'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             appendices:
                 type: '[AppendixInput]!'
                 description: 'the opinion appendices'

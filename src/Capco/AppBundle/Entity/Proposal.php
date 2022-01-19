@@ -18,6 +18,7 @@ use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\AddressableTrait;
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\FollowableTrait;
@@ -88,6 +89,7 @@ class Proposal implements
     use TimestampableTrait;
     use TrashableTrait;
     use UuidTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 

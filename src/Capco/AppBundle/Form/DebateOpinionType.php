@@ -25,6 +25,7 @@ class DebateOpinionType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
             ])
+            ->add('bodyUsingJoditWysiwyg')
             ->add('author', RelayNodeType::class, [
                 'class' => User::class,
             ])

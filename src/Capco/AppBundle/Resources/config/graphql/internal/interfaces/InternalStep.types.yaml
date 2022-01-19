@@ -25,6 +25,9 @@ InternalStep:
             body:
                 type: 'HTML'
                 description: 'The introduction text of the step.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean!'
             enabled:
                 description: 'Is the step enabled or not'
                 type: 'Boolean!'

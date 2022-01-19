@@ -21,6 +21,7 @@ abstract class AbstractStepFormType extends AbstractType
                 'mapped' => false,
             ])
             ->add('body')
+            ->add('bodyUsingJoditWysiwyg')
             ->add('title')
             ->add('label')
             ->add('startAt', DateTimeType::class, [

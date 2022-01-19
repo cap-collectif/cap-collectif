@@ -133,6 +133,13 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                   Object {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "bodyUsingJoditWysiwyg",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "User",
                     "kind": "LinkedField",
                     "name": "animator",
@@ -686,7 +693,7 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
         ],
       },
       "params": Object {
-        "cacheID": "93c4cf9628d5b9fe6356053d4fd675b9",
+        "cacheID": "5c9315332efbd270565b97f46d9f06a2",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -716,6 +723,7 @@ fragment EventForm_event on Event {
   isPresential
   recordingUrl
   isRecordingPublished
+  bodyUsingJoditWysiwyg
   animator {
     id
     displayName
@@ -971,6 +979,13 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                   Object {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "bodyUsingJoditWysiwyg",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "User",
                     "kind": "LinkedField",
                     "name": "animator",
@@ -1524,7 +1539,7 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
         ],
       },
       "params": Object {
-        "cacheID": "93c4cf9628d5b9fe6356053d4fd675b9",
+        "cacheID": "5c9315332efbd270565b97f46d9f06a2",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -1554,6 +1569,7 @@ fragment EventForm_event on Event {
   isPresential
   recordingUrl
   isRecordingPublished
+  bodyUsingJoditWysiwyg
   animator {
     id
     displayName
@@ -1809,6 +1825,13 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "bodyUsingJoditWysiwyg",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "User",
                     "kind": "LinkedField",
                     "name": "animator",
@@ -2362,7 +2385,7 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "93c4cf9628d5b9fe6356053d4fd675b9",
+        "cacheID": "5c9315332efbd270565b97f46d9f06a2",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -2392,6 +2415,7 @@ fragment EventForm_event on Event {
   isPresential
   recordingUrl
   isRecordingPublished
+  bodyUsingJoditWysiwyg
   animator {
     id
     displayName
@@ -2647,6 +2671,13 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "bodyUsingJoditWysiwyg",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "User",
                     "kind": "LinkedField",
                     "name": "animator",
@@ -3200,7 +3231,7 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "93c4cf9628d5b9fe6356053d4fd675b9",
+        "cacheID": "5c9315332efbd270565b97f46d9f06a2",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -3230,6 +3261,7 @@ fragment EventForm_event on Event {
   isPresential
   recordingUrl
   isRecordingPublished
+  bodyUsingJoditWysiwyg
   animator {
     id
     displayName

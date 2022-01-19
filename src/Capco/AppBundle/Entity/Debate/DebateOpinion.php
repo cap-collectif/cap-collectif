@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\TitleTrait;
@@ -29,6 +30,7 @@ class DebateOpinion
     use TimestampableTrait;
     use TitleTrait;
     use UuidTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})

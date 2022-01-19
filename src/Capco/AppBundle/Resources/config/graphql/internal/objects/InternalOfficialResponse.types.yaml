@@ -9,3 +9,6 @@ InternalOfficialResponse:
                 type: '[InternalUser!]!'
             proposal:
                 type: 'InternalProposal!'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean!'

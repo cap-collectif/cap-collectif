@@ -7,11 +7,17 @@ ChangeVersionInput:
                 type: 'ID!'
                 description: 'The version Node id.'
             body:
-                type: 'String'
+                type: 'HTML'
                 description: 'Updated version body.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             title:
                 type: 'String'
                 description: 'Updated version title.'
             comment:
-                type: 'String'
+                type: 'HTML'
                 description: 'Updated version comment.'
+            commentUsingJoditWysiwyg:
+                description: 'Is the comment using Jodit Wysiwyg.'
+                type: 'Boolean'

@@ -89,6 +89,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       translation,
       props.currentLanguage,
     ),
+    bodyUsingJoditWysiwyg: values?.bodyUsingJoditWysiwyg ?? false,
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
     customCode: values.customcode,
@@ -181,6 +182,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
       translation,
       props.currentLanguage,
     ),
+    bodyUsingJoditWysiwyg: values?.bodyUsingJoditWysiwyg ?? false,
   };
   const reviewInput =
     values.refusedReason !== 'NONE'

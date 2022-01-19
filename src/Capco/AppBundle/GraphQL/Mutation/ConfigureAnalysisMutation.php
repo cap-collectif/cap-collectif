@@ -72,6 +72,7 @@ class ConfigureAnalysisMutation implements MutationInterface
             $selectionStepStatusId,
             $costEstimationEnabled,
             $body,
+            $bodyUsingJoditWysiwyg,
         ) = [
             $args->offsetGet('proposalFormId'),
             $args->offsetGet('evaluationFormId'),
@@ -83,6 +84,7 @@ class ConfigureAnalysisMutation implements MutationInterface
             $args->offsetGet('selectionStepStatusId'),
             $args->offsetGet('costEstimationEnabled'),
             $args->offsetGet('body'),
+            $args->offsetGet('bodyUsingJoditWysiwyg'),
         ];
 
         $evaluationForm = null;
@@ -156,7 +158,8 @@ class ConfigureAnalysisMutation implements MutationInterface
             ->setMoveToSelectionStep($moveToSelectionStep)
             ->setSelectionStepStatus($chosenSelectionStepStatus)
             ->setCostEstimationEnabled($costEstimationEnabled)
-            ->setBody($body ?? '');
+            ->setBody($body ?? '')
+            ->setBodyUsingJoditWysiwyg($bodyUsingJoditWysiwyg ?? false);
 
         try {
             $this->entityManager->persist($analysisConfiguration);

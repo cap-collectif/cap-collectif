@@ -327,6 +327,9 @@ input AddDebateOpinionInput {
   """The body value of the opinion."""
   body: HTML!
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+
   """The Node ID of a `User`. The author of the opinion."""
   author: ID!
 
@@ -413,6 +416,9 @@ input AddEventInput {
   """The Node ID of the author for this event."""
   author: ID
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+
   """Author of event agree to use personal data for event only"""
   authorAgreeToUsePersonalDataForEventOnly: Boolean
 
@@ -494,6 +500,9 @@ input AddProposalNewsInput {
 
   """Current media id"""
   media: ID
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
   clientMutationId: String
 }
 
@@ -717,8 +726,14 @@ input AddVersionInput {
   """The concerned opinion id."""
   opinionId: ID!
   title: String!
-  body: String!
-  comment: String
+  body: HTML!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+  comment: HTML
+
+  """Is the comment using Jodit Wysiwyg."""
+  commentUsingJoditWysiwyg: Boolean
   clientMutationId: String
 }
 
@@ -808,6 +823,9 @@ type AnalysisConfiguration {
   """A text to explain the analysis process."""
   body: HTML
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
+
   """
   Indicates whether or not a proposal has been processed on effectiveDate
   """
@@ -879,6 +897,9 @@ type Appendix {
   """Identifies the body of the contribution."""
   body: HTML
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
+
   """Identifies the body of the contribution rendered to text."""
   bodyText: String
   appendixType: AppendixType!
@@ -888,6 +909,9 @@ type Appendix {
 input AppendixInput {
   """Identifies the body of the contribution."""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
   appendixType: ID
 }
 
@@ -1177,6 +1201,9 @@ input AskProposalRevisionInput {
 
   """The information to resolve revision"""
   body: HTML!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
   clientMutationId: String
 }
 
@@ -1497,6 +1524,9 @@ input ChangeEventInput {
   """The Node ID of the author for this event."""
   author: ID
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+
   """Author of event agree to use personal data for event only"""
   authorAgreeToUsePersonalDataForEventOnly: Boolean
 
@@ -1658,6 +1688,9 @@ input ChangeProposalContentInput {
 
   """The new proposal body"""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
 
   """The new proposal summary"""
   summary: String
@@ -1844,13 +1877,19 @@ input ChangeVersionInput {
   versionId: ID!
 
   """Updated version body."""
-  body: String
+  body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
 
   """Updated version title."""
   title: String
 
   """Updated version comment."""
-  comment: String
+  comment: HTML
+
+  """Is the comment using Jodit Wysiwyg."""
+  commentUsingJoditWysiwyg: Boolean
   clientMutationId: String
 }
 
@@ -1929,6 +1968,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 
   """Is the step enabled or not"""
   enabled: Boolean!
@@ -2406,6 +2448,9 @@ input ConfigureAnalysisInput {
   """A text to explain the analysis process."""
   body: HTML
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+
   """Activate the cost estimation on the evaluation form."""
   costEstimationEnabled: Boolean!
 
@@ -2589,6 +2634,9 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 
   """Is the step enabled or not"""
   enabled: Boolean!
@@ -3165,7 +3213,10 @@ input CreateOpinionInput {
   title: String!
 
   """the opinion body"""
-  body: String!
+  body: HTML!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
 
   """the opinion appendices"""
   appendices: [AppendixInput]!
@@ -3189,6 +3240,9 @@ enum CreatePostErrorCode {
 
 input CreatePostInput {
   translations: [CreatePostTranslationInput!]
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
 
   """post authors"""
   authors: [ID!]!
@@ -3331,6 +3385,9 @@ input CreateProposalFromBackOfficeInput {
   """The proposal body"""
   body: HTML
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+
   """The proposal summary"""
   summary: String
 
@@ -3410,6 +3467,9 @@ input CreateProposalInput {
 
   """The proposal body"""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
 
   """The proposal summary"""
   summary: String
@@ -4275,6 +4335,9 @@ type DebateOpinion implements Node {
   """The content of the opinion."""
   body: HTML!
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
+
   """The expert giving his opinion."""
   author: User!
 
@@ -4333,6 +4396,9 @@ type DebateStep implements Step & Node {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 
   """Is the step enabled or not"""
   enabled: Boolean!
@@ -5437,6 +5503,9 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """The delete date."""
   deletedAt: DateTime
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 
   """The jitsi admin/animator token if there is one"""
   jitsiToken: String
@@ -7422,6 +7491,9 @@ type OfficialResponse implements Node {
 
   """The proposal linked to the official response"""
   proposal: Proposal!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 }
 
 """A contribution"""
@@ -7602,6 +7674,9 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
     value: YesNoPairedVoteValue
   ): YesNoPairedVoteConnection!
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
+
   """The versions related to the contribution."""
   versions(
     """
@@ -7774,6 +7849,9 @@ type OtherStep implements Node & Step {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 
   """Is the step enabled or not"""
   enabled: Boolean!
@@ -8170,6 +8248,9 @@ type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocat
 
   """The owner of the post."""
   owner: PostOwner
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 }
 
 """The affiliation of a user to a post"""
@@ -8315,6 +8396,9 @@ type PresentationStep implements Node & Step {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 
   """Is the step enabled or not"""
   enabled: Boolean!
@@ -8879,6 +8963,9 @@ input ProjectStepInput {
   startAt: DateTime
   endAt: DateTime
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
   metaDescription: String
   customCode: String
   isEnabled: Boolean!
@@ -8911,6 +8998,9 @@ input ProjectStepInput {
   defaultStatus: ID
   questionnaire: ID
   footer: HTML
+
+  """Is the questionnaire footer using Jodit Wysiwyg."""
+  footerUsingJoditWysiwyg: Boolean
   collectParticipantsEmail: Boolean
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
@@ -9263,6 +9353,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   True if proposal got any social network value and proposal form using any social networks.
   """
   isProposalUsingAnySocialNetworks: Boolean!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 }
 
 """The affiliation of a user to a proposal"""
@@ -10017,6 +10110,9 @@ type ProposalRevision {
 
   """The information to resolve revision"""
   body: HTML!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 }
 
 """A connection to a list of items."""
@@ -10152,6 +10248,9 @@ interface ProposalStep {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 
   """Is the step enabled or not"""
   enabled: Boolean!
@@ -11439,6 +11538,9 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
   """The introduction text of the step."""
   body: HTML
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
+
   """Is the step enabled or not"""
   enabled: Boolean!
 
@@ -11500,6 +11602,9 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
 
   """Does the questionnaire allow to collect anonymous users email ?"""
   collectParticipantsEmail: Boolean!
+
+  """Is the questionnaire footer using Jodit Wysiwyg."""
+  footerUsingJoditWysiwyg: Boolean!
 }
 
 """Available questionnaire types."""
@@ -11539,6 +11644,9 @@ type RankingStep implements Node & Step {
 
   """The introduction text of the step."""
   body: HTML
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 
   """Is the step enabled or not"""
   enabled: Boolean!
@@ -12760,6 +12868,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The introduction text of the step."""
   body: HTML
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
+
   """Is the step enabled or not"""
   enabled: Boolean!
 
@@ -13568,6 +13679,9 @@ interface Step {
   """The introduction text of the step."""
   body: HTML
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
+
   """Is the step enabled or not"""
   enabled: Boolean!
 
@@ -14191,6 +14305,9 @@ input UpdateDebateOpinionInput {
   """If provided, update the body value."""
   body: HTML
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+
   """If a Node ID of a `User` is provided, update the author."""
   author: ID
 
@@ -14499,6 +14616,9 @@ input UpdateOfficialResponseInput {
   """The body of the OfficialResponse."""
   body: HTML!
 
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+
   """True if the OfficialResponse is published."""
   isPublished: Boolean!
 
@@ -14542,7 +14662,10 @@ input UpdateOpinionInput {
   title: String!
 
   """the opinion body"""
-  body: String!
+  body: HTML!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
 
   """the opinion appendices"""
   appendices: [AppendixInput]!
@@ -14566,6 +14689,9 @@ enum UpdatePostErrorCode {
 
 input UpdatePostInput {
   translations: [CreatePostTranslationInput!]
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
 
   """post authors"""
   authors: [ID!]!
@@ -15017,6 +15143,9 @@ input UpdateProposalNewsInput {
 
   """Current media id"""
   media: ID
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
   clientMutationId: String
 }
 
@@ -16368,7 +16497,7 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
   viewerHasReport: Boolean!
 
   """Explenation."""
-  comment: String
+  comment: HTML
 
   """The title of the contribution."""
   title: String!
@@ -16480,6 +16609,9 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
   """Either or not the viewer is following the content."""
   viewerIsFollowing: Boolean!
+
+  """Is the comment using Jodit Wysiwyg."""
+  commentUsingJoditWysiwyg: Boolean!
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -16497,6 +16629,9 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
   """The section of the parent opinion."""
   section: Section!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
   answer: Answer
 
   """The viewer vote."""

@@ -177,6 +177,7 @@ const onSubmit = (
               : [];
           return {
             ...s,
+            bodyUsingJoditWysiwyg: s.bodyUsingJoditWysiwyg,
             isGridViewEnabled: undefined,
             isListViewEnabled: undefined,
             isMapViewEnabled: undefined,
@@ -199,6 +200,7 @@ const onSubmit = (
             proposalForm: s.proposalForm?.value || undefined,
             consultations: s.consultations?.length ? s.consultations.map(c => c.value) : undefined,
             footer: sTypename === 'QuestionnaireStep' ? s.footer : undefined,
+            footerUsingJoditWysiwyg: sTypename === 'QuestionnaireStep' ? s.footerUsingJoditWysiwyg : undefined,
             type: convertTypenameToConcreteStepType(sTypename),
             mainView:
               sTypename === 'CollectStep' || sTypename === 'SelectionStep' ? s.mainView : undefined,
@@ -658,6 +660,7 @@ export default createFragmentContainer(injectIntl(container), {
       steps {
         id
         body
+        bodyUsingJoditWysiwyg  
         timeless
         __typename
         title
@@ -765,6 +768,7 @@ export default createFragmentContainer(injectIntl(container), {
             label: title
           }
           footer
+          footerUsingJoditWysiwyg
           isAnonymousParticipationAllowed
           collectParticipantsEmail
           requirements {

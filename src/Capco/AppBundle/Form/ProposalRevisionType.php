@@ -25,6 +25,7 @@ class ProposalRevisionType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
+            ->add('bodyUsingJoditWysiwyg')
             ->add('expiresAt', DateTimeType::class, [
                 'required' => true,
                 'widget' => 'single_text',

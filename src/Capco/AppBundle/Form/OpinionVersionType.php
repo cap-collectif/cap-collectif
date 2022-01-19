@@ -32,6 +32,7 @@ class OpinionVersionType extends AbstractType
                     new Assert\Length(['min' => 2]),
                 ],
             ])
+            ->add('bodyUsingJoditWysiwyg')
             ->add('comment', TextareaType::class, [
                 'purify_html' => true,
                 'purify_html_profile' => 'user',
@@ -40,7 +41,9 @@ class OpinionVersionType extends AbstractType
                     new Assert\NotBlank(),
                     new Assert\Length(['min' => 2]),
                 ],
-            ]);
+            ])
+            ->add('commentUsingJoditWysiwyg')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

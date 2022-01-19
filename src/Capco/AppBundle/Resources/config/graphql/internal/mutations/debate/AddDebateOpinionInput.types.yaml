@@ -12,6 +12,9 @@ AddDebateOpinionInput:
             body:
                 type: 'HTML!'
                 description: 'The body value of the opinion.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             author:
                 type: 'ID!'
                 description: 'The Node ID of a `User`. The author of the opinion.'

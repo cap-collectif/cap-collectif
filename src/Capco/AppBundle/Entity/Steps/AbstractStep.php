@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Enum\ViewConfiguration;
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Status;
@@ -48,6 +49,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     use TimeRangeableTrait;
     use TimestampableTrait;
     use UuidTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     public const STATE_FUTURE = 'FUTURE';
     public const STATE_OPENED = 'OPENED';

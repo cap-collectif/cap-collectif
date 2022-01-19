@@ -53,12 +53,27 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
      */
     private $footer;
 
+    /**
+     * @ORM\Column(name="footer_using_jodit_wysiwyg", type="boolean", nullable=false, options={"default": false})
+     */
+    private bool $footerUsingJoditWysiwyg = false;
+
     public function __clone()
     {
         parent::__clone();
         $this->questionnaire = clone $this->questionnaire;
         $this->questionnaire->setTitle('Copie de ' . $this->questionnaire->getTitle());
         $this->questionnaire->setStep($this);
+    }
+    public function isFooterUsingJoditWysiwyg(): bool
+    {
+        return $this->footerUsingJoditWysiwyg;
+    }
+
+    public function setFooterUsingJoditWysiwyg(bool $footerUsingJoditWysiwyg): QuestionnaireStep
+    {
+        $this->footerUsingJoditWysiwyg = $footerUsingJoditWysiwyg;
+        return $this;
     }
 
     public function getFooter()

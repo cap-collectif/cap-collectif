@@ -294,6 +294,13 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "bodyUsingJoditWysiwyg",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "User",
                         "kind": "LinkedField",
                         "name": "animator",
@@ -729,7 +736,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "b73a3ee5b29776702a9e625656cc60de",
+            "cacheID": "d08e36f633dded7b220702689c95bdc8",
             "id": null,
             "metadata": Object {},
             "name": "EventFormPageAppQuery",
@@ -786,6 +793,7 @@ fragment EventForm_event on Event {
   isPresential
   recordingUrl
   isRecordingPublished
+  bodyUsingJoditWysiwyg
   animator {
     id
     displayName

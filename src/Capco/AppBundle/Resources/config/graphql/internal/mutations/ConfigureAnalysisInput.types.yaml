@@ -18,6 +18,9 @@ ConfigureAnalysisInput:
             body:
                 type: 'HTML'
                 description: 'A text to explain the analysis process.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             costEstimationEnabled:
                 type: 'Boolean!'
                 description: 'Activate the cost estimation on the evaluation form.'

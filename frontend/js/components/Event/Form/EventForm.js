@@ -155,6 +155,7 @@ export type FormValues = {|
   status: ?EventReviewStatus,
   authorAgreeToUsePersonalDataForEventOnly: ?boolean,
   adminAuthorizeDataTransfer: ?boolean,
+  bodyUsingJoditWysiwyg: boolean
 |};
 
 export const validate = (values: FormValues, props: Props) => {
@@ -786,6 +787,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         startAt: props.event && props.event.timeRange ? props.event.timeRange.startAt : null,
         endAt: props.event && props.event.timeRange ? props.event.timeRange.endAt : null,
         body: translation ? translation.body : null,
+        bodyUsingJoditWysiwyg: props?.event?.bodyUsingJoditWysiwyg ?? false,
         enabled: props.event ? props.event.enabled : null,
         commentable: props.event ? props.event.commentable : null,
         guestListEnabled: props.event ? props.event.guestListEnabled : null,
@@ -868,6 +870,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
       isPresential: true,
       guestListEnabled: false,
       author: { value: props.query.viewer.id, label: props.query.viewer.displayName },
+      bodyUsingJoditWysiwyg: false
     },
   };
 };
@@ -896,6 +899,7 @@ export default createFragmentContainer(container, {
       isPresential
       recordingUrl
       isRecordingPublished
+      bodyUsingJoditWysiwyg
       animator {
         id
         displayName

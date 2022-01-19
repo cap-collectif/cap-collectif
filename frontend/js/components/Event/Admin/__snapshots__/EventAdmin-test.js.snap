@@ -257,6 +257,13 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "bodyUsingJoditWysiwyg",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "User",
                       "kind": "LinkedField",
                       "name": "animator",
@@ -522,7 +529,7 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "e4b3be387fd23678867f76b42614f876",
+          "cacheID": "d0cc9dcdc93b52eabd91fbe391066116",
           "id": null,
           "metadata": Object {},
           "name": "EventAdminQuery",
@@ -566,6 +573,7 @@ fragment EventForm_event on Event {
   isPresential
   recordingUrl
   isRecordingPublished
+  bodyUsingJoditWysiwyg
   animator {
     id
     displayName
@@ -898,6 +906,13 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "bodyUsingJoditWysiwyg",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "User",
                       "kind": "LinkedField",
                       "name": "animator",
@@ -1163,7 +1178,7 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "e4b3be387fd23678867f76b42614f876",
+          "cacheID": "d0cc9dcdc93b52eabd91fbe391066116",
           "id": null,
           "metadata": Object {},
           "name": "EventAdminQuery",
@@ -1207,6 +1222,7 @@ fragment EventForm_event on Event {
   isPresential
   recordingUrl
   isRecordingPublished
+  bodyUsingJoditWysiwyg
   animator {
     id
     displayName

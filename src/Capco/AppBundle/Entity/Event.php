@@ -7,6 +7,7 @@ use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
@@ -57,6 +58,7 @@ class Event implements
     use TimestampableTrait;
     use TranslatableTrait;
     use UuidTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"startAt", "endAt", "zipCode", "address", "nbAddress", "media", "Theme"})
@@ -704,6 +706,7 @@ class Event implements
             'adminAuthorizeDataTransfer',
             'commentable',
             'createdAt',
+            'bodyUsingJoditWysiwyg',
         ];
 
         foreach ($this as $key => $value) {

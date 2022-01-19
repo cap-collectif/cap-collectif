@@ -55,6 +55,9 @@ InternalOpinion:
             body:
                 type: 'HTML!'
                 description: 'Identifies the body of the contribution.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean!'
             bodyText:
                 type: 'String!'
                 description: 'Identifies the body of the contribution rendered to text.'

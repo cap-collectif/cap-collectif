@@ -11,3 +11,6 @@ UpdateProposalNewsInput:
             media:
                 type: 'ID'
                 description: 'Current media id'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'

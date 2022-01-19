@@ -20,10 +20,8 @@ class ProposalType extends AbstractType
     protected Manager $toggleManager;
     private RedisCache $cache;
 
-    public function __construct(
-        RedisCache $cache,
-        Manager $toggleManager
-    ) {
+    public function __construct(RedisCache $cache, Manager $toggleManager)
+    {
         $this->toggleManager = $toggleManager;
         $this->cache = $cache;
     }
@@ -52,7 +50,8 @@ class ProposalType extends AbstractType
                 'required' => $isDraft,
                 'purify_html' => true,
                 'purify_html_profile' => 'user',
-            ]);
+            ])
+            ->add('bodyUsingJoditWysiwyg');
 
         if ($this->toggleManager->isActive(Manager::themes) && $form->isUsingThemes()) {
             $builder->add('theme');

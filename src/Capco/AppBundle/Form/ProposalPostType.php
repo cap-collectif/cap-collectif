@@ -43,6 +43,7 @@ class ProposalPostType extends AbstractType
                 ],
                 'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
             ])
+            ->add('bodyUsingJoditWysiwyg')
             ->add('media', EntityType::class, [
                 'class' => Media::class,
             ]);

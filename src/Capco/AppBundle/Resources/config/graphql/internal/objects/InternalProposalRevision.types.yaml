@@ -39,3 +39,6 @@ InternalProposalRevision:
             body:
                 type: 'HTML!'
                 description: 'The information to resolve revision'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean!'

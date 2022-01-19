@@ -42,6 +42,7 @@ class UpdateOfficialResponseMutation implements MutationInterface
         User $user
     ): OfficialResponse {
         $officialResponse->setBody($input->offsetGet('body'));
+        $officialResponse->setBodyUsingJoditWysiwyg($input->offsetGet('bodyUsingJoditWysiwyg') ?? false);
         $this->updateOfficialResponsePublication($officialResponse, $input);
         $this->updateOfficialResponseAuthors(
             $officialResponse,

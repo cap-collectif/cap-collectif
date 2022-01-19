@@ -19,6 +19,9 @@ InternalDebateOpinion:
             body:
                 description: 'The content of the opinion.'
                 type: HTML!
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean!'
             author:
                 description: 'The expert giving his opinion.'
                 type: InternalUser!

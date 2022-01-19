@@ -6,5 +6,8 @@ AppendixInput:
             body:
                 type: 'HTML'
                 description: 'Identifies the body of the contribution.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             appendixType:
                 type: 'ID'

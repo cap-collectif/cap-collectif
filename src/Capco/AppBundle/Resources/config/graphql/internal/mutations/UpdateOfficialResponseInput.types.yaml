@@ -9,6 +9,9 @@ UpdateOfficialResponseInput:
             body:
                 type: 'HTML!'
                 description: 'The body of the OfficialResponse.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
             isPublished:
                 type: 'Boolean!'
                 description: 'True if the OfficialResponse is published.'

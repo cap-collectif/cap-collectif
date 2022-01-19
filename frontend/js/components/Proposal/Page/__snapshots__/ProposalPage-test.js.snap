@@ -3519,6 +3519,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "bodyUsingJoditWysiwyg",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "Media",
                       "kind": "LinkedField",
                       "name": "media",
@@ -7504,7 +7511,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "a75eedcea0a5dd828e847f0d41b84ed5",
+          "cacheID": "5affa65116f7020d0710c5ce29a6845b",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8420,6 +8427,7 @@ fragment ProposalForm_proposal_4iFR9m on Proposal {
   id
   title
   body
+  bodyUsingJoditWysiwyg
   summary
   address {
     json
