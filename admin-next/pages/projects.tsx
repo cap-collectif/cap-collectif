@@ -15,6 +15,7 @@ import ProjectListNoResult from 'components/Projects/ProjectListNoResult';
 import ProjectModalCreateProject from 'components/Projects/ProjectModalCreateProject';
 import TablePlaceholder from 'components/UI/Table/TablePlaceholder';
 import ProjectList from 'components/Projects/ProjectList';
+import withPageAuthRequired from '../utils/withPageAuthRequired';
 
 export const projectsQuery = graphql`
     query projectsQuery(
@@ -162,5 +163,7 @@ const Projects: NextPage<PageProps> = ({ viewerSession }) => {
         </Layout>
     );
 };
+
+export const getServerSideProps = withPageAuthRequired;
 
 export default Projects;

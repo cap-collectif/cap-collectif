@@ -5,6 +5,7 @@ import Layout from '../components/Layout/Layout';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import { useIntl } from 'react-intl';
 import IdentificationCodesContent from '../components/IdentificationCodes/IdentificationCodesContent';
+import withPageAuthRequired from '../utils/withPageAuthRequired';
 
 const IdentificationCodes: NextPage<PageProps> = () => {
     const intl = useIntl();
@@ -16,5 +17,7 @@ const IdentificationCodes: NextPage<PageProps> = () => {
         </Layout>
     );
 };
+
+export const getServerSideProps = withPageAuthRequired;
 
 export default IdentificationCodes;

@@ -13,6 +13,10 @@ export const environment = new Environment({
 
 const getEnvironment = (featureFlags: FeatureFlags) => {
     commitLocalUpdate(environment, storeProxy => {
+        if (storeProxy.get(`client:root:featureFlags:shield_mode`) !== undefined) {
+            // If features flags are already set, we don't need to do anything.
+            return;
+        }
         const newfeatureFlagsRecords = Object.keys(featureFlags).map(key => {
             const enabled = featureFlags[key];
             const newRecord = storeProxy.create(`client:root:featureFlags:${key}`, 'FeatureFlag');
