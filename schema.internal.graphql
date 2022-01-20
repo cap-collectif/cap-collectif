@@ -946,6 +946,9 @@ type ApplyProposalStatusPayload {
 
   """An unsuccessful mutation will return an error message"""
   error: ApplyProposalStatusErrorCode
+
+  """The status applied or nothing if the status was removed."""
+  status: ProposalStepStatus
   clientMutationId: String
 }
 

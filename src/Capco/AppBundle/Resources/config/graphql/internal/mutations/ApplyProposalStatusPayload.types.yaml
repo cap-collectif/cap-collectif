@@ -8,3 +8,6 @@ ApplyProposalStatusPayload:
             error:
                 type: 'ApplyProposalStatusErrorCode'
                 description: 'An unsuccessful mutation will return an error message'
+            status:
+                type: 'ProposalStepStatus'
+                description: 'The status applied or nothing if the status was removed.'

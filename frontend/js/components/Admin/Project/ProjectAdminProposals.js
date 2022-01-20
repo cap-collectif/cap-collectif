@@ -51,8 +51,6 @@ import {
 import AddProposalsToStepsMutation from '~/mutations/AddProposalsToStepsMutation';
 import ApplyProposalStatusMutation from '~/mutations/ApplyProposalStatusMutation';
 import RemoveProposalsFromStepsMutation from '~/mutations/RemoveProposalsFromStepsMutation';
-import FluxDispatcher from '~/dispatchers/AppDispatcher';
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import ProjectAdminMergeModale from '~/components/Admin/Project/Modale/ProjectAdminMergeModale';
 import AnalysisNoProposal from '~/components/Analysis/AnalysisNoProposal/AnalysisNoProposal';
 import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
@@ -75,6 +73,7 @@ import Text from '~ui/Primitives/Text';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
 import useToastingMachine from '~/utils/hooks/useToastingMachine';
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import type { StepStatusFilter } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 export const PROJECT_ADMIN_PROPOSAL_LOAD_100 = 100;
@@ -195,35 +194,36 @@ const assignStatus = async (
   selectedProposalIds: $ReadOnlyArray<Uuid>,
   closeDropdown: ?() => void,
   intl: IntlShape,
+  allStatuses: $ReadOnlyArray<StepStatusFilter>,
 ) => {
-  try {
-    if (closeDropdown) {
-      closeDropdown();
-    }
-    if (selectedProposalIds.length === 1) {
-      toast({
-        variant: 'loading',
-        content: intl.formatMessage({ id: 'loading-contributions' }),
-        position: 'bottom',
-      });
-    }
-    await ApplyProposalStatusMutation.commit({
-      input: {
-        proposalIds: selectedProposalIds,
-        statusId: assigneeId === 'deleted' ? null : assigneeId,
-      },
-      step: stepSelected,
-    });
-    displaySuccessStatusToast(selectedProposalIds, intl);
-  } catch (e) {
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'status.update.failed',
-      },
+  if (closeDropdown) closeDropdown();
+
+  if (selectedProposalIds.length === 1) {
+    toast({
+      variant: 'loading',
+      content: intl.formatMessage({ id: 'loading-contributions' }),
+      position: 'bottom',
     });
   }
+
+  ApplyProposalStatusMutation.commit({
+    input: {
+      proposalIds: selectedProposalIds,
+      statusId: assigneeId === 'deleted' ? null : assigneeId,
+    },
+    step: stepSelected,
+    statusSelected:
+      assigneeId === 'deleted' ? null : allStatuses.find(status => status.id === assigneeId),
+  }).then(response => {
+    if (!response.applyProposalStatus || response.applyProposalStatus.error) {
+      return toast({
+        variant: 'danger',
+        content: intl.formatMessage({ id: 'status.update.failed' }),
+      });
+    }
+  });
+
+  displaySuccessStatusToast(selectedProposalIds, intl);
 };
 
 const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
@@ -588,7 +588,14 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
                 });
               } else {
                 startToasting();
-                assignStatus(selectedStatus, selectedStepId, selectedRows, null, intl).then(() => {
+                assignStatus(
+                  selectedStatus,
+                  selectedStepId,
+                  selectedRows,
+                  null,
+                  intl,
+                  stepStatuses,
+                ).then(() => {
                   setOpenConfirmModal(false);
                   setSelectedStatus(null);
                   stopToasting();
@@ -667,11 +674,16 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
                     setOpenConfirmModal(true);
                   } else {
                     startToasting();
-                    assignStatus(newValue, selectedStepId, selectedRows, closeDropdown, intl).then(
-                      () => {
-                        setTimeout(stopToasting, 3000);
-                      },
-                    );
+                    assignStatus(
+                      newValue,
+                      selectedStepId,
+                      selectedRows,
+                      closeDropdown,
+                      intl,
+                      stepStatuses,
+                    ).then(() => {
+                      setTimeout(stopToasting, 3000);
+                    });
                   }
                 }}
                 title={intl.formatMessage({ id: 'change.status.to' })}>

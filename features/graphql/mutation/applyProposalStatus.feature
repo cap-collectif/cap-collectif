@@ -71,6 +71,9 @@ Scenario: Admin does not change the status of a proposal
     "query": "mutation ($input: ApplyProposalStatusInput!) {
       applyProposalStatus(input: $input) {
         error
+        status {
+          id
+        }
         proposals {
           edges {
             node {
@@ -102,6 +105,9 @@ Scenario: Admin does not change the status of a proposal
     "data": {
       "applyProposalStatus": {
         "error": null,
+        "status": {
+          "id": "status4"
+        },
         "proposals": {
           "edges": [
             {
@@ -135,6 +141,9 @@ Scenario: Admin changes the status of a selection step in a proposal
     "query": "mutation ($input: ApplyProposalStatusInput!) {
       applyProposalStatus(input: $input) {
         error
+        status {
+          id
+        }
         proposals {
           edges {
             node {
@@ -166,6 +175,9 @@ Scenario: Admin changes the status of a selection step in a proposal
     "data": {
       "applyProposalStatus": {
         "error": null,
+        "status": {
+          "id": "status5"
+        },
         "proposals": {
           "edges": [
             {
@@ -199,6 +211,9 @@ Scenario: Admin changes the status of the collection step in a proposal
     "query": "mutation ($input: ApplyProposalStatusInput!) {
       applyProposalStatus(input: $input) {
         error
+        status {
+          id
+        }
         proposals {
           edges {
             node {
@@ -230,6 +245,9 @@ Scenario: Admin changes the status of the collection step in a proposal
     "data": {
       "applyProposalStatus": {
         "error": null,
+        "status": {
+          "id": "status2"
+        },
         "proposals": {
           "edges": [
             {
@@ -263,6 +281,9 @@ Scenario: Admin removes the status of a proposal
     "query": "mutation ($input: ApplyProposalStatusInput!) {
       applyProposalStatus(input: $input) {
         error
+        status {
+          id
+        }
         proposals {
           edges {
             node {
@@ -294,6 +315,7 @@ Scenario: Admin removes the status of a proposal
     "data": {
       "applyProposalStatus": {
         "error": null,
+        "status": null,
         "proposals": {
           "edges": [
             {

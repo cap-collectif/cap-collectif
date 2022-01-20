@@ -14,20 +14,17 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
 {
     public function __invoke(Argument $args, User $user): array
     {
-        $error = null;
-        $proposals = [];
-
         try {
             $status = $this->getStatus($args->offsetGet('statusId'), $user);
             $proposals = $this->getProposals($args->offsetGet('proposalIds'), $user);
             $this->applyStatusToSeveralProposals($proposals, $status);
         } catch (UserError $userError) {
-            $error = $userError->getMessage();
+            return ['error' => $userError->getMessage()];
         }
 
         return [
             'proposals' => $this->getConnection($proposals, $args),
-            'error' => $error,
+            'status' => $status,
         ];
     }
 

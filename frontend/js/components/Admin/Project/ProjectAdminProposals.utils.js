@@ -30,7 +30,7 @@ import type { DistrictFilter } from '~/components/Analysis/AnalysisFilter/Analys
 import type { ProjectAdminAnalysisTabQueryResponse } from '~relay/ProjectAdminAnalysisTabQuery.graphql';
 import type { ThemeFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme';
 
-type StepStatusFilter = {|
+export type StepStatusFilter = {|
   +id: Uuid,
   +color: ?string,
   +name: string,
@@ -633,8 +633,9 @@ export const isRowIndeterminate = (
   );
 
   const countAnalystsSelected = allDataProposals.analysts.filter(({ id }) => id === user.id).length;
-  const countSupervisorsSelected = allDataProposals.supervisor.filter(({ id }) => id === user.id)
-    .length;
+  const countSupervisorsSelected = allDataProposals.supervisor.filter(
+    ({ id }) => id === user.id,
+  ).length;
   const countDecisionMakersSelected = allDataProposals.decisionMaker.filter(
     ({ id }) => id === user.id,
   ).length;
@@ -666,8 +667,9 @@ export const isStatusIndeterminate = (
   const onlySelectedProposals = proposals?.filter(({ id }) => selectedProposals.includes(id)) || [];
   const countProposalSelected = onlySelectedProposals.length;
 
-  const countStatusSelected = onlySelectedProposals.filter(({ status }) => status?.id === statusId)
-    .length;
+  const countStatusSelected = onlySelectedProposals.filter(
+    ({ status }) => status?.id === statusId,
+  ).length;
 
   const statusNotInAllSelectedProposals = countStatusSelected !== countProposalSelected;
 
