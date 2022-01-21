@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\ContactForm;
 
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,6 +19,7 @@ class ContactForm implements Translatable, SonataTranslatableInterface
     use UuidTrait;
     use SonataTranslatableTrait;
     use TranslatableTrait;
+    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
@@ -29,6 +31,22 @@ class ContactForm implements Translatable, SonataTranslatableInterface
      * @ORM\Column(name="interlocutor", type="string", length=255, nullable=true)
      */
     private $interlocutor;
+
+    /**
+     * @ORM\Column(name="confidentiality_using_jodit_wysiwyg", type="boolean", nullable=false, options={"default": false})
+     */
+    private bool $confidentialityUsingJoditWysiwyg = false;
+
+    public function isConfidentialityUsingJoditWysiwyg(): bool
+    {
+        return $this->confidentialityUsingJoditWysiwyg;
+    }
+
+    public function setConfidentialityUsingJoditWysiwyg(bool $confidentialityUsingJoditWysiwyg): ContactForm
+    {
+        $this->confidentialityUsingJoditWysiwyg = $confidentialityUsingJoditWysiwyg;
+        return $this;
+    }
 
     public function getTitle(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {

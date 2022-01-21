@@ -102,7 +102,9 @@ ProjectStepInput:
             debateType:
                 type: 'DebateType'
             debateContent:
-                type: 'String'
+                type: 'HTML'
+            debateContentUsingJoditWysiwyg:
+                type: 'Boolean'
             # DebateStep && QuestionnaireStep
             isAnonymousParticipationAllowed:
                 type: 'Boolean'

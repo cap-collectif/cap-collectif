@@ -38,6 +38,7 @@ abstract class AbstractQuestionType extends AbstractType
             'purify_html' => true,
             'purify_html_profile' => 'user',
         ]);
+        $builder->add('descriptionUsingJoditWysiwyg');
         $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, [
             'required' => false,
             'class' => AbstractQuestion::class,

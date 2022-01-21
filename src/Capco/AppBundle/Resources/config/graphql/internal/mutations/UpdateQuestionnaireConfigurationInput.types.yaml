@@ -9,8 +9,11 @@ UpdateQuestionnaireConfigurationInput:
                 type: 'String'
                 description: 'The new title of the questionnaire.'
             description:
-                type: 'String'
+                type: 'HTML'
                 description: 'The new description of the questionnaire.'
+            descriptionUsingJoditWysiwyg:
+                description: 'Is the description using Jodit Wysiwyg.'
+                type: 'Boolean'
             questions:
                 type: '[QuestionnaireAbstractQuestionInput!]'
                 description: 'The new list of available questions for this questionnaire'

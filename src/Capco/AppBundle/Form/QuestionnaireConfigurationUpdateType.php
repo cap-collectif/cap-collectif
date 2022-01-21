@@ -26,6 +26,7 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'user',
             ])
+            ->add('descriptionUsingJoditWysiwyg')
             ->add('questions', CollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => true,

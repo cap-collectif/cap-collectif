@@ -19,14 +19,20 @@ InternalRegistrationForm:
                 type: 'Boolean!'
             topText:
                 description: 'The bottom text to display'
-                type: 'String'
+                type: 'HTML'
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getTopText(args["locale"])'
+            topTextUsingJoditWysiwyg:
+                description: 'Is the topText using Jodit Wysiwyg.'
+                type: 'Boolean!'
             bottomText:
                 description: 'The bottom text to display'
-                type: 'String'
+                type: 'HTML'
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getBottomText(args["locale"])'
+            bottomTextUsingJoditWysiwyg:
+                description: 'Is the bottomText using Jodit Wysiwyg.'
+                type: 'Boolean!'
             domains:
                 description: 'A whitelist of authorized domains that can register'
                 type: '[InternalEmailDomain!]'

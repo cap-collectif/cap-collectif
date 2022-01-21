@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
+use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\OwnerTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -51,6 +52,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     use TimestampableTrait;
     use UsingSocialNetworksTrait;
     use UuidTrait;
+    use DescriptionUsingJoditWysiwygTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "description"})

@@ -41,6 +41,7 @@ class PostType extends AbstractType
                     ],
                 ],
             ])
+            ->add('bodyUsingJoditWysiwyg')
             ->add('displayedOnBlog', CheckboxType::class, [
                 'required' => true,
             ])

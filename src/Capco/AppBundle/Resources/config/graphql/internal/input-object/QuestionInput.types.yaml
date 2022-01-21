@@ -28,7 +28,9 @@ QuestionInput:
             choices:
                 type: '[QuestionChoiceInput]'
             description:
-                type: 'String'
+                type: 'HTML'
+            descriptionUsingJoditWysiwyg:
+                type: 'Boolean'
             jumps:
                 type: '[LogicJumpInput]'
             hidden:

@@ -31,6 +31,9 @@ InternalDebateStep:
       debateContent:
         description: 'the content of the debate'
         type: 'HTML'
+      debateContentUsingJoditWysiwyg:
+        description: 'Is the debateContent using Jodit Wysiwyg.'
+        type: 'Boolean!'
       isAnonymousParticipationAllowed:
         description: 'Does the debate allow anonymous users to participate?'
         type: 'Boolean!'

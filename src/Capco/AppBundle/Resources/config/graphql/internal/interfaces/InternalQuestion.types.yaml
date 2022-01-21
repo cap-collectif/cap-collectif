@@ -36,7 +36,10 @@ InternalQuestion:
             helpText:
                 type: 'String'
             description:
-                type: 'String'
+                type: 'HTML'
+            descriptionUsingJoditWysiwyg:
+                description: 'Is the description using Jodit Wysiwyg.'
+                type: 'Boolean!'
             kind:
                 type: 'String!'
             slug:

@@ -37,6 +37,9 @@ class UpdateRegistrationFormCommunicationMutation implements MutationInterface
             $registrationForm->setBottomTextDisplayed($arguments['bottomTextDisplayed']);
         }
 
+        $registrationForm->setTopTextUsingJoditWysiwyg($arguments['topTextUsingJoditWysiwyg'] ?? false);
+        $registrationForm->setBottomTextUsingJoditWysiwyg($arguments['bottomTextUsingJoditWysiwyg'] ?? false);
+
         if (isset($arguments['translations'])) {
             foreach ($arguments['translations'] as $translation) {
                 $registrationForm

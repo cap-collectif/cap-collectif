@@ -12,3 +12,9 @@ UpdateContactFormInput:
                 description: 'Email of the interlocutor of the contact form.'
             translations:
                 type: '[InternalContactFormTranslationInput!]!'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean'
+            confidentialityUsingJoditWysiwyg:
+                description: 'Is the confidentiality using Jodit Wysiwyg.'
+                type: 'Boolean'

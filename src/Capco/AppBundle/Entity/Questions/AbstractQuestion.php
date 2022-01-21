@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Questions;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\LogicJump;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableUpdatableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -30,6 +31,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     use IdTrait;
     use SluggableUpdatableTitleTrait;
     use TimestampableTrait;
+    use DescriptionUsingJoditWysiwygTrait;
 
     public const QUESTION_TYPE_SIMPLE_TEXT = 0;
     public const QUESTION_TYPE_MULTILINE_TEXT = 1;

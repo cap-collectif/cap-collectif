@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\ContactForm\ContactForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Email;
@@ -61,6 +62,7 @@ class ContactFormType extends AbstractType
                 ],
                 'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
             ])
+            ->add('bodyUsingJoditWysiwyg')
             ->add('confidentiality', TextType::class, [
                 'required' => true,
                 'purify_html' => true,
@@ -70,12 +72,15 @@ class ContactFormType extends AbstractType
                     'cols' => '30',
                 ],
                 'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
-            ]);
+            ])
+            ->add('confidentialityUsingJoditWysiwyg')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'data_class' => ContactForm::class,
             'translation_domain' => 'CapcoAppBundle',
             'csrf_protection' => false,
         ]);

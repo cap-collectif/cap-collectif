@@ -227,6 +227,12 @@ input AddContactFormInput {
   """Email of the interlocutor of the contact form."""
   email: String!
   translations: [ContactFormTranslationInput!]!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+
+  """Is the confidentiality using Jodit Wysiwyg."""
+  confidentialityUsingJoditWysiwyg: Boolean
   clientMutationId: String
 }
 
@@ -2747,7 +2753,10 @@ type ContactForm implements Node {
   body(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
-  ): String!
+  ): HTML!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
 
   """The mail to send the contact Form"""
   email: String!
@@ -2756,7 +2765,10 @@ type ContactForm implements Node {
   confidentiality(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
-  ): String
+  ): HTML
+
+  """Is the confidentiality using Jodit Wysiwyg."""
+  confidentialityUsingJoditWysiwyg: Boolean!
   translations: [ContactFormTranslation!]!
 }
 
@@ -4452,6 +4464,9 @@ type DebateStep implements Step & Node {
 
   """the content of the debate"""
   debateContent: HTML
+
+  """Is the debateContent using Jodit Wysiwyg."""
+  debateContentUsingJoditWysiwyg: Boolean!
 
   """Does the debate allow anonymous users to participate?"""
   isAnonymousParticipationAllowed: Boolean!
@@ -6707,7 +6722,10 @@ type MajorityQuestion implements Question & Node {
   private: Boolean!
   required: Boolean!
   helpText: String
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean!
   kind: String!
   slug: String!
 
@@ -6899,7 +6917,10 @@ type MediaQuestion implements Question & Node {
   private: Boolean!
   required: Boolean!
   helpText: String
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean!
   kind: String!
   slug: String!
 
@@ -6977,7 +6998,10 @@ type MultipleChoiceQuestion implements Question & Node {
   private: Boolean!
   required: Boolean!
   helpText: String
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean!
   kind: String!
   slug: String!
 
@@ -9009,7 +9033,8 @@ input ProjectStepInput {
   nbVersionsToDisplay: Int
   articles: [DebateArticleInput]
   debateType: DebateType
-  debateContent: String
+  debateContent: HTML
+  debateContentUsingJoditWysiwyg: Boolean
   isAnonymousParticipationAllowed: Boolean
 
   """Whether or not secret ballot is enable"""
@@ -9741,7 +9766,10 @@ type ProposalForm implements Node & UniformResourceLocatable {
   """The URL to this resource."""
   url: URI!
   reference: String!
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean!
   summaryHelpText: String
   illustrationHelpText: String
   title: String!
@@ -11140,7 +11168,10 @@ interface Question {
   private: Boolean!
   required: Boolean!
   helpText: String
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean!
   kind: String!
   slug: String!
 
@@ -11263,7 +11294,8 @@ input QuestionInput {
   otherAllowed: Boolean
   validationRule: MultipleChoiceQuestionValidationRuleInput
   choices: [QuestionChoiceInput]
-  description: String
+  description: HTML
+  descriptionUsingJoditWysiwyg: Boolean
   jumps: [LogicJumpInput]
   hidden: Boolean = false
 
@@ -11353,7 +11385,10 @@ type Questionnaire implements Node {
   _id: ID!
   step: QuestionnaireStep
   anonymousAllowed: Boolean!
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean!
   multipleRepliesAllowed: Boolean!
 
   """accept answers or not"""
@@ -11792,13 +11827,19 @@ type RegistrationForm implements Node {
   topText(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
-  ): String
+  ): HTML
+
+  """Is the topText using Jodit Wysiwyg."""
+  topTextUsingJoditWysiwyg: Boolean!
 
   """The bottom text to display"""
   bottomText(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
-  ): String
+  ): HTML
+
+  """Is the bottomText using Jodit Wysiwyg."""
+  bottomTextUsingJoditWysiwyg: Boolean!
 
   """A whitelist of authorized domains that can register"""
   domains: [EmailDomain!]
@@ -11814,10 +11855,10 @@ input RegistrationFormCommunicationInput {
   locale: String!
 
   """The bottom text to display"""
-  topText: String
+  topText: HTML
 
   """The bottom text to display"""
-  bottomText: String
+  bottomText: HTML
 }
 
 """translation of the registration form"""
@@ -12767,7 +12808,10 @@ type SectionQuestion implements Question & Node {
   private: Boolean!
   required: Boolean!
   helpText: String
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean!
   kind: String!
   slug: String!
 
@@ -13325,7 +13369,10 @@ type SimpleQuestion implements Question & Node {
   private: Boolean!
   required: Boolean!
   helpText: String
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean!
   kind: String!
   slug: String!
 
@@ -14211,6 +14258,12 @@ input UpdateContactFormInput {
   """Email of the interlocutor of the contact form."""
   email: String!
   translations: [ContactFormTranslationInput!]!
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean
+
+  """Is the confidentiality using Jodit Wysiwyg."""
+  confidentialityUsingJoditWysiwyg: Boolean
   clientMutationId: String
 }
 
@@ -14990,7 +15043,10 @@ type UpdateProjectPayload {
 input UpdateProposalFormInput {
   proposalFormId: ID!
   title: String
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean
   summaryHelpText: String
   illustrationHelpText: String
   usingThemes: Boolean
@@ -15215,7 +15271,10 @@ input UpdateQuestionnaireConfigurationInput {
   title: String
 
   """The new description of the questionnaire."""
-  description: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean
 
   """The new list of available questions for this questionnaire"""
   questions: [QuestionnaireAbstractQuestionInput!]
@@ -15281,6 +15340,12 @@ input UpdateRegistrationFormCommunicationInput {
   translations: [RegistrationFormCommunicationInput!]
   topTextDisplayed: Boolean
   bottomTextDisplayed: Boolean
+
+  """Is the topText using Jodit Wysiwyg."""
+  topTextUsingJoditWysiwyg: Boolean
+
+  """Is the bottomText using Jodit Wysiwyg."""
+  bottomTextUsingJoditWysiwyg: Boolean
   clientMutationId: String
 }
 

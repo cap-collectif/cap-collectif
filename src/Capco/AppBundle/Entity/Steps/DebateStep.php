@@ -42,6 +42,11 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     private ?string $debateContent;
 
     /**
+     * @ORM\Column(name="debate_content_using_jodit_wysiwyg", type="boolean", nullable=false, options={"default": false})
+     */
+    private bool $debateContentUsingJoditWysiwyg = false;
+
+    /**
      * When we create a debate step, we also create a debate.
      */
     public function __construct(Debate $debate)
@@ -49,6 +54,17 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
         parent::__construct();
         $this->debate = $debate;
         $debate->setStep($this);
+    }
+
+    public function isDebateContentUsingJoditWysiwyg(): bool
+    {
+        return $this->debateContentUsingJoditWysiwyg;
+    }
+    
+    public function setDebateContentUsingJoditWysiwyg(bool $debateContentUsingJoditWysiwyg): DebateStep
+    {
+        $this->debateContentUsingJoditWysiwyg = $debateContentUsingJoditWysiwyg;
+        return $this;
     }
 
     public function getDebate(): ?Debate

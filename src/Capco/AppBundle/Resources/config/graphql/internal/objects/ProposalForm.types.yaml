@@ -13,7 +13,10 @@ ProposalForm:
             reference:
                 type: 'String!'
             description:
-                type: 'String'
+                type: 'HTML'
+            descriptionUsingJoditWysiwyg:
+                description: 'Is the description using Jodit Wysiwyg.'
+                type: 'Boolean!'
             summaryHelpText:
                 type: 'String'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormSummaryHelpTextResolver", [value])'

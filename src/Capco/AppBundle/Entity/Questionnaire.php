@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationC
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\OwnerTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -29,6 +30,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     use SluggableTitleTrait;
     use TimestampableTrait;
     use UuidTrait;
+    use DescriptionUsingJoditWysiwygTrait;
 
     /**
      * @var \DateTime

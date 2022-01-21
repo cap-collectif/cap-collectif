@@ -11,7 +11,10 @@ InternalQuestionnaire:
             anonymousAllowed:
                 type: 'Boolean!'
             description:
-                type: 'String'
+                type: 'HTML'
+            descriptionUsingJoditWysiwyg:
+                description: 'Is the description using Jodit Wysiwyg.'
+                type: 'Boolean!'
             multipleRepliesAllowed:
                 type: 'Boolean!'
             contribuable:

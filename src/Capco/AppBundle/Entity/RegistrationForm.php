@@ -44,9 +44,43 @@ class RegistrationForm implements QuestionnableForm, SonataTranslatableInterface
      */
     private $topTextDisplayed = false;
 
+    /**
+     * @ORM\Column(name="top_text_using_jodit_wysiwyg", type="boolean", nullable=false, options={"default": false})
+     */
+    private bool $topTextUsingJoditWysiwyg = false;
+
+    /**
+     * @ORM\Column(name="bottom_text_using_jodit_wysiwyg", type="boolean", nullable=false, options={"default": false})
+     */
+    private bool $bottomTextUsingJoditWysiwyg = false;
+
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+    }
+
+
+    public function isTopTextUsingJoditWysiwyg(): bool
+    {
+        return $this->topTextUsingJoditWysiwyg;
+    }
+
+    public function setTopTextUsingJoditWysiwyg(bool $topTextUsingJoditWysiwyg): RegistrationForm
+    {
+        $this->topTextUsingJoditWysiwyg = $topTextUsingJoditWysiwyg;
+        return $this;
+    }
+
+    public function isBottomTextUsingJoditWysiwyg(): bool
+    {
+        return $this->bottomTextUsingJoditWysiwyg;
+    }
+
+    public function setBottomTextUsingJoditWysiwyg(bool $bottomTextUsingJoditWysiwyg): RegistrationForm
+    {
+        $this->bottomTextUsingJoditWysiwyg = $bottomTextUsingJoditWysiwyg;
+        return $this;
     }
 
     public function isBottomTextDisplayed(): bool

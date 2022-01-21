@@ -19,16 +19,22 @@ InternalContactForm:
                 resolve: '@=value.getTitle(args["locale"])'
             body:
                 description: 'The body of the contact Form'
-                type: 'String!'
+                type: 'HTML!'
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getBody(args["locale"])'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean!'
             email:
                 description: 'The mail to send the contact Form'
                 type: 'String!'
             confidentiality:
                 description: 'The confidentiality text for the contact Form'
-                type: 'String'
+                type: 'HTML'
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getConfidentiality(args["locale"])'
+            confidentialityUsingJoditWysiwyg:
+                description: 'Is the confidentiality using Jodit Wysiwyg.'
+                type: 'Boolean!'
             translations:
                 type: '[InternalContactFormTranslation!]!'

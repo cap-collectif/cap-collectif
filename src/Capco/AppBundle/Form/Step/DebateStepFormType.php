@@ -36,6 +36,7 @@ class DebateStepFormType extends AbstractStepFormType
             'purify_html' => true,
             'purify_html_profile' => 'admin',
         ]);
+        $builder->add('debateContentUsingJoditWysiwyg');
         $builder
             ->add('isAnonymousParticipationAllowed')
             ->add('articles', OrderedCollectionType::class, [

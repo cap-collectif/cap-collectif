@@ -42,7 +42,7 @@ class ProposalFormUpdateType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
             ])
-
+            ->add('descriptionUsingJoditWysiwyg')
             ->add('usingDescription', CheckboxType::class)
             ->add('descriptionMandatory', CheckboxType::class)
             ->add('descriptionHelpText', TextType::class, [

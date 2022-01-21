@@ -8,3 +8,9 @@ UpdateRegistrationFormCommunicationInput:
                 type: 'Boolean'
             bottomTextDisplayed:
                 type: 'Boolean'
+            topTextUsingJoditWysiwyg:
+                description: 'Is the topText using Jodit Wysiwyg.'
+                type: 'Boolean'
+            bottomTextUsingJoditWysiwyg:
+                description: 'Is the bottomText using Jodit Wysiwyg.'
+                type: 'Boolean'
