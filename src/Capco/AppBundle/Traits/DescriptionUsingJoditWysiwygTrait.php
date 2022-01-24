@@ -10,7 +10,7 @@ trait DescriptionUsingJoditWysiwygTrait
     /**
      * @ORM\Column(name="description_using_jodit_wysiwyg", type="boolean", nullable=false, options={"default": false})
      */
-    private bool $descriptionUsingJoditWysiwyg = false;
+    protected bool $descriptionUsingJoditWysiwyg = false;
 
 
     public function isDescriptionUsingJoditWysiwyg(): bool

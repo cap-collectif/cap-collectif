@@ -25,6 +25,7 @@ class CreateProposalFormMutation implements MutationInterface
     public function __invoke(Argument $input, User $viewer): array
     {
         $proposalForm = new ProposalForm();
+        $proposalForm->setDescriptionUsingJoditWysiwyg(true);
 
         $form = $this->formFactory->create(ProposalFormCreateType::class, $proposalForm);
 
