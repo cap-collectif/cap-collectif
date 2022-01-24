@@ -244,7 +244,7 @@
                         "description": "description.module.france_connect",
                         "onlySuperAdmin": false
                     },
-                    "login.openid": {
+                    "login_openid": {
                         "title": "global.openId",
                         "description": "description.module.openId",
                         "onlySuperAdmin": false
