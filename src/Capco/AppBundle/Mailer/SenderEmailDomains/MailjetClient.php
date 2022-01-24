@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\ExternalServiceConfiguration;
 use Capco\AppBundle\Entity\SenderEmailDomain;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Process\Process;
 
 class MailjetClient
 {
@@ -49,6 +50,15 @@ class MailjetClient
         if ($mailjetDomain) {
             $domain->setSpfValidation($mailjetDomain->getSpfValidation());
             $domain->setDkimValidation($mailjetDomain->getDkimValidation());
+            $domain->setTxtKey($mailjetDomain->getTxtKey());
+            $domain->setTxtValue($mailjetDomain->getTxtValue());
+            $domain->setTxtValidation(
+                self::isTxtValid(
+                    $mailjetDomain->getValue(),
+                    $mailjetDomain->getTxtKey(),
+                    $mailjetDomain->getTxtValue()
+                )
+            );
 
             return $domain;
         }
@@ -102,12 +112,29 @@ class MailjetClient
             ->setValue($data->Domain)
             ->setService(ExternalServiceConfiguration::MAILER_MAILJET)
             ->setSpfValidation('OK' === $data->SPFStatus)
-            ->setDkimValidation('OK' === $data->DKIMStatus);
+            ->setDkimValidation('OK' === $data->DKIMStatus)
+            ->setTxtKey($data->OwnerShipTokenRecordName)
+            ->setTxtValue($data->OwnerShipToken)
+            ->setTxtValidation(
+                self::isTxtValid(
+                    $data->Domain,
+                    $data->OwnerShipTokenRecordName,
+                    $data->OwnerShipToken
+                )
+            );
     }
 
     private function getAuth(): array
     {
         return [$this->publicKey, $this->privateKey];
+    }
+
+    private static function isTxtValid(string $domain, string $key, string $value): bool
+    {
+        $process = new Process(['dig', '-t', 'txt', $key, '+short']);
+        $process->run();
+
+        return $process->isSuccessful() && str_contains($process->getOutput(), $value);
     }
 
     private static function getEmailRegexFromDomain(string $domain): string

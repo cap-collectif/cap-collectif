@@ -19,3 +19,12 @@ SenderEmailDomain:
             dkimValidation:
                 type: 'Boolean!'
                 description: 'Is the DKIM validated.'
+            txtKey:
+                type: 'String'
+                description: 'The key to configure authentication by TXT.'
+            txtValue:
+                type: 'String'
+                description: 'The value to configure authentication by TXT.'
+            txtValidation:
+                type: 'Boolean!'
+                description: 'True if service confirms domain authentication by TXT.'

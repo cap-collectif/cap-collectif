@@ -26,6 +26,8 @@ class MailjetClientSpec extends ObjectBehavior
         $data->Domain = 'cap-collectif.com';
         $data->SPFStatus = 'OK';
         $data->DKIMStatus = 'KO';
+        $data->OwnerShipToken = 'mailjetTokenValue';
+        $data->OwnerShipTokenRecordName = 'mailjetToken';
 
         $senderEmailDomain = $this->senderEmailDomainFromData($data);
 
@@ -33,6 +35,9 @@ class MailjetClientSpec extends ObjectBehavior
         $senderEmailDomain->getService()->shouldBe('mailjet');
         $senderEmailDomain->getDkimValidation()->shouldBe(false);
         $senderEmailDomain->getSpfValidation()->shouldBe(true);
+        $senderEmailDomain->getTxtKey()->shouldBe('mailjetToken');
+        $senderEmailDomain->getTxtValue()->shouldBe('mailjetTokenValue');
+        $senderEmailDomain->getTxtValidation()->shouldBe(false);
     }
 
     public function it_get_existing_domain(Client $client, Response $response)
@@ -41,6 +46,8 @@ class MailjetClientSpec extends ObjectBehavior
         $domainData->Domain = 'cap-collectif.com';
         $domainData->SPFStatus = 'OK';
         $domainData->DKIMStatus = 'KO';
+        $domainData->OwnerShipToken = 'mailjetTokenValue';
+        $domainData->OwnerShipTokenRecordName = 'mailjetToken';
         $body = new \stdClass();
         $body->Data = [$domainData];
         $response->getBody()->willReturn(json_encode($body));
@@ -60,6 +67,9 @@ class MailjetClientSpec extends ObjectBehavior
         $senderEmailDomain->getService()->shouldBe('mailjet');
         $senderEmailDomain->getDkimValidation()->shouldBe(false);
         $senderEmailDomain->getSpfValidation()->shouldBe(true);
+        $senderEmailDomain->getTxtKey()->shouldBe('mailjetToken');
+        $senderEmailDomain->getTxtValue()->shouldBe('mailjetTokenValue');
+        $senderEmailDomain->getTxtValidation()->shouldBe(false);
     }
 
     public function it_get_non_existing_domain(Client $client)
@@ -84,10 +94,14 @@ class MailjetClientSpec extends ObjectBehavior
         $alpha->Domain = 'cap-collectif.com';
         $alpha->SPFStatus = 'OK';
         $alpha->DKIMStatus = 'KO';
+        $alpha->OwnerShipToken = 'mailjetTokenValue';
+        $alpha->OwnerShipTokenRecordName = 'mailjetToken';
         $beta = new \stdClass();
         $beta->Domain = 'cap-collectifv2.com';
         $beta->SPFStatus = 'KO';
         $beta->DKIMStatus = 'KO';
+        $beta->OwnerShipToken = 'mailjetTokenValueV2';
+        $beta->OwnerShipTokenRecordName = 'mailjetTokenV2';
         $body = new \stdClass();
         $body->Data = [$alpha, $beta];
         $response->getBody()->willReturn(json_encode($body));
@@ -113,12 +127,18 @@ class MailjetClientSpec extends ObjectBehavior
         $alphaDomain->getService()->shouldBe('mailjet');
         $alphaDomain->getDkimValidation()->shouldBe(false);
         $alphaDomain->getSpfValidation()->shouldBe(true);
+        $alphaDomain->getTxtKey()->shouldBe('mailjetToken');
+        $alphaDomain->getTxtValue()->shouldBe('mailjetTokenValue');
+        $alphaDomain->getTxtValidation()->shouldBe(false);
         $betaDomain = $senderEmailDomains['cap-collectifv2.com'];
         $betaDomain->shouldBeAnInstanceOf(SenderEmailDomain::class);
         $betaDomain->getValue()->shouldBe('cap-collectifv2.com');
         $betaDomain->getService()->shouldBe('mailjet');
         $betaDomain->getDkimValidation()->shouldBe(false);
         $betaDomain->getSpfValidation()->shouldBe(false);
+        $betaDomain->getTxtKey()->shouldBe('mailjetTokenV2');
+        $betaDomain->getTxtValue()->shouldBe('mailjetTokenValueV2');
+        $betaDomain->getTxtValidation()->shouldBe(false);
     }
 
     public function it_creates_domain(Client $client)
@@ -162,6 +182,8 @@ class MailjetClientSpec extends ObjectBehavior
         $domainData->Domain = 'cap-collectif.com';
         $domainData->SPFStatus = 'OK';
         $domainData->DKIMStatus = 'KO';
+        $domainData->OwnerShipToken = 'mailjetTokenValue';
+        $domainData->OwnerShipTokenRecordName = 'mailjetToken';
         $body = new \stdClass();
         $body->Data = [$domainData];
         $response->getBody()->willReturn(json_encode($body));

@@ -57,7 +57,8 @@ class SenderEmailDomainsManager
         return $senderEmailDomain;
     }
 
-    private function updateLocalDomains(array $domains): array {
+    private function updateLocalDomains(array $domains): array
+    {
         $hasChange = false;
         foreach ($domains as $domain) {
             if ($this->updateDomain($domain)) {
@@ -72,7 +73,8 @@ class SenderEmailDomainsManager
         return $domains;
     }
 
-    private function updateDomain(SenderEmailDomain $domain): bool {
+    private function updateDomain(SenderEmailDomain $domain): bool
+    {
         $serviceDomain = self::getMatchingServiceDomain($domain);
         if ($serviceDomain && self::updateDomainFromService($domain, $serviceDomain)) {
             return true;
@@ -85,6 +87,9 @@ class SenderEmailDomainsManager
         SenderEmailDomain $domain,
         SenderEmailDomain $serviceDomain
     ): bool {
+        $domain->setTxtKey($serviceDomain->getTxtKey());
+        $domain->setTxtValue($serviceDomain->getTxtValue());
+        $domain->setTxtValidation($serviceDomain->getTxtValidation());
         if (self::hasChangeInValidation($domain, $serviceDomain)) {
             $domain->setDkimValidation($serviceDomain->getDkimValidation());
             $domain->setSpfValidation($serviceDomain->getSpfValidation());
@@ -95,10 +100,12 @@ class SenderEmailDomainsManager
         return false;
     }
 
-    private function getMatchingServiceDomain(SenderEmailDomain $domain): ?SenderEmailDomain {
+    private function getMatchingServiceDomain(SenderEmailDomain $domain): ?SenderEmailDomain
+    {
         if (ExternalServiceConfiguration::MAILER_MANDRILL === $domain->getService()) {
             return $this->mandrillClient->getSenderEmailDomain($domain);
         }
+
         return $this->mailjetClient->getSenderEmailDomain($domain->getValue());
     }
 

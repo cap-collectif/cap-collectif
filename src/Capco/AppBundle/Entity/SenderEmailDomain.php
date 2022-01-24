@@ -27,6 +27,10 @@ class SenderEmailDomain
     private bool $spfValidation = false;
     private bool $dkimValidation = false;
 
+    private ?string $txtKey = null;
+    private ?string $txtValue = null;
+    private bool $txtValidation = false;
+
     public function getValue(): string
     {
         return $this->value;
@@ -74,6 +78,42 @@ class SenderEmailDomain
     public function setDkimValidation(bool $dkimValidation): self
     {
         $this->dkimValidation = $dkimValidation;
+
+        return $this;
+    }
+
+    public function getTxtKey(): ?string
+    {
+        return $this->txtKey;
+    }
+
+    public function setTxtKey(string $txtKey): self
+    {
+        $this->txtKey = $txtKey;
+
+        return $this;
+    }
+
+    public function getTxtValue(): ?string
+    {
+        return $this->txtValue;
+    }
+
+    public function setTxtValue(?string $txtValue): self
+    {
+        $this->txtValue = $txtValue;
+
+        return $this;
+    }
+
+    public function getTxtValidation(): bool
+    {
+        return $this->txtValidation;
+    }
+
+    public function setTxtValidation(?bool $txtValidation): self
+    {
+        $this->txtValidation = $txtValidation;
 
         return $this;
     }

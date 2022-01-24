@@ -43,8 +43,12 @@ class MandrillClient
             $this->post('senders/check-domain', ['domain' => $domain->getValue()])->getBody()
         );
         $serviceDomain = clone $domain;
-        $serviceDomain->setDkimValidation($data->dkim->valid);
-        $serviceDomain->setSpfValidation($data->spf->valid);
+        $serviceDomain
+            ->setDkimValidation($data->dkim->valid)
+            ->setSpfValidation($data->spf->valid)
+            ->setTxtKey('mandrill_verify')
+            ->setTxtValue($data->verify_txt_key)
+            ->setTxtValidation($data->valid_signing);
 
         return $serviceDomain;
     }
@@ -62,6 +66,9 @@ class MandrillClient
 
         $domain->setSpfValidation($mandrillDomain->getSpfValidation());
         $domain->setDkimValidation($mandrillDomain->getDkimValidation());
+        $domain->setTxtKey('mandrill_verify');
+        $domain->setTxtValue($mandrillDomain->getTxtValue());
+        $domain->setTxtValidation($mandrillDomain->getTxtValidation());
 
         return $domain;
     }
@@ -84,7 +91,10 @@ class MandrillClient
             ->setValue($data->domain)
             ->setService(ExternalServiceConfiguration::MAILER_MANDRILL)
             ->setSpfValidation($data->spf->valid)
-            ->setDkimValidation($data->dkim->valid);
+            ->setDkimValidation($data->dkim->valid)
+            ->setTxtKey('mandrill_verify')
+            ->setTxtValue($data->verify_txt_key)
+            ->setTxtValidation($data->valid_signing);
     }
 
     private function getAuth(): string

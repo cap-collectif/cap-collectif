@@ -30,6 +30,7 @@ RUN set -x \
         locales \
         gnupg2 \
         dirmngr \
+        dnsutils \
     && \
     localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
     apt-get clean && \
@@ -43,7 +44,6 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y -qq \
-        php-apcu \
         php7.4-apcu \
         php7.4-apc \
         php7.4-cli \

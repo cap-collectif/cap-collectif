@@ -13269,6 +13269,15 @@ type SenderEmailDomain {
 
   """Is the DKIM validated."""
   dkimValidation: Boolean!
+
+  """The key to configure authentication by TXT."""
+  txtKey: String
+
+  """The value to configure authentication by TXT."""
+  txtValue: String
+
+  """True if service confirms domain authentication by TXT."""
+  txtValidation: Boolean!
 }
 
 """Possible types for SenderEmailDomain."""

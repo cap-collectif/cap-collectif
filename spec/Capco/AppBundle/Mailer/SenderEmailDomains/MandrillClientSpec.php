@@ -30,6 +30,8 @@ class MandrillClientSpec extends ObjectBehavior
         $data->domain = 'cap-collectif.com';
         $data->spf = $spf;
         $data->dkim = $dkim;
+        $data->verify_txt_key = 'mandrillTxtValue';
+        $data->valid_signing = false;
 
         $senderEmailDomain = $this->senderEmailDomainFromData($data);
 
@@ -37,6 +39,9 @@ class MandrillClientSpec extends ObjectBehavior
         $senderEmailDomain->getService()->shouldBe('mandrill');
         $senderEmailDomain->getDkimValidation()->shouldBe(false);
         $senderEmailDomain->getSpfValidation()->shouldBe(true);
+        $senderEmailDomain->getTxtKey()->shouldBe('mandrill_verify');
+        $senderEmailDomain->getTxtValue()->shouldBe('mandrillTxtValue');
+        $senderEmailDomain->getTxtValidation()->shouldBe(false);
     }
 
     public function it_get_all_domains(Client $client, Response $response)
@@ -49,6 +54,8 @@ class MandrillClientSpec extends ObjectBehavior
         $alpha->domain = 'cap-collectif.com';
         $alpha->spf = $alphaSpf;
         $alpha->dkim = $alphaDkim;
+        $alpha->verify_txt_key = 'mandrillTxtValue';
+        $alpha->valid_signing = false;
 
         $betaSpf = new \stdClass();
         $betaSpf->valid = false;
@@ -58,6 +65,9 @@ class MandrillClientSpec extends ObjectBehavior
         $beta->domain = 'cap-collectifv2.com';
         $beta->spf = $betaSpf;
         $beta->dkim = $betaDkim;
+        $beta->verify_txt_key = 'mandrillTxtValue';
+        $beta->valid_signing = false;
+
         $response->getBody()->willReturn(json_encode([$alpha, $beta]));
         $this->client = $client;
         $client
@@ -81,12 +91,18 @@ class MandrillClientSpec extends ObjectBehavior
         $alphaDomain->getService()->shouldBe('mandrill');
         $alphaDomain->getDkimValidation()->shouldBe(false);
         $alphaDomain->getSpfValidation()->shouldBe(true);
+        $alphaDomain->getTxtKey()->shouldBe('mandrill_verify');
+        $alphaDomain->getTxtValue()->shouldBe('mandrillTxtValue');
+        $alphaDomain->getTxtValidation()->shouldBe(false);
         $betaDomain = $senderEmailDomains['cap-collectifv2.com'];
         $betaDomain->shouldBeAnInstanceOf(SenderEmailDomain::class);
         $betaDomain->getValue()->shouldBe('cap-collectifv2.com');
         $betaDomain->getService()->shouldBe('mandrill');
         $betaDomain->getDkimValidation()->shouldBe(false);
         $betaDomain->getSpfValidation()->shouldBe(false);
+        $betaDomain->getTxtKey()->shouldBe('mandrill_verify');
+        $betaDomain->getTxtValue()->shouldBe('mandrillTxtValue');
+        $betaDomain->getTxtValidation()->shouldBe(false);
     }
 
     public function it_creates_domain(Client $client)
@@ -107,10 +123,13 @@ class MandrillClientSpec extends ObjectBehavior
                         'domain' => 'cap-collectif.com',
                         'spf' => ['valid' => false],
                         'dkim' => ['valid' => false],
+                        'verify_txt_key' => 'mandrillTxtValue',
+                        'valid_signing' => false,
                     ])
                 )
             )
             ->shouldBeCalled();
+
         $domain = new SenderEmailDomain();
         $domain->setValue('cap-collectif.com');
         $domain->setService('mandrill');
@@ -121,5 +140,8 @@ class MandrillClientSpec extends ObjectBehavior
         $result->getService()->shouldBe('mandrill');
         $result->getDkimValidation()->shouldBe(false);
         $result->getSpfValidation()->shouldBe(false);
+        $result->getTxtKey()->shouldBe('mandrill_verify');
+        $result->getTxtValue()->shouldBe('mandrillTxtValue');
+        $result->getTxtValidation()->shouldBe(false);
     }
 }
