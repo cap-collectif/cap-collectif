@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\TitleTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -21,6 +22,7 @@ class QuestionChoice implements IndexableInterface
     use PositionableTrait;
     use TitleTrait;
     use UuidTrait;
+    use DescriptionUsingJoditWysiwygTrait;
 
     /**
      * @ORM\Column(name="description", type="text", nullable=true)

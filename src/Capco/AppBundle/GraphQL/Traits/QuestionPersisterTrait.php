@@ -350,6 +350,7 @@ trait QuestionPersisterTrait
                     $question->addChoice($choice);
                 }
                 $choice->setTitle($choiceData['title']);
+                $choice->setDescriptionUsingJoditWysiwyg($choiceData['descriptionUsingJoditWysiwyg'] ?? false);
                 if (isset($choiceData['description'])) {
                     $choice->setDescription($choiceData['description']);
                 }
