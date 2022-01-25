@@ -27,3 +27,5 @@ Capco\AppBundle\Entity\ReplyAnonymous:
         getType:
             serialized_name: replyType
             groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
+        ipAddress:
+            groups: [ ElasticsearchReply ]

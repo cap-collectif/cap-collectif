@@ -166,9 +166,17 @@ class AnalyticsSearch
         DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
+
+        // the object should either be debateAnonymousVote or an anonymous reply
+        $objectTypeBoolQuery = new BoolQuery();
+        $objectTypeBoolQuery->addShould(new Query\Term(['objectType' => 'debateAnonymousVote']));
+        $objectTypeBoolQuery->addShould((new BoolQuery())
+                ->addFilter(new Query\Term(['objectType' => 'reply']))
+                ->addFilter(new Query\Term(['replyType' => 'replyAnonymous'])));
+
         $boolQuery = new BoolQuery();
         $boolQuery
-            ->addFilter(new Query\Term(['objectType' => 'debateAnonymousVote']))
+            ->addFilter($objectTypeBoolQuery)
             ->addFilter(
                 new Range('createdAt', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
