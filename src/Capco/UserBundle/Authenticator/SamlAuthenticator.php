@@ -46,6 +46,10 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
             return 'urn:oid:0.9.2342.19200300.100.1.3'; // mail
         }
 
+        if ('cd59' === $this->samlIdp) {
+            return 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress';
+        }
+
         if ('dev' === $this->samlIdp) {
             return 'https://samltest.id/attributes/role';
         }
