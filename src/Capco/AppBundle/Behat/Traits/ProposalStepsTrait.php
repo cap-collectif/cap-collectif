@@ -651,7 +651,7 @@ trait ProposalStepsTrait
     public function iSubmitTheCommentForm()
     {
         $this->navigationContext->getPage('proposal page')->submitCommentForm();
-        $this->waitAndThrowOnFailure(3000, "$('#current-alert').length > 0");
+        $this->waitAndThrowOnFailure(5000, "$('#current-alert').length > 0");
     }
 
     /**

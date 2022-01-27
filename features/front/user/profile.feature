@@ -78,7 +78,6 @@ Scenario: Logged in user wants to change his password
 Scenario: Logged in user wants to manage his followings and unfollow all and stay unfollow after refresh
   Given I am logged in as user
   And I visited "manage followings page"
-  And I wait 2 seconds
   And I click the "#unfollow-all" element
   Then I should see "no-following"
   Then I reload the page
@@ -89,7 +88,6 @@ Scenario: Logged in user wants to manage his followings and unfollow all and sta
 Scenario: Logged in user wants to manage his followings and unfollow the first project and stay unfollow after refresh
   Given I am logged in as user
   And I visited "manage followings page"
-  And I wait 2 seconds
   Then I click the "[id='profile-project-unfollow-button-UHJvamVjdDpwcm9qZWN0Ng==']" element
   And the "[id='profile-project-collapse-UHJvamVjdDpwcm9qZWN0Ng==']" element should not contain "class=\"capco-panel-list collapse in panel panel-default\""
   And I wait 2 seconds
@@ -100,7 +98,6 @@ Scenario: Logged in user wants to manage his followings and unfollow the first p
 Scenario: Logged in user wants to manage his followings and unfollow the first proposal and stay unfollow after refresh
   Given I am logged in as user
   And I visited "manage followings page"
-  And I wait 2 seconds
   Then I click the "#profile-proposal-unfollow-button-UHJvcG9zYWw6cHJvcG9zYWw4" element
   And the "span#collapse-proposal-UHJvcG9zYWw6cHJvcG9zYWw4" element should not contain "class=\"collapse in\""
   And I wait 2 seconds
@@ -111,7 +108,6 @@ Scenario: Logged in user wants to manage his followings and unfollow the first p
 Scenario: Logged in user wants to manage his followings and click on a proposal
   Given I am logged in as user
   And I visited "manage followings page"
-  And I wait 2 seconds
   When I follow "Ravalement de la façade de la bibliothèque municipale"
   And I should be redirected to "/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale"
 
@@ -119,7 +115,6 @@ Scenario: Logged in user wants to manage his followings and click on a proposal
 Scenario: Logged in user wants to manage his followings and click on a project
   Given I am logged in as user
   And I visited "manage followings page"
-  And I wait 2 seconds
   When I click the "[id='profile-project-link-UHJvamVjdDpwcm9qZWN0Ng==']" element
   Then I should be redirected to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
 

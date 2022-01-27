@@ -354,13 +354,13 @@ trait OpinionStepsTrait
         $page = $this->getCurrentPage();
 
         $this->waitAndThrowOnFailure(
-            3000,
+            5000,
             '$("' . $page->getArgumentDeleteButtonSelector() . '").length > 0'
         );
         $page->clickArgumentDeleteButton();
 
         $this->waitAndThrowOnFailure(
-            3000,
+            5000,
             '$("' . $page->getArgumentConfirmDeletionButtonSelector() . '").length > 0'
         );
         $page->clickArgumentConfirmDeletionButton();

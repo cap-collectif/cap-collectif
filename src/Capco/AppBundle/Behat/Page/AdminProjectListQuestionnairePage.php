@@ -15,6 +15,20 @@ class AdminProjectListQuestionnairePage extends Page
         'add button' => '#btn-add-questionnaire',
     ];
 
+    public function verifyPage()
+    {
+        if (
+            !$this->getSession()->wait(
+                10000,
+                "$('#btn-add-questionnaire').length > 0"
+            )
+        ) {
+            throw new \RuntimeException(
+                'AdminProjectListQuestionnairePage did not fully load, check selector in "verifyPage".'
+            );
+        }
+    }
+
     public function clickAddQuestionnaireButton()
     {
         $this->getElement('add button')->click();

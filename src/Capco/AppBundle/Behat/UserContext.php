@@ -246,7 +246,7 @@ class UserContext extends DefaultContext
      */
     public function iCanSeeIamLoggedInAs(string $username)
     {
-        $this->waitAndThrowOnFailure(3000, "$('#navbar-username').length > 0");
+        $this->waitAndThrowOnFailure(5000, "$('#navbar-username').length > 0");
         $this->assertElementContainsText('#navbar-username', $username);
     }
 
