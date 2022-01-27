@@ -3,7 +3,6 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\GraphQL\Mutation\GenerateJitsiRoomMutation;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Prophecy\Argument;
@@ -39,7 +38,6 @@ class AddEventMutationSpec extends ObjectBehavior
         Publisher $publisher,
         Translator $translator,
         LocaleRepository $localeRepository,
-        GenerateJitsiRoomMutation $generateJitsiRoomMutation,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $localeRepository->findEnabledLocalesCodes()->willReturn(['fr-FR']);
@@ -52,7 +50,6 @@ class AddEventMutationSpec extends ObjectBehavior
             $publisher,
             $translator,
             $localeRepository,
-            $generateJitsiRoomMutation,
             $authorizationChecker
         );
     }

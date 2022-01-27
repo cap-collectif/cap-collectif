@@ -38,7 +38,6 @@ class AddEventMutation implements MutationInterface
     private TranslatorInterface $translator;
     private Publisher $publisher;
     private LocaleRepository $localeRepository;
-    private GenerateJitsiRoomMutation $generateJitsiRoomMutation;
     private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
@@ -50,7 +49,6 @@ class AddEventMutation implements MutationInterface
         Publisher $publisher,
         TranslatorInterface $translator,
         LocaleRepository $localeRepository,
-        GenerateJitsiRoomMutation $generateJitsiRoomMutation,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
@@ -61,7 +59,6 @@ class AddEventMutation implements MutationInterface
         $this->translator = $translator;
         $this->publisher = $publisher;
         $this->localeRepository = $localeRepository;
-        $this->generateJitsiRoomMutation = $generateJitsiRoomMutation;
         $this->authorizationChecker = $authorizationChecker;
     }
 
@@ -192,14 +189,6 @@ class AddEventMutation implements MutationInterface
 
         if (isset($values['animator'])) {
             unset($values['animator']);
-        }
-
-        if (
-            isset($values['isPresential']) &&
-            !$values['isPresential'] &&
-            null === $event->getRoomName()
-        ) {
-            $this->generateJitsiRoomMutation->createJitsiRoomForEvent($event);
         }
 
         $form = $formFactory->create(EventType::class, $event);

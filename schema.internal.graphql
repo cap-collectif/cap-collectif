@@ -6188,21 +6188,6 @@ enum GenderValue {
   OTHER
 }
 
-input GenerateJitsiRoomMutationInput {
-  """Event id."""
-  eventId: ID
-  clientMutationId: String
-}
-
-type GenerateJitsiRoomMutationPayload {
-  """The jitsi room name."""
-  roomName: String!
-
-  """The jitsi token"""
-  jitsiToken: String!
-  clientMutationId: String
-}
-
 """A string containing GeoJSON code."""
 scalar GeoJSON
 
@@ -7258,7 +7243,6 @@ type Mutation {
   subscribeToEventAsNonRegistered(input: SubscribeToEventAsNonRegisteredInput!): SubscribeToEventAsNonRegisteredPayload
   subscribeToEventAsRegistered(input: SubscribeToEventAsRegisteredInput!): SubscribeToEventAsRegisteredPayload
   unsubscribeToEventAsRegistered(input: UnsubscribeToEventAsRegisteredInput!): UnsubscribeToEventAsRegisteredPayload
-  generateJitsiRoomMutation(input: GenerateJitsiRoomMutationInput!): GenerateJitsiRoomMutationPayload
   updateProfileAccountEmail(input: UpdateProfileAccountEmailInput!): UpdateProfileAccountEmailPayload
   updateProfileAccountLocale(input: UpdateProfileAccountLocaleInput!): UpdateProfileAccountLocalePayload
 
