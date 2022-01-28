@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\SSO\FacebookSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
@@ -40,17 +41,12 @@ class UserController extends AbstractController
             ->getArrayCopy();
 
         $loginFranceConnectEnabled = $toggleManager->isActive('login_franceconnect');
-        $loginFranceConnect =
-            \count(
-                array_filter($ssoConfigurations, function ($sso) use ($loginFranceConnectEnabled) {
-                    return $sso instanceof FranceConnectSSOConfiguration &&
-                        true === $sso->isEnabled() &&
-                        true === $loginFranceConnectEnabled;
-                })
-            ) > 0;
+        $loginFranceConnect = $loginFranceConnectEnabled && $ssoConfigurationRepository->findOneActiveByType('franceconnect');
+        $loginFacebook = $ssoConfigurationRepository->findOneActiveByType('facebook') !== null;
 
         $loginSaml = $toggleManager->isActive('login_saml');
         $loginCas = $toggleManager->isActive('login_cas');
+        $loginParis = $toggleManager->isActive('login_paris');
 
         $ssoList = array_filter($ssoConfigurations, function ($sso) {
             return $sso instanceof Oauth2SSOConfiguration && true === $sso->isEnabled();
@@ -73,7 +69,8 @@ class UserController extends AbstractController
             $ssoList[] = ['type' => 'cas', 'name' => 'Cas'];
         }
 
-        $hasEnabledSSO = $loginFranceConnect || \count($ssoList) > 0;
+        $hasEnabledSSO =
+            $loginParis || $loginFacebook || $loginFranceConnect || \count($ssoList) > 0;
 
         $invitation = $repository->findOneByToken($token);
 
@@ -102,6 +99,8 @@ class UserController extends AbstractController
             'token',
             'email',
             'baseUrl',
+            'loginFacebook',
+            'loginParis',
             'loginFranceConnect',
             'ssoList',
             'hasEnabledSSO'

@@ -72,6 +72,20 @@ export const FranceConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styl
   }
 `;
 
+export const LoginParisButton: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  width: 325px;
+  border-radius: 4px;
+  background: white;
+  text-align: center;
+  margin-bottom: 16px;
+  padding: 8px 0;
+  border: 1px solid #002542;
+
+  a > svg {
+    height: 30px;
+  }
+`;
+
 export const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.div`
   position: relative;
   height: 45px;
@@ -89,9 +103,7 @@ export const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = 
     top: 0;
     fill: ${props => getLabelColorForType(props.type, props.labelColor)};
     background-color: ${props =>
-      tinycolor(getButtonColorForType(props.type, props.buttonColor))
-        .darken(10)
-        .toString()};
+      tinycolor(getButtonColorForType(props.type, props.buttonColor)).darken(10).toString()};
     width: 15%;
     border-radius: 3px 0 0 3px;
     display: flex;

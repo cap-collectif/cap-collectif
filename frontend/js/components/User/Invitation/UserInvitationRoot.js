@@ -18,6 +18,7 @@ type Props = {|
   +token: string,
   +baseUrl: string,
   +loginFacebook: boolean,
+  +loginParis: boolean,
   +loginFranceConnect: boolean,
   +ssoList: {|
     +type: string,
@@ -52,6 +53,7 @@ const UserInvitationRootPage = ({
   email,
   token,
   loginFacebook,
+  loginParis,
   loginFranceConnect,
   ssoList,
   hasEnabledSSO,
@@ -82,6 +84,7 @@ const UserInvitationRootPage = ({
           <UserInvitationSSOPage
             loginFacebook={loginFacebook}
             loginFranceConnect={loginFranceConnect}
+            loginParis={loginParis}
             ssoList={ssoList}
             logoFragmentRef={logo}
             primaryColor={primaryColor}

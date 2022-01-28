@@ -53,4 +53,15 @@ class AbstractSSOConfigurationRepository extends EntityRepository
 
         return $query->getResult(AbstractQuery::HYDRATE_ARRAY);
     }
+
+    public function findOneActiveByType(string $type): ?AbstractSSOConfiguration
+    {
+        return $this->createQueryBuilder('sso')
+            ->andWhere('sso INSTANCE OF :type')
+            ->andWhere('sso.enabled = true')
+            ->setParameters(['type' => $type])
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

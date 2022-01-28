@@ -8,7 +8,7 @@ Object {
         "node": Object {
           "buttonColor": "#7498c0",
           "clientId": "***REMOVED***",
-          "enabled": true,
+          "enabled": false,
           "id": "RmFjZWJvb2tTU09Db25maWd1cmF0aW9uOmZhY2Vib29r",
           "labelColor": "#FFFFFF",
           "name": "Facebook",

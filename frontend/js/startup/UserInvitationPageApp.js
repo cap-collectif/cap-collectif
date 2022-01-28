@@ -14,6 +14,7 @@ export type UserInvitationPageAppProps = {|
   +baseUrl: string,
   +loginFacebook: boolean,
   +loginFranceConnect: boolean,
+  +loginParis: boolean,
   +loginSaml: boolean,
   +ssoList: any,
   +hasEnabledSSO: boolean,
@@ -57,6 +58,7 @@ export default (propsComponent: Props) => (
                 token={propsComponent.token}
                 baseUrl={propsComponent.baseUrl}
                 loginFacebook={propsComponent.loginFacebook}
+                loginParis={propsComponent.loginParis}
                 loginFranceConnect={propsComponent.loginFranceConnect}
                 ssoList={propsComponent.ssoList}
                 hasEnabledSSO={propsComponent.hasEnabledSSO}

@@ -26,6 +26,7 @@ import CreateAccountEmailLink from '~/components/User/Invitation/CreateAccountEm
 type Props = {|
   +loginFacebook: boolean,
   +loginFranceConnect: boolean,
+  +loginParis: boolean,
   +ssoList: any,
   +logoFragmentRef: UserInvitationSSOPage_logo$key,
   +primaryColor: string,
@@ -45,6 +46,7 @@ const LOGO_FRAGMENT = graphql`
 const UserInvitationSSOPage = ({
   loginFacebook,
   loginFranceConnect,
+  loginParis,
   ssoList,
   logoFragmentRef,
   primaryColor,
@@ -64,6 +66,9 @@ const UserInvitationSSOPage = ({
   );
   const ssoByPassAuth = useFeatureFlag('sso_by_pass_auth');
   const disconnectOpenId = useFeatureFlag('disconnect_openid');
+  const shieldMode = useFeatureFlag('shield_mode');
+
+  console.log({shieldMode})
 
   return (
     <Container>
@@ -96,6 +101,13 @@ const UserInvitationSSOPage = ({
                   btnTextColor={btnTextColor}
                 />
               )}
+              {loginParis && (
+                <SSOButton
+                  type="loginParis"
+                  primaryColor={primaryColor}
+                  btnTextColor={btnTextColor}
+                />
+              )}
               {ssoList.map((sso, index) => {
                 return (
                   <SSOButton
@@ -110,7 +122,7 @@ const UserInvitationSSOPage = ({
                 );
               })}
             </>
-            {!ssoByPassAuth && (
+            {(!ssoByPassAuth && !shieldMode) && (
               <>
                 <Flex alignItems="center" width="100%" mb={4}>
                   <Line />
