@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalVoteModal } from './ProposalVoteModal';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 describe('<ProposalVoteModal />', () => {
   const proposal = {
@@ -35,6 +35,9 @@ describe('<ProposalVoteModal />', () => {
       totalCount: 0,
       edges: [],
     },
+    publishedVoteDate: '01-02-2022 00:00:00',
+    isSecretBallot: true,
+    canDisplayBallot: false,
   };
 
   const stepInterpellation = {
@@ -61,6 +64,9 @@ describe('<ProposalVoteModal />', () => {
       totalCount: 0,
       edges: [],
     },
+    publishedVoteDate: null,
+    isSecretBallot: false,
+    canDisplayBallot: true,
   };
 
   it('should render correctly', () => {

@@ -14,18 +14,20 @@ use Psr\Log\LoggerInterface;
 
 class FollowerNotifierCommand extends Command
 {
-    private $followerNotifier;
-    private $proposalActivitiesResolver;
-    private $opinionActivitiesResolver;
-    private $logger;
-    private $activitiesService;
+    protected static $defaultName = 'capco:follower-notifier';
+    private FollowerNotifier $followerNotifier;
+    private ProposalActivitiesResolver $proposalActivitiesResolver;
+    private OpinionActivitiesResolver $opinionActivitiesResolver;
+    private LoggerInterface $logger;
+    private ActivitiesService $activitiesService;
 
     public function __construct(
         FollowerNotifier $followerNotifier,
         ProposalActivitiesResolver $proposalActivitiesResolver,
         OpinionActivitiesResolver $opinionActivitiesResolver,
         LoggerInterface $logger,
-        ActivitiesService $activitiesService
+        ActivitiesService $activitiesService,
+        ?string $name
     ) {
         $this->followerNotifier = $followerNotifier;
         $this->proposalActivitiesResolver = $proposalActivitiesResolver;
@@ -33,7 +35,7 @@ class FollowerNotifierCommand extends Command
         $this->logger = $logger;
         $this->activitiesService = $activitiesService;
 
-        parent::__construct();
+        parent::__construct($name);
     }
 
     protected function configure()

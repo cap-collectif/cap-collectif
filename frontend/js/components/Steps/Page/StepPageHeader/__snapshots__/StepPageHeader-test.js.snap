@@ -1,122 +1,286 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
-<StepPageHeaderstyle__StepPageHeaderContainer>
+<div
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+>
   <h2
     className="h2"
   >
-    I am a title
+    &lt;mock-value-for-field-"title"&gt;
   </h2>
   <div
     className="mb-30 project__step-dates"
-  />
-</StepPageHeaderstyle__StepPageHeaderContainer>
+  >
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-calendar-2-1"
+      />
+       
+      global.dates.full.days
+    </div>
+  </div>
+  <div
+    className="Card__Container-dKzlwP fosnBM card"
+  >
+    <div
+      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+    >
+      <div
+        className="step__intro"
+      >
+        <div
+          className="body__infos__content"
+        >
+          <div
+            className=" ql-editor"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<mock-value-for-field-\\"body\\">",
+              }
+            }
+            style={
+              Object {
+                "lineHeight": "22px",
+                "maxHeight": "none",
+                "overflow": "visible",
+                "visibility": "visible",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`<StepPageHeader /> should render correctly a consultationStep with a description 1`] = `
-<StepPageHeaderstyle__StepPageHeaderContainer>
+<div
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+>
   <h2
     className="h2"
   >
-    I am a title
+    &lt;mock-value-for-field-"title"&gt;
   </h2>
   <div
     className="mb-30 project__step-dates"
-  />
-  <BodyInfos
-    body="Je suis la belle description"
-    maxLines={5}
-  />
-</StepPageHeaderstyle__StepPageHeaderContainer>
+  >
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-calendar-2-1"
+      />
+       
+      global.dates.full.days
+    </div>
+  </div>
+  <div
+    className="Card__Container-dKzlwP fosnBM card"
+  >
+    <div
+      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+    >
+      <div
+        className="step__intro"
+      >
+        <div
+          className="body__infos__content"
+        >
+          <div
+            className=" ql-editor"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<mock-value-for-field-\\"body\\">",
+              }
+            }
+            style={
+              Object {
+                "lineHeight": "22px",
+                "maxHeight": "none",
+                "overflow": "visible",
+                "visibility": "visible",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
-<StepPageHeaderstyle__StepPageHeaderContainer>
+<div
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+>
   <h2
     className="h2"
   >
-    I am a title
+    &lt;mock-value-for-field-"title"&gt;
   </h2>
   <div
     className="mb-30 project__step-dates"
-  />
-</StepPageHeaderstyle__StepPageHeaderContainer>
+  >
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-calendar-2-1"
+      />
+       
+      global.dates.full.days
+    </div>
+  </div>
+  <div
+    className="Card__Container-dKzlwP fosnBM card"
+  >
+    <div
+      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+    >
+      <div
+        className="step__intro"
+      >
+        <div
+          className="body__infos__content"
+        >
+          <div
+            className=" ql-editor"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<mock-value-for-field-\\"body\\">",
+              }
+            }
+            style={
+              Object {
+                "lineHeight": "22px",
+                "maxHeight": "none",
+                "overflow": "visible",
+                "visibility": "visible",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
-<StepPageHeaderstyle__StepPageHeaderContainer>
+<div
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+>
   <h2
     className="h2"
   >
-    I am a title
+    &lt;mock-value-for-field-"title"&gt;
   </h2>
   <div
     className="mb-30 project__step-dates"
-  />
-  <h4
-    style={
-      Object {
-        "marginBottom": "20px",
-      }
-    }
   >
-    <i
-      className="cap cap-hand-like-2-1"
-      style={
-        Object {
-          "color": "#377bb5",
-          "fontSize": "22px",
-        }
-      }
-    />
-     
-    <FormattedMessage
-      id="proposal.vote.threshold.step"
-      values={
-        Object {
-          "num": 1,
-        }
-      }
-    />
-  </h4>
-</StepPageHeaderstyle__StepPageHeaderContainer>
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-calendar-2-1"
+      />
+       
+      global.dates.full.days
+    </div>
+  </div>
+  <div
+    className="Card__Container-dKzlwP fosnBM card"
+  >
+    <div
+      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+    >
+      <div
+        className="step__intro"
+      >
+        <div
+          className="body__infos__content"
+        >
+          <div
+            className=" ql-editor"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<mock-value-for-field-\\"body\\">",
+              }
+            }
+            style={
+              Object {
+                "lineHeight": "22px",
+                "maxHeight": "none",
+                "overflow": "visible",
+                "visibility": "visible",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`<StepPageHeader /> should render correctly a selectionStep with interpellation 1`] = `
-<StepPageHeaderstyle__StepPageHeaderContainer>
+<div
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+>
   <h2
     className="h2"
   >
-    I am a title
+    &lt;mock-value-for-field-"title"&gt;
   </h2>
   <div
     className="mb-30 project__step-dates"
-  />
-  <h4
-    style={
-      Object {
-        "marginBottom": "20px",
-      }
-    }
   >
-    <i
-      className="cap cap-hand-like-2-1"
-      style={
-        Object {
-          "color": "#377bb5",
-          "fontSize": "22px",
-        }
-      }
-    />
-     
-    <FormattedMessage
-      id="interpellation.support.threshold.step"
-      values={
-        Object {
-          "num": 1,
-        }
-      }
-    />
-  </h4>
-</StepPageHeaderstyle__StepPageHeaderContainer>
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-calendar-2-1"
+      />
+       
+      global.dates.full.days
+    </div>
+  </div>
+  <div
+    className="Card__Container-dKzlwP fosnBM card"
+  >
+    <div
+      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+    >
+      <div
+        className="step__intro"
+      >
+        <div
+          className="body__infos__content"
+        >
+          <div
+            className=" ql-editor"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<mock-value-for-field-\\"body\\">",
+              }
+            }
+            style={
+              Object {
+                "lineHeight": "22px",
+                "maxHeight": "none",
+                "overflow": "visible",
+                "visibility": "visible",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;

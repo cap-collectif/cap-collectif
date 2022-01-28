@@ -1,23 +1,65 @@
 // @flow
 import React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { graphql, useFragment } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
-import type { ProposalPageTabs_proposal } from '~relay/ProposalPageTabs_proposal.graphql';
-import type { ProposalPageTabs_step } from '~relay/ProposalPageTabs_step.graphql';
-import type { FeatureToggles, GlobalState } from '~/types';
+import type { ProposalPageTabs_proposal$key } from '~relay/ProposalPageTabs_proposal.graphql';
+import type { ProposalPageTabs_step$key } from '~relay/ProposalPageTabs_step.graphql';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {
-  proposal: ?ProposalPageTabs_proposal,
-  step: ?ProposalPageTabs_step,
-  features: FeatureToggles,
+  proposal: ?ProposalPageTabs_proposal$key,
+  step: ?ProposalPageTabs_step$key,
   tabKey: string,
   votesCount: number,
 };
+
+const STEP_FRAGMENT = graphql`
+  fragment ProposalPageTabs_step on ProposalStep {
+    canDisplayBallot
+  }
+`;
+
+const PROPOSAL_FRAGMENT = graphql`
+  fragment ProposalPageTabs_proposal on Proposal
+  @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
+    id
+    form {
+      usingCategories
+      usingThemes
+      objectType
+    }
+    news {
+      totalCount
+      edges {
+        node {
+          id
+          title
+        }
+      }
+    }
+    currentVotableStep {
+      id
+      voteThreshold
+      voteType
+    }
+    allFollowers: followers(first: 0) {
+      totalCount
+    }
+    project {
+      type {
+        title
+      }
+      opinionCanBeFollowed
+    }
+    tipsmeeeDonators: tipsmeee @include(if: $isTipsMeeeEnabled) {
+      donatorsCount
+    }
+  }
+`;
 
 const Tabs: StyledComponent<{ loading: boolean }, {}, HTMLDivElement> = styled.div`
   height: 84px;
@@ -79,11 +121,20 @@ const Tabs: StyledComponent<{ loading: boolean }, {}, HTMLDivElement> = styled.d
   }
 `;
 
-export const ProposalPageTabs = ({ proposal, step, tabKey, votesCount, features }: Props) => {
-  const showVotesTab = votesCount > 0 || proposal?.currentVotableStep !== null;
+export const ProposalPageTabs = ({
+  proposal: proposalFragment,
+  step: stepFragment,
+  tabKey,
+  votesCount,
+}: Props) => {
+  const proposal = useFragment(PROPOSAL_FRAGMENT, proposalFragment);
+  const step = useFragment(STEP_FRAGMENT, stepFragment);
+  const isTipsmeeEnable = useFeatureFlag('unstable__tipsmeee');
+  const showVotesTab =
+    (votesCount > 0 || proposal?.currentVotableStep !== null) && step?.canDisplayBallot;
   const showFollowersTab = proposal?.project?.opinionCanBeFollowed;
   const showDonatorsTab =
-    features.unstable__tipsmeee && proposal && proposal.tipsmeeeDonators
+    isTipsmeeEnable && proposal && proposal.tipsmeeeDonators
       ? proposal.tipsmeeeDonators.donatorsCount > 0
       : false;
   const voteTabLabel =
@@ -93,6 +144,7 @@ export const ProposalPageTabs = ({ proposal, step, tabKey, votesCount, features 
     .map(edge => edge.node)
     .filter(Boolean)
     .some(e => e.title === 'Réponse officielle');
+
   const newsTotalCount = (proposal?.news.totalCount || 0) - (hasOfficialAnswer ? 1 : 0);
 
   return (
@@ -137,58 +189,5 @@ export const ProposalPageTabs = ({ proposal, step, tabKey, votesCount, features 
     </Tabs>
   );
 };
-const mapStateToProps = (state: GlobalState) => ({
-  features: state.default.features,
-});
 
-export default createFragmentContainer(
-  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageTabs),
-  {
-    step: graphql`
-      fragment ProposalPageTabs_step on ProposalStep {
-        id
-      }
-    `,
-    proposal: graphql`
-      fragment ProposalPageTabs_proposal on Proposal
-        @argumentDefinitions(stepId: { type: "ID!" }, isTipsMeeeEnabled: { type: "Boolean!" }) {
-        id
-        form {
-          usingCategories
-          usingThemes
-          objectType
-        }
-        news {
-          totalCount
-          edges {
-            node {
-              id
-              title
-            }
-          }
-        }
-        currentVotableStep {
-          id
-          voteThreshold
-          voteType
-        }
-        votableSteps {
-          id
-          title
-        }
-        allFollowers: followers(first: 0) {
-          totalCount
-        }
-        project {
-          type {
-            title
-          }
-          opinionCanBeFollowed
-        }
-        tipsmeeeDonators: tipsmeee @include(if: $isTipsMeeeEnabled) {
-          donatorsCount
-        }
-      }
-    `,
-  },
-);
+export default ProposalPageTabs;

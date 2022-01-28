@@ -97,6 +97,7 @@ export const ProposalPreviewBody = ({ proposal, step, viewer }: Props) => {
         )}
       </div>
       {step &&
+        step.canDisplayBallot &&
         step.voteThreshold !== null &&
         typeof step.voteThreshold !== 'undefined' &&
         step.voteThreshold > 0 && (
@@ -168,6 +169,7 @@ export default createFragmentContainer(ProposalPreviewBody, {
       ...ProposalPreviewVote_step @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalVoteThresholdProgressBar_step
       voteThreshold
+      canDisplayBallot
       voteType
       project {
         opinionCanBeFollowed

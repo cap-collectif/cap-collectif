@@ -33,3 +33,37 @@ exports[`<ProposalListOrderSorting /> should render the list order sorting compo
   </Select>
 </div>
 `;
+
+exports[`<ProposalListOrderSorting /> should render the list order sorting component without vote sort 1`] = `
+<div>
+  <Select
+    id="proposal-filter-sorting-button"
+    label="global.filter_f_random"
+  >
+    <SelectOption
+      isSelected={true}
+      key="random"
+      onClick={[Function]}
+      value="random"
+    >
+      global.filter_f_random
+    </SelectOption>
+    <SelectOption
+      isSelected={false}
+      key="last"
+      onClick={[Function]}
+      value="last"
+    >
+      global.filter_f_last
+    </SelectOption>
+    <SelectOption
+      isSelected={false}
+      key="old"
+      onClick={[Function]}
+      value="old"
+    >
+      global.filter_f_old
+    </SelectOption>
+  </Select>
+</div>
+`;

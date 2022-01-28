@@ -16,6 +16,19 @@ describe('<ProposalPreviewFooter />', () => {
       },
     },
     votesRanking: true,
+    canDisplayBallot: true,
+  };
+
+  const stepWithVoteActiveButNotDisplayed = {
+    $refType,
+    voteType: 'SIMPLE',
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
+    votesRanking: true,
+    canDisplayBallot: false,
   };
 
   const stepWithVoteDisabled = {
@@ -27,6 +40,7 @@ describe('<ProposalPreviewFooter />', () => {
       },
     },
     votesRanking: false,
+    canDisplayBallot: false,
   };
 
   const proposal = {
@@ -71,6 +85,13 @@ describe('<ProposalPreviewFooter />', () => {
   it('should render a footer with votes and comments counters', () => {
     const wrapper = shallow(
       <ProposalPreviewFooter step={stepWithVoteActive} proposal={proposal} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a footer without votes counter', () => {
+    const wrapper = shallow(
+      <ProposalPreviewFooter step={stepWithVoteActiveButNotDisplayed} proposal={proposal} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

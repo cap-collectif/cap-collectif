@@ -2,7 +2,7 @@
 
 exports[`<QuestionnairePage /> renders correctly 1`] = `
 <QuestionnairePage__QuestionnaireContainer>
-  <Relay(StepPageHeader)
+  <StepPageHeader
     step={
       Object {
         "$fragmentRefs": null,
@@ -55,7 +55,7 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
 
 exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`] = `
 <QuestionnairePage__QuestionnaireContainer>
-  <Relay(StepPageHeader)
+  <StepPageHeader
     step={
       Object {
         "$fragmentRefs": null,
@@ -105,7 +105,7 @@ exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`]
 
 exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
 <QuestionnairePage__QuestionnaireContainer>
-  <Relay(StepPageHeader)
+  <StepPageHeader
     step={
       Object {
         "$fragmentRefs": null,

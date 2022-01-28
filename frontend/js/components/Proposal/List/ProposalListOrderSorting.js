@@ -3,9 +3,9 @@ import * as React from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import LocalStorage from '../../../services/LocalStorageService';
-import { changeOrder } from '../../../redux/modules/proposal';
-import { PROPOSAL_AVAILABLE_ORDERS } from '../../../constants/ProposalConstants';
-import type { Dispatch, State } from '../../../types';
+import { changeOrder } from '~/redux/modules/proposal';
+import { PROPOSAL_AVAILABLE_ORDERS } from '~/constants/ProposalConstants';
+import type { Dispatch, State } from '~/types';
 import Select from '../../Ui/Form/Select/Select';
 import SelectOption from '../../Ui/Form/Select/SelectOption';
 
@@ -19,6 +19,7 @@ type Props = {
   defaultSort?: ?string,
   stepId?: string,
   intl: IntlShape,
+  canDisplayBallot: boolean,
 };
 
 type ComponentState = {
@@ -38,8 +39,8 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
     this.state = {
       displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByComments ? ['comments'] : [])
         .concat(props.orderByCost ? ['expensive', 'cheap'] : [])
-        .concat(props.orderByVotes ? ['votes', 'least-votes'] : [])
-        .concat(props.orderByPoints ? ['points', 'least-points'] : []),
+        .concat(props.orderByVotes && props.canDisplayBallot ? ['votes', 'least-votes'] : [])
+        .concat(props.orderByPoints && props.canDisplayBallot ? ['points', 'least-points'] : []),
     };
   }
 

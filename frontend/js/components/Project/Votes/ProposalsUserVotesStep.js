@@ -1,8 +1,9 @@
 // @flow
 import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { submit, isDirty, isSubmitting } from 'redux-form';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalsUserVotesTable from './ProposalsUserVotesTable';
 import SubmitButton from '../../Form/SubmitButton';
@@ -37,6 +38,7 @@ export const ProposalsUserVotesStep = ({
   linkColor,
 }: Props) => {
   const [showAbout, setShowAbout] = useState<boolean>(false);
+  const intl = useIntl();
   const keyTradProjectCount =
     step.form?.objectType === 'PROPOSAL'
       ? isInterpellationContextFromStep(step)
@@ -61,6 +63,28 @@ export const ProposalsUserVotesStep = ({
   if (!step.viewerVotes) {
     return null;
   }
+  const getVoteHelpWording = (): string => {
+    let votesHelpText = '';
+    if (step.isSecretBallot && !step.publishedVoteDate) {
+      votesHelpText = `${votesHelpText} ${intl.formatMessage({
+        id: 'publish-ballot-no-date-help-text',
+      })}`;
+    }
+    if (step.isSecretBallot && step.publishedVoteDate) {
+      votesHelpText = `${votesHelpText} ${intl.formatMessage(
+        { id: 'publish-ballot-date-help-text' },
+        {
+          date: moment(step.publishedVoteDate).format('MM/DD/YYYY'),
+          time: moment(step.publishedVoteDate).format('HH:mm'),
+        },
+      )}`;
+    }
+    if (step.votesHelpText) {
+      votesHelpText = `${votesHelpText} ${step.votesHelpText}`;
+    }
+    return votesHelpText;
+  }
+  const votesHelpText = getVoteHelpWording();
 
   return (
     <ProposalUserVoteStepContainer id={`vote-table-step-${step.slug || ''}`}>
@@ -79,7 +103,7 @@ export const ProposalsUserVotesStep = ({
             />
           </span>
         </BackToVote>
-        {step.votesHelpText && (
+        {votesHelpText && (
           <button
             style={{ color: linkColor }}
             type="button"
@@ -96,7 +120,7 @@ export const ProposalsUserVotesStep = ({
       </div>
       {showAbout && (
         <div className="mt-20 mb-20">
-          <WYSIWYGRender value={step.votesHelpText} />
+          <WYSIWYGRender value={votesHelpText} />
         </div>
       )}
 
@@ -138,7 +162,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(
 export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalsUserVotesStep_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...ProposalsUserVotesTable_step
       ...VoteMinAlert_step
       id
@@ -146,6 +170,8 @@ export default createFragmentContainer(container, {
       votesHelpText
       slug
       url
+      isSecretBallot
+      publishedVoteDate
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         totalCount
         ...ProposalsUserVotesTable_votes

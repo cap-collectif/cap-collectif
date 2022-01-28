@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\Following;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Following\ActivitiesResolver;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
@@ -28,7 +29,8 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
         ProjectRepository $projectRepository,
         OfficialResponseRepository $officialResponseRepository,
         Logger $logger,
-        Router $router
+        Router $router,
+        ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader
     ) {
         $this->beConstructedWith(
             $followerRepository,
@@ -38,7 +40,8 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
             $projectRepository,
             $officialResponseRepository,
             $logger,
-            $router
+            $router,
+            $proposalCurrentVotableStepDataLoader
         );
     }
 
@@ -57,7 +60,8 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
         ProjectRepository $projectRepository,
         OfficialResponseRepository $officialResponseRepository,
         Logger $logger,
-        Router $router
+        Router $router,
+        ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader
     ) {
         $proposalFormRepository->findAll()->willReturn([]);
 
@@ -69,7 +73,8 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
             $projectRepository,
             $officialResponseRepository,
             $logger,
-            $router
+            $router,
+            $proposalCurrentVotableStepDataLoader
         );
 
         $this->getActivitiesByRelativeTime()->shouldBe([]);

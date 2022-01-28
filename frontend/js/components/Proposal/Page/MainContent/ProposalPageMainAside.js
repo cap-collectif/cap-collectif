@@ -1,20 +1,18 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import ProposalPageMetadata from '~/components/Proposal/Page/Aside/ProposalPageMetadata';
 import ProposalPageVoteThreshold from '~/components/Proposal/Page/Aside/ProposalPageVoteThreshold';
 import ProposalPageAdvancement from '~/components/Proposal/Page/Aside/ProposalPageAdvancement';
 import type { ProposalPageMainAside_proposal } from '~relay/ProposalPageMainAside_proposal.graphql';
-import { type GlobalState, type FeatureToggles } from '~/types';
 import { bootstrapGrid } from '~/utils/sizes';
 import ProposalTipsMeeeAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeAside';
 import ProposalSocialNetworkLinks from '~/components/Proposal/Page/Aside/ProposalSocialNetworkLinks';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {
   proposal: ProposalPageMainAside_proposal,
-  features: FeatureToggles,
   display: boolean,
 };
 
@@ -48,23 +46,25 @@ const Container: StyledComponent<{ display: boolean }, {}, HTMLDivElement> = sty
   }
 `;
 
-export const ProposalPageMainAside = ({ proposal, features, display }: Props) => {
+export const ProposalPageMainAside = ({ proposal, display }: Props) => {
   const currentVotableStep = proposal?.currentVotableStep;
+  const isTipmeeEnable = useFeatureFlag('unstable__tipsmeee');
   return (
     <Container display={display}>
       <div>
         <ProposalPageMetadata
           proposal={proposal}
-          showDistricts={features.districts || false}
+          showDistricts={useFeatureFlag('districts') || false}
           showCategories={proposal?.form?.usingCategories}
           showNullEstimation={!!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')}
-          showThemes={(features.themes || false) && proposal?.form?.usingThemes}
+          showThemes={(useFeatureFlag('themes') || false) && proposal?.form?.usingThemes}
         />
         {currentVotableStep !== null &&
           typeof currentVotableStep !== 'undefined' &&
           currentVotableStep.voteThreshold !== null &&
           typeof currentVotableStep.voteThreshold !== 'undefined' &&
-          currentVotableStep.voteThreshold > 0 && (
+          currentVotableStep.voteThreshold > 0 &&
+          currentVotableStep.canDisplayBallot && (
             <ProposalPageVoteThreshold
               proposal={proposal}
               step={currentVotableStep}
@@ -73,7 +73,7 @@ export const ProposalPageMainAside = ({ proposal, features, display }: Props) =>
           )}
       </div>
       <ProposalPageAdvancement proposal={proposal} />
-      {proposal && proposal.form.usingTipsmeee && features.unstable__tipsmeee && (
+      {proposal && proposal.form.usingTipsmeee && isTipmeeEnable && (
         <ProposalTipsMeeeAside proposal={proposal} />
       )}
       {proposal && proposal.isProposalUsingAnySocialNetworks && (
@@ -83,39 +83,33 @@ export const ProposalPageMainAside = ({ proposal, features, display }: Props) =>
   );
 };
 
-const mapStateToProps = (state: GlobalState) => ({
-  features: state.default.features,
-});
-
-export default createFragmentContainer(
-  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageMainAside),
-  {
-    proposal: graphql`
-      fragment ProposalPageMainAside_proposal on Proposal
-        @argumentDefinitions(
-          stepId: { type: "ID!" }
-          isTipsMeeeEnabled: { type: "Boolean!" }
-          isAuthenticated: { type: "Boolean!" }
-        ) {
-        id
-        ...ProposalPageMetadata_proposal
-        ...ProposalPageAdvancement_proposal
-        ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
-        ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
-        ...ProposalSocialNetworkLinks_proposal @arguments(isAuthenticated: $isAuthenticated)
-        isProposalUsingAnySocialNetworks
-        currentVotableStep {
-          votesRanking
-          voteType
-          voteThreshold
-          ...ProposalPageVoteThreshold_step
-        }
-        form {
-          usingCategories
-          usingThemes
-          usingTipsmeee @include(if: $isTipsMeeeEnabled)
-        }
+export default createFragmentContainer(ProposalPageMainAside, {
+  proposal: graphql`
+    fragment ProposalPageMainAside_proposal on Proposal
+    @argumentDefinitions(
+      stepId: { type: "ID!" }
+      isTipsMeeeEnabled: { type: "Boolean!" }
+      isAuthenticated: { type: "Boolean!" }
+    ) {
+      id
+      ...ProposalPageMetadata_proposal
+      ...ProposalPageAdvancement_proposal
+      ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
+      ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
+      ...ProposalSocialNetworkLinks_proposal @arguments(isAuthenticated: $isAuthenticated)
+      isProposalUsingAnySocialNetworks
+      currentVotableStep {
+        votesRanking
+        voteType
+        voteThreshold
+        canDisplayBallot
+        ...ProposalPageVoteThreshold_step
       }
-    `,
-  },
-);
+      form {
+        usingCategories
+        usingThemes
+        usingTipsmeee @include(if: $isTipsMeeeEnabled)
+      }
+    }
+  `,
+});

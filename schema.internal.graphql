@@ -2150,6 +2150,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   """If not null, the date to display vote count"""
   publishedVoteDate: DateTime
+
+  """Whether or not can display vote counters and points"""
+  canDisplayBallot: Boolean!
   private: Boolean!
   defaultStatus: ProposalStepStatus
 
@@ -5953,9 +5956,6 @@ enum FeatureFlagType {
   """Whether or not the paper vote is enabled."""
   unstable__paper_vote
   versions
-
-  """Whether or not the secret_ballot is enabled."""
-  unstable__secret_ballot
 }
 
 """Require a firstname"""
@@ -10436,6 +10436,9 @@ interface ProposalStep {
 
   """If not null, the date to display vote count"""
   publishedVoteDate: DateTime
+
+  """Whether or not can display vote counters and points"""
+  canDisplayBallot: Boolean!
 }
 
 """The given proposal status in a step."""
@@ -13073,6 +13076,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
   """If not null, the date to display vote count"""
   publishedVoteDate: DateTime
+
+  """Whether or not can display vote counters and points"""
+  canDisplayBallot: Boolean!
   position: Int!
 
   """

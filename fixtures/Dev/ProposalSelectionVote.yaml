@@ -108,3 +108,19 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         position: 0
         publishedAt: <(new \DateTime('2015-03-01 00:00:57'))>
         createdAt: <(new \DateTime('2015-03-01 00:00:57'))>
+    proposalSelectionVote58:
+        id: 1063
+        proposal: '@proposalByFranceConnectUser'
+        selectionStep: '@selectionStepIdf3Vote'
+        user: '@user5'
+        position: 0
+        publishedAt: <(new \DateTime('2022-01-03'))>
+        createdAt: <(new \DateTime('2022-01-03'))>
+    proposalSelectionVote59:
+        id: 1064
+        proposal: '@propositionAvecDesRs'
+        selectionStep: '@selectionStepIdf3Winners'
+        user: '@user5'
+        position: 0
+        publishedAt: <(new \DateTime('2022-01-03'))>
+        createdAt: <(new \DateTime('2022-01-03'))>

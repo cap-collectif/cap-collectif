@@ -317,6 +317,13 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "canDisplayBallot",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "abstractKey": "__isProposalStep",
                                 "kind": "InlineFragment",
                                 "selections": Array [
@@ -1946,7 +1953,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "a77c1f5a2ddae6998c1b97193de9040d",
+        "cacheID": "edb948973d1643f278a085957ee46f32",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -2314,6 +2321,7 @@ fragment StepPageHeader_step on Step {
   ... on SelectionStep {
     voteThreshold
     votable
+    canDisplayBallot
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
@@ -2702,6 +2710,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                 "storageKey": null,
                               },
                               Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "canDisplayBallot",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "abstractKey": "__isProposalStep",
                                 "kind": "InlineFragment",
                                 "selections": Array [
@@ -4331,7 +4346,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "a77c1f5a2ddae6998c1b97193de9040d",
+        "cacheID": "edb948973d1643f278a085957ee46f32",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4699,6 +4714,7 @@ fragment StepPageHeader_step on Step {
   ... on SelectionStep {
     voteThreshold
     votable
+    canDisplayBallot
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
@@ -5087,6 +5103,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                 "storageKey": null,
                               },
                               Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "canDisplayBallot",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "abstractKey": "__isProposalStep",
                                 "kind": "InlineFragment",
                                 "selections": Array [
@@ -6716,7 +6739,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "a77c1f5a2ddae6998c1b97193de9040d",
+        "cacheID": "edb948973d1643f278a085957ee46f32",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -7084,6 +7107,7 @@ fragment StepPageHeader_step on Step {
   ... on SelectionStep {
     voteThreshold
     votable
+    canDisplayBallot
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
@@ -7472,6 +7496,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                 "storageKey": null,
                               },
                               Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "canDisplayBallot",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "abstractKey": "__isProposalStep",
                                 "kind": "InlineFragment",
                                 "selections": Array [
@@ -9101,7 +9132,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "a77c1f5a2ddae6998c1b97193de9040d",
+        "cacheID": "edb948973d1643f278a085957ee46f32",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -9469,6 +9500,7 @@ fragment StepPageHeader_step on Step {
   ... on SelectionStep {
     voteThreshold
     votable
+    canDisplayBallot
     ... on ProposalStep {
       __isProposalStep: __typename
       form {

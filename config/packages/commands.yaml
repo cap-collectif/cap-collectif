@@ -94,3 +94,7 @@ services:
         arguments:
             $name: 'capco:check:invite-user-status'
             $publisher: '@swarrot.publisher'
+
+    Capco\AppBundle\Command\FollowerNotifierCommand:
+        arguments:
+            $name: 'capco:follower-notifier'

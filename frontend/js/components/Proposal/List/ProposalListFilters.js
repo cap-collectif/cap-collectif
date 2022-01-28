@@ -131,6 +131,7 @@ export class ProposalListFilters extends React.Component<Props> {
               orderByVotes={orderByVotes}
               orderByPoints={orderByPoints}
               defaultSort={step.defaultSort}
+              canDisplayBallot={step.canDisplayBallot}
             />
           </Col>
           {displayedFilters.map((filterName, index) => (
@@ -186,6 +187,7 @@ export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalListFilters_step on ProposalStep {
       id
+      canDisplayBallot
       ... on CollectStep {
         private
       }

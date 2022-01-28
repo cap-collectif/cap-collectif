@@ -46,6 +46,7 @@ describe('<ProposalPreviewBody />', () => {
       project: {
         opinionCanBeFollowed: true,
       },
+      canDisplayBallot: true,
       $fragmentRefs,
       $refType,
     },

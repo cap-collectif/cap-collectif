@@ -3,7 +3,7 @@
 exports[`Internal|Query.votes fetches total number of votes 1`] = `
 Object {
   "votes": Object {
-    "totalCount": 272,
+    "totalCount": 274,
   },
 }
 `;

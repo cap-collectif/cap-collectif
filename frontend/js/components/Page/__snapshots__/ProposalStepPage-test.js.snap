@@ -4,7 +4,7 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
 <div
   id="ProposalStepPage-rendered"
 >
-  <Relay(StepPageHeader)
+  <StepPageHeader
     step={
       Object {
         "$fragmentRefs": null,

@@ -18,6 +18,7 @@ describe('<ProposalListFilters />', () => {
       voteType: 'DISABLED',
       votesRanking: true,
       statuses: [],
+      canDisplayBallot: true,
       form: {
         usingAddress: true,
         usingDistrict: true,
@@ -79,6 +80,44 @@ describe('<ProposalListFilters />', () => {
           title: 'Immobilier',
         },
       ],
+    };
+    // $FlowFixMe
+    const wrapper = shallow(<ProposalListFilters {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly without vote filters filters', () => {
+    const props = {
+      ...defaultProps,
+      step: {
+        $refType,
+        $fragmentRefs,
+        id: 'test',
+        defaultSort: 'random',
+        voteType: 'DISABLED',
+        votesRanking: true,
+        statuses: [],
+        canDisplayBallot: false,
+        form: {
+          usingAddress: true,
+          usingDistrict: true,
+          usingThemes: true,
+          commentable: true,
+          costable: true,
+          usingCategories: true,
+          districts: [
+            {
+              id: '1',
+              name: 'Ouagadougou',
+            },
+          ],
+          categories: [
+            {
+              id: '2',
+              name: 'Category1',
+            },
+          ],
+        },
+      },
     };
     // $FlowFixMe
     const wrapper = shallow(<ProposalListFilters {...props} />);

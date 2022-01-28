@@ -6,10 +6,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
 >
   <ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
     <h4>
-      <FormattedMessage
-        id="proposal.vote.threshold.title"
-        values={Object {}}
-      />
+      proposal.vote.threshold.title
     </h4>
     <p>
       <div
@@ -26,14 +23,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
             size={14}
           />
         </ProposalPagestyle__CategoryCircledIcon>
-        <FormattedMessage
-          id="proposal.vote.count"
-          values={
-            Object {
-              "num": 30,
-            }
-          }
-        />
+        proposal.vote.count
       </div>
       <MetadataRow
         categoryPaddingLeft={5}
@@ -61,15 +51,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
       striped={false}
     />
     <div>
-      <FormattedMessage
-        id="proposal.vote.threshold.progress"
-        values={
-          Object {
-            "max": 100,
-            "num": 70,
-          }
-        }
-      />
+      proposal.vote.threshold.progress
     </div>
   </ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
 </ProposalPagestyle__Card>
@@ -81,10 +63,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
 >
   <ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
     <h4>
-      <FormattedMessage
-        id="proposal.vote.threshold.reached"
-        values={Object {}}
-      />
+      proposal.vote.threshold.reached
     </h4>
     <p>
       <div
@@ -101,14 +80,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
             size={14}
           />
         </ProposalPagestyle__CategoryCircledIcon>
-        <FormattedMessage
-          id="proposal.vote.count"
-          values={
-            Object {
-              "num": 30,
-            }
-          }
-        />
+        proposal.vote.count
       </div>
     </p>
     <ProgressBar
@@ -124,15 +96,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
       striped={false}
     />
     <div>
-      <FormattedMessage
-        id="proposal.vote.threshold.progress_reached"
-        values={
-          Object {
-            "max": 20,
-            "num": 30,
-          }
-        }
-      />
+      proposal.vote.threshold.progress_reached
     </div>
   </ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
 </ProposalPagestyle__Card>

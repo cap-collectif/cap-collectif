@@ -116,3 +116,15 @@ Capco\AppBundle\Entity\Selection:
         selectionStep: '@selectionstepVoteClassement'
         createdAt: <(new \DateTime('2020-01-01 00:00:10'))>
         status: '@statusVoteAvecClassement'
+    selectionstepVoteIdf31:
+        proposal: '@propositionPourTestLeDoublon'
+        selectionStep: '@selectionStepIdf3Vote'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionstepVoteIdf33:
+        proposal: '@proposalByFranceConnectUser'
+        selectionStep: '@selectionStepIdf3Vote'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionstepVoteIdf35:
+        proposal: '@propositionAvecDesRs'
+        selectionStep: '@selectionStepIdf3Winners'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>

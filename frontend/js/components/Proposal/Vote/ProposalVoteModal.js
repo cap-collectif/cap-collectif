@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useCallback, useState } from 'react';
+import moment from 'moment';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
 import { ConnectionHandler, fetchQuery_DEPRECATED } from 'relay-runtime';
 import { Modal, Panel, Label } from 'react-bootstrap';
@@ -21,6 +23,7 @@ import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import invariant from '~/utils/invariant';
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 import VoteMinAlert from '~/components/Project/Votes/VoteMinAlert';
+import usePrevious from '~/utils/hooks/usePrevious';
 
 type ParentProps = {
   proposal: ProposalVoteModal_proposal,
@@ -51,27 +54,86 @@ const ProposalVoteModalContainer: StyledComponent<{}, {}, typeof Modal> = styled
   }
 `;
 
-type State = {
-  keyboard: boolean,
-};
+export const ProposalVoteModal = ({
+  dispatch,
+  showModal,
+  proposal,
+  step,
+  invalid,
+  isSubmitting,
+  isAuthenticated,
+  pristine,
+  viewerIsConfirmedByEmail,
+}: Props) => {
+  const [keyboard, setKeyboard] = useState(true);
+  const prevShowModal = usePrevious(showModal);
+  const intl = useIntl();
+  const createTmpVote = useCallback(() => {
+    commitLocalUpdate(environment, store => {
+      const dataID = `client:newTmpVote:${proposal.id}`;
 
-export class ProposalVoteModal extends React.Component<Props, State> {
-  state = {
-    keyboard: true,
-  };
+      let newNode = store.get(dataID);
+      if (!newNode) {
+        newNode = store.create(dataID, 'ProposalVote');
+      }
+      newNode.setValue(viewerIsConfirmedByEmail, 'published');
+      if (!viewerIsConfirmedByEmail) {
+        newNode.setValue('WAITING_AUTHOR_CONFIRMATION', 'notPublishedReason');
+      }
+      newNode.setValue(false, 'anonymous');
+      newNode.setValue(null, 'id'); // This will be used to know that this is the tmp vote
 
-  componentDidUpdate(prevProps: Props) {
-    const { showModal } = this.props;
-    if (!prevProps.showModal && showModal) {
-      this.createTmpVote();
-    } else if (!showModal && prevProps.showModal) {
-      this.deleteTmpVote();
+      // $FlowFixMe Cannot call newNode.setLinkedRecord with store.get(...) bound to record
+      newNode.setLinkedRecord(store.get(proposal.id), 'proposal');
+
+      // Create a new edge
+      const edgeID = `client:newTmpEdge:${proposal.id}`;
+      let newEdge = store.get(edgeID);
+      if (!newEdge) {
+        newEdge = store.create(edgeID, 'ProposalVoteEdge');
+      }
+      newEdge.setLinkedRecord(newNode, 'node');
+
+      const stepProxy = store.get(step.id);
+      if (!stepProxy) return;
+      const connection = stepProxy.getLinkedRecord('viewerVotes', {
+        orderBy: { field: 'POSITION', direction: 'ASC' },
+      });
+      if (!connection) {
+        return;
+      }
+      ConnectionHandler.insertEdgeAfter(connection, newEdge);
+      const totalCount = parseInt(connection.getValue('totalCount'), 10);
+      connection.setValue(totalCount + 1, 'totalCount');
+    });
+  }, [proposal.id, step.id, viewerIsConfirmedByEmail]);
+
+  const deleteTmpVote = useCallback(() => {
+    commitLocalUpdate(environment, store => {
+      const dataID = `client:newTmpVote:${proposal.id}`;
+      const stepProxy = store.get(step.id);
+      if (!stepProxy) return;
+      const connection = stepProxy.getLinkedRecord('viewerVotes', {
+        orderBy: { field: 'POSITION', direction: 'ASC' },
+      });
+      if (connection) {
+        ConnectionHandler.deleteNode(connection, dataID);
+        const totalCount = parseInt(connection.getValue('totalCount'), 10);
+        connection.setValue(totalCount - 1, 'totalCount');
+      }
+      store.delete(dataID);
+    });
+  }, [proposal.id, step.id]);
+
+  React.useEffect(() => {
+    if (!prevShowModal && showModal) {
+      createTmpVote();
+    } else if (!showModal && prevShowModal) {
+      deleteTmpVote();
     }
-  }
+  }, [prevShowModal, showModal, deleteTmpVote, createTmpVote]);
 
-  onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
-    const { pristine, dispatch, step, proposal, isAuthenticated } = this.props;
-
+  const onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
     const tmpVote = values.votes.filter(v => v.id === null)[0];
 
     // First we add the vote
@@ -112,83 +174,19 @@ export class ProposalVoteModal extends React.Component<Props, State> {
     });
   };
 
-  onHide = () => {
-    const { dispatch } = this.props;
+  const onHide = () => {
     dispatch(closeVoteModal());
   };
 
-  createTmpVote = () => {
-    commitLocalUpdate(environment, store => {
-      const { proposal, viewerIsConfirmedByEmail, step } = this.props;
-      const dataID = `client:newTmpVote:${proposal.id}`;
-
-      let newNode = store.get(dataID);
-      if (!newNode) {
-        newNode = store.create(dataID, 'ProposalVote');
-      }
-      newNode.setValue(viewerIsConfirmedByEmail, 'published');
-      if (!viewerIsConfirmedByEmail) {
-        newNode.setValue('WAITING_AUTHOR_CONFIRMATION', 'notPublishedReason');
-      }
-      newNode.setValue(false, 'anonymous');
-      newNode.setValue(null, 'id'); // This will be used to know that this is the tmp vote
-
-      // $FlowFixMe Cannot call newNode.setLinkedRecord with store.get(...) bound to record
-      newNode.setLinkedRecord(store.get(proposal.id), 'proposal');
-
-      // Create a new edge
-      const edgeID = `client:newTmpEdge:${proposal.id}`;
-      let newEdge = store.get(edgeID);
-      if (!newEdge) {
-        newEdge = store.create(edgeID, 'ProposalVoteEdge');
-      }
-      newEdge.setLinkedRecord(newNode, 'node');
-
-      const stepProxy = store.get(step.id);
-      if (!stepProxy) return;
-      const connection = stepProxy.getLinkedRecord('viewerVotes', {
-        orderBy: { field: 'POSITION', direction: 'ASC' },
-      });
-      if (!connection) {
-        return;
-      }
-      ConnectionHandler.insertEdgeAfter(connection, newEdge);
-      const totalCount = parseInt(connection.getValue('totalCount'), 10);
-      connection.setValue(totalCount + 1, 'totalCount');
-    });
+  const disabledKeyboard = () => {
+    setKeyboard(false);
   };
 
-  deleteTmpVote = () => {
-    commitLocalUpdate(environment, store => {
-      const { proposal, step } = this.props;
-      const dataID = `client:newTmpVote:${proposal.id}`;
-      const stepProxy = store.get(step.id);
-      if (!stepProxy) return;
-      const connection = stepProxy.getLinkedRecord('viewerVotes', {
-        orderBy: { field: 'POSITION', direction: 'ASC' },
-      });
-      if (connection) {
-        ConnectionHandler.deleteNode(connection, dataID);
-        const totalCount = parseInt(connection.getValue('totalCount'), 10);
-        connection.setValue(totalCount - 1, 'totalCount');
-      }
-      store.delete(dataID);
-    });
+  const activeKeyboard = () => {
+    setKeyboard(true);
   };
 
-  disabledKeyboard = () => {
-    this.setState({
-      keyboard: false,
-    });
-  };
-
-  activeKeyboard = () => {
-    this.setState({
-      keyboard: true,
-    });
-  };
-
-  getModalVoteTranslation = (step: ProposalVoteModal_step) => {
+  const getModalVoteTranslation = () => {
     if (step.form && step.form.objectType === 'PROPOSAL') {
       if (isInterpellationContextFromStep(step)) {
         return 'interpellation.support.count';
@@ -198,7 +196,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
     return 'count-questions';
   };
 
-  getModalVoteTitleTranslation = (step: ProposalVoteModal_step) => {
+  const getModalVoteTitleTranslation = () => {
     const isInterpellation = isInterpellationContextFromStep(step);
     if (step.votesRanking) {
       if (isInterpellation) {
@@ -214,102 +212,106 @@ export class ProposalVoteModal extends React.Component<Props, State> {
     return 'global.vote.for';
   };
 
-  render() {
-    const {
-      dispatch,
-      showModal,
-      proposal,
-      step,
-      invalid,
-      isSubmitting,
-      isAuthenticated,
-    } = this.props;
-    const { keyboard } = this.state;
-    const keyTradForModalVote = this.getModalVoteTranslation(step);
-    const keyTradForModalVoteTitle = this.getModalVoteTitleTranslation(step);
-
-    return step.requirements ? (
-      <ProposalVoteModalContainer
-        animation={false}
-        enforceFocus={false}
-        keyboard={keyboard}
-        show={showModal}
-        onHide={this.onHide}
-        bsSize="large"
-        role="dialog"
-        dialogClassName="custom-modal-dialog"
-        aria-labelledby="contained-modal-title-lg">
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">
-            <FormattedMessage id={keyTradForModalVoteTitle} />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {step.requirements.totalCount > 0 && (
-            <Panel id="required-conditions" bsStyle="primary">
-              <Panel.Heading>
-                <FormattedMessage id="requirements" />{' '}
-                {step.requirements.viewerMeetsTheRequirements && (
-                  <Label bsStyle="primary">
-                    <FormattedMessage id="filled" />
-                  </Label>
-                )}
-              </Panel.Heading>
-              {!step.requirements.viewerMeetsTheRequirements && (
-                <Panel.Body>
-                  <WYSIWYGRender value={step.requirements.reason} />
-                  <RequirementsForm step={step} />
-                </Panel.Body>
-              )}
-            </Panel>
-          )}
-          <VoteMinAlert step={step} translationKey={keyTradForModalVote} />
-          <ProposalsUserVotesTable
-            onSubmit={this.onSubmit}
-            step={step}
-            votes={step.viewerVotes}
-            disabledKeyboard={this.disabledKeyboard}
-            activeKeyboard={this.activeKeyboard}
-          />
-          {step.votesHelpText && (
-            <div className="well mb-0 mt-15">
-              <p>
-                <b>
-                  <FormattedMessage
-                    id={
-                      isInterpellationContextFromStep(step)
-                        ? 'admin.fields.step.supportsHelpText'
-                        : 'admin.fields.step.votesHelpText'
-                    }
-                  />
-                </b>
-              </p>
-              <WYSIWYGRender value={step.votesHelpText} />
-            </div>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <CloseButton className="pull-right" onClose={this.onHide} />
-          <SubmitButton
-            id="confirm-proposal-vote"
-            disabled={step.requirements.totalCount > 0 ? invalid : false}
-            onSubmit={() => {
-              dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
-              fetchQuery_DEPRECATED(environment, refetchViewer, {
-                stepId: step.id,
-                isAuthenticated,
-              });
-            }}
-            label="global.save"
-            isSubmitting={isSubmitting}
-            bsStyle={!proposal.viewerHasVote || isSubmitting ? 'success' : 'danger'}
-            style={{ marginLeft: '10px' }}
-          />
-        </Modal.Footer>
-      </ProposalVoteModalContainer>
-    ) : null;
+  const keyTradForModalVote = getModalVoteTranslation();
+  const keyTradForModalVoteTitle = getModalVoteTitleTranslation();
+  let votesHelpText =
+    step.isSecretBallot && !step.publishedVoteDate && !step.canDisplayBallot
+      ? intl.formatMessage({ id: 'publish-ballot-no-date-help-text' })
+      : '';
+  votesHelpText =
+    step.isSecretBallot && step.publishedVoteDate && !step.canDisplayBallot
+      ? intl.formatMessage(
+          { id: 'publish-ballot-date-help-text' },
+          {
+            date: moment(step.publishedVoteDate).format('DD/MM/YYYY'),
+            time: moment(step.publishedVoteDate).format('HH:mm'),
+          },
+        )
+      : votesHelpText;
+  if (step.votesHelpText) {
+    votesHelpText = votesHelpText
+      ? `${votesHelpText} ${step.votesHelpText}`
+      : `${step.votesHelpText}`;
   }
-}
+
+  return step.requirements ? (
+    <ProposalVoteModalContainer
+      animation={false}
+      enforceFocus={false}
+      keyboard={keyboard}
+      show={showModal}
+      onHide={onHide}
+      bsSize="large"
+      role="dialog"
+      aria-labelledby="contained-modal-title-lg">
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-lg">
+          {intl.formatMessage({ id: keyTradForModalVoteTitle })}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {step.requirements && step.requirements.totalCount > 0 && (
+          <Panel id="required-conditions" bsStyle="primary">
+            <Panel.Heading>
+              {intl.formatMessage({ id: 'requirements' })}{' '}
+              {step.requirements?.viewerMeetsTheRequirements && (
+                <Label bsStyle="primary">{intl.formatMessage({ id: 'filled' })}</Label>
+              )}
+            </Panel.Heading>
+            {!step.requirements?.viewerMeetsTheRequirements && step.requirements?.reason && (
+              <Panel.Body>
+                <WYSIWYGRender value={step.requirements.reason} />
+                <RequirementsForm step={step} />
+              </Panel.Body>
+            )}
+          </Panel>
+        )}
+        <VoteMinAlert step={step} translationKey={keyTradForModalVote} />
+        <ProposalsUserVotesTable
+          onSubmit={onSubmit}
+          step={step}
+          votes={step.viewerVotes}
+          disabledKeyboard={disabledKeyboard}
+          activeKeyboard={activeKeyboard}
+        />
+        {votesHelpText && (
+          <div className="well mb-0 mt-15">
+            <p>
+              <b>
+                <FormattedMessage
+                  id={
+                    isInterpellationContextFromStep(step)
+                      ? 'admin.fields.step.supportsHelpText'
+                      : 'admin.fields.step.votesHelpText'
+                  }
+                />
+              </b>
+            </p>
+            <WYSIWYGRender value={votesHelpText} />
+          </div>
+        )}
+      </Modal.Body>
+      <Modal.Footer>
+        <CloseButton className="pull-right" onClose={onHide} />
+        <SubmitButton
+          id="confirm-proposal-vote"
+          disabled={step.requirements && step.requirements?.totalCount > 0 ? invalid : false}
+          onSubmit={() => {
+            dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
+            fetchQuery_DEPRECATED(environment, refetchViewer, {
+              stepId: step.id,
+              isAuthenticated,
+            });
+          }}
+          label="global.save"
+          isSubmitting={isSubmitting}
+          bsStyle={!proposal.viewerHasVote || isSubmitting ? 'success' : 'danger'}
+          style={{ marginLeft: '10px' }}
+        />
+      </Modal.Footer>
+    </ProposalVoteModalContainer>
+  ) : null;
+};
 
 const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
   showModal: !!(
@@ -333,7 +335,7 @@ export default createFragmentContainer(container, {
   `,
   step: graphql`
     fragment ProposalVoteModal_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       votesRanking
       votesHelpText
@@ -345,6 +347,9 @@ export default createFragmentContainer(container, {
           totalCount
         }
       }
+      isSecretBallot
+      canDisplayBallot
+      publishedVoteDate
       ...interpellationLabelHelper_step @relay(mask: false)
       ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalsUserVotesTable_step

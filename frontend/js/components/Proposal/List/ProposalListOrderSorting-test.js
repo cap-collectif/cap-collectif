@@ -13,11 +13,16 @@ const props = {
   defaultSort: PROPOSAL_ORDER_RANDOM,
   stepId: 'selectionstep1',
   intl: intlMock,
+  canDisplayBallot: true,
 };
 
 describe('<ProposalListOrderSorting />', () => {
   it('should render the list order sorting component', () => {
     const wrapper = shallow(<ProposalListOrderSorting {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render the list order sorting component without vote sort', () => {
+    const wrapper = shallow(<ProposalListOrderSorting {...props} canDisplayBallot={false} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

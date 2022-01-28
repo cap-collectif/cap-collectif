@@ -55,3 +55,7 @@ ProposalStep:
             publishedVoteDate:
                 type: 'DateTime'
                 description: 'If not null, the date to display vote count'
+            canDisplayBallot:
+                type: 'Boolean!'
+                description: 'Whether or not can display vote counters and points'
+                resolve: '@=value.canDisplayBallot()'

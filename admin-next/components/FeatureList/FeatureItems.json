@@ -373,11 +373,6 @@
                         "title": "capco.module.graphql_introspection",
                         "description": "",
                         "onlySuperAdmin": false
-                    },
-                    "unstable__secret_ballot": {
-                        "title": "secret-ballot",
-                        "description": "",
-                        "onlySuperAdmin": true
                     }
                 }
             }

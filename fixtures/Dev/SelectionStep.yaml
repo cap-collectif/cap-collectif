@@ -467,12 +467,22 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         defaultStatus: '@statusIdfVote1'
         body: Franciliens, prêts à voter
         allowAuthorsToAddNews: true
+        secretBallot: true
+        votesRanking: true
+        votesMin: 1
+        votesLimit: 3
+        publishedVoteDate: <(new \DateTime('2035-01-03'))>
     selectionStepIdf3Winners:
         id: selectionStepId3fWinners
         title: Le suivi des projets lauréats
         label: Le suivi des projets lauréats
         startAt: <identity((new \DateTime('2021-11-11')))>
         endAt: <identity((new \DateTime('2032-08-02')))>
-        voteType: 0
+        voteType: 1
         defaultStatus: '@statusIdfWinner1'
         body: Gardez un oeil sur les projets !
+        secretBallot: true
+        votesRanking: true
+        votesMin: 1
+        votesLimit: 3
+        publishedVoteDate: <(new \DateTime('2022-01-03'))>

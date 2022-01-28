@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageAside } from './ProposalPageAside';
 import { $refType, $fragmentRefs } from '~/mocks';
-import { features } from '~/redux/modules/default';
+import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils';
 
 const proposal = {
   $refType,
@@ -12,6 +12,7 @@ const proposal = {
   currentVotableStep: {
     voteType: 'SIMPLE',
     votesRanking: true,
+    canDisplayBallot: true,
     $fragmentRefs,
   },
   tipsmeeeId: null,
@@ -28,6 +29,16 @@ const proposal = {
   },
 };
 
+const proposalWithSecretBallot = {
+  ...proposal,
+  currentVotableStep: {
+    voteType: 'SIMPLE',
+    votesRanking: true,
+    canDisplayBallot: false,
+    $fragmentRefs,
+  },
+};
+
 const props = {
   ...proposal,
   hasVotableStep: false,
@@ -37,21 +48,28 @@ const props = {
 };
 
 describe('<ProposalPageAside />', () => {
+  afterEach(() => {
+    disableFeatureFlags();
+  });
+
   it('should render correctly', () => {
-    const wrapper = shallow(
-      <ProposalPageAside {...props} proposal={proposal} features={{ ...features }} />,
-    );
+    const wrapper = shallow(<ProposalPageAside {...props} proposal={proposal} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly with votableStep', () => {
     const wrapper = shallow(
+      <ProposalPageAside proposal={proposal} {...props} opinionCanBeFollowed hasVotableStep />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should not render correctly with votableStep', () => {
+    const wrapper = shallow(
       <ProposalPageAside
-        proposal={proposal}
+        proposal={proposalWithSecretBallot}
         {...props}
         opinionCanBeFollowed
         hasVotableStep
         isAuthenticated
-        features={{ ...features }}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -65,12 +83,13 @@ describe('<ProposalPageAside />', () => {
         hasVotableStep
         isAnalysing
         isAuthenticated
-        features={{ ...features }}
       />,
     );
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly with tipsmeee', () => {
+    enableFeatureFlags(['unstable__tipsmeee']);
+
     const wrapper = shallow(
       <ProposalPageAside
         proposal={{
@@ -91,7 +110,6 @@ describe('<ProposalPageAside />', () => {
         hasVotableStep
         isAnalysing
         isAuthenticated
-        features={{ ...features, unstable__tipsmeee: true }}
       />,
     );
     expect(wrapper).toMatchSnapshot();

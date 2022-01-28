@@ -17,6 +17,7 @@ exports[`<ProposalListFilters /> should render correctly 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "canDisplayBallot": true,
           "defaultSort": "random",
           "form": Object {
             "categories": Array [
@@ -65,6 +66,7 @@ exports[`<ProposalListFilters /> should render correctly 1`] = `
       xs={12}
     >
       <Connect(injectIntl(ProposalListOrderSorting))
+        canDisplayBallot={true}
         defaultSort="random"
         orderByComments={true}
         orderByCost={true}
@@ -93,6 +95,7 @@ exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "canDisplayBallot": true,
           "defaultSort": "random",
           "form": Object {
             "categories": Array [
@@ -141,6 +144,7 @@ exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
       xs={12}
     >
       <Connect(injectIntl(ProposalListOrderSorting))
+        canDisplayBallot={true}
         defaultSort="random"
         orderByComments={true}
         orderByCost={true}
@@ -164,6 +168,84 @@ exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
       >
         <Component />
       </FormattedMessage>
+    </Col>
+  </Row>
+</div>
+`;
+
+exports[`<ProposalListFilters /> should render correctly without vote filters filters 1`] = `
+<div
+  className="mb-15 mt-30"
+  id="proposal-list-filter"
+>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <Relay(ProposalListToggleViewBtn)
+      displayMode="grid"
+      setDisplayMode={[MockFunction]}
+      showMapButton={false}
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "canDisplayBallot": false,
+          "defaultSort": "random",
+          "form": Object {
+            "categories": Array [
+              Object {
+                "id": "2",
+                "name": "Category1",
+              },
+            ],
+            "commentable": true,
+            "costable": true,
+            "districts": Array [
+              Object {
+                "id": "1",
+                "name": "Ouagadougou",
+              },
+            ],
+            "usingAddress": true,
+            "usingCategories": true,
+            "usingDistrict": true,
+            "usingThemes": true,
+          },
+          "id": "test",
+          "statuses": Array [],
+          "voteType": "DISABLED",
+          "votesRanking": true,
+        }
+      }
+    />
+    <Col
+      bsClass="col"
+      componentClass="div"
+      lg={3}
+      md={4}
+      sm={6}
+      xs={12}
+    >
+      <Connect(injectIntl(ProposalListSearch)) />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      id="proposal-filter-sorting"
+      lg={3}
+      md={4}
+      sm={6}
+      xs={12}
+    >
+      <Connect(injectIntl(ProposalListOrderSorting))
+        canDisplayBallot={false}
+        defaultSort="random"
+        orderByComments={true}
+        orderByCost={true}
+        orderByPoints={true}
+        orderByVotes={false}
+      />
     </Col>
   </Row>
 </div>

@@ -7,17 +7,17 @@ use Doctrine\DBAL\Exception\InvalidArgumentException;
 
 class UserActivity implements FollowerNotifiedOfInterface
 {
-    protected $username;
-    protected $lastname;
-    protected $firstname;
-    protected $email;
-    protected $id;
-    protected $locale;
-    protected $userProposals = [];
-    protected $userProjects = [];
-    protected $notifiedOf;
-    protected $urlManagingFollowings;
-    protected $userOpinions = [];
+    protected string $username;
+    protected ?string $lastname;
+    protected ?string $firstname;
+    protected string $email;
+    protected string $id;
+    protected ?string $locale;
+    protected array $userProposals = [];
+    protected ?array $userProjects = [];
+    protected string $notifiedOf;
+    protected string $urlManagingFollowings;
+    protected array $userOpinions = [];
 
     public function getUsername(): string
     {

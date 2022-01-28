@@ -18,6 +18,7 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
     useFeatureFlag('unstable__tipsmeee') &&
     proposal.form.usingTipsmeee &&
     proposal.tipsMeeeDonation;
+
   const showComments = proposal.form.commentable;
   const showVotes =
     proposal.allVotesOnStep !== null && step && step.voteType && step.voteType !== 'DISABLED';
@@ -102,34 +103,36 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
           />
         </div>
       )}
-      {showVotes && proposal.allVotesOnStep && (
-        <>
-          <div className="card__counters__item card__counters__item--votes">
-            <div className="card__counters__value">{proposal.allVotesOnStep.totalCount}</div>
-            <FormattedMessage
-              id={voteCountLabel}
-              values={{
-                count: proposal.allVotesOnStep.totalCount,
-              }}
-              tagName="div"
-            />
-          </div>
-          {step.votesRanking && proposal.allVotesOnStep && (
+      {step.canDisplayBallot &&
+        showVotes &&
+        proposal.allVotesOnStep && (
+          <>
             <div className="card__counters__item card__counters__item--votes">
-              <div className="card__counters__value">
-                {proposal.allVotesOnStep.totalPointsCount}
-              </div>
+              <div className="card__counters__value">{proposal.allVotesOnStep.totalCount}</div>
               <FormattedMessage
-                id="points-count"
+                id={voteCountLabel}
                 values={{
-                  num: proposal.allVotesOnStep.totalPointsCount,
+                  count: proposal.allVotesOnStep.totalCount,
                 }}
                 tagName="div"
               />
             </div>
-          )}
-        </>
-      )}
+            {step.votesRanking && proposal.allVotesOnStep && (
+              <div className="card__counters__item card__counters__item--votes">
+                <div className="card__counters__value">
+                  {proposal.allVotesOnStep.totalPointsCount}
+                </div>
+                <FormattedMessage
+                  id="points-count"
+                  values={{
+                    num: proposal.allVotesOnStep.totalPointsCount,
+                  }}
+                  tagName="div"
+                />
+              </div>
+            )}
+          </>
+        )}
     </Card.Counters>
   );
 };
@@ -144,6 +147,7 @@ export default createFragmentContainer(connect<any, any, _, _, _, _>()(ProposalP
         }
       }
       votesRanking
+      canDisplayBallot
     }
   `,
   proposal: graphql`

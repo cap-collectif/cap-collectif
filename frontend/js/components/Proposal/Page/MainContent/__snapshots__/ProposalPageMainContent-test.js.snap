@@ -50,7 +50,7 @@ exports[`<ProposalPageMainContent /> should render correctly 1`] = `
       }
     }
   />
-  <Relay(Connect(ProposalPageMainAside))
+  <Relay(ProposalPageMainAside)
     display={false}
     proposal={
       Object {
@@ -132,7 +132,7 @@ exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] 
       }
     }
   />
-  <Relay(Connect(ProposalPageMainAside))
+  <Relay(ProposalPageMainAside)
     display={true}
     proposal={
       Object {
@@ -234,7 +234,7 @@ exports[`<ProposalPageMainContent /> should render correctly with tipsmeeee 1`] 
       }
     }
   />
-  <Relay(Connect(ProposalPageMainAside))
+  <Relay(ProposalPageMainAside)
     display={false}
     proposal={
       Object {

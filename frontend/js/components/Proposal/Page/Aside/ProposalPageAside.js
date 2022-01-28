@@ -1,17 +1,16 @@
 // @flow
 import React, { useRef } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
 import { useResize } from '@liinkiing/react-hooks';
 import { useScrollYPosition } from 'react-use-scroll-position';
 import styled, { type StyledComponent, css } from 'styled-components';
-import type { FeatureToggles, GlobalState } from '~/types';
 import type { ProposalPageAside_proposal } from '~relay/ProposalPageAside_proposal.graphql';
 import ProposalPageMetadata from '~/components/Proposal/Page/Aside/ProposalPageMetadata';
 import ProposalPageVoteThreshold from '~/components/Proposal/Page/Aside/ProposalPageVoteThreshold';
 import ProposalSocialNetworkLinks from '~/components/Proposal/Page/Aside/ProposalSocialNetworkLinks';
 import ProposalPageAdvancement from '~/components/Proposal/Page/Aside/ProposalPageAdvancement';
 import ProposalTipsMeeeAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeAside';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 const HEIGHT_WITH_VOTEBAR = 130;
 const HEIGHT_WITHOUT_VOTEBAR = 80;
@@ -20,7 +19,6 @@ type Props = {
   proposal: ProposalPageAside_proposal,
   opinionCanBeFollowed: boolean,
   hasVotableStep: boolean,
-  features: FeatureToggles,
   isAnalysing: boolean,
   isAuthenticated: boolean,
   isActualityTab?: boolean,
@@ -46,28 +44,28 @@ const Aside: StyledComponent<
     z-index: 1;
     top: ${hasVoteBar ? '370px' : '320px'};
     ${isFixedToTop &&
-      css`
-        position: fixed;
-        margin-top: unset;
-        margin-left: 617px;
-        top: ${hasVoteBar ? '130px' : '80px'};
-      `}
+    css`
+      position: fixed;
+      margin-top: unset;
+      margin-left: 617px;
+      top: ${hasVoteBar ? '130px' : '80px'};
+    `}
     ${isFixedToBottom &&
-      css`
-        bottom: 10px;
-        margin-top: unset;
-        top: unset;
-        position: fixed;
-        margin-left: 617px;
-      `}
+    css`
+      bottom: 10px;
+      margin-top: unset;
+      top: unset;
+      position: fixed;
+      margin-left: 617px;
+    `}
     ${isMovingUp &&
-      css`
-        margin-left: 30px;
-        position: relative;
-        bottom: 15px;
-        margin-top: auto;
-        top: unset;
-      `}
+    css`
+      margin-left: 30px;
+      position: relative;
+      bottom: 15px;
+      margin-top: auto;
+      top: unset;
+    `}
   > div {
       display: flex;
       flex-direction: column;
@@ -80,7 +78,6 @@ const Aside: StyledComponent<
 
 export const ProposalPageAside = ({
   proposal,
-  features,
   isAnalysing,
   hasVotableStep,
   isAuthenticated,
@@ -90,6 +87,9 @@ export const ProposalPageAside = ({
   const asideRef = useRef(null);
   const currentVotableStep = proposal?.currentVotableStep;
   const scrollY: number = useScrollYPosition();
+  const isFeatureTipsMeeEnable = useFeatureFlag('unstable__tipsmeee');
+  const isDistrictsEnabled = useFeatureFlag('districts');
+  const isThemesEnabled = useFeatureFlag('themes');
   const hasVoteBar = hasVotableStep && proposal?.currentVotableStep && isAuthenticated;
   const footerSize = document.getElementsByTagName('footer')[0]?.offsetHeight;
   const bodyHeight = document.getElementsByTagName('body')[0]?.offsetHeight;
@@ -100,7 +100,7 @@ export const ProposalPageAside = ({
   const isMovingUp =
     (shouldGoUp && scrollY > totalHeight && bottom < 0) ||
     (height + bottom - 15 < heightFromTop + (asideRef?.current?.clientHeight || 0) && !shouldGoUp);
-  const tipsmeeeWithCode = !!(proposal && proposal.tipsmeeeId && features.unstable__tipsmeee);
+  const tipsmeeeWithCode = !!(proposal && proposal.tipsmeeeId && isFeatureTipsMeeEnable);
 
   return (
     <Aside
@@ -116,24 +116,26 @@ export const ProposalPageAside = ({
           <>
             <ProposalPageMetadata
               proposal={proposal}
-              showDistricts={features.districts || false}
+              showDistricts={isDistrictsEnabled || false}
               showCategories={proposal?.form?.usingCategories}
               showNullEstimation={
                 !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
               }
-              showThemes={(features.themes || false) && proposal?.form?.usingThemes}
+              showThemes={(isThemesEnabled || false) && proposal?.form?.usingThemes}
             />
             <ProposalPageAdvancement proposal={proposal} />
-            {proposal && proposal.form.usingTipsmeee && features.unstable__tipsmeee && (
+            {proposal && proposal.form.usingTipsmeee && isFeatureTipsMeeEnable && (
               <ProposalTipsMeeeAside proposal={proposal} />
             )}
-            {currentVotableStep !== null && typeof currentVotableStep !== 'undefined' && (
-              <ProposalPageVoteThreshold
-                proposal={proposal}
-                step={currentVotableStep}
-                showPoints={(currentVotableStep && currentVotableStep.votesRanking) || false}
-              />
-            )}
+            {currentVotableStep !== null &&
+              typeof currentVotableStep !== 'undefined' &&
+              currentVotableStep.canDisplayBallot && (
+                <ProposalPageVoteThreshold
+                  proposal={proposal}
+                  step={currentVotableStep}
+                  showPoints={(currentVotableStep && currentVotableStep.votesRanking) || false}
+                />
+              )}
           </>
         )}
         {proposal &&
@@ -147,43 +149,37 @@ export const ProposalPageAside = ({
   );
 };
 
-const mapStateToProps = (state: GlobalState) => ({
-  features: state.default.features,
-});
-
-export default createFragmentContainer(
-  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageAside),
-  {
-    proposal: graphql`
-      fragment ProposalPageAside_proposal on Proposal
-        @argumentDefinitions(
-          stepId: { type: "ID!" }
-          isTipsMeeeEnabled: { type: "Boolean!" }
-          isAuthenticated: { type: "Boolean!" }
-        ) {
-        ...ProposalPageMetadata_proposal
-        ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
-        ...ProposalPageAdvancement_proposal
-        ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
-        currentVotableStep {
-          votesRanking
-          voteType
-          ...ProposalPageVoteThreshold_step
-        }
-        viewerDidAuthor @include(if: $isAuthenticated)
-        isProposalUsingAnySocialNetworks
-        ...ProposalSocialNetworkLinks_proposal @arguments(isAuthenticated: $isAuthenticated)
-        tipsmeeeId @include(if: $isTipsMeeeEnabled)
-        form {
-          step {
-            state
-          }
-          isUsingAnySocialNetworks
-          usingCategories
-          usingThemes
-          usingTipsmeee @include(if: $isTipsMeeeEnabled)
-        }
+export default createFragmentContainer(ProposalPageAside, {
+  proposal: graphql`
+    fragment ProposalPageAside_proposal on Proposal
+    @argumentDefinitions(
+      stepId: { type: "ID!" }
+      isTipsMeeeEnabled: { type: "Boolean!" }
+      isAuthenticated: { type: "Boolean!" }
+    ) {
+      ...ProposalPageMetadata_proposal
+      ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
+      ...ProposalPageAdvancement_proposal
+      ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
+      currentVotableStep {
+        votesRanking
+        voteType
+        canDisplayBallot
+        ...ProposalPageVoteThreshold_step
       }
-    `,
-  },
-);
+      viewerDidAuthor @include(if: $isAuthenticated)
+      isProposalUsingAnySocialNetworks
+      ...ProposalSocialNetworkLinks_proposal @arguments(isAuthenticated: $isAuthenticated)
+      tipsmeeeId @include(if: $isTipsMeeeEnabled)
+      form {
+        step {
+          state
+        }
+        isUsingAnySocialNetworks
+        usingCategories
+        usingThemes
+        usingTipsmeee @include(if: $isTipsMeeeEnabled)
+      }
+    }
+  `,
+});

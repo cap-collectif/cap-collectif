@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
@@ -20,15 +21,7 @@ use Symfony\Component\Routing\RouterInterface;
 class ProposalActivitiesResolver extends ActivitiesResolver
 {
     public const NOT_FOLLOWED = 0;
-    public const ACTIVITIES = [
-        'isUpdated',
-        'isDeleted',
-        'comments',
-        'votes',
-        'lastStep',
-        'posts',
-        'officialResponses',
-    ];
+    public const ACTIVITIES = ['comments', 'votes', 'lastStep', 'posts', 'officialResponses'];
 
     protected FollowerRepository $followerRepository;
     protected ProposalRepository $proposalRepository;
@@ -38,6 +31,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
     protected RouterInterface $router;
     private PostRepository $postRepository;
     private OfficialResponseRepository $officialResponseRepository;
+    private ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader;
 
     public function __construct(
         FollowerRepository $followerRepository,
@@ -47,7 +41,8 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         ProjectRepository $projectRepository,
         OfficialResponseRepository $officialResponseRepository,
         LoggerInterface $logger,
-        RouterInterface $router
+        RouterInterface $router,
+        ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader
     ) {
         $this->followerRepository = $followerRepository;
         $this->proposalRepository = $proposalRepository;
@@ -57,6 +52,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         $this->officialResponseRepository = $officialResponseRepository;
         $this->logger = $logger;
         $this->router = $router;
+        $this->proposalCurrentVotableStepDataLoader = $proposalCurrentVotableStepDataLoader;
     }
 
     public function getFollowedByUserId(): array
@@ -115,6 +111,19 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         return $followersWithActivities;
     }
 
+    public function canDisplayProposalVotes(Proposal $proposal): bool
+    {
+        $currentVotableStep = $this->proposalCurrentVotableStepDataLoader->resolve($proposal);
+        if (
+            $currentVotableStep &&
+            ($currentVotableStep->isCollectStep() || $currentVotableStep->isSelectionStep())
+        ) {
+            return $currentVotableStep->canDisplayBallot();
+        }
+
+        return true;
+    }
+
     public function getActivitiesByRelativeTime(string $relativeTime = 'yesterday'): array
     {
         $yesterdayMidnight = new \DateTime($relativeTime . ' midnight');
@@ -131,17 +140,18 @@ class ProposalActivitiesResolver extends ActivitiesResolver
             foreach ($proposals as $proposal) {
                 $currentProposal = [];
                 $proposalId = $proposal->getId();
-
                 $proposalCommentYesterdays = $this->proposalRepository->countProposalCommentsCreatedBetween(
                     $yesterdayMidnight,
                     $yesterdayLasTime,
                     $proposalId
                 );
-                $proposalVotesInYesterday = $this->proposalRepository->countProposalVotesCreatedBetween(
-                    $yesterdayMidnight,
-                    $yesterdayLasTime,
-                    $proposalId
-                );
+                $proposalVotesInYesterday = $this->canDisplayProposalVotes($proposal)
+                    ? $this->proposalRepository->countProposalVotesCreatedBetween(
+                        $yesterdayMidnight,
+                        $yesterdayLasTime,
+                        $proposalId
+                    )
+                    : [['sVotes' => 0, 'cVotes' => 0]];
                 $proposalStepInYesterday = $this->proposalRepository->proposalStepChangedBetween(
                     $yesterdayMidnight,
                     $yesterdayLasTime,

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
-import { connect } from 'react-redux';
 import type { ProposalPageMainContent_proposal } from '~relay/ProposalPageMainContent_proposal.graphql';
 import ProposalPageFusionInformations from './ProposalPageFusionInformations';
 import ProposalPageDescription from './ProposalPageDescription';
@@ -14,14 +13,13 @@ import ProposalPageOfficialAnswer from './ProposalPageOfficialAnswer';
 import ProposalPageCustomSections from './ProposalPageCustomSections';
 import ProposalPageMainAside from './ProposalPageMainAside';
 import { bootstrapGrid } from '~/utils/sizes';
-import type { FeatureToggles, GlobalState } from '~/types';
 import ProposalTipsMeeeDonatorsAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeDonatorsAside';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
   +proposal: ?ProposalPageMainContent_proposal,
   goToBlog: () => void,
   isAnalysing: boolean,
-  features: FeatureToggles,
 |};
 
 const ProposalPageMainContentContainer: StyledComponent<
@@ -57,61 +55,58 @@ const DonatorContent: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-export const ProposalPageMainContent = ({ proposal, goToBlog, isAnalysing, features }: Props) => (
-  <ProposalPageMainContentContainer
-    usingTipsmeee={features.unstable__tipsmeee && proposal && proposal.tipsmeeeId}
-    id={proposal ? 'ProposalPageMainContent' : 'ProposalPageMainContentLoading'}>
-    <ProposalPageFusionInformations proposal={proposal} />
-    <ProposalPageOfficialAnswer proposal={proposal} />
-    {proposal && features.unstable__tipsmeee && (
-      <DonatorContent>
-        <ProposalTipsMeeeDonatorsAside proposal={proposal} />
-      </DonatorContent>
-    )}
-    <ProposalPageDescription proposal={proposal} />
-    <ProposalPageLocalisation proposal={proposal} />
-    {features.unstable__tipsmeee && <ProposalPageTopDonators proposal={proposal} />}
-    <ProposalPageCustomSections proposal={proposal} />
-    <ProposalPageMainAside proposal={proposal} display={isAnalysing} />
-    <ProposalPageNews proposal={proposal} goToBlog={goToBlog} />
-    <ProposalPageDiscussions proposal={proposal} />
-  </ProposalPageMainContentContainer>
-);
+export const ProposalPageMainContent = ({ proposal, goToBlog, isAnalysing }: Props) => {
+  const isTipsmeeeEnable = useFeatureFlag('unstable__tipsmeee');
 
-const mapStateToProps = (state: GlobalState) => ({
-  features: state.default.features,
+  return (
+    <ProposalPageMainContentContainer
+      usingTipsmeee={isTipsmeeeEnable && proposal && proposal.tipsmeeeId}
+      id={proposal ? 'ProposalPageMainContent' : 'ProposalPageMainContentLoading'}>
+      <ProposalPageFusionInformations proposal={proposal} />
+      <ProposalPageOfficialAnswer proposal={proposal} />
+      {proposal && isTipsmeeeEnable && (
+        <DonatorContent>
+          <ProposalTipsMeeeDonatorsAside proposal={proposal} />
+        </DonatorContent>
+      )}
+      <ProposalPageDescription proposal={proposal} />
+      <ProposalPageLocalisation proposal={proposal} />
+      {isTipsmeeeEnable && <ProposalPageTopDonators proposal={proposal} />}
+      <ProposalPageCustomSections proposal={proposal} />
+      {proposal && <ProposalPageMainAside proposal={proposal} display={isAnalysing} />}
+      <ProposalPageNews proposal={proposal} goToBlog={goToBlog} />
+      <ProposalPageDiscussions proposal={proposal} />
+    </ProposalPageMainContentContainer>
+  );
+};
+
+export default createFragmentContainer(ProposalPageMainContent, {
+  proposal: graphql`
+    fragment ProposalPageMainContent_proposal on Proposal
+    @argumentDefinitions(
+      isTipsMeeeEnabled: { type: "Boolean!" }
+      isAuthenticated: { type: "Boolean!" }
+    ) {
+      tipsmeeeId @include(if: $isTipsMeeeEnabled)
+      ...ProposalPageFusionInformations_proposal
+      ...ProposalPageTopDonators_proposal @include(if: $isTipsMeeeEnabled)
+      ...ProposalPageOfficialAnswer_proposal
+      ...ProposalPageDescription_proposal
+      ...ProposalPageLocalisation_proposal
+      ...ProposalPageCustomSections_proposal
+      ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
+      ...ProposalPageMainAside_proposal
+        @arguments(
+          stepId: $stepId
+          isTipsMeeeEnabled: $isTipsMeeeEnabled
+          isAuthenticated: $isAuthenticated
+        )
+      ...ProposalPageNews_proposal @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalPageDiscussions_proposal
+      ...ProposalVoteButtonWrapperFragment_proposal
+        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+      ...ProposalPageComments_proposal
+      ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
+    }
+  `,
 });
-
-export default createFragmentContainer(
-  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageMainContent),
-  {
-    proposal: graphql`
-      fragment ProposalPageMainContent_proposal on Proposal
-        @argumentDefinitions(
-          isTipsMeeeEnabled: { type: "Boolean!" }
-          isAuthenticated: { type: "Boolean!" }
-        ) {
-        tipsmeeeId @include(if: $isTipsMeeeEnabled)
-        ...ProposalPageFusionInformations_proposal
-        ...ProposalPageTopDonators_proposal @include(if: $isTipsMeeeEnabled)
-        ...ProposalPageOfficialAnswer_proposal
-        ...ProposalPageDescription_proposal
-        ...ProposalPageLocalisation_proposal
-        ...ProposalPageCustomSections_proposal
-        ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
-        ...ProposalPageMainAside_proposal
-          @arguments(
-            stepId: $stepId
-            isTipsMeeeEnabled: $isTipsMeeeEnabled
-            isAuthenticated: $isAuthenticated
-          )
-        ...ProposalPageNews_proposal @arguments(isAuthenticated: $isAuthenticated)
-        ...ProposalPageDiscussions_proposal
-        ...ProposalVoteButtonWrapperFragment_proposal
-          @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
-        ...ProposalPageComments_proposal
-        ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
-      }
-    `,
-  },
-);

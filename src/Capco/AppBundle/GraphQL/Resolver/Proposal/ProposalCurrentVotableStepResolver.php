@@ -9,7 +9,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLo
 
 class ProposalCurrentVotableStepResolver implements ResolverInterface
 {
-    private $dataLoader;
+    private ProposalCurrentVotableStepDataLoader $dataLoader;
 
     public function __construct(ProposalCurrentVotableStepDataLoader $dataLoader)
     {

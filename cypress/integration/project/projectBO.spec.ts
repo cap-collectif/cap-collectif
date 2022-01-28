@@ -4,7 +4,6 @@ describe('Project', () => {
   describe('Project BO', () => {
     beforeEach(() => {
       cy.task('db:restore')
-      cy.task('enable:feature', 'unstable__secret_ballot')
       cy.directLoginAs('admin')
     })
     it('should enable secret ballot on collect', () => {

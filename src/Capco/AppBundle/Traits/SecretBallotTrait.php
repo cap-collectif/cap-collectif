@@ -39,4 +39,14 @@ trait SecretBallotTrait
 
         return $this;
     }
+
+    public function canDisplayBallot(): bool
+    {
+        if (!$this->secretBallot) {
+            return true;
+        }
+        $currentDate = new \DateTime();
+
+        return $this->publishedVoteDate && $this->publishedVoteDate < $currentDate;
+    }
 }

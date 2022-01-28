@@ -1,88 +1,159 @@
 /* eslint-env jest */
 // @flow
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { graphql, useLazyLoadQuery } from 'react-relay';
+import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
+import ReactTestRenderer from 'react-test-renderer';
+import {
+  disableFeatureFlags,
+  enableFeatureFlags,
+  addsSupportForPortals,
+  clearSupportForPortals,
+  RelaySuspensFragmentTest,
+} from '~/testUtils';
+import type { ProposalPageTabsTestQuery } from '~relay/ProposalPageTabsTestQuery.graphql';
 import { ProposalPageTabs } from './ProposalPageTabs';
-import { features } from '~/redux/modules/default';
-import { $refType } from '~/mocks';
 
 describe('<ProposalPageTabs />', () => {
-  const proposal = {
-    $refType,
-    id: '1',
-    allFollowers: {
-      totalCount: 169,
-    },
-    currentVotableStep: null,
-    votableSteps: [],
-    news: {
-      totalCount: 1,
-      edges: [{ node: { id: 'news1', title: 'Titre' } }],
-    },
-    project: {
-      opinionCanBeFollowed: true,
-      type: {
-        title: 'global.consultation',
+  let environment;
+  let testComponentTree;
+  let TestProposalPageTabs;
+
+  const defaultMockResolvers = {
+    Proposal: () => ({
+      id: '1',
+      allFollowers: {
+        totalCount: 169,
       },
-    },
-    form: {
-      usingThemes: true,
-      usingCategories: true,
-      objectType: 'PROPOSAL',
-    },
-    tipsmeeeDonators: {
-      donatorsCount: 2,
-    },
+      news: {
+        totalCount: 1,
+        edges: [{ node: { id: 'news1', title: 'Titre' } }],
+      },
+      currentVotableStep: null,
+      project: {
+        opinionCanBeFollowed: true,
+        type: {
+          title: 'global.consultation',
+        },
+      },
+      tipsmeeeDonators: {
+        donatorsCount: 2,
+      },
+    }),
+    Step: () => ({
+      canDisplayBallot: true,
+    }),
   };
 
-  const props = {
-    votesCount: 5,
-    tabKey: 'content',
-    categories: [],
-    steps: [
-      {
-        title: 'title',
-        id: 'step1',
-      },
-    ],
-    step: {
-      id: 'stepid',
-      $refType,
-    },
-    features: {
-      ...features,
-      districts: true,
-      themes: true,
-      unstable__tipsmeee: false,
-    },
-    viewer: null,
-  };
+  const query = graphql`
+    query ProposalPageTabsTestQuery(
+      $proposalId: ID = "proposalId"
+      $stepId: ID = "stepId"
+      $isTipsMeeeEnabled: Boolean!
+    ) @relay_test_operation {
+      proposal: node(id: $proposalId) {
+        ...ProposalPageTabs_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)
+      }
+      step: node(id: $stepId) {
+        ...ProposalPageTabs_step
+      }
+    }
+  `;
+
+  afterEach(() => {
+    disableFeatureFlags();
+    clearSupportForPortals();
+  });
+
+  beforeEach(() => {
+    addsSupportForPortals();
+    environment = createMockEnvironment();
+    const TestRenderer = props => {
+      const data = useLazyLoadQuery<ProposalPageTabsTestQuery>(query, { isTipsMeeeEnabled: false });
+      if (!data.proposal || !data.step) return null;
+      return <ProposalPageTabs proposal={data.proposal} step={data.step} {...props} />;
+    };
+
+    TestProposalPageTabs = props => (
+      <RelaySuspensFragmentTest environment={environment}>
+        <TestRenderer {...props} v />
+      </RelaySuspensFragmentTest>
+    );
+
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, defaultMockResolvers),
+    );
+  });
 
   it('should render Tabs with correct DOM structure', () => {
-    const wrapper = shallow(<ProposalPageTabs proposal={proposal} {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    enableFeatureFlags(['districts']);
+    enableFeatureFlags(['themes']);
+    testComponentTree = ReactTestRenderer.create(
+      <TestProposalPageTabs votesCount={5} tabKey="content" />,
+    );
+    expect(testComponentTree).toMatchSnapshot();
   });
 
   it('should render Tabs with tipsmeee enable', () => {
-    const wrapper = shallow(
-      <ProposalPageTabs
-        proposal={proposal}
-        {...props}
-        features={{ ...features, districts: true, themes: true, unstable__tipsmeee: true }}
-      />,
+    enableFeatureFlags(['districts']);
+    enableFeatureFlags(['themes']);
+    enableFeatureFlags(['unstable__tipsmeee']);
+
+    testComponentTree = ReactTestRenderer.create(
+      <TestProposalPageTabs votesCount={5} tabKey="content" />,
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(testComponentTree).toMatchSnapshot();
   });
 
   it('should render without blog tab', () => {
-    const proposalWithoutBlogTab = {
-      ...proposal,
-      news: {
-        totalCount: 0,
-        edges: [],
-      },
-    };
-    const wrapper = shallow(<ProposalPageTabs proposal={proposalWithoutBlogTab} {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, {
+        ...defaultMockResolvers,
+        Proposal: () => ({
+          id: '1',
+          allFollowers: {
+            totalCount: 169,
+          },
+          currentVotableStep: null,
+          votableSteps: [],
+          news: {
+            totalCount: 0,
+            edges: [],
+          },
+          project: {
+            opinionCanBeFollowed: true,
+            type: {
+              title: 'global.consultation',
+            },
+          },
+          form: {
+            usingThemes: true,
+            usingCategories: true,
+            objectType: 'PROPOSAL',
+          },
+          tipsmeeeDonators: {
+            donatorsCount: 2,
+          },
+        }),
+      }),
+    );
+    testComponentTree = ReactTestRenderer.create(
+      <TestProposalPageTabs votesCount={5} tabKey="content" />,
+    );
+    expect(testComponentTree).toMatchSnapshot();
+  });
+  it('should render without vote tab', () => {
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, {
+        ...defaultMockResolvers,
+        Step: () => ({
+          canDisplayBallot: false,
+        }),
+      }),
+    );
+    testComponentTree = ReactTestRenderer.create(
+      <TestProposalPageTabs votesCount={5} tabKey="content" />,
+    );
+    expect(testComponentTree).toMatchSnapshot();
   });
 });

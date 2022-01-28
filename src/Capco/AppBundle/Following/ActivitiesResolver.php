@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Following;
 
-use Capco\AppBundle\Following\ActivitiesResolverInterface;
 use Capco\UserBundle\Entity\User;
 
 abstract class ActivitiesResolver implements ActivitiesResolverInterface
@@ -22,12 +21,11 @@ abstract class ActivitiesResolver implements ActivitiesResolverInterface
     );
 
     /**
-     * Count the number of activities
+     * Count the number of activities.
      */
     protected function countActivities(array $activities): int
     {
         $nbActivities = \count($this::ACTIVITIES);
-
         foreach ($this::ACTIVITIES as $activity) {
             if (!$activities[$activity]) {
                 --$nbActivities;
@@ -39,6 +37,6 @@ abstract class ActivitiesResolver implements ActivitiesResolverInterface
 
     protected function isUserEmailValid(User $user): bool
     {
-        return filter_var($user->getEmailCanonical(), FILTER_VALIDATE_EMAIL);
+        return filter_var($user->getEmailCanonical(), \FILTER_VALIDATE_EMAIL);
     }
 }

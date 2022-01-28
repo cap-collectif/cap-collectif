@@ -283,10 +283,6 @@ Object {
       "enabled": false,
       "type": "unstable__paper_vote",
     },
-    Object {
-      "enabled": false,
-      "type": "unstable__secret_ballot",
-    },
   ],
 }
 `;

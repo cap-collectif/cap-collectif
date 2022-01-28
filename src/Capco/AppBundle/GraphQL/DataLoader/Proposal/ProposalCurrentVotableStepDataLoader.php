@@ -15,8 +15,8 @@ use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver;
 
 class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
 {
-    private $resolver;
-    private $stepRepo;
+    private ProposalVotableStepsResolver $resolver;
+    private AbstractStepRepository $stepRepo;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,

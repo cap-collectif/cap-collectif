@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalPageAside /> should render correctly 1`] = `
+exports[`<ProposalPageAside /> should not render correctly with votableStep 1`] = `
 <ProposalPageAside__Aside
-  hasVoteBar={false}
+  hasVoteBar={true}
   id="ProposalPageAside"
   isAnalysing={false}
   isFixedToBottom={false}
@@ -18,6 +18,7 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": false,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -47,6 +48,7 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": false,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -65,13 +67,111 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
         }
       }
     />
-    <Relay(injectIntl(ProposalPageVoteThreshold))
+    <ProposalSocialNetworkLinks
       proposal={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": false,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+            "usingTipsmeee": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "tipsmeeeId": null,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+  </div>
+</ProposalPageAside__Aside>
+`;
+
+exports[`<ProposalPageAside /> should render correctly 1`] = `
+<ProposalPageAside__Aside
+  hasVoteBar={false}
+  id="ProposalPageAside"
+  isAnalysing={false}
+  isFixedToBottom={false}
+  isFixedToTop={false}
+  isMovingUp={false}
+  isTipsmeee={false}
+>
+  <div>
+    <Relay(ProposalPageMetadata)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+            "usingTipsmeee": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "tipsmeeeId": null,
+          "viewerDidAuthor": true,
+        }
+      }
+      showCategories={true}
+      showDistricts={false}
+      showNullEstimation={false}
+      showThemes={false}
+    />
+    <Relay(ProposalPageAdvancement)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+            "usingTipsmeee": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "tipsmeeeId": null,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+    <Relay(ProposalPageVoteThreshold)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -93,6 +193,7 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
       step={
         Object {
           "$fragmentRefs": null,
+          "canDisplayBallot": true,
           "voteType": "SIMPLE",
           "votesRanking": true,
         }
@@ -105,6 +206,7 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -145,6 +247,7 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -174,6 +277,7 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -192,13 +296,14 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
         }
       }
     />
-    <Relay(injectIntl(ProposalPageVoteThreshold))
+    <Relay(ProposalPageVoteThreshold)
       proposal={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -220,6 +325,7 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
       step={
         Object {
           "$fragmentRefs": null,
+          "canDisplayBallot": true,
           "voteType": "SIMPLE",
           "votesRanking": true,
         }
@@ -232,6 +338,7 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -272,6 +379,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -301,6 +409,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -326,6 +435,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -344,13 +454,14 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
         }
       }
     />
-    <Relay(injectIntl(ProposalPageVoteThreshold))
+    <Relay(ProposalPageVoteThreshold)
       proposal={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -372,6 +483,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
       step={
         Object {
           "$fragmentRefs": null,
+          "canDisplayBallot": true,
           "voteType": "SIMPLE",
           "votesRanking": true,
         }
@@ -384,6 +496,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -408,7 +521,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
 
 exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
 <ProposalPageAside__Aside
-  hasVoteBar={true}
+  hasVoteBar={false}
   id="ProposalPageAside"
   isAnalysing={false}
   isFixedToBottom={false}
@@ -424,6 +537,7 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -453,6 +567,7 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -471,13 +586,14 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
         }
       }
     />
-    <Relay(injectIntl(ProposalPageVoteThreshold))
+    <Relay(ProposalPageVoteThreshold)
       proposal={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },
@@ -499,6 +615,7 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
       step={
         Object {
           "$fragmentRefs": null,
+          "canDisplayBallot": true,
           "voteType": "SIMPLE",
           "votesRanking": true,
         }
@@ -511,6 +628,7 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
           "$refType": null,
           "currentVotableStep": Object {
             "$fragmentRefs": null,
+            "canDisplayBallot": true,
             "voteType": "SIMPLE",
             "votesRanking": true,
           },

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageMainContent } from './ProposalPageMainContent';
 import { $refType, $fragmentRefs } from '~/mocks';
-import { features } from '~/redux/modules/default';
+import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils';
 
 describe('<ProposalPageMainContent />', () => {
   const proposal = {
@@ -13,43 +13,29 @@ describe('<ProposalPageMainContent />', () => {
     tipsmeeeId: null,
   };
 
-  const propsFeatures = {
-    ...features,
-    unstable__tipsmeee: false,
-  };
-  const featuresWithTipsmeee = {
-    ...features,
-    unstable__tipsmeee: true,
-  };
+  afterEach(() => {
+    disableFeatureFlags();
+  });
 
   it('should render correctly', () => {
     const wrapper = shallow(
-      <ProposalPageMainContent
-        proposal={proposal}
-        features={propsFeatures}
-        goToBlog={jest.fn()}
-        isAnalysing={false}
-      />,
+      <ProposalPageMainContent proposal={proposal} goToBlog={jest.fn()} isAnalysing={false} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly whith analysis', () => {
     const wrapper = shallow(
-      <ProposalPageMainContent
-        proposal={proposal}
-        features={propsFeatures}
-        goToBlog={jest.fn()}
-        isAnalysing
-      />,
+      <ProposalPageMainContent proposal={proposal} goToBlog={jest.fn()} isAnalysing />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with tipsmeeee', () => {
+    enableFeatureFlags(['unstable__tipsmeee']);
+
     const wrapper = shallow(
       <ProposalPageMainContent
         proposal={{ ...proposal, tipsmeeeId: 'anId' }}
-        features={featuresWithTipsmeee}
         goToBlog={jest.fn()}
         isAnalysing={false}
       />,

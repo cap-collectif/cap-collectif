@@ -180,6 +180,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "canDisplayBallot": true,
           "id": "step1",
           "project": Object {
             "opinionCanBeFollowed": true,
@@ -276,6 +277,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "canDisplayBallot": true,
           "id": "step1",
           "project": Object {
             "opinionCanBeFollowed": true,

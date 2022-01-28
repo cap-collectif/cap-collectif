@@ -20,3 +20,13 @@ Scenario: "Checking if blog articles, related to a proposal followed by a user, 
   Then email should match snapshot 'notify_followers<user@test.com>_blog_post.html'
   And I open mail to "admin@test.com"
   Then email should match snapshot 'notify_followers<admin@test.com>_blog_post.html'
+
+@parallel-scenario @rabbitmq @snapshot-email
+Scenario: "Checking if blog articles, related to a proposal followed by a user, publications are notified to the latter"
+  Given I run "capco:follower-notifier --time=2022-01-03"
+  Then the command exit code should be 0
+  And 2 mail should be sent
+  And I open mail to "user@test.com"
+  Then email should match snapshot 'notify_followers<user@test.com>_idf_bp3.html'
+  And I open mail to "maxime.auriau@cap-collectif.com"
+  Then email should match snapshot 'notify_followers<maxime.auriau@cap-collectif.com>_idf_bp3.html'

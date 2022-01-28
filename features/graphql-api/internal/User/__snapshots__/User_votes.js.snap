@@ -337,6 +337,18 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "id": "1063",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1064",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
             "id": "T3BpbmlvblZvdGU6OTE=",
             "isAccounted": true,
           },
@@ -474,7 +486,7 @@ Object {
           },
         },
       ],
-      "totalCount": 23,
+      "totalCount": 25,
     },
   },
 }
@@ -485,6 +497,18 @@ Object {
   "node": Object {
     "votes": Object {
       "edges": Array [
+        Object {
+          "node": Object {
+            "id": "1063",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1064",
+            "isAccounted": true,
+          },
+        },
         Object {
           "node": Object {
             "id": "T3BpbmlvblZvdGU6OTE=",
@@ -630,7 +654,7 @@ Object {
           },
         },
       ],
-      "totalCount": 24,
+      "totalCount": 26,
     },
   },
 }

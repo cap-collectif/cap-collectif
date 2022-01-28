@@ -10,11 +10,11 @@ import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
 import { VoteFieldContainer } from './ProjectAdminStepForm.style';
 import type { Dispatch } from '~/types';
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import Flex from '~ui/Primitives/Layout/Flex';
-import Text from '~ui/Primitives/Text';
 import { styleGuideColors } from '~/utils/colors';
 import AppBox from '~ui/Primitives/AppBox';
+import Text from '~ui/Primitives/Text';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
   ...ReduxFormFieldArrayProps,
@@ -55,7 +55,6 @@ export function StepVotesFields({
   const [votesLimitState, setVotesLimitState] = useState(options.limit || 3);
   const [votesRankingState, setVotesRankingState] = useState(options.ranking || false);
   const intl = useIntl();
-  const isFeatureSecretBallotEnabled = useFeatureFlag('unstable__secret_ballot');
   const useVoteMin = useFeatureFlag('votes_min');
 
   return (
@@ -254,8 +253,6 @@ export function StepVotesFields({
                   </>
                 </>
               )}
-              {isFeatureSecretBallotEnabled && (
-                <>
                   <FieldContainer toggled={isSecretBallotEnabled}>
                     <Field
                       component={toggle}
@@ -278,8 +275,6 @@ export function StepVotesFields({
                       addonAfter={<i className="cap-calendar-2" />}
                     />
                   )}
-                </>
-              )}
             </AppBox>
             <AppBox maxWidth="50%">
               <Field
