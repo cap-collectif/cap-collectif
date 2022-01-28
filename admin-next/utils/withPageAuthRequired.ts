@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps } from 'next';
 import getSessionCookieFromReq from './request-helper';
 import getSessionFromSessionCookie from './session-resolver';
 import getViewerJsonFromRedisSession from './session-decoder';
@@ -32,6 +32,10 @@ const redirectOnError = (res: NextApiResponse, devErrorMessage: string) => {
     // In production we redirect to the frontend homepage.
     res.writeHead(302, { Location: '/' });
     res.end();
+
+    // We redirect to the frontend homepage but
+    // `GetServerSideProps` must return an object, so let's return an empty object.
+    return { props: {} };
 };
 
 const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {

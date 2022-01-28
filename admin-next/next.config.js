@@ -8,7 +8,8 @@ const nextConfig = {
   webpack5: false,
   // TODO enable this
   reactStrictMode: false,
-  basePath: process.env.SYMFONY_ENV === 'prod' ? '/admin-next' : '',
+  basePath:
+    process.env.SYMFONY_ENV === 'prod' || process.env.SYMFONY_ENV === 'test' ? '/admin-next' : '',
   env: {
     PRODUCTION: process.env.SYMFONY_ENV === 'prod',
   },

@@ -7,6 +7,7 @@
     "dev": "next dev -H admin-next.capco.dev -p 3000",
     "build": "next build",
     "start": "next start -p ${ADMIN_NEXT_PORT:=3000}",
+    "local-build-and-serve": "SYMFONY_ENV=test next build && SYMFONY_ENV=test next start -p ${ADMIN_NEXT_PORT:=3000}",
     "lint": "next lint",
     "prettier": "prettier --write {pages,utils,.}/*.{ts,tsx,js}",
     "test": "jest",

@@ -1,8 +1,22 @@
 #!/bin/bash
 
-echo "Starting nodejs..."
+echo "[$(date -u)][NODEJS] Started!"
 
-rm /var/node_ssr.sock || true
-cd /var
+cd /var/www/admin-next
 
-exec node /var/www/nodejs/server.js -user capco
+# Make sure to run the following command are already executed 
+# in the admin-next directory :
+# - yarn install
+# - yarn relay
+
+
+if [[ -n "$CI" ]]; then
+    # Launch `/admin-next` only for cypress tests
+    if [[ "$CIRCLE_JOB" == *"cypress"* ]]; then
+        exec pm2 start --no-daemon yarn --name "admin-next" --interpreter bash -- local-build-and-serve
+    else
+        exec sleep 10
+    fi
+else 
+    exec pm2 start --no-daemon yarn --name "admin-next" --interpreter bash -- local-build-and-serve
+fi
