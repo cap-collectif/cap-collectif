@@ -9,8 +9,6 @@ const InternalQuery = /* GraphQL */ `
           name
           enabled
           profileUrl
-          buttonColor
-          labelColor
           ... on Oauth2SSOConfiguration {
             clientId
             secret

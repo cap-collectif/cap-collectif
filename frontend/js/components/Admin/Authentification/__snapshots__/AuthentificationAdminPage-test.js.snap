@@ -241,20 +241,6 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                               "name": "profileUrl",
                               "storageKey": null,
                             },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "buttonColor",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "labelColor",
-                              "storageKey": null,
-                            },
                           ],
                           "type": "Oauth2SSOConfiguration",
                         },
@@ -414,7 +400,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "0938d30934d6ecdda166909cb47fe3d4",
+          "cacheID": "b386bf58ff96b3557074c0baeaee441b",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -516,8 +502,6 @@ fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
   logoutUrl
   redirectUri
   profileUrl
-  buttonColor
-  labelColor
   __typename
 }
 
@@ -797,20 +781,6 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
                               "name": "profileUrl",
                               "storageKey": null,
                             },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "buttonColor",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "labelColor",
-                              "storageKey": null,
-                            },
                           ],
                           "type": "Oauth2SSOConfiguration",
                         },
@@ -970,7 +940,7 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "0938d30934d6ecdda166909cb47fe3d4",
+          "cacheID": "b386bf58ff96b3557074c0baeaee441b",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -1072,8 +1042,6 @@ fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
   logoutUrl
   redirectUri
   profileUrl
-  buttonColor
-  labelColor
   __typename
 }
 

@@ -3175,12 +3175,6 @@ input CreateOauth2SSOConfigurationInput {
 
   """The name of your SSO provider."""
   name: String!
-
-  """Color in hexadecimal of SSO button."""
-  buttonColor: Color!
-
-  """Color in hexadecimal of label SSO button."""
-  labelColor: Color!
   clientMutationId: String
 }
 
@@ -14624,12 +14618,6 @@ input UpdateOauth2SSOConfigurationInput {
 
   """The name of your SSO provider."""
   name: String!
-
-  """Color in hexadecimal of SSO button."""
-  buttonColor: Color!
-
-  """Color in hexadecimal of label SSO button."""
-  labelColor: Color!
 
   """The ID of oauth2 configuration that needs to be updated."""
   id: ID!

@@ -24,8 +24,6 @@ type FormValues = {|
   logoutUrl: ?Uri,
   redirectUri: Uri,
   profileUrl: ?Uri,
-  buttonColor: ?string,
-  labelColor: ?string,
 |};
 
 type Props = {|
@@ -50,8 +48,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     userInfoUrl,
     logoutUrl,
     profileUrl,
-    buttonColor,
-    labelColor,
   } = values;
 
   const { onClose } = props;
@@ -66,8 +62,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     userInfoUrl,
     accessTokenUrl,
     authorizationUrl,
-    buttonColor,
-    labelColor,
   };
 
   if (id === undefined || id === null) {
@@ -124,8 +118,6 @@ const validate = ({
   userInfoUrl,
   authorizationUrl,
   accessTokenUrl,
-  buttonColor,
-  labelColor,
 }: FormValues) => {
   const errors = {};
 
@@ -145,14 +137,6 @@ const validate = ({
     errors.clientId = 'global.required';
   } else if (clientId.length < 2) {
     errors.clientId = 'two-characters-minimum-required';
-  }
-
-  if (!buttonColor) {
-    errors.buttonColor = 'global.required';
-  }
-
-  if (!labelColor) {
-    errors.labelColor = 'global.required';
   }
 
   errors.logoutUrl = validateUrl(logoutUrl);
@@ -175,8 +159,6 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
     userInfoUrl: null,
     accessTokenUrl: null,
     authorizationUrl: null,
-    labelColor: null,
-    buttonColor: null,
   };
 
   render() {
@@ -215,22 +197,6 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               required
               component={component}
               label={<FormattedMessage id="global.name" />}
-            />
-            <Field
-              id={`${formName}_buttonColor`}
-              name="buttonColor"
-              type="color-picker"
-              required
-              component={component}
-              label={<FormattedMessage id="color.btn.bg" />}
-            />
-            <Field
-              id={`${formName}_labelColor`}
-              name="color-picker"
-              type="text"
-              required
-              component={component}
-              label={<FormattedMessage id="label-color" />}
             />
             <h4>Configuration</h4>
             <Field
@@ -321,11 +287,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: GlobalState, props: Props) => ({
-  initialValues: {
-    ...props,
-    buttonColor: props.buttonColor || '#7498C0',
-    labelColor: props.labelColor || '#FFFFFF',
-  },
+  initialValues: props,
 });
 
 const form = reduxForm({

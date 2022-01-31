@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { SystemStyleObject } from '@styled-system/css';
-import { Controller, ControllerRenderProps, FieldValues, Control } from 'react-hook-form';
+import {
+    Controller,
+    ControllerRenderProps,
+    FieldValues,
+    Control,
+    RegisterOptions,
+} from 'react-hook-form';
 import {
     TextArea,
     Input,
@@ -10,16 +16,17 @@ import {
     FormLabel,
     FormErrorMessage,
     CapInputSize,
+    Switch,
+    Checkbox,
 } from '@cap-collectif/ui';
-import { isEmail } from '~/services/Validator';
+import { REGEX_EMAIL } from '~/services/Validator';
 import { Select, SelectProps } from './Select';
-import { Checkbox, CheckboxProps } from './Checkbox';
+import { MultipleCheckbox, MultipleCheckboxProps } from './MultipleCheckbox';
 
-type FieldType = 'text' | 'textarea' | 'email' | 'select' | 'checkbox';
+type FieldType = 'text' | 'textarea' | 'email' | 'select' | 'checkbox' | 'password' | 'switch';
 
 export interface FieldInputProps
-    extends Omit<SelectProps, 'value' | 'onChange'>,
-        Omit<CheckboxProps, 'value' | 'onChange'> {
+    extends Omit<SelectProps & MultipleCheckboxProps, 'value' | 'onChange'> {
     control: Control<any>;
     name: string;
     id: string;
@@ -34,6 +41,10 @@ export interface FieldInputProps
     accept?: string | string[];
     guideline?: string;
     style?: SystemStyleObject;
+    validate?: RegisterOptions['validate'];
+    pattern?: RegisterOptions['pattern'];
+    setValueAs?: RegisterOptions['setValueAs'];
+    labelOnElement?: string;
 }
 
 export const FieldInput: React.FC<FieldInputProps> = ({
@@ -41,6 +52,10 @@ export const FieldInput: React.FC<FieldInputProps> = ({
     guideline,
     name,
     control,
+    pattern,
+    validate,
+    setValueAs,
+    labelOnElement,
     ...props
 }) => {
     const intl = useIntl();
@@ -57,13 +72,17 @@ export const FieldInput: React.FC<FieldInputProps> = ({
             noOptionsMessage,
             loadingMessage,
             ...rest
-        }: Omit<FieldInputProps, 'label' | 'guideline' | 'name' | 'control'>,
+        }: Omit<FieldInputProps, 'label' | 'guideline' | 'name' | 'control' | 'pattern'>,
         field: ControllerRenderProps<FieldValues, string>,
     ) => {
-        if (type === 'text' || type === 'email') return <Input {...rest} {...field} />;
-        if (type === 'checkbox') return <Checkbox {...rest} {...field} choices={choices} />;
-        if (type === 'textarea') return <TextArea {...rest} {...field} />;
-        if (type === 'select')
+        if (type === 'text' || type === 'email' || type === 'password') {
+            return <Input {...rest} {...field} />;
+        } else if (type === 'checkbox') {
+            if (choices) return <MultipleCheckbox {...rest} {...field} choices={choices} />;
+            return <Checkbox {...rest} {...field} checked={field.value} label={labelOnElement} />;
+        } else if (type === 'textarea') return <TextArea {...rest} {...field} />;
+        else if (type === 'switch') return <Switch {...rest} {...field} checked={field.value} />;
+        else if (type === 'select')
             return (
                 <Select
                     options={options}
@@ -78,12 +97,6 @@ export const FieldInput: React.FC<FieldInputProps> = ({
 
     const required = props.required ? intl.formatMessage({ id: 'fill-field' }) : undefined;
 
-    const validateEmail =
-        props.type === 'email'
-            ? (value: string) =>
-                  isEmail(value) || intl.formatMessage({ id: 'global.constraints.email.invalid' })
-            : undefined;
-
     const minLength = props.minLength
         ? {
               value: props.minLength,
@@ -91,11 +104,20 @@ export const FieldInput: React.FC<FieldInputProps> = ({
           }
         : undefined;
 
-    const rules = {
+    const rules: RegisterOptions = {
         required,
-        validate: validateEmail,
+        validate,
         minLength,
+        pattern:
+            props.type === 'email'
+                ? {
+                      value: REGEX_EMAIL,
+                      message: intl.formatMessage({ id: 'global.constraints.email.invalid' }),
+                  }
+                : pattern,
+        setValueAs,
     };
+
     return (
         <Controller
             name={name}
@@ -105,6 +127,7 @@ export const FieldInput: React.FC<FieldInputProps> = ({
                 const isInvalid = invalid && touchedFields[name];
                 return (
                     <FormControl
+                        width="auto"
                         variantSize={CapInputSize.Sm}
                         isRequired={props.required}
                         isInvalid={isInvalid}

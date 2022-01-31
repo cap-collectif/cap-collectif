@@ -20,8 +20,6 @@ Scenario: Admin wants to create an Oauth2 SSO configuration
           userInfoUrl
           logoutUrl
           profileUrl
-          buttonColor
-          labelColor
         }
       }
     }",
@@ -35,9 +33,7 @@ Scenario: Admin wants to create an Oauth2 SSO configuration
         "accessTokenUrl": "https://test.dev/token",
         "userInfoUrl": "https://test.dev/userinfo",
         "logoutUrl": "https://test.dev/logout",
-        "profileUrl": "https://test.dev/account",
-        "buttonColor": "#CDCDCD",
-        "labelColor": "#000000"
+        "profileUrl": "https://test.dev/account"
       }
     }
   }
@@ -57,9 +53,7 @@ Scenario: Admin wants to create an Oauth2 SSO configuration
           "accessTokenUrl": "https://test.dev/token",
           "userInfoUrl": "https://test.dev/userinfo",
           "logoutUrl": "https://test.dev/logout",
-          "profileUrl": "https://test.dev/account",
-          "buttonColor": "#CDCDCD",
-          "labelColor": "#000000"
+          "profileUrl": "https://test.dev/account"
          }
        }
      }
