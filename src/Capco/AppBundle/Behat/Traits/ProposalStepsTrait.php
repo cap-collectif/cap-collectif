@@ -961,6 +961,7 @@ trait ProposalStepsTrait
         $this->waitAndThrowOnFailure(1000, "$('#confirm-proposal-vote').length > 0");
         $this->buttonShouldNotBeDisabled('global.save');
         $this->iClickOnButton('#confirm-proposal-vote');
+        $this->iWait(3);
     }
 
     /**

@@ -133,7 +133,6 @@ Scenario: Logged in as user who doesn't full fill requirements and want to vote.
   And I confirm my vote
   And I cancel my vote for the first proposal
   # We vote again
-  And I wait 2 seconds
   And I vote for the first proposal
   And I should see "requirements filled"
   And the button "global.save" should not be disabled

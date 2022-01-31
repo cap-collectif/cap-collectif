@@ -154,7 +154,7 @@ trait ProjectStepsTrait
         $this->iWait(1);
         $this->iWaitElementToAppearOnPage('.proposal__button__vote');
         $this->navigationContext->getPage('collect page')->clickVoteProposalButton();
-        $this->iWait(2);
+        $this->iWait(3);
     }
 
     /**
