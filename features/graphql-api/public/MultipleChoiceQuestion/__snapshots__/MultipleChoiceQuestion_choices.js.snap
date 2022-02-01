@@ -154,25 +154,3 @@ Object {
   },
 }
 `;
-
-exports[`MultipleChoiceQuestion.choices array fetches a question's choices that match the given term and paginate the results 1`] = `
-Array [
-  Object {
-    "node": Object {
-      "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0NQ==",
-      "title": "Je suis le titre pour tester la recherche sur le mot: skurt #45",
-    },
-  },
-]
-`;
-
-exports[`MultipleChoiceQuestion.choices array fetches a question's choices that match the given term and paginate the results 2`] = `
-Array [
-  Object {
-    "node": Object {
-      "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2U0NA==",
-      "title": "Je suis le titre pour tester la recherche sur le mot: skuu #44",
-    },
-  },
-]
-`;

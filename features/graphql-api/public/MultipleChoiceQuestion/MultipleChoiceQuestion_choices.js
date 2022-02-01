@@ -74,14 +74,21 @@ describe('MultipleChoiceQuestion.choices array', () => {
     );
     const endCursor = response1.question.choices.pageInfo.endCursor;
     expect(response1.question.choices.pageInfo.hasNextPage).toBe(true);
-    expect(response1.question.choices.edges).toMatchSnapshot();
+    expect(response1.question.choices.edges.length).toBe(1);
+    expect(response1.question.choices.edges[0].node.title).toMatch(/sku/);
+
     const response2 = await graphql(
       PaginatedMultipleChoiceQuestionChoicesQuery,
       { ...variables, cursor: endCursor },
       'internal',
     );
     expect(response2.question.choices.pageInfo.hasNextPage).toBe(false);
-    expect(response2.question.choices.edges).toMatchSnapshot();
+    expect(response2.question.choices.edges.length).toBe(1);
+    expect(response2.question.choices.edges[0].node.title).toMatch(/sku/);
+
+    expect(response1.question.choices.edges[0].node.id).not.toBe(
+      response2.question.choices.edges[0].node.id,
+    );
   });
 
   it("fetches a question's choices and paginate the results", async () => {
