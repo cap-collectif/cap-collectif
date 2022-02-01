@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Traits\User;
 
 trait UserSSOParisTrait
 {
-    protected ?string $parisId;
+    protected ?string $parisId = null;
 
     public function setParisId(string $parisId): self
     {
