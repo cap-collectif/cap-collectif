@@ -258,9 +258,13 @@ export const ProposalVoteModal = ({
                 <Label bsStyle="primary">{intl.formatMessage({ id: 'filled' })}</Label>
               )}
             </Panel.Heading>
-            {!step.requirements?.viewerMeetsTheRequirements && step.requirements?.reason && (
+            {!step.requirements?.viewerMeetsTheRequirements && (
               <Panel.Body>
-                <WYSIWYGRender value={step.requirements.reason} />
+                {
+                  step.requirements?.reason && (
+                    <WYSIWYGRender value={step.requirements.reason} />
+                  )
+                }
                 <RequirementsForm step={step} />
               </Panel.Body>
             )}
