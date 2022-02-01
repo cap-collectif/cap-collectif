@@ -11,7 +11,7 @@ const query = graphql`
     project: node(id: $id) {
       ... on Project {
         visibility
-        adminUrl
+        adminAlphaUrl
       }
     }
   }
@@ -49,7 +49,7 @@ export const rendering = ({
             <a
               id="action_show"
               className="ml-15 btn btn-sm btn-warning"
-              href={project.adminUrl != null ? project.adminUrl : ''}
+              href={project.adminAlphaUrl != null ? project.adminAlphaUrl : ''}
               name="action_edit">
               <FormattedMessage id="action_edit" />
               <i className="cap cap-external-link ml-5" />
