@@ -54,10 +54,10 @@ export const MultipleCheckbox: React.FC<MultipleCheckboxProps> = ({
                         key={choiceKey}
                         name={fieldName}
                         id={`${id}_${choiceKey}`}
-                        label={choice.label}
                         checked={finalValue?.includes(choiceValue)}
-                        onChange={event => handleChange(event, choiceValue)}
-                    />
+                        onChange={event => handleChange(event, choiceValue)}>
+                        {choice.label}
+                    </CapCheckbox>
                 );
             })}
         </CheckboxGroup>

@@ -79,7 +79,11 @@ export const FieldInput: React.FC<FieldInputProps> = ({
             return <Input {...rest} {...field} />;
         } else if (type === 'checkbox') {
             if (choices) return <MultipleCheckbox {...rest} {...field} choices={choices} />;
-            return <Checkbox {...rest} {...field} checked={field.value} label={labelOnElement} />;
+            return (
+                <Checkbox {...rest} {...field} checked={field.value}>
+                    {labelOnElement}
+                </Checkbox>
+            );
         } else if (type === 'textarea') return <TextArea {...rest} {...field} />;
         else if (type === 'switch') return <Switch {...rest} {...field} checked={field.value} />;
         else if (type === 'select')

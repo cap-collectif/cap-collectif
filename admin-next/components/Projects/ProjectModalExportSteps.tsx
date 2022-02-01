@@ -146,7 +146,7 @@ const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({
                                 name="export_list"
                                 type="checkbox"
                                 control={control}
-                                label={intl.formatMessage({
+                                labelOnElement={intl.formatMessage({
                                     id: 'admin.project.list.export.title',
                                 })}
                                 choices={exportChoices}
