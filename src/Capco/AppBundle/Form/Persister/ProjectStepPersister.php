@@ -75,19 +75,10 @@ class ProjectStepPersister
             list($type, $entity) = $this->getFormEntity($step);
             $form = $this->formFactory->create($type, $entity);
             unset($step['id']);
-            if (!$entity instanceof CollectStep && !$entity instanceof SelectionStep) {
-                unset($step['votesMin']);
-                if (isset($step['allowAuthorsToAddNews'])) {
-                    unset($step['allowAuthorsToAddNews']);
-                }
-            }
-            if (
-                'collect' === $step['type'] ||
-                ('selection' === $step['type'] && !isset($step['mainView']))
-            ) {
-                $step['mainView'] = $project->getFirstCollectStep()
-                    ? $project->getFirstCollectStep()->getMainView()
-                    : 'grid';
+            if ('collect' === $step['type'] || 'selection' === $step['type']) {
+                self::setDefaultMainViewIfNeeded($step, $project);
+            } else {
+                unset($step['votesMin'], $step['allowAuthorsToAddNews']);
             }
             $form->submit($step);
             if (!$form->isValid()) {
@@ -190,5 +181,14 @@ class ProjectStepPersister
     private static function isEditMode(array $stepData): bool
     {
         return isset($stepData['id']) && null !== $stepData['id'] && '' !== $stepData['id'];
+    }
+
+    private static function setDefaultMainViewIfNeeded(array &$stepData, Project $project): void
+    {
+        if (!isset($stepData['mainView'])) {
+            $stepData['mainView'] = $project->getFirstCollectStep()
+                ? $project->getFirstCollectStep()->getMainView()
+                : 'grid';
+        }
     }
 }
