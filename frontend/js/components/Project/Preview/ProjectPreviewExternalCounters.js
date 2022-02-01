@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
-import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
+import ProjectRestrictedAccessFragmentLegacy from '../Page/ProjectRestrictedAccessFragmentLegacy';
 import type { ProjectPreviewExternalCounters_project } from '~relay/ProjectPreviewExternalCounters_project.graphql';
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
@@ -68,7 +68,7 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
               />
             )}
 
-          <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
+          <ProjectRestrictedAccessFragmentLegacy project={project} icon="cap-lock-2-1" />
         </TagsList>
       </>
     );
@@ -84,7 +84,7 @@ export default createFragmentContainer(ProjectPreviewExternalCounters, {
       externalContributionsCount
       externalVotesCount
       archived
-      ...ProjectRestrictedAccessFragment_project
+      ...ProjectRestrictedAccessFragmentLegacy_project
     }
   `,
 });

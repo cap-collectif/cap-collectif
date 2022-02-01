@@ -3,10 +3,9 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { reset } from 'redux-form';
 import { useDispatch } from 'react-redux';
-import { Flex, Text, Button, ButtonGroup, Modal } from '@cap-collectif/ui';
+import { Text, Button, ButtonGroup, Modal, Flex } from '@cap-collectif/ui';
 import { formName } from '../Form/ProposalForm';
 import type { Dispatch } from '~/types';
-import colors from '~/styles/modules/colors';
 
 type Props = {|
   +onClose: () => void,
@@ -18,12 +17,12 @@ const ProposalLeaveModal = ({ onClose, resetModalState }: Props): React.Node => 
   const dispatch: Dispatch = useDispatch();
   return (
     <>
-      <Modal.Body height="unset">
+      <Modal.Body height="unset" align="center">
         <Flex direction="column" alignItems="center" my={[0, '20%']}>
           <Text textAlign="center" fontSize={33} mb={8}>
-            <span className="d-b emoji-container" role="img" aria-label="Door">
-              🚪
-            </span>
+          <span className="d-b emoji-container" role="img" aria-label="Door">
+            🚪
+          </span>
           </Text>
           <Text textAlign="center" fontSize={[20, 33]} fontWeight={600} mb={2}>
             {intl.formatMessage({ id: 'leave-form' })}
@@ -33,7 +32,7 @@ const ProposalLeaveModal = ({ onClose, resetModalState }: Props): React.Node => 
           </Text>
         </Flex>
       </Modal.Body>
-      <Modal.Footer spacing={2} pt={4} borderTop={`1px solid ${colors.gray[200]}`}>
+      <Modal.Footer>
         <ButtonGroup>
           <Button
             variantSize="big"

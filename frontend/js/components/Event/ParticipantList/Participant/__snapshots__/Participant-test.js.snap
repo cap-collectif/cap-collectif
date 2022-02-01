@@ -2,7 +2,7 @@
 
 exports[`<Participant /> should render correctly 1`] = `
 <Participantstyle__Container>
-  <Relay(Connect(UserAvatar))
+  <Relay(Connect(UserAvatarLegacy))
     user={
       Object {
         "$fragmentRefs": null,
@@ -21,7 +21,7 @@ exports[`<Participant /> should render correctly 1`] = `
 
 exports[`<Participant /> should render correctly when registeredAnonymously 1`] = `
 <Participantstyle__Container>
-  <Relay(Connect(UserAvatar))
+  <Relay(Connect(UserAvatarLegacy))
     needDefaultAvatar={true}
     user={
       Object {

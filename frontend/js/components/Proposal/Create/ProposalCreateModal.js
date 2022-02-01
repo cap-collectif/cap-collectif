@@ -1,20 +1,18 @@
 // @flow
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import { AnimatePresence, motion } from 'framer-motion';
 import { graphql, useFragment } from 'react-relay';
 import { useAnalytics } from 'use-analytics';
 import { connect } from 'react-redux';
 import { isSubmitting, change, submit, isPristine, isInvalid } from 'redux-form';
-import Button from '~ds/Button/Button';
-import Modal from '~ds/Modal/Modal';
-import Heading from '~ui/Primitives/Heading';
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
-import ProposalFormLegacy, { formName } from '../Form/ProposalFormLegacy';
+import { Modal, Button, Heading, ButtonGroup, CapUIModalSize } from '@cap-collectif/ui';
+import ProposalForm, { formName } from '../Form/ProposalForm';
 import type { ProposalCreateModal_proposalForm$key } from '~relay/ProposalCreateModal_proposalForm.graphql';
 import type { Dispatch, GlobalState } from '~/types';
-import colors from '~/styles/modules/colors';
-import ProposalOtherPanelsModalLegacy from './ProposalOtherPanelsModalLegacy';
+import ProposalOtherPanelsModal from './ProposalOtherPanelsModal';
+import ResetCss from '~/utils/ResetCss';
+import ProposalErrorModal from '~/components/Proposal/Create/ProposalErrorModal';
+import type { CreateProposalInput } from '~relay/CreateProposalMutation.graphql';
 
 type Props = {|
   +proposalForm: ProposalCreateModal_proposalForm$key,
@@ -39,8 +37,9 @@ const FRAGMENT = graphql`
         title
       }
     }
-    ...ProposalFormLegacy_proposalForm
-    ...ProposalOtherPanelsModalLegacy_proposalForm
+    ...ProposalForm_proposalForm
+    ...ProposalOtherPanelsModal_proposalForm
+    ...ProposalErrorModal_proposalForm
   }
 `;
 
@@ -65,12 +64,26 @@ const ProposalCreateModal = ({
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>('NORMAL');
   const [errorCount, setErrorCount] = React.useState<number>(0);
   const [isDraft, setIsDraft] = React.useState<boolean>(false);
+  const [valuesSaved, setValuesSaved] = React.useState<?CreateProposalInput>(null);
+
   const intl = useIntl();
   const { track } = useAnalytics();
   const proposalForm = useFragment(FRAGMENT, proposalFormFragment);
+
+  const resetModalState = () => {
+    setModalState('NORMAL');
+    setErrorCount(0);
+  };
+
+  const onSubmitFailed = () => {
+    setErrorCount(errorCount + 1);
+    setModalState('ERROR');
+  };
+
   if (!show) return null;
   return (
     <Modal
+      baseId="proposal-create-modal"
       show={show}
       hideCloseButton={modalState === 'LEAVE'}
       hideOnEsc={modalState !== 'LEAVE'}
@@ -81,45 +94,36 @@ const ProposalCreateModal = ({
         else onClose();
       }}
       fullPageScrollable
-      ariaLabel={intl.formatMessage({ id: title })}>
+      ariaLabel={intl.formatMessage({ id: title })}
+      size={CapUIModalSize.Xl}
+    >
       {() => (
         <>
-          <Modal.Header pb={['', 8]} borderBottom={['', `1px solid ${colors.gray[200]}`]}>
-            <Heading>{intl.formatMessage({ id: title })}</Heading>
-          </Modal.Header>
-          <AnimatePresence>
-            <ProposalOtherPanelsModalLegacy
+          <ResetCss>
+            <Modal.Header>
+              <Heading>{intl.formatMessage({ id: title })}</Heading>
+            </Modal.Header>
+          </ResetCss>
+          <>
+            <ProposalOtherPanelsModal
               proposalForm={proposalForm}
-              errorCount={errorCount}
               onClose={onClose}
               modalState={modalState}
-              resetModalState={() => {
-                setModalState('NORMAL');
-                setErrorCount(0);
-              }}
+              resetModalState={resetModalState}
             />
             {modalState === 'NORMAL' && (
-              <motion.div
-                key="normal"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, display: 'block' }}
-                exit={{ opacity: 0, display: 'none' }}>
+              <>
                 <Modal.Body>
-                  <ProposalFormLegacy
+                  <ProposalForm
                     onAddressEdit={() => setModalState('MAP')}
                     proposalForm={proposalForm}
                     proposal={null}
                     onSubmitSuccess={onClose}
-                    onSubmitFailed={() => {
-                      setErrorCount(errorCount + 1);
-                      setModalState('ERROR');
-                    }}
+                    onSubmitFailed={onSubmitFailed}
+                    setValuesSaved={setValuesSaved}
                   />
                 </Modal.Body>
-                <Modal.Footer
-                  spacing={2}
-                  pt={['', 4]}
-                  borderTop={['', `1px solid ${colors.gray[200]}`]}>
+                <Modal.Footer>
                   <ButtonGroup>
                     <Button
                       id="confirm-proposal-create-as-draft"
@@ -169,9 +173,19 @@ const ProposalCreateModal = ({
                     </Button>
                   </ButtonGroup>
                 </Modal.Footer>
-              </motion.div>
+              </>
             )}
-          </AnimatePresence>
+            {modalState === 'ERROR' && (
+              <ProposalErrorModal
+                allowRetry={errorCount < 2}
+                resetModalState={resetModalState}
+                onClose={onClose}
+                valuesSaved={valuesSaved}
+                proposalForm={proposalForm}
+                onSubmitFailed={onSubmitFailed}
+              />
+            )}
+          </>
         </>
       )}
     </Modal>

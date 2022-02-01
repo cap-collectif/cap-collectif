@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import Tag from '~/components/Ui/Labels/Tag';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import UserLink from '~/components/User/UserLink';
 import type { TagUser_user } from '~relay/TagUser_user.graphql';
 import colors from '~/utils/colors';
@@ -17,7 +17,7 @@ type TagUserProps = {
 export const TagUser = ({ user, size }: TagUserProps) => {
   const Avatar =
     user.media && user.media.url ? (
-      <UserAvatar user={user} size={size} />
+      <UserAvatarLegacy user={user} size={size} />
     ) : (
       <IconRounded size={18} color={colors.darkGray}>
         <Icon name={ICON_NAME.user} color="#fff" size={10} />
@@ -37,7 +37,7 @@ export default createFragmentContainer(TagUser, {
       media {
         url
       }
-      ...UserAvatar_user
+      ...UserAvatarLegacy_user
       ...UserLink_user
     }
   `,

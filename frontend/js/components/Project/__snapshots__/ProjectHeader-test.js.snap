@@ -2,66 +2,72 @@
 
 exports[`<ProjectHeader /> should render correctly 1`] = `
 <div
-  className="sc-bdnxRM Flex___StyledAppBox-RSPpX hKRDgh projectHeader"
+  className="sc-bdvvtL bYbjUV projectHeader"
 >
   <div
-    className="sc-bdnxRM mutyP projectHeader__cover"
+    className="sc-bdvvtL kykDne projectHeader__cover"
   >
     <div
-      className="sc-bdnxRM jcRvHj projectHeader__cover__content"
+      className="sc-bdvvtL fDVfuT projectHeader__cover__content"
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
-        id="project-header"
-        onClick={[Function]}
-        style={
-          Object {
-            "cursor": "default",
-          }
-        }
+        className="sc-bdvvtL eOtkDA"
       >
         <div
-          className="sc-bdnxRM gwxoTk"
+          className="sc-bdvvtL dmRHxa cap-avatar-group projectHeader__authors platform__body"
+          id="project-header"
+          onClick={[Function]}
+          role="group"
+          style={
+            Object {
+              "cursor": "default",
+            }
+          }
         >
           <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
-            style={
-              Object {
-                "background": "#842d86",
-                "color": undefined,
-              }
-            }
+            className="sc-bdvvtL dZFYjr"
           >
-            <img
-              alt="Vince"
-              className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
-              src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
+            <div
+              className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
               title="Vince"
-            />
+            >
+              <img
+                alt="Vince"
+                className="sc-bdvvtL gEWnzg"
+                src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
+                style={
+                  Object {
+                    "objectFit": "cover",
+                  }
+                }
+                title="Vince"
+              />
+            </div>
           </div>
         </div>
         <p
-          className="sc-bdnxRM fChsQe platform__body"
+          className="sc-bdvvtL fnwNFv cap-text platform__body"
           id="authors-credit"
+          onClick={[Function]}
         >
           Vince
         </p>
       </div>
       <h3
-        className="sc-bdnxRM jhjGuP projectHeader__title platform__title"
+        className="sc-bdvvtL iCPkRa cap-text projectHeader__title platform__title"
         title="Food project"
       >
         Food project
       </h3>
     </div>
     <div
-      className="sc-bdnxRM cJsGVv projectHeader__coverVideo"
+      className="sc-bdvvtL hpGpvm projectHeader__coverVideo"
     >
       <div
-        aria-controls="id-1"
+        aria-controls="project-header-cover-modal"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bdnxRM dtWeAb"
+        className="sc-bdvvtL kLLhjw"
         onClick={[Function]}
         onClickCapture={[Function]}
         onKeyDown={[Function]}
@@ -73,7 +79,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       >
         <img
           alt="Media Food"
-          className="sc-bdnxRM bnKRvo"
+          className="sc-bdvvtL bdbrhN"
           src="https://127.0.0.1/media/default/0001/01/providerReference58.jpg"
           style={
             Object {
@@ -113,7 +119,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
         aria-modal={true}
         data-dialog={true}
         hidden={true}
-        id="id-1"
+        id="project-header-cover-modal"
         onAnimationEnd={[Function]}
         onBlur={[Function]}
         onKeyDown={[Function]}
@@ -128,41 +134,50 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       />
     </div>
     <div
-      className="sc-bdnxRM fyCKaM"
+      className="sc-bdvvtL kFZckT"
     >
       <div
-        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS gaGbxY jVkzaf cguwDa"
+        aria-describedby="id-g"
+        className="sc-bdvvtL TpZGZ sc-Galmp hyqcUE cap-tag"
         id="restricted-access"
-        onClick={[Function]}
+        onBlur={[Function]}
+        onFocus={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
+        style={Object {}}
+        tabIndex={0}
         title=""
       >
-        <IconMock
-          className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
-        />
-        <p
-          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
+        <svg
+          className="sc-bdvvtL sc-eJwWfJ kuPGYc jsDA-DM cap-icon"
+          fill="none"
+          viewBox="0 0 10 12"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          restrictedaccess
-        </p>
+          <path
+            d="M8.5 4.75h-.375V3.375a3.375 3.375 0 10-6.75 0V4.75H1a1 1 0 00-1 1V11a1 1 0 001 1h7.5a1 1 0 001-1V5.75a1 1 0 00-1-1zm-4.75 3a1 1 0 111.5.861V9.75a.5.5 0 01-1 0V8.611a.997.997 0 01-.5-.861zM2.625 3.375a2.125 2.125 0 114.25 0V4.5a.25.25 0 01-.25.25h-3.75a.25.25 0 01-.25-.25V3.375z"
+            fill="currentColor"
+          />
+        </svg>
+        restrictedaccess
       </div>
       <div
-        className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+        className="cap-tooltip"
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onTransitionEnd={[Function]}
+        role="tooltip"
         style={
           Object {
-            "opacity": 0,
-            "transform": "scale(0.8) translateZ(0)",
+            "display": "none",
+            "left": "100%",
+            "pointerEvents": "none",
+            "position": "fixed",
+            "top": "100%",
           }
         }
-      >
-        only-visible-by-administrators
-        <div
-          className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-          data-popper-arrow={true}
-          id="arrow"
-        />
-      </div>
+      />
     </div>
   </div>
 </div>

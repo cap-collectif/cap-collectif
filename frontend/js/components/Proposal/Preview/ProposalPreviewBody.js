@@ -10,7 +10,7 @@ import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
 import Tag from '../../Ui/Labels/Tag';
 import TagsList from '../../Ui/List/TagsList';
-import ProposalFollowButtonLegacy from '../Follow/ProposalFollowButtonLegacy';
+import ProposalFollowButton from '../Follow/ProposalFollowButton';
 import type { ProposalPreviewBody_proposal } from '~relay/ProposalPreviewBody_proposal.graphql';
 import type { ProposalPreviewBody_step } from '~relay/ProposalPreviewBody_step.graphql';
 import type { ProposalPreviewBody_viewer } from '~relay/ProposalPreviewBody_viewer.graphql';
@@ -85,7 +85,7 @@ export const ProposalPreviewBody = ({ proposal, step, viewer }: Props) => {
         step.project &&
         step.project.opinionCanBeFollowed &&
         proposal.form.objectType !== 'ESTABLISHMENT' ? (
-          <ProposalFollowButtonLegacy proposal={proposal} isAuthenticated={!!viewer} />
+          <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
         ) : null}
         {proposal.form.objectType === 'ESTABLISHMENT' && (
           <Button
@@ -160,7 +160,7 @@ export default createFragmentContainer(ProposalPreviewBody, {
         id
         votesRanking
       }
-      ...ProposalFollowButtonLegacy_proposal @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
   step: graphql`

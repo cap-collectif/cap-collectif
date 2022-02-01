@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Skeleton from '~ds/Skeleton';
+import {Skeleton} from '@cap-collectif/ui';
 import ProjectHeader from '~ui/Project/ProjectHeader';
 import ErrorQuery from '~/components/Error/ErrorQuery/ErrorQuery';
 

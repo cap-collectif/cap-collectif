@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Container, UserInfo } from './Participant.style';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import type { Participant_participant } from '~relay/Participant_participant.graphql';
 
 type Props = {|
@@ -13,7 +13,7 @@ type Props = {|
 
 export const Participant = ({ participant, isAnonymous }: Props) => (
   <Container>
-    <UserAvatar user={participant} needDefaultAvatar={isAnonymous} />
+    <UserAvatarLegacy user={participant} needDefaultAvatar={isAnonymous} />
 
     <UserInfo>
       {participant.username && !isAnonymous ? (

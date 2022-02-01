@@ -255,7 +255,7 @@ Scenario: Admin access to his project and click to edit it
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
   Then I should see "Collecte des propositions pour la capcoBeer"
-  And I should see "admin" in the "#project-header #authors-credit" element
+  And I should see "admin" in the "#authors-credit" element
   And I should see "global.draft.only_visible_by_you"
   Then I follow "action_edit"
   And I should be redirected to "/admin/alpha/project/ProjectAccessibleForMeOnlyByAdmin/edit"

@@ -857,7 +857,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9fae36fb381cb4868998cf84cf2e8d0e",
+          "cacheID": "2a9fba87aa3fe79d80bcca3e9f78c735",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -915,7 +915,7 @@ fragment ProposalDetailLikers_proposal on Proposal {
   ...ProposalDetailLikersModal_proposal
 }
 
-fragment ProposalFollowButtonLegacy_proposal_39ngnn on Proposal {
+fragment ProposalFollowButton_proposal_39ngnn on Proposal {
   id
   viewerIsFollowing @include(if: $isAuthenticated)
   viewerFollowingConfiguration @include(if: $isAuthenticated)
@@ -952,7 +952,7 @@ fragment ProposalPreviewBody_proposal_3UaCIZ on Proposal {
   ...ProposalPreviewUser_proposal
   ...ProposalDetailEstimation_proposal
   ...ProposalDetailLikers_proposal
-  ...ProposalFollowButtonLegacy_proposal_39ngnn
+  ...ProposalFollowButton_proposal_39ngnn
 }
 
 fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {

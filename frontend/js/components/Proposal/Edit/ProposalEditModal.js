@@ -23,6 +23,8 @@ import Collapsable from '~ui/Collapsable';
 import { mediaQueryMobile } from '~/utils/sizes';
 import colors from '~/styles/modules/colors';
 import ProposalOtherPanelsModal from '../Create/ProposalOtherPanelsModal';
+import ProposalErrorModal from '~/components/Proposal/Create/ProposalErrorModal';
+import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMutation.graphql';
 
 type Props = {|
   +intl: IntlShape,
@@ -145,14 +147,27 @@ export const ProposalEditModal = ({
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>('NORMAL');
   const [errorCount, setErrorCount] = React.useState<number>(0);
   const [isDraft, setIsDraft] = React.useState<boolean>(false);
+  const [valuesSaved, setValuesSaved] = React.useState<?ChangeProposalContentInput>(null);
+
   if (!proposal || !show) return null;
   const pendingRevisions = getProposalPendingRevisions(proposal);
   const isRevisionExpired = isProposalRevisionsExpired(proposal);
   const hasPendingRevisions = pendingRevisions.length > 0;
 
+  const onSubmitFailed = () => {
+    setErrorCount(errorCount + 1);
+    setModalState('ERROR');
+  };
+
+  const resetModalState = () => {
+    setModalState('NORMAL');
+    setErrorCount(0);
+  };
+
   return (
     <ModalProposalEditContainer
-      size={CapUIModalSize.Lg}
+      baseId="proposal-edit-modal"
+      size={CapUIModalSize.Xl}
       fullSizeOnMobile
       show={show}
       dialogClassName={cn('custom-modal-dialog', { 'expired-revision': isRevisionExpired })}
@@ -195,13 +210,9 @@ export const ProposalEditModal = ({
           <AnimatePresence>
             <ProposalOtherPanelsModal
               proposalForm={proposal.form}
-              errorCount={errorCount}
               onClose={onClose}
               modalState={modalState}
-              resetModalState={() => {
-                setModalState('NORMAL');
-                setErrorCount(0);
-              }}
+              resetModalState={resetModalState}
             />
             {modalState === 'NORMAL' && (
               <motion.div
@@ -254,10 +265,8 @@ export const ProposalEditModal = ({
                     proposal={proposal}
                     isBackOfficeInput={false}
                     onSubmitSuccess={onClose}
-                    onSubmitFailed={() => {
-                      setErrorCount(errorCount + 1);
-                      setModalState('ERROR');
-                    }}
+                    onSubmitFailed={onSubmitFailed}
+                    setValuesSaved={setValuesSaved}
                   />
                 </Modal.Body>
                 <Modal.Footer borderTop={['', `1px solid ${colors.gray[200]}`]}>
@@ -314,6 +323,17 @@ export const ProposalEditModal = ({
                 </Modal.Footer>
               </motion.div>
             )}
+            {modalState === 'ERROR' && (
+              <ProposalErrorModal
+                allowRetry={errorCount < 2}
+                resetModalState={resetModalState}
+                onClose={onClose}
+                valuesSaved={valuesSaved}
+                proposalForm={proposal.form}
+                onSubmitFailed={onSubmitFailed}
+                proposal={proposal}
+              />
+            )}
           </AnimatePresence>
         </>
       )}
@@ -355,9 +375,11 @@ export default createFragmentContainer(container, {
         contribuable
         ...ProposalForm_proposalForm
         ...ProposalOtherPanelsModal_proposalForm
+        ...ProposalErrorModal_proposalForm
       }
       publicationStatus
       ...ProposalForm_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)
+      ...ProposalErrorModal_proposal
       ...ProposalDraftAlert_proposal
     }
   `,

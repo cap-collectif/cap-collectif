@@ -193,6 +193,7 @@ const ModalProposalSocialNetworks = ({
   const intl = useIntl();
   return (
     <Modal
+      baseId="proposal-social-networks-modal"
       size={CapUIModalSize.Md}
       show={show}
       onClose={onClose}

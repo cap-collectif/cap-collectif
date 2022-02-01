@@ -1,24 +1,17 @@
 // @flow
 import * as React from 'react';
-import { useIntl } from 'react-intl';
-import styled, { type StyledComponent } from 'styled-components';
-import { useSelector } from 'react-redux';
+import {useIntl} from 'react-intl';
+import {useSelector} from 'react-redux';
 import css from '@styled-system/css';
-import AppBox from '~ui/Primitives/AppBox';
-import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
-import AvatarGroup, { type Props as AvatarGroupProps } from '~ds/AvatarGroup/AvatarGroup';
-import Text from '~ui/Primitives/Text';
-import Icon, { type Props as IconProps } from '~ds/Icon/Icon';
-import { cleanChildren } from '~/utils/cleanChildren';
-import { formatBigNumber } from '~/utils/bigNumberFormatter';
-import Link from '~ds/Link/Link';
+import {Flex, Modal, Heading, Icon, Text, Box, AvatarGroup} from '@cap-collectif/ui'
+import {cleanChildren} from '~/utils/cleanChildren';
+import {formatBigNumber} from '~/utils/bigNumberFormatter';
 import DefaultProjectImage from '~/components/Project/Preview/DefaultProjectImage';
 import Tooltip from '~ds/Tooltip/Tooltip';
 import useIsMobile from '~/utils/hooks/useIsMobile';
-import Heading from '~ui/Primitives/Heading';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Modal from '~ds/Modal/Modal';
 import Play from './SVG/Play';
+import { type Props as IconProps } from '~ds/Icon/Icon';
+import { type Props as AvatarGroupProps } from '~ds/AvatarGroup/AvatarGroup';
 
 const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
   const backgroundColor = useSelector(state => state.default.parameters['color.btn.primary.bg']);
@@ -33,7 +26,7 @@ const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
       minHeight="270px"
       maxHeight="315px"
       backgroundColor={backgroundColor}
-      css={{
+      sx={{
         filter: isArchived ? 'grayscale(1)' : null,
         opacity: isArchived ? '50%' : null,
       }}>
@@ -42,7 +35,6 @@ const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
   );
 };
 type CoverProps = {|
-  ...AppBoxProps,
   children: React.Node,
   isArchived: boolean,
 |};
@@ -63,7 +55,7 @@ export const Cover = ({ children, isArchived, ...rest }: CoverProps) => {
     );
   }
   return (
-    <AppBox
+    <Box
       className="projectHeader__cover"
       position="relative"
       display="flex"
@@ -73,13 +65,13 @@ export const Cover = ({ children, isArchived, ...rest }: CoverProps) => {
       justifyContent="center"
       {...rest}>
       {hasCoverImage || hasCoverVideo ? children : validChildren}
-    </AppBox>
+    </Box>
   );
 };
 type TitleProps = {|
   children: React.Node,
 |};
-export const Title = ({ children, ...rest }: TitleProps) => {
+export const Title = ({children, ...rest}: TitleProps) => {
   return (
     <Text
       className="projectHeader__title platform__title"
@@ -97,11 +89,10 @@ export const Title = ({ children, ...rest }: TitleProps) => {
   );
 };
 type ContentProps = {|
-  ...AppBoxProps,
   children: React.Node,
 |};
-export const Content = ({ children, ...rest }: ContentProps) => (
-  <AppBox
+export const Content = ({children, ...rest}: ContentProps) => (
+  <Box
     className="projectHeader__cover__content"
     position="relative"
     display="flex"
@@ -114,40 +105,38 @@ export const Content = ({ children, ...rest }: ContentProps) => (
     width={['100%', 'calc(100% - 405px)']}
     {...rest}>
     {children}
-  </AppBox>
+  </Box>
 );
 type CoverImageProps = {|
-  ...AppBoxProps,
   src: string,
   alt: string,
   isArchived: boolean,
 |};
 export const CoverImage = ({ src, alt, isArchived, ...rest }: CoverImageProps) => (
-  <AppBox
+  <Box
     className="projectHeader__coverImage"
     width={['100%', '405px']}
     borderRadius={[0, 'accordion']}
     overflow="hidden"
     minHeight="270px"
     maxHeight="315px"
-    css={{
+    sx={{
       filter: isArchived ? 'grayscale(1)' : null,
       opacity: isArchived ? '50%' : null,
     }}
     {...rest}>
-    <AppBox
+    <Box
       as="img"
       src={src}
       alt={alt}
       width={['100%', '405px']}
       height="100%"
       minHeight="270px"
-      style={{ objectFit: 'cover' }}
+      style={{objectFit: 'cover'}}
     />
-  </AppBox>
+  </Box>
 );
 type CoverVideoProps = {|
-  ...AppBoxProps,
   src?: string,
   alt?: string,
   +url: string,
@@ -159,29 +148,29 @@ export const CoverVideo = ({ url, src, alt, isArchived, ...rest }: CoverVideoPro
   const renderButton = () => {
     if (src) {
       return (
-        <AppBox minHeight="270px" maxHeight="315px" width="100%" height="100%" position="relative">
-          <AppBox
+        <Box minHeight="270px" maxHeight="315px" width="100%" height="100%" position="relative">
+          <Box
             as="img"
             src={src}
             alt={alt}
             width={['100%', '405px']}
             height="100%"
             minHeight="270px"
-            style={{ objectFit: 'cover' }}
+            style={{objectFit: 'cover'}}
           />
-          <Play />
-        </AppBox>
+          <Play/>
+        </Box>
       );
     }
     return (
-      <AppBox minHeight="270px" maxHeight="315px" width="100%" height="100%" position="relative">
+      <Box minHeight="270px" maxHeight="315px" width="100%" height="100%" position="relative">
         <DefaultCoverImage isArchived={isArchived} />
         <Play />
-      </AppBox>
+      </Box>
     );
   };
   return (
-    <AppBox
+    <Box
       className="projectHeader__coverVideo"
       position="relative"
       width={['100%', '405px']}
@@ -192,7 +181,8 @@ export const CoverVideo = ({ url, src, alt, isArchived, ...rest }: CoverVideoPro
       height="100%"
       {...rest}>
       <Modal
-        ariaLabel={intl.formatMessage({ id: 'project-header-video-modal' })}
+        baseId="project-header-cover-modal"
+        ariaLabel={intl.formatMessage({id: 'project-header-video-modal'})}
         fullSizeOnMobile
         height={isMobile ? '64%' : '60%'}
         width={isMobile ? '90%' : '60%'}
@@ -207,51 +197,90 @@ export const CoverVideo = ({ url, src, alt, isArchived, ...rest }: CoverVideoPro
           height="100%"
         />
       </Modal>
-    </AppBox>
+    </Box>
   );
 };
 type AuthorsProps = {|
   ...AvatarGroupProps,
   active: boolean,
   children: React.Node,
+  authors: $ReadOnlyArray<{|
+    +id: string,
+    +username: ?string,
+    +url: string,
+    +avatarUrl: ?string,
+  |}>
 |};
-export const Authors = ({ children, active, ...rest }: AuthorsProps) => {
+
+export const Authors = ({children, active, onClick, authors, ...rest}: AuthorsProps) => {
   const isMobile = useIsMobile();
   const hoverColor = useSelector(state => state.default.parameters['color.link.hover']);
+  const intl = useIntl();
+
+  const getTextValue = (): string => {
+    const remainingAuthorsLength = authors.length - 1;
+    const firstAuthorUsername = authors[0].username ?? '';
+    if (remainingAuthorsLength === 0) {
+      return firstAuthorUsername;
+    } if (remainingAuthorsLength === 1) {
+      const secondAuthorUsername = authors[1].username ?? '';
+      return intl.formatMessage({id: 'avatar-group-shownames-2'}, {first: firstAuthorUsername, second: secondAuthorUsername})
+    }
+    return intl.formatMessage({id: 'avatar-group-shownames'}, {name: firstAuthorUsername, length: remainingAuthorsLength})
+  }
+
   return (
-    <AvatarGroup
-      id="project-header"
-      className="projectHeader__authors platform__body"
-      minHeight={isMobile ? 13 : 9}
-      marginTop={[-8, 0]}
-      zIndex={1}
-      flexWrap="wrap"
-      size={isMobile ? 'xl' : 'lg'}
-      max={3}
-      css={
-        active &&
-        css({
-          '& > p:hover': {
-            color: hoverColor,
+    <Flex alignItems="center">
+      <AvatarGroup
+        id="project-header"
+        className="projectHeader__authors platform__body"
+        minHeight={isMobile ? 13 : 9}
+        marginTop={[-8, 0]}
+        zIndex={1}
+        flexWrap="wrap"
+        size={isMobile ? 'xl' : 'lg'}
+        max={3}
+        sx={
+          active &&
+          css({
+            '& > p:hover': {
+              color: hoverColor,
+              textDecoration: 'underline',
+            },
+          })
+        }
+        onClick={onClick}
+        {...rest}>
+        {children}
+      </AvatarGroup>
+      <Text
+        id="authors-credit"
+        className="platform__body"
+        fontWeight={400}
+        lineHeight="24px"
+        onClick={onClick}
+        color="neutral-gray.900"
+        paddingLeft={[0, 2]}
+        fontSize="14px"
+        sx={{
+          '&:hover': {
             textDecoration: 'underline',
-          },
-        })
-      }
-      showNames
-      {...rest}>
-      {children}
-    </AvatarGroup>
-  );
+            cursor: 'pointer'
+          }
+        }}>
+        {getTextValue()}
+      </Text>
+    </Flex>
+);
 };
 type BlocksProps = {|
-  ...AppBoxProps,
   children: React.Node,
 |};
-export const Blocks = ({ children, ...rest }: BlocksProps) => {
+export const Blocks = ({children, ...rest}: BlocksProps) => {
   const haschildren = cleanChildren(children).length > 0;
   if (haschildren) {
     return (
-      <AppBox
+      <Box
         className="projectHeader__blocks"
         display="flex"
         flexDirection="row"
@@ -263,25 +292,24 @@ export const Blocks = ({ children, ...rest }: BlocksProps) => {
         height={10}
         maxHeight={10}
         justifyContent="flex-start"
+        p={0}
         as="ul"
-        css={{ paddingInlineStart: '0px' }}
         {...rest}>
         {children}
-      </AppBox>
+      </Box>
     );
   }
   return null;
 };
 type BlockProps = {|
-  ...AppBoxProps,
   title: string,
   content: ?string | ?number,
   contentId?: ?string,
   tooltipLabel?: React.Node,
 |};
-export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: BlockProps) => (
+export const Block = ({title, content, contentId, tooltipLabel, ...rest}: BlockProps) => (
   <Tooltip label={tooltipLabel} delay={[200, 500]}>
-    <AppBox
+    <Box
       className="projectHeader__block"
       display="flex"
       flexDirection="column"
@@ -310,19 +338,18 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
         height={[4, 6]}>
         {title.charAt(0).toUpperCase() + title.slice(1)}
       </Text>
-    </AppBox>
+    </Box>
   </Tooltip>
 );
 
 type InfoProps = {|
-  ...AppBoxProps,
   children: React.Node,
 |};
-export const Info = ({ children, ...rest }: InfoProps) => {
+export const Info = ({children, ...rest}: InfoProps) => {
   const haschildren = cleanChildren(children).length > 0;
   if (haschildren) {
     return (
-      <AppBox
+      <Box
         className="projectHeader__info"
         display="flex"
         flexDirection="row"
@@ -335,20 +362,19 @@ export const Info = ({ children, ...rest }: InfoProps) => {
         maxHeight="24px"
         justifyContent="flex-start"
         as="ul"
-        css={{ paddingInlineStart: '0px' }}
+        p={0}
         {...rest}>
         {children}
-      </AppBox>
+      </Box>
     );
   }
   return null;
 };
 type LocationProps = {|
-  ...AppBoxProps,
   content: ?string,
 |};
-const Location = ({ content, ...rest }: LocationProps) => (
-  <AppBox
+const Location = ({content, ...rest}: LocationProps) => (
+  <Box
     className="projectHeader__info__location"
     display="flex"
     flexDirection="row"
@@ -358,7 +384,7 @@ const Location = ({ content, ...rest }: LocationProps) => (
     marginBottom={0}
     as="li"
     {...rest}>
-    <Icon color="neutral-gray.500" size="md" name="PIN_O" marginLeft="-5px" />
+    <Icon color="neutral-gray.500" size="md" name="PIN_O" marginLeft="-5px"/>
     <Text
       className="platform__body"
       fontSize={[1, 2]}
@@ -368,17 +394,16 @@ const Location = ({ content, ...rest }: LocationProps) => (
       truncate={35}>
       {content}
     </Text>
-  </AppBox>
+  </Box>
 );
 Info.Location = Location;
 
 type ThemeProps = {|
-  ...AppBoxProps,
   content: string,
   href: string,
 |};
-const Theme = ({ content, href, ...rest }: ThemeProps) => (
-  <AppBox
+const Theme = ({content, href, ...rest}: ThemeProps) => (
+  <Box
     className="projectHeader__info__theme"
     display="flex"
     flexDirection="row"
@@ -389,7 +414,7 @@ const Theme = ({ content, href, ...rest }: ThemeProps) => (
     as="a"
     href={href}
     {...rest}>
-    <Icon color="neutral-gray.500" size="md" name="FOLDER_O" marginLeft="-3px" />
+    <Icon color="neutral-gray.500" size="md" name="FOLDER_O" marginLeft="-3px"/>
     <Text
       className="platform__body"
       fontSize={[1, 2]}
@@ -399,17 +424,16 @@ const Theme = ({ content, href, ...rest }: ThemeProps) => (
       truncate={35}>
       {content}
     </Text>
-  </AppBox>
+  </Box>
 );
 Info.Theme = Theme;
 
 type SocialsProps = {|
-  ...AppBoxProps,
   children: React.Node,
 |};
 
-export const Socials = ({ children, ...rest }: SocialsProps) => (
-  <AppBox
+export const Socials = ({children, ...rest}: SocialsProps) => (
+  <Box
     className="projectHeader__socials"
     position={['absolute', 'relative']}
     right={[0]}
@@ -425,30 +449,31 @@ export const Socials = ({ children, ...rest }: SocialsProps) => (
     zIndex={9}
     {...rest}>
     {children}
-  </AppBox>
-);
-const SocialContainer: StyledComponent<{}, {}, any> = styled(Link)(
-  css({
-    color: 'neutral-gray.500',
-    boxShadow: 'none !important',
-    width: 6,
-    cursor: 'pointer',
-    '&:hover': {
-      color: 'neutral-gray.700',
-    },
-    '&:focus': {
-      color: 'neutral-gray.700',
-      outline: 'none',
-    },
-  }),
+  </Box>
 );
 type SocialProps = {|
   href: string,
   name: string,
   ...IconProps,
 |};
-export const Social = ({ href, name, ...rest }: SocialProps) => (
-  <SocialContainer className="projectHeader__social" mr={[4, 6]} href={href}>
+export const Social = ({href, name, ...rest}: SocialProps) => (
+  <Box as="a" className="projectHeader__social"
+       mr={[4, 6]}
+       href={href}
+       color="neutral-gray.500"
+       width={6}
+       sx={{
+         boxShadow: 'none !important',
+         cursor: 'pointer',
+         '&:hover': {
+           color: 'neutral-gray.700',
+         },
+         '&:focus': {
+           color: 'neutral-gray.700',
+           outline: 'none',
+         },
+       }}
+  >
     <Icon name={name} size="md" {...rest} />
-  </SocialContainer>
+  </Box>
 );

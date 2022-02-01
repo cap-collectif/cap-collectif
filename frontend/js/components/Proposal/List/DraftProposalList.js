@@ -2,10 +2,10 @@
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import classNames from 'classnames';
+import { Box } from '@cap-collectif/ui';
 import DraftProposalPreview from '../Preview/DraftProposalPreview';
 import DraftBox from '../../Utils/DraftBox';
 import type { DraftProposalList_step } from '~relay/DraftProposalList_step.graphql';
-import AppBox from '~/components/Ui/Primitives/AppBox';
 
 type Props = {
   step: DraftProposalList_step,
@@ -29,7 +29,7 @@ export class DraftProposalList extends React.Component<Props> {
     }
 
     return (
-      <AppBox id="draftAnchor" pt={8}>
+      <Box id="draftAnchor" pt={8}>
         <DraftBox>
           <ul className={classes}>
             {proposals.map((edge, i) => (
@@ -37,7 +37,7 @@ export class DraftProposalList extends React.Component<Props> {
             ))}
           </ul>
         </DraftBox>
-      </AppBox>
+      </Box>
     );
   }
 }
@@ -45,7 +45,7 @@ export class DraftProposalList extends React.Component<Props> {
 export default createFragmentContainer(DraftProposalList, {
   step: graphql`
     fragment DraftProposalList_step on CollectStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       viewerProposalDrafts @include(if: $isAuthenticated) {
         edges {
           node {

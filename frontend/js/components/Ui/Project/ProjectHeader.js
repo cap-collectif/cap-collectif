@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import {Flex} from '@cap-collectif/ui';
 import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
 
 import {
@@ -16,7 +17,6 @@ import {
   Info,
 } from './ProjectHeader.Cover';
 import { Frise, Step, Steps } from './ProjectHeader.Frise';
-import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
   ...AppBoxProps,

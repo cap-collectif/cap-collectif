@@ -7,7 +7,7 @@ import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import type { UserSearchDropdownChoice_user } from '~relay/UserSearchDropdownChoice_user.graphql';
 import DropdownSelectChoice from '~ui/DropdownSelect/choice';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { TYPE_ROLE } from '~/constants/AnalyseConstants';
 import type { GlobalState } from '~/types';
@@ -53,7 +53,7 @@ const UserSearchDropdownChoice = ({
       value={user.id}
       disabled={disabled}>
       <div>
-        <UserAvatar user={user} displayUrl={false} size={18} />
+        <UserAvatarLegacy user={user} displayUrl={false} size={18} />
         <span>{user.username}</span>
       </div>
 

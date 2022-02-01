@@ -28,7 +28,7 @@ exports[`<EditProfileTabs /> should not render profile tab, if sso doesn't allow
             className="m-auto align-items-center"
           >
             <Left>
-              <Relay(Connect(UserAvatar))
+              <Relay(Connect(UserAvatarLegacy))
                 user={
                   Object {
                     "$fragmentRefs": null,
@@ -313,7 +313,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
             className="m-auto align-items-center"
           >
             <Left>
-              <Relay(Connect(UserAvatar))
+              <Relay(Connect(UserAvatarLegacy))
                 user={
                   Object {
                     "$fragmentRefs": null,
@@ -617,7 +617,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             className="m-auto align-items-center"
           >
             <Left>
-              <Relay(Connect(UserAvatar))
+              <Relay(Connect(UserAvatarLegacy))
                 user={
                   Object {
                     "$fragmentRefs": null,
@@ -892,7 +892,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             className="m-auto align-items-center"
           >
             <Left>
-              <Relay(Connect(UserAvatar))
+              <Relay(Connect(UserAvatarLegacy))
                 user={
                   Object {
                     "$fragmentRefs": null,

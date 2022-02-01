@@ -2,7 +2,7 @@
 import React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import type { AnalystRevoked_analyst } from '~relay/AnalystRevoked_analyst.graphql';
 
 type Props = {
@@ -19,7 +19,7 @@ const AnalystRevokedContainer: StyledComponent<{}, {}, HTMLLIElement> = styled.l
 
 const AnalystRevoked = ({ analyst }: Props) => (
   <AnalystRevokedContainer>
-    <UserAvatar user={analyst} size={35} displayUrl={false} />
+    <UserAvatarLegacy user={analyst} size={35} displayUrl={false} />
     <span className="mr-10">{analyst.username}</span>
   </AnalystRevokedContainer>
 );

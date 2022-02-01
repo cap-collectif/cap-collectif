@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectHeader /> should render correctly 1`] = `
-<ForwardRef
+<Flex
   className="projectHeader"
   direction="column"
   maxWidth="100%"
@@ -18,6 +18,52 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
     <Content>
       <Authors
         active={true}
+        authors={
+          Array [
+            Object {
+              "avatarUrl": "",
+              "id": "1",
+              "url": "",
+              "username": "Mikasa Estucasa",
+            },
+            Object {
+              "avatarUrl": "",
+              "id": "2",
+              "url": "",
+              "username": "John Mark",
+            },
+            Object {
+              "avatarUrl": "",
+              "id": "3",
+              "url": "",
+              "username": "Dan Abramov",
+            },
+            Object {
+              "avatarUrl": "",
+              "id": "4",
+              "url": "",
+              "username": "Dan Abramov",
+            },
+            Object {
+              "avatarUrl": "",
+              "id": "5",
+              "url": "",
+              "username": "Dan Abramov",
+            },
+            Object {
+              "avatarUrl": "",
+              "id": "6",
+              "url": "",
+              "username": "Dan Abramov",
+            },
+            Object {
+              "avatarUrl": "",
+              "id": "6",
+              "url": "",
+              "username": "Dan Abramov",
+            },
+          ]
+        }
       >
         <Avatar
           name="Mikasa Estucasa"
@@ -165,5 +211,5 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       />
     </Steps>
   </Frise>
-</ForwardRef>
+</Flex>
 `;

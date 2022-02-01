@@ -2,13 +2,13 @@
 
 exports[`<ProjectStepTabs /> should render correctly without arrow & with active tab 1`] = `
 <div
-  className="sc-bdnxRM dTkKkW frise"
+  className="sc-bdvvtL fgAItv frise"
 >
   <ul
-    className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox3-brPamy gCmJTI kqjIJu frise__stepList"
+    className="sc-bdvvtL hoKwSg frise__stepList"
   >
     <div
-      className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj jOvakW slick-initialized"
+      className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj gaLuHz slick-initialized"
     >
       
       <div
@@ -45,7 +45,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
           >
             <div>
               <li
-                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP gtTeFr jA-dOqc frise__stepItem"
+                className="sc-bdvvtL ffjLYS frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -77,7 +77,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   />
                 </svg>
                 <a
-                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  className="sc-bdvvtL ciajHx frise__stepItem__link"
                   href="https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner"
                   style={
                     Object {
@@ -85,14 +85,14 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     }
                   }
                 >
-                  <h5
-                    className="sc-bdnxRM OHwgU frise__stepItem__link__title platform__body"
+                  <p
+                    className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
                     title="Présentation"
                   >
                     Présentation
-                  </h5>
+                  </p>
                   <p
-                    className="sc-bdnxRM erHgoo frise__stepItem__link__content platform__body"
+                    className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
                   >
                     
                   </p>
@@ -115,7 +115,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
           >
             <div>
               <li
-                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP cFfMis jA-dOqc frise__stepItem"
+                className="sc-bdvvtL jmACxf frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -148,7 +148,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   />
                 </svg>
                 <a
-                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  className="sc-bdvvtL ciajHx frise__stepItem__link"
                   href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
                   style={
                     Object {
@@ -156,14 +156,14 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     }
                   }
                 >
-                  <h5
-                    className="sc-bdnxRM hvVQBw frise__stepItem__link__title platform__body"
+                  <p
+                    className="sc-bdvvtL gkCKCF cap-text frise__stepItem__link__title platform__body"
                     title="Consultation"
                   >
                     Consultation
-                  </h5>
+                  </p>
                   <p
-                    className="sc-bdnxRM AiBJM frise__stepItem__link__content platform__body"
+                    className="sc-bdvvtL feWHWz cap-text frise__stepItem__link__content platform__body"
                   >
                     step.status.closed
                   </p>
@@ -186,7 +186,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
           >
             <div>
               <li
-                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP kcPizd jA-dOqc frise__stepItem"
+                className="sc-bdvvtL cLncHc frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -219,7 +219,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   />
                 </svg>
                 <a
-                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  className="sc-bdvvtL ciajHx frise__stepItem__link"
                   href="https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet"
                   style={
                     Object {
@@ -227,14 +227,14 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     }
                   }
                 >
-                  <h5
-                    className="sc-bdnxRM OHwgU frise__stepItem__link__title platform__body"
+                  <p
+                    className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
                     title="Dépôt"
                   >
                     Dépôt
-                  </h5>
+                  </p>
                   <p
-                    className="sc-bdnxRM erHgoo frise__stepItem__link__content platform__body"
+                    className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
                   >
                     count.block.daysLeft
                   </p>
@@ -257,7 +257,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
           >
             <div>
               <li
-                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP kcPizd bhnpCO frise__stepItem"
+                className="sc-bdvvtL eyNMwe frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -290,7 +290,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   />
                 </svg>
                 <a
-                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  className="sc-bdvvtL ciajHx frise__stepItem__link"
                   href="https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet"
                   style={
                     Object {
@@ -298,35 +298,37 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     }
                   }
                 >
-                  <h5
-                    className="sc-bdnxRM cWYEuU frise__stepItem__link__title platform__body"
+                  <p
+                    aria-describedby="id-g"
+                    className="sc-bdvvtL dttrVk cap-text frise__stepItem__link__title platform__body"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    tabIndex={0}
                     title="Questionnaire qui dénonce"
                   >
                     Questionnaire qui dénonce
-                  </h5>
+                  </p>
                   <div
-                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ platform__body"
+                    className="cap-tooltip"
+                    hidden={true}
+                    id="id-g"
+                    onAnimationEnd={[Function]}
+                    onTransitionEnd={[Function]}
+                    role="tooltip"
                     style={
                       Object {
-                        "opacity": 0,
-                        "transform": "scale(0.8) translateZ(0)",
+                        "display": "none",
+                        "left": "100%",
+                        "pointerEvents": "none",
+                        "position": "fixed",
+                        "top": "100%",
                       }
                     }
-                  >
-                    <p
-                      className="sc-bdnxRM cZcArZ"
-                      title="frise-tooltip-text"
-                    >
-                      frise-tooltip-text
-                    </p>
-                    <div
-                      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                      data-popper-arrow={true}
-                      id="arrow"
-                    />
-                  </div>
+                  />
                   <p
-                    className="sc-bdnxRM gzYoCo frise__stepItem__link__content platform__body"
+                    className="sc-bdvvtL kJbqTC cap-text frise__stepItem__link__content platform__body"
                   />
                 </a>
               </li>
@@ -343,13 +345,13 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
 
 exports[`<ProjectStepTabs /> should render null when there is only one step 1`] = `
 <div
-  className="sc-bdnxRM dTkKkW frise"
+  className="sc-bdvvtL fgAItv frise"
 >
   <ul
-    className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox3-brPamy gCmJTI kqjIJu frise__stepList"
+    className="sc-bdvvtL hoKwSg frise__stepList"
   >
     <div
-      className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj jOvakW slick-initialized"
+      className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj gaLuHz slick-initialized"
     >
       
       <div
@@ -386,7 +388,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
           >
             <div>
               <li
-                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP gtTeFr jA-dOqc frise__stepItem"
+                className="sc-bdvvtL ffjLYS frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -418,7 +420,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   />
                 </svg>
                 <a
-                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  className="sc-bdvvtL ciajHx frise__stepItem__link"
                   href="https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner"
                   style={
                     Object {
@@ -426,14 +428,14 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     }
                   }
                 >
-                  <h5
-                    className="sc-bdnxRM OHwgU frise__stepItem__link__title platform__body"
+                  <p
+                    className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
                     title="Présentation"
                   >
                     Présentation
-                  </h5>
+                  </p>
                   <p
-                    className="sc-bdnxRM erHgoo frise__stepItem__link__content platform__body"
+                    className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
                   >
                     
                   </p>
@@ -456,7 +458,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
           >
             <div>
               <li
-                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP cFfMis jA-dOqc frise__stepItem"
+                className="sc-bdvvtL jmACxf frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -489,7 +491,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   />
                 </svg>
                 <a
-                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  className="sc-bdvvtL ciajHx frise__stepItem__link"
                   href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
                   style={
                     Object {
@@ -497,14 +499,14 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     }
                   }
                 >
-                  <h5
-                    className="sc-bdnxRM hvVQBw frise__stepItem__link__title platform__body"
+                  <p
+                    className="sc-bdvvtL gkCKCF cap-text frise__stepItem__link__title platform__body"
                     title="Consultation"
                   >
                     Consultation
-                  </h5>
+                  </p>
                   <p
-                    className="sc-bdnxRM AiBJM frise__stepItem__link__content platform__body"
+                    className="sc-bdvvtL feWHWz cap-text frise__stepItem__link__content platform__body"
                   >
                     step.status.closed
                   </p>
@@ -527,7 +529,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
           >
             <div>
               <li
-                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP kcPizd jA-dOqc frise__stepItem"
+                className="sc-bdvvtL cLncHc frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -560,7 +562,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   />
                 </svg>
                 <a
-                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  className="sc-bdvvtL ciajHx frise__stepItem__link"
                   href="https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet"
                   style={
                     Object {
@@ -568,14 +570,14 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     }
                   }
                 >
-                  <h5
-                    className="sc-bdnxRM OHwgU frise__stepItem__link__title platform__body"
+                  <p
+                    className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
                     title="Dépôt"
                   >
                     Dépôt
-                  </h5>
+                  </p>
                   <p
-                    className="sc-bdnxRM erHgoo frise__stepItem__link__content platform__body"
+                    className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
                   >
                     count.block.daysLeft
                   </p>
@@ -598,7 +600,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
           >
             <div>
               <li
-                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP kcPizd bhnpCO frise__stepItem"
+                className="sc-bdvvtL eyNMwe frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -631,7 +633,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   />
                 </svg>
                 <a
-                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  className="sc-bdvvtL ciajHx frise__stepItem__link"
                   href="https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet"
                   style={
                     Object {
@@ -639,35 +641,37 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     }
                   }
                 >
-                  <h5
-                    className="sc-bdnxRM cWYEuU frise__stepItem__link__title platform__body"
+                  <p
+                    aria-describedby="id-g"
+                    className="sc-bdvvtL dttrVk cap-text frise__stepItem__link__title platform__body"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    tabIndex={0}
                     title="Questionnaire qui dénonce"
                   >
                     Questionnaire qui dénonce
-                  </h5>
+                  </p>
                   <div
-                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ platform__body"
+                    className="cap-tooltip"
+                    hidden={true}
+                    id="id-g"
+                    onAnimationEnd={[Function]}
+                    onTransitionEnd={[Function]}
+                    role="tooltip"
                     style={
                       Object {
-                        "opacity": 0,
-                        "transform": "scale(0.8) translateZ(0)",
+                        "display": "none",
+                        "left": "100%",
+                        "pointerEvents": "none",
+                        "position": "fixed",
+                        "top": "100%",
                       }
                     }
-                  >
-                    <p
-                      className="sc-bdnxRM cZcArZ"
-                      title="frise-tooltip-text"
-                    >
-                      frise-tooltip-text
-                    </p>
-                    <div
-                      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                      data-popper-arrow={true}
-                      id="arrow"
-                    />
-                  </div>
+                  />
                   <p
-                    className="sc-bdnxRM gzYoCo frise__stepItem__link__content platform__body"
+                    className="sc-bdvvtL kJbqTC cap-text frise__stepItem__link__content platform__body"
                   />
                 </a>
               </li>

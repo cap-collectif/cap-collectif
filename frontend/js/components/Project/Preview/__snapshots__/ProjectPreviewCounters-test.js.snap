@@ -26,7 +26,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters when projec
       showZero={true}
       value={72}
     />
-    <ProjectRestrictedAccessFragment
+    <ProjectRestrictedAccessFragmentLegacy
       icon="cap-lock-2-1"
       isOnProjectCard={true}
       project={
@@ -95,7 +95,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
       showZero={true}
       value={72}
     />
-    <ProjectHeaderDistrictsList
+    <ProjectHeaderDistrictsListLegacy
       breakingNumber={1}
       project={
         Object {
@@ -159,7 +159,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
         }
       }
     />
-    <ProjectRestrictedAccessFragment
+    <ProjectRestrictedAccessFragmentLegacy
       icon="cap-lock-2-1"
       isOnProjectCard={true}
       project={
@@ -254,7 +254,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
       showZero={true}
       value={72}
     />
-    <ProjectRestrictedAccessFragment
+    <ProjectRestrictedAccessFragmentLegacy
       icon="cap-lock-2-1"
       isOnProjectCard={true}
       project={

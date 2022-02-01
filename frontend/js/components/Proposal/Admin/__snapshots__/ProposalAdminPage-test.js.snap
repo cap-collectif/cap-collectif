@@ -2295,7 +2295,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7954699ae2a2b71705ad7095c2d08918",
+          "cacheID": "3576960507c9cce532f96ecb60cfd7ae",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2740,7 +2740,7 @@ fragment ProposalRevision_proposal on Proposal {
   ...ProposalRevisionModalForm_proposal
 }
 
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {
@@ -2764,7 +2764,7 @@ fragment UserNotConfirmedLabel_user on User {
 
 fragment UserPreview_user on User {
   ...UserNotConfirmedLabel_user
-  ...UserAvatar_user
+  ...UserAvatarLegacy_user
   id
   url
   displayName

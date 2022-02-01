@@ -10,7 +10,7 @@ exports[`<ProfileComment /> should render correctly 1`] = `
     <div
       className="opinion__content"
     >
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         user={
           Object {
             "$fragmentRefs": null,

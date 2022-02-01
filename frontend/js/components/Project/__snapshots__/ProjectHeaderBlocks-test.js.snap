@@ -2,19 +2,19 @@
 
 exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
 <ul
-  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox2-cYLuYh czlZPR hengbC projectHeader__blocks"
+  className="sc-bdvvtL egRzVz projectHeader__blocks"
 >
   <li
-    className="sc-bdnxRM ifddLS projectHeader__block"
+    className="sc-bdvvtL cEMvUo projectHeader__block"
   >
     <h2
-      className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
+      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id=""
     >
       16
     </h2>
     <p
-      className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
+      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
     >
       Contribution-plural
     </p>
@@ -29,30 +29,30 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
     }
   >
     <div
-      className="sc-bdnxRM dicyTt"
+      className="sc-bdvvtL jZuKfK"
     >
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         proposal-count {"count":84}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         amendment-count {"count":42}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         argument-count {"count":84}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         source-count {"count":42}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         answer-count {"count":42}
       </p>
@@ -64,31 +64,31 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
     />
   </div>
   <li
-    className="sc-bdnxRM ifddLS projectHeader__block"
+    className="sc-bdvvtL cEMvUo projectHeader__block"
   >
     <h2
-      className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
+      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id="votes-counter-pill"
     >
       5
     </h2>
     <p
-      className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
+      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
     >
       Vote-plural
     </p>
   </li>
   <li
-    className="sc-bdnxRM ifddLS projectHeader__block"
+    className="sc-bdvvtL cEMvUo projectHeader__block"
   >
     <h2
-      className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
+      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id=""
     >
       88
     </h2>
     <p
-      className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
+      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
     >
       Project.preview.counters.contributors
     </p>
@@ -98,19 +98,19 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
 
 exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
 <ul
-  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox2-cYLuYh czlZPR hengbC projectHeader__blocks"
+  className="sc-bdvvtL egRzVz projectHeader__blocks"
 >
   <li
-    className="sc-bdnxRM ifddLS projectHeader__block"
+    className="sc-bdvvtL cEMvUo projectHeader__block"
   >
     <h2
-      className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
+      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id=""
     >
       16
     </h2>
     <p
-      className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
+      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
     >
       Contribution-plural
     </p>
@@ -125,30 +125,30 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
     }
   >
     <div
-      className="sc-bdnxRM dicyTt"
+      className="sc-bdvvtL jZuKfK"
     >
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         proposal-count {"count":84}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         amendment-count {"count":42}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         argument-count {"count":84}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         source-count {"count":42}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         answer-count {"count":42}
       </p>
@@ -160,31 +160,31 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
     />
   </div>
   <li
-    className="sc-bdnxRM ifddLS projectHeader__block"
+    className="sc-bdvvtL cEMvUo projectHeader__block"
   >
     <h2
-      className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
+      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id="votes-counter-pill"
     >
       5
     </h2>
     <p
-      className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
+      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
     >
       Vote-plural
     </p>
   </li>
   <li
-    className="sc-bdnxRM ifddLS projectHeader__block"
+    className="sc-bdvvtL cEMvUo projectHeader__block"
   >
     <h2
-      className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
+      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id=""
     >
       88
     </h2>
     <p
-      className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
+      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
     >
       Project.preview.counters.contributors
     </p>
@@ -194,19 +194,19 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
 
 exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`] = `
 <ul
-  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox2-cYLuYh czlZPR hengbC projectHeader__blocks"
+  className="sc-bdvvtL egRzVz projectHeader__blocks"
 >
   <li
-    className="sc-bdnxRM ifddLS projectHeader__block"
+    className="sc-bdvvtL cEMvUo projectHeader__block"
   >
     <h2
-      className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
+      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id=""
     >
       16
     </h2>
     <p
-      className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
+      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
     >
       Contribution-plural
     </p>
@@ -221,30 +221,30 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
     }
   >
     <div
-      className="sc-bdnxRM dicyTt"
+      className="sc-bdvvtL jZuKfK"
     >
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         proposal-count {"count":84}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         amendment-count {"count":42}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         argument-count {"count":84}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         source-count {"count":42}
       </p>
       <p
-        className="sc-bdnxRM lmUqmF"
+        className="sc-bdvvtL hVKQVu cap-text"
       >
         answer-count {"count":42}
       </p>
@@ -256,31 +256,31 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
     />
   </div>
   <li
-    className="sc-bdnxRM ifddLS projectHeader__block"
+    className="sc-bdvvtL cEMvUo projectHeader__block"
   >
     <h2
-      className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
+      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id="votes-counter-pill"
     >
       5
     </h2>
     <p
-      className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
+      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
     >
       Vote-plural
     </p>
   </li>
   <li
-    className="sc-bdnxRM ifddLS projectHeader__block"
+    className="sc-bdvvtL cEMvUo projectHeader__block"
   >
     <h2
-      className="sc-bdnxRM hmLYRe projectHeader__block__content platform__body"
+      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id=""
     >
       88
     </h2>
     <p
-      className="sc-bdnxRM iIkjNK projectHeader__block__title platform__body"
+      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
     >
       Project.preview.counters.contributors
     </p>

@@ -6,10 +6,10 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import styled from 'styled-components';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import type { StyledComponent } from 'styled-components';
-import Modal from '~ds/Modal/Modal';
+import { Modal, Button, CapUIModalSize } from '@cap-collectif/ui'
 import colors from '~/styles/modules/colors';
 import ProjectHeader from '~ui/Project/ProjectHeader';
-import Button from '~ds/Button/Button';
+import ResetCss from '~/utils/ResetCss';
 
 import ListGroupFlush from '../Ui/List/ListGroupFlush';
 import { type ProjectHeaderDistrictsList_project$key } from '~relay/ProjectHeaderDistrictsList_project.graphql';
@@ -72,17 +72,22 @@ const ProjectHeaderDistrictsList = ({ breakingNumber, project }: Props) => {
           archived={data.archived}
         />
         <Modal
+          baseId="project-header-district-list-modal"
           show={isOpen}
           onClose={onClose}
-          ariaLabel={intl.formatMessage({ id: 'data_district_list' })}>
-          <Modal.Header>
-            <FormattedMessage
-              id="count-area"
-              values={{
-                count: data.districts?.totalCount,
-              }}
-            />
-          </Modal.Header>
+          ariaLabel={intl.formatMessage({ id: 'data_district_list' })}
+          size={CapUIModalSize.Lg}
+        >
+          <ResetCss>
+            <Modal.Header>
+              <FormattedMessage
+                id="count-area"
+                values={{
+                  count: data.districts?.totalCount,
+                }}
+              />
+            </Modal.Header>
+          </ResetCss>
           <Modal.Body>
             <ListGroupFlush>
               {data.districts?.totalCount &&

@@ -38,7 +38,7 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an archived exter
       showZero={true}
       value={54}
     />
-    <ProjectRestrictedAccessFragment
+    <ProjectRestrictedAccessFragmentLegacy
       icon="cap-lock-2-1"
       project={
         Object {
@@ -95,7 +95,7 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
       showZero={true}
       value={54}
     />
-    <ProjectRestrictedAccessFragment
+    <ProjectRestrictedAccessFragmentLegacy
       icon="cap-lock-2-1"
       project={
         Object {
@@ -145,7 +145,7 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
       showZero={true}
       value={0}
     />
-    <ProjectRestrictedAccessFragment
+    <ProjectRestrictedAccessFragmentLegacy
       icon="cap-lock-2-1"
       project={
         Object {

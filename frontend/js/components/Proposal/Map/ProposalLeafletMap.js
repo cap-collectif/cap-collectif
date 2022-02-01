@@ -13,12 +13,13 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import L from 'leaflet';
 import { useResize, useDisclosure } from '@liinkiing/react-hooks';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import {Button} from '@cap-collectif/ui';
 import ZoomControl from './ZoomControl';
 import type { MapCenterObject, MapOptions, MapProps, MapRef, PopupRef } from './Map.types';
 import type { State, Dispatch } from '~/types';
 import type { MapTokens } from '~/redux/modules/user';
 import ProposalMapPopover from './ProposalMapPopover';
-import LoginOverlay from '~/components/Utils/LoginOverlay';
+import NewLoginOverlay from '~/components/Utils/NewLoginOverlay';
 import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_proposals.graphql';
 import type { ProposalLeafletMap_proposalForm } from '~relay/ProposalLeafletMap_proposalForm.graphql';
 import { isSafari, Emitter } from '~/config';
@@ -46,7 +47,6 @@ import { formName } from '~/components/Proposal/Form/ProposalForm';
 import ProposalMapOutOfAreaPane from './ProposalMapOutOfAreaPane';
 import ProposalCreateModal from '../Create/ProposalCreateModal';
 import { getProposalLabelByType } from '~/utils/interpellationLabelHelper';
-import Button from '~ds/Button/Button';
 import { mapToast, MapEvents } from './Map.events';
 
 type Props = {|
@@ -261,7 +261,7 @@ export const ProposalLeafletMap = ({
           position={lastPopoverLatLng}
           autoPan={false}
           className="popup-proposal">
-          <LoginOverlay placement="top">
+          <NewLoginOverlay placement="top">
             <Button
               bg={btnBgColor}
               color={btnTextColor}
@@ -271,7 +271,7 @@ export const ProposalLeafletMap = ({
               disabled={!proposalForm?.contribuable}>
               {intl.formatMessage({ id: titleTradKey })}
             </Button>
-          </LoginOverlay>
+          </NewLoginOverlay>
         </Popup>
         <MarkerClusterGroup
           spiderfyOnMaxZoom

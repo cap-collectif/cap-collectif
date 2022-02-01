@@ -79,7 +79,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
         />
       </span>
     </h3>
-    <AppBox
+    <Box
       as="span"
       bg={
         Array [
@@ -160,7 +160,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
           interpellation.add
         </Button>
       </Connect(LoginOverlay)>
-    </AppBox>
+    </Box>
   </div>
 </Fragment>
 `;
@@ -244,7 +244,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
         />
       </span>
     </h3>
-    <AppBox
+    <Box
       as="span"
       bg={
         Array [
@@ -325,7 +325,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
           proposal.add
         </Button>
       </Connect(LoginOverlay)>
-    </AppBox>
+    </Box>
   </div>
 </Fragment>
 `;

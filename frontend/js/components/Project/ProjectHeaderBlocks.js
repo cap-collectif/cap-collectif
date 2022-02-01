@@ -3,10 +3,9 @@ import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
 import moment from 'moment';
+import { Text, Box } from '@cap-collectif/ui'
 import ProjectHeaderLayout from '~ui/Project/ProjectHeader';
 import type { ProjectHeaderBlocks_project$key } from '~relay/ProjectHeaderBlocks_project.graphql';
-import Text from '~ui/Primitives/Text';
-import AppBox from '~ui/Primitives/AppBox';
 
 const FRAGMENT = graphql`
   fragment ProjectHeaderBlocks_project on Project {
@@ -92,7 +91,7 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
       debateArgument.totalCount > 0
     ) {
       return (
-        <AppBox padding={1} textAlign="center">
+        <Box padding={1} textAlign="center">
           {(opinions.totalCount > 0 || proposals.totalCount > 0) && (
             <Text marginBottom="0px !important">
               <FormattedMessage
@@ -127,7 +126,7 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
               <FormattedMessage id="answer-count" values={{ count: replies.totalCount }} />
             </Text>
           )}
-        </AppBox>
+        </Box>
       );
     }
   };

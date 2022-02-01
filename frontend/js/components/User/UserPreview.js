@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import UserAvatar from './UserAvatar';
+import UserAvatarLegacy from './UserAvatarLegacy';
 import UserLink from './UserLink';
 import type { UserPreview_user } from '~relay/UserPreview_user.graphql';
 import UserNotConfirmedLabel from './UserNotConfirmedLabel';
@@ -24,7 +24,7 @@ export class UserPreview extends React.Component<Props> {
           <Media>
             <Media.Left>
               {/* $FlowFixMe */}
-              <UserAvatar user={user} />
+              <UserAvatarLegacy user={user} />
             </Media.Left>
             <Media.Body>
               {user ? (
@@ -70,7 +70,7 @@ export default createFragmentContainer(UserPreview, {
   user: graphql`
     fragment UserPreview_user on User {
       ...UserNotConfirmedLabel_user
-      ...UserAvatar_user
+      ...UserAvatarLegacy_user
       id
       url
       displayName

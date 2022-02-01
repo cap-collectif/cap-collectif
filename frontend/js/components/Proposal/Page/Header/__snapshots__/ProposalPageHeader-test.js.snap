@@ -40,7 +40,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
         <Flex
           direction="row"
         >
-          <Relay(Connect(UserAvatar))
+          <Relay(Connect(UserAvatarLegacy))
             user={
               Object {
                 "$fragmentRefs": null,
@@ -149,7 +149,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
         <Flex
           direction="row"
         >
-          <Relay(Connect(UserAvatar))
+          <Relay(Connect(UserAvatarLegacy))
             user={
               Object {
                 "$fragmentRefs": null,
@@ -280,7 +280,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
         <Flex
           direction="row"
         >
-          <Relay(Connect(UserAvatar))
+          <Relay(Connect(UserAvatarLegacy))
             user={
               Object {
                 "$fragmentRefs": null,
@@ -403,7 +403,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
         <Flex
           direction="row"
         >
-          <Relay(Connect(UserAvatar))
+          <Relay(Connect(UserAvatarLegacy))
             user={
               Object {
                 "$fragmentRefs": null,
@@ -516,7 +516,7 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
         <Flex
           direction="row"
         >
-          <Relay(Connect(UserAvatar))
+          <Relay(Connect(UserAvatarLegacy))
             user={
               Object {
                 "$fragmentRefs": null,
@@ -629,7 +629,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
         <Flex
           direction="row"
         >
-          <Relay(Connect(UserAvatar))
+          <Relay(Connect(UserAvatarLegacy))
             user={
               Object {
                 "$fragmentRefs": null,

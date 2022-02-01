@@ -6,7 +6,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
   aria-modal={true}
   data-dialog={true}
   hidden={false}
-  id="id-1"
+  id="user-group-modal"
   onAnimationEnd={[Function]}
   onBlur={[Function]}
   onKeyDown={[Function]}
@@ -15,7 +15,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+    className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -24,7 +24,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
     }
   >
     <div
-      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
+      className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
       style={
         Object {
           "opacity": 0,
@@ -32,30 +32,50 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         }
       }
     >
-      <header
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+      <div
+        className="ResetCss-jmHeCe hpqhdm"
       >
-        <div
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+        <header
+          className="sc-bdvvtL jPHUkp cap-modal__header"
         >
-          <h2
-            className="sc-bdnxRM fenvOW"
+          <div
+            className="sc-bdvvtL hEjsJA"
           >
-            people-with-access-to-project
-          </h2>
-        </div>
-        <button
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
-          onClick={[Function]}
-          type="button"
-        >
-          <IconMock
-            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
-          />
-        </button>
-      </header>
+            <h2
+              className="sc-bdvvtL jlybEY cap-heading"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              people-with-access-to-project
+            </h2>
+          </div>
+          <button
+            className="sc-bdvvtL bFJghn"
+            onClick={[Function]}
+          >
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+      </div>
       <main
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+        className="sc-bdvvtL vunmq cap-modal__footer"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
@@ -87,7 +107,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
               />
             </svg>
             <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX kfdEqC btn-md p-0"
+              className="sc-bdvvtL sc-lcepkR iPfbxu izhULq cap-button btn-md p-0"
               onClick={[Function]}
               title="persons-in-the-group"
               type="button"
@@ -99,7 +119,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
               aria-modal={true}
               data-dialog={true}
               hidden={true}
-              id="id-2"
+              id="<Group-mock-id-2>-modal"
               onAnimationEnd={[Function]}
               onBlur={[Function]}
               onKeyDown={[Function]}
@@ -116,11 +136,17 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         </ul>
       </main>
       <footer
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+        className="sc-bdvvtL glllsy cap-modal__footer"
       >
         <button
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+          className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
           onClick={[MockFunction]}
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
           type="button"
         >
           global.close
@@ -137,7 +163,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
   aria-modal={true}
   data-dialog={true}
   hidden={false}
-  id="id-1"
+  id="user-group-modal"
   onAnimationEnd={[Function]}
   onBlur={[Function]}
   onKeyDown={[Function]}
@@ -146,7 +172,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+    className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -155,7 +181,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
     }
   >
     <div
-      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
+      className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
       style={
         Object {
           "opacity": 0,
@@ -163,30 +189,50 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         }
       }
     >
-      <header
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+      <div
+        className="ResetCss-jmHeCe hpqhdm"
       >
-        <div
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+        <header
+          className="sc-bdvvtL jPHUkp cap-modal__header"
         >
-          <h2
-            className="sc-bdnxRM fenvOW"
+          <div
+            className="sc-bdvvtL hEjsJA"
           >
-            people-with-access-to-project
-          </h2>
-        </div>
-        <button
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
-          onClick={[Function]}
-          type="button"
-        >
-          <IconMock
-            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
-          />
-        </button>
-      </header>
+            <h2
+              className="sc-bdvvtL jlybEY cap-heading"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              people-with-access-to-project
+            </h2>
+          </div>
+          <button
+            className="sc-bdvvtL bFJghn"
+            onClick={[Function]}
+          >
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+      </div>
       <main
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+        className="sc-bdvvtL vunmq cap-modal__footer"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
@@ -218,7 +264,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
               />
             </svg>
             <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX kfdEqC btn-md p-0"
+              className="sc-bdvvtL sc-lcepkR iPfbxu izhULq cap-button btn-md p-0"
               onClick={[Function]}
               title="persons-in-the-group"
               type="button"
@@ -230,7 +276,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
               aria-modal={true}
               data-dialog={true}
               hidden={true}
-              id="id-2"
+              id="<Group-mock-id-2>-modal"
               onAnimationEnd={[Function]}
               onBlur={[Function]}
               onKeyDown={[Function]}
@@ -247,11 +293,17 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         </ul>
       </main>
       <footer
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+        className="sc-bdvvtL glllsy cap-modal__footer"
       >
         <button
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+          className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
           onClick={[MockFunction]}
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
           type="button"
         >
           global.close
@@ -268,7 +320,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
   aria-modal={true}
   data-dialog={true}
   hidden={false}
-  id="id-1"
+  id="user-group-modal"
   onAnimationEnd={[Function]}
   onBlur={[Function]}
   onKeyDown={[Function]}
@@ -277,7 +329,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+    className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -286,7 +338,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
     }
   >
     <div
-      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
+      className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
       style={
         Object {
           "opacity": 0,
@@ -294,30 +346,50 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
         }
       }
     >
-      <header
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+      <div
+        className="ResetCss-jmHeCe hpqhdm"
       >
-        <div
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+        <header
+          className="sc-bdvvtL jPHUkp cap-modal__header"
         >
-          <h2
-            className="sc-bdnxRM fenvOW"
+          <div
+            className="sc-bdvvtL hEjsJA"
           >
-            people-with-access-to-project
-          </h2>
-        </div>
-        <button
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
-          onClick={[Function]}
-          type="button"
-        >
-          <IconMock
-            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
-          />
-        </button>
-      </header>
+            <h2
+              className="sc-bdvvtL jlybEY cap-heading"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              people-with-access-to-project
+            </h2>
+          </div>
+          <button
+            className="sc-bdvvtL bFJghn"
+            onClick={[Function]}
+          >
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+      </div>
       <main
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+        className="sc-bdvvtL vunmq cap-modal__footer"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
@@ -349,7 +421,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
               />
             </svg>
             <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX kfdEqC btn-md p-0"
+              className="sc-bdvvtL sc-lcepkR iPfbxu izhULq cap-button btn-md p-0"
               onClick={[Function]}
               title="persons-in-the-group"
               type="button"
@@ -361,7 +433,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
               aria-modal={true}
               data-dialog={true}
               hidden={true}
-              id="id-2"
+              id="<Group-mock-id-2>-modal"
               onAnimationEnd={[Function]}
               onBlur={[Function]}
               onKeyDown={[Function]}
@@ -378,11 +450,17 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
         </ul>
       </main>
       <footer
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+        className="sc-bdvvtL glllsy cap-modal__footer"
       >
         <button
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+          className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
           onClick={[MockFunction]}
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
           type="button"
         >
           global.close

@@ -11,7 +11,7 @@ exports[`<CommentForm /> should render correctly 1`] = `
     }
   }
 >
-  <UserAvatar
+  <UserAvatarLegacy
     className="pull-left"
     displayUrl={true}
     onBlur={[Function]}
@@ -152,7 +152,7 @@ exports[`<CommentForm /> should render correctly with user 1`] = `
     }
   }
 >
-  <UserAvatar
+  <UserAvatarLegacy
     className="pull-left"
     displayUrl={true}
     onBlur={[Function]}

@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
+import { Avatar } from '@cap-collectif/ui';
 import type { ProjectHeaderAuthorList_project$key } from '~relay/ProjectHeaderAuthorList_project.graphql';
 import ProjectHeaderLayout from '~ui/Project/ProjectHeader';
-import Avatar from '~ds/Avatar/Avatar';
 import ProjectHeaderAuthorsModal from '~/components/Project/Authors/ProjectHeaderAuthorsModal';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
@@ -27,16 +27,19 @@ const ProjectHeaderAuthorList = ({ project }: Props): React.Node => {
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const data = useFragment(FRAGMENT, project);
   if (data.authors && data.authors.length > 0) {
+    const firstAuthor = data.authors[0];
     if (data.authors.length === 1) {
       return (
         <ProjectHeaderLayout.Authors
           active={profilesToggle}
           style={{ cursor: profilesToggle ? 'pointer' : 'default' }}
-          onClick={() => (profilesToggle ? window.open(data.authors[0].url, '_self') : null)}>
+          onClick={() => (profilesToggle ? window.open(firstAuthor.url, '_self') : null)}
+          authors={data.authors}
+        >
           <Avatar
-            key={data.authors[0].id}
-            name={data.authors[0].username}
-            src={data.authors[0].avatarUrl}
+            key={firstAuthor.id}
+            name={firstAuthor.username}
+            src={firstAuthor.avatarUrl}
           />
         </ProjectHeaderLayout.Authors>
       );
@@ -47,10 +50,12 @@ const ProjectHeaderAuthorList = ({ project }: Props): React.Node => {
         <ProjectHeaderLayout.Authors
           active={profilesToggle}
           style={{ cursor: profilesToggle ? 'pointer' : 'default' }}
-          onClick={onOpen}>
-          {data.authors.map(author => (
-            <Avatar key={author.id} name={author.username} src={author.avatarUrl} />
-          ))}
+          onClick={onOpen}
+          authors={data.authors}
+        >
+            {data.authors.map(author => (
+              <Avatar key={author.id} name={author.username} src={author.avatarUrl} />
+            ))}
         </ProjectHeaderLayout.Authors>
       </>
     );

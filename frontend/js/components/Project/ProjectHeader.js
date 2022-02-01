@@ -14,7 +14,7 @@ import ProjectArchivedTag from '~/components/Project/ProjectArchivedTag';
 
 const FRAGMENT = graphql`
   fragment ProjectHeader_project on Project
-  @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
+    @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
     id
     title
     url

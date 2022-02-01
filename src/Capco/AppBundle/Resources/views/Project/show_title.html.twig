@@ -3,7 +3,8 @@
 
 {{ react_render_component('ProjectHeaderApp', {
     'props': {
-        'projectId': project.id|toGlobalId('Project')
+        'projectId': project.id|toGlobalId('Project'),
+        'currentStepType': currentStep.getType()
     },
 })}}
 

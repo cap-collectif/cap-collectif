@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Media, ListGroupItem } from 'react-bootstrap';
-import UserAvatar from '../../User/UserAvatar';
+import UserAvatarLegacy from '../../User/UserAvatarLegacy';
 import OpinionInfos from '../OpinionInfos';
 import OpinionSourceTitle from './OpinionSourceTitle';
 import OpinionSourceContent from './OpinionSourceContent';
@@ -42,7 +42,7 @@ export class OpinionSource extends React.Component<Props> {
             </p>
           )}
           <Media.Left>
-            <UserAvatar user={source.author} />
+            <UserAvatarLegacy user={source.author} />
           </Media.Left>
           <Media.Body className="opinion__body">
             <OpinionInfos rankingThreshold={null} opinion={source} />
@@ -90,14 +90,14 @@ export default createFragmentContainer(OpinionSource, {
         title
         url
         author {
-          ...UserAvatar_user
+          ...UserAvatarLegacy_user
         }
       }
       ... on Version {
         title
         url
         author {
-          ...UserAvatar_user
+          ...UserAvatarLegacy_user
         }
       }
     }

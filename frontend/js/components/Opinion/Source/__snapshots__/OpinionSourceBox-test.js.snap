@@ -1644,7 +1644,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "e909afc62fb5d3a3ac25d9a1ce1cc723",
+            "cacheID": "7d6b31fc85bef7fe3ea2a5fa5d77efd2",
             "id": null,
             "metadata": Object {},
             "name": "OpinionSourceBoxQuery",
@@ -1880,7 +1880,7 @@ fragment OpinionSource_sourceable_39ngnn on Sourceable {
     title
     url
     author {
-      ...UserAvatar_user
+      ...UserAvatarLegacy_user
       id
     }
   }
@@ -1888,7 +1888,7 @@ fragment OpinionSource_sourceable_39ngnn on Sourceable {
     title
     url
     author {
-      ...UserAvatar_user
+      ...UserAvatarLegacy_user
       id
     }
   }
@@ -1963,7 +1963,7 @@ fragment UnpublishedTooltip_publishable on Publishable {
   notPublishedReason
 }
 
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {

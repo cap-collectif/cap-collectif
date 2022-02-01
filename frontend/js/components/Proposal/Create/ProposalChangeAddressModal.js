@@ -127,8 +127,9 @@ const ProposalChangeAddressModal = ({
   };
   return (
     <>
-      <Modal.Body p={0} pt={0} position="relative" height="unset">
+      <Modal.Body>
         <Box
+          position="relative"
           css={{
             '.address-container': {
               position: 'absolute',
@@ -273,7 +274,7 @@ const ProposalChangeAddressModal = ({
           </MapContainer>
         </Box>
       </Modal.Body>
-      <Modal.Footer spacing={2} pt={4} borderTop={`1px solid ${colors.gray[200]}`}>
+      <Modal.Footer>
         <Flex justifyContent="space-between" width="100%">
           <Button
             leftIcon="LONG_ARROW_LEFT"

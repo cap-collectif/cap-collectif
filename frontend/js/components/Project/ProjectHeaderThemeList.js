@@ -7,12 +7,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import type { StyledComponent } from 'styled-components';
+import { Button, Modal } from '@cap-collectif/ui'
 import type { ProjectHeaderThemeList_project$key } from '~relay/ProjectHeaderThemeList_project.graphql';
 import ProjectHeader from '~ui/Project/ProjectHeader';
 import colors from '~/styles/modules/colors';
-import Modal from '~ds/Modal/Modal';
 import ListGroupFlush from '~ui/List/ListGroupFlush';
-import Button from '~ds/Button/Button';
 
 const FRAGMENT = graphql`
   fragment ProjectHeaderThemeList_project on Project {
@@ -80,7 +79,9 @@ const ProjectHeaderThemeList = ({ project, breakingNumber }: Props): React.Node 
         <Modal
           show={isOpen}
           onClose={onClose}
-          ariaLabel={intl.formatMessage({ id: 'data_theme_list' })}>
+          ariaLabel={intl.formatMessage({ id: 'data_theme_list' })}
+          baseId="theme-modal"
+        >
           <Modal.Header>
             <FormattedMessage
               id="count-themes"

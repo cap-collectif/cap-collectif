@@ -16,7 +16,7 @@ exports[`<EventPageHeader /> should render correctly 1`] = `
       </h1>
     </EventPageHeaderstyle__TitleContainer>
     <EventPageHeaderstyle__InfoContainer>
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         size={60}
         user={
           Object {
@@ -173,7 +173,7 @@ exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] =
       </h1>
     </EventPageHeaderstyle__TitleContainer>
     <EventPageHeaderstyle__InfoContainer>
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         size={60}
         user={
           Object {
@@ -313,7 +313,7 @@ exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
       </h1>
     </EventPageHeaderstyle__TitleContainer>
     <EventPageHeaderstyle__InfoContainer>
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         size={60}
         user={
           Object {
@@ -455,7 +455,7 @@ exports[`<EventPageHeader /> should render correctly when type online 1`] = `
       </h1>
     </EventPageHeaderstyle__TitleContainer>
     <EventPageHeaderstyle__InfoContainer>
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         size={60}
         user={
           Object {
@@ -629,7 +629,7 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
       </h1>
     </EventPageHeaderstyle__TitleContainer>
     <EventPageHeaderstyle__InfoContainer>
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         size={60}
         user={
           Object {
@@ -845,7 +845,7 @@ exports[`<EventPageHeader /> should render without comments count when not comme
       </h1>
     </EventPageHeaderstyle__TitleContainer>
     <EventPageHeaderstyle__InfoContainer>
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         size={60}
         user={
           Object {
@@ -987,7 +987,7 @@ exports[`<EventPageHeader /> should render without guest count and comments coun
       </h1>
     </EventPageHeaderstyle__TitleContainer>
     <EventPageHeaderstyle__InfoContainer>
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         size={60}
         user={
           Object {
@@ -1112,7 +1112,7 @@ exports[`<EventPageHeader /> should render without guest count when guest list i
       </h1>
     </EventPageHeaderstyle__TitleContainer>
     <EventPageHeaderstyle__InfoContainer>
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         size={60}
         user={
           Object {

@@ -3,7 +3,7 @@
 exports[`<UserRegister /> should render correctly 1`] = `
 <UserRegisterstyle__Container>
   <div>
-    <Relay(Connect(UserAvatar))
+    <Relay(Connect(UserAvatarLegacy))
       user={
         Object {
           "$fragmentRefs": null,

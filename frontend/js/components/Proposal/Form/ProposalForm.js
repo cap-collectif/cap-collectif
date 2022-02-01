@@ -59,6 +59,8 @@ import { formatGeoJsons, geoContains, type GeoJson } from '~/utils/geojson';
 import { ProposalFormMapPreview } from './ProposalFormMapPreview';
 import UserListField from '~/components/Admin/Field/UserListField';
 import { mapOpenPopup } from '~/components/Proposal/Map/Map.events';
+import type { CreateProposalInput } from '~relay/CreateProposalMutation.graphql';
+import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMutation.graphql';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -128,6 +130,7 @@ export type Props = {|
   +isBackOfficeInput?: boolean,
   +errorCount?: number,
   +onAddressEdit?: () => void,
+  +setValuesSaved?: (values: CreateProposalInput | ChangeProposalContentInput) => void,
 |};
 
 export type FormValues = {|
@@ -195,7 +198,15 @@ const TipsmeeeFormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
 const onSubmit = (
   values: FormValues,
   dispatch: Dispatch,
-  { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed }: Props,
+  {
+    proposalForm,
+    proposal,
+    features,
+    intl,
+    onSubmitSuccess,
+    onSubmitFailed,
+    setValuesSaved,
+  }: Props,
 ) => {
   const data = {
     title: values.title,
@@ -240,6 +251,11 @@ const onSubmit = (
   }
 
   if (proposal) {
+    if (setValuesSaved)
+      setValuesSaved({
+        ...data,
+        id: proposal.id,
+      });
     return ChangeProposalContentMutation.commit({
       input: { ...data, id: proposal.id },
       proposalRevisionsEnabled: features.proposal_revisions ?? false,
@@ -266,6 +282,12 @@ const onSubmit = (
         });
       });
   }
+
+  if (setValuesSaved)
+    setValuesSaved({
+      ...data,
+      proposalFormId: proposalForm.id,
+    });
 
   return CreateProposalMutation.commit({
     input: {

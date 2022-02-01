@@ -3,12 +3,11 @@ import * as React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { graphql, usePaginationFragment } from 'react-relay';
+import { Heading, Button, Modal, CapUIModalSize } from '@cap-collectif/ui'
 import UserAvatar from '../../User/UserAvatar';
-import Modal from '~ds/Modal/Modal';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 import type { UserInGroupModal_group$key } from '~relay/UserInGroupModal_group.graphql';
-import Heading from '~ui/Primitives/Heading';
-import Button from '~ds/Button/Button';
+import ResetCss from '~/utils/ResetCss';
 
 type RelayProps = {|
   group: UserInGroupModal_group$key,
@@ -50,13 +49,18 @@ const UserInGroupModal = ({ show, group, handleClose }: Props): React.Node => {
   const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(FRAGMENT, group);
   return (
     <Modal
+      baseId={`${data.id}-modal`}
       id={`${data.id}-modal`}
       show={show}
       onClose={handleClose}
-      ariaLabel={intl.formatMessage({ id: 'people-with-access-to-project' })}>
-      <Modal.Header>
-        <Heading id="contained-modal-title-lg">{data.title}</Heading>
-      </Modal.Header>
+      ariaLabel={intl.formatMessage({ id: 'people-with-access-to-project' })}
+      size={CapUIModalSize.Lg}
+    >
+      <ResetCss>
+        <Modal.Header>
+          <Heading id="contained-modal-title-lg">{data.title}</Heading>
+        </Modal.Header>
+      </ResetCss>
       <Modal.Body>
         {data.users !== null && data.users.edges && data.users.edges.length > 0 && (
           <ListGroupFlush>
@@ -66,7 +70,7 @@ const UserInGroupModal = ({ show, group, handleClose }: Props): React.Node => {
               .filter(Boolean)
               .map(user => (
                 <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
-                  <UserAvatar user={user} />
+                   <UserAvatar user={user} />
                   <a
                     href={user.url}
                     className="align-self-center"

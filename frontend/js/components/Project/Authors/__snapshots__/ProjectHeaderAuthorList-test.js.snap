@@ -7,7 +7,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-1"
+    id="show-authors-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -21,56 +21,55 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
-    id="project-header"
-    onClick={[Function]}
-    style={
-      Object {
-        "cursor": "default",
-      }
-    }
+    className="sc-bdvvtL eOtkDA"
   >
     <div
-      className="sc-bdnxRM gwxoTk"
+      className="sc-bdvvtL dmRHxa cap-avatar-group projectHeader__authors platform__body"
+      id="project-header"
+      onClick={[Function]}
+      role="group"
+      style={
+        Object {
+          "cursor": "default",
+        }
+      }
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
-        style={
-          Object {
-            "background": "#862d84",
-            "color": undefined,
-          }
-        }
-        title="admin"
+        className="sc-bdvvtL dZFYjr"
       >
-        a
+        <div
+          className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
+        >
+          a
+        </div>
       </div>
-    </div>
-    <div
-      className="sc-bdnxRM hEKNNt"
-    >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
-        style={
-          Object {
-            "background": "#1f4a93",
-            "color": undefined,
-          }
-        }
+        className="sc-bdvvtL dZFYjr"
       >
-        <img
-          alt="welcomattic"
-          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
-          src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+        <div
+          className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
           title="welcomattic"
-        />
+        >
+          <img
+            alt="welcomattic"
+            className="sc-bdvvtL gEWnzg"
+            src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+            title="welcomattic"
+          />
+        </div>
       </div>
     </div>
     <p
-      className="sc-bdnxRM fChsQe platform__body"
+      className="sc-bdvvtL fnwNFv cap-text platform__body"
       id="authors-credit"
+      onClick={[Function]}
     >
-      avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
+      avatar-group-shownames-2
     </p>
   </div>,
 ]
@@ -83,7 +82,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-1"
+    id="show-authors-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -97,56 +96,55 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
-    id="project-header"
-    onClick={[Function]}
-    style={
-      Object {
-        "cursor": "default",
-      }
-    }
+    className="sc-bdvvtL eOtkDA"
   >
     <div
-      className="sc-bdnxRM gwxoTk"
+      className="sc-bdvvtL dmRHxa cap-avatar-group projectHeader__authors platform__body"
+      id="project-header"
+      onClick={[Function]}
+      role="group"
+      style={
+        Object {
+          "cursor": "default",
+        }
+      }
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
-        style={
-          Object {
-            "background": "#862d84",
-            "color": undefined,
-          }
-        }
-        title="admin"
+        className="sc-bdvvtL dZFYjr"
       >
-        a
+        <div
+          className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
+        >
+          a
+        </div>
       </div>
-    </div>
-    <div
-      className="sc-bdnxRM hEKNNt"
-    >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
-        style={
-          Object {
-            "background": "#1f4a93",
-            "color": undefined,
-          }
-        }
+        className="sc-bdvvtL dZFYjr"
       >
-        <img
-          alt="welcomattic"
-          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
-          src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+        <div
+          className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
           title="welcomattic"
-        />
+        >
+          <img
+            alt="welcomattic"
+            className="sc-bdvvtL gEWnzg"
+            src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+            title="welcomattic"
+          />
+        </div>
       </div>
     </div>
     <p
-      className="sc-bdnxRM fChsQe platform__body"
+      className="sc-bdvvtL fnwNFv cap-text platform__body"
       id="authors-credit"
+      onClick={[Function]}
     >
-      avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
+      avatar-group-shownames-2
     </p>
   </div>,
 ]
@@ -159,7 +157,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-1"
+    id="show-authors-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -173,56 +171,55 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
-    id="project-header"
-    onClick={[Function]}
-    style={
-      Object {
-        "cursor": "default",
-      }
-    }
+    className="sc-bdvvtL eOtkDA"
   >
     <div
-      className="sc-bdnxRM gwxoTk"
+      className="sc-bdvvtL dmRHxa cap-avatar-group projectHeader__authors platform__body"
+      id="project-header"
+      onClick={[Function]}
+      role="group"
+      style={
+        Object {
+          "cursor": "default",
+        }
+      }
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
-        style={
-          Object {
-            "background": "#862d84",
-            "color": undefined,
-          }
-        }
-        title="admin"
+        className="sc-bdvvtL dZFYjr"
       >
-        a
+        <div
+          className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
+        >
+          a
+        </div>
       </div>
-    </div>
-    <div
-      className="sc-bdnxRM hEKNNt"
-    >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
-        style={
-          Object {
-            "background": "#1f4a93",
-            "color": undefined,
-          }
-        }
+        className="sc-bdvvtL dZFYjr"
       >
-        <img
-          alt="welcomattic"
-          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
-          src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+        <div
+          className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
           title="welcomattic"
-        />
+        >
+          <img
+            alt="welcomattic"
+            className="sc-bdvvtL gEWnzg"
+            src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+            title="welcomattic"
+          />
+        </div>
       </div>
     </div>
     <p
-      className="sc-bdnxRM fChsQe platform__body"
+      className="sc-bdvvtL fnwNFv cap-text platform__body"
       id="authors-credit"
+      onClick={[Function]}
     >
-      avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
+      avatar-group-shownames-2
     </p>
   </div>,
 ]
@@ -235,7 +232,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-1"
+    id="show-authors-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -249,56 +246,55 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
-    id="project-header"
-    onClick={[Function]}
-    style={
-      Object {
-        "cursor": "default",
-      }
-    }
+    className="sc-bdvvtL eOtkDA"
   >
     <div
-      className="sc-bdnxRM gwxoTk"
+      className="sc-bdvvtL dmRHxa cap-avatar-group projectHeader__authors platform__body"
+      id="project-header"
+      onClick={[Function]}
+      role="group"
+      style={
+        Object {
+          "cursor": "default",
+        }
+      }
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
-        style={
-          Object {
-            "background": "#862d84",
-            "color": undefined,
-          }
-        }
-        title="admin"
+        className="sc-bdvvtL dZFYjr"
       >
-        a
+        <div
+          className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
+        >
+          a
+        </div>
       </div>
-    </div>
-    <div
-      className="sc-bdnxRM hEKNNt"
-    >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
-        style={
-          Object {
-            "background": "#1f4a93",
-            "color": undefined,
-          }
-        }
+        className="sc-bdvvtL dZFYjr"
       >
-        <img
-          alt="welcomattic"
-          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
-          src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+        <div
+          className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
           title="welcomattic"
-        />
+        >
+          <img
+            alt="welcomattic"
+            className="sc-bdvvtL gEWnzg"
+            src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+            title="welcomattic"
+          />
+        </div>
       </div>
     </div>
     <p
-      className="sc-bdnxRM fChsQe platform__body"
+      className="sc-bdvvtL fnwNFv cap-text platform__body"
       id="authors-credit"
+      onClick={[Function]}
     >
-      avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
+      avatar-group-shownames-2
     </p>
   </div>,
 ]

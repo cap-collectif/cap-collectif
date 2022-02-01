@@ -6,7 +6,7 @@ exports[`<RegisterForm /> should render correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <RegisterFormstyle__UserInfo>
-    <Relay(Connect(UserAvatar))
+    <Relay(Connect(UserAvatarLegacy))
       user={
         Object {
           "$fragmentRefs": null,

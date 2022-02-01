@@ -7538,7 +7538,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "e5d2245edef09b5285dd117f766ffd2a",
+        "cacheID": "3b44b673caa2c91cabb134e3d41355da",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -8058,7 +8058,7 @@ fragment ProposalAnalysisPanel_proposal_2uwUKI on Proposal {
 fragment ProposalAnalysisUserRow_user on User {
   id
   displayName
-  ...UserAvatar_user
+  ...UserAvatarLegacy_user
 }
 
 fragment ProposalAssessmentFormPanel_proposal_2uwUKI on Proposal {
@@ -8266,11 +8266,24 @@ fragment ProposalEditModal_proposal_19sAkT on Proposal {
     contribuable
     ...ProposalForm_proposalForm
     ...ProposalOtherPanelsModal_proposalForm
+    ...ProposalErrorModal_proposalForm
     id
   }
   publicationStatus
   ...ProposalForm_proposal_4iFR9m
+  ...ProposalErrorModal_proposal
   ...ProposalDraftAlert_proposal
+}
+
+fragment ProposalErrorModal_proposal on Proposal {
+  id
+}
+
+fragment ProposalErrorModal_proposalForm on ProposalForm {
+  id
+  step {
+    id
+  }
 }
 
 fragment ProposalFollowButton_proposal_39ngnn on Proposal {
@@ -8873,7 +8886,7 @@ fragment ProposalPageHeader_proposal_19sAkT on Proposal {
   author {
     username
     isViewer @include(if: $isAuthenticated)
-    ...UserAvatar_user
+    ...UserAvatarLegacy_user
     id
   }
   createdAt
@@ -9701,6 +9714,15 @@ fragment UnpublishedTooltip_publishable on Publishable {
   notPublishedReason
 }
 
+fragment UserAvatarLegacy_user on User {
+  url
+  username
+  media {
+    url
+    id
+  }
+}
+
 fragment UserAvatar_user on User {
   url
   username
@@ -9725,7 +9747,7 @@ fragment UserNotConfirmedLabel_user on User {
 
 fragment UserPreview_user on User {
   ...UserNotConfirmedLabel_user
-  ...UserAvatar_user
+  ...UserAvatarLegacy_user
   id
   url
   displayName

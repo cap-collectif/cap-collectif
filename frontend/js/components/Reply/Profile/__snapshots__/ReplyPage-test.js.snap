@@ -311,7 +311,7 @@ exports[`<ReplyPage /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "66b00b39be90c745f2136f539afb76f7",
+          "cacheID": "745ee6a5547d7ae6dae29c906cd852cc",
           "id": null,
           "metadata": Object {},
           "name": "ReplyPageQuery",
@@ -354,14 +354,14 @@ fragment Reply_reply_39ngnn on Reply {
   }
   ... on UserReply {
     author {
-      ...UserAvatar_user
+      ...UserAvatarLegacy_user
       ...UserLink_user
       id
     }
   }
 }
 
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {
@@ -700,7 +700,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "66b00b39be90c745f2136f539afb76f7",
+          "cacheID": "745ee6a5547d7ae6dae29c906cd852cc",
           "id": null,
           "metadata": Object {},
           "name": "ReplyPageQuery",
@@ -743,14 +743,14 @@ fragment Reply_reply_39ngnn on Reply {
   }
   ... on UserReply {
     author {
-      ...UserAvatar_user
+      ...UserAvatarLegacy_user
       ...UserLink_user
       id
     }
   }
 }
 
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {
@@ -1089,7 +1089,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
           ],
         },
         "params": Object {
-          "cacheID": "66b00b39be90c745f2136f539afb76f7",
+          "cacheID": "745ee6a5547d7ae6dae29c906cd852cc",
           "id": null,
           "metadata": Object {},
           "name": "ReplyPageQuery",
@@ -1132,14 +1132,14 @@ fragment Reply_reply_39ngnn on Reply {
   }
   ... on UserReply {
     author {
-      ...UserAvatar_user
+      ...UserAvatarLegacy_user
       ...UserLink_user
       id
     }
   }
 }
 
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {

@@ -2,10 +2,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
-import Tooltip from '~ds/Tooltip/Tooltip';
-import Tag from '~ds/Tag/Tag';
+import { Tag, Tooltip, CapUIIcon, Icon } from '@cap-collectif/ui'
 import type { RenderPrivateAccess_project$key } from '~relay/RenderPrivateAccess_project.graphql';
-import { ICON_NAME } from '~ds/Icon/Icon';
 
 type Props = {
   project: RenderPrivateAccess_project$key,
@@ -30,10 +28,10 @@ const RenderPrivateAccess = ({ project, isOnProjectCard = false }: Props): React
     <Tooltip placement="top" label={<FormattedMessage id={visibleBy} />}>
       <Tag
         id="restricted-access"
-        icon={ICON_NAME.LOCK}
-        variant="neutral-gray"
-        color={data.archived ? 'neutral-gray.500' : 'neutral-gray.800'}
-        mr={isOnProjectCard ? 4 : 0}>
+        variantColor={data.archived ? 'gray' : 'neutral-gray'}
+        mr={isOnProjectCard ? 4 : 0}
+      >
+        <Icon name={CapUIIcon.Lock}/>
         <FormattedMessage id="restrictedaccess" />
       </Tag>
     </Tooltip>

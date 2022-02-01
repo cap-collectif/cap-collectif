@@ -11,7 +11,7 @@ import {
   NameContainer,
   ParticipantInfo,
 } from './ProjectAdminParticipant.style';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import InlineList from '~ui/List/InlineList';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors, { styleGuideColors } from '~/utils/colors';
@@ -144,7 +144,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
         </InlineList>
       </ParticipantInfo>
 
-      <UserAvatar user={participant} size={42} />
+      <UserAvatarLegacy user={participant} size={42} />
     </Container>
   );
 };
@@ -174,7 +174,7 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
       contributions(contribuableId: $contribuableId, includeTrashed: true) {
         totalCount
       }
-      ...UserAvatar_user
+      ...UserAvatarLegacy_user
     }
   `,
 });

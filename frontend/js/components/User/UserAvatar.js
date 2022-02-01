@@ -3,15 +3,15 @@ import React from 'react';
 import styled, { css, type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { Icon } from '@cap-collectif/ui'
 import DefaultAvatar from './DefaultAvatar';
 import type { State, FeatureToggles } from '~/types';
 import type { UserAvatar_user } from '~relay/UserAvatar_user.graphql';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { Circle } from '~ui/Medias/AvatarBadge/AvatarBadge.style';
 
 export type Badge = {|
   color: string,
-  icon: $Values<typeof ICON_NAME>,
+  icon: string,
   size: number,
   iconSize: number,
   iconColor: string,

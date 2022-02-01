@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import { ICON_NAME } from '~ui/Icons/Icon';
 import type { AnalysisProposalListRole_proposal } from '~relay/AnalysisProposalListRole_proposal.graphql';
 import AnalysisProposalListRoleContainer, {
@@ -46,7 +46,7 @@ const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
                 {intl.formatMessage({ id: 'global.assigned.to' })} {supervisor.username}
               </Tooltip>
             }>
-            <UserAvatar
+            <UserAvatarLegacy
               user={supervisor}
               displayUrl={false}
               size={AVATAR_SIZE}
@@ -66,7 +66,7 @@ const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
                 {intl.formatMessage({ id: 'global.assigned.to' })} {decisionMaker.username}
               </Tooltip>
             }>
-            <UserAvatar
+            <UserAvatarLegacy
               user={decisionMaker}
               displayUrl={false}
               size={AVATAR_SIZE}

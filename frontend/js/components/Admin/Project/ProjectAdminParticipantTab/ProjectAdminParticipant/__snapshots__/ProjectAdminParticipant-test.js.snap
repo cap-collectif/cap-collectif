@@ -112,7 +112,7 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "b
       </ul>
     </div>
     <span
-      className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+      className="UserAvatarLegacy__UserAvatarContainer-eQVGyq fSduWg"
       onBlur={[Function]}
       onFocus={[Function]}
       onMouseOut={[Function]}
@@ -252,7 +252,7 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "beta_
       </ul>
     </div>
     <span
-      className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+      className="UserAvatarLegacy__UserAvatarContainer-eQVGyq fSduWg"
       onBlur={[Function]}
       onFocus={[Function]}
       onMouseOut={[Function]}

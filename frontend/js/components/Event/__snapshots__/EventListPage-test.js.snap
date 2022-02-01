@@ -1617,7 +1617,7 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "dd8546fe034db9f173f30cacadc08fbb",
+          "cacheID": "d42069ce698452eeff891468c58e1495",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -1874,11 +1874,11 @@ fragment TagUser_user on User {
     url
     id
   }
-  ...UserAvatar_user
+  ...UserAvatarLegacy_user
   ...UserLink_user
 }
 
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {
@@ -3536,7 +3536,7 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "dd8546fe034db9f173f30cacadc08fbb",
+          "cacheID": "d42069ce698452eeff891468c58e1495",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -3793,11 +3793,11 @@ fragment TagUser_user on User {
     url
     id
   }
-  ...UserAvatar_user
+  ...UserAvatarLegacy_user
   ...UserLink_user
 }
 
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {
@@ -5455,7 +5455,7 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "dd8546fe034db9f173f30cacadc08fbb",
+          "cacheID": "d42069ce698452eeff891468c58e1495",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -5712,11 +5712,11 @@ fragment TagUser_user on User {
     url
     id
   }
-  ...UserAvatar_user
+  ...UserAvatarLegacy_user
   ...UserLink_user
 }
 
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {

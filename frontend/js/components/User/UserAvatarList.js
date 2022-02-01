@@ -6,7 +6,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { OverlayTrigger } from 'react-bootstrap';
 
 import UserAvatarList from '../Ui/List/UserAvatarList';
-import UserAvatar from './UserAvatar';
+import UserAvatarLegacy from './UserAvatarLegacy';
 import type { State, FeatureToggles } from '../../types';
 import Tooltip from '../Utils/Tooltip';
 import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
@@ -36,7 +36,7 @@ export const UserAvatarListContainer = (props: Props) => {
         {users &&
           users.map((user, index) =>
             shouldRedirectProfile ? (
-              <UserAvatar
+              <UserAvatarLegacy
                 key={index}
                 {...(avatarSize ? { size: avatarSize } : {})}
                 user={user}
@@ -47,7 +47,7 @@ export const UserAvatarListContainer = (props: Props) => {
                 key={index}
                 placement="top"
                 overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
-                <UserAvatar
+                <UserAvatarLegacy
                   {...(avatarSize ? { size: avatarSize } : {})}
                   user={user}
                   features={features}

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import UserAvatar from '../User/UserAvatar';
+import UserAvatarLegacy from '../User/UserAvatarLegacy';
 import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
 import CommentVoteButton from './CommentVoteButton';
@@ -30,7 +30,7 @@ export class CommentAnswer extends React.Component<Props> {
         isHighlighted={isHighlighted}
         isAnswer>
         <div className="Commentavatar">
-          <UserAvatar user={comment.author} />
+          <UserAvatarLegacy user={comment.author} />
         </div>
         <Media className="opinion">
           <Media.Body className="opinion__body">

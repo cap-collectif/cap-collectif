@@ -66,6 +66,7 @@ const ModalProposalIllustration = ({
   const intl = useIntl();
   return (
     <Modal
+      baseId="proposal-illustration-modal"
       size={CapUIModalSize.Md}
       show={show}
       onClose={onClose}

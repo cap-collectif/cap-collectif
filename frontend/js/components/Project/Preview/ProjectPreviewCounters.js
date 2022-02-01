@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
-import ProjectHeaderDistrictsList from '../ProjectHeaderDistrictsList';
+import ProjectHeaderDistrictsListLegacy from '../ProjectHeaderDistrictsListLegacy';
 import TagsList from '../../Ui/List/TagsList';
-import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
+import ProjectRestrictedAccessFragmentLegacy from '../Page/ProjectRestrictedAccessFragmentLegacy';
 import type { ProjectPreviewCounters_project } from '~relay/ProjectPreviewCounters_project.graphql';
 
 type Props = {|
@@ -60,9 +60,9 @@ export class ProjectPreviewCounters extends React.Component<Props> {
             />
           )}
           {project.districts && project.districts.totalCount > 0 && (
-            <ProjectHeaderDistrictsList project={project} breakingNumber={1} />
+            <ProjectHeaderDistrictsListLegacy project={project} breakingNumber={1} />
           )}
-          <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" isOnProjectCard />
+          <ProjectRestrictedAccessFragmentLegacy project={project} icon="cap-lock-2-1" isOnProjectCard />
         </TagsList>
       </div>
     );
@@ -84,7 +84,7 @@ export default createFragmentContainer(ProjectPreviewCounters, {
       }
       hasParticipativeStep
       isExternal
-      ...ProjectHeaderDistrictsList_project
+      ...ProjectHeaderDistrictsListLegacy_project
       isVotesCounterDisplayable
       isContributionsCounterDisplayable
       isParticipantsCounterDisplayable
@@ -106,7 +106,7 @@ export default createFragmentContainer(ProjectPreviewCounters, {
       type {
         title
       }
-      ...ProjectRestrictedAccessFragment_project
+      ...ProjectRestrictedAccessFragmentLegacy_project
       ...ProjectType_project
     }
   `,

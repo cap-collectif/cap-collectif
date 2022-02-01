@@ -3,14 +3,26 @@
 exports[`<ProjectHeaderThemeList /> should render correctly 1`] = `
 Array [
   <a
-    className="sc-bdnxRM HxneP ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
+    className="sc-bdvvtL cAlSLs ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
     onClick={[Function]}
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG griLIq fZkSKg AMDLx icon"
-    />
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ elfRAM jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 12 10"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.785.785 0 003.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727V3.182z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
     <p
-      className="sc-bdnxRM hELlhr platform__body"
+      className="sc-bdvvtL iWabdg cap-text platform__body"
       title="Immobilier "
     >
       Immobilier
@@ -23,7 +35,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-1"
+    id="theme-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -42,14 +54,26 @@ Array [
 exports[`<ProjectHeaderThemeList /> should render correctly when project is archived 1`] = `
 Array [
   <a
-    className="sc-bdnxRM HxneP ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
+    className="sc-bdvvtL cAlSLs ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
     onClick={[Function]}
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG griLIq fZkSKg AMDLx icon"
-    />
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ elfRAM jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 12 10"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.785.785 0 003.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727V3.182z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
     <p
-      className="sc-bdnxRM hELlhr platform__body"
+      className="sc-bdvvtL iWabdg cap-text platform__body"
       title="Immobilier "
     >
       Immobilier
@@ -62,7 +86,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-1"
+    id="theme-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -81,14 +105,26 @@ Array [
 exports[`<ProjectHeaderThemeList /> should render correctly with the display of modal 1`] = `
 Array [
   <a
-    className="sc-bdnxRM HxneP ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
+    className="sc-bdvvtL cAlSLs ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
     onClick={[Function]}
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG griLIq fZkSKg AMDLx icon"
-    />
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ elfRAM jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 12 10"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.785.785 0 003.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727V3.182z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
     <p
-      className="sc-bdnxRM hELlhr platform__body"
+      className="sc-bdvvtL iWabdg cap-text platform__body"
       title="Immobilier "
     >
       Immobilier
@@ -101,7 +137,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={false}
-    id="id-1"
+    id="theme-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -110,7 +146,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+      className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -119,7 +155,7 @@ Array [
       }
     >
       <div
-        className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
+        className="sc-bdvvtL hnbcdn sc-GEbAx cap-modal"
         style={
           Object {
             "opacity": 0,
@@ -128,25 +164,35 @@ Array [
         }
       >
         <header
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+          className="sc-bdvvtL jPHUkp cap-modal__header"
         >
           <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+            className="sc-bdvvtL hEjsJA"
           >
             count-themes {"count":4}
           </div>
           <button
-            className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
+            className="sc-bdvvtL bFJghn"
             onClick={[Function]}
-            type="button"
           >
-            <IconMock
-              className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
-            />
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
           </button>
         </header>
         <main
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+          className="sc-bdvvtL vunmq cap-modal__footer"
         >
           <ul
             className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
@@ -191,11 +237,17 @@ Array [
           </ul>
         </main>
         <footer
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+          className="sc-bdvvtL glllsy cap-modal__footer"
         >
           <button
-            className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+            className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
             onClick={[Function]}
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
             type="button"
           >
             global.close

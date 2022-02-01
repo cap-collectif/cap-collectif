@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
-import UserAvatar from '../User/UserAvatar';
+import UserAvatarLegacy from '../User/UserAvatarLegacy';
 import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
 import CommentVoteButtonLegacy from './CommentVoteButtonLegacy';
@@ -72,7 +72,7 @@ export class Comment extends React.Component<Props, State> {
     return (
       <CommentContainer as="li" useBodyColor={useBodyColor} isHighlighted={isHighlighted}>
         {/* $FlowFixMe */}
-        <UserAvatar user={comment.author} size={45} />
+        <UserAvatarLegacy user={comment.author} size={45} />
         <Media className="opinion">
           <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
             <div className="opinion__data">

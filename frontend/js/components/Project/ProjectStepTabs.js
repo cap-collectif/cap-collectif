@@ -114,7 +114,7 @@ const ProjectStepTabs = ({ project }: Props): React.Node => {
   }
   return (
     <ProjectHeader.Frise>
-      <ProjectHeader.Steps
+       <ProjectHeader.Steps
         modalTitle={intl.formatMessage({ id: 'project-header-step-modal-title' })}
         currentStepIndex={currentStepIndex}>
         {data.steps
@@ -130,7 +130,7 @@ const ProjectStepTabs = ({ project }: Props): React.Node => {
               {renderProgressBar(step)}
             </ProjectHeader.Step>
           ))}
-      </ProjectHeader.Steps>
+       </ProjectHeader.Steps>
     </ProjectHeader.Frise>
   );
 };

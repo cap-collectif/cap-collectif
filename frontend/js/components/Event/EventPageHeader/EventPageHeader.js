@@ -14,7 +14,7 @@ import {
   ActionContainer,
   UsernameContainer,
 } from './EventPageHeader.style';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import type { State } from '~/types';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
@@ -82,7 +82,7 @@ export const EventPageHeader = ({
         </TitleContainer>
 
         <InfoContainer>
-          <UserAvatar user={author} size={60} />
+          <UserAvatarLegacy user={author} size={60} />
           <div>
             <UsernameContainer>
               {hasProfileEnabled && author ? (
@@ -282,7 +282,7 @@ export default createFragmentContainer(EventPageHeaderConnected, {
         id
         username
         url
-        ...UserAvatar_user
+        ...UserAvatarLegacy_user
       }
       review {
         status

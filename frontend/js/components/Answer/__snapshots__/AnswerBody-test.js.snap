@@ -10,7 +10,7 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
       }
     }
   >
-    <Relay(Connect(UserAvatar))
+    <Relay(Connect(UserAvatarLegacy))
       className="pull-left"
       user={
         Object {

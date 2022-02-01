@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
-import ProposalVoteButtonWrapperFragmentLegacy from '../Vote/ProposalVoteButtonWrapperFragmentLegacy';
+import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
 import type { ProposalPreviewVote_proposal } from '~relay/ProposalPreviewVote_proposal.graphql';
 import type { ProposalPreviewVote_step } from '~relay/ProposalPreviewVote_step.graphql';
 import type { ProposalPreviewVote_viewer } from '~relay/ProposalPreviewVote_viewer.graphql';
@@ -27,7 +27,7 @@ export class ProposalPreviewVote extends React.Component<Props> {
     const { proposal, step, viewer } = this.props;
     return (
       <Container>
-        <ProposalVoteButtonWrapperFragmentLegacy
+        <ProposalVoteButtonWrapperFragment
           proposal={proposal}
           step={step}
           viewer={viewer}
@@ -43,7 +43,7 @@ export class ProposalPreviewVote extends React.Component<Props> {
 export default createFragmentContainer(ProposalPreviewVote, {
   viewer: graphql`
     fragment ProposalPreviewVote_viewer on User {
-      ...ProposalVoteButtonWrapperFragmentLegacy_viewer
+      ...ProposalVoteButtonWrapperFragment_viewer
         @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
     }
   `,
@@ -52,7 +52,7 @@ export default createFragmentContainer(ProposalPreviewVote, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
-      ...ProposalVoteButtonWrapperFragmentLegacy_proposal
+      ...ProposalVoteButtonWrapperFragment_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
     }
   `,
@@ -60,7 +60,7 @@ export default createFragmentContainer(ProposalPreviewVote, {
     fragment ProposalPreviewVote_step on Step
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
-      ...ProposalVoteButtonWrapperFragmentLegacy_step @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, useFragment } from 'react-relay';
-import AppBox from '~ui/Primitives/AppBox';
+import { Box } from '@cap-collectif/ui'
 import RenderCustomAccess from './RenderCustomAccess';
 import RenderPrivateAccess from './RenderPrivateAccess';
 import type { ProjectRestrictedAccessFragment_project$key } from '~relay/ProjectRestrictedAccessFragment_project.graphql';
@@ -28,7 +28,7 @@ const ProjectRestrictedAccessFragment = ({
   if (data && data.visibility) {
     if (data.visibility === 'CUSTOM') {
       return (
-        <AppBox
+        <Box
           style={{ cursor: 'pointer' }}
           position="absolute"
           top={isOnProjectCard ? '-44px' : '12px'}
@@ -36,19 +36,19 @@ const ProjectRestrictedAccessFragment = ({
           <React.Fragment>
             <RenderCustomAccess project={data} isOnProjectCard={isOnProjectCard} />
           </React.Fragment>
-        </AppBox>
+        </Box>
       );
     }
     if (data.visibility === 'ME' || data.visibility === 'ADMIN') {
       return (
-        <AppBox
+        <Box
           position="absolute"
           top={isOnProjectCard ? '-44px' : '12px'}
           right={isOnProjectCard ? 0 : '10px'}>
           <React.Fragment>
             <RenderPrivateAccess project={data} isOnProjectCard={isOnProjectCard} />
           </React.Fragment>
-        </AppBox>
+        </Box>
       );
     }
   }

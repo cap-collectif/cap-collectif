@@ -70,7 +70,7 @@ global.window.matchMedia =
 
 // $FlowFixMe we are in jest mode
 console.error = () => {
-  return;
+  
 };
 
 // $FlowFixMe we are in jest mode
@@ -207,3 +207,13 @@ jest.mock('react-router-dom', () => ({
   }),
   useRouteMatch: () => ({ url: '/mock/url' }),
 }));
+
+
+jest.mock('@cap-collectif/ui', () => {
+  const mockMath = Object.create(global.Math);
+  mockMath.random = () => 0.5;
+  global.Math = mockMath;
+  return {
+    ...jest.requireActual('@cap-collectif/ui'),
+  };
+});

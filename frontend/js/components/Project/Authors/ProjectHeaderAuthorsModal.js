@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import { graphql, useFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
+import { Modal, Button, Heading, CapUIModalSize } from '@cap-collectif/ui'
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
-import Modal from '~ds/Modal/Modal';
 import UserAvatar from '../../User/UserAvatar';
-import Button from '~ds/Button/Button';
-import Heading from '~ui/Primitives/Heading';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import type { ProjectHeaderAuthorsModal_project$key } from '~relay/ProjectHeaderAuthorsModal_project.graphql';
+import ResetCss from '~/utils/ResetCss';
+
 
 type Props = {|
   +show: boolean,
@@ -56,17 +56,22 @@ const ProjectHeaderAuthorsModal = ({ show, onClose, project }: Props): React.Nod
   return (
     <Modal
       id="show-authors-modal"
+      baseId="show-authors-modal"
       show={show}
       onClose={onClose}
-      ariaLabel={intl.formatMessage({ id: 'project.authors' })}>
-      <Modal.Header>
-        <Heading>
-          {intl.formatMessage(
-            { id: 'number-of-authors' },
-            { num: data.authors ? data.authors.length : 0 },
-          )}
-        </Heading>
-      </Modal.Header>
+      ariaLabel={intl.formatMessage({ id: 'project.authors' })}
+      size={CapUIModalSize.Lg}
+    >
+      <ResetCss>
+        <Modal.Header>
+          <Heading>
+            {intl.formatMessage(
+              { id: 'number-of-authors' },
+              { num: data.authors ? data.authors.length : 0 },
+            )}
+          </Heading>
+        </Modal.Header>
+      </ResetCss>
       <Modal.Body>
         <ProjectAuthorList className="mb-0">
           {data.authors.map(user => (

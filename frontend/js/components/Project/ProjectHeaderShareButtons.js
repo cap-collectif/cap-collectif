@@ -2,12 +2,11 @@
 import * as React from 'react';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { useIntl } from 'react-intl';
-import Modal from '~ds/Modal/Modal';
+import { Button, Heading, Modal, CapUIModalSize } from '@cap-collectif/ui';
 import ProjectHeader from '~ui/Project/ProjectHeader';
 import share from '~/utils/share';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
-import Heading from '~ui/Primitives/Heading';
-import Button from '~ds/Button/Button';
+import ResetCss from '~/utils/ResetCss';
 
 export type Props = {|
   +url: string,
@@ -21,10 +20,12 @@ const ProjectHeaderShareButtons = ({ url, title }: Props): React.Node => {
 
   const renderModal = () => {
     return (
-      <Modal show={isOpen} onClose={onClose} ariaLabel={intl.formatMessage({ id: 'share.link' })}>
-        <Modal.Header>
-          <Heading>{intl.formatMessage({ id: 'share.link' })}</Heading>
-        </Modal.Header>
+      <Modal baseId="project-header-share-buttons-modal" show={isOpen} onClose={onClose} ariaLabel={intl.formatMessage({ id: 'share.link' })} size={CapUIModalSize.Lg}>
+        <ResetCss>
+          <Modal.Header>
+            <Heading>{intl.formatMessage({ id: 'share.link' })}</Heading>
+          </Modal.Header>
+        </ResetCss>
         <Modal.Body>
           <p className="excerpt">{title}</p>
           <textarea title={intl.formatMessage({ id: 'share.link' })} readOnly rows="3">

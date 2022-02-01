@@ -14,7 +14,7 @@ import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { ProposalPageHeader_proposal } from '~relay/ProposalPageHeader_proposal.graphql';
 import type { ProposalPageHeader_step } from '~relay/ProposalPageHeader_step.graphql';
 import type { ProposalPageHeader_viewer } from '~relay/ProposalPageHeader_viewer.graphql';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
@@ -262,7 +262,7 @@ export const ProposalPageHeader = ({
           <h1>{title}</h1>
           <Skeleton placeholder={<AvatarPlaceholder />} isLoaded={proposal !== null}>
             <Flex direction="row">
-              <UserAvatar user={proposal?.author} />
+              <UserAvatarLegacy user={proposal?.author} />
               <About>
                 <div>{proposal?.author.username}</div>
                 <div>
@@ -343,7 +343,7 @@ export default createFragmentContainer(container, {
       author {
         username
         isViewer @include(if: $isAuthenticated)
-        ...UserAvatar_user
+        ...UserAvatarLegacy_user
       }
       createdAt
       publishedAt

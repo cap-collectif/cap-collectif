@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { reset } from 'redux-form';
+import { Box, Button } from '@cap-collectif/ui';
 import {
   isInterpellationContextFromStep,
   isEstablishmentFormStep,
@@ -13,11 +14,9 @@ import {
 import type { Dispatch, GlobalState } from '~/types';
 import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql';
 import ProposalCreateModal from '../Proposal/Create/ProposalCreateModal';
-import Button from '~ds/Button/Button';
-import LoginOverlay from '~/components/Utils/LoginOverlay';
+import NewLoginOverlay from '~/components/Utils/NewLoginOverlay';
 import { formName } from '../Proposal/Form/ProposalForm';
 import useIsMobile from '~/utils/hooks/useIsMobile';
-import AppBox from '~ui/Primitives/AppBox';
 import type { ProposalViewMode } from '~/redux/modules/proposal';
 
 type Props = {
@@ -106,7 +105,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
           )}
         </h3>
         {step.form && step.kind === 'collect' && (
-          <AppBox
+          <Box
             as={isMobile ? 'div' : 'span'}
             my={[0, 20]}
             position={['fixed', 'relative']}
@@ -120,7 +119,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
             borderRadius={['8px 8px 0px 0px', 'unset']}
             className={isMobile ? '' : 'pull-right'}
             display={displayMode === 'map' && isMobile ? 'none' : 'block'}>
-            <LoginOverlay>
+            <NewLoginOverlay>
               <Button
                 m="auto"
                 maxWidth="300px"
@@ -136,8 +135,8 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
                 display="block">
                 {intl.formatMessage({ id: titleTradKey })}
               </Button>
-            </LoginOverlay>
-          </AppBox>
+            </NewLoginOverlay>
+          </Box>
         )}
       </div>
     </>

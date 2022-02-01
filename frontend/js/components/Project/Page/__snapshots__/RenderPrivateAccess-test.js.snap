@@ -3,75 +3,93 @@
 exports[`<RenderPrivateAccess /> should render correctly for admin only 1`] = `
 Array [
   <div
-    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS gaGbxY jVkzaf cguwDa"
+    aria-describedby="id-g"
+    className="sc-bdvvtL TpZGZ sc-Galmp hyqcUE cap-tag"
     id="restricted-access"
-    onClick={[Function]}
+    onBlur={[Function]}
+    onFocus={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    style={Object {}}
+    tabIndex={0}
     title=""
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
-    />
-    <p
-      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ kuPGYc jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 10 12"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      restrictedaccess
-    </p>
+      <path
+        d="M8.5 4.75h-.375V3.375a3.375 3.375 0 10-6.75 0V4.75H1a1 1 0 00-1 1V11a1 1 0 001 1h7.5a1 1 0 001-1V5.75a1 1 0 00-1-1zm-4.75 3a1 1 0 111.5.861V9.75a.5.5 0 01-1 0V8.611a.997.997 0 01-.5-.861zM2.625 3.375a2.125 2.125 0 114.25 0V4.5a.25.25 0 01-.25.25h-3.75a.25.25 0 01-.25-.25V3.375z"
+        fill="currentColor"
+      />
+    </svg>
+    restrictedaccess
   </div>,
   <div
-    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    className="cap-tooltip"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
     style={
       Object {
-        "opacity": 0,
-        "transform": "scale(0.8) translateZ(0)",
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
       }
     }
-  >
-    global.draft.only_visible_by_you
-    <div
-      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-      data-popper-arrow={true}
-      id="arrow"
-    />
-  </div>,
+  />,
 ]
 `;
 
 exports[`<RenderPrivateAccess /> should render correctly for me only 1`] = `
 Array [
   <div
-    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS gaGbxY jVkzaf cguwDa"
+    aria-describedby="id-g"
+    className="sc-bdvvtL TpZGZ sc-Galmp hyqcUE cap-tag"
     id="restricted-access"
-    onClick={[Function]}
+    onBlur={[Function]}
+    onFocus={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    style={Object {}}
+    tabIndex={0}
     title=""
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
-    />
-    <p
-      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ kuPGYc jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 10 12"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      restrictedaccess
-    </p>
+      <path
+        d="M8.5 4.75h-.375V3.375a3.375 3.375 0 10-6.75 0V4.75H1a1 1 0 00-1 1V11a1 1 0 001 1h7.5a1 1 0 001-1V5.75a1 1 0 00-1-1zm-4.75 3a1 1 0 111.5.861V9.75a.5.5 0 01-1 0V8.611a.997.997 0 01-.5-.861zM2.625 3.375a2.125 2.125 0 114.25 0V4.5a.25.25 0 01-.25.25h-3.75a.25.25 0 01-.25-.25V3.375z"
+        fill="currentColor"
+      />
+    </svg>
+    restrictedaccess
   </div>,
   <div
-    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    className="cap-tooltip"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
     style={
       Object {
-        "opacity": 0,
-        "transform": "scale(0.8) translateZ(0)",
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
       }
     }
-  >
-    global.draft.only_visible_by_you
-    <div
-      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-      data-popper-arrow={true}
-      id="arrow"
-    />
-  </div>,
+  />,
 ]
 `;

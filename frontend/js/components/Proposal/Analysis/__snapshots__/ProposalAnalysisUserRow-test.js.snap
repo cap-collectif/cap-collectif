@@ -7,7 +7,7 @@ exports[`<ProposalAnalysisUserRow /> renders correctly 1`] = `
     disabled={false}
   >
     <div>
-      <Relay(Connect(UserAvatar))
+      <Relay(Connect(UserAvatarLegacy))
         className="pull-left"
         size={32}
         user={

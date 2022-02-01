@@ -4,7 +4,7 @@ import { Field, reduxForm, submit } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedHTMLMessage, FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
 import component from '~/components/Form/Field';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import type { RegisterForm_user } from '~relay/RegisterForm_user.graphql';
 import type { RegisterForm_event } from '~relay/RegisterForm_event.graphql';
 import type { Dispatch } from '~/types';
@@ -108,7 +108,7 @@ export const RegisterForm = ({
     <FormContainer onSubmit={handleSubmit} id={formName}>
       {user ? (
         <UserInfo>
-          <UserAvatar user={user} /> {user.username}
+          <UserAvatarLegacy user={user} /> {user.username}
         </UserInfo>
       ) : (
         <>
@@ -166,7 +166,7 @@ export default createFragmentContainer(injectIntl(form), {
   user: graphql`
     fragment RegisterForm_user on User {
       username
-      ...UserAvatar_user
+      ...UserAvatarLegacy_user
     }
   `,
   event: graphql`

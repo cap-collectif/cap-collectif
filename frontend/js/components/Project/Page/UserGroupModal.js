@@ -3,13 +3,12 @@ import * as React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { graphql, usePaginationFragment } from 'react-relay';
-import Button from '~ds/Button/Button';
-import Modal from '~ds/Modal/Modal';
+import {Heading, Modal, Button, CapUIModalSize} from '@cap-collectif/ui'
 import UserInGroupModal from './UserInGroupModal';
 import GroupAvatar from '../../User/GroupAvatar';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 import type { UserGroupModal_project$key } from '~relay/UserGroupModal_project.graphql';
-import Heading from '~ui/Primitives/Heading';
+import ResetCss from '~/utils/ResetCss';
 
 type Props = {|
   project: UserGroupModal_project$key,
@@ -53,10 +52,15 @@ const UserGroupModal = ({ show, project, handleClose }: Props): React.Node => {
     <Modal
       show={show}
       onClose={handleClose}
-      ariaLabel={intl.formatMessage({ id: 'groups-with-access-to-project' })}>
-      <Modal.Header>
-        <Heading>{intl.formatMessage({ id: 'people-with-access-to-project' })}</Heading>
-      </Modal.Header>
+      ariaLabel={intl.formatMessage({ id: 'groups-with-access-to-project' })}
+      size={CapUIModalSize.Lg}
+      baseId="user-group-modal"
+    >
+      <ResetCss>
+        <Modal.Header>
+          <Heading>{intl.formatMessage({ id: 'people-with-access-to-project' })}</Heading>
+        </Modal.Header>
+      </ResetCss>
       <Modal.Body>
         {data.restrictedViewers &&
           data.restrictedViewers.edges &&

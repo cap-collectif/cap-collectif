@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Container, ButtonUnsubscribe } from './UserRegister.style';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import type { UserRegister_user } from '~relay/UserRegister_user.graphql';
 import type { UserRegister_event } from '~relay/UserRegister_event.graphql';
 import UnsubscribeToEventAsRegisteredMutation from '~/mutations/UnsubscribeToEventAsRegisteredMutation';
@@ -43,7 +43,7 @@ export const UserRegister = ({ user, event }: Props) => {
     <Container>
       {user && (
         <div>
-          <UserAvatar user={user} /> {user.username}
+          <UserAvatarLegacy user={user} /> {user.username}
         </div>
       )}
 

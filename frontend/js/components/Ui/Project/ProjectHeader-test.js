@@ -5,13 +5,58 @@ import { shallow } from 'enzyme';
 import ProjectHeader from './ProjectHeader';
 import Avatar from '~ds/Avatar/Avatar';
 
+const authors = [
+  {
+    id: '1',
+    username: 'Mikasa Estucasa',
+    url: '',
+    avatarUrl: ''
+  },
+  {
+    id: '2',
+    username: 'John Mark',
+    url: '',
+    avatarUrl: ''
+  },
+  {
+    id: '3',
+    username: 'Dan Abramov',
+    url: '',
+    avatarUrl: ''
+  },
+  {
+    id: '4',
+    username: 'Dan Abramov',
+    url: '',
+    avatarUrl: ''
+  },
+  {
+    id: '5',
+    username: 'Dan Abramov',
+    url: '',
+    avatarUrl: ''
+  },
+  {
+    id: '6',
+    username: 'Dan Abramov',
+    url: '',
+    avatarUrl: ''
+  },
+  {
+    id: '6',
+    username: 'Dan Abramov',
+    url: '',
+    avatarUrl: ''
+  },
+]
+
 describe('<ProjectHeader />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(
       <ProjectHeader>
         <ProjectHeader.Cover isArchived={false}>
           <ProjectHeader.Content>
-            <ProjectHeader.Authors active>
+            <ProjectHeader.Authors active authors={authors}>
               <Avatar
                 name="Mikasa Estucasa"
                 src="https://risibank.fr/cache/stickers/d1261/126102-full.png"

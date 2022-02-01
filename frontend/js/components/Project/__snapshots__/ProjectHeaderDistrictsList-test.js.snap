@@ -3,14 +3,32 @@
 exports[`<ProjectHeaderDistrictsList /> should render correctly 1`] = `
 Array [
   <li
-    className="sc-bdnxRM HxneP ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
+    className="sc-bdvvtL cAlSLs ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
     onClick={[Function]}
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG egDEeE fZkSKg AMDLx icon"
-    />
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ haWjdS jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 9 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+      <path
+        d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
     <p
-      className="sc-bdnxRM hELlhr platform__body"
+      className="sc-bdvvtL iWabdg cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -23,7 +41,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-1"
+    id="project-header-district-list-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -42,14 +60,32 @@ Array [
 exports[`<ProjectHeaderDistrictsList /> should render correctly when project is archived 1`] = `
 Array [
   <li
-    className="sc-bdnxRM HxneP ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
+    className="sc-bdvvtL cAlSLs ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
     onClick={[Function]}
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG egDEeE fZkSKg AMDLx icon"
-    />
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ haWjdS jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 9 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+      <path
+        d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
     <p
-      className="sc-bdnxRM hELlhr platform__body"
+      className="sc-bdvvtL iWabdg cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -62,7 +98,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-1"
+    id="project-header-district-list-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -81,14 +117,32 @@ Array [
 exports[`<ProjectHeaderDistrictsList /> should render correctly with the display of modal 1`] = `
 Array [
   <li
-    className="sc-bdnxRM HxneP ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
+    className="sc-bdvvtL cAlSLs ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
     onClick={[Function]}
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG egDEeE fZkSKg AMDLx icon"
-    />
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ haWjdS jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 9 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+      <path
+        d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
     <p
-      className="sc-bdnxRM hELlhr platform__body"
+      className="sc-bdvvtL iWabdg cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -101,7 +155,7 @@ Array [
     aria-modal={true}
     data-dialog={true}
     hidden={false}
-    id="id-1"
+    id="project-header-district-list-modal"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -110,7 +164,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+      className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -119,7 +173,7 @@ Array [
       }
     >
       <div
-        className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
+        className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
         style={
           Object {
             "opacity": 0,
@@ -127,26 +181,40 @@ Array [
           }
         }
       >
-        <header
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+        <div
+          className="ResetCss-jmHeCe hpqhdm"
         >
-          <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+          <header
+            className="sc-bdvvtL jPHUkp cap-modal__header"
           >
-            count-area {"count":5}
-          </div>
-          <button
-            className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
-            onClick={[Function]}
-            type="button"
-          >
-            <IconMock
-              className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
-            />
-          </button>
-        </header>
+            <div
+              className="sc-bdvvtL hEjsJA"
+            >
+              count-area {"count":5}
+            </div>
+            <button
+              className="sc-bdvvtL bFJghn"
+              onClick={[Function]}
+            >
+              <svg
+                className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+                fill="none"
+                viewBox="0 0 12 12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 11L11 1M1 1l10 10"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={0.8}
+                />
+              </svg>
+            </button>
+          </header>
+        </div>
         <main
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+          className="sc-bdvvtL vunmq cap-modal__footer"
         >
           <ul
             className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
@@ -180,11 +248,17 @@ Array [
           </ul>
         </main>
         <footer
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+          className="sc-bdvvtL glllsy cap-modal__footer"
         >
           <button
-            className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+            className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
             onClick={[Function]}
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
             type="button"
           >
             global.close

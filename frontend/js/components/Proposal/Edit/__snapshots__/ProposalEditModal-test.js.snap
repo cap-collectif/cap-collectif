@@ -3,6 +3,7 @@
 exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
+  baseId="proposal-edit-modal"
   dialogClassName="custom-modal-dialog"
   fullSizeOnMobile={true}
   hideCloseButton={false}
@@ -10,7 +11,7 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
   hideOnEsc={true}
   onClose={[Function]}
   show={true}
-  size="lg"
+  size="xl"
 >
   <ResetCss>
     <Modal.Header
@@ -29,7 +30,6 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
   </ResetCss>
   <AnimatePresence>
     <ProposalOtherPanelsModal
-      errorCount={0}
       modalState="NORMAL"
       onClose={[MockFunction]}
       proposalForm={
@@ -114,6 +114,7 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
               "contribuable": true,
             }
           }
+          setValuesSaved={[Function]}
         />
       </Modal.Body>
       <Modal.Footer
@@ -155,6 +156,7 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
 exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
+  baseId="proposal-edit-modal"
   dialogClassName="custom-modal-dialog"
   fullSizeOnMobile={true}
   hideCloseButton={false}
@@ -162,7 +164,7 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
   hideOnEsc={true}
   onClose={[Function]}
   show={true}
-  size="lg"
+  size="xl"
 >
   <ResetCss>
     <Modal.Header
@@ -181,7 +183,6 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
   </ResetCss>
   <AnimatePresence>
     <ProposalOtherPanelsModal
-      errorCount={0}
       modalState="NORMAL"
       onClose={[MockFunction]}
       proposalForm={
@@ -266,6 +267,7 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
               "contribuable": true,
             }
           }
+          setValuesSaved={[Function]}
         />
       </Modal.Body>
       <Modal.Footer
@@ -309,6 +311,7 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
 exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
+  baseId="proposal-edit-modal"
   dialogClassName="custom-modal-dialog"
   fullSizeOnMobile={true}
   hideCloseButton={false}
@@ -316,7 +319,7 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
   hideOnEsc={true}
   onClose={[Function]}
   show={true}
-  size="lg"
+  size="xl"
 >
   <ResetCss>
     <Modal.Header
@@ -335,7 +338,6 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
   </ResetCss>
   <AnimatePresence>
     <ProposalOtherPanelsModal
-      errorCount={0}
       modalState="NORMAL"
       onClose={[MockFunction]}
       proposalForm={
@@ -420,6 +422,7 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
               "contribuable": true,
             }
           }
+          setValuesSaved={[Function]}
         />
       </Modal.Body>
       <Modal.Footer
@@ -461,6 +464,7 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
 exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
+  baseId="proposal-edit-modal"
   dialogClassName="custom-modal-dialog"
   fullSizeOnMobile={true}
   hideCloseButton={false}
@@ -468,7 +472,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
   hideOnEsc={true}
   onClose={[Function]}
   show={true}
-  size="lg"
+  size="xl"
 >
   <ResetCss>
     <Modal.Header
@@ -487,7 +491,6 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
   </ResetCss>
   <AnimatePresence>
     <ProposalOtherPanelsModal
-      errorCount={0}
       modalState="NORMAL"
       onClose={[MockFunction]}
       proposalForm={
@@ -572,6 +575,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
               "contribuable": true,
             }
           }
+          setValuesSaved={[Function]}
         />
       </Modal.Body>
       <Modal.Footer
@@ -613,6 +617,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
 exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
+  baseId="proposal-edit-modal"
   dialogClassName="custom-modal-dialog"
   fullSizeOnMobile={true}
   hideCloseButton={false}
@@ -620,7 +625,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
   hideOnEsc={true}
   onClose={[Function]}
   show={true}
-  size="lg"
+  size="xl"
 >
   <ResetCss>
     <Modal.Header
@@ -639,7 +644,6 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
   </ResetCss>
   <AnimatePresence>
     <ProposalOtherPanelsModal
-      errorCount={0}
       modalState="NORMAL"
       onClose={[MockFunction]}
       proposalForm={
@@ -724,6 +728,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
               "contribuable": true,
             }
           }
+          setValuesSaved={[Function]}
         />
       </Modal.Body>
       <Modal.Footer
@@ -765,6 +770,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
 exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
+  baseId="proposal-edit-modal"
   dialogClassName="custom-modal-dialog"
   fullSizeOnMobile={true}
   hideCloseButton={false}
@@ -772,7 +778,7 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
   hideOnEsc={true}
   onClose={[Function]}
   show={true}
-  size="lg"
+  size="xl"
 >
   <ResetCss>
     <Modal.Header
@@ -791,7 +797,6 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
   </ResetCss>
   <AnimatePresence>
     <ProposalOtherPanelsModal
-      errorCount={0}
       modalState="NORMAL"
       onClose={[MockFunction]}
       proposalForm={
@@ -876,6 +881,7 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
               "contribuable": true,
             }
           }
+          setValuesSaved={[Function]}
         />
       </Modal.Body>
       <Modal.Footer

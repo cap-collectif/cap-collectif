@@ -7,7 +7,7 @@ import moment from 'moment';
 import Linkify from 'react-linkify';
 import { Label, ListGroupItem } from 'react-bootstrap';
 import Media from '../Ui/Medias/Media/Media';
-import UserAvatar from '../User/UserAvatar';
+import UserAvatarLegacy from '../User/UserAvatarLegacy';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
@@ -74,7 +74,7 @@ export class ArgumentItem extends React.Component<Props> {
         )}
         <Media overflow>
           <Media.Left>
-            <UserAvatar user={argument.author} className="excerpt_dark" />
+            <UserAvatarLegacy user={argument.author} className="excerpt_dark" />
           </Media.Left>
           <Media.Body className="opinion__body">
             <div className="opinion__data">

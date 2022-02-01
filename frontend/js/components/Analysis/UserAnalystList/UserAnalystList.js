@@ -5,7 +5,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import UserAvatarList from '~ui/List/UserAvatarList';
 import { AVATAR_SIZE } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style';
-import UserAvatar from '~/components/User/UserAvatar';
+import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import type { UserAnalystList_proposal } from '~relay/UserAnalystList_proposal.graphql';
 import UserAnalystListContainer, {
   SPACE_BETWEEN_AVATAR,
@@ -46,7 +46,7 @@ const UserAnalystList = ({ proposal, dispatch }: Props) => {
                 {intl.formatMessage({ id: 'global.assigned.to' })} {analyst.username}
               </Tooltip>
             }>
-            <UserAvatar
+            <UserAvatarLegacy
               user={analyst}
               displayUrl={false}
               size={AVATAR_SIZE}
