@@ -33,8 +33,6 @@ class ResetDefaultLocaleCommand extends Command
             $localeCode = $input->getOption('code');
             $localeTranslationKey = $input->getOption('locale');
             $this->setDefaultLocale($localeCode, $localeTranslationKey);
-
-            return 1;
         }
 
         return 0;

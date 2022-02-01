@@ -340,7 +340,7 @@ class ReinitCommand extends Command
         $this->stopwatch->start('dropDatabase');
         $this->runCommands(
             [
-                'doctrine:database:drop' => ['--force' => true],
+                'doctrine:database:drop' => ['--if-exists' => true, '--force' => true],
             ],
             $output
         );
@@ -591,9 +591,13 @@ class ReinitCommand extends Command
         foreach ($commands as $key => $value) {
             $input = new ArrayInput($value);
             $input->setInteractive(false);
-            $this->getApplication()
+            $returnCode = $this->getApplication()
                 ->find($key)
                 ->run($input, $output);
+
+            if (0 !== $returnCode) {
+                throw new \RuntimeException('Command' . $key . 'failed…', 1);
+            }
         }
     }
 }

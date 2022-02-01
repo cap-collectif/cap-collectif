@@ -57,7 +57,7 @@ class TranslateBasicParameters extends Command
 
         $this->entityManager->flush();
 
-        return 1;
+        return 0;
     }
 
     private function getAndTranslateSiteParameter(
