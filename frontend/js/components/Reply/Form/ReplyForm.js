@@ -347,18 +347,25 @@ export class ReplyForm extends React.Component<Props, State> {
     const canParticipateAnonymously = isAnonymousQuestionnaireFeatureEnabled
       ? questionnaire?.step?.isAnonymousParticipationAllowed
       : false;
-    if (canParticipateAnonymously) {
+
+    if (!canParticipateAnonymously) {
+      return (
+        !questionnaire.contribuable ||
+        !user ||
+        (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
+        (!questionnaire?.viewerReplies?.totalCount === 0 &&
+          !questionnaire.multipleRepliesAllowed &&
+          !reply)
+      );
+    }
+
+    if (questionnaire.contribuable) {
       return false;
     }
 
-    return (
-      !questionnaire.contribuable ||
-      !user ||
-      (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
-      (!questionnaire?.viewerReplies?.totalCount === 0 &&
-        !questionnaire.multipleRepliesAllowed &&
-        !reply)
-    );
+    if (canParticipateAnonymously) {
+      return true;
+    }
   }
 
   render() {
@@ -406,6 +413,12 @@ export class ReplyForm extends React.Component<Props, State> {
       }
       return isDisabled;
     };
+
+    const canContributeAnonymously = this.state.captcha.visible &&
+      !isAuthenticated &&
+      !reply &&
+      canParticipateAnonymously &&
+      questionnaire.contribuable;
 
     return (
       <ReplyFormContainer id="reply-form-container">
@@ -493,28 +506,28 @@ export class ReplyForm extends React.Component<Props, State> {
             </>
           )}
 
-          {this.state.captcha.visible && !isAuthenticated && !reply && canParticipateAnonymously && (
-            <Flex direction="column" align="center">
-              <Text
-                css={css({
-                  mb: `${SPACES_SCALES[6]} !important`,
-                })}
-                textAlign="center"
-                className="recaptcha-message"
-                color="neutral-gray.700">
-                {intl.formatMessage({ id: 'captcha.check' })}
-              </Text>
-              <Captcha
-                style={{ transformOrigin: 'center' }}
-                value={this.state.captcha.value}
-                onChange={value => {
-                  this.setState(state => ({
-                    captcha: { ...state.captcha, value },
-                  }));
-                }}
-              />
-            </Flex>
-          )}
+          {canContributeAnonymously && (
+              <Flex direction="column" align="center">
+                <Text
+                  css={css({
+                    mb: `${SPACES_SCALES[6]} !important`,
+                  })}
+                  textAlign="center"
+                  className="recaptcha-message"
+                  color="neutral-gray.700">
+                  {intl.formatMessage({ id: 'captcha.check' })}
+                </Text>
+                <Captcha
+                  style={{ transformOrigin: 'center' }}
+                  value={this.state.captcha.value}
+                  onChange={value => {
+                    this.setState(state => ({
+                      captcha: { ...state.captcha, value },
+                    }));
+                  }}
+                />
+              </Flex>
+            )}
 
           {(!reply || reply.viewerCanUpdate || isAnonymousReply) && (
             <div className="btn-toolbar btn-box sticky">
