@@ -9,22 +9,21 @@ declare(strict_types=1);
 
 namespace Capco\AdminBundle\Action;
 
-use Capco\AppBundle\Enum\UserRole;
+use Twig\Environment;
 use Capco\UserBundle\Entity\User;
-use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
+use Capco\AppBundle\Enum\UserRole;
 use Sonata\AdminBundle\Admin\Pool;
-use Sonata\AdminBundle\Templating\TemplateRegistryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
+use Sonata\AdminBundle\Templating\TemplateRegistryInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Twig\Environment;
 
 final class DashboardAction
 {
-    public const PROJECT_ADMIN_REDIRECT_TO = 'admin_capco_app_project_list';
-
     private $dashboardBlocks = [];
     private $breadcrumbsBuilder;
     private $templateRegistry;
@@ -61,7 +60,10 @@ final class DashboardAction
             (!$token->getUser()->hasRole(UserRole::ROLE_ADMIN) ||
                 !$token->getUser()->hasRole(UserRole::ROLE_SUPER_ADMIN))
         ) {
-            return new RedirectResponse($this->router->generate(self::PROJECT_ADMIN_REDIRECT_TO));
+            return new RedirectResponse(
+                $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL) .
+                    'admin-next/projects'
+            );
         }
         $blocks = [
             'top' => [],

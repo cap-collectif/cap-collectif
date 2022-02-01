@@ -443,7 +443,7 @@ final class ProjectAdmin extends CapcoAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('duplicate');
-        $collection->clearExcept(['batch', 'list', 'edit', 'delete', 'show', 'duplicate']);
+        $collection->clearExcept(['edit', 'delete', 'show', 'duplicate']);
         $collection->add('preview', $this->getRouterIdParameter() . '/preview');
     }
 }

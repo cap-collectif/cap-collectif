@@ -636,16 +636,6 @@ class CRUDController extends Controller
             $url = $this->admin->generateUrl('create', $params);
         }
 
-        if ('DELETE' === $this->getRestMethod()) {
-            if (
-                'admin_capco_app_steps_abstractstep_delete' === $request->attributes->get('_route')
-            ) {
-                return $this->redirectToRoute('admin_capco_app_project_list');
-            }
-
-            return $this->redirectToList();
-        }
-
         if (!$url) {
             foreach (['edit', 'show'] as $route) {
                 if ($this->admin->hasRoute($route) && $this->admin->hasAccess($route, $object)) {
@@ -687,7 +677,7 @@ class CRUDController extends Controller
             @trigger_error(
                 "Accessing a child that isn't connected to a given parent is deprecated since 3.34" .
                     " and won't be allowed in 4.0.",
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
         }
     }

@@ -9,5 +9,5 @@ class AdminProjectListPage extends Page
 {
     use PageTrait;
 
-    protected $path = '/admin-next/projects/';
+    protected $path = '/admin-next/projects';
 }

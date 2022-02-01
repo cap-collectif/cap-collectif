@@ -1,4 +1,4 @@
-/** import { AdminProjectsListPage, AdminDashboardPage } from '~e2e-pages/index'
+import { AdminProjectsListPage, AdminDashboardPage } from '~e2e-pages/index'
 
 describe('Project Owner', () => {
   describe('Dashboard rights', () => {
@@ -21,4 +21,4 @@ describe('Project Owner', () => {
       cy.url().should('contain', AdminProjectsListPage.path)
     })
   })
-}) */
+})
