@@ -70,6 +70,20 @@ export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
       });
   }
 
+  const formatBounds = bounds => {
+    if (
+      bounds.getNorthEast().lat === bounds.getSouthWest().lat &&
+      bounds.getNorthEast().lng === bounds.getSouthWest().lng
+    )
+      return L.latLngBounds([
+        bounds.getCenter(),
+        { lat: bounds._northEast.lat + 0.001, lng: bounds._northEast.lng + 0.001 },
+        { lat: bounds._northEast.lat - 0.001, lng: bounds._northEast.lng - 0.001 },
+      ]);
+
+    return bounds;
+  };
+
   const bounds = L.latLngBounds(markersGroup);
 
   return (
@@ -89,7 +103,7 @@ export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
       ) : null}
 
       <MapContainer
-        bounds={bounds.isValid() ? bounds : undefined}
+        bounds={bounds.isValid() ? formatBounds(bounds) : undefined}
         zoom={defaultMapOptions.zoom}
         maxZoom={MAX_MAP_ZOOM}
         preferCanvas
@@ -142,19 +156,19 @@ const Container = connect<any, any, _, _, _, _>()(LeafletMap);
 export default createFragmentContainer(Container, {
   query: graphql`
     fragment LeafletMap_query on Query
-      @argumentDefinitions(
-        count: { type: "Int!" }
-        cursor: { type: "String" }
-        theme: { type: "ID" }
-        project: { type: "ID" }
-        locale: { type: "TranslationLocale" }
-        search: { type: "String" }
-        userType: { type: "ID" }
-        isFuture: { type: "Boolean" }
-        author: { type: "ID" }
-        isRegistrable: { type: "Boolean" }
-        orderBy: { type: "EventOrder" }
-      ) {
+    @argumentDefinitions(
+      count: { type: "Int!" }
+      cursor: { type: "String" }
+      theme: { type: "ID" }
+      project: { type: "ID" }
+      locale: { type: "TranslationLocale" }
+      search: { type: "String" }
+      userType: { type: "ID" }
+      isFuture: { type: "Boolean" }
+      author: { type: "ID" }
+      isRegistrable: { type: "Boolean" }
+      orderBy: { type: "EventOrder" }
+    ) {
       events(
         first: $count
         after: $cursor
