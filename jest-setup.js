@@ -51,7 +51,7 @@ global.window.__SERVER__ = false;
 
 // This mock works only with a normal function (source: https://stackoverflow.com/a/67575349)
 // eslint-disable-next-line func-names
-global.window.IntersectionObserver = function() {
+global.window.IntersectionObserver = function () {
   return {
     observe: jest.fn(),
     disconnect: jest.fn(),
@@ -60,7 +60,7 @@ global.window.IntersectionObserver = function() {
 
 global.window.matchMedia =
   window.matchMedia ||
-  function() {
+  function () {
     return {
       matches: false,
       addListener() {},

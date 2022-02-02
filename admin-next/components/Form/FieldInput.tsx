@@ -19,9 +19,9 @@ import {
     Switch,
     Checkbox,
 } from '@cap-collectif/ui';
-import { REGEX_EMAIL } from '~/services/Validator';
 import { Select, SelectProps } from './Select';
 import { MultipleCheckbox, MultipleCheckboxProps } from './MultipleCheckbox';
+import { isEmail } from 'utils/validator';
 
 type FieldType = 'text' | 'textarea' | 'email' | 'select' | 'checkbox' | 'password' | 'switch';
 

@@ -35,7 +35,7 @@ export const getAdminNextUrl = () => {
 
 const isTest = () => getBaseUrl() === 'https://capco.test';
 
-export const ALLEWED_IMAGE_MIMETYPES = [
+export const ALLOWED_IMAGE_MIMETYPES = [
   'image/png', // .png
   'image/svg+xml', // .svg
   'image/gif', // .gif
@@ -44,7 +44,7 @@ export const ALLEWED_IMAGE_MIMETYPES = [
 
 // This must be sync with API check in MediasController::ALLOWED_MIMETYPES
 export const ALLOWED_MIMETYPES = [
-  ...ALLEWED_IMAGE_MIMETYPES,
+  ...ALLOWED_IMAGE_MIMETYPES,
   'text/csv', // .csv
   'application/x-PhpStorm-csv-file', // .csv
   'text/anytext', // .csv

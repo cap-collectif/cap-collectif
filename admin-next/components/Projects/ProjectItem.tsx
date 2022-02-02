@@ -175,7 +175,6 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                             (!!project.exportableSteps && project.exportableSteps.length > 0)) && (
                             <ProjectModalExportSteps
                                 project={project}
-                                intl={intl}
                                 isOnlyProjectAdmin={isOnlyProjectAdmin}
                             />
                         )}

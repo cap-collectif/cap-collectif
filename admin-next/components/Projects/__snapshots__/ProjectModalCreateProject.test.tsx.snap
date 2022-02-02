@@ -1,0 +1,567 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectModalCreateProject /> <TestModalCreateProject /> should render correctly 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <button
+    aria-controls="id-g"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL sc-lcepkR choMAJ igzsNu cap-button"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
+  >
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+      fill="none"
+      viewBox="0 0 12 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 6h10M6 1v10"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
+    create-a-project
+  </button>,
+  <div
+    aria-label="create-a-project"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+]
+`;
+
+exports[`<ProjectModalCreateProject /> <TestModalCreateProject /> should render modal open 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <button
+    aria-controls="id-g"
+    aria-expanded={true}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL sc-lcepkR choMAJ igzsNu cap-button"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
+  >
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+      fill="none"
+      viewBox="0 0 12 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 6h10M6 1v10"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
+    create-a-project
+  </button>,
+  <div
+    aria-label="create-a-project"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bdvvtL hzfKcR sc-fbyfCU cap-modal__overlay"
+      onClick={[Function]}
+      style={
+        Object {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="sc-bdvvtL eDoiZv sc-GEbAx jkpaYN cap-modal"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+          }
+        }
+      >
+        <header
+          className="sc-bdvvtL hkuGAm cap-modal__header"
+        >
+          <div
+            className="sc-bdvvtL hJgXxS"
+          >
+            <h2
+              className="sc-bdvvtL geLhUw cap-heading"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              create-a-project
+            </h2>
+          </div>
+          <button
+            className="sc-bdvvtL cYwHQC"
+            onClick={[Function]}
+          >
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ jxcAbw icfuGT cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+        <main
+          className="sc-bdvvtL kAxhVk cap-modal__footer"
+        >
+          <form
+            className="sc-bdvvtL cHxxHH"
+            id="form-create-project"
+          >
+            <div
+              className="sc-bdvvtL lfnYcW cap-form-control"
+              role="group"
+            >
+              <label
+                className="sc-bdvvtL dYOOYb cap-form-label"
+                htmlFor="title"
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <p
+                  className="sc-bdvvtL bQcuRG cap-text"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  global.title
+                </p>
+              </label>
+              <input
+                aria-required={true}
+                className="sc-bdvvtL sc-dvQaRk eBJHkE iiODgr cap-input"
+                disabled={false}
+                id="title"
+                name="title"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="admiun.project.create.title.placeholder"
+                required={true}
+                value=""
+              />
+            </div>
+            <div
+              className="sc-bdvvtL lfnYcW cap-form-control"
+              role="group"
+            >
+              <label
+                className="sc-bdvvtL dYOOYb cap-form-label"
+                htmlFor="author"
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <p
+                  className="sc-bdvvtL bQcuRG cap-text"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  global.author
+                </p>
+              </label>
+              <div
+                className="sc-bdvvtL iWnVea"
+              >
+                <div
+                  className="cap-async-select css-b62m3t-container"
+                  id="author"
+                  onKeyDown={[Function]}
+                >
+                  <span
+                    className="css-1f43avz-a11yText-A11yText"
+                    id="react-select-2-live-region"
+                  />
+                  <span
+                    aria-atomic="false"
+                    aria-live="polite"
+                    aria-relevant="additions text"
+                    className="css-1f43avz-a11yText-A11yText"
+                  />
+                  <div
+                    className="cap-async-select__control css-17ru8n9-control"
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <div
+                      className="cap-async-select__value-container cap-async-select__value-container--is-multi cap-async-select__value-container--has-value css-1ajcqt1-ValueContainer"
+                    >
+                      <div
+                        className="sc-bdvvtL icmLmQ sc-Galmp eCBqrg cap-tag"
+                        style={Object {}}
+                        title="lbrunet"
+                      >
+                        <p
+                          className="sc-bdvvtL kwYNUY cap-text cap-tag__label"
+                        >
+                          lbrunet
+                        </p>
+                        <div
+                          aria-label="close"
+                          className="sc-bdvvtL eYHSJG cap-tag__closeButton"
+                          onClick={[Function]}
+                          role="button"
+                          style={
+                            Object {
+                              "opacity": 0,
+                              "right": "0rem",
+                            }
+                          }
+                        >
+                          <svg
+                            className="sc-bdvvtL sc-eJwWfJ kfbHGA dMCrXP cap-icon"
+                            fill="none"
+                            viewBox="0 0 12 12"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M1 11L11 1M1 1l10 10"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={0.8}
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        className="cap-async-select__input-container css-ki4j6j-Input"
+                        data-value=""
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-controls="react-select-2-listbox"
+                          aria-expanded={false}
+                          aria-haspopup={true}
+                          aria-owns="react-select-2-listbox"
+                          autoCapitalize="none"
+                          autoComplete="off"
+                          autoCorrect="off"
+                          className="cap-async-select__input"
+                          disabled={false}
+                          id="react-select-2-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          role="combobox"
+                          spellCheck="false"
+                          style={
+                            Object {
+                              "background": 0,
+                              "border": 0,
+                              "color": "inherit",
+                              "font": "inherit",
+                              "gridArea": "1 / 2",
+                              "label": "input",
+                              "margin": 0,
+                              "minWidth": "2px",
+                              "opacity": 1,
+                              "outline": 0,
+                              "padding": 0,
+                              "width": "100%",
+                            }
+                          }
+                          tabIndex={0}
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <svg
+                      className="sc-bdvvtL sc-eJwWfJ jBXXhP bAqwkc cap-icon sc-nVkyK biuFCx"
+                      fill="none"
+                      viewBox="0 0 12 12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M11 6a5 5 0 11-5-5"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={0.8}
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <input
+                      name="author"
+                      type="hidden"
+                      value="VXNlcjp1c2VyMQ=="
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sc-bdvvtL lfnYcW cap-form-control"
+              role="group"
+            >
+              <label
+                className="sc-bdvvtL dYOOYb cap-form-label"
+                htmlFor="type"
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <p
+                  className="sc-bdvvtL bQcuRG cap-text"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  admin.fields.project.type.title
+                </p>
+              </label>
+              <div
+                className="sc-bdvvtL iWnVea"
+              >
+                <div
+                  className="cap-select css-b62m3t-container"
+                  id="type"
+                  onKeyDown={[Function]}
+                >
+                  <span
+                    className="css-1f43avz-a11yText-A11yText"
+                    id="react-select-3-live-region"
+                  />
+                  <span
+                    aria-atomic="false"
+                    aria-live="polite"
+                    aria-relevant="additions text"
+                    className="css-1f43avz-a11yText-A11yText"
+                  />
+                  <div
+                    className="cap-select__control css-17ru8n9-control"
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <div
+                      className="cap-select__value-container css-n2ktue-ValueContainer"
+                    >
+                      <div
+                        className="cap-select__placeholder css-1sf7qid-placeholder"
+                        id="react-select-3-placeholder"
+                      >
+                        admin.fields.menu_item.parent_empty
+                      </div>
+                      <div
+                        className="cap-select__input-container css-nplzcd-Input"
+                        data-value=""
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-controls="react-select-3-listbox"
+                          aria-describedby="react-select-3-placeholder"
+                          aria-expanded={false}
+                          aria-haspopup={true}
+                          aria-owns="react-select-3-listbox"
+                          autoCapitalize="none"
+                          autoComplete="off"
+                          autoCorrect="off"
+                          className="cap-select__input"
+                          disabled={false}
+                          id="react-select-3-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          role="combobox"
+                          spellCheck="false"
+                          style={
+                            Object {
+                              "background": 0,
+                              "border": 0,
+                              "color": "inherit",
+                              "font": "inherit",
+                              "gridArea": "1 / 2",
+                              "label": "input",
+                              "margin": 0,
+                              "minWidth": "2px",
+                              "opacity": 1,
+                              "outline": 0,
+                              "padding": 0,
+                              "width": "100%",
+                            }
+                          }
+                          tabIndex={0}
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <svg
+                      className="sc-bdvvtL sc-eJwWfJ cZVbcU icfuGT cap-icon"
+                      fill="none"
+                      onClick={[Function]}
+                      style={
+                        Object {
+                          "cursor": "pointer",
+                        }
+                      }
+                      viewBox="0 0 12 7"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6 7c.164 0 .326-.032.475-.095.15-.063.283-.155.392-.27l4.916-5.216a.827.827 0 00.214-.62.845.845 0 00-.311-.584.968.968 0 00-.66-.214.954.954 0 00-.632.277l-4.3 4.562a.133.133 0 01-.188 0L1.606.278A.954.954 0 00.974.001a.967.967 0 00-.66.214A.845.845 0 00.003.8a.827.827 0 00.214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    name="type"
+                    type="hidden"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </main>
+        <footer
+          className="sc-bdvvtL gUJayl cap-modal__footer"
+        >
+          <div
+            className="sc-bdvvtL gFvFYr cap-buttonGroup"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            <button
+              className="sc-bdvvtL sc-lcepkR fzwTIb itSeml cap-button"
+              onClick={[Function]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              cancel
+            </button>
+            <button
+              className="sc-bdvvtL sc-lcepkR fzwTIb igzsNu cap-button"
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              global.create
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;

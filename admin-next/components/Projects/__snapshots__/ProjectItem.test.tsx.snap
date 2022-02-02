@@ -1,0 +1,1117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectItem /> should render correctly 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL eRYtWO"
+    >
+      <a
+        className="sc-bdvvtL jtXLLM cap-link"
+        href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
+      >
+        Stratégie technologique de l'Etat et services publics
+      </a>
+      <div
+        className="sc-bdvvtL fIfDCJ"
+      >
+        <a
+          className="sc-bdvvtL UJLXz cap-link"
+          href="https://capco.dev/themes/immobilier?_locale=fr-FR"
+        >
+          Immobilier
+        </a>
+        <span>
+          ,   
+        </span>
+        <a
+          className="sc-bdvvtL UJLXz cap-link"
+          href="https://capco.dev/themes/transport?_locale=fr-FR"
+        >
+          Transport
+        </a>
+      </div>
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL iOUgMg sc-Galmp eCBqrg cap-tag"
+      style={Object {}}
+      title="public-everybody"
+    >
+      public-everybody
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    30/12/2014
+  </td>,
+  <td
+    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <button
+      aria-controls="id-g"
+      aria-describedby="id-g"
+      aria-expanded={false}
+      aria-haspopup="menu"
+      aria-label="global.plus"
+      className="sc-bdvvtL fBQcEv cap-buttonQuickAction cap-menu__disclosure"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onClickCapture={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyPressCapture={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseDownCapture={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <svg
+        className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+        fill="currentColor"
+        viewBox="0 0 12 4"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+        />
+      </svg>
+    </button>
+    <div
+      className="cap-tooltip"
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onTransitionEnd={[Function]}
+      role="tooltip"
+      style={
+        Object {
+          "display": "none",
+          "left": "100%",
+          "pointerEvents": "none",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+    />
+    <div
+      aria-orientation="vertical"
+      className="sc-bdvvtL cXiVDo sc-jQrDum cap-menu__list cap-menu__list"
+      data-dialog={true}
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onBlur={[Function]}
+      onBlurCapture={[Function]}
+      onFocus={[Function]}
+      onFocusCapture={[Function]}
+      onKeyDown={[Function]}
+      onKeyDownCapture={[Function]}
+      onKeyUpCapture={[Function]}
+      onTransitionEnd={[Function]}
+      role="menu"
+      style={
+        Object {
+          "display": "none",
+          "left": "100%",
+          "opacity": 0,
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      tabIndex={-1}
+    >
+      <button
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          action_show
+           
+        </p>
+      </button>
+      <button
+        aria-controls="id-g"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+        type="button"
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          project.download.button
+           
+        </p>
+      </button>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+      <button
+        aria-controls="id-g"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+        type="button"
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          admin.global.delete
+           
+        </p>
+      </button>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+    </div>
+  </td>,
+]
+`;
+
+exports[`<ProjectItem /> should render correctly without authors 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL eRYtWO"
+    >
+      <a
+        className="sc-bdvvtL jtXLLM cap-link"
+        href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
+      >
+        Stratégie technologique de l'Etat et services publics
+      </a>
+      <div
+        className="sc-bdvvtL fIfDCJ"
+      >
+        <a
+          className="sc-bdvvtL UJLXz cap-link"
+          href="https://capco.dev/themes/immobilier?_locale=fr-FR"
+        >
+          Immobilier
+        </a>
+        <span>
+          ,   
+        </span>
+        <a
+          className="sc-bdvvtL UJLXz cap-link"
+          href="https://capco.dev/themes/transport?_locale=fr-FR"
+        >
+          Transport
+        </a>
+      </div>
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL iOUgMg sc-Galmp eCBqrg cap-tag"
+      style={Object {}}
+      title="public-everybody"
+    >
+      public-everybody
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    30/12/2014
+  </td>,
+  <td
+    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <button
+      aria-controls="id-g"
+      aria-describedby="id-g"
+      aria-expanded={false}
+      aria-haspopup="menu"
+      aria-label="global.plus"
+      className="sc-bdvvtL fBQcEv cap-buttonQuickAction cap-menu__disclosure"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onClickCapture={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyPressCapture={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseDownCapture={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <svg
+        className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+        fill="currentColor"
+        viewBox="0 0 12 4"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+        />
+      </svg>
+    </button>
+    <div
+      className="cap-tooltip"
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onTransitionEnd={[Function]}
+      role="tooltip"
+      style={
+        Object {
+          "display": "none",
+          "left": "100%",
+          "pointerEvents": "none",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+    />
+    <div
+      aria-orientation="vertical"
+      className="sc-bdvvtL cXiVDo sc-jQrDum cap-menu__list cap-menu__list"
+      data-dialog={true}
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onBlur={[Function]}
+      onBlurCapture={[Function]}
+      onFocus={[Function]}
+      onFocusCapture={[Function]}
+      onKeyDown={[Function]}
+      onKeyDownCapture={[Function]}
+      onKeyUpCapture={[Function]}
+      onTransitionEnd={[Function]}
+      role="menu"
+      style={
+        Object {
+          "display": "none",
+          "left": "100%",
+          "opacity": 0,
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      tabIndex={-1}
+    >
+      <button
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          action_show
+           
+        </p>
+      </button>
+      <button
+        aria-controls="id-g"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+        type="button"
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          project.download.button
+           
+        </p>
+      </button>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+      <button
+        aria-controls="id-g"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+        type="button"
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          admin.global.delete
+           
+        </p>
+      </button>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+    </div>
+  </td>,
+]
+`;
+
+exports[`<ProjectItem /> should render correctly without exportable steps 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL eRYtWO"
+    >
+      <a
+        className="sc-bdvvtL jtXLLM cap-link"
+        href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
+      >
+        Stratégie technologique de l'Etat et services publics
+      </a>
+      <div
+        className="sc-bdvvtL fIfDCJ"
+      >
+        <a
+          className="sc-bdvvtL UJLXz cap-link"
+          href="https://capco.dev/themes/immobilier?_locale=fr-FR"
+        >
+          Immobilier
+        </a>
+        <span>
+          ,   
+        </span>
+        <a
+          className="sc-bdvvtL UJLXz cap-link"
+          href="https://capco.dev/themes/transport?_locale=fr-FR"
+        >
+          Transport
+        </a>
+      </div>
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL iOUgMg sc-Galmp eCBqrg cap-tag"
+      style={Object {}}
+      title="public-everybody"
+    >
+      public-everybody
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    30/12/2014
+  </td>,
+  <td
+    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <button
+      aria-controls="id-g"
+      aria-describedby="id-g"
+      aria-expanded={false}
+      aria-haspopup="menu"
+      aria-label="global.plus"
+      className="sc-bdvvtL fBQcEv cap-buttonQuickAction cap-menu__disclosure"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onClickCapture={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyPressCapture={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseDownCapture={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <svg
+        className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+        fill="currentColor"
+        viewBox="0 0 12 4"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+        />
+      </svg>
+    </button>
+    <div
+      className="cap-tooltip"
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onTransitionEnd={[Function]}
+      role="tooltip"
+      style={
+        Object {
+          "display": "none",
+          "left": "100%",
+          "pointerEvents": "none",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+    />
+    <div
+      aria-orientation="vertical"
+      className="sc-bdvvtL cXiVDo sc-jQrDum cap-menu__list cap-menu__list"
+      data-dialog={true}
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onBlur={[Function]}
+      onBlurCapture={[Function]}
+      onFocus={[Function]}
+      onFocusCapture={[Function]}
+      onKeyDown={[Function]}
+      onKeyDownCapture={[Function]}
+      onKeyUpCapture={[Function]}
+      onTransitionEnd={[Function]}
+      role="menu"
+      style={
+        Object {
+          "display": "none",
+          "left": "100%",
+          "opacity": 0,
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      tabIndex={-1}
+    >
+      <button
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          action_show
+           
+        </p>
+      </button>
+      <button
+        aria-controls="id-g"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+        type="button"
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          admin.global.delete
+           
+        </p>
+      </button>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+    </div>
+  </td>,
+]
+`;
+
+exports[`<ProjectItem /> should render correctly without themes 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL eRYtWO"
+    >
+      <a
+        className="sc-bdvvtL jtXLLM cap-link"
+        href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
+      >
+        Stratégie technologique de l'Etat et services publics
+      </a>
+      <div
+        className="sc-bdvvtL fIfDCJ"
+      />
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL iOUgMg sc-Galmp eCBqrg cap-tag"
+      style={Object {}}
+      title="public-everybody"
+    >
+      public-everybody
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    30/12/2014
+  </td>,
+  <td
+    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <button
+      aria-controls="id-g"
+      aria-describedby="id-g"
+      aria-expanded={false}
+      aria-haspopup="menu"
+      aria-label="global.plus"
+      className="sc-bdvvtL fBQcEv cap-buttonQuickAction cap-menu__disclosure"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onClickCapture={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyPressCapture={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseDownCapture={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <svg
+        className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+        fill="currentColor"
+        viewBox="0 0 12 4"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+        />
+      </svg>
+    </button>
+    <div
+      className="cap-tooltip"
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onTransitionEnd={[Function]}
+      role="tooltip"
+      style={
+        Object {
+          "display": "none",
+          "left": "100%",
+          "pointerEvents": "none",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+    />
+    <div
+      aria-orientation="vertical"
+      className="sc-bdvvtL cXiVDo sc-jQrDum cap-menu__list cap-menu__list"
+      data-dialog={true}
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onBlur={[Function]}
+      onBlurCapture={[Function]}
+      onFocus={[Function]}
+      onFocusCapture={[Function]}
+      onKeyDown={[Function]}
+      onKeyDownCapture={[Function]}
+      onKeyUpCapture={[Function]}
+      onTransitionEnd={[Function]}
+      role="menu"
+      style={
+        Object {
+          "display": "none",
+          "left": "100%",
+          "opacity": 0,
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      tabIndex={-1}
+    >
+      <button
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          action_show
+           
+        </p>
+      </button>
+      <button
+        aria-controls="id-g"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+        type="button"
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          project.download.button
+           
+        </p>
+      </button>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+      <button
+        aria-controls="id-g"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdvvtL kwhLRS cap-menu__item"
+        id="id-g"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        tabIndex={0}
+        type="button"
+      >
+        <p
+          className="sc-bdvvtL dgPHnB cap-text"
+        >
+           
+          admin.global.delete
+           
+        </p>
+      </button>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+    </div>
+  </td>,
+]
+`;

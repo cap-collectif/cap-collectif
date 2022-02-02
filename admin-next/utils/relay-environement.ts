@@ -1,6 +1,6 @@
 import { commitLocalUpdate } from 'react-relay';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
-import executeFunction from '~/network/executeFunction';
+import executeFunction from 'network/executeFunction';
 import { FeatureFlags } from '../types';
 
 const store = new Store(new RecordSource());

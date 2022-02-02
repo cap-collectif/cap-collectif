@@ -23,7 +23,6 @@ const formName = 'form-export-project';
 
 interface ProjectModalExportStepsProps {
     project: ProjectModalExportSteps_project$key;
-    intl: IntlShape;
     isOnlyProjectAdmin?: boolean;
 }
 

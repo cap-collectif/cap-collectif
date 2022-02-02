@@ -43,7 +43,7 @@ import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInpu
 import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority';
 import type { MajorityProperty } from '~ui/Form/Input/Majority/Majority';
 import type { BsSize, ValidationState } from '~/types/ReactBootstrap.type';
-import { ALLEWED_IMAGE_MIMETYPES, ALLOWED_MIMETYPES } from '~/config';
+import { ALLOWED_IMAGE_MIMETYPES, ALLOWED_MIMETYPES } from '~/config';
 
 export type ParentProps = {|
   name?: ?string,
@@ -269,7 +269,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             className={props.className}
             value={value}
             onChange={props.onChange}
-            accept={ALLEWED_IMAGE_MIMETYPES}
+            accept={ALLOWED_IMAGE_MIMETYPES}
             maxSize={maxSize}
             preview={props.image}
             {...props}
