@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import ProjectHeader from '~ui/Project/ProjectHeader';
 import type { ProjectStepTabs_project$key } from '~relay/ProjectStepTabs_project.graphql';
-import { fromGlobalId } from '~/utils/fromGlobalId';
+import { fromGlobalId, isGlobalId } from '~/utils/fromGlobalId';
 
 export type Props = {|
   project: ProjectStepTabs_project$key,
@@ -36,7 +36,7 @@ const ProjectStepTabs = ({ project }: Props): React.Node => {
   React.useEffect(() => {
     setCurrentStepIndex(
       data.steps.findIndex(elem => {
-        const { id } = fromGlobalId(elem.id);
+        const { id } = isGlobalId(elem.id) ? fromGlobalId(elem.id) : { id: elem.id };
         return id === current;
       }),
     );
@@ -87,7 +87,7 @@ const ProjectStepTabs = ({ project }: Props): React.Node => {
     return null;
   };
   const renderProgressBar = step => {
-    const { id: decoded } = fromGlobalId(step.id);
+    const { id: decoded } = isGlobalId(step.id) ? fromGlobalId(step.id) : { id: step.id };
     if (step.state === 'OPENED') {
       if (decoded === current && step.timeRange?.startAt && step.timeRange?.endAt) {
         const progress =
@@ -100,7 +100,7 @@ const ProjectStepTabs = ({ project }: Props): React.Node => {
     return null;
   };
   const getColorState = (stepId, state) => {
-    const { id: decoded } = fromGlobalId(stepId);
+    const { id: decoded } = isGlobalId(stepId) ? fromGlobalId(stepId) : { id: stepId };
     if (decoded === current) {
       return 'ACTIVE';
     }

@@ -26,3 +26,6 @@ export function fromGlobalId(globalId: ?string): ResolvedGlobalId {
     id: unbasedGlobalId.substring(delimiterPos + 1),
   };
 }
+export function isGlobalId(id: string) {
+  return !id.match('-');
+}
