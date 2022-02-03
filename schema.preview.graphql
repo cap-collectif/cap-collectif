@@ -956,9 +956,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Identifies the body of the contribution rendered to text."""
   bodyText: String
-
-  """The count of paper votes outside of the platform."""
-  paperVotesCount: Int!
 }
 
 """A proposal analysis."""

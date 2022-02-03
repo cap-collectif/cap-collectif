@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\ProposalStepPaperVoteCounter;
 use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
@@ -162,6 +163,11 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     private $events;
 
     /**
+     * @ORM\OneToMany(targetEntity=ProposalStepPaperVoteCounter::class, mappedBy="step", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private Collection $proposalStepPaperVoteCounters;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -170,6 +176,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         $this->statuses = new ArrayCollection();
         $this->requirements = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->proposalStepPaperVoteCounters = new ArrayCollection();
     }
 
     public function __clone()

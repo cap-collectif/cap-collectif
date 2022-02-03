@@ -462,6 +462,20 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                   ],
                                   "storageKey": null,
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "votable",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "votesRanking",
+                                  "storageKey": null,
+                                },
                               ],
                               "type": "SelectionStep",
                             },
@@ -494,6 +508,20 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                   ],
                                   "storageKey": null,
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "votable",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "votesRanking",
+                                  "storageKey": null,
+                                },
                               ],
                               "type": "CollectStep",
                             },
@@ -512,6 +540,56 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "hasAnalysis",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ProposalStepPaperVoteCounter",
+                      "kind": "LinkedField",
+                      "name": "paperVotes",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": null,
+                          "kind": "LinkedField",
+                          "name": "step",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalCount",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalPointsCount",
                           "storageKey": null,
                         },
                       ],
@@ -2295,7 +2373,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3576960507c9cce532f96ecb60cfd7ae",
+          "cacheID": "85ccf9c36a3eacb3f80c3f1fefbeaa1f",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2642,15 +2720,27 @@ fragment ProposalAdminSelections_proposal on Proposal {
           id
           name
         }
+        votable
+        votesRanking
       }
       ... on CollectStep {
         statuses {
           id
           name
         }
+        votable
+        votesRanking
       }
     }
     id
+  }
+  paperVotes {
+    step {
+      __typename
+      id
+    }
+    totalCount
+    totalPointsCount
   }
 }
 

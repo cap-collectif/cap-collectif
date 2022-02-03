@@ -261,3 +261,265 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
   </div>
 </div>
 `;
+
+exports[`<ProposalAdminSelections /> render correctly with paper votes 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="project.show.meta.step.title"
+        values={Object {}}
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="admin.help.link.proposal.advancement"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <ListGroup
+        bsClass="list-group"
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
+        <ListGroupItem
+          bsClass="list-group-item"
+          listItem={false}
+        >
+          <div>
+            <strong>
+              step-1
+            </strong>
+             - 
+            <span>
+              Etape de dépôt
+            </span>
+          </div>
+          <br />
+          <Field
+            component={[Function]}
+            disabled={true}
+            id="collectPublished"
+            label={
+              <FormattedMessage
+                id="published-in-this-step"
+                tagName="div"
+                values={Object {}}
+              />
+            }
+            name="collectPublished"
+            readOnly={true}
+          />
+          <div>
+            <Field
+              component={[Function]}
+              id="collectStatus"
+              label="Statut"
+              name="collectStatus"
+              normalize={[Function]}
+              type="select"
+            >
+              <option
+                value="-1"
+              >
+                global.no_status
+              </option>
+            </Field>
+          </div>
+        </ListGroupItem>
+        <ListGroupItem
+          bsClass="list-group-item"
+          id="item_0"
+          key="0"
+          listItem={false}
+        >
+          <div>
+            <strong>
+              step-2
+            </strong>
+             - 
+            <span>
+              Etape de sélection
+            </span>
+          </div>
+          <br />
+          <Field
+            component={[Function]}
+            id="selections[0].selected"
+            label={
+              <FormattedMessage
+                id="published-in-this-step"
+                values={Object {}}
+              />
+            }
+            name="selections[0].selected"
+            normalize={[Function]}
+          />
+          <div>
+            <Field
+              component={[Function]}
+              id="selections[0].status"
+              label="Statut"
+              name="selections[0].status"
+              normalize={[Function]}
+              type="select"
+            >
+              <option
+                value="-1"
+              >
+                global.no_status
+              </option>
+            </Field>
+            <FieldArray
+              component={
+                Object {
+                  "$$typeof": Symbol(react.memo),
+                  "WrappedComponent": [Function],
+                  "__docgenInfo": Object {
+                    "description": "",
+                    "displayName": "ProposalAdminProgressSteps",
+                    "methods": Array [
+                      Object {
+                        "docblock": null,
+                        "modifiers": Array [],
+                        "name": "handleClose",
+                        "params": Array [
+                          Object {
+                            "name": "valid",
+                            "type": Object {
+                              "name": "boolean",
+                            },
+                          },
+                        ],
+                        "returns": null,
+                      },
+                      Object {
+                        "docblock": null,
+                        "modifiers": Array [],
+                        "name": "cancelClose",
+                        "params": Array [],
+                        "returns": null,
+                      },
+                    ],
+                    "props": Object {
+                      "dispatch": Object {
+                        "description": "",
+                        "flowType": Object {
+                          "name": "Dispatch",
+                        },
+                        "required": true,
+                      },
+                      "fields": Object {
+                        "description": "",
+                        "flowType": Object {
+                          "name": "signature",
+                          "raw": "{ length: number, map: Function, remove: Function }",
+                          "signature": Object {
+                            "properties": Array [
+                              Object {
+                                "key": "length",
+                                "value": Object {
+                                  "name": "number",
+                                  "required": true,
+                                },
+                              },
+                              Object {
+                                "key": "map",
+                                "value": Object {
+                                  "name": "Function",
+                                  "required": true,
+                                },
+                              },
+                              Object {
+                                "key": "remove",
+                                "value": Object {
+                                  "name": "Function",
+                                  "required": true,
+                                },
+                              },
+                            ],
+                          },
+                          "type": "object",
+                        },
+                        "required": true,
+                      },
+                      "progressSteps": Object {
+                        "description": "",
+                        "flowType": Object {
+                          "elements": Array [
+                            Object {
+                              "name": "Object",
+                            },
+                          ],
+                          "name": "Array",
+                          "raw": "Array<Object>",
+                        },
+                        "required": true,
+                      },
+                    },
+                  },
+                  "compare": null,
+                  "displayName": "Connect(ProposalAdminProgressSteps)",
+                  "type": [Function],
+                }
+              }
+              name="progressSteps"
+            />
+          </div>
+        </ListGroupItem>
+      </ListGroup>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="proposal_advancement_save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={false}
+        />
+      </ButtonToolbar>
+    </form>
+  </div>
+</div>
+`;

@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\ProposalStepPaperVoteCounter:
+    ProposalStepPaperVoteCounter109:
+        totalCount: 13
+        totalPointsCount: 42
+        proposal: '@proposal109'
+        step: '@collectstepCorona'
+    ProposalStepPaperVoteCounter133:
+        totalCount: 13
+        totalPointsCount: 42
+        proposal: '@proposalProjectWithOwner'
+        step: '@collectStepProjectWithOwner'

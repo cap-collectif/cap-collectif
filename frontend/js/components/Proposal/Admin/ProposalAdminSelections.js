@@ -7,9 +7,16 @@ import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
 import moment from 'moment';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import {
+  ButtonToolbar,
+  Button,
+  ListGroup,
+  ListGroupItem,
+  OverlayTrigger,
+  Tooltip,
+} from 'react-bootstrap';
 import type { ProposalAdminSelections_proposal } from '~relay/ProposalAdminSelections_proposal.graphql';
-import type { State, Dispatch } from '../../../types';
+import type { State, Dispatch } from '~/types';
 import AlertForm from '../../Alert/AlertForm';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
@@ -19,6 +26,11 @@ import ChangeCollectStatusMutation from '../../../mutations/ChangeCollectStatusM
 import ChangeProposalProgressStepsMutation from '../../../mutations/ChangeProposalProgressStepsMutation';
 import UnselectProposalMutation from '../../../mutations/UnselectProposalMutation';
 import ProposalAdminProgressSteps from './ProposalAdminProgressSteps';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Icon, { ICON_NAME } from '~ds/Icon/Icon';
+import UpdateProposalStepPaperVoteCounterMutation from '~/mutations/UpdateProposalStepPaperVoteCounterMutation';
+import Text from '~ui/Primitives/Text';
+import AppBox from '~ui/Primitives/AppBox';
 
 export const formName = 'proposal-admin-selections';
 const selector = formValueSelector(formName);
@@ -39,10 +51,41 @@ type Props = PassedProps & {
   submitSucceeded: boolean,
   submitFailed: boolean,
   submitting: boolean,
+  paperVoteEnabled: boolean,
 };
 
-const validate = () => {
-  const errors = {};
+const validate = (values: FormValues, props: Props) => {
+  const errors = {
+    paperVotes: {},
+  };
+
+  for (const stepId in values.paperVotes) {
+    if (values.paperVotes[stepId].totalCount || values.paperVotes[stepId].totalPointsCount) {
+      const voteStep = props.proposal.project?.steps.find(step => step.id === stepId);
+      if (voteStep && voteStep.votesRanking) {
+        const { totalCount, totalPointsCount } = values.paperVotes[stepId];
+
+        if (undefined === totalCount) {
+          errors.paperVotes[stepId] = {
+            totalCount: 'error-paper-points-no-votes',
+          };
+        } else if (undefined === totalPointsCount) {
+          errors.paperVotes[stepId] = {
+            totalCount: 'error-paper-points-no-points',
+          };
+        } else if (Number(totalCount) === 0 && Number(totalPointsCount) > 0) {
+          errors.paperVotes[stepId] = {
+            totalCount: 'error-paper-points-no-votes',
+          };
+        } else if (Number(totalCount) > Number(totalPointsCount)) {
+          errors.paperVotes[stepId] = {
+            totalCount: 'error-paper-points-above-votes',
+          };
+        }
+      }
+    }
+  }
+
   return errors;
 };
 
@@ -111,7 +154,50 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       }),
     );
   }
+
+  for (const stepId in values.paperVotes) {
+    if (!Number.isNaN(values.paperVotes[stepId].totalCount)) {
+      const newCount = Number(values.paperVotes[stepId].totalCount);
+      const newPoints =
+        values.paperVotes[stepId].totalPointsCount &&
+        !Number.isNaN(values.paperVotes[stepId].totalPointsCount)
+          ? Number(values.paperVotes[stepId].totalPointsCount)
+          : 0;
+      if (
+        newCount !== (props.initialValues.paperVotes[stepId]?.totalCount ?? 0) ||
+        newPoints !== (props.initialValues.paperVotes[stepId]?.totalPointsCount ?? 0)
+      ) {
+        promises.push(
+          UpdateProposalStepPaperVoteCounterMutation.commit({
+            input: {
+              proposal: proposal.id,
+              step: stepId,
+              totalCount: newCount,
+              totalPointsCount: newPoints ?? 0,
+            },
+          }),
+        );
+      }
+    }
+  }
+
   return Promise.all(promises);
+};
+
+const paperVotesIndexed = paperVotes => {
+  if (paperVotes) {
+    return paperVotes.reduce((acc, paperVote) => {
+      return {
+        ...acc,
+        [paperVote.step.id]: {
+          totalCount: paperVote.totalCount,
+          totalPointsCount: paperVote.totalPointsCount,
+        },
+      };
+    }, {});
+  }
+
+  return {};
 };
 
 export class ProposalAdminSelections extends Component<Props> {
@@ -127,6 +213,7 @@ export class ProposalAdminSelections extends Component<Props> {
       submitSucceeded,
       submitFailed,
       submitting,
+      paperVoteEnabled,
     } = this.props;
     const steps = proposal.project ? proposal.project.steps : [];
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
@@ -178,6 +265,54 @@ export class ProposalAdminSelections extends Component<Props> {
                       ))}
                   </Field>
                 </div>
+                {collectStep.votable && paperVoteEnabled && (
+                  <>
+                    <Flex direction="row" align="center" spacing={1}>
+                      <Text color="gray.900">
+                        {intl.formatMessage({ id: 'paper-votes-field-label' })}
+                      </Text>
+                      <OverlayTrigger
+                        key={intl.formatMessage({ id: 'paper-votes-field-help-tooltip' })}
+                        placement="top"
+                        overlay={
+                          <Tooltip id="paper-vote-tooltip">
+                            {intl.formatMessage({ id: 'paper-votes-field-help-tooltip' })}
+                          </Tooltip>
+                        }>
+                        <AppBox mt={1}>
+                          <Icon name={ICON_NAME.CIRCLE_INFO} size="sm" color="blue.500" />
+                        </AppBox>
+                      </OverlayTrigger>
+                    </Flex>
+                    <Text color="gray.700" style={{ marginTop: 0 }}>
+                      {intl.formatMessage({ id: 'paper-votes-field-help' })}
+                    </Text>
+                    <Flex>
+                      <AppBox maxWidth="200px">
+                        <Field
+                          label={
+                            collectStep.votesRanking
+                              ? intl.formatMessage({ id: 'vote-plural' }, { num: 2 })
+                              : ''
+                          }
+                          type="number"
+                          name={`paperVotes[${collectStep.id}].totalCount`}
+                          component={component}
+                        />
+                      </AppBox>
+                      {collectStep.votesRanking && (
+                        <Flex ml={4} maxWidth="200px">
+                          <Field
+                            label={intl.formatMessage({ id: 'points-plural' }, { num: 2 })}
+                            type="number"
+                            name={`paperVotes[${collectStep.id}].totalPointsCount`}
+                            component={component}
+                          />
+                        </Flex>
+                      )}
+                    </Flex>
+                  </>
+                )}
               </ListGroupItem>
               {selectionSteps.map((step, index) => (
                 <ListGroupItem key={index} id={`item_${index}`}>
@@ -213,6 +348,55 @@ export class ProposalAdminSelections extends Component<Props> {
                         <FieldArray name="progressSteps" component={ProposalAdminProgressSteps} />
                       )}
                     </div>
+                  )}
+                  {step.votable && paperVoteEnabled && (
+                    <>
+                      <Flex direction="row" align="center" spacing={1}>
+                        <Text color="gray.900">
+                          {intl.formatMessage({ id: 'paper-votes-field-label' })}
+                        </Text>
+                        <OverlayTrigger
+                          key={intl.formatMessage({ id: 'paper-votes-field-help-tooltip' })}
+                          placement="top"
+                          overlay={
+                            <Tooltip id={`paper-vote-tooltip-${index}`}>
+                              {intl.formatMessage({ id: 'paper-votes-field-help-tooltip' })}
+                            </Tooltip>
+                          }>
+                          <AppBox mt={1}>
+                            <Icon name={ICON_NAME.CIRCLE_INFO} size="sm" color="blue.500" />
+                          </AppBox>
+                        </OverlayTrigger>
+                      </Flex>
+                      <Text color="gray.700" style={{ marginTop: 0 }}>
+                        {intl.formatMessage({ id: 'paper-votes-field-help' })}
+                      </Text>
+                      <Flex>
+                        <AppBox maxWidth="200px">
+                          <Field
+                            label={
+                              step.votesRanking
+                                ? intl.formatMessage({ id: 'vote-plural' }, { num: 2 })
+                                : ''
+                            }
+                            type="number"
+                            name={`paperVotes[${step.id}].totalCount`}
+                            component={component}
+                          />
+                        </AppBox>
+                        {step.votesRanking && (
+                          <Flex ml={4} maxWidth="200px">
+                            <Field
+                              style={{maxWidth: "200px"}}
+                              label={intl.formatMessage({ id: 'points-plural' }, { num: 2 })}
+                              type="number"
+                              name={`paperVotes[${step.id}].totalPointsCount`}
+                              component={component}
+                            />
+                          </Flex>
+                        )}
+                      </Flex>
+                    </>
                   )}
                 </ListGroupItem>
               ))}
@@ -268,7 +452,9 @@ const mapStateToProps = (state: State, props: PassedProps) => {
           status: selection && selection.status ? selection.status.id : null,
         };
       }),
+      paperVotes: paperVotesIndexed(props.proposal.paperVotes),
     },
+    paperVoteEnabled: state.default.features.unstable__paper_vote ?? false,
   };
 };
 
@@ -306,14 +492,25 @@ export default createFragmentContainer(container, {
               id
               name
             }
+            votable
+            votesRanking
           }
           ... on CollectStep {
             statuses {
               id
               name
             }
+            votable
+            votesRanking
           }
         }
+      }
+      paperVotes {
+        step {
+          id
+        }
+        totalCount
+        totalPointsCount
       }
     }
   `,

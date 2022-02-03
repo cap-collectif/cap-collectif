@@ -1,0 +1,17 @@
+InternalProposalStepPaperVoteCounter:
+    type: object
+    config:
+        name: ProposalStepPaperVoteCounter
+        fields:
+            proposal:
+                type: 'InternalProposal!'
+                description: 'The proposal voted.'
+            step:
+                type: 'ProposalStep!'
+                description: 'The step where the proposal is voted.'
+            totalCount:
+                type: 'Int!'
+                description: 'the count of paper vote won by by the proposal.'
+            totalPointsCount:
+                type: 'Int!'
+                description: 'the count of paper points won by by the proposal.'

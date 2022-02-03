@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.proposals fetches proposal's paper votes 1`] = `
+Object {
+  "node": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxQcm9qZWN0V2l0aE93bmVy",
+            "paperVotes": Array [
+              Object {
+                "proposal": Object {
+                  "id": "UHJvcG9zYWw6cHJvcG9zYWxQcm9qZWN0V2l0aE93bmVy",
+                },
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9qZWN0V2l0aE93bmVy",
+                },
+                "totalCount": 13,
+                "totalPointsCount": 42,
+              },
+            ],
+            "paperVotesTotalCount": 13,
+            "paperVotesTotalPointsCount": 42,
+            "pointsOnStep": 42,
+            "votesOnStep": 13,
+          },
+        },
+      ],
+    },
+  },
+}
+`;

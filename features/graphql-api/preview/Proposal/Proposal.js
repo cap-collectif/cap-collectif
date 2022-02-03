@@ -13,7 +13,6 @@ const ProposalPreviewData = /* GraphQL */ `
               address {
                 formatted
               }
-              paperVotesCount
             }
           }
         }

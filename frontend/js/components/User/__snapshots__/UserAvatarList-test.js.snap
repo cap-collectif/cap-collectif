@@ -82,6 +82,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "twilio": false,
             "unstable__anonymous_questionnaire": false,
             "unstable__new_consultation_page": false,
+            "unstable__paper_vote": false,
             "unstable__project_admin": false,
             "unstable__remote_events": false,
             "unstable__tipsmeee": false,

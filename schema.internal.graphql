@@ -7354,6 +7354,7 @@ type Mutation {
   createTwilioServiceMutation(input: CreateTwilioServiceInput!): CreateTwilioServicePayload
   updateTwilioAlphaSenderMutation(input: UpdateTwilioAlphaSenderInput!): UpdateTwilioAlphaSenderPayload
   sendSmsPhoneValidationCode(input: SendSmsPhoneValidationCodeInput!): SendSmsPhoneValidationCodePayload
+  updateProposalStepPaperVoteCounter(input: UpdateProposalStepPaperVoteCounterInput!): UpdateProposalStepPaperVoteCounterPayload
 }
 
 """A connection to a list of items."""
@@ -9164,9 +9165,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """Identifies the body of the contribution rendered to text."""
   bodyText: String
 
-  """The count of paper votes outside of the platform."""
-  paperVotesCount: Int!
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -9289,6 +9287,37 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Identifies the answers to an evaluation form."""
   evaluation: ProposalEvaluation @deprecated(reason: "Field `viewerCanSeeEvaluation` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
+
+  """Count of paper votes of the proposal."""
+  paperVotesTotalCount(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """If provided, retrieve only in this step."""
+    stepId: ID
+  ): Int!
+
+  """Count of paper points of the proposal."""
+  paperVotesTotalPointsCount(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """If provided, retrieve only in this step."""
+    stepId: ID
+  ): Int!
+
+  """The paper vote obtained by the proposal, step by step."""
+  paperVotes: [ProposalStepPaperVoteCounter!]
 
   """Check if the proposal has been merged with another"""
   hasBeenMerged: Boolean
@@ -10433,6 +10462,20 @@ interface ProposalStep {
 
   """Whether or not can display vote counters and points"""
   canDisplayBallot: Boolean!
+}
+
+type ProposalStepPaperVoteCounter {
+  """The proposal voted."""
+  proposal: Proposal!
+
+  """The step where the proposal is voted."""
+  step: ProposalStep!
+
+  """the count of paper vote won by by the proposal."""
+  totalCount: Int!
+
+  """the count of paper points won by by the proposal."""
+  totalPointsCount: Int!
 }
 
 """The given proposal status in a step."""
@@ -15236,6 +15279,42 @@ type UpdateProposalSocialNetworksPayload {
 
   """An unsuccessful mutation will return an error message"""
   errorCode: ProposalSocialNetworksErrorCode
+  clientMutationId: String
+}
+
+"""Available errors on UpdateProposalStepPaperVoteCounter mutation."""
+enum UpdateProposalStepPaperVoteCounterErrorCode {
+  """The proposal does not exist."""
+  PROPOSAL_NOT_FOUND
+
+  """The step does not exist or is neither a collect nor selection step."""
+  STEP_NOT_FOUND
+
+  """The step is not votable."""
+  STEP_NOT_VOTABLE
+}
+
+input UpdateProposalStepPaperVoteCounterInput {
+  """ID of the proposal to update votes."""
+  proposal: ID!
+
+  """ID of the step where the proposal receives votes."""
+  step: ID!
+
+  """Count of votes received by the proposal in the step."""
+  totalCount: Int!
+
+  """Amount of points received by the proposal in the step."""
+  totalPointsCount: Int!
+  clientMutationId: String
+}
+
+type UpdateProposalStepPaperVoteCounterPayload {
+  """If successful, the updated proposal."""
+  proposal: Proposal
+
+  """The error, if any."""
+  errorCode: UpdateProposalStepPaperVoteCounterErrorCode
   clientMutationId: String
 }
 

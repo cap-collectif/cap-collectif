@@ -32,7 +32,7 @@ describe('Internal|deleteProject mutation', () => {
           id: 'UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy',
         },
       },
-      'internal_admin',
+      'internal_theo',
     );
 
     expect(response.deleteProject.deletedProjectId).toBe('UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy');

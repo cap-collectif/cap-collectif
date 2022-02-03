@@ -73,6 +73,7 @@ class Proposal implements
     Authorable
 {
     use AddressableTrait;
+    use BodyUsingJoditWysiwygTrait;
     use CommentableWithoutCounterTrait;
     use DraftableTrait;
     use FollowableTrait;
@@ -89,7 +90,6 @@ class Proposal implements
     use TimestampableTrait;
     use TrashableTrait;
     use UuidTrait;
-    use BodyUsingJoditWysiwygTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -330,9 +330,9 @@ class Proposal implements
     private ?ProposalSocialNetworks $proposalSocialNetworks;
 
     /**
-     * @ORM\Column(name="paper_votes_count", type="integer")
+     * @ORM\OneToMany(targetEntity=ProposalStepPaperVoteCounter::class, mappedBy="proposal", orphanRemoval=true)
      */
-    private int $paperVotesCount = 0;
+    private Collection $paperVotes;
 
     public function __construct()
     {
@@ -354,6 +354,7 @@ class Proposal implements
         $this->revisions = new ArrayCollection();
         $this->assessment = null;
         $this->decision = null;
+        $this->paperVotes = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -1579,14 +1580,31 @@ class Proposal implements
         return $this;
     }
 
-    public function getPaperVotesCount(): int
+    public function getPaperVotes(): Collection
     {
-        return $this->paperVotesCount;
+        return $this->paperVotes;
     }
 
-    public function setPaperVotesCount(int $paperVotesCount): self
+    public function addPaperVote(ProposalStepPaperVoteCounter $paperVote): self
     {
-        $this->paperVotesCount = $paperVotesCount;
+        if (!$this->paperVotes->contains($paperVote)) {
+            $this->paperVotes->add($paperVote);
+
+            // set the owning side of the relation if necessary
+            $paperVote->setProposal($this);
+        }
+
+        return $this;
+    }
+
+    public function removePaperVote(ProposalStepPaperVoteCounter $paperVote): self
+    {
+        if ($this->paperVotes->removeElement($paperVote)) {
+            // set the owning side to null (unless already changed)
+            if ($paperVote->getProposal() === $this) {
+                $paperVote->setProposal(null);
+            }
+        }
 
         return $this;
     }

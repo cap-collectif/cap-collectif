@@ -24,10 +24,10 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 class SelectionStep extends AbstractStep implements ParticipativeStepInterface
 {
     use AllowAuthorsToAddNewsTrait;
+    use SecretBallotTrait;
     use TimelessStepTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
-    use SecretBallotTrait;
 
     public const TYPE = 'selection';
     const VOTE_TYPE_DISABLED = 0;

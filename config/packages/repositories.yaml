@@ -650,3 +650,9 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:UserPhoneVerificationSms']
+
+    Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:ProposalStepPaperVoteCounter']

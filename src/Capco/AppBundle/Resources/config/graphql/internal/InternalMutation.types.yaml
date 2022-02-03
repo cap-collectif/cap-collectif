@@ -1445,3 +1445,10 @@ InternalMutation:
                     inputType: SendSmsPhoneValidationCodeInput
                     payloadType: SendSmsPhoneValidationCodePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Requirement\\SendSmsPhoneValidationCodeMutation", [value, getUser()])'
+            updateProposalStepPaperVoteCounter:
+                access: '@=hasRole("ROLE_PROJECT_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProposalStepPaperVoteCounterInput
+                    payloadType: UpdateProposalStepPaperVoteCounterPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdateProposalStepPaperVoteCounterMutation", [value, getUser()])'

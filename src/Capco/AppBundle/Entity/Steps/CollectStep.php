@@ -23,10 +23,10 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 class CollectStep extends AbstractStep implements ParticipativeStepInterface
 {
     use AllowAuthorsToAddNewsTrait;
+    use SecretBallotTrait;
     use TimelessStepTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
-    use SecretBallotTrait;
     public const TYPE = 'collect';
 
     public static $sort = [

@@ -1,0 +1,11 @@
+UpdateProposalStepPaperVoteCounterPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of UpdateProposalStepPaperVoteCounter mutation.'
+        fields:
+            proposal:
+                type: 'InternalProposal'
+                description: 'If successful, the updated proposal.'
+            errorCode:
+                type: 'UpdateProposalStepPaperVoteCounterErrorCode'
+                description: 'The error, if any.'

@@ -104,6 +104,7 @@ export const features: FeatureToggles = {
   noindex_on_profiles: false,
   unstable__anonymous_questionnaire: false,
   twilio: false,
+  unstable__paper_vote: false,
 };
 
 export const initialState: State = {

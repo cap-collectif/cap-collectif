@@ -71,6 +71,7 @@ class FeaturesCategoryResolver
                     Manager::noindex_on_profiles,
                     Manager::unstable__anonymous_questionnaire,
                     Manager::twilio,
+                    Manager::unstable__paper_vote,
                 ],
             ],
         ],

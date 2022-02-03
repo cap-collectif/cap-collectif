@@ -131,6 +131,27 @@ InternalProposal:
                         type: 'Boolean'
                         description: '(ROLE_SUPER_ADMIN only) Select also not accounted votes.'
                         defaultValue: false
+            paperVotesTotalCount:
+                description: 'Count of paper votes of the proposal.'
+                type: 'Int!'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStepPaperVoteTotalCountResolver", [value, args])'
+                args:
+                    stepId:
+                        type: 'ID'
+                        description: 'If provided, retrieve only in this step.'
+            paperVotesTotalPointsCount:
+                description: 'Count of paper points of the proposal.'
+                type: 'Int!'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStepPaperVoteTotalPointsCountResolver", [value, args])'
+                args:
+                    stepId:
+                        type: 'ID'
+                        description: 'If provided, retrieve only in this step.'
+            paperVotes:
+                description: 'The paper vote obtained by the proposal, step by step.'
+                type: '[InternalProposalStepPaperVoteCounter!]'
             hasBeenMerged:
                 type: 'Boolean'
                 description: 'Check if the proposal has been merged with another'
