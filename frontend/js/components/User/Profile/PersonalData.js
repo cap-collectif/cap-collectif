@@ -78,11 +78,14 @@ const validate = (values: Object, props: Props) => {
     if (!values.phone || values.phone.length === 0) {
       errors.phone = 'fill-or-delete-field';
     }
-    if (values.phone && values.phone.length <= 2) {
-      errors.phone = 'two-characters-minimum-required';
-    }
-    if (values.phone && values.phone.length > 256) {
-      errors.phone = '256-characters-maximum-required';
+    if (values.phone && typeof values.phone === 'string') {
+      const countryCode = values.phone.slice(0, 3);
+      const remainingPhone = values.phone.slice(3);
+      if (countryCode !== '+33') {
+        errors.phone = 'phone.validation.start.by.plus.thirty.three';
+      } else if (!/^[0-9]+$/.test(remainingPhone) || remainingPhone.length !== 9) {
+        errors.phone = 'profile.constraints.phone.invalid';
+      }
     }
   }
 
@@ -134,8 +137,34 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       if (!response.updateProfilePersonalData || !response.updateProfilePersonalData.user) {
         throw new Error('Mutation "updateProfilePersonalData" failed.');
       }
+      const { errorCode } = response.updateProfilePersonalData;
+
+      if (errorCode) {
+        let phone;
+        switch (errorCode) {
+          case 'PHONE_SHOULD_BE_MOBILE_NUMBER':
+            phone = intl.formatMessage({ id: 'phone.validation.mobile.format' });
+            break;
+          case 'PHONE_ALREADY_USED_BY_ANOTHER_USER':
+            phone = intl.formatMessage({ id: 'phone.validation.number.already.used' });
+            break;
+          case 'PHONE_INVALID_LENGTH':
+            phone = intl.formatMessage({ id: 'phone.validation.length' });
+            break;
+          default:
+            phone = null;
+        }
+
+        throw new SubmissionError({
+          phone,
+        });
+      }
     })
     .catch(response => {
+      if (response.errors) {
+        throw new SubmissionError(response.errors);
+      }
+
       if (response.response.message) {
         throw new SubmissionError({
           _error: response.response.message,

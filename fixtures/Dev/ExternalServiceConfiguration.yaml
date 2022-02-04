@@ -2,3 +2,13 @@ Capco\AppBundle\Entity\ExternalServiceConfiguration:
   Mailer:
     type: 'mailer'
     value: 'mandrill'
+  TwilioAlphaSenderId:
+    type: 'twilio_alpha_sender_id'
+    value: '***REMOVED***'
+  TwilioAlphaSenderName:
+    type: 'twilio_alpha_sender_name'
+    value: 'dev'
+  TwilioServiceId:
+    type: 'twilio_service_id'
+    value: '***REMOVED***'
+

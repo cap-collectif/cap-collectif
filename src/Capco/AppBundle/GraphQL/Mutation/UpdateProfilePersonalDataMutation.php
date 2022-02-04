@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Enum\UserPhoneErrors;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PersonalDataFormType;
 use Capco\UserBundle\Repository\UserRepository;
@@ -29,8 +30,8 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
         $this->user = $viewer;
         $this->arguments = $input->getArrayCopy();
 
-        // it an update from BO
-        if (isset($this->arguments[self::USER_ID])) {
+        $isUpdatingFromBO = isset($this->arguments[self::USER_ID]);
+        if ($isUpdatingFromBO) {
             parent::__invoke($input, $viewer);
         }
 
@@ -43,6 +44,19 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
         }
 
         if (!$form->isValid()) {
+            $errors = $form->getErrors(true, true);
+            foreach ($errors as $error) {
+                $message = $error->getMessage();
+                if ($message === UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER) {
+                    return ['user' => $this->user, 'errorCode' => UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER];
+                }
+                if ($message === UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER) {
+                    return ['user' => $this->user, 'errorCode' => UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER];
+                }
+                if ($message === UserPhoneErrors::PHONE_INVALID_LENGTH) {
+                    return ['user' => $this->user, 'errorCode' => UserPhoneErrors::PHONE_INVALID_LENGTH];
+                }
+            }
             return [
                 'user' => $this->user,
                 'errorCode' => self::CANT_UPDATE,

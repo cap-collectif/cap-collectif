@@ -141,7 +141,7 @@ describe('<RequirementsForm />', () => {
     expect(validate({}, { ...props, step: { requirements: { edges: null } } })).toMatchSnapshot();
 
     const values = {
-      requirement1: '0606060606',
+      requirement1: '+33606060606',
       requirement2: '1992-04-09T23:21:06+0200',
       requirement3: 'Aurélien',
       requirement4: 'David',
@@ -151,7 +151,7 @@ describe('<RequirementsForm />', () => {
     expect(validate(values, props)).toMatchSnapshot();
 
     const invalidValues = {
-      requirement1: '060606060612345',
+      requirement1: '+3360606060612345',
     };
     expect(validate(invalidValues, props)).toMatchSnapshot();
 

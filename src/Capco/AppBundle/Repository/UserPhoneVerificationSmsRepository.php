@@ -32,4 +32,19 @@ class UserPhoneVerificationSmsRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findMostRecentSms(User $user): ?UserPhoneVerificationSms
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.user = :user')
+            ->orderBy('s.createdAt', 'DESC')
+            ->setParameters(['user' => $user])
+        ;
+
+        $results = $qb->getQuery()->getResult();
+
+        return $results[0] ?? null;
+    }
+
+
 }

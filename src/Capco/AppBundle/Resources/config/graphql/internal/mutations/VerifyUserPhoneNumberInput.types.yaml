@@ -1,0 +1,8 @@
+VerifyUserPhoneNumberInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of verifyUserPhoneNumber mutation.'
+        fields:
+            code:
+                type: 'String!'
+                description: 'The validaton code sent by sms'

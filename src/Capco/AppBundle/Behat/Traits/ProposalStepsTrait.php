@@ -928,7 +928,7 @@ trait ProposalStepsTrait
      */
     public function iFullFillTheRequirementsConditions()
     {
-        $this->fillField('mobile-phone', '0123456789');
+        $this->fillField('mobile-phone', '+33623456789');
         $this->fillField('day', '24');
         $this->fillField('month', '3');
         $this->fillField('year', '1992');

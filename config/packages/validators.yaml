@@ -100,3 +100,7 @@ services:
     Capco\AppBundle\Validator\Constraints\CheckIdentificationCodeValidator:
         tags:
             - { name: validator.constraint_validator, alias: check_identification_code.validator }
+
+    Capco\AppBundle\Validator\Constraints\CheckPhoneNumberValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: check_phone_number.validator }

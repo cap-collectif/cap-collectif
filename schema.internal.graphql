@@ -7355,6 +7355,7 @@ type Mutation {
   updateTwilioAlphaSenderMutation(input: UpdateTwilioAlphaSenderInput!): UpdateTwilioAlphaSenderPayload
   sendSmsPhoneValidationCode(input: SendSmsPhoneValidationCodeInput!): SendSmsPhoneValidationCodePayload
   updateProposalStepPaperVoteCounter(input: UpdateProposalStepPaperVoteCounterInput!): UpdateProposalStepPaperVoteCounterPayload
+  verifyUserPhoneNumber(input: VerifyUserPhoneNumberInput!): VerifyUserPhoneNumberPayload
 }
 
 """A connection to a list of items."""
@@ -14894,6 +14895,15 @@ type UpdateProfilePayload {
 enum UpdateProfilePersonalDataErrorCode {
   """The update failed"""
   CANT_UPDATE
+
+  """The given phone should be a mobile phone number."""
+  PHONE_SHOULD_BE_MOBILE_NUMBER
+
+  """The given phone is already used by another user."""
+  PHONE_ALREADY_USED_BY_ANOTHER_USER
+
+  """The given phone should be 10 digits."""
+  PHONE_INVALID_LENGTH
 }
 
 input UpdateProfilePersonalDataInput {
@@ -16584,6 +16594,33 @@ type ValueResponse implements Response {
 
   """The response value formatted."""
   formattedValue: String
+}
+
+"""Available errors for an `verifyUserPhoneNumber` mutation."""
+enum VerifyUserPhoneNumberErrorCode {
+  """The given phone is already confirmed."""
+  PHONE_ALREADY_CONFIRMED
+
+  """The given given code is expired."""
+  CODE_EXPIRED
+
+  """The given code is not valid."""
+  CODE_NOT_VALID
+}
+
+input VerifyUserPhoneNumberInput {
+  """The validaton code sent by sms"""
+  code: String!
+  clientMutationId: String
+}
+
+type VerifyUserPhoneNumberPayload {
+  """The updated User."""
+  user: User
+
+  """The error code, if failing."""
+  errorCode: VerifyUserPhoneNumberErrorCode
+  clientMutationId: String
 }
 
 """A version of contribution"""

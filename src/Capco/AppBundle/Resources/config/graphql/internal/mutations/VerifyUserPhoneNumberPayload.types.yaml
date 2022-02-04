@@ -1,0 +1,10 @@
+VerifyUserPhoneNumberPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            user:
+                type: 'InternalUser'
+                description: 'The updated User.'
+            errorCode:
+                type: 'VerifyUserPhoneNumberErrorCode'
+                description: 'The error code, if failing.'

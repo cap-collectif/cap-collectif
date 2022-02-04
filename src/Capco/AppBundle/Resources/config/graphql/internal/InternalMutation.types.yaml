@@ -1427,12 +1427,14 @@ InternalMutation:
                     payloadType: CreateUserIdentificationCodeListPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Security\\CreateUserIdentificationCodeListMutation", [value, getUser()])'
             createTwilioServiceMutation:
+                access: '@=hasRole("ROLE_ADMIN")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateTwilioServiceInput
                     payloadType: CreateTwilioServicePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateTwilioServiceMutation", [value, getUser()])'
             updateTwilioAlphaSenderMutation:
+                access: '@=hasRole("ROLE_ADMIN")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateTwilioAlphaSenderInput
@@ -1452,3 +1454,10 @@ InternalMutation:
                     inputType: UpdateProposalStepPaperVoteCounterInput
                     payloadType: UpdateProposalStepPaperVoteCounterPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdateProposalStepPaperVoteCounterMutation", [value, getUser()])'
+            verifyUserPhoneNumber:
+                access: '@=hasRole("ROLE_USER")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: VerifyUserPhoneNumberInput
+                    payloadType: VerifyUserPhoneNumberPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\VerifyUserPhoneNumberMutation", [value, getUser()])'

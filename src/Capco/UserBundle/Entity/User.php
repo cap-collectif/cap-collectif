@@ -24,6 +24,7 @@ use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Validator\Constraints as CustomAssert;
 
 class User extends BaseUser implements ProjectOwner, EquatableInterface, IndexableInterface
 {
@@ -53,6 +54,11 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected $gender;
     protected ?Media $media = null;
     protected ?string $birthPlace = null;
+
+    /**
+     * @CustomAssert\CheckPhoneNumber
+     */
+    protected $phone;
 
     //participations
     protected Collection $opinions;

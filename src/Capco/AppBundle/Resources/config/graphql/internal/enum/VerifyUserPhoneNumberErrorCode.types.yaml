@@ -1,0 +1,15 @@
+VerifyUserPhoneNumberErrorCode:
+    type: enum
+    config:
+        name: VerifyUserPhoneNumberErrorCode
+        description: 'Available errors for an `verifyUserPhoneNumber` mutation.'
+        values:
+            PHONE_ALREADY_CONFIRMED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\VerifyUserPhoneNumberMutation::PHONE_ALREADY_CONFIRMED")'
+                description: 'The given phone is already confirmed.'
+            CODE_EXPIRED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\VerifyUserPhoneNumberMutation::CODE_EXPIRED")'
+                description: 'The given given code is expired.'
+            CODE_NOT_VALID:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\VerifyUserPhoneNumberMutation::CODE_NOT_VALID")'
+                description: 'The given code is not valid.'

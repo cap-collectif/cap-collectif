@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|verifyUserPhoneNumber mutation should return CODE_EXPIRED errorCode 1`] = `
+Object {
+  "verifyUserPhoneNumber": Object {
+    "errorCode": "CODE_EXPIRED",
+    "user": null,
+  },
+}
+`;
+
+exports[`Internal|verifyUserPhoneNumber mutation should return CODE_NOT_VALID errorCode 1`] = `
+Object {
+  "verifyUserPhoneNumber": Object {
+    "errorCode": "CODE_NOT_VALID",
+    "user": null,
+  },
+}
+`;
+
+exports[`Internal|verifyUserPhoneNumber mutation should return PHONE_ALREADY_CONFIRMED errorCode 1`] = `
+Object {
+  "verifyUserPhoneNumber": Object {
+    "errorCode": "PHONE_ALREADY_CONFIRMED",
+    "user": null,
+  },
+}
+`;
+
+exports[`Internal|verifyUserPhoneNumber mutation should verify phone number correctly 1`] = `
+Object {
+  "verifyUserPhoneNumber": Object {
+    "errorCode": null,
+    "user": Object {
+      "email": "lbrunet@cap-collectif.com",
+      "phoneConfirmed": true,
+    },
+  },
+}
+`;
