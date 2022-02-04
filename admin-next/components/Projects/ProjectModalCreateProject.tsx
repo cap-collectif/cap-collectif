@@ -1,4 +1,5 @@
-import * as React from 'react';
+import type { FC } from 'react';
+import { FormControl, FieldInput } from '@cap-collectif/form';
 import { useIntl } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
@@ -11,14 +12,14 @@ import {
     toast,
     CapUIIcon,
     CapUIModalSize,
+    FormLabel,
 } from '@cap-collectif/ui';
 import type { ProjectModalCreateProject_query$key } from '@relay/ProjectModalCreateProject_query.graphql';
 import { mutationErrorToast } from 'utils/mutation-error-toast';
 import formatSubmitted from 'utils/format-submitted';
 import CreateProjectMutation from 'mutations/CreateProjectMutation';
 import { useForm } from 'react-hook-form';
-import FieldInput from 'components/Form/FieldInput';
-import UserListField from 'components/Form/UserListField';
+import UserListField from '../Form/UserListField';
 
 const formName = 'form-create-project';
 
@@ -51,7 +52,7 @@ const FRAGMENT = graphql`
     }
 `;
 
-const ProjectModalCreateProject: React.FC<ProjectModalCreateProjectProps> = ({
+const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
     query: queryReference,
     noResult,
     isOnlyProjectAdmin,
@@ -134,48 +135,52 @@ const ProjectModalCreateProject: React.FC<ProjectModalCreateProjectProps> = ({
                     </Modal.Header>
                     <Modal.Body>
                         <Flex as="form" direction="column" spacing={3} id={formName}>
-                            <FieldInput
-                                id="title"
-                                name="title"
-                                required
-                                label={intl.formatMessage({ id: 'global.title' })}
-                                placeholder={intl.formatMessage({
-                                    id: 'admiun.project.create.title.placeholder',
-                                })}
-                                control={control}
-                                type="text"
-                            />
-                            <UserListField
-                                defaultOptions
-                                name="author"
-                                id="author"
-                                disabled={isOnlyProjectAdmin}
-                                aria-autocomplete="list"
-                                aria-haspopup="true"
-                                role="combobox"
-                                label={intl.formatMessage({ id: 'global.author' })}
-                                isMulti
-                                control={control}
-                            />
+                            <FormControl name="title" control={control} isRequired>
+                                <FormLabel
+                                    htmlFor="title"
+                                    label={intl.formatMessage({ id: 'global.title' })}
+                                />
+                                <FieldInput
+                                    id="title"
+                                    name="title"
+                                    control={control}
+                                    type="text"
+                                    placeholder={intl.formatMessage({
+                                        id: 'admiun.project.create.title.placeholder',
+                                    })}
+                                />
+                            </FormControl>
 
-                            <FieldInput
-                                name="type"
-                                id="type"
-                                label={intl.formatMessage({
-                                    id: 'admin.fields.project.type.title',
-                                })}
+                            <FormControl
+                                name="author"
                                 control={control}
-                                disabled={false}
-                                placeholder={intl.formatMessage({
-                                    id: 'admin.fields.menu_item.parent_empty',
-                                })}
-                                type="select"
-                                options={data?.projectTypes?.filter(Boolean).map(type => ({
-                                    value: type.id,
-                                    label: intl.formatMessage({ id: type.title }),
-                                }))}
-                                clearable
-                            />
+                                isDisabled={isOnlyProjectAdmin}>
+                                <FormLabel label={intl.formatMessage({ id: 'global.author' })} />
+                                <UserListField name="author" control={control} isMulti />
+                            </FormControl>
+
+                            <FormControl name="type" control={control}>
+                                <FormLabel
+                                    label={intl.formatMessage({
+                                        id: 'admin.fields.project.type.title',
+                                    })}
+                                />
+                                <FieldInput
+                                    name="type"
+                                    control={control}
+                                    options={
+                                        data?.projectTypes?.filter(Boolean).map(type => ({
+                                            value: type.id,
+                                            label: intl.formatMessage({ id: type.title }),
+                                        })) || []
+                                    }
+                                    type="select"
+                                    placeholder={intl.formatMessage({
+                                        id: 'admin.fields.menu_item.parent_empty',
+                                    })}
+                                    clearable
+                                />
+                            </FormControl>
                         </Flex>
                     </Modal.Body>
                     <Modal.Footer spacing={2}>

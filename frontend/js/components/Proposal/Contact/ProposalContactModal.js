@@ -1,22 +1,22 @@
 // @flow
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import { SubmissionError } from 'redux-form';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button } from '@cap-collectif/ui';
+import { Button, FormLabel } from '@cap-collectif/ui';
+import { FormControl, FieldInput } from '@cap-collectif/form';
+import { SubmissionError } from 'redux-form';
 import type { State } from '~/types';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import ContactProposalAuthorMutation from '~/mutations/ContactProposalAuthorMutation';
-import FieldInput from '~/components/Form/FieldInput';
+import Captcha from '~/components/Form/Captcha';
 
 type Props = {|
   show: boolean,
   proposalId: string,
   authorName: string,
   onClose: () => {},
-  onSubmit: () => {},
   addCaptchaField: boolean,
 |};
 
@@ -25,7 +25,6 @@ type FormValues = {|
   senderName: string,
   message: string,
   replyEmail: string,
-  captcha: string,
 |};
 
 export const formName = 'ProposalContactModalForm';
@@ -38,6 +37,7 @@ export const ProposalContactModal = ({
   proposalId,
 }: Props) => {
   const intl = useIntl();
+  const [captcha, setCaptcha] = React.useState('');
 
   const { handleSubmit, formState, control, reset } = useForm({
     mode: 'onChange',
@@ -45,12 +45,16 @@ export const ProposalContactModal = ({
   });
   const { isValid, isSubmitting } = formState;
 
+  const hasValidForm = addCaptchaField ? isValid && !!captcha : isValid;
+
   const onSubmit = (values: FormValues) => {
     if (!values) return;
-    ContactProposalAuthorMutation.commit({ input: { ...values } })
+    ContactProposalAuthorMutation.commit({ input: { ...values, captcha } })
       .then(() => {
         onClose();
         reset();
+        setCaptcha('');
+
         FluxDispatcher.dispatch({
           actionType: 'UPDATE_ALERT',
           alert: {
@@ -59,12 +63,16 @@ export const ProposalContactModal = ({
           },
         });
       })
-      .catch(() => {
-        throw new SubmissionError({
-          _error: 'global.error.server.form',
-        });
+      .catch(error => {
+        if(error) {
+          throw new SubmissionError({
+            _error: 'global.error.server.form',
+          });
+        }
+
       });
   };
+
   return (
     <Modal
       show={show}
@@ -73,49 +81,59 @@ export const ProposalContactModal = ({
         reset();
       }}
       aria-labelledby="ProposalFormContactModal-modal">
-      <form onSubmit={handleSubmit(onSubmit)} id={formName}>
+      <form onSubmit={e => handleSubmit((data: FormValues) => onSubmit(data))(e)} id={formName}>
         <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
           <Modal.Title id="ProposalFormContactModal-title">
             <FormattedMessage id="send-message-to" values={{ messageTo: authorName }} />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FieldInput
-            label={<FormattedMessage id="your-name" />}
-            id="ProposalFormContactModal-senderName"
-            type="text"
-            control={control}
-            minLength={2}
-            required
-            name="senderName"
-          />
-          <FieldInput
-            label={<FormattedMessage id="your-email-address" />}
-            id="ProposalFormContactModal-replyEmail"
-            required
-            control={control}
-            name="replyEmail"
-            type="email"
-          />
-          <FieldInput
-            label={<FormattedMessage id="contact.your-message" />}
-            id="ProposalFormContactModal-message"
-            required
-            control={control}
-            name="message"
-            type="textarea"
-          />
-          <FieldInput
-            id="captcha"
-            name="captcha"
-            type="captcha"
-            control={control}
-            required={addCaptchaField}
-          />
+          <FormControl name="senderName" control={control} isRequired>
+            <FormLabel
+              htmlFor="ProposalFormContactModal-senderName"
+              label={intl.formatMessage({ id: 'your-name' })}
+            />
+            <FieldInput
+              id="ProposalFormContactModal-senderName"
+              name="senderName"
+              control={control}
+              type="text"
+              minLength={2}
+            />
+          </FormControl>
+
+          <FormControl name="replyEmail" control={control} isRequired>
+            <FormLabel
+              htmlFor="ProposalFormContactModal-replyEmail"
+              label={intl.formatMessage({ id: 'your-email-address' })}
+            />
+            <FieldInput
+              id="ProposalFormContactModal-replyEmail"
+              name="replyEmail"
+              control={control}
+              type="email"
+            />
+          </FormControl>
+
+          <FormControl name="message" control={control} isRequired>
+            <FormLabel
+              htmlFor="ProposalFormContactModal-message"
+              label={intl.formatMessage({ id: 'contact.your-message' })}
+            />
+            <FieldInput
+              id="ProposalFormContactModal-message"
+              name="message"
+              control={control}
+              type="textarea"
+            />
+          </FormControl>
+
+          {addCaptchaField && (
+            <Captcha onChange={captchaKey => setCaptcha(captchaKey)} value={captcha} />
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button
-            type="button"
             variant="secondary"
             variantColor="hierarchy"
             variantSize="medium"
@@ -129,11 +147,10 @@ export const ProposalContactModal = ({
           <Button
             id="ProposalFormContactModal-submit"
             isLoading={isSubmitting}
-            disabled={!isValid}
+            disabled={!hasValidForm}
             variant="primary"
             variantSize="medium"
-            type="submit"
-            onClick={onSubmit}>
+            type="submit">
             {intl.formatMessage({ id: 'global.validate' })}
           </Button>
         </Modal.Footer>

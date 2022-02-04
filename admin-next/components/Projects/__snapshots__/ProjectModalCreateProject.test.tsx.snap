@@ -198,8 +198,14 @@ Array [
             id="form-create-project"
           >
             <div
-              className="sc-bdvvtL lfnYcW cap-form-control"
+              className="sc-bdvvtL iXOAiz cap-form-control"
               role="group"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
             >
               <label
                 className="sc-bdvvtL dYOOYb cap-form-label"
@@ -234,16 +240,16 @@ Array [
                 onFocus={[Function]}
                 placeholder="admiun.project.create.title.placeholder"
                 required={true}
+                type="text"
                 value=""
               />
             </div>
             <div
-              className="sc-bdvvtL lfnYcW cap-form-control"
+              className="sc-bdvvtL iXOAiz cap-form-control"
               role="group"
             >
               <label
                 className="sc-bdvvtL dYOOYb cap-form-label"
-                htmlFor="author"
                 style={
                   Object {
                     "marginLeft": 0,
@@ -268,7 +274,6 @@ Array [
               >
                 <div
                   className="cap-async-select css-b62m3t-container"
-                  id="author"
                   onKeyDown={[Function]}
                 >
                   <span
@@ -396,12 +401,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bdvvtL lfnYcW cap-form-control"
+              className="sc-bdvvtL iXOAiz cap-form-control"
               role="group"
             >
               <label
                 className="sc-bdvvtL dYOOYb cap-form-label"
-                htmlFor="type"
                 style={
                   Object {
                     "marginLeft": 0,
@@ -426,7 +430,6 @@ Array [
               >
                 <div
                   className="cap-select css-b62m3t-container"
-                  id="type"
                   onKeyDown={[Function]}
                 >
                   <span

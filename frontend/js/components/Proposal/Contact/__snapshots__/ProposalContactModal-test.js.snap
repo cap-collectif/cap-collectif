@@ -55,7 +55,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <FieldInput
+      <FormControl
         control={
           Object {
             "_defaultValues": Object {
@@ -140,19 +140,105 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
             "unregister": [Function],
           }
         }
-        id="ProposalFormContactModal-senderName"
-        label={
-          <FormattedMessage
-            id="your-name"
-            values={Object {}}
-          />
-        }
-        minLength={2}
+        isRequired={true}
         name="senderName"
-        required={true}
-        type="text"
-      />
-      <FieldInput
+      >
+        <FormLabel
+          htmlFor="ProposalFormContactModal-senderName"
+          label="your-name"
+        />
+        <FieldInput
+          control={
+            Object {
+              "_defaultValues": Object {
+                "proposalId": "proposalId324Z",
+              },
+              "_executeSchema": [Function],
+              "_fields": Object {},
+              "_formState": Object {
+                "dirtyFields": Object {},
+                "errors": Object {},
+                "isDirty": false,
+                "isSubmitSuccessful": false,
+                "isSubmitted": false,
+                "isSubmitting": false,
+                "isValid": false,
+                "isValidating": false,
+                "submitCount": 0,
+                "touchedFields": Object {},
+              },
+              "_formValues": Object {
+                "proposalId": "proposalId324Z",
+              },
+              "_getDirty": [Function],
+              "_getFieldArray": [Function],
+              "_getWatch": [Function],
+              "_names": Object {
+                "array": Array [],
+                "mount": Array [],
+                "unMount": Array [],
+                "watch": Array [],
+              },
+              "_options": Object {
+                "defaultValues": Object {
+                  "proposalId": "proposalId324Z",
+                },
+                "mode": "onChange",
+                "reValidateMode": "onChange",
+                "shouldFocusError": true,
+              },
+              "_proxyFormState": Object {
+                "dirtyFields": false,
+                "errors": false,
+                "isDirty": false,
+                "isSubmitting": "all",
+                "isValid": "all",
+                "isValidating": false,
+                "touchedFields": false,
+              },
+              "_removeUnmounted": [Function],
+              "_stateFlags": Object {
+                "action": false,
+                "mount": false,
+                "watch": false,
+              },
+              "_subjects": Object {
+                "array": Object {
+                  "next": [Function],
+                  "observers": Array [],
+                  "subscribe": [Function],
+                  "unsubscribe": [Function],
+                },
+                "state": Object {
+                  "next": [Function],
+                  "observers": Array [
+                    Object {
+                      "next": [Function],
+                    },
+                  ],
+                  "subscribe": [Function],
+                  "unsubscribe": [Function],
+                },
+                "watch": Object {
+                  "next": [Function],
+                  "observers": Array [],
+                  "subscribe": [Function],
+                  "unsubscribe": [Function],
+                },
+              },
+              "_updateFieldArray": [Function],
+              "_updateValid": [Function],
+              "register": [Function],
+              "unregister": [Function],
+            }
+          }
+          id="ProposalFormContactModal-senderName"
+          minLength={2}
+          name="senderName"
+          type="text"
+        />
+      </FormControl>
+      <FormControl
         control={
           Object {
             "_defaultValues": Object {
@@ -237,18 +323,104 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
             "unregister": [Function],
           }
         }
-        id="ProposalFormContactModal-replyEmail"
-        label={
-          <FormattedMessage
-            id="your-email-address"
-            values={Object {}}
-          />
-        }
+        isRequired={true}
         name="replyEmail"
-        required={true}
-        type="email"
-      />
-      <FieldInput
+      >
+        <FormLabel
+          htmlFor="ProposalFormContactModal-replyEmail"
+          label="your-email-address"
+        />
+        <FieldInput
+          control={
+            Object {
+              "_defaultValues": Object {
+                "proposalId": "proposalId324Z",
+              },
+              "_executeSchema": [Function],
+              "_fields": Object {},
+              "_formState": Object {
+                "dirtyFields": Object {},
+                "errors": Object {},
+                "isDirty": false,
+                "isSubmitSuccessful": false,
+                "isSubmitted": false,
+                "isSubmitting": false,
+                "isValid": false,
+                "isValidating": false,
+                "submitCount": 0,
+                "touchedFields": Object {},
+              },
+              "_formValues": Object {
+                "proposalId": "proposalId324Z",
+              },
+              "_getDirty": [Function],
+              "_getFieldArray": [Function],
+              "_getWatch": [Function],
+              "_names": Object {
+                "array": Array [],
+                "mount": Array [],
+                "unMount": Array [],
+                "watch": Array [],
+              },
+              "_options": Object {
+                "defaultValues": Object {
+                  "proposalId": "proposalId324Z",
+                },
+                "mode": "onChange",
+                "reValidateMode": "onChange",
+                "shouldFocusError": true,
+              },
+              "_proxyFormState": Object {
+                "dirtyFields": false,
+                "errors": false,
+                "isDirty": false,
+                "isSubmitting": "all",
+                "isValid": "all",
+                "isValidating": false,
+                "touchedFields": false,
+              },
+              "_removeUnmounted": [Function],
+              "_stateFlags": Object {
+                "action": false,
+                "mount": false,
+                "watch": false,
+              },
+              "_subjects": Object {
+                "array": Object {
+                  "next": [Function],
+                  "observers": Array [],
+                  "subscribe": [Function],
+                  "unsubscribe": [Function],
+                },
+                "state": Object {
+                  "next": [Function],
+                  "observers": Array [
+                    Object {
+                      "next": [Function],
+                    },
+                  ],
+                  "subscribe": [Function],
+                  "unsubscribe": [Function],
+                },
+                "watch": Object {
+                  "next": [Function],
+                  "observers": Array [],
+                  "subscribe": [Function],
+                  "unsubscribe": [Function],
+                },
+              },
+              "_updateFieldArray": [Function],
+              "_updateValid": [Function],
+              "register": [Function],
+              "unregister": [Function],
+            }
+          }
+          id="ProposalFormContactModal-replyEmail"
+          name="replyEmail"
+          type="email"
+        />
+      </FormControl>
+      <FormControl
         control={
           Object {
             "_defaultValues": Object {
@@ -333,107 +505,103 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
             "unregister": [Function],
           }
         }
-        id="ProposalFormContactModal-message"
-        label={
-          <FormattedMessage
-            id="contact.your-message"
-            values={Object {}}
-          />
-        }
+        isRequired={true}
         name="message"
-        required={true}
-        type="textarea"
-      />
-      <FieldInput
-        control={
-          Object {
-            "_defaultValues": Object {
-              "proposalId": "proposalId324Z",
-            },
-            "_executeSchema": [Function],
-            "_fields": Object {},
-            "_formState": Object {
-              "dirtyFields": Object {},
-              "errors": Object {},
-              "isDirty": false,
-              "isSubmitSuccessful": false,
-              "isSubmitted": false,
-              "isSubmitting": false,
-              "isValid": false,
-              "isValidating": false,
-              "submitCount": 0,
-              "touchedFields": Object {},
-            },
-            "_formValues": Object {
-              "proposalId": "proposalId324Z",
-            },
-            "_getDirty": [Function],
-            "_getFieldArray": [Function],
-            "_getWatch": [Function],
-            "_names": Object {
-              "array": Array [],
-              "mount": Array [],
-              "unMount": Array [],
-              "watch": Array [],
-            },
-            "_options": Object {
-              "defaultValues": Object {
+      >
+        <FormLabel
+          htmlFor="ProposalFormContactModal-message"
+          label="contact.your-message"
+        />
+        <FieldInput
+          control={
+            Object {
+              "_defaultValues": Object {
                 "proposalId": "proposalId324Z",
               },
-              "mode": "onChange",
-              "reValidateMode": "onChange",
-              "shouldFocusError": true,
-            },
-            "_proxyFormState": Object {
-              "dirtyFields": false,
-              "errors": false,
-              "isDirty": false,
-              "isSubmitting": "all",
-              "isValid": "all",
-              "isValidating": false,
-              "touchedFields": false,
-            },
-            "_removeUnmounted": [Function],
-            "_stateFlags": Object {
-              "action": false,
-              "mount": false,
-              "watch": false,
-            },
-            "_subjects": Object {
-              "array": Object {
-                "next": [Function],
-                "observers": Array [],
-                "subscribe": [Function],
-                "unsubscribe": [Function],
+              "_executeSchema": [Function],
+              "_fields": Object {},
+              "_formState": Object {
+                "dirtyFields": Object {},
+                "errors": Object {},
+                "isDirty": false,
+                "isSubmitSuccessful": false,
+                "isSubmitted": false,
+                "isSubmitting": false,
+                "isValid": false,
+                "isValidating": false,
+                "submitCount": 0,
+                "touchedFields": Object {},
               },
-              "state": Object {
-                "next": [Function],
-                "observers": Array [
-                  Object {
-                    "next": [Function],
-                  },
-                ],
-                "subscribe": [Function],
-                "unsubscribe": [Function],
+              "_formValues": Object {
+                "proposalId": "proposalId324Z",
               },
-              "watch": Object {
-                "next": [Function],
-                "observers": Array [],
-                "subscribe": [Function],
-                "unsubscribe": [Function],
+              "_getDirty": [Function],
+              "_getFieldArray": [Function],
+              "_getWatch": [Function],
+              "_names": Object {
+                "array": Array [],
+                "mount": Array [],
+                "unMount": Array [],
+                "watch": Array [],
               },
-            },
-            "_updateFieldArray": [Function],
-            "_updateValid": [Function],
-            "register": [Function],
-            "unregister": [Function],
+              "_options": Object {
+                "defaultValues": Object {
+                  "proposalId": "proposalId324Z",
+                },
+                "mode": "onChange",
+                "reValidateMode": "onChange",
+                "shouldFocusError": true,
+              },
+              "_proxyFormState": Object {
+                "dirtyFields": false,
+                "errors": false,
+                "isDirty": false,
+                "isSubmitting": "all",
+                "isValid": "all",
+                "isValidating": false,
+                "touchedFields": false,
+              },
+              "_removeUnmounted": [Function],
+              "_stateFlags": Object {
+                "action": false,
+                "mount": false,
+                "watch": false,
+              },
+              "_subjects": Object {
+                "array": Object {
+                  "next": [Function],
+                  "observers": Array [],
+                  "subscribe": [Function],
+                  "unsubscribe": [Function],
+                },
+                "state": Object {
+                  "next": [Function],
+                  "observers": Array [
+                    Object {
+                      "next": [Function],
+                    },
+                  ],
+                  "subscribe": [Function],
+                  "unsubscribe": [Function],
+                },
+                "watch": Object {
+                  "next": [Function],
+                  "observers": Array [],
+                  "subscribe": [Function],
+                  "unsubscribe": [Function],
+                },
+              },
+              "_updateFieldArray": [Function],
+              "_updateValid": [Function],
+              "register": [Function],
+              "unregister": [Function],
+            }
           }
-        }
-        id="captcha"
-        name="captcha"
-        required={false}
-        type="captcha"
-      />
+          id="ProposalFormContactModal-message"
+          name="message"
+          type="textarea"
+        />
+      </FormControl>
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
@@ -442,7 +610,6 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
       <Button
         mr={2}
         onClick={[Function]}
-        type="button"
         variant="secondary"
         variantColor="hierarchy"
         variantSize="medium"
@@ -453,7 +620,6 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
         disabled={true}
         id="ProposalFormContactModal-submit"
         isLoading={false}
-        onClick={[Function]}
         type="submit"
         variant="primary"
         variantSize="medium"

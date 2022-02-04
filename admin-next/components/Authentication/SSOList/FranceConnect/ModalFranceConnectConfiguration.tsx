@@ -107,7 +107,7 @@ const ModalFranceConnectConfiguration: FC<ModalFranceConnectConfigurationProps> 
                     </Modal.Header>
                     <Modal.Body>
                         <FormProvider {...methods} >
-                            <FormConfiguration optionalFields={ssoConfiguration?.allowedData || []} />
+                            <FormConfiguration />
                         </FormProvider>
                     </Modal.Body>
                     <Modal.Footer>

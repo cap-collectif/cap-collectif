@@ -11,7 +11,6 @@ const mutation = graphql`
   mutation ContactProposalAuthorMutation($input: ContactProposalAuthorInput!) {
     contactProposalAuthor(input: $input) {
       error
-      clientMutationId
     }
   }
 `;
@@ -22,6 +21,11 @@ const commit = (
   commitMutation(environment, {
     mutation,
     variables,
+    optimisticResponse: {
+      contactProposalAuthor: {
+        error: null
+      }
+    }
   });
 
 export default { commit };

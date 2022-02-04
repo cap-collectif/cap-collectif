@@ -1,29 +1,24 @@
 import * as React from 'react';
 import { fetchQuery, graphql } from 'react-relay';
-import { UserListFieldQuery, UserListFieldQueryResponse } from '@relay/UserListFieldQuery.graphql';
-import { UserListFieldNotInIdsQuery } from '@relay/UserListFieldNotInIdsQuery.graphql';
+import type {
+    UserListFieldQuery,
+    UserListFieldQueryResponse,
+} from '@relay/UserListFieldQuery.graphql';
 import { environment } from 'utils/relay-environement';
-import { FieldInput, FieldInputProps } from './FieldInput';
+import { FieldInput, FieldSelect, BaseField } from '@cap-collectif/form';
 
-interface UserListFieldProps extends FieldInputProps {
-    ariaControls?: string;
-    userListToNoSearch?: Array<string>;
-    autoload?: boolean;
+interface UserListFieldProps extends Omit<BaseField, 'onChange'>, Omit<FieldSelect, 'type'> {
+    userIdsToNoSearch?: string[];
     authorOfEvent?: boolean;
 }
 
-const getUsersList = graphql`
-    query UserListFieldQuery($displayName: String, $authorOfEventOnly: Boolean) {
-        userSearch(displayName: $displayName, authorsOfEventOnly: $authorOfEventOnly) {
-            id
-            displayName
-            email
-        }
-    }
-`;
+type UserListFieldValue = {
+    label: string,
+    value: string,
+};
 
-const getUsersListWithoutIds = graphql`
-    query UserListFieldNotInIdsQuery(
+const getUserList = graphql`
+    query UserListFieldQuery(
         $notInIds: [String]
         $displayName: String
         $authorOfEventOnly: Boolean
@@ -72,52 +67,34 @@ const formatUsersData = (users: UserListFieldQueryResponse['userSearch']) => {
 };
 
 export const UserListField: React.FC<UserListFieldProps> = ({
-    id,
+    userIdsToNoSearch = [],
+    authorOfEvent = false,
     name,
-    label,
-    clearable,
-    placeholder,
-    ariaControls,
+    control,
     ...props
 }) => {
-    const loadOptions = (search: string) => {
-        const { userListToNoSearch, authorOfEvent } = props;
-        const retrieveUsersList = (usersIds: null | Array<string>, terms: null | string) => {
-            if (usersIds) {
-                return fetchQuery<UserListFieldNotInIdsQuery>(environment, getUsersListWithoutIds, {
-                    notInIds: usersIds,
-                    displayName: terms,
-                    authorOfEventOnly: authorOfEvent || false,
-                })
-                    .toPromise()
-                    .then(data => formatUsersData(data?.userSearch || null));
-            }
+    const loadOptions = async (search: string): Promise<UserListFieldValue[]> => {
+        const usersData = await fetchQuery<UserListFieldQuery>(environment, getUserList, {
+            notInIds: userIdsToNoSearch,
+            displayName: search,
+            authorOfEventOnly: authorOfEvent,
+        }).toPromise();
 
-            return fetchQuery<UserListFieldQuery>(environment, getUsersList, {
-                displayName: terms,
-                authorOfEventOnly: authorOfEvent || false,
-            })
-                .toPromise()
-                .then(data => formatUsersData(data?.userSearch || null));
-        };
+        if (usersData && usersData.userSearch) {
+            return (formatUsersData(usersData.userSearch) as UserListFieldValue[]);
+        }
 
-        return retrieveUsersList(userListToNoSearch || null, search);
+        return [];
     };
 
     return (
         <FieldInput
-            name={name}
-            id={id}
-            type="select"
-            label={label}
-            placeholder={placeholder}
-            aria-controls={ariaControls}
-            aria-autocomplete="list"
-            aria-haspopup="true"
-            role="combobox"
-            clearable={clearable}
-            loadOptions={loadOptions}
             {...props}
+            type="select"
+            control={control}
+            name={name}
+            defaultOptions
+            loadOptions={loadOptions}
         />
     );
 };

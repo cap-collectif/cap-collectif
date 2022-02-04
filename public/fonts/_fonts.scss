@@ -92,6 +92,40 @@
     url('../../../public/fonts/openSans/OpenSans-Light.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
+// Regular
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: normal;
+    src: local(''),
+    url('../../../public/fonts/openSans/OpenSans-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Regular.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+// Semi bold
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    src: local(''),
+    url('../../../public/fonts/openSans/OpenSans-SemiBold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-SemiBold.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-SemiBold.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+// Bold
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: bold;
+    src: url("../../../public/fonts/openSans/OpenSans-Bold.ttf");
+    src: local(''),
+    url('../../../public/fonts/openSans/OpenSans-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Bold.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
 @font-face {
     font-family: "Ubuntu";
     font-style: normal;

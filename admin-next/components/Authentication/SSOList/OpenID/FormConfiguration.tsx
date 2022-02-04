@@ -1,10 +1,9 @@
 import type { FC } from 'react';
-import { Flex } from '@cap-collectif/ui';
-import FieldInput from '../../../Form/FieldInput';
+import { Flex, FormLabel } from '@cap-collectif/ui';
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
-import { REGEX_URL } from '~/services/Validator';
+import { FormControl, FieldInput, REGEX_URL } from '@cap-collectif/form';
 
 export type FormValues = {
     name: string,
@@ -26,107 +25,126 @@ const FormConfiguration: FC = () => {
 
     return (
         <Flex as="form" direction="column" spacing={3} id={formName}>
-            <FieldInput
-                type="text"
-                id="name"
-                name="name"
-                required
-                label={intl.formatMessage({ id: 'global.name' })}
-                control={control}
-                minLength={2}
-            />
+            <FormControl name="name" control={control} isRequired>
+                <FormLabel htmlFor="name" label={intl.formatMessage({ id: 'global.name' })} />
+                <FieldInput id="name" name="name" control={control} type="text" minLength={2} />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="authorizationUrl"
-                name="authorizationUrl"
-                required
-                label={intl.formatMessage({ id: 'authorization-URL' })}
-                control={control}
-                pattern={{
-                    value: REGEX_URL,
-                    message: intl.formatMessage({ id: 'source.constraints.link' }),
-                }}
-            />
+            <FormControl name="authorizationUrl" control={control} isRequired>
+                <FormLabel
+                    htmlFor="authorizationUrl"
+                    label={intl.formatMessage({ id: 'authorization-URL' })}
+                />
+                <FieldInput
+                    id="authorizationUrl"
+                    name="authorizationUrl"
+                    control={control}
+                    type="text"
+                    rules={{
+                        pattern: {
+                            value: REGEX_URL,
+                            message: intl.formatMessage({ id: 'source.constraints.link' }),
+                        },
+                    }}
+                />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="accessTokenUrl"
-                name="accessTokenUrl"
-                required
-                label={intl.formatMessage({ id: 'access-token-URL' })}
-                control={control}
-                pattern={{
-                    value: REGEX_URL,
-                    message: intl.formatMessage({ id: 'source.constraints.link' }),
-                }}
-            />
+            <FormControl name="accessTokenUrl" control={control} isRequired>
+                <FormLabel
+                    htmlFor="accessTokenUrl"
+                    label={intl.formatMessage({ id: 'access-token-URL' })}
+                />
+                <FieldInput
+                    id="accessTokenUrl"
+                    name="accessTokenUrl"
+                    control={control}
+                    type="text"
+                    rules={{
+                        pattern: {
+                            value: REGEX_URL,
+                            message: intl.formatMessage({ id: 'source.constraints.link' }),
+                        },
+                    }}
+                />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="userInfoUrl"
-                name="userInfoUrl"
-                required
-                label={intl.formatMessage({ id: 'user-information-url' })}
-                control={control}
-                pattern={{
-                    value: REGEX_URL,
-                    message: intl.formatMessage({ id: 'source.constraints.link' }),
-                }}
-            />
+            <FormControl name="userInfoUrl" control={control} isRequired>
+                <FormLabel
+                    htmlFor="userInfoUrl"
+                    label={intl.formatMessage({ id: 'user-information-url' })}
+                />
+                <FieldInput
+                    id="userInfoUrl"
+                    name="userInfoUrl"
+                    control={control}
+                    type="text"
+                    rules={{
+                        pattern: {
+                            value: REGEX_URL,
+                            message: intl.formatMessage({ id: 'source.constraints.link' }),
+                        },
+                    }}
+                />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="logoutUrl"
-                name="logoutUrl"
-                label={intl.formatMessage({ id: 'access-disconnection-url' })}
-                control={control}
-                pattern={{
-                    value: REGEX_URL,
-                    message: intl.formatMessage({ id: 'source.constraints.link' }),
-                }}
-            />
+            <FormControl name="logoutUrl" control={control} isRequired>
+                <FormLabel
+                    htmlFor="logoutUrl"
+                    label={intl.formatMessage({ id: 'access-disconnection-url' })}
+                />
+                <FieldInput
+                    id="logoutUrl"
+                    name="logoutUrl"
+                    control={control}
+                    type="text"
+                    rules={{
+                        pattern: {
+                            value: REGEX_URL,
+                            message: intl.formatMessage({ id: 'source.constraints.link' }),
+                        },
+                    }}
+                />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="clientId"
-                name="clientId"
-                required
-                label={intl.formatMessage({ id: 'client-id' })}
-                minLength={2}
-                control={control}
-            />
+            <FormControl name="clientId" control={control} isRequired>
+                <FormLabel htmlFor="clientId" label={intl.formatMessage({ id: 'client-id' })} />
+                <FieldInput
+                    id="clientId"
+                    name="clientId"
+                    control={control}
+                    type="text"
+                    minLength={2}
+                />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="secret"
-                name="secret"
-                label={intl.formatMessage({ id: 'secret' })}
-                required
-                control={control}
-                minLength={2}
-            />
+            <FormControl name="secret" control={control} isRequired>
+                <FormLabel htmlFor="secret" label={intl.formatMessage({ id: 'secret' })} />
+                <FieldInput id="secret" name="secret" control={control} type="text" minLength={2} />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="profileUrl"
-                name="profileUrl"
-                label={intl.formatMessage({ id: 'url-user-profile-sso' })}
-                control={control}
-                pattern={{
-                    value: REGEX_URL,
-                    message: intl.formatMessage({ id: 'source.constraints.link' }),
-                }}
-            />
+            <FormControl name="profileUrl" control={control}>
+                <FormLabel
+                    htmlFor="profileUrl"
+                    label={intl.formatMessage({ id: 'url-user-profile-sso' })}
+                />
+                <FieldInput
+                    id="profileUrl"
+                    name="profileUrl"
+                    control={control}
+                    type="text"
+                    rules={{
+                        pattern: {
+                            value: REGEX_URL,
+                            message: intl.formatMessage({ id: 'source.constraints.link' }),
+                        },
+                    }}
+                />
+            </FormControl>
 
-            <FieldInput
-                disabled
-                type="text"
-                id="redirectUri"
-                name="redirectUri"
-                label={intl.formatMessage({ id: 'sso-link' })}
-                control={control}
-            />
+            <FormControl name="profileUrl" control={control} isDisabled>
+                <FormLabel htmlFor="redirectUri" label={intl.formatMessage({ id: 'sso-link' })} />
+                <FieldInput id="redirectUri" name="redirectUri" control={control} type="text" />
+            </FormControl>
         </Flex>
     );
 };

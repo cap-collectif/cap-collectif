@@ -10,7 +10,6 @@ describe('<ProposalContactModal />', () => {
       proposalId: 'proposalId324Z',
       authorName: 'Gertrude',
       onClose: jest.fn(),
-      onSubmit: jest.fn(),
       addCaptchaField: false,
       show: false,
     };

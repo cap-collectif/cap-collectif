@@ -8,8 +8,9 @@ import {
     Text,
     ButtonGroup,
     Menu,
-    Flex,
     CapUIModalSize,
+    Box,
+    FormLabel,
 } from '@cap-collectif/ui';
 import type {
     ProjectModalExportSteps_project$key,
@@ -17,7 +18,7 @@ import type {
 } from '@relay/ProjectModalExportSteps_project.graphql';
 import downloadCSV from 'utils/download-csv';
 import { useForm } from 'react-hook-form';
-import FieldInput from 'components/Form/FieldInput';
+import { FormControl, FieldInput } from '@cap-collectif/form';
 
 const formName = 'form-export-project';
 
@@ -139,18 +140,22 @@ const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({
                         </Heading>
                     </Modal.Header>
                     <Modal.Body>
-                        <Flex as="form" direction="column" spacing={3} id={formName}>
-                            <FieldInput
-                                id="export_list"
-                                name="export_list"
-                                type="checkbox"
-                                control={control}
-                                labelOnElement={intl.formatMessage({
-                                    id: 'admin.project.list.export.title',
-                                })}
-                                choices={exportChoices}
-                            />
-                        </Flex>
+                        <Box as="form" id={formName}>
+                            <FormControl name="export_list" control={control}>
+                                <FormLabel
+                                    label={intl.formatMessage({
+                                        id: 'admin.project.list.export.title',
+                                    })}
+                                />
+                                <FieldInput
+                                    id="export_list"
+                                    name="export_list"
+                                    type="checkbox"
+                                    control={control}
+                                    choices={exportChoices}
+                                />
+                            </FormControl>
+                        </Box>
                     </Modal.Body>
                     <Modal.Footer>
                         <ButtonGroup>

@@ -1,17 +1,10 @@
 import type { FC } from 'react';
 import * as React from 'react';
 import { CapUIFontWeight, Flex, FormLabel, Text } from '@cap-collectif/ui';
-import FieldInput from '../../../Form/FieldInput';
 import { FormattedHTMLMessage, useIntl } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
-import {
-    FranceConnectAllowedData,
-    ModalFranceConnectConfiguration_ssoConfiguration,
-} from '@relay/ModalFranceConnectConfiguration_ssoConfiguration.graphql';
-
-type FormConfigurationProps = {
-    readonly optionalFields: ModalFranceConnectConfiguration_ssoConfiguration['allowedData'],
-};
+import { FranceConnectAllowedData } from '@relay/ModalFranceConnectConfiguration_ssoConfiguration.graphql';
+import { FormControl, FieldInput } from '@cap-collectif/form';
 
 export type FormValues = {
     environment: boolean,
@@ -31,47 +24,47 @@ export type FormValues = {
 
 type OptionalField = {
     label: string,
-    value: FranceConnectAllowedData
-}
+    value: FranceConnectAllowedData,
+};
 
 const OPTIONAL_FIELDS: OptionalField[] = [
     {
         label: 'birth-country',
-        value: 'birthcountry'
+        value: 'birthcountry',
     },
     {
         label: 'form.label_date_of_birth',
-        value: 'birthdate'
+        value: 'birthdate',
     },
     {
         label: 'birthPlace',
-        value: 'birthplace'
+        value: 'birthplace',
     },
     {
         label: 'filter.label_email',
-        value: 'email'
+        value: 'email',
     },
     {
         label: 'form.label_lastname',
-        value: 'family_name'
+        value: 'family_name',
     },
     {
         label: 'form.label_gender',
-        value: 'gender'
+        value: 'gender',
     },
     {
         label: 'form.label_firstname',
-        value: 'given_name'
+        value: 'given_name',
     },
     {
         label: 'list.label_username',
-        value: 'preferred_username'
+        value: 'preferred_username',
     },
-]
+];
 
 const formName = 'form-france-connect-configuration';
 
-const FormConfiguration: FC<FormConfigurationProps> = ({ optionalFields }) => {
+const FormConfiguration: FC = () => {
     const intl = useIntl();
     const { control } = useFormContext<FormValues>();
 
@@ -81,61 +74,43 @@ const FormConfiguration: FC<FormConfigurationProps> = ({ optionalFields }) => {
                 <FormattedHTMLMessage id="edit-facebook-authentication-method-create-app" />
             </Text>
 
-            <FieldInput
-                type="text"
-                id="clientId"
-                name="clientId"
-                required
-                label={intl.formatMessage({ id: 'client-id' })}
-                control={control}
-                minLength={2}
-            />
+            <FormControl name="clientId" control={control} isRequired>
+                <FormLabel htmlFor="clientId" label={intl.formatMessage({ id: 'client-id' })} />
+                <FieldInput
+                    id="clientId"
+                    name="clientId"
+                    control={control}
+                    type="text"
+                    minLength={2}
+                />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="secret"
-                name="secret"
-                required
-                label={intl.formatMessage({
-                    id: 'secret',
-                })}
-                control={control}
-                minLength={2}
-            />
+            <FormControl name="secret" control={control} isRequired>
+                <FormLabel htmlFor="secret" label={intl.formatMessage({ id: 'secret' })} />
+                <FieldInput id="secret" name="secret" control={control} type="text" minLength={2} />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="redirectUri"
-                name="redirectUri"
-                disabled
-                required
-                label={intl.formatMessage({
-                    id: 'callback-url',
-                })}
-                control={control}
-            />
+            <FormControl name="redirectUri" control={control} isRequired isDisabled>
+                <FormLabel
+                    htmlFor="redirectUri"
+                    label={intl.formatMessage({ id: 'callback-url' })}
+                />
+                <FieldInput id="redirectUri" name="redirectUri" control={control} type="text" />
+            </FormControl>
 
-            <FieldInput
-                type="text"
-                id="logoutUrl"
-                name="logoutUrl"
-                disabled
-                required
-                label={intl.formatMessage({
-                    id: 'logout-url',
-                })}
-                control={control}
-            />
+            <FormControl name="logoutUrl" control={control} isRequired isDisabled>
+                <FormLabel htmlFor="logoutUrl" label={intl.formatMessage({ id: 'logout-url' })} />
+                <FieldInput id="logoutUrl" name="logoutUrl" control={control} type="text" />
+            </FormControl>
 
-            <FieldInput
-                type="checkbox"
-                id="environment"
-                name="environment"
-                control={control}
-                labelOnElement={intl.formatMessage({
-                    id: 'environment-france-connect',
-                })}
-            />
+            <FormControl name="logoutUrl" control={control} isRequired isDisabled>
+                <FormLabel htmlFor="environment" label={intl.formatMessage({ id: 'logout-url' })} />
+                <FieldInput id="environment" name="environment" control={control} type="checkbox">
+                    {intl.formatMessage({
+                        id: 'environment-france-connect',
+                    })}
+                </FieldInput>
+            </FormControl>
 
             <Flex direction="column" spacing={2}>
                 <Text color="gray.900" fontSize={2} fontWeight={CapUIFontWeight.Semibold}>
@@ -144,15 +119,19 @@ const FormConfiguration: FC<FormConfigurationProps> = ({ optionalFields }) => {
 
                 <Flex direction="column" spacing={1}>
                     {OPTIONAL_FIELDS.map(optionalField => (
-                        <Flex direction="row" align="flex-start" spacing={2} key={optionalField.value}>
+                        <Flex
+                            direction="row"
+                            align="flex-start"
+                            spacing={2}
+                            key={optionalField.value}>
                             <FieldInput
                                 type="switch"
                                 control={control}
                                 key={optionalField.value}
                                 name={optionalField.value}
-                                id={optionalField.value}
-                            />
-                            <FormLabel htmlFor={optionalField.value} label={intl.formatMessage({ id: optionalField.label })} />
+                                id={optionalField.value}>
+                                {intl.formatMessage({ id: optionalField.label })}
+                            </FieldInput>
                         </Flex>
                     ))}
                 </Flex>

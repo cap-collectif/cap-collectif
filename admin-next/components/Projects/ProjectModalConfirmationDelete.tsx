@@ -11,6 +11,7 @@ import {
     ButtonGroup,
     Menu,
     CapUIModalSize,
+    Checkbox,
 } from '@cap-collectif/ui';
 import { mutationErrorToast } from 'utils/mutation-error-toast';
 import type { ProjectModalConfirmationDelete_project$key } from '@relay/ProjectModalConfirmationDelete_project.graphql';
@@ -83,22 +84,12 @@ const ProjectModalConfirmationDelete: React.FC<ProjectModalConfirmationDeletePro
                                 }}
                             />
                         </Text>
-                        <Flex direction="row" spacing={2} align="center">
-                            <input
-                                id="isDeleteConfirmed"
-                                name="isDeleteConfirmed"
-                                type="checkbox"
-                                checked={confirm}
-                                onChange={() => {
-                                    setConfirm(!confirm);
-                                }}
-                            />
-                            <label
-                                htmlFor="isDeleteConfirmed"
-                                style={{ fontWeight: 400, marginBottom: '0px !important' }}>
-                                {intl.formatMessage({ id: 'admin.project.delete.confirm' })}
-                            </label>
-                        </Flex>
+                        <Checkbox
+                            id="isDeleteConfirmed"
+                            checked={confirm}
+                            onChange={() => setConfirm(!confirm)}>
+                            {intl.formatMessage({ id: 'admin.project.delete.confirm' })}
+                        </Checkbox>
                     </Modal.Body>
                     <Modal.Footer spacing={2}>
                         <ButtonGroup>

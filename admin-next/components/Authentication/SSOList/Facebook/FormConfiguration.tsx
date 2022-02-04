@@ -1,9 +1,9 @@
 import type { FC } from 'react';
-import { Flex, Text } from '@cap-collectif/ui';
-import FieldInput from '../../../Form/FieldInput';
+import { Flex, FormLabel, Text } from '@cap-collectif/ui';
 import * as React from 'react';
 import { useIntl, FormattedHTMLMessage } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
+import { FormControl, FieldInput } from '@cap-collectif/form';
 
 export type FormValues = {
     clientId: string,
@@ -22,36 +22,42 @@ const FormConfiguration: FC = () => {
                 <FormattedHTMLMessage id="edit-facebook-authentication-method-create-app" />
             </Text>
 
-            <FieldInput
-                id="clientId"
-                name="clientId"
-                required
-                label={intl.formatMessage({ id: 'App-ID' })}
-                placeholder="ex : 1714596595426186"
-                control={control}
-                type="text"
-                pattern={{
-                    value: /^\d+$/,
-                    message: intl.formatMessage({ id: 'facebook-app-id-must-be-16-digits' }),
-                }}
-            />
+            <FormControl name="clientId" control={control} isRequired>
+                <FormLabel htmlFor="clientId" label={intl.formatMessage({ id: 'App-ID' })} />
+                <FieldInput
+                    id="clientId"
+                    name="clientId"
+                    control={control}
+                    type="text"
+                    placeholder="ex : 1714596595426186"
+                    rules={{
+                        pattern: {
+                            value: /^\d+$/,
+                            message: intl.formatMessage({
+                                id: 'facebook-app-id-must-be-16-digits',
+                            }),
+                        },
+                    }}
+                />
+            </FormControl>
 
-            <FieldInput
-                name="secret"
-                type="password"
-                id="secret"
-                label={intl.formatMessage({
-                    id: 'App-secret',
-                })}
-                control={control}
-                placeholder="ex : fe7bXXXXXXXXXXXXXXXXXXXXXXXX03xx"
-                required
-                validate={{
-                    equalTo: value =>
-                        value.length !== 32 &&
-                        intl.formatMessage({ id: 'facebook-app-secret-must-be-32-char' }),
-                }}
-            />
+            <FormControl name="secret" control={control} isRequired>
+                <FormLabel htmlFor="secret" label={intl.formatMessage({ id: 'App-secret' })} />
+                <FieldInput
+                    id="secret"
+                    name="secret"
+                    control={control}
+                    type="password"
+                    placeholder="ex : fe7bXXXXXXXXXXXXXXXXXXXXXXXX03xx"
+                    rules={{
+                        validate: {
+                            equalTo: value =>
+                                value.length !== 32 &&
+                                intl.formatMessage({ id: 'facebook-app-secret-must-be-32-char' }),
+                        },
+                    }}
+                />
+            </FormControl>
 
             <FormattedHTMLMessage id="edit-facebook-authentication-method-find-id-secret" />
         </Flex>
