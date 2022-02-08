@@ -138,6 +138,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public function __construct()
     {
         $this->jumps = new ArrayCollection();
+        $this->responses = new ArrayCollection();
     }
 
     public function __toString()
