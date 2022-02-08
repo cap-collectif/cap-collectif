@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { LoginSocialButtons } from './LoginSocialButtons';
-import { features } from '../../../redux/modules/default';
+import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils';
 
 describe('<LoginSocialButtons />', () => {
   const ssoList = [
@@ -22,34 +22,18 @@ describe('<LoginSocialButtons />', () => {
   ];
 
   const props = {
-    features,
     ssoList: [],
   };
   const propsWithFeatureLoginFacebookActivated = {
-    features: {
-      ...features,
-      login_facebook: true,
-    },
     ssoList: [],
   };
   const propsWithFeatureLoginSamlActivated = {
-    features: {
-      ...features,
-      login_saml: true,
-    },
     ssoList: [],
   };
   const propsWithFeatureLoginCasActivated = {
-    features: {
-      ...features,
-      login_cas: true,
-    },
     ssoList: [],
   };
   const propsWithFeatureLoginOpenIDActivated = {
-    features: {
-      ...features,
-    },
     ssoList: [
       {
         name: 'Cap Collectif Oauth2 Provider',
@@ -60,10 +44,6 @@ describe('<LoginSocialButtons />', () => {
     ],
   };
   const propsWithFeatureLoginFranceConnectActivated = {
-    features: {
-      ...features,
-      login_franceconnect: true,
-    },
     ssoList: [
       {
         name: 'France Connect',
@@ -74,53 +54,45 @@ describe('<LoginSocialButtons />', () => {
     ],
   };
   const propsWithAllLoginFeaturesLoginActivated = {
-    features: {
-      ...features,
-      login_facebook: true,
-      login_saml: true,
-      login_cas: true,
-      login_franceconnect: true,
-    },
     ssoList,
   };
 
   const propsWithAllLoginFeaturesLoginActivatedAndORSeparatorDisabled = {
-    features: {
-      ...features,
-      login_facebook: true,
-      login_saml: true,
-      login_cas: true,
-      login_franceconnect: true,
-      sso_by_pass_auth: true,
-    },
     ssoList,
   };
-
+  afterEach(() => {
+    disableFeatureFlags();
+  });
   it('renders nothing', () => {
     const wrapper = shallow(<LoginSocialButtons {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders only Facebook button', () => {
+    enableFeatureFlags(['login_facebook']);
     const wrapper = shallow(<LoginSocialButtons {...propsWithFeatureLoginFacebookActivated} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders only SAML button', () => {
+    enableFeatureFlags(['login_saml']);
     const wrapper = shallow(<LoginSocialButtons {...propsWithFeatureLoginSamlActivated} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('renders only CAS button', () => {
+    enableFeatureFlags(['login_cas']);
     const wrapper = shallow(<LoginSocialButtons {...propsWithFeatureLoginCasActivated} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders only OpenID button', () => {
+    enableFeatureFlags(['login_openid']);
     const wrapper = shallow(<LoginSocialButtons {...propsWithFeatureLoginOpenIDActivated} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders only FranceConnect button', () => {
+    enableFeatureFlags(['login_franceconnect']);
     const wrapper = shallow(
       <LoginSocialButtons {...propsWithFeatureLoginFranceConnectActivated} />,
     );
@@ -128,11 +100,21 @@ describe('<LoginSocialButtons />', () => {
   });
 
   it('renders all buttons', () => {
+    // $FlowFixMe
+    enableFeatureFlags(['login_facebook', 'login_saml', 'login_franceconnect', 'login_cas']);
     const wrapper = shallow(<LoginSocialButtons {...propsWithAllLoginFeaturesLoginActivated} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders without OR separator', () => {
+    // $FlowFixMe
+    enableFeatureFlags([
+      'login_facebook',
+      'login_saml',
+      'login_franceconnect',
+      'login_cas',
+      'sso_by_pass_auth',
+    ]);
     const wrapper = shallow(
       <LoginSocialButtons {...propsWithAllLoginFeaturesLoginActivatedAndORSeparatorDisabled} />,
     );

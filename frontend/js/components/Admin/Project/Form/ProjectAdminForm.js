@@ -14,10 +14,8 @@ import CreateProjectAlphaMutation from '~/mutations/CreateProjectAlphaMutation';
 import UpdateProjectAlphaMutation from '~/mutations/UpdateProjectAlphaMutation';
 import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
 import { type ProjectAdminForm_query } from '~relay/ProjectAdminForm_query.graphql';
-
 import ProjectStepAdmin, { validate as validateSteps } from '../Steps/ProjectStepAdmin';
 import ProjectExternalAdminPage from '../External/ProjectExternalAdminPage';
-
 import ProjectContentAdminForm, {
   type FormValues as ContentFormValues,
   validate as validateContent,

@@ -66,17 +66,14 @@ export const ProjectAdminStepFormModal = ({
     DATE_OF_BIRTH: false,
   });
   const [ssoConfig, setSsoConfig] = useState<?boolean>(null);
-  const isFranceConnectRequirementReady = true;
   React.useEffect(() => {
     async function fetchData() {
       if (!query.ssoConfigurations || ssoConfig !== null) {
         return;
       }
 
-      if (isFranceConnectRequirementReady) {
-        const fcAllowedData = loadFCAllowedData(query);
-        setData(fcAllowedData);
-      }
+      const fcAllowedData = loadFCAllowedData(query);
+      setData(fcAllowedData);
       const ssoConfiguration = query?.ssoConfigurations?.edges
         ? query.ssoConfigurations.edges
             .filter(Boolean)
@@ -94,11 +91,10 @@ export const ProjectAdminStepFormModal = ({
     }
 
     fetchData();
-  }, [setData, setSsoConfig, data, isFranceConnectRequirementReady, query, ssoConfig]);
+  }, [setData, setSsoConfig, data, query, ssoConfig]);
   const stepType = STEP_TYPES.find(s => s.value === type);
   const modalTitle = stepType ? (isCreating ? stepType.addLabel : stepType.editLabel) : '';
-  const isFranceConnectConfigured =
-    hasLoginFranceConnect && ssoConfig && isFranceConnectRequirementReady;
+  const isFranceConnectConfigured = hasLoginFranceConnect && ssoConfig;
   return (
     <StepModalContainer
       animation={false}

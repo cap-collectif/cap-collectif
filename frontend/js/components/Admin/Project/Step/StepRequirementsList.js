@@ -80,9 +80,10 @@ export function createRequirements(
   step: {
     __typename: string,
     requirements?: ?Array<Requirement>,
-},   twilioEnabled: ?boolean,
+  },
+  twilioEnabled: ?boolean,
   isFranceConnectConfigured: boolean,
-  isFranceConnectRequirementReady: boolean = false,): Array<Requirement> {
+): Array<Requirement> {
   const requirements = [];
   if (!doesStepSupportRequirements(step)) {
     return requirements;
@@ -115,8 +116,7 @@ export function createRequirements(
     requirements.push(requirementFactory('PHONE_VERIFIED', false, 'verify.number.sms', null));
   if (
     !initialRequirements.some((r: Requirement) => r.type === 'FRANCE_CONNECT') &&
-    isFranceConnectConfigured &&
-    isFranceConnectRequirementReady
+    isFranceConnectConfigured
   )
     requirements.push(requirementFactory('FRANCE_CONNECT', false, 'france_connect', null));
   initialRequirements.forEach((requirement: Requirement) => {
@@ -133,7 +133,7 @@ export function createRequirements(
             true,
             'form.label_firstname',
             requirement.id,
-            isFranceConnectConfigured && isFranceConnectRequirementReady,
+            isFranceConnectConfigured,
           ),
         );
         break;
@@ -144,7 +144,7 @@ export function createRequirements(
             true,
             'global.name',
             requirement.id,
-            isFranceConnectConfigured && isFranceConnectRequirementReady,
+            isFranceConnectConfigured,
           ),
         );
         break;
@@ -158,7 +158,7 @@ export function createRequirements(
             true,
             'form.label_date_of_birth',
             requirement.id,
-            isFranceConnectConfigured && isFranceConnectRequirementReady,
+            isFranceConnectConfigured,
           ),
         );
         break;
@@ -178,7 +178,7 @@ export function createRequirements(
         );
         break;
       case 'FRANCE_CONNECT':
-        if (isFranceConnectConfigured && isFranceConnectRequirementReady) {
+        if (isFranceConnectConfigured) {
           requirements.push(
             requirementFactory('FRANCE_CONNECT', true, 'france_connect', requirement.id),
           );
@@ -200,7 +200,6 @@ export function StepRequirementsList({
   onInputDelete,
   fcAllowedData,
 }: Props) {
-  const isFranceConnectRequirementReady = false;
   const intl = useIntl();
   const onDragEnd = (result: DropResult) => {
     // dropped outside the list
@@ -246,10 +245,7 @@ export function StepRequirementsList({
                                   value: requirement.checked,
                                   name: requirement.type,
                                   onChange: () => {
-                                    if (
-                                      requirement.type === 'FRANCE_CONNECT' &&
-                                      isFranceConnectRequirementReady
-                                    ) {
+                                    if (requirement.type === 'FRANCE_CONNECT') {
                                       if (lastNameRequirement && fcAllowedData.LASTNAME === true) {
                                         Array.from(requirements).forEach(function (r, rIndex) {
                                           if (r.type === 'LASTNAME') {

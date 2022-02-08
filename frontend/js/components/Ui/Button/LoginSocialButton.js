@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState, type Node } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import tinycolor from 'tinycolor2';
@@ -21,11 +21,9 @@ type Props = {|
   labelColor?: string,
   buttonColor?: string,
   text?: string,
+  justifyContent?: string,
+  noHR?: boolean,
 |};
-
-type State = {
-  +isHover: boolean,
-};
 
 export const getLabelColorForType = (type: LoginSocialButtonType, color?: string): string => {
   switch (type) {
@@ -105,7 +103,7 @@ export type LinkButtonProps = {|
   labelColor?: string,
   buttonColor?: string,
   text?: string,
-  children: React.Node,
+  children: Node,
 |};
 
 const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.div`
@@ -125,9 +123,7 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
     top: 0;
     fill: ${props => getLabelColorForType(props.type, props.labelColor)};
     background-color: ${props =>
-      tinycolor(getButtonColorForType(props.type, props.buttonColor))
-        .darken(10)
-        .toString()};
+      tinycolor(getButtonColorForType(props.type, props.buttonColor)).darken(10).toString()};
     height: 34px;
     width: 15%;
     border-radius: 3px 0 0 3px;
@@ -171,23 +167,31 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
   }
 `;
 
-export const FranceConnectLink: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const FranceConnectLink: StyledComponent<
+  { justifyContent: string },
+  {},
+  HTMLDivElement,
+> = styled.div`
   margin-top: 8px;
   color: #00acc1;
   font-size: 13px;
-  text-align: center;
+  text-align: ${props => props.justifyContent};
   hr {
     margin-top: 8px;
     margin-bottom: 8px;
   }
 `;
 
-export const FranceConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const FranceConnectButton: StyledComponent<
+  { justifyContent: string },
+  {},
+  HTMLDivElement,
+> = styled.div`
   position: relative;
   margin-top: 10px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: ${props => props.justifyContent};
   a[title] {
     text-transform: uppercase;
   }
@@ -209,68 +213,72 @@ const GrandLyonConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styled.d
   }
 `;
 
-export default class LoginSocialButton extends React.Component<Props, State> {
-  state = {
-    isHover: false,
-  };
+export const LoginSocialButton = ({
+  type,
+  switchUserMode,
+  text,
+  labelColor,
+  buttonColor,
+  justifyContent = 'center',
+  noHR = false,
+}: Props) => {
+  const [isHover, seIsHover] = useState<boolean>(false);
 
-  render() {
-    const { type, switchUserMode, text, labelColor, buttonColor } = this.props;
-    const { isHover } = this.state;
-    const redirectUri = switchUserMode
-      ? `${baseUrl}/sso/switch-user`
-      : window && window.location.href;
+  const redirectUri = switchUserMode
+    ? `${baseUrl}/sso/switch-user`
+    : window && window.location.href;
 
-    if (text === 'grandLyonConnect') {
-      return (
-        <GrandLyonConnectButton type={text} labelColor={labelColor} buttonColor={buttonColor}>
-          <a href={getButtonLinkForType(type, redirectUri)} title={type}>
-            <SocialIcon className="loginIcon" name={text} />
-          </a>
-        </GrandLyonConnectButton>
-      );
-    }
-
+  if (text === 'grandLyonConnect') {
     return (
-      <div>
-        {type === 'franceConnect' ? (
-          <>
-            <AppBox textAlign="center" mt={1} fontSize={2}>
-              <FormattedMessage tagName="p" id="fc-title" />
-            </AppBox>
-            <FranceConnectButton>
-              <a
-                href={getButtonLinkForType(type, redirectUri)}
-                title="FranceConnect"
-                onMouseEnter={() => this.setState({ isHover: true })}
-                onMouseLeave={() => this.setState({ isHover: false })}>
-                {isHover ? (
-                  <SocialIcon className="loginIcon" name={`${type}Hover`} />
-                ) : (
-                  <SocialIcon className="loginIcon" name={type} />
-                )}
-              </a>
-            </FranceConnectButton>
-            <FranceConnectLink>
-              <a href="https://franceconnect.gouv.fr/">
-                <FormattedMessage id="what-is-fc" />
-              </a>
-              <hr />
-            </FranceConnectLink>
-          </>
-        ) : (
-          <LinkButton type={type} labelColor={labelColor} buttonColor={buttonColor}>
-            <SocialIcon className="loginIcon" name={type} />
-            <a href={getButtonLinkForType(type, redirectUri)} title={type}>
-              {text !== undefined ? (
-                <span>{text}</span>
-              ) : (
-                <FormattedMessage id={getButtonContentForType(type)} />
-              )}
-            </a>
-          </LinkButton>
-        )}
-      </div>
+      <GrandLyonConnectButton type={text} labelColor={labelColor} buttonColor={buttonColor}>
+        <a href={getButtonLinkForType(type, redirectUri)} title={type}>
+          <SocialIcon className="loginIcon" name={text} />
+        </a>
+      </GrandLyonConnectButton>
     );
   }
-}
+
+  return (
+    <div>
+      {type === 'franceConnect' ? (
+        <>
+          <AppBox textAlign={justifyContent} mt={1} fontSize={2}>
+            <FormattedMessage tagName="p" id="fc-title" />
+          </AppBox>
+          <FranceConnectButton justifyContent={justifyContent}>
+            <a
+              href={getButtonLinkForType(type, redirectUri)}
+              title="FranceConnect"
+              onMouseEnter={() => seIsHover(true)}
+              onMouseLeave={() => seIsHover(false)}>
+              {isHover ? (
+                <SocialIcon className="loginIcon" name={`${type}Hover`} />
+              ) : (
+                <SocialIcon className="loginIcon" name={type} />
+              )}
+            </a>
+          </FranceConnectButton>
+          <FranceConnectLink justifyContent={justifyContent}>
+            <a href="https://franceconnect.gouv.fr/">
+              <FormattedMessage id="what-is-fc" />
+            </a>
+            {!noHR ? <hr /> : null}
+          </FranceConnectLink>
+        </>
+      ) : (
+        <LinkButton type={type} labelColor={labelColor} buttonColor={buttonColor}>
+          <SocialIcon className="loginIcon" name={type} />
+          <a href={getButtonLinkForType(type, redirectUri)} title={type}>
+            {text !== undefined ? (
+              <span>{text}</span>
+            ) : (
+              <FormattedMessage id={getButtonContentForType(type)} />
+            )}
+          </a>
+        </LinkButton>
+      )}
+    </div>
+  );
+};
+
+export default LoginSocialButton;

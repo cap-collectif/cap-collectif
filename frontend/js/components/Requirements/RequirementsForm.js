@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -14,6 +14,8 @@ import CheckIdentificationCodeMutation, {
 import type { Dispatch, State } from '~/types';
 import DateDropdownPicker from '../Form/DateDropdownPicker';
 import environment from '../../createRelayEnvironment';
+import LoginSocialButton from '~ui/Button/LoginSocialButton';
+import AppBox from '~ui/Primitives/AppBox';
 
 export const formName = 'requirements-form';
 
@@ -318,75 +320,75 @@ const getFormProps = (requirement: Requirement, change: any) => {
   return { component, type: 'text', divClassName: 'col-sm-12 col-xs-12' };
 };
 
-export class RequirementsForm extends React.Component<Props> {
-  render() {
-    const { step, submitting, submitSucceeded, change } = this.props;
-    const requirements = step.requirements?.edges
-      ?.filter(Boolean)
-      .map(edge => edge.node)
-      .filter(requirement => requirement.__typename !== 'PhoneVerifiedRequirement');
-    return (
-      <form>
-        <div className="col-sm-12 col-xs-12 alert__form_succeeded-message">
-          {submitting ? (
-            <div>
-              <i
-                className="cap cap-spinner"
-                style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}
-              />{' '}
-              <FormattedMessage id="current-registration" />
-            </div>
-          ) : submitSucceeded ? (
-            <div>
-              <i className="cap cap-android-checkmark-circle" />{' '}
-              <FormattedMessage id="global.saved" />
-            </div>
-          ) : null}
-        </div>
-        {requirements &&
-          requirements.length > 0 &&
-          requirements.map(requirement => {
+export const RequirementsForm = ({ step, submitting, submitSucceeded, change }: Props) => {
+  const requirements = step.requirements?.edges
+    ?.filter(Boolean)
+    .map(edge => edge.node)
+    .filter(requirement => requirement.__typename !== 'PhoneVerifiedRequirement');
+  return (
+    <form>
+      <div className="col-sm-12 col-xs-12 alert__form_succeeded-message">
+        {submitting ? (
+          <div>
+            <i
+              className="cap cap-spinner"
+              style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}
+            />{' '}
+            <FormattedMessage id="current-registration" />
+          </div>
+        ) : submitSucceeded ? (
+          <div>
+            <i className="cap cap-android-checkmark-circle" />{' '}
+            <FormattedMessage id="global.saved" />
+          </div>
+        ) : null}
+      </div>
+      {requirements &&
+        requirements.length > 0 &&
+        requirements.map(requirement => {
+          if (requirement.__typename === 'FranceConnectRequirement' && !requirement.viewerValue) {
             return (
-              <Field
-                addonBefore={
-                  requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined
-                }
-                minlength={
-                  requirement.__typename === 'IdentificationCodeRequirement' ? 8 : undefined
-                }
-                id={
-                  requirement.__typename === 'IdentificationCodeRequirement'
-                    ? 'IdentificationCodeRequirement'
-                    : requirement.id
-                }
-                key={requirement.id}
-                disabled={
-                  requirement.__typename === 'IdentificationCodeRequirement' &&
-                  requirement.viewerValue
-                }
-                placeholder={
-                  requirement.__typename === 'IdentificationCodeRequirement' &&
-                  !requirement.viewerValue
-                    ? 'Ex: 25FOVC10'
-                    : null
-                }
-                name={
-                  requirement.__typename === 'PostalAddressRequirement'
-                    ? 'PostalAddressText'
-                    : requirement.__typename === 'IdentificationCodeRequirement'
-                    ? 'IdentificationCodeRequirement'
-                    : requirement.id
-                }
-                label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
-                {...getFormProps(requirement, change)}>
-                {requirement.__typename === 'CheckboxRequirement' ? requirement.label : null}
-              </Field>
+              <AppBox justifyContent="left" textAlign="left">
+                <LoginSocialButton justifyContent="left" type="franceConnect" noHR />
+              </AppBox>
             );
-          })}
-      </form>
-    );
-  }
-}
+          }
+          return (
+            <Field
+              addonBefore={requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined}
+              minlength={requirement.__typename === 'IdentificationCodeRequirement' ? 8 : undefined}
+              id={
+                requirement.__typename === 'IdentificationCodeRequirement'
+                  ? 'IdentificationCodeRequirement'
+                  : requirement.id
+              }
+              key={requirement.id}
+              disabled={
+                requirement.__typename === 'IdentificationCodeRequirement' &&
+                requirement.viewerValue
+              }
+              placeholder={
+                requirement.__typename === 'IdentificationCodeRequirement' &&
+                !requirement.viewerValue
+                  ? 'Ex: 25FOVC10'
+                  : null
+              }
+              name={
+                requirement.__typename === 'PostalAddressRequirement'
+                  ? 'PostalAddressText'
+                  : requirement.__typename === 'IdentificationCodeRequirement'
+                  ? 'IdentificationCodeRequirement'
+                  : requirement.id
+              }
+              label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
+              {...getFormProps(requirement, change)}>
+              {requirement.__typename === 'CheckboxRequirement' ? requirement.label : null}
+            </Field>
+          );
+        })}
+    </form>
+  );
+};
 
 const form = reduxForm({
   onChange,

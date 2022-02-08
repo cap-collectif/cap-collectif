@@ -96,45 +96,58 @@ class CreateStepContributorsCommand extends BaseExportCommand
             throw new \RuntimeException('An exception occured while creating a writer.');
         }
         $writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
-        $writer->addRow(
-            WriterEntityFactory::createRowFromArray(GraphqlQueryAndCsvHeaderHelper::USER_HEADERS)
-        );
+        $header = GraphqlQueryAndCsvHeaderHelper::USER_HEADERS;
+        $isCollectOrSelectionStep = \in_array($step->getType(), ['collect', 'selection']);
+        $isFranceConnectAccountCsvLine = 22;
+        if (!$isCollectOrSelectionStep) {
+            unset($header[$isFranceConnectAccountCsvLine]);
+        }
+        $writer->addRow(WriterEntityFactory::createRowFromArray($header));
         $this->connectionTraversor->traverse(
             $data,
             'contributors',
-            function ($edge) use ($writer) {
+            function ($edge) use (
+                $writer,
+                $isCollectOrSelectionStep,
+                $isFranceConnectAccountCsvLine
+            ) {
                 $contributor = $edge['node'];
-                $writer->addRow(
-                    WriterEntityFactory::createRowFromArray([
-                        $contributor['id'],
-                        $contributor['email'],
-                        $contributor['username'],
-                        $contributor['userType'] ? $contributor['userType']['name'] : null,
-                        $contributor['createdAt'],
-                        $contributor['updatedAt'],
-                        $contributor['lastLogin'],
-                        $contributor['rolesText'],
-                        $contributor['consentExternalCommunication'],
-                        $contributor['enabled'],
-                        $contributor['isEmailConfirmed'],
-                        $contributor['locked'],
-                        $contributor['phoneConfirmed'],
-                        $contributor['gender'],
-                        $contributor['websiteUrl'],
-                        $contributor['biography'],
-                        $contributor['zipCode'],
-                        $contributor['city'],
-                        $contributor['firstname'],
-                        $contributor['lastname'],
-                        $contributor['dateOfBirth'],
-                        $contributor['postalAddress']
-                            ? $contributor['postalAddress']['formatted']
-                            : null,
-                        $contributor['phone'],
-                        $contributor['url'],
-                        $contributor['userIdentificationCode'],
-                    ])
-                );
+                $row = [
+                    $contributor['id'],
+                    $contributor['email'],
+                    $contributor['username'],
+                    $contributor['userType'] ? $contributor['userType']['name'] : null,
+                    $contributor['createdAt'],
+                    $contributor['updatedAt'],
+                    $contributor['lastLogin'],
+                    $contributor['rolesText'],
+                    $contributor['consentExternalCommunication'],
+                    $contributor['enabled'],
+                    $contributor['isEmailConfirmed'],
+                    $contributor['locked'],
+                    $contributor['phoneConfirmed'],
+                    $contributor['gender'],
+                    $contributor['websiteUrl'],
+                    $contributor['biography'],
+                    $contributor['zipCode'],
+                    $contributor['city'],
+                    $contributor['firstname'],
+                    $contributor['lastname'],
+                    $contributor['dateOfBirth'],
+                    $contributor['postalAddress']
+                        ? $contributor['postalAddress']['formatted']
+                        : null,
+                    filter_var($contributor['isFranceConnectAccount'], \FILTER_VALIDATE_BOOLEAN)
+                        ? 'YES'
+                        : 'NO',
+                    $contributor['phone'],
+                    $contributor['url'],
+                    $contributor['userIdentificationCode'],
+                ];
+                if (!$isCollectOrSelectionStep) {
+                    unset($row[$isFranceConnectAccountCsvLine]);
+                }
+                $writer->addRow(WriterEntityFactory::createRowFromArray($row));
             },
             function ($pageInfo) use ($step) {
                 return $this->getStepContributorsGraphQLQuery(

@@ -5,10 +5,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   <div
     className="font-weight-semi-bold"
   >
-    <FormattedMessage
-      id="authenticate-with"
-      values={Object {}}
-    />
+    authenticate-with
   </div>
   <LoginSocialButton
     type="saml"
@@ -25,16 +22,14 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
     type="openId"
   />
   <LoginSocialButton
+    justifyContent="center"
     key="1"
     type="franceConnect"
   />
   <p
     className="p--centered"
   >
-    <FormattedMessage
-      id="login.or"
-      values={Object {}}
-    />
+    login.or
   </p>
 </Fragment>
 `;
@@ -46,10 +41,7 @@ exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
   <div
     className="font-weight-semi-bold"
   >
-    <FormattedMessage
-      id="authenticate-with"
-      values={Object {}}
-    />
+    authenticate-with
   </div>
   <LoginSocialButton
     type="cas"
@@ -57,10 +49,7 @@ exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
   <p
     className="p--centered"
   >
-    <FormattedMessage
-      id="login.or"
-      values={Object {}}
-    />
+    login.or
   </p>
 </Fragment>
 `;
@@ -72,22 +61,17 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
   <div
     className="font-weight-semi-bold"
   >
-    <FormattedMessage
-      id="authenticate-with"
-      values={Object {}}
-    />
+    authenticate-with
   </div>
   <LoginSocialButton
+    justifyContent="center"
     key="0"
     type="franceConnect"
   />
   <p
     className="p--centered"
   >
-    <FormattedMessage
-      id="login.or"
-      values={Object {}}
-    />
+    login.or
   </p>
 </Fragment>
 `;
@@ -97,10 +81,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   <div
     className="font-weight-semi-bold"
   >
-    <FormattedMessage
-      id="authenticate-with"
-      values={Object {}}
-    />
+    authenticate-with
   </div>
   <LoginSocialButton
     buttonColor="#ABABAB"
@@ -113,10 +94,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   <p
     className="p--centered"
   >
-    <FormattedMessage
-      id="login.or"
-      values={Object {}}
-    />
+    login.or
   </p>
 </Fragment>
 `;
@@ -126,10 +104,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   <div
     className="font-weight-semi-bold"
   >
-    <FormattedMessage
-      id="authenticate-with"
-      values={Object {}}
-    />
+    authenticate-with
   </div>
   <LoginSocialButton
     type="saml"
@@ -137,10 +112,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   <p
     className="p--centered"
   >
-    <FormattedMessage
-      id="login.or"
-      values={Object {}}
-    />
+    login.or
   </p>
 </Fragment>
 `;
@@ -150,10 +122,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   <div
     className="font-weight-semi-bold"
   >
-    <FormattedMessage
-      id="authenticate-with"
-      values={Object {}}
-    />
+    authenticate-with
   </div>
   <LoginSocialButton
     type="saml"
@@ -170,6 +139,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     type="openId"
   />
   <LoginSocialButton
+    justifyContent="center"
     key="1"
     type="franceConnect"
   />

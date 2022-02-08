@@ -35,6 +35,7 @@ class GraphqlQueryAndCsvHeaderHelper
     phone
     url
     userIdentificationCode
+    isFranceConnectAccount
 ';
 
     public const USER_HEADERS = [
@@ -60,6 +61,7 @@ class GraphqlQueryAndCsvHeaderHelper
         'user_lastname',
         'user_dateOfBirth',
         'user_postalAddress',
+        'user_isFranceConnectAssociated',
         'user_phone',
         'user_profileUrl',
         'userIdentificationCode',

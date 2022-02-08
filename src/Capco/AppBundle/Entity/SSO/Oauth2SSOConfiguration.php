@@ -118,4 +118,9 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
 
         return $this;
     }
+
+    public function getSsoType(): string
+    {
+        return SSOType::OAUTH2;
+    }
 }

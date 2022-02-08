@@ -1,15 +1,14 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-
-import type { FeatureToggles, ReduxStoreSSOConfiguration, State } from '../../../types';
+import { useIntl } from 'react-intl';
+import type { ReduxStoreSSOConfiguration, State } from '~/types';
 import LoginSocialButton from '../../Ui/Button/LoginSocialButton';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export type LabelPrefix = 'registration.' | 'login.' | '';
 
 type StateProps = {|
-  features: FeatureToggles,
   ssoList: Array<ReduxStoreSSOConfiguration>,
 |};
 
@@ -18,70 +17,68 @@ type Props = {|
   prefix?: LabelPrefix,
 |};
 
-export class LoginSocialButtons extends React.Component<Props> {
-  render() {
-    const { features, ssoList } = this.props;
-    if (
-      !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'facebook').length > 0) &&
-      !features.login_saml &&
-      !features.login_cas &&
-      !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0) &&
-      !features.login_franceconnect
-    ) {
-      return null;
-    }
+export const LoginSocialButtons = ({ ssoList }: Props) => {
+  const loginFranceConnect = useFeatureFlag('login_franceconnect');
+  const hasLoginSaml = useFeatureFlag('login_saml');
+  const hasLoginCas = useFeatureFlag('login_cas');
+  const hasDisconnectOpenId = useFeatureFlag('disconnect_openid');
+  const hasSsoByPassAuth = useFeatureFlag('sso_by_pass_auth');
+  const intl = useIntl();
 
-    /* @TODO: Add more Login button in mapping when it will be configurable. */
-    return (
-      <>
-        <div className="font-weight-semi-bold">
-          <FormattedMessage id="authenticate-with" />
-        </div>
-        {features.login_saml && <LoginSocialButton type="saml" />}
-        {features.login_cas && <LoginSocialButton type="cas" />}
-        {ssoList.length > 0 &&
-          ssoList.map(
-            (
-              { ssoType, name, buttonColor, labelColor }: ReduxStoreSSOConfiguration,
-              index: number,
-            ) => {
-              switch (ssoType) {
-                case 'oauth2':
-                  return (
-                    <LoginSocialButton
-                      text={name}
-                      labelColor={labelColor}
-                      buttonColor={buttonColor}
-                      key={index}
-                      switchUserMode={features.disconnect_openid || false}
-                      type="openId"
-                    />
-                  );
-                case 'franceconnect':
-                  return (
-                    features.login_franceconnect && (
-                      <LoginSocialButton key={index} type="franceConnect" />
-                    )
-                  );
-                case 'facebook':
-                  return <LoginSocialButton type="facebook" />;
-                default:
-                  break;
-              }
-            },
-          )}
-        {!features.sso_by_pass_auth && (
-          <p className="p--centered">
-            <FormattedMessage id="login.or" />
-          </p>
-        )}
-      </>
-    );
+  if (
+    !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'facebook').length > 0) &&
+    !hasLoginSaml &&
+    !hasLoginCas &&
+    !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0) &&
+    !loginFranceConnect
+  ) {
+    return null;
   }
-}
+
+  /* @TODO: Add more Login button in mapping when it will be configurable. */
+  return (
+    <>
+      <div className="font-weight-semi-bold">{intl.formatMessage({ id: 'authenticate-with' })}</div>
+      {hasLoginSaml && <LoginSocialButton type="saml" />}
+      {hasLoginCas && <LoginSocialButton type="cas" />}
+      {ssoList.length > 0 &&
+        ssoList.map(
+          (
+            { ssoType, name, buttonColor, labelColor }: ReduxStoreSSOConfiguration,
+            index: number,
+          ) => {
+            switch (ssoType) {
+              case 'oauth2':
+                return (
+                  <LoginSocialButton
+                    text={name}
+                    labelColor={labelColor}
+                    buttonColor={buttonColor}
+                    key={index}
+                    switchUserMode={hasDisconnectOpenId || false}
+                    type="openId"
+                  />
+                );
+              case 'franceconnect':
+                return (
+                  loginFranceConnect && (
+                    <LoginSocialButton key={index} type="franceConnect" justifyContent="center" />
+                  )
+                );
+              case 'facebook':
+                return <LoginSocialButton type="facebook" />;
+              default:
+                break;
+            }
+          },
+        )}
+      {!hasSsoByPassAuth && <p className="p--centered">{intl.formatMessage({ id: 'login.or' })}</p>}
+    </>
+  );
+};
 
 const mapStateToProps = (state: State) => ({
-  features: state.default.features,
+  // TODO use Fragment to get sso list
   ssoList: state.default.ssoList,
 });
 

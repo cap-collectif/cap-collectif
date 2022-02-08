@@ -35,7 +35,9 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
       values={Object {}}
     />
   </AppBox>
-  <LoginSocialButton__FranceConnectButton>
+  <LoginSocialButton__FranceConnectButton
+    justifyContent="center"
+  >
     <a
       href="/login/franceconnect?_destination=http://localhost/"
       onMouseEnter={[Function]}
@@ -48,7 +50,9 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
       />
     </a>
   </LoginSocialButton__FranceConnectButton>
-  <LoginSocialButton__FranceConnectLink>
+  <LoginSocialButton__FranceConnectLink
+    justifyContent="center"
+  >
     <a
       href="https://franceconnect.gouv.fr/"
     >
