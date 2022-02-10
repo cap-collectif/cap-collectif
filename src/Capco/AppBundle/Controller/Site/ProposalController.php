@@ -22,7 +22,8 @@ use Symfony\Component\Routing\RouterInterface;
 class ProposalController extends Controller
 {
     /**
-     * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}", name="app_project_show_proposal", options={"i18n" = false})
+     * @Route("/project/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}", name="app_project_show_proposal", options={"i18n" = false})
+     * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}", name="app_project_show_proposal_legacy", options={"i18n" = false})
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @Entity("step", class="CapcoAppBundle:Steps\CollectStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},

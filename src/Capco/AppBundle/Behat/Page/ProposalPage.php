@@ -9,7 +9,7 @@ class ProposalPage extends Page
 {
     use PageTrait;
 
-    protected $path = '/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}';
+    protected $path = '/project/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}';
 
     protected $elements = [
         'proposal votes counter' => '#proposal-page-tabs-tab-votes .tip',

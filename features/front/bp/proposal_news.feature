@@ -35,4 +35,4 @@ Scenario: User can delete his news and admin should not be notified
   Then I click on button to edit news
   And I click on button to delete news
   Then I confirm to delete my news
-  And I should be redirected to '/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quassociation-avec-rna'
+  And I should be redirected to '/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quassociation-avec-rna'

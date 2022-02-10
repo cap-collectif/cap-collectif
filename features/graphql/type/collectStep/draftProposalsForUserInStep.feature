@@ -35,7 +35,7 @@ Scenario: GraphQL client wants to get list of draft proposals
           {
               "node": {
                 "title": "Proposition brouillon 3",
-                "url": "https:\/\/capco.test\/projects\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/proposition-brouillon-3"
+                "url": "https:\/\/capco.test\/project\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/proposition-brouillon-3"
               }
           }
         ]

@@ -109,7 +109,7 @@ Scenario: Logged in user wants to manage his followings and click on a proposal
   Given I am logged in as user
   And I visited "manage followings page"
   When I follow "Ravalement de la façade de la bibliothèque municipale"
-  And I should be redirected to "/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale"
+  And I should be redirected to "/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale"
 
 @database
 Scenario: Logged in user wants to manage his followings and click on a project
