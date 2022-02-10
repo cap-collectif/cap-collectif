@@ -3,7 +3,7 @@ Feature: Sso redirection
 
 @database
 Scenario: User wants to connect through SSO without losing his current page on the website and with by pass
-  Given feature "disconnect_openid" is enabled
+  Given feature "oauth2_switch_user" is enabled
   Given feature "sso_by_pass_auth" is enabled
   Then enable sso provider "ssoOauth2"
   And I go to a selection step with simple vote enabled
@@ -20,7 +20,7 @@ Scenario: User wants to connect through SSO without losing his current page on t
 
 @database
 Scenario: Logged in from ssoOauth2 user wants to soft delete his account
-  Given feature "disconnect_openid" is enabled
+  Given feature "oauth2_switch_user" is enabled
   Given feature "sso_by_pass_auth" is enabled
   Then enable sso provider "ssoOauth2"
   And I visited "home page"

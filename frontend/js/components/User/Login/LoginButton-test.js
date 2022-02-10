@@ -10,7 +10,7 @@ describe('<LoginButton />', () => {
     loginWithMonCompteParis: false,
     loginWithOpenID: false,
     byPassLoginModal: false,
-    disconnectOpenID: false,
+    oauth2SwitchUser: false,
     openLoginModal: jest.fn(),
   };
 

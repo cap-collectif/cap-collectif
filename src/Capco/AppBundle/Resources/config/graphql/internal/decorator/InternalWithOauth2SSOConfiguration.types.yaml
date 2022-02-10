@@ -29,3 +29,6 @@ InternalWithOauth2SSOConfiguration:
             name:
                 type: 'String!'
                 description: 'The name of your SSO provider.'
+            disconnectSsoOnLogout:
+                type: 'Boolean!'
+                description: 'Whether or not disconnect sso on logout.'

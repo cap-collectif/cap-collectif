@@ -21,7 +21,7 @@ class FranceConnectLogoutHandlerSpec extends ObjectBehavior
         TokenStorage $tokenStorage,
         OAuthToken $token
     ) {
-        $this->beConstructedWith($manager, $resourceOwner, $router, $tokenStorage, 'prod');
+        $this->beConstructedWith($manager, $resourceOwner, $tokenStorage);
 
         $manager->isActive('login_franceconnect')->willReturn(true);
         $token->getResourceOwnerName()->willReturn('franceconnect');
@@ -38,7 +38,7 @@ class FranceConnectLogoutHandlerSpec extends ObjectBehavior
         $parameters = [
             'post_logout_redirect_uri' => 'https://capco.dev',
             'state' => 'abc123',
-            'id_token_hint' => 'abc123'
+            'id_token_hint' => 'abc123',
         ];
 
         $request = new Request();
@@ -67,7 +67,7 @@ class FranceConnectLogoutHandlerSpec extends ObjectBehavior
         TokenStorage $tokenStorage,
         OAuthToken $token
     ) {
-        $this->beConstructedWith($manager, $resourceOwner, $router, $tokenStorage, 'prod');
+        $this->beConstructedWith($manager, $resourceOwner, $tokenStorage);
 
         $manager->isActive('login_franceconnect')->willReturn(false);
         $token->getResourceOwnerName()->willReturn('franceconnect');

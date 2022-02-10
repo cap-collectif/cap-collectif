@@ -43,7 +43,7 @@ class SSOController extends Controller
     {
         $user = $this->getUser();
 
-        if (!$user || !$this->toggleManager->isActive('disconnect_openid')) {
+        if (!$user || !$this->toggleManager->isActive('oauth2_switch_user')) {
             return $this->redirect('/');
         }
 

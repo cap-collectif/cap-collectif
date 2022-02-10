@@ -20,6 +20,7 @@ class Oauth2SSOConfigurationFormType extends AbstractType
                 'strip_tags' => true,
             ])
             ->add('enabled', CheckboxType::class)
+            ->add('disconnectSsoOnLogout', CheckboxType::class)
             ->add('accessTokenUrl', UrlType::class)
             ->add('userInfoUrl', UrlType::class)
             ->add('authorizationUrl', UrlType::class)

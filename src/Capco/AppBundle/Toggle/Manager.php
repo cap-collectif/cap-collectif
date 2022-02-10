@@ -48,7 +48,7 @@ class Manager
     public const consultation_plan = 'consultation_plan';
     public const display_map = 'display_map';
     public const consent_internal_communication = 'consent_internal_communication';
-    public const disconnect_openid = 'disconnect_openid';
+    public const oauth2_switch_user = 'oauth2_switch_user';
     public const sso_by_pass_auth = 'sso_by_pass_auth';
     public const allow_users_to_propose_events = 'allow_users_to_propose_events';
     public const login_franceconnect = 'login_franceconnect';
@@ -152,7 +152,7 @@ class Manager
         self::consultation_plan,
         self::display_map,
         self::consent_internal_communication,
-        self::disconnect_openid,
+        self::oauth2_switch_user,
         self::sso_by_pass_auth,
         self::allow_users_to_propose_events,
         self::login_franceconnect,

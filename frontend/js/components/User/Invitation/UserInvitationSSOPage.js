@@ -65,7 +65,7 @@ const UserInvitationSSOPage = ({
     (state: GlobalState) => state.default.parameters['global.site.organization_name'],
   );
   const ssoByPassAuth = useFeatureFlag('sso_by_pass_auth');
-  const disconnectOpenId = useFeatureFlag('disconnect_openid');
+  const oauth2SwitchUser = useFeatureFlag('oauth2_switch_user');
   const shieldMode = useFeatureFlag('shield_mode');
 
   console.log({shieldMode})
@@ -116,7 +116,7 @@ const UserInvitationSSOPage = ({
                     key={index}
                     index={index}
                     btnTextColor={btnTextColor}
-                    switchUserMode={disconnectOpenId}
+                    switchUserMode={oauth2SwitchUser}
                     text={sso?.name}
                   />
                 );

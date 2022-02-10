@@ -1,20 +1,20 @@
 // @flow
-import React from 'react';
-import { connect } from 'react-redux';
+import * as React from 'react';
+import { graphql, useFragment } from 'react-relay';
 import { Button, Modal, ToggleButton } from 'react-bootstrap';
 import { change, Field, reduxForm, SubmissionError } from 'redux-form';
-import { FormattedMessage, type IntlShape } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { useIntl } from 'react-intl';
 import Toggle from '../../Form/Toggle';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import CloseButton from '../../Form/CloseButton';
-import type { GlobalState, Uri, Dispatch } from '../../../types';
+import type { Uri, Dispatch } from '~/types';
 import type {
-  FranceConnectConfigurationModal_ssoConfiguration,
+  FranceConnectConfigurationModal_ssoConfiguration$key,
   SSOEnvironment,
 } from '~relay/FranceConnectConfigurationModal_ssoConfiguration.graphql';
 import UpdateFranceConnectConfigurationMutation from '../../../mutations/UpdateFranceConnectSSOConfigurationMutation';
+import Text from '~ui/Primitives/Text';
 
 type FormValues = {|
   environment: SSOEnvironment,
@@ -32,19 +32,34 @@ type FormValues = {|
   preferred_username: boolean,
 |};
 
-type Props = {|
-  ssoConfiguration: FranceConnectConfigurationModal_ssoConfiguration,
+type FranceConnectProps = {|
+  +franceConnectConfiguration: FranceConnectConfigurationModal_ssoConfiguration$key,
   show: boolean,
   onClose: () => void,
+|};
+
+type Props = {|
   ...FormValues,
   ...ReduxFormFormProps,
-  intl: IntlShape,
+  ...FranceConnectProps,
 |};
 
 const formName = 'france-connect-configuration-form';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const {
+const FRAGMENT = graphql`
+  fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOConfiguration {
+    id
+    clientId
+    secret
+    environment
+    redirectUri
+    logoutUrl
+    allowedData
+  }
+`;
+
+const onSubmit = (
+  {
     environment,
     secret,
     clientId,
@@ -56,10 +71,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     birthcountry,
     email,
     preferred_username,
-  } = values;
-
-  const { onClose } = props;
-
+  }: FormValues,
+  dispatch: Dispatch,
+  { onClose }: Props,
+) => {
   return UpdateFranceConnectConfigurationMutation.commit({
     input: {
       environment,
@@ -120,158 +135,140 @@ export const FranceConnectConfigurationModal = ({
   submitSucceeded,
   submitFailed,
   dispatch,
-}: Props) => (
-  <Modal show={show} onHide={onClose} aria-labelledby="france-connect-modal-lg">
-    <form onSubmit={handleSubmit} id={`${formName}`}>
-      <Modal.Header closeButton>
-        <Modal.Title id="oauth2-sso-modal-lg">
-          <FormattedMessage id="edit-france-connect-authentication-method" />
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>
-          <FormattedMessage id="Configuration" />
-        </h4>
-        <FormattedMessage id="environment" tagName="p" />
-        <Field
-          id={`${formName}_environment`}
-          name="environment"
-          type="radio-buttons"
-          required
-          component={component}>
-          <ToggleButton
-            value="TESTING"
-            onClick={() => dispatch(change(formName, 'environment', 'TESTING'))}>
-            <FormattedMessage id="integration" />
-          </ToggleButton>
-          <ToggleButton
-            value="PRODUCTION"
-            onClick={() => dispatch(change(formName, 'environment', 'PRODUCTION'))}>
-            <FormattedMessage id="production" />
-          </ToggleButton>
-        </Field>
-        <Field
-          id={`${formName}_clientId`}
-          name="clientId"
-          type="text"
-          required
-          component={component}
-          label={<FormattedMessage id="client-id" />}
-        />
-        <Field
-          id={`${formName}_secret`}
-          name="secret"
-          type="text"
-          required
-          component={component}
-          label={<FormattedMessage id="secret" />}
-        />
-        <Field
-          id={`${formName}_redirectUri`}
-          name="redirectUri"
-          disabled
-          required
-          type="text"
-          component={component}
-          label={<FormattedMessage id="callback-url" />}
-        />
-        <Field
-          id={`${formName}_logoutUrl`}
-          name="logoutUrl"
-          disabled
-          required
-          type="text"
-          component={component}
-          label={<FormattedMessage id="logout-url" />}
-        />
-        <label>
-          <FormattedMessage id="fc-allowed-fields" />
-        </label>
-        <Field
-          id={`${formName}_given_name`}
-          name="given_name"
-          component={Toggle}
-          label={<FormattedMessage id="form.label_firstname" />}
-        />
-        <Field
-          id={`${formName}_family_name`}
-          name="family_name"
-          component={Toggle}
-          label={<FormattedMessage id="form.label_lastname" />}
-        />
-        <Field
-          id={`${formName}_birthdate`}
-          name="birthdate"
-          component={Toggle}
-          label={<FormattedMessage id="form.label_date_of_birth" />}
-        />
-        <Field
-          id={`${formName}_birthplace`}
-          name="birthplace"
-          component={Toggle}
-          label={<FormattedMessage id="birthPlace" />}
-        />
-        <Field
-          id={`${formName}_birthcountry`}
-          name="birthcountry"
-          component={Toggle}
-          label={<FormattedMessage id="birth-country" />}
-        />
-        <Field
-          id={`${formName}_gender`}
-          name="gender"
-          component={Toggle}
-          label={<FormattedMessage id="form.label_gender" />}
-        />
-        <Field
-          id={`${formName}_email`}
-          name="email"
-          component={Toggle}
-          label={<FormattedMessage id="filter.label_email" />}
-        />
-        <Field
-          id={`${formName}_preferred_username`}
-          name="preferred_username"
-          component={Toggle}
-          label={<FormattedMessage id="list.label_username" />}
-        />
-      </Modal.Body>
-      <Modal.Footer>
-        <AlertForm
-          valid={valid}
-          invalid={invalid && !pristine}
-          submitSucceeded={submitSucceeded}
-          submitFailed={submitFailed}
-          submitting={submitting}
-        />
-        <CloseButton onClose={onClose} />
-        <Button
-          type="submit"
-          id={`${formName}_submit`}
-          bsStyle="primary"
-          disabled={pristine || invalid || submitting}>
-          <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-        </Button>
-      </Modal.Footer>
-    </form>
-  </Modal>
-);
-
-const mapStateToProps = (state: GlobalState, props: Props) => {
-  const data = props.ssoConfiguration?.allowedData ?? [];
-  return {
-    initialValues: {
-      ...props.ssoConfiguration,
-      given_name: data.includes('given_name'),
-      family_name: data.includes('family_name'),
-      birthdate: data.includes('birthdate'),
-      birthplace: data.includes('birthplace'),
-      birthcountry: data.includes('birthcountry'),
-      gender: data.includes('gender'),
-      email: data.includes('email'),
-      preferred_username: data.includes('preferred_username'),
-    },
-  };
+}: Props) => {
+  const intl = useIntl();
+  return (
+    <Modal show={show} onHide={onClose} aria-labelledby="france-connect-modal-lg">
+      <form onSubmit={handleSubmit} id={`${formName}`}>
+        <Modal.Header closeButton>
+          <Modal.Title id="oauth2-sso-modal-lg">
+            {intl.formatMessage({ id: 'edit-france-connect-authentication-method' })}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>{intl.formatMessage({ id: 'Configuration' })}</h4>
+          <Text>{intl.formatMessage({ id: 'environment' })}</Text>
+          <Field
+            id={`${formName}_environment`}
+            name="environment"
+            type="radio-buttons"
+            required
+            component={component}>
+            <ToggleButton
+              value="TESTING"
+              onClick={() => dispatch(change(formName, 'environment', 'TESTING'))}>
+              {intl.formatMessage({ id: 'integration' })}
+            </ToggleButton>
+            <ToggleButton
+              value="PRODUCTION"
+              onClick={() => dispatch(change(formName, 'environment', 'PRODUCTION'))}>
+              {intl.formatMessage({ id: 'production' })}
+            </ToggleButton>
+          </Field>
+          <Field
+            id={`${formName}_clientId`}
+            name="clientId"
+            type="text"
+            required
+            component={component}
+            label={intl.formatMessage({ id: 'client-id' })}
+          />
+          <Field
+            id={`${formName}_secret`}
+            name="secret"
+            type="text"
+            required
+            component={component}
+            label={intl.formatMessage({ id: 'secret' })}
+          />
+          <Field
+            id={`${formName}_redirectUri`}
+            name="redirectUri"
+            disabled
+            required
+            type="text"
+            component={component}
+            label={intl.formatMessage({ id: 'callback-url' })}
+          />
+          <Field
+            id={`${formName}_logoutUrl`}
+            name="logoutUrl"
+            disabled
+            required
+            type="text"
+            component={component}
+            label={intl.formatMessage({ id: 'logout-url' })}
+          />
+          <label>{intl.formatMessage({ id: 'fc-allowed-fields' })}</label>
+          <Field
+            id={`${formName}_given_name`}
+            name="given_name"
+            component={Toggle}
+            label={intl.formatMessage({ id: 'form.label_firstname' })}
+          />
+          <Field
+            id={`${formName}_family_name`}
+            name="family_name"
+            component={Toggle}
+            label={intl.formatMessage({ id: 'form.label_lastname' })}
+          />
+          <Field
+            id={`${formName}_birthdate`}
+            name="birthdate"
+            component={Toggle}
+            label={intl.formatMessage({ id: 'form.label_date_of_birth' })}
+          />
+          <Field
+            id={`${formName}_birthplace`}
+            name="birthplace"
+            component={Toggle}
+            label={intl.formatMessage({ id: 'birthPlace' })}
+          />
+          <Field
+            id={`${formName}_birthcountry`}
+            name="birthcountry"
+            component={Toggle}
+            label={intl.formatMessage({ id: 'birth-country' })}
+          />
+          <Field
+            id={`${formName}_gender`}
+            name="gender"
+            component={Toggle}
+            label={intl.formatMessage({ id: 'form.label_gender' })}
+          />
+          <Field
+            id={`${formName}_email`}
+            name="email"
+            component={Toggle}
+            label={intl.formatMessage({ id: 'filter.label_email' })}
+          />
+          <Field
+            id={`${formName}_preferred_username`}
+            name="preferred_username"
+            component={Toggle}
+            label={intl.formatMessage({ id: 'list.label_username' })}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <AlertForm
+            valid={valid}
+            invalid={invalid && !pristine}
+            submitSucceeded={submitSucceeded}
+            submitFailed={submitFailed}
+            submitting={submitting}
+          />
+          <CloseButton onClose={onClose} />
+          <Button
+            type="submit"
+            id={`${formName}_submit`}
+            bsStyle="primary"
+            disabled={pristine || invalid || submitting}>
+            {intl.formatMessage({ id: submitting ? 'global.loading' : 'global.save' })}
+          </Button>
+        </Modal.Footer>
+      </form>
+    </Modal>
+  );
 };
 
 const form = reduxForm({
@@ -281,17 +278,33 @@ const form = reduxForm({
   form: formName,
 })(FranceConnectConfigurationModal);
 
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
-export default createFragmentContainer(container, {
-  ssoConfiguration: graphql`
-    fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOConfiguration {
-      id
-      clientId
-      secret
-      environment
-      redirectUri
-      logoutUrl
-      allowedData
-    }
-  `,
-});
+function injectProps(Component) {
+  return function WrapperComponent(props: FranceConnectProps) {
+    const { franceConnectConfiguration: franceConnectConfigurationFragment } = props;
+    const franceConnectConfiguration = useFragment(FRAGMENT, franceConnectConfigurationFragment);
+    const data = franceConnectConfiguration?.allowedData ?? [];
+    const initialValues = {
+      ...franceConnectConfiguration,
+      given_name: data.includes('given_name'),
+      family_name: data.includes('family_name'),
+      birthdate: data.includes('birthdate'),
+      birthplace: data.includes('birthplace'),
+      birthcountry: data.includes('birthcountry'),
+      gender: data.includes('gender'),
+      email: data.includes('email'),
+      preferred_username: data.includes('preferred_username'),
+    };
+
+    return (
+      <Component
+        {...props}
+        initialValues={initialValues}
+        franceConnectConfiguration={franceConnectConfiguration}
+      />
+    );
+  };
+}
+
+const container = (injectProps(form): React.AbstractComponent<FranceConnectProps>);
+
+export default container;

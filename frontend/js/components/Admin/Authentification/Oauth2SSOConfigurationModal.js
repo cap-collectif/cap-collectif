@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
-
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import CloseButton from '../../Form/CloseButton';
-import { isUrl } from '../../../services/Validator';
-import type { GlobalState, Uri, Uuid, Dispatch } from '../../../types';
+import { isUrl } from '~/services/Validator';
+import type { GlobalState, Uri, Uuid, Dispatch } from '~/types';
 import AddOauth2SSOConfigurationMutation from '../../../mutations/AddOauth2SSOConfigurationMutation';
 import UpdateOauth2SSOConfigurationMutation from '../../../mutations/UpdateOauth2SSOConfigurationMutation';
+import Toggle from '~/components/Form/Toggle';
 
 type FormValues = {|
   id?: ?Uuid,
@@ -24,6 +24,7 @@ type FormValues = {|
   logoutUrl: ?Uri,
   redirectUri: Uri,
   profileUrl: ?Uri,
+  isDisconnectSsoOnLogout: ?boolean,
 |};
 
 type Props = {|
@@ -48,6 +49,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     userInfoUrl,
     logoutUrl,
     profileUrl,
+    isDisconnectSsoOnLogout,
   } = values;
 
   const { onClose } = props;
@@ -62,6 +64,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     userInfoUrl,
     accessTokenUrl,
     authorizationUrl,
+    disconnectSsoOnLogout: isDisconnectSsoOnLogout,
   };
 
   if (id === undefined || id === null) {
@@ -159,6 +162,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
     userInfoUrl: null,
     accessTokenUrl: null,
     authorizationUrl: null,
+    isDisconnectSsoOnLogout: false,
   };
 
   render() {
@@ -261,6 +265,12 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               type="text"
               component={component}
               label={<FormattedMessage id="sso-link" />}
+            />
+            <Field
+              id={`${formName}_disconnectSsoOnLogout`}
+              name="isDisconnectSsoOnLogout"
+              component={Toggle}
+              label={<FormattedMessage id="disconnect-sso-on-logout" />}
             />
           </Modal.Body>
           <Modal.Footer>

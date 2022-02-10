@@ -241,6 +241,13 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                               "name": "profileUrl",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isDisconnectSsoOnLogout",
+                              "storageKey": null,
+                            },
                           ],
                           "type": "Oauth2SSOConfiguration",
                         },
@@ -309,6 +316,13 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "secret",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isDisconnectSsoOnLogout",
                               "storageKey": null,
                             },
                           ],
@@ -397,10 +411,35 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
               "kind": "LinkedHandle",
               "name": "ssoConfigurations",
             },
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "User",
+              "kind": "LinkedField",
+              "name": "viewer",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "isSuperAdmin",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
           ],
         },
         "params": Object {
-          "cacheID": "b386bf58ff96b3557074c0baeaee441b",
+          "cacheID": "d7650f0e270852a6ba9172bf542d8f89",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -426,6 +465,7 @@ fragment FacebookConfigurationCard_ssoConfiguration on FacebookSSOConfiguration 
   clientId
   secret
   enabled
+  isDisconnectSsoOnLogout
 }
 
 fragment FacebookConfigurationForm_ssoConfiguration on FacebookSSOConfiguration {
@@ -483,6 +523,10 @@ fragment ListPublicSSO_query on Query {
       hasNextPage
     }
   }
+  viewer {
+    isSuperAdmin
+    id
+  }
 }
 
 fragment ListSSOConfiguration_query on Query {
@@ -503,6 +547,7 @@ fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
   redirectUri
   profileUrl
   __typename
+  isDisconnectSsoOnLogout
 }
 
 fragment SSOConfigurationItem_configuration on SSOConfiguration {
@@ -781,6 +826,13 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
                               "name": "profileUrl",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isDisconnectSsoOnLogout",
+                              "storageKey": null,
+                            },
                           ],
                           "type": "Oauth2SSOConfiguration",
                         },
@@ -849,6 +901,13 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "secret",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isDisconnectSsoOnLogout",
                               "storageKey": null,
                             },
                           ],
@@ -937,10 +996,35 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
               "kind": "LinkedHandle",
               "name": "ssoConfigurations",
             },
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "User",
+              "kind": "LinkedField",
+              "name": "viewer",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "isSuperAdmin",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
           ],
         },
         "params": Object {
-          "cacheID": "b386bf58ff96b3557074c0baeaee441b",
+          "cacheID": "d7650f0e270852a6ba9172bf542d8f89",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -966,6 +1050,7 @@ fragment FacebookConfigurationCard_ssoConfiguration on FacebookSSOConfiguration 
   clientId
   secret
   enabled
+  isDisconnectSsoOnLogout
 }
 
 fragment FacebookConfigurationForm_ssoConfiguration on FacebookSSOConfiguration {
@@ -1023,6 +1108,10 @@ fragment ListPublicSSO_query on Query {
       hasNextPage
     }
   }
+  viewer {
+    isSuperAdmin
+    id
+  }
 }
 
 fragment ListSSOConfiguration_query on Query {
@@ -1043,6 +1132,7 @@ fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
   redirectUri
   profileUrl
   __typename
+  isDisconnectSsoOnLogout
 }
 
 fragment SSOConfigurationItem_configuration on SSOConfiguration {

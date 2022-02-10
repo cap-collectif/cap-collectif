@@ -48,7 +48,12 @@ abstract class AbstractSSOConfiguration
      */
     protected $environment = EnumSSOEnvironmentType::NONE;
 
-    protected $ssoType = null;
+    protected $ssoType;
+
+    /**
+     * @ORM\Column(name="disconnect_sso_on_logout", type="boolean", nullable=false, options={"default" = false})
+     */
+    protected bool $disconnectSsoOnLogout = false;
 
     public function getName(): string
     {
@@ -113,7 +118,7 @@ abstract class AbstractSSOConfiguration
         return $this;
     }
 
-    public function getSsoType():string
+    public function getSsoType(): string
     {
         return $this->ssoType;
     }
@@ -121,6 +126,18 @@ abstract class AbstractSSOConfiguration
     public function setSsoType(string $ssoType): self
     {
         $this->ssoType = $ssoType;
+
+        return $this;
+    }
+
+    public function isDisconnectSsoOnLogout(): bool
+    {
+        return $this->disconnectSsoOnLogout;
+    }
+
+    public function setDisconnectSsoOnLogout(bool $disconnectSsoOnLogout): self
+    {
+        $this->disconnectSsoOnLogout = $disconnectSsoOnLogout;
 
         return $this;
     }

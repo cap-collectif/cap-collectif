@@ -7,29 +7,22 @@ use Capco\UserBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class FranceConnectLogoutHandler implements LogoutHandlerInterface
 {
     private Manager $toggleManager;
     private ResourceOwnerInterface $resourceOwner;
-    private RouterInterface $router;
     private TokenStorageInterface $tokenStorage;
-    private string $environment;
 
     public function __construct(
         Manager $toggleManager,
         ResourceOwnerInterface $resourceOwner,
-        RouterInterface $router,
-        TokenStorageInterface $tokenStorage,
-        string $environment
+        TokenStorageInterface $tokenStorage
     ) {
         $this->toggleManager = $toggleManager;
         $this->resourceOwner = $resourceOwner;
-        $this->router = $router;
         $this->tokenStorage = $tokenStorage;
-        $this->environment = $environment;
     }
 
     public function handle(

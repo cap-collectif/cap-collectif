@@ -73,7 +73,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate('allow_users_to_propose_events');
         $this->manager->activate('indexation');
         $this->manager->activate('developer_documentation');
-        $this->manager->deactivate('disconnect_openid');
+        $this->manager->deactivate('oauth2_switch_user');
         $this->manager->deactivate('sso_by_pass_auth');
         $this->manager->deactivate('graphql_query_analytics');
         $this->manager->activate('consultation_plan');
@@ -128,7 +128,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('login_saml');
             $this->manager->deactivate('login_cas');
             $this->manager->deactivate('login_paris');
-            $this->manager->deactivate('disconnect_openid');
+            $this->manager->deactivate('oauth2_switch_user');
             $this->manager->deactivate('public_api');
             $this->manager->deactivate('search');
             $this->manager->deactivate('http_redirects');

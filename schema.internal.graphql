@@ -3175,6 +3175,9 @@ input CreateOauth2SSOConfigurationInput {
 
   """The name of your SSO provider."""
   name: String!
+
+  """Whether or not disconnect sso on logout."""
+  disconnectSsoOnLogout: Boolean!
   clientMutationId: String
 }
 
@@ -5842,6 +5845,9 @@ type FacebookSSOConfiguration implements Node & SSOConfiguration {
   """Color in hexadecimal of label SSO button."""
   labelColor: Color!
 
+  """Whether or nor disconnect sso on logout."""
+  isDisconnectSsoOnLogout: Boolean!
+
   """Client ID."""
   clientId: String
 
@@ -5889,7 +5895,7 @@ enum FeatureFlagType {
   indexation
   consultation_plan
   consent_internal_communication
-  disconnect_openid
+  oauth2_switch_user
   sso_by_pass_auth
   allow_users_to_propose_events
   login_franceconnect
@@ -6143,6 +6149,9 @@ type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
 
   """Color in hexadecimal of label SSO button."""
   labelColor: Color!
+
+  """Whether or nor disconnect sso on logout."""
+  isDisconnectSsoOnLogout: Boolean!
 
   """Client ID."""
   clientId: String
@@ -7449,6 +7458,9 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
 
   """Color in hexadecimal of label SSO button."""
   labelColor: Color!
+
+  """Whether or nor disconnect sso on logout."""
+  isDisconnectSsoOnLogout: Boolean!
 
   """Client ID."""
   clientId: String
@@ -12656,6 +12668,9 @@ interface SSOConfiguration {
 
   """Color in hexadecimal of label SSO button."""
   labelColor: Color!
+
+  """Whether or nor disconnect sso on logout."""
+  isDisconnectSsoOnLogout: Boolean!
 }
 
 """A connection to a list of items."""
@@ -14665,6 +14680,9 @@ input UpdateOauth2SSOConfigurationInput {
 
   """The name of your SSO provider."""
   name: String!
+
+  """Whether or not disconnect sso on logout."""
+  disconnectSsoOnLogout: Boolean!
 
   """The ID of oauth2 configuration that needs to be updated."""
   id: ID!

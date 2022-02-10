@@ -2,61 +2,68 @@
 
 namespace Capco\UserBundle\Security\Http\Logout\Handler;
 
-use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
+use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpenIDLogoutHandler implements LogoutHandlerInterface
 {
-    private Manager $toggleManager;
     private ResourceOwnerInterface $resourceOwner;
     private RouterInterface $router;
     private OpenIDReferrerResolver $refererResolver;
+    private AbstractSSOConfigurationRepository $repository;
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(
-        Manager $toggleManager,
         ResourceOwnerInterface $resourceOwner,
         RouterInterface $router,
-        OpenIDReferrerResolver $referrerResolver
+        OpenIDReferrerResolver $referrerResolver,
+        TokenStorageInterface $tokenStorage,
+        AbstractSSOConfigurationRepository $repository
     ) {
-        $this->toggleManager = $toggleManager;
         $this->resourceOwner = $resourceOwner;
         $this->router = $router;
         $this->refererResolver = $referrerResolver;
+        $this->repository = $repository;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function handle(
         RedirectResponseWithRequest $responseWithRequest
     ): RedirectResponseWithRequest {
-        if ($this->toggleManager->isActive('disconnect_openid')) {
-            $logoutURL = $this->resourceOwner->getOption('logout_url');
+        $token = $this->tokenStorage->getToken();
+        if ($token && $token instanceof OAuthToken && 'openid' === $token->getResourceOwnerName()) {
+            $oauth2 = $this->repository->findASsoByType('oauth2');
 
-            $homepageUrl = $this->router->generate(
-                'app_homepage',
-                [],
-                RouterInterface::ABSOLUTE_URL
-            );
+            if ($oauth2 && $oauth2->isDisconnectSsoOnLogout()) {
+                $logoutURL = $this->resourceOwner->getOption('logout_url');
+                $homepageUrl = $this->router->generate(
+                    'app_homepage',
+                    [],
+                    RouterInterface::ABSOLUTE_URL
+                );
 
-            $parameters = [];
+                if ($responseWithRequest->getRequest()->query->get('ssoSwitchUser')) {
+                    $parameters = [
+                        $this->refererResolver->getRefererParameterForLogout() =>
+                            $homepageUrl . '/login/openid?_destination=' . $homepageUrl,
+                    ];
+                } else {
+                    $parameters = [
+                        $this->refererResolver->getRefererParameterForLogout() => $homepageUrl,
+                    ];
+                }
 
-            if ($responseWithRequest->getRequest()->query->get('ssoSwitchUser')) {
-                $parameters = [
-                    $this->refererResolver->getRefererParameterForLogout() =>
-                        $homepageUrl . '/login/openid?_destination=' . $homepageUrl,
-                ];
-            } else {
-                $parameters = [
-                    $this->refererResolver->getRefererParameterForLogout() => $homepageUrl,
-                ];
+                $responseWithRequest->setResponse(
+                    new RedirectResponse(
+                        $logoutURL . '?' . http_build_query($parameters, '', '&') ?? '/'
+                    )
+                );
             }
-
-            $responseWithRequest->setResponse(
-                new RedirectResponse(
-                    $logoutURL . '?' . http_build_query($parameters, '', '&') ?? '/'
-                )
-            );
         }
 
         return $responseWithRequest;

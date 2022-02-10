@@ -68,8 +68,8 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::consultation_plan")'
             consent_internal_communication:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::consent_internal_communication")'
-            disconnect_openid:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::disconnect_openid")'
+            oauth2_switch_user:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::oauth2_switch_user")'
             sso_by_pass_auth:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::sso_by_pass_auth")'
             allow_users_to_propose_events:

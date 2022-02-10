@@ -14,9 +14,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateOauth2SSOConfigurationMutation implements MutationInterface
 {
-    private $em;
-    private $formFactory;
-    private $repository;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private Oauth2SSOConfigurationRepository $repository;
 
     public function __construct(
         EntityManagerInterface $em,

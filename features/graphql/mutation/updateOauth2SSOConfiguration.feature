@@ -13,6 +13,7 @@ Admin wants to update a Oauth2 SSO configuration
         ssoConfiguration {
           name
           enabled
+          isDisconnectSsoOnLogout
           clientId
           secret
           authorizationUrl
@@ -28,6 +29,7 @@ Admin wants to update a Oauth2 SSO configuration
         "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
         "name": "Cap collectif Oauth2 Provider",
         "enabled": true,
+        "disconnectSsoOnLogout": true,
         "clientId": "account",
         "secret": "***REMOVED***",
         "authorizationUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/auth",
@@ -47,6 +49,7 @@ Admin wants to update a Oauth2 SSO configuration
         "ssoConfiguration": {
           "name": "Cap collectif Oauth2 Provider",
           "enabled": true,
+          "isDisconnectSsoOnLogout": true,
           "clientId": "account",
           "secret": "***REMOVED***",
           "authorizationUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/auth",

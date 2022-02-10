@@ -2,8 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { FormattedHTMLMessage, useIntl } from 'react-intl';
+import { graphql, useFragment } from 'react-relay';
 import type { Dispatch } from 'redux';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
@@ -13,8 +13,8 @@ import Heading from '~ui/Primitives/Heading';
 import Modal from '~ds/Modal/Modal';
 import Text from '~ui/Primitives/Text';
 import Button from '~ds/Button/Button';
-import type { FacebookConfigurationForm_ssoConfiguration } from '~relay/FacebookConfigurationForm_ssoConfiguration.graphql';
-import type {FacebookSSOConfiguration} from './ListPublicSSO'
+import type { FacebookConfigurationForm_ssoConfiguration$key } from '~relay/FacebookConfigurationForm_ssoConfiguration.graphql';
+import type { FacebookSSOConfiguration } from './ListPublicSSO';
 
 type FormValues = {|
   clientId: string,
@@ -23,7 +23,7 @@ type FormValues = {|
 |};
 
 type Props = {|
-  ssoConfiguration: ?FacebookConfigurationForm_ssoConfiguration,
+  ssoConfiguration: ?FacebookConfigurationForm_ssoConfiguration$key,
   ssoConfigurationConnectionId: string,
   hide: () => void,
   setFacebook: (config: FacebookSSOConfiguration) => void,
@@ -31,19 +31,29 @@ type Props = {|
   ...ReduxFormFormProps,
 |};
 
+const FRAGMENT = graphql`
+  fragment FacebookConfigurationForm_ssoConfiguration on FacebookSSOConfiguration {
+    __typename
+    clientId
+    secret
+    enabled
+  }
+`;
+
 const formName = 'facebook-configuration-form';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch<*>, props: Props) => {
-  const { secret, clientId } = values;
-  const { hide, ssoConfigurationConnectionId } = props;
-
+const onSubmit = (
+  { secret, clientId }: FormValues,
+  dispatch: Dispatch<*>,
+  { hide, ssoConfigurationConnectionId }: Props,
+) => {
   return UpdateFacebookConfigurationMutation.commit({
     input: {
       clientId,
       secret,
-      enabled: !!secret && !!clientId
+      enabled: !!secret && !!clientId,
     },
-    connections: [ssoConfigurationConnectionId]
+    connections: [ssoConfigurationConnectionId],
   })
     .then(() => {
       hide();
@@ -73,27 +83,26 @@ const validate = ({ secret, clientId }: FormValues) => {
   return errors;
 };
 
-export const FacebookConfigurationForm = (props: Props) => {
-  const {
-    hide,
-    ssoConfiguration,
-    pristine,
-    invalid,
-    handleSubmit,
-    submitting,
-    valid,
-    submitSucceeded,
-    submitFailed,
-  } = props;
+export const FacebookConfigurationForm = ({
+  hide,
+  ssoConfiguration: ssoConfigurationFragment,
+  pristine,
+  invalid,
+  handleSubmit,
+  submitting,
+  valid,
+  submitSucceeded,
+  submitFailed,
+}: Props) => {
+  const ssoConfiguration = useFragment(FRAGMENT, ssoConfigurationFragment);
+  const intl = useIntl();
   return (
     <form id={formName} onSubmit={handleSubmit}>
       <Modal.Header>
         <Modal.Header.Label>
-          <FormattedMessage id="authentication-method" />
+          {intl.formatMessage({ id: 'authentication-method' })}
         </Modal.Header.Label>
-        <Heading>
-          <FormattedMessage id="edit-facebook-authentication-method" />
-        </Heading>
+        <Heading>{intl.formatMessage({ id: 'edit-facebook-authentication-method' })}</Heading>
       </Modal.Header>
       <Modal.Body>
         <Text>
@@ -106,7 +115,7 @@ export const FacebookConfigurationForm = (props: Props) => {
           type="text"
           required
           component={component}
-          label={<FormattedMessage id="App-ID" />}
+          label={intl.formatMessage({ id: 'App-ID' })}
           placeholder="ex : 1714596595426186"
         />
         <Field
@@ -116,7 +125,7 @@ export const FacebookConfigurationForm = (props: Props) => {
           required
           component={component}
           placeholder="ex : fe7bXXXXXXXXXXXXXXXXXXXXXXXX03xx"
-          label={<FormattedMessage id="App-secret" />}
+          label={intl.formatMessage({ id: 'App-secret' })}
         />
         <Text>
           <FormattedHTMLMessage id="edit-facebook-authentication-method-find-id-secret" />
@@ -131,7 +140,7 @@ export const FacebookConfigurationForm = (props: Props) => {
           submitting={submitting}
         />
         <Button onClick={hide} variantSize="small" variant="secondary">
-          <FormattedMessage id="global.cancel" />
+          {intl.formatMessage({ id: 'global.cancel' })}
         </Button>
         <Button
           type="submit"
@@ -139,25 +148,23 @@ export const FacebookConfigurationForm = (props: Props) => {
           variant="primary"
           variantSize="small"
           disabled={pristine || invalid || submitting}>
-          <FormattedMessage
-            id={
-              submitting
-                ? 'global.loading'
-                : ssoConfiguration && ssoConfiguration.enabled
-                ? 'global.save'
-                : 'action_enable'
-            }
-          />
+          {intl.formatMessage({
+            id: submitting
+              ? 'global.loading'
+              : ssoConfiguration && ssoConfiguration.enabled
+              ? 'global.save'
+              : 'action_enable',
+          })}
         </Button>
       </Modal.Footer>
     </form>
   );
 };
 
-const mapStateToProps = (state: GlobalState, props: Props) => {
+const mapStateToProps = (state: GlobalState, { ssoConfiguration }: Props) => {
   return {
     initialValues: {
-      ...props.ssoConfiguration,
+      ...ssoConfiguration,
     },
   };
 };
@@ -169,14 +176,4 @@ const form = reduxForm({
   form: formName,
 })(FacebookConfigurationForm);
 
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
-export default createFragmentContainer(container, {
-  ssoConfiguration: graphql`
-    fragment FacebookConfigurationForm_ssoConfiguration on FacebookSSOConfiguration {
-      __typename
-      clientId
-      secret
-      enabled
-    }
-  `,
-});
+export default connect<any, any, _, _, _, _>(mapStateToProps)(form);

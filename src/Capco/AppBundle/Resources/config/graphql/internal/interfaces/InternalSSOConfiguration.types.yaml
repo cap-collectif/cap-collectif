@@ -22,3 +22,6 @@ InternalSSOConfiguration:
             labelColor:
                 type: 'Color!'
                 description: 'Color in hexadecimal of label SSO button.'
+            isDisconnectSsoOnLogout:
+                type: 'Boolean!'
+                description: 'Whether or nor disconnect sso on logout.'

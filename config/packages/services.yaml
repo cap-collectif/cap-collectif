@@ -156,7 +156,6 @@ services:
         lazy: true
         arguments:
             $resourceOwner: '@hwi_oauth.resource_owner.franceconnect'
-            $environment: '%kernel.environment%'
             $tokenStorage: '@security.token_storage'
 
     Capco\AppBundle\Client\:

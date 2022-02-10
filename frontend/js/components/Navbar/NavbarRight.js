@@ -125,7 +125,7 @@ export const NavbarRight = ({
               {intl.formatMessage({ id: 'global.params' })}
             </MenuItem>
 
-            {features.disconnect_openid && (
+            {features.oauth2_switch_user && (
               <MenuItem {...menu} as={S.TabsLink} href="/logout?ssoSwitchUser=true">
                 <i className="cap cap-refresh mr-10" aria-hidden="true" />
                 {intl.formatMessage({ id: 'change-user' })}

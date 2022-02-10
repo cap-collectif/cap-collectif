@@ -21,7 +21,7 @@ export const LoginSocialButtons = ({ ssoList }: Props) => {
   const loginFranceConnect = useFeatureFlag('login_franceconnect');
   const hasLoginSaml = useFeatureFlag('login_saml');
   const hasLoginCas = useFeatureFlag('login_cas');
-  const hasDisconnectOpenId = useFeatureFlag('disconnect_openid');
+  const hasOauth2SwitchUser = useFeatureFlag('oauth2_switch_user');
   const hasSsoByPassAuth = useFeatureFlag('sso_by_pass_auth');
   const intl = useIntl();
 
@@ -55,7 +55,7 @@ export const LoginSocialButtons = ({ ssoList }: Props) => {
                     labelColor={labelColor}
                     buttonColor={buttonColor}
                     key={index}
-                    switchUserMode={hasDisconnectOpenId || false}
+                    switchUserMode={hasOauth2SwitchUser || false}
                     type="openId"
                   />
                 );

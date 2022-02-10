@@ -249,8 +249,8 @@
                         "description": "description.module.openId",
                         "onlySuperAdmin": false
                     },
-                    "disconnect_openid": {
-                        "title": "capco.module.disconnect_openid",
+                    "oauth2_switch_user": {
+                        "title": "capco.module.oauth2_switch_user",
                         "description": "",
                         "onlySuperAdmin": false,
                         "dependOf": ["openid"]

@@ -165,7 +165,7 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "disconnect_openid",
+      "type": "oauth2_switch_user",
     },
     Object {
       "enabled": false,

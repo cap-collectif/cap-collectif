@@ -40,7 +40,7 @@ class FeaturesCategoryResolver
                 UserRole::ROLE_ADMIN => Manager::ADMIN_ALLOWED_FEATURES,
                 UserRole::ROLE_SUPER_ADMIN => [
                     Manager::votes_min,
-                    Manager::disconnect_openid,
+                    Manager::oauth2_switch_user,
                     Manager::votes_evolution,
                     Manager::remind_user_account_confirmation,
                     Manager::server_side_rendering,

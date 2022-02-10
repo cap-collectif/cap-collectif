@@ -6,7 +6,7 @@ export const defaultFeatureFlags: FeatureFlags = {
     unstable__remote_events: false,
     login_saml: false,
     login_paris: false,
-    disconnect_openid: false,
+    oauth2_switch_user: false,
     votes_min: false,
     blog: false,
     calendar: false,
