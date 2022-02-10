@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal mutation.addProposalsFromCsv should import 1`] = `
+exports[`Internal mutation.addProposalsFromCsv should import as admin 1`] = `
 Object {
   "addProposalsFromCsv": Object {
     "badLines": Array [
@@ -31,6 +31,30 @@ Object {
 }
 `;
 
+exports[`Internal mutation.addProposalsFromCsv should import as project admin 1`] = `
+Object {
+  "addProposalsFromCsv": Object {
+    "badLines": Array [
+      2,
+      4,
+    ],
+    "duplicates": Array [
+      3,
+      5,
+      6,
+    ],
+    "errorCode": null,
+    "importableProposals": 0,
+    "importedProposals": Object {
+      "edges": Array [],
+    },
+    "mandatoryMissing": Array [
+      7,
+    ],
+  },
+}
+`;
+
 exports[`Internal mutation.addProposalsFromCsv should not import 1`] = `
 Object {
   "addProposalsFromCsv": Object {
@@ -50,6 +74,21 @@ Object {
     "mandatoryMissing": Array [
       7,
     ],
+  },
+}
+`;
+
+exports[`Internal mutation.addProposalsFromCsv should not import when project admin is not owner 1`] = `
+Object {
+  "addProposalsFromCsv": Object {
+    "badLines": Array [],
+    "duplicates": Array [],
+    "errorCode": "VIEWER_NOT_ALLOWED",
+    "importableProposals": 0,
+    "importedProposals": Object {
+      "edges": Array [],
+    },
+    "mandatoryMissing": Array [],
   },
 }
 `;

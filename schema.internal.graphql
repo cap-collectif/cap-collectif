@@ -10016,6 +10016,9 @@ enum ProposalImportsErrorCode {
 
   """Given CSV file contain over 501 lines"""
   TOO_MUCH_LINES
+
+  """Viewer is not allowed to import proposals"""
+  VIEWER_NOT_ALLOWED
 }
 
 """Available errors on proposal news mutation"""

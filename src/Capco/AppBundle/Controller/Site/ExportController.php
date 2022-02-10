@@ -314,7 +314,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-proposal-form-csv-model/{stepId}", name="app_export_step_proposal_form_csv_model", options={"i18n" = false})
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_PROJECT_ADMIN')")
      */
     public function downloadProposalFormCsvModelAction(Request $request, string $stepId): Response
     {
@@ -323,6 +323,14 @@ class ExportController extends Controller
         $output = new NullOutput();
 
         $proposalFormId = $step->getProposalFormId();
+        $proposalForm = $step->getProposalForm();
+        $viewer = $this->getUser();
+        $viewerIsNotProjectOwner =
+            $viewer->isOnlyProjectAdmin() && $proposalForm->getProject()->getOwner() !== $viewer;
+        if (!$proposalForm || $viewerIsNotProjectOwner) {
+            throw new AccessDeniedException();
+        }
+
         $this->runCommands(
             [
                 'capco:import-proposals:generate-header-csv' => [

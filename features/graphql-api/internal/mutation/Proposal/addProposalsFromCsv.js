@@ -35,7 +35,7 @@ describe('Internal mutation.addProposalsFromCsv', () => {
     expect(importProposals).toMatchSnapshot();
   });
 
-  it('should import', async () => {
+  it('should import as admin', async () => {
     const importInput = {
       ...input,
       dryRun: false,
@@ -45,6 +45,27 @@ describe('Internal mutation.addProposalsFromCsv', () => {
       AddProposalsFromCsvMutation,
       { input: importInput },
       'internal_admin',
+    );
+    expect(importProposals).toMatchSnapshot();
+  });
+  it('should import as project admin', async () => {
+    const importInput = {
+      ...input,
+      dryRun: false,
+    };
+
+    const importProposals = await graphql(
+      AddProposalsFromCsvMutation,
+      { input: importInput },
+      'internal_theo',
+    );
+    expect(importProposals).toMatchSnapshot();
+  });
+  it('should not import when project admin is not owner', async () => {
+    const importProposals = await graphql(
+      AddProposalsFromCsvMutation,
+      { input },
+      'internal_kiroule',
     );
     expect(importProposals).toMatchSnapshot();
   });

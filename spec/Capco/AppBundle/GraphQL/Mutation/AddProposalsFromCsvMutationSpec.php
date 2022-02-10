@@ -10,6 +10,7 @@ use Capco\AppBundle\Import\ImportProposalsFromCsv;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
+use Capco\UserBundle\Entity\User;
 use DG\BypassFinals;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -51,8 +52,10 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ImportProposalsFromCsv $importProposalsFromCsv,
         ProposalFormRepository $proposalFormRepository,
         ConnectionInterface $connection,
-        ConnectionBuilder $connectionBuilder
+        ConnectionBuilder $connectionBuilder,
+        User $viewer
     ) {
+        $viewer->isOnlyProjectAdmin()->willReturn(false);
         $input->offsetGet('csvToImport')->willReturn('MediaUUID');
         $media->getProviderReference()->willReturn('filename.csv');
         $mediaRepository->find('MediaUUID')->willReturn($media);
@@ -81,7 +84,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             'errorCode' => 'PROPOSAL_FORM_NOT_FOUND',
         ];
 
-        $this->__invoke($input)->shouldReturn($fail);
+        $this->__invoke($input, $viewer)->shouldReturn($fail);
     }
 
     public function it_return_an_error_file_is_empty(
@@ -93,8 +96,10 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ProposalFormRepository $proposalFormRepository,
         CollectStep $step,
         ConnectionInterface $connection,
-        ConnectionBuilder $connectionBuilder
+        ConnectionBuilder $connectionBuilder,
+        User $viewer
     ) {
+        $viewer->isOnlyProjectAdmin()->willReturn(false);
         BypassFinals::enable();
 
         $input->offsetGet('csvToImport')->willReturn('MediaUUID');
@@ -133,7 +138,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             'errorCode' => 'EMPTY_FILE',
         ];
 
-        $this->__invoke($input)->shouldReturn($fail);
+        $this->__invoke($input, $viewer)->shouldReturn($fail);
     }
 
     public function it_return_an_error_bad_data_model(
@@ -145,8 +150,10 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ProposalFormRepository $proposalFormRepository,
         CollectStep $step,
         ConnectionInterface $connection,
-        ConnectionBuilder $connectionBuilder
+        ConnectionBuilder $connectionBuilder,
+        User $viewer
     ) {
+        $viewer->isOnlyProjectAdmin()->willReturn(false);
         BypassFinals::enable();
 
         $input->offsetGet('csvToImport')->willReturn('MediaUUID');
@@ -186,7 +193,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             'errorCode' => 'BAD_DATA_MODEL',
         ];
 
-        $this->__invoke($input)->shouldReturn($fail);
+        $this->__invoke($input, $viewer)->shouldReturn($fail);
     }
 
     public function it_return_an_error_step_not_found(
@@ -196,8 +203,10 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ImportProposalsFromCsv $importProposalsFromCsv,
         ProposalForm $proposalForm,
         ProposalFormRepository $proposalFormRepository,
-        CollectStep $step
+        CollectStep $step,
+        User $viewer
     ) {
+        $viewer->isOnlyProjectAdmin()->willReturn(false);
         BypassFinals::enable();
 
         $input->offsetGet('csvToImport')->willReturn('MediaUUID');
@@ -220,6 +229,9 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             ->import(false, true, false)
             ->willThrow(new \RuntimeException('STEP_NOT_FOUND'));
 
-        $this->shouldThrow(new \RuntimeException('STEP_NOT_FOUND'))->during('__invoke', [$input]);
+        $this->shouldThrow(new \RuntimeException('STEP_NOT_FOUND'))->during('__invoke', [
+            $input,
+            $viewer,
+        ]);
     }
 }

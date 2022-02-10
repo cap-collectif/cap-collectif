@@ -16,6 +16,7 @@ use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Utils\Map;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -32,6 +33,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
     public const EMPTY_FILE = 'EMPTY_FILE';
     public const BAD_DATA_MODEL = 'BAD_DATA_MODEL';
     public const PROPOSAL_FORM_NOT_FOUND = 'PROPOSAL_FORM_NOT_FOUND';
+    public const VIEWER_NOT_ALLOWED = 'VIEWER_NOT_ALLOWED';
     protected EntityManagerInterface $om;
     protected MediaManager $mediaManager;
     protected ProposalDistrictRepository $districtRepository;
@@ -67,7 +69,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $this->em = $em;
     }
 
-    public function __invoke(Arg $input): array
+    public function __invoke(Arg $input, User $viewer): array
     {
         /** @var Media $media */
         $media = $this->mediaRepository->find($input->offsetGet('csvToImport'));
@@ -77,8 +79,9 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $this->importProposalsFromCsv->setDelimiter($input->offsetGet('delimiter'));
         /** @var ProposalForm $proposalForm */
         $proposalForm = $this->proposalFormRepository->find($input->offsetGet('proposalFormId'));
-
-        if (!$proposalForm) {
+        $viewerIsNotProjectOwner =
+            $viewer->isOnlyProjectAdmin() && $proposalForm->getProject()->getOwner() !== $viewer;
+        if (!$proposalForm || $viewerIsNotProjectOwner) {
             return [
                 'importableProposals' => 0,
                 'importedProposals' => $this->getConnection([], $input),
@@ -86,7 +89,9 @@ class AddProposalsFromCsvMutation implements MutationInterface
                 'badLines' => [],
                 'duplicates' => [],
                 'mandatoryMissing' => [],
-                'errorCode' => self::PROPOSAL_FORM_NOT_FOUND,
+                'errorCode' => $viewerIsNotProjectOwner
+                    ? self::VIEWER_NOT_ALLOWED
+                    : self::PROPOSAL_FORM_NOT_FOUND,
             ];
         }
         $this->importProposalsFromCsv->setProposalForm($proposalForm);

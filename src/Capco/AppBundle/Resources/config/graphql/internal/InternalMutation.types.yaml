@@ -349,7 +349,7 @@ InternalMutation:
                     payloadType: CreateProposalPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalMutation", [value, getUser()])'
             addProposalsFromCsv:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: InternalAddProposalsFromCsvInput

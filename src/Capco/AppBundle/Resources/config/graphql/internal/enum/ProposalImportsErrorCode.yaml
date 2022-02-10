@@ -16,3 +16,6 @@ ProposalImportsErrorCode:
             TOO_MUCH_LINES:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsFromCsvMutation::TOO_MUCH_LINES")'
                 description: 'Given CSV file contain over 501 lines'
+            VIEWER_NOT_ALLOWED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsFromCsvMutation::VIEWER_NOT_ALLOWED")'
+                description: 'Viewer is not allowed to import proposals'

@@ -89,6 +89,8 @@ export const ProposalCsvDropZoneInput = ({ input, onPostDrop, disabled }: FileUp
                       ? 'invalid-data-model'
                       : input.value.errorCode === 'TOO_MUCH_LINES'
                       ? 'error-import-max-proposals'
+                      : input.value.errorCode === 'VIEWER_NOT_ALLOWED'
+                      ? 'error-import-viewer-not-allowed'
                       : input.value.errorCode
                   }
                 />
