@@ -153,7 +153,7 @@ Array [
         }
       >
         <header
-          className="sc-bdvvtL hkuGAm cap-modal__header"
+          className="sc-bdvvtL ijabiQ cap-modal__header"
         >
           <div
             className="sc-bdvvtL hJgXxS"
@@ -529,7 +529,7 @@ Array [
           </form>
         </main>
         <footer
-          className="sc-bdvvtL gUJayl cap-modal__footer"
+          className="sc-bdvvtL cnmiif cap-modal__footer"
         >
           <div
             className="sc-bdvvtL gFvFYr cap-buttonGroup"

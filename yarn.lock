@@ -1538,10 +1538,10 @@
   resolved "https://registry.yarnpkg.com/@cap-collectif/form/-/form-0.1.2.tgz#6e9bfa88dda85ba7de11bbe9d6e5e54a57654b09"
   integrity sha512-rcOJHAnWknAGJ2OisqL6KcVLyUzwqLFy8fswePdPRuGvxLGbL8CotCp6Q/Zu3+xlsBnufzX4ykq2be5JU5OsWg==
 
-"@cap-collectif/ui@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-0.9.1.tgz#faead1dfcde86f91a3fe94fe634bc860e1d48ad5"
-  integrity sha512-q/sIQaqsKe2JhFxQ56YtgkPa1bpx9PMxLaiwZS/ItFktwhJsE4RRdKnVkh9ukGjZZT3mJ1Hu6UQJpwRYD/hRQw==
+"@cap-collectif/ui@^0.9.2":
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-0.9.2.tgz#a753965d97e79016db43c3a5e0020f241a4ba6d7"
+  integrity sha512-oznKTA55QP4D7vPqY+9qD1ReyBfJCAdpbJFy8jlLBAX6cTBgFn2AyKRoTOblvc+dIFcaJvls0ys3hAWI5Q4XPA==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
