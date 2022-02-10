@@ -22,14 +22,17 @@ UpdateProfilePublicDataInput:
                 type: 'URI'
                 description: 'Your website'
             linkedInUrl:
-                type: 'String'
+                type: 'URI'
                 description: 'Your linkedIn'
             facebookUrl:
-                type: 'String'
+                type: 'URI'
                 description: 'Your facebook'
             twitterUrl:
-                type: 'String'
+                type: 'URI'
                 description: 'Your twitter'
+            instagramUrl:
+                type: 'URI'
+                description: 'Your instagram'
             profilePageIndexed:
                 type: 'Boolean'
                 description: 'Whether or not this user profile page is indexed.'

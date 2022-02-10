@@ -21,6 +21,7 @@ describe('<UserAdminProfile/>', () => {
       websiteUrl: 'perd.u',
       facebookUrl: 'perd.u',
       twitterUrl: 'perd.u',
+      instagramUrl: 'perd.u',
       url: 'perd.u',
       userType: { id: '1' },
       profilePageIndexed: true,

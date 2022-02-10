@@ -32,6 +32,9 @@
                     {% if user.getFacebookUrl %}
                         <li><i class="cap cap-facebook"></i> <a class="external-link" href="{{ user.getFacebookUrl }}">{{ 'share.facebook' | trans({}, 'CapcoAppBundle')}}</a></li>
                     {% endif %}
+                    {% if user.getInstagramUrl %}
+                        <li><i class="cap cap-instagram"></i> <a class="external-link" href="{{ user.getInstagramUrl }}">{{ 'instagram' | trans({}, 'CapcoAppBundle')}}</a></li>
+                    {% endif %}
                     {% if user.getTwitterUrl %}
                         <li><i class="cap cap-twitter"></i> <a class="external-link" href="{{ user.getTwitterUrl }}">{{ 'user.profile.show.twitter' | trans({}, 'CapcoAppBundle')}}</a></li>
                     {% endif %}

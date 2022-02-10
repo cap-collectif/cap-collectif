@@ -294,6 +294,13 @@ exports[`<UserAdminPage/> should render 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "instagramUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "profilePageIndexed",
                       "storageKey": null,
                     },
@@ -461,7 +468,7 @@ exports[`<UserAdminPage/> should render 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c83cf253b2d737ffaaad57d4f1dd501b",
+          "cacheID": "23e8706508085e4064772c2634e5ef85",
           "id": null,
           "metadata": Object {},
           "name": "UserAdminPageQuery",
@@ -564,6 +571,7 @@ fragment UserAdminProfile_user on User {
   facebookUrl
   linkedInUrl
   twitterUrl
+  instagramUrl
   profilePageIndexed
   userType {
     id

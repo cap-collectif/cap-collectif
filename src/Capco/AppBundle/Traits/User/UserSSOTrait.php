@@ -26,6 +26,7 @@ trait UserSSOTrait
     protected ?string $twitter_id = null;
     protected ?string $twitter_access_token = null;
     protected ?string $twitterUrl = null;
+    protected ?string $instagramUrl = null;
 
     //linkedin
     protected ?string $linkedInUrl = null;
@@ -56,9 +57,15 @@ trait UserSSOTrait
         }
 
         if ('univ-lyon1' === $idp) {
-            $this->setUsername($attributes['urn:oid:2.5.4.42'][0] . ' ' . $attributes['urn:oid:2.5.4.4'][0]);
+            $this->setUsername(
+                $attributes['urn:oid:2.5.4.42'][0] . ' ' . $attributes['urn:oid:2.5.4.4'][0]
+            );
             $this->setEmail($attributes['urn:oid:0.9.2342.19200300.100.1.3'][0]);
-            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['urn:oid:0.9.2342.19200300.100.1.3'][0]));
+            $this->setEmailCanonical(
+                (new Canonicalizer())->canonicalize(
+                    $attributes['urn:oid:0.9.2342.19200300.100.1.3'][0]
+                )
+            );
         }
     }
 
@@ -146,6 +153,16 @@ trait UserSSOTrait
     public function setTwitterUrl(?string $twitterUrl): void
     {
         $this->twitterUrl = $twitterUrl;
+    }
+
+    public function getInstagramUrl(): ?string
+    {
+        return $this->instagramUrl;
+    }
+
+    public function setInstagramUrl(?string $instagramUrl): void
+    {
+        $this->instagramUrl = $instagramUrl;
     }
 
     public function getLinkedInUrl(): ?string

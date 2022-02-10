@@ -49,3 +49,6 @@ PublicUser:
             deletedAccountAt:
                 type: 'DateTime'
                 description: 'Identifies the date and time when this user account was deleted.'
+            instagramUrl:
+                type: 'URI'
+                description: "A URL pointing to the user's Instagram account."

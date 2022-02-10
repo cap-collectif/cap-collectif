@@ -169,6 +169,24 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
         component={[Function]}
         disabled={false}
         divClassName="col-sm-4"
+        id="public-data-form-instagram"
+        label={
+          <FormattedMessage
+            id="instagram-profile"
+            values={Object {}}
+          />
+        }
+        name="instagramUrl"
+        placeholder="https://"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
         id="public-data-form-twitter"
         label={
           <FormattedMessage
@@ -390,6 +408,24 @@ exports[`<UserAdminProfile/> should render, with user not confirmed by email adn
           />
         }
         name="facebookUrl"
+        placeholder="https://"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="public-data-form-instagram"
+        label={
+          <FormattedMessage
+            id="instagram-profile"
+            values={Object {}}
+          />
+        }
+        name="instagramUrl"
         placeholder="https://"
         type="text"
       />

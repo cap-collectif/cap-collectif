@@ -47,7 +47,8 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
               "biography": "I am a fucking customer",
               "facebookUrl": "https://facebook.com/mmm",
               "id": "user1234",
-              "linkedInUrl": "http://linkedin.com/neurchi",
+              "instagramUrl": "https://instagram.com/cuicui",
+              "linkedInUrl": "https://linkedin.com/neurchi",
               "media": Object {
                 "id": "media1",
                 "name": "media1",
@@ -56,7 +57,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
               },
               "neighborhood": "DTC",
               "profilePageIndexed": false,
-              "twitterUrl": "http://twitter.com/cuicui",
+              "twitterUrl": "https://twitter.com/cuicui",
               "userType": Object {
                 "id": "1",
               },
@@ -233,6 +234,30 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
       >
         <label
           className="col-sm-3 control-label"
+          htmlFor="public-data-form-instagram"
+        >
+          <FormattedMessage
+            id="instagram-profile"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-instagram"
+            name="instagramUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
           htmlFor="public-data-form-twitter"
         >
           <FormattedMessage
@@ -399,7 +424,8 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
               "biography": "I am a fucking customer",
               "facebookUrl": "https://facebook.com/mmm",
               "id": "user1234",
-              "linkedInUrl": "http://linkedin.com/neurchi",
+              "instagramUrl": "https://instagram.com/cuicui",
+              "linkedInUrl": "https://linkedin.com/neurchi",
               "media": Object {
                 "id": "media1",
                 "name": "media1",
@@ -408,7 +434,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
               },
               "neighborhood": "DTC",
               "profilePageIndexed": false,
-              "twitterUrl": "http://twitter.com/cuicui",
+              "twitterUrl": "https://twitter.com/cuicui",
               "userType": Object {
                 "id": "1",
               },
@@ -538,6 +564,30 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
             divClassName="col-sm-6"
             id="public-data-form-facebook"
             name="facebookUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-instagram"
+        >
+          <FormattedMessage
+            id="instagram-profile"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-instagram"
+            name="instagramUrl"
             placeholder="https://"
             type="text"
           />

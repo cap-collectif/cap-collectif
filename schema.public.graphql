@@ -169,6 +169,9 @@ type User implements Node & UniformResourceLocatable {
 
   """Identifies the date and time when this user account was deleted."""
   deletedAccountAt: DateTime
+
+  """A URL pointing to the user's Instagram account."""
+  instagramUrl: URI
 }
 
 """A connection to a list of items."""

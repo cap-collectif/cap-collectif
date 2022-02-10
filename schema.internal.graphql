@@ -15008,13 +15008,16 @@ input UpdateProfilePublicDataInput {
   websiteUrl: URI
 
   """Your linkedIn"""
-  linkedInUrl: String
+  linkedInUrl: URI
 
   """Your facebook"""
-  facebookUrl: String
+  facebookUrl: URI
 
   """Your twitter"""
-  twitterUrl: String
+  twitterUrl: URI
+
+  """Your instagram"""
+  instagramUrl: URI
 
   """Whether or not this user profile page is indexed."""
   profilePageIndexed: Boolean
@@ -15663,6 +15666,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
   """Identifies the date and time when this user account was deleted."""
   deletedAccountAt: DateTime
+
+  """A URL pointing to the user's Instagram account."""
+  instagramUrl: URI
 
   """The type of the person."""
   userType: UserType

@@ -60,6 +60,7 @@
         <field name="twitter_id" column="twitter_id" type="string" length="255" nullable="true" unique="true"/>
         <field name="twitter_access_token" column="twitter_access_token" type="string" length="255" nullable="true" />
         <field name="twitterUrl" column="twitter_url" type="string" length="255" nullable="true" />
+        <field name="instagramUrl" column="instagram_url" type="string" length="255" nullable="true" />
         <field name="websiteUrl" column="website_url" type="string" nullable="true"/>
         <field name="profilePageIndexed" column="profile_page_indexed" type="boolean" nullable="false">
             <options>

@@ -12,6 +12,13 @@ import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePublicDataMutation from '~/mutations/UpdateProfilePublicDataMutation';
 import { REGEX_USERNAME } from '~/constants/FormConstants';
+import {
+  fbRegEx,
+  instagramRegEx,
+  linkedInRegEx,
+  twitterRegEx,
+} from '~/components/Utils/SocialNetworkRegexUtils';
+import { isUrl } from '~/services/Validator';
 
 type RelayProps = {| user: UserAdminProfile_user, viewer: UserAdminProfile_viewer |};
 
@@ -31,6 +38,7 @@ type FormValues = {|
   +facebookUrl: ?string,
   +linkedInUrl: ?string,
   +twitterUrl: ?string,
+  +instagramUrl: ?string,
   doNotIndexProfile: ?boolean,
   userType: string,
   +neighborhood: ?string,
@@ -56,9 +64,10 @@ const validate = (values: Object) => {
     'biography',
     'websiteUrl',
     'neighborhood',
-    'linkedIn',
-    'twitter',
-    'facebook',
+    'linkedInUrl',
+    'twitterUrl',
+    'instagramUrl',
+    'facebookUrl',
     'username',
   ];
 
@@ -76,6 +85,38 @@ const validate = (values: Object) => {
       values[value] = null;
     }
 
+    if (values.facebookUrl && (!values.facebookUrl.match(fbRegEx) || !isUrl(values.facebookUrl))) {
+      errors.facebookUrl = {
+        id: 'error-invalid-facebook-url',
+      };
+    }
+    if (
+      values.twitterUrl &&
+      (!values.twitterUrl.match(twitterRegEx) || !isUrl(values.twitterUrl))
+    ) {
+      errors.twitterUrl = {
+        id: 'error-invalid-socialNetwork-url',
+        values: { SocialNetworkName: 'Twitter' },
+      };
+    }
+    if (
+      values.instagramUrl &&
+      (!values.instagramUrl.match(instagramRegEx) || !isUrl(values.instagramUrl))
+    ) {
+      errors.instagramUrl = {
+        id: 'error-invalid-socialNetwork-url',
+        values: { SocialNetworkName: 'Instagram' },
+      };
+    }
+    if (
+      values.linkedInUrl &&
+      (!values.linkedInUrl.match(linkedInRegEx) || !isUrl(values.linkedInUrl))
+    ) {
+      errors.linkedInUrl = {
+        id: 'error-invalid-socialNetwork-url',
+        values: { SocialNetworkName: 'LinkedIn' },
+      };
+    }
     if (values[value] && values[value].length < 2) {
       errors[value] = 'two-characters-minimum-required';
     }
@@ -95,8 +136,11 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const media =
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const userId = props.user.id;
-  const profilePageIndexed = typeof values.doNotIndexProfile !== 'undefined' ? !values.doNotIndexProfile : props.user.profilePageIndexed;
-  const { id, isViewer, url,doNotIndexProfile, ...rest } = values;
+  const profilePageIndexed =
+    typeof values.doNotIndexProfile !== 'undefined'
+      ? !values.doNotIndexProfile
+      : props.user.profilePageIndexed;
+  const { id, isViewer, url, doNotIndexProfile, ...rest } = values;
 
   const input = {
     ...rest,
@@ -239,6 +283,17 @@ export class UserAdminProfile extends React.Component<Props, State> {
             <div className="clearfix" />
             <Field
               placeholder="https://"
+              name="instagramUrl"
+              component={component}
+              type="text"
+              disabled={!isViewerOrSuperAdmin}
+              id="public-data-form-instagram"
+              divClassName="col-sm-4"
+              label={<FormattedMessage id="instagram-profile" />}
+            />
+            <div className="clearfix" />
+            <Field
+              placeholder="https://"
               name="twitterUrl"
               component={component}
               type="text"
@@ -317,6 +372,7 @@ const mapStateToProps = (state: GlobalState, { user, viewer }: RelayProps) => ({
     facebookUrl: user.facebookUrl ? user.facebookUrl : null,
     linkedInUrl: user.linkedInUrl ? user.linkedInUrl : null,
     twitterUrl: user.twitterUrl ? user.twitterUrl : null,
+    instagramUrl: user.instagramUrl ? user.instagramUrl : null,
     doNotIndexProfile: !user.profilePageIndexed,
     userType: user.userType ? user.userType.id : null,
     neighborhood: user.neighborhood ? user.neighborhood : null,
@@ -347,6 +403,7 @@ export default createFragmentContainer(container, {
       facebookUrl
       linkedInUrl
       twitterUrl
+      instagramUrl
       profilePageIndexed
       userType {
         id

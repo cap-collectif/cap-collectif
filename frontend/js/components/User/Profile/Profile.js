@@ -17,7 +17,13 @@ import {
   getSsoTradKey,
 } from '~/components/User/Profile/PersonalData';
 import { REGEX_USERNAME } from '~/constants/FormConstants';
-import { fbRegEx, linkedInRegEx, twitterRegEx } from '~/components/Utils/SocialNetworkRegexUtils';
+import {
+  fbRegEx,
+  instagramRegEx,
+  linkedInRegEx,
+  twitterRegEx,
+} from '~/components/Utils/SocialNetworkRegexUtils';
+import { isUrl } from '~/services/Validator';
 
 type RelayProps = {| viewer: Profile_viewer |};
 type Props = {|
@@ -39,6 +45,7 @@ const validate = (values: Object) => {
     'neighborhood',
     'linkedInUrl',
     'twitterUrl',
+    'instagramUrl',
     'facebookUrl',
     'username',
   ];
@@ -52,20 +59,40 @@ const validate = (values: Object) => {
         errors[value] = 'registration.constraints.username.symbol';
       }
     }
-    if (value === 'facebookUrl' && values[value] && values[value].length > 5) {
-      if (!values[value].match(fbRegEx)) {
-        errors[value] = 'not-fb-url-valide';
-      }
+    if (values.facebookUrl && (!values.facebookUrl.match(fbRegEx) || !isUrl(values.facebookUrl))) {
+      errors.facebookUrl = {
+        id: 'error-invalid-facebook-url',
+      };
     }
-    if (value === 'twitterUrl' && values[value] && values[value].length > 5) {
-      if (!values[value].match(twitterRegEx)) {
-        errors[value] = 'not-twitter-url-valide';
-      }
+
+    if (
+      values.twitterUrl &&
+      (!values.twitterUrl.match(twitterRegEx) || !isUrl(values.twitterUrl))
+    ) {
+      errors.twitterUrl = {
+        id: 'error-invalid-socialNetwork-url',
+        values: { SocialNetworkName: 'Twitter' },
+      };
     }
-    if (value === 'linkedInUrl' && values[value] && values[value].length > 5) {
-      if (!values[value].match(linkedInRegEx)) {
-        errors[value] = 'not-linkedin-url-valide';
-      }
+
+    if (
+      values.instagramUrl &&
+      (!values.instagramUrl.match(instagramRegEx) || !isUrl(values.instagramUrl))
+    ) {
+      errors.instagramUrl = {
+        id: 'error-invalid-socialNetwork-url',
+        values: { SocialNetworkName: 'Instagram' },
+      };
+    }
+
+    if (
+      values.linkedInUrl &&
+      (!values.linkedInUrl.match(linkedInRegEx) || !isUrl(values.linkedInUrl))
+    ) {
+      errors.linkedInUrl = {
+        id: 'error-invalid-socialNetwork-url',
+        values: { SocialNetworkName: 'LinkedIn' },
+      };
     }
     if (values[value] && values[value].length < 2) {
       errors[value] = 'two-characters-minimum-required';
@@ -295,6 +322,27 @@ export class Profile extends Component<Props> {
               </div>
             </div>
             <div className="horizontal_field_with_border_top no-border">
+              <label className="col-sm-3 control-label" htmlFor="public-data-form-instagram">
+                <FormattedMessage id="instagram-profile" />
+              </label>
+              <div>
+                <Field
+                  placeholder="https://"
+                  name="instagramUrl"
+                  component={component}
+                  disabled={window.location.hostname === occitanieUrl}
+                  type="text"
+                  id="public-data-form-instagram"
+                  divClassName="col-sm-6"
+                />
+                {isSsoFcOrOccitanie(false) && (
+                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                    <FormattedMessage id={getSsoTradKey()} />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="public-data-form-twitter">
                 <FormattedMessage id="user.profile.edit.twitter" />
               </label>
@@ -389,6 +437,7 @@ const mapStateToProps = (state: State, props: Props) => ({
     facebookUrl: props.viewer.facebookUrl ? props.viewer.facebookUrl : null,
     linkedInUrl: props.viewer.linkedInUrl ? props.viewer.linkedInUrl : null,
     twitterUrl: props.viewer.twitterUrl ? props.viewer.twitterUrl : null,
+    instagramUrl: props.viewer.instagramUrl ? props.viewer.instagramUrl : null,
     doNotIndexProfile: !props.viewer.profilePageIndexed,
     userType: props.viewer.userType ? props.viewer.userType.id : null,
     neighborhood: props.viewer.neighborhood ? props.viewer.neighborhood : null,
@@ -414,6 +463,7 @@ export default createFragmentContainer(container, {
       biography
       facebookUrl
       linkedInUrl
+      instagramUrl
       twitterUrl
       profilePageIndexed
       userType {

@@ -27,6 +27,7 @@ class PublicDataType extends AbstractType
     {
         $builder
             ->add('twitterUrl', UrlType::class)
+            ->add('instagramUrl', UrlType::class)
             ->add('facebookUrl', UrlType::class)
             ->add('linkedInUrl', UrlType::class)
             ->add('username', PurifiedTextType::class, [
