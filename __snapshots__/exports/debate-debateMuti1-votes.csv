@@ -1,6 +1,6 @@
-﻿vote_publishedAt,vote_type,vote_geoip_country_name,vote_geoip_region_name,vote_geoip_city_name,vote_author_id,vote_author_zipCode,vote_author_username,vote_author_isEmailConfirmed,vote_author_email,vote_author_userType_name,debate_url
-"2020-01-08 00:00:00",AGAINST,,,,VXNlcjp1c2VyNw==,,user7,1,user7@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
-"2020-01-09 00:00:00",AGAINST,,,,VXNlcjp1c2VyOA==,,user8,1,user8@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
-"2020-01-10 00:00:00",AGAINST,,,,VXNlcjp1c2VyOQ==,,user9,1,user9@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
-"2020-01-11 00:00:00",AGAINST,,,,VXNlcjp1c2VyMTA=,,user10,1,user10@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
-"2020-01-12 00:00:00",AGAINST,,,,VXNlcjp1c2VyMTE=,,user11,1,user11@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
+﻿vote_publishedAt,vote_type,vote_geoip_country_name,vote_geoip_region_name,vote_geoip_city_name,vote_source,vote_author_id,vote_author_zipCode,vote_author_username,vote_author_isEmailConfirmed,vote_author_email,vote_author_userType_name,debate_url
+"2020-01-08 00:00:00",AGAINST,,,,APPLICATION,VXNlcjp1c2VyNw==,,user7,1,user7@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
+"2020-01-09 00:00:00",AGAINST,,,,APPLICATION,VXNlcjp1c2VyOA==,,user8,1,user8@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
+"2020-01-10 00:00:00",AGAINST,,,,APPLICATION,VXNlcjp1c2VyOQ==,,user9,1,user9@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
+"2020-01-11 00:00:00",AGAINST,,,,APPLICATION,VXNlcjp1c2VyMTA=,,user10,1,user10@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
+"2020-01-12 00:00:00",AGAINST,,,,APPLICATION,VXNlcjp1c2VyMTE=,,user11,1,user11@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie
