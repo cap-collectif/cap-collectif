@@ -9303,28 +9303,12 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Count of paper votes of the proposal."""
   paperVotesTotalCount(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
     """If provided, retrieve only in this step."""
     stepId: ID
   ): Int!
 
   """Count of paper points of the proposal."""
   paperVotesTotalPointsCount(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
     """If provided, retrieve only in this step."""
     stepId: ID
   ): Int!

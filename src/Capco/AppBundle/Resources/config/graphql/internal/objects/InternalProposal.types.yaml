@@ -134,7 +134,6 @@ InternalProposal:
             paperVotesTotalCount:
                 description: 'Count of paper votes of the proposal.'
                 type: 'Int!'
-                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStepPaperVoteTotalCountResolver", [value, args])'
                 args:
                     stepId:
@@ -143,7 +142,6 @@ InternalProposal:
             paperVotesTotalPointsCount:
                 description: 'Count of paper points of the proposal.'
                 type: 'Int!'
-                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStepPaperVoteTotalPointsCountResolver", [value, args])'
                 args:
                     stepId:

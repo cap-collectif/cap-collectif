@@ -181,8 +181,12 @@ EOF;
         'proposal_reference' => 'reference',
         'proposal_title' => 'title',
         //Only published votes apparently
-        'proposal_votes_totalCount' => 'allVotes.totalCount',
-        'proposal_votes_totalPointsCount' => 'allVotes.totalPointsCount',
+        'proposal_votes_totalCount' => '',
+        'proposal_votes_digitalCount' => 'allVotes.totalCount',
+        'proposal_votes_paperCount' => 'paperVotesTotalCount',
+        'proposal_votes_totalPointsCount' => '',
+        'proposal_votes_digitalPointsCount' => 'allVotes.totalPointsCount',
+        'proposal_votes_paperPointsCount' => 'paperVotesTotalPointsCount',
         'proposal_createdAt' => 'createdAt',
         'proposal_publishedAt' => 'publishedAt',
         'proposal_updatedAt' => 'updatedAt',
@@ -596,6 +600,11 @@ EOF;
             $row[] = $val;
         } elseif ('reference' === $arr[0]) {
             $row[] = '"' . $proposal['reference'] . '"';
+        } elseif ('proposal_votes_totalCount' === $columnName) {
+            $row[] = $proposal['paperVotesTotalCount'] + $proposal['allVotes']['totalCount'];
+        } elseif ('proposal_votes_totalPointsCount' === $columnName) {
+            $row[] =
+                $proposal['paperVotesTotalPointsCount'] + $proposal['allVotes']['totalPointsCount'];
         } else {
             $val = $proposal;
             foreach ($arr as $a) {
@@ -1591,6 +1600,8 @@ ${COMMENT_VOTE_INFOS}
                 totalCount
                 totalPointsCount
             }
+            paperVotesTotalCount(stepId: "{$proposalStep->getId()}")
+            paperVotesTotalPointsCount(stepId: "{$proposalStep->getId()}")
             createdAt
             publishedAt
             updatedAt
