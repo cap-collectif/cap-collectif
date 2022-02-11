@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,6 +16,7 @@ use Symfony\Component\Routing\RouterInterface;
 class SiradelController extends AbstractController
 {
     use ResolverTrait;
+
     private UserUrlResolver $urlResolver;
     private UserIsGrantedResolver $isGrantedResolver;
     private RouterInterface $router;
@@ -37,6 +39,7 @@ class SiradelController extends AbstractController
      */
     public function getWebComponentUrls(Request $request): JsonResponse
     {
+        /** @var User $user */
         $user = $this->getUser();
 
         try {
@@ -46,15 +49,13 @@ class SiradelController extends AbstractController
         }
 
         $profileUrl = $this->urlResolver->__invoke($user);
-        $adminUrl = $analysisUrl = null;
-        if ($this->isGrantedResolver->isGranted($user)) {
-            $adminUrl = $this->router->generate(
-                'sonata_admin_dashboard',
-                [],
-                RouterInterface::ABSOLUTE_URL
-            );
-        }
-        if ($this->userRepository->isAssignedUsersOnProposal($user) || $user->isProjectAdmin()) {
+        $analysisUrl = null;
+        $adminUrl = $this->router->generate(
+            'sonata_admin_dashboard',
+            [],
+            RouterInterface::ABSOLUTE_URL
+        );
+        if ($this->userRepository->isAssignedUsersOnProposal($user)) {
             $analysisUrl = $this->router->generate(
                 'user_evaluations',
                 [],
@@ -62,25 +63,31 @@ class SiradelController extends AbstractController
             );
         }
 
+        $urls = [
+            [
+                'url' => $profileUrl,
+                'labelFr' => 'Mon profil',
+                'labelEn' => 'My profile',
+            ],
+        ];
+        if ($user && $user->isAdmin() || $user->isProjectAdmin()) {
+            $urls[] = [
+                'url' => $adminUrl,
+                'labelFr' => 'Administration',
+                'labelEn' => 'Administration',
+            ];
+        }
+        if ($user && $analysisUrl) {
+            $urls[] = [
+                'url' => $analysisUrl,
+                'labelFr' => 'Mes analyses',
+                'labelEn' => 'My analyses',
+            ];
+        }
+
         return $this->json(
             [
-                'urls' => [
-                    [
-                        'url' => $profileUrl,
-                        'labelFr' => 'Mon profil',
-                        'labelEn' => 'My profile',
-                    ],
-                    [
-                        'url' => $adminUrl,
-                        'labelFr' => 'Administration',
-                        'labelEn' => 'Administration',
-                    ],
-                    [
-                        'url' => $analysisUrl,
-                        'labelFr' => 'Mes analyses',
-                        'labelEn' => 'My analyses',
-                    ],
-                ],
+                'urls' => $urls,
             ],
             201
         );
