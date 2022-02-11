@@ -15,7 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorMap({
  *      "oauth2"           = "Oauth2SSOConfiguration",
  *      "franceconnect"    = "FranceConnectSSOConfiguration",
- *      "facebook"         = "FacebookSSOConfiguration"
+ *      "facebook"         = "FacebookSSOConfiguration",
+ *      "cas"              = "CASSSOConfiguration"
  * })
  */
 abstract class AbstractSSOConfiguration

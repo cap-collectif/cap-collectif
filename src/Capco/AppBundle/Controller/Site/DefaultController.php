@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Mailer\Message\MessagesList;
+use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Handler\CasHandler;
 use Doctrine\ORM\NoResultException;
@@ -56,9 +57,17 @@ class DefaultController extends Controller
     /**
      * @Route("/login-cas", name="cas_login", options={"i18n" = false}, defaults={"_feature_flags" = "login_cas"})
      */
-    public function loginCasAction(Request $request, CasHandler $casHandler)
-    {
-        return $casHandler->login($this->getSafeRedirectDestinationFromRequest($request));
+    public function loginCasAction(
+        Request $request,
+        CASSSOConfigurationRepository $repository,
+        CasHandler $casHandler
+    ) {
+        $configuration = $repository->findOneBy([]);
+        if ($configuration && $configuration->isEnabled()) {
+            return $casHandler->login($this->getSafeRedirectDestinationFromRequest($request));
+        }
+
+        return $this->redirectToRoute('app_homepage');
     }
 
     /**

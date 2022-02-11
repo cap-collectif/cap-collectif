@@ -404,6 +404,11 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:SSO\FacebookSSOConfiguration']
 
+    Capco\AppBundle\Repository\CASSSOConfigurationRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:SSO\CASSSOConfiguration']
+
     Capco\AppBundle\Repository\UserConnectionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true

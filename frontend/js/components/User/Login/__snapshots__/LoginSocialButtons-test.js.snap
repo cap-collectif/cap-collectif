@@ -11,9 +11,6 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
     type="saml"
   />
   <LoginSocialButton
-    type="cas"
-  />
-  <LoginSocialButton
     buttonColor="#ABABAB"
     key="0"
     labelColor="#FFFFFF"
@@ -25,6 +22,9 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
     justifyContent="center"
     key="1"
     type="franceConnect"
+  />
+  <LoginSocialButton
+    type="cas"
   />
   <p
     className="p--centered"
@@ -128,9 +128,6 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     type="saml"
   />
   <LoginSocialButton
-    type="cas"
-  />
-  <LoginSocialButton
     buttonColor="#ABABAB"
     key="0"
     labelColor="#FFFFFF"
@@ -142,6 +139,9 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     justifyContent="center"
     key="1"
     type="franceConnect"
+  />
+  <LoginSocialButton
+    type="cas"
   />
 </Fragment>
 `;

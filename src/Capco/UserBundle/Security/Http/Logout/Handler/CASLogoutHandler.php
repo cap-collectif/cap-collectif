@@ -2,6 +2,8 @@
 
 namespace Capco\UserBundle\Security\Http\Logout\Handler;
 
+use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
+use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Handler\CasHandler;
 
@@ -11,12 +13,16 @@ use Capco\UserBundle\Handler\CasHandler;
 class CASLogoutHandler implements LogoutHandlerInterface
 {
     private Manager $toggleManager;
-
+    private ?CASSSOConfiguration $configuration;
     private CasHandler $casHandler;
 
-    public function __construct(Manager $toggleManager, CasHandler $casHandler)
-    {
+    public function __construct(
+        Manager $toggleManager,
+        CASSSOConfigurationRepository $repository,
+        CasHandler $casHandler
+    ) {
         $this->toggleManager = $toggleManager;
+        $this->configuration = $repository->findOneBy([]);
         $this->casHandler = $casHandler;
     }
 
@@ -26,7 +32,11 @@ class CASLogoutHandler implements LogoutHandlerInterface
     public function handle(
         RedirectResponseWithRequest $responseWithRequest
     ): RedirectResponseWithRequest {
-        if ($this->toggleManager->isActive('login_cas')) {
+        if (
+            $this->toggleManager->isActive('login_cas') &&
+            $this->configuration &&
+            $this->configuration->isEnabled()
+        ) {
             $responseWithRequest
                 ->getRequest()
                 ->getSession()

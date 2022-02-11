@@ -28,7 +28,11 @@ export const LoginSocialButtons = ({ ssoList }: Props) => {
   if (
     !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'facebook').length > 0) &&
     !hasLoginSaml &&
-    !hasLoginCas &&
+    !(
+      hasLoginCas &&
+      ssoList.length > 0 &&
+      ssoList.filter(sso => sso.ssoType === 'cas').length > 0
+    ) &&
     !(ssoList.length > 0 && ssoList.filter(sso => sso.ssoType === 'oauth2').length > 0) &&
     !loginFranceConnect
   ) {
@@ -40,7 +44,6 @@ export const LoginSocialButtons = ({ ssoList }: Props) => {
     <>
       <div className="font-weight-semi-bold">{intl.formatMessage({ id: 'authenticate-with' })}</div>
       {hasLoginSaml && <LoginSocialButton type="saml" />}
-      {hasLoginCas && <LoginSocialButton type="cas" />}
       {ssoList.length > 0 &&
         ssoList.map(
           (
@@ -67,6 +70,8 @@ export const LoginSocialButtons = ({ ssoList }: Props) => {
                 );
               case 'facebook':
                 return <LoginSocialButton type="facebook" />;
+              case 'cas':
+                return hasLoginCas ? <LoginSocialButton type="cas" /> : null;
               default:
                 break;
             }

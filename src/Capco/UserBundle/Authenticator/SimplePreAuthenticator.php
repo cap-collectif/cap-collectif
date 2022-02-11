@@ -2,6 +2,8 @@
 
 namespace Capco\UserBundle\Authenticator;
 
+use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
+use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -14,14 +16,17 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
     protected ?SamlAuthenticator $samlAuthenticator;
     protected MonCompteParisAuthenticator $parisAuthenticator;
     protected ?CasAuthenticator $casAuthenticator;
+    private ?CASSSOConfiguration $casConfiguration;
 
     public function __construct(
         Manager $toggleManager,
+        CASSSOConfigurationRepository $CASSSOConfigurationRepository,
         MonCompteParisAuthenticator $parisAuthenticator,
         ?SamlAuthenticator $samlAuthenticator = null,
         ?CasAuthenticator $casAuthenticator = null
     ) {
         $this->toggleManager = $toggleManager;
+        $this->casConfiguration = $CASSSOConfigurationRepository->findOneBy([]);
         $this->parisAuthenticator = $parisAuthenticator;
         $this->samlAuthenticator = $samlAuthenticator;
         $this->casAuthenticator = $casAuthenticator;
@@ -64,7 +69,11 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
         if ($this->toggleManager->isActive('login_paris')) {
             return $this->parisAuthenticator;
         }
-        if ($this->toggleManager->isActive('login_cas')) {
+        if (
+            $this->toggleManager->isActive('login_cas') &&
+            $this->casConfiguration &&
+            $this->casConfiguration->isEnabled()
+        ) {
             return $this->casAuthenticator;
         }
 

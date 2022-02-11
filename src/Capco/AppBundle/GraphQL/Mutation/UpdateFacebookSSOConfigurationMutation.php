@@ -37,7 +37,7 @@ class UpdateFacebookSSOConfigurationMutation implements MutationInterface
 
     private function getConfiguration(): FacebookSSOConfiguration
     {
-        $configuration = $this->repository->get();
+        $configuration = $this->repository->findOneBy([]);
         if (null === $configuration) {
             $configuration = new FacebookSSOConfiguration();
             $this->em->persist($configuration);

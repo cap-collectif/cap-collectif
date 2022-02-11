@@ -2,8 +2,9 @@
 
 namespace Capco\UserBundle\Handler;
 
+use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
+use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -17,19 +18,19 @@ use phpCAS;
 class CasHandler
 {
     private SessionInterface $session;
-    private ContainerBagInterface $params;
     private LoggerInterface $logger;
+    private ?CASSSOConfiguration $configuration;
     private string $environment;
 
     public function __construct(
         SessionInterface $session,
-        ContainerBagInterface $params,
         LoggerInterface $logger,
+        CASSSOConfigurationRepository $repository,
         string $environment
     ) {
         $this->session = $session;
-        $this->params = $params;
         $this->logger = $logger;
+        $this->configuration = $repository->findOneBy([]);
         $this->environment = $environment;
     }
 
@@ -47,7 +48,7 @@ class CasHandler
             phpCAS::setNoCasServerValidation();
         } else {
             // Set the certificate of the CAS server CA and if the CN should be properly verified, Example: certificate path (/path/to/vtca_cachain.pem)
-            phpCAS::setCasServerCACert($this->params->get('cas_certificate_file'));
+            phpCAS::setCasServerCACert($this->getConfiguration()->getCasCertificateFile());
         }
 
         // Check CAS authentication
@@ -99,12 +100,45 @@ class CasHandler
 
     private function initializeClient(): void
     {
+        $serverURL = $this->getServerUrlParts();
+
         // Initialize phpCAS
         phpCAS::client(
-            CAS_VERSION_2_0,
-            $this->params->get('cas_host'),
-            (int) $this->params->get('cas_port'),
-            $this->params->get('cas_context')
+            $this->getVersion(),
+            $serverURL['host'],
+            (int) $serverURL['port'],
+            $serverURL['path']
         );
+    }
+
+    private function getVersion(): string
+    {
+        $versions = [
+            1 => CAS_VERSION_1_0,
+            2 => CAS_VERSION_2_0,
+            3 => CAS_VERSION_3_0,
+        ];
+
+        return $versions[$this->getConfiguration()->getCasVersion()];
+    }
+
+    private function getServerUrlParts(): array
+    {
+        $serverUrl = $this->getConfiguration()->getCasServerUrl();
+
+        return [
+            'host' => parse_url($serverUrl, \PHP_URL_HOST),
+            'port' => parse_url($serverUrl, \PHP_URL_PORT),
+            'path' => parse_url($serverUrl, \PHP_URL_PATH),
+        ];
+    }
+
+    private function getConfiguration(): CASSSOConfiguration
+    {
+        if (null === $this->configuration) {
+            throw new \RuntimeException(self::class . ' : configuration not found');
+        }
+
+        return $this->configuration;
     }
 }

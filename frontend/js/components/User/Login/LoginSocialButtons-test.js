@@ -19,6 +19,12 @@ describe('<LoginSocialButtons />', () => {
       labelColor: '',
       buttonColor: '',
     },
+    {
+      name: 'Cap Collectif CAS Provider',
+      ssoType: 'cas',
+      labelColor: '#FFFFFF',
+      buttonColor: '#ABABAB',
+    },
   ];
 
   const props = {
@@ -31,7 +37,14 @@ describe('<LoginSocialButtons />', () => {
     ssoList: [],
   };
   const propsWithFeatureLoginCasActivated = {
-    ssoList: [],
+    ssoList: [
+      {
+        name: 'Cap Collectif CAS Provider',
+        ssoType: 'cas',
+        labelColor: '#FFFFFF',
+        buttonColor: '#ABABAB',
+      },
+    ],
   };
   const propsWithFeatureLoginOpenIDActivated = {
     ssoList: [

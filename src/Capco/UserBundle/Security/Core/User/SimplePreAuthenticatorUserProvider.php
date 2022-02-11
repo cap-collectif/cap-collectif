@@ -2,6 +2,8 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
+use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
+use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -11,17 +13,20 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 class SimplePreAuthenticatorUserProvider implements UserProviderInterface
 {
     private Manager $toggleManager;
+    private ?CASSSOConfiguration $casConfiguration;
     private ?SamlUserProvider $samlProvider;
     private MonCompteParisUserProvider $parisProvider;
     private ?CasUserProvider $casProvider;
 
     public function __construct(
         Manager $toggleManager,
+        CASSSOConfigurationRepository $CASSSOConfigurationRepository,
         ?SamlUserProvider $samlProvider,
         MonCompteParisUserProvider $parisProvider,
         ?CasUserProvider $casProvider
     ) {
         $this->toggleManager = $toggleManager;
+        $this->casConfiguration = $CASSSOConfigurationRepository->findOneBy([]);
         $this->samlProvider = $samlProvider;
         $this->parisProvider = $parisProvider;
         $this->casProvider = $casProvider;
@@ -64,7 +69,11 @@ class SimplePreAuthenticatorUserProvider implements UserProviderInterface
         if ($this->toggleManager->isActive('login_paris')) {
             return $this->parisProvider;
         }
-        if ($this->toggleManager->isActive('login_cas')) {
+        if (
+            $this->toggleManager->isActive('login_cas') &&
+            $this->casConfiguration &&
+            $this->casConfiguration->isEnabled()
+        ) {
             return $this->casProvider;
         }
 

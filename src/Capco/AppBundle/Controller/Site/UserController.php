@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\FacebookSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
@@ -48,25 +49,31 @@ class UserController extends AbstractController
         $loginCas = $toggleManager->isActive('login_cas');
         $loginParis = $toggleManager->isActive('login_paris');
 
-        $ssoList = array_filter($ssoConfigurations, function ($sso) {
-            return $sso instanceof Oauth2SSOConfiguration && true === $sso->isEnabled();
+        $ssoList = array_filter($ssoConfigurations, function ($sso) use ($loginCas) {
+            return ($sso instanceof Oauth2SSOConfiguration ||
+                ($sso instanceof CASSSOConfiguration && $loginCas)) &&
+                true === $sso->isEnabled();
         });
 
         $ssoList = array_values(
             array_map(function ($sso) {
-                return [
-                    'type' => 'oauth2',
-                    'name' => $sso->getName(),
-                ];
+                if ($sso instanceof Oauth2SSOConfiguration) {
+                    return [
+                        'type' => 'oauth2',
+                        'name' => $sso->getName(),
+                    ];
+                }
+                if ($sso instanceof CASSSOConfiguration) {
+                    return [
+                        'type' => 'cas',
+                        'name' => $sso->getName(),
+                    ];
+                }
             }, $ssoList)
         );
 
         if ($loginSaml) {
             $ssoList[] = ['type' => 'saml', 'name' => 'Saml'];
-        }
-
-        if ($loginCas) {
-            $ssoList[] = ['type' => 'cas', 'name' => 'Cas'];
         }
 
         $hasEnabledSSO =
