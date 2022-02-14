@@ -49,7 +49,7 @@ export class UnpublishedProposalListView extends React.Component<Props> {
             step={step}
             proposals={step.viewerProposalsUnpublished}
             viewer={viewer}
-            view="grid"
+            view="GRID"
             id="proposals-unpublished-list"
           />
         </Panel.Body>

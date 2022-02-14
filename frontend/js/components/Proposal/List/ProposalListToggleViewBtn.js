@@ -66,12 +66,12 @@ export const ProposalListToggleViewBtn = ({
         {displayModeEnabled.isListViewEnabled && (
           <Button
             bsStyle="default"
-            active={displayMode === 'list'}
+            active={displayMode === 'LIST'}
             role="checkbox"
-            aria-checked={displayMode === 'list'}
-            title={displayMode === 'list' ? intl.formatMessage({ id: 'table-selected' }) : null}
+            aria-checked={displayMode === 'LIST'}
+            title={displayMode === 'LIST' ? intl.formatMessage({ id: 'table-selected' }) : null}
             style={{ flex: '1 0 auto' }}
-            onClick={() => setDisplayMode('list')}>
+            onClick={() => setDisplayMode('LIST')}>
             <i className="cap cap-android-menu" /> <FormattedMessage id="global.list" />
           </Button>
         )}
@@ -79,12 +79,12 @@ export const ProposalListToggleViewBtn = ({
         {displayModeEnabled.isGridViewEnabled && (
           <Button
             bsStyle="default"
-            active={displayMode === 'grid'}
+            active={displayMode === 'GRID'}
             role="checkbox"
-            aria-checked={displayMode === 'grid'}
-            title={displayMode === 'grid' ? intl.formatMessage({ id: 'mosaic-selected' }) : null}
+            aria-checked={displayMode === 'GRID'}
+            title={displayMode === 'GRID' ? intl.formatMessage({ id: 'mosaic-selected' }) : null}
             style={{ flex: '1 0 auto' }}
-            onClick={() => setDisplayMode('grid')}>
+            onClick={() => setDisplayMode('GRID')}>
             <i className="cap cap-th-large" /> <FormattedMessage id="grid" />
           </Button>
         )}
@@ -94,10 +94,10 @@ export const ProposalListToggleViewBtn = ({
             bsStyle="default"
             style={{ flex: '1 0 auto' }}
             role="checkbox"
-            aria-checked={displayMode === 'map'}
-            title={displayMode === 'map' ? intl.formatMessage({ id: 'map-selected' }) : null}
-            active={displayMode === 'map'}
-            onClick={() => setDisplayMode('map')}>
+            aria-checked={displayMode === 'MAP'}
+            title={displayMode === 'MAP' ? intl.formatMessage({ id: 'map-selected' }) : null}
+            active={displayMode === 'MAP'}
+            onClick={() => setDisplayMode('MAP')}>
             <i className="cap cap-map-location" />
             <FormattedMessage id="capco.module.display_map" />
           </Button>

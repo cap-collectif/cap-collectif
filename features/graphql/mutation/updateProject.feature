@@ -413,7 +413,7 @@ Scenario: GraphQL client wants to update project with votesMin greater than vote
                   "isEnabled":true,
                   "title":"Le beau titre de l'étape CollectStep",
                   "label":"CollectStep",
-                  "mainView":"grid",
+                  "mainView":"GRID",
                   "votesMin":3,
                   "votesLimit":1
                }
@@ -517,7 +517,7 @@ Scenario: GraphQL client wants to update project with votesMin below 1
                   "isEnabled":true,
                   "title":"Le beau titre de l'étape CollectStep",
                   "label":"CollectStep",
-                  "mainView":"grid",
+                  "mainView":"GRID",
                   "votesMin":0,
                   "votesLimit":1
                }

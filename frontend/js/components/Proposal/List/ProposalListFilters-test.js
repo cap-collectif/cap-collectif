@@ -50,7 +50,7 @@ describe('<ProposalListFilters />', () => {
       statuses: null,
       types: null,
     },
-    displayMode: 'grid',
+    displayMode: 'GRID',
   };
 
   it('should render correctly', () => {

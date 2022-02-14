@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form\Persister;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ViewConfiguration;
 use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Diff;
@@ -188,7 +189,7 @@ class ProjectStepPersister
         if (!isset($stepData['mainView'])) {
             $stepData['mainView'] = $project->getFirstCollectStep()
                 ? $project->getFirstCollectStep()->getMainView()
-                : 'grid';
+                : ViewConfiguration::GRID;
         }
     }
 }

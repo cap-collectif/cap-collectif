@@ -78,14 +78,14 @@ export class ProposalList extends React.Component<Props> {
       <React.Fragment>
         {proposalsVisiblePublicly.edges && proposalsVisiblePublicly.edges.length > 0 && (
           <React.Fragment>
-            {view === 'grid'
+            {view === 'GRID'
               ? renderProposals(proposalsVisiblePublicly, step, viewer)
               : renderProposalListTableView(proposalsVisiblePublicly, step)}
           </React.Fragment>
         )}
         {proposalsVisibleOnlyByViewer.edges && proposalsVisibleOnlyByViewer.edges.length > 0 && (
           <VisibilityBox enabled>
-            {view === 'grid'
+            {view === 'GRID'
               ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer)
               : renderProposalListTableView(proposalsVisibleOnlyByViewer, step)}
           </VisibilityBox>

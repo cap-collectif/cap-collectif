@@ -2176,8 +2176,8 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     first: Int = 100
   ): ProposalConnection!
 
-  """The main view : grid, list or map"""
-  mainView: String!
+  """The main view : GRID, LIST or MAP"""
+  mainView: MainView!
 
   """
   Whether or not authors can add news on proposals collected in this step
@@ -6651,6 +6651,18 @@ interface MailingListOwner {
   ): MailingListConnection!
 }
 
+"""The main view : GRID, LIST or MAP"""
+enum MainView {
+  """View proposals as GRID"""
+  GRID
+
+  """View proposals as LIST"""
+  LIST
+
+  """View proposals as MAP"""
+  MAP
+}
+
 """Data corresponding to one majority question choice"""
 type MajorityChoice {
   choice: MajorityChoiceType!
@@ -9010,8 +9022,8 @@ input ProjectStepInput {
   allowingProgressSteps: Boolean
   statuses: [StepStatusInput]
 
-  """the default view : grid, list or map"""
-  mainView: String
+  """the default view : GRID, LIST or MAP"""
+  mainView: MainView
   private: Boolean
   proposalForm: ID
   defaultStatus: ID
@@ -9843,13 +9855,13 @@ type ProposalForm implements Node & UniformResourceLocatable {
   """The configuration for the related analysis."""
   analysisConfiguration: AnalysisConfiguration
 
-  """True if the grid view is enabled."""
+  """True if the GRID view is enabled."""
   isGridViewEnabled: Boolean!
 
-  """True if the grid view is enabled."""
+  """True if the LIST view is enabled."""
   isListViewEnabled: Boolean!
 
-  """True if the grid view is enabled."""
+  """True if the MAP view is enabled."""
   isMapViewEnabled: Boolean!
 
   """True if tipsmeee is enabled."""
@@ -13142,8 +13154,8 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     first: Int = 100
   ): UserConnection!
 
-  """The main view : grid, list or map"""
-  mainView: String!
+  """The main view : GRID, LIST or MAP"""
+  mainView: MainView!
   defaultStatus: ProposalStepStatus
   isAnalysisStep: Boolean!
 }
@@ -15143,13 +15155,13 @@ input UpdateProposalFormInput {
   """can the viewer send a contact message to the proposals author"""
   canContact: Boolean
 
-  """can the viewer see the proposals as a grid"""
+  """can the viewer see the proposals as a GRID"""
   isGridViewEnabled: Boolean
 
-  """can the viewer see the proposals as a list"""
+  """can the viewer see the proposals as a LIST"""
   isListViewEnabled: Boolean
 
-  """can the viewer see the proposals as a map"""
+  """can the viewer see the proposals as a MAP"""
   isMapViewEnabled: Boolean
 
   """Proposal form using tipsmeee field"""

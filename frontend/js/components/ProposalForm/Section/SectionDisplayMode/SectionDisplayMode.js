@@ -72,41 +72,41 @@ export const zoomLevels = [
 
 const getStepsDependOfView = (
   proposalForm: SectionDisplayMode_proposalForm,
-  viewSearched: 'grid' | 'list' | 'map',
+  viewSearched: 'GRID' | 'LIST' | 'MAP',
 ) => {
   const firstCollectStep = proposalForm.step?.project?.firstCollectStep;
 
   return proposalForm.step?.project?.steps.filter(Boolean).filter(step => {
     if (step.__typename === 'CollectStep') {
-      if (step.mainView === 'grid' && step.form?.isGridViewEnabled && viewSearched === 'grid')
+      if (step.mainView === 'GRID' && step.form?.isGridViewEnabled && viewSearched === 'GRID')
         return true;
-      if (step.mainView === 'list' && step.form?.isListViewEnabled && viewSearched === 'list')
+      if (step.mainView === 'LIST' && step.form?.isListViewEnabled && viewSearched === 'LIST')
         return true;
-      if (step.mainView === 'map' && step.form?.isMapViewEnabled && viewSearched === 'map')
+      if (step.mainView === 'MAP' && step.form?.isMapViewEnabled && viewSearched === 'MAP')
         return true;
     }
 
     if (step.__typename === 'SelectionStep') {
       if (
-        step.mainView === 'grid' &&
+        step.mainView === 'GRID' &&
         firstCollectStep?.form?.isGridViewEnabled &&
-        viewSearched === 'grid'
+        viewSearched === 'GRID'
       ) {
         return true;
       }
 
       if (
-        step.mainView === 'list' &&
+        step.mainView === 'LIST' &&
         firstCollectStep?.form?.isListViewEnabled &&
-        viewSearched === 'list'
+        viewSearched === 'LIST'
       ) {
         return true;
       }
 
       if (
-        step.mainView === 'map' &&
+        step.mainView === 'MAP' &&
         firstCollectStep?.form?.isMapViewEnabled &&
-        viewSearched === 'map'
+        viewSearched === 'MAP'
       ) {
         return true;
       }
@@ -191,9 +191,9 @@ export const SectionDisplayMode = ({
   const isMapDisplay = isMapViewEnabled && isOpen;
   const position = [latitude || LOCATION_PARIS.lat, longitude || LOCATION_PARIS.lng];
 
-  const stepsGrid = getStepsDependOfView(proposalForm, 'grid');
-  const stepsList = getStepsDependOfView(proposalForm, 'list');
-  const stepsMap = getStepsDependOfView(proposalForm, 'map');
+  const stepsGrid = getStepsDependOfView(proposalForm, 'GRID');
+  const stepsList = getStepsDependOfView(proposalForm, 'LIST');
+  const stepsMap = getStepsDependOfView(proposalForm, 'MAP');
 
   const updateInfoLocation = React.useCallback(
     (dataLocation: AddressCompleteFormatted, previewLocationDisplay: string) => {
@@ -351,7 +351,7 @@ export const SectionDisplayMode = ({
             stepsList && stepsList.length > 0
               ? {
                   width: '360px',
-                  content: <PopoverToggleView proposalForm={proposalForm} typeView="list" />,
+                  content: <PopoverToggleView proposalForm={proposalForm} typeView="LIST" />,
                 }
               : null
           }
@@ -368,7 +368,7 @@ export const SectionDisplayMode = ({
             stepsGrid && stepsGrid.length > 0
               ? {
                   width: '360px',
-                  content: <PopoverToggleView proposalForm={proposalForm} typeView="grid" />,
+                  content: <PopoverToggleView proposalForm={proposalForm} typeView="GRID" />,
                 }
               : null
           }
@@ -387,7 +387,7 @@ export const SectionDisplayMode = ({
             stepsMap && stepsMap.length > 0
               ? {
                   width: '360px',
-                  content: <PopoverToggleView proposalForm={proposalForm} typeView="map" />,
+                  content: <PopoverToggleView proposalForm={proposalForm} typeView="MAP" />,
                 }
               : null
           }

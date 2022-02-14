@@ -141,31 +141,31 @@ describe('<ProposalStepPageHeader />', () => {
   });
 
   it('renders with proposal context in selection step', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step1} displayMode="grid" />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step1} displayMode="GRID" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with interpellation context in selection step', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step2} displayMode="grid" />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step2} displayMode="GRID" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with question context in selection step', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step3} displayMode="grid" />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step3} displayMode="GRID" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with proposal context in collect step', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step4} displayMode="grid" />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step4} displayMode="GRID" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with interpellation context in collect step', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step5} displayMode="grid" />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step5} displayMode="GRID" />);
     expect(wrapper).toMatchSnapshot();
   });
   it('renders with a map view', () => {
-    const wrapper = shallow(<ProposalStepPageHeader step={props.step1} displayMode="map" />);
+    const wrapper = shallow(<ProposalStepPageHeader step={props.step1} displayMode="MAP" />);
     expect(wrapper).toMatchSnapshot();
   });
 });

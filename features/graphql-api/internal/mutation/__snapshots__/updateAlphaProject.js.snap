@@ -52,7 +52,7 @@ Object {
           },
           "id": Any<String>,
           "isSecretBallot": false,
-          "mainView": "grid",
+          "mainView": "GRID",
           "private": false,
           "publishedVoteDate": null,
           "requirements": Object {
@@ -103,7 +103,7 @@ Object {
           "enabled": true,
           "id": Any<String>,
           "isSecretBallot": true,
-          "mainView": "list",
+          "mainView": "LIST",
           "publishedVoteDate": "2030-01-01 00:00:00",
           "requirements": Object {
             "edges": Array [],
@@ -186,7 +186,7 @@ Object {
           },
           "id": Any<String>,
           "isSecretBallot": false,
-          "mainView": "grid",
+          "mainView": "GRID",
           "private": false,
           "publishedVoteDate": null,
           "requirements": Object {
@@ -221,7 +221,7 @@ Object {
           "enabled": true,
           "id": Any<String>,
           "isSecretBallot": true,
-          "mainView": "list",
+          "mainView": "LIST",
           "publishedVoteDate": "2030-01-01 00:00:00",
           "requirements": Object {
             "edges": Array [],
@@ -304,7 +304,7 @@ Object {
           },
           "id": Any<String>,
           "isSecretBallot": false,
-          "mainView": "grid",
+          "mainView": "GRID",
           "private": false,
           "publishedVoteDate": null,
           "requirements": Object {

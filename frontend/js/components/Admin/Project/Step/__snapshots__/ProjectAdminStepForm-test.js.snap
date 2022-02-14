@@ -377,7 +377,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
           isGridViewEnabled={false}
           isListViewEnabled={true}
           isMapViewEnabled={false}
-          mainView="grid"
+          mainView="GRID"
           pristine={true}
           project={
             Object {
@@ -403,7 +403,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
               "isEnabled": true,
               "isSecretBallot": false,
               "label": "au bois dormant",
-              "mainView": "grid",
+              "mainView": "GRID",
               "metaDescription": "oeoeoe",
               "startAt": "date",
               "timeless": false,
@@ -804,7 +804,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
           isGridViewEnabled={false}
           isListViewEnabled={true}
           isMapViewEnabled={false}
-          mainView="grid"
+          mainView="GRID"
           pristine={true}
           project={
             Object {
@@ -830,7 +830,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
               "isEnabled": true,
               "isSecretBallot": false,
               "label": "au bois dormant",
-              "mainView": "grid",
+              "mainView": "GRID",
               "metaDescription": "oeoeoe",
               "startAt": "date",
               "timeless": false,

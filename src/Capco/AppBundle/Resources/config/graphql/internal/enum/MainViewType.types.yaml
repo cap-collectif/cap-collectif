@@ -1,0 +1,14 @@
+MainView:
+    type: enum
+    config:
+        description: 'The main view : GRID, LIST or MAP'
+        values:
+            GRID:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ViewConfiguration::GRID")'
+                description: 'View proposals as GRID'
+            LIST:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ViewConfiguration::LIST")'
+                description: 'View proposals as LIST'
+            MAP:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ViewConfiguration::MAP")'
+                description: 'View proposals as MAP'

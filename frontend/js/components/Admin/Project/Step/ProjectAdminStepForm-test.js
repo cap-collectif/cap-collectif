@@ -19,7 +19,7 @@ describe('<ProjectAdminStepForm />', () => {
     isGridViewEnabled: false,
     isListViewEnabled: true,
     isMapViewEnabled: false,
-    mainView: 'grid',
+    mainView: 'GRID',
     project: {
       $refType,
       firstCollectStep: {
@@ -44,7 +44,7 @@ describe('<ProjectAdminStepForm />', () => {
       isEnabled: true,
       label: 'au bois dormant',
       metaDescription: 'oeoeoe',
-      mainView: 'grid',
+      mainView: 'GRID',
       isSecretBallot: false,
     },
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },

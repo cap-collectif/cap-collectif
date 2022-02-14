@@ -43,6 +43,7 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
  */
 abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 {
+    use BodyUsingJoditWysiwygTrait;
     use DateHelperTrait;
     use MetaDescriptionCustomCodeTrait;
     use RequirementTrait;
@@ -50,7 +51,6 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     use TimeRangeableTrait;
     use TimestampableTrait;
     use UuidTrait;
-    use BodyUsingJoditWysiwygTrait;
 
     public const STATE_FUTURE = 'FUTURE';
     public const STATE_OPENED = 'OPENED';
@@ -87,7 +87,8 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     protected $projectAbstractStep;
 
     /**
-     * @ORM\Column(name="main_view", type="string", nullable=true, options={"default": "grid"})
+     * @ORM\Column(name="main_view", type="string", options={"default": "GRID"}, nullable=true)
+     * @Assert\Choice(choices={"GRID", "MAP", "LIST"})
      */
     protected string $mainView = ViewConfiguration::GRID;
 

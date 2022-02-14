@@ -118,7 +118,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
             boxShadow={['0px 10px 50px rgba(0, 0, 0, 0.15)', 'unset']}
             borderRadius={['8px 8px 0px 0px', 'unset']}
             className={isMobile ? '' : 'pull-right'}
-            display={displayMode === 'map' && isMobile ? 'none' : 'block'}>
+            display={displayMode === 'MAP' && isMobile ? 'none' : 'block'}>
             <NewLoginOverlay>
               <Button
                 m="auto"

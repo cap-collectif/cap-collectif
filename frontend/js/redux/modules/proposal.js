@@ -9,7 +9,7 @@ import {
   isInterpellationContextFromProposal,
 } from '~/utils/interpellationLabelHelper';
 
-export type ProposalViewMode = 'list' | 'grid' | 'map';
+export type ProposalViewMode = 'LIST' | 'GRID' | 'MAP';
 
 export type Filters = {|
   types: ?string,

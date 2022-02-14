@@ -132,13 +132,13 @@ ProposalForm:
                 description: 'The configuration for the related analysis.'
             isGridViewEnabled:
                 type: 'Boolean!'
-                description: 'True if the grid view is enabled.'
+                description: 'True if the GRID view is enabled.'
             isListViewEnabled:
                 type: 'Boolean!'
-                description: 'True if the grid view is enabled.'
+                description: 'True if the LIST view is enabled.'
             isMapViewEnabled:
                 type: 'Boolean!'
-                description: 'True if the grid view is enabled.'
+                description: 'True if the MAP view is enabled.'
             usingTipsmeee:
                 type: 'Boolean!'
                 description: 'True if tipsmeee is enabled.'

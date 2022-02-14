@@ -72,8 +72,8 @@ ProjectStepInput:
             statuses:
                 type: '[StepStatusInput]'
             mainView:
-                type: 'String'
-                description: 'the default view : grid, list or map'
+                type: 'MainView'
+                description: 'the default view : GRID, LIST or MAP'
             # CollectStep
             private:
                 type: 'Boolean'

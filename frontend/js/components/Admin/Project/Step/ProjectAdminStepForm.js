@@ -107,7 +107,7 @@ type Props = {|
       isMapViewEnabled: boolean,
     |},
     private?: ?boolean,
-    mainView: string,
+    mainView: ProposalViewMode,
     articles?: Array<{
       id: string,
       url: string,
@@ -198,9 +198,9 @@ const getMainView = (
   isListViewEnabled: ?boolean,
   isMapViewEnabled: ?boolean,
 ) => {
-  if (isGridViewEnabled) return 'grid';
-  if (isListViewEnabled) return 'list';
-  if (isMapViewEnabled) return 'map';
+  if (isGridViewEnabled) return 'GRID';
+  if (isListViewEnabled) return 'LIST';
+  if (isMapViewEnabled) return 'MAP';
 };
 
 const getValueDisplayMode = (
@@ -682,7 +682,7 @@ export function ProjectAdminStepForm({
                     id="listView"
                     type="radio"
                     name="mainView"
-                    value="list"
+                    value="LIST"
                     component={renderComponent}
                     label={
                       <LabelView>
@@ -698,7 +698,7 @@ export function ProjectAdminStepForm({
                     id="gridView"
                     type="radio"
                     name="mainView"
-                    value="grid"
+                    value="GRID"
                     component={renderComponent}
                     label={
                       <LabelView>
@@ -714,7 +714,7 @@ export function ProjectAdminStepForm({
                     id="mapView"
                     type="radio"
                     name="mainView"
-                    value="map"
+                    value="MAP"
                     component={renderComponent}
                     label={
                       <LabelView>

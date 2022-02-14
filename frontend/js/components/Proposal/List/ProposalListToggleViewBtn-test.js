@@ -7,7 +7,7 @@ import { $refType } from '~/mocks';
 
 const baseProps = {
   showMapButton: true,
-  displayMode: 'grid',
+  displayMode: 'GRID',
   setDisplayMode: jest.fn(),
   step: {
     $refType,

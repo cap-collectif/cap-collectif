@@ -188,7 +188,7 @@ const BASE_SELECTION_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape SelectionStep",
   label: 'SelectionStep',
-  mainView: 'list',
+  mainView: 'LIST',
   secretBallot: true,
   publishedVoteDate: '2030-01-01 00:00:00',
 };
@@ -226,7 +226,7 @@ const BASE_COLLECT_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape CollectStep",
   label: 'CollectStep',
-  mainView: 'grid',
+  mainView: 'GRID',
 };
 
 describe('Internal|updateAlphaProject simple mutations', () => {
@@ -1108,7 +1108,7 @@ describe('project access control', () => {
         isEnabled: true,
         allowAuthorsToAddNews: false,
         defaultSort: 'RANDOM',
-        mainView: 'grid',
+        mainView: 'GRID',
         proposalForm: 'proposalFormProjectWithOwner',
         private: false,
         defaultStatus: null,

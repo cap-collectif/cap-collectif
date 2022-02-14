@@ -8,11 +8,11 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Exception\ViewConfigurationException;
 
-class ViewConfiguration
+class ViewConfiguration implements EnumType
 {
-    public const GRID = 'grid';
-    public const LIST = 'list';
-    public const MAP = 'map';
+    public const GRID = 'GRID';
+    public const LIST = 'LIST';
+    public const MAP = 'MAP';
 
     public const ALL = [self::GRID, self::LIST, self::MAP];
 
@@ -42,6 +42,21 @@ class ViewConfiguration
                 }
             }
         }
+    }
+
+    public static function isValid($value): bool
+    {
+        return \in_array($value, self::getAvailableTypes(), true);
+    }
+
+    public static function getAvailableTypes(): array
+    {
+        return self::ALL;
+    }
+
+    public static function getAvailableTypesToString(): string
+    {
+        return implode(' | ', self::getAvailableTypes());
     }
 
     private static function updateOneStepFromItsProposal(

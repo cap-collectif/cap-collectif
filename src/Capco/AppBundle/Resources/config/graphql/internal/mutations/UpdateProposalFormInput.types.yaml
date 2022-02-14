@@ -83,13 +83,13 @@ UpdateProposalFormInput:
                 description: 'can the viewer send a contact message to the proposals author'
             isGridViewEnabled:
                 type: 'Boolean'
-                description: 'can the viewer see the proposals as a grid'
+                description: 'can the viewer see the proposals as a GRID'
             isListViewEnabled:
                 type: 'Boolean'
-                description: 'can the viewer see the proposals as a list'
+                description: 'can the viewer see the proposals as a LIST'
             isMapViewEnabled:
                 type: 'Boolean'
-                description: 'can the viewer see the proposals as a map'
+                description: 'can the viewer see the proposals as a MAP'
             usingTipsmeee:
                 type: 'Boolean'
                 description: 'Proposal form using tipsmeee field'

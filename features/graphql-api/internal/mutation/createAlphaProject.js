@@ -176,7 +176,7 @@ const BASE_SELECTION_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape SelectionStep",
   label: 'SelectionStep',
-  mainView: 'grid',
+  mainView: 'GRID',
   secretBallot: true,
   publishedVoteDate: '2030-01-01 00:00:00',
 };
@@ -216,7 +216,7 @@ const BASE_COLLECT_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape CollectStep",
   label: 'CollectStep',
-  mainView: 'grid',
+  mainView: 'GRID',
 };
 
 describe('Internal|createAlphaProject simple mutations', () => {

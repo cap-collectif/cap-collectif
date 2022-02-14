@@ -72,7 +72,7 @@ exports[`<UnpublishedProposalListView /> renders correcty 1`] = `
           },
         }
       }
-      view="grid"
+      view="GRID"
       viewer={
         Object {
           "$fragmentRefs": null,

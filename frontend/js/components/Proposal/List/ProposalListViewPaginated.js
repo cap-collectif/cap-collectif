@@ -42,7 +42,7 @@ const ProposalListViewPaginated = ({
       className={cn('proposal-list-view-paginated', {
         [`displayMode-${displayMode}`]: !!displayMode,
       })}>
-      {displayMap && displayMode === 'map' ? (
+      {displayMap && displayMode === 'MAP' ? (
         <ProposalsDisplayMap
           className="zi-0"
           step={step}

@@ -100,11 +100,11 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
                           "isListViewEnabled": false,
                           "isMapViewEnabled": true,
                         },
-                        "mainView": "grid",
+                        "mainView": "GRID",
                       },
                       Object {
                         "__typename": "SelectionStep",
-                        "mainView": "map",
+                        "mainView": "MAP",
                       },
                     ],
                   },
@@ -112,7 +112,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
                 "zoomMap": 20,
               }
             }
-            typeView="grid"
+            typeView="GRID"
           />,
           "width": "360px",
         }
@@ -190,11 +190,11 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
                           "isListViewEnabled": false,
                           "isMapViewEnabled": true,
                         },
-                        "mainView": "grid",
+                        "mainView": "GRID",
                       },
                       Object {
                         "__typename": "SelectionStep",
-                        "mainView": "map",
+                        "mainView": "MAP",
                       },
                     ],
                   },
@@ -202,7 +202,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
                 "zoomMap": 20,
               }
             }
-            typeView="map"
+            typeView="MAP"
           />,
           "width": "360px",
         }
@@ -546,11 +546,11 @@ exports[`<SectionDisplayMode /> should render correctly when map view not enable
                           "isListViewEnabled": false,
                           "isMapViewEnabled": true,
                         },
-                        "mainView": "grid",
+                        "mainView": "GRID",
                       },
                       Object {
                         "__typename": "SelectionStep",
-                        "mainView": "map",
+                        "mainView": "MAP",
                       },
                     ],
                   },
@@ -558,7 +558,7 @@ exports[`<SectionDisplayMode /> should render correctly when map view not enable
                 "zoomMap": 20,
               }
             }
-            typeView="grid"
+            typeView="GRID"
           />,
           "width": "360px",
         }
@@ -615,11 +615,11 @@ exports[`<SectionDisplayMode /> should render correctly when map view not enable
                           "isListViewEnabled": false,
                           "isMapViewEnabled": true,
                         },
-                        "mainView": "grid",
+                        "mainView": "GRID",
                       },
                       Object {
                         "__typename": "SelectionStep",
-                        "mainView": "map",
+                        "mainView": "MAP",
                       },
                     ],
                   },
@@ -627,7 +627,7 @@ exports[`<SectionDisplayMode /> should render correctly when map view not enable
                 "zoomMap": 20,
               }
             }
-            typeView="map"
+            typeView="MAP"
           />,
           "width": "360px",
         }

@@ -10,7 +10,7 @@ exports[`<ProposalListFilters /> should render correctly 1`] = `
     componentClass="div"
   >
     <Relay(ProposalListToggleViewBtn)
-      displayMode="grid"
+      displayMode="GRID"
       setDisplayMode={[MockFunction]}
       showMapButton={false}
       step={
@@ -88,7 +88,7 @@ exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
     componentClass="div"
   >
     <Relay(ProposalListToggleViewBtn)
-      displayMode="grid"
+      displayMode="GRID"
       setDisplayMode={[MockFunction]}
       showMapButton={false}
       step={
@@ -183,7 +183,7 @@ exports[`<ProposalListFilters /> should render correctly without vote filters fi
     componentClass="div"
   >
     <Relay(ProposalListToggleViewBtn)
-      displayMode="grid"
+      displayMode="GRID"
       setDisplayMode={[MockFunction]}
       showMapButton={false}
       step={

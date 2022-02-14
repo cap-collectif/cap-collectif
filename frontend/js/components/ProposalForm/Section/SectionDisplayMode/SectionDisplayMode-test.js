@@ -33,7 +33,7 @@ const props = {
         steps: [
           {
             __typename: 'CollectStep',
-            mainView: 'grid',
+            mainView: 'GRID',
             form: {
               isGridViewEnabled: true,
               isListViewEnabled: false,
@@ -42,7 +42,7 @@ const props = {
           },
           {
             __typename: 'SelectionStep',
-            mainView: 'map',
+            mainView: 'MAP',
           },
         ],
       },
