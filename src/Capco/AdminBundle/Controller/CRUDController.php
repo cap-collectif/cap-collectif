@@ -366,7 +366,7 @@ class CRUDController extends Controller
                 );
             }
 
-            return $this->redirectTo($object);
+            return $this->redirectToList();
         }
 
         // NEXT_MAJOR: Remove this line and use commented line below it instead
@@ -634,6 +634,10 @@ class CRUDController extends Controller
                 $params['subclass'] = $request->get('subclass');
             }
             $url = $this->admin->generateUrl('create', $params);
+        }
+
+        if ('DELETE' === $this->getRestMethod()) {
+            return $this->redirectToList();
         }
 
         if (!$url) {
