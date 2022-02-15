@@ -280,9 +280,15 @@ exports[`<AdminEventList /> should render correctly 1`] = `
             className="sc-bdnxRM Flex___StyledAppBox-RSPpX gNHkfZ"
           >
             <button
+              aria-describedby="id-3"
               className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
               href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              tabIndex={0}
               type="button"
             >
               <IconMock
@@ -290,26 +296,22 @@ exports[`<AdminEventList /> should render correctly 1`] = `
               />
             </button>
             <div
-              className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+              className="cap-tooltip"
+              hidden={true}
+              id="id-3"
+              onAnimationEnd={[Function]}
+              onTransitionEnd={[Function]}
+              role="tooltip"
               style={
                 Object {
-                  "opacity": 0,
-                  "transform": "scale(0.8) translateZ(0)",
+                  "display": "none",
+                  "left": "100%",
+                  "pointerEvents": "none",
+                  "position": "fixed",
+                  "top": "100%",
                 }
               }
-            >
-              <p
-                className="sc-bdnxRM cZcArZ"
-                title="global.download"
-              >
-                global.download
-              </p>
-              <div
-                className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                data-popper-arrow={true}
-                id="arrow"
-              />
-            </div>
+            />
           </div>
         </td>
       </tr>
@@ -508,9 +510,15 @@ exports[`<AdminEventList /> should render correctly 1`] = `
             className="sc-bdnxRM Flex___StyledAppBox-RSPpX gNHkfZ"
           >
             <button
+              aria-describedby="id-4"
               className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
               href="<mock-value-for-field-\\"exportParticipantsUrl\\">"
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              tabIndex={0}
               type="button"
             >
               <IconMock
@@ -518,26 +526,22 @@ exports[`<AdminEventList /> should render correctly 1`] = `
               />
             </button>
             <div
-              className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+              className="cap-tooltip"
+              hidden={true}
+              id="id-4"
+              onAnimationEnd={[Function]}
+              onTransitionEnd={[Function]}
+              role="tooltip"
               style={
                 Object {
-                  "opacity": 0,
-                  "transform": "scale(0.8) translateZ(0)",
+                  "display": "none",
+                  "left": "100%",
+                  "pointerEvents": "none",
+                  "position": "fixed",
+                  "top": "100%",
                 }
               }
-            >
-              <p
-                className="sc-bdnxRM cZcArZ"
-                title="global.download"
-              >
-                global.download
-              </p>
-              <div
-                className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-                data-popper-arrow={true}
-                id="arrow"
-              />
-            </div>
+            />
           </div>
         </td>
       </tr>

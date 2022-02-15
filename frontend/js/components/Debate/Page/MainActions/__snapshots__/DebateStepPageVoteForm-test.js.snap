@@ -35,7 +35,9 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
       Tweet
     </a>
     <button
+      aria-describedby="id-1"
       class="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
+      tabindex="0"
       type="button"
     >
       <iconmock
@@ -43,6 +45,13 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
       />
       global.link
     </button>
+    <div
+      class="cap-tooltip"
+      hidden=""
+      id="id-1"
+      role="tooltip"
+      style="display:none;position:fixed;left:100%;top:100%;pointer-events:none"
+    />
   </div>
   <div
     class="sc-bdnxRM cnbanf DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
@@ -268,7 +277,9 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
       Tweet
     </a>
     <button
+      aria-describedby="id-1"
       class="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
+      tabindex="0"
       type="button"
     >
       <iconmock
@@ -276,6 +287,13 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
       />
       global.link
     </button>
+    <div
+      class="cap-tooltip"
+      hidden=""
+      id="id-1"
+      role="tooltip"
+      style="display:none;position:fixed;left:100%;top:100%;pointer-events:none"
+    />
   </div>
   <button
     class="sc-bdnxRM Button__ButtonInner-dWPVNG hgJMSO kFclcg"

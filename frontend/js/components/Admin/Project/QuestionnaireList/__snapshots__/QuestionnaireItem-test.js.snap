@@ -72,16 +72,22 @@ Array [
   >
     <button
       aria-controls="id-1"
+      aria-describedby="id-2"
       aria-expanded={false}
       aria-haspopup="dialog"
       className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
+      onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
+      onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyPressCapture={[Function]}
       onKeyUp={[Function]}
       onMouseDown={[Function]}
       onMouseDownCapture={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      tabIndex={0}
       type="button"
     >
       <IconMock
@@ -89,26 +95,22 @@ Array [
       />
     </button>
     <div
-      className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+      className="cap-tooltip"
+      hidden={true}
+      id="id-2"
+      onAnimationEnd={[Function]}
+      onTransitionEnd={[Function]}
+      role="tooltip"
       style={
         Object {
-          "opacity": 0,
-          "transform": "scale(0.8) translateZ(0)",
+          "display": "none",
+          "left": "100%",
+          "pointerEvents": "none",
+          "position": "fixed",
+          "top": "100%",
         }
       }
-    >
-      <p
-        className="sc-bdnxRM cZcArZ"
-        title="global.delete"
-      >
-        global.delete
-      </p>
-      <div
-        className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
-        data-popper-arrow={true}
-        id="arrow"
-      />
-    </div>
+    />
     <div
       aria-label="delete-confirmation"
       aria-modal={true}

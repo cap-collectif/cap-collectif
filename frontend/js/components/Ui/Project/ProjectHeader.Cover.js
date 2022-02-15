@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
-import {useIntl} from 'react-intl';
-import {useSelector} from 'react-redux';
+import { useIntl } from 'react-intl';
+import { useSelector } from 'react-redux';
 import css from '@styled-system/css';
-import {Flex, Modal, Heading, Icon, Text, Box, AvatarGroup} from '@cap-collectif/ui'
-import {cleanChildren} from '~/utils/cleanChildren';
-import {formatBigNumber} from '~/utils/bigNumberFormatter';
+import { Flex, Modal, Heading, Icon, Text, Box, AvatarGroup } from '@cap-collectif/ui';
+import { cleanChildren } from '~/utils/cleanChildren';
+import { formatBigNumber } from '~/utils/bigNumberFormatter';
 import DefaultProjectImage from '~/components/Project/Preview/DefaultProjectImage';
 import Tooltip from '~ds/Tooltip/Tooltip';
 import useIsMobile from '~/utils/hooks/useIsMobile';
@@ -71,7 +71,7 @@ export const Cover = ({ children, isArchived, ...rest }: CoverProps) => {
 type TitleProps = {|
   children: React.Node,
 |};
-export const Title = ({children, ...rest}: TitleProps) => {
+export const Title = ({ children, ...rest }: TitleProps) => {
   return (
     <Text
       className="projectHeader__title platform__title"
@@ -91,7 +91,7 @@ export const Title = ({children, ...rest}: TitleProps) => {
 type ContentProps = {|
   children: React.Node,
 |};
-export const Content = ({children, ...rest}: ContentProps) => (
+export const Content = ({ children, ...rest }: ContentProps) => (
   <Box
     className="projectHeader__cover__content"
     position="relative"
@@ -132,7 +132,7 @@ export const CoverImage = ({ src, alt, isArchived, ...rest }: CoverImageProps) =
       width={['100%', '405px']}
       height="100%"
       minHeight="270px"
-      style={{objectFit: 'cover'}}
+      style={{ objectFit: 'cover' }}
     />
   </Box>
 );
@@ -156,9 +156,9 @@ export const CoverVideo = ({ url, src, alt, isArchived, ...rest }: CoverVideoPro
             width={['100%', '405px']}
             height="100%"
             minHeight="270px"
-            style={{objectFit: 'cover'}}
+            style={{ objectFit: 'cover' }}
           />
-          <Play/>
+          <Play />
         </Box>
       );
     }
@@ -182,7 +182,7 @@ export const CoverVideo = ({ url, src, alt, isArchived, ...rest }: CoverVideoPro
       {...rest}>
       <Modal
         baseId="project-header-cover-modal"
-        ariaLabel={intl.formatMessage({id: 'project-header-video-modal'})}
+        ariaLabel={intl.formatMessage({ id: 'project-header-video-modal' })}
         fullSizeOnMobile
         height={isMobile ? '64%' : '60%'}
         width={isMobile ? '90%' : '60%'}
@@ -209,10 +209,10 @@ type AuthorsProps = {|
     +username: ?string,
     +url: string,
     +avatarUrl: ?string,
-  |}>
+  |}>,
 |};
 
-export const Authors = ({children, active, onClick, authors, ...rest}: AuthorsProps) => {
+export const Authors = ({ children, active, onClick, authors, ...rest }: AuthorsProps) => {
   const isMobile = useIsMobile();
   const hoverColor = useSelector(state => state.default.parameters['color.link.hover']);
   const intl = useIntl();
@@ -222,12 +222,19 @@ export const Authors = ({children, active, onClick, authors, ...rest}: AuthorsPr
     const firstAuthorUsername = authors[0].username ?? '';
     if (remainingAuthorsLength === 0) {
       return firstAuthorUsername;
-    } if (remainingAuthorsLength === 1) {
-      const secondAuthorUsername = authors[1].username ?? '';
-      return intl.formatMessage({id: 'avatar-group-shownames-2'}, {first: firstAuthorUsername, second: secondAuthorUsername})
     }
-    return intl.formatMessage({id: 'avatar-group-shownames'}, {name: firstAuthorUsername, length: remainingAuthorsLength})
-  }
+    if (remainingAuthorsLength === 1) {
+      const secondAuthorUsername = authors[1].username ?? '';
+      return intl.formatMessage(
+        { id: 'avatar-group-shownames-2' },
+        { first: firstAuthorUsername, second: secondAuthorUsername },
+      );
+    }
+    return intl.formatMessage(
+      { id: 'avatar-group-shownames' },
+      { name: firstAuthorUsername, length: remainingAuthorsLength },
+    );
+  };
 
   return (
     <Flex alignItems="center">
@@ -265,18 +272,18 @@ export const Authors = ({children, active, onClick, authors, ...rest}: AuthorsPr
         sx={{
           '&:hover': {
             textDecoration: 'underline',
-            cursor: 'pointer'
-          }
+            cursor: 'pointer',
+          },
         }}>
         {getTextValue()}
       </Text>
     </Flex>
-);
+  );
 };
 type BlocksProps = {|
   children: React.Node,
 |};
-export const Blocks = ({children, ...rest}: BlocksProps) => {
+export const Blocks = ({ children, ...rest }: BlocksProps) => {
   const haschildren = cleanChildren(children).length > 0;
   if (haschildren) {
     return (
@@ -307,8 +314,8 @@ type BlockProps = {|
   contentId?: ?string,
   tooltipLabel?: React.Node,
 |};
-export const Block = ({title, content, contentId, tooltipLabel, ...rest}: BlockProps) => (
-  <Tooltip label={tooltipLabel} delay={[200, 500]}>
+export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: BlockProps) => (
+  <Tooltip label={tooltipLabel}>
     <Box
       className="projectHeader__block"
       display="flex"
@@ -345,7 +352,7 @@ export const Block = ({title, content, contentId, tooltipLabel, ...rest}: BlockP
 type InfoProps = {|
   children: React.Node,
 |};
-export const Info = ({children, ...rest}: InfoProps) => {
+export const Info = ({ children, ...rest }: InfoProps) => {
   const haschildren = cleanChildren(children).length > 0;
   if (haschildren) {
     return (
@@ -373,7 +380,7 @@ export const Info = ({children, ...rest}: InfoProps) => {
 type LocationProps = {|
   content: ?string,
 |};
-const Location = ({content, ...rest}: LocationProps) => (
+const Location = ({ content, ...rest }: LocationProps) => (
   <Box
     className="projectHeader__info__location"
     display="flex"
@@ -384,7 +391,7 @@ const Location = ({content, ...rest}: LocationProps) => (
     marginBottom={0}
     as="li"
     {...rest}>
-    <Icon color="neutral-gray.500" size="md" name="PIN_O" marginLeft="-5px"/>
+    <Icon color="neutral-gray.500" size="md" name="PIN_O" marginLeft="-5px" />
     <Text
       className="platform__body"
       fontSize={[1, 2]}
@@ -402,7 +409,7 @@ type ThemeProps = {|
   content: string,
   href: string,
 |};
-const Theme = ({content, href, ...rest}: ThemeProps) => (
+const Theme = ({ content, href, ...rest }: ThemeProps) => (
   <Box
     className="projectHeader__info__theme"
     display="flex"
@@ -414,7 +421,7 @@ const Theme = ({content, href, ...rest}: ThemeProps) => (
     as="a"
     href={href}
     {...rest}>
-    <Icon color="neutral-gray.500" size="md" name="FOLDER_O" marginLeft="-3px"/>
+    <Icon color="neutral-gray.500" size="md" name="FOLDER_O" marginLeft="-3px" />
     <Text
       className="platform__body"
       fontSize={[1, 2]}
@@ -432,7 +439,7 @@ type SocialsProps = {|
   children: React.Node,
 |};
 
-export const Socials = ({children, ...rest}: SocialsProps) => (
+export const Socials = ({ children, ...rest }: SocialsProps) => (
   <Box
     className="projectHeader__socials"
     position={['absolute', 'relative']}
@@ -456,24 +463,25 @@ type SocialProps = {|
   name: string,
   ...IconProps,
 |};
-export const Social = ({href, name, ...rest}: SocialProps) => (
-  <Box as="a" className="projectHeader__social"
-       mr={[4, 6]}
-       href={href}
-       color="neutral-gray.500"
-       width={6}
-       sx={{
-         boxShadow: 'none !important',
-         cursor: 'pointer',
-         '&:hover': {
-           color: 'neutral-gray.700',
-         },
-         '&:focus': {
-           color: 'neutral-gray.700',
-           outline: 'none',
-         },
-       }}
-  >
+export const Social = ({ href, name, ...rest }: SocialProps) => (
+  <Box
+    as="a"
+    className="projectHeader__social"
+    mr={[4, 6]}
+    href={href}
+    color="neutral-gray.500"
+    width={6}
+    sx={{
+      boxShadow: 'none !important',
+      cursor: 'pointer',
+      '&:hover': {
+        color: 'neutral-gray.700',
+      },
+      '&:focus': {
+        color: 'neutral-gray.700',
+        outline: 'none',
+      },
+    }}>
     <Icon name={name} size="md" {...rest} />
   </Box>
 );

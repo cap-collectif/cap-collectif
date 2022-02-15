@@ -1,17 +1,13 @@
-import { PolymorphicComponent } from '../../Ui/Primitives/AppBox';
-import { TippyPlacementProps } from '../common';
-import { TippyProps as TippyPropsType } from '@tippyjs/react';
-import { ReactNode } from 'react'
+import { AppBoxProps, PolymorphicComponent } from '../../Ui/Primitives/AppBox';
+import { FunctionComponentElement, ReactNode } from 'react';
 
-type Props = TippyPlacementProps & Partial<Pick<TippyPropsType, 'delay' | 'showOnCreate' | 'onShow' | 'onHide' >> & {
-  readonly label: ReactNode
-  readonly truncate?: number
-  readonly trigger?: Array<'mouseenter' | 'focus' | 'click' | 'focusin' | 'manual'>
-  readonly useArrow?: boolean
-  readonly isDisabled?: boolean
-  readonly keepOnHover?: boolean
+export type TooltipProps = AppBoxProps & {
+    readonly children: FunctionComponentElement<any>
+    readonly visible?: boolean
+    readonly label: ReactNode
+    readonly baseId?: string
 }
 
-declare const Tooltip: PolymorphicComponent<Props>
+declare const Tooltip: PolymorphicComponent<TooltipProps>
 
 export default Tooltip

@@ -2,10 +2,9 @@
 import * as React from 'react';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
-import Tooltip from '~ds/Tooltip/Tooltip';
-import Card from '~ds/Card/Card';
 import Button from '~ds/Button/Button';
 import AppBox from '~ui/Primitives/AppBox';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 export default {
   title: 'Design system/Tooltip',
@@ -80,88 +79,3 @@ withCustom.args = {
   bg: 'red.700',
   label: 'Salut les filles',
 };
-
-export const withCustomTrigger = Template.bind({});
-withCustomTrigger.storyName = 'with custom trigger';
-withCustomTrigger.args = {
-  label: 'Salut les filles',
-  trigger: ['click'],
-};
-
-export const withoutArrow = Template.bind({});
-withoutArrow.storyName = 'without arrow';
-withoutArrow.args = {
-  label: 'Salut les filles',
-  useArrow: false,
-};
-
-const PlacementTemplate = (args: any) => (
-  <Flex align="center" gridGap={2}>
-    <Tooltip {...args}>
-      <Flex as={Card} minHeight="100px" justify="center" align="center">
-        <Text>Hover moi</Text>
-      </Flex>
-    </Tooltip>
-    <Tooltip {...args}>
-      <Flex as={Card} minHeight="200px" justify="center" align="center">
-        <Text>Hover moi</Text>
-      </Flex>
-    </Tooltip>
-    <Tooltip {...args}>
-      <Flex as={Card} minHeight="250px" justify="center" align="center">
-        <Text>Hover moi</Text>
-      </Flex>
-    </Tooltip>
-    <Tooltip {...args}>
-      <Flex as={Card} minHeight="400px" justify="center" align="center">
-        <Text>Hover moi</Text>
-      </Flex>
-    </Tooltip>
-  </Flex>
-);
-
-export const withPalcement = PlacementTemplate.bind({});
-withPalcement.storyName = 'with placement';
-withPalcement.args = {
-  label: 'Salut les filles',
-  placement: 'top',
-};
-export const disabled = Template.bind({});
-disabled.args = {
-  label: 'Salut les filles',
-  isDisabled: true,
-};
-
-const OptionsTemplate = (args: any) => (
-  <Flex align="center" gridGap={2} wrap="wrap">
-    <Tooltip {...args} delay={0}>
-      <Button variant="primary" variantSize="medium">
-        No delay
-      </Button>
-    </Tooltip>
-    <Tooltip {...args} delay={[500, null]}>
-      <Button variant="primary" variantSize="medium">
-        500ms delay on open
-      </Button>
-    </Tooltip>
-    <Tooltip {...args} delay={[null, 500]}>
-      <Button variant="primary" variantSize="medium">
-        500ms delay on close
-      </Button>
-    </Tooltip>
-    <Tooltip {...args} keepOnHover>
-      <Button variant="primary" variantSize="medium">
-        Keep on hover
-      </Button>
-    </Tooltip>
-    <Tooltip {...args} showOnCreate>
-      <Button variant="primary" variantSize="medium">
-        Show on create
-      </Button>
-    </Tooltip>
-  </Flex>
-);
-
-export const withOptions = OptionsTemplate.bind({});
-withOptions.storyName = 'with options';
-withOptions.args = { label: 'Salut les filles' };

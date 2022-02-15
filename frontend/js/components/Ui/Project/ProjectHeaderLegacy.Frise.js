@@ -397,7 +397,7 @@ export const Step = ({
           style={{
             transform: 'translate(-45%,-50%)',
           }}>
-          <Tooltip className="platform__body" label={tooltipLabel} delay={[500, 350]}>
+          <Tooltip className="platform__body" label={tooltipLabel}>
             <Text
               className="frise__stepItem__link__title platform__body"
               as="h5"

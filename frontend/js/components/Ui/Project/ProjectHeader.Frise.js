@@ -3,7 +3,17 @@ import * as React from 'react';
 import Slider from 'react-slick';
 import styled, { type StyledComponent } from 'styled-components';
 import { useSelector } from 'react-redux';
-import { Heading, Tooltip, Flex, Icon, Text, Modal, Box, CapUIIcon, headingStyles } from '@cap-collectif/ui'
+import {
+  Heading,
+  Tooltip,
+  Flex,
+  Icon,
+  Text,
+  Modal,
+  Box,
+  CapUIIcon,
+  headingStyles,
+} from '@cap-collectif/ui';
 import { cleanChildren } from '~/utils/cleanChildren';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import hexToRgb from '~/utils/colors/hexToRgb';
@@ -158,7 +168,7 @@ export const Steps = ({ children, modalTitle, currentStepIndex, ...rest }: Steps
           display="flex !important"
           alignItems="center"
           justifyContent="center">
-          <Icon name={CapUIIcon.ArrowLeft} size="sm" color="white"/>
+          <Icon name={CapUIIcon.ArrowLeft} size="sm" color="white" />
         </Box>
       ),
     };
@@ -188,7 +198,7 @@ export const Steps = ({ children, modalTitle, currentStepIndex, ...rest }: Steps
               isEnd: validChildren.length > 5 && index === validChildren.length - 1,
             }),
           )}
-         </StepsContainer>
+        </StepsContainer>
       </Box>
     );
   }
@@ -393,33 +403,29 @@ export const Step = ({
           style={{
             transform: 'translate(-45%,-50%)',
           }}>
-          {
-            isValidTooltip ? (
-              <Tooltip className="platform__body" label={tooltipLabel} delay={[500, 350]}>
-                <Text
-                  {...headingStyles.h5}
-                  fontSize={2}
-                  className="frise__stepItem__link__title platform__body"
-                  color={getTextColor()}
-                  truncate={50}
-                  fontWeight="semibold"
-                >
-                  {title}
-                </Text>
-              </Tooltip>
-            ) : (
+          {isValidTooltip ? (
+            <Tooltip className="platform__body" label={tooltipLabel}>
               <Text
                 {...headingStyles.h5}
                 fontSize={2}
                 className="frise__stepItem__link__title platform__body"
                 color={getTextColor()}
                 truncate={50}
-                fontWeight="semibold"
-              >
+                fontWeight="semibold">
                 {title}
               </Text>
-            )
-          }
+            </Tooltip>
+          ) : (
+            <Text
+              {...headingStyles.h5}
+              fontSize={2}
+              className="frise__stepItem__link__title platform__body"
+              color={getTextColor()}
+              truncate={50}
+              fontWeight="semibold">
+              {title}
+            </Text>
+          )}
           <Text
             className="frise__stepItem__link__content platform__body"
             {...headingStyles.h5}
@@ -438,119 +444,117 @@ export const Step = ({
   }
   return (
     <>
-      {
-        isValidTooltip ? (
-          <Tooltip className="platform__body" label={tooltipLabel}>
+      {isValidTooltip ? (
+        <Tooltip className="platform__body" label={tooltipLabel}>
+          <Flex
+            className="frise__stepItem"
+            flexDirection="column"
+            justifyContent="flex-start"
+            as="li"
+            position="relative"
+            width="100%"
+            height="100%"
+            minHeight={11}
+            backgroundColor={getBackgroundColor()}
+            marginBottom={2}
+            borderRadius="normal"
+            overflow="hidden"
+            textAlign="center"
+            {...rest}>
             <Flex
-              className="frise__stepItem"
-              flexDirection="column"
-              justifyContent="flex-start"
-              as="li"
-              position="relative"
-              width="100%"
-              height="100%"
-              minHeight={11}
-              backgroundColor={getBackgroundColor()}
-              marginBottom={2}
-              borderRadius="normal"
-              overflow="hidden"
-              textAlign="center"
-              {...rest}>
-              <Flex
-                className="frise__stepItem__link"
-                direction="column"
-                align="center"
-                position="absolute"
-                zIndex={9}
-                width="calc(100% - 100px)"
-                top="50%"
-                left="50%"
-                as="a"
-                href={href}
-                style={{ transform: 'translate(-50%,-50%)' }}>
-                <Text
-                  className="frise__stepItem__link__title platform__body"
-                  as="h5"
-                  fontSize={1}
-                  lineHeight="sm"
-                  fontWeight="semibold"
-                  truncate={50}
-                  color={getTextColor()}>
-                  {title}
-                </Text>
-                <Text
-                  className="frise__stepItem__link__content platform__body"
-                  fontSize={1}
-                  lineHeight="sm"
-                  fontWeight="normal"
-                  color={getTextColor()}>
-                  {content}
-                </Text>
-              </Flex>
-              {progressBar &&
+              className="frise__stepItem__link"
+              direction="column"
+              align="center"
+              position="absolute"
+              zIndex={9}
+              width="calc(100% - 100px)"
+              top="50%"
+              left="50%"
+              as="a"
+              href={href}
+              style={{ transform: 'translate(-50%,-50%)' }}>
+              <Text
+                className="frise__stepItem__link__title platform__body"
+                as="h5"
+                fontSize={1}
+                lineHeight="sm"
+                fontWeight="semibold"
+                truncate={50}
+                color={getTextColor()}>
+                {title}
+              </Text>
+              <Text
+                className="frise__stepItem__link__content platform__body"
+                fontSize={1}
+                lineHeight="sm"
+                fontWeight="normal"
+                color={getTextColor()}>
+                {content}
+              </Text>
+            </Flex>
+            {progressBar &&
               React.cloneElement(progressBar, {
                 width: '100%',
                 marginLeft: 0,
                 style: { transform: 'none' },
               })}
-            </Flex>
-          </Tooltip>
-        ) : (
-          <>
+          </Flex>
+        </Tooltip>
+      ) : (
+        <>
+          <Flex
+            className="frise__stepItem"
+            flexDirection="column"
+            justifyContent="flex-start"
+            as="li"
+            position="relative"
+            width="100%"
+            height="100%"
+            minHeight={11}
+            backgroundColor={getBackgroundColor()}
+            marginBottom={2}
+            borderRadius="normal"
+            overflow="hidden"
+            textAlign="center"
+            {...rest}>
             <Flex
-              className="frise__stepItem"
-              flexDirection="column"
-              justifyContent="flex-start"
-              as="li"
-              position="relative"
-              width="100%"
-              height="100%"
-              minHeight={11}
-              backgroundColor={getBackgroundColor()}
-              marginBottom={2}
-              borderRadius="normal"
-              overflow="hidden"
-              textAlign="center"
-              {...rest}>
-              <Flex
-                className="frise__stepItem__link"
-                direction="column"
-                align="center"
-                position="absolute"
-                zIndex={9}
-                width="calc(100% - 100px)"
-                top="50%"
-                left="50%"
-                as="a"
-                href={href}
-                style={{ transform: 'translate(-50%,-50%)' }}>
-                <Text
-                  className="frise__stepItem__link__title platform__body"
-                  {...headingStyles.h5}
-                  fontWeight="semibold"
-                  truncate={50}
-                  color={getTextColor()}>
-                  {title}
-                </Text>
-                <Text
-                  className="frise__stepItem__link__content platform__body"
-                  fontSize={1}
-                  lineHeight="sm"
-                  fontWeight="normal"
-                  color={getTextColor()}>
-                  {content}
-                </Text>
-              </Flex>
-              {progressBar &&
+              className="frise__stepItem__link"
+              direction="column"
+              align="center"
+              position="absolute"
+              zIndex={9}
+              width="calc(100% - 100px)"
+              top="50%"
+              left="50%"
+              as="a"
+              href={href}
+              style={{ transform: 'translate(-50%,-50%)' }}>
+              <Text
+                className="frise__stepItem__link__title platform__body"
+                {...headingStyles.h5}
+                fontWeight="semibold"
+                truncate={50}
+                color={getTextColor()}>
+                {title}
+              </Text>
+              <Text
+                className="frise__stepItem__link__content platform__body"
+                fontSize={1}
+                lineHeight="sm"
+                fontWeight="normal"
+                color={getTextColor()}>
+                {content}
+              </Text>
+            </Flex>
+            {progressBar &&
               React.cloneElement(progressBar, {
                 width: '100%',
                 marginLeft: 0,
                 style: { transform: 'none' },
               })}
-            </Flex>
-          </>
-        )
-      }
+          </Flex>
+        </>
+      )}
     </>
   );
 };

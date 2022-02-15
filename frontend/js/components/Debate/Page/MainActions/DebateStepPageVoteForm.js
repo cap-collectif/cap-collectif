@@ -486,7 +486,7 @@ export const DebateStepPageVoteForm = ({
             Tweet
           </a>
 
-          <Tooltip label={intl.formatMessage({ id: 'copied-link' })} trigger={['click']}>
+          <Tooltip label={intl.formatMessage({ id: 'copied-link' })}>
             <Button
               backgroundColor="gray.500"
               color="white"
@@ -637,7 +637,7 @@ const container = (connect<AfterConnectProps, BeforeConnectProps, _, _, _, _>(ma
 export default (createFragmentContainer(container, {
   debate: graphql`
     fragment DebateStepPageVoteForm_debate on Debate
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
       id
       url
       viewerVote @include(if: $isAuthenticated) {

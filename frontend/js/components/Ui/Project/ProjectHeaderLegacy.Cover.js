@@ -36,8 +36,7 @@ const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
       css={{
         filter: isArchived ? 'grayscale(1)' : null,
         opacity: isArchived ? '50%' : null,
-      }}
-      >
+      }}>
       <DefaultProjectImage />
     </Flex>
   );
@@ -45,7 +44,7 @@ const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
 type CoverProps = {|
   ...AppBoxProps,
   children: React.Node,
-  isArchived: boolean
+  isArchived: boolean,
 |};
 export const Cover = ({ children, isArchived, ...rest }: CoverProps) => {
   const validChildren = cleanChildren(children);
@@ -57,7 +56,10 @@ export const Cover = ({ children, isArchived, ...rest }: CoverProps) => {
     validChildren.splice(
       0,
       1,
-      ...[React.cloneElement(validChildren[0], { width: '100%' }), <DefaultCoverImage isArchived={isArchived}/>],
+      ...[
+        React.cloneElement(validChildren[0], { width: '100%' }),
+        <DefaultCoverImage isArchived={isArchived} />,
+      ],
     );
   }
   return (
@@ -118,7 +120,7 @@ type CoverImageProps = {|
   ...AppBoxProps,
   src: string,
   alt: string,
-  isArchived: boolean
+  isArchived: boolean,
 |};
 export const CoverImage = ({ src, alt, isArchived, ...rest }: CoverImageProps) => (
   <AppBox
@@ -278,7 +280,7 @@ type BlockProps = {|
   tooltipLabel?: React.Node,
 |};
 export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: BlockProps) => (
-  <Tooltip label={tooltipLabel} delay={[200, 500]}>
+  <Tooltip label={tooltipLabel}>
     <AppBox
       className="projectHeader__block"
       display="flex"
