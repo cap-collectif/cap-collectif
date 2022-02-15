@@ -21,16 +21,18 @@ type Props = {|
 const renderMembers = ({
   error,
   props,
+  isAdmin,
 }: {
   ...ReactRelayReadyState,
   props: ?ModalMembersQueryResponse,
+  isAdmin: boolean,
 }) => {
   if (error) return graphqlError;
 
   if (props) {
     const { mailingList } = props;
     if (mailingList) {
-      return <Members mailingList={mailingList} />;
+      return <Members mailingList={mailingList} isAdmin={isAdmin} />;
     }
   }
 
@@ -78,7 +80,7 @@ export const ModalMembers = ({ show, onClose, mailingList }: Props) => {
             }
           `}
           variables={{ mailingListId: id, count: 10, isAdmin }}
-          render={({ error, props, retry }) => renderMembers({ error, props, retry })}
+          render={({ error, props, retry }) => renderMembers({ error, props, retry, isAdmin })}
         />
       </Modal.Body>
     </ModalContainer>

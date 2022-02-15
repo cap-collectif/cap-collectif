@@ -35,6 +35,7 @@ const baseProps = {
       ],
     },
   },
+  isAdmin: true,
   relay: relayPaginationMock,
 };
 

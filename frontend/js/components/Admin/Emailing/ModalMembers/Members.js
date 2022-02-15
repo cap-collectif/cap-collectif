@@ -15,6 +15,7 @@ export const USERS_PAGINATION = 20;
 type Props = {|
   +mailingList: Members_mailingList,
   +relay: RelayPaginationProp,
+  +isAdmin: boolean,
 |};
 
 export const Members = ({ mailingList, relay }: Props) => {
@@ -74,11 +75,11 @@ export default createPaginationContainer(
   {
     mailingList: graphql`
       fragment Members_mailingList on MailingList
-        @argumentDefinitions(
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-          isAdmin: { type: "Boolean!" }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        isAdmin: { type: "Boolean!" }
+      ) {
         id
         allMembers: users(consentInternalCommunicationOnly: false) {
           totalCount
@@ -116,12 +117,12 @@ export default createPaginationContainer(
         ...prevVars,
       };
     },
-    getVariables(props: Props, { count, cursor, isAdmin }, fragmentVariables) {
+    getVariables(props: Props, { count, cursor }, fragmentVariables) {
       return {
         ...fragmentVariables,
         count,
         cursor,
-        isAdmin,
+        isAdmin: props.isAdmin,
         mailingListId: props.mailingList.id,
       };
     },
