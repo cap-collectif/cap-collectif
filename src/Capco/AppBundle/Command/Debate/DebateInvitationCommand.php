@@ -17,6 +17,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Find id of a debate : SELECT debate.id, step.title FROM debate LEFT JOIN step ON step.id = step_id;
+ */
 class DebateInvitationCommand extends Command
 {
     public const NAME = 'capco:debate:invite';
