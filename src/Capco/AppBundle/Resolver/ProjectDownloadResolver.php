@@ -70,6 +70,7 @@ class ProjectDownloadResolver
             'undraft_at',
             'account',
             'noAccount_email',
+            'noAccount_email_isConfirmed',
             'internalComm',
         ];
 
@@ -159,6 +160,7 @@ class ProjectDownloadResolver
     {
         $isAnonymousReply = !isset($reply['author']);
         $participantEmail = $isAnonymousReply ? $reply['participantEmail'] : '';
+        $participantEmailIsConfirmed = $isAnonymousReply ? ($reply['emailConfirmed'] ? 'Yes' : 'No') : null;
 
         $item = [
             'id' => $reply['id'],
@@ -175,6 +177,7 @@ class ProjectDownloadResolver
             'undraft_at' => $isAnonymousReply ? '' : $this->dateToString($reply['undraftAt']),
             'account' => $this->booleanToString(!$isAnonymousReply),
             'noAccount_email' => $participantEmail,
+            'noAccount_email_isConfirmed' => $participantEmailIsConfirmed,
             'internalComm' => $this->booleanToString(!empty($participantEmail)),
         ];
 

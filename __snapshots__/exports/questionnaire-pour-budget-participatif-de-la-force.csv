@@ -1,1 +1,1 @@
-﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,account,noAccount_email,internalComm
+﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,account,noAccount_email,noAccount_email_isConfirmed,internalComm

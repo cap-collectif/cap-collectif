@@ -83,7 +83,7 @@ class AddAnonymousReplyMutation implements MutationInterface
         $this->em->persist($replyAnonymous);
         $this->em->flush();
 
-        if ($questionnaire->isNotifyResponseCreate()) {
+        if ($questionnaire->isNotifyResponseCreate() || $replyAnonymous->getParticipantEmail()) {
             $this->publisher->publish(
                 'questionnaire.reply',
                 new Message(

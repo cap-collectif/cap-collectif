@@ -7,8 +7,10 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousCreateAdminMessage;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousCreateConfirmMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousUpdateAdminMessage;
+use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyCreateMessage;
@@ -18,6 +20,7 @@ use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyDeleteAdminMe
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyUpdateAdminMessage;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Traits\FormatDateTrait;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
@@ -121,7 +124,10 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $recipientEmail
             );
         }
-        if ($questionnaire->isAcknowledgeReplies() && !$isAnonReply) {
+
+        if ($isAnonReply) {
+            $this->confirmAnonymousEmail($reply);
+        } elseif ($questionnaire->isAcknowledgeReplies()) {
             if ($reply->getStep()) {
                 $params['endDate'] = $reply->getStep()->getEndAt()
                     ? $this->getLongDate(
@@ -331,5 +337,31 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         }
 
         return true;
+    }
+
+    private function confirmAnonymousEmail(ReplyAnonymous $replyAnonymous): void
+    {
+        if ($replyAnonymous->getParticipantEmail()) {
+            $this->mailer->createAndSendMessage(
+                QuestionnaireReplyAnonymousCreateConfirmMessage::class,
+                $replyAnonymous,
+                [
+                    'organizationName' => $this->siteParams->getValue(
+                        'global.site.organization_name'
+                    ),
+                    'baseUrl' => $this->router->generate(
+                        'app_homepage',
+                        ['token' => $replyAnonymous->getToken()],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    ),
+                    'subscribeUrl' => $this->router->generate(
+                        'capco_app_questionnaire_confirm_anonymous_email',
+                        ['token' => $replyAnonymous->getToken()],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    ),
+                ],
+                (new User())->setEmail($replyAnonymous->getParticipantEmail())
+            );
+        }
     }
 }

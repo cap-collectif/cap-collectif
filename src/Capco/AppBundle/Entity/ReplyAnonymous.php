@@ -28,6 +28,11 @@ class ReplyAnonymous extends AbstractReply
     private ?string $participantEmail;
 
     /**
+     * @ORM\Column(name="email_confirmed", type="boolean", nullable=false, options={"default": false})
+     */
+    private bool $emailConfirmed = false;
+
+    /**
      * @ORM\OneToMany(
      *  targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse",
      *  mappedBy="replyAnonymous",
@@ -76,5 +81,24 @@ class ReplyAnonymous extends AbstractReply
     public function getStatus(): string
     {
         return ReplyStatus::PUBLISHED;
+    }
+
+    public function isEmailConfirmed(): bool
+    {
+        return $this->emailConfirmed;
+    }
+
+    public function setEmailConfirmed(bool $emailConfirmed): self
+    {
+        $this->emailConfirmed = $emailConfirmed;
+
+        return $this;
+    }
+
+    public function confirmEmail(): self
+    {
+        $this->emailConfirmed = true;
+
+        return $this;
     }
 }

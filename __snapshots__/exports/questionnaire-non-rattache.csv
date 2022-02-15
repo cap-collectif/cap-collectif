@@ -1,2 +1,2 @@
-﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,account,noAccount_email,internalComm,"Je nai pas de projet","Jai plusieurs choix"
-reply8,Yes,"2016-03-08 00:00:00",user,user5,user@test.com,+33635492871,"2016-03-08 00:00:00","2019-03-08 00:00:00",No,No,"2016-03-08 00:00:00",Yes,,No,secret,
+﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,account,noAccount_email,noAccount_email_isConfirmed,internalComm,"Je nai pas de projet","Jai plusieurs choix"
+reply8,Yes,"2016-03-08 00:00:00",user,user5,user@test.com,+33635492871,"2016-03-08 00:00:00","2019-03-08 00:00:00",No,No,"2016-03-08 00:00:00",Yes,,,No,secret,

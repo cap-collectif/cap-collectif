@@ -1,2 +1,2 @@
-﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,account,noAccount_email,internalComm
-replyAdmin,Yes,"2019-03-20 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"2019-03-20 00:00:00","2019-03-20 00:00:00",Yes,No,"2019-03-20 00:00:00",Yes,,No
+﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,account,noAccount_email,noAccount_email_isConfirmed,internalComm
+replyAdmin,Yes,"2019-03-20 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"2019-03-20 00:00:00","2019-03-20 00:00:00",Yes,No,"2019-03-20 00:00:00",Yes,,,No

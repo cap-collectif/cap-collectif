@@ -1,0 +1,102 @@
+{% extends "@CapcoMail/standardLayout.html.twig" %}
+{% set logo = app_logo_url() %}
+{% set btnBg = capco_site_color_value('color.btn.bg') %}
+{% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
+{% set btnText = capco_site_color_value('color.btn.text') %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
+{% set linkText = capco_site_color_value('color.link.default') %}
+{% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}
+
+{%  block style_mail %}
+    {{ parent() }}
+
+    .mail__button {
+        background: #1A88FF;
+        box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.09);
+        border-radius: 3px;
+        padding: 12px 0px;
+        text-align: center;
+        margin-bottom: 8px;
+        max-width: 243px;
+    }
+    .mail__button a {
+        font-weight:700;
+        font-size:11px;
+        text-transform: uppercase;
+        color: #FFFFFF !important;
+        font-family: 'OpenSans', helvetica, arial, sans-serif !important;
+    }
+
+    @media (max-width: 768px) {
+        .mail__link__wrapper {
+            width: 100%;
+            text-align: center;
+        }
+        .mail__button {
+        display: inline-block;
+        width: 80%;
+        max-width:300px;
+        }
+    }
+{% endblock %}
+
+
+{% block core_mail %}
+    <div>
+        {% if logo is not null %}
+            <img src="{{ logo }}" alt="logo {{ organizationName }}"  style="width:150px;margin-bottom:5px;"/>
+        {% else %}
+            <img src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" style="margin-bottom:5px;"/>
+        {% endif %}
+
+        <div>
+            <table style="width: 100%;margin-bottom:20px;">
+                <tr>
+                    <td>
+                        <h1>
+                            {{ 'thanks-for-your-interest'|trans({'{organizationName}': organizationName}, 'CapcoAppBundle', user_locale) }}
+                        </h1>
+                        <p style="color: #5E5E5E;">
+                            {{ 'mail-greeting-username'|trans({'{username}': ''}, 'CapcoAppBundle', user_locale)}}<br/>
+                            {{ 'reply.anonymous.email.body'|trans({}, 'CapcoAppBundle', user_locale) }}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+            <table style="width: 100%;">
+                <td class="mail__link__wrapper">
+                    <div class="mail__button">
+                        <a href="{{ subscribeUrl }}">{{ 'send-me-news'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
+                    </div>
+                </td>
+            </table>
+            <table style="width: 100%;margin-bottom:20px;">
+                <td class="mail__link__wrapper">
+                    <a style="text-align: center;color: #1A88FF;" href="{{ subscribeUrl }}">{{ 'https://' ~ subscribeUrl|split('/')[2] ~ '/...' }}</a>
+                </td>
+            </table>
+
+            <table style="width: 100%">
+                <tr>
+                    <td class="mail__link__wrapper">
+                        <p style="color: #5E5E5E;">
+                            {{ 'please-ignore-email'|trans({}, 'CapcoAppBundle', user_locale) }}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer_mail %}
+    <p style="font-size:13px; font-family:helvetica, arial, sans-serif; color:#999999; margin-top: 10px;">
+        {{ 'email.footer.consent.internal'|trans({'{organizationName}': organizationName}, 'CapcoAppBundle', user_locale) | raw }}
+        <br><br>
+        {{ 'email.propulsed.by.capco'|trans({
+            '{logoUrl}': baseUrl ~ asset('capco-logo-mail.png'),
+        }, 'CapcoAppBundle', user_locale) | raw }}
+    </p>
+
+{% endblock %}

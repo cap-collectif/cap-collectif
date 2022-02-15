@@ -43,7 +43,7 @@ Scenario: Admin wants to export consultation steps
   And exported "csv" file with name "transformation-numerique-des-relations_ma-futur-collecte-de-proposition.csv" should match its snapshot
   And exported "csv" file with name "df7f805d45b7ee459f571183eed9d25d.csv" should match its snapshot
 
-@database @dev
+@database
 Scenario: Admin wants to export collect steps
   Given I run a command "capco:export:proposalStep" with parameters:
    | --delimiter | , |
@@ -124,6 +124,7 @@ Scenario: Project admin wants to export questionnaires
     | --delimiter |,|
   And exported "csv" file with name "projet-avec-administrateur-de-projet_questionnaire-administrateur-de-projet-project-admin.csv" should match its snapshot
   And exported "csv" file with name "projet-avec-administrateur-de-projet_questionnaire-administrateur-de-projet-2-project-admin.csv" should match its snapshot
+  And exported "csv" file with name "projet-avec-administrateur-de-projet_questionnaire-step-anonymous-project-owner.csv" should match its snapshot
   Then the command exit code should be 0
 
 Scenario: Admin wants to export event participants
