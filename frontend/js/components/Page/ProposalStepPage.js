@@ -2,7 +2,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Row } from 'react-bootstrap';
+import moment from 'moment';
 import { QueryRenderer, graphql } from 'react-relay';
+import { useIntl } from 'react-intl';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import UnpublishedProposalListView from '../Proposal/List/UnpublishedProposalListView';
 import DraftProposalList from '../Proposal/List/DraftProposalList';
@@ -22,6 +24,7 @@ import { formatGeoJsons } from '~/utils/geojson';
 
 type OwnProps = {|
   stepId: string,
+  projectId: string,
   count: number,
 |};
 
@@ -51,6 +54,7 @@ type RenderedProps = {|
 export const ProposalStepPageRendered = (props: RenderedProps) => {
   const { isTipsMeeeEnabled, viewer, isAuthenticated, features, step, count } = props;
   const [displayMode, setDisplayMode] = React.useState(step?.mainView);
+  const intl = useIntl();
 
   React.useEffect(() => {
     if (!displayMode && step?.mainView) setDisplayMode(step?.mainView);
@@ -68,6 +72,27 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   }
   return (
     <div id="ProposalStepPage-rendered">
+      {step.state === 'CLOSED' && ( // We keep for now these "old style" alerts
+        <div className="alert alert-info alert-dismissible block" role="alert">
+          <p>
+            <strong>{intl.formatMessage({ id: 'step.selection.alert.ended.title' })}</strong>{' '}
+            {intl.formatMessage({ id: 'thank.for.contribution' })}
+          </p>
+        </div>
+      )}
+      {step.state === 'FUTURE' && (
+        <div className="alert alert-info alert-dismissible block" role="alert">
+          <p>
+            <strong>{intl.formatMessage({ id: 'step.collect.alert.future.title' })}</strong>{' '}
+            {intl.formatMessage(
+              {
+                id: 'step.start.future',
+              },
+              { date: moment(step.timeRange?.startAt).format('MM/DD/YYYY') },
+            )}
+          </p>
+        </div>
+      )}
       <StepPageHeader step={step} />
       {isAuthenticated && step.kind === 'collect' && <DraftProposalList step={step} />}
       {isAuthenticated && (
@@ -108,10 +133,10 @@ export class ProposalStepPage extends React.Component<Props> {
 
   render() {
     const { count, stepId, isAuthenticated, features, isTipsMeeeEnabled } = this.props;
-
     return (
       <div className="proposal__step-page">
         <QueryRenderer
+          fetchPolicy="store-and-network"
           environment={environment}
           query={graphql`
             query ProposalStepPageQuery(
@@ -138,9 +163,13 @@ export class ProposalStepPage extends React.Component<Props> {
                   id
                   defaultSort
                   voteType
+                  state
                   statuses {
                     id
                     name
+                  }
+                  timeRange {
+                    startAt
                   }
                   form {
                     mapCenter {

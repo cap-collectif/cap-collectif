@@ -259,6 +259,7 @@ class StepController extends Controller
     }
 
     /**
+     * @Route("/project/{projectSlug}/collect/{stepSlug}/", name="app_project_show_collect_trailing_slash")
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @Entity("step", class="CapcoAppBundle:Steps\CollectStep", options={
@@ -343,6 +344,7 @@ class StepController extends Controller
     }
 
     /**
+     * @Route("/project/{projectSlug}/selection/{stepSlug}/", name="app_project_show_selection_trailing_slash")
      * @Route("/project/{projectSlug}/selection/{stepSlug}", name="app_project_show_selection")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @Entity("step", class="CapcoAppBundle:Steps\SelectionStep", options={

@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
+import { useParams, useLocation } from 'react-router-dom';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import type { State } from '~/types';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '~/constants/ProposalConstants';
@@ -10,37 +11,34 @@ import ProposalPageLogic from './ProposalPageLogic';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export type Props = {|
-  proposalId: string,
-  proposalTitle: string,
-  currentVotableStepId: ?string,
-  opinionCanBeFollowed: boolean,
-  isAuthenticated: boolean,
-  hasVotableStep: boolean,
-  votesPageUrl: string,
-  image: string,
-  showVotesWidget: boolean,
+  +proposalSlug: string,
+  +currentVotableStepId: ?string,
+  +opinionCanBeFollowed: boolean,
+  +isAuthenticated: boolean,
+  +hasVotableStep: boolean,
+  +votesPageUrl: string,
+  +showVotesWidget: boolean,
 |};
 
 export const ProposalPage = ({
-  proposalId,
-  proposalTitle,
   currentVotableStepId,
   isAuthenticated,
   opinionCanBeFollowed,
   hasVotableStep,
   votesPageUrl,
-  image,
   showVotesWidget,
 }: Props) => {
+  const { slug } = useParams();
+  const { state } = useLocation();
   const isTipsMeeeEnabled = useFeatureFlag('unstable__tipsmeee');
   const proposalRevisionsEnabled = useFeatureFlag('proposal_revisions');
-
   return (
     <QueryRenderer
+      fetchPolicy="store-and-network"
       environment={environment}
       query={graphql`
         query ProposalPageQuery(
-          $proposalId: ID!
+          $proposalSlug: String!
           $hasVotableStep: Boolean!
           $stepId: ID!
           $count: Int!
@@ -51,7 +49,7 @@ export const ProposalPage = ({
         ) {
           ...ProposalPageLogic_query
             @arguments(
-              proposalId: $proposalId
+              proposalSlug: $proposalSlug
               hasVotableStep: $hasVotableStep
               stepId: $stepId
               count: $count
@@ -66,9 +64,9 @@ export const ProposalPage = ({
         }
       `}
       variables={{
-        proposalId,
-        hasVotableStep: !!currentVotableStepId,
-        stepId: currentVotableStepId || '',
+        proposalSlug: slug,
+        hasVotableStep: !!state?.currentVotableStepId || !!currentVotableStepId,
+        stepId: state?.currentVotableStepId || currentVotableStepId || '',
         count: PROPOSAL_FOLLOWERS_TO_SHOW,
         cursor: null,
         isAuthenticated,
@@ -92,11 +90,9 @@ export const ProposalPage = ({
         return (
           <ProposalPageLogic
             queryRef={props}
-            title={proposalTitle}
             hasVotableStep={hasVotableStep}
             opinionCanBeFollowed={opinionCanBeFollowed}
             votesPageUrl={votesPageUrl}
-            image={image}
             showVotesWidget={showVotesWidget}
             isAuthenticated={isAuthenticated}
           />

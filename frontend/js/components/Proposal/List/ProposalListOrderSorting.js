@@ -45,10 +45,10 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
   }
 
   componentDidMount() {
-    const { dispatch, defaultSort, stepId } = this.props;
+    const { dispatch, defaultSort, stepId, order } = this.props;
     const savedSort = LocalStorage.get('proposal.orderByStep');
     if (!savedSort || !Object.prototype.hasOwnProperty.call(savedSort, stepId)) {
-      if (defaultSort) {
+      if (defaultSort && !order) {
         dispatch(changeOrder(defaultSort));
       }
     } else {

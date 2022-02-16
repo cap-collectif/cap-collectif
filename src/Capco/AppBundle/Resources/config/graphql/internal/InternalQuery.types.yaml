@@ -6,6 +6,13 @@ InternalQuery:
         name: Query
         description: 'Root of the schema.'
         fields:
+            proposalFromSlug:
+                description: 'Lookup a proposal from its unique slug.'
+                type: 'InternalProposal'
+                args:
+                    slug:
+                        type: 'String!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFromSlugResolver", [args, getUser()])'
             pages:
                 description: 'Lookup pages.'
                 type: '[InternalPage!]!'

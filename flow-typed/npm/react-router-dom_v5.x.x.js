@@ -44,6 +44,7 @@ declare module "react-router-dom" {
     pathname: string,
     search: string,
     hash: string,
+    state: any,
     ...
   };
 
@@ -87,7 +88,7 @@ declare module "react-router-dom" {
     history: RouterHistory,
     location: Location,
     match: Match,
-    staticContext?: StaticRouterContext
+    staticContext?: StaticRouterContext,
   |};
 
   declare type ContextRouterVoid = {

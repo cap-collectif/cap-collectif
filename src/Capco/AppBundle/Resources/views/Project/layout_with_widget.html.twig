@@ -9,13 +9,12 @@
 
 {% block mainContent %}
 
-    {% if showVotesWidget %}
+    {% if showVotesWidget and currentStep.type != 'collect' and currentStep.type != 'selection' %}
         {% set votableStep = proposal is defined ? proposal|current_votable_step : currentStep %}
         {% set stepId = votableStep|toStepGlobalId() %}
         {{ react_render_component('ProposalVoteBasketWidgetApp', {
             'props': {
                 'stepId': stepId,
-                'image': media_public_url(capco_site_image_media('image.votes_bar'), 'default_small'),
                 'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
             },
         }) }}

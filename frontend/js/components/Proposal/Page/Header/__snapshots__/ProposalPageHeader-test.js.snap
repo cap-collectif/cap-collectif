@@ -6,8 +6,8 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <a
-        href="http://capco.test"
+      <Link
+        to="/step"
       >
         <Icon
           color="#0388cc"
@@ -18,7 +18,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
           id="questions-list"
           values={Object {}}
         />
-      </a>
+      </Link>
       <div />
     </ProposalPageHeader__HeaderActions>
     <div
@@ -31,7 +31,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
     </div>
     <ProposalPageHeader__Informations>
       <h1>
-        Titre
+        titre
       </h1>
       <Skeleton
         isLoaded={true}
@@ -90,6 +90,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
             "objectType": "QUESTION",
             "step": Object {
               "state": "CLOSED",
+              "url": "/step",
             },
             "usingIllustration": true,
           },
@@ -119,8 +120,8 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <a
-        href="http://capco.test"
+      <Link
+        to="/step"
       >
         <Icon
           color="#0388cc"
@@ -131,7 +132,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           id="proposal.back"
           values={Object {}}
         />
-      </a>
+      </Link>
       <div />
     </ProposalPageHeader__HeaderActions>
     <ProposalPageHeader__Cover
@@ -140,7 +141,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
     />
     <ProposalPageHeader__Informations>
       <h1>
-        Titre
+        titre
       </h1>
       <Skeleton
         isLoaded={true}
@@ -207,6 +208,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             "objectType": "PROPOSAL",
             "step": Object {
               "state": "CLOSED",
+              "url": "/step",
             },
             "usingIllustration": true,
           },
@@ -238,8 +240,8 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <a
-        href="http://capco.test"
+      <Link
+        to="/step"
       >
         <Icon
           color="#0388cc"
@@ -250,7 +252,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           id="proposal.back"
           values={Object {}}
         />
-      </a>
+      </Link>
       <div>
         <button
           id="side-analysis-open-button"
@@ -271,7 +273,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
     />
     <ProposalPageHeader__Informations>
       <h1>
-        Titre
+        titre
       </h1>
       <Skeleton
         isLoaded={true}
@@ -338,6 +340,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             "objectType": "PROPOSAL",
             "step": Object {
               "state": "CLOSED",
+              "url": "/step",
             },
             "usingIllustration": true,
           },
@@ -369,8 +372,8 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <a
-        href="http://capco.test"
+      <Link
+        to="/step"
       >
         <Icon
           color="#0388cc"
@@ -381,7 +384,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
           id="questions-list"
           values={Object {}}
         />
-      </a>
+      </Link>
       <div />
     </ProposalPageHeader__HeaderActions>
     <div
@@ -394,7 +397,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
     </div>
     <ProposalPageHeader__Informations>
       <h1>
-        Titre
+        titre
       </h1>
       <Skeleton
         isLoaded={true}
@@ -453,6 +456,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
             "objectType": "QUESTION",
             "step": Object {
               "state": "CLOSED",
+              "url": "/step",
             },
             "usingIllustration": true,
           },
@@ -482,8 +486,8 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <a
-        href="http://capco.test"
+      <Link
+        to="/step"
       >
         <Icon
           color="#0388cc"
@@ -494,7 +498,7 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
           id="establishment-back"
           values={Object {}}
         />
-      </a>
+      </Link>
       <div />
     </ProposalPageHeader__HeaderActions>
     <div
@@ -507,7 +511,7 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
     </div>
     <ProposalPageHeader__Informations>
       <h1>
-        Titre
+        titre
       </h1>
       <Skeleton
         isLoaded={true}
@@ -566,6 +570,7 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
             "objectType": "ESTABLISHMENT",
             "step": Object {
               "state": "CLOSED",
+              "url": "/step",
             },
             "usingIllustration": true,
           },
@@ -595,8 +600,8 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <a
-        href="http://capco.test"
+      <Link
+        to="/step"
       >
         <Icon
           color="#0388cc"
@@ -607,7 +612,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
           id="interpellation.back"
           values={Object {}}
         />
-      </a>
+      </Link>
       <div />
     </ProposalPageHeader__HeaderActions>
     <div
@@ -620,7 +625,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
     </div>
     <ProposalPageHeader__Informations>
       <h1>
-        Titre
+        titre
       </h1>
       <Skeleton
         isLoaded={true}
@@ -679,6 +684,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
             "objectType": "PROPOSAL",
             "step": Object {
               "state": "CLOSED",
+              "url": "/step",
             },
             "usingIllustration": true,
           },

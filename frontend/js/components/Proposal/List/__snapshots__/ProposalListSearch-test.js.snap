@@ -16,6 +16,7 @@ exports[`<ProposalListSearch /> should render correctly 1`] = `
       />
     }
     id="proposal-search-input"
+    initialValue="This is some terms"
     name="search"
     onChange={[Function]}
     onClear={[Function]}

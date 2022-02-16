@@ -398,6 +398,38 @@ exports[`<LastProposals /> should render correctly 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "slug",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": null,
+                      "kind": "LinkedField",
+                      "name": "currentVotableStep",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "title",
                       "storageKey": null,
                     },
@@ -672,7 +704,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "2b03be4ef6696bd788a1924788546af5",
+          "cacheID": "1103cd338f13effcb4f46542e033338a",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -736,6 +768,11 @@ fragment ProposalFollowButton_proposal_3HigpW on Proposal {
 
 fragment ProposalPreviewBody_proposal_1nwaua on Proposal {
   id
+  slug
+  currentVotableStep {
+    __typename
+    id
+  }
   title
   trashed
   trashedStatus

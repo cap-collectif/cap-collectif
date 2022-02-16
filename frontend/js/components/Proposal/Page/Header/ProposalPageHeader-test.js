@@ -25,6 +25,7 @@ describe('<ProposalPageHeader />', () => {
       usingIllustration: true,
       step: {
         state: 'CLOSED',
+        url: '/step',
       },
     },
     media: { url: '/image.exe' },
@@ -58,6 +59,7 @@ describe('<ProposalPageHeader />', () => {
       usingIllustration: true,
       step: {
         state: 'CLOSED',
+        url: '/step',
       },
     },
     media: null,
@@ -83,6 +85,7 @@ describe('<ProposalPageHeader />', () => {
       usingIllustration: true,
       step: {
         state: 'CLOSED',
+        url: '/step',
       },
     },
     media: null,
@@ -151,6 +154,7 @@ describe('<ProposalPageHeader />', () => {
       usingIllustration: true,
       step: {
         state: 'CLOSED',
+        url: '/step',
       },
     },
     media: null,
@@ -175,6 +179,7 @@ describe('<ProposalPageHeader />', () => {
       usingIllustration: true,
       step: {
         state: 'CLOSED',
+        url: '/step',
       },
     },
     media: null,

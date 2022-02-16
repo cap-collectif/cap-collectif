@@ -28,6 +28,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             "name": "media1",
             "url": "http://image.png",
           },
+          "slug": "proposal-title",
           "summaryOrBodyExcerpt": "summaryOrBodyExcerpt",
           "theme": Object {
             "title": "themeI",
@@ -92,6 +93,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
               "name": "media1",
               "url": "http://image.png",
             },
+            "slug": "proposal-title",
             "summaryOrBodyExcerpt": "summaryOrBodyExcerpt",
             "theme": Object {
               "title": "themeI",
@@ -127,6 +129,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
               "name": "media1",
               "url": "http://image.png",
             },
+            "slug": "proposal-title",
             "summaryOrBodyExcerpt": "summaryOrBodyExcerpt",
             "theme": Object {
               "title": "themeI",
@@ -166,6 +169,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             "name": "media1",
             "url": "http://image.png",
           },
+          "slug": "proposal-title",
           "summaryOrBodyExcerpt": "summaryOrBodyExcerpt",
           "theme": Object {
             "title": "themeI",
@@ -185,6 +189,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
           "project": Object {
             "opinionCanBeFollowed": true,
           },
+          "url": "/step",
           "voteThreshold": 2,
           "voteType": "SIMPLE",
         }
@@ -220,6 +225,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             "name": "media1",
             "url": "http://image.png",
           },
+          "slug": "proposal-title",
           "summaryOrBodyExcerpt": "summaryOrBodyExcerpt",
           "theme": Object {
             "title": "themeI",
@@ -262,6 +268,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             "name": "media1",
             "url": "http://image.png",
           },
+          "slug": "proposal-title",
           "summaryOrBodyExcerpt": "summaryOrBodyExcerpt",
           "theme": Object {
             "title": "themeI",
@@ -282,6 +289,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
           "project": Object {
             "opinionCanBeFollowed": true,
           },
+          "url": "/step",
           "voteThreshold": 2,
           "voteType": "SIMPLE",
         }

@@ -22,6 +22,7 @@ type Props = {|
   +step: ?ProposalPreview_step,
   +viewer: ?ProposalPreview_viewer,
   +features: FeatureToggles,
+  +isSPA?: boolean,
 |};
 
 const ProposalCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
@@ -83,7 +84,7 @@ const getCategoryImage = (proposal: ProposalPreview_proposal) => {
 
 export class ProposalPreview extends React.Component<Props> {
   render() {
-    const { proposal, step, viewer, features } = this.props;
+    const { proposal, step, viewer, features, isSPA } = this.props;
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
         <ProposalCard
@@ -109,7 +110,7 @@ export class ProposalPreview extends React.Component<Props> {
               </>
             )
           ) : null}
-          <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
+          <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} isSPA={isSPA} />
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
           <ProposalPreviewStatus proposal={proposal} />
         </ProposalCard>
@@ -138,12 +139,12 @@ export default createFragmentContainer(
     `,
     proposal: graphql`
       fragment ProposalPreview_proposal on Proposal
-        @argumentDefinitions(
-          stepId: { type: "ID!" }
-          isAuthenticated: { type: "Boolean!" }
-          isProfileView: { type: "Boolean", defaultValue: false }
-          isTipsMeeeEnabled: { type: "Boolean!" }
-        ) {
+      @argumentDefinitions(
+        stepId: { type: "ID!" }
+        isAuthenticated: { type: "Boolean!" }
+        isProfileView: { type: "Boolean", defaultValue: false }
+        isTipsMeeeEnabled: { type: "Boolean!" }
+      ) {
         id
         media {
           url

@@ -10,21 +10,27 @@ describe('<ProposalMapPopover />', () => {
   const proposal = {
     $refType,
     url: 'http://test.com',
+    slug: 'test-proposal',
     title: 'testProposal',
+    currentVotableStep: { id: 'id' },
     author: { $fragmentRefs },
     media: { url: 'media.jpg' },
     category: null,
     status: null,
+    form: { step: { url: '/step' } },
   };
 
   const proposalWithoutMedia = {
     $refType,
     url: 'http://test.com',
     title: 'testProposal',
+    slug: 'test-proposal',
     author: { $fragmentRefs },
     media: null,
+    currentVotableStep: { id: 'id' },
     status: { name: 'cv ou quoi le frer le boss lacoste tn ou pas?', color: 'SUCCESS' },
     category: { name: 'Cat', categoryImage: null, icon: 'wheelchair', color: 'purple' },
+    form: { step: { url: '/step' } },
   };
 
   it('should render popover with a picture given the feature is enabled', () => {

@@ -13,7 +13,7 @@ type Props = {|
   +intl: Object,
 |};
 
-export const ProposalListSearch = ({ dispatch, intl }: Props) => {
+export const ProposalListSearch = ({ dispatch, intl, terms }: Props) => {
   const onInputChange = debounce((e: SyntheticInputEvent<HTMLInputElement>) => {
     const term = e.target.value;
     dispatch(changeTerm(term || ''));
@@ -37,6 +37,7 @@ export const ProposalListSearch = ({ dispatch, intl }: Props) => {
           onInputChange(e);
         }}
         onClear={handleClear}
+        initialValue={terms}
       />
     </form>
   );

@@ -9,16 +9,16 @@ import type {
 } from '~relay/ProposalVoteBasketWidgetAppQuery.graphql';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const ProposalVoteBasketWidget = lazy(() =>
-  import(
-    /* webpackChunkName: "ProposalVoteBasketWidget" */ '~/components/Proposal/Vote/ProposalVoteBasketWidget'
-  ),
+const ProposalVoteBasketWidget = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "ProposalVoteBasketWidget" */ '~/components/Proposal/Vote/ProposalVoteBasketWidget'
+    ),
 );
 
 type Props = {
   stepId: string,
   votesPageUrl: string,
-  image: string,
 };
 
 export default (data: Props) => (
@@ -57,7 +57,6 @@ export default (data: Props) => (
                 <ProposalVoteBasketWidget
                   step={props.step}
                   viewer={props.viewer}
-                  image={data.image}
                   votesPageUrl={data.votesPageUrl}
                 />
               );

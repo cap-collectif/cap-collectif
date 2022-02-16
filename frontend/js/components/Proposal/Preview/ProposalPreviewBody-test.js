@@ -10,6 +10,7 @@ describe('<ProposalPreviewBody />', () => {
   const props = {
     proposal: {
       id: 'proposal1',
+      slug: 'proposal-title',
       title: 'proposalTitle',
       trashed: false,
       trashedStatus: 'INVISIBLE',
@@ -41,6 +42,7 @@ describe('<ProposalPreviewBody />', () => {
     features,
     step: {
       id: 'step1',
+      url: '/step',
       voteThreshold: 2,
       voteType: 'SIMPLE',
       project: {

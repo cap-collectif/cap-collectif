@@ -7,7 +7,6 @@ import { Tab } from 'react-bootstrap';
 import { useResize } from '@liinkiing/react-hooks'; // TODO: find a better library
 import { Box } from '@cap-collectif/ui';
 import colors from '~/utils/colors';
-import ProposalVoteBasketWidget from '~/components/Proposal/Vote/ProposalVoteBasketWidget';
 import ProposalPageHeader from './Header/ProposalPageHeader';
 import ProposalPageTabs from './ProposalPageTabs';
 import ProposalAnalysisPanel from '../Analysis/ProposalAnalysisPanel';
@@ -25,11 +24,9 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export type Props = {|
   queryRef: ?ProposalPageLogic_query$key,
-  title: string,
   opinionCanBeFollowed: boolean,
   hasVotableStep: boolean,
   votesPageUrl: string,
-  image: string,
   showVotesWidget: boolean,
   isAuthenticated: boolean,
 |};
@@ -53,9 +50,9 @@ const PanelContainer: StyledComponent<
   },
   {},
   HTMLDivElement,
-> = styled.div.attrs(({ bottom }) => ({
+> = styled.div.attrs(({ bottom, scrollY }) => ({
   style: {
-    bottom: bottom < 0 && `${-bottom}px`,
+    bottom: bottom < 0 && scrollY && `${-bottom}px`,
   },
 }))`
   display: ${({ isAnalysing }) => !isAnalysing && 'none'};
@@ -72,7 +69,7 @@ const PanelContainer: StyledComponent<
       : hasVoteBar
       ? '100px'
       : '50px'};
-  position: ${({ scrollY }) => (scrollY >= 25 ? 'fixed' : 'absolute')};
+  position: ${({ scrollY }) => (scrollY >= 25 || !scrollY ? 'fixed' : 'absolute')};
   background: white;
   left: calc(50% + 142px);
   transition: width 0.5s;
@@ -85,7 +82,7 @@ type MODAL_STATE = 'TRUE' | 'FALSE' | 'SHOWED';
 const FRAGMENT = graphql`
   fragment ProposalPageLogic_query on Query
   @argumentDefinitions(
-    proposalId: { type: "ID!" }
+    proposalSlug: { type: "String!" }
     hasVotableStep: { type: "Boolean!" }
     stepId: { type: "ID!" }
     count: { type: "Int!" }
@@ -104,7 +101,7 @@ const FRAGMENT = graphql`
       ...ProposalPageTabs_step
       ...ProposalVoteBasketWidget_step @arguments(isAuthenticated: $isAuthenticated)
     }
-    proposal: node(id: $proposalId) {
+    proposal: proposalFromSlug(slug: $proposalSlug) {
       ...ProposalPageAside_proposal
         @arguments(
           stepId: $stepId
@@ -157,11 +154,8 @@ const FRAGMENT = graphql`
 
 export const ProposalPageLogic = ({
   queryRef,
-  title,
   opinionCanBeFollowed,
   hasVotableStep,
-  votesPageUrl,
-  image,
   showVotesWidget,
   isAuthenticated,
 }: Props) => {
@@ -194,17 +188,8 @@ export const ProposalPageLogic = ({
   useEffect(() => {
     if (show !== 'SHOWED') setShow(viewer && isMobile && hasAnalysis ? 'TRUE' : 'FALSE');
   }, [show, viewer, hasAnalysis, isMobile]);
-
   return (
     <>
-      {proposal && step && showVotesWidget && (
-        <ProposalVoteBasketWidget
-          step={step}
-          viewer={viewer}
-          image={image}
-          votesPageUrl={votesPageUrl}
-        />
-      )}
       <Box bg="white" pt={[0, 5]}>
         <ProposalDraftAlert proposal={proposal} message="draft-visible-by-you" />
       </Box>
@@ -217,7 +202,6 @@ export const ProposalPageLogic = ({
           <ProposalPageHeader
             hasAnalysingButton={hasAnalysis && !isAnalysing && !isMobile}
             onAnalysisClick={() => setIsAnalysing(true)}
-            title={title}
             proposal={proposal}
             step={step}
             viewer={viewer}

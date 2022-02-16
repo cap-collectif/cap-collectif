@@ -205,6 +205,12 @@ jest.mock('react-router-dom', () => ({
   useHistory: () => ({
     push: jest.fn(),
   }),
+  useParams: () => ({
+    slug: 'slug',
+  }),
+  useLocation: () => ({
+    state: {}
+  }),
   useRouteMatch: () => ({ url: '/mock/url' }),
 }));
 

@@ -82,7 +82,6 @@ const commit = (
       if (!payload || !payload.getLinkedRecord('voteEdge')) {
         return;
       }
-
       const proposalProxy = store.get(variables.input.proposalId);
       if (!proposalProxy) return;
 
@@ -94,6 +93,7 @@ const commit = (
       proposalProxy.setValue(true, 'viewerHasVote', { step: variables.input.stepId });
 
       const stepProxy = store.get(variables.input.stepId);
+
       if (!stepProxy) return;
       const stepConnection = stepProxy.getLinkedRecord('viewerVotes', {
         orderBy: { field: 'POSITION', direction: 'ASC' },
@@ -111,10 +111,7 @@ const commit = (
         const ids =
           stepConnection.getLinkedRecords('edges')?.map(edge => {
             return String(
-              edge
-                ?.getLinkedRecord('node')
-                ?.getLinkedRecord('proposal')
-                ?.getValue('id'),
+              edge?.getLinkedRecord('node')?.getLinkedRecord('proposal')?.getValue('id'),
             );
           }) || [];
 

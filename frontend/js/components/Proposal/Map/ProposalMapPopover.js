@@ -3,12 +3,15 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { Link } from 'react-router-dom';
 import type { State, FeatureToggles } from '~/types';
 import type { ProposalMapPopover_proposal } from '~relay/ProposalMapPopover_proposal.graphql';
 import UserLink from '../../User/UserLink';
 import { translateContent } from '~/utils/ContentTranslator';
 import colors from '~/utils/colors';
+import { getBaseUrl } from '~/config';
 import { bootstrapToHex } from '~/utils/bootstrapToHexColor';
+import { getBaseUrlFromProposalUrl } from '~/utils/router';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import { mediaQueryTablet } from '~/utils/sizes';
 import { MAIN_BORDER_RADIUS_SIZE, MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
@@ -130,55 +133,72 @@ export const PopoverInfo: StyledComponent<
   }
 `;
 
-export const ProposalMapPopover = ({ proposal, features, isMobile }: Props) => (
-  <>
-    <PopoverContainer isMobile={isMobile}>
-      {proposal.status && (
-        <Status color={bootstrapToHex(proposal.status.color)}>{proposal.status?.name}</Status>
-      )}
-      <PopoverContent>
-        <h4>
-          <a href={proposal.url}>{translateContent(proposal.title)}</a>
-        </h4>
-        <div>
-          {features.display_pictures_in_depository_proposals_list &&
-            (proposal?.media?.url || proposal?.category?.categoryImage?.image?.url ? (
-              <img
-                src={
-                  proposal.media
-                    ? proposal.media.url
-                    : proposal?.category?.categoryImage?.image?.url
-                }
-                alt="proposal-illustration"
-              />
-            ) : (
-              <>
-                {proposal?.category?.icon && (
-                  <Icon name={ICON_NAME[proposal?.category?.icon]} size={36} color={colors.white} />
-                )}
-                <SimpleProposalBackground
-                  color={proposal?.category?.color || '#1E88E5'}
-                  id={`background-${proposal.url}`}
-                />
-              </>
-            ))}
+export const ProposalMapPopover = ({ proposal, features, isMobile }: Props) => {
+  const url = getBaseUrlFromProposalUrl(proposal.url);
+  return (
+    <>
+      <PopoverContainer isMobile={isMobile}>
+        {proposal.status && (
+          <Status color={bootstrapToHex(proposal.status.color)}>{proposal.status?.name}</Status>
+        )}
+        <PopoverContent>
+          <h4>
+            <Link
+              to={{
+                pathname: `/${url}/${proposal.slug}`,
+                state: {
+                  currentVotableStepId: proposal.currentVotableStep?.id,
+                  stepUrl: proposal.form?.step?.url.replace(getBaseUrl(), ''),
+                },
+              }}>
+              {translateContent(proposal.title)}
+            </Link>
+          </h4>
           <div>
-            {proposal.category && (
+            {features.display_pictures_in_depository_proposals_list &&
+              (proposal?.media?.url || proposal?.category?.categoryImage?.image?.url ? (
+                <img
+                  src={
+                    proposal.media
+                      ? proposal.media.url
+                      : proposal?.category?.categoryImage?.image?.url
+                  }
+                  alt="proposal-illustration"
+                />
+              ) : (
+                <>
+                  {proposal?.category?.icon && (
+                    <Icon
+                      name={ICON_NAME[proposal?.category?.icon]}
+                      size={36}
+                      color={colors.white}
+                    />
+                  )}
+                  <SimpleProposalBackground
+                    color={proposal?.category?.color || '#1E88E5'}
+                    id={`background-${proposal.url}`}
+                  />
+                </>
+              ))}
+            <div>
+              {proposal.category && (
+                <PopoverInfo
+                  displayPicture={features.display_pictures_in_depository_proposals_list}>
+                  <Icon name={ICON_NAME.tag} size={12} color={colors.iconGrayColor} />
+                  <span>{proposal.category.name}</span>
+                </PopoverInfo>
+              )}
               <PopoverInfo displayPicture={features.display_pictures_in_depository_proposals_list}>
-                <Icon name={ICON_NAME.tag} size={12} color={colors.iconGrayColor} />
-                <span>{proposal.category.name}</span>
+                <Icon name={ICON_NAME.newUser} size={12} color={colors.iconGrayColor} />
+                <UserLink user={proposal.author} />
               </PopoverInfo>
-            )}
-            <PopoverInfo displayPicture={features.display_pictures_in_depository_proposals_list}>
-              <Icon name={ICON_NAME.newUser} size={12} color={colors.iconGrayColor} />
-              <UserLink user={proposal.author} />
-            </PopoverInfo>
+            </div>
           </div>
-        </div>
-      </PopoverContent>
-    </PopoverContainer>
-  </>
-);
+        </PopoverContent>
+      </PopoverContainer>
+    </>
+  );
+};
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
@@ -190,9 +210,15 @@ export default createFragmentContainer(
     proposal: graphql`
       fragment ProposalMapPopover_proposal on Proposal {
         title
+        slug
         url
         media {
           url
+        }
+        form {
+          step {
+            url
+          }
         }
         category {
           name
@@ -203,6 +229,9 @@ export default createFragmentContainer(
               url
             }
           }
+        }
+        currentVotableStep {
+          id
         }
         status(step: $stepId) {
           name

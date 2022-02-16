@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { Link } from 'react-router-dom';
 import type { DraftProposalPreview_proposal } from '~relay/DraftProposalPreview_proposal.graphql';
 import { translateContent } from '~/utils/ContentTranslator';
 
@@ -14,7 +15,13 @@ export class DraftProposalPreview extends React.Component<Props> {
 
     return (
       <li className="list-group-item">
-        <a href={proposal.url}>{translateContent(proposal.title)}</a>
+        <Link
+          to={{
+            pathname: `/proposals/${proposal.slug}`,
+            state: { currentVotableStepId: proposal.currentVotableStep?.id },
+          }}>
+          {translateContent(proposal.title)}
+        </Link>
       </li>
     );
   }
@@ -25,6 +32,10 @@ export default createFragmentContainer(DraftProposalPreview, {
     fragment DraftProposalPreview_proposal on Proposal {
       title
       url
+      slug
+      currentVotableStep {
+        id
+      }
     }
   `,
 });

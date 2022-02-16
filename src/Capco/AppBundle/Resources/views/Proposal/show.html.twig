@@ -31,15 +31,18 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('ProposalPageApp', {'props':{'currentVotableStepId': currentVotableStepId,
-    'proposalTitle': proposal.title,
-    'opinionCanBeFollowed': project.opinionCanBeFollowed,
-    'hasVotableStep': currentStep != null,
-    'proposalId': proposal.id|toGlobalId('Proposal'),
-    'image': media_public_url(capco_site_image_media('image.votes_bar'), 'default_small'),
-    'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
-    'showVotesWidget': showVotesWidget,
-     }}) }}
+    {{ react_render_component('ProposalStepPageApp', { 'props': { 
+        'currentVotableStepId': currentVotableStepId,
+        'stepId': currentStep.id|toGlobalId('CollectStep'),
+        'projectId': project.id|toGlobalId('Project'),
+        'currentStepType': currentStep.getType(),
+        'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
+        'showVotesWidget': showVotesWidget,
+        'hasVotableStep': currentStep != null,
+        'opinionCanBeFollowed': project.opinionCanBeFollowed,
+        'proposalSlug': proposal.slug,
+        count: capco_site_parameter_value('proposal.pagination') * 1 
+    } }) }}
 {% endblock %}
 
 {% block javascripts %}

@@ -69,7 +69,7 @@ export type State = {
   +isLoading: boolean,
   +isEditing: boolean,
   +showEditModal: boolean,
-  +order: string,
+  +order: ?string,
   +filters: Filters,
   +terms: ?string,
   +lastEditedStepId: ?Uuid,
@@ -91,7 +91,7 @@ export const initialState: State = {
   isLoading: true,
   isEditing: false,
   showEditModal: false,
-  order: 'random',
+  order: null,
   filters: {
     themes: null,
     categories: null,

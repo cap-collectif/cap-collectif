@@ -7,13 +7,11 @@ import { disableFeatureFlags } from '~/testUtils';
 
 describe('<ProposalPage />', () => {
   const props = {
-    proposalId: '41',
-    proposalTitle: 'Titre',
+    proposalSlug: 'proposal-titre',
     currentVotableStepId: 'stepid',
     opinionCanBeFollowed: false,
     hasVotableStep: false,
     isAuthenticated: false,
-    image: '/lepetitcochontirelirechelou.jpg',
     showVotesWidget: true,
     votesPageUrl: '/votes',
   };

@@ -21,16 +21,16 @@ const query = graphql`
 `;
 export type Props = {|
   +projectId: Uuid,
-  +currentStepType: string
+  +currentStepType: string,
 |};
-export default ({ projectId, currentStepType }: Props) => {
-
+export const ProjectHeaderQueryRenderer = ({ projectId, currentStepType }: Props) => {
   const DSReadySteps = ['collect', 'selection'];
   const isDsReady = DSReadySteps.includes(currentStepType);
 
   return (
     <Providers resetCSS={!isDsReady} designSystem={isDsReady}>
       <QueryRenderer
+        fetchPolicy="store-and-network"
         variables={{
           projectId,
           count: 10,
@@ -39,10 +39,10 @@ export default ({ projectId, currentStepType }: Props) => {
         environment={environment}
         query={query}
         render={({
-                   error,
-                   props,
-                   retry,
-                 }: {
+          error,
+          props,
+          retry,
+        }: {
           ...ReactRelayReadyState,
           props: ?ProjectHeaderAppQueryResponse,
         }) => {
@@ -56,24 +56,36 @@ export default ({ projectId, currentStepType }: Props) => {
 
           const getProjectHeader = () => {
             if (props && props.project) {
-              return isDsReady ? <ProjectHeader project={props.project} /> : <ProjectHeaderLegacy project={props.project} />;
+              return isDsReady ? (
+                <ProjectHeader project={props.project} />
+              ) : (
+                <ProjectHeaderLegacy project={props.project} />
+              );
             }
             return null;
-          }
+          };
 
           const getPlaceholder = () => {
-            return isDsReady ? <ProjectHeaderPlaceholder fetchData={retry} hasError={!!error} /> : <ProjectHeaderPlaceholderLegacy fetchData={retry} hasError={!!error} />
-          }
+            return isDsReady ? (
+              <ProjectHeaderPlaceholder fetchData={retry} hasError={!!error} />
+            ) : (
+              <ProjectHeaderPlaceholderLegacy fetchData={retry} hasError={!!error} />
+            );
+          };
 
           return (
-            <Skeleton
-              isLoaded={!!(props && props.project)}
-              placeholder={getPlaceholder()}>
+            <Skeleton isLoaded={!!(props && props.project)} placeholder={getPlaceholder()}>
               {!!(props && props.project) && getProjectHeader()}
             </Skeleton>
           );
         }}
       />
     </Providers>
-  )
-}
+  );
+};
+
+export default ({ projectId, currentStepType }: Props) => (
+  <Providers>
+    <ProjectHeaderQueryRenderer projectId={projectId} currentStepType={currentStepType} />
+  </Providers>
+);

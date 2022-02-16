@@ -306,7 +306,7 @@ export default createFragmentContainer(
   {
     step: graphql`
       fragment ProposalVoteBasketWidget_step on ProposalStep
-        @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
         viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
           totalCount
         }
@@ -319,7 +319,7 @@ export default createFragmentContainer(
     `,
     viewer: graphql`
       fragment ProposalVoteBasketWidget_viewer on User
-        @argumentDefinitions(stepId: { type: "ID!" }) {
+      @argumentDefinitions(stepId: { type: "ID!" }) {
         proposalVotes(stepId: $stepId) {
           totalCount
           creditsSpent

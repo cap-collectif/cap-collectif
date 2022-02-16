@@ -163,6 +163,7 @@ Scenario: Anonymous user combine search, filters and sorting on proposals in a c
 
 Scenario: Anonymous user wants to see proposals likers
   Given I go to an open collect step
+  And I wait 3 seconds
   Then I should see the proposal likers
 
 @elasticsearch
@@ -189,6 +190,7 @@ Scenario: Anonymous user wants to see saved proposals when he returns on the sel
   When I save current proposals
   Then I go to a selection step
   When proposals should be ordered randomly
+  And I wait 3 seconds
   Then I should see same proposals
 
 @elasticsearch

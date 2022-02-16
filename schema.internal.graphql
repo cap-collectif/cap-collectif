@@ -9268,6 +9268,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Link of Youtube channel."""
   youtubeUrl: URI
+
+  """The slug of a proposal."""
+  slug: String!
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]! @deprecated(reason: "Field `evaluers` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
   currentVotableStep: ProposalStep
@@ -10843,6 +10846,9 @@ type Query {
     """Ordering options for users returning from the connection."""
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
   ): UserConnection!
+
+  """Lookup a proposal from its unique slug."""
+  proposalFromSlug(slug: String!): Proposal
 
   """Lookup pages."""
   pages: [Page!]!

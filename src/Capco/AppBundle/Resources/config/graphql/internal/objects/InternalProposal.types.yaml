@@ -26,6 +26,9 @@ InternalProposal:
                 builder: 'Relay::GlobalId'
                 builderConfig:
                     typeName: Proposal
+            slug:
+                description: 'The slug of a proposal.'
+                type: String!
             adminUrl:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAdminUrlResolver", [value, getUser(), context])'
             progressSteps:

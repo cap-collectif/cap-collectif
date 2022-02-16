@@ -4,7 +4,9 @@ import Truncate from 'react-truncate';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import ProposalPreviewVote from './ProposalPreviewVote';
+import { getBaseUrl } from '~/config';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
@@ -19,14 +21,44 @@ import ProposalPreviewUser from './ProposalPreviewUser';
 import { translateContent, isPredefinedTraductionKey } from '~/utils/ContentTranslator';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import { getBaseUrlFromProposalUrl } from '~/utils/router';
 
 type Props = {
   proposal: ProposalPreviewBody_proposal,
   step: ?ProposalPreviewBody_step,
   viewer: ?ProposalPreviewBody_viewer,
+  isSPA?: boolean,
 };
 
-export const ProposalPreviewBody = ({ proposal, step, viewer }: Props) => {
+const renderProposalTitle = (
+  proposal: ProposalPreviewBody_proposal,
+  step: ?ProposalPreviewBody_step,
+  isSPA?: boolean,
+) => {
+  const url = getBaseUrlFromProposalUrl(proposal.url);
+  return isSPA ? (
+    <Link
+      to={{
+        pathname: `/${url}/${proposal.slug}`,
+        state: {
+          currentVotableStepId: proposal.currentVotableStep?.id,
+          stepUrl: step?.url.replace(getBaseUrl(), ''),
+        },
+      }}>
+      <Card.Title tagName="h4">
+        <Truncate lines={3}>{translateContent(proposal.title)}</Truncate>
+      </Card.Title>
+    </Link>
+  ) : (
+    <a href={proposal.url}>
+      <Card.Title tagName="h4">
+        <Truncate lines={3}>{translateContent(proposal.title)}</Truncate>
+      </Card.Title>
+    </a>
+  );
+};
+
+export const ProposalPreviewBody = ({ proposal, step, viewer, isSPA }: Props) => {
   const intl = useIntl();
   const summary =
     proposal.summaryOrBodyExcerpt && isPredefinedTraductionKey(proposal.summaryOrBodyExcerpt)
@@ -44,11 +76,7 @@ export const ProposalPreviewBody = ({ proposal, step, viewer }: Props) => {
           </h4>
         ) : (
           <React.Fragment>
-            <a href={proposal.url}>
-              <Card.Title tagName="h4">
-                <Truncate lines={3}>{translateContent(proposal.title)}</Truncate>
-              </Card.Title>
-            </a>
+            {renderProposalTitle(proposal, step, isSPA)}
             <p className="excerpt small">
               <WYSIWYGRender value={summary} />
             </p>
@@ -128,6 +156,10 @@ export default createFragmentContainer(ProposalPreviewBody, {
       isProfileView: { type: "Boolean", defaultValue: false }
     ) {
       id
+      slug
+      currentVotableStep {
+        id
+      }
       title
       trashed
       trashedStatus
@@ -169,6 +201,7 @@ export default createFragmentContainer(ProposalPreviewBody, {
       ...ProposalPreviewVote_step @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalVoteThresholdProgressBar_step
       voteThreshold
+      url
       canDisplayBallot
       voteType
       project {

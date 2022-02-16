@@ -90,6 +90,7 @@ Scenario: On Proposal Preview, I want to follow a proposal and change the type o
   Then I change the type of proposal follow with type "essential"
   And I should see proposal followed as "essential"
   Then I go to a collect step with vote
+  And I wait 2 seconds
   And I should see "following"
   And I click the ".dropdown-button" element
   And I should see a ".dropdown-menu" element
@@ -102,6 +103,7 @@ Scenario: On Proposal Preview, I want to follow a proposal and change the type o
   And I wait 2 seconds
   Then I should see "follow"
   And I go to a collect step with vote
+  And I wait 2 seconds
   Then I should see "follow"
 
 Scenario: User with true unfollow token wants to connect via email activities link

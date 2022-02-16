@@ -34,7 +34,7 @@ const renderProposals = (proposals, step, viewer) => (
           .map(edge => edge.node)
           .filter(Boolean)
           .map((node, key) => (
-            <ProposalPreview key={key} proposal={node} step={step} viewer={viewer} />
+            <ProposalPreview key={key} proposal={node} step={step} viewer={viewer} isSPA />
           ))}
     </ul>
   </Row>

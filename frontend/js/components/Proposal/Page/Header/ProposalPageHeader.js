@@ -7,6 +7,8 @@ import { useDisclosure } from '@liinkiing/react-hooks';
 import moment from 'moment';
 import styled, { type StyledComponent } from 'styled-components';
 import { Button, Box, Flex, Skeleton } from '@cap-collectif/ui';
+import { Link, useLocation } from 'react-router-dom';
+import { getBaseUrl } from '~/config';
 import colors from '~/utils/colors';
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes';
 import type { GlobalState } from '~/types';
@@ -18,17 +20,16 @@ import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
-
+import { getBaseUrlFromStepUrl } from '~/utils/router';
 import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration';
 
 type Props = {
-  title: string,
+  title: ?string,
   proposal: ProposalPageHeader_proposal,
   viewer: ?ProposalPageHeader_viewer,
   step: ?ProposalPageHeader_step,
   opinionCanBeFollowed: boolean,
   hasVotableStep: boolean,
-  referer: string,
   hasAnalysingButton?: boolean,
   onAnalysisClick?: () => void,
   shouldDisplayPictures: boolean,
@@ -164,14 +165,22 @@ const AvatarPlaceholder = () => (
   </Flex>
 );
 
+const renderBackUrl = (originStepUrl?: ?string, defaultStepUrl: string, tradKeyToBack: ?string) => {
+  const url = getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl);
+  return (
+    <Link to={`/${url}`}>
+      <Icon name={ICON_NAME.chevronLeft} size={9} color={colors.primaryColor} />
+      {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
+    </Link>
+  );
+};
+
 export const ProposalPageHeader = ({
   proposal,
   step,
   viewer,
-  title,
   opinionCanBeFollowed,
   hasVotableStep,
-  referer,
   hasAnalysingButton,
   onAnalysisClick,
   shouldDisplayPictures,
@@ -181,6 +190,7 @@ export const ProposalPageHeader = ({
   const color = shouldDisplayPictures ? proposal?.category?.color || '#1E88E5' : '#C4C4C4';
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
+  const { state } = useLocation();
 
   const createdDate = (
     <FormattedDate
@@ -212,10 +222,11 @@ export const ProposalPageHeader = ({
     <Header id="ProposalPageHeader">
       <div>
         <HeaderActions>
-          <a href={referer || proposal.url}>
-            <Icon name={ICON_NAME.chevronLeft} size={9} color={colors.primaryColor} />
-            {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
-          </a>
+          {renderBackUrl(
+            state?.stepUrl,
+            proposal?.form?.step?.url?.replace(getBaseUrl(), '') || '',
+            tradKeyToBack,
+          )}
           <div>
             {hasAnalysingButton && (
               <button type="button" id="side-analysis-open-button" onClick={onAnalysisClick}>
@@ -259,7 +270,7 @@ export const ProposalPageHeader = ({
           </div>
         )}
         <Informations>
-          <h1>{title}</h1>
+          <h1>{proposal?.title}</h1>
           <Skeleton placeholder={<AvatarPlaceholder />} isLoaded={proposal !== null}>
             <Flex direction="row">
               <UserAvatarLegacy user={proposal?.author} />
@@ -291,7 +302,6 @@ export const ProposalPageHeader = ({
 };
 
 const mapStateToProps = (state: GlobalState) => ({
-  referer: state.proposal.referer,
   shouldDisplayPictures: state.default.features.display_pictures_in_depository_proposals_list,
 });
 
@@ -300,24 +310,24 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageHea
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment ProposalPageHeader_viewer on User
-      @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
+    @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
       ...ProposalPageHeaderButtons_viewer
         @arguments(stepId: $stepId, hasVotableStep: $hasVotableStep)
     }
   `,
   step: graphql`
     fragment ProposalPageHeader_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...ProposalPageHeaderButtons_step @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
   proposal: graphql`
     fragment ProposalPageHeader_proposal on Proposal
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean!" }
-        proposalRevisionsEnabled: { type: "Boolean!" }
-        isTipsMeeeEnabled: { type: "Boolean!" }
-      ) {
+    @argumentDefinitions(
+      isAuthenticated: { type: "Boolean!" }
+      proposalRevisionsEnabled: { type: "Boolean!" }
+      isTipsMeeeEnabled: { type: "Boolean!" }
+    ) {
       id
       ...TrashedMessage_contribution
       ...UnpublishedLabel_publishable
@@ -353,6 +363,7 @@ export default createFragmentContainer(container, {
         objectType
         usingIllustration
         step {
+          url
           state
         }
       }
