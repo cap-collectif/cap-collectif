@@ -38,7 +38,7 @@ const updateExternalServiceConfiguration = (value: string, intl: IntlShape) =>
     toast({
       variant: 'success',
       content: intl.formatMessage({
-        id: 'global.save',
+        id: 'global-saved',
       }),
     });
   });

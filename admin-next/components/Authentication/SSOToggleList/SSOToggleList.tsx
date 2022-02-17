@@ -3,20 +3,19 @@ import {
     CapUIFontWeight,
     CapUIIcon,
     CapUIIconSize,
-    Checkbox,
     Flex,
     headingStyles,
     Switch,
     Tag,
     Text,
+    Checkbox
 } from '@cap-collectif/ui';
 import { Section } from '@ui/Section';
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql';
-import { IntlShape, useIntl } from 'react-intl';
-import { mutationErrorToast } from '@utils/mutation-error-toast';
+import { useIntl } from 'react-intl';
 import { useNavBarContext } from '../../NavBar/NavBar.context';
 import { useFeatureFlags } from '@hooks/useFeatureFlag';
-import ToggleFeatureMutation from '@mutations/ToggleFeatureMutation';
+import { toggleFeatureFlag } from '@mutations/ToggleFeatureMutation';
 import ListCard from '@ui/ListCard/ListCard';
 
 type SSOToggle = {
@@ -47,28 +46,6 @@ const SSO_TOGGLES: SSOToggle[] = [
     },
 ];
 
-const toggleFeatureFlag = (
-    name: FeatureFlagType,
-    enabled: boolean,
-    intl: IntlShape,
-    callBack: any,
-) => {
-    callBack(true);
-
-    return ToggleFeatureMutation.commit({
-        input: {
-            type: name,
-            enabled,
-        },
-    }).then(response => {
-        callBack(false);
-
-        if (!response.toggleFeature?.featureFlag) {
-            return mutationErrorToast(intl);
-        }
-    });
-};
-
 const SSOToggleList: FC = () => {
     const intl = useIntl();
     const { setSaving } = useNavBarContext();
@@ -78,7 +55,7 @@ const SSOToggleList: FC = () => {
         'login_saml',
         'login_cas',
         'login_paris',
-        'disconnect_openid',
+        'oauth2_switch_user',
     ]);
 
     return (
@@ -101,7 +78,7 @@ const SSOToggleList: FC = () => {
             <ListCard>
                 {SSO_TOGGLES.map(ssoToggle => (
                     <Fragment key={ssoToggle.featureFlag}>
-                        <ListCard.Item as="label" htmlFor={ssoToggle.featureFlag}>
+                        <ListCard.Item as="label" htmlFor={ssoToggle.featureFlag} >
                             <ListCard.Item.Label
                                 color="gray.900"
                                 fontWeight={CapUIFontWeight.Semibold}>
@@ -124,20 +101,20 @@ const SSOToggleList: FC = () => {
                         {ssoToggle.featureFlag === 'login_openid' && features.login_openid && (
                             <ListCard.SubItem>
                                 <Checkbox
-                                    checked={features.disconnect_openid}
-                                    onChange={e =>
+                                    checked={features.oauth2_switch_user}
+                                    id="openID-switch-user"
+                                    onChange={e => {
                                         toggleFeatureFlag(
-                                            'disconnect_openid',
+                                            'oauth2_switch_user',
                                             e.target.checked,
                                             intl,
                                             setSaving,
-                                        )
-                                    }
-                                    id="confirmed-openID-connection"
-                                    label={intl.formatMessage({
-                                        id: 'confirm-connection-openID',
+                                        );
+                                    }}>
+                                    {intl.formatMessage({
+                                        id: 'disconnect-sso-on-logout',
                                     })}
-                                />
+                                </Checkbox>
                             </ListCard.SubItem>
                         )}
                     </Fragment>

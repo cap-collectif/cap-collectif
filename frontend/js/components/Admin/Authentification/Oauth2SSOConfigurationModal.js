@@ -24,7 +24,7 @@ type FormValues = {|
   logoutUrl: ?Uri,
   redirectUri: Uri,
   profileUrl: ?Uri,
-  isDisconnectSsoOnLogout: ?boolean,
+  disconnectSsoOnLogout: ?boolean,
 |};
 
 type Props = {|
@@ -49,7 +49,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     userInfoUrl,
     logoutUrl,
     profileUrl,
-    isDisconnectSsoOnLogout,
+    disconnectSsoOnLogout,
   } = values;
 
   const { onClose } = props;
@@ -64,7 +64,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     userInfoUrl,
     accessTokenUrl,
     authorizationUrl,
-    disconnectSsoOnLogout: isDisconnectSsoOnLogout,
+    disconnectSsoOnLogout: disconnectSsoOnLogout || false,
   };
 
   if (id === undefined || id === null) {
@@ -162,7 +162,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
     userInfoUrl: null,
     accessTokenUrl: null,
     authorizationUrl: null,
-    isDisconnectSsoOnLogout: false,
+    disconnectSsoOnLogout: false,
   };
 
   render() {
@@ -268,7 +268,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
             />
             <Field
               id={`${formName}_disconnectSsoOnLogout`}
-              name="isDisconnectSsoOnLogout"
+              name="disconnectSsoOnLogout"
               component={Toggle}
               label={<FormattedMessage id="disconnect-sso-on-logout" />}
             />

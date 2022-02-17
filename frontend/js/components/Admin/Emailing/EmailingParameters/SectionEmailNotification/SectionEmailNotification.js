@@ -68,7 +68,7 @@ const updateSenderEmail = (senderEmailId: string, intl: IntlShape) => {
       } else {
         toast({
           variant: 'success',
-          content: intl.formatMessage({ id: 'global.save' }),
+          content: intl.formatMessage({ id: 'global-saved' }),
         });
       }
     })
@@ -96,7 +96,7 @@ const updateSiteParameter = (value: string, type: UpdateSiteParameterKeyname, in
         } else {
           toast({
             variant: 'success',
-            content: intl.formatMessage({ id: 'global.save' }),
+            content: intl.formatMessage({ id: 'global-saved' }),
           });
         }
       })

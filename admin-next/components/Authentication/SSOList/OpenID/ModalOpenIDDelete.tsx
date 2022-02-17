@@ -34,8 +34,6 @@ const deleteSSO = (ssoId: string, intl: IntlShape) => {
         .catch(() => {
             mutationErrorToast(intl)
         });
-
-
 }
 
 const ModalOpenIDDelete: FC<ModalOpenIDDeleteProps> = ({ ssoConfiguration: ssoConfigurationFragment }) => {
@@ -63,13 +61,13 @@ const ModalOpenIDDelete: FC<ModalOpenIDDeleteProps> = ({ ssoConfiguration: ssoCo
                     </Modal.Header>
                     <Modal.Body>
                         <Text color="gray.900">
-                            {intl.formatMessage({ id: "are-you-sure-activating-new-editor "})}
+                            {intl.formatMessage({ id: "are-you-sure-activating-new-editor"})}
                         </Text>
                         <Checkbox
                             checked={confirmed}
                             onChange={() => setConfirmed(!confirmed)}
                             id="confirmed-action"
-                            label={intl.formatMessage({ id: "admin.project.delete.confirm"})} />
+                        >{intl.formatMessage({ id: 'admin.project.delete.confirm' })}</Checkbox>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button

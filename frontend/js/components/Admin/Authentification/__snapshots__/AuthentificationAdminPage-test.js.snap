@@ -245,7 +245,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "isDisconnectSsoOnLogout",
+                              "name": "disconnectSsoOnLogout",
                               "storageKey": null,
                             },
                           ],
@@ -316,13 +316,6 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "secret",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "isDisconnectSsoOnLogout",
                               "storageKey": null,
                             },
                           ],
@@ -439,7 +432,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "d7650f0e270852a6ba9172bf542d8f89",
+          "cacheID": "d9fcbe3bbcf55490a27ad90d342caeb0",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -465,7 +458,6 @@ fragment FacebookConfigurationCard_ssoConfiguration on FacebookSSOConfiguration 
   clientId
   secret
   enabled
-  isDisconnectSsoOnLogout
 }
 
 fragment FacebookConfigurationForm_ssoConfiguration on FacebookSSOConfiguration {
@@ -547,7 +539,7 @@ fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
   redirectUri
   profileUrl
   __typename
-  isDisconnectSsoOnLogout
+  disconnectSsoOnLogout
 }
 
 fragment SSOConfigurationItem_configuration on SSOConfiguration {
@@ -830,7 +822,7 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "isDisconnectSsoOnLogout",
+                              "name": "disconnectSsoOnLogout",
                               "storageKey": null,
                             },
                           ],
@@ -901,13 +893,6 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "secret",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "isDisconnectSsoOnLogout",
                               "storageKey": null,
                             },
                           ],
@@ -1024,7 +1009,7 @@ exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "d7650f0e270852a6ba9172bf542d8f89",
+          "cacheID": "d9fcbe3bbcf55490a27ad90d342caeb0",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -1050,7 +1035,6 @@ fragment FacebookConfigurationCard_ssoConfiguration on FacebookSSOConfiguration 
   clientId
   secret
   enabled
-  isDisconnectSsoOnLogout
 }
 
 fragment FacebookConfigurationForm_ssoConfiguration on FacebookSSOConfiguration {
@@ -1132,7 +1116,7 @@ fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
   redirectUri
   profileUrl
   __typename
-  isDisconnectSsoOnLogout
+  disconnectSsoOnLogout
 }
 
 fragment SSOConfigurationItem_configuration on SSOConfiguration {

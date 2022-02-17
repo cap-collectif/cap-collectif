@@ -10,20 +10,14 @@ describe('<LoginSocialButtons />', () => {
     {
       name: 'Cap Collectif Oauth2 Provider',
       ssoType: 'oauth2',
-      labelColor: '#FFFFFF',
-      buttonColor: '#ABABAB',
     },
     {
       name: 'France Connect',
       ssoType: 'franceconnect',
-      labelColor: '',
-      buttonColor: '',
     },
     {
       name: 'Cap Collectif CAS Provider',
       ssoType: 'cas',
-      labelColor: '#FFFFFF',
-      buttonColor: '#ABABAB',
     },
   ];
 
@@ -41,8 +35,6 @@ describe('<LoginSocialButtons />', () => {
       {
         name: 'Cap Collectif CAS Provider',
         ssoType: 'cas',
-        labelColor: '#FFFFFF',
-        buttonColor: '#ABABAB',
       },
     ],
   };
@@ -51,8 +43,6 @@ describe('<LoginSocialButtons />', () => {
       {
         name: 'Cap Collectif Oauth2 Provider',
         ssoType: 'oauth2',
-        labelColor: '#FFFFFF',
-        buttonColor: '#ABABAB',
       },
     ],
   };
@@ -61,8 +51,6 @@ describe('<LoginSocialButtons />', () => {
       {
         name: 'France Connect',
         ssoType: 'franceconnect',
-        labelColor: '',
-        buttonColor: '',
       },
     ],
   };

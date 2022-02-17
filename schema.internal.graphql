@@ -5857,14 +5857,8 @@ type FacebookSSOConfiguration implements Node & SSOConfiguration {
   """Profile URL on the SSO side."""
   profileUrl: URI
 
-  """Color in hexadecimal of SSO button."""
-  buttonColor: Color!
-
-  """Color in hexadecimal of label SSO button."""
-  labelColor: Color!
-
-  """Whether or nor disconnect sso on logout."""
-  isDisconnectSsoOnLogout: Boolean!
+  """Whether or not disconnect sso on logout."""
+  disconnectSsoOnLogout: Boolean!
 
   """Client ID."""
   clientId: String
@@ -6162,14 +6156,8 @@ type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
   """Profile URL on the SSO side."""
   profileUrl: URI
 
-  """Color in hexadecimal of SSO button."""
-  buttonColor: Color!
-
-  """Color in hexadecimal of label SSO button."""
-  labelColor: Color!
-
-  """Whether or nor disconnect sso on logout."""
-  isDisconnectSsoOnLogout: Boolean!
+  """Whether or not disconnect sso on logout."""
+  disconnectSsoOnLogout: Boolean!
 
   """Client ID."""
   clientId: String
@@ -7485,14 +7473,8 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
   """Profile URL on the SSO side."""
   profileUrl: URI
 
-  """Color in hexadecimal of SSO button."""
-  buttonColor: Color!
-
-  """Color in hexadecimal of label SSO button."""
-  labelColor: Color!
-
-  """Whether or nor disconnect sso on logout."""
-  isDisconnectSsoOnLogout: Boolean!
+  """Whether or not disconnect sso on logout."""
+  disconnectSsoOnLogout: Boolean!
 
   """Client ID."""
   clientId: String
@@ -12688,14 +12670,8 @@ interface SSOConfiguration {
   """Profile URL on the SSO side."""
   profileUrl: URI
 
-  """Color in hexadecimal of SSO button."""
-  buttonColor: Color!
-
-  """Color in hexadecimal of label SSO button."""
-  labelColor: Color!
-
-  """Whether or nor disconnect sso on logout."""
-  isDisconnectSsoOnLogout: Boolean!
+  """Whether or not disconnect sso on logout."""
+  disconnectSsoOnLogout: Boolean!
 }
 
 """A connection to a list of items."""

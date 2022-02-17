@@ -33,11 +33,12 @@ const DEFAULT_SSO_CONFIGS: SSOConfigs = {
 
 const FRAGMENT = graphql`
     fragment SSOList_query on Query {
-        ssoConfigurations(first: 100) @connection(key: "SSOList_ssoConfigurations") {
+        ssoConfigurations(first: 100) @connection(key: "SSOList_ssoConfigurations", filters: []) {
             __id
             edges {
                 node {
                     id
+                    name
                     __typename
                     ...CardFacebook_ssoConfiguration
                     ...CardFranceConnect_ssoConfiguration
@@ -58,8 +59,7 @@ const SSOList: FC<SSOListProps> = ({ query: queryFragment }) => {
     const ssoConfigs: SSOConfigs = useMemo(() => {
         if(!ssoConfigurations.edges) return DEFAULT_SSO_CONFIGS;
 
-        return (
-            ssoConfigurations.edges
+        return ssoConfigurations.edges
                 .filter(Boolean)
                 .map(edge => edge?.node)
                 .reduce((acc, node) => {
@@ -74,8 +74,12 @@ const SSOList: FC<SSOListProps> = ({ query: queryFragment }) => {
                     }
 
                     return acc;
-                }, DEFAULT_SSO_CONFIGS)
-        );
+                }, {
+                    facebook: null,
+                    franceConnect: null,
+                    openIDs: [],
+                } as SSOConfigs);
+
     }, [ssoConfigurations]);
 
     return (

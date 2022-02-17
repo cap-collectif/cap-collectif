@@ -8,6 +8,7 @@ import { Box, Flex } from '@cap-collectif/ui';
 import ModalOpenIDConfiguration from './SSOList/OpenID/ModalOpenIDConfiguration';
 import SSOToggleList from './SSOToggleList/SSOToggleList';
 import { useAppContext } from '../AppProvider/App.context';
+import useFeatureFlag from '@hooks/useFeatureFlag';
 
 const QUERY = graphql`
     query AuthenticationMethodsQuery {
@@ -19,9 +20,10 @@ const AuthenticationMethods: FC = () => {
     const intl = useIntl();
     const query = useLazyLoadQuery<AuthenticationMethodsQuery>(QUERY, {});
     const { viewerSession } = useAppContext();
+    const hasFeatureOpenId = useFeatureFlag('login_openid');
 
     return (
-        <Section>
+        <Section flex={2}>
             <Flex direction="row" justify="space-between" align="flex-start">
                 <Box>
                     <Section.Title>
@@ -33,10 +35,12 @@ const AuthenticationMethods: FC = () => {
                     </Section.Description>
                 </Box>
 
-                <ModalOpenIDConfiguration
-                    ssoConfiguration={null}
-                    ssoConnectionName="client:root:__SSOList_ssoConfigurations_connection"
-                />
+                {hasFeatureOpenId && (
+                    <ModalOpenIDConfiguration
+                        ssoConfiguration={null}
+                        ssoConnectionName="client:root:__SSOList_ssoConfigurations_connection"
+                    />
+                )}
             </Flex>
 
             <SSOList query={query} />

@@ -13,7 +13,7 @@ Scenario: Admin wants to create an Oauth2 SSO configuration
           id
           name
           enabled
-          isDisconnectSsoOnLogout
+          disconnectSsoOnLogout
           clientId
           secret
           authorizationUrl
@@ -49,7 +49,7 @@ Scenario: Admin wants to create an Oauth2 SSO configuration
           "id": @string@,
           "name": "Test SSO",
           "enabled": true,
-          "isDisconnectSsoOnLogout": true,
+          "disconnectSsoOnLogout": true,
           "clientId": "test",
           "secret": "test",
           "authorizationUrl": "https://test.dev/auth",

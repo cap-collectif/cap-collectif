@@ -47,7 +47,7 @@ export const LoginSocialButtons = ({ ssoList }: Props) => {
       {ssoList.length > 0 &&
         ssoList.map(
           (
-            { ssoType, name, buttonColor, labelColor }: ReduxStoreSSOConfiguration,
+            { ssoType, name }: ReduxStoreSSOConfiguration,
             index: number,
           ) => {
             switch (ssoType) {
@@ -55,8 +55,6 @@ export const LoginSocialButtons = ({ ssoList }: Props) => {
                 return (
                   <LoginSocialButton
                     text={name}
-                    labelColor={labelColor}
-                    buttonColor={buttonColor}
                     key={index}
                     switchUserMode={hasOauth2SwitchUser || false}
                     type="openId"

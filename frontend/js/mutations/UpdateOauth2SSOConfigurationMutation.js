@@ -22,7 +22,7 @@ const mutation = graphql`
         userInfoUrl
         logoutUrl
         profileUrl
-        isDisconnectSsoOnLogout
+        disconnectSsoOnLogout
       }
     }
   }

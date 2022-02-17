@@ -169,8 +169,6 @@ export type SSOType = 'oauth2' | 'franceconnect' | 'facebook' | 'cas';
 export type ReduxStoreSSOConfiguration = {|
   name: string,
   ssoType: SSOType,
-  labelColor: string,
-  buttonColor: string,
 |};
 
 export interface SSOConfigurationInterface {

@@ -35,16 +35,6 @@ abstract class AbstractSSOConfiguration
     protected $profileUrl;
 
     /**
-     * @ORM\Column(name="button_color", type="string", length=7, nullable=false, options={"default": "#7498C0"})
-     */
-    protected $buttonColor = '#7498c0';
-
-    /**
-     * @ORM\Column(name="label_color", type="string", length=7, nullable=false, options={"default": "#FFFFFF"})
-     */
-    protected $labelColor = '#FFFFFF';
-
-    /**
      * @ORM\Column(name="environment", type="enum_sso_environment", nullable=false, options={"default": "NONE"})
      */
     protected $environment = EnumSSOEnvironmentType::NONE;
@@ -80,28 +70,6 @@ abstract class AbstractSSOConfiguration
         return $this;
     }
 
-    public function getButtonColor(): string
-    {
-        return $this->buttonColor;
-    }
-
-    public function setButtonColor(string $buttonColor): self
-    {
-        $this->buttonColor = $buttonColor;
-
-        return $this;
-    }
-
-    public function getLabelColor(): string
-    {
-        return $this->labelColor;
-    }
-
-    public function setLabelColor(?string $labelColor = null): void
-    {
-        $this->labelColor = $labelColor;
-    }
-
     public function getKind(): string
     {
         return 'oauth2';
@@ -132,6 +100,11 @@ abstract class AbstractSSOConfiguration
     }
 
     public function isDisconnectSsoOnLogout(): bool
+    {
+        return $this->disconnectSsoOnLogout;
+    }
+
+    public function disconnectSsoOnLogout(): bool
     {
         return $this->disconnectSsoOnLogout;
     }

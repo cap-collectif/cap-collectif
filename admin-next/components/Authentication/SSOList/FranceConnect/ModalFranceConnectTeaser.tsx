@@ -84,8 +84,8 @@ const ModalFranceConnectTeaser: FC<ModalFranceConnectTeaserProps> = ({ organizat
                             'france.connect.unique.user.per.account',
                             'france.connect.infos.verified',
                             'france.connect.participants.time.saver',
-                        ].map(label => (
-                            <Flex direction="row" spacing={1}>
+                        ].map((label, idx) => (
+                            <Flex direction="row" spacing={1} key={idx}>
                                 <Icon
                                     name={CapUIIcon.CheckO}
                                     size={CapUIIconSize.Md}

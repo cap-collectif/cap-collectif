@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
 import { FormControl, FieldInput, REGEX_URL } from '@cap-collectif/form';
+import { useFeatureFlag } from '@hooks/useFeatureFlag';
 
 export type FormValues = {
     name: string,
@@ -15,6 +16,7 @@ export type FormValues = {
     secret: string,
     profileUrl: string | null,
     redirectUri?: string,
+    disconnectSsoOnLogout?: boolean
 };
 
 const formName = 'form-openId-configuration';
@@ -22,6 +24,7 @@ const formName = 'form-openId-configuration';
 const FormConfiguration: FC = () => {
     const intl = useIntl();
     const { control } = useFormContext<FormValues>();
+    const hasLoginOpenID = useFeatureFlag('login_openid');
 
     return (
         <Flex as="form" direction="column" spacing={3} id={formName}>
@@ -145,6 +148,14 @@ const FormConfiguration: FC = () => {
                 <FormLabel htmlFor="redirectUri" label={intl.formatMessage({ id: 'sso-link' })} />
                 <FieldInput id="redirectUri" name="redirectUri" control={control} type="text" />
             </FormControl>
+
+            {hasLoginOpenID && <FormControl name="disconnectSsoOnLogout" control={control}>
+                <FieldInput id="disconnectSsoOnLogout" name="disconnectSsoOnLogout" control={control} type="checkbox">
+                    {intl.formatMessage({
+                        id: 'confirm-connection-openID',
+                    })}
+                </FieldInput>
+            </FormControl>}
         </Flex>
     );
 };

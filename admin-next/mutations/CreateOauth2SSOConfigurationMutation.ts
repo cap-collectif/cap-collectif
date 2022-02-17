@@ -26,6 +26,7 @@ const mutation = graphql`
                 userInfoUrl
                 logoutUrl
                 profileUrl
+                disconnectSsoOnLogout
             }
         }
     }
@@ -56,6 +57,7 @@ const commit = (
                         typeof variables.input.logoutUrl === 'undefined'
                             ? null
                             : variables.input.logoutUrl,
+                    disconnectSsoOnLogout: variables.input.disconnectSsoOnLogout,
                 },
             },
         },

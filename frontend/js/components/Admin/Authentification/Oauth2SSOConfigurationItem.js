@@ -122,7 +122,7 @@ export default createFragmentContainer(Oauth2SSOConfigurationItem, {
       redirectUri
       profileUrl
       __typename
-      isDisconnectSsoOnLogout
+      disconnectSsoOnLogout
     }
   `,
 });

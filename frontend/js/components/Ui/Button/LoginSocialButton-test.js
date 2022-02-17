@@ -3,11 +3,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import LoginSocialButton from './LoginSocialButton';
+import { LoginSocialButton } from './LoginSocialButton';
+
+const baseProps = {
+  primaryColor: '#fffeee',
+  colorText: '#fff',
+}
 
 describe('<LoginSocialButton />', () => {
   it('should render correctly', () => {
     const props = {
+      ...baseProps,
       type: 'facebook',
       switchUserMode: false,
     };
@@ -16,6 +22,7 @@ describe('<LoginSocialButton />', () => {
   });
   it('should render correctly franceConnect', () => {
     const props = {
+      ...baseProps,
       type: 'franceConnect',
       switchUserMode: false,
     };
@@ -25,6 +32,7 @@ describe('<LoginSocialButton />', () => {
 
   it('should render correctly with grandLyonConnect', () => {
     const props = {
+      ...baseProps,
       type: 'openId',
       text: 'grandLyonConnect',
     };
@@ -34,11 +42,10 @@ describe('<LoginSocialButton />', () => {
 
   it('should render correctly with switchusermode', () => {
     const props = {
+      ...baseProps,
       type: 'openId',
       switchUserMode: true,
       text: 'openid',
-      labelColor: '#ffffff',
-      buttonColor: '#000000',
     };
     const wrapper = shallow(<LoginSocialButton {...props} />);
     expect(wrapper).toMatchSnapshot();

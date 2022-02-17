@@ -6,6 +6,9 @@ import type {
     ToggleFeatureMutationResponse,
     ToggleFeatureMutationVariables,
 } from '@relay/ToggleFeatureMutation.graphql';
+import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql';
+import { IntlShape } from 'react-intl';
+import { mutationErrorToast } from '@utils/mutation-error-toast';
 
 const mutation = graphql`
     mutation ToggleFeatureMutation($input: ToggleFeatureInput!) @raw_response_type {
@@ -63,5 +66,27 @@ const commit = (
             );
         },
     });
+
+export const toggleFeatureFlag = (
+    name: FeatureFlagType,
+    enabled: boolean,
+    intl: IntlShape,
+    callBack?: any,
+): void => {
+    callBack(true);
+
+    commit({
+        input: {
+            type: name,
+            enabled,
+        },
+    }).then(response => {
+        if (!response.toggleFeature?.featureFlag) {
+            mutationErrorToast(intl);
+        }
+    });
+
+    callBack(false);
+};
 
 export default { commit };

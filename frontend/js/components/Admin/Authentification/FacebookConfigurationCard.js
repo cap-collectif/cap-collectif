@@ -19,7 +19,6 @@ const FRAGMENT = graphql`
     clientId
     secret
     enabled
-    isDisconnectSsoOnLogout
   }
 `;
 

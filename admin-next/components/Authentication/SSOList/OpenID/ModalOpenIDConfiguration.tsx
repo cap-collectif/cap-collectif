@@ -35,6 +35,7 @@ const FRAGMENT = graphql`
         accessTokenUrl
         authorizationUrl
         redirectUri
+        disconnectSsoOnLogout
     }
 `;
 
@@ -49,6 +50,7 @@ const onSubmit = (data: FormValues, hide: () => void, intl: IntlShape, reset: ()
         userInfoUrl: data.userInfoUrl,
         accessTokenUrl: data.accessTokenUrl,
         authorizationUrl: data.authorizationUrl,
+        disconnectSsoOnLogout: data?.disconnectSsoOnLogout || false,
     }
 
     if(isEditing && ssoId) {
@@ -89,6 +91,7 @@ const ModalOpenIDConfiguration: FC<ModalOpenIDConfigurationProps> = ({ ssoConfig
             accessTokenUrl: ssoConfiguration.accessTokenUrl,
             authorizationUrl: ssoConfiguration.authorizationUrl,
             redirectUri: ssoConfiguration.redirectUri,
+            disconnectSsoOnLogout: ssoConfiguration.disconnectSsoOnLogout,
         } : undefined
     });
 

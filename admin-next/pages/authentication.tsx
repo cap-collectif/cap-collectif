@@ -2,22 +2,26 @@ import Layout from '../components/Layout/Layout';
 import { useIntl } from 'react-intl';
 import { Suspense } from 'react';
 import AuthenticationMethods from '../components/Authentication/AuthenticationMethods';
-import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui';
+import { Flex } from '@cap-collectif/ui';
+import Shield from '../components/Authentication/Shield';
 import withPageAuthRequired from '@utils/withPageAuthRequired';
+import AuthenticationMethodsPlaceholder from '../components/Authentication/AuthenticationMethodsPlaceholder';
+import ShieldPlaceholder from '../components/Authentication/ShieldPlaceholder';
 
 const Authentication = () => {
     const intl = useIntl();
 
     return (
         <Layout navTitle={intl.formatMessage({ id: 'admin.group.authentication' })}>
-            <Suspense
-                fallback={
-                    <Flex alignItems="center" justifyContent="center">
-                        <Spinner size={CapUIIconSize.Xxl} color="gray.150" />
-                    </Flex>
-                }>
-                <AuthenticationMethods />
-            </Suspense>
+            <Flex direction="row" justify="space-between" spacing={6}>
+                <Suspense fallback={<AuthenticationMethodsPlaceholder />}>
+                    <AuthenticationMethods />
+                </Suspense>
+
+                <Suspense fallback={<ShieldPlaceholder />}>
+                    <Shield />
+                </Suspense>
+            </Flex>
         </Layout>
     );
 };

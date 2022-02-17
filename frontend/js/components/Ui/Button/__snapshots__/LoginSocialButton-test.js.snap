@@ -3,6 +3,8 @@
 exports[`<LoginSocialButton /> should render correctly 1`] = `
 <div>
   <LoginSocialButton__LinkButton
+    buttonColor="#fffeee"
+    labelColor="#fff"
     type="facebook"
   >
     <SocialIcon
@@ -85,8 +87,8 @@ exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`]
 exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] = `
 <div>
   <LoginSocialButton__LinkButton
-    buttonColor="#000000"
-    labelColor="#ffffff"
+    buttonColor="#fffeee"
+    labelColor="#fff"
     type="openId"
   >
     <SocialIcon

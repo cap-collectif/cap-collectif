@@ -3,9 +3,11 @@ import React, { useState, type Node } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import tinycolor from 'tinycolor2';
+import { connect } from 'react-redux';
 import SocialIcon from '../Icons/SocialIcon';
 import AppBox from '~ui/Primitives/AppBox';
 import { baseUrl } from '~/config';
+import type { GlobalState } from '~/types';
 
 export type LoginSocialButtonType =
   | 'facebook'
@@ -18,11 +20,11 @@ export type LoginSocialButtonType =
 type Props = {|
   type: LoginSocialButtonType,
   switchUserMode?: boolean,
-  labelColor?: string,
-  buttonColor?: string,
   text?: string,
   justifyContent?: string,
   noHR?: boolean,
+  primaryColor: string,
+  colorText: string,
 |};
 
 export const getLabelColorForType = (type: LoginSocialButtonType, color?: string): string => {
@@ -217,10 +219,10 @@ export const LoginSocialButton = ({
   type,
   switchUserMode,
   text,
-  labelColor,
-  buttonColor,
   justifyContent = 'center',
   noHR = false,
+  primaryColor,
+  colorText
 }: Props) => {
   const [isHover, seIsHover] = useState<boolean>(false);
 
@@ -230,7 +232,7 @@ export const LoginSocialButton = ({
 
   if (text === 'grandLyonConnect') {
     return (
-      <GrandLyonConnectButton type={text} labelColor={labelColor} buttonColor={buttonColor}>
+      <GrandLyonConnectButton type={text}>
         <a href={getButtonLinkForType(type, redirectUri)} title={type}>
           <SocialIcon className="loginIcon" name={text} />
         </a>
@@ -266,7 +268,7 @@ export const LoginSocialButton = ({
           </FranceConnectLink>
         </>
       ) : (
-        <LinkButton type={type} labelColor={labelColor} buttonColor={buttonColor}>
+        <LinkButton type={type} labelColor={colorText} buttonColor={primaryColor}>
           <SocialIcon className="loginIcon" name={type} />
           <a href={getButtonLinkForType(type, redirectUri)} title={type}>
             {text !== undefined ? (
@@ -281,4 +283,9 @@ export const LoginSocialButton = ({
   );
 };
 
-export default LoginSocialButton;
+const mapStateToProps = (state: GlobalState) => ({
+  primaryColor: state.default.parameters['color.btn.primary.bg'],
+  colorText: state.default.parameters['color.btn.primary.text']
+});
+
+export default connect<any, any, _, _, _, _>(mapStateToProps)(LoginSocialButton);

@@ -60,15 +60,19 @@ export const ALLOWED_MIMETYPES = [
     'application/vnd.oasis.opendocument.spreadsheet', // .ods
 ];
 
+const getApiUrl = (): string => {
+    const apiBaseUrl = getBaseUrlWithAdminNextSupport();
+    return `${apiBaseUrl}/api`;
+}
+
+export const UPLOAD_PATH = `${getApiUrl()}/files`
+
 export default {
     getGraphqlInternalUrl: () => {
         const apiBaseUrl = getBaseUrlWithAdminNextSupport();
         return `${apiBaseUrl}/graphql/internal`;
     },
-    getApiUrl: () => {
-        const apiBaseUrl = getBaseUrlWithAdminNextSupport();
-        return `${apiBaseUrl}/api`;
-    },
+    getApiUrl,
     mapsServerKey: '***REMOVED***',
     mapProviders: {
         MAPBOX: {
@@ -95,3 +99,4 @@ export default {
     ),
     isIframe: typeof window !== 'undefined' && window.self !== window.top,
 };
+

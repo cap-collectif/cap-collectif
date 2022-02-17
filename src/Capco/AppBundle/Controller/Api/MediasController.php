@@ -92,6 +92,7 @@ class MediasController extends AbstractController
                 'url' =>
                     $request->getUriForPath('/media') .
                     $this->mediaExtension->path($media, 'reference'),
+                'type' => $media->getContentType()
             ],
             201
         );

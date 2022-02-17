@@ -7,23 +7,21 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   >
     authenticate-with
   </div>
-  <LoginSocialButton
+  <Connect(LoginSocialButton)
     type="saml"
   />
-  <LoginSocialButton
-    buttonColor="#ABABAB"
+  <Connect(LoginSocialButton)
     key="0"
-    labelColor="#FFFFFF"
     switchUserMode={false}
     text="Cap Collectif Oauth2 Provider"
     type="openId"
   />
-  <LoginSocialButton
+  <Connect(LoginSocialButton)
     justifyContent="center"
     key="1"
     type="franceConnect"
   />
-  <LoginSocialButton
+  <Connect(LoginSocialButton)
     type="cas"
   />
   <p
@@ -43,7 +41,7 @@ exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
   >
     authenticate-with
   </div>
-  <LoginSocialButton
+  <Connect(LoginSocialButton)
     type="cas"
   />
   <p
@@ -63,7 +61,7 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
   >
     authenticate-with
   </div>
-  <LoginSocialButton
+  <Connect(LoginSocialButton)
     justifyContent="center"
     key="0"
     type="franceConnect"
@@ -83,10 +81,8 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   >
     authenticate-with
   </div>
-  <LoginSocialButton
-    buttonColor="#ABABAB"
+  <Connect(LoginSocialButton)
     key="0"
-    labelColor="#FFFFFF"
     switchUserMode={false}
     text="Cap Collectif Oauth2 Provider"
     type="openId"
@@ -106,7 +102,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   >
     authenticate-with
   </div>
-  <LoginSocialButton
+  <Connect(LoginSocialButton)
     type="saml"
   />
   <p
@@ -124,23 +120,21 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   >
     authenticate-with
   </div>
-  <LoginSocialButton
+  <Connect(LoginSocialButton)
     type="saml"
   />
-  <LoginSocialButton
-    buttonColor="#ABABAB"
+  <Connect(LoginSocialButton)
     key="0"
-    labelColor="#FFFFFF"
     switchUserMode={false}
     text="Cap Collectif Oauth2 Provider"
     type="openId"
   />
-  <LoginSocialButton
+  <Connect(LoginSocialButton)
     justifyContent="center"
     key="1"
     type="franceConnect"
   />
-  <LoginSocialButton
+  <Connect(LoginSocialButton)
     type="cas"
   />
 </Fragment>
