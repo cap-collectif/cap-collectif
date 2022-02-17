@@ -76,6 +76,7 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@ui': path.resolve(__dirname, '../components/UI'),
+      '@utils': path.resolve(__dirname, '../utils'),
     };
 
     return config;
