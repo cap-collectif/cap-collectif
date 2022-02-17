@@ -235,8 +235,8 @@
                 "featuresRequired": ["multilangue"]
             },
             {
-                "title": "custom-url",
-                "href": "/admin/redirect/list",
+                "title": "domain.and.url",
+                "href": "/admin-next/domain-url",
                 "rolesRequired": [],
                 "featuresRequired": ["http_redirects"]
             },

@@ -297,7 +297,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     <SidebarLink text="global-languages" href="/admin/locale/list" />
                   )}
                   {features.http_redirects && (
-                    <SidebarLink text="custom-url" href="/admin/redirect/list" />
+                    <SidebarLink text="domain.and.url" href="/admin-next/domain-url" />
                   )}
                   <SidebarLink text="website-icon" href="/admin/favicon/list" />
                   <SidebarLink text="global-typeface" href="/admin/font/list" />
