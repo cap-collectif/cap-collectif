@@ -2,22 +2,22 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Client\MapboxClient;
 use Capco\AppBundle\Entity\MapToken;
-use Capco\AppBundle\Enum\MapProviderEnum;
-use Capco\AppBundle\Repository\MapTokenRepository;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\Client\MapboxClient;
 use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Enum\MapProviderEnum;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Capco\AppBundle\Repository\MapTokenRepository;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 class GenerateMapProviderPublicToken extends Command
 {
     public const MAPBOX_USERNAME = 'capcollectif';
-    const MAPBOX_SECRET_TOKEN_SCOPES = [
+
+    const MAPBOX_PUBLIC_TOKEN_SCOPES = [
         'styles:tiles',
         'styles:read',
         'fonts:read',
@@ -25,30 +25,33 @@ class GenerateMapProviderPublicToken extends Command
     ];
 
     protected static $defaultName = 'capco:generate:map-token';
+
+    private SymfonyStyle $io;
+    private MapboxClient $mapboxClient;
+    private MapTokenRepository $mapTokenRepository;
+    private EntityManagerInterface $em;
     /**
-     * @var SymfonyStyle
+     * To enable map views, you need a mapbox access token
+     * https://www.mapbox.com/
+     * "tokens:read", "tokens:write" scopes.
      */
-    private $io;
-    private $siteParameterResolver;
-    private $mapboxClient;
-    private $mapTokenRepository;
-    private $em;
-    private $mapboxSecretKey;
+    private string $mapboxSecretKey;
+    private string $instanceName;
 
     public function __construct(
-        SiteParameterResolver $siteParameterResolver,
         string $mapboxSecretKey,
+        string $instanceName,
         EntityManagerInterface $em,
         MapTokenRepository $mapTokenRepository,
         MapboxClient $mapboxClient,
         ?string $name = null
     ) {
         parent::__construct($name);
-        $this->siteParameterResolver = $siteParameterResolver;
         $this->mapboxClient = $mapboxClient;
         $this->mapTokenRepository = $mapTokenRepository;
         $this->em = $em;
         $this->mapboxSecretKey = $mapboxSecretKey;
+        $this->instanceName = $instanceName;
     }
 
     protected function configure(): void
@@ -72,15 +75,15 @@ class GenerateMapProviderPublicToken extends Command
             throw new \RuntimeException(sprintf('Invalid provider : "%s"', $provider));
         }
         if (MapProviderEnum::MAPBOX === $provider) {
-            $this->handleMapbox();
+            return $this->handleMapbox();
         }
 
-        return 0;
+        return 1;
     }
 
     private function handleMapbox(): int
     {
-        $sitename = $this->siteParameterResolver->getValue('global.site.fullname');
+        $sitename = $this->instanceName;
         $provider = $this->mapTokenRepository->getCurrentMapTokenForProvider(
             MapProviderEnum::MAPBOX
         );
@@ -102,6 +105,16 @@ class GenerateMapProviderPublicToken extends Command
         }
 
         $this->io->title('Generating public token for Mapbox for ' . $sitename);
+
+        if (!$this->mapboxSecretKey || !str_starts_with($this->mapboxSecretKey, 'sk.')) {
+            $this->io->error(
+                'You need to set a mapbox secret key (sk.xyz…) in the env or .env.local file to generate a public token. You current secret value is : ' .
+                    $this->mapboxSecretKey
+            );
+
+            return 1;
+        }
+
         $this->io->text('Requesting <info>Mapbox API</info>...');
 
         $response = $this->mapboxClient
@@ -109,14 +122,15 @@ class GenerateMapProviderPublicToken extends Command
             ->setPath(self::MAPBOX_USERNAME)
             ->addParameter('access_token', $this->mapboxSecretKey)
             ->post([
-                'scopes' => self::MAPBOX_SECRET_TOKEN_SCOPES,
+                'scopes' => self::MAPBOX_PUBLIC_TOKEN_SCOPES,
                 'note' => 'Public token for ' . $sitename,
             ]);
 
         if (isset($response['token'])) {
             $provider
                 ->setInitialPublicToken($response['token'])
-                ->setPublicToken($response['token']);
+                ->setPublicToken($response['token'])
+                ->setSecretToken($this->mapboxSecretKey);
             $this->em->flush();
             $this->io->success(
                 sprintf(

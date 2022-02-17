@@ -10,6 +10,7 @@ def generate(migrate='false', environement='dev'):
         # Delete media cache and source files
         command('rm -rf public/media/*', 'application')
         command('mkdir -p public/media', 'application')
+        # command('php -d memory_limit=1024M bin/console debug:container --env-vars --env=' + environement, 'application', Config.www_app)
         command('php -d memory_limit=1024M bin/console capco:reinit --force --env=' + environement + ('', ' --migrate')[migrate == 'true'], 'application', Config.www_app)
     else:
         print("Option environment must be 'dev', 'test' or 'prod'.")

@@ -5,7 +5,11 @@ services:
       BLACKFIRE_LOG_LEVEL: 1
       CI: ${CI}
       CIRCLE_JOB: ${CIRCLE_JOB}
-
+      # Set the following variables on CircleCI
+      # https://app.circleci.com/settings/project/github/cap-collectif/platform/environment-variables
+      SYMFONY_GOOGLE_MAP_PUBLIC_KEY: ${SYMFONY_GOOGLE_MAP_PUBLIC_KEY}
+      SYMFONY_GOOGLE_MAP_SERVER_KEY: ${SYMFONY_GOOGLE_MAP_SERVER_KEY}
+      SYMFONY_MAPBOX_SECRET_KEY: ${SYMFONY_MAPBOX_SECRET_KEY}
     volumes:
       - ../../:/var/www
       - /etc/localtime:/etc/localtime:ro

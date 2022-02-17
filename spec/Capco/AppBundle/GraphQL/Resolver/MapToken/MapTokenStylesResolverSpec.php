@@ -121,10 +121,8 @@ class MapTokenStylesResolverSpec extends ObjectBehavior
             ],
         ];
 
-        $publicToken =
-            '***REMOVED***';
-        $secretToken =
-            '***REMOVED***';
+        $publicToken = 'INSERT_A_REAL_SECRET';
+        $secretToken = 'INSERT_A_REAL_SECRET';
 
         $argument->offsetGet('visibility')->willReturn(null);
         $mapToken->getInitialPublicToken()->willReturn($publicToken);

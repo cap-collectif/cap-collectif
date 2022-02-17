@@ -15,6 +15,15 @@ def setup_env_vars():
     """
     variables = """APP_ENV=dev
 SYMFONY_ENV=dev
+# If you want to enable address geolocation, set this variables
+# https://developers.google.com/maps/documentation/javascript/get-api-key
+SYMFONY_GOOGLE_MAP_PUBLIC_KEY=INSERT_A_REAL_SECRET
+SYMFONY_GOOGLE_MAP_SERVER_KEY=INSERT_A_REAL_SECRET
+# To enable map views, you need a mapbox access token
+# https://www.mapbox.com/
+# with "tokens:read", "tokens:write" scopes
+SYMFONY_MAPBOX_SECRET_KEY=INSERT_A_REAL_SECRET
+# Host mapping
 SYMFONY_DATABASE_HOST={host}
 SYMFONY_REDIS_HOST={host}
 SYMFONY_ELASTICSEARCH_HOST={host}
@@ -23,6 +32,7 @@ SYMFONY_RABBITMQ_NODENAME={host}
 SYMFONY_ASSETS_HOST={asset_host}""" \
         .format(host=Config.local_ip, asset_host=Config.asset_host)
     run('echo "%s" > .env.local' % variables)
+    print(color_cyan + 'Successfully created `.env.local`')
 
 
 def prepare_php(environment='dev'):

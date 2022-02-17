@@ -25,6 +25,7 @@ services:
     Capco\AppBundle\Command\GenerateMapProviderPublicToken:
         arguments:
             $mapboxSecretKey: '%mapbox_secret_key%'
+            $instanceName: '%instance_name%'
 
     Capco\AppBundle\Command\ReinitCommand:
         arguments:

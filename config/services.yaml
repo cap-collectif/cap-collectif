@@ -25,7 +25,6 @@ parameters:
     use_assetic_controller: '%env(SYMFONY_USE_ASSETIC_CONTROLLER)%'
     google_app_id: '%env(SYMFONY_GOOGLE_APP_ID)%'
     google_app_secret: '%env(SYMFONY_GOOGLE_APP_SECRET)%'
-    real_favicon_secret: '%env(SYMFONY_REAL_FAVICON_SECRET)%'
     language_analyzer: '%env(SYMFONY_LANGUAGE_ANALYZER)%'
     remember_secret: '%env(SYMFONY_REMEMBER_SECRET)%'
     router.request_context.host: '%env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST)%'
@@ -38,7 +37,7 @@ parameters:
     twilio_number: '%env(SYMFONY_TWILIO_NUMBER)%'
     disable_mail_delivery: false
     sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
-    google_maps_key: '%env(SYMFONY_GOOGLE_MAP_KEY)%'
+    google_maps_key: '%env(SYMFONY_GOOGLE_MAP_PUBLIC_KEY)%'
     mapbox_secret_key: '%env(SYMFONY_MAPBOX_SECRET_KEY)%'
     locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC']
     google_maps_key_server: '%env(SYMFONY_GOOGLE_MAP_SERVER_KEY)%'
@@ -90,8 +89,9 @@ parameters:
     cas_verify_url_profile: '%env(SYMFONY_CAS_VERIFY_URL_PROFILE)%'
     #
     # Default values :
+    # Please do not put sensible data here.
     #
-    env(SYMFONY_GOOGLE_MAP_KEY): '***REMOVED***'
+    env(SYMFONY_GOOGLE_MAP_PUBLIC_KEY): '***REMOVED***'
     env(SYMFONY_GOOGLE_MAP_SERVER_KEY): '***REMOVED***'
     env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
     env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -134,7 +134,6 @@ parameters:
     env(SYMFONY_RABBITMQ_PORT): 5672
     env(SYMFONY_RABBITMQ_NODENAME): rabbit
     env(SYMFONY_MAPBOX_SECRET_KEY): ***REMOVED***
-    env(SYMFONY_REAL_FAVICON_SECRET): ***REMOVED***
     env(SYMFONY_ASSETS_HOST): null
     env(SYMFONY_SENTRY_DSN): null
     env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
