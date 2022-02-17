@@ -1,0 +1,9 @@
+UpdateCustomDomainPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            siteSettings:
+                type: 'InternalSiteSettings'
+            errorCode:
+                type: 'UpdateCustomDomainErrorCode'
+                description: 'The available errors if any.'

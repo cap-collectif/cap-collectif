@@ -4654,6 +4654,24 @@ type DeleteCommentPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `updateCustomDomain` mutation."""
+enum DeleteCustomDomainErrorCode {
+  """Error occured while deleting the custom domain."""
+  ERROR_DEPLOYER_API
+}
+
+input DeleteCustomDomainInput {
+  clientMutationId: String
+}
+
+type DeleteCustomDomainPayload {
+  siteSettings: SiteSettings
+
+  """The available errors if any."""
+  errorCode: DeleteCustomDomainErrorCode
+  clientMutationId: String
+}
+
 """Available errors for an `deleteDebateAnonymousArgument` mutation."""
 enum DeleteDebateAnonymousArgumentErrorCode {
   """No `Debate` match your `id`."""
@@ -7377,6 +7395,8 @@ type Mutation {
   sendSmsPhoneValidationCode(input: SendSmsPhoneValidationCodeInput!): SendSmsPhoneValidationCodePayload
   updateProposalStepPaperVoteCounter(input: UpdateProposalStepPaperVoteCounterInput!): UpdateProposalStepPaperVoteCounterPayload
   verifyUserPhoneNumber(input: VerifyUserPhoneNumberInput!): VerifyUserPhoneNumberPayload
+  updateCustomDomain(input: UpdateCustomDomainInput!): UpdateCustomDomainPayload
+  deleteCustomDomain(input: DeleteCustomDomainInput!): DeleteCustomDomainPayload
 }
 
 """A connection to a list of items."""
@@ -11169,6 +11189,9 @@ type Query {
 
   """Get all sending addresses registered"""
   senderEmails: [SenderEmail!]!
+
+  """Get site settings."""
+  siteSettings: SiteSettings
 }
 
 input QueryAnalyticsFilter {
@@ -13529,6 +13552,30 @@ type SiteParameterTranslation {
   locale: String!
 }
 
+"""Site settings"""
+type SiteSettings {
+  """The current capco domain."""
+  capcoDomain: URI!
+
+  """The custom domain to redirect to."""
+  customDomain: URI
+
+  """The status of the domain change."""
+  status: SiteSettingsStatus
+}
+
+"""The status of the domain change."""
+enum SiteSettingsStatus {
+  """Custom domain is not set."""
+  IDLE
+
+  """Custom domain syntax is valid and waiting for cname validation."""
+  PENDING
+
+  """The site redirects correctly to the custom domain."""
+  ACTIVE
+}
+
 """A source"""
 type Source implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable & Reportable & ContributionWithAuthor {
   """The ID of an object."""
@@ -14371,6 +14418,29 @@ type UpdateContactPagePayload {
 
   """The locale of the contact page."""
   locale: String
+  clientMutationId: String
+}
+
+"""Available errors for an `updateCustomDomain` mutation."""
+enum UpdateCustomDomainErrorCode {
+  """The given customDomain syntax is not valid."""
+  CUSTOM_DOMAIN_SYNTAX_NOT_VALID
+
+  """Error occured while updating the custom domain."""
+  ERROR_DEPLOYER_API
+}
+
+input UpdateCustomDomainInput {
+  """The updated custom domain."""
+  customDomain: String
+  clientMutationId: String
+}
+
+type UpdateCustomDomainPayload {
+  siteSettings: SiteSettings
+
+  """The available errors if any."""
+  errorCode: UpdateCustomDomainErrorCode
   clientMutationId: String
 }
 

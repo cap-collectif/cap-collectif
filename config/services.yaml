@@ -47,6 +47,7 @@ parameters:
     mailjet_public_key: '%env(SYMFONY_MAILJET_PUBLIC_KEY)%'
     mailjet_private_key: '%env(SYMFONY_MAILJET_PRIVATE_KEY)%'
     instance_name: '%env(SYMFONY_INSTANCE_NAME)%'
+    instance_auth_token: '%env(SYMFONY_INSTANCE_AUTH_TOKEN)%'
     sentry_log_level: '%env(SYMFONY_SENTRY_LOG_LEVEL)%'
     sonata_translation.admin.extension.knplabs_translatable.class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension
     knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
@@ -140,6 +141,7 @@ parameters:
     env(SYMFONY_MAILJET_PUBLIC_KEY): ***REMOVED***
     env(SYMFONY_MAILJET_PRIVATE_KEY): ***REMOVED***
     env(SYMFONY_INSTANCE_NAME): dev
+    env(SYMFONY_INSTANCE_AUTH_TOKEN): ''
     env(SYMFONY_APP_VERSION): dev
     # NEWRELIC, see https://tech.cap-collectif.com/docs/infrastructure/newrelic.html
     env(SYMFONY_NEWRELIC_API_KEY): ***REMOVED***

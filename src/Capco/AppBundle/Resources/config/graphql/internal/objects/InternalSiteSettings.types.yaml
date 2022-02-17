@@ -1,0 +1,16 @@
+InternalSiteSettings:
+    type: object
+    config:
+        description: 'Site settings'
+        name: SiteSettings
+        fields:
+            capcoDomain:
+                type: 'URI!'
+                description: 'The current capco domain.'
+            customDomain:
+                type: 'URI'
+                description: 'The custom domain to redirect to.'
+            status:
+                type: 'InternalSiteSettingsStatus'
+                description: 'The status of the domain change.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SiteSettings\\SiteSettingsStatusResolver", [value, getUser()])'

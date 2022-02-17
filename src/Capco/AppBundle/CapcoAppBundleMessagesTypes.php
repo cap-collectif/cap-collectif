@@ -42,4 +42,6 @@ final class CapcoAppBundleMessagesTypes
     public const EMAILING_CAMPAIGN = 'emailing.campaign';
 
     public const ELASTICSEARCH_INDEXATION = 'elasticsearch.indexation';
+
+    public const CUSTOM_DOMAIN_CREATE = 'custom.domain.create';
 }

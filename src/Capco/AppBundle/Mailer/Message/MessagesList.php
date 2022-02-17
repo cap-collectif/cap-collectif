@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Mailer\Message;
 
+use Capco\AppBundle\Mailer\Message\CustomDomain\CreateCustomDomainMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteMessage;
@@ -35,6 +36,7 @@ final class MessagesList
         'user_account_confirmation_reminder_message' =>
             UserAccountConfirmationReminderMessage::class,
         'user_invitation' => UserInviteNewInvitation::class,
+        'custom_domain_create' => CreateCustomDomainMessage::class
     ];
     public const TEMPLATE_LIST = [
         'event_create_admin' => EventCreateAdminMessage::TEMPLATE,
@@ -52,5 +54,6 @@ final class MessagesList
         'user_account_confirmation_reminder_message' =>
             UserAccountConfirmationReminderMessage::TEMPLATE,
         'user_invitation' => UserInviteNewInvitation::TEMPLATE,
+        'custom_domain_create' => CreateCustomDomainMessage::TEMPLATE
     ];
 }

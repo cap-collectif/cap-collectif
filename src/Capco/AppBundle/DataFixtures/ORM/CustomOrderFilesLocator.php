@@ -306,6 +306,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/SenderEmail.yaml',
             $this->fixturesDir . 'Dev/UserPhoneVerificationSms.yaml',
             $this->fixturesDir . 'Dev/ProposalStepPaperVoteCounter.yaml',
+            $this->fixturesDir . 'Dev/SiteSettings.yaml',
         ];
     }
 }

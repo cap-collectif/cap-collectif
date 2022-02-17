@@ -541,3 +541,9 @@ InternalQuery:
                 description: 'Get all sending addresses registered'
                 access: "@=hasRole('ROLE_PROJECT_ADMIN') and hasFeatureFlag('beta__emailing')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailResolver", [getUser()])'
+            siteSettings:
+                type: 'InternalSiteSettings'
+                description: 'Get site settings.'
+                access: "@hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SiteSettings\\SiteSettingsResolver")'
+

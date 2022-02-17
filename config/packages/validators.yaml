@@ -104,3 +104,7 @@ services:
     Capco\AppBundle\Validator\Constraints\CheckPhoneNumberValidator:
         tags:
             - { name: validator.constraint_validator, alias: check_phone_number.validator }
+
+    Capco\AppBundle\Validator\Constraints\CheckCustomDomainValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: check_custom_domain.validator }

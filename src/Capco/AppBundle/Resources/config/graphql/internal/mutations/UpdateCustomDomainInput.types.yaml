@@ -1,0 +1,8 @@
+UpdateCustomDomainInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateCustomDomain mutation.'
+        fields:
+            customDomain:
+                type: 'String'
+                description: 'The updated custom domain.'

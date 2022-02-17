@@ -349,3 +349,8 @@ services:
 
     Doctrine\ORM\Id\UuidGenerator:
         public: true
+
+    Capco\AppBundle\Client\DeployerClient:
+        arguments:
+            $instanceName: '%instance_name%'
+            $token: '%instance_auth_token%'

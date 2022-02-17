@@ -1,0 +1,9 @@
+DeleteCustomDomainPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            siteSettings:
+                type: 'InternalSiteSettings'
+            errorCode:
+                type: 'DeleteCustomDomainErrorCode'
+                description: 'The available errors if any.'

@@ -1461,3 +1461,17 @@ InternalMutation:
                     inputType: VerifyUserPhoneNumberInput
                     payloadType: VerifyUserPhoneNumberPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\VerifyUserPhoneNumberMutation", [value, getUser()])'
+            updateCustomDomain:
+                access: '@=hasRole("ROLE_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateCustomDomainInput
+                    payloadType: UpdateCustomDomainPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCustomDomainMutation", [value, getUser()])'
+            deleteCustomDomain:
+                access: '@=hasRole("ROLE_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteCustomDomainInput
+                    payloadType: DeleteCustomDomainPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteCustomDomainMutation", [value])'
