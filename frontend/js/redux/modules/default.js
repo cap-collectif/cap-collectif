@@ -105,6 +105,7 @@ export const features: FeatureToggles = {
   unstable__anonymous_questionnaire: false,
   twilio: false,
   unstable__paper_vote: false,
+  helpscout_beacon: false,
 };
 
 export const initialState: State = {

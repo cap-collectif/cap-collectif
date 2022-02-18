@@ -157,3 +157,6 @@ InternalFeatureFlagType:
                 description: 'Whether or not the paper vote is enabled.'
             versions:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::versions")'
+            helpscout_beacon:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::helpscout_beacon")'
+                description: 'Whether or not the Helpscout beacon is enabled'

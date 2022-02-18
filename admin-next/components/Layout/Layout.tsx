@@ -13,6 +13,7 @@ import sideBarItems from '../SideBar/SideBarItems.json';
 import { useRouter } from 'next/router';
 import CookieHelper from '@utils/cookie-helper';
 import { LayoutProvider } from './Layout.context';
+import useFeatureFlag from '@hooks/useFeatureFlag';
 
 export interface LayoutProps {
     children: React.ReactNode;
@@ -26,6 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
     const contentRef = React.useRef(null);
     const { viewerSession, appVersion } = useAppContext();
     const { pathname } = useRouter();
+    const helpscoutBeacon = useFeatureFlag('helpscout_beacon');
     const menuOpen = sideBarItems.find(sideBarItem => {
         if (sideBarItem.items.length > 0)
             return sideBarItem.items.some(item => item.href.includes(pathname));
@@ -54,13 +56,34 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                             }`,
                         }}
                     />
-
                     <script
                         type="text/javascript"
                         src="https://app.getbeamer.com/js/beamer-embed.js"
                         defer
                     />
-
+                    {helpscoutBeacon && (
+                        <>
+                            <script
+                                type="text/javascript"
+                                dangerouslySetInnerHTML={{
+                                    __html: `!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});`,
+                                }}
+                            />
+                            <script
+                                type="text/javascript"
+                                dangerouslySetInnerHTML={{
+                                    __html: `
+                            window.Beacon('logout', { endActiveChat: true });
+                            window.Beacon('init', '224da0d3-665b-400b-9fc8-812e9e1ff8b8');
+                            window.Beacon('prefill', {
+                                name: '${viewerSession.username}',
+                                email: '${viewerSession.email}'
+                            })
+                            window.Beacon('config', {enablePreviousMessages: false})`,
+                                }}
+                            />
+                        </>
+                    )}
                     <link
                         rel="preload"
                         href={`${FONT_PATH}/OpenSans-Regular.ttf`}

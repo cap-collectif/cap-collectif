@@ -221,6 +221,9 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
 
   // hack to avoid error flow because of react-beautiful-dnd
   Element: any;
+
+  // Beacon helpscout
+  Beacon(action: string, params: any): any;
 }
 
 declare class Touch {

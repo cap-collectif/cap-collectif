@@ -47,6 +47,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "districts": false,
             "export": false,
             "external_project": false,
+            "helpscout_beacon": false,
             "http_redirects": false,
             "import_proposals": false,
             "login_cas": false,

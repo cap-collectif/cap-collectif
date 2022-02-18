@@ -5968,6 +5968,9 @@ enum FeatureFlagType {
   """Whether or not the paper vote is enabled."""
   unstable__paper_vote
   versions
+
+  """Whether or not the Helpscout beacon is enabled"""
+  helpscout_beacon
 }
 
 """Require a firstname"""

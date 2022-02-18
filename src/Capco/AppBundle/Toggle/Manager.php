@@ -82,6 +82,7 @@ class Manager
     public const unstable__anonymous_questionnaire = 'unstable__anonymous_questionnaire';
     public const twilio = 'twilio';
     public const unstable__paper_vote = 'unstable__paper_vote';
+    public const helpscout_beacon = 'helpscout_beacon';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -182,6 +183,7 @@ class Manager
         self::unstable__anonymous_questionnaire,
         self::twilio,
         self::unstable__paper_vote,
+        self::helpscout_beacon,
     ];
 
     protected ToggleManager $toggleManager;

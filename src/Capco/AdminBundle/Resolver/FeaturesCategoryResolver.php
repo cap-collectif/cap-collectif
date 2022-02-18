@@ -72,6 +72,7 @@ class FeaturesCategoryResolver
                     Manager::unstable__anonymous_questionnaire,
                     Manager::twilio,
                     Manager::unstable__paper_vote,
+                    Manager::helpscout_beacon,
                 ],
             ],
         ],

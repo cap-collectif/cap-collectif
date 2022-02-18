@@ -125,6 +125,7 @@ Scenario: Logged in user wants to see his votes on a project and remove one
 Scenario: Logged in as user who doesn't full fill requirements and want to vote...
   Given I am logged in as pierre
   When I go to a project with requirement condition to vote and ranking
+  And I wait 5 seconds
   And I vote for the first proposal
   Then I should see a proposal vote modal
   Given I didn't full fill requirements conditions

@@ -73,6 +73,7 @@ export const defaultFeatureFlags: FeatureFlags = {
     versions: false,
     unstable__paper_vote: false,
     graphql_introspection: false,
+    helpscout_beacon: false,
 };
 
 const getRedisFeatureFlagKey = (flag: string) => {

@@ -73,6 +73,7 @@ Scenario: On Proposal Preview, Proposal should stay followed after user refresh 
   And I wait 1 seconds
   And I should see "following"
   Then I go to a collect step with vote
+  And I wait 5 seconds
   And I should see "following"
 
 @security @elasticsearch @database

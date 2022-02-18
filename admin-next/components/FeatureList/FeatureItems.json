@@ -75,6 +75,11 @@
                         "title": "capco.module.multilangue",
                         "description": "description.module.multilangue",
                         "onlySuperAdmin": true
+                    },
+                    "helpscout_beacon": {
+                        "title": "capco.module.helpscout-beacon",
+                        "description": "description.module.helpscout-beacon",
+                        "onlySuperAdmin": true
                     }
                 }
             }
