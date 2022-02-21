@@ -21,6 +21,8 @@ import type {
 import config from '../../config';
 import LoginModal from '~/components/User/Login/LoginModal';
 import { formatGeoJsons } from '~/utils/geojson';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import StepEvents from '../Steps/StepEvents';
 
 type OwnProps = {|
   stepId: string,
@@ -55,6 +57,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   const { isTipsMeeeEnabled, viewer, isAuthenticated, features, step, count } = props;
   const [displayMode, setDisplayMode] = React.useState(step?.mainView);
   const intl = useIntl();
+  const calendar = useFeatureFlag('calendar');
 
   React.useEffect(() => {
     if (!displayMode && step?.mainView) setDisplayMode(step?.mainView);
@@ -72,6 +75,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   }
   return (
     <div id="ProposalStepPage-rendered">
+      {step.events?.totalCount && calendar && <StepEvents step={step} />}
       {step.state === 'CLOSED' && ( // We keep for now these "old style" alerts
         <div className="alert alert-info alert-dismissible block" role="alert">
           <p>
@@ -161,6 +165,9 @@ export class ProposalStepPage extends React.Component<Props> {
               step: node(id: $stepId) {
                 ... on ProposalStep {
                   id
+                  events(orderBy: { field: START_AT, direction: DESC }) {
+                    totalCount
+                  }
                   defaultSort
                   voteType
                   state
@@ -204,6 +211,7 @@ export class ProposalStepPage extends React.Component<Props> {
                   ...ProposalListView_step @arguments(count: $count)
                   ...UnpublishedProposalListView_step @arguments(isAuthenticated: $isAuthenticated)
                   ...ProposalStepPageHeader_step
+                  ...StepEvents_step
                   ... on CollectStep {
                     private
                     mainView
