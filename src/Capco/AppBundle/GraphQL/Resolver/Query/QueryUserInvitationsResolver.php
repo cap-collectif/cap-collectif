@@ -47,6 +47,8 @@ class QueryUserInvitationsResolver implements ResolverInterface
 
             $connection = $paginator->auto($args, $totalCount);
             $connection->setTotalCount($totalCount);
+
+            return $connection;
         }
 
         $paginator = new Paginator(function (int $offset, int $limit) use (
@@ -55,7 +57,6 @@ class QueryUserInvitationsResolver implements ResolverInterface
             $status
         ) {
             $results = $this->repository->findPaginated($limit, $offset, $term, $status);
-
             $totalCount = \count($results);
 
             return $results;

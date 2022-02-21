@@ -164,14 +164,17 @@ class UserInviteRepository extends EntityRepository
     ): QueryBuilder {
         // We need to get the internal status value from the last UserInviteEmailMessage related to each UserInvite.
         // LIMIT 1 is set by default.
-        $qb->leftJoin(
-            'ui.emailMessages',
-            'em',
-            Join::WITH,
-            'em = FIRST(SELECT uiem FROM CapcoAppBundle:UserInviteEmailMessage uiem WHERE uiem.invitation = ui.id ORDER BY uiem.createdAt DESC)'
-        );
-        $qb->leftJoin('ui.groups', 'uig');
+        if ($status) {
+            $qb->leftJoin(
+                'ui.emailMessages',
+                'em',
+                Join::WITH,
+                'em = FIRST(SELECT uiem FROM CapcoAppBundle:UserInviteEmailMessage uiem WHERE uiem.invitation = ui.id ORDER BY uiem.createdAt DESC)'
+            );
+        }
+
         if (null !== $term) {
+            $qb->leftJoin('ui.groups', 'uig');
             $qb->where(
                 $qb
                     ->expr()
