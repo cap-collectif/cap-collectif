@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import cn from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import LoginOverlay from '../../Utils/LoginOverlay';
+import NewLoginOverlay from '../../Utils/NewLoginOverlay';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import { VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
@@ -193,7 +193,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             show={showModal}
           />
         )}
-        <LoginOverlay>
+        <NewLoginOverlay>
           <button
             type="button"
             style={style}
@@ -214,7 +214,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             )}
             <i className={data.icon} /> <FormattedMessage id={`vote.${data.str}`} />
           </button>
-        </LoginOverlay>
+        </NewLoginOverlay>
       </div>
     );
   }
@@ -223,7 +223,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
 export default createFragmentContainer(injectIntl(OpinionVotesButton), {
   opinion: graphql`
     fragment OpinionVotesButton_opinion on OpinionOrVersion
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       __typename
       ... on Opinion {
         id

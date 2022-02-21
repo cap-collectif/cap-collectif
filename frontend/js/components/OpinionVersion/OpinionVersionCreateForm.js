@@ -75,14 +75,14 @@ class OpinionVersionCreateForm extends React.Component<Props> {
         />
         <Field
           name="body"
-          type="editor"
+          type="editor-ds"
           component={renderInput}
           label={<FormattedMessage id="opinion.version.body" />}
           help={<FormattedMessage id="opinion.version.body_helper" />}
         />
         <Field
           name="comment"
-          type="editor"
+          type="editor-ds"
           component={renderInput}
           label={<FormattedMessage id="opinion.version.comment" />}
           help={<FormattedMessage id="opinion.version.comment_helper" />}

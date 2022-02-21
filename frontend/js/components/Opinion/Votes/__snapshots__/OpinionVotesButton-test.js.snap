@@ -24,7 +24,7 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
       }
     }
   />
-  <Connect(LoginOverlay)>
+  <Connect(NewLoginOverlay)>
     <button
       aria-label="vote.aria_label.ok"
       className="btn btn-success btn--outline"
@@ -42,7 +42,7 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
         values={Object {}}
       />
     </button>
-  </Connect(LoginOverlay)>
+  </Connect(NewLoginOverlay)>
 </div>
 `;
 
@@ -62,7 +62,7 @@ exports[`<OpinionVotesButton /> should render a red button when value is -1 and 
       }
     }
   />
-  <Connect(LoginOverlay)>
+  <Connect(NewLoginOverlay)>
     <button
       aria-label="vote.aria_label.nok"
       className="btn btn-danger btn--outline"
@@ -80,7 +80,7 @@ exports[`<OpinionVotesButton /> should render a red button when value is -1 and 
         values={Object {}}
       />
     </button>
-  </Connect(LoginOverlay)>
+  </Connect(NewLoginOverlay)>
 </div>
 `;
 
@@ -98,7 +98,7 @@ exports[`<OpinionVotesButton /> should render an orange button when value is 0 a
       }
     }
   />
-  <Connect(LoginOverlay)>
+  <Connect(NewLoginOverlay)>
     <button
       aria-label="vote.aria_label.mitige"
       className="btn btn-warning btn--outline"
@@ -116,6 +116,6 @@ exports[`<OpinionVotesButton /> should render an orange button when value is 0 a
         values={Object {}}
       />
     </button>
-  </Connect(LoginOverlay)>
+  </Connect(NewLoginOverlay)>
 </div>
 `;

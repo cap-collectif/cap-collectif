@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalFollowButton /> should render a button to follow a proposal when viewer is not following. 1`] = `
-<Connect(LoginOverlay)>
+<Connect(NewLoginOverlay)>
   <button
     className="btn btn-default proposal__button__follow"
     id="proposal-follow-btn-proposal1"
@@ -16,11 +16,11 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal wh
       values={Object {}}
     />
   </button>
-</Connect(LoginOverlay)>
+</Connect(NewLoginOverlay)>
 `;
 
 exports[`<ProposalFollowButton /> should render a button to unfollow a proposal when viewer is following. 1`] = `
-<Connect(LoginOverlay)>
+<Connect(NewLoginOverlay)>
   <span
     className="mb-0 custom-dropdown"
   >
@@ -203,7 +203,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
       </DropdownMenu>
     </Uncontrolled(Dropdown)>
   </span>
-</Connect(LoginOverlay)>
+</Connect(NewLoginOverlay)>
 `;
 
 exports[`<ProposalFollowButton /> should render correctly when not authenticated 1`] = `

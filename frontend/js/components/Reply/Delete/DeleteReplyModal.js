@@ -2,19 +2,16 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { Button, Modal, CapUIModalSize, Heading, Text, toast } from '@cap-collectif/ui';
 import type { DeleteReplyModal_reply } from '~relay/DeleteReplyModal_reply.graphql';
 import DeleteAnonymousReplyMutation from '~/mutations/DeleteAnonymousReplyMutation';
 import DeleteUserReplyMutation from '~/mutations/DeleteUserReplyMutation';
 import CookieMonster from '~/CookieMonster';
-import Button from '~ds/Button/Button';
-import Modal from '~ds/Modal/Modal';
-import Heading from '~ui/Primitives/Heading';
-import Text from '~ui/Primitives/Text';
 import Icon from '~ui/Icons/Icon';
-import { toast } from '~ds/Toast';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context';
 import type { DeleteReplyModal_questionnaire } from '~relay/DeleteReplyModal_questionnaire.graphql';
+import ResetCss from '~/utils/ResetCss';
 
 type Props = {|
   +reply: DeleteReplyModal_reply,
@@ -68,12 +65,15 @@ export const DeleteReplyModal = ({ reply, questionnaire }: Props) => {
         <button type="button" className="btn-delete">
           <Icon name="trash" size={16} viewBox="0 0 16 16" />
         </button>
-      }>
+      }
+      size={CapUIModalSize.Lg}>
       {({ hide }) => (
         <>
-          <Modal.Header>
-            <Heading>{intl.formatMessage({ id: 'delete-confirmation' })}</Heading>
-          </Modal.Header>
+          <ResetCss>
+            <Modal.Header>
+              <Heading>{intl.formatMessage({ id: 'delete-confirmation' })}</Heading>
+            </Modal.Header>
+          </ResetCss>
           <Modal.Body>
             <Text>{intl.formatMessage({ id: 'reply.delete.confirm' })}</Text>
           </Modal.Body>

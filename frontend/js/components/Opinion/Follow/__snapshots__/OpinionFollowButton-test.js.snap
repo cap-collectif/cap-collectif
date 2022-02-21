@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<OpinionFollowButton /> should render a button to follow a opinion 1`] = `
-<Connect(LoginOverlay)>
+<Connect(NewLoginOverlay)>
   <button
     className="btn btn-default opinion__button__follow mr-5"
     id="opinion-follow-btn-opinion1"
@@ -16,11 +16,11 @@ exports[`<OpinionFollowButton /> should render a button to follow a opinion 1`] 
       values={Object {}}
     />
   </button>
-</Connect(LoginOverlay)>
+</Connect(NewLoginOverlay)>
 `;
 
 exports[`<OpinionFollowButton /> should render a button to follow a opinion and user is not connected 1`] = `
-<Connect(LoginOverlay)>
+<Connect(NewLoginOverlay)>
   <button
     className="btn btn-default opinion__button__follow mr-5"
     id="opinion-follow-btn-opinion1"
@@ -35,11 +35,11 @@ exports[`<OpinionFollowButton /> should render a button to follow a opinion and 
       values={Object {}}
     />
   </button>
-</Connect(LoginOverlay)>
+</Connect(NewLoginOverlay)>
 `;
 
 exports[`<OpinionFollowButton /> should render a button to unfollow a opinion 1`] = `
-<Connect(LoginOverlay)>
+<Connect(NewLoginOverlay)>
   <span
     className="mb-0 custom-dropdown"
   >
@@ -225,5 +225,5 @@ exports[`<OpinionFollowButton /> should render a button to unfollow a opinion 1`
       </DropdownMenu>
     </Uncontrolled(Dropdown)>
   </span>
-</Connect(LoginOverlay)>
+</Connect(NewLoginOverlay)>
 `;

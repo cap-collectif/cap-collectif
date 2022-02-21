@@ -97,7 +97,7 @@ export class OpinionEditForm extends React.Component<Props> {
         />
         <Field
           name="body"
-          type="editor"
+          type="editor-ds"
           id="opinion_body"
           component={renderInput}
           help={step.consultations?.edges && step.consultations.edges[0]?.node.descriptionHelpText}
@@ -113,7 +113,7 @@ export class OpinionEditForm extends React.Component<Props> {
                 component={renderInput}
                 name={field.appendixType.title}
                 label={field.appendixType.title}
-                type="editor"
+                type="editor-ds"
                 id={`opinion_appendix-${index + 1}`}
               />
             ))}

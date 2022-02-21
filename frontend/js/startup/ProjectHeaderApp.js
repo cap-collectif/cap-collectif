@@ -24,8 +24,12 @@ export type Props = {|
   +currentStepType: string,
 |};
 export const ProjectHeaderQueryRenderer = ({ projectId, currentStepType }: Props) => {
-  const DSReadySteps = ['collect', 'selection'];
+  const DSReadySteps = ['collect', 'selection', 'presentation', 'consultation', 'questionnaire'];
   const isDsReady = DSReadySteps.includes(currentStepType);
+
+  if (isDsReady) {
+    document.getElementsByTagName('html')[0].style.fontSize = '14px';
+  }
 
   return (
     <Providers resetCSS={!isDsReady} designSystem={isDsReady}>

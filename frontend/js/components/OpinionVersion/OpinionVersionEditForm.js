@@ -82,7 +82,7 @@ class OpinionVersionEditForm extends React.Component<Props> {
         <Field
           id="version-body"
           name="body"
-          type="editor"
+          type="editor-ds"
           component={renderInput}
           label={<FormattedMessage id="opinion.version.body" />}
           help={<FormattedMessage id="opinion.version.body_helper" />}
@@ -90,7 +90,7 @@ class OpinionVersionEditForm extends React.Component<Props> {
         <Field
           id="version-comment"
           name="comment"
-          type="editor"
+          type="editor-ds"
           component={renderInput}
           label={<FormattedMessage id="opinion.version.comment" />}
           help={<FormattedMessage id="opinion.version.comment_helper" />}

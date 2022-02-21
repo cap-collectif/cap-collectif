@@ -15,10 +15,11 @@ type Props = {|
   ...ConsultationPropositionBoxProps,
 |};
 
-const ConsultationPropositionBox = lazy(() =>
-  import(
-    /* webpackChunkName: "ConsultationPropositionBox" */ '~/components/Consultation/ConsultationPropositionBox'
-  ),
+const ConsultationPropositionBox = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "ConsultationPropositionBox" */ '~/components/Consultation/ConsultationPropositionBox'
+    ),
 );
 
 // TODO: To use when working on the new consultation index page. For now, only the OpinionPage is being done
@@ -40,10 +41,13 @@ const ConsultationPageAppContainer = connect<any, any, _, _, _, _>(mapStateToPro
   ConsultationPageApp,
 );
 
-export default (props: Props) => (
-  <Suspense fallback={<Loader />}>
-    <Providers>
-      <ConsultationPageAppContainer {...props} />
-    </Providers>
-  </Suspense>
-);
+export default (props: Props) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px';
+  return (
+    <Suspense fallback={<Loader />}>
+      <Providers designSystem resetCSS={false}>
+        <ConsultationPageAppContainer {...props} />
+      </Providers>
+    </Suspense>
+  );
+};

@@ -45,7 +45,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
           >
             <div>
               <li
-                className="sc-bdvvtL ffjLYS frise__stepItem"
+                className="sc-bdvvtL gckJqb frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -115,7 +115,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
           >
             <div>
               <li
-                className="sc-bdvvtL jmACxf frise__stepItem"
+                className="sc-bdvvtL eQuOKu frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -186,7 +186,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
           >
             <div>
               <li
-                className="sc-bdvvtL cLncHc frise__stepItem"
+                className="sc-bdvvtL gjaEAB frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -257,7 +257,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
           >
             <div>
               <li
-                className="sc-bdvvtL eyNMwe frise__stepItem"
+                className="sc-bdvvtL lcHpFn frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -388,7 +388,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
           >
             <div>
               <li
-                className="sc-bdvvtL ffjLYS frise__stepItem"
+                className="sc-bdvvtL gckJqb frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -458,7 +458,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
           >
             <div>
               <li
-                className="sc-bdvvtL jmACxf frise__stepItem"
+                className="sc-bdvvtL eQuOKu frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -529,7 +529,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
           >
             <div>
               <li
-                className="sc-bdvvtL cLncHc frise__stepItem"
+                className="sc-bdvvtL gjaEAB frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",
@@ -600,7 +600,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
           >
             <div>
               <li
-                className="sc-bdvvtL eyNMwe frise__stepItem"
+                className="sc-bdvvtL lcHpFn frise__stepItem"
                 style={
                   Object {
                     "display": "inline-block",

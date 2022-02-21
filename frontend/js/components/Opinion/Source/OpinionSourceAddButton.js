@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import LoginOverlay from '../../Utils/LoginOverlay';
+import NewLoginOverlay from '../../Utils/NewLoginOverlay';
 
 type Props = {|
   handleClick: () => void,
@@ -9,7 +9,7 @@ type Props = {|
 |};
 
 const OpinionSourceAddButton = ({ disabled, handleClick }: Props) => (
-  <LoginOverlay>
+  <NewLoginOverlay>
     <button
       type="button"
       id="source-form__add"
@@ -19,7 +19,7 @@ const OpinionSourceAddButton = ({ disabled, handleClick }: Props) => (
       <i className="cap cap-add-1" />
       <FormattedMessage id="opinion.add_new_source" />
     </button>
-  </LoginOverlay>
+  </NewLoginOverlay>
 );
 
 export default OpinionSourceAddButton;

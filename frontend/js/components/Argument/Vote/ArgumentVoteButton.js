@@ -7,7 +7,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import RemoveArgumentVoteMutation from '../../../mutations/RemoveArgumentVoteMutation';
 import AddArgumentVoteMutation from '../../../mutations/AddArgumentVoteMutation';
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
-import LoginOverlay from '../../Utils/LoginOverlay';
+import NewLoginOverlay from '../../Utils/NewLoginOverlay';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import type { ArgumentVoteButton_argument } from '~relay/ArgumentVoteButton_argument.graphql';
 import RequirementsFormModal from '../../Requirements/RequirementsModal';
@@ -96,7 +96,7 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
           <RequirementsFormModal step={step} handleClose={this.closeModal} show={showModal} />
         )}
 
-        <LoginOverlay>
+        <NewLoginOverlay>
           <button
             type="button"
             ref={button => {
@@ -120,7 +120,7 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
               publishable={argument.viewerVote || null}
             />
           </button>
-        </LoginOverlay>
+        </NewLoginOverlay>
       </>
     );
   }
@@ -129,7 +129,7 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
 export default createFragmentContainer(ArgumentVoteButton, {
   argument: graphql`
     fragment ArgumentVoteButton_argument on Argument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       author {
         isViewer @include(if: $isAuthenticated)

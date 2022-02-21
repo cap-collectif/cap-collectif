@@ -17,7 +17,7 @@ import FollowOpinionMutation from '../../../mutations/FollowOpinionMutation';
 import UpdateFollowOpinionMutation from '../../../mutations/UpdateFollowOpinionMutation';
 import type { OpinionFollowButton_opinion } from '~relay/OpinionFollowButton_opinion.graphql';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
-import LoginOverlay from '../../Utils/LoginOverlay';
+import NewLoginOverlay from '../../Utils/NewLoginOverlay';
 import Popover from '../../Utils/Popover';
 
 import type { SubscriptionTypeValue } from '~relay/UpdateFollowOpinionMutation.graphql';
@@ -64,7 +64,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
     const { isJustFollowed } = this.state;
     if (!opinion.viewerIsFollowing && opinion.id) {
       return (
-        <LoginOverlay>
+        <NewLoginOverlay>
           <button
             type="button"
             className="btn btn-default opinion__button__follow mr-5"
@@ -78,7 +78,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
             <i className="cap cap-rss" />
             <FormattedMessage id="follow" />
           </button>
-        </LoginOverlay>
+        </NewLoginOverlay>
       );
     }
     if (
@@ -87,7 +87,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
       typeof opinion.viewerFollowingConfiguration !== 'undefined'
     ) {
       return (
-        <LoginOverlay>
+        <NewLoginOverlay>
           <span className="mb-0 custom-dropdown">
             <Dropdown
               className="mb-0 width250 custom-dropdown-bgd dropdown-button"
@@ -183,7 +183,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
               </Dropdown.Menu>
             </Dropdown>
           </span>
-        </LoginOverlay>
+        </NewLoginOverlay>
       );
     }
     return null;
@@ -193,7 +193,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
 export default createFragmentContainer(OpinionFollowButton, {
   opinion: graphql`
     fragment OpinionFollowButton_opinion on OpinionOrVersion
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       ... on Opinion {
         id
         viewerIsFollowing @include(if: $isAuthenticated)

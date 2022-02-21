@@ -14,7 +14,7 @@ describe('<ReportButton />', () => {
 
   it('renders clickable button', () => {
     const button = shallow(<ReportButton {...defaultProps} />)
-      .find('Connect(LoginOverlay)')
+      .find('Connect(NewLoginOverlay)')
       .find('button');
     expect(button.prop('id')).toEqual('report-opinion-1-button');
     expect(button.prop('onClick')).toBeDefined();
@@ -24,7 +24,7 @@ describe('<ReportButton />', () => {
 
   it('renders a reported button', () => {
     const button = shallow(<ReportButton {...defaultProps} reported />)
-      .find('Connect(LoginOverlay)')
+      .find('Connect(NewLoginOverlay)')
       .find('button');
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toEqual(true);

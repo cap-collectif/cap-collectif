@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { Flex, Heading } from '@cap-collectif/ui';
 import type { OpinionPageLogic_query } from '~relay/OpinionPageLogic_query.graphql';
-import Heading from '~ui/Primitives/Heading';
-import Flex from '~ui/Primitives/Layout/Flex';
 
 export type Props = {|
   query: ?OpinionPageLogic_query,
@@ -23,7 +22,7 @@ const OpinionPageLogic = ({ query }: Props) => {
 export default createFragmentContainer(OpinionPageLogic, {
   query: graphql`
     fragment OpinionPageLogic_query on Query
-      @argumentDefinitions(opinionId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(opinionId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
       opinion: node(id: $opinionId) {
         ... on Opinion {
           title

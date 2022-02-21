@@ -78,6 +78,7 @@ exports[`<ReplyForm /> should render correctly when anonymous participation is a
         ]
       }
       typeForm="questionnaire"
+      unstable__enableCapcoUiDs={true}
     />
     <div
       className="btn-toolbar btn-box sticky"
@@ -559,6 +560,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
         ]
       }
       typeForm="questionnaire"
+      unstable__enableCapcoUiDs={true}
     />
     <div
       className="btn-toolbar btn-box sticky"
@@ -822,6 +824,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
         ]
       }
       typeForm="questionnaire"
+      unstable__enableCapcoUiDs={true}
     />
     <div
       className="btn-toolbar btn-box sticky"
@@ -1032,6 +1035,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
         ]
       }
       typeForm="questionnaire"
+      unstable__enableCapcoUiDs={true}
     />
     <div
       className="btn-toolbar btn-box sticky"
@@ -1357,6 +1361,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
         ]
       }
       typeForm="questionnaire"
+      unstable__enableCapcoUiDs={true}
     />
     <div
       className="btn-toolbar btn-box sticky"
@@ -1595,6 +1600,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
         ]
       }
       typeForm="questionnaire"
+      unstable__enableCapcoUiDs={true}
     />
     <div
       className="btn-toolbar btn-box sticky"
@@ -1752,6 +1758,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
         ]
       }
       typeForm="questionnaire"
+      unstable__enableCapcoUiDs={true}
     />
     <div
       className="btn-toolbar btn-box sticky"
@@ -1908,6 +1915,7 @@ exports[`<ReplyForm /> should render correctly with requirements filled 1`] = `
         ]
       }
       typeForm="questionnaire"
+      unstable__enableCapcoUiDs={true}
     />
     <hr
       className="mb-30"
@@ -2105,6 +2113,7 @@ exports[`<ReplyForm /> should render correctly with requirements not full filled
         ]
       }
       typeForm="questionnaire"
+      unstable__enableCapcoUiDs={true}
     />
     <hr
       className="mb-30"

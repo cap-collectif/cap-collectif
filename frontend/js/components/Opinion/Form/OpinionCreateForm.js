@@ -136,7 +136,7 @@ export class OpinionCreateForm extends React.Component<Props> {
         />
         <Field
           name="body"
-          type="editor"
+          type="editor-ds"
           id="opinion_body"
           component={renderInput}
           help={consultation.descriptionHelpText}
@@ -151,7 +151,7 @@ export class OpinionCreateForm extends React.Component<Props> {
               name={field.title}
               label={field.title}
               help={field.helpText}
-              type="editor"
+              type="editor-ds"
               id={`appendix_${index}`}
             />
           ))}
@@ -185,7 +185,7 @@ export default createFragmentContainer(container, {
   `,
   consultationStep: graphql`
     fragment OpinionCreateForm_consultationStep on ConsultationStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
       id
       project {

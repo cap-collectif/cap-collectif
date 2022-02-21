@@ -20,6 +20,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import memoize from 'lodash/memoize';
 import css from '@styled-system/css';
 import debounce from 'debounce-promise';
+import { toast, Flex, Text } from '@cap-collectif/ui';
 import type { Dispatch, GlobalState } from '~/types';
 import type { ReplyForm_questionnaire } from '~relay/ReplyForm_questionnaire.graphql';
 import type { ReplyForm_reply } from '~relay/ReplyForm_reply.graphql';
@@ -43,12 +44,9 @@ import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import RequirementsForm, {
   formName as requirementsFormName,
 } from '~/components/Requirements/RequirementsForm';
-import { toast } from '~ds/Toast';
 import CookieMonster from '~/CookieMonster';
-import Text from '~ui/Primitives/Text';
 import { isEmail } from '~/services/Validator';
 import Captcha from '~/components/Form/Captcha';
-import Flex from '~ui/Primitives/Layout/Flex';
 import { SPACES_SCALES } from '~/styles/theme/base';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 
@@ -459,6 +457,7 @@ export class ReplyForm extends React.Component<Props, State> {
             reply={reply}
             availableQuestions={availableQuestions}
             memoize={memoizeAvailableQuestions}
+            unstable__enableCapcoUiDs
           />
 
           {!isAuthenticated &&

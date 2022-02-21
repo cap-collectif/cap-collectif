@@ -381,6 +381,7 @@ export const Step = ({
         position="relative"
         marginRight={-5}
         marginLeft={isStart ? -3 : 0}
+        height="56px"
         {...rest}>
         {isStart && <StartStep />}
         {isEnd && <EndStep />}

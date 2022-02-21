@@ -193,7 +193,7 @@ class OpinionSourceForm extends React.Component<Props> {
         />
         <Field
           id="sourceBody"
-          type="editor"
+          type="editor-ds"
           component={renderComponent}
           name="body"
           label={<FormattedMessage id="source.body" />}

@@ -44,7 +44,7 @@ exports[`<OpinionEditForm /> renders a form 1`] = `
       />
     }
     name="body"
-    type="editor"
+    type="editor-ds"
   />
   <Field
     component={[Function]}
@@ -52,7 +52,7 @@ exports[`<OpinionEditForm /> renders a form 1`] = `
     key="0"
     label="Exposé des motifs"
     name="Exposé des motifs"
-    type="editor"
+    type="editor-ds"
   />
 </form>
 `;

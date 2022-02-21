@@ -21,10 +21,10 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdvvtL eOtkDA"
+    className="sc-bdvvtL jChgrW"
   >
     <div
-      className="sc-bdvvtL dmRHxa cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bdvvtL hSqYWf cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -96,10 +96,10 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdvvtL eOtkDA"
+    className="sc-bdvvtL jChgrW"
   >
     <div
-      className="sc-bdvvtL dmRHxa cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bdvvtL hSqYWf cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -171,10 +171,10 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdvvtL eOtkDA"
+    className="sc-bdvvtL jChgrW"
   >
     <div
-      className="sc-bdvvtL dmRHxa cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bdvvtL hSqYWf cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -246,10 +246,10 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdvvtL eOtkDA"
+    className="sc-bdvvtL jChgrW"
   >
     <div
-      className="sc-bdvvtL dmRHxa cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bdvvtL hSqYWf cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"

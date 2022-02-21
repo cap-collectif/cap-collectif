@@ -3,7 +3,7 @@ import React from 'react';
 import cn from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import LoginOverlay from '../Utils/LoginOverlay';
+import NewLoginOverlay from '../Utils/NewLoginOverlay';
 import OpinionCreateModal from './Create/OpinionCreateModal';
 import { openOpinionCreateModal } from '../../redux/modules/opinion';
 import type { NewOpinionButton_section } from '~relay/NewOpinionButton_section.graphql';
@@ -23,7 +23,7 @@ const NewOpinionButton = ({ dispatch, label, consultation, section, className }:
 
   return (
     <React.Fragment>
-      <LoginOverlay>
+      <NewLoginOverlay>
         <button
           type="button"
           disabled={disabled}
@@ -35,7 +35,7 @@ const NewOpinionButton = ({ dispatch, label, consultation, section, className }:
           <i className="cap cap-add-1" />
           <span className="hidden-xs">{label}</span>
         </button>
-      </LoginOverlay>
+      </NewLoginOverlay>
       <OpinionCreateModal section={section} consultation={consultation} />
     </React.Fragment>
   );
@@ -53,7 +53,7 @@ export default createFragmentContainer(container, {
   `,
   consultation: graphql`
     fragment NewOpinionButton_consultation on Consultation
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       contribuable
       ...OpinionCreateModal_consultation @arguments(isAuthenticated: $isAuthenticated)

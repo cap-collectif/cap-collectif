@@ -1,6 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import AppBox from '~ui/Primitives/AppBox';
+import { Box } from '@cap-collectif/ui';
 
 export const ReplyFormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   background-color: #fff;
@@ -9,7 +9,7 @@ export const ReplyFormContainer: StyledComponent<{}, {}, HTMLDivElement> = style
   border-radius: 4px;
 `;
 
-export const ParticipantEmailWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled(AppBox)`
+export const ParticipantEmailWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled(Box)`
   input {
     width: 300px;
   }

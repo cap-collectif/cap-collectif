@@ -71,7 +71,7 @@ const Arrow: StyledComponent<{ position: Placement }, {}, HTMLDivElement> = styl
 
 // There is !important css because there is specific styles on pages that break the component display
 
-export const LoginOverlay = ({
+export const NewLoginOverlay = ({
   isAuthenticated,
   children,
   enabled = true,
@@ -144,7 +144,7 @@ export const LoginOverlay = ({
   );
 };
 
-LoginOverlay.displayName = 'LoginOverlay';
+NewLoginOverlay.displayName = 'NewLoginOverlay';
 
 const mapStateToProps = (state: State) => ({
   isAuthenticated: !!state.user.user,
@@ -153,4 +153,4 @@ const mapStateToProps = (state: State) => ({
   loginWithOpenId: loginWithOpenID(state.default.ssoList),
 });
 
-export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(LoginOverlay);
+export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(NewLoginOverlay);

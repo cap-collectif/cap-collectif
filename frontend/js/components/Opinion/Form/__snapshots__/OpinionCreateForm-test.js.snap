@@ -30,7 +30,7 @@ exports[`<OpinionCreateForm /> renders correctly 1`] = `
       />
     }
     name="body"
-    type="editor"
+    type="editor-ds"
   />
   <Field
     component={[Function]}
@@ -39,7 +39,7 @@ exports[`<OpinionCreateForm /> renders correctly 1`] = `
     key="0"
     label="appendice"
     name="appendice"
-    type="editor"
+    type="editor-ds"
   />
 </form>
 `;
@@ -98,7 +98,7 @@ exports[`<OpinionCreateForm /> renders correctly with requirements 1`] = `
       />
     }
     name="body"
-    type="editor"
+    type="editor-ds"
   />
   <Field
     component={[Function]}
@@ -107,7 +107,7 @@ exports[`<OpinionCreateForm /> renders correctly with requirements 1`] = `
     key="0"
     label="appendice"
     name="appendice"
-    type="editor"
+    type="editor-ds"
   />
 </form>
 `;

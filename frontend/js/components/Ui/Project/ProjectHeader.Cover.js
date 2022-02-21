@@ -3,11 +3,10 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import css from '@styled-system/css';
-import { Flex, Modal, Heading, Icon, Text, Box, AvatarGroup } from '@cap-collectif/ui';
+import { Flex, Modal, Heading, Icon, Text, Box, AvatarGroup, Tooltip } from '@cap-collectif/ui';
 import { cleanChildren } from '~/utils/cleanChildren';
 import { formatBigNumber } from '~/utils/bigNumberFormatter';
 import DefaultProjectImage from '~/components/Project/Preview/DefaultProjectImage';
-import Tooltip from '~ds/Tooltip/Tooltip';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import Play from './SVG/Play';
 import { type Props as IconProps } from '~ds/Icon/Icon';
@@ -237,13 +236,12 @@ export const Authors = ({ children, active, onClick, authors, ...rest }: Authors
   };
 
   return (
-    <Flex alignItems="center">
+    <Flex alignItems="center" zIndex={2}>
       <AvatarGroup
         id="project-header"
         className="projectHeader__authors platform__body"
         minHeight={isMobile ? 13 : 9}
         marginTop={[-8, 0]}
-        zIndex={1}
         flexWrap="wrap"
         size={isMobile ? 'xl' : 'lg'}
         max={3}
@@ -314,8 +312,45 @@ type BlockProps = {|
   contentId?: ?string,
   tooltipLabel?: React.Node,
 |};
-export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: BlockProps) => (
-  <Tooltip label={tooltipLabel}>
+export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: BlockProps) => {
+  if (tooltipLabel) {
+    return (
+      <Tooltip label={tooltipLabel} delay={[200, 500]} zIndex={10}>
+        <Box
+          className="projectHeader__block"
+          display="flex"
+          flexDirection="column"
+          justifyContent="flex-start"
+          marginRight={[6, 8]}
+          marginBottom={[2, 0]}
+          maxHeight={10}
+          as="li"
+          {...rest}>
+          <Heading
+            className="projectHeader__block__content platform__body"
+            id={contentId || ''}
+            fontSize={[2, 4]}
+            lineHeight="base"
+            fontWeight="semibold"
+            height={[4, 6]}
+            color="neutral-gray.900">
+            {typeof content === 'number' ? formatBigNumber(content) : content}
+          </Heading>
+          <Text
+            className="projectHeader__block__title platform__body"
+            color="neutral-gray.900"
+            fontSize={[1, 4]}
+            lineHeight="base"
+            fontWeight="normal"
+            height={[4, 6]}>
+            {title.charAt(0).toUpperCase() + title.slice(1)}
+          </Text>
+        </Box>
+      </Tooltip>
+    );
+  }
+
+  return (
     <Box
       className="projectHeader__block"
       display="flex"
@@ -346,8 +381,8 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
         {title.charAt(0).toUpperCase() + title.slice(1)}
       </Text>
     </Box>
-  </Tooltip>
-);
+  );
+};
 
 type InfoProps = {|
   children: React.Node,
@@ -453,7 +488,7 @@ export const Socials = ({ children, ...rest }: SocialsProps) => (
     flexBasis="100%"
     alignItems="center"
     marginTop={[9, 6]}
-    zIndex={9}
+    zIndex={2}
     {...rest}>
     {children}
   </Box>
