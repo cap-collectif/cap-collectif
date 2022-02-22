@@ -475,22 +475,11 @@ trait ProposalStepsTrait
 
     /**
      * @When I search for proposals with terms :terms
-     *
-     * @param mixed $terms
      */
-    public function iSearchForProposalsWithTerms($terms)
+    public function iSearchForProposalsWithTerms(string $terms)
     {
         $this->fillField('proposal-search-input', $terms);
         $this->IwaitForSuccessfulRefetchQuery();
-    }
-
-    /**
-     * @Then proposal :proposal1 should be before proposal :proposal2
-     */
-    public function proposalShouldBeBeforeProposal(string $proposal1, string $proposal2): void
-    {
-        $this->assertIfFilterSortedBy('last');
-        $this->proposalBeforeProposal($proposal1, $proposal2);
     }
 
     /**
@@ -498,11 +487,10 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeOrderedByDate()
     {
-        $option = $this->getCurrentPage()->getSelectedSortingOption();
         $this->assertIfFilterSortedBy('last');
         $this->proposalBeforeProposal(
-            'Ravalement de la façade de la bibliothèque municipale',
-            'Proposition pas encore votable'
+            'Rénovation du gymnase',
+            'Ravalement de la façade de la bibliothèque municipale'
         );
     }
 
@@ -570,7 +558,6 @@ trait ProposalStepsTrait
     public function proposalsShouldHaveNoResults()
     {
         $this->assertPageContainsText('proposal.empty');
-        $this->assertPageNotContainsText('proposal.random_search');
     }
 
     /**
@@ -783,14 +770,6 @@ trait ProposalStepsTrait
     {
         $this->navigationContext->getPage('proposal page')->clickReportProposalButton();
         $this->iWait(1);
-    }
-
-    /**
-     * @Then I should see the proposal likers
-     */
-    public function iShouldSeeTheProposalLikers()
-    {
-        $this->assertPageContainsText('proposal.likers.count {"num":5}');
     }
 
     /**
@@ -1055,14 +1034,6 @@ trait ProposalStepsTrait
     public function iClickTheProposalUnvoteButton()
     {
         $this->clickProposalVoteButtonWithLabel('voted');
-    }
-
-    /**
-     * @When I click the reload random button
-     */
-    public function iClickTheReloadRandomButton()
-    {
-        $this->clickProposalVoteButtonWithLabel('proposal.random_search');
     }
 
     /**
@@ -1469,43 +1440,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I save current proposals
-     */
-    public function iSaveCurrentProposals()
-    {
-        $items = array_map(
-            function ($element) {
-                return $element->getText();
-            },
-            $this->getSession()
-                ->getPage()
-                ->findAll('css', '.opinion__list .card__title')
-        );
-
-        $this->currentCollectsStep = $items;
-    }
-
-    /**
-     * @When I should see same proposals
-     */
-    public function iShouldSeeSameProposals()
-    {
-        $savedSteps = $this->currentCollectsStep;
-        $selector = '.opinion__list .card__title';
-
-        $items = array_map(
-            function ($element) {
-                return $element->getText();
-            },
-            $this->getSession()
-                ->getPage()
-                ->findAll('css', $selector)
-        );
-
-        Assert::assertSame($savedSteps, $items);
-    }
-
-    /**
      * @When I should see other proposals
      */
     public function iShouldSeeOtherProposals()
@@ -1523,14 +1457,6 @@ trait ProposalStepsTrait
         );
 
         Assert::assertNotSame($savedSteps, $items);
-    }
-
-    /**
-     * @When I should not see random row
-     */
-    public function isShouldNotSeeRandomRow()
-    {
-        $this->assertPageNotContainsText('proposal.random_search');
     }
 
     /**

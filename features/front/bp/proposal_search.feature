@@ -1,5 +1,5 @@
 @bp @proposal_search
-Feature: Proposals search
+Feature: Proposals step filters and search
 
 Scenario: Initialize filters from URL parameters
   Given features user_type, districts are enabled
@@ -90,7 +90,7 @@ Scenario: Logged in admin wants to see a proposal in a private collect step
   And I should not see "403-error"
 
 @security
-Scenario: Logged in admin wants to see a proposal in a private collect step
+Scenario: Logged in project admin wants to see a proposal in a private collect step
   Given I am logged in as theo
   And I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-grand-projet"
   And I should not see "403-error"
@@ -106,25 +106,9 @@ Scenario: Anonymous user wants to see proposals in a collect step and sort them
   Given I go to an open collect step
   Then proposals should be ordered randomly
   When I sort proposals by date
-  Then proposal "Proposition pas encore votable" should be before proposal "Ravalement de la façade de la bibliothèque municipale"
+  Then proposals should be ordered by date  
   When I sort proposals by comments
   Then proposals should be ordered by comments
-
-@elasticsearch
-Scenario: Anonymous user wants to see last proposals when he returns on the list of proposals
-  Given I go to an open collect step
-  Then proposals should be ordered randomly
-  When I save current proposals
-  Then I go to an open collect step
-  When proposals should be ordered randomly
-  Then I should see same proposals
-
-@elasticsearch
-Scenario: Anonymous user wants to search a proposal with the random filter
-  Given I go to an open collect step
-  Then proposals should be ordered randomly
-  When I search for proposals with terms "plantation"
-  Then I should not see random row
 
 @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by term
@@ -161,11 +145,6 @@ Scenario: Anonymous user combine search, filters and sorting on proposals in a c
   Then there should be 2 proposals
   Then proposals should be filtered by theme and terms and sorted by comments
 
-Scenario: Anonymous user wants to see proposals likers
-  Given I go to an open collect step
-  And I wait 3 seconds
-  Then I should see the proposal likers
-
 @elasticsearch
 Scenario: Anonymous user wants to see proposals in a selection step and apply filters
   Given feature "themes" is enabled
@@ -179,21 +158,6 @@ Scenario: Anonymous user wants to see proposals in a selection step and sort the
   Given I go to a selection step with simple vote enabled
   Then proposals should be ordered randomly
   When I sort proposals by date
-  Then proposal "Rénovation du gymnase" should be before proposal "Ravalement de la façade de la bibliothèque municipale"
+  Then proposals should be ordered by date  
   When I sort proposals by comments
   Then proposals should be ordered by comments
-
-@elasticsearch
-Scenario: Anonymous user wants to see saved proposals when he returns on the selection of proposals
-  Given I go to a selection step
-  Then proposals should be ordered randomly
-  When I save current proposals
-  Then I go to a selection step
-  When proposals should be ordered randomly
-  And I wait 3 seconds
-  Then I should see same proposals
-
-@elasticsearch
-Scenario: Anonymous user want to show a proposal without actuality
-  Given I go to a proposal not yet votable
-  Then I should not see an "#proposal-page-tabs-tab-blog" element
