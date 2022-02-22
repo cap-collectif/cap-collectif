@@ -399,8 +399,8 @@
         "id": "emailing",
         "title": "admin.group.emailing",
         "icon": "ENVELOPE_O",
-        "featuresRequired": ["unstable__emailing"],
-        "rolesRequired": ["admin"],
+        "featuresRequired": ["beta__emailing"],
+        "rolesRequired": [],
         "items": [
             {
                 "title": "admin-menu-campaign-list",
@@ -418,7 +418,7 @@
                 "title": "admin-menu-parameters",
                 "href": "/admin/mailingParameters/list",
                 "rolesRequired": ["admin"],
-                "featuresRequired": ["unstable__emailing_parameters"]
+                "featuresRequired": ["beta__emailing_parameters"]
             }
         ]
     },
