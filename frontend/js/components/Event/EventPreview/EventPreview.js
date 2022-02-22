@@ -53,8 +53,6 @@ export const EventPreview = ({
     steps,
     timeRange,
     url,
-    isRecordingPublished,
-    isPresential,
     guestListEnabled,
   }: EventPreview_event = event;
 
@@ -70,7 +68,7 @@ export const EventPreview = ({
       : false;
   const isEventDone = hasStarted && hasEnded;
   const isLive = isEventLive(timeRange.startAt, timeRange.endAt);
-  const hasTag = (!isPresential && isLive) || guestListEnabled || displayReview;
+  const hasTag = isLive || guestListEnabled || displayReview;
 
   return (
     <EventPreviewContainer isHighlighted={isHighlighted}>
@@ -87,26 +85,10 @@ export const EventPreview = ({
                 <FormattedMessage id="passed-singular" />
               </div>
             )}
-
-            {isEventDone && isRecordingPublished && (
-              <div className="replay">
-                <Label color={colors.lightBlue} fontSize={10}>
-                  <FormattedMessage id="replay" />
-                </Label>
-              </div>
-            )}
           </DateContainer>
 
           {hasTag && (
             <InlineList>
-              {!isPresential && isLive && (
-                <li>
-                  <Label color={colors.dangerColor} fontSize={10}>
-                    <FormattedMessage id="en-direct" />
-                  </Label>
-                </li>
-              )}
-
               {guestListEnabled && (
                 <li>
                   <Label color={colors.lightBlue} fontSize={10}>
@@ -126,11 +108,7 @@ export const EventPreview = ({
 
         <Content>
           <TitleContainer>
-            <Icon
-              name={isPresential ? ICON_NAME.eventPhysical : ICON_NAME.eventOnline}
-              size={17}
-              color={colors.lightBlue}
-            />
+            <Icon name={ICON_NAME.eventPhysical} size={17} color={colors.lightBlue} />
             <Card.Title>
               <a href={url} title={title}>
                 <Truncate lines={2}>{title}</Truncate>
@@ -163,12 +141,10 @@ export default createFragmentContainer(Container, {
       title
       url
       guestListEnabled
-      isPresential
       timeRange {
         startAt
         endAt
       }
-      isRecordingPublished
       googleMapsAddress {
         __typename
         ...TagCity_address

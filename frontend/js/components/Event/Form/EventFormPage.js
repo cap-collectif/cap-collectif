@@ -101,9 +101,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     steps: values.steps ? values.steps.map(s => s.value) : null,
-    isPresential: values.isPresential,
-    isRecordingPublished: values.isRecordingPublished,
-    animator: values.animator ? values.animator.value : undefined,
     author: values.author ? values.author.value : undefined,
     adminAuthorizeDataTransfer,
     authorAgreeToUsePersonalDataForEventOnly,
@@ -168,9 +165,6 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     steps: values.steps ? values.steps.map(s => s.value) : null,
-    isPresential: values.isPresential,
-    isRecordingPublished: values.isRecordingPublished,
-    animator: values.animator ? values.animator.value : undefined,
     author: values.author ? values.author.value : undefined,
     adminAuthorizeDataTransfer: values.adminAuthorizeDataTransfer,
     authorAgreeToUsePersonalDataForEventOnly:
@@ -398,7 +392,7 @@ export const EventFormCreatePage = connect<any, any, _, _, _, _>(mapStateToProps
 export default createFragmentContainer(EventFormCreatePage, {
   query: graphql`
     fragment EventFormPage_query on Query
-      @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
+    @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
       ...EventForm_query @arguments(affiliations: $affiliations)
       viewer {
         isSuperAdmin
@@ -409,7 +403,7 @@ export default createFragmentContainer(EventFormCreatePage, {
   `,
   event: graphql`
     fragment EventFormPage_event on Event
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       review {
         status

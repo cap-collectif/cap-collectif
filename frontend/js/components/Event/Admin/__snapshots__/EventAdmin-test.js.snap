@@ -237,53 +237,7 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "isPresential",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "recordingUrl",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "isRecordingPublished",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
                       "name": "bodyUsingJoditWysiwyg",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": "User",
-                      "kind": "LinkedField",
-                      "name": "animator",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "displayName",
-                          "storageKey": null,
-                        },
-                      ],
                       "storageKey": null,
                     },
                     Object {
@@ -529,7 +483,7 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "d0cc9dcdc93b52eabd91fbe391066116",
+          "cacheID": "55cc54994b9da4edc1e131ae32715e96",
           "id": null,
           "metadata": Object {},
           "name": "EventAdminQuery",
@@ -570,14 +524,7 @@ fragment EventFormPage_event_FngS2 on Event {
 
 fragment EventForm_event on Event {
   id
-  isPresential
-  recordingUrl
-  isRecordingPublished
   bodyUsingJoditWysiwyg
-  animator {
-    id
-    displayName
-  }
   timeRange {
     startAt
     endAt
@@ -886,53 +833,7 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "isPresential",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "recordingUrl",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "isRecordingPublished",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
                       "name": "bodyUsingJoditWysiwyg",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": "User",
-                      "kind": "LinkedField",
-                      "name": "animator",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "displayName",
-                          "storageKey": null,
-                        },
-                      ],
                       "storageKey": null,
                     },
                     Object {
@@ -1178,7 +1079,7 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "d0cc9dcdc93b52eabd91fbe391066116",
+          "cacheID": "55cc54994b9da4edc1e131ae32715e96",
           "id": null,
           "metadata": Object {},
           "name": "EventAdminQuery",
@@ -1219,14 +1120,7 @@ fragment EventFormPage_event_FngS2 on Event {
 
 fragment EventForm_event on Event {
   id
-  isPresential
-  recordingUrl
-  isRecordingPublished
   bodyUsingJoditWysiwyg
-  animator {
-    id
-    displayName
-  }
   timeRange {
     startAt
     endAt

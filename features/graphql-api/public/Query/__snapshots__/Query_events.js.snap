@@ -141,17 +141,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
-          "translations": Array [
-            Object {
-              "locale": "fr-FR",
-              "title": "On vous présente Agui, l’ami du BP",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "translations": Array [
             Object {
@@ -172,39 +161,6 @@ Object {
             Object {
               "locale": "fr-FR",
               "title": "evenement créer par un utilisateur anglais avec review approved",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
-          "translations": Array [
-            Object {
-              "locale": "fr-FR",
-              "title": "Evenement animé par l'utilisateur User",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
-          "translations": Array [
-            Object {
-              "locale": "fr-FR",
-              "title": "+ de tech dans la civictech : c'est quoi une API ?",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
-          "translations": Array [
-            Object {
-              "locale": "fr-FR",
-              "title": "Il n'y a pas que le budget participatif dans la vie",
             },
           ],
         },
@@ -243,7 +199,7 @@ Object {
         },
       },
     ],
-    "totalCount": 19,
+    "totalCount": 15,
   },
 }
 `;
@@ -255,129 +211,80 @@ Object {
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ1",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWRFbg==",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ3",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ4",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQy",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ5",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQxMA==",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ0",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ2",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQx",
-          "isPresential": true,
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQz",
-          "isPresential": true,
         },
       },
     ],
     "totalCount": 15,
-  },
-}
-`;
-
-exports[`Preview|Query.events connection fetches all remote events 1`] = `
-Object {
-  "events": Object {
-    "edges": Array [
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
-          "isPresential": false,
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
-          "isPresential": false,
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
-          "isPresential": false,
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
-          "isPresential": false,
-        },
-      },
-    ],
-    "totalCount": 4,
   },
 }
 `;
@@ -501,19 +408,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "On vous présente Agui, l’ami du BP",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "projects": Array [],
           "review": Object {
@@ -542,45 +436,6 @@ Object {
           },
           "themes": Array [],
           "title": "evenement créer par un utilisateur anglais avec review approved",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement animé par l'utilisateur User",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "+ de tech dans la civictech : c'est quoi une API ?",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Il n'y a pas que le budget participatif dans la vie",
         },
       },
       Object {
@@ -626,7 +481,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 19,
+    "totalCount": 15,
   },
 }
 `;
@@ -750,19 +605,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "On vous présente Agui, l’ami du BP",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "projects": Array [],
           "review": Object {
@@ -791,45 +633,6 @@ Object {
           },
           "themes": Array [],
           "title": "evenement créer par un utilisateur anglais avec review approved",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement animé par l'utilisateur User",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "+ de tech dans la civictech : c'est quoi une API ?",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Il n'y a pas que le budget participatif dans la vie",
         },
       },
       Object {
@@ -875,7 +678,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 19,
+    "totalCount": 15,
   },
 }
 `;
@@ -999,19 +802,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "On vous présente Agui, l’ami du BP",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "projects": Array [],
           "review": Object {
@@ -1040,45 +830,6 @@ Object {
           },
           "themes": Array [],
           "title": "evenement créer par un utilisateur anglais avec review approved",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement animé par l'utilisateur User",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "+ de tech dans la civictech : c'est quoi une API ?",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Il n'y a pas que le budget participatif dans la vie",
         },
       },
       Object {
@@ -1124,7 +875,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 19,
+    "totalCount": 15,
   },
 }
 `;
@@ -1248,19 +999,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "On vous présente Agui, l’ami du BP",
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "projects": Array [],
           "review": Object {
@@ -1291,25 +1029,12 @@ Object {
           "title": "evenement créer par un utilisateur anglais avec review approved",
         },
       },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement animé par l'utilisateur User",
-        },
-      },
     ],
     "pageInfo": Object {
-      "endCursor": "YTozOntpOjA7aToxNjUxMDk2ODAwMDAwO2k6MTtpOi05MjIzMzcyMDM2ODU0Nzc1ODA4O2k6MjtpOjE0Mjg5NjI0MDAwMDA7fQ==",
+      "endCursor": "YTozOntpOjA7aToxNzEzMDQ1NjAwMDAwO2k6MTtpOi05MjIzMzcyMDM2ODU0Nzc1ODA4O2k6MjtpOjE0Mjg5NjI0MDAwMDA7fQ==",
       "hasNextPage": false,
     },
-    "totalCount": 14,
+    "totalCount": 12,
   },
 }
 `;
@@ -1318,32 +1043,6 @@ exports[`Preview|Query.events connection fetches only passed events with a curso
 Object {
   "events": Object {
     "edges": Array [
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "+ de tech dans la civictech : c'est quoi une API ?",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Il n'y a pas que le budget participatif dans la vie",
-        },
-      },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
@@ -1387,7 +1086,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 5,
+    "totalCount": 3,
   },
 }
 `;
@@ -1425,7 +1124,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxODgzNTk5MjAwMDAwO2k6MTtpOjE4NjcxODY4MDAwMDA7aToyO2k6MTQyMDY3MTYwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 19,
+    "totalCount": 15,
   },
 }
 `;
@@ -1463,7 +1162,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxNTY1MTI4ODAwMDAwO2k6MTtpOjkyMjMzNzIwMzY4NTQ3NzU4MDc7aToyO2k6MTQyMTAxNzIwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 19,
+    "totalCount": 15,
   },
 }
 `;
@@ -1501,7 +1200,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToyMDU3NjEyNDAwMDAwO2k6MTtpOjE5NzA0MzEyMDAwMDA7aToyO2k6MTQyMDIzOTYwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 19,
+    "totalCount": 15,
   },
 }
 `;
@@ -1539,7 +1238,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxOTU5MjAyODAwMDAwO2k6MTtpOjIyMTE3NTAwMDAwMDA7aToyO2k6MTQyMDQ5ODgwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 19,
+    "totalCount": 15,
   },
 }
 `;
@@ -1821,31 +1520,6 @@ Object {
       Object {
         "node": Object {
           "author": Object {
-            "id": "VXNlcjp1c2VyQWd1aQ==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": null,
-          },
-          "body": "La phase d’analyse dans un BP est aussi fastidieuse à réaliser que passionnante à étudier, aussi méconnue du public que redoutée des services ! Petit tour d’horizon des enjeux. Avant de découvrir Agui, le dernier né chez Capco, l’outil d’analyse intégré à la plateforme qui va transformer votre chemin de croix en promenade du dimanche.",
-          "createdAt": "2015-04-14 00:00:00",
-          "enabled": true,
-          "endAt": null,
-          "fullAddress": "",
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
-          "lat": null,
-          "link": null,
-          "lng": null,
-          "startAt": "2024-05-28 00:00:00",
-          "title": "On vous présente Agui, l’ami du BP",
-          "updatedAt": null,
-          "url": "https://capco.test/events/on-vous-presente-agui-lami-du-bp",
-          "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": Object {
             "id": "VXNlcjp1c2VyNQ==",
             "responses": Object {
               "edges": Array [],
@@ -1894,85 +1568,6 @@ Object {
           "title": "evenement créer par un utilisateur anglais avec review approved",
           "updatedAt": null,
           "url": "https://capco.test/events/evenement-creer-par-un-utilisateur-anglais-avec-review-approved",
-          "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": Object {
-            "id": "VXNlcjp1c2VyQWd1aQ==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": null,
-          },
-          "body": "Vous savez, moi je ne crois pas qu’il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer ma vie aujourd’hui avec vous, je dirais que c’est d’abord des rencontres. Des gens qui m’ont tendu la main, peut-être à un moment où je ne pouvais pas, où j’étais seul chez moi. Et c’est assez curieux de se dire que les hasards, les rencontres forgent une destinée… Parce que quand on a le goût de la chose, quand on a le goût de la chose bien faite, le beau geste, parfois on ne trouve pas l’interlocuteur en face je dirais, le miroir qui vous aide à avancer. Alors ça n’est pas mon cas, comme je disais là, puisque moi au contraire, j’ai pu ':' et je dis merci à la vie, je lui dis merci, je chante la vie, je danse la vie… je ne suis qu’amour ! Et finalement, quand beaucoup de gens aujourd’hui me disent « Mais comment fais-tu pour avoir cette humanité ? », et bien je leur réponds très simplement, je leur dis que c’est ce goût de l’amour ce goût donc qui m’a poussé aujourd’hui à entreprendre une construction mécanique, mais demain qui sait ? Peut-être simplement à me mettre au service de la communauté, à faire le don, le don de soi…",
-          "createdAt": "2015-04-14 00:00:00",
-          "enabled": true,
-          "endAt": null,
-          "fullAddress": "",
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
-          "lat": null,
-          "link": null,
-          "lng": null,
-          "startAt": "2022-04-28 00:00:00",
-          "title": "Evenement animé par l'utilisateur User",
-          "updatedAt": null,
-          "url": "https://capco.test/events/evenement-anime-par-lutilisateur-user",
-          "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": Object {
-            "id": "VXNlcjp1c2VyU3B5bA==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": Object {
-              "name": "Citoyen",
-            },
-          },
-          "body": "Terme barbare mais qui vous sera expliqué avec pédagogie par notre Directeur technique, Aurélien David. Au-delà de la définition, il vous expliquera les usages immédiats possibles pour vous et en quoi les API seront bien le pilier demain des démarches numériques sur votre territoire.",
-          "createdAt": "2020-05-28 00:00:00",
-          "enabled": true,
-          "endAt": null,
-          "fullAddress": "",
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
-          "lat": null,
-          "link": null,
-          "lng": null,
-          "startAt": "2020-05-28 00:00:00",
-          "title": "+ de tech dans la civictech : c'est quoi une API ?",
-          "updatedAt": null,
-          "url": "https://capco.test/events/de-tech-dans-la-civictech-cest-quoi-une-api",
-          "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": Object {
-            "id": "VXNlcjp1c2VyU3B5bA==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": Object {
-              "name": "Citoyen",
-            },
-          },
-          "body": "“Innovation”, le mot est lâché. Nous souhaitons ici présenter des cas d’usage qui méritent l’attention par leur caractère singulier. Au-delà de la présentation de ces cas d’usage, nous lancerons la discussion sur ce qu’il y a dans ces initiatives de radicalement différent des pratiques les plus courantes. <br />- projet d’entraide directe pendant le Covid (Orléans, Albi, Rennes, Paris…)<br />- consultations sur le plan climat (Grenoble, Poitiers)<br />- consultation budgétaire (Corrèze)",
-          "createdAt": "2020-05-27 00:00:00",
-          "enabled": true,
-          "endAt": null,
-          "fullAddress": "",
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
-          "lat": null,
-          "link": null,
-          "lng": null,
-          "startAt": "2020-05-27 00:00:00",
-          "title": "Il n'y a pas que le budget participatif dans la vie",
-          "updatedAt": null,
-          "url": "https://capco.test/events/il-ny-a-pas-que-le-budget-participatif-dans-la-vie",
           "zipCode": null,
         },
       },
@@ -2062,7 +1657,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 19,
+    "totalCount": 15,
   },
 }
 `;

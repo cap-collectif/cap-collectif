@@ -34,19 +34,13 @@ export const ProjectEventPreview = ({ event }: Props) => {
     title,
     googleMapsAddress,
     timeRange,
-    isPresential,
-    animator,
     author,
-    isRecordingPublished,
     guestListEnabled,
     url,
   }: ProjectEventPreview_event = event;
   const startAt = timeRange?.startAt;
   const endAt = timeRange?.endAt;
-
   const isLive = isEventLive(startAt, endAt);
-  const eventAnimator = animator ?? author;
-
   const isPast = startAt ? moment(new Date()).isAfter(startAt) : false;
   const isStarted = startAt != null ? new Date(startAt).getTime() <= new Date().getTime() : false;
   const isEnded =
@@ -56,18 +50,13 @@ export const ProjectEventPreview = ({ event }: Props) => {
       ? getEndDateFromStartAt(startAt).getTime() <= new Date().getTime()
       : false;
   const isEventDone = isStarted && isEnded;
-  const hasTag =
-    (!isPresential && isLive) || (isEventDone && isRecordingPublished) || guestListEnabled;
+  const hasTag = isLive || isEventDone || guestListEnabled;
 
   return (
     <EventPreviewContainer isProject>
       <Card.Body>
         <TitleContainer>
-          <Icon
-            name={isPresential ? ICON_NAME.eventPhysical : ICON_NAME.eventOnline}
-            size={17}
-            color={colors.lightBlue}
-          />
+          <Icon name={ICON_NAME.eventPhysical} size={17} color={colors.lightBlue} />
           <Card.Title>
             <a href={url} title={title}>
               <Truncate lines={2}>{title}</Truncate>
@@ -87,22 +76,6 @@ export const ProjectEventPreview = ({ event }: Props) => {
 
           {hasTag && (
             <InlineList>
-              {!isPresential && isLive && (
-                <li>
-                  <Label color={colors.dangerColor} fontSize={10}>
-                    <FormattedMessage id="en-direct" />
-                  </Label>
-                </li>
-              )}
-
-              {isEventDone && isRecordingPublished && (
-                <li>
-                  <Label color={colors.lightBlue} fontSize={10}>
-                    <FormattedMessage id="replay" />
-                  </Label>
-                </li>
-              )}
-
               {guestListEnabled && (
                 <li>
                   <Label color={colors.lightBlue} fontSize={10}>
@@ -116,25 +89,14 @@ export const ProjectEventPreview = ({ event }: Props) => {
 
         <Content>
           <TagsList vertical>
-            {googleMapsAddress && isPresential && (
-              <TagCity address={googleMapsAddress} size="16px" />
-            )}
+            {googleMapsAddress && <TagCity address={googleMapsAddress} size="16px" />}
 
-            {eventAnimator && (
+            {author && (
               <Tag size="16px">
                 <IconRounded size={18} color={colors.darkGray}>
-                  <Icon name={ICON_NAME.micro} color="#fff" size={10} />
+                  <Icon name={ICON_NAME.user} color="#fff" size={10} />
                 </IconRounded>
-                {eventAnimator?.username}
-              </Tag>
-            )}
-
-            {!isPresential && (
-              <Tag size="16px">
-                <IconRounded size={18} color={colors.darkGray}>
-                  <Icon name={ICON_NAME.camera} color="#fff" size={10} />
-                </IconRounded>
-                <FormattedMessage id="global.online" />
+                {author?.username}
               </Tag>
             )}
           </TagsList>
@@ -150,11 +112,6 @@ export default createFragmentContainer(ProjectEventPreview, {
       id
       title
       url
-      isPresential
-      isRecordingPublished
-      animator {
-        username
-      }
       author {
         username
       }

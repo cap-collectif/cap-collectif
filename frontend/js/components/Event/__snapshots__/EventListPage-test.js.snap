@@ -300,13 +300,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "kind": "ScalarField",
-                          "name": "isPresential",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
                           "concreteType": "TimeRange",
                           "kind": "LinkedField",
                           "name": "timeRange",
@@ -327,13 +320,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "storageKey": null,
                             },
                           ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isRecordingPublished",
                           "storageKey": null,
                         },
                         Object {
@@ -888,20 +874,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "kind": "ScalarField",
-                          "name": "isPresential",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isRecordingPublished",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
                           "concreteType": "Theme",
                           "kind": "LinkedField",
                           "name": "themes",
@@ -1323,13 +1295,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "isPresential",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
                                   "concreteType": "TimeRange",
                                   "kind": "LinkedField",
                                   "name": "timeRange",
@@ -1350,13 +1315,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                       "storageKey": null,
                                     },
                                   ],
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "isRecordingPublished",
                                   "storageKey": null,
                                 },
                                 Object {
@@ -1617,7 +1575,7 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "d42069ce698452eeff891468c58e1495",
+          "cacheID": "9c5be436d406ff421abb0716561e96bc",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -1785,12 +1743,10 @@ fragment EventPreview_event on Event {
   title
   url
   guestListEnabled
-  isPresential
   timeRange {
     startAt
     endAt
   }
-  isRecordingPublished
   googleMapsAddress {
     __typename
     ...TagCity_address
@@ -2219,13 +2175,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "kind": "ScalarField",
-                          "name": "isPresential",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
                           "concreteType": "TimeRange",
                           "kind": "LinkedField",
                           "name": "timeRange",
@@ -2246,13 +2195,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "storageKey": null,
                             },
                           ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isRecordingPublished",
                           "storageKey": null,
                         },
                         Object {
@@ -2807,20 +2749,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "kind": "ScalarField",
-                          "name": "isPresential",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isRecordingPublished",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
                           "concreteType": "Theme",
                           "kind": "LinkedField",
                           "name": "themes",
@@ -3242,13 +3170,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "isPresential",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
                                   "concreteType": "TimeRange",
                                   "kind": "LinkedField",
                                   "name": "timeRange",
@@ -3269,13 +3190,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                       "storageKey": null,
                                     },
                                   ],
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "isRecordingPublished",
                                   "storageKey": null,
                                 },
                                 Object {
@@ -3536,7 +3450,7 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "d42069ce698452eeff891468c58e1495",
+          "cacheID": "9c5be436d406ff421abb0716561e96bc",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -3704,12 +3618,10 @@ fragment EventPreview_event on Event {
   title
   url
   guestListEnabled
-  isPresential
   timeRange {
     startAt
     endAt
   }
-  isRecordingPublished
   googleMapsAddress {
     __typename
     ...TagCity_address
@@ -4138,13 +4050,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "kind": "ScalarField",
-                          "name": "isPresential",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
                           "concreteType": "TimeRange",
                           "kind": "LinkedField",
                           "name": "timeRange",
@@ -4165,13 +4070,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "storageKey": null,
                             },
                           ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isRecordingPublished",
                           "storageKey": null,
                         },
                         Object {
@@ -4726,20 +4624,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "kind": "ScalarField",
-                          "name": "isPresential",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isRecordingPublished",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
                           "concreteType": "Theme",
                           "kind": "LinkedField",
                           "name": "themes",
@@ -5161,13 +5045,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "isPresential",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
                                   "concreteType": "TimeRange",
                                   "kind": "LinkedField",
                                   "name": "timeRange",
@@ -5188,13 +5065,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                       "storageKey": null,
                                     },
                                   ],
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "isRecordingPublished",
                                   "storageKey": null,
                                 },
                                 Object {
@@ -5455,7 +5325,7 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "d42069ce698452eeff891468c58e1495",
+          "cacheID": "9c5be436d406ff421abb0716561e96bc",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -5623,12 +5493,10 @@ fragment EventPreview_event on Event {
   title
   url
   guestListEnabled
-  isPresential
   timeRange {
     startAt
     endAt
   }
-  isRecordingPublished
   googleMapsAddress {
     __typename
     ...TagCity_address

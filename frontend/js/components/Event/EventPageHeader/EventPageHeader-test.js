@@ -11,8 +11,6 @@ const baseEvent = {
   commentable: true,
   guestListEnabled: true,
   id: '123454321',
-  isPresential: true,
-  animator: null,
   title: 'Ceci est un titre',
   adminUrl: 'https://capco.dev/admin',
   viewerDidAuthor: false,
@@ -58,10 +56,6 @@ const baseEvent = {
 
 const event = {
   basic: baseEvent,
-  remote: {
-    ...baseEvent,
-    isPresential: false,
-  },
   noGoogleAddress: {
     ...baseEvent,
     googleMapsAddress: null,
@@ -86,19 +80,6 @@ describe('<EventPageHeader />', () => {
     const wrapper = shallow(
       <EventPageHeader
         event={event.basic}
-        query={query}
-        hasThemeEnabled
-        hasProfileEnabled
-        hasProposeEventEnabled
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly when type online', () => {
-    const wrapper = shallow(
-      <EventPageHeader
-        event={event.remote}
         query={query}
         hasThemeEnabled
         hasProfileEnabled

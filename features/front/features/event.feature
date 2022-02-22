@@ -8,7 +8,7 @@ Background:
 @parallel-scenario
 Scenario: Anonymous wants to list events
   Given I visited "events page"
-  Then I should see 14 ".eventPreview" elements
+  Then I should see 12 ".eventPreview" elements
 
 @read-only
 Scenario: Events can be filtered by projects

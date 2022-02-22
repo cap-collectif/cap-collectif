@@ -23,10 +23,7 @@ const initialValuesEmpty = {
   metaDescription: null,
   customCode: null,
   addressText: null,
-  isPresential: true,
-  isRecordingPublished: false,
   adminAuthorizeDataTransfer: false,
-  recordingUrl: null,
   steps: [],
   media: null,
   themes: [],
@@ -59,12 +56,6 @@ const defaultProps = {
 
 const presentialInitialValues = {
   ...initialValuesEmpty,
-  isPresential: true,
-};
-
-const remoteInitialValues = {
-  ...initialValuesEmpty,
-  isPresential: false,
 };
 
 const eventNotComplete = {
@@ -86,9 +77,6 @@ const eventNotComplete = {
     ],
     review: null,
     deletedAt: null,
-    isPresential: true,
-    isRecordingPublished: false,
-    recordingUrl: null,
     steps: [],
     googleMapsAddress: null,
     customCode: '',
@@ -97,7 +85,6 @@ const eventNotComplete = {
     guestListEnabled: true,
     adminAuthorizeDataTransfer: false,
     authorAgreeToUsePersonalDataForEventOnly: false,
-    animator: null,
     themes: [],
     projects: [],
     media: {
@@ -191,53 +178,6 @@ describe('<EventForm />', () => {
       ...eventComplete,
     };
     const wrapper = shallow(<EventForm {...props} initialValues={initialValuesEmpty} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('it does not render toggle on frontend even with remote event enabled', () => {
-    const props = {
-      ...initialValuesComplete,
-      ...eventComplete,
-    };
-    const wrapper = shallow(
-      <EventForm
-        {...props}
-        isFrontendView
-        features={{ ...features, unstable__remote_events: true }}
-        initialValues={initialValuesEmpty}
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('it renders correctly on BO a toggle with remote event enabled', () => {
-    const props = {
-      ...initialValuesComplete,
-      ...eventComplete,
-    };
-    const wrapper = shallow(
-      <EventForm
-        {...props}
-        isFrontendView={false}
-        features={{ ...features, unstable__remote_events: true }}
-        initialValues={initialValuesEmpty}
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('it renders correctly a remote event', () => {
-    const props = {
-      ...initialValuesComplete,
-      ...eventComplete,
-    };
-    const wrapper = shallow(
-      <EventForm
-        {...props}
-        features={{ ...features, unstable__remote_events: true }}
-        initialValues={remoteInitialValues}
-      />,
-    );
     expect(wrapper).toMatchSnapshot();
   });
 

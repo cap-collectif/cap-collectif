@@ -19,7 +19,6 @@ import type { EventPageContent_viewer } from '~relay/EventPageContent_viewer.gra
 import ModalParticipantList from '~/components/Event/ModalParticipantList/ModalParticipantList';
 import RegisterForm from '~/components/Event/RegisterForm/RegisterForm';
 import UserRegister, { unsubscribe } from '~/components/Event/UserRegister/UserRegister';
-import EventPageRemoteContent from '~/components/Event/EventPageContent/EventPageRemoteContent';
 import { Container, Content, ButtonSubscribe, ButtonUnsubscribe } from './EventPageContent.style';
 import ModalEventRegister from '~/components/Event/ModalEventRegister/ModalEventRegister';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
@@ -43,7 +42,6 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled, intl }
     isRegistrationPossible,
     isViewerParticipatingAtEvent,
     viewerDidAuthor,
-    isPresential,
   } = event;
   const publicToken =
     '***REMOVED***';
@@ -59,13 +57,11 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled, intl }
       <Content>
         {viewerDidAuthor && hasProposeEventEnabled && <EventModerationMotiveView event={event} />}
 
-        {media?.url && isPresential && <Thumbnail width="100%" height="400px" image={media.url} />}
-
-        {!isPresential && <EventPageRemoteContent event={event} viewer={viewer} />}
+        {media?.url && <Thumbnail width="100%" height="400px" image={media.url} />}
 
         {body && <WYSIWYGRender className="description" value={body} />}
 
-        {googleMapsAddress && isPresential && (
+        {googleMapsAddress && (
           <MapContainer
             center={[googleMapsAddress.lat, googleMapsAddress.lng]}
             zoom={10}
@@ -98,7 +94,7 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled, intl }
         <ParticipantList event={event} setShowModalParticipant={setShowModalParticipant} />
       )}
 
-      {commentable && isPresential && <CommentSectionApp commentableId={event.id} />}
+      {commentable && <CommentSectionApp commentableId={event.id} />}
 
       {participants.totalCount > 0 && (
         <ModalParticipantList
@@ -152,7 +148,7 @@ const EventPageContentConnected = connect<any, any, _, _, _, _>(mapStateToProps)
 export default createFragmentContainer(EventPageContentConnected, {
   event: graphql`
     fragment EventPageContent_event on Event
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       title
       url
@@ -171,13 +167,11 @@ export default createFragmentContainer(EventPageContentConnected, {
       participants {
         totalCount
       }
-      isPresential
       ...RegisterForm_event
       ...UserRegister_event
       ...ModalEventRegister_event @arguments(isAuthenticated: $isAuthenticated)
       ...ModalParticipantList_event
       ...ParticipantList_event @arguments(isAuthenticated: $isAuthenticated)
-      ...EventPageRemoteContent_event @arguments(isAuthenticated: $isAuthenticated)
       ...EventModerationMotiveView_event
     }
   `,
@@ -187,7 +181,6 @@ export default createFragmentContainer(EventPageContentConnected, {
       ...RegisterForm_user
       ...UserRegister_user
       ...ModalEventRegister_user
-      ...EventPageRemoteContent_viewer
     }
   `,
 });

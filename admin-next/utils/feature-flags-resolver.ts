@@ -3,7 +3,6 @@ import { FeatureFlags } from '../types';
 
 export const defaultFeatureFlags: FeatureFlags = {
     report_browers_errors_to_sentry: false,
-    unstable__remote_events: false,
     login_saml: false,
     login_paris: false,
     oauth2_switch_user: false,

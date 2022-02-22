@@ -15,7 +15,6 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
             "lng": 123454321,
           },
           "id": "123id",
-          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -104,7 +103,6 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -135,7 +133,6 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -172,7 +169,6 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
             "lng": 123454321,
           },
           "id": "123id",
-          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -275,7 +271,6 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
           "lng": 123454321,
         },
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -302,7 +297,6 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
           "lng": 123454321,
         },
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -338,7 +332,6 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
             "lng": 123454321,
           },
           "id": "123id",
-          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -390,7 +383,6 @@ exports[`<EventPageContent /> should render correctly when no google address 1`]
         "commentable": true,
         "googleMapsAddress": null,
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -417,7 +409,6 @@ exports[`<EventPageContent /> should render correctly when no google address 1`]
         "commentable": true,
         "googleMapsAddress": null,
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -450,7 +441,6 @@ exports[`<EventPageContent /> should render correctly when no google address 1`]
           "commentable": true,
           "googleMapsAddress": null,
           "id": "123id",
-          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -552,7 +542,6 @@ exports[`<EventPageContent /> should render correctly when no registration possi
           "lng": 123454321,
         },
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": false,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -582,7 +571,6 @@ exports[`<EventPageContent /> should render correctly when no registration possi
           "lng": 123454321,
         },
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": false,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -598,152 +586,6 @@ exports[`<EventPageContent /> should render correctly when no registration possi
     onClose={[Function]}
     show={false}
   />
-</EventPageContentstyle__Container>
-`;
-
-exports[`<EventPageContent /> should render correctly when remote event 1`] = `
-<EventPageContentstyle__Container>
-  <EventPageContentstyle__Content>
-    <Relay(EventPageRemoteContent)
-      event={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "body": "je suis le body",
-          "commentable": true,
-          "googleMapsAddress": Object {
-            "lat": 1234321,
-            "lng": 123454321,
-          },
-          "id": "123id",
-          "isPresential": false,
-          "isRegistrationPossible": true,
-          "isViewerParticipatingAtEvent": true,
-          "media": Object {
-            "url": "https://uneimagerandom.jpg",
-          },
-          "participants": Object {
-            "totalCount": 1,
-          },
-          "title": "Je suis un événement",
-          "url": "https://jesuislurl.com",
-        }
-      }
-      viewer={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "jpecId",
-        }
-      }
-    />
-    <WYSIWYGRender
-      className="description"
-      value="je suis le body"
-    />
-    <_default
-      id="123id"
-      title="Je suis un événement"
-      url="https://jesuislurl.com"
-    />
-  </EventPageContentstyle__Content>
-  <Relay(Connect(ParticipantList))
-    event={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "body": "je suis le body",
-        "commentable": true,
-        "googleMapsAddress": Object {
-          "lat": 1234321,
-          "lng": 123454321,
-        },
-        "id": "123id",
-        "isPresential": false,
-        "isRegistrationPossible": true,
-        "isViewerParticipatingAtEvent": true,
-        "media": Object {
-          "url": "https://uneimagerandom.jpg",
-        },
-        "participants": Object {
-          "totalCount": 1,
-        },
-        "title": "Je suis un événement",
-        "url": "https://jesuislurl.com",
-      }
-    }
-    setShowModalParticipant={[Function]}
-  />
-  <Relay(ModalParticipantList)
-    event={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "body": "je suis le body",
-        "commentable": true,
-        "googleMapsAddress": Object {
-          "lat": 1234321,
-          "lng": 123454321,
-        },
-        "id": "123id",
-        "isPresential": false,
-        "isRegistrationPossible": true,
-        "isViewerParticipatingAtEvent": true,
-        "media": Object {
-          "url": "https://uneimagerandom.jpg",
-        },
-        "participants": Object {
-          "totalCount": 1,
-        },
-        "title": "Je suis un événement",
-        "url": "https://jesuislurl.com",
-      }
-    }
-    onClose={[Function]}
-    show={false}
-  />
-  <Fixed
-    position={
-      Object {
-        "left": "66%",
-      }
-    }
-    width="300px"
-  >
-    <Relay(UserRegister)
-      event={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "body": "je suis le body",
-          "commentable": true,
-          "googleMapsAddress": Object {
-            "lat": 1234321,
-            "lng": 123454321,
-          },
-          "id": "123id",
-          "isPresential": false,
-          "isRegistrationPossible": true,
-          "isViewerParticipatingAtEvent": true,
-          "media": Object {
-            "url": "https://uneimagerandom.jpg",
-          },
-          "participants": Object {
-            "totalCount": 1,
-          },
-          "title": "Je suis un événement",
-          "url": "https://jesuislurl.com",
-        }
-      }
-      user={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "jpecId",
-        }
-      }
-    />
-  </Fixed>
 </EventPageContentstyle__Container>
 `;
 
@@ -824,7 +666,6 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -854,7 +695,6 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
-        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -890,7 +730,6 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
             "lng": 123454321,
           },
           "id": "123id",
-          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {

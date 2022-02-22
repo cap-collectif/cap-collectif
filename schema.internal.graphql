@@ -433,15 +433,6 @@ input AddEventInput {
 
   """An array of Node IDs of steps associated to this event."""
   steps: [ID!]
-
-  """Is the event presential or remotely accessible"""
-  isPresential: Boolean
-
-  """Should the event be recorded or not"""
-  isRecordingPublished: Boolean
-
-  """The Node ID of the animator for this event if there is one."""
-  animator: ID
 }
 
 type AddEventPayload {
@@ -1544,15 +1535,6 @@ input ChangeEventInput {
 
   """An array of Node IDs of steps associated to this event."""
   steps: [ID!]
-
-  """Is the event presential or remotely accessible"""
-  isPresential: Boolean
-
-  """Should the event be recorded or not"""
-  isRecordingPublished: Boolean
-
-  """The Node ID of the animator for this event if there is one."""
-  animator: ID
 
   """The ID of the Event to modify."""
   id: ID!
@@ -5543,20 +5525,8 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """Is the body using Jodit Wysiwyg."""
   bodyUsingJoditWysiwyg: Boolean!
 
-  """The jitsi admin/animator token if there is one"""
-  jitsiToken: String
-
-  """Whether or not this event is presential."""
-  isPresential: Boolean!
-
-  """Whether or not this event has a public recording URL."""
-  isRecordingPublished: Boolean!
-
   """The jitsi room name available on remote events only."""
   roomName: String
-
-  """The URL used to stream this event recording."""
-  recordingUrl: URI
 
   """The slug of event"""
   slug: String!
@@ -5570,9 +5540,6 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """Show if user is already participating at event"""
   isViewerParticipatingAtEvent: Boolean!
-
-  """The jitsi room animator available on remote events only."""
-  animator: User
 
   """The steps corresponding to this event."""
   steps: [Step!]!
@@ -5929,7 +5896,6 @@ enum FeatureFlagType {
   phone_confirmation
   reporting
   display_map
-  unstable__remote_events
   votes_min
   beta__emailing
   beta__emailing_parameters
@@ -10787,11 +10753,6 @@ type Query {
     ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
     """
     project: ID
-
-    """
-    If true, return the presential events, if false return the remote events.
-    """
-    isPresential: Boolean
 
     """If provided, searches events by title and description."""
     search: String

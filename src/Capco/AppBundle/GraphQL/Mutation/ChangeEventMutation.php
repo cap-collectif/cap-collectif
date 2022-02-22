@@ -13,7 +13,6 @@ use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -71,16 +70,6 @@ class ChangeEventMutation implements MutationInterface
         // admin and superAdmin can change the event's author
         if ($newAuthor && $viewer->isAdmin() && $newAuthor !== $event->getAuthor()) {
             $event->setAuthor($newAuthor);
-        }
-
-        /** @var User $newAnimator */
-        $newAnimator = isset($values['animator'])
-            ? $this->globalIdResolver->resolve($values['animator'], $viewer)
-            : null;
-
-        // admin and superAdmin can change the event's animator
-        if ($newAnimator && $viewer->isAdmin() && $newAnimator !== $event->getAnimator()) {
-            $event->setAnimator($newAnimator);
         }
 
         // a user want to edit his refused event

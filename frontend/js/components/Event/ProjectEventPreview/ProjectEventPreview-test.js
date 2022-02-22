@@ -8,11 +8,8 @@ import { $refType, $fragmentRefs } from '~/mocks';
 const baseEvent = {
   $refType,
   id: 'eventId',
-  isRecordingPublished: false,
   title: 'Lorem ipsum dolor sit amet, consectetur adipiscing.',
   url: '#',
-  isPresential: true,
-  animator: null,
   author: null,
   guestListEnabled: false,
   timeRange: {
@@ -27,10 +24,6 @@ const baseEvent = {
 
 const event = {
   basic: baseEvent,
-  remote: {
-    ...baseEvent,
-    isPresential: false,
-  },
   withoutAddress: {
     ...baseEvent,
     googleMapsAddress: null,
@@ -46,21 +39,11 @@ const event = {
     ...baseEvent,
     guestListEnabled: true,
   },
-  withRecording: {
-    ...baseEvent,
-    isPresential: false,
-    isRecordingPublished: true,
-  },
 };
 
 describe('<ProjectEventPreview />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<ProjectEventPreview event={event.basic} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly for remote event', () => {
-    const wrapper = shallow(<ProjectEventPreview event={event.remote} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -76,11 +59,6 @@ describe('<ProjectEventPreview />', () => {
 
   it('should render correctly when guest enabled', () => {
     const wrapper = shallow(<ProjectEventPreview event={event.withGuestEnabled} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly when when recording published', () => {
-    const wrapper = shallow(<ProjectEventPreview event={event.withRecording} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -1,19 +1,13 @@
 // @flow
 import * as React from 'react';
-import {
-  FormattedMessage,
-  FormattedDate,
-  injectIntl,
-  type IntlShape,
-  FormattedHTMLMessage,
-} from 'react-intl';
+import { FormattedMessage, FormattedDate, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { StyledComponent } from 'styled-components';
 import styled from 'styled-components';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
-import { Button, OverlayTrigger, ToggleButton } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 import Tooltip from '~/components/Utils/Tooltip';
 import toggle from '~/components//Form/Toggle';
 import type { Dispatch, FeatureToggles, GlobalState } from '~/types';
@@ -41,7 +35,6 @@ type SelectedCurrentValues = {|
   link: ?string,
   status: ?EventReviewStatus,
   projects: Array<{| value: string, label: string |}>,
-  isPresential: boolean,
 |};
 
 type Values = {|
@@ -60,8 +53,6 @@ type Values = {|
   steps: Array<{| id: string, label: string |}>,
   startAt: ?string,
   endAt: ?string,
-  recordingUrl: ?string,
-  isRecordingPublished: boolean,
   title: ?string,
   body: ?string,
   metaDescription: ?string,
@@ -92,19 +83,6 @@ const PageTitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     width: 100%;
     padding-bottom: 15px;
     border-bottom: 1px solid ${colors.borderColor};
-  }
-`;
-
-const JitsiNoReplayContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  background: ${colors.formBgc};
-  border-radius: 4px;
-  border: 2px solid ${colors.borderColor};
-  padding: 30px;
-  color: ${colors.darkGray};
-  display: flex;
-  justify-content: center;
-  span {
-    text-align: center;
   }
 `;
 
@@ -148,14 +126,11 @@ export type FormValues = {|
   themes: [],
   projects: [],
   steps: [],
-  animator: { value: string, label: string },
-  isPresential: boolean,
-  isRecordingPublished: boolean,
   refusedReason: ?EventRefusedReason,
   status: ?EventReviewStatus,
   authorAgreeToUsePersonalDataForEventOnly: ?boolean,
   adminAuthorizeDataTransfer: ?boolean,
-  bodyUsingJoditWysiwyg: boolean
+  bodyUsingJoditWysiwyg: boolean,
 |};
 
 export const validate = (values: FormValues, props: Props) => {
@@ -222,18 +197,6 @@ export const EventForm = ({
   intl,
   handleSubmit,
 }: Props) => {
-  const [isReplayAvailable, setReplayAvailability] = React.useState(false);
-
-  React.useEffect(() => {
-    async function testrecordingUrl(link: string) {
-      const response = await fetch(link);
-      setReplayAvailability(response.status !== 404);
-    }
-    if (event?.recordingUrl) {
-      testrecordingUrl(event.recordingUrl);
-    }
-  }, [event, isReplayAvailable]);
-
   const isDisabled = (adminCanEdit = false): boolean => {
     if (
       query.viewer.isSuperAdmin ||
@@ -263,42 +226,6 @@ export const EventForm = ({
       return false;
     }
     return event?.review?.status !== 'AWAITING';
-  };
-
-  const renderJistiSection = () => {
-    if (event && event.recordingUrl && isReplayAvailable) {
-      return (
-        <div className="mr-10">
-          <Button
-            id="submit-project-content"
-            bsStyle="primary"
-            onClick={() => {
-              if (event.recordingUrl) {
-                window.open(event.recordingUrl);
-              }
-            }}>
-            <FormattedMessage id="global.play.video" />
-          </Button>
-          <a id="download-replay" href={event.recordingUrl} download className="btn btn-primary">
-            <FormattedMessage id="global.download" />
-          </a>
-          <div className="mt-10">
-            <Field
-              name="isRecordingPublished"
-              id="event_isRecordingPublished"
-              component={toggle}
-              disabled={isDisabled(true)}
-              label={<FormattedMessage id="global.published" />}
-            />
-          </div>
-        </div>
-      );
-    }
-    return (
-      <JitsiNoReplayContainer>
-        <FormattedHTMLMessage id="activate-jitsi-recording-hint" />
-      </JitsiNoReplayContainer>
-    );
   };
 
   const refusedReasons: Array<{| value: EventRefusedReason, label: string |}> = [
@@ -353,27 +280,6 @@ export const EventForm = ({
           </>
         )}
         <div className="box-body">
-          {!isFrontendView && features.unstable__remote_events ? (
-            <Field
-              type="radio-buttons"
-              id="isPresential"
-              name="isPresential"
-              label={<FormattedMessage id="global.type" />}
-              component={component}>
-              <ToggleButton
-                id="presential"
-                value={!!1}
-                onClick={() => dispatch(change(formName, 'isPresential', true))}>
-                <FormattedMessage id="global.presential" />
-              </ToggleButton>
-              <ToggleButton
-                id="remote"
-                value={!!0}
-                onClick={() => dispatch(change(formName, 'isPresential', false))}>
-                <FormattedMessage id="global.online" />
-              </ToggleButton>
-            </Field>
-          ) : null}
           <Field
             name="title"
             label={<FormattedMessage id="global.title" />}
@@ -393,21 +299,6 @@ export const EventForm = ({
               id="event_author"
               name="author"
               placeholder={intl.formatMessage({ id: 'select-author' })}
-              labelClassName={null}
-              selectFieldIsObject
-            />
-          )}
-          {query.viewer.isAdmin && !isFrontendView && !currentValues?.isPresential && (
-            <UserListField
-              clearable={false}
-              label={<FormattedMessage id="global.animator" />}
-              ariaControls="EventForm-filter-user-listbox"
-              inputClassName="fake-inputClassName"
-              autoload
-              disabled={!query.viewer.isAdmin || isDisabled()}
-              id="event_animator"
-              name="animator"
-              placeholder={null}
               labelClassName={null}
               selectFieldIsObject
             />
@@ -715,20 +606,11 @@ export const EventForm = ({
                   label={<FormattedMessage id="global.published" />}
                 />
               )}
-              {!currentValues?.isPresential && (
-                <div className="box-header">
-                  <h3 className="box-title replay-container">
-                    <FormattedMessage id="global.replay" />
-                  </h3>
-                  {renderJistiSection()}
-                </div>
-              )}
               <div className="box-header">
                 <h3 className="box-title">
                   <FormattedMessage id="global-customization" />
                 </h3>
               </div>
-
               <Field
                 name="customcode"
                 type="textarea"
@@ -834,43 +716,21 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
             : null,
         addressJson:
           props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
-        recordingUrl: props.event && props.event.recordingUrl,
-        isPresential: props.event ? props.event.isPresential : true,
-        animator:
-          props.event && props.event.animator
-            ? { value: props.event.animator.id, label: props.event.animator.displayName }
-            : null,
-        isRecordingPublished: props.event && props.event.isRecordingPublished,
         translations: props.event && props.event.translations ? props.event.translations : [],
       },
-      currentValues: selector(
-        state,
-        'guestListEnabled',
-        'link',
-        'status',
-        'projects',
-        'isPresential',
-      ),
+      currentValues: selector(state, 'guestListEnabled', 'link', 'status', 'projects'),
     };
   }
 
   return {
     currentLanguage: state.language.currentLanguage,
     features: state.default.features,
-    currentValues: selector(
-      state,
-      'guestListEnabled',
-      'link',
-      'status',
-      'projects',
-      'isPresential',
-    ),
+    currentValues: selector(state, 'guestListEnabled', 'link', 'status', 'projects'),
     initialValues: {
       authorAgreeToUsePersonalDataForEventOnly: false,
-      isPresential: true,
       guestListEnabled: false,
       author: { value: props.query.viewer.id, label: props.query.viewer.displayName },
-      bodyUsingJoditWysiwyg: false
+      bodyUsingJoditWysiwyg: false,
     },
   };
 };
@@ -880,7 +740,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form
 export default createFragmentContainer(container, {
   query: graphql`
     fragment EventForm_query on Query
-      @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
+    @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
       ...SelectTheme_query
       viewer {
         ...SelectProject_viewer @arguments(affiliations: $affiliations)
@@ -896,14 +756,7 @@ export default createFragmentContainer(container, {
   event: graphql`
     fragment EventForm_event on Event {
       id
-      isPresential
-      recordingUrl
-      isRecordingPublished
       bodyUsingJoditWysiwyg
-      animator {
-        id
-        displayName
-      }
       timeRange {
         startAt
         endAt

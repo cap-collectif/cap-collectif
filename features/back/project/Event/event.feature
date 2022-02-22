@@ -156,47 +156,6 @@ Scenario: Logged in super admin want to moderate a accepted event
   Then I click on button "#confirm-event-edit"
   And I wait "global.saved" to appear on current page in "body"
 
-@database
-Scenario: Logged in admin wants to use jitsi for a remote event on a previously non remote event
-  Given I am logged in as admin
-  And features projects, unstable__remote_events, allow_users_to_propose_events, calendar are enabled
-  And I go to admin event page with eventId "eventCreateByAUserReviewApproved"
-  And I should not see "global.animator"
-  And I should not see ".replay-container" in the "body" element
-  And I click on button "#remote"
-  Then I wait "#event_animator" to appear on current page
-  And I wait ".replay-container" to appear on current page
-  Then I click on button "#confirm-event-edit"
-  And I wait "global.saved" to appear on current page in "body"
-  Then I go to event page with slug "event-create-by-user-with-review-approved"
-  Then I wait "#jitsi-container" to appear on current page
-
-@ready-only
-Scenario: Logged in animator can join jitsi room before it starts
-  Given I am logged in as agui
-  And features unstable__remote_events, calendar are enabled
-  Then I go to event page with slug "on-vous-presente-agui-lami-du-bp"
-  Then I can participate in jitsi room
-
-@ready-only
-Scenario: Anonymous user can not participate to a not started remote event
-  Given features unstable__remote_events, projects, calendar are enabled
-  When I go to event page with slug "on-vous-presente-agui-lami-du-bp"
-  Then I can not participate in jitsi room
-
-@database
-Scenario: Anonymous user can participate to a started remote event
-  Given features unstable__remote_events, projects, calendar are enabled
-  And I set currentDate as the start event date for event "eventRemote"
-  When I go to event page with slug "on-vous-presente-agui-lami-du-bp"
-  Then I can participate in jitsi room
-
-@ready-only
-Scenario: Anonymous user can see the replay of a past event
-  Given features unstable__remote_events, projects, calendar are enabled
-  When I go to event page with slug "de-tech-dans-la-civictech-cest-quoi-une-api"
-  Then I can see the jitsi replay
-
 @ready-only
 Scenario: Anonymous user can see events linked to a specific step
   Given feature calendar is enabled

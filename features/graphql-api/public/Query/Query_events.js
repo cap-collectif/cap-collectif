@@ -126,18 +126,12 @@ const InternalLocaleEventsQuery = /* GraphQL */ `
 `;
 
 const InternalRemoteEventsQuery = /* GraphQL */ `
-  query InternalRemoteEventsQuery(
-    $count: Int!
-    $cursor: String
-    $isPresential: Boolean!
-    $orderBy: EventOrder!
-  ) {
-    events(first: $count, after: $cursor, orderBy: $orderBy, isPresential: $isPresential) {
+  query InternalRemoteEventsQuery($count: Int!, $cursor: String, $orderBy: EventOrder!) {
+    events(first: $count, after: $cursor, orderBy: $orderBy) {
       totalCount
       edges {
         node {
           id
-          isPresential
         }
       }
     }
@@ -251,21 +245,6 @@ describe('Preview|Query.events connection', () => {
         InternalRemoteEventsQuery,
         {
           count: 100,
-          isPresential: true,
-          orderBy: { field: 'START_AT', direction: 'ASC' },
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
-
-  it('fetches all remote events', async () => {
-    await expect(
-      graphql(
-        InternalRemoteEventsQuery,
-        {
-          count: 100,
-          isPresential: false,
           orderBy: { field: 'START_AT', direction: 'ASC' },
         },
         'internal',

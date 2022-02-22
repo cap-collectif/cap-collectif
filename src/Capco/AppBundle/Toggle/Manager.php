@@ -68,7 +68,6 @@ class Manager
     public const report_browers_errors_to_sentry = 'report_browers_errors_to_sentry';
     public const phone_confirmation = 'phone_confirmation';
     public const reporting = 'reporting';
-    public const unstable__remote_events = 'unstable__remote_events';
     public const beta__emailing = 'beta__emailing';
     public const beta__emailing_parameters = 'beta__emailing_parameters';
     public const proposal_revisions = 'proposal_revisions';
@@ -169,7 +168,6 @@ class Manager
         self::beta__admin_editor,
         self::http_redirects,
         self::report_browers_errors_to_sentry,
-        self::unstable__remote_events,
         self::beta__emailing,
         self::beta__emailing_parameters,
         self::proposal_revisions,

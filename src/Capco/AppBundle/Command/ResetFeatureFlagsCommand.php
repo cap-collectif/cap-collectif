@@ -93,7 +93,6 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate(Manager::unstable__tipsmeee);
         $this->manager->activate('sentry_log');
         $this->manager->activate('remind_user_account_confirmation');
-        $this->manager->activate('unstable__remote_events');
         $this->manager->deactivate('beta__emailing');
         $this->manager->deactivate(Manager::beta__emailing_parameters);
         $this->manager->activate(Manager::proposal_revisions);
@@ -112,7 +111,6 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->activate('public_api');
             $this->manager->activate('indexation');
             $this->manager->deactivate('sentry_log');
-            $this->manager->deactivate('unstable__remote_events');
             $this->manager->deactivate(Manager::export_legacy_users);
             $this->manager->deactivate(Manager::import_proposals);
             $this->manager->deactivate(Manager::beta__analytics_page);

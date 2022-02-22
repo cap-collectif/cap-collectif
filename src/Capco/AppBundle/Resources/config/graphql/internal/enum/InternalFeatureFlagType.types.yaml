@@ -112,8 +112,6 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::reporting")'
             display_map:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::display_map")'
-            unstable__remote_events:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__remote_events")'
             votes_min:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::votes_min")'
             beta__emailing:

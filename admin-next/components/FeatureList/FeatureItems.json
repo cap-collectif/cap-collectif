@@ -146,12 +146,6 @@
                         "description": "description.module.calendar",
                         "onlySuperAdmin": false
                     },
-                    "unstable__remote_events": {
-                        "title": "capco.module.remote_events",
-                        "description": "",
-                        "onlySuperAdmin": true,
-                        "dependOf": ["calendar"]
-                    },
                     "themes": {
                         "title": "capco.module.themes",
                         "description": "description.module.themes",

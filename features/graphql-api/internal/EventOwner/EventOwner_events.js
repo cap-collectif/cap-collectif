@@ -123,8 +123,8 @@ describe('Internal.EventOwner.events', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.events.totalCount).toBe(27);
-    expect(response.viewer.events.edges).toHaveLength(27);
+    expect(response.viewer.events.totalCount).toBe(23);
+    expect(response.viewer.events.edges).toHaveLength(23);
   });
 
   it('should filter by a given query', async () => {

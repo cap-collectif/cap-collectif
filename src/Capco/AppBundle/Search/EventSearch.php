@@ -206,9 +206,6 @@ class EventSearch extends Search
         if (isset($providedFilters['isRegistrable'])) {
             $filters['isRegistrable'] = $providedFilters['isRegistrable'];
         }
-        if (isset($providedFilters['isPresential'])) {
-            $filters['isPresential'] = $providedFilters['isPresential'];
-        }
         if (isset($providedFilters['enabled'])) {
             $filters['enabled'] = $providedFilters['enabled'];
         }

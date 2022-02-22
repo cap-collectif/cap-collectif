@@ -102,7 +102,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $payload['event']->shouldBe($event);
     }
 
-    public function it_updates_an_event_with_new_author_and_new_animator(
+    public function it_updates_an_event_with_new_author(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactory $formFactory,
@@ -112,8 +112,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Event $event,
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker,
-        User $newAuthor,
-        User $newAnimator
+        User $newAuthor
     ) {
         $values = [
             'id' => 'base64id',
@@ -139,10 +138,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve($values['author'], $viewer)->willReturn($newAuthor);
         $event->getAuthor()->willReturn(null);
         $event->setAuthor($newAuthor)->shouldBeCalled();
-
-        $globalIdResolver->resolve($values['animator'], $viewer)->willReturn($newAnimator);
-        $event->getAnimator()->willReturn(null);
-        $event->setAnimator($newAnimator)->shouldBeCalled();
 
         $formFactory->create(EventType::class, $event)->willReturn($form);
         $form

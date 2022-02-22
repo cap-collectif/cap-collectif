@@ -512,42 +512,12 @@ Object {
         },
         Object {
           "node": Object {
-            "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": "2020-05-27 00:00:00",
-            },
-            "title": "Il n'y a pas que le budget participatif dans la vie",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": "2020-05-28 00:00:00",
-            },
-            "title": "+ de tech dans la civictech : c'est quoi une API ?",
-          },
-        },
-        Object {
-          "node": Object {
             "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
             "timeRange": Object {
               "endAt": null,
               "startAt": "2020-05-28 00:00:00",
             },
             "title": "Evenement owned par un owner",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": "2022-04-28 00:00:00",
-            },
-            "title": "Evenement animé par l'utilisateur User",
           },
         },
         Object {
@@ -578,16 +548,6 @@ Object {
               "startAt": "2024-04-14 00:00:00",
             },
             "title": "evenement créer par un utilisateur anglais avec review approved",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": "2024-05-28 00:00:00",
-            },
-            "title": "On vous présente Agui, l’ami du BP",
           },
         },
         Object {
@@ -631,7 +591,7 @@ Object {
           },
         },
       ],
-      "totalCount": 27,
+      "totalCount": 23,
     },
   },
 }

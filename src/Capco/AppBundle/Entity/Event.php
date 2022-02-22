@@ -49,6 +49,7 @@ class Event implements
     Translatable,
     SonataTranslatableInterface
 {
+    use BodyUsingJoditWysiwygTrait;
     use CommentableWithoutCounterTrait;
     use CustomCodeTrait;
     use DateHelperTrait;
@@ -58,7 +59,6 @@ class Event implements
     use TimestampableTrait;
     use TranslatableTrait;
     use UuidTrait;
-    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"startAt", "endAt", "zipCode", "address", "nbAddress", "media", "Theme"})
@@ -148,12 +148,6 @@ class Event implements
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="animator_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     */
-    private $animator;
-
-    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventComment", mappedBy="Event",  cascade={"persist", "remove"})
      */
     private $comments;
@@ -172,26 +166,6 @@ class Event implements
      * @ORM\Column(name="room_name", type="text", nullable=true)
      */
     private $roomName;
-
-    /**
-     * @ORM\Column(name="jitsi_token", type="text", nullable=true)
-     */
-    private $jitsiToken;
-
-    /**
-     * @ORM\Column(name="is_presential", type="boolean", nullable=false, options={"default": true})
-     */
-    private $isPresential = true;
-
-    /**
-     * @ORM\Column(name="recording_link", type="text", nullable=true)
-     */
-    private $recordingLink;
-
-    /**
-     * @ORM\Column(name="is_recording_published", type="boolean", nullable=false, options={"default": false})
-     */
-    private $isRecordingPublished = false;
 
     /**
      * TODO to remove after recette is ok.
@@ -303,18 +277,6 @@ class Event implements
     {
         $this->steps->removeElement($step);
         $step->removeEvent($this);
-
-        return $this;
-    }
-
-    public function getRecordingLink(): ?string
-    {
-        return $this->recordingLink;
-    }
-
-    public function setRecordingLink(?string $recordingLink): self
-    {
-        $this->recordingLink = $recordingLink;
 
         return $this;
     }
@@ -598,18 +560,6 @@ class Event implements
         return $this;
     }
 
-    public function getNewAddressIsSimilar(): ?bool
-    {
-        return $this->newAddressIsSimilar;
-    }
-
-    public function setNewAddressIsSimilar(?bool $newAddressIsSimilar = null): self
-    {
-        $this->newAddressIsSimilar = $newAddressIsSimilar;
-
-        return $this;
-    }
-
     public function getReview(): ?EventReview
     {
         return $this->review;
@@ -701,8 +651,6 @@ class Event implements
             'translations',
             'newTranslations',
             'guestListEnabled',
-            'isPresential',
-            'isRecordingPublished',
             'adminAuthorizeDataTransfer',
             'commentable',
             'createdAt',
@@ -830,54 +778,6 @@ class Event implements
     public function setRoomName(?string $roomName): self
     {
         $this->roomName = $roomName;
-
-        return $this;
-    }
-
-    public function getJitsiToken(): ?string
-    {
-        return $this->jitsiToken;
-    }
-
-    public function setJitsiToken(?string $jitsiToken): self
-    {
-        $this->jitsiToken = $jitsiToken;
-
-        return $this;
-    }
-
-    public function getIsPresential(): bool
-    {
-        return $this->isPresential;
-    }
-
-    public function setIsPresential(bool $isPresential): self
-    {
-        $this->isPresential = $isPresential;
-
-        return $this;
-    }
-
-    public function getIsRecordingPublished(): bool
-    {
-        return $this->isRecordingPublished;
-    }
-
-    public function setIsRecordingPublished(bool $isRecordingPublished): self
-    {
-        $this->isRecordingPublished = $isRecordingPublished;
-
-        return $this;
-    }
-
-    public function getAnimator(): ?User
-    {
-        return $this->animator;
-    }
-
-    public function setAnimator(?User $animator): self
-    {
-        $this->animator = $animator;
 
         return $this;
     }

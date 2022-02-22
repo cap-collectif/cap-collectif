@@ -50,8 +50,6 @@ export const EventPageHeader = ({
   user,
 }: Props) => {
   const {
-    isPresential,
-    animator,
     title,
     googleMapsAddress,
     timeRange,
@@ -64,7 +62,6 @@ export const EventPageHeader = ({
     guestListEnabled,
   } = event;
 
-  const speaker = animator ?? author;
   const locale = global && global.locale ? global.locale.split('-')[0] : '';
   moment.locale(locale);
   return (
@@ -72,11 +69,7 @@ export const EventPageHeader = ({
       <div className="event-header-info">
         <TitleContainer>
           {!config.isMobile && (
-            <Icon
-              name={!isPresential ? ICON_NAME.eventOnline : ICON_NAME.eventPhysical}
-              size={30}
-              color={colors.lightBlue}
-            />
+            <Icon name={ICON_NAME.eventPhysical} size={30} color={colors.lightBlue} />
           )}
           <h1>{title}</h1>
         </TitleContainer>
@@ -126,40 +119,8 @@ export const EventPageHeader = ({
                 )}
               </Tag>
 
-              {timeRange?.startAt && timeRange?.endAt && !isPresential && (
-                <Tag
-                  size="16px"
-                  CustomImage={
-                    <IconRounded size={18} color={colors.darkGray}>
-                      <Icon name={ICON_NAME.clock} color="#fff" size={10} />
-                    </IconRounded>
-                  }>
-                  {moment
-                    .utc(
-                      moment
-                        .duration(moment(timeRange.startAt).diff(timeRange.endAt))
-                        .as('milliseconds'),
-                    )
-                    .format('HH:mm')}
-                </Tag>
-              )}
-
               {hasThemeEnabled && themes && themes.length > 0 && (
                 <TagThemes themes={themes} size="16px" />
-              )}
-
-              {speaker && (
-                <Tag
-                  size="16px"
-                  CustomImage={
-                    <IconRounded size={18} color={colors.darkGray}>
-                      <Icon name={ICON_NAME.micro} color="#fff" size={10} />
-                    </IconRounded>
-                  }>
-                  <FormattedMessage id="driven.by" />
-                  {' : '}
-                  {speaker.username}
-                </Tag>
               )}
 
               {googleMapsAddress?.formatted && (
@@ -245,26 +206,21 @@ const EventPageHeaderConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
 export default createFragmentContainer(EventPageHeaderConnected, {
   query: graphql`
     fragment EventPageHeader_query on Query
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...EventEditButton_query @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
   event: graphql`
     fragment EventPageHeader_event on Event
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       title
-      isPresential
       adminUrl
       commentable
       guestListEnabled
       translations {
         locale
         link
-      }
-      animator {
-        id
-        username
       }
       viewerDidAuthor @include(if: $isAuthenticated)
       timeRange {

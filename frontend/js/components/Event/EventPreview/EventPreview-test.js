@@ -11,8 +11,6 @@ const baseEvent = {
   title: 'Lorem ipsum dolor sit amet, consectetur adipiscing.',
   url: '#',
   guestListEnabled: false,
-  isPresential: false,
-  isRecordingPublished: false,
   timeRange: {
     startAt: '2030-03-10 00:00:00',
     endAt: null,
@@ -31,11 +29,6 @@ const baseEvent = {
 const event = {
   basic: {
     ...baseEvent,
-  },
-  remote: {
-    ...baseEvent,
-    isPresential: true,
-    isRecordingPublished: true,
   },
   withoutAddress: {
     ...baseEvent,
@@ -81,11 +74,6 @@ describe('<EventPreview />', () => {
 
   it('should render correctly when no date', () => {
     const wrapper = shallow(<EventPreview event={event.withoutDate} hasIllustrationDisplayed />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly when remote', () => {
-    const wrapper = shallow(<EventPreview event={event.remote} hasIllustrationDisplayed />);
     expect(wrapper).toMatchSnapshot();
   });
 

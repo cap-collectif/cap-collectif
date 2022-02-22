@@ -52,12 +52,3 @@ InternalAddEventInput:
             steps:
                 type: '[ID!]'
                 description: 'An array of Node IDs of steps associated to this event.'
-            isPresential:
-                type: 'Boolean'
-                description: 'Is the event presential or remotely accessible'
-            isRecordingPublished:
-                type: 'Boolean'
-                description: 'Should the event be recorded or not'
-            animator:
-                type: 'ID'
-                description: 'The Node ID of the animator for this event if there is one.'

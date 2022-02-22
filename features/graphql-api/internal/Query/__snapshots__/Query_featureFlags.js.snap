@@ -229,10 +229,6 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "unstable__remote_events",
-    },
-    Object {
-      "enabled": false,
       "type": "beta__emailing",
     },
     Object {

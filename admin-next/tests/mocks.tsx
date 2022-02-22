@@ -21,7 +21,6 @@ export const intlMock = {
 
 export const features: FeatureFlags = {
     report_browers_errors_to_sentry: false,
-    unstable__remote_events: false,
     login_saml: false,
     login_cas: false,
     login_paris: false,

@@ -113,53 +113,7 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "isPresential",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "recordingUrl",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "isRecordingPublished",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
                     "name": "bodyUsingJoditWysiwyg",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "User",
-                    "kind": "LinkedField",
-                    "name": "animator",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "displayName",
-                        "storageKey": null,
-                      },
-                    ],
                     "storageKey": null,
                   },
                   Object {
@@ -693,7 +647,7 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
         ],
       },
       "params": Object {
-        "cacheID": "5c9315332efbd270565b97f46d9f06a2",
+        "cacheID": "1bb2d29557ae1367c704e6c029d94542",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -720,14 +674,7 @@ fragment EventCreateModal_query_39ngnn on Query {
 
 fragment EventForm_event on Event {
   id
-  isPresential
-  recordingUrl
-  isRecordingPublished
   bodyUsingJoditWysiwyg
-  animator {
-    id
-    displayName
-  }
   timeRange {
     startAt
     endAt
@@ -959,53 +906,7 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "isPresential",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "recordingUrl",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "isRecordingPublished",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
                     "name": "bodyUsingJoditWysiwyg",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "User",
-                    "kind": "LinkedField",
-                    "name": "animator",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "displayName",
-                        "storageKey": null,
-                      },
-                    ],
                     "storageKey": null,
                   },
                   Object {
@@ -1539,7 +1440,7 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
         ],
       },
       "params": Object {
-        "cacheID": "5c9315332efbd270565b97f46d9f06a2",
+        "cacheID": "1bb2d29557ae1367c704e6c029d94542",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -1566,14 +1467,7 @@ fragment EventCreateModal_query_39ngnn on Query {
 
 fragment EventForm_event on Event {
   id
-  isPresential
-  recordingUrl
-  isRecordingPublished
   bodyUsingJoditWysiwyg
-  animator {
-    id
-    displayName
-  }
   timeRange {
     startAt
     endAt
@@ -1805,53 +1699,7 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "isPresential",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "recordingUrl",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "isRecordingPublished",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
                     "name": "bodyUsingJoditWysiwyg",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "User",
-                    "kind": "LinkedField",
-                    "name": "animator",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "displayName",
-                        "storageKey": null,
-                      },
-                    ],
                     "storageKey": null,
                   },
                   Object {
@@ -2385,7 +2233,7 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "5c9315332efbd270565b97f46d9f06a2",
+        "cacheID": "1bb2d29557ae1367c704e6c029d94542",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -2412,14 +2260,7 @@ fragment EventCreateModal_query_39ngnn on Query {
 
 fragment EventForm_event on Event {
   id
-  isPresential
-  recordingUrl
-  isRecordingPublished
   bodyUsingJoditWysiwyg
-  animator {
-    id
-    displayName
-  }
   timeRange {
     startAt
     endAt
@@ -2651,53 +2492,7 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "isPresential",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "recordingUrl",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "isRecordingPublished",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
                     "name": "bodyUsingJoditWysiwyg",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "User",
-                    "kind": "LinkedField",
-                    "name": "animator",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "displayName",
-                        "storageKey": null,
-                      },
-                    ],
                     "storageKey": null,
                   },
                   Object {
@@ -3231,7 +3026,7 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "5c9315332efbd270565b97f46d9f06a2",
+        "cacheID": "1bb2d29557ae1367c704e6c029d94542",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -3258,14 +3053,7 @@ fragment EventCreateModal_query_39ngnn on Query {
 
 fragment EventForm_event on Event {
   id
-  isPresential
-  recordingUrl
-  isRecordingPublished
   bodyUsingJoditWysiwyg
-  animator {
-    id
-    displayName
-  }
   timeRange {
     startAt
     endAt

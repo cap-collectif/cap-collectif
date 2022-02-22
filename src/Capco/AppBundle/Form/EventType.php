@@ -61,8 +61,6 @@ class EventType extends AbstractType
                 'multiple' => true,
                 'class' => AbstractStep::class,
             ])
-            ->add('isPresential', CheckboxType::class)
-            ->add('isRecordingPublished', CheckboxType::class)
             ->add('address', TextType::class)
             ->add('city', TextType::class)
             ->add('zipCode', TextType::class)

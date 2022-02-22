@@ -50,7 +50,6 @@ class FeaturesCategoryResolver
                     Manager::beta__questionnaire_result,
                     Manager::display_pictures_in_event_list,
                     Manager::multilangue,
-                    Manager::unstable__remote_events,
                     Manager::unstable__tipsmeee,
                     Manager::sentry_log,
                     Manager::login_openid,

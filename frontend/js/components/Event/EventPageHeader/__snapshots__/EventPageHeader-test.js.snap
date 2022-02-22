@@ -87,28 +87,6 @@ exports[`<EventPageHeader /> should render correctly 1`] = `
               >
                 <Icon
                   color="#fff"
-                  name="micro"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="driven.by"
-              values={Object {}}
-            />
-             : 
-            Jean Necrideteste
-          </Tag>
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
                   name="pin2"
                   size={10}
                 />
@@ -236,28 +214,6 @@ exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] =
               ]
             }
           />
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
-                  name="micro"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="driven.by"
-              values={Object {}}
-            />
-             : 
-            Jean Necrideteste
-          </Tag>
         </EventPageHeaderstyle__TagsList>
       </div>
     </EventPageHeaderstyle__InfoContainer>
@@ -369,202 +325,6 @@ exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
               >
                 <Icon
                   color="#fff"
-                  name="micro"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="driven.by"
-              values={Object {}}
-            />
-             : 
-            Jean Necrideteste
-          </Tag>
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
-                  name="pin2"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            12 rue des pissenlits - 75002 Paris, France
-          </Tag>
-        </EventPageHeaderstyle__TagsList>
-      </div>
-    </EventPageHeaderstyle__InfoContainer>
-    <EventPageHeaderstyle__InfoLineContainer>
-      <div>
-        <span
-          className="number"
-        >
-          12
-        </span>
-        <FormattedMessage
-          id="comment.dynamic"
-          values={
-            Object {
-              "num": 12,
-            }
-          }
-        />
-      </div>
-      <div>
-        <span
-          className="number"
-        >
-          1
-        </span>
-        <FormattedMessage
-          id="registered.dynamic"
-          values={
-            Object {
-              "num": 1,
-            }
-          }
-        />
-      </div>
-    </EventPageHeaderstyle__InfoLineContainer>
-  </div>
-</EventPageHeaderstyle__Container>
-`;
-
-exports[`<EventPageHeader /> should render correctly when type online 1`] = `
-<EventPageHeaderstyle__Container>
-  <div
-    className="event-header-info"
-  >
-    <EventPageHeaderstyle__TitleContainer>
-      <Icon
-        color="#007bff"
-        name="eventOnline"
-        size={30}
-      />
-      <h1>
-        Ceci est un titre
-      </h1>
-    </EventPageHeaderstyle__TitleContainer>
-    <EventPageHeaderstyle__InfoContainer>
-      <Relay(Connect(UserAvatarLegacy))
-        size={60}
-        user={
-          Object {
-            "$fragmentRefs": null,
-            "id": "authorId",
-            "url": "https://monurl.fr",
-            "username": "Jean Necrideteste",
-          }
-        }
-      />
-      <div>
-        <EventPageHeaderstyle__UsernameContainer>
-          <a
-            className="username"
-            href="https://monurl.fr"
-          >
-            Jean Necrideteste
-          </a>
-        </EventPageHeaderstyle__UsernameContainer>
-        <EventPageHeaderstyle__TagsList>
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
-                  name="calendar"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="date.start.to.date.end"
-              values={
-                Object {
-                  "dateEnd": "1er juillet 2020",
-                  "dateStart": "1er juillet 2020",
-                  "hourEnd": "15:55",
-                  "hourStart": "15:48",
-                }
-              }
-            />
-          </Tag>
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
-                  name="clock"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            23:53
-          </Tag>
-          <Relay(TagThemes)
-            size="16px"
-            themes={
-              Array [
-                Object {
-                  "$fragmentRefs": null,
-                  "__typename": "Theme",
-                },
-                Object {
-                  "$fragmentRefs": null,
-                  "__typename": "Theme",
-                },
-              ]
-            }
-          />
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
-                  name="micro"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="driven.by"
-              values={Object {}}
-            />
-             : 
-            Jean Necrideteste
-          </Tag>
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
                   name="pin2"
                   size={10}
                 />
@@ -654,7 +414,6 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
                 "$fragmentRefs": null,
                 "$refType": null,
                 "adminUrl": "https://capco.dev/admin",
-                "animator": null,
                 "author": Object {
                   "$fragmentRefs": null,
                   "id": "authorId",
@@ -670,7 +429,6 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
                 },
                 "guestListEnabled": true,
                 "id": "123454321",
-                "isPresential": true,
                 "participants": Object {
                   "totalCount": 1,
                 },
@@ -746,28 +504,6 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
               ]
             }
           />
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
-                  name="micro"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="driven.by"
-              values={Object {}}
-            />
-             : 
-            Jean Necrideteste
-          </Tag>
           <Tag
             CustomImage={
               <IconRounded
@@ -916,28 +652,6 @@ exports[`<EventPageHeader /> should render without comments count when not comme
               >
                 <Icon
                   color="#fff"
-                  name="micro"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="driven.by"
-              values={Object {}}
-            />
-             : 
-            Jean Necrideteste
-          </Tag>
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
                   name="pin2"
                   size={10}
                 />
@@ -1058,28 +772,6 @@ exports[`<EventPageHeader /> should render without guest count and comments coun
               >
                 <Icon
                   color="#fff"
-                  name="micro"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="driven.by"
-              values={Object {}}
-            />
-             : 
-            Jean Necrideteste
-          </Tag>
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
                   name="pin2"
                   size={10}
                 />
@@ -1175,28 +867,6 @@ exports[`<EventPageHeader /> should render without guest count when guest list i
               ]
             }
           />
-          <Tag
-            CustomImage={
-              <IconRounded
-                color="#707070"
-                size={18}
-              >
-                <Icon
-                  color="#fff"
-                  name="micro"
-                  size={10}
-                />
-              </IconRounded>
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="driven.by"
-              values={Object {}}
-            />
-             : 
-            Jean Necrideteste
-          </Tag>
           <Tag
             CustomImage={
               <IconRounded

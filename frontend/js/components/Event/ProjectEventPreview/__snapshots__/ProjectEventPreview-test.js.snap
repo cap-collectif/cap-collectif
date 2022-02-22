@@ -53,68 +53,6 @@ exports[`<ProjectEventPreview /> should render correctly 1`] = `
 </EventPreviewstyle__EventPreviewContainer>
 `;
 
-exports[`<ProjectEventPreview /> should render correctly for remote event 1`] = `
-<EventPreviewstyle__EventPreviewContainer
-  isProject={true}
->
-  <Body>
-    <EventPreviewstyle__TitleContainer>
-      <Icon
-        color="#007bff"
-        name="eventOnline"
-        size={17}
-      />
-      <Title
-        tagName="h3"
-      >
-        <a
-          href="#"
-          title="Lorem ipsum dolor sit amet, consectetur adipiscing."
-        >
-          <Truncate
-            ellipsis="…"
-            lines={2}
-            trimWhitespace={false}
-            width={0}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing.
-          </Truncate>
-        </a>
-      </Title>
-    </EventPreviewstyle__TitleContainer>
-    <EventPreviewstyle__HeadContent>
-      <Date
-        date="2030-03-10 00:00:00"
-      />
-    </EventPreviewstyle__HeadContent>
-    <EventPreviewstyle__Content>
-      <EventPreviewstyle__TagsList
-        vertical={true}
-      >
-        <Tag
-          size="16px"
-        >
-          <IconRounded
-            color="#707070"
-            size={18}
-          >
-            <Icon
-              color="#fff"
-              name="camera"
-              size={10}
-            />
-          </IconRounded>
-          <FormattedMessage
-            id="global.online"
-            values={Object {}}
-          />
-        </Tag>
-      </EventPreviewstyle__TagsList>
-    </EventPreviewstyle__Content>
-  </Body>
-</EventPreviewstyle__EventPreviewContainer>
-`;
-
 exports[`<ProjectEventPreview /> should render correctly when guest enabled 1`] = `
 <EventPreviewstyle__EventPreviewContainer
   isProject={true}
@@ -270,68 +208,6 @@ exports[`<ProjectEventPreview /> should render correctly when no googleMapsAddre
       <EventPreviewstyle__TagsList
         vertical={true}
       />
-    </EventPreviewstyle__Content>
-  </Body>
-</EventPreviewstyle__EventPreviewContainer>
-`;
-
-exports[`<ProjectEventPreview /> should render correctly when when recording published 1`] = `
-<EventPreviewstyle__EventPreviewContainer
-  isProject={true}
->
-  <Body>
-    <EventPreviewstyle__TitleContainer>
-      <Icon
-        color="#007bff"
-        name="eventOnline"
-        size={17}
-      />
-      <Title
-        tagName="h3"
-      >
-        <a
-          href="#"
-          title="Lorem ipsum dolor sit amet, consectetur adipiscing."
-        >
-          <Truncate
-            ellipsis="…"
-            lines={2}
-            trimWhitespace={false}
-            width={0}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing.
-          </Truncate>
-        </a>
-      </Title>
-    </EventPreviewstyle__TitleContainer>
-    <EventPreviewstyle__HeadContent>
-      <Date
-        date="2030-03-10 00:00:00"
-      />
-    </EventPreviewstyle__HeadContent>
-    <EventPreviewstyle__Content>
-      <EventPreviewstyle__TagsList
-        vertical={true}
-      >
-        <Tag
-          size="16px"
-        >
-          <IconRounded
-            color="#707070"
-            size={18}
-          >
-            <Icon
-              color="#fff"
-              name="camera"
-              size={10}
-            />
-          </IconRounded>
-          <FormattedMessage
-            id="global.online"
-            values={Object {}}
-          />
-        </Tag>
-      </EventPreviewstyle__TagsList>
     </EventPreviewstyle__Content>
   </Body>
 </EventPreviewstyle__EventPreviewContainer>

@@ -203,72 +203,12 @@ Capco\AppBundle\Entity\Event:
         createdAt: <identity((new \DateTime('2015-06-14')))>
         addressJson: '[{"address_components":[{"long_name":"103","short_name":"103","types":["street_number"]},{"long_name":"Grande Rue de la Croix-Rousse","short_name":"Grande Rue de la Croix-Rousse","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69004","short_name":"69004","types":["postal_code"]}],"formatted_address":"103 Grande Rue de la Croix-Rousse, 69004 Lyon, France","geometry":{"location":{"lat":45.7817345,"lng":4.8305811},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.78308348029149,"lng":4.831930080291502},"southwest":{"lat":45.7803855197085,"lng":4.829232119708498}}},"place_id":"ChIJjTMnvR_r9EcRYmk8W0oMmC0","plus_code":{"compound_code":"QRJJ+M6 Lyon, France","global_code":"8FQ6QRJJ+M6"},"types":["street_address"]}]'
         review: '@eventReview6'
-    eventRemote:
-        id: eventRemote
-        # Make sure to have a future date here, for CI
-        startAt: <identity((new \DateTime('2024-05-28')))>
-        author: '@userAgui'
-        createdAt: <identity((new \DateTime('2015-04-14')))>
-        isPresential: false
-        animator: '@userAgui'
-        projects: ['@projectIdf']
-        steps: ['@collectstepIdf', '@selectionStepIdfVote']
-        enabled: true
-        guestListEnabled: true
-    eventRemoteUserAnimator:
-        id: eventRemoteUserAnimator
-        # Make sure to have a future date here, for CI
-        startAt: <identity((new \DateTime('2022-04-28')))>
-        author: '@userAgui'
-        createdAt: <identity((new \DateTime('2015-04-14')))>
-        isPresential: false
-        animator: '@user5'
-        projects: ['@projectIdf']
-        roomName: I_AM_A_RANDOM_GENERATED_ROOM_NAME_3
-        jitsiToken: I_AM_A_RANDOM_GENERATED_TOKEN_3
-        steps: ['@collectstepIdf', '@selectionStepIdfVote']
-        enabled: true
-        guestListEnabled: true
-    eventRemotePastWithoutReplay:
-        id: eventRemotePastWithoutReplay
-        startAt: <identity((new \DateTime('2020-05-27')))>
-        author: '@userSpyl'
-        createdAt: <identity((new \DateTime('2020-05-27')))>
-        isPresential: false
-        enabled: true
-        animator: '@userSpyl'
-        isRecordingPublished: false
-        roomName: I_AM_A_RANDOM_GENERATED_ROOM_NAME_1
-        jitsiToken: I_AM_A_RANDOM_GENERATED_TOKEN_1
-        recordingLink: <('https://assets.cap.co/jitsi_recordings/MVu7w6fg1QZSpMz+hHYh9AGG7w3Xm6QiyKwhQXVM-dg3IUp2xiDfyK6R7G3zTCLbROTdnlO60LYfobyBBwHjRw==.mp4')>
-        projects: ['@projectIdf']
-        steps: ['@collectstepIdf', '@selectionStepIdfAnalyse']
-    eventRemotePastWithReplay:
-        id: eventRemotePastWithReplay
-        startAt: <identity((new \DateTime('2020-05-28')))>
-        author: '@userSpyl'
-        createdAt: <identity((new \DateTime('2020-05-28')))>
-        isPresential: false
-        enabled: true
-        animator: '@userSpyl'
-        isRecordingPublished: true
-        roomName: I_AM_A_RANDOM_GENERATED_ROOM_NAME_2
-        jitsiToken: I_AM_A_RANDOM_GENERATED_TOKEN_2
-        recordingLink: <('https://assets.cap.co/jitsi_recordings/MVu7w6fg1QZSpMz+hHYh9AGG7w3Xm6QiyKwhQXVM-dg3IUp2xiDfyK6R7G3zTCLbROTdnlO60LYfobyBBwHjRw==.mp4')>
-        projects: ['@projectIdf']
-        steps: ['@collectstepIdf', '@selectionStepIdfAnalyse']
     eventWithOwner:
         id: eventWithOwner
         startAt: <identity((new \DateTime('2020-05-28')))>
         author: '@userTheo'
         owner: '@userTheo'
         createdAt: <identity((new \DateTime('2020-05-28')))>
-        isPresential: false
         enabled: true
-        animator: '@userTheo'
-        isRecordingPublished: true
-        roomName: I_AM_A_RANDOM_GENERATED_ROOM_NAME_2
-        jitsiToken: I_AM_A_RANDOM_GENERATED_TOKEN_2
-        recordingLink: <('https://assets.cap.co/jitsi_recordings/MVu7w6fg1QZSpMz+hHYh9AGG7w3Xm6QiyKwhQXVM-dg3IUp2xiDfyK6R7G3zTCLbROTdnlO60LYfobyBBwHjRw==.mp4')>
         projects: ['@projectIdf']
         steps: ['@collectstepIdf', '@selectionStepIdfAnalyse']

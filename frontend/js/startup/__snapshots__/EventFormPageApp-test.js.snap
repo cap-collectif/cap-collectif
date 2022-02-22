@@ -274,53 +274,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "isPresential",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "recordingUrl",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "isRecordingPublished",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
                         "name": "bodyUsingJoditWysiwyg",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "User",
-                        "kind": "LinkedField",
-                        "name": "animator",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "displayName",
-                            "storageKey": null,
-                          },
-                        ],
                         "storageKey": null,
                       },
                       Object {
@@ -736,7 +690,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "d08e36f633dded7b220702689c95bdc8",
+            "cacheID": "654d16d83b72ad097d06b1bc54dfa2e7",
             "id": null,
             "metadata": Object {},
             "name": "EventFormPageAppQuery",
@@ -790,14 +744,7 @@ fragment EventFormPage_query_k3vj0 on Query {
 
 fragment EventForm_event on Event {
   id
-  isPresential
-  recordingUrl
-  isRecordingPublished
   bodyUsingJoditWysiwyg
-  animator {
-    id
-    displayName
-  }
   timeRange {
     startAt
     endAt

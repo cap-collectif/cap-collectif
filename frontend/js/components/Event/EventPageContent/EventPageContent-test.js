@@ -13,7 +13,6 @@ const basePresentialEvent = {
   url: 'https://jesuislurl.com',
   body: 'je suis le body',
   commentable: true,
-  isPresential: true,
   isRegistrationPossible: true,
   isViewerParticipatingAtEvent: true,
   media: {
@@ -47,10 +46,6 @@ const presentialEvent = {
   withModerationMotive: {
     ...basePresentialEvent,
     viewerDidAuthor: true,
-  },
-  remote: {
-    ...basePresentialEvent,
-    isPresential: false,
   },
 };
 
@@ -114,18 +109,6 @@ describe('<EventPageContent />', () => {
       <EventPageContent
         hasProposeEventEnabled
         event={presentialEvent.withModerationMotive}
-        viewer={user}
-        intl={intlMock}
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly when remote event', () => {
-    const wrapper = shallow(
-      <EventPageContent
-        hasProposeEventEnabled={false}
-        event={presentialEvent.remote}
         viewer={user}
         intl={intlMock}
       />,
