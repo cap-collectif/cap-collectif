@@ -33,7 +33,11 @@ export class DraftProposalList extends React.Component<Props> {
         <DraftBox>
           <ul className={classes}>
             {proposals.map((edge, i) => (
-              <DraftProposalPreview key={`draft-proposal-${i}`} proposal={edge.node} />
+              <DraftProposalPreview
+                key={`draft-proposal-${i}`}
+                proposal={edge.node}
+                stepUrl={step.url}
+              />
             ))}
           </ul>
         </DraftBox>
@@ -46,6 +50,7 @@ export default createFragmentContainer(DraftProposalList, {
   step: graphql`
     fragment DraftProposalList_step on CollectStep
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      url
       viewerProposalDrafts @include(if: $isAuthenticated) {
         edges {
           node {

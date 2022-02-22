@@ -57,6 +57,7 @@ const commit = (variables: {
       const edgeID = `client:newTmpNode:${newProposalId}`;
       newNode.setValue(proposal.getValue('title'), 'title');
       newNode.setValue(proposal.getValue('url'), 'url');
+      newNode.setValue(proposal.getValue('slug'), 'slug');
       let newEdge = store.get(edgeID);
       if (!newEdge) {
         newEdge = store.create(edgeID, 'ProposalEdge');

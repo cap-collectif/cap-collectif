@@ -254,6 +254,7 @@ Scenario: Admin access to his project and click to edit it
   When I visited "collect page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
+  And I wait 10 seconds
   Then I should see "Collecte des propositions pour la capcoBeer"
   And I should see "admin" in the "#authors-credit" element
   And I should see "global.draft.only_visible_by_you"

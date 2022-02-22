@@ -75,16 +75,16 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   }
   return (
     <div id="ProposalStepPage-rendered">
-      {step.events?.totalCount && calendar && <StepEvents step={step} />}
-      {step.state === 'CLOSED' && ( // We keep for now these "old style" alerts
+      {step.events?.totalCount && calendar ? <StepEvents step={step} /> : null}
+      {step.state === 'CLOSED' ? ( // We keep for now these "old style" alerts
         <div className="alert alert-info alert-dismissible block" role="alert">
           <p>
             <strong>{intl.formatMessage({ id: 'step.selection.alert.ended.title' })}</strong>{' '}
             {intl.formatMessage({ id: 'thank.for.contribution' })}
           </p>
         </div>
-      )}
-      {step.state === 'FUTURE' && (
+      ) : null}
+      {step.state === 'FUTURE' ? (
         <div className="alert alert-info alert-dismissible block" role="alert">
           <p>
             <strong>{intl.formatMessage({ id: 'step.collect.alert.future.title' })}</strong>{' '}
@@ -96,7 +96,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
             )}
           </p>
         </div>
-      )}
+      ) : null}
       <StepPageHeader step={step} />
       {isAuthenticated && step.kind === 'collect' && <DraftProposalList step={step} />}
       {isAuthenticated && (
