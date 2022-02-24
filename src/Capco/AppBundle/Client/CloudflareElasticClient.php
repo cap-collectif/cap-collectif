@@ -207,9 +207,6 @@ class CloudflareElasticClient
             ->setSize(0)
             ->addAggregation(
                 (new Terms('most_seen_pages'))
-                    ->setScript(
-                        "def indexOfQP = _value.indexOf('?'); if (indexOfQP > 0) { return _value.substring(0, indexOfQP); } return _value;"
-                    )
                     ->setField('clientRequestURI.keyword')
                     ->setOrder('_count', 'desc')
                     ->setSize(10)
