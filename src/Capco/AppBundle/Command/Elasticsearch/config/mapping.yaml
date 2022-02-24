@@ -1,25 +1,11 @@
 mappings:
     dynamic: false
     properties:
-        '@timestamp':
-            type: date
-        '@version':
-            type: keyword
-        CacheCacheStatus:
-            type: keyword
-        CacheResponseBytes:
-            type: long
-        CacheResponseStatus:
-            type: long
-        CacheTieredFill:
-            type: boolean
-        ClientASN:
-            type: long
-        ClientCountry:
-            type: keyword
-        ClientDeviceType:
-            type: keyword
-        ClientIP:
+        clientIP:
+            type: text
+            fields:
+                keyword: { type: keyword }
+        geoip:
             properties:
                 city_name:
                     type: keyword
@@ -71,213 +57,41 @@ mappings:
                             ignore_above: 256
                 timezone:
                     type: keyword
-        ClientIPClass:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        ClientRequestBytes:
-            type: long
-        ClientRequestHost:
+        clientIPClass:
             type: keyword
-        ClientRequestMethod:
-            type: keyword
-        ClientRequestPath:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        ClientRequestProtocol:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        ClientRequestReferer:
+        clientRequestHost:
             type: text
             fields:
                 keyword:
                     type: keyword
                     ignore_above: 512
-        ClientRequestURI:
+        clientRequestReferer:
             type: text
             fields:
                 keyword:
                     type: keyword
                     ignore_above: 512
-        ClientRequestUserAgent:
+        clientRequestURI:
             type: text
             fields:
                 keyword:
                     type: keyword
                     ignore_above: 512
-        ClientSSLCipher:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        ClientSSLProtocol:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        ClientSrcPort:
-            type: long
-        EdgeColoID:
-            type: long
-        EdgeEndTimestamp:
+        edgeEndTimestamp:
             type: date
-        EdgePathingOp:
+        rayID:
             type: keyword
-        EdgePathingSrc:
+        projectSlug:
+            type: text
+            fields:
+                keyword: { type: keyword }
+        stepSlug:
+            type: text
+            fields:
+                keyword: { type: keyword }
+        consultationSlug:
             type: keyword
-        EdgePathingStatus:
-            type: keyword
-        EdgeRateLimitAction:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        EdgeRateLimitID:
-            type: long
-        EdgeRequestHost:
-            type: keyword
-        EdgeResponseBytes:
-            type: long
-        EdgeResponseCompressionRatio:
-            type: float
-        EdgeResponseContentType:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        EdgeResponseStatus:
-            type: long
-        EdgeServerIP:
-            type: keyword
-        EdgeStartTimestamp:
-            type: date
-        OriginIP:
-            type: keyword
-        OriginResponseBytes:
-            type: long
-        OriginResponseHTTPExpires:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        OriginResponseHTTPLastModified:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        OriginResponseStatus:
-            type: long
-        OriginResponseTime:
-            type: long
-        OriginSSLProtocol:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        ParentRayID:
-            type: keyword
-        RayID:
-            type: keyword
-        SecurityLevel:
-            type: keyword
-        UserAgent:
-            properties:
-                build:
-                    type: keyword
-                device:
-                    type: keyword
-                major:
-                    type: keyword
-                minor:
-                    type: keyword
-                name:
-                    type: keyword
-                os:
-                    type: text
-                    fields:
-                        keyword:
-                            type: keyword
-                            ignore_above: 256
-                os_major:
-                    type: keyword
-                os_minor:
-                    type: keyword
-                os_name:
-                    type: text
-                    fields:
-                        keyword:
-                            type: keyword
-                            ignore_above: 256
-                patch:
-                    type: keyword
-        WAFAction:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        WAFFlags:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        WAFMatchedVar:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        WAFProfile:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        WAFRuleID:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        WAFRuleMessage:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        WorkerCPUTime:
-            type: long
-        WorkerStatus:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
-        WorkerSubrequest:
+        searchEngineReferer:
             type: boolean
-        WorkerSubrequestCount:
-            type: long
-        ZoneID:
-            type: long
-        message:
-            type: text
-            fields:
-                keyword:
-                    type: keyword
-                    ignore_above: 256
+        socialNetworkReferer:
+            type: boolean

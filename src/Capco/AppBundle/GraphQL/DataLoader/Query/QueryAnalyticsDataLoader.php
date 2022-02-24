@@ -166,13 +166,11 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         }
 
         if (
-            !empty(array_intersect($requestedFields, $externalAnalyticKeys)) &&
-            ($externalSets = $this->cloudflareElasticClient->getExternalAnalyticsResultSet(
+            $externalSets = $this->cloudflareElasticClient->getExternalAnalyticsResultSet(
                 $start,
                 $end,
-                $requestedFields,
                 $projectSlug
-            ))
+            )
         ) {
             $sets = $externalSets->getResultSets();
             $results = array_merge($results, [

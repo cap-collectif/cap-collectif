@@ -19,6 +19,11 @@ parameters:
     elasticsearch_index: '%env(SYMFONY_ELASTICSEARCH_INDEX)%'
     elasticsearch_password: '%env(SYMFONY_ELASTICSEARCH_PASSWORD)%'
     elasticsearch_username: '%env(SYMFONY_ELASTICSEARCH_USERNAME)%'
+    logpush_elasticsearch_host: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_HOST)%'
+    logpush_elasticsearch_index: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_INDEX)%'
+    logpush_elasticsearch_username: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_USERNAME)%'
+    logpush_elasticsearch_password: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_PASSWORD)%'
+    logpush_elasticsearch_port: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_PORT)%'
     app_version: '%env(SYMFONY_APP_VERSION)%'
     locale: '%env(SYMFONY_LOCALE)%'
     secret: '%env(SYMFONY_SECRET)%'
@@ -77,9 +82,6 @@ parameters:
     slack_jpec_ghost: '%env(SLACK_JPEC_GHOST)%'
     panther_url: '%env(SYMFONY_PANTHER_URL)%'
     panther_token: '%env(SYMFONY_PANTHER_TOKEN)%'
-    cloudflare_elastic_username: '%env(SYMFONY_CLOUDFLARE_ELASTIC_USERNAME)%'
-    cloudflare_elastic_password: '%env(SYMFONY_CLOUDFLARE_ELASTIC_PASSWORD)%'
-    cloudflare_elastic_id: '%env(SYMFONY_CLOUDFLARE_ELASTIC_ID)%'
     cas_host: '%env(SYMFONY_PHPCAS_CONFIG_HOST)%'
     cas_port: '%env(SYMFONY_PHPCAS_CONFIG_PORT)%'
     cas_context: '%env(SYMFONY_PHPCAS_CONFIG_CONTEXT)%'
@@ -157,10 +159,6 @@ parameters:
     env(SLACK_JPEC_GHOST): ***REMOVED***
     env(SYMFONY_PANTHER_URL): '***REMOVED***'
     env(SYMFONY_PANTHER_TOKEN): '***REMOVED***'
-    # CLOUDFLARE ELASTIC CLOUD
-    env(SYMFONY_CLOUDFLARE_ELASTIC_ID): '***REMOVED***'
-    env(SYMFONY_CLOUDFLARE_ELASTIC_USERNAME): 'elastic'
-    env(SYMFONY_CLOUDFLARE_ELASTIC_PASSWORD): '***REMOVED***'
     env(SYMFONY_SENTRY_LOG_LEVEL): 'error'
     env(SYMFONY_SESSION_TIMEOUT_SECONDS): 1209600 # in seconds, 1209600 = two weeks
     env(SYMFONY_PHPCAS_CONFIG_HOST): '***REMOVED***' # "ppd-***REMOVED***"
@@ -170,6 +168,12 @@ parameters:
     env(SYMFONY_PHPCAS_CONFIG_LOG_FILE_NAME): 'cas_log'
     env(SYMFONY_PHPCAS_CERTIFICATE_FILE): '***REMOVED***'
     env(SYMFONY_CAS_VERIFY_URL_PROFILE): '***REMOVED***'
+    # ELASTICSEARCH-LOGPUSH
+    env(SYMFONY_LOGPUSH_ELASTICSEARCH_HOST): '***REMOVED***'
+    env(SYMFONY_LOGPUSH_ELASTICSEARCH_INDEX): '***REMOVED***'
+    env(SYMFONY_LOGPUSH_ELASTICSEARCH_USERNAME): '***REMOVED***'
+    env(SYMFONY_LOGPUSH_ELASTICSEARCH_PASSWORD): '***REMOVED***'
+    env(SYMFONY_LOGPUSH_ELASTICSEARCH_PORT): '443'
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead

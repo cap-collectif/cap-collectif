@@ -48,13 +48,14 @@ class CreateIndexCommand extends Command
                             'region_name',
                             'city_name',
                             'region_iso_code',
+                            'location',
                         ],
                     ],
                 ],
             ],
         ]);
         if ($newPipeline->getError()) {
-            $output->writeln(['An error occured when creating pipeline.']);
+            $output->writeln(['An error occurred when creating pipeline.']);
         } else {
             $output->writeln(['Pipeline <info>geoip</info> has been added.']);
         }

@@ -178,12 +178,15 @@ services:
     Capco\AppBundle\Client\CloudflareElasticClient:
         autowire: true
         arguments:
+            $logger: '@logger'
             $hostname: '%router.request_context.host%'
-            $username: '%cloudflare_elastic_username%'
-            $password: '%cloudflare_elastic_password%'
-            $clientId: '%cloudflare_elastic_id%'
             $environment: '%kernel.environment%'
             $elasticsearchHost: '%elasticsearch_host%'
+            $logpushElasticsearchHost: '%logpush_elasticsearch_host%'
+            $logpushElasticsearchIndex: '%logpush_elasticsearch_index%'
+            $logpushElasticsearchPassword: '%logpush_elasticsearch_password%'
+            $logpushElasticsearchUsername: '%logpush_elasticsearch_username%'
+            $logpushElasticsearchPort: '%logpush_elasticsearch_port%'
 
     Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface: '@security.authentication.trust_resolver'
 

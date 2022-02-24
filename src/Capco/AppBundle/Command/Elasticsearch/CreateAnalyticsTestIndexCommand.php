@@ -47,8 +47,8 @@ class CreateAnalyticsTestIndexCommand extends Command
         $progressBar = new ProgressBar($output, \count($logs));
         $params = [];
         $progressBar->start();
-        foreach ($logs as $key => $log) {
-            $params[] = ['index' => ['_index' => 'analytics_test', '_id' => $key + 1]];
+        foreach ($logs as $log) {
+            $params[] = ['index' => ['_index' => 'analytics_test', '_id' => $log['rayID']]];
             $params[] = $log;
             $progressBar->advance();
         }
