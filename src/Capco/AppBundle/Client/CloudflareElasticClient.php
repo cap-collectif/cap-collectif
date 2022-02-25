@@ -133,8 +133,7 @@ class CloudflareElasticClient
                     'gte' => $start->format(DateTimeInterface::ATOM),
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
-            )
-            ->addMustNot($this->getUpTimeRobotIPFilterQuery());
+            );
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
@@ -167,8 +166,7 @@ class CloudflareElasticClient
                     'gte' => $start->format(DateTimeInterface::ATOM),
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
-            )
-            ->addMustNot($this->getUpTimeRobotIPFilterQuery());
+            );
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
@@ -198,8 +196,7 @@ class CloudflareElasticClient
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
-            ->addMustNot($this->getUpTimeRobotIPFilterQuery());
+            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]));
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
@@ -242,8 +239,6 @@ class CloudflareElasticClient
                 ])
             )
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]));
-
-        $boolQuery->addMustNot($this->getUpTimeRobotIPFilterQuery());
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
@@ -293,7 +288,6 @@ class CloudflareElasticClient
             )
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
             ->addMustNot(new Query\Exists('clientRequestReferer'))
-            ->addMustNot($this->getUpTimeRobotIPFilterQuery())
             ->addMustNot(new Query\Exists('socialNetworkReferer'));
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
@@ -318,8 +312,7 @@ class CloudflareElasticClient
             ->addFilter(new Query\Exists('clientRequestReferer'))
             ->addMustNot(new Query\Term(['socialNetworkReferer' => true]))
             ->addMustNot(new Query\Term(['searchEngineReferer' => true]))
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
-            ->addMustNot($this->getUpTimeRobotIPFilterQuery());
+            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]));
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);
@@ -336,47 +329,6 @@ class CloudflareElasticClient
         }
 
         return $boolQuery;
-    }
-
-    /**
-     * Return a new Bool query with filter on the list of
-     * the main ip range provided by UpTimeRobot.
-     */
-    private function getUpTimeRobotIPFilterQuery(): Query\BoolQuery
-    {
-        return (new Query\BoolQuery())
-            ->addShould(
-                (new Query\BoolQuery())->addFilter(
-                    new Range('clientIP.keyword', [
-                        'gte' => '69.162.124.226',
-                        'lte' => '69.162.124.237',
-                    ])
-                )
-            )
-            ->addShould(
-                (new Query\BoolQuery())->addFilter(
-                    new Range('clientIP.keyword', [
-                        'gte' => '63.143.42.242',
-                        'lte' => '63.143.42.253',
-                    ])
-                )
-            )
-            ->addShould(
-                (new Query\BoolQuery())->addFilter(
-                    new Range('clientIP.keyword', [
-                        'gte' => '216.245.221.82',
-                        'lte' => '216.245.221.93',
-                    ])
-                )
-            )
-            ->addShould(
-                (new Query\BoolQuery())->addFilter(
-                    new Range('clientIP.keyword', [
-                        'gte' => '208.115.199.18',
-                        'lte' => '208.115.199.30',
-                    ])
-                )
-            );
     }
 
     private function createEsClient(
