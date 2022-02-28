@@ -9,39 +9,52 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class EnableCommand extends Command
 {
-    public $force;
-    private $container;
+    private Manager $toggleManager;
+    private KernelInterface $kernel;
 
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(string $name = null, Manager $toggleManager, KernelInterface $kernel)
     {
-        $this->container = $container;
         parent::__construct($name);
+        $this->toggleManager = $toggleManager;
+        $this->kernel = $kernel;
     }
 
     protected function configure()
     {
         $this->setName('capco:toggle:enable')
             ->setDescription('Enable a given feature toggle')
-            ->addArgument('toggle', InputArgument::REQUIRED, 'A feature toggle name to activate');
+            ->addArgument('toggle', InputArgument::OPTIONAL, 'A feature toggle name to activate')
+            ->addOption('all');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $style = new SymfonyStyle($input, $output);
         $inputToggle = $input->getArgument('toggle');
-        $toggleManager = $this->getContainer()->get(Manager::class);
+        $all = $input->getOption('all');
 
-        if (!$toggleManager->exists($inputToggle)) {
+        if($all && $this->kernel->getEnvironment() === 'dev') {
+            $this->toggleManager->activateAll();
+            $this->toggleManager->deactivate(Manager::shield_mode);
+            $this->toggleManager->deactivate(Manager::graphql_introspection);
+            $this->toggleManager->deactivate(Manager::graphql_query_analytics);
+            $this->toggleManager->deactivate(Manager::developer_documentation);
+
+            return 0;
+        }
+
+        if (!$this->toggleManager->exists($inputToggle)) {
             $style->error($inputToggle . ' feature toggle doesn\'t exist...');
 
             return 1;
         }
 
-        if (!$toggleManager->isActive($inputToggle)) {
-            $toggleManager->activate($inputToggle);
+        if (!$this->toggleManager->isActive($inputToggle)) {
+            $this->toggleManager->activate($inputToggle);
             $style->success($inputToggle . ' feature toggle is now enabled!');
 
             return 0;
@@ -50,10 +63,5 @@ class EnableCommand extends Command
         $style->warning($inputToggle . ' feature toggle is already active!');
 
         return 0;
-    }
-
-    private function getContainer()
-    {
-        return $this->container;
     }
 }
