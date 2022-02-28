@@ -98,7 +98,7 @@ Scenario: Proposal should stay voted after user refresh the page
   And I submit the proposal vote form
   And I wait "#global-alert-box" to appear on current page
   And I should see "vote.add_success" in the "#global-alert-box" element
-  # And I should see 'global.cancel'
+  And I reload the page
   Then I go to a collect step with vote
   And I should see "voted"
 
