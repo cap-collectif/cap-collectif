@@ -6,7 +6,7 @@ import moment from 'moment';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
 import { ConnectionHandler, fetchQuery_DEPRECATED } from 'relay-runtime';
 import { Modal, Panel, Label } from 'react-bootstrap';
-import { submit, isPristine, isInvalid, getFormSyncErrors } from 'redux-form';
+import { submit, isPristine, isInvalid, isAsyncValidating } from 'redux-form';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import CloseButton from '../../Form/CloseButton';
@@ -260,11 +260,7 @@ export const ProposalVoteModal = ({
             </Panel.Heading>
             {!step.requirements?.viewerMeetsTheRequirements && (
               <Panel.Body>
-                {
-                  step.requirements?.reason && (
-                    <WYSIWYGRender value={step.requirements.reason} />
-                  )
-                }
+                {step.requirements?.reason && <WYSIWYGRender value={step.requirements.reason} />}
                 <RequirementsForm step={step} />
               </Panel.Body>
             )}
@@ -299,7 +295,9 @@ export const ProposalVoteModal = ({
         <CloseButton className="pull-right" onClose={onHide} />
         <SubmitButton
           id="confirm-proposal-vote"
-          disabled={step.requirements && step.requirements?.totalCount > 0 ? invalid : false}
+          disabled={
+            step.requirements && !step.requirements.viewerMeetsTheRequirements ? invalid : false
+          }
           onSubmit={() => {
             dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
             fetchQuery_DEPRECATED(environment, refetchViewer, {
@@ -323,7 +321,8 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
   ),
   isSubmitting: !!state.proposal.isVoting,
   pristine: isPristine(getFormName(props.step))(state),
-  invalid: isInvalid(formName)(state) || Object.keys(getFormSyncErrors(formName)(state)).length > 0,
+  invalid:
+    isInvalid(formName)(state) || isAsyncValidating(formName)(state) || isPristine(formName)(state),
   viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
   isAuthenticated: !!state.user.user,
 });

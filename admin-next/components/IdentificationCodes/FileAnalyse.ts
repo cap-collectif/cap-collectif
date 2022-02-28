@@ -4,10 +4,10 @@ import { DataType, DatumType, frenchSeparator, commaSeparator } from './DataType
 const csvToArray = (content: string): Array<string> => {
     let rows = content.split('\n');
 
-    if (rows.at(-1) === '') {
+    if (rows[-1] === '') {
         rows.pop();
     }
-    if (rows.at(0).includes('firstname')) {
+    if (rows[0].includes('firstname')) {
         rows.shift();
     }
 

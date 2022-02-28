@@ -8,7 +8,7 @@ Capco\UserBundle\Entity\User:
     roles:
       - 'ROLE_SUPER_ADMIN'
     confirmationToken: ~
-    phone: +33000000000
+    phone: +33678913245
     firstname: Capco
     lastname: Lectif
     address: 25 rue claude tiller

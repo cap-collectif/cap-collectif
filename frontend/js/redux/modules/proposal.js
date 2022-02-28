@@ -236,7 +236,6 @@ export type ProposalAction =
   | RequestVotingAction
   | ChangeTermAction
   | ChangeOrderAction
-  | OpenDeleteProposalModalAction
   | ChangePageAction
   | CloseCreateModalAction
   | OpenVoteModalAction

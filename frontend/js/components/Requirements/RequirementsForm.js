@@ -3,7 +3,14 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { reduxForm, Field, startSubmit, stopSubmit } from 'redux-form';
+import {
+  reduxForm,
+  Field,
+  startSubmit,
+  stopSubmit,
+  stopAsyncValidation,
+  isPristine,
+} from 'redux-form';
 import { fetchQuery_DEPRECATED } from 'relay-runtime';
 import component from '../Form/Field';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
@@ -16,53 +23,23 @@ import DateDropdownPicker from '../Form/DateDropdownPicker';
 import environment from '../../createRelayEnvironment';
 import LoginSocialButton from '~ui/Button/LoginSocialButton';
 import AppBox from '~ui/Primitives/AppBox';
+import type { RequirementsForm_step } from '~relay/RequirementsForm_step.graphql';
 
 export const formName = 'requirements-form';
 
-type GoogleMapsAddress = {
-  json: string,
-  formatted: string,
-};
+type GoogleMapsAddress = {|
+  +formatted: ?string,
+  +json: string,
+|};
 
-// We can not use __generated__ relay flow type because it's wrong
-type Requirement =
-  | {
-      +__typename: 'DateOfBirthRequirement',
-      +id: string,
-      +viewerMeetsTheRequirement: boolean,
-      +viewerDateOfBirth: ?string,
-    }
-  | {
-      +__typename: 'PostalAddressRequirement',
-      +id: string,
-      +viewerMeetsTheRequirement: boolean,
-      +viewerAddress: ?GoogleMapsAddress,
-    }
-  | {
-      +__typename: 'CheckboxRequirement',
-      +id: string,
-      +viewerMeetsTheRequirement: boolean,
-      +label: string,
-    }
-  | {
-      +__typename:
-        | 'FirstnameRequirement'
-        | 'LastnameRequirement'
-        | 'PhoneRequirement'
-        | 'IdentificationCodeRequirement'
-        | 'PhoneVerifiedRequirement'
-        | 'FranceConnectRequirement',
-      +id: string,
-      +viewerMeetsTheRequirement: boolean,
-      +viewerValue: ?string,
-    };
-
-export type RequirementsForm_step = {|
-  +requirements: {|
-    +edges: ?$ReadOnlyArray<?{|
-      +node: Requirement,
-    |}>,
-  |},
+type Requirement = {|
+  +__typename: string,
+  +id: string,
+  +viewerMeetsTheRequirement?: boolean,
+  +viewerDateOfBirth?: ?string,
+  +viewerAddress?: ?GoogleMapsAddress,
+  +viewerValue?: ?string,
+  +label?: string,
 |};
 
 type FormValues = { [key: string]: ?string | boolean };
@@ -71,6 +48,7 @@ type Props = {
   stepId?: ?string,
   step: RequirementsForm_step,
   isAuthenticated: boolean,
+  pristine: boolean,
 };
 
 export const refetchViewer = graphql`
@@ -110,14 +88,20 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, props: Props): Pr
     const requirement = requirementEdge.node;
     // cast as string, because, some code can be numbers only
     const newValue = String(values.IdentificationCodeRequirement).toUpperCase();
+
     // if viewer has code dont update the requirement
-    if (requirement.viewerValue || newValue.length < 8) {
+    if (requirement.viewerValue) {
       return Promise.resolve();
     }
-    if (!requirement.viewerValue && newValue.length >= 8) {
+    if (newValue.length < 32) {
+      const errors = {};
+      errors.IdentificationCodeRequirement = 'BAD_CODE';
+      reject(errors);
+    }
+    if (!requirement.viewerValue && newValue.length >= 32) {
       return checkIdentificationCode(newValue).then(response => {
+        const errors = {};
         if (response) {
-          const errors = {};
           errors.IdentificationCodeRequirement = response;
           reject(errors);
         } else {
@@ -125,13 +109,10 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, props: Props): Pr
           return UpdateProfilePersonalDataMutation.commit({
             input: { userIdentificationCode: newValue },
           }).then(() => {
-            if (props.stepId) {
-              fetchQuery_DEPRECATED(environment, refetchViewer, {
-                stepId: props.stepId,
-                isAuthenticated: props.isAuthenticated,
-              });
-            }
+            errors.IdentificationCodeRequirement = undefined;
             dispatch(stopSubmit(formName));
+            dispatch(stopAsyncValidation(formName));
+            Promise.resolve();
           });
         }
       });
@@ -148,13 +129,7 @@ export const validate = (values: FormValues, props: Props) => {
   }
   for (const edge of edges.filter(Boolean)) {
     const requirement = edge.node;
-    if (!values[requirement.id]) {
-      const fieldName =
-        requirement.__typename === 'PostalAddressRequirement'
-          ? 'PostalAddressText'
-          : requirement.id;
-      errors[fieldName] = 'global.required';
-    } else if (requirement.__typename === 'PhoneRequirement') {
+    if (requirement.__typename === 'PhoneRequirement') {
       const phone = values[requirement.id];
       if (typeof phone === 'string') {
         const countryCode = phone.slice(0, 3);
@@ -165,6 +140,15 @@ export const validate = (values: FormValues, props: Props) => {
           errors[requirement.id] = 'profile.constraints.phone.invalid';
         }
       }
+    } else if (
+      !values[requirement.id] &&
+      requirement.__typename !== 'IdentificationCodeRequirement'
+    ) {
+      const fieldName =
+        requirement.__typename === 'PostalAddressRequirement'
+          ? 'PostalAddressText'
+          : requirement.id;
+      errors[fieldName] = 'global.required';
     }
   }
 
@@ -177,6 +161,9 @@ export const onChange = (
   props: Props,
   previousValues: FormValues,
 ): void => {
+  if (props.pristine) {
+    return;
+  }
   Object.keys(values).forEach(element => {
     if (previousValues[element] !== values[element]) {
       const requirementEdge =
@@ -356,7 +343,9 @@ export const RequirementsForm = ({ step, submitting, submitSucceeded, change }: 
           return (
             <Field
               addonBefore={requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined}
-              minlength={requirement.__typename === 'IdentificationCodeRequirement' ? 8 : undefined}
+              minlength={
+                requirement.__typename === 'IdentificationCodeRequirement' ? 32 : undefined
+              }
               id={
                 requirement.__typename === 'IdentificationCodeRequirement'
                   ? 'IdentificationCodeRequirement'
@@ -403,7 +392,7 @@ const getRequirementInitialValue = (requirement: Requirement): ?string | boolean
     return requirement.viewerMeetsTheRequirement;
   }
   if (requirement.__typename === 'PhoneRequirement') {
-    return requirement.viewerValue ? requirement.viewerValue.replace('+33', '') : null;
+    return requirement.viewerValue ? requirement.viewerValue : null;
   }
   if (requirement.__typename === 'DateOfBirthRequirement') {
     return requirement.viewerDateOfBirth;
@@ -416,6 +405,7 @@ const getRequirementInitialValue = (requirement: Requirement): ?string | boolean
 
 const mapStateToProps = (state: State, { step }: Props) => ({
   isAuthenticated: !!state.user.user,
+  pristine: isPristine(formName)(state),
   initialValues: step.requirements.edges
     ? step.requirements.edges
         .filter(Boolean)
@@ -433,10 +423,7 @@ const mapStateToProps = (state: State, { step }: Props) => ({
           if (requirement.__typename === 'IdentificationCodeRequirement') {
             return {
               ...initialValues,
-              IdentificationCodeRequirement: requirement.viewerValue
-                ? requirement.viewerValue
-                : null,
-              [requirement.id]: getRequirementInitialValue(requirement),
+              IdentificationCodeRequirement: getRequirementInitialValue(requirement),
             };
           }
           return {

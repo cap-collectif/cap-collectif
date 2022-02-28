@@ -40,7 +40,13 @@ class CheckIdentificationCodeMutation implements MutationInterface
                 'errorCode' => self::VIEWER_ALREADY_HAS_A_CODE,
             ];
         }
-        /* TODO in upgrade of Symfony https://symfony.com/doc/current/rate_limiter.html */
+        if (\strlen($arguments['identificationCode']) < 32) {
+            return [
+                'user' => $user,
+                'errorCode' => CheckIdentificationCode::BAD_CODE,
+            ];
+        }
+        // TODO in upgrade of Symfony https://symfony.com/doc/current/rate_limiter.html
         /** @var CacheItem $cachedItem */
         $cachedItem = $this->cache->getItem(self::USER_CACHE_KEY . '-' . $user->getId());
         $valueItem = $cachedItem->get();

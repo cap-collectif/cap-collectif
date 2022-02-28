@@ -1300,6 +1300,42 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                 </div>
               </div>
             </div>
+            <div
+              className="horizontal_field_with_border_top"
+            >
+              <label
+                className="col-sm-3 control-label"
+                htmlFor="personal-data-form-code"
+              >
+                <FormattedMessage
+                  id="identification_code"
+                  values={Object {}}
+                />
+              </label>
+              <div>
+                <Field
+                  component={[Function]}
+                  disabled={true}
+                  divClassName="col-sm-4 col-xs-12"
+                  id="personal-data-form-code"
+                  name="userIdentificationCode"
+                  type="text"
+                />
+                <Text
+                  as="div"
+                  className="col-sm-4 col-xs-12 code-privacy"
+                  color="#272B30"
+                  marginLeft="190px"
+                  width="max-content"
+                >
+                  <FormattedHTMLMessage
+                    id="verificationCodeHelp"
+                    tagName="span"
+                    values={Object {}}
+                  />
+                </Text>
+              </div>
+            </div>
           </div>
           <AlertForm
             errorMessage={null}
@@ -2747,6 +2783,42 @@ exports[`<PersonalData /> should render with personal data not editable 1`] = `
                     values={Object {}}
                   />
                 </div>
+              </div>
+            </div>
+            <div
+              className="horizontal_field_with_border_top"
+            >
+              <label
+                className="col-sm-3 control-label"
+                htmlFor="personal-data-form-code"
+              >
+                <FormattedMessage
+                  id="identification_code"
+                  values={Object {}}
+                />
+              </label>
+              <div>
+                <Field
+                  component={[Function]}
+                  disabled={true}
+                  divClassName="col-sm-4 col-xs-12"
+                  id="personal-data-form-code"
+                  name="userIdentificationCode"
+                  type="text"
+                />
+                <Text
+                  as="div"
+                  className="col-sm-4 col-xs-12 code-privacy"
+                  color="#272B30"
+                  marginLeft="190px"
+                  width="max-content"
+                >
+                  <FormattedHTMLMessage
+                    id="verificationCodeHelp"
+                    tagName="span"
+                    values={Object {}}
+                  />
+                </Text>
               </div>
             </div>
           </div>

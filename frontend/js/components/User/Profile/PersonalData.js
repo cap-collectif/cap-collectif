@@ -187,7 +187,8 @@ const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
     !viewer.address2 &&
     !viewer.zipCode &&
     !viewer.city &&
-    !viewer.gender
+    !viewer.gender &&
+    !viewer.userIdentificationCode
   ) {
     return false;
   }
@@ -203,7 +204,8 @@ const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
     !formValue.address2 &&
     !formValue.zipCode &&
     !formValue.city &&
-    !formValue.gender
+    !formValue.gender &&
+    !formValue.userIdentificationCode
   ) {
     return false;
   }
@@ -821,7 +823,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                         </div>
                       )}
-                      {viewer.userIdentificationCode && (
+                      {currentValues.userIdentificationCode !== null && (
                         <div className="horizontal_field_with_border_top">
                           <label
                             className="col-sm-3 control-label"
@@ -868,6 +870,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 viewer.address2 ||
                 viewer.city ||
                 viewer.zipCode ||
+                viewer.userIdentificationCode ||
                 viewer.phone)) ||
               !isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount)) && (
               <Panel.Footer>{footer}</Panel.Footer>
@@ -943,6 +946,7 @@ const mapStateToProps = (state: State, props: Props) => ({
     'zipCode',
     'phone',
     'birthPlace',
+    'userIdentificationCode',
   ),
 });
 

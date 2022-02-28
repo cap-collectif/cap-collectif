@@ -219,7 +219,7 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
         values={Object {}}
       />
     }
-    minlength={8}
+    minlength={32}
     name="IdentificationCodeRequirement"
     placeholder="Ex: 25FOVC10"
     type="text"
@@ -238,17 +238,14 @@ Object {
   "requirement3": "global.required",
   "requirement4": "global.required",
   "requirement5": "global.required",
-  "requirement6": "global.required",
 }
 `;
 
 exports[`<RequirementsForm /> validate correctly 4`] = `
 Object {
-  "requirement1": "global.required",
   "requirement2": "global.required",
   "requirement3": "global.required",
   "requirement4": "global.required",
   "requirement5": "global.required",
-  "requirement6": "global.required",
 }
 `;

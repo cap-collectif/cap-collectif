@@ -434,7 +434,12 @@ declare module 'redux-form' {
       form: string,
       getFormState: ?GetFormState,
     ): (state: any) => boolean
-  
+
+    declare export function isAsyncValidating(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => boolean
+
     declare export function reduxForm(
       config: ReduxFormConfig,
     ): { (WrappedComponent: ComponentType<*>): ComponentType<*> }

@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
 import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePersonalDataMutation';
 import { RequirementsForm, onChange, validate } from './RequirementsForm';
-import { formMock } from '../../mocks';
+import { formMock, $refType } from '~/mocks';
 
 jest.mock('../../mutations/UpdateRequirementMutation', () => ({
   __esModule: true, // this property makes it work
@@ -24,6 +24,7 @@ jest.mock('../../mutations/UpdateProfilePersonalDataMutation', () => ({
 
 describe('<RequirementsForm />', () => {
   const step = {
+    $refType,
     requirements: {
       edges: [
         {
@@ -93,7 +94,7 @@ describe('<RequirementsForm />', () => {
       requirement5: false,
       requirement6: false,
     };
-    const props = { ...formMock, step, isAuthenticated: false };
+    const props = { ...formMock, step, pristine: false, isAuthenticated: false };
     const dispatch = jest.fn();
     expect(onChange(previousValues, dispatch, props, previousValues)).toMatchSnapshot();
     jest.runAllTimers();
@@ -124,6 +125,7 @@ describe('<RequirementsForm />', () => {
       ...formMock,
       step,
       isAuthenticated: false,
+      pristine: false,
     };
     const dispatch = jest.fn();
     expect(onChange(values, dispatch, props, previousValues)).toMatchSnapshot();
@@ -137,8 +139,10 @@ describe('<RequirementsForm />', () => {
   });
 
   it('validate correctly', () => {
-    const props = { ...formMock, step, isAuthenticated: false };
-    expect(validate({}, { ...props, step: { requirements: { edges: null } } })).toMatchSnapshot();
+    const props = { ...formMock, pristine: false, step, isAuthenticated: false };
+    expect(
+      validate({}, { ...props, step: { $refType, requirements: { edges: null } } }),
+    ).toMatchSnapshot();
 
     const values = {
       requirement1: '+33606060606',
