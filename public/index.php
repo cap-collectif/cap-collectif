@@ -8,14 +8,16 @@ use Symfony\Component\HttpFoundation\Request;
 require __DIR__ . '/../vendor/autoload.php';
 
 // The check is to ensure we don't use .env in production
-if (!isset($_SERVER['SYMFONY_ENV'])) {
+if (!isset($_SERVER['SYMFONY_ENV']) || $_SERVER['SYMFONY_ENV'] !== 'prod') {
     if (!class_exists(Dotenv::class)) {
         throw new \RuntimeException(
             'SYMFONY_ENV environment variable is not defined. You need to define environment variables for configuration or add "symfony/dotenv" as a Composer dependency to load variables from a .env file.'
         );
     }
     // Useful when using Symfony binary, do not remove it.
-    (new Dotenv())->load(__DIR__ . '/../.env.local');
+    if (file_exists(__DIR__ . '/../.env.local')) {
+        (new Dotenv())->load(__DIR__ . '/../.env.local');
+    }
 }
 
 $env = $_SERVER['SYMFONY_ENV'];

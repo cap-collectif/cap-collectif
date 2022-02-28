@@ -16,7 +16,7 @@ set_time_limit(0);
 
 require dirname(__DIR__).'/vendor/autoload.php';
 // The check is to ensure we don't use .env in production
-if (!isset($_SERVER['SYMFONY_ENV'])) {
+if (!isset($_SERVER['SYMFONY_ENV']) || $_SERVER['SYMFONY_ENV'] !== 'prod') {
     if (!class_exists(Dotenv::class)) {
         throw new \RuntimeException(
             'SYMFONY_ENV environment variable is not defined. You need to define environment variables for configuration or add "symfony/dotenv" as a Composer dependency to load variables from a .env file.'

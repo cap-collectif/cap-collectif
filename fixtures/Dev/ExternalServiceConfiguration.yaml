@@ -4,11 +4,11 @@ Capco\AppBundle\Entity\ExternalServiceConfiguration:
     value: 'mandrill'
   TwilioAlphaSenderId:
     type: 'twilio_alpha_sender_id'
-    value: '***REMOVED***'
+    value: <{twilio_default_alpha_sender_id}> 
   TwilioAlphaSenderName:
     type: 'twilio_alpha_sender_name'
     value: 'dev'
   TwilioServiceId:
     type: 'twilio_service_id'
-    value: '***REMOVED***'
+    value: <{twilio_default_service_id}> 
 
