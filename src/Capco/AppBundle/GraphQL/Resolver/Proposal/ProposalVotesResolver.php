@@ -33,7 +33,7 @@ class ProposalVotesResolver implements ResolverInterface
             true === $args->offsetGet('includeUnpublished') ||
             ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
 
-        if ($args->offsetExists('stepId')) {
+        if ($args->offsetExists('stepId') && $args->offsetGet('stepId')) {
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $viewer, $context);
 
             return $this->proposalVotesDataLoader->load(

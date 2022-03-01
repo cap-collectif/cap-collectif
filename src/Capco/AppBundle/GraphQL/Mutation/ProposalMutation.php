@@ -502,7 +502,9 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         } else {
             $sendNotification = !($proposal->viewerIsAdminOrOwner($viewer) && $author !== $viewer);
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE;
-            $messageData['date'] = $proposal->getLastModifiedAt()->format('Y-m-d H:i:s');
+            $messageData['date'] = $proposal->getLastModifiedAt()
+                ? $proposal->getLastModifiedAt()->format('Y-m-d H:i:s')
+                : $now->format('Y-m-d H:i:s');
         }
         if ($sendNotification) {
             $this->publisher->publish($proposalQueue, new Message(json_encode($messageData)));

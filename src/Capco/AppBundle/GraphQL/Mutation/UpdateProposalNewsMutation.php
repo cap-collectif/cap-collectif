@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostTranslation;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\ProposalPostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -51,10 +52,13 @@ class UpdateProposalNewsMutation implements MutationInterface
         try {
             $proposalPost = $this->getPost($input, $viewer);
             $proposalPost = $this->updateProposalNews($input, $proposalPost);
+            /** @var Proposal $firstProposal */
+            $firstProposal = $proposalPost->getProposals()->first();
+            if (!$firstProposal) {
+                throw new UserError(self::PROPOSAL_NOT_FOUND);
+            }
             /** @var ProposalFormNotificationConfiguration $config */
-            $config = $proposalPost
-                ->getProposals()
-                ->first()
+            $config = $firstProposal
                 ->getProposalForm()
                 ->getNotificationsConfiguration();
 
