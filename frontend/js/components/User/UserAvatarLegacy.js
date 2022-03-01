@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { css, type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Icon } from '@cap-collectif/ui'
+import Icon from '~ui/Icons/Icon';
 import DefaultAvatar from './DefaultAvatar';
 import type { State, FeatureToggles } from '~/types';
 import type { UserAvatarLegacy_user } from '~relay/UserAvatarLegacy_user.graphql';
@@ -57,7 +57,7 @@ const UserAvatarContainer: StyledComponent<
   { hasBadge: boolean },
   {},
   HTMLSpanElement,
-  > = styled.span`
+> = styled.span`
   ${props => commonStyleAvatar(props.hasBadge)}
 `;
 
@@ -73,7 +73,6 @@ export class UserAvatarLegacy extends React.Component<Props> {
     onMouseOver: () => {},
     onMouseOut: () => {},
   };
-
 
   renderAvatar() {
     const { user, defaultAvatar, size, className, needDefaultAvatar } = this.props;
@@ -166,14 +165,17 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect<any, any, _, _, _, _>(mapStateToProps)(UserAvatarLegacy), {
-  user: graphql`
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(UserAvatarLegacy),
+  {
+    user: graphql`
       fragment UserAvatarLegacy_user on User {
+        url
+        username
+        media {
           url
-          username
-          media {
-              url
-          }
+        }
       }
-  `,
-});
+    `,
+  },
+);
