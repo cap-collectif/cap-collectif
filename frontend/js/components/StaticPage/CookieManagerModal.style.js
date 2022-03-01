@@ -44,6 +44,7 @@ export const ButtonAccept: StyledComponent<{}, {}, HTMLButtonElement> = styled.b
 `;
 
 export const CookieBanner: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  z-index: 1040 !important;
   background-color: ${colors['neutral-gray']['900']};
   font-size: 14px;
 
