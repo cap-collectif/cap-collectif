@@ -29,7 +29,7 @@ class UpdateProjectFormType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('authors', EntityType::class, [
                 'class' => ProjectAuthor::class,

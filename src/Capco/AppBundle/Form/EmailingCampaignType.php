@@ -24,7 +24,7 @@ class EmailingCampaignType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('senderEmail', EmailType::class, [
                 'required' => true,
@@ -33,7 +33,7 @@ class EmailingCampaignType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('mailingList', EntityType::class, [
                 'class' => MailingList::class,
@@ -51,7 +51,7 @@ class EmailingCampaignType extends AbstractType
                 'required' => false,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'empty_data' => '',
             ])
             ->add('content', TextType::class, [

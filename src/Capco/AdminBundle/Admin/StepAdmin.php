@@ -231,7 +231,7 @@ class StepAdmin extends CapcoAdmin
                     'required' => false,
                     'help' => 'help-text-for-reason-for-collection-field',
                     'purify_html' => true,
-                    'purify_html_profile' => 'default',
+                    'purify_html_profile' => 'admin',
                 ])
                 ->end();
         } elseif ($subject instanceof RankingStep) {
@@ -350,7 +350,7 @@ class StepAdmin extends CapcoAdmin
                     'required' => false,
                     'help' => 'help-text-for-reason-for-collection-field',
                     'purify_html' => true,
-                    'purify_html_profile' => 'default',
+                    'purify_html_profile' => 'admin',
                 ])
                 ->end();
             if ($subject instanceof CollectStep || $subject instanceof SelectionStep) {

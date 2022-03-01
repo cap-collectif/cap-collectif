@@ -17,7 +17,7 @@ class ProjectType extends AbstractType
             ->add('title', TextType::class, [
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('Author', null, ['required' => true]);
     }

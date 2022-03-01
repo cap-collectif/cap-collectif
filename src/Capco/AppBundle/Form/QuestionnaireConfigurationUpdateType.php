@@ -20,11 +20,11 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
             ->add('title', PurifiedTextType::class, [
                 'strip_tags' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('description', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'user',
+                'purify_html_profile' => 'admin',
             ])
             ->add('descriptionUsingJoditWysiwyg')
             ->add('questions', CollectionType::class, [

@@ -28,7 +28,7 @@ class ContactType extends AbstractType
                 'label' => 'contact.form.title',
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'constraints' => [new NotBlank(['message' => 'contact.title'])],
             ])
             ->add('email', EmailType::class, [
@@ -54,21 +54,21 @@ class ContactType extends AbstractType
                 'label' => 'contact.form.message',
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'constraints' => [new NotBlank(['message' => 'contact.no_message'])],
             ])
             ->add('customCode', TextType::class, [
                 'label' => 'contact.form.body',
                 'required' => false,
                 'purify_html' => false,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
             ])
             ->add('metadatas', TextType::class, [
                 'label' => 'contact.form.body',
                 'required' => false,
                 'purify_html' => false,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
             ])
             ->add('socialMedias', EntityType::class, [

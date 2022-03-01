@@ -18,7 +18,7 @@ class ApiAdminRegistrationFormType extends ApiRegistrationFormType
             'required' => true,
             'purify_html' => true,
             'strip_tags' => true,
-            'purify_html_profile' => 'default',
+            'purify_html_profile' => 'admin',
         ]);
         $builder->add('email', EmailType::class, ['required' => true]);
         $builder->add('roles', CollectionType::class, ['entry_type' => TextType::class]);

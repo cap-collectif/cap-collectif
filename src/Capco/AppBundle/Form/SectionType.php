@@ -30,11 +30,11 @@ class SectionType extends AbstractType
             ])
             ->add('title', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('teaser', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('position', NumberType::class)
             ->add('nbObjects', NumberType::class)

@@ -16,7 +16,7 @@ class ProgessStepType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'required' => true,
             ])
             ->add('startAt', DateTimeType::class, [

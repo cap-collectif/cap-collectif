@@ -29,7 +29,7 @@ class ProfileFormType extends AbstractType
                 'strip_tags' => true,
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('neighborhood', null, [])
             ->add('media', MediaType::class, [

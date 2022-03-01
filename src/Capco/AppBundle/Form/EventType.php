@@ -28,11 +28,11 @@ class EventType extends AbstractType
             ])
             ->add('title', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('body', TextareaType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('bodyUsingJoditWysiwyg')
             ->add('startAt', DateTimeType::class, [

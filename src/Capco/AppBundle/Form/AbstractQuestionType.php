@@ -27,16 +27,16 @@ abstract class AbstractQuestionType extends AbstractType
         $builder->add('title', PurifiedTextType::class, [
             'strip_tags' => true,
             'purify_html' => true,
-            'purify_html_profile' => 'default',
+            'purify_html_profile' => 'admin',
         ]);
         $builder->add('helpText', PurifiedTextType::class, [
             'strip_tags' => true,
             'purify_html' => true,
-            'purify_html_profile' => 'default',
+            'purify_html_profile' => 'admin',
         ]);
         $builder->add('description', TextType::class, [
             'purify_html' => true,
-            'purify_html_profile' => 'user',
+            'purify_html_profile' => 'admin',
         ]);
         $builder->add('descriptionUsingJoditWysiwyg');
         $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, [

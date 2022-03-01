@@ -34,7 +34,7 @@ class PublicDataType extends AbstractType
                 'strip_tags' => true,
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('neighborhood')
             ->add('media')
@@ -44,7 +44,7 @@ class PublicDataType extends AbstractType
             ->add('websiteUrl', UrlType::class)
             ->add('biography', TextareaType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ]);
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', EntityType::class, [

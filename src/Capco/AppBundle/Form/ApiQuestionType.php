@@ -17,12 +17,12 @@ class ApiQuestionType extends AbstractType
             ->add('type', TextType::class, [
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('question', TextType::class, [
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('required', CheckboxType::class, ['required' => true])
             ->add('choices', CollectionType::class, [

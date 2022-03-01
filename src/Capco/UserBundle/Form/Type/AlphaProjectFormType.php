@@ -41,7 +41,7 @@ class AlphaProjectFormType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('restrictedViewerGroups', EntityType::class, [
                 'class' => Group::class,

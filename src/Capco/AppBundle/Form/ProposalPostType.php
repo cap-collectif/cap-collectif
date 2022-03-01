@@ -23,20 +23,20 @@ class ProposalPostType extends AbstractType
                 'label' => 'contact.form.title',
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'constraints' => [new NotBlank(['message' => 'contact.title'])],
             ])
             ->add('abstract', TextType::class, [
                 'label' => 'contact.form.title',
                 'required' => false,
                 'purify_html' => false,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('body', TextType::class, [
                 'label' => 'contact.form.body',
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'attr' => [
                     'rows' => '10',
                     'cols' => '30',

@@ -15,12 +15,12 @@ class GroupCreateType extends AbstractType
         $builder->add('title', TextType::class, [
             'required' => true,
             'purify_html' => true,
-            'purify_html_profile' => 'default',
+            'purify_html_profile' => 'admin',
         ]);
         $builder->add('description', TextType::class, [
             'required' => false,
             'purify_html' => true,
-            'purify_html_profile' => 'default',
+            'purify_html_profile' => 'admin',
         ]);
     }
 

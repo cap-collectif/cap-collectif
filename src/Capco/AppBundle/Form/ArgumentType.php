@@ -16,7 +16,7 @@ class ArgumentType extends AbstractType
             ->add('body', TextType::class, [
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('type', IntegerType::class, [
                 'required' => true,

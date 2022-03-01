@@ -16,7 +16,7 @@ class AppendixType extends AbstractType
             ->add('body', TextType::class, [
                 'required' => false,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('bodyUsingJoditWysiwyg')
             ->add('appendixType', null, [

@@ -16,7 +16,7 @@ class OpinionVersionType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'constraints' => [
                     new Assert\NotNull(),
                     new Assert\NotBlank(),

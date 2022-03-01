@@ -21,33 +21,33 @@ class PersonalDataFormType extends AbstractType
             ->add('firstname', PurifiedTextType::class, [
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('lastname', PurifiedTextType::class, [
                 'strip_tags' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('postalAddress', PurifiedTextType::class, [
                 'strip_tags' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('address', PurifiedTextType::class, [
                 'strip_tags' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('address2', PurifiedTextType::class, [
                 'strip_tags' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('zipCode')
             ->add('city', PurifiedTextType::class, [
                 'strip_tags' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('phone')
             ->add('email', EmailType::class)

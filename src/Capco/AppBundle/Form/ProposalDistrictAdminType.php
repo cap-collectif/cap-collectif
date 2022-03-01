@@ -17,7 +17,7 @@ class ProposalDistrictAdminType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('geojson', TextType::class, [
                 'constraints' => [new CheckGeoJson()],

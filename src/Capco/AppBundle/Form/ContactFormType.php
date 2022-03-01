@@ -23,14 +23,14 @@ class ContactFormType extends AbstractType
                 'label' => 'contact.form.interlocutor',
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'constraints' => [new NotBlank(['message' => 'contact.no_interlocutor'])],
             ])
             ->add('title', TextType::class, [
                 'label' => 'contact.form.title',
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'constraints' => [new NotBlank(['message' => 'contact.title'])],
             ])
             ->add('email', EmailType::class, [
@@ -55,7 +55,7 @@ class ContactFormType extends AbstractType
                 'label' => 'contact.form.body',
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'attr' => [
                     'rows' => '10',
                     'cols' => '30',
@@ -66,7 +66,7 @@ class ContactFormType extends AbstractType
             ->add('confidentiality', TextType::class, [
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
                 'attr' => [
                     'rows' => '10',
                     'cols' => '30',

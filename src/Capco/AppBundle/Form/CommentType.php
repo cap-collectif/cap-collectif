@@ -36,7 +36,7 @@ class CommentType extends AbstractType
         $builder->add('body', TextType::class, [
             'required' => true,
             'purify_html' => true,
-            'purify_html_profile' => 'default',
+            'purify_html_profile' => 'admin',
         ]);
 
         if (!$this->user || !\is_object($this->user)) {
@@ -44,7 +44,7 @@ class CommentType extends AbstractType
                 ->add('authorName', TextType::class, [
                     'required' => true,
                     'purify_html' => true,
-                    'purify_html_profile' => 'default',
+                    'purify_html_profile' => 'admin',
                 ])
                 ->add('authorEmail', EmailType::class, ['required' => true]);
         }
