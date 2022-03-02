@@ -98,8 +98,8 @@ const searchProposalsQuery = graphql`
 `;
 
 type LatLng = {
-  lat: number,
-  lng: number,
+  +lat: number,
+  +lng: number,
 };
 
 export const formName = 'proposal-form';
@@ -393,6 +393,38 @@ const validate = (
   return errors;
 };
 
+export const retrieveDistrictForLocation = (
+  location: LatLng,
+  proposalFormId: string,
+  dispatch: Dispatch,
+  updateDistrictsCallback?: ({ districtIdsFilteredByAddress: Array<string> }) => void,
+) => {
+  fetchQuery_DEPRECATED(
+    environment,
+    getAvailableDistrictsQuery,
+    ({
+      proposalFormId,
+      latitude: location.lat,
+      longitude: location.lng,
+    }: ProposalFormAvailableDistrictsForLocalisationQueryVariables),
+  ).then((data: ProposalFormAvailableDistrictsForLocalisationQueryResponse) => {
+    const districtIdsFilteredByAddress = data.availableDistrictsForLocalisation.map(
+      district => district.id,
+    );
+    dispatch(
+      change(
+        formName,
+        'district',
+        districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0],
+      ),
+    );
+    if (updateDistrictsCallback)
+      updateDistrictsCallback({
+        districtIdsFilteredByAddress,
+      });
+  });
+};
+
 type State = {
   titleSuggestions: Array<{|
     +id: string,
@@ -449,16 +481,22 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
-    const { titleValue: titleValueProps, addressValue: addressValueProps } = this.props;
+    const { titleValue: titleValueProps, addressValue: addressValueProps, dispatch } = this.props;
     if (titleValueProps !== titleValue) {
       this.setState({ titleSuggestions: [] });
       if (titleValue && titleValue.length > 3) {
         this.loadTitleSuggestions(titleValue);
       }
     }
+
     if (addressValueProps !== addressValue) {
       if (proposalForm.proposalInAZoneRequired && addressValue) {
-        this.retrieveDistrictForLocation(JSON.parse(addressValue)[0].geometry.location);
+        retrieveDistrictForLocation(
+          JSON.parse(addressValue)[0].geometry.location,
+          proposalForm.id,
+          dispatch,
+          this.setState.bind(this),
+        );
       }
     }
   }
@@ -466,33 +504,6 @@ export class ProposalForm extends React.Component<Props, State> {
   componentWillUnmount() {
     window.removeEventListener('beforeunload', onUnload);
   }
-
-  retrieveDistrictForLocation = (location: LatLng) => {
-    const { proposalForm, dispatch } = this.props;
-    fetchQuery_DEPRECATED(
-      environment,
-      getAvailableDistrictsQuery,
-      ({
-        proposalFormId: proposalForm.id,
-        latitude: location.lat,
-        longitude: location.lng,
-      }: ProposalFormAvailableDistrictsForLocalisationQueryVariables),
-    ).then((data: ProposalFormAvailableDistrictsForLocalisationQueryResponse) => {
-      const districtIdsFilteredByAddress = data.availableDistrictsForLocalisation.map(
-        district => district.id,
-      );
-      dispatch(
-        change(
-          formName,
-          'district',
-          districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0],
-        ),
-      );
-      this.setState({
-        districtIdsFilteredByAddress,
-      });
-    });
-  };
 
   renderError() {
     const { error, proposalForm, intl } = this.props;

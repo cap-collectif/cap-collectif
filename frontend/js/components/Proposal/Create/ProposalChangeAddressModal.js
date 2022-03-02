@@ -9,7 +9,7 @@ import { graphql, useFragment } from 'react-relay';
 import { MapContainer, Marker, TileLayer, GeoJSON } from 'react-leaflet';
 import { Flex, Button, Modal, Box } from '@cap-collectif/ui';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
-import { formName } from '../Form/ProposalForm';
+import { formName, retrieveDistrictForLocation } from '../Form/ProposalForm';
 import type { Dispatch, GlobalState } from '~/types';
 import type { MapProps, MapCenterObject } from '~/components/Proposal/Map/Map.types';
 import type { MapTokens } from '~/redux/modules/user';
@@ -299,6 +299,12 @@ const ProposalChangeAddressModal = ({
                   newAddress ? newAddress.formatted_address : newAddress,
                 ),
               );
+              if (newAddress)
+                retrieveDistrictForLocation(
+                  newAddress.geometry.location,
+                  proposalForm.id,
+                  dispatch,
+                );
               resetModalState();
             }}>
             {intl.formatMessage({ id: 'validate-address' })}
