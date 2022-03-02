@@ -23,7 +23,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
     const SQL_QUERY = <<<'EOF'
     select * from (
     (select 'id', 'username', 'email', 'emailConfirmed', 'role','createdAt', 'updatedAt','lastLogin' , 'enabled','confirmedAccountAt' ,'locked', 'gender', 'firstname', 'lastname','dateOfBirth', 'websiteUrl' ,'biography',  'address','deletedAccountAt' , 'facebookId' , 'status', 'internalComm' , 'externalComm', 'userIdentificationCode')
-    UNION  (select DISTINCT(u.id), IFNULL(u.username, '') as username, u.email, IF(ISNULL(u.confirmation_token), 'YES', 'NO') as emailConfirmed,
+    UNION  (select DISTINCT(TO_BASE64(CONCAT('User:',u.id))), IFNULL(u.username, '') as username, u.email, IF(ISNULL(u.confirmation_token), 'YES', 'NO') as emailConfirmed,
     CASE
         WHEN u.roles LIKE '%%ROLE_ADMIN%%' THEN "Administrateur"
         WHEN u.roles LIKE '%%ROLE_PROJECT_ADMIN%%' THEN "Créateur de projet"
