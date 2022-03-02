@@ -345,6 +345,15 @@ const getDistrictsTranslated = (districts, defaultLanguage: string) =>
     };
   });
 
+const isJsonString = str => {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl, defaultLanguage, features } = props;
 
@@ -363,6 +372,16 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     __isWithinUnmatchedTypeRefinement,
     ...rest
   } = values;
+
+  let mapCenter = null;
+  if (values.mapCenter && values.viewEnabled.isMapViewEnabled) {
+    if (!isJsonString(values.mapCenter.json)) {
+      mapCenter = JSON.stringify([values.mapCenter.json]);
+    } else if (isJsonString(values.mapCenter.json)) {
+      mapCenter = values.mapCenter.json;
+    }
+  }
+
   const input = {
     ...rest,
     usingTipsmeee: features.unstable__tipsmeee ? values.usingTipsmeee : undefined,
@@ -382,12 +401,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     isListViewEnabled: values.viewEnabled.isListViewEnabled,
     isMapViewEnabled: values.viewEnabled.isMapViewEnabled,
     objectType: values.objectType,
-    mapCenter:
-      values.mapCenter &&
-      values.viewEnabled.isMapViewEnabled &&
-      typeof values.mapCenter.json === 'object'
-        ? JSON.stringify([values.mapCenter.json])
-        : null,
+    mapCenter,
   };
 
   const nbChoices = input.questions.reduce((acc, array) => {
