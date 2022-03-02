@@ -122,6 +122,7 @@ class UpdateProposalNewsMutation implements MutationInterface
                     $values['translations'][$translation->getLocale()]['abstract']
                 );
             }
+            $this->em->flush();
         }
         $firstProposal = $proposalPost->getProposals()->first();
         if (!$firstProposal) {
