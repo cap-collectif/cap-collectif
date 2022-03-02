@@ -114,12 +114,16 @@ trait TimeRangeableTrait
             $now = new \DateTime();
         }
 
+        if ($this->isTimeless()) {
+            return false;
+        }
+
         if (null === $this->startAt && null === $this->endAt) {
             return !$this->isTimeless();
         }
 
         if (null === $this->endAt) {
-            return null !== $this->startAt && $this->startAt < $now;
+            return !(null !== $this->startAt);
         }
 
         if ($this->endAt < $now) {
