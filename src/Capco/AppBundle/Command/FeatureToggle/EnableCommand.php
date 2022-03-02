@@ -43,6 +43,8 @@ class EnableCommand extends Command
             $this->toggleManager->deactivate(Manager::graphql_introspection);
             $this->toggleManager->deactivate(Manager::graphql_query_analytics);
             $this->toggleManager->deactivate(Manager::developer_documentation);
+            $this->toggleManager->deactivate(Manager::login_paris);
+            $this->toggleManager->deactivate(Manager::sso_by_pass_auth);
 
             return 0;
         }
