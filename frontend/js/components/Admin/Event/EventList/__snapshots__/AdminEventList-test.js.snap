@@ -309,6 +309,7 @@ exports[`<AdminEventList /> should render correctly 1`] = `
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -539,6 +540,7 @@ exports[`<AdminEventList /> should render correctly 1`] = `
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />

@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
 import moment from 'moment';
-import { Text, Box } from '@cap-collectif/ui'
+import { Text, Box } from '@cap-collectif/ui';
 import ProjectHeaderLayout from '~ui/Project/ProjectHeader';
 import type { ProjectHeaderBlocks_project$key } from '~relay/ProjectHeaderBlocks_project.graphql';
 
@@ -54,6 +54,7 @@ const FRAGMENT = graphql`
     anonymousVotes: votes(anonymous: true) {
       totalCount
     }
+    paperVotesTotalCount
   }
 `;
 export type Props = {|
@@ -63,14 +64,33 @@ export type Props = {|
 const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
   const data = useFragment(FRAGMENT, project);
   const intl = useIntl();
-  const { opinions, opinionVersions, sources, replies, argument, debateArgument, proposals } = data;
+  const {
+    steps,
+    opinions,
+    opinionVersions,
+    sources,
+    replies,
+    repliesAnonymous,
+    argument,
+    debateArgument,
+    proposals,
+    votes,
+    anonymousVotes,
+    paperVotesTotalCount,
+    contributions,
+    contributors,
+    isContributionsCounterDisplayable,
+    isVotesCounterDisplayable,
+    isParticipantsCounterDisplayable,
+  } = data;
+  const numericVotesTotalCount = votes?.totalCount ?? 0;
+  const votesTotalCount = numericVotesTotalCount + paperVotesTotalCount;
+  const participantsTotalCount =
+    contributors.totalCount + anonymousVotes.totalCount + repliesAnonymous.totalCount;
+
   const getDaysLeftBlock = () => {
-    if (
-      data.steps.length === 1 &&
-      data.steps[0].state === 'OPENED' &&
-      data.steps[0].timeRange?.endAt
-    ) {
-      const count = moment(data.steps[0].timeRange?.endAt).diff(moment(), 'days');
+    if (steps.length === 1 && steps[0].state === 'OPENED' && steps[0].timeRange?.endAt) {
+      const count = moment(steps[0].timeRange?.endAt).diff(moment(), 'days');
       return (
         <ProjectHeaderLayout.Block
           title={intl.formatMessage({ id: 'count.daysLeft' }, { count })}
@@ -80,6 +100,34 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
     }
     return null;
   };
+
+  const getVotesTooltip = () => {
+    return (
+      <Box padding={1} textAlign="center">
+        {numericVotesTotalCount > 0 && (
+          <Text marginBottom="0px !important">
+            {intl.formatMessage({ id: 'numeric-votes-count' }, { num: numericVotesTotalCount })}
+          </Text>
+        )}
+        {paperVotesTotalCount > 0 && (
+          <Text marginBottom="0px !important">
+            {intl.formatMessage({ id: 'paper-votes-count' }, { num: paperVotesTotalCount })}
+          </Text>
+        )}
+      </Box>
+    );
+  };
+
+  const getParticipantsTooltip = () => {
+    return (
+      <Box padding={1} textAlign="center">
+        <Text marginBottom="0px !important">
+          {intl.formatMessage({ id: 'online-contributors' }, { count: participantsTotalCount })}
+        </Text>
+      </Box>
+    );
+  };
+
   const getContributionsTooltip = () => {
     if (
       opinions.totalCount > 0 ||
@@ -94,70 +142,70 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
         <Box padding={1} textAlign="center">
           {(opinions.totalCount > 0 || proposals.totalCount > 0) && (
             <Text marginBottom="0px !important">
-              <FormattedMessage
-                id="proposal-count"
-                values={{ count: opinions.totalCount + proposals.totalCount }}
-              />
+              {intl.formatMessage(
+                { id: 'proposal-count' },
+                { count: opinions.totalCount + proposals.totalCount },
+              )}
             </Text>
           )}
           {opinionVersions.totalCount > 0 && (
             <Text marginBottom="0px !important">
-              <FormattedMessage
-                id="amendment-count"
-                values={{ count: opinionVersions.totalCount }}
-              />
+              {intl.formatMessage({ id: 'amendment-count' }, { count: opinionVersions.totalCount })}
             </Text>
           )}
           {(argument.totalCount > 0 || debateArgument.totalCount > 0) && (
             <Text marginBottom="0px !important">
-              <FormattedMessage
-                id="argument-count"
-                values={{ count: argument.totalCount + debateArgument.totalCount }}
-              />
+              {intl.formatMessage(
+                { id: 'argument-count' },
+                { count: argument.totalCount + debateArgument.totalCount },
+              )}
             </Text>
           )}
           {sources.totalCount > 0 && (
             <Text marginBottom="0px !important">
-              <FormattedMessage id="source-count" values={{ count: sources.totalCount }} />
+              {intl.formatMessage({ id: 'source-count' }, { count: sources.totalCount })}
             </Text>
           )}
           {replies.totalCount > 0 && (
             <Text marginBottom="0px !important">
-              <FormattedMessage id="answer-count" values={{ count: replies.totalCount }} />
+              {intl.formatMessage({ id: 'answer-count' }, { count: replies.totalCount })}
             </Text>
           )}
         </Box>
       );
     }
   };
+
   return (
     <ProjectHeaderLayout.Blocks>
       {getDaysLeftBlock()}
-      {data.isContributionsCounterDisplayable && (
+      {isContributionsCounterDisplayable && (
         <ProjectHeaderLayout.Block
           tooltipLabel={getContributionsTooltip()}
           title={intl.formatMessage(
             { id: 'contribution-plural' },
-            { num: data.contributions.totalCount },
+            { num: contributions.totalCount },
           )}
-          content={data.contributions.totalCount}
+          content={contributions.totalCount}
         />
       )}
-      {!!data.votes.totalCount && data.isVotesCounterDisplayable && (
+      {votesTotalCount > 0 && isVotesCounterDisplayable && (
         <ProjectHeaderLayout.Block
+          tooltipLabel={getVotesTooltip()}
           contentId="votes-counter-pill"
-          title={intl.formatMessage({ id: 'vote-plural' }, { num: data.votes.totalCount })}
-          content={data.votes.totalCount}
+          title={intl.formatMessage({ id: 'vote-plural' }, { num: votesTotalCount })}
+          content={votesTotalCount}
         />
       )}
 
-      {data.isParticipantsCounterDisplayable && (
+      {isParticipantsCounterDisplayable && (
         <ProjectHeaderLayout.Block
+          tooltipLabel={getParticipantsTooltip()}
           title={intl.formatMessage(
             { id: 'project.preview.counters.contributors' },
-            { num: data.contributors.totalCount + data.anonymousVotes.totalCount + data.repliesAnonymous.totalCount },
+            { num: participantsTotalCount },
           )}
-          content={data.contributors.totalCount + data.anonymousVotes.totalCount + data.repliesAnonymous.totalCount}
+          content={participantsTotalCount}
         />
       )}
     </ProjectHeaderLayout.Blocks>

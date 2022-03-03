@@ -31,6 +31,8 @@ describe('<ProposalVoteThresholdProgressBar />', () => {
         totalCount: 1,
         totalPointsCount: 5,
       },
+      paperVotesTotalCount: 0,
+      paperVotesTotalPointsCount: 0,
     };
     const wrapper = shallow(<ProposalVoteThresholdProgressBar proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -52,6 +54,8 @@ describe('<ProposalVoteThresholdProgressBar />', () => {
         totalCount: 1,
         totalPointsCount: 5,
       },
+      paperVotesTotalCount: 0,
+      paperVotesTotalPointsCount: 0,
     };
     const wrapper = shallow(<ProposalVoteThresholdProgressBar proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();

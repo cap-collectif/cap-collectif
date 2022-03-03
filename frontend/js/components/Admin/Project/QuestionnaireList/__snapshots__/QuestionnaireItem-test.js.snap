@@ -108,6 +108,7 @@ Array [
           "pointerEvents": "none",
           "position": "fixed",
           "top": "100%",
+          "zIndex": undefined,
         }
       }
     />

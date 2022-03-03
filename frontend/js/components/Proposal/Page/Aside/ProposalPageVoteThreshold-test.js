@@ -20,6 +20,8 @@ describe('<ProposalPageVoteThreshold />', () => {
         title: 'global.consultation',
       },
     },
+    paperVotesTotalCount: 0,
+    paperVotesTotalPointsCount: 0,
   };
 
   const stepWithVoteThreshold = {

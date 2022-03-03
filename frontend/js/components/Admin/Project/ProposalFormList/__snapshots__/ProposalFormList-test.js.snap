@@ -277,6 +277,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -318,6 +319,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -446,6 +448,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -487,6 +490,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -778,6 +782,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -819,6 +824,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -937,6 +943,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -978,6 +985,7 @@ exports[`<ProposalFormList /> <TestProposalFormList /> should render correctly w
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />

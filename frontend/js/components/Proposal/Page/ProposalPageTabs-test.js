@@ -39,6 +39,7 @@ describe('<ProposalPageTabs />', () => {
       tipsmeeeDonators: {
         donatorsCount: 2,
       },
+      paperVotesTotalCount: 0,
     }),
     Step: () => ({
       canDisplayBallot: true,

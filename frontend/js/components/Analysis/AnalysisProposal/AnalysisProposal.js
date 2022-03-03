@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { FormattedDate, useIntl } from 'react-intl';
 import moment from 'moment';
-import { OverlayTrigger } from 'react-bootstrap';
+import { Box } from '@cap-collectif/ui';
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql';
 import AnalysisProposalContainer, {
   ProposalTag,
@@ -20,10 +20,11 @@ import type {
   ProposalsThemeValues,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-import Tooltip from '~/components/Utils/Tooltip';
 import colors, { styleGuideColors } from '~/utils/colors';
 import { pxToRem } from '~/utils/styles/mixins';
 import { TagContainer } from '~ui/Labels/Tag';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Text from '~ui/Primitives/Text';
 
 type Props = {
   proposal: AnalysisProposal_proposal,
@@ -44,8 +45,8 @@ type Props = {
 
 const AnalysisProposal = ({
   proposal,
-  votes,
-  points,
+  votes = 0,
+  points = 0,
   isVoteRanking = false,
   isVotable = false,
   dispatch,
@@ -60,6 +61,8 @@ const AnalysisProposal = ({
 }: Props) => {
   const isSelected = proposalSelected === proposal.id;
   const hasActionDisplay = isSelected && isAdminView;
+  const intl = useIntl();
+
   return (
     <AnalysisProposalContainer
       rowId={proposal.id}
@@ -71,47 +74,39 @@ const AnalysisProposal = ({
         <ProposalListRowHeader>
           {(proposal.draft || proposal.trashed) && hasStateTag && (
             <StateTag>
-              <FormattedMessage
-                id={
-                  proposal.draft ? 'admin.fields.proposal.draft' : 'admin.fields.proposal.isTrashed'
-                }
-              />
+              {intl.formatMessage({
+                id: proposal.draft
+                  ? 'admin.fields.proposal.draft'
+                  : 'admin.fields.proposal.isTrashed',
+              })}
             </StateTag>
           )}
 
           {proposal.hasBeenMerged && hasRegroupTag && (
-            <StateTag className="merge-tag">
-              <FormattedMessage id="badge.merged" />
-            </StateTag>
+            <StateTag className="merge-tag">{intl.formatMessage({ id: 'badge.merged' })}</StateTag>
           )}
 
           <h2 className="d-flex align-items-center">
             {proposal.revisions && proposal.revisions.totalCount > 0 && (
-              <OverlayTrigger
-                key="proposal-revisions"
-                placement="top"
-                overlay={
-                  <Tooltip id="tooltip-top" className="text-left">
-                    <FormattedMessage
-                      id="review.asked.by"
-                      values={{
-                        count: proposal.revisions.totalCount,
-                        username: proposal.revisions.edges
-                          ?.filter(Boolean)
-                          .map(edge => edge.node)
-                          .map(revision => revision.author.username)
-                          .join(', '),
-                      }}
-                    />
-                  </Tooltip>
-                }>
+              <Tooltip
+                label={intl.formatMessage(
+                  { id: 'review.asked.by' },
+                  {
+                    count: proposal.revisions.totalCount,
+                    username: proposal.revisions.edges
+                      ?.filter(Boolean)
+                      .map(edge => edge.node)
+                      .map(revision => revision.author.username)
+                      .join(', '),
+                  },
+                )}>
                 <Icon
                   name={ICON_NAME.information}
                   size={pxToRem(14)}
                   className="mr-10"
                   color={styleGuideColors.blue200}
                 />
-              </OverlayTrigger>
+              </Tooltip>
             )}
             <a href={isAdminView ? proposal?.adminUrl ?? proposal.url : proposal.url}>
               {proposal.title}
@@ -125,7 +120,7 @@ const AnalysisProposal = ({
             {proposal.publishedAt && (
               <React.Fragment>
                 {' '}
-                • <FormattedMessage id="submited_on" />{' '}
+                • {intl.formatMessage({ id: 'submited_on' })}{' '}
                 <FormattedDate
                   value={moment(proposal.publishedAt)}
                   day="numeric"
@@ -182,18 +177,62 @@ const AnalysisProposal = ({
               {proposal.category.name}
             </ProposalTag>
           )}
-          {isVotable && votes !== null && (
-            <TagContainer>
-              <Icon color={colors.darkGray} size="14" name={ICON_NAME.like} />
-              <FormattedMessage id="votes-count" values={{ num: votes }} />
-            </TagContainer>
+          {isVotable && votes + proposal.paperVotesTotalCount > 0 && (
+            <Tooltip
+              label={
+                <Box textAlign="center">
+                  {votes > 0 && (
+                    <Text marginBottom="0px !important">
+                      {intl.formatMessage({ id: 'numeric-votes-count' }, { num: votes })}
+                    </Text>
+                  )}
+                  {proposal.paperVotesTotalCount > 0 && (
+                    <Text marginBottom="0px !important">
+                      {intl.formatMessage(
+                        { id: 'paper-votes-count' },
+                        { num: proposal.paperVotesTotalCount },
+                      )}
+                    </Text>
+                  )}
+                </Box>
+              }>
+              <TagContainer>
+                <Icon color={colors.darkGray} size="14" name={ICON_NAME.like} />
+                {intl.formatMessage(
+                  { id: 'votes-count' },
+                  { num: votes + proposal.paperVotesTotalCount },
+                )}
+              </TagContainer>
+            </Tooltip>
           )}
-          {isVoteRanking && points !== null && (
-            <TagContainer>
-              <Icon color={colors.darkGray} size="14" name={ICON_NAME.trophy} />
-              <span>{points}&nbsp;</span>
-              <FormattedMessage id="points-count" values={{ num: points }} />
-            </TagContainer>
+          {isVoteRanking && points + proposal.paperVotesTotalPointsCount > 0 && (
+            <Tooltip
+              label={
+                <Box textAlign="center">
+                  {points > 0 && (
+                    <Text marginBottom="0px !important">
+                      {intl.formatMessage({ id: 'numeric-points-count' }, { num: points })}
+                    </Text>
+                  )}
+                  {proposal.paperVotesTotalPointsCount > 0 && (
+                    <Text marginBottom="0px !important">
+                      {intl.formatMessage(
+                        { id: 'paper-points-count' },
+                        { num: proposal.paperVotesTotalPointsCount },
+                      )}
+                    </Text>
+                  )}
+                </Box>
+              }>
+              <TagContainer>
+                <Icon color={colors.darkGray} size="14" name={ICON_NAME.trophy} />
+                <span>{points + proposal.paperVotesTotalPointsCount}&nbsp;</span>
+                {intl.formatMessage(
+                  { id: 'points-count' },
+                  { num: points + proposal.paperVotesTotalPointsCount },
+                )}
+              </TagContainer>
+            </Tooltip>
           )}
         </AnalysisProposalListRowMeta>
 
@@ -206,7 +245,7 @@ const AnalysisProposal = ({
                   window.open(proposal?.adminUrl, '_blank');
                 }
               }}>
-              <FormattedMessage id="global.edit" />
+              {intl.formatMessage({ id: 'global.edit' })}
             </button>
 
             <button
@@ -214,12 +253,12 @@ const AnalysisProposal = ({
               onClick={() => {
                 window.open(proposal.url, '_blank');
               }}>
-              <FormattedMessage id="action_show" />
+              {intl.formatMessage({ id: 'action_show' })}
             </button>
 
             {!proposal.trashed && (
               <button type="button" onClick={() => setProposalModalDelete(proposal)}>
-                <FormattedMessage id="move.contribution.to.trash" />
+                {intl.formatMessage({ id: 'move.contribution.to.trash' })}
               </button>
             )}
           </ActionContainer>
@@ -234,10 +273,10 @@ const AnalysisProposal = ({
 export default createFragmentContainer(AnalysisProposal, {
   proposal: graphql`
     fragment AnalysisProposal_proposal on Proposal
-      @argumentDefinitions(
-        isAdminView: { type: "Boolean" }
-        proposalRevisionsEnabled: { type: "Boolean!" }
-      ) {
+    @argumentDefinitions(
+      isAdminView: { type: "Boolean" }
+      proposalRevisionsEnabled: { type: "Boolean!" }
+    ) {
       revisions(state: PENDING) @include(if: $proposalRevisionsEnabled) {
         totalCount
         edges {
@@ -274,6 +313,8 @@ export default createFragmentContainer(AnalysisProposal, {
         id
         title
       }
+      paperVotesTotalCount
+      paperVotesTotalPointsCount
       ...ModalDeleteProposal_proposal
     }
   `,

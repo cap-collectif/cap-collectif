@@ -358,6 +358,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
               "pointerEvents": "none",
               "position": "fixed",
               "top": "100%",
+              "zIndex": undefined,
             }
           }
         />
@@ -822,6 +823,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
               "pointerEvents": "none",
               "position": "fixed",
               "top": "100%",
+              "zIndex": undefined,
             }
           }
         />

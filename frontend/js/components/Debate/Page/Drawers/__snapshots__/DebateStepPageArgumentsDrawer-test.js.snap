@@ -147,6 +147,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                         "pointerEvents": "none",
                         "position": "fixed",
                         "top": "100%",
+                        "zIndex": undefined,
                       }
                     }
                   />
@@ -199,6 +200,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                       "pointerEvents": "none",
                       "position": "fixed",
                       "top": "100%",
+                      "zIndex": undefined,
                     }
                   }
                 />
@@ -304,6 +306,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                         "pointerEvents": "none",
                         "position": "fixed",
                         "top": "100%",
+                        "zIndex": undefined,
                       }
                     }
                   />
@@ -356,6 +359,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                       "pointerEvents": "none",
                       "position": "fixed",
                       "top": "100%",
+                      "zIndex": undefined,
                     }
                   }
                 />
@@ -461,6 +465,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                         "pointerEvents": "none",
                         "position": "fixed",
                         "top": "100%",
+                        "zIndex": undefined,
                       }
                     }
                   />
@@ -513,6 +518,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                       "pointerEvents": "none",
                       "position": "fixed",
                       "top": "100%",
+                      "zIndex": undefined,
                     }
                   }
                 />

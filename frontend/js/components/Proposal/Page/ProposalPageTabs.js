@@ -58,6 +58,7 @@ const PROPOSAL_FRAGMENT = graphql`
     tipsmeeeDonators: tipsmeee @include(if: $isTipsMeeeEnabled) {
       donatorsCount
     }
+    paperVotesTotalCount
   }
 `;
 
@@ -130,8 +131,9 @@ export const ProposalPageTabs = ({
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalFragment);
   const step = useFragment(STEP_FRAGMENT, stepFragment);
   const isTipsmeeEnable = useFeatureFlag('unstable__tipsmeee');
+  const totalVotesCount = votesCount + (proposal?.paperVotesTotalCount ?? 0);
   const showVotesTab =
-    (votesCount > 0 || proposal?.currentVotableStep !== null) && step?.canDisplayBallot;
+    (totalVotesCount > 0 || proposal?.currentVotableStep !== null) && step?.canDisplayBallot;
   const showFollowersTab = proposal?.project?.opinionCanBeFollowed;
   const showDonatorsTab =
     isTipsmeeEnable && proposal && proposal.tipsmeeeDonators
@@ -162,7 +164,7 @@ export const ProposalPageTabs = ({
         {(showVotesTab || !proposal) && (
           <NavItem disabled={!proposal} eventKey="votes" active={tabKey === 'votes'}>
             <FormattedMessage id={voteTabLabel} />
-            {proposal && <span className="tip">{votesCount}</span>}
+            {proposal && <span className="tip">{totalVotesCount}</span>}
           </NavItem>
         )}
         {(showFollowersTab || !proposal) && (

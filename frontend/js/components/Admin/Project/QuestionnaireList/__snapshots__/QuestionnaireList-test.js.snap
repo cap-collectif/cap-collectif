@@ -283,6 +283,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                 "pointerEvents": "none",
                 "position": "fixed",
                 "top": "100%",
+                "zIndex": undefined,
               }
             }
           />
@@ -416,6 +417,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                 "pointerEvents": "none",
                 "position": "fixed",
                 "top": "100%",
+                "zIndex": undefined,
               }
             }
           />
@@ -712,6 +714,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                 "pointerEvents": "none",
                 "position": "fixed",
                 "top": "100%",
+                "zIndex": undefined,
               }
             }
           />
@@ -835,6 +838,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                 "pointerEvents": "none",
                 "position": "fixed",
                 "top": "100%",
+                "zIndex": undefined,
               }
             }
           />

@@ -40,6 +40,16 @@ InternalProject:
                         type: 'Boolean'
                         defaultValue: null
                         description: 'Wether it retrieves anonymous votes or not.'
+            paperVotesTotalCount:
+                description: 'Count of paper votes on the project.'
+                type: 'Int!'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProjectPaperVoteTotalCountResolver", [value, args])'
+            paperVotesTotalPointsCount:
+                description: 'Count of paper votes points on the project.'
+                type: 'Int!'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProjectPaperVoteTotalPointsCountResolver", [value, args])'
             steps:
                 args:
                     orderBy:

@@ -18,7 +18,8 @@ type Props = {
 export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
   render() {
     const { proposal, step, showPoints } = this.props;
-    const votesCount = proposal.votes.totalCount;
+    const votesCount = proposal.votes.totalCount + proposal.paperVotesTotalCount;
+    const pointsCount = proposal.votes.totalPointsCount + proposal.paperVotesTotalPointsCount;
     const { voteThreshold } = step;
     if (voteThreshold === null || typeof voteThreshold === 'undefined') {
       return null;
@@ -49,10 +50,7 @@ export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
             <div>
               <Icon name={ICON_NAME.trophy} size={14} color={colors.secondaryGray} />
               &nbsp;
-              <FormattedMessage
-                id="count-points"
-                values={{ num: proposal.votes.totalPointsCount }}
-              />
+              <FormattedMessage id="count-points" values={{ num: pointsCount }} />
             </div>
           )}
         </div>
@@ -83,6 +81,8 @@ export default createFragmentContainer(ProposalVoteThresholdProgressBar, {
         totalCount
         totalPointsCount
       }
+      paperVotesTotalCount
+      paperVotesTotalPointsCount
       ...interpellationLabelHelper_proposal @relay(mask: false)
     }
   `,

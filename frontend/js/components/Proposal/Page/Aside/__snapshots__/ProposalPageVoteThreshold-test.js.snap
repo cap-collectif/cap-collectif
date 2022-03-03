@@ -9,34 +9,64 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
       proposal.vote.threshold.title
     </h4>
     <p>
+      <Tooltip
+        backgroundColor="black"
+        borderRadius="4px"
+        label={
+          <React.Fragment>
+            <Text
+              fontFamily="OpenSans"
+              fontSize={1}
+              lineHeight="sm"
+              textAlign="center"
+            >
+              numeric-votes-count
+            </Text>
+          </React.Fragment>
+        }
+        zIndex={10}
+      >
+        <div
+          className="vote-counter"
+        >
+          <ProposalPagestyle__CategoryCircledIcon
+            paddingLeft={6}
+            paddingTop={0}
+            size={24}
+          >
+            <Icon
+              color="#6c757d"
+              name="like"
+              size={14}
+            />
+          </ProposalPagestyle__CategoryCircledIcon>
+          <Box
+            ml="3"
+          >
+            proposal.vote.count
+          </Box>
+        </div>
+      </Tooltip>
       <div
         className="vote-counter"
       >
         <ProposalPagestyle__CategoryCircledIcon
-          paddingLeft={6}
+          paddingLeft={5}
           paddingTop={0}
           size={24}
         >
           <Icon
             color="#6c757d"
-            name="like"
+            name="trophy"
             size={14}
           />
         </ProposalPagestyle__CategoryCircledIcon>
-        proposal.vote.count
+        <Box
+          ml="3"
+        >
+          count-points
+        </Box>
       </div>
-      <MetadataRow
-        categoryPaddingLeft={5}
-        categoryPaddingTop={0}
-        categorySize={24}
-        color="#6c757d"
-        content="count-points"
-        name="trophy"
-        paddingLeft={3}
-        paddingTop={0}
-        ready={true}
-        size={14}
-      />
     </p>
     <ProgressBar
       active={false}
@@ -66,22 +96,44 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
       proposal.vote.threshold.reached
     </h4>
     <p>
-      <div
-        className="vote-counter"
+      <Tooltip
+        backgroundColor="black"
+        borderRadius="4px"
+        label={
+          <React.Fragment>
+            <Text
+              fontFamily="OpenSans"
+              fontSize={1}
+              lineHeight="sm"
+              textAlign="center"
+            >
+              numeric-votes-count
+            </Text>
+          </React.Fragment>
+        }
+        zIndex={10}
       >
-        <ProposalPagestyle__CategoryCircledIcon
-          paddingLeft={6}
-          paddingTop={0}
-          size={24}
+        <div
+          className="vote-counter"
         >
-          <Icon
-            color="#6c757d"
-            name="like"
-            size={14}
-          />
-        </ProposalPagestyle__CategoryCircledIcon>
-        proposal.vote.count
-      </div>
+          <ProposalPagestyle__CategoryCircledIcon
+            paddingLeft={6}
+            paddingTop={0}
+            size={24}
+          >
+            <Icon
+              color="#6c757d"
+              name="like"
+              size={14}
+            />
+          </ProposalPagestyle__CategoryCircledIcon>
+          <Box
+            ml="3"
+          >
+            proposal.vote.count
+          </Box>
+        </div>
+      </Tooltip>
     </p>
     <ProgressBar
       active={false}

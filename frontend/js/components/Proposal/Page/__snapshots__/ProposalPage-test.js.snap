@@ -760,6 +760,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
               Object {
                 "alias": null,
                 "args": null,
+                "kind": "ScalarField",
+                "name": "paperVotesTotalCount",
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "paperVotesTotalPointsCount",
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
                 "concreteType": "ProposalForm",
                 "kind": "LinkedField",
                 "name": "form",
@@ -7497,7 +7511,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "66c3f78d5bb9afba24155c8a30ca74bf",
+        "cacheID": "21e8c1bca36bffb56da311fab5ec8cad",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -9072,6 +9086,7 @@ fragment ProposalPageTabs_proposal_4iFR9m on Proposal {
   tipsmeeeDonators: tipsmeee @include(if: $isTipsMeeeEnabled) {
     donatorsCount
   }
+  paperVotesTotalCount
 }
 
 fragment ProposalPageTabs_step on ProposalStep {
@@ -9094,6 +9109,8 @@ fragment ProposalPageVoteThreshold_proposal_2r3fA4 on Proposal {
     totalCount
     totalPointsCount
   }
+  paperVotesTotalCount
+  paperVotesTotalPointsCount
   project {
     type {
       title
@@ -9122,6 +9139,7 @@ fragment ProposalPageVotes_proposal on Proposal {
   allVotes: votes(first: 0, stepId: $stepId) {
     totalCount
   }
+  paperVotesTotalCount
   votableSteps {
     __typename
     id

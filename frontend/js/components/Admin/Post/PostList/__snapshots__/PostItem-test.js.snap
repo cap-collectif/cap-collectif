@@ -135,6 +135,7 @@ Array [
             "pointerEvents": "none",
             "position": "fixed",
             "top": "100%",
+            "zIndex": undefined,
           }
         }
       />
@@ -176,6 +177,7 @@ Array [
             "pointerEvents": "none",
             "position": "fixed",
             "top": "100%",
+            "zIndex": undefined,
           }
         }
       />
@@ -337,6 +339,7 @@ Array [
             "pointerEvents": "none",
             "position": "fixed",
             "top": "100%",
+            "zIndex": undefined,
           }
         }
       />
@@ -378,6 +381,7 @@ Array [
             "pointerEvents": "none",
             "position": "fixed",
             "top": "100%",
+            "zIndex": undefined,
           }
         }
       />

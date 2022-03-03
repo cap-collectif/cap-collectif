@@ -336,6 +336,7 @@ exports[`<PostList /> should render correctly 1`] = `
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -377,6 +378,7 @@ exports[`<PostList /> should render correctly 1`] = `
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -529,6 +531,7 @@ exports[`<PostList /> should render correctly 1`] = `
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />
@@ -570,6 +573,7 @@ exports[`<PostList /> should render correctly 1`] = `
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
+                  "zIndex": undefined,
                 }
               }
             />

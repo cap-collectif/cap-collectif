@@ -27,14 +27,16 @@ export type LineChartProps = {|
   +withAxis?: boolean,
   +withTooltip?: boolean,
   +data: Data[],
-  +label: string,
+  +label: React.Node,
 |};
 
-const renderTooltip = ({ payload }, label: string) =>
+const renderTooltip = ({ payload }, label: React.Node) =>
   payload && payload[0] ? (
     <AppBox bg="blue.800" borderRadius="normal" p={1}>
       <Text color="blue.200">{payload[0].payload.date}</Text>
-      <Text color="white">{`${formatBigNumber(payload[0].value)} ${label}`}</Text>
+      <Text color="white">
+        {formatBigNumber(payload[0].value)} {label}
+      </Text>
     </AppBox>
   ) : null;
 

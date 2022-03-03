@@ -59,8 +59,12 @@ export const CategoryTitle: StyledComponent<{}, {}, HTMLDivElement> = styled.div
     font-weight: 600;
     margin: 0;
     margin-left: 15px;
+  }
+
+  h5 {
     color: ${colors.secondaryGray};
-    width: calc(100% - 40px);
+    margin-top: 15px;
+    margin-left: 15px;
   }
 `;
 

@@ -8640,6 +8640,28 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
   hasAnalysis: Boolean!
+
+  """Count of paper votes on the project."""
+  paperVotesTotalCount(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): Int!
+
+  """Count of paper votes points on the project."""
+  paperVotesTotalPointsCount(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): Int!
   metaDescription: String
 
   """Slug of a project"""

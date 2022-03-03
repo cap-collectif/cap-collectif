@@ -56,6 +56,8 @@ describe('<ProposalPreviewFooter />', () => {
       totalCount: 42,
       totalPointsCount: 192,
     },
+    paperVotesTotalCount: 0,
+    paperVotesTotalPointsCount: 0,
     tipsMeeeDonation: null,
   };
 

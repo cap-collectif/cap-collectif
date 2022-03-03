@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { connect } from 'react-redux';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import PickableList from '~ui/List/PickableList';
 import { usePickableList } from '~ui/List/PickableList/usePickableList';
 import DropdownSelect from '~ui/DropdownSelect';
@@ -36,20 +35,20 @@ import colors from '~/styles/modules/colors';
 import ModalCreateMailingList from '~/components/Admin/Project/ProjectAdminParticipantTab/ModalCreateMailingList/ModalCreateMailingList';
 import type { GlobalState } from '~/types';
 import { clearToasts } from '~ds/Toast';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 export const PROJECT_ADMIN_PARTICIPANT_PAGINATION = 30;
 
 type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminParticipants_project,
-  +hasFeatureEmail: boolean,
   +viewerIsAdmin: boolean,
 |};
 
 type HeaderProps = {|
   +project: ProjectAdminParticipants_project,
   +showModalCreateMailingList: boolean => void,
-  +hasFeatureEmail: boolean,
   +refusingCount: number,
 |};
 
@@ -66,15 +65,12 @@ const countSelectedNotConsenting = (
   );
 };
 
-const DashboardHeader = ({
-  project,
-  showModalCreateMailingList,
-  hasFeatureEmail,
-  refusingCount,
-}: HeaderProps) => {
+const DashboardHeader = ({ project, showModalCreateMailingList, refusingCount }: HeaderProps) => {
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useProjectAdminParticipantsContext();
   const intl = useIntl();
+  const hasFeatureEmail = useFeatureFlag('beta__emailing');
+  const hasFeaturePaperVote = useFeatureFlag('unstable__paper_vote');
   const { steps, userTypes, filtersOrdered } = React.useMemo(
     () => getAllFormattedChoicesForProject(project, parameters.filtersOrdered),
     [project, parameters.filtersOrdered],
@@ -152,13 +148,7 @@ const DashboardHeader = ({
             }}
           />
           {selectedRows.length <= refusingCount && (
-            <OverlayTrigger
-              placement="top"
-              overlay={
-                <Tooltip id="tooltip-send-mail-no-consenting">
-                  {intl.formatMessage({ id: 'send-mail-no-consenting' })}
-                </Tooltip>
-              }>
+            <Tooltip label={intl.formatMessage({ id: 'send-mail-no-consenting' })}>
               <ButtonSendMail
                 type="button"
                 onClick={() => showModalCreateMailingList(true)}
@@ -166,7 +156,7 @@ const DashboardHeader = ({
                 <Icon name={ICON_NAME.sendMail} color={colors.blue[300]} size={16} />
                 <FormattedMessage id="send-mail" />
               </ButtonSendMail>
-            </OverlayTrigger>
+            </Tooltip>
           )}
           {selectedRows.length > refusingCount && (
             <ButtonSendMail type="button" onClick={() => showModalCreateMailingList(true)}>
@@ -182,7 +172,16 @@ const DashboardHeader = ({
             <FormattedMessage
               id="project.preview.counters.contributors"
               values={{ num: rowsCount }}
-            />
+            />{' '}
+            {hasFeaturePaperVote && (
+              <Tooltip
+                maxWidth="200px"
+                label={intl.formatMessage({ id: 'warning-paper-contributions-not-counted' })}>
+                <span>
+                  <Icon name={ICON_NAME.information} size={12} color={colors.gray[500]} />
+                </span>
+              </Tooltip>
+            )}
           </p>
           <AnalysisProposalListFiltersContainer>
             <AnalysisProposalListFiltersAction>{renderFilters}</AnalysisProposalListFiltersAction>
@@ -206,16 +205,12 @@ const DashboardHeader = ({
   );
 };
 
-export const ProjectAdminParticipants = ({
-  project,
-  relay,
-  hasFeatureEmail,
-  viewerIsAdmin,
-}: Props) => {
+export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin }: Props) => {
   const { parameters, status, dispatch } = useProjectAdminParticipantsContext();
   const { selectedRows } = usePickableList();
   const refusingCount = countSelectedNotConsenting(project, selectedRows);
   const intl = useIntl();
+  const hasFeatureEmail = useFeatureFlag('beta__emailing');
   const hasParticipants = project.participants?.totalCount > 0;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
   const { isOpen, onOpen, onClose } = useDisclosure(false);
@@ -284,7 +279,6 @@ export const ProjectAdminParticipants = ({
           <DashboardHeader
             project={project}
             showModalCreateMailingList={onOpen}
-            hasFeatureEmail={hasFeatureEmail}
             refusingCount={refusingCount}
           />
         </AnalysisProposalListHeaderContainer>
@@ -465,7 +459,6 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
 );
 
 const mapStateToProps = (state: GlobalState) => ({
-  hasFeatureEmail: state.default.features.beta__emailing || false,
   viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
 });
 

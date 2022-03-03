@@ -23,6 +23,7 @@ type TooltipProps = {|
   +visible?: boolean,
   +label?: React$Node,
   +baseId?: string,
+  +zIndex?: number,
 |};
 
 const ContainerAnimate = motion.custom(AppBox);
@@ -46,6 +47,7 @@ export const Tooltip = ({
   visible,
   className,
   baseId,
+  zIndex,
   ...props
 }: TooltipProps) => {
   const tooltip = useTooltipState({
@@ -53,26 +55,27 @@ export const Tooltip = ({
     animated: 300,
     gutter: 8,
     baseId,
+    unstable_timeout: 400,
   });
 
-  const showDelayed = () => {
-    setTimeout(() => {
-      tooltip.show();
-    }, 400);
-  };
   if (!label) return children || null;
 
   return (
     <>
       <TooltipReference
         {...tooltip}
-        show={showDelayed}
         ref={React.Children.toArray(children)[0].ref}
         {...React.Children.toArray(children)[0].props}>
         {referenceProps => React.cloneElement(React.Children.toArray(children)[0], referenceProps)}
       </TooltipReference>
 
-      <ReakitTooltip {...tooltip} className="cap-tooltip">
+      <ReakitTooltip
+        {...tooltip}
+        className="cap-tooltip"
+        unstable_popoverStyles={{
+          ...tooltip.unstable_popoverStyles,
+          zIndex,
+        }}>
         <AnimatePresence>
           {tooltip.visible && (
             <ContainerAnimate

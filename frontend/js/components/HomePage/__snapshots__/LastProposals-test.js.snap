@@ -398,6 +398,20 @@ exports[`<LastProposals /> should render correctly 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "paperVotesTotalCount",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "paperVotesTotalPointsCount",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "slug",
                       "storageKey": null,
                     },
@@ -704,7 +718,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "1103cd338f13effcb4f46542e033338a",
+          "cacheID": "cd60a859caac894e01c36408766ca7c9",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -820,6 +834,8 @@ fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
   allComments: comments(first: 0) {
     totalCountWithAnswers
   }
+  paperVotesTotalCount
+  paperVotesTotalPointsCount
 }
 
 fragment ProposalPreviewStatus_proposal_2tPna9 on Proposal {

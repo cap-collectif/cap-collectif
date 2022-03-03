@@ -43,13 +43,19 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
     }
   />
   <li
+    aria-describedby="id-g"
     className="sc-bdvvtL cEMvUo projectHeader__block"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={0}
   >
     <h2
       className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id="votes-counter-pill"
     >
-      5
+      47
     </h2>
     <p
       className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
@@ -57,8 +63,31 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
       Vote-plural
     </p>
   </li>
+  <div
+    className="cap-tooltip"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+  />
   <li
+    aria-describedby="id-g"
     className="sc-bdvvtL cEMvUo projectHeader__block"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={0}
   >
     <h2
       className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
@@ -72,6 +101,23 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
       Project.preview.counters.contributors
     </p>
   </li>
+  <div
+    className="cap-tooltip"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+  />
 </ul>
 `;
 
@@ -118,13 +164,19 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
     }
   />
   <li
+    aria-describedby="id-g"
     className="sc-bdvvtL cEMvUo projectHeader__block"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={0}
   >
     <h2
       className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id="votes-counter-pill"
     >
-      5
+      47
     </h2>
     <p
       className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
@@ -132,8 +184,31 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
       Vote-plural
     </p>
   </li>
+  <div
+    className="cap-tooltip"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+  />
   <li
+    aria-describedby="id-g"
     className="sc-bdvvtL cEMvUo projectHeader__block"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={0}
   >
     <h2
       className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
@@ -147,6 +222,23 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
       Project.preview.counters.contributors
     </p>
   </li>
+  <div
+    className="cap-tooltip"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+  />
 </ul>
 `;
 
@@ -193,13 +285,19 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
     }
   />
   <li
+    aria-describedby="id-g"
     className="sc-bdvvtL cEMvUo projectHeader__block"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={0}
   >
     <h2
       className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
       id="votes-counter-pill"
     >
-      5
+      47
     </h2>
     <p
       className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
@@ -207,8 +305,31 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
       Vote-plural
     </p>
   </li>
+  <div
+    className="cap-tooltip"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+  />
   <li
+    aria-describedby="id-g"
     className="sc-bdvvtL cEMvUo projectHeader__block"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={0}
   >
     <h2
       className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
@@ -222,5 +343,22 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
       Project.preview.counters.contributors
     </p>
   </li>
+  <div
+    className="cap-tooltip"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+  />
 </ul>
 `;

@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { fetchQuery_DEPRECATED } from 'relay-runtime';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
@@ -87,9 +87,12 @@ const query = graphql`
 `;
 
 export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
+  const intl = useIntl();
   const [selectedStep, setSelectedStep] = useState<?Step>(proposal?.votableSteps[0]);
   const [votesCount, setVotesCount] = useState<number>(proposal?.allVotes?.totalCount || 0);
   const showVotesTab = votesCount > 0 || proposal?.currentVotableStep !== null;
+  const paperVotesTotalCount = proposal?.paperVotesTotalCount ?? 0;
+  const votesTotalCount = votesCount + paperVotesTotalCount;
 
   useEffect(() => {
     setVotesCount(proposal?.allVotes?.totalCount || 0);
@@ -105,8 +108,14 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
               <Icon name={ICON_NAME.like} size={20} color={colors.secondaryGray} />
             </CategoryCircledIcon>
             <h3>
-              <FormattedMessage values={{ num: votesCount }} id="proposal.vote.count" />
+              <FormattedMessage values={{ num: votesTotalCount }} id="proposal.vote.count" />
             </h3>
+            <h5>
+              {intl.formatMessage(
+                { id: 'paper-and-numeric-distribution' },
+                { numericVotesCount: votesCount, paperVotesCount: paperVotesTotalCount },
+              )}
+            </h5>
           </CategoryTitle>
           {proposal.votableSteps.length > 1 && (
             <StepSelect
@@ -156,6 +165,7 @@ export default createFragmentContainer(ProposalPageVotes, {
       allVotes: votes(first: 0, stepId: $stepId) {
         totalCount
       }
+      paperVotesTotalCount
       votableSteps {
         id
         title

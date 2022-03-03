@@ -88,38 +88,60 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes and comment
   <div
     className="card__counters__item card__counters__item--votes"
   >
-    <div
-      className="card__counters__value"
-    >
-      42
-    </div>
-    <FormattedMessage
-      id="vote.count_no_nb"
-      tagName="div"
-      values={
-        Object {
-          "count": 42,
-        }
+    <Tooltip
+      backgroundColor="black"
+      borderRadius="4px"
+      label={
+        <React.Fragment>
+          <Text
+            fontFamily="OpenSans"
+            fontSize={1}
+            lineHeight="sm"
+            textAlign="center"
+          >
+            numeric-votes-count
+          </Text>
+        </React.Fragment>
       }
-    />
+    >
+      <div
+        className="card__counters__value"
+      >
+        42
+      </div>
+    </Tooltip>
+    <p>
+      vote.count_no_nb
+    </p>
   </div>
   <div
     className="card__counters__item card__counters__item--votes"
   >
-    <div
-      className="card__counters__value"
-    >
-      192
-    </div>
-    <FormattedMessage
-      id="points-count"
-      tagName="div"
-      values={
-        Object {
-          "num": 192,
-        }
+    <Tooltip
+      backgroundColor="black"
+      borderRadius="4px"
+      label={
+        <React.Fragment>
+          <Text
+            fontFamily="OpenSans"
+            fontSize={1}
+            lineHeight="sm"
+            textAlign="center"
+          >
+            numeric-points-count
+          </Text>
+        </React.Fragment>
       }
-    />
+    >
+      <div
+        className="card__counters__value"
+      >
+        192
+      </div>
+    </Tooltip>
+    <p>
+      points-count
+    </p>
   </div>
 </Counters>
 `;
@@ -129,38 +151,60 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes counters on
   <div
     className="card__counters__item card__counters__item--votes"
   >
-    <div
-      className="card__counters__value"
-    >
-      42
-    </div>
-    <FormattedMessage
-      id="vote.count_no_nb"
-      tagName="div"
-      values={
-        Object {
-          "count": 42,
-        }
+    <Tooltip
+      backgroundColor="black"
+      borderRadius="4px"
+      label={
+        <React.Fragment>
+          <Text
+            fontFamily="OpenSans"
+            fontSize={1}
+            lineHeight="sm"
+            textAlign="center"
+          >
+            numeric-votes-count
+          </Text>
+        </React.Fragment>
       }
-    />
+    >
+      <div
+        className="card__counters__value"
+      >
+        42
+      </div>
+    </Tooltip>
+    <p>
+      vote.count_no_nb
+    </p>
   </div>
   <div
     className="card__counters__item card__counters__item--votes"
   >
-    <div
-      className="card__counters__value"
-    >
-      192
-    </div>
-    <FormattedMessage
-      id="points-count"
-      tagName="div"
-      values={
-        Object {
-          "num": 192,
-        }
+    <Tooltip
+      backgroundColor="black"
+      borderRadius="4px"
+      label={
+        <React.Fragment>
+          <Text
+            fontFamily="OpenSans"
+            fontSize={1}
+            lineHeight="sm"
+            textAlign="center"
+          >
+            numeric-points-count
+          </Text>
+        </React.Fragment>
       }
-    />
+    >
+      <div
+        className="card__counters__value"
+      >
+        192
+      </div>
+    </Tooltip>
+    <p>
+      points-count
+    </p>
   </div>
 </Counters>
 `;

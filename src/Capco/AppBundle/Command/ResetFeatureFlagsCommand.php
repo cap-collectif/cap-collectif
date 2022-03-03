@@ -103,7 +103,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate(Manager::beta__analytics_page);
         $this->manager->activate(Manager::unstable__project_admin);
         $this->manager->deactivate(Manager::noindex_on_profiles);
-        $this->manager->deactivate(Manager::unstable__paper_vote);
+        $this->manager->activate(Manager::unstable__paper_vote);
 
         if ('test' === $this->env) {
             $this->manager->activate('votes_min');
@@ -114,6 +114,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::export_legacy_users);
             $this->manager->deactivate(Manager::import_proposals);
             $this->manager->deactivate(Manager::beta__analytics_page);
+            $this->manager->deactivate(Manager::unstable__paper_vote);
         }
 
         if ('prod' === $this->env) {
@@ -143,6 +144,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::import_proposals);
             $this->manager->deactivate(Manager::beta__analytics_page);
             $this->manager->deactivate(Manager::unstable__project_admin);
+            $this->manager->deactivate(Manager::unstable__paper_vote);
         }
 
         $output->writeln('<info>Feature flags reseted ! </info>');

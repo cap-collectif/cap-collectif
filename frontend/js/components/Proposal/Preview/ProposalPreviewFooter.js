@@ -1,12 +1,14 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import type { ProposalPreviewFooter_proposal } from '~relay/ProposalPreviewFooter_proposal.graphql';
 import type { ProposalPreviewFooter_step } from '~relay/ProposalPreviewFooter_step.graphql';
 import Card from '../../Ui/Card/Card';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import Text from '~ui/Primitives/Text';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type Props = {
   proposal: ProposalPreviewFooter_proposal,
@@ -14,6 +16,7 @@ type Props = {
 };
 
 export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
+  const intl = useIntl();
   const showDonationInfos =
     useFeatureFlag('unstable__tipsmeee') &&
     proposal.form.usingTipsmeee &&
@@ -27,6 +30,12 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
     projectType === 'project.types.interpellation' && proposal.form.objectType === 'PROPOSAL'
       ? 'support.count_no_nb'
       : 'vote.count_no_nb';
+  const numericVotesTotalCount = proposal?.allVotesOnStep?.totalCount ?? 0;
+  const numericVotesTotalPointsCount = proposal?.allVotesOnStep?.totalPointsCount ?? 0;
+  const paperVotesTotalCount = proposal?.paperVotesTotalCount ?? 0;
+  const paperVotesTotalPointsCount = proposal?.paperVotesTotalPointsCount ?? 0;
+  const votesTotalCount = numericVotesTotalCount + paperVotesTotalCount;
+  const votesTotalPointsCount = numericVotesTotalPointsCount + paperVotesTotalPointsCount;
 
   if (showDonationInfos) {
     return (
@@ -103,36 +112,76 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
           />
         </div>
       )}
-      {step.canDisplayBallot &&
-        showVotes &&
-        proposal.allVotesOnStep && (
-          <>
-            <div className="card__counters__item card__counters__item--votes">
-              <div className="card__counters__value">{proposal.allVotesOnStep.totalCount}</div>
-              <FormattedMessage
-                id={voteCountLabel}
-                values={{
-                  count: proposal.allVotesOnStep.totalCount,
-                }}
-                tagName="div"
-              />
-            </div>
-            {step.votesRanking && proposal.allVotesOnStep && (
-              <div className="card__counters__item card__counters__item--votes">
-                <div className="card__counters__value">
-                  {proposal.allVotesOnStep.totalPointsCount}
-                </div>
-                <FormattedMessage
-                  id="points-count"
-                  values={{
-                    num: proposal.allVotesOnStep.totalPointsCount,
-                  }}
-                  tagName="div"
-                />
-              </div>
+      {step.canDisplayBallot && showVotes && (
+        <>
+          <div className="card__counters__item card__counters__item--votes">
+            {votesTotalCount > 0 ? (
+              <Tooltip
+                backgroundColor="black"
+                borderRadius="4px"
+                label={
+                  <>
+                    {numericVotesTotalCount > 0 && (
+                      <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                        {intl.formatMessage(
+                          { id: 'numeric-votes-count' },
+                          { num: numericVotesTotalCount },
+                        )}
+                      </Text>
+                    )}
+                    {paperVotesTotalCount > 0 && (
+                      <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                        {intl.formatMessage(
+                          { id: 'paper-votes-count' },
+                          { num: paperVotesTotalCount },
+                        )}
+                      </Text>
+                    )}
+                  </>
+                }>
+                <div className="card__counters__value">{votesTotalCount}</div>
+              </Tooltip>
+            ) : (
+              <div className="card__counters__value">{votesTotalCount}</div>
             )}
-          </>
-        )}
+            <p>{intl.formatMessage({ id: voteCountLabel }, { count: votesTotalCount })}</p>
+          </div>
+          {step.votesRanking && (
+            <div className="card__counters__item card__counters__item--votes">
+              {votesTotalPointsCount > 0 ? (
+                <Tooltip
+                  backgroundColor="black"
+                  borderRadius="4px"
+                  label={
+                    <>
+                      {numericVotesTotalPointsCount > 0 && (
+                        <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                          {intl.formatMessage(
+                            { id: 'numeric-points-count' },
+                            { num: numericVotesTotalPointsCount },
+                          )}
+                        </Text>
+                      )}
+                      {paperVotesTotalPointsCount > 0 && (
+                        <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                          {intl.formatMessage(
+                            { id: 'paper-points-count' },
+                            { num: paperVotesTotalPointsCount },
+                          )}
+                        </Text>
+                      )}
+                    </>
+                  }>
+                  <div className="card__counters__value">{votesTotalPointsCount}</div>
+                </Tooltip>
+              ) : (
+                <div className="card__counters__value">{votesTotalPointsCount}</div>
+              )}
+              <p>{intl.formatMessage({ id: 'points-count' }, { num: votesTotalPointsCount })}</p>
+            </div>
+          )}
+        </>
+      )}
     </Card.Counters>
   );
 };
@@ -174,6 +223,8 @@ export default createFragmentContainer(connect<any, any, _, _, _, _>()(ProposalP
         totalCount
         totalPointsCount
       }
+      paperVotesTotalCount
+      paperVotesTotalPointsCount
     }
   `,
 });

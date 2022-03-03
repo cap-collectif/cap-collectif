@@ -31,6 +31,7 @@ import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import UpdateProposalStepPaperVoteCounterMutation from '~/mutations/UpdateProposalStepPaperVoteCounterMutation';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~ui/Primitives/AppBox';
+import { Tooltip as DsTooltip } from '~ds/Tooltip/Tooltip';
 
 export const formName = 'proposal-admin-selections';
 const selector = formValueSelector(formName);
@@ -55,36 +56,35 @@ type Props = PassedProps & {
 };
 
 const validate = (values: FormValues, props: Props) => {
-  const errors = {
-    paperVotes: {},
-  };
+  const errors = {};
 
+  const paperVoteErrors = {};
   for (const stepId in values.paperVotes) {
     if (values.paperVotes[stepId].totalCount || values.paperVotes[stepId].totalPointsCount) {
       const voteStep = props.proposal.project?.steps.find(step => step.id === stepId);
       if (voteStep && voteStep.votesRanking) {
         const { totalCount, totalPointsCount } = values.paperVotes[stepId];
+        const paperVoteStepErrors = {};
 
         if (undefined === totalCount) {
-          errors.paperVotes[stepId] = {
-            totalCount: 'error-paper-points-no-votes',
-          };
+          paperVoteStepErrors.totalCount = 'error-paper-points-no-votes';
+          paperVoteErrors[stepId] = paperVoteStepErrors;
         } else if (undefined === totalPointsCount) {
-          errors.paperVotes[stepId] = {
-            totalCount: 'error-paper-points-no-points',
-          };
+          values.paperVotes[stepId].totalPointsCount = 0;
+          paperVoteStepErrors.totalPointsCount = 'error-paper-points-no-points';
+          paperVoteErrors[stepId] = paperVoteStepErrors;
         } else if (Number(totalCount) === 0 && Number(totalPointsCount) > 0) {
-          errors.paperVotes[stepId] = {
-            totalCount: 'error-paper-points-no-votes',
-          };
+          paperVoteStepErrors.totalCount = 'error-paper-points-no-votes';
+          paperVoteErrors[stepId] = paperVoteStepErrors;
         } else if (Number(totalCount) > Number(totalPointsCount)) {
-          errors.paperVotes[stepId] = {
-            totalCount: 'error-paper-points-above-votes',
-          };
+          paperVoteStepErrors.totalCount = 'error-paper-points-above-votes';
+          paperVoteStepErrors.totalPointsCount = ' ';
+          paperVoteErrors[stepId] = paperVoteStepErrors;
         }
       }
     }
   }
+  errors.paperVotes = paperVoteErrors;
 
   return errors;
 };
@@ -271,21 +271,23 @@ export class ProposalAdminSelections extends Component<Props> {
                       <Text color="gray.900">
                         {intl.formatMessage({ id: 'paper-votes-field-label' })}
                       </Text>
-                      <OverlayTrigger
-                        key={intl.formatMessage({ id: 'paper-votes-field-help-tooltip' })}
-                        placement="top"
-                        overlay={
-                          <Tooltip id="paper-vote-tooltip">
-                            {intl.formatMessage({ id: 'paper-votes-field-help-tooltip' })}
-                          </Tooltip>
-                        }>
-                        <AppBox mt={1}>
+                      <DsTooltip
+                        label={intl.formatMessage({
+                          id: collectStep.votesRanking
+                            ? 'paper-votes-field-help-tooltip'
+                            : 'paper-votes-and-points-field-help-tooltip',
+                        })}>
+                        <Flex>
                           <Icon name={ICON_NAME.CIRCLE_INFO} size="sm" color="blue.500" />
-                        </AppBox>
-                      </OverlayTrigger>
+                        </Flex>
+                      </DsTooltip>
                     </Flex>
                     <Text color="gray.700" style={{ marginTop: 0 }}>
-                      {intl.formatMessage({ id: 'paper-votes-field-help' })}
+                      {intl.formatMessage({
+                        id: collectStep.votesRanking
+                          ? 'paper-votes-field-help-points'
+                          : 'paper-votes-field-help',
+                      })}
                     </Text>
                     <Flex>
                       <AppBox maxWidth="200px">
@@ -356,11 +358,19 @@ export class ProposalAdminSelections extends Component<Props> {
                           {intl.formatMessage({ id: 'paper-votes-field-label' })}
                         </Text>
                         <OverlayTrigger
-                          key={intl.formatMessage({ id: 'paper-votes-field-help-tooltip' })}
+                          key={intl.formatMessage({
+                            id: step.votesRanking
+                              ? 'paper-votes-field-help-tooltip'
+                              : 'paper-votes-and-points-field-help-tooltip',
+                          })}
                           placement="top"
                           overlay={
                             <Tooltip id={`paper-vote-tooltip-${index}`}>
-                              {intl.formatMessage({ id: 'paper-votes-field-help-tooltip' })}
+                              {intl.formatMessage({
+                                id: step.votesRanking
+                                  ? 'paper-votes-field-help-tooltip'
+                                  : 'paper-votes-and-points-field-help-tooltip',
+                              })}
                             </Tooltip>
                           }>
                           <AppBox mt={1}>
@@ -369,7 +379,11 @@ export class ProposalAdminSelections extends Component<Props> {
                         </OverlayTrigger>
                       </Flex>
                       <Text color="gray.700" style={{ marginTop: 0 }}>
-                        {intl.formatMessage({ id: 'paper-votes-field-help' })}
+                        {intl.formatMessage({
+                          id: step.votesRanking
+                            ? 'paper-votes-field-help-points'
+                            : 'paper-votes-field-help',
+                        })}
                       </Text>
                       <Flex>
                         <AppBox maxWidth="200px">
@@ -387,7 +401,7 @@ export class ProposalAdminSelections extends Component<Props> {
                         {step.votesRanking && (
                           <Flex ml={4} maxWidth="200px">
                             <Field
-                              style={{maxWidth: "200px"}}
+                              style={{ maxWidth: '200px' }}
                               label={intl.formatMessage({ id: 'points-plural' }, { num: 2 })}
                               type="number"
                               name={`paperVotes[${step.id}].totalPointsCount`}
