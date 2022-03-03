@@ -38,14 +38,6 @@ class EventRegistrationType extends AbstractType
                     'required' => false,
                     'label' => 'make-my-registration-anonymous',
                 ])
-                ->add('isPrivacyPolicyAccepted', null, [
-                    'required' => true,
-                    'label' => $this->translator->trans(
-                        $options['adminAuthorizeDataTransferTradKey'],
-                        [],
-                        'CapcoAppBundle'
-                    ),
-                ])
                 ->add('submit', SubmitType::class, [
                     'label' => 'global.register',
                     'attr' => ['class' => 'btn btn-success btn-block'],
@@ -64,14 +56,6 @@ class EventRegistrationType extends AbstractType
             ->add('private', null, [
                 'required' => false,
                 'label' => 'make-my-registration-anonymous',
-            ])
-            ->add('isPrivacyPolicyAccepted', null, [
-                'required' => true,
-                'label' => $this->translator->trans(
-                    $options['adminAuthorizeDataTransferTradKey'],
-                    [],
-                    'CapcoAppBundle'
-                ),
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'global.register',
