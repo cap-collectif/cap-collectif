@@ -65,10 +65,10 @@ class CasUserFilter
             $attributes = json_decode(json_encode(simplexml_load_string($response->getBody()->getContents())),true);
             if(key_exists('role', $attributes) && !in_array($attributes['role'], [self::COLLABORATOR_LABEL, self::ELECTED_LABEL]))
             {
+                $this->logger->error('Cas user "'. $username . '" has not authorized role : ' . $attributes['role']);
+
                 return true;
             }
-
-            $this->logger->error('Cas user "'. $username . '" has not authorized role : ' . $attributes['role']);
 
             return false;
 
