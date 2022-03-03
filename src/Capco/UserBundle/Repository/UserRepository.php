@@ -221,14 +221,16 @@ class UserRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getConfirmedUsersWithoutVoteInDebate(Debate $debate): array
+    public function countConfirmedUsersWithoutVoteInDebate(Debate $debate): int
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT u
+                'SELECT count(u.id)
                 FROM CapcoUserBundle:User u
                 WHERE
                     u.confirmationToken IS NULL
+                    AND u.email IS NOT NULL
+                    AND u.consentInternalCommunication = 1
                     AND 0 = (
                         SELECT count(distinct v.id)
                         FROM CapcoAppBundle:Debate\DebateVote v
@@ -238,6 +240,35 @@ class UserRepository extends EntityRepository
                     )
                 '
             )
+            ->setParameter('debate', $debate)
+            ->getSingleScalarResult();
+    }
+
+    public function getConfirmedUsersWithoutVoteInDebate(
+        Debate $debate,
+        int $firstResult = 0,
+        int $maxResult = 100
+    ): array {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT u
+                FROM CapcoUserBundle:User u
+                WHERE
+                    u.confirmationToken IS NULL
+                    AND u.email IS NOT NULL
+                    AND u.consentInternalCommunication = 1
+                    AND 0 = (
+                        SELECT count(distinct v.id)
+                        FROM CapcoAppBundle:Debate\DebateVote v
+                        WHERE
+                            v.user = u
+                            AND v.debate= :debate
+                    )
+                ORDER BY u.id ASC
+                '
+            )
+            ->setFirstResult($firstResult)
+            ->setMaxResults($maxResult)
             ->setParameter('debate', $debate)
             ->getResult();
     }

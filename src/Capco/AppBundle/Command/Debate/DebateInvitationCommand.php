@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Find id of a debate : SELECT debate.id, step.title FROM debate LEFT JOIN step ON step.id = step_id;
+ * Find id of a debate : SELECT debate.id, step.title FROM debate LEFT JOIN step ON step.id = step_id;.
  */
 class DebateInvitationCommand extends Command
 {
@@ -27,6 +27,7 @@ class DebateInvitationCommand extends Command
     public const OPT_REMINDER = 'reminder';
     public const OPT_TEST_TOKEN = 'test-token';
     public const OPT_BATCH = 'batch';
+    public const OPT_BATCH_DEFAULT = 10;
     public const OPT_LIMIT = 'limit';
 
     private EntityManagerInterface $em;
@@ -67,7 +68,7 @@ class DebateInvitationCommand extends Command
                 'b',
                 InputOption::VALUE_OPTIONAL,
                 'the amount of email to launch between each save',
-                10
+                self::OPT_BATCH_DEFAULT
             )
             ->addOption(
                 self::OPT_LIMIT,
@@ -87,15 +88,24 @@ class DebateInvitationCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $debate = $this->getDebate($input);
-        $users = $this->userRepository->getConfirmedUsersWithoutVoteInDebate($debate);
         $isReminder = $input->getOption(self::OPT_REMINDER);
         $limit = $input->getOption(self::OPT_LIMIT);
-        $progressBar = new ProgressBar($output, $limit ?? \count($users));
+        $batch = $input->getOption(self::OPT_BATCH);
+        if ($batch < 1) {
+            $batch = self::OPT_BATCH_DEFAULT;
+        }
+        $total = $this->userRepository->countConfirmedUsersWithoutVoteInDebate($debate);
+        $usersLoaded = 0;
+        $mailSent = 0;
+        $progressBar = new ProgressBar($output, $limit ?? $total);
+        do {
+            $users = $this->userRepository->getConfirmedUsersWithoutVoteInDebate(
+                $debate,
+                $usersLoaded
+            );
+            $usersLoaded += \count($users);
 
-        $counter = 0;
-        /** @var User $user */
-        foreach ($users as $user) {
-            if ($user->getEmail() && $user->isConsentInternalCommunication()) {
+            foreach ($users as $user) {
                 try {
                     $voteToken = $this->getVoteToken($user, $debate);
                     if (null === $voteToken || ($isReminder && $voteToken->isValid())) {
@@ -106,12 +116,12 @@ class DebateInvitationCommand extends Command
                             $isReminder,
                             $input->getOption(self::OPT_TEST_TOKEN)
                         );
-                        ++$counter;
-                        if (0 === $counter % $input->getOption(self::OPT_BATCH)) {
+                        ++$mailSent;
+                        if (0 === $mailSent % $batch) {
                             $this->em->flush();
                         }
                         if ($limit) {
-                            if ($limit <= $counter) {
+                            if ($limit <= $mailSent) {
                                 break;
                             }
                             $progressBar->advance();
@@ -126,15 +136,15 @@ class DebateInvitationCommand extends Command
                             '</error>'
                     );
                 }
+                if (null === $limit) {
+                    $progressBar->advance();
+                }
             }
-            if (null === $limit) {
-                $progressBar->advance();
-            }
-        }
+        } while ($usersLoaded < $total && (null === $limit || $mailSent < $limit));
         $this->em->flush();
         $progressBar->finish();
 
-        $output->writeln("\n${counter} email(s) sent to invite to debate " . $debate->getId());
+        $output->writeln("\n${mailSent} email(s) sent to invite to debate " . $debate->getId());
 
         return 0;
     }
