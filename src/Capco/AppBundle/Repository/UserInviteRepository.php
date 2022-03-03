@@ -131,9 +131,12 @@ class UserInviteRepository extends EntityRepository
 
     public function getPendingInvitations(?int $limit, ?int $offset, Group $group): array
     {
-        return $this->getPaginated($limit, $offset)
+        $qb = $this->getPaginated($limit, $offset);
+        $qb = $this->filterByStatus($qb, UserInviteStatus::PENDING);
+
+        return $qb
             ->innerJoin('ui.groups', 'g')
-            ->where('g = :group')
+            ->andWhere('g = :group')
             ->setParameter('group', $group)
             ->getQuery()
             ->getResult();
