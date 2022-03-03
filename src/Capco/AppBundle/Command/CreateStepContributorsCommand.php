@@ -121,7 +121,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
                     $contributor['updatedAt'],
                     $contributor['lastLogin'],
                     $contributor['rolesText'],
-                    $contributor['consentExternalCommunication'],
+                    $contributor['consentInternalCommunication'],
                     $contributor['enabled'],
                     $contributor['isEmailConfirmed'],
                     $contributor['locked'],

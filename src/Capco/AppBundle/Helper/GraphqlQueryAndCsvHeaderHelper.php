@@ -15,7 +15,7 @@ class GraphqlQueryAndCsvHeaderHelper
     updatedAt
     lastLogin
     rolesText
-    consentExternalCommunication
+    consentInternalCommunication
     enabled
     isEmailConfirmed
     locked
@@ -47,7 +47,7 @@ class GraphqlQueryAndCsvHeaderHelper
         'user_updatedAt',
         'user_lastLogin',
         'user_rolesText',
-        'user_consentExternalCommunication',
+        'user_consentInternalCommunication',
         'user_enabled',
         'user_isEmailConfirmed',
         'user_locked',
