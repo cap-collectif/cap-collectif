@@ -68,9 +68,12 @@ class CasUserFilter
                 return true;
             }
 
+            $this->logger->error('Cas user "'. $username . '" has not authorized role : ' . $attributes['role']);
+
             return false;
 
         } catch (TransportException | ClientExceptionInterface | DecodingExceptionInterface | RedirectionExceptionInterface | ServerExceptionInterface $exception) {
+            $this->logger->error('Cas user "'. $username . '" api request failed');
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
             return false;
