@@ -67,6 +67,14 @@ trait UserSSOTrait
                 )
             );
         }
+
+        if ('sorbonne' === $idp) {
+            $this->setUsername(
+                $attributes['givenName'][0] . ' ' . $attributes['sn'][0]
+            );
+            $this->setEmail($attributes['mail'][0]);
+            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
+        }
     }
 
     public function setSamlId(string $samlId): self

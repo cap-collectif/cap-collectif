@@ -50,6 +50,10 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
             return 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress';
         }
 
+        if ('sorbonne' === $this->samlIdp) {
+            return 'mail';
+        }
+
         if ('dev' === $this->samlIdp) {
             return 'https://samltest.id/attributes/role';
         }
