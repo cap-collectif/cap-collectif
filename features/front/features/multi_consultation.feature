@@ -21,5 +21,5 @@ Scenario: A user should be able to share the consultation when the feature is en
   And I go to "/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation"
   And I wait "#share-button" to appear on current page
   And I click the "#share-button" element
-  And I click the "#share-button + ul > li:last-of-type" element
+  And I click the "button.share-option:last-of-type" element
   Then I should see "https://capco.test/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation"

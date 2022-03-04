@@ -135,6 +135,8 @@ export const PrivacyContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.
 export const PrivacyInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  justify-content: center;
 
   span {
     margin-left: 5px;

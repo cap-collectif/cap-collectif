@@ -76,7 +76,7 @@ export default createFragmentContainer(
       fragment UserAvatarList_users on User @relay(plural: true) {
         id
         username
-        ...UserAvatar_user
+        ...UserAvatarLegacy_user
       }
     `,
   },

@@ -9,8 +9,6 @@ import Media from '../../components/Ui/Medias/Media/Media';
 import ListGroup from '../../components/Ui/List/ListGroup';
 import Loader from '../../components/Ui/FeedbacksIndicators/Loader';
 import { opinionArguments as opinionArgumentsMock } from '../mocks/opinionArguments';
-import ShareButton from '../../components/Ui/Button/ShareButton';
-import ShareButtonAction from '../../components/Ui/Button/ShareButtonAction';
 
 const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
   <div className="w-100">
@@ -135,13 +133,6 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
               </button>{' '}
             </React.Fragment>
           )}
-          <ShareButton id={`share-button-${item.id}`} bsSize="xs" outline grey>
-            <ShareButtonAction action="mail" />
-            <ShareButtonAction action="facebook" />
-            <ShareButtonAction action="twitter" />
-            <ShareButtonAction action="linkedin" />
-            <ShareButtonAction action="link" />
-          </ShareButton>
         </div>
       </Media.Body>
     </Media>

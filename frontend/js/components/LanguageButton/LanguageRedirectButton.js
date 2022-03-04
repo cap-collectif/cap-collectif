@@ -1,11 +1,10 @@
 // @flow
 import React from 'react';
 import { useIntl } from 'react-intl';
-import {
-  DropdownLanguageButton,
-  MenuLanguageItem,
-} from '~/components/LanguageButton/LanguageButton';
+import { DropdownLanguageButton } from '~/components/LanguageButton/LanguageButton';
 import { LanguageContainer, LanguageTitle } from '~/components/LanguageButton/Language';
+import Menu from '../DesignSystem/Menu/Menu';
+import { ICON_NAME } from '~ds/Icon/Icon';
 
 type CurrentLanguageProps = {|
   language: string,
@@ -34,13 +33,23 @@ const Language = ({ language }: CurrentLanguageProps) => {
 
 export const LanguageRedirectButton = ({ languages, currentLanguage }: Props) => {
   return (
-    <DropdownLanguageButton bsStyle="default" title={<Language language={currentLanguage} />}>
-      {languages.map(language => (
-        <MenuLanguageItem key={language.id} href={language.redirect}>
-          <Language language={language.traductionKey} />
-        </MenuLanguageItem>
-      ))}
-    </DropdownLanguageButton>
+    <Menu>
+      <Menu.Button>
+        <DropdownLanguageButton
+          rightIcon={ICON_NAME.ARROW_DOWN_O}
+          variant="primary"
+          variantSize="medium">
+          <Language language={currentLanguage} />
+        </DropdownLanguageButton>
+      </Menu.Button>
+      <Menu.List>
+        {languages.map(language => (
+          <Menu.ListItem as="a" key={language.id} href={language.redirect}>
+            <Language language={language.traductionKey} />
+          </Menu.ListItem>
+        ))}
+      </Menu.List>
+    </Menu>
   );
 };
 

@@ -152,8 +152,6 @@ const FooterLinks = ({
           backgroundColor={`${backgroundColor} !important`}
           textColor={textColor}
           borderless
-          dropup
-          pullRight
         />
       )}
     </FlexContainer>

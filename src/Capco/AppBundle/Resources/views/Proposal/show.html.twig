@@ -48,10 +48,8 @@
 {% block javascripts %}
     {{ parent() }}
 
-    {% if proposal.proposalForm.isMapViewEnabled or proposal.proposalForm.usingAddress %}
+    {% if proposal.proposalForm.isMapViewEnabled or proposal.proposalForm.usingAddress or ( currentVotableStep and currentVotableStep.useAddressOrMap) %}
         {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
     {% endif %}
-    {% if currentVotableStep and currentVotableStep.useAddressOrMap %}
-        {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
-    {% endif %}
+
 {% endblock %}

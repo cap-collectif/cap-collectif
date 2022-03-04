@@ -4,10 +4,12 @@ import { useDisclosure } from '@liinkiing/react-hooks';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
-import { Menu, Button, Icon, CapUIIcon, CapUIIconSize } from '@cap-collectif/ui';
 import type { GlobalState } from '~/types';
 import type { BsSize } from '~/types/ReactBootstrap.type';
-import ShareButtonAction from '../Ui/Button/ShareButtonAction';
+import ShareButtonActionLegacy from '../Ui/Button/ShareButtonActionLegacy';
+import Menu from '../DesignSystem/Menu/Menu';
+import Button from '~ds/Button/Button';
+import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import colors from '~/utils/colors';
 
 type Props = {|
@@ -22,7 +24,7 @@ type Props = {|
   disabled?: boolean,
 |};
 
-const ShareButtonDropdownLegacy = ({
+const ShareButtonDropdown = ({
   id = 'share-button',
   title = '',
   url,
@@ -87,35 +89,35 @@ const ShareButtonDropdownLegacy = ({
   };
 
   return enabled ? (
-    <Menu
-      disclosure={
+    <Menu placement="bottom-start" className="share-button-dropdown">
+      <Menu.Button>
         <Button
-          style={{ color: '#333', borderColor: '#333' }}
-          className=" btn btn-default dropdown-button custom-dropdown-button share-dropdown-button"
-          variant="secondary"
-          variantColor="hierarchy"
+          style={{
+            color: colors.black,
+            backgroundColor: colors.white,
+            padding: '6px 12px',
+            fontWeight: 400,
+          }}
           id={id}
           disabled={disabled}
           rightIcon={
-            <Icon name={CapUIIcon.ArrowDownO} size={CapUIIconSize.SM} color={colors.black} />
+            <Icon name={ICON_NAME.ARROW_DOWN_O} size={ICON_SIZE.SM} color={colors.black} />
           }
           leftIcon={
-            <Icon
-              name={CapUIIcon.Share}
-              size={bsSize === 'xs' ? CapUIIconSize.XS : CapUIIconSize.SM}
-            />
-          }>
+            <Icon name={ICON_NAME.SHARE} size={bsSize === 'xs' ? ICON_SIZE.XS : ICON_SIZE.SM} />
+          }
+          variant="tertiary"
+          variantSize="medium"
+          variantColor="hierarchy">
           {intl.formatMessage({ id: 'global.share' })}
         </Button>
-      }
-      placement="bottom-start"
-      className="share-button-dropdown">
-      <Menu.List className="share-button-dropdown">
-        <ShareButtonAction action="mail" onSelect={mail} />
-        <ShareButtonAction action="facebook" onSelect={facebook} />
-        <ShareButtonAction action="twitter" onSelect={twitter} />
-        <ShareButtonAction action="linkedin" onSelect={linkedin} />
-        <ShareButtonAction action="link" onSelect={onOpen} />
+      </Menu.Button>
+      <Menu.List>
+        <ShareButtonActionLegacy action="mail" onSelect={mail} />
+        <ShareButtonActionLegacy action="facebook" onSelect={facebook} />
+        <ShareButtonActionLegacy action="twitter" onSelect={twitter} />
+        <ShareButtonActionLegacy action="linkedin" onSelect={linkedin} />
+        <ShareButtonActionLegacy action="link" onSelect={onOpen} />
         {renderModal()}
       </Menu.List>
     </Menu>
@@ -126,4 +128,4 @@ const mapStateToProps = (state: GlobalState) => ({
   enabled: state.default.features.share_buttons,
 });
 
-export default connect<any, any, _, _, _, _>(mapStateToProps)(ShareButtonDropdownLegacy);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ShareButtonDropdown);

@@ -67,7 +67,7 @@ const container = connect<any, any, _, _, _, _>()(ArgumentButtons);
 export default createFragmentContainer(container, {
   argument: graphql`
     fragment ArgumentButtons_argument on Argument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       author {
         id
         slug

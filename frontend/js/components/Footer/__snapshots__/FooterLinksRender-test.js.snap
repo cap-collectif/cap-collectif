@@ -76,24 +76,22 @@ exports[`<FooterLinksRender /> renders correcty 1`] = `
     <FooterLinksRender__LinkSeparator>
       |
     </FooterLinksRender__LinkSeparator>
-    <FooterLinksRender__SeeMoreFooterButton
-      dropup={true}
-      id="footer-see-more-button"
-      noCaret={true}
-      pullRight={true}
-      title={
-        <React.Fragment>
+    <Menu>
+      <Menu.Button>
+        <FooterLinksRender__SeeMoreFooterButton
+          id="footer-see-more-button"
+          rightIcon="ARROW_DOWN_O"
+          variant="primary"
+          variantSize="medium"
+        >
           <FormattedMessage
             id="global.navbar.see_more"
             values={Object {}}
           />
-          <SiteLanguageChangeButton__Caret
-            className="cap-arrow-39"
-            color="inherit"
-          />
-        </React.Fragment>
-      }
-    />
+        </FooterLinksRender__SeeMoreFooterButton>
+      </Menu.Button>
+      <Menu.List />
+    </Menu>
   </li>
 </FooterLinksRender__LinkList>
 `;

@@ -1,6 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import { MenuItem, Modal, DropdownButton } from 'react-bootstrap';
+import { MenuItem, Modal } from 'react-bootstrap';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 
@@ -61,20 +61,6 @@ export const BoxDeprecated: StyledComponent<{}, {}, HTMLDivElement> = styled.div
     font-size: 10px;
     top: 5px;
     left: 2px;
-  }
-`;
-
-export const StepCreateButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(
-  DropdownButton,
-).attrs({
-  className: 'btn-outline-primary box-content__toolbar',
-})`
-  border: 1px solid #3b88fd !important;
-  color: #3b88fd !important;
-  :focus,
-  :hover {
-    background-color: #3b88fd !important;
-    color: #fff !important;
   }
 `;
 

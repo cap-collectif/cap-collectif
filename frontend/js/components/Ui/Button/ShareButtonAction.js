@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { MenuItem } from 'react-bootstrap';
+import { Flex, Menu } from '@cap-collectif/ui';
 import SocialIcon from '../Icons/SocialIcon';
 
 type Props = {|
@@ -14,9 +14,17 @@ class ShareButtonAction extends React.Component<Props> {
     const { action, onSelect } = this.props;
 
     return (
-      <MenuItem onSelect={onSelect}>
-        <SocialIcon name={action} size={16} /> <FormattedMessage id={`share.${action}`} />
-      </MenuItem>
+      <Menu.Item
+        as="a"
+        href="#"
+        className="share-option"
+        onClick={onSelect}
+        style={{ marginBottom: 'unset' }}>
+        <Flex>
+          <SocialIcon name={action} size={16} />
+          <FormattedMessage id={`share.${action}`} />
+        </Flex>
+      </Menu.Item>
     );
   }
 }

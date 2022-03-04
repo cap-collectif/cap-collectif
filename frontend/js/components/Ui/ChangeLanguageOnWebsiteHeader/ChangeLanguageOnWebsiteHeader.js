@@ -135,7 +135,6 @@ const ChangeLanguageOnWebsiteHeader = React.forwardRef<Props, HTMLDivElement>(
                 onChange={updateLanguage}
                 backgroundColor="rgba(255, 255, 255, 0.15) !important" // TODO: Remove this when we'll stop using bootstrap
                 textColor="#FFF"
-                pullRight
               />
               <ContinueButton
                 id="language-header-continue-button"

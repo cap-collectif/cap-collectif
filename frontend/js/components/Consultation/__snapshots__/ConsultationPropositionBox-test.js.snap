@@ -2392,7 +2392,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "04ae44815f0b8ed62a47e412eb946d48",
+          "cacheID": "9edd28f2c1b9e889c75baace73435975",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2838,19 +2838,19 @@ fragment UnpublishedOpinionList_consultation on Consultation {
   }
 }
 
-fragment UserAvatarList_users on User {
-  id
-  username
-  ...UserAvatar_user
-}
-
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {
     url
     id
   }
+}
+
+fragment UserAvatarList_users on User {
+  id
+  username
+  ...UserAvatarLegacy_user
 }
 
 fragment UserLink_user on User {
@@ -5266,7 +5266,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "04ae44815f0b8ed62a47e412eb946d48",
+          "cacheID": "9edd28f2c1b9e889c75baace73435975",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5712,19 +5712,19 @@ fragment UnpublishedOpinionList_consultation on Consultation {
   }
 }
 
-fragment UserAvatarList_users on User {
-  id
-  username
-  ...UserAvatar_user
-}
-
-fragment UserAvatar_user on User {
+fragment UserAvatarLegacy_user on User {
   url
   username
   media {
     url
     id
   }
+}
+
+fragment UserAvatarList_users on User {
+  id
+  username
+  ...UserAvatarLegacy_user
 }
 
 fragment UserLink_user on User {

@@ -13,8 +13,6 @@ import {
   Row,
   Col,
 } from 'react-bootstrap';
-import ShareButton from '../../components/Ui/Button/ShareButton';
-import ShareButtonAction from '../../components/Ui/Button/ShareButtonAction';
 
 import Card from '../../components/Ui/Card/Card';
 import UserLink from '../../components/User/UserLink';
@@ -313,16 +311,6 @@ const OpinionBox = ({ section, opinion }) => (
               <i className="cap cap-flag-1" /> Signaler
             </Button>
           </span>
-          {/** Utils/ShareButtonDropdown.js */}
-          {opinion.title && opinion.url && (
-            <ShareButton id="shareButton" margin="ml-5">
-              <ShareButtonAction action="mail" />
-              <ShareButtonAction action="facebook" />
-              <ShareButtonAction action="twitter" />
-              <ShareButtonAction action="linkedin" />
-              <ShareButtonAction action="link" />
-            </ShareButton>
-          )}
         </ButtonToolbar>
       </div>
     </div>
@@ -396,13 +384,11 @@ storiesOf('Cap Collectif/OpinionBox', module)
       appendices: [
         {
           title: 'Exposé des motifs',
-          body:
-            'Lorem ipsum dolor amet direct trade cornhole exercitation hashtag mixtape, master cleanse vexillologist. Irure kickstarter single-origin coffee fashion axe vexillologist viral. Selfies etsy cloud bread heirloom, sunt craft beer fixie palo santo asymmetrical.',
+          body: 'Lorem ipsum dolor amet direct trade cornhole exercitation hashtag mixtape, master cleanse vexillologist. Irure kickstarter single-origin coffee fashion axe vexillologist viral. Selfies etsy cloud bread heirloom, sunt craft beer fixie palo santo asymmetrical.',
         },
         {
           title: 'Annexes',
-          body:
-            'Lorem ipsum dolor amet direct trade cornhole exercitation hashtag mixtape, master cleanse vexillologist. Irure kickstarter single-origin coffee fashion axe vexillologist viral. Selfies etsy cloud bread heirloom, sunt craft beer fixie palo santo asymmetrical.',
+          body: 'Lorem ipsum dolor amet direct trade cornhole exercitation hashtag mixtape, master cleanse vexillologist. Irure kickstarter single-origin coffee fashion axe vexillologist viral. Selfies etsy cloud bread heirloom, sunt craft beer fixie palo santo asymmetrical.',
         },
       ],
     };
@@ -437,8 +423,7 @@ storiesOf('Cap Collectif/OpinionBox', module)
       ...opinionMock,
       answer: {
         title: 'Exemple de réponse',
-        body:
-          'Lorem ipsum dolor amet direct trade cornhole exercitation hashtag mixtape, master cleanse vexillologist. Irure kickstarter single-origin coffee fashion axe vexillologist viral. Selfies etsy cloud bread heirloom, sunt craft beer fixie palo santo asymmetrical.',
+        body: 'Lorem ipsum dolor amet direct trade cornhole exercitation hashtag mixtape, master cleanse vexillologist. Irure kickstarter single-origin coffee fashion axe vexillologist viral. Selfies etsy cloud bread heirloom, sunt craft beer fixie palo santo asymmetrical.',
         author: authorMock,
       },
     };

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { fetchQuery_DEPRECATED } from 'relay-runtime';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
+import { Menu, Button } from '@cap-collectif/ui';
 import colors from '~/utils/colors';
 import environment from '~/createRelayEnvironment';
 import type { ProposalPageVotes_proposal } from '~relay/ProposalPageVotes_proposal.graphql';
@@ -62,10 +62,14 @@ const ProposalPageVotesContainer: StyledComponent<{}, {}, HTMLDivElement> = styl
   }
 `;
 
-const StepSelect: StyledComponent<{}, {}, typeof DropdownButton> = styled(DropdownButton)`
+const StepSelect: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   background: none !important;
   border: none;
   box-shadow: none !important;
+  & span {
+    color: black;
+    white-space: nowrap;
+  }
 
   &:hover,
   &:focus {
@@ -118,37 +122,41 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
             </h5>
           </CategoryTitle>
           {proposal.votableSteps.length > 1 && (
-            <StepSelect
-              noCaret
-              pullRight
-              id={`proposal-votes-select-step-${proposal.id}`}
-              title={
-                <span>
-                  <Icon name={ICON_NAME.filter} size={18} color={colors.black} />
-                  {selectedStep?.title}
-                </span>
+            <Menu
+              disclosure={
+                <StepSelect
+                  id={`proposal-votes-select-step-${proposal.id}`}
+                  variant="primary"
+                  variantSize="medium">
+                  <span>
+                    <Icon name={ICON_NAME.filter} size={18} color={colors.black} />
+                    {selectedStep?.title}
+                  </span>
+                </StepSelect>
               }>
-              {proposal.votableSteps.map((votableStep, index) => (
-                <MenuItem
-                  key={index}
-                  onSelect={() => {
-                    setSelectedStep(votableStep);
-                    fetchQuery_DEPRECATED(
-                      environment,
-                      query,
-                      ({
-                        proposalId: proposal.id,
-                        stepId: votableStep.id,
-                      }: ProposalPageVotesTotalCountQueryVariables),
-                    ).then((data: ProposalPageVotesTotalCountQueryResponse) => {
-                      setVotesCount(data?.proposal?.allVotes?.totalCount || 0);
-                      setGlobalVotesCount(data?.proposal?.allVotes?.totalCount || 0);
-                    });
-                  }}>
-                  {votableStep.title}
-                </MenuItem>
-              ))}
-            </StepSelect>
+              <Menu.List>
+                {proposal.votableSteps.map((votableStep, index) => (
+                  <Menu.Item
+                    key={index}
+                    onClick={() => {
+                      setSelectedStep(votableStep);
+                      fetchQuery_DEPRECATED(
+                        environment,
+                        query,
+                        ({
+                          proposalId: proposal.id,
+                          stepId: votableStep.id,
+                        }: ProposalPageVotesTotalCountQueryVariables),
+                      ).then((data: ProposalPageVotesTotalCountQueryResponse) => {
+                        setVotesCount(data?.proposal?.allVotes?.totalCount || 0);
+                        setGlobalVotesCount(data?.proposal?.allVotes?.totalCount || 0);
+                      });
+                    }}>
+                    {votableStep.title}
+                  </Menu.Item>
+                ))}
+              </Menu.List>
+            </Menu>
           )}
         </div>
 

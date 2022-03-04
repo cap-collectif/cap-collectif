@@ -1,7 +1,7 @@
 // @flow
 /* eslint-env jest */
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { IntlProvider } from 'react-intl';
 import ChangeLanguageOnWebsiteHeader, { Content } from './ChangeLanguageOnWebsiteHeader';
 
@@ -35,7 +35,7 @@ describe('<ChangeLanguageOnWebsiteHeader />', () => {
     ],
   };
   it('should render correctly', () => {
-    const wrapper = mount(
+    const wrapper = shallow(
       <IntlProvider>
         <ChangeLanguageOnWebsiteHeader {...props} />
       </IntlProvider>,

@@ -11,7 +11,7 @@ trait SharingStepsTrait
      */
     public function iShouldSeeTheShareDropdown()
     {
-        $this->assertElementOnPage('.dropdown-menu');
+        $this->assertElementOnPage('.share-dropdown-button');
         $this->assertElementOnPage('.share-button-dropdown');
         $this->assertElementContainsText('.share-button-dropdown', 'share.facebook');
         $this->assertElementContainsText('.share-button-dropdown', 'share.link');
@@ -22,7 +22,7 @@ trait SharingStepsTrait
      */
     public function iShouldSeeTheOpinionShareDropdown()
     {
-        $this->assertElementOnPage('.opinion__description .dropdown-menu');
+        $this->assertElementOnPage('.opinion__description #opinion-share-button');
         $this->assertElementOnPage('.opinion__description .share-button-dropdown');
         $this->assertElementContainsText(
             '.opinion__description .share-button-dropdown',
@@ -39,6 +39,7 @@ trait SharingStepsTrait
      */
     public function iClickTheShareLinkButton()
     {
+        $this->iWait(1);
         $this->clickLink('share.link');
         $this->iWait(1);
     }

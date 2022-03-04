@@ -91,7 +91,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionButtons)
 export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionButtons_opinion on OpinionOrVersion
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...OpinionDelete_opinion
       ...OpinionReportButton_opinion @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionFollowButton_opinion @arguments(isAuthenticated: $isAuthenticated)

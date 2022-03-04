@@ -84,7 +84,7 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
       }
     />
   </ProposalPageHeaderButtons__FixedButtons>
-  <Connect(ShareButtonDropdown)
+  <Connect(ShareButtonDropdownLegacy)
     disabled={false}
     id="proposal-share-button"
     title="OEEEEE"

@@ -1,14 +1,16 @@
 // @flow
 import React, { useState } from 'react';
-import { Row, Col, DropdownButton, MenuItem } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
+import { Menu } from '@cap-collectif/ui';
 import { mediaQueryMobile } from '~/utils/sizes';
 import CommentListView, { type CommentOrderBy } from './CommentListView';
 import CommentForm from './CommentForm';
 import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
+import Button from '~ds/Button/Button';
 
 type Props = {|
   +intl: IntlShape,
@@ -40,7 +42,7 @@ const SortBy: StyledComponent<{}, {}, typeof Col> = styled(Col)`
   }
 `;
 
-export const FilterButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(DropdownButton)`
+export const FilterButton: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   border: none !important;
   outline: none !important;
   background-color: ${colors.white} !important;
@@ -78,20 +80,24 @@ export function CommentSectionView(props: Props) {
         {commentable.allComments && commentable.allComments.totalCountWithAnswers > 1 && (
           <SortBy smOffset={2} sm={4} xs={12}>
             <Icon name={ICON_NAME.sort} size={20} color={colors.darkText} />
-            <FilterButton
-              noCaret
-              id="js-btn-visibility-step"
-              title={<FormattedMessage id={filters[order]} />}>
-              <MenuItem id="public-collect" onClick={() => setOrder('popular')}>
-                {intl.formatMessage({ id: filters.popular })}
-              </MenuItem>
-              <MenuItem id="private-collect" onClick={() => setOrder('last')}>
-                {intl.formatMessage({ id: filters.last })}
-              </MenuItem>
-              <MenuItem id="old" onClick={() => setOrder('old')}>
-                {intl.formatMessage({ id: filters.old })}
-              </MenuItem>
-            </FilterButton>
+            <Menu
+              disclosure={
+                <FilterButton id="js-btn-visibility-step" variant="primary" variantSize="medium">
+                  <FormattedMessage id={filters[order]} />
+                </FilterButton>
+              }>
+              <Menu.List>
+                <Menu.Item id="public-collect" onClick={() => setOrder('popular')}>
+                  {intl.formatMessage({ id: filters.popular })}
+                </Menu.Item>
+                <Menu.Item id="private-collect" onClick={() => setOrder('last')}>
+                  {intl.formatMessage({ id: filters.last })}
+                </Menu.Item>
+                <Menu.Item id="old" onClick={() => setOrder('old')}>
+                  {intl.formatMessage({ id: filters.old })}
+                </Menu.Item>
+              </Menu.List>
+            </Menu>
           </SortBy>
         )}
       </Row>

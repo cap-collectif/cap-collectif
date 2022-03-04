@@ -1,16 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
-<SiteLanguageChangeButton__DropdownLanguageButton
-  backgroundColor="#FFF"
-  borderless={false}
-  bsStyle="default"
-  dropup={false}
-  id="language-change-button-dropdown"
-  noCaret={true}
-  pullRight={false}
-  title={
-    <React.Fragment>
+<Menu
+  placement="top"
+>
+  <Menu.Button>
+    <SiteLanguageChangeButton__DropdownLanguageButton
+      backgroundColor="#FFF"
+      borderless={false}
+      id="language-change-button-dropdown"
+      variant="primary"
+      variantSize="medium"
+    >
       <SiteLanguageChangeButton__LanguageContainer>
         <SiteLanguageChangeButton__SiteEarthIcon
           color="#000"
@@ -29,30 +30,29 @@ exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
         color="#000"
         id="language-change-caret"
       />
-    </React.Fragment>
-  }
->
-  <SiteLanguageChangeButton__MenuLanguageItem
-    id="language-choice-de-DE"
-    key="de-DE"
-    onClick={[Function]}
-    small={false}
-  >
-    <span>
-      deutsch
-    </span>
-  </SiteLanguageChangeButton__MenuLanguageItem>
-  <SiteLanguageChangeButton__MenuLanguageItem
-    id="language-choice-en-GB"
-    key="en-GB"
-    onClick={[Function]}
-    small={false}
-  >
-    <span>
-      english
-    </span>
-  </SiteLanguageChangeButton__MenuLanguageItem>
-</SiteLanguageChangeButton__DropdownLanguageButton>
+    </SiteLanguageChangeButton__DropdownLanguageButton>
+  </Menu.Button>
+  <Menu.List>
+    <Menu.ListItem
+      id="language-choice-de-DE"
+      key="de-DE"
+      onClick={[Function]}
+    >
+      <span>
+        deutsch
+      </span>
+    </Menu.ListItem>
+    <Menu.ListItem
+      id="language-choice-en-GB"
+      key="en-GB"
+      onClick={[Function]}
+    >
+      <span>
+        english
+      </span>
+    </Menu.ListItem>
+  </Menu.List>
+</Menu>
 `;
 
 exports[`<SiteLanguageChangeButton /> should return null with a wrong defaultLanguage 1`] = `""`;

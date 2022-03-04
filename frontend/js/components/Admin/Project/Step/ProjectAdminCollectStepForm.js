@@ -5,7 +5,9 @@ import { Field, FieldArray, arrayPush, change } from 'redux-form';
 import { connect, useSelector } from 'react-redux';
 import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
+import { Button as BootstrapButton } from 'react-bootstrap';
+import type { StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import environment from '~/createRelayEnvironment';
 import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
@@ -20,6 +22,9 @@ import { renderSortValues } from './ProjectAdminSelectionStepForm';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
+import Menu from '../../../DesignSystem/Menu/Menu';
+import { ICON_NAME } from '~ds/Icon/Icon';
+import Button from '~ds/Button/Button';
 
 type Props = {|
   requirements?: Array<Requirement>,
@@ -38,6 +43,20 @@ type Props = {|
   isPrivate: boolean,
   fcAllowedData: FranceConnectAllowedData,
 |};
+
+export const StepVisibilityDropdown: StyledComponent<{}, {}, typeof Button> = styled(Button)`
+  margin-top: 15px;
+  background-color: #f4f4f4;
+  color: #444;
+  border-color: #ddd;
+  &:hover {
+    color: #444;
+    border-color: #ddd;
+  }
+  & svg {
+    color: #444;
+  }
+`;
 
 export const getAvailableProposals = graphql`
   query ProjectAdminCollectStepFormProposalsQuery(
@@ -146,31 +165,44 @@ export const ProjectAdminCollectStepForm = ({
           <Flex ml={2} width="100%" maxWidth="175px" direction="column">
             <FormattedMessage tagName="b" id="project-visibility" />
             <Flex>
-              <DropdownButton
-                id="js-btn-visibility-step"
-                className="mt-15"
-                title={<FormattedMessage id={isPrivate ? 'global-restricted' : 'public'} />}>
-                <MenuItem
-                  id="public-collect"
-                  onClick={() => {
-                    dispatch(change(formName, 'private', false));
-                  }}>
-                  <PrivacyInfo>
-                    <FormattedMessage id="public" />
-                    <FormattedMessage id="everybody" />
-                  </PrivacyInfo>
-                </MenuItem>
-                <MenuItem
-                  id="private-collect"
-                  onClick={() => {
-                    dispatch(change(formName, 'private', true));
-                  }}>
-                  <PrivacyInfo>
-                    <FormattedMessage id="global-restricted" />
-                    <FormattedMessage id="authors-and-administrators" />
-                  </PrivacyInfo>
-                </MenuItem>
-              </DropdownButton>
+              <Menu placement="bottom-start" id="step_visibility">
+                <Menu.Button>
+                  <StepVisibilityDropdown
+                    id="js-btn-visibility-step"
+                    className="dropdown-toggle btn btn-default"
+                    rightIcon={ICON_NAME.ARROW_DOWN_O}
+                    variant="secondary"
+                    variantSize="small">
+                    <FormattedMessage id={isPrivate ? 'global-restricted' : 'public'} />
+                  </StepVisibilityDropdown>
+                </Menu.Button>
+                <Menu.List>
+                  <Menu.ListItem
+                    as="li"
+                    style={{ paddingBottom: 0, paddingRight: 0 }}
+                    id="public-collect"
+                    onClick={() => {
+                      dispatch(change(formName, 'private', false));
+                    }}>
+                    <PrivacyInfo>
+                      <FormattedMessage id="public" />
+                      <FormattedMessage id="everybody" />
+                    </PrivacyInfo>
+                  </Menu.ListItem>
+                  <Menu.ListItem
+                    as="li"
+                    style={{ paddingBottom: 0, paddingRight: 0 }}
+                    id="private-collect"
+                    onClick={() => {
+                      dispatch(change(formName, 'private', true));
+                    }}>
+                    <PrivacyInfo>
+                      <FormattedMessage id="global-restricted" />
+                      <FormattedMessage id="authors-and-administrators" />
+                    </PrivacyInfo>
+                  </Menu.ListItem>
+                </Menu.List>
+              </Menu>
             </Flex>
           </Flex>
         </Flex>
@@ -212,7 +244,7 @@ export const ProjectAdminCollectStepForm = ({
         formName={formName}
         statuses={statuses}
       />
-      <Button
+      <BootstrapButton
         id="js-btn-create-step"
         bsStyle="primary"
         className="btn-outline-primary box-content__toolbar mb-20"
@@ -225,7 +257,7 @@ export const ProjectAdminCollectStepForm = ({
           )
         }>
         <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
-      </Button>
+      </BootstrapButton>
       {statusesWithId?.length ? (
         <Field
           labelClassName="control-label"
@@ -248,7 +280,7 @@ export const ProjectAdminCollectStepForm = ({
         requirements={requirements}
         fcAllowedData={fcAllowedData}
       />
-      <Button
+      <BootstrapButton
         id="js-btn-create-step"
         bsStyle="primary"
         className="btn-outline-primary box-content__toolbar mb-20"
@@ -262,7 +294,7 @@ export const ProjectAdminCollectStepForm = ({
           )
         }>
         <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
-      </Button>
+      </BootstrapButton>
       <Field
         type="editor"
         name="requirementsReason"

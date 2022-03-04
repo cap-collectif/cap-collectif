@@ -168,6 +168,16 @@ trait ProjectStepsTrait
     }
 
     /**
+     * @When I configure my follow option
+     */
+    public function iConfigureMyFollowOption()
+    {
+        $this->iWaitElementToAppearOnPage('.proposal__button__follow_options');
+        $this->navigationContext->getPage('collect page')->clickFollowProposalButtonOption();
+        $this->iWait(1);
+    }
+
+    /**
      * @When I should see proposal followed as :type
      */
     public function iShouldSeeProposalFollowedAs(string $type)

@@ -2,12 +2,14 @@
 import React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import { DropdownButton } from 'react-bootstrap';
 import { type FooterLink, type Legals } from './Footer';
-import { Caret } from '../Ui/Button/SiteLanguageChangeButton';
 import useShowMore from '../../utils/hooks/useShowMore';
-import { useWindowWidth } from '../../utils/hooks/useWindowWidth';
+import { useWindowWidth } from '~/utils/hooks/useWindowWidth';
 import CookieManagerModal from '../StaticPage/CookieManagerModal';
+import Menu from '../DesignSystem/Menu/Menu';
+import MenuButton from '~ds/Menu/MenuButton';
+import Button from '~ds/Button/Button';
+import { ICON_NAME } from '~ds/Icon/Icon';
 
 type Props = {|
   links: Array<FooterLink>,
@@ -47,27 +49,21 @@ export const LinkList: StyledComponent<{ left?: boolean }, {}, HTMLUListElement>
   }
 `;
 
-const SeeMoreFooterButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(DropdownButton)`
+const SeeMoreFooterButton: StyledComponent<{}, {}, typeof MenuButton> = styled(Button)`
   background: transparent !important;
   border: none;
   color: inherit !important;
   font-size: inherit;
   display: flex;
+  &:focus {
+    box-shadow: none !important;
+  }
   span {
     display: block;
     margin-top: -4px;
   }
   i {
     margin-top: -1px;
-  }
-`;
-
-const SeeMoreLink: StyledComponent<{}, {}, HTMLLIElement> = styled.li`
-  margin-bottom: 5px;
-  font-size: 16px;
-  a {
-    color: #000 !important;
-    display: flex !important;
   }
 `;
 
@@ -83,25 +79,26 @@ const renderSeeMore = (
   return (
     <li key="see-more-footer" ref={seeMoreRef}>
       <LinkSeparator>|</LinkSeparator>
-      <SeeMoreFooterButton
-        id="footer-see-more-button"
-        noCaret
-        dropup
-        pullRight
-        title={
-          <>
+      <Menu>
+        <Menu.Button>
+          <SeeMoreFooterButton
+            id="footer-see-more-button"
+            rightIcon={ICON_NAME.ARROW_DOWN_O}
+            variant="primary"
+            variantSize="medium">
             <FormattedMessage id="global.navbar.see_more" />
-            <Caret className="cap-arrow-39" color="inherit" />
-          </>
-        }>
-        {links.map((link: FooterLink, index: number) => {
-          return index >= overflowIndex ? (
-            <SeeMoreLink key={link.name} ref={handleItemWidth}>
-              <a href={link.url}>{link.name}</a>
-            </SeeMoreLink>
-          ) : null;
-        })}
-      </SeeMoreFooterButton>
+          </SeeMoreFooterButton>
+        </Menu.Button>
+        <Menu.List>
+          {links.map((link: FooterLink, index: number) => {
+            return index >= overflowIndex ? (
+              <Menu.ListItem key={link.name} ref={handleItemWidth}>
+                <a href={link.url}>{link.name}</a>
+              </Menu.ListItem>
+            ) : null;
+          })}
+        </Menu.List>
+      </Menu>
     </li>
   );
 };
@@ -117,13 +114,8 @@ const FooterLinksRender = ({
 }: Props) => {
   const activeNumber = getActivatedNumber(legals, cookiesText);
   const { width } = useWindowWidth();
-  const [
-    containerRef,
-    seeMoreRef,
-    handleItemWidth,
-    overflowIndex,
-    shouldDisplaySeeMore,
-  ] = useShowMore(width > 767, (links && links.length + activeNumber) || 0);
+  const [containerRef, seeMoreRef, handleItemWidth, overflowIndex, shouldDisplaySeeMore] =
+    useShowMore(width > 767, (links && links.length + activeNumber) || 0);
   return (
     <LinkList ref={containerRef}>
       {legals.cookies && (

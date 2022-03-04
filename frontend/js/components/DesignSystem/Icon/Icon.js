@@ -78,6 +78,7 @@ export const ICON_NAME = {
   DUPLICATE_O: 'DUPLICATE_O',
   IMAGE: 'IMAGE',
   ERROR: 'ERROR',
+  SHARE: 'SHARE',
 };
 
 export const ICON_SIZE = {

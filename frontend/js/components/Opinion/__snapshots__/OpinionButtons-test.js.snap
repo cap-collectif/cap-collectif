@@ -67,7 +67,7 @@ exports[`<OpinionButtons /> should render correctly 1`] = `
         }
       }
     />
-    <Connect(ShareButtonDropdown)
+    <Connect(ShareButtonDropdownLegacy)
       className="ml-5"
       id="opinion-share-button"
       title="title"

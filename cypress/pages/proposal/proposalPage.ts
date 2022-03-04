@@ -35,4 +35,13 @@ export default new (class ProposalPage {
       proposal: 'proposition-avec-des-reseaux-sociaux',
     })
   }
-})
+
+  visitProposalPage() {
+    return this.visit({
+      project: 'budget-participatif-rennes',
+      step: 'collecte-des-propositions',
+      stepType: 'collect',
+      proposal: 'renovation-du-gymnase',
+    })
+  }
+})()

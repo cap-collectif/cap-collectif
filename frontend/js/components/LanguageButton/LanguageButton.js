@@ -1,11 +1,13 @@
 // @flow
 import React, { useState } from 'react';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 import Language from './Language';
 import type { LanguageButton_languages } from '~relay/LanguageButton_languages.graphql';
+import Menu from '../DesignSystem/Menu/Menu';
+import Button from '~ds/Button/Button';
+import { ICON_NAME } from '~ds/Icon/Icon';
 
 export type LanguageStatus = {|
   id: string,
@@ -20,9 +22,7 @@ type Props = {|
   pullRight?: boolean,
 |};
 
-export const DropdownLanguageButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(
-  DropdownButton,
-)`
+export const DropdownLanguageButton: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   display: flex;
   background: rgba(108, 117, 125, 0.2);
   border-radius: 4px;
@@ -33,10 +33,6 @@ export const DropdownLanguageButton: StyledComponent<{}, {}, typeof DropdownButt
   }
 `;
 
-export const MenuLanguageItem: StyledComponent<{}, {}, typeof MenuItem> = styled(MenuItem)`
-  margin-bottom: 5px;
-`;
-
 // The API locale code format is upper case with _, like 'FR_CA'
 // The frontend locale code format is with -, like 'fr-CA'
 export const formatLanguageCode = (languageCode: string) => {
@@ -44,7 +40,7 @@ export const formatLanguageCode = (languageCode: string) => {
   return `${splittedLanguageCode[0].toLowerCase()}-${splittedLanguageCode[1]}`;
 };
 
-export const LanguageButton = ({ onChange, languages, defaultLanguage, pullRight }: Props) => {
+export const LanguageButton = ({ onChange, languages, defaultLanguage }: Props) => {
   const languagesFormatted = languages.map(language => ({
     ...language,
     code: formatLanguageCode(language.code),
@@ -56,21 +52,28 @@ export const LanguageButton = ({ onChange, languages, defaultLanguage, pullRight
 
   if (!currentLanguage) return null;
   return (
-    <DropdownLanguageButton
-      bsStyle="default"
-      pullRight={pullRight}
-      title={<Language language={currentLanguage} />}>
-      {languagesFormatted.map(language => (
-        <MenuLanguageItem
-          key={language.id}
-          onClick={() => {
-            updateLanguage(language);
-            onChange(language.code);
-          }}>
-          <Language language={language} />
-        </MenuLanguageItem>
-      ))}
-    </DropdownLanguageButton>
+    <Menu>
+      <Menu.Button>
+        <DropdownLanguageButton
+          rightIcon={ICON_NAME.ARROW_DOWN_O}
+          variant="primary"
+          variantSize="medium">
+          <Language language={currentLanguage} />
+        </DropdownLanguageButton>
+      </Menu.Button>
+      <Menu.List>
+        {languagesFormatted.map(language => (
+          <Menu.ListItem
+            key={language.id}
+            onClick={() => {
+              updateLanguage(language);
+              onChange(language.code);
+            }}>
+            <Language language={language} />
+          </Menu.ListItem>
+        ))}
+      </Menu.List>
+    </Menu>
   );
 };
 

@@ -99,6 +99,7 @@ nohup.out
 
 # env files
 /.env.local
+/.env.local.backup
 /.env.local.php
 /.env.*.local
 

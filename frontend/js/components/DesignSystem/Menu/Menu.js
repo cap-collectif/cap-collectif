@@ -46,7 +46,7 @@ const Menu = ({
     <MenuContext.Provider value={context}>
       <AppBox position="relative" display="inline-block" {...rest}>
         <Tippy
-          zIndex={1000}
+          zIndex={1060}
           placement={placement}
           render={attrs => (list ? React.cloneElement(list, attrs) : null)}
           animation

@@ -24,6 +24,7 @@ class CollectPage extends Page
         'proposal form submit draft button' => '#confirm-proposal-create-as-draft',
         'sorting select' => 'select#proposal-filter-sorting-button',
         'follow proposal button' => '.proposal__button__follow',
+        'follow proposal button option' => '.proposal__button__follow_options',
         'type of follow proposal' => '.proposal__follow',
         'my votes' => '.widget__button',
         'restricted-access' => '#restricted-access',
@@ -95,6 +96,11 @@ class CollectPage extends Page
     public function clickFollowProposalButton()
     {
         return $this->getElement('follow proposal button')->click();
+    }
+
+    public function clickFollowProposalButtonOption()
+    {
+        return $this->getElement('follow proposal button option')->click();
     }
 
     public function clickMyVotesButton()

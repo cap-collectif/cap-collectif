@@ -1145,8 +1145,8 @@ class ApplicationContext extends UserContext
         $this->iWaitElementToAppearOnPage('#language-change-button-dropdown');
         $this->iWaitElementToAppearOnPage('#footer-links #language-change-caret');
         $this->iClickElement('#footer-links #language-change-caret');
-        $this->iWaitElementToAppearOnPage("#footer-links #language-choice-${locale}");
-        $this->iClickElement("#footer-links #language-choice-${locale}");
+        $this->iWaitElementToAppearOnPage("#language-choice-${locale}");
+        $this->iClickElement("#language-choice-${locale}");
     }
 
     /**

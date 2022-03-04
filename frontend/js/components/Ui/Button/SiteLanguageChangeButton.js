@@ -1,8 +1,9 @@
 // @flow
 import React, { useState } from 'react';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 import EarthIcon from '../Icons/EarthIcon';
+import Menu from '../../DesignSystem/Menu/Menu';
+import Button from '~ds/Button/Button';
 
 export type LocaleMap = {|
   translationKey: string,
@@ -14,8 +15,6 @@ type Props = {|
   onChange: LocaleMap => void,
   languageList: Array<LocaleMap>,
   defaultLanguage: string,
-  pullRight: boolean,
-  dropup: boolean,
   minWidth?: number,
   maxWidth?: number,
   textColor: string,
@@ -37,8 +36,8 @@ const LanguageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 const DropdownLanguageButton: StyledComponent<
   { minWidth?: number, maxWidth?: number, backgroundColor: string, borderless: boolean },
   {},
-  typeof DropdownButton,
-> = styled(DropdownButton)`
+  typeof Button,
+> = styled(Button)`
   display: flex;
   justify-content: space-between;
   min-width: ${props => (props.minWidth !== undefined ? `${props.minWidth}px` : '100%')};
@@ -50,18 +49,6 @@ const DropdownLanguageButton: StyledComponent<
   .caret {
     align-self: center;
     margin-left: 6px;
-  }
-`;
-
-const MenuLanguageItem: StyledComponent<{ small: boolean }, {}, typeof MenuItem> = styled(MenuItem)`
-  margin-bottom: 5px;
-  font-family: 'OpenSans', helvetica, arial, sans-serif;
-  font-size: 16px;
-
-  a {
-    color: #000 !important;
-    padding-left: ${props => props.small && '10px !important'};
-    display: flex !important;
   }
 `;
 
@@ -100,8 +87,6 @@ const SiteLanguageChangeButton = ({
   onChange,
   languageList,
   defaultLanguage,
-  pullRight,
-  dropup,
   minWidth,
   maxWidth,
   textColor,
@@ -115,49 +100,50 @@ const SiteLanguageChangeButton = ({
   if (!currentLanguage) return null;
 
   return (
-    <DropdownLanguageButton
-      id="language-change-button-dropdown"
-      minWidth={minWidth}
-      maxWidth={maxWidth}
-      backgroundColor={backgroundColor}
-      bsStyle="default"
-      pullRight={pullRight}
-      dropup={dropup}
-      borderless={borderless}
-      noCaret={!small}
-      title={renderCurrentLanguage(currentLanguage, textColor, small)}>
-      {languageList
-        .filter(language => language.code !== currentLanguage.code || small)
-        .sort((l1: LocaleMap, l2: LocaleMap) => {
-          return l1.translationKey >= l2.translationKey ? 1 : -1;
-        })
-        .map(language => (
-          <MenuLanguageItem
-            id={`language-choice-${language.code}`}
-            key={language.code}
-            small={small}
-            onClick={() => {
-              updateLanguage(language);
-              onChange(language);
-            }}>
-            {small &&
-              (language.code === currentLanguage ? (
-                <i className="cap-android-done mr-5" />
-              ) : (
-                <Placeholder />
-              ))}
-            <span>{language.translationKey}</span>
-          </MenuLanguageItem>
-        ))}
-    </DropdownLanguageButton>
+    <Menu placement="top">
+      <Menu.Button>
+        <DropdownLanguageButton
+          id="language-change-button-dropdown"
+          minWidth={minWidth}
+          maxWidth={maxWidth}
+          backgroundColor={backgroundColor}
+          borderless={borderless}
+          variant="primary"
+          variantSize="medium">
+          {renderCurrentLanguage(currentLanguage, textColor, small)}
+        </DropdownLanguageButton>
+      </Menu.Button>
+      <Menu.List>
+        {languageList
+          .filter(language => language.code !== currentLanguage.code || small)
+          .sort((l1: LocaleMap, l2: LocaleMap) => {
+            return l1.translationKey >= l2.translationKey ? 1 : -1;
+          })
+          .map(language => (
+            <Menu.ListItem
+              id={`language-choice-${language.code}`}
+              key={language.code}
+              onClick={() => {
+                updateLanguage(language);
+                onChange(language);
+              }}>
+              {small &&
+                (language.code === currentLanguage ? (
+                  <i className="cap-android-done mr-5" />
+                ) : (
+                  <Placeholder />
+                ))}
+              <span>{language.translationKey}</span>
+            </Menu.ListItem>
+          ))}
+      </Menu.List>
+    </Menu>
   );
 };
 SiteLanguageChangeButton.defaultProps = {
   small: false,
-  pullRight: false,
   textColor: '#000',
   backgroundColor: '#FFF',
-  dropup: false,
   borderless: false,
 };
 

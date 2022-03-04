@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import styled, { css, type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
+import ShareButtonDropdownLegacy from '../Utils/ShareButtonDropdownLegacy';
 import { breakpoint } from '../../utils/mixins';
 import type { MetaStepNavigation_step } from '~relay/MetaStepNavigation_step.graphql';
 import AppBox from '~ui/Primitives/AppBox';
@@ -36,9 +36,9 @@ const BackMessage: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
   )}
 `;
 
-// The consultation span selector is a bit hacky but I have no way to control the ShareButtonDropdown
+// The consultation span selector is a bit hacky but I have no way to control the ShareButtonDropdownLegacy
 // component without redo some writing of the component to allow handle responsive cases
-const ShareButtonDropdownInner: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+const ShareButtonDropdownLegacyInner: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
   #${SHARE_BUTTON_ID} > span > span:last-child {
     display: none;
     ${breakpoint(
@@ -87,13 +87,13 @@ export const MetaStepNavigationShare = ({ step }: { step: MetaStepNavigation_ste
     case 'ConsultationStep':
       return step.consultation ? (
         <AppBox textAlign="right">
-          <ShareButtonDropdownInner>
-            <ShareButtonDropdown
+          <ShareButtonDropdownLegacyInner>
+            <ShareButtonDropdownLegacy
               id={SHARE_BUTTON_ID}
               url={step.consultation.url}
               title={step.consultation.title}
             />
-          </ShareButtonDropdownInner>
+          </ShareButtonDropdownLegacyInner>
         </AppBox>
       ) : null;
     default:
@@ -114,7 +114,7 @@ export const MetaStepNavigation = ({ step }: Props) => {
 export default createFragmentContainer(MetaStepNavigation, {
   step: graphql`
     fragment MetaStepNavigation_step on Step
-      @argumentDefinitions(relatedSlug: { type: "String!" }) {
+    @argumentDefinitions(relatedSlug: { type: "String!" }) {
       __typename
       url
       ... on ConsultationStep {
