@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Find id of a debate : SELECT debate.id, step.title FROM debate LEFT JOIN step ON step.id = step_id;.
+ * Find id of a debate : SELECT debate.id, step.title FROM debate LEFT JOIN step ON step.id = step_id;
  */
 class DebateInvitationCommand extends Command
 {
@@ -178,7 +178,7 @@ class DebateInvitationCommand extends Command
 
     private function getVoteToken(User $user, Debate $debate): ?DebateVoteToken
     {
-        return $this->voteTokenRepository->getUnusedUserDebateToken($user, $debate);
+        return $this->voteTokenRepository->getUserDebateToken($user, $debate);
     }
 
     private function getDebate(InputInterface $input): Debate
