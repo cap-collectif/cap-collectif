@@ -1,6 +1,7 @@
 Capco\AppBundle\Entity\MapToken:
   mapboxMapToken:
     id: mapboxToken
+    # TODO @spyl94 in next PR
     initialPublicToken: ***REMOVED***
     publicToken: ***REMOVED***
     secretToken: ***REMOVED***

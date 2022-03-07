@@ -380,8 +380,8 @@ Capco\UserBundle\Entity\User:
         emailConfirmationSentAt: <(new \DateTime('2018-09-03 09:30:00'))>
         enabled: true
         createdAt: <(new \DateTime('2018-09-03 09:30:00'))>
-        facebookId: 153808779501692
-        facebookAccessToken: '***REMOVED***'
+        facebookId: '153808779501692'
+        facebookAccessToken: 'INSERT_A_REAL_SECRET'
     userJeanDuplicates:
         id: 'userJeanDuplicates'
         username: Juan
@@ -399,7 +399,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <(new \DateTime('2018-09-05 09:30:00'))>
         facebookId: '153808779501692-duplicates'
-        facebookAccessToken: '***REMOVED***'
+        facebookAccessToken: 'INSERT_A_REAL_SECRET'
     user520:
         id: 'user520'
         username: OnePunchMan
@@ -669,7 +669,7 @@ Capco\UserBundle\Entity\User:
         updatedAt: $createdAt
         biography: Je suis créé via france connect
         franceConnectId: '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1'
-        franceConnectAccessToken: '***REMOVED***'
+        franceConnectAccessToken: INSERT_A_REAL_SECRET
     duplicatesUserConnectedFranceConnect:
         id: 'duplicatesUserConnectedFranceConnect'
         username: LAMPE Gerare
@@ -682,7 +682,7 @@ Capco\UserBundle\Entity\User:
         createdAt: <(new \DateTime('2020-04-10 09:30:00'))>
         biography: Je suis un doublon
         franceConnectId: '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1-duplicates'
-        franceConnectAccessToken: '***REMOVED***'
+        franceConnectAccessToken: INSERT_A_REAL_SECRET
     userBobMarley:
         id: 'userBobMarley'
         username: Bob Marley

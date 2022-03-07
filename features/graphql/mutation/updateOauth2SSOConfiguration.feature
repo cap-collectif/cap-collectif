@@ -31,12 +31,12 @@ Admin wants to update a Oauth2 SSO configuration
         "enabled": true,
         "disconnectSsoOnLogout": true,
         "clientId": "account",
-        "secret": "***REMOVED***",
-        "authorizationUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/auth",
-        "accessTokenUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
-        "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
-        "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
-        "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account"
+        "secret": "INSERT_A_REAL_SECRET",
+        "authorizationUrl": "INSERT_A_REAL_SECRET",
+        "accessTokenUrl": "INSERT_A_REAL_SECRET",
+        "userInfoUrl": "INSERT_A_REAL_SECRET",
+        "logoutUrl": "INSERT_A_REAL_SECRET",
+        "profileUrl": "INSERT_A_REAL_SECRET"
       }
     }
   }
@@ -51,12 +51,12 @@ Admin wants to update a Oauth2 SSO configuration
           "enabled": true,
           "disconnectSsoOnLogout": true,
           "clientId": "account",
-          "secret": "***REMOVED***",
-          "authorizationUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/auth",
-          "accessTokenUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
-          "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
-          "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
-          "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account"
+          "secret": "INSERT_A_REAL_SECRET",
+          "authorizationUrl": @string@,
+          "accessTokenUrl": @string@,
+          "userInfoUrl": @string@,
+          "logoutUrl": @string@,
+          "profileUrl": @string@
          }
        }
      }

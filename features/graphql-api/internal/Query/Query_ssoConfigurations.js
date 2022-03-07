@@ -8,7 +8,6 @@ const InternalQuery = /* GraphQL */ `
           id
           name
           enabled
-          profileUrl
           ... on Oauth2SSOConfiguration {
             clientId
             secret
@@ -40,6 +39,33 @@ const InternalQuery = /* GraphQL */ `
 
 describe('Internal|Query.ssoConfigurations', () => {
   it('fetches all configurations', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal_admin')).resolves.toMatchSnapshot();
+    await expect(graphql(InternalQuery, {}, 'internal_admin')).resolves.toMatchSnapshot({
+      ssoConfigurations: {
+        edges: [
+          {
+            node: {
+              clientId: expect.any(String),
+              secret: expect.any(String),
+            },
+          },
+          {
+            node: {
+              clientId: expect.any(String),
+              secret: expect.any(String),
+            },
+          },
+          {
+            node: {
+              clientId: expect.any(String),
+              secret: expect.any(String),
+              authorizationUrl: expect.any(String),
+              accessTokenUrl: expect.any(String),
+              userInfoUrl: expect.any(String),
+              logoutUrl: expect.any(String),
+            },
+          },
+        ],
+      },
+    });
   });
 });

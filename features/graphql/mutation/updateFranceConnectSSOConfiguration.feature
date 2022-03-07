@@ -25,7 +25,7 @@ Scenario: Admin wants to update France Connect configuration
       "input": {
         "environment": "TESTING",
         "clientId": "account",
-        "secret": "***REMOVED***",
+        "secret": "INSERT_A_REAL_SECRET",
         "given_name": true,
         "family_name": true,
         "birthdate": true,
@@ -46,7 +46,7 @@ Scenario: Admin wants to update France Connect configuration
            "fcConfiguration":{
               "environment":"TESTING",
               "clientId":"account",
-              "secret":"***REMOVED***",
+              "secret":"INSERT_A_REAL_SECRET",
               "authorizationUrl":"https:\/\/fcp.integ01.dev-franceconnect.fr\/api\/v1\/authorize",
               "accessTokenUrl":"https:\/\/fcp.integ01.dev-franceconnect.fr\/api\/v1\/token",
               "userInfoUrl":"https:\/\/fcp.integ01.dev-franceconnect.fr\/api\/v1\/userinfo",
@@ -88,7 +88,7 @@ Scenario: Admin wants to update France Connect configuration and turn it to prod
       "input": {
         "environment": "PRODUCTION",
         "clientId": "account",
-        "secret": "***REMOVED***",
+        "secret": "INSERT_A_REAL_SECRET",
         "given_name": true,
         "family_name": true,
         "birthdate": true,
@@ -108,7 +108,7 @@ Scenario: Admin wants to update France Connect configuration and turn it to prod
       "updateFranceConnectSSOConfiguration": {
         "fcConfiguration": {
           "clientId": "account",
-          "secret": "***REMOVED***",
+          "secret": "INSERT_A_REAL_SECRET",
           "authorizationUrl": "https://app.franceconnect.gouv.fr/api/v1/authorize",
           "accessTokenUrl": "https://app.franceconnect.gouv.fr/api/v1/token",
           "userInfoUrl": "https://app.franceconnect.gouv.fr/api/v1/userinfo",

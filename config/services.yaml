@@ -61,8 +61,12 @@ parameters:
     twilio_default_alpha_sender_id: '%env(SYMFONY_TWILIO_DEFAULT_ALPHA_SENDER_ID)%'
     twilio_default_service_id: '%env(SYMFONY_TWILIO_DEFAULT_SERVICE_ID)%'
     default_super_admin_password: '%env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD)%'
+    default_facebook_client_id: '%env(SYMFONY_DEFAULT_FACEBOOK_CLIENT_ID)%'
+    default_facebook_secret: '%env(SYMFONY_DEFAULT_FACEBOOK_SECRET)%'
+    default_france_connect_client_id: '%env(SYMFONY_DEFAULT_FRANCE_CONNECT_CLIENT_ID)%'
+    default_france_connect_client_secret: '%env(SYMFONY_DEFAULT_FRANCE_CONNECT_CLIENT_SECRET)%'
     sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
-    google_maps_key: '%env(SYMFONY_GOOGLE_MAP_PUBLIC_KEY)%'
+    google_map_public_key: '%env(SYMFONY_GOOGLE_MAP_PUBLIC_KEY)%'
     mapbox_secret_key: '%env(SYMFONY_MAPBOX_SECRET_KEY)%'
     google_maps_key_server: '%env(SYMFONY_GOOGLE_MAP_SERVER_KEY)%'
     mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
@@ -88,6 +92,14 @@ parameters:
     cas_log_file_name: '%env(SYMFONY_PHPCAS_CONFIG_LOG_FILE_NAME)%'
     cas_certificate_file: '%env(SYMFONY_PHPCAS_CERTIFICATE_FILE)%'
     cas_verify_url_profile: '%env(SYMFONY_CAS_VERIFY_URL_PROFILE)%'
+    default_oauth_client_id: '%env(SYMFONY_DEFAULT_OAUTH_CLIENT_ID)%'
+    default_oauth_client_secret: '%env(SYMFONY_DEFAULT_OAUTH_CLIENT_SECRET)%'
+    default_oauth_authorization_url: '%env(SYMFONY_DEFAULT_OAUTH_AUTHORIZATION_URL)%'
+    default_oauth_access_token_url: '%env(SYMFONY_DEFAULT_OAUTH_ACCESS_TOKEN_URL)%'
+    default_oauth_access_user_info_url: '%env(SYMFONY_DEFAULT_OAUTH_USER_INFO_URL)%'
+    default_oauth_logout_url: '%env(SYMFONY_DEFAULT_OAUTH_LOGOUT_URL)%'
+    default_oauth_profile_url: '%env(SYMFONY_DEFAULT_OAUTH_PROFILE_URL)%'
+    default_redirectionio_project_id: '%env(SYMFONY_DEFAULT_REDIRECTIONIO_PROJECT_ID)%'
     #
     # Default env values :
     # Please do not put sensible data here.
@@ -158,6 +170,19 @@ parameters:
     env(SYMFONY_LOGPUSH_ELASTICSEARCH_USERNAME): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_LOGPUSH_ELASTICSEARCH_PASSWORD): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_LOGPUSH_ELASTICSEARCH_PORT): '443'
+    # SSO logins
+    env(SYMFONY_DEFAULT_FACEBOOK_CLIENT_ID): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_FACEBOOK_SECRET): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_FRANCE_CONNECT_CLIENT_ID): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_FRANCE_CONNECT_CLIENT_SECRET): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_OAUTH_CLIENT_ID): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_OAUTH_CLIENT_SECRET): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_OAUTH_AUTHORIZATION_URL): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_OAUTH_ACCESS_TOKEN_URL): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_OAUTH_USER_INFO_URL): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_OAUTH_LOGOUT_URL): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_OAUTH_PROFILE_URL): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_DEFAULT_REDIRECTIONIO_PROJECT_ID): 'INSERT_A_REAL_SECRET'
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead
