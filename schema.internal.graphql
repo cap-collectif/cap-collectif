@@ -13531,9 +13531,6 @@ enum SiteSettingsStatus {
   """Custom domain is not set."""
   IDLE
 
-  """Custom domain syntax is valid and waiting for cname validation."""
-  PENDING
-
   """The site redirects correctly to the custom domain."""
   ACTIVE
 }
@@ -14390,6 +14387,9 @@ enum UpdateCustomDomainErrorCode {
 
   """Error occured while updating the custom domain."""
   ERROR_DEPLOYER_API
+
+  """The given CNAME is not valid."""
+  CNAME_NOT_VALID
 }
 
 input UpdateCustomDomainInput {

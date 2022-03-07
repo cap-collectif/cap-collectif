@@ -27,15 +27,13 @@ class UpdateCustomDomainMutation implements MutationInterface
     private LoggerInterface $logger;
     private DeployerClient $deployerClient;
     private ValidatorInterface $validator;
-    private CustomDomainNotifier $notifier;
 
     public function __construct(
         EntityManagerInterface $em,
         SiteSettingsRepository $siteSettingsRepository,
         LoggerInterface        $logger,
         DeployerClient         $deployerClient,
-        ValidatorInterface     $validator,
-        CustomDomainNotifier   $notifier
+        ValidatorInterface     $validator
     )
     {
         $this->em = $em;
@@ -43,7 +41,6 @@ class UpdateCustomDomainMutation implements MutationInterface
         $this->logger = $logger;
         $this->deployerClient = $deployerClient;
         $this->validator = $validator;
-        $this->notifier = $notifier;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -81,19 +78,15 @@ class UpdateCustomDomainMutation implements MutationInterface
         }
 
         if (!$isCustomDomainCnameValid) {
-            $siteSettings->setStatus(SiteSettingsStatus::PENDING);
-            $this->em->persist($siteSettings);
-            $this->em->flush();
-            return ['siteSettings' => $siteSettings, 'errorCode' => null];
+            return ['siteSettings' => $siteSettings, 'errorCode' => self::CNAME_NOT_VALID];
         }
 
         try {
-            $statusCode = $this->deployerClient->addCustomDomain($customDomain);
+            $statusCode = $this->deployerClient->updateCurrentDomain($customDomain);
             if ($statusCode === 201) {
                 $siteSettings->setStatus(SiteSettingsStatus::ACTIVE);
                 $this->em->persist($siteSettings);
                 $this->em->flush();
-                $this->notifier->onCreation($siteSettings, $user);
                 return ['siteSettings' => $siteSettings, 'errorCode' => null];
             }
             return ['siteSettings' => $siteSettings, 'errorCode' => self::ERROR_DEPLOYER_API];

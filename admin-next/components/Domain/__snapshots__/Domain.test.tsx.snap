@@ -1,0 +1,426 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <form
+    className="sc-bdvvtL gHQeBM"
+    id="custom-domain-form"
+    onSubmit={[Function]}
+  >
+    <h4
+      className="sc-bdvvtL eXPDTP cap-heading"
+    >
+      domain.name
+    </h4>
+    <div
+      className="sc-bdvvtL cjIfaS"
+    >
+      <div
+        className="sc-bdvvtL fUkvrk"
+      >
+        <div
+          className="sc-bdvvtL jHnSQN"
+        >
+          <p
+            className="sc-bdvvtL gHQRXI cap-text"
+          >
+            capco.subdomain
+          </p>
+          <p
+            className="sc-bdvvtL dgPHnB cap-text"
+          >
+            capco.subdomain.description
+          </p>
+        </div>
+      </div>
+      <div
+        className="sc-bdvvtL PWSXW cap-form-control"
+        role="group"
+      >
+        <label
+          className="sc-bdvvtL dYOOYb cap-form-label"
+          htmlFor="subDomain"
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          <p
+            className="sc-bdvvtL bQcuRG cap-text"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            sub-domain
+          </p>
+        </label>
+        <input
+          aria-required={true}
+          className="sc-bdvvtL sc-dvQaRk eBJHkE iiODgr cap-input"
+          disabled={true}
+          id="subDomain"
+          name="subDomain"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="admiun.project.create.title.placeholder"
+          required={true}
+          type="text"
+          value="capco.domain.com"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-bdvvtL gUUfMC"
+    >
+      <div
+        className="sc-bdvvtL fUkvrk"
+      >
+        <div
+          className="sc-bdvvtL jHnSQN"
+        >
+          <p
+            className="sc-bdvvtL gHQRXI cap-text"
+          >
+            custom-domain
+          </p>
+          <p
+            className="sc-bdvvtL dgPHnB cap-text"
+          >
+            custom-domain.description
+          </p>
+        </div>
+      </div>
+      <div
+        className="sc-bdvvtL fUkvrk"
+      >
+        <div
+          className="sc-bdvvtL PWSXW cap-form-control"
+          role="group"
+        >
+          <label
+            className="sc-bdvvtL dYOOYb cap-form-label"
+            htmlFor="customDomain"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            <p
+              className="sc-bdvvtL bQcuRG cap-text"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              custom-domain-name
+            </p>
+          </label>
+          <span
+            className="sc-bdvvtL cVgtMc cap-form-guideline"
+          >
+            domain.must.point.to.cname
+            <p
+              className="sc-bdvvtL dgPHnB cap-text"
+            >
+              domain.save.help
+            </p>
+          </span>
+          <div
+            className="sc-bdvvtL gbfPVc cap-input-group"
+          >
+            <div
+              className="sc-bdvvtL jRlhBU"
+            >
+              <div
+                className="sc-bdvvtL bWjrXE sc-Galmp eCBqrg cap-tag"
+                style={Object {}}
+                title="custom.domain.com"
+              >
+                <p
+                  className="sc-bdvvtL kwYNUY cap-text cap-tag__label"
+                >
+                  custom.domain.com
+                </p>
+                <div
+                  aria-label="close"
+                  className="sc-bdvvtL eYHSJG cap-tag__closeButton"
+                  onClick={[Function]}
+                  role="button"
+                  style={
+                    Object {
+                      "opacity": 0,
+                      "right": "0rem",
+                    }
+                  }
+                >
+                  <svg
+                    className="sc-bdvvtL sc-eJwWfJ kfbHGA dMCrXP cap-icon"
+                    fill="none"
+                    viewBox="0 0 12 12"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 11L11 1M1 1l10 10"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={0.8}
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-label="delete-custom-domain"
+      aria-modal={true}
+      data-dialog={true}
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onBlur={[Function]}
+      onKeyDown={[Function]}
+      onTransitionEnd={[Function]}
+      role="dialog"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex={-1}
+    />
+  </form>,
+]
+`;
+
+exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <form
+    className="sc-bdvvtL gHQeBM"
+    id="custom-domain-form"
+    onSubmit={[Function]}
+  >
+    <h4
+      className="sc-bdvvtL eXPDTP cap-heading"
+    >
+      domain.name
+    </h4>
+    <div
+      className="sc-bdvvtL cjIfaS"
+    >
+      <div
+        className="sc-bdvvtL fUkvrk"
+      >
+        <div
+          className="sc-bdvvtL jHnSQN"
+        >
+          <p
+            className="sc-bdvvtL gHQRXI cap-text"
+          >
+            capco.subdomain
+          </p>
+          <p
+            className="sc-bdvvtL dgPHnB cap-text"
+          >
+            capco.subdomain.description
+          </p>
+        </div>
+      </div>
+      <div
+        className="sc-bdvvtL PWSXW cap-form-control"
+        role="group"
+      >
+        <label
+          className="sc-bdvvtL dYOOYb cap-form-label"
+          htmlFor="subDomain"
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          <p
+            className="sc-bdvvtL bQcuRG cap-text"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            sub-domain
+          </p>
+        </label>
+        <input
+          aria-required={true}
+          className="sc-bdvvtL sc-dvQaRk eBJHkE iiODgr cap-input"
+          disabled={true}
+          id="subDomain"
+          name="subDomain"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="admiun.project.create.title.placeholder"
+          required={true}
+          type="text"
+          value="capco.domain.com"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-bdvvtL gUUfMC"
+    >
+      <div
+        className="sc-bdvvtL fUkvrk"
+      >
+        <div
+          className="sc-bdvvtL jHnSQN"
+        >
+          <p
+            className="sc-bdvvtL gHQRXI cap-text"
+          >
+            custom-domain
+          </p>
+          <p
+            className="sc-bdvvtL dgPHnB cap-text"
+          >
+            custom-domain.description
+          </p>
+        </div>
+      </div>
+      <div
+        className="sc-bdvvtL fUkvrk"
+      >
+        <div
+          className="sc-bdvvtL PWSXW cap-form-control"
+          role="group"
+        >
+          <label
+            className="sc-bdvvtL dYOOYb cap-form-label"
+            htmlFor="customDomain"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            <p
+              className="sc-bdvvtL bQcuRG cap-text"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              custom-domain-name
+            </p>
+          </label>
+          <span
+            className="sc-bdvvtL cVgtMc cap-form-guideline"
+          >
+            domain.must.point.to.cname
+            <p
+              className="sc-bdvvtL dgPHnB cap-text"
+            >
+              domain.save.help
+            </p>
+          </span>
+          <div
+            className="sc-bdvvtL gbfPVc cap-input-group"
+          >
+            <input
+              className="sc-bdvvtL sc-dvQaRk eBJHkE iiODgr cap-input"
+              disabled={false}
+              id="customDomain"
+              name="customDomain"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="custom-domain-placeholder"
+              required={false}
+              type="text"
+            />
+            <button
+              className="sc-bdvvtL sc-lcepkR johlmz igzsNu cap-button"
+              disabled={true}
+              type="submit"
+            >
+              global.use
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-label="delete-custom-domain"
+      aria-modal={true}
+      data-dialog={true}
+      hidden={true}
+      id="id-g"
+      onAnimationEnd={[Function]}
+      onBlur={[Function]}
+      onKeyDown={[Function]}
+      onTransitionEnd={[Function]}
+      role="dialog"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex={-1}
+    />
+  </form>,
+]
+`;

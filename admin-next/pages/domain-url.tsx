@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
 import RedirectionIO from '../components/RedirectionIO/RedirectionIO';
+import Domain from '../components/Domain/Domain';
 
 const DomainUrl: FC = () => {
     const intl = useIntl();
@@ -12,6 +13,7 @@ const DomainUrl: FC = () => {
     return (
         <Layout navTitle={intl.formatMessage({ id: 'domain.and.url' })}>
             <Suspense fallback={<Loader />}>
+                <Domain/>
                 <RedirectionIO />
             </Suspense>
         </Layout>

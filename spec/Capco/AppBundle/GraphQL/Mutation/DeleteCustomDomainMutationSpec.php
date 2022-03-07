@@ -33,18 +33,18 @@ class DeleteCustomDomainMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         DeployerClient $deployerClient
     ) {
-        $customDomain = 'domain.capco.com';
+        $capcoDomain = 'domain.capco.com';
         $siteSettingsRepository
             ->findSiteSetting()
             ->shouldBeCalledOnce()
             ->willReturn($siteSettings);
         $siteSettings
-            ->getCustomDomain()
+            ->getCapcoDomain()
             ->shouldBeCalledOnce()
-            ->willReturn($customDomain);
+            ->willReturn($capcoDomain);
 
         $statusCode = '400';
-        $deployerClient->deleteCustomDomain($customDomain)->willReturn($statusCode);
+        $deployerClient->updateCurrentDomain($capcoDomain)->willReturn($statusCode);
 
         $siteSettings->setCustomDomain(null)->shouldNotBeCalled();
         $siteSettings->setStatus(SiteSettingsStatus::IDLE)->shouldNotBeCalled();
@@ -63,18 +63,18 @@ class DeleteCustomDomainMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         DeployerClient $deployerClient
     ) {
-        $customDomain = 'domain.capco.com';
+        $capcoDomain = 'domain.capco.com';
         $siteSettingsRepository
             ->findSiteSetting()
             ->shouldBeCalledOnce()
             ->willReturn($siteSettings);
         $siteSettings
-            ->getCustomDomain()
+            ->getCapcoDomain()
             ->shouldBeCalledOnce()
-            ->willReturn($customDomain);
+            ->willReturn($capcoDomain);
 
-        $statusCode = '204';
-        $deployerClient->deleteCustomDomain($customDomain)->willReturn($statusCode);
+        $statusCode = '201';
+        $deployerClient->updateCurrentDomain($capcoDomain)->willReturn($statusCode);
 
         $siteSettings->setCustomDomain(null)->shouldBeCalledOnce();
         $siteSettings->setStatus(SiteSettingsStatus::IDLE)->shouldBeCalledOnce();

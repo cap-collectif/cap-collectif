@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should render correctly 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    aria-label="delete-custom-domain"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bdvvtL hzfKcR sc-fbyfCU cap-modal__overlay"
+      onClick={[Function]}
+      style={
+        Object {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="sc-bdvvtL eyMQxL sc-GEbAx gKTrBI cap-modal"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+          }
+        }
+      >
+        <header
+          className="sc-bdvvtL ijabiQ cap-modal__header"
+        >
+          <div
+            className="sc-bdvvtL hJgXxS"
+          >
+            <h2
+              className="sc-bdvvtL bTHMhT cap-heading"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              are-you-sure-you-want-to-delete-your-custom-domain-name
+            </h2>
+          </div>
+          <button
+            className="sc-bdvvtL cYwHQC"
+            onClick={[Function]}
+          >
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ jxcAbw icfuGT cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+        <main
+          className="sc-bdvvtL kAxhVk cap-modal__footer"
+        >
+          <p
+            className="sc-bdvvtL fSiVqj cap-text"
+          >
+            custom-domain-delete-confirmation-message
+          </p>
+          <label
+            checked={false}
+            className="sc-bdvvtL kGdEVS"
+            htmlFor="agree-checkbox"
+            onChange={[Function]}
+          >
+            <div
+              className="sc-bdvvtL RvMdm cap-checkbox"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              <input
+                checked={false}
+                className="sc-bdvvtL fgNIRM cap-checkbox__input"
+                id="agree-checkbox"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="checkbox"
+              />
+              <div
+                className="sc-bdvvtL ialReI cap-checkbox__box"
+              />
+            </div>
+            <span
+              className="sc-bdvvtL dPuepn cap-text"
+            >
+              admin.project.delete.confirm
+            </span>
+          </label>
+        </main>
+        <footer
+          className="sc-bdvvtL cnmiif cap-modal__footer"
+        >
+          <div
+            className="sc-bdvvtL gFvFYr cap-buttonGroup"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            <button
+              className="sc-bdvvtL sc-lcepkR fzwTIb itSeml cap-button"
+              onClick={[Function]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              cancel
+            </button>
+            <button
+              className="sc-bdvvtL sc-lcepkR fzwTIb ixkmkg cap-button"
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              global.delete
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;

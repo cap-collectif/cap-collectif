@@ -6,7 +6,6 @@ use Capco\AppBundle\Client\DeployerClient;
 use Capco\AppBundle\Entity\SiteSettings;
 use Capco\AppBundle\Enum\SiteSettingsStatus;
 use Capco\AppBundle\GraphQL\Mutation\UpdateCustomDomainMutation;
-use Capco\AppBundle\Notifier\CustomDomainNotifier;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
 use Capco\AppBundle\Validator\Constraints\CheckCustomDomainConstraint;
 use PhpSpec\ObjectBehavior;
@@ -26,8 +25,7 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         SiteSettingsRepository $siteSettingsRepository,
         LoggerInterface $logger,
         DeployerClient $deployerClient,
-        ValidatorInterface $validator,
-        CustomDomainNotifier $notifier
+        ValidatorInterface $validator
     ) {
         $this->beConstructedWith(
             $em,
@@ -35,7 +33,6 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
             $logger,
             $deployerClient,
             $validator,
-            $notifier
         );
     }
 
@@ -117,7 +114,6 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         Arg $input,
         User $user,
         SiteSettings $siteSettings,
-        EntityManagerInterface $em,
         ValidatorInterface $validator,
         ConstraintViolationInterface $violation
     ) {
@@ -132,10 +128,6 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
             ->willReturn($siteSettings);
         $siteSettings->setCustomDomain($customDomain)->shouldBeCalledOnce();
 
-        $siteSettings->setStatus(SiteSettingsStatus::PENDING)->shouldBeCalledOnce();
-        $em->persist(Argument::type(SiteSettings::class))->shouldBeCalledOnce();
-        $em->flush()->shouldBeCalledOnce();
-
         $violations = new ConstraintViolationList([$violation->getWrappedObject()]);
         $validator
             ->validate($customDomain, Argument::type(CheckCustomDomainConstraint::class))
@@ -148,7 +140,7 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
 
         $payload = $this->__invoke($input, $user);
         $payload->shouldHaveCount(2);
-        $payload['errorCode']->shouldBe(null);
+        $payload['errorCode']->shouldBe(UpdateCustomDomainMutation::CNAME_NOT_VALID);
         $payload['siteSettings']->shouldHaveType(SiteSettings::class);
     }
 
@@ -159,8 +151,7 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         SiteSettings $siteSettings,
         EntityManagerInterface $em,
         ValidatorInterface $validator,
-        DeployerClient $deployerClient,
-        CustomDomainNotifier $notifier
+        DeployerClient $deployerClient
     ) {
         $customDomain = 'domain.com';
         $input
@@ -179,10 +170,9 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($violations);
 
-        $deployerClient->addCustomDomain($customDomain)->willReturn(400);
+        $deployerClient->updateCurrentDomain($customDomain)->willReturn(400);
         $em->persist(Argument::type(SiteSettings::class))->shouldNotBeCalled();
         $em->flush()->shouldNotBeCalled();
-        $notifier->onCreation($siteSettings, $user);
 
         $payload = $this->__invoke($input, $user);
         $payload->shouldHaveCount(2);
@@ -197,8 +187,7 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         SiteSettings $siteSettings,
         EntityManagerInterface $em,
         ValidatorInterface $validator,
-        DeployerClient $deployerClient,
-        CustomDomainNotifier $notifier
+        DeployerClient $deployerClient
     ) {
         $customDomain = 'domain.com';
         $input
@@ -218,13 +207,12 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
             ->willReturn($violations);
 
         $deployerClient
-            ->addCustomDomain($customDomain)
+            ->updateCurrentDomain($customDomain)
             ->shouldBeCalledOnce()
             ->willReturn(201);
         $siteSettings->setStatus(SiteSettingsStatus::ACTIVE)->shouldBeCalledOnce();
         $em->persist(Argument::type(SiteSettings::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
-        $notifier->onCreation($siteSettings, $user)->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input, $user);
         $payload->shouldHaveCount(2);

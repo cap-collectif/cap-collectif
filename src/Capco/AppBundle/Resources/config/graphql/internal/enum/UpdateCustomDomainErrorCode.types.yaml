@@ -10,3 +10,6 @@ UpdateCustomDomainErrorCode:
             ERROR_DEPLOYER_API:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCustomDomainMutation::ERROR_DEPLOYER_API")'
                 description: 'Error occured while updating the custom domain.'
+            CNAME_NOT_VALID:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCustomDomainMutation::CNAME_NOT_VALID")'
+                description: 'The given CNAME is not valid.'

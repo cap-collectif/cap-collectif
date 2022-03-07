@@ -30,15 +30,15 @@ class DeleteCustomDomainMutation implements MutationInterface
     public function __invoke(Argument $input): array
     {
         $siteSettings = $this->siteSettingsRepository->findSiteSetting();
-        $customDomain = $siteSettings->getCustomDomain();
+        $capcoDomain = $siteSettings->getCapcoDomain();
 
         try {
-            $statusCode = $this->deployerClient->deleteCustomDomain($customDomain);
+            $statusCode = $this->deployerClient->updateCurrentDomain($capcoDomain);
         } catch (\Exception $e) {
             return ['siteSettings' => $siteSettings, 'errorCode' => self::ERROR_DEPLOYER_API];
         }
 
-        if ($statusCode === 204) {
+        if ($statusCode === 201) {
             $siteSettings->setCustomDomain(null);
             $siteSettings->setStatus(SiteSettingsStatus::IDLE);
             $this->em->flush();

@@ -13,4 +13,3 @@ InternalSiteSettings:
             status:
                 type: 'InternalSiteSettingsStatus'
                 description: 'The status of the domain change.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SiteSettings\\SiteSettingsStatusResolver", [value, getUser()])'

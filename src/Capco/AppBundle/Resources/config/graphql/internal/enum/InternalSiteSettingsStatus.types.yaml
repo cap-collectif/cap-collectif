@@ -7,9 +7,6 @@ InternalSiteSettingsStatus:
             IDLE:
                 value: '@=constant("Capco\\AppBundle\\Enum\\SiteSettingsStatus::IDLE")'
                 description: 'Custom domain is not set.'
-            PENDING:
-                value: '@=constant("Capco\\AppBundle\\Enum\\SiteSettingsStatus::PENDING")'
-                description: 'Custom domain syntax is valid and waiting for cname validation.'
             ACTIVE:
                 value: '@=constant("Capco\\AppBundle\\Enum\\SiteSettingsStatus::ACTIVE")'
                 description: 'The site redirects correctly to the custom domain.'
