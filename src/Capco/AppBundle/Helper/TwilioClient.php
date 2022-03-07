@@ -2,103 +2,122 @@
 
 namespace Capco\AppBundle\Helper;
 
+use Capco\AppBundle\Entity\ExternalServiceConfiguration;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Twilio\Exceptions\TwilioException;
+use Twilio\Rest\Api\V2010\AccountInstance;
 use Twilio\Rest\Client;
-use Twilio\Rest\Messaging\V1\Service\AlphaSenderInstance;
-use Twilio\Rest\Messaging\V1\ServiceInstance;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Twilio\Rest\Api\V2010\Account\MessageInstance;
 
 class TwilioClient
 {
-    private const SENDER_NAME_MAX_LENGTH = 11;
-
     // see https://www.twilio.com/docs/api/errors
     public const ERRORS = [
-        'INVALID_TO_NUMBER' => 21211
+        'INVALID_PARAMETER' => 60200,
+        'NOT_FOUND' => 20404,
     ];
-
 
     private Client $client;
     private ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
-    private ValidatorInterface $validator;
+    private HttpClientInterface $httpClient;
 
-    public function __construct(ExternalServiceConfigurationRepository $externalServiceConfigurationRepository, ValidatorInterface $validator, string $twilioSid, string $twilioToken)
-    {
+    public function __construct(
+        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
+        string $twilioSid,
+        string $twilioToken,
+        HttpClientInterface $httpClient
+    ) {
         $this->client = new Client($twilioSid, $twilioToken);
         $this->externalServiceConfigurationRepository = $externalServiceConfigurationRepository;
-        $this->validator = $validator;
+        $this->httpClient = $httpClient;
     }
 
-    public function send(string $to, string $body, string $messagingServiceSid): MessageInstance
+    public function sendVerificationCode(string $phone): array
     {
-        return $this->client->messages->create($to, [
-            'messagingServiceSid' => $messagingServiceSid,
-            'body' => $body,
+        $serviceSid = $this->getVerifyServiceSid();
+
+        $url = "https://verify.twilio.com/v2/Services/{$serviceSid}/Verifications";
+        $response = $this->httpClient->request('POST', $url, [
+            'auth_basic' => $this->getSubAccountCredentials(),
+            'body' => ['To' => $phone, 'Channel' => 'sms'],
         ]);
+
+        return [
+            'statusCode' => $response->getStatusCode(),
+            'data' => $response->toArray(false),
+        ];
+    }
+
+    public function checkVerificationCode(string $phone, string $code): array
+    {
+        $serviceSid = $this->getVerifyServiceSid();
+        $url = "https://verify.twilio.com/v2/Services/{$serviceSid}/VerificationCheck";
+        $response = $this->httpClient->request('POST', $url, [
+            'auth_basic' => $this->getSubAccountCredentials(),
+            'body' => ['To' => $phone, 'Code' => $code],
+        ]);
+
+        return [
+            'statusCode' => $response->getStatusCode(),
+            'data' => $response->toArray(false),
+        ];
+    }
+
+    public function createVerifyService(string $serviceName): array
+    {
+        $url = 'https://verify.twilio.com/v2/Services';
+        $response = $this->httpClient->request('POST', $url, [
+            'auth_basic' => $this->getSubAccountCredentials(),
+            'body' => ['FriendlyName' => $serviceName],
+        ]);
+
+        return [
+            'statusCode' => $response->getStatusCode(),
+            'data' => $response->toArray(false),
+        ];
+    }
+
+    public function updateVerifyService(string $serviceName): array
+    {
+        $serviceSid = $this->getVerifyServiceSid();
+        $url = "https://verify.twilio.com/v2/Services/{$serviceSid}";
+        $response = $this->httpClient->request('POST', $url, [
+            'auth_basic' => $this->getSubAccountCredentials(),
+            'body' => ['FriendlyName' => $serviceName],
+        ]);
+
+        return [
+            'statusCode' => $response->getStatusCode(),
+            'data' => $response->toArray(false),
+        ];
     }
 
     /**
      * @throws TwilioException
      */
-    public function createService(string $serviceName): ServiceInstance
+    public function createSubAccount(string $name): AccountInstance
     {
-        return $this->client->messaging->v1->services->create($serviceName);
+        return $this->client->api->v2010->accounts->create(['friendlyName' => $name]);
     }
 
-    /**
-     * @throws TwilioException
-     */
-    public function createAlphaSender(string $senderName): AlphaSenderInstance
-    {
-        $serviceId = $this->getServiceId();
-
-        return $this->client->messaging->v1
-            ->services($serviceId)
-            ->alphaSenders->create($senderName);
-    }
-
-    /**
-     * @throws TwilioException
-     */
-    public function deleteAlphaSender(string $alphaSenderSid): bool
-    {
-        $serviceId = $this->getServiceId();
-
-        return $this->client->messaging->v1
-            ->services($serviceId)
-            ->alphaSenders($alphaSenderSid)
-            ->delete();
-    }
-
-    public function getServiceId(): ?string
+    private function getVerifyServiceSid(): string
     {
         $config = $this->externalServiceConfigurationRepository->findOneBy([
-            'type' => 'twilio_service_id',
+            'type' => ExternalServiceConfiguration::TWILIO_VERIFY_SERVICE_SID,
         ]);
 
-        return $config ? $config->getValue() : null;
+        return $config->getValue();
     }
 
-    /**
-     * Twilio docs : https://www.twilio.com/docs/api/errors/21709
-     * Alphanumeric Sender IDs may be up to 11 characters. Accepted characters include both upper- and lower-case ASCII letters, the digits 0 through 9, and space: A-Z, a-z, 0-9. They may not be only numbers.
-     */
-    public function isSenderNameValid(string $name): bool
+    private function getSubAccountCredentials(): array
     {
-        $formatConstraint = new Assert\Regex(['pattern' => '/^[A-Za-z0-9]+$/']);
-        $notOnlyNumberConstraint = new Assert\Regex(['pattern' => '/^[0-9]+$/', 'match' => false]);
-        $lengthConstraint = new Assert\Length(['max' => self::SENDER_NAME_MAX_LENGTH]);
-
-        $errors = $this->validator->validate($name, [
-            $formatConstraint,
-            $lengthConstraint,
-            $notOnlyNumberConstraint
+        $sid = $this->externalServiceConfigurationRepository->findOneBy([
+            'type' => ExternalServiceConfiguration::TWILIO_SUBACCOUNT_SID,
+        ]);
+        $token = $this->externalServiceConfigurationRepository->findOneBy([
+            'type' => ExternalServiceConfiguration::TWILIO_SUBACCOUNT_AUTH_TOKEN,
         ]);
 
-        return $errors->count() === 0;
+        return [$sid->getValue(), $token->getValue()];
     }
-
 }

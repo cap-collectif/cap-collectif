@@ -1,0 +1,8 @@
+UpdateTwilioVerifyServiceInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateTwilioVerifyService mutation.'
+        fields:
+            serviceName:
+                type: 'String!'
+                description: 'The updated service name.'

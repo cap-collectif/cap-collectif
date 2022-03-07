@@ -1,0 +1,11 @@
+UpdateTwilioVerifyServicePayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of the updateTwilioVerifyService mutation.'
+        fields:
+            serviceName:
+                type: 'String'
+                description: 'The updated service name.'
+            errorCode:
+                type: 'UpdateTwilioVerifyServiceErrorCode'
+                description: 'The error code, if failing.'

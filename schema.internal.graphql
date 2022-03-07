@@ -3568,24 +3568,39 @@ type CreateSenderEmailPayload {
   clientMutationId: String
 }
 
-"""Available errors for an `createTwilioServiceMutation` mutation."""
-enum CreateTwilioServiceErrorCode {
-  """The service could not be created"""
-  COULD_NOT_CREATE_SERVICE
-
-  """The given sender name is invalid"""
-  INVALID_SENDER_NAME
+"""Available errors for an `createTwilioSubAccount` mutation."""
+enum CreateTwilioSubAccountErrorCode {
+  """Error occured while calling twilio API."""
+  TWILIO_API_ERROR
 }
 
-input CreateTwilioServiceInput {
+input CreateTwilioSubAccountInput {
+  """The twilio sub account name."""
+  name: String!
+  clientMutationId: String
+}
+
+type CreateTwilioSubAccountPayload {
+  """The error generated, if any."""
+  errorCode: CreateTwilioSubAccountErrorCode
+  clientMutationId: String
+}
+
+"""Available errors for an `createTwilioVerifyService` mutation."""
+enum CreateTwilioVerifyServiceErrorCode {
+  """Error occured while calling twilio API."""
+  TWILIO_API_ERROR
+}
+
+input CreateTwilioVerifyServiceInput {
   """The name given to the service."""
   serviceName: String!
   clientMutationId: String
 }
 
-type CreateTwilioServicePayload {
+type CreateTwilioVerifyServicePayload {
   """The error code, if failing."""
-  errorCode: CreateTwilioServiceErrorCode
+  errorCode: CreateTwilioVerifyServiceErrorCode
 
   """The created service name."""
   serviceName: String
@@ -5800,14 +5815,17 @@ enum ExternalServiceConfigurationType {
   """Choice of the external mailer client : mandrill or mailjet."""
   MAILER
 
-  """Twilio service Id."""
-  TWILIO_SERVICE_ID
+  """Twilio verify service sid."""
+  TWILIO_VERIFY_SERVICE_SID
 
-  """Twilio alpha sender Id."""
-  TWILIO_ALPHA_SENDER_ID
+  """Twilio verify service name."""
+  TWILIO_VERIFY_SERVICE_NAME
 
-  """Twilio alpha sender name."""
-  TWILIO_ALPHA_SENDER_NAME
+  """Twilio subaccount sid."""
+  TWILIO_SUBACCOUNT_SID
+
+  """Twilio subaccount auth token."""
+  TWILIO_SUBACCOUNT_AUTH_TOKEN
 }
 
 """Facebook SSO Configuration."""
@@ -7347,13 +7365,14 @@ type Mutation {
   checkIdentificationCode(input: CheckIdentificationCodeInput!): CheckIdentificationCodePayload
   deleteUserIdentificationCodeList(input: DeleteUserIdentificationCodeListInput!): DeleteUserIdentificationCodeListPayload
   createUserIdentificationCodeList(input: CreateUserIdentificationCodeListInput!): CreateUserIdentificationCodeListPayload
-  createTwilioServiceMutation(input: CreateTwilioServiceInput!): CreateTwilioServicePayload
-  updateTwilioAlphaSenderMutation(input: UpdateTwilioAlphaSenderInput!): UpdateTwilioAlphaSenderPayload
+  createTwilioVerifyService(input: CreateTwilioVerifyServiceInput!): CreateTwilioVerifyServicePayload
+  updateTwilioVerifyService(input: UpdateTwilioVerifyServiceInput!): UpdateTwilioVerifyServicePayload
   sendSmsPhoneValidationCode(input: SendSmsPhoneValidationCodeInput!): SendSmsPhoneValidationCodePayload
   updateProposalStepPaperVoteCounter(input: UpdateProposalStepPaperVoteCounterInput!): UpdateProposalStepPaperVoteCounterPayload
   verifyUserPhoneNumber(input: VerifyUserPhoneNumberInput!): VerifyUserPhoneNumberPayload
   updateCustomDomain(input: UpdateCustomDomainInput!): UpdateCustomDomainPayload
   deleteCustomDomain(input: DeleteCustomDomainInput!): DeleteCustomDomainPayload
+  createTwilioSubAccount(input: CreateTwilioSubAccountInput!): CreateTwilioSubAccountPayload
 }
 
 """A connection to a list of items."""
@@ -13247,9 +13266,6 @@ type SendEmailingCampaignPayload {
 
 """Available errors for an `sendSmsPhoneValidationCode` mutation."""
 enum SendSmsPhoneValidationCodeErrorCode {
-  """The sms could not be delivered"""
-  UNDELIVERED
-
   """The given number is invalid"""
   INVALID_NUMBER
 
@@ -13259,8 +13275,8 @@ enum SendSmsPhoneValidationCodeErrorCode {
   """The user has already confirmed his phone number"""
   PHONE_ALREADY_CONFIRMED
 
-  """The twilio messaging service needs to be created"""
-  MESSAGING_SERVICE_ID_NOT_FOUND
+  """An error occured while calling twilio api"""
+  TWILIO_API_ERROR
 }
 
 input SendSmsPhoneValidationCodeInput {
@@ -15592,27 +15608,24 @@ type UpdateSiteParameterPayload {
   clientMutationId: String
 }
 
-"""Available errors for an `updateTwilioAlphaSenderMutation` mutation."""
-enum UpdateTwilioAlphaSenderErrorCode {
-  """The alpha sender name could not be updated"""
-  COULD_NOT_UPDATE_ALPHA_SENDER
-
-  """The alpha sender id was not found"""
-  ALPHA_SENDER_ID_NOT_FOUND
+"""Available errors for an `updateTwilioVerifyService` mutation."""
+enum UpdateTwilioVerifyServiceErrorCode {
+  """Error occured while calling twilio API."""
+  TWILIO_API_ERROR
 }
 
-input UpdateTwilioAlphaSenderInput {
-  """The updated alpha sender name."""
-  alphaSenderName: String!
+input UpdateTwilioVerifyServiceInput {
+  """The updated service name."""
+  serviceName: String!
   clientMutationId: String
 }
 
-type UpdateTwilioAlphaSenderPayload {
-  """The error code, if failing."""
-  errorCode: UpdateTwilioAlphaSenderErrorCode
+type UpdateTwilioVerifyServicePayload {
+  """The updated service name."""
+  serviceName: String
 
-  """The updated alpha sender name."""
-  alphaSenderName: String
+  """The error code, if failing."""
+  errorCode: UpdateTwilioVerifyServiceErrorCode
   clientMutationId: String
 }
 
@@ -16670,6 +16683,9 @@ enum VerifyUserPhoneNumberErrorCode {
 
   """The given code is not valid."""
   CODE_NOT_VALID
+
+  """An error occured while calling twilio api."""
+  TWILIO_API_ERROR
 }
 
 input VerifyUserPhoneNumberInput {

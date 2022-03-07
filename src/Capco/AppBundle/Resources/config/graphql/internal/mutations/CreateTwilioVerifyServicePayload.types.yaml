@@ -1,10 +1,10 @@
-CreateTwilioServicePayload:
+CreateTwilioVerifyServicePayload:
     type: relay-mutation-payload
     config:
-        description: 'Payload of the createTwilioService mutation.'
+        description: 'Payload of the createTwilioVerifyService mutation.'
         fields:
             errorCode:
-                type: 'CreateTwilioServiceErrorCode'
+                type: 'CreateTwilioVerifyServiceErrorCode'
                 description: 'The error code, if failing.'
             serviceName:
                 type: 'String'

@@ -1,14 +1,16 @@
 Capco\AppBundle\Entity\ExternalServiceConfiguration:
-  Mailer:
-    type: 'mailer'
-    value: 'mandrill'
-  TwilioAlphaSenderId:
-    type: 'twilio_alpha_sender_id'
-    value: <{twilio_default_alpha_sender_id}> 
-  TwilioAlphaSenderName:
-    type: 'twilio_alpha_sender_name'
-    value: 'dev'
-  TwilioServiceId:
-    type: 'twilio_service_id'
-    value: <{twilio_default_service_id}> 
-
+    Mailer:
+        type: 'mailer'
+        value: 'mandrill'
+    TwilioSubAccountAuthToken:
+        type: 'twilio_subaccount_auth_token'
+        value: <{twilio_default_subaccount_token}>
+    TwilioSubAccountSid:
+        type: 'twilio_subaccount_sid'
+        value: <{twilio_default_subaccount_sid}>
+    TwilioVerifyServiceSid:
+        type: 'twilio_verify_service_sid'
+        value: <{twilio_default_verify_service_id}>
+    TwilioVerifyServiceName:
+        type: 'twilio_verify_service_name'
+        value: 'test_dev_service'

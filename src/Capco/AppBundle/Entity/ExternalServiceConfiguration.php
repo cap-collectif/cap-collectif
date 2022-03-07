@@ -15,15 +15,17 @@ class ExternalServiceConfiguration
     public const MAILER_MAILJET = 'mailjet';
     public const TYPE_MAILER = 'mailer';
 
-    public const TWILIO_SERVICE_ID = 'twilio_service_id';
-    public const TWILIO_ALPHA_SENDER_ID = 'twilio_alpha_sender_id';
-    public const TWILIO_ALPHA_SENDER_NAME = 'twilio_alpha_sender_name';
+    public const TWILIO_VERIFY_SERVICE_SID = 'twilio_verify_service_sid';
+    public const TWILIO_VERIFY_SERVICE_NAME = 'twilio_verify_service_name';
+    public const TWILIO_SUBACCOUNT_SID = 'twilio_subaccount_sid';
+    public const TWILIO_SUBACCOUNT_AUTH_TOKEN = 'twilio_subaccount_auth_token';
 
     public const TYPES = [
         self::TYPE_MAILER,
-        self::TWILIO_SERVICE_ID,
-        self::TWILIO_ALPHA_SENDER_ID,
-        self::TWILIO_ALPHA_SENDER_NAME,
+        self::TWILIO_VERIFY_SERVICE_SID,
+        self::TWILIO_VERIFY_SERVICE_NAME,
+        self::TWILIO_SUBACCOUNT_SID,
+        self::TWILIO_SUBACCOUNT_AUTH_TOKEN,
     ];
     public const AVAILABLE_VALUES = [
         self::TYPE_MAILER => [self::MAILER_MANDRILL, self::MAILER_MAILJET],

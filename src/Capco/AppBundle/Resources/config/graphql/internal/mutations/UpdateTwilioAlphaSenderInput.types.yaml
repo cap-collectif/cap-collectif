@@ -1,8 +1,0 @@
-UpdateTwilioAlphaSenderInput:
-    type: relay-mutation-input
-    config:
-        description: 'Input of updateTwilioAlphaSenderMutation mutation.'
-        fields:
-            alphaSenderName:
-                type: 'String!'
-                description: 'The updated alpha sender name.'
