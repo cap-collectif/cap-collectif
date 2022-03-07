@@ -8639,6 +8639,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
   hasAnalysis: Boolean!
 
   """Count of paper votes on the project."""

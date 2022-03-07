@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -14,9 +15,11 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectHeaderType;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\LocalizableTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
+use Capco\AppBundle\Traits\TimeRangeableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
@@ -35,12 +38,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasUserGroupIdVisibilityGroup()
  */
-class Project implements IndexableInterface
+class Project implements IndexableInterface, TimeRangeable
 {
     use LocalizableTrait;
     use MetaDescriptionCustomCodeTrait;
     use ProjectVisibilityTrait;
     use UuidTrait;
+    use DateHelperTrait;
+    use TimeRangeableTrait;
 
     public const FILTER_ALL = 'all';
 
@@ -254,6 +259,10 @@ class Project implements IndexableInterface
      * @ORM\ManyToOne(targetEntity=User::class)
      */
     private $owner;
+
+    private ?\DateTime $startAt = null;
+
+    private ?\DateTime $endAt = null;
 
     public function __construct()
     {
@@ -726,7 +735,34 @@ class Project implements IndexableInterface
 
     public function getStartAt(): ?\DateTime
     {
-        return $this->getCurrentStep() ? $this->getCurrentStep()->getStartAt() : null;
+        $startAt = null;
+        /** * @var $step ProjectAbstractStep  */
+        foreach ($this->steps as $step) {
+            if (!$startAt) {
+                $startAt = $step->getStep()->getStartAt();
+                continue;
+            }
+            if ($step->getStep()->getStartAt() < $startAt) {
+                $startAt = $step->getStep()->getStartAt();
+            }
+        }
+        return $startAt;
+    }
+
+    public function getEndAt(): ?\DateTime
+    {
+        $endAt = null;
+        /** * @var $step ProjectAbstractStep  */
+        foreach ($this->steps as $step) {
+            if (!$endAt) {
+                $endAt = $step->getStep()->getEndAt();
+                continue;
+            }
+            if ($step->getStep()->getEndAt() > $endAt) {
+                $endAt = $step->getStep()->getEndAt();
+            }
+        }
+        return $endAt;
     }
 
     public function getCurrentStep(): ?AbstractStep

@@ -5,6 +5,7 @@ InternalProject:
         - UniformResourceAdminLocatable
         - InternalWithProposals
         - InternalPrimaryKey
+        - InternalTimeRangeable
     config:
         name: Project
         interfaces:
