@@ -23,11 +23,11 @@ Group:
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     emailConfirmed:
-                        type: 'Boolean'
-                        defaultValue: null
+                        type: Boolean
+                        defaultValue: true
                         description: 'Filter the list by email confirmation'
                     consentInternalCommunication:
-                        type: 'Boolean'
+                        type: Boolean
                         defaultValue: null
                         description: 'Filter the list by consent to internal communication'
                 description: 'Get all users of the group.'
@@ -41,3 +41,7 @@ Group:
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all userInvite who are still pending'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupPendingInvitationsResolver", [value, args])'
+            isUsedInEmailing:
+                type: Boolean!
+                description: 'Whether or not group is used in emailing campaign'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupIsUsedInEmailingCampaignResolver", [value, args])'

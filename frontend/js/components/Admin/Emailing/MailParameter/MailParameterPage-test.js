@@ -20,6 +20,7 @@ const baseProps = {
     mailingList: {
       id: 'mailingList123',
     },
+    emailingGroup: null,
     mailingInternal: null,
     sendAt: '2030-03-11 00:00:00',
     status: 'DRAFT',
@@ -40,6 +41,16 @@ const props = {
       status: 'SENT',
     },
   },
+  group: {
+    ...baseProps,
+    emailingCampaign: {
+      ...baseProps.emailingCampaign,
+      mailingList: null,
+      emailingGroup: {
+        id: 'group2',
+      },
+    },
+  },
 };
 
 describe('<MailParameterPage />', () => {
@@ -50,6 +61,10 @@ describe('<MailParameterPage />', () => {
 
   it('should renders correctly when disabled', () => {
     const wrapper = shallow(<MailParameterPage {...props.disabled} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should renders correctly with emailing group', () => {
+    const wrapper = shallow(<MailParameterPage {...props.group} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

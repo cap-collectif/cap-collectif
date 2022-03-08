@@ -54,7 +54,7 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
       className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
     >
       <div
-        className="form-group  "
+        className="form-group"
       >
         <label
           className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"

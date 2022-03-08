@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Entity\ActionToken;
 use Capco\AppBundle\Entity\EmailingCampaign;
+use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\SendEmailingCampaignErrorCode;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\EmailingCampaignMessage;
@@ -101,6 +102,9 @@ class EmailingCampaignSender
         if ($emailingCampaign->getMailingInternal()) {
             return $this->getRecipientsFromInternalList($emailingCampaign->getMailingInternal());
         }
+        if ($emailingCampaign->getEmailingGroup()) {
+            return $this->getRecipientsFromUserGroup($emailingCampaign->getEmailingGroup());
+        }
 
         throw new UserError(SendEmailingCampaignErrorCode::CANNOT_BE_SENT);
     }
@@ -109,6 +113,13 @@ class EmailingCampaignSender
     {
         return new ArrayCollection(
             ($users = $this->userRepository->getFromInternalList($internalList))
+        );
+    }
+
+    private function getRecipientsFromUserGroup(Group $group): Collection
+    {
+        return new ArrayCollection(
+            ($users = $this->userRepository->getUsersInGroup($group, 0, 1000, true))
         );
     }
 }

@@ -39,6 +39,10 @@ class EmailingCampaignType extends AbstractType
                 'class' => MailingList::class,
                 'required' => false,
             ])
+            ->add('emailingGroup', EntityType::class, [
+                'class' => Group::class,
+                'required' => false,
+            ])
             ->add('mailingInternal', ChoiceType::class, [
                 'choices' => EmailingCampaignInternalList::ALL,
                 'required' => false,

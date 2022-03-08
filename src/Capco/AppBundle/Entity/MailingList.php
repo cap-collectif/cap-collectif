@@ -79,6 +79,7 @@ class MailingList
     public function getUsersWithValidEmail(bool $consentInternalOnly = false): Collection
     {
         $usersWithValidEmail = new ArrayCollection();
+        /** @var User $user */
         foreach ($this->users as $user) {
             if ($user->getEmail()) {
                 if (!$consentInternalOnly || $user->isConsentInternalCommunication()) {

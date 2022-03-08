@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
+use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\EmailingCampaignAffiliation;
 use Capco\UserBundle\Entity\User;
@@ -67,5 +68,15 @@ class EmailingCampaignRepository extends EntityRepository
             ->setParameter('sendAt', $sendAt)
             ->getQuery()
             ->getResult();
+    }
+
+    public function countEmailingCampaignUsingGroup(Group $group): int
+    {
+        return (int) $this->createQueryBuilder('ec')
+            ->select('COUNT(ec.id)')
+            ->andWhere('ec.emailingGroup = :group')
+            ->setParameter('group', $group)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

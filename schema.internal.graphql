@@ -5917,6 +5917,7 @@ enum FeatureFlagType {
   votes_min
   beta__emailing
   beta__emailing_parameters
+  beta__emailing_group
   proposal_revisions
 
   """Whether or not an admin can use `TIPSmeee`. Used in dev only."""
@@ -6253,7 +6254,7 @@ type Group implements Node {
     first: Int = 100
 
     """Filter the list by email confirmation"""
-    emailConfirmed: Boolean = null
+    emailConfirmed: Boolean = true
 
     """Filter the list by consent to internal communication"""
     consentInternalCommunication: Boolean = null
@@ -6271,6 +6272,9 @@ type Group implements Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): UserInviteConnection!
+
+  """Whether or not group is used in emailing campaign"""
+  isUsedInEmailing: Boolean!
 }
 
 """A connection to a list of items."""

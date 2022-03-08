@@ -70,6 +70,7 @@ class Manager
     public const reporting = 'reporting';
     public const beta__emailing = 'beta__emailing';
     public const beta__emailing_parameters = 'beta__emailing_parameters';
+    public const beta__emailing_group = 'beta__emailing_group';
     public const proposal_revisions = 'proposal_revisions';
     public const unstable__tipsmeee = 'unstable__tipsmeee';
     public const unstable__new_consultation_page = 'unstable__new_consultation_page';
@@ -170,6 +171,7 @@ class Manager
         self::report_browers_errors_to_sentry,
         self::beta__emailing,
         self::beta__emailing_parameters,
+        self::beta__emailing_group,
         self::proposal_revisions,
         self::unstable__tipsmeee,
         self::unstable__new_consultation_page,

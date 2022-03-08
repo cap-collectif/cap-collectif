@@ -221,6 +221,19 @@
                         "onlySuperAdmin": false
                     }
                 }
+            },
+            {
+                "title": "capco.module.emailing",
+                "description": "emailing-tool-description",
+                "onlySuperAdmin": false,
+                "featuresRequired": ["beta__emailing"],
+                "items": {
+                    "beta__emailing_group": {
+                        "title": "admin.label.group",
+                        "description": "emailing-group-description",
+                        "onlySuperAdmin": false
+                    }
+                }
             }
         ]
     },

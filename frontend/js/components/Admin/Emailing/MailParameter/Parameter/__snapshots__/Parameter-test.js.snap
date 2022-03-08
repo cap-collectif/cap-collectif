@@ -255,8 +255,9 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
           emailingCampaign={
             Object {
               "$refType": null,
+              "emailingGroup": null,
               "mailingInternal": null,
-              "mailingList": Object {
+              "mailingListFragment": Object {
                 "$fragmentRefs": null,
                 "mailingListUsers": Object {
                   "totalCount": 3,
@@ -269,11 +270,29 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
                   "title": "P&C",
                 },
               },
+              "senderEmail": "assistance@cap-collectif.com",
             }
           }
           query={
             Object {
               "$refType": null,
+              "groups": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                      "title": "Je suis un groupe",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "2",
+                      "title": "Je suis un groupe aussi",
+                    },
+                  },
+                ],
+                "totalCount": 2,
+              },
               "senderEmails": Array [
                 Object {
                   "address": "sender-email@gmail.com",
@@ -303,6 +322,7 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
                 "totalCount": 3,
               },
               "viewer": Object {
+                "isAdmin": true,
                 "mailingLists": Object {
                   "edges": Array [
                     Object {
@@ -586,8 +606,9 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
           emailingCampaign={
             Object {
               "$refType": null,
+              "emailingGroup": null,
               "mailingInternal": null,
-              "mailingList": Object {
+              "mailingListFragment": Object {
                 "$fragmentRefs": null,
                 "mailingListUsers": Object {
                   "totalCount": 3,
@@ -600,11 +621,29 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
                   "title": "P&C",
                 },
               },
+              "senderEmail": "assistance@cap-collectif.com",
             }
           }
           query={
             Object {
               "$refType": null,
+              "groups": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                      "title": "Je suis un groupe",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "2",
+                      "title": "Je suis un groupe aussi",
+                    },
+                  },
+                ],
+                "totalCount": 2,
+              },
               "senderEmails": Array [
                 Object {
                   "address": "sender-email@gmail.com",
@@ -634,6 +673,7 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
                 "totalCount": 3,
               },
               "viewer": Object {
+                "isAdmin": true,
                 "mailingLists": Object {
                   "edges": Array [
                     Object {
@@ -917,8 +957,9 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
           emailingCampaign={
             Object {
               "$refType": null,
+              "emailingGroup": null,
               "mailingInternal": null,
-              "mailingList": Object {
+              "mailingListFragment": Object {
                 "$fragmentRefs": null,
                 "mailingListUsers": Object {
                   "totalCount": 3,
@@ -931,11 +972,29 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
                   "title": "P&C",
                 },
               },
+              "senderEmail": "assistance@cap-collectif.com",
             }
           }
           query={
             Object {
               "$refType": null,
+              "groups": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                      "title": "Je suis un groupe",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "2",
+                      "title": "Je suis un groupe aussi",
+                    },
+                  },
+                ],
+                "totalCount": 2,
+              },
               "senderEmails": Array [
                 Object {
                   "address": "sender-email@gmail.com",
@@ -965,6 +1024,7 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
                 "totalCount": 3,
               },
               "viewer": Object {
+                "isAdmin": true,
                 "mailingLists": Object {
                   "edges": Array [
                     Object {
@@ -1248,8 +1308,9 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
           emailingCampaign={
             Object {
               "$refType": null,
+              "emailingGroup": null,
               "mailingInternal": "CONFIRMED",
-              "mailingList": Object {
+              "mailingListFragment": Object {
                 "$fragmentRefs": null,
                 "mailingListUsers": Object {
                   "totalCount": 3,
@@ -1262,11 +1323,29 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
                   "title": "P&C",
                 },
               },
+              "senderEmail": "assistance@cap-collectif.com",
             }
           }
           query={
             Object {
               "$refType": null,
+              "groups": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                      "title": "Je suis un groupe",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "2",
+                      "title": "Je suis un groupe aussi",
+                    },
+                  },
+                ],
+                "totalCount": 2,
+              },
               "senderEmails": Array [
                 Object {
                   "address": "sender-email@gmail.com",
@@ -1296,6 +1375,7 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
                 "totalCount": 3,
               },
               "viewer": Object {
+                "isAdmin": true,
                 "mailingLists": Object {
                   "edges": Array [
                     Object {

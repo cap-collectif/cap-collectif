@@ -24,21 +24,25 @@ class GroupUsersResolver implements ResolverInterface
             $args = new Argument(['first' => 100]);
         }
         $consentInternalCommunication = $args['consentInternalCommunication'];
+        $emailConfirmed = $args['emailConfirmed'];
         $paginator = new Paginator(function (?int $offset, ?int $limit) use (
             $group,
-            $consentInternalCommunication
+            $consentInternalCommunication,
+            $emailConfirmed
         ) {
             return $this->userRepository->getUsersInGroup(
                 $group,
                 $offset,
                 $limit,
-                $consentInternalCommunication
+                $consentInternalCommunication,
+                $emailConfirmed
             );
         });
 
         $totalCount = $this->userRepository->countUsersInGroup(
             $group,
-            $consentInternalCommunication
+            $consentInternalCommunication,
+            $emailConfirmed
         );
 
         return $paginator->auto($args, $totalCount);

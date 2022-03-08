@@ -26,6 +26,7 @@ import Header, { formName, PATHS } from './Header/Header';
 import SendEmailingCampaignMutation from '~/mutations/SendEmailingCampaignMutation';
 import stripHtml from '~/utils/stripHtml';
 import { DATE_ISO8601_FORMAT } from '~/shared/date';
+import { fromGlobalId } from '~/utils/fromGlobalId';
 
 const REGISTER_FIELDS = [
   'title',
@@ -41,6 +42,7 @@ type Values = {|
   title: string,
   senderEmail: string,
   mailingList: ?string,
+  emailingGroup: ?string,
   mailSubject: ?string,
   mailContent: ?string,
   sendingSchedule: boolean,
@@ -65,15 +67,22 @@ const handleChangeEmailingCampaign = (values: Values, dispatch: Dispatch, props:
     sendingSchedule,
     plannedDate,
   } = values;
-  const { emailingCampaign } = props;
-
+  const { emailingCampaign, pristine } = props;
+  const { type } = fromGlobalId(mailingList);
+  if (pristine) {
+    return;
+  }
   return UpdateEmailingCampaignMutation.commit({
     input: {
       id: emailingCampaign.id,
       name: title,
       senderEmail,
       senderName: emailingCampaign.senderName,
-      mailingList: !DEFAULT_MAILING_LIST.includes(mailingList) && mailingList ? mailingList : null,
+      mailingList:
+        type !== 'Group' && mailingList && !DEFAULT_MAILING_LIST.includes(mailingList)
+          ? mailingList
+          : undefined,
+      emailingGroup: type === 'Group' ? mailingList : undefined,
       mailingInternal: DEFAULT_MAILING_LIST.includes(mailingList) ? mailingList : null,
       object: mailSubject,
       content: mailContent,
@@ -175,7 +184,7 @@ const validate = (
 
   if (!title) {
     const fieldName = intl.formatMessage({ id: 'campaign-title' });
-    errors.mailingList = {
+    errors.title = {
       id: 'global.field.mandatory.dynamic',
       values: { fieldName },
     };
@@ -196,7 +205,7 @@ const validate = (
   if (!mailingList) {
     const fieldName = (
       <Link to={PATHS.PARAMETER} key="mailingList">
-        {intl.formatMessage({ id: 'admin-menu-emailing-list' })}
+        {intl.formatMessage({ id: 'recipient' })}
       </Link>
     );
     errors.mailingList = {
@@ -334,7 +343,11 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
     title: props.emailingCampaign.name,
     mailContent: props.emailingCampaign.content,
     mailSubject: props.emailingCampaign.object,
-    mailingList: props.emailingCampaign.mailingInternal || props.emailingCampaign.mailingList?.id,
+    mailingList:
+      props.emailingCampaign.mailingInternal ||
+      props.emailingCampaign.mailingList?.id ||
+      props.emailingCampaign.emailingGroup?.id ||
+      null,
   },
   registeredFieldsName: state.form[formName]?.registeredFields
     ? Object.keys(state.form[formName].registeredFields)
@@ -360,6 +373,9 @@ export default createFragmentContainer(MailParameterPageConnected, {
       mailingInternal
       sendAt
       status
+      emailingGroup {
+        id
+      }
       ...Header_emailingCampaign
       ...Parameter_emailingCampaign
       ...Content_emailingCampaign
@@ -369,7 +385,7 @@ export default createFragmentContainer(MailParameterPageConnected, {
   `,
   query: graphql`
     fragment MailParameterPage_query on Query
-      @argumentDefinitions(affiliations: { type: "[MailingListAffiliation!]" }) {
+    @argumentDefinitions(affiliations: { type: "[MailingListAffiliation!]" }) {
       ...Parameter_query @arguments(affiliations: $affiliations)
     }
   `,

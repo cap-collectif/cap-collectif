@@ -6,16 +6,12 @@ import { ParameterPage } from './index';
 import { $refType, $fragmentRefs } from '~/mocks';
 import MockProviders from '~/testUtils';
 
-const userAdmin = {
-  isAdmin: true,
-};
-
 const baseProps = {
   disabled: false,
   showError: false,
   emailingCampaign: {
     $refType,
-    mailingList: {
+    mailingListFragment: {
       $fragmentRefs,
       name: 'Je suis une mailingList',
       project: {
@@ -28,6 +24,8 @@ const baseProps = {
         totalCount: 3,
       },
     },
+    senderEmail: 'assistance@cap-collectif.com',
+    emailingGroup: null,
     mailingInternal: null,
   },
   query: {
@@ -50,6 +48,7 @@ const baseProps = {
           },
         ],
       },
+      isAdmin: true,
     },
     users: {
       totalCount: 30,
@@ -79,6 +78,23 @@ const baseProps = {
         address: 'sender-email2@gmail.com',
       },
     ],
+    groups: {
+      totalCount: 2,
+      edges: [
+        {
+          node: {
+            id: '1',
+            title: 'Je suis un groupe',
+          },
+        },
+        {
+          node: {
+            id: '2',
+            title: 'Je suis un groupe aussi',
+          },
+        },
+      ],
+    },
   },
 };
 
@@ -104,7 +120,7 @@ const props = {
 describe('<ParameterPage />', () => {
   it('should renders correctly', () => {
     const wrapper = shallow(
-      <MockProviders store={{ user: { user: userAdmin } }}>
+      <MockProviders>
         <ParameterPage {...props.basic} />
       </MockProviders>,
     );
@@ -113,7 +129,7 @@ describe('<ParameterPage />', () => {
 
   it('should renders correctly when disabled', () => {
     const wrapper = shallow(
-      <MockProviders store={{ user: { user: userAdmin } }}>
+      <MockProviders>
         <ParameterPage {...props.disabled} />
       </MockProviders>,
     );
@@ -122,7 +138,7 @@ describe('<ParameterPage />', () => {
 
   it('should renders correctly when error', () => {
     const wrapper = shallow(
-      <MockProviders store={{ user: { user: userAdmin } }}>
+      <MockProviders>
         <ParameterPage {...props.withError} />
       </MockProviders>,
     );
@@ -131,7 +147,7 @@ describe('<ParameterPage />', () => {
 
   it('should renders correctly when mailing list internal selected', () => {
     const wrapper = shallow(
-      <MockProviders store={{ user: { user: userAdmin } }}>
+      <MockProviders>
         <ParameterPage {...props.withMailingListInternal} />
       </MockProviders>,
     );

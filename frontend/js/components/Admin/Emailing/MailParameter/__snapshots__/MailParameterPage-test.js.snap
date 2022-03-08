@@ -15,6 +15,7 @@ exports[`<MailParameterPage /> should renders correctly 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "content": "Ceci est du contenu",
+          "emailingGroup": null,
           "id": "emailingCampaign123",
           "mailingInternal": null,
           "mailingList": Object {
@@ -43,6 +44,7 @@ exports[`<MailParameterPage /> should renders correctly 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "content": "Ceci est du contenu",
+              "emailingGroup": null,
               "id": "emailingCampaign123",
               "mailingInternal": null,
               "mailingList": Object {
@@ -76,6 +78,7 @@ exports[`<MailParameterPage /> should renders correctly 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "content": "Ceci est du contenu",
+              "emailingGroup": null,
               "id": "emailingCampaign123",
               "mailingInternal": null,
               "mailingList": Object {
@@ -103,6 +106,7 @@ exports[`<MailParameterPage /> should renders correctly 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "content": "Ceci est du contenu",
+              "emailingGroup": null,
               "id": "emailingCampaign123",
               "mailingInternal": null,
               "mailingList": Object {
@@ -126,6 +130,7 @@ exports[`<MailParameterPage /> should renders correctly 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "content": "Ceci est du contenu",
+          "emailingGroup": null,
           "id": "emailingCampaign123",
           "mailingInternal": null,
           "mailingList": Object {
@@ -161,6 +166,7 @@ exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "content": "Ceci est du contenu",
+          "emailingGroup": null,
           "id": "emailingCampaign123",
           "mailingInternal": null,
           "mailingList": Object {
@@ -189,6 +195,7 @@ exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "content": "Ceci est du contenu",
+              "emailingGroup": null,
               "id": "emailingCampaign123",
               "mailingInternal": null,
               "mailingList": Object {
@@ -222,6 +229,7 @@ exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "content": "Ceci est du contenu",
+              "emailingGroup": null,
               "id": "emailingCampaign123",
               "mailingInternal": null,
               "mailingList": Object {
@@ -249,6 +257,7 @@ exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
               "$fragmentRefs": null,
               "$refType": null,
               "content": "Ceci est du contenu",
+              "emailingGroup": null,
               "id": "emailingCampaign123",
               "mailingInternal": null,
               "mailingList": Object {
@@ -272,6 +281,7 @@ exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "content": "Ceci est du contenu",
+          "emailingGroup": null,
           "id": "emailingCampaign123",
           "mailingInternal": null,
           "mailingList": Object {
@@ -283,6 +293,157 @@ exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
           "senderEmail": "captain.obious@cap-collectif.com",
           "senderName": "Captain Obvious",
           "status": "SENT",
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+  </BrowserRouter>
+</MailParameterPagestyle__Form>
+`;
+
+exports[`<MailParameterPage /> should renders correctly with emailing group 1`] = `
+<MailParameterPagestyle__Form
+  id="form-edit-emailing-campaign"
+  onSubmit={[MockFunction]}
+>
+  <BrowserRouter
+    basename="/admin/mailingCampaign/edit/emailingCampaign123"
+  >
+    <Relay(Connect(Header))
+      disabled={false}
+      emailingCampaign={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "content": "Ceci est du contenu",
+          "emailingGroup": Object {
+            "id": "group2",
+          },
+          "id": "emailingCampaign123",
+          "mailingInternal": null,
+          "mailingList": null,
+          "name": "Je suis une emailing list",
+          "object": "Ceci est le sujet",
+          "sendAt": "2030-03-11 00:00:00",
+          "senderEmail": "captain.obious@cap-collectif.com",
+          "senderName": "Captain Obvious",
+          "status": "DRAFT",
+        }
+      }
+      setModalCancelOpen={[Function]}
+      showError={false}
+    />
+    <Switch>
+      <Route
+        exact={true}
+        path="/"
+      >
+        <Relay(ParameterPage)
+          disabled={false}
+          emailingCampaign={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "content": "Ceci est du contenu",
+              "emailingGroup": Object {
+                "id": "group2",
+              },
+              "id": "emailingCampaign123",
+              "mailingInternal": null,
+              "mailingList": null,
+              "name": "Je suis une emailing list",
+              "object": "Ceci est le sujet",
+              "sendAt": "2030-03-11 00:00:00",
+              "senderEmail": "captain.obious@cap-collectif.com",
+              "senderName": "Captain Obvious",
+              "status": "DRAFT",
+            }
+          }
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
+          }
+          showError={false}
+        />
+      </Route>
+      <Route
+        exact={true}
+        path="/content"
+      >
+        <Relay(ContentPage)
+          disabled={false}
+          emailingCampaign={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "content": "Ceci est du contenu",
+              "emailingGroup": Object {
+                "id": "group2",
+              },
+              "id": "emailingCampaign123",
+              "mailingInternal": null,
+              "mailingList": null,
+              "name": "Je suis une emailing list",
+              "object": "Ceci est le sujet",
+              "sendAt": "2030-03-11 00:00:00",
+              "senderEmail": "captain.obious@cap-collectif.com",
+              "senderName": "Captain Obvious",
+              "status": "DRAFT",
+            }
+          }
+          showError={false}
+        />
+      </Route>
+      <Route
+        exact={true}
+        path="/sending"
+      >
+        <Relay(Connect(SendingPage))
+          disabled={false}
+          emailingCampaign={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "content": "Ceci est du contenu",
+              "emailingGroup": Object {
+                "id": "group2",
+              },
+              "id": "emailingCampaign123",
+              "mailingInternal": null,
+              "mailingList": null,
+              "name": "Je suis une emailing list",
+              "object": "Ceci est le sujet",
+              "sendAt": "2030-03-11 00:00:00",
+              "senderEmail": "captain.obious@cap-collectif.com",
+              "senderName": "Captain Obvious",
+              "status": "DRAFT",
+            }
+          }
+          showError={false}
+        />
+      </Route>
+    </Switch>
+    <Relay(ModalCancelSending)
+      emailingCampaign={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "content": "Ceci est du contenu",
+          "emailingGroup": Object {
+            "id": "group2",
+          },
+          "id": "emailingCampaign123",
+          "mailingInternal": null,
+          "mailingList": null,
+          "name": "Je suis une emailing list",
+          "object": "Ceci est le sujet",
+          "sendAt": "2030-03-11 00:00:00",
+          "senderEmail": "captain.obious@cap-collectif.com",
+          "senderName": "Captain Obvious",
+          "status": "DRAFT",
         }
       }
       onClose={[Function]}

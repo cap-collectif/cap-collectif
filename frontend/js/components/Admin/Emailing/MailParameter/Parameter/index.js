@@ -7,7 +7,6 @@ import { useDisclosure } from '@liinkiing/react-hooks';
 import { useSelector } from 'react-redux';
 import { Container } from '../common.style';
 import { InstructionContainer, ButtonMembers } from './style';
-import component from '~/components/Form/Field';
 import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
 import ModalInternalMembers from '~/components/Admin/Emailing/ModalMembers/ModalInternalMembers';
@@ -19,6 +18,9 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import AppBox from '~ui/Primitives/AppBox';
 import { LineHeight } from '~ui/Primitives/constants';
 import type { GlobalState } from '~/types';
+import select, { type Options } from '~/components/Form/Select';
+import { ModalGroupMembers } from '~/components/Admin/Emailing/ModalMembers/ModalGroupMembers';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export const DEFAULT_MAILING_LIST = ['REGISTERED', 'CONFIRMED', 'NOT_CONFIRMED'];
 
@@ -43,7 +45,7 @@ export const getWordingMailingInternal = (mailingInternal: string, intl: IntlSha
 };
 
 export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: Props) => {
-  const { mailingList, mailingInternal } = emailingCampaign;
+  const { mailingListFragment, mailingInternal, emailingGroup } = emailingCampaign;
   const {
     viewer,
     users,
@@ -53,15 +55,18 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
     usersConfirmedRefusing,
     usersNotConfirmedRefusing,
     senderEmails,
+    groups,
   } = query;
   const { mailingLists } = viewer;
   const { user } = useSelector((state: GlobalState) => state.user);
+  const emailingGroupEnabled = useFeatureFlag('beta__emailing_group');
   const isAdmin = user ? user.isAdmin : false;
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
-  const hasMailingList = !!mailingList || !!mailingInternal;
+  const hasMailingList = !!mailingListFragment || !!mailingInternal || !!emailingGroup;
   const [countUsers, setCountUsers] = React.useState<number>(0);
   const [countUsersRefusing, setCountUsersRefusing] = React.useState<number>(0);
+  const [mailingListValue, setMailingListValue] = React.useState<?Options>(null);
 
   React.useEffect(() => {
     if (mailingInternal) {
@@ -81,23 +86,106 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
           break;
       }
     }
-
-    if (mailingList) {
-      setCountUsers(mailingList.mailingListUsers.totalCount);
+    if (mailingListFragment) {
+      setCountUsers(mailingListFragment.mailingListUsers.totalCount);
       setCountUsersRefusing(
-        mailingList.mailingListUsers.totalCount - mailingList.mailingListUsersConsenting.totalCount,
+        mailingListFragment.mailingListUsers.totalCount -
+          mailingListFragment.mailingListUsersConsenting.totalCount,
       );
+    }
+    if (emailingGroup?.id && emailingGroupEnabled) {
+      setCountUsers(emailingGroup.groupListUsers.totalCount);
+      setCountUsersRefusing(emailingGroup.groupListUsersNotConsenting.totalCount);
     }
   }, [
     mailingInternal,
-    mailingList,
+    mailingListFragment,
     users.totalCount,
     usersConfirmed.totalCount,
     usersNotConfirmed.totalCount,
     usersRefusing.totalCount,
     usersConfirmedRefusing.totalCount,
     usersNotConfirmedRefusing.totalCount,
+    emailingGroup,
+    mailingListValue,
+    emailingGroupEnabled,
   ]);
+  const getMailingList = () => {
+    return mailingLists?.edges
+      ? mailingLists?.edges
+          ?.filter(Boolean)
+          .map(edge => edge.node)
+          .filter(Boolean)
+          .map(m => ({
+            value: m.id,
+            label: m.name,
+            ariaLabel: m.name,
+          }))
+      : [];
+  };
+  const getUserGroupList = () => {
+    if (groups && groups.edges && groups.totalCount > 0) {
+      return groups.edges
+        ?.filter(Boolean)
+        .map(edge => edge.node)
+        .filter(Boolean)
+        .map(m => ({
+          value: m.id,
+          label: m.title,
+          ariaLabel: m.title,
+        }));
+    }
+
+    return [];
+  };
+  const adminValues = () =>
+    isAdmin
+      ? [
+          {
+            value: 'REGISTERED',
+            label: getWordingMailingInternal('REGISTERED', intl),
+            ariaLabel: getWordingMailingInternal('REGISTERED', intl),
+          },
+          {
+            value: 'CONFIRMED',
+            label: getWordingMailingInternal('CONFIRMED', intl),
+            ariaLabel: getWordingMailingInternal('CONFIRMED', intl),
+          },
+          {
+            value: 'NOT_CONFIRMED',
+            label: getWordingMailingInternal('NOT_CONFIRMED', intl),
+            ariaLabel: getWordingMailingInternal('NOT_CONFIRMED', intl),
+          },
+        ]
+      : [];
+
+  const mailingListValues = () => {
+    let mailList = getMailingList();
+    let groupList = emailingGroupEnabled ? getUserGroupList() : [];
+    mailList = adminValues().concat(mailList);
+
+    if (mailList.length > 0 && groupList && groupList?.length > 0 && emailingGroupEnabled) {
+      mailList = [
+        {
+          label: `${intl.formatMessage({ id: 'admin-menu-emailing-list' })}:`,
+          options: mailList,
+        },
+      ];
+      groupList = [
+        {
+          label: `${intl.formatMessage({ id: 'admin.label.group' })}:`,
+          options: groupList,
+        },
+      ];
+    }
+    if (groupList.length > 0 && emailingGroupEnabled) {
+      return [...mailList, ...groupList];
+    }
+
+    return mailList;
+  };
+
+  const displayConsultMembersButton = countUsers > 0 && countUsers > countUsersRefusing;
 
   return (
     <Container disabled={disabled}>
@@ -108,48 +196,38 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
         name="senderEmail"
         type="select"
         clearable={false}
-        component={component}
+        component={select}
+        labelClassName="none"
+        selectValue={emailingCampaign.senderEmail}
         label={intl.formatMessage({ id: 'sender-address' })}
-        placeholder="global.placeholder.email"
-        disableValidation={!showError}>
-        {senderEmails.map(senderEmail => (
-          <option key={senderEmail.id} value={senderEmail.address}>
-            {senderEmail.address}
-          </option>
-        ))}
-      </Field>
+        placeholder={intl.formatMessage({ id: 'global.placeholder.email' })}
+        displayError={showError}
+        options={senderEmails.map(senderEmail => ({
+          value: senderEmail.address,
+          label: senderEmail.address,
+          ariaLabel: senderEmail.address,
+        }))}
+      />
 
       <Field
-        type="select"
         id="mailingList"
         name="mailingList"
-        component={component}
-        label={intl.formatMessage({ id: 'admin-menu-emailing-list' })}
+        type="select"
         disabled={disabled}
-        disableValidation={!showError}>
-        <option value="" disabled>
-          {intl.formatMessage({ id: 'select-list' })}
-        </option>
-        {isAdmin && (
-          <>
-            <option value="REGISTERED">{getWordingMailingInternal('REGISTERED', intl)}</option>
-            <option value="CONFIRMED">{getWordingMailingInternal('CONFIRMED', intl)}</option>
-            <option value="NOT_CONFIRMED">
-              {getWordingMailingInternal('NOT_CONFIRMED', intl)}
-            </option>
-          </>
-        )}
-        {mailingLists?.totalCount > 0 &&
-          mailingLists?.edges
-            ?.filter(Boolean)
-            .map(edge => edge.node)
-            .filter(Boolean)
-            .map(m => (
-              <option key={m.id} value={m.id}>
-                {m.name}
-              </option>
-            ))}
-      </Field>
+        component={select}
+        label={intl.formatMessage({ id: 'recipient' })}
+        clearable
+        displayError={showError}
+        grouped={groups.totalCount && mailingLists.totalCount && emailingGroupEnabled}
+        placeholder={intl.formatMessage({
+          id:
+            groups.totalCount && mailingLists.totalCount && emailingGroupEnabled
+              ? 'select-list-or-group'
+              : 'select-mailing-list',
+        })}
+        options={mailingListValues()}
+        onChange={e => setMailingListValue(e)}
+      />
 
       {hasMailingList && countUsers > 0 && (
         <Flex direction="column" align="flex-start" spacing={2}>
@@ -172,15 +250,15 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
               </AppBox>
             </Tooltip>
 
-            {mailingList?.project && (
+            {mailingListFragment?.project && (
               <>
                 <Icon name={ICON_NAME.BOOK_STAR_O} size="md" color="gray.900" />
-                <Text as="span">{mailingList.project.title}</Text>
+                <Text as="span">{mailingListFragment.project.title}</Text>
               </>
             )}
           </Flex>
 
-          {countUsers > 0 && countUsers > countUsersRefusing && (
+          {displayConsultMembersButton && (
             <ButtonMembers type="button" onClick={onOpen}>
               {intl.formatMessage({ id: 'consult-members' })}
             </ButtonMembers>
@@ -203,8 +281,16 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
         (mailingInternal ? (
           <ModalInternalMembers show={isOpen} onClose={onClose} type={mailingInternal} />
         ) : (
-          <ModalMembers show={isOpen} onClose={onClose} mailingList={mailingList} />
+          <ModalMembers show={isOpen} onClose={onClose} mailingList={mailingListFragment} />
         ))}
+      {emailingGroup && emailingGroupEnabled && (
+        <ModalGroupMembers
+          show={isOpen}
+          onClose={onClose}
+          groupListRef={emailingGroup}
+          isAdmin={isAdmin}
+        />
+      )}
     </Container>
   );
 };
@@ -212,7 +298,19 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
 export default createFragmentContainer(ParameterPage, {
   emailingCampaign: graphql`
     fragment Parameter_emailingCampaign on EmailingCampaign {
-      mailingList {
+      emailingGroup {
+        id
+        title
+        groupListUsersNotConsenting: users(first: 0, consentInternalCommunication: false) {
+          totalCount
+        }
+        groupListUsers: users(first: 0) {
+          totalCount
+        }
+        ...ModalGroupMembers_groupList
+      }
+      senderEmail
+      mailingListFragment: mailingList {
         name
         project {
           title
@@ -241,6 +339,7 @@ export default createFragmentContainer(ParameterPage, {
             }
           }
         }
+        isAdmin
       }
       users(first: 0) {
         totalCount
@@ -271,6 +370,15 @@ export default createFragmentContainer(ParameterPage, {
       senderEmails {
         id
         address
+      }
+      groups {
+        totalCount
+        edges {
+          node {
+            id
+            title
+          }
+        }
       }
     }
   `,

@@ -10,10 +10,7 @@ exports[`<GroupAdminParameters /> render correctly 1`] = `
     <h3
       className="box-title"
     >
-      <FormattedMessage
-        id="global.params"
-        values={Object {}}
-      />
+      global.params
     </h3>
   </div>
   <div
@@ -28,10 +25,7 @@ exports[`<GroupAdminParameters /> render correctly 1`] = `
       deleteModalTitle="group.admin.parameters.modal.delete.title"
       showDeleteModal={false}
     />
-    <ButtonToolbar
-      bsClass="btn-toolbar"
-      className="box-content__toolbar mb-15"
-    >
+    <ButtonGroup>
       <Connect(SubmitButton)
         disabled={false}
         id="confirm-group-edit"
@@ -51,10 +45,7 @@ exports[`<GroupAdminParameters /> render correctly 1`] = `
           className="fa fa-trash"
         />
          
-        <FormattedMessage
-          id="global.delete"
-          values={Object {}}
-        />
+        global.delete
       </Button>
       <AlertForm
         invalid={false}
@@ -63,7 +54,91 @@ exports[`<GroupAdminParameters /> render correctly 1`] = `
         submitting={false}
         valid={false}
       />
-    </ButtonToolbar>
+    </ButtonGroup>
+  </div>
+</div>
+`;
+
+exports[`<GroupAdminParameters /> render correctly with disabled button 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header  pl-0"
+  >
+    <h3
+      className="box-title"
+    >
+      global.params
+    </h3>
+  </div>
+  <div
+    className="box-content"
+  >
+    <GroupForm />
+    <Connect(DeleteModal)
+      buttonConfirmMessage="global.removeDefinitively"
+      closeDeleteModal={[Function]}
+      deleteElement={[Function]}
+      deleteModalContent="group.admin.parameters.modal.delete.content"
+      deleteModalTitle="group.admin.parameters.modal.delete.title"
+      showDeleteModal={false}
+    />
+    <ButtonGroup>
+      <Connect(SubmitButton)
+        disabled={false}
+        id="confirm-group-edit"
+        isSubmitting={false}
+        label="global.save"
+        onSubmit={[Function]}
+      />
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        key="top"
+        overlay={
+          <_default
+            className="text-left"
+            id="tooltip-top"
+            style={
+              Object {
+                "wordBreak": "break-word",
+              }
+            }
+          >
+            group-used-in-mailinglist
+          </_default>
+        }
+        placement="top"
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={true}
+          onClick={[Function]}
+        >
+          <i
+            className="fa fa-trash"
+          />
+           
+          global.delete
+        </Button>
+      </OverlayTrigger>
+      <AlertForm
+        invalid={false}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        valid={false}
+      />
+    </ButtonGroup>
   </div>
 </div>
 `;

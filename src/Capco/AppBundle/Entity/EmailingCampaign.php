@@ -204,7 +204,7 @@ class EmailingCampaign
 
     public function hasReceipt(): bool
     {
-        return $this->mailingList || $this->mailingInternal;
+        return $this->mailingList || $this->mailingInternal || $this->emailingGroup;
     }
 
     public function isComplete(): bool

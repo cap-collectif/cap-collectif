@@ -236,3 +236,55 @@ exports[`<CampaignItem /> should renders correctly with mailing list internal 1`
   </ForwardRef>
 </CampaignItemstyle__Container>
 `;
+
+exports[`<CampaignItem /> should renders correctly with users group 1`] = `
+<CampaignItemstyle__Container
+  rowId="1"
+  selected={false}
+>
+  <h3>
+    <a
+      href="/admin/mailingCampaign/edit/1"
+      rel="noopener noreferrer"
+    >
+      Je suis une campagne
+    </a>
+  </h3>
+  <CampaignItemstyle__InfoRow>
+    <p>
+      <CampaignItemstyle__Circle
+        ariaHidden={true}
+        color="#D8D8D8"
+      />
+      <span
+        className="label-status"
+      >
+        global-draft
+      </span>
+    </p>
+    <p>
+      <span
+        className="separator"
+      >
+        •
+      </span>
+      <span>
+        Mon Mar 11 2030 00:00:00 GMT+0100
+      </span>
+    </p>
+  </CampaignItemstyle__InfoRow>
+  <ForwardRef
+    align="center"
+    direction="row"
+  >
+    <Icon
+      color="gray.500"
+      name="USER_O"
+      size="md"
+    />
+    <span>
+      Je suis un group
+    </span>
+  </ForwardRef>
+</CampaignItemstyle__Container>
+`;

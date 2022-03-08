@@ -89,8 +89,11 @@ class UserRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
-    public function countUsersInGroup(Group $group, ?bool $consentInternalCommunication = null): int
-    {
+    public function countUsersInGroup(
+        Group $group,
+        ?bool $consentInternalCommunication = null,
+        bool $emailConfirmed = true
+    ): int {
         $qb = $this->createQueryBuilder('u');
         $qb->select('COUNT(u.id)')
             ->innerJoin('u.userGroups', 'ug')
@@ -101,6 +104,11 @@ class UserRepository extends EntityRepository
                 'u.consentInternalCommunication = :consentInternalCommunication'
             )->setParameter('consentInternalCommunication', $consentInternalCommunication);
         }
+        if ($emailConfirmed) {
+            $qb->andWhere('u.confirmationToken IS NULL');
+        } else {
+            $qb->andWhere('u.confirmationToken <> NULL');
+        }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -109,7 +117,8 @@ class UserRepository extends EntityRepository
         Group $group,
         int $offset = 0,
         int $limit = 1000,
-        ?bool $consentInternalCommunication = null
+        ?bool $consentInternalCommunication = null,
+        bool $emailConfirmed = true
     ): array {
         $qb = $this->createQueryBuilder('u');
         $qb->innerJoin('u.userGroups', 'ug')
@@ -119,6 +128,11 @@ class UserRepository extends EntityRepository
             $qb->andWhere(
                 'u.consentInternalCommunication = :consentInternalCommunication'
             )->setParameter('consentInternalCommunication', $consentInternalCommunication);
+        }
+        if ($emailConfirmed) {
+            $qb->andWhere('u.confirmationToken IS NULL');
+        } else {
+            $qb->andWhere('u.confirmationToken <> NULL');
         }
         $qb->setFirstResult($offset)->setMaxResults($limit);
 

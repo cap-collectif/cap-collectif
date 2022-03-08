@@ -464,6 +464,13 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
                       "name": "description",
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isUsedInEmailing",
+                      "storageKey": null,
+                    },
                   ],
                   "type": "Group",
                 },
@@ -473,7 +480,7 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "36a37d3e8da9e596633b86926fddebfe",
+          "cacheID": "081e1d7affb3ba4c29771ad9c59f75eb",
           "id": null,
           "metadata": Object {},
           "name": "GroupAdminPageQuery",
@@ -503,6 +510,7 @@ fragment GroupAdminParameters_group on Group {
   id
   title
   description
+  isUsedInEmailing
 }
 
 fragment GroupAdminPendingInvitationsList_group_CYQFO on Group {

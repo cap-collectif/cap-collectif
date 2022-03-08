@@ -2,6 +2,7 @@
 import * as React from 'react';
 import styled, { css, type StyledComponent } from 'styled-components';
 import Select from 'react-select';
+import cn from 'classnames';
 import Async from 'react-select/async';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import debouncePromise from 'debounce-promise';
@@ -11,8 +12,8 @@ import Label from '~/components/Ui/Form/Label/Label';
 import Description from '~ui/Form/Description/Description';
 import isQuestionnaire from '~/utils/isQuestionnaire';
 
-type Option = { value: string, label: string };
-type Options = Array<Option>;
+export type Option = { value: string, label: string };
+export type Options = Array<Option> | Array<{ label: string, options: Array<Option> }>;
 export type ReactSelectValue = { value: string, label: string };
 type Value = string | Array<{ value: string }> | ReactSelectValue;
 type OnChangeInput = Array<{ value: string }>;
@@ -42,7 +43,7 @@ type Props = {
     onFocus: () => void,
   },
   id: string,
-  meta: { touched: boolean, error: ?string },
+  meta: { touched: boolean, error: ?any },
   label: string | React.Node,
   help: string | React.Node,
   placeholder?: string,
@@ -52,6 +53,8 @@ type Props = {
   controlShouldRenderValue?: boolean,
   disabled?: boolean,
   multi: boolean,
+  grouped: boolean,
+  displayError: boolean,
   options?: Options, // or loadOptions for async
   loadOptions?: () => Options, // or options for sync
   filterOption?: Function,
@@ -176,6 +179,8 @@ const RenderSelect = ({
   inputClassName,
   blockClassName = '',
   multi = false,
+  grouped = false,
+  displayError = true,
   disabled = false,
   autoload = false,
   debounce = false,
@@ -207,12 +212,12 @@ const RenderSelect = ({
 
   let selectValue = null;
   let selectLabel = null;
-
   if (typeof loadOptions === 'function') {
     selectValue = value;
   } else if (multi) {
     selectLabel =
       options &&
+      // $FlowFixMe cause option can be both type
       options.filter(option => Array.isArray(value) && value.some(o => o.value === option.value));
     selectValue = value !== undefined || value !== null ? selectLabel && selectLabel : [];
   } else if (Object.prototype.hasOwnProperty.call(value, 'value')) {
@@ -225,14 +230,28 @@ const RenderSelect = ({
         option => option && option.value && option.value === ((value: any): ReactSelectValue).value,
       );
     selectValue = value && value.value ? selectLabel && selectLabel[0] : null;
+  } else if (grouped && options) {
+    options.map(selectGroup => {
+      if (!selectGroup && !selectGroup.options) {
+        return;
+      }
+      // $FlowFixMe because options can be both 2 types
+      selectGroup.options.filter(opt => {
+        if (opt.value === value) {
+          selectValue = opt;
+        }
+      });
+    });
   } else {
     selectLabel =
       options && options.filter(option => option && option.value && option.value === value);
     selectValue = value !== undefined || value !== null ? selectLabel && selectLabel[0] : null;
   }
-
   const component = (
-    <div className={`form-group ${blockClassName} ${canValidate && error ? ' has-error' : ''}`}>
+    <div
+      className={cn('form-group', blockClassName, {
+        'has-error': canValidate && displayError && error,
+      })}>
       {label && (
         <Label
           htmlFor={id}
@@ -314,6 +333,9 @@ const RenderSelect = ({
                 if (typeof onChange === 'function') {
                   onChange();
                 }
+                if (grouped && !Array.isArray(newValue)) {
+                  input.onChange(newValue ? newValue.value : '');
+                }
                 if ((multi && Array.isArray(newValue)) || selectFieldIsObject) {
                   return input.onChange(newValue);
                 }
@@ -335,9 +357,9 @@ const RenderSelect = ({
           )}
         </SelectContainer>
 
-        {canValidate && error && (
+        {canValidate && error && displayError && (
           <span className="error-block">
-            <FormattedMessage id={error} />
+            <FormattedMessage id={error.id} values={error.values || undefined} />
           </span>
         )}
       </div>

@@ -17,6 +17,7 @@ const baseProps = {
       name: 'Je suis une mailing list',
     },
     mailingInternal: null,
+    emailingGroup: null,
   },
   selected: false,
 };
@@ -46,6 +47,16 @@ const props = {
       mailingList: null,
     },
   },
+  withGroup: {
+    ...baseProps,
+    campaign: {
+      ...baseProps.campaign,
+      mailingList: null,
+      emailingGroup: {
+        title: 'Je suis un group',
+      },
+    },
+  },
 };
 
 describe('<CampaignItem />', () => {
@@ -71,6 +82,10 @@ describe('<CampaignItem />', () => {
 
   it('should renders correctly with mailing list internal', () => {
     const wrapper = shallow(<CampaignItem {...props.withMailingInternal} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should renders correctly with users group', () => {
+    const wrapper = shallow(<CampaignItem {...props.withGroup} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

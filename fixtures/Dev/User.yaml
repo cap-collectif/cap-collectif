@@ -416,7 +416,7 @@ Capco\UserBundle\Entity\User:
         emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
-
+        consentInternalCommunication: true
     user521:
         id: 'user521'
         username: userToDelete

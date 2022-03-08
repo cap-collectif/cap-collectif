@@ -68,6 +68,7 @@ export const features: FeatureFlags = {
     display_pictures_in_event_list: false,
     beta__emailing: false,
     beta__emailing_parameters: false,
+    beta__emailing_group: false,
     proposal_revisions: false,
     unstable__tipsmeee: false,
     unstable__new_consultation_page: false,
@@ -89,7 +90,6 @@ export const features: FeatureFlags = {
     remind_user_account_confirmation: false,
     sentry_log: false,
     unstable__paper_vote: false,
-    unstable__secret_ballot: false,
     versions: false,
 };
 

@@ -42,7 +42,7 @@ exports[`<PostForm/> should render correctly 1`] = `
       />
     </div>
     <div
-      className="form-group  "
+      className="form-group"
     >
       <label
         className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"

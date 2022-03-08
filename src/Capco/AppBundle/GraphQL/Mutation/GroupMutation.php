@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Form\GroupCreateType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\UserBundle\Entity\User;
@@ -27,6 +28,7 @@ class GroupMutation implements MutationInterface
     private EntityManagerInterface $entityManager;
     private UserGroupRepository $userGroupRepository;
     private GlobalIdResolver $globalIdResolver;
+    private EmailingCampaignRepository $emailingCampaignRepository;
 
     public function __construct(
         LoggerInterface $logger,
@@ -35,7 +37,8 @@ class GroupMutation implements MutationInterface
         UserRepository $userRepository,
         UserGroupRepository $userGroupRepository,
         GroupRepository $groupRepository,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        EmailingCampaignRepository $emailingCampaignRepository
     ) {
         $this->logger = $logger;
         $this->formFactory = $formFactory;
@@ -44,6 +47,7 @@ class GroupMutation implements MutationInterface
         $this->groupRepository = $groupRepository;
         $this->userGroupRepository = $userGroupRepository;
         $this->globalIdResolver = $globalIdResolver;
+        $this->emailingCampaignRepository = $emailingCampaignRepository;
     }
 
     public function create(Argument $input): array
@@ -99,8 +103,8 @@ class GroupMutation implements MutationInterface
         if (!$group) {
             throw new UserError(sprintf('Unknown group with id "%s"', $groupId));
         }
-
-        if (!$group->isDeletable()) {
+        $isGroupUsedInCampaign = $this->emailingCampaignRepository->countEmailingCampaignUsingGroup($group);
+        if (!$group->isDeletable() && !$isGroupUsedInCampaign) {
             throw new UserError(
                 sprintf('This group can\'t be deleted because it\'s protected "%s"', $groupId)
             );
