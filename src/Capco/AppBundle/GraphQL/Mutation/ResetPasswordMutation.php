@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Doctrine\UserManager;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Form\Type\RecreatePasswordFormType;
+use Capco\UserBundle\Form\Type\PasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Security\LoginManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -24,6 +24,7 @@ class ResetPasswordMutation implements MutationInterface
     private SessionInterface $session;
     private LoginManagerInterface $loginManager;
     private string $firewallName;
+    private LoggerInterface $logger;
 
     public function __construct(
         SessionInterface $session,
@@ -33,6 +34,7 @@ class ResetPasswordMutation implements MutationInterface
         LoginManagerInterface $loginManager,
         UserPasswordEncoderInterface $userPasswordEncoder,
         TranslatorInterface $translator,
+        LoggerInterface $logger,
         $firewallName
     ) {
         $this->em = $em;
@@ -43,12 +45,12 @@ class ResetPasswordMutation implements MutationInterface
         $this->session = $session;
         $this->loginManager = $loginManager;
         $this->firewallName = $firewallName;
+        $this->logger = $logger;
     }
 
     public function __invoke(Argument $args): array
     {
         $token = $args->offsetGet('token');
-        /** @var User $user */
         $user = $this->userManager->findUserByResetPasswordToken($token);
         if (null === $user) {
             return [
@@ -58,12 +60,8 @@ class ResetPasswordMutation implements MutationInterface
                 ),
             ];
         }
-        $data = [];
-        $data['plainPassword'] = [
-            'first' => $args->offsetGet('password'),
-            'second' => $args->offsetGet('password'),
-        ];
-        $form = $this->formFactory->create(RecreatePasswordFormType::class, $user, [
+        $data = ['plainPassword' => $args->offsetGet('password')];
+        $form = $this->formFactory->create(PasswordFormType::class, $user, [
             'csrf_protection' => false,
         ]);
         $form->submit($data);
@@ -86,6 +84,9 @@ class ResetPasswordMutation implements MutationInterface
             return [
                 'user' => $user,
             ];
+        }
+        foreach ($form->getErrors(true) as $error) {
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
         }
 
         return [
