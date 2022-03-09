@@ -100,6 +100,7 @@ Scenario: Proposal should stay voted after user refresh the page
   And I should see "vote.add_success" in the "#global-alert-box" element
   And I reload the page
   Then I go to a collect step with vote
+  And I wait 10 seconds
   And I should see "voted"
 
 @security @votes_from_proposal

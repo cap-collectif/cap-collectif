@@ -299,7 +299,7 @@ const ProposalChangeAddressModal = ({
                   newAddress ? newAddress.formatted_address : newAddress,
                 ),
               );
-              if (newAddress)
+              if (newAddress && proposalForm.proposalInAZoneRequired)
                 retrieveDistrictForLocation(
                   newAddress.geometry.location,
                   proposalForm.id,
