@@ -92,6 +92,36 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
         $this->checkIfCustomQuestionResponseIsValid($row, 2)->shouldReturn(true);
     }
 
+    public function it_allow_empty_choice(
+        ProposalForm $proposalForm,
+        MultipleChoiceQuestion $question,
+        QuestionChoice $goodChoice
+    ) {
+        $customFields = ['question with bad choice'];
+        $proposalForm->getQuestionByTitle('question with bad choice')->willReturn($question);
+        $question->setTitle('question with bad choice');
+        $goodChoice->setTitle('existing choice');
+        $question->addChoice($goodChoice);
+        // select
+        $question->isRequired()->willReturn(false);
+        $question->getType()->willReturn(4);
+        $question->getChoices()->willReturn(new ArrayCollection([$goodChoice]));
+        $question->isChoiceValid('')->willReturn(false);
+        $row['question with bad choice'] = '';
+        $this->setCustomFields($customFields);
+        $this->setProposalForm($proposalForm);
+
+        $proposalForm->getQuestions()->willReturn(new ArrayCollection([$question]));
+
+        $this->checkIfCustomQuestionResponseIsValid($row, 2)->shouldReturn(true);
+        $question->isRequired()->willReturn(true);
+        $question->isOtherAllowed()->willReturn(false);
+        $this->checkIfCustomQuestionResponseIsValid($row, 2)->shouldReturn(false);
+        $question->isRequired()->willReturn(true);
+        $question->isOtherAllowed()->willReturn(false);
+        $this->checkIfCustomQuestionResponseIsValid($row, 2)->shouldReturn(false);
+    }
+
     public function it_check_majority_question(ProposalForm $proposalForm, SimpleQuestion $question)
     {
         $customFields = ['majority decision'];
@@ -119,6 +149,7 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
         $goodChoice->setTitle('existing choice');
         $question->addChoice($goodChoice);
         // radio
+        $question->isRequired()->willReturn(true);
         $question->getType()->willReturn(3);
         $question->getChoices()->willReturn(new ArrayCollection([$goodChoice]));
         $question->isChoiceValid('not existing choice')->willReturn(false);

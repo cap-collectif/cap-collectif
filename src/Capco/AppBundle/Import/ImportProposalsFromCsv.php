@@ -219,15 +219,17 @@ class ImportProposalsFromCsv
                 case AbstractQuestion::QUESTION_TYPE_BUTTON:
                     if (
                         $question instanceof MultipleChoiceQuestion &&
-                        !$question->isChoiceValid(trim($row[$questionTitle])) &&
-                        !$question->isOtherAllowed()
+                        ($question->isRequired() &&
+                            !$question->isChoiceValid(trim($row[$questionTitle])) &&
+                            !$question->isOtherAllowed())
                     ) {
                         $this->badData = $this->incrementBadData($this->badData, $key);
                         $this->logger->error(
                             sprintf(
-                                'bad data for question %s in line %d',
+                                'bad data for question %s in line %d with value %s',
                                 trim($questionTitle),
-                                $key
+                                $key,
+                                $row[$questionTitle]
                             )
                         );
 
@@ -240,9 +242,10 @@ class ImportProposalsFromCsv
                         $this->badData = $this->incrementBadData($this->badData, $key);
                         $this->logger->error(
                             sprintf(
-                                'bad data for question %s in line %d',
+                                'bad data for question %s in line %d with value %s',
                                 trim($questionTitle),
-                                $key
+                                $key,
+                                $row[$questionTitle]
                             )
                         );
 
@@ -263,9 +266,10 @@ class ImportProposalsFromCsv
                             $this->badData = $this->incrementBadData($this->badData, $key);
                             $this->logger->error(
                                 sprintf(
-                                    'bad data for question %s in line %d',
+                                    'bad data for question %s in line %d with value %s',
                                     trim($questionTitle),
-                                    $key
+                                    $key,
+                                    $row[$questionTitle]
                                 )
                             );
 
