@@ -167,18 +167,18 @@ class VoteSearch extends Search
                     if (
                         isset(
                             $result->getHit()['_source']['proposal'],
-                            $result->getHit()['_source']['proposal']['pointsCountByStep']
+                            $result->getHit()['_source']['proposal']['countByStep']
                         )
                     ) {
                         foreach (
-                            $result->getHit()['_source']['proposal']['pointsCountByStep']
+                            $result->getHit()['_source']['proposal']['countByStep']
                             as $pointedSteps
                         ) {
                             if (
                                 isset($pointedSteps['step'], $keys[0]['step']) &&
                                 $pointedSteps['step']['id'] === $keys[0]['step']->getId()
                             ) {
-                                return $pointedSteps['count'];
+                                return $pointedSteps['numericPoints'];
                             }
 
                             continue;

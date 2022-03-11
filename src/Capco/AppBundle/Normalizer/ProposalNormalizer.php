@@ -8,6 +8,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
@@ -24,6 +25,7 @@ class ProposalNormalizer implements
     private ObjectNormalizer $normalizer;
     private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
     private ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository;
     private CommentableCommentsDataLoader $commentableCommentsDataLoader;
     private ProposalResponsesResolver $proposalResponsesResolver;
 
@@ -31,12 +33,14 @@ class ProposalNormalizer implements
         ObjectNormalizer $normalizer,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository,
         CommentableCommentsDataLoader $commentableCommentsDataLoader,
         ProposalResponsesResolver $proposalResponsesResolver
     ) {
         $this->normalizer = $normalizer;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
+        $this->proposalStepPaperVoteCounterRepository = $proposalStepPaperVoteCounterRepository;
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
         $this->proposalResponsesResolver = $proposalResponsesResolver;
     }
@@ -105,6 +109,14 @@ class ProposalNormalizer implements
 
     private function countPointsAndVotes(Proposal $proposal, array $data): array
     {
+        $stepCounter = [];
+        $totalNumericVoteCount = 0;
+        $totalNumericPointsCount = 0;
+        $totalPaperVoteCount = 0;
+        $totalPaperPointsCount = 0;
+        $totalVoteCount = 0;
+        $totalPointsCount = 0;
+
         $selectionCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
             $proposal
         );
@@ -116,47 +128,81 @@ class ProposalNormalizer implements
         $selectionVotesCountPoints = $selectionCount['pointsBySteps'];
         $collectVotesCount = $collectCount['votesBySteps'];
         $collectVotesCountPoints = $collectCount['pointsBySteps'];
-        $stepVoteCounter = [];
-        $totalVoteCount = 0;
+
         foreach ($collectVotesCount as $stepId => $value) {
-            $stepVoteCounter[] = [
-                'step' => ['id' => $stepId],
-                'count' => $value,
-            ];
+            $stepCounter[$stepId] = self::emptyStepCounter($stepId);
+            $stepCounter[$stepId]['numericVotes'] += $value;
+            $stepCounter[$stepId]['votes'] += $value;
+            $totalNumericVoteCount += $value;
             $totalVoteCount += $value;
         }
         foreach ($selectionVotesCount as $stepId => $value) {
-            $stepVoteCounter[] = [
-                'step' => ['id' => $stepId],
-                'count' => $value,
-            ];
+            $stepCounter[$stepId] = self::emptyStepCounter($stepId);
+            $stepCounter[$stepId]['numericVotes'] += $value;
+            $stepCounter[$stepId]['votes'] += $value;
+            $totalNumericVoteCount += $value;
             $totalVoteCount += $value;
         }
 
-        $data['votesCountByStep'] = $stepVoteCounter;
-        $data['votesCount'] = $totalVoteCount;
-
-        $stepPointsCounter = [];
-        $totalPointsCount = 0;
-
         foreach ($collectVotesCountPoints as $stepId => $value) {
-            $stepPointsCounter[] = [
-                'step' => ['id' => $stepId],
-                'count' => $value,
-            ];
+            if (!isset($stepCounter[$stepId])) {
+                $stepCounter[$stepId] = self::emptyStepCounter($stepId);
+            }
+            $stepCounter[$stepId]['numericPoints'] += $value;
+            $stepCounter[$stepId]['points'] += $value;
+            $totalNumericPointsCount += $value;
             $totalPointsCount += $value;
         }
         foreach ($selectionVotesCountPoints as $stepId => $value) {
-            $stepPointsCounter[] = [
-                'step' => ['id' => $stepId],
-                'count' => $value,
-            ];
+            if (!isset($stepCounter[$stepId])) {
+                $stepCounter[$stepId] = self::emptyStepCounter($stepId);
+            }
+            $stepCounter[$stepId]['numericPoints'] += $value;
+            $stepCounter[$stepId]['points'] += $value;
+            $totalNumericPointsCount += $value;
             $totalPointsCount += $value;
         }
 
-        $data['pointsCountByStep'] = $stepPointsCounter;
+        $paperVoteCounters = $this->proposalStepPaperVoteCounterRepository->findBy([
+            'proposal' => $proposal,
+        ]);
+        foreach ($paperVoteCounters as $paperVoteCounter) {
+            $stepId = $paperVoteCounter->getStep()->getId();
+            if (!isset($stepCounter[$stepId])) {
+                $stepCounter[$stepId] = self::emptyStepCounter($stepId);
+            }
+            $stepCounter[$stepId]['paperVotes'] += $paperVoteCounter->getTotalCount();
+            $stepCounter[$stepId]['paperPoints'] += $paperVoteCounter->getTotalPointsCount();
+            $stepCounter[$stepId]['votes'] += $paperVoteCounter->getTotalCount();
+            $stepCounter[$stepId]['points'] += $paperVoteCounter->getTotalPointsCount();
+
+            $totalPaperVoteCount += $paperVoteCounter->getTotalCount();
+            $totalPaperPointsCount += $paperVoteCounter->getTotalPointsCount();
+            $totalVoteCount += $paperVoteCounter->getTotalCount();
+            $totalPointsCount += $paperVoteCounter->getTotalPointsCount();
+        }
+
+        $data['countByStep'] = array_values($stepCounter);
+        $data['numericVotesCount'] = $totalNumericVoteCount;
+        $data['numericPointsCount'] = $totalNumericPointsCount;
+        $data['paperVotesCount'] = $totalPaperVoteCount;
+        $data['paperPointsCount'] = $totalPaperPointsCount;
+        $data['votesCount'] = $totalVoteCount;
         $data['pointsCount'] = $totalPointsCount;
 
         return $data;
+    }
+
+    private static function emptyStepCounter(string $stepId): array
+    {
+        return [
+            'step' => ['id' => $stepId],
+            'numericVotes' => 0,
+            'paperVotes' => 0,
+            'votes' => 0,
+            'numericPoints' => 0,
+            'paperPoints' => 0,
+            'points' => 0,
+        ];
     }
 }

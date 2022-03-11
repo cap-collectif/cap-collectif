@@ -518,38 +518,38 @@ class ProposalSearch extends Search
                 break;
             case 'votes':
                 return [
-                    'votesCountByStep.count' => [
+                    'countByStep.votes' => [
                         'order' => 'desc',
-                        'nested_path' => 'votesCountByStep',
-                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
+                        'nested_path' => 'countByStep',
+                        'nested_filter' => ['term' => ['countByStep.step.id' => $stepId]],
                     ],
                     'createdAt' => ['order' => 'desc'],
                 ];
             case 'points':
                 return [
-                    'pointsCountByStep.count' => [
+                    'countByStep.points' => [
                         'order' => 'desc',
-                        'nested_path' => 'pointsCountByStep',
-                        'nested_filter' => ['term' => ['pointsCountByStep.step.id' => $stepId]],
+                        'nested_path' => 'countByStep',
+                        'nested_filter' => ['term' => ['countByStep.step.id' => $stepId]],
                     ],
                     'createdAt' => ['order' => 'desc'],
                 ];
 
             case 'least-votes':
                 return [
-                    'votesCountByStep.count' => [
+                    'countByStep.votes' => [
                         'order' => 'asc',
-                        'nested_path' => 'votesCountByStep',
-                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
+                        'nested_path' => 'countByStep',
+                        'nested_filter' => ['term' => ['countByStep.step.id' => $stepId]],
                     ],
                     'createdAt' => ['order' => 'desc'],
                 ];
             case 'least-points':
                 return [
-                    'pointsCountByStep.count' => [
+                    'countByStep.points' => [
                         'order' => 'asc',
-                        'nested_path' => 'pointsCountByStep',
-                        'nested_filter' => ['term' => ['pointsCountByStep.step.id' => $stepId]],
+                        'nested_path' => 'countByStep',
+                        'nested_filter' => ['term' => ['countByStep.step.id' => $stepId]],
                     ],
                     'createdAt' => ['order' => 'desc'],
                 ];

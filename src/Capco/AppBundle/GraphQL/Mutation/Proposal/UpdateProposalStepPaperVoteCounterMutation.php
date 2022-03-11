@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Proposal;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalStepPaperVoteCounter;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -24,15 +25,18 @@ class UpdateProposalStepPaperVoteCounterMutation implements MutationInterface
     private EntityManagerInterface $em;
     private GlobalIdResolver $resolver;
     private ProposalStepPaperVoteCounterRepository $repository;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $resolver,
-        ProposalStepPaperVoteCounterRepository $repository
+        ProposalStepPaperVoteCounterRepository $repository,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->resolver = $resolver;
         $this->repository = $repository;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -44,6 +48,8 @@ class UpdateProposalStepPaperVoteCounterMutation implements MutationInterface
             $paperVote->setTotalCount($input->offsetGet('totalCount'));
             $paperVote->setTotalPointsCount($input->offsetGet('totalPointsCount'));
             $this->em->flush();
+            $this->indexer->index(get_class($proposal), $proposal->getId());
+            $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['error' => $error->getMessage()];
         }

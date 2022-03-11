@@ -5,7 +5,7 @@ Capco\AppBundle\Entity\ProposalStepPaperVoteCounter:
         proposal: '@question1'
         step: '@collectQuestionVoteAvecClassement'
     ProposalStepPaperVoteCounterQ2:
-        totalCount: 2
+        totalCount: 1
         totalPointsCount: 2
         proposal: '@question2'
         step: '@collectQuestionVoteAvecClassement'

@@ -241,18 +241,31 @@ mappings:
                 status:
                     properties:
                         id: { type: keyword }
+        numericPointsCount: { type: long }
+        numericVotesCount: { type: long }
+        paperPointsCount: { type: long }
+        paperVotesCount: { type: long }
         pointsCount: { type: long }
         votesCount: { type: long }
-        votesCountByStep: *ContributionStep
         votesCountByProject: *ContributionProject
         votesCountByConsultation: *ContributionConsultation
         eventStatus:
             type: keyword
-        pointsCountByStep:
+        countByStep:
             type: nested
             properties:
                 step: *Step
-                count:
+                numericVotes:
+                    type: long
+                paperVotes:
+                    type: long
+                votes:
+                    type: long
+                numericPoints:
+                    type: long
+                paperPoints:
+                    type: long
+                points:
                     type: long
         proposalAnalysts:
             properties:
