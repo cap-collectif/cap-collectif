@@ -81,7 +81,6 @@ export class BodyText extends React.Component<Props, State> {
         <div ref={this.refContent} className="body__infos__content">
           <WYSIWYGRender
             style={{
-              lineHeight: `${LINE_HEIGHT}px`,
               ...style,
             }}
             value={text}

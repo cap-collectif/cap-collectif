@@ -57,6 +57,7 @@ type Values = {|
   body: ?string,
   metaDescription: ?string,
   link: ?string,
+  bodyUsingJoditWysiwyg?: boolean,
 |};
 
 type Props = {|
@@ -73,6 +74,7 @@ type Props = {|
   className?: string,
   isFrontendView: boolean,
   currentLanguage?: string,
+  bodyUsingJoditWysiwyg?: boolean,
 |};
 
 const PageTitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -191,6 +193,7 @@ export const EventForm = ({
   event,
   query,
   currentValues,
+  bodyUsingJoditWysiwyg,
   dispatch,
   className,
   isFrontendView = false,
@@ -362,6 +365,9 @@ export const EventForm = ({
             id="event_body"
             type="admin-editor"
             name="body"
+            fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
+            fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+            formName={formName}
             component={component}
             disabled={isDisabled()}
             label={<FormattedMessage id="global.description" />}
@@ -669,7 +675,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         startAt: props.event && props.event.timeRange ? props.event.timeRange.startAt : null,
         endAt: props.event && props.event.timeRange ? props.event.timeRange.endAt : null,
         body: translation ? translation.body : null,
-        bodyUsingJoditWysiwyg: props?.event?.bodyUsingJoditWysiwyg ?? false,
+        bodyUsingJoditWysiwyg: props?.event?.bodyUsingJoditWysiwyg !== false,
         enabled: props.event ? props.event.enabled : null,
         commentable: props.event ? props.event.commentable : null,
         guestListEnabled: props.event ? props.event.guestListEnabled : null,
@@ -718,6 +724,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
           props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
         translations: props.event && props.event.translations ? props.event.translations : [],
       },
+      // WYSIWYG Migration
+      bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
       currentValues: selector(state, 'guestListEnabled', 'link', 'status', 'projects'),
     };
   }
@@ -725,12 +733,20 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   return {
     currentLanguage: state.language.currentLanguage,
     features: state.default.features,
-    currentValues: selector(state, 'guestListEnabled', 'link', 'status', 'projects'),
+    // WYSIWYG Migration
+    bodyUsingJoditWysiwyg: true,
+    currentValues: selector(
+      state,
+      'guestListEnabled',
+      'link',
+      'status',
+      'projects',
+      'isPresential',
+    ),
+
     initialValues: {
       authorAgreeToUsePersonalDataForEventOnly: false,
-      guestListEnabled: false,
-      author: { value: props.query.viewer.id, label: props.query.viewer.displayName },
-      bodyUsingJoditWysiwyg: false,
+      bodyUsingJoditWysiwyg: true,
     },
   };
 };

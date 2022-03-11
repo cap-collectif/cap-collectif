@@ -8,4 +8,8 @@ exercise_html_purifier:
         admin:
             config:
                 HTML.SafeIframe: true
+                HTML.Trusted: true
+                Attr.AllowedFrameTargets: ['_blank']
                 URI.SafeIframeRegexp: "#https?://([-÷÷\\w\\.]+)+(:\\d+)?(/([\\w/_\\.]*(\\?\\S+)?)?)?#"
+                CSS.AllowTricky: true
+                CSS.Trusted: true

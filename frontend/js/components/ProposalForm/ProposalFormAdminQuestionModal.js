@@ -37,6 +37,7 @@ type Props = {|
   intl: IntlShape,
   isSuperAdmin: boolean,
   questionsIds: $ReadOnlyArray<string>,
+  descriptionUsingJoditWysiwyg?: ?boolean,
   ...ParentProps,
 |};
 
@@ -150,6 +151,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
       currentQuestion,
       formErrors,
       isSuperAdmin,
+      descriptionUsingJoditWysiwyg,
     } = this.props;
     if (formErrors.questions !== undefined) {
       disabled = true;
@@ -168,7 +170,8 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
           const isEmpty = this.resetQuestion();
           onClose(isEmpty);
         }}
-        aria-labelledby="proposal-form-admin-question-modal-title-lg">
+        aria-labelledby="proposal-form-admin-question-modal-title-lg"
+        enforceFocus={false}>
         <ModalContainer>
           <Modal.Header closeButton>
             <div className="modal-title">
@@ -203,6 +206,9 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
               name={`${member}.description`}
               component={component}
               type="admin-editor"
+              formName={formName}
+              fieldUsingJoditWysiwyg={descriptionUsingJoditWysiwyg}
+              fieldUsingJoditWysiwygName={`${member}.descriptionUsingJoditWysiwyg`}
               id={`${member}.description`}
               label={
                 <span>
@@ -524,6 +530,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
     validationRuleType: selector(state, `${props.member}.validationRule.type`),
     formErrors: getFormSyncErrors(props.formName)(state),
     isSuperAdmin: state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'),
+    descriptionUsingJoditWysiwyg: selector(state, `${props.member}.descriptionUsingJoditWysiwyg`),
   };
 };
 

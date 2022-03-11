@@ -38,6 +38,8 @@ exports[`<ShieldAdminForm /> renders correctly 1`] = `
       </div>
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwyg={true}
+        fieldUsingJoditWysiwygName="siteParameter"
         id="shield-admin-form_introduction"
         label={
           <h4>

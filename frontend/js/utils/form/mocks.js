@@ -1757,8 +1757,7 @@ export const allTypeResponses: ResponsesInReduxForm = [
         id: '3de332be-6d0a-11ea-9d72-0242ac110006',
         name: 'randomImage.jpg',
         size: '17.5 Ko',
-        url:
-          'https://demo.cap-collectif.com/media/default/0001/01/40dacc5a6c1bbf642d7b41728632cfa3d50f0edb.jpeg',
+        url: 'https://demo.cap-collectif.com/media/default/0001/01/40dacc5a6c1bbf642d7b41728632cfa3d50f0edb.jpeg',
       },
     ],
   },

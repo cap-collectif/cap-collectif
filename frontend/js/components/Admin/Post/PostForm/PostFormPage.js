@@ -38,6 +38,7 @@ export const PostFormPageQuery: GraphQLTaggedNode = graphql`
         }
         abstract
         body
+        bodyUsingJoditWysiwyg
         media {
           id
           url
@@ -138,6 +139,7 @@ const PostFormPage = ({ queryReference, postId, isAdmin }: Props): React.Node =>
         is_published: false,
         is_displayed: !!isAdmin,
         published_at: moment().format('YYYY-MM-DD HH:mm:ss'),
+        bodyUsingJoditWysiwyg: true,
       };
     }
 
@@ -174,6 +176,7 @@ const PostFormPage = ({ queryReference, postId, isAdmin }: Props): React.Node =>
           : null,
       proposal: proposal && proposal.length > 0 && proposal[0]?.title ? proposal[0]?.title : null,
       proposalId: proposal && proposal.length > 0 && proposal[0]?.id ? proposal[0]?.id : null,
+      bodyUsingJoditWysiwyg: post?.bodyUsingJoditWysiwyg !== false,
     };
   };
   return (

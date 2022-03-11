@@ -28,7 +28,7 @@ class PostType extends AbstractType
                     'body' => [
                         'required' => true,
                         'purify_html' => true,
-                        'purify_html_profile' => 'user',
+                        'purify_html_profile' => 'admin',
                     ],
                     'title' => [
                         'required' => true,

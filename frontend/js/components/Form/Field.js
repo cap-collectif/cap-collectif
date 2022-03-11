@@ -105,6 +105,9 @@ type Props = {|
   dateProps?: DateProps,
   maxSize?: number,
   accept?: Array<string>,
+  fieldUsingJoditWysiwyg?: boolean,
+  fieldUsingJoditWysiwygName?: string,
+  noCode?: boolean,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -165,6 +168,9 @@ class Field extends React.Component<Props> {
       selectedLanguage,
       maxSize,
       accept,
+      fieldUsingJoditWysiwyg,
+      fieldUsingJoditWysiwygName,
+      noCode,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -245,6 +251,9 @@ class Field extends React.Component<Props> {
         selectedLanguage={selectedLanguage}
         maxSize={maxSize}
         accept={accept}
+        fieldUsingJoditWysiwyg={fieldUsingJoditWysiwyg}
+        fieldUsingJoditWysiwygName={fieldUsingJoditWysiwygName}
+        noCode={noCode}
         {...input}>
         {children}
       </Input>

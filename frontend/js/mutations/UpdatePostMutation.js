@@ -13,6 +13,7 @@ const mutation = graphql`
       post {
         title
         body
+        bodyUsingJoditWysiwyg
       }
       errorCode
     }

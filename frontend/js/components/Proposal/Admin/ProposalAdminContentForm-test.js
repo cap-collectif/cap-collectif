@@ -92,6 +92,7 @@ describe('<ProposalAdminContentForm />', () => {
             type: 'text',
             helpText: 'Help 1',
             description: null,
+            descriptionUsingJoditWysiwyg: false,
             level: 0,
             position: 0,
             number: 1,

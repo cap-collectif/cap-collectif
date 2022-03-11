@@ -277,6 +277,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
       arrayPush(formName, 'questions', {
         private: false,
         required: false,
+        descriptionUsingJoditWysiwyg: true,
       }),
     );
 
@@ -292,6 +293,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
         required: false,
         type: 'section',
         level: 0,
+        descriptionUsingJoditWysiwyg: true,
       }),
     );
     this.setState({ editIndexSection: fields.length });
@@ -306,6 +308,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
         required: false,
         type: 'section',
         level: 1,
+        descriptionUsingJoditWysiwyg: true,
       }),
     );
     this.setState({ editIndexSubSection: fields.length });

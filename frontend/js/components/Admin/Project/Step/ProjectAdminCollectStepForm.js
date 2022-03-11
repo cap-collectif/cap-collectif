@@ -296,7 +296,7 @@ export const ProjectAdminCollectStepForm = ({
         <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
       </BootstrapButton>
       <Field
-        type="editor"
+        type="textarea"
         name="requirementsReason"
         id="step-requirementsReason"
         label={<FormattedMessage id="reason-for-collection" />}

@@ -1104,6 +1104,13 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
+                              "name": "descriptionUsingJoditWysiwyg",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
                               "name": "type",
                               "storageKey": null,
                             },
@@ -1280,6 +1287,13 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                               "args": null,
                                               "kind": "ScalarField",
                                               "name": "description",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "descriptionUsingJoditWysiwyg",
                                               "storageKey": null,
                                             },
                                             Object {
@@ -2373,7 +2387,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "85ccf9c36a3eacb3f80c3f1fefbeaa1f",
+          "cacheID": "ff02a2f89b5eb4889703d47d8f6ca1e2",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2550,6 +2564,7 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
         number
       }
       description
+      descriptionUsingJoditWysiwyg
       type
       ... on MultipleChoiceQuestion {
         isOtherAllowed
@@ -2570,6 +2585,7 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
               id
               title
               description
+              descriptionUsingJoditWysiwyg
               color
               image {
                 id

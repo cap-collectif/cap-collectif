@@ -101,7 +101,7 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with data 1`] = 
       />
     }
     name="requirementsReason"
-    type="editor"
+    type="textarea"
   />
 </Fragment>
 `;
@@ -198,7 +198,7 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with no initial 
       />
     }
     name="requirementsReason"
-    type="editor"
+    type="textarea"
   />
 </Fragment>
 `;

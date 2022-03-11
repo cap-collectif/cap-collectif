@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, type IntlShape } from 'react-intl';
-import { reduxForm, Field, SubmissionError, submit } from 'redux-form';
+import { reduxForm, Field, SubmissionError, submit, formValueSelector } from 'redux-form';
 import { connect, useDispatch } from 'react-redux';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import type { Dispatch, State } from '~/types';
@@ -21,6 +21,8 @@ type FormValues = {|
   +email: ?string,
   +title: ?string,
   +confidentiality: string,
+  +confidentialityUsingJoditWysiwyg?: ?boolean,
+  +bodyUsingJoditWysiwyg?: ?boolean,
 |};
 
 type ValidFormValues = {|
@@ -28,6 +30,8 @@ type ValidFormValues = {|
   +email: string,
   +title: string,
   +confidentiality: string,
+  +confidentialityUsingJoditWysiwyg?: ?boolean,
+  +bodyUsingJoditWysiwyg?: ?boolean,
 |};
 type OwnProps = {|
   +intl: IntlShape,
@@ -44,6 +48,8 @@ type StateProps = {|
   +initialValues: FormValues,
   +form: string,
   +dispatch: Dispatch,
+  +confidentialityUsingJoditWysiwyg?: ?boolean,
+  +bodyUsingJoditWysiwyg?: ?boolean,
 |};
 
 type AfterConnectProps = {|
@@ -73,6 +79,8 @@ const onSubmit = (values: ValidFormValues, dispatch: Dispatch, props: Props) => 
   const data = {
     email: values.email,
     translations: translationsData,
+    confidentialityUsingJoditWysiwyg: values.confidentialityUsingJoditWysiwyg,
+    bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg,
   };
 
   if (contactForm) {
@@ -150,6 +158,8 @@ export const ContactFormAdminForm = ({
   handleSubmit,
   pristine,
   invalid,
+  bodyUsingJoditWysiwyg,
+  confidentialityUsingJoditWysiwyg,
 }: Props): React.Node => {
   const optional = (
     <span className="excerpt">
@@ -159,7 +169,6 @@ export const ContactFormAdminForm = ({
   );
 
   const dispatch = useDispatch<Dispatch>();
-
   return (
     <div id="create-reply-form">
       <form id="reply-form" onSubmit={handleSubmit}>
@@ -175,6 +184,9 @@ export const ContactFormAdminForm = ({
           id={`${form}-contact-body`}
           type="admin-editor"
           name="body"
+          fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
+          fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+          formName={form}
           component={renderInput}
           label={
             <span>
@@ -197,6 +209,9 @@ export const ContactFormAdminForm = ({
           id={`${form}-confidentiality`}
           type="admin-editor"
           name="confidentiality"
+          fieldUsingJoditWysiwyg={confidentialityUsingJoditWysiwyg}
+          fieldUsingJoditWysiwygName="confidentialityUsingJoditWysiwyg"
+          formName={form}
           component={renderInput}
           label={
             <span>
@@ -235,19 +250,29 @@ const mapStateToProps = (state: State, { contactForm, intl }: BeforeConnectProps
     contactForm ? contactForm.translations : [],
     state.language.currentLanguage,
   );
-
+  const form = contactForm ? `Update${formName}-${contactForm.id}` : `Create${formName}`;
   return {
     currentLanguage: state.language.currentLanguage,
-    form: contactForm ? `Update${formName}-${contactForm.id}` : `Create${formName}`,
+    form,
     initialValues: {
       title: translation ? translation.title : null,
       body: translation ? translation.body : null,
       email: contactForm ? contactForm.email : null,
+      bodyUsingJoditWysiwyg: contactForm ? contactForm.bodyUsingJoditWysiwyg !== false : true,
+      confidentialityUsingJoditWysiwyg: contactForm
+        ? contactForm.confidentialityUsingJoditWysiwyg !== false
+        : true,
       confidentiality:
         contactForm && translation && translation.confidentiality
           ? translation.confidentiality
           : intl.formatMessage({ id: 'contact-form-confidentiality-text' }),
     },
+    // WYSIWYG Migration
+    bodyUsingJoditWysiwyg: formValueSelector(form)(state, 'bodyUsingJoditWysiwyg'),
+    confidentialityUsingJoditWysiwyg: formValueSelector(form)(
+      state,
+      'confidentialityUsingJoditWysiwyg',
+    ),
   };
 };
 
@@ -266,6 +291,8 @@ export default (createFragmentContainer(container, {
     fragment ContactFormAdminForm_contactForm on ContactForm {
       id
       email
+      bodyUsingJoditWysiwyg
+      confidentialityUsingJoditWysiwyg
       translations {
         locale
         body

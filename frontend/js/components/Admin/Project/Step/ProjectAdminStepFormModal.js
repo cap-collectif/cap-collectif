@@ -102,7 +102,8 @@ export const ProjectAdminStepFormModal = ({
       onHide={onClose}
       dialogClassName="custom-modal-dialog"
       bsSize="large"
-      aria-labelledby="contained-modal-title-lg">
+      aria-labelledby="contained-modal-title-lg"
+      enforceFocus={false}>
       <Modal.Header closeButton>
         <StepModalTitle id="contained-modal-title-lg">
           <FormattedMessage id={modalTitle} />

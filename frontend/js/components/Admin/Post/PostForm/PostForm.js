@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { Field, reduxForm, submit, change, FormSection } from 'redux-form';
-import { useDispatch } from 'react-redux';
+import { Field, reduxForm, submit, change, FormSection, formValueSelector } from 'redux-form';
+import { useDispatch, connect } from 'react-redux';
 import { useIntl } from 'react-intl';
 import css from '@styled-system/css';
 import { graphql, useFragment } from 'react-relay';
@@ -9,6 +9,7 @@ import type { IntlShape } from 'react-intl';
 import moment from 'moment';
 import Flex from '~ui/Primitives/Layout/Flex';
 import component from '~/components/Form/Field';
+import type { GlobalState, Dispatch } from '~/types';
 import Accordion from '~ds/Accordion';
 import Panel from '~ds/Accordion/panel';
 import AccordionButton from '~ds/Accordion/button';
@@ -59,20 +60,22 @@ type OwnProps = {|
 |};
 type AfterConnectProps = {|
   ...OwnProps,
+  +dispatch: Dispatch,
+  +bodyUsingJoditWysiwyg?: ?boolean,
 |};
 type Props = {|
-  ...OwnProps,
+  ...AfterConnectProps,
   ...ReduxFormFormProps,
 |};
 const formName = 'admin_post_create';
 
 const FRAGMENT = graphql`
   fragment PostForm_query on Query
-    @argumentDefinitions(
-      affiliations: { type: "[ProjectAffiliation!]" }
-      isAdmin: { type: " Boolean!" }
-      postId: { type: "ID!" }
-    ) {
+  @argumentDefinitions(
+    affiliations: { type: "[ProjectAffiliation!]" }
+    isAdmin: { type: " Boolean!" }
+    postId: { type: "ID!" }
+  ) {
     post: node(id: $postId) {
       ...ModalPostDeleteConfirmation_post
     }
@@ -179,6 +182,7 @@ const PostForm = ({
   submitting,
   initialValues,
   dirty,
+  bodyUsingJoditWysiwyg,
 }: Props): React.Node => {
   const intl = useIntl();
   const data = useFragment(FRAGMENT, query);
@@ -399,6 +403,9 @@ const PostForm = ({
             }
             component={component}
             disabled={false}
+            fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
+            fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+            formName={formName}
             type="admin-editor"
           />
         </FormSection>
@@ -633,6 +640,11 @@ const validate = (values: FormValues) => {
 
   return errors;
 };
+
+const mapStateToProps = (state: GlobalState) => ({
+  bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
+});
+
 const formContainer: React.AbstractComponent<AfterConnectProps> = reduxForm({
   form: formName,
   enableReinitialize: true,
@@ -640,4 +652,8 @@ const formContainer: React.AbstractComponent<AfterConnectProps> = reduxForm({
   onSubmit,
 })(PostForm);
 
-export default formContainer;
+const postForm = (connect<AfterConnectProps, OwnProps, _, _, _, _>(mapStateToProps)(
+  formContainer,
+): React.AbstractComponent<OwnProps>);
+
+export default postForm;

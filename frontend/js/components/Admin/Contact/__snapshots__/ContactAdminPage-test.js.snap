@@ -228,13 +228,27 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
                       "name": "email",
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "bodyUsingJoditWysiwyg",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "confidentialityUsingJoditWysiwyg",
+                      "storageKey": null,
+                    },
                   ],
                   "storageKey": null,
                 },
               ],
             },
             "params": Object {
-              "cacheID": "a2f784b991a1bae77a55e4af4bc6d466",
+              "cacheID": "03ed17a84d99c6cbf7c9c05dbe1f0a7d",
               "id": null,
               "metadata": Object {},
               "name": "ContactAdminPageQuery",
@@ -263,6 +277,8 @@ fragment ContactAdminList_query on Query {
 fragment ContactFormAdminForm_contactForm on ContactForm {
   id
   email
+  bodyUsingJoditWysiwyg
+  confidentialityUsingJoditWysiwyg
   translations {
     locale
     body

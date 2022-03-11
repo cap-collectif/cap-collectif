@@ -53,10 +53,11 @@ exports[`<ContentPage /> should renders correctly 1`] = `
     component={[Function]}
     disableValidation={true}
     disabled={false}
+    fieldUsingJoditWysiwyg={true}
     id="mailContent"
     label="mail-content"
     name="mailContent"
-    type="editor"
+    type="admin-editor"
   />
   <Relay(PreviewMail)
     emailingCampaign={
@@ -127,10 +128,11 @@ exports[`<ContentPage /> should renders correctly when disabled 1`] = `
     component={[Function]}
     disableValidation={true}
     disabled={true}
+    fieldUsingJoditWysiwyg={true}
     id="mailContent"
     label="mail-content"
     name="mailContent"
-    type="editor"
+    type="admin-editor"
   />
   <Relay(PreviewMail)
     emailingCampaign={
@@ -201,10 +203,11 @@ exports[`<ContentPage /> should renders correctly when error 1`] = `
     component={[Function]}
     disableValidation={false}
     disabled={false}
+    fieldUsingJoditWysiwyg={true}
     id="mailContent"
     label="mail-content"
     name="mailContent"
-    type="editor"
+    type="admin-editor"
   />
   <Relay(PreviewMail)
     emailingCampaign={

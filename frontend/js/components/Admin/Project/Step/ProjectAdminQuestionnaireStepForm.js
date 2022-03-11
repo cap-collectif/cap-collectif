@@ -13,7 +13,7 @@ import environment from '~/createRelayEnvironment';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
 import { type ProjectAdminQuestionnaireStepFormQuestionnairesQueryResponse } from '~relay/ProjectAdminQuestionnaireStepFormQuestionnairesQuery.graphql';
 import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
-import { type FranceConnectAllowedData } from "~/components/Admin/Project/Step/ProjectAdminStepForm";
+import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
 
 type Props = {|
   dispatch: Dispatch,
@@ -21,6 +21,7 @@ type Props = {|
   questionnaire?: {| label: string, value: string |},
   isAnonymousParticipationAllowed: boolean,
   fcAllowedData: FranceConnectAllowedData,
+  footerUsingJoditWysiwyg?: ?boolean,
 |};
 
 export const getAvailableQuestionnaires = graphql`
@@ -86,6 +87,7 @@ export const ProjectAdminQuestionnaireStepForm = ({
   requirements,
   isAnonymousParticipationAllowed,
   fcAllowedData,
+  footerUsingJoditWysiwyg,
 }: Props) => {
   const { user } = useSelector((state: GlobalState) => state.user);
   const intl = useIntl();
@@ -94,9 +96,12 @@ export const ProjectAdminQuestionnaireStepForm = ({
   return (
     <>
       <Field
-        type="editor"
+        type="admin-editor"
         name="footer"
         id="step-footer"
+        fieldUsingJoditWysiwyg={footerUsingJoditWysiwyg}
+        fieldUsingJoditWysiwygName="footerUsingJoditWysiwyg"
+        formName="stepForm"
         label={renderLabel('global.footer', intl)}
         component={component}
       />
@@ -144,7 +149,7 @@ export const ProjectAdminQuestionnaireStepForm = ({
             <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
           </Button>
           <Field
-            type="editor"
+            type="textarea"
             name="requirementsReason"
             id="step-requirementsReason"
             label={<FormattedMessage id="reason-for-collection" />}

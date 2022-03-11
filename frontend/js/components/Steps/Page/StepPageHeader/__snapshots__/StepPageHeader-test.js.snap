@@ -35,7 +35,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
           className="body__infos__content"
         >
           <div
-            className=" ql-editor"
+            className=" ql-editor wysiwyg-render"
             dangerouslySetInnerHTML={
               Object {
                 "__html": "<mock-value-for-field-\\"body\\">",
@@ -43,7 +43,6 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
             }
             style={
               Object {
-                "lineHeight": "22px",
                 "maxHeight": "none",
                 "overflow": "visible",
                 "visibility": "visible",
@@ -92,7 +91,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep with a de
           className="body__infos__content"
         >
           <div
-            className=" ql-editor"
+            className=" ql-editor wysiwyg-render"
             dangerouslySetInnerHTML={
               Object {
                 "__html": "<mock-value-for-field-\\"body\\">",
@@ -100,7 +99,6 @@ exports[`<StepPageHeader /> should render correctly a consultationStep with a de
             }
             style={
               Object {
-                "lineHeight": "22px",
                 "maxHeight": "none",
                 "overflow": "visible",
                 "visibility": "visible",
@@ -149,7 +147,7 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
           className="body__infos__content"
         >
           <div
-            className=" ql-editor"
+            className=" ql-editor wysiwyg-render"
             dangerouslySetInnerHTML={
               Object {
                 "__html": "<mock-value-for-field-\\"body\\">",
@@ -157,7 +155,6 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
             }
             style={
               Object {
-                "lineHeight": "22px",
                 "maxHeight": "none",
                 "overflow": "visible",
                 "visibility": "visible",
@@ -206,7 +203,7 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
           className="body__infos__content"
         >
           <div
-            className=" ql-editor"
+            className=" ql-editor wysiwyg-render"
             dangerouslySetInnerHTML={
               Object {
                 "__html": "<mock-value-for-field-\\"body\\">",
@@ -214,7 +211,6 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
             }
             style={
               Object {
-                "lineHeight": "22px",
                 "maxHeight": "none",
                 "overflow": "visible",
                 "visibility": "visible",
@@ -263,7 +259,7 @@ exports[`<StepPageHeader /> should render correctly a selectionStep with interpe
           className="body__infos__content"
         >
           <div
-            className=" ql-editor"
+            className=" ql-editor wysiwyg-render"
             dangerouslySetInnerHTML={
               Object {
                 "__html": "<mock-value-for-field-\\"body\\">",
@@ -271,7 +267,6 @@ exports[`<StepPageHeader /> should render correctly a selectionStep with interpe
             }
             style={
               Object {
-                "lineHeight": "22px",
                 "maxHeight": "none",
                 "overflow": "visible",
                 "visibility": "visible",

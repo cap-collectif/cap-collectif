@@ -2,191 +2,201 @@
 
 exports[`<Editor /> should render correctly with defaultProps 1`] = `
 <div
-  aria-labelledby="label-azerty"
-  class="Editor__Container-iWGgom fJXUsY editor test"
-  id="azerty"
+  class="sc-bdnxRM daIcnO"
 >
-  <div>
-    <div
-      aria-orientation="horizontal"
-      class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
-      id="quill-toolbar"
-      role="menubar"
-    >
-      <span
-        class="sc-bdnxRM hptjof"
-        clip="rect(0px, 0px, 0px, 0px)"
-      >
-        <button
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
-          id="quill-toolbar-1"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-        >
-          aria-editor-skip-toolbar
-        </button>
-      </span>
-      <select
-        aria-label="global.fontsize"
-        class="ql-size"
-        id="quill-toolbar-2"
-        role="menuitem"
-        tabindex="0"
-      >
-        <option
-          value="small"
-        >
-          editor.size.small
-        </option>
-        <option
-          selected=""
-          value="normal"
-        >
-          editor.size.normal
-        </option>
-        <option
-          value="large"
-        >
-          editor.size.large
-        </option>
-      </select>
+  <button
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG kRZQHJ laeJgQ"
+    type="button"
+  >
+    activate-new-editor
+  </button>
+  <div
+    aria-labelledby="label-azerty"
+    class="Editor__Container-iWGgom fJXUsY editor test"
+    id="azerty"
+  >
+    <div>
       <div
-        aria-label="aria-editor-tools-style"
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats ql-editor-button"
-        role="group"
+        aria-orientation="horizontal"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
+        id="quill-toolbar"
+        role="menubar"
       >
-        <button
-          aria-label="global.bold"
-          class="ql-bold ql-editor-button"
-          id="quill-toolbar-3"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-        />
-        <button
-          aria-label="global.italic"
-          class="ql-italic ql-editor-button"
-          id="quill-toolbar-4"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-        />
-        <button
-          aria-label="global.underline"
-          class="ql-underline ql-editor-button"
-          id="quill-toolbar-5"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-        />
-        <button
-          aria-label="global.strike"
-          class="ql-strike ql-editor-button"
-          id="quill-toolbar-6"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-        />
-      </div>
-      <div
-        aria-label="aria-editor-tools-alignment"
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats"
-        role="group"
-      >
-        <button
-          aria-label="editor.list"
-          class="ql-list ql-editor-button"
-          id="quill-toolbar-7"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-          value="ordered"
-        />
-        <button
-          aria-label="global.list"
-          class="ql-list ql-editor-button"
-          id="quill-toolbar-8"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-          value="bullet"
-        />
-        <button
-          aria-label="global.delete.indent"
-          class="ql-indent ql-editor-button"
-          id="quill-toolbar-9"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-          value="-1"
-        />
-        <button
-          aria-label="global.indent"
-          class="ql-indent ql-editor-button"
-          id="quill-toolbar-10"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-          value="+1"
-        />
+        <span
+          class="sc-bdnxRM hptjof"
+          clip="rect(0px, 0px, 0px, 0px)"
+        >
+          <button
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
+            id="quill-toolbar-1"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          >
+            aria-editor-skip-toolbar
+          </button>
+        </span>
         <select
-          aria-label="editor.align.title"
-          class="ql-align"
-          id="quill-toolbar-11"
+          aria-label="global.fontsize"
+          class="ql-size"
+          id="quill-toolbar-2"
           role="menuitem"
           tabindex="0"
         >
           <option
-            aria-label="editor.align.left"
+            value="small"
+          >
+            editor.size.small
+          </option>
+          <option
             selected=""
-          />
+            value="normal"
+          >
+            editor.size.normal
+          </option>
           <option
-            aria-label="editor.align.center"
-            value="center"
-          />
-          <option
-            aria-label="editor.align.right"
-            value="right"
-          />
-          <option
-            aria-label="editor.align.justify"
-            value="justify"
-          />
+            value="large"
+          >
+            editor.size.large
+          </option>
         </select>
-      </div>
-      <div
-        aria-label="aria-editor-tools-insertion"
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats"
-        role="group"
-      >
-        <button
-          aria-label="global.link"
-          class="ql-link ql-editor-button"
-          id="quill-toolbar-12"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-        />
-        <button
-          aria-label="global.image"
-          class="ql-image ql-editor-button"
-          id="quill-toolbar-13"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-        />
-        <button
-          aria-label="global.video"
-          class="ql-video ql-editor-button"
-          id="quill-toolbar-14"
-          role="menuitem"
-          tabindex="0"
-          type="button"
-        />
+        <div
+          aria-label="aria-editor-tools-style"
+          class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats ql-editor-button"
+          role="group"
+        >
+          <button
+            aria-label="global.bold"
+            class="ql-bold ql-editor-button"
+            id="quill-toolbar-3"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          />
+          <button
+            aria-label="global.italic"
+            class="ql-italic ql-editor-button"
+            id="quill-toolbar-4"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          />
+          <button
+            aria-label="global.underline"
+            class="ql-underline ql-editor-button"
+            id="quill-toolbar-5"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          />
+          <button
+            aria-label="global.strike"
+            class="ql-strike ql-editor-button"
+            id="quill-toolbar-6"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          />
+        </div>
+        <div
+          aria-label="aria-editor-tools-alignment"
+          class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats"
+          role="group"
+        >
+          <button
+            aria-label="editor.list"
+            class="ql-list ql-editor-button"
+            id="quill-toolbar-7"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+            value="ordered"
+          />
+          <button
+            aria-label="global.list"
+            class="ql-list ql-editor-button"
+            id="quill-toolbar-8"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+            value="bullet"
+          />
+          <button
+            aria-label="global.delete.indent"
+            class="ql-indent ql-editor-button"
+            id="quill-toolbar-9"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+            value="-1"
+          />
+          <button
+            aria-label="global.indent"
+            class="ql-indent ql-editor-button"
+            id="quill-toolbar-10"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+            value="+1"
+          />
+          <select
+            aria-label="editor.align.title"
+            class="ql-align"
+            id="quill-toolbar-11"
+            role="menuitem"
+            tabindex="0"
+          >
+            <option
+              aria-label="editor.align.left"
+              selected=""
+            />
+            <option
+              aria-label="editor.align.center"
+              value="center"
+            />
+            <option
+              aria-label="editor.align.right"
+              value="right"
+            />
+            <option
+              aria-label="editor.align.justify"
+              value="justify"
+            />
+          </select>
+        </div>
+        <div
+          aria-label="aria-editor-tools-insertion"
+          class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats"
+          role="group"
+        >
+          <button
+            aria-label="global.link"
+            class="ql-link ql-editor-button"
+            id="quill-toolbar-12"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          />
+          <button
+            aria-label="global.image"
+            class="ql-image ql-editor-button"
+            id="quill-toolbar-13"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          />
+          <button
+            aria-label="global.video"
+            class="ql-video ql-editor-button"
+            id="quill-toolbar-14"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          />
+        </div>
       </div>
     </div>
+    <div />
   </div>
-  <div />
 </div>
 `;

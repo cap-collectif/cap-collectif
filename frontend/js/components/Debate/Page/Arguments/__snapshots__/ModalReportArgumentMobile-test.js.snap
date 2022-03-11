@@ -23,7 +23,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
   tabindex="-1"
 >
   <div
-    class="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+    class="sc-bdnxRM gYBLn Modal__ModalContainerInner-gRLtaR"
     style="opacity:0"
   >
     <div

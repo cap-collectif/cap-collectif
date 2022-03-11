@@ -179,6 +179,7 @@ const onSubmit = (
     draft: values.draft,
     estimation: values.estimation,
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
+    // $FlowFixMe descriptionUsingJoditWysiwyg
     responses: formatSubmitResponses(values.responses, proposal.form.questions),
     author: isAdmin && values.author ? values.author.value : undefined,
     id: proposal.id,
@@ -422,9 +423,8 @@ export const warnProposalContent = (
 };
 
 const validate = (values: FormValues, { proposal, features, intl }: Props) => {
-  const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
-    'availableQuestions',
-  );
+  const availableQuestions: Array<string> =
+    memoizeAvailableQuestions.cache.get('availableQuestions');
   // $FlowFixMe
   validateProposalContent(values, proposal.form, features, intl, values.draft, availableQuestions);
 };
@@ -955,6 +955,7 @@ const form = reduxForm({
 
 const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
   const defaultResponses = formatInitialResponsesValues(
+    // $FlowFixMe descriptionUsingJoditWysiwyg
     proposal.form.questions,
     proposal.responses ? proposal.responses : [],
   );
@@ -1021,7 +1022,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAdminContentForm_proposal on Proposal
-      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
+    @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       ...ProposalFusionEditModal_proposal
       ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
       id

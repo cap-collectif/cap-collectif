@@ -8,6 +8,8 @@ import type { GlobalState } from '~/types';
 import QuillToolbar from './QuillToolbar';
 import { selectLocalImage } from './EditorImageUpload';
 import Text from '~ui/Primitives/Text';
+import AppBox from '../Ui/Primitives/AppBox';
+import EditorSwitchModal from './EditorSwitchModal';
 
 type Props = {
   intl: IntlShape,
@@ -22,10 +24,13 @@ type Props = {
   withCharacterCounter?: boolean,
   maxLength?: string,
   selectedLanguage?: string,
+  switchToNewEditor?: () => void,
 };
 
 type State = {|
   valueWithoutHtml: ?string,
+  switchConfirm?: ?boolean,
+  show: boolean,
 |};
 
 export const Container: StyledComponent<{ hasCounter: boolean }, {}, HTMLDivElement> = styled.div`
@@ -64,7 +69,9 @@ export class Editor extends React.Component<Props, State> {
     this.editorRef = React.createRef();
     this.toolbarRef = React.createRef();
     this.state = {
+      switchConfirm: false,
       valueWithoutHtml: null,
+      show: false,
     };
   }
 
@@ -188,8 +195,8 @@ export class Editor extends React.Component<Props, State> {
   }
 
   render() {
-    const { className, id, withCharacterCounter, maxLength } = this.props;
-    const { valueWithoutHtml } = this.state;
+    const { switchToNewEditor, className, id, withCharacterCounter, maxLength } = this.props;
+    const { valueWithoutHtml, switchConfirm } = this.state;
 
     const classes = {
       editor: true,
@@ -198,21 +205,42 @@ export class Editor extends React.Component<Props, State> {
     };
 
     return (
-      <Container
-        id={id}
-        className={classNames(classes)}
-        hasCounter={withCharacterCounter}
-        aria-labelledby={id ? `label-${id}` : ''}>
-        <div ref={this.toolbarRef}>
-          <QuillToolbar onFocus={() => this.quill.focus()} />
-        </div>
-        <div ref={this.editorRef} />
-        {withCharacterCounter && maxLength && (
-          <Text className="character-counter" color="gray.500" fontSize={1}>
-            {`${valueWithoutHtml?.length || 0}/${parseInt(maxLength, 10)}`}
-          </Text>
+      <AppBox position="relative">
+        {switchToNewEditor && (
+          <EditorSwitchModal
+            show={this.state.show}
+            setShow={(newShow: boolean) =>
+              this.setState(state => ({
+                ...state,
+                show: newShow,
+              }))
+            }
+            switchConfirm={switchConfirm}
+            setSwitchConfirm={() => {
+              this.setState(state => ({
+                ...state,
+                switchConfirm: !state.switchConfirm,
+              }));
+            }}
+            switchToNewEditor={switchToNewEditor}
+          />
         )}
-      </Container>
+        <Container
+          id={id}
+          className={classNames(classes)}
+          hasCounter={withCharacterCounter}
+          aria-labelledby={id ? `label-${id}` : ''}>
+          <div ref={this.toolbarRef}>
+            <QuillToolbar onFocus={() => this.quill.focus()} />
+          </div>
+          <div ref={this.editorRef} />
+          {withCharacterCounter && maxLength && (
+            <Text className="character-counter" color="gray.500" fontSize={1}>
+              {`${valueWithoutHtml?.length || 0}/${parseInt(maxLength, 10)}`}
+            </Text>
+          )}
+        </Container>
+      </AppBox>
     );
   }
 }

@@ -8,7 +8,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
   backdrop={true}
   bsClass="modal"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
@@ -67,6 +67,8 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
+        formName="string"
         id="string.description"
         label={
           <span>
@@ -116,7 +118,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
   backdrop={true}
   bsClass="modal"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
@@ -175,6 +177,8 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
+        formName="string"
         id="string.description"
         label={
           <span>
@@ -236,7 +240,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
   backdrop={true}
   bsClass="modal"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
@@ -295,6 +299,8 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
+        formName="string"
         id="string.description"
         label={
           <span>
@@ -368,7 +374,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
   backdrop={true}
   bsClass="modal"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
@@ -427,6 +433,8 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
+        formName="string"
         id="string.description"
         label={
           <span>
@@ -476,7 +484,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
   backdrop={true}
   bsClass="modal"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
@@ -535,6 +543,8 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
+        formName="string"
         id="string.description"
         label={
           <span>
@@ -584,7 +594,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
   backdrop={true}
   bsClass="modal"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   id="proposal-form-admin-question-modal"
   keyboard={true}
   manager={
@@ -643,6 +653,8 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
+        formName="string"
         id="string.description"
         label={
           <span>

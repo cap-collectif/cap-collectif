@@ -16,7 +16,7 @@ import StepVotesFields from './StepVotesFields';
 import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
-import { type FranceConnectAllowedData } from "~/components/Admin/Project/Step/ProjectAdminStepForm";
+import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
 
 type Props = {|
   requirements?: Array<Requirement>,
@@ -178,7 +178,7 @@ export const ProjectAdminSelectionStepForm = ({
         <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
       </Button>
       <Field
-        type="editor"
+        type="textarea"
         name="requirementsReason"
         id="step-requirementsReason"
         label={<FormattedMessage id="reason-for-collection" />}

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
@@ -33,6 +33,7 @@ type Props = {|
   type: ForOrAgainstValue,
   onClose: () => void,
   show: boolean,
+  bodyUsingJoditWysiwyg?: ?boolean,
 |};
 
 type Values = {|
@@ -42,6 +43,7 @@ type Values = {|
   },
   title: string,
   body: string,
+  bodyUsingJoditWysiwyg: boolean,
 |};
 
 const getTitle = (type: ForOrAgainstValue, isCreating?: boolean): string => {
@@ -113,13 +115,14 @@ const updateDebateOpinion = (input, debateOpinionId, onClose, intl) => {
 
 const onSubmit = (values: Values, dispatch: Dispatch, props: Props) => {
   const { debate, opinion, type, onClose, isCreating, intl } = props;
-  const { title, author, body } = values;
+  const { title, author, body, bodyUsingJoditWysiwyg } = values;
 
   const input = {
     title,
     body,
     author: author?.value || '',
     type,
+    bodyUsingJoditWysiwyg,
   };
   const connections = [formatConnectionPath(['client', debate.id], 'FaceToFace_opinions')];
 
@@ -140,7 +143,13 @@ const onValidate = (values: Values) => {
 
 const formName = 'form-debate-opinion';
 
-export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: Props) => (
+export const ModalDebateOpinion = ({
+  isCreating,
+  onClose,
+  type,
+  handleSubmit,
+  bodyUsingJoditWysiwyg,
+}: Props) => (
   <ModalContainer
     show
     animation={false}
@@ -176,9 +185,13 @@ export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: 
         />
 
         <Field
-          type="editor"
+          type="admin-editor"
           name="body"
           id="body"
+          fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
+          fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+          formName={formName}
+          noCode
           label={<FormattedMessage id="global.review" />}
           component={component}
           maxLength="2000"
@@ -217,8 +230,10 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
         }
       : null,
     body: props.opinion?.body || '',
+    bodyUsingJoditWysiwyg: props.opinion?.bodyUsingJoditWysiwyg !== false,
     title: props.opinion?.title || '',
   },
+  bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
 });
 
 const ModalDebateOpinionConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
@@ -232,6 +247,7 @@ export default createFragmentContainer(ModalDebateOpinionConnected, {
       type
       title
       body
+      bodyUsingJoditWysiwyg
       author {
         id
         username

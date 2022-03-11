@@ -232,6 +232,7 @@ const ProposalRevisionModalForm = ({
               name="body"
               component={component}
               type={unstable__enableCapcoUiDs ? 'admin-editor-ds' : 'admin-editor'}
+              fieldUsingJoditWysiwyg
               id="proposal_revision_body"
               placeholder={intl.formatMessage({ id: 'review.request.description' })}
               label={<FormattedMessage id="additional-information" />}

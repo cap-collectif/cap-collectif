@@ -49,6 +49,7 @@ type Props = {|
   +usingTipsmeee: boolean,
   +isMapViewEnabled: boolean,
   +features: FeatureToggles,
+  +descriptionUsingJoditWysiwyg?: ?boolean,
 |};
 
 const TYPE_PROPOSAL_FORM = {
@@ -465,6 +466,7 @@ export const ProposalFormAdminConfigurationForm = ({
   isMapViewEnabled,
   proposalForm,
   dispatch,
+  descriptionUsingJoditWysiwyg,
 }: Props) => {
   const optional = (
     <span className="excerpt">
@@ -512,6 +514,9 @@ export const ProposalFormAdminConfigurationForm = ({
             name="description"
             component={component}
             type="admin-editor"
+            fieldUsingJoditWysiwyg={descriptionUsingJoditWysiwyg}
+            fieldUsingJoditWysiwygName="descriptionUsingJoditWysiwyg"
+            formName={formName}
             id="proposal_form_description"
             label={<FormattedMessage id="global.intro" />}
           />
@@ -911,20 +916,32 @@ export const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: GlobalState, props: RelayProps) => {
   const questions = props.proposalForm.questions.map(question => {
-    if (question.__typename !== 'MultipleChoiceQuestion') return question;
+    if (question.__typename !== 'MultipleChoiceQuestion')
+      return {
+        ...question,
+        descriptionUsingJoditWysiwyg: question.descriptionUsingJoditWysiwyg !== false,
+      };
     const choices =
       question.choices && question.choices.edges
         ? question.choices.edges
             .filter(Boolean)
-            .map(edge => edge.node)
+            .map(edge => ({
+              ...edge.node,
+              descriptionUsingJoditWysiwyg: edge.node?.descriptionUsingJoditWysiwyg !== false,
+            }))
             .filter(Boolean)
         : [];
-    return { ...question, choices };
+    return {
+      ...question,
+      choices,
+      descriptionUsingJoditWysiwyg: question.descriptionUsingJoditWysiwyg !== false,
+    };
   });
 
   return {
     initialValues: {
       ...props.proposalForm,
+      descriptionUsingJoditWysiwyg: props.proposalForm.descriptionUsingJoditWysiwyg !== false,
       step: undefined,
       categories: props.proposalForm.categories.filter(Boolean).map(category => {
         const categoryImage =
@@ -983,6 +1000,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     features: state.default.features,
     defaultLanguage: state.language.currentLanguage,
     isMapViewEnabled: selector(state, 'viewEnabled')?.isMapViewEnabled,
+    descriptionUsingJoditWysiwyg: selector(state, 'descriptionUsingJoditWysiwyg'),
   };
 };
 
@@ -996,6 +1014,7 @@ export default createRefetchContainer(
       fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
         id
         description
+        descriptionUsingJoditWysiwyg
         usingThemes
         themeMandatory
         usingCategories

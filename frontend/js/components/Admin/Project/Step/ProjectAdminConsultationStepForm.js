@@ -12,7 +12,7 @@ import environment from '~/createRelayEnvironment';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
 import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
 import type { Dispatch } from '~/types';
-import { type FranceConnectAllowedData } from "~/components/Admin/Project/Step/ProjectAdminStepForm";
+import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
 
 type Props = {|
   requirements?: Array<Requirement>,
@@ -103,7 +103,7 @@ export const ProjectAdminConsultationStepForm = ({
         <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
       </Button>
       <Field
-        type="editor"
+        type="textarea"
         name="requirementsReason"
         id="step-requirementsReason"
         label={<FormattedMessage id="reason-for-collection" />}

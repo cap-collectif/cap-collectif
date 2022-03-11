@@ -69,6 +69,8 @@ exports[`<ModalDebateOpinion /> should render correctly when creating opinion 1`
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+        formName="form-debate-opinion"
         id="body"
         label={
           <FormattedMessage
@@ -78,7 +80,8 @@ exports[`<ModalDebateOpinion /> should render correctly when creating opinion 1`
         }
         maxLength="2000"
         name="body"
-        type="editor"
+        noCode={true}
+        type="admin-editor"
         withCharacterCounter={true}
       />
     </form>
@@ -179,6 +182,8 @@ exports[`<ModalDebateOpinion /> should render correctly when editing opinion 1`]
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+        formName="form-debate-opinion"
         id="body"
         label={
           <FormattedMessage
@@ -188,7 +193,8 @@ exports[`<ModalDebateOpinion /> should render correctly when editing opinion 1`]
         }
         maxLength="2000"
         name="body"
-        type="editor"
+        noCode={true}
+        type="admin-editor"
         withCharacterCounter={true}
       />
     </form>

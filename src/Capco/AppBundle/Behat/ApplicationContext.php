@@ -814,34 +814,20 @@ class ApplicationContext extends UserContext
                 ->fillField($field, $value);
         } catch (ElementNotFoundException $e) {
             // Try to get corresponding wysiwyg field
-            // Works only with quill editor for now
             $wrapper = $this->getSession()
                 ->getPage()
                 ->find('named', ['id_or_name', $field]);
-            if (!$wrapper || !$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor')) {
+            if (!$wrapper || (!$wrapper->hasClass('joditEditor' && (!$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor'))))) {
                 throw $e;
             }
-            $field = $wrapper->find('css', '.ql-editor');
-            $field->setValue($value);
-        } catch (ElementNotVisible $e) {
-            // Ckeditor case
-            $wrapper = $this->getSession()
-                ->getPage()
-                ->find('named', ['id_or_name', 'cke_' . $field]);
-            if (!$wrapper || !$wrapper->hasClass('cke')) {
-                throw $e;
+            if ($wrapper->hasClass('joditEditor')) {
+                $field = $wrapper->find('css', '.jodit-wysiwyg');
+                $field->setValue($value);
             }
-            $this->getSession()
-                ->getDriver()
-                ->executeScript(
-                    '
-                CKEDITOR.instances["' .
-                        $field .
-                        '"].setData("' .
-                        $value .
-                        '");
-            '
-                );
+            if ($wrapper->hasClass('editor')) {
+                $field = $wrapper->find('css', '.ql-editor');
+                $field->setValue($value);
+            }
         }
     }
 

@@ -2,7 +2,14 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { change, Field, FieldArray, reduxForm, SubmissionError } from 'redux-form';
+import {
+  change,
+  Field,
+  FieldArray,
+  reduxForm,
+  SubmissionError,
+  formValueSelector,
+} from 'redux-form';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type QuestionsInReduxForm, submitQuestion } from '~/utils/submitQuestion';
@@ -15,7 +22,10 @@ import type { Dispatch, FeatureToggles, State } from '~/types';
 import formatChoices from '~/utils/form/formatChoices';
 
 type RelayProps = {| +questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};
-type ReduxProps = {| +questionnaireResultsEnabled: boolean |};
+type ReduxProps = {|
+  +questionnaireResultsEnabled: boolean,
+  +descriptionUsingJoditWysiwyg?: ?boolean,
+|};
 type Props = {|
   ...RelayProps,
   ...ReduxProps,
@@ -253,6 +263,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
       submitting,
       submitSucceeded,
       submitFailed,
+      descriptionUsingJoditWysiwyg,
     } = this.props;
 
     return (
@@ -281,6 +292,9 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
               name="description"
               component={component}
               type="admin-editor"
+              fieldUsingJoditWysiwyg={descriptionUsingJoditWysiwyg}
+              fieldUsingJoditWysiwygName="descriptionUsingJoditWysiwyg"
+              formName={formName}
               id="proposal_form_description"
               label={<FormattedMessage id="global.description" />}
             />
@@ -331,6 +345,8 @@ const form = reduxForm({
 })(QuestionnaireAdminConfigurationForm);
 
 const mapStateToProps = (state: State, props: RelayProps) => {
+  const selector = formValueSelector(formName);
+
   const questionnaire = formatChoices(props.questionnaire);
   return {
     questionnaireResultsEnabled: state.default.features.beta__questionnaire_result,
@@ -338,7 +354,9 @@ const mapStateToProps = (state: State, props: RelayProps) => {
       title: questionnaire.title,
       description: questionnaire.description,
       questions: questionnaire.questions,
+      descriptionUsingJoditWysiwyg: questionnaire.descriptionUsingJoditWysiwyg !== false,
     },
+    descriptionUsingJoditWysiwyg: selector(state, 'descriptionUsingJoditWysiwyg'),
   };
 };
 
@@ -351,6 +369,7 @@ export default createFragmentContainer(intlContainer, {
       id
       title
       description
+      descriptionUsingJoditWysiwyg
       questions {
         id
         ...responsesHelper_adminQuestion @relay(mask: false)

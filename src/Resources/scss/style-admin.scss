@@ -49,3 +49,15 @@ body {
 #beamerSelector {
     display: none;
 }
+
+.jodit-dialog__panel a.jodit-button[data-ref='editImage'] {
+    display: none;
+  }
+
+.jodit_sticky>.jodit-toolbar__box {
+    z-index: 1050 !important;
+}
+
+.jodit h1 {
+    font-size: 36px !important;
+}

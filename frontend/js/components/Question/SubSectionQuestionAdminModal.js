@@ -37,6 +37,7 @@ type Props = {|
   +dispatch: Dispatch,
   +currentSection: SelectionFormValues,
   +questions: Questions,
+  +descriptionUsingJoditWysiwyg?: ?boolean,
   ...ParentProps,
 |};
 
@@ -58,6 +59,7 @@ const SubSectionQuestionAdminModal = ({
   dispatch,
   formName,
   questions,
+  descriptionUsingJoditWysiwyg,
 }: Props) => {
   const [initialSectionValues, changeInitialSection] = useState(currentSection);
 
@@ -70,7 +72,10 @@ const SubSectionQuestionAdminModal = ({
   };
 
   return (
-    <Modal show={show} aria-labelledby="proposal-form-admin-question-modal-title-lg">
+    <Modal
+      show={show}
+      aria-labelledby="proposal-form-admin-question-modal-title-lg"
+      enforceFocus={false}>
       <ModalContainer>
         <Modal.Header>
           <div className="modal-title">
@@ -92,6 +97,9 @@ const SubSectionQuestionAdminModal = ({
             id={`${member}.description`}
             name={`${member}.description`}
             type="admin-editor"
+            formName={formName}
+            fieldUsingJoditWysiwyg={descriptionUsingJoditWysiwyg}
+            fieldUsingJoditWysiwygName={`${member}.descriptionUsingJoditWysiwyg`}
             label={
               <span>
                 <FormattedMessage id="global.description" />
@@ -177,6 +185,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
     currentSection: selector(state, `${props.member}`),
     disabled: getFormSyncErrors(props.formName)(state).questions !== undefined,
     questions: selector(state, 'questions'),
+    descriptionUsingJoditWysiwyg: selector(state, `${props.member}.descriptionUsingJoditWysiwyg`),
   };
 };
 

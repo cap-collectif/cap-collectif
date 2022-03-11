@@ -73,7 +73,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
         className="sc-bdnxRM isZYbz"
       >
         <div
-          className=" ql-editor"
+          className=" ql-editor wysiwyg-render"
           dangerouslySetInnerHTML={
             Object {
               "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
@@ -162,7 +162,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
         className="sc-bdnxRM isZYbz"
       >
         <div
-          className=" ql-editor"
+          className=" ql-editor wysiwyg-render"
           dangerouslySetInnerHTML={
             Object {
               "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
@@ -248,7 +248,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
         className="sc-bdnxRM isZYbz"
       >
         <div
-          className=" ql-editor"
+          className=" ql-editor wysiwyg-render"
           dangerouslySetInnerHTML={
             Object {
               "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
@@ -337,7 +337,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
         className="sc-bdnxRM isZYbz"
       >
         <div
-          className=" ql-editor"
+          className=" ql-editor wysiwyg-render"
           dangerouslySetInnerHTML={
             Object {
               "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
@@ -430,7 +430,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
         className="sc-bdnxRM isZYbz"
       >
         <div
-          className=" ql-editor"
+          className=" ql-editor wysiwyg-render"
           dangerouslySetInnerHTML={
             Object {
               "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)

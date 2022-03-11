@@ -249,7 +249,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
       />
     }
     name="requirementsReason"
-    type="editor"
+    type="textarea"
   />
 </Fragment>
 `;
@@ -490,7 +490,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
       />
     }
     name="requirementsReason"
-    type="editor"
+    type="textarea"
   />
 </Fragment>
 `;

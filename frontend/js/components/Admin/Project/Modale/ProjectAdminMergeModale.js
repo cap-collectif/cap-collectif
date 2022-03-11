@@ -132,7 +132,7 @@ export const ProjectAdminMergeModale = ({
           <Field
             name="description"
             component={component}
-            type="admin-editor"
+            type="editor"
             id="merge.description"
             label={
               <span className="font-weight-bold">

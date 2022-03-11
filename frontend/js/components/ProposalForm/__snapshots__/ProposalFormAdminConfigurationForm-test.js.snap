@@ -66,6 +66,8 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="descriptionUsingJoditWysiwyg"
+        formName="proposal-form-admin-configuration"
         id="proposal_form_description"
         label={
           <FormattedMessage
@@ -160,6 +162,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         "description": "description",
         "descriptionHelpText": "",
         "descriptionMandatory": true,
+        "descriptionUsingJoditWysiwyg": false,
         "districtHelpText": "",
         "districtMandatory": true,
         "districts": Array [],
@@ -180,6 +183,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
             "__typename": "SimpleQuestion",
             "alwaysJumpDestinationQuestion": null,
             "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
             "destinationJumps": Array [],
             "helpText": null,
             "hidden": false,
@@ -553,6 +557,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                   "description": "description",
                   "descriptionHelpText": "",
                   "descriptionMandatory": true,
+                  "descriptionUsingJoditWysiwyg": false,
                   "districtHelpText": "",
                   "districtMandatory": true,
                   "districts": Array [],
@@ -573,6 +578,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                       "__typename": "SimpleQuestion",
                       "alwaysJumpDestinationQuestion": null,
                       "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
                       "destinationJumps": Array [],
                       "helpText": null,
                       "hidden": false,
@@ -1243,6 +1249,8 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="descriptionUsingJoditWysiwyg"
+        formName="proposal-form-admin-configuration"
         id="proposal_form_description"
         label={
           <FormattedMessage
@@ -1337,6 +1345,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
         "description": "description",
         "descriptionHelpText": "",
         "descriptionMandatory": true,
+        "descriptionUsingJoditWysiwyg": false,
         "districtHelpText": "",
         "districtMandatory": true,
         "districts": Array [],
@@ -1357,6 +1366,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
             "__typename": "SimpleQuestion",
             "alwaysJumpDestinationQuestion": null,
             "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
             "destinationJumps": Array [],
             "helpText": null,
             "hidden": false,
@@ -1731,6 +1741,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
                   "description": "description",
                   "descriptionHelpText": "",
                   "descriptionMandatory": true,
+                  "descriptionUsingJoditWysiwyg": false,
                   "districtHelpText": "",
                   "districtMandatory": true,
                   "districts": Array [],
@@ -1751,6 +1762,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
                       "__typename": "SimpleQuestion",
                       "alwaysJumpDestinationQuestion": null,
                       "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
                       "destinationJumps": Array [],
                       "helpText": null,
                       "hidden": false,
@@ -2422,6 +2434,8 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
       />
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="descriptionUsingJoditWysiwyg"
+        formName="proposal-form-admin-configuration"
         id="proposal_form_description"
         label={
           <FormattedMessage
@@ -2516,6 +2530,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
         "description": "description",
         "descriptionHelpText": "",
         "descriptionMandatory": true,
+        "descriptionUsingJoditWysiwyg": false,
         "districtHelpText": "",
         "districtMandatory": true,
         "districts": Array [],
@@ -2536,6 +2551,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
             "__typename": "SimpleQuestion",
             "alwaysJumpDestinationQuestion": null,
             "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
             "destinationJumps": Array [],
             "helpText": null,
             "hidden": false,
@@ -2556,6 +2572,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
             "__typename": "SimpleQuestion",
             "alwaysJumpDestinationQuestion": null,
             "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
             "destinationJumps": Array [],
             "helpText": null,
             "hidden": false,
@@ -2576,6 +2593,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
             "__typename": "SimpleQuestion",
             "alwaysJumpDestinationQuestion": null,
             "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
             "destinationJumps": Array [],
             "helpText": null,
             "hidden": false,
@@ -2596,6 +2614,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
             "__typename": "SimpleQuestion",
             "alwaysJumpDestinationQuestion": null,
             "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
             "destinationJumps": Array [],
             "helpText": null,
             "hidden": false,
@@ -2970,6 +2989,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
                   "description": "description",
                   "descriptionHelpText": "",
                   "descriptionMandatory": true,
+                  "descriptionUsingJoditWysiwyg": false,
                   "districtHelpText": "",
                   "districtMandatory": true,
                   "districts": Array [],
@@ -2990,6 +3010,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
                       "__typename": "SimpleQuestion",
                       "alwaysJumpDestinationQuestion": null,
                       "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
                       "destinationJumps": Array [],
                       "helpText": null,
                       "hidden": false,
@@ -3010,6 +3031,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
                       "__typename": "SimpleQuestion",
                       "alwaysJumpDestinationQuestion": null,
                       "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
                       "destinationJumps": Array [],
                       "helpText": null,
                       "hidden": false,
@@ -3030,6 +3052,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
                       "__typename": "SimpleQuestion",
                       "alwaysJumpDestinationQuestion": null,
                       "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
                       "destinationJumps": Array [],
                       "helpText": null,
                       "hidden": false,
@@ -3050,6 +3073,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
                       "__typename": "SimpleQuestion",
                       "alwaysJumpDestinationQuestion": null,
                       "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
                       "destinationJumps": Array [],
                       "helpText": null,
                       "hidden": false,

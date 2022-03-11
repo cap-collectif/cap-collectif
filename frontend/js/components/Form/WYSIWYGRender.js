@@ -23,7 +23,9 @@ export const WYSIWYGRender = (props: Props) => {
   // $FlowFixMe value may be a number.
   if (typeof value === 'string' && isPredefinedTraductionKey(value)) {
     // $FlowFixMe value may be a number.
-    return <div className={`${className || ''} ql-editor`}>{translateContent(value)}</div>;
+    return (
+      <div className={`${className || ''} ql-editor wysiwyg-render`}>{translateContent(value)}</div>
+    );
   }
 
   let truncatedValue = value;
@@ -37,13 +39,17 @@ export const WYSIWYGRender = (props: Props) => {
       dangerouslySetInnerHTML: { __html: truncatedValue },
     });
 
-    return raw ? child : <div className={`${className || ''} ql-editor`}>{child}</div>;
+    return raw ? (
+      child
+    ) : (
+      <div className={`${className || ''} ql-editor wysiwyg-render`}>{child}</div>
+    );
   }
 
   return (
     <div
       {...rest}
-      className={`${className || ''} ql-editor`}
+      className={`${className || ''} ql-editor wysiwyg-render`}
       dangerouslySetInnerHTML={{ __html: truncatedValue }}
     />
   );

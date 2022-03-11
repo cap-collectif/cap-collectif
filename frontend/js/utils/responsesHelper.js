@@ -116,6 +116,7 @@ const QuestionAdminFragment = {
         number
       }
       description
+      descriptionUsingJoditWysiwyg
       type
       ... on MultipleChoiceQuestion {
         isOtherAllowed
@@ -137,6 +138,7 @@ const QuestionAdminFragment = {
               id
               title
               description
+              descriptionUsingJoditWysiwyg
               color
               image {
                 id

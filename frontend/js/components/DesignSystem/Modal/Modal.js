@@ -34,7 +34,7 @@ export type ModalProps = {|
   +fullSizeOnMobile?: boolean,
   +fullPageScrollable?: boolean,
 |};
-const ModalContainerInner = styled(motion.custom(AppBox)).attrs({
+const ModalContainerInner = styled(motion.custom(AppBox)).attrs(({ zIndex }) => ({
   position: 'fixed',
   left: 0,
   right: 0,
@@ -42,11 +42,11 @@ const ModalContainerInner = styled(motion.custom(AppBox)).attrs({
   top: 0,
   p: [0, 4],
   pt: [2, 4],
-  zIndex: 1030,
+  zIndex,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-})``;
+}))``;
 const ModalInner = styled(motion.custom(AppBox)).attrs(
   ({ fullSizeOnMobile, fullPageScrollable, ...rest }) => ({
     display: 'flex',
@@ -85,6 +85,7 @@ const Modal = ({
   hideOnEsc = true,
   preventBodyScroll = true,
   fullPageScrollable = false,
+  zIndex,
   ...props
 }: ModalProps) => {
   const isControlled = show === true || show === false;
@@ -171,7 +172,8 @@ const Modal = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: TRANSITION_DURATION, ease }}
-              exit={{ opacity: 0 }}>
+              exit={{ opacity: 0 }}
+              zIndex={zIndex || 1030}>
               <ModalInner
                 overflow={scrollBehavior === 'inside' ? 'overlay' : undefined}
                 initial={{ opacity: 0, y: isMobile ? 20 : -20 }}

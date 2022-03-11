@@ -14,7 +14,6 @@ exports[`<BodyText /> should render a step intro div and a FormattedHTMLMessage 
     <WYSIWYGRender
       style={
         Object {
-          "lineHeight": "22px",
           "maxHeight": "none",
           "overflow": "visible",
           "visibility": "visible",

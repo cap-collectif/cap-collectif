@@ -44,6 +44,7 @@ type Props = {|
   effectiveDate: ?string,
   evaluationFormId: ?string,
   moveToSelectionStep: ?string,
+  bodyUsingJoditWysiwyg?: ?boolean,
 |};
 
 type QuestionnaireFormatted = {|
@@ -103,6 +104,7 @@ const onSubmit = (
     favourableStatus: values.favourableStatus || null,
     costEstimationEnabled: values.costEstimationEnabled,
     body: values.body || '',
+    bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg,
   };
 
   return UpdateProposalFormAnalysisConfigurationMutation.commit({ input });
@@ -123,15 +125,16 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
   submitSucceeded,
   submitFailed,
   submitting,
+  bodyUsingJoditWysiwyg,
 }: Props) => {
   const intl = useIntl();
   const { user } = useSelector((state: GlobalState) => state.user);
   const isAdmin = user?.isAdmin || false;
 
-  const statusesGroupedByStep = React.useMemo(() => getStatusesGroupedByStep(proposalForm), [
-    proposalForm,
-  ]);
-
+  const statusesGroupedByStep = React.useMemo(
+    () => getStatusesGroupedByStep(proposalForm),
+    [proposalForm],
+  );
   React.useEffect(() => {
     if (selectedAnalysisStep && !effectiveDate) {
       const dateEndStep =
@@ -176,8 +179,11 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
           />
           <Field
             name="body"
-            type="editor"
+            type="admin-editor"
             id="body"
+            formName={formName}
+            fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
+            fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
             component={component}
             label={
               <>
@@ -555,6 +561,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
     moveToSelectionStep: formValueSelector(formName)(state, 'moveToSelectionStep'),
     moveToSelectionStatus: formValueSelector(formName)(state, 'moveToSelectionStatus'),
     effectiveDate: formValueSelector(formName)(state, 'effectiveDate'),
+    bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
     initialValues: {
       analysisStep: analysisConfiguration?.analysisStep?.id || null,
       evaluationForm: analysisConfiguration?.evaluationForm?.id || null,
@@ -570,6 +577,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
           value: status.id,
         })) || null,
       body: analysisConfiguration?.body || null,
+      bodyUsingJoditWysiwyg: analysisConfiguration?.bodyUsingJoditWysiwyg !== false,
     },
   };
 };
@@ -585,6 +593,7 @@ export default createFragmentContainer(intlContainer, {
         __typename
         id
         body
+        bodyUsingJoditWysiwyg
         effectiveDate
         costEstimationEnabled
         moveToSelectionStep {

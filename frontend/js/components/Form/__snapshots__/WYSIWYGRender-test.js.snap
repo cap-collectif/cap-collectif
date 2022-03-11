@@ -2,7 +2,7 @@
 
 exports[`<WYSIWYGRender /> should render correctly 1`] = `
 <div
-  className="myClass ql-editor"
+  className="myClass ql-editor wysiwyg-render"
   dangerouslySetInnerHTML={
     Object {
       "__html": "<div>Little test</div>",
@@ -13,7 +13,7 @@ exports[`<WYSIWYGRender /> should render correctly 1`] = `
 
 exports[`<WYSIWYGRender /> should render correctly with predefined content 1`] = `
 <div
-  className="myClass ql-editor"
+  className="myClass ql-editor wysiwyg-render"
   dangerouslySetInnerHTML={
     Object {
       "__html": "<div>Little test</div>",
@@ -24,7 +24,7 @@ exports[`<WYSIWYGRender /> should render correctly with predefined content 1`] =
 
 exports[`<WYSIWYGRender /> should render correctly with tagName 1`] = `
 <div
-  className="myClass ql-editor"
+  className="myClass ql-editor wysiwyg-render"
 >
   <i
     dangerouslySetInnerHTML={

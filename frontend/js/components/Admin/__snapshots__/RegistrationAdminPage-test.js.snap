@@ -421,6 +421,13 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "descriptionUsingJoditWysiwyg",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "type",
                       "storageKey": null,
                     },
@@ -603,6 +610,13 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
+                                      "name": "descriptionUsingJoditWysiwyg",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
                                       "name": "color",
                                       "storageKey": null,
                                     },
@@ -663,6 +677,20 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
+                  "kind": "ScalarField",
+                  "name": "topTextUsingJoditWysiwyg",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "bottomTextUsingJoditWysiwyg",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
                   "concreteType": "RegistrationFormTranslation",
                   "kind": "LinkedField",
                   "name": "translations",
@@ -705,7 +733,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "202aee1eb20d956e464a963112e71aed",
+          "cacheID": "7978c982098d8f66304331ec0b909438",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -723,6 +751,8 @@ fragment RegistrationFormCommunication_registrationForm on RegistrationForm {
   id
   topTextDisplayed
   bottomTextDisplayed
+  topTextUsingJoditWysiwyg
+  bottomTextUsingJoditWysiwyg
   translations {
     topText
     bottomText
@@ -793,6 +823,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       number
     }
     description
+    descriptionUsingJoditWysiwyg
     type
     ... on MultipleChoiceQuestion {
       isOtherAllowed
@@ -813,6 +844,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
             id
             title
             description
+            descriptionUsingJoditWysiwyg
             color
             image {
               id
@@ -1387,6 +1419,13 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
+                            "name": "descriptionUsingJoditWysiwyg",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
                             "name": "type",
                             "storageKey": null,
                           },
@@ -1569,6 +1608,13 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                                             "alias": null,
                                             "args": null,
                                             "kind": "ScalarField",
+                                            "name": "descriptionUsingJoditWysiwyg",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
                                             "name": "color",
                                             "storageKey": null,
                                           },
@@ -1629,6 +1675,20 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                       Object {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "topTextUsingJoditWysiwyg",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "bottomTextUsingJoditWysiwyg",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "RegistrationFormTranslation",
                         "kind": "LinkedField",
                         "name": "translations",
@@ -1671,7 +1731,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                 ],
               },
               "params": Object {
-                "cacheID": "202aee1eb20d956e464a963112e71aed",
+                "cacheID": "7978c982098d8f66304331ec0b909438",
                 "id": null,
                 "metadata": Object {},
                 "name": "RegistrationAdminPageQuery",
@@ -1689,6 +1749,8 @@ fragment RegistrationFormCommunication_registrationForm on RegistrationForm {
   id
   topTextDisplayed
   bottomTextDisplayed
+  topTextUsingJoditWysiwyg
+  bottomTextUsingJoditWysiwyg
   translations {
     topText
     bottomText
@@ -1759,6 +1821,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       number
     }
     description
+    descriptionUsingJoditWysiwyg
     type
     ... on MultipleChoiceQuestion {
       isOtherAllowed
@@ -1779,6 +1842,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
             id
             title
             description
+            descriptionUsingJoditWysiwyg
             color
             image {
               id
@@ -2317,6 +2381,13 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "descriptionUsingJoditWysiwyg",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "type",
                       "storageKey": null,
                     },
@@ -2499,6 +2570,13 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
+                                      "name": "descriptionUsingJoditWysiwyg",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
                                       "name": "color",
                                       "storageKey": null,
                                     },
@@ -2559,6 +2637,20 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                 Object {
                   "alias": null,
                   "args": null,
+                  "kind": "ScalarField",
+                  "name": "topTextUsingJoditWysiwyg",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "bottomTextUsingJoditWysiwyg",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
                   "concreteType": "RegistrationFormTranslation",
                   "kind": "LinkedField",
                   "name": "translations",
@@ -2601,7 +2693,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
           ],
         },
         "params": Object {
-          "cacheID": "202aee1eb20d956e464a963112e71aed",
+          "cacheID": "7978c982098d8f66304331ec0b909438",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -2619,6 +2711,8 @@ fragment RegistrationFormCommunication_registrationForm on RegistrationForm {
   id
   topTextDisplayed
   bottomTextDisplayed
+  topTextUsingJoditWysiwyg
+  bottomTextUsingJoditWysiwyg
   translations {
     topText
     bottomText
@@ -2689,6 +2783,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       number
     }
     description
+    descriptionUsingJoditWysiwyg
     type
     ... on MultipleChoiceQuestion {
       isOtherAllowed
@@ -2709,6 +2804,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
             id
             title
             description
+            descriptionUsingJoditWysiwyg
             color
             image {
               id

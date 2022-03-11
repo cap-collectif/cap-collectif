@@ -23,6 +23,8 @@ type Props = {|
   useTopText: boolean,
   useBottomText: boolean,
   currentLanguage: string,
+  topTextUsingJoditWysiwyg?: ?boolean,
+  bottomTextUsingJoditWysiwyg?: ?boolean,
 |};
 
 type FormValues = {|
@@ -30,6 +32,8 @@ type FormValues = {|
   topText: string,
   bottomTextDisplayed: boolean,
   bottomText: string,
+  topTextUsingJoditWysiwyg?: ?boolean,
+  bottomTextUsingJoditWysiwyg?: ?boolean,
 |};
 
 const Title: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -57,6 +61,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     ),
     topTextDisplayed: values.topTextDisplayed,
     bottomTextDisplayed: values.bottomTextDisplayed,
+    topTextUsingJoditWysiwyg: values.topTextUsingJoditWysiwyg,
+    bottomTextUsingJoditWysiwyg: values.bottomTextUsingJoditWysiwyg,
   };
   return UpdateRegistrationFormCommunicationMutation.commit({ input })
     .then(response => {
@@ -86,6 +92,8 @@ export const RegistrationFormCommunication = ({
   useBottomText,
   submitSucceeded,
   submitFailed,
+  topTextUsingJoditWysiwyg,
+  bottomTextUsingJoditWysiwyg,
 }: Props) => (
   <div className="box box-primary container-fluid">
     <div className="box-content box-content__content-form">
@@ -103,7 +111,16 @@ export const RegistrationFormCommunication = ({
           id="display-message-above-form">
           <FormattedMessage id="registration.admin.topText" />
         </Field>
-        {useTopText && <Field name="topText" type="admin-editor" component={renderInput} />}
+        {useTopText && (
+          <Field
+            name="topText"
+            type="admin-editor"
+            fieldUsingJoditWysiwyg={topTextUsingJoditWysiwyg}
+            fieldUsingJoditWysiwygName="topTextUsingJoditWysiwyg"
+            formName={formName}
+            component={renderInput}
+          />
+        )}
         <Field
           type="checkbox"
           name="bottomTextDisplayed"
@@ -111,7 +128,16 @@ export const RegistrationFormCommunication = ({
           id="display-message-below-form">
           <FormattedMessage id="registration.admin.bottomText" />
         </Field>
-        {useBottomText && <Field name="bottomText" type="admin-editor" component={renderInput} />}
+        {useBottomText && (
+          <Field
+            name="bottomText"
+            type="admin-editor"
+            fieldUsingJoditWysiwyg={bottomTextUsingJoditWysiwyg}
+            fieldUsingJoditWysiwygName="bottomTextUsingJoditWysiwyg"
+            formName={formName}
+            component={renderInput}
+          />
+        )}
         <div className="box-content__toolbar btn-toolbar">
           <Button type="submit" disabled={submitting} className="btn btn-primary">
             {submitting ? (
@@ -150,9 +176,13 @@ const mapStateToProps = (state: State, { registrationForm }: Props) => {
       topText: translation ? translation.topText : null,
       bottomTextDisplayed: registrationForm.bottomTextDisplayed,
       bottomText: translation ? translation.bottomText : null,
+      topTextUsingJoditWysiwyg: registrationForm.topTextUsingJoditWysiwyg !== false,
+      bottomTextUsingJoditWysiwyg: registrationForm.bottomTextUsingJoditWysiwyg !== false,
     },
     useTopText: formValueSelector(formName)(state, 'topTextDisplayed'),
     useBottomText: formValueSelector(formName)(state, 'bottomTextDisplayed'),
+    topTextUsingJoditWysiwyg: formValueSelector(formName)(state, 'topTextUsingJoditWysiwyg'),
+    bottomTextUsingJoditWysiwyg: formValueSelector(formName)(state, 'bottomTextUsingJoditWysiwyg'),
     features: state.default.features,
   };
 };
@@ -165,6 +195,8 @@ export default createFragmentContainer(container, {
       id
       topTextDisplayed
       bottomTextDisplayed
+      topTextUsingJoditWysiwyg
+      bottomTextUsingJoditWysiwyg
       translations {
         topText
         bottomText

@@ -13,7 +13,6 @@ import DateTime, {
 } from './DateTime';
 import Editor from './Editor';
 import EditorDs from './EditorDs';
-import AdminEditor from '../AdminEditor';
 import Ranking from './Ranking/Ranking';
 import MultipleCheckbox from './MultipleCheckbox/MultipleCheckbox';
 import MultipleRadio from './MultipleRadio/MultipleRadio';
@@ -44,6 +43,7 @@ import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajorit
 import type { MajorityProperty } from '~ui/Form/Input/Majority/Majority';
 import type { BsSize, ValidationState } from '~/types/ReactBootstrap.type';
 import { ALLOWED_IMAGE_MIMETYPES, ALLOWED_MIMETYPES } from '~/config';
+import WYSIWYG from './WysiwygEditor';
 
 export type ParentProps = {|
   name?: ?string,
@@ -114,6 +114,9 @@ export type ParentProps = {|
   selectedLanguage?: string,
   maxSize?: number,
   accept?: string | string[],
+  fieldUsingJoditWysiwyg?: boolean,
+  fieldUsingJoditWysiwygName?: string,
+  noCode?: boolean,
 |};
 
 type Props = {|
@@ -201,6 +204,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     selectedLanguage,
     maxSize,
     accept,
+    noCode,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -244,7 +248,7 @@ class ReactBootstrapInput extends React.Component<Props> {
 
     if (type === 'admin-editor' || type === 'admin-editor-ds') {
       return (
-        <AdminEditor
+        <WYSIWYG
           id={props.id}
           name={props.name}
           initialContent={value}
@@ -253,6 +257,8 @@ class ReactBootstrapInput extends React.Component<Props> {
           maxLength={props.maxLength}
           selectedLanguage={selectedLanguage}
           unstable__enableCapcoUiDs={type === 'admin-editor-ds'}
+          formName={formName}
+          noCode={noCode}
           {...props}
         />
       );

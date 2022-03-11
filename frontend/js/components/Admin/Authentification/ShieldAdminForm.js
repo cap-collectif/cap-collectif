@@ -116,6 +116,8 @@ export const ShieldAdminForm = (props: Props) => {
             id={`${formName}_introduction`}
             name="introduction"
             type="admin-editor"
+            fieldUsingJoditWysiwyg
+            fieldUsingJoditWysiwygName="siteParameter"
             component={component}
             label={
               <h4>

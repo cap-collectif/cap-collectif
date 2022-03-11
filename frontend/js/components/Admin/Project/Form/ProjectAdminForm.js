@@ -198,7 +198,8 @@ const onSubmit = (
             proposalForm: s.proposalForm?.value || undefined,
             consultations: s.consultations?.length ? s.consultations.map(c => c.value) : undefined,
             footer: sTypename === 'QuestionnaireStep' ? s.footer : undefined,
-            footerUsingJoditWysiwyg: sTypename === 'QuestionnaireStep' ? s.footerUsingJoditWysiwyg : undefined,
+            footerUsingJoditWysiwyg:
+              sTypename === 'QuestionnaireStep' ? s.footerUsingJoditWysiwyg : undefined,
             type: convertTypenameToConcreteStepType(sTypename),
             mainView:
               sTypename === 'CollectStep' || sTypename === 'SelectionStep' ? s.mainView : undefined,
@@ -285,6 +286,8 @@ const onSubmit = (
             isTresholdEnabled: undefined,
             isLimitEnabled: undefined,
             // DebateStep
+            debateContentUsingJoditWysiwyg:
+              sTypename === 'DebateStep' ? s.debateContentUsingJoditWysiwyg : undefined,
             articles:
               sTypename === 'DebateStep' ? s.articles.filter(article => article.url) : undefined,
             debate: undefined,
@@ -658,7 +661,7 @@ export default createFragmentContainer(injectIntl(container), {
       steps {
         id
         body
-        bodyUsingJoditWysiwyg  
+        bodyUsingJoditWysiwyg
         timeless
         __typename
         title
@@ -801,6 +804,7 @@ export default createFragmentContainer(injectIntl(container), {
           }
           debateType
           debateContent
+          debateContentUsingJoditWysiwyg
         }
       }
       visibility

@@ -74,7 +74,7 @@ exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1
         Je suis pour
       </h4>
       <div
-        className=" ql-editor"
+        className=" ql-editor wysiwyg-render"
         dangerouslySetInnerHTML={
           Object {
             "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
@@ -163,7 +163,7 @@ exports[`<DebateStepPageOpinionDrawer /> should render an AGAINST opinion when o
         Je suis pour
       </h4>
       <div
-        className=" ql-editor"
+        className=" ql-editor wysiwyg-render"
         dangerouslySetInnerHTML={
           Object {
             "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)

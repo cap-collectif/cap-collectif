@@ -759,6 +759,57 @@ div.embeddedContent {
 
 #examine-events {
     @media (max-width: $screen-xs-max) {
-        width: 100%
+        width: 100%;
     }
 }
+
+.wysiwyg-render {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    iframe {
+        max-width: 100%;
+    }
+
+    table:not(.table) > tbody > tr {
+        margin-bottom: 15px;
+        display: flex;
+        @media (max-width: $screen-xs-max) {
+            margin-bottom: 30px;
+            flex-direction: column;
+            align-items: center;
+
+            td {
+                width:100% !important;
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    table:not(.table)>tbody>tr>td[style*="border-color: rgb"],
+    table:not(.table)>tbody>tr>td[style*="border-color:rgb"] {
+        border: 1px solid;
+    }
+
+    table:not(.table)>tbody>tr>td[style*="vertical-align:middle"],
+    table:not(.table)>tbody>tr>td[style*="vertical-align: middle"] {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    table:not(.table)>tbody>tr>td[style*="vertical-align:bottom"],
+    table:not(.table)>tbody>tr>td[style*="vertical-align: bottom"] {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+    }
+    
+    table:not(.table) > tbody > tr > td {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+

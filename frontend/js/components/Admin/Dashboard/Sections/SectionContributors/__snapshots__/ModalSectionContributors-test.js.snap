@@ -15,7 +15,7 @@ exports[`<ModalSectionContributors /> <TestModalSectionContributors /> should re
   tabIndex={-1}
 >
   <div
-    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+    className="sc-bdnxRM gYBLn Modal__ModalContainerInner-gRLtaR"
     onClick={[Function]}
     style={
       Object {

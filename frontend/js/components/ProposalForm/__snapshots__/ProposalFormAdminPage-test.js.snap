@@ -405,6 +405,13 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "descriptionUsingJoditWysiwyg",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "usingThemes",
                       "storageKey": null,
                     },
@@ -1271,6 +1278,13 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "descriptionUsingJoditWysiwyg",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "type",
                           "storageKey": null,
                         },
@@ -1453,6 +1467,13 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                                           "alias": null,
                                           "args": null,
                                           "kind": "ScalarField",
+                                          "name": "descriptionUsingJoditWysiwyg",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
                                           "name": "color",
                                           "storageKey": null,
                                         },
@@ -1625,6 +1646,13 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "body",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "bodyUsingJoditWysiwyg",
                           "storageKey": null,
                         },
                         Object {
@@ -1979,7 +2007,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "5244098b08ec0a2a02e5cf4c5bb8ec2c",
+          "cacheID": "5b0e773336fa1ffbd82ef563e22f5740",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2027,6 +2055,7 @@ fragment ProposalFormAdminAnalysisConfigurationForm_proposalForm on ProposalForm
     __typename
     id
     body
+    bodyUsingJoditWysiwyg
     effectiveDate
     costEstimationEnabled
     moveToSelectionStep {
@@ -2107,6 +2136,7 @@ fragment ProposalFormAdminCategories_query on Query {
 fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
   id
   description
+  descriptionUsingJoditWysiwyg
   usingThemes
   themeMandatory
   usingCategories
@@ -2245,6 +2275,7 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
       number
     }
     description
+    descriptionUsingJoditWysiwyg
     type
     ... on MultipleChoiceQuestion {
       isOtherAllowed
@@ -2265,6 +2296,7 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
             id
             title
             description
+            descriptionUsingJoditWysiwyg
             color
             image {
               id

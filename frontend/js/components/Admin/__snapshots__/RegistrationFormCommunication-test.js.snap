@@ -36,6 +36,8 @@ exports[`<RegistrationFormCommunication /> renders correctly 1`] = `
       </Field>
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="topTextUsingJoditWysiwyg"
+        formName="registration-form-communication"
         name="topText"
         type="admin-editor"
       />
@@ -52,6 +54,8 @@ exports[`<RegistrationFormCommunication /> renders correctly 1`] = `
       </Field>
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="bottomTextUsingJoditWysiwyg"
+        formName="registration-form-communication"
         name="bottomText"
         type="admin-editor"
       />
@@ -119,6 +123,8 @@ exports[`<RegistrationFormCommunication /> renders correctly with multilangue 1`
       </Field>
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="topTextUsingJoditWysiwyg"
+        formName="registration-form-communication"
         name="topText"
         type="admin-editor"
       />
@@ -135,6 +141,8 @@ exports[`<RegistrationFormCommunication /> renders correctly with multilangue 1`
       </Field>
       <Field
         component={[Function]}
+        fieldUsingJoditWysiwygName="bottomTextUsingJoditWysiwyg"
+        formName="registration-form-communication"
         name="bottomText"
         type="admin-editor"
       />

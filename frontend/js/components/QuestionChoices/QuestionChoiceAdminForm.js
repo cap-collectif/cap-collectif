@@ -176,16 +176,8 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      dispatch,
-      fields,
-      choices,
-      formName,
-      oldMember,
-      type,
-      intl,
-      importedResponses,
-    } = this.props;
+    const { dispatch, fields, choices, formName, oldMember, type, intl, importedResponses } =
+      this.props;
     const {
       editIndex,
       showModal,
@@ -348,7 +340,9 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
           bsStyle="primary"
           className="btn--outline box-content__toolbar"
           onClick={() => {
-            dispatch(arrayPush(formName, `${oldMember}.choices`, {}));
+            dispatch(
+              arrayPush(formName, `${oldMember}.choices`, { descriptionUsingJoditWysiwyg: true }),
+            );
             this.setState({
               editIndex: fields.length,
               isCreating: true,

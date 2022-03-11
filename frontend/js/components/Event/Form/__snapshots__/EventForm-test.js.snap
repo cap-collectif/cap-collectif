@@ -93,6 +93,8 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       <Field
         component={[Function]}
         disabled={false}
+        fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+        formName="EventForm"
         id="event_body"
         label={
           <FormattedMessage
@@ -541,6 +543,8 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       <Field
         component={[Function]}
         disabled={false}
+        fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+        formName="EventForm"
         id="event_body"
         label={
           <FormattedMessage
@@ -989,6 +993,8 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       <Field
         component={[Function]}
         disabled={false}
+        fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+        formName="EventForm"
         id="event_body"
         label={
           <FormattedMessage

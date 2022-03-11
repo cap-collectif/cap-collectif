@@ -119,7 +119,7 @@ exports[`<ProjectAdminMergeModale /> renders correctly 1`] = `
           </span>
         }
         name="description"
-        type="admin-editor"
+        type="editor"
       />
     </ModalBody>
     <ModalFooter

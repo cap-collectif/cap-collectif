@@ -44,6 +44,7 @@ const mutation = graphql`
         steps {
           id
           body
+          bodyUsingJoditWysiwyg
           __typename
           title
           slug
@@ -88,12 +89,15 @@ const mutation = graphql`
             }
             debateType
             debateContent
+            debateContentUsingJoditWysiwyg
           }
           ... on QuestionnaireStep {
             questionnaire {
               value: id
               label: title
             }
+            footer
+            footerUsingJoditWysiwyg
           }
         }
         ...ProjectAccessAdminForm_project

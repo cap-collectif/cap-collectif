@@ -14,6 +14,7 @@ const baseProps = {
     type: 'FOR',
     title: 'Pour ou contre la vie ?',
     body: 'Tell us the truth',
+    bodyUsingJoditWysiwyg: false,
     author: {
       id: 'author123',
       username: 'SmokeWeedEveryday',

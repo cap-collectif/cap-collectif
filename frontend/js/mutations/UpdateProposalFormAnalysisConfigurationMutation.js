@@ -14,6 +14,7 @@ const mutation = graphql`
         __typename
         id
         body
+        bodyUsingJoditWysiwyg
         effectiveDate
         costEstimationEnabled
         evaluationForm {

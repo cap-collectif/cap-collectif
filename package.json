@@ -151,7 +151,7 @@
         },
         {
             "path": "./public/js/commons.js",
-            "maxSize": "800 KB"
+            "maxSize": "1000 KB"
         },
         {
             "path": "./public/js/app.js",
@@ -285,6 +285,7 @@
         "jest": "^27.0.6",
         "jest-styled-components": "^7.0.3",
         "jimp": "^0.9.3",
+        "jodit-react": "^1.1.15",
         "jquery": "^3.5.1",
         "jquery-minicolors": "^2.1.10",
         "js-cookie": "^2.2.1",

@@ -55,6 +55,9 @@ type Props = {|
   ...ReduxFormFormProps,
   handleClose?: () => {},
   features: FeatureToggles,
+  bodyUsingJoditWysiwyg?: boolean,
+  debateContentUsingJoditWysiwyg?: ?boolean,
+  footerUsingJoditWysiwyg?: ?boolean,
   step: {
     id: string,
     label: string,
@@ -63,6 +66,8 @@ type Props = {|
     startAt: string,
     endAt: ?string,
     body: string,
+    bodyUsingJoditWysiwyg?: ?boolean,
+    footerUsingJoditWysiwyg?: ?boolean,
     isEnabled: boolean,
     timeless?: boolean,
     isAnonymousParticipationAllowed?: boolean,
@@ -117,6 +122,7 @@ type Props = {|
     },
     debateType?: DebateType,
     debateContent?: string,
+    debateContentUsingJoditWysiwyg?: ?boolean,
     collectParticipantsEmail?: boolean,
   },
   intl: IntlShape,
@@ -405,6 +411,9 @@ export function ProjectAdminStepForm({
   debateType,
   fcAllowedData,
   hasIdentificationCodeLists,
+  bodyUsingJoditWysiwyg,
+  debateContentUsingJoditWysiwyg,
+  footerUsingJoditWysiwyg,
 }: Props) {
   const { user } = useSelector((state: GlobalState) => state.user);
 
@@ -514,6 +523,9 @@ export function ProjectAdminStepForm({
             <Field
               type="admin-editor"
               name="debateContent"
+              fieldUsingJoditWysiwyg={debateContentUsingJoditWysiwyg}
+              fieldUsingJoditWysiwygName="debateContentUsingJoditWysiwyg"
+              formName={stepFormName}
               id="step-debate-content"
               label={<FormattedMessage id="debate.content" />}
               placeholder={<FormattedMessage id="debate.content" />}
@@ -582,8 +594,12 @@ export function ProjectAdminStepForm({
 
           {step.__typename !== 'DebateStep' && (
             <Field
-              type="editor"
+              type="admin-editor"
               name="body"
+              fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
+              fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
+              formName={stepFormName}
+              fieldName="bodyUsingJoditWysiwyg"
               id="step-body"
               label={renderLabel('proposal.body', intl, undefined, true)}
               component={renderComponent}
@@ -605,6 +621,7 @@ export function ProjectAdminStepForm({
               requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
               isAnonymousParticipationAllowed={isAnonymousParticipationAllowed}
+              footerUsingJoditWysiwyg={footerUsingJoditWysiwyg}
             />
           )}
           {step.__typename === 'ConsultationStep' && (
@@ -822,6 +839,7 @@ const mapStateToProps = (
       __typename: step?.__typename ? step.__typename : null,
       label: step?.label ? step.label : null,
       body: step?.body ? step.body : null,
+      bodyUsingJoditWysiwyg: step?.bodyUsingJoditWysiwyg !== false,
       title: step?.title ? step.title : null,
       endAt: step?.endAt ? step.endAt : null,
       startAt: step?.startAt || moment(),
@@ -840,6 +858,7 @@ const mapStateToProps = (
       // DebateStep
       debateType: step.__typename === 'DebateStep' ? step?.debateType || 'FACE_TO_FACE' : undefined,
       debateContent: step.__typename === 'DebateStep' ? step?.debateContent : undefined,
+      debateContentUsingJoditWysiwyg: step?.debateContentUsingJoditWysiwyg !== false,
       // QuestionnaireStep
       questionnaire: step?.questionnaire || null,
       footer: step?.footer ? step.footer : null,
@@ -849,6 +868,7 @@ const mapStateToProps = (
           : step.__typename === 'QuestionnaireStep'
           ? true
           : undefined,
+      footerUsingJoditWysiwyg: step.footerUsingJoditWysiwyg !== false,
       // ConsultationStep
       consultations: step?.consultations || [],
       requirements: step ? createRequirements(step, twilioEnabled, isFranceConnectConfigured) : [],
@@ -916,6 +936,13 @@ const mapStateToProps = (
     isPrivate: formValueSelector(stepFormName)(state, 'private') || false,
     // DebateStep
     debateType: formValueSelector(stepFormName)(state, 'debateType') || 'FACE_TO_FACE',
+    // WYSIWYG Migration
+    bodyUsingJoditWysiwyg: formValueSelector(stepFormName)(state, 'bodyUsingJoditWysiwyg'),
+    footerUsingJoditWysiwyg: formValueSelector(stepFormName)(state, 'footerUsingJoditWysiwyg'),
+    debateContentUsingJoditWysiwyg: formValueSelector(stepFormName)(
+      state,
+      'debateContentUsingJoditWysiwyg',
+    ),
   };
 };
 

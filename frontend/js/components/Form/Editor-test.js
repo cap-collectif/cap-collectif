@@ -17,6 +17,7 @@ describe('<Editor />', () => {
     id: 'azerty',
     disabled: true,
     currentLanguage: 'FR-fr',
+    switchToNewEditor: jest.fn(),
   };
 
   it('should render correctly with defaultProps', () => {

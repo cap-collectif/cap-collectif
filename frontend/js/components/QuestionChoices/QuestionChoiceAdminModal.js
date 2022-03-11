@@ -21,6 +21,7 @@ type Props = {|
   formName: string,
   type: string,
   intl: IntlShape,
+  descriptionUsingJoditWysiwyg?: ?boolean,
 |};
 
 type ModalState = {|
@@ -36,7 +37,17 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
   }
 
   render() {
-    const { member, show, isCreating, onClose, onSubmit, type, intl } = this.props;
+    const {
+      member,
+      show,
+      isCreating,
+      onClose,
+      onSubmit,
+      type,
+      intl,
+      formName,
+      descriptionUsingJoditWysiwyg,
+    } = this.props;
     const optional = (
       <span className="excerpt">
         {' '}
@@ -48,7 +59,8 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
         show={show}
         onHide={onClose}
         aria-labelledby="proposal-form-admin-question-modal-title-lg"
-        id="proposal-form-admin-question-modal">
+        id="proposal-form-admin-question-modal"
+        enforceFocus={false}>
         <ModalContainer>
           <Modal.Header closeButton>
             <div className="modal-title">
@@ -69,6 +81,9 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
               name={`${member}.description`}
               component={component}
               type="admin-editor"
+              fieldUsingJoditWysiwyg={descriptionUsingJoditWysiwyg}
+              fieldUsingJoditWysiwygName={`${member}.descriptionUsingJoditWysiwyg`}
+              formName={formName}
               id={`${member}.description`}
               label={
                 <span>
@@ -121,6 +136,7 @@ const mapStateToProps = (state: GlobalState, props) => {
   const selector = formValueSelector(props.formName);
   return {
     kind: selector(state, `${props.member}.kind`),
+    descriptionUsingJoditWysiwyg: selector(state, `${props.member}.descriptionUsingJoditWysiwyg`),
   };
 };
 
