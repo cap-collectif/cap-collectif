@@ -54,6 +54,7 @@ class SettingsController extends Controller
      * @Route("/admin/settings/pages.shield/list", name="capco_admin_settings_shield")
      * @Template("@CapcoAdmin/Settings/shield.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
+     * @deprecated Replace by our NextJs router so this is not used anymore
      */
     public function shieldAction()
     {

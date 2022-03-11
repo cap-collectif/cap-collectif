@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react';
+import { FC, ChangeEvent, Fragment } from 'react';
 import {
     CapUIFontWeight,
     CapUIIcon,
@@ -8,7 +8,7 @@ import {
     Switch,
     Tag,
     Text,
-    Checkbox
+    Checkbox,
 } from '@cap-collectif/ui';
 import { Section } from '@ui/Section';
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql';
@@ -66,7 +66,7 @@ const SSOToggleList: FC = () => {
                 </Text>
 
                 <Tag variantColor="gray">
-                    <Tag.LeftIcon name={CapUIIcon.Lock} size={CapUIIconSize.Sm} mr={0} />
+                    <Tag.LeftIcon name={CapUIIcon.LockOpen} size={CapUIIconSize.Sm} mr={0} />
                 </Tag>
             </Flex>
             <Section.Description mb={4}>
@@ -78,7 +78,7 @@ const SSOToggleList: FC = () => {
             <ListCard>
                 {SSO_TOGGLES.map(ssoToggle => (
                     <Fragment key={ssoToggle.featureFlag}>
-                        <ListCard.Item as="label" htmlFor={ssoToggle.featureFlag} >
+                        <ListCard.Item as="label" htmlFor={ssoToggle.featureFlag}>
                             <ListCard.Item.Label
                                 color="gray.900"
                                 fontWeight={CapUIFontWeight.Semibold}>
@@ -88,7 +88,7 @@ const SSOToggleList: FC = () => {
                             <Switch
                                 id={ssoToggle.featureFlag}
                                 checked={features[ssoToggle.featureFlag]}
-                                onChange={e =>
+                                onChange={(e: ChangeEvent<HTMLInputElement>) =>
                                     toggleFeatureFlag(
                                         ssoToggle.featureFlag,
                                         e.target.checked,
@@ -112,7 +112,7 @@ const SSOToggleList: FC = () => {
                                         );
                                     }}>
                                     {intl.formatMessage({
-                                        id: 'disconnect-sso-on-logout',
+                                        id: 'capco.module.oauth2_switch_user',
                                     })}
                                 </Checkbox>
                             </ListCard.SubItem>

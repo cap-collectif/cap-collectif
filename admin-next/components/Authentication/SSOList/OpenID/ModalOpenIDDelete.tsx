@@ -1,8 +1,6 @@
 import { useState, FC } from 'react';
 import {
     Button,
-    ButtonQuickAction,
-    CapUIIcon,
     CapUIModalSize,
     Checkbox,
     Heading,
@@ -17,6 +15,8 @@ import DeleteSSOConfigurationMutation from '@mutations/DeleteSSOConfigurationMut
 
 type ModalOpenIDDeleteProps = {
     readonly ssoConfiguration: ModalOpenIDDelete_ssoConfiguration$key
+    readonly isOpen: boolean
+    readonly onClose: () => void
 }
 
 const FRAGMENT = graphql`
@@ -36,58 +36,49 @@ const deleteSSO = (ssoId: string, intl: IntlShape) => {
         });
 }
 
-const ModalOpenIDDelete: FC<ModalOpenIDDeleteProps> = ({ ssoConfiguration: ssoConfigurationFragment }) => {
+const ModalOpenIDDelete: FC<ModalOpenIDDeleteProps> = ({ ssoConfiguration: ssoConfigurationFragment, onClose, isOpen }) => {
     const intl = useIntl();
     const ssoConfiguration = useFragment(FRAGMENT, ssoConfigurationFragment);
     const [confirmed, setConfirmed] = useState(false);
 
     return (
         <Modal
-            disclosure={
-                <ButtonQuickAction
-                    variantColor="red"
-                    icon={CapUIIcon.Trash}
-                    label={intl.formatMessage({ id: 'action_delete' })}
-                />
-            }
+            show={isOpen}
+            onClose={onClose}
             ariaLabel={intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-the-authentication-method' })}
             size={CapUIModalSize.Lg}>
-            {({ hide }) => (
-                <>
-                    <Modal.Header>
-                        <Heading>
-                            {intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-the-authentication-method' })}
-                        </Heading>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Text color="gray.900">
-                            {intl.formatMessage({ id: "are-you-sure-activating-new-editor"})}
-                        </Text>
-                        <Checkbox
-                            checked={confirmed}
-                            onChange={() => setConfirmed(!confirmed)}
-                            id="confirmed-action"
-                        >{intl.formatMessage({ id: 'admin.project.delete.confirm' })}</Checkbox>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button
-                            variant="secondary"
-                            variantColor="primary"
-                            variantSize="medium"
-                            onClick={hide}>
-                            {intl.formatMessage({ id: 'cancel' })}
-                        </Button>
-                        <Button
-                            variant="primary"
-                            variantColor="danger"
-                            variantSize="medium"
-                            disabled={!confirmed}
-                            onClick={() => deleteSSO(ssoConfiguration.id, intl)}>
-                            {intl.formatMessage({ id: 'global.delete' })}
-                        </Button>
-                    </Modal.Footer>
-                </>
-            )}
+                <Modal.Header>
+                    <Heading>
+                        {intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-the-authentication-method' })}
+                    </Heading>
+                </Modal.Header>
+                <Modal.Body spacing={4}>
+                    <Text color="gray.900">
+                        {intl.formatMessage({ id: "you-will-delete-authentication-method"})}
+                    </Text>
+                    <Checkbox
+                        checked={confirmed}
+                        onChange={() => setConfirmed(!confirmed)}
+                        id="confirmed-action"
+                    >{intl.formatMessage({ id: 'admin.project.delete.confirm' })}</Checkbox>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        variantColor="primary"
+                        variantSize="medium"
+                        onClick={onClose}>
+                        {intl.formatMessage({ id: 'cancel' })}
+                    </Button>
+                    <Button
+                        variant="primary"
+                        variantColor="danger"
+                        variantSize="medium"
+                        disabled={!confirmed}
+                        onClick={() => deleteSSO(ssoConfiguration.id, intl)}>
+                        {intl.formatMessage({ id: 'global.delete' })}
+                    </Button>
+                </Modal.Footer>
         </Modal>
     );
 };

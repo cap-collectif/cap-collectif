@@ -29,3 +29,5 @@ InternalUpdateFranceConnectSSOConfigurationInput:
                 type: 'Boolean!'
             preferred_username:
                 type: 'Boolean!'
+            enabled:
+                type: 'Boolean!'

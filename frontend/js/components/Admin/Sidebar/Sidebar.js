@@ -392,7 +392,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                   />
                   <SidebarLink
                     text="admin.label.pages.shield"
-                    href="/admin/settings/pages.shield/list"
+                    href="/admin-next/authentification"
                   />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>

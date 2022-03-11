@@ -6,6 +6,8 @@ import type {
     UpdateShieldAdminFormMutationResponse,
     UpdateShieldAdminFormMutationVariables,
 } from '@relay/UpdateShieldAdminFormMutation.graphql';
+import { UpdateShieldAdminFormInput } from '@relay/UpdateShieldAdminFormMutation.graphql';
+import { ShieldQueryResponse } from '@relay/ShieldQuery.graphql';
 
 const mutation = graphql`
     mutation UpdateShieldAdminFormMutation($input: UpdateShieldAdminFormInput!) @raw_response_type {
@@ -51,17 +53,23 @@ const commit = (
 
             const newShieldAdminForm = payload.getLinkedRecord('shieldAdminForm');
             const newTranslations = newShieldAdminForm.getLinkedRecords('translations');
-            const newShieldMode = newShieldAdminForm.getValue('shieldMode')
+            const newShieldMode = newShieldAdminForm.getValue('shieldMode');
 
             shieldAdminForm.setValue(newShieldMode, 'shieldMode');
             shieldAdminForm.setLinkedRecords(newTranslations, 'translations');
         },
     });
 
-export const toggleShield = (enabled: boolean) => {
+export const toggleShield = (
+    enabled: boolean,
+    translations: ShieldQueryResponse['shieldAdminForm']['translations'],
+    mediaId?: string,
+) => {
     return commit({
         input: {
             shieldMode: enabled,
+            translations,
+            mediaId: mediaId || null,
         },
     });
 };

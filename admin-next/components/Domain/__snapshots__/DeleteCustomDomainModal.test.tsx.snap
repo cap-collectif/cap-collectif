@@ -98,10 +98,8 @@ Array [
             custom-domain-delete-confirmation-message
           </p>
           <label
-            checked={false}
             className="sc-bdvvtL kGdEVS"
             htmlFor="agree-checkbox"
-            onChange={[Function]}
           >
             <div
               className="sc-bdvvtL RvMdm cap-checkbox"

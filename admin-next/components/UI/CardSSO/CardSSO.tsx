@@ -17,8 +17,8 @@ const CardSSO: FC<CardSSOProps> & SubComponents = ({ children, ...props }) => (
         borderColor="gray.200"
         borderRadius="normal"
         overflow="hidden"
-        width="264px"
-        maxWidth="264px"
+        width="100%"
+        minWidth="264px"
         {...props}>
         {children}
     </Flex>

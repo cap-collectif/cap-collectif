@@ -20,7 +20,6 @@ import ProjectAdminApp from '~/startup/ProjectAdminApp';
 import ProjectAdminAppDeprecated from '~/startup/ProjectAdminAppDeprecated';
 import ProjectDistrictAdminApp from '~/startup/ProjectDistrictAdminApp';
 import AdminExportButtonApp from '~/startup/AdminExportButtonApp';
-import AuthentificationAdminApp from '~/startup/AuthentificationAdminApp';
 import EventAdminEditPageApp from '~/startup/EventAdminEditPageApp';
 import ProjectExternalProjectAdminAppDeprecated from '~/startup/ProjectExternalProjectAdminAppDeprecated';
 import FontAdminPageApp from '~/startup/FontAdminPageApp';
@@ -71,7 +70,6 @@ ReactOnRails.register({
   ProjectAdminAppDeprecated,
   ProjectDistrictAdminApp,
   AdminExportButtonApp,
-  AuthentificationAdminApp,
   EventAdminEditPageApp,
   ProjectExternalProjectAdminAppDeprecated,
   FontAdminPageApp,

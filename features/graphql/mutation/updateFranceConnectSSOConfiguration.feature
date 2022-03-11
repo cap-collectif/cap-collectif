@@ -18,6 +18,7 @@ Scenario: Admin wants to update France Connect configuration
           userInfoUrl
           logoutUrl
           allowedData
+          enabled
         }
       }
     }",
@@ -33,7 +34,8 @@ Scenario: Admin wants to update France Connect configuration
         "birthcountry": false,
         "gender": true,
         "email": true,
-        "preferred_username": false
+        "preferred_username": false,
+        "enabled": true
       }
     }
   }
@@ -57,7 +59,8 @@ Scenario: Admin wants to update France Connect configuration
                  "birthdate",
                  "gender",
                  "email"
-              ]
+              ],
+              "enabled": true
            }
         }
      }
@@ -81,6 +84,7 @@ Scenario: Admin wants to update France Connect configuration and turn it to prod
           userInfoUrl
           logoutUrl
           allowedData
+          enabled
         }
       }
     }",
@@ -96,7 +100,8 @@ Scenario: Admin wants to update France Connect configuration and turn it to prod
         "birthcountry": false,
         "gender": true,
         "email": true,
-        "preferred_username": false
+        "preferred_username": false,
+        "enabled": true
       }
     }
   }
@@ -120,7 +125,8 @@ Scenario: Admin wants to update France Connect configuration and turn it to prod
              "birthdate",
              "gender",
              "email"
-          ]
+          ],
+          "enabled": true
          }
        }
      }

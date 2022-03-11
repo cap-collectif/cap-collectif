@@ -103,8 +103,7 @@ const FormConfiguration: FC = () => {
                 <FieldInput id="logoutUrl" name="logoutUrl" control={control} type="text" />
             </FormControl>
 
-            <FormControl name="logoutUrl" control={control} isRequired isDisabled>
-                <FormLabel htmlFor="environment" label={intl.formatMessage({ id: 'logout-url' })} />
+            <FormControl name="environment" control={control}>
                 <FieldInput id="environment" name="environment" control={control} type="checkbox">
                     {intl.formatMessage({
                         id: 'environment-france-connect',
@@ -124,14 +123,16 @@ const FormConfiguration: FC = () => {
                             align="flex-start"
                             spacing={2}
                             key={optionalField.value}>
-                            <FieldInput
-                                type="switch"
-                                control={control}
-                                key={optionalField.value}
-                                name={optionalField.value}
-                                id={optionalField.value}>
-                                {intl.formatMessage({ id: optionalField.label })}
-                            </FieldInput>
+                            <FormControl name={optionalField.value} control={control}>
+                                <FieldInput
+                                    type="switch"
+                                    control={control}
+                                    key={optionalField.value}
+                                    name={optionalField.value}
+                                    id={optionalField.value}>
+                                    {intl.formatMessage({ id: optionalField.label })}
+                                </FieldInput>
+                            </FormControl>
                         </Flex>
                     ))}
                 </Flex>

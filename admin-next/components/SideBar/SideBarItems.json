@@ -389,7 +389,7 @@
             },
             {
                 "title": "admin.label.pages.shield",
-                "href": "/admin/settings/pages.shield/list",
+                "href": "/admin-next/authentification",
                 "rolesRequired": [],
                 "featuresRequired": []
             }

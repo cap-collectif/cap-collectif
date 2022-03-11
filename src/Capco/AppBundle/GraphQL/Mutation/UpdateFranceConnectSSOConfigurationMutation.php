@@ -2,9 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Enum\SSOType;
 use Capco\AppBundle\Form\FranceConnectSSOConfigurationFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -15,12 +16,12 @@ class UpdateFranceConnectSSOConfigurationMutation implements MutationInterface
 {
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
-    private FranceConnectSSOConfigurationRepository $repository;
+    private AbstractSSOConfigurationRepository $repository;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        FranceConnectSSOConfigurationRepository $repository
+        AbstractSSOConfigurationRepository $repository
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -31,7 +32,7 @@ class UpdateFranceConnectSSOConfigurationMutation implements MutationInterface
     {
         $values = $input->getArrayCopy();
 
-        $fcConfiguration = $this->repository->findOneBy(['enabled' => true]);
+        $fcConfiguration = $this->repository->findASsoByType(SSOType::FRANCE_CONNECT);
 
         if (!$fcConfiguration) {
             throw new UserError('France Connect configuration is not activated.');

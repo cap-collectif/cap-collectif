@@ -1,6 +1,5 @@
 import type { FC } from 'react';
-import { Flex, FormLabel, Text } from '@cap-collectif/ui';
-import * as React from 'react';
+import { Button, Flex, FormLabel, Text } from '@cap-collectif/ui';
 import { useIntl, FormattedHTMLMessage } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
 import { FormControl, FieldInput } from '@cap-collectif/form';
@@ -52,14 +51,20 @@ const FormConfiguration: FC = () => {
                     rules={{
                         validate: {
                             equalTo: value =>
-                                value.length !== 32 &&
+                                value.length === 32 ||
                                 intl.formatMessage({ id: 'facebook-app-secret-must-be-32-char' }),
                         },
                     }}
                 />
             </FormControl>
 
-            <FormattedHTMLMessage id="edit-facebook-authentication-method-find-id-secret" />
+            <Button
+                as="a"
+                variant="link"
+                variantColor="primary"
+                href="https://developers.facebook.com/apps/">
+                {intl.formatMessage({ id: 'where-find-facebook-authentication' })}
+            </Button>
         </Flex>
     );
 };

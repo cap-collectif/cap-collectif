@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { useMemo, FC } from 'react';
 import { Grid } from '@cap-collectif/ui';
 import CardFacebook from './Facebook/CardFacebook';
 import CardMail from './Mail/CardMail';
@@ -11,7 +11,6 @@ import type { CardFranceConnect_ssoConfiguration$key } from '@relay/CardFranceCo
 import type { CardOpenID_ssoConfiguration$key } from '@relay/CardOpenID_ssoConfiguration.graphql';
 import CardParis from './Paris/CardParis';
 import useFeatureFlag from '@hooks/useFeatureFlag';
-import { useMemo } from 'react';
 
 type SSOListProps = {
     query: SSOList_query$key,
@@ -83,7 +82,13 @@ const SSOList: FC<SSOListProps> = ({ query: queryFragment }) => {
     }, [ssoConfigurations]);
 
     return (
-        <Grid gap={4} templateColumns="1fr 1fr 1fr" mt={4}>
+        <Grid
+            gap={4}
+            autoFill={{
+                min: 'auto',
+                max: '32%',
+            }}
+           mt={4}>
             <CardMail />
             <CardFacebook
                 ssoConfiguration={ssoConfigs.facebook}

@@ -47,7 +47,6 @@ import ProjectTrashCommentApp from '../js/startup/ProjectTrashCommentApp';
 import AdminExportButtonApp from '../js/startup/AdminExportButtonApp';
 import EventListApp from '../js/startup/EventListApp';
 import SectionPageApp from '../js/startup/SectionPageApp';
-import AuthentificationAdminApp from '../js/startup/AuthentificationAdminApp';
 import ProfileUserCommentApp from '../js/startup/ProfileUserCommentApp';
 import EventAdminEditPageApp from '../js/startup/EventAdminEditPageApp';
 import EventFormPageApp from '../js/startup/EventFormPageApp';
@@ -118,7 +117,6 @@ ReactOnRails.register({
   ProjectTrashCommentApp,
   AdminExportButtonApp,
   EventListApp,
-  AuthentificationAdminApp,
   ProfileUserCommentApp,
   EventAdminEditPageApp,
   EventFormPageApp,

@@ -28,7 +28,7 @@ Array [
     restrictedaccess
   </div>,
   <div
-    className="cap-tooltip"
+    className="cap-tooltip-container"
     hidden={true}
     id="id-g"
     onAnimationEnd={[Function]}
@@ -41,6 +41,7 @@ Array [
         "pointerEvents": "none",
         "position": "fixed",
         "top": "100%",
+        "zIndex": 1000,
       }
     }
   />,
@@ -75,7 +76,7 @@ Array [
     restrictedaccess
   </div>,
   <div
-    className="cap-tooltip"
+    className="cap-tooltip-container"
     hidden={true}
     id="id-g"
     onAnimationEnd={[Function]}
@@ -88,6 +89,7 @@ Array [
         "pointerEvents": "none",
         "position": "fixed",
         "top": "100%",
+        "zIndex": 1000,
       }
     }
   />,

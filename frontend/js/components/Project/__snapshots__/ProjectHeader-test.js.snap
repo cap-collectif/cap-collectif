@@ -162,7 +162,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
         restrictedaccess
       </div>
       <div
-        className="cap-tooltip"
+        className="cap-tooltip-container"
         hidden={true}
         id="id-g"
         onAnimationEnd={[Function]}
@@ -175,6 +175,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
             "pointerEvents": "none",
             "position": "fixed",
             "top": "100%",
+            "zIndex": 1000,
           }
         }
       />

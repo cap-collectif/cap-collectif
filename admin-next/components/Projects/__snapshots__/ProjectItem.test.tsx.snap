@@ -125,7 +125,7 @@ Array [
       </svg>
     </button>
     <div
-      className="cap-tooltip"
+      className="cap-tooltip-container"
       hidden={true}
       id="id-g"
       onAnimationEnd={[Function]}
@@ -138,6 +138,7 @@ Array [
           "pointerEvents": "none",
           "position": "fixed",
           "top": "100%",
+          "zIndex": 1000,
         }
       }
     />
@@ -185,6 +186,7 @@ Array [
         onMouseMove={[Function]}
         role="menuitem"
         tabIndex={0}
+        type="button"
       >
         <p
           className="sc-bdvvtL dgPHnB cap-text"
@@ -420,7 +422,7 @@ Array [
       </svg>
     </button>
     <div
-      className="cap-tooltip"
+      className="cap-tooltip-container"
       hidden={true}
       id="id-g"
       onAnimationEnd={[Function]}
@@ -433,6 +435,7 @@ Array [
           "pointerEvents": "none",
           "position": "fixed",
           "top": "100%",
+          "zIndex": 1000,
         }
       }
     />
@@ -480,6 +483,7 @@ Array [
         onMouseMove={[Function]}
         role="menuitem"
         tabIndex={0}
+        type="button"
       >
         <p
           className="sc-bdvvtL dgPHnB cap-text"
@@ -715,7 +719,7 @@ Array [
       </svg>
     </button>
     <div
-      className="cap-tooltip"
+      className="cap-tooltip-container"
       hidden={true}
       id="id-g"
       onAnimationEnd={[Function]}
@@ -728,6 +732,7 @@ Array [
           "pointerEvents": "none",
           "position": "fixed",
           "top": "100%",
+          "zIndex": 1000,
         }
       }
     />
@@ -775,6 +780,7 @@ Array [
         onMouseMove={[Function]}
         role="menuitem"
         tabIndex={0}
+        type="button"
       >
         <p
           className="sc-bdvvtL dgPHnB cap-text"
@@ -946,7 +952,7 @@ Array [
       </svg>
     </button>
     <div
-      className="cap-tooltip"
+      className="cap-tooltip-container"
       hidden={true}
       id="id-g"
       onAnimationEnd={[Function]}
@@ -959,6 +965,7 @@ Array [
           "pointerEvents": "none",
           "position": "fixed",
           "top": "100%",
+          "zIndex": 1000,
         }
       }
     />
@@ -1006,6 +1013,7 @@ Array [
         onMouseMove={[Function]}
         role="menuitem"
         tabIndex={0}
+        type="button"
       >
         <p
           className="sc-bdvvtL dgPHnB cap-text"

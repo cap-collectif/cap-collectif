@@ -242,49 +242,6 @@
         "title": "global.infra",
         "groups": [
             {
-                "title": "admin.group.authentication",
-                "description": "description.group.authentication",
-                "onlySuperAdmin": true,
-                "items": {
-                    "remind_user_account_confirmation": {
-                        "title": "capco.module.remind_user_account_confirmation",
-                        "description": "description.module.remind_user_account_confirmation",
-                        "onlySuperAdmin": false
-                    },
-                    "login_franceconnect": {
-                        "title": "france_connect",
-                        "description": "description.module.france_connect",
-                        "onlySuperAdmin": false
-                    },
-                    "login_openid": {
-                        "title": "global.openId",
-                        "description": "description.module.openId",
-                        "onlySuperAdmin": false
-                    },
-                    "oauth2_switch_user": {
-                        "title": "capco.module.oauth2_switch_user",
-                        "description": "",
-                        "onlySuperAdmin": false,
-                        "dependOf": ["openid"]
-                    },
-                    "login_saml": {
-                        "title": "saml",
-                        "description": "description.module.saml",
-                        "onlySuperAdmin": false
-                    },
-                    "login_paris": {
-                        "title": "mon_compte_paris",
-                        "description": "description.module.mon_compte_paris",
-                        "onlySuperAdmin": false
-                    },
-                    "login_cas": {
-                        "title": "CAS",
-                        "description": "description.module.cas",
-                        "onlySuperAdmin": false
-                    }
-                }
-            },
-            {
                 "title": "API",
                 "description": "description.group.api",
                 "onlySuperAdmin": false,

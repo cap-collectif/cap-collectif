@@ -17,6 +17,7 @@ const mutation = graphql`
         updateFranceConnectSSOConfiguration(input: $input) {
             fcConfiguration
                 @prependNode(connections: $connections, edgeTypeName: "SSOConfigurationEdge") {
+                enabled
                 ...ModalFranceConnectConfiguration_ssoConfiguration
             }
         }
@@ -53,7 +54,8 @@ const commit = (
                     environment: variables.input.environment,
                     redirectUri: '',
                     logoutUrl: '',
-                    allowedData: getAllowedData(variables)
+                    allowedData: getAllowedData(variables),
+                    enabled: true
                 },
             },
         },

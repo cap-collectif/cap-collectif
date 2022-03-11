@@ -14642,6 +14642,7 @@ input UpdateFranceConnectSSOConfigurationInput {
   gender: Boolean!
   email: Boolean!
   preferred_username: Boolean!
+  enabled: Boolean!
   clientMutationId: String
 }
 
