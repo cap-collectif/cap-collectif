@@ -4,12 +4,14 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Validator\Constraints\CheckPhoneNumber;
 use Capco\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -49,7 +51,9 @@ class PersonalDataFormType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
             ])
-            ->add('phone')
+            ->add('phone', TelType::class, [
+                'constraints' => [new CheckPhoneNumber()],
+            ])
             ->add('email', EmailType::class)
             ->add('phoneConfirmed')
             ->add('birthPlace')

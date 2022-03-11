@@ -5,9 +5,6 @@ namespace Capco\AppBundle\Validator\Constraints;
 use Capco\AppBundle\Enum\UserPhoneErrors;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @Annotation
- */
 class CheckPhoneNumber extends Constraint
 {
     public string $mobileNumberMessage = UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER;
