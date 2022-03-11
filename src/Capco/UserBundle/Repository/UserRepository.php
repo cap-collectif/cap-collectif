@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
@@ -1446,6 +1447,54 @@ EOF;
         $stmt->bindValue('userid', $user->getId());
 
         return \count($stmt->executeQuery()->fetchAllAssociative()) > 0;
+    }
+
+    public function getUsersInMailingList(
+        MailingList $mailingList,
+        bool $validEmailOnly = true,
+        bool $consentInternalOnly = true,
+        ?int $offset = null,
+        ?int $limit = null
+    ): Paginator {
+        $qb = $this->createQueryBuilder('u')
+            ->leftJoin('CapcoAppBundle:MailingList', 'ml', 'WITH', 'u MEMBER OF ml.users')
+            ->where('ml = :mailingList')
+            ->orderBy('u.createdAt')
+            ->setParameter('mailingList', $mailingList);
+        if ($validEmailOnly) {
+            $qb->andWhere('u.email IS NOT NULL');
+        }
+        if ($consentInternalOnly) {
+            $qb->andWhere('u.consentInternalCommunication = 1');
+        }
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return new Paginator($qb);
+    }
+
+    public function countUsersInMailingList(
+        MailingList $mailingList,
+        bool $validEmailOnly = true,
+        bool $consentInternalOnly = true
+    ): int {
+        $qb = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->leftJoin('CapcoAppBundle:MailingList', 'ml', 'WITH', 'u MEMBER OF ml.users')
+            ->where('ml = :mailingList')
+            ->setParameter('mailingList', $mailingList);
+        if ($validEmailOnly) {
+            $qb->andWhere('u.email IS NOT NULL');
+        }
+        if ($consentInternalOnly) {
+            $qb->andWhere('u.consentInternalCommunication = 1');
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder

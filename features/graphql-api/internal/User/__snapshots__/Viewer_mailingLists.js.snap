@@ -12,6 +12,11 @@ Object {
         },
         Object {
           "node": Object {
+            "name": "Coucou, tu veux voir ma liste ?",
+          },
+        },
+        Object {
+          "node": Object {
             "name": "liste Solidarité COVID-19",
           },
         },
@@ -26,7 +31,7 @@ Object {
           },
         },
       ],
-      "totalCount": 4,
+      "totalCount": 5,
     },
   },
 }

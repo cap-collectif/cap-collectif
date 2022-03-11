@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -12,10 +13,12 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 class MailingListUsersConnection implements ResolverInterface
 {
     private MailingListRepository $repository;
+    private UserRepository $userRepository;
 
-    public function __construct(MailingListRepository $repository)
+    public function __construct(MailingListRepository $repository, UserRepository $userRepository)
     {
         $this->repository = $repository;
+        $this->userRepository = $userRepository;
     }
 
     public function __invoke($mailingList, Argument $argument): Connection
@@ -25,16 +28,25 @@ class MailingListUsersConnection implements ResolverInterface
             $mailingList,
             $argument
         ) {
-            return $mailingList
-                ->getUsersWithValidEmail($argument->offsetGet('consentInternalCommunicationOnly'))
-                ->toArray();
+            return $this->userRepository
+                ->getUsersInMailingList(
+                    $mailingList,
+                    true,
+                    $argument->offsetGet('consentInternalCommunicationOnly'),
+                    $offset,
+                    $limit
+                )
+                ->getIterator()
+                ->getArrayCopy();
         });
 
         return $paginator->auto(
             $argument,
-            $mailingList
-                ->getUsersWithValidEmail($argument->offsetGet('consentInternalCommunicationOnly'))
-                ->count()
+            $this->userRepository->countUsersInMailingList(
+                $mailingList,
+                true,
+                $argument->offsetGet('consentInternalCommunicationOnly')
+            )
         );
     }
 
