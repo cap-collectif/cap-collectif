@@ -23,14 +23,20 @@ const getFirstTab = (children: React.ReactElement<typeof Tab>[]): ActiveTab => {
 const TabsChart: React.FC<TabsChartProps> & SubComponents = ({ children }) => {
     const [activeTab, setActiveTab] = React.useState<ActiveTab>(getFirstTab(children));
 
-    const tabsChildren = React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
-            return React.cloneElement(child, {
-                active: activeTab?.id === child.props.id,
-                selectTab: setActiveTab,
-            });
-        }
-    });
+    const tabsChildren = React.useMemo(() => {
+        return React.Children.map(children, child => {
+            if (React.isValidElement(child)) {
+                return React.cloneElement(child, {
+                    active: activeTab?.id === child.props.id,
+                    selectTab: setActiveTab,
+                });
+            }
+        });
+    }, [activeTab, children]);
+
+    React.useEffect(() => {
+        setActiveTab(getFirstTab(children))
+    }, [children])
 
     return (
         <Flex direction="column" spacing={8}>

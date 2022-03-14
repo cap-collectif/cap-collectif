@@ -47,7 +47,7 @@ const LineChart: FC<LineChartProps> = ({
     return (
         <Box width="100%" height="100%" {...props}>
             <ResponsiveContainer width="100%" height="100%">
-                <LineChartRecharts width={500} height={500} data={data}>
+                <LineChartRecharts data={data}>
                     <defs>
                         <linearGradient id="colorLine" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" stopColor={colors.blue['700']} />

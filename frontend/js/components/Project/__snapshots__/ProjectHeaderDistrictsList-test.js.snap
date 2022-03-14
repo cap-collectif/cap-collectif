@@ -164,7 +164,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
+      className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -173,7 +173,7 @@ Array [
       }
     >
       <div
-        className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
+        className="sc-bdvvtL dwCLSW sc-gsNilK ftqHuc cap-modal"
         style={
           Object {
             "opacity": 0,

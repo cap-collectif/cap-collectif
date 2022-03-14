@@ -15,7 +15,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
+    className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -24,7 +24,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
     }
   >
     <div
-      className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
+      className="sc-bdvvtL dwCLSW sc-gsNilK ftqHuc cap-modal"
       style={
         Object {
           "opacity": 0,
@@ -172,7 +172,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
+    className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -181,7 +181,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
     }
   >
     <div
-      className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
+      className="sc-bdvvtL dwCLSW sc-gsNilK ftqHuc cap-modal"
       style={
         Object {
           "opacity": 0,
@@ -329,7 +329,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
+    className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -338,7 +338,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
     }
   >
     <div
-      className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
+      className="sc-bdvvtL dwCLSW sc-gsNilK ftqHuc cap-modal"
       style={
         Object {
           "opacity": 0,

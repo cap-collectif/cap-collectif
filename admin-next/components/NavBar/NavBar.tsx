@@ -49,7 +49,7 @@ const FLAGS = {
 type NavBarData = {
     number: {
         color: string,
-        label: string,
+        label: string | number,
     }
     label: string
 }

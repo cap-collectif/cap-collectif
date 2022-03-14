@@ -25,7 +25,7 @@ export interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) => {
     const intl = useIntl();
     const contentRef = React.useRef(null);
-    const { viewerSession, appVersion } = useAppContext();
+    const { viewerSession } = useAppContext();
     const { pathname } = useRouter();
     const helpscoutBeacon = useFeatureFlag('helpscout_beacon');
     const menuOpen = sideBarItems.find(sideBarItem => {

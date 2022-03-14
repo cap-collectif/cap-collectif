@@ -31,6 +31,26 @@ export function formatCodeToLocale(code: string): string {
     return codeSplitted.join('-');
 }
 
+export function getOnlyLanguage(locale: string) {
+    switch (locale) {
+        case 'en-GB':
+        case 'eu-EU':
+            return 'en-gb';
+        case 'de-DE':
+            return 'de';
+        case 'es-ES':
+            return 'es';
+        case 'nl-NL':
+            return 'nl';
+        case 'sv-SE':
+            return 'sv';
+        case 'fr-FR':
+        case 'oc-OC':
+        default:
+            return 'fr';
+    }
+}
+
 type Translation = {
     readonly locale: string,
     readonly [field: string]: ReactNode,

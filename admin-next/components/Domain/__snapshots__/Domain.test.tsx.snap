@@ -79,7 +79,7 @@ Array [
         </label>
         <input
           aria-required={true}
-          className="sc-bdvvtL sc-dvQaRk eBJHkE iiODgr cap-input"
+          className="sc-bdvvtL sc-TBWPX eBJHkE dtkaZV cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -160,7 +160,7 @@ Array [
               className="sc-bdvvtL jRlhBU"
             >
               <div
-                className="sc-bdvvtL bWjrXE sc-Galmp eCBqrg cap-tag"
+                className="sc-bdvvtL bWjrXE sc-fWCJzd eCIVdF cap-tag"
                 style={Object {}}
                 title="custom.domain.com"
               >
@@ -303,7 +303,7 @@ Array [
         </label>
         <input
           aria-required={true}
-          className="sc-bdvvtL sc-dvQaRk eBJHkE iiODgr cap-input"
+          className="sc-bdvvtL sc-TBWPX eBJHkE dtkaZV cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -381,7 +381,7 @@ Array [
             className="sc-bdvvtL beMdAg cap-input-group"
           >
             <input
-              className="sc-bdvvtL sc-dvQaRk eBJHkE iiODgr cap-input"
+              className="sc-bdvvtL sc-TBWPX eBJHkE dtkaZV cap-input"
               disabled={false}
               id="customDomain"
               name="customDomain"

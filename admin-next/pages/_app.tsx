@@ -1,12 +1,13 @@
-import React from 'react';
-import App, { AppProps } from 'next/app';
-import { NextApiResponse } from 'next';
+import type { FC } from 'react';
+import type { AppProps } from 'next/app';
+import moment from 'moment';
 import Providers from '../utils/providers';
 import GlobalCSS from '../styles/GlobalCSS';
 import Fonts from '../styles/Fonts';
+import { getOnlyLanguage } from '@utils/locale-helper';
 
 // We use this component to only render when window is available (it's used by our Redux store)
-const SafeHydrate: React.FC<{}> = ({ children }) => {
+const SafeHydrate: FC = ({ children }) => {
     return (
         <div suppressHydrationWarning>
             {typeof window === 'undefined' || typeof document === 'undefined' ? null : children}
@@ -16,6 +17,8 @@ const SafeHydrate: React.FC<{}> = ({ children }) => {
 
 // This is the entrypoint where we inject all providers and shared data
 function MyApp({ Component, pageProps }: AppProps) {
+    if (pageProps.intl) moment.locale(getOnlyLanguage(pageProps.intl.locale));
+
     return (
         <SafeHydrate>
             <Providers

@@ -135,7 +135,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL hzfKcR sc-fbyfCU cap-modal__overlay"
+      className="sc-bdvvtL hzfKcR sc-GEbAx cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -144,7 +144,7 @@ Array [
       }
     >
       <div
-        className="sc-bdvvtL eDoiZv sc-GEbAx jkpaYN cap-modal"
+        className="sc-bdvvtL eDoiZv sc-gsNilK ftqHuc cap-modal"
         style={
           Object {
             "opacity": 0,
@@ -231,7 +231,7 @@ Array [
               </label>
               <input
                 aria-required={true}
-                className="sc-bdvvtL sc-dvQaRk eBJHkE iiODgr cap-input"
+                className="sc-bdvvtL sc-TBWPX eBJHkE dtkaZV cap-input"
                 disabled={false}
                 id="title"
                 name="title"
@@ -295,7 +295,7 @@ Array [
                       className="cap-async-select__value-container cap-async-select__value-container--is-multi cap-async-select__value-container--has-value css-1ajcqt1-ValueContainer"
                     >
                       <div
-                        className="sc-bdvvtL icmLmQ sc-Galmp eCBqrg cap-tag"
+                        className="sc-bdvvtL icmLmQ sc-fWCJzd eCIVdF cap-tag"
                         style={Object {}}
                         title="lbrunet"
                       >

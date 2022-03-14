@@ -40,7 +40,7 @@ Array [
   </button>,
   <div
     aria-orientation="vertical"
-    className="sc-bdvvtL cXiVDo sc-jQrDum cap-menu__list cap-menu__list"
+    className="sc-bdvvtL cXiVDo sc-fvxzrP cap-menu__list cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"

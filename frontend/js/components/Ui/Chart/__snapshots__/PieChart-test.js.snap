@@ -5,11 +5,7 @@ exports[`<PieChart /> renders PieChart 1`] = `
   height="479px"
   width="110px"
 >
-  <ResponsiveContainer
-    debounce={0}
-    height="100%"
-    width="100%"
-  >
+  <ForwardRef>
     <PieChart
       barCategoryGap="10%"
       barGap={4}
@@ -128,7 +124,7 @@ exports[`<PieChart /> renders PieChart 1`] = `
          
       </Pie>
     </PieChart>
-  </ResponsiveContainer>
+  </ForwardRef>
 </PieChart__ContentWrapper>
 `;
 
@@ -137,11 +133,7 @@ exports[`<PieChart /> renders PieChart with default props 1`] = `
   height="95px"
   width="115px"
 >
-  <ResponsiveContainer
-    debounce={0}
-    height="100%"
-    width="100%"
-  >
+  <ForwardRef>
     <PieChart
       barCategoryGap="10%"
       barGap={4}
@@ -260,6 +252,6 @@ exports[`<PieChart /> renders PieChart with default props 1`] = `
          
       </Pie>
     </PieChart>
-  </ResponsiveContainer>
+  </ForwardRef>
 </PieChart__ContentWrapper>
 `;

@@ -18,6 +18,7 @@ const nextConfig = {
     defaultLocale: 'fr-FR',
     locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC'],
   },
+  excludeDefaultMomentLocales: true,
   experimental: {
     externalDir: true,
   },

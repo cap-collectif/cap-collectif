@@ -83,7 +83,7 @@ const PieChart: FC<PieChartProps> = ({ percentages, ...props }) => {
 
       <Box flex={1}>
         <ResponsiveContainer width="100%" height="100%">
-          <Box as={PieChartRecharts} width="100%" height="100%">
+          <PieChartRecharts>
             <Pie dataKey="value" data={percentagesFormatted} cx="50%" cy="50%" outerRadius="100%">
               {percentagesFormatted.map(percentage => (
                 <Cell
@@ -95,7 +95,7 @@ const PieChart: FC<PieChartProps> = ({ percentages, ...props }) => {
                 />
               ))}
             </Pie>
-          </Box>
+          </PieChartRecharts>
         </ResponsiveContainer>
       </Box>
     </Flex>

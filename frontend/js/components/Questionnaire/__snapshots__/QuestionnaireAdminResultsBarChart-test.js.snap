@@ -2,10 +2,8 @@
 
 exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other responses & empty response 1`] = `
 <QuestionnaireAdminResultsBarChart__Container>
-  <ResponsiveContainer
-    debounce={0}
+  <ForwardRef
     height={300}
-    width="100%"
   >
     <BarChart
       barCategoryGap="10%"
@@ -140,16 +138,14 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
         />
       </Bar>
     </BarChart>
-  </ResponsiveContainer>
+  </ForwardRef>
 </QuestionnaireAdminResultsBarChart__Container>
 `;
 
 exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other responses & on mobile 1`] = `
 <QuestionnaireAdminResultsBarChart__Container>
-  <ResponsiveContainer
-    debounce={0}
+  <ForwardRef
     height={225}
-    width="100%"
   >
     <BarChart
       barCategoryGap="10%"
@@ -276,6 +272,6 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other r
         />
       </Bar>
     </BarChart>
-  </ResponsiveContainer>
+  </ForwardRef>
 </QuestionnaireAdminResultsBarChart__Container>
 `;

@@ -34,7 +34,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL hzfKcR sc-fbyfCU cap-modal__overlay"
+      className="sc-bdvvtL hzfKcR sc-GEbAx cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -43,7 +43,7 @@ Array [
       }
     >
       <div
-        className="sc-bdvvtL eyMQxL sc-GEbAx gKTrBI cap-modal"
+        className="sc-bdvvtL eyMQxL sc-gsNilK hdjjoB cap-modal"
         style={
           Object {
             "opacity": 0,

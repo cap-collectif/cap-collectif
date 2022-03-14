@@ -15,7 +15,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
+    className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -24,7 +24,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
     }
   >
     <div
-      className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
+      className="sc-bdvvtL dwCLSW sc-gsNilK ftqHuc cap-modal"
       id="<Node-mock-id-1>-modal"
       style={
         Object {
@@ -154,7 +154,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
+    className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -163,7 +163,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
     }
   >
     <div
-      className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
+      className="sc-bdvvtL dwCLSW sc-gsNilK ftqHuc cap-modal"
       id="<Node-mock-id-1>-modal"
       style={
         Object {
@@ -293,7 +293,7 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL ebDlAL sc-fbyfCU cap-modal__overlay"
+    className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -302,7 +302,7 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
     }
   >
     <div
-      className="sc-bdvvtL dwCLSW sc-GEbAx jkpaYN cap-modal"
+      className="sc-bdvvtL dwCLSW sc-gsNilK ftqHuc cap-modal"
       id="<Node-mock-id-1>-modal"
       style={
         Object {

@@ -138,7 +138,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
     >
       <div
         aria-describedby="id-g"
-        className="sc-bdvvtL TpZGZ sc-Galmp hyqcUE cap-tag"
+        className="sc-bdvvtL TpZGZ sc-fWCJzd rNujt cap-tag"
         id="restricted-access"
         onBlur={[Function]}
         onFocus={[Function]}

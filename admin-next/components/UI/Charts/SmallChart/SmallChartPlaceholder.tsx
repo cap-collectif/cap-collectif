@@ -5,8 +5,8 @@ const SmallChartPlaceholder: FC = () => (
     <Flex
         direction="row"
         justify="space-around"
-        px={4}
-        py={6}
+        px={6}
+        py={4}
         spacing={8}
         bg="white"
         width="25%"

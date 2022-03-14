@@ -15,11 +15,7 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly with other resp
         }
       }
     >
-      <ResponsiveContainer
-        debounce={0}
-        height="100%"
-        width="100%"
-      >
+      <ForwardRef>
         <PieChart
           barCategoryGap="10%"
           barGap={4}
@@ -165,7 +161,7 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly with other resp
              
           </Pie>
         </PieChart>
-      </ResponsiveContainer>
+      </ForwardRef>
     </div>
   </div>
 </div>
@@ -186,11 +182,7 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly without other r
         }
       }
     >
-      <ResponsiveContainer
-        debounce={0}
-        height="100%"
-        width="100%"
-      >
+      <ForwardRef>
         <PieChart
           barCategoryGap="10%"
           barGap={4}
@@ -282,7 +274,7 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly without other r
              
           </Pie>
         </PieChart>
-      </ResponsiveContainer>
+      </ForwardRef>
     </div>
   </div>
 </div>
