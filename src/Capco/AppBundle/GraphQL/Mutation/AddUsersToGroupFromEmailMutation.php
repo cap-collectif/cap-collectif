@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\UserGroup;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\UserBundle\Entity\User;
@@ -15,39 +16,41 @@ use Psr\Log\LoggerInterface;
 
 class AddUsersToGroupFromEmailMutation implements MutationInterface
 {
-    protected $groupRepository;
-    protected $logger;
-    protected $em;
-    protected $userRepository;
-    protected $userGroupRepository;
+    protected GroupRepository $groupRepository;
+    protected LoggerInterface $logger;
+    protected EntityManagerInterface $em;
+    protected UserRepository $userRepository;
+    protected UserGroupRepository $userGroupRepository;
+    protected GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         GroupRepository $groupRepository,
         LoggerInterface $logger,
         EntityManagerInterface $em,
         UserRepository $userRepository,
-        UserGroupRepository $userGroupRepository
+        UserGroupRepository $userGroupRepository,
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->groupRepository = $groupRepository;
         $this->logger = $logger;
         $this->em = $em;
         $this->userRepository = $userRepository;
         $this->userGroupRepository = $userGroupRepository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
-    public function __invoke(array $emails, bool $dryRun, string $groupId): array
+    public function __invoke(array $emails, bool $dryRun, string $groupId, User $viewer): array
     {
-        /** @var Group $group */
-        $group = $this->groupRepository->find($groupId);
-
-        if (!$group) {
+        $group = $this->globalIdResolver->resolve($groupId, $viewer);
+        if (!$group instanceof Group) {
             $error = sprintf(
                 '%s addUsersToGroupFromEmail: Cannot find the group "%g"',
                 \get_class($this),
                 $groupId
             );
             $this->logger->error($error);
-            throw new UserError('Can\'t add users in group.');
+
+            throw new UserError('Group not found');
         }
 
         $importedUsers = [];
@@ -56,10 +59,8 @@ class AddUsersToGroupFromEmailMutation implements MutationInterface
 
         try {
             foreach (array_unique($emails) as $email) {
-                /** @var User $user */
                 $user = $this->userRepository->findOneBy(['email' => $email]);
-
-                if ($user) {
+                if ($user instanceof User) {
                     $userGroup = $this->userGroupRepository->findOneBy([
                         'user' => $user,
                         'group' => $group,
@@ -94,6 +95,7 @@ class AddUsersToGroupFromEmailMutation implements MutationInterface
                     ' addUsersToGroupFromEmail: ' .
                     sprintf('Cannot add users in group with id "%g"', $groupId)
             );
+
             throw new UserError('Can\'t add users in group.');
         }
     }

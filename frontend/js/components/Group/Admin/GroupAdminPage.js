@@ -53,7 +53,7 @@ export class GroupAdminPage extends Component<Props, State> {
             }
           `}
           variables={{
-            id: groupId,
+            id: Buffer.from(`Group:${groupId}`).toString('base64'),
             cursorUsers: null,
             countUsers: 100,
             cursorInvitations: null,

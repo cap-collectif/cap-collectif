@@ -28,7 +28,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
           "unknown@unknown.com"
         ],
         "dryRun": true,
-        "groupId": "group5"
+        "groupId": "R3JvdXA6Z3JvdXA1"
       }
     }
   }
@@ -78,7 +78,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
       }
     }",
     "variables": {
-      "groupId": "group5"
+      "groupId": "R3JvdXA6Z3JvdXA1"
     }
   }
   """
@@ -123,7 +123,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
           "unknown@unknown.com"
         ],
         "dryRun": false,
-        "groupId": "group5"
+        "groupId": "R3JvdXA6Z3JvdXA1"
       }
     }
   }
@@ -173,7 +173,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
       }
     }",
     "variables": {
-      "groupId": "group5"
+      "groupId": "R3JvdXA6Z3JvdXA1"
     }
   }
   """

@@ -701,7 +701,7 @@ InternalMutation:
                 builderConfig:
                     inputType: AddUsersToGroupFromEmailInput
                     payloadType: AddUsersToGroupFromEmailPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUsersToGroupFromEmailMutation", [value["emails"], value["dryRun"], value["groupId"]])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUsersToGroupFromEmailMutation", [value["emails"], value["dryRun"], value["groupId"], getUser()])'
             # Questionnaire
             createQuestionnaire:
                 access: "@=hasRole('ROLE_PROJECT_ADMIN')"

@@ -277,10 +277,6 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get(GroupRepository::class)->find($uuid);
-        }
-
-        if (!$node) {
             $node = $this->container->get(ProposalFormRepository::class)->find($uuid);
         }
 
