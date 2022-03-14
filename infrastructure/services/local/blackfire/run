@@ -1,24 +1,24 @@
 #!/bin/bash
 
-variables=( "BLACKFIRE_SERVER_ID" "BLACKFIRE_SERVER_TOKEN" "BLACKFIRE_CLIENT_ID" "BLACKFIRE_CLIENT_TOKEN" "BLACKFIRE_LOG_LEVEL" "BLACKFIRE_LOG_FILE")
-
-for var in "${variables[@]}"
-do
-   :
-   sed -i "s|%$var%|${!var}|g" /etc/blackfire/agent
-   sed -i "s|%$var%|${!var}|g" /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
-   sed -i "s|%$var%|${!var}|g" /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
-done
-
-function test_phpfpm {
-  /etc/init.d/php7.4-fpm status > /dev/null
-}
-
-until ( test_phpfpm )
-do
-  sleep 1
-done
-
 # Uncomment me to enable blackfire.io profiling
-#
+
+# variables=( "BLACKFIRE_SERVER_ID" "BLACKFIRE_SERVER_TOKEN" "BLACKFIRE_CLIENT_ID" "BLACKFIRE_CLIENT_TOKEN" "BLACKFIRE_LOG_LEVEL" "BLACKFIRE_LOG_FILE")
+
+# for var in "${variables[@]}"
+# do
+#    :
+#    sed -i "s|%$var%|${!var}|g" /etc/blackfire/agent
+#    sed -i "s|%$var%|${!var}|g" /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
+#    sed -i "s|%$var%|${!var}|g" /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
+# done
+
+# function test_phpfpm {
+#   /etc/init.d/php7.4-fpm status > /dev/null
+# }
+
+# until ( test_phpfpm )
+# do
+#   sleep 1
+# done
+
 # exec /usr/bin/blackfire-agent
