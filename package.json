@@ -377,7 +377,7 @@
         "slick-carousel": "1.8.1",
         "stickyfilljs": "^2.1.0",
         "storybook-addon-intl": "^2.4.1",
-        "storybook-addon-knobs": "https://***REMOVED***:x-oauth-basic@github.com/cap-collectif/knob/tarball/23e3e6573111a7c4f1620852c4d1b70bc3413c8b",
+        "storybook-addon-knobs": "https://github.com/cap-collectif/knob/tarball/23e3e6573111a7c4f1620852c4d1b70bc3413c8b",
         "stream-browserify": "^3.0.0",
         "style-loader": "^1.2.1",
         "styled-components": "^5.2.0",
@@ -417,7 +417,6 @@
         "babel-plugin-relay": "^12.0.0",
         "bundlewatch": "^0.3.1",
         "fast-xml-parser": "^3.17.4",
-        "identity-obj-proxy": "^3.0.0",
-        "playwright": "^1.12.3"
+        "identity-obj-proxy": "^3.0.0"
     }
 }
