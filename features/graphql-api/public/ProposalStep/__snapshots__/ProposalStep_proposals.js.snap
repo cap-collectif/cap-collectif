@@ -3,6 +3,7 @@
 exports[`Internal|ProposalStep.proposals connection fetches proposals with most points associated to a collect step with a cursor 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -18,8 +19,12 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:26:00",
             "status": null,
-            "votes": Object {
+            "voteOnStep": Object {
               "totalCount": 3,
+              "totalPointsCount": 8,
+            },
+            "votes": Object {
+              "totalCount": 4,
               "totalPointsCount": 8,
             },
           },
@@ -37,6 +42,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:02:50",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 3,
+              "totalPointsCount": 7,
+            },
             "votes": Object {
               "totalCount": 3,
               "totalPointsCount": 7,
@@ -57,6 +66,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches proposals with most votes associated to a collect step with a cursor 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -72,8 +82,12 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:26:00",
             "status": null,
-            "votes": Object {
+            "voteOnStep": Object {
               "totalCount": 3,
+              "totalPointsCount": 8,
+            },
+            "votes": Object {
+              "totalCount": 4,
               "totalPointsCount": 8,
             },
           },
@@ -91,6 +105,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:02:50",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 3,
+              "totalPointsCount": 7,
+            },
             "votes": Object {
               "totalCount": 3,
               "totalPointsCount": 7,
@@ -111,6 +129,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep and a category "Aménagement" with a cursor 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -135,6 +154,10 @@ Object {
               "id": "status5",
               "name": "Vote gagné",
             },
+            "voteOnStep": Object {
+              "totalCount": 1,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 1,
               "totalPointsCount": 0,
@@ -155,6 +178,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep and a district "Beauregard" with a cursor 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -178,6 +202,10 @@ Object {
             "status": Object {
               "id": "status4",
               "name": "Soumis au vote",
+            },
+            "voteOnStep": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
             },
             "votes": Object {
               "totalCount": 0,
@@ -199,6 +227,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep and a status "Soumis au vote" with a cursor 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -223,6 +252,10 @@ Object {
               "id": "status4",
               "name": "Soumis au vote",
             },
+            "voteOnStep": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 0,
               "totalPointsCount": 0,
@@ -243,6 +276,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep with a cursor 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -264,6 +298,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:04:00",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 47,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 47,
               "totalPointsCount": 0,
@@ -292,6 +330,10 @@ Object {
               "id": "status5",
               "name": "Vote gagné",
             },
+            "voteOnStep": Object {
+              "totalCount": 1,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 1,
               "totalPointsCount": 0,
@@ -320,6 +362,10 @@ Object {
               "id": "status4",
               "name": "Soumis au vote",
             },
+            "voteOnStep": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 0,
               "totalPointsCount": 0,
@@ -340,6 +386,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep with paginated commentables after cursor with exact count 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -417,6 +464,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep with paginated commentables after cursor with less commentables than count 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -489,6 +537,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep with paginated commentables after cursor with more commentables than count 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -576,6 +625,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step and a status "En cours" with a cursor 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [],
       "pageInfo": Object {
@@ -591,6 +641,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step with a cursor 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -606,8 +657,12 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:26:00",
             "status": null,
-            "votes": Object {
+            "voteOnStep": Object {
               "totalCount": 3,
+              "totalPointsCount": 8,
+            },
+            "votes": Object {
+              "totalCount": 4,
               "totalPointsCount": 8,
             },
           },
@@ -625,6 +680,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:03:41",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 0,
               "totalPointsCount": 0,
@@ -645,6 +704,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step with a cursor ordered by comments count ASC 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -660,8 +720,12 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:26:00",
             "status": null,
-            "votes": Object {
+            "voteOnStep": Object {
               "totalCount": 3,
+              "totalPointsCount": 8,
+            },
+            "votes": Object {
+              "totalCount": 4,
               "totalPointsCount": 8,
             },
           },
@@ -679,6 +743,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:03:41",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 0,
               "totalPointsCount": 0,
@@ -698,6 +766,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:03:41",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 0,
               "totalPointsCount": 0,
@@ -717,6 +789,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:03:40",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 0,
               "totalPointsCount": 0,
@@ -736,6 +812,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:02:50",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 3,
+              "totalPointsCount": 7,
+            },
             "votes": Object {
               "totalCount": 3,
               "totalPointsCount": 7,
@@ -755,6 +835,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:02:40",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 1,
+              "totalPointsCount": 1,
+            },
             "votes": Object {
               "totalCount": 1,
               "totalPointsCount": 1,
@@ -775,6 +859,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step with a cursor ordered by comments count DESC 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -798,6 +883,10 @@ Object {
             "status": Object {
               "id": "status4",
               "name": "Soumis au vote",
+            },
+            "voteOnStep": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
             },
             "votes": Object {
               "totalCount": 0,
@@ -824,6 +913,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:04:00",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 47,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 47,
               "totalPointsCount": 0,
@@ -852,6 +945,10 @@ Object {
               "id": "status5",
               "name": "Vote gagné",
             },
+            "voteOnStep": Object {
+              "totalCount": 1,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 1,
               "totalPointsCount": 0,
@@ -872,6 +969,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a collect step with a cursor ordered by old published 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -895,6 +993,10 @@ Object {
             "status": Object {
               "id": "status4",
               "name": "Soumis au vote",
+            },
+            "voteOnStep": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
             },
             "votes": Object {
               "totalCount": 0,
@@ -924,6 +1026,10 @@ Object {
               "id": "status5",
               "name": "Vote gagné",
             },
+            "voteOnStep": Object {
+              "totalCount": 1,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 1,
               "totalPointsCount": 0,
@@ -949,6 +1055,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:04:00",
             "status": null,
+            "voteOnStep": Object {
+              "totalCount": 47,
+              "totalPointsCount": 0,
+            },
             "votes": Object {
               "totalCount": 47,
               "totalPointsCount": 0,
@@ -969,6 +1079,7 @@ Object {
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a question collect step with a cursor 1`] = `
 Object {
   "node": Object {
+    "canDisplayBallot": true,
     "proposals": Object {
       "edges": Array [
         Object {
@@ -986,6 +1097,10 @@ Object {
             "status": Object {
               "id": "status2",
               "name": "Approuvé",
+            },
+            "voteOnStep": Object {
+              "totalCount": 1,
+              "totalPointsCount": 1,
             },
             "votes": Object {
               "totalCount": 1,
@@ -1009,8 +1124,12 @@ Object {
               "id": "status2",
               "name": "Approuvé",
             },
-            "votes": Object {
+            "voteOnStep": Object {
               "totalCount": 1,
+              "totalPointsCount": 2,
+            },
+            "votes": Object {
+              "totalCount": 2,
               "totalPointsCount": 2,
             },
           },

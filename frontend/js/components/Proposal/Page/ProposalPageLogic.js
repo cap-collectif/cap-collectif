@@ -140,6 +140,7 @@ const FRAGMENT = graphql`
         }
         currentVotableStep {
           id
+          canDisplayBallot
         }
         allVotes: votes(first: 0, stepId: $stepId) {
           totalCount
@@ -236,11 +237,11 @@ export const ProposalPageLogic = ({
                 )}
               </ProposalPageBody>
             </Tab.Pane>
-            <Tab.Pane eventKey="votes">
-              {proposal && (
-                <ProposalPageVotes proposal={proposal} setGlobalVotesCount={setVotesCount} />
-              )}
-            </Tab.Pane>
+            {proposal?.currentVotableStep?.canDisplayBallot && (
+              <Tab.Pane eventKey="votes">
+                  <ProposalPageVotes proposal={proposal} setGlobalVotesCount={setVotesCount} />
+              </Tab.Pane>
+            )}
             <Tab.Pane eventKey="blog">
               <ProposalPageBody className="d-flex">
                 <ProposalPageBlog proposal={proposal} />

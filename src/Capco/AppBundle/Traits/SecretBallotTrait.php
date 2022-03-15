@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 trait SecretBallotTrait

@@ -1,6 +1,7 @@
 matchers:
   - spec\Matcher\BeAConnectionMatcher
   - spec\Matcher\BeAnEmptyConnectionMatcher
+  - spec\Matcher\BeAnEmptyCollectionMatcher
 extensions:
   FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
     format: [clover, html]

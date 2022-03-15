@@ -51,7 +51,7 @@ class DebateVotesResolverSpec extends ObjectBehavior
             )
             ->willReturn($paginatedResult)
             ->shouldBeCalled();
-        $this->__invoke($debate, $args, null)->shouldReturnEmptyConnection();
+        $this->__invoke($debate, $args, null)->shouldReturnEmptyConnection([]);
     }
 
     public function it_resolve_votes(

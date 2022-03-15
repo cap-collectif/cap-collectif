@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
+use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -35,6 +37,10 @@ class ProposalVotesResolver implements ResolverInterface
 
         if ($args->offsetExists('stepId') && $args->offsetGet('stepId')) {
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $viewer, $context);
+
+            if ($step && !$step->canResolverDisplayBallot($viewer)) {
+                return ConnectionBuilder::empty(['totalPointsCount' => 0]);
+            }
 
             return $this->proposalVotesDataLoader->load(
                 compact('proposal', 'step', 'args', 'includeUnpublished', 'includeNotAccounted')

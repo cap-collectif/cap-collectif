@@ -45,7 +45,7 @@ class DebateArgumentsResolverSpec extends ObjectBehavior
         $result->getEntities()->willReturn([]);
         $result->getCursors()->willReturn([]);
         $result->getTotalCount()->willReturn(0);
-        $this->__invoke($debate, $args, null)->shouldReturnEmptyConnection();
+        $this->__invoke($debate, $args, null)->shouldReturnEmptyConnection([]);
     }
 
     public function it_resolve_arguments(

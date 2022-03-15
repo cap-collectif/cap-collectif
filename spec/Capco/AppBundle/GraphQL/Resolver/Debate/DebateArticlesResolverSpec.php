@@ -30,7 +30,7 @@ class DebateArticlesResolverSpec extends ObjectBehavior
             ->countByDebate($debate)
             ->willReturn(0)
             ->shouldBeCalled();
-        $this->__invoke($debate, $args)->shouldReturnEmptyConnection();
+        $this->__invoke($debate, $args)->shouldReturnEmptyConnection([]);
     }
 
     public function it_resolve_articles(
@@ -39,8 +39,7 @@ class DebateArticlesResolverSpec extends ObjectBehavior
         Paginator $paginator,
         DebateArticle $a,
         DebateArticle $b
-    )
-    {
+    ) {
         $args = new Argument(['first' => 10, 'after' => null]);
         $repository
             ->getByDebate($debate, 11, 0)

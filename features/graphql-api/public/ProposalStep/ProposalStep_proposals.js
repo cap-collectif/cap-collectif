@@ -11,6 +11,7 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
   ) {
     node(id: $id) {
       ... on ProposalStep {
+        canDisplayBallot
         proposals(
           first: $count
           after: $cursor
@@ -46,7 +47,11 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
                 id
                 name
               }
-              votes(stepId: $id) {
+              votes {
+                totalCount
+                totalPointsCount
+              }
+              voteOnStep: votes(stepId: $id) {
                 totalCount
                 totalPointsCount
               }
@@ -62,6 +67,7 @@ const ProposalStepProposalsCommentableQuery = /* GraphQL */ `
   query ProposalStepProposalsQuery($id: ID!, $count: Int!, $after: String) {
     node(id: $id) {
       ... on ProposalStep {
+        canDisplayBallot
         proposals {
           totalCount
           pageInfo {
@@ -90,7 +96,6 @@ const ProposalStepProposalsCommentableQuery = /* GraphQL */ `
         }
       }
     }
-    #
   }
 `;
 

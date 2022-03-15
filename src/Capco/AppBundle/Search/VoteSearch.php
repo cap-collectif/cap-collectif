@@ -180,6 +180,12 @@ class VoteSearch extends Search
                             ) {
                                 return $pointedSteps['numericPoints'];
                             }
+                            if (
+                                isset($pointedSteps['step'], $keys[1]['step']) &&
+                                $pointedSteps['step']['id'] === $keys[1]['step']->getId()
+                            ) {
+                                return $pointedSteps['numericPoints'];
+                            }
 
                             continue;
                         }

@@ -9348,7 +9348,10 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   ): Int!
 
   """The paper vote obtained by the proposal, step by step."""
-  paperVotes: [ProposalStepPaperVoteCounter!]
+  paperVotes(
+    """If provided, retrieve only in this step."""
+    stepId: ID
+  ): [ProposalStepPaperVoteCounter!]
 
   """Check if the proposal has been merged with another"""
   hasBeenMerged: Boolean

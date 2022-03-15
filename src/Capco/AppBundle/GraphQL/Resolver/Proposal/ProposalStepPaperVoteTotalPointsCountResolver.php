@@ -14,12 +14,15 @@ class ProposalStepPaperVoteTotalPointsCountResolver
 {
     public function __invoke(Proposal $proposal, Argument $args, ?User $viewer = null): int
     {
-        return $this->count($proposal, $this->getStep($args, $viewer));
+        return $this->count($proposal, $this->getStep($args, $viewer), $viewer);
     }
 
-    private function count(Proposal $proposal, ?AbstractStep $step): int
+    private function count(Proposal $proposal, ?AbstractStep $step, ?User $viewer = null): int
     {
         $counter = 0;
+        if ($step && !$step->canResolverDisplayBallot($viewer)) {
+            return $counter;
+        }
 
         foreach ($this->getPaperVotes($proposal, $step) as $paperVote) {
             $counter += $paperVote->getTotalPointsCount();

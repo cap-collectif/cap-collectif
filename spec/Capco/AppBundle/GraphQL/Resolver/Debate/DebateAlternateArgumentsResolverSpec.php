@@ -43,7 +43,7 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
             )
             ->willReturn(new ElasticsearchPaginatedResult([], [], 0))
             ->shouldBeCalled();
-        $this->__invoke($debate, $args, null)->shouldReturnEmptyConnection();
+        $this->__invoke($debate, $args, null)->shouldReturnEmptyConnection([]);
     }
 
     public function it_resolve_arguments(

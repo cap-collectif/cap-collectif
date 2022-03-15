@@ -21,6 +21,16 @@ const ProposalPaperVotesData = /* GraphQL */ `
                 totalCount
                 totalPointsCount
               }
+              paperVotesOnStep: paperVotes(stepId: $collectStepId) {
+                proposal {
+                  id
+                }
+                step {
+                  id
+                }
+                totalCount
+                totalPointsCount
+              }
             }
           }
         }

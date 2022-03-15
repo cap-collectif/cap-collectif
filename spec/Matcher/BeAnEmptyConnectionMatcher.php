@@ -15,7 +15,7 @@ class BeAnEmptyConnectionMatcher implements Matcher
         return 'returnEmptyConnection' === $name;
     }
 
-    public function positiveMatch(string $name, $subject, array $arguments): ?DelayedCall
+    public function positiveMatch(string $name, $subject, array $arguments = []): ?DelayedCall
     {
         if (!$subject instanceof Connection) {
             throw new FailureException(
@@ -23,7 +23,11 @@ class BeAnEmptyConnectionMatcher implements Matcher
             );
         }
 
-        if ($subject != ConnectionBuilder::empty() || $subject->getTotalCount() > 0) {
+        // need only one = not !== because, we want to know if it is the same structure and not exactly the same object
+        if (
+            $subject != (isset($arguments[0]) && ConnectionBuilder::empty($arguments[0])) ||
+            $subject->getTotalCount() > 0
+        ) {
             throw new FailureException(
                 sprintf('the return value "%s" must be an empty Connection.', $subject)
             );

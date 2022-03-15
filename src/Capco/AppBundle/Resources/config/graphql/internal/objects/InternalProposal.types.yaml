@@ -152,7 +152,12 @@ InternalProposal:
                         description: 'If provided, retrieve only in this step.'
             paperVotes:
                 description: 'The paper vote obtained by the proposal, step by step.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPaperVotesResolver", [value, args, getUser()])'
                 type: '[InternalProposalStepPaperVoteCounter!]'
+                args:
+                    stepId:
+                        type: 'ID'
+                        description: 'If provided, retrieve only in this step.'
             hasBeenMerged:
                 type: 'Boolean'
                 description: 'Check if the proposal has been merged with another'

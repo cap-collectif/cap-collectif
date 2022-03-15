@@ -1,7 +1,6 @@
 @proposal_comments
 Feature: Selection step proposal votes connection
 
-@database
 Scenario: Admin wants to get votes for a proposal in a selection step
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -11,6 +10,8 @@ Scenario: Admin wants to get votes for a proposal in a selection step
       selectionStep: node(id: $selectionStepId) {
           id
           ... on SelectionStep {
+              isSecretBallot
+              canDisplayBallot
               proposals(first: $count) {
                   totalCount
                   edges {
@@ -40,10 +41,12 @@ Scenario: Admin wants to get votes for a proposal in a selection step
   """
   {
     "data": {
-        "selectionStep": {
-            "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
-            "proposals": {
-                "totalCount": 3,
+       "selectionStep":{
+          "id":"U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+          "isSecretBallot":false,
+          "canDisplayBallot":true,
+          "proposals":{
+             "totalCount":3,
                 "edges": [
                     {
                         "node": {
@@ -56,13 +59,12 @@ Scenario: Admin wants to get votes for a proposal in a selection step
                     },
                     @...@
                 ]
-            }
-        }
+          }
+       }
     }
   }
   """
 
-@database
 Scenario: Admin wants to get votes for a question in a selection step
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -72,6 +74,8 @@ Scenario: Admin wants to get votes for a question in a selection step
       selectionStep: node(id: $selectionStepId) {
           id
           ... on SelectionStep {
+              isSecretBallot
+              canDisplayBallot
               proposals(first: $count) {
                   totalCount
                   edges {
@@ -106,6 +110,8 @@ Scenario: Admin wants to get votes for a question in a selection step
      "data":{
         "selectionStep":{
            "id":"U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25RdWVzdGlvblN0ZXBWb3RlQ2xhc3NlbWVudA==",
+           "isSecretBallot":false,
+          "canDisplayBallot":true,
            "proposals":{
               "totalCount":1,
               "edges":[
@@ -128,6 +134,92 @@ Scenario: Admin wants to get votes for a question in a selection step
            },
            "form":{
               "objectType":"QUESTION"
+           }
+        }
+     }
+  }
+  """
+
+Scenario: Admin wants to get votes for a proposal with secret ballot
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "query ($selectionStepId: ID!, $count: Int) {
+      selectionStep: node(id: $selectionStepId) {
+          id
+          ... on SelectionStep {
+              isSecretBallot
+              canDisplayBallot
+              proposals(first: $count) {
+                  totalCount
+                  edges {
+                      node {
+                          id
+                          votes(first: $count, stepId: $selectionStepId) {
+                              totalCount
+                              edges {
+                                node {
+                                    id
+                                }
+                              }
+                          }
+                      }
+                  }
+              }
+              form {
+                objectType
+              }
+          }
+      }
+    }",
+    "variables": {
+      "selectionStepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
+      "count": 3
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "selectionStep":{
+           "id":"U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
+           "isSecretBallot":true,
+           "canDisplayBallot":false,
+           "proposals":{
+              "totalCount":2,
+              "edges":[
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zaXRpb25Qb3VyVGVzdExlRG91Ymxvbg==",
+                       "votes":{
+                          "totalCount":0,
+                          "edges":[
+
+                          ]
+                       }
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWxCeUZyYW5jZUNvbm5lY3RVc2Vy",
+                       "votes":{
+                          "totalCount":1,
+                          "edges":[
+                             {
+                                "node":{
+                                   "id":"@string@"
+                                }
+                             }
+                          ]
+                       }
+                    }
+                 }
+              ]
+           },
+           "form":{
+              "objectType":"PROPOSAL"
            }
         }
      }

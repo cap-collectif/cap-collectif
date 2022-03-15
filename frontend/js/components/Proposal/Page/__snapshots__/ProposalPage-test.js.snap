@@ -7511,7 +7511,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "21e8c1bca36bffb56da311fab5ec8cad",
+        "cacheID": "1da888cc7025dcebc6fcd07373413486",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -8943,6 +8943,7 @@ fragment ProposalPageLogic_query_2tno1B on Query {
     currentVotableStep {
       __typename
       id
+      canDisplayBallot
     }
     allVotes: votes(first: 0, stepId: $stepId) {
       totalCount

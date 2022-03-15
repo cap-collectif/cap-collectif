@@ -37,14 +37,14 @@ class DebateArgumentVotesResolverSpec extends ObjectBehavior
                 $debateArgument,
                 0,
                 \Prophecy\Argument::any(),
-                \Prophecy\Argument::any(),
+                \Prophecy\Argument::any()
             )
             ->willReturn($elasticsearchPaginatedResult)
             ->shouldBeCalled();
         $elasticsearchPaginatedResult->getEntities()->willReturn([]);
         $elasticsearchPaginatedResult->getCursors()->willReturn([]);
         $elasticsearchPaginatedResult->getTotalCount()->willReturn(0);
-        $this->__invoke($debateArgument, $args)->shouldReturnEmptyConnection();
+        $this->__invoke($debateArgument, $args)->shouldReturnEmptyConnection([]);
     }
 
     public function it_resolve_votes(

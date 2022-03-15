@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalSort;
@@ -20,7 +21,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
  * @CapcoAssert\VoteMin
  */
-class CollectStep extends AbstractStep implements ParticipativeStepInterface
+class CollectStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface
 {
     use AllowAuthorsToAddNewsTrait;
     use SecretBallotTrait;

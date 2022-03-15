@@ -10,6 +10,7 @@ Object {
           "node": Object {
             "id": "UHJvcG9zYWw6cHJvcG9zYWxQcm9qZWN0V2l0aE93bmVy",
             "paperVotes": Array [],
+            "paperVotesOnStep": Array [],
             "paperVotesTotalCount": 0,
             "paperVotesTotalPointsCount": 0,
             "pointsOnStep": 0,

@@ -29,7 +29,7 @@ class DebateOpinionsResolverSpec extends ObjectBehavior
             ->countByDebate($debate)
             ->willReturn(0)
             ->shouldBeCalled();
-        $this->__invoke($debate, $args)->shouldReturnEmptyConnection();
+        $this->__invoke($debate, $args)->shouldReturnEmptyConnection([]);
     }
 
     public function it_resolve_opinions(

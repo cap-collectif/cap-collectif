@@ -3,10 +3,12 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
 use Capco\AppBundle\Entity\ProposalStepPaperVoteCounter;
 use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Project;
@@ -443,6 +445,18 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     //used in twig to add googlemaps js file
     public function useAddressOrMap(): bool
     {
+        return false;
+    }
+
+    public function canResolverDisplayBallot($viewer): bool
+    {
+        if ($this instanceof VotableStepInterface && $this->canDisplayBallot()) {
+            return true;
+        }
+        if ($viewer instanceof User && $viewer->isAdmin()) {
+            return true;
+        }
+
         return false;
     }
 }

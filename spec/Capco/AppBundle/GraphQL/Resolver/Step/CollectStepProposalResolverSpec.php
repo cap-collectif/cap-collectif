@@ -27,6 +27,6 @@ class CollectStepProposalResolverSpec extends ObjectBehavior
     ): void {
         $args = new Argument(['first' => 10]);
         $step->getProposalForm()->willReturn(null);
-        $this($step, $args, null, $request)->shouldReturnEmptyConnection();
+        $this($step, $args, null, $request)->shouldReturnEmptyConnection([]);
     }
 }

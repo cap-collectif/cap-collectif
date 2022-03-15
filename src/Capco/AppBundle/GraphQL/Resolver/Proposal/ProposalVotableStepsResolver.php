@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Selection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProposalVotableStepsResolver implements ResolverInterface
@@ -14,6 +15,7 @@ class ProposalVotableStepsResolver implements ResolverInterface
         if ($collect && $collect->isVotable()) {
             $result[] = $collect;
         }
+        /** @var Selection $selection */
         foreach ($proposal->getSelections() as $selection) {
             if ($selection->getStep()->isVotable()) {
                 $result[] = $selection->getStep();
