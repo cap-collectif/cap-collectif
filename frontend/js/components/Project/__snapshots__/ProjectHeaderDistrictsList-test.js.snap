@@ -164,7 +164,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
+      className="sc-bdvvtL bSKXj sc-GEbAx cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {

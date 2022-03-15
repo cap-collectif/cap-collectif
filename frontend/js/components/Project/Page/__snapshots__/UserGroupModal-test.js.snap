@@ -15,7 +15,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
+    className="sc-bdvvtL bSKXj sc-GEbAx cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -172,7 +172,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
+    className="sc-bdvvtL bSKXj sc-GEbAx cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -329,7 +329,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL ebDlAL sc-GEbAx cap-modal__overlay"
+    className="sc-bdvvtL bSKXj sc-GEbAx cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
