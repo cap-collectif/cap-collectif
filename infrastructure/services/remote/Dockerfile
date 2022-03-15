@@ -202,7 +202,6 @@ VOLUME /var/lib/redirectionio
 COPY infrastructure/services/remote/rabbitmq/rabbitmqadmin          /usr/local/bin/rabbitmqadmin
 COPY infrastructure/services/remote/cron/antivirus                  /etc/cron.daily
 COPY infrastructure/services/remote/cron/check_db_schema            /etc/cron.hourly
-COPY infrastructure/services/remote/cron/check_ping_google          /etc/cron.hourly
 
 # Daemons
 COPY infrastructure/services/remote/php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index

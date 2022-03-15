@@ -1,7 +1,0 @@
-#!/bin/bash
-
-ping -c1 google.com > /dev/null 2>&1
-
-if [[ $? -ne 0 ]]; then
-  curl -X POST -H 'Content-type: application/json' --data '{"text":"['"$SYMFONY_INSTANCE_NAME"'] Cannot ping google.com"}' $SLACK_WEBHOOK_ANTIVIRUS
-fi
