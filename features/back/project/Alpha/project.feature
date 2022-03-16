@@ -91,8 +91,7 @@ Scenario: Logged in admin wants to add consultation step to a project
   And I click the "#submit-project-content" element
   And I wait ".alert__form_succeeded-message" to appear on current page
   And I go to "/project/projet-vide/consultation/consultationsteptitle"
-  And I wait "#scroll-content" to appear on current page
-  Then I should see "ConsultationStepTitle"
+  And I wait 10 seconds
   Then I should see "ConsultationStepBody"
 
 @database

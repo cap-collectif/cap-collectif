@@ -89,14 +89,10 @@ const ProposalCreateModal = ({
       hideOnEsc={modalState !== 'LEAVE'}
       hideOnClickOutside={false}
       onOpen={onOpen}
-      onClose={() => {
-        if (modalState !== 'LEAVE') setModalState('LEAVE');
-        else onClose();
-      }}
+      onClose={onClose}
       fullPageScrollable
       ariaLabel={intl.formatMessage({ id: title })}
-      size={CapUIModalSize.Xl}
-    >
+      size={CapUIModalSize.Xl}>
       {() => (
         <>
           <ResetCss>

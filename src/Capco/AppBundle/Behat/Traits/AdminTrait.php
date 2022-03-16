@@ -43,35 +43,21 @@ trait AdminTrait
      */
     public function iFillTheReactElementWithOneOption(string $element, int $number)
     {
-        $this->getSession()
-            ->getPage()
-            ->find('css', $element)
-            ->click();
-
         //Does not work if we do not try to enter something in the field
         $searchInput = $this->getSession()
             ->getPage()
             ->find('css', "${element} .react-select__value-container .react-select__input input");
         $searchInput->setValue('');
-
+        $this->iWait(3);
         $this->getSession()
             ->getPage()
             ->find('css', $element)
             ->click();
-
         $this->iWait(3);
-
-        $option = $this->getSession()
+        $this->getSession()
             ->getPage()
-            ->find(
-                'css',
-                "${element} .react-select__menu-list .react-select__option:nth-child(${number})"
-            );
-        if ($option) {
-            $option->click();
-        } else {
-            throw new \RuntimeException("Could not find option for ${element} : ${number}");
-        }
+            ->find('css', "${element}-menuList .react-select__option:nth-child($number)")
+            ->click();
     }
 
     /**
@@ -84,46 +70,25 @@ trait AdminTrait
             ->getPage()
             ->find('css', '#ProposalFusionForm-project .react-select__input input')
             ->setValue('UHJvamVjdDpwcm9qZWN0Nw==');
-        $this->iWait(3);
-
-        // Select 2 distinct proposals from the project
-        $searchValues = [
-            '', // Proposition gratuite
-            'pas', // Proposition pas chère
-        ];
-        foreach ($searchValues as $search) {
-            $this->getSession()
-                ->getPage()
-                ->find('css', '#ProposalFusionForm-fromProposals')
-                ->click();
-
-            $searchInput = $this->getSession()
-                ->getPage()
-                ->find('css', '#ProposalFusionForm-fromProposals .react-select__input input');
-            $searchInput->setValue($search);
-
-            $this->getSession()
-                ->getPage()
-                ->find('css', '#ProposalFusionForm-fromProposals')
-                ->click();
-            $this->iWait(3);
-
-            $option = $this->getSession()
-                ->getPage()
-                ->find(
-                    'css',
-                    '#ProposalFusionForm-fromProposals .react-select__menu-list .react-select__option:first-child'
-                );
-            if ($option) {
-                $option->click();
-            } else {
-                throw new \RuntimeException('Could not find option for search : "' . $search . '"');
-            }
-            $this->iWait(2);
-        }
+        $this->iWait(5);
+        
         $this->getSession()
             ->getPage()
             ->find('css', '#ProposalFusionForm-fromProposals')
+            ->click();
+        $searchInput = $this->getSession()
+            ->getPage()
+            ->find('css', '#ProposalFusionForm-fromProposals .react-select__input input');
+        $searchInput->setValue('');
+        $this->iWait(3);
+        $this->getSession()
+            ->getPage()
+            ->find('css', "#ProposalFusionForm-fromProposals")
+            ->click();
+        $this->iWait(3);
+        $this->getSession()
+            ->getPage()
+            ->find('css', "#ProposalFusionForm-fromProposals-menuList .react-select__option:first-child")
             ->click();
     }
 

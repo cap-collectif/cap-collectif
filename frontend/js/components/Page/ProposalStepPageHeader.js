@@ -26,7 +26,7 @@ type Props = {
 
 export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
   const intl = useIntl();
-  const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const isMobile = useIsMobile();
   const dispatch = useDispatch<Dispatch>();
   const { btnBgColor, btnTextColor } = useSelector((state: GlobalState) => ({
@@ -60,7 +60,6 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
     : isProposalForm
     ? 'proposal.count'
     : 'count-questions';
-
   return (
     <>
       <ProposalCreateModal

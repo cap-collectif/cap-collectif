@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import styled, { css, type StyledComponent } from 'styled-components';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import cn from 'classnames';
 import Async from 'react-select/async';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
@@ -11,6 +11,7 @@ import Help from '~/components/Ui/Form/Help/Help';
 import Label from '~/components/Ui/Form/Label/Label';
 import Description from '~ui/Form/Description/Description';
 import isQuestionnaire from '~/utils/isQuestionnaire';
+import colors from '~/styles/modules/colors';
 
 export type Option = { value: string, label: string };
 export type Options = Array<Option> | Array<{ label: string, options: Array<Option> }>;
@@ -85,6 +86,15 @@ const ClearIndicator = props => {
   return (
     <div role="button" className="select__clear-zone" {...restInnerProps} ref={ref}>
       <i className="cap cap-times mr-10 ml-10" />
+    </div>
+  );
+};
+
+const MenuList = props => {
+  const { selectProps } = props;
+  return (
+    <div id={selectProps.menuListId ? `${selectProps.menuListId}-menuList` : undefined}>
+      <components.MenuList {...props} />
     </div>
   );
 };
@@ -209,7 +219,6 @@ const RenderSelect = ({
     leading: true,
   });
   const canValidate = (meta.touched && !isQuestionnaire(typeForm)) || isQuestionnaire(typeForm);
-
   let selectValue = null;
   let selectLabel = null;
   if (typeof loadOptions === 'function') {
@@ -271,7 +280,7 @@ const RenderSelect = ({
           {typeof loadOptions === 'function' ? (
             <Async
               filterOption={filterOption}
-              components={{ ClearIndicator }}
+              components={{ ClearIndicator, MenuList }}
               isDisabled={disabled}
               defaultOptions={autoload}
               isClearable={clearable}
@@ -291,6 +300,24 @@ const RenderSelect = ({
               aria-labelledby={`label-select-${id}`}
               ariaLiveMessages={ariaLiveMessage(intl)}
               onFocus={onFocus}
+              menuPortalTarget={document?.body}
+              menuListId={id}
+              styles={{
+                menuPortal: base => ({
+                  ...base,
+                  zIndex: 1300,
+                }),
+                option: base => ({
+                  ...base,
+                  '&:hover,&[class*="is-focused"]': {
+                    backgroundColor: colors.gray['100'],
+                  },
+                  '&[class*="is-selected"]': { backgroundColor: '#2484FF' },
+                  borderBottom: `1px solid ${colors.gray['200']}`,
+                  '&:last-child': { borderBottom: 'none' },
+                }),
+              }}
+              menuShouldBlockScroll
               onChange={(newValue: OnChangeInput) => {
                 if (typeof onChange === 'function') {
                   onChange();
@@ -307,7 +334,7 @@ const RenderSelect = ({
           ) : (
             <Select
               name={name}
-              components={{ ClearIndicator }}
+              components={{ ClearIndicator, MenuList }}
               isDisabled={disabled}
               className="react-select-container"
               classNamePrefix="react-select"
@@ -329,6 +356,24 @@ const RenderSelect = ({
               aria-labelledby={`label-select-${id}`}
               ariaLiveMessages={ariaLiveMessage(intl)}
               onFocus={onFocus}
+              menuPortalTarget={document?.body}
+              menuListId={id}
+              styles={{
+                menuPortal: base => ({
+                  ...base,
+                  zIndex: 1300,
+                }),
+                option: base => ({
+                  ...base,
+                  '&:hover,&[class*="is-focused"]': {
+                    backgroundColor: colors.gray['100'],
+                  },
+                  '&[class*="is-selected"]': { backgroundColor: '#2484FF' },
+                  borderBottom: `1px solid ${colors.gray['200']}`,
+                  '&:last-child': { borderBottom: 'none' },
+                }),
+              }}
+              menuShouldBlockScroll
               onChange={(newValue: OnChangeInput) => {
                 if (typeof onChange === 'function') {
                   onChange();

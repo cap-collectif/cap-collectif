@@ -110,7 +110,7 @@ trait AdminEventTrait
         $page->find('css', '#event_author .react-select__input input')->setValue($username);
         $this->iWait(3);
         $page->find('css', '#event_author')->click();
-        $page->find('css', '#event_author .react-select__option:first-child')->click();
+        $page->find('css', '.react-select__menu-portal .react-select__option:first-child')->click();
     }
 
     /**
@@ -171,7 +171,7 @@ trait AdminEventTrait
         $page->find('css', '#event_refusedReason .react-select__input input')->setValue($option);
         $this->iWait(3);
         $page->find('css', '#event_refusedReason')->click();
-        $page->find('css', '#event_refusedReason .react-select__option:first-child')->click();
+        $page->find('css', '.react-select__menu-portal .react-select__option:first-child')->click();
     }
 
     /**

@@ -96,6 +96,6 @@ trait AdminProjectTrait
         $page->find('css', '#project-author .react-select__input input')->setValue($username);
         $this->iWait(3);
         $page->find('css', '#project-author')->click();
-        $page->find('css', '#project-author .react-select__option:first-child')->click();
+        $page->find('css', '.react-select__menu-portal .react-select__option:first-child')->click();
     }
 }
