@@ -103,7 +103,9 @@ class GroupMutation implements MutationInterface
         if (!$group) {
             throw new UserError(sprintf('Unknown group with id "%s"', $groupId));
         }
-        $isGroupUsedInCampaign = $this->emailingCampaignRepository->countEmailingCampaignUsingGroup($group);
+        $isGroupUsedInCampaign = $this->emailingCampaignRepository->countEmailingCampaignUsingGroup(
+            $group
+        );
         if (!$group->isDeletable() && !$isGroupUsedInCampaign) {
             throw new UserError(
                 sprintf('This group can\'t be deleted because it\'s protected "%s"', $groupId)
@@ -165,15 +167,15 @@ class GroupMutation implements MutationInterface
             $this->entityManager->flush();
         }
 
-        $this->addUsersInGroup([$user->getId()], $group->getId(), '.anon', false);
+        $this->addUsersInGroup(
+            [GlobalId::toGlobalId('User', $user->getId())],
+            GlobalId::toGlobalId('Group', $group->getId()),
+            '.anon'
+        );
     }
 
-    public function addUsersInGroup(
-        array $users,
-        string $groupId,
-        $viewer,
-        bool $isGlobalID = true
-    ): array {
+    public function addUsersInGroup(array $users, string $groupId, $viewer): array
+    {
         /** @var Group $group */
         $group = $this->globalIdResolver->resolve($groupId, $viewer);
 
@@ -181,14 +183,12 @@ class GroupMutation implements MutationInterface
             $error = sprintf('Cannot find the group "%g"', $groupId);
             $this->logger->error(__METHOD__ . ' addUsersInGroup: ' . $error);
 
-            throw new UserError('Can\'t add users in group.', $groupId);
+            throw new UserError($error);
         }
 
         try {
             foreach ($users as $userId) {
-                if ($isGlobalID) {
-                    $userId = GlobalId::fromGlobalId($userId)['id'];
-                }
+                $userId = GlobalId::fromGlobalId($userId)['id'];
                 /** @var User $user */
                 $user = $this->userRepository->find($userId);
 
