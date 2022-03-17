@@ -7,6 +7,7 @@ services:
       CIRCLE_JOB: ${CIRCLE_JOB}
       # Set the following variables on CircleCI
       # https://app.circleci.com/settings/project/github/cap-collectif/platform/environment-variables
+      SYMFONY_DEPLOYER_API_URL: ${SYMFONY_DEPLOYER_API_URL}
       SYMFONY_GOOGLE_MAP_PUBLIC_KEY: ${SYMFONY_GOOGLE_MAP_PUBLIC_KEY}
       SYMFONY_GOOGLE_MAP_SERVER_KEY: ${SYMFONY_GOOGLE_MAP_SERVER_KEY}
       SYMFONY_MAPBOX_PUBLIC_KEY: ${SYMFONY_MAPBOX_PUBLIC_KEY}

@@ -4,19 +4,24 @@ namespace Capco\AppBundle\Client;
 
 class DeployerClient
 {
-    private string $baseUrl = "***REMOVED***";
+    private ?string $deployerBaseUrl;
     private string $instanceName;
     private string $token;
 
-    public function __construct(string $instanceName, string $token)
+    public function __construct(?string $deployerBaseUrl, string $instanceName, string $token)
     {
+        $this->deployerBaseUrl = $deployerBaseUrl;
         $this->instanceName = $instanceName;
         $this->token = $token;
     }
 
     public function updateCurrentDomain(string $customDomain): int
     {
-        $endpoint = "{$this->baseUrl}/instances/{$this->instanceName}/urls/token";
+        if (!$this->deployerBaseUrl) {
+            throw new \RuntimeException("You need to set deployer URL to use this.", 1);
+        }
+
+        $endpoint = "{$this->deployerBaseUrl}/instances/{$this->instanceName}/urls/token";
 
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -36,7 +41,7 @@ class DeployerClient
         curl_close($curl);
 
         if ($err) {
-            throw new \Exception("cURL Error #: {$err}");
+            throw new \RuntimeException("cURL Error #: {$err}");
         }
 
         return $statusCode;

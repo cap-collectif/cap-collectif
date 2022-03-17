@@ -38,50 +38,6 @@ final class Version20190520093622 extends AbstractMigration implements Container
         );
     }
 
-    public function postUp(Schema $schema): void
-    {
-        $instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-
-        switch ($instanceName) {
-            case 'occitanie':
-                $this->connection->insert('sso_configuration', [
-                    'id' => $this->generator->generate($this->em, null),
-                    'name' => 'occitanie-openid',
-                    'enabled' => 1,
-                    'ssoType' => 'oauth2',
-                    'client_id' => 'capcollectif',
-                    'secret' => '***REMOVED***',
-                    'authorization_url' =>
-                        'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne/protocol/openid-connect/auth',
-                    'access_token_url' =>
-                        'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne/protocol/openid-connect/token',
-                    'user_info_url' =>
-                        'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne/protocol/openid-connect/userinfo',
-                    'logout_url' =>
-                        'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne/protocol/openid-connect/logout',
-                ]);
-
-                break;
-            case 'nantes':
-                $this->connection->insert('sso_configuration', [
-                    'id' => $this->generator->generate($this->em, null),
-                    'name' => 'nantes-openid',
-                    'enabled' => 1,
-                    'ssoType' => 'oauth2',
-                    'client_id' => '***REMOVED***',
-                    'secret' => '***REMOVED***',
-                    'authorization_url' => '***REMOVED***',
-                    'access_token_url' => '***REMOVED***',
-                    'user_info_url' => '***REMOVED***',
-                    'logout_url' => '***REMOVED***',
-                ]);
-
-                break;
-            default:
-                break;
-        }
-    }
-
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs

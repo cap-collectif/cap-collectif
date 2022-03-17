@@ -20,6 +20,7 @@ parameters:
     #
     # Variables set by env values :
     #
+    deployer_api_url: '%env(SYMFONY_DEPLOYER_API_URL)%'
     database_driver: '%env(SYMFONY_DATABASE_DRIVER)%'
     database_host: '%env(SYMFONY_DATABASE_HOST)%'
     database_port: '%env(int:SYMFONY_DATABASE_PORT)%'
@@ -118,6 +119,7 @@ parameters:
     env(SYMFONY_RABBITMQ_PASSWORD): guest
     env(SYMFONY_RABBITMQ_VHOST): capco
     env(SYMFONY_SAML_SP): dev
+    env(SYMFONY_DEPLOYER_API_URL): null
     env(SYMFONY_SAML_PROTECT): false
     env(SYMFONY_LOGIN_SAML_ALLOWED): True
     env(SYMFONY_ELASTICSEARCH_HOST): 127.0.0.1
