@@ -35,6 +35,13 @@ type AriaLiveMessage = {|
   onFilter?: ({ inputValue: string, resultsMessage: string }) => string,
 |};
 
+type Error =
+  | string
+  | {
+      id: string,
+      values: any,
+    };
+
 type Props = {
   input: {
     name: string,
@@ -44,7 +51,7 @@ type Props = {
     onFocus: () => void,
   },
   id: string,
-  meta: { touched: boolean, error: ?any },
+  meta: { touched: boolean, error: ?Error },
   label: string | React.Node,
   help: string | React.Node,
   placeholder?: string,
@@ -404,7 +411,10 @@ const RenderSelect = ({
 
         {canValidate && error && displayError && (
           <span className="error-block">
-            <FormattedMessage id={error.id} values={error.values || undefined} />
+            {typeof error === 'string' && <FormattedMessage id={error} />}
+            {typeof error === 'object' && (
+              <FormattedMessage id={error.id} values={error.values || undefined} />
+            )}
           </span>
         )}
       </div>

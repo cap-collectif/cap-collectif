@@ -139,7 +139,7 @@ export const validate = (values: FormValues, props: Props) => {
   const { isFrontendView } = props;
 
   const errors = {};
-  const fields = ['title', 'startAt', 'endAt', 'author', 'body'];
+  const fields = ['title', 'startAt', 'endAt', 'body'];
   fields.forEach(value => {
     if (value === 'endAt' && values.endAt) {
       if (!values.startAt) {
@@ -154,6 +154,7 @@ export const validate = (values: FormValues, props: Props) => {
         }
       }
     }
+
     if (value === 'body' && values[value] && values[value] === '<p><br></p>') {
       errors[value] = 'fill-field';
     }
@@ -172,6 +173,7 @@ export const validate = (values: FormValues, props: Props) => {
   if (values.guestListEnabled && values.link) {
     errors.link = 'error-alert-choosing-subscription-mode';
   }
+
   if (values.status === 'REFUSED' && (!values.refusedReason || values.refusedReason === 'NONE')) {
     errors.refusedReason = 'fill-field';
   }
@@ -185,6 +187,11 @@ export const validate = (values: FormValues, props: Props) => {
   if (values.metadescription !== null && values?.metadescription?.length > 160) {
     errors.metadescription = { id: 'characters-maximum', values: { quantity: 160 } };
   }
+
+  if (!values.author) {
+    errors.author = 'fill-field';
+  }
+
   return errors;
 };
 
@@ -735,18 +742,13 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     features: state.default.features,
     // WYSIWYG Migration
     bodyUsingJoditWysiwyg: true,
-    currentValues: selector(
-      state,
-      'guestListEnabled',
-      'link',
-      'status',
-      'projects',
-      'isPresential',
-    ),
+    currentValues: selector(state, 'guestListEnabled', 'link', 'status', 'projects'),
 
     initialValues: {
       authorAgreeToUsePersonalDataForEventOnly: false,
       bodyUsingJoditWysiwyg: true,
+      guestListEnabled: false,
+      author: { value: props.query.viewer.id, label: props.query.viewer.displayName },
     },
   };
 };
