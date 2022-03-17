@@ -25,30 +25,21 @@ describe('<ProposalPageLocalisation />', () => {
     proposal = generateMockProposal();
   });
 
-  const mapTokens = {
-    MAPBOX: {
-      styleId: 'string',
-      styleOwner: 'string',
-      publicToken: 'string',
-      initialPublicToken: 'string',
-    },
-  };
-
   it('should render correctly', () => {
-    const wrapper = shallow(<ProposalPageLocalisation proposal={proposal} mapTokens={mapTokens} />);
+    const wrapper = shallow(<ProposalPageLocalisation proposal={proposal} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should be empty if address is not enabled on form', () => {
     proposal.form.usingAddress = false;
-    const wrapper = shallow(<ProposalPageLocalisation proposal={proposal} mapTokens={mapTokens} />);
+    const wrapper = shallow(<ProposalPageLocalisation proposal={proposal} />);
     expect(wrapper.isEmptyRender()).toBe(true);
   });
 
   it('should be empty if address is null', () => {
     // $FlowFixMe type is readonly, but we don't care in tests
     proposal.address = null;
-    const wrapper = shallow(<ProposalPageLocalisation proposal={proposal} mapTokens={mapTokens} />);
+    const wrapper = shallow(<ProposalPageLocalisation proposal={proposal} />);
     expect(wrapper.isEmptyRender()).toBe(true);
   });
 });

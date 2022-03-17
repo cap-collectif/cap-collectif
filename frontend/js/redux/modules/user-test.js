@@ -2,20 +2,11 @@
 /* eslint-env jest */
 import { reducer, cancelEmailChangeSucceed, userRequestEmailChange } from './user';
 import type { State } from './user';
-import config from '../../config';
 
 const initialState: State = {
   showLoginModal: false,
   showRegistrationModal: false,
   showLocaleHeader: true,
-  mapTokens: {
-    MAPBOX: {
-      initialPublicToken: config.mapProviders.MAPBOX.apiKey,
-      publicToken: config.mapProviders.MAPBOX.apiKey,
-      styleOwner: config.mapProviders.MAPBOX.styleOwner,
-      styleId: config.mapProviders.MAPBOX.styleId,
-    },
-  },
   registration_form: {
     hasQuestions: false,
     bottomTextDisplayed: false,

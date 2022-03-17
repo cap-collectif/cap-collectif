@@ -9,7 +9,7 @@ import L from 'leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
-import { MapContainer as Map, Marker, TileLayer, ZoomControl } from 'react-leaflet';
+import { MapContainer as Map, Marker, ZoomControl } from 'react-leaflet';
 import type { Dispatch, GlobalState } from '~/types';
 import viewChoice from './ViewChoice/ViewChoice';
 import {
@@ -36,9 +36,7 @@ import type {
   AddressComplete,
 } from '~/components/Form/Address/Address.type';
 import type { MapProps } from '~/components/Proposal/Map/Map.types';
-
-const publicToken =
-  '***REMOVED***';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 
 export const LOCATION_PARIS = {
   lat: 48.8534,
@@ -456,10 +454,7 @@ export const SectionDisplayMode = ({
                   zoomControl={false}
                   doubleClickZoom={false}
                   gestureHandling>
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-                    url={`https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-                  />
+                  <CapcoTileLayer />
                   <ZoomControl position="bottomright" />
                   <Marker
                     position={position}

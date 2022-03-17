@@ -9,17 +9,30 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryMapTokenResolver implements ResolverInterface
 {
-    private $repository;
+    private MapTokenRepository $repository;
+    private ?string $defaultMapboxPublicToken = null;
+    private ?string $defaultMapboxSecretKey = null;
 
-    public function __construct(MapTokenRepository $repository)
+    public function __construct(MapTokenRepository $repository, string $defaultMapboxPublicToken, string $defaultMapboxSecretKey)
     {
         $this->repository = $repository;
+        $this->defaultMapboxPublicToken = $defaultMapboxPublicToken;
+        $this->defaultMapboxSecretKey = $defaultMapboxSecretKey;
     }
 
-    public function __invoke(Argument $args): ?MapToken
+    public function __invoke(?Argument $args = null): ?MapToken
     {
-        $provider = $args->offsetGet('provider');
+        $provider = $args ? $args->offsetGet('provider') : 'MAPBOX';
+        $setDefaultIfNull = $args ? $args->offsetGet('includeDefault') : true;
 
-        return $this->repository->getCurrentMapTokenForProvider($provider);
+        $mapToken = $this->repository->getCurrentMapTokenForProvider($provider);
+
+        // We assign default values, if needed…
+        if ($setDefaultIfNull && $mapToken && !$mapToken->getPublicToken() && $provider === 'MAPBOX') {
+            $mapToken->setPublicToken($this->defaultMapboxPublicToken);
+            $mapToken->setSecretToken($this->defaultMapboxSecretKey);
+        }
+
+        return $mapToken;
     }
 }

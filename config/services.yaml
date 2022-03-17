@@ -69,6 +69,7 @@ parameters:
     sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
     google_map_public_key: '%env(SYMFONY_GOOGLE_MAP_PUBLIC_KEY)%'
     mapbox_secret_key: '%env(SYMFONY_MAPBOX_SECRET_KEY)%'
+    mapbox_public_key: '%env(SYMFONY_MAPBOX_PUBLIC_KEY)%'
     google_maps_key_server: '%env(SYMFONY_GOOGLE_MAP_SERVER_KEY)%'
     mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
     mailjet_public_key: '%env(SYMFONY_MAILJET_PUBLIC_KEY)%'

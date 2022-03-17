@@ -85,7 +85,7 @@ export const ProposalPage = ({
           return graphqlError;
         }
         if (props && hasVotableStep && !props.step) {
-          console.error("L'étape n'a pas pu être récupérée"); // eslint-disable-line no-console
+          console.warn("L'étape n'a pas pu être récupérée"); // eslint-disable-line no-console
         }
         return (
           <ProposalPageLogic

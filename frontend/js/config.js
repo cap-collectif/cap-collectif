@@ -61,6 +61,30 @@ export const ALLOWED_MIMETYPES = [
   'application/vnd.oasis.opendocument.spreadsheet', // .ods
 ];
 
+type MapTokens = {
+  +[provider: string]: {
+    +styleId: string,
+    +styleOwner: string,
+    +publicToken: string,
+  },
+};
+
+const mapProviders: MapTokens = {
+  MAPBOX: {
+    publicToken:
+      (typeof window !== 'undefined' && window.MAPBOX_PUBLIC_TOKEN) || 'INSERT_A_REAL_SECRET',
+    styleOwner:
+      (typeof window !== 'undefined' && window.MAPBOX_PUBLIC_STYLE_OWNER) || 'INSERT_A_REAL_SECRET',
+    styleId:
+      (typeof window !== 'undefined' && window.MAPBOX_PUBLIC_STYLE_ID) || 'INSERT_A_REAL_SECRET',
+  },
+};
+
+export const getMapboxUrl = () => {
+  const tokens = mapProviders.MAPBOX;
+  return `https://api.mapbox.com/styles/v1/${tokens.styleOwner}/${tokens.styleId}/tiles/256/{z}/{x}/{y}?access_token=${tokens.publicToken}`;
+};
+
 export default {
   getGraphqlInternalUrl: () => {
     const apiBaseUrl = getBaseUrlWithAdminNextSupport();
@@ -70,15 +94,7 @@ export default {
     const apiBaseUrl = getBaseUrlWithAdminNextSupport();
     return `${apiBaseUrl}/api`;
   },
-  mapsServerKey: '***REMOVED***',
-  mapProviders: {
-    MAPBOX: {
-      apiKey:
-        '***REMOVED***',
-      styleOwner: 'capcollectif',
-      styleId: '***REMOVED***',
-    },
-  },
+  mapProviders,
   // https://github.com/elementalui/elemental/blob/master/src/constants.js
   canUseDOM: !!(typeof window !== 'undefined' && window.document && window.document.createElement),
   isDev: isDev(),

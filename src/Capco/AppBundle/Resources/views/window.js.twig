@@ -2,6 +2,10 @@ window.locale = "{{ intl_locale() }}";
 window.timeZone = "{{ intl_timeZone() }}";
 window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
 window._capco_featureFlags = {{ features_flags_for_relay()|json_encode()|raw }};
+{% set mapToken =  mapTokenResolver.__invoke() %}
+window.MAPBOX_PUBLIC_TOKEN = "{{ mapToken.publicToken }}";
+window.MAPBOX_PUBLIC_STYLE_OWNER = "{{ mapToken.styleOwner }}";
+window.MAPBOX_PUBLIC_STYLE_ID = "{{ mapToken.styleId }}";
 {% if is_feature_enabled('report_browers_errors_to_sentry') %}
     window.sentryDsn = "{{ sentryDsn }}";
 {% endif %}

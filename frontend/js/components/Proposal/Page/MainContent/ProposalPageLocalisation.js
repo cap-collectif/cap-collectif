@@ -1,19 +1,17 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import { Box, Skeleton } from '@cap-collectif/ui';
 import colors from '~/utils/colors';
 import config from '~/config';
-import type { MapTokens } from '~/redux/modules/user';
-import type { GlobalState } from '~/types';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 
 import type { ProposalPageLocalisation_proposal } from '~relay/ProposalPageLocalisation_proposal.graphql';
 import {
@@ -24,8 +22,7 @@ import {
 } from '~/components/Proposal/Page/ProposalPage.style';
 
 type Props = {
-  proposal: ProposalPageLocalisation_proposal,
-  mapTokens: MapTokens,
+  proposal: ?ProposalPageLocalisation_proposal,
 };
 
 let L;
@@ -37,16 +34,13 @@ const Placeholder = () => (
   </Box>
 );
 
-export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
+export const ProposalPageLocalisation = ({ proposal }: Props) => {
   React.useEffect(() => {
     if (config.canUseDOM) {
       L = require('leaflet'); // eslint-disable-line
       L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
     }
   }, []);
-
-  if (!mapTokens) return null;
-  const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
   if (!proposal || !config.canUseDOM || !proposal.address || !proposal.form.usingAddress) {
     return null;
@@ -78,10 +72,7 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
                 }}
                 doubleClickZoom={false}
                 gestureHandling>
-                <TileLayer
-                  attribution='&copy; <a href"https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href"https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-                  url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-                />
+                <CapcoTileLayer />
                 <Marker
                   position={[proposal?.address.lat, proposal?.address.lng]}
                   icon={
@@ -103,25 +94,18 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
   );
 };
 
-const mapStateToProps = (state: GlobalState) => ({
-  mapTokens: state.user.mapTokens,
-});
-
-export default createFragmentContainer(
-  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageLocalisation),
-  {
-    proposal: graphql`
-      fragment ProposalPageLocalisation_proposal on Proposal {
-        id
-        form {
-          usingAddress
-        }
-        address {
-          formatted
-          lat
-          lng
-        }
+export default createFragmentContainer(ProposalPageLocalisation, {
+  proposal: graphql`
+    fragment ProposalPageLocalisation_proposal on Proposal {
+      id
+      form {
+        usingAddress
       }
-    `,
-  },
-);
+      address {
+        formatted
+        lat
+        lng
+      }
+    }
+  `,
+});

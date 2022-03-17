@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { renderToString } from 'react-dom/server';
 import noop from 'lodash/noop';
 import { change } from 'redux-form';
-import { TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
+import { GeoJSON, Marker, Popup } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
@@ -13,16 +13,16 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import L from 'leaflet';
 import { useResize, useDisclosure } from '@liinkiing/react-hooks';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import {Button} from '@cap-collectif/ui';
+import { Button } from '@cap-collectif/ui';
 import ZoomControl from './ZoomControl';
 import type { MapCenterObject, MapOptions, MapProps, MapRef, PopupRef } from './Map.types';
 import type { State, Dispatch } from '~/types';
-import type { MapTokens } from '~/redux/modules/user';
 import ProposalMapPopover from './ProposalMapPopover';
 import NewLoginOverlay from '~/components/Utils/NewLoginOverlay';
 import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_proposals.graphql';
 import type { ProposalLeafletMap_proposalForm } from '~relay/ProposalLeafletMap_proposalForm.graphql';
 import { isSafari, Emitter } from '~/config';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 
 import {
   StyledMap,
@@ -51,7 +51,6 @@ import { mapToast, MapEvents } from './Map.events';
 
 type Props = {|
   proposals: ProposalLeafletMap_proposals,
-  mapTokens: MapTokens,
   geoJsons?: Array<GeoJson>,
   defaultMapOptions: MapOptions,
   visible: boolean,
@@ -130,7 +129,6 @@ export const ProposalLeafletMap = ({
   defaultMapOptions,
   proposals,
   visible,
-  mapTokens,
   className,
   hasMore,
   hasError,
@@ -152,7 +150,6 @@ export const ProposalLeafletMap = ({
       : proposalForm?.objectType === 'PROPOSAL'
       ? getProposalLabelByType(projectType, 'add')
       : 'submit-a-question';
-  const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
   const mapRef = useRef(null);
   const popupRef = useRef(null);
   const slickRef = useRef(null);
@@ -250,10 +247,7 @@ export const ProposalLeafletMap = ({
         className={className}
         doubleClickZoom={false}
         gestureHandling={!isSafari}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-          url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-        />
+        <CapcoTileLayer />
         <Popup
           ref={popupRef}
           key="popup-proposal"
@@ -384,7 +378,6 @@ ProposalLeafletMap.defaultProps = {
 };
 
 const mapStateToProps = (state: State) => ({
-  mapTokens: state.user.mapTokens,
   shouldDisplayPictures: state.default.features.display_pictures_in_depository_proposals_list,
   btnBgColor: state.default.parameters['color.btn.primary.bg'],
   btnTextColor: state.default.parameters['color.btn.primary.text'],

@@ -56,10 +56,7 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
       }
       zoom={10}
     >
-      <ForwardRef(LeafComponent)
-        attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
-        url="https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
-      />
+      <CapcoTileLayer />
       <ForwardRef(ContainerComponent)
         icon={
           NewClass {
@@ -224,10 +221,7 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
       }
       zoom={10}
     >
-      <ForwardRef(LeafComponent)
-        attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
-        url="https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
-      />
+      <CapcoTileLayer />
       <ForwardRef(ContainerComponent)
         icon={
           NewClass {
@@ -495,10 +489,7 @@ exports[`<EventPageContent /> should render correctly when no registration possi
       }
       zoom={10}
     >
-      <ForwardRef(LeafComponent)
-        attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
-        url="https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
-      />
+      <CapcoTileLayer />
       <ForwardRef(ContainerComponent)
         icon={
           NewClass {
@@ -619,10 +610,7 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
       }
       zoom={10}
     >
-      <ForwardRef(LeafComponent)
-        attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
-        url="https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
-      />
+      <CapcoTileLayer />
       <ForwardRef(ContainerComponent)
         icon={
           NewClass {

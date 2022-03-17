@@ -10,17 +10,6 @@ const defaultMapOptions = {
   zoom: 12,
 };
 
-const mapTokens = {
-  MAPBOX: {
-    initialPublicToken:
-      '***REMOVED***',
-    publicToken:
-      '***REMOVED***',
-    styleOwner: 'capcollectif',
-    styleId: '***REMOVED***',
-  },
-};
-
 it('should render correctly with proposals', () => {
   const proposals = [
     {
@@ -58,7 +47,6 @@ it('should render correctly with proposals', () => {
     relay: relayPaginationMock,
     step,
     defaultMapOptions,
-    mapTokens,
   };
   const wrapper = shallow(<ProposalsDisplayMap {...props} />);
   expect(wrapper).toMatchSnapshot();
@@ -66,7 +54,7 @@ it('should render correctly with proposals', () => {
 
 it('should not render when no proposals are in the step', () => {
   const step = { ...$refType };
-  const props = { relay: relayPaginationMock, step, defaultMapOptions, mapTokens };
+  const props = { relay: relayPaginationMock, step, defaultMapOptions };
   const wrapper = shallow(<ProposalsDisplayMap {...props} />);
   expect(wrapper).toMatchSnapshot();
 });

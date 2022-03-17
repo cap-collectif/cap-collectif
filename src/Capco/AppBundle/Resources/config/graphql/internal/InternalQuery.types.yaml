@@ -44,6 +44,10 @@ InternalQuery:
                     provider:
                         type: 'MapTokenProvider!'
                         description: 'The map provider'
+                    includeDefault:
+                        type: 'Boolean'
+                        defaultValue: true
+                        description: 'Whether or not resolves the default map tokens if no custom tokens are specified'
             siteFavicon:
                 type: 'SiteImage!'
                 description: 'Get the current favicon'

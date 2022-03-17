@@ -5,7 +5,7 @@ import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import { storiesOf } from '@storybook/react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, Marker } from 'react-leaflet';
 import { BlankPopup } from '~/components/Proposal/Map/ProposalLeafletMap.style';
 import {
   PopoverContent,
@@ -19,6 +19,7 @@ import type { FeatureToggles } from '~/types';
 import { features as defaultFeatures } from '~/redux/modules/default';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 
 // TODO: mieux typer l'ensemble du storybook
 type Props = {
@@ -28,9 +29,6 @@ type Props = {
 
 export const ProposalMapPopover = (props: Props) => {
   const { proposal, features } = props;
-
-  const publicToken =
-    '***REMOVED***';
 
   React.useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
@@ -50,10 +48,7 @@ export const ProposalMapPopover = (props: Props) => {
         }}
         doubleClickZoom={false}
         gestureHandling>
-        <TileLayer
-          attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-          url={`https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-        />
+        <CapcoTileLayer />
         <Marker
           position={[
             proposal.address && proposal.address.lat,

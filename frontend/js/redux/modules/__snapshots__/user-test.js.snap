@@ -5,14 +5,6 @@ Object {
   "displayChartModal": false,
   "groupAdminUsersUserDeletionFailed": false,
   "groupAdminUsersUserDeletionSuccessful": false,
-  "mapTokens": Object {
-    "MAPBOX": Object {
-      "initialPublicToken": "***REMOVED***",
-      "publicToken": "***REMOVED***",
-      "styleId": "***REMOVED***",
-      "styleOwner": "capcollectif",
-    },
-  },
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
@@ -36,14 +28,6 @@ Object {
   "displayChartModal": false,
   "groupAdminUsersUserDeletionFailed": false,
   "groupAdminUsersUserDeletionSuccessful": false,
-  "mapTokens": Object {
-    "MAPBOX": Object {
-      "initialPublicToken": "***REMOVED***",
-      "publicToken": "***REMOVED***",
-      "styleId": "***REMOVED***",
-      "styleOwner": "capcollectif",
-    },
-  },
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,

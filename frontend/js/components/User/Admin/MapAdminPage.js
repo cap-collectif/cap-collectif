@@ -39,7 +39,7 @@ const MapAdminPage = () => (
         environment={environment}
         query={graphql`
           query MapAdminPageQuery($provider: MapTokenProvider!) {
-            mapToken(provider: $provider) {
+            mapToken(provider: $provider, includeDefault: false) {
               ...MapboxAdminConfig_mapToken
             }
           }

@@ -5,7 +5,6 @@ import type { MapOptions } from '../Proposal/Map/Map.types';
 import { type GeoJson } from '~/utils/geojson';
 import ProposalLeafletMap from '../Proposal/Map/ProposalLeafletMap';
 import type { ProposalsDisplayMap_step } from '~relay/ProposalsDisplayMap_step.graphql';
-import type { MapTokens } from '../../redux/modules/user';
 
 type RelayProps = {|
   +step: ProposalsDisplayMap_step,
@@ -14,7 +13,6 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
   +relay: RelayPaginationProp,
-  +mapTokens: MapTokens,
   +geoJsons?: Array<GeoJson>,
   +defaultMapOptions: MapOptions,
 |};

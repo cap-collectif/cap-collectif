@@ -2,15 +2,13 @@
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import styled, { type StyledComponent } from 'styled-components';
-import { connect } from 'react-redux';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
-import type { MapTokens } from '~/redux/modules/user';
-import type { GlobalState } from '~/types';
 import config from '~/config';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 
@@ -19,7 +17,6 @@ let L;
 type Props = {|
   +color: string,
   +icon: string,
-  mapTokens: MapTokens,
 |};
 
 const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -41,7 +38,7 @@ const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-export const ProposalFormCategoryPinPreview = ({ color, icon, mapTokens }: Props) => {
+export const ProposalFormCategoryPinPreview = ({ color, icon }: Props) => {
   React.useEffect(() => {
     if (config.canUseDOM) {
       L = require('leaflet'); // eslint-disable-line
@@ -49,8 +46,6 @@ export const ProposalFormCategoryPinPreview = ({ color, icon, mapTokens }: Props
     }
   }, []);
 
-  if (!mapTokens) return null;
-  const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
   if (config.canUseDOM) {
     L = require('leaflet'); // eslint-disable-line
   }
@@ -72,10 +67,7 @@ export const ProposalFormCategoryPinPreview = ({ color, icon, mapTokens }: Props
           height: '100%',
         }}
         gestureHandling>
-        <TileLayer
-          attribution='&copy; <a href"https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href"https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-          url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-        />
+        <CapcoTileLayer />
         <Marker
           position={[48.8601, 2.3507]}
           icon={L.divIcon({
@@ -95,8 +87,4 @@ export const ProposalFormCategoryPinPreview = ({ color, icon, mapTokens }: Props
   );
 };
 
-const mapStateToProps = (state: GlobalState) => ({
-  mapTokens: state.user.mapTokens,
-});
-
-export default connect<any, any, _, _, _, _>(mapStateToProps)(ProposalFormCategoryPinPreview);
+export default ProposalFormCategoryPinPreview;

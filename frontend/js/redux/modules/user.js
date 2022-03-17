@@ -3,7 +3,6 @@ import { change, SubmissionError } from 'redux-form';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
-import config from '../../config';
 import CookieMonster from '../../CookieMonster';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
@@ -47,22 +46,11 @@ type Props = {
   shieldEnabled: boolean,
   query: RegistrationForm_query,
 };
-
-export type MapTokens = {
-  +[provider: string]: {
-    +styleId: string,
-    +styleOwner: string,
-    +publicToken: string,
-    +initialPublicToken: string,
-  },
-};
-
 export type State = {
   +showLoginModal: boolean,
   +showLocaleHeader: boolean,
   +displayChartModal: boolean,
   +showRegistrationModal: boolean,
-  +mapTokens: MapTokens,
   +registration_form: {
     +bottomTextDisplayed: boolean,
     +topTextDisplayed: boolean,
@@ -139,14 +127,6 @@ const initialState: State = {
   displayChartModal: false,
   showRegistrationModal: false,
   user: null,
-  mapTokens: {
-    MAPBOX: {
-      initialPublicToken: config.mapProviders.MAPBOX.apiKey,
-      publicToken: config.mapProviders.MAPBOX.apiKey,
-      styleOwner: config.mapProviders.MAPBOX.styleOwner,
-      styleId: config.mapProviders.MAPBOX.styleId,
-    },
-  },
   registration_form: {
     hasQuestions: false,
     bottomText: '',
@@ -354,9 +334,10 @@ export const resendConfirmation = async (): Promise<*> => {
   }
 };
 
-export const groupAdminUsersUserDeletionSuccessful = (): GroupAdminUsersUserDeletionSuccessfulAction => ({
-  type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL',
-});
+export const groupAdminUsersUserDeletionSuccessful =
+  (): GroupAdminUsersUserDeletionSuccessfulAction => ({
+    type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL',
+  });
 export const groupAdminUsersUserDeletionFailed = (): GroupAdminUsersUserDeletionFailedAction => ({
   type: 'GROUP_ADMIN_USERS_USER_DELETION_FAILED',
 });

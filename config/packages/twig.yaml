@@ -16,6 +16,7 @@ twig:
         #
         # Please use this only for legacy pages, because it's **very bad** for perfomance.
         #
+        mapTokenResolver: '@Capco\AppBundle\GraphQL\Resolver\Query\QueryMapTokenResolver'
         opinionVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionVotesResolver'
         opinionVersionsResolver: '@Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionVersionsResolver'
         argumentVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Argument\ArgumentVotesResolver'

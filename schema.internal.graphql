@@ -10886,6 +10886,11 @@ type Query {
   mapToken(
     """The map provider"""
     provider: MapTokenProvider!
+
+    """
+    Whether or not resolves the default map tokens if no custom tokens are specified
+    """
+    includeDefault: Boolean = true
   ): MapToken
 
   """Get the current favicon"""

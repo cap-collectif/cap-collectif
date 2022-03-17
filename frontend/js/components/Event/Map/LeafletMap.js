@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, Marker, Popup } from 'react-leaflet';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { graphql } from 'relay-runtime';
 import { FormattedMessage } from 'react-intl';
@@ -13,12 +13,12 @@ import { createFragmentContainer } from 'react-relay';
 import LocateControl from '~/components/Proposal/Map/LocateControl';
 import type { GlobalState, Dispatch } from '~/types';
 import { changeEventSelected } from '~/redux/modules/event';
-import type { MapTokens } from '~/redux/modules/user';
 import type { MapOptions } from '~/components/Proposal/Map/Map.types';
 import EventMapPreview from './EventMapPreview/EventMapPreview';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 import type { LeafletMap_query } from '~relay/LeafletMap_query.graphql';
 import { isSafari } from '~/config';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 
 type Props = {|
   query: LeafletMap_query,
@@ -26,11 +26,24 @@ type Props = {|
   loading: boolean,
 |};
 
+const formatBounds = bounds => {
+  if (
+    bounds.getNorthEast().lat === bounds.getSouthWest().lat &&
+    bounds.getNorthEast().lng === bounds.getSouthWest().lng
+  )
+    return L.latLngBounds([
+      bounds.getCenter(),
+      { lat: bounds._northEast.lat + 0.001, lng: bounds._northEast.lng + 0.001 },
+      { lat: bounds._northEast.lat - 0.001, lng: bounds._northEast.lng - 0.001 },
+    ]);
+
+  return bounds;
+};
+
 export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
   const markers = query.events;
 
   const eventSelected: ?string = useSelector((state: GlobalState) => state.event.eventSelected);
-  const mapTokens: MapTokens = useSelector((state: GlobalState) => state.user.mapTokens);
 
   const dispatch: Dispatch = useDispatch();
 
@@ -55,7 +68,6 @@ export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
     });
   };
 
-  const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
   const markersGroup = [];
 
   if (markers && markers.edges && markers.edges.length > 0) {
@@ -69,20 +81,6 @@ export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
         }
       });
   }
-
-  const formatBounds = bounds => {
-    if (
-      bounds.getNorthEast().lat === bounds.getSouthWest().lat &&
-      bounds.getNorthEast().lng === bounds.getSouthWest().lng
-    )
-      return L.latLngBounds([
-        bounds.getCenter(),
-        { lat: bounds._northEast.lat + 0.001, lng: bounds._northEast.lng + 0.001 },
-        { lat: bounds._northEast.lat - 0.001, lng: bounds._northEast.lng - 0.001 },
-      ]);
-
-    return bounds;
-  };
 
   const bounds = L.latLngBounds(markersGroup);
 
@@ -113,10 +111,7 @@ export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
         doubleClickZoom={false}
         gestureHandling={!isSafari}
         tap={false}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-          url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-        />
+        <CapcoTileLayer />
         <MarkerClusterGroup
           spiderfyOnMaxZoom
           showCoverageOnHover={false}

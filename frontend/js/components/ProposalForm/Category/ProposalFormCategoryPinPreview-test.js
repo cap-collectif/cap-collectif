@@ -8,16 +8,6 @@ describe('<ProposalFormCategoryPinPreview />', () => {
   const props = {
     color: 'blue',
     icon: 'parking',
-    mapTokens: {
-      MAPBOX: {
-        initialPublicToken:
-          '***REMOVED***',
-        publicToken:
-          '***REMOVED***',
-        styleOwner: 'capcollectif',
-        styleId: '***REMOVED***',
-      },
-    },
   };
 
   it('render correctly', () => {

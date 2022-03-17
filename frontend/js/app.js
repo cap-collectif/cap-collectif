@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import 'url-search-params-polyfill';
 import { shouldPolyfill } from '@formatjs/intl-pluralrules/should-polyfill';
 import { shouldPolyfill as relativeShouldPolyfill } from '@formatjs/intl-relativetimeformat/should-polyfill';
-import { isSafari } from '~/config'
+import { isSafari } from '~/config';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -275,7 +275,7 @@ global.App = ($ => {
     const lat = mapElement.getAttribute('data-lat');
     const lng = mapElement.getAttribute('data-lng');
 
-    mapboxgl.accessToken = config.mapProviders.MAPBOX.apiKey;
+    mapboxgl.accessToken = config.mapProviders.MAPBOX.publicToken;
 
     // Map
     const mapOptions = {
@@ -302,9 +302,7 @@ global.App = ($ => {
     // Fix containers
     const containers = `${options.container} .container`;
     $(options.container).addClass('container  sidebar__container');
-    $(containers)
-      .removeClass('container  container--thinner')
-      .addClass('container--with-sidebar');
+    $(containers).removeClass('container  container--thinner').addClass('container--with-sidebar');
 
     // Handle small screens
     $(options.toggle).on('click', () => {

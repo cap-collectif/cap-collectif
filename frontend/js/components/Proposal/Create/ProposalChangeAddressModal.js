@@ -4,15 +4,14 @@ import { useIntl } from 'react-intl';
 import { change, formValueSelector } from 'redux-form';
 import noop from 'lodash/noop';
 import { renderToString } from 'react-dom/server';
-import { useDispatch, useSelector, connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import { graphql, useFragment } from 'react-relay';
-import { MapContainer, Marker, TileLayer, GeoJSON } from 'react-leaflet';
+import { MapContainer, Marker, GeoJSON } from 'react-leaflet';
 import { Flex, Button, Modal, Box } from '@cap-collectif/ui';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 import { formName, retrieveDistrictForLocation } from '../Form/ProposalForm';
 import type { Dispatch, GlobalState } from '~/types';
 import type { MapProps, MapCenterObject } from '~/components/Proposal/Map/Map.types';
-import type { MapTokens } from '~/redux/modules/user';
 import type { ProposalChangeAddressModal_proposalForm$key } from '~relay/ProposalChangeAddressModal_proposalForm.graphql';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import 'leaflet/dist/leaflet.css';
@@ -27,6 +26,7 @@ import ProposalMapOutOfAreaPane from '../Map/ProposalMapOutOfAreaPane';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import { mapToast } from '../Map/Map.events';
 import ZoomControl from '../Map/ZoomControl';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 
 let L;
 
@@ -103,7 +103,6 @@ const ProposalChangeAddressModal = ({
   const geoJsons = proposalForm.step?.form?.districts
     ? formatGeoJsons(proposalForm.step.form.districts)
     : null;
-  const mapTokens: MapTokens = useSelector((state: GlobalState) => state.user.mapTokens);
   const mapRef = React.useRef(null);
   const intl = useIntl();
   const dispatch: Dispatch = useDispatch();
@@ -119,9 +118,8 @@ const ProposalChangeAddressModal = ({
     newAddress?.formatted_address || null,
   );
 
-  if (!mapTokens || !L) return null;
+  if (!L) return null;
 
-  const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
   const proposalCategory = proposalForm.categories.find(cat => cat.id === category) || {
     color: dsColors.blue[500],
   };
@@ -223,10 +221,7 @@ const ProposalChangeAddressModal = ({
                 : {},
             }}
             tap>
-            <TileLayer
-              attribution='&copy; <a href"https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href"https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-              url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-            />
+            <CapcoTileLayer />
             {geoJsons &&
               geoJsons.map((geoJson, idx) => (
                 <GeoJSON

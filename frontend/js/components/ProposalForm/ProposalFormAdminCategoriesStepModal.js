@@ -169,7 +169,9 @@ export const ProposalFormAdminCategoriesStepModal = ({
                     !showPredefinedImage ? customCategoryImage || newCategoryImage : null
                   }
                 />
-                <ProposalFormCategoryPinPreview color={selectedColor} icon={selectedIcon} />
+                {selectedColor && selectedIcon ? (
+                  <ProposalFormCategoryPinPreview color={selectedColor} icon={selectedIcon} />
+                ) : null}
               </div>
             </div>
             <div className="mt-10">

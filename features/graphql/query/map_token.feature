@@ -17,7 +17,7 @@ Scenario: GraphQL client wants to get list of available map tokens
     "data": {
       "mapTokens": [
         {
-          "_id": "mapboxToken",
+          "_id": @string@,
           "provider": "MAPBOX"
         },
         @...@
@@ -42,7 +42,7 @@ Scenario: GraphQL client wants to get a particular map token given its provider
   {
     "data": {
       "mapToken": {
-        "_id": "mapboxToken",
+        "_id": @string@,
         "publicToken": @string@,
         "secretToken": @null@
       }
@@ -76,7 +76,7 @@ Scenario: GraphQL admin client wants to get a particular map token given its pro
   {
     "data": {
       "mapToken": {
-        "_id": "mapboxToken",
+        "_id": @string@,
         "publicToken": @string@,
         "secretToken": @string@
       }
@@ -105,7 +105,7 @@ Scenario: GraphQL client wants to list styles for a particular map token given i
   {
     "data": {
       "mapToken": {
-        "_id": "mapboxToken",
+        "_id": @string@,
         "styles": [
           {
             "id": @string@,
@@ -142,7 +142,7 @@ Scenario: GraphQL client wants to list public styles for a particular map token 
   {
     "data": {
       "mapToken": {
-        "_id": "mapboxToken",
+        "_id": @string@,
         "styles": [
           {
             "id": @string@,
@@ -179,7 +179,7 @@ Scenario: GraphQL client wants to list private styles for a particular map token
   {
     "data": {
       "mapToken": {
-        "_id": "mapboxToken",
+        "_id": @string@,
         "styles": [
           {
             "id": @string@,

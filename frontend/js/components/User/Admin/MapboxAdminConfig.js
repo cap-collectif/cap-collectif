@@ -55,20 +55,25 @@ const SubmitButtonInner = styled.span`
 const formName = 'mapbox-admin-config';
 
 const validate = (values: FormValues) => {
-  const errors = {};
-  const fields = ['publicToken', 'secretToken'];
+  if (!values.publicToken && !values.secretToken) {
+    return {};
+  }
 
-  fields.forEach(field => {
-    if (
-      (field === 'publicToken' && !values[field]) ||
-      (field === 'secretToken' && !values[field]) ||
-      (values[field] && values[field].length === 0)
-    ) {
-      errors[field] = 'fill-field';
-    }
-  });
+  if (values.publicToken && values.secretToken) {
+    return {};
+  }
 
-  return errors;
+  if (!values.publicToken && values.secretToken) {
+    return {
+      publicToken: 'fill-field',
+    };
+  }
+
+  if (values.publicToken && !values.secretToken) {
+    return {
+      secretToken: 'fill-field',
+    };
+  }
 };
 
 const onSubmit = async (values: FormValues) => {
@@ -239,12 +244,8 @@ const form = reduxForm({
 
 const mapStateToProps = (state: GlobalState, { mapToken }: Props) => ({
   initialValues: {
-    secretToken: mapToken ? mapToken.secretToken : '',
-    publicToken: mapToken
-      ? mapToken.publicToken !== state.user.mapTokens.MAPBOX.initialPublicToken
-        ? mapToken.publicToken
-        : ''
-      : '',
+    secretToken: mapToken ? mapToken.secretToken : null,
+    publicToken: mapToken ? mapToken.publicToken : null,
   },
 });
 

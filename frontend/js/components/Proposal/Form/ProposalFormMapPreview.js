@@ -1,12 +1,9 @@
 // @flow
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
-import { useSelector } from 'react-redux';
 import config from '~/config';
-import type { MapTokens } from '~/redux/modules/user';
-import type { GlobalState } from '~/types';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 import 'leaflet/dist/leaflet.css';
@@ -15,6 +12,7 @@ import { colors as dsColors } from '~/styles/modules/colors';
 import { colors } from '~/utils/colors';
 import type { MapProps } from '~/components/Proposal/Map/Map.types';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 
 type Props = {|
   +address: ?string,
@@ -25,7 +23,6 @@ type Props = {|
 let L;
 
 export const ProposalFormMapPreview = ({ address, category, categories }: Props) => {
-  const mapTokens: MapTokens = useSelector((state: GlobalState) => state.user.mapTokens);
   const mapRef = React.useRef(null);
   const proposalAddress: AddressComplete = JSON.parse(
     address ? address.substring(1, address.length - 1) : '{}',
@@ -46,9 +43,8 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
       ]);
   }, [proposalAddress]);
 
-  if (!mapTokens || !L || !address) return null;
+  if (!L || !address) return null;
 
-  const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
   const proposalCategory = categories.find(cat => cat.id === category) || {
     color: dsColors.blue[500],
   };
@@ -76,10 +72,7 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
       }}
       tap={!L.Browser.mobile}
       gestureHandling>
-      <TileLayer
-        attribution='&copy; <a href"https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href"https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-        url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-      />
+      <CapcoTileLayer />
       <Marker
         position={[proposalAddress.geometry.location.lat, proposalAddress.geometry.location.lng]}
         icon={L.divIcon({

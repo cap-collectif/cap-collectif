@@ -46,17 +46,6 @@ describe('<ProposalLeafletMap />', () => {
     },
   ];
 
-  const mapTokens = {
-    MAPBOX: {
-      initialPublicToken:
-        '***REMOVED***',
-      publicToken:
-        '***REMOVED***',
-      styleOwner: 'capcollectif',
-      styleId: '***REMOVED***',
-    },
-  };
-
   const props = {
     hasError: false,
     hasMore: false,
@@ -78,7 +67,6 @@ describe('<ProposalLeafletMap />', () => {
         {...props}
         defaultMapOptions={defaultMapOptions}
         visible
-        mapTokens={mapTokens}
         proposals={proposals}
       />,
     );
@@ -93,7 +81,6 @@ describe('<ProposalLeafletMap />', () => {
         {...props}
         defaultMapOptions={defaultMapOptions}
         visible={false}
-        mapTokens={mapTokens}
         proposals={proposals}
       />,
     );
@@ -108,7 +95,6 @@ describe('<ProposalLeafletMap />', () => {
         isLoading
         defaultMapOptions={defaultMapOptions}
         visible
-        mapTokens={mapTokens}
         proposals={proposals}
       />,
     );

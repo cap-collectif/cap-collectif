@@ -228,7 +228,7 @@ exports[`<MapboxAdminConfig/> should render with styles 1`] = `
             "isCurrent": true,
             "name": "Le bo thème",
             "owner": "capcollectif",
-            "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme/tiles/256/14/8114/5686?access_token=***REMOVED***",
+            "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme/tiles/256/14/8114/5686?access_token=INSERT_A_REAL_SECRET",
             "updatedAt": null,
           }
         }
@@ -247,7 +247,7 @@ exports[`<MapboxAdminConfig/> should render with styles 1`] = `
             "isCurrent": false,
             "name": "Le bo thème 2",
             "owner": "capcollectif",
-            "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme2/tiles/256/14/8114/5686?access_token=***REMOVED***",
+            "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme2/tiles/256/14/8114/5686?access_token=INSERT_A_REAL_SECRET",
             "updatedAt": "2018-11-23 10:00:00",
           }
         }

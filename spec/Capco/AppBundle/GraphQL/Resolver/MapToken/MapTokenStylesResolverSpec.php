@@ -13,7 +13,7 @@ class MapTokenStylesResolverSpec extends ObjectBehavior
 {
     public function let(MapboxClient $client): void
     {
-        $this->beConstructedWith($client);
+        $this->beConstructedWith($client, 'default_public_token', 'default_secret_token');
     }
 
     public function it_is_initializable(): void
@@ -124,8 +124,7 @@ class MapTokenStylesResolverSpec extends ObjectBehavior
         $publicToken = 'INSERT_A_REAL_SECRET';
         $secretToken = 'INSERT_A_REAL_SECRET';
 
-        $argument->offsetGet('visibility')->willReturn(null);
-        $mapToken->getInitialPublicToken()->willReturn($publicToken);
+        $argument->offsetGet('visibility')->willReturn(null)->shouldBeCalled();
         $mapToken->getPublicToken()->willReturn($publicToken);
         $mapToken->getSecretToken()->willReturn($secretToken);
         $mapToken->getProvider()->willReturn(MapProviderEnum::MAPBOX);

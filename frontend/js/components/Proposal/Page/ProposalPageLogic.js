@@ -167,7 +167,7 @@ export const ProposalPageLogic = ({
   const scrollY: number = useScrollYPosition();
   const footerSize = document.getElementsByTagName('footer')[0]?.offsetHeight;
   const bodyHeight = document.getElementsByTagName('body')[0]?.offsetHeight;
-  const proposal = query?.proposal || null;
+  const proposal = query?.proposal;
   const step = query?.step || null;
   const viewer = query?.viewer || null;
   const hasAnalysis =
@@ -189,6 +189,7 @@ export const ProposalPageLogic = ({
   useEffect(() => {
     if (show !== 'SHOWED') setShow(viewer && isMobile && hasAnalysis ? 'TRUE' : 'FALSE');
   }, [show, viewer, hasAnalysis, isMobile]);
+
   return (
     <>
       <Box bg="white" pt={[0, 5]}>

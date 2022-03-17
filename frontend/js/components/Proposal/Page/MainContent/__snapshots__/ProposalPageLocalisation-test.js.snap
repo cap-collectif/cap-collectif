@@ -45,10 +45,7 @@ exports[`<ProposalPageLocalisation /> should render correctly 1`] = `
           }
           zoom={16}
         >
-          <ForwardRef(LeafComponent)
-            attribution="© <a href\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
-            url="https://api.mapbox.com/styles/v1/string/string/tiles/256/{z}/{x}/{y}?access_token=string"
-          />
+          <CapcoTileLayer />
           <ForwardRef(ContainerComponent)
             position={
               Array [

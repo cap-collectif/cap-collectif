@@ -73,14 +73,6 @@ export default {
         return `${apiBaseUrl}/graphql/internal`;
     },
     getApiUrl,
-    mapsServerKey: '***REMOVED***',
-    mapProviders: {
-        MAPBOX: {
-            apiKey: '***REMOVED***',
-            styleOwner: 'capcollectif',
-            styleId: '***REMOVED***',
-        },
-    },
     // https://github.com/elementalui/elemental/blob/master/src/constants.js
     canUseDOM: !!(
         typeof window !== 'undefined' &&

@@ -271,7 +271,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly with illustra
           icon="parking"
           name="Titre"
         />
-        <Connect(ProposalFormCategoryPinPreview)
+        <ProposalFormCategoryPinPreview
           color="red"
           icon="parking"
         />

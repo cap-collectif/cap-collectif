@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker } from 'react-leaflet';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
@@ -24,6 +24,7 @@ import ModalEventRegister from '~/components/Event/ModalEventRegister/ModalEvent
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import EventModerationMotiveView from '~/components/Event/EventModerationMotiveView';
 import type { State } from '~/types';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 
 type Props = {|
   +event: EventPageContent_event,
@@ -43,8 +44,6 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled, intl }
     isViewerParticipatingAtEvent,
     viewerDidAuthor,
   } = event;
-  const publicToken =
-    '***REMOVED***';
   const [showModalParticipant, setShowModalParticipant] = React.useState<boolean>(false);
   const [showModalRegister, setShowModalRegister] = React.useState<boolean>(false);
 
@@ -72,10 +71,7 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled, intl }
             }}
             doubleClickZoom={false}
             gestureHandling>
-            <TileLayer
-              attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-              url={`https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
-            />
+            <CapcoTileLayer />
             <Marker
               position={[googleMapsAddress.lat, googleMapsAddress.lng]}
               icon={L.icon({

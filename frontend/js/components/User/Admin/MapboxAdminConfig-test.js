@@ -37,7 +37,7 @@ describe('<MapboxAdminConfig/>', () => {
             owner: 'capcollectif',
             name: 'Le bo thème',
             previewUrl:
-              'https://api.mapbox.com/styles/v1/capcollectif/lebotheme/tiles/256/14/8114/5686?access_token=***REMOVED***',
+              'https://api.mapbox.com/styles/v1/capcollectif/lebotheme/tiles/256/14/8114/5686?access_token=INSERT_A_REAL_SECRET',
             createdAt: '2018-11-23 00:00:00',
             updatedAt: null,
             isCurrent: true,
@@ -47,7 +47,7 @@ describe('<MapboxAdminConfig/>', () => {
             owner: 'capcollectif',
             name: 'Le bo thème 2',
             previewUrl:
-              'https://api.mapbox.com/styles/v1/capcollectif/lebotheme2/tiles/256/14/8114/5686?access_token=***REMOVED***',
+              'https://api.mapbox.com/styles/v1/capcollectif/lebotheme2/tiles/256/14/8114/5686?access_token=INSERT_A_REAL_SECRET',
             createdAt: '2018-11-23 00:00:00',
             updatedAt: '2018-11-23 10:00:00',
             isCurrent: false,
