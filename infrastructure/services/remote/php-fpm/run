@@ -70,7 +70,7 @@ gosu capco php -d memory_limit=-1 bin/console assets:install public --symlink --
 echo "[$(date -u)][PHP-FPM] Cache warmed!"
 
 SYMFONY_DATABASE_NAME=symfony
-database=`mysql --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=${SYMFONY_DATABASE_PASSWORD} --skip-column-names -e "SHOW DATABASES LIKE '${SYMFONY_DATABASE_NAME}'"`
+database=`mysql --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --port=${SYMFONY_DATABASE_PORT:-3306} --user=${SYMFONY_DATABASE_USER:-root} --password=${SYMFONY_DATABASE_PASSWORD} --skip-column-names -e "SHOW DATABASES LIKE '${SYMFONY_DATABASE_NAME}'"`
 if [ "$database" == "$SYMFONY_DATABASE_NAME" ]; then
     echo "[$(date -u)][PHP-FPM] Database ${SYMFONY_DATABASE_NAME} already exists."
     gosu capco php -d memory_limit=-1 bin/console doctrine:migrations:sync-metadata-storage --env=prod --no-interaction
