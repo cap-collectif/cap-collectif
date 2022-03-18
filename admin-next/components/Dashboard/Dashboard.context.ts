@@ -2,18 +2,17 @@ import * as React from 'react';
 import moment from 'moment';
 
 export enum FilterKey {
+    DATE_RANGE = 'dateRange',
     PROJECT = 'projectId',
-    START_AT = 'startAt',
-    END_AT = 'endAt',
 }
 
 export type DateRange = {
-    [FilterKey.START_AT]: string,
-    [FilterKey.END_AT]: string,
+    startAt: string,
+    endAt: string,
 };
 
 export type Filters = {
-    dateRange: DateRange,
+    [FilterKey.DATE_RANGE]: DateRange,
     [FilterKey.PROJECT]: string,
 };
 

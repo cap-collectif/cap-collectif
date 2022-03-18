@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, Suspense } from 'react';
+import { FC, useEffect, useState, useMemo, Suspense } from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { Flex } from '@cap-collectif/ui';
 import SectionVisitors from './Sections/SectionVisitors/SectionVisitors';
@@ -44,8 +44,10 @@ type DashboardContentProps = {
 
 const DashboardContent: FC<DashboardContentProps> = ({ viewer: viewerFragment }) => {
     const [projectId, setProjectId] = useUrlState('projectId', DEFAULT_FILTERS.projectId);
-    const [startAt, setStartAt] = useUrlState('startAt', DEFAULT_FILTERS.dateRange.startAt);
-    const [endAt, setEndAt] = useUrlState('endAt', DEFAULT_FILTERS.dateRange.endAt);
+    const [dateRange, setDateRange] = useUrlState(
+        'dateRange',
+        JSON.stringify(DEFAULT_FILTERS.dateRange),
+    );
 
     const { viewerSession } = useAppContext();
     const viewer = useFragment(FRAGMENT, viewerFragment);
@@ -76,29 +78,31 @@ const DashboardContent: FC<DashboardContentProps> = ({ viewer: viewerFragment })
         }
     }, [projectId, setProjectId, viewerSession.isAdmin, projects]);
 
+    const contextValue = useMemo(
+        () => ({
+            filters: {
+                dateRange: {
+                    startAt: JSON.parse(dateRange).startAt,
+                    endAt: JSON.parse(dateRange).endAt,
+                },
+                projectId,
+            },
+            setFilters: (key: FilterKey, value: string) => {
+                switch (key) {
+                    case 'dateRange':
+                        return setDateRange(value);
+                    case 'projectId':
+                        return setProjectId(value);
+                }
+            },
+        }),
+        [dateRange, projectId],
+    );
+
     if (!hasProjects) return <DashboardEmptyState />;
 
     return (
-        <DashboardContext.Provider
-            value={{
-                filters: {
-                    dateRange: {
-                        startAt,
-                        endAt,
-                    },
-                    projectId,
-                },
-                setFilters: (key: FilterKey, value: string) => {
-                    switch (key) {
-                        case 'startAt':
-                            return setStartAt(value);
-                        case 'endAt':
-                            return setEndAt(value);
-                        case 'projectId':
-                            return setProjectId(value);
-                    }
-                },
-            }}>
+        <DashboardContext.Provider value={contextValue}>
             <Flex direction="column" px={8} py={6} spacing={8}>
                 <DashboardFilters viewer={viewer} />
 

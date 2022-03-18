@@ -78,12 +78,7 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
     useEffect(() => {
         if (filters.projectId !== 'ALL') {
             const dateRangeProject = getDateRangeProject(projects, filters.projectId);
-
-            new Promise(() => {
-                setFilters(FilterKey.START_AT, dateRangeProject.startAt);
-            }).then(() => {
-                setFilters(FilterKey.END_AT, dateRangeProject.endAt);
-            });
+            setFilters(FilterKey.DATE_RANGE, JSON.stringify(dateRangeProject));
         }
     }, [filters[FilterKey.PROJECT], projects]);
 
@@ -150,15 +145,16 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
                 minDate={canSelectDateOutRange ? undefined : dateRange.startDate}
                 displayFormat="DD/MM/YYYY"
                 onClose={({ startDate, endDate }) => {
-                    if (startDate) {
-                        new Promise(() => {
-                            setFilters(FilterKey.START_AT, startDate.format('MM/DD/YYYY'));
-                        }).then(() => {
-                            if (endDate) setFilters(FilterKey.END_AT, endDate.format('MM/DD/YYYY'));
-                        });
-                    }
+                    const dateRangeUpdated = {
+                        startAt: startDate
+                            ? startDate.format('MM/DD/YYYY')
+                            : dateRange.startDate.format('MM/DD/YYYY'),
+                        endAt: endDate
+                            ? endDate.format('MM/DD/YYYY')
+                            : dateRange.endDate.format('MM/DD/YYYY'),
+                    };
 
-                    if (endDate) setFilters(FilterKey.END_AT, endDate.format('MM/DD/YYYY'));
+                    setFilters(FilterKey.DATE_RANGE, JSON.stringify(dateRangeUpdated));
                 }}
             />
         </Flex>

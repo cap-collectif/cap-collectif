@@ -76,7 +76,7 @@ const SectionParticipations: FC<SectionParticipationsProps> = ({
                         { num: comments?.totalCount ?? 0 },
                     )}
                     count={comments?.totalCount ?? 0}
-                    disabled={comments?.totalCount === 0 || true}
+                    disabled={comments?.totalCount === 0 ?? true}
                     data={comments ? formatValues(comments.values, intl) : []}
                 />
                 <TabsChart.Tab

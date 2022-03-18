@@ -9,45 +9,56 @@ import {
     SpotIcon,
     CapUISpotIcon,
     CapUISpotIconSize,
-    CapUIFontWeight,
 } from '@cap-collectif/ui';
+import Layout from '../../Layout/Layout';
+import Router from 'next/router';
 
-type DashboardErrorProps = {
-    resetErrorBoundary: () => void,
-};
-
-const DashboardError: FC<DashboardErrorProps> = ({ resetErrorBoundary }) => {
+const DashboardError: FC = () => {
     const intl = useIntl();
 
     return (
-        <Flex direction="column" spacing="100px">
-            <Text
-                color="blue.800"
-                {...headingStyles.h4}
-                fontWeight={CapUIFontWeight.Semibold}
-                px={6}
-                py={4}
-                bg="white">
-                {intl.formatMessage({ id: 'dashboard-platform' })}
-            </Text>
-
-            <Flex direction="column" align="flex-start" width="75%" margin="0 auto">
+        <Layout
+            navTitle={intl.formatMessage({ id: 'dashboard-platform' })}
+            navData={[
+                {
+                    label: intl.formatMessage({ id: 'global.project-dynamic' }, { num: 0 }),
+                    number: {
+                        color: 'blue.500',
+                        label: 0,
+                    },
+                },
+                {
+                    label: intl.formatMessage({ id: 'global.in-progress' }),
+                    number: {
+                        color: 'orange.500',
+                        label: 0,
+                    },
+                },
+                {
+                    label: intl.formatMessage({ id: 'global.done-dynamic' }, { num: 0 }),
+                    number: {
+                        color: 'green.500',
+                        label: 0,
+                    },
+                },
+            ]}>
+            <Flex direction="column" align="flex-start" ml="8%" mt="8%">
                 <SpotIcon name={CapUISpotIcon.ERROR} size={CapUISpotIconSize.Lg} mb={2} />
                 <Heading as="h2" uppercase={false} color="blue.900" mb={2}>
                     {intl.formatMessage({ id: 'something-went-wrong' })}
                 </Heading>
-                <Text {...headingStyles.h4} color="blue.900" mb={8}>
+                <Text {...headingStyles.h4} color="blue.900" mb={8} maxWidth="80%">
                     {intl.formatMessage({ id: 'error-message-dashboard' })}
                 </Text>
                 <Button
                     variant="primary"
                     variantColor="primary"
                     variantSize="medium"
-                    onClick={resetErrorBoundary}>
+                    onClick={Router.reload}>
                     {intl.formatMessage({ id: 'button.try.again' })}
                 </Button>
             </Flex>
-        </Flex>
+        </Layout>
     );
 };
 
