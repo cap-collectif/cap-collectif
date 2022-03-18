@@ -14,7 +14,7 @@ chown -R capco:capco /var/www/var
 chown -R capco:capco /var/www/public/export
 
 function test_mysqldatabase {
-   mysqlshow --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=$SYMFONY_DATABASE_PASSWORD ${SYMFONY_DATABASE_NAME:-symfony} > /dev/null
+   mysqlshow --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --port=${SYMFONY_DATABASE_PORT:-3306} --user=${SYMFONY_DATABASE_USER:-root} --password=$SYMFONY_DATABASE_PASSWORD ${SYMFONY_DATABASE_NAME:-symfony} > /dev/null
 }
 
 function test_redis {
