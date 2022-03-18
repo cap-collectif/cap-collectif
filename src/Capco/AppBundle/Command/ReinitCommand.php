@@ -276,6 +276,14 @@ class ReinitCommand extends Command
         }
 
         $this->loadFixtures($output, $this->env);
+
+        if ('prod' === $this->env) {
+            $output->writeln('Start generate map token');
+
+            $this->runCommands(['capco:generate:map-token' => ['provider' => 'MAPBOX']], $output);
+            $output->writeln('End generate map token');
+        }
+
         $output->writeln('<info>Database is ready !</info>');
 
         if (!$input->getOption('no-toggles')) {

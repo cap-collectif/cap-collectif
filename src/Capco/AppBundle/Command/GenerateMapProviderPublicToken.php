@@ -127,10 +127,7 @@ class GenerateMapProviderPublicToken extends Command
             ]);
 
         if (isset($response['token'])) {
-            $provider
-                ->setInitialPublicToken($response['token'])
-                ->setPublicToken($response['token'])
-                ->setSecretToken($this->mapboxSecretKey);
+            $provider->setPublicToken($response['token'])->setSecretToken($this->mapboxSecretKey);
             $this->em->flush();
             $this->io->success(
                 sprintf(
