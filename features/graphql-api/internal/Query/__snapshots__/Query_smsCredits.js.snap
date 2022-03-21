@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.smsCredits should list sms credits 1`] = `
+Object {
+  "smsOrders": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "amount": 5000,
+          "id": "U21zT3JkZXI6c21zT3JkZXIy",
+        },
+      },
+    ],
+  },
+}
+`;

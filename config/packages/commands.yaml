@@ -99,3 +99,7 @@ services:
     Capco\AppBundle\Command\FollowerNotifierCommand:
         arguments:
             $name: 'capco:follower-notifier'
+
+    Capco\AppBundle\Command\SendSmsCreditConsumptionAlertCommand:
+        arguments:
+            $name: 'capco:sms-credit-consumption-alert'

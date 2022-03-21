@@ -1,0 +1,11 @@
+AddSmsCreditPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of addSmsCredit mutation.'
+        fields:
+            smsCredit:
+                type: 'InternalSmsCredit'
+                description: 'The created sms credit.'
+            errorCode:
+                type: 'InternalAddSmsCreditErrorCode'
+                description: 'Available errors for the mutation.'

@@ -1,0 +1,7 @@
+SmsCreditConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalSmsCredit!
+        connectionFields:
+            totalCount:
+                type: Int!

@@ -1,0 +1,15 @@
+InternalSmsAnalytics:
+    type: object
+    config:
+        description: 'Sms analytics.'
+        name: SmsAnalytics
+        fields:
+            remainingCredits:
+                type: 'InternalRemainingSmsCredit!'
+                description: 'The remaining credits.'
+            consumedCredits:
+                type: 'Int!'
+                description: 'The number of verified users.'
+            totalCredits:
+                type: 'Int!'
+                description: 'The total credits purchased.'

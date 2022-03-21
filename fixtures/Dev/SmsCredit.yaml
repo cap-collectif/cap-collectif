@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\SmsCredit:
+    smsCredit1:
+        id: 'smsCredit1'
+        amount: 1000
+        smsOrder: '@smsOrder1'
+        createdAt: <(new \DateTime('2022-02-21 00:00:00'))>
+        updatedAt: <(new \DateTime('2022-02-21 00:00:00'))>

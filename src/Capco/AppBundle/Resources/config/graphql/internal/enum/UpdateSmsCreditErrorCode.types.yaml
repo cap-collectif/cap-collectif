@@ -1,0 +1,9 @@
+UpdateSmsCreditErrorCode:
+    type: enum
+    config:
+        name: UpdateSmsCreditErrorCode
+        description: 'Available errors for an `updateSmsCredit` mutation.'
+        values:
+            SMS_CREDIT_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\UpdateSmsCreditMutation::SMS_CREDIT_NOT_FOUND")'
+                description: 'No `SmsCredit` match your `id`.'

@@ -1,0 +1,8 @@
+DeleteSmsOrderInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteSmsOrder mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the smsOrder to delete.'

@@ -1,0 +1,12 @@
+UpdateSmsCreditInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateSmsCredit mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of smsCredit to update.'
+            amount:
+                type: 'Int!'
+                description: 'The amount of credit to update.'
+

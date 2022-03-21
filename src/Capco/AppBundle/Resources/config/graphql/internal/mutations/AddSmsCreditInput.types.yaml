@@ -1,0 +1,11 @@
+AddSmsCreditInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of addSmsCredit mutation.'
+        fields:
+            amount:
+                type: 'Int!'
+                description: 'The amount to credit.'
+            smsOrder:
+                type: 'ID!'
+                description: 'The order id to process.'

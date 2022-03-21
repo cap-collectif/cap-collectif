@@ -358,3 +358,6 @@ services:
             $deployerBaseUrl: '%deployer_api_url%'
             $instanceName: '%instance_name%'
             $token: '%instance_auth_token%'
+
+    Capco\AppBundle\Service\SmsAnalyticsHelper:
+        autowire: true

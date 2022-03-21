@@ -1,0 +1,12 @@
+InternalRemainingSmsCredit:
+    type: object
+    config:
+        description: 'Sms remaining credits'
+        name: RemainingSmsCredit
+        fields:
+            amount:
+                type: 'Int!'
+                description: 'The remaining amount.'
+            status:
+                type: 'InternalRemainingSmsCreditStatus!'
+                description: 'The status based on the remaining amount'

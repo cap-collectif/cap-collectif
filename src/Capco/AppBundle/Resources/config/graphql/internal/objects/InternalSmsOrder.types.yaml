@@ -1,0 +1,20 @@
+InternalSmsOrder:
+    type: object
+    inherits:
+        - Timestampable
+        - Node
+    config:
+        interfaces:
+            - Node
+        description: 'Sms order.'
+        name: SmsOrder
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                type: 'ID!'
+                builderConfig:
+                    typeName: SmsOrder
+            amount:
+                type: 'Int!'
+                description: 'The amount ordered.'

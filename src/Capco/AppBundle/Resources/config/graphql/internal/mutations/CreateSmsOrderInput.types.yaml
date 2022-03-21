@@ -1,0 +1,8 @@
+CreateSmsOrderInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createSmsOrder mutation.'
+        fields:
+            amount:
+                type: 'Int!'
+                description: 'The sms credit amount ordered.'

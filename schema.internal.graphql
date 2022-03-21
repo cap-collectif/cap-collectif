@@ -611,6 +611,24 @@ type AddProposalsToStepsPayload {
   clientMutationId: String
 }
 
+input AddSmsCreditInput {
+  """The amount to credit."""
+  amount: Int!
+
+  """The order id to process."""
+  smsOrder: ID!
+  clientMutationId: String
+}
+
+type AddSmsCreditPayload {
+  """The created sms credit."""
+  smsCredit: SmsCredit
+
+  """Available errors for the mutation."""
+  errorCode: InternalAddSmsCreditErrorCode
+  clientMutationId: String
+}
+
 input AddSourceInput {
   """The Sourceable ID to source."""
   sourceableId: ID!
@@ -3568,6 +3586,17 @@ type CreateSenderEmailPayload {
   clientMutationId: String
 }
 
+input CreateSmsOrderInput {
+  """The sms credit amount ordered."""
+  amount: Int!
+  clientMutationId: String
+}
+
+type CreateSmsOrderPayload {
+  smsOrder: SmsOrder!
+  clientMutationId: String
+}
+
 """Available errors for an `createTwilioSubAccount` mutation."""
 enum CreateTwilioSubAccountErrorCode {
   """Error occured while calling twilio API."""
@@ -5022,6 +5051,24 @@ type DeleteSenderEmailDomainPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `deleteSmsOrder` mutation."""
+enum DeleteSmsOrderErrorCode {
+  """No `SmsOrder` match your `id`."""
+  SMS_ORDER_NOT_FOUND
+}
+
+input DeleteSmsOrderInput {
+  """The id of the smsOrder to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteSmsOrderPayload {
+  """The error generated, if any."""
+  errorCode: DeleteSmsOrderErrorCode
+  clientMutationId: String
+}
+
 input DeleteSourceInput {
   """The ID to delete."""
   sourceId: ID!
@@ -6365,6 +6412,15 @@ type IdentificationCodeRequirement implements Node & Requirement {
   viewerValue: String
 }
 
+"""Available errors on addSmsCredit mutation."""
+enum InternalAddSmsCreditErrorCode {
+  """The given order is already processed."""
+  ORDER_ALREADY_PROCESSED
+
+  """The given order is not found."""
+  SMS_ORDER_NOT_FOUND
+}
+
 input InviteUsersInput {
   """Set the maximum results to return"""
   maxResults: Int = 100
@@ -7376,6 +7432,10 @@ type Mutation {
   verifyUserPhoneNumber(input: VerifyUserPhoneNumberInput!): VerifyUserPhoneNumberPayload
   updateCustomDomain(input: UpdateCustomDomainInput!): UpdateCustomDomainPayload
   deleteCustomDomain(input: DeleteCustomDomainInput!): DeleteCustomDomainPayload
+  createSmsOrder(input: CreateSmsOrderInput!): CreateSmsOrderPayload
+  deleteSmsOrder(input: DeleteSmsOrderInput!): DeleteSmsOrderPayload
+  addSmsCredit(input: AddSmsCreditInput!): AddSmsCreditPayload
+  updateSmsCredit(input: UpdateSmsCreditInput!): UpdateSmsCreditPayload
   createTwilioSubAccount(input: CreateTwilioSubAccountInput!): CreateTwilioSubAccountPayload
 }
 
@@ -11194,6 +11254,31 @@ type Query {
 
   """Get site settings."""
   siteSettings: SiteSettings
+
+  """Get list of sms orders."""
+  smsOrders(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): SmsOrderConnection!
+
+  """Get list of sms credits."""
+  smsCredits(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): SmsCreditConnection!
+
+  """Get sms analytics"""
+  smsAnalytics: SmsAnalytics!
 }
 
 input QueryAnalyticsFilter {
@@ -11952,6 +12037,30 @@ type RelaunchUserInvitationsPayload {
   """The relaunched invitations edge"""
   relaunchedInvitations: [UserInviteEdge!]!
   clientMutationId: String
+}
+
+"""Sms remaining credits"""
+type RemainingSmsCredit {
+  """The remaining amount."""
+  amount: Int!
+
+  """The status based on the remaining amount"""
+  status: RemainingSmsCreditStatus!
+}
+
+"""Available status for RemainingSmsCredit"""
+enum RemainingSmsCreditStatus {
+  """The remaining amount is over 25% of its last refill."""
+  IDLE
+
+  """The remaining amount is between 25% and 10% of its last refill."""
+  LOW
+
+  """The remaining amount is below 10% of its last refill."""
+  VERY_LOW
+
+  """The remaining amount is equal or below 0% of its last refill"""
+  TOTAL
 }
 
 """Remaining time in days/hours"""
@@ -13564,6 +13673,88 @@ enum SiteSettingsStatus {
 
   """The site redirects correctly to the custom domain."""
   ACTIVE
+}
+
+"""Sms analytics."""
+type SmsAnalytics {
+  """The remaining credits."""
+  remainingCredits: RemainingSmsCredit!
+
+  """The number of verified users."""
+  consumedCredits: Int!
+
+  """The total credits purchased."""
+  totalCredits: Int!
+}
+
+"""Represents a sms transaction."""
+type SmsCredit implements Node {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The ID of an object."""
+  id: ID!
+
+  """The amount credited."""
+  amount: Int!
+}
+
+"""A connection to a list of items."""
+type SmsCreditConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [SmsCreditEdge]
+}
+
+"""An edge in a connection."""
+type SmsCreditEdge {
+  """The item at the end of the edge."""
+  node: SmsCredit!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Sms order."""
+type SmsOrder implements Node {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The ID of an object."""
+  id: ID!
+
+  """The amount ordered."""
+  amount: Int!
+}
+
+"""A connection to a list of items."""
+type SmsOrderConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [SmsOrderEdge]
+}
+
+"""An edge in a connection."""
+type SmsOrderEdge {
+  """The item at the end of the edge."""
+  node: SmsOrder!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """A source"""
@@ -15618,6 +15809,29 @@ type UpdateSiteParameterPayload {
 
   """The error generated, if any."""
   errorCode: UpdateSiteParameterErrorCode
+  clientMutationId: String
+}
+
+"""Available errors for an `updateSmsCredit` mutation."""
+enum UpdateSmsCreditErrorCode {
+  """No `SmsCredit` match your `id`."""
+  SMS_CREDIT_NOT_FOUND
+}
+
+input UpdateSmsCreditInput {
+  """The id of smsCredit to update."""
+  id: ID!
+
+  """The amount of credit to update."""
+  amount: Int!
+  clientMutationId: String
+}
+
+type UpdateSmsCreditPayload {
+  smsCredit: SmsCredit
+
+  """The error generated, if any."""
+  errorCode: UpdateSmsCreditErrorCode
   clientMutationId: String
 }
 

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\SmsCredit;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
@@ -10,6 +11,8 @@ use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\AppBundle\Repository\SmsCreditRepository;
+use Capco\AppBundle\Repository\SmsOrderRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
@@ -62,6 +65,7 @@ class GlobalIdResolver
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
 
+    // since we are calling all repositories it is easier to directly inject the container instead of injecting all repositories one by one.
     public function __construct(
         ContainerInterface $container,
         LoggerInterface $logger,
@@ -170,6 +174,14 @@ class GlobalIdResolver
                     break;
                 case 'DebateArticle':
                     $node = $this->container->get(DebateArticleRepository::class)->find($uuid);
+
+                    break;
+                case 'SmsOrder':
+                    $node = $this->container->get(SmsOrderRepository::class)->find($uuid);
+
+                    break;
+                case SmsCredit::RELAY_NODE_TYPE:
+                    $node = $this->container->get(SmsCreditRepository::class)->find($uuid);
 
                     break;
                 case 'Question':

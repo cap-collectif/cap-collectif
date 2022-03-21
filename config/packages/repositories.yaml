@@ -667,3 +667,21 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:SiteSettings']
+
+    Capco\AppBundle\Repository\SmsOrderRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:SmsOrder']
+
+    Capco\AppBundle\Repository\SmsCreditRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:SmsCredit']
+
+    Capco\AppBundle\Repository\SmsRemainingCreditEmailAlertRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:SmsRemainingCreditEmailAlert']

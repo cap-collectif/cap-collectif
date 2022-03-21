@@ -547,4 +547,21 @@ InternalQuery:
                 description: 'Get site settings.'
                 access: "@hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SiteSettings\\SiteSettingsResolver")'
+            smsOrders:
+                type: 'SmsOrderConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'Get list of sms orders.'
+                access: "@hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsOrdersResolver", [args])'
+            smsCredits:
+                type: 'SmsCreditConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'Get list of sms credits.'
+                access: "@hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsCreditsResolver", [args])'
+            smsAnalytics:
+                type: 'InternalSmsAnalytics!'
+                description: 'Get sms analytics'
+                access: "@hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsAnalyticsResolver", [args])'
 

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.smsAnalytics should query sms analytics 1`] = `
+Object {
+  "smsAnalytics": Object {
+    "consumedCredits": 7,
+    "remainingCredits": Object {
+      "amount": 993,
+      "status": "IDLE",
+    },
+    "totalCredits": 1000,
+  },
+}
+`;

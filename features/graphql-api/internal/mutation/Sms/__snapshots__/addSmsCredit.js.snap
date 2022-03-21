@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addSmsCredit should create an sms credit 1`] = `
+Object {
+  "addSmsCredit": Object {
+    "errorCode": null,
+    "smsCredit": Object {
+      "amount": 5000,
+      "id": Any<String>,
+    },
+  },
+}
+`;
+
+exports[`mutations.addSmsCredit should return ORDER_ALREADY_PROCESSED errorCode 1`] = `
+Object {
+  "addSmsCredit": Object {
+    "errorCode": "ORDER_ALREADY_PROCESSED",
+    "smsCredit": null,
+  },
+}
+`;

@@ -1,0 +1,7 @@
+CreateSmsOrderPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of createSmsOrder mutation.'
+        fields:
+            smsOrder:
+                type: 'InternalSmsOrder!'

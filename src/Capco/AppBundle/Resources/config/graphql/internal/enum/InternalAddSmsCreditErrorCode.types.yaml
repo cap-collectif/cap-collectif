@@ -1,0 +1,12 @@
+InternalAddSmsCreditErrorCode:
+    type: enum
+    config:
+        name: InternalAddSmsCreditErrorCode
+        description: 'Available errors on addSmsCredit mutation.'
+        values:
+            ORDER_ALREADY_PROCESSED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\AddSmsCreditMutation::ORDER_ALREADY_PROCESSED")'
+                description: 'The given order is already processed.'
+            SMS_ORDER_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\AddSmsCreditMutation::SMS_ORDER_NOT_FOUND")'
+                description: 'The given order is not found.'

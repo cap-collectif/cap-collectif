@@ -1167,6 +1167,18 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findByRoleAdminOrSuperAdmin(): array
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->where('u.roles LIKE :roleAdmin OR u.roles LIKE :roleSuperAdmin')
+        ->setParameters([
+            'roleAdmin' => '%ROLE_ADMIN%',
+            'roleSuperAdmin' => '%ROLE_SUPER_ADMIN%',
+        ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
     /**
      * @return string[]
      */
@@ -1500,5 +1512,16 @@ EOF;
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
+    }
+
+    public function countPhoneConfirmedUsers(): int
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->where('u.phoneConfirmed = true')
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+
     }
 }

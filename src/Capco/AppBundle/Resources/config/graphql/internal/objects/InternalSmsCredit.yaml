@@ -1,0 +1,20 @@
+InternalSmsCredit:
+    type: object
+    inherits:
+        - Timestampable
+        - Node
+    config:
+        interfaces:
+            - Node
+        description: 'Represents a sms transaction.'
+        name: SmsCredit
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                type: 'ID!'
+                builderConfig:
+                    typeName: SmsCredit
+            amount:
+                type: 'Int!'
+                description: 'The amount credited.'

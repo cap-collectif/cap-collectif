@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateSmsCredit should return SMS_CREDIT_NOT_FOUND errorCode 1`] = `
+Object {
+  "updateSmsCredit": Object {
+    "errorCode": "SMS_CREDIT_NOT_FOUND",
+    "smsCredit": null,
+  },
+}
+`;
+
+exports[`mutations.updateSmsCredit should update an sms credit 1`] = `
+Object {
+  "updateSmsCredit": Object {
+    "errorCode": null,
+    "smsCredit": Object {
+      "amount": 10000,
+    },
+  },
+}
+`;

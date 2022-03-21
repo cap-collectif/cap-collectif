@@ -1,0 +1,8 @@
+DeleteSmsOrderPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of deleteSmsOrder mutation.'
+        fields:
+            errorCode:
+                type: 'DeleteSmsOrderErrorCode'
+                description: 'The error generated, if any.'

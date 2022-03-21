@@ -1475,6 +1475,34 @@ InternalMutation:
                     inputType: DeleteCustomDomainInput
                     payloadType: DeleteCustomDomainPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteCustomDomainMutation", [value])'
+            createSmsOrder:
+                access: '@=hasRole("ROLE_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateSmsOrderInput
+                    payloadType: CreateSmsOrderPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\CreateSmsOrderMutation", [value])'
+            deleteSmsOrder:
+                access: '@=hasRole("ROLE_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteSmsOrderInput
+                    payloadType: DeleteSmsOrderPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\DeleteSmsOrderMutation", [value, getUser()])'
+            addSmsCredit:
+                access: '@=hasRole("ROLE_SUPER_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddSmsCreditInput
+                    payloadType: AddSmsCreditPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\AddSmsCreditMutation", [value, getUser()])'
+            updateSmsCredit:
+                access: '@=hasRole("ROLE_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateSmsCreditInput
+                    payloadType: UpdateSmsCreditPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\UpdateSmsCreditMutation", [value, getUser()])'
             createTwilioSubAccount:
                 access: '@=hasRole("ROLE_ADMIN")'
                 builder: 'Relay::Mutation'

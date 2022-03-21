@@ -1,0 +1,13 @@
+Capco\AppBundle\Entity\SmsOrder:
+    smsOrder1:
+        id: 'smsOrder1'
+        amount: 1000
+        isProcessed: true
+        createdAt: <(new \DateTime('2022-02-21 00:00:00'))>
+        updatedAt: <(new \DateTime('2022-02-21 00:00:00'))>
+    smsOrder2:
+        id: 'smsOrder2'
+        amount: 5000
+        isProcessed: false
+        createdAt: <(new \DateTime('2022-02-25 00:00:00'))>
+        updatedAt: <(new \DateTime('2022-02-25 00:00:00'))>

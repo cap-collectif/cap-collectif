@@ -7,6 +7,8 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\SmsCredit;
+use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
@@ -281,6 +283,14 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof DebateArticle) {
             return $this->typeResolver->resolve('InternalDebateArticle');
+        }
+
+        if ($node instanceof SmsOrder) {
+            return $this->typeResolver->resolve('InternalSmsOrder');
+        }
+
+        if ($node instanceof SmsCredit) {
+            return $this->typeResolver->resolve('InternalSmsCredit');
         }
 
         throw new UserError('Could not resolve type of Node.');

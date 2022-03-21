@@ -14,6 +14,11 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalNewsUpdateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionRevisedMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeMessage;
+use Capco\AppBundle\Mailer\Message\Sms\AlertSmsConsumedCreditMessage;
+use Capco\AppBundle\Mailer\Message\Sms\CreateSmsOrderMessage;
+use Capco\AppBundle\Mailer\Message\Sms\InitialSmsCreditMessage;
+use Capco\AppBundle\Mailer\Message\Sms\RefillSmsCreditMessage;
+use Capco\AppBundle\Mailer\Message\Sms\RefillSmsOrderMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
 use Capco\AppBundle\Mailer\Message\UserInvite\UserInviteNewInvitation;
 
@@ -35,6 +40,11 @@ final class MessagesList
         'user_account_confirmation_reminder_message' =>
             UserAccountConfirmationReminderMessage::class,
         'user_invitation' => UserInviteNewInvitation::class,
+        'create_sms_order' => CreateSmsOrderMessage::class,
+        'initial_sms_credit' => InitialSmsCreditMessage::class,
+        'refill_sms_order' => RefillSmsOrderMessage::class,
+        'refill_sms_credit' => RefillSmsCreditMessage::class,
+        'alert_sms_consumed_credit' => AlertSmsConsumedCreditMessage::class,
     ];
     public const TEMPLATE_LIST = [
         'event_create_admin' => EventCreateAdminMessage::TEMPLATE,
@@ -52,5 +62,10 @@ final class MessagesList
         'user_account_confirmation_reminder_message' =>
             UserAccountConfirmationReminderMessage::TEMPLATE,
         'user_invitation' => UserInviteNewInvitation::TEMPLATE,
+        'create_sms_order' => CreateSmsOrderMessage::TEMPLATE,
+        'initial_sms_credit' => InitialSmsCreditMessage::TEMPLATE,
+        'refill_sms_order' => RefillSmsOrderMessage::TEMPLATE,
+        'refill_sms_credit' => RefillSmsCreditMessage::TEMPLATE,
+        'alert_sms_consumed_credit' => AlertSmsConsumedCreditMessage::TEMPLATE,
     ];
 }

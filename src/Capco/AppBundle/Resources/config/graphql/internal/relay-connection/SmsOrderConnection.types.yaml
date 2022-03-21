@@ -1,0 +1,7 @@
+SmsOrderConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalSmsOrder!
+        connectionFields:
+            totalCount:
+                type: Int!
