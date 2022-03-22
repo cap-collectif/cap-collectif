@@ -251,11 +251,6 @@
         "symfony-var-dir": "var",
         "symfony-public-dir": "public"
     },
-    "scripts": {
-        "post-install-cmd": [
-            "php -r \"shell_exec('cp -R app/config/simplesamlphp vendor/simplesamlphp');\""
-        ]
-    },
     "replace": {
         "symfony/polyfill-php54": "*",
         "symfony/polyfill-php55": "*",

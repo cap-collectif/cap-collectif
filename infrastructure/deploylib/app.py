@@ -54,10 +54,6 @@ SYMFONY_ASSETS_HOST={asset_host}""" \
 def prepare_php(environment='dev'):
     "Prepare PHP"
     run('composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress')
-    run('rm -rf vendor/simplesamlphp/simplesamlphp/config/*')
-    run('rm -rf vendor/simplesamlphp/simplesamlphp/metadata/*')
-    run('rm -rf vendor/simplesamlphp/simplesamlphp/cert')
-    run('cp -R app/config/simplesamlphp vendor/simplesamlphp')
     run('php -d memory_limit=-1 bin/console graphql:compile')
     run('composer dump-autoload --optimize --apcu')
     run('php -d memory_limit=-1 bin/console cache:warmup --no-optional-warmers --env=' + environment)

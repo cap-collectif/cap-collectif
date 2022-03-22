@@ -178,7 +178,6 @@ RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --ignore
 COPY bin /var/www/bin
 COPY translations /var/www/translations
 COPY public /var/www/public
-COPY app /var/www/app
 COPY src /var/www/src
 COPY assets /var/www/assets
 COPY frontend /var/www/frontend
@@ -198,11 +197,7 @@ RUN mkdir -m 755 -p translations var public/media public/bundles src/Capco/AppBu
 # /!\
 
 # Build autoloader and initialize Symfony
-RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
-    && rm -rf vendor/simplesamlphp/simplesamlphp/metadata/* \
-    && rm -rf vendor/simplesamlphp/simplesamlphp/cert \
-    && cp -r app/config/simplesamlphp /var/www/vendor/simplesamlphp \
-    && gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
+RUN gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
     && gosu capco composer dump-autoload --no-dev --optimize --apcu \
     && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
     && gosu capco php bin/console assets:install public --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction

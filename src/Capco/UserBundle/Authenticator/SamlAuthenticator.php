@@ -34,11 +34,11 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
 
     public function getAuthenticationAttribute(): string
     {
-        if ('daher' === $this->samlIdp) {
-            return 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn';
+        if ('dev' === $this->samlIdp) {
+            return 'https://samltest.id/attributes/role';
         }
 
-        if ('grandest-preprod' === $this->samlIdp || 'grandest' === $this->samlIdp) {
+        if ('grandest' === $this->samlIdp) {
             return 'email';
         }
 
@@ -52,10 +52,6 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
 
         if ('sorbonne' === $this->samlIdp) {
             return 'mail';
-        }
-
-        if ('dev' === $this->samlIdp) {
-            return 'https://samltest.id/attributes/role';
         }
 
         throw new \Exception('Could not find authentication attribute for idp: ' . $this->samlIdp);

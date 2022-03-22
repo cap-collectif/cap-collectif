@@ -303,7 +303,6 @@ RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --ignore
 COPY bin /var/www/bin
 COPY translations /var/www/translations
 COPY public /var/www/public
-COPY app /var/www/app
 COPY src /var/www/src
 COPY assets /var/www/assets
 COPY frontend /var/www/frontend
@@ -325,7 +324,7 @@ ENV SYMFONY_DEBUG false
 
 # Maybe chown before copy will be faster
 RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/__generated__ \
-    && chown -R capco:capco bin translations src public app templates config fixtures admin-next \
+    && chown -R capco:capco bin translations src public templates config fixtures admin-next \
     && mkdir -p var/cache/prod \
     && mkdir -p var/cache/prod/translations \
     && chmod -R 777 var \
@@ -392,11 +391,7 @@ ENV SYMFONY_LOGPUSH_ELASTICSEARCH_USERNAME=$SYMFONY_LOGPUSH_ELASTICSEARCH_USERNA
 ENV SYMFONY_LOGPUSH_ELASTICSEARCH_PASSWORD=$SYMFONY_LOGPUSH_ELASTICSEARCH_PASSWORD
 
 # Build autoloader and initialize Symfony
-RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
-    && rm -rf vendor/simplesamlphp/simplesamlphp/metadata/* \
-    && rm -rf vendor/simplesamlphp/simplesamlphp/cert \
-    && cp -r app/config/simplesamlphp /var/www/vendor/simplesamlphp \
-    && gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
+RUN gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
     && gosu capco composer dump-autoload --no-dev --optimize --apcu \
     && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
     && gosu capco php bin/console assets:install public --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction

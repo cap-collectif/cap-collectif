@@ -35,7 +35,6 @@ class SamlUserProvider implements UserProviderInterface
                 $user = $this->userManager->createUser();
                 $user->setSamlId($id);
                 $user->setUsername($id);
-                // for daher, afd-interne, pole-emploi the id is the email
                 $email = $id;
 
                 // If the id is not a valid email, we create a fake one...

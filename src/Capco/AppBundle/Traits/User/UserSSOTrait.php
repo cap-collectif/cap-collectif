@@ -36,21 +36,7 @@ trait UserSSOTrait
 
     public function setSamlAttributes(string $idp, array $attributes): void
     {
-        if ('daher' === $idp) {
-            $this->setUsername(
-                $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
-            );
-            $this->setEmail(
-                $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
-            );
-            $this->setEmailCanonical(
-                (new Canonicalizer())->canonicalize(
-                    $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
-                )
-            );
-        }
-
-        if ('grandest-preprod' === $idp || 'grandest' === $idp) {
+        if ('grandest' === $idp) {
             $this->setUsername($attributes['prenom'][0]);
             $this->setEmail($attributes['email'][0]);
             $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['email'][0]));
