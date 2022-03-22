@@ -830,7 +830,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud17:
         question: '@simplequestion2'
         reply: '@replyTagCloud9'
-        value: ***REMOVED***
+        value: Le sport c'est cool
         createdAt: <(new \DateTime('2021-01-01 04:19:00'))>
     responseTagCloud18:
         question: '@xQuestion1'

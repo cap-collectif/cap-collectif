@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Migrations;
 
-use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
-use Capco\AppBundle\Helper\EnvHelper;
 use Capco\AppBundle\Toggle\Manager;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
@@ -41,28 +39,5 @@ final class Version20220125142127 extends AbstractMigration implements Container
         $this->addSql(
             'ALTER TABLE sso_configuration DROP cas_version, DROP cas_server_url, DROP cas_certificate_file'
         );
-    }
-
-    public function postUp(Schema $schema): void
-    {
-        if ($this->manager->isActive('login_cas')) {
-            $casConfiguration = new CASSSOConfiguration();
-            $casConfiguration->setCasVersion(2);
-            $casConfiguration->setCasServerUrl(
-                (EnvHelper::get('SYMFONY_PHPCAS_CONFIG_HOST') ?? '***REMOVED***') .
-                    ':' .
-                    (EnvHelper::get('SYMFONY_PHPCAS_CONFIG_PORT') ?? '80') .
-                    (EnvHelper::get('SYMFONY_PHPCAS_CONFIG_CONTEXT') ?? '/')
-            );
-            $casConfiguration->setCasCertificateFile(
-                EnvHelper::get('SYMFONY_PHPCAS_CERTIFICATE_FILE') ?? ''
-            );
-            $casConfiguration->setName(
-                'capcapeb' === EnvHelper::get('SYMFONY_INSTANCE_NAME') ? 'capeb' : 'cas'
-            );
-            $casConfiguration->setEnabled(true);
-            $this->em->persist($casConfiguration);
-            $this->em->flush();
-        }
     }
 }

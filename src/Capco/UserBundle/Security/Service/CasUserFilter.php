@@ -18,38 +18,24 @@ class CasUserFilter
 {
     const COLLABORATOR_LABEL = 'C';
     const ELECTED_LABEL = 'E';
-    /**
-     * @var Client
-     */
+
     private Client $client;
-
-    /**
-     * @var LoggerInterface
-     */
     private LoggerInterface $logger;
+    private ?string $url = null;
 
-    /**
-     * @var string
-     */
-    private string $url;
-
-    /**
-     * @param LoggerInterface $logger
-     * @param string $url
-     */
-    public function __construct(LoggerInterface $logger, string $url)
+    public function __construct(LoggerInterface $logger, ?string $url)
     {
         $this->client = new Client();
         $this->logger = $logger;
         $this->url = $url;
     }
 
-    /**
-     * @param string $username
-     * @return bool
-     */
     public function isNotAuthorizedCasUserProfile(string $username): bool
     {
+        if (!$this->url) {
+            return false;
+        }
+
         try {
             $response = $this->client->post( $this->url, [
                 'headers' => [
@@ -66,7 +52,6 @@ class CasUserFilter
             if(key_exists('role', $attributes) && !in_array($attributes['role'], [self::COLLABORATOR_LABEL, self::ELECTED_LABEL]))
             {
                 $this->logger->error('Cas user "'. $username . '" has not authorized role : ' . json_encode($attributes['role']));
-
                 return true;
             }
 

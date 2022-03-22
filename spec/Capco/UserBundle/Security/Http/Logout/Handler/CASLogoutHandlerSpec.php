@@ -47,9 +47,7 @@ class CASLogoutHandlerSpec extends ObjectBehavior
 
         $expectedRedirectResponseWithRequest
             ->getResponse()
-            ->setTargetUrl(
-                'https://ppd-***REMOVED***/cas/logout?' . http_build_query($parameters, '', '&')
-            );
+            ->setTargetUrl('https://CAS_URL/cas/logout?' . http_build_query($parameters, '', '&'));
 
         $this->handle($dummyRedirectResponseWithRequest)->shouldReturn(
             $expectedRedirectResponseWithRequest
@@ -78,7 +76,7 @@ class CASLogoutHandlerSpec extends ObjectBehavior
 
         $expectedRedirectResponseWithRequest
             ->getResponse()
-            ->setTargetUrl('https://ppd-***REMOVED***/cas/logout');
+            ->setTargetUrl('https://CAS_URL/cas/logout');
 
         $this->handle($dummyRedirectResponseWithRequest)->shouldReturn(
             $expectedRedirectResponseWithRequest

@@ -16,30 +16,27 @@ class CasUserFilterSpec extends ObjectBehavior
     {
         // create a mock and queue two responses.
         $mock = new MockHandler([
-            new Response(200,  ['Content-Type' => 'application/xml'], 'false'),
-            new Response(200,  ['Content-Type' => 'application/xml'], 'false'),
+            new Response(200, ['Content-Type' => 'application/xml'], 'false'),
+            new Response(200, ['Content-Type' => 'application/xml'], 'false'),
         ]);
 
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
         // The first request is intercepted with the first response.
-        $client->post('***REMOVED***', [
+        $client->post('https://CAS_URL/WebService/call', [
             'verify' => false, // deactivate ssl verification because server certificate not valid put it true otherwise
             'body' => '<IdentificationRequest>
                               <login>RomaneA</login>
-                          </IdentificationRequest>'
-
+                          </IdentificationRequest>',
         ]);
         // The second request is intercepted with the second response.
-        $client->post('***REMOVED***', [
+        $client->post('https://CAS_URL/WebService/call', [
             'verify' => false, // deactivate ssl verification because server certificate not valid put it true otherwise
             'body' => '<IdentificationRequest>
                               <login>HUV76</login>
-                          </IdentificationRequest>'
-
+                          </IdentificationRequest>',
         ]);
-
     }
 
     public function it_is_initializable()
@@ -49,8 +46,7 @@ class CasUserFilterSpec extends ObjectBehavior
 
     public function let(LoggerInterface $logger)
     {
-        $url = '***REMOVED***';
+        $url = 'https://CAS_URL/WebService/call';
         $this->beConstructedWith($logger, $url);
     }
-
 }

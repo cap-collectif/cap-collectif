@@ -22,7 +22,7 @@ Capco\AppBundle\Entity\FooterSocialNetwork:
 
   FooterSocialNetwork4:
     title: Google+
-    link: ***REMOVED***
+    link: https://plus.google.com
     position: 4
     isEnabled: true
     style: gplus
