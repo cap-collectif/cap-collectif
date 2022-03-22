@@ -1,178 +1,110 @@
 // @flow
 import * as React from 'react';
-import { Field, reduxForm, submit } from 'redux-form';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedHTMLMessage, FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
-import component from '~/components/Form/Field';
-import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
-import type { RegisterForm_user } from '~relay/RegisterForm_user.graphql';
-import type { RegisterForm_event } from '~relay/RegisterForm_event.graphql';
-import type { Dispatch } from '~/types';
-import SubmitButton from '~/components/Form/SubmitButton';
-import { FormContainer, UserInfo } from './RegisterForm.style';
+import { toast, Button } from '@cap-collectif/ui';
+import { useIntl, type IntlShape } from 'react-intl';
+import { graphql, useFragment } from 'react-relay';
+import { useSelector } from 'react-redux';
+import type { RegisterForm_query$key } from '~relay/RegisterForm_query.graphql';
 import SubscribeToEventAsRegisteredMutation from '~/mutations/SubscribeToEventAsRegisteredMutation';
-import SubscribeToEventAsNonRegisteredMutation from '~/mutations/SubscribeToEventAsNonRegisteredMutation';
-import { toast } from '~ds/Toast';
-
-const formName = 'RegisterFormEvent';
+import type { GlobalState } from '~/types';
+import { getTranslation } from '~/services/Translation';
+import EventFormAnonymousModal from './EventFormAnonymousModal';
 
 type Props = {|
-  ...ReduxFormFormProps,
-  user?: RegisterForm_user,
-  event: RegisterForm_event,
-  onClose: () => void,
-  intl: IntlShape,
+  queryRef: RegisterForm_query$key,
 |};
 
-type Values = {|
-  privacyPolicy: boolean,
-|};
-
-const validate = ({ privacyPolicy }: Values) => {
-  const errors = {};
-
-  if (!privacyPolicy) {
-    errors.privacyPolicy = 'global.required';
+const FRAGMENT = graphql`
+  fragment RegisterForm_query on Query
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, eventId: { type: "ID!" }) {
+    event: node(id: $eventId) {
+      ... on Event {
+        id
+        translations {
+          locale
+          link
+        }
+      }
+    }
+    viewer @include(if: $isAuthenticated) {
+      id
+    }
   }
+`;
 
-  return errors;
-};
-
-const onSubmit = (values, dispatch: Dispatch, props: Props) => {
-  if (props.user) {
-    const input = {
-      eventId: props.event.id,
-      private: values.private,
-    };
-
-    return SubscribeToEventAsRegisteredMutation.commit({
-      input,
-      isAuthenticated: true,
-    })
-      .then(() => {
-        toast({
-          variant: 'success',
-          content: props.intl.formatHTMLMessage({
-            id: 'event_registration.create.register_success',
-          }),
-        });
-      })
-      .catch(() => {
-        toast({
-          variant: 'danger',
-          content: props.intl.formatHTMLMessage({ id: 'global.error.server.form' }),
-        });
-      });
-  }
-
+const onSubmit = (values: { eventId: string }, intl: IntlShape) => {
   const input = {
-    eventId: props.event.id,
-    email: values.email,
-    username: values.username,
-    private: values.private,
+    eventId: values.eventId,
+    private: false,
   };
 
-  return SubscribeToEventAsNonRegisteredMutation.commit({
+  return SubscribeToEventAsRegisteredMutation.commit({
     input,
-    isAuthenticated: false,
+    isAuthenticated: true,
   })
     .then(() => {
-      const { onClose } = props;
       toast({
         variant: 'success',
-        content: props.intl.formatHTMLMessage({ id: 'event_registration.create.register_success' }),
+        content: intl.formatHTMLMessage({
+          id: 'event_registration.create.register_success',
+        }),
       });
-      props.reset();
-      if (onClose) {
-        onClose();
-      }
     })
     .catch(() => {
       toast({
         variant: 'danger',
-        content: props.intl.formatHTMLMessage({ id: 'global.error.server.form' }),
+        content: intl.formatHTMLMessage({ id: 'global.error.server.form' }),
       });
     });
 };
 
-export const RegisterForm = ({
-  user,
-  event,
-  dispatch,
-  handleSubmit,
-  invalid,
-  pristine,
-  submitting,
-}: Props) => {
-  return (
-    <FormContainer onSubmit={handleSubmit} id={formName}>
-      {user ? (
-        <UserInfo>
-          <UserAvatarLegacy user={user} /> {user.username}
-        </UserInfo>
-      ) : (
-        <>
-          <Field
-            type="text"
-            name="username"
-            id="username"
-            label={<FormattedMessage id="global.name" />}
-            component={component}
-          />
+export const RegisterForm = ({ queryRef }: Props) => {
+  const [isAnonymouslyRegistered, setIsAnonymouslyRegistered] = React.useState(false);
+  const query = useFragment(FRAGMENT, queryRef);
+  const intl = useIntl();
+  const { currentLanguage } = useSelector((state: GlobalState) => state.language);
 
-          <Field
-            type="text"
-            name="email"
-            id="email"
-            label={<FormattedMessage id="global.email" />}
-            component={component}
-          />
-        </>
-      )}
+  if (!query) return null;
+  const { event, viewer } = query;
+  if (!event || !event.id) return null;
 
-      <div>
-        <Field type="checkbox" name="private" id="private" component={component}>
-          <FormattedMessage id="make-my-registration-anonymous" />
-        </Field>
+  const { id, translations } = event;
 
-        <Field type="checkbox" name="privacyPolicy" id="privacyPolicy" component={component}>
-          <FormattedHTMLMessage
-            id={
-              event.adminAuthorizeDataTransfer
-                ? 'privacy-policy-accepted-2'
-                : 'privacy-policy-accepted'
-            }
-          />
-        </Field>
-      </div>
+  const translation = translations ? getTranslation(translations, currentLanguage) : undefined;
+  const link = translation?.link || undefined;
 
-      <SubmitButton
+  if (viewer || link)
+    return (
+      <Button
+        as={link ? 'a' : 'button'}
+        href={link || undefined}
+        target={link ? '_blank' : undefined}
+        variantColor="primary"
+        variant="primary"
+        variantSize="big"
         label="event_registration.create.register"
-        onSubmit={() => dispatch(submit(formName))}
-        bsStyle="success"
-        disabled={pristine || invalid || submitting}
-      />
-    </FormContainer>
+        onClick={link ? () => {} : () => onSubmit({ eventId: id }, intl)}
+        disabled={false}
+        width={['100%', 'auto']}
+        justifyContent="center">
+        {intl.formatMessage({ id: 'global.register' })}
+      </Button>
+    );
+
+  return isAnonymouslyRegistered ? (
+    <Button
+      variantColor="primary"
+      variant="primary"
+      variantSize="big"
+      label="event_registration.create.register"
+      width={['100%', 'auto']}
+      justifyContent="center"
+      disabled>
+      {intl.formatMessage({ id: 'admin.fields.event_registration.registered' })}
+    </Button>
+  ) : (
+    <EventFormAnonymousModal eventId={id} register={() => setIsAnonymouslyRegistered(true)} />
   );
 };
 
-const form = reduxForm({
-  validate,
-  onSubmit,
-  form: formName,
-})(RegisterForm);
-
-export default createFragmentContainer(injectIntl(form), {
-  user: graphql`
-    fragment RegisterForm_user on User {
-      username
-      ...UserAvatarLegacy_user
-    }
-  `,
-  event: graphql`
-    fragment RegisterForm_event on Event {
-      id
-      adminAuthorizeDataTransfer
-    }
-  `,
-});
+export default RegisterForm;

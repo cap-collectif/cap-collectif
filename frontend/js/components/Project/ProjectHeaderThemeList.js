@@ -1,31 +1,27 @@
 // @flow
 import * as React from 'react';
-import { graphql, useFragment } from 'react-relay';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import type { StyledComponent } from 'styled-components';
-import { Button, Modal } from '@cap-collectif/ui'
-import type { ProjectHeaderThemeList_project$key } from '~relay/ProjectHeaderThemeList_project.graphql';
+import { Button, Modal } from '@cap-collectif/ui';
 import ProjectHeader from '~ui/Project/ProjectHeader';
 import colors from '~/styles/modules/colors';
 import ListGroupFlush from '~ui/List/ListGroupFlush';
 
-const FRAGMENT = graphql`
-  fragment ProjectHeaderThemeList_project on Project {
-    themes {
-      title
-      url
-      id
-    }
-    archived
-  }
-`;
+type Themes = $ReadOnlyArray<{|
+  +title: string,
+  +url: string,
+  +id: string,
+|}>;
+
 export type Props = {|
-  +project: ProjectHeaderThemeList_project$key,
+  +isArchived?: boolean,
   +breakingNumber: number,
+  +themes: Themes,
+  +eventView?: boolean,
 |};
 
 export const ThemesButton: StyledComponent<
@@ -42,18 +38,28 @@ const Theme = styled(ProjectHeader.Info.Theme)`
     color: ${props => props.color};
   }
 `;
-const ProjectHeaderThemeList = ({ project, breakingNumber }: Props): React.Node => {
+const ProjectHeaderThemeList = ({
+  themes,
+  breakingNumber,
+  isArchived,
+  eventView,
+}: Props): React.Node => {
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
-  const data = useFragment(FRAGMENT, project);
   const hoverColor = useSelector(state => state.default.parameters['color.link.hover']);
 
-  if (!!data.themes && data.themes?.length > 0) {
-    if (data.themes?.length <= breakingNumber) {
+  if (!!themes && themes?.length > 0) {
+    if (themes?.length <= breakingNumber) {
       return (
         <>
-          {data.themes?.map(theme => (
-            <Theme color={hoverColor} key={theme.id} href={theme.url} content={theme.title} />
+          {themes?.map(theme => (
+            <Theme
+              color={hoverColor}
+              key={theme.id}
+              href={theme.url}
+              content={theme.title}
+              eventView={eventView}
+            />
           ))}
         </>
       );
@@ -63,36 +69,35 @@ const ProjectHeaderThemeList = ({ project, breakingNumber }: Props): React.Node 
         <ThemesButton
           content={
             <>
-              {data.themes[0]?.title}{' '}
+              {themes[0]?.title}{' '}
               <FormattedMessage
                 id="and-count-other-themes"
                 values={{
-                  count: data.themes.length - 1,
+                  count: themes.length - 1,
                 }}
               />
             </>
           }
           onClick={onOpen}
           className="p-0 data-districts__modal-link"
-          archived={data.archived}
+          archived={!!isArchived}
         />
         <Modal
           show={isOpen}
           onClose={onClose}
-          ariaLabel={intl.formatMessage({ id: 'data_theme_list' })}
-          baseId="theme-modal"
-        >
+          ariaLabel={intl.formatMessage({ id: 'theme_list' })}
+          baseId="theme-modal">
           <Modal.Header>
             <FormattedMessage
               id="count-themes"
               values={{
-                count: data.themes?.length,
+                count: themes?.length,
               }}
             />
           </Modal.Header>
           <Modal.Body>
             <ListGroupFlush>
-              {data.themes?.map(theme => (
+              {themes?.map(theme => (
                 <ListGroupItem>
                   <a key={theme.id} href={theme.url}>
                     {theme.title}

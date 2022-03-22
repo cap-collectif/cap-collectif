@@ -23,7 +23,6 @@ export const EventImageContainer: StyledComponent<{}, {}, HTMLDivElement> = styl
   flex: auto;
   overflow: hidden;
   ${MAIN_BORDER_RADIUS};
-
   svg,
   path {
     position: absolute;

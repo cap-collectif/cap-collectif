@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventDeleteModal /> should render correctly 1`] = `
+Array [
+  <button
+    aria-controls="id-g"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL sc-lcepkR dsJymO imMyBh cap-button"
+    id="btn-delete-event"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
+  >
+    global.delete
+  </button>,
+  <div
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+]
+`;

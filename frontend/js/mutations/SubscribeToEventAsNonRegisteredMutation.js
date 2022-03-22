@@ -8,17 +8,12 @@ import type {
 } from '~relay/SubscribeToEventAsNonRegisteredMutation.graphql';
 
 const mutation = graphql`
-  mutation SubscribeToEventAsNonRegisteredMutation(
-    $input: SubscribeToEventAsNonRegisteredInput!
-    $isAuthenticated: Boolean!
-  ) {
+  mutation SubscribeToEventAsNonRegisteredMutation($input: SubscribeToEventAsNonRegisteredInput!) {
     subscribeToEventAsNonRegistered(input: $input) {
       event {
         participants {
           totalCount
         }
-        ...ModalParticipantList_event
-        ...ParticipantList_event @arguments(isAuthenticated: $isAuthenticated)
       }
     }
   }

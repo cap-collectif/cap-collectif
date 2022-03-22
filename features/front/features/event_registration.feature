@@ -34,14 +34,6 @@ Scenario: Anonymous wants to register an event with existing email
   Then I should see "event_registration.create.listed_email" in the '#main' element
 
 @database
-Scenario: logged user wants to register an event anonymously
-  Given I am logged in as user
-  And I go to event page with slug "event-without-registrations"
-  And I check element "capco_event_registration_private"
-  When I press "event_registration.create.register"
-  Then I should see "global.anonymous" in the "#eventRegistrationModal" element
-
-@database
 Scenario: logged user wants to register an event
   Given I am logged in as user
   And I go to event page with slug "event-without-registrations"

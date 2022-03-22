@@ -11,6 +11,7 @@ import useIsMobile from '~/utils/hooks/useIsMobile';
 import Play from './SVG/Play';
 import { type Props as IconProps } from '~ds/Icon/Icon';
 import { type Props as AvatarGroupProps } from '~ds/AvatarGroup/AvatarGroup';
+import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
 
 const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
   const backgroundColor = useSelector(state => state.default.parameters['color.btn.primary.bg']);
@@ -208,13 +209,15 @@ type AuthorsProps = {|
     +username: ?string,
     +url: string,
     +avatarUrl: ?string,
-  |}>,
+  |}> | null,
 |};
 
 export const Authors = ({ children, active, onClick, authors, ...rest }: AuthorsProps) => {
   const isMobile = useIsMobile();
   const hoverColor = useSelector(state => state.default.parameters['color.link.hover']);
   const intl = useIntl();
+
+  if (!authors) return null;
 
   const getTextValue = (): string => {
     const remainingAuthorsLength = authors.length - 1;
@@ -443,23 +446,29 @@ Info.Location = Location;
 type ThemeProps = {|
   content: string,
   href: string,
+  eventView?: boolean,
 |};
-const Theme = ({ content, href, ...rest }: ThemeProps) => (
+const Theme = ({ content, href, eventView, ...rest }: ThemeProps) => (
   <Box
     className="projectHeader__info__theme"
     display="flex"
     flexDirection="row"
     justifyContent="flex-start"
     alignItems="center"
-    paddingRight={2}
+    paddingRight={eventView ? 7 : 2}
     marginBottom={0}
     as="a"
     href={href}
     {...rest}>
-    <Icon color="neutral-gray.500" size="md" name="FOLDER_O" marginLeft="-3px" />
+    <Icon
+      color="neutral-gray.500"
+      size="md"
+      name="FOLDER_O"
+      marginLeft={eventView ? undefined : '-3px'}
+    />
     <Text
       className="platform__body"
-      fontSize={[1, 2]}
+      fontSize={eventView ? undefined : [1, 2]}
       lineHeight="sm"
       fontWeight="normal"
       color="gray.900"
@@ -471,6 +480,7 @@ const Theme = ({ content, href, ...rest }: ThemeProps) => (
 Info.Theme = Theme;
 
 type SocialsProps = {|
+  ...AppBoxProps,
   children: React.Node,
 |};
 

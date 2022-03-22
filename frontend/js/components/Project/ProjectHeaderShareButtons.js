@@ -7,20 +7,27 @@ import ProjectHeader from '~ui/Project/ProjectHeader';
 import share from '~/utils/share';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import ResetCss from '~/utils/ResetCss';
+import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
 
 export type Props = {|
+  ...AppBoxProps,
   +url: string,
   +title: string,
 |};
 
-const ProjectHeaderShareButtons = ({ url, title }: Props): React.Node => {
+const ProjectHeaderShareButtons = ({ url, title, ...rest }: Props): React.Node => {
   const hasShareButtons = useFeatureFlag('share_buttons');
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
 
   const renderModal = () => {
     return (
-      <Modal baseId="project-header-share-buttons-modal" show={isOpen} onClose={onClose} ariaLabel={intl.formatMessage({ id: 'share.link' })} size={CapUIModalSize.Lg}>
+      <Modal
+        baseId="project-header-share-buttons-modal"
+        show={isOpen}
+        onClose={onClose}
+        ariaLabel={intl.formatMessage({ id: 'share.link' })}
+        size={CapUIModalSize.Lg}>
         <ResetCss>
           <Modal.Header>
             <Heading>{intl.formatMessage({ id: 'share.link' })}</Heading>
@@ -44,7 +51,7 @@ const ProjectHeaderShareButtons = ({ url, title }: Props): React.Node => {
     return null;
   }
   return (
-    <ProjectHeader.Socials>
+    <ProjectHeader.Socials {...rest}>
       <ProjectHeader.Social
         href="#"
         onClick={(event: Event) => {

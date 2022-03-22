@@ -18,9 +18,6 @@ const mutation = graphql`
           totalCount
         }
         isViewerParticipatingAtEvent @include(if: $isAuthenticated)
-        ...ModalEventRegister_event @arguments(isAuthenticated: $isAuthenticated)
-        ...ModalParticipantList_event
-        ...ParticipantList_event @arguments(isAuthenticated: $isAuthenticated)
       }
     }
   }

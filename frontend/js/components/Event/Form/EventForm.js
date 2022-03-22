@@ -370,7 +370,7 @@ export const EventForm = ({
           )}
           <Field
             id="event_body"
-            type="admin-editor"
+            type={isFrontendView ? 'admin-editor-ds' : 'admin-editor'}
             name="body"
             fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
             fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"

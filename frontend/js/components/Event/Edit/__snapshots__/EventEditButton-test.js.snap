@@ -21,14 +21,22 @@ exports[`<EventEditButton /> it renders correctly 1`] = `
     }
     show={false}
   />
-  <Connect(EditButton)
-    author={
-      Object {
-        "uniqueId": "/metal",
-      }
-    }
-    className="mr-10"
+  <Button
+    className="event-edit-button"
+    id="edit-button"
+    justifyContent="center"
     onClick={[Function]}
-  />
+    variant="primary"
+    variantColor="primary"
+    variantSize="big"
+    width={
+      Array [
+        "100%",
+        "auto",
+      ]
+    }
+  >
+    global.edit
+  </Button>
 </Fragment>
 `;

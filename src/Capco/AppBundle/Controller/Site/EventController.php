@@ -127,7 +127,7 @@ class EventController extends Controller
 
         if ($event->isDeleted()) {
             return new Response(
-                $this->renderView('CapcoAppBundle:Event:cancel.html.twig', ['event' => $event])
+                $this->renderView('CapcoAppBundle:Event:show.html.twig', ['event' => $event, 'isDeleted' => true])
             );
         }
         $this->denyAccessUnlessGranted(EventVoter::VIEW_FRONT, $event);
@@ -148,6 +148,7 @@ class EventController extends Controller
                 'viewerIsAuthor' => $event->getAuthor() === $this->getUser(),
                 'event' => $event,
                 'viewer' => $viewer,
+                'isDeleted' => false,
             ];
         }
 
@@ -196,6 +197,7 @@ class EventController extends Controller
             'event' => $event,
             'viewer' => $viewer,
             'user' => $this->getUser(),
+            'isDeleted' => false,
         ];
     }
 }

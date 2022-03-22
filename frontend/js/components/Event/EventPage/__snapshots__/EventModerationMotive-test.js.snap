@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventModerationMotive /> <TestEventModerationMotive /> should render correctly 1`] = `
+Array [
+  <span
+    className="sc-bdvvtL kOyFuN cap-text"
+  >
+    admin.action.recent_contributions.unpublish.input_label
+  </span>,
+  <div
+    className="sc-bdvvtL dhidHq sc-fbyfCU hrfTAY cap-info-message"
+  />,
+]
+`;

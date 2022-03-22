@@ -12,7 +12,7 @@ export const query = graphql`
   }
 `;
 
-const useFeatureFlag = (flag: FeatureFlagType): boolean => {
+export const useFeatureFlag = (flag: FeatureFlagType): boolean => {
   const data = useLazyLoadQuery<useFeatureFlagQuery>(query, {}, { fetchPolicy: 'store-only' });
   invariant(data.featureFlags !== undefined, 'The featureFlags are is missing in Relay store.');
 

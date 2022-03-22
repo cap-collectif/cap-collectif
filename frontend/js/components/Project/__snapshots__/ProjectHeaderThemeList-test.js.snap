@@ -31,7 +31,7 @@ Array [
     </p>
   </a>,
   <div
-    aria-label="data_theme_list"
+    aria-label="theme_list"
     aria-modal={true}
     data-dialog={true}
     hidden={true}
@@ -54,7 +54,7 @@ Array [
 exports[`<ProjectHeaderThemeList /> should render correctly when project is archived 1`] = `
 Array [
   <a
-    className="sc-bdvvtL cAlSLs ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
+    className="sc-bdvvtL cAlSLs ProjectHeaderThemeList__ThemesButton-hsKMqV fOWBro p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
@@ -82,7 +82,7 @@ Array [
     </p>
   </a>,
   <div
-    aria-label="data_theme_list"
+    aria-label="theme_list"
     aria-modal={true}
     data-dialog={true}
     hidden={true}
@@ -133,7 +133,7 @@ Array [
     </p>
   </a>,
   <div
-    aria-label="data_theme_list"
+    aria-label="theme_list"
     aria-modal={true}
     data-dialog={true}
     hidden={false}

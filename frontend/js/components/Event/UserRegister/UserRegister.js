@@ -1,16 +1,12 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { type IntlShape, useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Container, ButtonUnsubscribe } from './UserRegister.style';
-import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
-import type { UserRegister_user } from '~relay/UserRegister_user.graphql';
+import { toast, Button } from '@cap-collectif/ui';
 import type { UserRegister_event } from '~relay/UserRegister_event.graphql';
 import UnsubscribeToEventAsRegisteredMutation from '~/mutations/UnsubscribeToEventAsRegisteredMutation';
-import { toast } from '~ds/Toast';
 
 type Props = {
-  user?: UserRegister_user,
   event: UserRegister_event,
 };
 
@@ -37,30 +33,23 @@ export const unsubscribe = (eventId: string, intl: IntlShape) => {
     });
 };
 
-export const UserRegister = ({ user, event }: Props) => {
+export const UserRegister = ({ event }: Props) => {
   const intl = useIntl();
   return (
-    <Container>
-      {user && (
-        <div>
-          <UserAvatarLegacy user={user} /> {user.username}
-        </div>
-      )}
-
-      <ButtonUnsubscribe type="button" onClick={() => unsubscribe(event.id, intl)}>
-        <FormattedMessage id="event_registration.unsubscribe" />
-      </ButtonUnsubscribe>
-    </Container>
+    <Button
+      variantColor="danger"
+      variant="secondary"
+      variantSize="big"
+      type="button"
+      width={['100%', 'auto']}
+      onClick={() => unsubscribe(event.id, intl)}
+      justifyContent="center">
+      {intl.formatMessage({ id: 'event_registration.unsubscribe' })}
+    </Button>
   );
 };
 
 export default createFragmentContainer(UserRegister, {
-  user: graphql`
-    fragment UserRegister_user on User {
-      username
-      ...UserAvatar_user
-    }
-  `,
   event: graphql`
     fragment UserRegister_event on Event {
       id

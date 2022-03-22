@@ -29,7 +29,7 @@ Scenario: Logged in admin wants to add a new event
   Then I click on button "#confirm-event-create"
   And I wait 3 seconds
   Then I go to event page with slug "test"
-  And I should see "17 août 2030 à 12:13" appear on current page in "body"
+  And I should see a ".eventContent" element
 
 @ready-only
 Scenario: Logged in admin can review an event

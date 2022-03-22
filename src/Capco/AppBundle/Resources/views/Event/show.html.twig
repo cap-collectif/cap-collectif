@@ -25,7 +25,7 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    {{ react_render_component('EventPageApp', { 'props': {'eventId': event.id|toGlobalId('Event')} }) }}
+    {{ react_render_component('EventPageApp', { 'props': {'eventId': event.id|toGlobalId('Event'), 'isDeleted' :isDeleted} }) }}
 {% endblock %}
 
 {% block javascripts %}

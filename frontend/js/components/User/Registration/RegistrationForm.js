@@ -61,9 +61,8 @@ const memoizeAvailableQuestions: any = memoize(() => {});
 const getCustomFieldsErrors = (values: FormValues, props: Props) => {
   // TODO: remove this parameter from the function or create a specific traduction key
   if (values.questions && values.responses) {
-    const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
-      'availableQuestions',
-    );
+    const availableQuestions: Array<string> =
+      memoizeAvailableQuestions.cache.get('availableQuestions');
 
     return validateResponses(
       values.questions,
