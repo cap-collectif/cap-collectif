@@ -36,7 +36,7 @@ Capco\AppBundle\Entity\SocialNetwork:
 
   SocialNetwork6:
     title: Google
-    link: ***REMOVED***
+    link: https://plus.google.com/
     position: 6
     isEnabled: true
     media: '@MediaGooglePlus'
