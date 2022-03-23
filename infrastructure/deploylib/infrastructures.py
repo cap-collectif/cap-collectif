@@ -1,6 +1,5 @@
 import time
 from sys import platform as _platform
-import app
 from fabric import Config, Connection
 from infrastructure.deploylib.environments import compose
 from invoke import run
