@@ -7437,6 +7437,7 @@ type Mutation {
   addSmsCredit(input: AddSmsCreditInput!): AddSmsCreditPayload
   updateSmsCredit(input: UpdateSmsCreditInput!): UpdateSmsCreditPayload
   createTwilioSubAccount(input: CreateTwilioSubAccountInput!): CreateTwilioSubAccountPayload
+  updatePaperVote(input: UpdatePaperVoteInput!): UpdatePaperVotePayload
 }
 
 """A connection to a list of items."""
@@ -15045,6 +15046,39 @@ type UpdateOpinionPayload {
 
   """available errors if mutation fails"""
   errorCode: UpdateOpinionErrorCode
+  clientMutationId: String
+}
+
+"""Available errors on UpdatePaperVote mutation."""
+enum UpdatePaperVoteErrorCode {
+  """The proposal does not exist."""
+  PROPOSAL_NOT_FOUND
+
+  """The step does not exist or is neither a collect nor selection step."""
+  STEP_NOT_FOUND
+}
+
+input UpdatePaperVoteInput {
+  """ID of the proposal to update votes."""
+  proposal: ID!
+
+  """ID of the step where the proposal receives votes."""
+  step: ID!
+
+  """Count of votes received by the proposal in the step."""
+  count: Int!
+
+  """Amount of points received by the proposal in the step."""
+  points: Int!
+  clientMutationId: String
+}
+
+type UpdatePaperVotePayload {
+  """If successful, the updated proposal."""
+  proposal: Proposal
+
+  """The error, if any."""
+  error: UpdatePaperVoteErrorCode
   clientMutationId: String
 }
 

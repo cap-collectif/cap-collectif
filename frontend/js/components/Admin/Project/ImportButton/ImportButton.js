@@ -13,17 +13,26 @@ import type { Dispatch } from '~/types';
 import ImportProposalsFromCsvModal, {
   formName,
 } from '~/components/Admin/Project/ImportButton/ImportProposalsFromCsvModal';
+import ImportPaperVotesFromCsvModal from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal';
 import colors from '~/utils/colors';
 import AddProposalsFromCsvMutation from '~/mutations/AddProposalsFromCsvMutation';
 import type { AddProposalsFromCsvMutationResponse } from '~relay/AddProposalsFromCsvMutation.graphql';
 import { toast } from '~ds/Toast';
-import type { ProposalsStepValues } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
+import type { StepFilter } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 
 type Props = {|
   proposalFormId: string,
-  selectedStepId: ProposalsStepValues,
+  selectedStep: StepFilter,
+  proposals: Array<{|
+    +id: string,
+    +fullReference: string,
+    +title: string,
+    +paperVotesTotalCount: number,
+    +paperVotesTotalPointsCount: number,
+  |}>,
+  projectTitle: string,
   projectId: string,
   viewerIsAdmin: boolean,
 |};
@@ -53,15 +62,24 @@ type FormValue = {|
   },
 |};
 
-const ImportButton = ({ proposalFormId, selectedStepId, projectId, viewerIsAdmin }: Props) => {
+const ImportButton = ({
+  proposalFormId,
+  selectedStep,
+  proposals,
+  projectId,
+  projectTitle,
+  viewerIsAdmin,
+}: Props) => {
   const intl = useIntl();
   const { url: baseLinkUrl } = useRouteMatch();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showPaperVotesModal, setShowPaperVotesModal] = useState<boolean>(false);
   const [failOneTime, setFailOneTime] = useState<boolean>(false);
   const proposalRevisionsEnabled = useFeatureFlag('proposal_revisions');
+  const paperVotesEnabled = useFeatureFlag('unstable__paper_vote');
   const { parameters } = useProjectAdminProposalsContext();
 
-  if (!selectedStepId) {
+  if (!selectedStep) {
     return null;
   }
 
@@ -76,7 +94,7 @@ const ImportButton = ({ proposalFormId, selectedStepId, projectId, viewerIsAdmin
       input,
       proposalRevisionsEnabled,
       isAdminView: true,
-      step: selectedStepId,
+      step: selectedStep.id,
       projectId,
       parameters,
     })
@@ -138,10 +156,10 @@ const ImportButton = ({ proposalFormId, selectedStepId, projectId, viewerIsAdmin
       <Menu placement="bottom-start">
         <Menu.Button>
           <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variantSize="small" variant="secondary">
-            {intl.formatMessage({ id: 'global.create' })}
+            {intl.formatMessage({ id: 'link_action_create' })}
           </Button>
         </Menu.Button>
-        <Menu.List mt={0}>
+        <Menu.List mt={0} minWidth="240px">
           <Menu.ListItem>
             <Text
               as="span"
@@ -151,30 +169,47 @@ const ImportButton = ({ proposalFormId, selectedStepId, projectId, viewerIsAdmin
                   color: colors.darkText,
                 },
               })}>
-              <a href={`${baseLinkUrl}/${selectedStepId}/create`}>
-                {intl.formatMessage({ id: 'create-proposal' })}
+              <a href={`${baseLinkUrl}/${selectedStep.id}/create`}>
+                {intl.formatMessage({ id: 'add.proposal.hand' })}
               </a>
             </Text>
           </Menu.ListItem>
-          <Menu.ListItem>
-            <Text
-              onClick={() => {
-                setShowModal(true);
-              }}>
-              {intl.formatMessage({ id: 'import-csv-proposal' })}
-            </Text>
+          <Menu.ListItem
+            onClick={() => {
+              setShowModal(true);
+            }}>
+            {intl.formatMessage({ id: 'add.proposal.csv' })}
           </Menu.ListItem>
+          {paperVotesEnabled && selectedStep.votable && (
+            <Menu.ListItem
+              onClick={() => {
+                setShowPaperVotesModal(true);
+              }}>
+              {intl.formatMessage({ id: 'add.paper_votes.csv' })}
+            </Menu.ListItem>
+          )}
         </Menu.List>
       </Menu>
       <ImportProposalsFromCsvModal
         show={showModal}
         proposalFormId={proposalFormId}
-        selectedStepId={selectedStepId}
+        selectedStepId={selectedStep.id}
         projectId={projectId}
         viewerIsAdmin={viewerIsAdmin}
         onSubmit={submitImportProposalsVerified}
         onClose={() => {
           setShowModal(false);
+        }}
+      />
+      <ImportPaperVotesFromCsvModal
+        show={showPaperVotesModal}
+        selectedStepId={selectedStep.id}
+        selectedStepTitle={selectedStep.title}
+        projectTitle={projectTitle}
+        isVoteRanking={selectedStep.votesRanking}
+        proposals={proposals}
+        onClose={() => {
+          setShowPaperVotesModal(false);
         }}
       />
     </>

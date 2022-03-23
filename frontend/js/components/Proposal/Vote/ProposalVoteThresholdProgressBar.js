@@ -81,8 +81,8 @@ export default createFragmentContainer(ProposalVoteThresholdProgressBar, {
         totalCount
         totalPointsCount
       }
-      paperVotesTotalCount
-      paperVotesTotalPointsCount
+      paperVotesTotalCount(stepId: $stepId)
+      paperVotesTotalPointsCount(stepId: $stepId)
       ...interpellationLabelHelper_proposal @relay(mask: false)
     }
   `,

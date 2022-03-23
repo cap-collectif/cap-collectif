@@ -1388,14 +1388,26 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                   },
                                   Object {
                                     "alias": null,
-                                    "args": null,
+                                    "args": Array [
+                                      Object {
+                                        "kind": "Variable",
+                                        "name": "stepId",
+                                        "variableName": "stepId",
+                                      },
+                                    ],
                                     "kind": "ScalarField",
                                     "name": "paperVotesTotalCount",
                                     "storageKey": null,
                                   },
                                   Object {
                                     "alias": null,
-                                    "args": null,
+                                    "args": Array [
+                                      Object {
+                                        "kind": "Variable",
+                                        "name": "stepId",
+                                        "variableName": "stepId",
+                                      },
+                                    ],
                                     "kind": "ScalarField",
                                     "name": "paperVotesTotalPointsCount",
                                     "storageKey": null,
@@ -1820,7 +1832,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "2ad81c7ee0da2d4062c5bf09d473e0c0",
+            "cacheID": "773b7520d4ead752912e0902ccf47e61",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashQuery",
@@ -1831,6 +1843,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
   $isTipsMeeeEnabled: Boolean!
   $cursor: String
   $count: Int
+  $stepId: ID!
 ) {
   project: node(id: $projectId) {
     __typename
@@ -2108,8 +2121,8 @@ fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
   allComments: comments(first: 0) {
     totalCountWithAnswers
   }
-  paperVotesTotalCount
-  paperVotesTotalPointsCount
+  paperVotesTotalCount(stepId: $stepId)
+  paperVotesTotalPointsCount(stepId: $stepId)
 }
 
 fragment ProposalPreviewStatus_proposal_2tPna9 on Proposal {

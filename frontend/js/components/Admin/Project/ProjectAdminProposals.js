@@ -4,6 +4,7 @@ import { FormattedHTMLMessage, FormattedMessage, useIntl, type IntlShape } from 
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
+import { useState } from 'react';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
 import type { ProjectAdminProposals_themes } from '~relay/ProjectAdminProposals_themes.graphql';
 import PickableList from '~ui/List/PickableList';
@@ -74,6 +75,8 @@ import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
 import useToastingMachine from '~/utils/hooks/useToastingMachine';
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import type { StepStatusFilter } from '~/components/Admin/Project/ProjectAdminProposals.utils';
+import ImportPaperVotesFromCsvModal from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 export const PROJECT_ADMIN_PROPOSAL_LOAD_100 = 100;
@@ -777,6 +780,7 @@ export const ProjectAdminProposals = ({
 }: Props) => {
   const { parameters, dispatch } = useProjectAdminProposalsContext();
   const intl = useIntl();
+  const paperVotesEnabled = useFeatureFlag('unstable__paper_vote');
   const history = useHistory();
   const hasProposals = project.proposals?.totalCount > 0;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
@@ -790,11 +794,23 @@ export const ProjectAdminProposals = ({
   const selectedStepId: ProposalsStepValues = parameters.filters.step;
   const selectedStep: ?StepFilter = steps.find(({ id }) => id === selectedStepId);
   const proposalFormId: string = selectedStep?.form.id || '';
+  const proposals =
+    project.proposals.edges
+      ?.map(edge => edge && edge.node)
+      ?.filter(Boolean)
+      .map(({ id, fullReference, title, paperVotesTotalCount, paperVotesTotalPointsCount }) => ({
+        id,
+        fullReference,
+        title,
+        paperVotesTotalCount,
+        paperVotesTotalPointsCount,
+      })) ?? [];
 
   const [proposalSelected, setProposalSelected] = React.useState<?string>(null);
   const [proposalModalDelete, setProposalModalDelete] =
     React.useState<?AnalysisProposal_proposal>(null);
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [showPaperVotesModal, setShowPaperVotesModal] = useState<boolean>(false);
 
   const loadMore = React.useCallback(() => {
     if (!relay.hasMore() || relay.isLoading()) {
@@ -872,12 +888,41 @@ export const ProjectAdminProposals = ({
           <ButtonGroup>
             {selectedStepId && selectedStep?.type === 'CollectStep' && selectedStep?.form?.id && (
               <ImportButton
-                selectedStepId={selectedStepId}
+                proposals={proposals}
+                selectedStep={selectedStep}
                 proposalFormId={proposalFormId}
                 projectId={project.id}
+                projectTitle={project.title}
                 viewerIsAdmin={viewerIsAdmin}
               />
             )}
+            {selectedStepId &&
+              selectedStep?.type === 'SelectionStep' &&
+              selectedStep?.form?.id &&
+              paperVotesEnabled &&
+              selectedStep.votable && (
+                <>
+                  <Button
+                    variantSize="small"
+                    variant="secondary"
+                    onClick={() => {
+                      setShowPaperVotesModal(true);
+                    }}>
+                    {intl.formatMessage({ id: 'paper-votes-add' })}
+                  </Button>
+                  <ImportPaperVotesFromCsvModal
+                    show={showPaperVotesModal}
+                    selectedStepId={selectedStep.id}
+                    selectedStepTitle={selectedStep.title}
+                    projectTitle={project.title}
+                    isVoteRanking={selectedStep.votesRanking}
+                    proposals={proposals}
+                    onClose={() => {
+                      setShowPaperVotesModal(false);
+                    }}
+                  />
+                </>
+              )}
             {viewerIsAdmin && project.exportableSteps && (
               <NewExportButton
                 disabled={!hasProposals}
@@ -955,7 +1000,9 @@ export const ProjectAdminProposals = ({
                     isVoteRanking={selectedStep?.votesRanking || false}
                     isVotable={selectedStep?.votable || false}
                     votes={proposal.proposalVotes.totalCount}
+                    paperVotes={proposal.paperVotesTotalCount}
                     points={proposal.proposalVotes.totalPointsCount}
+                    paperPoints={proposal.paperVotesTotalPointsCount}
                     rowId={proposal.id}
                     key={proposal.id}
                     dispatch={dispatch}
@@ -1034,6 +1081,7 @@ const container = createPaginationContainer(
         term: { type: "String", defaultValue: null }
       ) {
         id
+        title
         adminAlphaUrl
         slug
         type {
@@ -1140,6 +1188,7 @@ const container = createPaginationContainer(
                 name
               }
               reference(full: false)
+              fullReference: reference(full: true)
               status(step: $step) {
                 id
                 name
@@ -1161,8 +1210,14 @@ const container = createPaginationContainer(
                   title
                 }
               }
+              paperVotesTotalCount(stepId: $step)
+              paperVotesTotalPointsCount(stepId: $step)
               ...AnalysisProposal_proposal
-                @arguments(isAdminView: true, proposalRevisionsEnabled: $proposalRevisionsEnabled)
+                @arguments(
+                  isAdminView: true
+                  proposalRevisionsEnabled: $proposalRevisionsEnabled
+                  step: $step
+                )
             }
             cursor
           }

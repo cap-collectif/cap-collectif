@@ -276,6 +276,7 @@ export default createFragmentContainer(AnalysisProposal, {
     @argumentDefinitions(
       isAdminView: { type: "Boolean" }
       proposalRevisionsEnabled: { type: "Boolean!" }
+      step: { type: "ID", defaultValue: null }
     ) {
       revisions(state: PENDING) @include(if: $proposalRevisionsEnabled) {
         totalCount
@@ -313,8 +314,8 @@ export default createFragmentContainer(AnalysisProposal, {
         id
         title
       }
-      paperVotesTotalCount
-      paperVotesTotalPointsCount
+      paperVotesTotalCount(stepId: $step)
+      paperVotesTotalPointsCount(stepId: $step)
       ...ModalDeleteProposal_proposal
     }
   `,

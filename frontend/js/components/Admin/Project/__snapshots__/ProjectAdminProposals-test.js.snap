@@ -139,8 +139,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -188,8 +191,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-12",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -237,8 +243,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-2",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -279,8 +288,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-3",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -325,8 +337,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-4",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -360,8 +375,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-7",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -399,8 +417,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-8",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -435,8 +456,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1104",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -530,6 +554,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Sélection",
                 },
               ],
+              "title": "je suis un titre",
               "type": Object {
                 "title": "project.types.participatoryBudgeting",
               },
@@ -566,6 +591,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -590,8 +617,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -639,6 +669,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -663,8 +695,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-12",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -712,6 +747,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -736,8 +773,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-2",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -778,6 +818,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -802,8 +844,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-3",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -851,6 +896,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -872,8 +919,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-4",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -910,6 +960,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -931,8 +983,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-7",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -973,6 +1028,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -994,8 +1051,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-8",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -1036,6 +1096,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -1054,8 +1116,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1104",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -1200,8 +1265,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -1249,8 +1317,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-12",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -1298,8 +1369,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-2",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -1340,8 +1414,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-3",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -1386,8 +1463,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-4",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -1421,8 +1501,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-7",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -1460,8 +1543,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-8",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -1496,8 +1582,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1104",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -1591,6 +1680,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Sélection",
                 },
               ],
+              "title": "je suis un titre",
               "type": Object {
                 "title": "project.types.participatoryBudgeting",
               },
@@ -1627,6 +1717,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -1651,8 +1743,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -1700,6 +1795,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -1724,8 +1821,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-12",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -1773,6 +1873,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -1797,8 +1899,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-2",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -1839,6 +1944,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -1863,8 +1970,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-3",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -1912,6 +2022,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -1933,8 +2045,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-4",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -1971,6 +2086,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -1992,8 +2109,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-7",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -2034,6 +2154,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -2055,8 +2177,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-8",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -2097,6 +2222,8 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -2115,8 +2242,11 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1104",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -2298,8 +2428,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -2347,8 +2480,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-12",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -2396,8 +2532,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-2",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -2438,8 +2577,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-3",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -2484,8 +2626,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-4",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -2519,8 +2664,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-7",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -2558,8 +2706,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-8",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -2594,8 +2745,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1104",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -2689,6 +2843,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Sélection",
                 },
               ],
+              "title": "je suis un titre",
               "type": Object {
                 "title": "project.types.participatoryBudgeting",
               },
@@ -2725,6 +2880,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -2749,8 +2906,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -2798,6 +2958,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -2822,8 +2984,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-12",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -2871,6 +3036,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -2895,8 +3062,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-2",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -2937,6 +3107,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -2961,8 +3133,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-3",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -3010,6 +3185,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -3031,8 +3208,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-4",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -3069,6 +3249,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -3090,8 +3272,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-7",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -3132,6 +3317,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -3153,8 +3340,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-8",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -3195,6 +3385,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -3213,8 +3405,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1104",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -3368,8 +3563,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -3417,8 +3615,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-12",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -3466,8 +3667,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-2",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -3508,8 +3712,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-3",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -3554,8 +3761,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-4",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -3589,8 +3799,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-7",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -3628,8 +3841,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-8",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -3664,8 +3880,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1104",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -3759,6 +3978,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Sélection",
                 },
               ],
+              "title": "je suis un titre",
               "type": Object {
                 "title": "project.types.participatoryBudgeting",
               },
@@ -3795,6 +4015,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -3819,8 +4041,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -3868,6 +4093,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -3892,8 +4119,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-12",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -3941,6 +4171,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -3965,8 +4197,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-2",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -4007,6 +4242,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -4031,8 +4268,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-3",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -4080,6 +4320,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -4101,8 +4343,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-4",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -4139,6 +4384,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -4160,8 +4407,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-7",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -4202,6 +4452,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -4223,8 +4475,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-8",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -4265,6 +4520,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -4283,8 +4540,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1104",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -4448,8 +4708,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -4497,8 +4760,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-12",
                       "hasBeenMerged": true,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -4546,8 +4812,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-2",
                       "hasBeenMerged": true,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -4588,8 +4857,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-3",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 0,
@@ -4634,8 +4906,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-4",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -4669,8 +4944,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-7",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -4708,8 +4986,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-8",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -4744,8 +5025,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1104",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -4839,6 +5123,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Sélection",
                 },
               ],
+              "title": "Default merge proposal project",
               "type": Object {
                 "title": "project.types.participatoryBudgeting",
               },
@@ -4875,6 +5160,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -4899,8 +5186,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -4948,6 +5238,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -4972,8 +5264,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-12",
               "hasBeenMerged": true,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -5021,6 +5316,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -5045,8 +5342,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-2",
               "hasBeenMerged": true,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -5087,6 +5387,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          paperPoints={0}
+          paperVotes={0}
           points={0}
           proposal={
             Object {
@@ -5111,8 +5413,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-3",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 0,
@@ -5160,6 +5465,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -5181,8 +5488,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-4",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -5219,6 +5529,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -5240,8 +5552,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-7",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -5282,6 +5597,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -5303,8 +5620,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-8",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -5345,6 +5665,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -5363,8 +5685,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1104",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -5509,8 +5834,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -5558,8 +5886,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-12",
                       "hasBeenMerged": true,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -5607,8 +5938,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-2",
                       "hasBeenMerged": true,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -5649,8 +5983,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-3",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 0,
@@ -5695,8 +6032,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-4",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -5730,8 +6070,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-7",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -5769,8 +6112,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-8",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -5805,8 +6151,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                           "title": "Collecte des propositions",
                         },
                       },
+                      "fullReference": "1-1104",
                       "hasBeenMerged": false,
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "paperVotesTotalCount": 0,
+                      "paperVotesTotalPointsCount": 0,
                       "proposalVotes": Object {
                         "totalCount": 10,
                         "totalPointsCount": 26,
@@ -5900,6 +6249,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Sélection",
                 },
               ],
+              "title": "Default merge proposal project",
               "type": Object {
                 "title": "project.types.participatoryBudgeting",
               },
@@ -5936,6 +6286,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -5960,8 +6312,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -6009,6 +6364,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -6033,8 +6390,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-12",
               "hasBeenMerged": true,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -6082,6 +6442,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -6106,8 +6468,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-2",
               "hasBeenMerged": true,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -6148,6 +6513,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          paperPoints={0}
+          paperVotes={0}
           points={0}
           proposal={
             Object {
@@ -6172,8 +6539,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-3",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 0,
@@ -6221,6 +6591,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -6242,8 +6614,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-4",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -6280,6 +6655,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -6301,8 +6678,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-7",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -6343,6 +6723,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -6364,8 +6746,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-8",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -6406,6 +6791,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           isVotable={false}
           isVoteRanking={false}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          paperPoints={0}
+          paperVotes={0}
           points={26}
           proposal={
             Object {
@@ -6424,8 +6811,11 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Collecte des propositions",
                 },
               },
+              "fullReference": "1-1104",
               "hasBeenMerged": false,
               "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+              "paperVotesTotalCount": 0,
+              "paperVotesTotalPointsCount": 0,
               "proposalVotes": Object {
                 "totalCount": 10,
                 "totalPointsCount": 26,
@@ -6663,6 +7053,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                   "title": "Sélection",
                 },
               ],
+              "title": "je suis un titre",
               "type": Object {
                 "title": "project.types.participatoryBudgeting",
               },
@@ -6881,6 +7272,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                   "title": "Sélection",
                 },
               ],
+              "title": "je suis un titre",
               "type": Object {
                 "title": "project.types.participatoryBudgeting",
               },

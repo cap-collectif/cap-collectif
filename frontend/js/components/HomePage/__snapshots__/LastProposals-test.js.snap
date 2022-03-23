@@ -396,14 +396,26 @@ exports[`<LastProposals /> should render correctly 1`] = `
                     },
                     Object {
                       "alias": null,
-                      "args": null,
+                      "args": Array [
+                        Object {
+                          "kind": "Variable",
+                          "name": "stepId",
+                          "variableName": "stepId",
+                        },
+                      ],
                       "kind": "ScalarField",
                       "name": "paperVotesTotalCount",
                       "storageKey": null,
                     },
                     Object {
                       "alias": null,
-                      "args": null,
+                      "args": Array [
+                        Object {
+                          "kind": "Variable",
+                          "name": "stepId",
+                          "variableName": "stepId",
+                        },
+                      ],
                       "kind": "ScalarField",
                       "name": "paperVotesTotalPointsCount",
                       "storageKey": null,
@@ -718,13 +730,14 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "cd60a859caac894e01c36408766ca7c9",
+          "cacheID": "0a617bf31b6d872bebae0c432f25c8d3",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
           "operationKind": "query",
           "text": "query LastProposalsQuery(
   $ids: [ID!]!
+  $stepId: ID!
   $isTipsMeeeEnabled: Boolean!
 ) {
   proposals: nodes(ids: $ids) {
@@ -834,8 +847,8 @@ fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
   allComments: comments(first: 0) {
     totalCountWithAnswers
   }
-  paperVotesTotalCount
-  paperVotesTotalPointsCount
+  paperVotesTotalCount(stepId: $stepId)
+  paperVotesTotalPointsCount(stepId: $stepId)
 }
 
 fragment ProposalPreviewStatus_proposal_2tPna9 on Proposal {

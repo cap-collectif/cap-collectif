@@ -1,0 +1,17 @@
+UpdatePaperVoteInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update the paper votes of a proposal for a step.'
+        fields:
+            proposal:
+                type: 'ID!'
+                description: 'ID of the proposal to update votes.'
+            step:
+                type: 'ID!'
+                description: 'ID of the step where the proposal receives votes.'
+            count:
+                type: 'Int!'
+                description: 'Count of votes received by the proposal in the step.'
+            points:
+                type: 'Int!'
+                description: 'Amount of points received by the proposal in the step.'

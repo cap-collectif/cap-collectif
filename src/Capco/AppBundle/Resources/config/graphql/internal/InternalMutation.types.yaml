@@ -1510,3 +1510,10 @@ InternalMutation:
                     inputType: CreateTwilioSubAccountInput
                     payloadType: CreateTwilioSubAccountPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\CreateTwilioSubAccount", [value])'
+            updatePaperVote:
+                access: '@=hasRole("ROLE_PROJECT_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdatePaperVoteInput
+                    payloadType: UpdatePaperVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdatePaperVoteMutation", [value, getUser()])'

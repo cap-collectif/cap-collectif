@@ -223,8 +223,8 @@ export default createFragmentContainer(connect<any, any, _, _, _, _>()(ProposalP
         totalCount
         totalPointsCount
       }
-      paperVotesTotalCount
-      paperVotesTotalPointsCount
+      paperVotesTotalCount(stepId: $stepId)
+      paperVotesTotalPointsCount(stepId: $stepId)
     }
   `,
 });

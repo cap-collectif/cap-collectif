@@ -1,0 +1,12 @@
+UpdatePaperVoteErrorCode:
+    type: enum
+    config:
+        name: UpdatePaperVoteErrorCode
+        description: 'Available errors on UpdatePaperVote mutation.'
+        values:
+            PROPOSAL_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdatePaperVoteMutation::PROPOSAL_NOT_FOUND")'
+                description: 'The proposal does not exist.'
+            STEP_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdatePaperVoteMutation::STEP_NOT_FOUND")'
+                description: 'The step does not exist or is neither a collect nor selection step.'

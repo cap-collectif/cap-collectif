@@ -471,14 +471,26 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                 },
                                 Object {
                                   "alias": null,
-                                  "args": null,
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Variable",
+                                      "name": "stepId",
+                                      "variableName": "stepId",
+                                    },
+                                  ],
                                   "kind": "ScalarField",
                                   "name": "paperVotesTotalCount",
                                   "storageKey": null,
                                 },
                                 Object {
                                   "alias": null,
-                                  "args": null,
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Variable",
+                                      "name": "stepId",
+                                      "variableName": "stepId",
+                                    },
+                                  ],
                                   "kind": "ScalarField",
                                   "name": "paperVotesTotalPointsCount",
                                   "storageKey": null,
@@ -903,13 +915,14 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "0965876737d9a0ebfdb31594a8af881e",
+          "cacheID": "83dac29e8460ca8f57074ebafc980f4e",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
           "operationKind": "query",
           "text": "query ProjectTrashProposalQuery(
   $projectId: ID!
+  $stepId: ID!
   $isAuthenticated: Boolean!
   $isTipsMeeeEnabled: Boolean!
   $cursor: String
@@ -1021,8 +1034,8 @@ fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
   allComments: comments(first: 0) {
     totalCountWithAnswers
   }
-  paperVotesTotalCount
-  paperVotesTotalPointsCount
+  paperVotesTotalCount(stepId: $stepId)
+  paperVotesTotalPointsCount(stepId: $stepId)
 }
 
 fragment ProposalPreviewStatus_proposal_2tPna9 on Proposal {
