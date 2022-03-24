@@ -2,9 +2,12 @@
 
 namespace Capco\AppBundle\Model;
 
+use Capco\AppBundle\Entity\OpinionType;
+use Doctrine\Common\Collections\Collection;
+
 interface Sourceable
 {
-    public function getSources();
+    public function getSources(): Collection;
 
     public function canContribute($user = null): bool;
 
@@ -15,7 +18,7 @@ interface Sourceable
 
     public function isPublished(): bool;
 
-    public function getOpinionType();
+    public function getOpinionType(): ?OpinionType;
 
     public function getStep();
 }

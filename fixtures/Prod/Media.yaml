@@ -37,6 +37,10 @@ Capco\MediaBundle\Entity\Media:
         binaryContent: social/twitter.png
         name: Twitter
         category: '@MediaCategory1'
+    MediaYoutube:
+        binaryContent: social/youtube.png
+        name: Youtube
+        category: '@MediaCategory1'
     MediaCapcoSite:
         binaryContent: social/capco.png
         name: Capco

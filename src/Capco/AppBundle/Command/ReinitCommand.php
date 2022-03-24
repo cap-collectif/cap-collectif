@@ -78,7 +78,6 @@ use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\EventListener\DebateArticleListener;
 use Capco\AppBundle\EventListener\QuestionnaireSubscriber;
-use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\EventListener\UserInviteEmailMessageListener;
 use Capco\AppBundle\GraphQL\DataLoader\Project\ProjectProposalsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
@@ -123,7 +122,6 @@ class ReinitCommand extends Command
     private ProgressBarProcessor $progressBarProcessor;
     private ElasticsearchDoctrineListener $elasticsearchListener;
     private DoctrineListener $publishableListener;
-    private ReferenceEventListener $referenceListener;
     private QuestionnaireSubscriber $questionnaireSubscriber;
     private StepContributionsDataLoader $stepContributionDataloader;
     private ProposalFormProposalsDataLoader $proposalFormProposalsDataloader;
@@ -141,7 +139,6 @@ class ReinitCommand extends Command
         ProgressBarProcessor $progressBarProcessor,
         DoctrineListener $publishableListener,
         ElasticsearchDoctrineListener $elasticsearchListener,
-        ReferenceEventListener $referenceListener,
         QuestionnaireSubscriber $questionnaireSubscriber,
         StepContributionsDataLoader $stepContributionDataloader,
         ProposalFormProposalsDataLoader $proposalFormProposalsDataloader,
@@ -167,7 +164,6 @@ class ReinitCommand extends Command
         $this->stepPointsVotesCountDataLoader = $stepPointVotesCountDataloader;
         $this->projectProposalsDataloader = $projectProposalsDataloader;
         $this->projectCurrentVotableStepDataloader = $projectCurrentVotableStepDataloader;
-        $this->referenceListener = $referenceListener;
         $this->stopwatch = $stopwatch;
         $this->questionnaireSubscriber = $questionnaireSubscriber;
     }

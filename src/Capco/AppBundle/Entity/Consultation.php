@@ -59,7 +59,7 @@ class Consultation implements IndexableInterface
      * @ORM\Column(name="opinion_count_shown_by_section", type="integer")
      * @Assert\Range(max=20,min=1)
      */
-    private $opinionCountShownBySection = 5;
+    private $opinionCountShownBySection = 10;
 
     /**
      * @var \DateTime

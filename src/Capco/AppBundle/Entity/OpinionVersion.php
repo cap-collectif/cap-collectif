@@ -18,6 +18,7 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -31,6 +32,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 {
     use AnswerableTrait;
+    use BodyUsingJoditWysiwygTrait;
     use DiffableTrait;
     use FollowableTrait;
     use ModerableTrait;
@@ -41,7 +43,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use TrashableTrait;
     use UuidTrait;
     use VotableOkNokMitigeTrait;
-    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")
@@ -115,9 +116,10 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this->commentUsingJoditWysiwyg;
     }
 
-    public function setCommentUsingJoditWysiwyg(bool $commentUsingJoditWysiwyg): OpinionVersion
+    public function setCommentUsingJoditWysiwyg(bool $commentUsingJoditWysiwyg): self
     {
         $this->commentUsingJoditWysiwyg = $commentUsingJoditWysiwyg;
+
         return $this;
     }
 
@@ -247,7 +249,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
-    public function getSources()
+    public function getSources(): Collection
     {
         return $this->sources;
     }
@@ -291,7 +293,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     // ******************************* Custom methods **************************************
 
-    public function getOpinionType()
+    public function getOpinionType(): ?OpinionType
     {
         if ($this->parent) {
             return $this->parent->getOpinionType();

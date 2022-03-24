@@ -25,12 +25,12 @@ class OpinionType
     const COMMENT_SYSTEM_BOTH = 2;
 
     public static $colorsType = [
+        'opinion_type.colors.white' => 'white',
         'global.red' => 'red',
         'global.green' => 'green',
         'opinion_type.colors.blue' => 'blue',
         'global.orange' => 'orange',
         'opinion_type.colors.bluedark' => 'bluedark',
-        'opinion_type.colors.white' => 'white',
         'opinion_type.colors.default' => 'default',
     ];
 
@@ -129,15 +129,11 @@ class OpinionType
     private $updatedAt;
 
     /**
-     * @var
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="OpinionType", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Opinions;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="color", type="string", length=50)
      */
     private $color;
@@ -148,11 +144,9 @@ class OpinionType
     private $defaultFilter;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $isEnabled;
+    private $isEnabled = true;
 
     /**
      * @var bool
@@ -171,7 +165,7 @@ class OpinionType
      *
      * @ORM\Column(name="sourceable", type="boolean", options={"default": true})
      */
-    private $sourceable = true;
+    private $sourceable = false;
 
     /**
      * @var int

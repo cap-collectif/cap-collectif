@@ -87,6 +87,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
         consultation: '@PJL'
         parent: '@opinionType5'
+        sourceable: true
     opinionType7:
         id: 'opinionType7'
         title: Sous-partie 2
@@ -101,6 +102,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
         consultation: '@PJL'
         parent: '@opinionType5'
+        sourceable: true
     opinionType8:
         id: 'opinionType8'
         title: Le problème constaté
@@ -110,6 +112,7 @@ Capco\AppBundle\Entity\OpinionType:
         defaultFilter: votes
         votesHelpText: Bon courage pour le votes
         votesThreshold: 5
+        sourceable: true
         votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
         consultation: '@default'
     opinionType9:

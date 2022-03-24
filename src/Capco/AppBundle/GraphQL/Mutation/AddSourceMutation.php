@@ -13,7 +13,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Helper\RedisStorageHelper;
-use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
@@ -25,14 +24,13 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddSourceMutation implements MutationInterface
 {
-    private $em;
-    private $opinionRepo;
-    private $versionRepo;
-    private $formFactory;
-    private $redisStorage;
-    private $sourceRepo;
-    private $logger;
-    private $stepRequirementsResolver;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private OpinionRepository $opinionRepo;
+    private OpinionVersionRepository $versionRepo;
+    private RedisStorageHelper $redisStorage;
+    private LoggerInterface $logger;
+    private StepRequirementsResolver $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -40,7 +38,6 @@ class AddSourceMutation implements MutationInterface
         OpinionRepository $opinionRepo,
         OpinionVersionRepository $versionRepo,
         RedisStorageHelper $redisStorage,
-        SourceRepository $sourceRepo,
         LoggerInterface $logger,
         StepRequirementsResolver $stepRequirementsResolver
     ) {
@@ -49,7 +46,6 @@ class AddSourceMutation implements MutationInterface
         $this->opinionRepo = $opinionRepo;
         $this->versionRepo = $versionRepo;
         $this->redisStorage = $redisStorage;
-        $this->sourceRepo = $sourceRepo;
         $this->logger = $logger;
         $this->stepRequirementsResolver = $stepRequirementsResolver;
     }
@@ -78,8 +74,7 @@ class AddSourceMutation implements MutationInterface
 
             return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
         }
-
-        if (!$sourceable->getOpinionType()->isSourceable()) {
+        if (!$sourceable->getOpinionType() || !$sourceable->getOpinionType()->isSourceable()) {
             $error = ['message' => 'Can\'t add an source to non-sourceable.'];
 
             return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
