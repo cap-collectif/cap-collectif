@@ -1,7 +1,7 @@
-InternalAddSmsCreditErrorCode:
+AddSmsCreditErrorCode:
     type: enum
     config:
-        name: InternalAddSmsCreditErrorCode
+        name: AddSmsCreditErrorCode
         description: 'Available errors on addSmsCredit mutation.'
         values:
             ORDER_ALREADY_PROCESSED:

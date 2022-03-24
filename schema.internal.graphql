@@ -611,6 +611,15 @@ type AddProposalsToStepsPayload {
   clientMutationId: String
 }
 
+"""Available errors on addSmsCredit mutation."""
+enum AddSmsCreditErrorCode {
+  """The given order is already processed."""
+  ORDER_ALREADY_PROCESSED
+
+  """The given order is not found."""
+  SMS_ORDER_NOT_FOUND
+}
+
 input AddSmsCreditInput {
   """The amount to credit."""
   amount: Int!
@@ -625,7 +634,7 @@ type AddSmsCreditPayload {
   smsCredit: SmsCredit
 
   """Available errors for the mutation."""
-  errorCode: InternalAddSmsCreditErrorCode
+  errorCode: AddSmsCreditErrorCode
   clientMutationId: String
 }
 
@@ -6410,15 +6419,6 @@ type IdentificationCodeRequirement implements Node & Requirement {
 
   """The viewer's identification code"""
   viewerValue: String
-}
-
-"""Available errors on addSmsCredit mutation."""
-enum InternalAddSmsCreditErrorCode {
-  """The given order is already processed."""
-  ORDER_ALREADY_PROCESSED
-
-  """The given order is not found."""
-  SMS_ORDER_NOT_FOUND
 }
 
 input InviteUsersInput {

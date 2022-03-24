@@ -7,5 +7,5 @@ AddSmsCreditPayload:
                 type: 'InternalSmsCredit'
                 description: 'The created sms credit.'
             errorCode:
-                type: 'InternalAddSmsCreditErrorCode'
+                type: 'AddSmsCreditErrorCode'
                 description: 'Available errors for the mutation.'
