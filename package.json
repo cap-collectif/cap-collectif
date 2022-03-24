@@ -1,7 +1,7 @@
 {
-    "name": "platform",
+    "name": "cap-collectif",
     "private": true,
-    "license": "UNLICENSED",
+    "license": "SEE LICENSE IN LICENSE.md",
     "scripts": {
         "test": "NODE_ENV=test jest -c jest.config.js",
         "test:ci": "NODE_ENV=test jest -c jest.config.js --coverage --ci --runInBand",

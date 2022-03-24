@@ -1,5 +1,6 @@
-This is our [Next.js](https://nextjs.org/) administration.
+# Admin-next
 
+This is our [Next.js](https://nextjs.org/) implementation for our new administration.
 ## Getting Started
 
 ### Requirements
@@ -10,7 +11,7 @@ First, make sure your `/etc/host` contains:
 127.0.0.1 admin-next.capco.dev
 ```
 
-Then check all docker containers are running (`fab local.infrastructures.up`), because `admin-next` is using Redis from `platform`.
+Then check all docker containers are running (`fab local.infrastructures.up`), because `admin-next` is using Redis to access the user's session.
 
 ### Daily commands
 

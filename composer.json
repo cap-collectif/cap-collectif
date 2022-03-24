@@ -1,6 +1,6 @@
 {
-    "name": "capco/platform",
-    "license": "proprietary",
+    "name": "cap-collectif/cap-collectif",
+    "license": "SEE LICENSE IN LICENSE.md",
     "description": "Cap-Collectif SaaS",
     "autoload": {
         "exclude-from-classmap": [

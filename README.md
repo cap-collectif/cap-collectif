@@ -1,33 +1,28 @@
-# Cap Collectif
+# ![Cap Collectif](/fixtures/files/logo.png)
 
-![Cap Collectif](https://cap-collectif.com/uploads/2016/03/logo-complet-site.png)
+**Cap Collectif** is a french start up that aims at supporting decision-makers who want to change their decision-making process towards more transparency and inclusion.
+To do that, we provide decision-makers with a **fully customizable online platform** integrating **10 different tools**, each dedicated to a specific **participatory process** (consultation, which aims at setting up debates in a controlled and organized framework, participatory budgeting, survey, call for proposals, suggestion box, etc.).
+Our technology is based on a collective intelligence methodology inspired by the Open Gov’s doctrine created by Barack Obama — and since adopted by 79 countries in the world — in order to reinforce the efficiency of public policies and rebuild citizens’ trust.
 
-Cap Collectif is a **digital democracy platform**…
+For more informations, consult our **[website](https://cap-collectif.com)**.
 
-## Demo platform
+- [Case studies](https://cap-collectif.com/realisation)
+- [Blog](https://cap-collectif.com/blog)
+- [Demo](https://cap-collectif.com/demo)
 
-Coming soon.
+## 🔗 Getting started
 
-## Open-source model
+_Documentation for developers is coming soon._
 
-Coming soon.
-
-## Getting started
-
-Check out the **[Development Portal](https://developers.cap-collectif.com)** to get started:
+<!-- Check out the **[Development Portal](https://developers.cap-collectif.com)** to get started:
 
 - [Deploying your own platform](https://developers.cap-collectif.com/start-deployment)
-- [Setting up your development environment](https://developers.cap-collectif.com/start-dev-environment)
+- [Setting up your development environment](https://developers.cap-collectif.com/start-dev-environment) -->
 
-For more information about Cap Collectif, consult our **[website](https://cap-collectif.com/)**.
-
-- [Case studies](https://cap-collectif.com/realisations-2/)
-- [Blog](https://cap-collectif.com/blog/)
-
-## Contributing
+## 🤝 Contributing
 
 We welcome contributions through GitHub pull request, discussions or issues.
 
-## License
+## 📄 License
 
-Source code in this repository is covered by…
+Source code in this repository is covered by [LICENSE](/LICENSE.md).
