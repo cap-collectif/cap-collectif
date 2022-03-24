@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class CheckIdentificationCodeMutation implements MutationInterface
 {
     public const VIEWER_ALREADY_HAS_A_CODE = 'VIEWER_ALREADY_HAS_A_CODE';
+    public const CODE_MINIMAL_LENGTH = 'CODE_MINIMAL_LENGTH';
     public const LIMIT_REACHED = 'LIMIT_REACHED';
     public const USER_CACHE_KEY = 'userCacheKey';
     protected LoggerInterface $logger;
@@ -40,7 +41,7 @@ class CheckIdentificationCodeMutation implements MutationInterface
                 'errorCode' => self::VIEWER_ALREADY_HAS_A_CODE,
             ];
         }
-        if (\strlen($arguments['identificationCode']) < 32) {
+        if (\strlen($arguments['identificationCode']) < self::CODE_MINIMAL_LENGTH) {
             return [
                 'user' => $user,
                 'errorCode' => CheckIdentificationCode::BAD_CODE,

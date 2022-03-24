@@ -219,7 +219,7 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
         values={Object {}}
       />
     }
-    minlength={32}
+    minlength={8}
     name="IdentificationCodeRequirement"
     placeholder="Ex: 25FOVC10"
     type="text"

@@ -29,7 +29,8 @@ class CreateUserIdentificationCodeListMutation implements MutationInterface
         $list = $this->generateListAndCodes(
             $input->offsetGet('name'),
             $viewer,
-            $input->offsetGet('data')
+            $input->offsetGet('data'),
+            $input->offsetGet('codeLength')
         );
         $this->em->persist($list);
         $this->em->flush();
@@ -40,19 +41,21 @@ class CreateUserIdentificationCodeListMutation implements MutationInterface
     private function generateListAndCodes(
         string $name,
         User $owner,
-        array $csvData
+        array $csvData,
+        ?int $codeLength
     ): UserIdentificationCodeList {
         $list = self::generateList($name, $owner);
-        $this->generateUserIdentificationCodesForList($list, $csvData);
+        $this->generateUserIdentificationCodesForList($list, $csvData, $codeLength);
 
         return $list;
     }
 
     private function generateUserIdentificationCodesForList(
         UserIdentificationCodeList $list,
-        array $csvData
+        array $csvData,
+        ?int $codeLength
     ): void {
-        $this->addCodesToCsvData($csvData);
+        $this->addCodesToCsvData($csvData, $codeLength);
         foreach ($csvData as $csvDatum) {
             $userIdentificationCode = self::generateUserIdentificationCodeFromDatum($csvDatum);
             $userIdentificationCode->setList($list);
@@ -60,19 +63,19 @@ class CreateUserIdentificationCodeListMutation implements MutationInterface
         }
     }
 
-    private function addCodesToCsvData(array &$csvData): void
+    private function addCodesToCsvData(array &$csvData, ?int $codeLength): void
     {
-        $newCodes = $this->generatePlainCodes(\count($csvData));
+        $newCodes = $this->generatePlainCodes(\count($csvData), $codeLength);
         foreach ($csvData as $i => $csvDatum) {
             $csvData[$i]['code'] = $newCodes[$i];
         }
     }
 
-    private function generatePlainCodes(int $nb): array
+    private function generatePlainCodes(int $nb, ?int $codeLength): array
     {
         return IdentificationCodeGenerator::generateArrayOfCodes(
             $nb,
-            null,
+            $codeLength,
             $this->codeRepository->getPlainCodes()
         );
     }

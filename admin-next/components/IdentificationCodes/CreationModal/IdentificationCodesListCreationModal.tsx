@@ -4,9 +4,10 @@ import { FC, useState } from 'react';
 import { CreateUserIdentificationCodeListMutationResponse } from '@relay/CreateUserIdentificationCodeListMutation.graphql';
 import { DataType } from '../DataType';
 import CreateUserIdentificationCodeListMutation from '../../../mutations/CreateUserIdentificationCodeListMutation';
-import IdentificationCodesListCreationModalHeader from './IdentificationCodesListCreationModalHeader';
 import IdentificationCodesListCreationModalBody from './IdentificationCodesListCreationModalBody';
 import IdentificationCodesListCreationModalFooter from './IdentificationCodesListCreationModalFooter';
+
+const DEFAULT_CODE_LENGTH = 8;
 
 export const IdentificationCodesListCreationModal: FC<{
     connectionName: string;
@@ -30,6 +31,7 @@ export const IdentificationCodesListCreationModal: FC<{
             input: {
                 data: data.validData,
                 name: name,
+                codeLength: DEFAULT_CODE_LENGTH,
             },
             connections: [connectionName],
             edgeTypeName: 'UserIdentificationCodeList',

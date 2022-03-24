@@ -9,3 +9,5 @@ CreateUserIdentificationCodeListInput:
             data:
                 type: '[CreateUserIdentificationCodeListInputDatum!]!'
                 description: 'Data for the codes creation.'
+            codeLength:
+                type: 'Int'

@@ -27,6 +27,8 @@ import type { RequirementsForm_step } from '~relay/RequirementsForm_step.graphql
 
 export const formName = 'requirements-form';
 
+const CODE_MINIMAL_LENGTH = 8;
+
 type GoogleMapsAddress = {|
   +formatted: ?string,
   +json: string,
@@ -93,12 +95,12 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, props: Props): Pr
     if (requirement.viewerValue) {
       return Promise.resolve();
     }
-    if (newValue.length < 32) {
+    if (newValue.length < CODE_MINIMAL_LENGTH) {
       const errors = {};
       errors.IdentificationCodeRequirement = 'BAD_CODE';
       reject(errors);
     }
-    if (!requirement.viewerValue && newValue.length >= 32) {
+    if (!requirement.viewerValue && newValue.length >= CODE_MINIMAL_LENGTH) {
       return checkIdentificationCode(newValue).then(response => {
         const errors = {};
         if (response) {
@@ -344,7 +346,9 @@ export const RequirementsForm = ({ step, submitting, submitSucceeded, change }: 
             <Field
               addonBefore={requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined}
               minlength={
-                requirement.__typename === 'IdentificationCodeRequirement' ? 32 : undefined
+                requirement.__typename === 'IdentificationCodeRequirement'
+                  ? CODE_MINIMAL_LENGTH
+                  : undefined
               }
               id={
                 requirement.__typename === 'IdentificationCodeRequirement'
