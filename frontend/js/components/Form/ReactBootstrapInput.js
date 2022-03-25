@@ -214,7 +214,12 @@ class ReactBootstrapInput extends React.Component<Props> {
     const ariaDescribedBy = `${props.id ? `label-${props.id}` : ''} ${
       props.help && props.id ? `${props.id}-help` : ''
     }`;
+
     const ariaInvalid = !!errors;
+
+    const ariaLabelledby = ariaInvalid
+      ? `${props.id ? `label-${props.id} ${props.id}-error` : ''}`
+      : undefined;
 
     if (type === 'editor') {
       return (
@@ -376,6 +381,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         aria-required={ariaRequired}
         type={props.componentClass ? undefined : type !== 'number' ? type : 'text'}
         value={value}
+        aria-labelledby={ariaLabelledby}
         {...props}>
         {children}
       </FormControl>
@@ -550,6 +556,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           value={value}
           {...props}
           aria-describedby={ariaDescribedBy}
+          aria-labelledby={ariaLabelledby}
           aria-invalid={ariaInvalid}
           aria-required={ariaRequired}
         />
@@ -565,6 +572,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             value={value}
             {...props}
             aria-describedby={ariaDescribedBy}
+            aria-labelledby={ariaLabelledby}
             aria-invalid={ariaInvalid}
             aria-required={ariaRequired}
           />

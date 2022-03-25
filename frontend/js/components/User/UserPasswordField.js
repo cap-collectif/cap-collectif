@@ -73,7 +73,6 @@ export class UserPasswordField extends React.Component<Props, UserPasswordFieldS
               name={name}
               id={id}
               divClassName={divClassName || ''}
-              hideValidationMessage={isPasswordFocus}
               ariaRequired={ariaRequired}
               autoComplete={autoComplete}
               label={label || null}
@@ -92,7 +91,6 @@ export class UserPasswordField extends React.Component<Props, UserPasswordFieldS
         name={name}
         id={id}
         divClassName={divClassName || ''}
-        hideValidationMessage={isPasswordFocus}
         ariaRequired={ariaRequired}
         autoComplete={autoComplete}
         label={label || null}

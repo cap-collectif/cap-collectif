@@ -1,19 +1,19 @@
 // @flow
-import React, { PureComponent } from 'react';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import * as React from 'react';
+import { useIntl, FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { DatesInterval } from '../Utils/DatesInterval';
 import DarkenGradientMedia from '../Ui/Medias/DarkenGradientMedia';
 import RatioMediaContainer from '../Ui/Medias/RatioMediaContainer';
 
-type Props = {
+type CarouselDesktopProps = {
   highlighteds: Array<Object>,
 };
 
-export class CarouselDesktop extends PureComponent<Props> {
-  componentDidMount() {
-    const { highlighteds } = this.props;
+export const CarouselDesktop = ({ highlighteds }: CarouselDesktopProps) => {
+  const intl = useIntl();
 
+  React.useEffect(() => {
     $('#carousel').on('slid.bs.carousel', () => {
       const lastSlide = highlighteds.length - 1;
       const firstSlide = 0;
@@ -39,10 +39,9 @@ export class CarouselDesktop extends PureComponent<Props> {
         leftArrow.classList.remove('disabled');
       }
     });
-  }
+  }, [highlighteds]);
 
-  getEmptyNavItem = () => {
-    const { highlighteds } = this.props;
+  const getEmptyNavItem = () => {
     const emptyItem = [];
 
     for (let i = 0; i < 4 - highlighteds.length; i++) {
@@ -52,7 +51,7 @@ export class CarouselDesktop extends PureComponent<Props> {
     return emptyItem;
   };
 
-  getItemDate = (type: string, item: Object) => (
+  const getItemDate = (type: string, item: Object) => (
     <span className="carousel__date">
       {type === 'event' && item.startAt && item.endAt && (
         <DatesInterval startAt={item.startAt} endAt={item.endAt} />
@@ -84,130 +83,122 @@ export class CarouselDesktop extends PureComponent<Props> {
     </span>
   );
 
-  render() {
-    const { highlighteds } = this.props;
+  return (
+    <div
+      className="carousel__desktop carousel slide"
+      id="carousel"
+      data-pause="hover"
+      data-ride="carousel"
+      data-wrap="false"
+      data-keyboard="true">
+      <div className="carousel__navigation" id="carousel-navigation">
+        <ul className="carousel-indicators">
+          {highlighteds.map((highlighted, index) => {
+            const highlightedType = highlighted.object_type;
+            const activeItem = index === 0 ? 'carousel-nav-item active' : 'carousel-nav-item';
 
-    return (
-      <div
-        className="carousel__desktop carousel slide"
-        id="carousel"
-        data-pause="hover"
-        data-ride="carousel"
-        data-wrap="false"
-        data-keyboard="true">
-        <div className="carousel__navigation" id="carousel-navigation">
-          <ul className="carousel-indicators">
+            const item = highlighted[highlightedType];
+
+            const maxItemLength = 55;
+            const trimmedString =
+              item.title.length > maxItemLength
+                ? `${item.title.substring(0, maxItemLength)}...`
+                : item.title;
+
+            return (
+              <li key={index} className={activeItem} data-target="#carousel" data-slide-to={index}>
+                <p>
+                  <span className="carousel__type">
+                    <FormattedMessage id={`type-${highlighted.object_type}`} />
+                  </span>
+                  <br />
+                  <span className="carousel__title">{trimmedString}</span>
+                  <br />
+                  {getItemDate(highlightedType, item)}
+                </p>
+              </li>
+            );
+          })}
+          {getEmptyNavItem()}
+          <div id="active-bg-item" />
+        </ul>
+      </div>
+      <div className="carousel__content">
+        <RatioMediaContainer>
+          <div className="carousel-inner" id="carousel-inner" role="listbox">
             {highlighteds.map((highlighted, index) => {
               const highlightedType = highlighted.object_type;
-              const activeItem = index === 0 ? 'carousel-nav-item active' : 'carousel-nav-item';
-
+              const activeItem = index === 0 ? 'item active' : 'item';
               const item = highlighted[highlightedType];
 
-              const maxItemLength = 55;
-              const trimmedString =
-                item.title.length > maxItemLength
-                  ? `${item.title.substring(0, maxItemLength)}...`
-                  : item.title;
+              const getMedia = () => {
+                if (item.media) {
+                  return (
+                    <DarkenGradientMedia
+                      width="100%"
+                      height="100%"
+                      url={item.media.url}
+                      title={item.title}
+                    />
+                  );
+                }
+
+                if (item.cover) {
+                  return (
+                    <DarkenGradientMedia
+                      width="100%"
+                      height="100%"
+                      url={item.cover.url}
+                      title={item.title}
+                    />
+                  );
+                }
+
+                return <div className="bg--default bg--project" />;
+              };
 
               return (
-                <li
-                  key={index}
-                  className={activeItem}
-                  data-target="#carousel"
-                  data-slide-to={index}>
-                  <p>
-                    <span className="carousel__type">
-                      <FormattedMessage id={`type-${highlighted.object_type}`} />
-                    </span>
-                    <br />
-                    <span className="carousel__title">{trimmedString}</span>
-                    <br />
-                    {this.getItemDate(highlightedType, item)}
-                  </p>
-                </li>
+                <div key={index} className={activeItem} data-item={index}>
+                  {getMedia()}
+                  <div className="carousel-caption">
+                    <p>
+                      <span className="carousel__type">
+                        <FormattedMessage id={`type-${highlighted.object_type}`} />
+                      </span>
+                      <br />
+                      <a className="carousel__title" href={item._links ? item._links.show : '#'}>
+                        {item.title}
+                      </a>
+                      <br />
+                      {getItemDate(highlightedType, item)}
+                    </p>
+                  </div>
+                </div>
               );
             })}
-            {this.getEmptyNavItem()}
-            <div id="active-bg-item" />
-          </ul>
-        </div>
-        <div className="carousel__content">
-          <RatioMediaContainer>
-            <div className="carousel-inner" id="carousel-inner" role="listbox">
-              {highlighteds.map((highlighted, index) => {
-                const highlightedType = highlighted.object_type;
-                const activeItem = index === 0 ? 'item active' : 'item';
-                const item = highlighted[highlightedType];
-
-                const getMedia = () => {
-                  if (item.media) {
-                    return (
-                      <DarkenGradientMedia
-                        width="100%"
-                        height="100%"
-                        url={item.media.url}
-                        title={item.title}
-                      />
-                    );
-                  }
-
-                  if (item.cover) {
-                    return (
-                      <DarkenGradientMedia
-                        width="100%"
-                        height="100%"
-                        url={item.cover.url}
-                        title={item.title}
-                      />
-                    );
-                  }
-
-                  return <div className="bg--default bg--project" />;
-                };
-
-                return (
-                  <div key={index} className={activeItem} data-item={index}>
-                    {getMedia()}
-                    <div className="carousel-caption">
-                      <p>
-                        <span className="carousel__type">
-                          <FormattedMessage id={`type-${highlighted.object_type}`} />
-                        </span>
-                        <br />
-                        <a className="carousel__title" href={item._links ? item._links.show : '#'}>
-                          {item.title}
-                        </a>
-                        <br />
-                        {this.getItemDate(highlightedType, item)}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <a
-              className="left carousel-control disabled"
-              id="left-arrow"
-              href="#carousel"
-              role="button"
-              data-slide="prev">
-              <i className="cap-arrow-37" />
-              <span className="sr-only">Previous</span>
-            </a>
-            <a
-              className="right carousel-control"
-              id="right-arrow"
-              href="#carousel"
-              role="button"
-              data-slide="next">
-              <i className="cap-arrow-38" />
-              <span className="sr-only">Next</span>
-            </a>
-          </RatioMediaContainer>
-        </div>
+          </div>
+          <a
+            className="left carousel-control disabled"
+            id="left-arrow"
+            href="#carousel"
+            role="button"
+            data-slide="prev">
+            <i className="cap-arrow-37" />
+            <span className="sr-only">{intl.formatMessage({ id: 'global.previous' })}</span>
+          </a>
+          <a
+            className="right carousel-control"
+            id="right-arrow"
+            href="#carousel"
+            role="button"
+            data-slide="next">
+            <i className="cap-arrow-38" />
+            <span className="sr-only">{intl.formatMessage({ id: 'global.next' })}</span>
+          </a>
+        </RatioMediaContainer>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default CarouselDesktop;

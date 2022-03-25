@@ -17,7 +17,7 @@
         {%  endif %}
 
         <div class="box">
-            <h2 class="theme__title  h3"><a href="{{ path('app_theme_show', {'slug': theme.translate.slug}) }}">{{ theme.translate.title }}</a></h2>
+            <h3 class="theme__title  h3"><a href="{{ path('app_theme_show', {'slug': theme.translate.slug}) }}">{{ theme.translate.title }}</a></h3>
             {% set nbProjects = theme.countEnabledProjects() %}
             {% set nbPosts = theme.countEnabledPosts() %}
             {% set nbEvents = theme.countEnabledEvents() %}

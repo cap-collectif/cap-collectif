@@ -70,7 +70,7 @@ export const DistrictAdminFields = ({
               <div className="excerpt inline">
                 <FormattedMessage id="format.GeoJSON" />
                 <a
-                  href="https://aide.cap-collectif.com/article/51-creer-un-formulaire-de-depot#affichage"
+                  href="https://aide.cap-collectif.com/article/205-budget-participatif-creer-un-formulaire-de-depot-de-propositions#zones"
                   rel="noopener noreferrer"
                   target="_blank"
                   className="ml-5">

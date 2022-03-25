@@ -361,7 +361,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
         <span
           className="sr-only"
         >
-          Previous
+          global.previous
         </span>
       </a>
       <a
@@ -377,7 +377,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
         <span
           className="sr-only"
         >
-          Next
+          global.next
         </span>
       </a>
     </RatioMediaContainer>

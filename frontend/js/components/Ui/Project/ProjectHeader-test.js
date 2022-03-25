@@ -10,45 +10,45 @@ const authors = [
     id: '1',
     username: 'Mikasa Estucasa',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '2',
     username: 'John Mark',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '3',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '4',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '5',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '6',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '6',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
-]
+];
 
 describe('<ProjectHeader />', () => {
   it('should render correctly', () => {
@@ -85,9 +85,9 @@ describe('<ProjectHeader />', () => {
               />
             </ProjectHeader.Info>
             <ProjectHeader.Socials>
-              <ProjectHeader.Social href="#" name="FACEBOOK" />
-              <ProjectHeader.Social href="#" name="TWITTER" />
-              <ProjectHeader.Social href="#" name="LINK" />
+              <ProjectHeader.Social onClick={() => {}} name="FACEBOOK" />
+              <ProjectHeader.Social onClick={() => {}} name="TWITTER" />
+              <ProjectHeader.Social onClick={() => {}} name="LINK" />
             </ProjectHeader.Socials>
           </ProjectHeader.Content>
           <ProjectHeader.CoverImage src="/cover.jpg" alt="Cover Image" isArchived={false} />

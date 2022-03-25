@@ -53,28 +53,23 @@ const ProjectHeaderShareButtons = ({ url, title, ...rest }: Props): React.Node =
   return (
     <ProjectHeader.Socials {...rest}>
       <ProjectHeader.Social
-        href="#"
-        onClick={(event: Event) => {
-          event.preventDefault();
+        onClick={() => {
           share(title, url, 'facebook');
         }}
         name="FACEBOOK"
+        ariaLabel={intl.formatMessage({ id: 'share-link-facebook' })}
       />
       <ProjectHeader.Social
-        href="#"
-        onClick={(event: Event) => {
-          event.preventDefault();
+        onClick={() => {
           share(title, url, 'twitter');
         }}
         name="TWITTER"
+        ariaLabel={intl.formatMessage({ id: 'share-link-twitter' })}
       />
       <ProjectHeader.Social
-        href="#"
-        onClick={(event: Event) => {
-          event.preventDefault();
-          onOpen();
-        }}
+        onClick={onOpen}
         name="LINK"
+        ariaLabel={intl.formatMessage({ id: 'open-share-link-modal' })}
       />
       {renderModal()}
     </ProjectHeader.Socials>

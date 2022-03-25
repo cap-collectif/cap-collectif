@@ -10,14 +10,14 @@ export default {
   component: ProjectHeader,
   argTypes: {
     title: {
-      control: {type: 'text'},
+      control: { type: 'text' },
       defaultValue: 'Projet de loi pour une République numérique ',
     },
     coverURL: {
-      control: {type: 'text'},
+      control: { type: 'text' },
       defaultValue: 'https://source.unsplash.com/random/400x800',
     },
-    onClick: {action: 'clicked'},
+    onClick: { action: 'clicked' },
   },
 };
 
@@ -26,48 +26,48 @@ const authors = [
     id: '1',
     username: 'Mikasa Estucasa',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '2',
     username: 'John Mark',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '3',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '4',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '5',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '6',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
   {
     id: '6',
     username: 'Dan Abramov',
     url: '',
-    avatarUrl: ''
+    avatarUrl: '',
   },
-]
+];
 
 const Template = (args: any) => (
-  <MockProviders store={{default: {parameters: {'color.btn.primary.bg': '#546E7A'}}}}>
+  <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
     <Flex width={['100%', '1080px']} justify="center">
       <ProjectHeader>
         <ProjectHeader.Cover isArchived={false}>
@@ -77,33 +77,33 @@ const Template = (args: any) => (
                 name="Mikasa Estucasa"
                 src="https://risibank.fr/cache/stickers/d1261/126102-full.png"
               />
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="John Mark"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="John Mark" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
             </ProjectHeader.Authors>
             <ProjectHeader.Title>{args.title}</ProjectHeader.Title>
             <ProjectHeader.Blocks>
-              <ProjectHeader.Block title="Contributions" content={8488}/>
-              <ProjectHeader.Block title="Jours restants" content={136}/>
-              <ProjectHeader.Block title="Votes" content={147529}/>
-              <ProjectHeader.Block title="Participants" content={21472}/>
+              <ProjectHeader.Block title="Contributions" content={8488} />
+              <ProjectHeader.Block title="Jours restants" content={136} />
+              <ProjectHeader.Block title="Votes" content={147529} />
+              <ProjectHeader.Block title="Participants" content={21472} />
             </ProjectHeader.Blocks>
             <ProjectHeader.Info>
-              <ProjectHeader.Info.Location content="Nantes"/>
-              <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne"/>
+              <ProjectHeader.Info.Location content="Nantes" />
+              <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne" />
               <ProjectHeader.Info.Theme
                 href="#"
                 content="Projet de loi, consentement, seuil d’âge, mineur"
               />
             </ProjectHeader.Info>
             <ProjectHeader.Socials>
-              <ProjectHeader.Social href="#" name="FACEBOOK"/>
-              <ProjectHeader.Social href="#" name="TWITTER"/>
-              <ProjectHeader.Social href="#" name="LINK"/>
+              <ProjectHeader.Social onClick={() => {}} name="FACEBOOK" />
+              <ProjectHeader.Social onClick={() => {}} name="TWITTER" />
+              <ProjectHeader.Social onClick={() => {}} name="LINK" />
             </ProjectHeader.Socials>
           </ProjectHeader.Content>
           <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} isArchived={false} />
@@ -173,7 +173,7 @@ const Template = (args: any) => (
               content="30 jours restants"
               tooltipLabel="30 jours restants"
               state="ACTIVE">
-              <ProjectHeader.Step.Progress progress={50}/>
+              <ProjectHeader.Step.Progress progress={50} />
             </ProjectHeader.Step>
             <ProjectHeader.Step
               href="#"
@@ -216,7 +216,7 @@ Mobile.parameters = {
 Mobile.args = {};
 
 export const withoutCoverImage = (args: any) => (
-  <MockProviders store={{default: {parameters: {'color.btn.primary.bg': '#546E7A'}}}}>
+  <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
     <Flex width={['100%', '1080px']} justify="center">
       <ProjectHeader>
         <ProjectHeader.Cover isArchived={false}>
@@ -226,33 +226,33 @@ export const withoutCoverImage = (args: any) => (
                 name="Mikasa Estucasa"
                 src="https://risibank.fr/cache/stickers/d1261/126102-full.png"
               />
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="John Mark"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="John Mark" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
             </ProjectHeader.Authors>
             <ProjectHeader.Title>{args.title}</ProjectHeader.Title>
             <ProjectHeader.Blocks>
-              <ProjectHeader.Block title="Contributions" content={8488}/>
-              <ProjectHeader.Block title="Jours restants" content={136}/>
-              <ProjectHeader.Block title="Votes" content={147529}/>
-              <ProjectHeader.Block title="Participants" content={21472}/>
+              <ProjectHeader.Block title="Contributions" content={8488} />
+              <ProjectHeader.Block title="Jours restants" content={136} />
+              <ProjectHeader.Block title="Votes" content={147529} />
+              <ProjectHeader.Block title="Participants" content={21472} />
             </ProjectHeader.Blocks>
             <ProjectHeader.Info>
-              <ProjectHeader.Info.Location content="Nantes"/>
-              <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne"/>
+              <ProjectHeader.Info.Location content="Nantes" />
+              <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne" />
               <ProjectHeader.Info.Theme
                 href="#"
                 content="Projet de loi, consentement, seuil d’âge, mineur"
               />
             </ProjectHeader.Info>
             <ProjectHeader.Socials>
-              <ProjectHeader.Social href="#" name="FACEBOOK"/>
-              <ProjectHeader.Social href="#" name="TWITTER"/>
-              <ProjectHeader.Social href="#" name="LINK"/>
+              <ProjectHeader.Social onClick={() => {}} name="FACEBOOK" />
+              <ProjectHeader.Social onClick={() => {}} name="TWITTER" />
+              <ProjectHeader.Social onClick={() => {}} name="LINK" />
             </ProjectHeader.Socials>
           </ProjectHeader.Content>
         </ProjectHeader.Cover>
@@ -285,7 +285,7 @@ export const withoutCoverImage = (args: any) => (
               content="30 jours restants"
               tooltipLabel="30 jours restants"
               state="ACTIVE">
-              <ProjectHeader.Step.Progress progress={50}/>
+              <ProjectHeader.Step.Progress progress={50} />
             </ProjectHeader.Step>
           </ProjectHeader.Steps>
         </ProjectHeader.Frise>
@@ -294,7 +294,7 @@ export const withoutCoverImage = (args: any) => (
   </MockProviders>
 );
 export const withCoverVideo = (args: any) => (
-  <MockProviders store={{default: {parameters: {'color.btn.primary.bg': '#546E7A'}}}}>
+  <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
     <Flex width={['100%', '1080px']} justify="center">
       <ProjectHeader>
         <ProjectHeader.Cover isArchived={false}>
@@ -304,33 +304,33 @@ export const withCoverVideo = (args: any) => (
                 name="Mikasa Estucasa"
                 src="https://risibank.fr/cache/stickers/d1261/126102-full.png"
               />
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="John Mark"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="John Mark" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
             </ProjectHeader.Authors>
             <ProjectHeader.Title>{args.title}</ProjectHeader.Title>
             <ProjectHeader.Blocks>
-              <ProjectHeader.Block title="Contributions" content={8488}/>
-              <ProjectHeader.Block title="Jours restants" content={136}/>
-              <ProjectHeader.Block title="Votes" content={147529}/>
-              <ProjectHeader.Block title="Participants" content={21472}/>
+              <ProjectHeader.Block title="Contributions" content={8488} />
+              <ProjectHeader.Block title="Jours restants" content={136} />
+              <ProjectHeader.Block title="Votes" content={147529} />
+              <ProjectHeader.Block title="Participants" content={21472} />
             </ProjectHeader.Blocks>
             <ProjectHeader.Info>
-              <ProjectHeader.Info.Location content="Nantes"/>
-              <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne"/>
+              <ProjectHeader.Info.Location content="Nantes" />
+              <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne" />
               <ProjectHeader.Info.Theme
                 href="#"
                 content="Projet de loi, consentement, seuil d’âge, mineur"
               />
             </ProjectHeader.Info>
             <ProjectHeader.Socials>
-              <ProjectHeader.Social href="#" name="FACEBOOK"/>
-              <ProjectHeader.Social href="#" name="TWITTER"/>
-              <ProjectHeader.Social href="#" name="LINK"/>
+              <ProjectHeader.Social onClick={() => {}} name="FACEBOOK" />
+              <ProjectHeader.Social onClick={() => {}} name="TWITTER" />
+              <ProjectHeader.Social onClick={() => {}} name="LINK" />
             </ProjectHeader.Socials>
           </ProjectHeader.Content>
           <ProjectHeader.CoverVideo
@@ -369,7 +369,7 @@ export const withCoverVideo = (args: any) => (
               content="30 jours restants"
               tooltipLabel="30 jours restants"
               state="ACTIVE">
-              <ProjectHeader.Step.Progress progress={50}/>
+              <ProjectHeader.Step.Progress progress={50} />
             </ProjectHeader.Step>
           </ProjectHeader.Steps>
         </ProjectHeader.Frise>
@@ -388,33 +388,33 @@ export const withoutFrise = (args: any) => (
               name="Mikasa Estucasa"
               src="https://risibank.fr/cache/stickers/d1261/126102-full.png"
             />
-            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-            <Avatar name="John Mark"/>
-            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
+            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+            <Avatar name="John Mark" />
+            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
           </ProjectHeader.Authors>
           <ProjectHeader.Title>{args.title}</ProjectHeader.Title>
           <ProjectHeader.Blocks>
-            <ProjectHeader.Block title="Contributions" content={8488}/>
-            <ProjectHeader.Block title="Jours restants" content={136}/>
-            <ProjectHeader.Block title="Votes" content={147529}/>
-            <ProjectHeader.Block title="Participants" content={21472}/>
+            <ProjectHeader.Block title="Contributions" content={8488} />
+            <ProjectHeader.Block title="Jours restants" content={136} />
+            <ProjectHeader.Block title="Votes" content={147529} />
+            <ProjectHeader.Block title="Participants" content={21472} />
           </ProjectHeader.Blocks>
           <ProjectHeader.Info>
-            <ProjectHeader.Info.Location content="Nantes"/>
-            <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne"/>
+            <ProjectHeader.Info.Location content="Nantes" />
+            <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne" />
             <ProjectHeader.Info.Theme
               href="#"
               content="Projet de loi, consentement, seuil d’âge, mineur"
             />
           </ProjectHeader.Info>
           <ProjectHeader.Socials>
-            <ProjectHeader.Social href="#" name="FACEBOOK"/>
-            <ProjectHeader.Social href="#" name="TWITTER"/>
-            <ProjectHeader.Social href="#" name="LINK"/>
+            <ProjectHeader.Social onClick={() => {}} name="FACEBOOK" />
+            <ProjectHeader.Social onClick={() => {}} name="TWITTER" />
+            <ProjectHeader.Social onClick={() => {}} name="LINK" />
           </ProjectHeader.Socials>
         </ProjectHeader.Content>
         <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} isArchived={false} />
@@ -441,23 +441,23 @@ export const oneAuthor = (args: any) => (
           </ProjectHeader.Authors>
           <ProjectHeader.Title>{args.title}</ProjectHeader.Title>
           <ProjectHeader.Blocks>
-            <ProjectHeader.Block title="Contributions" content={8488}/>
-            <ProjectHeader.Block title="Jours restants" content={136}/>
-            <ProjectHeader.Block title="Votes" content={147529}/>
-            <ProjectHeader.Block title="Participants" content={21472}/>
+            <ProjectHeader.Block title="Contributions" content={8488} />
+            <ProjectHeader.Block title="Jours restants" content={136} />
+            <ProjectHeader.Block title="Votes" content={147529} />
+            <ProjectHeader.Block title="Participants" content={21472} />
           </ProjectHeader.Blocks>
           <ProjectHeader.Info>
-            <ProjectHeader.Info.Location content="Nantes"/>
-            <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne"/>
+            <ProjectHeader.Info.Location content="Nantes" />
+            <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne" />
             <ProjectHeader.Info.Theme
               href="#"
               content="Projet de loi, consentement, seuil d’âge, mineur"
             />
           </ProjectHeader.Info>
           <ProjectHeader.Socials>
-            <ProjectHeader.Social href="#" name="FACEBOOK"/>
-            <ProjectHeader.Social href="#" name="TWITTER"/>
-            <ProjectHeader.Social href="#" name="LINK"/>
+            <ProjectHeader.Social onClick={() => {}} name="FACEBOOK" />
+            <ProjectHeader.Social onClick={() => {}} name="TWITTER" />
+            <ProjectHeader.Social onClick={() => {}} name="LINK" />
           </ProjectHeader.Socials>
         </ProjectHeader.Content>
         <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} isArchived={false} />
@@ -491,7 +491,7 @@ export const oneAuthor = (args: any) => (
             content="30 jours restants"
             tooltipLabel="30 jours restants"
             state="ACTIVE">
-            <ProjectHeader.Step.Progress progress={50}/>
+            <ProjectHeader.Step.Progress progress={50} />
           </ProjectHeader.Step>
           <ProjectHeader.Step
             href="#"
@@ -525,34 +525,33 @@ export const multipleAuthor = (args: any) => (
     <ProjectHeader>
       <ProjectHeader.Cover isArchived={false}>
         <ProjectHeader.Content>
-          <ProjectHeader.Authors active authors={authors.slice(0, 3)}
-          >
+          <ProjectHeader.Authors active authors={authors.slice(0, 3)}>
             <Avatar
               name="Mikasa Estucasa"
               src="https://risibank.fr/cache/stickers/d1261/126102-full.png"
             />
-            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov"/>
-            <Avatar name="John Mark"/>
+            <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+            <Avatar name="John Mark" />
           </ProjectHeader.Authors>
           <ProjectHeader.Title>{args.title}</ProjectHeader.Title>
           <ProjectHeader.Blocks>
-            <ProjectHeader.Block title="Contributions" content={8488}/>
-            <ProjectHeader.Block title="Jours restants" content={136}/>
-            <ProjectHeader.Block title="Votes" content={147529}/>
-            <ProjectHeader.Block title="Participants" content={21472}/>
+            <ProjectHeader.Block title="Contributions" content={8488} />
+            <ProjectHeader.Block title="Jours restants" content={136} />
+            <ProjectHeader.Block title="Votes" content={147529} />
+            <ProjectHeader.Block title="Participants" content={21472} />
           </ProjectHeader.Blocks>
           <ProjectHeader.Info>
-            <ProjectHeader.Info.Location content="Nantes"/>
-            <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne"/>
+            <ProjectHeader.Info.Location content="Nantes" />
+            <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne" />
             <ProjectHeader.Info.Theme
               href="#"
               content="Projet de loi, consentement, seuil d’âge, mineur"
             />
           </ProjectHeader.Info>
           <ProjectHeader.Socials>
-            <ProjectHeader.Social href="#" name="FACEBOOK"/>
-            <ProjectHeader.Social href="#" name="TWITTER"/>
-            <ProjectHeader.Social href="#" name="LINK"/>
+            <ProjectHeader.Social onClick={() => {}} name="FACEBOOK" />
+            <ProjectHeader.Social onClick={() => {}} name="TWITTER" />
+            <ProjectHeader.Social onClick={() => {}} name="LINK" />
           </ProjectHeader.Socials>
         </ProjectHeader.Content>
         <ProjectHeader.CoverImage src={args.coverURL} alt={args.coverURL} isArchived={false} />
@@ -586,7 +585,7 @@ export const multipleAuthor = (args: any) => (
             content="30 jours restants"
             tooltipLabel="30 jours restants"
             state="ACTIVE">
-            <ProjectHeader.Step.Progress progress={50}/>
+            <ProjectHeader.Step.Progress progress={50} />
           </ProjectHeader.Step>
           <ProjectHeader.Step
             href="#"
@@ -649,7 +648,7 @@ export const MultiFrise = (args: any) => (
           content="30 jours restants"
           tooltipLabel="30 jours restants"
           state="FINISHED">
-          <ProjectHeader.Step.Progress progress={50}/>
+          <ProjectHeader.Step.Progress progress={50} />
         </ProjectHeader.Step>
         <ProjectHeader.Step
           href="#"
@@ -710,7 +709,7 @@ export const MultiFrise = (args: any) => (
           content="30 jours restants"
           tooltipLabel="30 jours restants"
           state="ACTIVE">
-          <ProjectHeader.Step.Progress progress={90}/>
+          <ProjectHeader.Step.Progress progress={90} />
         </ProjectHeader.Step>
       </ProjectHeader.Steps>
     </ProjectHeader.Frise>
@@ -723,7 +722,7 @@ export const MultiFrise = (args: any) => (
           content="terminé"
           tooltipLabel="Terminé"
           state="ACTIVE">
-          <ProjectHeader.Step.Progress progress={90}/>
+          <ProjectHeader.Step.Progress progress={90} />
         </ProjectHeader.Step>
         <ProjectHeader.Step
           href="#"

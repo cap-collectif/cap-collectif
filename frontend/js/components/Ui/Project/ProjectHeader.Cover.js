@@ -9,7 +9,6 @@ import { formatBigNumber } from '~/utils/bigNumberFormatter';
 import DefaultProjectImage from '~/components/Project/Preview/DefaultProjectImage';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import Play from './SVG/Play';
-import { type Props as IconProps } from '~ds/Icon/Icon';
 import { type Props as AvatarGroupProps } from '~ds/AvatarGroup/AvatarGroup';
 import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
 
@@ -503,19 +502,24 @@ export const Socials = ({ children, ...rest }: SocialsProps) => (
     {children}
   </Box>
 );
+
 type SocialProps = {|
-  href: string,
   name: string,
-  ...IconProps,
+  onClick: () => void,
+  ariaLabel?: string,
 |};
-export const Social = ({ href, name, ...rest }: SocialProps) => (
+
+export const Social = ({ onClick, ariaLabel, name, ...rest }: SocialProps) => (
   <Box
-    as="a"
+    as="button"
     className="projectHeader__social"
     mr={[4, 6]}
-    href={href}
+    p={0}
+    bg="transparent"
+    border="none"
     color="neutral-gray.500"
     width={6}
+    aria-label={ariaLabel}
     sx={{
       boxShadow: 'none !important',
       cursor: 'pointer',
@@ -526,7 +530,9 @@ export const Social = ({ href, name, ...rest }: SocialProps) => (
         color: 'neutral-gray.700',
         outline: 'none',
       },
-    }}>
-    <Icon name={name} size="md" {...rest} />
+    }}
+    onClick={onClick}
+    {...rest}>
+    <Icon name={name} size="md" />
   </Box>
 );

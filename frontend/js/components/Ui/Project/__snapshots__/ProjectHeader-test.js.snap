@@ -132,16 +132,16 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       </Info>
       <Socials>
         <Social
-          href="#"
           name="FACEBOOK"
+          onClick={[Function]}
         />
         <Social
-          href="#"
           name="TWITTER"
+          onClick={[Function]}
         />
         <Social
-          href="#"
           name="LINK"
+          onClick={[Function]}
         />
       </Socials>
     </Content>
