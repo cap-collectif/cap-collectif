@@ -8,17 +8,13 @@ import type { StyledComponent } from 'styled-components';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import { useDisclosure } from '@liinkiing/react-hooks';
+import { Skeleton, Heading, Flex, Button, Icon, CapUIIcon, CapUIIconSize, Box, useTheme } from '@cap-collectif/ui'
 import type { DebateStepPageLinkedArticles_step } from '~relay/DebateStepPageLinkedArticles_step.graphql';
-import AppBox from '~ui/Primitives/AppBox';
-import Heading from '~ui/Primitives/Heading';
-import Flex from '~ui/Primitives/Layout/Flex';
 import DebateArticleCard from '~ui/DebateArticle/DebateArticleCard';
-import Button from '~ds/Button/Button';
 import DebateStepPageLinkedArticlesDrawer from '~/components/Debate/Page/Drawers/DebateStepPageLinkedArticlesDrawer';
 import { DATE_SHORT_LOCALIZED_FORMAT } from '~/shared/date';
-import Skeleton from '~ds/Skeleton';
 import DebateArticlePlaceholder from './DebateArticlePlaceholder';
-import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
+
 
 type Props = {|
   +step: ?DebateStepPageLinkedArticles_step,
@@ -29,7 +25,7 @@ const SLIDER_MAX_ARTICLES_MOBILE = 4;
 
 export const StyledSlider: StyledComponent<{}, {}, typeof Slider> = styled(Slider)`
   .slick-slide {
-    padding: 0 ${props => props.theme.space[3]};
+    padding: 0 ${props => props.spacing};
     height: unset;
     & > div {
       height: 100%;
@@ -67,6 +63,7 @@ export const StyledSlider: StyledComponent<{}, {}, typeof Slider> = styled(Slide
 export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.Node => {
   const { track } = useAnalytics();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const theme = useTheme();
   const debate = step?.debate;
   const articles = debate?.articles?.edges
     ?.filter(Boolean)
@@ -75,7 +72,7 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
   if (!articles || articles.length === 0) return null;
 
   return (
-    <AppBox id={step ? 'DebateStepPageLinkedArticles' : 'DebateStepPageLinkedArticlesLoading'}>
+    <Box id={step ? 'DebateStepPageLinkedArticles' : 'DebateStepPageLinkedArticlesLoading'}>
       {step && isMobile && (
         <DebateStepPageLinkedArticlesDrawer onClose={onClose} isOpen={isOpen} step={step} />
       )}
@@ -100,6 +97,7 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
         }>
         {articles && articles.length > 0 && (
           <StyledSlider
+            spacing={theme.space[3]}
             {...{
               infinite: false,
               dots: true,
@@ -108,12 +106,12 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
               arrows: true,
               nextArrow: (
                 <Button className="slick-arrow slick-next">
-                  <Icon name={ICON_NAME.ARROW_RIGHT} size={ICON_SIZE.SM} color="white" />
+                  <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Sm} color="white" />
                 </Button>
               ),
               prevArrow: (
                 <Button className="slick-arrow slick-prev">
-                  <Icon name={ICON_NAME.ARROW_LEFT} size={ICON_SIZE.SM} color="white" />
+                  <Icon name={CapUIIcon.ArrowLeft} size={CapUIIconSize.Sm} color="white" />
                 </Button>
               ),
               responsive: [
@@ -135,10 +133,10 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
             {articles
               .slice(0, isMobile ? SLIDER_MAX_ARTICLES_MOBILE : articles.length)
               .map(article => (
-                <AppBox
+                <Box
                   as="a"
                   height="100%"
-                  css={{
+                  sx={{
                     userSelect: 'none',
                     '-webkit-user-drag': 'none',
                   }}
@@ -161,12 +159,12 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
                     <DebateArticleCard.Title truncate={54}>{article.title}</DebateArticleCard.Title>
                     <DebateArticleCard.Origin>{article.origin}</DebateArticleCard.Origin>
                   </DebateArticleCard>
-                </AppBox>
+                </Box>
               ))}
           </StyledSlider>
         )}
       </Skeleton>
-    </AppBox>
+    </Box>
   );
 };
 

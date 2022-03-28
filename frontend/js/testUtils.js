@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { Provider as ReakitProvider } from 'reakit';
 import { IntlProvider } from 'react-intl-redux';
 import { RelayEnvironmentProvider } from 'react-relay';
+import { CapUIProvider } from '@cap-collectif/ui';
 import { theme } from '~/styles/theme';
 import appStore from '~/stores/AppStore';
 import type { FeatureFlagType } from '~relay/useFeatureFlagQuery.graphql';
@@ -48,14 +49,18 @@ export const clearSupportForPortals = () => {
   ReactDOM.createPortal.mockClear();
 };
 
-type Props = {| +children: React.Node, +store?: any |};
+type Props = {| +children: React.Node, +store?: any, +useCapUIProvider?: boolean |};
 
-export const MockProviders = ({ children, store = {} }: Props) => {
+export const MockProviders = ({ children, store = {}, useCapUIProvider = false }: Props) => {
   return (
     <Provider store={appStore(store)}>
       <IntlProvider>
         <ReakitProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          {useCapUIProvider ? (
+            <CapUIProvider>{children}</CapUIProvider>
+          ) : (
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          )}
         </ReakitProvider>
       </IntlProvider>
     </Provider>

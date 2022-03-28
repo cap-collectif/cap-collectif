@@ -67,7 +67,7 @@ export const NavbarRight = ({
               { username: user.username },
             )}>
             <UserAvatarDeprecated user={user} size={34} anchor={false} />
-            <AppBox as="span" ml={2}>
+            <AppBox as="span" ml="8px">
               {user.username}
             </AppBox>
             <span className="caret" />
@@ -141,7 +141,7 @@ export const NavbarRight = ({
           </Menu>
         </>
       ) : (
-        <AppBox px={4}>
+        <AppBox px="16px">
           <RegistrationButton className="navbar-btn" />{' '}
           <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
         </AppBox>

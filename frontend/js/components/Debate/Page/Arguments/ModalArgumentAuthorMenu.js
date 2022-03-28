@@ -2,9 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
-import Button from '~ds/Button/Button';
-import { ICON_NAME } from '~ds/Icon/Icon';
-import Modal from '~ds/Modal/Modal';
+import { Button, CapUIIcon, Modal } from '@cap-collectif/ui';
 import type { ModalArgumentAuthorMenu_argument } from '~relay/ModalArgumentAuthorMenu_argument.graphql';
 import ModalEditArgumentMobile from '~/components/Debate/Page/Arguments/ModalEditArgumentMobile';
 import ModalDeleteArgumentMobile from '~/components/Debate/Page/Arguments/ModalDeleteArgumentMobile';
@@ -21,7 +19,7 @@ export const ModalArgumentAuthorMenu = ({ argument, hasViewer = true }: Props): 
       ariaLabel={intl.formatMessage({ id: 'global.menu' })}
       disclosure={
         <Button
-          rightIcon={ICON_NAME.MORE}
+          rightIcon={CapUIIcon.More}
           aria-label={intl.formatMessage({ id: 'global.menu' })}
           color="gray.500"
         />

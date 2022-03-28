@@ -2,11 +2,9 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import styled from 'styled-components';
-import Icon from '~ds/Icon/Icon';
+import {Flex, Text, Box, Icon, CapUIIcon} from '@cap-collectif/ui'
 import { Container } from './VoteView.style';
-import Flex from '~ui/Primitives/Layout/Flex';
-import AppBox from '~ui/Primitives/AppBox';
-import Text from '~ui/Primitives/Text';
+
 
 type Props = {|
   +positivePercentage: number,
@@ -42,7 +40,7 @@ export const VoteView = ({ positivePercentage, isMobile, votesCount }: Props) =>
           {votesCount ? votesCount.FOR : leftPercentage}&nbsp;
           <FormattedMessage id="argument.show.type.for" tagName={React.Fragment} />
         </MobileTextPercentage>
-        <AppBox
+        <Box
           flex={Math.floor(left)}
           bg="green.500"
           position="absolute"
@@ -54,7 +52,7 @@ export const VoteView = ({ positivePercentage, isMobile, votesCount }: Props) =>
           {votesCount ? votesCount.AGAINST : rightPercentage}&nbsp;
           <FormattedMessage id="argument.show.type.against" tagName={React.Fragment} />
         </MobileTextPercentage>
-        <AppBox
+        <Box
           flex={Math.floor(right)}
           bg="red.500"
           position="absolute"
@@ -72,22 +70,22 @@ export const VoteView = ({ positivePercentage, isMobile, votesCount }: Props) =>
         {left > 5 ? (
           <div>
             <div className="circle">
-              <Icon name="THUMB_UP" color="white" size="lg" />
+              <Icon name={CapUIIcon.ThumbUp} color="white" size="lg" />
             </div>
             {[...Array(Math.floor(left / 20) + (left > 10 ? 1 : 0))].map((_, index) => (
               <div className="bubble" key={`${index}-green`}>
-                <Icon name="THUMB_UP" color="white" size="lg" />
+                <Icon name={CapUIIcon.ThumbUp} color="white" size="lg" />
               </div>
             ))}
           </div>
         ) : null}
         <div style={{ opacity: right > 5 ? 1 : 0 }}>
           <div className="circle red">
-            <Icon name="THUMB_UP" color="white" size="lg" />
+            <Icon name={CapUIIcon.ThumbUp} color="white" size="lg" />
           </div>
           {[...Array(Math.floor(right / 20) + (right > 10 ? 1 : 0))].map((_, index) => (
             <div className="bubble reverse" key={`${index}-red`}>
-              <Icon name="THUMB_UP" color="white" size="lg" />
+              <Icon name={CapUIIcon.ThumbUp} color="white" size="lg" />
             </div>
           ))}
         </div>

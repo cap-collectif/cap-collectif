@@ -4,6 +4,7 @@ import { graphql } from 'react-relay';
 import { useFragment, usePagination } from 'relay-hooks';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useMultipleDisclosure } from '@liinkiing/react-hooks';
+import { Box, Spinner, Flex } from '@cap-collectif/ui';
 import type {
   DebateStepPageAlternateArgumentsPagination_debate,
   DebateStepPageAlternateArgumentsPagination_debate$key,
@@ -12,11 +13,8 @@ import type {
   DebateStepPageAlternateArgumentsPagination_viewer,
   DebateStepPageAlternateArgumentsPagination_viewer$key,
 } from '~relay/DebateStepPageAlternateArgumentsPagination_viewer.graphql';
-import AppBox from '~/components/Ui/Primitives/AppBox';
 import ArgumentCard from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type { ConnectionMetadata, RelayHookPaginationProps } from '~/types';
-import Spinner from '~ds/Spinner/Spinner';
-import Flex from '~ui/Primitives/Layout/Flex';
 import { StyledSlider } from '~/components/Debate/Page/LinkedArticles/DebateStepPageLinkedArticles';
 import DebateStepPageArgumentDrawer from '~/components/Debate/Page/Drawers/DebateStepPageArgumentDrawer';
 import ModalModerateArgument from '~/components/Debate/Page/Arguments/ModalModerateArgument';
@@ -40,12 +38,12 @@ const MOBILE_PREVIEW_MAX_ARGUMENTS = 4;
 // $FlowFixMe We need to wait for relay 11
 export const FRAGMENT = graphql`
   fragment DebateStepPageAlternateArgumentsPagination_debate on Debate
-    @argumentDefinitions(
-      orderBy: { type: "DebateArgumentOrder!" }
-      first: { type: "Int", defaultValue: 2 }
-      cursor: { type: "String" }
-      isAuthenticated: { type: "Boolean!" }
-    ) {
+  @argumentDefinitions(
+    orderBy: { type: "DebateArgumentOrder!" }
+    first: { type: "Int", defaultValue: 2 }
+    cursor: { type: "String" }
+    isAuthenticated: { type: "Boolean!" }
+  ) {
     id
     viewerUnpublishedArgument @include(if: $isAuthenticated) {
       id
@@ -176,7 +174,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
   return (
     <>
       {preview ? (
-        <AppBox width="100%">
+        <Box width="100%">
           <StyledSlider
             {...{
               infinite: false,
@@ -228,7 +226,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
               </React.Fragment>
             ))}
           </StyledSlider>
-        </AppBox>
+        </Box>
       ) : (
         <InfiniteScroll
           pageStart={0}
@@ -246,54 +244,50 @@ export const DebateStepPageAlternateArgumentsPagination = ({
           }
           useWindow={false}>
           {viewerUnpublishedArgument && (
-            <AppBox key={viewerUnpublishedArgument.id} marginBottom={6}>
-              <>
-                <DebateStepPageArgumentDrawer
-                  key={`drawer-${viewerUnpublishedArgument.id}`}
-                  argument={viewerUnpublishedArgument}
-                  viewer={viewer}
-                  isOpen={isOpen(`drawer-${viewerUnpublishedArgument.id}`)}
-                  onClose={onClose(`drawer-${viewerUnpublishedArgument.id}`)}
-                />
-                <ArgumentCard
-                  key={viewerUnpublishedArgument.id}
-                  onReadMore={onOpen(`drawer-${viewerUnpublishedArgument.id}`)}
-                  isMobile
-                  argument={viewerUnpublishedArgument}
-                  viewer={viewer}
-                  bg="neutral-gray.100"
-                  mb={6}
-                  setArgumentReported={setArgumentReported}
-                  setModerateArgumentModal={setModerateArgumentModal}
-                  setDeleteModalInfo={setDeleteModalInfo}
-                />
-              </>
-            </AppBox>
+            <Box key={viewerUnpublishedArgument.id} marginBottom={6}>
+              <DebateStepPageArgumentDrawer
+                key={`drawer-${viewerUnpublishedArgument.id}`}
+                argument={viewerUnpublishedArgument}
+                viewer={viewer}
+                isOpen={isOpen(`drawer-${viewerUnpublishedArgument.id}`)}
+                onClose={onClose(`drawer-${viewerUnpublishedArgument.id}`)}
+              />
+              <ArgumentCard
+                key={viewerUnpublishedArgument.id}
+                onReadMore={onOpen(`drawer-${viewerUnpublishedArgument.id}`)}
+                isMobile
+                argument={viewerUnpublishedArgument}
+                viewer={viewer}
+                bg="neutral-gray.100"
+                mb={6}
+                setArgumentReported={setArgumentReported}
+                setModerateArgumentModal={setModerateArgumentModal}
+                setDeleteModalInfo={setDeleteModalInfo}
+              />
+            </Box>
           )}
           {debateArguments?.map(argument => (
-            <AppBox key={argument.id} marginBottom={6}>
-              <>
-                <DebateStepPageArgumentDrawer
-                  key={`drawer-${argument.id}`}
-                  argument={argument}
-                  viewer={viewer}
-                  isOpen={isOpen(`drawer-${argument.id}`)}
-                  onClose={onClose(`drawer-${argument.id}`)}
-                />
-                <ArgumentCard
-                  key={argument.id}
-                  onReadMore={onOpen(`drawer-${argument.id}`)}
-                  isMobile
-                  argument={argument}
-                  viewer={viewer}
-                  bg="neutral-gray.100"
-                  mb={6}
-                  setArgumentReported={setArgumentReported}
-                  setModerateArgumentModal={setModerateArgumentModal}
-                  setDeleteModalInfo={setDeleteModalInfo}
-                />
-              </>
-            </AppBox>
+            <Box key={argument.id} marginBottom={6}>
+              <DebateStepPageArgumentDrawer
+                key={`drawer-${argument.id}`}
+                argument={argument}
+                viewer={viewer}
+                isOpen={isOpen(`drawer-${argument.id}`)}
+                onClose={onClose(`drawer-${argument.id}`)}
+              />
+              <ArgumentCard
+                key={argument.id}
+                onReadMore={onOpen(`drawer-${argument.id}`)}
+                isMobile
+                argument={argument}
+                viewer={viewer}
+                bg="neutral-gray.100"
+                mb={6}
+                setArgumentReported={setArgumentReported}
+                setModerateArgumentModal={setModerateArgumentModal}
+                setDeleteModalInfo={setDeleteModalInfo}
+              />
+            </Box>
           ))}
         </InfiniteScroll>
       )}

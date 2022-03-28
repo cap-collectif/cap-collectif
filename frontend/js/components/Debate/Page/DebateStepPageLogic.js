@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
+import { Flex } from '@cap-collectif/ui';
 import type { DebateStepPageLogic_query } from '~relay/DebateStepPageLogic_query.graphql';
-import Flex from '~ui/Primitives/Layout/Flex';
 import DebateStepPageMainActions from './MainActions/DebateStepPageMainActions';
 import DebateStepPageFaceToFace from './FaceToFace/DebateStepPageFaceToFace';
 import DebateStepPageLinkedArticles from './LinkedArticles/DebateStepPageLinkedArticles';
@@ -47,12 +47,12 @@ export const DebateStepPageLogic = ({ query }: Props): React.Node => {
 export default (createFragmentContainer(DebateStepPageLogic, {
   query: graphql`
     fragment DebateStepPageLogic_query on Query
-      @argumentDefinitions(
-        stepId: { type: "ID!" }
-        isAuthenticated: { type: "Boolean!" }
-        isMobile: { type: "Boolean!" }
-        isDebateFaceToFace: { type: "Boolean!" }
-      ) {
+    @argumentDefinitions(
+      stepId: { type: "ID!" }
+      isAuthenticated: { type: "Boolean!" }
+      isMobile: { type: "Boolean!" }
+      isDebateFaceToFace: { type: "Boolean!" }
+    ) {
       viewer @include(if: $isAuthenticated) {
         ...DebateStepPageArguments_viewer
       }

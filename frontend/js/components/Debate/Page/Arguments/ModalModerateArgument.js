@@ -5,12 +5,12 @@ import { submit } from 'redux-form';
 import { useDispatch } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
+import { toast } from '@cap-collectif/ui';
 import CloseButton from '~/components/Form/CloseButton';
 import SubmitButton from '~/components/Form/SubmitButton';
 import TrashDebateArgumentMutation from '~/mutations/TrashDebateArgumentMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import type { Dispatch } from '~/types';
-import { toast } from '~ds/Toast';
 import { mediaQueryMobile } from '~/utils/sizes';
 import ModerateForm, { formName, type Values } from '~/components/Moderate/ModerateForm';
 

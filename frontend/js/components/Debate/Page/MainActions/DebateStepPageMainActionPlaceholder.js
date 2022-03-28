@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Skeleton from '~ds/Skeleton';
+import { Flex, Skeleton } from '@cap-collectif/ui';
 
 export const DebateStepPageMainActionsPlaceholder = (): React.Node => (
   <Flex direction="column" alignItems="center" spacing={4}>

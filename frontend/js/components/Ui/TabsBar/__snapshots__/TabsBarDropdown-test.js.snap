@@ -19,8 +19,6 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
             "align": "center",
             "direction": "row",
             "height": "100%",
-            "px": 4,
-            "py": 2,
           },
         ],
         "componentStyle": e {
@@ -29,7 +27,7 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
           "componentId": "styles__DropdownToggle-ckofMh",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}",
+            ".caret{margin-left:5px;}padding:8px 16px;",
             [Function],
             " &:hover,&:focus{color:",
             [Function],
@@ -309,8 +307,6 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
             "align": "center",
             "direction": "row",
             "height": "100%",
-            "px": 4,
-            "py": 2,
           },
         ],
         "componentStyle": e {
@@ -319,7 +315,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
           "componentId": "styles__DropdownToggle-ckofMh",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}",
+            ".caret{margin-left:5px;}padding:8px 16px;",
             [Function],
             " &:hover,&:focus{color:",
             [Function],

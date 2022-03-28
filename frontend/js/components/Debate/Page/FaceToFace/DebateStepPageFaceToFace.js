@@ -2,14 +2,11 @@
 import React, { useState, type Node } from 'react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import { Box, Skeleton, Button, Flex, Heading } from '@cap-collectif/ui'
 import type { DebateStepPageFaceToFace_step } from '~relay/DebateStepPageFaceToFace_step.graphql';
-import AppBox from '~ui/Primitives/AppBox';
-import Heading from '~ui/Primitives/Heading';
-import Flex from '~ui/Primitives/Layout/Flex';
 import DebateOpinionPlaceholder from '~/components/Debate/Opinion/DebateOpinionPlaceholder';
 import DebateOpinion from '~/components/Debate/Opinion/DebateOpinion';
-import Button from '~ds/Button/Button';
-import Skeleton from '~ds/Skeleton';
+
 
 type Props = {|
   +step: ?DebateStepPageFaceToFace_step,
@@ -32,7 +29,7 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props): Node => {
     !isMobile && ((againstOpinion?.body.length || 0) > 500 || (forOpinion?.body.length || 0) > 500);
 
   return (
-    <AppBox id={step ? 'DebateStepPageFaceToFace' : 'DebateStepPageFaceToFaceLoading'}>
+    <Box id={step ? 'DebateStepPageFaceToFace' : 'DebateStepPageFaceToFaceLoading'}>
       <Heading as="h3" fontWeight="400" mb={6}>
         <FormattedMessage id="the.face-to-face" />
       </Heading>
@@ -77,7 +74,7 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props): Node => {
           </>
         ) : null}
       </Skeleton>
-    </AppBox>
+    </Box>
   );
 };
 

@@ -3,11 +3,8 @@ import * as React from 'react';
 import moment from 'moment';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import { Box, Flex, Tag, Heading } from '@cap-collectif/ui'
 import type { DebateStepPageNotYetStarted_step } from '~relay/DebateStepPageNotYetStarted_step.graphql';
-import AppBox from '~ui/Primitives/AppBox';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Tag from '~ds/Tag/Tag';
-import Heading from '~ui/Primitives/Heading';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
@@ -30,16 +27,16 @@ export const DebateStepPageNotYetStarted = ({ step }: Props): React.Node => {
     timeUntil = <FormattedMessage id="count.hoursUntil" values={{ count: hoursUntil }} />;
 
   return (
-    <AppBox id="DebateStepPageNotYetStarted">
+    <Box id="DebateStepPageNotYetStarted">
       <Flex direction="column" alignItems="center" spacing={4}>
-        <Tag variantType="badge" variant="blue" icon="CLOCK">
+        <Tag variantType="badge" variantColor="blue" icon="CLOCK">
           {timeUntil}
         </Tag>
         <Heading as="h2" fontWeight="400" mb={2} textAlign="center" color="gray.900">
           {title}
         </Heading>
       </Flex>
-    </AppBox>
+    </Box>
   );
 };
 

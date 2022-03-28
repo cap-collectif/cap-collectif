@@ -2,16 +2,14 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
-import Button from '~ds/Button/Button';
-import Modal from '~ds/Modal/Modal';
+import {Button, Modal, Heading, Text} from '@cap-collectif/ui'
 import type { ModalEditArgumentMobile_argument } from '~relay/ModalEditArgumentMobile_argument.graphql';
-import Heading from '~ui/Primitives/Heading';
-import Text from '~ui/Primitives/Text';
 import { FontWeight } from '~ui/Primitives/constants';
 import ArgumentCardFormEdition, {
   type FormValues,
 } from '~/components/Debate/ArgumentCard/ArgumentCardFormEdition';
 import UpdateDebateArgumentMutation from '~/mutations/UpdateDebateArgumentMutation';
+import ResetCss from '~/utils/ResetCss'
 
 type Props = {|
   argument: ModalEditArgumentMobile_argument,
@@ -66,9 +64,11 @@ export const ModalEditArgumentMobile = ({ argument, hidePreviousModal }: Props):
       case 'FORM':
         return (
           <>
-            <Modal.Header>
-              <Heading as="h4">{intl.formatMessage({ id: 'edit-my-argument' })}</Heading>
-            </Modal.Header>
+            <ResetCss>
+              <Modal.Header>
+                <Heading as="h4">{intl.formatMessage({ id: 'edit-my-argument' })}</Heading>
+              </Modal.Header>
+            </ResetCss>
 
             <Modal.Body pb={6}>
               <ArgumentCardFormEdition

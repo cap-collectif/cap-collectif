@@ -3,6 +3,8 @@
 exports[`<NewUserAvatar /> should render correctly 1`] = `
 <Avatar
   alt="Pablo Escobar"
+  backgroundColor="#413a78"
+  color="#fff"
   name="Pablo Escobar"
   src="https://monAvatarWow.com"
 />
@@ -11,6 +13,8 @@ exports[`<NewUserAvatar /> should render correctly 1`] = `
 exports[`<NewUserAvatar /> should render correctly when no avatar 1`] = `
 <Avatar
   alt="Pablo Escobar"
+  backgroundColor="#413a78"
+  color="#fff"
   name="Pablo Escobar"
 />
 `;

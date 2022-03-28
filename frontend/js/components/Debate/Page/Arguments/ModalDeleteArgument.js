@@ -3,10 +3,10 @@ import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { type IntlShape, useIntl } from 'react-intl';
 import { useAnalytics } from 'use-analytics';
+import { toast } from '@cap-collectif/ui'
 import DeleteDebateArgumentMutation from '~/mutations/DeleteDebateArgumentMutation';
 import DeleteDebateAnonymousArgumentMutation from '~/mutations/DeleteDebateAnonymousArgumentMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
-import { toast } from '~ds/Toast';
 import { formatConnectionPath } from '~/shared/utils/relay';
 import { mediaQueryMobile } from '~/utils/sizes';
 import DeleteModal from '~/components/Modal/DeleteModal';

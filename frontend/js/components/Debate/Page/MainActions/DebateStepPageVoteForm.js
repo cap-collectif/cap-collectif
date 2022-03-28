@@ -10,13 +10,20 @@ import { useAnalytics } from 'use-analytics';
 import styled, { type StyledComponent } from 'styled-components';
 import { useActor } from '@xstate/react';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import type { DebateStepPageVoteForm_debate } from '~relay/DebateStepPageVoteForm_debate.graphql';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Button from '~ds/Button/Button';
-import Icon from '~ds/Icon/Icon';
-import Card from '~ds/Card/Card';
+import {
+  Flex,
+  Button,
+  Icon,
+  Card,
+  Tooltip,
+  Text,
+  Popover,
+  ButtonGroup,
+  toast,
+} from '@cap-collectif/ui';
 import colors from '~/styles/modules/colors';
-import Tooltip from '~ds/Tooltip/Tooltip';
+import ResetCss from '~/utils/ResetCss';
+import type { DebateStepPageVoteForm_debate } from '~relay/DebateStepPageVoteForm_debate.graphql';
 import typography from '~/styles/theme/typography';
 import component from '~/components/Form/Field';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
@@ -24,11 +31,7 @@ import AddDebateArgumentMutation from '~/mutations/AddDebateArgumentMutation';
 import { formatConnectionPath } from '~/shared/utils/relay';
 import useScript from '~/utils/hooks/useScript';
 import MobilePublishArgumentModal from '~/components/Debate/Page/Modals/MobilePublishArgumentModal';
-import Text from '~ui/Primitives/Text';
-import Popover from '~ds/Popover';
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import RemoveDebateVoteMutation from '~/mutations/RemoveDebateVoteMutation';
-import { toast } from '~ds/Toast';
 import type { Dispatch, GlobalState } from '~/types';
 import ModalDeleteVoteMobile from '~/components/Debate/Page/Modals/ModalDeleteVoteMobile';
 import RemoveDebateAnonymousVoteMutation from '~/mutations/RemoveDebateAnonymousVoteMutation';
@@ -91,6 +94,7 @@ export const Form: StyledComponent<{ disabled: boolean }, {}, HTMLFormElement> =
   }
 
   textarea {
+    height: 4.5rem;
     outline: none;
     background: none;
     border: none !important;
@@ -100,6 +104,7 @@ export const Form: StyledComponent<{ disabled: boolean }, {}, HTMLFormElement> =
     font-size: ${typography.fontSizes[4]};
 
     &::placeholder {
+      font-size: 1.2857142857rem;
       color: ${colors.gray[500]};
       font-weight: normal;
     }
@@ -308,8 +313,8 @@ export const DebateStepPageVoteForm = ({
       exit={{ opacity: 0 }}>
       <Flex
         direction={['column', 'row']}
-        alignItems="center"
-        justifyContent="center"
+        align="center"
+        justify="center"
         fontWeight={isAbsolute ? [600, 500] : [500]}>
         <>
           {isMobile && (
@@ -374,61 +379,62 @@ export const DebateStepPageVoteForm = ({
               )}
 
               {value !== 'voted_anonymous' && debate.viewerHasArgument && (
-                <Popover placement="right" trigger={['click']}>
-                  <Popover.Trigger>
+                <Popover
+                  placement="right"
+                  disclosure={
                     <Button ml={2} variant="link" variantColor="hierarchy">
                       <FormattedMessage
                         id={viewerVoteValue === 'FOR' ? 'delete.vote.for' : 'delete.vote.against'}
                       />
                     </Button>
-                  </Popover.Trigger>
-                  <Popover.Content>
-                    {({ closePopover }) => (
-                      <React.Fragment>
-                        <Popover.Header>
+                  }>
+                  {({ closePopover }) => (
+                    <React.Fragment>
+                      <ResetCss>
+                        <Popover.Header closeButton={false}>
                           {intl.formatMessage({ id: 'vote-delete-confirmation' })}
                         </Popover.Header>
-                        <Popover.Body>
-                          <Text>
-                            {intl.formatMessage({
-                              id: 'delete-argument-associate-to-vote',
-                            })}
-                          </Text>
-                        </Popover.Body>
-                        <Popover.Footer>
-                          <ButtonGroup>
-                            <Button
-                              onClick={closePopover}
-                              variant="secondary"
-                              variantColor="hierarchy"
-                              variantSize="small">
-                              {intl.formatMessage({ id: 'cancel' })}
-                            </Button>
-                            <Button
-                              variant="primary"
-                              variantColor="danger"
-                              variantSize="small"
-                              onClick={() => {
-                                track('debate_vote_delete', {
-                                  type: viewerVoteValue,
-                                  url: debate.url,
-                                });
-                                deleteVoteFromViewer(
-                                  debate.id,
-                                  viewerVoteValue,
-                                  debate?.viewerHasArgument || false,
-                                  send,
-                                  setShowArgumentForm,
-                                  intl,
-                                );
-                              }}>
-                              {intl.formatMessage({ id: 'delete-vote' })}
-                            </Button>
-                          </ButtonGroup>
-                        </Popover.Footer>
-                      </React.Fragment>
-                    )}
-                  </Popover.Content>
+                      </ResetCss>
+                      <Popover.Body>
+                        <Text>
+                          {intl.formatMessage({
+                            id: 'delete-argument-associate-to-vote',
+                          })}
+                        </Text>
+                      </Popover.Body>
+                      <Popover.Footer>
+                        <ButtonGroup>
+                          <Button
+                            onClick={closePopover}
+                            variant="secondary"
+                            variantColor="hierarchy"
+                            variantSize="small">
+                            {intl.formatMessage({ id: 'cancel' })}
+                          </Button>
+                          <Button
+                            variant="primary"
+                            variantColor="danger"
+                            variantSize="small"
+                            onClick={() => {
+                              track('debate_vote_delete', {
+                                type: viewerVoteValue,
+                                url: debate.url,
+                              });
+                              deleteVoteFromViewer(
+                                debate.id,
+                                viewerVoteValue,
+                                debate?.viewerHasArgument || false,
+                                send,
+                                setShowArgumentForm,
+                                intl,
+                              );
+                            }}>
+                            {intl.formatMessage({ id: 'delete-vote' })}
+                          </Button>
+                        </ButtonGroup>
+                      </Popover.Footer>
+                    </React.Fragment>
+                  )}
                 </Popover>
               )}
               {(value === 'voted_anonymous' || !debate.viewerHasArgument) && (
@@ -488,7 +494,7 @@ export const DebateStepPageVoteForm = ({
 
           <Tooltip label={intl.formatMessage({ id: 'copied-link' })}>
             <Button
-              backgroundColor="gray.500"
+              variantColor="hierarchy"
               color="white"
               height={5}
               p="4px 8px"

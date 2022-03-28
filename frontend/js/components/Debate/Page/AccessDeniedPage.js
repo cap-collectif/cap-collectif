@@ -1,9 +1,8 @@
 // @flow
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import Flex from '~ui/Primitives/Layout/Flex';
-import AppBox from '~ui/Primitives/AppBox';
-import Text from '~ui/Primitives/Text';
+import { Flex, Box, Text } from '@cap-collectif/ui';
+
 
 const AccessDeniedPage = (): React.Node => {
   const intl = useIntl();
@@ -88,14 +87,14 @@ const AccessDeniedPage = (): React.Node => {
 
   return (
     <Flex direction="column" alignItems="center" backgroundColor="gray.100" height="100vh">
-      <AppBox mt={9}>
+      <Box mt={9}>
         <Text textAlign="center" fontSize={6} fontWeight={600} mb={4}>
           {intl.formatMessage({ id: 'we-are-sorry' })}
         </Text>
         <Text textAlign="center" fontSize={5}>
           {intl.formatMessage({ id: 'page-access-denied' })}
         </Text>
-      </AppBox>
+      </Box>
       <Flex justifyContent="center">{image}</Flex>
     </Flex>
   );

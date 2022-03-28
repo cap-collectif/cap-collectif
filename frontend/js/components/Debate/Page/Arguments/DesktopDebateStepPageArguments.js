@@ -2,21 +2,16 @@
 import React, { useState, type Node } from 'react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { Heading, Box, Button, Flex, Menu, Text, CapUIIcon } from '@cap-collectif/ui';
+import styled from 'styled-components';
 import type { DebateStepPageArguments_step } from '~relay/DebateStepPageArguments_step.graphql';
 import type { DesktopDebateStepPageArguments_viewer } from '~relay/DesktopDebateStepPageArguments_viewer.graphql';
-import Heading from '~ui/Primitives/Heading';
-import AppBox from '~/components/Ui/Primitives/AppBox';
-import Button from '~ds/Button/Button';
-import Flex from '~/components/Ui/Primitives/Layout/Flex';
-import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import DebateStepPageArgumentsPagination, {
   CONNECTION_CONFIG_YES,
   CONNECTION_CONFIG_NO,
   CONNECTION_NODES_PER_PAGE,
 } from './DebateStepPageArgumentsPagination';
 import type { RelayHookPaginationProps as PaginationProps } from '~/types';
-import { Menu } from '~ds/Menu';
-import Text from '~ui/Primitives/Text';
 import type { Filter } from '~/components/Debate/Page/Arguments/types';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
@@ -24,6 +19,18 @@ type Props = {|
   +step: ?DebateStepPageArguments_step,
   +viewer: ?DesktopDebateStepPageArguments_viewer,
 |};
+
+const OptionItem = styled(Menu.OptionItem)`
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  background-color: white;
+  input {
+    margin-left: 4px;
+    margin-right: 8px;
+    margin-top: 0;
+  }
+`;
 
 export const DesktopDebateStepPageArguments = ({ step, viewer }: Props): Node => {
   const { stepClosed } = useDebateStepPage();
@@ -40,21 +47,21 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props): Node =>
   const argumentsCount = step?.debate?.arguments?.totalCount || 0;
 
   return (
-    <AppBox id="DebateStepPageArguments">
+    <Box id="DebateStepPageArguments">
       {!stepClosed && (
         <Flex align="center" direction="row" justifyContent="space-between" mb={6}>
           <Heading as="h3" fontWeight="400" capitalize>
             <FormattedMessage id="shortcut.opinion" values={{ num: argumentsCount }} />
           </Heading>
-          <Menu>
-            <Menu.Button>
-              <Button rightIcon={ICON_NAME.ARROW_DOWN} color="gray.500">
+          <Menu
+            disclosure={
+              <Button rightIcon={CapUIIcon.ArrowDown} variantColor="hierarchy" variant="tertiary">
                 <FormattedMessage tagName={React.Fragment} id="argument.sort.label" />
               </Button>
-            </Menu.Button>
+            }>
             <Menu.List>
               <Menu.OptionGroup
-                title={intl.formatMessage({ id: 'arguments.sort' })}
+                title={intl.formatMessage({ id: 'arguments.sort' }).toUpperCase()}
                 type="radio"
                 onChange={newValue => {
                   setFilter(((newValue: any): Filter));
@@ -84,21 +91,21 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props): Node =>
                     );
                 }}
                 value={filter}>
-                <Menu.OptionItem value="DESC">
+                <OptionItem value="DESC">
                   <Text>
                     <FormattedMessage tagName={React.Fragment} id="project.sort.last" />
                   </Text>
-                </Menu.OptionItem>
-                <Menu.OptionItem value="ASC">
+                </OptionItem>
+                <OptionItem value="ASC">
                   <Text>
                     <FormattedMessage tagName={React.Fragment} id="opinion.sort.old" />
                   </Text>
-                </Menu.OptionItem>
-                <Menu.OptionItem value="MOST_SUPPORTED">
+                </OptionItem>
+                <OptionItem value="MOST_SUPPORTED">
                   <Text>
                     <FormattedMessage tagName={React.Fragment} id="filter.most_supported" />
                   </Text>
-                </Menu.OptionItem>
+                </OptionItem>
               </Menu.OptionGroup>
             </Menu.List>
           </Menu>
@@ -140,12 +147,12 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props): Node =>
           onClick={() => {
             if (yesState) yesState.loadMore(CONNECTION_CONFIG_YES, CONNECTION_NODES_PER_PAGE);
             if (noState) noState.loadMore(CONNECTION_CONFIG_NO, CONNECTION_NODES_PER_PAGE);
-          }}>
-          <Icon name="ADD" />
+          }}
+          leftIcon={CapUIIcon.Add}>
           <FormattedMessage id="global.more" />
         </Button>
       )}
-    </AppBox>
+    </Box>
   );
 };
 

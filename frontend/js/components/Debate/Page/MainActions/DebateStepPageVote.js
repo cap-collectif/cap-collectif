@@ -1,25 +1,22 @@
 // @flow
 import React, { useEffect, useState, type Node } from 'react';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { type IntlShape, useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { m as motion } from 'framer-motion';
-import css from '@styled-system/css';
 import { useAnalytics } from 'use-analytics';
 import { useActor } from '@xstate/react';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Button from '~ds/Button/Button';
+import { Text, Flex, Box, Icon, CapUIIcon, CapUILineHeight } from '@cap-collectif/ui';
+import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import AddDebateVoteMutation, { type OptimisticResponse } from '~/mutations/AddDebateVoteMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { MachineContext, type VoteAction, type VoteState } from './DebateStepPageStateMachine';
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import Captcha from '~/components/Form/Captcha';
-import Text from '~ui/Primitives/Text';
 import AddDebateAnonymousVoteMutation from '~/mutations/AddDebateAnonymousVoteMutation';
 import { SPACES_SCALES } from '~/styles/theme/base';
 import CookieMonster from '~/CookieMonster';
 import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
-import LoginOverlay from '~/components/Utils/LoginOverlay';
+import NewLoginOverlay from '~/components/Utils/NewLoginOverlay';
 import type { DebateStepPageVote_step } from '~relay/DebateStepPageVote_step.graphql';
 import type { GlobalState } from '~/types';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
@@ -162,13 +159,13 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
           <ConditionalWrapper
             when={!step.isAnonymousParticipationAllowed}
             wrapper={children => (
-              <LoginOverlay placement={top ? 'top' : 'bottom'}>{children}</LoginOverlay>
+              <NewLoginOverlay placement={top ? 'top' : 'bottom'}>{children}</NewLoginOverlay>
             )}>
-            <Button
+            <Box
+              as="button"
               onMouseEnter={() => setIsHover('FOR')}
               onMouseLeave={() => setIsHover(false)}
-              css={css(buttonColor('green', isHover === 'AGAINST'))}
-              variantSize="big"
+              sx={buttonColor('green', isHover === 'AGAINST')}
               onClick={() => {
                 if (isAuthenticated) {
                   track('debate_vote_click', { type: 'FOR', url: step.debate.url });
@@ -185,20 +182,30 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
                   setCaptcha(c => ({ ...c, visible: true, voteType: 'FOR' }));
                 }
               }}
-              leftIcon="THUMB_UP">
-              <FormattedMessage id="global.for" />
-            </Button>
+              fontWeight={600}
+              px={8}
+              py={3}
+              borderRadius="4px"
+              fontSize={3}>
+              <Flex align="center" justify="center">
+                <Icon name={CapUIIcon.ThumbUp} mr={1} />
+                <Text lineHeight={CapUILineHeight.Base}>
+                  {intl.formatMessage({ id: 'global.for' })}
+                </Text>
+              </Flex>
+            </Box>
           </ConditionalWrapper>
 
           <ConditionalWrapper
             when={!step.isAnonymousParticipationAllowed}
             wrapper={children => (
-              <LoginOverlay placement={top ? 'top' : 'bottom'}>{children}</LoginOverlay>
+              <NewLoginOverlay placement={top ? 'top' : 'bottom'}>{children}</NewLoginOverlay>
             )}>
-            <Button
+            <Box
+              as="button"
               onMouseEnter={() => setIsHover('AGAINST')}
               onMouseLeave={() => setIsHover(false)}
-              css={css(buttonColor('red', isHover === 'FOR'))}
+              sx={buttonColor('red', isHover === 'FOR')}
               variantSize="big"
               onClick={() => {
                 if (isAuthenticated) {
@@ -216,9 +223,18 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
                   setCaptcha(c => ({ ...c, visible: true, voteType: 'AGAINST' }));
                 }
               }}
-              leftIcon="THUMB_DOWN">
-              <FormattedMessage id="global.against" />
-            </Button>
+              fontWeight={600}
+              px={8}
+              py={3}
+              borderRadius="4px"
+              fontSize={3}>
+              <Flex align="center" justify="center">
+                <Icon name={CapUIIcon.ThumbDown} mr={1} />
+                <Text lineHeight={CapUILineHeight.Base}>
+                  {intl.formatMessage({ id: 'global.against' })}
+                </Text>
+              </Flex>
+            </Box>
           </ConditionalWrapper>
         </>
       )}
@@ -226,9 +242,9 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
       {captcha.visible && (
         <Flex direction="column" align="center">
           <Text
-            css={css({
+            sx={{
               mb: `${SPACES_SCALES[6]} !important`,
-            })}
+            }}
             textAlign="center"
             className="recaptcha-message"
             color="neutral-gray.700">
@@ -248,7 +264,7 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
 export default (createFragmentContainer(DebateStepPageVote, {
   step: graphql`
     fragment DebateStepPageVote_step on DebateStep
-      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
+    @argumentDefinitions(isMobile: { type: "Boolean!" }) {
       isAnonymousParticipationAllowed
       debate {
         url

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useMemo } from 'react';
-import AppBox from '~ui/Primitives/AppBox';
+import { Flex } from '@cap-collectif/ui';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import type { Context } from '~ds/List/ListOptionGroup.context';
 import { ListOptionGroupContext } from '~ds/List/ListOptionGroup.context';
@@ -26,9 +26,9 @@ export const ListOptionGroup = ({ children, type, value, onChange, ...props }: P
 
   return (
     <ListOptionGroupContext.Provider value={context}>
-      <AppBox display="flex" flexDirection="column" {...props}>
+      <Flex direction="column" {...props}>
         {children}
-      </AppBox>
+      </Flex>
     </ListOptionGroupContext.Provider>
   );
 };

@@ -4,18 +4,12 @@ import { useFragment, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import css from '@styled-system/css';
 import { useDisclosure } from '@liinkiing/react-hooks';
+import { Box, Button, Heading, Text, Tag, Card, Flex } from '@cap-collectif/ui';
 import type { DebateOpinion_opinion$key } from '~relay/DebateOpinion_opinion.graphql';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Card from '~ds/Card/Card';
-import Tag from '~ds/Tag/Tag';
-import Text from '~ui/Primitives/Text';
-import Heading from '~ui/Primitives/Heading';
 import { LineHeight } from '~ui/Primitives/constants';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
-import Button from '~ds/Button/Button';
 import DebateStepPageOpinionDrawer from '~/components/Debate/Page/Drawers/DebateStepPageOpinionDrawer';
 import NewUserAvatar from '~/components/User/NewUserAvatar';
-import AppBox from '~ui/Primitives/AppBox';
 import colors from '~/styles/modules/colors';
 
 // TODO remove this and import from relay
@@ -32,7 +26,7 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
   const opinion = useFragment(
     graphql`
       fragment DebateOpinion_opinion on DebateOpinion
-        @argumentDefinitions(isMobile: { type: "Boolean!" }) {
+      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
         ...DebateStepPageOpinionDrawer_opinion @include(if: $isMobile)
         title
         body
@@ -53,7 +47,7 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
       flex="1" // we have to manually set a max height in px for the transition to work
       maxHeight={!readMore ? '400px' : '2000px'}
       overflow="hidden"
-      css={{
+      sx={{
         transition: 'max-height 0.5s ease-out',
         '.ql-video': {
           width: '100%',
@@ -62,31 +56,32 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
       }}
       position="relative">
       <Tag
-        variant={opinion.type === 'FOR' ? 'green' : 'red'}
+        variantColor={opinion.type === 'FOR' ? 'green' : 'red'}
+        variantType="tag"
         borderBottomLeftRadius={0}
         borderTopLeftRadius={0}
         borderTopRightRadius={0}
-        css={css({
-          position: 'absolute',
+        sx={{
+          position: 'absolute !important',
           '&:hover': {
             cursor: 'default',
             background: colors[opinion.type === 'FOR' ? 'green' : 'red'][150],
           },
-        })}>
+        }}>
         <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
           <FormattedMessage id={opinion.type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
         </Text>
       </Tag>
       {!readMore && (
-        <AppBox
+        <Box
           width="100%"
           height={12}
           bottom={0}
-          css={css({
+          sx={{
             position: 'absolute',
             background:
               'linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,0) 100%)',
-          })}
+          }}
         />
       )}
       <Flex direction="column" m={6} mt={10}>
@@ -97,6 +92,7 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
             borderColor="yellow.500"
             color="yellow.500"
             border="2px solid"
+            bg="blue.100"
             user={opinion.author}
           />
           <Flex direction="column">

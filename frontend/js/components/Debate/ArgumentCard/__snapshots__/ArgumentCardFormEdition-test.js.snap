@@ -18,8 +18,9 @@ exports[`<ArgumentCardFormEdition /> renders correcty 1`] = `
     mt={2}
   >
     <Button
-      color="neutral-gray.500"
       onClick={[MockFunction]}
+      variant="tertiary"
+      variantColor="hierarchy"
       variantSize="small"
     >
       global.cancel

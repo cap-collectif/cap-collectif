@@ -1,13 +1,8 @@
 // @flow
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Heading from '~ui/Primitives/Heading';
+import { Card, Icon, CapUIIcon, CapUIIconSize, Text, Box, Heading, Flex } from '@cap-collectif/ui'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
-import AppBox from '~ui/Primitives/AppBox';
-import Text from '~ui/Primitives/Text';
-import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
-import Card from '~ds/Card/Card';
 
 export const DebateArticleCardTitle: StyledComponent<{}, {}, typeof Heading> = styled(
   Heading,
@@ -48,9 +43,9 @@ type Props = {|
 const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Props) => {
   return (
     <Card bg="white" p={0} flexDirection="column" overflow="hidden" display="flex" {...props}>
-      <AppBox overflow="hidden" height={14}>
+      <Box overflow="hidden" height={14}>
         {illustration ? (
-          <AppBox
+          <Box
             src={illustration}
             width="100%"
             height="100%"
@@ -59,10 +54,10 @@ const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Pr
           />
         ) : (
           <Flex justify="center" align="center" width="100%" height="100%" bg="neutral-gray.150">
-            <Icon name={ICON_NAME.NEWSPAPER} size={ICON_SIZE.XXL} color="gray.500" />
+            <Icon name={CapUIIcon.Newspaper} size={CapUIIconSize.Xxl} color="gray.500" />
           </Flex>
         )}
-      </AppBox>
+      </Box>
       <Flex direction="column" px={4} py={2} bg="white" flex={1}>
         {children}
         {publishedAt && (

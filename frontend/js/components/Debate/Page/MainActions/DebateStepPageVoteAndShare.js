@@ -6,6 +6,7 @@ import { useMachine } from '@xstate/react';
 import { useSelector } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
 import { useScrollYPosition } from 'react-use-scroll-position';
+import {Flex, Heading, Box} from '@cap-collectif/ui'
 import type { DebateStepPageVoteAndShare_step } from '~relay/DebateStepPageVoteAndShare_step.graphql';
 import VoteView from '~/components/Ui/Vote/VoteView';
 import DebateStepPageVote from './DebateStepPageVote';
@@ -13,9 +14,6 @@ import type { GlobalState } from '~/types';
 import DebateStepPageAbsoluteVoteAndShare from './DebateStepPageAbsoluteVoteAndShare';
 import DebateStepPageVoteForm from './DebateStepPageVoteForm';
 import useOnScreen from '~/utils/hooks/useOnScreen';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Heading from '~ui/Primitives/Heading';
-import AppBox from '~ui/Primitives/AppBox';
 import CookieMonster from '~/CookieMonster';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 import {
@@ -79,7 +77,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
           {value.includes('none') && <DebateStepPageVote step={step} />}
         </AnimatePresence>
         {stepClosed && (
-          <AppBox textAlign="center" mb={6}>
+          <Box textAlign="center" mb={6}>
             <Heading as="h3" color="neutral-gray.900" fontSize={[16, 24]} fontWeight={400}>
               {intl.formatMessage(
                 { id: 'summary-debate-participation' },
@@ -94,7 +92,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
             <Heading as="h3" color="neutral-gray.900" fontSize={[16, 24]} fontWeight={400}>
               {intl.formatMessage({ id: 'thanks-participation-debate-ended' })}
             </Heading>
-          </AppBox>
+          </Box>
         )}
 
         {value !== 'idle' && !value.includes('none') && (
@@ -128,7 +126,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
             )}
           </>
         )}
-      </Flex>
+       </Flex>
     </MachineContext.Provider>
   );
 };

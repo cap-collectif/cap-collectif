@@ -5,14 +5,13 @@ import { type IntlShape } from 'react-intl';
 import { reduxForm, Field, formValueSelector, submit } from 'redux-form';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
+import { ButtonGroup, Button } from '@cap-collectif/ui';
 import type { ArgumentCardFormEdition_argument } from '~relay/ArgumentCardFormEdition_argument.graphql';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import UpdateDebateArgumentMutation from '~/mutations/UpdateDebateArgumentMutation';
-import Button from '~ds/Button/Button';
 import type { Dispatch, GlobalState } from '~/types';
 import component from '~/components/Form/Field';
 import colors from '~/styles/modules/colors';
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 
 export const formName = 'argument-card-edition-form';
 
@@ -122,7 +121,7 @@ export const ArgumentCardFormEdition = ({
         </Button>
       ) : (
         <ButtonGroup justifyContent="flex-end" mt={2}>
-          <Button color="neutral-gray.500" onClick={goBack} variantSize="small">
+          <Button variantColor="hierarchy" variant="tertiary" onClick={goBack} variantSize="small">
             {intl.formatMessage({ id: 'global.cancel' })}
           </Button>
           <Button

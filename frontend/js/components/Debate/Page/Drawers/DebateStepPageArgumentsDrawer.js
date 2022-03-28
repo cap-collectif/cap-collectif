@@ -3,22 +3,18 @@ import * as React from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useState } from 'react';
+import {Modal, Heading, CapUIIcon, Button, Flex, Text} from '@cap-collectif/ui';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Text from '~ui/Primitives/Text';
 import DebateStepPageAlternateArgumentsPagination, {
   CONNECTION_CONFIG,
 } from '~/components/Debate/Page/Arguments/DebateStepPageAlternateArgumentsPagination';
 import type { DebateStepPageArgumentsDrawer_debate$key } from '~relay/DebateStepPageArgumentsDrawer_debate.graphql';
 import type { DebateStepPageArgumentsDrawer_viewer$key } from '~relay/DebateStepPageArgumentsDrawer_viewer.graphql';
-import Button from '~ds/Button/Button';
-import { ICON_NAME } from '~ds/Icon/Icon';
 import type { RelayHookPaginationProps as PaginationProps } from '~/types';
 import { CONNECTION_NODES_PER_PAGE } from '~/components/Debate/Page/Arguments/DebateStepPageArgumentsPagination';
 import type { Filter } from '~/components/Debate/Page/Arguments/types';
-import Modal from '~ds/Modal/Modal';
-import Heading from '~ui/Primitives/Heading';
 import ListOptionGroup from '~ds/List/ListOptionGroup';
+import ResetCss from '~/utils/ResetCss'
 
 const DEBATE_FRAGMENT = graphql`
   fragment DebateStepPageArgumentsDrawer_debate on Debate
@@ -90,17 +86,18 @@ const DebateStepPageArgumentsDrawer = ({
 
         <Modal
           disclosure={
-            <Button rightIcon={ICON_NAME.ARROW_DOWN} color="gray.500">
+            <Button rightIcon={CapUIIcon.ArrowDown} color="gray.500">
               <FormattedMessage tagName={React.Fragment} id="argument.sort.label" />
             </Button>
           }
           ariaLabel={intl.formatMessage({ id: 'arguments.sort' })}>
           {({ hide }) => (
             <>
-              <Modal.Header>
-                <Heading as="h4">{intl.formatMessage({ id: 'arguments.sort' })}</Heading>
-              </Modal.Header>
-
+              <ResetCss>
+                <Modal.Header>
+                  <Heading as="h4">{intl.formatMessage({ id: 'arguments.sort' })}</Heading>
+                </Modal.Header>
+              </ResetCss>
               <Modal.Body pb={6}>
                 <ListOptionGroup
                   value={filter}

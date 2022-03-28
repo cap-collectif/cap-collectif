@@ -4,6 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { DebateStepPageLinkedArticles } from './DebateStepPageLinkedArticles';
 import { $refType, $fragmentRefs } from '~/mocks';
+import MockProviders from '~/testUtils';
 
 const baseProps = {
   isMobile: false,
@@ -63,11 +64,19 @@ const baseProps = {
 
 describe('<DebateStepPageLinkedArticles />', () => {
   it('should renders correctly', () => {
-    const wrapper = shallow(<DebateStepPageLinkedArticles {...baseProps} />);
+    const wrapper = shallow(
+      <MockProviders useCapUIProvider>
+        <DebateStepPageLinkedArticles {...baseProps} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
   it('should renders correctly on mobile', () => {
-    const wrapper = shallow(<DebateStepPageLinkedArticles {...baseProps} isMobile />);
+    const wrapper = shallow(
+      <MockProviders useCapUIProvider>
+        <DebateStepPageLinkedArticles {...baseProps} isMobile />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

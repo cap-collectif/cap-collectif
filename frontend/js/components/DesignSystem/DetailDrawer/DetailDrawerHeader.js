@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
-import AppBox from '~ui/Primitives/AppBox';
+import {Flex, Icon, CapUIIcon, CapUIIconSize} from '@cap-collectif/ui';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
-import Icon, { ICON_SIZE } from '~ds/Icon/Icon';
 
 type Props = {|
   ...AppBoxProps,
@@ -12,19 +11,19 @@ type Props = {|
 
 const DetailDrawerHeader = ({ children, onClose, showBackArrow = true, ...props }: Props) => {
   return (
-    <AppBox display="flex" alignItems="center" p={6} {...props}>
+    <Flex align="center" p={6} {...props}>
       {showBackArrow && (
         <Icon
           onClick={onClose}
           css={{ '&:hover': { cursor: 'pointer' } }}
           color="blue.500"
-          size={ICON_SIZE.LG}
+          size={CapUIIconSize.Lg}
           className="detail__drawer--back-arow"
-          name="LONG_ARROW_LEFT"
+          name={CapUIIcon.LongArrowLeft}
         />
       )}
       {children}
-    </AppBox>
+    </Flex>
   );
 };
 

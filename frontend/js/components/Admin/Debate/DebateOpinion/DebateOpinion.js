@@ -11,7 +11,7 @@ import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import { type DebateOpinion_debateOpinion } from '~relay/DebateOpinion_debateOpinion.graphql';
-import NewUserAvatar from '~/components/User/NewUserAvatar';
+import NewUserAvatarLegacy from '~/components/User/NewUserAvatarLegacy';
 
 type Props = {|
   +debateOpinion: DebateOpinion_debateOpinion,
@@ -71,7 +71,12 @@ export const DebateOpinion = ({ debateOpinion, onEdit, onDelete }: Props) => {
 
       <Flex direction="column" px={6} pt={10} pb={6} maxHeight="100%">
         <Flex direction="row" spacing={2} mb={4} align="center">
-          <NewUserAvatar user={author} size="md" border="2px solid" borderColor="yellow.500" />
+          <NewUserAvatarLegacy
+            user={author}
+            size="md"
+            border="2px solid"
+            borderColor="yellow.500"
+          />
           <Text fontSize={3} color="gray.500">
             {author.username}
           </Text>
@@ -93,7 +98,7 @@ export default createFragmentContainer(DebateOpinion, {
       body
       author {
         username
-        ...NewUserAvatar_user
+        ...NewUserAvatarLegacy_user
       }
     }
   `,

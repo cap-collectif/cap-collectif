@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { graphql } from 'react-relay';
 import { useFragment, usePagination } from 'relay-hooks';
+import { Box } from '@cap-collectif/ui'
 import type {
   DebateStepPageArgumentsPagination_debate,
   DebateStepPageArgumentsPagination_debate$key,
@@ -14,7 +15,6 @@ import type {
   DebateStepPageArgumentsPagination_viewer,
   DebateStepPageArgumentsPagination_viewer$key,
 } from '~relay/DebateStepPageArgumentsPagination_viewer.graphql';
-import AppBox from '~/components/Ui/Primitives/AppBox';
 import ArgumentCard from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type { RelayHookPaginationProps, ConnectionMetadata } from '~/types';
 import ModalModerateArgument, {
@@ -180,7 +180,7 @@ export const DebateStepPageArgumentsPagination = ({
   return (
     <>
       {viewerUnpublishedArgument && (
-        <AppBox key={viewerUnpublishedArgument.id} marginBottom={6}>
+        <Box key={viewerUnpublishedArgument.id} marginBottom={6}>
           <ArgumentCard
             argument={viewerUnpublishedArgument}
             viewer={viewer}
@@ -188,10 +188,10 @@ export const DebateStepPageArgumentsPagination = ({
             setModerateArgumentModal={setModerateArgumentModal}
             setDeleteModalInfo={setDeleteModalInfo}
           />
-        </AppBox>
+        </Box>
       )}
       {debateArguments?.map(argument => (
-        <AppBox key={argument.id} marginBottom={6}>
+        <Box key={argument.id} marginBottom={6}>
           <ArgumentCard
             argument={argument}
             viewer={viewer}
@@ -199,7 +199,7 @@ export const DebateStepPageArgumentsPagination = ({
             setModerateArgumentModal={setModerateArgumentModal}
             setDeleteModalInfo={setDeleteModalInfo}
           />
-        </AppBox>
+        </Box>
       ))}
       {moderateArgumentModal && (
         <ModalModerateArgument

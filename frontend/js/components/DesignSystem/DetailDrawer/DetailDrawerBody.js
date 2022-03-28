@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import AppBox from '~ui/Primitives/AppBox';
+import {Box} from '@cap-collectif/ui'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 
 type Props = {|
@@ -9,9 +9,9 @@ type Props = {|
 
 const DetailDrawerBody = ({ children, ...props }: Props) => {
   return (
-    <AppBox overflow="auto" px={6} {...props}>
+    <Box overflow="auto" px={6} {...props}>
       {children}
-    </AppBox>
+    </Box>
   );
 };
 

@@ -4,10 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { graphql } from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { useFragment } from 'relay-hooks';
-import Heading from '~ui/Primitives/Heading';
-import AppBox from '~/components/Ui/Primitives/AppBox';
-import Button from '~ds/Button/Button';
-import Flex from '~/components/Ui/Primitives/Layout/Flex';
+import { Heading, Box, Button, Flex } from '@cap-collectif/ui';
 import type {
   MobileDebateStepPageArguments_debate,
   MobileDebateStepPageArguments_debate$key,
@@ -59,7 +56,7 @@ export const MobileDebateStepPageArguments = ({
   const argumentsCount: number = debate.arguments?.totalCount ?? 0;
 
   return (
-    <AppBox id="DebateStepPageArguments">
+    <Box id="DebateStepPageArguments">
       <DebateStepPageArgumentsDrawer
         onClose={onClose}
         isOpen={isOpen}
@@ -77,7 +74,7 @@ export const MobileDebateStepPageArguments = ({
       <Flex direction="row">
         <DebateStepPageAlternateArgumentsPagination debate={debate} viewer={viewer} preview />
       </Flex>
-    </AppBox>
+    </Box>
   );
 };
 

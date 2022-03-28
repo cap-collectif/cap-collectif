@@ -6,7 +6,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty when not show 1`]
   aria-modal="true"
   data-dialog="true"
   hidden=""
-  id="id-1"
+  id="id-g"
   role="dialog"
   style="display:none"
   tabindex="-1"
@@ -18,26 +18,26 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
   aria-label="global.menu"
   aria-modal="true"
   data-dialog="true"
-  id="id-1"
+  id="id-g"
   role="dialog"
   tabindex="-1"
 >
   <div
-    class="sc-bdnxRM gYBLn Modal__ModalContainerInner-gRLtaR"
+    class="sc-bdvvtL bSKXj sc-GEbAx cap-modal__overlay"
     style="opacity:0"
   >
     <div
-      class="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
+      class="sc-bdvvtL hnbcdn sc-gsNilK cap-modal"
       style="opacity:0;transform:translateY(-20px) translateZ(0)"
     >
       <main
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs gconsy"
+        class="sc-bdvvtL gdNnTf cap-modal__footer"
       >
         <button
-          aria-controls="id-2"
+          aria-controls="id-g"
           aria-expanded="false"
           aria-haspopup="dialog"
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG cMnXb dwbTkh"
+          class="sc-bdvvtL sc-lcepkR fKkohK jVZifq cap-button"
           type="button"
         >
           global.report.submit
@@ -47,7 +47,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
           aria-modal="true"
           data-dialog="true"
           hidden=""
-          id="id-2"
+          id="id-g"
           role="dialog"
           style="display:none"
           tabindex="-1"

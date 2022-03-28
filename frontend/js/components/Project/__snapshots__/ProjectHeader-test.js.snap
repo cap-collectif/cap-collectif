@@ -28,7 +28,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
             className="sc-bdvvtL dZFYjr"
           >
             <div
-              className="sc-bdvvtL gkqkwZ sc-clIzBv fnLKtc cap-avatar"
+              className="sc-bdvvtL QtoVT sc-clIzBv fnLKtc cap-avatar"
               title="Vince"
             >
               <img
@@ -54,7 +54,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
         </p>
       </div>
       <h3
-        className="sc-bdvvtL iCPkRa cap-text projectHeader__title platform__title"
+        className="sc-bdvvtL eXdgpL cap-text projectHeader__title platform__title"
         title="Food project"
       >
         Food project

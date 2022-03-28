@@ -2,30 +2,26 @@
 
 exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] = `
 <div
-  className="sc-bdnxRM"
+  className="sc-bdvvtL"
   id="DebateStepPageNotYetStarted"
 >
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX jeswne kvrLSX"
+    className="sc-bdvvtL hehOWr"
   >
     <div
-      className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS ddZVrU czLSQf cguwDa"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      className="sc-bdvvtL ielpPC sc-fWCJzd cixfEG cap-tag"
+      style={
+        Object {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
       title=""
     >
-      <IconMock
-        className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
-      />
-      <p
-        className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
-      >
-        count.daysUntil {"count":725}
-      </p>
+      count.daysUntil {"count":725}
     </div>
     <h2
-      className="sc-bdnxRM afcbP"
+      className="sc-bdvvtL hYSiQD cap-heading"
     >
       
     </h2>

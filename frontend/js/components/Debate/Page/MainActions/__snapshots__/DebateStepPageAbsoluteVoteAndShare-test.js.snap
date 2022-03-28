@@ -1,861 +1,513 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly 1`] = `
-<div
-  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL hLGqxb MNiHh"
->
+Array [
   <div
-    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdvvtL eYSNaB"
   >
     <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX AqBSD dagDTf"
+      className="sc-bdvvtL TRpZk container"
     >
-      <p
-        className="sc-bdnxRM jtOdAA"
-      >
-        
-      </p>
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX kTCDAs cPNXGW"
-        style={
-          Object {
-            "opacity": 0,
-          }
-        }
+        className="sc-bdvvtL blbeDV"
       >
-        <button
-          aria-controls="popover-overlay"
-          aria-expanded={false}
-          aria-haspopup="dialog"
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onKeyDown={[Function]}
-          onKeyPressCapture={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          type="button"
-        >
-          <IconMock
-            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-          />
-          global.for
-        </button>
-        <div
-          aria-label="vote.popover.title"
-          className="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
-          data-dialog={true}
-          hidden={true}
-          id="login-popover"
-          onAnimationEnd={[Function]}
-          onBlur={[Function]}
-          onKeyDown={[Function]}
-          onTransitionEnd={[Function]}
-          role="dialog"
+        <p
+          className="sc-bdvvtL etAIZY cap-text"
           style={
             Object {
-              "display": "none",
-              "left": "100%",
-              "position": "fixed",
-              "top": "100%",
+              "marginLeft": 0,
+              "marginTop": 0,
             }
           }
-          tabIndex={0}
         >
+          
+        </p>
+        <div
+          className="sc-bdvvtL dVKRbo"
+          style={
+            Object {
+              "opacity": 0,
+            }
+          }
+        >
+          <button
+            aria-controls="popover-overlay"
+            aria-expanded={false}
+            aria-haspopup="dialog"
+            className="sc-bdvvtL bOAaxo"
+            onClick={[Function]}
+            onClickCapture={[Function]}
+            onKeyDown={[Function]}
+            onKeyPressCapture={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseDownCapture={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            type="button"
+          >
+            <div
+              className="sc-bdvvtL djSMSy"
+            >
+              <svg
+                className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+                fill="none"
+                viewBox="0 0 32 29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+                  fill="currentColor"
+                />
+              </svg>
+              <p
+                className="sc-bdvvtL dgPHnB cap-text"
+              >
+                global.for
+              </p>
+            </div>
+          </button>
           <div
-            className="sc-bdnxRM LoginOverlay__Arrow-jnMMdg eRHiAV ICvob"
+            aria-label="vote.popover.title"
+            className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+            data-dialog={true}
+            hidden={true}
+            id="login-popover"
+            onAnimationEnd={[Function]}
+            onBlur={[Function]}
+            onKeyDown={[Function]}
+            onTransitionEnd={[Function]}
+            role="dialog"
             style={
               Object {
-                "bottom": "100%",
-                "fontSize": 30,
-                "height": "1em",
-                "pointerEvents": "none",
-                "width": "1em",
+                "display": "none",
+                "left": "100%",
+                "position": "fixed",
+                "top": "100%",
               }
             }
+            tabIndex={0}
           >
-            <svg
+            <div
+              className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg huXWwm ipxCrt"
               style={
                 Object {
-                  "transform": "rotateZ(360deg)",
+                  "bottom": "100%",
+                  "fontSize": 30,
+                  "height": "1em",
+                  "pointerEvents": "none",
+                  "width": "1em",
                 }
               }
-              viewBox="0 0 30 30"
             >
-              <path
-                className="stroke"
-                d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
-              />
-              <path
-                className="fill"
-                d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
-              />
-            </svg>
-          </div>
-          <div
-            className="sc-bdnxRM kGlejw"
-          >
-            <p
-              className="sc-bdnxRM gCefO"
-            >
-              vote.popover.title
-            </p>
+              <svg
+                style={
+                  Object {
+                    "transform": "rotateZ(360deg)",
+                  }
+                }
+                viewBox="0 0 30 30"
+              >
+                <path
+                  className="stroke"
+                  d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+                />
+                <path
+                  className="fill"
+                  d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+                />
+              </svg>
+            </div>
             <div
-              className="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
+              className="sc-bdvvtL fxVUoH"
             >
               <p
-                className="sc-bdnxRM iwmYLL"
+                className="sc-bdvvtL gCcJmA cap-text"
               >
-                vote.popover.body
+                vote.popover.title
               </p>
-              <span
-                className="sc-bdnxRM hptjof"
-                clip="rect(0px, 0px, 0px, 0px)"
+              <div
+                className="sc-bdvvtL czpQVi"
               >
-                <button
-                  className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
-                  onClick={[Function]}
-                  type="button"
+                <p
+                  className="sc-bdvvtL civIyF cap-text"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
                 >
-                  global.close
-                </button>
-              </span>
-              <span
-                style={Object {}}
-              >
-                <button
-                  aria-label="open.connection_modal"
-                  className="center-block btn-block login-button btn btn-success"
-                  destination="http://localhost"
-                  disabled={false}
-                  onClick={[Function]}
-                  type="button"
+                  vote.popover.body
+                </p>
+                <span
+                  className="sc-bdnxRM hptjof"
+                  clip="rect(0px, 0px, 0px, 0px)"
                 >
-                  global.login
-                </button>
-              </span>
+                  <button
+                    className="sc-bdvvtL sc-lcepkR johlmz igzsNu cap-button"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    global.close
+                  </button>
+                </span>
+                <span
+                  style={Object {}}
+                >
+                  <button
+                    aria-label="open.connection_modal"
+                    className="center-block btn-block login-button btn btn-success"
+                    destination="http://localhost"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    global.login
+                  </button>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        <button
-          aria-controls="popover-overlay"
-          aria-expanded={false}
-          aria-haspopup="dialog"
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onKeyDown={[Function]}
-          onKeyPressCapture={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          type="button"
-        >
-          <IconMock
-            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-          />
-          global.against
-        </button>
-        <div
-          aria-label="vote.popover.title"
-          className="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
-          data-dialog={true}
-          hidden={true}
-          id="login-popover"
-          onAnimationEnd={[Function]}
-          onBlur={[Function]}
-          onKeyDown={[Function]}
-          onTransitionEnd={[Function]}
-          role="dialog"
-          style={
-            Object {
-              "display": "none",
-              "left": "100%",
-              "position": "fixed",
-              "top": "100%",
-            }
-          }
-          tabIndex={0}
-        >
+          <button
+            aria-controls="popover-overlay"
+            aria-expanded={false}
+            aria-haspopup="dialog"
+            className="sc-bdvvtL jJYLYJ"
+            onClick={[Function]}
+            onClickCapture={[Function]}
+            onKeyDown={[Function]}
+            onKeyPressCapture={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseDownCapture={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            type="button"
+          >
+            <div
+              className="sc-bdvvtL djSMSy"
+            >
+              <svg
+                className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+                viewBox="0 0 12 11"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
+                  fill="currentColor"
+                />
+              </svg>
+              <p
+                className="sc-bdvvtL dgPHnB cap-text"
+              >
+                global.against
+              </p>
+            </div>
+          </button>
           <div
-            className="sc-bdnxRM LoginOverlay__Arrow-jnMMdg eRHiAV ICvob"
+            aria-label="vote.popover.title"
+            className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+            data-dialog={true}
+            hidden={true}
+            id="login-popover"
+            onAnimationEnd={[Function]}
+            onBlur={[Function]}
+            onKeyDown={[Function]}
+            onTransitionEnd={[Function]}
+            role="dialog"
             style={
               Object {
-                "bottom": "100%",
-                "fontSize": 30,
-                "height": "1em",
-                "pointerEvents": "none",
-                "width": "1em",
+                "display": "none",
+                "left": "100%",
+                "position": "fixed",
+                "top": "100%",
               }
             }
+            tabIndex={0}
           >
-            <svg
+            <div
+              className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg huXWwm ipxCrt"
               style={
                 Object {
-                  "transform": "rotateZ(360deg)",
+                  "bottom": "100%",
+                  "fontSize": 30,
+                  "height": "1em",
+                  "pointerEvents": "none",
+                  "width": "1em",
                 }
               }
-              viewBox="0 0 30 30"
             >
-              <path
-                className="stroke"
-                d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
-              />
-              <path
-                className="fill"
-                d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
-              />
-            </svg>
-          </div>
-          <div
-            className="sc-bdnxRM kGlejw"
-          >
-            <p
-              className="sc-bdnxRM gCefO"
-            >
-              vote.popover.title
-            </p>
+              <svg
+                style={
+                  Object {
+                    "transform": "rotateZ(360deg)",
+                  }
+                }
+                viewBox="0 0 30 30"
+              >
+                <path
+                  className="stroke"
+                  d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+                />
+                <path
+                  className="fill"
+                  d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+                />
+              </svg>
+            </div>
             <div
-              className="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
+              className="sc-bdvvtL fxVUoH"
             >
               <p
-                className="sc-bdnxRM iwmYLL"
+                className="sc-bdvvtL gCcJmA cap-text"
               >
-                vote.popover.body
+                vote.popover.title
               </p>
-              <span
-                className="sc-bdnxRM hptjof"
-                clip="rect(0px, 0px, 0px, 0px)"
+              <div
+                className="sc-bdvvtL czpQVi"
               >
-                <button
-                  className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
-                  onClick={[Function]}
-                  type="button"
+                <p
+                  className="sc-bdvvtL civIyF cap-text"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
                 >
-                  global.close
-                </button>
-              </span>
-              <span
-                style={Object {}}
-              >
-                <button
-                  aria-label="open.connection_modal"
-                  className="center-block btn-block login-button btn btn-success"
-                  destination="http://localhost"
-                  disabled={false}
-                  onClick={[Function]}
-                  type="button"
+                  vote.popover.body
+                </p>
+                <span
+                  className="sc-bdnxRM hptjof"
+                  clip="rect(0px, 0px, 0px, 0px)"
                 >
-                  global.login
-                </button>
-              </span>
+                  <button
+                    className="sc-bdvvtL sc-lcepkR johlmz igzsNu cap-button"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    global.close
+                  </button>
+                </span>
+                <span
+                  style={Object {}}
+                >
+                  <button
+                    aria-label="open.connection_modal"
+                    className="center-block btn-block login-button btn btn-success"
+                    destination="http://localhost"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    global.login
+                  </button>
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when argumented 1`] = `
-<div
-  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL hLGqxb MNiHh"
->
+Array [
   <div
-    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdvvtL eYSNaB"
   >
     <div
-      style={
-        Object {
-          "width": "100%",
-        }
-      }
+      className="sc-bdvvtL TRpZk container"
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX hjHJnk"
-      >
-        <span
-          aria-label="vote"
-          className="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
-          role="img"
-        >
-          🎉
-        </span>
-        <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "thanks-for-debate-richer",
-            }
-          }
-        />
-        <button
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
-          onClick={[Function]}
-          type="button"
-        >
-          delete.vote.against
-        </button>
-      </div>
-      <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX KSjKw fvBSZY"
-      >
-        <iframe
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowFullScreen={true}
-          frameBorder="0"
-          height="20"
-          scrolling="no"
-          src="https://www.facebook.com/plugins/share_button.php?href=/debate/pour-ou-contre&layout=button_count&size=small&width=91&height=20&appId"
-          style={
-            Object {
-              "border": "none",
-              "overflow": "hidden",
-            }
-          }
-          title="facebook share button"
-          width="91"
-        />
-        <a
-          className="twitter-share-button"
-          data-show-count="false"
-          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-        >
-          Tweet
-        </a>
-        <button
-          aria-describedby="id-1"
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          tabIndex={0}
-          type="button"
-        >
-          <IconMock
-            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
-          />
-          global.link
-        </button>
-        <div
-          className="cap-tooltip"
-          hidden={true}
-          id="id-1"
-          onAnimationEnd={[Function]}
-          onTransitionEnd={[Function]}
-          role="tooltip"
-          style={
-            Object {
-              "display": "none",
-              "left": "100%",
-              "pointerEvents": "none",
-              "position": "fixed",
-              "top": "100%",
-              "zIndex": undefined,
-            }
-          }
-        />
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when voted 1`] = `
-<div
-  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL hLGqxb dlsZIf"
->
-  <div
-    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
-  >
-    <div
-      style={
-        Object {
-          "width": "100%",
-        }
-      }
-    >
-      <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX hjHJnk"
-      >
-        <span
-          aria-label="vote"
-          className="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
-          role="img"
-        >
-          🗳️
-        </span>
-        <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "thanks-for-your-vote",
-            }
-          }
-        />
-        <button
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
-          onClick={[Function]}
-          type="button"
-        >
-          delete.vote.against
-        </button>
-      </div>
-      <div
-        className="sc-bdnxRM inHOUp DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
-      >
-        <form
-          className="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
-          disabled={false}
-          id="debate-argument-form"
-          onSubmit={[Function]}
-        >
-          <div
-            className="form-group"
-          >
-            <textarea
-              aria-describedby="label-body "
-              aria-invalid={false}
-              autoComplete="off"
-              autoFocus={false}
-              className="form-control"
-              id="body"
-              minLength="1"
-              name="body"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onDragStart={[Function]}
-              onDrop={[Function]}
-              onFocus={[Function]}
-              placeholder="why-are-you-against"
-              type="textarea"
-              value=""
-              warnings={null}
-            />
-            <div
-              className="Notepad__Container-inQLrC cTBqFb visible-print-block"
-            >
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly 1`] = `
-<div
-  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL jlRppZ MNiHh"
->
-  <div
-    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
-  >
-    <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX AqBSD dagDTf"
-    >
-      <p
-        className="sc-bdnxRM jtOdAA"
-      >
-        
-      </p>
-      <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX kTCDAs cPNXGW"
         style={
           Object {
-            "opacity": 0,
+            "width": "100%",
           }
         }
       >
-        <button
-          aria-controls="popover-overlay"
-          aria-expanded={false}
-          aria-haspopup="dialog"
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onKeyDown={[Function]}
-          onKeyPressCapture={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          type="button"
-        >
-          <IconMock
-            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-          />
-          global.for
-        </button>
         <div
-          aria-label="vote.popover.title"
-          className="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
-          data-dialog={true}
-          hidden={true}
-          id="login-popover"
-          onAnimationEnd={[Function]}
-          onBlur={[Function]}
-          onKeyDown={[Function]}
-          onTransitionEnd={[Function]}
-          role="dialog"
-          style={
-            Object {
-              "display": "none",
-              "left": "100%",
-              "position": "fixed",
-              "top": "100%",
-            }
-          }
-          tabIndex={0}
-        >
-          <div
-            className="sc-bdnxRM LoginOverlay__Arrow-jnMMdg bGinxx cBAwUK"
-            style={
-              Object {
-                "fontSize": 30,
-                "height": "1em",
-                "pointerEvents": "none",
-                "top": "100%",
-                "width": "1em",
-              }
-            }
-          >
-            <svg
-              style={
-                Object {
-                  "transform": "rotateZ(180deg)",
-                }
-              }
-              viewBox="0 0 30 30"
-            >
-              <path
-                className="stroke"
-                d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
-              />
-              <path
-                className="fill"
-                d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
-              />
-            </svg>
-          </div>
-          <div
-            className="sc-bdnxRM kGlejw"
-          >
-            <p
-              className="sc-bdnxRM gCefO"
-            >
-              vote.popover.title
-            </p>
-            <div
-              className="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
-            >
-              <p
-                className="sc-bdnxRM iwmYLL"
-              >
-                vote.popover.body
-              </p>
-              <span
-                className="sc-bdnxRM hptjof"
-                clip="rect(0px, 0px, 0px, 0px)"
-              >
-                <button
-                  className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
-                  onClick={[Function]}
-                  type="button"
-                >
-                  global.close
-                </button>
-              </span>
-              <span
-                style={Object {}}
-              >
-                <button
-                  aria-label="open.connection_modal"
-                  className="center-block btn-block login-button btn btn-success"
-                  destination="http://localhost"
-                  disabled={false}
-                  onClick={[Function]}
-                  type="button"
-                >
-                  global.login
-                </button>
-              </span>
-            </div>
-          </div>
-        </div>
-        <button
-          aria-controls="popover-overlay"
-          aria-expanded={false}
-          aria-haspopup="dialog"
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onKeyDown={[Function]}
-          onKeyPressCapture={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          type="button"
-        >
-          <IconMock
-            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-          />
-          global.against
-        </button>
-        <div
-          aria-label="vote.popover.title"
-          className="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
-          data-dialog={true}
-          hidden={true}
-          id="login-popover"
-          onAnimationEnd={[Function]}
-          onBlur={[Function]}
-          onKeyDown={[Function]}
-          onTransitionEnd={[Function]}
-          role="dialog"
-          style={
-            Object {
-              "display": "none",
-              "left": "100%",
-              "position": "fixed",
-              "top": "100%",
-            }
-          }
-          tabIndex={0}
-        >
-          <div
-            className="sc-bdnxRM LoginOverlay__Arrow-jnMMdg bGinxx cBAwUK"
-            style={
-              Object {
-                "fontSize": 30,
-                "height": "1em",
-                "pointerEvents": "none",
-                "top": "100%",
-                "width": "1em",
-              }
-            }
-          >
-            <svg
-              style={
-                Object {
-                  "transform": "rotateZ(180deg)",
-                }
-              }
-              viewBox="0 0 30 30"
-            >
-              <path
-                className="stroke"
-                d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
-              />
-              <path
-                className="fill"
-                d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
-              />
-            </svg>
-          </div>
-          <div
-            className="sc-bdnxRM kGlejw"
-          >
-            <p
-              className="sc-bdnxRM gCefO"
-            >
-              vote.popover.title
-            </p>
-            <div
-              className="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
-            >
-              <p
-                className="sc-bdnxRM iwmYLL"
-              >
-                vote.popover.body
-              </p>
-              <span
-                className="sc-bdnxRM hptjof"
-                clip="rect(0px, 0px, 0px, 0px)"
-              >
-                <button
-                  className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
-                  onClick={[Function]}
-                  type="button"
-                >
-                  global.close
-                </button>
-              </span>
-              <span
-                style={Object {}}
-              >
-                <button
-                  aria-label="open.connection_modal"
-                  className="center-block btn-block login-button btn btn-success"
-                  destination="http://localhost"
-                  disabled={false}
-                  onClick={[Function]}
-                  type="button"
-                >
-                  global.login
-                </button>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when argumented 1`] = `
-<div
-  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL hLGqxb MNiHh"
->
-  <div
-    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
-  >
-    <div
-      style={
-        Object {
-          "width": "100%",
-        }
-      }
-    >
-      <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX hjHJnk"
-      >
-        <span
-          aria-label="vote"
-          className="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
-          role="img"
-        >
-          🎉
-        </span>
-        <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "thanks-for-debate-richer",
-            }
-          }
-        />
-        <button
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
-          onClick={[Function]}
-          type="button"
-        >
-          delete.vote.against
-        </button>
-      </div>
-      <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX KSjKw fvBSZY"
-      >
-        <iframe
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowFullScreen={true}
-          frameBorder="0"
-          height="20"
-          scrolling="no"
-          src="https://www.facebook.com/plugins/share_button.php?href=/debate/pour-ou-contre&layout=button_count&size=small&width=91&height=20&appId"
-          style={
-            Object {
-              "border": "none",
-              "overflow": "hidden",
-            }
-          }
-          title="facebook share button"
-          width="91"
-        />
-        <a
-          className="twitter-share-button"
-          data-show-count="false"
-          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-        >
-          Tweet
-        </a>
-        <button
-          aria-describedby="id-1"
-          className="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          tabIndex={0}
-          type="button"
-        >
-          <IconMock
-            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
-          />
-          global.link
-        </button>
-        <div
-          className="cap-tooltip"
-          hidden={true}
-          id="id-1"
-          onAnimationEnd={[Function]}
-          onTransitionEnd={[Function]}
-          role="tooltip"
-          style={
-            Object {
-              "display": "none",
-              "left": "100%",
-              "pointerEvents": "none",
-              "position": "fixed",
-              "top": "100%",
-              "zIndex": undefined,
-            }
-          }
-        />
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when voted 1`] = `
-<div
-  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL jlRppZ MNiHh"
->
-  <div
-    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
-  >
-    <div
-      style={
-        Object {
-          "width": "100%",
-        }
-      }
-    >
-      <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX hjHJnk"
-      >
-        <p
-          className="sc-bdnxRM PLHLg"
+          className="sc-bdvvtL bypsMk"
         >
           <span
             aria-label="vote"
-            className="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+            className="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
+            role="img"
+          >
+            🎉
+          </span>
+          <span
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "thanks-for-debate-richer",
+              }
+            }
+          />
+          <button
+            className="sc-bdvvtL sc-lcepkR bZkUKR cxpeMM cap-button"
+            onClick={[Function]}
+            type="button"
+          >
+            delete.vote.against
+          </button>
+        </div>
+        <div
+          className="sc-bdvvtL pFRrx"
+        >
+          <iframe
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            allowFullScreen={true}
+            frameBorder="0"
+            height="20"
+            scrolling="no"
+            src="https://www.facebook.com/plugins/share_button.php?href=/debate/pour-ou-contre&layout=button_count&size=small&width=91&height=20&appId"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+            title="facebook share button"
+            width="91"
+          />
+          <a
+            className="twitter-share-button"
+            data-show-count="false"
+            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+          >
+            Tweet
+          </a>
+          <button
+            aria-describedby="id-g"
+            className="sc-bdvvtL sc-lcepkR jSSwTC bBchHc cap-button"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ iyEUKQ icfuGT cap-icon"
+              fill="none"
+              viewBox="0 0 32 32"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
+                fill="currentColor"
+              />
+              <path
+                d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
+                fill="currentColor"
+              />
+            </svg>
+            global.link
+          </button>
+          <div
+            className="cap-tooltip-container"
+            hidden={true}
+            id="id-g"
+            onAnimationEnd={[Function]}
+            onTransitionEnd={[Function]}
+            role="tooltip"
+            style={
+              Object {
+                "display": "none",
+                "left": "100%",
+                "pointerEvents": "none",
+                "position": "fixed",
+                "top": "100%",
+                "zIndex": 1000,
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when voted 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdvvtL kSKRZH"
+  >
+    <div
+      className="sc-bdvvtL TRpZk container"
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="sc-bdvvtL bypsMk"
+        >
+          <span
+            aria-label="vote"
+            className="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
             role="img"
           >
             🗳️
@@ -867,16 +519,606 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
               }
             }
           />
-        </p>
+          <button
+            className="sc-bdvvtL sc-lcepkR bZkUKR cxpeMM cap-button"
+            onClick={[Function]}
+            type="button"
+          >
+            delete.vote.against
+          </button>
+        </div>
+        <div
+          className="sc-bdvvtL fPoqcI cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+        >
+          <form
+            className="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
+            disabled={false}
+            id="debate-argument-form"
+            onSubmit={[Function]}
+          >
+            <div
+              className="form-group"
+            >
+              <textarea
+                aria-describedby="label-body "
+                aria-invalid={false}
+                autoComplete="off"
+                autoFocus={false}
+                className="form-control"
+                id="body"
+                minLength="1"
+                name="body"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onDragStart={[Function]}
+                onDrop={[Function]}
+                onFocus={[Function]}
+                placeholder="why-are-you-against"
+                type="textarea"
+                value=""
+                warnings={null}
+              />
+              <div
+                className="Notepad__Container-inQLrC cTBqFb visible-print-block"
+              >
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-      <button
-        className="sc-bdnxRM Button__ButtonInner-dWPVNG hgJMSO kFclcg"
-        onClick={[Function]}
-        type="button"
-      >
-        publish-argument
-      </button>
     </div>
-  </div>
-</div>
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdvvtL bJNqZn"
+  >
+    <div
+      className="sc-bdvvtL TRpZk container"
+    >
+      <div
+        className="sc-bdvvtL blbeDV"
+      >
+        <p
+          className="sc-bdvvtL etAIZY cap-text"
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          
+        </p>
+        <div
+          className="sc-bdvvtL dVKRbo"
+          style={
+            Object {
+              "opacity": 0,
+            }
+          }
+        >
+          <button
+            aria-controls="popover-overlay"
+            aria-expanded={false}
+            aria-haspopup="dialog"
+            className="sc-bdvvtL bOAaxo"
+            onClick={[Function]}
+            onClickCapture={[Function]}
+            onKeyDown={[Function]}
+            onKeyPressCapture={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseDownCapture={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            type="button"
+          >
+            <div
+              className="sc-bdvvtL djSMSy"
+            >
+              <svg
+                className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+                fill="none"
+                viewBox="0 0 32 29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+                  fill="currentColor"
+                />
+              </svg>
+              <p
+                className="sc-bdvvtL dgPHnB cap-text"
+              >
+                global.for
+              </p>
+            </div>
+          </button>
+          <div
+            aria-label="vote.popover.title"
+            className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+            data-dialog={true}
+            hidden={true}
+            id="login-popover"
+            onAnimationEnd={[Function]}
+            onBlur={[Function]}
+            onKeyDown={[Function]}
+            onTransitionEnd={[Function]}
+            role="dialog"
+            style={
+              Object {
+                "display": "none",
+                "left": "100%",
+                "position": "fixed",
+                "top": "100%",
+              }
+            }
+            tabIndex={0}
+          >
+            <div
+              className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg gbmMky juLQlw"
+              style={
+                Object {
+                  "fontSize": 30,
+                  "height": "1em",
+                  "pointerEvents": "none",
+                  "top": "100%",
+                  "width": "1em",
+                }
+              }
+            >
+              <svg
+                style={
+                  Object {
+                    "transform": "rotateZ(180deg)",
+                  }
+                }
+                viewBox="0 0 30 30"
+              >
+                <path
+                  className="stroke"
+                  d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+                />
+                <path
+                  className="fill"
+                  d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+                />
+              </svg>
+            </div>
+            <div
+              className="sc-bdvvtL fxVUoH"
+            >
+              <p
+                className="sc-bdvvtL gCcJmA cap-text"
+              >
+                vote.popover.title
+              </p>
+              <div
+                className="sc-bdvvtL czpQVi"
+              >
+                <p
+                  className="sc-bdvvtL civIyF cap-text"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  vote.popover.body
+                </p>
+                <span
+                  className="sc-bdnxRM hptjof"
+                  clip="rect(0px, 0px, 0px, 0px)"
+                >
+                  <button
+                    className="sc-bdvvtL sc-lcepkR johlmz igzsNu cap-button"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    global.close
+                  </button>
+                </span>
+                <span
+                  style={Object {}}
+                >
+                  <button
+                    aria-label="open.connection_modal"
+                    className="center-block btn-block login-button btn btn-success"
+                    destination="http://localhost"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    global.login
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <button
+            aria-controls="popover-overlay"
+            aria-expanded={false}
+            aria-haspopup="dialog"
+            className="sc-bdvvtL jJYLYJ"
+            onClick={[Function]}
+            onClickCapture={[Function]}
+            onKeyDown={[Function]}
+            onKeyPressCapture={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseDownCapture={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            type="button"
+          >
+            <div
+              className="sc-bdvvtL djSMSy"
+            >
+              <svg
+                className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+                viewBox="0 0 12 11"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
+                  fill="currentColor"
+                />
+              </svg>
+              <p
+                className="sc-bdvvtL dgPHnB cap-text"
+              >
+                global.against
+              </p>
+            </div>
+          </button>
+          <div
+            aria-label="vote.popover.title"
+            className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+            data-dialog={true}
+            hidden={true}
+            id="login-popover"
+            onAnimationEnd={[Function]}
+            onBlur={[Function]}
+            onKeyDown={[Function]}
+            onTransitionEnd={[Function]}
+            role="dialog"
+            style={
+              Object {
+                "display": "none",
+                "left": "100%",
+                "position": "fixed",
+                "top": "100%",
+              }
+            }
+            tabIndex={0}
+          >
+            <div
+              className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg gbmMky juLQlw"
+              style={
+                Object {
+                  "fontSize": 30,
+                  "height": "1em",
+                  "pointerEvents": "none",
+                  "top": "100%",
+                  "width": "1em",
+                }
+              }
+            >
+              <svg
+                style={
+                  Object {
+                    "transform": "rotateZ(180deg)",
+                  }
+                }
+                viewBox="0 0 30 30"
+              >
+                <path
+                  className="stroke"
+                  d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+                />
+                <path
+                  className="fill"
+                  d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+                />
+              </svg>
+            </div>
+            <div
+              className="sc-bdvvtL fxVUoH"
+            >
+              <p
+                className="sc-bdvvtL gCcJmA cap-text"
+              >
+                vote.popover.title
+              </p>
+              <div
+                className="sc-bdvvtL czpQVi"
+              >
+                <p
+                  className="sc-bdvvtL civIyF cap-text"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  vote.popover.body
+                </p>
+                <span
+                  className="sc-bdnxRM hptjof"
+                  clip="rect(0px, 0px, 0px, 0px)"
+                >
+                  <button
+                    className="sc-bdvvtL sc-lcepkR johlmz igzsNu cap-button"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    global.close
+                  </button>
+                </span>
+                <span
+                  style={Object {}}
+                >
+                  <button
+                    aria-label="open.connection_modal"
+                    className="center-block btn-block login-button btn btn-success"
+                    destination="http://localhost"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    global.login
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when argumented 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdvvtL eYSNaB"
+  >
+    <div
+      className="sc-bdvvtL TRpZk container"
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="sc-bdvvtL bypsMk"
+        >
+          <span
+            aria-label="vote"
+            className="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
+            role="img"
+          >
+            🎉
+          </span>
+          <span
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "thanks-for-debate-richer",
+              }
+            }
+          />
+          <button
+            className="sc-bdvvtL sc-lcepkR bZkUKR cxpeMM cap-button"
+            onClick={[Function]}
+            type="button"
+          >
+            delete.vote.against
+          </button>
+        </div>
+        <div
+          className="sc-bdvvtL pFRrx"
+        >
+          <iframe
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            allowFullScreen={true}
+            frameBorder="0"
+            height="20"
+            scrolling="no"
+            src="https://www.facebook.com/plugins/share_button.php?href=/debate/pour-ou-contre&layout=button_count&size=small&width=91&height=20&appId"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+            title="facebook share button"
+            width="91"
+          />
+          <a
+            className="twitter-share-button"
+            data-show-count="false"
+            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+          >
+            Tweet
+          </a>
+          <button
+            aria-describedby="id-g"
+            className="sc-bdvvtL sc-lcepkR jSSwTC bBchHc cap-button"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ iyEUKQ icfuGT cap-icon"
+              fill="none"
+              viewBox="0 0 32 32"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
+                fill="currentColor"
+              />
+              <path
+                d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
+                fill="currentColor"
+              />
+            </svg>
+            global.link
+          </button>
+          <div
+            className="cap-tooltip-container"
+            hidden={true}
+            id="id-g"
+            onAnimationEnd={[Function]}
+            onTransitionEnd={[Function]}
+            role="tooltip"
+            style={
+              Object {
+                "display": "none",
+                "left": "100%",
+                "pointerEvents": "none",
+                "position": "fixed",
+                "top": "100%",
+                "zIndex": 1000,
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when voted 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdvvtL bJNqZn"
+  >
+    <div
+      className="sc-bdvvtL TRpZk container"
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="sc-bdvvtL bypsMk"
+        >
+          <p
+            className="sc-bdvvtL raPRS cap-text"
+          >
+            <span
+              aria-label="vote"
+              className="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+              role="img"
+            >
+              🗳️
+            </span>
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "thanks-for-your-vote",
+                }
+              }
+            />
+          </p>
+        </div>
+        <button
+          className="sc-bdvvtL sc-lcepkR jvGbMS igzsNu cap-button"
+          onClick={[Function]}
+          type="button"
+        >
+          publish-argument
+        </button>
+      </div>
+    </div>
+  </div>,
+]
 `;

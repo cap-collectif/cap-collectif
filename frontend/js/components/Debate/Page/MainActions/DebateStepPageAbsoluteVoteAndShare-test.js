@@ -68,7 +68,7 @@ describe('<DebateStepPageAbsoluteVoteAndShare />', () => {
     };
     MobileTestComponent = componentProps => (
       <RelaySuspensFragmentTest environment={environment}>
-        <MockProviders store={{}}>
+        <MockProviders store={{}} useCapUIProvider>
           <MachineContext.Provider value={{ ...Machine }}>
             <TestRenderer
               componentProps={componentProps}
@@ -81,7 +81,7 @@ describe('<DebateStepPageAbsoluteVoteAndShare />', () => {
     );
     DesktopTestComponent = componentProps => (
       <RelaySuspensFragmentTest environment={environment}>
-        <MockProviders store={{}}>
+        <MockProviders store={{}} useCapUIProvider>
           <MachineContext.Provider value={{ ...Machine }}>
             <TestRenderer componentProps={componentProps} queryVariables={desktopVariables} />
           </MachineContext.Provider>

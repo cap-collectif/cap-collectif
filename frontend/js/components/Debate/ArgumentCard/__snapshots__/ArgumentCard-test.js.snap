@@ -5,18 +5,18 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
   bg="white"
   p={6}
 >
-  <ForwardRef
+  <Flex
     direction="column"
     height="100%"
   >
-    <ForwardRef
-      alignItems="start"
+    <Flex
+      align="start"
       direction="row"
-      justifyContent="space-between"
+      justify="space-between"
       mb={2}
     >
-      <ForwardRef
-        alignItems="center"
+      <Flex
+        align="center"
         direction="row"
         flexWrap="wrap"
       >
@@ -32,7 +32,7 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
           interactive={false}
           mb={2}
           mr={2}
-          variant="green"
+          variantColor="green"
         >
           <Text
             as="span"
@@ -47,17 +47,17 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
             />
           </Text>
         </Tag>
-      </ForwardRef>
-      <ForwardRef
+      </Flex>
+      <Flex
         align="center"
         direction="row"
       />
-    </ForwardRef>
+    </Flex>
     <Text>
       Je suis pour le LSD dans nos cantines
        
     </Text>
-    <ForwardRef
+    <Flex
       align="center"
       flexDirection="row"
       justify="center"
@@ -72,7 +72,7 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
         when={false}
         wrapper={[Function]}
       >
-        <Connect(LoginOverlay)
+        <Connect(NewLoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -87,8 +87,10 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
               />
             }
             onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
           />
-        </Connect(LoginOverlay)>
+        </Connect(NewLoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"
@@ -108,8 +110,8 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
       >
         500
       </Text>
-    </ForwardRef>
-  </ForwardRef>
+    </Flex>
+  </Flex>
   <Relay(ModalReportArgumentMobile)
     argument={
       Object {
@@ -146,18 +148,18 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
   bg="white"
   p={6}
 >
-  <ForwardRef
+  <Flex
     direction="column"
     height="100%"
   >
-    <ForwardRef
-      alignItems="start"
+    <Flex
+      align="start"
       direction="row"
-      justifyContent="space-between"
+      justify="space-between"
       mb={2}
     >
-      <ForwardRef
-        alignItems="center"
+      <Flex
+        align="center"
         direction="row"
         flexWrap="wrap"
       >
@@ -173,7 +175,7 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
           interactive={false}
           mb={2}
           mr={2}
-          variant="green"
+          variantColor="green"
         >
           <Text
             as="span"
@@ -188,17 +190,17 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
             />
           </Text>
         </Tag>
-      </ForwardRef>
-      <ForwardRef
+      </Flex>
+      <Flex
         align="center"
         direction="row"
       />
-    </ForwardRef>
+    </Flex>
     <Text>
       Je suis pour le LSD dans nos cantines
        
     </Text>
-    <ForwardRef
+    <Flex
       align="center"
       flexDirection="row"
       justify="center"
@@ -213,7 +215,7 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
         when={false}
         wrapper={[Function]}
       >
-        <Connect(LoginOverlay)
+        <Connect(NewLoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -228,8 +230,10 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
               />
             }
             onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
           />
-        </Connect(LoginOverlay)>
+        </Connect(NewLoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"
@@ -249,8 +253,8 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
       >
         500
       </Text>
-    </ForwardRef>
-  </ForwardRef>
+    </Flex>
+  </Flex>
   <Relay(ModalReportArgumentMobile)
     argument={
       Object {
@@ -287,18 +291,18 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
   bg="white"
   p={6}
 >
-  <ForwardRef
+  <Flex
     direction="column"
     height="100%"
   >
-    <ForwardRef
-      alignItems="start"
+    <Flex
+      align="start"
       direction="row"
-      justifyContent="space-between"
+      justify="space-between"
       mb={2}
     >
-      <ForwardRef
-        alignItems="center"
+      <Flex
+        align="center"
         direction="row"
         flexWrap="wrap"
       >
@@ -314,7 +318,7 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
           interactive={false}
           mb={2}
           mr={2}
-          variant="green"
+          variantColor="green"
         >
           <Text
             as="span"
@@ -329,17 +333,17 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
             />
           </Text>
         </Tag>
-      </ForwardRef>
-      <ForwardRef
+      </Flex>
+      <Flex
         align="center"
         direction="row"
       />
-    </ForwardRef>
+    </Flex>
     <Text>
       Je suis pour le LSD dans nos cantines
        
     </Text>
-    <ForwardRef
+    <Flex
       align="center"
       flexDirection="row"
       justify="center"
@@ -354,7 +358,7 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
         when={false}
         wrapper={[Function]}
       >
-        <Connect(LoginOverlay)
+        <Connect(NewLoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -369,8 +373,10 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
               />
             }
             onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
           />
-        </Connect(LoginOverlay)>
+        </Connect(NewLoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"
@@ -390,8 +396,8 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
       >
         500
       </Text>
-    </ForwardRef>
-  </ForwardRef>
+    </Flex>
+  </Flex>
   <Relay(ModalReportArgumentMobile)
     argument={
       Object {
@@ -428,18 +434,18 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
   bg="white"
   p={6}
 >
-  <ForwardRef
+  <Flex
     direction="column"
     height="100%"
   >
-    <ForwardRef
-      alignItems="start"
+    <Flex
+      align="start"
       direction="row"
-      justifyContent="space-between"
+      justify="space-between"
       mb={2}
     >
-      <ForwardRef
-        alignItems="center"
+      <Flex
+        align="center"
         direction="row"
         flexWrap="wrap"
       >
@@ -455,7 +461,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
           interactive={false}
           mb={2}
           mr={2}
-          variant="green"
+          variantColor="green"
         >
           <Text
             as="span"
@@ -470,17 +476,17 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
             />
           </Text>
         </Tag>
-      </ForwardRef>
-      <ForwardRef
+      </Flex>
+      <Flex
         align="center"
         direction="row"
       />
-    </ForwardRef>
+    </Flex>
     <Text>
       Je suis pour le LSD dans nos cantines
        
     </Text>
-    <ForwardRef
+    <Flex
       align="center"
       flexDirection="row"
       justify="center"
@@ -495,7 +501,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
         when={false}
         wrapper={[Function]}
       >
-        <Connect(LoginOverlay)
+        <Connect(NewLoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -510,8 +516,10 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
               />
             }
             onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
           />
-        </Connect(LoginOverlay)>
+        </Connect(NewLoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"
@@ -531,8 +539,8 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
       >
         500
       </Text>
-    </ForwardRef>
-  </ForwardRef>
+    </Flex>
+  </Flex>
   <Relay(ModalReportArgumentMobile)
     argument={
       Object {
@@ -569,18 +577,18 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
   bg="white"
   p={6}
 >
-  <ForwardRef
+  <Flex
     direction="column"
     height="100%"
   >
-    <ForwardRef
-      alignItems="start"
+    <Flex
+      align="start"
       direction="row"
-      justifyContent="space-between"
+      justify="space-between"
       mb={2}
     >
-      <ForwardRef
-        alignItems="center"
+      <Flex
+        align="center"
         direction="row"
         flexWrap="wrap"
       >
@@ -596,7 +604,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
           interactive={false}
           mb={2}
           mr={2}
-          variant="green"
+          variantColor="green"
         >
           <Text
             as="span"
@@ -611,17 +619,17 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
             />
           </Text>
         </Tag>
-      </ForwardRef>
-      <ForwardRef
+      </Flex>
+      <Flex
         align="center"
         direction="row"
       />
-    </ForwardRef>
+    </Flex>
     <Text>
       Je suis pour le LSD dans nos cantines
        
     </Text>
-    <ForwardRef
+    <Flex
       align="center"
       flexDirection="row"
       justify="center"
@@ -636,7 +644,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
         when={true}
         wrapper={[Function]}
       >
-        <Connect(LoginOverlay)
+        <Connect(NewLoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -651,8 +659,10 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
               />
             }
             onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
           />
-        </Connect(LoginOverlay)>
+        </Connect(NewLoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"
@@ -672,8 +682,8 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
       >
         500
       </Text>
-    </ForwardRef>
-  </ForwardRef>
+    </Flex>
+  </Flex>
   <Relay(ModalReportArgumentMobile)
     argument={
       Object {

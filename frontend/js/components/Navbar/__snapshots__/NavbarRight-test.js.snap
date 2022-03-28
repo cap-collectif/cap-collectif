@@ -3,7 +3,7 @@
 exports[`<NavbarRight /> should render correctly 1`] = `
 <Fragment>
   <AppBox
-    px={4}
+    px="16px"
   >
     <Connect(injectIntl(RegistrationButton))
       className="navbar-btn"
@@ -34,8 +34,6 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
             "align": "center",
             "direction": "row",
             "height": "100%",
-            "px": 4,
-            "py": 2,
           },
         ],
         "componentStyle": e {
@@ -44,7 +42,7 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "componentId": "styles__DropdownToggle-ckofMh",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}",
+            ".caret{margin-left:5px;}padding:8px 16px;",
             [Function],
             " &:hover,&:focus{color:",
             [Function],
@@ -191,7 +189,7 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
     />
     <AppBox
       as="span"
-      ml={2}
+      ml="8px"
     >
       admin
     </AppBox>
@@ -853,8 +851,6 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
             "align": "center",
             "direction": "row",
             "height": "100%",
-            "px": 4,
-            "py": 2,
           },
         ],
         "componentStyle": e {
@@ -863,7 +859,7 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           "componentId": "styles__DropdownToggle-ckofMh",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}",
+            ".caret{margin-left:5px;}padding:8px 16px;",
             [Function],
             " &:hover,&:focus{color:",
             [Function],
@@ -1010,7 +1006,7 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
     />
     <AppBox
       as="span"
-      ml={2}
+      ml="8px"
     >
       admin
     </AppBox>
@@ -1672,8 +1668,6 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
             "align": "center",
             "direction": "row",
             "height": "100%",
-            "px": 4,
-            "py": 2,
           },
         ],
         "componentStyle": e {
@@ -1682,7 +1676,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "componentId": "styles__DropdownToggle-ckofMh",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}",
+            ".caret{margin-left:5px;}padding:8px 16px;",
             [Function],
             " &:hover,&:focus{color:",
             [Function],
@@ -1829,7 +1823,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
     />
     <AppBox
       as="span"
-      ml={2}
+      ml="8px"
     >
       admin
     </AppBox>

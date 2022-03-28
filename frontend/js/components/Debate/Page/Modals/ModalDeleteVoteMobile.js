@@ -3,18 +3,16 @@ import * as React from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useActor } from '@xstate/react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
-import Button from '~ds/Button/Button';
-import Modal from '~ds/Modal/Modal';
+import { Button, Text, Modal, Heading } from '@cap-collectif/ui'
 import type { ModalDeleteVoteMobile_debate } from '~relay/ModalDeleteVoteMobile_debate.graphql';
-import Text from '~ui/Primitives/Text';
 import { FontWeight } from '~ui/Primitives/constants';
-import Heading from '~ui/Primitives/Heading';
 import RemoveDebateVoteAlternateArgumentMutation from '~/mutations/RemoveDebateVoteAlternateArgumentMutation';
 import {
   MachineContext,
   type VoteAction,
   type VoteState,
 } from '~/components/Debate/Page/MainActions/DebateStepPageStateMachine';
+import ResetCss from '~/utils/ResetCss'
 
 type Props = {|
   debate: ModalDeleteVoteMobile_debate,
@@ -73,9 +71,11 @@ export const ModalDeleteVoteMobile = ({ debate, setShowArgumentForm }: Props): R
       case 'CHOICES':
         return (
           <>
-            <Modal.Header textAlign="center">
-              <Heading as="h4">{intl.formatMessage({ id: 'confirm-delete-vote' })}</Heading>
-            </Modal.Header>
+            <ResetCss>
+              <Modal.Header textAlign="center">
+                <Heading as="h4">{intl.formatMessage({ id: 'confirm-delete-vote' })}</Heading>
+              </Modal.Header>
+            </ResetCss>
 
             <Modal.Body pb={6}>
               <Text color="neutral-gray.700" mb={4} textAlign="center">

@@ -1,13 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import css from '@styled-system/css';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Card from '~ds/Card/Card';
-import Tag from '~ds/Tag/Tag';
+import { Flex, Card, Tag, Text, Skeleton } from '@cap-collectif/ui';
 import { LineHeight } from '~ui/Primitives/constants';
-import Text from '~ui/Primitives/Text';
-import Skeleton from '~ds/Skeleton';
 
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
@@ -18,10 +13,10 @@ type Props = {|
 export const DebateOpinionPlaceholder = ({ debateOpinionStatus = 'FOR' }: Props): React.Node => (
   <Card p={0} bg="white" width="100%">
     <Tag
-      variant={debateOpinionStatus === 'FOR' ? 'green' : 'red'}
-      css={css({
+      variantColor={debateOpinionStatus === 'FOR' ? 'green' : 'red'}
+      sx={{
         position: 'absolute',
-      })}>
+      }}>
       <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
         <FormattedMessage id={debateOpinionStatus === 'FOR' ? 'opinion.for' : 'opinion.against'} />
       </Text>

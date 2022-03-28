@@ -76,6 +76,7 @@ export const Title = ({ children, ...rest }: TitleProps) => {
       className="projectHeader__title platform__title"
       width="100%"
       as="h3"
+      mb={0}
       fontSize={[4, 6]}
       lineHeight="initial" // {['base', 'l']}
       fontWeight="semibold"

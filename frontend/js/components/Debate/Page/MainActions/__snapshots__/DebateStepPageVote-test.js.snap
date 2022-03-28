@@ -2,50 +2,95 @@
 
 exports[`<DebateStepPageVote/> should renders correctly 1`] = `
 <div
-  class="sc-bdnxRM Flex___StyledAppBox-RSPpX iEaHFR cPNXGW"
+  class="sc-bdvvtL gnQsba"
   style="opacity:0"
 >
   <button
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
-    type="button"
+    class="sc-bdvvtL bwZmwA"
   >
-    <iconmock
-      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-    />
-    global.for
+    <div
+      class="sc-bdvvtL iDVMyE"
+    >
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        fill="none"
+        viewBox="0 0 32 29"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="sc-bdvvtL ciyRZw cap-text"
+      >
+        global.for
+      </p>
+    </div>
   </button>
   <button
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
-    type="button"
+    class="sc-bdvvtL dMPniQ"
   >
-    <iconmock
-      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-    />
-    global.against
+    <div
+      class="sc-bdvvtL iDVMyE"
+    >
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        viewBox="0 0 12 11"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="sc-bdvvtL ciyRZw cap-text"
+      >
+        global.against
+      </p>
+    </div>
   </button>
 </div>
 `;
 
 exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1`] = `
 <div
-  class="sc-bdnxRM Flex___StyledAppBox-RSPpX iEaHFR cPNXGW"
+  class="sc-bdvvtL gnQsba"
   style="opacity:0"
 >
   <button
     aria-controls="popover-overlay"
     aria-expanded="false"
     aria-haspopup="dialog"
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
+    class="sc-bdvvtL bwZmwA"
     type="button"
   >
-    <iconmock
-      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-    />
-    global.for
+    <div
+      class="sc-bdvvtL iDVMyE"
+    >
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        fill="none"
+        viewBox="0 0 32 29"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="sc-bdvvtL ciyRZw cap-text"
+      >
+        global.for
+      </p>
+    </div>
   </button>
   <div
     aria-label="vote.popover.title"
-    class="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
+    class="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
     data-dialog="true"
     hidden=""
     id="login-popover"
@@ -54,7 +99,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
     tabindex="0"
   >
     <div
-      class="sc-bdnxRM LoginOverlay__Arrow-jnMMdg eRHiAV ICvob"
+      class="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg huXWwm ipxCrt"
       style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
     >
       <svg
@@ -72,18 +117,19 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
       </svg>
     </div>
     <div
-      class="sc-bdnxRM kGlejw"
+      class="sc-bdvvtL iEmlgw"
     >
       <p
-        class="sc-bdnxRM gCefO"
+        class="sc-bdvvtL gfzBSV cap-text"
       >
         vote.popover.title
       </p>
       <div
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
+        class="sc-bdvvtL grUqXo"
       >
         <p
-          class="sc-bdnxRM iwmYLL"
+          class="sc-bdvvtL egrZXz cap-text"
+          style="margin-left:0;margin-top:0"
         >
           vote.popover.body
         </p>
@@ -92,7 +138,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            class="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
+            class="sc-bdvvtL sc-lcepkR iPfbxu elkPgU cap-button"
             type="button"
           >
             global.close
@@ -115,17 +161,32 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
     aria-controls="popover-overlay"
     aria-expanded="false"
     aria-haspopup="dialog"
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
+    class="sc-bdvvtL dMPniQ"
     type="button"
   >
-    <iconmock
-      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-    />
-    global.against
+    <div
+      class="sc-bdvvtL iDVMyE"
+    >
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        viewBox="0 0 12 11"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="sc-bdvvtL ciyRZw cap-text"
+      >
+        global.against
+      </p>
+    </div>
   </button>
   <div
     aria-label="vote.popover.title"
-    class="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
+    class="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
     data-dialog="true"
     hidden=""
     id="login-popover"
@@ -134,7 +195,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
     tabindex="0"
   >
     <div
-      class="sc-bdnxRM LoginOverlay__Arrow-jnMMdg eRHiAV ICvob"
+      class="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg huXWwm ipxCrt"
       style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
     >
       <svg
@@ -152,18 +213,19 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
       </svg>
     </div>
     <div
-      class="sc-bdnxRM kGlejw"
+      class="sc-bdvvtL iEmlgw"
     >
       <p
-        class="sc-bdnxRM gCefO"
+        class="sc-bdvvtL gfzBSV cap-text"
       >
         vote.popover.title
       </p>
       <div
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
+        class="sc-bdvvtL grUqXo"
       >
         <p
-          class="sc-bdnxRM iwmYLL"
+          class="sc-bdvvtL egrZXz cap-text"
+          style="margin-left:0;margin-top:0"
         >
           vote.popover.body
         </p>
@@ -172,7 +234,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            class="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
+            class="sc-bdvvtL sc-lcepkR iPfbxu elkPgU cap-button"
             type="button"
           >
             global.close
@@ -196,52 +258,110 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
 
 exports[`<DebateStepPageVote/> should renders correctly with anonymous participation 1`] = `
 <div
-  class="sc-bdnxRM Flex___StyledAppBox-RSPpX iEaHFR cPNXGW"
+  class="sc-bdvvtL gnQsba"
   style="opacity:0"
 >
   <button
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
-    type="button"
+    class="sc-bdvvtL bwZmwA"
   >
-    <iconmock
-      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-    />
-    global.for
+    <div
+      class="sc-bdvvtL iDVMyE"
+    >
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        fill="none"
+        viewBox="0 0 32 29"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="sc-bdvvtL ciyRZw cap-text"
+      >
+        global.for
+      </p>
+    </div>
   </button>
   <button
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
-    type="button"
+    class="sc-bdvvtL dMPniQ"
   >
-    <iconmock
-      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-    />
-    global.against
+    <div
+      class="sc-bdvvtL iDVMyE"
+    >
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        viewBox="0 0 12 11"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="sc-bdvvtL ciyRZw cap-text"
+      >
+        global.against
+      </p>
+    </div>
   </button>
 </div>
 `;
 
 exports[`<DebateStepPageVote/> should renders correctly with email not confirmed argument 1`] = `
 <div
-  class="sc-bdnxRM Flex___StyledAppBox-RSPpX iEaHFR cPNXGW"
+  class="sc-bdvvtL gnQsba"
   style="opacity:0"
 >
   <button
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
-    type="button"
+    class="sc-bdvvtL bwZmwA"
   >
-    <iconmock
-      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-    />
-    global.for
+    <div
+      class="sc-bdvvtL iDVMyE"
+    >
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        fill="none"
+        viewBox="0 0 32 29"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="sc-bdvvtL ciyRZw cap-text"
+      >
+        global.for
+      </p>
+    </div>
   </button>
   <button
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
-    type="button"
+    class="sc-bdvvtL dMPniQ"
   >
-    <iconmock
-      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
-    />
-    global.against
+    <div
+      class="sc-bdvvtL iDVMyE"
+    >
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        viewBox="0 0 12 11"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="sc-bdvvtL ciyRZw cap-text"
+      >
+        global.against
+      </p>
+    </div>
   </button>
 </div>
 `;

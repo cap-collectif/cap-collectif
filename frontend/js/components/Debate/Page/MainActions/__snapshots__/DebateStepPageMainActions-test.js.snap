@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
-<AppBox
+<Box
   id="DebateStepPageMainActions"
 >
   <Skeleton
     isLoaded={true}
     placeholder={<DebateStepPageMainActionsPlaceholder />}
   >
-    <ForwardRef
+    <Flex
       alignItems="center"
       direction="column"
       spacing={4}
     >
       <Tag
         icon="CLOCK"
-        variant="neutral-gray"
+        variantColor="neutral-gray"
         variantType="badge"
       >
         global.ended
@@ -38,27 +38,27 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
           }
         }
       />
-    </ForwardRef>
+    </Flex>
   </Skeleton>
-</AppBox>
+</Box>
 `;
 
 exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
-<AppBox
+<Box
   id="DebateStepPageMainActions"
 >
   <Skeleton
     isLoaded={true}
     placeholder={<DebateStepPageMainActionsPlaceholder />}
   >
-    <ForwardRef
+    <Flex
       alignItems="center"
       direction="column"
       spacing={4}
     >
       <Tag
         icon="CLOCK"
-        variant="neutral-gray"
+        variantColor="neutral-gray"
         variantType="badge"
       >
         global.ended
@@ -81,7 +81,7 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
           }
         }
       />
-    </ForwardRef>
+    </Flex>
   </Skeleton>
-</AppBox>
+</Box>
 `;

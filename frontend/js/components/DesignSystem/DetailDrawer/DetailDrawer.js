@@ -6,8 +6,8 @@ import { AnimatePresence, m as motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useKeyboardShortcuts } from '@liinkiing/react-hooks';
 import { createPortal } from 'react-dom';
+import {Box} from '@cap-collectif/ui'
 import { ease } from '~/utils/motion';
-import AppBox from '~ui/Primitives/AppBox';
 import DetailDrawerHeader from '~ds/DetailDrawer/DetailDrawerHeader';
 import DetailDrawerBody from '~ds/DetailDrawer/DetailDrawerBody';
 import { cleanChildren } from '~/utils/cleanChildren';
@@ -31,7 +31,7 @@ if (config.canUseDOM && document) {
   }
 }
 
-const DetailDrawerInner = styled(motion.custom(AppBox)).attrs({
+const DetailDrawerInner = styled(motion.custom(Box)).attrs({
   position: 'fixed',
   left: 0,
   right: 0,

@@ -6,33 +6,25 @@ import Providers from './Providers';
 import type { ProjectHeaderAppQueryResponse } from '~relay/ProjectHeaderAppQuery.graphql';
 import type { Uuid } from '../types';
 import ProjectHeader from '~/components/Project/ProjectHeader';
-import ProjectHeaderLegacy from '~/components/Project/ProjectHeaderLegacy';
 import Skeleton from '~ds/Skeleton';
 import ProjectHeaderPlaceholder from '~/components/Project/ProjectHeader-Placeholder';
-import ProjectHeaderPlaceholderLegacy from '~/components/Project/ProjectHeader-PlaceholderLegacy';
 
 const query = graphql`
   query ProjectHeaderAppQuery($projectId: ID!, $count: Int, $cursor: String) {
     project: node(id: $projectId) {
       ...ProjectHeader_project @arguments(count: $count, cursor: $cursor)
-      ...ProjectHeaderLegacy_project @arguments(count: $count, cursor: $cursor)
     }
   }
 `;
 export type Props = {|
   +projectId: Uuid,
-  +currentStepType: string,
 |};
-export const ProjectHeaderQueryRenderer = ({ projectId, currentStepType }: Props) => {
-  const DSReadySteps = ['collect', 'selection', 'presentation', 'consultation', 'questionnaire'];
-  const isDsReady = DSReadySteps.includes(currentStepType);
 
-  if (isDsReady) {
-    document.getElementsByTagName('html')[0].style.fontSize = '14px';
-  }
+export const ProjectHeaderQueryRenderer = ({ projectId }: Props) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px';
 
   return (
-    <Providers resetCSS={!isDsReady} designSystem={isDsReady}>
+    <Providers resetCSS={false} designSystem>
       <QueryRenderer
         fetchPolicy="store-and-network"
         variables={{
@@ -58,28 +50,9 @@ export const ProjectHeaderQueryRenderer = ({ projectId, currentStepType }: Props
             return null;
           }
 
-          const getProjectHeader = () => {
-            if (props && props.project) {
-              return isDsReady ? (
-                <ProjectHeader project={props.project} />
-              ) : (
-                <ProjectHeaderLegacy project={props.project} />
-              );
-            }
-            return null;
-          };
-
-          const getPlaceholder = () => {
-            return isDsReady ? (
-              <ProjectHeaderPlaceholder fetchData={retry} hasError={!!error} />
-            ) : (
-              <ProjectHeaderPlaceholderLegacy fetchData={retry} hasError={!!error} />
-            );
-          };
-
           return (
-            <Skeleton isLoaded={!!(props && props.project)} placeholder={getPlaceholder()}>
-              {!!(props && props.project) && getProjectHeader()}
+            <Skeleton isLoaded={!!(props && props.project)} placeholder={<ProjectHeaderPlaceholder fetchData={retry} hasError={!!error} />}>
+              {!!(props && props.project) && <ProjectHeader project={props.project} />}
             </Skeleton>
           );
         }}
@@ -88,8 +61,8 @@ export const ProjectHeaderQueryRenderer = ({ projectId, currentStepType }: Props
   );
 };
 
-export default ({ projectId, currentStepType }: Props) => (
+export default ({ projectId }: Props) => (
   <Providers>
-    <ProjectHeaderQueryRenderer projectId={projectId} currentStepType={currentStepType} />
+    <ProjectHeaderQueryRenderer projectId={projectId} />
   </Providers>
 );

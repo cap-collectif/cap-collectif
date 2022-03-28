@@ -36,7 +36,7 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
       mb={4}
       spacing={2}
     >
-      <Relay(NewUserAvatar)
+      <Relay(NewUserAvatarLegacy)
         border="2px solid"
         borderColor="yellow.500"
         size="md"

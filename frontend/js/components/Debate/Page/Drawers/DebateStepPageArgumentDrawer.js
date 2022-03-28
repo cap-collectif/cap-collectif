@@ -3,14 +3,9 @@ import * as React from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
+import {Flex, Text, Button, Tag, Heading, Icon, CapUIIcon} from '@cap-collectif/ui';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Text from '~ui/Primitives/Text';
-import Button from '~ds/Button/Button';
-import Tag from '~ds/Tag/Tag';
-import Heading from '~ui/Primitives/Heading';
-import LoginOverlay from '~/components/Utils/LoginOverlay';
-import Icon, { ICON_NAME } from '~ds/Icon/Icon';
+import NewLoginOverlay from '~/components/Utils/NewLoginOverlay';
 import { voteForArgument } from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type { DebateStepPageArgumentDrawer_argument$key } from '~relay/DebateStepPageArgumentDrawer_argument.graphql';
 import type { DebateStepPageArgumentDrawer_viewer$key } from '~relay/DebateStepPageArgumentDrawer_viewer.graphql';
@@ -78,7 +73,7 @@ const DebateStepPageArgumentDrawer = ({
           </Text>
 
           <Tag
-            variant={argument.type === 'FOR' ? 'green' : 'red'}
+            variantColor={argument.type === 'FOR' ? 'green' : 'red'}
             interactive={false}
             alignSelf="center">
             <Heading as="h5" fontWeight="700" uppercase>
@@ -89,7 +84,7 @@ const DebateStepPageArgumentDrawer = ({
 
         {argument.viewerCanReport && !stepClosed && (
           <Button
-            rightIcon={ICON_NAME.MORE}
+            rightIcon={CapUIIcon.More}
             aria-label={intl.formatMessage({ id: 'global.menu' })}
             color="gray.500"
             onClick={onOpen}
@@ -101,9 +96,9 @@ const DebateStepPageArgumentDrawer = ({
         {isAuthor && !stepClosed && <ModalArgumentAuthorMenu argument={argument} />}
       </DetailDrawer.Header>
 
-      <DetailDrawer.Body>
+       <DetailDrawer.Body>
         <Text>{argument.body}</Text>
-      </DetailDrawer.Body>
+       </DetailDrawer.Body>
 
       <Flex
         direction="row"
@@ -116,7 +111,7 @@ const DebateStepPageArgumentDrawer = ({
         borderTopRightRadius="16px"
         width="100%"
         py={4}>
-        <LoginOverlay enabled={!stepClosed} placement="bottom">
+        <NewLoginOverlay enabled={!stepClosed} placement="bottom">
           <Button
             color="neutral-gray.500"
             leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
@@ -134,7 +129,7 @@ const DebateStepPageArgumentDrawer = ({
             })}
             disabled={stepClosed}
           />
-        </LoginOverlay>
+        </NewLoginOverlay>
         <Text ml={1} as="span" fontSize={4} color="neutral-gray.900">
           {argument.votes.totalCount}
         </Text>

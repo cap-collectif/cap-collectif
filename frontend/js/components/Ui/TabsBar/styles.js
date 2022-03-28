@@ -112,13 +112,12 @@ export const DropdownToggle: StyledComponent<{ isOpen: boolean }, {}, typeof Fle
 ).attrs({
   direction: 'row',
   align: 'center',
-  px: 4,
-  py: 2,
   height: '100%',
 })`
   .caret {
     margin-left: 5px;
   }
+  padding: 8px 16px;
 
   ${props =>
     props.isOpen &&

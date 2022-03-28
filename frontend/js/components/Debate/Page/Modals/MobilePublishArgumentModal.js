@@ -5,13 +5,12 @@ import { useAnalytics } from 'use-analytics';
 import { useCallback } from 'react';
 import { Field, isInvalid, isPristine } from 'redux-form';
 import { useSelector, connect } from 'react-redux';
-import Modal from '~ds/Modal/Modal';
+import { Heading, Button, Modal } from '@cap-collectif/ui';
 import { formName } from '~/components/Debate/Page/MainActions/DebateStepPageVoteForm';
 import component from '~/components/Form/Field';
-import Button from '~ds/Button/Button';
 import type { GlobalState, Dispatch } from '~/types';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
-import Heading from '~/components/Ui/Primitives/Heading';
+import ResetCss from '~/utils/ResetCss';
 
 type BeforeConnectProps = {|
   +show: boolean,
@@ -63,15 +62,12 @@ export const MobilePublishArgumentModal = ({
   };
   if (!show) return null;
   return (
-    <Modal
-      fullSizeOnMobile
-      id="publish-argument"
-      onClose={handleClose}
-      show={show}
-      ariaLabel={title}>
-      <Modal.Header>
-        <Heading as="h4">{title}</Heading>
-      </Modal.Header>
+    <Modal id="publish-argument" onClose={handleClose} show={show} ariaLabel={title}>
+      <ResetCss>
+        <Modal.Header>
+          <Heading as="h4">{title}</Heading>
+        </Modal.Header>
+      </ResetCss>
       <Modal.Body>
         <form ref={focusInputRef} id={formName}>
           <Field

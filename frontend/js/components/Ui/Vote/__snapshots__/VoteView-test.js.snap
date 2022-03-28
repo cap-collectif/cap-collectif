@@ -142,7 +142,7 @@ exports[`<VoteView /> should not render when step is finished 1`] = `
 `;
 
 exports[`<VoteView /> should not render when step is finished on mobile 1`] = `
-<ForwardRef
+<Flex
   justify="space-between"
   position="relative"
   width="100%"
@@ -158,7 +158,7 @@ exports[`<VoteView /> should not render when step is finished on mobile 1`] = `
       values={Object {}}
     />
   </VoteView__MobileTextPercentage>
-  <AppBox
+  <Box
     bg="green.500"
     flex={43}
     height="2px"
@@ -177,7 +177,7 @@ exports[`<VoteView /> should not render when step is finished on mobile 1`] = `
       values={Object {}}
     />
   </VoteView__MobileTextPercentage>
-  <AppBox
+  <Box
     bg="red.500"
     flex={57}
     height="2px"
@@ -185,7 +185,7 @@ exports[`<VoteView /> should not render when step is finished on mobile 1`] = `
     position="absolute"
     width="57%"
   />
-</ForwardRef>
+</Flex>
 `;
 
 exports[`<VoteView /> should render correctly 1`] = `
@@ -318,7 +318,7 @@ exports[`<VoteView /> should render correctly 1`] = `
 `;
 
 exports[`<VoteView /> should render correctly on mobile 1`] = `
-<ForwardRef
+<Flex
   justify="space-between"
   position="relative"
   width="100%"
@@ -334,7 +334,7 @@ exports[`<VoteView /> should render correctly on mobile 1`] = `
       values={Object {}}
     />
   </VoteView__MobileTextPercentage>
-  <AppBox
+  <Box
     bg="green.500"
     flex={42}
     height="2px"
@@ -353,7 +353,7 @@ exports[`<VoteView /> should render correctly on mobile 1`] = `
       values={Object {}}
     />
   </VoteView__MobileTextPercentage>
-  <AppBox
+  <Box
     bg="red.500"
     flex={58}
     height="2px"
@@ -361,7 +361,7 @@ exports[`<VoteView /> should render correctly on mobile 1`] = `
     position="absolute"
     width="58%"
   />
-</ForwardRef>
+</Flex>
 `;
 
 exports[`<VoteView /> should render correctly when 0% positive 1`] = `
@@ -475,7 +475,7 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
 `;
 
 exports[`<VoteView /> should render correctly when 0% positive on mobile 1`] = `
-<ForwardRef
+<Flex
   justify="space-between"
   position="relative"
   width="100%"
@@ -491,7 +491,7 @@ exports[`<VoteView /> should render correctly when 0% positive on mobile 1`] = `
       values={Object {}}
     />
   </VoteView__MobileTextPercentage>
-  <AppBox
+  <Box
     bg="green.500"
     flex={0}
     height="2px"
@@ -510,7 +510,7 @@ exports[`<VoteView /> should render correctly when 0% positive on mobile 1`] = `
       values={Object {}}
     />
   </VoteView__MobileTextPercentage>
-  <AppBox
+  <Box
     bg="red.500"
     flex={100}
     height="2px"
@@ -518,7 +518,7 @@ exports[`<VoteView /> should render correctly when 0% positive on mobile 1`] = `
     position="absolute"
     width="100%"
   />
-</ForwardRef>
+</Flex>
 `;
 
 exports[`<VoteView /> should render correctly when 100% positive 1`] = `
@@ -643,7 +643,7 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
 `;
 
 exports[`<VoteView /> should render correctly when 100% positive on mobile 1`] = `
-<ForwardRef
+<Flex
   justify="space-between"
   position="relative"
   width="100%"
@@ -659,7 +659,7 @@ exports[`<VoteView /> should render correctly when 100% positive on mobile 1`] =
       values={Object {}}
     />
   </VoteView__MobileTextPercentage>
-  <AppBox
+  <Box
     bg="green.500"
     flex={100}
     height="2px"
@@ -678,7 +678,7 @@ exports[`<VoteView /> should render correctly when 100% positive on mobile 1`] =
       values={Object {}}
     />
   </VoteView__MobileTextPercentage>
-  <AppBox
+  <Box
     bg="red.500"
     flex={0}
     height="2px"
@@ -686,7 +686,7 @@ exports[`<VoteView /> should render correctly when 100% positive on mobile 1`] =
     position="absolute"
     width="0%"
   />
-</ForwardRef>
+</Flex>
 `;
 
 exports[`<VoteView /> should render correctly when NaN 1`] = `

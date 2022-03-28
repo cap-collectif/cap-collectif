@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`] = `
-<ForwardRef
+<Flex
   direction="column"
   spacing={8}
 >
@@ -33,11 +33,11 @@ exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`]
     }
   />
   <Connect(LoginModal) />
-</ForwardRef>
+</Flex>
 `;
 
 exports[`<DebateStepPageLogic /> should renders correctly when not authenticated 1`] = `
-<ForwardRef
+<Flex
   direction="column"
   spacing={8}
 >
@@ -65,7 +65,7 @@ exports[`<DebateStepPageLogic /> should renders correctly when not authenticated
     viewer={null}
   />
   <Connect(LoginModal) />
-</ForwardRef>
+</Flex>
 `;
 
 exports[`<DebateStepPageLogic /> should renders correctly when step not started 1`] = `

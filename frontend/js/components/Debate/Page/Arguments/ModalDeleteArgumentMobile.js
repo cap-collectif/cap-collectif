@@ -2,17 +2,14 @@
 import * as React from 'react';
 import { useIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
-import Button from '~ds/Button/Button';
-import Modal from '~ds/Modal/Modal';
+import {Button, Modal, Text, CapUIIcon, Heading} from '@cap-collectif/ui'
 import type { ModalDeleteArgumentMobile_argument } from '~relay/ModalDeleteArgumentMobile_argument.graphql';
-import Text from '~ui/Primitives/Text';
 import { FontWeight } from '~ui/Primitives/constants';
-import { ICON_NAME } from '~ds/Icon/Icon';
 import { formatConnectionPath } from '~/shared/utils/relay';
 import DeleteDebateArgumentMutation from '~/mutations/DeleteDebateArgumentMutation';
 import DeleteDebateAnonymousArgumentMutation from '~/mutations/DeleteDebateAnonymousArgumentMutation';
-import Heading from '~ui/Primitives/Heading';
 import CookieMonster from '~/CookieMonster';
+import ResetCss from '~/utils/ResetCss'
 
 type Props = {|
   argument: ModalDeleteArgumentMobile_argument,
@@ -108,9 +105,11 @@ export const ModalDeleteArgumentMobile = ({
       case 'CHOICES':
         return (
           <>
-            <Modal.Header>
-              <Heading as="h4">{intl.formatMessage({ id: 'confirm-delete-argument' })}</Heading>
-            </Modal.Header>
+            <ResetCss>
+              <Modal.Header>
+                <Heading as="h4">{intl.formatMessage({ id: 'confirm-delete-argument' })}</Heading>
+              </Modal.Header>
+            </ResetCss>
 
             <Modal.Body pb={6}>
               <Button
@@ -216,7 +215,7 @@ export const ModalDeleteArgumentMobile = ({
           justifyContent="center"
           variant="tertiary"
           variantColor="danger"
-          leftIcon={ICON_NAME.TRASH}>
+          leftIcon={CapUIIcon.Trash}>
           {intl.formatMessage({ id: 'global.delete' })}
         </Button>
       }

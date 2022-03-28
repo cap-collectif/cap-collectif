@@ -4,34 +4,26 @@ import { truncate } from 'lodash';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
+import { Box, Tooltip, Menu, Button, Flex, Card, Tag, Text, CapUIIconSize, Icon, CapUIIcon} from '@cap-collectif/ui'
 import type {
   ArgumentCard_argument,
   ForOrAgainstValue,
 } from '~relay/ArgumentCard_argument.graphql';
 import type { ArgumentCard_viewer } from '~relay/ArgumentCard_viewer.graphql';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Card from '~ds/Card/Card';
-import Tag from '~ds/Tag/Tag';
-import Text from '~ui/Primitives/Text';
 import { LineHeight } from '~ui/Primitives/constants';
-import LoginOverlay from '~/components/Utils/LoginOverlay';
+import NewLoginOverlay from '~/components/Utils/NewLoginOverlay';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import AddDebateArgumentVoteMutation from '~/mutations/AddDebateArgumentVoteMutation';
 import RemoveDebateArgumentVoteMutation from '~/mutations/RemoveDebateArgumentVoteMutation';
-import Button from '~ds/Button/Button';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import type { ModerateArgument } from '~/components/Debate/Page/Arguments/ModalModerateArgument';
 import ModalArgumentAuthorMenu from '~/components/Debate/Page/Arguments/ModalArgumentAuthorMenu';
-import Icon, { ICON_NAME } from '~ds/Icon/Icon';
-import Menu from '~ds/Menu/Menu';
 import ArgumentCardFormEdition from './ArgumentCardFormEdition';
 import ModalReportArgumentMobile from '~/components/Debate/Page/Arguments/ModalReportArgumentMobile';
 import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/ModalModerateArgumentMobile';
 import type { ArgumentReported } from '~/components/Debate/Page/Arguments/ModalReportArgument';
-import Tooltip from '~ds/Tooltip/Tooltip';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
-import AppBox from '~ui/Primitives/AppBox';
 import CookieMonster from '~/CookieMonster';
 
 type Props = {|
@@ -112,9 +104,9 @@ export const ArgumentCard = ({
   return (
     <Card p={6} bg="white" {...props}>
       <Flex height="100%" direction="column">
-        <Flex mb={2} direction="row" justifyContent="space-between" alignItems="start">
-          <Flex direction="row" alignItems="center" flexWrap="wrap">
-            <Text maxWidth="100%" overflow="hidden" mr={2} mb="8px !important">
+        <Flex mb={2} direction="row" justify="space-between" align="start">
+          <Flex direction="row" align="center" flexWrap="wrap">
+             <Text maxWidth="100%" overflow="hidden" mr={2} mb="8px !important">
               {argument.author?.username
                 ? argument.author.username
                 : argument.username?.length
@@ -123,7 +115,7 @@ export const ArgumentCard = ({
             </Text>
             <Tag
               mb={2}
-              variant={argument.type === 'FOR' ? 'green' : 'red'}
+              variantColor={argument.type === 'FOR' ? 'green' : 'red'}
               interactive={false}
               mr={2}>
               <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
@@ -139,9 +131,9 @@ export const ArgumentCard = ({
                 <Tag
                   mb={2}
                   maxWidth="none !important"
-                  variant={stepClosed ? 'red' : 'orange'}
+                  variantColor={stepClosed ? 'red' : 'orange'}
                   interactive={false}
-                  icon={stepClosed ? ICON_NAME.CIRCLE_CROSS : ICON_NAME.CLOCK}>
+                  icon={stepClosed ? CapUIIcon.Cross : CapUIIcon.Clock}>
                   <Text
                     as="span"
                     fontSize={1}
@@ -167,8 +159,10 @@ export const ArgumentCard = ({
                       forOrAgainst: argument.type,
                     })
                   }
-                  rightIcon={ICON_NAME.MODERATE}
+                  rightIcon={CapUIIcon.Moderate}
                   color="neutral-gray.500"
+                  variant="link"
+                  variantColor="hierarchy"
                 />
               ) : (
                 <ModalModerateArgumentMobile argument={argument} />
@@ -181,9 +175,11 @@ export const ArgumentCard = ({
                   {!isEditing && viewer && (
                     <Button
                       onClick={() => setIsEditing(true)}
-                      rightIcon={ICON_NAME.PENCIL}
+                      rightIcon={CapUIIcon.Pencil}
                       color="neutral-gray.500"
                       aria-label={intl.formatMessage({ id: 'global.edit' })}
+                      variant="link"
+                      variantColor="hierarchy"
                     />
                   )}
                   <Button
@@ -196,8 +192,10 @@ export const ArgumentCard = ({
                         hash: viewer ? null : anonymousArgumentHash,
                       })
                     }
-                    rightIcon={ICON_NAME.TRASH}
+                    rightIcon={CapUIIcon.Trash}
                     color="neutral-gray.500"
+                    variant="link"
+                    variantColor="hierarchy"
                     aria-label={intl.formatMessage({ id: 'global.delete' })}
                   />
                 </>
@@ -205,19 +203,20 @@ export const ArgumentCard = ({
                 <ModalArgumentAuthorMenu argument={argument} hasViewer={!!viewer} />
               ))}
 
-            {argument.viewerCanReport &&
+             {argument.viewerCanReport &&
               !stepClosed &&
               (!isMobile ? (
-                <Menu>
-                  <Menu.Button>
+                <Menu
+                  disclosure={
                     <Button
-                      rightIcon={ICON_NAME.MORE}
+                      rightIcon={CapUIIcon.More}
                       aria-label={intl.formatMessage({ id: 'global.menu' })}
                       color="gray.500"
                     />
-                  </Menu.Button>
+                  }
+                >
                   <Menu.List>
-                    <Menu.ListItem
+                     <Menu.Item
                       as={Button}
                       onClick={() =>
                         setArgumentReported({
@@ -226,15 +225,15 @@ export const ArgumentCard = ({
                           forOrAgainst: argument.type,
                         })
                       }
-                      leftIcon={ICON_NAME.FLAG}
+                      leftIcon={CapUIIcon.Flag}
                       color="blue.900">
                       {intl.formatMessage({ id: 'global.report.submit' })}
-                    </Menu.ListItem>
+                     </Menu.Item>
                   </Menu.List>
                 </Menu>
               ) : (
                 <Button
-                  rightIcon={ICON_NAME.MORE}
+                  rightIcon={CapUIIcon.More}
                   aria-label={intl.formatMessage({ id: 'global.menu' })}
                   color="gray.500"
                   onClick={onOpen}
@@ -277,13 +276,13 @@ export const ArgumentCard = ({
               when={(viewer && !viewer?.isEmailConfirmed) || false}
               wrapper={children => (
                 <Tooltip label={intl.formatMessage({ id: 'confirm-account-to-interact' })}>
-                  <AppBox>{children}</AppBox>
+                  <Box>{children}</Box>
                 </Tooltip>
               )}>
-              <LoginOverlay enabled={!stepClosed} placement="bottom">
+              <NewLoginOverlay enabled={!stepClosed} placement="bottom">
                 <Button
                   color="neutral-gray.500"
-                  leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
+                  leftIcon={<Icon name={argument.viewerHasVote ? CapUIIcon.Clap : CapUIIcon.ClapO} size={CapUIIconSize.Lg} />}
                   onClick={() =>
                     voteForArgument(
                       argument.id,
@@ -297,8 +296,10 @@ export const ArgumentCard = ({
                     id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
                   })}
                   disabled={stepClosed || (viewer && !viewer?.isEmailConfirmed) || false}
+                  variant="link"
+                  variantColor="hierarchy"
                 />
-              </LoginOverlay>
+              </NewLoginOverlay>
             </ConditionalWrapper>
             <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.900">
               {argument.votes.totalCount}

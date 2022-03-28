@@ -4,13 +4,10 @@ import { submit } from 'redux-form';
 import { useDispatch } from 'react-redux';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
-import Button from '~ds/Button/Button';
-import Modal from '~ds/Modal/Modal';
+import { Button, Modal, Heading, Text } from '@cap-collectif/ui'
 import type { ModalReportArgumentMobile_argument } from '~relay/ModalReportArgumentMobile_argument.graphql';
-import Heading from '~ui/Primitives/Heading';
 import ReportForm, { formName, getType, type Values } from '~/components/Report/ReportForm';
 import type { Dispatch } from '~/types';
-import Text from '~ui/Primitives/Text';
 import { FontWeight } from '~ui/Primitives/constants';
 import ReportDebateArgumentMutation from '~/mutations/ReportDebateArgumentMutation';
 

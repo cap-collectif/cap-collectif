@@ -4,16 +4,22 @@ import { useIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector, change, SubmissionError } from 'redux-form';
 import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
-import Button from '~ds/Button/Button';
+import {
+  Flex,
+  Button,
+  Modal,
+  Heading,
+  Text,
+  Box,
+  Icon,
+  CapUIIconSize,
+  SpotIcon,
+  CapUISpotIcon,
+  CapUIModalSize,
+} from '@cap-collectif/ui';
 import component from '~/components/Form/Field';
-import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
-import Modal from '~ds/Modal/Modal';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Heading from '~ui/Primitives/Heading';
-import Text from '~ui/Primitives/Text';
 import { isEmail } from '~/services/Validator';
 import type { Dispatch, State } from '~/types';
-import Icon, { ICON_SIZE } from '~ds/Icon/Icon';
 import CookieMonster from '~/CookieMonster';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { showLoginModal } from '~/redux/modules/user';
@@ -22,10 +28,10 @@ import {
   ChartLinkComponent,
   PrivacyPolicyComponent,
 } from '~/components/User/Registration/RegistrationForm';
-import AppBox from '~/components/Ui/Primitives/AppBox';
 import AddDebateAnonymousArgumentMutation from '~/mutations/AddDebateAnonymousArgumentMutation';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 import SendConfirmationEmailDebateAnonymousArgumentMutation from '~/mutations/SendConfirmationEmailDebateAnonymousArgumentMutation';
+import ResetCss from '~/utils/ResetCss';
 
 const STATE = {
   FORM: 'FORM',
@@ -96,8 +102,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         change(
           'login',
           'onSuccessAction',
-          `{"action":"DEBATE_ARGUMENT","debate":"${debate}","body":"${body ||
-            ''}","type":"${viewerVoteValue}","widgetOriginURI":"${location || ''}"}`,
+          `{"action":"DEBATE_ARGUMENT","debate":"${debate}","body":"${
+            body || ''
+          }","type":"${viewerVoteValue}","widgetOriginURI":"${location || ''}"}`,
         ),
       );
     } else
@@ -191,11 +198,13 @@ const ModalContent = ({
       <form ref={focusInputRef} id={anonymousFormMail} onSubmit={handleSubmit}>
         {modalState === 'FORM' && (
           <>
-            <Modal.Header>
-              <Text fontSize={18} fontWeight={600} color="blue.900">
-                {intl.formatMessage({ id: title })}
-              </Text>
-            </Modal.Header>
+            <ResetCss>
+              <Modal.Header>
+                <Text fontSize={18} fontWeight={600} color="blue.900">
+                  {intl.formatMessage({ id: title })}
+                </Text>
+              </Modal.Header>
+            </ResetCss>
             <Modal.Body>
               <Field
                 name="body"
@@ -225,26 +234,28 @@ const ModalContent = ({
         )}
         {modalState === 'INFO' && (
           <>
-            <Modal.Header>
-              {isMobile && (
-                <Flex>
-                  <Icon
-                    onClick={() => setModalState('FORM')}
-                    css={{ '&:hover': { cursor: 'pointer' } }}
-                    color="blue.900"
-                    size={ICON_SIZE.MD}
-                    name="LONG_ARROW_LEFT"
-                    mr={6}
-                  />
-                  <Heading as="h4">{intl.formatMessage({ id: 'youre-almost-there' })}</Heading>
-                </Flex>
-              )}
-            </Modal.Header>
-            <Modal.Body pb={6} pt={0} align="center">
+            <ResetCss>
+              <Modal.Header>
+                {isMobile && (
+                  <Flex>
+                    <Icon
+                      onClick={() => setModalState('FORM')}
+                      sx={{ '&:hover': { cursor: 'pointer' } }}
+                      color="blue.900"
+                      size={CapUIIconSize.Md}
+                      name="LONG_ARROW_LEFT"
+                      mr={6}
+                    />
+                    <Heading as="h4">{intl.formatMessage({ id: 'youre-almost-there' })}</Heading>
+                  </Flex>
+                )}
+              </Modal.Header>
+            </ResetCss>
+            <Modal.Body pb={6} pt={0} align="center" height="auto">
               <Flex direction="column" alignItems="center" width="100%">
                 {!isMobile && (
                   <>
-                    <SpotIcon name={SPOT_ICON_NAME.CHATTING} size="lg" mb={4} alignSelf="center" />
+                    <SpotIcon name={CapUISpotIcon.BUBBLE} size="lg" mb={4} alignSelf="center" />
                     <Heading as="h4" color="gray.900" m={0} mb={1} fontWeight="600">
                       {intl.formatMessage({ id: 'youre-almost-there' })}
                     </Heading>
@@ -253,7 +264,7 @@ const ModalContent = ({
                     </Text>
                   </>
                 )}
-                <AppBox width="100%" mt={4}>
+                <Box width="100%" mt={4}>
                   <Field
                     name="username"
                     component={component}
@@ -304,7 +315,7 @@ const ModalContent = ({
                       }}
                     />
                   </Field>
-                </AppBox>
+                </Box>
               </Flex>
             </Modal.Body>
             <Modal.Footer>
@@ -325,10 +336,14 @@ const ModalContent = ({
         )}
         {modalState === 'MAIL_SENT' && (
           <>
-            <Modal.Header />
-            <Modal.Body pb={6} pt={0} align="center">
+            <ResetCss>
+              <Modal.Header>
+                <p />
+              </Modal.Header>
+            </ResetCss>
+            <Modal.Body pb={6} pt={0} align="center" height="auto">
               <Flex direction="column" alignItems="center">
-                <SpotIcon name={SPOT_ICON_NAME.MAIL_1} size="lg" mb={4} alignSelf="center" />
+                <SpotIcon name={CapUISpotIcon.PAPER_PLANE_1} size="lg" mb={4} alignSelf="center" />
                 <Heading as="h4" color="gray.900" m={0} mb={1} fontWeight="600">
                   {intl.formatMessage({ id: 'check-your-mailbox' })}
                 </Heading>
@@ -346,10 +361,12 @@ const ModalContent = ({
         )}
         {modalState === 'VERIFY_MAIL' && (
           <>
-            <Modal.Header />
-            <Modal.Body pb={6} pt={0} align="center">
+            <ResetCss>
+              <Modal.Header />
+            </ResetCss>
+            <Modal.Body pb={6} pt={0} align="center" height="auto">
               <Flex direction="column" alignItems="center">
-                <SpotIcon name={SPOT_ICON_NAME.MAIL_2} size="lg" mb={4} alignSelf="center" />
+                <SpotIcon name={CapUISpotIcon.PAPER_PLANE_2} size="lg" mb={4} alignSelf="center" />
                 <Heading as="h4" color="gray.900" m={0} mb={1} fontWeight="600">
                   {intl.formatMessage({ id: 'check-your-mailbox' })}
                 </Heading>
@@ -378,9 +395,9 @@ export const ModalPublishArgumentAnonymous = ({
     <>
       <Modal
         hideOnClickOutside={false}
-        fullSizeOnMobile
         preventBodyScroll={false}
         ariaLabel={intl.formatMessage({ id: 'global.menu' })}
+        size={CapUIModalSize.Xl}
         disclosure={
           <Button
             type="submit"

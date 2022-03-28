@@ -16,18 +16,18 @@ exports[`<SectionTopContributors /> <TestSectionTopContributors /> should render
       className="sc-bdnxRM Flex___StyledAppBox-RSPpX jeswne MYLyI"
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwuNZE Avatar__AvatarInner-chaUKm grFDLb"
-        style={
-          Object {
-            "background": "#842d86",
-            "color": "#fff",
-          }
-        }
+        className="sc-bdvvtL byUiDS sc-clIzBv eqbzZb cap-avatar"
+        title="Vince"
       >
         <img
           alt="Vince"
-          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
+          className="sc-bdvvtL gEWnzg"
           src="<mock-value-for-field-\\"url\\">"
+          style={
+            Object {
+              "objectFit": "cover",
+            }
+          }
           title="Vince"
         />
       </div>

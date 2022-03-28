@@ -7,10 +7,13 @@ const DebateStepPage = lazy(() =>
   import(/* webpackChunkName: "DebateStepPage" */ '~/components/Debate/Page/DebateStepPage'),
 );
 
-export default (props: Props) => (
-  <Suspense fallback={null}>
-    <Providers>
-      <DebateStepPage {...props} />
-    </Providers>
-  </Suspense>
-);
+export default (props: Props) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px';
+  return (
+    <Suspense fallback={null}>
+      <Providers designSystem resetCSS={false}>
+        <DebateStepPage {...props} />
+      </Providers>
+    </Suspense>
+  )
+};

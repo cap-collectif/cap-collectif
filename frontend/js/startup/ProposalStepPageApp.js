@@ -18,7 +18,6 @@ const ProposalPage = lazy(
 type Props = {|
   +stepId: string,
   +projectId: string,
-  +currentStepType: string,
   +count: number,
   +votesPageUrl: string,
   +showVotesWidget: boolean,
@@ -29,7 +28,6 @@ type Props = {|
 |};
 
 const ProposalStepPageRouterSwitch = ({
-  currentStepType,
   votesPageUrl,
   showVotesWidget,
   currentVotableStepId,
@@ -50,7 +48,6 @@ const ProposalStepPageRouterSwitch = ({
             <div className="container" style={{ padding: 0 }}>
               <ProjectHeaderQueryRenderer
                 projectId={props.projectId}
-                currentStepType={currentStepType}
               />
             </div>
           </section>

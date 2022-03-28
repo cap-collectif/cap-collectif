@@ -5,7 +5,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
   style="width:100%;opacity:0"
 >
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
+    class="sc-bdvvtL hkRPGF"
   >
     <span
       aria-label="vote"
@@ -18,46 +18,59 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
       thanks-for-debate-richer
     </span>
     <button
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
+      class="sc-bdvvtL sc-lcepkR jnWmdn grtNlY cap-button"
       type="button"
     >
       delete.vote.against
     </button>
   </div>
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX KSjKw fvBSZY"
+    class="sc-bdvvtL fFQceo"
   >
     <a
       class="twitter-share-button"
       data-show-count="false"
       href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+      style="margin-left:0;margin-top:0"
     >
       Tweet
     </a>
     <button
-      aria-describedby="id-1"
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
+      aria-describedby="id-g"
+      class="sc-bdvvtL sc-lcepkR hwmnaM eIOwRL cap-button"
       tabindex="0"
       type="button"
     >
-      <iconmock
-        class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
-      />
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ fwilKK kiGavP cap-icon"
+        fill="none"
+        viewBox="0 0 32 32"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
+          fill="currentColor"
+        />
+        <path
+          d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
+          fill="currentColor"
+        />
+      </svg>
       global.link
     </button>
     <div
-      class="cap-tooltip"
+      class="cap-tooltip-container"
       hidden=""
-      id="id-1"
+      id="id-g"
       role="tooltip"
-      style="display:none;position:fixed;left:100%;top:100%;pointer-events:none"
+      style="display:none;position:fixed;left:100%;top:100%;z-index:1000;pointer-events:none"
     />
   </div>
   <div
-    class="sc-bdnxRM cnbanf DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+    class="sc-bdvvtL dcUQvO cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
   >
     <form
-      class="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
+      class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
       id="debate-argument-form"
     >
       <div
@@ -95,16 +108,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
         </div>
       </div>
       <div
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX cOrEHs"
+        class="sc-bdvvtL jgkUYe"
       >
         <button
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG eWdgRn kfdEqC"
+          class="sc-bdvvtL sc-lcepkR jxJZV izhULq cap-button"
           type="button"
         >
           global.cancel
         </button>
         <button
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL kFclcg"
+          class="sc-bdvvtL sc-lcepkR lvprm elkPgU cap-button"
           type="submit"
         >
           argument.publish.mine
@@ -120,7 +133,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
   style="width:100%;opacity:0"
 >
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
+    class="sc-bdvvtL hkRPGF"
   >
     <span
       aria-label="vote"
@@ -133,17 +146,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
       publish.argument.validate.account
     </span>
     <button
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
+      class="sc-bdvvtL sc-lcepkR jnWmdn grtNlY cap-button"
       type="button"
     >
       delete.vote.against
     </button>
   </div>
   <div
-    class="sc-bdnxRM cnbanf DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+    class="sc-bdvvtL dcUQvO cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
   >
     <form
-      class="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
+      class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
       id="debate-argument-form"
     >
       <div
@@ -181,16 +194,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
         </div>
       </div>
       <div
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX cOrEHs"
+        class="sc-bdvvtL jgkUYe"
       >
         <button
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG eWdgRn kfdEqC"
+          class="sc-bdvvtL sc-lcepkR jxJZV izhULq cap-button"
           type="button"
         >
           global.cancel
         </button>
         <button
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL kFclcg"
+          class="sc-bdvvtL sc-lcepkR lvprm elkPgU cap-button"
           type="submit"
         >
           argument.publish.mine
@@ -206,16 +219,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
   style="width:100%;opacity:1"
 >
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
+    class="sc-bdvvtL hkRPGF"
   >
     <button
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
+      class="sc-bdvvtL sc-lcepkR jnWmdn grtNlY cap-button"
       type="button"
     >
       delete.vote.against
     </button>
     <p
-      class="sc-bdnxRM PLHLg"
+      class="sc-bdvvtL cCgxqf cap-text"
     >
       <span
         aria-label="vote"
@@ -230,7 +243,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
     </p>
   </div>
   <button
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG hgJMSO kFclcg"
+    class="sc-bdvvtL sc-lcepkR bUhJVz elkPgU cap-button"
     type="button"
   >
     publish-argument
@@ -243,16 +256,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
   style="width:100%;opacity:1"
 >
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
+    class="sc-bdvvtL hkRPGF"
   >
     <button
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
+      class="sc-bdvvtL sc-lcepkR jnWmdn grtNlY cap-button"
       type="button"
     >
       delete.vote.against
     </button>
     <p
-      class="sc-bdnxRM PLHLg"
+      class="sc-bdvvtL cCgxqf cap-text"
     >
       <span
         aria-label="vote"
@@ -267,36 +280,49 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
     </p>
   </div>
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX KSjKw fvBSZY"
+    class="sc-bdvvtL fFQceo"
   >
     <a
       class="twitter-share-button"
       data-show-count="false"
       href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+      style="margin-left:0;margin-top:0"
     >
       Tweet
     </a>
     <button
-      aria-describedby="id-1"
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
+      aria-describedby="id-g"
+      class="sc-bdvvtL sc-lcepkR hwmnaM eIOwRL cap-button"
       tabindex="0"
       type="button"
     >
-      <iconmock
-        class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
-      />
+      <svg
+        class="sc-bdvvtL sc-eJwWfJ fwilKK kiGavP cap-icon"
+        fill="none"
+        viewBox="0 0 32 32"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
+          fill="currentColor"
+        />
+        <path
+          d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
+          fill="currentColor"
+        />
+      </svg>
       global.link
     </button>
     <div
-      class="cap-tooltip"
+      class="cap-tooltip-container"
       hidden=""
-      id="id-1"
+      id="id-g"
       role="tooltip"
-      style="display:none;position:fixed;left:100%;top:100%;pointer-events:none"
+      style="display:none;position:fixed;left:100%;top:100%;z-index:1000;pointer-events:none"
     />
   </div>
   <button
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG hgJMSO kFclcg"
+    class="sc-bdvvtL sc-lcepkR bUhJVz elkPgU cap-button"
     type="button"
   >
     publish-argument
@@ -309,7 +335,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
   style="width:100%;opacity:0"
 >
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
+    class="sc-bdvvtL hkRPGF"
   >
     <span
       aria-label="vote"
@@ -322,17 +348,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
       thanks-for-your-vote
     </span>
     <button
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
+      class="sc-bdvvtL sc-lcepkR jnWmdn grtNlY cap-button"
       type="button"
     >
       delete.vote.against
     </button>
   </div>
   <div
-    class="sc-bdnxRM cnbanf DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+    class="sc-bdvvtL dcUQvO cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
   >
     <form
-      class="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
+      class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
       id="debate-argument-form"
     >
       <div
@@ -370,16 +396,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
         </div>
       </div>
       <div
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX cOrEHs"
+        class="sc-bdvvtL jgkUYe"
       >
         <button
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG eWdgRn kfdEqC"
+          class="sc-bdvvtL sc-lcepkR jxJZV izhULq cap-button"
           type="button"
         >
           global.cancel
         </button>
         <button
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL kFclcg"
+          class="sc-bdvvtL sc-lcepkR lvprm elkPgU cap-button"
           type="submit"
         >
           argument.publish.mine
@@ -395,7 +421,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
   style="width:100%;opacity:0"
 >
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
+    class="sc-bdvvtL hkRPGF"
   >
     <span
       aria-label="vote"
@@ -408,17 +434,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
       thanks-for-your-vote {"instance":"CapCollectif"}
     </span>
     <button
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
+      class="sc-bdvvtL sc-lcepkR jnWmdn grtNlY cap-button"
       type="button"
     >
       delete.vote.against
     </button>
   </div>
   <div
-    class="sc-bdnxRM cnbanf DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+    class="sc-bdvvtL dcUQvO cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
   >
     <form
-      class="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
+      class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
       id="debate-argument-form"
     >
       <div
@@ -456,19 +482,19 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
         </div>
       </div>
       <div
-        class="sc-bdnxRM Flex___StyledAppBox-RSPpX cOrEHs"
+        class="sc-bdvvtL jgkUYe"
       >
         <button
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG eWdgRn kfdEqC"
+          class="sc-bdvvtL sc-lcepkR jxJZV izhULq cap-button"
           type="button"
         >
           global.cancel
         </button>
         <button
-          aria-controls="id-1"
+          aria-controls="id-g"
           aria-expanded="false"
           aria-haspopup="dialog"
-          class="sc-bdnxRM Button__ButtonInner-dWPVNG jyNtxW kFclcg"
+          class="sc-bdvvtL sc-lcepkR fCyCEb elkPgU cap-button"
           type="submit"
         >
           global.validate
@@ -478,7 +504,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
           aria-modal="true"
           data-dialog="true"
           hidden=""
-          id="id-1"
+          id="id-g"
           role="dialog"
           style="display:none"
           tabindex="-1"
@@ -494,16 +520,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
   style="width:100%;opacity:1"
 >
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
+    class="sc-bdvvtL hkRPGF"
   >
     <button
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
+      class="sc-bdvvtL sc-lcepkR jnWmdn grtNlY cap-button"
       type="button"
     >
       delete.vote.against
     </button>
     <p
-      class="sc-bdnxRM PLHLg"
+      class="sc-bdvvtL cCgxqf cap-text"
     >
       <span
         aria-label="vote"
@@ -518,10 +544,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
     </p>
   </div>
   <button
-    aria-controls="id-1"
+    aria-controls="id-g"
     aria-expanded="false"
     aria-haspopup="dialog"
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG ktGAwN kFclcg"
+    class="sc-bdvvtL sc-lcepkR jCgStk elkPgU cap-button"
     type="submit"
   >
     publish-argument
@@ -531,7 +557,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
     aria-modal="true"
     data-dialog="true"
     hidden=""
-    id="id-1"
+    id="id-g"
     role="dialog"
     style="display:none"
     tabindex="-1"
@@ -544,16 +570,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile
   style="width:100%;opacity:1"
 >
   <div
-    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
+    class="sc-bdvvtL hkRPGF"
   >
     <button
-      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
+      class="sc-bdvvtL sc-lcepkR jnWmdn grtNlY cap-button"
       type="button"
     >
       delete.vote.against
     </button>
     <p
-      class="sc-bdnxRM PLHLg"
+      class="sc-bdvvtL cCgxqf cap-text"
     >
       <span
         aria-label="vote"
@@ -568,7 +594,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile
     </p>
   </div>
   <button
-    class="sc-bdnxRM Button__ButtonInner-dWPVNG hgJMSO kFclcg"
+    class="sc-bdvvtL sc-lcepkR bUhJVz elkPgU cap-button"
     type="button"
   >
     publish-argument

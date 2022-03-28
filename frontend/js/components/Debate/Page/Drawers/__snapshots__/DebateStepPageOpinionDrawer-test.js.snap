@@ -2,7 +2,7 @@
 
 exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1`] = `
 <div
-  className="sc-bdnxRM iIjqGL DetailDrawer__DetailDrawerInner-iBqxvi"
+  className="sc-bdvvtL jkvOqu DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -11,65 +11,76 @@ exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1
   }
 >
   <div
-    className="sc-bdnxRM ctlvnX"
+    className="sc-bdvvtL cywTLc"
     onClose={[MockFunction]}
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG jtsHZK bSAkp AMDLx icon DebateStepPageOpinionDrawer___StyledIcon-saWWq Gmooy detail__drawer--back-arow"
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ bJAjij dhRlrh cap-icon detail__drawer--back-arow"
+      fill="none"
       onClick={[MockFunction]}
-    />
+      viewBox="0 0 12 6"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+    </svg>
     <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX eErtxh"
+      className="sc-bdvvtL cjIQvK"
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX ldbxA-d Avatar__AvatarInner-chaUKm grFDLb"
-        style={
-          Object {
-            "background": "#2d867a",
-            "color": "#fff",
-          }
-        }
+        className="sc-bdvvtL ljCqyo sc-clIzBv eqbzZb cap-avatar"
+        title="Agui le penseur"
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
+          className="sc-bdvvtL gEWnzg"
           src="<media-url>"
+          style={
+            Object {
+              "objectFit": "cover",
+            }
+          }
           title="Agui le penseur"
         />
       </div>
       <p
-        className="sc-bdnxRM dYwlXI"
+        className="sc-bdvvtL hSeaNQ cap-text"
       >
         Agui le penseur
       </p>
       <div
-        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS WvGVp hBLRKx cguwDa"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+        className="sc-bdvvtL iA-dEBk sc-fWCJzd rNujt cap-tag"
+        style={Object {}}
         title=""
       >
-        <p
-          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
+        <h5
+          className="sc-bdvvtL dUCohE cap-heading"
         >
-          <h5
-            className="sc-bdnxRM ewLwjT"
-          >
-            opinion.for
-          </h5>
-        </p>
+          opinion.for
+        </h5>
       </div>
       <p
-        className="sc-bdnxRM dNpFoK"
+        className="sc-bdvvtL bDnbgJ cap-text"
       >
         Jsuis né dans les favela au brésil
       </p>
     </div>
     <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX ggEaaV kvrLSX"
+      className="sc-bdvvtL gkOfop"
     >
       <h4
-        className="sc-bdnxRM gPFhMB"
+        className="sc-bdvvtL ixkJHe cap-heading"
+        style={
+          Object {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
       >
         Je suis pour
       </h4>
@@ -91,7 +102,7 @@ exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1
 
 exports[`<DebateStepPageOpinionDrawer /> should render an AGAINST opinion when open 1`] = `
 <div
-  className="sc-bdnxRM iIjqGL DetailDrawer__DetailDrawerInner-iBqxvi"
+  className="sc-bdvvtL jkvOqu DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -100,65 +111,76 @@ exports[`<DebateStepPageOpinionDrawer /> should render an AGAINST opinion when o
   }
 >
   <div
-    className="sc-bdnxRM ctlvnX"
+    className="sc-bdvvtL cywTLc"
     onClose={[MockFunction]}
   >
-    <IconMock
-      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG jtsHZK bSAkp AMDLx icon DebateStepPageOpinionDrawer___StyledIcon-saWWq Gmooy detail__drawer--back-arow"
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ bJAjij dhRlrh cap-icon detail__drawer--back-arow"
+      fill="none"
       onClick={[MockFunction]}
-    />
+      viewBox="0 0 12 6"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+    </svg>
     <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX eErtxh"
+      className="sc-bdvvtL cjIQvK"
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX ldbxA-d Avatar__AvatarInner-chaUKm grFDLb"
-        style={
-          Object {
-            "background": "#2d867a",
-            "color": "#fff",
-          }
-        }
+        className="sc-bdvvtL ljCqyo sc-clIzBv eqbzZb cap-avatar"
+        title="Agui le penseur"
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
+          className="sc-bdvvtL gEWnzg"
           src="<media-url>"
+          style={
+            Object {
+              "objectFit": "cover",
+            }
+          }
           title="Agui le penseur"
         />
       </div>
       <p
-        className="sc-bdnxRM dYwlXI"
+        className="sc-bdvvtL hSeaNQ cap-text"
       >
         Agui le penseur
       </p>
       <div
-        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS WvGVp hBLRKx cguwDa"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+        className="sc-bdvvtL iA-dEBk sc-fWCJzd rNujt cap-tag"
+        style={Object {}}
         title=""
       >
-        <p
-          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
+        <h5
+          className="sc-bdvvtL dUCohE cap-heading"
         >
-          <h5
-            className="sc-bdnxRM ewLwjT"
-          >
-            opinion.for
-          </h5>
-        </p>
+          opinion.for
+        </h5>
       </div>
       <p
-        className="sc-bdnxRM dNpFoK"
+        className="sc-bdvvtL bDnbgJ cap-text"
       >
         Jsuis né dans les favela au brésil
       </p>
     </div>
     <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX ggEaaV kvrLSX"
+      className="sc-bdvvtL gkOfop"
     >
       <h4
-        className="sc-bdnxRM gPFhMB"
+        className="sc-bdvvtL ixkJHe cap-heading"
+        style={
+          Object {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
       >
         Je suis pour
       </h4>

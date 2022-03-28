@@ -4,16 +4,13 @@ import { submit } from 'redux-form';
 import { useDispatch } from 'react-redux';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
-import Button from '~ds/Button/Button';
-import { ICON_NAME } from '~ds/Icon/Icon';
-import Modal from '~ds/Modal/Modal';
+import { Button, Modal, Heading, Text, CapUIIcon } from '@cap-collectif/ui'
 import type { ModalModerateArgumentMobile_argument } from '~relay/ModalModerateArgumentMobile_argument.graphql';
-import Heading from '~ui/Primitives/Heading';
 import ModerateForm, { formName, type Values } from '~/components/Moderate/ModerateForm';
-import Text from '~ui/Primitives/Text';
 import { FontWeight } from '~ui/Primitives/constants';
 import TrashDebateAlternateArgumentMutation from '~/mutations/TrashDebateAlternateArgumentMutation';
 import type { Dispatch } from '~/types';
+import ResetCss from '~/utils/ResetCss'
 
 type Props = {|
   argument: ModalModerateArgumentMobile_argument,
@@ -73,10 +70,11 @@ export const ModalModerateArgumentMobile = ({ argument }: Props): React.Node => 
       case 'FORM':
         return (
           <>
-            <Modal.Header>
-              <Heading as="h4">{intl.formatMessage({ id: 'moderate-argument' })}</Heading>
-            </Modal.Header>
-
+            <ResetCss>
+              <Modal.Header>
+                <Heading as="h4">{intl.formatMessage({ id: 'moderate-argument' })}</Heading>
+              </Modal.Header>
+            </ResetCss>
             <Modal.Body pb={6}>
               <ModerateForm
                 onSubmit={(values: Values) => {
@@ -179,7 +177,7 @@ export const ModalModerateArgumentMobile = ({ argument }: Props): React.Node => 
 
   return (
     <Modal
-      disclosure={<Button rightIcon={ICON_NAME.MODERATE} color="neutral-gray.500" />}
+      disclosure={<Button rightIcon={CapUIIcon.Moderate} color="neutral-gray.500" />}
       ariaLabel={intl.formatMessage({ id: 'global.report.submit' })}
       onClose={resetState}>
       {({ hide }) => getModalContent(modalState, hide)}
