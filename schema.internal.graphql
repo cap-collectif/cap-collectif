@@ -433,6 +433,12 @@ input AddEventInput {
 
   """An array of Node IDs of steps associated to this event."""
   steps: [ID!]
+
+  """Whether or not this event is registrations measurable."""
+  measurable: Boolean! = false
+
+  """If measurable what is the max allowed registrations"""
+  maxRegistrations: Int
 }
 
 type AddEventPayload {
@@ -1562,6 +1568,12 @@ input ChangeEventInput {
 
   """An array of Node IDs of steps associated to this event."""
   steps: [ID!]
+
+  """Whether or not this event is registrations measurable."""
+  measurable: Boolean! = false
+
+  """If measurable what is the max allowed registrations"""
+  maxRegistrations: Int
 
   """The ID of the Event to modify."""
   id: ID!
@@ -5616,8 +5628,8 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """The steps corresponding to this event."""
   steps: [Step!]!
 
-  """Wheter or not registration is enabled on this event."""
-  isRegistrationPossible: Boolean
+  """Whether or not registration is enabled on this event."""
+  isRegistrationPossible: Boolean!
 
   """Wheter or not the viewer can join the room before it starts."""
   viewerIsRoomAnimator: Boolean!
@@ -5630,6 +5642,18 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """The url to export participants"""
   exportParticipantsUrl: URI
+
+  """The remaining number of possible registrations"""
+  availableRegistration: Int
+
+  """Whether or not registration is complete"""
+  isEventRegistrationComplete: Boolean!
+
+  """Whether or not registration is measurable"""
+  isMeasurable: Boolean!
+
+  """The number of max registration available"""
+  maxRegistrations: Int
 }
 
 """The affiliation of a user to a event"""
@@ -5677,6 +5701,12 @@ input EventInput {
   body: HTML
   link: URI
   metaDescription: String
+
+  """Whether or not this event is registrations measurable."""
+  measurable: Boolean! = false
+
+  """If measurable what is the max allowed registrations"""
+  maxRegistrations: Int
 }
 
 """Ways in which lists of events can be ordered upon return."""

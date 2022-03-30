@@ -101,8 +101,8 @@ InternalEvent:
                 type: '[InternalStep!]!'
                 description: 'The steps corresponding to this event.'
             isRegistrationPossible:
-                type: 'Boolean'
-                description: 'Wheter or not registration is enabled on this event.'
+                type: 'Boolean!'
+                description: 'Whether or not registration is enabled on this event.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventIsRegistrationPossibleResolver", [value])'
             viewerIsRoomAnimator:
                 type: 'Boolean!'
@@ -120,3 +120,18 @@ InternalEvent:
                 type: 'URI'
                 description: 'The url to export participants'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventExportParticipantsUrlResolver", [value])'
+            availableRegistration:
+                type: 'Int'
+                description: 'The remaining number of possible registrations'
+                resolve: '@=value.getAvailableRegistration()'
+            isEventRegistrationComplete:
+                type: 'Boolean!'
+                description: 'Whether or not registration is complete'
+                resolve: '@=value.isRegistrationComplete()'
+            isMeasurable:
+                type: 'Boolean!'
+                description: 'Whether or not registration is measurable'
+                resolve: '@=value.isMeasurable()'
+            maxRegistrations:
+                type: 'Int'
+                description: 'The number of max registration available'

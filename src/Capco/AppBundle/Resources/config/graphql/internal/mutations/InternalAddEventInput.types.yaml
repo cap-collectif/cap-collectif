@@ -52,3 +52,10 @@ InternalAddEventInput:
             steps:
                 type: '[ID!]'
                 description: 'An array of Node IDs of steps associated to this event.'
+            measurable:
+                type: 'Boolean!'
+                defaultValue: false
+                description: 'Whether or not this event is registrations measurable.'
+            maxRegistrations:
+                type: 'Int'
+                description: 'If measurable what is the max allowed registrations'

@@ -8,16 +8,19 @@ use Capco\UserBundle\Entity\User;
 
 class EventHelper
 {
-    public function isRegistrationPossible(Event $event)
+    public function isRegistrationPossible(Event $event): bool
     {
         return $event->canContribute() &&
             $event->isFuture() &&
             $event->isGuestListEnabled() &&
-            null === $event->getLink();
+            null === $event->getLink() &&
+            !$event->isRegistrationComplete();
     }
 
-    public function findUserRegistrationOrCreate(Event $event, User $user = null)
-    {
+    public function findUserRegistrationOrCreate(
+        Event $event,
+        ?User $user = null
+    ): EventRegistration {
         if (null === $user) {
             return new EventRegistration($event);
         }

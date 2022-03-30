@@ -14,6 +14,8 @@ const ChangeEventMutation = /* GraphQL*/ `
                 owner {
                     username
                 }
+                isMeasurable
+                maxRegistrations
             }
         }
     }
@@ -29,6 +31,8 @@ const input = {
   ],
   startAt: '2020-01-01',
   guestListEnabled: false,
+  measurable: true,
+  maxRegistrations: 50,
 };
 
 describe('mutations.createEvent', () => {
@@ -48,6 +52,8 @@ describe('mutations.createEvent', () => {
     expect(response.changeEvent.event.body).toBe('body is updated');
     expect(response.changeEvent.event.owner.username).toBe('Théo QP');
     expect(response.changeEvent.event.author.username).toBe('Théo QP');
+    expect(response.changeEvent.event.isMeasurable).toBe(true);
+    expect(response.changeEvent.event.maxRegistrations).toBe(50);
   });
 
   it('should have an error when attempting to update a unknown event.', async () => {

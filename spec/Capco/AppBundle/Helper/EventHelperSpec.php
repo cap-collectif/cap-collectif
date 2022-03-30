@@ -21,6 +21,7 @@ class EventHelperSpec extends ObjectBehavior
         $event->isGuestListEnabled()->willReturn(false);
         $event->isFuture()->willReturn(true);
         $event->canContribute()->willReturn(true);
+        $event->isRegistrationComplete()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
         // Event is not future => false
@@ -28,6 +29,7 @@ class EventHelperSpec extends ObjectBehavior
         $event->isGuestListEnabled()->willReturn(true);
         $event->isFuture()->willReturn(false);
         $event->canContribute()->willReturn(true);
+        $event->isRegistrationComplete()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
         // Can not contribute => false
@@ -35,6 +37,7 @@ class EventHelperSpec extends ObjectBehavior
         $event->isGuestListEnabled()->willReturn(true);
         $event->isFuture()->willReturn(true);
         $event->canContribute()->willReturn(false);
+        $event->isRegistrationComplete()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
         // Has link => false
@@ -42,6 +45,7 @@ class EventHelperSpec extends ObjectBehavior
         $event->isFuture()->willReturn(true);
         $event->getLink()->willReturn('http://lol.com');
         $event->canContribute()->willReturn(true);
+        $event->isRegistrationComplete()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
         // Everything is awesome => true
@@ -49,6 +53,15 @@ class EventHelperSpec extends ObjectBehavior
         $event->isGuestListEnabled()->willReturn(true);
         $event->isFuture()->willReturn(true);
         $event->canContribute()->willReturn(true);
+        $event->isRegistrationComplete()->willReturn(true);
+        $this->isRegistrationPossible($event)->shouldReturn(false);
+
+        // Everything is awesome => true
+        $event->getLink()->willReturn(null);
+        $event->isGuestListEnabled()->willReturn(true);
+        $event->isFuture()->willReturn(true);
+        $event->canContribute()->willReturn(true);
+        $event->isRegistrationComplete()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(true);
     }
 

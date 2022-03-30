@@ -203,6 +203,17 @@ class Event implements
      */
     private ?User $owner;
 
+    /**
+     * @ORM\Column(name="measurable", type="boolean", options={"default": false})
+     */
+    private bool $measurable = false;
+
+    /**
+     * @ORM\Column(name="max_registrations", type="integer", nullable=true)
+     * @Assert\Positive
+     */
+    private ?int $maxRegistrations = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -655,6 +666,8 @@ class Event implements
             'commentable',
             'createdAt',
             'bodyUsingJoditWysiwyg',
+            'measurable',
+            'maxRegistrations',
         ];
 
         foreach ($this as $key => $value) {
@@ -663,6 +676,8 @@ class Event implements
             }
         }
 
+        $this->maxRegistrations = 0;
+        $this->measurable = false;
         $this->enabled = false;
         $this->commentable = false;
     }
@@ -787,13 +802,55 @@ class Event implements
         return $this->owner;
     }
 
-    /**
-     * @return Event
-     */
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
 
         return $this;
+    }
+
+    public function isMeasurable(): bool
+    {
+        return $this->measurable;
+    }
+
+    public function setMeasurable(bool $measurable): self
+    {
+        $this->measurable = $measurable;
+
+        return $this;
+    }
+
+    public function getMaxRegistrations(): ?int
+    {
+        return $this->maxRegistrations;
+    }
+
+    public function setMaxRegistrations(?int $maxRegistrations = null): self
+    {
+        $this->maxRegistrations = $maxRegistrations;
+
+        return $this;
+    }
+
+    public function getAvailableRegistration(): int
+    {
+        return $this->maxRegistrations - $this->registrations->count();
+    }
+
+    public function isRegistrationComplete(): bool
+    {
+        if (null === $this->maxRegistrations) {
+            return false;
+        }
+
+        if ($this->measurable) {
+            return $this->maxRegistrations === $this->registrations->count();
+        }
+        if ($this->guestListEnabled) {
+            return $this->maxRegistrations === $this->registrations->count();
+        }
+
+        return false;
     }
 }

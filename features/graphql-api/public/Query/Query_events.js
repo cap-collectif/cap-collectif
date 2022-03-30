@@ -82,6 +82,10 @@ const InternalEventsQuery = /* GraphQL */ `
         node {
           id
           title
+          availableRegistration
+          isEventRegistrationComplete
+          isMeasurable
+          maxRegistrations
           themes {
             id
           }

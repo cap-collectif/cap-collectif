@@ -36,6 +36,9 @@ const AddEventMutation = /* GraphQL*/ `
                         json
                         formatted
                     }
+                    isMeasurable,
+                    maxRegistrations
+                    
                 }
             }
         }
@@ -87,5 +90,37 @@ describe('mutations.createEvent', () => {
         'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
+  });
+
+  it('should create an event with measurable registration', async () => {
+    await expect(
+      graphql(
+        AddEventMutation,
+        {
+          input: {
+            ...input,
+            measurable: true,
+            maxRegistrations: 10,
+          },
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('should not create an event with measurable registration', async () => {
+    await expect(
+      graphql(
+        AddEventMutation,
+        {
+          input: {
+            ...input,
+            measurable: true,
+            maxRegistrations: -1,
+          },
+        },
+        'internal_admin',
+      ),
+    ).rejects.toThrowError();
   });
 });

@@ -51,6 +51,9 @@ class SubscribeToEventAsNonRegisteredMutation implements MutationInterface
         if ($eventRegistration) {
             throw new UserError('User is already registered for this event.');
         }
+        if ($event->isRegistrationComplete()) {
+            throw new UserError('Event is complete');
+        }
         $eventRegistration = new EventRegistration($event);
         $eventRegistration
             ->setUsername($username)
