@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import * as React from 'react';
 import { CapUIFontWeight, Flex, FormLabel, Text } from '@cap-collectif/ui';
-import { FormattedHTMLMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
 import { FranceConnectAllowedData } from '@relay/ModalFranceConnectConfiguration_ssoConfiguration.graphql';
 import { FormControl, FieldInput } from '@cap-collectif/form';
@@ -70,10 +70,6 @@ const FormConfiguration: FC = () => {
 
     return (
         <Flex as="form" direction="column" spacing={3} id={formName}>
-            <Text color="gray.700" fontSize={3}>
-                <FormattedHTMLMessage id="edit-facebook-authentication-method-create-app" />
-            </Text>
-
             <FormControl name="clientId" control={control} isRequired>
                 <FormLabel htmlFor="clientId" label={intl.formatMessage({ id: 'client-id' })} />
                 <FieldInput
