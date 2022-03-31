@@ -11,6 +11,9 @@ for directory in var/cache var/log var/logs public/bundles public/media/default 
 done
 echo "[PHP-FPM] Created var/ files!"
 
+echo "[$(date -u)][PHP-FPM] Granting permissions to app/ folder..."
+chmod -R 777 app/
+echo "[$(date -u)][PHP-FPM] Permissions granted to app/ folder!"
 
 echo "[$(date -u)][PHP-FPM] Setting permissions to public/, cache/, log/ and logs/..."
 chmod -R 777 public/media
