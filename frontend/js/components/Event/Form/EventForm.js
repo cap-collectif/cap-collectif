@@ -340,34 +340,6 @@ export const EventForm = ({
                 ),
             }}
           />
-          {/* This part is tempory, it will be delete after migration complete */}
-          {query.viewer.isSuperAdmin && !isFrontendView && (
-            <div className="mb-5">
-              <div>
-                {event && event.fullAddress && (
-                  <div className="clearfix mb-5">
-                    <FormattedMessage id="old-address" />: {event.fullAddress}
-                  </div>
-                )}
-                {event && event.lat && event.lng && (
-                  <div className="clearfix mb-5">
-                    {' '}
-                    <FormattedMessage id="old-latitude" />: &nbsp; {event.lat} / {event.lng}
-                  </div>
-                )}
-                {event &&
-                  event.googleMapsAddress &&
-                  event.googleMapsAddress.lat &&
-                  event.googleMapsAddress.lng && (
-                    <div className="clearfix mb-5">
-                      {' '}
-                      <FormattedMessage id="new-latitude" />
-                      :&nbsp; {event.googleMapsAddress.lat} / {event.googleMapsAddress.lng}
-                    </div>
-                  )}
-              </div>
-            </div>
-          )}
           <Field
             id="event_body"
             type={isFrontendView ? 'admin-editor-ds' : 'admin-editor'}

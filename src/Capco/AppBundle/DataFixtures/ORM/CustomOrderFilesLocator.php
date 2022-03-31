@@ -11,11 +11,13 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
 {
     use IsAServiceTrait;
 
-    private $decoratedFixtureLocator;
-    private $fixturesDir;
+    private FixtureLocatorInterface $decoratedFixtureLocator;
+    private string $fixturesDir;
 
-    public function __construct(FixtureLocatorInterface $decoratedFixtureLocator, $fixturesDir)
-    {
+    public function __construct(
+        FixtureLocatorInterface $decoratedFixtureLocator,
+        string $fixturesDir
+    ) {
         $this->decoratedFixtureLocator = $decoratedFixtureLocator;
         $this->fixturesDir = $fixturesDir;
     }
@@ -127,9 +129,9 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Prod/SocialNetwork.yaml',
             $this->fixturesDir . 'Prod/FooterSocialNetwork.yaml',
             $this->fixturesDir . 'Prod/Page.yaml',
+            $this->fixturesDir . 'Prod/PageTranslation.yaml',
             $this->fixturesDir . 'Prod/SourceCategory.yaml',
             $this->fixturesDir . 'Prod/SourceCategoryTranslation.yaml',
-            $this->fixturesDir . 'Prod/PageTranslation.yaml',
             $this->fixturesDir . 'Prod/SiteImage.yaml',
             $this->fixturesDir . 'Prod/SiteColor.yaml',
             $this->fixturesDir . 'Prod/Section.yaml',

@@ -15,7 +15,7 @@ use Nelmio\Alice\IsAServiceTrait;
 {
     use IsAServiceTrait;
 
-    private $decoratedLoader;
+    private LoaderInterface $decoratedLoader;
 
     public function __construct(LoaderInterface $decoratedLoader)
     {
@@ -31,7 +31,7 @@ use Nelmio\Alice\IsAServiceTrait;
         array $fixturesFiles,
         array $parameters = [],
         array $objects = [],
-        PurgeMode $purgeMode = null
+        ?PurgeMode $purgeMode = null
     ): array {
         // We get the objects from the decorated loader
         $objects = $this->decoratedLoader->load($fixturesFiles, $parameters, $objects, $purgeMode);

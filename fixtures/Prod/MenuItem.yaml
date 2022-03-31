@@ -1,101 +1,95 @@
 Capco\AppBundle\Entity\MenuItem:
-  MenuItem1:
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 1
-    parent: null
-    menu: 1
+    #acceuil
+    MenuItem1:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 1
+        parent: null
+        menu: 1
+    #themes
+    MenuItem2:
+        isEnabled: false
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 22
+        parent: null
+        menu: 1
+        associatedFeatures: [themes]
+    #Projets participatifs
+    MenuItem3:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 2
+        parent: null
+        menu: 1
+    #À propos
+    MenuItem5:
+        isEnabled: 1
+        isDeletable: 1
+        isFullyModifiable: 1
+        position: 6
+        parent: null
+        menu: 1
+    #contact
+    MenuItem6:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 8
+        parent: '@MenuItem5'
+        menu: 1
+    #Charte
+    MenuItem8:
+        isEnabled: 1
+        isDeletable: 0
+        position: 7
+        parent: '@MenuItem5'
+        menu: 1
+        link: pages/charte
+    #Actualités
+    MenuItem11:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 3
+        parent: null
+        menu: 1
+    #Blog
+    MenuItem13:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 4
+        menu: 1
+        associatedFeatures: [blog]
+        parent: '@MenuItem11'
 
-  MenuItem2:
-    isEnabled: false
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 2
-    parent: null
-    menu: 1
-    associatedFeatures: [themes]
+    #Évènements
+    MenuItem12:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 5
+        parent: '@MenuItem11'
+        menu: 1
+        associatedFeatures: [calendar]
 
-  MenuItem3:
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 3
-    parent: null
-    menu: 1
-
-  MenuItem5:
-    isEnabled: 1
-    isDeletable: 1
-    isFullyModifiable: 1
-    position: 5
-    parent: null
-    menu: 1
-
-  MenuItem6:
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 1
-    parent: '@MenuItem5'
-    menu: 1
-
-  MenuItem8:
-    isEnabled: 1
-    isDeletable: 0
-    position: 6
-    parent: '@MenuItem5'
-    menu: 1
-    link: pages/charte
-
-  MenuItem10:
-    page: '@page2'
-    isEnabled: 1
-    isDeletable: 1
-    position: 8
-    parent: null
-    menu: 2
-
-  MenuItem11:
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 2
-    parent: null
-    menu: 1
-    associatedFeatures: [blog]
-
-  MenuItem12:
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 3
-    parent: null
-    menu: 1
-    associatedFeatures: [calendar]
-
-  MenuItem14:
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    associatedFeatures: [members_list]
-    position: 2
-    menu: 1
-    parent: '@MenuItem5'
-
-  MenuItem15:
-    page: '@page3'
-    isEnabled: 1
-    isDeletable: 1
-    position: 1
-    parent: null
-    menu: 2
-
-  MenuItem16:
-    isEnabled: 0
-    isDeletable: 0
-    isFullyModifiable: 0
-    associatedFeatures: [developer_documentation]
-    position: 8
-    parent: null
-    menu: 2
+    #Liste des inscrits
+    MenuItem14:
+        isEnabled: 0
+        isDeletable: 0
+        isFullyModifiable: 0
+        associatedFeatures: [members_list]
+        position: 10
+        menu: 1
+    #Développeurs
+    MenuItem16:
+        isEnabled: 0
+        isDeletable: 0
+        isFullyModifiable: 0
+        associatedFeatures: [developer_documentation]
+        position: 11
+        parent: null
+        menu: 2

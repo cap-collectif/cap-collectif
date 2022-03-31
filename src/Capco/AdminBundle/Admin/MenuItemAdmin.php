@@ -23,7 +23,7 @@ class MenuItemAdmin extends AbstractAdmin
     protected $classnameLabel = 'menu_item';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'menu',
+        '_sort_by' => 'position',
     ];
 
     public function createQuery($context = 'list')

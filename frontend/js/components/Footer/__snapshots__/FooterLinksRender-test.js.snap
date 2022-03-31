@@ -12,6 +12,12 @@ exports[`<FooterLinksRender /> renders correcty 1`] = `
       />
     </a>
   </li>
+  <li>
+    <Connect(CookieManagerModal)
+      isLink={true}
+      separator="|"
+    />
+  </li>
   <li
     left={false}
   >
@@ -39,12 +45,6 @@ exports[`<FooterLinksRender /> renders correcty 1`] = `
         values={Object {}}
       />
     </a>
-  </li>
-  <li>
-    <Connect(CookieManagerModal)
-      isLink={true}
-      separator="|"
-    />
   </li>
   <li
     key="FAQ"
