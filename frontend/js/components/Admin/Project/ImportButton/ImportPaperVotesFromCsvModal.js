@@ -262,6 +262,7 @@ export const ImportPaperVotesFromCsvModal = ({
                 content: intl.formatMessage({ id: 'paper-vote-import-success' }),
               });
               onClose();
+              window.location.reload();
             }}
             variant="primary"
             variantColor="primary"
