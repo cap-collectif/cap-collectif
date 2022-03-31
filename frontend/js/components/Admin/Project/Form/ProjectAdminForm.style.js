@@ -3,6 +3,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { MenuItem, Modal } from 'react-bootstrap';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
+import Icon from '~ds/Icon/Icon';
 
 export const ProjectBoxContainer: StyledComponent<
   { color?: ?string },
@@ -157,4 +158,9 @@ export const StepModalTitle: StyledComponent<{}, {}, typeof Modal.Title> = style
 
 export const PermalinkWrapper: StyledComponent<{}, {}, HTMLParagraphElement> = styled.p`
   word-break: break-all;
+  margin: 0;
+`;
+
+export const UpdateSlugIcon: StyledComponent<{}, {}, typeof Icon> = styled(Icon)`
+  cursor: pointer;
 `;

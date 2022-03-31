@@ -1,0 +1,11 @@
+UpdateProjectSlugPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of updateProjectSlug mutation.'
+        fields:
+            project:
+                type: 'InternalProject'
+                description: 'The updated project.'
+            errorCode:
+                type: 'UpdateProjectSlugErrorCode'
+                description: 'Available errors for updateProjectSlug mutation.'

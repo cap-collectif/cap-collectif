@@ -361,3 +361,8 @@ services:
 
     Capco\AppBundle\Service\SmsAnalyticsHelper:
         autowire: true
+
+    Symfony\Component\String\Slugger\AsciiSlugger:
+        autowire: true
+
+    Symfony\Component\String\Slugger\SluggerInterface: '@Symfony\Component\String\Slugger\AsciiSlugger'

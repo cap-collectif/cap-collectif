@@ -1517,3 +1517,10 @@ InternalMutation:
                     inputType: UpdatePaperVoteInput
                     payloadType: UpdatePaperVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdatePaperVoteMutation", [value, getUser()])'
+            updateProjectSlug:
+                access: '@=hasRole("ROLE_PROJECT_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProjectSlugInput
+                    payloadType: UpdateProjectSlugPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProjectSlugMutation", [value, getUser()])'

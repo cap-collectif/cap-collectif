@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectPublishAdminForm } from './ProjectPublishAdminForm';
-import { formMock, intlMock, $refType } from '~/mocks';
+import { formMock, intlMock, $refType, $fragmentRefs } from '~/mocks';
 import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils';
 
 describe('<ProjectPublishAdminForm />', () => {
@@ -38,6 +38,7 @@ describe('<ProjectPublishAdminForm />', () => {
         publishedAt: '18/08/1998',
         locale: null,
         archived: false,
+        $fragmentRefs,
       },
     };
     enableFeatureFlags(['multilangue']);
@@ -58,6 +59,7 @@ describe('<ProjectPublishAdminForm />', () => {
           label: 'french',
         },
         archived: false,
+        $fragmentRefs,
       },
     };
     enableFeatureFlags(['multilangue']);

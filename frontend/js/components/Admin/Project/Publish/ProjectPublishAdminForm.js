@@ -3,6 +3,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { type IntlShape, FormattedMessage } from 'react-intl';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import renderComponent from '~/components/Form/Field';
 import { type ProjectPublishAdminForm_project } from '~relay/ProjectPublishAdminForm_project.graphql';
 import select from '~/components/Form/Select';
@@ -12,8 +13,12 @@ import {
   ProjectSmallFieldsContainer,
   PermalinkWrapper,
   ProjectBoxContainer,
+  UpdateSlugIcon,
 } from '../Form/ProjectAdminForm.style';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import UpdateSlugModal from '~/components/Admin/Project/Publish/UpdateSlugModal';
+import { ICON_NAME } from '~ds/Icon/Icon';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 export type FormValues = {|
   publishedAt: string,
@@ -61,8 +66,9 @@ export const validate = (props: FormValues) => {
   return errors;
 };
 
-export const ProjectPublishAdminForm = ({ project }: Props) => {
+export const ProjectPublishAdminForm = ({ project, intl }: Props) => {
   const hasFeatureMultilangue = useFeatureFlag('multilangue');
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   return (
     <div className="col-md-12">
       <ProjectBoxContainer className="box container-fluid">
@@ -105,14 +111,29 @@ export const ProjectPublishAdminForm = ({ project }: Props) => {
             component={renderComponent}>
             <FormattedMessage id="archive.project" />
           </Field>
-          <PermalinkWrapper>
-            <strong>
-              <FormattedMessage id="permalink" /> :
-            </strong>{' '}
-            <a href={project?.url} target="blank">
-              {project?.url}
-            </a>
-          </PermalinkWrapper>
+          <Flex alignItems="center" mb={4}>
+            <PermalinkWrapper>
+              <strong>
+                <FormattedMessage id="permalink" /> :
+              </strong>{' '}
+              <a href={project?.url} target="blank">
+                {project?.url}
+              </a>
+            </PermalinkWrapper>
+            <UpdateSlugIcon
+              id="update-slug-icon"
+              name={ICON_NAME.PENCIL}
+              color="gray.500"
+              onClick={onOpen}
+            />
+            <UpdateSlugModal
+              show={isOpen}
+              onClose={onClose}
+              project={project}
+              projectId={project?.id ?? ''}
+              intl={intl}
+            />
+          </Flex>
         </div>
       </ProjectBoxContainer>
     </div>
@@ -121,7 +142,8 @@ export const ProjectPublishAdminForm = ({ project }: Props) => {
 
 export default createFragmentContainer(ProjectPublishAdminForm, {
   project: graphql`
-    fragment ProjectPublishAdminForm_project on Project @relay(mask: false) {
+    fragment ProjectPublishAdminForm_project on Project {
+      id
       publishedAt
       locale {
         value: id
@@ -129,6 +151,7 @@ export default createFragmentContainer(ProjectPublishAdminForm, {
       }
       url
       archived
+      ...UpdateSlugModal_project
     }
   `,
 });

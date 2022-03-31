@@ -1,0 +1,9 @@
+UpdateProjectSlugErrorCode:
+    type: enum
+    config:
+        name: UpdateProjectSlugErrorCode
+        description: 'Available errors for an `updateProjectSlug` mutation.'
+        values:
+            PROJECT_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProjectSlugMutation::PROJECT_NOT_FOUND")'
+                description: 'No project found for the given id.'

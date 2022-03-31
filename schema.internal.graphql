@@ -7469,6 +7469,7 @@ type Mutation {
   updateSmsCredit(input: UpdateSmsCreditInput!): UpdateSmsCreditPayload
   createTwilioSubAccount(input: CreateTwilioSubAccountInput!): CreateTwilioSubAccountPayload
   updatePaperVote(input: UpdatePaperVoteInput!): UpdatePaperVotePayload
+  updateProjectSlug(input: UpdateProjectSlugInput!): UpdateProjectSlugPayload
 }
 
 """A connection to a list of items."""
@@ -15425,6 +15426,30 @@ input UpdateProjectInput {
 type UpdateProjectPayload {
   """The created project"""
   project: Project
+  clientMutationId: String
+}
+
+"""Available errors for an `updateProjectSlug` mutation."""
+enum UpdateProjectSlugErrorCode {
+  """No project found for the given id."""
+  PROJECT_NOT_FOUND
+}
+
+input UpdateProjectSlugInput {
+  """The project id."""
+  projectId: ID!
+
+  """The slug to update."""
+  slug: String!
+  clientMutationId: String
+}
+
+type UpdateProjectSlugPayload {
+  """The updated project."""
+  project: Project
+
+  """Available errors for updateProjectSlug mutation."""
+  errorCode: UpdateProjectSlugErrorCode
   clientMutationId: String
 }
 

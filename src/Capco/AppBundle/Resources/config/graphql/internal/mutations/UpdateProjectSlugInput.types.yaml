@@ -1,0 +1,11 @@
+UpdateProjectSlugInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateProjectSlug mutation.'
+        fields:
+            projectId:
+                type: 'ID!'
+                description: 'The project id.'
+            slug:
+                type: 'String!'
+                description: 'The slug to update.'

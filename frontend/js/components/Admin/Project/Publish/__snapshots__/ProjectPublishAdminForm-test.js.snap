@@ -48,19 +48,51 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
           values={Object {}}
         />
       </Field>
-      <ProjectAdminFormstyle__PermalinkWrapper>
-        <strong>
-          <FormattedMessage
-            id="permalink"
-            values={Object {}}
+      <ForwardRef
+        alignItems="center"
+        mb={4}
+      >
+        <ProjectAdminFormstyle__PermalinkWrapper>
+          <strong>
+            <FormattedMessage
+              id="permalink"
+              values={Object {}}
+            />
+             :
+          </strong>
+           
+          <a
+            target="blank"
           />
-           :
-        </strong>
-         
-        <a
-          target="blank"
+        </ProjectAdminFormstyle__PermalinkWrapper>
+        <ProjectAdminFormstyle__UpdateSlugIcon
+          color="gray.500"
+          id="update-slug-icon"
+          name="PENCIL"
+          onClick={[Function]}
         />
-      </ProjectAdminFormstyle__PermalinkWrapper>
+        <WrapperComponent
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          onClose={[Function]}
+          project={null}
+          projectId=""
+          show={false}
+        />
+      </ForwardRef>
     </div>
   </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
@@ -138,22 +170,67 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
           values={Object {}}
         />
       </Field>
-      <ProjectAdminFormstyle__PermalinkWrapper>
-        <strong>
-          <FormattedMessage
-            id="permalink"
-            values={Object {}}
-          />
-           :
-        </strong>
-         
-        <a
-          href="/sku"
-          target="blank"
-        >
-          /sku
-        </a>
-      </ProjectAdminFormstyle__PermalinkWrapper>
+      <ForwardRef
+        alignItems="center"
+        mb={4}
+      >
+        <ProjectAdminFormstyle__PermalinkWrapper>
+          <strong>
+            <FormattedMessage
+              id="permalink"
+              values={Object {}}
+            />
+             :
+          </strong>
+           
+          <a
+            href="/sku"
+            target="blank"
+          >
+            /sku
+          </a>
+        </ProjectAdminFormstyle__PermalinkWrapper>
+        <ProjectAdminFormstyle__UpdateSlugIcon
+          color="gray.500"
+          id="update-slug-icon"
+          name="PENCIL"
+          onClick={[Function]}
+        />
+        <WrapperComponent
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          onClose={[Function]}
+          project={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "archived": false,
+              "id": "1",
+              "locale": Object {
+                "label": "french",
+                "value": "locale-en-GB",
+              },
+              "publishedAt": "18/08/1998",
+              "url": "/sku",
+            }
+          }
+          projectId="1"
+          show={false}
+        />
+      </ForwardRef>
     </div>
   </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
@@ -231,22 +308,64 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
           values={Object {}}
         />
       </Field>
-      <ProjectAdminFormstyle__PermalinkWrapper>
-        <strong>
-          <FormattedMessage
-            id="permalink"
-            values={Object {}}
-          />
-           :
-        </strong>
-         
-        <a
-          href="/sku"
-          target="blank"
-        >
-          /sku
-        </a>
-      </ProjectAdminFormstyle__PermalinkWrapper>
+      <ForwardRef
+        alignItems="center"
+        mb={4}
+      >
+        <ProjectAdminFormstyle__PermalinkWrapper>
+          <strong>
+            <FormattedMessage
+              id="permalink"
+              values={Object {}}
+            />
+             :
+          </strong>
+           
+          <a
+            href="/sku"
+            target="blank"
+          >
+            /sku
+          </a>
+        </ProjectAdminFormstyle__PermalinkWrapper>
+        <ProjectAdminFormstyle__UpdateSlugIcon
+          color="gray.500"
+          id="update-slug-icon"
+          name="PENCIL"
+          onClick={[Function]}
+        />
+        <WrapperComponent
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          onClose={[Function]}
+          project={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "archived": false,
+              "id": "1",
+              "locale": null,
+              "publishedAt": "18/08/1998",
+              "url": "/sku",
+            }
+          }
+          projectId="1"
+          show={false}
+        />
+      </ForwardRef>
     </div>
   </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
@@ -300,19 +419,51 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
           values={Object {}}
         />
       </Field>
-      <ProjectAdminFormstyle__PermalinkWrapper>
-        <strong>
-          <FormattedMessage
-            id="permalink"
-            values={Object {}}
+      <ForwardRef
+        alignItems="center"
+        mb={4}
+      >
+        <ProjectAdminFormstyle__PermalinkWrapper>
+          <strong>
+            <FormattedMessage
+              id="permalink"
+              values={Object {}}
+            />
+             :
+          </strong>
+           
+          <a
+            target="blank"
           />
-           :
-        </strong>
-         
-        <a
-          target="blank"
+        </ProjectAdminFormstyle__PermalinkWrapper>
+        <ProjectAdminFormstyle__UpdateSlugIcon
+          color="gray.500"
+          id="update-slug-icon"
+          name="PENCIL"
+          onClick={[Function]}
         />
-      </ProjectAdminFormstyle__PermalinkWrapper>
+        <WrapperComponent
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          onClose={[Function]}
+          project={null}
+          projectId=""
+          show={false}
+        />
+      </ForwardRef>
     </div>
   </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
