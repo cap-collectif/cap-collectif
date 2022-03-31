@@ -2,14 +2,14 @@
 import * as React from 'react';
 import { useIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
-import {Button, Modal, Text, CapUIIcon, Heading} from '@cap-collectif/ui'
+import { Button, Modal, Text, CapUIIcon, Heading, CapUIModalSize } from '@cap-collectif/ui';
 import type { ModalDeleteArgumentMobile_argument } from '~relay/ModalDeleteArgumentMobile_argument.graphql';
 import { FontWeight } from '~ui/Primitives/constants';
 import { formatConnectionPath } from '~/shared/utils/relay';
 import DeleteDebateArgumentMutation from '~/mutations/DeleteDebateArgumentMutation';
 import DeleteDebateAnonymousArgumentMutation from '~/mutations/DeleteDebateAnonymousArgumentMutation';
 import CookieMonster from '~/CookieMonster';
-import ResetCss from '~/utils/ResetCss'
+import ResetCss from '~/utils/ResetCss';
 
 type Props = {|
   argument: ModalDeleteArgumentMobile_argument,
@@ -210,6 +210,9 @@ export const ModalDeleteArgumentMobile = ({
 
   return (
     <Modal
+      alwaysOpenInPortal
+      hideCloseButton
+      variantSize={CapUIModalSize.Xl}
       disclosure={
         <Button
           justifyContent="center"

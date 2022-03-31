@@ -2,14 +2,19 @@
 
 exports[`<ModalArgumentAuthorMenu /> should renders correcty 1`] = `
 <Modal
+  alwaysOpenInPortal={true}
   ariaLabel="global.menu"
   disclosure={
-    <Button
-      aria-label="global.menu"
-      color="gray.500"
-      rightIcon="MORE"
+    <ButtonQuickAction
+      border="none"
+      height="32px"
+      icon="MORE"
+      label="global.menu"
+      variantColor="gray"
     />
   }
+  hideCloseButton={true}
+  variantSize="xl"
 >
   <Component />
 </Modal>

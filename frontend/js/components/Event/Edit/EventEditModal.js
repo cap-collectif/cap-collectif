@@ -1,18 +1,17 @@
 // @flow
 import * as React from 'react';
-import { Modal } from 'react-bootstrap';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { Modal, CapUIModalSize, Heading, Button, Flex } from '@cap-collectif/ui';
+import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { isInvalid, submit, isSubmitting } from 'redux-form';
 import styled, { type StyledComponent } from 'styled-components';
 import { formName } from '../Form/EventForm';
-import CloseButton from '../../Form/CloseButton';
-import SubmitButton from '../../Form/SubmitButton';
 import type { State, Dispatch } from '../../../types';
 import type { EventEditModal_query } from '~relay/EventEditModal_query.graphql';
 import type { EventEditModal_event } from '~relay/EventEditModal_event.graphql';
 import { EventFormInModal } from '../Create/EventCreateModal';
+import ResetCss from '~/utils/ResetCss';
 
 type RelayProps = {|
   query: EventEditModal_query,
@@ -47,37 +46,47 @@ export const EventEditModal = ({
 
   return (
     <Modal
-      animation={false}
       show={show}
-      onHide={handleClose}
-      bsSize="large"
+      onClose={handleClose}
+      size={CapUIModalSize.Xl}
       aria-labelledby="contained-modal-title-lg">
-      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
-        <Modal.Title id="contained-modal-title-lg">
-          <FormattedMessage id="edit-event" />
-        </Modal.Title>
-      </Modal.Header>
+      <ResetCss>
+        <Modal.Header>
+          <Heading as="h4">{intl.formatMessage({ id: 'edit-event' })}</Heading>
+        </Modal.Header>
+      </ResetCss>
       <Modal.Body>
         <EventFormInModal query={query} event={event} isFrontendView />
       </Modal.Body>
       <Modal.Footer>
         {event && event.participants.totalCount > 0 && (
           <NotifyInfoMessage>
-            <FormattedMessage id="event-modification-notification-to-members" />
+            {intl.formatMessage({ id: 'event-modification-notification-to-members' })}
           </NotifyInfoMessage>
         )}
-        <div className="mt-10">
-          <CloseButton onClose={handleClose} />
-          <SubmitButton
-            label="global.submit"
+        <Flex>
+          <Button
+            variant="secondary"
+            variantSize="big"
+            variantColor="primary"
+            mr={2}
+            onClick={handleClose}>
+            {intl.formatMessage({ id: 'global.cancel' })}
+          </Button>
+          <Button
+            variant="primary"
+            variantSize="big"
+            variantColor="primary"
+            label={intl.formatMessage({ id: 'global.submit' })}
             id="confirm-event-submit"
-            disabled={pristine || submitting}
-            isSubmitting={submitting}
-            onSubmit={() => {
+            disabled={pristine}
+            isLoading={submitting}
+            onClick={() => {
               dispatch(submit(formName));
-            }}
-          />
-        </div>
+            }}>
+            {intl.formatMessage({ id: 'global.submit' })}
+          </Button>
+        </Flex>
       </Modal.Footer>
     </Modal>
   );
@@ -93,7 +102,7 @@ export const container = connect<any, any, _, _, _, _>(mapStateToProps)(EventEdi
 export default createFragmentContainer(container, {
   query: graphql`
     fragment EventEditModal_query on Query
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...EventForm_query @include(if: $isAuthenticated)
     }
   `,

@@ -8,13 +8,22 @@ import type { StyledComponent } from 'styled-components';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import { Skeleton, Heading, Flex, Button, Icon, CapUIIcon, CapUIIconSize, Box, useTheme } from '@cap-collectif/ui'
+import {
+  Skeleton,
+  Heading,
+  Flex,
+  Button,
+  Icon,
+  CapUIIcon,
+  CapUIIconSize,
+  Box,
+  useTheme,
+} from '@cap-collectif/ui';
 import type { DebateStepPageLinkedArticles_step } from '~relay/DebateStepPageLinkedArticles_step.graphql';
 import DebateArticleCard from '~ui/DebateArticle/DebateArticleCard';
 import DebateStepPageLinkedArticlesDrawer from '~/components/Debate/Page/Drawers/DebateStepPageLinkedArticlesDrawer';
 import { DATE_SHORT_LOCALIZED_FORMAT } from '~/shared/date';
 import DebateArticlePlaceholder from './DebateArticlePlaceholder';
-
 
 type Props = {|
   +step: ?DebateStepPageLinkedArticles_step,
@@ -141,6 +150,7 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
                     '-webkit-user-drag': 'none',
                   }}
                   href={article.url}
+                  target="_blank"
                   key={article.id}
                   onClick={() => {
                     track('debate_article_click', {
@@ -171,7 +181,7 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
 export default (createFragmentContainer(DebateStepPageLinkedArticles, {
   step: graphql`
     fragment DebateStepPageLinkedArticles_step on DebateStep
-      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
+    @argumentDefinitions(isMobile: { type: "Boolean!" }) {
       id
       debate {
         url

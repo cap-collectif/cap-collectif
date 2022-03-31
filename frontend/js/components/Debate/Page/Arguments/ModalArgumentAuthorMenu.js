@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
-import { Button, CapUIIcon, Modal } from '@cap-collectif/ui';
+import { ButtonQuickAction, CapUIIcon, Modal, CapUIModalSize } from '@cap-collectif/ui';
 import type { ModalArgumentAuthorMenu_argument } from '~relay/ModalArgumentAuthorMenu_argument.graphql';
 import ModalEditArgumentMobile from '~/components/Debate/Page/Arguments/ModalEditArgumentMobile';
 import ModalDeleteArgumentMobile from '~/components/Debate/Page/Arguments/ModalDeleteArgumentMobile';
@@ -16,25 +16,33 @@ export const ModalArgumentAuthorMenu = ({ argument, hasViewer = true }: Props): 
   const intl = useIntl();
   return (
     <Modal
+      hideCloseButton
+      alwaysOpenInPortal
+      variantSize={CapUIModalSize.Xl}
       ariaLabel={intl.formatMessage({ id: 'global.menu' })}
       disclosure={
-        <Button
-          rightIcon={CapUIIcon.More}
-          aria-label={intl.formatMessage({ id: 'global.menu' })}
-          color="gray.500"
+        <ButtonQuickAction
+          icon={CapUIIcon.More}
+          label={intl.formatMessage({ id: 'global.menu' })}
+          variantColor="gray"
+          border="none"
+          height="32px"
         />
       }>
       {({ hide: hideModalMenu }) => (
-        <Modal.Body spacing={6} p={6}>
-          {hasViewer && (
-            <ModalEditArgumentMobile argument={argument} hidePreviousModal={hideModalMenu} />
-          )}
-          <ModalDeleteArgumentMobile
-            argument={argument}
-            hidePreviousModal={hideModalMenu}
-            hasViewer={hasViewer}
-          />
-        </Modal.Body>
+        <>
+          <Modal.Header />
+          <Modal.Body spacing={6} p={6}>
+            {hasViewer && (
+              <ModalEditArgumentMobile argument={argument} hidePreviousModal={hideModalMenu} />
+            )}
+            <ModalDeleteArgumentMobile
+              argument={argument}
+              hidePreviousModal={hideModalMenu}
+              hasViewer={hasViewer}
+            />
+          </Modal.Body>
+        </>
       )}
     </Modal>
   );

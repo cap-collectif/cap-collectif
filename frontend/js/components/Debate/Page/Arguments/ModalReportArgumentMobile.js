@@ -4,7 +4,7 @@ import { submit } from 'redux-form';
 import { useDispatch } from 'react-redux';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
-import { Button, Modal, Heading, Text } from '@cap-collectif/ui'
+import { Button, Modal, Heading, Text, CapUIModalSize } from '@cap-collectif/ui';
 import type { ModalReportArgumentMobile_argument } from '~relay/ModalReportArgumentMobile_argument.graphql';
 import ReportForm, { formName, getType, type Values } from '~/components/Report/ReportForm';
 import type { Dispatch } from '~/types';
@@ -170,26 +170,17 @@ export const ModalReportArgumentMobile = ({ argument, show, onClose }: Props): R
   };
 
   return (
-    <Modal ariaLabel={intl.formatMessage({ id: 'global.menu' })} show={show} onClose={onClose}>
-      <Modal.Body spacing={6} p={6}>
-        <Modal
-          onClose={() => {
-            resetState();
-            onClose();
-          }}
-          disclosure={
-            <Button
-              variant="primary"
-              variantColor="danger"
-              variantSize="big"
-              justifyContent="center">
-              {intl.formatMessage({ id: 'global.report.submit' })}
-            </Button>
-          }
-          ariaLabel={intl.formatMessage({ id: 'global.report.submit' })}>
-          {({ hide: hideModalChoice }) => getModalContent(modalState, hideModalChoice)}
-        </Modal>
-      </Modal.Body>
+    <Modal
+      show={show}
+      hideCloseButton
+      variantSize={CapUIModalSize.Xl}
+      alwaysOpenInPortal
+      onClose={() => {
+        resetState();
+        onClose();
+      }}
+      ariaLabel={intl.formatMessage({ id: 'global.report.submit' })}>
+      {({ hide: hideModalChoice }) => getModalContent(modalState, hideModalChoice)}
     </Modal>
   );
 };

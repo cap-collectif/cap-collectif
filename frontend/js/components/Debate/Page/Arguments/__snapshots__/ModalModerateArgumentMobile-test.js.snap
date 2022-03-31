@@ -4,13 +4,16 @@ exports[`<ModalModerateArgumentMobile /> should renders correcty with argument 1
 Array [
   <button
     aria-controls="id-g"
+    aria-describedby="id-g"
     aria-expanded="false"
     aria-haspopup="dialog"
-    class="sc-bdvvtL sc-lcepkR fjYDno elkPgU cap-button"
+    aria-label=""
+    class="sc-bdvvtL gGjHcZ cap-buttonQuickAction"
+    tabindex="0"
     type="button"
   >
     <svg
-      class="sc-bdvvtL sc-eJwWfJ iPkWup jsDA-DM cap-icon"
+      class="sc-bdvvtL sc-eJwWfJ hHMOTv jsDA-DM cap-icon"
       fill="currentColor"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +23,13 @@ Array [
       />
     </svg>
   </button>,
+  <div
+    class="cap-tooltip-container"
+    hidden=""
+    id="id-g"
+    role="tooltip"
+    style="display:none;position:fixed;left:100%;top:100%;z-index:1000;pointer-events:none"
+  />,
   <div
     aria-label="global.report.submit"
     aria-modal="true"

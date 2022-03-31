@@ -43,12 +43,14 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
     >
       <a
         href="https://www.generationlibre.eu/medias/non-au-passeport-vaccinal-gaspard-koenig/"
+        rel="noreferrer"
         style={
           Object {
             "marginLeft": 0,
             "marginTop": 0,
           }
         }
+        target="_blank"
       >
         <div
           className="sc-bdvvtL ifijdB cap-card"
@@ -80,6 +82,8 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
       </a>
       <a
         href="https://actu.orange.fr/societe/videos/macron-ceux-qui-disent-on-aura-un-vaccin-en-mars-ou-avril-prochain-vous-trompent-CNT000001tKjH0.html"
+        rel="noreferrer"
+        target="_blank"
       >
         <div
           className="sc-bdvvtL ifijdB cap-card"
@@ -116,6 +120,8 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
       </a>
       <a
         href="https://www.francetvinfo.fr/sante/maladie/coronavirus/vaccin/covid-19-passeport-vaccinal-pass-sanitaire-certificat-vert-l-article-a-lire-pour-comprendre-le-debat-qui-agite-la-france-et-l-europe_4324853.html"
+        rel="noreferrer"
+        target="_blank"
       >
         <div
           className="sc-bdvvtL ifijdB cap-card"

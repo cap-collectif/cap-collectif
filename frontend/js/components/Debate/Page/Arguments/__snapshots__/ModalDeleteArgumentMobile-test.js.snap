@@ -2,6 +2,7 @@
 
 exports[`<ModalDeleteArgumentMobile /> should renders correcty with argument 1`] = `
 <Modal
+  alwaysOpenInPortal={true}
   ariaLabel="confirm-delete-argument"
   disclosure={
     <Button
@@ -13,7 +14,9 @@ exports[`<ModalDeleteArgumentMobile /> should renders correcty with argument 1`]
       global.delete
     </Button>
   }
+  hideCloseButton={true}
   onClose={[Function]}
+  variantSize="xl"
 >
   <Component />
 </Modal>

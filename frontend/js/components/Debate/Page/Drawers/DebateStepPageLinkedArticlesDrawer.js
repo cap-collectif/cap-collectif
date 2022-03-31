@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
-import { Heading, Flex } from '@cap-collectif/ui'
+import { Heading, Flex } from '@cap-collectif/ui';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
 import type { DebateStepPageLinkedArticlesDrawer_step } from '~relay/DebateStepPageLinkedArticlesDrawer_step.graphql';
 import DebateArticleCard from '~ui/DebateArticle/DebateArticleCard';
@@ -30,10 +30,10 @@ const DebateStepPageLinkedArticlesDrawer = ({ step, ...drawerProps }: Props): Re
           <FormattedMessage id="related.articles" />
         </Heading>
       </DetailDrawer.Header>
-       <DetailDrawer.Body>
+      <DetailDrawer.Body>
         <Flex direction="column" spacing={4} mb={4}>
           {articles.map(article => (
-            <a href={article.url} key={article.id}>
+            <a href={article.url} key={article.id} target="_blank" rel="noreferrer">
               <DebateArticleCard
                 illustration={article.coverUrl}
                 publishedAt={
@@ -47,7 +47,7 @@ const DebateStepPageLinkedArticlesDrawer = ({ step, ...drawerProps }: Props): Re
             </a>
           ))}
         </Flex>
-       </DetailDrawer.Body>
+      </DetailDrawer.Body>
     </DetailDrawer>
   );
 };

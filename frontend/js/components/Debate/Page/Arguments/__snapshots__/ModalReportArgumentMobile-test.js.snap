@@ -2,7 +2,7 @@
 
 exports[`<ModalReportArgumentMobile /> should renders correcty when not show 1`] = `
 <div
-  aria-label="global.menu"
+  aria-label="global.report.submit"
   aria-modal="true"
   data-dialog="true"
   hidden=""
@@ -15,7 +15,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty when not show 1`]
 
 exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`] = `
 <div
-  aria-label="global.menu"
+  aria-label="global.report.submit"
   aria-modal="true"
   data-dialog="true"
   id="id-g"
@@ -27,32 +27,136 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
     style="opacity:0"
   >
     <div
-      class="sc-bdvvtL hnbcdn sc-gsNilK cap-modal"
+      class="sc-bdvvtL krEzRq sc-gsNilK cap-modal"
       style="opacity:0;transform:translateY(-20px) translateZ(0)"
     >
+      <header
+        class="sc-bdvvtL jfdhIH cap-modal__header"
+      >
+        <div
+          class="sc-bdvvtL hEjsJA"
+        >
+          <h4
+            class="sc-bdvvtL jtLwVb cap-heading"
+            style="margin-left:0;margin-top:0"
+          >
+            global.modal.report.title
+          </h4>
+        </div>
+      </header>
       <main
-        class="sc-bdvvtL gdNnTf cap-modal__footer"
+        class="sc-bdvvtL gWVjgj cap-modal__footer"
+      >
+        <form
+          id="report-form"
+        >
+          <div
+            class="form-group"
+          >
+            <label
+              class="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+              for="reportType"
+              id="label-reportType"
+              type="label"
+            >
+              global.modal.report.form.status
+            </label>
+            <span
+              class="visible-print-block help-block"
+            >
+              one-possible-answer
+            </span>
+            <select
+              aria-describedby="label-reportType "
+              aria-invalid="false"
+              class="form-control"
+              id="reportType"
+              name="status"
+            >
+              <option
+                value="-1"
+              >
+                global.select
+              </option>
+              <option
+                value="1"
+              >
+                reporting.status.offending
+              </option>
+              <option
+                value="2"
+              >
+                reporting.status.spam
+              </option>
+              <option
+                value="3"
+              >
+                reporting.status.error
+              </option>
+              <option
+                value="4"
+              >
+                reporting.status.sexual
+              </option>
+              <option
+                value="5"
+              >
+                reporting.status.off_topic
+              </option>
+            </select>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+              for="reportBody"
+              id="label-reportBody"
+              type="label"
+            >
+              global.modal.report.form.body
+            </label>
+            <textarea
+              aria-describedby="label-reportBody "
+              aria-invalid="false"
+              class="form-control"
+              id="reportBody"
+              name="body"
+              type="textarea"
+            />
+            <div
+              class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+            >
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        </form>
+      </main>
+      <footer
+        class="sc-bdvvtL eAeyKU cap-modal__footer"
       >
         <button
-          aria-controls="id-g"
-          aria-expanded="false"
-          aria-haspopup="dialog"
-          class="sc-bdvvtL sc-lcepkR fKkohK jVZifq cap-button"
+          class="sc-bdvvtL sc-lcepkR dFIOER jVZifq cap-button"
+          style="margin-left:0;margin-top:0"
           type="button"
         >
           global.report.submit
         </button>
-        <div
-          aria-label="global.report.submit"
-          aria-modal="true"
-          data-dialog="true"
-          hidden=""
-          id="id-g"
-          role="dialog"
-          style="display:none"
-          tabindex="-1"
-        />
-      </main>
+      </footer>
     </div>
   </div>
 </div>

@@ -226,7 +226,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
               </div>
             </div>
             <div
-              aria-label="global.menu"
+              aria-label="global.report.submit"
               aria-modal={true}
               data-dialog={true}
               hidden={true}
@@ -380,7 +380,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
               </div>
             </div>
             <div
-              aria-label="global.menu"
+              aria-label="global.report.submit"
               aria-modal={true}
               data-dialog={true}
               hidden={true}
@@ -534,7 +534,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
               </div>
             </div>
             <div
-              aria-label="global.menu"
+              aria-label="global.report.submit"
               aria-modal={true}
               data-dialog={true}
               hidden={true}

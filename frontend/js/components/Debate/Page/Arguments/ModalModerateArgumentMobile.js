@@ -4,13 +4,21 @@ import { submit } from 'redux-form';
 import { useDispatch } from 'react-redux';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
-import { Button, Modal, Heading, Text, CapUIIcon } from '@cap-collectif/ui'
+import {
+  Button,
+  Modal,
+  Heading,
+  Text,
+  CapUIIcon,
+  CapUIModalSize,
+  ButtonQuickAction,
+} from '@cap-collectif/ui';
 import type { ModalModerateArgumentMobile_argument } from '~relay/ModalModerateArgumentMobile_argument.graphql';
 import ModerateForm, { formName, type Values } from '~/components/Moderate/ModerateForm';
 import { FontWeight } from '~ui/Primitives/constants';
 import TrashDebateAlternateArgumentMutation from '~/mutations/TrashDebateAlternateArgumentMutation';
 import type { Dispatch } from '~/types';
-import ResetCss from '~/utils/ResetCss'
+import ResetCss from '~/utils/ResetCss';
 
 type Props = {|
   argument: ModalModerateArgumentMobile_argument,
@@ -177,7 +185,17 @@ export const ModalModerateArgumentMobile = ({ argument }: Props): React.Node => 
 
   return (
     <Modal
-      disclosure={<Button rightIcon={CapUIIcon.Moderate} color="neutral-gray.500" />}
+      hideCloseButton
+      variantSize={CapUIModalSize.Xl}
+      alwaysOpenInPortal
+      disclosure={
+        <ButtonQuickAction
+          icon={CapUIIcon.Moderate}
+          variantColor="gray"
+          height="32px"
+          border="none"
+        />
+      }
       ariaLabel={intl.formatMessage({ id: 'global.report.submit' })}
       onClose={resetState}>
       {({ hide }) => getModalContent(modalState, hide)}

@@ -71,7 +71,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
   >
     <button
       aria-label="vote.add"
-      className="sc-bdvvtL sc-lcepkR fjYDno elkPgU cap-button"
+      className="sc-bdvvtL sc-lcepkR fjYDno grtNlY cap-button"
       disabled={true}
       onClick={[Function]}
       type="button"
@@ -95,7 +95,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
     </span>
   </div>
   <div
-    aria-label="global.menu"
+    aria-label="global.report.submit"
     aria-modal={true}
     data-dialog={true}
     hidden={true}
@@ -186,7 +186,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
   >
     <button
       aria-label="vote.add"
-      className="sc-bdvvtL sc-lcepkR fjYDno elkPgU cap-button"
+      className="sc-bdvvtL sc-lcepkR fjYDno grtNlY cap-button"
       disabled={true}
       onClick={[Function]}
       type="button"
@@ -210,7 +210,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
     </span>
   </div>
   <div
-    aria-label="global.menu"
+    aria-label="global.report.submit"
     aria-modal={true}
     data-dialog={true}
     hidden={true}
@@ -301,7 +301,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
   >
     <button
       aria-label="vote.add"
-      className="sc-bdvvtL sc-lcepkR fjYDno elkPgU cap-button"
+      className="sc-bdvvtL sc-lcepkR fjYDno grtNlY cap-button"
       disabled={true}
       onClick={[Function]}
       type="button"
@@ -325,7 +325,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
     </span>
   </div>
   <div
-    aria-label="global.menu"
+    aria-label="global.report.submit"
     aria-modal={true}
     data-dialog={true}
     hidden={true}

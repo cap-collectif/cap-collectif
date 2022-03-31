@@ -24,7 +24,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
     }
   >
     <div
-      className="sc-bdvvtL dwCLSW sc-gsNilK ftqHuc cap-modal"
+      className="sc-bdvvtL krWFkn sc-gsNilK ftqHuc cap-modal"
       id="show-authors-modal"
       style={
         Object {

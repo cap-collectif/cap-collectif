@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import {Flex, Text, Button, Tag, Heading, Icon, CapUIIcon} from '@cap-collectif/ui';
+import { Flex, Text, Button, Tag, Heading, Icon, CapUIIcon } from '@cap-collectif/ui';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
 import NewLoginOverlay from '~/components/Utils/NewLoginOverlay';
 import { voteForArgument } from '~/components/Debate/ArgumentCard/ArgumentCard';
@@ -96,9 +96,9 @@ const DebateStepPageArgumentDrawer = ({
         {isAuthor && !stepClosed && <ModalArgumentAuthorMenu argument={argument} />}
       </DetailDrawer.Header>
 
-       <DetailDrawer.Body>
+      <DetailDrawer.Body>
         <Text>{argument.body}</Text>
-       </DetailDrawer.Body>
+      </DetailDrawer.Body>
 
       <Flex
         direction="row"
@@ -128,6 +128,8 @@ const DebateStepPageArgumentDrawer = ({
               id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
             })}
             disabled={stepClosed}
+            variant="link"
+            variantColor="hierarchy"
           />
         </NewLoginOverlay>
         <Text ml={1} as="span" fontSize={4} color="neutral-gray.900">

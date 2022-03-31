@@ -140,17 +140,18 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props): Node =>
         </Flex>
       </Flex>
       {(yesState?.hasMore || noState?.hasMore) && (
-        <Button
-          m="auto"
-          variant="secondary"
-          variantSize="small"
-          onClick={() => {
-            if (yesState) yesState.loadMore(CONNECTION_CONFIG_YES, CONNECTION_NODES_PER_PAGE);
-            if (noState) noState.loadMore(CONNECTION_CONFIG_NO, CONNECTION_NODES_PER_PAGE);
-          }}
-          leftIcon={CapUIIcon.Add}>
-          <FormattedMessage id="global.more" />
-        </Button>
+        <Flex width="100%" justify="center">
+          <Button
+            variant="secondary"
+            variantSize="small"
+            onClick={() => {
+              if (yesState) yesState.loadMore(CONNECTION_CONFIG_YES, CONNECTION_NODES_PER_PAGE);
+              if (noState) noState.loadMore(CONNECTION_CONFIG_NO, CONNECTION_NODES_PER_PAGE);
+            }}
+            leftIcon={CapUIIcon.Add}>
+            <FormattedMessage id="global.more" />
+          </Button>
+        </Flex>
       )}
     </Box>
   );

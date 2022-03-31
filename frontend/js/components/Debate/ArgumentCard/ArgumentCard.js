@@ -4,7 +4,20 @@ import { truncate } from 'lodash';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import { Box, Tooltip, Menu, Button, Flex, Card, Tag, Text, CapUIIconSize, Icon, CapUIIcon} from '@cap-collectif/ui'
+import {
+  Box,
+  Tooltip,
+  Menu,
+  Button,
+  Flex,
+  Card,
+  Tag,
+  Text,
+  CapUIIconSize,
+  Icon,
+  CapUIIcon,
+  ButtonQuickAction,
+} from '@cap-collectif/ui';
 import type {
   ArgumentCard_argument,
   ForOrAgainstValue,
@@ -106,7 +119,7 @@ export const ArgumentCard = ({
       <Flex height="100%" direction="column">
         <Flex mb={2} direction="row" justify="space-between" align="start">
           <Flex direction="row" align="center" flexWrap="wrap">
-             <Text maxWidth="100%" overflow="hidden" mr={2} mb="8px !important">
+            <Text maxWidth="100%" overflow="hidden" mr={2} mb="8px !important">
               {argument.author?.username
                 ? argument.author.username
                 : argument.username?.length
@@ -203,21 +216,21 @@ export const ArgumentCard = ({
                 <ModalArgumentAuthorMenu argument={argument} hasViewer={!!viewer} />
               ))}
 
-             {argument.viewerCanReport &&
+            {argument.viewerCanReport &&
               !stepClosed &&
               (!isMobile ? (
                 <Menu
                   disclosure={
-                    <Button
-                      rightIcon={CapUIIcon.More}
-                      aria-label={intl.formatMessage({ id: 'global.menu' })}
-                      color="gray.500"
+                    <ButtonQuickAction
+                      icon={CapUIIcon.More}
+                      label={intl.formatMessage({ id: 'global.menu' })}
+                      variantColor="gray"
+                      border="none"
+                      height="32px"
                     />
-                  }
-                >
+                  }>
                   <Menu.List>
-                     <Menu.Item
-                      as={Button}
+                    <Menu.Item
                       onClick={() =>
                         setArgumentReported({
                           id: argument.id,
@@ -226,17 +239,20 @@ export const ArgumentCard = ({
                         })
                       }
                       leftIcon={CapUIIcon.Flag}
-                      color="blue.900">
+                      bg="white"
+                      border="none">
                       {intl.formatMessage({ id: 'global.report.submit' })}
-                     </Menu.Item>
+                    </Menu.Item>
                   </Menu.List>
                 </Menu>
               ) : (
-                <Button
-                  rightIcon={CapUIIcon.More}
-                  aria-label={intl.formatMessage({ id: 'global.menu' })}
-                  color="gray.500"
+                <ButtonQuickAction
+                  icon={CapUIIcon.More}
+                  label={intl.formatMessage({ id: 'global.menu' })}
+                  variantColor="gray"
                   onClick={onOpen}
+                  border="none"
+                  height="32px"
                 />
               ))}
           </Flex>
@@ -282,7 +298,12 @@ export const ArgumentCard = ({
               <NewLoginOverlay enabled={!stepClosed} placement="bottom">
                 <Button
                   color="neutral-gray.500"
-                  leftIcon={<Icon name={argument.viewerHasVote ? CapUIIcon.Clap : CapUIIcon.ClapO} size={CapUIIconSize.Lg} />}
+                  leftIcon={
+                    <Icon
+                      name={argument.viewerHasVote ? CapUIIcon.Clap : CapUIIcon.ClapO}
+                      size={CapUIIconSize.Lg}
+                    />
+                  }
                   onClick={() =>
                     voteForArgument(
                       argument.id,
@@ -316,7 +337,7 @@ export const ArgumentCard = ({
 export default (createFragmentContainer(ArgumentCard, {
   argument: graphql`
     fragment ArgumentCard_argument on AbstractDebateArgument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       body
       votes(first: 0) {
