@@ -9,25 +9,32 @@ import type { SSOList_query$key } from '@relay/SSOList_query.graphql';
 import type { CardFacebook_ssoConfiguration$key } from '@relay/CardFacebook_ssoConfiguration.graphql';
 import type { CardFranceConnect_ssoConfiguration$key } from '@relay/CardFranceConnect_ssoConfiguration.graphql';
 import type { CardOpenID_ssoConfiguration$key } from '@relay/CardOpenID_ssoConfiguration.graphql';
+import type { CardCAS_ssoConfiguration$key } from '@relay/CardCAS_ssoConfiguration.graphql';
 import CardParis from './Paris/CardParis';
 import useFeatureFlag from '@hooks/useFeatureFlag';
+import CardCAS from './CAS/CardCAS';
 
 type SSOListProps = {
-    query: SSOList_query$key,
+    query: SSOList_query$key;
 };
 type SSOConfigs = {
-    facebook: CardFacebook_ssoConfiguration$key | null,
-    franceConnect: CardFranceConnect_ssoConfiguration$key | null,
+    facebook: CardFacebook_ssoConfiguration$key | null;
+    franceConnect: CardFranceConnect_ssoConfiguration$key | null;
     openIDs: ({
-        id: string
-        __typename: string
-    } & CardOpenID_ssoConfiguration$key)[],
+        id: string;
+        __typename: string;
+    } & CardOpenID_ssoConfiguration$key)[];
+    cas: ({
+        id: string;
+        __typename: string;
+    } & CardCAS_ssoConfiguration$key)[];
 };
 
 const DEFAULT_SSO_CONFIGS: SSOConfigs = {
     facebook: null,
     franceConnect: null,
     openIDs: [],
+    cas: [],
 };
 
 const FRAGMENT = graphql`
@@ -42,6 +49,7 @@ const FRAGMENT = graphql`
                     ...CardFacebook_ssoConfiguration
                     ...CardFranceConnect_ssoConfiguration
                     ...CardOpenID_ssoConfiguration
+                    ...CardCAS_ssoConfiguration
                 }
             }
         }
@@ -56,12 +64,13 @@ const SSOList: FC<SSOListProps> = ({ query: queryFragment }) => {
     const hasSSOParis = useFeatureFlag('login_paris');
 
     const ssoConfigs: SSOConfigs = useMemo(() => {
-        if(!ssoConfigurations.edges) return DEFAULT_SSO_CONFIGS;
+        if (!ssoConfigurations.edges) return DEFAULT_SSO_CONFIGS;
 
         return ssoConfigurations.edges
-                .filter(Boolean)
-                .map(edge => edge?.node)
-                .reduce((acc, node) => {
+            .filter(Boolean)
+            .map(edge => edge?.node)
+            .reduce(
+                (acc, node) => {
                     if (node) {
                         if (node?.__typename === 'FacebookSSOConfiguration') {
                             acc.facebook = node;
@@ -69,16 +78,20 @@ const SSOList: FC<SSOListProps> = ({ query: queryFragment }) => {
                             acc.franceConnect = node;
                         } else if (['Oauth2SSOConfiguration'].includes(node.__typename)) {
                             acc.openIDs.push(node);
+                        } else if (['CASSSOConfiguration'].includes(node.__typename)) {
+                            acc.cas.push(node);
                         }
                     }
 
                     return acc;
-                }, {
+                },
+                {
                     facebook: null,
                     franceConnect: null,
                     openIDs: [],
-                } as SSOConfigs);
-
+                    cas: [],
+                } as SSOConfigs,
+            );
     }, [ssoConfigurations]);
 
     return (
@@ -88,7 +101,7 @@ const SSOList: FC<SSOListProps> = ({ query: queryFragment }) => {
                 min: 'auto',
                 max: '32%',
             }}
-           mt={4}>
+            mt={4}>
             <CardMail />
             <CardFacebook
                 ssoConfiguration={ssoConfigs.facebook}
@@ -107,6 +120,17 @@ const SSOList: FC<SSOListProps> = ({ query: queryFragment }) => {
                         <CardOpenID
                             key={openIDConfig.id}
                             ssoConfiguration={openIDConfig}
+                            ssoConnectionName={ssoConfigurations.__id}
+                        />
+                    ),
+            )}
+
+            {ssoConfigs.cas.map(
+                casConfig =>
+                    casConfig && (
+                        <CardCAS
+                            key={casConfig.id}
+                            ssoConfiguration={casConfig}
                             ssoConnectionName={ssoConfigurations.__id}
                         />
                     ),

@@ -22,6 +22,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
     type="franceConnect"
   />
   <Connect(LoginSocialButton)
+    text="Cap Collectif CAS Provider"
     type="cas"
   />
   <p
@@ -42,6 +43,7 @@ exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
     authenticate-with
   </div>
   <Connect(LoginSocialButton)
+    text="Cap Collectif CAS Provider"
     type="cas"
   />
   <p
@@ -135,6 +137,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     type="franceConnect"
   />
   <Connect(LoginSocialButton)
+    text="Cap Collectif CAS Provider"
     type="cas"
   />
 </Fragment>

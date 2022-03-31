@@ -1,0 +1,18 @@
+InternalCreateCASSSOConfigurationInput:
+    type: relay-mutation-input
+    config:
+        name: CreateCASSSOConfigurationInput
+        description: 'Create a CAS configuration.'
+        fields:
+            name:
+                description: 'The name of configured SSO.'
+                type: 'String!'
+            casVersion:
+                type: 'CasVersion!'
+                description: 'Version of CAS used.'
+            casServerUrl:
+                type: 'URI!'
+                description: 'URL of the CAS server.'
+            casCertificate:
+                type: 'String!'
+                description: 'Content of the certificate file.'

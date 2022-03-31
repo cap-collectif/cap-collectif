@@ -25,6 +25,7 @@ services:
       SYMFONY_SAML_SP: dev
       SYMFONY_LOGIN_SAML_ALLOWED: 'True'
       SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
+      SYMFONY_CAS_CERTIFICATE_DIRECTORY: '../app/cas'
     volumes:
       - /var/www/public/media
       - /var/www/var/cache

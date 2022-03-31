@@ -4,16 +4,15 @@ import { useIntl } from 'react-intl';
 import SSOList from './SSOList/SSOList';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import type { AuthenticationMethodsQuery } from '@relay/AuthenticationMethodsQuery.graphql';
-import { Button, Flex } from '@cap-collectif/ui';
-import ModalOpenIDConfiguration from './SSOList/OpenID/ModalOpenIDConfiguration';
+import { Flex } from '@cap-collectif/ui';
 import SSOToggleList from './SSOToggleList/SSOToggleList';
 import { useAppContext } from '../AppProvider/App.context';
-import useFeatureFlag from '@hooks/useFeatureFlag';
-import { useDisclosure } from '@liinkiing/react-hooks';
+import AddSSO from './AddSSO';
 
 const QUERY = graphql`
     query AuthenticationMethodsQuery {
         ...SSOList_query
+        ...AddSSO_query
     }
 `;
 
@@ -21,8 +20,6 @@ const AuthenticationMethods: FC = () => {
     const intl = useIntl();
     const query = useLazyLoadQuery<AuthenticationMethodsQuery>(QUERY, {});
     const { viewerSession } = useAppContext();
-    const hasFeatureOpenId = useFeatureFlag('login_openid');
-    const { isOpen, onClose, onOpen } = useDisclosure(false);
 
     return (
         <Section width="70%">
@@ -37,24 +34,7 @@ const AuthenticationMethods: FC = () => {
                     </Section.Description>
                 </Flex>
 
-                {hasFeatureOpenId && (
-                    <>
-                        <Button
-                            variantColor="primary"
-                            variant="secondary"
-                            variantSize="small"
-                            onClick={onOpen}>
-                            {intl.formatMessage({ id: 'global.add' })}
-                        </Button>
-
-                        <ModalOpenIDConfiguration
-                            ssoConfiguration={null}
-                            ssoConnectionName="client:root:__SSOList_ssoConfigurations_connection"
-                            isOpen={isOpen}
-                            onClose={onClose}
-                        />
-                    </>
-                )}
+                <AddSSO query={query} />
             </Flex>
 
             <SSOList query={query} />

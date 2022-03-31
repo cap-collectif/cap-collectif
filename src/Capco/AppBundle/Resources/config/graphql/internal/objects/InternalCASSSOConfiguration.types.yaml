@@ -1,0 +1,27 @@
+InternalCASSSOConfiguration:
+    type: object
+    inherits:
+        - Node
+        - InternalSSOConfiguration
+    config:
+        interfaces:
+            - Node
+            - InternalSSOConfiguration
+        name: CASSSOConfiguration
+        description: 'CAS SSO Configuration.'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: CASSSOConfiguration
+            casVersion:
+                type: 'CasVersion!'
+                description: 'Version of CAS used.'
+            casServerUrl:
+                type: 'URI!'
+                description: 'URL of the CAS server.'
+            casCertificate:
+                type: 'String!'
+                description: 'Content of the certificate file.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\CasCertificateContentResolver", [value])'

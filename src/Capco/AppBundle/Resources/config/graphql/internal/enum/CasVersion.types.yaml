@@ -1,0 +1,11 @@
+CasVersion:
+    type: enum
+    config:
+        description: 'Allowed versions of cas.'
+        values:
+            'v1':
+                value: 1
+            'v2':
+                value: 2
+            'v3':
+                value: 3

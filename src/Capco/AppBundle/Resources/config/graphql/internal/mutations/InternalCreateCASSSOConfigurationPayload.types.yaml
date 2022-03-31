@@ -1,0 +1,8 @@
+InternalCreateCASSSOConfigurationPayload:
+    type: relay-mutation-payload
+    config:
+        name: CreateCASSSOConfigurationPayload
+        fields:
+            ssoConfiguration:
+                type: 'InternalCASSSOConfiguration'
+                description: 'The created cas configuration.'

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\SmsCredit;
+use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
@@ -217,6 +218,12 @@ class GlobalIdResolver
                 case 'FranceConnectSSOConfiguration':
                     $node = $this->container
                         ->get(FranceConnectSSOConfigurationRepository::class)
+                        ->find($uuid);
+
+                    break;
+                case 'CASSSOConfiguration':
+                    $node = $this->container
+                        ->get(CASSSOConfigurationRepository::class)
                         ->find($uuid);
 
                     break;

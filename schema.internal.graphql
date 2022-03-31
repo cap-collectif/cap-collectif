@@ -1416,6 +1416,33 @@ input BorderStyleInput {
   size: Int
 }
 
+"""CAS SSO Configuration."""
+type CASSSOConfiguration implements Node & SSOConfiguration {
+  """The ID of an object."""
+  id: ID!
+
+  """The name of configured SSO."""
+  name: String!
+
+  """Does this configuration is enabled?"""
+  enabled: Boolean!
+
+  """Profile URL on the SSO side."""
+  profileUrl: URI
+
+  """Whether or not disconnect sso on logout."""
+  disconnectSsoOnLogout: Boolean!
+
+  """Version of CAS used."""
+  casVersion: CasVersion!
+
+  """URL of the CAS server."""
+  casServerUrl: URI!
+
+  """Content of the certificate file."""
+  casCertificate: String!
+}
+
 type CancelEmailChangePayload {
   """if it succeeded"""
   success: Boolean
@@ -1456,6 +1483,13 @@ type CancelUserInvitationsPayload {
   """The cancelled invitations IDs"""
   cancelledInvitationsIds: [ID!]!
   clientMutationId: String
+}
+
+"""Allowed versions of cas."""
+enum CasVersion {
+  v1
+  v2
+  v3
 }
 
 """A category image"""
@@ -3019,6 +3053,27 @@ input CreateAlphaProjectInput {
 type CreateAlphaProjectPayload {
   """The created project"""
   project: Project
+  clientMutationId: String
+}
+
+input CreateCASSSOConfigurationInput {
+  """The name of configured SSO."""
+  name: String!
+
+  """Version of CAS used."""
+  casVersion: CasVersion!
+
+  """URL of the CAS server."""
+  casServerUrl: URI!
+
+  """Content of the certificate file."""
+  casCertificate: String!
+  clientMutationId: String
+}
+
+type CreateCASSSOConfigurationPayload {
+  """The created cas configuration."""
+  ssoConfiguration: CASSSOConfiguration
   clientMutationId: String
 }
 
@@ -7323,6 +7378,8 @@ type Mutation {
   updateShieldAdminForm(input: UpdateShieldAdminFormInput!): UpdateShieldAdminFormPayload
   createOauth2SSOConfiguration(input: CreateOauth2SSOConfigurationInput!): CreateOauth2SSOConfigurationPayload
   updateOauth2SSOConfiguration(input: UpdateOauth2SSOConfigurationInput!): UpdateOauth2SSOConfigurationPayload
+  createCASSSOConfiguration(input: CreateCASSSOConfigurationInput!): CreateCASSSOConfigurationPayload
+  updateCASSSOConfiguration(input: UpdateCASSSOConfigurationInput!): UpdateCASSSOConfigurationPayload
   deleteSSOConfiguration(input: DeleteSSOConfigurationInput!): DeleteSSOConfigurationPayload
   toggleSSOConfigurationStatus(input: ToggleSSOConfigurationStatusInput!): ToggleSSOConfigurationStatusPayload
   updateFranceConnectSSOConfiguration(input: UpdateFranceConnectSSOConfigurationInput!): UpdateFranceConnectSSOConfigurationPayload
@@ -14571,6 +14628,31 @@ type UpdateAnonymousReplyPayload {
   clientMutationId: String
 }
 
+input UpdateCASSSOConfigurationInput {
+  """The name of configured SSO."""
+  name: String!
+
+  """Version of CAS used."""
+  casVersion: CasVersion!
+
+  """URL of the CAS server."""
+  casServerUrl: URI!
+
+  """Content of the certificate file."""
+  casCertificate: String!
+  clientMutationId: String
+
+  """The global id of the cas configuration to update."""
+  id: ID!
+}
+
+type UpdateCASSSOConfigurationPayload {
+  """The created cas configuration."""
+  ssoConfiguration: CASSSOConfiguration
+  errorCode: updateCASSSOConfiguratonErrorCode
+  clientMutationId: String
+}
+
 input UpdateContactFormInput {
   """ID of the contact form to update."""
   id: ID!
@@ -17416,4 +17498,10 @@ enum YesNoPairedVoteValue {
   YES
   NO
   MITIGE
+}
+
+"""Available errors for an `updateCASSSOConfiguraton` mutation."""
+enum updateCASSSOConfiguratonErrorCode {
+  """No CAS configuration matching the id."""
+  CONFIGURATION_NOT_FOUND
 }

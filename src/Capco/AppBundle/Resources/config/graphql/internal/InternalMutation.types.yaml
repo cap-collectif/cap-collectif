@@ -832,6 +832,20 @@ InternalMutation:
                     inputType: InternalUpdateOauth2SSOConfigurationInput
                     payloadType: InternalUpdateOauth2SSOConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOauth2SSOConfigurationMutation", [value])'
+            createCASSSOConfiguration:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: InternalCreateCASSSOConfigurationInput
+                    payloadType: InternalCreateCASSSOConfigurationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateCASSSOConfigurationMutation", [value])'
+            updateCASSSOConfiguration:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: InternalUpdateCASSSOConfigurationInput
+                    payloadType: InternalUpdateCASSSOConfigurationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCASSSOConfigurationMutation", [value, getUser()])'
             deleteSSOConfiguration:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

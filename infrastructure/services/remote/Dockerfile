@@ -304,6 +304,7 @@ COPY bin /var/www/bin
 COPY translations /var/www/translations
 COPY public /var/www/public
 COPY src /var/www/src
+COPY app /var/www/app
 COPY assets /var/www/assets
 COPY frontend /var/www/frontend
 COPY templates /var/www/templates
@@ -324,7 +325,7 @@ ENV SYMFONY_DEBUG false
 
 # Maybe chown before copy will be faster
 RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/__generated__ \
-    && chown -R capco:capco bin translations src public templates config fixtures admin-next \
+    && chown -R capco:capco bin translations src public templates config app fixtures admin-next \
     && mkdir -p var/cache/prod \
     && mkdir -p var/cache/prod/translations \
     && chmod -R 777 var \
@@ -391,6 +392,7 @@ ENV SYMFONY_LOGPUSH_ELASTICSEARCH_PORT=$SYMFONY_LOGPUSH_ELASTICSEARCH_PORT
 ENV SYMFONY_LOGPUSH_ELASTICSEARCH_INDEX=$SYMFONY_LOGPUSH_ELASTICSEARCH_INDEX
 ENV SYMFONY_LOGPUSH_ELASTICSEARCH_USERNAME=$SYMFONY_LOGPUSH_ELASTICSEARCH_USERNAME
 ENV SYMFONY_LOGPUSH_ELASTICSEARCH_PASSWORD=$SYMFONY_LOGPUSH_ELASTICSEARCH_PASSWORD
+ENV SYMFONY_CAS_CERTIFICATE_DIRECTORY=$SYMFONY_CAS_CERTIFICATE_DIRECTORY
 
 # Build autoloader and initialize Symfony
 RUN gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \

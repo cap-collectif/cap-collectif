@@ -1,0 +1,11 @@
+InternalUpdateCASSSOConfigurationInput:
+    type: relay-mutation-input
+    inherits:
+        - InternalCreateCASSSOConfigurationInput
+    config:
+        name: UpdateCASSSOConfigurationInput
+        description: 'Update a CAS configuration.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The global id of the cas configuration to update.'

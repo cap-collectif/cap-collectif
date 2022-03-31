@@ -89,6 +89,7 @@ parameters:
     panther_url: '%env(SYMFONY_PANTHER_URL)%'
     panther_token: '%env(SYMFONY_PANTHER_TOKEN)%'
     cas_verify_url_profile: '%env(SYMFONY_CAS_VERIFY_URL_PROFILE)%'
+    cas_certificate_directory: '%env(SYMFONY_CAS_CERTIFICATE_DIRECTORY)%'
     default_oauth_client_id: '%env(SYMFONY_DEFAULT_OAUTH_CLIENT_ID)%'
     default_oauth_client_secret: '%env(SYMFONY_DEFAULT_OAUTH_CLIENT_SECRET)%'
     default_oauth_authorization_url: '%env(SYMFONY_DEFAULT_OAUTH_AUTHORIZATION_URL)%'

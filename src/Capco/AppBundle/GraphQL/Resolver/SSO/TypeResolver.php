@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\SSO;
 
 use Capco\AppBundle\Entity\SSO\AbstractSSOConfiguration;
+use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\FacebookSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
@@ -32,6 +33,10 @@ class TypeResolver implements ResolverInterface
 
         if ($data instanceof FacebookSSOConfiguration) {
             return $this->typeResolver->resolve('InternalFacebookSSOConfiguration');
+        }
+
+        if ($data instanceof CASSSOConfiguration) {
+            return $this->typeResolver->resolve('InternalCASSSOConfiguration');
         }
 
         throw new UserError('Could not resolve type of SSO Configuration.');

@@ -1,0 +1,10 @@
+InternalUpdateCASSSOConfigurationPayload:
+    type: relay-mutation-payload
+    config:
+        name: UpdateCASSSOConfigurationPayload
+        fields:
+            ssoConfiguration:
+                type: 'InternalCASSSOConfiguration'
+                description: 'The created cas configuration.'
+            errorCode:
+                type: 'updateCASSSOConfiguratonErrorCode'
