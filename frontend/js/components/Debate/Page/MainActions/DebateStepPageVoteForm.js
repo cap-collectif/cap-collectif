@@ -634,6 +634,7 @@ const mapStateToProps = (state: GlobalState) => ({
 const form = reduxForm({
   form: formName,
   onSubmit,
+  destroyOnUnmount: false,
 })(DebateStepPageVoteForm);
 
 const container = (connect<AfterConnectProps, BeforeConnectProps, _, _, _, _>(mapStateToProps)(

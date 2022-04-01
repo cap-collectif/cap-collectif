@@ -395,7 +395,6 @@ export const ModalPublishArgumentAnonymous = ({
     <>
       <Modal
         hideOnClickOutside={false}
-        preventBodyScroll={false}
         ariaLabel={intl.formatMessage({ id: 'global.menu' })}
         size={CapUIModalSize.Xl}
         disclosure={
