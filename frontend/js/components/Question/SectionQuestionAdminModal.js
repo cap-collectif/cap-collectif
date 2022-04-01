@@ -87,6 +87,7 @@ const SectionQuestionAdminModal = ({
   return (
     <Modal
       show={show}
+      backdrop="static"
       aria-labelledby="proposal-form-admin-question-modal-title-lg"
       enforceFocus={false}>
       <ModalContainer>

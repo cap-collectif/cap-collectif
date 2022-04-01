@@ -100,6 +100,7 @@ export const ProjectAdminStepFormModal = ({
       animation={false}
       show={show}
       onHide={onClose}
+      backdrop="static"
       dialogClassName="custom-modal-dialog"
       bsSize="large"
       aria-labelledby="contained-modal-title-lg"
