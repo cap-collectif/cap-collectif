@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Row } from 'react-bootstrap';
-import moment from 'moment';
 import { QueryRenderer, graphql } from 'react-relay';
 import { useIntl } from 'react-intl';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
@@ -92,7 +91,9 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
               {
                 id: 'step.start.future',
               },
-              { date: moment(step.timeRange?.startAt).format('MM/DD/YYYY') },
+              {
+                date: intl.formatDate(step.timeRange?.startAt),
+              },
             )}
           </p>
         </div>
