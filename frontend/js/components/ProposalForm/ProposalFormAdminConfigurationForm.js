@@ -67,10 +67,6 @@ export const validate = (values: Object) => {
     return {};
   }
 
-  if (!values.description || values.description.length <= 2) {
-    errors.description = 'admin.fields.proposal_form.errors.introduction';
-  }
-
   if (values.usingCategories && values.categories.length === 0) {
     errors.categories = 'admin.fields.proposal_form.errors.categories';
   }

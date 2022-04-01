@@ -3681,7 +3681,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
 
 exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as 0 1`] = `
 Object {
-  "description": "admin.fields.proposal_form.errors.introduction",
   "questions": Array [
     Object {
       "rangeMax": "error.define-value",
@@ -3694,14 +3693,12 @@ Object {
 
 exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as min < max 1`] = `
 Object {
-  "description": "admin.fields.proposal_form.errors.introduction",
   "viewEnabled": "select.display.mode",
 }
 `;
 
 exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as min > max 1`] = `
 Object {
-  "description": "admin.fields.proposal_form.errors.introduction",
   "questions": Array [
     Object {
       "rangeMin": "error.min-higher-maximum",
@@ -3713,14 +3710,12 @@ Object {
 
 exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as min equal 0 and max equal 10000 1`] = `
 Object {
-  "description": "admin.fields.proposal_form.errors.introduction",
   "viewEnabled": "select.display.mode",
 }
 `;
 
 exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as min equal 1000 and max equal 0 1`] = `
 Object {
-  "description": "admin.fields.proposal_form.errors.introduction",
   "questions": Array [
     Object {
       "rangeMin": "error.min-higher-maximum",
@@ -3732,7 +3727,6 @@ Object {
 
 exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as null 1`] = `
 Object {
-  "description": "admin.fields.proposal_form.errors.introduction",
   "questions": Array [
     Object {
       "rangeMax": "error.define-value",
