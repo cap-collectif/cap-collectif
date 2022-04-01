@@ -293,6 +293,14 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @When I close the old browser banner
+     */
+    public function iCloseTheOldBrowserBanner()
+    {
+        $this->iClickElement('#buorgig');
+    }
+
+    /**
      * @Given I should see the shield
      */
     public function iShouldSeeTheShield()

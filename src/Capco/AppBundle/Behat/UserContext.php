@@ -267,6 +267,7 @@ class UserContext extends DefaultContext
     public function iOpenLoginModal()
     {
         $this->navigationContext->iVisitedPage('HomePage');
+        $this->iCloseTheOldBrowserBanner();
         $home = $this->navigationContext->getPage('HomePage');
         $home->openLoginModal();
     }

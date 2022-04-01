@@ -8,10 +8,12 @@ Scenario: A user wants to login and see he has successfully logged in.
 Scenario: An admin wants to login and see he has successfully logged in.
   Given I am logged in as admin
   Then I can see I am logged in as "admin"
+  And I close the old browser banner
   And I can access admin in navbar
 
 Scenario: A logged user wants to logout
   Given I am logged in as user
+  And I close the old browser banner
   When I logout
   Then I should see "global.login"
 
@@ -37,6 +39,7 @@ Scenario: User has lost password and email should be sent
 Scenario: Anonymous wants to register with user type and zipcode
   Given features "restrict_connection", "captcha" are enabled
   And I visited "home page"
+  Then I close the old browser banner
   When I press "global.login"
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |

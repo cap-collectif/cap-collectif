@@ -94,6 +94,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
   after selecting a locale
   Given feature "multilangue" is enabled
   Given I go to "/de/"
+  And I close the old browser banner
   And I should not see a cookie named "locale"
   And I select "fr-FR" in the language header
   And the locale should be "fr-FR"
@@ -104,6 +105,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
   not after dismissing it
   Given feature "multilangue" is enabled
   Given I go to "/de/"
+  And I close the old browser banner
   And I should not see a cookie named "locale"
   And I wait "#changeLanguageProposalContainer" to appear on current page
   And I click the "#language-header-close" element
@@ -118,6 +120,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
   And I should not see "error.404.title"
   And I should not see a cookie named "locale"
   And I wait "#changeLanguageProposalContainer" to appear on current page
+  And I close the old browser banner
   And I click the "#language-header-close" element
   And I reload the page
   Then I should see a cookie named "locale"
