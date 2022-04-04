@@ -166,6 +166,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
     return (
       <Modal
         show={show}
+        backdrop="static"
         onHide={() => {
           const isEmpty = this.resetQuestion();
           onClose(isEmpty);

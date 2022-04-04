@@ -58,6 +58,7 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
       <Modal
         show={show}
         onHide={onClose}
+        backdrop="static"
         aria-labelledby="proposal-form-admin-question-modal-title-lg"
         id="proposal-form-admin-question-modal"
         enforceFocus={false}>
