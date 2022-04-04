@@ -12,7 +12,7 @@
         'url':         url('capco_user_profile_show_comments', {'slug': user.slug}),
         'type':        'profile',
         'image':       userMedia,
-        'noindex':      user.isProfilePageNotIndexed() or is_feature_enabled(constant('Capco\\AppBundle\\Toggle\\Manager::noindex_on_profiles'))
+        'noindex':     not user.isProfilePageIndexed() or is_feature_enabled(constant('Capco\\AppBundle\\Toggle\\Manager::noindex_on_profiles'))
     } only %}
 {% endblock %}
 
