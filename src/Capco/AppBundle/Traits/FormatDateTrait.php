@@ -26,7 +26,7 @@ trait FormatDateTrait
         return $dateFormatter->format($dateTime->getTimestamp());
     }
 
-    public static function clearTimeZone($timezone)
+    public static function clearTimeZone(string $timezone) : string
     {
         return explode(' ', $timezone)[0];
     }
