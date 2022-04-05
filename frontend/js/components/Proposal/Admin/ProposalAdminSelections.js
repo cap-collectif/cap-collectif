@@ -42,6 +42,7 @@ type PassedProps = {
 };
 
 type Props = PassedProps & {
+  proposal: ProposalAdminSelections_proposal,
   initialValues: FormValues,
   intl: IntlShape,
   selectionValues: Array<{ step: string, selected: boolean, status: ?string }>,
@@ -107,7 +108,11 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         }),
       );
     }
-    if (selection.selected && previousSelection && previousSelection.status !== selection.status) {
+    if (
+      selection.selected &&
+      previousSelection &&
+      previousSelection.status?.id !== selection.status
+    ) {
       promises.push(
         ChangeSelectionStatusMutation.commit({
           input: {
