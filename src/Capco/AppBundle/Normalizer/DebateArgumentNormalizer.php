@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\AppBundle\Search\VoteSearch;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -38,6 +38,6 @@ class DebateArgumentNormalizer implements NormalizerInterface, SerializerAwareIn
 
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof DebateArgument;
+        return $data instanceof DebateArgumentInterface;
     }
 }

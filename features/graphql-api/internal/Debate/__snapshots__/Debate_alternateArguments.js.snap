@@ -171,10 +171,29 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTkRBd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRERWlPMzA9IjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk56QXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRFlpTzMwPSI7fQ==",
+          "cursor": "YToyOntzOjM6ImZvciI7czo4ODoiWVRveU9udHBPakE3YVRveE5qRTVPREl3TURBd01EQXdPMms2TVR0ek9qSTNPaUpFWldKaGRHVkJibTl1ZVcxdmRYTkJjbWQxYldWdWRFWnZjakVpTzMwPSI7czo3OiJhZ2FpbnN0IjtzOjcyOiJZVG95T250cE9qQTdhVG94TmpBek5ETTJOekF3TURBd08yazZNVHR6T2pFMU9pSmtaV0poZEdWQmNtZDFiV1Z1ZERZaU8zMD0iO30=",
           "node": Object {
             "against": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
+              "type": "AGAINST",
+              "votes": Object {
+                "totalCount": 0,
+              },
+            },
+            "for": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
+              "type": "FOR",
+              "votes": Object {
+                "totalCount": 1,
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTkRBd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRERWlPMzA9IjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk56WXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRGNpTzMwPSI7fQ==",
+          "node": Object {
+            "against": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
               "type": "AGAINST",
               "votes": Object {
                 "totalCount": 0,
@@ -190,15 +209,9 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTlRJd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRETWlPMzA9IjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk56WXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRGNpTzMwPSI7fQ==",
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTlRJd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRETWlPMzA9IjtzOjc6ImFnYWluc3QiO047fQ==",
           "node": Object {
-            "against": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
-              "type": "AGAINST",
-              "votes": Object {
-                "totalCount": 0,
-              },
-            },
+            "against": null,
             "for": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
               "type": "FOR",
@@ -217,19 +230,6 @@ Object {
               "type": "FOR",
               "votes": Object {
                 "totalCount": 0,
-              },
-            },
-          },
-        },
-        Object {
-          "cursor": "YToyOntzOjM6ImZvciI7czo4ODoiWVRveU9udHBPakE3YVRveE5qRTVPREl3TURBd01EQXdPMms2TVR0ek9qSTNPaUpFWldKaGRHVkJibTl1ZVcxdmRYTkJjbWQxYldWdWRFWnZjakVpTzMwPSI7czo3OiJhZ2FpbnN0IjtOO30=",
-          "node": Object {
-            "against": null,
-            "for": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
-              "type": "FOR",
-              "votes": Object {
-                "totalCount": 1,
               },
             },
           },

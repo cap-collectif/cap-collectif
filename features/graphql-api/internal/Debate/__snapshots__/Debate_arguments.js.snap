@@ -575,6 +575,38 @@ Object {
           },
         },
         Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtzOjI3OiJEZWJhdGVBbm9ueW1vdXNBcmd1bWVudEZvcjEiO30=",
+          "node": Object {
+            "body": "Freedom for da ganja man",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
+            "published": true,
+            "publishedAt": "2021-05-01 01:00:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "username": "rasta94",
+            "viewerHasVote": false,
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "id": "VXNlcjp1c2VyMQ==",
+                    },
+                    "createdAt": "2021-05-02 00:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyODAx",
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
           "cursor": "YToyOntpOjA7aToxO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDEiO30=",
           "node": Object {
             "author": Object {
@@ -728,41 +760,9 @@ Object {
             },
           },
         },
-        Object {
-          "cursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czoyNzoiRGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3IxIjt9",
-          "node": Object {
-            "body": "Freedom for da ganja man",
-            "debate": Object {
-              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
-            },
-            "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
-            "published": true,
-            "publishedAt": "2021-05-01 01:00:00",
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "FOR",
-            "username": "rasta94",
-            "viewerHasVote": false,
-            "votes": Object {
-              "edges": Array [
-                Object {
-                  "node": Object {
-                    "author": Object {
-                      "id": "VXNlcjp1c2VyMQ==",
-                    },
-                    "createdAt": "2021-05-02 00:00:00",
-                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyODAx",
-                  },
-                },
-              ],
-            },
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czoyNzoiRGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3IxIjt9",
+        "endCursor": "YToyOntpOjA7aTowO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDciO30=",
         "hasNextPage": false,
       },
       "totalCount": 8,
