@@ -19,7 +19,7 @@ InternalContactForm:
                 resolve: '@=value.getTitle(args["locale"])'
             body:
                 description: 'The body of the contact Form'
-                type: 'HTML!'
+                type: 'HTML'
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getBody(args["locale"])'
             bodyUsingJoditWysiwyg:

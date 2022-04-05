@@ -10,6 +10,6 @@ InternalContactFormTranslationInput:
             title:
                 type: 'String!'
             body:
-                type: 'String!'
+                type: 'String'
             confidentiality:
                 type: 'String'

@@ -2811,7 +2811,7 @@ type ContactForm implements Node {
   body(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
-  ): HTML!
+  ): HTML
 
   """Is the body using Jodit Wysiwyg."""
   bodyUsingJoditWysiwyg: Boolean!
@@ -2838,7 +2838,7 @@ type ContactFormTranslation {
   title: String!
 
   """The translated body of the contact Form"""
-  body: String!
+  body: String
 
   """The translated confidentiality text for the contact Form"""
   confidentiality: String
@@ -2848,7 +2848,7 @@ input ContactFormTranslationInput {
   id: ID
   locale: String!
   title: String!
-  body: String!
+  body: String
   confidentiality: String
   clientMutationId: String
 }

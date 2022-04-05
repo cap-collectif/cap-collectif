@@ -52,7 +52,7 @@ class ContactType extends AbstractType
             ->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']])
             ->add('body', TextType::class, [
                 'label' => 'contact.form.message',
-                'required' => true,
+                'required' => false,
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
                 'constraints' => [new NotBlank(['message' => 'contact.no_message'])],

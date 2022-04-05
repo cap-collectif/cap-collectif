@@ -23,10 +23,15 @@ use Capco\AppBundle\Traits\TranslationTrait;
  */
 class ContactFormTranslation implements Translation
 {
-    use UuidTrait;
-    use TextableTrait;
     use SluggableTitleTrait;
+    use TextableTrait;
     use TranslationTrait;
+    use UuidTrait;
+
+    /**
+     * @ORM\Column(name="body", type="text", nullable=true)
+     */
+    private $body;
 
     /**
      * @ORM\Column(name="confidentiality", type="text", nullable=true)

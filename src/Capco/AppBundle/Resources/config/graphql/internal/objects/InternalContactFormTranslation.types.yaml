@@ -11,7 +11,7 @@ InternalContactFormTranslation:
                 type: 'String!'
             body:
                 description: 'The translated body of the contact Form'
-                type: 'String!'
+                type: 'String'
             confidentiality:
                 description: 'The translated confidentiality text for the contact Form'
                 type: 'String'
