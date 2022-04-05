@@ -99,10 +99,10 @@ if [ "$database" == "$SYMFONY_DATABASE_NAME" ]; then
 else
     echo "[$(date -u)][PHP-FPM] Database ${SYMFONY_DATABASE_NAME} does not exist yet."
     echo "[$(date -u)][PHP-FPM] Cleaning ElasticSearch index..."
-    while ! curl http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:9200 > /dev/null 2>&1;
+    while ! curl http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:${SYMFONY_ELASTICSEARCH_PORT:-9200} > /dev/null 2>&1;
       do sleep $timeout
     done
-    curl -XDELETE http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:9200/_all > /dev/null 2>&1
+    curl -XDELETE http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:${SYMFONY_ELASTICSEARCH_PORT:-9200}/${SYMFONY_ELASTICSEARCH_INDEX:-capco} > /dev/null 2>&1
     echo "[$(date -u)][PHP-FPM] Creating a new database with production data..."
     gosu capco php bin/console doctrine:database:create --env=prod --no-interaction --quiet
     gosu capco php bin/console doctrine:migrations:sync-metadata-storage --env=prod --no-interaction --quiet
