@@ -40,6 +40,9 @@ EmailingCampaign:
             mailingInternal:
                 type: 'EmailingCampaignInternalList'
                 description: 'an internal list used instead of a mailing list'
+            project:
+                type: 'InternalProject'
+                description: 'the project whose participants shall receive the email'
             sendAt:
                 type: 'DateTime'
                 description: 'the date when the email has been sent or shall be'

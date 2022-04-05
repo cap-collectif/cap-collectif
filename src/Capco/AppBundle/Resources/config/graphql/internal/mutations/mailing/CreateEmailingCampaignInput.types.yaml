@@ -9,3 +9,6 @@ CreateEmailingCampaignInput:
             emailingGroup:
                 type: 'ID'
                 description: 'Optional. The users group to build the campaign.'
+            project:
+                type: 'ID'
+                description: 'Optional. The project to build the campaign.'

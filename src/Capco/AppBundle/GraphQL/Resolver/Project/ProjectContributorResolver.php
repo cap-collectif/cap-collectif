@@ -57,12 +57,16 @@ class ProjectContributorResolver implements ResolverInterface
                 $providedFilters['vip'],
                 $providedFilters['userType'],
                 $providedFilters['term'],
+                $providedFilters['emailConfirmed'],
+                $providedFilters['consentInternalCommunication'],
                 $orderBy,
             ) = [
                 GlobalId::fromGlobalId($args->offsetGet('step'))['id'],
                 $args->offsetGet('vip'),
                 $args->offsetGet('userType'),
                 $args->offsetGet('term'),
+                $args->offsetGet('emailConfirmed'),
+                $args->offsetGet('consentInternalCommunication'),
                 $args->offsetGet('orderBy') ?: [],
             ];
 

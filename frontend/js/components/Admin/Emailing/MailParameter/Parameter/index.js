@@ -21,6 +21,7 @@ import type { GlobalState } from '~/types';
 import select, { type Options } from '~/components/Form/Select';
 import { ModalGroupMembers } from '~/components/Admin/Emailing/ModalMembers/ModalGroupMembers';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import ModalProjectContributors from '~/components/Admin/Emailing/ModalMembers/ModalProjectContributors';
 
 export const DEFAULT_MAILING_LIST = ['REGISTERED', 'CONFIRMED', 'NOT_CONFIRMED'];
 
@@ -45,7 +46,7 @@ export const getWordingMailingInternal = (mailingInternal: string, intl: IntlSha
 };
 
 export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: Props) => {
-  const { mailingListFragment, mailingInternal, emailingGroup } = emailingCampaign;
+  const { mailingListFragment, mailingInternal, emailingGroup, project } = emailingCampaign;
   const {
     viewer,
     users,
@@ -56,6 +57,7 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
     usersNotConfirmedRefusing,
     senderEmails,
     groups,
+    projects,
   } = query;
   const { mailingLists } = viewer;
   const { user } = useSelector((state: GlobalState) => state.user);
@@ -63,7 +65,7 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
   const isAdmin = user ? user.isAdmin : false;
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
-  const hasMailingList = !!mailingListFragment || !!mailingInternal || !!emailingGroup;
+  const hasMailingList = !!mailingListFragment || !!mailingInternal || !!emailingGroup || !!project;
   const [countUsers, setCountUsers] = React.useState<number>(0);
   const [countUsersRefusing, setCountUsersRefusing] = React.useState<number>(0);
   const [mailingListValue, setMailingListValue] = React.useState<?Options>(null);
@@ -97,6 +99,10 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
       setCountUsers(emailingGroup.groupListUsers.totalCount);
       setCountUsersRefusing(emailingGroup.groupListUsersNotConsenting.totalCount);
     }
+    if (project?.id) {
+      setCountUsers(project.contributors.totalCount);
+      setCountUsersRefusing(0);
+    }
   }, [
     mailingInternal,
     mailingListFragment,
@@ -107,6 +113,7 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
     usersConfirmedRefusing.totalCount,
     usersNotConfirmedRefusing.totalCount,
     emailingGroup,
+    project,
     mailingListValue,
     emailingGroupEnabled,
   ]);
@@ -138,6 +145,21 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
 
     return [];
   };
+  const getProjectList = () => {
+    if (projects && projects.edges && projects.totalCount > 0) {
+      return projects.edges
+        ?.filter(Boolean)
+        .map(edge => edge.node)
+        .filter(Boolean)
+        .map(node => ({
+          value: node.id,
+          label: node.title,
+          ariaLabel: node.title,
+        }));
+    }
+
+    return [];
+  };
   const adminValues = () =>
     isAdmin
       ? [
@@ -160,30 +182,52 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
       : [];
 
   const mailingListValues = () => {
-    let mailList = getMailingList();
-    let groupList = emailingGroupEnabled ? getUserGroupList() : [];
-    mailList = adminValues().concat(mailList);
+    const mailList = getMailingList().concat(adminValues());
+    const groupList = emailingGroupEnabled ? getUserGroupList() : [];
+    const groupListOptions =
+      groupList.length > 0
+        ? [
+            {
+              label: `${intl.formatMessage({ id: 'admin.label.group' })}:`,
+              options: groupList,
+            },
+          ]
+        : [];
+    const projectList = getProjectList();
+    const projectListOptions =
+      projectList.length > 0
+        ? [
+            {
+              label: `${intl.formatMessage({ id: 'project-participants' })}:`,
+              options: projectList,
+            },
+          ]
+        : [];
+    const displaySeveralOptions = groupList.length > 0 || projectList.length > 0;
+    const mailListOptions = displaySeveralOptions
+      ? [
+          {
+            label: `${intl.formatMessage({ id: 'admin-menu-emailing-list' })}:`,
+            options: mailList,
+          },
+        ]
+      : mailList;
 
-    if (mailList.length > 0 && groupList && groupList?.length > 0 && emailingGroupEnabled) {
-      mailList = [
-        {
-          label: `${intl.formatMessage({ id: 'admin-menu-emailing-list' })}:`,
-          options: mailList,
-        },
-      ];
-      groupList = [
-        {
-          label: `${intl.formatMessage({ id: 'admin.label.group' })}:`,
-          options: groupList,
-        },
-      ];
-    }
-    if (groupList.length > 0 && emailingGroupEnabled) {
-      return [...mailList, ...groupList];
+    if (displaySeveralOptions) {
+      return [...mailListOptions, ...projectListOptions, ...groupListOptions];
     }
 
     return mailList;
   };
+
+  const mailingListPlaceHolder =
+    emailingGroupEnabled && groups.totalCount > 0 && projects.totalCount > 0
+      ? 'select-list-project-or-group'
+      : emailingGroupEnabled && groups.totalCount > 0
+      ? 'select-list-or-group'
+      : projects.totalCount > 0
+      ? 'select-list-or-project'
+      : 'select-mailing-list';
 
   const displayConsultMembersButton = countUsers > 0 && countUsers > countUsersRefusing;
 
@@ -218,13 +262,8 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
         label={intl.formatMessage({ id: 'recipient' })}
         clearable
         displayError={showError}
-        grouped={groups.totalCount && mailingLists.totalCount && emailingGroupEnabled}
-        placeholder={intl.formatMessage({
-          id:
-            groups.totalCount && mailingLists.totalCount && emailingGroupEnabled
-              ? 'select-list-or-group'
-              : 'select-mailing-list',
-        })}
+        grouped={(groups.totalCount > 0 && emailingGroupEnabled) || projects.totalCount > 0}
+        placeholder={intl.formatMessage({ id: mailingListPlaceHolder })}
         options={mailingListValues()}
         onChange={e => setMailingListValue(e)}
       />
@@ -291,6 +330,14 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
           isAdmin={isAdmin}
         />
       )}
+      {project && (
+        <ModalProjectContributors
+          show={isOpen}
+          onClose={onClose}
+          projectRef={project}
+          isAdmin={isAdmin}
+        />
+      )}
     </Container>
   );
 };
@@ -324,6 +371,14 @@ export default createFragmentContainer(ParameterPage, {
         ...ModalMembers_mailingList
       }
       mailingInternal
+      project {
+        id
+        title
+        contributors(emailConfirmed: true, consentInternalCommunication: true) {
+          totalCount
+        }
+        ...ModalProjectContributors_project
+      }
     }
   `,
   query: graphql`
@@ -372,6 +427,15 @@ export default createFragmentContainer(ParameterPage, {
         address
       }
       groups {
+        totalCount
+        edges {
+          node {
+            id
+            title
+          }
+        }
+      }
+      projects {
         totalCount
         edges {
           node {

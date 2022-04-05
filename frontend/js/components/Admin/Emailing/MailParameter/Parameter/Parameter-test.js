@@ -27,6 +27,7 @@ const baseProps = {
     senderEmail: 'assistance@cap-collectif.com',
     emailingGroup: null,
     mailingInternal: null,
+    project: null,
   },
   query: {
     $refType,
@@ -91,6 +92,17 @@ const baseProps = {
           node: {
             id: '2',
             title: 'Je suis un groupe aussi',
+          },
+        },
+      ],
+    },
+    projects: {
+      totalCount: 1,
+      edges: [
+        {
+          node: {
+            id: '1',
+            title: 'Je suis un project',
           },
         },
       ],

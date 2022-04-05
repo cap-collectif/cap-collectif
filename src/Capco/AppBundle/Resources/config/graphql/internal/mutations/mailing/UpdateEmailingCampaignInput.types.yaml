@@ -21,6 +21,9 @@ UpdateEmailingCampaignInput:
             emailingGroup:
                 type: 'ID'
                 description: 'Id of the group'
+            project:
+                type: 'ID'
+                description: 'Id of the project'
             mailingInternal:
                 type: 'ID'
                 description: 'Id of the internal mailing list'

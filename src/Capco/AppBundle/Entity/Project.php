@@ -260,6 +260,11 @@ class Project implements IndexableInterface, TimeRangeable
      */
     private $owner;
 
+    /**
+     * @ORM\OneToMany(targetEntity=EmailingCampaign::class, mappedBy="project", orphanRemoval=true)
+     */
+    private Collection $emailingCampaigns;
+
     private ?\DateTime $startAt = null;
 
     private ?\DateTime $endAt = null;
@@ -275,6 +280,7 @@ class Project implements IndexableInterface, TimeRangeable
         $this->projectDistrictPositioners = new ArrayCollection();
         $this->updatedAt = new \DateTime();
         $this->publishedAt = new \DateTime();
+        $this->emailingCampaigns = new ArrayCollection();
     }
 
     public function __clone()
@@ -1394,6 +1400,18 @@ class Project implements IndexableInterface, TimeRangeable
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getEmailingCampaigns(): Collection
+    {
+        return $this->emailingCampaigns;
+    }
+
+    public function setEmailingCampaigns(Collection $emailingCampaigns): self
+    {
+        $this->emailingCampaigns = $emailingCampaigns;
 
         return $this;
     }

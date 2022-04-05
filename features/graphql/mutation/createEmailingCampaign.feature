@@ -324,6 +324,83 @@ Scenario: GraphQL admin wants to create a campaign with a wrong mailing list
   """
 
 @database
+Scenario: GraphQL project owner creates a campaign from its project
+  Given I am logged in to graphql as theo
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CreateEmailingCampaignInput!) {
+      createEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          name
+          project {
+            title
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "project": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "createEmailingCampaign": {
+        "error": null,
+        "emailingCampaign": {
+          "name": "global.campaign.new",
+          "project": {
+            "title": "Projet avec administrateur de projet"
+          }
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL project owner creates a campaign from another project and get an error
+  Given I am logged in to graphql as theo
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CreateEmailingCampaignInput!) {
+      createEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          name
+          project {
+            title
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "project": "UHJvamVjdDpwcm9qZWN0MQ=="
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "createEmailingCampaign": {
+        "error": "ID_NOT_FOUND_PROJECT",
+        "emailingCampaign": null
+      }
+    }
+  }
+  """
+
+@database
 Scenario: GraphQL admin wants to create a campaign with both group and organic list
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:

@@ -9,6 +9,7 @@ use Capco\AppBundle\Mailer\Message\EmailingCampaign\AbstractEmailingCampaignMess
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\TestEmailingCampaignMessage;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Routing\RouterInterface;
@@ -23,12 +24,13 @@ class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 
     public function __construct(
         GlobalIdResolver $resolver,
+        EntityManagerInterface $entityManager,
         MailerService $mailerService,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         Environment $twig
     ) {
-        parent::__construct($resolver);
+        parent::__construct($resolver, $entityManager);
         $this->mailerService = $mailerService;
         $this->siteParams = $siteParams;
         $this->router = $router;

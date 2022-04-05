@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\MailingList;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Form\Type\RelayNodeType;
@@ -49,6 +50,10 @@ class EmailingCampaignType extends AbstractType
             ])
             ->add('emailingGroup', RelayNodeType::class, [
                 'class' => Group::class,
+                'required' => false,
+            ])
+            ->add('project', RelayNodeType::class, [
+                'class' => Project::class,
                 'required' => false,
             ])
             ->add('object', PurifiedTextType::class, [

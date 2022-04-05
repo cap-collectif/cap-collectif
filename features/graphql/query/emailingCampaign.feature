@@ -26,6 +26,9 @@ Scenario: GraphQL client wants to get all campaigns
             mailingList {
               name
             }
+            project {
+              title
+            }
             preview
           }
         }
@@ -53,6 +56,7 @@ Scenario: GraphQL client wants to get all campaigns
               "status": "PLANNED",
               "mailingInternal": "CONFIRMED",
               "mailingList": null,
+              "project": null,
               "preview": @string@
             }
           },

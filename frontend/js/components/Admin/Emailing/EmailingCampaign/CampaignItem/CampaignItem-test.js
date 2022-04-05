@@ -18,6 +18,7 @@ const baseProps = {
     },
     mailingInternal: null,
     emailingGroup: null,
+    project: null,
   },
   selected: false,
 };

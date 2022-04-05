@@ -112,9 +112,7 @@ class UserSearch extends Search
         }
 
         if (null !== $onlyProjectAdmins) {
-            $boolQuery->addFilter(
-                new Term(['isOnlyProjectAdmin' => $onlyProjectAdmins])
-            );
+            $boolQuery->addFilter(new Term(['isOnlyProjectAdmin' => $onlyProjectAdmins]));
         }
 
         $query = new Query();
@@ -299,9 +297,17 @@ class UserSearch extends Search
         if (isset($providedFilters['vip'])) {
             $boolQuery->addFilter(new Term(['vip' => $providedFilters['vip']]));
         }
-
         if (isset($providedFilters['userType'])) {
             $boolQuery->addFilter(new Term(['userType.id' => $providedFilters['userType']]));
+        }
+        if (isset($providedFilters['emailConfirmed']) && $providedFilters['emailConfirmed']) {
+            $boolQuery->addFilter(new Term(['isEmailConfirmed' => true]));
+        }
+        if (
+            isset($providedFilters['consentInternalCommunication']) &&
+            $providedFilters['consentInternalCommunication']
+        ) {
+            $boolQuery->addFilter(new Term(['isConsentInternalCommunication' => true]));
         }
 
         $query = new Query($boolQuery);

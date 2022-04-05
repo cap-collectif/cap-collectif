@@ -23,20 +23,16 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     //when we set the sendAt date, it must be in more than 5mn to be sure the cron can pass.
     public const SEND_AT_SECURITY = 5 * 60;
 
-    private EntityManagerInterface $entityManager;
     private FormFactoryInterface $formFactory;
-    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver
+        FormFactoryInterface $formFactory
     ) {
-        parent::__construct($resolver);
+        parent::__construct($resolver, $entityManager);
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -99,31 +95,28 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         EmailingCampaign $emailingCampaign,
         User $viewer
     ): void {
+        $this->checkSingleInput($input);
         $mailingListGlobalId = $input->offsetGet('mailingList');
         $groupListGlobalId = $input->offsetGet('emailingGroup');
         $mailingInternal = $input->offsetGet('mailingInternal');
+        $projectGlobalId = $input->offsetGet('project');
 
-        if (($mailingListGlobalId && $mailingInternal) || ($groupListGlobalId && $mailingListGlobalId) || ($groupListGlobalId && $mailingInternal) && ($groupListGlobalId && $mailingInternal && $mailingListGlobalId)) {
-            throw new UserError(UpdateEmailingCampaignErrorCode::DOUBLE_LIST);
-        }
         if ($mailingListGlobalId) {
-            $mailingList = $this->globalIdResolver->resolve($mailingListGlobalId, $viewer);
-            if (!$mailingList || (!$viewer->isAdmin() && $mailingList->getOwner() !== $viewer)) {
-                throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
-            }
-            $mailingList->addEmailingCampaign($emailingCampaign);
+            $this->findMailingList($mailingListGlobalId, $viewer)->addEmailingCampaign(
+                $emailingCampaign
+            );
         }
         if ($groupListGlobalId) {
-            $group = $this->globalIdResolver->resolve($groupListGlobalId, $viewer);
-            if (!$group) {
-                throw new UserError(UpdateEmailingCampaignErrorCode::GROUP_NOT_FOUND);
-            }
+            $this->findGroup($groupListGlobalId, $viewer);
         }
         if (
             $mailingInternal &&
             (!$viewer->isAdmin() || !EmailingCampaignInternalList::isValid($mailingInternal))
         ) {
-            throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
+            throw new UserError(UpdateEmailingCampaignErrorCode::ID_NOT_FOUND_MAILING_LIST);
+        }
+        if ($projectGlobalId) {
+            $this->findProject($projectGlobalId, $viewer);
         }
     }
 }

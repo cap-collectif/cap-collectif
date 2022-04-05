@@ -270,6 +270,7 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
                   "title": "P&C",
                 },
               },
+              "project": null,
               "senderEmail": "assistance@cap-collectif.com",
             }
           }
@@ -292,6 +293,17 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
                   },
                 ],
                 "totalCount": 2,
+              },
+              "projects": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                      "title": "Je suis un project",
+                    },
+                  },
+                ],
+                "totalCount": 1,
               },
               "senderEmails": Array [
                 Object {
@@ -621,6 +633,7 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
                   "title": "P&C",
                 },
               },
+              "project": null,
               "senderEmail": "assistance@cap-collectif.com",
             }
           }
@@ -643,6 +656,17 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
                   },
                 ],
                 "totalCount": 2,
+              },
+              "projects": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                      "title": "Je suis un project",
+                    },
+                  },
+                ],
+                "totalCount": 1,
               },
               "senderEmails": Array [
                 Object {
@@ -972,6 +996,7 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
                   "title": "P&C",
                 },
               },
+              "project": null,
               "senderEmail": "assistance@cap-collectif.com",
             }
           }
@@ -994,6 +1019,17 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
                   },
                 ],
                 "totalCount": 2,
+              },
+              "projects": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                      "title": "Je suis un project",
+                    },
+                  },
+                ],
+                "totalCount": 1,
               },
               "senderEmails": Array [
                 Object {
@@ -1323,6 +1359,7 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
                   "title": "P&C",
                 },
               },
+              "project": null,
               "senderEmail": "assistance@cap-collectif.com",
             }
           }
@@ -1345,6 +1382,17 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
                   },
                 ],
                 "totalCount": 2,
+              },
+              "projects": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                      "title": "Je suis un project",
+                    },
+                  },
+                ],
+                "totalCount": 1,
               },
               "senderEmails": Array [
                 Object {

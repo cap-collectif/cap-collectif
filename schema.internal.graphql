@@ -3167,7 +3167,10 @@ enum CreateEmailingCampaignErrorCode {
   """No group match your id"""
   ID_NOT_FOUND_GROUP
 
-  """A campaign cannot have both group, internal and organic list"""
+  """No project match your id"""
+  ID_NOT_FOUND_PROJECT
+
+  """A campaign cannot have both group, project, internal and organic list"""
   DOUBLE_LIST
 }
 
@@ -3177,6 +3180,9 @@ input CreateEmailingCampaignInput {
 
   """Optional. The users group to build the campaign."""
   emailingGroup: ID
+
+  """Optional. The project to build the campaign."""
+  project: ID
   clientMutationId: String
 }
 
@@ -5384,6 +5390,9 @@ type EmailingCampaign implements Node {
 
   """an internal list used instead of a mailing list"""
   mailingInternal: EmailingCampaignInternalList
+
+  """the project whose participants shall receive the email"""
+  project: Project
 
   """the date when the email has been sent or shall be"""
   sendAt: DateTime
@@ -8678,6 +8687,14 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """The user type to filter by."""
     userType: ID
+
+    """Set true to get only confirmed users."""
+    emailConfirmed: Boolean = false
+
+    """
+    Set true to get only users consenting to receive internal communication.
+    """
+    consentInternalCommunication: Boolean = false
 
     """Search contributor by his email, username, lastname"""
     term: String
@@ -14811,6 +14828,18 @@ type UpdateDebateOpinionPayload {
 
 """Available errors on campaign edition"""
 enum UpdateEmailingCampaignErrorCode {
+  """No mailing list match your id"""
+  ID_NOT_FOUND_MAILING_LIST
+
+  """No group match your id"""
+  ID_NOT_FOUND_GROUP
+
+  """No project match your id"""
+  ID_NOT_FOUND_PROJECT
+
+  """A campaign cannot have both group, project, internal and organic list"""
+  DOUBLE_LIST
+
   """No campaign match your id"""
   ID_NOT_FOUND
 
@@ -14819,12 +14848,6 @@ enum UpdateEmailingCampaignErrorCode {
 
   """sendAt must be in the future"""
   TOO_LATE
-
-  """A campaign cannot have both group, internal and organic list"""
-  DOUBLE_LIST
-
-  """No mailing list match your id"""
-  MAILING_LIST_NOT_FOUND
 }
 
 input UpdateEmailingCampaignInput {
@@ -14845,6 +14868,9 @@ input UpdateEmailingCampaignInput {
 
   """Id of the group"""
   emailingGroup: ID
+
+  """Id of the project"""
+  project: ID
 
   """Id of the internal mailing list"""
   mailingInternal: ID

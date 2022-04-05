@@ -15,7 +15,6 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
-    private EntityManagerInterface $entityManager;
     private Publisher $publisher;
 
     public function __construct(
@@ -23,8 +22,7 @@ class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         EntityManagerInterface $entityManager,
         Publisher $publisher
     ) {
-        parent::__construct($resolver);
-        $this->entityManager = $entityManager;
+        parent::__construct($resolver, $entityManager);
         $this->publisher = $publisher;
     }
 

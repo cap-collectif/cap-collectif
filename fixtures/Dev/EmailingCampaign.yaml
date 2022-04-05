@@ -38,10 +38,10 @@ Capco\AppBundle\Entity\EmailingCampaign:
         name: 'Campagne pour le projet avec propriétaire'
         senderEmail: 'assistance@cap-collectif.com'
         senderName: 'Théo qui assiste'
-        mailingList: '@mailingListFromProjectWithOwner'
         owner: '@userTheo'
-        mailingInternal: null
+        project: '@projectWithOwner'
         status: 'DRAFT'
+        object: 'Vous vous souvenez de Théo ?'
     CampaignToAgentDeLaVilleParticipants:
         id: CampaignToAgentDeLaVilleParticipants
         name: 'On envoie un message aux utilisateurs du group Agent de la ville'

@@ -66,6 +66,12 @@ class EmailingCampaign
     private ?string $mailingInternal = null;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="emailingCampaigns")
+     * @ORM\JoinColumn(nullable=true, name="project_id")
+     */
+    private ?Project $project = null;
+
+    /**
      * @ORM\Column(type="datetime", name="send_at", nullable=true)
      */
     private ?\DateTime $sendAt = null;
@@ -157,6 +163,18 @@ class EmailingCampaign
         return $this;
     }
 
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
     public function getMailingInternal(): ?string
     {
         return $this->mailingInternal;
@@ -204,7 +222,10 @@ class EmailingCampaign
 
     public function hasReceipt(): bool
     {
-        return $this->mailingList || $this->mailingInternal || $this->emailingGroup;
+        return $this->mailingList ||
+            $this->mailingInternal ||
+            $this->emailingGroup ||
+            $this->project;
     }
 
     public function isComplete(): bool

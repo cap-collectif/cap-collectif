@@ -33,6 +33,7 @@ const REGISTER_FIELDS = [
   'senderEmail',
   'mailingList',
   'mailSubject',
+  'project',
   'mailContent',
   'sendingSchedule',
   'plannedDate',
@@ -44,6 +45,7 @@ type Values = {|
   mailingList: ?string,
   emailingGroup: ?string,
   mailSubject: ?string,
+  project: ?string,
   mailContent: ?string,
   sendingSchedule: boolean,
   plannedDate?: ?string,
@@ -79,10 +81,14 @@ const handleChangeEmailingCampaign = (values: Values, dispatch: Dispatch, props:
       senderEmail,
       senderName: emailingCampaign.senderName,
       mailingList:
-        type !== 'Group' && mailingList && !DEFAULT_MAILING_LIST.includes(mailingList)
+        type !== 'Group' &&
+        type !== 'Project' &&
+        mailingList &&
+        !DEFAULT_MAILING_LIST.includes(mailingList)
           ? mailingList
           : undefined,
       emailingGroup: type === 'Group' ? mailingList : undefined,
+      project: type === 'Project' ? mailingList : undefined,
       mailingInternal: DEFAULT_MAILING_LIST.includes(mailingList) ? mailingList : null,
       object: mailSubject,
       content: mailContent,
@@ -171,6 +177,7 @@ const validate = (
     title,
     senderEmail,
     mailingList,
+    project,
     mailSubject,
     mailContent,
     sendingSchedule,
@@ -202,7 +209,7 @@ const validate = (
     };
   }
 
-  if (!mailingList) {
+  if (!mailingList && !project) {
     const fieldName = (
       <Link to={PATHS.PARAMETER} key="mailingList">
         {intl.formatMessage({ id: 'recipient' })}
@@ -347,6 +354,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
       props.emailingCampaign.mailingInternal ||
       props.emailingCampaign.mailingList?.id ||
       props.emailingCampaign.emailingGroup?.id ||
+      props.emailingCampaign.project?.id ||
       null,
   },
   registeredFieldsName: state.form[formName]?.registeredFields
@@ -368,6 +376,9 @@ export default createFragmentContainer(MailParameterPageConnected, {
       object
       content
       mailingList {
+        id
+      }
+      project {
         id
       }
       mailingInternal

@@ -22,16 +22,11 @@ Object {
         },
         Object {
           "node": Object {
-            "name": "Liste du projet de Théo",
-          },
-        },
-        Object {
-          "node": Object {
             "name": "Les gens qui pèsent dans le capco-game",
           },
         },
       ],
-      "totalCount": 5,
+      "totalCount": 4,
     },
   },
 }
@@ -58,13 +53,8 @@ Object {
             "name": "J'avoue je sers à rien",
           },
         },
-        Object {
-          "node": Object {
-            "name": "Liste du projet de Théo",
-          },
-        },
       ],
-      "totalCount": 2,
+      "totalCount": 1,
     },
   },
 }

@@ -35,7 +35,8 @@ const STATUS_CAMPAIGN = {
 };
 
 export const CampaignItem = ({ campaign, selected }: Props) => {
-  const { id, name, mailingList, sendAt, status, mailingInternal, emailingGroup } = campaign;
+  const { id, name, mailingList, sendAt, status, mailingInternal, emailingGroup, project } =
+    campaign;
   const intl = useIntl();
 
   return (
@@ -72,12 +73,13 @@ export const CampaignItem = ({ campaign, selected }: Props) => {
         )}
       </InfoRow>
 
-      {(mailingList || mailingInternal || emailingGroup) && (
+      {(mailingList || mailingInternal || emailingGroup || project) && (
         <Flex direction="row" align="center">
           <Icon name={ICON_NAME.USER_O} size="md" color="gray.500" />
           <span>
             {mailingList && mailingList.name}
             {emailingGroup && emailingGroup.title}
+            {project && project.title}
             {mailingInternal && getWordingMailingInternal(mailingInternal, intl)}
           </span>
         </Flex>
@@ -100,6 +102,9 @@ export default createFragmentContainer(CampaignItem, {
         title
       }
       mailingInternal
+      project {
+        title
+      }
     }
   `,
 });

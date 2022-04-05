@@ -14,12 +14,6 @@ Capco\AppBundle\Entity\MailingList:
         name: "J'avoue je sers à rien"
         users: []
         owner: '@userTheo'
-    mailingListFromProjectWithOwner:
-        id: mailingListFromProjectWithOwner
-        owner: '@userTheo'
-        name: 'Liste du projet de Théo'
-        users: ['@userJpec', '@userMaxime']
-        project: '@projectWithOwner'
     longMailingList:
         id: longMailingList
         name: 'Coucou, tu veux voir ma liste ?'

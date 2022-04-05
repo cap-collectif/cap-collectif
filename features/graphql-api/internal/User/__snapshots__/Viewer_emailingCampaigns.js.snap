@@ -52,14 +52,8 @@ exports[`Internal.viewer.emailingCampaigns project owner should get its campaign
 Object {
   "viewer": Object {
     "emailingCampaigns": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "name": "Campagne pour le projet avec propriétaire",
-          },
-        },
-      ],
-      "totalCount": 1,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }

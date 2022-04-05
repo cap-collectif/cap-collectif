@@ -313,7 +313,7 @@ Scenario: GraphQL admin updates a campaign with wrong non existing list
   {
     "data": {
       "updateEmailingCampaign": {
-        "error": "MAILING_LIST_NOT_FOUND",
+        "error": "ID_NOT_FOUND_MAILING_LIST",
         "emailingCampaign": null
       }
     }
@@ -355,7 +355,7 @@ Scenario: GraphQL admin updates a campaign with wrong non existing internal list
   {
     "data": {
       "updateEmailingCampaign": {
-        "error": "MAILING_LIST_NOT_FOUND",
+        "error": "ID_NOT_FOUND_MAILING_LIST",
         "emailingCampaign": null
       }
     }
@@ -466,7 +466,7 @@ Scenario: GraphQL project owner tries to update its campaign with another ones m
   {
     "data": {
       "updateEmailingCampaign": {
-        "error": "MAILING_LIST_NOT_FOUND",
+        "error": "ID_NOT_FOUND_MAILING_LIST",
         "emailingCampaign": null
       }
     }
@@ -502,7 +502,7 @@ Scenario: GraphQL project owner tries to update its campaign with internal maili
   {
     "data": {
       "updateEmailingCampaign": {
-        "error": "MAILING_LIST_NOT_FOUND",
+        "error": "ID_NOT_FOUND_MAILING_LIST",
         "emailingCampaign": null
       }
     }

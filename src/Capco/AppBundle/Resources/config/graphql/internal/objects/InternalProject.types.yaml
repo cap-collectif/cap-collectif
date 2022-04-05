@@ -28,6 +28,14 @@ InternalProject:
                     userType:
                         type: 'ID'
                         description: 'The user type to filter by.'
+                    emailConfirmed:
+                        type: 'Boolean'
+                        defaultValue: false
+                        description: 'Set true to get only confirmed users.'
+                    consentInternalCommunication:
+                        type: 'Boolean'
+                        defaultValue: false
+                        description: 'Set true to get only users consenting to receive internal communication.'
                     orderBy:
                         type: 'UserOrder'
                         defaultValue: { field: CREATED_AT, direction: DESC }

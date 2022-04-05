@@ -6,7 +6,14 @@ class CreateEmailingCampaignErrorCode implements EnumType
 {
     public const ID_NOT_FOUND_MAILING_LIST = 'ID_NOT_FOUND_MAILING_LIST';
     public const ID_NOT_FOUND_GROUP = 'ID_NOT_FOUND_GROUP';
-    public const ALL = [self::ID_NOT_FOUND_MAILING_LIST, self::ID_NOT_FOUND_GROUP];
+    public const ID_NOT_FOUND_PROJECT = 'ID_NOT_FOUND_PROJECT';
+    public const DOUBLE_LIST = 'DOUBLE_LIST';
+    public const ALL = [
+        self::ID_NOT_FOUND_MAILING_LIST,
+        self::ID_NOT_FOUND_GROUP,
+        self::ID_NOT_FOUND_PROJECT,
+        self::DOUBLE_LIST,
+    ];
 
     public static function isValid($value): bool
     {

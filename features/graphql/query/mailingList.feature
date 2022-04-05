@@ -26,7 +26,7 @@ Scenario: GraphQL client wants to get all mailing lists
   {
     "data":{
       "mailingLists":{
-        "totalCount":5,
+        "totalCount":4,
         "edges":[
           {
             "node":{
@@ -46,14 +46,6 @@ Scenario: GraphQL client wants to get all mailing lists
             "node":{
               "name":"liste Solidarité COVID-19",
               "owner": null
-            }
-          },
-          {
-            "node":{
-              "name":"Liste du projet de Théo",
-              "owner": {
-                "username": "Théo QP"
-              }
             }
           },
           {

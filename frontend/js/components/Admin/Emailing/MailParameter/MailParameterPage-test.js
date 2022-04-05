@@ -22,6 +22,7 @@ const baseProps = {
     },
     emailingGroup: null,
     mailingInternal: null,
+    project: null,
     sendAt: '2030-03-11 00:00:00',
     status: 'DRAFT',
   },
