@@ -13,7 +13,7 @@ const mutation = graphql`
       project {
         _id
         id
-        adminUrl
+        adminAlphaUrl
         steps {
           id
           body

@@ -120,7 +120,7 @@ class ProjectNormalizer implements
 
         if (\in_array('ProjectAdmin', $groups, true)) {
             $links['admin'] = $this->router->generate(
-                'admin_capco_app_project_edit',
+                'capco_admin_alpha_project_edit',
                 ['id' => $object->getId()],
                 UrlGeneratorInterface::ABSOLUTE_URL
             );

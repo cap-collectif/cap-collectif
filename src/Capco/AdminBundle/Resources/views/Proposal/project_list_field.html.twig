@@ -3,7 +3,7 @@
 {% block field %}
     {% spaceless %}
         {% if value %}
-            <a href="{{ path('admin_capco_app_project_edit', {id: value.id}) }}">{{ value }}</a>
+            <a href="{{ path('capco_admin_alpha_project_edit', {id: value.id}) }}">{{ value }}</a>
         {% endif %}
     {% endspaceless %}
 {% endblock %}

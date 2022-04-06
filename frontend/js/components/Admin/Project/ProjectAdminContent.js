@@ -25,7 +25,6 @@ import ProjectAdminParticipantTab, {
   queryParticipant,
 } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipantTab';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-import { BoxDeprecated, BoxContainer } from './Form/ProjectAdminForm.style';
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
 import { ProjectAdminParticipantsProvider } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context';
 import ProjectAdminContributionsPage, {
@@ -175,7 +174,6 @@ const formatNavbarLinks = (
         viewerIsAdmin={viewerIsAdmin}
         query={query}
         hasIdentificationCodeLists={hasIdentificationCodeLists}
-
       />
     ),
   });
@@ -264,7 +262,7 @@ export const ProjectAdminContent = ({
         dataPrefetchPage,
         location.pathname,
         viewerIsAdmin,
-        hasIdentificationCodeLists
+        hasIdentificationCodeLists,
       ),
     [
       project,
@@ -275,7 +273,7 @@ export const ProjectAdminContent = ({
       dataPrefetchPage,
       location.pathname,
       viewerIsAdmin,
-      hasIdentificationCodeLists
+      hasIdentificationCodeLists,
     ],
   );
 
@@ -306,16 +304,6 @@ export const ProjectAdminContent = ({
       </Header>
 
       <Content>
-        {viewerIsAdmin && (
-          <BoxContainer className="box container-fluid" color="#ffc206">
-            <BoxDeprecated>
-              <FormattedMessage id="message.page.previous.version" />
-              <a href={project.adminUrl}>
-                <FormattedMessage id="global.consult" /> <i className="cap cap-arrow-66" />
-              </a>
-            </BoxDeprecated>
-          </BoxContainer>
-        )}
         <Switch>
           {links.map(link => (
             <Route key={link.url} path={link.url}>
@@ -367,7 +355,7 @@ export default createFragmentContainer(
         title
         url
         hasAnalysis
-        adminUrl
+        adminAlphaUrl
         proposals {
           totalCount
         }

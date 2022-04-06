@@ -8731,7 +8731,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   authors: [User!]!
 
   """The admin URL to this resource."""
-  adminUrl: URI!
+  adminUrl: URI
 
   """A list of proposals associated to the object."""
   proposals(

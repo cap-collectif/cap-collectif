@@ -1,9 +1,0 @@
-{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
-
-{% block field %}
-    <div>
-        {%  if object.Cover is not null %}
-            {% thumbnail object.Cover, 'small' with {'title': object.Cover.name, 'alt': object.Cover.name} %}
-        {% endif %}
-    </div>
-{% endblock %}

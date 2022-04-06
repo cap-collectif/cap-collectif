@@ -398,32 +398,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\StepAdmin:
-        arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Steps\AbstractStep,
-                Capco\AdminBundle\Controller\StepController,
-            ]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.label.step }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-            - [
-                  setSubClasses,
-                  [
-                      {
-                          collect_step: Capco\AppBundle\Entity\Steps\CollectStep,
-                          presentation_step: Capco\AppBundle\Entity\Steps\PresentationStep,
-                          consultation_step: Capco\AppBundle\Entity\Steps\ConsultationStep,
-                          ranking_step: Capco\AppBundle\Entity\Steps\RankingStep,
-                          election_step: Capco\AppBundle\Entity\Steps\SelectionStep,
-                          questionnaire_step: Capco\AppBundle\Entity\Steps\QuestionnaireStep,
-                          other_step: Capco\AppBundle\Entity\Steps\OtherStep,
-                      },
-                  ],
-              ]
-
     Capco\AdminBundle\Admin\ThemeAdmin:
         arguments:
             [
@@ -760,18 +734,6 @@ services:
                   ],
               ]
 
-    Capco\AdminBundle\Admin\ProjectAbstractStepAdmin:
-        arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Steps\ProjectAbstractStep,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.label.project_abstractstep }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\QuestionnaireAbstractQuestionAdmin:
         arguments:
             [
@@ -817,18 +779,6 @@ services:
                   group: admin.group.moderation,
                   label: admin.label.answer,
               }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
-    Capco\AdminBundle\Admin\SelectionStepAdmin:
-        arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Steps\SelectionStep,
-                Capco\AdminBundle\Controller\StepController,
-            ]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.label.step }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 

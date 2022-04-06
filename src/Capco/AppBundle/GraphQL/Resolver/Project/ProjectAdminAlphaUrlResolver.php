@@ -23,7 +23,7 @@ class ProjectAdminAlphaUrlResolver implements ResolverInterface
             [
                 'id' => $project->getId(),
                 '_sonata_admin' => 'capco_admin.admin.project',
-                '_sonata_name' => 'admin_capco_app_project_edit',
+                '_sonata_name' => 'capco_admin_alpha_project_edit',
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
