@@ -67,6 +67,7 @@ class ProjectNormalizer implements
             $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
                 $object
             );
+            $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
             $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
             $data['authors'] = [];
             foreach ($object->getAuthors() as $projectAuthor) {

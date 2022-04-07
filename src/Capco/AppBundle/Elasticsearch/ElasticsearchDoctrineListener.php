@@ -15,6 +15,7 @@ use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Entity\ProposalDecisionMaker;
 use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
@@ -194,6 +195,13 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                         $this->process($opinion, false);
                     }
                 }
+            }
+        }
+
+        if ($entity instanceof UserGroup) {
+            $projects = $entity->getGroup()->getProjectsVisibleByTheGroup();
+            foreach ($projects as $project) {
+                $this->process($project, false);
             }
         }
     }
