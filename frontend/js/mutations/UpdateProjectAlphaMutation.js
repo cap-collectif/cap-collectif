@@ -101,7 +101,7 @@ const mutation = graphql`
           }
         }
         ...ProjectAccessAdminForm_project
-
+        ...ProjectAdminForm_project
         visibility
         publishedAt
         opinionCanBeFollowed

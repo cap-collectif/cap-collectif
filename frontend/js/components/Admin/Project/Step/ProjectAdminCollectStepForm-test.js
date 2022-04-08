@@ -19,6 +19,7 @@ describe('<ProjectAdminCollectStepForm />', () => {
     votesMin: 1,
     stepFormName: 'defaultForm',
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
+    endAt: '2050-01-01',
   };
 
   it('renders correctly for project admin', () => {

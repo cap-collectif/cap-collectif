@@ -252,6 +252,7 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for admin 1`] = `
       >
         <ProjectAdminCollectStepForm
           dispatch={[MockFunction]}
+          endAt="2050-01-01"
           fcAllowedData={
             Object {
               "DATE_OF_BIRTH": false,
@@ -528,6 +529,7 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for project admin 1`]
       >
         <ProjectAdminCollectStepForm
           dispatch={[MockFunction]}
+          endAt="2050-01-01"
           fcAllowedData={
             Object {
               "DATE_OF_BIRTH": false,

@@ -3,6 +3,7 @@
 exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
 <Fragment>
   <Connect(StepVotesFields)
+    endAt={null}
     isBudgetEnabled={true}
     isLimitEnabled={true}
     isSecretBallotEnabled={false}
@@ -257,6 +258,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
 exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial data 1`] = `
 <Fragment>
   <Connect(StepVotesFields)
+    endAt="2050-01-01"
     isBudgetEnabled={false}
     isLimitEnabled={false}
     isSecretBallotEnabled={true}

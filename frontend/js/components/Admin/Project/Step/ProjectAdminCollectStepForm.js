@@ -42,6 +42,7 @@ type Props = {|
   proposal?: {| label: string, value: string |},
   isPrivate: boolean,
   fcAllowedData: FranceConnectAllowedData,
+  endAt: ?string,
 |};
 
 export const StepVisibilityDropdown: StyledComponent<{}, {}, typeof Button> = styled(Button)`
@@ -119,6 +120,7 @@ export const ProjectAdminCollectStepForm = ({
   votesMin,
   votesRanking,
   fcAllowedData,
+  endAt,
 }: Props) => {
   const intl = useIntl();
   const { user } = useSelector((state: GlobalState) => state.user);
@@ -235,6 +237,7 @@ export const ProjectAdminCollectStepForm = ({
         isTresholdEnabled={isTresholdEnabled}
         isLimitEnabled={isLimitEnabled}
         isSecretBallotEnabled={isSecretBallotEnabled}
+        endAt={endAt}
       />
 
       {renderSubSection('admin.fields.step.statuses')}

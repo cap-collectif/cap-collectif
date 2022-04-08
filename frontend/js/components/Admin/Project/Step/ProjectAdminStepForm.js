@@ -646,6 +646,7 @@ export function ProjectAdminStepForm({
               votable={votable}
               requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
+              endAt={step.endAt}
             />
           )}
 
@@ -668,6 +669,7 @@ export function ProjectAdminStepForm({
               votable={votable}
               requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
+              endAt={step.endAt}
             />
           )}
 
@@ -905,7 +907,7 @@ const mapStateToProps = (
       isTresholdEnabled: step?.isTresholdEnabled || false,
       isSecretBallotEnabled: step?.isSecretBallotEnabled || false,
       isSecretBallot: step?.isSecretBallot || false,
-      publishedVoteDate: step?.publishedVoteDate || null,
+      publishedVoteDate: step?.publishedVoteDate || step?.endAt || null,
       private: step?.private || false,
     },
     isBudgetEnabled: formValueSelector(stepFormName)(state, 'isBudgetEnabled') || false,

@@ -32,6 +32,7 @@ type Props = {|
   votesRanking: boolean,
   stepFormName: string,
   fcAllowedData: FranceConnectAllowedData,
+  endAt: ?string,
 |};
 
 export const renderSortValues = (intl: IntlShape) => [
@@ -61,6 +62,7 @@ export const ProjectAdminSelectionStepForm = ({
   votesLimit,
   votesMin,
   fcAllowedData,
+  endAt,
 }: Props) => {
   const intl = useIntl();
   const statusesWithId = statuses?.filter(s => s.id) || [];
@@ -78,6 +80,7 @@ export const ProjectAdminSelectionStepForm = ({
         isTresholdEnabled={isTresholdEnabled}
         isLimitEnabled={isLimitEnabled}
         isSecretBallotEnabled={isSecretBallotEnabled}
+        endAt={endAt}
       />
       {renderSubSection('global.proposals')}
       <ProjectSmallFieldsContainer>

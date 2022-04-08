@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useIntl, FormattedHTMLMessage } from 'react-intl';
-import { Field, change } from 'redux-form';
+import { Field, change, formValueSelector } from 'redux-form';
 import styled, { type StyledComponent } from 'styled-components';
 import toggle from '~/components/Form/Toggle';
 import component from '~/components/Form/Field';
 import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
 import { VoteFieldContainer } from './ProjectAdminStepForm.style';
-import type { Dispatch } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 import Flex from '~ui/Primitives/Layout/Flex';
 import { styleGuideColors } from '~/utils/colors';
 import AppBox from '~ui/Primitives/AppBox';
@@ -26,6 +26,7 @@ type Props = {|
   isSecretBallotEnabled: boolean,
   isLimitEnabled: boolean,
   options: {| ranking?: boolean, min: ?number, limit: ?number |},
+  endAt: ?string,
 |};
 
 const FieldContainer: StyledComponent<{ toggled: boolean }, {}, typeof Flex> = styled(Flex)`
@@ -41,16 +42,20 @@ const FieldContainer: StyledComponent<{ toggled: boolean }, {}, typeof Flex> = s
     }
 `;
 
-export function StepVotesFields({
-  votable,
-  dispatch,
-  isBudgetEnabled,
-  isTresholdEnabled,
-  isSecretBallotEnabled,
-  isLimitEnabled,
-  stepFormName,
-  options,
-}: Props) {
+export function StepVotesFields(
+  {
+    votable,
+    dispatch,
+    isBudgetEnabled,
+    isTresholdEnabled,
+    isSecretBallotEnabled,
+    isLimitEnabled,
+    stepFormName,
+    options,
+    endAt,
+  }: Props,
+  state: GlobalState,
+) {
   const [votesMinState, setVotesMinState] = useState(options.min || 1);
   const [votesLimitState, setVotesLimitState] = useState(options.limit || 3);
   const [votesRankingState, setVotesRankingState] = useState(options.ranking || false);
@@ -253,28 +258,32 @@ export function StepVotesFields({
                   </>
                 </>
               )}
-                  <FieldContainer toggled={isSecretBallotEnabled}>
-                    <Field
-                      component={toggle}
-                      labelSide="LEFT"
-                      id="step-secretBallot"
-                      name="isSecretBallot"
-                      className="toggle-secret-ballot"
-                      normalize={val => !!val}
-                      helpText={intl.formatMessage({ id: 'secret-ballot-body' })}
-                      label={intl.formatMessage({ id: 'secret-ballot' })}
-                    />
-                  </FieldContainer>
-                  {isSecretBallotEnabled && (
-                    <Field
-                      id="step-publishedVoteDate"
-                      component={component}
-                      type="datetime"
-                      name="publishedVoteDate"
-                      label={renderLabel('published-vote-date', intl, undefined, true, '400')}
-                      addonAfter={<i className="cap-calendar-2" />}
-                    />
-                  )}
+              <FieldContainer toggled={isSecretBallotEnabled}>
+                <Field
+                  component={toggle}
+                  labelSide="LEFT"
+                  id="step-secretBallot"
+                  name="isSecretBallot"
+                  className="toggle-secret-ballot"
+                  normalize={val => !!val}
+                  helpText={intl.formatMessage({ id: 'secret-ballot-body' })}
+                  label={intl.formatMessage({ id: 'secret-ballot' })}
+                  onClick={() => {
+                    const value = endAt || formValueSelector(stepFormName)(state, 'endAt') || null;
+                    dispatch(change(stepFormName, 'publishedVoteDate', value));
+                  }}
+                />
+              </FieldContainer>
+              {isSecretBallotEnabled && (
+                <Field
+                  id="step-publishedVoteDate"
+                  component={component}
+                  type="datetime"
+                  name="publishedVoteDate"
+                  label={renderLabel('published-vote-date', intl, undefined, true, '400')}
+                  addonAfter={<i className="cap-calendar-2" />}
+                />
+              )}
             </AppBox>
             <AppBox maxWidth="50%">
               <Field
