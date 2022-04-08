@@ -83,11 +83,7 @@ class IndexBuilder
 
     public function generateIndexName(): string
     {
-        if (empty(getenv('SYMFONY_ELASTICSEARCH_INDEX'))) {
-            return sprintf('capco_%s', date('Y-m-d-H-i-s'));
-        }
-
-        return getenv('SYMFONY_ELASTICSEARCH_INDEX');
+        return sprintf('%s_%s', $this->indexName, date('Y-m-d-H-i-s'));
     }
 
     public function cleanOldIndices(int $afterLiveLimit = 2): array
