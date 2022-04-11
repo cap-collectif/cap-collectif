@@ -77,7 +77,7 @@ export const defaultFeatureFlags: FeatureFlags = {
 };
 
 const getRedisFeatureFlagKey = (flag: string) => {
-    return `feature_toggle__TOGGLE__${flag}`;
+    return `${process.env.SYMFONY_REDIS_PREFIX}feature_toggle__TOGGLE__${flag}`;
 };
 
 export const decodePHPFlag = (encodedFlag: string): boolean => {
