@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\SendEmailingCampaignErrorCode;
-use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectEmailableContributorsResolver;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\EmailingCampaignMessage;
 use Capco\AppBundle\Manager\TokenManager;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
@@ -17,7 +17,6 @@ use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use GraphQL\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -28,7 +27,7 @@ class EmailingCampaignSender
     private SiteParameterResolver $siteParams;
     private RouterInterface $router;
     private TokenManager $tokenManager;
-    private ProjectContributorResolver $projectContributorResolver;
+    private ProjectEmailableContributorsResolver $projectEmailableContributorsResolver;
 
     public function __construct(
         MailerService $mailerService,
@@ -36,14 +35,14 @@ class EmailingCampaignSender
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         TokenManager $tokenManager,
-        ProjectContributorResolver $projectContributorResolver
+        ProjectEmailableContributorsResolver $projectEmailableContributorsResolver
     ) {
         $this->mailerService = $mailerService;
         $this->userRepository = $userRepository;
         $this->siteParams = $siteParams;
         $this->router = $router;
         $this->tokenManager = $tokenManager;
-        $this->projectContributorResolver = $projectContributorResolver;
+        $this->projectEmailableContributorsResolver = $projectEmailableContributorsResolver;
     }
 
     public function send(EmailingCampaign $emailingCampaign): EmailingCampaign
@@ -147,32 +146,21 @@ class EmailingCampaignSender
 
     private function getRecipientsFromProject(Project $project): Collection
     {
-        $participantIds = [];
-        $arg = new Argument([
-            'first' => 100,
-            'after' => null,
-            'orderBy' => [
-                'field' => 'CREATED_AT',
-                'direction' => 'DESC',
-            ],
-            'emailConfirmed' => true,
-            'consentInternalCommunication' => true,
-        ]);
-        do {
-            $response = $this->projectContributorResolver->__invoke($project, $arg);
-            $arg->offsetSet('after', $response->getPageInfo()->getEndCursor());
-            foreach ($response->getEdges() as $edge) {
-                $id = $edge->getNode()->getId();
-                $participantIds[$id] = $id;
-            }
-        } while ($response->getPageInfo()->getHasNextPage());
-
+        $participantsData = $this->projectEmailableContributorsResolver->getContributors(
+            $project,
+            null,
+            null
+        );
         $participants = new ArrayCollection();
-        foreach ($participantIds as $participantId) {
-            $participant = $this->userRepository->find($participantId);
-            if ($participant) {
-                $participants->add($participant);
+        foreach ($participantsData as $participantsDatum) {
+            $email = $participantsDatum['email'];
+            $user = $this->userRepository->findOneByEmail($email);
+            if (null === $user) {
+                $user = new User();
+                $user->setEmail($email);
+                $user->setPassword($participantsDatum['token']);
             }
+            $participants->add($user);
         }
 
         return $participants;

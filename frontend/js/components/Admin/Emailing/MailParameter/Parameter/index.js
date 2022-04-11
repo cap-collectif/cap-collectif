@@ -100,8 +100,10 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
       setCountUsersRefusing(emailingGroup.groupListUsersNotConsenting.totalCount);
     }
     if (project?.id) {
-      setCountUsers(project.contributors.totalCount);
-      setCountUsersRefusing(0);
+      setCountUsers(
+        project.emailableContributors.totalCount + project.emailableContributors.refusingCount,
+      );
+      setCountUsersRefusing(project.emailableContributors.refusingCount);
     }
   }, [
     mailingInternal,
@@ -374,8 +376,9 @@ export default createFragmentContainer(ParameterPage, {
       project {
         id
         title
-        contributors(emailConfirmed: true, consentInternalCommunication: true) {
+        emailableContributors {
           totalCount
+          refusingCount
         }
         ...ModalProjectContributors_project
       }

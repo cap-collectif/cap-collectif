@@ -1,0 +1,12 @@
+InternalEmailableConnection:
+    type: relay-connection
+    config:
+        name: EmailableConnection
+        nodeType: InternalEmailable!
+        connectionFields:
+            totalCount:
+                type: Int!
+                description: Identifies the total count of items in the connection.
+            refusingCount:
+                type: Int!
+                description: Identifies the total count of refusing items in the connection. (Not fetched from connection)

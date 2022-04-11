@@ -13,6 +13,7 @@ use Capco\AppBundle\Manager\TokenManager;
 use Capco\AppBundle\Repository\ActionTokenRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateVoteTokenRepository;
+use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
@@ -204,6 +205,47 @@ class TokenController extends AbstractController
         );
 
         return $this->redirectToDebate($argument->getDebate());
+    }
+
+    /**
+     * @Route("/unsubscribeAnonymous", name="capco_app_unsubscribe_anonymous", options={"i18n" = false})
+     */
+    public function unsubscribeAnonymous(
+        EntityManagerInterface $entityManager,
+        DebateAnonymousArgumentRepository $argumentRepository,
+        ReplyAnonymousRepository $replyRepository,
+        Request $request
+    ): Response {
+        $email = $request->get('email');
+        $token = $request->get('token');
+        $argument = $argumentRepository->findOneBy(['email' => $email, 'token' => $token]);
+        if (null === $argument) {
+            $reply = $replyRepository->findOneBy(['participantEmail' => $email, 'token' => $token]);
+            if (null === $reply) {
+                $this->logger->info(
+                    __METHOD__ . ' : invalid token and email : ' . $email . ' - ' . $token . '}'
+                );
+                $this->addFlash(
+                    'danger',
+                    $this->translator->trans('invalid-token', [], 'CapcoAppBundle')
+                );
+
+                return $this->redirectToRoute('app_homepage');
+            }
+        }
+        $arguments = $argumentRepository->findBy(['email' => $email]);
+        $replies = $replyRepository->findBy(['participantEmail' => $email]);
+
+        foreach ($arguments as $argument) {
+            $argument->setConsentInternalCommunication(false);
+        }
+        foreach ($replies as $reply) {
+            $reply->setEmailConfirmed(false);
+        }
+
+        $entityManager->flush();
+
+        return $this->render('@CapcoApp/User/unsubscribe.html.twig', ['redirectUrl' => null]);
     }
 
     private function createSuccessResponse(string $successMessage, ActionToken $token): Response

@@ -1,0 +1,13 @@
+InternalEmailable:
+    type: object
+    config:
+        description: 'A user, with or without account, who can receive email.'
+        name: Emailable
+        fields:
+            username:
+                type: 'String'
+                description: "The user's public name."
+            email:
+                type: 'Email'
+                description: "The user's personal email."
+                access: "@=hasRole('ROLE_ADMIN')"

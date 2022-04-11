@@ -5359,6 +5359,41 @@ input EmailDomainInput {
   value: String!
 }
 
+"""A user, with or without account, who can receive email."""
+type Emailable {
+  """The user's public name."""
+  username: String
+
+  """The user's personal email."""
+  email: Email
+}
+
+"""A connection to a list of items."""
+type EmailableConnection {
+  """Identifies the total count of items in the connection."""
+  totalCount: Int!
+
+  """
+  Identifies the total count of refusing items in the connection. (Not fetched from connection)
+  """
+  refusingCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [EmailableEdge]
+}
+
+"""An edge in a connection."""
+type EmailableEdge {
+  """The item at the end of the edge."""
+  node: Emailable!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 """An emailing campaign"""
 type EmailingCampaign implements Node {
   """uuid of the emailing campaign"""
@@ -8833,6 +8868,17 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """When the time interval begins or ends."""
   timeRange: TimeRange!
   hasAnalysis: Boolean!
+
+  """A list of contributors associated with the project."""
+  emailableContributors(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): EmailableConnection!
 
   """Count of paper votes on the project."""
   paperVotesTotalCount(

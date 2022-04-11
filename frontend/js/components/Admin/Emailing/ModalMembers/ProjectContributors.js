@@ -21,27 +21,19 @@ export const ProjectContributorsQuery: GraphQLTaggedNode = graphql`
   )
   @refetchable(queryName: "ProjectContributorsPaginationQuery") {
     id
-    contributors(
-      first: $count
-      after: $cursor
-      emailConfirmed: $emailConfirmed
-      consentInternalCommunication: true
-    ) @connection(key: "ProjectContributors_contributors", filters: []) {
+    emailableContributors(first: $count, after: $cursor)
+      @connection(key: "ProjectContributors_emailableContributors", filters: []) {
       totalCount
+      refusingCount
       pageInfo {
         hasNextPage
       }
       edges {
         node {
-          id
           email @include(if: $isAdmin)
           username
-          consentInternalCommunication
         }
       }
-    }
-    allContributors: contributors(emailConfirmed: true) {
-      totalCount
     }
   }
 `;
@@ -60,11 +52,10 @@ export const ProjectContributors = ({ project, isAdmin }: Props) => {
   );
 
   const consentingContributors =
-    data.contributors.edges
+    data.emailableContributors.edges
       ?.filter(Boolean)
       .map(e => e.node)
       .filter(Boolean) ?? [];
-  const refusingCount = data.allContributors.totalCount - consentingContributors.length;
 
   const firstRendered = React.useRef(null);
   React.useEffect(() => {
@@ -84,12 +75,12 @@ export const ProjectContributors = ({ project, isAdmin }: Props) => {
       m={0}
       css={{ listStyle: 'none', overflow: 'auto', maxHeight: '300px' }}
       ref={ProjectContributorsRef}>
-      {refusingCount > 0 && (
+      {data.emailableContributors.refusingCount > 0 && (
         <InfoMessage variant="info" mb={6}>
           <InfoMessage.Title>
             {intl.formatMessage(
               { id: 'mailingList-refusing-members-count' },
-              { num: refusingCount },
+              { num: data.emailableContributors.refusingCount },
             )}
           </InfoMessage.Title>
           <InfoMessage.Content>
@@ -111,8 +102,10 @@ export const ProjectContributors = ({ project, isAdmin }: Props) => {
         getScrollParent={() => ProjectContributorsRef.current}
         useWindow={false}>
         {consentingContributors.map(contributor => (
-          <AppBox as="li" key={contributor.id} mb={3} color="gray.900" fontWeight="400">
-            {contributor.email ?? contributor.username}
+          <AppBox as="li" key={contributor.email} mb={3} color="gray.900" fontWeight="400">
+            {contributor.email ??
+              contributor.username ??
+              intl.formatMessage({ id: 'global.anonymous' })}
           </AppBox>
         ))}
       </InfiniteScroll>

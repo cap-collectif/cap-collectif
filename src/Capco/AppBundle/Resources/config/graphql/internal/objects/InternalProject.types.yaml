@@ -42,6 +42,11 @@ InternalProject:
                     term:
                         type: 'String'
                         description: 'Search contributor by his email, username, lastname'
+            emailableContributors:
+                type: 'InternalEmailableConnection!'
+                description: 'A list of contributors associated with the project.'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectEmailableContributorsResolver", [value, args])'
             votes:
                 type: 'InternalVoteConnection!'
                 args:
