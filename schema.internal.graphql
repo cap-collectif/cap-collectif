@@ -4701,6 +4701,12 @@ type DeleteAccountByEmailPayload {
   clientMutationId: String
 }
 
+"""Available errors for a `DeleteAccount` mutation."""
+enum DeleteAccountErrorCode {
+  """Cannot delete super admin account !"""
+  CANNOT_DELETE_SUPER_ADMIN
+}
+
 input DeleteAccountInput {
   """You must chose a strategy to delete your account"""
   type: DeleteAccountType!
@@ -4713,6 +4719,9 @@ input DeleteAccountInput {
 type DeleteAccountPayload {
   """user id"""
   userId: ID!
+
+  """possible errors for delete account."""
+  errorCode: DeleteAccountErrorCode
   clientMutationId: String
 }
 

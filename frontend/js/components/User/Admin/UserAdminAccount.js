@@ -103,6 +103,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
       submitting,
       handleSubmit,
       isViewerOrAdmin,
+      viewer,
     } = this.props;
     const { showDeleteAccountModal } = this.state;
 
@@ -169,7 +170,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
-              {isViewerOrAdmin && (
+              {((isViewerOrAdmin && !user.isSuperAdmin) || viewer.isSuperAdmin) && (
                 <Button
                   id="delete-account-profile-button"
                   bsStyle="danger"
@@ -238,6 +239,7 @@ export default createFragmentContainer(container, {
       vip
       enabled
       isAdmin
+      isSuperAdmin
       isSubscribedToNewsLetter
       isSubscribedToProposalNews
       subscribedToNewsLetterAt
@@ -247,6 +249,7 @@ export default createFragmentContainer(container, {
   viewer: graphql`
     fragment UserAdminAccount_viewer on User {
       isAdmin
+      isSuperAdmin
     }
   `,
 });

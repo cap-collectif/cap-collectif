@@ -362,6 +362,9 @@ services:
     Capco\AppBundle\Service\SmsAnalyticsHelper:
         autowire: true
 
+    Capco\AppBundle\Anonymizer\AnonymizeUser:
+        public: true
+
     Symfony\Component\String\Slugger\AsciiSlugger:
         autowire: true
 

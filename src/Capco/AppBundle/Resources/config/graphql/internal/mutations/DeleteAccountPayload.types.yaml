@@ -5,3 +5,6 @@ DeleteAccountPayload:
             userId:
                 type: 'ID!'
                 description: 'user id'
+            errorCode:
+                type: 'DeleteAccountErrorCode'
+                description: 'possible errors for delete account.'

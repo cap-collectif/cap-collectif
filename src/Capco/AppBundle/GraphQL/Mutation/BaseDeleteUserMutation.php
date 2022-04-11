@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
+use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
@@ -24,11 +25,9 @@ use Capco\AppBundle\Repository\ProposalEvaluationRepository;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
-use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Form\Type\UserMedia;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Sonata\MediaBundle\Provider\ImageProvider;
@@ -57,6 +56,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     protected HighlightedContentRepository $highlightedContentRepository;
     protected MailingListRepository $mailingListRepository;
     protected LoggerInterface $logger;
+    protected AnonymizeUser $anonymizeUser;
     private FormFactoryInterface $formFactory;
 
     public function __construct(
@@ -79,7 +79,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
         LoggerInterface $logger,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        AnonymizeUser $anonymizeUser
     ) {
         parent::__construct($em, $mediaProvider);
         $this->translator = $translator;
@@ -100,6 +101,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->mailingListRepository = $mailingListRepository;
         $this->logger = $logger;
         $this->formFactory = $formFactory;
+        $this->anonymizeUser = $anonymizeUser;
     }
 
     public function softDelete(User $user): void
@@ -206,97 +208,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     public function anonymizeUser(User $user): void
     {
-        $newsletter = $this->newsletterSubscriptionRepository->findOneBy([
-            'email' => $user->getEmail(),
-        ]);
-        $userGroups = $this->groupRepository->findBy(['user' => $user]);
-
-        if ($newsletter) {
-            $this->em->remove($newsletter);
-        }
-
-        if ($userGroups) {
-            foreach ($userGroups as $userGroup) {
-                $this->em->remove($userGroup);
-            }
-        }
-
-        $user->setEmail(null);
-        $user->setEmailCanonical(null);
-        $user->setUsername('deleted-user');
-        $user->setDeletedAccountAt(new \DateTime());
-        $user->setPlainPassword(null);
-        $user->clearLastLogin();
-
-        $user->setFacebookId(null);
-        $user->setFacebookUrl(null);
-        $user->setFacebookData(null);
-        $user->setFacebookName(null);
-        $user->setFacebookAccessToken(null);
-        $user->setCasId(null);
-
-        $user->setTwitterId(null);
-        $user->setTwitterUrl(null);
-        $user->setTwitterData(null);
-        $user->setTwitterName(null);
-        $user->setTwitterAccessToken(null);
-
-        $user->setGplusData(null);
-        $user->setGplusName(null);
-        $user->setGplusData(null);
-
-        $user->setOpenId(null);
-        $user->setOpenIdAccessToken(null);
-
-        $user->setFranceConnectId(null);
-        $user->setFranceConnectAccessToken(null);
-
-        $user->setAddress(null);
-        $user->setAddress2(null);
-        $user->setZipCode(null);
-        $user->setNeighborhood(null);
-        $user->setPhone(null);
-        $user->setCity(null);
-        $user->setBiography(null);
-        $user->setDateOfBirth(null);
-        $user->setFirstname(null);
-        $user->setLastname(null);
-        $user->setWebsite(null);
-        $user->setGender(null);
-        $user->setLocale(null);
-        $user->setTimezone(null);
-        $user->setLocked(true);
-        if ($user->getMedia()) {
-            try {
-                $this->removeObjectMedia($user);
-            } catch (\Exception $e) {
-                $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
-                $form = $this->formFactory->create(UserMedia::class, $user, [
-                    'csrf_protection' => false,
-                ]);
-                // we force to delete media, so fill an empty field
-                $form->submit(['media' => null], false);
-
-                if (!$form->isValid()) {
-                    $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
-
-                    throw new \Exception('Can\'t delete user profile image !');
-                }
-
-                $this->em->flush();
-            }
-        }
-
-        $contributions = $user->getContributions();
-        foreach ($contributions as $contribution) {
-            if ($contribution instanceof Proposal) {
-                $this->proposalAuthorDataLoader->invalidate($contribution);
-            }
-        }
-
-        $this->removeFromMailingLists($user);
-
-        $this->userManager->updateUser($user);
+        $this->anonymizeUser->anonymize($user);
     }
 
     private function deleteResponsesAndEvaluationsFromProposal(User $user, $proposal): void
@@ -372,10 +284,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     private function removeObjectMedia($object): void
     {
-        /** @var Media $media */
-        $media = $this->mediaRepository->find($object->getMedia()->getId());
-        $this->removeMedia($media);
-        $object->setMedia(null);
+        $this->anonymizeUser->removeObjectMedia($object);
     }
 
     private function deleteResponsesContent(Proposal $proposal, string $deletedBodyText): void
@@ -414,8 +323,6 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     private function removeFromMailingLists(User $user): void
     {
-        foreach ($this->mailingListRepository->getMailingListByUser($user) as $mailingList) {
-            $mailingList->getUsers()->removeElement($user);
-        }
+        $this->anonymizeUser->removeFromMailingLists($user);
     }
 }

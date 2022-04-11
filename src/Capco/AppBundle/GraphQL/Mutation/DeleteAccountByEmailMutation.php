@@ -14,6 +14,7 @@ use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\ProposalEvaluationRepository;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -54,7 +55,8 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         EventRepository $eventRepository,
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        AnonymizeUser $anonymizeUser
     ) {
         parent::__construct(
             $em,
@@ -76,7 +78,8 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $highlightedContentRepository,
             $mailingListRepository,
             $logger,
-            $formFactory
+            $formFactory,
+            $anonymizeUser
         );
         $this->userRepository = $userRepository;
     }
@@ -108,7 +111,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         $this->em->refresh($user);
 
         try {
-            $this->anonymizeUser($user);
+            $this->anonymizeUser->anonymize($user);
             $this->em->refresh($user);
             $this->softDelete($user);
             $this->em->flush();

@@ -14,6 +14,7 @@ describe('<UserAdminAccount/>', () => {
   const viewer = {
     $refType,
     isAdmin: true,
+    isSuperAdmin: false,
   };
 
   it('should render when user is admin or viewer', () => {
@@ -26,6 +27,7 @@ describe('<UserAdminAccount/>', () => {
       roles: [],
       vip: false,
       isAdmin: true,
+      isSuperAdmin: false,
       subscribedToNewsLetterAt: '2018-05-03 11:11:11',
       $fragmentRefs,
       isSubscribedToNewsLetter: true,
@@ -64,6 +66,7 @@ describe('<UserAdminAccount/>', () => {
       roles: [],
       vip: false,
       isAdmin: false,
+      isSuperAdmin: false,
       subscribedToNewsLetterAt: null,
       isSubscribedToNewsLetter: false,
       isSubscribedToProposalNews: false,
@@ -84,6 +87,82 @@ describe('<UserAdminAccount/>', () => {
           locked: false,
           newsletter: false,
           isSubscribedToProposalNews: false,
+        }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render when viewer is admin and user is not super admin', () => {
+    const userSubscribed = {
+      $refType,
+      id: 'user1',
+      enabled: true,
+      isViewer: false,
+      locked: false,
+      roles: [],
+      vip: false,
+      isAdmin: true,
+      isSuperAdmin: false,
+      subscribedToNewsLetterAt: '2018-05-03 11:11:11',
+      $fragmentRefs,
+      isSubscribedToNewsLetter: true,
+      isSubscribedToProposalNews: true,
+    };
+    const wrapper = shallow(
+      <UserAdminAccount
+        {...props1}
+        isViewerOrAdmin
+        viewer={{...viewer, isSuperAdmin: false }}
+        user={userSubscribed}
+        initialValues={{
+          roles: {
+            labels: ['ROLE_USER'],
+            other: null,
+          },
+          vip: false,
+          enabled: true,
+          locked: true,
+          newsletter: true,
+          isSubscribedToProposalNews: true,
+        }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render when viewer is super admin', () => {
+    const userSubscribed = {
+      $refType,
+      id: 'user1',
+      enabled: true,
+      isViewer: false,
+      locked: false,
+      roles: [],
+      vip: false,
+      isAdmin: true,
+      isSuperAdmin: false,
+      subscribedToNewsLetterAt: '2018-05-03 11:11:11',
+      $fragmentRefs,
+      isSubscribedToNewsLetter: true,
+      isSubscribedToProposalNews: true,
+    };
+    const wrapper = shallow(
+      <UserAdminAccount
+        {...props1}
+        isViewerOrAdmin
+        viewer={viewer}
+        user={userSubscribed}
+        initialValues={{
+          roles: {
+            labels: ['ROLE_USER'],
+            other: null,
+          },
+          vip: false,
+          enabled: true,
+          locked: true,
+          newsletter: true,
+          isSubscribedToProposalNews: true,
         }}
       />,
     );

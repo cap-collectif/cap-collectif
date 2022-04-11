@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
+use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
@@ -31,6 +32,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountMutation extends BaseDeleteUserMutation
 {
+    public const CANNOT_DELETE_SUPER_ADMIN = 'CANNOT_DELETE_SUPER_ADMIN';
+    public const CANNOT_FIND_USER = 'Can not find this userId !';
+
     private UserRepository $userRepository;
 
     public function __construct(
@@ -54,7 +58,8 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
         FormFactoryInterface $formFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        AnonymizeUser $anonymizeUser
     ) {
         parent::__construct(
             $em,
@@ -76,7 +81,8 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $highlightedContentRepository,
             $mailingListRepository,
             $logger,
-            $formFactory
+            $formFactory,
+            $anonymizeUser
         );
         $this->userRepository = $userRepository;
     }
@@ -85,6 +91,9 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
     {
         $user = $this->getUser($input, $viewer);
         $userId = GlobalId::toGlobalId('User', $user->getId());
+        if (!$viewer->isSuperAdmin() && $user->isSuperAdmin()) {
+            return ['errorCode' => self::CANNOT_DELETE_SUPER_ADMIN, 'userId' => $userId];
+        }
 
         $this->deleteAccount($input['type'], $user);
 
@@ -95,7 +104,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
     {
         if (DeleteAccountType::HARD === $deleteType && $user) {
             $this->hardDeleteUserContributionsInActiveSteps($user);
-            //in order not to reference dead relationships between entities
+            // in order not to reference dead relationships between entities
             $this->em->refresh($user);
         }
         $this->anonymizeUser($user);
@@ -113,7 +122,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $userId = GlobalId::fromGlobalId($input['userId'])['id'];
             $user = $this->userRepository->find($userId);
             if (!$user) {
-                throw new UserError('Can not find this userId !');
+                throw new UserError(self::CANNOT_FIND_USER);
             }
         }
 
