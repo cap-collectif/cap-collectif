@@ -3,13 +3,10 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Enum\PostAffiliation;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -139,9 +136,7 @@ class PostRepository extends EntityRepository
             $qb->orWhere(
                 $qb
                     ->expr()
-                    ->orX(
-                        $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC),
-                    )
+                    ->orX($qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC))
             );
             if (!empty($viewer->getUserGroupIds())) {
                 $qb->orWhere($qb->expr()->in('crvg.id', $viewer->getUserGroupIds()));
@@ -278,6 +273,16 @@ class PostRepository extends EntityRepository
         }
 
         return $qb->getQuery()->execute();
+    }
+
+    public function countPublishedByProject(Project $project): int
+    {
+        $qb = $this->getIsPublishedQueryBuilder()
+            ->select('COUNT(p.id)')
+            ->andWhere(':project MEMBER OF p.projects')
+            ->setParameter('project', $project);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**

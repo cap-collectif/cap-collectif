@@ -20,10 +20,19 @@ Capco\AppBundle\Entity\Post:
         projects: ['@p2']
         themes: ['@theme2']
 
-    post{9..10}:
-        id: 'post<current()>'
+    post9:
+        id: 'post9'
         isPublished: true
-        publishedAt: <identity((new \DateTime('2018-11-05')))>
+        publishedAt: <identity((new \DateTime('2018-11-05 00:00:00')))>
+        Authors:
+            - '@user5'
+        media: null
+        projects: ['@p2']
+        themes: ['@theme2']
+    post10:
+        id: 'post10'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-05 00:00:01')))>
         Authors:
             - '@user5'
         media: null

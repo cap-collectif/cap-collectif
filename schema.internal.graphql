@@ -9055,6 +9055,20 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """The owner of the project."""
   owner: ProjectOwner
   exportContributorsUrl: URI
+
+  """The posts relative to the project."""
+  posts(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): PostConnection!
+
+  """The open consultation step of the project, if any."""
+  consultationStepOpen: ConsultationStep
 }
 
 """A project abstract step."""

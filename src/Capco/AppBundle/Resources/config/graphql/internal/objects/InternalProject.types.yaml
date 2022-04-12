@@ -253,3 +253,11 @@ InternalProject:
             exportContributorsUrl:
                 type: 'URI'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectExportContributorsResolver", [value])'
+            posts:
+                type: 'InternalPostConnection!'
+                description: 'The posts relative to the project.'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectPostsResolver", [value])'
+            consultationStepOpen:
+                type: 'InternalConsultationStep'
+                description: 'The open consultation step of the project, if any.'
