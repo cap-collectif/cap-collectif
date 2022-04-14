@@ -55,7 +55,6 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument7:
         __construct: ['@debateCannabis']
         id: 'debateArgument7'
-        ipAddress: 92.154.85.110
         type: AGAINST
         author: '@userIan'
         body: Si le cannabis était légalisé, il serait vendu par le circuit officiel qui en contrôlerait la quantité et limiterait la teneur de THC pour réduire les accidents. Il serait alors peu attrayant pour la majorité des utilisateurs en recherche de sensations, voire de défonce. Ainsi, comme avant, les trafiquants proposeraient un produit plus fortement dosé et moins cher n’ayant plus le coût des compromissions et des risques actuels.

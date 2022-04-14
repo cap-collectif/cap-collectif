@@ -312,7 +312,7 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
-            "ipAddress": "92.154.85.110",
+            "ipAddress": null,
             "votes": Object {
               "edges": Array [],
             },
