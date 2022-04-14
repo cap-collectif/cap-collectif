@@ -22,7 +22,7 @@ export const createFormDataHeaders = (headers?: HeadersInit): HeadersInit => ({
 
 const Fetcher = {
     graphqlFormData<T>(body: FormData): Promise<T> {
-        return fetch(config.getGraphqlInternalUrl(), {
+        return fetch(config.getGraphqlUrl(), {
             method: 'POST',
             credentials: 'same-origin',
             headers: createFormDataHeaders(),
@@ -33,7 +33,7 @@ const Fetcher = {
     },
 
     graphql<T>(body: Body): Promise<T> {
-        return fetch(config.getGraphqlInternalUrl(), {
+        return fetch(config.getGraphqlUrl(), {
             method: 'POST',
             // For `admin-next.capco.dev` we need to include cookies even if not on the same origin.
             credentials: config.isDev ? 'include' : 'same-origin',

@@ -1,0 +1,7 @@
+DevQuery:
+    type: object
+    inherits:
+        - InternalQuery
+    config:
+        name: Query
+        description: 'Root of the schema'

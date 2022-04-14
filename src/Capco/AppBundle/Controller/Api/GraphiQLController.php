@@ -10,20 +10,9 @@ use Overblog\GraphiQLBundle\Config\GraphiQLControllerEndpoint;
 
 final class GraphiQLController
 {
-    /**
-     * @var TwigEnvironment
-     */
-    private $twig;
-
-    /**
-     * @var GraphiQLViewConfig
-     */
-    private $viewConfig;
-
-    /**
-     * @var GraphiQLControllerEndpoint
-     */
-    private $graphQLEndpoint;
+    private TwigEnvironment $twig;
+    private GraphiQLViewConfig $viewConfig;
+    private GraphiQLControllerEndpoint $graphQLEndpoint;
 
     public function __construct(
         TwigEnvironment $twig,
@@ -37,9 +26,9 @@ final class GraphiQLController
 
     /**
      * @Route("/graphiql", name="graphiql_endpoint", defaults={"_feature_flags" = "public_api"}, options={"i18n" = false})
-     * @Route("/graphiql/{schemaName}", name="graphiql_multiple_endpoint", condition="'%kernel.environment%' === 'dev'", requirements={"schemaName" = "public|internal"}, options={"i18n" = false})
+     * @Route("/graphiql/{schemaName}", name="graphiql_multiple_endpoint", condition="'%kernel.environment%' === 'dev'", requirements={"schemaName" = "public|internal|dev"}, options={"i18n" = false})
      */
-    public function indexAction($schemaName = null)
+    public function indexAction($schemaName = null): Response
     {
         $endpoint =
             null === $schemaName

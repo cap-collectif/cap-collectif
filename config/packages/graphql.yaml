@@ -118,3 +118,43 @@ overblog_graphql:
                     - InternalTimeRange
                     - InternalProposalVoteConnection
                     - InternalAnonymousReply
+            # This is our dev schema (used in development only)
+            dev:
+                query: DevQuery
+                mutation: DevMutation
+                # The name of extra types that can not be detected
+                # by graphql-php during static schema analysis.
+                # These types names should be explicitly declare here
+                types:
+                    - MultipleChoiceQuestionLogicJumpCondition
+                    - InternalArgument
+                    - InternalProject
+                    - AnswerOrPost
+                    - CheckboxRequirement
+                    - FirstnameRequirement
+                    - LastnameRequirement
+                    - IdentificationCodeRequirement
+                    - FranceConnectRequirement
+                    - DateOfBirthRequirement
+                    - PhoneRequirement
+                    - PostalAddressRequirement
+                    - PhoneVerifiedRequirement
+                    - OpinionOrVersion
+                    - OtherStep
+                    - PresentationStep
+                    - InternalQuestionnaireStep
+                    - InternalDebateStep
+                    - RankingStep
+                    - VersionVote
+                    - InternalSimpleQuestion
+                    - InternalMultipleChoiceQuestion
+                    - InternalValueResponse
+                    - InternalSectionQuestion
+                    - InternalMediaQuestion
+                    - InternalMediaResponse
+                    - InternalOauth2SSOConfiguration
+                    - Locale
+                    - InternalMajorityQuestion
+                    - InternalTimeRange
+                    - InternalProposalVoteConnection
+                    - InternalAnonymousReply

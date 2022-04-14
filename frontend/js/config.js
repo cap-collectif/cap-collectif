@@ -86,9 +86,10 @@ export const getMapboxUrl = () => {
 };
 
 export default {
-  getGraphqlInternalUrl: () => {
+  getGraphqlUrl: () => {
     const apiBaseUrl = getBaseUrlWithAdminNextSupport();
-    return `${apiBaseUrl}/graphql/internal`;
+    const schema = isDev() ? 'dev' : 'internal';
+    return `${apiBaseUrl}/graphql/${schema}`;
   },
   getApiUrl: () => {
     const apiBaseUrl = getBaseUrlWithAdminNextSupport();

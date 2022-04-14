@@ -41,7 +41,7 @@ def compile_graphql():
 
 def graphql_schemas(checkSame=False):
     "Generate GraphQL schemas"
-    for schema in ['public', 'preview', 'internal']:
+    for schema in ['public', 'preview', 'internal', 'dev']:
         command(
             'bin/console graphql:dump-schema --env dev --schema ' + schema + ' --no-debug --file schema.' + schema + '.graphql --format graphql',
             'application', Config.www_app)
@@ -140,6 +140,7 @@ def restore_es_snapshot():
     run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false,\\\"feature_states\\\":[\\\"geoip\\\"]}"')
     run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_open"')
     run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_aliases" -H "Content-Type: application/json" --data "{\\\"actions\\\":[{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco\\\"}}]}"')
+
 
 def behat(fast_failure='true', profile='false', suite='false', tags='false', timer='true'):
     "Run Gherkin Tests"

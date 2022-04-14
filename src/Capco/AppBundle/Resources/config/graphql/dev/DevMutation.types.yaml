@@ -1,0 +1,6 @@
+DevMutation:
+    type: object
+    inherits:
+        - InternalMutation
+    config:
+        name: Mutation

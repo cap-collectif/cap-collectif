@@ -10,6 +10,7 @@ use Overblog\GraphQLBundle\Request\Parser;
 use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Overblog\GraphQLBundle\Request\ParserInterface;
@@ -46,15 +47,20 @@ class GraphQLController extends BaseController
 
     /**
      * @Route("/graphql", name="graphql_endpoint", defaults={"_feature_flags" = "public_api"}, options={"i18n" = false})
-     * @Route("/graphql/{schemaName}", name="graphql_multiple_endpoint", requirements={"schemaName" = "public|internal"}, options={"i18n" = false})
+     * @Route("/graphql/{schemaName}", name="graphql_multiple_endpoint", requirements={"schemaName" = "public|internal|dev"}, options={"i18n" = false})
      */
-    public function endpointAction(Request $request, ?string $schemaName = null)
+    public function endpointAction(Request $request, ?string $schemaName = null): Response
     {
         if (!$schemaName) {
             $schemaName = 'public';
             if (self::PREVIEW_HEADER === $request->headers->get('accept')) {
                 $schemaName = 'preview';
             }
+        }
+        if ('dev' === $schemaName && 'dev' !== $this->env && 'test' === $this->env) {
+            $this->logger->warn('trying to access dev schema in prod environment.');
+
+            throw new BadRequestHttpException('trying to access dev schema in prod environment.');
         }
 
         try {

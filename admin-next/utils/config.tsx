@@ -63,14 +63,15 @@ export const ALLOWED_MIMETYPES = [
 const getApiUrl = (): string => {
     const apiBaseUrl = getBaseUrlWithAdminNextSupport();
     return `${apiBaseUrl}/api`;
-}
+};
 
-export const UPLOAD_PATH = `${getApiUrl()}/files`
+export const UPLOAD_PATH = `${getApiUrl()}/files`;
 
 export default {
-    getGraphqlInternalUrl: () => {
+    getGraphqlUrl: () => {
         const apiBaseUrl = getBaseUrlWithAdminNextSupport();
-        return `${apiBaseUrl}/graphql/internal`;
+        const schema = isDev() ? 'dev' : 'internal';
+        return `${apiBaseUrl}/graphql/${schema}`;
     },
     getApiUrl,
     // https://github.com/elementalui/elemental/blob/master/src/constants.js
@@ -91,4 +92,3 @@ export default {
     ),
     isIframe: typeof window !== 'undefined' && window.self !== window.top,
 };
-
