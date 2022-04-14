@@ -19,6 +19,13 @@ use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
 class GraphQLController extends BaseController
 {
     public const PREVIEW_HEADER = 'application/vnd.cap-collectif.preview+json';
+    private const SCHEMA_PUBLIC = 'public';
+    private const SCHEMA_PREVIEW = 'preview';
+    private const SCHEMA_INTERNAL = 'internal';
+    private const SCHEMA_DEV = 'dev';
+    private const ENV_DEV = 'dev';
+    private const ENV_TEST = 'test';
+    private const ENV_PROD = 'prod';
 
     private ParserInterface $batchParser;
     private Executor $requestExecutor;
@@ -52,12 +59,12 @@ class GraphQLController extends BaseController
     public function endpointAction(Request $request, ?string $schemaName = null): Response
     {
         if (!$schemaName) {
-            $schemaName = 'public';
+            $schemaName = self::SCHEMA_PUBLIC;
             if (self::PREVIEW_HEADER === $request->headers->get('accept')) {
-                $schemaName = 'preview';
+                $schemaName = self::SCHEMA_PREVIEW;
             }
         }
-        if ('dev' === $schemaName && 'dev' !== $this->env && 'test' === $this->env) {
+        if (self::SCHEMA_DEV === $schemaName && self::ENV_PROD !== $this->env) {
             $this->logger->warn('trying to access dev schema in prod environment.');
 
             throw new BadRequestHttpException('trying to access dev schema in prod environment.');
@@ -66,7 +73,7 @@ class GraphQLController extends BaseController
         try {
             return $this->createResponse($request, $schemaName, false);
         } catch (BadRequestHttpException $e) {
-            if ('public' === $schemaName || 'preview' === $schemaName) {
+            if (self::SCHEMA_PUBLIC === $schemaName || self::SCHEMA_PREVIEW === $schemaName) {
                 $this->logger->warn('Wrong public query');
             } else {
                 throw $e;
@@ -121,7 +128,7 @@ class GraphQLController extends BaseController
     private function addCORSAndCacheHeadersIfNeeded(Response $response, Request $request): void
     {
         // We make sure to handle CORS correctly in development/testing
-        if ('dev' === $this->env || 'test' === $this->env) {
+        if (self::ENV_DEV === $this->env || self::ENV_TEST === $this->env) {
             $response->headers->set(
                 'Access-Control-Allow-Origin',
                 $request->headers->get('Origin') ?? '*',
