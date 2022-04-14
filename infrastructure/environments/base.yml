@@ -23,7 +23,7 @@ services:
       SYMFONY_ELASTICSEARCH_HOST: elasticsearch
       SYMFONY_REDIS_HOST: redis
       SYMFONY_SAML_SP: dev
-      SYMFONY_LOGIN_SAML_ALLOWED: 'True'
+      SYMFONY_LOGIN_SAML_ALLOWED: 'False'
       SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
       SYMFONY_CAS_CERTIFICATE_DIRECTORY: '../app/cas'
     volumes:

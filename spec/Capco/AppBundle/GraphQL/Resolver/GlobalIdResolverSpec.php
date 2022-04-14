@@ -6,6 +6,8 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\OfficialResponse;
+use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
+use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
@@ -232,6 +234,22 @@ class GlobalIdResolverSpec extends ObjectBehavior
 
         $this->beConstructedWith($container, $logger, $entityManager);
         $this->resolve($uuid, null)->shouldReturn($opinion);
+    }
+
+    public function it_can_resolve_a_cas_sso_configuration(
+        ContainerInterface $container,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        CASSSOConfigurationRepository $repository,
+        CASSSOConfiguration $casSSOConfiguration
+    ) {
+        $id = 'casSSOConfigurationID';
+        $container->get(CASSSOConfigurationRepository::class)->willReturn($repository);
+        $repository->find($id)->willReturn($casSSOConfiguration);
+        $this->beConstructedWith($container, $logger, $entityManager);
+        $globalId = GlobalId::toGlobalId('CASSSOConfiguration', $id);
+
+        $this->resolve($globalId, null)->shouldReturn($casSSOConfiguration);
     }
 
     public function it_can_not_resolve_an_unknown_uuid(
