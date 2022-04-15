@@ -219,28 +219,6 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
       <div
         className="clearfix"
       />
-      <h2
-        className="page-header"
-      >
-        <FormattedMessage
-          id="confidentialite.title"
-          values={Object {}}
-        />
-      </h2>
-      <Field
-        component={[Function]}
-        disabled={false}
-        divClassName="col-sm-8"
-        id="profilePageIndexed"
-        labelClassName="font-weight-normal"
-        name="doNotIndexProfile"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="user.profile.edit.profilePageIndexed"
-          values={Object {}}
-        />
-      </Field>
       <div
         className="clearfix"
       />

@@ -304,32 +304,6 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
       <div
         className="clearfix"
       />
-      <h2>
-        <FormattedMessage
-          id="confidentialite.title"
-          values={Object {}}
-        />
-      </h2>
-      <div
-        className="horizontal_field_with_border_top"
-      >
-        <div
-          className="col-sm-3"
-        />
-        <Field
-          component={[Function]}
-          divClassName="col-sm-8"
-          id="profilePageIndexed"
-          labelClassName="font-weight-normal"
-          name="doNotIndexProfile"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="user.profile.edit.profilePageIndexed"
-            values={Object {}}
-          />
-        </Field>
-      </div>
       <div
         className="horizontal_field_with_border_top"
       >

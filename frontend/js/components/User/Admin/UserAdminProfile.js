@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import type { Dispatch, State, GlobalState } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 import type { UserAdminProfile_user } from '~relay/UserAdminProfile_user.graphql';
 import type { UserAdminProfile_viewer } from '~relay/UserAdminProfile_viewer.graphql';
 import component from '../../Form/Field';
@@ -19,6 +19,7 @@ import {
   twitterRegEx,
 } from '~/components/Utils/SocialNetworkRegexUtils';
 import { isUrl } from '~/services/Validator';
+import useFeatureFlag from "~/utils/hooks/useFeatureFlag";
 
 type RelayProps = {| user: UserAdminProfile_user, viewer: UserAdminProfile_viewer |};
 
@@ -52,7 +53,6 @@ type Props = {|
   // initialValues: FormValues,
   hasValue: Object,
   userTypes: Array<Object>,
-  features: Object,
   isViewerOrSuperAdmin: boolean,
 |};
 
@@ -169,20 +169,19 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     });
 };
 
-export class UserAdminProfile extends React.Component<Props, State> {
-  render() {
-    const {
-      invalid,
-      valid,
-      submitSucceeded,
-      submitFailed,
-      handleSubmit,
-      submitting,
-      userTypes,
-      features,
-      error,
-      isViewerOrSuperAdmin,
-    } = this.props;
+export const UserAdminProfile= ({
+  invalid,
+  valid,
+  submitSucceeded,
+  submitFailed,
+  handleSubmit,
+  submitting,
+  userTypes,
+  error,
+  isViewerOrSuperAdmin,}:Props)=> {
+  const useNoIndexProfile = useFeatureFlag('noindex_on_profiles');
+  const useUserType = useFeatureFlag('user_type');
+
     return (
       <div className="box box-primary container-fluid">
         <h2 className="page-header">
@@ -217,7 +216,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               disabled={!isViewerOrSuperAdmin}
             />
             <div className="clearfix" />
-            {features.user_type && (
+            {useUserType && (
               <Field
                 id="profile-form-userType"
                 name="userType"
@@ -314,10 +313,11 @@ export class UserAdminProfile extends React.Component<Props, State> {
               label={<FormattedMessage id="show.label_linked_in_url" />}
             />
             <div className="clearfix" />
+            {!useNoIndexProfile ? (
+              <>
             <h2 className="page-header">
               <FormattedMessage id="confidentialite.title" />
             </h2>
-            {!features.noindex_on_profiles ? (
               <Field
                 id="profilePageIndexed"
                 name="doNotIndexProfile"
@@ -328,6 +328,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
                 divClassName="col-sm-8">
                 <FormattedMessage id="user.profile.edit.profilePageIndexed" />
               </Field>
+              </>
             ) : null}
             <div className="clearfix" />
             <ButtonToolbar className="box-content__toolbar">
@@ -354,7 +355,6 @@ export class UserAdminProfile extends React.Component<Props, State> {
       </div>
     );
   }
-}
 
 const form = reduxForm({
   onSubmit,
@@ -379,7 +379,6 @@ const mapStateToProps = (state: GlobalState, { user, viewer }: RelayProps) => ({
     media: user ? user.media : undefined,
   },
   userTypes: state.default.userTypes,
-  features: state.default.features,
   isViewerOrSuperAdmin: user.isViewer || viewer.isSuperAdmin,
 });
 

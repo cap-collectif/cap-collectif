@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -17,6 +17,7 @@ import {
   getSsoTradKey,
 } from '~/components/User/Profile/PersonalData';
 import { REGEX_USERNAME } from '~/constants/FormConstants';
+import useFeatureFlag from "~/utils/hooks/useFeatureFlag";
 import {
   fbRegEx,
   instagramRegEx,
@@ -33,7 +34,6 @@ type Props = {|
   initialValues: Object,
   hasValue: Object,
   userTypes: Array<Object>,
-  features: Object,
 |};
 
 const formName = 'viewerProfileForm';
@@ -164,20 +164,19 @@ const renderFooter = (invalid: boolean, submitting: boolean) => (
   </div>
 );
 
-export class Profile extends Component<Props> {
-  render() {
-    const {
-      viewer,
-      invalid,
-      valid,
-      submitSucceeded,
-      submitFailed,
-      handleSubmit,
-      submitting,
-      userTypes,
-      features,
-      error,
-    } = this.props;
+export const Profile = ({
+  viewer,
+  invalid,
+  valid,
+  submitSucceeded,
+  submitFailed,
+  handleSubmit,
+  submitting,
+  userTypes,
+  error,
+}:Props) => {
+  const useNoIndexProfile = useFeatureFlag('noindex_on_profiles');
+  const useUserType = useFeatureFlag('user_type');
 
     return (
       <form onSubmit={handleSubmit} className="form-horizontal">
@@ -231,7 +230,7 @@ export class Profile extends Component<Props> {
                 )}
               </div>
             </div>
-            {features.user_type && (
+            {useUserType && (
               <div className="horizontal_field_with_border_top no-border">
                 <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
                   <FormattedMessage id="registration.type" />{' '}
@@ -385,10 +384,11 @@ export class Profile extends Component<Props> {
               </div>
             </div>
             <div className="clearfix" />
+            {!useNoIndexProfile ? (
+              <>
             <h2>
               <FormattedMessage id="confidentialite.title" />
             </h2>
-            {!features.noindex_on_profiles ? (
               <div className="horizontal_field_with_border_top">
                 <div className="col-sm-3" />
                 <Field
@@ -401,6 +401,7 @@ export class Profile extends Component<Props> {
                   <FormattedMessage id="user.profile.edit.profilePageIndexed" />
                 </Field>
               </div>
+              </>
             ) : null}
             <div className="horizontal_field_with_border_top">
               <div className="col-sm-3" />
@@ -421,7 +422,6 @@ export class Profile extends Component<Props> {
       </form>
     );
   }
-}
 
 const form = reduxForm({
   onSubmit,
@@ -444,7 +444,6 @@ const mapStateToProps = (state: State, props: Props) => ({
     media: props.viewer ? props.viewer.media : undefined,
   },
   userTypes: state.default.userTypes,
-  features: state.default.features,
 });
 
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));

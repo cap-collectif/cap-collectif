@@ -2,8 +2,9 @@
 /* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock, formMock, $refType } from '../../../mocks';
+import { intlMock, formMock, $refType } from '~/mocks';
 import { UserAdminProfile } from './UserAdminProfile';
+import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils';
 
 describe('<UserAdminProfile/>', () => {
   const props1 = {
@@ -32,15 +33,13 @@ describe('<UserAdminProfile/>', () => {
       isSuperAdmin: true,
     },
   };
-
+  afterEach(() => {
+    disableFeatureFlags();
+  });
   it('should render, with user confirmed by email adn viewer is super admin ', () => {
+    enableFeatureFlags(['user_type', 'noindex_on_profiles']);
     const wrapper = shallow(
-      <UserAdminProfile
-        {...props1}
-        userTypes={[{ id: 1, name: 'type_1' }]}
-        features={{ user_type: true }}
-        isViewerOrSuperAdmin
-      />,
+      <UserAdminProfile {...props1} userTypes={[{ id: 1, name: 'type_1' }]} isViewerOrSuperAdmin />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -49,7 +48,6 @@ describe('<UserAdminProfile/>', () => {
       <UserAdminProfile
         {...props1}
         userTypes={[{ id: 1, name: 'type_1' }]}
-        features={{ user_type: false }}
         isViewerOrSuperAdmin={false}
       />,
     );

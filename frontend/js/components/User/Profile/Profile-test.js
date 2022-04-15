@@ -3,7 +3,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Profile } from './Profile';
-import { intlMock, formMock, $refType } from '../../../mocks';
+import { intlMock, formMock, $refType } from '~/mocks';
+import { enableFeatureFlags, disableFeatureFlags } from '~/testUtils';
 
 describe('<Profile />', () => {
   const props = {
@@ -26,9 +27,6 @@ describe('<Profile />', () => {
       profilePageIndexed: false,
       userType: 1,
       neighborhood: 'DTC',
-    },
-    features: {
-      user_type: true,
     },
   };
 
@@ -53,9 +51,6 @@ describe('<Profile />', () => {
       userType: 1,
       neighborhood: 'DTC',
     },
-    features: {
-      user_type: false,
-    },
   };
 
   const viewer = {
@@ -79,8 +74,11 @@ describe('<Profile />', () => {
     },
     neighborhood: 'DTC',
   };
-
+  afterEach(() => {
+    disableFeatureFlags();
+  });
   it('should render my profile with features user_type', () => {
+    enableFeatureFlags(['user_type', 'noindex_on_profiles']);
     const wrapper = shallow(
       <Profile viewer={viewer} userTypes={[{ id: 1, name: 'type_1' }]} {...props} />,
     );

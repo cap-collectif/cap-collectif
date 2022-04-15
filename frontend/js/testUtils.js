@@ -15,8 +15,8 @@ export const mockRandomValues = () => {
   global.Math.random = () => 0.5;
 };
 
-export const enableFeatureFlags = (flags: [FeatureFlagType]) => {
-  global.mockFeatureFlag.mockImplementation((flag: FeatureFlagType) => {
+export const enableFeatureFlags = (flags: Array<FeatureFlagType>) => {
+  global.mockFeatureFlag.mockImplementation((flag: Array<FeatureFlagType>) => {
     if (flags.includes(flag)) {
       return true;
     }
