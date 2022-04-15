@@ -7,6 +7,6 @@ verify_ssl = true
 docker-compose = ">=1.23.0"
 docker = "*"
 pyaml = ">=4.2b1"
-Fabric = "2.6"
+Fabric = "*"
 paramiko = "*"
 pycodestyle = "*"
