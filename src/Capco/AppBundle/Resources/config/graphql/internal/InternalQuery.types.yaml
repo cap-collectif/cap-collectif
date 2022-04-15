@@ -513,7 +513,7 @@ InternalQuery:
                 type: 'InternalPlatformAnalytics!'
                 description: 'Return the platform analytics'
                 access: "@=hasRole('ROLE_PROJECT_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\AnalyticsResolver", [args, info])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryAnalyticsResolver", [args, info])'
                 args:
                     filter:
                         type: 'InternalQueryAnalyticsFilter!'
@@ -564,4 +564,3 @@ InternalQuery:
                 description: 'Get sms analytics'
                 access: "@hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsAnalyticsResolver", [args])'
-

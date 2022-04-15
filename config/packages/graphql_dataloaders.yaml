@@ -123,5 +123,6 @@ services:
         public: true
         arguments:
             $cachePrefix: QueryAnalyticsDataLoader
-            $cacheTtl: 600
-            $enableCache: true
+            # Elasticsearch already implement some application caching
+            # so we can disable our own, to always return fresh results
+            $enableCache: false

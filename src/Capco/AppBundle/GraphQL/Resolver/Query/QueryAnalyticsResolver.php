@@ -8,7 +8,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class AnalyticsResolver implements ResolverInterface
+class QueryAnalyticsResolver implements ResolverInterface
 {
     private QueryAnalyticsDataLoader $loader;
 

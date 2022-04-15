@@ -28,6 +28,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
+use GraphQL\Executor\Promise\Promise;
 
 class QueryAnalyticsDataLoader extends BatchDataLoader
 {
@@ -77,7 +78,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         $this->invalidateAll();
     }
 
-    public function all(array $keys)
+    public function all(array $keys): Promise
     {
         $filters = $keys[0];
         list($start, $end, $projectId, $requestedFields, $topContributorsCount) = [
@@ -87,13 +88,17 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
             $filters['requestedFields'],
             $filters['topContributorsCount'],
         ];
+
         $projectSlug = null;
         if ($projectId) {
             /** @var $project Project */
-            if (!($project = $this->projectRepository->find($projectId))) {
+            $project = $this->projectRepository->find($projectId);
+            if (!$project) {
                 throw new UserError('This project id does not exist.');
             }
             $projectSlug = $project->getSlug();
+
+            // Some performance optimization:
             // We avoid getting a too wide time range by setting
             // the start date to the project's publication date
             // if the given start date is smaller.
@@ -106,6 +111,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         // Prefill the results array with empty
         // arrays to prevent useless processing.
         $results = array_fill_keys($requestedFields, null);
+
         $internalAnalyticKeys = [
             'registrations',
             'votes',
