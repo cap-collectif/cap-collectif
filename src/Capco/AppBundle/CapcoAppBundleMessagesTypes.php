@@ -44,4 +44,5 @@ final class CapcoAppBundleMessagesTypes
     public const ELASTICSEARCH_INDEXATION = 'elasticsearch.indexation';
 
     public const CUSTOM_DOMAIN_CREATE = 'custom.domain.create';
+    public const SENDINBLUE = 'sendinblue';
 }

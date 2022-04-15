@@ -236,3 +236,9 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: emailing_campaign
+        sendinblue:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: sendinblue

@@ -124,6 +124,9 @@ swarrot:
         emailing.campaign:
             exchange: capco_direct_exchange
             routing_key: emailing_campaign
+        sendinblue:
+            exchange: capco_direct_exchange
+            routing_key: sendinblue
     consumers:
         elasticsearch_indexation:
             processor: Capco\AppBundle\Elasticsearch\IndexationProcessor
@@ -755,6 +758,23 @@ swarrot:
                       retry_routing_key_pattern: 'proposal_news_delete_retry_%%attempt%%'
         emailing_campaign:
             processor: Capco\AppBundle\Processor\EmailingCampaignProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'emailing_campaign_%%attempt%%'
+        sendinblue:
+            processor: Capco\AppBundle\Processor\SendInBlueProcessor
             middleware_stack:
                 - configurator: swarrot.processor.signal_handler
                 - configurator: swarrot.processor.max_execution_time

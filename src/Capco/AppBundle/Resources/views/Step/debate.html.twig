@@ -15,7 +15,7 @@
         'title': currentStep.title ~ ' ' ~ project.title,
         'type': 'project',
         'description': currentStep.metaDescription ?: currentStep.title,
-        'author': is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.firstAuthor.slug}) : null,
+        'author': is_feature_enabled('profiles') and project.firstAuthor ? url('capco_user_profile_show_all', {'slug': project.firstAuthor.slug}) : null,
         'image': image,
         'url': url('app_project_show_debate', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})
     } only %}

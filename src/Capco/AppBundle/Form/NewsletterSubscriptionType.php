@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\NewsletterSubscription;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +25,7 @@ class NewsletterSubscriptionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\NewsletterSubscription',
+            'data_class' => NewsletterSubscription::class,
             'translation_domain' => 'CapcoAppBundle',
             'csrf_protection' => false,
         ]);

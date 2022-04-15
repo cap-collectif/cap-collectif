@@ -16,6 +16,7 @@ services:
             $projectDir: '%kernel.project_dir%'
             $locale: '%locale%'
             $env: '%kernel.environment%'
+            $sendInBlueSecret: '%sendinblue_secret%'
 
     Capco\AppBundle\Controller\Site\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Site/'

@@ -27,6 +27,7 @@ use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -59,7 +60,8 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         MailingListRepository $mailingListRepository,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
-        AnonymizeUser $anonymizeUser
+        AnonymizeUser $anonymizeUser,
+        Publisher $publisher
     ) {
         parent::__construct(
             $em,
@@ -82,7 +84,8 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $mailingListRepository,
             $logger,
             $formFactory,
-            $anonymizeUser
+            $anonymizeUser,
+            $publisher
         );
         $this->userRepository = $userRepository;
     }

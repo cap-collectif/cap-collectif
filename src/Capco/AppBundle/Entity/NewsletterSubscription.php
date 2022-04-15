@@ -18,100 +18,59 @@ class NewsletterSubscription
     use IdTrait;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=false)
      * @Assert\NotBlank()
      * @Assert\NotNull()
      * @Assert\Email()
      */
-    private $email;
+    private string $email;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    private \DateTime $createdAt;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_enabled", type="boolean", options={"default": true})
      */
-    private $isEnabled = true;
+    private bool $isEnabled = true;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getEmail() : 'New newsletter';
     }
 
-    /**
-     * Set email.
-     *
-     * @param string $email
-     *
-     * @return NewsletterSubscription
-     */
-    public function setEmail($email)
+    public function setEmail($email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    /**
-     * Get email.
-     *
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Set isEnabled.
-     *
-     * @param bool $isEnabled
-     *
-     * @return NewsletterSubscription
-     */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 
         return $this;
     }
 
-    /**
-     * Get isEnabled.
-     *
-     * @return bool
-     */
-    public function getIsEnabled()
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return NewsletterSubscription
-     */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 

@@ -2,10 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Swarrot\Broker\Message;
 
 class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
 {
@@ -21,6 +23,14 @@ class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
                 ->setUsername($input->offsetGet('username'))
                 ->setConsentInternalCommunication($input->offsetGet('consentInternalCommunication'))
                 ->setToken($this->tokenGenerator->generateToken());
+            if (true === $input->offsetGet('consentInternalCommunication')) {
+                $this->pushToSendinblue([
+                    'email' => $input->offsetGet('email'),
+                    'data' => [
+                        'DEBATS_PROJETS' => $debate->getProject()->getTitle(),
+                    ],
+                ]);
+            }
 
             self::setDebateArgumentOrigin($debateArgument, $input);
             self::setDebateArgumentContent($debateArgument, $input);
@@ -33,5 +43,18 @@ class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
         }
 
         return compact('debateArgument', 'token');
+    }
+
+    private function pushToSendinblue(array $args): void
+    {
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::SENDINBLUE,
+            new Message(
+                json_encode([
+                    'method' => 'addEmailToSendinblue',
+                    'args' => $args,
+                ])
+            )
+        );
     }
 }

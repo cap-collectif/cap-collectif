@@ -34,6 +34,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
 use Sonata\MediaBundle\Provider\ImageProvider;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Translation\Translator;
 
@@ -67,7 +68,8 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         SoftDeleteEventListener $softDeleteEventListener,
         EventManager $eventManager,
         User $user,
-        AnonymizeUser $anonymizeUser
+        AnonymizeUser $anonymizeUser,
+        Publisher $publisher
     ) {
         $em->getFilters()->willReturn($filterCollection);
         $em->getEventManager()->willReturn($eventManager);
@@ -106,7 +108,8 @@ class DeleteAccountMutationSpec extends ObjectBehavior
             $mailingListRepository,
             $formFactory,
             $logger,
-            $anonymizeUser
+            $anonymizeUser,
+            $publisher
         );
     }
 
@@ -122,6 +125,7 @@ class DeleteAccountMutationSpec extends ObjectBehavior
     ) {
         $encodeUserId = GlobalId::toGlobalId('User', self::USER_ID);
         $input = new Arg(['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD]);
+        $user->getEmail()->willReturn('admin@test.com');
 
         $userRepository
             ->find(self::USER_ID)
@@ -163,6 +167,7 @@ class DeleteAccountMutationSpec extends ObjectBehavior
     ) {
         $encodeUserId = GlobalId::toGlobalId('User', self::USER_ID);
         $input = new Arg(['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD]);
+        $user->getEmail()->willReturn('admin@test.com');
 
         $userRepository
             ->find(self::USER_ID)

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
@@ -13,6 +14,8 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +29,7 @@ class HomepageController extends Controller
     private TranslatorInterface $translator;
     private NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
     private UserRepository $userRepository;
+    private Publisher $publisher;
 
     public function __construct(
         QueryEventsResolver $eventsResolver,
@@ -33,7 +37,8 @@ class HomepageController extends Controller
         Manager $manager,
         TranslatorInterface $translator,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        Publisher $publisher
     ) {
         $this->eventsResolver = $eventsResolver;
         $this->sectionResolver = $sectionResolver;
@@ -41,6 +46,7 @@ class HomepageController extends Controller
         $this->translator = $translator;
         $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
         $this->userRepository = $userRepository;
+        $this->publisher = $publisher;
     }
 
     /**
@@ -100,8 +106,12 @@ class HomepageController extends Controller
                         $userNotification = $userToNotify->getNotificationsConfiguration();
                         if (!$userNotification->isConsentExternalCommunication()) {
                             $userToNotify->setNotificationsConfiguration(
+                                // Do we have to change this into internal Comm ?
                                 $userNotification->setConsentExternalCommunication(true)
                             );
+                            $this->pushToSendinblue('addUserToSendinblue', [
+                                'user' => $userToNotify,
+                            ]);
                             $flashBag->add(
                                 'success',
                                 $this->translator->trans('homepage.newsletter.success')
@@ -119,6 +129,9 @@ class HomepageController extends Controller
                             'success',
                             $this->translator->trans('homepage.newsletter.success')
                         );
+                        $this->pushToSendinblue('addEmailToSendinblue', [
+                            'email' => $subscription->getEmail(),
+                        ]);
                     } elseif ($email) {
                         if ($email->getIsEnabled()) {
                             $flashBag->add(
@@ -128,6 +141,9 @@ class HomepageController extends Controller
                         } else {
                             $email->setIsEnabled(true);
                             $em->persist($email);
+                            $this->pushToSendinblue('addEmailToSendinblue', [
+                                'email' => $email->getEmail(),
+                            ]);
                             $flashBag->add(
                                 'success',
                                 $this->translator->trans('homepage.newsletter.success')
@@ -152,5 +168,18 @@ class HomepageController extends Controller
             'sections' => $sections,
             'eventsCount' => $eventsCount,
         ];
+    }
+
+    private function pushToSendinblue(string $method, array $args): void
+    {
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::SENDINBLUE,
+            new Message(
+                json_encode([
+                    'method' => $method,
+                    'args' => $args,
+                ])
+            )
+        );
     }
 }

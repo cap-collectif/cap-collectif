@@ -9,6 +9,7 @@ services:
             $logger: '@logger'
             $env: '%kernel.environment%'
             $locale: '%locale%'
+            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
 
     Capco\AppBundle\Command\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Command/*'
@@ -99,3 +100,7 @@ services:
     Capco\AppBundle\Command\SendSmsCreditConsumptionAlertCommand:
         arguments:
             $name: 'capco:sms-credit-consumption-alert'
+
+    Capco\AppBundle\Command\UnsubscribeUserFromCsvCommand:
+        arguments:
+            $name: 'capco:user:unsubscribe'

@@ -98,6 +98,9 @@ parameters:
     default_oauth_logout_url: '%env(SYMFONY_DEFAULT_OAUTH_LOGOUT_URL)%'
     default_oauth_profile_url: '%env(SYMFONY_DEFAULT_OAUTH_PROFILE_URL)%'
     default_redirectionio_project_id: '%env(SYMFONY_DEFAULT_REDIRECTIONIO_PROJECT_ID)%'
+    sendinblue_api_key: '%env(SYMFONY_SENDINBLUE_API_KEY)%'
+    sendinblue_nl_list_id: '%env(SYMFONY_SENDINBLUE_NL_LIST_ID)%'
+    sendinblue_secret: '%env(SYMFONY_SENDINBLUE_SECRET)%'
     #
     # Default env values :
     # Please do not put sensible data here.
@@ -136,6 +139,7 @@ parameters:
     env(SYMFONY_RABBITMQ_NODENAME): rabbit
     env(SYMFONY_ASSETS_HOST): null
     env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD): admin
+    env(SYMFONY_REMEMBER_SECRET): secretRemember
     # To be deleted
     env(SYMFONY_TIPSMEEE_API_KEY): INSERT_A_REAL_SECRET
     # Todo inject only on occitanie instance with service pass

@@ -2,8 +2,11 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Security\LoginManagerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Capco\UserBundle\Doctrine\UserManager;
@@ -23,6 +26,7 @@ class ConfirmationController extends Controller
     private SessionInterface $session;
     private UserRepository $userRepo;
     private TranslatorInterface $translator;
+    private Publisher $publisher;
 
     public function __construct(
         UserManager $userManager,
@@ -31,7 +35,8 @@ class ConfirmationController extends Controller
         SessionInterface $session,
         ContributionManager $contributionManager,
         TranslatorInterface $translator,
-        UserRepository $userRepo
+        UserRepository $userRepo,
+        Publisher $publisher
     ) {
         $this->userManager = $userManager;
         $this->loginManager = $loginManager;
@@ -41,6 +46,7 @@ class ConfirmationController extends Controller
         $this->userRepo = $userRepo;
         $this->translator = $translator;
         $this->login = true;
+        $this->publisher = $publisher;
     }
 
     /**
@@ -91,7 +97,9 @@ class ConfirmationController extends Controller
 
         // This will flush
         $this->userManager->updateUser($user);
-
+        if ($user->isConsentInternalCommunication()) {
+            $this->pushToSendinblue(['email' => $user->getEmail()]);
+        }
         if ($this->login) {
             $this->loginManager->loginUser('main', $user, $response);
         }
@@ -109,6 +117,20 @@ class ConfirmationController extends Controller
 
         return $response;
     }
+
+    private function pushToSendinblue(array $args): void
+    {
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::SENDINBLUE,
+            new Message(
+                json_encode([
+                    'method' => 'addEmailToSendinblue',
+                    'args' => $args,
+                ])
+            )
+        );
+    }
+
 
     /**
      * @Route("/account/new_email_confirmation/{token}", name="account_confirm_new_email", options={"i18n" = false})

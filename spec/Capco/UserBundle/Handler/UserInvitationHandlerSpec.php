@@ -14,15 +14,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class UserInvitationHandlerSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $em,
         Manager $manager,
-        UserInviteRepository $userInviteRepository
+        UserInviteRepository $userInviteRepository,
+        Publisher $publisher
     ) {
-        $this->beConstructedWith($userInviteRepository, $manager, $em);
+        $this->beConstructedWith($userInviteRepository, $manager, $em, $publisher);
     }
 
     public function it_is_initializable(): void
@@ -48,6 +50,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $date = new \DateTime($now);
         $user->setConfirmationToken(null)->shouldBeCalledOnce();
         $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
+        $user->isConsentInternalCommunication()->willReturn(true);
 
         $em->persist($user)->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
@@ -70,6 +73,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
             ->setEmail($email)
             ->setIsProjectAdmin(true)
             ->setIsAdmin(false);
+        $user->isConsentInternalCommunication()->willReturn(true);
 
         $userInviteRepository->findOneByEmailAndNotExpired($email)->willReturn($invitation);
 
@@ -112,6 +116,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $date = new \DateTime($now);
         $user->setConfirmationToken(null)->shouldBeCalledOnce();
         $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
+        $user->isConsentInternalCommunication()->willReturn(true);
 
         $em->persist($user)->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
@@ -156,6 +161,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $date = new \DateTime($now);
         $user->setConfirmationToken(null)->shouldBeCalledOnce();
         $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
+        $user->isConsentInternalCommunication()->willReturn(true);
 
         $em->persist($user)->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();

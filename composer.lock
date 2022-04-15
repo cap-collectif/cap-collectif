@@ -9881,10 +9881,6 @@
                 "client",
                 "search"
             ],
-            "support": {
-                "issues": "https://github.com/ruflin/Elastica/issues",
-                "source": "https://github.com/ruflin/Elastica/tree/7.1.3"
-            },
             "time": "2021-12-09T08:28:09+00:00"
         },
         {
@@ -10166,6 +10162,69 @@
                 }
             ],
             "time": "2020-11-30T07:34:24+00:00"
+        },
+        {
+            "name": "sendinblue/api-v3-sdk",
+            "version": "v7.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sendinblue/APIv3-php-library",
+                "reference": "c169d8ceb74b211199fb11586389fb9aa2c37790"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sendinblue/APIv3-php-library/zipball/c169d8ceb74b211199fb11586389fb9aa2c37790",
+                "reference": "c169d8ceb74b211199fb11586389fb9aa2c37790",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "<=7.3.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~1.12",
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "~2.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "7.x.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SendinBlue\\Client\\": "lib/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "SendinBlue\\Client\\": "test/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SendinBlue Developers",
+                    "email": "contact@sendinblue.com",
+                    "homepage": "https://www.sendinblue.com/"
+                }
+            ],
+            "description": "Official SendinBlue provided RESTFul API V3 php library",
+            "homepage": "https://github.com/sendinblue/APIv3-php-library",
+            "keywords": [
+                "api",
+                "php",
+                "sdk",
+                "sendinblue",
+                "swagger"
+            ],
+            "time": "2021-08-25T08:49:42+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -20163,28 +20222,28 @@
     ],
     "aliases": [
         {
-            "package": "alexandresalome/mailcatcher",
-            "version": "9999999-dev",
-            "alias": "1.3.0",
-            "alias_normalized": "1.3.0.0"
-        },
-        {
-            "package": "friendsofsymfony/user-bundle",
-            "version": "9999999-dev",
-            "alias": "2.1.2",
-            "alias_normalized": "2.1.2.0"
-        },
-        {
-            "package": "limenius/react-renderer",
-            "version": "9999999-dev",
-            "alias": "4.0.2",
-            "alias_normalized": "4.0.2.0"
-        },
-        {
-            "package": "sonata-project/media-bundle",
-            "version": "dev-bugfix-3.x",
             "alias": "3.30.0",
-            "alias_normalized": "3.30.0.0"
+            "alias_normalized": "3.30.0.0",
+            "version": "dev-bugfix-3.x",
+            "package": "sonata-project/media-bundle"
+        },
+        {
+            "alias": "2.1.2",
+            "alias_normalized": "2.1.2.0",
+            "version": "9999999-dev",
+            "package": "friendsofsymfony/user-bundle"
+        },
+        {
+            "alias": "4.0.2",
+            "alias_normalized": "4.0.2.0",
+            "version": "9999999-dev",
+            "package": "limenius/react-renderer"
+        },
+        {
+            "alias": "1.3.0",
+            "alias_normalized": "1.3.0.0",
+            "version": "9999999-dev",
+            "package": "alexandresalome/mailcatcher"
         }
     ],
     "minimum-stability": "stable",

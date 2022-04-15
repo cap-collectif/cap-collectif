@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
@@ -31,6 +32,8 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Sonata\MediaBundle\Provider\ImageProvider;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -58,6 +61,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     protected LoggerInterface $logger;
     protected AnonymizeUser $anonymizeUser;
     private FormFactoryInterface $formFactory;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -80,7 +84,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         MailingListRepository $mailingListRepository,
         LoggerInterface $logger,
         FormFactoryInterface $formFactory,
-        AnonymizeUser $anonymizeUser
+        AnonymizeUser $anonymizeUser,
+        Publisher $publisher
     ) {
         parent::__construct($em, $mediaProvider);
         $this->translator = $translator;
@@ -102,6 +107,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->logger = $logger;
         $this->formFactory = $formFactory;
         $this->anonymizeUser = $anonymizeUser;
+        $this->publisher = $publisher;
     }
 
     public function softDelete(User $user): void
@@ -208,7 +214,18 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     public function anonymizeUser(User $user): void
     {
+        $email = $user->getEmail();
         $this->anonymizeUser->anonymize($user);
+
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::SENDINBLUE,
+            new Message(
+                json_encode([
+                    'method' => 'deleteUserFromSendinblue',
+                    'args' => ['email' => $email],
+                ])
+            )
+        );
     }
 
     private function deleteResponsesAndEvaluationsFromProposal(User $user, $proposal): void
@@ -324,5 +341,15 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     private function removeFromMailingLists(User $user): void
     {
         $this->anonymizeUser->removeFromMailingLists($user);
+
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::SENDINBLUE,
+            new Message(
+                json_encode([
+                    'method' => 'deleteUserFromSendinblue',
+                    'args' => ['user' => $user],
+                ])
+            )
+        );
     }
 }

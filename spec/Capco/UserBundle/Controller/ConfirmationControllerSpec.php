@@ -5,6 +5,7 @@ namespace spec\Capco\UserBundle\Controller;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Routing\Router;
 use FOS\UserBundle\Security\LoginManager;
 use Capco\UserBundle\Doctrine\UserManager;
@@ -24,7 +25,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
         Session $session,
         ContributionManager $contributionManager,
         TranslatorInterface $translator,
-        UserRepository $userRepo
+        UserRepository $userRepo,
+        Publisher $publisher
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -33,7 +35,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
             $session,
             $contributionManager,
             $translator,
-            $userRepo
+            $userRepo,
+            $publisher
         );
         $this->login = false;
     }
@@ -98,7 +101,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->willReturn(null);
 
         $user->setConfirmedAccountAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
-
+        $user->isConsentInternalCommunication()->willReturn(true);
+        $user->getEmail()->willReturn('test@test.com');
         $user
             ->setEnabled(true)
             ->shouldBeCalled()

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\UserInviteRepository;
@@ -9,12 +10,13 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Handler\UserInvitationHandler;
-use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -38,9 +40,7 @@ class RegisterMutation implements MutationInterface
     private TokenGeneratorInterface $tokenGenerator;
     private FOSNotifier $notifier;
     private FormFactoryInterface $formFactory;
-    private EntityManagerInterface $em;
     private ResponsesFormatter $responsesFormatter;
-    private Manager $manager;
     private UserInvitationHandler $userInvitationHandler;
 
     public function __construct(
@@ -52,9 +52,7 @@ class RegisterMutation implements MutationInterface
         TokenGeneratorInterface $tokenGenerator,
         FOSNotifier $notifier,
         FormFactoryInterface $formFactory,
-        EntityManagerInterface $em,
         ResponsesFormatter $responsesFormatter,
-        Manager $manager,
         UserInvitationHandler $userInvitationHandler
     ) {
         $this->toggleManager = $toggleManager;
@@ -65,9 +63,7 @@ class RegisterMutation implements MutationInterface
         $this->tokenGenerator = $tokenGenerator;
         $this->notifier = $notifier;
         $this->formFactory = $formFactory;
-        $this->em = $em;
         $this->responsesFormatter = $responsesFormatter;
-        $this->manager = $manager;
         $this->userInvitationHandler = $userInvitationHandler;
     }
 
