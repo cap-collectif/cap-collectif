@@ -64,7 +64,7 @@ class GraphQLController extends BaseController
                 $schemaName = self::SCHEMA_PREVIEW;
             }
         }
-        if (self::SCHEMA_DEV === $schemaName && self::ENV_PROD !== $this->env) {
+        if (self::SCHEMA_DEV === $schemaName && self::ENV_PROD === $this->env) {
             $this->logger->warn('trying to access dev schema in prod environment.');
 
             throw new BadRequestHttpException('trying to access dev schema in prod environment.');
