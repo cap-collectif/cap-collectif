@@ -33,7 +33,7 @@ class Client extends BaseClient
             $query['track_total_hits'] = true;
         }
 
-        if (!$this->debug || !\is_array($data)) {
+        if (!$this->debug) {
             return parent::request($path, $method, $data, $query);
         }
 
@@ -62,7 +62,7 @@ class Client extends BaseClient
     private function logQuery(
         string $path,
         string $method,
-        array $data,
+        $data,
         array $query,
         $start,
         float $engineMS = 0.0,

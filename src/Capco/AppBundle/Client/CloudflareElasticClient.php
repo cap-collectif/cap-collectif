@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Client;
 
+use Capco\AppBundle\Elasticsearch\Client;
 use Capco\AppBundle\Enum\PlatformAnalyticsTrafficSourceType;
 use Elastica\Aggregation\Cardinality;
 use DateTimeInterface;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Terms;
-use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\Connection\HttpException;
@@ -21,11 +21,13 @@ class CloudflareElasticClient
 {
     private Client $esClient;
     private LoggerInterface $logger;
+    private LoggerInterface $esLoggerCollector;
     private string $hostname;
     private string $index;
 
     public function __construct(
         LoggerInterface $logger,
+        LoggerInterface $esLoggerCollector,
         string $hostname,
         string $environment,
         string $elasticsearchHost,
@@ -40,7 +42,7 @@ class CloudflareElasticClient
         $this->esClient = $this->createEsClient(
             $environment,
             $elasticsearchHost,
-            $logger,
+            $esLoggerCollector,
             $logpushElasticsearchHost,
             $logpushElasticsearchIndex,
             $logpushElasticsearchUsername,
@@ -355,7 +357,8 @@ class CloudflareElasticClient
                 'persistent' => false,
             ],
             null,
-            $logger
+            $logger,
+            $devOrTest
         );
     }
 

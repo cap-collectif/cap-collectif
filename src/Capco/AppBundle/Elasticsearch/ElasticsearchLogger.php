@@ -18,7 +18,7 @@ class ElasticsearchLogger implements LoggerInterface
     public function logQuery(
         string $path,
         string $method,
-        array $data,
+        $data,
         float $time,
         array $connection = [],
         array $query = [],
@@ -43,7 +43,7 @@ class ElasticsearchLogger implements LoggerInterface
 
         if (null !== $this->logger) {
             $message = sprintf('%s (%s) %0.2f ms', $path, $method, $time * 1000);
-            $this->logger->debug($message, $data);
+            $this->logger->debug($message, ['query_dsl' => $data]);
         }
     }
 
