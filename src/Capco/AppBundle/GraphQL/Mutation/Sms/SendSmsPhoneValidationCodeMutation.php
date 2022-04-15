@@ -49,7 +49,7 @@ class SendSmsPhoneValidationCodeMutation implements MutationInterface
 
         $apiErrorCode = 400 === $statusCode ? $response['data']['code'] : null;
 
-        if ($apiErrorCode === TwilioClient::ERRORS['INVALID_PARAMETER']) {
+        if ($apiErrorCode === TwilioClient::ERRORS['INVALID_PARAMETER'] || $apiErrorCode === TwilioClient::ERRORS['LANDLINE_NUMBER_NOT_SUPPORTED']) {
             return ['errorCode' => self::INVALID_NUMBER];
         }
 

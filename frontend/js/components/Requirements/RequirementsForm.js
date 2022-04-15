@@ -132,13 +132,12 @@ export const validate = (values: FormValues, props: Props) => {
   for (const edge of edges.filter(Boolean)) {
     const requirement = edge.node;
     if (requirement.__typename === 'PhoneRequirement') {
-      const phone = values[requirement.id];
+      let phone = values[requirement.id];
       if (typeof phone === 'string') {
-        const countryCode = phone.slice(0, 3);
-        const remainingPhone = phone.slice(3);
-        if (countryCode !== '+33') {
-          errors[requirement.id] = 'phone.validation.start.by.plus.thirty.three';
-        } else if (!/^[0-9]+$/.test(remainingPhone) || remainingPhone.length !== 9) {
+        if (phone.slice(0, 3) === '+33') {
+          phone = phone.replace('+33', '0');
+        }
+        if (!/^[0-9]+$/.test(phone) || phone.length !== 10) {
           errors[requirement.id] = 'profile.constraints.phone.invalid';
         }
       }
@@ -227,7 +226,11 @@ export const onChange = (
         input.lastname = newValue;
       }
       if (requirement.__typename === 'PhoneRequirement') {
-        input.phone = newValue;
+        if (newValue.slice(0, 3) === '+33') {
+          input.phone = newValue;
+        } else {
+          input.phone = `+33${newValue.charAt(0) === '0' ? newValue.substring(1) : newValue}`;
+        }
       }
 
       if (Object.keys(input).length < 1) {

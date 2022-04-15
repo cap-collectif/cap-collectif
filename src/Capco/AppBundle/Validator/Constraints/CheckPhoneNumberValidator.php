@@ -9,7 +9,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class CheckPhoneNumberValidator extends ConstraintValidator
 {
-
     private UserRepository $userRepository;
     private Security $security;
 
@@ -21,21 +20,17 @@ class CheckPhoneNumberValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$value) return;
-        $this->validateMobileNumberFormat($value, $constraint);
+        if (!$value) {
+            return;
+        }
+        $this->validateNumberLength($value, $constraint);
         $this->checkAlreadyUsed($value, $constraint);
     }
 
-    private function validateMobileNumberFormat(string $phone, Constraint $constraint)
+    private function validateNumberLength(string $phone, Constraint $constraint)
     {
-        $validMobileNumbers = ['+336', '+337'];
-        $numbersToCheck = substr($phone, 0, 4);
-        if (!in_array($numbersToCheck, $validMobileNumbers)) {
-            $this->context->buildViolation($constraint->mobileNumberMessage)->addViolation();
-        }
-
         $phoneMaxLength = 12; // +33 and 9 digits
-        if (strlen($phone) !== $phoneMaxLength) {
+        if (\strlen($phone) !== $phoneMaxLength) {
             $this->context->buildViolation($constraint->invalidLength)->addViolation();
         }
     }

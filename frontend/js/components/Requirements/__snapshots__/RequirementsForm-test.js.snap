@@ -37,8 +37,20 @@ exports[`<RequirementsForm /> call api on every value changed 2`] = `
         "type": "@@redux-form/START_SUBMIT",
       },
     ],
+    Array [
+      Object {
+        "meta": Object {
+          "form": "requirements-form",
+        },
+        "type": "@@redux-form/START_SUBMIT",
+      },
+    ],
   ],
   "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
     Object {
       "type": "return",
       "value": undefined,
@@ -86,6 +98,13 @@ exports[`<RequirementsForm /> call api on every value changed 4`] = `
     Array [
       Object {
         "input": Object {
+          "phone": "+33606060606",
+        },
+      },
+    ],
+    Array [
+      Object {
+        "input": Object {
           "dateOfBirth": "1992-04-09T23:21:06+0200",
         },
       },
@@ -106,6 +125,10 @@ exports[`<RequirementsForm /> call api on every value changed 4`] = `
     ],
   ],
   "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
     Object {
       "type": "return",
       "value": Promise {},

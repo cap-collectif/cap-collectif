@@ -15,6 +15,7 @@ class TwilioClient
     public const ERRORS = [
         'INVALID_PARAMETER' => 60200,
         'NOT_FOUND' => 20404,
+        'LANDLINE_NUMBER_NOT_SUPPORTED' => 60205,
     ];
 
     private Client $client;

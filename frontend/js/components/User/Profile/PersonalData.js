@@ -79,11 +79,11 @@ const validate = (values: Object, props: Props) => {
       errors.phone = 'fill-or-delete-field';
     }
     if (values.phone && typeof values.phone === 'string') {
-      const countryCode = values.phone.slice(0, 3);
-      const remainingPhone = values.phone.slice(3);
-      if (countryCode !== '+33') {
-        errors.phone = 'phone.validation.start.by.plus.thirty.three';
-      } else if (!/^[0-9]+$/.test(remainingPhone) || remainingPhone.length !== 9) {
+      let { phone } = values;
+      if (phone.slice(0, 3) === '+33') {
+        phone = phone.replace('+33', '0');
+      }
+      if (!/^[0-9]+$/.test(phone) || phone.length !== 10) {
         errors.phone = 'profile.constraints.phone.invalid';
       }
     }
@@ -132,6 +132,10 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     ...values,
   };
 
+  if (input.phone && input.phone.slice(0, 3) !== '+33') {
+    input.phone = `+33${input.phone.charAt(0) === '0' ? input.phone.substring(1) : input.phone}`;
+  }
+
   return UpdateProfilePersonalDataMutation.commit({ input })
     .then(response => {
       if (!response.updateProfilePersonalData || !response.updateProfilePersonalData.user) {
@@ -142,9 +146,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       if (errorCode) {
         let phone;
         switch (errorCode) {
-          case 'PHONE_SHOULD_BE_MOBILE_NUMBER':
-            phone = intl.formatMessage({ id: 'phone.validation.mobile.format' });
-            break;
           case 'PHONE_ALREADY_USED_BY_ANOTHER_USER':
             phone = intl.formatMessage({ id: 'phone.validation.number.already.used' });
             break;
@@ -823,7 +824,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                         </div>
                       )}
-                      {currentValues.userIdentificationCode !== null && (
+                      {!!currentValues.userIdentificationCode && (
                         <div className="horizontal_field_with_border_top">
                           <label
                             className="col-sm-3 control-label"

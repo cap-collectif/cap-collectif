@@ -47,16 +47,20 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
             $errors = $form->getErrors(true, true);
             foreach ($errors as $error) {
                 $message = $error->getMessage();
-                if ($message === UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER) {
-                    return ['user' => $this->user, 'errorCode' => UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER];
+                if (UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER === $message) {
+                    return [
+                        'user' => $this->user,
+                        'errorCode' => UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER,
+                    ];
                 }
-                if ($message === UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER) {
-                    return ['user' => $this->user, 'errorCode' => UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER];
-                }
-                if ($message === UserPhoneErrors::PHONE_INVALID_LENGTH) {
-                    return ['user' => $this->user, 'errorCode' => UserPhoneErrors::PHONE_INVALID_LENGTH];
+                if (UserPhoneErrors::PHONE_INVALID_LENGTH === $message) {
+                    return [
+                        'user' => $this->user,
+                        'errorCode' => UserPhoneErrors::PHONE_INVALID_LENGTH,
+                    ];
                 }
             }
+
             return [
                 'user' => $this->user,
                 'errorCode' => self::CANT_UPDATE,
