@@ -2,8 +2,11 @@
 
 namespace spec\Capco\UserBundle\Security\Core\User;
 
+use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
+use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
 use Capco\UserBundle\Handler\UserInvitationHandler;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\FacebookResourceOwner;
+use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Elasticsearch\Indexer;
@@ -16,6 +19,8 @@ use Capco\UserBundle\Security\Core\User\OauthUserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class OauthUserProviderSpec extends ObjectBehavior
 {
@@ -32,7 +37,8 @@ class OauthUserProviderSpec extends ObjectBehavior
         GroupMutation $groupMutation,
         FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
         LoggerInterface $logger,
-        UserInvitationHandler $userInvitationHandler
+        UserInvitationHandler $userInvitationHandler,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -43,7 +49,8 @@ class OauthUserProviderSpec extends ObjectBehavior
             $groupMutation,
             $franceConnectSSOConfigurationRepository,
             $logger,
-            $userInvitationHandler
+            $userInvitationHandler,
+            $tokenStorage
         );
     }
 
@@ -53,10 +60,13 @@ class OauthUserProviderSpec extends ObjectBehavior
         OpenIDResourceOwner $ressourceOwner,
         UserManagerInterface $userManager,
         User $user,
-        OpenIDExtraMapper $extraMapper
+        OpenIDExtraMapper $extraMapper,
+        TokenStorageInterface $tokenStorage,
+        TokenInterface $token
     ) {
         $this->generateGenericOpenIdResponse($response, $ressourceOwner);
-
+        $tokenStorage->getToken()->willReturn($token);
+        $token->getUser()->willReturn(null);
         // We try to find a user that match the criterias, but could not find one.
         $userRepository
             ->findByAccessTokenOrUsername('openid_access_token', 'openid_id')
@@ -103,11 +113,13 @@ class OauthUserProviderSpec extends ObjectBehavior
         UserRepository $userRepository,
         FacebookResourceOwner $ressourceOwner,
         UserManagerInterface $userManager,
-        User $user
+        User $user,
+        TokenStorageInterface $tokenStorage,
+        TokenInterface $token
     ) {
         $this->generateGenericFacebookResponse($response, $ressourceOwner);
-
-        // We try to find a user that match the criterias, but could not find one.
+        $tokenStorage->getToken()->willReturn($token);
+        $token->getUser()->willReturn(null); // We try to find a user that match the criterias, but could not find one.
         $userRepository
             ->findByAccessTokenOrUsername('facebook_access_token', '2081576388576162')
             ->willReturn(null);
@@ -146,10 +158,13 @@ class OauthUserProviderSpec extends ObjectBehavior
         UserRepository $userRepository,
         OpenIDResourceOwner $ressourceOwner,
         UserManagerInterface $userManager,
-        User $user
+        User $user,
+        TokenStorageInterface $tokenStorage,
+        TokenInterface $token
     ) {
         $this->generateGenericOpenIdResponse($response, $ressourceOwner);
-
+        $tokenStorage->getToken()->willReturn($token);
+        $token->getUser()->willReturn(null);
         // We disable refresh user informations at every login
         $ressourceOwner->isRefreshingUserInformationsAtEveryLogin()->willReturn(false);
 
@@ -175,16 +190,69 @@ class OauthUserProviderSpec extends ObjectBehavior
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
 
+    /**
+     * setFranceConnectI return null , I dont know why...
+     *
+     * public function it_associat_a_user_to_franceconnect(
+     * UserResponseInterface $response,
+     * FranceConnectResourceOwner $ressourceOwner,
+     * UserManagerInterface $userManager,
+     * User $user,
+     * TokenStorageInterface $tokenStorage,
+     * TokenInterface $token,
+     * FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
+     * FranceConnectSSOConfiguration $fcConfig,
+     * OAuthToken $OAuthToken
+     * ) {
+     * $this->generateGenericFranceConnectResponse($response, $ressourceOwner, $OAuthToken);
+     * $user->getEmail()->willReturn('viewer@email.com');
+     * $tokenStorage->getToken()->willReturn($token);
+     * $token->getUser()->willReturn($user);
+     * $allowedData = [
+     * 'given_name' => true,
+     * 'family_name' => true,
+     * 'birthdate' => true,
+     * 'gender' => true,
+     * 'birthplace' => false,
+     * 'birthcountry' => false,
+     * 'email' => true,
+     * 'preferred_username' => false,
+     * ];
+     * // We try to find a user that match the criterias, and find one.
+     * $franceConnectSSOConfigurationRepository->find('franceConnect')->shouldBeCalled()->willReturn($fcConfig);
+     * $fcConfig->getAllowedData()->willReturn($allowedData);
+     * // Here we assert right values are set for the user.
+     * $user->getFranceConnectId()->willReturn(null);
+     * $user->getId()->willReturn('<some uuid>');.
+     *
+     * $user
+     * ->setFranceConnectId('france_connect_id')
+     * ->shouldBeCalled()
+     * ->willReturn($user);
+     * //        $user
+     * //            ->setFranceConnectAccessToken('franceconnect_access_token')
+     * //            ->shouldBeCalled();
+     *
+     * $user->setFranceConnectIdToken('fc_raw_token')->shouldBeCalled();
+     *
+     * // We flush the new values.
+     * $userManager->updateUser($user)->shouldBeCalled();
+     *
+     * $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+     * }*/
     public function it_load_existing_openid_user_and_update_values(
         UserResponseInterface $response,
         UserRepository $userRepository,
         OpenIDResourceOwner $ressourceOwner,
         UserManagerInterface $userManager,
         User $user,
-        OpenIDExtraMapper $extraMapper
+        OpenIDExtraMapper $extraMapper,
+        TokenStorageInterface $tokenStorage,
+        TokenInterface $token
     ) {
         $this->generateGenericOpenIdResponse($response, $ressourceOwner);
-
+        $tokenStorage->getToken()->willReturn($token);
+        $token->getUser()->willReturn(null);
         // We enable refresh user informations at every login
         $ressourceOwner->isRefreshingUserInformationsAtEveryLogin()->willReturn(true);
 
@@ -231,6 +299,13 @@ class OauthUserProviderSpec extends ObjectBehavior
         $data['birthdate'] = '1992-12-12';
         $data['gender'] = 'male';
         $data['email'] = 'toto@alapla.ge';
+        $user->getFirstname()->willReturn(null);
+        $user->getLastname()->willReturn(null);
+        $user->getDateOfBirth()->willReturn(null);
+        $user->getGender()->willReturn(null);
+        $user->getUsername()->willReturn(null);
+        $user->getEmail()->willReturn(null);
+
         $response->getData()->willReturn($data);
         $user->setFirstname(ucfirst(strtolower($data['given_name'])))->shouldBeCalled();
         $user->setUsername('ala Toto')->shouldBeCalled();
@@ -253,7 +328,7 @@ class OauthUserProviderSpec extends ObjectBehavior
             'preferred_username' => false,
         ];
 
-        $this->map(
+        $this->mapFranceConnectData(
             $user->getWrappedObject(),
             $response->getWrappedObject(),
             $allowedData
@@ -270,6 +345,13 @@ class OauthUserProviderSpec extends ObjectBehavior
         $data['gender'] = 'male';
         $data['preferred_username'] = 'toto_fc_username';
         $data['email'] = 'toto@alapla.ge';
+        $user->getFirstname()->willReturn(null);
+        $user->getLastname()->willReturn(null);
+        $user->getDateOfBirth()->willReturn(null);
+        $user->getGender()->willReturn(null);
+        $user->getUsername()->willReturn(null);
+        $user->getEmail()->willReturn(null);
+
         $response->getData()->willReturn($data);
         $user->setFirstname(ucfirst(strtolower($data['given_name'])))->shouldBeCalled();
         $user->setUsername('toto_fc_username')->shouldBeCalled();
@@ -293,7 +375,49 @@ class OauthUserProviderSpec extends ObjectBehavior
             'preferred_username' => true,
         ];
 
-        $this->map(
+        $this->mapFranceConnectData(
+            $user->getWrappedObject(),
+            $response->getWrappedObject(),
+            $allowedData
+        )->shouldReturn($user);
+    }
+
+    public function it_dont_map_because_user_exist(UserResponseInterface $response, User $user)
+    {
+        $data = [];
+        $data['given_name'] = 'toto';
+        $data['family_name'] = 'titi';
+        $data['birthplace'] = false;
+        $data['birthdate'] = '1992-12-12';
+        $data['gender'] = 'male';
+        $data['preferred_username'] = 'toto_fc_username';
+        $data['email'] = 'toto@alapla.ge';
+        $user->getFirstname()->willReturn('TOTO_AVANT');
+        $user->getLastname()->willReturn('ALA');
+        $user->getDateOfBirth()->willReturn(\DateTime::createFromFormat('Y-m-d', '1990-10-10'));
+        $user->getGender()->willReturn('mal');
+        $user->getUsername()->willReturn('username');
+        $user->getEmail()->willReturn('totoala@ferme.com');
+
+        $response->getData()->willReturn($data);
+        $user->setFirstname('Toto')->shouldBeCalled();
+        $user->setUsername('toto_fc_username')->shouldNotBeCalled();
+        $user->setLastname('titi')->shouldBeCalled();
+        $user->setGender('m')->shouldBeCalled();
+        $user->setEmail($data['email'])->shouldNotBeCalled();
+        $user->setDateOfBirth()->shouldNotBeCalled();
+        $allowedData = [
+            'given_name' => true,
+            'family_name' => true,
+            'birthdate' => false,
+            'gender' => true,
+            'birthplace' => false,
+            'birthcountry' => false,
+            'email' => true,
+            'preferred_username' => true,
+        ];
+
+        $this->mapFranceConnectData(
             $user->getWrappedObject(),
             $response->getWrappedObject(),
             $allowedData
@@ -326,5 +450,34 @@ class OauthUserProviderSpec extends ObjectBehavior
         $response->getResourceOwner()->willReturn($ressourceOwner);
         $response->getLastName()->willReturn('Smith');
         $response->getFirstName()->willReturn('jean');
+    }
+
+    private function generateGenericFranceConnectResponse(
+        UserResponseInterface $response,
+        FranceConnectResourceOwner $ressourceOwner,
+        OAuthToken $OAuthToken
+    ) {
+        $data = [
+            'given_name' => 'Jean Jacques',
+            'family_name' => 'GoldMan',
+            'birthdate' => null,
+            'gender' => 'male',
+            'birthplace' => null,
+            'birthcountry' => null,
+            'email' => 'jeanjacques@goldman.com',
+            'preferred_username' => 'jj',
+        ];
+        $response->getData()->willReturn($data);
+        $ressourceOwner->getName()->willReturn('franceconnect');
+        $response->getEmail()->willReturn('jeanjacques@goldman.com');
+        $response->getNickname()->willReturn('JJ');
+        $response->getAccessToken()->willReturn('franceconnect_access_token');
+        $response->getUsername()->willReturn('jj');
+        $response->getResourceOwner()->willReturn($ressourceOwner);
+        $response->getLastName()->willReturn('GoldMan');
+        $response->getFirstName()->willReturn('Jean Jacques');
+        $response->getOAuthToken()->willReturn($OAuthToken);
+        $token = ['id_token' => 'fc_raw_token'];
+        $OAuthToken->getRawToken()->willReturn($token);
     }
 }

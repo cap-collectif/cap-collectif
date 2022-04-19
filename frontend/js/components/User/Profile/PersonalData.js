@@ -337,6 +337,16 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         </Button>
       </div>
     );
+    const canDisplaySubmitButton =
+      (viewer.isFranceConnectAccount &&
+        (viewer.address ||
+          viewer.address2 ||
+          viewer.city ||
+          viewer.zipCode ||
+          viewer.userIdentificationCode ||
+          viewer.postalAddress ||
+          viewer.phone)) ||
+      !isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount);
 
     return (
       <PersonnalDataContainer id="personal-data">
@@ -803,7 +813,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 disabled={isSsoFcOrOccitanie(false)}
                               />
                             </div>
-                            {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
+                            {!isSsoFcOrOccitanie(false) && (
                               <div className="col-sm-4 btn--delete">
                                 <OverlayTrigger
                                   trigger="click"
@@ -866,16 +876,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 </div>
               )}
             </Panel.Body>
-            {((viewer.isFranceConnectAccount &&
-              (viewer.address ||
-                viewer.address2 ||
-                viewer.city ||
-                viewer.zipCode ||
-                viewer.userIdentificationCode ||
-                viewer.phone)) ||
-              !isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount)) && (
-              <Panel.Footer>{footer}</Panel.Footer>
-            )}
+            {canDisplaySubmitButton && <Panel.Footer>{footer}</Panel.Footer>}
           </Panel>
         </form>
         <Panel>

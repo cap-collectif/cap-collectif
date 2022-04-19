@@ -11,6 +11,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
@@ -25,6 +26,7 @@ class OauthUserProvider extends FOSUBUserProvider
     private FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository;
     private LoggerInterface $logger;
     private UserInvitationHandler $userInvitationHandler;
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(
         UserManagerInterface $userManager,
@@ -35,7 +37,8 @@ class OauthUserProvider extends FOSUBUserProvider
         GroupMutation $groupMutation,
         FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
         LoggerInterface $logger,
-        UserInvitationHandler $userInvitationHandler
+        UserInvitationHandler $userInvitationHandler,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->userRepository = $userRepository;
         $this->extraMapper = $extraMapper;
@@ -44,6 +47,7 @@ class OauthUserProvider extends FOSUBUserProvider
         $this->franceConnectSSOConfigurationRepository = $franceConnectSSOConfigurationRepository;
         $this->logger = $logger;
         $this->userInvitationHandler = $userInvitationHandler;
+        $this->tokenStorage = $tokenStorage;
 
         parent::__construct($userManager, $properties);
     }
@@ -76,13 +80,18 @@ class OauthUserProvider extends FOSUBUserProvider
     {
         $ressourceOwner = $response->getResourceOwner();
         $serviceName = $ressourceOwner->getName();
-
+        $viewer = $this->tokenStorage->getToken()
+            ? $this->tokenStorage->getToken()->getUser()
+            : null;
         $email = $response->getEmail() ?: $serviceName . '_' . $response->getUsername();
         $this->debug($response);
         $username =
             $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
         // because, accounts created with FranceConnect can change their email
-        $user = $this->getUser($email, $response);
+        $user =
+            'franceconnect' === $serviceName && $viewer instanceof User
+                ? $viewer
+                : $this->getUser($email, $response);
         $isNewUser = false;
         if (null === $user) {
             $isNewUser = true;
@@ -110,7 +119,7 @@ class OauthUserProvider extends FOSUBUserProvider
             $fcConfig = $this->franceConnectSSOConfigurationRepository->find('franceConnect');
 
             // in next time, we can associate franceConnect after manually create account, so we have to dissociate if it's a new account or not
-            $user = $this->map($user, $response, $fcConfig->getAllowedData());
+            $user = $this->mapFranceConnectData($user, $response, $fcConfig->getAllowedData());
             $user->setFranceConnectIdToken($response->getOAuthToken()->getRawToken()['id_token']);
         }
 
@@ -130,7 +139,7 @@ class OauthUserProvider extends FOSUBUserProvider
     /**
      * https://partenaires.franceconnect.gouv.fr/fcp/fournisseur-service#identite-pivot.
      */
-    public function map(
+    public function mapFranceConnectData(
         UserInterface $user,
         UserResponseInterface $userResponse,
         array $allowedData
@@ -167,14 +176,16 @@ class OauthUserProvider extends FOSUBUserProvider
             }
             $user->setGender($gender);
         }
-        if ($allowedData['email']) {
+        if ($allowedData['email'] && !$user->getEmail()) {
             $user->setEmail($userInfoData['email']);
         }
 
-        if ($allowedData['preferred_username'] && !empty($userInfoData['preferred_username'])) {
-            $user->setUsername($userInfoData['preferred_username']);
-        } else {
-            $user->setUsername($userInfoData['family_name'] . ' ' . $firstName);
+        if (!$user->getUsername()) {
+            if ($allowedData['preferred_username'] && !empty($userInfoData['preferred_username'])) {
+                $user->setUsername($userInfoData['preferred_username']);
+            } else {
+                $user->setUsername($userInfoData['family_name'] . ' ' . $firstName);
+            }
         }
 
         return $user;
