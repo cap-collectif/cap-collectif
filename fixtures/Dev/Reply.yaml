@@ -169,3 +169,15 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2016-03-02'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+    replyCivicIA:
+        id: 'replyCivicIA'
+        author: '@userMickael'
+        draft: 0
+        questionnaire: '@questionnaire1'
+        publishedAt: <(new \DateTime('2022-01-01'))>
+        createdAt: <(new \DateTime('2022-01-01'))>
+        updatedAt: <(new \DateTime('2022-01-01'))>
+        undraftAt: $publishedAt
+        iaCategory: 'food'
+        iaSentiment: 'neutral'
+        iaReadability: 97

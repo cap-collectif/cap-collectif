@@ -48,9 +48,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 3,
+            "totalCount": 4,
           },
-          "contributionsCount": 3,
+          "contributionsCount": 4,
           "contributors": Object {
             "totalCount": 1,
           },
@@ -278,9 +278,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 3,
+            "totalCount": 4,
           },
-          "contributionsCount": 3,
+          "contributionsCount": 4,
           "contributors": Object {
             "totalCount": 1,
           },

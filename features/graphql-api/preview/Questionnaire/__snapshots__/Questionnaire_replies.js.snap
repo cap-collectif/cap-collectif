@@ -4,16 +4,16 @@ exports[`Preview|Questionnaire.replies connection fetches all replies counters a
 Object {
   "node": Object {
     "allReplies": Object {
-      "totalCount": 39,
+      "totalCount": 40,
     },
     "publishedAndDraftReplies": Object {
-      "totalCount": 36,
+      "totalCount": 37,
     },
     "publishedAndUnpublishedReplies": Object {
-      "totalCount": 36,
+      "totalCount": 37,
     },
     "publishedReplies": Object {
-      "totalCount": 34,
+      "totalCount": 35,
     },
   },
 }
@@ -23,16 +23,16 @@ exports[`Preview|Questionnaire.replies connection fetches published counters onl
 Object {
   "node": Object {
     "allReplies": Object {
-      "totalCount": 34,
+      "totalCount": 35,
     },
     "publishedAndDraftReplies": Object {
-      "totalCount": 34,
+      "totalCount": 35,
     },
     "publishedAndUnpublishedReplies": Object {
-      "totalCount": 34,
+      "totalCount": 35,
     },
     "publishedReplies": Object {
-      "totalCount": 34,
+      "totalCount": 35,
     },
   },
 }
@@ -43,6 +43,112 @@ Object {
   "node": Object {
     "replies": Object {
       "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNjQwOTkxNjAwMDAwO2k6MTtzOjEyOiJyZXBseUNpdmljSUEiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyTWlja2FlbA==",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": null,
+            },
+            "createdAt": "2022-01-01 00:00:00",
+            "id": "UmVwbHk6cmVwbHlDaXZpY0lB",
+            "publishedAt": "2022-01-01 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+            ],
+            "updatedAt": "2022-01-01 00:00:00",
+          },
+        },
         Object {
           "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5MSI7fQ==",
           "node": Object {
@@ -3744,7 +3850,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNDU2Nzg2ODAwMDAwO2k6MTtzOjY6InJlcGx5MSI7fQ==",
         "hasNextPage": false,
       },
-      "totalCount": 34,
+      "totalCount": 35,
     },
   },
 }
@@ -3755,6 +3861,16 @@ Object {
   "node": Object {
     "replies": Object {
       "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNjQwOTkxNjAwMDAwO2k6MTtzOjEyOiJyZXBseUNpdmljSUEiO30=",
+          "node": Object {
+            "createdAt": "2022-01-01 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlDaXZpY0lB",
+            "published": true,
+            "publishedAt": "2022-01-01 00:00:00",
+          },
+        },
         Object {
           "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5MSI7fQ==",
           "node": Object {
@@ -4150,7 +4266,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNDU2Nzg2ODAwMDAwO2k6MTtzOjY6InJlcGx5MSI7fQ==",
         "hasNextPage": false,
       },
-      "totalCount": 39,
+      "totalCount": 40,
     },
   },
 }

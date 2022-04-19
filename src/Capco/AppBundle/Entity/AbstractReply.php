@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\CivicIA\CivicIATrait;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\VoteContribution;
@@ -22,14 +23,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class AbstractReply implements Contribution, VoteContribution
 {
     use AuthorInformationTrait;
+    use CivicIATrait;
     use PublishableTrait;
     use TimestampableTrait;
     use UuidTrait;
-
-    public function __construct()
-    {
-        $this->updatedAt = new \DateTime();
-    }
 
     /**
      * @Assert\NotNull()
@@ -43,6 +40,11 @@ abstract class AbstractReply implements Contribution, VoteContribution
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private \DateTimeInterface $updatedAt;
+
+    public function __construct()
+    {
+        $this->updatedAt = new \DateTime();
+    }
 
     public function __toString(): string
     {
@@ -90,7 +92,11 @@ abstract class AbstractReply implements Contribution, VoteContribution
 
     public function isViewerProjectOwner(User $viewer): bool
     {
-        return $viewer->isProjectAdmin() && $this->getQuestionnaire()->getStep()->getProject()->getOwner() === $viewer;
+        return $viewer->isProjectAdmin() &&
+            $this->getQuestionnaire()
+                ->getStep()
+                ->getProject()
+                ->getOwner() === $viewer;
     }
 
     public function isIndexable(): bool
@@ -117,5 +123,4 @@ abstract class AbstractReply implements Contribution, VoteContribution
             'ElasticsearchReplyNestedProject',
         ];
     }
-
 }

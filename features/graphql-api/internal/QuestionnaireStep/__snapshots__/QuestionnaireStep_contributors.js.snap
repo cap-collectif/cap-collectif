@@ -13,6 +13,12 @@ Object {
         },
         Object {
           "node": Object {
+            "id": "VXNlcjp1c2VyTWlja2FlbA==",
+            "username": "Dev null",
+          },
+        },
+        Object {
+          "node": Object {
             "id": "VXNlcjp1c2VyMjA=",
             "username": "user20",
           },
@@ -29,14 +35,8 @@ Object {
             "username": "user18",
           },
         },
-        Object {
-          "node": Object {
-            "id": "VXNlcjp1c2VyMTc=",
-            "username": "user17",
-          },
-        },
       ],
-      "totalCount": 20,
+      "totalCount": 21,
     },
     "id": "questionnairestep1",
     "title": "Questionnaire des JO 2024",

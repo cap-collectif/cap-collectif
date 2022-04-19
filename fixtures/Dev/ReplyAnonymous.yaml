@@ -21,3 +21,13 @@ Capco\AppBundle\Entity\ReplyAnonymous:
         createdAt: <(new \DateTime('2018-03-01'))>
         updatedAt: <(new \DateTime('2018-03-01'))>
         token: 'ghi'
+    replyAnonymousCivicIA:
+        id: 'replyAnonymous3'
+        questionnaire: '@questionnaireAnonymous'
+        publishedAt: <(new \DateTime('2017-03-01'))>
+        createdAt: <(new \DateTime('2017-03-01'))>
+        updatedAt: <(new \DateTime('2017-03-01'))>
+        token: 'jkl'
+        iaCategory: 'health'
+        iaSentiment: 'positive'
+        iaReadability: 3

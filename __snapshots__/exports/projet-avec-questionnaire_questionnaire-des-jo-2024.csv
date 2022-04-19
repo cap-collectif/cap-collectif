@@ -5,6 +5,7 @@ reply5,Yes,"2016-03-05 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"20
 reply6,Yes,"2016-03-06 00:00:00",user_updating_email,user515,user_updating_email@test.com,,"2016-03-06 00:00:00","2019-03-06 00:00:00",No,No,"2016-03-06 00:00:00",Yes,,,No,,,,"Pas assez fort (Mon sonotone est en panne)",,,,,,,"Profession libérale"
 reply7,No,,user_not_confirmed,user_not_confirmed,user_not_confirmed@test.com,+33628353289,"2016-03-07 00:00:00","2019-03-07 00:00:00",No,No,"2016-03-07 00:00:00",Yes,,,No,"Trop cool ! On va voir Tibo qui cours en slip !",,,,,,Oui,,,,
 reply9,Yes,"2016-03-22 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"2016-03-05 00:00:00","2016-03-20 00:00:00",No,Yes,"2016-03-22 00:00:00",Yes,,,No,,,,,,,,,,,
+replyCivicIA,Yes,"2022-01-01 00:00:00","Dev null",userMickael,mickael@cap-collectif.com,,"2022-01-01 00:00:00","2022-01-01 00:00:00",No,No,"2022-01-01 00:00:00",Yes,,,No,,,,,,,,,,,
 replyMajority10,Yes,"2016-03-02 00:00:00",user10,user10,user10@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,Yes,,,No,,,,,,,,,,very-well,
 replyMajority11,Yes,"2016-03-02 00:00:00",user11,user11,user11@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,Yes,,,No,,,,,,,,,,very-well,
 replyMajority12,Yes,"2016-03-02 00:00:00",user12,user12,user12@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,Yes,,,No,,,,,,,,,,global-well,
