@@ -64,11 +64,7 @@ const UserInvitationSSOPage = ({
   const organizationName = useSelector(
     (state: GlobalState) => state.default.parameters['global.site.organization_name'],
   );
-  const ssoByPassAuth = useFeatureFlag('sso_by_pass_auth');
   const oauth2SwitchUser = useFeatureFlag('oauth2_switch_user');
-  const shieldMode = useFeatureFlag('shield_mode');
-
-  console.log({shieldMode})
 
   return (
     <Container>
@@ -122,7 +118,7 @@ const UserInvitationSSOPage = ({
                 );
               })}
             </>
-            {(!ssoByPassAuth && !shieldMode) && (
+            { !loginParis && (
               <>
                 <Flex alignItems="center" width="100%" mb={4}>
                   <Line />
