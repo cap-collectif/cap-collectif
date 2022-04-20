@@ -2004,6 +2004,18 @@ type CheckboxRequirement implements Node & Requirement {
   label: String!
 }
 
+"""Sentiments detected by civicIA."""
+enum CivicIASentiment {
+  """Positive sentiment."""
+  POSITIVE
+
+  """Neutral or undetected sentiment."""
+  NEUTRAL
+
+  """Negative sentiment."""
+  NEGATIVE
+}
+
 """A proposal step"""
 type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   """The ID of an object."""
@@ -17165,6 +17177,15 @@ type ValueResponse implements Response {
 
   """The response value formatted."""
   formattedValue: String
+
+  """Detected category by civicIA."""
+  iaCategory: String
+
+  """Detected readability by civicIA. The higher the more complex."""
+  iaReadability: Int
+
+  """Detected sentiment by civicIA."""
+  iaSentiment: CivicIASentiment
 }
 
 """Available errors for an `verifyUserPhoneNumber` mutation."""

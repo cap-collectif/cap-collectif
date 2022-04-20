@@ -1,0 +1,14 @@
+CivicIASentiment:
+    type: enum
+    config:
+        description: 'Sentiments detected by civicIA.'
+        values:
+            POSITIVE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\CivicIASentimentEnum::POSITIVE")'
+                description: 'Positive sentiment.'
+            NEUTRAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\CivicIASentimentEnum::NEUTRAL")'
+                description: 'Neutral or undetected sentiment.'
+            NEGATIVE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\CivicIASentimentEnum::NEGATIVE")'
+                description: 'Negative sentiment.'

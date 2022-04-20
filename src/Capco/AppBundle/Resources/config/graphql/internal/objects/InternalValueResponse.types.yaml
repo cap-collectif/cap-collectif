@@ -23,3 +23,15 @@ InternalValueResponse:
                 type: 'String'
                 description: 'The response value formatted.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedValueResponseTypeResolver", [value])'
+            iaCategory:
+                type: 'String'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Detected category by civicIA.'
+            iaReadability:
+                type: 'Int'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Detected readability by civicIA. The higher the more complex.'
+            iaSentiment:
+                type: 'CivicIASentiment'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Detected sentiment by civicIA.'
