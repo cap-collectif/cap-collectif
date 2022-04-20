@@ -1,5 +1,4 @@
 ﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentInternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl,userIdentificationCode
-VXNlcjp1c2VyTWlja2FlbA==,mickael@cap-collectif.com,"Dev null",,"2019-11-04 09:30:00",,,Utilisateur,Yes,Yes,Yes,No,No,,,,"La raclette c'est bon.",,,,,https://capco.dev/profile/devnull,
 VXNlcjp1c2VyMTUw,user150@cap-collectif.com,user150,Citoyen,"2017-01-01 02:30:00",,,Utilisateur,Yes,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user150,
 VXNlcjp1c2VyMjA=,user20@cap-collectif.com,user20,Citoyen,"2017-01-01 00:20:00",,,Utilisateur,Yes,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user20,
 VXNlcjp1c2VyMTk=,user19@cap-collectif.com,user19,Citoyen,"2017-01-01 00:19:00",,,Utilisateur,Yes,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user19,

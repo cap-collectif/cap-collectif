@@ -439,7 +439,7 @@ Object {
         },
         Object {
           "key": "2017-02-01T00:00:00.000Z",
-          "totalCount": 44,
+          "totalCount": 43,
         },
         Object {
           "key": "2017-03-01T00:00:00.000Z",
@@ -651,26 +651,6 @@ Object {
         },
         Object {
           "key": "2021-07-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2021-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2021-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2021-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2021-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2021-12-01T00:00:00.000Z",
           "totalCount": 1,
         },
       ],
@@ -995,26 +975,6 @@ Object {
         },
         Object {
           "key": "2021-07-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2021-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2021-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2021-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2021-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2021-12-01T00:00:00.000Z",
           "totalCount": 1,
         },
       ],

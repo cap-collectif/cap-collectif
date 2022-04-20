@@ -9,22 +9,6 @@ Object {
           "node": Object {
             "__typename": "UserReply",
             "author": Object {
-              "email": "mickael@cap-collectif.com",
-              "username": "Dev null",
-            },
-            "createdAt": "2022-01-01 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlDaXZpY0lB",
-            "notPublishedReason": null,
-            "published": true,
-            "status": "PUBLISHED",
-            "updatedAt": "2022-01-01 00:00:00",
-          },
-        },
-        Object {
-          "node": Object {
-            "__typename": "UserReply",
-            "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
             },
@@ -646,7 +630,7 @@ Object {
           },
         },
       ],
-      "totalCount": 40,
+      "totalCount": 39,
     },
     "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
     "title": "Votre avis sur les JO 2024 à Paris",
@@ -1022,17 +1006,8 @@ Object {
             "updatedAt": "2020-02-12 00:00:00",
           },
         },
-        Object {
-          "node": Object {
-            "__typename": "UserReply",
-            "createdAt": "2022-01-01 00:00:00",
-            "id": "UmVwbHk6cmVwbHlDaXZpY0lB",
-            "publishedAt": "2022-01-01 00:00:00",
-            "updatedAt": "2022-01-01 00:00:00",
-          },
-        },
       ],
-      "totalCount": 40,
+      "totalCount": 39,
     },
     "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
   },
@@ -1106,15 +1081,6 @@ Object {
   "node": Object {
     "adminReplies": Object {
       "edges": Array [
-        Object {
-          "node": Object {
-            "__typename": "UserReply",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlDaXZpY0lB",
-            "published": true,
-            "status": "PUBLISHED",
-          },
-        },
         Object {
           "node": Object {
             "__typename": "UserReply",
@@ -1422,7 +1388,7 @@ Object {
           },
         },
       ],
-      "totalCount": 35,
+      "totalCount": 34,
     },
     "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
   },

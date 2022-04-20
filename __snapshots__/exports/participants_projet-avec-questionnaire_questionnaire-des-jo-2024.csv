@@ -1,6 +1,5 @@
 ﻿user_id,user_email,user_userName,user_TypeName,user_createdAt,user_updatedAt,user_lastLogin,user_rolesText,user_consentInternalCommunication,user_enabled,user_isEmailConfirmed,user_locked,user_phoneConfirmed,user_gender,user_websiteUrl,user_biography,user_zipCode,user_city,user_firstname,user_lastname,user_dateOfBirth,user_postalAddress,user_phone,user_profileUrl,userIdentificationCode
 VXNlcjp1c2VyMTUw,user150@cap-collectif.com,user150,Citoyen,"2017-01-01 02:30:00",,,Utilisateur,1,1,1,,,,,,,,firstname150,lastname150,,,,https://capco.dev/profile/user150,
-VXNlcjp1c2VyTWlja2FlbA==,mickael@cap-collectif.com,"Dev null",,"2019-11-04 09:30:00",,,Utilisateur,1,1,1,,,,,"La raclette c'est bon.",,,Mickael,Buliard,,,,https://capco.dev/profile/devnull,
 VXNlcjp1c2VyMjA=,user20@cap-collectif.com,user20,Citoyen,"2017-01-01 00:20:00",,,Utilisateur,1,1,1,,,,,,,,firstname20,lastname20,,,,https://capco.dev/profile/user20,
 VXNlcjp1c2VyMTk=,user19@cap-collectif.com,user19,Citoyen,"2017-01-01 00:19:00",,,Utilisateur,1,1,1,,,,,,,,firstname19,lastname19,,,,https://capco.dev/profile/user19,
 VXNlcjp1c2VyMTg=,user18@cap-collectif.com,user18,Citoyen,"2017-01-01 00:18:00",,,Utilisateur,1,1,1,,,,,,,,firstname18,lastname18,,,,https://capco.dev/profile/user18,

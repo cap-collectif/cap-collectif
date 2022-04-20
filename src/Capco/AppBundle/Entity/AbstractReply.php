@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\CivicIA\CivicIATrait;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\VoteContribution;
@@ -23,7 +22,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class AbstractReply implements Contribution, VoteContribution
 {
     use AuthorInformationTrait;
-    use CivicIATrait;
     use PublishableTrait;
     use TimestampableTrait;
     use UuidTrait;

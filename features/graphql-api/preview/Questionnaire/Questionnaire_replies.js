@@ -82,11 +82,9 @@ const AllRepliesQuery = /* GraphQL */ `
             node {
               id
               published
+              draft
               createdAt
               publishedAt
-              ... on UserReply {
-                draft
-              }
             }
           }
         }

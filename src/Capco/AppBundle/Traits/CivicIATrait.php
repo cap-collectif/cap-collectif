@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\CivicIA;
+namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Enum\CivicIASentimentEnum;
 use Doctrine\ORM\Mapping as ORM;

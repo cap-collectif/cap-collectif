@@ -821,6 +821,9 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud8'
         value: Pas trop non plus, j'aime pas le sport. or
         createdAt: <(new \DateTime('2021-01-01 04:18:00'))>
+        iaCategory: 'sport'
+        iaSentiment: 'negative'
+        iaReadability: 37
     responseTagCloud16:
         question: '@xQuestion1'
         reply: '@replyTagCloud8'
@@ -918,6 +921,9 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud15'
         value: "Et une petite dernière pour la route quand même juste pour vous demandez comment vous allez ? Et la je rajoute des petits mots clés tels que : sportifs, sport, JO, athlètes, beurre de cacahuète, bruit, divertissement, sirop d'érable, une bouteille d'huile et des raviolis mais je crois que je viens de lire ma liste de course en même temps."
         createdAt: <(new \DateTime('2021-01-01 04:29:00'))>
+        iaCategory: 'sport'
+        iaSentiment: 'neutral'
+        iaReadability: 80
     responseTagCloud30:
         question: '@xQuestion1'
         reply: '@replyTagCloud15'
@@ -932,8 +938,12 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         replyAnonymous: '@replyAnonymous1'
         value: 'bien'
         createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
+        iaSentiment: 'positive'
+        iaReadability: 7
     responseAnonymousQuestionnaire2:
         question: '@simpleQuestionAnonymousQuestionnaire'
         replyAnonymous: '@replyAnonymous2'
         value: 'bien bien bien'
         createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
+        iaSentiment: 'positive'
+        iaReadability: 12

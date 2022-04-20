@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Responses;
 
+use Capco\AppBundle\Traits\CivicIATrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ValueResponse extends AbstractResponse
 {
+    use CivicIATrait;
+
     /**
      * @ORM\Column(name="value", type="json", nullable=true)
      *
