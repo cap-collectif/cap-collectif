@@ -161,7 +161,9 @@ def behat(fast_failure='true', profile='false', suite='false', tags='false', tim
 
 
 def view(firefox='false'):
-    if Config.dinghy:
+    if Config.docker_for_mac:
+        run('echo "secret" | open vnc://localhost:5900')
+    elif Config.dinghy:
         run('echo "secret" | open vnc://`docker-machine ip dinghy`')
     else:
         if firefox != 'false':
