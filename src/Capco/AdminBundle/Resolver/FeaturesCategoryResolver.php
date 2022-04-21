@@ -72,6 +72,7 @@ class FeaturesCategoryResolver
                     Manager::twilio,
                     Manager::unstable__paper_vote,
                     Manager::helpscout_beacon,
+                    Manager::api_sendinblue,
                 ],
             ],
         ],

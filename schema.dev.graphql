@@ -6163,6 +6163,9 @@ enum FeatureFlagType {
 
   """Whether or not the Helpscout beacon is enabled"""
   helpscout_beacon
+
+  """Whether or not the Sendiblue API is enabled"""
+  api_sendinblue
 }
 
 """Require a firstname"""

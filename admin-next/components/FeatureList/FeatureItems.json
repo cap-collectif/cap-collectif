@@ -342,6 +342,11 @@
                         "title": "capco.module.graphql_introspection",
                         "description": "",
                         "onlySuperAdmin": false
+                    },
+                    "api_sendinblue": {
+                        "title": "capco.module.api_sendinblue",
+                        "description": "",
+                        "onlySuperAdmin": true
                     }
                 }
             }

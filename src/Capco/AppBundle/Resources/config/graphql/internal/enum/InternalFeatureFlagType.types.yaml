@@ -160,3 +160,6 @@ InternalFeatureFlagType:
             helpscout_beacon:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::helpscout_beacon")'
                 description: 'Whether or not the Helpscout beacon is enabled'
+            api_sendinblue:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::api_sendinblue")'
+                description: 'Whether or not the Sendiblue API is enabled'
