@@ -35,6 +35,7 @@ coverage/*
 /app/config/parameters.yml
 
 # infra
+infrastructure/services/local/nginx/ssl
 infrastructure/environments/current.yml
 infrastructure/services/databasefixtures/dump.sql
 
