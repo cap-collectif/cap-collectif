@@ -46,6 +46,7 @@ class AnalyticsSearch
         array $requestedFields,
         ?string $projectId = null
     ): \Elastica\Multi\ResultSet {
+
         $multiSearchQuery = new Search($this->getClient());
         $searchQueries = [
             'registrations' => $this->createUserRegistrationsQuery($start, $end),
@@ -72,9 +73,8 @@ class AnalyticsSearch
             ),
         ];
 
-        $multiSearchQuery->addSearches(
-            $this->unsetNonRequestedSearchQueries($searchQueries, $requestedFields)
-        );
+        $searches = $this->unsetNonRequestedSearchQueries($searchQueries, $requestedFields);
+        $multiSearchQuery->addSearches($searches);
 
         try {
             $searchResult = $multiSearchQuery->search();
@@ -166,13 +166,14 @@ class AnalyticsSearch
         DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
-
         // the object should either be debateAnonymousVote or an anonymous reply
         $objectTypeBoolQuery = new BoolQuery();
         $objectTypeBoolQuery->addShould(new Query\Term(['objectType' => 'debateAnonymousVote']));
-        $objectTypeBoolQuery->addShould((new BoolQuery())
+        $objectTypeBoolQuery->addShould(
+            (new BoolQuery())
                 ->addFilter(new Query\Term(['objectType' => 'reply']))
-                ->addFilter(new Query\Term(['replyType' => 'replyAnonymous'])));
+                ->addFilter(new Query\Term(['replyType' => 'replyAnonymous']))
+        );
 
         $boolQuery = new BoolQuery();
         $boolQuery

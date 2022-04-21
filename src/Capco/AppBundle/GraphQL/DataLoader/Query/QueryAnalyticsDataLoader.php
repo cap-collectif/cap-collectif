@@ -127,69 +127,74 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
 
         // Before triggering each multi search query, we check if we need to by
         // the intersection of the requested fields and those available in the queries
-        if (
-            !empty(array_intersect($requestedFields, $internalAnalyticKeys)) &&
-            ($internalSets = $this->analyticsSearch->getInternalAnalyticsResultSet(
+        if (!empty(array_intersect($requestedFields, $internalAnalyticKeys))) {
+            $internalSets = $this->analyticsSearch->getInternalAnalyticsResultSet(
                 $start,
                 $end,
                 $topContributorsCount,
                 $requestedFields,
                 $projectId
-            ))
-        ) {
+            );
             $sets = $internalSets->getResultSets();
-            $results = array_merge($results, [
-                'registrations' => isset($sets['registrations'])
-                    ? AnalyticsRegistrations::fromEs($sets['registrations'])
-                    : [],
-                'votes' => isset($sets['votes']) ? AnalyticsVotes::fromEs($sets['votes']) : [],
-                'comments' => isset($sets['comments'])
-                    ? AnalyticsComments::fromEs($sets['comments'])
-                    : [],
-                'contributions' => isset($sets['contributions'])
-                    ? AnalyticsContributions::fromEs($sets['contributions'])
-                    : [],
-                'followers' => isset($sets['followers'])
-                    ? AnalyticsFollowers::fromEs($sets['followers'])
-                    : [],
-                'contributors' => isset($sets['contributors'])
-                    ? AnalyticsContributors::fromEs($sets['contributors'])
-                    : [],
-                'topContributors' => isset($sets['topContributors'])
-                    ? $this->analyticsTopContributors
-                        ->fromEs($sets['topContributors'])
-                        ->getContributors()
-                    : [],
-                'anonymousContributors' => isset($sets['anonymousContributors'])
-                    ? AnalyticsAnonymousContributors::fromEs($sets['anonymousContributors'])
-                    : [],
-                'mostUsedProposalCategories' => isset($sets['mostUsedProposalCategories'])
-                    ? $this->analyticsMostUsedProposalCategories->fromEs(
-                        $sets['mostUsedProposalCategories']
-                    )
-                    : [],
-            ]);
+
+            if (isset($sets['registrations'])) {
+                $results['registrations'] = AnalyticsRegistrations::fromEs($sets['registrations']);
+            }
+            if (isset($sets['votes'])) {
+                $results['votes'] = AnalyticsVotes::fromEs($sets['votes']);
+            }
+            if (isset($sets['comments'])) {
+                $results['comments'] = AnalyticsComments::fromEs($sets['comments']);
+            }
+            if (isset($sets['contributions'])) {
+                $results['contributions'] = AnalyticsContributions::fromEs($sets['contributions']);
+            }
+            if (isset($sets['followers'])) {
+                $results['followers'] = AnalyticsFollowers::fromEs($sets['followers']);
+            }
+            if (isset($sets['contributors'])) {
+                $results['contributors'] = AnalyticsContributors::fromEs($sets['contributors']);
+            }
+            if (isset($sets['topContributors'])) {
+                $results['topContributors'] = $this->analyticsTopContributors
+                    ->fromEs($sets['topContributors'])
+                    ->getContributors();
+            }
+            if (isset($sets['anonymousContributors'])) {
+                $results['anonymousContributors'] = AnalyticsAnonymousContributors::fromEs(
+                    $sets['anonymousContributors']
+                );
+            }
+            if (isset($sets['mostUsedProposalCategories'])) {
+                $results[
+                    'mostUsedProposalCategories'
+                ] = $this->analyticsMostUsedProposalCategories->fromEs(
+                    $sets['mostUsedProposalCategories']
+                );
+            }
         }
 
         if (
-            $externalSets = $this->cloudflareElasticClient->getExternalAnalyticsResultSet(
+            !empty(array_intersect($requestedFields, $externalAnalyticKeys)) &&
+            ($externalSets = $this->cloudflareElasticClient->getExternalAnalyticsResultSet(
                 $start,
                 $end,
-                $projectSlug
-            )
+                $projectSlug,
+                $requestedFields
+            ))
         ) {
             $sets = $externalSets->getResultSets();
-            $results = array_merge($results, [
-                'visitors' => isset($sets['visitors'])
-                    ? AnalyticsVisitors::fromEs($sets['visitors'])
-                    : [],
-                'pageViews' => isset($sets['pageViews'])
-                    ? AnalyticsPageViews::fromEs($sets['pageViews'])
-                    : [],
-                'mostVisitedPages' => isset($sets['mostVisitedPages'])
-                    ? AnalyticsMostVisitedPages::fromEs($sets['mostVisitedPages'])
-                    : [],
-            ]);
+            if (isset($sets['visitors'])) {
+                $results['visitors'] = AnalyticsVisitors::fromEs($sets['visitors']);
+            }
+            if (isset($sets['pageViews'])) {
+                $results['pageViews'] = AnalyticsPageViews::fromEs($sets['pageViews']);
+            }
+            if (isset($sets['mostVisitedPages'])) {
+                $results['mostVisitedPages'] = AnalyticsMostVisitedPages::fromEs(
+                    $sets['mostVisitedPages']
+                );
+            }
         }
 
         if (

@@ -96,17 +96,49 @@ class CloudflareElasticClient
         return $searchResult;
     }
 
+    public function getExternalAnalyticsSearches(
+        DateTimeInterface $start,
+        DateTimeInterface $end,
+        ?string $projectSlug,
+        array $requestedFields
+    ): array {
+        $searchQueries = [];
+
+        if (\in_array('visitors', $requestedFields, true)) {
+            $searchQueries['visitors'] = $this->createUniqueVisitorsQuery(
+                $start,
+                $end,
+                $projectSlug
+            );
+        }
+        if (\in_array('pageViews', $requestedFields, true)) {
+            $searchQueries['pageViews'] = $this->createPageViewsQuery($start, $end, $projectSlug);
+        }
+        if (\in_array('mostVisitedPages', $requestedFields, true)) {
+            $searchQueries['mostVisitedPages'] = $this->createMostVisitedPagesQuery(
+                $start,
+                $end,
+                $projectSlug
+            );
+        }
+
+        return $searchQueries;
+    }
+
     public function getExternalAnalyticsResultSet(
         DateTimeInterface $start,
         DateTimeInterface $end,
-        ?string $projectSlug = null
+        ?string $projectSlug,
+        array $requestedFields
     ): ?ResultSet {
         $multisearchQuery = new Search($this->esClient);
-        $searchQueries = [
-            'visitors' => $this->createUniqueVisitorsQuery($start, $end, $projectSlug),
-            'pageViews' => $this->createPageViewsQuery($start, $end, $projectSlug),
-            'mostVisitedPages' => $this->createMostVisitedPagesQuery($start, $end, $projectSlug),
-        ];
+
+        $searchQueries = $this->getExternalAnalyticsSearches(
+            $start,
+            $end,
+            $projectSlug,
+            $requestedFields
+        );
         $multisearchQuery->addSearches($searchQueries);
 
         try {
