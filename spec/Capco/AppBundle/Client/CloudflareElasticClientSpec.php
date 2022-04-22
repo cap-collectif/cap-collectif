@@ -9,9 +9,9 @@ use Capco\AppBundle\Client\CloudflareElasticClient;
 
 class CloudflareElasticClientSpec extends ObjectBehavior
 {
-    public function let(LoggerInterface $logger)
+    public function let(LoggerInterface $logger, LoggerInterface $esLogger)
     {
-        $this->beConstructedWith($logger, '', '', '', '', '', '', '', '');
+        $this->beConstructedWith($logger, $esLogger, '', '', '', '', '', '', '', '');
     }
 
     public function it_is_initializable(): void
