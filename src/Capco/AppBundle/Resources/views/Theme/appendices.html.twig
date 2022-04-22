@@ -1,7 +1,6 @@
-{% set nbPosts = theme.posts | length %}
-{% set nbEvents = theme.events | length %}
+{% set nbPosts = theme.countEnabledPosts() %}
+{% set nbEvents = theme.countEnabledEvents() %}
 {% set nbAppendices = (nbPosts > 0) + (nbEvents > 0) %}
-
 {% if nbAppendices > 0 %}
     <section class="section--custom">
         <div class="container appendices__container">
@@ -10,7 +9,7 @@
                     <div class="col-centered col-xs-12 col-sm-6 col-md-4 text-center  appendices__item  box">
                         <h2 class="h4">{{ 'theme.show.appendices.posts.title'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="excerpt">
-                            {{ 'article-related-count' | trans({'count': nbPosts | length}, 'CapcoAppBundle') }}
+                            {{ 'article-related-count' | trans({'count': nbPosts}, 'CapcoAppBundle') }}
                         <p><a href="{{ path('app_blog_search_theme', {'theme': theme.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.posts.button'|trans({}, 'CapcoAppBundle') }}</a></p>
                     </div>
                 {% endif %}
@@ -18,7 +17,7 @@
                     <div class="col-centered col-xs-12 col-sm-6 col-md-4 text-center  appendices__item  box">
                         <h2 class="h4">{{ 'theme.show.appendices.events.title'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="excerpt">
-                            {{ 'event-related-count' | trans({'count': nbEvents | length}, 'CapcoAppBundle') }}
+                            {{ 'event-related-count' | trans({'count': nbEvents}, 'CapcoAppBundle') }}
                         <p><a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.events.button'|trans({}, 'CapcoAppBundle') }}</a></p>
                     </div>
                 {% endif %}
