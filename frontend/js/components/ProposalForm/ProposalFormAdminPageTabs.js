@@ -58,7 +58,7 @@ export const ProposalFormAdminPageTabs = ({ intl, proposalForm, query }: Props) 
           />
 
           <ActionContainer>
-            <a href="/admin/capco/app/proposalform/list">
+            <a href="/admin-next/proposalForm">
               <Icon name={ICON_NAME.list} size={13} color={colors.primaryColor} />
               <span className="ml-5">{intl.formatMessage({ id: 'link_action_list' })}</span>
             </a>

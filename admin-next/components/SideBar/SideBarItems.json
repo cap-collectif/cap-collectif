@@ -134,7 +134,7 @@
             },
             {
                 "title": "admin.label.proposal_form",
-                "href": "/admin/capco/app/proposalform/list",
+                "href": "/admin-next/proposalForm",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

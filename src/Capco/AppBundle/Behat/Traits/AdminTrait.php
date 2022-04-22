@@ -137,7 +137,7 @@ trait AdminTrait
      */
     public function iGoToTheAdminProposalFormListPage()
     {
-        $this->visit('/admin/capco/app/proposalform/list');
+        $this->visit('/admin-next/proposalForm');
     }
 
     /**

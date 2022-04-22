@@ -231,7 +231,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                   ) : null}
                   <SidebarLink
                     text="admin.label.proposal_form"
-                    href="/admin/capco/app/proposalform/list"
+                    href="/admin-next/proposalForm"
                   />
                   <SidebarLink
                     text="admin.label.questionnaire"

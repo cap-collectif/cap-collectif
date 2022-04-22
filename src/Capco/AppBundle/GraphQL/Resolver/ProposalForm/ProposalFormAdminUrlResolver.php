@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ProposalFormAdminUrlResolver implements ResolverInterface
@@ -22,7 +23,7 @@ class ProposalFormAdminUrlResolver implements ResolverInterface
             [
                 'id' => $proposalForm->getId(),
             ],
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
     }
 }

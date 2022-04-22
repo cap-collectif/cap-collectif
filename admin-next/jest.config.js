@@ -5,6 +5,8 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   moduleNameMapper: {
     '^utils/(.*)$': '<rootDir>/utils/$1',
+    '@utils/(.*)$': '<rootDir>/utils/$1',
+    '@ui/(.*)$': '<rootDir>/components/UI/$1',
     '^components/(.*)$': '<rootDir>/components/$1',
     '^tests/(.*)$': '<rootDir>/tests/$1',
     '^@relay/(.*)$': '<rootDir>/__generated__/$1',

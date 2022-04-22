@@ -1,27 +1,28 @@
-// @flow
 import { graphql } from 'react-relay';
-// eslint-disable-next-line import/no-unresolved
-import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
-import environment from '../createRelayEnvironment';
+import { RecordSourceSelectorProxy } from 'relay-runtime';
+import { environment } from 'utils/relay-environement';
 import commitMutation from './commitMutation';
 import type {
+  DeleteProposalFormMutation,
   DeleteProposalFormMutationResponse,
   DeleteProposalFormMutationVariables,
-} from '~relay/DeleteProposalFormMutation.graphql';
+} from '@relay/DeleteProposalFormMutation.graphql';
 
 const mutation = graphql`
-  mutation DeleteProposalFormMutation($input: DeleteProposalFormInput!, $connections: [ID!]!) {
-    deleteProposalForm(input: $input) {
-      deletedProposalFormId @deleteEdge(connections: $connections)
+    mutation DeleteProposalFormMutation($input: DeleteProposalFormInput!, $connections: [ID!]!)
+    @raw_response_type
+    {
+        deleteProposalForm(input: $input) {
+            deletedProposalFormId @deleteEdge(connections: $connections)
+        }
     }
-  }
 `;
 
 const commit = (
   variables: DeleteProposalFormMutationVariables,
   isAdmin: boolean,
 ): Promise<DeleteProposalFormMutationResponse> =>
-  commitMutation(environment, {
+  commitMutation<DeleteProposalFormMutation>(environment, {
     mutation,
     variables,
     optimisticResponse: {
@@ -43,7 +44,7 @@ const commit = (
       });
       if (!proposalForms) return;
 
-      const proposalFormsTotalCount = parseInt(proposalForms.getValue('totalCount'), 10);
+      const proposalFormsTotalCount = parseInt(String(proposalForms.getValue('totalCount')), 10);
       proposalForms.setValue(proposalFormsTotalCount - 1, 'totalCount');
     },
   });

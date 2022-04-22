@@ -1,33 +1,34 @@
-// @flow
 import { graphql } from 'react-relay';
-// eslint-disable-next-line import/no-unresolved
-import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
-import environment from '../createRelayEnvironment';
+import { RecordSourceSelectorProxy } from 'relay-runtime';
+import { environment } from 'utils/relay-environement';
 import commitMutation from './commitMutation';
 import type {
+  CreateProposalFormMutation,
   CreateProposalFormMutationResponse,
   CreateProposalFormMutationVariables,
-} from '~relay/CreateProposalFormMutation.graphql';
-import { type Viewer } from '~/components/Admin/Project/ProposalFormList/ProposalFormListPage';
+} from '@relay/CreateProposalFormMutation.graphql';
+import {ModalCreateProposalForm_viewer} from "@relay/ModalCreateProposalForm_viewer.graphql";
 
 const mutation = graphql`
-  mutation CreateProposalFormMutation($input: CreateProposalFormInput!, $connections: [ID!]!) {
-    createProposalForm(input: $input) {
-      proposalForm @prependNode(connections: $connections, edgeTypeName: "ProposalFormEdge") {
-        ...ProposalFormItem_proposalForm
-        adminUrl
-      }
+    mutation CreateProposalFormMutation($input: CreateProposalFormInput!, $connections: [ID!]!)
+    @raw_response_type
+    {
+        createProposalForm(input: $input) {
+            proposalForm @prependNode(connections: $connections, edgeTypeName: "ProposalFormEdge") {
+                ...ProposalFormItem_proposalForm
+                adminUrl
+            }
+        }
     }
-  }
 `;
 
 const commit = (
   variables: CreateProposalFormMutationVariables,
   isAdmin: boolean,
-  owner: Viewer,
+  owner: ModalCreateProposalForm_viewer,
   hasProposalForm: boolean,
 ): Promise<CreateProposalFormMutationResponse> =>
-  commitMutation(environment, {
+  commitMutation<CreateProposalFormMutation>(environment, {
     mutation,
     variables,
     optimisticResponse: {
@@ -35,11 +36,11 @@ const commit = (
         proposalForm: {
           id: new Date().toISOString(),
           title: variables.input.title,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          createdAt: new Date().toString(),
+          updatedAt: new Date().toString(),
           step: null,
           adminUrl: '',
-          owner,
+          owner
         },
       },
     },
@@ -58,7 +59,7 @@ const commit = (
       });
       if (!proposalForms) return;
 
-      const proposalFormsTotalCount = parseInt(proposalForms.getValue('totalCount'), 10);
+      const proposalFormsTotalCount = parseInt(String(proposalForms.getValue('totalCount')), 10);
       proposalForms.setValue(proposalFormsTotalCount + 1, 'totalCount');
     },
   });
