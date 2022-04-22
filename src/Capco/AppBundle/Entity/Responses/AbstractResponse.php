@@ -10,8 +10,8 @@ use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\ReplyAnonymous;
-use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -43,8 +43,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractResponse implements IndexableInterface
 {
-    use IdTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     const TYPE_FIELD_NAME = '_type';
 
