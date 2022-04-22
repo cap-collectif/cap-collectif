@@ -15,7 +15,7 @@ type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsBarChart_multipleChoiceQuestion,
   backgroundColor: string,
   intl: IntlShape,
-  innerRef: (ref: ?React.Ref<typeof ResponsiveContainer>) => void,
+  innerRef: (ref: any) => void,
 };
 
 const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`

@@ -83,7 +83,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
           multipleChoiceQuestion={question}
           backgroundColor={backgroundColor}
           innerRef={el => {
-            this.chartsRef.push({ id: question.id, ref: el });
+            this.chartsRef.push({ id: question.id, ref: el?.current });
           }}
         />
       );

@@ -129,7 +129,7 @@ export const useQuestionnaireProps = (
         setQuestions(q);
       };
       generateData();
-    }, 200);
+    }, 1000);
 
     return () => clearTimeout(timeoutId);
   }, [intl, questionnaire, chartsRef]);
