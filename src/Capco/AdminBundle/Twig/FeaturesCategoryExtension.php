@@ -3,8 +3,10 @@
 namespace Capco\AdminBundle\Twig;
 
 use Capco\AdminBundle\Resolver\FeaturesCategoryResolver;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class FeaturesCategoryExtension extends \Twig_Extension
+class FeaturesCategoryExtension extends AbstractExtension
 {
     protected $resolver;
 
@@ -16,55 +18,32 @@ class FeaturesCategoryExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('is_category_enabled', [$this, 'isCategoryEnabled']),
-            new \Twig_SimpleFunction('is_admin_enabled', [$this, 'isAdminEnabled']),
-            new \Twig_SimpleFunction('get_enabled_pages_categories', [
-                $this,
-                'getEnabledPagesCategories',
-            ]),
-            new \Twig_SimpleFunction('get_enabled_settings_categories', [
+            new TwigFunction('is_category_enabled', [$this, 'isCategoryEnabled']),
+            new TwigFunction('is_admin_enabled', [$this, 'isAdminEnabled']),
+            new TwigFunction('get_enabled_pages_categories', [$this, 'getEnabledPagesCategories']),
+            new TwigFunction('get_enabled_settings_categories', [
                 $this,
                 'getEnabledSettingsCategories',
             ]),
         ];
     }
 
-    /**
-     * @param $category
-     *
-     * @return bool
-     */
-    public function isCategoryEnabled($category)
+    public function isCategoryEnabled(string $category): bool
     {
         return $this->resolver->isCategoryEnabled($category);
     }
 
-    /**
-     * @param mixed $admin
-     *
-     * @return bool
-     */
-    public function isAdminEnabled($admin)
+    public function isAdminEnabled($admin): bool
     {
         return $this->resolver->isAdminEnabled($admin);
     }
 
-    /**
-     * Return enabled categories for pages group.
-     *
-     * @return array
-     */
-    public function getEnabledPagesCategories()
+    public function getEnabledPagesCategories(): array
     {
         return $this->resolver->getEnabledPagesCategories();
     }
 
-    /**
-     * Return enabled categories for settings group.
-     *
-     * @return array
-     */
-    public function getEnabledSettingsCategories()
+    public function getEnabledSettingsCategories(): array
     {
         return $this->resolver->getEnabledSettingsCategories();
     }

@@ -2,15 +2,16 @@
 
 namespace Capco\AdminBundle\Twig;
 
-use Twig_Extension;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class VarsExtension extends Twig_Extension
+class VarsExtension extends AbstractExtension
 {
     /**
      * @return array
      */
     public function getFunctions()
     {
-        return [new \Twig_SimpleFunction('json_decode', 'json_decode')];
+        return [new TwigFunction('json_decode', 'json_decode')];
     }
 }
