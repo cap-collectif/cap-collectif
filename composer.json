@@ -190,7 +190,7 @@
         "sentry/sdk": "^2.0",
         "knplabs/doctrine-behaviors": "~1.1",
         "sonata-project/translation-bundle": "^2.4",
-        "limenius/react-bundle": "4.0",
+        "limenius/react-bundle": "5.0.1",
         "limenius/react-renderer": "dev-master as 4.0.2",
         "php-translation/symfony-bundle": "^0.12",
         "geocoder-php/google-maps-provider": "^4.4",
