@@ -140,7 +140,7 @@
             },
             {
                 "title": "admin.label.questionnaire",
-                "href": "/admin/capco/app/questionnaire/list",
+                "href": "/admin-next/questionnaireList",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

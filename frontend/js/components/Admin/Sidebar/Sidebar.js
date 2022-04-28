@@ -235,7 +235,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                   />
                   <SidebarLink
                     text="admin.label.questionnaire"
-                    href="/admin/capco/app/questionnaire/list"
+                    href="/admin-next/questionnaireList"
                   />
                   {isAdmin ? (
                     <SidebarLink

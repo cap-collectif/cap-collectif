@@ -34,3 +34,15 @@ jest.mock('@cap-collectif/ui', () => {
         ...jest.requireActual('@cap-collectif/ui'),
     };
 });
+
+export const appContextValue = {
+    viewerSession: {
+        email: 'come-back@gmail.com',
+        username: 'Theo',
+        id: 'user-123',
+        isAdmin: true,
+        isSuperAdmin: false,
+        isProjectAdmin: false,
+    },
+    appVersion: 'app-v1',
+};

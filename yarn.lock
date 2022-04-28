@@ -1533,15 +1533,15 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/form@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/form/-/form-0.1.6.tgz#728588d734c4f11762ae8bc92a5e7cdb2269685f"
-  integrity sha512-7+U2WEGiOI0Ww7ljwsydr3fzDWCpcfIn42cHH9gAY7CIcGuVWgRusd03DNJQhsU9JYyjMMnvbMKY69eURAZXMQ==
+"@cap-collectif/form@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/form/-/form-0.2.2.tgz#dd6899661b429c89f43b937b2579415acadfb038"
+  integrity sha512-/6Q7bSHVhoMNtUENSYLAA7LAImD1MwrbKtofQesAX17R1Cpp5PcdhzOkyyOXp1e0hKskKMx3gdCuemjZEb1i2w==
 
-"@cap-collectif/ui@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.0.5.tgz#d9beada0bafd59c88e7f6420f3a4136acdb42a67"
-  integrity sha512-npggA4150H/lnj9i7NWrFKZE12kBYUGec4/cq5eaNaElQbk+UK9dhYfS05WQt3Ko7QLUoO6O5PaHiCw7/kj1Kw==
+"@cap-collectif/ui@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.1.1.tgz#f8b1d7d47856099aae494f4eb9e25906a5cf84e7"
+  integrity sha512-tDdvWoafMZ2XC8n6CsmhkOWFtQjxfIjUX7tLMWvzyFSvElKxZGuqEY4+OHwyDHiPRT13lHEZYAVxftk63jJ6ig==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"

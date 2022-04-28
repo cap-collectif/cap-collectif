@@ -9,7 +9,7 @@ class AdminProjectListQuestionnairePage extends Page
 {
     use PageTrait;
 
-    protected $path = '/admin/capco/app/questionnaire/list';
+    protected $path = '/admin-next/questionnaireList';
 
     protected $elements = [
         'add button' => '#btn-add-questionnaire',

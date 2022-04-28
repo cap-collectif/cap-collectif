@@ -40,7 +40,6 @@ import SidebarApp from '~/startup/SidebarApp';
 import DashboardPageApp from '~/startup/DashboardPageApp';
 import AdminPostListApp from '~/startup/AdminPostListApp';
 import AdminPostCreateFormApp from '~/startup/AdminPostCreateFormApp';
-import AdminQuestionnaireListApp from '~/startup/AdminQuestionnaireListApp';
 import AdminEventListApp from '~/startup/AdminEventListApp';
 
 ReactOnRails.registerStore({ appStore });
@@ -84,6 +83,5 @@ ReactOnRails.register({
   DashboardPageApp,
   AdminPostListApp,
   AdminPostCreateFormApp,
-  AdminQuestionnaireListApp,
   AdminEventListApp,
 });

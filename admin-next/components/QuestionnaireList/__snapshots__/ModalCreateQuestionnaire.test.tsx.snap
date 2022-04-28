@@ -1,0 +1,378 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalCreateQuestionnaire /> <TestModalCreateProject /> should render correctly 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <button
+    aria-controls="id-g"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL sc-lcepkR kXXdah igzsNu cap-button"
+    id="btn-add-questionnaire"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
+  >
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+      fill="none"
+      viewBox="0 0 12 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 6h10M6 1v10"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
+    create-questionnaire
+  </button>,
+  <div
+    aria-label="create-questionnaire"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+]
+`;
+
+exports[`<ModalCreateQuestionnaire /> <TestModalCreateProject /> should render modal open 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <button
+    aria-controls="id-g"
+    aria-expanded={true}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL sc-lcepkR kXXdah igzsNu cap-button"
+    id="btn-add-questionnaire"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
+  >
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+      fill="none"
+      viewBox="0 0 12 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 6h10M6 1v10"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
+    create-questionnaire
+  </button>,
+  <div
+    aria-label="create-questionnaire"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bdvvtL cjNftN sc-GEbAx cap-modal__overlay"
+      onClick={[Function]}
+      style={
+        Object {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="sc-bdvvtL dYRnRy sc-gsNilK hdjjoB cap-modal"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+          }
+        }
+      >
+        <header
+          className="sc-bdvvtL ijabiQ cap-modal__header"
+        >
+          <div
+            className="sc-bdvvtL hJgXxS"
+          >
+            <h2
+              className="sc-bdvvtL geLhUw cap-heading"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              global.questionnaire
+            </h2>
+          </div>
+          <button
+            className="sc-bdvvtL cYwHQC"
+            onClick={[Function]}
+          >
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ jxcAbw icfuGT cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+        <main
+          className="sc-bdvvtL kAxhVk cap-modal__footer"
+        >
+          <form
+            id="form-create-questionnaire"
+          >
+            <div
+              className="sc-bdvvtL iXOAiz cap-form-control"
+              role="group"
+            >
+              <div
+                className="sc-bdvvtL kaMTIB cap-radio-group"
+              >
+                <label
+                  className="sc-bdvvtL kGdEVS"
+                  htmlFor="type_choice-VOTING"
+                >
+                  <div
+                    className="sc-bdvvtL RvMdm cap-radio"
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                  >
+                    <input
+                      aria-required={true}
+                      checked={false}
+                      className="sc-bdvvtL fgNIRM cap-radio__input"
+                      disabled={false}
+                      id="type_choice-VOTING"
+                      name="choices-for-field-type"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      required={true}
+                      style={
+                        Object {
+                          "marginLeft": 0,
+                          "marginTop": 0,
+                        }
+                      }
+                      type="radio"
+                    />
+                    <div
+                      className="sc-bdvvtL ckvAqI cap-radio__box"
+                    />
+                  </div>
+                  <span
+                    className="sc-bdvvtL dPuepn cap-text"
+                  >
+                    voting
+                  </span>
+                </label>
+                <label
+                  className="sc-bdvvtL kGdEVS"
+                  htmlFor="type_choice-QUESTIONNAIRE"
+                >
+                  <div
+                    className="sc-bdvvtL RvMdm cap-radio"
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                  >
+                    <input
+                      aria-required={true}
+                      checked={true}
+                      className="sc-bdvvtL fgNIRM cap-radio__input"
+                      disabled={false}
+                      id="type_choice-QUESTIONNAIRE"
+                      name="choices-for-field-type"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      required={true}
+                      style={
+                        Object {
+                          "marginLeft": 0,
+                          "marginTop": 0,
+                        }
+                      }
+                      type="radio"
+                    />
+                    <div
+                      className="sc-bdvvtL ckvAqI cap-radio__box"
+                    />
+                  </div>
+                  <span
+                    className="sc-bdvvtL dPuepn cap-text"
+                  >
+                    global.questionnaire
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div
+              className="sc-bdvvtL iXOAiz cap-form-control"
+              role="group"
+            >
+              <label
+                className="sc-bdvvtL dYOOYb cap-form-label"
+                htmlFor="title"
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <p
+                  className="sc-bdvvtL bQcuRG cap-text"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  global.title
+                </p>
+              </label>
+              <input
+                aria-required={true}
+                className="sc-bdvvtL sc-TBWPX eBJHkE dtkaZV cap-input"
+                disabled={false}
+                id="title"
+                maxLength={255}
+                minLength={2}
+                name="title"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="questionnaire-title-placeholder"
+                required={true}
+                type="text"
+                value=""
+              />
+            </div>
+          </form>
+        </main>
+        <footer
+          className="sc-bdvvtL jPEMWG cap-modal__footer"
+        >
+          <div
+            className="sc-bdvvtL gFvFYr cap-buttonGroup"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            <button
+              className="sc-bdvvtL sc-lcepkR fzwTIb itSeml cap-button"
+              onClick={[Function]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              cancel
+            </button>
+            <button
+              className="sc-bdvvtL sc-lcepkR fzwTIb igzsNu cap-button"
+              id="confirm-questionnaire-create"
+              onClick={[Function]}
+              type="submit"
+            >
+              global.send
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;

@@ -1,33 +1,35 @@
-// @flow
 import { graphql } from 'react-relay';
-// eslint-disable-next-line import/no-unresolved
-import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
-import environment from '../createRelayEnvironment';
+import type { RecordSourceSelectorProxy } from 'relay-runtime';
+import { environment } from 'utils/relay-environement';
 import commitMutation from './commitMutation';
 import type {
+  CreateQuestionnaireMutation,
   CreateQuestionnaireMutationResponse,
   CreateQuestionnaireMutationVariables,
-} from '~relay/CreateQuestionnaireMutation.graphql';
-import { type Viewer } from '~/components/Admin/Project/QuestionnaireList/QuestionnaireListPage';
+} from '@relay/CreateQuestionnaireMutation.graphql';
+import {ModalCreateQuestionnaire_viewer} from '@relay/ModalCreateQuestionnaire_viewer.graphql'
+
 
 const mutation = graphql`
-  mutation CreateQuestionnaireMutation($input: CreateQuestionnaireInput!, $connections: [ID!]!) {
-    createQuestionnaire(input: $input) {
-      questionnaire @prependNode(connections: $connections, edgeTypeName: "QuestionnaireEdge") {
-        ...QuestionnaireItem_questionnaire
-        adminUrl
-      }
+    mutation CreateQuestionnaireMutation($input: CreateQuestionnaireInput!, $connections: [ID!]!)
+    @raw_response_type
+    {
+        createQuestionnaire(input: $input) {
+            questionnaire @prependNode(connections: $connections, edgeTypeName: "QuestionnaireEdge") {
+                ...QuestionnaireItem_questionnaire
+                adminUrl
+            }
+        }
     }
-  }
 `;
 
 const commit = (
   variables: CreateQuestionnaireMutationVariables,
   isAdmin: boolean,
-  owner: Viewer,
+  owner: ModalCreateQuestionnaire_viewer,
   hasQuestionnaire: boolean,
 ): Promise<CreateQuestionnaireMutationResponse> =>
-  commitMutation(environment, {
+  commitMutation<CreateQuestionnaireMutation>(environment, {
     mutation,
     variables,
     optimisticResponse: {
@@ -35,8 +37,8 @@ const commit = (
         questionnaire: {
           id: new Date().toISOString(),
           title: variables.input.title,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          createdAt: new Date().toString(),
+          updatedAt: new Date().toString(),
           step: null,
           adminUrl: '',
           owner,
@@ -60,7 +62,7 @@ const commit = (
       });
       if (!questionnaires) return;
 
-      const totalCount = parseInt(questionnaires.getValue('totalCount'), 10);
+      const totalCount = parseInt(String(questionnaires.getValue('totalCount')), 10);
       questionnaires.setValue(totalCount + 1, 'totalCount');
     },
   });
