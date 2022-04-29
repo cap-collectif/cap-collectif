@@ -23,47 +23,7 @@ exports[`<ProposalPreviewFooter /> should render a footer with comments counters
 </Counters>
 `;
 
-exports[`<ProposalPreviewFooter /> should render a footer with donation infos 1`] = `
-<Counters>
-  <div
-    className="card__counters__item card__counters__item--comments"
-  >
-    <div
-      className="card__counters__value"
-    >
-      15000
-       €
-    </div>
-    <FormattedMessage
-      id="donation_amount_collected.count_no_nb"
-      tagName="div"
-      values={
-        Object {
-          "count": 15000,
-        }
-      }
-    />
-  </div>
-  <div
-    className="card__counters__item card__counters__item--comments"
-  >
-    <div
-      className="card__counters__value"
-    >
-      5
-    </div>
-    <FormattedMessage
-      id="donation.count_no_nb"
-      tagName="div"
-      values={
-        Object {
-          "count": 5,
-        }
-      }
-    />
-  </div>
-</Counters>
-`;
+exports[`<ProposalPreviewFooter /> should render a footer with donation infos 1`] = `""`;
 
 exports[`<ProposalPreviewFooter /> should render a footer with votes and comments counters 1`] = `
 <Counters>

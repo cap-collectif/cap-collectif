@@ -61,13 +61,6 @@ class ProposalType extends AbstractType
             $builder->add('category');
         }
 
-        if (
-            $this->toggleManager->isActive(Manager::unstable__tipsmeee) &&
-            $form->isUsingTipsmeee()
-        ) {
-            $builder->add('tipsmeeeId');
-        }
-
         if ($this->toggleManager->isActive(Manager::districts) && $form->isUsingDistrict()) {
             $builder->add('district');
         }

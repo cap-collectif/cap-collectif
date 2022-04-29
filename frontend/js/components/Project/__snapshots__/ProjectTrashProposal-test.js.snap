@@ -29,11 +29,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "isTipsMeeeEnabled",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
               "name": "projectId",
             },
             Object {
@@ -79,11 +74,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                     },
                     Object {
                       "kind": "Variable",
-                      "name": "isTipsMeeeEnabled",
-                      "variableName": "isTipsMeeeEnabled",
-                    },
-                    Object {
-                      "kind": "Variable",
                       "name": "stepId",
                       "variableName": "stepId",
                     },
@@ -97,7 +87,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "231550074c436eb3bc0644437d56806c",
+        "hash": "c32e81358c47b0644cfbf52b2f013dcf",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -115,11 +105,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isTipsMeeeEnabled",
             },
             Object {
               "defaultValue": null,
@@ -432,13 +417,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "usingTipsmeee",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
                                       "name": "id",
                                       "storageKey": null,
                                     },
@@ -744,38 +722,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                   "storageKey": null,
                                 },
                                 Object {
-                                  "condition": "isTipsMeeeEnabled",
-                                  "kind": "Condition",
-                                  "passingValue": true,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": "tipsMeeeDonation",
-                                      "args": null,
-                                      "concreteType": "TipsMeee",
-                                      "kind": "LinkedField",
-                                      "name": "tipsmeee",
-                                      "plural": false,
-                                      "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "donationTotalCount",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "donationCount",
-                                          "storageKey": null,
-                                        },
-                                      ],
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                },
-                                Object {
                                   "abstractKey": "__isPublishable",
                                   "kind": "InlineFragment",
                                   "selections": Array [
@@ -915,7 +861,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "83dac29e8460ca8f57074ebafc980f4e",
+          "cacheID": "d6731ec49093ca38d848238df715ce38",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -924,13 +870,12 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
   $projectId: ID!
   $stepId: ID!
   $isAuthenticated: Boolean!
-  $isTipsMeeeEnabled: Boolean!
   $cursor: String
   $count: Int
 ) {
   project: node(id: $projectId) {
     __typename
-    ...ProposalTrashedListPaginated_project_3shNSw
+    ...ProposalTrashedListPaginated_project_2RchB8
     id
   }
 }
@@ -1019,17 +964,12 @@ fragment ProposalPreviewBody_proposal_3UaCIZ on Proposal {
   ...ProposalFollowButton_proposal_39ngnn
 }
 
-fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
+fragment ProposalPreviewFooter_proposal_2tPna9 on Proposal {
   id
   form {
     commentable
     objectType
-    usingTipsmeee
     id
-  }
-  tipsMeeeDonation: tipsmeee @include(if: $isTipsMeeeEnabled) {
-    donationTotalCount
-    donationCount
   }
   allComments: comments(first: 0) {
     totalCountWithAnswers
@@ -1061,7 +1001,7 @@ fragment ProposalPreviewUser_proposal on Proposal {
   }
 }
 
-fragment ProposalPreview_proposal_2CDdxe on Proposal {
+fragment ProposalPreview_proposal_4died5 on Proposal {
   id
   media {
     url
@@ -1083,19 +1023,19 @@ fragment ProposalPreview_proposal_2CDdxe on Proposal {
     }
     id
   }
-  ...ProposalPreviewFooter_proposal_23y2IM
+  ...ProposalPreviewFooter_proposal_2tPna9
   ...ProposalPreviewBody_proposal_3UaCIZ
   ...ProposalPreviewStatus_proposal_2tPna9
 }
 
-fragment ProposalTrashedListPaginated_project_3shNSw on Project {
+fragment ProposalTrashedListPaginated_project_2RchB8 on Project {
   id
   proposals(first: $count, after: $cursor, trashedStatus: TRASHED) {
     totalCount
     edges {
       node {
         id
-        ...ProposalPreview_proposal_2CDdxe
+        ...ProposalPreview_proposal_4died5
         __typename
       }
       cursor
@@ -1140,7 +1080,6 @@ fragment UserLink_user on User {
         "count": 20,
         "cursor": null,
         "isAuthenticated": true,
-        "isTipsMeeeEnabled": true,
         "projectId": "UHJvamVjdDpwcm9qZWN0MQ==",
         "stepId": "",
       }

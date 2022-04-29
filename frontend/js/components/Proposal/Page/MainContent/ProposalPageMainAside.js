@@ -7,7 +7,6 @@ import ProposalPageVoteThreshold from '~/components/Proposal/Page/Aside/Proposal
 import ProposalPageAdvancement from '~/components/Proposal/Page/Aside/ProposalPageAdvancement';
 import type { ProposalPageMainAside_proposal } from '~relay/ProposalPageMainAside_proposal.graphql';
 import { bootstrapGrid } from '~/utils/sizes';
-import ProposalTipsMeeeAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeAside';
 import ProposalSocialNetworkLinks from '~/components/Proposal/Page/Aside/ProposalSocialNetworkLinks';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
@@ -48,7 +47,6 @@ const Container: StyledComponent<{ display: boolean }, {}, HTMLDivElement> = sty
 
 export const ProposalPageMainAside = ({ proposal, display }: Props) => {
   const currentVotableStep = proposal?.currentVotableStep;
-  const isTipmeeEnable = useFeatureFlag('unstable__tipsmeee');
   return (
     <Container display={display}>
       <div>
@@ -73,9 +71,6 @@ export const ProposalPageMainAside = ({ proposal, display }: Props) => {
           )}
       </div>
       <ProposalPageAdvancement proposal={proposal} />
-      {proposal && proposal.form.usingTipsmeee && isTipmeeEnable && (
-        <ProposalTipsMeeeAside proposal={proposal} />
-      )}
       {proposal && proposal.isProposalUsingAnySocialNetworks && (
         <ProposalSocialNetworkLinks proposal={proposal} />
       )}
@@ -86,15 +81,10 @@ export const ProposalPageMainAside = ({ proposal, display }: Props) => {
 export default createFragmentContainer(ProposalPageMainAside, {
   proposal: graphql`
     fragment ProposalPageMainAside_proposal on Proposal
-    @argumentDefinitions(
-      stepId: { type: "ID!" }
-      isTipsMeeeEnabled: { type: "Boolean!" }
-      isAuthenticated: { type: "Boolean!" }
-    ) {
+    @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
       id
       ...ProposalPageMetadata_proposal
       ...ProposalPageAdvancement_proposal
-      ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
       ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
       ...ProposalSocialNetworkLinks_proposal @arguments(isAuthenticated: $isAuthenticated)
       isProposalUsingAnySocialNetworks
@@ -108,7 +98,6 @@ export default createFragmentContainer(ProposalPageMainAside, {
       form {
         usingCategories
         usingThemes
-        usingTipsmeee @include(if: $isTipsMeeeEnabled)
       }
     }
   `,

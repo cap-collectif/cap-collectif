@@ -144,7 +144,6 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
         },
       ]
     }
-    isTipsMeeeEnabled={false}
     step={
       Object {
         "$fragmentRefs": null,

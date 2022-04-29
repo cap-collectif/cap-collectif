@@ -32,11 +32,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
-            "name": "isTipsMeeeEnabled",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
             "name": "proposalRevisionsEnabled",
           },
           Object {
@@ -75,11 +70,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 "kind": "Variable",
                 "name": "isAuthenticated",
                 "variableName": "isAuthenticated",
-              },
-              Object {
-                "kind": "Variable",
-                "name": "isTipsMeeeEnabled",
-                "variableName": "isTipsMeeeEnabled",
               },
               Object {
                 "kind": "Variable",
@@ -134,7 +124,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
         "type": "Query",
       },
-      "hash": "9200a3e0963a64cb743aed182a9c6d2c",
+      "hash": "0e23cc0657270c68eb21dafa083355a5",
       "kind": "Request",
       "operation": Object {
         "argumentDefinitions": Array [
@@ -167,11 +157,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isAuthenticated",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "isTipsMeeeEnabled",
           },
           Object {
             "defaultValue": null,
@@ -1977,20 +1962,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
-                    "kind": "ScalarField",
-                    "name": "usingTipsmeee",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "tipsmeeeHelpText",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
                     "concreteType": "GoogleMapsAddress",
                     "kind": "LinkedField",
                     "name": "mapCenter",
@@ -3516,14 +3487,14 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 "alias": null,
                 "args": null,
                 "kind": "ScalarField",
-                "name": "title",
+                "name": "url",
                 "storageKey": null,
               },
               Object {
                 "alias": null,
                 "args": null,
                 "kind": "ScalarField",
-                "name": "url",
+                "name": "title",
                 "storageKey": null,
               },
               Object {
@@ -3617,102 +3588,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   },
                 ],
                 "storageKey": null,
-              },
-              Object {
-                "condition": "isTipsMeeeEnabled",
-                "kind": "Condition",
-                "passingValue": true,
-                "selections": Array [
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "TipsMeee",
-                    "kind": "LinkedField",
-                    "name": "tipsmeee",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "donatorsCount",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "donationTotalCount",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProposalTopDonator",
-                        "kind": "LinkedField",
-                        "name": "topDonators",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "name",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "amount",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "email",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "date",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                    ],
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "tipsmeeeId",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": "tipsmeeeDonators",
-                    "args": null,
-                    "concreteType": "TipsMeee",
-                    "kind": "LinkedField",
-                    "name": "tipsmeee",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "donatorsCount",
-                        "storageKey": null,
-                      },
-                    ],
-                    "storageKey": null,
-                  },
-                ],
               },
               Object {
                 "condition": "isAuthenticated",
@@ -7511,7 +7386,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "1da888cc7025dcebc6fcd07373413486",
+        "cacheID": "f3f86604a5404e1ccba29faaf98389eb",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -7521,10 +7396,9 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
   $hasVotableStep: Boolean!
   $stepId: ID!
   $isAuthenticated: Boolean!
-  $isTipsMeeeEnabled: Boolean!
   $proposalRevisionsEnabled: Boolean!
 ) {
-  ...ProposalPageLogic_query_2tno1B
+  ...ProposalPageLogic_query_UgobF
   step: node(id: $stepId) @include(if: $hasVotableStep) {
     __typename
     id
@@ -8221,7 +8095,7 @@ fragment ProposalDraftAlert_proposal on Proposal {
   publicationStatus
 }
 
-fragment ProposalEditModal_proposal_19sAkT on Proposal {
+fragment ProposalEditModal_proposal_2Ag0mE on Proposal {
   id
   allRevisions: revisions @include(if: $proposalRevisionsEnabled) {
     totalCount
@@ -8243,7 +8117,7 @@ fragment ProposalEditModal_proposal_19sAkT on Proposal {
     id
   }
   publicationStatus
-  ...ProposalForm_proposal_4iFR9m
+  ...ProposalForm_proposal
   ...ProposalErrorModal_proposal
   ...ProposalDraftAlert_proposal
 }
@@ -8273,6 +8147,61 @@ fragment ProposalFormSwitcher_proposal_2uwUKI on Proposal {
   ...ProposalViewAnalysisPanel_proposal
   ...ProposalViewDecisionPanel_proposal
   ...ProposalViewAssessmentPanel_proposal
+}
+
+fragment ProposalForm_proposal on Proposal {
+  id
+  title
+  body
+  bodyUsingJoditWysiwyg
+  summary
+  address {
+    json
+    formatted
+    lat
+    lng
+  }
+  publicationStatus
+  category {
+    id
+  }
+  theme {
+    id
+  }
+  district {
+    id
+  }
+  responses {
+    __typename
+    __isResponse: __typename
+    question {
+      __typename
+      id
+    }
+    ... on ValueResponse {
+      value
+    }
+    ... on MediaResponse {
+      medias {
+        id
+        name
+        size
+        url
+      }
+    }
+  }
+  media {
+    id
+    name
+    size
+    url
+  }
+  twitterUrl
+  facebookUrl
+  youtubeUrl
+  webPageUrl
+  instagramUrl
+  linkedInUrl
 }
 
 fragment ProposalForm_proposalForm on ProposalForm {
@@ -8425,8 +8354,6 @@ fragment ProposalForm_proposalForm on ProposalForm {
   descriptionMandatory
   usingSummary
   usingIllustration
-  usingTipsmeee
-  tipsmeeeHelpText
   usingFacebook
   usingWebPage
   usingTwitter
@@ -8434,62 +8361,6 @@ fragment ProposalForm_proposalForm on ProposalForm {
   usingYoutube
   usingLinkedIn
   isUsingAnySocialNetworks
-}
-
-fragment ProposalForm_proposal_4iFR9m on Proposal {
-  id
-  title
-  body
-  bodyUsingJoditWysiwyg
-  summary
-  address {
-    json
-    formatted
-    lat
-    lng
-  }
-  publicationStatus
-  category {
-    id
-  }
-  theme {
-    id
-  }
-  district {
-    id
-  }
-  responses {
-    __typename
-    __isResponse: __typename
-    question {
-      __typename
-      id
-    }
-    ... on ValueResponse {
-      value
-    }
-    ... on MediaResponse {
-      medias {
-        id
-        name
-        size
-        url
-      }
-    }
-  }
-  media {
-    id
-    name
-    size
-    url
-  }
-  tipsmeeeId @include(if: $isTipsMeeeEnabled)
-  twitterUrl
-  facebookUrl
-  youtubeUrl
-  webPageUrl
-  instagramUrl
-  linkedInUrl
 }
 
 fragment ProposalMediaResponse_medias on Media {
@@ -8555,10 +8426,8 @@ fragment ProposalPageAlert_proposal on Proposal {
   trashedReason
 }
 
-fragment ProposalPageAside_proposal_3F3xMA on Proposal {
+fragment ProposalPageAside_proposal_Q37Wz on Proposal {
   ...ProposalPageMetadata_proposal
-  ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
-  tipsmeeeId @include(if: $isTipsMeeeEnabled)
   ...ProposalPageAdvancement_proposal
   ...ProposalPageVoteThreshold_proposal_2r3fA4
   currentVotableStep {
@@ -8580,7 +8449,6 @@ fragment ProposalPageAside_proposal_3F3xMA on Proposal {
     isUsingAnySocialNetworks
     usingCategories
     usingThemes
-    usingTipsmeee @include(if: $isTipsMeeeEnabled)
     id
   }
 }
@@ -8744,18 +8612,6 @@ fragment ProposalPageDiscussions_proposal on Proposal {
   ...ProposalPageComments_proposal
 }
 
-fragment ProposalPageDonators_proposal_4iFR9m on Proposal {
-  title
-  tipsmeee @include(if: $isTipsMeeeEnabled) {
-    topDonators {
-      name
-      amount
-      date
-      email
-    }
-  }
-}
-
 fragment ProposalPageFollowers_proposal on Proposal {
   id
   followers(first: 20) {
@@ -8792,7 +8648,7 @@ fragment ProposalPageFusionInformations_proposal on Proposal {
   }
 }
 
-fragment ProposalPageHeaderButtons_proposal_19sAkT on Proposal {
+fragment ProposalPageHeaderButtons_proposal_2Ag0mE on Proposal {
   id
   url
   title
@@ -8818,7 +8674,7 @@ fragment ProposalPageHeaderButtons_proposal_19sAkT on Proposal {
   ...ProposalVoteModal_proposal_2r3fA4 @include(if: $isAuthenticated)
   ...ProposalFollowButton_proposal_39ngnn
   ...ProposalReportButton_proposal_39ngnn
-  ...ProposalEditModal_proposal_19sAkT
+  ...ProposalEditModal_proposal_2Ag0mE
   ...ProposalDeleteModal_proposal
 }
 
@@ -8834,11 +8690,11 @@ fragment ProposalPageHeaderButtons_viewer_3VJ3TV on User {
   ...ProposalVoteButtonWrapperFragment_viewer_Q37Wz @include(if: $hasVotableStep)
 }
 
-fragment ProposalPageHeader_proposal_19sAkT on Proposal {
+fragment ProposalPageHeader_proposal_2Ag0mE on Proposal {
   id
   ...TrashedMessage_contribution
   ...UnpublishedLabel_publishable
-  ...ProposalPageHeaderButtons_proposal_19sAkT
+  ...ProposalPageHeaderButtons_proposal_2Ag0mE
   title
   media {
     url
@@ -8907,7 +8763,7 @@ fragment ProposalPageLocalisation_proposal on Proposal {
   }
 }
 
-fragment ProposalPageLogic_query_2tno1B on Query {
+fragment ProposalPageLogic_query_UgobF on Query {
   viewer @include(if: $isAuthenticated) {
     id
     ...ProposalPageHeader_viewer_4ESFbG
@@ -8921,17 +8777,16 @@ fragment ProposalPageLogic_query_2tno1B on Query {
     id
   }
   proposal: proposalFromSlug(slug: $proposalSlug) {
-    ...ProposalPageAside_proposal_3F3xMA
+    ...ProposalPageAside_proposal_Q37Wz
     ...ProposalDraftAlert_proposal
-    ...ProposalPageMainContent_proposal_1lypTn
+    ...ProposalPageMainContent_proposal_39ngnn
     ...ProposalPageAlert_proposal
-    ...ProposalPageTabs_proposal_4iFR9m
+    ...ProposalPageTabs_proposal
     ...ProposalPageVotes_proposal
     ...ProposalPageBlog_proposal
     ...ProposalPageFollowers_proposal
-    ...ProposalPageDonators_proposal_4iFR9m
-    ...ProposalPageHeader_proposal_19sAkT
-    ...ProposalPageMainAside_proposal_3F3xMA @include(if: $isAuthenticated)
+    ...ProposalPageHeader_proposal_2Ag0mE
+    ...ProposalPageMainAside_proposal_Q37Wz @include(if: $isAuthenticated)
     ...ProposalAnalysisPanel_proposal_2uwUKI @include(if: $isAuthenticated)
     viewerCanDecide @include(if: $isAuthenticated)
     viewerCanAnalyse @include(if: $isAuthenticated)
@@ -8951,11 +8806,10 @@ fragment ProposalPageLogic_query_2tno1B on Query {
   }
 }
 
-fragment ProposalPageMainAside_proposal_3F3xMA on Proposal {
+fragment ProposalPageMainAside_proposal_Q37Wz on Proposal {
   id
   ...ProposalPageMetadata_proposal
   ...ProposalPageAdvancement_proposal
-  ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
   ...ProposalPageVoteThreshold_proposal_2r3fA4
   ...ProposalSocialNetworkLinks_proposal_39ngnn
   isProposalUsingAnySocialNetworks
@@ -8971,21 +8825,17 @@ fragment ProposalPageMainAside_proposal_3F3xMA on Proposal {
   form {
     usingCategories
     usingThemes
-    usingTipsmeee @include(if: $isTipsMeeeEnabled)
     id
   }
 }
 
-fragment ProposalPageMainContent_proposal_1lypTn on Proposal {
-  tipsmeeeId @include(if: $isTipsMeeeEnabled)
-  ...ProposalPageTopDonators_proposal @include(if: $isTipsMeeeEnabled)
-  ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
+fragment ProposalPageMainContent_proposal_39ngnn on Proposal {
   ...ProposalPageFusionInformations_proposal
   ...ProposalPageOfficialAnswer_proposal
   ...ProposalPageDescription_proposal
   ...ProposalPageLocalisation_proposal
   ...ProposalPageCustomSections_proposal
-  ...ProposalPageMainAside_proposal_3F3xMA
+  ...ProposalPageMainAside_proposal_Q37Wz
   ...ProposalPageNews_proposal_39ngnn
   ...ProposalPageDiscussions_proposal
   ...ProposalVoteButtonWrapperFragment_proposal_Q37Wz
@@ -9050,7 +8900,7 @@ fragment ProposalPageOfficialAnswer_proposal on Proposal {
   }
 }
 
-fragment ProposalPageTabs_proposal_4iFR9m on Proposal {
+fragment ProposalPageTabs_proposal on Proposal {
   id
   form {
     usingCategories
@@ -9084,25 +8934,12 @@ fragment ProposalPageTabs_proposal_4iFR9m on Proposal {
     opinionCanBeFollowed
     id
   }
-  tipsmeeeDonators: tipsmeee @include(if: $isTipsMeeeEnabled) {
-    donatorsCount
-  }
   paperVotesTotalCount
 }
 
 fragment ProposalPageTabs_step on ProposalStep {
   __isProposalStep: __typename
   canDisplayBallot
-}
-
-fragment ProposalPageTopDonators_proposal on Proposal {
-  tipsmeee {
-    topDonators {
-      name
-      amount
-      email
-    }
-  }
 }
 
 fragment ProposalPageVoteThreshold_proposal_2r3fA4 on Proposal {
@@ -9340,19 +9177,6 @@ fragment ProposalSocialNetworkLinks_proposal_39ngnn on Proposal {
       id
     }
     id
-  }
-}
-
-fragment ProposalTipsMeeeAside_proposal on Proposal {
-  ...ProposalTipsMeeeDonatorsAside_proposal
-  title
-  tipsmeeeId
-}
-
-fragment ProposalTipsMeeeDonatorsAside_proposal on Proposal {
-  tipsmeee {
-    donatorsCount
-    donationTotalCount
   }
 }
 
@@ -9772,7 +9596,6 @@ fragment VoteMinAlert_step on ProposalStep {
       "cursor": null,
       "hasVotableStep": true,
       "isAuthenticated": false,
-      "isTipsMeeeEnabled": false,
       "proposalRevisionsEnabled": false,
       "proposalSlug": "slug",
       "stepId": "stepid",

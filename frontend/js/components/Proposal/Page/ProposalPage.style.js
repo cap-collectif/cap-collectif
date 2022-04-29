@@ -84,25 +84,3 @@ export const SeeMoreButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.
   padding: 5px;
   border-radius: 4px;
 `;
-
-export const ProposalTipsmeeeContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  iframe {
-    border: none;
-    overflow: hidden;
-  }
-`;
-
-export const ProposalTipsmeeeQrCodeContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  figure {
-    text-align: right;
-  }
-  img {
-    width: 75%;
-  }
-`;

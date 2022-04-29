@@ -1000,7 +1000,6 @@ Capco\AppBundle\Entity\Proposal:
         proposalForm: '@proposalformCafetier'
         reference: 5
         district: '@paris12'
-        tipsmeeeId: '8w0k53L28'
         createdAt: <(new \DateTime('2020-11-09 10:15:00'))>
         updatedAt: <(new \DateTime('2020-11-09 10:15:00'))>
         publishedAt: <(new \DateTime('2020-11-09 10:15:00'))>

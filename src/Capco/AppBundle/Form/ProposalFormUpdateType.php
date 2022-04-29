@@ -140,14 +140,6 @@ class ProposalFormUpdateType extends AbstractType
             ->add('isListViewEnabled', CheckboxType::class)
             ->add('isMapViewEnabled', CheckboxType::class);
 
-        if ($this->toggleManager->isActive(Manager::unstable__tipsmeee)) {
-            $builder
-                ->add('usingTipsmeee', CheckboxType::class)
-                ->add('tipsmeeeHelpText', TextType::class, [
-                    'purify_html' => true,
-                    'purify_html_profile' => 'admin',
-                ]);
-        }
         $builder
             ->add('usingWebPage', CheckboxType::class)
             ->add('usingFacebook', CheckboxType::class)

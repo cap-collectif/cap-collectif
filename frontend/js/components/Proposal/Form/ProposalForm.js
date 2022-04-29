@@ -54,7 +54,6 @@ import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import renderResponses from '~/components/Form/RenderResponses';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
-import config from '~/config';
 import { formatGeoJsons, geoContains, type GeoJson } from '~/utils/geojson';
 import { ProposalFormMapPreview } from './ProposalFormMapPreview';
 import UserListField from '~/components/Admin/Field/UserListField';
@@ -118,7 +117,6 @@ export type Props = {|
   +dispatch: Dispatch,
   +features: FeatureToggles,
   +titleValue: ?string,
-  +tipsmeeeIdDisabled: boolean,
   +addressValue: ?string,
   +category: ?string,
   +responses: ResponsesInReduxForm,
@@ -143,7 +141,6 @@ export type FormValues = {|
   theme?: ?string,
   category?: ?string,
   district?: ?string,
-  tipsmeeeId?: ?string,
   responses: ResponsesInReduxForm,
   media?: ?any,
   draft: boolean,
@@ -184,17 +181,6 @@ export const ExternalLinks: StyledComponent<{}, {}, HTMLDivElement> = styled.div
   }
 `;
 
-const TipsmeeeFormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  padding: 24px;
-  background: ${styleGuideColors.blue100};
-  border: 1px solid ${styleGuideColors.blue200};
-  box-sizing: border-box;
-  border-radius: 4px;
-  figure {
-    margin-bottom: 10px;
-  }
-`;
-
 const onSubmit = (
   values: FormValues,
   dispatch: Dispatch,
@@ -217,7 +203,6 @@ const onSubmit = (
     theme: values.theme,
     category: values.category,
     district: values.district,
-    tipsmeeeId: values.tipsmeeeId,
     draft: values.draft,
     responses: formatSubmitResponses(values.responses, proposalForm.questions),
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
@@ -342,31 +327,6 @@ const onSubmit = (
         _error: 'global.error.server.form',
       });
     });
-};
-
-export const asyncValidate = (values: FormValues) => {
-  if (values.tipsmeeeId) {
-    const tipsmeeeUrl = config.isDevOrTest
-      ? `https://tipsmeee.fra1.digitaloceanspaces.com/datasStage/qrs/qr_${values.tipsmeeeId}.png`
-      : `https://tipsmeee.fra1.digitaloceanspaces.com/datas/qrs/qr_${values.tipsmeeeId}.png`;
-    // https://stackoverflow.com/questions/34116294/rejecting-promise-when-using-fetch
-    return fetch(tipsmeeeUrl).then(function (res) {
-      if (res.status === 200 && res.ok) {
-        return res;
-      }
-      // eslint-disable-next-line no-throw-literal
-      throw { tipsmeeeId: 'tipsmeee-id-error' };
-    });
-  }
-  if (values.draft) {
-    return new Promise<void>(resolve => {
-      resolve();
-    });
-  }
-  return new Promise<void>(() => {
-    // eslint-disable-next-line no-throw-literal
-    throw { tipsmeeeId: 'tipsmeee-id-mandatory' };
-  });
 };
 
 const validate = (
@@ -534,7 +494,6 @@ export class ProposalForm extends React.Component<Props, State> {
     const {
       intl,
       titleValue,
-      tipsmeeeIdDisabled,
       proposalForm,
       dispatch,
       features,
@@ -543,7 +502,6 @@ export class ProposalForm extends React.Component<Props, State> {
       form,
       responses,
       addressValue,
-      user,
       category,
       onAddressEdit,
       change: changeProps,
@@ -574,9 +532,6 @@ export class ProposalForm extends React.Component<Props, State> {
         {' '}
         {intl.formatMessage({ id: 'global.optional' })}
       </Text>
-    );
-    const mandatory = (
-      <span className="excerpt"> {intl.formatMessage({ id: 'global.mandatory' })}</span>
     );
     return (
       <form id="proposal-form">
@@ -928,44 +883,6 @@ export class ProposalForm extends React.Component<Props, State> {
             )}
           </ExternalLinks>
         )}
-        {features.unstable__tipsmeee && proposalForm.usingTipsmeee && (
-          <>
-            <FormattedHTMLMessage id="configure-my-tipsmeee" tagName="p" />
-            <TipsmeeeFormContainer>
-              <figure>
-                <img src="/svg/tipsmeee.svg" alt="tipsmeee logo" />
-              </figure>
-              <FormattedHTMLMessage id="tipsmeee-body" tagName="p" />
-              <p>
-                <Button
-                  target="_blank"
-                  href={
-                    config.isDevOrTest
-                      ? `https://www-stage.tipsmeee.com/login/capco/${user.username}`
-                      : `https://tipsmeee.com/login/capco/${user.username}`
-                  }
-                  type="button">
-                  {intl.formatMessage({ id: 'create-tipsmeee' })}
-                </Button>
-              </p>
-              <Field
-                id="proposal_tipsmeee"
-                name="tipsmeeeId"
-                component={component}
-                type="text"
-                placeholder={proposalForm.tipsmeeeHelpText}
-                disabled={tipsmeeeIdDisabled}
-                label={
-                  <span>
-                    {intl.formatMessage({ id: 'proposal.tipsMeee' })}
-                    {mandatory}
-                  </span>
-                }
-              />
-              {intl.formatMessage({ id: 'tipsmeee-code-help', tagName: 'p' })}
-            </TipsmeeeFormContainer>
-          </>
-        )}
       </form>
     );
   }
@@ -994,7 +911,6 @@ const mapStateToProps = (
       theme: proposal && proposal.theme ? proposal.theme.id : undefined,
       district: proposal && proposal.district ? proposal.district.id : undefined,
       category: proposal && proposal.category ? proposal.category.id : undefined,
-      tipsmeeeId: proposal && proposal.tipsmeeeId ? proposal.tipsmeeeId : undefined,
       media: proposal ? proposal.media : undefined,
       addressText: proposal && proposal.address ? proposal.address.formatted : '',
       address: (proposal && proposal.address && proposal.address.json) || undefined,
@@ -1009,7 +925,6 @@ const mapStateToProps = (
     },
     geoJsons: formatGeoJsons(proposalForm.districts),
     titleValue: selector(state, 'title'),
-    tipsmeeeIdDisabled: proposal && proposal.tipsmeeeId,
     category: selector(state, 'category'),
     addressValue: selector(state, 'address'),
     features: state.default.features,
@@ -1018,14 +933,6 @@ const mapStateToProps = (
     isBackOfficeInput,
     currentStepId: state.project.currentProjectStepById,
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
-    asyncValidate:
-      state.default.features.unstable__tipsmeee && proposalForm.usingTipsmeee
-        ? asyncValidate
-        : undefined,
-    asyncChangeFields:
-      state.default.features.unstable__tipsmeee && proposalForm.usingTipsmeee
-        ? ['tipsmeeeId']
-        : undefined,
   };
 };
 
@@ -1040,8 +947,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form
 
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalForm_proposal on Proposal
-    @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
+    fragment ProposalForm_proposal on Proposal {
       id
       title
       body
@@ -1072,7 +978,6 @@ export default createFragmentContainer(container, {
         size
         url
       }
-      tipsmeeeId @include(if: $isTipsMeeeEnabled)
       twitterUrl
       facebookUrl
       youtubeUrl
@@ -1135,8 +1040,6 @@ export default createFragmentContainer(container, {
       descriptionMandatory
       usingSummary
       usingIllustration
-      usingTipsmeee
-      tipsmeeeHelpText
       usingFacebook
       usingWebPage
       usingTwitter

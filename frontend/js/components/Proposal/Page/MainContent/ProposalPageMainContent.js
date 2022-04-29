@@ -6,15 +6,12 @@ import type { ProposalPageMainContent_proposal } from '~relay/ProposalPageMainCo
 import ProposalPageFusionInformations from './ProposalPageFusionInformations';
 import ProposalPageDescription from './ProposalPageDescription';
 import ProposalPageLocalisation from './ProposalPageLocalisation';
-import ProposalPageTopDonators from '~/components/Proposal/Page/MainContent/ProposalPageTopDonators';
 import ProposalPageNews from './ProposalPageNews';
 import ProposalPageDiscussions from './ProposalPageDiscussions';
 import ProposalPageOfficialAnswer from './ProposalPageOfficialAnswer';
 import ProposalPageCustomSections from './ProposalPageCustomSections';
 import ProposalPageMainAside from './ProposalPageMainAside';
 import { bootstrapGrid } from '~/utils/sizes';
-import ProposalTipsMeeeDonatorsAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeDonatorsAside';
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
   +proposal: ?ProposalPageMainContent_proposal,
@@ -22,13 +19,9 @@ type Props = {|
   isAnalysing: boolean,
 |};
 
-const ProposalPageMainContentContainer: StyledComponent<
-  { usingTipsmeee: boolean },
-  {},
-  HTMLDivElement,
-> = styled.div`
+const ProposalPageMainContentContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 100%;
-  min-height: ${({ usingTipsmeee }) => (usingTipsmeee ? '1000px' : 'auto')};
+  min-height: auto;
   @media (min-width: ${bootstrapGrid.mdMin}px) {
     max-width: 587px;
   }
@@ -42,36 +35,14 @@ const ProposalPageMainContentContainer: StyledComponent<
   }
 `;
 
-const DonatorContent: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  @media (min-width: ${bootstrapGrid.mdMin}px) {
-    display: none;
-  }
-  @media (max-width: ${bootstrapGrid.mdMin}px) {
-    display: flex;
-    margin: 15px;
-    #ProposalTipsMeeeDonators {
-      width: 100%;
-    }
-  }
-`;
-
 export const ProposalPageMainContent = ({ proposal, goToBlog, isAnalysing }: Props) => {
-  const isTipsmeeeEnable = useFeatureFlag('unstable__tipsmeee');
-
   return (
     <ProposalPageMainContentContainer
-      usingTipsmeee={isTipsmeeeEnable && proposal && proposal.tipsmeeeId}
       id={proposal ? 'ProposalPageMainContent' : 'ProposalPageMainContentLoading'}>
       <ProposalPageFusionInformations proposal={proposal} />
       <ProposalPageOfficialAnswer proposal={proposal} />
-      {proposal && isTipsmeeeEnable && (
-        <DonatorContent>
-          <ProposalTipsMeeeDonatorsAside proposal={proposal} />
-        </DonatorContent>
-      )}
       <ProposalPageDescription proposal={proposal} />
       <ProposalPageLocalisation proposal={proposal} />
-      {isTipsmeeeEnable && <ProposalPageTopDonators proposal={proposal} />}
       <ProposalPageCustomSections proposal={proposal} />
       {proposal && <ProposalPageMainAside proposal={proposal} display={isAnalysing} />}
       <ProposalPageNews proposal={proposal} goToBlog={goToBlog} />
@@ -83,24 +54,14 @@ export const ProposalPageMainContent = ({ proposal, goToBlog, isAnalysing }: Pro
 export default createFragmentContainer(ProposalPageMainContent, {
   proposal: graphql`
     fragment ProposalPageMainContent_proposal on Proposal
-    @argumentDefinitions(
-      isTipsMeeeEnabled: { type: "Boolean!" }
-      isAuthenticated: { type: "Boolean!" }
-    ) {
-      tipsmeeeId @include(if: $isTipsMeeeEnabled)
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...ProposalPageFusionInformations_proposal
-      ...ProposalPageTopDonators_proposal @include(if: $isTipsMeeeEnabled)
       ...ProposalPageOfficialAnswer_proposal
       ...ProposalPageDescription_proposal
       ...ProposalPageLocalisation_proposal
       ...ProposalPageCustomSections_proposal
-      ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
       ...ProposalPageMainAside_proposal
-        @arguments(
-          stepId: $stepId
-          isTipsMeeeEnabled: $isTipsMeeeEnabled
-          isAuthenticated: $isAuthenticated
-        )
+        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       ...ProposalPageNews_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalPageDiscussions_proposal
       ...ProposalVoteButtonWrapperFragment_proposal

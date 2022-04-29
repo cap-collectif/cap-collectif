@@ -8,7 +8,6 @@ import colors from '~/utils/colors';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 import type { ProposalPageTabs_proposal$key } from '~relay/ProposalPageTabs_proposal.graphql';
 import type { ProposalPageTabs_step$key } from '~relay/ProposalPageTabs_step.graphql';
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {
   proposal: ?ProposalPageTabs_proposal$key,
@@ -24,8 +23,7 @@ const STEP_FRAGMENT = graphql`
 `;
 
 const PROPOSAL_FRAGMENT = graphql`
-  fragment ProposalPageTabs_proposal on Proposal
-  @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
+  fragment ProposalPageTabs_proposal on Proposal {
     id
     form {
       usingCategories
@@ -54,9 +52,6 @@ const PROPOSAL_FRAGMENT = graphql`
         title
       }
       opinionCanBeFollowed
-    }
-    tipsmeeeDonators: tipsmeee @include(if: $isTipsMeeeEnabled) {
-      donatorsCount
     }
     paperVotesTotalCount
   }
@@ -130,15 +125,10 @@ export const ProposalPageTabs = ({
 }: Props) => {
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalFragment);
   const step = useFragment(STEP_FRAGMENT, stepFragment);
-  const isTipsmeeEnable = useFeatureFlag('unstable__tipsmeee');
   const totalVotesCount = votesCount + (proposal?.paperVotesTotalCount ?? 0);
   const showVotesTab =
     (totalVotesCount > 0 || proposal?.currentVotableStep !== null) && step?.canDisplayBallot;
   const showFollowersTab = proposal?.project?.opinionCanBeFollowed;
-  const showDonatorsTab =
-    isTipsmeeEnable && proposal && proposal.tipsmeeeDonators
-      ? proposal.tipsmeeeDonators.donatorsCount > 0
-      : false;
   const voteTabLabel =
     step && isInterpellationContextFromProposal(proposal) ? 'global.support' : 'global.vote';
   const hasOfficialAnswer = proposal?.news?.edges
@@ -173,16 +163,6 @@ export const ProposalPageTabs = ({
             {proposal && (
               <span className="tip">
                 {proposal.allFollowers ? proposal.allFollowers.totalCount : 0}
-              </span>
-            )}
-          </NavItem>
-        )}
-        {(showDonatorsTab || !proposal) && (
-          <NavItem disabled={!proposal} eventKey="donators" active={tabKey === 'donators'}>
-            <FormattedMessage id="proposal.tabs.donators" />
-            {proposal && (
-              <span className="tip">
-                {proposal.tipsmeeeDonators ? proposal.tipsmeeeDonators.donatorsCount : 0}
               </span>
             )}
           </NavItem>

@@ -87,7 +87,7 @@
         <section id="profile-proposal" class="section--custom">
             <div class="container">
                 <h2>{{ 'global.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
-                {{ react_render_component('UserProposalsApp', { 'props': { 'authorId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER'), 'isTipsMeeeEnabled': is_feature_enabled('unstable__tipsmeee') } }) }}
+                {{ react_render_component('UserProposalsApp', { 'props': { 'authorId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>
     {% endif %}

@@ -19,8 +19,6 @@ import ProposalPageVotes from './Votes/ProposalPageVotes';
 import ProposalPageBlog from './Blog/ProposalPageBlog';
 import ProposalPageFollowers from './Followers/ProposalPageFollowers';
 import ProposalDraftAlert from './ProposalDraftAlert';
-import ProposalPageDonators from '~/components/Proposal/Page/Donators/ProposalPageDonators';
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export type Props = {|
   queryRef: ?ProposalPageLogic_query$key,
@@ -88,7 +86,6 @@ const FRAGMENT = graphql`
     count: { type: "Int!" }
     cursor: { type: "String" }
     isAuthenticated: { type: "Boolean!" }
-    isTipsMeeeEnabled: { type: "Boolean!" }
     proposalRevisionsEnabled: { type: "Boolean!" }
   ) {
     viewer @include(if: $isAuthenticated) {
@@ -102,33 +99,21 @@ const FRAGMENT = graphql`
       ...ProposalVoteBasketWidget_step @arguments(isAuthenticated: $isAuthenticated)
     }
     proposal: proposalFromSlug(slug: $proposalSlug) {
-      ...ProposalPageAside_proposal
-        @arguments(
-          stepId: $stepId
-          isTipsMeeeEnabled: $isTipsMeeeEnabled
-          isAuthenticated: $isAuthenticated
-        )
+      ...ProposalPageAside_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       ...ProposalDraftAlert_proposal
-      ...ProposalPageMainContent_proposal
-        @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled, isAuthenticated: $isAuthenticated)
+      ...ProposalPageMainContent_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalPageAlert_proposal
-      ...ProposalPageTabs_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)
+      ...ProposalPageTabs_proposal
       ...ProposalPageVotes_proposal
       ...ProposalPageBlog_proposal
       ...ProposalPageFollowers_proposal
-      ...ProposalPageDonators_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)
       ...ProposalPageHeader_proposal
         @arguments(
           isAuthenticated: $isAuthenticated
           proposalRevisionsEnabled: $proposalRevisionsEnabled
-          isTipsMeeeEnabled: $isTipsMeeeEnabled
         )
       ...ProposalPageMainAside_proposal
-        @arguments(
-          stepId: $stepId
-          isTipsMeeeEnabled: $isTipsMeeeEnabled
-          isAuthenticated: $isAuthenticated
-        )
+        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         @include(if: $isAuthenticated)
       ...ProposalAnalysisPanel_proposal
         @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
@@ -180,7 +165,6 @@ export const ProposalPageLogic = ({
   const [show, setShow] = useState<MODAL_STATE>('FALSE');
   const [isAnalysing, setIsAnalysing] = useState(hasAnalysis);
   const bottom = bodyHeight - scrollY - height - footerSize;
-  const isTipsmeeeEnable = useFeatureFlag('unstable__tipsmeee');
 
   useEffect(() => {
     setVotesCount(proposal?.allVotes?.totalCount || 0);
@@ -240,7 +224,7 @@ export const ProposalPageLogic = ({
             </Tab.Pane>
             {proposal?.currentVotableStep?.canDisplayBallot && (
               <Tab.Pane eventKey="votes">
-                  <ProposalPageVotes proposal={proposal} setGlobalVotesCount={setVotesCount} />
+                <ProposalPageVotes proposal={proposal} setGlobalVotesCount={setVotesCount} />
               </Tab.Pane>
             )}
             <Tab.Pane eventKey="blog">
@@ -261,11 +245,6 @@ export const ProposalPageLogic = ({
             <Tab.Pane eventKey="followers">
               <ProposalPageFollowers proposal={proposal} pageAdmin={false} />
             </Tab.Pane>
-            {isTipsmeeeEnable && (
-              <Tab.Pane eventKey="donators">
-                <ProposalPageDonators proposal={proposal} />
-              </Tab.Pane>
-            )}
           </Tab.Content>
         </PageContainer>
       </Tab.Container>

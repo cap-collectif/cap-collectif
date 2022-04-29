@@ -120,7 +120,6 @@ const onSubmit = (
     theme: values.theme,
     category: values.category,
     district: values.district,
-    tipsmeeeId: values.tipsmeeeId,
     responses: formatSubmitResponses(values.responses, proposalForm.questions),
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
     twitterUrl: values.twitterUrl,

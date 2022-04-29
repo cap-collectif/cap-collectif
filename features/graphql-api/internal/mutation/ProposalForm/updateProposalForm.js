@@ -67,7 +67,6 @@ const mutation = /* GraphQL */ `
         usingInstagram
         usingLinkedIn
         usingYoutube
-        usingTipsmeee
       }
     }
   }
@@ -400,35 +399,5 @@ describe('Internal | updateProposalForm', () => {
         'internal_admin',
       ),
     ).rejects.toThrowError('No view is active. At least one must be selected');
-  });
-  it('admin cannot add tipsmeee to a proposalForm if feature is disabled', async () => {
-    await disableFeatureFlag('unstable__tipsmeee');
-    const response = await graphql(
-      mutation,
-      {
-        input: {
-          proposalFormId: 'proposalForm13',
-          usingTipsmeee: true,
-          tipsmeeeHelpText: 'Entrez votre code tipsmeee ici',
-        },
-      },
-      'internal_admin',
-    );
-    expect(response.updateProposalForm.proposalForm.usingTipsmeee).toBe(false);
-  });
-  it('admin add tipsmeee to a proposalForm', async () => {
-    await enableFeatureFlag('unstable__tipsmeee');
-    const response = await graphql(
-      mutation,
-      {
-        input: {
-          proposalFormId: 'proposalForm13',
-          usingTipsmeee: true,
-          tipsmeeeHelpText: 'Entrez votre code tipsmeee ici',
-        },
-      },
-      'internal_admin',
-    );
-    expect(response.updateProposalForm.proposalForm.usingTipsmeee).toBe(true);
   });
 });

@@ -34,7 +34,6 @@ type StateProps = {|
   order: ?string,
   terms: ?string,
   isAuthenticated: boolean,
-  isTipsMeeeEnabled: boolean,
   features: FeatureToggles,
   dispatch: Dispatch,
 |};
@@ -49,11 +48,10 @@ type RenderedProps = {|
   count: number,
   isAuthenticated: boolean,
   features: FeatureToggles,
-  isTipsMeeeEnabled: boolean,
 |};
 
 export const ProposalStepPageRendered = (props: RenderedProps) => {
-  const { isTipsMeeeEnabled, viewer, isAuthenticated, features, step, count } = props;
+  const { viewer, isAuthenticated, features, step, count } = props;
   const [displayMode, setDisplayMode] = React.useState(step?.mainView);
   const intl = useIntl();
   const calendar = useFeatureFlag('calendar');
@@ -109,7 +107,6 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
       <ProposalListFilters step={step} setDisplayMode={setDisplayMode} displayMode={displayMode} />
       <ProposalListView
         displayMap={features.display_map}
-        isTipsMeeeEnabled={isTipsMeeeEnabled}
         geoJsons={geoJsons}
         step={step}
         count={count}
@@ -137,7 +134,7 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 
   render() {
-    const { count, stepId, isAuthenticated, features, isTipsMeeeEnabled } = this.props;
+    const { count, stepId, isAuthenticated, features } = this.props;
     return (
       <div className="proposal__step-page">
         <QueryRenderer
@@ -149,7 +146,6 @@ export class ProposalStepPage extends React.Component<Props> {
               $cursor: String
               $orderBy: ProposalOrder
               $isAuthenticated: Boolean!
-              $isTipsMeeeEnabled: Boolean!
               $count: Int
               $term: String
               $district: ID
@@ -229,7 +225,6 @@ export class ProposalStepPage extends React.Component<Props> {
             ({
               stepId,
               isAuthenticated,
-              isTipsMeeeEnabled,
               count: config.isMobile ? 10 : count,
               cursor: null,
               ...this.initialRenderVars,
@@ -254,7 +249,6 @@ export class ProposalStepPage extends React.Component<Props> {
                   count={count}
                   isAuthenticated={isAuthenticated}
                   features={features}
-                  isTipsMeeeEnabled={isTipsMeeeEnabled}
                 />
               );
             }
@@ -276,7 +270,6 @@ const mapStateToProps = (state: State) => ({
   terms: state.proposal.terms,
   order: state.proposal.order,
   features: state.default.features,
-  isTipsMeeeEnabled: !!state.default.features.unstable__tipsmeee,
 });
 
 export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(ProposalStepPage);

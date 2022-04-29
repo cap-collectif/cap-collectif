@@ -10,19 +10,19 @@ import type {
 } from '~relay/UserProposalsAppQuery.graphql';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const UserProposalsPaginated = lazy(() =>
-  import(
-    /* webpackChunkName: "UserProposalsPaginated" */ '~/components/User/Profile/UserProposalsPaginated'
-  ),
+const UserProposalsPaginated = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "UserProposalsPaginated" */ '~/components/User/Profile/UserProposalsPaginated'
+    ),
 );
 
 type Props = {|
   authorId: string,
   isAuthenticated: boolean,
-  isTipsMeeeEnabled: boolean,
 |};
 
-export default ({ authorId, isAuthenticated, isTipsMeeeEnabled }: Props) => (
+export default ({ authorId, isAuthenticated }: Props) => (
   <Suspense fallback={<Loader />}>
     <Providers>
       <QueryRenderer
@@ -31,7 +31,6 @@ export default ({ authorId, isAuthenticated, isTipsMeeeEnabled }: Props) => (
             authorId,
             isProfileView: true,
             isAuthenticated,
-            isTipsMeeeEnabled,
             // TODO fixme https://github.com/cap-collectif/platform/issues/7016
             stepId: '',
             count: PROPOSAL_PAGINATION,
@@ -44,7 +43,6 @@ export default ({ authorId, isAuthenticated, isTipsMeeeEnabled }: Props) => (
             $stepId: ID!
             $authorId: ID!
             $isAuthenticated: Boolean!
-            $isTipsMeeeEnabled: Boolean!
             $count: Int!
             $isProfileView: Boolean!
             $cursor: String
@@ -55,7 +53,6 @@ export default ({ authorId, isAuthenticated, isTipsMeeeEnabled }: Props) => (
                 @arguments(
                   count: $count
                   isAuthenticated: $isAuthenticated
-                  isTipsMeeeEnabled: $isTipsMeeeEnabled
                   isProfileView: $isProfileView
                   stepId: $stepId
                   cursor: $cursor

@@ -90,12 +90,6 @@ UpdateProposalFormInput:
             isMapViewEnabled:
                 type: 'Boolean'
                 description: 'can the viewer see the proposals as a MAP'
-            usingTipsmeee:
-                type: 'Boolean'
-                description: 'Proposal form using tipsmeee field'
-            tipsmeeeHelpText:
-                type: 'String'
-                description: 'Proposal form help text for tipsmeee field'
             usingWebPage:
                 type: 'Boolean!'
                 description: 'Can proposal contain web site url'

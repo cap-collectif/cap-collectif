@@ -142,9 +142,6 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
         if (isset($header['district'])) {
             $example = array_merge($example, [$district]);
         }
-        if (isset($header['tipsmeee'])) {
-            $example = array_merge($example, ['code_tipsmeee']);
-        }
         if (isset($header['media_url'])) {
             $example = array_merge($example, ['URL']);
         }

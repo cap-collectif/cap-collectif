@@ -128,12 +128,7 @@ export default createFragmentContainer(ProposalList, {
       edges {
         node {
           id
-          ...ProposalPreview_proposal
-            @arguments(
-              stepId: $stepId
-              isAuthenticated: $isAuthenticated
-              isTipsMeeeEnabled: $isTipsMeeeEnabled
-            )
+          ...ProposalPreview_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         }
       }
     }

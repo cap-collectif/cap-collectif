@@ -139,12 +139,6 @@ ProposalForm:
             isMapViewEnabled:
                 type: 'Boolean!'
                 description: 'True if the MAP view is enabled.'
-            usingTipsmeee:
-                type: 'Boolean!'
-                description: 'True if tipsmeee is enabled.'
-            tipsmeeeHelpText:
-                type: 'String'
-                description: 'The help text for tipsmeee.'
             numberOfUsedSocialNetworks:
                 type: 'Int!'
                 description: 'The number of social networks used.'

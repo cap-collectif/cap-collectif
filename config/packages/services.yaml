@@ -170,11 +170,6 @@ services:
             $clientId: '%occitanie_client_id%'
             $clientSecret: '%occitanie_client_secret%'
 
-    Capco\AppBundle\Client\TipsmeeeClient:
-        autowire: true
-        arguments:
-            $apiKey: '%tipsmeee_api_key%'
-
     Capco\AppBundle\Client\CloudflareElasticClient:
         autowire: true
         arguments:

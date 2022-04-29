@@ -46,13 +46,13 @@ use Capco\AppBundle\Entity\District\ProposalDistrict;
  */
 class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
 {
+    use DescriptionUsingJoditWysiwygTrait;
     use OwnerTrait;
     use ReferenceTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
     use UsingSocialNetworksTrait;
     use UuidTrait;
-    use DescriptionUsingJoditWysiwygTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "description"})
@@ -194,16 +194,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
      * @ORM\Column(name="using_district", type="boolean", nullable=false)
      */
     private bool $usingDistrict = false;
-
-    /**
-     * @ORM\Column(name="using_tipsmeee", type="boolean", nullable=false, options={"default": false})
-     */
-    private bool $usingTipsmeee = false;
-
-    /**
-     * @ORM\Column(name="tipsmeee_help_text", type="string", length=255, nullable=true)
-     */
-    private ?string $tipsmeeeHelpText;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="proposalForm")
@@ -713,7 +703,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     {
         $label = $this->getTitle();
         if ($this->getStep()) {
-            $label = $this->getStep()->getTitle().' - '.$label;
+            $label = $this->getStep()->getTitle() . ' - ' . $label;
         }
 
         return $label;
@@ -988,35 +978,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getTipsmeeeHelpText(): ?string
-    {
-        return $this->tipsmeeeHelpText;
-    }
-
-    public function setTipsmeeeHelpText(?string $tipsmeeeHelpText): self
-    {
-        $this->tipsmeeeHelpText = $tipsmeeeHelpText;
-
-        return $this;
-    }
-
-    public function getUsingTipsmee(): bool
-    {
-        return $this->usingTipsmeee;
-    }
-
-    public function isUsingTipsmeee(): bool
-    {
-        return $this->usingTipsmeee;
-    }
-
-    public function setUsingTipsmeee(bool $usingTipsmeee): self
-    {
-        $this->usingTipsmeee = $usingTipsmeee;
-
-        return $this;
-    }
-
     public function getFieldsUsed(bool $isCliModel = false): array
     {
         $fields = ['title', 'author', 'cost'];
@@ -1031,9 +992,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         }
         if ($this->usingDistrict) {
             $fields = array_merge($fields, ['district']);
-        }
-        if ($this->usingTipsmeee) {
-            $fields = array_merge($fields, ['tipsmeee']);
         }
         if ($isCliModel && $this->usingIllustration) {
             $fields = array_merge($fields, ['media_url']);
@@ -1077,9 +1035,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         }
         if ($this->usingDistrict) {
             $fields = array_merge($fields, ['district' => $this->districtMandatory]);
-        }
-        if ($this->usingTipsmeee) {
-            $fields = array_merge($fields, ['tipsmeee' => $this->themeMandatory]);
         }
         if ($this->usingDescription) {
             $fields = array_merge($fields, ['body' => $this->descriptionMandatory]);
@@ -1128,12 +1083,18 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $fields;
     }
 
-    public function getFieldsType(Collection $questions, bool $nextChoice = false, bool $isCliModel = false): array
-    {
+    public function getFieldsType(
+        Collection $questions,
+        bool $nextChoice = false,
+        bool $isCliModel = false
+    ): array {
         $fields = [];
         /** @var AbstractQuestion $question */
         foreach ($questions as $question) {
-            if ($question instanceof SimpleQuestion || ($question instanceof MediaQuestion && $isCliModel) ) {
+            if (
+                $question instanceof SimpleQuestion ||
+                ($question instanceof MediaQuestion && $isCliModel)
+            ) {
                 $type = 'texte brut';
                 if ($question instanceof MediaQuestion) {
                     $type = 'URL';
@@ -1170,9 +1131,9 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                     $nextChoice && \count($choices) > 1
                         ? $choices[1]->getTitle()
                         : $question
-                        ->getChoices()
-                        ->first()
-                        ->getTitle();
+                            ->getChoices()
+                            ->first()
+                            ->getTitle();
 
                 $fields[$question->getTitle()] = $type;
             }
@@ -1191,7 +1152,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         array &$cloneReferences,
         QuestionnaireAbstractQuestion $qaq
     ): QuestionnaireAbstractQuestion {
-        $key = $qaq->getQuestion()->getTitle().$qaq->getQuestion()->getPosition();
+        $key = $qaq->getQuestion()->getTitle() . $qaq->getQuestion()->getPosition();
         if (\array_key_exists($key, $cloneReferences)) {
             return $cloneReferences[$key];
         }
@@ -1276,7 +1237,9 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                                 ->getQuestionnaireAbstractQuestion();
                             $clonedJumpQaq->setProposalForm($this);
                             $clonedJump->setDestination($clonedJumpQaq->getQuestion());
-                            $cloneReferences[$clonedJumpQaq->getQuestion()->getTitle()] = $clonedJumpQaq;
+                            $cloneReferences[
+                                $clonedJumpQaq->getQuestion()->getTitle()
+                            ] = $clonedJumpQaq;
                         }
                         $clonedJumps->add($clonedJump);
                     }

@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import type { ProposalPreviewFooter_proposal } from '~relay/ProposalPreviewFooter_proposal.graphql';
 import type { ProposalPreviewFooter_step } from '~relay/ProposalPreviewFooter_step.graphql';
 import Card from '../../Ui/Card/Card';
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import Text from '~ui/Primitives/Text';
 import Tooltip from '~ds/Tooltip/Tooltip';
 
@@ -17,10 +16,6 @@ type Props = {
 
 export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
   const intl = useIntl();
-  const showDonationInfos =
-    useFeatureFlag('unstable__tipsmeee') &&
-    proposal.form.usingTipsmeee &&
-    proposal.tipsMeeeDonation;
 
   const showComments = proposal.form.commentable;
   const showVotes =
@@ -37,69 +32,12 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
   const votesTotalCount = numericVotesTotalCount + paperVotesTotalCount;
   const votesTotalPointsCount = numericVotesTotalPointsCount + paperVotesTotalPointsCount;
 
-  if (showDonationInfos) {
-    return (
-      <Card.Counters>
-        <div className="card__counters__item card__counters__item--comments">
-          <div className="card__counters__value">
-            {proposal.tipsMeeeDonation?.donationTotalCount ?? 0} €
-          </div>
-          <FormattedMessage
-            id="donation_amount_collected.count_no_nb"
-            values={{
-              count: proposal.tipsMeeeDonation?.donationTotalCount ?? 0,
-            }}
-            tagName="div"
-          />
-        </div>
-        <div className="card__counters__item card__counters__item--comments">
-          <div className="card__counters__value">
-            {proposal.tipsMeeeDonation?.donationCount ?? 0}
-          </div>
-          <FormattedMessage
-            id="donation.count_no_nb"
-            values={{
-              count: proposal.tipsMeeeDonation?.donationCount ?? 0,
-            }}
-            tagName="div"
-          />
-        </div>
-      </Card.Counters>
-    );
-  }
-
   if (!showVotes && !showComments) {
     return null;
   }
 
   return (
     <Card.Counters>
-      {showDonationInfos && (
-        <>
-          <div className="card__counters__item card__counters__item--comments">
-            <div className="card__counters__value">
-              {proposal.tipsMeeeDonation?.donationTotalCount}
-            </div>
-            <FormattedMessage
-              id="comment.count_no_nb"
-              values={{
-                count: proposal.tipsMeeeDonation?.donationTotalCount,
-              }}
-              tagName="div"
-            />
-          </div>
-          <div className="card__counters__item card__counters__item--comments">
-            <div className="card__counters__value">{proposal.tipsMeeeDonation?.donationCount}</div>
-            <FormattedMessage
-              id="comment.count_no_nb"
-              values={{
-                count: proposal.tipsMeeeDonation?.donationCount,
-              }}
-              tagName="div"
-            />
-          </div>
-        </>
-      )}
       {showComments && (
         <div className="card__counters__item card__counters__item--comments">
           <div className="card__counters__value">{proposal.allComments.totalCountWithAnswers}</div>
@@ -204,17 +142,11 @@ export default createFragmentContainer(connect<any, any, _, _, _, _>()(ProposalP
     @argumentDefinitions(
       stepId: { type: "ID!" }
       isProfileView: { type: "Boolean", defaultValue: false }
-      isTipsMeeeEnabled: { type: "Boolean!" }
     ) {
       id
       form {
         commentable
         objectType
-        usingTipsmeee
-      }
-      tipsMeeeDonation: tipsmeee @include(if: $isTipsMeeeEnabled) {
-        donationTotalCount
-        donationCount
       }
       allComments: comments(first: 0) {
         totalCountWithAnswers

@@ -88,7 +88,6 @@ type Props = {
   displayMap: boolean,
   displayMode: ProposalViewMode,
   count: number,
-  isTipsMeeeEnabled: boolean,
 };
 type State = {
   isRefetching: boolean,
@@ -111,7 +110,7 @@ export class ProposalListView extends React.Component<Props, State> {
 
   _refetch = () => {
     this.setState({ isRefetching: true, hasRefetchError: false });
-    const { isTipsMeeeEnabled, filters, order, step, term, relay, viewer } = this.props;
+    const { filters, order, step, term, relay, viewer } = this.props;
 
     const refetchVariables = fragmentVariables =>
       ({
@@ -119,7 +118,6 @@ export class ProposalListView extends React.Component<Props, State> {
         stepId: step.id,
         isAuthenticated: !!viewer,
         count: fragmentVariables.count,
-        isTipsMeeeEnabled,
         term: term || null,
       }: ProposalListViewRefetchQueryVariables);
 
@@ -137,16 +135,8 @@ export class ProposalListView extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      displayMap,
-      geoJsons,
-      defaultMapOptions,
-      step,
-      viewer,
-      displayMode,
-      count,
-      isTipsMeeeEnabled,
-    } = this.props;
+    const { displayMap, geoJsons, defaultMapOptions, step, viewer, displayMode, count } =
+      this.props;
     const { hasRefetchError, isRefetching } = this.state;
 
     if (hasRefetchError) {
@@ -160,7 +150,6 @@ export class ProposalListView extends React.Component<Props, State> {
     return (
       <ProposalListViewPaginated
         displayMap={displayMap}
-        isTipsMeeeEnabled={isTipsMeeeEnabled}
         geoJsons={geoJsons}
         defaultMapOptions={defaultMapOptions}
         count={count}
@@ -201,7 +190,6 @@ export default createRefetchContainer(
       $cursor: String
       $orderBy: ProposalOrder
       $isAuthenticated: Boolean!
-      $isTipsMeeeEnabled: Boolean!
       $count: Int
       $term: String
       $district: ID

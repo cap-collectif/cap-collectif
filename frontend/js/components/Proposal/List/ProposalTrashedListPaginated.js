@@ -80,13 +80,12 @@ export default createPaginationContainer(
   {
     project: graphql`
       fragment ProposalTrashedListPaginated_project on Project
-        @argumentDefinitions(
-          count: { type: "Int" }
-          cursor: { type: "String" }
-          stepId: { type: "ID!" }
-          isAuthenticated: { type: "Boolean!" }
-          isTipsMeeeEnabled: { type: "Boolean!" }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int" }
+        cursor: { type: "String" }
+        stepId: { type: "ID!" }
+        isAuthenticated: { type: "Boolean!" }
+      ) {
         id
         proposals(first: $count, after: $cursor, trashedStatus: TRASHED)
           @connection(key: "ProposalTrashedListPaginated_proposals") {
@@ -95,12 +94,7 @@ export default createPaginationContainer(
             node {
               id
               ...ProposalPreview_proposal
-                @arguments(
-                  isProfileView: true
-                  stepId: $stepId
-                  isAuthenticated: $isAuthenticated
-                  isTipsMeeeEnabled: $isTipsMeeeEnabled
-                )
+                @arguments(isProfileView: true, stepId: $stepId, isAuthenticated: $isAuthenticated)
             }
           }
           pageInfo {
@@ -138,7 +132,6 @@ export default createPaginationContainer(
         $count: Int
         $cursor: String
         $isAuthenticated: Boolean!
-        $isTipsMeeeEnabled: Boolean!
       ) {
         project: node(id: $projectId) {
           ...ProposalTrashedListPaginated_project
@@ -146,7 +139,6 @@ export default createPaginationContainer(
               count: $count
               cursor: $cursor
               isAuthenticated: $isAuthenticated
-              isTipsMeeeEnabled: $isTipsMeeeEnabled
               stepId: $stepId
             )
         }

@@ -141,12 +141,6 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
             }
         }
 
-        if (
-            !$this->toggleManager->isActive(Manager::unstable__tipsmeee) &&
-            isset($arguments['usingTipsmeee'], $arguments['tipsmeeeHelpText'])
-        ) {
-            unset($arguments['usingTipsmeee'], $arguments['tipsmeeeHelpText']);
-        }
         $hasViewConfigurationChanged =
             (\array_key_exists('isGridViewEnabled', $arguments) &&
                 $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled()) ||

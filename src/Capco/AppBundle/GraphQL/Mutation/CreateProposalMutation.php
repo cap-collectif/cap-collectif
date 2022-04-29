@@ -209,14 +209,6 @@ class CreateProposalMutation implements MutationInterface
             unset($values['district']);
         }
 
-        if (
-            isset($values['tipsmeeeId']) &&
-            (!$this->toggleManager->isActive(Manager::unstable__tipsmeee) ||
-                !$proposalForm->isUsingTipsmeee())
-        ) {
-            unset($values['tipsmeeeId']);
-        }
-
         if (isset($values['address']) && !$proposalForm->getUsingAddress()) {
             unset($values['address']);
         }

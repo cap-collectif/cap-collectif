@@ -51,7 +51,6 @@ export const defaultFeatureFlags: FeatureFlags = {
     beta__emailing_parameters: false,
     beta__emailing_group: false,
     proposal_revisions: false,
-    unstable__tipsmeee: false,
     unstable__new_consultation_page: false,
     import_proposals: false,
     beta__analytics_page: false,

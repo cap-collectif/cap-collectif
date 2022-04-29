@@ -93,7 +93,6 @@ export const features: FeatureToggles = {
   beta__emailing: false,
   beta__emailing_parameters: false,
   proposal_revisions: false,
-  unstable__tipsmeee: false,
   unstable__new_consultation_page: false,
   new_project_card: false,
   import_proposals: false,

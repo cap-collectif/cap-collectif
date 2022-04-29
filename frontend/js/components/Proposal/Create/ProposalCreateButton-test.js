@@ -61,17 +61,4 @@ describe('<ProposalCreateButton />', () => {
     const wrapper = shallow(<ProposalCreateButton {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
-  it('should render correctly as tipsmeee', () => {
-    const props = {
-      handleClick: jest.fn(),
-      disabled: false,
-      proposalForm: {
-        $refType,
-        objectType: 'PROPOSAL',
-      },
-      projectType: 'project.types.budgetPart',
-    };
-    const wrapper = shallow(<ProposalCreateButton {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
 });

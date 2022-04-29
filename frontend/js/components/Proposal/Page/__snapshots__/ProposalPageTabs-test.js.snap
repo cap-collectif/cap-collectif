@@ -62,68 +62,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
 </div>
 `;
 
-exports[`<ProposalPageTabs /> should render Tabs with tipsmeee enable 1`] = `
-<div
-  className="ProposalPageTabs__Tabs-dVxsf iddESn"
-  loading={false}
->
-  <ul
-    className="nav"
-    role={null}
-  >
-    <li
-      className="active"
-      role="presentation"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
-      >
-        presentation_step
-      </a>
-    </li>
-    <li
-      className=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
-      >
-        menu.news
-        <span
-          className="tip"
-        >
-          1
-        </span>
-      </a>
-    </li>
-    <li
-      className=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
-      >
-        proposal.tabs.followers
-        <span
-          className="tip"
-        >
-          169
-        </span>
-      </a>
-    </li>
-  </ul>
-</div>
-`;
-
 exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
 <div
   className="ProposalPageTabs__Tabs-dVxsf iddESn"

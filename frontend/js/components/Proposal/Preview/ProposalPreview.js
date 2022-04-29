@@ -143,7 +143,6 @@ export default createFragmentContainer(
         stepId: { type: "ID!" }
         isAuthenticated: { type: "Boolean!" }
         isProfileView: { type: "Boolean", defaultValue: false }
-        isTipsMeeeEnabled: { type: "Boolean!" }
       ) {
         id
         media {
@@ -162,12 +161,7 @@ export default createFragmentContainer(
             }
           }
         }
-        ...ProposalPreviewFooter_proposal
-          @arguments(
-            stepId: $stepId
-            isProfileView: $isProfileView
-            isTipsMeeeEnabled: $isTipsMeeeEnabled
-          )
+        ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
         ...ProposalPreviewBody_proposal
           @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)
         ...ProposalPreviewStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)

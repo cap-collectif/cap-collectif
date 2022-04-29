@@ -173,11 +173,6 @@
                         "title": "capco.module.vote_min",
                         "description": "description.module.vote_min",
                         "onlySuperAdmin": false
-                    },
-                    "unstable__tipsmeee": {
-                        "title": "capco.module.tipsmeee",
-                        "description": "",
-                        "onlySuperAdmin": true
                     }
                 }
             },

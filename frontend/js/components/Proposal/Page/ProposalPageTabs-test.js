@@ -36,9 +36,6 @@ describe('<ProposalPageTabs />', () => {
           title: 'global.consultation',
         },
       },
-      tipsmeeeDonators: {
-        donatorsCount: 2,
-      },
       paperVotesTotalCount: 0,
     }),
     Step: () => ({
@@ -47,13 +44,10 @@ describe('<ProposalPageTabs />', () => {
   };
 
   const query = graphql`
-    query ProposalPageTabsTestQuery(
-      $proposalId: ID = "proposalId"
-      $stepId: ID = "stepId"
-      $isTipsMeeeEnabled: Boolean!
-    ) @relay_test_operation {
+    query ProposalPageTabsTestQuery($proposalId: ID = "proposalId", $stepId: ID = "stepId")
+    @relay_test_operation {
       proposal: node(id: $proposalId) {
-        ...ProposalPageTabs_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)
+        ...ProposalPageTabs_proposal
       }
       step: node(id: $stepId) {
         ...ProposalPageTabs_step
@@ -70,7 +64,7 @@ describe('<ProposalPageTabs />', () => {
     addsSupportForPortals();
     environment = createMockEnvironment();
     const TestRenderer = props => {
-      const data = useLazyLoadQuery<ProposalPageTabsTestQuery>(query, { isTipsMeeeEnabled: false });
+      const data = useLazyLoadQuery<ProposalPageTabsTestQuery>(query, {});
       if (!data.proposal || !data.step) return null;
       return <ProposalPageTabs proposal={data.proposal} step={data.step} {...props} />;
     };
@@ -89,17 +83,6 @@ describe('<ProposalPageTabs />', () => {
   it('should render Tabs with correct DOM structure', () => {
     enableFeatureFlags(['districts']);
     enableFeatureFlags(['themes']);
-    testComponentTree = ReactTestRenderer.create(
-      <TestProposalPageTabs votesCount={5} tabKey="content" />,
-    );
-    expect(testComponentTree).toMatchSnapshot();
-  });
-
-  it('should render Tabs with tipsmeee enable', () => {
-    enableFeatureFlags(['districts']);
-    enableFeatureFlags(['themes']);
-    enableFeatureFlags(['unstable__tipsmeee']);
-
     testComponentTree = ReactTestRenderer.create(
       <TestProposalPageTabs votesCount={5} tabKey="content" />,
     );
@@ -131,9 +114,6 @@ describe('<ProposalPageTabs />', () => {
             usingThemes: true,
             usingCategories: true,
             objectType: 'PROPOSAL',
-          },
-          tipsmeeeDonators: {
-            donatorsCount: 2,
           },
         }),
       }),

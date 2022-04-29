@@ -93,7 +93,6 @@ export type FeatureToggles = {
   beta__emailing: ?boolean,
   beta__emailing_parameters: ?boolean,
   proposal_revisions: ?boolean,
-  unstable__tipsmeee: ?boolean,
   unstable__new_consultation_page: ?boolean,
   new_project_card: ?boolean,
   import_proposals: ?boolean,

@@ -171,11 +171,6 @@ class Proposal implements
     private ?Status $status = null;
 
     /**
-     * @ORM\Column(name="tipsmeee_id", type="string", nullable=true)
-     */
-    private ?string $tipsmeeeId = null;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalCategory", cascade={"persist"}, inversedBy="proposals")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
@@ -1420,18 +1415,6 @@ class Proposal implements
     public function removeEvaluer(Group $group): self
     {
         $this->evaluers->removeElement($group);
-
-        return $this;
-    }
-
-    public function getTipsmeeeId(): ?string
-    {
-        return $this->tipsmeeeId;
-    }
-
-    public function setTipsmeeeId(?string $tipsmeeeId): self
-    {
-        $this->tipsmeeeId = $tipsmeeeId;
 
         return $this;
     }

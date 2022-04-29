@@ -24,7 +24,7 @@ framework:
     default_locale: '%locale%'
     trusted_hosts: null
     session:
-        handler_id: Capco\UserBundle\Security\SessionWithJsonHandler 
+        handler_id: Capco\UserBundle\Security\SessionWithJsonHandler
         # /!\ Uptading this is a BC /!\
         name: PHPSESSID
         cookie_lifetime: '%env(SYMFONY_SESSION_TIMEOUT_SECONDS)%'
@@ -50,5 +50,3 @@ framework:
         only_exceptions: false
     http_client:
         scoped_clients:
-            tipsmeee.client:
-                base_uri: 'https://api-stage.tipsmeee.com/'

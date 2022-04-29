@@ -46,7 +46,6 @@ type Props = {|
   +usingIllustration: boolean,
   +usingSummary: boolean,
   +usingDistrict: boolean,
-  +usingTipsmeee: boolean,
   +isMapViewEnabled: boolean,
   +features: FeatureToggles,
   +descriptionUsingJoditWysiwyg?: ?boolean,
@@ -150,23 +149,6 @@ export const validate = (values: Object) => {
 
   return errors;
 };
-
-const headerPanelUsingTipsmeee = (
-  <div id="proposal_form_admin_tipsmee_panel">
-    <h4 className="pull-left">
-      <FormattedMessage id="tipsmeee-link" />
-    </h4>
-    <div className="pull-right">
-      <Field
-        id="proposal_form_using_tipsmeee_field"
-        name="usingTipsmeee"
-        component={toggle}
-        normalize={val => !!val}
-      />
-    </div>
-    <div className="clearfix" />
-  </div>
-);
 
 const headerPanelUsingCategories = (
   <div id="proposal_form_admin_category_panel">
@@ -352,7 +334,7 @@ const isJsonString = str => {
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const { intl, defaultLanguage, features } = props;
+  const { intl, defaultLanguage } = props;
 
   values.questions.map(question => {
     if (question.importedResponses || question.importedResponses === null) {
@@ -381,8 +363,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
 
   const input = {
     ...rest,
-    usingTipsmeee: features.unstable__tipsmeee ? values.usingTipsmeee : undefined,
-    tipsmeeeHelpText: features.unstable__tipsmeee ? values.tipsmeeeHelpText : undefined,
     proposalFormId: props.proposalForm.id,
     districts: getDistrictsTranslated(values.districts, defaultLanguage),
     categories: values.categories.map(category => ({
@@ -456,7 +436,6 @@ export const ProposalFormAdminConfigurationForm = ({
   usingSummary,
   usingIllustration,
   usingDistrict,
-  usingTipsmeee,
   features,
   query,
   isMapViewEnabled,
@@ -750,27 +729,6 @@ export const ProposalFormAdminConfigurationForm = ({
           </Panel>
         )}
 
-        {features.unstable__tipsmeee && (
-          <Panel expanded={usingTipsmeee} onToggle={() => {}}>
-            <Panel.Heading>{headerPanelUsingTipsmeee}</Panel.Heading>
-            <Panel.Collapse>
-              <Panel.Body>
-                <Field
-                  name="tipsmeeeHelpText"
-                  component={component}
-                  type="text"
-                  id="proposal_form_tipsmeee_help_text"
-                  label={
-                    <span>
-                      <FormattedMessage id="global.help.text" />
-                      {optional}
-                    </span>
-                  }
-                />
-              </Panel.Body>
-            </Panel.Collapse>
-          </Panel>
-        )}
         {query.viewer.isSuperAdmin && (
           <Field
             id="proposal_form_canContact_field"
@@ -982,7 +940,6 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     usingCategories: selector(state, 'usingCategories'),
     usingThemes: selector(state, 'usingThemes'),
     usingDistrict: selector(state, 'usingDistrict'),
-    usingTipsmeee: selector(state, 'usingTipsmeee'),
     usingDescription: selector(state, 'usingDescription'),
     usingSummary: selector(state, 'usingSummary'),
     usingIllustration: selector(state, 'usingIllustration'),
@@ -1041,8 +998,6 @@ export default createRefetchContainer(
         usingDistrict
         districtHelpText
         districtMandatory
-        usingTipsmeee
-        tipsmeeeHelpText
         allowAknowledge
         objectType
         usingFacebook

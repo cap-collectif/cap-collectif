@@ -8,7 +8,6 @@ exports[`<ProposalPageAside /> should not render correctly with votableStep 1`] 
   isFixedToBottom={false}
   isFixedToTop={false}
   isMovingUp={false}
-  isTipsmeee={false}
 >
   <div>
     <Relay(ProposalPageMetadata)
@@ -29,10 +28,8 @@ exports[`<ProposalPageAside /> should not render correctly with votableStep 1`] 
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -59,10 +56,8 @@ exports[`<ProposalPageAside /> should not render correctly with votableStep 1`] 
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -85,10 +80,8 @@ exports[`<ProposalPageAside /> should not render correctly with votableStep 1`] 
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -105,7 +98,6 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
   isFixedToBottom={false}
   isFixedToTop={false}
   isMovingUp={false}
-  isTipsmeee={false}
 >
   <div>
     <Relay(ProposalPageMetadata)
@@ -126,10 +118,8 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -156,10 +146,8 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -182,10 +170,8 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -217,10 +203,8 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -237,7 +221,6 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
   isFixedToBottom={false}
   isFixedToTop={false}
   isMovingUp={false}
-  isTipsmeee={false}
 >
   <div>
     <Relay(ProposalPageMetadata)
@@ -258,10 +241,8 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -288,10 +269,8 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -314,10 +293,8 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -349,168 +326,8 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
-          "viewerDidAuthor": true,
-        }
-      }
-    />
-  </div>
-</ProposalPageAside__Aside>
-`;
-
-exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
-<ProposalPageAside__Aside
-  hasVoteBar={true}
-  id="ProposalPageAside"
-  isAnalysing={true}
-  isFixedToBottom={false}
-  isFixedToTop={false}
-  isMovingUp={false}
-  isTipsmeee={true}
->
-  <div>
-    <Relay(ProposalPageMetadata)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "currentVotableStep": Object {
-            "$fragmentRefs": null,
-            "canDisplayBallot": true,
-            "voteType": "SIMPLE",
-            "votesRanking": true,
-          },
-          "form": Object {
-            "isUsingAnySocialNetworks": true,
-            "step": Object {
-              "state": "OPENED",
-            },
-            "usingCategories": true,
-            "usingThemes": true,
-            "usingTipsmeee": true,
-          },
-          "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": "aTipsmeCode",
-          "viewerDidAuthor": true,
-        }
-      }
-      showCategories={true}
-      showDistricts={false}
-      showNullEstimation={false}
-      showThemes={false}
-    />
-    <Relay(ProposalPageAdvancement)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "currentVotableStep": Object {
-            "$fragmentRefs": null,
-            "canDisplayBallot": true,
-            "voteType": "SIMPLE",
-            "votesRanking": true,
-          },
-          "form": Object {
-            "isUsingAnySocialNetworks": true,
-            "step": Object {
-              "state": "OPENED",
-            },
-            "usingCategories": true,
-            "usingThemes": true,
-            "usingTipsmeee": true,
-          },
-          "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": "aTipsmeCode",
-          "viewerDidAuthor": true,
-        }
-      }
-    />
-    <ProposalTipsMeeeAside
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "currentVotableStep": Object {
-            "$fragmentRefs": null,
-            "canDisplayBallot": true,
-            "voteType": "SIMPLE",
-            "votesRanking": true,
-          },
-          "form": Object {
-            "isUsingAnySocialNetworks": true,
-            "step": Object {
-              "state": "OPENED",
-            },
-            "usingCategories": true,
-            "usingThemes": true,
-            "usingTipsmeee": true,
-          },
-          "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": "aTipsmeCode",
-          "viewerDidAuthor": true,
-        }
-      }
-    />
-    <Relay(ProposalPageVoteThreshold)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "currentVotableStep": Object {
-            "$fragmentRefs": null,
-            "canDisplayBallot": true,
-            "voteType": "SIMPLE",
-            "votesRanking": true,
-          },
-          "form": Object {
-            "isUsingAnySocialNetworks": true,
-            "step": Object {
-              "state": "OPENED",
-            },
-            "usingCategories": true,
-            "usingThemes": true,
-            "usingTipsmeee": true,
-          },
-          "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": "aTipsmeCode",
-          "viewerDidAuthor": true,
-        }
-      }
-      showPoints={true}
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "canDisplayBallot": true,
-          "voteType": "SIMPLE",
-          "votesRanking": true,
-        }
-      }
-    />
-    <ProposalSocialNetworkLinks
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "currentVotableStep": Object {
-            "$fragmentRefs": null,
-            "canDisplayBallot": true,
-            "voteType": "SIMPLE",
-            "votesRanking": true,
-          },
-          "form": Object {
-            "isUsingAnySocialNetworks": true,
-            "step": Object {
-              "state": "OPENED",
-            },
-            "usingCategories": true,
-            "usingThemes": true,
-            "usingTipsmeee": true,
-          },
-          "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": "aTipsmeCode",
           "viewerDidAuthor": true,
         }
       }
@@ -527,7 +344,6 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
   isFixedToBottom={false}
   isFixedToTop={false}
   isMovingUp={false}
-  isTipsmeee={false}
 >
   <div>
     <Relay(ProposalPageMetadata)
@@ -548,10 +364,8 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -578,10 +392,8 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -604,10 +416,8 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }
@@ -639,10 +449,8 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
             },
             "usingCategories": true,
             "usingThemes": false,
-            "usingTipsmeee": false,
           },
           "isProposalUsingAnySocialNetworks": true,
-          "tipsmeeeId": null,
           "viewerDidAuthor": true,
         }
       }

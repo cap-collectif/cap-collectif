@@ -16,7 +16,6 @@ import type { GeoJson } from '~/utils/geojson';
 type Props = {
   relay: RelayPaginationProp,
   displayMap: boolean,
-  isTipsMeeeEnabled: boolean,
   step: ProposalListViewPaginated_step,
   displayMode: ProposalViewMode,
   defaultMapOptions: MapOptions,
@@ -141,7 +140,6 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
         cursor,
         stepId: props.step.id,
         isAuthenticated: !!props.viewer,
-        isTipsMeeeEnabled: props.isTipsMeeeEnabled,
       };
     },
     query: graphql`
@@ -150,7 +148,6 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
         $cursor: String
         $orderBy: ProposalOrder
         $isAuthenticated: Boolean!
-        $isTipsMeeeEnabled: Boolean!
         $count: Int
         $term: String
         $district: ID

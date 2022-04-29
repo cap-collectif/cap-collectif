@@ -30,7 +30,6 @@ export const ProposalPage = ({
 }: Props) => {
   const { slug } = useParams();
   const { state } = useLocation();
-  const isTipsMeeeEnabled = useFeatureFlag('unstable__tipsmeee');
   const proposalRevisionsEnabled = useFeatureFlag('proposal_revisions');
   return (
     <QueryRenderer
@@ -44,7 +43,6 @@ export const ProposalPage = ({
           $count: Int!
           $cursor: String
           $isAuthenticated: Boolean!
-          $isTipsMeeeEnabled: Boolean!
           $proposalRevisionsEnabled: Boolean!
         ) {
           ...ProposalPageLogic_query
@@ -55,7 +53,6 @@ export const ProposalPage = ({
               count: $count
               cursor: $cursor
               isAuthenticated: $isAuthenticated
-              isTipsMeeeEnabled: $isTipsMeeeEnabled
               proposalRevisionsEnabled: $proposalRevisionsEnabled
             )
           step: node(id: $stepId) @include(if: $hasVotableStep) {
@@ -70,7 +67,6 @@ export const ProposalPage = ({
         count: PROPOSAL_FOLLOWERS_TO_SHOW,
         cursor: null,
         isAuthenticated,
-        isTipsMeeeEnabled,
         proposalRevisionsEnabled: proposalRevisionsEnabled && isAuthenticated,
       }}
       render={({

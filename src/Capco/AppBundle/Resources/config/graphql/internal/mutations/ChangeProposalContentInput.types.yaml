@@ -44,9 +44,6 @@ ChangeProposalContentInput:
             media:
                 type: 'ID'
                 description: 'Current media id'
-            tipsmeeeId:
-                type: 'String'
-                description: 'The ID of tipsmeee'
             estimation:
                 type: 'Float'
             likers:

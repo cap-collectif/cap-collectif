@@ -620,9 +620,6 @@ class ImportProposalsFromCsv
         if ($this->proposalForm->getUsingAddress() && $address) {
             $proposal->setAddress($address);
         }
-        if ($this->proposalForm->isUsingTipsmeee()) {
-            $proposal->setTipsmeeeId($row['tipsmeeee']);
-        }
         if (
             $this->proposalForm->isUsingEstimation() &&
             !empty($row['estimation']) &&

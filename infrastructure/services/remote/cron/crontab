@@ -40,8 +40,5 @@
 # Send Planned emailing campaigns every 5 minutes.
 */5 * * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:send-emailing-campaign --env=prod
 
-# Cache TipsMeee computed data every minute.
-* * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:compute:tipsmeee-data --env=prod --quiet
-
 # Publish entities with planned publication every 5 minutes.
 */5 * * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:publisher --env=prod

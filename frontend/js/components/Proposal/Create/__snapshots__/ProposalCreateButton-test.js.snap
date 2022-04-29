@@ -60,26 +60,6 @@ exports[`<ProposalCreateButton /> should render correctly as Question 1`] = `
 </Connect(LoginOverlay)>
 `;
 
-exports[`<ProposalCreateButton /> should render correctly as tipsmeee 1`] = `
-<Connect(LoginOverlay)>
-  <button
-    className="btn btn-primary"
-    disabled={false}
-    id="add-proposal"
-    onClick={[MockFunction]}
-    type="button"
-  >
-    <i
-      className="cap cap-add-1"
-    />
-    <FormattedMessage
-      id="proposal.add"
-      values={Object {}}
-    />
-  </button>
-</Connect(LoginOverlay)>
-`;
-
 exports[`<ProposalCreateButton /> should render correctly when disabled 1`] = `
 <Connect(LoginOverlay)>
   <button

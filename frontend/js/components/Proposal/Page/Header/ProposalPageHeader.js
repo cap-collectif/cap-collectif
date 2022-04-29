@@ -326,7 +326,6 @@ export default createFragmentContainer(container, {
     @argumentDefinitions(
       isAuthenticated: { type: "Boolean!" }
       proposalRevisionsEnabled: { type: "Boolean!" }
-      isTipsMeeeEnabled: { type: "Boolean!" }
     ) {
       id
       ...TrashedMessage_contribution
@@ -335,7 +334,6 @@ export default createFragmentContainer(container, {
         @arguments(
           isAuthenticated: $isAuthenticated
           proposalRevisionsEnabled: $proposalRevisionsEnabled
-          isTipsMeeeEnabled: $isTipsMeeeEnabled
         )
       title
       media {

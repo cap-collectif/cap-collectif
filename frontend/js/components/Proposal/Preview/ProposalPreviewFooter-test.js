@@ -3,8 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPreviewFooter } from './ProposalPreviewFooter';
-import { $refType } from '../../../mocks';
-import { enableFeatureFlags } from '~/testUtils';
+import { $refType } from '~/mocks';
 
 describe('<ProposalPreviewFooter />', () => {
   const stepWithVoteActive = {
@@ -49,7 +48,6 @@ describe('<ProposalPreviewFooter />', () => {
     form: {
       commentable: true,
       objectType: 'PROPOSAL',
-      usingTipsmeee: false,
     },
     allComments: { totalCountWithAnswers: 13 },
     allVotesOnStep: {
@@ -58,29 +56,21 @@ describe('<ProposalPreviewFooter />', () => {
     },
     paperVotesTotalCount: 0,
     paperVotesTotalPointsCount: 0,
-    tipsMeeeDonation: null,
   };
 
   const proposalNotCommentable = {
     ...proposal,
-    tipsMeeeDonation: null,
     form: {
       commentable: false,
       objectType: 'PROPOSAL',
-      usingTipsmeee: false,
     },
   };
 
   const proposalWithDonations = {
     ...proposal,
-    tipsMeeeDonation: {
-      donationCount: 5,
-      donationTotalCount: 15000,
-    },
     form: {
       commentable: false,
       objectType: 'ESTABLISHMENT',
-      usingTipsmeee: true,
     },
   };
 
@@ -120,7 +110,6 @@ describe('<ProposalPreviewFooter />', () => {
   });
 
   it('should render a footer with donation infos', () => {
-    enableFeatureFlags(['unstable__tipsmeee']);
     const wrapper = shallow(
       <ProposalPreviewFooter proposal={proposalWithDonations} step={stepWithVoteDisabled} />,
     );

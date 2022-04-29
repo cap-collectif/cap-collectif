@@ -3,14 +3,12 @@
 exports[`<ProposalPageMainContent /> should render correctly 1`] = `
 <ProposalPageMainContent__ProposalPageMainContentContainer
   id="ProposalPageMainContent"
-  usingTipsmeee={false}
 >
   <Relay(ProposalPageFusionInformations)
     proposal={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -19,7 +17,6 @@ exports[`<ProposalPageMainContent /> should render correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -28,7 +25,6 @@ exports[`<ProposalPageMainContent /> should render correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -37,7 +33,6 @@ exports[`<ProposalPageMainContent /> should render correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -46,7 +41,6 @@ exports[`<ProposalPageMainContent /> should render correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -56,7 +50,6 @@ exports[`<ProposalPageMainContent /> should render correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -66,7 +59,6 @@ exports[`<ProposalPageMainContent /> should render correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -75,7 +67,6 @@ exports[`<ProposalPageMainContent /> should render correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -85,14 +76,12 @@ exports[`<ProposalPageMainContent /> should render correctly 1`] = `
 exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] = `
 <ProposalPageMainContent__ProposalPageMainContentContainer
   id="ProposalPageMainContent"
-  usingTipsmeee={false}
 >
   <Relay(ProposalPageFusionInformations)
     proposal={
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -101,7 +90,6 @@ exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] 
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -110,7 +98,6 @@ exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] 
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -119,7 +106,6 @@ exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] 
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -128,7 +114,6 @@ exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] 
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -138,7 +123,6 @@ exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] 
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -148,7 +132,6 @@ exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] 
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
       }
     }
   />
@@ -157,109 +140,6 @@ exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] 
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "tipsmeeeId": null,
-      }
-    }
-  />
-</ProposalPageMainContent__ProposalPageMainContentContainer>
-`;
-
-exports[`<ProposalPageMainContent /> should render correctly with tipsmeeee 1`] = `
-<ProposalPageMainContent__ProposalPageMainContentContainer
-  id="ProposalPageMainContent"
-  usingTipsmeee="anId"
->
-  <Relay(ProposalPageFusionInformations)
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "tipsmeeeId": "anId",
-      }
-    }
-  />
-  <Relay(ProposalPageOfficialAnswer)
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "tipsmeeeId": "anId",
-      }
-    }
-  />
-  <ProposalPageMainContent__DonatorContent>
-    <ProposalTipsMeeeDonatorsAside
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "tipsmeeeId": "anId",
-        }
-      }
-    />
-  </ProposalPageMainContent__DonatorContent>
-  <Relay(ProposalPageDescription)
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "tipsmeeeId": "anId",
-      }
-    }
-  />
-  <Relay(ProposalPageLocalisation)
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "tipsmeeeId": "anId",
-      }
-    }
-  />
-  <ProposalPageTopDonators
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "tipsmeeeId": "anId",
-      }
-    }
-  />
-  <Relay(Connect(ProposalPageCustomSections))
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "tipsmeeeId": "anId",
-      }
-    }
-  />
-  <Relay(ProposalPageMainAside)
-    display={false}
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "tipsmeeeId": "anId",
-      }
-    }
-  />
-  <Relay(ProposalPageNews)
-    goToBlog={[MockFunction]}
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "tipsmeeeId": "anId",
-      }
-    }
-  />
-  <Relay(ProposalPageDiscussions)
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "tipsmeeeId": "anId",
       }
     }
   />

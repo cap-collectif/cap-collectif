@@ -7,7 +7,6 @@ import { LastProposals } from './LastProposals';
 describe('<LastProposals />', () => {
   const props = {
     ids: ['proposal1', 'proposal2', 'proposal3'],
-    isTipsMeeeEnabled: false,
   };
 
   it('should render correctly', () => {

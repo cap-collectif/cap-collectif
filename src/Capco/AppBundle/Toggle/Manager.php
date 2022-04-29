@@ -72,7 +72,6 @@ class Manager
     public const beta__emailing_parameters = 'beta__emailing_parameters';
     public const beta__emailing_group = 'beta__emailing_group';
     public const proposal_revisions = 'proposal_revisions';
-    public const unstable__tipsmeee = 'unstable__tipsmeee';
     public const unstable__new_consultation_page = 'unstable__new_consultation_page';
     public const new_project_card = 'new_project_card';
     public const export_legacy_users = 'export_legacy_users';
@@ -174,7 +173,6 @@ class Manager
         self::beta__emailing_parameters,
         self::beta__emailing_group,
         self::proposal_revisions,
-        self::unstable__tipsmeee,
         self::unstable__new_consultation_page,
         self::new_project_card,
         self::export_legacy_users,

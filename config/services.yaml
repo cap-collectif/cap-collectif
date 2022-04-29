@@ -84,7 +84,6 @@ parameters:
     occitanie_password: '%env(SYMFONY_OCCITANIE_PASSWORD)%'
     occitanie_client_id: '%env(SYMFONY_OCCITANIE_CLIENT_ID)%'
     occitanie_client_secret: '%env(SYMFONY_OCCITANIE_CLIENT_SECRET)%'
-    tipsmeee_api_key: '%env(SYMFONY_TIPSMEEE_API_KEY)%'
     slack_jpec_ghost: '%env(SLACK_JPEC_GHOST)%'
     panther_url: '%env(SYMFONY_PANTHER_URL)%'
     panther_token: '%env(SYMFONY_PANTHER_TOKEN)%'
@@ -141,7 +140,6 @@ parameters:
     env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD): admin
     env(SYMFONY_REMEMBER_SECRET): secretRemember
     # To be deleted
-    env(SYMFONY_TIPSMEEE_API_KEY): INSERT_A_REAL_SECRET
     # Todo inject only on occitanie instance with service pass
     env(SYMFONY_OCCITANIE_USERNAME): INSERT_A_REAL_SECRET
     env(SYMFONY_OCCITANIE_PASSWORD): INSERT_A_REAL_SECRET

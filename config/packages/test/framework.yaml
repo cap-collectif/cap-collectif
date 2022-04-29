@@ -8,5 +8,3 @@ framework:
         enabled: true
     http_client:
         scoped_clients:
-            tipsmeee.client:
-                base_uri: 'https://api-stage.tipsmeee.com/'

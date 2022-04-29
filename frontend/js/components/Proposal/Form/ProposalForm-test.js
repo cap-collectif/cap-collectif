@@ -96,8 +96,6 @@ describe('<ProposalForm />', () => {
     descriptionHelpText: 'Description help',
     addressHelpText: 'Address help',
     proposalInAZoneRequired: true,
-    usingTipsmeee: false,
-    tipsmeeeHelpText: null,
     usingFacebook: true,
     usingWebPage: true,
     usingTwitter: true,
@@ -185,8 +183,6 @@ describe('<ProposalForm />', () => {
     themeMandatory: true,
     descriptionMandatory: true,
     usingCategories: true,
-    usingTipsmeee: true,
-    tipsmeeeHelpText: 'this is tipsmeee',
     categoryMandatory: true,
     categoryHelpText: 'Category help',
     usingAddress: true,
@@ -209,7 +205,6 @@ describe('<ProposalForm />', () => {
   const props = {
     intl: intlMock,
     ...formMock,
-    tipsmeeeIdDisabled: false,
     responses: [],
     proposalForm: {
       ...proposalForm,
@@ -226,7 +221,6 @@ describe('<ProposalForm />', () => {
       ...features,
       themes: true,
       districts: true,
-      unstable__tipsmeee: false,
     },
     titleValue: 'Proposal title',
     addressValue: null,
@@ -237,7 +231,6 @@ describe('<ProposalForm />', () => {
       summary: 'Proposal summary',
       publicationStatus: 'PUBLISHED',
       address: null,
-      tipsmeeeId: '8w0k53L28',
       theme: { id: 'theme1' },
       district: { id: 'district1' },
       category: { id: 'category1' },
@@ -285,7 +278,6 @@ describe('<ProposalForm />', () => {
   it('should render a create Question form', () => {
     const questionProps = {
       ...props,
-      tipsmeeeIdDisabled: false,
       proposalForm: {
         ...proposalForm,
         $refType,
@@ -299,7 +291,6 @@ describe('<ProposalForm />', () => {
   it('should render a create Question form with hidden questions', () => {
     const questionProps = {
       ...props,
-      tipsmeeeIdDisabled: false,
       proposalForm: {
         ...hiddenQuestionsProposalForm,
         $refType,
@@ -316,12 +307,9 @@ describe('<ProposalForm />', () => {
         ...features,
         themes: true,
         districts: true,
-        unstable__tipsmeee: true,
       },
-      tipsmeeeIdDisabled: true,
       proposalForm: {
         ...proposalForm,
-        usingTipsmeee: true,
         $refType,
         objectType: 'ESTABLISHMENT',
       },

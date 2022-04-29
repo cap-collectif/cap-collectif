@@ -371,8 +371,6 @@ Capco\AppBundle\Entity\ProposalForm:
         isMapViewEnabled: true
         usingCategories: false
         usingSummary: true
-        usingTipsmeee: true
-        tipsmeeeHelpText: Code d'identification TipsMeee
         districtMandatory: false
         themeMandatory: false
         descriptionMandatory: true

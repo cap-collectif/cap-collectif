@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageAside } from './ProposalPageAside';
 import { $refType, $fragmentRefs } from '~/mocks';
-import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils';
+import { disableFeatureFlags } from '~/testUtils';
 
 const proposal = {
   $refType,
@@ -15,14 +15,12 @@ const proposal = {
     canDisplayBallot: true,
     $fragmentRefs,
   },
-  tipsmeeeId: null,
   isProposalUsingAnySocialNetworks: true,
   viewerDidAuthor: true,
   form: {
     isUsingAnySocialNetworks: true,
     usingCategories: true,
     usingThemes: false,
-    usingTipsmeee: false,
     step: {
       state: 'CLOSED',
     },
@@ -78,33 +76,6 @@ describe('<ProposalPageAside />', () => {
     const wrapper = shallow(
       <ProposalPageAside
         proposal={proposal}
-        {...props}
-        opinionCanBeFollowed
-        hasVotableStep
-        isAnalysing
-        isAuthenticated
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-  it('should render correctly with tipsmeee', () => {
-    enableFeatureFlags(['unstable__tipsmeee']);
-
-    const wrapper = shallow(
-      <ProposalPageAside
-        proposal={{
-          ...proposal,
-          form: {
-            isUsingAnySocialNetworks: true,
-            usingCategories: true,
-            usingThemes: true,
-            usingTipsmeee: true,
-            step: {
-              state: 'OPENED',
-            },
-          },
-          tipsmeeeId: 'aTipsmeCode',
-        }}
         {...props}
         opinionCanBeFollowed
         hasVotableStep

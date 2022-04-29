@@ -16,12 +16,7 @@ const mutation = graphql`
       proposal {
         ...DraftProposalPreview_proposal @relay(mask: false)
         ...ProposalPreview_proposal
-          @arguments(
-            stepId: $stepId
-            isAuthenticated: true
-            isProfileView: false
-            isTipsMeeeEnabled: false
-          )
+          @arguments(stepId: $stepId, isAuthenticated: true, isProfileView: false)
         ...ProposalLeafletMap_proposals
         id
         url

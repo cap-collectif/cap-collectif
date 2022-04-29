@@ -1779,9 +1779,6 @@ input ChangeProposalContentInput {
 
   """Current media id"""
   media: ID
-
-  """The ID of tipsmeee"""
-  tipsmeeeId: String
   estimation: Float
   likers: [ID!]
   clientMutationId: String
@@ -3517,9 +3514,6 @@ input CreateProposalFromBackOfficeInput {
 
   """The media id to illustrate"""
   media: ID
-
-  """The ID of tipsmeee"""
-  tipsmeeeId: String
   clientMutationId: String
 
   """The proposal author"""
@@ -3600,9 +3594,6 @@ input CreateProposalInput {
 
   """The media id to illustrate"""
   media: ID
-
-  """The ID of tipsmeee"""
-  tipsmeeeId: String
   clientMutationId: String
 }
 
@@ -6126,9 +6117,6 @@ enum FeatureFlagType {
   beta__emailing_parameters
   beta__emailing_group
   proposal_revisions
-
-  """Whether or not an admin can use `TIPSmeee`. Used in dev only."""
-  unstable__tipsmeee
 
   """Whether or not the new consultation page is active."""
   unstable__new_consultation_page
@@ -9661,12 +9649,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Viewer can contribute to the proposal"""
   contribuable: Boolean!
-
-  """The ID of tipsmeee."""
-  tipsmeeeId: String
-
-  """Return all tipsmeee related data."""
-  tipsmeee: TipsMeee
   isProposalAuthorAllowedToAddNews: Boolean!
 
   """
@@ -10139,12 +10121,6 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   """True if the MAP view is enabled."""
   isMapViewEnabled: Boolean!
-
-  """True if tipsmeee is enabled."""
-  usingTipsmeee: Boolean!
-
-  """The help text for tipsmeee."""
-  tipsmeeeHelpText: String
 
   """The number of social networks used."""
   numberOfUsedSocialNetworks: Int!
@@ -10813,20 +10789,6 @@ enum ProposalTaskState {
 
   """The proposal's all task done"""
   DONE
-}
-
-type ProposalTopDonator {
-  """The donator's email."""
-  email: String!
-
-  """The donator's name."""
-  name: String!
-
-  """The amount of the donation."""
-  amount: Float!
-
-  """The donation date."""
-  date: DateTime!
 }
 
 """Possible trashed status for a `Proposal`."""
@@ -14433,24 +14395,6 @@ type TimeRange {
   isTimeless: Boolean!
 }
 
-"""Object containing all tipsmee related data."""
-type TipsMeee {
-  """The number of donation"""
-  donationCount: Int!
-
-  """The number of donators."""
-  donatorsCount: Int!
-
-  """The donation total count."""
-  donationTotalCount: Float!
-
-  """The top donators of the proposal."""
-  topDonators(
-    """The first n top donators."""
-    first: Int = 100
-  ): [ProposalTopDonator!]!
-}
-
 input ToggleFeatureInput {
   """The type of the feature"""
   type: FeatureFlagType!
@@ -15706,12 +15650,6 @@ input UpdateProposalFormInput {
 
   """can the viewer see the proposals as a MAP"""
   isMapViewEnabled: Boolean
-
-  """Proposal form using tipsmeee field"""
-  usingTipsmeee: Boolean
-
-  """Proposal form help text for tipsmeee field"""
-  tipsmeeeHelpText: String
 
   """Can proposal contain web site url"""
   usingWebPage: Boolean! = false

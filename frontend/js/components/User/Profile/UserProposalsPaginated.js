@@ -70,14 +70,14 @@ export default createPaginationContainer(
   {
     user: graphql`
       fragment UserProposalsPaginated_user on User
-        @argumentDefinitions(
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-          stepId: { type: "ID!" }
-          isAuthenticated: { type: "Boolean!" }
-          isTipsMeeeEnabled: { type: "Boolean!" }
-          isProfileView: { type: "Boolean!" }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        stepId: { type: "ID!" }
+        isAuthenticated: { type: "Boolean!" }
+
+        isProfileView: { type: "Boolean!" }
+      ) {
         id
         proposals(first: $count, after: $cursor)
           @connection(key: "UserProposalsPaginated_proposals") {
@@ -88,7 +88,6 @@ export default createPaginationContainer(
               ...ProposalPreview_proposal
                 @arguments(
                   isAuthenticated: $isAuthenticated
-                  isTipsMeeeEnabled: $isTipsMeeeEnabled
                   isProfileView: $isProfileView
                   stepId: $stepId
                 )
@@ -128,7 +127,6 @@ export default createPaginationContainer(
         $stepId: ID!
         $userId: ID!
         $isAuthenticated: Boolean!
-        $isTipsMeeeEnabled: Boolean!
         $count: Int!
         $isProfileView: Boolean!
         $cursor: String
@@ -139,7 +137,6 @@ export default createPaginationContainer(
             @arguments(
               count: $count
               isAuthenticated: $isAuthenticated
-              isTipsMeeeEnabled: $isTipsMeeeEnabled
               isProfileView: $isProfileView
               stepId: $stepId
               cursor: $cursor

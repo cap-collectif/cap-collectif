@@ -9,7 +9,6 @@ import ProposalPageMetadata from '~/components/Proposal/Page/Aside/ProposalPageM
 import ProposalPageVoteThreshold from '~/components/Proposal/Page/Aside/ProposalPageVoteThreshold';
 import ProposalSocialNetworkLinks from '~/components/Proposal/Page/Aside/ProposalSocialNetworkLinks';
 import ProposalPageAdvancement from '~/components/Proposal/Page/Aside/ProposalPageAdvancement';
-import ProposalTipsMeeeAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeAside';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 const HEIGHT_WITH_VOTEBAR = 130;
@@ -31,14 +30,13 @@ const Aside: StyledComponent<
     isFixedToTop: boolean,
     isFixedToBottom: boolean,
     isMovingUp: boolean,
-    isTipsmeee: boolean,
   },
   {},
   HTMLElement,
 > = styled.aside`
-  ${({ isAnalysing, hasVoteBar, isFixedToTop, isFixedToBottom, isMovingUp, isTipsmeee }) => css`
+  ${({ isAnalysing, hasVoteBar, isFixedToTop, isFixedToBottom, isMovingUp }) => css`
     display: ${isAnalysing && 'none'};
-    width: ${isTipsmeee ? '333px' : '300px'};
+    width: 300px;
     position: absolute;
     margin-left: 617px;
     z-index: 1;
@@ -87,7 +85,6 @@ export const ProposalPageAside = ({
   const asideRef = useRef(null);
   const currentVotableStep = proposal?.currentVotableStep;
   const scrollY: number = useScrollYPosition();
-  const isFeatureTipsMeeEnable = useFeatureFlag('unstable__tipsmeee');
   const isDistrictsEnabled = useFeatureFlag('districts');
   const isThemesEnabled = useFeatureFlag('themes');
   const hasVoteBar = hasVotableStep && proposal?.currentVotableStep && isAuthenticated;
@@ -100,7 +97,6 @@ export const ProposalPageAside = ({
   const isMovingUp =
     (shouldGoUp && scrollY > totalHeight && bottom < 0) ||
     (height + bottom - 15 < heightFromTop + (asideRef?.current?.clientHeight || 0) && !shouldGoUp);
-  const tipsmeeeWithCode = !!(proposal && proposal.tipsmeeeId && isFeatureTipsMeeEnable);
 
   return (
     <Aside
@@ -109,7 +105,6 @@ export const ProposalPageAside = ({
       isFixedToTop={scrollY > 240 && !shouldGoUp}
       isFixedToBottom={shouldGoUp && scrollY > totalHeight}
       isMovingUp={isMovingUp}
-      isTipsmeee={tipsmeeeWithCode}
       id="ProposalPageAside">
       <div ref={asideRef}>
         {!isActualityTab && (
@@ -124,9 +119,6 @@ export const ProposalPageAside = ({
               showThemes={(isThemesEnabled || false) && proposal?.form?.usingThemes}
             />
             <ProposalPageAdvancement proposal={proposal} />
-            {proposal && proposal.form.usingTipsmeee && isFeatureTipsMeeEnable && (
-              <ProposalTipsMeeeAside proposal={proposal} />
-            )}
             {currentVotableStep !== null &&
               typeof currentVotableStep !== 'undefined' &&
               currentVotableStep.canDisplayBallot && (
@@ -152,13 +144,8 @@ export const ProposalPageAside = ({
 export default createFragmentContainer(ProposalPageAside, {
   proposal: graphql`
     fragment ProposalPageAside_proposal on Proposal
-    @argumentDefinitions(
-      stepId: { type: "ID!" }
-      isTipsMeeeEnabled: { type: "Boolean!" }
-      isAuthenticated: { type: "Boolean!" }
-    ) {
+    @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
       ...ProposalPageMetadata_proposal
-      ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
       ...ProposalPageAdvancement_proposal
       ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
       currentVotableStep {
@@ -170,7 +157,6 @@ export default createFragmentContainer(ProposalPageAside, {
       viewerDidAuthor @include(if: $isAuthenticated)
       isProposalUsingAnySocialNetworks
       ...ProposalSocialNetworkLinks_proposal @arguments(isAuthenticated: $isAuthenticated)
-      tipsmeeeId @include(if: $isTipsMeeeEnabled)
       form {
         step {
           state
@@ -178,7 +164,6 @@ export default createFragmentContainer(ProposalPageAside, {
         isUsingAnySocialNetworks
         usingCategories
         usingThemes
-        usingTipsmeee @include(if: $isTipsMeeeEnabled)
       }
     }
   `,

@@ -12,9 +12,7 @@ framework:
         system: cache.adapter.system
         directory: '%kernel.cache_dir%/pools' # Only used with cache.adapter.filesystem
     http_client:
-        scoped_clients:
-            tipsmeee.client:
-                base_uri: 'https://api.tipsmeee.com/'
+        scoped_clients: ~
 swiftmailer:
     default_mailer: mandrill
 

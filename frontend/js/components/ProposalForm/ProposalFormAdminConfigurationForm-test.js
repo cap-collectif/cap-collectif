@@ -31,8 +31,6 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     usingAddress: true,
     usingDescription: true,
     usingIllustration: false,
-    usingTipsmeee: false,
-    tipsmeeeHelpText: null,
     usingSummary: false,
     mapCenter: {
       lat: 0,
@@ -110,7 +108,6 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     usingDistrict: true,
     usingDescription: true,
     usingIllustration: false,
-    usingTipsmeee: false,
     usingSummary: false,
     isMapViewEnabled: false,
     features,

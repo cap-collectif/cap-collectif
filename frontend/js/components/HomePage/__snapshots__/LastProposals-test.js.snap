@@ -19,11 +19,6 @@ exports[`<LastProposals /> should render correctly 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "isTipsMeeeEnabled",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
               "name": "stepId",
             },
           ],
@@ -70,11 +65,6 @@ exports[`<LastProposals /> should render correctly 1`] = `
                         },
                         Object {
                           "kind": "Variable",
-                          "name": "isTipsMeeeEnabled",
-                          "variableName": "isTipsMeeeEnabled",
-                        },
-                        Object {
-                          "kind": "Variable",
                           "name": "stepId",
                           "variableName": "stepId",
                         },
@@ -91,7 +81,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "25119a05d0f89f0690154f3b4d11e8ff",
+        "hash": "538e15a175db4807d328a530f2edd6c4",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -104,11 +94,6 @@ exports[`<LastProposals /> should render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "stepId",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isTipsMeeeEnabled",
             },
           ],
           "kind": "Operation",
@@ -351,13 +336,6 @@ exports[`<LastProposals /> should render correctly 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "objectType",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "usingTipsmeee",
                           "storageKey": null,
                         },
                         Object {
@@ -662,38 +640,6 @@ exports[`<LastProposals /> should render correctly 1`] = `
                       "storageKey": null,
                     },
                     Object {
-                      "condition": "isTipsMeeeEnabled",
-                      "kind": "Condition",
-                      "passingValue": true,
-                      "selections": Array [
-                        Object {
-                          "alias": "tipsMeeeDonation",
-                          "args": null,
-                          "concreteType": "TipsMeee",
-                          "kind": "LinkedField",
-                          "name": "tipsmeee",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "donationTotalCount",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "donationCount",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                      ],
-                    },
-                    Object {
                       "abstractKey": "__isPublishable",
                       "kind": "InlineFragment",
                       "selections": Array [
@@ -730,7 +676,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "0a617bf31b6d872bebae0c432f25c8d3",
+          "cacheID": "cfaba4c44cf87354c4a6c260ec5f9eff",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -738,13 +684,12 @@ exports[`<LastProposals /> should render correctly 1`] = `
           "text": "query LastProposalsQuery(
   $ids: [ID!]!
   $stepId: ID!
-  $isTipsMeeeEnabled: Boolean!
 ) {
   proposals: nodes(ids: $ids) {
     __typename
     ... on Proposal {
       id
-      ...ProposalPreview_proposal_3NCAPp
+      ...ProposalPreview_proposal_dUMnP
     }
     id
   }
@@ -832,17 +777,12 @@ fragment ProposalPreviewBody_proposal_1nwaua on Proposal {
   ...ProposalFollowButton_proposal_3HigpW
 }
 
-fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
+fragment ProposalPreviewFooter_proposal_2tPna9 on Proposal {
   id
   form {
     commentable
     objectType
-    usingTipsmeee
     id
-  }
-  tipsMeeeDonation: tipsmeee @include(if: $isTipsMeeeEnabled) {
-    donationTotalCount
-    donationCount
   }
   allComments: comments(first: 0) {
     totalCountWithAnswers
@@ -874,7 +814,7 @@ fragment ProposalPreviewUser_proposal on Proposal {
   }
 }
 
-fragment ProposalPreview_proposal_3NCAPp on Proposal {
+fragment ProposalPreview_proposal_dUMnP on Proposal {
   id
   media {
     url
@@ -896,7 +836,7 @@ fragment ProposalPreview_proposal_3NCAPp on Proposal {
     }
     id
   }
-  ...ProposalPreviewFooter_proposal_23y2IM
+  ...ProposalPreviewFooter_proposal_2tPna9
   ...ProposalPreviewBody_proposal_1nwaua
   ...ProposalPreviewStatus_proposal_2tPna9
 }
@@ -934,7 +874,6 @@ fragment UserLink_user on User {
           "proposal2",
           "proposal3",
         ],
-        "isTipsMeeeEnabled": false,
         "stepId": "",
       }
     }

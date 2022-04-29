@@ -122,9 +122,6 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::beta__emailing_group")'
             proposal_revisions:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::proposal_revisions")'
-            unstable__tipsmeee:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__tipsmeee")'
-                description: 'Whether or not an admin can use `TIPSmeee`. Used in dev only.'
             unstable__new_consultation_page:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__new_consultation_page")'
                 description: 'Whether or not the new consultation page is active.'
