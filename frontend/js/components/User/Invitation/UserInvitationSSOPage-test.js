@@ -72,6 +72,7 @@ describe('<UserInvitationSSOPage />', () => {
     btnTextColor: 'white',
     backgroundColor: 'white',
     setFirstVisited: jest.fn(),
+    token: 'onishan'
   };
 
   describe('<TestUserInvitationSSOPage />', () => {

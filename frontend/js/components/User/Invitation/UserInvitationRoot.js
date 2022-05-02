@@ -76,7 +76,6 @@ const UserInvitationRootPage = ({
 
   const backgroundColor =
     colors.find(color => color.keyname === 'color.main_menu.bg')?.value || defaultPrimaryColor;
-
   return (
     <Switch>
       <Route path="/sso">
@@ -91,11 +90,13 @@ const UserInvitationRootPage = ({
             btnTextColor={btnTextColor}
             backgroundColor={backgroundColor}
             setFirstVisited={setFirstVisited}
+            token={token}
           />
         ) : (
           <Redirect from="/sso" to="/" />
         )}
       </Route>
+
       <Route path="/">
         {hasEnabledSSO && !firstVisited ? (
           <Redirect to="/sso" />

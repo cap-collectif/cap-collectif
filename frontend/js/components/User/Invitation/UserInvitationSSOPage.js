@@ -33,6 +33,7 @@ type Props = {|
   +btnTextColor: string,
   +backgroundColor: string,
   +setFirstVisited: (visited: boolean) => void,
+  +token: string,
 |};
 
 const LOGO_FRAGMENT = graphql`
@@ -53,6 +54,7 @@ const UserInvitationSSOPage = ({
   btnTextColor,
   backgroundColor,
   setFirstVisited,
+  token
 }: Props) => {
   React.useEffect(() => {
     setFirstVisited(true);
@@ -131,7 +133,10 @@ const UserInvitationSSOPage = ({
                   index={ssoList.length}
                   primaryColor={primaryColor}
                   btnTextColor={btnTextColor}
-                  to="/">
+                  to={{
+                    pathname: "/",
+                    search: `?token=${token}`
+                  }}>
                   {intl.formatMessage({ id: 'create-account-with-email' })}
                 </CreateAccountEmailLink>
               </>
@@ -139,6 +144,7 @@ const UserInvitationSSOPage = ({
           </ButtonsContainer>
         </LeftSideInner>
       </LeftSide>
+
       <RigthSide
         width="50%"
         justifyContent="center"

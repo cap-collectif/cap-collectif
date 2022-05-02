@@ -81,7 +81,7 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
         <a
           backgroundColor="green"
           className="SSOButtonstyle__BaseButton-dfBTRJ SSOButtonstyle__PrimarySSOButton-fjCAej bEDTed hTYcqt"
-          href="/"
+          href="/?token=onishan"
           onClick={[Function]}
           textColor="white"
         >
@@ -181,7 +181,7 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
         <a
           backgroundColor="green"
           className="SSOButtonstyle__BaseButton-dfBTRJ SSOButtonstyle__PrimarySSOButton-fjCAej bEDTed hTYcqt"
-          href="/"
+          href="/?token=onishan"
           onClick={[Function]}
           textColor="white"
         >

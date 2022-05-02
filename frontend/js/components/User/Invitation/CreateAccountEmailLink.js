@@ -7,11 +7,16 @@ import {
   TertiarySSOButton,
 } from '~/components/User/Invitation/SSOButton.style';
 
+type DestinationType = {
+  +pathname: string,
+  +search: string
+}
+
 type Props = {|
   +index: number,
   +primaryColor: string,
   +btnTextColor: string,
-  +to: string,
+  +to: DestinationType,
   +children: React.Node,
 |};
 

@@ -47,9 +47,11 @@ export default (propsComponent: Props) => (
       }) => {
         if (error) return graphqlError;
 
+        const baseRoute = propsComponent.baseUrl.split('?')[0];
+
         if (props && props.siteImage && props.siteColors) {
           return (
-            <Router basename={propsComponent.baseUrl}>
+            <Router basename={baseRoute}>
               <UserInvitationRoot
                 queryFragmentRef={props}
                 logoFragmentRef={props.siteImage}
