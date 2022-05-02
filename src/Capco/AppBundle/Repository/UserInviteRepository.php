@@ -197,6 +197,9 @@ class UserInviteRepository extends EntityRepository
                         $qb->expr()->literal((new \DateTimeImmutable())->format('Y/m/d H:i:s'))
                     )
             );
+            $qb->leftJoin('CapcoUserBundle:User', 'u', Join::WITH, 'u.email = ui.email')->andWhere(
+                'u.email IS NULL'
+            );
         }
 
         if (UserInviteStatus::FAILED === $status) {
