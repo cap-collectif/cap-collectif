@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
@@ -37,6 +38,7 @@ class AddUserReplyMutation implements MutationInterface
     private Publisher $publisher;
     private RequestGuesser $requestGuesser;
     private StepRequirementsResolver $stepRequirementsResolver;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -47,7 +49,8 @@ class AddUserReplyMutation implements MutationInterface
         LoggerInterface $logger,
         Publisher $publisher,
         RequestGuesser $requestGuesser,
-        StepRequirementsResolver $stepRequirementsResolver
+        StepRequirementsResolver $stepRequirementsResolver,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -58,6 +61,7 @@ class AddUserReplyMutation implements MutationInterface
         $this->publisher = $publisher;
         $this->requestGuesser = $requestGuesser;
         $this->stepRequirementsResolver = $stepRequirementsResolver;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -122,6 +126,8 @@ class AddUserReplyMutation implements MutationInterface
 
         $this->em->persist($reply);
         $this->em->flush();
+        $this->indexer->index(Reply::class, $reply->getId());
+        $this->indexer->finishBulk();
 
         if ($questionnaire->isNotifyResponseCreate() && !$reply->isDraft()) {
             $this->publisher->publish(

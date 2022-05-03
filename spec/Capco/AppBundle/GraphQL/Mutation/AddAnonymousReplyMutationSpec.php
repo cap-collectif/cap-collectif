@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Form\ReplyAnonymousType;
@@ -31,7 +32,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         RequestGuesser $requestGuesser,
         TokenGeneratorInterface $tokenGenerator,
         GlobalIdResolver $globalIdResolver,
-        Publisher $publisher
+        Publisher $publisher,
+        Indexer $indexer
     ) {
         $this->beConstructedWith(
             $em,
@@ -41,7 +43,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
             $requestGuesser,
             $tokenGenerator,
             $globalIdResolver,
-            $publisher
+            $publisher,
+            $indexer
         );
     }
 
@@ -59,7 +62,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         ResponsesFormatter $responsesFormatter,
         FormFactoryInterface $formFactory,
         Form $form,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        Indexer $indexer
     ) {
         $values = [
             'questionnaireId' => 'abc',
@@ -124,6 +128,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
 
         $em->persist(Argument::type(ReplyAnonymous::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
+        $indexer->index(ReplyAnonymous::class, Argument::any())->shouldBeCalledOnce();
+        $indexer->finishBulk()->shouldBeCalledOnce();
 
         $questionnaire->isNotifyResponseCreate()->willReturn(false);
 
@@ -146,7 +152,7 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         Form $form,
         EntityManagerInterface $em,
         Publisher $publisher,
-        ReplyAnonymous $replyAnonymous
+        Indexer $indexer
     ) {
         $values = [
             'questionnaireId' => 'abc',
@@ -211,6 +217,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
 
         $em->persist(Argument::type(ReplyAnonymous::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
+        $indexer->index(ReplyAnonymous::class, Argument::any())->shouldBeCalledOnce();
+        $indexer->finishBulk()->shouldBeCalledOnce();
 
         $questionnaire
             ->isNotifyResponseCreate()

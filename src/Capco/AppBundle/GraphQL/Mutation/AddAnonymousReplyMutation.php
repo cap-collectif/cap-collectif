@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Form\ReplyAnonymousType;
@@ -30,6 +31,7 @@ class AddAnonymousReplyMutation implements MutationInterface
     private TokenGeneratorInterface $tokenGenerator;
     private GlobalIdResolver $globalIdResolver;
     private Publisher $publisher;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -39,7 +41,8 @@ class AddAnonymousReplyMutation implements MutationInterface
         RequestGuesser $requestGuesser,
         TokenGeneratorInterface $tokenGenerator,
         GlobalIdResolver $globalIdResolver,
-        Publisher $publisher
+        Publisher $publisher,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -49,6 +52,7 @@ class AddAnonymousReplyMutation implements MutationInterface
         $this->tokenGenerator = $tokenGenerator;
         $this->globalIdResolver = $globalIdResolver;
         $this->publisher = $publisher;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input): array
@@ -82,6 +86,8 @@ class AddAnonymousReplyMutation implements MutationInterface
 
         $this->em->persist($replyAnonymous);
         $this->em->flush();
+        $this->indexer->index(ReplyAnonymous::class, $replyAnonymous->getId());
+        $this->indexer->finishBulk();
 
         if ($questionnaire->isNotifyResponseCreate() || $replyAnonymous->getParticipantEmail()) {
             $this->publisher->publish(
