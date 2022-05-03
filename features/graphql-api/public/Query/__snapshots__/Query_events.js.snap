@@ -295,11 +295,11 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": 1,
           "id": "RXZlbnQ6ZXZlbnQz",
           "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
+          "isMeasurable": true,
+          "maxRegistrations": 2,
           "projects": Array [
             Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -388,11 +388,11 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 1,
+          "availableRegistration": 0,
           "id": "RXZlbnQ6ZXZlbnQy",
           "isEventRegistrationComplete": false,
-          "isMeasurable": true,
-          "maxRegistrations": 2,
+          "isMeasurable": false,
+          "maxRegistrations": null,
           "projects": Array [
             Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -552,11 +552,11 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": 1,
           "id": "RXZlbnQ6ZXZlbnQz",
           "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
+          "isMeasurable": true,
+          "maxRegistrations": 2,
           "projects": Array [
             Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -645,11 +645,11 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 1,
+          "availableRegistration": 0,
           "id": "RXZlbnQ6ZXZlbnQy",
           "isEventRegistrationComplete": false,
-          "isMeasurable": true,
-          "maxRegistrations": 2,
+          "isMeasurable": false,
+          "maxRegistrations": null,
           "projects": Array [
             Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -809,11 +809,11 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": 1,
           "id": "RXZlbnQ6ZXZlbnQz",
           "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
+          "isMeasurable": true,
+          "maxRegistrations": 2,
           "projects": Array [
             Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -902,11 +902,11 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 1,
+          "availableRegistration": 0,
           "id": "RXZlbnQ6ZXZlbnQy",
           "isEventRegistrationComplete": false,
-          "isMeasurable": true,
-          "maxRegistrations": 2,
+          "isMeasurable": false,
+          "maxRegistrations": null,
           "projects": Array [
             Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -1066,11 +1066,11 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": 1,
           "id": "RXZlbnQ6ZXZlbnQz",
           "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
+          "isMeasurable": true,
+          "maxRegistrations": 2,
           "projects": Array [
             Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -1159,11 +1159,11 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 1,
+          "availableRegistration": 0,
           "id": "RXZlbnQ6ZXZlbnQy",
           "isEventRegistrationComplete": false,
-          "isMeasurable": true,
-          "maxRegistrations": 2,
+          "isMeasurable": false,
+          "maxRegistrations": null,
           "projects": Array [
             Object {
               "id": "UHJvamVjdDpwcm9qZWN0MQ==",

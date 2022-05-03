@@ -62,11 +62,12 @@ const container = connect<any, any, _, _, _, _>()(EventPagePassedEventsPreview);
 export default createFragmentContainer(container, {
   query: graphql`
     fragment EventPagePassedEventsPreview_query on Query
-      @argumentDefinitions(
-        locale: { type: "TranslationLocale" }
-        previewCount: { type: "Int" }
-        orderBy: { type: "EventOrder" }
-      ) {
+    @argumentDefinitions(
+      locale: { type: "TranslationLocale" }
+      previewCount: { type: "Int" }
+      orderBy: { type: "EventOrder" }
+      isAuthenticated: { type: "Boolean!" }
+    ) {
       previewPassedEvents: events(
         locale: $locale
         first: $previewCount
@@ -76,7 +77,7 @@ export default createFragmentContainer(container, {
         totalCount
         edges {
           node {
-            ...EventPreview_event
+            ...EventPreview_event @arguments(isAuthenticated: $isAuthenticated)
           }
         }
       }

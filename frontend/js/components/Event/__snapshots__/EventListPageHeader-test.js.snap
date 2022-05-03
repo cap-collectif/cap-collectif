@@ -481,6 +481,38 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                     "name": "adminAuthorizeDataTransfer",
                     "storageKey": null,
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "maxRegistrations",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isMeasurable",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "ParticipantConnection",
+                    "kind": "LinkedField",
+                    "name": "participants",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "totalCount",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
                 ],
                 "type": "Event",
               },
@@ -647,7 +679,7 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
         ],
       },
       "params": Object {
-        "cacheID": "1bb2d29557ae1367c704e6c029d94542",
+        "cacheID": "50e60f11658f3bc3ba32922aa3f5cd81",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -731,6 +763,11 @@ fragment EventForm_event on Event {
   }
   authorAgreeToUsePersonalDataForEventOnly
   adminAuthorizeDataTransfer
+  maxRegistrations
+  isMeasurable
+  participants {
+    totalCount
+  }
 }
 
 fragment EventForm_query on Query {
@@ -1274,6 +1311,38 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                     "name": "adminAuthorizeDataTransfer",
                     "storageKey": null,
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "maxRegistrations",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isMeasurable",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "ParticipantConnection",
+                    "kind": "LinkedField",
+                    "name": "participants",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "totalCount",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
                 ],
                 "type": "Event",
               },
@@ -1440,7 +1509,7 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
         ],
       },
       "params": Object {
-        "cacheID": "1bb2d29557ae1367c704e6c029d94542",
+        "cacheID": "50e60f11658f3bc3ba32922aa3f5cd81",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -1524,6 +1593,11 @@ fragment EventForm_event on Event {
   }
   authorAgreeToUsePersonalDataForEventOnly
   adminAuthorizeDataTransfer
+  maxRegistrations
+  isMeasurable
+  participants {
+    totalCount
+  }
 }
 
 fragment EventForm_query on Query {
@@ -2067,6 +2141,38 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                     "name": "adminAuthorizeDataTransfer",
                     "storageKey": null,
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "maxRegistrations",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isMeasurable",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "ParticipantConnection",
+                    "kind": "LinkedField",
+                    "name": "participants",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "totalCount",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
                 ],
                 "type": "Event",
               },
@@ -2233,7 +2339,7 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "1bb2d29557ae1367c704e6c029d94542",
+        "cacheID": "50e60f11658f3bc3ba32922aa3f5cd81",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -2317,6 +2423,11 @@ fragment EventForm_event on Event {
   }
   authorAgreeToUsePersonalDataForEventOnly
   adminAuthorizeDataTransfer
+  maxRegistrations
+  isMeasurable
+  participants {
+    totalCount
+  }
 }
 
 fragment EventForm_query on Query {
@@ -2860,6 +2971,38 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                     "name": "adminAuthorizeDataTransfer",
                     "storageKey": null,
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "maxRegistrations",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isMeasurable",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "ParticipantConnection",
+                    "kind": "LinkedField",
+                    "name": "participants",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "totalCount",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
                 ],
                 "type": "Event",
               },
@@ -3026,7 +3169,7 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "1bb2d29557ae1367c704e6c029d94542",
+        "cacheID": "50e60f11658f3bc3ba32922aa3f5cd81",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -3110,6 +3253,11 @@ fragment EventForm_event on Event {
   }
   authorAgreeToUsePersonalDataForEventOnly
   adminAuthorizeDataTransfer
+  maxRegistrations
+  isMeasurable
+  participants {
+    totalCount
+  }
 }
 
 fragment EventForm_query on Query {

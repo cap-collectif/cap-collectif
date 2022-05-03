@@ -319,6 +319,13 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "name": "endAt",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isFuture",
+                              "storageKey": null,
+                            },
                           ],
                           "storageKey": null,
                         },
@@ -546,8 +553,57 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "isRegistrationPossible",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isCompleteAndRegistrationPossibleResolver",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isMeasurable",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "maxRegistrations",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "availableRegistration",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "id",
                           "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isViewerParticipatingAtEvent",
+                              "storageKey": null,
+                            },
+                          ],
                         },
                       ],
                       "storageKey": null,
@@ -766,6 +822,13 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "name": "endAt",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isFuture",
+                              "storageKey": null,
+                            },
                           ],
                           "storageKey": null,
                         },
@@ -970,6 +1033,55 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                             },
                           ],
                           "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isRegistrationPossible",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isCompleteAndRegistrationPossibleResolver",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isMeasurable",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "maxRegistrations",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "availableRegistration",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isViewerParticipatingAtEvent",
+                              "storageKey": null,
+                            },
+                          ],
                         },
                       ],
                       "storageKey": null,
@@ -1314,6 +1426,13 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                       "name": "endAt",
                                       "storageKey": null,
                                     },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isFuture",
+                                      "storageKey": null,
+                                    },
                                   ],
                                   "storageKey": null,
                                 },
@@ -1537,6 +1656,55 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                   ],
                                   "storageKey": null,
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isRegistrationPossible",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isCompleteAndRegistrationPossibleResolver",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isMeasurable",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "maxRegistrations",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "availableRegistration",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "condition": "isAuthenticated",
+                                  "kind": "Condition",
+                                  "passingValue": true,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isViewerParticipatingAtEvent",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                },
                               ],
                               "storageKey": null,
                             },
@@ -1575,7 +1743,7 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9c5be436d406ff421abb0716561e96bc",
+          "cacheID": "cab20865dce6e750bb6ac06c6d6ae2d6",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -1646,14 +1814,14 @@ fragment EventListPageContainer_query_17yZ05 on Query {
       edges {
         node {
           id
-          ...EventPreview_event
+          ...EventPreview_event_39ngnn
         }
       }
     }
     adminAwaitingEvents
     id
   }
-  ...EventRefetch_query_307oU4
+  ...EventRefetch_query_17yZ05
   ...EventListFilters_query_307oU4
   ...EventListCounter_query_307oU4
 }
@@ -1665,18 +1833,18 @@ fragment EventListPageHeader_queryViewer_39ngnn on Query {
   }
 }
 
-fragment EventListPaginated_query_307oU4 on Query {
+fragment EventListPaginated_query_17yZ05 on Query {
   previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
   }
-  ...EventPagePassedEventsPreview_query_qo3MD
+  ...EventPagePassedEventsPreview_query_pkHIz
   ...EventMap_query_307oU4
   events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
     totalCount
     edges {
       node {
         id
-        ...EventPreview_event
+        ...EventPreview_event_39ngnn
         __typename
       }
       cursor
@@ -1727,25 +1895,26 @@ fragment EventMap_query_307oU4 on Query {
   ...LeafletMap_query_307oU4
 }
 
-fragment EventPagePassedEventsPreview_query_qo3MD on Query {
+fragment EventPagePassedEventsPreview_query_pkHIz on Query {
   previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
     edges {
       node {
-        ...EventPreview_event
+        ...EventPreview_event_39ngnn
         id
       }
     }
   }
 }
 
-fragment EventPreview_event on Event {
+fragment EventPreview_event_39ngnn on Event {
   title
   url
   guestListEnabled
   timeRange {
     startAt
     endAt
+    isFuture
   }
   googleMapsAddress {
     __typename
@@ -1767,10 +1936,16 @@ fragment EventPreview_event on Event {
   }
   ...EventImage_event
   ...EventLabelStatus_event
+  isViewerParticipatingAtEvent @include(if: $isAuthenticated)
+  isRegistrationPossible
+  isCompleteAndRegistrationPossibleResolver
+  isMeasurable
+  maxRegistrations
+  availableRegistration
 }
 
-fragment EventRefetch_query_307oU4 on Query {
-  ...EventListPaginated_query_307oU4
+fragment EventRefetch_query_17yZ05 on Query {
+  ...EventListPaginated_query_17yZ05
 }
 
 fragment LeafletMap_query_307oU4 on Query {
@@ -2194,6 +2369,13 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "name": "endAt",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isFuture",
+                              "storageKey": null,
+                            },
                           ],
                           "storageKey": null,
                         },
@@ -2421,8 +2603,57 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "isRegistrationPossible",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isCompleteAndRegistrationPossibleResolver",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isMeasurable",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "maxRegistrations",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "availableRegistration",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "id",
                           "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isViewerParticipatingAtEvent",
+                              "storageKey": null,
+                            },
+                          ],
                         },
                       ],
                       "storageKey": null,
@@ -2641,6 +2872,13 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "name": "endAt",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isFuture",
+                              "storageKey": null,
+                            },
                           ],
                           "storageKey": null,
                         },
@@ -2845,6 +3083,55 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                             },
                           ],
                           "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isRegistrationPossible",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isCompleteAndRegistrationPossibleResolver",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isMeasurable",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "maxRegistrations",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "availableRegistration",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isViewerParticipatingAtEvent",
+                              "storageKey": null,
+                            },
+                          ],
                         },
                       ],
                       "storageKey": null,
@@ -3189,6 +3476,13 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                       "name": "endAt",
                                       "storageKey": null,
                                     },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isFuture",
+                                      "storageKey": null,
+                                    },
                                   ],
                                   "storageKey": null,
                                 },
@@ -3412,6 +3706,55 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                   ],
                                   "storageKey": null,
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isRegistrationPossible",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isCompleteAndRegistrationPossibleResolver",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isMeasurable",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "maxRegistrations",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "availableRegistration",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "condition": "isAuthenticated",
+                                  "kind": "Condition",
+                                  "passingValue": true,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isViewerParticipatingAtEvent",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                },
                               ],
                               "storageKey": null,
                             },
@@ -3450,7 +3793,7 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9c5be436d406ff421abb0716561e96bc",
+          "cacheID": "cab20865dce6e750bb6ac06c6d6ae2d6",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -3521,14 +3864,14 @@ fragment EventListPageContainer_query_17yZ05 on Query {
       edges {
         node {
           id
-          ...EventPreview_event
+          ...EventPreview_event_39ngnn
         }
       }
     }
     adminAwaitingEvents
     id
   }
-  ...EventRefetch_query_307oU4
+  ...EventRefetch_query_17yZ05
   ...EventListFilters_query_307oU4
   ...EventListCounter_query_307oU4
 }
@@ -3540,18 +3883,18 @@ fragment EventListPageHeader_queryViewer_39ngnn on Query {
   }
 }
 
-fragment EventListPaginated_query_307oU4 on Query {
+fragment EventListPaginated_query_17yZ05 on Query {
   previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
   }
-  ...EventPagePassedEventsPreview_query_qo3MD
+  ...EventPagePassedEventsPreview_query_pkHIz
   ...EventMap_query_307oU4
   events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
     totalCount
     edges {
       node {
         id
-        ...EventPreview_event
+        ...EventPreview_event_39ngnn
         __typename
       }
       cursor
@@ -3602,25 +3945,26 @@ fragment EventMap_query_307oU4 on Query {
   ...LeafletMap_query_307oU4
 }
 
-fragment EventPagePassedEventsPreview_query_qo3MD on Query {
+fragment EventPagePassedEventsPreview_query_pkHIz on Query {
   previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
     edges {
       node {
-        ...EventPreview_event
+        ...EventPreview_event_39ngnn
         id
       }
     }
   }
 }
 
-fragment EventPreview_event on Event {
+fragment EventPreview_event_39ngnn on Event {
   title
   url
   guestListEnabled
   timeRange {
     startAt
     endAt
+    isFuture
   }
   googleMapsAddress {
     __typename
@@ -3642,10 +3986,16 @@ fragment EventPreview_event on Event {
   }
   ...EventImage_event
   ...EventLabelStatus_event
+  isViewerParticipatingAtEvent @include(if: $isAuthenticated)
+  isRegistrationPossible
+  isCompleteAndRegistrationPossibleResolver
+  isMeasurable
+  maxRegistrations
+  availableRegistration
 }
 
-fragment EventRefetch_query_307oU4 on Query {
-  ...EventListPaginated_query_307oU4
+fragment EventRefetch_query_17yZ05 on Query {
+  ...EventListPaginated_query_17yZ05
 }
 
 fragment LeafletMap_query_307oU4 on Query {
@@ -4069,6 +4419,13 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "name": "endAt",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isFuture",
+                              "storageKey": null,
+                            },
                           ],
                           "storageKey": null,
                         },
@@ -4296,8 +4653,57 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "isRegistrationPossible",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isCompleteAndRegistrationPossibleResolver",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isMeasurable",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "maxRegistrations",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "availableRegistration",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "id",
                           "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isViewerParticipatingAtEvent",
+                              "storageKey": null,
+                            },
+                          ],
                         },
                       ],
                       "storageKey": null,
@@ -4516,6 +4922,13 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "name": "endAt",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isFuture",
+                              "storageKey": null,
+                            },
                           ],
                           "storageKey": null,
                         },
@@ -4720,6 +5133,55 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                             },
                           ],
                           "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isRegistrationPossible",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isCompleteAndRegistrationPossibleResolver",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isMeasurable",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "maxRegistrations",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "availableRegistration",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isViewerParticipatingAtEvent",
+                              "storageKey": null,
+                            },
+                          ],
                         },
                       ],
                       "storageKey": null,
@@ -5064,6 +5526,13 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                       "name": "endAt",
                                       "storageKey": null,
                                     },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isFuture",
+                                      "storageKey": null,
+                                    },
                                   ],
                                   "storageKey": null,
                                 },
@@ -5287,6 +5756,55 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                   ],
                                   "storageKey": null,
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isRegistrationPossible",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isCompleteAndRegistrationPossibleResolver",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isMeasurable",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "maxRegistrations",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "availableRegistration",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "condition": "isAuthenticated",
+                                  "kind": "Condition",
+                                  "passingValue": true,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isViewerParticipatingAtEvent",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                },
                               ],
                               "storageKey": null,
                             },
@@ -5325,7 +5843,7 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9c5be436d406ff421abb0716561e96bc",
+          "cacheID": "cab20865dce6e750bb6ac06c6d6ae2d6",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -5396,14 +5914,14 @@ fragment EventListPageContainer_query_17yZ05 on Query {
       edges {
         node {
           id
-          ...EventPreview_event
+          ...EventPreview_event_39ngnn
         }
       }
     }
     adminAwaitingEvents
     id
   }
-  ...EventRefetch_query_307oU4
+  ...EventRefetch_query_17yZ05
   ...EventListFilters_query_307oU4
   ...EventListCounter_query_307oU4
 }
@@ -5415,18 +5933,18 @@ fragment EventListPageHeader_queryViewer_39ngnn on Query {
   }
 }
 
-fragment EventListPaginated_query_307oU4 on Query {
+fragment EventListPaginated_query_17yZ05 on Query {
   previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
   }
-  ...EventPagePassedEventsPreview_query_qo3MD
+  ...EventPagePassedEventsPreview_query_pkHIz
   ...EventMap_query_307oU4
   events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
     totalCount
     edges {
       node {
         id
-        ...EventPreview_event
+        ...EventPreview_event_39ngnn
         __typename
       }
       cursor
@@ -5477,25 +5995,26 @@ fragment EventMap_query_307oU4 on Query {
   ...LeafletMap_query_307oU4
 }
 
-fragment EventPagePassedEventsPreview_query_qo3MD on Query {
+fragment EventPagePassedEventsPreview_query_pkHIz on Query {
   previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
     edges {
       node {
-        ...EventPreview_event
+        ...EventPreview_event_39ngnn
         id
       }
     }
   }
 }
 
-fragment EventPreview_event on Event {
+fragment EventPreview_event_39ngnn on Event {
   title
   url
   guestListEnabled
   timeRange {
     startAt
     endAt
+    isFuture
   }
   googleMapsAddress {
     __typename
@@ -5517,10 +6036,16 @@ fragment EventPreview_event on Event {
   }
   ...EventImage_event
   ...EventLabelStatus_event
+  isViewerParticipatingAtEvent @include(if: $isAuthenticated)
+  isRegistrationPossible
+  isCompleteAndRegistrationPossibleResolver
+  isMeasurable
+  maxRegistrations
+  availableRegistration
 }
 
-fragment EventRefetch_query_307oU4 on Query {
-  ...EventListPaginated_query_307oU4
+fragment EventRefetch_query_17yZ05 on Query {
+  ...EventListPaginated_query_17yZ05
 }
 
 fragment LeafletMap_query_307oU4 on Query {

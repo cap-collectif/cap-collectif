@@ -25,6 +25,7 @@ type Props = {|
   +author: ?{ value: string },
   +orderBy: EventOrder,
   +formName: string,
+  +isAuthenticated: boolean,
 |};
 
 type State = {|
@@ -39,7 +40,17 @@ export class EventRefetch extends React.Component<Props, State> {
   };
 
   _refetch = debounce(() => {
-    const { relay, search, project, theme, author, status, isRegistrable, userType } = this.props;
+    const {
+      relay,
+      search,
+      project,
+      theme,
+      author,
+      status,
+      isRegistrable,
+      userType,
+      isAuthenticated,
+    } = this.props;
     this.setState({ isRefetching: true });
     const refetchVariables = fragmentVariables =>
       ({
@@ -59,6 +70,7 @@ export class EventRefetch extends React.Component<Props, State> {
           status === 'finished' || status === 'all'
             ? getOrderBy(ORDER_TYPE.OLD)
             : getOrderBy(ORDER_TYPE.LAST),
+        isAuthenticated,
       }: EventRefetchRefetchQueryVariables);
 
     relay.refetch(
@@ -110,6 +122,7 @@ export class EventRefetch extends React.Component<Props, State> {
 const mapStateToProps = (state: GlobalState) => {
   const selector = formValueSelector('EventPageContainer');
   return {
+    isAuthenticated: !!state.user.user,
     theme: selector(state, 'theme'),
     project: selector(state, 'project'),
     search: selector(state, 'search'),
@@ -128,19 +141,20 @@ export default createRefetchContainer(
   {
     query: graphql`
       fragment EventRefetch_query on Query
-        @argumentDefinitions(
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-          theme: { type: "ID" }
-          project: { type: "ID" }
-          locale: { type: "TranslationLocale" }
-          search: { type: "String" }
-          userType: { type: "ID" }
-          isFuture: { type: "Boolean" }
-          author: { type: "ID" }
-          isRegistrable: { type: "Boolean" }
-          orderBy: { type: "EventOrder" }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        theme: { type: "ID" }
+        project: { type: "ID" }
+        locale: { type: "TranslationLocale" }
+        search: { type: "String" }
+        userType: { type: "ID" }
+        isFuture: { type: "Boolean" }
+        author: { type: "ID" }
+        isRegistrable: { type: "Boolean" }
+        orderBy: { type: "EventOrder" }
+        isAuthenticated: { type: "Boolean!" }
+      ) {
         ...EventListPaginated_query
           @arguments(
             cursor: $cursor
@@ -154,6 +168,7 @@ export default createRefetchContainer(
             author: $author
             isRegistrable: $isRegistrable
             orderBy: $orderBy
+            isAuthenticated: $isAuthenticated
           )
       }
     `,
@@ -171,6 +186,7 @@ export default createRefetchContainer(
       $author: ID
       $isRegistrable: Boolean
       $orderBy: EventOrder
+      $isAuthenticated: Boolean!
     ) {
       ...EventRefetch_query
         @arguments(
@@ -185,6 +201,7 @@ export default createRefetchContainer(
           author: $author
           isRegistrable: $isRegistrable
           orderBy: $orderBy
+          isAuthenticated: $isAuthenticated
         )
       events(
         first: $count

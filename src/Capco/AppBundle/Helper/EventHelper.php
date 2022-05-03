@@ -13,8 +13,12 @@ class EventHelper
         return $event->canContribute() &&
             $event->isFuture() &&
             $event->isGuestListEnabled() &&
-            null === $event->getLink() &&
-            !$event->isRegistrationComplete();
+            null === $event->getLink();
+    }
+
+    public function isCompleteAndRegistrationPossibleResolver(Event $event): bool
+    {
+        return $this->isRegistrationPossible($event) && $event->isRegistrationComplete();
     }
 
     public function findUserRegistrationOrCreate(

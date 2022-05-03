@@ -23,7 +23,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
       md={12}
       xs={12}
     >
-      <Relay(Connect(EventPreview))
+      <Relay(EventPreview)
         event={
           Object {
             "$fragmentRefs": null,
@@ -31,7 +31,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
         }
         key="0"
       />
-      <Relay(Connect(EventPreview))
+      <Relay(EventPreview)
         event={
           Object {
             "$fragmentRefs": null,
@@ -39,7 +39,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
         }
         key="1"
       />
-      <Relay(Connect(EventPreview))
+      <Relay(EventPreview)
         event={
           Object {
             "$fragmentRefs": null,

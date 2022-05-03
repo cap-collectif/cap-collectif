@@ -20,7 +20,7 @@ type Props = {|
   +disabled: boolean,
 |};
 
-const renderLabel = (intl: IntlShape, label: string, optional: boolean) => {
+export const renderLabel = (intl: IntlShape, label: string, optional: boolean) => {
   const message = intl.formatMessage({ id: label });
   return optional ? (
     <div>

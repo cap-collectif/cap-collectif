@@ -512,6 +512,38 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                         "storageKey": null,
                       },
                       Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "maxRegistrations",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "isMeasurable",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "ParticipantConnection",
+                        "kind": "LinkedField",
+                        "name": "participants",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
                         "condition": "isAuthenticated",
                         "kind": "Condition",
                         "passingValue": true,
@@ -690,7 +722,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "654d16d83b72ad097d06b1bc54dfa2e7",
+            "cacheID": "324b7b39326a7e19b07f27db44764f05",
             "id": null,
             "metadata": Object {},
             "name": "EventFormPageAppQuery",
@@ -801,6 +833,11 @@ fragment EventForm_event on Event {
   }
   authorAgreeToUsePersonalDataForEventOnly
   adminAuthorizeDataTransfer
+  maxRegistrations
+  isMeasurable
+  participants {
+    totalCount
+  }
 }
 
 fragment EventForm_query_k3vj0 on Query {

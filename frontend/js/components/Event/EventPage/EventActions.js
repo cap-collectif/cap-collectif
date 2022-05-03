@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
-import { ButtonGroup, Button } from '@cap-collectif/ui';
+import { ButtonGroup, Button, Text } from '@cap-collectif/ui';
 import { getTranslation } from '~/services/Translation';
 import type { EventActions_query$key } from '~relay/EventActions_query.graphql';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
@@ -40,6 +40,8 @@ const FRAGMENT = graphql`
           status
         }
         adminUrl
+        isEventRegistrationComplete
+        availableRegistration
       }
     }
     viewer @include(if: $isAuthenticated) {
@@ -66,10 +68,37 @@ export const EventActions = ({ queryRef }: Props) => {
     review,
     isRegistrationPossible,
     translations,
+    isEventRegistrationComplete,
+    availableRegistration,
   } = event;
 
   const translation = translations ? getTranslation(translations, currentLanguage) : undefined;
   const link = translation?.link || undefined;
+  const displayLeftEventPlacesTag =
+    !isEventRegistrationComplete &&
+    availableRegistration &&
+    availableRegistration > 0 &&
+    availableRegistration < 4;
+
+  let registerButton = <UserRegister user={viewer} event={event} />;
+  if ((!isViewerParticipatingAtEvent || !viewer) && !isEventRegistrationComplete) {
+    registerButton = (
+      <>
+        <RegisterForm queryRef={query} />{' '}
+        {displayLeftEventPlacesTag ? (
+          <Text as="span" mt="12px">
+            {intl.formatMessage({ id: 'left-event-places' }, { num: availableRegistration })}
+          </Text>
+        ) : null}
+      </>
+    );
+  } else if (isEventRegistrationComplete && !isViewerParticipatingAtEvent) {
+    registerButton = (
+      <Button variantSize="big" variantColor="danger" variant="primary" disabled>
+        {intl.formatMessage({ id: 'complete' })}
+      </Button>
+    );
+  }
 
   const eventIsNotApproved =
     viewerDidAuthor && hasProposeEvent && review && review?.status !== 'APPROVED';
@@ -82,15 +111,7 @@ export const EventActions = ({ queryRef }: Props) => {
           <EventDeleteModal eventId={event.id} />
         </>
       )}
-      {!eventIsNotApproved && (isRegistrationPossible || link) && (
-        <>
-          {!isViewerParticipatingAtEvent || !viewer ? (
-            <RegisterForm queryRef={query} />
-          ) : (
-            <UserRegister user={viewer} event={event} />
-          )}
-        </>
-      )}
+      {!eventIsNotApproved && (isRegistrationPossible || link) && <>{registerButton}</>}
       {viewer?.isAdmin ? (
         <Button
           href={event.adminUrl}

@@ -104,6 +104,10 @@ InternalEvent:
                 type: 'Boolean!'
                 description: 'Whether or not registration is enabled on this event.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventIsRegistrationPossibleResolver", [value])'
+            isCompleteAndRegistrationPossibleResolver:
+                type: 'Boolean!'
+                description: 'Whether or not registration is enabled on this event and event is complete.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventIsCompleteAndRegistrationPossibleResolver", [value])'
             viewerIsRoomAnimator:
                 type: 'Boolean!'
                 description: 'Wheter or not the viewer can join the room before it starts.'

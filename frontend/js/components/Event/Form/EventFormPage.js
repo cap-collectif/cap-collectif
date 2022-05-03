@@ -89,7 +89,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       translation,
       props.currentLanguage,
     ),
-    measurable: false,
+    measurable: isFrontendView ? false : values.measurable,
     bodyUsingJoditWysiwyg: values?.bodyUsingJoditWysiwyg ?? false,
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
@@ -105,6 +105,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     author: values.author ? values.author.value : undefined,
     adminAuthorizeDataTransfer,
     authorAgreeToUsePersonalDataForEventOnly,
+    maxRegistrations:
+      ((isFrontendView && values.guestListEnabled) ||
+        (!isFrontendView && values?.guestListEnabled === true && values?.measurable === true)) &&
+      values.maxRegistrations &&
+      !Number.isNaN(values.maxRegistrations)
+        ? Math.round(Number(values.maxRegistrations))
+        : null,
   };
 
   return AddEventMutation.commit({ input })
@@ -153,6 +160,29 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     link: values.link,
   };
 
+  const measurable = isFrontendView ? false : values.measurable;
+  let maxRegistrations =
+    values.maxRegistrations && !Number.isNaN(values.maxRegistrations)
+      ? Math.round(Number(values.maxRegistrations))
+      : null;
+  if (isFrontendView && !values.guestListEnabled) {
+    maxRegistrations = null;
+  } else if (
+    !isFrontendView &&
+    values?.guestListEnabled === true &&
+    event?.review &&
+    values.maxRegistrations
+  ) {
+    maxRegistrations = Math.round(Number(values.maxRegistrations));
+  } else if (
+    !isFrontendView &&
+    values?.guestListEnabled === true &&
+    !event?.review &&
+    !values.measurable
+  ) {
+    maxRegistrations = null;
+  }
+
   const updateInput = {
     id: values.id,
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
@@ -163,7 +193,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     addressJson,
     enabled,
     media,
-    measurable: false,
+    measurable,
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     steps: values.steps ? values.steps.map(s => s.value) : null,
@@ -179,6 +209,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
       props.currentLanguage,
     ),
     bodyUsingJoditWysiwyg: values?.bodyUsingJoditWysiwyg ?? false,
+    maxRegistrations,
   };
   const reviewInput =
     values.refusedReason !== 'NONE'

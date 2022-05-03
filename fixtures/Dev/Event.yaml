@@ -30,8 +30,6 @@ Capco\AppBundle\Entity\Event:
         themes: ['@theme1']
         createdAt: <identity((new \DateTime('2015-01-02')))>
         addressJson: '[{"address_components":[{"long_name":"Tour Eiffel","short_name":"Tour Eiffel","types":["bus_station","establishment","point_of_interest","transit_station"]},{"long_name":"Paris","short_name":"Paris","types":["locality","political"]},{"long_name":"Paris","short_name":"Paris","types":["administrative_area_level_2","political"]},{"long_name":"\u00cele-de-France","short_name":"\u00cele-de-France","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"75007","short_name":"75007","types":["postal_code"]}],"formatted_address":"Tour Eiffel, 75007 Paris, France","geometry":{"location":{"lat":48.860489,"lng":2.2959102},"location_type":"GEOMETRIC_CENTER","viewport":{"northeast":{"lat":48.8618379802915,"lng":2.297259180291502},"southwest":{"lat":48.85914001970851,"lng":2.294561219708498}}},"place_id":"ChIJARsZE-Fv5kcRr1x6No4iL28","plus_code":{"compound_code":"V76W+59 Paris, France","global_code":"8FW4V76W+59"},"types":["bus_station","establishment","point_of_interest","transit_station"]}]'
-        measurable: true
-        maxRegistrations: 2
     event3:
         id: 'event3'
         enabled: true
@@ -48,6 +46,8 @@ Capco\AppBundle\Entity\Event:
         projects: ['@p1']
         createdAt: <identity((new \DateTime('2015-01-03')))>
         addressJson: '[{"address_components":[{"long_name":"48","short_name":"48","types":["street_number"]},{"long_name":"Rue de Stalingrad","short_name":"Rue de Stalingrad","types":["route"]},{"long_name":"Grenoble","short_name":"Grenoble","types":["locality","political"]},{"long_name":"Is\u00e8re","short_name":"Is\u00e8re","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"38000","short_name":"38000","types":["postal_code"]}],"formatted_address":"48 Rue de Stalingrad, 38000 Grenoble, France","geometry":{"location":{"lat":45.1785573,"lng":5.725935499999999},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.1799062802915,"lng":5.727284480291502},"southwest":{"lat":45.17720831970851,"lng":5.724586519708497}}},"place_id":"ChIJCY6gF5T0ikcRzf3RXiLszMo","plus_code":{"compound_code":"5PHG+F7 Grenoble, France","global_code":"8FQ75PHG+F7"},"types":["establishment","health","point_of_interest","store"]}]'
+        measurable: true
+        maxRegistrations: 2
     event4:
         id: event4
         enabled: true

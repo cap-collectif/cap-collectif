@@ -23,6 +23,7 @@ class EventHelperSpec extends ObjectBehavior
         $event->canContribute()->willReturn(true);
         $event->isRegistrationComplete()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(false);
+        $this->isCompleteAndRegistrationPossibleResolver($event)->shouldReturn(false);
 
         // Event is not future => false
         $event->getLink()->willReturn(null);
@@ -31,7 +32,7 @@ class EventHelperSpec extends ObjectBehavior
         $event->canContribute()->willReturn(true);
         $event->isRegistrationComplete()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(false);
-
+        $this->isCompleteAndRegistrationPossibleResolver($event)->shouldReturn(false);
         // Can not contribute => false
         $event->getLink()->willReturn(null);
         $event->isGuestListEnabled()->willReturn(true);
@@ -39,7 +40,7 @@ class EventHelperSpec extends ObjectBehavior
         $event->canContribute()->willReturn(false);
         $event->isRegistrationComplete()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(false);
-
+        $this->isCompleteAndRegistrationPossibleResolver($event)->shouldReturn(false);
         // Has link => false
         $event->isGuestListEnabled()->willReturn(true);
         $event->isFuture()->willReturn(true);
@@ -47,22 +48,23 @@ class EventHelperSpec extends ObjectBehavior
         $event->canContribute()->willReturn(true);
         $event->isRegistrationComplete()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(false);
-
+        $this->isCompleteAndRegistrationPossibleResolver($event)->shouldReturn(false);
         // Everything is awesome => true
         $event->getLink()->willReturn(null);
         $event->isGuestListEnabled()->willReturn(true);
         $event->isFuture()->willReturn(true);
         $event->canContribute()->willReturn(true);
         $event->isRegistrationComplete()->willReturn(true);
-        $this->isRegistrationPossible($event)->shouldReturn(false);
-
+        $this->isRegistrationPossible($event)->shouldReturn(true);
+        $this->isCompleteAndRegistrationPossibleResolver($event)->shouldReturn(true);
         // Everything is awesome => true
         $event->getLink()->willReturn(null);
         $event->isGuestListEnabled()->willReturn(true);
         $event->isFuture()->willReturn(true);
         $event->canContribute()->willReturn(true);
-        $event->isRegistrationComplete()->willReturn(false);
+        $event->isRegistrationComplete()->willReturn(true);
         $this->isRegistrationPossible($event)->shouldReturn(true);
+        $this->isCompleteAndRegistrationPossibleResolver($event)->shouldReturn(true);
     }
 
     public function it_can_find_user_registration(Event $event, User $user)

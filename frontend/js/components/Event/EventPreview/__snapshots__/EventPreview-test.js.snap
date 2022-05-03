@@ -13,11 +13,16 @@ exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
         "author": Object {
           "$fragmentRefs": null,
         },
+        "availableRegistration": 0,
         "googleMapsAddress": Object {
           "$fragmentRefs": null,
           "__typename": "GoogleMapsAddress",
         },
         "guestListEnabled": false,
+        "isCompleteAndRegistrationPossibleResolver": false,
+        "isMeasurable": false,
+        "isRegistrationPossible": true,
+        "maxRegistrations": null,
         "steps": Array [
           Object {
             "$fragmentRefs": null,
@@ -32,6 +37,7 @@ exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
         ],
         "timeRange": Object {
           "endAt": null,
+          "isFuture": true,
           "startAt": "2030-03-10 00:00:00",
         },
         "title": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
@@ -121,7 +127,7 @@ exports[`<EventPreview /> should render correctly 1`] = `
   isHighlighted={false}
 >
   <Relay(EventImage)
-    enabled={true}
+    enabled={false}
     event={
       Object {
         "$fragmentRefs": null,
@@ -129,11 +135,16 @@ exports[`<EventPreview /> should render correctly 1`] = `
         "author": Object {
           "$fragmentRefs": null,
         },
+        "availableRegistration": 0,
         "googleMapsAddress": Object {
           "$fragmentRefs": null,
           "__typename": "GoogleMapsAddress",
         },
         "guestListEnabled": false,
+        "isCompleteAndRegistrationPossibleResolver": false,
+        "isMeasurable": false,
+        "isRegistrationPossible": true,
+        "maxRegistrations": null,
         "steps": Array [
           Object {
             "$fragmentRefs": null,
@@ -148,6 +159,7 @@ exports[`<EventPreview /> should render correctly 1`] = `
         ],
         "timeRange": Object {
           "endAt": null,
+          "isFuture": true,
           "startAt": "2030-03-10 00:00:00",
         },
         "title": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
@@ -237,7 +249,7 @@ exports[`<EventPreview /> should render correctly when guest enabled 1`] = `
   isHighlighted={false}
 >
   <Relay(EventImage)
-    enabled={true}
+    enabled={false}
     event={
       Object {
         "$fragmentRefs": null,
@@ -245,11 +257,16 @@ exports[`<EventPreview /> should render correctly when guest enabled 1`] = `
         "author": Object {
           "$fragmentRefs": null,
         },
+        "availableRegistration": 0,
         "googleMapsAddress": Object {
           "$fragmentRefs": null,
           "__typename": "GoogleMapsAddress",
         },
         "guestListEnabled": true,
+        "isCompleteAndRegistrationPossibleResolver": false,
+        "isMeasurable": false,
+        "isRegistrationPossible": true,
+        "maxRegistrations": null,
         "steps": Array [
           Object {
             "$fragmentRefs": null,
@@ -264,6 +281,7 @@ exports[`<EventPreview /> should render correctly when guest enabled 1`] = `
         ],
         "timeRange": Object {
           "endAt": null,
+          "isFuture": true,
           "startAt": "2030-03-10 00:00:00",
         },
         "title": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
@@ -363,12 +381,12 @@ exports[`<EventPreview /> should render correctly when guest enabled 1`] = `
 </EventPreviewstyle__EventPreviewContainer>
 `;
 
-exports[`<EventPreview /> should render correctly when no date 1`] = `
+exports[`<EventPreview /> should render correctly when guest enabled and tag complete 1`] = `
 <EventPreviewstyle__EventPreviewContainer
   isHighlighted={false}
 >
   <Relay(EventImage)
-    enabled={true}
+    enabled={false}
     event={
       Object {
         "$fragmentRefs": null,
@@ -376,11 +394,16 @@ exports[`<EventPreview /> should render correctly when no date 1`] = `
         "author": Object {
           "$fragmentRefs": null,
         },
+        "availableRegistration": 0,
         "googleMapsAddress": Object {
           "$fragmentRefs": null,
           "__typename": "GoogleMapsAddress",
         },
-        "guestListEnabled": false,
+        "guestListEnabled": true,
+        "isCompleteAndRegistrationPossibleResolver": true,
+        "isMeasurable": false,
+        "isRegistrationPossible": true,
+        "maxRegistrations": 3,
         "steps": Array [
           Object {
             "$fragmentRefs": null,
@@ -395,6 +418,444 @@ exports[`<EventPreview /> should render correctly when no date 1`] = `
         ],
         "timeRange": Object {
           "endAt": null,
+          "isFuture": true,
+          "startAt": "2030-03-10 00:00:00",
+        },
+        "title": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+        "url": "#",
+      }
+    }
+  />
+  <Tag
+    className="eventTag"
+    variantColor="red"
+  >
+    <Tag.Label>
+      complete
+    </Tag.Label>
+  </Tag>
+  <Body>
+    <EventPreviewstyle__HeadContent>
+      <EventPreviewstyle__DateContainer>
+        <Date
+          date="2030-03-10 00:00:00"
+        />
+      </EventPreviewstyle__DateContainer>
+      <InlineList
+        margin={true}
+      >
+        <li>
+          <Label
+            color="#007bff"
+            fontSize={10}
+          >
+            <FormattedMessage
+              id="registration-required"
+              values={Object {}}
+            />
+          </Label>
+        </li>
+      </InlineList>
+    </EventPreviewstyle__HeadContent>
+    <EventPreviewstyle__Content>
+      <EventPreviewstyle__TitleContainer>
+        <Icon
+          color="#007bff"
+          name="eventPhysical"
+          size={17}
+        />
+        <Title
+          tagName="h3"
+        >
+          <a
+            href="#"
+            title="Lorem ipsum dolor sit amet, consectetur adipiscing."
+          >
+            <Truncate
+              ellipsis="…"
+              lines={2}
+              trimWhitespace={false}
+              width={0}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing.
+            </Truncate>
+          </a>
+        </Title>
+      </EventPreviewstyle__TitleContainer>
+      <EventPreviewstyle__TagsList>
+        <Relay(TagUser)
+          size={20}
+          user={
+            Object {
+              "$fragmentRefs": null,
+            }
+          }
+        />
+        <Relay(TagCity)
+          address={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "GoogleMapsAddress",
+            }
+          }
+          size="16px"
+        />
+        <Relay(TagThemes)
+          size="16px"
+          themes={
+            Array [
+              Object {
+                "$fragmentRefs": null,
+                "__typename": "Theme",
+              },
+            ]
+          }
+        />
+        <Relay(TagStep)
+          size="16px"
+          step={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "CollectStep",
+            }
+          }
+        />
+      </EventPreviewstyle__TagsList>
+    </EventPreviewstyle__Content>
+  </Body>
+</EventPreviewstyle__EventPreviewContainer>
+`;
+
+exports[`<EventPreview /> should render correctly when guest enabled and tag register 1`] = `
+<EventPreviewstyle__EventPreviewContainer
+  isHighlighted={false}
+>
+  <Relay(EventImage)
+    enabled={false}
+    event={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "$fragmentRefs": null,
+        },
+        "availableRegistration": 0,
+        "googleMapsAddress": Object {
+          "$fragmentRefs": null,
+          "__typename": "GoogleMapsAddress",
+        },
+        "guestListEnabled": true,
+        "isCompleteAndRegistrationPossibleResolver": false,
+        "isMeasurable": false,
+        "isRegistrationPossible": true,
+        "isViewerParticipatingAtEvent": true,
+        "maxRegistrations": 3,
+        "steps": Array [
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "CollectStep",
+          },
+        ],
+        "themes": Array [
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "Theme",
+          },
+        ],
+        "timeRange": Object {
+          "endAt": null,
+          "isFuture": true,
+          "startAt": "2030-03-10 00:00:00",
+        },
+        "title": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+        "url": "#",
+      }
+    }
+  />
+  <Tag
+    className="eventTag"
+    variantColor="green"
+  >
+    <Tag.Label>
+      admin.fields.event_registration.registered
+    </Tag.Label>
+  </Tag>
+  <Body>
+    <EventPreviewstyle__HeadContent>
+      <EventPreviewstyle__DateContainer>
+        <Date
+          date="2030-03-10 00:00:00"
+        />
+      </EventPreviewstyle__DateContainer>
+      <InlineList
+        margin={true}
+      >
+        <li>
+          <Label
+            color="#007bff"
+            fontSize={10}
+          >
+            <FormattedMessage
+              id="registration-required"
+              values={Object {}}
+            />
+          </Label>
+        </li>
+      </InlineList>
+    </EventPreviewstyle__HeadContent>
+    <EventPreviewstyle__Content>
+      <EventPreviewstyle__TitleContainer>
+        <Icon
+          color="#007bff"
+          name="eventPhysical"
+          size={17}
+        />
+        <Title
+          tagName="h3"
+        >
+          <a
+            href="#"
+            title="Lorem ipsum dolor sit amet, consectetur adipiscing."
+          >
+            <Truncate
+              ellipsis="…"
+              lines={2}
+              trimWhitespace={false}
+              width={0}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing.
+            </Truncate>
+          </a>
+        </Title>
+      </EventPreviewstyle__TitleContainer>
+      <EventPreviewstyle__TagsList>
+        <Relay(TagUser)
+          size={20}
+          user={
+            Object {
+              "$fragmentRefs": null,
+            }
+          }
+        />
+        <Relay(TagCity)
+          address={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "GoogleMapsAddress",
+            }
+          }
+          size="16px"
+        />
+        <Relay(TagThemes)
+          size="16px"
+          themes={
+            Array [
+              Object {
+                "$fragmentRefs": null,
+                "__typename": "Theme",
+              },
+            ]
+          }
+        />
+        <Relay(TagStep)
+          size="16px"
+          step={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "CollectStep",
+            }
+          }
+        />
+      </EventPreviewstyle__TagsList>
+    </EventPreviewstyle__Content>
+  </Body>
+</EventPreviewstyle__EventPreviewContainer>
+`;
+
+exports[`<EventPreview /> should render correctly when guest enabled and tag rest 1`] = `
+<EventPreviewstyle__EventPreviewContainer
+  isHighlighted={false}
+>
+  <Relay(EventImage)
+    enabled={false}
+    event={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "$fragmentRefs": null,
+        },
+        "availableRegistration": 3,
+        "googleMapsAddress": Object {
+          "$fragmentRefs": null,
+          "__typename": "GoogleMapsAddress",
+        },
+        "guestListEnabled": true,
+        "isCompleteAndRegistrationPossibleResolver": false,
+        "isMeasurable": false,
+        "isRegistrationPossible": true,
+        "isViewerParticipatingAtEvent": true,
+        "maxRegistrations": 10,
+        "steps": Array [
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "CollectStep",
+          },
+        ],
+        "themes": Array [
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "Theme",
+          },
+        ],
+        "timeRange": Object {
+          "endAt": null,
+          "isFuture": true,
+          "startAt": "2030-03-10 00:00:00",
+        },
+        "title": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+        "url": "#",
+      }
+    }
+  />
+  <Tag
+    className="eventTag"
+    variantColor="green"
+  >
+    <Tag.Label>
+      admin.fields.event_registration.registered
+    </Tag.Label>
+  </Tag>
+  <Body>
+    <EventPreviewstyle__HeadContent>
+      <EventPreviewstyle__DateContainer>
+        <Date
+          date="2030-03-10 00:00:00"
+        />
+      </EventPreviewstyle__DateContainer>
+      <InlineList
+        margin={true}
+      >
+        <li>
+          <Label
+            color="#007bff"
+            fontSize={10}
+          >
+            <FormattedMessage
+              id="registration-required"
+              values={Object {}}
+            />
+          </Label>
+        </li>
+      </InlineList>
+    </EventPreviewstyle__HeadContent>
+    <EventPreviewstyle__Content>
+      <EventPreviewstyle__TitleContainer>
+        <Icon
+          color="#007bff"
+          name="eventPhysical"
+          size={17}
+        />
+        <Title
+          tagName="h3"
+        >
+          <a
+            href="#"
+            title="Lorem ipsum dolor sit amet, consectetur adipiscing."
+          >
+            <Truncate
+              ellipsis="…"
+              lines={2}
+              trimWhitespace={false}
+              width={0}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing.
+            </Truncate>
+          </a>
+        </Title>
+      </EventPreviewstyle__TitleContainer>
+      <EventPreviewstyle__TagsList>
+        <Relay(TagUser)
+          size={20}
+          user={
+            Object {
+              "$fragmentRefs": null,
+            }
+          }
+        />
+        <Relay(TagCity)
+          address={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "GoogleMapsAddress",
+            }
+          }
+          size="16px"
+        />
+        <Relay(TagThemes)
+          size="16px"
+          themes={
+            Array [
+              Object {
+                "$fragmentRefs": null,
+                "__typename": "Theme",
+              },
+            ]
+          }
+        />
+        <Relay(TagStep)
+          size="16px"
+          step={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "CollectStep",
+            }
+          }
+        />
+      </EventPreviewstyle__TagsList>
+    </EventPreviewstyle__Content>
+  </Body>
+</EventPreviewstyle__EventPreviewContainer>
+`;
+
+exports[`<EventPreview /> should render correctly when no date 1`] = `
+<EventPreviewstyle__EventPreviewContainer
+  isHighlighted={false}
+>
+  <Relay(EventImage)
+    enabled={false}
+    event={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "$fragmentRefs": null,
+        },
+        "availableRegistration": 0,
+        "googleMapsAddress": Object {
+          "$fragmentRefs": null,
+          "__typename": "GoogleMapsAddress",
+        },
+        "guestListEnabled": false,
+        "isCompleteAndRegistrationPossibleResolver": false,
+        "isMeasurable": false,
+        "isRegistrationPossible": true,
+        "maxRegistrations": null,
+        "steps": Array [
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "CollectStep",
+          },
+        ],
+        "themes": Array [
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "Theme",
+          },
+        ],
+        "timeRange": Object {
+          "endAt": null,
+          "isFuture": false,
           "startAt": null,
         },
         "title": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
@@ -480,7 +941,7 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
   isHighlighted={false}
 >
   <Relay(EventImage)
-    enabled={true}
+    enabled={false}
     event={
       Object {
         "$fragmentRefs": null,
@@ -488,8 +949,13 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
         "author": Object {
           "$fragmentRefs": null,
         },
+        "availableRegistration": 0,
         "googleMapsAddress": null,
         "guestListEnabled": false,
+        "isCompleteAndRegistrationPossibleResolver": false,
+        "isMeasurable": false,
+        "isRegistrationPossible": true,
+        "maxRegistrations": null,
         "steps": Array [
           Object {
             "$fragmentRefs": null,
@@ -504,6 +970,7 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
         ],
         "timeRange": Object {
           "endAt": null,
+          "isFuture": true,
           "startAt": "2030-03-10 00:00:00",
         },
         "title": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
@@ -584,7 +1051,7 @@ exports[`<EventPreview /> should render correctly when no themes 1`] = `
   isHighlighted={false}
 >
   <Relay(EventImage)
-    enabled={true}
+    enabled={false}
     event={
       Object {
         "$fragmentRefs": null,
@@ -592,11 +1059,16 @@ exports[`<EventPreview /> should render correctly when no themes 1`] = `
         "author": Object {
           "$fragmentRefs": null,
         },
+        "availableRegistration": 0,
         "googleMapsAddress": Object {
           "$fragmentRefs": null,
           "__typename": "GoogleMapsAddress",
         },
         "guestListEnabled": false,
+        "isCompleteAndRegistrationPossibleResolver": false,
+        "isMeasurable": false,
+        "isRegistrationPossible": true,
+        "maxRegistrations": null,
         "steps": Array [
           Object {
             "$fragmentRefs": null,
@@ -606,6 +1078,7 @@ exports[`<EventPreview /> should render correctly when no themes 1`] = `
         "themes": Array [],
         "timeRange": Object {
           "endAt": null,
+          "isFuture": true,
           "startAt": "2030-03-10 00:00:00",
         },
         "title": "Lorem ipsum dolor sit amet, consectetur adipiscing.",

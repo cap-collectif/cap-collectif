@@ -10,10 +10,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       <h3
         className="box-title"
       >
-        <FormattedMessage
-          id="global.general"
-          values={Object {}}
-        />
+        global.general
       </h3>
       <span
         className="mr-30 mt-15"
@@ -29,12 +26,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         component={[Function]}
         disabled={false}
         id="event_title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
+        label="global.title"
         name="title"
         type="text"
       />
@@ -72,17 +64,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         id="event_address"
         label={
           <div>
-            <FormattedMessage
-              id="proposal_form.address"
-              values={Object {}}
-            />
+            proposal_form.address
             <div
               className="excerpt inline"
             >
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </div>
           </div>
         }
@@ -96,12 +82,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
         formName="EventForm"
         id="event_body"
-        label={
-          <FormattedMessage
-            id="global.description"
-            values={Object {}}
-          />
-        }
+        label="global.description"
         name="body"
         type="admin-editor"
       />
@@ -123,12 +104,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           }
           formName="EventForm"
           id="event_startAt"
-          label={
-            <FormattedMessage
-              id="start-date"
-              values={Object {}}
-            />
-          }
+          label="start-date"
           name="startAt"
           timeFormat={false}
           type="datetime"
@@ -151,17 +127,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           id="event_endAt"
           label={
             <div>
-              <FormattedMessage
-                id="ending-date"
-                values={Object {}}
-              />
+              ending-date
               <div
                 className="excerpt inline"
               >
-                <FormattedMessage
-                  id="global.optional"
-                  values={Object {}}
-                />
+                global.optional
               </div>
             </div>
           }
@@ -174,17 +144,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         id="event_media"
         label={
           <div>
-            <FormattedMessage
-              id="global.illustration"
-              values={Object {}}
-            />
+            global.illustration
             <div
               className="excerpt inline"
             >
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </div>
           </div>
         }
@@ -197,17 +161,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       disabled={false}
       label={
         <React.Fragment>
-          <FormattedMessage
-            id="global.meta.description"
-            values={Object {}}
-          />
+          global.meta.description
           <span
             className="excerpt inline"
           >
-            <FormattedMessage
-              id="global.optional"
-              values={Object {}}
-            />
+            global.optional
              
             <OverlayTrigger
               defaultOverlayShown={false}
@@ -221,10 +179,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
                     }
                   }
                 >
-                  <FormattedMessage
-                    id="admin.help.metadescription"
-                    values={Object {}}
-                  />
+                  admin.help.metadescription
                 </_default>
               }
               placement="top"
@@ -249,17 +204,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       <h3
         className="box-title"
       >
-        <FormattedMessage
-          id="form.label_category"
-          values={Object {}}
-        />
+        form.label_category
         <EventForm__TitleHint>
             
            
-          <FormattedMessage
-            id="allow-event-linking"
-            values={Object {}}
-          />
+          allow-event-linking
         </EventForm__TitleHint>
       </h3>
     </div>
@@ -302,41 +251,31 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       }
     />
     <div>
-      <div>
+      <EventForm__OptionContainer
+        isFrontendView={false}
+      >
         <div
           className="box-header"
         >
           <h3
             className="box-title"
           >
-            <FormattedMessage
-              id="global.options"
-              values={Object {}}
-            />
+            global.options
           </h3>
         </div>
         <Field
           component={[Function]}
           disabled={false}
+          groupClassName="guest-group"
           id="event_registrable"
-          label={
-            <FormattedMessage
-              id="inscriptions-on-platform"
-              values={Object {}}
-            />
-          }
+          label="inscriptions-on-platform"
           name="guestListEnabled"
           type="checkbox"
         />
         <Field
           component={[Function]}
           id="event_adminAuthorizeDataTransfer"
-          label={
-            <FormattedMessage
-              id="authorize-transfer-of-data-to-event-organizer"
-              values={Object {}}
-            />
-          }
+          label="authorize-transfer-of-data-to-event-organizer"
           name="adminAuthorizeDataTransfer"
           type="checkbox"
         />
@@ -344,16 +283,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           component={[Function]}
           disabled={false}
           id="event_commentable"
-          label={
-            <FormattedMessage
-              id="admin.fields.proposal.comments"
-              values={Object {}}
-            />
-          }
+          label="admin.fields.proposal.comments"
           name="commentable"
           type="checkbox"
         />
-      </div>
+      </EventForm__OptionContainer>
       <div>
         <div
           className="box-header pt-0"
@@ -361,22 +295,14 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           <h3
             className="box-title"
           >
-            <FormattedMessage
-              id="global.publication"
-              values={Object {}}
-            />
+            global.publication
           </h3>
         </div>
         <Field
           component={[Function]}
           disabled={false}
           id="event_enabled"
-          label={
-            <FormattedMessage
-              id="global.published"
-              values={Object {}}
-            />
-          }
+          label="global.published"
           name="enabled"
           type="checkbox"
         />
@@ -386,10 +312,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           <h3
             className="box-title"
           >
-            <FormattedMessage
-              id="global-customization"
-              values={Object {}}
-            />
+            global-customization
           </h3>
         </div>
         <Field
@@ -397,17 +320,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           disabled={false}
           label={
             <React.Fragment>
-              <FormattedMessage
-                id="admin.customcode"
-                values={Object {}}
-              />
+              admin.customcode
               <span
                 className="excerpt inline"
               >
-                <FormattedMessage
-                  id="global.optional"
-                  values={Object {}}
-                />
+                global.optional
                  
                 <OverlayTrigger
                   defaultOverlayShown={false}
@@ -421,10 +338,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
                         }
                       }
                     >
-                      <FormattedMessage
-                        id="admin.help.customcode"
-                        values={Object {}}
-                      />
+                      admin.help.customcode
                     </_default>
                   }
                   placement="top"
@@ -460,10 +374,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       <h3
         className="box-title"
       >
-        <FormattedMessage
-          id="global.general"
-          values={Object {}}
-        />
+        global.general
       </h3>
       <span
         className="mr-30 mt-15"
@@ -479,12 +390,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         component={[Function]}
         disabled={false}
         id="event_title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
+        label="global.title"
         name="title"
         type="text"
       />
@@ -522,17 +428,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         id="event_address"
         label={
           <div>
-            <FormattedMessage
-              id="proposal_form.address"
-              values={Object {}}
-            />
+            proposal_form.address
             <div
               className="excerpt inline"
             >
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </div>
           </div>
         }
@@ -546,12 +446,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
         formName="EventForm"
         id="event_body"
-        label={
-          <FormattedMessage
-            id="global.description"
-            values={Object {}}
-          />
-        }
+        label="global.description"
         name="body"
         type="admin-editor"
       />
@@ -573,12 +468,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           }
           formName="EventForm"
           id="event_startAt"
-          label={
-            <FormattedMessage
-              id="start-date"
-              values={Object {}}
-            />
-          }
+          label="start-date"
           name="startAt"
           timeFormat={false}
           type="datetime"
@@ -601,17 +491,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           id="event_endAt"
           label={
             <div>
-              <FormattedMessage
-                id="ending-date"
-                values={Object {}}
-              />
+              ending-date
               <div
                 className="excerpt inline"
               >
-                <FormattedMessage
-                  id="global.optional"
-                  values={Object {}}
-                />
+                global.optional
               </div>
             </div>
           }
@@ -624,17 +508,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         id="event_media"
         label={
           <div>
-            <FormattedMessage
-              id="global.illustration"
-              values={Object {}}
-            />
+            global.illustration
             <div
               className="excerpt inline"
             >
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </div>
           </div>
         }
@@ -647,17 +525,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       disabled={false}
       label={
         <React.Fragment>
-          <FormattedMessage
-            id="global.meta.description"
-            values={Object {}}
-          />
+          global.meta.description
           <span
             className="excerpt inline"
           >
-            <FormattedMessage
-              id="global.optional"
-              values={Object {}}
-            />
+            global.optional
              
             <OverlayTrigger
               defaultOverlayShown={false}
@@ -671,10 +543,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
                     }
                   }
                 >
-                  <FormattedMessage
-                    id="admin.help.metadescription"
-                    values={Object {}}
-                  />
+                  admin.help.metadescription
                 </_default>
               }
               placement="top"
@@ -699,17 +568,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       <h3
         className="box-title"
       >
-        <FormattedMessage
-          id="form.label_category"
-          values={Object {}}
-        />
+        form.label_category
         <EventForm__TitleHint>
             
            
-          <FormattedMessage
-            id="allow-event-linking"
-            values={Object {}}
-          />
+          allow-event-linking
         </EventForm__TitleHint>
       </h3>
     </div>
@@ -752,41 +615,31 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       }
     />
     <div>
-      <div>
+      <EventForm__OptionContainer
+        isFrontendView={false}
+      >
         <div
           className="box-header"
         >
           <h3
             className="box-title"
           >
-            <FormattedMessage
-              id="global.options"
-              values={Object {}}
-            />
+            global.options
           </h3>
         </div>
         <Field
           component={[Function]}
           disabled={false}
+          groupClassName="guest-group"
           id="event_registrable"
-          label={
-            <FormattedMessage
-              id="inscriptions-on-platform"
-              values={Object {}}
-            />
-          }
+          label="inscriptions-on-platform"
           name="guestListEnabled"
           type="checkbox"
         />
         <Field
           component={[Function]}
           id="event_adminAuthorizeDataTransfer"
-          label={
-            <FormattedMessage
-              id="authorize-transfer-of-data-to-event-organizer"
-              values={Object {}}
-            />
-          }
+          label="authorize-transfer-of-data-to-event-organizer"
           name="adminAuthorizeDataTransfer"
           type="checkbox"
         />
@@ -794,16 +647,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           component={[Function]}
           disabled={false}
           id="event_commentable"
-          label={
-            <FormattedMessage
-              id="admin.fields.proposal.comments"
-              values={Object {}}
-            />
-          }
+          label="admin.fields.proposal.comments"
           name="commentable"
           type="checkbox"
         />
-      </div>
+      </EventForm__OptionContainer>
       <div>
         <div
           className="box-header pt-0"
@@ -811,22 +659,14 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           <h3
             className="box-title"
           >
-            <FormattedMessage
-              id="global.publication"
-              values={Object {}}
-            />
+            global.publication
           </h3>
         </div>
         <Field
           component={[Function]}
           disabled={false}
           id="event_enabled"
-          label={
-            <FormattedMessage
-              id="global.published"
-              values={Object {}}
-            />
-          }
+          label="global.published"
           name="enabled"
           type="checkbox"
         />
@@ -836,10 +676,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           <h3
             className="box-title"
           >
-            <FormattedMessage
-              id="global-customization"
-              values={Object {}}
-            />
+            global-customization
           </h3>
         </div>
         <Field
@@ -847,17 +684,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           disabled={false}
           label={
             <React.Fragment>
-              <FormattedMessage
-                id="admin.customcode"
-                values={Object {}}
-              />
+              admin.customcode
               <span
                 className="excerpt inline"
               >
-                <FormattedMessage
-                  id="global.optional"
-                  values={Object {}}
-                />
+                global.optional
                  
                 <OverlayTrigger
                   defaultOverlayShown={false}
@@ -871,10 +702,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
                         }
                       }
                     >
-                      <FormattedMessage
-                        id="admin.help.customcode"
-                        values={Object {}}
-                      />
+                      admin.help.customcode
                     </_default>
                   }
                   placement="top"
@@ -910,10 +738,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       <h3
         className="box-title"
       >
-        <FormattedMessage
-          id="global.general"
-          values={Object {}}
-        />
+        global.general
       </h3>
       <span
         className="mr-30 mt-15"
@@ -929,12 +754,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         component={[Function]}
         disabled={false}
         id="event_title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
+        label="global.title"
         name="title"
         type="text"
       />
@@ -972,17 +792,11 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         id="event_address"
         label={
           <div>
-            <FormattedMessage
-              id="proposal_form.address"
-              values={Object {}}
-            />
+            proposal_form.address
             <div
               className="excerpt inline"
             >
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </div>
           </div>
         }
@@ -996,12 +810,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
         formName="EventForm"
         id="event_body"
-        label={
-          <FormattedMessage
-            id="global.description"
-            values={Object {}}
-          />
-        }
+        label="global.description"
         name="body"
         type="admin-editor"
       />
@@ -1023,12 +832,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           }
           formName="EventForm"
           id="event_startAt"
-          label={
-            <FormattedMessage
-              id="start-date"
-              values={Object {}}
-            />
-          }
+          label="start-date"
           name="startAt"
           timeFormat={false}
           type="datetime"
@@ -1051,17 +855,11 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           id="event_endAt"
           label={
             <div>
-              <FormattedMessage
-                id="ending-date"
-                values={Object {}}
-              />
+              ending-date
               <div
                 className="excerpt inline"
               >
-                <FormattedMessage
-                  id="global.optional"
-                  values={Object {}}
-                />
+                global.optional
               </div>
             </div>
           }
@@ -1074,17 +872,11 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         id="event_media"
         label={
           <div>
-            <FormattedMessage
-              id="global.illustration"
-              values={Object {}}
-            />
+            global.illustration
             <div
               className="excerpt inline"
             >
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </div>
           </div>
         }
@@ -1097,17 +889,11 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       disabled={false}
       label={
         <React.Fragment>
-          <FormattedMessage
-            id="global.meta.description"
-            values={Object {}}
-          />
+          global.meta.description
           <span
             className="excerpt inline"
           >
-            <FormattedMessage
-              id="global.optional"
-              values={Object {}}
-            />
+            global.optional
              
             <OverlayTrigger
               defaultOverlayShown={false}
@@ -1121,10 +907,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
                     }
                   }
                 >
-                  <FormattedMessage
-                    id="admin.help.metadescription"
-                    values={Object {}}
-                  />
+                  admin.help.metadescription
                 </_default>
               }
               placement="top"
@@ -1149,17 +932,11 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       <h3
         className="box-title"
       >
-        <FormattedMessage
-          id="form.label_category"
-          values={Object {}}
-        />
+        form.label_category
         <EventForm__TitleHint>
             
            
-          <FormattedMessage
-            id="allow-event-linking"
-            values={Object {}}
-          />
+          allow-event-linking
         </EventForm__TitleHint>
       </h3>
     </div>
@@ -1202,41 +979,31 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       }
     />
     <div>
-      <div>
+      <EventForm__OptionContainer
+        isFrontendView={false}
+      >
         <div
           className="box-header"
         >
           <h3
             className="box-title"
           >
-            <FormattedMessage
-              id="global.options"
-              values={Object {}}
-            />
+            global.options
           </h3>
         </div>
         <Field
           component={[Function]}
           disabled={false}
+          groupClassName="guest-group"
           id="event_registrable"
-          label={
-            <FormattedMessage
-              id="inscriptions-on-platform"
-              values={Object {}}
-            />
-          }
+          label="inscriptions-on-platform"
           name="guestListEnabled"
           type="checkbox"
         />
         <Field
           component={[Function]}
           id="event_adminAuthorizeDataTransfer"
-          label={
-            <FormattedMessage
-              id="authorize-transfer-of-data-to-event-organizer"
-              values={Object {}}
-            />
-          }
+          label="authorize-transfer-of-data-to-event-organizer"
           name="adminAuthorizeDataTransfer"
           type="checkbox"
         />
@@ -1244,16 +1011,21 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           component={[Function]}
           disabled={false}
           id="event_commentable"
-          label={
-            <FormattedMessage
-              id="admin.fields.proposal.comments"
-              values={Object {}}
-            />
-          }
+          label="admin.fields.proposal.comments"
           name="commentable"
           type="checkbox"
         />
-      </div>
+        <Field
+          component={[Function]}
+          disabled={true}
+          groupClassName="registration-group"
+          id="event_maxRegistrations"
+          label="maximum-vote"
+          min="0"
+          name="maxRegistrations"
+          type="number"
+        />
+      </EventForm__OptionContainer>
       <div>
         <div
           className="box-header pt-0"
@@ -1261,22 +1033,14 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           <h3
             className="box-title"
           >
-            <FormattedMessage
-              id="global.publication"
-              values={Object {}}
-            />
+            global.publication
           </h3>
         </div>
         <Field
           component={[Function]}
           disabled={false}
           id="event_enabled"
-          label={
-            <FormattedMessage
-              id="global.published"
-              values={Object {}}
-            />
-          }
+          label="global.published"
           name="enabled"
           type="checkbox"
         />
@@ -1286,10 +1050,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           <h3
             className="box-title"
           >
-            <FormattedMessage
-              id="global-customization"
-              values={Object {}}
-            />
+            global-customization
           </h3>
         </div>
         <Field
@@ -1297,17 +1058,11 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           disabled={false}
           label={
             <React.Fragment>
-              <FormattedMessage
-                id="admin.customcode"
-                values={Object {}}
-              />
+              admin.customcode
               <span
                 className="excerpt inline"
               >
-                <FormattedMessage
-                  id="global.optional"
-                  values={Object {}}
-                />
+                global.optional
                  
                 <OverlayTrigger
                   defaultOverlayShown={false}
@@ -1321,10 +1076,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
                         }
                       }
                     >
-                      <FormattedMessage
-                        id="admin.help.customcode"
-                        values={Object {}}
-                      />
+                      admin.help.customcode
                     </_default>
                   }
                   placement="top"

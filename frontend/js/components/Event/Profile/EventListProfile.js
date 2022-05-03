@@ -12,15 +12,20 @@ export type Props = {
 
 class EventListProfile extends React.Component<Props> {
   render() {
-    const { userId } = this.props;
+    const { userId, isAuthenticated } = this.props;
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query EventListProfileQuery($userId: ID!, $orderBy: EventOrder) {
+          query EventListProfileQuery(
+            $userId: ID!
+            $orderBy: EventOrder
+            $isAuthenticated: Boolean!
+          ) {
             user: node(id: $userId) {
               ... on User {
-                ...EventListProfileRefetch_user @arguments(orderBy: $orderBy)
+                ...EventListProfileRefetch_user
+                  @arguments(orderBy: $orderBy, isAuthenticated: $isAuthenticated)
               }
             }
           }
@@ -28,6 +33,7 @@ class EventListProfile extends React.Component<Props> {
         variables={{
           userId,
           orderBy: { field: 'START_AT', direction: 'DESC' },
+          isAuthenticated,
         }}
         render={({
           error,

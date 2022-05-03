@@ -84,7 +84,7 @@ Scenario: GraphQL client want to get the list of participants of an event where 
       }
     }",
     "variables": {
-      "event": "RXZlbnQ6ZXZlbnQy"
+      "event": "RXZlbnQ6ZXZlbnQz"
     }
   }
   """

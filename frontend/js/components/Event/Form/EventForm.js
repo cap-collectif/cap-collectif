@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, FormattedDate, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, FormattedDate, injectIntl, type IntlShape, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -10,7 +10,7 @@ import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import { OverlayTrigger } from 'react-bootstrap';
 import Tooltip from '~/components/Utils/Tooltip';
 import toggle from '~/components//Form/Toggle';
-import type { Dispatch, FeatureToggles, GlobalState } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 import type {
   EventForm_event,
   EventRefusedReason,
@@ -18,20 +18,23 @@ import type {
 } from '~relay/EventForm_event.graphql';
 import type { EventForm_query } from '~relay/EventForm_query.graphql';
 import component from '~/components/Form/Field';
-import UserListField from '~/components//Admin/Field/UserListField';
-import SelectTheme from '~/components//Utils/SelectTheme';
+import UserListField from '~/components/Admin/Field/UserListField';
+import SelectTheme, { renderLabel } from '~/components/Utils/SelectTheme';
 import SelectProject from '~/components/Event/Form/SelectProject';
 import select from '~/components/Form/Select';
 import approve from '~/components/Form/Approve';
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 import { getTranslation } from '~/services/Translation';
 import SelectStep from '~/components/Event/Form/SelectStep';
-import colors from '~/utils/colors';
+import colors, { styleGuideColors } from '~/utils/colors';
 import { InformationIcon } from '~/components/Admin/Project/Content/ProjectContentAdminForm';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import { isFloat } from '~/utils/string';
 
 type SelectedCurrentValues = {|
   guestListEnabled: boolean,
+  measurable: boolean,
   link: ?string,
   status: ?EventReviewStatus,
   projects: Array<{| value: string, label: string |}>,
@@ -64,7 +67,6 @@ type Props = {|
   ...ReduxFormFormProps,
   event: ?EventForm_event,
   query: EventForm_query,
-  features: FeatureToggles,
   dispatch: Dispatch,
   intl: IntlShape,
   initialValues: Values,
@@ -105,6 +107,38 @@ const FormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
+const OptionContainer: StyledComponent<
+  { isFrontendView: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div`
+  .form-group label {
+    font-weight: 400;
+    color: ${styleGuideColors.gray900};
+  }
+  .guest-group {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 188px;
+    margin-bottom: 14px !important;
+  }
+
+  .registration-group {
+    ${props =>
+      props.isFrontendView &&
+      `
+    margin-left: 26px;
+  `};
+    label {
+      margin-bottom: 0 !important;
+    }
+    input[name="maxRegistrations"] {
+      width: 104px;
+      height: 32px;
+    }
+  }
+`;
+
 export const formName = 'EventForm';
 
 export type FormValues = {|
@@ -133,10 +167,12 @@ export type FormValues = {|
   authorAgreeToUsePersonalDataForEventOnly: ?boolean,
   adminAuthorizeDataTransfer: ?boolean,
   bodyUsingJoditWysiwyg: boolean,
+  maxRegistrations: ?string,
+  measurable: boolean,
 |};
 
 export const validate = (values: FormValues, props: Props) => {
-  const { isFrontendView } = props;
+  const { isFrontendView, event } = props;
 
   const errors = {};
   const fields = ['title', 'startAt', 'endAt', 'body'];
@@ -163,7 +199,6 @@ export const validate = (values: FormValues, props: Props) => {
       errors[value] = 'fill-field';
     }
   });
-
   if (props.query.viewer.isOnlyProjectAdmin) {
     if (!values.projects || values.projects.length === 0) {
       errors.projects = 'fill-field';
@@ -172,6 +207,26 @@ export const validate = (values: FormValues, props: Props) => {
 
   if (values.guestListEnabled && values.link) {
     errors.link = 'error-alert-choosing-subscription-mode';
+  }
+  const isMaxRegistrationOnError =
+    (values.maxRegistrations && Number.isNaN(Number(values.maxRegistrations))) ||
+    (values.maxRegistrations &&
+      Number(values.maxRegistrations) <= 0 &&
+      values.maxRegistrations.length > 0) ||
+    isFloat(Number(values.maxRegistrations));
+
+  const isBackOfficeView = !isFrontendView;
+  const isMaxRegistrationLowerThanUserRegisterd =
+    isBackOfficeView &&
+    values.maxRegistrations &&
+    event?.participants &&
+    event.participants.totalCount > 0 &&
+    Number(values.maxRegistrations) < event.participants.totalCount;
+
+  if (isMaxRegistrationOnError) {
+    errors.maxRegistrations = 'must-be-positive-integer';
+  } else if (isMaxRegistrationLowerThanUserRegisterd) {
+    errors.maxRegistrations = 'maxRegistration-error';
   }
 
   if (values.status === 'REFUSED' && (!values.refusedReason || values.refusedReason === 'NONE')) {
@@ -196,7 +251,6 @@ export const validate = (values: FormValues, props: Props) => {
 };
 
 export const EventForm = ({
-  features,
   event,
   query,
   currentValues,
@@ -204,14 +258,19 @@ export const EventForm = ({
   dispatch,
   className,
   isFrontendView = false,
-  intl,
   handleSubmit,
 }: Props) => {
+  const intl = useIntl();
+  const isFeatureUserEventEnabled = useFeatureFlag('allow_users_to_propose_events');
+  const isFeatureMultiLangueEnabled = useFeatureFlag('multilangue');
+  const isFeatureThemesEnabled = useFeatureFlag('themes');
+  const isBackOfficeView = !isFrontendView;
+
   const isDisabled = (adminCanEdit = false): boolean => {
     if (
       query.viewer.isSuperAdmin ||
       query.viewer.isOnlyProjectAdmin ||
-      (query.viewer.isAdmin && !features.allow_users_to_propose_events)
+      (query.viewer.isAdmin && !isFeatureUserEventEnabled)
     ) {
       return false;
     }
@@ -228,7 +287,7 @@ export const EventForm = ({
       return true;
     }
 
-    return !isFrontendView && !query.viewer.isAdmin;
+    return isBackOfficeView && !query.viewer.isAdmin;
   };
 
   const isModerationDisable = (): boolean => {
@@ -252,53 +311,78 @@ export const EventForm = ({
       ? currentValues.projects.map(project => project.value)
       : [];
 
+  const displayMaximumField =
+    isFrontendView ||
+    (isBackOfficeView &&
+      currentValues?.guestListEnabled === true &&
+      currentValues?.measurable === true) ||
+    (isBackOfficeView && event?.review);
+
+  const displayMeasurable =
+    isBackOfficeView && currentValues?.guestListEnabled === true && !event?.review;
+
+  let isMaxRegistrationEnable = false;
+  if (
+    (isBackOfficeView && !event?.review) ||
+    (isFrontendView && currentValues && currentValues.guestListEnabled)
+  ) {
+    isMaxRegistrationEnable = true;
+  }
+
+  const displaysTheDateOfTheReview =
+    event &&
+    !event.author?.isAdmin &&
+    event.review &&
+    event.review?.status !== 'AWAITING' &&
+    event.review.updatedAt &&
+    isFeatureUserEventEnabled;
+
+  const displayLinkField =
+    isBackOfficeView &&
+    currentValues &&
+    currentValues?.guestListEnabled === false &&
+    query.viewer.isAdmin;
+
   return (
     <FormContainer>
       <form className={`eventForm ${className || ''}`} onSubmit={handleSubmit}>
-        {!isFrontendView && (
+        {isBackOfficeView && (
           <>
             <PageTitleContainer>
-              <h3 className="box-title">
-                <FormattedMessage id="global.general" />
-              </h3>
+              <h3 className="box-title">{intl.formatMessage({ id: 'global.general' })}</h3>
               <span className="mr-30 mt-15">
-                {features.multilangue && <LanguageButtonContainer />}
+                {isFeatureMultiLangueEnabled && <LanguageButtonContainer />}
               </span>
             </PageTitleContainer>
             <div className="color-dark-gray font-size-16">
-              {event &&
-                !event.author?.isAdmin &&
-                event.review &&
-                event.review?.status !== 'AWAITING' &&
-                event.review.updatedAt &&
-                features.allow_users_to_propose_events && (
-                  <FormattedMessage
-                    id="event-examined-on-date-by-administrator"
-                    values={{
-                      date: (
-                        <FormattedDate
-                          value={moment(event.review.updatedAt)}
-                          day="numeric"
-                          month="long"
-                          year="numeric"
-                        />
-                      ),
-                    }}
-                  />
-                )}
+              {displaysTheDateOfTheReview && event?.review && (
+                <FormattedMessage
+                  id="event-examined-on-date-by-administrator"
+                  values={{
+                    date: (
+                      <FormattedDate
+                        value={moment(event.review.updatedAt)}
+                        day="numeric"
+                        month="long"
+                        year="numeric"
+                      />
+                    ),
+                  }}
+                />
+              )}
             </div>
           </>
         )}
         <div className="box-body">
           <Field
             name="title"
-            label={<FormattedMessage id="global.title" />}
+            label={intl.formatMessage({ id: 'global.title' })}
             component={component}
             disabled={isDisabled()}
             type="text"
             id="event_title"
           />
-          {!isFrontendView && (
+          {isBackOfficeView && (
             <UserListField
               clearable={false}
               label={<FormattedMessage id="global.author" />}
@@ -322,9 +406,9 @@ export const EventForm = ({
             disabled={isDisabled()}
             label={
               <div>
-                <FormattedMessage id="proposal_form.address" />
+                {intl.formatMessage({ id: 'proposal_form.address' })}
                 <div className="excerpt inline">
-                  <FormattedMessage id="global.optional" />
+                  {intl.formatMessage({ id: 'global.optional' })}
                 </div>
               </div>
             }
@@ -349,7 +433,7 @@ export const EventForm = ({
             formName={formName}
             component={component}
             disabled={isDisabled()}
-            label={<FormattedMessage id="global.description" />}
+            label={intl.formatMessage({ id: 'global.description' })}
           />
           <div className="datePickContainer">
             <Field
@@ -360,7 +444,7 @@ export const EventForm = ({
               type="datetime"
               name="startAt"
               formName={formName}
-              label={<FormattedMessage id="start-date" />}
+              label={intl.formatMessage({ id: 'start-date' })}
               addonAfter={<i className="cap-calendar-2" />}
             />
             <Field
@@ -373,9 +457,9 @@ export const EventForm = ({
               formName={formName}
               label={
                 <div>
-                  <FormattedMessage id="ending-date" />
+                  {intl.formatMessage({ id: 'ending-date' })}
                   <div className="excerpt inline">
-                    <FormattedMessage id="global.optional" />
+                    {intl.formatMessage({ id: 'global.optional' })}
                   </div>
                 </div>
               }
@@ -387,9 +471,9 @@ export const EventForm = ({
             name="media"
             label={
               <div>
-                <FormattedMessage id="global.illustration" />
+                {intl.formatMessage({ id: 'global.illustration' })}
                 <div className="excerpt inline">
-                  <FormattedMessage id="global.optional" />
+                  {intl.formatMessage({ id: 'global.optional' })}
                 </div>
               </div>
             }
@@ -402,9 +486,9 @@ export const EventForm = ({
           type="textarea"
           label={
             <>
-              <FormattedMessage id="global.meta.description" />
+              {intl.formatMessage({ id: 'global.meta.description' })}
               <span className="excerpt inline">
-                <FormattedMessage id="global.optional" />{' '}
+                {intl.formatMessage({ id: 'global.optional' })}{' '}
                 <OverlayTrigger
                   key="top"
                   placement="top"
@@ -413,7 +497,7 @@ export const EventForm = ({
                       id="tooltip-top"
                       className="text-left"
                       style={{ wordBreak: 'break-word' }}>
-                      <FormattedMessage id="admin.help.metadescription" />
+                      {intl.formatMessage({ id: 'admin.help.metadescription' })}
                     </Tooltip>
                   }>
                   <InformationIcon />
@@ -426,13 +510,13 @@ export const EventForm = ({
         />
         <div className="box-header d-flex">
           <h3 className="box-title">
-            <FormattedMessage id="form.label_category" />
+            {intl.formatMessage({ id: 'form.label_category' })}
             <TitleHint>
-              {'  '} <FormattedMessage id="allow-event-linking" />
+              {'  '} {intl.formatMessage({ id: 'allow-event-linking' })}
             </TitleHint>
           </h3>
         </div>
-        {features.themes && (
+        {isFeatureThemesEnabled && (
           <SelectTheme
             optional={isFrontendView}
             query={query}
@@ -466,83 +550,108 @@ export const EventForm = ({
           optional={isFrontendView}
         />
         <div>
-          <div>
+          <OptionContainer isFrontendView={isFrontendView}>
             <div className="box-header">
-              <h3 className="box-title">
-                <FormattedMessage id="global.options" />
-              </h3>
+              <h3 className="box-title">{intl.formatMessage({ id: 'global.options' })}</h3>
             </div>
             <Field
+              groupClassName="guest-group"
               name="guestListEnabled"
               id="event_registrable"
               type="checkbox"
-              component={toggle}
+              component={isFrontendView ? component : toggle}
               disabled={!!(currentValues && currentValues.link) || isDisabled(true)}
-              label={<FormattedMessage id="inscriptions-on-platform" />}
+              label={intl.formatMessage({
+                id: isFrontendView ? 'allow-inscriptions' : 'inscriptions-on-platform',
+              })}
             />
-            {currentValues?.guestListEnabled === false &&
-              !isFrontendView &&
-              query.viewer.isAdmin && (
-                <Field
-                  name="link"
-                  label={<FormattedMessage id="link-external-subscription" />}
-                  component={component}
-                  placeholder="https://"
-                  type="text"
-                  id="event_link"
-                />
-              )}
-            {!query.viewer.isOnlyProjectAdmin && !isFrontendView && (
+            {displayLinkField && (
+              <Field
+                name="link"
+                label={intl.formatMessage({ id: 'link-external-subscription' })}
+                component={component}
+                placeholder="https://"
+                type="text"
+                id="event_link"
+              />
+            )}
+            {!query.viewer.isOnlyProjectAdmin && isBackOfficeView && (
               <Field
                 name="adminAuthorizeDataTransfer"
                 id="event_adminAuthorizeDataTransfer"
                 type="checkbox"
                 component={toggle}
-                label={<FormattedMessage id="authorize-transfer-of-data-to-event-organizer" />}
+                label={intl.formatMessage({ id: 'authorize-transfer-of-data-to-event-organizer' })}
               />
             )}
-            {!isFrontendView && (
+            {isBackOfficeView && (
               <Field
                 name="commentable"
                 id="event_commentable"
                 type="checkbox"
                 component={toggle}
                 disabled={isDisabled(true)}
-                label={<FormattedMessage id="admin.fields.proposal.comments" />}
+                label={intl.formatMessage({ id: 'admin.fields.proposal.comments' })}
               />
             )}
-          </div>
+            {displayMeasurable && (
+              <Field
+                groupClassName="registration-group"
+                name="measurable"
+                label={intl.formatMessage({ id: 'measurable-registration' })}
+                component={toggle}
+                type="checkbox"
+                id="event_measurable"
+              />
+            )}
+            {displayMaximumField && (
+              <Field
+                groupClassName="registration-group"
+                name="maxRegistrations"
+                label={renderLabel(
+                  intl,
+                  intl.formatMessage({ id: isFrontendView ? 'max-registrations' : 'maximum-vote' }),
+                  isFrontendView,
+                )}
+                component={component}
+                disabled={!isMaxRegistrationEnable}
+                type="number"
+                min="0"
+                id="event_maxRegistrations"
+              />
+            )}
+          </OptionContainer>
           {!query.viewer.isAdmin && isFrontendView && (
             <div>
               <div className="box-header box-title" />
               <div>
                 <Field
+                  required={false}
+                  optional={isFrontendView}
                   name="authorAgreeToUsePersonalDataForEventOnly"
                   id="event_authorAgreeToUsePersonalDataForEventOnly"
                   type="checkbox"
                   normalize={val => !!val}
                   component={component}
                   disabled={isDisabled()}>
-                  <FormattedMessage id="checkbox-event-data-transfer-warning-to-organizer" />
+                  {intl.formatMessage({ id: 'checkbox-event-data-transfer-warning-to-organizer' })}
                 </Field>
               </div>
             </div>
           )}
-          {(query.viewer.isAdmin || query.viewer.isOnlyProjectAdmin) && !isFrontendView && (
+          {(query.viewer.isAdmin || query.viewer.isOnlyProjectAdmin) && isBackOfficeView && (
             <div>
               <div className="box-header pt-0">
-                <h3 className="box-title">
-                  <FormattedMessage id="global.publication" />
-                </h3>
+                <h3 className="box-title">{intl.formatMessage({ id: 'global.publication' })}</h3>
               </div>
 
               {event &&
               !event.author?.isAdmin &&
               event.review?.status &&
-              features.allow_users_to_propose_events ? (
+              isFeatureUserEventEnabled ? (
                 <>
                   <span className="help-block">
-                    <FormattedMessage id="author-will-be-notified-of-this-message" />
+                    {intl.formatMessage({ id: 'author-will-be-notified-of-this-message' })}
                   </span>
                   <Field
                     name="status"
@@ -552,9 +661,9 @@ export const EventForm = ({
                     approvedValue="APPROVED"
                     refusedValue="REFUSED"
                     disabled={isModerationDisable()}
-                    label={
-                      <FormattedMessage id="admin.action.recent_contributions.unpublish.input_label" />
-                    }
+                    label={intl.formatMessage({
+                      id: 'admin.action.recent_contributions.unpublish.input_label',
+                    })}
                   />
                   {currentValues?.status === 'REFUSED' && (
                     <>
@@ -565,9 +674,9 @@ export const EventForm = ({
                         required
                         component={select}
                         disabled={isModerationDisable()}
-                        label={
-                          <FormattedMessage id="admin.action.recent_contributions.unpublish.input_label" />
-                        }
+                        label={intl.formatMessage({
+                          id: 'admin.action.recent_contributions.unpublish.input_label',
+                        })}
                         options={refusedReasons}
                       />
                       <Field
@@ -576,7 +685,7 @@ export const EventForm = ({
                         type="textarea"
                         component={component}
                         disabled={isModerationDisable()}
-                        label={<FormattedMessage id="details" />}
+                        label={intl.formatMessage({ id: 'details' })}
                       />
                     </>
                   )}
@@ -588,22 +697,20 @@ export const EventForm = ({
                   type="checkbox"
                   component={toggle}
                   disabled={isDisabled()}
-                  label={<FormattedMessage id="global.published" />}
+                  label={intl.formatMessage({ id: 'global.published' })}
                 />
               )}
               <div className="box-header">
-                <h3 className="box-title">
-                  <FormattedMessage id="global-customization" />
-                </h3>
+                <h3 className="box-title">{intl.formatMessage({ id: 'global-customization' })}</h3>
               </div>
               <Field
                 name="customcode"
                 type="textarea"
                 label={
                   <>
-                    <FormattedMessage id="admin.customcode" />
+                    {intl.formatMessage({ id: 'admin.customcode' })}
                     <span className="excerpt inline">
-                      <FormattedMessage id="global.optional" />{' '}
+                      {intl.formatMessage({ id: 'global.optional' })}{' '}
                       <OverlayTrigger
                         key="top"
                         placement="top"
@@ -612,7 +719,7 @@ export const EventForm = ({
                             id="tooltip-top"
                             className="text-left"
                             style={{ wordBreak: 'break-word' }}>
-                            <FormattedMessage id="admin.help.customcode" />
+                            {intl.formatMessage({ id: 'admin.help.customcode' })}
                           </Tooltip>
                         }>
                         <InformationIcon />
@@ -647,7 +754,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
       : undefined;
     return {
       currentLanguage: state.language.currentLanguage,
-      features: state.default.features,
       initialValues: {
         id: props.event && props.event.id ? props.event.id : null,
         title: translation ? translation.title : null,
@@ -658,6 +764,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         enabled: props.event ? props.event.enabled : null,
         commentable: props.event ? props.event.commentable : null,
         guestListEnabled: props.event ? props.event.guestListEnabled : null,
+        maxRegistrations: props.event ? props.event.maxRegistrations : null,
+        measurable: props.event ? props.event.isMeasurable : false,
         adminAuthorizeDataTransfer: props.event?.adminAuthorizeDataTransfer || false,
         authorAgreeToUsePersonalDataForEventOnly: props.event
           ?.authorAgreeToUsePersonalDataForEventOnly
@@ -705,16 +813,22 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
       },
       // WYSIWYG Migration
       bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
-      currentValues: selector(state, 'guestListEnabled', 'link', 'status', 'projects'),
+      currentValues: selector(
+        state,
+        'guestListEnabled',
+        'link',
+        'status',
+        'projects',
+        'measurable',
+      ),
     };
   }
 
   return {
     currentLanguage: state.language.currentLanguage,
-    features: state.default.features,
     // WYSIWYG Migration
     bodyUsingJoditWysiwyg: true,
-    currentValues: selector(state, 'guestListEnabled', 'link', 'status', 'projects'),
+    currentValues: selector(state, 'guestListEnabled', 'link', 'status', 'projects', 'measurable'),
 
     initialValues: {
       authorAgreeToUsePersonalDataForEventOnly: false,
@@ -801,6 +915,11 @@ export default createFragmentContainer(container, {
       }
       authorAgreeToUsePersonalDataForEventOnly
       adminAuthorizeDataTransfer
+      maxRegistrations
+      isMeasurable
+      participants {
+        totalCount
+      }
     }
   `,
 });

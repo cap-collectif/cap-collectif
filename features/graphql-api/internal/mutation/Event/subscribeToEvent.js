@@ -33,16 +33,29 @@ describe('mutations.subscribeToEvent', () => {
     expect(subscribeToEvent).toMatchSnapshot();
   });
 
-  it('user wants to subscribe to event.', async () => {
+  it('theo wants to subscribe to event.', async () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsRegisteredMutation,
       {
-        input: { eventId: 'RXZlbnQ6ZXZlbnQz' },
+        input: { eventId: 'RXZlbnQ6ZXZlbnQx' },
       },
-      'internal_user',
+      'internal_theo',
     );
     expect(subscribeToEvent).toMatchSnapshot();
   });
+
+  it('user wants to subscribe to a registered event.', async () => {
+    await expect(
+      graphql(
+        SubscribeToEventAsRegisteredMutation,
+        {
+          input: { eventId: 'RXZlbnQ6ZXZlbnQz' },
+        },
+        'internal_user',
+      ),
+    ).rejects.toThrowError('Event is complete');
+  });
+
   it('user wants to subscribe to a complete event.', async () => {
     await expect(
       graphql(
@@ -59,7 +72,7 @@ describe('mutations.subscribeToEvent', () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsRegisteredMutation,
       {
-        input: { eventId: 'RXZlbnQ6ZXZlbnQz', private: true },
+        input: { eventId: 'RXZlbnQ6ZXZlbnQx', private: true },
       },
       'internal_user_conseil_regional',
     );
@@ -70,7 +83,7 @@ describe('mutations.subscribeToEvent', () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsNonRegisteredMutation,
       {
-        input: { eventId: 'RXZlbnQ6ZXZlbnQz', email: 'jpec@cap-collectif.com', username: 'Jpec' },
+        input: { eventId: 'RXZlbnQ6ZXZlbnQx', email: 'jpec@cap-collectif.com', username: 'Jpec' },
       },
       'internal',
     );
@@ -82,7 +95,7 @@ describe('mutations.subscribeToEvent', () => {
       SubscribeToEventAsNonRegisteredMutation,
       {
         input: {
-          eventId: 'RXZlbnQ6ZXZlbnQz',
+          eventId: 'RXZlbnQ6ZXZlbnQx',
           email: 'jpec-anonymous@cap-collectif.com',
           username: 'Jpec',
           private: true,
@@ -91,6 +104,22 @@ describe('mutations.subscribeToEvent', () => {
       'internal',
     );
     expect(subscribeToEvent).toMatchSnapshot();
+  });
+  it('anonymous wants to subscribe ever subscribed event.', async () => {
+    await expect(
+      graphql(
+        SubscribeToEventAsNonRegisteredMutation,
+        {
+          input: {
+            eventId: 'RXZlbnQ6ZXZlbnQx',
+            email: 'jpec-anonymous@cap-collectif.com',
+            username: 'Jpec',
+            private: true,
+          },
+        },
+        'internal',
+      ),
+    ).rejects.toThrowError('User is already registered for this event.');
   });
   it('anonymous wants to subscribe to a complete event.', async () => {
     await expect(

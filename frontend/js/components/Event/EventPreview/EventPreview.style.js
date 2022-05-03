@@ -77,6 +77,19 @@ const EventPreviewContainer: StyledComponent<
       }
     }
   }
+
+  .cap-tag.eventTag {
+    position: absolute !important;
+    margin-top: 8px !important;
+    margin-left: 8px !important;
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: left;
+    border-radius: 4px;
+  }
 `;
 
 export const HeadContent: StyledComponent<{}, {}, HTMLDivElement> = styled.div`

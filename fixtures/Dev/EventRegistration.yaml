@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\EventRegistration:
         private: false
         confirmed: true
     eventRegistration52:
-        event: '@event2'
+        event: '@event3'
         user: '@user3'
         private: false
         confirmed: true

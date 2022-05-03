@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
@@ -10,6 +11,7 @@ import type {
   HomePageEventsQueryResponse,
   HomePageEventsQueryVariables,
 } from '~relay/HomePageEventsQuery.graphql';
+import type { State } from '~/types';
 
 export type Props = {|
   +showAllUrl: string,
@@ -19,6 +21,7 @@ export type Props = {|
     +body: ?string,
     +nbObjects: ?number,
   },
+  +isAuthenticated: boolean,
 |};
 
 export const EventContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -105,18 +108,23 @@ class HomePageEvents extends React.Component<Props> {
   };
 
   render() {
-    const { section } = this.props;
+    const { section, isAuthenticated } = this.props;
 
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query HomePageEventsQuery($count: Int, $orderBy: EventOrder!, $isFuture: Boolean!) {
+          query HomePageEventsQuery(
+            $count: Int
+            $orderBy: EventOrder!
+            $isFuture: Boolean!
+            $isAuthenticated: Boolean
+          ) {
             events(orderBy: $orderBy, first: $count, isFuture: $isFuture) {
               edges {
                 node {
                   id
-                  ...EventPreview_event
+                  ...EventPreview_event @arguments(isAuthenticated: $isAuthenticated)
                 }
               }
             }
@@ -130,6 +138,7 @@ class HomePageEvents extends React.Component<Props> {
               field: 'START_AT',
               direction: 'ASC',
             },
+            isAuthenticated,
           }: HomePageEventsQueryVariables)
         }
         render={this.renderEventList}
@@ -138,4 +147,8 @@ class HomePageEvents extends React.Component<Props> {
   }
 }
 
-export default HomePageEvents;
+const mapStateToProps = (state: State) => ({
+  isAuthenticated: state.user.user !== null,
+});
+
+export default connect<any, any, _, _, _, _>(mapStateToProps)(HomePageEvents);

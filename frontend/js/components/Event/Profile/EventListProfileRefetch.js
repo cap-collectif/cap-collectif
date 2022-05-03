@@ -41,7 +41,10 @@ export const getOrderBy = (order: $Values<typeof ORDER_TYPE>) =>
 export const EventListProfileRefetch = ({ relay, user }: Props) => {
   const _refetch = (order: $Values<typeof ORDER_TYPE>) => {
     const orderBy = getOrderBy(order);
-    relay.refetch(({ userId: user.id, orderBy }: EventListProfileRefetchQueryVariables), null);
+    relay.refetch(
+      ({ userId: user.id, orderBy, isAuthenticated: true }: EventListProfileRefetchQueryVariables),
+      null,
+    );
   };
 
   const onChangeHandler = (e: Event) => {
@@ -88,13 +91,13 @@ export default createRefetchContainer(
   {
     user: graphql`
       fragment EventListProfileRefetch_user on User
-        @argumentDefinitions(orderBy: { type: "EventOrder" }) {
+      @argumentDefinitions(orderBy: { type: "EventOrder" }, isAuthenticated: { type: "Boolean!" }) {
         id
         events(first: 100, orderBy: $orderBy, onlyWhenAuthor: true) {
           edges {
             node {
               id
-              ...EventPreview_event
+              ...EventPreview_event @arguments(isAuthenticated: $isAuthenticated)
             }
           }
         }
@@ -102,9 +105,14 @@ export default createRefetchContainer(
     `,
   },
   graphql`
-    query EventListProfileRefetchQuery($userId: ID!, $orderBy: EventOrder) {
+    query EventListProfileRefetchQuery(
+      $userId: ID!
+      $orderBy: EventOrder
+      $isAuthenticated: Boolean!
+    ) {
       user: node(id: $userId) {
-        ...EventListProfileRefetch_user @arguments(orderBy: $orderBy)
+        ...EventListProfileRefetch_user
+          @arguments(orderBy: $orderBy, isAuthenticated: $isAuthenticated)
       }
     }
   `,

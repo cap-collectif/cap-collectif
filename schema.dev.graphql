@@ -5742,6 +5742,11 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """Whether or not registration is enabled on this event."""
   isRegistrationPossible: Boolean!
 
+  """
+  Whether or not registration is enabled on this event and event is complete.
+  """
+  isCompleteAndRegistrationPossibleResolver: Boolean!
+
   """Wheter or not the viewer can join the room before it starts."""
   viewerIsRoomAnimator: Boolean!
 

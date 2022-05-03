@@ -14,7 +14,7 @@ exports[`mutations.subscribeToEvent anonymous wants to subscribe to event as ano
 Object {
   "subscribeToEventAsNonRegistered": Object {
     "event": Object {
-      "id": "RXZlbnQ6ZXZlbnQz",
+      "id": "RXZlbnQ6ZXZlbnQx",
     },
   },
 }
@@ -24,7 +24,17 @@ exports[`mutations.subscribeToEvent anonymous wants to subscribe to event. 1`] =
 Object {
   "subscribeToEventAsNonRegistered": Object {
     "event": Object {
-      "id": "RXZlbnQ6ZXZlbnQz",
+      "id": "RXZlbnQ6ZXZlbnQx",
+    },
+  },
+}
+`;
+
+exports[`mutations.subscribeToEvent theo wants to subscribe to event. 1`] = `
+Object {
+  "subscribeToEventAsRegistered": Object {
+    "event": Object {
+      "id": "RXZlbnQ6ZXZlbnQx",
     },
   },
 }
@@ -34,17 +44,7 @@ exports[`mutations.subscribeToEvent user wants to subscribe to event as anonymou
 Object {
   "subscribeToEventAsRegistered": Object {
     "event": Object {
-      "id": "RXZlbnQ6ZXZlbnQz",
-    },
-  },
-}
-`;
-
-exports[`mutations.subscribeToEvent user wants to subscribe to event. 1`] = `
-Object {
-  "subscribeToEventAsRegistered": Object {
-    "event": Object {
-      "id": "RXZlbnQ6ZXZlbnQz",
+      "id": "RXZlbnQ6ZXZlbnQx",
     },
   },
 }

@@ -49,16 +49,8 @@ const EventListContainer: StyledComponent<{}, {}, typeof Col> = styled(Col)`
 `;
 
 export const EventListPaginated = (props: Props) => {
-  const {
-    status,
-    query,
-    relay,
-    features,
-    dispatch,
-    eventSelected,
-    isMobileListView,
-    formName,
-  } = props;
+  const { status, query, relay, features, dispatch, eventSelected, isMobileListView, formName } =
+    props;
   const [loading, setLoading] = useState(false);
   const { width } = useWindowWidth();
 
@@ -112,17 +104,18 @@ export const EventListPaginated = (props: Props) => {
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
-              .map((node, key) => (
-                // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-                <div
-                  key={key}
-                  onMouseOver={() => (width > bootstrapGrid.smMax ? onFocus(node.id) : null)}>
-                  <EventPreview
-                    isHighlighted={eventSelected && eventSelected === node.id}
-                    event={node}
-                  />
-                </div>
-              ))}
+              .map((node, key) => {
+                const highlighted = eventSelected && eventSelected === node.id;
+
+                return (
+                  // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
+                  <div
+                    key={key}
+                    onMouseOver={() => (width > bootstrapGrid.smMax ? onFocus(node.id) : null)}>
+                    <EventPreview isHighlighted={Boolean(highlighted)} event={node} />
+                  </div>
+                );
+              })}
           {relay.hasMore() && (
             <Row>
               <div className="text-center">
@@ -166,20 +159,21 @@ export default createPaginationContainer(
   {
     query: graphql`
       fragment EventListPaginated_query on Query
-        @argumentDefinitions(
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-          theme: { type: "ID" }
-          project: { type: "ID" }
-          locale: { type: "TranslationLocale" }
-          search: { type: "String" }
-          userType: { type: "ID" }
-          isFuture: { type: "Boolean" }
-          previewCount: { type: "Int", defaultValue: 5 }
-          author: { type: "ID" }
-          isRegistrable: { type: "Boolean" }
-          orderBy: { type: "EventOrder" }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        theme: { type: "ID" }
+        project: { type: "ID" }
+        locale: { type: "TranslationLocale" }
+        search: { type: "String" }
+        userType: { type: "ID" }
+        isFuture: { type: "Boolean" }
+        previewCount: { type: "Int", defaultValue: 5 }
+        author: { type: "ID" }
+        isRegistrable: { type: "Boolean" }
+        orderBy: { type: "EventOrder" }
+        isAuthenticated: { type: "Boolean!" }
+      ) {
         previewPassedEvents: events(
           locale: $locale
           first: $previewCount
@@ -189,7 +183,12 @@ export default createPaginationContainer(
           totalCount
         }
         ...EventPagePassedEventsPreview_query
-          @arguments(locale: $locale, previewCount: $previewCount, orderBy: $orderBy)
+          @arguments(
+            locale: $locale
+            previewCount: $previewCount
+            orderBy: $orderBy
+            isAuthenticated: $isAuthenticated
+          )
         ...EventMap_query
           @arguments(
             count: $count
@@ -221,7 +220,7 @@ export default createPaginationContainer(
           edges {
             node {
               id
-              ...EventPreview_event
+              ...EventPreview_event @arguments(isAuthenticated: $isAuthenticated)
             }
           }
           pageInfo {
@@ -265,6 +264,7 @@ export default createPaginationContainer(
         $author: ID
         $isRegistrable: Boolean
         $orderBy: EventOrder
+        $isAuthenticated: Boolean!
       ) {
         ...EventListPaginated_query
           @arguments(
@@ -279,6 +279,7 @@ export default createPaginationContainer(
             author: $author
             isRegistrable: $isRegistrable
             orderBy: $orderBy
+            isAuthenticated: $isAuthenticated
           )
       }
     `,

@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Tag } from '@cap-collectif/ui';
 import Truncate from 'react-truncate';
 import Card from '~/components/Ui/Card/Card';
 import TagUser from '~/components/Tag/TagUser/TagUser';
@@ -18,7 +18,6 @@ import EventPreviewContainer, {
 } from './EventPreview.style';
 import EventLabelStatus from '~/components/Event/EventLabelStatus';
 import type { EventPreview_event } from '~relay/EventPreview_event.graphql';
-import type { State } from '~/types';
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import Label from '~ui/Labels/Label';
@@ -28,19 +27,57 @@ import {
   getEndDateFromStartAt,
   isEventLive,
 } from '~/components/Event/EventPageContent/EventHelperFunctions';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
   +event: EventPreview_event,
-  +hasIllustrationDisplayed: boolean,
   +isHighlighted?: boolean,
   +isAuthorHidden?: boolean,
   +displayReview?: boolean,
   +registrationRequired?: boolean,
 |};
 
+const getTagLabel = (intl, availableRegistration, tagColor: ?string) => {
+  if (tagColor === 'red') {
+    return intl.formatMessage({ id: 'complete' });
+  }
+  if (tagColor === 'yellow') {
+    return intl.formatMessage({ id: 'x-available-registration' }, { x: availableRegistration });
+  }
+  if (tagColor === 'green') {
+    return intl.formatMessage({ id: 'admin.fields.event_registration.registered' });
+  }
+  return null;
+};
+
+const getTagColor = (
+  guestListEnabled,
+  availableRegistration,
+  isCompleteAndRegistrationPossibleResolver,
+  isMeasurable,
+  isViewerParticipatingAtEvent,
+) => {
+  if (isViewerParticipatingAtEvent) {
+    return 'green';
+  }
+  if (isCompleteAndRegistrationPossibleResolver) {
+    return 'red';
+  }
+  const isRegistrationMeasurable = isMeasurable || guestListEnabled;
+  if (
+    availableRegistration &&
+    isRegistrationMeasurable &&
+    availableRegistration < 4 &&
+    availableRegistration > 0
+  ) {
+    return 'yellow';
+  }
+
+  return null;
+};
+
 export const EventPreview = ({
   event,
-  hasIllustrationDisplayed,
   isHighlighted = false,
   isAuthorHidden = false,
   displayReview = false,
@@ -54,8 +91,13 @@ export const EventPreview = ({
     timeRange,
     url,
     guestListEnabled,
+    availableRegistration,
+    isCompleteAndRegistrationPossibleResolver,
+    isMeasurable,
+    isViewerParticipatingAtEvent,
   }: EventPreview_event = event;
-
+  const hasIllustrationDisplayed = useFeatureFlag('display_pictures_in_event_list');
+  const intl = useIntl();
   const hasStarted =
     timeRange.startAt != null
       ? new Date(timeRange.startAt).getTime() <= new Date().getTime()
@@ -69,11 +111,28 @@ export const EventPreview = ({
   const isEventDone = hasStarted && hasEnded;
   const isLive = isEventLive(timeRange.startAt, timeRange.endAt);
   const hasTag = isLive || guestListEnabled || displayReview;
+  const tagColor = getTagColor(
+    guestListEnabled,
+    availableRegistration,
+    isCompleteAndRegistrationPossibleResolver,
+    isMeasurable,
+    isViewerParticipatingAtEvent,
+  );
+  const tagLabel = getTagLabel(intl, availableRegistration, tagColor);
+  const displayEventTag =
+    timeRange.isFuture &&
+    (isMeasurable || guestListEnabled) &&
+    tagColor !== null &&
+    tagLabel !== null;
 
   return (
     <EventPreviewContainer isHighlighted={isHighlighted}>
       <EventImage event={event} enabled={hasIllustrationDisplayed} />
-
+      {displayEventTag && (
+        <Tag variantColor={tagColor} className="eventTag">
+          <Tag.Label>{tagLabel}</Tag.Label>
+        </Tag>
+      )}
       <Card.Body>
         <HeadContent>
           <DateContainer>
@@ -129,21 +188,17 @@ export const EventPreview = ({
   );
 };
 
-const mapStateToProps = (state: State) => ({
-  hasIllustrationDisplayed: state.default.features.display_pictures_in_event_list || false,
-});
-
-const Container = connect<any, any, _, _, _, _>(mapStateToProps)(EventPreview);
-
-export default createFragmentContainer(Container, {
+export default createFragmentContainer(EventPreview, {
   event: graphql`
-    fragment EventPreview_event on Event {
+    fragment EventPreview_event on Event
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       title
       url
       guestListEnabled
       timeRange {
         startAt
         endAt
+        isFuture
       }
       googleMapsAddress {
         __typename
@@ -162,6 +217,12 @@ export default createFragmentContainer(Container, {
       }
       ...EventImage_event
       ...EventLabelStatus_event
+      isViewerParticipatingAtEvent @include(if: $isAuthenticated)
+      isRegistrationPossible
+      isCompleteAndRegistrationPossibleResolver
+      isMeasurable
+      maxRegistrations
+      availableRegistration
     }
   `,
 });

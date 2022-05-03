@@ -164,27 +164,27 @@ const form = reduxForm({
 export default createFragmentContainer(form, {
   query: graphql`
     fragment EventListPageContainer_query on Query
-      @argumentDefinitions(
-        count: { type: "Int!" }
-        cursor: { type: "String" }
-        locale: { type: "TranslationLocale" }
-        theme: { type: "ID" }
-        project: { type: "ID" }
-        search: { type: "String" }
-        userType: { type: "ID" }
-        isFuture: { type: "Boolean" }
-        author: { type: "ID" }
-        isRegistrable: { type: "Boolean" }
-        orderBy: { type: "EventOrder" }
-        isAuthenticated: { type: "Boolean!" }
-      ) {
+    @argumentDefinitions(
+      count: { type: "Int!" }
+      cursor: { type: "String" }
+      locale: { type: "TranslationLocale" }
+      theme: { type: "ID" }
+      project: { type: "ID" }
+      search: { type: "String" }
+      userType: { type: "ID" }
+      isFuture: { type: "Boolean" }
+      author: { type: "ID" }
+      isRegistrable: { type: "Boolean" }
+      orderBy: { type: "EventOrder" }
+      isAuthenticated: { type: "Boolean!" }
+    ) {
       viewer @include(if: $isAuthenticated) {
         awaitingOrRefusedEvents {
           totalCount
           edges {
             node {
               id
-              ...EventPreview_event
+              ...EventPreview_event @arguments(isAuthenticated: $isAuthenticated)
             }
           }
         }
@@ -203,6 +203,7 @@ export default createFragmentContainer(form, {
           author: $author
           isRegistrable: $isRegistrable
           orderBy: $orderBy
+          isAuthenticated: $isAuthenticated
         )
       ...EventListFilters_query
         @arguments(
