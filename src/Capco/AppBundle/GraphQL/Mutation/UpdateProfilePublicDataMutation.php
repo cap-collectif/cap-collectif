@@ -35,6 +35,7 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
             parent::__invoke($input, $viewer);
         }
 
+        $this->limitBiographyLength();
         if (!$this->toggleManager->isActive('user_type')) {
             // blocking bug, need to throw an exception and catch it into JS
             unset($this->arguments['userType']);
@@ -57,5 +58,12 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
         $this->em->flush();
 
         return [self::USER => $this->user];
+    }
+
+    private function limitBiographyLength(): void
+    {
+        if (isset($this->arguments['biography']) && \strlen($this->arguments['biography']) > 256) {
+            $this->arguments['biography'] = substr($this->arguments['biography'], 0, 253) . '...';
+        }
     }
 }

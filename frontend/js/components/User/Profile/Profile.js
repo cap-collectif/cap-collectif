@@ -17,7 +17,7 @@ import {
   getSsoTradKey,
 } from '~/components/User/Profile/PersonalData';
 import { REGEX_USERNAME } from '~/constants/FormConstants';
-import useFeatureFlag from "~/utils/hooks/useFeatureFlag";
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import {
   fbRegEx,
   instagramRegEx,
@@ -98,8 +98,8 @@ const validate = (values: Object) => {
       errors[value] = 'two-characters-minimum-required';
     }
     if (value === 'biography') {
-      if (values[value] && values[value].length > 1000) {
-        errors[value] = '1000-characters-maximum-required';
+      if (values[value] && values[value].length > 256) {
+        errors[value] = '256-characters-maximum-required';
       }
     } else if (values[value] && values[value].length > 256) {
       errors[value] = '256-characters-maximum-required';
@@ -174,29 +174,53 @@ export const Profile = ({
   submitting,
   userTypes,
   error,
-}:Props) => {
+}: Props) => {
   const useNoIndexProfile = useFeatureFlag('noindex_on_profiles');
   const useUserType = useFeatureFlag('user_type');
 
-    return (
-      <form onSubmit={handleSubmit} className="form-horizontal">
-        <Panel id="capco_horizontal_form">
-          <Panel.Heading>{renderHeader}</Panel.Heading>
-          <Panel.Body>
-            <div className="horizontal_field_with_border_top no-border">
-              <label className="col-sm-3 control-label" htmlFor="profile_avatar">
-                <FormattedMessage id="sonata.media.provider.image" />
-              </label>
-              {/* $FlowFixMe */}
-              <UserAvatarDeprecated className="col-sm-1" user={viewer} />
-              <div className="clearfix" />
-              <div className="col-sm-3" />
+  return (
+    <form onSubmit={handleSubmit} className="form-horizontal">
+      <Panel id="capco_horizontal_form">
+        <Panel.Heading>{renderHeader}</Panel.Heading>
+        <Panel.Body>
+          <div className="horizontal_field_with_border_top no-border">
+            <label className="col-sm-3 control-label" htmlFor="profile_avatar">
+              <FormattedMessage id="sonata.media.provider.image" />
+            </label>
+            {/* $FlowFixMe */}
+            <UserAvatarDeprecated className="col-sm-1" user={viewer} />
+            <div className="clearfix" />
+            <div className="col-sm-3" />
+            <Field
+              id="profile_avatar"
+              name="media"
+              disabled={window.location.hostname === occitanieUrl}
+              component={component}
+              type="image"
+              divClassName="col-sm-6"
+            />
+            {isSsoFcOrOccitanie(false) && (
+              <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                <FormattedMessage id={getSsoTradKey()} />
+              </div>
+            )}
+          </div>
+          <div className="horizontal_field_with_border_top no-border">
+            <label className="col-sm-3 control-label" htmlFor="profile-form-username">
+              <FormattedMessage id="global.fullname" />
+              <br />
+              <span className="excerpt">
+                <FormattedMessage id="global.mandatory" />
+              </span>
+            </label>
+            <div>
               <Field
-                id="profile_avatar"
-                name="media"
-                disabled={window.location.hostname === occitanieUrl}
+                name="username"
                 component={component}
-                type="image"
+                required
+                type="text"
+                disabled={window.location.hostname === occitanieUrl}
+                id="profile-form-username"
                 divClassName="col-sm-6"
               />
               {isSsoFcOrOccitanie(false) && (
@@ -205,190 +229,166 @@ export const Profile = ({
                 </div>
               )}
             </div>
+          </div>
+          {useUserType && (
             <div className="horizontal_field_with_border_top no-border">
-              <label className="col-sm-3 control-label" htmlFor="profile-form-username">
-                <FormattedMessage id="global.fullname" />
-                <br />
-                <span className="excerpt">
-                  <FormattedMessage id="global.mandatory" />
-                </span>
+              <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
+                <FormattedMessage id="registration.type" />{' '}
               </label>
               <div>
                 <Field
-                  name="username"
+                  id="profile-form-userType"
+                  name="userType"
                   component={component}
-                  required
-                  type="text"
+                  type="select"
                   disabled={window.location.hostname === occitanieUrl}
-                  id="profile-form-username"
-                  divClassName="col-sm-6"
-                />
-                {isSsoFcOrOccitanie(false) && (
-                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
-                    <FormattedMessage id={getSsoTradKey()} />
-                  </div>
-                )}
+                  divClassName="col-sm-6">
+                  <FormattedMessage id="registration.select.type">
+                    {(message: string) => <option value="">{message}</option>}
+                  </FormattedMessage>
+                  {userTypes.map((type, i) => (
+                    <option key={i + 1} value={type.id}>
+                      {type.name}
+                    </option>
+                  ))}
+                </Field>
               </div>
             </div>
-            {useUserType && (
-              <div className="horizontal_field_with_border_top no-border">
-                <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
-                  <FormattedMessage id="registration.type" />{' '}
-                </label>
-                <div>
-                  <Field
-                    id="profile-form-userType"
-                    name="userType"
-                    component={component}
-                    type="select"
-                    disabled={window.location.hostname === occitanieUrl}
-                    divClassName="col-sm-6">
-                    <FormattedMessage id="registration.select.type">
-                      {(message: string) => <option value="">{message}</option>}
-                    </FormattedMessage>
-                    {userTypes.map((type, i) => (
-                      <option key={i + 1} value={type.id}>
-                        {type.name}
-                      </option>
-                    ))}
-                  </Field>
+          )}
+          <div className="horizontal_field_with_border_top no-border">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-biography">
+              <FormattedMessage id="form.label_biography" />
+            </label>
+            <div>
+              <Field
+                name="biography"
+                component={component}
+                disabled={window.location.hostname === occitanieUrl}
+                type="textarea"
+                id="public-data-form-biography"
+                divClassName="col-sm-6"
+              />
+              {isSsoFcOrOccitanie(false) && (
+                <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                  <FormattedMessage id={getSsoTradKey()} />
                 </div>
-              </div>
-            )}
-            <div className="horizontal_field_with_border_top no-border">
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-biography">
-                <FormattedMessage id="form.label_biography" />
-              </label>
-              <div>
-                <Field
-                  name="biography"
-                  component={component}
-                  disabled={window.location.hostname === occitanieUrl}
-                  type="textarea"
-                  id="public-data-form-biography"
-                  divClassName="col-sm-6"
-                />
-                {isSsoFcOrOccitanie(false) && (
-                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
-                    <FormattedMessage id={getSsoTradKey()} />
-                  </div>
-                )}
-              </div>
+              )}
             </div>
-            <div className="horizontal_field_with_border_top no-border">
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-neighborhood">
-                <FormattedMessage id="form.label_neighborhood" />
-              </label>
-              <div>
-                <Field
-                  name="neighborhood"
-                  component={component}
-                  type="text"
-                  disabled={window.location.hostname === occitanieUrl}
-                  id="public-data-form-neighborhood"
-                  divClassName="col-sm-6"
-                />
-                {isSsoFcOrOccitanie(false) && (
-                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
-                    <FormattedMessage id={getSsoTradKey()} />
-                  </div>
-                )}
-              </div>
+          </div>
+          <div className="horizontal_field_with_border_top no-border">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-neighborhood">
+              <FormattedMessage id="form.label_neighborhood" />
+            </label>
+            <div>
+              <Field
+                name="neighborhood"
+                component={component}
+                type="text"
+                disabled={window.location.hostname === occitanieUrl}
+                id="public-data-form-neighborhood"
+                divClassName="col-sm-6"
+              />
+              {isSsoFcOrOccitanie(false) && (
+                <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                  <FormattedMessage id={getSsoTradKey()} />
+                </div>
+              )}
             </div>
-            <div className="clearfix" />
-            <h2>
-              <FormattedMessage id="social-medias" />
-            </h2>
-            <div className="horizontal_field_with_border_top no-border">
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-facebook">
-                <FormattedMessage id="user.profile.edit.facebook" />
-              </label>
-              <div>
-                <Field
-                  placeholder="https://"
-                  name="facebookUrl"
-                  component={component}
-                  disabled={window.location.hostname === occitanieUrl}
-                  type="text"
-                  id="public-data-form-facebook"
-                  divClassName="col-sm-6"
-                />
-                {isSsoFcOrOccitanie(false) && (
-                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
-                    <FormattedMessage id={getSsoTradKey()} />
-                  </div>
-                )}
-              </div>
+          </div>
+          <div className="clearfix" />
+          <h2>
+            <FormattedMessage id="social-medias" />
+          </h2>
+          <div className="horizontal_field_with_border_top no-border">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-facebook">
+              <FormattedMessage id="user.profile.edit.facebook" />
+            </label>
+            <div>
+              <Field
+                placeholder="https://"
+                name="facebookUrl"
+                component={component}
+                disabled={window.location.hostname === occitanieUrl}
+                type="text"
+                id="public-data-form-facebook"
+                divClassName="col-sm-6"
+              />
+              {isSsoFcOrOccitanie(false) && (
+                <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                  <FormattedMessage id={getSsoTradKey()} />
+                </div>
+              )}
             </div>
-            <div className="horizontal_field_with_border_top no-border">
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-instagram">
-                <FormattedMessage id="instagram-profile" />
-              </label>
-              <div>
-                <Field
-                  placeholder="https://"
-                  name="instagramUrl"
-                  component={component}
-                  disabled={window.location.hostname === occitanieUrl}
-                  type="text"
-                  id="public-data-form-instagram"
-                  divClassName="col-sm-6"
-                />
-                {isSsoFcOrOccitanie(false) && (
-                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
-                    <FormattedMessage id={getSsoTradKey()} />
-                  </div>
-                )}
-              </div>
+          </div>
+          <div className="horizontal_field_with_border_top no-border">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-instagram">
+              <FormattedMessage id="instagram-profile" />
+            </label>
+            <div>
+              <Field
+                placeholder="https://"
+                name="instagramUrl"
+                component={component}
+                disabled={window.location.hostname === occitanieUrl}
+                type="text"
+                id="public-data-form-instagram"
+                divClassName="col-sm-6"
+              />
+              {isSsoFcOrOccitanie(false) && (
+                <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                  <FormattedMessage id={getSsoTradKey()} />
+                </div>
+              )}
             </div>
-            <div className="horizontal_field_with_border_top no-border">
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-twitter">
-                <FormattedMessage id="user.profile.edit.twitter" />
-              </label>
-              <div>
-                <Field
-                  placeholder="https://"
-                  disabled={window.location.hostname === occitanieUrl}
-                  name="twitterUrl"
-                  component={component}
-                  type="text"
-                  id="public-data-form-twitter"
-                  divClassName="col-sm-6"
-                />
-                {isSsoFcOrOccitanie(false) && (
-                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
-                    <FormattedMessage id={getSsoTradKey()} />
-                  </div>
-                )}
-              </div>
+          </div>
+          <div className="horizontal_field_with_border_top no-border">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-twitter">
+              <FormattedMessage id="user.profile.edit.twitter" />
+            </label>
+            <div>
+              <Field
+                placeholder="https://"
+                disabled={window.location.hostname === occitanieUrl}
+                name="twitterUrl"
+                component={component}
+                type="text"
+                id="public-data-form-twitter"
+                divClassName="col-sm-6"
+              />
+              {isSsoFcOrOccitanie(false) && (
+                <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                  <FormattedMessage id={getSsoTradKey()} />
+                </div>
+              )}
             </div>
-            <div className="horizontal_field_with_border_top no-border">
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-linkedIn">
-                <FormattedMessage id="show.label_linked_in_url" />
-              </label>
-              <div>
-                <Field
-                  placeholder="https://"
-                  name="linkedInUrl"
-                  disabled={window.location.hostname === occitanieUrl}
-                  component={component}
-                  type="text"
-                  id="public-data-form-linkedIn"
-                  divClassName="col-sm-6"
-                />
-                {isSsoFcOrOccitanie(false) && (
-                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
-                    <FormattedMessage id={getSsoTradKey()} />
-                  </div>
-                )}
-              </div>
+          </div>
+          <div className="horizontal_field_with_border_top no-border">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-linkedIn">
+              <FormattedMessage id="show.label_linked_in_url" />
+            </label>
+            <div>
+              <Field
+                placeholder="https://"
+                name="linkedInUrl"
+                disabled={window.location.hostname === occitanieUrl}
+                component={component}
+                type="text"
+                id="public-data-form-linkedIn"
+                divClassName="col-sm-6"
+              />
+              {isSsoFcOrOccitanie(false) && (
+                <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                  <FormattedMessage id={getSsoTradKey()} />
+                </div>
+              )}
             </div>
-            <div className="clearfix" />
-            {!useNoIndexProfile ? (
-              <>
-            <h2>
-              <FormattedMessage id="confidentialite.title" />
-            </h2>
+          </div>
+          <div className="clearfix" />
+          {!useNoIndexProfile ? (
+            <>
+              <h2>
+                <FormattedMessage id="confidentialite.title" />
+              </h2>
               <div className="horizontal_field_with_border_top">
                 <div className="col-sm-3" />
                 <Field
@@ -401,27 +401,27 @@ export const Profile = ({
                   <FormattedMessage id="user.profile.edit.profilePageIndexed" />
                 </Field>
               </div>
-              </>
-            ) : null}
-            <div className="horizontal_field_with_border_top">
-              <div className="col-sm-3" />
-              <ButtonToolbar className="col-sm-6 pl-0">
-                <AlertForm
-                  valid={valid}
-                  invalid={invalid}
-                  errorMessage={error}
-                  submitSucceeded={submitSucceeded}
-                  submitFailed={submitFailed}
-                  submitting={submitting}
-                />
-              </ButtonToolbar>
-            </div>
-          </Panel.Body>
-          <Panel.Footer>{renderFooter(invalid, submitting)}</Panel.Footer>
-        </Panel>
-      </form>
-    );
-  }
+            </>
+          ) : null}
+          <div className="horizontal_field_with_border_top">
+            <div className="col-sm-3" />
+            <ButtonToolbar className="col-sm-6 pl-0">
+              <AlertForm
+                valid={valid}
+                invalid={invalid}
+                errorMessage={error}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
+            </ButtonToolbar>
+          </div>
+        </Panel.Body>
+        <Panel.Footer>{renderFooter(invalid, submitting)}</Panel.Footer>
+      </Panel>
+    </form>
+  );
+};
 
 const form = reduxForm({
   onSubmit,
