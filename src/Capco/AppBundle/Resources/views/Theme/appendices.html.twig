@@ -18,7 +18,7 @@
                         <h2 class="h4">{{ 'theme.show.appendices.events.title'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="excerpt">
                             {{ 'event-related-count' | trans({'count': nbEvents}, 'CapcoAppBundle') }}
-                        <p><a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.events.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+                        <p><a href="{{ path('app_event', {theme: theme.id}) }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.events.button'|trans({}, 'CapcoAppBundle') }}</a></p>
                     </div>
                 {% endif %}
             </div>

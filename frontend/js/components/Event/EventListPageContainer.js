@@ -148,10 +148,12 @@ export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }
 export const getInitialValues = () => {
   const urlSearch = new URLSearchParams(window.location.search);
   const project = urlSearch.get('projectId') || null;
+  const theme = urlSearch.get('theme') ?? null;
   const hasFilteredUrl = !!project;
   return {
     status: hasFilteredUrl ? 'all' : 'ongoing-and-future',
     project,
+    theme,
   };
 };
 

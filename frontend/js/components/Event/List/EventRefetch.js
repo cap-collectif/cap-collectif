@@ -98,6 +98,13 @@ export class EventRefetch extends React.Component<Props, State> {
       prevProps.isRegistrable !== isRegistrable ||
       prevProps.orderBy !== orderBy
     ) {
+      const url = new URL(window.location.href);
+      const searchParams = new URLSearchParams(window.location.search);
+      if (theme) {
+        searchParams.set('theme', theme);
+      }
+      url.search = searchParams.toString();
+      window.history.replaceState({}, '', url.toString());
       this._refetch();
     }
   }
