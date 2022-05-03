@@ -130,7 +130,7 @@ class FontsController extends AbstractController
                 'name' => $lastUploadedFont->getName(),
                 'useAsHeading' => $lastUploadedFont->getUseAsHeading(),
                 'useAsBody' => $lastUploadedFont->getUseAsBody(),
-            ]);
+            ], 201);
         }
 
         return $this->json(
