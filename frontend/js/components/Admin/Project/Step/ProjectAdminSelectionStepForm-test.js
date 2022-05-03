@@ -3,9 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminSelectionStepForm } from './ProjectAdminSelectionStepForm';
+import MockProviders from '~/testUtils';
 
 describe('<ProjectAdminSelectionStepForm />', () => {
   const defaultProps = {
+    id: 'stepId',
     dispatch: jest.fn(),
     isBudgetEnabled: false,
     isTresholdEnabled: false,
@@ -21,12 +23,17 @@ describe('<ProjectAdminSelectionStepForm />', () => {
   };
 
   it('renders correctly with no initial data', () => {
-    const wrapper = shallow(<ProjectAdminSelectionStepForm {...defaultProps} />);
+    const wrapper = shallow(
+      <MockProviders>
+        <ProjectAdminSelectionStepForm {...defaultProps} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly with data', () => {
     const props = {
+      id: 'stepId',
       dispatch: jest.fn(),
       isBudgetEnabled: true,
       isTresholdEnabled: true,
@@ -47,7 +54,11 @@ describe('<ProjectAdminSelectionStepForm />', () => {
       endAt: null,
       fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     };
-    const wrapper = shallow(<ProjectAdminSelectionStepForm {...props} />);
+    const wrapper = shallow(
+      <MockProviders>
+        <ProjectAdminSelectionStepForm {...props} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

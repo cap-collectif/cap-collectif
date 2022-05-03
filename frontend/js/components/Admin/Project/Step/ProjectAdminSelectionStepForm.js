@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Field, FieldArray, arrayPush } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import component from '~/components/Form/Field';
@@ -10,15 +10,18 @@ import toggle from '~/components/Form/Toggle';
 import select from '~/components/Form/Select';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
 import StepStatusesList, { type ProposalStepStatus } from './StepStatusesList';
-import type { Dispatch } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';
 import StepVotesFields from './StepVotesFields';
 import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
+import Tooltip from "~ds/Tooltip/Tooltip";
+import AppBox from "~ui/Primitives/AppBox";
 
 type Props = {|
+  id: string,
   requirements?: Array<Requirement>,
   statuses?: Array<ProposalStepStatus>,
   dispatch: Dispatch,
@@ -49,6 +52,7 @@ export const renderSortValues = (intl: IntlShape) => [
 const formName = 'stepForm';
 
 export const ProjectAdminSelectionStepForm = ({
+  id,
   votable,
   requirements,
   statuses,
@@ -66,6 +70,13 @@ export const ProjectAdminSelectionStepForm = ({
 }: Props) => {
   const intl = useIntl();
   const statusesWithId = statuses?.filter(s => s.id) || [];
+
+  const hasAlreadyAllowingProgressStepsChecked = useSelector((state: GlobalState) => {
+    return state.form.projectAdminForm.values.steps
+      .filter(step => step.__typename === 'SelectionStep' && step.id !== id)
+      .some(step => step.allowingProgressSteps === true);
+  });
+
   return (
     <>
       <StepVotesFields
@@ -115,13 +126,19 @@ export const ProjectAdminSelectionStepForm = ({
           </Field>
         </Flex>
       </ProjectSmallFieldsContainer>
-      <Field
-        component={toggle}
-        id="step-allowingProgressSteps"
-        name="allowingProgressSteps"
-        normalize={val => !!val}
-        label={<FormattedMessage id="admin.fields.step.allowingProgressSteps" />}
-      />
+      <Tooltip
+        label={hasAlreadyAllowingProgressStepsChecked ? intl.formatMessage({id: 'already-active-on-a-selection-step'}) : ''}>
+        <AppBox width="fit-content">
+          <Field
+            component={toggle}
+            id="step-allowingProgressSteps"
+            name="allowingProgressSteps"
+            normalize={val => !!val}
+            label={<FormattedMessage id="admin.fields.step.allowingProgressSteps" />}
+            disabled={hasAlreadyAllowingProgressStepsChecked}
+          />
+        </AppBox>
+      </Tooltip>
       {renderSubSection('admin.fields.step.statuses')}
       <FieldArray
         name="statuses"

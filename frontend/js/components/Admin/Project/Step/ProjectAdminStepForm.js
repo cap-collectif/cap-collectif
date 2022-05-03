@@ -633,6 +633,7 @@ export function ProjectAdminStepForm({
           )}
           {step.__typename === 'SelectionStep' && (
             <ProjectAdminSelectionStepForm
+              id={step.id}
               isBudgetEnabled={isBudgetEnabled}
               isTresholdEnabled={isTresholdEnabled}
               isSecretBallotEnabled={isSecretBallotEnabled}

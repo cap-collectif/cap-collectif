@@ -47,7 +47,7 @@ export const Tooltip = ({
   visible,
   className,
   baseId,
-  zIndex,
+  zIndex = 1100,
   ...props
 }: TooltipProps) => {
   const tooltip = useTooltipState({
@@ -89,7 +89,6 @@ export const Tooltip = ({
               exit={{ opacity: 0 }}
               transition={LAYOUT_TRANSITION_SPRING}
               className={cn('cap-tooltip', className)}
-              zIndex="tooltip"
               {...props}>
               <Arrow {...tooltip} />
               {typeof label === 'string' && (
