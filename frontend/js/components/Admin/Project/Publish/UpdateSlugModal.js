@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, useFragment } from 'react-relay';
-import { FormattedHTMLMessage, type IntlShape } from 'react-intl';
+import { FormattedHTMLMessage, useIntl, type IntlShape } from 'react-intl';
 import styled from 'styled-components';
 import { Field, reduxForm, submit } from 'redux-form';
 import { useSelector } from 'react-redux';
@@ -90,7 +90,6 @@ const UpdateSlugModal = ({
   project: projectFragment,
   show,
   onClose,
-  intl,
   handleSubmit,
   dispatch,
   pristine,
@@ -100,7 +99,7 @@ const UpdateSlugModal = ({
   ...ReduxFormFormProps,
 }) => {
   const project = useFragment(FRAGMENT, projectFragment);
-
+  const intl = useIntl();
   const agree = useSelector(state => state.form[formName].values.agree);
   const slug = useSelector(state => state.form[formName].values.slug);
 
@@ -109,7 +108,10 @@ const UpdateSlugModal = ({
   if (!project) return null;
 
   return (
-    <Modal show={show} onClose={onClose} ariaLabel={intl.formatMessage({ id: 'update-project-slug' })}>
+    <Modal
+      show={show}
+      onClose={onClose}
+      ariaLabel={intl.formatMessage({ id: 'update-project-slug' })}>
       <form id={formName} onSubmit={handleSubmit}>
         <Modal.Header borderBottom="normal" borderColor="gray.200" pb={6}>
           <Text fontWeight={600} color="blue.900" fontSize={4}>

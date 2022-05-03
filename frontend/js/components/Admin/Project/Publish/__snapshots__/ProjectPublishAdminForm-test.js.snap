@@ -9,10 +9,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
-        <FormattedMessage
-          id="global.publication"
-          values={Object {}}
-        />
+        global.publication
       </h4>
     </ProjectAdminFormstyle__ProjectBoxHeader>
     <div
@@ -27,12 +24,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
           }
           component={[Function]}
           id="project-publishedAt"
-          label={
-            <FormattedMessage
-              id="global.date.text"
-              values={Object {}}
-            />
-          }
+          label="global.date.text"
           name="publishedAt"
           type="datetime"
         />
@@ -43,10 +35,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
         name="archived"
         type="checkbox"
       >
-        <FormattedMessage
-          id="archive.project"
-          values={Object {}}
-        />
+        archive.project
       </Field>
       <ForwardRef
         alignItems="center"
@@ -54,10 +43,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
       >
         <ProjectAdminFormstyle__PermalinkWrapper>
           <strong>
-            <FormattedMessage
-              id="permalink"
-              values={Object {}}
-            />
+            permalink
              :
           </strong>
            
@@ -107,10 +93,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
-        <FormattedMessage
-          id="global.publication"
-          values={Object {}}
-        />
+        global.publication
       </h4>
     </ProjectAdminFormstyle__ProjectBoxHeader>
     <div
@@ -125,12 +108,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
           }
           component={[Function]}
           id="project-publishedAt"
-          label={
-            <FormattedMessage
-              id="global.date.text"
-              values={Object {}}
-            />
-          }
+          label="global.date.text"
           name="publishedAt"
           type="datetime"
         />
@@ -140,21 +118,11 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
           autoload={true}
           component={[Function]}
           id="project-locale"
-          label={
-            <FormattedMessage
-              id="form.label_locale"
-              values={Object {}}
-            />
-          }
+          label="form.label_locale"
           labelClassName="control-label"
           loadOptions={[Function]}
           name="locale"
-          placeholder={
-            <FormattedMessage
-              id="locale.all-locales"
-              values={Object {}}
-            />
-          }
+          placeholder="locale.all-locales"
           role="combobox"
           selectFieldIsObject={true}
         />
@@ -165,10 +133,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
         name="archived"
         type="checkbox"
       >
-        <FormattedMessage
-          id="archive.project"
-          values={Object {}}
-        />
+        archive.project
       </Field>
       <ForwardRef
         alignItems="center"
@@ -176,10 +141,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
       >
         <ProjectAdminFormstyle__PermalinkWrapper>
           <strong>
-            <FormattedMessage
-              id="permalink"
-              values={Object {}}
-            />
+            permalink
              :
           </strong>
            
@@ -245,10 +207,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
-        <FormattedMessage
-          id="global.publication"
-          values={Object {}}
-        />
+        global.publication
       </h4>
     </ProjectAdminFormstyle__ProjectBoxHeader>
     <div
@@ -263,12 +222,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
           }
           component={[Function]}
           id="project-publishedAt"
-          label={
-            <FormattedMessage
-              id="global.date.text"
-              values={Object {}}
-            />
-          }
+          label="global.date.text"
           name="publishedAt"
           type="datetime"
         />
@@ -278,21 +232,11 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
           autoload={true}
           component={[Function]}
           id="project-locale"
-          label={
-            <FormattedMessage
-              id="form.label_locale"
-              values={Object {}}
-            />
-          }
+          label="form.label_locale"
           labelClassName="control-label"
           loadOptions={[Function]}
           name="locale"
-          placeholder={
-            <FormattedMessage
-              id="locale.all-locales"
-              values={Object {}}
-            />
-          }
+          placeholder="locale.all-locales"
           role="combobox"
           selectFieldIsObject={true}
         />
@@ -303,10 +247,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
         name="archived"
         type="checkbox"
       >
-        <FormattedMessage
-          id="archive.project"
-          values={Object {}}
-        />
+        archive.project
       </Field>
       <ForwardRef
         alignItems="center"
@@ -314,10 +255,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
       >
         <ProjectAdminFormstyle__PermalinkWrapper>
           <strong>
-            <FormattedMessage
-              id="permalink"
-              values={Object {}}
-            />
+            permalink
              :
           </strong>
            
@@ -380,10 +318,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
-        <FormattedMessage
-          id="global.publication"
-          values={Object {}}
-        />
+        global.publication
       </h4>
     </ProjectAdminFormstyle__ProjectBoxHeader>
     <div
@@ -398,12 +333,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
           }
           component={[Function]}
           id="project-publishedAt"
-          label={
-            <FormattedMessage
-              id="global.date.text"
-              values={Object {}}
-            />
-          }
+          label="global.date.text"
           name="publishedAt"
           type="datetime"
         />
@@ -414,10 +344,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
         name="archived"
         type="checkbox"
       >
-        <FormattedMessage
-          id="archive.project"
-          values={Object {}}
-        />
+        archive.project
       </Field>
       <ForwardRef
         alignItems="center"
@@ -425,10 +352,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
       >
         <ProjectAdminFormstyle__PermalinkWrapper>
           <strong>
-            <FormattedMessage
-              id="permalink"
-              values={Object {}}
-            />
+            permalink
              :
           </strong>
            

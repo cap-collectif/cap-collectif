@@ -9,7 +9,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class SectionUrlResolver implements ResolverInterface
 {
-    private $router;
+    private RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {
@@ -26,7 +26,9 @@ class SectionUrlResolver implements ResolverInterface
             [
                 'projectSlug' => $project->getSlug(),
                 'stepSlug' => $step->getSlug(),
-                'consultationSlug' => $type->getConsultation()->getSlug(),
+                'consultationSlug' => $type->getConsultation()
+                    ? $type->getConsultation()->getSlug()
+                    : '',
                 'opinionTypeSlug' => $type->getSlug(),
             ],
             UrlGeneratorInterface::ABSOLUTE_URL

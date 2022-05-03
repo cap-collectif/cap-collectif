@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -38,7 +39,7 @@ class ProjectUrlResolver implements ResolverInterface
 
         $firstStep = $project->getFirstStep();
         // if no step, so we redirect to projects list page
-        if (!$firstStep) {
+        if (!$firstStep instanceof AbstractStep) {
             return $this->router->generate(
                 'app_project',
                 ['_locale' => $locale],

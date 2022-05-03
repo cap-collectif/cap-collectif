@@ -21,32 +21,28 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class StepController extends Controller
 {
     private TranslatorInterface $translator;
     private SerializerInterface $serializer;
-    private AuthorizationCheckerInterface $authorizationChecker;
     private OpinionSearch $opinionSearch;
     private VersionSearch $versionSearch;
 
     public function __construct(
         TranslatorInterface $translator,
         SerializerInterface $serializer,
-        AuthorizationCheckerInterface $authorizationChecker,
         OpinionSearch $opinionSearch,
         VersionSearch $versionSearch
     ) {
         $this->translator = $translator;
         $this->serializer = $serializer;
-        $this->authorizationChecker = $authorizationChecker;
         $this->opinionSearch = $opinionSearch;
         $this->versionSearch = $versionSearch;
     }
@@ -64,7 +60,7 @@ class StepController extends Controller
      */
     public function showStepAction(Project $project, OtherStep $step)
     {
-        if (!$project->canDisplay($this->getUser())) {
+        if (!$project->viewerCanSee($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -87,7 +83,7 @@ class StepController extends Controller
      */
     public function showPresentationAction(Project $project, PresentationStep $step)
     {
-        if (!$project->canDisplay($this->getUser())) {
+        if (!$project->viewerCanSee($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
         $projectSlug = $project->getSlug();
@@ -116,7 +112,7 @@ class StepController extends Controller
      */
     public function showDebateAction(Project $project, DebateStep $step)
     {
-        if (!$project->canDisplay($this->getUser())) {
+        if (!$project->viewerCanSee($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -145,7 +141,7 @@ class StepController extends Controller
      */
     public function showRankingAction(Project $project, RankingStep $step)
     {
-        if (!$project->canDisplay($this->getUser())) {
+        if (!$project->viewerCanSee($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -195,7 +191,7 @@ class StepController extends Controller
      */
     public function showOpinionsRankingAction(Project $project, RankingStep $step, $page = 1)
     {
-        if (!$project->canDisplay($this->getUser())) {
+        if (!$project->viewerCanSee($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -233,7 +229,7 @@ class StepController extends Controller
      */
     public function showVersionsRankingAction(Project $project, RankingStep $step, $page = 1)
     {
-        if (!$project->canDisplay($this->getUser())) {
+        if (!$project->viewerCanSee($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -271,7 +267,7 @@ class StepController extends Controller
      */
     public function showCollectStepAction(Project $project, CollectStep $step)
     {
-        if (!$project->canDisplay($this->getUser())) {
+        if (!$project->viewerCanSee($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -303,7 +299,7 @@ class StepController extends Controller
         ?string $replyId = null
     ) {
         $viewer = $this->getUser();
-        if (!$project->canDisplay($viewer)) {
+        if (!$project->viewerCanSee($viewer)) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -356,7 +352,7 @@ class StepController extends Controller
      */
     public function showSelectionStepAction(Project $project, SelectionStep $step)
     {
-        if (!$project->canDisplay($this->getUser())) {
+        if (!$project->viewerCanSee($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -408,7 +404,7 @@ class StepController extends Controller
             ]);
         }
 
-        // To keep the same old URI to handle consultion show and supporting the new URI for showing a consultation
+        // To keep the same old URI to handle consultation show and supporting the new URI for showing a consultation
         // with a slug, we have to handle both case. If the step has only 1 consultation, we should keep the old behaviour
         if ($step->getFirstConsultation()) {
             $consultationSlug = $consultation

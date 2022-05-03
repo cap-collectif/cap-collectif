@@ -2,7 +2,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-relay';
-import { type IntlShape, FormattedMessage } from 'react-intl';
+import { type IntlShape, useIntl, FormattedMessage } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import renderComponent from '~/components/Form/Field';
 import { type ProjectPublishAdminForm_project } from '~relay/ProjectPublishAdminForm_project.graphql';
@@ -66,21 +66,21 @@ export const validate = (props: FormValues) => {
   return errors;
 };
 
-export const ProjectPublishAdminForm = ({ project, intl }: Props) => {
+export const ProjectPublishAdminForm = ({ project }: Props) => {
   const hasFeatureMultilangue = useFeatureFlag('multilangue');
   const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const intl = useIntl();
+
   return (
     <div className="col-md-12">
       <ProjectBoxContainer className="box container-fluid">
         <ProjectBoxHeader>
-          <h4>
-            <FormattedMessage id="global.publication" />
-          </h4>
+          <h4>{intl.formatMessage({ id: 'global.publication' })}</h4>
         </ProjectBoxHeader>
         <div className="box-content">
           <ProjectSmallFieldsContainer>
             <Field
-              label={<FormattedMessage id="global.date.text" />}
+              label={intl.formatMessage({ id: 'global.date.text' })}
               id="project-publishedAt"
               name="publishedAt"
               type="datetime"
@@ -95,12 +95,12 @@ export const ProjectPublishAdminForm = ({ project, intl }: Props) => {
                 component={select}
                 id="project-locale"
                 name="locale"
-                label={<FormattedMessage id="form.label_locale" />}
+                label={intl.formatMessage({ id: 'form.label_locale' })}
                 role="combobox"
                 aria-autocomplete="list"
                 aria-haspopup="true"
                 loadOptions={loadLocaleOptions}
-                placeholder={<FormattedMessage id="locale.all-locales" />}
+                placeholder={intl.formatMessage({ id: 'locale.all-locales' })}
               />
             )}
           </ProjectSmallFieldsContainer>
@@ -109,13 +109,11 @@ export const ProjectPublishAdminForm = ({ project, intl }: Props) => {
             type="checkbox"
             name="archived"
             component={renderComponent}>
-            <FormattedMessage id="archive.project" />
+            {intl.formatMessage({ id: 'archive.project' })}
           </Field>
           <Flex alignItems="center" mb={4}>
             <PermalinkWrapper>
-              <strong>
-                <FormattedMessage id="permalink" /> :
-              </strong>{' '}
+              <strong>{intl.formatMessage({ id: 'permalink' })} :</strong>{' '}
               <a href={project?.url} target="blank">
                 {project?.url}
               </a>

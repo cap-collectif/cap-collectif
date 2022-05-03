@@ -15,7 +15,7 @@ Object {
     "errorCode": null,
     "project": Object {
       "slug": "toto-1234-eeea",
-      "url": "https://capco.test/consultation/toto-1234-eeea/presentation/presentation-1",
+      "url": "https://capco.test/project/toto-1234-eeea/presentation/presentation-1",
     },
   },
 }

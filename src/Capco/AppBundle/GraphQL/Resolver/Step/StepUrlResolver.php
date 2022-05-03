@@ -48,7 +48,9 @@ class StepUrlResolver implements ResolverInterface
         $routeName = null;
         switch (ClassUtils::getClass($step)) {
             case PresentationStep::class:
-                $routeName = 'app_consultation_show_presentation';
+                $routeName = $step->isConsultationStep()
+                    ? 'app_consultation_show_presentation'
+                    : 'app_project_show_presentation';
 
                 break;
             case CollectStep::class:
