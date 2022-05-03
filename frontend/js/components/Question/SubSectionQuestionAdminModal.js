@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { Field, getFormSyncErrors, formValueSelector, change } from 'redux-form';
+import { Field, getFormSyncErrors, formValueSelector, change, arrayPop } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -156,6 +156,7 @@ const SubSectionQuestionAdminModal = ({
             onClose={() => {
               const isEmpty = resetSection();
               onClose(isEmpty);
+              dispatch(arrayPop(formName, 'questions'));
             }}
           />
           <SubmitButton
@@ -174,12 +175,6 @@ const SubSectionQuestionAdminModal = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    dispatch,
-  };
-};
-
 const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
   return {
@@ -190,7 +185,4 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   };
 };
 
-export default connect<any, any, _, _, _, _>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(injectIntl(SubSectionQuestionAdminModal));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(SubSectionQuestionAdminModal));
