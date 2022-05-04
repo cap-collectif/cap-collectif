@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\ProposalForm;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\CategoryImage;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Enum\ViewConfiguration;
@@ -82,15 +83,117 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
     {
         $arguments = $input->getArrayCopy();
         $id = $arguments['proposalFormId'];
+        $oldChoices = null;
 
-        /** @var ProposalForm $proposalForm */
-        $proposalForm = $this->proposalFormRepo->find($id);
-        if (!$proposalForm) {
-            throw new UserError(sprintf('Unknown proposal form with id "%s"', $id));
-        }
+        $proposalForm = $this->getProposalFormFromUUID($id);
+
         unset($arguments['proposalFormId']);
         $form = $this->formFactory->create(ProposalFormUpdateType::class, $proposalForm);
+        $arguments = $this->districtsProcess($proposalForm, $arguments);
+        $arguments = $this->categoriesProcess($proposalForm, $arguments);
 
+        $hasViewConfigurationChanged = $this->getViewConfigurationChanged($arguments, $proposalForm);
+
+        if (isset($arguments['questions'])) {
+            $oldChoices = $this->getQuestionChoicesValues($proposalForm->getId());
+            $this->handleQuestions($form, $proposalForm, $arguments, 'proposal');
+        } else {
+            $form->submit($arguments, false);
+        }
+
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->logger->error(__METHOD__.$form->getErrors(true, false));
+
+            throw GraphQLException::fromFormErrors($form);
+        }
+
+        try {
+            ViewConfiguration::checkProposalForm($proposalForm);
+        } catch (ViewConfigurationException $exception) {
+            throw new UserError($exception->getMessage());
+        }
+
+        if ($hasViewConfigurationChanged) {
+            ViewConfiguration::updateStepsFromProposal($proposalForm);
+        }
+
+        // Associate the new categoryImage from uploaded image to proposalCategory
+        $arguments = $this->associateNewCategoryImageToProposalCategory($proposalForm, $arguments);
+
+        $this->em->flush();
+
+        $this->reIndexChoices($oldChoices, $proposalForm);
+
+        return ['proposalForm' => $proposalForm];
+    }
+
+    private function getViewConfigurationChanged(array $arguments, ProposalForm $proposalForm): bool
+    {
+        return
+            (\array_key_exists('isGridViewEnabled', $arguments) &&
+                $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled()) ||
+            (\array_key_exists('isListViewEnabled', $arguments) &&
+                $arguments['isListViewEnabled'] !== $proposalForm->isListViewEnabled()) ||
+            (\array_key_exists('isMapViewEnabled', $arguments) &&
+                $arguments['isMapViewEnabled'] !== $proposalForm->isMapViewEnabled());
+    }
+
+    private function getProposalFormFromUUID(string $uuid): ProposalForm
+    {
+        $proposalForm = $this->proposalFormRepo->find($uuid);
+        if (!$proposalForm) {
+            throw new UserError(sprintf('Unknown proposal form with id "%s"', $uuid));
+        }
+
+        return $proposalForm;
+    }
+
+    private function reIndexChoices(?array $oldChoices, ProposalForm $proposalForm)
+    {
+        if (isset($oldChoices)) {
+            // We index all the question choices synchronously to avoid a
+            // difference between datas saved in db and in elasticsearch.
+            $newChoices = $this->getQuestionChoicesValues($proposalForm->getId());
+            $mergedChoices = array_unique(array_merge($oldChoices, $newChoices));
+            if (\count($mergedChoices) < 1500) {
+                $this->indexQuestionChoicesValues($mergedChoices);
+            }
+        }
+    }
+
+    private function associateNewCategoryImageToProposalCategory(ProposalForm $proposalForm, array $arguments): array
+    {
+        if (isset($arguments['categories'])) {
+            $proposalCategories = $proposalForm->getCategories();
+            /** @var ProposalCategory $proposalCategory */
+            foreach ($proposalCategories as $proposalCategory) {
+                foreach ($arguments['categories'] as &$category) {
+                    if (
+                        isset($category['newCategoryImage']) &&
+                        null !== $category['newCategoryImage'] &&
+                        !$this->categoryImageRepository->findByImage(
+                            $category['newCategoryImage']
+                        ) &&
+                        $category['name'] === $proposalCategory->getName()
+                    ) {
+                        $image = $this->mediaRepository->find($category['newCategoryImage']);
+                        if (null !== $image) {
+                            $categoryImage = (new CategoryImage())->setImage(
+                                $this->mediaRepository->find($image)
+                            );
+                            $proposalCategory->setCategoryImage($categoryImage);
+                        }
+                    }
+                    unset($category);
+                }
+            }
+        }
+
+        return $arguments;
+    }
+
+    private function districtsProcess(ProposalForm $proposalForm, array $arguments): array
+    {
         if (isset($arguments['districts'])) {
             $districtsIds = [];
             foreach ($arguments['districts'] as $dataDistrict) {
@@ -121,6 +224,12 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
                 $arguments['districts'][$districtKey] = $dataDistrict;
             }
         }
+
+        return $arguments;
+    }
+
+    private function categoriesProcess(ProposalForm $proposalForm, array $arguments): array
+    {
         if (isset($arguments['categories'])) {
             $categoriesIds = [];
             foreach ($arguments['categories'] as $dataCategory) {
@@ -141,76 +250,7 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
             }
         }
 
-        $hasViewConfigurationChanged =
-            (\array_key_exists('isGridViewEnabled', $arguments) &&
-                $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled()) ||
-            (\array_key_exists('isListViewEnabled', $arguments) &&
-                $arguments['isListViewEnabled'] !== $proposalForm->isListViewEnabled()) ||
-            (\array_key_exists('isMapViewEnabled', $arguments) &&
-                $arguments['isMapViewEnabled'] !== $proposalForm->isMapViewEnabled());
-
-        if (isset($arguments['questions'])) {
-            $oldChoices = $this->getQuestionChoicesValues($proposalForm->getId());
-            $this->handleQuestions($form, $proposalForm, $arguments, 'proposal');
-        } else {
-            $form->submit($arguments, false);
-        }
-
-        if ($form->isSubmitted() && !$form->isValid()) {
-            $this->logger->error(__METHOD__ . $form->getErrors(true, false));
-
-            throw GraphQLException::fromFormErrors($form);
-        }
-
-        try {
-            ViewConfiguration::checkProposalForm($proposalForm);
-        } catch (ViewConfigurationException $exception) {
-            throw new UserError($exception->getMessage());
-        }
-
-        if ($hasViewConfigurationChanged) {
-            ViewConfiguration::updateStepsFromProposal($proposalForm);
-        }
-
-        // Associate the new categoryImage from uploaded image to proposalCategory
-        if (isset($arguments['categories'])) {
-            $proposalCategories = $proposalForm->getCategories();
-            /** @var ProposalCategory $proposalCategory */
-            foreach ($proposalCategories as $proposalCategory) {
-                foreach ($arguments['categories'] as &$category) {
-                    if (
-                        isset($category['newCategoryImage']) &&
-                        null !== $category['newCategoryImage'] &&
-                        !$this->categoryImageRepository->findByImage(
-                            $category['newCategoryImage']
-                        ) &&
-                        $category['name'] === $proposalCategory->getName()
-                    ) {
-                        $image = $this->mediaRepository->find($category['newCategoryImage']);
-                        if (null !== $image) {
-                            $categoryImage = (new CategoryImage())->setImage(
-                                $this->mediaRepository->find($image)
-                            );
-                            $proposalCategory->setCategoryImage($categoryImage);
-                        }
-                    }
-                    unset($category);
-                }
-            }
-        }
-        $this->em->flush();
-
-        if (isset($oldChoices)) {
-            // We index all the question choices synchronously to avoid a
-            // difference between datas saved in db and in elasticsearch.
-            $newChoices = $this->getQuestionChoicesValues($proposalForm->getId());
-            $mergedChoices = array_unique(array_merge($oldChoices, $newChoices));
-            if (\count($mergedChoices) < 1500) {
-                $this->indexQuestionChoicesValues($mergedChoices);
-            }
-        }
-
-        return ['proposalForm' => $proposalForm];
+        return $arguments;
     }
 
     private function defaultBorderIfEnabled(array $dataDistrict): array

@@ -74,7 +74,7 @@ const mutation = /* GraphQL */ `
 
 const defaultInput = {
   proposalFormId: 'proposalForm1',
-  title: 'New title',
+  title: '   New title   ',
   titleHelpText: 'Title help',
   description: 'New description',
   descriptionHelpText: 'Description help',
@@ -208,7 +208,7 @@ describe('Internal | updateProposalForm', () => {
             },
             {
               question: {
-                title: 'Documents à remplir',
+                title: ' Documents à remplir     ',
                 helpText: '5 fichiers max',
                 private: false,
                 required: true,
@@ -251,14 +251,14 @@ describe('Internal | updateProposalForm', () => {
                 choices: [
                   {
                     id: 'UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzMw==',
-                    title: 'Non',
+                    title: '  Non   ',
                     description: null,
                     color: null,
                     image: null,
                   },
                   {
                     id: 'UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNA==',
-                    title: 'Peut être',
+                    title: '    Peut être    ',
                     description: null,
                     color: null,
                     image: null,
@@ -286,7 +286,7 @@ describe('Internal | updateProposalForm', () => {
             {
               question: {
                 id: 'UXVlc3Rpb246NDg=',
-                title: 'Question Multiple?',
+                title: 'Question Multiple?           ',
                 helpText: null,
                 description: null,
                 type: 'radio',
@@ -296,7 +296,7 @@ describe('Internal | updateProposalForm', () => {
                 choices: [
                   {
                     id: 'UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzMw==',
-                    title: 'Non',
+                    title: 'Non           ',
                     description: null,
                     color: null,
                     image: null,

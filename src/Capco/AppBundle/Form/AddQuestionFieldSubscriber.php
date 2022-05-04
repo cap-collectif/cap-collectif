@@ -16,8 +16,8 @@ use Symfony\Component\Form\FormInterface;
 
 class AddQuestionFieldSubscriber implements EventSubscriberInterface
 {
-    protected $factory;
-    protected $arrayHydrator;
+    protected FormFactoryInterface $factory;
+    protected ArrayHydrator $arrayHydrator;
 
     public function __construct(FormFactoryInterface $factory, ArrayHydrator $arrayHydrator)
     {
@@ -49,6 +49,8 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
         // because of abstract inheritance, we need to handle creation and mapping to Doctrine.
         $form = $event->getForm();
         $question = null;
+
+        $data['question']['title'] = trim($data['question']['title']);
 
         if (AbstractQuestion::QUESTION_TYPE_MEDIAS === $data['question']['type']) {
             $question = new MediaQuestion();

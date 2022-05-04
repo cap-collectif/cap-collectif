@@ -118,11 +118,20 @@ const validate = (values: FormValues) => {
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { questionnaireResultsEnabled } = props;
-  values.questions.map(question => {
+  values.questions.map((question, index) => {
     /* $FlowFixMe */
     if (question.importedResponses || question.importedResponses === null) {
       /* $FlowFixMe we need to do something about the question types but I don't have time */
       delete question.importedResponses;
+    }
+    // $FlowFixMe
+    values.questions[index].title = values.questions[index].title.trim();
+    if (question.choices) {
+      // $FlowFixMe
+      question.choices.map((choice, key) => {
+        // $FlowFixMe
+        question.choices[key].title = question.choices[key].title.trim();
+      });
     }
   });
 

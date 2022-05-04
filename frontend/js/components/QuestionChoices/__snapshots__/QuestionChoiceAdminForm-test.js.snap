@@ -5,7 +5,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
   className="form-group"
   id="questions_choice_panel_personal"
 >
-  <Connect(injectIntl(QuestionChoiceAdminModal))
+  <Connect(QuestionChoiceAdminModal)
     formName="formName"
     isCreating={true}
     member={null}
@@ -63,7 +63,7 @@ exports[`<ProposalUserVoteItem /> should render correctly modal to edit question
   className="form-group"
   id="questions_choice_panel_personal"
 >
-  <Connect(injectIntl(QuestionChoiceAdminModal))
+  <Connect(QuestionChoiceAdminModal)
     formName="formName"
     isCreating={true}
     member="questions[0].choices[3]"
@@ -174,7 +174,7 @@ exports[`<ProposalUserVoteItem /> should render correctly modal to import file o
     show={true}
     type="type"
   />
-  <Connect(injectIntl(QuestionChoiceAdminModal))
+  <Connect(QuestionChoiceAdminModal)
     formName="formName"
     isCreating={true}
     member={null}
@@ -232,7 +232,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without choices 1`] = 
   className="form-group"
   id="questions_choice_panel_personal"
 >
-  <Connect(injectIntl(QuestionChoiceAdminModal))
+  <Connect(QuestionChoiceAdminModal)
     formName="formName"
     isCreating={true}
     member={null}

@@ -336,11 +336,18 @@ const isJsonString = str => {
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl, defaultLanguage } = props;
 
-  values.questions.map(question => {
+  values.questions.map((question, index) => {
     if (question.importedResponses || question.importedResponses === null) {
       delete question.importedResponses;
     }
+    values.questions[index].title = values.questions[index].title.trim();
+    if(question.choices) {
+      question.choices.map((choice, key) => {
+        question.choices[key].title = question.choices[key].title.trim();
+      });
+    }
   });
+
   const {
     id,
     __id,

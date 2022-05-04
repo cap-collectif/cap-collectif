@@ -3,7 +3,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { QuestionChoiceAdminModal } from './QuestionChoiceAdminModal';
-import { intlMock } from '../../mocks';
 
 const defaultProps = {
   show: true,
@@ -15,7 +14,6 @@ const defaultProps = {
   dispatch: jest.fn(),
   formName: 'string',
   type: 'string',
-  intl: intlMock,
 };
 
 describe('<ProposalUserVoteItem />', () => {

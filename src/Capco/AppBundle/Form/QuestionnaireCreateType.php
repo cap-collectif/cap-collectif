@@ -15,6 +15,7 @@ class QuestionnaireCreateType extends AbstractType
         $builder->add('title', TextType::class, [
             'purify_html' => true,
             'purify_html_profile' => 'admin',
+            'trim' => true,
         ]);
         $builder->add('type');
     }

@@ -42,10 +42,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
           componentClass="h4"
           id="proposal-form-admin-question-modal-title-lg"
         >
-          <FormattedMessage
-            id="global-edit-answer"
-            values={Object {}}
-          />
+          global-edit-answer
         </ModalTitle>
       </div>
     </ModalHeader>
@@ -56,12 +53,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
       <Field
         component={[Function]}
         id="string.title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
+        label="global.title"
         name="string.title"
         type="text"
       />
@@ -72,18 +64,12 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
         id="string.description"
         label={
           <span>
-            <FormattedMessage
-              id="global.description"
-              values={Object {}}
-            />
+            global.description
             <span
               className="excerpt"
             >
                
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </span>
           </span>
         }
@@ -152,10 +138,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
           componentClass="h4"
           id="proposal-form-admin-question-modal-title-lg"
         >
-          <FormattedMessage
-            id="global-edit-answer"
-            values={Object {}}
-          />
+          global-edit-answer
         </ModalTitle>
       </div>
     </ModalHeader>
@@ -166,12 +149,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       <Field
         component={[Function]}
         id="string.title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
+        label="global.title"
         name="string.title"
         type="text"
       />
@@ -182,18 +160,12 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
         id="string.description"
         label={
           <span>
-            <FormattedMessage
-              id="global.description"
-              values={Object {}}
-            />
+            global.description
             <span
               className="excerpt"
             >
                
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </span>
           </span>
         }
@@ -203,12 +175,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       <Field
         component={[Function]}
         id="string.color"
-        label={
-          <FormattedMessage
-            id="global.color"
-            values={Object {}}
-          />
-        }
+        label="global.color"
         name="string.color"
         type="color-picker"
       />
@@ -274,10 +241,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
           componentClass="h4"
           id="proposal-form-admin-question-modal-title-lg"
         >
-          <FormattedMessage
-            id="global-edit-answer"
-            values={Object {}}
-          />
+          global-edit-answer
         </ModalTitle>
       </div>
     </ModalHeader>
@@ -288,12 +252,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
       <Field
         component={[Function]}
         id="string.title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
+        label="global.title"
         name="string.title"
         type="text"
       />
@@ -304,18 +263,12 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
         id="string.description"
         label={
           <span>
-            <FormattedMessage
-              id="global.description"
-              values={Object {}}
-            />
+            global.description
             <span
               className="excerpt"
             >
                
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </span>
           </span>
         }
@@ -328,18 +281,12 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
         id="proposal_media"
         label={
           <span>
-            <FormattedMessage
-              id="proposal.media"
-              values={Object {}}
-            />
+            proposal.media
             <span
               className="excerpt"
             >
                
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </span>
           </span>
         }
@@ -408,10 +355,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
           componentClass="h4"
           id="proposal-form-admin-question-modal-title-lg"
         >
-          <FormattedMessage
-            id="global-add-answer"
-            values={Object {}}
-          />
+          global-add-answer
         </ModalTitle>
       </div>
     </ModalHeader>
@@ -422,12 +366,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
       <Field
         component={[Function]}
         id="string.title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
+        label="global.title"
         name="string.title"
         type="text"
       />
@@ -438,18 +377,12 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
         id="string.description"
         label={
           <span>
-            <FormattedMessage
-              id="global.description"
-              values={Object {}}
-            />
+            global.description
             <span
               className="excerpt"
             >
                
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </span>
           </span>
         }
@@ -518,10 +451,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
           componentClass="h4"
           id="proposal-form-admin-question-modal-title-lg"
         >
-          <FormattedMessage
-            id="global-edit-answer"
-            values={Object {}}
-          />
+          global-edit-answer
         </ModalTitle>
       </div>
     </ModalHeader>
@@ -532,12 +462,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
       <Field
         component={[Function]}
         id="string.title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
+        label="global.title"
         name="string.title"
         type="text"
       />
@@ -548,18 +473,12 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
         id="string.description"
         label={
           <span>
-            <FormattedMessage
-              id="global.description"
-              values={Object {}}
-            />
+            global.description
             <span
               className="excerpt"
             >
                
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </span>
           </span>
         }
@@ -628,10 +547,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
           componentClass="h4"
           id="proposal-form-admin-question-modal-title-lg"
         >
-          <FormattedMessage
-            id="global-add-answer"
-            values={Object {}}
-          />
+          global-add-answer
         </ModalTitle>
       </div>
     </ModalHeader>
@@ -642,12 +558,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
       <Field
         component={[Function]}
         id="string.title"
-        label={
-          <FormattedMessage
-            id="global.title"
-            values={Object {}}
-          />
-        }
+        label="global.title"
         name="string.title"
         type="text"
       />
@@ -658,18 +569,12 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
         id="string.description"
         label={
           <span>
-            <FormattedMessage
-              id="global.description"
-              values={Object {}}
-            />
+            global.description
             <span
               className="excerpt"
             >
                
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
+              global.optional
             </span>
           </span>
         }

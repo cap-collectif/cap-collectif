@@ -15,6 +15,7 @@ class ApiQuestionChoiceType extends AbstractType
             'required' => true,
             'purify_html' => true,
             'purify_html_profile' => 'admin',
+            'trim' => true,
         ]);
     }
 

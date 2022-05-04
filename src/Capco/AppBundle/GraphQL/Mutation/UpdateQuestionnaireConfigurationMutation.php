@@ -3,14 +3,15 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
+use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
@@ -65,9 +66,8 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     public function __invoke(Argument $input, User $viewer): array
     {
         $arguments = $input->getArrayCopy();
-        $questionnaireId = GlobalId::fromGlobalId($arguments['questionnaireId'])['id'];
-        $questionnaire = $this->globalIdResolver->resolve($arguments['questionnaireId'], $viewer);
-
+        $questionnaire = $this->getQuestionnaire($arguments['questionnaireId'], $viewer);
+        $oldChoices = null;
         unset($arguments['questionnaireId']);
 
         $questionnaire->setUpdatedAt(new \Datetime());
@@ -78,7 +78,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         );
 
         if (isset($arguments['questions'])) {
-            $oldChoices = $this->getQuestionChoicesValues($questionnaireId);
+            $oldChoices = $this->getQuestionChoicesValues($questionnaire->getId());
             $this->handleQuestions($form, $questionnaire, $arguments, 'questionnaire');
         } else {
             $form->submit($arguments, false);
@@ -91,6 +91,34 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         }
         $this->em->flush();
 
+        $this->reIndex($oldChoices, $questionnaire->getId());
+
+        return ['questionnaire' => $questionnaire];
+    }
+
+    public function isGranted(string $id, User $viewer): bool
+    {
+        $questionnaire = $this->globalIdResolver->resolve($id, $viewer);
+
+        if ($questionnaire instanceof Questionnaire) {
+            return $this->authorizationChecker->isGranted(QuestionnaireVoter::EDIT, $questionnaire);
+        }
+
+        return false;
+    }
+
+    private function getQuestionnaire($questionnaireId, $viewer): Questionnaire
+    {
+        $questionnaire = $this->globalIdResolver->resolve($questionnaireId, $viewer);
+        if (!$questionnaire instanceof Questionnaire) {
+            throw new UserError('Questionnaire not found.');
+        }
+
+        return $questionnaire;
+    }
+
+    private function reIndex(?array $oldChoices, string $questionnaireId): void
+    {
         if (isset($oldChoices)) {
             // We index all the question choices synchronously to avoid a
             // difference between datas saved in db and in elasticsearch.
@@ -100,18 +128,5 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
                 $this->indexQuestionChoicesValues($mergedChoices);
             }
         }
-
-        return ['questionnaire' => $questionnaire];
-    }
-
-    public function isGranted(string $id, User $viewer): bool
-    {
-        $questionnaire = $this->globalIdResolver->resolve($id, $viewer);
-
-        if ($questionnaire) {
-            return $this->authorizationChecker->isGranted(QuestionnaireVoter::EDIT, $questionnaire);
-        }
-
-        return false;
     }
 }

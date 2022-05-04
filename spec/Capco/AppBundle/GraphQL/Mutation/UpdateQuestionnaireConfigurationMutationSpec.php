@@ -21,7 +21,6 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -75,7 +74,7 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
         $globalIdResolver
             ->resolve($arguments['questionnaireId'], $viewer)
             ->willReturn($questionnaire);
-
+        $questionnaire->getId()->willReturn('abc');
         $arguments = ['title' => 'abc'];
 
         $questionnaire->setUpdatedAt(Argument::type(\DateTime::class))->shouldBeCalled();
@@ -114,7 +113,7 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
             ->willReturn($questionnaire);
 
         $arguments = ['title' => 'abc'];
-
+        $questionnaire->getId()->willReturn('abc');
         $questionnaire
             ->setUpdatedAt(Argument::type(\DateTime::class))
             ->shouldBeCalled()
@@ -141,12 +140,11 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
     public function it_should_return_false_if_questionnaire_is_not_found(
         GlobalIdResolver $globalIdResolver,
         User $viewer,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $id = 'abc';
         $questionnaire = null;
         $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
-
         $authorizationChecker
             ->isGranted(QuestionnaireVoter::EDIT, $questionnaire)
             ->shouldNotBeCalled();
@@ -157,14 +155,14 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
     public function it_should_call_is_granted_if_questionnaire_is_found(
         GlobalIdResolver $globalIdResolver,
         User $viewer,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         Questionnaire $questionnaire
     ) {
         $id = 'abc';
         $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
-
         $authorizationChecker
             ->isGranted(QuestionnaireVoter::EDIT, $questionnaire)
+            ->willReturn(true)
             ->shouldBeCalled();
 
         $this->isGranted($id, $viewer);

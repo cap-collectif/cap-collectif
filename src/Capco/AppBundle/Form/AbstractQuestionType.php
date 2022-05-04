@@ -28,6 +28,7 @@ abstract class AbstractQuestionType extends AbstractType
             'strip_tags' => true,
             'purify_html' => true,
             'purify_html_profile' => 'admin',
+            'trim' => true,
         ]);
         $builder->add('helpText', PurifiedTextType::class, [
             'strip_tags' => true,

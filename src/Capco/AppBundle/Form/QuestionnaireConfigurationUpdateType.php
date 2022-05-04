@@ -21,6 +21,7 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
                 'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
+                'trim' => true,
             ])
             ->add('description', TextType::class, [
                 'purify_html' => true,
