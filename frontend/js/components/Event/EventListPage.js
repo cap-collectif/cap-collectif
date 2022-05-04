@@ -36,6 +36,9 @@ export const EventListPage = ({
   const isFuture =
     initialValues.status === 'all' ? null : initialValues.status === 'ongoing-and-future';
 
+  const urlSearch = new URLSearchParams(window.location.search);
+  const theme = urlSearch.get('theme') ?? null;
+
   return (
     <div className="event-page">
       <QueryRenderer
@@ -78,7 +81,7 @@ export const EventListPage = ({
             count: config.isMobile ? 25 : 50,
             cursor: null,
             search: null,
-            theme: null,
+            theme,
             userType: null,
             project,
             isFuture,
