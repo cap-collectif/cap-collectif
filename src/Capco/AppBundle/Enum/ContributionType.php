@@ -9,7 +9,7 @@ final class ContributionType implements EnumType
     public const COMMENT = 'COMMENT';
     public const ARGUMENT = 'ARGUMENT';
     public const DEBATEARGUMENT = 'DEBATEARGUMENT';
-    public const DEBATE_ANONYMOUS_ARGUMENT = 'DEBATE_ANONYMOUS_ARGUMENT';
+    public const DEBATEANONYMOUSARGUMENT = 'DEBATEANONYMOUSARGUMENT';
     public const SOURCE = 'SOURCE';
     public const PROPOSAL = 'PROPOSAL';
     public const REPLY = 'REPLY';
@@ -29,6 +29,7 @@ final class ContributionType implements EnumType
             self::COMMENT,
             self::ARGUMENT,
             self::DEBATEARGUMENT,
+            self::DEBATEANONYMOUSARGUMENT,
             self::SOURCE,
             self::PROPOSAL,
             self::REPLY,

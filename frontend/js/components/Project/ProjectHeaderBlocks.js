@@ -42,6 +42,9 @@ const FRAGMENT = graphql`
     debateArgument: contributions(type: DEBATEARGUMENT) {
       totalCount
     }
+    debateAnonymousArgument: contributions(type: DEBATEANONYMOUSARGUMENT) {
+      totalCount
+    }
     proposals: contributions(type: PROPOSAL) {
       totalCount
     }
@@ -73,6 +76,7 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
     repliesAnonymous,
     argument,
     debateArgument,
+    debateAnonymousArgument,
     proposals,
     votes,
     anonymousVotes,
@@ -136,6 +140,7 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
       sources.totalCount > 0 ||
       replies.totalCount > 0 ||
       argument.totalCount > 0 ||
+      debateAnonymousArgument.totalCount > 0 ||
       debateArgument.totalCount > 0
     ) {
       return (
@@ -153,11 +158,18 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
               {intl.formatMessage({ id: 'amendment-count' }, { count: opinionVersions.totalCount })}
             </Text>
           )}
-          {(argument.totalCount > 0 || debateArgument.totalCount > 0) && (
+          {(argument.totalCount > 0 ||
+            debateArgument.totalCount > 0 ||
+            debateAnonymousArgument.totalCount > 0) && (
             <Text marginBottom="0px !important">
               {intl.formatMessage(
                 { id: 'argument-count' },
-                { count: argument.totalCount + debateArgument.totalCount },
+                {
+                  count:
+                    argument.totalCount +
+                    debateArgument.totalCount +
+                    debateAnonymousArgument.totalCount,
+                },
               )}
             </Text>
           )}

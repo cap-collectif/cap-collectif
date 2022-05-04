@@ -36,7 +36,7 @@ class ContributionSearch extends Search
         ContributionType::OPINIONVERSION => OpinionVersion::class,
         ContributionType::ARGUMENT => Argument::class,
         ContributionType::DEBATEARGUMENT => DebateArgument::class,
-        ContributionType::DEBATE_ANONYMOUS_ARGUMENT => DebateAnonymousArgument::class,
+        ContributionType::DEBATEANONYMOUSARGUMENT => DebateAnonymousArgument::class,
         ContributionType::SOURCE => Source::class,
         ContributionType::REPLY => Reply::class,
         ContributionType::PROPOSAL => Proposal::class,
@@ -352,7 +352,6 @@ class ContributionSearch extends Search
             $contributions['ids'][] = $document->get('id');
         }
         $count = $response->getResponse()->getData()['hits']['total']['value'];
-
         if (!empty($contributions['types'])) {
             foreach ($contributions['types'] as $type => $contributionsData) {
                 if (ContributionType::isValid(strtoupper($type))) {

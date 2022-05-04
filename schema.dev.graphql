@@ -2988,6 +2988,9 @@ enum ContributionType {
   """Get contributions that are debate argument."""
   DEBATEARGUMENT
 
+  """Get contributions that are debate anonymous argument."""
+  DEBATEANONYMOUSARGUMENT
+
   """Get contributions that are a reply anonymous"""
   REPLY_ANONYMOUS
 }

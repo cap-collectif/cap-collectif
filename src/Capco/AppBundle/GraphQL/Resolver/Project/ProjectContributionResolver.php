@@ -29,7 +29,8 @@ class ProjectContributionResolver implements ResolverInterface
             $args = new Arg(['first' => 0]);
         }
         $totalCount = 0;
-        if (!$project->isExternal()) {
+        $isInternalProject = !$project->isExternal();
+        if ($isInternalProject) {
             $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
                 &$totalCount,
                 $project,
@@ -44,14 +45,14 @@ class ProjectContributionResolver implements ResolverInterface
                     $order = 'last';
                 }
 
-                if ($args->offsetGet('type') === 'REPLY_ANONYMOUS') {
+                if ('REPLY_ANONYMOUS' === $args->offsetGet('type')) {
                     $filters['_type'] = ['replyAnonymous'];
                 } else {
                     $filters['_type'] = $args->offsetGet('type')
                         ? [
                             \call_user_func([
                                 ContributionSearch::CONTRIBUTION_TYPE_CLASS_MAPPING[
-                                $args->offsetGet('type')
+                                    $args->offsetGet('type')
                                 ],
                                 'getElasticsearchTypeName',
                             ]),
