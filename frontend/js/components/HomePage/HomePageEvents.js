@@ -118,7 +118,7 @@ class HomePageEvents extends React.Component<Props> {
             $count: Int
             $orderBy: EventOrder!
             $isFuture: Boolean!
-            $isAuthenticated: Boolean
+            $isAuthenticated: Boolean!
           ) {
             events(orderBy: $orderBy, first: $count, isFuture: $isFuture) {
               edges {
