@@ -1,8 +1,8 @@
 const QuestionResponsesCivicIAQuery = /** GraphQL */ `
-  query QuestionResponsesCivicIAQuery($questionId: ID!) {
+  query QuestionResponsesCivicIAQuery($questionId: ID!, $sentimentFilter: CivicIASentiment) {
     question: node(id: $questionId) {
       ... on Question {
-        responses {
+        responses (iaSentiment: $sentimentFilter) {
           edges {
             node {
               ... on ValueResponse {
@@ -25,6 +25,7 @@ describe('Internal|Question.civicIA', () => {
         QuestionResponsesCivicIAQuery,
         {
           questionId: 2,
+          sentimentFilter: null,
         },
         'internal_user',
       ),
@@ -36,6 +37,19 @@ describe('Internal|Question.civicIA', () => {
         QuestionResponsesCivicIAQuery,
         {
           questionId: 2,
+          sentimentFilter: null,
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+  it('get civicIA analysis on negative responses', async () => {
+    await expect(
+      graphql(
+        QuestionResponsesCivicIAQuery,
+        {
+          questionId: 2,
+          sentimentFilter: 'NEGATIVE',
         },
         'internal_admin',
       ),

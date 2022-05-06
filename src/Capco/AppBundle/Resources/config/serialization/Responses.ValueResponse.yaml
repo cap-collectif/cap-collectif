@@ -2,3 +2,5 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     attributes:
         value:
             groups: [Proposals, Replies]
+        iaSentiment:
+            groups: [Proposals, Replies, ElasticsearchResponse]

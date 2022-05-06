@@ -6916,6 +6916,9 @@ type MajorityQuestion implements Question & Node {
 
     """Get responses in which the term appears."""
     term: String
+
+    """Get responses matching given sentiment."""
+    iaSentiment: CivicIASentiment = null
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -7111,6 +7114,9 @@ type MediaQuestion implements Question & Node {
 
     """Get responses in which the term appears."""
     term: String
+
+    """Get responses matching given sentiment."""
+    iaSentiment: CivicIASentiment = null
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -7192,6 +7198,9 @@ type MultipleChoiceQuestion implements Question & Node {
 
     """Get responses in which the term appears."""
     term: String
+
+    """Get responses matching given sentiment."""
+    iaSentiment: CivicIASentiment = null
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -11472,6 +11481,9 @@ interface Question {
 
     """Get responses in which the term appears."""
     term: String
+
+    """Get responses matching given sentiment."""
+    iaSentiment: CivicIASentiment = null
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -13135,6 +13147,9 @@ type SectionQuestion implements Question & Node {
 
     """Get responses in which the term appears."""
     term: String
+
+    """Get responses matching given sentiment."""
+    iaSentiment: CivicIASentiment = null
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -13705,6 +13720,9 @@ type SimpleQuestion implements Question & Node {
 
     """Get responses in which the term appears."""
     term: String
+
+    """Get responses matching given sentiment."""
+    iaSentiment: CivicIASentiment = null
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!

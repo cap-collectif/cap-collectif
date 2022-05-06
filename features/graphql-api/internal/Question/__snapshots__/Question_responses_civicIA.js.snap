@@ -130,6 +130,24 @@ Object {
 }
 `;
 
+exports[`Internal|Question.civicIA get civicIA analysis on negative responses 1`] = `
+Object {
+  "question": Object {
+    "responses": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "iaCategory": "sport",
+            "iaReadability": 37,
+            "iaSentiment": "NEGATIVE",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`Internal|Question.civicIA get civicIA analysis on responses 1`] = `
 Object {
   "question": Object {

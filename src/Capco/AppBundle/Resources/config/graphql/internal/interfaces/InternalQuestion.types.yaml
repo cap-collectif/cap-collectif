@@ -18,6 +18,10 @@ InternalQuestion:
                     term:
                         type: 'String'
                         description: 'Get responses in which the term appears.'
+                    iaSentiment:
+                        type: 'CivicIASentiment'
+                        defaultValue: null
+                        description: 'Get responses matching given sentiment.'
             number:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
                 type: 'Int!'

@@ -44,6 +44,7 @@ class QuestionResponsesResolver implements ResolverInterface
             isset($arguments['withNotConfirmedUser']) &&
             true === $arguments['withNotConfirmedUser'];
         $term = $arguments['term'] ?? null;
+        $sentimentFilter = $args->offsetGet('iaSentiment');
 
         // Schema design is wrong but let's return empty connection for now…
         if ($question instanceof SectionQuestion) {
@@ -54,13 +55,15 @@ class QuestionResponsesResolver implements ResolverInterface
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $question,
             $withNotConfirmedUser,
-            $term
+            $term,
+            $sentimentFilter
         ) {
             try {
                 return $this->responseSearch->getResponsesByQuestion(
                     $question,
                     $withNotConfirmedUser,
                     $term,
+                    $sentimentFilter,
                     $limit,
                     $cursor
                 );

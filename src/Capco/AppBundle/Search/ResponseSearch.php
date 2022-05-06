@@ -77,6 +77,7 @@ class ResponseSearch extends Search
         AbstractQuestion $question,
         bool $withNotConfirmedUser = false,
         ?string $term = null,
+        ?string $sentimentFilter = null,
         int $limit = 20,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
@@ -94,6 +95,10 @@ class ResponseSearch extends Search
                     ->setFieldQuery('textValue', Sanitizer::escape($term, [' ']))
                     ->setFieldOperator('textValue', Query\Match::OPERATOR_AND)
             );
+        }
+
+        if ($sentimentFilter) {
+            $boolQuery->addFilter(new Term(['iaSentiment' => strtolower($sentimentFilter)]));
         }
 
         $query = new Query($boolQuery);
