@@ -22,8 +22,10 @@ type Props = {|
   },
   backgroundColor?: ?string,
   labelClassName?: string,
+  // use this one to set class on div before form-group
   divClassName?: string,
   wrapperClassName?: string,
+  // use this one to set class on div on form-group
   groupClassName?: ?string,
   help?: string,
   helpPrint?: boolean,

@@ -20,6 +20,7 @@ describe('<ProjectAdminSelectionStepForm />', () => {
     stepFormName: 'defaultForm',
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     endAt: '2050-01-01',
+    isFranceConnectConfigured: true,
   };
 
   it('renders correctly with no initial data', () => {
@@ -53,6 +54,7 @@ describe('<ProjectAdminSelectionStepForm />', () => {
       ],
       endAt: null,
       fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
+      isFranceConnectConfigured: true,
     };
     const wrapper = shallow(
       <MockProviders>

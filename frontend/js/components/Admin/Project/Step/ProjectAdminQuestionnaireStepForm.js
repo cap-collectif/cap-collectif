@@ -21,6 +21,7 @@ type Props = {|
   questionnaire?: {| label: string, value: string |},
   isAnonymousParticipationAllowed: boolean,
   fcAllowedData: FranceConnectAllowedData,
+  isFranceConnectConfigured: boolean,
   footerUsingJoditWysiwyg?: ?boolean,
 |};
 
@@ -87,6 +88,7 @@ export const ProjectAdminQuestionnaireStepForm = ({
   requirements,
   isAnonymousParticipationAllowed,
   fcAllowedData,
+  isFranceConnectConfigured,
   footerUsingJoditWysiwyg,
 }: Props) => {
   const { user } = useSelector((state: GlobalState) => state.user);
@@ -132,6 +134,7 @@ export const ProjectAdminQuestionnaireStepForm = ({
             formName={formName}
             requirements={requirements}
             fcAllowedData={fcAllowedData}
+            isFranceConnectConfigured={isFranceConnectConfigured}
           />
           <Button
             id="js-btn-create-step"

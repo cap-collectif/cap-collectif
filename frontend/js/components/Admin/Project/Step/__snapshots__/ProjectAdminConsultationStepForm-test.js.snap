@@ -61,6 +61,7 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with data 1`] = 
       }
     }
     formName="stepForm"
+    isFranceConnectConfigured={true}
     name="requirements"
     requirements={
       Array [
@@ -167,6 +168,7 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with no initial 
       }
     }
     formName="stepForm"
+    isFranceConnectConfigured={true}
     name="requirements"
   />
   <Button

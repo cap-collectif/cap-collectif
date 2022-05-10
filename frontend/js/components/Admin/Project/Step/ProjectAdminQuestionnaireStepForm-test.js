@@ -21,6 +21,7 @@ describe('<ProjectAdminQuestionnaireStepForm />', () => {
     ],
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     isAnonymousParticipationAllowed: false,
+    isFranceConnectConfigured: true,
   };
 
   it('renders correctly with no data', () => {

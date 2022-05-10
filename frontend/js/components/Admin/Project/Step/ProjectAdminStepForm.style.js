@@ -1,7 +1,7 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
 import { ListGroupItem } from 'react-bootstrap';
-import colors from '~/utils/colors';
+import colors, { styleGuideColors } from '~/utils/colors';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 
 export const DateContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -57,6 +57,10 @@ export const RequirementDragItem: StyledComponent<{}, {}, typeof ListGroupItem> 
 
   li {
     margin-right: 15px;
+  }
+
+  .fcHelp {
+    color: ${styleGuideColors.gray500} !important;
   }
 `;
 

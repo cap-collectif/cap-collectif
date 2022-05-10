@@ -41,6 +41,7 @@ type Props = {|
   stepFormName: string,
   proposal?: {| label: string, value: string |},
   isPrivate: boolean,
+  isFranceConnectConfigured: boolean,
   fcAllowedData: FranceConnectAllowedData,
   endAt: ?string,
 |};
@@ -120,6 +121,7 @@ export const ProjectAdminCollectStepForm = ({
   votesMin,
   votesRanking,
   fcAllowedData,
+  isFranceConnectConfigured,
   endAt,
 }: Props) => {
   const intl = useIntl();
@@ -282,6 +284,7 @@ export const ProjectAdminCollectStepForm = ({
         formName={formName}
         requirements={requirements}
         fcAllowedData={fcAllowedData}
+        isFranceConnectConfigured={isFranceConnectConfigured}
       />
       <BootstrapButton
         id="js-btn-create-step"

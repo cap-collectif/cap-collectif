@@ -9,6 +9,7 @@ describe('<ProjectAdminConsultationStepForm />', () => {
     consultations: [],
     dispatch: jest.fn(),
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
+    isFranceConnectConfigured: true,
   };
 
   it('renders correctly with no initial data', () => {

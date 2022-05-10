@@ -36,6 +36,7 @@ type Props = {|
   stepFormName: string,
   fcAllowedData: FranceConnectAllowedData,
   endAt: ?string,
+  isFranceConnectConfigured: boolean,
 |};
 
 export const renderSortValues = (intl: IntlShape) => [
@@ -67,6 +68,7 @@ export const ProjectAdminSelectionStepForm = ({
   votesMin,
   fcAllowedData,
   endAt,
+  isFranceConnectConfigured,
 }: Props) => {
   const intl = useIntl();
   const statusesWithId = statuses?.filter(s => s.id) || [];
@@ -181,6 +183,7 @@ export const ProjectAdminSelectionStepForm = ({
         formName={formName}
         requirements={requirements}
         fcAllowedData={fcAllowedData}
+        isFranceConnectConfigured={isFranceConnectConfigured}
       />
       <Button
         id="js-btn-create-step"

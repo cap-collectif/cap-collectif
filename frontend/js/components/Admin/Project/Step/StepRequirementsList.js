@@ -14,6 +14,7 @@ import {
   type DroppableProvided,
 } from 'react-beautiful-dnd';
 import { arrayMove, Field, change, arrayRemove } from 'redux-form';
+import { Flex, Text } from '@cap-collectif/ui';
 import toggle from '~/components/Form/Toggle';
 import InputRequirement from '~/components/Ui/Form/InputRequirement';
 import type { RequirementType } from '~relay/UpdateProjectAlphaMutation.graphql';
@@ -41,6 +42,7 @@ type Props = {|
   onInputCheck: (value: boolean, field: string, requirement: Requirement) => void,
   onInputChange: (value: string, field: string, requirement: Requirement) => void,
   onInputDelete: (index: number) => void,
+  isFranceConnectConfigured: boolean,
 |};
 
 export const getUId = (): Uuid => `_${Math.random().toString(36).substr(2, 9)}`;
@@ -83,6 +85,7 @@ export function createRequirements(
   },
   twilioEnabled: ?boolean,
   isFranceConnectConfigured: boolean,
+  fcAllowedData: FranceConnectAllowedData,
 ): Array<Requirement> {
   const requirements = [];
   if (!doesStepSupportRequirements(step)) {
@@ -112,13 +115,16 @@ export function createRequirements(
   if (
     !initialRequirements.some((r: Requirement) => r.type === 'PHONE_VERIFIED') &&
     isSupportingPhoneVerifiedRequirement
-  )
+  ) {
     requirements.push(requirementFactory('PHONE_VERIFIED', false, 'verify.number.sms', null));
+  }
   if (
     !initialRequirements.some((r: Requirement) => r.type === 'FRANCE_CONNECT') &&
     isFranceConnectConfigured
-  )
+  ) {
     requirements.push(requirementFactory('FRANCE_CONNECT', false, 'france_connect', null));
+  }
+
   initialRequirements.forEach((requirement: Requirement) => {
     if (requirement.type === 'PHONE_VERIFIED' && isSupportingPhoneVerifiedRequirement) {
       requirements.push(
@@ -128,38 +134,18 @@ export function createRequirements(
     switch (requirement.type) {
       case 'FIRSTNAME':
         requirements.push(
-          requirementFactory(
-            'FIRSTNAME',
-            true,
-            'form.label_firstname',
-            requirement.id,
-            isFranceConnectConfigured,
-          ),
+          requirementFactory('FIRSTNAME', true, 'form.label_firstname', requirement.id),
         );
         break;
       case 'LASTNAME':
-        requirements.push(
-          requirementFactory(
-            'LASTNAME',
-            true,
-            'global.name',
-            requirement.id,
-            isFranceConnectConfigured,
-          ),
-        );
+        requirements.push(requirementFactory('LASTNAME', true, 'global.name', requirement.id));
         break;
       case 'PHONE':
         requirements.push(requirementFactory('PHONE', true, 'filter.label_phone', requirement.id));
         break;
       case 'DATE_OF_BIRTH':
         requirements.push(
-          requirementFactory(
-            'DATE_OF_BIRTH',
-            true,
-            'form.label_date_of_birth',
-            requirement.id,
-            isFranceConnectConfigured,
-          ),
+          requirementFactory('DATE_OF_BIRTH', true, 'form.label_date_of_birth', requirement.id),
         );
         break;
       case 'POSTAL_ADDRESS':
@@ -179,6 +165,17 @@ export function createRequirements(
         break;
       case 'FRANCE_CONNECT':
         if (isFranceConnectConfigured) {
+          Array.from(requirements).forEach(r => {
+            if (r.type === 'LASTNAME' && fcAllowedData.LASTNAME) {
+              r.disabled = true;
+            }
+            if (r.type === 'FIRSTNAME' && fcAllowedData.FIRSTNAME) {
+              r.disabled = true;
+            }
+            if (r.type === 'DATE_OF_BIRTH' && fcAllowedData.DATE_OF_BIRTH) {
+              r.disabled = true;
+            }
+          });
           requirements.push(
             requirementFactory('FRANCE_CONNECT', true, 'france_connect', requirement.id),
           );
@@ -199,6 +196,7 @@ export function StepRequirementsList({
   onInputCheck,
   onInputDelete,
   fcAllowedData,
+  isFranceConnectConfigured,
 }: Props) {
   const intl = useIntl();
   const onDragEnd = (result: DropResult) => {
@@ -212,6 +210,8 @@ export function StepRequirementsList({
   const lastNameRequirement = requirements.filter(r => r && r.type === 'LASTNAME');
   const firstNameRequirement = requirements.filter(r => r && r.type === 'FIRSTNAME');
   const birthDateRequirement = requirements.filter(r => r && r.type === 'DATE_OF_BIRTH');
+  const fcRequirement = ['LASTNAME', 'FIRSTNAME', 'DATE_OF_BIRTH'];
+  const [enableFranceConnect, setEnableFranceConnect] = React.useState<?boolean>(null);
   return (
     <ListGroup>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -221,9 +221,20 @@ export function StepRequirementsList({
               {fields.map((field: string, index: number) => {
                 const requirement = requirements[index];
                 if (!requirement) return;
+                let requirementExist = false;
+                // Cannot get fcAllowedData[requirement.type] because property CHECKBOX is missing in FranceConnectAllowedData [1].
+                if (
+                  requirement.type in fcAllowedData &&
+                  // $FlowFixMe I test everything to check that the key exists in the object, but nothing to do, I still have a flow error
+                  typeof fcAllowedData[requirement.type] !== 'undefined'
+                ) {
+                  requirementExist = fcAllowedData[requirement.type];
+                }
                 const isToggle = requirement.type !== 'CHECKBOX';
                 const id = `requirement.${requirement.id || requirement.uniqueId || ''}`;
-
+                if (requirement.type === 'FRANCE_CONNECT') {
+                  setEnableFranceConnect(requirement.checked);
+                }
                 return (
                   <Draggable key={id} draggableId={id} index={index}>
                     {(providedDraggable: DraggableProvided) => (
@@ -246,6 +257,7 @@ export function StepRequirementsList({
                                   name: requirement.type,
                                   onChange: () => {
                                     if (requirement.type === 'FRANCE_CONNECT') {
+                                      setEnableFranceConnect(requirement.checked);
                                       if (lastNameRequirement && fcAllowedData.LASTNAME === true) {
                                         Array.from(requirements).forEach(function (r, rIndex) {
                                           if (r.type === 'LASTNAME') {
@@ -319,6 +331,22 @@ export function StepRequirementsList({
                               />
                             </>
                           )}
+                          {isFranceConnectConfigured &&
+                            fcRequirement.indexOf(requirement.type) !== -1 &&
+                            requirementExist &&
+                            enableFranceConnect && (
+                              <Flex ml="auto" width="23%" className="fcHelp">
+                                <Text
+                                  as="span"
+                                  fontSize="11px"
+                                  fontFamily="Open Sans"
+                                  fontWeight={400}>
+                                  {intl.formatMessage({
+                                    id: 'data-collected-by-france-connect',
+                                  })}
+                                </Text>
+                              </Flex>
+                            )}
                           {requirement.disabled && requirement.type === 'IDENTIFICATION_CODE' && (
                             <InfoMessage variant="info" ml="auto">
                               <InfoMessage.Title withIcon>

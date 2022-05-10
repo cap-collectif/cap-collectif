@@ -262,6 +262,7 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for admin 1`] = `
               }
             }
             isBudgetEnabled={true}
+            isFranceConnectConfigured={true}
             isLimitEnabled={false}
             isPrivate={false}
             isSecretBallotEnabled={true}
@@ -541,6 +542,7 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for project admin 1`]
               }
             }
             isBudgetEnabled={true}
+            isFranceConnectConfigured={true}
             isLimitEnabled={false}
             isPrivate={false}
             isSecretBallotEnabled={true}

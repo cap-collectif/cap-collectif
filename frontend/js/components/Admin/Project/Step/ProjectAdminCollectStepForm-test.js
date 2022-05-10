@@ -20,6 +20,7 @@ describe('<ProjectAdminCollectStepForm />', () => {
     stepFormName: 'defaultForm',
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     endAt: '2050-01-01',
+    isFranceConnectConfigured: true,
   };
 
   it('renders correctly for project admin', () => {

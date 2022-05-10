@@ -19,6 +19,7 @@ type Props = {|
   dispatch: Dispatch,
   consultations: Array<{| label: string, value: string |}>,
   fcAllowedData: FranceConnectAllowedData,
+  isFranceConnectConfigured: boolean,
 |};
 
 export const getAvailableConsultations = graphql`
@@ -55,6 +56,7 @@ export const ProjectAdminConsultationStepForm = ({
   dispatch,
   consultations,
   fcAllowedData,
+  isFranceConnectConfigured,
 }: Props) => {
   return (
     <>
@@ -86,6 +88,7 @@ export const ProjectAdminConsultationStepForm = ({
         formName="stepForm"
         requirements={requirements}
         fcAllowedData={fcAllowedData}
+        isFranceConnectConfigured={isFranceConnectConfigured}
       />
       <Button
         id="js-btn-create-step"

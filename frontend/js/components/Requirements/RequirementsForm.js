@@ -12,6 +12,7 @@ import {
   isPristine,
 } from 'redux-form';
 import { fetchQuery_DEPRECATED } from 'relay-runtime';
+import { Icon, CapUIIcon, Flex } from '@cap-collectif/ui';
 import component from '../Form/Field';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
 import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePersonalDataMutation';
@@ -24,6 +25,7 @@ import environment from '../../createRelayEnvironment';
 import LoginSocialButton from '~ui/Button/LoginSocialButton';
 import AppBox from '~ui/Primitives/AppBox';
 import type { RequirementsForm_step } from '~relay/RequirementsForm_step.graphql';
+import FranceConnectIcon from '~ui/Icons/FranceConnectIcon';
 
 export const formName = 'requirements-form';
 
@@ -142,14 +144,17 @@ export const validate = (values: FormValues, props: Props) => {
         }
       }
     } else if (
+      (!values[requirement.id] || !values.PostalAddressText) &&
+      requirement.__typename === 'PostalAddressRequirement'
+    ) {
+      errors.PostalAddressText = 'global.required';
+    } else if (!values[requirement.id] && requirement.__typename === 'FranceConnectRequirement') {
+      errors.franceConnect_ = 'global.required';
+    } else if (
       !values[requirement.id] &&
       requirement.__typename !== 'IdentificationCodeRequirement'
     ) {
-      const fieldName =
-        requirement.__typename === 'PostalAddressRequirement'
-          ? 'PostalAddressText'
-          : requirement.id;
-      errors[fieldName] = 'global.required';
+      errors[requirement.id] = 'global.required';
     }
   }
 
@@ -340,9 +345,38 @@ export const RequirementsForm = ({ step, submitting, submitSucceeded, change }: 
         requirements.map(requirement => {
           if (requirement.__typename === 'FranceConnectRequirement' && !requirement.viewerValue) {
             return (
-              <AppBox justifyContent="left" textAlign="left">
-                <LoginSocialButton justifyContent="left" type="franceConnect" noHR />
+              <AppBox textAlign="left" mb={4} pl="15px">
+                <LoginSocialButton
+                  justifyContent="left"
+                  type="franceConnect"
+                  noHR
+                  fcTitle="fc-requirement-title"
+                />
+                <Field
+                  groupClassName="hidden"
+                  name="franceConnect_"
+                  id="franceConnect_"
+                  component={component}
+                  type="checkbox"
+                  checked={false}
+                />
               </AppBox>
+            );
+          }
+          if (requirement.__typename === 'FranceConnectRequirement' && requirement.viewerValue) {
+            return (
+              <Flex mt="12px" mb="8px" className="col-sm-12 col-xs-12">
+                <Icon name={CapUIIcon.Check} color="green.500" mr="13px" alignSelf="center" />
+                <FranceConnectIcon />
+                <Field
+                  groupClassName="hidden"
+                  name="franceConnect_"
+                  id="franceConnect_"
+                  component={component}
+                  type="checkbox"
+                  checked
+                />
+              </Flex>
             );
           }
           return (

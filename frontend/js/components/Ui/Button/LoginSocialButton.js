@@ -25,6 +25,7 @@ type Props = {|
   noHR?: boolean,
   primaryColor: string,
   colorText: string,
+  fcTitle?: string,
 |};
 
 export const getLabelColorForType = (type: LoginSocialButtonType, color?: string): string => {
@@ -222,7 +223,8 @@ export const LoginSocialButton = ({
   justifyContent = 'center',
   noHR = false,
   primaryColor,
-  colorText
+  colorText,
+  fcTitle = 'fc-title',
 }: Props) => {
   const [isHover, seIsHover] = useState<boolean>(false);
 
@@ -240,12 +242,18 @@ export const LoginSocialButton = ({
     );
   }
 
+  const isFcRequirement = fcTitle === 'fc-requirement-title';
+
   return (
     <div>
       {type === 'franceConnect' ? (
         <>
-          <AppBox textAlign={justifyContent} mt={1} fontSize={2}>
-            <FormattedMessage tagName="p" id="fc-title" />
+          <AppBox
+            textAlign={justifyContent}
+            mt={1}
+            fontSize={isFcRequirement ? '14px' : 2}
+            color={isFcRequirement ? 'gray.700' : undefined}>
+            <FormattedMessage tagName="p" id={fcTitle} />
           </AppBox>
           <FranceConnectButton justifyContent={justifyContent}>
             <a
@@ -261,7 +269,7 @@ export const LoginSocialButton = ({
             </a>
           </FranceConnectButton>
           <FranceConnectLink justifyContent={justifyContent}>
-            <a href="https://franceconnect.gouv.fr/">
+            <a href="https://franceconnect.gouv.fr/" target="_blank"  rel="noreferrer">
               <FormattedMessage id="what-is-fc" />
             </a>
             {!noHR ? <hr /> : null}
@@ -285,7 +293,7 @@ export const LoginSocialButton = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   primaryColor: state.default.parameters['color.btn.primary.bg'],
-  colorText: state.default.parameters['color.btn.primary.text']
+  colorText: state.default.parameters['color.btn.primary.text'],
 });
 
 export default connect<any, any, _, _, _, _>(mapStateToProps)(LoginSocialButton);

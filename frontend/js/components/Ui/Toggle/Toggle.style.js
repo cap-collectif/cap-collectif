@@ -27,6 +27,7 @@ export const ToggleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.d
   & > div {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 
     input {
       opacity: 0;

@@ -3,6 +3,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import ToggleUi from '~ui/Toggle/Toggle';
 import type { LabelSide } from '~ui/Toggle/Toggle.style';
+import AppBox from '~ui/Primitives/AppBox';
 
 export type Props = {|
   input: {
@@ -34,7 +35,7 @@ export const Toggle = ({
   bold,
   helpText,
 }: Props) => (
-  <div className={cn('form-group', className)}>
+  <AppBox className={cn('form-group', className)}>
     <ToggleUi
       id={id}
       name={input.name}
@@ -48,7 +49,7 @@ export const Toggle = ({
       bold={bold}
     />
     {meta?.touched && meta?.error}
-  </div>
+  </AppBox>
 );
 
 export default Toggle;

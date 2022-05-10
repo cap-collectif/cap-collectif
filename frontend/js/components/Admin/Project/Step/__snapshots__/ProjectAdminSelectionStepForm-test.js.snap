@@ -263,6 +263,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
             }
             id="stepId"
             isBudgetEnabled={true}
+            isFranceConnectConfigured={true}
             isLimitEnabled={true}
             isSecretBallotEnabled={false}
             isTresholdEnabled={true}
@@ -555,6 +556,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
             }
             id="stepId"
             isBudgetEnabled={false}
+            isFranceConnectConfigured={true}
             isLimitEnabled={false}
             isSecretBallotEnabled={true}
             isTresholdEnabled={false}

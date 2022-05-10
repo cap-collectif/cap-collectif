@@ -410,6 +410,7 @@ export function ProjectAdminStepForm({
   isCreating,
   debateType,
   fcAllowedData,
+  isFranceConnectConfigured,
   hasIdentificationCodeLists,
   bodyUsingJoditWysiwyg,
   debateContentUsingJoditWysiwyg,
@@ -620,6 +621,7 @@ export function ProjectAdminStepForm({
               stepFormName={stepFormName}
               requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
+              isFranceConnectConfigured={isFranceConnectConfigured}
               isAnonymousParticipationAllowed={isAnonymousParticipationAllowed}
               footerUsingJoditWysiwyg={footerUsingJoditWysiwyg}
             />
@@ -629,6 +631,7 @@ export function ProjectAdminStepForm({
               requirements={requirementsFiltered}
               consultations={step.consultations}
               fcAllowedData={fcAllowedData}
+              isFranceConnectConfigured={isFranceConnectConfigured}
             />
           )}
           {step.__typename === 'SelectionStep' && (
@@ -648,6 +651,7 @@ export function ProjectAdminStepForm({
               requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
               endAt={step.endAt}
+              isFranceConnectConfigured={isFranceConnectConfigured}
             />
           )}
 
@@ -670,6 +674,7 @@ export function ProjectAdminStepForm({
               votable={votable}
               requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
+              isFranceConnectConfigured={isFranceConnectConfigured}
               endAt={step.endAt}
             />
           )}
@@ -825,7 +830,7 @@ export function ProjectAdminStepForm({
 
 const mapStateToProps = (
   state: GlobalState,
-  { step, isCreating, project, isFranceConnectConfigured }: Props,
+  { step, isCreating, project, isFranceConnectConfigured, fcAllowedData }: Props,
 ) => {
   const { isGridViewEnabled, isListViewEnabled, isMapViewEnabled, mainView } = getValueDisplayMode(
     step,
@@ -874,7 +879,9 @@ const mapStateToProps = (
       footerUsingJoditWysiwyg: step.footerUsingJoditWysiwyg !== false,
       // ConsultationStep
       consultations: step?.consultations || [],
-      requirements: step ? createRequirements(step, twilioEnabled, isFranceConnectConfigured) : [],
+      requirements: step
+        ? createRequirements(step, twilioEnabled, isFranceConnectConfigured, fcAllowedData)
+        : [],
       // SelectionStep
       statuses: step?.statuses?.length ? step.statuses : [],
       defaultSort: step?.defaultSort?.toUpperCase() || 'RANDOM',

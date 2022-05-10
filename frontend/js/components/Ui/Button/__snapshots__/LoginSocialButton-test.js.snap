@@ -57,6 +57,8 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
   >
     <a
       href="https://franceconnect.gouv.fr/"
+      rel="noreferrer"
+      target="_blank"
     >
       <FormattedMessage
         id="what-is-fc"
