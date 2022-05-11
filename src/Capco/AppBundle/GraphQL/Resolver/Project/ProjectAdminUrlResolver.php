@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ProjectAdminAlphaUrlResolver implements ResolverInterface
+class ProjectAdminUrlResolver implements ResolverInterface
 {
     protected $router;
 
@@ -19,7 +19,7 @@ class ProjectAdminAlphaUrlResolver implements ResolverInterface
     public function __invoke(Project $project): string
     {
         return $this->router->generate(
-            'capco_admin_alpha_project_edit',
+            'admin_capco_app_project_edit',
             [
                 'id' => $project->getId(),
                 '_sonata_admin' => 'capco_admin.admin.project',

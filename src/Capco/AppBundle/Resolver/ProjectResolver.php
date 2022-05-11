@@ -27,7 +27,7 @@ class ProjectResolver
     public function resolveAdminEditUrl(Project $project, bool $absolute = true): string
     {
         return $this->router->generate(
-            'capco_admin_alpha_project_edit',
+            'admin_capco_app_project_edit',
             [
                 'id' => $project->getId(),
                 '_locale' => $this->requestStack->getCurrentRequest()->getLocale(),

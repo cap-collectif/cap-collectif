@@ -21,9 +21,9 @@ services:
 
     Capco\AppBundle\Notifier\UserNotifier:
         public: true
-    #
-    #    Capco\AppBundle\Notifier\ProjectNotifier:
-    #        public: true
+
+    Capco\AppBundle\Notifier\ProjectNotifier:
+        public: true
 
     Capco\AppBundle\Notifier\ContributionNotifier:
         public: true

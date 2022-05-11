@@ -127,6 +127,9 @@ InternalProject:
             adminAlphaUrl:
                 type: 'URI!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminAlphaUrlResolver", [value])'
+            adminUrl:
+                type: 'URI!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminUrlResolver", [value])'
             opinionCanBeFollowed:
                 type: 'Boolean!'
                 description: 'State of activation of Opinion subscription.'

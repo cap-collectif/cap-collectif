@@ -347,7 +347,7 @@ const onSubmit = (
   return CreateProjectAlphaMutation.commit({ input }).then(data => {
     if (data.createAlphaProject && data.createAlphaProject.project && !hasNewDebateStepAdded) {
       if (!hasNewDebateStepAdded) {
-        window.location.href = data.createAlphaProject.project.adminAlphaUrl;
+        window.location.href = data.createAlphaProject.project.adminUrl;
 
         toast({
           variant: 'success',

@@ -1,0 +1,180 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block form %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            const voteTypeField = $("#{{ admin.uniqid }}_voteType");
+            const votesHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_votesHelpText");
+            const budgetField = $("#sonata-ba-field-container-{{ admin.uniqid }}_budget");
+            const voteThresholdCheckboxField = $("#sonata-ba-field-container-{{ admin.uniqid }}_hasVoteThreshold");
+            const voteThresholdCheckbox = $("#{{ admin.uniqid }}_hasVoteThreshold");
+            const voteThresholdField = $("#sonata-ba-field-container-{{ admin.uniqid }}_voteThreshold");
+            const voteThresholdInput = $("#{{ admin.uniqid }}_voteThreshold");
+            const voteMinField = $("#sonata-ba-field-container-{{ admin.uniqid }}_votesMin");
+            const voteLimitField = $("#sonata-ba-field-container-{{ admin.uniqid }}_votesLimit");
+            const requirementsReason = $("#sonata-ba-field-container-{{ admin.uniqid }}_requirementsReason");
+            const requirementsPosition = $(".sonata-ba-td-{{ admin.uniqid }}_requirements-position");
+
+            function toggleVotesMinAndMaxField(show) {
+                if (show) {
+                    voteLimitField.removeClass('hidden');
+                    voteMinField.removeClass('hidden');
+                } else {
+                    voteLimitField.addClass('hidden');
+                    voteMinField.addClass('hidden');
+                }
+            }
+
+            function toggleVoteThresholdField(show) {
+                if (show) {
+                    voteThresholdField.removeClass('hidden');
+                } else {
+                    voteThresholdField.addClass('hidden');
+                }
+            }
+
+            function toggleVoteThresholdSection(show) {
+                if (show) {
+                    voteThresholdCheckboxField.removeClass('hidden');
+                } else {
+                    toggleVoteThresholdField(false);
+                    voteThresholdInput.val(0);
+                    voteThresholdCheckbox.iCheck('uncheck');
+                    voteThresholdCheckboxField.addClass('hidden');
+                }
+
+            }
+
+            function toggleVotesHelpTextField(show) {
+                if (show) {
+                    votesHelpTextField.removeClass('hidden');
+                } else {
+                    votesHelpTextField.addClass('hidden');
+                }
+            }
+
+            function toggleBudgetField(show) {
+                if (show) {
+                    budgetField.removeClass('hidden');
+                } else {
+                    budgetField.addClass('hidden');
+                }
+            }
+
+            function configureRequirement(select) {
+              const selectId = $(select).attr('id');
+              const selectValue = $(select).val();
+              let labelId = selectId.split('_');
+              labelId = labelId[0]+'_'+labelId[1]+'_'+labelId[2]+'_label';
+              if (selectValue !== 'CHECKBOX') {
+                $('#'+labelId).attr('placeholder', null);
+                $('#'+labelId).val(null);
+                $('#'+labelId).attr('disabled', true);
+                $('#'+labelId).attr('required', false);
+              } else {
+                $('#'+labelId).attr('disabled', false);
+                $('#'+labelId).attr('required', true);
+              }
+            }
+
+            function onLoadConfigureRequirementLabelAttributes() {
+              $('.select-type').each(function() {
+                configureRequirement(this);
+              });
+            }
+
+            function onChangeRequirementType() {
+              $('.select-type').on('change', function () {
+                configureRequirement(this);
+              });
+            }
+
+            // Requirement reason
+            if(requirementsPosition.length >= 1) {
+              requirementsReason.removeClass('hidden');
+            } else {
+              requirementsReason.addClass('hidden');
+            }
+            // on add a requirement
+            $('body').on('sonata.add_element', requirementsPosition, function(e) {
+              if($(".sonata-ba-td-{{ admin.uniqid }}_requirements-position").length >= 1) {
+                requirementsReason.removeClass('hidden');
+                onLoadConfigureRequirementLabelAttributes();
+                onChangeRequirementType();
+              } else {
+                requirementsReason.addClass('hidden');
+              }
+            });
+
+            // requirement checkbox label
+            // on load form
+            onLoadConfigureRequirementLabelAttributes();
+
+            // on change
+            $('.select-type').change(function () {
+            configureRequirement(this);
+            });
+
+            const initialValue = voteTypeField.val();
+            toggleVotesHelpTextField(initialValue === "1" || initialValue === "2");
+            toggleVotesMinAndMaxField(initialValue === "1" || initialValue === "2");
+            toggleBudgetField(initialValue === "2");
+            toggleVoteThresholdSection(initialValue === "1");
+
+            voteTypeField.on('change', function (e) {
+                toggleVotesHelpTextField(e.target.value === "1" || e.target.value === "2");
+                toggleVotesMinAndMaxField(e.target.value === "1" || e.target.value === "2");
+                toggleBudgetField(e.target.value === "2");
+                toggleVoteThresholdSection(e.target.value === "1");
+            });
+
+            const initialVoteThresholdValue = voteThresholdInput.val();
+            toggleVoteThresholdField(initialVoteThresholdValue > 0);
+
+            voteThresholdCheckbox.on('ifChecked', function () {
+                toggleVoteThresholdField(true);
+            });
+
+            voteThresholdCheckbox.on('ifUnchecked', function () {
+                toggleVoteThresholdField(false);
+                voteThresholdInput.val(0);
+            });
+
+            // For Timeless uses.
+            const timelessField = $("#{{ admin.uniqid }}_timeless");
+            const startAtField = $("#dtp_{{ admin.uniqid }}_startAt");
+            const endAtField = $("#dtp_{{ admin.uniqid }}_endAt");
+            const startAtContainer = $("#sonata-ba-field-container-{{ admin.uniqid }}_startAt");
+            const endAtContainer = $("#sonata-ba-field-container-{{ admin.uniqid }}_endAt");
+
+            function toggleDateFields(show) {
+                if (show) {
+                    startAtContainer.removeClass('hidden');
+                    endAtContainer.removeClass('hidden');
+                } else {
+                    startAtContainer.addClass('hidden');
+                    endAtContainer.addClass('hidden');
+                }
+            }
+
+            timelessField.on('ifChecked', function () {
+                toggleDateFields(false);
+                startAtField.data("DateTimePicker").setDate(null);
+                endAtField.data("DateTimePicker").setDate(null);
+            });
+
+            timelessField.on('ifUnchecked', function () {
+                toggleDateFields(true);
+            });
+
+            if (typeof timelessField !== 'undefined' && typeof timelessField.iCheck('update')[0] !== 'undefined') {
+                toggleDateFields(!timelessField.iCheck('update')[0].checked);
+            } else {
+            	toggleDateFields(true);
+            }
+
+        });
+    </script>
+{% endblock %}

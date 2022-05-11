@@ -1,0 +1,33 @@
+{% extends get_admin_template('base_list_field', admin.code) %}
+
+{% set is_editable =
+    field_description.options.editable is defined and
+    field_description.options.editable and
+    admin.hasAccess('edit', object) %}
+{% set x_editable_type = field_description.type|sonata_xeditable_type %}
+
+{% if is_editable and x_editable_type %}
+    {% block field_span_attributes %}
+        {% spaceless %}
+            {{ parent() }}
+            data-source="{{ field_description|sonata_xeditable_choices|json_encode }}"
+        {% endspaceless %}
+    {% endblock %}
+{% endif %}
+
+{% block field %}
+    {% spaceless %}
+        {% if field_description.options.choices is defined %}
+            {% set class = 'label label-success' %}
+            {% if field_description.options.choices[value] == 'private' %}
+                {% set class = 'label label-default' %}
+            {% elseif field_description.options.choices[value] == 'myself' %}
+                {% set class = 'label label-danger' %}
+            {% elseif field_description.options.choices[value] == 'global.customized' %}
+                {% set class = 'label label-info' %}
+            {% endif %}
+            {% set value = field_description.options.choices[value]|trans({}, field_description.options.catalogue) %}
+        {% endif %}
+        <span class="{{ class }}">{{ value }}</span>
+    {% endspaceless %}
+{% endblock %}

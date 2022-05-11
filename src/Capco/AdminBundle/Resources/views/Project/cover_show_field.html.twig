@@ -1,0 +1,7 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    {%  if value is not null %}
+        {% thumbnail value, 'form' with {'title': value.name, 'alt': value.name} %}
+    {%  endif %}
+{% endblock %}

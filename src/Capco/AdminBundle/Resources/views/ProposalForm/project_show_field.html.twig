@@ -3,7 +3,7 @@
 {% block field %}
     {% spaceless %}
         {% if object is not null and object.getProject() is not null %}
-            <a href="{{ path('capco_admin_alpha_project_edit', {id: object.getProject().getId()}) }}">{{ object.getProject().getTitle() }}</a>
+            <a href="{{ path('admin_capco_app_project_edit', {id: object.getProject().getId()}) }}">{{ object.getProject().getTitle() }}</a>
         {% endif %}
     {% endspaceless %}
 {% endblock %}
