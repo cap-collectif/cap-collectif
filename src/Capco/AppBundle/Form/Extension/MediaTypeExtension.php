@@ -51,7 +51,7 @@ class MediaTypeExtension extends AbstractTypeExtension
             ->remove('contentType');
     }
 
-    public function getExtendedTypes(): array
+    public static function getExtendedTypes(): array
     {
         return [MediaType::class];
     }

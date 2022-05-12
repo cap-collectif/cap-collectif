@@ -17,22 +17,21 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Answer
 {
-    use TimestampableTrait;
     use HasAuthorTrait;
     use IdTrait;
     use TextableTrait;
+    use TimestampableTrait;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    protected $updatedAt;
+    protected \DateTime $updatedAt;
 
     /**
      * @ORM\Column(name="title", type="string", nullable=true)
      */
-    protected $title;
+    protected ?string $title;
 
     public function __construct()
     {
@@ -40,7 +39,7 @@ class Answer
         $this->createdAt = new \DateTime();
     }
 
-    public function __toString(): ?string
+    public function __toString(): string
     {
         if ($this->getTitle()) {
             return $this->getTitle();
