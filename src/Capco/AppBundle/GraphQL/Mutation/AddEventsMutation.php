@@ -9,6 +9,7 @@ use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Utils\Map;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -26,6 +27,7 @@ class AddEventsMutation implements MutationInterface
     private ThemeRepository $themeRepo;
     private LocaleRepository $localeRepository;
     private ProjectRepository $projectRepository;
+    private Map $map;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -33,7 +35,8 @@ class AddEventsMutation implements MutationInterface
         UserRepository $userRepo,
         ThemeRepository $themeRepo,
         LocaleRepository $localeRepository,
-        ProjectRepository $projectRepository
+        ProjectRepository $projectRepository,
+        Map $map
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -41,6 +44,7 @@ class AddEventsMutation implements MutationInterface
         $this->themeRepo = $themeRepo;
         $this->localeRepository = $localeRepository;
         $this->projectRepository = $projectRepository;
+        $this->map = $map;
     }
 
     public function __invoke(Arg $input): array
@@ -51,12 +55,15 @@ class AddEventsMutation implements MutationInterface
         $notFoundProjects = [];
         $brokenDates = [];
 
+
         foreach ($input->offsetGet('events') as $eventInput) {
             foreach ($eventInput as &$ev) {
                 $ev = '' === $ev ? null : $ev;
             }
             unset($ev);
             $this->defaultTranslation($eventInput);
+
+            $this->handleAddress($eventInput);
 
             /** @var User $user */
             $author = $this->userRepo->findOneByEmail($eventInput['authorEmail']);
@@ -212,5 +219,25 @@ class AddEventsMutation implements MutationInterface
     {
        $stringDate = str_replace('/', '-', $stringDate);
        return (new \DateTime($stringDate))->format('Y-m-d H:i:s');
+    }
+
+    private function handleAddress(array &$eventInput): void
+    {
+        $address = $eventInput['address'] ?? '';
+        $zipCode = $eventInput['zipCode'] ?? '';
+        $city = $eventInput['city'] ?? '';
+        $country = $eventInput['country'] ?? '';
+
+        if (!$address) {
+            $addressJson = $this->map->getFormattedAddress("{$zipCode} {$city} {$country}");
+            if (!$addressJson) return;
+            $addressJsonArray = json_decode($addressJson, true);
+            if (!$addressJsonArray) return;
+            $eventInput['address'] = $addressJsonArray[0]['formatted_address'];
+            $eventInput['addressJson'] = $addressJson;
+            return;
+        }
+        $addressJson = $this->map->getFormattedAddress("{$address} {$zipCode} {$city} {$country}");
+        $eventInput['addressJson'] = $addressJson;
     }
 }
