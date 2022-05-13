@@ -1,7 +1,7 @@
 from sys import platform as _platform
 from fabric import Connection, Config
 from invoke import run
-import os
+import os, subprocess
 
 
 color_cyan = '\033[96m'
@@ -123,21 +123,19 @@ def generate_ssl():
     """
     Generate CRT (Black Magic)
     """
-    ssl_dir = Config.local_dir + "infrastructure/services/local/nginx/ssl/"
-    rootcrt = ssl_dir + "rootCA.crt"
-    rootkey = ssl_dir + "rootCA.key"
-    csr = ssl_dir + "capco.csr"
-    pem = ssl_dir + "capco.pem"
-    csrconf = ssl_dir + "capco.csr.cnf"
-    csrv3 = ssl_dir + "v3.ext"
-    key = ssl_dir + "capco.key"
-    crt = ssl_dir + "capco.crt"
-    pfx = ssl_dir + "capco.pfx"
 
-    run('openssl req -new -sha256 -nodes -out %s -newkey rsa:2048 -keyout %s -config %s' % (csr, key, csrconf))
-    run('openssl x509 -req -in %s -CA %s -CAkey %s -CAcreateserial -out %s -days 3000 -sha256 -extfile %s' % (csr, rootcrt, rootkey, crt, csrv3))
-    run('cat %s %s > %s' % (crt, key, pem))
-    run('openssl pkcs12 -export -inkey %s  -in %s -name "capco.dev" -out %s' % (key, pem, pfx))
+    try:
+        os.makedirs("infrastructure/services/local/nginx/ssl")
+    except:
+        print("infrastructure/services/local/nginx/ssl already exists, skipping")
+
+    if subprocess.call(['which', 'mkcert']) != 0:
+        raise Exception('mkcert is not installed, install it and try again')
+
+    run("mkcert -install")
+    run("mkcert -cert-file infrastructure/services/local/nginx/ssl/capco.crt -key-file infrastructure/services/local/nginx/ssl/capco.key *.cap.co capco.dev *.capco.dev capco.prod *.capco.prod capco.test *.capco.test capco.paris.fr")
+    run("cat infrastructure/services/local/nginx/ssl/capco.crt > infrastructure/services/local/nginx/ssl/capco.pem")
+    run("cat infrastructure/services/local/nginx/ssl/capco.key >> infrastructure/services/local/nginx/ssl/capco.pem")
 
 
 def sign_ssl_linux():
