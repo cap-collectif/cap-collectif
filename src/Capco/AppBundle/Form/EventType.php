@@ -3,8 +3,6 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\MediaBundle\Entity\Media;
@@ -54,14 +52,6 @@ class EventType extends AbstractType
             ->add('commentable')
             ->add('link')
             ->add('addressJson', TextType::class)
-            ->add('projects', RelayNodeType::class, [
-                'multiple' => true,
-                'class' => Project::class,
-            ])
-            ->add('steps', RelayNodeType::class, [
-                'multiple' => true,
-                'class' => AbstractStep::class,
-            ])
             ->add('address', TextType::class)
             ->add('city', TextType::class)
             ->add('zipCode', TextType::class)

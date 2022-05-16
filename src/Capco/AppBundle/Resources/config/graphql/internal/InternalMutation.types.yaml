@@ -60,7 +60,7 @@ InternalMutation:
                 builderConfig:
                     inputType: InternalAddEventsInput
                     payloadType: InternalAddEventsPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventsMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventsMutation", [value, getUser()])'
             changeEvent:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'

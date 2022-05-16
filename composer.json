@@ -106,7 +106,7 @@
     ],
     "require": {
         "php": ">=7.4",
-        "symfony/symfony": "4.4.19",
+        "symfony/symfony": "~4.4.35",
         "twig/extensions": "~1.0",
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/monolog-bundle": "^3.5",

@@ -121,7 +121,7 @@ class ProjectPersister
 
         try {
             $this->em->flush();
-            $this->stepPersister->persist($project, $steps);
+            $this->stepPersister->persist($project, $steps, $viewer);
         } catch (DriverException $e) {
             $this->logger->error(__METHOD__ . ' => ' . $e->getCode() . ' : ' . $e->getMessage());
 

@@ -7,7 +7,6 @@ use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
@@ -31,26 +30,24 @@ class AddEventMutationSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
+        FormFactoryInterface $formFactory,
         Indexer $indexer,
         Publisher $publisher,
+        AuthorizationCheckerInterface $authorizationChecker,
         Translator $translator,
-        LocaleRepository $localeRepository,
-        AuthorizationCheckerInterface $authorizationChecker
+        LocaleRepository $localeRepository
     ) {
         $localeRepository->findEnabledLocalesCodes()->willReturn(['fr-FR']);
         $this->beConstructedWith(
             $em,
-            $formFactory,
-            $logger,
             $globalIdResolver,
+            $formFactory,
             $indexer,
             $publisher,
+            $authorizationChecker,
             $translator,
-            $localeRepository,
-            $authorizationChecker
+            $localeRepository
         );
     }
 

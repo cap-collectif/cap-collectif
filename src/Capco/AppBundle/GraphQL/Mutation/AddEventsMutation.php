@@ -2,27 +2,30 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventTranslation;
 use Capco\AppBundle\Form\EventType;
+use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Utils\Map;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class AddEventsMutation implements MutationInterface
+class AddEventsMutation extends AbstractEventMutation
 {
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
     private UserRepository $userRepo;
     private ThemeRepository $themeRepo;
     private LocaleRepository $localeRepository;
@@ -31,15 +34,27 @@ class AddEventsMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
+        GlobalIdResolver $globalIdResolver,
         FormFactoryInterface $formFactory,
+        Indexer $indexer,
+        Publisher $publisher,
+        AuthorizationCheckerInterface $authorizationChecker,
+        TranslatorInterface $translator,
+        LocaleRepository $localeRepository,
         UserRepository $userRepo,
         ThemeRepository $themeRepo,
-        LocaleRepository $localeRepository,
         ProjectRepository $projectRepository,
         Map $map
     ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
+        parent::__construct(
+            $em,
+            $globalIdResolver,
+            $formFactory,
+            $indexer,
+            $publisher,
+            $authorizationChecker,
+            $translator
+        );
         $this->userRepo = $userRepo;
         $this->themeRepo = $themeRepo;
         $this->localeRepository = $localeRepository;
@@ -47,14 +62,13 @@ class AddEventsMutation implements MutationInterface
         $this->map = $map;
     }
 
-    public function __invoke(Arg $input): array
+    public function __invoke(Arg $input, User $viewer): array
     {
         $importedEvents = [];
         $notFoundEmails = [];
         $notFoundThemes = [];
         $notFoundProjects = [];
         $brokenDates = [];
-
 
         foreach ($input->offsetGet('events') as $eventInput) {
             foreach ($eventInput as &$ev) {
@@ -81,6 +95,7 @@ class AddEventsMutation implements MutationInterface
                         if (!$theme) {
                             $notFoundThemes[] = $themeTitle;
                             unset($eventInput['themes'][$key]);
+
                             continue;
                         }
                         $themeIds[] = $theme->getId();
@@ -88,25 +103,30 @@ class AddEventsMutation implements MutationInterface
                     $eventInput['themes'] = $themeIds;
                 }
 
-                if (\is_array($eventInput['projects']) && !empty($eventInput['projects'])) {
-                    $projectIds = [];
-                    foreach ($eventInput['projects'] as $key => $projectTitle) {
-                        $project = $this->projectRepository->findOneBy(['title' => $projectTitle]);
-                        if (!$project) {
-                            $notFoundProjects[] = $projectTitle;
-                            unset($eventInput['projects'][$key]);
-                            continue;
-                        }
-                        $projectIds[] = $project->getId();
-                    }
-                    $eventInput['projects'] = $projectIds;
-                }
-
                 if (
                     $this->checkIsAValidDate($eventInput['startAt']) &&
                     $this->checkIsAValidDate($eventInput['endAt'])
                 ) {
                     $event = (new Event())->setAuthor($author);
+
+                    if (\is_array($eventInput['projects']) && !empty($eventInput['projects'])) {
+                        foreach ($eventInput['projects'] as $key => $projectTitle) {
+                            $project = $this->projectRepository->findOneBy([
+                                'title' => $projectTitle,
+                            ]);
+                            if (!$project) {
+                                $notFoundProjects[] = $projectTitle;
+                                unset($eventInput['projects'][$key]);
+
+                                continue;
+                            }
+                            $event->addProject($project);
+                        }
+                    }
+                    unset($eventInput['projects']);
+
+                    $this->setSteps($event, $viewer, $eventInput);
+                    unset($eventInput['steps']);
 
                     LocaleUtils::indexTranslations($eventInput);
 
@@ -214,11 +234,11 @@ class AddEventsMutation implements MutationInterface
         return $values;
     }
 
-
     private function parseStringDate(string $stringDate): string
     {
-       $stringDate = str_replace('/', '-', $stringDate);
-       return (new \DateTime($stringDate))->format('Y-m-d H:i:s');
+        $stringDate = str_replace('/', '-', $stringDate);
+
+        return (new \DateTime($stringDate))->format('Y-m-d H:i:s');
     }
 
     private function handleAddress(array &$eventInput): void

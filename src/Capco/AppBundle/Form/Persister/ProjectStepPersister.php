@@ -2,8 +2,11 @@
 
 namespace Capco\AppBundle\Form\Persister;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\ViewConfiguration;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Diff;
@@ -52,22 +55,25 @@ class ProjectStepPersister
     private LoggerInterface $logger;
     private AbstractStepRepository $repository;
     private ProjectAbstractStepRepository $pasRepository;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         LoggerInterface $logger,
         EntityManagerInterface $em,
         AbstractStepRepository $repository,
         ProjectAbstractStepRepository $pasRepository,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
         $this->repository = $repository;
         $this->pasRepository = $pasRepository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
-    public function persist(Project $project, array $steps): void
+    public function persist(Project $project, array $steps, User $viewer): void
     {
         $steps = $this->normalize($steps);
         $dbSteps = new ArrayCollection($project->getRealSteps());
@@ -81,6 +87,9 @@ class ProjectStepPersister
             } else {
                 unset($step['votesMin'], $step['allowAuthorsToAddNews']);
             }
+
+            $consultations = $this->getConsultationsFromInput($step, $viewer);
+
             $form->submit($step);
             if (!$form->isValid()) {
                 $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
@@ -89,6 +98,10 @@ class ProjectStepPersister
             }
             /** @var AbstractStep $stepFromData */
             $stepFromData = $form->getData();
+            if ($stepFromData instanceof ConsultationStep) {
+                $this->updateConsultations($consultations, $stepFromData);
+            }
+
             $pasMatch = $this->pasRepository->findOneBy([
                 'project' => $project,
                 'step' => $stepFromData,
@@ -190,6 +203,37 @@ class ProjectStepPersister
             $stepData['mainView'] = $project->getFirstCollectStep()
                 ? $project->getFirstCollectStep()->getMainView()
                 : ViewConfiguration::GRID;
+        }
+    }
+
+    private function getConsultationsFromInput(array &$input, User $viewer): array
+    {
+        $consultations = [];
+        if ('consultation' === $input['type'] && isset($input['consultations'])) {
+            foreach ($input['consultations'] as $consultationId) {
+                $consultations[] = $this->globalIdResolver->resolve($consultationId, $viewer);
+            }
+            unset($input['consultations']);
+        }
+
+        return $consultations;
+    }
+
+    private function updateConsultations(array $consultations, ConsultationStep $step): void
+    {
+        $oldConsultations = $step->getConsultations()->toArray();
+        $step->getConsultations()->clear();
+        $position = 1;
+        foreach ($consultations as $consultation) {
+            $consultation->setPosition($position);
+            $step->addConsultation($consultation);
+            ++$position;
+        }
+
+        foreach ($oldConsultations as $oldConsultation) {
+            if (!$step->getConsultations()->contains($oldConsultation)) {
+                $oldConsultation->clearStep();
+            }
         }
     }
 }

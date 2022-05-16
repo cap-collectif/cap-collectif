@@ -5,7 +5,6 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\EventReview;
-use Capco\AppBundle\GraphQL\Mutation\AddEventMutation;
 use Capco\AppBundle\Security\EventVoter;
 use DateTime;
 use PhpSpec\ObjectBehavior;
@@ -20,30 +19,30 @@ use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\ChangeEventMutation;
-use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Translation\Translator;
 
 class ChangeEventMutationSpec extends ObjectBehavior
 {
     public function let(
-        GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
-        FormFactory $formFactory,
-        AddEventMutation $addEventMutation,
+        GlobalIdResolver $globalIdResolver,
+        FormFactoryInterface $formFactory,
         Indexer $indexer,
         Publisher $publisher,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        Translator $translator
     ) {
         $this->beConstructedWith(
-            $globalIdResolver,
             $em,
+            $globalIdResolver,
             $formFactory,
-            $addEventMutation,
             $indexer,
             $publisher,
-            $authorizationChecker
+            $authorizationChecker,
+            $translator
         );
     }
 
@@ -81,6 +80,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
         $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
+        $event->getAuthor()->willReturn($viewer);
+        $event->setAuthor($viewer)->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);
         $form
             ->submit(
@@ -160,47 +161,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $payload['event']->shouldBe($event);
     }
 
-    public function it_throws_error_on_invalid_form(
-        GlobalIdResolver $globalIdResolver,
-        Arg $input,
-        FormFactory $formFactory,
-        Form $form,
-        FormError $error,
-        User $viewer,
-        Event $event,
-        EventReview $eventReview
-    ) {
-        $values = ['id' => 'base64id', 'body' => '', 'translations' => []];
-
-        $viewer
-            ->isAdmin()
-            ->shouldBeCalled()
-            ->willReturn(false);
-        $viewer->isProjectAdmin()->willReturn(false);
-        $input
-            ->getArrayCopy()
-            ->shouldBeCalled()
-            ->willReturn($values);
-        $globalIdResolver
-            ->resolve('base64id', $viewer)
-            ->shouldBeCalled()
-            ->willReturn($event);
-        $formFactory->create(EventType::class, $event)->willReturn($form);
-        $eventReview->getStatus()->willReturn(EventReviewStatusType::AWAITING);
-        $event->getId()->willReturn('id');
-        $event->getAuthor()->willReturn($viewer);
-        $event->getReview()->willReturn($eventReview);
-        $event->getStatus()->willReturn(EventReviewStatusType::AWAITING);
-        $form->submit(['body' => '', 'translations' => []], false)->willReturn(null);
-        $error->getMessage()->willReturn('Invalid data.');
-        $form->getErrors()->willReturn([$error]);
-        $form->all()->willReturn([]);
-        $form->isValid()->willReturn(false);
-
-        $this->__invoke($input, $viewer);
-        $this->shouldThrow(GraphQLException::fromString('Invalid data.'));
-    }
-
     public function it_try_to_persists_new_event_with_customCode_as_user(
         Arg $arguments,
         User $viewer
@@ -209,10 +169,11 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
+        $viewer->isProjectAdmin()->willReturn(false);
 
         $arguments->getArrayCopy()->willReturn($values);
         $this->__invoke($arguments, $viewer)->shouldBe([
-            'event' => null,
+            'eventEdge' => null,
             'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
         ]);
     }
@@ -257,6 +218,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
         $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
+        $event->getAuthor()->willReturn($viewer);
+        $event->setAuthor($viewer)->willReturn($event);
 
         $eventReview->setStatus(EventReviewStatusType::AWAITING)->shouldBeCalled();
 

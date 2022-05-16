@@ -3,73 +3,36 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
-use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class ChangeEventMutation implements MutationInterface
+class ChangeEventMutation extends AbstractEventMutation
 {
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private FormFactoryInterface $formFactory;
-    private Indexer $indexer;
-    private Publisher $publisher;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private AddEventMutation $addEventMutation;
-
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        AddEventMutation $addEventMutation,
-        Indexer $indexer,
-        Publisher $publisher,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->indexer = $indexer;
-        $this->publisher = $publisher;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->addEventMutation = $addEventMutation;
-    }
-
     public function __invoke(Arg $input, User $viewer): array
     {
         $values = $input->getArrayCopy();
-        if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
+
+        try {
+            self::checkCustomCode($values, $viewer);
+            $event = $this->getEvent($values['id'], $viewer);
+            unset($values['id']);
+            $this->setAuthor($event, $values, $viewer);
+            LocaleUtils::indexTranslations($values);
+            $this->setProjects($event, $viewer, $values);
+            $this->setSteps($event, $viewer, $values);
+            unset($values['projects']);
+        } catch (UserError $error) {
             return [
-                'event' => null,
-                'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
+                'eventEdge' => null,
+                'userErrors' => [['message' => $error->getMessage()]],
             ];
-        }
-
-        /** @var Event $event */
-        $event = $this->globalIdResolver->resolve($values['id'], $viewer);
-
-        unset($values['id']);
-        LocaleUtils::indexTranslations($values);
-
-        /** @var User $newAuthor */
-        $newAuthor = isset($values['author'])
-            ? $this->globalIdResolver->resolve($values['author'], $viewer)
-            : null;
-
-        // admin and superAdmin can change the event's author
-        if ($newAuthor && $viewer->isAdmin() && $newAuthor !== $event->getAuthor()) {
-            $event->setAuthor($newAuthor);
         }
 
         // a user want to edit his refused event
@@ -81,7 +44,7 @@ class ChangeEventMutation implements MutationInterface
             $event->getReview()->setStatus(EventReviewStatusType::AWAITING);
         }
 
-        $this->addEventMutation->submitEventFormData($event, $values, $this->formFactory);
+        $this->submitEventFormData($event, $values, $this->formFactory);
 
         $this->em->flush();
 
@@ -111,5 +74,16 @@ class ChangeEventMutation implements MutationInterface
         }
 
         return $this->authorizationChecker->isGranted(EventVoter::EDIT, $event);
+    }
+
+    private function setAuthor(Event $event, array $values, User $viewer): void
+    {
+        $author = $event->getAuthor();
+
+        if ($viewer->isAdmin() && isset($values['author']) && !empty($values['author'])) {
+            $author = $this->getUser($values['author'], $viewer);
+        }
+
+        $event->setAuthor($author);
     }
 }
