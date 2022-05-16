@@ -132,7 +132,7 @@ class AddEventsMutation extends AbstractEventMutation
 
                     $form = $this->formFactory->create(EventType::class, $event);
                     $form->submit($eventInput, false);
-                    if (!$form->isValid()) {
+                    if ($form->isSubmitted() && !$form->isValid()) {
                         throw GraphQLException::fromFormErrors($form);
                     }
 

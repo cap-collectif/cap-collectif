@@ -35,7 +35,7 @@ class GraphQLException extends UserErrors
         }
 
         foreach ($form->all() as $child) {
-            if (!$child->isValid()) {
+            if ($child->isSubmitted() && !$child->isValid()) {
                 $errors = array_merge($errors, static::getPlainErrors($child));
             }
         }
