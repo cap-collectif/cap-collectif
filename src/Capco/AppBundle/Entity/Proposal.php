@@ -1522,11 +1522,13 @@ class Proposal implements
         return $this;
     }
 
-    public function isProposalAuthorAllowedToAddNews()
+    public function isProposalAuthorAllowedToAddNews(): bool
     {
-        $steps = $this->getProject()->getSteps();
+        $steps = $this->getProject() ? $this->getProject()->getSteps() : [];
         $selectionSteps = new ArrayCollection($this->getSelectionSteps());
-
+        if (empty($steps)) {
+            return false;
+        }
         // @var ProjectAbstractStep $step
         foreach ($steps as $pas) {
             $step = $pas->getStep();
