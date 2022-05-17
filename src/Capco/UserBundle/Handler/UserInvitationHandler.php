@@ -34,7 +34,9 @@ class UserInvitationHandler
     public function handleUserInvite(User $user): void
     {
         $email = $user->getEmail();
-
+        if (!$email) {
+            return;
+        }
         $invitation = $this->userInviteRepository->findOneByEmailAndNotExpired($email);
 
         if (!$invitation) {

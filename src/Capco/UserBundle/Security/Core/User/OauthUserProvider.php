@@ -27,6 +27,7 @@ class OauthUserProvider extends FOSUBUserProvider
     private LoggerInterface $logger;
     private UserInvitationHandler $userInvitationHandler;
     private TokenStorageInterface $tokenStorage;
+    private bool $isNewUser = false;
 
     public function __construct(
         UserManagerInterface $userManager,
@@ -63,7 +64,7 @@ class OauthUserProvider extends FOSUBUserProvider
         $setterToken = $setter . 'AccessToken';
 
         //we "disconnect" previously connected users
-        if (null !== ($previousUser = $this - $this->getUser($email, $response))) {
+        if (null !== ($previousUser = $this - $this->findUser($response, $email))) {
             $previousUser->{$setterId}(null);
             $previousUser->{$setterToken}(null);
             $this->userManager->updateUser($previousUser);
@@ -83,50 +84,14 @@ class OauthUserProvider extends FOSUBUserProvider
         $viewer = $this->tokenStorage->getToken()
             ? $this->tokenStorage->getToken()->getUser()
             : null;
-        $email = $response->getEmail() ?: $serviceName . '_' . $response->getUsername();
         $this->debug($response);
-        $username =
-            $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
         // because, accounts created with FranceConnect can change their email
         $user =
             'franceconnect' === $serviceName && $viewer instanceof User
                 ? $viewer
-                : $this->getUser($email, $response);
-        $isNewUser = false;
-        if (null === $user) {
-            $isNewUser = true;
-            $user = $this->userManager->createUser();
-            $user->setUsername($username);
-            $user->setEmail($email);
-            $user->setEnabled(true);
-            $this->userInvitationHandler->handleUserInvite($user);
-        }
-
-        $setter = 'set' . ucfirst($serviceName);
-        $setterId = 'openid' === $serviceName ? $setter : $setter . 'Id';
-        $setterToken = $setter . 'AccessToken';
-
-        if ('openid' === $serviceName) {
-            $needMapping =
-                $isNewUser || $ressourceOwner->isRefreshingUserInformationsAtEveryLogin();
-            if ($needMapping) {
-                $user->setUsername($username);
-                $user->setEmail($email);
-                $this->extraMapper->map($user, $response);
-            }
-        }
-        if ('franceconnect' === $serviceName && ($isNewUser || !$user->getFranceConnectId())) {
-            $fcConfig = $this->franceConnectSSOConfigurationRepository->find('franceConnect');
-
-            // in next time, we can associate franceConnect after manually create account, so we have to dissociate if it's a new account or not
-            $user = $this->mapFranceConnectData($user, $response, $fcConfig->getAllowedData());
-            $user->setFranceConnectIdToken($response->getOAuthToken()->getRawToken()['id_token']);
-        }
-
-        $user->{$setterId}($response->getUsername());
-        $user->{$setterToken}($response->getAccessToken());
+                : $this->getUser($response);
         $this->userManager->updateUser($user);
-        if ($isNewUser) {
+        if ($this->isNewUser) {
             $this->indexer->index(ClassUtils::getClass($user), $user->getId());
             $this->indexer->finishBulk();
         }
@@ -214,13 +179,65 @@ class OauthUserProvider extends FOSUBUserProvider
         ]);
     }
 
-    private function getUser(string $email, UserResponseInterface $response): ?User
+    private function findUser(UserResponseInterface $response, ?string $email = null): ?User
     {
         $user = $this->userRepository->findByAccessTokenOrUsername(
             $response->getAccessToken(),
             $response->getUsername()
         );
 
-        return $user ?: $this->userRepository->findOneByEmail($email);
+        return !$user && $email ? $this->userRepository->findOneByEmail($email) : $user;
+    }
+
+    private function getUser(UserResponseInterface $response): ?User
+    {
+        $ressourceOwner = $response->getResourceOwner();
+        $serviceName = $ressourceOwner->getName();
+        $email = $response->getEmail();
+        $ssoIsNotFacebook = 'facebook' !== $serviceName;
+        if (!$email && $ssoIsNotFacebook) {
+            $email = $serviceName . '_' . $response->getUsername();
+        }
+        $user = $this->findUser($response, $email);
+        $username =
+            $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
+
+        if (null === $user) {
+            $this->isNewUser = true;
+            $user = $this->userManager->createUser();
+            $user->setUsername($username);
+            $user->setEmail($email);
+            $user->setEnabled(true);
+            $this->userInvitationHandler->handleUserInvite($user);
+        }
+
+        $setter = 'set' . ucfirst($serviceName);
+        $setterId = 'openid' === $serviceName ? $setter : $setter . 'Id';
+        $setterToken = $setter . 'AccessToken';
+
+        if ('openid' === $serviceName) {
+            $needMapping =
+                $this->isNewUser || $ressourceOwner->isRefreshingUserInformationsAtEveryLogin();
+            if ($needMapping) {
+                $user->setUsername($username);
+                $user->setEmail($email);
+                $this->extraMapper->map($user, $response);
+            }
+        }
+        if (
+            'franceconnect' === $serviceName &&
+            ($this->isNewUser || !$user->getFranceConnectId())
+        ) {
+            $fcConfig = $this->franceConnectSSOConfigurationRepository->find('franceConnect');
+
+            // in next time, we can associate franceConnect after manually create account, so we have to dissociate if it's a new account or not
+            $user = $this->mapFranceConnectData($user, $response, $fcConfig->getAllowedData());
+            $user->setFranceConnectIdToken($response->getOAuthToken()->getRawToken()['id_token']);
+        }
+
+        $user->{$setterId}($response->getUsername());
+        $user->{$setterToken}($response->getAccessToken());
+
+        return $user;
     }
 }

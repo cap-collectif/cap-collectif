@@ -214,7 +214,11 @@ class GroupMutation implements MutationInterface
             $this->logger->error(
                 __METHOD__ .
                     ' addUsersInGroup: ' .
-                    sprintf('Cannot add users in group with id "%g"', $groupId)
+                    sprintf(
+                        'Cannot add users in group with id "%g. Cause : %s"',
+                        $groupId,
+                        $e->getMessage()
+                    )
             );
 
             throw new UserError('Can\'t add users in group.');

@@ -139,7 +139,7 @@ class OauthUserProviderSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($user);
         $user
-            ->setEmail('facebook_2081576388576162')
+            ->setEmail(null)
             ->shouldBeCalled()
             ->willReturn($user);
         $user

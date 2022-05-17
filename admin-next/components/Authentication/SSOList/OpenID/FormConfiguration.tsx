@@ -7,16 +7,16 @@ import { FormControl, FieldInput, REGEX_URL } from '@cap-collectif/form';
 import { useFeatureFlag } from '@hooks/useFeatureFlag';
 
 export type FormValues = {
-    name: string,
-    authorizationUrl: string,
-    accessTokenUrl: string,
-    userInfoUrl: string,
-    logoutUrl: string | null,
-    clientId: string,
-    secret: string,
-    profileUrl: string | null,
-    redirectUri?: string,
-    disconnectSsoOnLogout?: boolean
+    name: string;
+    authorizationUrl: string;
+    accessTokenUrl: string;
+    userInfoUrl: string;
+    logoutUrl: string | null;
+    clientId: string;
+    secret: string;
+    profileUrl: string | null;
+    redirectUri?: string;
+    disconnectSsoOnLogout?: boolean;
 };
 
 const formName = 'form-openId-configuration';
@@ -149,13 +149,19 @@ const FormConfiguration: FC = () => {
                 <FieldInput id="redirectUri" name="redirectUri" control={control} type="text" />
             </FormControl>
 
-            {hasLoginOpenID && <FormControl name="disconnectSsoOnLogout" control={control}>
-                <FieldInput id="disconnectSsoOnLogout" name="disconnectSsoOnLogout" control={control} type="checkbox">
-                    {intl.formatMessage({
-                        id: 'confirm-connection-openID',
-                    })}
-                </FieldInput>
-            </FormControl>}
+            {hasLoginOpenID && (
+                <FormControl name="disconnectSsoOnLogout" control={control}>
+                    <FieldInput
+                        id="disconnectSsoOnLogout"
+                        name="disconnectSsoOnLogout"
+                        control={control}
+                        type="checkbox">
+                        {intl.formatMessage({
+                            id: 'disconnect-sso-on-logout',
+                        })}
+                    </FieldInput>
+                </FormControl>
+            )}
         </Flex>
     );
 };
