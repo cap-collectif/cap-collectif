@@ -1,7 +1,6 @@
 @admin @project
 Feature: Projects features
 
-@dev
 Scenario: Logged in admin wants to test admin project
   Given I am logged in as admin
   # Need that the session works on admin-next

@@ -28,37 +28,37 @@ Scenario: An anonymous wants to refuse all cookies
   Then I click on button "#cookie-decline-button"
   And I should see a cookie named "hasFullConsent"
 
-Scenario: An anonymous wants to toggle cookies performance
-  Given I visited "projects page" with cookies not accepted
-  And I scroll to the bottom
-  And I wait "#cookies-management" to appear on current page
-  When I click on button "#cookies-management"
-  And I should see "global.disabled" appear on current page in "body"
-  Then I check element "cookies-enable-analytic"
-  And I should see "list.label_enabled"
-  And I click on button "#cookies-save"
-  And I wait "cookies.content.page" to disappear on current page in "#cookies-manager"
-  Then I go to a proposal with lot of comments
-  And I visited "projects page" with cookies not accepted
-  When I click on button "#cookies-management"
-  And I should see "list.label_enabled"
-  And I should not see "cookies-text"
+#Scenario: An anonymous wants to toggle cookies performance
+#  Given I visited "projects page" with cookies not accepted
+#  And I scroll to the bottom
+#  And I wait "#cookies-management" to appear on current page
+#  When I click on button "#cookies-management"
+#  And I should see "global.disabled" appear on current page in "body"
+#  Then I check element "cookies-enable-analytic"
+#  And I should see "list.label_enabled"
+#  And I click on button "#cookies-save"
+#  And I wait "cookies.content.page" to disappear on current page in "#cookies-manager"
+#  Then I go to a proposal with lot of comments
+#  And I visited "projects page" with cookies not accepted
+#  When I click on button "#cookies-management"
+#  And I should see "list.label_enabled"
+#  And I should not see "cookies-text"
 
-Scenario: An anonymous wants to toggle cookies advertising
-  Given I visited "projects page" with cookies not accepted
-  And I scroll to the bottom
-  When I click on button "#cookies-management"
-  And I should see "global.disabled"
-  Then I check element "cookies-enable-ads"
-  And I should see "list.label_enabled"
-  And I click on button "#cookies-save"
-  And I should not see "cookies-text"
-  Then I go to a proposal with lot of comments
-  And I visited "projects page" with cookies not accepted
-  When I click on button "#cookies-management"
-  And I should see "global.disabled"
-  And I should see "list.label_enabled"
-  And I should not see "cookies-text"
+#Scenario: An anonymous wants to toggle cookies advertising
+#  Given I visited "projects page" with cookies not accepted
+#  And I scroll to the bottom
+#  When I click on button "#cookies-management"
+#  And I should see "global.disabled"
+#  Then I check element "cookies-enable-ads"
+#  And I should see "list.label_enabled"
+#  And I click on button "#cookies-save"
+#  And I should not see "cookies-text"
+#  Then I go to a proposal with lot of comments
+#  And I visited "projects page" with cookies not accepted
+#  When I click on button "#cookies-management"
+#  And I should see "global.disabled"
+#  And I should see "list.label_enabled"
+#  And I should not see "cookies-text"
 
 Scenario: An anonymous accept cookies then should have one created
   Given I visited "home page" with cookies not accepted

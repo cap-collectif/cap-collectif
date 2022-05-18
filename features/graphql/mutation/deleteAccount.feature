@@ -45,7 +45,7 @@ Scenario: User5 who decides to hard delete his account should have his content a
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
                 "title": "Proposition plus votable",
-                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+                "body": "TODO",
                 "createdAt": "2017-02-01 09:40:00",
                 "published": true,
                 "author": {
@@ -57,7 +57,7 @@ Scenario: User5 who decides to hard delete his account should have his content a
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
                 "title": "Proposition plus votable 2",
-                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+                "body": "TODO",
                 "createdAt": "2017-02-01 09:50:00",
                 "published": true,
                 "author": {
@@ -634,7 +634,7 @@ Scenario: User who decides to hard delete his account should have his content de
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
                 "title": "Installation de bancs sur la place de la mairie",
-                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+                "body": "Insert Long Text here",
                 "createdAt": "2017-02-01 00:04:00",
                 "published": true,
                 "author": {
@@ -646,7 +646,7 @@ Scenario: User who decides to hard delete his account should have his content de
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
                 "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
-                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+                "body": "Insert Long Text here",
                 "createdAt": "2017-02-01 00:04:19",
                 "published": true,
                 "author": {
@@ -658,7 +658,7 @@ Scenario: User who decides to hard delete his account should have his content de
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
                 "title": "Proposition pas encore votable",
-                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+                "body": "TODO",
                 "createdAt": "2017-02-01 00:07:00",
                 "published": true,
                 "author": {
@@ -670,7 +670,7 @@ Scenario: User who decides to hard delete his account should have his content de
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
                 "title": "Proposition plus votable",
-                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+                "body": "TODO",
                 "createdAt": "2017-02-01 00:08:00",
                 "published": true,
                 "author": {
@@ -682,7 +682,7 @@ Scenario: User who decides to hard delete his account should have his content de
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
                 "title": "Ravalement de la façade de la bibliothèque municipale",
-                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+                "body": "Insert Long Text here",
                 "createdAt": "2017-02-01 09:08:00",
                 "published": true,
                 "author": {
@@ -694,7 +694,7 @@ Scenario: User who decides to hard delete his account should have his content de
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
                 "title": "Test de publication avec accusé de réception",
-                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+                "body": "TODO",
                 "createdAt": "2018-04-02 00:00:00",
                 "published": true,
                 "author": {

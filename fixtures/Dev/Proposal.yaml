@@ -4,7 +4,8 @@ Capco\AppBundle\Entity\Proposal:
         evaluers: ['@group1']
         id: proposal1
         title: Ravalement de la façade de la bibliothèque municipale
-        body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         author: '@userWelcomattic'
         proposalForm: '@proposalform1'
         theme: '@theme2'
@@ -23,7 +24,8 @@ Capco\AppBundle\Entity\Proposal:
         evaluers: ['@group1']
         id: deletedProposal1
         title: Hélas j'étais trop violent pour être en ligne
-        body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         author: '@userWelcomattic'
         proposalForm: '@proposalform1'
         theme: '@theme2'
@@ -63,7 +65,8 @@ Capco\AppBundle\Entity\Proposal:
         id: proposal3
         title: Installation de bancs sur la place de la mairie
         summary: Un beau résumé
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.\')>
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         rating: 3
         annotation: Vérifier les normes de sécurité
         author: '@userWelcomattic'
@@ -81,7 +84,8 @@ Capco\AppBundle\Entity\Proposal:
     proposal4:
         id: proposal4
         title: Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         rating: 1
         annotation: Renvoyer l'idée à l'église
         author: '@user7'
@@ -96,7 +100,8 @@ Capco\AppBundle\Entity\Proposal:
     proposal5:
         id: proposal5
         title: Proposition à la corbeille (visible)
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         trashedStatus: 'visible'
         rating: 1
         author: '@user7'
@@ -115,7 +120,8 @@ Capco\AppBundle\Entity\Proposal:
         title: Proposition à la corbeille (invisible)
         trashedStatus: invisible
         trashedReason: Raciste
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         rating: 3
         author: '@user4'
         proposalForm: '@proposalform1'
@@ -131,7 +137,8 @@ Capco\AppBundle\Entity\Proposal:
     proposal7:
         id: proposal7
         title: Proposition très chère
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         rating: 3
         author: '@user4'
         proposalForm: '@proposalform3'
@@ -148,7 +155,8 @@ Capco\AppBundle\Entity\Proposal:
     proposal8:
         id: proposal8
         title: Proposition pas chère
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         rating: 3
         likers: ['@user1', '@user2', '@user3']
         author: '@user4'
@@ -166,7 +174,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal9:
         id: proposal9
         title: Proposition gratuite
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         rating: 3
         author: '@user4'
         proposalForm: '@proposalform3'
@@ -182,7 +190,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal10:
         id: proposal10
         title: Proposition pas encore votable
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         rating: 3
         author: '@user4'
         proposalForm: '@proposalform1'
@@ -199,7 +207,7 @@ Capco\AppBundle\Entity\Proposal:
         id: proposal11
         title: Proposition plus votable
         slug: proposition-plus-votable
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         rating: 3
         author: '@user4'
         proposalForm: '@proposalform1'
@@ -216,7 +224,7 @@ Capco\AppBundle\Entity\Proposal:
         id: proposal12
         title: Proposition plus votable
         slug: proposition-plus-votable-1
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         rating: 3
         likers: ['@user504']
         evaluers: ['@group1']
@@ -238,7 +246,7 @@ Capco\AppBundle\Entity\Proposal:
         id: proposal13
         title: Proposition plus votable 2
         slug: proposition-plus-votable-2
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         rating: 3
         author: '@user5'
         proposalForm: '@proposalform4'
@@ -254,7 +262,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal14:
         id: proposal14
         title: Mon super projet
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user1'
         proposalForm: '@proposalform5'
         theme: '@theme2'
@@ -269,7 +277,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal15:
         id: proposal15
         title: Proposition 15
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user1'
         proposalForm: '@proposalform6'
         reference: 1
@@ -280,7 +288,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal16:
         id: proposal16
         title: Proposition 16
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user1'
         proposalForm: '@proposalform6'
         reference: 2
@@ -291,7 +299,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal17:
         id: proposal17
         title: Proposition 17
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalform7'
         reference: 1
@@ -302,7 +310,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal18:
         id: proposal18
         title: Proposition 18
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user1'
         proposalForm: '@proposalform7'
         reference: 2
@@ -313,7 +321,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal19:
         id: proposal19
         title: Proposition brouillon 1
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         draft: true
         author: '@userSpyl'
         proposalForm: '@proposalform1'
@@ -325,7 +333,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal20:
         id: proposal20
         title: Proposition brouillon 2
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         draft: true
         author: '@user1'
         proposalForm: '@proposalform1'
@@ -337,7 +345,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal21:
         id: proposal21
         title: Proposition brouillon 3
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         draft: true
         author: '@user4'
         proposalForm: '@proposalform1'
@@ -349,7 +357,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal22:
         id: proposal22
         title: Proposition vraiment intéressante
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalFormVote'
         reference: 666
@@ -360,7 +368,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal23:
         id: proposal23
         title: Proposition très intéressante
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalFormVote'
         reference: 667
@@ -371,7 +379,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal24:
         id: proposal24
         title: Proposition 1
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user1'
         proposalForm: '@proposalFormVoteClassement'
         reference: 1
@@ -382,7 +390,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal25:
         id: proposal25
         title: Proposition 2
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user1'
         proposalForm: '@proposalFormVoteClassement'
         reference: 2
@@ -393,7 +401,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal26:
         id: proposal26
         title: Proposition 3
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user1'
         proposalForm: '@proposalFormVoteClassement'
         reference: 3
@@ -404,7 +412,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal27:
         id: proposal27
         title: Operation génétique pour avoir la force
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user1'
         proposalForm: '@proposalform9'
         reference: 10
@@ -415,7 +423,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal28:
         id: proposal28
         title: Transfusion de midi-chloriens
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         draft: true
         author: '@user4'
         proposalForm: '@proposalform9'
@@ -425,7 +433,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal29:
         id: proposal29
         title: Annuler les prochains Star-Wars
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalform9'
         reference: 666
@@ -436,7 +444,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal30:
         id: proposal30
         title: Trouver un anti dote à la force
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalform9'
         reference: 667
@@ -447,7 +455,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal31:
         id: proposal31
         title: Minus et Cortex
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalform10'
         reference: 42
@@ -458,7 +466,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal32:
         id: proposal32
         title: Les chats
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user2'
         proposalForm: '@proposalform10'
         reference: 44
@@ -469,7 +477,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal32bis:
         id: proposal32bis
         title: Les chats ne devraient pas avoir le même titire
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user2'
         proposalForm: '@proposalform10'
         reference: 57
@@ -480,7 +488,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal33:
         id: proposal33
         title: Batman
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalform10'
         reference: 43
@@ -491,7 +499,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal34:
         id: proposal34
         title: Quel type de bière ?
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user1'
         proposalForm: '@proposalform11'
         reference: 45
@@ -502,7 +510,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal35:
         id: proposal35
         title: Proposition 35 non publiée
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@userNotConfirmedWithContributions'
         proposalForm: '@proposalform1'
         theme: '@theme3'
@@ -517,7 +525,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal36:
         id: proposal36
         title: Proposition non publiée à temps
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalform2'
         createdAt: <identity((new \DateTime('2018-11-03')))>
@@ -527,7 +535,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal37:
         id: proposal37
         title: Libérons les nains de jardin
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         publishedAt: <(new \DateTime('2017-02-01 13:37:00'))>
         author: '@user1'
         proposalForm: '@proposalform12'
@@ -538,7 +546,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal38:
         id: proposal38
         title: Libérons blanche neige
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         publishedAt: <(new \DateTime('2017-02-01 13:38:00'))>
         author: '@user1'
         proposalForm: '@proposalform12'
@@ -549,7 +557,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal39:
         id: proposal39
         title: Donnons leur un village dédié
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         publishedAt: <(new \DateTime('2017-02-01 13:39:00'))>
         author: '@user1'
         proposalForm: '@proposalform12'
@@ -582,7 +590,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal102:
         id: proposalDraftWithNotConfirmedAuthor
         title: Proposition brouillon avec un auteur non confirmé
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         draft: true
         author: '@userNotConfirmedWithContributions'
         proposalForm: '@proposalform1'
@@ -594,7 +602,7 @@ Capco\AppBundle\Entity\Proposal:
     question1:
         id: question1
         title: Comment faire de l'électricité ?
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         publishedAt: <(new \DateTime('2017-02-01 00:00:01'))>
         updatedAt: <(new \DateTime('2017-02-01 00:00:01'))>
         createdAt: <(new \DateTime('2017-02-01 00:00:01'))>
@@ -606,7 +614,7 @@ Capco\AppBundle\Entity\Proposal:
     question2:
         id: question2
         title: Et chez Youpie c'est mieux ?
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         publishedAt: <(new \DateTime('2017-02-01 00:00:02'))>
         updatedAt: <(new \DateTime('2017-02-01 00:00:02'))>
         createdAt: <(new \DateTime('2017-02-01 00:00:02'))>
@@ -646,7 +654,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal103:
         id: proposal103
         title: Test de publication sans accusé de réception
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalFormVote'
         reference: 1103
@@ -657,7 +665,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal104:
         id: proposal104
         title: Test de publication avec accusé de réception
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalform1'
         reference: 1104
@@ -668,7 +676,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal105:
         id: proposal105
         title: Proposition qui va être jetée
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalform16'
         reference: 1105
@@ -679,7 +687,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal106:
         id: proposal106
         title: Proposition qui est jetée
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalform16'
         reference: 1106
@@ -692,7 +700,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal107:
         id: proposal107
         title: Proposition n'est pas jetée
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user4'
         proposalForm: '@proposalform16'
         reference: 1107
@@ -961,7 +969,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal138:
         id: proposal138
         title: Proposition de Jean 1
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@userJean'
         proposalForm: '@proposalFormVoteClassement'
         reference: 4
@@ -972,7 +980,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal139:
         id: proposal139
         title: Proposition de Jean 2
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@userJean'
         proposalForm: '@proposalFormVoteClassement'
         reference: 5
@@ -983,7 +991,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal139bis:
         id: proposal139bis
         title: Proposition de Jean Duplicate 2
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@userJeanDuplicates'
         proposalForm: '@proposalFormVoteClassement'
         reference: 555555
@@ -995,7 +1003,7 @@ Capco\AppBundle\Entity\Proposal:
         id: lePetitCafe
         address: '[{"address_components": [  {"long_name": "6","short_name": "6","types": [ "street_number" ] },  {"long_name": "Rue Descartes","short_name": "Rue Descartes","types": [ "route" ] },  {"long_name": "Paris","short_name": "Paris","types": [ "locality", "political" ] },  {"long_name": "Département de Paris","short_name": "Département de Paris","types": [ "administrative_area_level_2", "political" ] },  {"long_name": "Île-de-France","short_name": "IDF","types": [ "administrative_area_level_1", "political" ] },  {"long_name": "France","short_name": "FR","types": [ "country", "political" ] },  {"long_name": "75005","short_name": "75005","types": [ "postal_code" ] }],"formatted_address": "6 Rue Descartes, 75005 Paris, France","geometry": {  "bounds": {"northeast": { "lat": 48.847207, "lng": 2.3485302 },"southwest": { "lat": 48.8470684, "lng": 2.3483977 } },  "location": {"lat": 48.8471578,"lng": 2.3484722 },  "location_type": "ROOFTOP",  "viewport": {"northeast": { "lat": 48.8484866802915, "lng": 2.349812930291502 },"southwest": { "lat": 48.8457887197085, "lng": 2.347114969708498 } }},"place_id": "ChIJNYpNEuZx5kcRceTkIv6AC1k","types": [ "premise" ]} ]'
         title: Le petit café
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalformCafetier'
         reference: 5
@@ -1010,7 +1018,7 @@ Capco\AppBundle\Entity\Proposal:
         address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" : {"location" : {"lat" : 48.8538407,"lng" : 2.3321014},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
         title: Café Louise
         district: '@paris6'
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalformCafetier'
         reference: 6
@@ -1023,7 +1031,7 @@ Capco\AppBundle\Entity\Proposal:
         address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" : {"location" : {"lat" : 48.8538407,"lng" : 2.3321014},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
         title: Proposition pour tester le doublon
         district: '@districtIdf3'
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalformIdfBP3'
         reference: 133
@@ -1037,7 +1045,7 @@ Capco\AppBundle\Entity\Proposal:
         title: Proposition avec des réseaux sociaux
         category: '@pCategory2'
         district: '@districtIdf3'
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalformIdfBP3'
         reference: 134
@@ -1052,7 +1060,7 @@ Capco\AppBundle\Entity\Proposal:
         title: Proposition par un utilisateur France Connect
         category: '@pCategory2'
         district: '@districtIdf3'
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         proposalForm: '@proposalformIdfBP3'
         reference: 135
         createdAt: <(new \DateTime('2021-07-04 10:30:00'))>
@@ -1062,7 +1070,7 @@ Capco\AppBundle\Entity\Proposal:
     proposalAvecDesRsAAjouter:
         id: proposalAvecDesRsAAjouter
         title: Proposition avec réseaux sociaux à ajouter
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalFormStepClosedIdfBP3'
         createdAt: <identity((new \DateTime('2021-06-03')))>
@@ -1073,7 +1081,7 @@ Capco\AppBundle\Entity\Proposal:
     proposalAvecDesRsAModifier:
         id: proposalAvecDesRsAModifier
         title: Proposition avec réseaux sociaux modifiable
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalFormStepClosedIdfBP3'
         createdAt: <identity((new \DateTime('2021-06-03')))>
@@ -1085,7 +1093,7 @@ Capco\AppBundle\Entity\Proposal:
     proposalProjectWithOwner:
         id: proposalProjectWithOwner
         title: Je propose, mais seulement pour Théo
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalFormProjectWithOwner'
         createdAt: <identity((new \DateTime('2021-06-03')))>
@@ -1095,7 +1103,7 @@ Capco\AppBundle\Entity\Proposal:
     proposalPhoneVerifiedRequirement:
         id: proposalPhoneVerifiedRequirement
         title: Je propose!
-        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        body: 'TODO'
         author: '@user5'
         proposalForm: '@proposalFormPhoneRequired'
         createdAt: <identity((new \DateTime('2021-06-03')))>

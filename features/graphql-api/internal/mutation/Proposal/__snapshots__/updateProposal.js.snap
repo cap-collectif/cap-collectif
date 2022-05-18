@@ -30,7 +30,7 @@ exports[`Internal | Update proposal content update proposal with rs 1`] = `
 Object {
   "changeProposalContent": Object {
     "proposal": Object {
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+      "body": "TODO",
       "facebookUrl": "https://www.facebook.com/capco/",
       "twitterUrl": "https://twitter.com/karate_kid22",
       "webPageUrl": "http://cap-collectif.com",

@@ -45,8 +45,7 @@ def symfony_bin_deps():
     run('brew install rabbitmq')
     run('brew install rabbitmq-c')
     run('brew install ag')
-    run('curl -sS https://get.symfony.com/cli/installer | bash')
-    run('mv ' + symfony_bin_dir + '/symfony /usr/local/bin/symfony')
+    # brew install symfony-cli/tap/symfony-cli
     run('brew install imagemagick')
     run('printf "\n" | pecl install imagick')
     run('printf "\n" | pecl install redis')
@@ -79,7 +78,7 @@ def symfony_bin_install(force=False):
 
 def configure_vhosts(mode='symfony_bin'):
     """
-    Update /etc/hosts file with domains
+    Update /etc/hosts file with domains and setup Symfony proxy
     """
 
     domains = [

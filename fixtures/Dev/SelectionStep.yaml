@@ -6,34 +6,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         isEnabled: true
         startAt: <identity((new \DateTime('2018-11-04')))>
         endAt: <identity((new \DateTime('2050-11-03')))>
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         voteType: 1
         votesHelpText: <stripslashes('\<p>\')>Bon vote<stripslashes('\</p>\')>
         defaultStatus: '@status4'
@@ -44,34 +18,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         isEnabled: true
         startAt: <identity((new \DateTime('2018-11-05')))>
         endAt: <identity((new \DateTime('2051-11-03')))>
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
         voteType: 0
         defaultStatus: '@status6'
     selectionstep3:
@@ -82,34 +30,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         startAt: <identity((new \DateTime('2018-11-06')))>
         endAt: <identity((new \DateTime('2019-01-01')))>
         voteType: 1
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
     selectionstep4:
         id: selectionstep4
         title: Sélection avec vote selon le budget
@@ -120,34 +42,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         voteType: 2
         votesHelpText: <stripslashes('\<p>\')>Bon vote<stripslashes('\</p>\')>
         budget: 3000000
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
     selectionstep5:
         id: selectionstep5
         title: Sélection avec vote simple
@@ -157,34 +53,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         endAt: <identity((new \DateTime('2034-06-01')))>
         voteType: 1
         votesHelpText: <stripslashes('\<p>\')>Bon vote<stripslashes('\</p>\')>
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
     selectionstep6:
         id: selectionstep6
         title: Sélection à venir
@@ -193,34 +63,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         startAt: <identity((new \DateTime('2034-06-01')))>
         endAt: <identity((new \DateTime('2036-06-01')))>
         voteType: 1
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
     selectionstep7:
         id: selectionstep7
         title: Réalisation
@@ -229,34 +73,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         allowingProgressSteps: true
         startAt: <identity((new \DateTime('2032-06-01')))>
         voteType: 0
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
     selectionstep8:
         id: selectionstep8
         title: Sélection avec vote budget limité
@@ -266,34 +84,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         endAt: <identity((new \DateTime('2032-06-02')))>
         voteType: 2
         votesLimit: 1
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
     selectionstep9:
         id: selectionstep9
         title: Étape Sélection
@@ -303,34 +95,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         endAt: <identity((new \DateTime('2032-06-02')))>
         voteType: 2
         votesLimit: 1
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
     selectionstepVoteClassement:
         id: selectionstepVoteClassement
         title: Selection avec vote classement limité
@@ -341,34 +107,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         votesLimit: 3
         votesRanking: true
         requirementsReason: Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
     selectionQuestionStepVoteClassement:
         id: selectionQuestionStepVoteClassement
         title: Selection de questions avec vote classement limité
@@ -378,34 +118,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         voteType: 1
         votesLimit: 3
         votesRanking: true
-        body: Compère le Renard se mit un jour en frais,
-            | Et retint à dîner commère la Cicogne.
-            | Le régal fut petit et sans beaucoup d'apprêts
-            | Le galand, pour toute besogne,
-            | Avait un brouet clair (il vivait chichement).
-            | Ce brouet fut par lui servi sur une assiette
-            | La cigogne au long bec n'en put attraper miette,
-            | Et le drôle eut lapé le tout en un moment.
-            | Pour se venger de cette tromperie,
-            | A quelque temps de là, la cigogne le prie.
-            | "Volontiers, lui dit-il, car avec mes amis,
-            | Je ne fais point cérémonie. "
-            | A l'heure dite, il courut au logis
-            | De la cigogne son hôtesse,
-            | Loua très fort sa politesse ,
-            | Trouva le dîner cuit à point.
-            | Bon appétit surtout, renards n'en manquent point.
-            | Il se réjouissait à l'odeur de la viande
-            | Mise en menus morceaux, et qu'il croyait friande.
-            | On servit, pour l'embarrasser,
-            | En un vase à long col et d'étroite embouchure .
-            | Le bec de la cigogne y pouvait bien passer,
-            | Mais le museau du sire était d'autre mesure.
-            | Il lui fallut à jeun retourner au logis,
-            | Honteux comme un renard qu'une poule aurait pris,
-            | Serrant la queue, et portant bas l'oreille.
-            | Trompeurs, c'est pour vous que j'écris
-            | Attendez-vous à la pareille.
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'
     selectionStepIdfAnalyse:
         id: selectionStepIdfAnalyse
         title: Etudes des projets

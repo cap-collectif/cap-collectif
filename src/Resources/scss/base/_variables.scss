@@ -135,8 +135,8 @@ $statuses: (primary $primary-color $white) (success $success-color $white) (info
     $bg: nth($status, 2);
     $color: nth($status, 3);
 
-    &.status--#{$name} {
-        background-color: $bg;
-        color: $color;
-    }
+     .status--#{$name} {
+         background-color: $bg;
+         color: $color;
+     }
 }
