@@ -14,7 +14,7 @@
         "cy:run:debate:ci": "NODE_ENV=ci cypress run --spec 'integration/debate/*.spec.ts'",
         "cy:run:project-owner:ci": "NODE_ENV=ci cypress run --spec 'integration/projectOwner/*.spec.ts'",
         "cy:run:questionnaire:ci": "NODE_ENV=ci cypress run --spec 'integration/questionnaire/*.spec.ts'",
-        "cy:run:projects:ci": "NODE_ENV=ci cypress run --spec 'integration/projects/*.spec.ts,integration/proposal/*.spec.ts'",
+        "cy:run:projects:ci": "NODE_ENV=ci cypress run --spec 'integration/projects/*.spec.ts,integration/proposal/*.spec.ts,integration/rgpd/*.spec.ts'",
         "cy:verify": "cypress verify",
         "cy:info": "cypress info",
         "cy:version": "cypress version"
