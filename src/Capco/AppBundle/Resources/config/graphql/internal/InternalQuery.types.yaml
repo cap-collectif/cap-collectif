@@ -553,6 +553,11 @@ InternalQuery:
                 description: 'Get list of sms orders.'
                 access: "@hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsOrdersResolver", [args])'
+                args:
+                    filter:
+                        type: 'SmsOrdersFilters'
+                        description: 'Filter sms orders.'
+                        defaultValue: '@=constant("Capco\\AppBundle\\Enum\\SmsOrdersFilters::UNPROCESSED")'
             smsCredits:
                 type: 'SmsCreditConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

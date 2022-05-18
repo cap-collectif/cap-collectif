@@ -5162,6 +5162,9 @@ input DeleteSmsOrderInput {
 }
 
 type DeleteSmsOrderPayload {
+  """The deleted sms order global id."""
+  deletedSmsOrderId: ID!
+
   """The error generated, if any."""
   errorCode: DeleteSmsOrderErrorCode
   clientMutationId: String
@@ -11434,6 +11437,9 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
+
+    """Filter sms orders."""
+    filter: SmsOrdersFilters = UNPROCESSED
   ): SmsOrderConnection!
 
   """Get list of sms credits."""
@@ -13914,6 +13920,9 @@ type SmsOrder implements Node {
 
   """The amount ordered."""
   amount: Int!
+
+  """State of the order."""
+  isProcessed: Boolean!
 }
 
 """A connection to a list of items."""
@@ -13934,6 +13943,15 @@ type SmsOrderEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+"""Available filters for `SmsOrders` query."""
+enum SmsOrdersFilters {
+  """Filter by processed orders."""
+  PROCESSED
+
+  """Filter by unprocessed orders."""
+  UNPROCESSED
 }
 
 """A source"""

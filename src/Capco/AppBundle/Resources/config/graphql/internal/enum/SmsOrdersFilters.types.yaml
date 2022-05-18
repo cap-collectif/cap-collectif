@@ -1,0 +1,12 @@
+SmsOrdersFilters:
+    type: enum
+    config:
+        name: SmsOrdersFilters
+        description: 'Available filters for `SmsOrders` query.'
+        values:
+            PROCESSED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\SmsOrdersFilters::PROCESSED")'
+                description: 'Filter by processed orders.'
+            UNPROCESSED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\SmsOrdersFilters::UNPROCESSED")'
+                description: 'Filter by unprocessed orders.'

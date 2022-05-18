@@ -4,7 +4,7 @@ import Title from './Title/Title';
 import Count from './Count/Count';
 import cn from 'classnames';
 
-type VariantType = 'blue' | 'white' | 'red' | 'yellow';
+export type VariantType = 'blue' | 'white' | 'red' | 'yellow';
 
 export interface CountSectionProps extends FlexProps {
     variant?: VariantType
@@ -42,7 +42,7 @@ const variantStyle = {
     yellow: {
         bg: 'yellow.100',
         border: "normal",
-        borderColor: 'yellow.150',
+        borderColor: 'yellow.200',
         '.count-section__title, .count-section__count': {
             color: 'yellow.800'
         }

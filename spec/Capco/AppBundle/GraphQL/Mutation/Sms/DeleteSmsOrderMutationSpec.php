@@ -42,7 +42,7 @@ class DeleteSmsOrderMutationSpec extends ObjectBehavior
         $em->remove($smsOrder)->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
 
-        $this->__invoke($input, $viewer)->shouldReturn(['errorCode' => null]);
+        $this->__invoke($input, $viewer)->shouldReturn(['errorCode' => null, 'deletedSmsOrderId' => $id]);
     }
 
     public function it_should_return_not_found_error_code(
@@ -62,6 +62,7 @@ class DeleteSmsOrderMutationSpec extends ObjectBehavior
 
         $this->__invoke($input, $viewer)->shouldReturn([
             'errorCode' => DeleteSmsOrderMutation::SMS_ORDER_NOT_FOUND,
+            'deletedSmsOrderId' => $id
         ]);
     }
 }

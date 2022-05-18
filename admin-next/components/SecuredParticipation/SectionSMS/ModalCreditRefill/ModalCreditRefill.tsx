@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { useIntl } from 'react-intl';
+import { IntlShape, useIntl } from 'react-intl';
 import {
     Button,
     CapUIFontWeight,
@@ -9,13 +9,38 @@ import {
     Heading,
     Modal,
     Tag,
-    Text,
+    Text, toast,
 } from '@cap-collectif/ui';
 import { SegmentedControl } from '@ui/SegmentedControl';
 import { SegmentedControlValue } from '@ui/SegmentedControl/item/SegmentedControlItem';
 import { formatBigNumber } from '@utils/format-number';
+import { mutationErrorToast } from '@utils/mutation-error-toast';
+import CreateSmsOrderMutation from '@mutations/CreateSmsOrderMutation';
+import useFeatureFlag from '@hooks/useFeatureFlag';
 
-const PACKAGE_LIST = [
+const submitOrder = (creditCount: SegmentedControlValue, intl: IntlShape) => {
+    const input = {
+        amount: Number(creditCount)
+    }
+
+    return CreateSmsOrderMutation.commit(
+        {
+            input,
+        },
+    ).then(response => {
+        if (!response.createSmsOrder?.smsOrder) {
+            return mutationErrorToast(intl);
+        }
+
+        toast({
+            variant: 'success',
+            content: intl.formatMessage({ id: 'order-sent-contact-soon' }),
+        });
+    });
+}
+
+
+export const PACKAGE_LIST = [
     {
         price: 1000,
         sms: 1000
@@ -36,8 +61,13 @@ const PACKAGE_LIST = [
     },
 ]
 
-const ModalCreditRefill: FC = () => {
+type ModalCreditRefillProps = {
+    firstRequest?: boolean
+}
+
+const ModalCreditRefill: FC<ModalCreditRefillProps> = ({ firstRequest }) => {
     const intl = useIntl();
+    const hasTwilioEnabled = useFeatureFlag('twilio');
     const [offerSelected, setOfferSelected] = useState<SegmentedControlValue>(PACKAGE_LIST[2].sms);
 
     const packageSelected = PACKAGE_LIST.find(pack => pack.sms === offerSelected) || PACKAGE_LIST[2];
@@ -48,6 +78,13 @@ const ModalCreditRefill: FC = () => {
             size={CapUIModalSize.Md}
             ariaLabel={intl.formatMessage({ id: "process-request" })}
             disclosure={
+                firstRequest ? <Button
+                    variant="primary"
+                    variantColor="primary"
+                    variantSize="small"
+                    disabled={!hasTwilioEnabled}>
+                    {intl.formatMessage({ id: "action_enable" })}
+                </Button> :
                 <Button variant="secondary" variantColor="primary" variantSize="small" alignSelf="flex-start">
                     {intl.formatMessage({ id: 'global.refill' })}
                 </Button>
@@ -92,7 +129,7 @@ const ModalCreditRefill: FC = () => {
                     </Modal.Body>
                     <Modal.Footer
                         info={{
-                            url: '#',
+                            url: 'https://aide.cap-collectif.com/article/270-securisation-du-vote-par-sms',
                             label: intl.formatMessage({ id: "learn.more" })
                         }}
                     >
@@ -100,7 +137,10 @@ const ModalCreditRefill: FC = () => {
                             variant="primary"
                             variantColor="primary"
                             variantSize="big"
-                            onClick={hide}>
+                            onClick={() => {
+                                submitOrder(offerSelected, intl)
+                                hide();
+                            }}>
                             {intl.formatMessage({ id: "global.to-order" })}
                         </Button>
                     </Modal.Footer>

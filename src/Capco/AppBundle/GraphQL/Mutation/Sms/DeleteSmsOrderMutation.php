@@ -28,12 +28,12 @@ class DeleteSmsOrderMutation implements MutationInterface
         $smsOrder = $this->globalIdResolver->resolve($id, $viewer);
 
         if (!$smsOrder) {
-            return ['errorCode' => self::SMS_ORDER_NOT_FOUND];
+            return ['errorCode' => self::SMS_ORDER_NOT_FOUND, 'deletedSmsOrderId' => $id];
         }
 
         $this->em->remove($smsOrder);
         $this->em->flush();
 
-        return ['errorCode' => null];
+        return ['errorCode' => null, 'deletedSmsOrderId' => $id];
     }
 }

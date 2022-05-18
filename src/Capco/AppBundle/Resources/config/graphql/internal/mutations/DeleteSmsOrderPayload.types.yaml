@@ -3,6 +3,9 @@ DeleteSmsOrderPayload:
     config:
         description: 'Payload of deleteSmsOrder mutation.'
         fields:
+            deletedSmsOrderId:
+                type: 'ID!'
+                description: 'The deleted sms order global id.'
             errorCode:
                 type: 'DeleteSmsOrderErrorCode'
                 description: 'The error generated, if any.'

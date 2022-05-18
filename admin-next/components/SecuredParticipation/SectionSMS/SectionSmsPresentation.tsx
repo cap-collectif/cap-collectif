@@ -3,7 +3,6 @@ import { Section } from '@ui/Section';
 import { useIntl } from 'react-intl';
 import {
     Box,
-    Button,
     CapUIIcon,
     CapUIIconSize,
     CapUILineHeight,
@@ -14,11 +13,10 @@ import {
     SpotIcon,
     Text,
 } from '@cap-collectif/ui';
-import useFeatureFlag from '@hooks/useFeatureFlag';
+import ModalCreditRefill from './ModalCreditRefill/ModalCreditRefill';
 
-const SectionSMSPresentation: FC = () => {
+const SectionSmsPresentation: FC = () => {
     const intl = useIntl();
-    const hasTwilioEnabled = useFeatureFlag('twilio');
 
     return (
         <Section direction="row" justify="space-between" align="center">
@@ -27,7 +25,7 @@ const SectionSMSPresentation: FC = () => {
                     {intl.formatMessage({ id: "verification-with-sms" })}
                 </Section.Title>
                 <Section.Description mb={4}>
-                    {intl.formatMessage({ id: "verification-with-sms" })}
+                    {intl.formatMessage({ id: "description-sms-service-not-activated" })}
                 </Section.Description>
 
                 <Box mb={5}>
@@ -46,13 +44,7 @@ const SectionSMSPresentation: FC = () => {
                     </Flex>
                 </Box>
 
-                <Button
-                    variant="primary"
-                    variantColor="primary"
-                    variantSize="small"
-                    disabled={!hasTwilioEnabled}>
-                    {intl.formatMessage({ id: "action_enable" })}
-                </Button>
+                <ModalCreditRefill firstRequest />
             </Box>
 
             <SpotIcon name={CapUISpotIcon.SMS} size={CapUISpotIconSize.Lg} />
@@ -60,4 +52,4 @@ const SectionSMSPresentation: FC = () => {
     );
 }
 
-export default SectionSMSPresentation;
+export default SectionSmsPresentation;

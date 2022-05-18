@@ -12,8 +12,12 @@ type SubComponents = {
     Item: typeof SegmentedControlItem
 }
 
-const SegmentedControl: FC<SegmentedControlProps> & SubComponents = ({ value, onChange, children, ...props  }) => {
-
+const SegmentedControl: FC<SegmentedControlProps> & SubComponents = ({
+    value,
+    onChange,
+    children,
+    ...props  
+}) => {
     const context = useMemo(
         () => ({
             onChange,
@@ -24,7 +28,7 @@ const SegmentedControl: FC<SegmentedControlProps> & SubComponents = ({ value, on
 
     return (
         <SegmentedControlContext.Provider value={context}>
-            <Flex direction="row" justify="space-between" bg="gray.200" borderRadius="8px" p={1} {...props}>
+            <Flex direction="row" justify="space-between" bg="gray.150" borderRadius="8px" p={2} {...props}>
                 {children}
             </Flex>
         </SegmentedControlContext.Provider>

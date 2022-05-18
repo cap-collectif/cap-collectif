@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\SmsOrder;
+use Capco\AppBundle\Enum\SmsOrdersFilters;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -14,13 +15,21 @@ use Doctrine\ORM\EntityRepository;
 class SmsOrderRepository extends EntityRepository
 {
 
-    public function findNotProcessedPaginated(int $offset, int $limit): array
+    public function findPaginated(int $offset, int $limit, string $filter): array
     {
-        return $this->createQueryBuilder('s')
-            ->where('s.isProcessed = false')
+        $qb = $this->createQueryBuilder('s')
             ->setFirstResult($offset)
-            ->setMaxResults($limit)
+            ->setMaxResults($limit);
+
+        if ($filter === SmsOrdersFilters::PROCESSED || $filter === SmsOrdersFilters::UNPROCESSED) {
+            $filterValue = $filter === SmsOrdersFilters::PROCESSED;
+            $qb->where('s.isProcessed = :isProcessed');
+            $qb->setParameter('isProcessed', $filterValue);
+        }
+
+        return $qb
             ->getQuery()->getResult();
+
     }
 
     public function countAll(): int
