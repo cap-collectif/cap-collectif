@@ -65,6 +65,14 @@ capco_api_webcomponent:
         _format: json
     options: { i18n: false }
 
+capco_api_sendinblue:
+    resource: '@CapcoAppBundle/Controller/Api/SendInBlueController.php'
+    type: annotation
+    prefix: /api
+    defaults:
+        _format: json
+    options: { i18n: false }
+
 # App
 capco_app:
     resource: '@CapcoAppBundle/Controller/Site'
