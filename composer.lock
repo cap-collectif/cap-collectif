@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2be1ffcba4eba3c739a6a8bcf6b8a26",
+    "content-hash": "735dc3ac746a059e0c5e33195d4fe688",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -9877,6 +9877,10 @@
                 "client",
                 "search"
             ],
+            "support": {
+                "issues": "https://github.com/ruflin/Elastica/issues",
+                "source": "https://github.com/ruflin/Elastica/tree/7.1.3"
+            },
             "time": "2021-12-09T08:28:09+00:00"
         },
         {
@@ -10164,7 +10168,7 @@
             "version": "v7.4.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sendinblue/APIv3-php-library",
+                "url": "https://github.com/sendinblue/APIv3-php-library.git",
                 "reference": "c169d8ceb74b211199fb11586389fb9aa2c37790"
             },
             "dist": {
@@ -10196,11 +10200,7 @@
                     "SendinBlue\\Client\\": "lib/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "SendinBlue\\Client\\": "test/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -10220,6 +10220,10 @@
                 "sendinblue",
                 "swagger"
             ],
+            "support": {
+                "issues": "https://github.com/sendinblue/APIv3-php-library/issues",
+                "source": "https://github.com/sendinblue/APIv3-php-library/tree/v7.4.4"
+            },
             "time": "2021-08-25T08:49:42+00:00"
         },
         {
