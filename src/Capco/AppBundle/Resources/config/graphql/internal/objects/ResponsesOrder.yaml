@@ -1,0 +1,12 @@
+ResponsesOrder:
+    type: input-object
+    config:
+        name: ResponsesOrder
+        description: 'Ways in which a responses can be ordered.'
+        fields:
+            field:
+                type: 'ResponsesOrderField'
+                description: 'The field in which to order responses by.'
+            direction:
+                type: 'OrderDirection'
+                description: 'The direction in which to order responses.'

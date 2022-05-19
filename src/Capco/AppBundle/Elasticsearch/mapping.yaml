@@ -342,6 +342,7 @@ mappings:
                 labels: { type: keyword }
                 other: { type: keyword }
         iaSentiment: { type: text }
+        iaReadability: { type: byte }
         responses:
             type: nested
             properties:

@@ -22,6 +22,10 @@ InternalQuestion:
                         type: 'CivicIASentiment'
                         defaultValue: null
                         description: 'Get responses matching given sentiment.'
+                    orderBy:
+                        type: 'ResponsesOrder'
+                        defaultValue: { field: CREATED_AT, direction: DESC }
+                        description: 'Ordering options for responses.'
             number:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
                 type: 'Int!'

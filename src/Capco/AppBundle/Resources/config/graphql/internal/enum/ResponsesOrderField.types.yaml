@@ -1,0 +1,11 @@
+ResponsesOrderField:
+    type: enum
+    config:
+        description: 'Properties by which responses can be ordered'
+        values:
+            CREATED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ResponsesOrderField::CREATED_AT")'
+                description: 'Allows ordering a list of responses by its creation date.'
+            READABILITY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ResponsesOrderField::READABILITY")'
+                description: 'Allows ordering a list of responses by its readability score.'

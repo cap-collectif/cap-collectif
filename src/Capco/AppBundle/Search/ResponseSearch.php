@@ -78,6 +78,7 @@ class ResponseSearch extends Search
         bool $withNotConfirmedUser = false,
         ?string $term = null,
         ?string $sentimentFilter = null,
+        array $orderBy = ['createdAt' => ['order' => 'desc']],
         int $limit = 20,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
@@ -102,7 +103,7 @@ class ResponseSearch extends Search
         }
 
         $query = new Query($boolQuery);
-        $this->setSortWithId($query, ['createdAt' => ['order' => 'desc']]);
+        $this->setSortWithId($query, $orderBy);
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);

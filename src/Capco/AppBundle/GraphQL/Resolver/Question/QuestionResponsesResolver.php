@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\ResponsesOrderField;
 use Capco\AppBundle\Search\ResponseSearch;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
@@ -13,7 +15,7 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class QuestionResponsesResolver implements ResolverInterface
 {
-    private $logger;
+    private LoggerInterface $logger;
     private ResponseSearch $responseSearch;
 
     public function __construct(ResponseSearch $responseSearch, LoggerInterface $logger)
@@ -45,6 +47,7 @@ class QuestionResponsesResolver implements ResolverInterface
             true === $arguments['withNotConfirmedUser'];
         $term = $arguments['term'] ?? null;
         $sentimentFilter = $args->offsetGet('iaSentiment');
+        $orderBy = self::getOrderBy($arguments);
 
         // Schema design is wrong but let's return empty connection for now…
         if ($question instanceof SectionQuestion) {
@@ -56,7 +59,8 @@ class QuestionResponsesResolver implements ResolverInterface
             $question,
             $withNotConfirmedUser,
             $term,
-            $sentimentFilter
+            $sentimentFilter,
+            $orderBy
         ) {
             try {
                 return $this->responseSearch->getResponsesByQuestion(
@@ -64,6 +68,7 @@ class QuestionResponsesResolver implements ResolverInterface
                     $withNotConfirmedUser,
                     $term,
                     $sentimentFilter,
+                    $orderBy,
                     $limit,
                     $cursor
                 );
@@ -75,5 +80,19 @@ class QuestionResponsesResolver implements ResolverInterface
         });
 
         return $paginator->auto($args);
+    }
+
+    private static function getOrderBy(array $arguments): array
+    {
+        $orderByField =
+            ResponsesOrderField::SORT_FIELD[
+                $arguments['orderBy']['field'] ?? ResponsesOrderField::CREATED_AT
+            ];
+        $orderByDirection =
+            OrderDirection::SORT_DIRECTION[
+                $arguments['orderBy']['direction'] ?? OrderDirection::DESC
+            ];
+
+        return [$orderByField => ['order' => $orderByDirection]];
     }
 }

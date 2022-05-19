@@ -277,3 +277,133 @@ Object {
   },
 }
 `;
+
+exports[`Internal|Question.civicIA get civicIA analysis on responses, ordered by readability 1`] = `
+Object {
+  "question": Object {
+    "responses": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "iaCategory": "sport",
+            "iaReadability": 80,
+            "iaSentiment": "NEUTRAL",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "sport",
+            "iaReadability": 37,
+            "iaSentiment": "NEGATIVE",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
+            "iaSentiment": null,
+          },
+        },
+      ],
+    },
+  },
+}
+`;

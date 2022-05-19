@@ -6922,6 +6922,9 @@ type MajorityQuestion implements Question & Node {
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
+
+    """Ordering options for responses."""
+    orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -7120,6 +7123,9 @@ type MediaQuestion implements Question & Node {
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
+
+    """Ordering options for responses."""
+    orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -7204,6 +7210,9 @@ type MultipleChoiceQuestion implements Question & Node {
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
+
+    """Ordering options for responses."""
+    orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -11490,6 +11499,9 @@ interface Question {
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
+
+    """Ordering options for responses."""
+    orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -12921,6 +12933,24 @@ input ResponseInput {
   medias: [ID!]
 }
 
+"""Ways in which a responses can be ordered."""
+input ResponsesOrder {
+  """The field in which to order responses by."""
+  field: ResponsesOrderField
+
+  """The direction in which to order responses."""
+  direction: OrderDirection
+}
+
+"""Properties by which responses can be ordered"""
+enum ResponsesOrderField {
+  """Allows ordering a list of responses by its creation date."""
+  CREATED_AT
+
+  """Allows ordering a list of responses by its readability score."""
+  READABILITY
+}
+
 input ReviewEventInput {
   """The ID of the Event to review."""
   id: ID!
@@ -13156,6 +13186,9 @@ type SectionQuestion implements Question & Node {
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
+
+    """Ordering options for responses."""
+    orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -13729,6 +13762,9 @@ type SimpleQuestion implements Question & Node {
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
+
+    """Ordering options for responses."""
+    orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
