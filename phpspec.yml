@@ -3,8 +3,8 @@ matchers:
   - spec\Matcher\BeAnEmptyConnectionMatcher
   - spec\Matcher\BeAnEmptyCollectionMatcher
 extensions:
-  FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
-    format: [clover, html]
-    output:
-      clover: coverage/php/clover.xml
-      html: coverage/php/html
+#  FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
+#    format: [clover, html]
+#    output:
+#      clover: coverage/php/clover.xml
+#      html: coverage/php/html

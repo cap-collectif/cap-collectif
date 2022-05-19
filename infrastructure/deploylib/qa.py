@@ -25,11 +25,11 @@ def phpspec(desc='false'):
     "Run PHP Unit Tests"
     if desc != 'false':
         command(
-            'php -d pcov.enabled=1 -d pcov.directory=. -d pcov.exclude="~vendor~" -d memory_limit=-1 bin/phpspec describe ' + desc,
+            'php -d memory_limit=-1 bin/phpspec describe ' + desc,
             'application', Config.www_app)
     else:
         command(
-            'php -d pcov.enabled=1 -d pcov.directory=. -d pcov.exclude="~vendor~" -d memory_limit=-1 bin/phpspec run --no-code-generation --no-coverage',
+            'php -d memory_limit=-1 bin/phpspec run --no-code-generation',
             'application', Config.www_app)
 
 

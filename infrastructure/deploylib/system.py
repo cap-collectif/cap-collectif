@@ -49,7 +49,6 @@ def symfony_bin_deps():
     run('brew install imagemagick')
     run('printf "\n" | pecl install imagick')
     run('printf "\n" | pecl install redis')
-    run('printf "\n" | pecl install pcov')
     run('echo $(brew --prefix rabbitmq-c) | pecl install amqp')
 
 

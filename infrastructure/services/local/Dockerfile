@@ -46,7 +46,6 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.4-redis \
         php7.4-xsl \
         php7.4-zip \
-        #php7.4-pcov \
         php7.4-amqp \
         php7.4-simplexml \
     && \
