@@ -1,4 +1,3 @@
-import DropzoneFile from 'react-dropzone';
 import { DataType, DatumType, frenchSeparator, commaSeparator } from './DataType';
 
 const csvToArray = (content: string): Array<string> => {

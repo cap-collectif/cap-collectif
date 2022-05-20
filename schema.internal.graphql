@@ -5199,7 +5199,7 @@ input DeleteUserIdentificationCodeListInput {
 
 type DeleteUserIdentificationCodeListPayload {
   """The id of the list just deleted, if successful."""
-  id: ID
+  deletedUserIdentificationCodeListId: ID
 
   """The error code, if failing."""
   errorCode: DeleteUserIdentificationCodeListErrorCode

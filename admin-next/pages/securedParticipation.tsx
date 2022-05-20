@@ -4,11 +4,11 @@ import React, { Suspense } from 'react';
 import Layout from '../components/Layout/Layout';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import { useIntl } from 'react-intl';
-import IdentificationCodesContent from '../components/IdentificationCodes/IdentificationCodesContent';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
 // import SectionSms from '../components/SecuredParticipation/SectionSMS/SectionSms';
+import SectionIdentificationCodes from '../components/SecuredParticipation/SectionIdentificationCodes/SectionIdentificationCodes';
 
-const IdentificationCodes: NextPage<PageProps> = () => {
+const SecuredParticipation: NextPage<PageProps> = () => {
     const intl = useIntl();
 
     return (
@@ -18,7 +18,7 @@ const IdentificationCodes: NextPage<PageProps> = () => {
             {/*</Suspense>*/}
 
             <Suspense fallback={<Loader />}>
-                <IdentificationCodesContent />
+                <SectionIdentificationCodes />
             </Suspense>
         </Layout>
     );
@@ -26,4 +26,4 @@ const IdentificationCodes: NextPage<PageProps> = () => {
 
 export const getServerSideProps = withPageAuthRequired;
 
-export default IdentificationCodes;
+export default SecuredParticipation;

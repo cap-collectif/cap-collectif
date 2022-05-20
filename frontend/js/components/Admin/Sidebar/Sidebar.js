@@ -229,10 +229,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                       href="/admin/capco/app/consultation/list"
                     />
                   ) : null}
-                  <SidebarLink
-                    text="admin.label.proposal_form"
-                    href="/admin-next/proposalForm"
-                  />
+                  <SidebarLink text="admin.label.proposal_form" href="/admin-next/proposalForm" />
                   <SidebarLink
                     text="admin.label.questionnaire"
                     href="/admin-next/questionnaireList"
@@ -323,7 +320,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                   />
                   <SidebarLink
                     text="secured-participation"
-                    href="/admin-next/identificationCodes"
+                    href="/admin-next/securedParticipation"
                   />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>

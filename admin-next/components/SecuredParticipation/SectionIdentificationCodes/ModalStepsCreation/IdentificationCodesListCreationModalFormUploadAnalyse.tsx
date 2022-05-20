@@ -1,15 +1,15 @@
 import { DataType } from '../DataType';
 import { FC } from 'react';
 import { FormattedHTMLMessage, useIntl } from 'react-intl';
-import { Box, InfoMessage } from '@cap-collectif/ui';
+import { InfoMessage } from '@cap-collectif/ui';
 import { HelpUrl } from '../HelpButton';
 
 type IdentificationCodesListCreationModalFormUploadAnalyseProps = {
-    data: DataType;
+    data: DataType,
 };
 
 const IdentificationCodesListCreationModalFormUploadAnalyseValid: FC<
-    IdentificationCodesListCreationModalFormUploadAnalyseProps
+    IdentificationCodesListCreationModalFormUploadAnalyseProps,
 > = ({ data }) => {
     const intl = useIntl();
 
@@ -28,7 +28,7 @@ const IdentificationCodesListCreationModalFormUploadAnalyseValid: FC<
 };
 
 const IdentificationCodesListCreationModalFormUploadAnalyseInvalid: FC<
-    IdentificationCodesListCreationModalFormUploadAnalyseProps
+    IdentificationCodesListCreationModalFormUploadAnalyseProps,
 > = ({ data }) => {
     return (
         <InfoMessage variant="danger" mt={2}>
@@ -51,7 +51,7 @@ const IdentificationCodesListCreationModalFormUploadAnalyseInvalid: FC<
 };
 
 const IdentificationCodesListCreationModalFormUploadAnalyseDuplicate: FC<
-    IdentificationCodesListCreationModalFormUploadAnalyseProps
+    IdentificationCodesListCreationModalFormUploadAnalyseProps,
 > = ({ data }) => {
     const intl = useIntl();
 
@@ -105,7 +105,7 @@ const IdentificationCodesListCreationModalFormUploadAnalyseNoValid: FC = () => {
 };
 
 const IdentificationCodesListCreationModalFormUploadAnalyse: FC<
-    IdentificationCodesListCreationModalFormUploadAnalyseProps
+    IdentificationCodesListCreationModalFormUploadAnalyseProps,
 > = ({ data }) => {
     return (
         <>

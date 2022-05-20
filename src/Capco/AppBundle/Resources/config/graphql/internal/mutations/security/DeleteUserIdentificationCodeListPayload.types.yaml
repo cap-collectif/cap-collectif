@@ -3,7 +3,7 @@ DeleteUserIdentificationCodeListPayload:
     config:
         description: 'Payload of the deleteUserIdentificationCodeList mutation.'
         fields:
-            id:
+            deletedUserIdentificationCodeListId:
                 type: 'ID'
                 description: 'The id of the list just deleted, if successful.'
             errorCode:

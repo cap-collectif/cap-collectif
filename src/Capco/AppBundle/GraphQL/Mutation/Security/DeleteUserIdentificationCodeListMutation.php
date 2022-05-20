@@ -33,7 +33,7 @@ class DeleteUserIdentificationCodeListMutation implements MutationInterface
             $list = $this->getList($globalId);
             $this->deleteList($list);
 
-            return ['id' => $globalId];
+            return ['deletedUserIdentificationCodeListId' => $globalId];
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
         }

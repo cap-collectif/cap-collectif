@@ -10,20 +10,23 @@ import {
 } from '@cap-collectif/ui';
 import { FC } from 'react';
 import { useIntl } from 'react-intl';
-import IdentificationCodesListCreationModal from './CreationModal/IdentificationCodesListCreationModal';
+import ModalStepsCreation from './ModalStepsCreation/ModalStepsCreation';
 import { Section } from '@ui/Section';
 import HelpButton from './HelpButton';
 
-const IdentificationCodesEmpty: FC<{
-    connectionName: string;
-}> = ({ connectionName }) => {
+type IdentificationCodesEmptyProps = {
+    readonly connectionName: string;
+}
+const IdentificationCodesEmpty: FC<IdentificationCodesEmptyProps> = ({ connectionName }) => {
     const intl = useIntl();
+
     return (
         <Section>
             <Section.Title>{intl.formatMessage({ id: 'identification-code-check' })}</Section.Title>
             <Section.Description>
                 {intl.formatMessage({ id: 'identification-code-check-help-first' })}
             </Section.Description>
+
             <Flex direction="row" align="center" justify="space-between">
                 <Flex direction="column">
                     <Flex direction="row" align="center">
@@ -44,7 +47,7 @@ const IdentificationCodesEmpty: FC<{
                 <SpotIcon name={CapUISpotIcon.MAIL} size={CapUISpotIconSize.Lg} />
             </Flex>
             <Flex direction="row">
-                <IdentificationCodesListCreationModal connectionName={connectionName} isFirst />
+                <ModalStepsCreation connectionName={connectionName} isFirst />
                 <HelpButton />
             </Flex>
         </Section>

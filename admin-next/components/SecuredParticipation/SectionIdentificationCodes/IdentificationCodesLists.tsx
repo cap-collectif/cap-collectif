@@ -1,23 +1,28 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import { Flex } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
 import IdentificationCodesListsTable from './Table/IdentificationCodesListsTable';
-import IdentificationCodesListCreationModal from './CreationModal/IdentificationCodesListCreationModal';
+import ModalStepsCreation from './ModalStepsCreation/ModalStepsCreation';
 import { Section } from '@ui/Section';
 import HelpButton from './HelpButton';
+import { graphql, useFragment } from 'react-relay';
+import type { IdentificationCodesLists_viewer$key } from '@relay/IdentificationCodesLists_viewer.graphql';
 
-export type IdentificationCodesListType = {
-    id: string;
-    name: string;
-    codesCount: number;
-    alreadyUsedCount: number;
-};
+const FRAGMENT = graphql`
+    fragment IdentificationCodesLists_viewer on User {
+        id
+        ...IdentificationCodesListsTable_viewer
+    }
+`;
 
-const IdentificationCodesLists: FC<{
-    lists: Array<{ node: IdentificationCodesListType }>;
+type IdentificationCodesListsProps = {
+    viewer: IdentificationCodesLists_viewer$key
     connectionName: string;
-}> = ({ lists, connectionName }) => {
+}
+
+const IdentificationCodesLists: FC<IdentificationCodesListsProps> = ({ viewer: viewerFragment, connectionName }) => {
     const intl = useIntl();
+    const viewer = useFragment(FRAGMENT, viewerFragment);
 
     return (
         <Section direction="row">
@@ -28,15 +33,14 @@ const IdentificationCodesLists: FC<{
                 <Section.Description my={1}>
                     {intl.formatMessage({ id: 'identification-code-check-help' })}
                 </Section.Description>
+
                 <Flex mt={6}>
-                    <IdentificationCodesListCreationModal
-                        connectionName={connectionName}
-                        isFirst={false}
-                    />
+                    <ModalStepsCreation connectionName={connectionName} />
                     <HelpButton />
                 </Flex>
             </Flex>
-            <IdentificationCodesListsTable lists={lists} connectionName={connectionName} />
+
+            <IdentificationCodesListsTable viewer={viewer} />
         </Section>
     );
 };

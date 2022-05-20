@@ -1,11 +1,10 @@
 import { DropzoneProps, useDropzone } from 'react-dropzone';
-import { SpotIcon, Text } from '@cap-collectif/ui';
+import { CapUISpotIcon, CapUISpotIconSize, SpotIcon, Text } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
-import React from 'react';
+import type { FC } from 'react';
 
 //todo this should be replaced as soon as the fileUploader is available in capUi
-const FileUpload = (props: DropzoneProps) => {
-    const { onDrop, ...rest } = props;
+const FileUpload: FC<DropzoneProps> = ({ onDrop, ...rest }) => {
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
     const intl = useIntl();
 
@@ -23,7 +22,7 @@ const FileUpload = (props: DropzoneProps) => {
                         width: '100%',
                     }}>
                     <div className="image-uploader__dropzone-label">
-                        <SpotIcon name="SHEET" size="lg" m="auto" />
+                        <SpotIcon name={CapUISpotIcon.SHEET} size={CapUISpotIconSize.Lg} m="auto" />
                         <Text color="gray.400">
                             {intl.formatMessage({ id: 'global.image_uploader.file.dropzone' })}
                         </Text>

@@ -54,7 +54,7 @@ Array [
   />,
   <div
     aria-orientation="vertical"
-    className="sc-bdvvtL caytJI sc-fvxzrP cap-menu__list cap-menu__list"
+    className="sc-bdvvtL caytJI sc-fbyfCU cap-menu__list cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"

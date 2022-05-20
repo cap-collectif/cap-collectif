@@ -353,7 +353,7 @@ export function StepRequirementsList({
                                 <FormattedHTMLMessage
                                   id="identification-code-create-reminder"
                                   values={{
-                                    url: '/admin-next/identificationCodes',
+                                    url: '/admin-next/securedParticipation',
                                   }}
                                 />
                               </InfoMessage.Title>

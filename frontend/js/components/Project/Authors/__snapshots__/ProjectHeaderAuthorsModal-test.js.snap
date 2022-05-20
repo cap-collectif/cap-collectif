@@ -15,7 +15,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL bSKXj sc-GEbAx cap-modal__overlay"
+    className="sc-bdvvtL bSKXj sc-gsNilK cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -24,7 +24,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
     }
   >
     <div
-      className="sc-bdvvtL krWFkn sc-gsNilK ftqHuc cap-modal"
+      className="sc-bdvvtL krWFkn sc-bXTejn bJAvtn cap-modal"
       id="show-authors-modal"
       style={
         Object {
