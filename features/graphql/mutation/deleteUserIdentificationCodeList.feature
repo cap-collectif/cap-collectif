@@ -8,7 +8,7 @@ Scenario: API client wants to delete a list but is not admin
   {
     "query": "mutation ($input: DeleteUserIdentificationCodeListInput!) {
       deleteUserIdentificationCodeList(input: $input) {
-        id
+        deletedUserIdentificationCodeListId
         errorCode
       }
     }",
@@ -38,7 +38,7 @@ Scenario: API admin wants to delete a list but wrong id
   {
     "query": "mutation ($input: DeleteUserIdentificationCodeListInput!) {
       deleteUserIdentificationCodeList(input: $input) {
-        id
+        deletedUserIdentificationCodeListId
         errorCode
       }
     }",
@@ -54,7 +54,7 @@ Scenario: API admin wants to delete a list but wrong id
   {
     "data": {
       "deleteUserIdentificationCodeList": {
-        "id": null,
+        "deletedUserIdentificationCodeListId": null,
         "errorCode": "NOT_FOUND"
       }
     }
@@ -69,7 +69,7 @@ Scenario: API admin wants to delete a list
   {
     "query": "mutation ($input: DeleteUserIdentificationCodeListInput!) {
       deleteUserIdentificationCodeList(input: $input) {
-        id
+        deletedUserIdentificationCodeListId
         errorCode
       }
     }",
@@ -85,7 +85,7 @@ Scenario: API admin wants to delete a list
   {
     "data": {
       "deleteUserIdentificationCodeList": {
-        "id": "VXNlcklkZW50aWZpY2F0aW9uQ29kZUxpc3Q6bmV3TGlzdA==",
+        "deletedUserIdentificationCodeListId": "VXNlcklkZW50aWZpY2F0aW9uQ29kZUxpc3Q6bmV3TGlzdA==",
         "errorCode": null
       }
     }
