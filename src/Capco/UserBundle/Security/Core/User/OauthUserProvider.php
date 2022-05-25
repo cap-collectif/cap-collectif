@@ -85,11 +85,7 @@ class OauthUserProvider extends FOSUBUserProvider
             ? $this->tokenStorage->getToken()->getUser()
             : null;
         $this->debug($response);
-        // because, accounts created with FranceConnect can change their email
-        $user =
-            'franceconnect' === $serviceName && $viewer instanceof User
-                ? $viewer
-                : $this->getUser($response);
+        $user = $this->getUser($response, $viewer);
         $this->userManager->updateUser($user);
         if ($this->isNewUser) {
             $this->indexer->index(ClassUtils::getClass($user), $user->getId());
@@ -189,7 +185,7 @@ class OauthUserProvider extends FOSUBUserProvider
         return !$user && $email ? $this->userRepository->findOneByEmail($email) : $user;
     }
 
-    private function getUser(UserResponseInterface $response): ?User
+    private function getUser(UserResponseInterface $response, $viewer): ?User
     {
         $ressourceOwner = $response->getResourceOwner();
         $serviceName = $ressourceOwner->getName();
@@ -198,10 +194,9 @@ class OauthUserProvider extends FOSUBUserProvider
         if (!$email && $ssoIsNotFacebook) {
             $email = $serviceName . '_' . $response->getUsername();
         }
-        $user = $this->findUser($response, $email);
+        $user = $viewer instanceof User ? $viewer : $this->findUser($response, $email);
         $username =
             $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
-
         if (null === $user) {
             $this->isNewUser = true;
             $user = $this->userManager->createUser();
