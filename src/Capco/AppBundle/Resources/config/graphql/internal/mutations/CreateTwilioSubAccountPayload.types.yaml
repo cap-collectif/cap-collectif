@@ -1,8 +1,0 @@
-CreateTwilioSubAccountPayload:
-    type: relay-mutation-payload
-    config:
-        description: 'Payload of createTwilioSubAccount mutation.'
-        fields:
-            errorCode:
-                type: 'CreateTwilioSubAccountErrorCode'
-                description: 'The error generated, if any.'

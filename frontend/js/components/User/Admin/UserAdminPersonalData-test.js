@@ -2,7 +2,7 @@
 /* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock, formMock, $refType } from '../../../mocks';
+import { intlMock, formMock, $refType } from '~/mocks';
 import { UserAdminPersonalData } from './UserAdminPersonalData';
 
 describe('<UserAdminPersonalData/>', () => {
@@ -31,6 +31,7 @@ describe('<UserAdminPersonalData/>', () => {
     isViewer: true,
     phone: '0666666666',
     phoneConfirmed: true,
+    phoneConfirmationSentAt: '',
     zipCode: '94560',
     userIdentificationCode: null,
   };

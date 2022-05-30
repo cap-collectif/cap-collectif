@@ -64,6 +64,34 @@ export const RequirementDragItem: StyledComponent<{}, {}, typeof ListGroupItem> 
   }
 `;
 
+export const RequirementSubItem: StyledComponent<
+  { isHidden?: boolean, isLast?: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div`
+  display: ${props => (props.isHidden ? 'none' : 'flex')};
+  align-items: center;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  padding: 12px 8px;
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  label {
+    margin-bottom: 0 !important;
+  }
+
+  ${props =>
+    props.isLast &&
+    `
+    border-bottom: 1px solid #ddd;
+    border-radius: 0 0 4px 4px;
+  `}
+`;
+
 export const CheckboxPlaceholder: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   flex: none;
   width: 23px;

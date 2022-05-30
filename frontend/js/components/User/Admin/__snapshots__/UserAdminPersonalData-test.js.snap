@@ -21,47 +21,22 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
       <Field
         component={[Function]}
         disabled={false}
-        divClassName="col-sm-4"
+        divClassName="col-sm-4 d-flex"
         id="personal-data-email"
         label={
-          <FormattedMessage
-            id="share.mail"
-            values={Object {}}
-          />
+          <ForwardRef
+            display="inline-flex"
+          >
+            <FormattedMessage
+              id="share.mail"
+              values={Object {}}
+            />
+            
+          </ForwardRef>
         }
         name="email"
         type="text"
       />
-      <div
-        className="clearfix"
-      />
-      <Field
-        component={[Function]}
-        disabled={true}
-        divClassName="col-sm-4"
-        id="isEmailConfirmed"
-        isReduxForm={true}
-        name="isEmailConfirmed"
-        type="checkbox"
-      >
-        <div>
-          <FormattedMessage
-            id="confirmed-by-email"
-            values={Object {}}
-          />
-           
-          <DatesInterval
-            day="numeric"
-            hour="numeric"
-            minute="numeric"
-            month="long"
-            second="numeric"
-            showCurrentYear={true}
-            startAt=""
-            year="numeric"
-          />
-        </div>
-      </Field>
       <div
         className="clearfix"
       />
@@ -231,30 +206,20 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
         divClassName="col-sm-4"
         id="phone"
         label={
-          <FormattedMessage
-            id="form.label_phone"
-            values={Object {}}
-          />
+          <ForwardRef
+            display="inline-flex"
+          >
+            <FormattedMessage
+              id="form.label_phone"
+              values={Object {}}
+            />
+            
+          </ForwardRef>
         }
         name="phone"
+        placeholder="profil-field-phone-placeholder"
         type="text"
       />
-      <div
-        className="clearfix"
-      />
-      <Field
-        component={[Function]}
-        disabled={true}
-        divClassName="col-sm-4"
-        id="phoneConfirmed"
-        name="phoneConfirmed"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="form.label_phone_confirmed"
-          values={Object {}}
-        />
-      </Field>
       <div
         className="clearfix"
       />
@@ -328,47 +293,22 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
       <Field
         component={[Function]}
         disabled={true}
-        divClassName="col-sm-4"
+        divClassName="col-sm-4 d-flex"
         id="personal-data-email"
         label={
-          <FormattedMessage
-            id="share.mail"
-            values={Object {}}
-          />
+          <ForwardRef
+            display="inline-flex"
+          >
+            <FormattedMessage
+              id="share.mail"
+              values={Object {}}
+            />
+            
+          </ForwardRef>
         }
         name="email"
         type="text"
       />
-      <div
-        className="clearfix"
-      />
-      <Field
-        component={[Function]}
-        disabled={true}
-        divClassName="col-sm-4"
-        id="isEmailConfirmed"
-        isReduxForm={true}
-        name="isEmailConfirmed"
-        type="checkbox"
-      >
-        <div>
-          <FormattedMessage
-            id="confirmed-by-email"
-            values={Object {}}
-          />
-           
-          <DatesInterval
-            day="numeric"
-            hour="numeric"
-            minute="numeric"
-            month="long"
-            second="numeric"
-            showCurrentYear={true}
-            startAt=""
-            year="numeric"
-          />
-        </div>
-      </Field>
       <div
         className="clearfix"
       />
@@ -538,30 +478,20 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
         divClassName="col-sm-4"
         id="phone"
         label={
-          <FormattedMessage
-            id="form.label_phone"
-            values={Object {}}
-          />
+          <ForwardRef
+            display="inline-flex"
+          >
+            <FormattedMessage
+              id="form.label_phone"
+              values={Object {}}
+            />
+            
+          </ForwardRef>
         }
         name="phone"
+        placeholder="profil-field-phone-placeholder"
         type="text"
       />
-      <div
-        className="clearfix"
-      />
-      <Field
-        component={[Function]}
-        disabled={true}
-        divClassName="col-sm-4"
-        id="phoneConfirmed"
-        name="phoneConfirmed"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="form.label_phone_confirmed"
-          values={Object {}}
-        />
-      </Field>
       <div
         className="clearfix"
       />

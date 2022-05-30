@@ -72,6 +72,7 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with data 1`] = 
         },
       ]
     }
+    stepType="ConsultationStep"
   />
   <Button
     active={false}
@@ -170,6 +171,7 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with no initial 
     formName="stepForm"
     isFranceConnectConfigured={true}
     name="requirements"
+    stepType="ConsultationStep"
   />
   <Button
     active={false}

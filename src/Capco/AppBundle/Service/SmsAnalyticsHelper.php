@@ -3,17 +3,21 @@ namespace Capco\AppBundle\Service;
 
 use Capco\AppBundle\Enum\RemainingSmsCreditStatus;
 use Capco\AppBundle\Repository\SmsCreditRepository;
+use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 use Capco\UserBundle\Repository\UserRepository;
 
 class SmsAnalyticsHelper
 {
     private SmsCreditRepository $smsCreditRepository;
-    private UserRepository $userRepository;
+    private UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
 
-    public function __construct(SmsCreditRepository $smsCreditRepository, UserRepository $userRepository)
+    public function __construct(
+        SmsCreditRepository $smsCreditRepository,
+        UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
+    )
     {
         $this->smsCreditRepository = $smsCreditRepository;
-        $this->userRepository = $userRepository;
+        $this->userPhoneVerificationSmsRepository = $userPhoneVerificationSmsRepository;
     }
 
     public function getTotalCredits(): int
@@ -23,7 +27,7 @@ class SmsAnalyticsHelper
 
     public function getConsumedCredits(): int
     {
-        return $this->userRepository->countPhoneConfirmedUsers();
+        return $this->userPhoneVerificationSmsRepository->countApprovedSms() ?? 0;
     }
 
     public function getRemainingCreditsAmount(): int
@@ -35,6 +39,9 @@ class SmsAnalyticsHelper
     {
         $remainingCreditsAmount = $this->getRemainingCreditsAmount();
         $mostRecentRefill = $this->smsCreditRepository->findMostRecent();
+
+        if (!$mostRecentRefill) return RemainingSmsCreditStatus::IDLE;
+
         $remainingCreditsPercentOfLastRefill = intval(round(($remainingCreditsAmount * 100) / $mostRecentRefill->getAmount()));
 
         if ($remainingCreditsPercentOfLastRefill <= 25 && $remainingCreditsPercentOfLastRefill >= 10 ) {

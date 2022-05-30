@@ -46,5 +46,14 @@ class UserPhoneVerificationSmsRepository extends EntityRepository
         return $results[0] ?? null;
     }
 
+    public function countApprovedSms(): int
+    {
+        return (int) $this->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->where("s.status = 'approved'")
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 
 }

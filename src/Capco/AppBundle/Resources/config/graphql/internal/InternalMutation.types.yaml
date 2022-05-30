@@ -1440,13 +1440,6 @@ InternalMutation:
                     inputType: CreateUserIdentificationCodeListInput
                     payloadType: CreateUserIdentificationCodeListPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Security\\CreateUserIdentificationCodeListMutation", [value, getUser()])'
-            createTwilioVerifyService:
-                access: '@=hasRole("ROLE_ADMIN")'
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: CreateTwilioVerifyServiceInput
-                    payloadType: CreateTwilioVerifyServicePayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\CreateTwilioVerifyServiceMutation", [value, getUser()])'
             updateTwilioVerifyService:
                 access: '@=hasRole("ROLE_ADMIN")'
                 builder: 'Relay::Mutation'
@@ -1517,13 +1510,6 @@ InternalMutation:
                     inputType: UpdateSmsCreditInput
                     payloadType: UpdateSmsCreditPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\UpdateSmsCreditMutation", [value, getUser()])'
-            createTwilioSubAccount:
-                access: '@=hasRole("ROLE_ADMIN")'
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: CreateTwilioSubAccountInput
-                    payloadType: CreateTwilioSubAccountPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\CreateTwilioSubAccount", [value])'
             updatePaperVote:
                 access: '@=hasRole("ROLE_PROJECT_ADMIN")'
                 builder: 'Relay::Mutation'

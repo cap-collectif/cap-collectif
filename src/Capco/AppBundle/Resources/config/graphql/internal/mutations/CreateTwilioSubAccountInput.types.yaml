@@ -1,8 +1,0 @@
-CreateTwilioSubAccountInput:
-    type: relay-mutation-input
-    config:
-        description: 'Input of createTwilioSubAccount mutation.'
-        fields:
-            name:
-                type: 'String!'
-                description: 'The twilio sub account name.'

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -14,6 +14,9 @@ import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePersonalDataMutation from '~/mutations/UpdateProfilePersonalDataMutation';
 import DatesInterval from '../../Utils/DatesInterval';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Icon from '~ds/Icon/Icon';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type RelayProps = {| user: UserAdminPersonalData_user, viewer: UserAdminPersonalData_viewer |};
 type GenderValue = 'FEMALE' | 'MALE' | 'OTHER';
@@ -32,11 +35,12 @@ type FormValue = {|
   gender: GenderValue,
   dateOfBirth: string,
 |};
+
 type Props = {|
   ...ReduxFormFormProps,
   ...RelayProps,
-  intl: IntlShape,
   // initialValues: FormValue,
+  intl: IntlShape,
   isViewer: boolean,
   isSuperAdmin: boolean,
 |};
@@ -122,27 +126,31 @@ export const UserAdminPersonalData = ({
           <Field
             id="personal-data-email"
             name="email"
-            label={<FormattedMessage id="share.mail" />}
+            label={
+              <Flex display="inline-flex">
+                <FormattedMessage id="share.mail" />
+                {user.emailConfirmationSentAt && (
+                  <Tooltip
+                    label={
+                      <div>
+                        <FormattedMessage id="confirmed-by-email" />
+                        &nbsp;
+                        <DatesInterval startAt={user.emailConfirmationSentAt} />
+                      </div>
+                    }>
+                    <div>
+                      <Icon name="CIRCLE_CHECK" size="md" color="green.500" />
+                    </div>
+                  </Tooltip>
+                )}
+              </Flex>
+            }
             component={component}
             type="text"
-            divClassName="col-sm-4"
+            divClassName="col-sm-4 d-flex"
             disabled={!isViewerOrSuperAdmin}
           />
-          <div className="clearfix" />
-          <Field
-            id="isEmailConfirmed"
-            name="isEmailConfirmed"
-            component={component}
-            isReduxForm
-            type="checkbox"
-            disabled
-            divClassName="col-sm-4">
-            <div>
-              <FormattedMessage id="confirmed-by-email" />
-              &nbsp;
-              <DatesInterval startAt={user.emailConfirmationSentAt} />
-            </div>
-          </Field>
+
           <div className="clearfix" />
           <Field
             name="firstname"
@@ -237,19 +245,28 @@ export const UserAdminPersonalData = ({
             component={component}
             type="text"
             disabled={!isViewerOrSuperAdmin}
-            label={<FormattedMessage id="form.label_phone" />}
+            placeholder="profil-field-phone-placeholder"
+            label={
+              <Flex display="inline-flex">
+                <FormattedMessage id="form.label_phone" />
+                {user.phoneConfirmationSentAt && (
+                  <Tooltip
+                    label={
+                      <div>
+                        <FormattedMessage id="number-verified" />
+                        &nbsp;
+                        <DatesInterval startAt={user.phoneConfirmationSentAt} />
+                      </div>
+                    }>
+                    <div>
+                      <Icon name="CIRCLE_CHECK" size="md" color="green.500" />
+                    </div>
+                  </Tooltip>
+                )}
+              </Flex>
+            }
             divClassName="col-sm-4"
           />
-          <div className="clearfix" />
-          <Field
-            id="phoneConfirmed"
-            name="phoneConfirmed"
-            component={component}
-            type="checkbox"
-            disabled
-            divClassName="col-sm-4">
-            <FormattedMessage id="form.label_phone_confirmed" />
-          </Field>
           <div className="clearfix" />
           <Field
             id="userIdentificationCode"
@@ -331,6 +348,7 @@ export default createFragmentContainer(container, {
       zipCode
       phone
       phoneConfirmed
+      phoneConfirmationSentAt
       userIdentificationCode
       isViewer
     }

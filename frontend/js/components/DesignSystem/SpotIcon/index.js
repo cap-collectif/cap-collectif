@@ -17,3 +17,4 @@ export { default as NEWSPAPER } from './svg/newspaper.svg';
 export { default as FORM } from './svg/form.svg';
 export { default as CALENDAR } from './svg/calendar.svg';
 export { default as PROJECT } from './svg/project.svg';
+export { default as SMS } from './svg/sms.svg';

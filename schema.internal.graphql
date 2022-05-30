@@ -624,6 +624,9 @@ enum AddSmsCreditErrorCode {
 
   """The given order is not found."""
   SMS_ORDER_NOT_FOUND
+
+  """Error occured while calling twilio API."""
+  TWILIO_API_ERROR
 }
 
 input AddSmsCreditInput {
@@ -3682,45 +3685,6 @@ input CreateSmsOrderInput {
 
 type CreateSmsOrderPayload {
   smsOrder: SmsOrder!
-  clientMutationId: String
-}
-
-"""Available errors for an `createTwilioSubAccount` mutation."""
-enum CreateTwilioSubAccountErrorCode {
-  """Error occured while calling twilio API."""
-  TWILIO_API_ERROR
-}
-
-input CreateTwilioSubAccountInput {
-  """The twilio sub account name."""
-  name: String!
-  clientMutationId: String
-}
-
-type CreateTwilioSubAccountPayload {
-  """The error generated, if any."""
-  errorCode: CreateTwilioSubAccountErrorCode
-  clientMutationId: String
-}
-
-"""Available errors for an `createTwilioVerifyService` mutation."""
-enum CreateTwilioVerifyServiceErrorCode {
-  """Error occured while calling twilio API."""
-  TWILIO_API_ERROR
-}
-
-input CreateTwilioVerifyServiceInput {
-  """The name given to the service."""
-  serviceName: String!
-  clientMutationId: String
-}
-
-type CreateTwilioVerifyServicePayload {
-  """The error code, if failing."""
-  errorCode: CreateTwilioVerifyServiceErrorCode
-
-  """The created service name."""
-  serviceName: String
   clientMutationId: String
 }
 
@@ -7598,7 +7562,6 @@ type Mutation {
   checkIdentificationCode(input: CheckIdentificationCodeInput!): CheckIdentificationCodePayload
   deleteUserIdentificationCodeList(input: DeleteUserIdentificationCodeListInput!): DeleteUserIdentificationCodeListPayload
   createUserIdentificationCodeList(input: CreateUserIdentificationCodeListInput!): CreateUserIdentificationCodeListPayload
-  createTwilioVerifyService(input: CreateTwilioVerifyServiceInput!): CreateTwilioVerifyServicePayload
   updateTwilioVerifyService(input: UpdateTwilioVerifyServiceInput!): UpdateTwilioVerifyServicePayload
   sendSmsPhoneValidationCode(input: SendSmsPhoneValidationCodeInput!): SendSmsPhoneValidationCodePayload
   updateProposalStepPaperVoteCounter(input: UpdateProposalStepPaperVoteCounterInput!): UpdateProposalStepPaperVoteCounterPayload
@@ -7609,7 +7572,6 @@ type Mutation {
   deleteSmsOrder(input: DeleteSmsOrderInput!): DeleteSmsOrderPayload
   addSmsCredit(input: AddSmsCreditInput!): AddSmsCreditPayload
   updateSmsCredit(input: UpdateSmsCreditInput!): UpdateSmsCreditPayload
-  createTwilioSubAccount(input: CreateTwilioSubAccountInput!): CreateTwilioSubAccountPayload
   updatePaperVote(input: UpdatePaperVoteInput!): UpdatePaperVotePayload
   updateProjectSlug(input: UpdateProjectSlugInput!): UpdateProjectSlugPayload
 }

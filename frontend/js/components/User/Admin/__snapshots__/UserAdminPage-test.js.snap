@@ -431,6 +431,13 @@ exports[`<UserAdminPage/> should render 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "phoneConfirmationSentAt",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "userIdentificationCode",
                       "storageKey": null,
                     },
@@ -475,7 +482,7 @@ exports[`<UserAdminPage/> should render 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "1d7b890a9e4994fd24c4845fde342b4e",
+          "cacheID": "003bf38b2c389dd14be93de469e35ae1",
           "id": null,
           "metadata": Object {},
           "name": "UserAdminPageQuery",
@@ -557,6 +564,7 @@ fragment UserAdminPersonalData_user on User {
   zipCode
   phone
   phoneConfirmed
+  phoneConfirmationSentAt
   userIdentificationCode
   isViewer
 }

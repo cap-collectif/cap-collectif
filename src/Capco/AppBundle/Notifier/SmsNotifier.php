@@ -54,7 +54,7 @@ class SmsNotifier extends BaseNotifier
                 'platformName' => $this->siteParams->getValue('global.site.fullname'),
             ],
             null,
-            'developement@cap-collectif.com'
+            'developpement@cap-collectif.com'
         );
     }
 
@@ -92,7 +92,7 @@ class SmsNotifier extends BaseNotifier
                 'platformName' => $this->siteParams->getValue('global.site.fullname'),
             ],
             null,
-            'developement@cap-collectif.com'
+            'developpement@cap-collectif.com'
         );
     }
 

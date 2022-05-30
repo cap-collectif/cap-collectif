@@ -18,10 +18,16 @@ import { Flex, Text } from '@cap-collectif/ui';
 import toggle from '~/components/Form/Toggle';
 import InputRequirement from '~/components/Ui/Form/InputRequirement';
 import type { RequirementType } from '~relay/UpdateProjectAlphaMutation.graphql';
-import { RequirementDragItem, CheckboxPlaceholder } from './ProjectAdminStepForm.style';
+import {
+  RequirementDragItem,
+  CheckboxPlaceholder,
+  RequirementSubItem,
+} from './ProjectAdminStepForm.style';
 import type { Dispatch, Uuid } from '~/types';
 import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
 import InfoMessage from '~ds/InfoMessage/InfoMessage';
+import component from '~/components/Form/Field';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export type Requirement = {|
   type: RequirementType | string,
@@ -43,6 +49,7 @@ type Props = {|
   onInputChange: (value: string, field: string, requirement: Requirement) => void,
   onInputDelete: (index: number) => void,
   isFranceConnectConfigured: boolean,
+  stepType: 'CollectStep' | 'SelectionStep' | 'ConsultationStep' | 'QuestionnaireStep',
 |};
 
 export const getUId = (): Uuid => `_${Math.random().toString(36).substr(2, 9)}`;
@@ -92,7 +99,8 @@ export function createRequirements(
     return requirements;
   }
 
-  const isSupportingPhoneVerifiedRequirement = step.__typename === 'CollectStep' && twilioEnabled;
+  const isSupportingPhoneVerifiedRequirement =
+    (step.__typename === 'CollectStep' || step.__typename === 'SelectionStep') && twilioEnabled;
   const initialRequirements = step.requirements || [];
   if (!initialRequirements.some((r: Requirement) => r.type === 'FIRSTNAME'))
     requirements.push(requirementFactory('FIRSTNAME', false, 'form.label_firstname', null, false));
@@ -197,6 +205,7 @@ export function StepRequirementsList({
   onInputDelete,
   fcAllowedData,
   isFranceConnectConfigured,
+  stepType,
 }: Props) {
   const intl = useIntl();
   const onDragEnd = (result: DropResult) => {
@@ -212,6 +221,15 @@ export function StepRequirementsList({
   const birthDateRequirement = requirements.filter(r => r && r.type === 'DATE_OF_BIRTH');
   const fcRequirement = ['LASTNAME', 'FIRSTNAME', 'DATE_OF_BIRTH'];
   const [enableFranceConnect, setEnableFranceConnect] = React.useState<?boolean>(null);
+
+  /* # Requirement => Phone verified # */
+  const hasFeatureTwilio = useFeatureFlag('twilio');
+  const hasPhoneVerifiedEnabled = stepType === 'CollectStep' || stepType === 'SelectionStep';
+  const phoneVerifiedRequirementIndex = requirements.findIndex(
+    requirement => requirement.type === 'PHONE_VERIFIED',
+  );
+  const phoneVerifiedRequirement = requirements[phoneVerifiedRequirementIndex];
+
   return (
     <ListGroup>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -220,7 +238,10 @@ export function StepRequirementsList({
             <div ref={provided.innerRef}>
               {fields.map((field: string, index: number) => {
                 const requirement = requirements[index];
-                if (!requirement) return;
+
+                if (!requirement || requirement.type === 'PHONE_VERIFIED') return;
+
+                const hasPhoneVerifiedDisplay = requirement.type === 'PHONE' && requirement.checked;
                 let requirementExist = false;
                 // Cannot get fcAllowedData[requirement.type] because property CHECKBOX is missing in FranceConnectAllowedData [1].
                 if (
@@ -303,7 +324,16 @@ export function StepRequirementsList({
                                           }
                                         });
                                       }
+                                    } else if (requirement.type === 'PHONE') {
+                                      if (!requirement.checked) {
+                                        onInputCheck(
+                                          false,
+                                          `requirements[${phoneVerifiedRequirementIndex}]`,
+                                          phoneVerifiedRequirement,
+                                        );
+                                      }
                                     }
+
                                     onInputCheck(!requirement.checked, field, requirements[index]);
                                   },
                                 },
@@ -360,6 +390,42 @@ export function StepRequirementsList({
                             </InfoMessage>
                           )}
                         </RequirementDragItem>
+                        {
+                          (hasPhoneVerifiedEnabled && phoneVerifiedRequirement) && (
+                            <RequirementSubItem
+                              isHidden={
+                                !(
+                                  hasPhoneVerifiedDisplay &&
+                                  phoneVerifiedRequirement
+                                )
+                              }
+                              isLast={phoneVerifiedRequirementIndex === requirements.length - 1}>
+                              <Field
+                                type="checkbox"
+                                id={`requirement-${phoneVerifiedRequirement.type}`}
+                                disabled={phoneVerifiedRequirement.disabled || !hasFeatureTwilio}
+                                component={component}
+                                name={`requirements[${phoneVerifiedRequirementIndex}]`}
+                                props={{
+                                  input: {
+                                    checked: phoneVerifiedRequirement.checked,
+                                    name: phoneVerifiedRequirement.type,
+                                    onChange: () => {
+                                      onInputCheck(
+                                        !phoneVerifiedRequirement.checked,
+                                        `requirements[${phoneVerifiedRequirementIndex}]`,
+                                        phoneVerifiedRequirement,
+                                      );
+                                    },
+                                  },
+                                }}>
+                                {intl.formatMessage({
+                                  id: phoneVerifiedRequirement?.label || '',
+                                })}
+                              </Field>
+                            </RequirementSubItem>
+                          )
+                        }
                       </div>
                     )}
                   </Draggable>

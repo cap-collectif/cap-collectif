@@ -285,6 +285,7 @@ export const ProjectAdminCollectStepForm = ({
         requirements={requirements}
         fcAllowedData={fcAllowedData}
         isFranceConnectConfigured={isFranceConnectConfigured}
+        stepType="CollectStep"
       />
       <BootstrapButton
         id="js-btn-create-step"

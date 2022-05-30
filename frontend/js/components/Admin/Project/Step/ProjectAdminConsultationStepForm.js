@@ -89,6 +89,7 @@ export const ProjectAdminConsultationStepForm = ({
         requirements={requirements}
         fcAllowedData={fcAllowedData}
         isFranceConnectConfigured={isFranceConnectConfigured}
+        stepType="ConsultationStep"
       />
       <Button
         id="js-btn-create-step"

@@ -527,7 +527,7 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
                   ? 'POSTAL_ADDRESS'
                   : edge?.node?.type === 'IdentificationCodeRequirement'
                   ? 'IDENTIFICATION_CODE'
-                  : edge?.node?.type === 'PhoneVerified'
+                  : edge?.node?.type === 'PhoneVerifiedRequirement'
                   ? 'PHONE_VERIFIED'
                   : edge?.node?.type === 'FranceConnectRequirement'
                   ? 'FRANCE_CONNECT'

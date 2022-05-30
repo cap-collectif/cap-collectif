@@ -17,8 +17,8 @@ import StepRequirementsList, { getUId, type Requirement } from './StepRequiremen
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
-import Tooltip from "~ds/Tooltip/Tooltip";
-import AppBox from "~ui/Primitives/AppBox";
+import Tooltip from '~ds/Tooltip/Tooltip';
+import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {|
   id: string,
@@ -129,7 +129,11 @@ export const ProjectAdminSelectionStepForm = ({
         </Flex>
       </ProjectSmallFieldsContainer>
       <Tooltip
-        label={hasAlreadyAllowingProgressStepsChecked ? intl.formatMessage({id: 'already-active-on-a-selection-step'}) : ''}>
+        label={
+          hasAlreadyAllowingProgressStepsChecked
+            ? intl.formatMessage({ id: 'already-active-on-a-selection-step' })
+            : ''
+        }>
         <AppBox width="fit-content">
           <Field
             component={toggle}
@@ -184,6 +188,7 @@ export const ProjectAdminSelectionStepForm = ({
         requirements={requirements}
         fcAllowedData={fcAllowedData}
         isFranceConnectConfigured={isFranceConnectConfigured}
+        stepType="SelectionStep"
       />
       <Button
         id="js-btn-create-step"

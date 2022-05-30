@@ -1,9 +1,0 @@
-CreateTwilioVerifyServiceErrorCode:
-    type: enum
-    config:
-        name: CreateTwilioVerifyServiceErrorCode
-        description: 'Available errors for an `createTwilioVerifyService` mutation.'
-        values:
-            TWILIO_API_ERROR:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\CreateTwilioVerifyServiceMutation::TWILIO_API_ERROR")'
-                description: 'Error occured while calling twilio API.'

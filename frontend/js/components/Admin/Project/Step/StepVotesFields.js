@@ -15,6 +15,7 @@ import { styleGuideColors } from '~/utils/colors';
 import AppBox from '~ui/Primitives/AppBox';
 import Text from '~ui/Primitives/Text';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import TeaserServices from './TeaserServices';
 
 type Props = {|
   ...ReduxFormFieldArrayProps,
@@ -61,6 +62,7 @@ export function StepVotesFields(
   const [votesRankingState, setVotesRankingState] = useState(options.ranking || false);
   const intl = useIntl();
   const useVoteMin = useFeatureFlag('votes_min');
+  const hasFeatureTwilio = useFeatureFlag('twilio');
 
   return (
     <>
@@ -294,6 +296,7 @@ export function StepVotesFields(
                 component={component}
                 help={intl.formatMessage({ id: 'vote-help' })}
               />
+              {!hasFeatureTwilio && <TeaserServices />}
             </AppBox>
           </Flex>
         </VoteFieldContainer>

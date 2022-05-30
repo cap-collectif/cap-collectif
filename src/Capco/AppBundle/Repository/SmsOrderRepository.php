@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityRepository;
 class SmsOrderRepository extends EntityRepository
 {
 
-    public function findPaginated(int $offset, int $limit, string $filter): array
+    public function findPaginated(int $offset, int $limit, ?string $filter = null): array
     {
         $qb = $this->createQueryBuilder('s')
             ->setFirstResult($offset)
@@ -32,10 +32,17 @@ class SmsOrderRepository extends EntityRepository
 
     }
 
-    public function countAll(): int
+    public function countAll(?string $filter = null): int
     {
-        return (int) $this->createQueryBuilder('s')
-            ->select('count(s.id)')
-            ->getQuery()->getSingleScalarResult();
+        $qb = $this->createQueryBuilder('s')
+            ->select('count(s.id)');
+
+        if ($filter === SmsOrdersFilters::PROCESSED || $filter === SmsOrdersFilters::UNPROCESSED) {
+            $filterValue = $filter === SmsOrdersFilters::PROCESSED;
+            $qb->where('s.isProcessed = :isProcessed');
+            $qb->setParameter('isProcessed', $filterValue);
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

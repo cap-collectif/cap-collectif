@@ -11,7 +11,9 @@ const Count: FC<CountProps> = ({ children, ...rest }: CountProps) => (
         fontWeight={CapUIFontWeight.Semibold}
         className="count-section__count"
         {...rest}>
-        {typeof children === "string" ? formatBigNumber(children) : children}
+        {typeof children === 'string' || typeof children === 'number'
+            ? formatBigNumber(children)
+            : children}
     </Text>
 );
 

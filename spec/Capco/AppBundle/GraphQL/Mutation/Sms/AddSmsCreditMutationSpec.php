@@ -2,22 +2,27 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Sms;
 
+use Capco\AppBundle\Entity\ExternalServiceConfiguration;
 use Capco\AppBundle\Entity\SmsCredit;
 use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\Form\SmsCreditType;
 use Capco\AppBundle\GraphQL\Mutation\Sms\AddSmsCreditMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Helper\TwilioClient;
 use Capco\AppBundle\Notifier\SmsNotifier;
 use Capco\AppBundle\Repository\SmsCreditRepository;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Twilio\Rest\Api\V2010\AccountInstance;
 
 class AddSmsCreditMutationSpec extends ObjectBehavior
 {
@@ -27,7 +32,10 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         SmsNotifier            $notifier,
         SmsCreditRepository    $smsCreditRepository,
         GlobalIdResolver       $globalIdResolver,
-        FormFactoryInterface   $formFactory
+        FormFactoryInterface   $formFactory,
+        TwilioClient           $twilioClient,
+        SiteParameterResolver  $siteParameterResolver,
+        LoggerInterface        $logger
     )
     {
         $this->beConstructedWith(
@@ -35,8 +43,10 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
             $notifier,
             $smsCreditRepository,
             $globalIdResolver,
-            $formFactory
-
+            $formFactory,
+            $twilioClient,
+            $siteParameterResolver,
+            $logger
         );
     }
 
@@ -45,7 +55,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $this->shouldHaveType(AddSmsCreditMutation::class);
     }
 
-    public function it_should_create_sms_credit_and_call_on_initial_sms_credit(
+    public function it_should_create_sms_credit_create_twilio_sub_account_and_call_on_initial_sms_credit(
         Arg                    $input,
         EntityManagerInterface $em,
         SmsCreditRepository    $smsCreditRepository,
@@ -54,7 +64,10 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         GlobalIdResolver       $globalIdResolver,
         SmsOrder               $smsOrder,
         FormFactoryInterface   $formFactory,
-        FormInterface          $form
+        FormInterface          $form,
+        TwilioClient           $twilioClient,
+        SiteParameterResolver  $siteParameterResolver,
+        AccountInstance        $subAccount
     )
     {
         $smsOrderId = 'smsOrderId';
@@ -78,6 +91,27 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $em->flush()->shouldBeCalledOnce();
 
         $smsCreditRepository->countAll()->shouldBeCalledOnce()->willReturn(0);
+
+        $organizationName = 'organizationName';
+        $siteParameterResolver->getValue('global.site.organization_name')->shouldBeCalledTimes(2)->willReturn($organizationName);
+        $twilioClient->createSubAccount($organizationName)->shouldBeCalledOnce()->willReturn($subAccount);
+
+        $subAccount->sid = 'XXXX';
+        $subAccount->authToken = 'XXXX';
+
+        $response = [
+            'statusCode' => 201,
+            'data' => [
+                'sid' => 'XXXX',
+                'friendly_name' => $organizationName
+            ]
+        ];
+
+        $twilioClient->createVerifyService($organizationName)->shouldBeCalledOnce()->willReturn($response);
+
+        $em->persist(Argument::type(ExternalServiceConfiguration::class))->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+        
         $notifier->onInitialSmsCredit($smsCredit)->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input, $viewer);

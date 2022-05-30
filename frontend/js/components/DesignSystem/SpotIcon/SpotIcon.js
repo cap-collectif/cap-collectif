@@ -26,6 +26,7 @@ export const SPOT_ICON_NAME = {
   NEWSPAPER: 'NEWSPAPER',
   CALENDAR: 'CALENDAR',
   PROJECT: 'PROJECT',
+  SMS: 'SMS',
 };
 
 export const SPOT_ICON_SIZE = {

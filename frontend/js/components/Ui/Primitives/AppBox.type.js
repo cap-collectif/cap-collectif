@@ -286,6 +286,7 @@ type As = {|
 
 type Anchor = {|
   download?: boolean,
+  target?: string,
 |};
 
 type Input = {|

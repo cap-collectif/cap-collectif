@@ -1,8 +1,0 @@
-CreateTwilioVerifyServiceInput:
-    type: relay-mutation-input
-    config:
-        description: 'Input of createTwilioVerifyService mutation.'
-        fields:
-            serviceName:
-                type: 'String!'
-                description: 'The name given to the service.'
