@@ -1,0 +1,12 @@
+UpdateCivicIAErrorCode:
+    type: enum
+    config:
+        name: UpdateCivicIAErrorCode
+        description: 'Available errors for an `updateCivicIA` mutation.'
+        values:
+            NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\CivicIA\\CivicIAMassUpdater::NOT_FOUND")'
+                description: 'No analyzable found for the given id.'
+            INVALID_JSON:
+                value: '@=constant("Capco\\AppBundle\\CivicIA\\CivicIAMassUpdater::INVALID_JSON")'
+                description: 'The given does not follow the format.'

@@ -1524,3 +1524,10 @@ InternalMutation:
                     inputType: UpdateProjectSlugInput
                     payloadType: UpdateProjectSlugPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProjectSlugMutation", [value, getUser()])'
+            updateCivicIA:
+                access: '@=hasRole("ROLE_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateCivicIAInput
+                    payloadType: UpdateCivicIAPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCivicIAMutation", [value, getUser()])'

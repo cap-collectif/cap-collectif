@@ -13,14 +13,24 @@ trait CivicIATrait
     private ?string $iaCategory = null;
 
     /**
-     * @ORM\Column(name="ia_readability", type="integer", nullable=true)
+     * @ORM\Column(name="ia_category_details", type="text", nullable=true)
      */
-    private ?int $iaReadability = null;
+    private ?string $iaCategoryDetails = null;
+
+    /**
+     * @ORM\Column(name="ia_readability", type="float", nullable=true)
+     */
+    private ?float $iaReadability = null;
 
     /**
      * @ORM\Column(name="ia_sentiment", type="text", nullable=true)
      */
     private ?string $iaSentiment = null;
+
+    /**
+     * @ORM\Column(name="ia_sentiment_details", type="text", nullable=true)
+     */
+    private ?string $iaSentimentDetails = null;
 
     public function getIaCategory(): ?string
     {
@@ -32,12 +42,22 @@ trait CivicIATrait
         $this->iaCategory = $iaCategory;
     }
 
-    public function getIaReadability(): ?int
+    public function getIaCategoryDetails(): ?string
+    {
+        return $this->iaCategoryDetails;
+    }
+
+    public function setIaCategoryDetails(?string $iaCategoryDetails): void
+    {
+        $this->iaCategoryDetails = $iaCategoryDetails;
+    }
+
+    public function getIaReadability(): ?float
     {
         return $this->iaReadability;
     }
 
-    public function setIaReadability(?int $iaReadability): void
+    public function setIaReadability(?float $iaReadability): void
     {
         self::checkIaReadability($iaReadability);
         $this->iaReadability = $iaReadability;
@@ -52,6 +72,16 @@ trait CivicIATrait
     {
         self::checkIaSentiment($iaSentiment);
         $this->iaSentiment = $iaSentiment;
+    }
+
+    public function getIaSentimentDetails(): ?string
+    {
+        return $this->iaSentimentDetails;
+    }
+
+    public function setIaSentimentDetails(?string $iaSentimentDetails): void
+    {
+        $this->iaSentimentDetails = $iaSentimentDetails;
     }
 
     protected static function checkIaReadability(?int $iaReadability): void

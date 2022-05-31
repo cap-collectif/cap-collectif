@@ -1,0 +1,19 @@
+CivicIAAnalyzable:
+    type: interface
+    config:
+        name: CivicIAAnalyzable
+        description: 'A node that can be analyzed by civicIA.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CivicIAAnalyzableResolver", [value])'
+        fields:
+            iaCategory:
+                type: 'String'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Detected category by civicIA.'
+            iaReadability:
+                type: 'Float'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Detected readability by civicIA. The higher the more complex.'
+            iaSentiment:
+                type: 'CivicIASentiment'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Detected sentiment by civicIA.'

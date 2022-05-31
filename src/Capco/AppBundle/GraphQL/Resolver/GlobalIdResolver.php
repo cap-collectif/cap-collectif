@@ -15,6 +15,7 @@ use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Repository\SmsCreditRepository;
 use Capco\AppBundle\Repository\SmsOrderRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
+use Capco\AppBundle\Repository\ValueResponseRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -317,6 +318,10 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container->get(UserGroupRepository::class)->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get(ValueResponseRepository::class)->find($uuid);
         }
 
         // TODO remove me.

@@ -2004,6 +2004,18 @@ type CheckboxRequirement implements Node & Requirement {
   label: String!
 }
 
+"""A node that can be analyzed by civicIA."""
+interface CivicIAAnalyzable {
+  """Detected category by civicIA."""
+  iaCategory: String
+
+  """Detected readability by civicIA. The higher the more complex."""
+  iaReadability: Float
+
+  """Detected sentiment by civicIA."""
+  iaSentiment: CivicIASentiment
+}
+
 """Sentiments detected by civicIA."""
 enum CivicIASentiment {
   """Positive sentiment."""
@@ -7574,6 +7586,7 @@ type Mutation {
   updateSmsCredit(input: UpdateSmsCreditInput!): UpdateSmsCreditPayload
   updatePaperVote(input: UpdatePaperVoteInput!): UpdatePaperVotePayload
   updateProjectSlug(input: UpdateProjectSlugInput!): UpdateProjectSlugPayload
+  updateCivicIA(input: UpdateCivicIAInput!): UpdateCivicIAPayload
 }
 
 """A connection to a list of items."""
@@ -14740,6 +14753,30 @@ type UpdateCASSSOConfigurationPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `updateCivicIA` mutation."""
+enum UpdateCivicIAErrorCode {
+  """No analyzable found for the given id."""
+  NOT_FOUND
+
+  """The given does not follow the format."""
+  INVALID_JSON
+}
+
+input UpdateCivicIAInput {
+  """The json data containing analyzables and their updates."""
+  data: String!
+  clientMutationId: String
+}
+
+type UpdateCivicIAPayload {
+  """The updated analyzables."""
+  analyzables: [CivicIAAnalyzable]
+
+  """Available errors for updateCivicIA mutation."""
+  errorCode: UpdateCivicIAErrorCode
+  clientMutationId: String
+}
+
 input UpdateContactFormInput {
   """ID of the contact form to update."""
   id: ID!
@@ -17148,7 +17185,7 @@ type UserType {
 }
 
 """A response"""
-type ValueResponse implements Response {
+type ValueResponse implements Response & CivicIAAnalyzable {
   """Nullable ID in case of empty response."""
   id: String
 
@@ -17165,7 +17202,7 @@ type ValueResponse implements Response {
   iaCategory: String
 
   """Detected readability by civicIA. The higher the more complex."""
-  iaReadability: Int
+  iaReadability: Float
 
   """Detected sentiment by civicIA."""
   iaSentiment: CivicIASentiment

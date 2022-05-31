@@ -375,4 +375,7 @@ services:
     Symfony\Component\String\Slugger\AsciiSlugger:
         autowire: true
 
+    Capco\AppBundle\CivicIA\CivicIAMassUpdater:
+        autowire: true
+
     Symfony\Component\String\Slugger\SluggerInterface: '@Symfony\Component\String\Slugger\AsciiSlugger'

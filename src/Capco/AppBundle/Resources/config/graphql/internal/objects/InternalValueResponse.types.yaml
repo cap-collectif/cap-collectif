@@ -7,6 +7,7 @@ InternalValueResponse:
         name: ValueResponse
         interfaces:
             - InternalResponse
+            - CivicIAAnalyzable
         description: 'A response'
         fields:
             id:
@@ -28,7 +29,7 @@ InternalValueResponse:
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'Detected category by civicIA.'
             iaReadability:
-                type: 'Int'
+                type: 'Float'
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'Detected readability by civicIA. The higher the more complex.'
             iaSentiment:

@@ -1,0 +1,8 @@
+UpdateCivicIAInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateCivicIA mutation.'
+        fields:
+            data:
+                type: 'String!'
+                description: 'The json data containing analyzables and their updates.'

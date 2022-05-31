@@ -4,9 +4,9 @@ namespace Capco\AppBundle\Enum;
 
 class CivicIASentimentEnum implements EnumType
 {
-    const POSITIVE = 'positive';
-    const NEUTRAL = 'neutral';
-    const NEGATIVE = 'negative';
+    const POSITIVE = 'POSITIVE';
+    const NEUTRAL = 'NEUTRAL';
+    const NEGATIVE = 'NEGATIVE';
 
     const SENTIMENTS = [self::POSITIVE, self::NEUTRAL, self::NEGATIVE];
 

@@ -1,0 +1,11 @@
+UpdateCivicIAPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of updateCivicIA mutation.'
+        fields:
+            analyzables:
+                type: '[CivicIAAnalyzable]'
+                description: 'The updated analyzables.'
+            errorCode:
+                type: 'UpdateCivicIAErrorCode'
+                description: 'Available errors for updateCivicIA mutation.'
