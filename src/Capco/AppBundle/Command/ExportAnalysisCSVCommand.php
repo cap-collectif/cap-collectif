@@ -354,6 +354,9 @@ EOF;
         // We iterate over each column of a row to fill them
         foreach ($headers['proposalHeaders'] as $headerPath) {
             $cellValue = $this->getRowCellValue($proposal, $headerPath);
+            if ('reference' === $headerPath) {
+                $cellValue = '"' . $cellValue . '"';
+            }
             $defaultRowContent[] = $cellValue;
         }
 
