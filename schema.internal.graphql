@@ -9076,6 +9076,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """The open consultation step of the project, if any."""
   consultationStepOpen: ConsultationStep
+
+  """The address of the project."""
+  address: GoogleMapsAddress
 }
 
 """A project abstract step."""
@@ -15635,6 +15638,9 @@ input UpdateProjectInput {
 
   """The number of votes in an external project"""
   externalVotesCount: Int
+
+  """The project address, geocoded by google"""
+  address: String
   clientMutationId: String
 }
 

@@ -49,3 +49,6 @@ UpdateProjectInput:
             externalVotesCount:
                 type: 'Int'
                 description: 'The number of votes in an external project'
+            address:
+                type: 'String'
+                description: 'The project address, geocoded by google'

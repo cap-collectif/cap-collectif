@@ -264,3 +264,7 @@ InternalProject:
             consultationStepOpen:
                 type: 'InternalConsultationStep'
                 description: 'The open consultation step of the project, if any.'
+            address:
+                description: 'The address of the project.'
+                type: 'PreviewGoogleMapsAddress'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAddressResolver", [value])'

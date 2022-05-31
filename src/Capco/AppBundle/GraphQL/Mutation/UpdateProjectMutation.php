@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\DBAL\Driver\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -14,22 +13,18 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\UserBundle\Form\Type\UpdateProjectFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Form\Persister\ProjectDistrictsPersister;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\Repository\ProjectDistrictPositionerRepository;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpdateProjectMutation implements MutationInterface
 {
-    private $entityManager;
-    private $formFactory;
-    private $logger;
-    private $projectRepository;
-    private $transformer;
-    private $projectDistrictRepository;
-    private $projectDistrictPositionerRepository;
-    private $districtsPersister;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private LoggerInterface $logger;
+    private ProjectRepository $projectRepository;
+    private ProjectAuthorTransformer $transformer;
+    private ProjectDistrictsPersister $districtsPersister;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -37,17 +32,13 @@ class UpdateProjectMutation implements MutationInterface
         LoggerInterface $logger,
         ProjectAuthorTransformer $transformer,
         ProjectRepository $projectRepository,
-        ProjectDistrictRepository $projectDistrictRepository,
-        ProjectDistrictsPersister $districtsPersister,
-        ProjectDistrictPositionerRepository $projectDistrictPositionerRepository
+        ProjectDistrictsPersister $districtsPersister
     ) {
         $this->entityManager = $entityManager;
         $this->logger = $logger;
         $this->formFactory = $formFactory;
         $this->transformer = $transformer;
         $this->projectRepository = $projectRepository;
-        $this->projectDistrictRepository = $projectDistrictRepository;
-        $this->projectDistrictPositionerRepository = $projectDistrictPositionerRepository;
         $this->districtsPersister = $districtsPersister;
     }
 
@@ -65,9 +56,9 @@ class UpdateProjectMutation implements MutationInterface
             isset($arguments['externalLink']) ||
             (isset($arguments['isExternal']) && $arguments['isExternal']);
 
-        $project = $this->projectRepository->find(GlobalId::fromGlobalId($arguments['id'])['id']);
+        $project = $this->projectRepository->find($projectId);
 
-        if (!$project) {
+        if (!$project instanceof Project) {
             throw new BadRequestHttpException('Sorry, please retry.');
         }
         $this->transformer->setProject($project);
@@ -100,7 +91,7 @@ class UpdateProjectMutation implements MutationInterface
 
         try {
             $this->entityManager->flush();
-        } catch (DriverException $e) {
+        } catch (\RuntimeException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()
             );

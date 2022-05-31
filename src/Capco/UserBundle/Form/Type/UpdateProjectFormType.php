@@ -67,6 +67,12 @@ class UpdateProjectFormType extends AbstractType
             ->add('locale', EntityType::class, [
                 'required' => false,
                 'class' => Locale::class,
+            ])
+            ->add('address', PurifiedTextType::class, [
+                'required' => false,
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'admin',
             ]);
     }
 

@@ -15,6 +15,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectHeaderType;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\LocalizableTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
@@ -40,12 +41,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Project implements IndexableInterface, TimeRangeable
 {
+    use AddressableTrait;
+    use DateHelperTrait;
     use LocalizableTrait;
     use MetaDescriptionCustomCodeTrait;
     use ProjectVisibilityTrait;
-    use UuidTrait;
-    use DateHelperTrait;
     use TimeRangeableTrait;
+    use UuidTrait;
 
     public const FILTER_ALL = 'all';
 
@@ -746,12 +748,14 @@ class Project implements IndexableInterface, TimeRangeable
         foreach ($this->steps as $step) {
             if (!$startAt) {
                 $startAt = $step->getStep()->getStartAt();
+
                 continue;
             }
             if ($step->getStep()->getStartAt() < $startAt) {
                 $startAt = $step->getStep()->getStartAt();
             }
         }
+
         return $startAt;
     }
 
@@ -762,12 +766,14 @@ class Project implements IndexableInterface, TimeRangeable
         foreach ($this->steps as $step) {
             if (!$endAt) {
                 $endAt = $step->getStep()->getEndAt();
+
                 continue;
             }
             if ($step->getStep()->getEndAt() > $endAt) {
                 $endAt = $step->getStep()->getEndAt();
             }
         }
+
         return $endAt;
     }
 
