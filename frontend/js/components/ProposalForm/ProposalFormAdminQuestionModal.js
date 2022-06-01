@@ -3,7 +3,14 @@ import * as React from 'react';
 import styled, { css, type StyledComponent } from 'styled-components';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Field, formValueSelector, FieldArray, getFormSyncErrors, change, arrayPop } from 'redux-form';
+import {
+  Field,
+  formValueSelector,
+  FieldArray,
+  getFormSyncErrors,
+  change,
+  arrayPop,
+} from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import Toggle from '../Form/Toggle';
@@ -152,7 +159,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
       formErrors,
       isSuperAdmin,
       descriptionUsingJoditWysiwyg,
-      dispatch
+      dispatch,
     } = this.props;
     if (formErrors.questions !== undefined) {
       disabled = true;
@@ -498,7 +505,9 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
               onClose={() => {
                 const isEmpty = this.resetQuestion();
                 onClose(isEmpty);
-                dispatch(arrayPop(formName, 'questions'));
+                if (!currentQuestion.id) {
+                  dispatch(arrayPop(formName, 'questions'));
+                }
               }}
             />
             <SubmitButton
@@ -531,4 +540,6 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   };
 };
 
-export default connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(ProposalFormAdminQuestionModal));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(ProposalFormAdminQuestionModal),
+);

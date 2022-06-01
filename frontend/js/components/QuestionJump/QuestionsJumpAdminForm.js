@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Field, FieldArray, formValueSelector } from 'redux-form';
+import { change, Field, FieldArray, formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, Button } from 'react-bootstrap';
+import { get } from 'lodash';
 import QuestionJumpConditionsAdminForm from './QuestionJumpConditionsAdminForm';
 import type { GlobalState } from '~/types';
 import component from '../Form/Field';
@@ -17,6 +18,7 @@ type ParentProps = {|
   oldMember: string,
 |};
 type Props = {|
+  ...ReduxFormFormProps,
   ...ParentProps,
   fields: { length: number, map: Function, remove: Function, push: Function },
   jumps: $PropertyType<responsesHelper_adminQuestion, 'jumps'>,
@@ -31,6 +33,7 @@ const QuestionsJumpAdminForm = ({
   oldMember,
   formName,
   currentQuestion,
+  dispatch,
 }: Props) => {
   const firstMultipleChoiceQuestion = questions.find(
     question => question.__typename === 'MultipleChoiceQuestion',
@@ -39,6 +42,9 @@ const QuestionsJumpAdminForm = ({
   const isMultipleQuestion = currentQuestion.__typename === 'MultipleChoiceQuestion';
 
   const addDefaultJump = () => {
+    const destinationQuestion =
+      questions[0].id !== currentQuestion.id ? questions[0] : questions[1] || null;
+    const destinationQuestionIndex = questions.findIndex(q => q.id === destinationQuestion?.id);
     fields.push({
       origin: {
         id: currentQuestion.id,
@@ -61,9 +67,44 @@ const QuestionsJumpAdminForm = ({
         },
       ],
       destination: {
-        id: questions[0].id !== currentQuestion.id ? questions[0].id : questions[1]?.id || null,
+        id: destinationQuestion?.id ?? null,
+        title: destinationQuestion?.title ?? null,
       },
     });
+
+    if (destinationQuestion && destinationQuestionIndex) {
+      dispatch(
+        change(formName, `questions[${destinationQuestionIndex}].destinationJumps`, [
+          ...destinationQuestion.destinationJumps,
+          {
+            origin: {
+              id: currentQuestion.id,
+              title: currentQuestion.title,
+            },
+          },
+        ]),
+      );
+    }
+  };
+
+  const onJumpRemove = (index: number, member: string): void => {
+    fields.remove(index);
+    const jump = get({ questions }, member);
+    if (jump.conditions.length === 1) {
+      const destinationId = jump.destination.id;
+      const destination = questions.find(q => q.id === destinationId);
+      const destinationIndex = questions.findIndex(q => q.id === destinationId);
+      const updatedDestinationJumps = destination?.destinationJumps?.filter(
+        j => j.origin.id !== currentQuestion.id,
+      );
+      dispatch(
+        change(
+          formName,
+          `questions[${destinationIndex}].destinationJumps`,
+          updatedDestinationJumps,
+        ),
+      );
+    }
   };
 
   return (
@@ -79,7 +120,7 @@ const QuestionsJumpAdminForm = ({
               <button
                 type="button"
                 style={{ border: 'none', fontSize: '20px', backgroundColor: '#f5f5f5' }}
-                onClick={() => fields.remove(index)}>
+                onClick={() => onJumpRemove(index, member)}>
                 X
               </button>
             </div>

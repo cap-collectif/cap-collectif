@@ -168,7 +168,9 @@ const SectionQuestionAdminModal = ({
             onClose={() => {
               const isEmpty = resetSection();
               onClose(isEmpty);
-              dispatch(arrayPop(formName, 'questions'));
+              if (!currentSection.id) {
+                dispatch(arrayPop(formName, 'questions'));
+              }
             }}
           />
           <SubmitButton
@@ -197,4 +199,6 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   };
 };
 
-export default connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(SectionQuestionAdminModal));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(SectionQuestionAdminModal),
+);

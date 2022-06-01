@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { formValueSelector, Field, FieldArray } from 'redux-form';
+import { formValueSelector, Field, FieldArray, change } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import type { GlobalState } from '~/types';
@@ -11,6 +11,7 @@ import type { Jump } from '../Questionnaire/QuestionnaireAdminConfigurationForm'
 import type { Questions } from '~/components/Form/Form.type';
 
 type Props = {
+  ...ReduxFormFormProps,
   fields: { length: number, map: Function, remove: Function, push: Function },
   questions: Questions,
   formName: string,
@@ -24,6 +25,7 @@ export const QuestionJumpConditionsAdminForm = ({
   member,
   formName,
   currentJump,
+  dispatch,
 }: Props) => {
   const currentQuestion = questions.find(question => question.id === currentJump?.origin.id);
   const isMultipleChoiceQuestion =
@@ -51,6 +53,38 @@ export const QuestionJumpConditionsAdminForm = ({
   };
 
   const defaultCondition = getDefaultCondition();
+
+  const onChange = e => {
+    const currentJumpDestinationId = currentJump.destination.id;
+    const currentJumpDestination = questions.find(q => q.id === currentJumpDestinationId);
+    const currentJumpDestinationIndex = questions.findIndex(q => q.id === currentJumpDestinationId);
+    const updatedDestinationJumps = currentJumpDestination?.destinationJumps?.filter(
+      jump => jump.origin.id !== currentQuestion?.id,
+    );
+
+    dispatch(
+      change(
+        formName,
+        `questions[${currentJumpDestinationIndex}].destinationJumps`,
+        updatedDestinationJumps,
+      ),
+    );
+
+    const destinationQuestionId = e.target.value;
+    const destinationQuestion = questions.find(q => q.id === destinationQuestionId);
+    const destinationQuestionIndex = questions.findIndex(q => q.id === destinationQuestionId);
+    dispatch(
+      change(formName, `questions[${destinationQuestionIndex}].destinationJumps`, [
+        ...(destinationQuestion?.destinationJumps ?? []),
+        {
+          origin: {
+            id: currentQuestion?.id,
+            title: currentQuestion?.title,
+          },
+        },
+      ]),
+    );
+  };
 
   return (
     <div className="form-group" id="questions_choice_panel_personal">
@@ -89,6 +123,7 @@ export const QuestionJumpConditionsAdminForm = ({
             <Field
               id={`${member}.destination.id`}
               name={`${member}.destination.id`}
+              onChange={onChange}
               type="select"
               component={component}>
               {questions
