@@ -82,6 +82,10 @@ type State = {|
   |},
 |};
 
+type ReactObjRef<ElementType: React.ElementType> = {
+  current: null | React.ElementRef<ElementType>,
+};
+
 export const formName = 'ReplyForm';
 
 const onUnload = e => {
@@ -285,6 +289,8 @@ const asyncValidate = (values: FormValues) => {
 export const getFormNameUpdate = (id: string) => `Update${formName}-${id}`;
 
 export class ReplyForm extends React.Component<Props, State> {
+  formRef: ReactObjRef<'form'>;
+
   constructor() {
     super();
     this.state = {
@@ -293,6 +299,7 @@ export class ReplyForm extends React.Component<Props, State> {
         value: null,
       },
     };
+    this.formRef = React.createRef();
   }
 
   static defaultProps = {
@@ -404,8 +411,14 @@ export class ReplyForm extends React.Component<Props, State> {
       : false;
 
     const disabledSubmitBtn = () => {
+      const isNativeFormValid = this.formRef.current?.reportValidity() ?? true;
       const isDisabled =
-        invalidRequirements || invalid || submitting || disabled || (!isDraft && pristine);
+        invalidRequirements ||
+        invalid ||
+        submitting ||
+        disabled ||
+        (!isDraft && pristine) ||
+        !isNativeFormValid;
       if (!isAuthenticated && !reply) {
         return isDisabled || !this.state.captcha.value;
       }
@@ -422,7 +435,7 @@ export class ReplyForm extends React.Component<Props, State> {
     return (
       <ReplyFormContainer id="reply-form-container">
         {questionnaire.description && <Description>{questionnaire.description}</Description>}
-        <form id="reply-form" onSubmit={handleSubmit}>
+        <form id="reply-form" onSubmit={handleSubmit} ref={this.formRef}>
           {(newReplyOrReplyInDraft || replyIsPublishedAndRequirementsAreNotMet) &&
             stepHasRequirement &&
             user && (
