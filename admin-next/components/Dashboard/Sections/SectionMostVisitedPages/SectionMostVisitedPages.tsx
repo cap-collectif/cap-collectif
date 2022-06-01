@@ -5,7 +5,7 @@ import { Box } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
 import ViewChart from '@ui/Charts/ViewChart/ViewChart';
 import Section from '@ui/Section/Section';
-import ModalSectionMostVisitedPages from './ModalSectionMostVisitedPages';
+import ModalSectionMostVisitedPages, { formatLabel } from './ModalSectionMostVisitedPages';
 import { useDashboard } from '../../Dashboard.context';
 import { SectionMostVisitedPagesQuery as SectionMostVisitedPagesQueryType } from '@relay/SectionMostVisitedPagesQuery.graphql';
 import { getVariablesQuery, QueryOptions } from '../Sections.utils';
@@ -57,7 +57,11 @@ const SectionMostVisitedPages: FC<SectionMostVisitedPagesProps> = ({ queryOption
                             level={idx + 1}
                             total={mostVisitedPages.totalCount}
                             count={value.totalCount}
-                            label={value.key}
+                            label={
+                                value.key === '/'
+                                    ? intl.formatMessage({ id: 'navbar.homepage' })
+                                    : `/${formatLabel(value.key)}`
+                            }
                         />
                     ))}
                 </Section>

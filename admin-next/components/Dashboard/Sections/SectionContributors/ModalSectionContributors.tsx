@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
-import { Modal, InfoMessage, Heading } from '@cap-collectif/ui';
+import { Modal, InfoMessage, Heading, CapUIModalSize } from '@cap-collectif/ui';
 import type { ModalSectionContributors_contributors$key } from '@relay/ModalSectionContributors_contributors.graphql';
 import type { ModalSectionContributors_anonymousContributors$key } from '@relay/ModalSectionContributors_anonymousContributors.graphql';
 import LineChart from '@ui/Charts/LineChart/LineChart';
@@ -66,7 +66,8 @@ const ModalSectionContributors: FC<ModalSectionContributorsProps> = ({
             ariaLabel={intl.formatMessage(
                 { id: 'global.contributor.dynamic' },
                 { num: totalContributorsCount },
-            )}>
+            )}
+            size={CapUIModalSize.Lg}>
             <Modal.Header>
                 <Heading as="h4" color="blue.900">
                     {totalContributorsCount}{' '}

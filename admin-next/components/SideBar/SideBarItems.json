@@ -428,7 +428,7 @@
         "icon": "PIE_CHART",
         "featuresRequired": ["beta__analytics_page"],
         "rolesRequired": [],
-        "href": "/admin/capco/analytics/list",
+        "href": "/admin-next/dashboard",
         "beta": true,
         "items": []
     }

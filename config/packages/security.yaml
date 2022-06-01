@@ -11,7 +11,6 @@ security:
         SONATA:
             - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT # if you are using acl then this line must be commented
     access_control:
-        - { path: ^/admin/capco/analytics/list, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/alpha/project, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/capco/app/project/.*/edit, roles: ROLE_ADMIN }
         - { path: ^/admin/capco/app/project, roles: ROLE_PROJECT_ADMIN }

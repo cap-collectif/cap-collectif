@@ -418,7 +418,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
           {features.beta__analytics_page ? (
             <SidebarLink
               text="admin.label.analytics"
-              href="/admin/capco/analytics/list"
+              href="/admin-next/dashboard"
               icon="PIE_CHART"
               withLabel={isOpen}
               fontSize={3}

@@ -21,6 +21,11 @@ const FRAGMENT = graphql`
     }
 `;
 
+export const formatLabel = (label: string): string => {
+    const labelSplitted = label.split('/');
+    return labelSplitted[labelSplitted.length - 1];
+};
+
 const ModalSectionMostVisitedPages: FC<ModalSectionMostVisitedPagesProps> = ({
     show,
     onClose,
@@ -48,7 +53,11 @@ const ModalSectionMostVisitedPages: FC<ModalSectionMostVisitedPagesProps> = ({
                         level={idx + 1}
                         total={mostVisitedPages.totalCount}
                         count={value.totalCount}
-                        label={value.key}
+                        label={
+                            value.key === '/'
+                                ? intl.formatMessage({ id: 'navbar.homepage' })
+                                : `/${formatLabel(value.key)}`
+                        }
                     />
                 ))}
             </Modal.Body>
