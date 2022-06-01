@@ -6,10 +6,10 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +17,6 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -31,7 +30,7 @@ class AddUserReplyMutation implements MutationInterface
 
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
-    private QuestionnaireRepository $questionnaireRepo;
+    private GlobalIdResolver $globalIdResolver;
     private ResponsesFormatter $responsesFormatter;
     private LoggerInterface $logger;
     private ReplyRepository $replyRepo;
@@ -44,7 +43,7 @@ class AddUserReplyMutation implements MutationInterface
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ReplyRepository $replyRepo,
-        QuestionnaireRepository $questionnaireRepo,
+        GlobalIdResolver $globalIdResolver,
         ResponsesFormatter $responsesFormatter,
         LoggerInterface $logger,
         Publisher $publisher,
@@ -55,7 +54,7 @@ class AddUserReplyMutation implements MutationInterface
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->replyRepo = $replyRepo;
-        $this->questionnaireRepo = $questionnaireRepo;
+        $this->globalIdResolver = $globalIdResolver;
         $this->responsesFormatter = $responsesFormatter;
         $this->logger = $logger;
         $this->publisher = $publisher;
@@ -68,10 +67,8 @@ class AddUserReplyMutation implements MutationInterface
     {
         $values = $input->getArrayCopy();
 
-        $questionnaireId = GlobalId::fromGlobalId($values['questionnaireId'])['id'];
-
         /** @var Questionnaire $questionnaire */
-        $questionnaire = $this->questionnaireRepo->find($questionnaireId);
+        $questionnaire = $this->globalIdResolver->resolve($values['questionnaireId'], $user);
         unset($values['questionnaireId']);
 
         if (!$questionnaire->canContribute($user)) {
@@ -129,7 +126,7 @@ class AddUserReplyMutation implements MutationInterface
         $this->indexer->index(Reply::class, $reply->getId());
         $this->indexer->finishBulk();
 
-        if ($questionnaire->isNotifyResponseCreate() && !$reply->isDraft()) {
+        if ($questionnaire->isAcknowledgeReplies() && !$reply->isDraft()) {
             $this->publisher->publish(
                 'questionnaire.reply',
                 new Message(
