@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 import Truncate from 'react-truncate';
 import moment from 'moment';
 import Card from '~/components/Ui/Card/Card';
@@ -38,10 +38,11 @@ export const ProjectEventPreview = ({ event }: Props) => {
     guestListEnabled,
     url,
   }: ProjectEventPreview_event = event;
+  const intl = useIntl();
   const startAt = timeRange?.startAt;
   const endAt = timeRange?.endAt;
   const isLive = isEventLive(startAt, endAt);
-  const isPast = startAt ? moment(new Date()).isAfter(startAt) : false;
+  const isPast = endAt ? moment(new Date()).isAfter(endAt) : false;
   const isStarted = startAt != null ? new Date(startAt).getTime() <= new Date().getTime() : false;
   const isEnded =
     endAt != null
@@ -70,7 +71,7 @@ export const ProjectEventPreview = ({ event }: Props) => {
           {isPast && (
             <div className="past-container">
               <span className="separator">-</span>
-              <FormattedMessage id="passed-singular" />
+              {intl.formatMessage({ id: 'passed-singular' })}
             </div>
           )}
 
@@ -79,7 +80,7 @@ export const ProjectEventPreview = ({ event }: Props) => {
               {guestListEnabled && (
                 <li>
                   <Label color={colors.lightBlue} fontSize={10}>
-                    <FormattedMessage id="registration-required" />
+                    {intl.formatMessage({ id: 'registration-required' })}
                   </Label>
                 </li>
               )}

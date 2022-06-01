@@ -39,6 +39,20 @@ const event = {
     ...baseEvent,
     guestListEnabled: true,
   },
+  passedEvent: {
+    ...baseEvent,
+    timeRange: {
+      startAt: '2021-03-10 00:00:00',
+      endAt: '2022-03-11 00:00:00',
+    },
+  },
+  notPassedEvent: {
+    ...baseEvent,
+    timeRange: {
+      startAt: '2020-03-10 00:00:00',
+      endAt: '2030-03-11 00:00:00',
+    },
+  },
 };
 
 describe('<ProjectEventPreview />', () => {
@@ -59,6 +73,15 @@ describe('<ProjectEventPreview />', () => {
 
   it('should render correctly when guest enabled', () => {
     const wrapper = shallow(<ProjectEventPreview event={event.withGuestEnabled} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly no passed event', () => {
+    const wrapper = shallow(<ProjectEventPreview event={event.notPassedEvent} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly passed event', () => {
+    const wrapper = shallow(<ProjectEventPreview event={event.passedEvent} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
