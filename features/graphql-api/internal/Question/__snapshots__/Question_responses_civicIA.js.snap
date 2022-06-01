@@ -137,8 +137,22 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "iaCategory": "literacy",
+            "iaReadability": null,
+            "iaSentiment": "NEGATIVE",
+          },
+        },
+        Object {
+          "node": Object {
             "iaCategory": "sport",
             "iaReadability": 37,
+            "iaSentiment": "NEGATIVE",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": null,
+            "iaReadability": null,
             "iaSentiment": "NEGATIVE",
           },
         },
@@ -155,9 +169,9 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "sport",
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
@@ -169,44 +183,44 @@ Object {
         },
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "literacy",
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "NEGATIVE",
           },
         },
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "literacy",
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "NEUTRAL",
           },
         },
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "literacy",
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "NEUTRAL",
           },
         },
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "bakery",
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "NEUTRAL",
           },
         },
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "home",
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "sport",
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
@@ -220,42 +234,42 @@ Object {
           "node": Object {
             "iaCategory": null,
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "NEGATIVE",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "sport",
+            "iaReadability": null,
+            "iaSentiment": "POSITIVE",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "sport",
+            "iaReadability": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
           "node": Object {
             "iaCategory": null,
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
           "node": Object {
             "iaCategory": null,
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "sport",
             "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
@@ -313,93 +327,93 @@ Object {
         },
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "sport",
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "sport",
+            "iaReadability": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
           "node": Object {
             "iaCategory": null,
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "NEGATIVE",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "sport",
+            "iaReadability": null,
+            "iaSentiment": "POSITIVE",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "home",
+            "iaReadability": null,
+            "iaSentiment": "POSITIVE",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "bakery",
+            "iaReadability": null,
+            "iaSentiment": "NEUTRAL",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "literacy",
+            "iaReadability": null,
+            "iaSentiment": "NEUTRAL",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "literacy",
+            "iaReadability": null,
+            "iaSentiment": "NEUTRAL",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "literacy",
+            "iaReadability": null,
+            "iaSentiment": "NEGATIVE",
           },
         },
         Object {
           "node": Object {
             "iaCategory": null,
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
+          },
+        },
+        Object {
+          "node": Object {
+            "iaCategory": "sport",
+            "iaReadability": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
           "node": Object {
             "iaCategory": null,
             "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
           },
         },
         Object {
           "node": Object {
-            "iaCategory": null,
+            "iaCategory": "sport",
             "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "iaCategory": null,
-            "iaReadability": null,
-            "iaSentiment": null,
+            "iaSentiment": "POSITIVE",
           },
         },
       ],

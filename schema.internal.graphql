@@ -3016,6 +3016,15 @@ interface ContributionWithAuthor {
   author: User!
 }
 
+"""Associates a value with a count."""
+type Counter {
+  """The value to be count."""
+  value: String!
+
+  """The count."""
+  counter: Int!
+}
+
 input CreateAlphaProjectInput {
   """The project title"""
   title: String!
@@ -6946,6 +6955,12 @@ type MajorityQuestion implements Question & Node {
   """Boolean to decide whether the question will be rendered or not"""
   hidden: Boolean!
 
+  """Most used categories of responses, detected by CivicIA."""
+  iaCategories(
+    """If given, will limit the number of categories returned."""
+    limit: Int
+  ): [Counter!]!
+
   """
   Return an array of MajorityCategories containing the total of responses for each choices.
   """
@@ -7146,6 +7161,12 @@ type MediaQuestion implements Question & Node {
 
   """Boolean to decide whether the question will be rendered or not"""
   hidden: Boolean!
+
+  """Most used categories of responses, detected by CivicIA."""
+  iaCategories(
+    """If given, will limit the number of categories returned."""
+    limit: Int
+  ): [Counter!]!
 }
 
 """A response"""
@@ -7233,6 +7254,12 @@ type MultipleChoiceQuestion implements Question & Node {
 
   """Boolean to decide whether the question will be rendered or not"""
   hidden: Boolean!
+
+  """Most used categories of responses, detected by CivicIA."""
+  iaCategories(
+    """If given, will limit the number of categories returned."""
+    limit: Int
+  ): [Counter!]!
   isOtherAllowed: Boolean!
 
   """Responses of the `other` question choice."""
@@ -11524,6 +11551,12 @@ interface Question {
 
   """Boolean to decide whether the question will be rendered or not"""
   hidden: Boolean!
+
+  """Most used categories of responses, detected by CivicIA."""
+  iaCategories(
+    """If given, will limit the number of categories returned."""
+    limit: Int
+  ): [Counter!]!
 }
 
 """A possible choice of a question."""
@@ -13212,6 +13245,12 @@ type SectionQuestion implements Question & Node {
   """Boolean to decide whether the question will be rendered or not"""
   hidden: Boolean!
 
+  """Most used categories of responses, detected by CivicIA."""
+  iaCategories(
+    """If given, will limit the number of categories returned."""
+    limit: Int
+  ): [Counter!]!
+
   """If not null, give the section s depth"""
   level: Int
 }
@@ -13787,6 +13826,12 @@ type SimpleQuestion implements Question & Node {
 
   """Boolean to decide whether the question will be rendered or not"""
   hidden: Boolean!
+
+  """Most used categories of responses, detected by CivicIA."""
+  iaCategories(
+    """If given, will limit the number of categories returned."""
+    limit: Int
+  ): [Counter!]!
 
   """if type number, value can be ranged (number question only)"""
   isRangeBetween: Boolean!

@@ -81,3 +81,12 @@ InternalQuestion:
             hidden:
                 type: 'Boolean!'
                 description: 'Boolean to decide whether the question will be rendered or not'
+            iaCategories:
+                type: '[Counter!]!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    limit:
+                        type: 'Int'
+                        description: 'If given, will limit the number of categories returned.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionIACategoriesResolver", [value, args, getUser()])'
+                description: 'Most used categories of responses, detected by CivicIA.'

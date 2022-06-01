@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Question.iaCategories fail to get iaCategories if not admin 1`] = `
+Object {
+  "question": null,
+}
+`;
+
+exports[`Internal|Question.iaCategories get 2 most used iaCategories 1`] = `
+Object {
+  "question": Object {
+    "iaCategories": Array [
+      Object {
+        "counter": 7,
+        "value": "sport",
+      },
+      Object {
+        "counter": 3,
+        "value": "literacy",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Question.iaCategories get iaCategories 1`] = `
+Object {
+  "question": Object {
+    "iaCategories": Array [
+      Object {
+        "counter": 7,
+        "value": "sport",
+      },
+      Object {
+        "counter": 3,
+        "value": "literacy",
+      },
+      Object {
+        "counter": 1,
+        "value": "home",
+      },
+      Object {
+        "counter": 1,
+        "value": "bakery",
+      },
+    ],
+  },
+}
+`;

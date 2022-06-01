@@ -108,6 +108,23 @@ class ValueResponseRepository extends EntityRepository
             ->getResult();
     }
 
+    public function countCategories(?AbstractQuestion $question = null, ?int $limit = null): array
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('r.iaCategory as value')
+            ->addSelect('count(r.id) as counter')
+            ->andWhere('r.iaCategory IS NOT NULL')
+            ->groupBy('r.iaCategory')
+            ->orderBy('counter', 'DESC')
+            ->setMaxResults($limit);
+
+        if ($question) {
+            $qb->andWhere('r.question = :question')->setParameter('question', $question);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
     private function getNoEmptyResultQueryBuilder(): QueryBuilder
     {
         return // Some fixes until we use a proper JSON query

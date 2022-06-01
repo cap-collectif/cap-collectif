@@ -1,0 +1,12 @@
+Counter:
+    type: object
+    name: 'Counter'
+    config:
+        description: 'Associates a value with a count.'
+        fields:
+            value:
+                type: 'String!'
+                description: 'The value to be count.'
+            counter:
+                type: 'Int!'
+                description: 'The count.'

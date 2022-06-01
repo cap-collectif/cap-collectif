@@ -745,6 +745,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud1'
         value: Incroyable ! Tout ces sportifs la wow.
         createdAt: <(new \DateTime('2021-01-01 04:07:00'))>
+        iaCategory: 'sport'
+        iaSentiment: 'POSITIVE'
     responseTagCloud2:
         question: '@xQuestion1'
         reply: '@replyTagCloud1'
@@ -757,6 +759,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud2'
         value: Oui c'est vraiment trop cool.
         createdAt: <(new \DateTime('2021-01-01 04:09:00'))>
+        iaSentiment: 'POSITIVE'
     responseTagCloud4:
         question: '@xQuestion1'
         reply: '@replyTagCloud2'
@@ -769,6 +772,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         question: '@simplequestion2'
         reply: '@replyTagCloud3'
         value: Ca va être fou ! Des sportifs de hauts niveaux.
+        iaCategory: 'sport'
+        iaSentiment: 'POSITIVE'
     responseTagCloud6:
         question: '@xQuestion1'
         reply: '@replyTagCloud3'
@@ -781,6 +786,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud4'
         value: C'est génial ! On va se régaler. mais
         createdAt: <(new \DateTime('2021-01-01 04:12:00'))>
+        iaSentiment: 'POSITIVE'
     responseTagCloud8:
         question: '@xQuestion1'
         reply: '@replyTagCloud4'
@@ -793,6 +799,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud5'
         value: Il va y avoir du divertissement ! Et des sportifs ou !
         createdAt: <(new \DateTime('2021-01-01 04:14:00'))>
+        iaCategory: 'sport'
+        iaSentiment: 'POSITIVE'
     responseTagCloud10:
         question: '@xQuestion1'
         reply: '@replyTagCloud5'
@@ -805,6 +813,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud6'
         value: Incroyable ! Tout ces sportifs la wow. est
         createdAt: <(new \DateTime('2021-01-01 04:15:00'))>
+        iaCategory: 'sport'
+        iaSentiment: 'POSITIVE'
     responseTagCloud12:
         question: '@xQuestion1'
         reply: '@replyTagCloud6'
@@ -817,6 +827,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud7'
         value: Bof, non pas trop ça va faire du bruit Donc !
         createdAt: <(new \DateTime('2021-01-01 04:17:00'))>
+        iaCategory: null
+        iaSentiment: 'NEGATIVE'
     responseTagCloud14:
         question: '@xQuestion1'
         reply: '@replyTagCloud7'
@@ -844,6 +856,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud9'
         value: Le sport c'est cool
         createdAt: <(new \DateTime('2021-01-01 04:19:00'))>
+        iaCategory: 'sport'
+        iaSentiment: 'POSITIVE'
     responseTagCloud18:
         question: '@xQuestion1'
         reply: '@replyTagCloud9'
@@ -856,6 +870,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud10'
         value: Enfin un peu de divertissement. Car le divertissement c'est bien à la maison.
         createdAt: <(new \DateTime('2021-01-01 04:20:00'))>
+        iaCategory: 'home'
+        iaSentiment: 'POSITIVE'
     responseTagCloud20:
         question: '@xQuestion1'
         reply: '@replyTagCloud10'
@@ -872,6 +888,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud11'
         value: L'autre jour j'étais à la boulangerie des sportifs, des sportifs ? Oui mec des sportifs. Jure des sportifs ? Oui oui des sportfs qui font du sport et du bruit et des phrases un peu longues pour le divertissement à Paris, cette phrase va plus vouloir rien dire mais c'est pas mal et ça régale.
         createdAt: <(new \DateTime('2021-01-01 04:22:00'))>
+        iaCategory: 'bakery'
+        iaSentiment: 'NEUTRAL'
     responseTagCloud22:
         question: '@xQuestion1'
         reply: '@replyTagCloud11'
@@ -888,6 +906,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud12'
         value: Aller encore une autre phrase un peu longue parce que bon il faut bien tester tout les cas, comme le cas K , et le cas K des lapins c'est caca, c'est incroyable et fou non comme le lundi à Paris
         createdAt: <(new \DateTime('2021-01-01 04:24:00'))>
+        iaCategory: 'literacy'
+        iaSentiment: 'NEUTRAL'
     responseTagCloud24:
         question: '@xQuestion1'
         reply: '@replyTagCloud12'
@@ -904,6 +924,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud13'
         value: Une autre phrase, parce que le mot phrase il va finir par pas mal remonté au final dans toutes ces réponses qui sont censées être liées au sport. Mais bon a cause du covid y'a plus trop de sport en vrai ou alors tu en fait à la maison mais c'est un peu ghetto quand même tu trouve pas ?
         createdAt: <(new \DateTime('2021-01-01 04:26:00'))>
+        iaCategory: 'literacy'
+        iaSentiment: 'NEUTRAL'
     responseTagCloud26:
         question: '@xQuestion1'
         reply: '@replyTagCloud13'
@@ -920,6 +942,8 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud14'
         value: D'ailleurs en parlant de sports et de sportifs, je suis toujours aussi dégouté que l'escalade ce soit toujours fermé ça se trouve en 2024 ça aurait pu être moi aux JO à flex sur des murs de fou la. Je continue à remplir un peu cette ligne histoire de faire genre je suis une longue phrase de sportif.
         createdAt: <(new \DateTime('2021-01-01 04:28:00'))>
+        iaCategory: 'literacy'
+        iaSentiment: 'NEGATIVE'
     responseTagCloud28:
         question: '@xQuestion1'
         reply: '@replyTagCloud14'
