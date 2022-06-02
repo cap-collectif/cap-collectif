@@ -21,6 +21,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SmsNotifier extends BaseNotifier
 {
+    private const BUSINESS_TEAM_EMAIL = 'developpement@cap-collectif.com';
     protected ArgumentUrlResolver $argumentUrlResolver;
     protected TranslatorInterface $translator;
     protected UserUrlResolver $userUrlResolver;
@@ -125,7 +126,9 @@ class SmsNotifier extends BaseNotifier
         $platformLink = "{$this->context->getScheme()}://{$this->context->getHost()}";
         $adminUrl = "{$platformLink}/admin-next/secure-participation"; 
 
-        foreach ($users as $user) {
+        $emails = array_map(function($user) { return $user->getEmail(); }, $users);
+        $emails[] = self::BUSINESS_TEAM_EMAIL;
+        foreach ($emails as $email) {
             $this->mailer->createAndSendMessage(
                 AlertSmsConsumedCreditMessage::class,
                 null,
@@ -136,7 +139,7 @@ class SmsNotifier extends BaseNotifier
                     'adminUrl' => $adminUrl,
                 ],
                 null,
-                $user->getEmail()
+                $email
             );
         }
 
