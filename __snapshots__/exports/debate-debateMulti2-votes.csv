@@ -1,12 +1,12 @@
-﻿vote_publishedAt,vote_type,vote_geoip_country_name,vote_geoip_region_name,vote_geoip_city_name,vote_source,vote_author_id,vote_author_zipCode,vote_author_username,vote_author_isEmailConfirmed,vote_author_email,vote_author_userType_name,debate_url
-"2020-01-13 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMTI=,,user12,1,user12@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-14 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMTM=,,user13,1,user13@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-15 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMTQ=,,user14,1,user14@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-16 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMTU=,,user15,1,user15@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-17 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMTY=,,user16,1,user16@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-18 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMTc=,,user17,1,user17@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-19 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMTg=,,user18,1,user18@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-20 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMTk=,,user19,1,user19@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-21 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMjA=,,user20,1,user20@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-22 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMjE=,,user21,1,user21@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
-"2020-01-23 00:00:00",FOR,,,,APPLICATION,VXNlcjp1c2VyMjI=,,user22,1,user22@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+﻿vote_publishedAt,vote_type,vote_source,vote_author_id,vote_author_zipCode,vote_author_username,vote_author_isEmailConfirmed,vote_author_email,vote_author_userType_name,debate_url
+"2020-01-13 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMTI=,,user12,1,user12@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-14 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMTM=,,user13,1,user13@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-15 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMTQ=,,user14,1,user14@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-16 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMTU=,,user15,1,user15@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-17 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMTY=,,user16,1,user16@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-18 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMTc=,,user17,1,user17@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-19 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMTg=,,user18,1,user18@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-20 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMTk=,,user19,1,user19@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-21 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMjA=,,user20,1,user20@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-22 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMjE=,,user21,1,user21@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort
+"2020-01-23 00:00:00",FOR,APPLICATION,VXNlcjp1c2VyMjI=,,user22,1,user22@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-mort

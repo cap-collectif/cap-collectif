@@ -1,3 +1,3 @@
-﻿vote_publishedAt,vote_type,vote_geoip_country_name,vote_geoip_region_name,vote_geoip_city_name,vote_source,vote_author_id,vote_author_zipCode,vote_author_username,vote_author_userType_name,debate_url
-"2015-01-01 09:04:00",FOR,,,,APPLICATION,VXNlcjp1c2VySnBlYw==,,Jpec,,https://capco.dev/project/projet-avec-administrateur-de-projet/debate/debat-admin-projet
-"2015-01-01 09:04:00",AGAINST,,,,APPLICATION,VXNlcjp1c2VyTWF4aW1l,,mauriau,Citoyen,https://capco.dev/project/projet-avec-administrateur-de-projet/debate/debat-admin-projet
+﻿vote_publishedAt,vote_type,vote_source,vote_author_id,vote_author_zipCode,vote_author_username,vote_author_userType_name,debate_url
+"2015-01-01 09:04:00",FOR,APPLICATION,VXNlcjp1c2VySnBlYw==,,Jpec,,https://capco.dev/project/projet-avec-administrateur-de-projet/debate/debat-admin-projet
+"2015-01-01 09:04:00",AGAINST,APPLICATION,VXNlcjp1c2VyTWF4aW1l,,mauriau,Citoyen,https://capco.dev/project/projet-avec-administrateur-de-projet/debate/debat-admin-projet

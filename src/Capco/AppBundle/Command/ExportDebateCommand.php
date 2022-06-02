@@ -40,10 +40,6 @@ class ExportDebateCommand extends BaseExportCommand
         'argument_author_internal_communication' => 'argument_author_internal_communication',
         'argument_author_external_communication' => 'argument_author_external_communication',
 
-        'argument_geoip_country_name' => 'geoip.countryName',
-        'argument_geoip_region_name' => 'geoip.regionName',
-        'argument_geoip_city_name' => 'geoip.cityName',
-
         'argument_content' => 'body',
         'argument_type' => 'type',
         'argument_voteNumber' => 'votes.totalCount',
@@ -54,10 +50,6 @@ class ExportDebateCommand extends BaseExportCommand
     public const HEADER_VOTE = [
         'vote_publishedAt' => 'publishedAt',
         'vote_type' => 'type',
-
-        'vote_geoip_country_name' => 'geoip.countryName',
-        'vote_geoip_region_name' => 'geoip.regionName',
-        'vote_geoip_city_name' => 'geoip.cityName',
 
         'vote_source' => 'vote_source',
 
@@ -129,6 +121,12 @@ class ExportDebateCommand extends BaseExportCommand
             InputOption::VALUE_OPTIONAL,
             'order the votes as PUBLICATION_DESC, PUBLICATION_ASC, CREATION_DESC, CREATION_ASC'
         );
+        $this->addOption(
+            'geoip',
+            'g',
+            InputOption::VALUE_NONE,
+            'use to add geo_ip location columns'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -140,6 +138,7 @@ class ExportDebateCommand extends BaseExportCommand
             $debate = $this->debateRepository->find($debateId);
             $owner = $debate ? $debate->getProject()->getOwner() : null;
             $isProjectAdmin = $owner && $owner->isOnlyProjectAdmin();
+            $geoIp = $input->getOption('geoip');
 
             $url = $this->loadDataAndGetUrl(
                 $debateId,
@@ -147,7 +146,8 @@ class ExportDebateCommand extends BaseExportCommand
                 $votes,
                 $input->getOption('arguments-order'),
                 $input->getOption('votes-order'),
-                $isProjectAdmin
+                $isProjectAdmin,
+                $geoIp
             );
             $this->generateArgumentsAndVotesCSV(
                 $output,
@@ -157,7 +157,8 @@ class ExportDebateCommand extends BaseExportCommand
                 $url,
                 $input->getOption('delimiter'),
                 $input->getOption('verbose'),
-                $isProjectAdmin
+                $isProjectAdmin,
+                $geoIp
             );
 
             if ($isProjectAdmin) {
@@ -169,7 +170,9 @@ class ExportDebateCommand extends BaseExportCommand
                     $arguments,
                     $votes,
                     $input->getOption('arguments-order'),
-                    $input->getOption('votes-order')
+                    $input->getOption('votes-order'),
+                    false,
+                    $geoIp
                 );
                 $this->generateArgumentsAndVotesCSV(
                     $output,
@@ -178,7 +181,9 @@ class ExportDebateCommand extends BaseExportCommand
                     $votes,
                     $url,
                     $input->getOption('delimiter'),
-                    $input->getOption('verbose')
+                    $input->getOption('verbose'),
+                    false,
+                    $geoIp
                 );
             }
         }
@@ -194,7 +199,8 @@ class ExportDebateCommand extends BaseExportCommand
         string $url,
         string $delimiter,
         bool $isVerbose,
-        bool $projectAdmin = false
+        bool $projectAdmin = false,
+        bool $geoIp = false
     ): void {
         $this->generateCSV(
             $output,
@@ -204,7 +210,8 @@ class ExportDebateCommand extends BaseExportCommand
             $url,
             $delimiter,
             $isVerbose,
-            $projectAdmin
+            $projectAdmin,
+            $geoIp
         );
         $this->generateCSV(
             $output,
@@ -214,7 +221,8 @@ class ExportDebateCommand extends BaseExportCommand
             $url,
             $delimiter,
             $isVerbose,
-            $projectAdmin
+            $projectAdmin,
+            $geoIp
         );
     }
 
@@ -226,7 +234,8 @@ class ExportDebateCommand extends BaseExportCommand
         string $url,
         string $delimiter,
         bool $isVerbose,
-        bool $projectAdmin = false
+        bool $projectAdmin = false,
+        bool $geoIp = false
     ): void {
         $output->writeln("<info>Generating ${type} of debate ${debateId}...</info>");
         $path = $this->getPath($debateId, $type, $projectAdmin);
@@ -243,8 +252,17 @@ class ExportDebateCommand extends BaseExportCommand
         }
 
         try {
-            self::addHeader($writer, $type, $projectAdmin);
-            self::fillDocument($writer, $type, $data, $url, $output, $isVerbose, $projectAdmin);
+            self::addHeader($writer, $type, $projectAdmin, $geoIp);
+            self::fillDocument(
+                $writer,
+                $type,
+                $data,
+                $url,
+                $output,
+                $isVerbose,
+                $projectAdmin,
+                $geoIp
+            );
         } catch (IOException $e) {
             throw new \RuntimeException('Error while writing on file: ' . $e->getMessage());
         }
@@ -257,11 +275,12 @@ class ExportDebateCommand extends BaseExportCommand
     private static function addHeader(
         Writer $writer,
         string $type,
-        bool $projectAdmin = false
+        bool $projectAdmin = false,
+        bool $geoIp = false
     ): void {
         $writer->addRow(
             WriterEntityFactory::createRowFromArray(
-                array_keys(self::getHeader($type, $projectAdmin))
+                array_keys(self::getHeader($type, $projectAdmin, $geoIp))
             )
         );
     }
@@ -273,7 +292,8 @@ class ExportDebateCommand extends BaseExportCommand
         string $url,
         OutputInterface $output,
         bool $isVerbose,
-        bool $projectAdmin = false
+        bool $projectAdmin = false,
+        bool $geoIp = false
     ): void {
         $forCount = 0;
         $againstCount = 0;
@@ -281,7 +301,7 @@ class ExportDebateCommand extends BaseExportCommand
         foreach ($data as $datum) {
             $datum = $datum['node'];
             $datum['url'] = $url;
-            self::addRowToDocument($writer, $datum, $type, $projectAdmin);
+            self::addRowToDocument($writer, $datum, $type, $projectAdmin, $geoIp);
 
             if ($isVerbose) {
                 if ('FOR' === $datum['type']) {
@@ -302,11 +322,12 @@ class ExportDebateCommand extends BaseExportCommand
         Writer $writer,
         array $argumentData,
         string $type,
-        bool $projectAdmin = false
+        bool $projectAdmin = false,
+        bool $geoIp = false
     ): void {
         $rowContent = [];
 
-        foreach (self::getHeader($type, $projectAdmin) as $headerPath) {
+        foreach (self::getHeader($type, $projectAdmin, $geoIp) as $headerPath) {
             $cellValue = self::getRowCellValue($argumentData, $headerPath);
             $rowContent[] = $cellValue;
         }
@@ -387,7 +408,8 @@ class ExportDebateCommand extends BaseExportCommand
         array &$votes,
         ?string $argumentsOrder = null,
         ?string $votesOrder = null,
-        bool $projectAdmin = false
+        bool $projectAdmin = false,
+        bool $geoIp = false
     ): string {
         $globalId = GlobalId::toGlobalId('Debate', $debateId);
 
@@ -402,7 +424,8 @@ class ExportDebateCommand extends BaseExportCommand
                         $voteCursor,
                         $argumentsOrder,
                         $votesOrder,
-                        $projectAdmin
+                        $projectAdmin,
+                        $geoIp
                     ),
                     'variables' => [],
                 ])
@@ -428,10 +451,22 @@ class ExportDebateCommand extends BaseExportCommand
         return $url;
     }
 
-    private static function getHeader(string $type, bool $projectAdmin = false): array
-    {
+    private static function getHeader(
+        string $type,
+        bool $projectAdmin = false,
+        bool $geoIP = false
+    ): array {
         $headersArgument = self::HEADER_ARGUMENT;
         $headersVote = self::HEADER_VOTE;
+
+        if ($geoIP) {
+            $headersVote['vote_geoip_country_name'] = 'geoip.countryName';
+            $headersVote['vote_geoip_region_name'] = 'geoip.regionName';
+            $headersVote['vote_geoip_city_name'] = 'geoip.cityName';
+            $headersArgument['argument_geoip_country_name'] = 'geoip.countryName';
+            $headersArgument['argument_geoip_region_name'] = 'geoip.regionName';
+            $headersArgument['argument_geoip_city_name'] = 'geoip.cityName';
+        }
 
         if ($projectAdmin) {
             unset(
@@ -455,7 +490,8 @@ class ExportDebateCommand extends BaseExportCommand
         ?string $votesCursor = null,
         ?string $argumentsOrder = null,
         ?string $votesOrder = null,
-        bool $projectAdmin = false
+        bool $projectAdmin = false,
+        bool $geoIp = false
     ): string {
         $argumentsOptions = self::getQueryOptions($argumentsCursor, $argumentsOrder);
         $votesOptions = self::getQueryOptions($votesCursor, $votesOrder);
@@ -463,6 +499,13 @@ class ExportDebateCommand extends BaseExportCommand
         $AUTHOR_INFOS_FRAGMENT = $projectAdmin
             ? GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_ANONYMOUS_FRAGMENT
             : GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
+        $geoIpPart = $geoIp
+            ? 'geoip {
+          countryName
+          regionName
+          cityName
+        }'
+            : '';
 
         return <<<EOF
 {$USER_TYPE_FRAGMENT}
@@ -480,11 +523,7 @@ class ExportDebateCommand extends BaseExportCommand
             updatedAt
             trashedAt
             trashedReason
-            geoip {
-              countryName
-              regionName
-              cityName
-            }
+            ${geoIpPart}
             ... on DebateArgument {
               author {
                 zipCode
