@@ -343,6 +343,7 @@ mappings:
                 other: { type: keyword }
         iaSentiment: { type: text }
         iaReadability: { type: byte }
+        iaCategory: { type: keyword }
         responses:
             type: nested
             properties:

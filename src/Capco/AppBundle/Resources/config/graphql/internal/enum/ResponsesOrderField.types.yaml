@@ -9,3 +9,6 @@ ResponsesOrderField:
             READABILITY:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ResponsesOrderField::READABILITY")'
                 description: 'Allows ordering a list of responses by its readability score.'
+            CATEGORY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ResponsesOrderField::CATEGORY")'
+                description: 'Allows ordering a list of responses by its category.'

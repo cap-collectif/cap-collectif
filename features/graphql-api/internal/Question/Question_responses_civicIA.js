@@ -74,4 +74,20 @@ describe('Internal|Question.civicIA', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
+  it('get civicIA analysis on responses, ordered by category', async () => {
+    await expect(
+      graphql(
+        QuestionResponsesCivicIAQuery,
+        {
+          questionId: 2,
+          sentimentFilter: null,
+          orderBy: {
+            field: 'CATEGORY',
+            direction: 'ASC',
+          },
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 });

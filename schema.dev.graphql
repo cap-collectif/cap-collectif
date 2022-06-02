@@ -12960,6 +12960,9 @@ enum ResponsesOrderField {
 
   """Allows ordering a list of responses by its readability score."""
   READABILITY
+
+  """Allows ordering a list of responses by its category."""
+  CATEGORY
 }
 
 input ReviewEventInput {

@@ -6,3 +6,5 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
             groups: [Proposals, Replies, ElasticsearchResponse]
         iaReadability:
             groups: [Proposals, Replies, ElasticsearchResponse]
+        iaCategory:
+            groups: [Proposals, Replies, ElasticsearchResponse]
