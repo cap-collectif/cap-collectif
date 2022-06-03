@@ -38,14 +38,17 @@ const MailParameterQuery = ({ id }: Props) => {
       environment={environment}
       variables={{
         emailingCampaignId: id,
-        affiliations: isAdmin ? null : ['OWNER'],
+        mlAffiliations: isAdmin ? null : ['OWNER'],
+        projectAffiliations: isAdmin ? null : ['OWNER'],
       }}
       query={graphql`
         query MailParameterQueryQuery(
           $emailingCampaignId: ID!
-          $affiliations: [MailingListAffiliation!]
+          $mlAffiliations: [MailingListAffiliation!]
+          $projectAffiliations: [ProjectAffiliation!]
         ) {
-          ...MailParameterPage_query @arguments(affiliations: $affiliations)
+          ...MailParameterPage_query
+            @arguments(mlAffiliations: $mlAffiliations, projectAffiliations: $projectAffiliations)
           emailingCampaign: node(id: $emailingCampaignId) {
             ... on EmailingCampaign {
               ...MailParameterPage_emailingCampaign

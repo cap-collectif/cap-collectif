@@ -57,9 +57,8 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
     usersNotConfirmedRefusing,
     senderEmails,
     groups,
-    projects,
   } = query;
-  const { mailingLists } = viewer;
+  const { mailingLists, projects } = viewer;
   const { user } = useSelector((state: GlobalState) => state.user);
   const emailingGroupEnabled = useFeatureFlag('beta__emailing_group');
   const isAdmin = user ? user.isAdmin : false;
@@ -386,14 +385,26 @@ export default createFragmentContainer(ParameterPage, {
   `,
   query: graphql`
     fragment Parameter_query on Query
-    @argumentDefinitions(affiliations: { type: "[MailingListAffiliation!]" }) {
+    @argumentDefinitions(
+      mlAffiliations: { type: "[MailingListAffiliation!]" }
+      projectAffiliations: { type: "[ProjectAffiliation!]" }
+    ) {
       viewer {
-        mailingLists(affiliations: $affiliations) {
+        mailingLists(affiliations: $mlAffiliations) {
           totalCount
           edges {
             node {
               id
               name
+            }
+          }
+        }
+        projects(affiliations: $projectAffiliations) {
+          totalCount
+          edges {
+            node {
+              id
+              title
             }
           }
         }
@@ -430,15 +441,6 @@ export default createFragmentContainer(ParameterPage, {
         address
       }
       groups {
-        totalCount
-        edges {
-          node {
-            id
-            title
-          }
-        }
-      }
-      projects {
         totalCount
         edges {
           node {

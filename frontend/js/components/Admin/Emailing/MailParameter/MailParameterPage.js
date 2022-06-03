@@ -396,8 +396,12 @@ export default createFragmentContainer(MailParameterPageConnected, {
   `,
   query: graphql`
     fragment MailParameterPage_query on Query
-    @argumentDefinitions(affiliations: { type: "[MailingListAffiliation!]" }) {
-      ...Parameter_query @arguments(affiliations: $affiliations)
+    @argumentDefinitions(
+      mlAffiliations: { type: "[MailingListAffiliation!]" }
+      projectAffiliations: { type: "[ProjectAffiliation!]" }
+    ) {
+      ...Parameter_query
+        @arguments(mlAffiliations: $mlAffiliations, projectAffiliations: $projectAffiliations)
     }
   `,
 });

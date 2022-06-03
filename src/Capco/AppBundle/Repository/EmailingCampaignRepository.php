@@ -49,7 +49,7 @@ class EmailingCampaignRepository extends EntityRepository
             \in_array(EmailingCampaignAffiliation::OWNER, $affiliations) &&
             $user
         ) {
-            $qb->andWhere('ml.owner = :user')->setParameter('user', $user);
+            $qb->andWhere('ec.owner = :user')->setParameter('user', $user);
         }
 
         return $qb

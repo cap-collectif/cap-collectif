@@ -49,6 +49,17 @@ const baseProps = {
           },
         ],
       },
+      projects: {
+        totalCount: 1,
+        edges: [
+          {
+            node: {
+              id: '1',
+              title: 'Je suis un project',
+            },
+          },
+        ],
+      },
       isAdmin: true,
     },
     users: {
@@ -92,17 +103,6 @@ const baseProps = {
           node: {
             id: '2',
             title: 'Je suis un groupe aussi',
-          },
-        },
-      ],
-    },
-    projects: {
-      totalCount: 1,
-      edges: [
-        {
-          node: {
-            id: '1',
-            title: 'Je suis un project',
           },
         },
       ],
