@@ -83,7 +83,7 @@ class AddEventsMutation extends AbstractEventMutation
             $author = $this->userRepo->findOneByEmail($eventInput['authorEmail']);
 
             $eventInput['startAt'] = $this->parseStringDate($eventInput['startAt']);
-            $eventInput['endAt'] = $this->parseStringDate($eventInput['endAt']);
+            $eventInput['endAt'] = $eventInput['endAt'] ? $this->parseStringDate($eventInput['endAt']) : null;
 
             if ($author) {
                 unset($eventInput['authorEmail']);
@@ -103,10 +103,7 @@ class AddEventsMutation extends AbstractEventMutation
                     $eventInput['themes'] = $themeIds;
                 }
 
-                if (
-                    $this->checkIsAValidDate($eventInput['startAt']) &&
-                    $this->checkIsAValidDate($eventInput['endAt'])
-                ) {
+                if ($this->validateDates($eventInput['startAt'], $eventInput['endAt'])) {
                     $event = (new Event())->setAuthor($author);
 
                     if (\is_array($eventInput['projects']) && !empty($eventInput['projects'])) {
@@ -239,6 +236,15 @@ class AddEventsMutation extends AbstractEventMutation
         $stringDate = str_replace('/', '-', $stringDate);
 
         return (new \DateTime($stringDate))->format('Y-m-d H:i:s');
+    }
+
+    public function validateDates(string $startAt, ?string $endAt): bool
+    {
+        if ($endAt) {
+            return $this->checkIsAValidDate($startAt) && $this->checkIsAValidDate($endAt);
+        }
+
+        return $this->checkIsAValidDate($startAt);
     }
 
     private function handleAddress(array &$eventInput): void
