@@ -318,9 +318,27 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         $this->proposals->removeElement($proposal);
     }
 
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
+    public function setEvents(array $events): self
+    {
+        $this->events = new ArrayCollection($events);
+
+        return $this;
+    }
+
+    public function setPosts(array $posts): self
+    {
+        $this->posts = new ArrayCollection($posts);
+
+        return $this;
+    }
+
+    public function setProjects(array $projects): self
+    {
+        $this->projects = new ArrayCollection($projects);
+
+        return $this;
+    }
+
     public function getEvents()
     {
         return $this->events;
@@ -429,21 +447,17 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
 
     public function countPublicProject()
     {
-        $count = 0;
-        /** @var Project $project */
-        foreach ($this->projects as $project) {
-            if ($project->isPublic()) {
-                ++$count;
-            }
-        }
-
-        return $count;
+        return $this->projects
+            ->filter(function (Project $project) {
+                return $project->isPublic();
+            })
+            ->count();
     }
 
     public function countEnabledPosts(): int
     {
         return $this->posts
-            ->map(function (Post $post) {
+            ->filter(function (Post $post) {
                 return $post->canDisplay() && $post->getIsPublished();
             })
             ->count();
@@ -452,7 +466,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     public function countEnabledEvents(): int
     {
         return $this->events
-            ->map(function (Event $event) {
+            ->filter(function (Event $event) {
                 return $event->isEnabled();
             })
             ->count();
