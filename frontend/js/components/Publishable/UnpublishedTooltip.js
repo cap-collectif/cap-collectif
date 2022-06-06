@@ -18,7 +18,7 @@ export const UnpublishedTooltip = ({ publishable, target }: Props) => (
     target={target}
     placement="top">
     <Tooltip id="UnpublishedTooltip">
-      <i className="cap cap-delete-2" />{' '}
+      <i className="cap cap-delete-2" />
       {publishable && publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION' ? (
         <FormattedMessage id="voting-pending-publication" />
       ) : null}

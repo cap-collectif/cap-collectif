@@ -46,8 +46,28 @@ export const VoteItemContainer: StyledComponent<{}, {}, HTMLDivElement> = styled
   width: 100%;
   align-items: center;
 
+  .col-md-8,
+  .col-md-3 {
+    width: fit-content !important;
+  }
+  .col-md-8 div div {
+    display: flex;
+    flex-flow: column-reverse;
+    br {
+      display: none;
+    }
+    span {
+      font-size: 11px;
+      line-height: 16px;
+      color: #919191;
+    }
+  }
+
   .proposals-user-votes__title {
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #001b38;
   }
 
   @media (max-width: ${bootstrapGrid.xsMax}px) {

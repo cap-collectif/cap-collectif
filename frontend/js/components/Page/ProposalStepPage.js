@@ -156,8 +156,8 @@ export class ProposalStepPage extends React.Component<Props> {
               $isMapDisplay: Boolean!
             ) {
               viewer @include(if: $isAuthenticated) {
-                ...ProposalListView_viewer
-                ...UnpublishedProposalListView_viewer
+                ...ProposalListView_viewer @arguments(stepId: $stepId)
+                ...UnpublishedProposalListView_viewer @arguments(stepId: $stepId)
               }
               step: node(id: $stepId) {
                 ... on ProposalStep {

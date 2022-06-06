@@ -1644,7 +1644,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "7d6b31fc85bef7fe3ea2a5fa5d77efd2",
+            "cacheID": "33cbc3e277e76ad226e3bfef43c67edb",
             "id": null,
             "metadata": Object {},
             "name": "OpinionSourceBoxQuery",
@@ -1744,7 +1744,7 @@ fragment OpinionSourceFormModal_sourceable_39ngnn on Sourceable {
   ...OpinionSourceForm_sourceable
   step {
     id
-    ...RequirementsForm_step_39ngnn
+    ...RequirementsFormLegacy_step_39ngnn
     requirements {
       viewerMeetsTheRequirements @include(if: $isAuthenticated)
       reason
@@ -1842,7 +1842,7 @@ fragment OpinionSourceVoteButton_source_39ngnn on Source {
     requirements {
       viewerMeetsTheRequirements @include(if: $isAuthenticated)
     }
-    ...RequirementsForm_step_39ngnn
+    ...RequirementsFormLegacy_step_39ngnn
     ...RequirementsModal_step_39ngnn
     id
   }
@@ -1894,7 +1894,7 @@ fragment OpinionSource_sourceable_39ngnn on Sourceable {
   }
 }
 
-fragment RequirementsForm_step_39ngnn on RequirementStep {
+fragment RequirementsFormLegacy_step_39ngnn on RequirementStep {
   __isRequirementStep: __typename
   requirements {
     edges {
@@ -1935,7 +1935,7 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
 }
 
 fragment RequirementsModal_step_39ngnn on ConsultationStep {
-  ...RequirementsForm_step_39ngnn
+  ...RequirementsFormLegacy_step_39ngnn
   id
   requirements {
     viewerMeetsTheRequirements @include(if: $isAuthenticated)

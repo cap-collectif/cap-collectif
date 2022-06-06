@@ -173,8 +173,8 @@ export default createRefetchContainer(
   container,
   {
     viewer: graphql`
-      fragment ProposalListView_viewer on User {
-        ...ProposalListViewPaginated_viewer
+      fragment ProposalListView_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+        ...ProposalListViewPaginated_viewer @arguments(stepId: $stepId)
       }
     `,
     step: graphql`

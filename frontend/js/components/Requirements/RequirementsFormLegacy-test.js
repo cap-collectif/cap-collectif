@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
 import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePersonalDataMutation';
-import { RequirementsForm, onChange, validate } from './RequirementsForm';
+import { RequirementsFormLegacy, onChange, validate } from './RequirementsFormLegacy';
 import { formMock, $refType } from '~/mocks';
 
 jest.mock('../../mutations/UpdateRequirementMutation', () => ({
@@ -22,7 +22,7 @@ jest.mock('../../mutations/UpdateProfilePersonalDataMutation', () => ({
   namedExport: jest.fn(),
 }));
 
-describe('<RequirementsForm />', () => {
+describe('<RequirementsFormLegacy />', () => {
   const step = {
     $refType,
     requirements: {
@@ -80,7 +80,7 @@ describe('<RequirementsForm />', () => {
   };
 
   it('should render a vote widget for a simple vote without limit', () => {
-    const wrapper = shallow(<RequirementsForm step={step} isAuthenticated {...formMock} />);
+    const wrapper = shallow(<RequirementsFormLegacy step={step} isAuthenticated {...formMock} />);
     expect(wrapper).toMatchSnapshot();
   });
 

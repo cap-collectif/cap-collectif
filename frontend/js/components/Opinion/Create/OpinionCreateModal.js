@@ -12,7 +12,7 @@ import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { State, Dispatch } from '../../../types';
 import type { OpinionCreateModal_section } from '~relay/OpinionCreateModal_section.graphql';
 import type { OpinionCreateModal_consultation } from '~relay/OpinionCreateModal_consultation.graphql';
-import { formName as requirementsFormName } from '../../Requirements/RequirementsForm';
+import { formName as requirementsFormName } from '../../Requirements/RequirementsFormLegacy';
 
 type RelayProps = {|
   section: OpinionCreateModal_section,

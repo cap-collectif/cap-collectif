@@ -2392,7 +2392,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9edd28f2c1b9e889c75baace73435975",
+          "cacheID": "cec923081dfeba61900ba084487326c4",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2505,7 +2505,7 @@ fragment OpinionCreateForm_consultation on Consultation {
 }
 
 fragment OpinionCreateForm_consultationStep_39ngnn on ConsultationStep {
-  ...RequirementsForm_step_39ngnn
+  ...RequirementsFormLegacy_step_39ngnn
   id
   project {
     _id
@@ -2728,7 +2728,7 @@ fragment Opinion_opinion on Opinion {
   }
 }
 
-fragment RequirementsForm_step_39ngnn on RequirementStep {
+fragment RequirementsFormLegacy_step_39ngnn on RequirementStep {
   __isRequirementStep: __typename
   requirements {
     edges {
@@ -5266,7 +5266,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9edd28f2c1b9e889c75baace73435975",
+          "cacheID": "cec923081dfeba61900ba084487326c4",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5379,7 +5379,7 @@ fragment OpinionCreateForm_consultation on Consultation {
 }
 
 fragment OpinionCreateForm_consultationStep_39ngnn on ConsultationStep {
-  ...RequirementsForm_step_39ngnn
+  ...RequirementsFormLegacy_step_39ngnn
   id
   project {
     _id
@@ -5602,7 +5602,7 @@ fragment Opinion_opinion on Opinion {
   }
 }
 
-fragment RequirementsForm_step_39ngnn on RequirementStep {
+fragment RequirementsFormLegacy_step_39ngnn on RequirementStep {
   __isRequirementStep: __typename
   requirements {
     edges {

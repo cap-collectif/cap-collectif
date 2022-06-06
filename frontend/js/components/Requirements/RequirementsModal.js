@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Modal, Alert } from 'react-bootstrap';
-import RequirementsForm from './RequirementsForm';
+import RequirementsFormLegacy from './RequirementsFormLegacy';
 import type { RequirementsModal_step } from '~relay/RequirementsModal_step.graphql';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 
@@ -40,7 +40,7 @@ export const RequirementsModal = ({ show, handleClose, step }: Props) => {
           <div className="col-xs-12">
             <WYSIWYGRender value={step.requirements.reason} />
           </div>
-          <RequirementsForm stepId={step.id} step={step} />
+          <RequirementsFormLegacy stepId={step.id} step={step} />
         </div>
       </Modal.Body>
     </Modal>
@@ -52,7 +52,7 @@ export default createFragmentContainer(container, {
   step: graphql`
     fragment RequirementsModal_step on ConsultationStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+      ...RequirementsFormLegacy_step @arguments(isAuthenticated: $isAuthenticated)
 
       id
       requirements {

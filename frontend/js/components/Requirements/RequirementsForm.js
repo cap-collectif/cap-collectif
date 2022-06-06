@@ -1,522 +1,297 @@
 // @flow
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { graphql, createFragmentContainer } from 'react-relay';
+import * as React from 'react';
+import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl';
 import {
-  reduxForm,
-  Field,
-  startSubmit,
-  stopSubmit,
-  stopAsyncValidation,
-  isPristine,
-} from 'redux-form';
-import { fetchQuery_DEPRECATED } from 'relay-runtime';
-import { Icon, CapUIIcon, Flex } from '@cap-collectif/ui';
-import component from '../Form/Field';
-import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
-import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePersonalDataMutation';
-import CheckIdentificationCodeMutation, {
-  type CheckIdentificationCodeMutationResponse,
-} from '../../mutations/CheckIdentificationCodeMutation';
-import type { Dispatch, State } from '~/types';
-import DateDropdownPicker from '../Form/DateDropdownPicker';
-import environment from '../../createRelayEnvironment';
+  CapUISpotIcon,
+  CapUISpotIconSize,
+  Flex,
+  FormGuideline,
+  FormLabel,
+  Heading,
+  InputGroup,
+  SpotIcon,
+  Text,
+  Icon,
+  CapUIIcon,
+  CapInputSize,
+} from '@cap-collectif/ui';
+import { COUNTRY_CODES, FieldInput, FormControl } from '@cap-collectif/form';
 import LoginSocialButton from '~ui/Button/LoginSocialButton';
-import AppBox from '~ui/Primitives/AppBox';
-import type { RequirementsForm_step } from '~relay/RequirementsForm_step.graphql';
 import FranceConnectIcon from '~ui/Icons/FranceConnectIcon';
 
-export const formName = 'requirements-form';
-
-const CODE_MINIMAL_LENGTH = 8;
-
-type GoogleMapsAddress = {|
-  +formatted: ?string,
-  +json: string,
-|};
-
-type Requirement = {|
-  +__typename: string,
-  +id: string,
-  +viewerMeetsTheRequirement?: boolean,
-  +viewerDateOfBirth?: ?string,
-  +viewerAddress?: ?GoogleMapsAddress,
-  +viewerValue?: ?string,
-  +label?: string,
-|};
-
-type FormValues = { [key: string]: ?string | boolean };
 type Props = {
-  ...ReduxFormFormProps,
-  stepId?: ?string,
-  step: RequirementsForm_step,
-  isAuthenticated: boolean,
-  pristine: boolean,
+  initialValues: { [key: string]: any },
+  isPhoneVerificationOnly: boolean,
+  control: any,
+  formState: any,
+  trigger: any,
+  setValue: any,
 };
 
-export const refetchViewer = graphql`
-  query RequirementsForm_userQuery($stepId: ID!, $isAuthenticated: Boolean!) {
-    step: node(id: $stepId) {
-      ... on RequirementStep {
-        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
-        requirements {
-          viewerMeetsTheRequirements @include(if: $isAuthenticated)
-        }
-      }
-    }
-  }
-`;
+export const CODE_MINIMAL_LENGTH = 8;
 
-const callApiTimeout: { [key: string]: TimeoutID } = {};
-
-const checkIdentificationCode = (identificationCode: string) =>
-  CheckIdentificationCodeMutation.commit({ input: { identificationCode } }).then(
-    (response: CheckIdentificationCodeMutationResponse) => {
-      if (response.checkIdentificationCode?.errorCode) {
-        return response.checkIdentificationCode.errorCode;
-      }
-    },
-  );
-
-const asyncValidate = (values: FormValues, dispatch: Dispatch, props: Props): Promise<*> => {
-  return new Promise((resolve, reject) => {
-    const requirementEdge =
-      props.step.requirements.edges &&
-      props.step.requirements.edges.filter(
-        edge => edge?.node?.__typename === 'IdentificationCodeRequirement',
-      )[0];
-    if (!requirementEdge) {
-      return Promise.resolve();
-    }
-    const requirement = requirementEdge.node;
-    // cast as string, because, some code can be numbers only
-    const newValue = String(values.IdentificationCodeRequirement).toUpperCase();
-
-    // if viewer has code dont update the requirement
-    if (requirement.viewerValue) {
-      return Promise.resolve();
-    }
-    if (newValue.length < CODE_MINIMAL_LENGTH) {
-      const errors = {};
-      errors.IdentificationCodeRequirement = 'BAD_CODE';
-      reject(errors);
-    }
-    if (!requirement.viewerValue && newValue.length >= CODE_MINIMAL_LENGTH) {
-      return checkIdentificationCode(newValue).then(response => {
-        const errors = {};
-        if (response) {
-          errors.IdentificationCodeRequirement = response;
-          reject(errors);
-        } else {
-          dispatch(startSubmit(formName));
-          return UpdateProfilePersonalDataMutation.commit({
-            input: { userIdentificationCode: newValue },
-          }).then(() => {
-            errors.IdentificationCodeRequirement = undefined;
-            dispatch(stopSubmit(formName));
-            dispatch(stopAsyncValidation(formName));
-            Promise.resolve();
-          });
-        }
-      });
-    }
-    Promise.resolve();
-  });
-};
-
-export const validate = (values: FormValues, props: Props) => {
-  const errors = {};
-  const { edges } = props.step.requirements;
-  if (!edges) {
-    return errors;
-  }
-  for (const edge of edges.filter(Boolean)) {
-    const requirement = edge.node;
-    if (requirement.__typename === 'PhoneRequirement') {
-      let phone = values[requirement.id];
-      if (typeof phone === 'string') {
-        if (phone.slice(0, 3) === '+33') {
-          phone = phone.replace('+33', '0');
-        }
-        if (!/^[0-9]+$/.test(phone) || phone.length !== 10) {
-          errors[requirement.id] = 'profile.constraints.phone.invalid';
-        }
-      }
-    } else if (
-      (!values[requirement.id] || !values.PostalAddressText) &&
-      requirement.__typename === 'PostalAddressRequirement'
-    ) {
-      errors.PostalAddressText = 'global.required';
-    } else if (!values[requirement.id] && requirement.__typename === 'FranceConnectRequirement') {
-      errors.franceConnect_ = 'global.required';
-    } else if (
-      !values[requirement.id] &&
-      requirement.__typename !== 'IdentificationCodeRequirement'
-    ) {
-      errors[requirement.id] = 'global.required';
-    }
-  }
-
-  return errors;
-};
-
-export const onChange = (
-  values: FormValues,
-  dispatch: Dispatch,
-  props: Props,
-  previousValues: FormValues,
-): void => {
-  if (props.pristine) {
-    return;
-  }
-  Object.keys(values).forEach(element => {
-    if (previousValues[element] !== values[element]) {
-      const requirementEdge =
-        props.step.requirements.edges &&
-        props.step.requirements.edges?.filter(edge => edge?.node?.id === element).length > 0
-          ? props.step.requirements.edges?.find(edge => edge?.node?.id === element)
-          : props.step.requirements.edges?.find(edge => edge?.node?.__typename === element);
-      if (!requirementEdge) {
-        return;
-      }
-      const requirement = requirementEdge.node;
-      const newValue = values[element];
-      // Check that the new phone value is valid
-      if (
-        requirement.__typename === 'PhoneRequirement' &&
-        typeof validate(values, props)[requirement.id] !== 'undefined'
-      ) {
-        return;
-      }
-
-      if (typeof newValue !== 'string') {
-        if (requirement.__typename === 'CheckboxRequirement' && typeof newValue === 'boolean') {
-          // The user just (un-)checked a box, so we can call our API directly
-          dispatch(startSubmit(formName));
-
-          return UpdateRequirementMutation.commit({
-            input: {
-              requirement: requirement.id,
-              value: newValue,
-            },
-          }).then(() => {
-            dispatch(stopSubmit(formName));
-
-            if (props.stepId) {
-              fetchQuery_DEPRECATED(environment, refetchViewer, {
-                stepId: props.stepId,
-                isAuthenticated: props.isAuthenticated,
-              });
-            }
-          });
-        }
-        return;
-      }
-      // skip identificationCode, the update is in asyncValidate
-      if (requirement.__typename === 'IdentificationCodeRequirement') {
-        return;
-      }
-      const input = {};
-      if (requirement.__typename === 'DateOfBirthRequirement') {
-        input.dateOfBirth = newValue;
-      }
-      if (requirement.__typename === 'PostalAddressRequirement') {
-        input.postalAddress = newValue;
-      }
-      if (requirement.__typename === 'FirstnameRequirement') {
-        input.firstname = newValue;
-      }
-      if (requirement.__typename === 'LastnameRequirement') {
-        input.lastname = newValue;
-      }
-      if (requirement.__typename === 'PhoneRequirement') {
-        if (newValue.slice(0, 3) === '+33') {
-          input.phone = newValue;
-        } else {
-          input.phone = `+33${newValue.charAt(0) === '0' ? newValue.substring(1) : newValue}`;
-        }
-      }
-
-      if (Object.keys(input).length < 1) {
-        return;
-      }
-      // To handle realtime updates
-      // we call the api after 1 second inactivity
-      // on each updated field, using timeout
-      const timeout = callApiTimeout[requirement.id];
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      dispatch(startSubmit(formName));
-
-      callApiTimeout[requirement.id] = setTimeout(() => {
-        UpdateProfilePersonalDataMutation.commit({ input }).then(() => {
-          dispatch(stopSubmit(formName));
-          if (props.stepId) {
-            fetchQuery_DEPRECATED(environment, refetchViewer, {
-              stepId: props.stepId,
-              isAuthenticated: props.isAuthenticated,
-            });
-          }
-        });
-      }, 1000);
-    }
-  });
-};
-
-const getLabel = (requirement: Requirement) => {
-  if (requirement.__typename === 'FirstnameRequirement') {
+const getLabel = (requirementType: string) => {
+  if (requirementType === 'FirstnameRequirement') {
     return <FormattedMessage id="form.label_firstname" />;
   }
-  if (requirement.__typename === 'LastnameRequirement') {
+  if (requirementType === 'LastnameRequirement') {
     return <FormattedMessage id="global.name" />;
   }
-  if (requirement.__typename === 'PhoneRequirement') {
+  if (requirementType === 'PhoneRequirement') {
     return <FormattedMessage id="mobile-phone" />;
   }
-  if (requirement.__typename === 'DateOfBirthRequirement') {
+  if (requirementType === 'DateOfBirthRequirement') {
     return <FormattedMessage id="form.label_date_of_birth" />;
   }
-  if (requirement.__typename === 'PostalAddressRequirement') {
+  if (requirementType === 'PostalAddressRequirement') {
     return <FormattedMessage id="admin.fields.event.address" />;
   }
-  if (requirement.__typename === 'IdentificationCodeRequirement') {
+  if (requirementType === 'IdentificationCodeRequirement') {
     return <FormattedMessage id="identification_code" />;
   }
-  if (requirement.__typename === 'FranceConnectRequirement') {
+  if (requirementType === 'FranceConnectRequirement') {
     return <FormattedMessage id="france_connect" />;
   }
-  if (requirement.__typename === 'PhoneVerifiedRequirement') {
+  if (requirementType === 'PhoneVerifiedRequirement') {
     return <FormattedMessage id="verify.number.sms" />;
   }
   return '';
 };
 
-const getFormProps = (requirement: Requirement, change: any) => {
-  if (requirement.__typename === 'DateOfBirthRequirement') {
-    return {
-      component: DateDropdownPicker,
-      globalClassName: 'col-sm-12 col-xs-12',
-      divClassName: 'row',
-    };
-  }
-  if (requirement.__typename === 'PostalAddressRequirement') {
-    return {
-      component,
-      type: 'address',
-      divClassName: 'col-sm-12 col-xs-12',
-      addressProps: {
-        getAddress: addressComplete => change(requirement.id, JSON.stringify([addressComplete])),
-      },
-    };
-  }
-  if (requirement.__typename === 'CheckboxRequirement') {
-    return { component, type: 'checkbox', divClassName: 'col-sm-12 col-xs-12' };
-  }
-  return { component, type: 'text', divClassName: 'col-sm-12 col-xs-12' };
-};
+const RequirementsForm = ({
+  initialValues,
+  isPhoneVerificationOnly,
+  control,
+  formState,
+  trigger,
+  setValue,
+}: Props) => {
+  const intl = useIntl();
 
-export const RequirementsForm = ({ step, submitting, submitSucceeded, change }: Props) => {
-  const requirements = step.requirements?.edges
-    ?.filter(Boolean)
-    .map(edge => edge.node)
-    .filter(requirement => requirement.__typename !== 'PhoneVerifiedRequirement');
+  React.useEffect(() => {
+    trigger();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const { isSubmitting } = formState;
+  if (isPhoneVerificationOnly) {
+    return (
+      <Flex as="form" direction="column" spacing={3} align="center" justify="center">
+        <SpotIcon name={CapUISpotIcon.ADD_CONTACT} size={CapUISpotIconSize.Lg} />
+        <Text textAlign="center" fontSize="18px" lineHeight="24px">
+          <FormattedHTMLMessage id="proposal.requirement.header.title" />
+        </Text>
+        <InputGroup>
+          <FormLabel label="" />
+          <FormControl name="PhoneVerifiedRequirement.CountryCode" control={control} isDisabled>
+            <FieldInput
+              uniqueCountry={COUNTRY_CODES.FR}
+              type="flagSelect"
+              name="PhoneVerifiedRequirement.CountryCode"
+              control={control}
+              placeholder={intl.formatMessage({ id: 'select.country.placeholder' })}
+            />
+          </FormControl>
+          <FormControl
+            name="PhoneVerifiedRequirement.phoneNumber"
+            control={control}
+            isDisabled={isSubmitting}>
+            <FieldInput type="tel" name="PhoneVerifiedRequirement.phoneNumber" control={control} />
+          </FormControl>
+        </InputGroup>
+      </Flex>
+    );
+  }
   return (
-    <form>
-      <div className="col-sm-12 col-xs-12 alert__form_succeeded-message">
-        {submitting ? (
-          <div>
-            <i
-              className="cap cap-spinner"
-              style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}
-            />{' '}
-            <FormattedMessage id="current-registration" />
-          </div>
-        ) : submitSucceeded ? (
-          <div>
-            <i className="cap cap-android-checkmark-circle" />{' '}
-            <FormattedMessage id="global.saved" />
-          </div>
-        ) : null}
-      </div>
-      {requirements &&
-        requirements.length > 0 &&
-        requirements.map(requirement => {
-          if (requirement.__typename === 'FranceConnectRequirement' && !requirement.viewerValue) {
+    <Flex direction="column" spacing={6} as="form">
+      <Heading as="h4">{intl.formatMessage({ id: 'vote.modal.body.form.title' })}</Heading>
+      <Flex direction="column" width="300px">
+        {Object.keys(initialValues).map(key => {
+          if (key === 'FranceConnectRequirement') {
+            if (!initialValues[key]) {
+              return (
+                <Flex justify="left" textAlign="left">
+                  <LoginSocialButton
+                    justifyContent="left"
+                    type="franceConnect"
+                    noHR
+                    fcTitle="fc-requirement-title"
+                  />
+                  <FormControl
+                    style={{ display: 'none' }}
+                    name="franceConnect_"
+                    id="franceConnect_"
+                    control={control}
+                    isRequired>
+                    <FieldInput
+                      type="hidden"
+                      name="franceConnect_"
+                      id="franceConnect_"
+                      control={control}
+                      defaultValue={false}
+                    />
+                  </FormControl>
+                </Flex>
+              );
+            }
+            if (initialValues[key]) {
+              return (
+                <Flex mb="16px">
+                  <Icon name={CapUIIcon.Check} color="green.500" alignSelf="center" />
+                  <FranceConnectIcon />
+                  <FormControl
+                    style={{ display: 'none' }}
+                    name="franceConnect_"
+                    id="franceConnect_"
+                    control={control}
+                    isRequired>
+                    <FieldInput
+                      type="hidden"
+                      name="franceConnect_"
+                      id="franceConnect_"
+                      control={control}
+                      defaultValue
+                    />
+                  </FormControl>
+                </Flex>
+              );
+            }
+          }
+
+          if (key === 'IdentificationCodeRequirement') {
             return (
-              <AppBox textAlign="left" mb={4} pl="15px">
-                <LoginSocialButton
-                  justifyContent="left"
-                  type="franceConnect"
-                  noHR
-                  fcTitle="fc-requirement-title"
+              <FormControl name={key} control={control} isRequired isDisabled={isSubmitting}>
+                <FormLabel label={getLabel(key)} />
+                <FieldInput
+                  variantSize={CapInputSize.Md}
+                  type="text"
+                  name={key}
+                  control={control}
+                  defaultValue={initialValues[key]}
                 />
-                <Field
-                  groupClassName="hidden"
-                  name="franceConnect_"
-                  id="franceConnect_"
-                  component={component}
-                  type="checkbox"
-                  checked={false}
-                />
-              </AppBox>
+              </FormControl>
             );
           }
-          if (requirement.__typename === 'FranceConnectRequirement' && requirement.viewerValue) {
+
+          if (key === 'PostalAddressRequirement') {
             return (
-              <Flex mt="12px" mb="8px" className="col-sm-12 col-xs-12">
-                <Icon name={CapUIIcon.Check} color="green.500" mr="13px" alignSelf="center" />
-                <FranceConnectIcon />
-                <Field
-                  groupClassName="hidden"
-                  name="franceConnect_"
-                  id="franceConnect_"
-                  component={component}
-                  type="checkbox"
-                  checked
-                />
-              </Flex>
+              <>
+                <FormControl name={key} control={control} isRequired isDisabled={isSubmitting}>
+                  <FormLabel label={getLabel(key)} />
+                  <FieldInput
+                    variantSize={CapInputSize.Md}
+                    type="address"
+                    name={key}
+                    control={control}
+                    defaultValue={initialValues[key]}
+                    getAddress={add => {
+                      setValue('realAddress', add);
+                    }}
+                  />
+                </FormControl>
+                <FormControl
+                  style={{ display: 'none' }}
+                  name="realAddress"
+                  control={control}
+                  isRequired>
+                  <FieldInput
+                    type="hidden"
+                    name="realAddress"
+                    control={control}
+                    defaultValue=""
+                    placeholder={intl.formatMessage({ id: 'global.address' })}
+                  />
+                </FormControl>
+              </>
             );
           }
+
+          if (key === 'CheckboxRequirement') {
+            return (
+              <FormControl
+                name={`${key}.viewerMeetsTheRequirement`}
+                control={control}
+                isRequired
+                isDisabled={isSubmitting}>
+                <FieldInput
+                  variantSize={CapInputSize.Md}
+                  type="checkbox"
+                  name={`${key}.viewerMeetsTheRequirement`}
+                  control={control}
+                  defaultValue={initialValues[key]?.viewerMeetsTheRequirement}>
+                  {initialValues[key]?.label}
+                </FieldInput>
+              </FormControl>
+            );
+          }
+
+          if (key === 'PhoneVerifiedRequirement' || key === 'PhoneRequirement') {
+            return (
+              <InputGroup>
+                <FormLabel label={getLabel(key)} />
+                {key === 'PhoneVerifiedRequirement' && (
+                  <FormGuideline>
+                    {intl.formatMessage({ id: 'phone.number.guideline' })}
+                  </FormGuideline>
+                )}
+                <FormControl
+                  name={`${key}.CountryCode`}
+                  control={control}
+                  isDisabled
+                  isRequired
+                  flex="50%">
+                  <FieldInput
+                    uniqueCountry={COUNTRY_CODES.FR}
+                    type="flagSelect"
+                    name={`${key}.CountryCode`}
+                    control={control}
+                    placeholder={intl.formatMessage({ id: 'select.country.placeholder' })}
+                    isDisabled
+                  />
+                </FormControl>
+                <FormControl
+                  name={`${key}.phoneNumber`}
+                  control={control}
+                  isRequired
+                  flex="50%"
+                  isDisabled={isSubmitting}>
+                  <FieldInput type="tel" name={`${key}.phoneNumber`} control={control} />
+                </FormControl>
+              </InputGroup>
+            );
+          }
+
+          if (key === 'DateOfBirthRequirement') {
+            return (
+              <FormControl name="DateOfBirthRequirement" control={control} isRequired>
+                <FormLabel label={getLabel(key)} />
+                <FieldInput
+                  type="date"
+                  name="DateOfBirthRequirement"
+                  control={control}
+                  isOutsideRange
+                />
+              </FormControl>
+            );
+          }
+
           return (
-            <Field
-              addonBefore={requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined}
-              minlength={
-                requirement.__typename === 'IdentificationCodeRequirement'
-                  ? CODE_MINIMAL_LENGTH
-                  : undefined
-              }
-              id={
-                requirement.__typename === 'IdentificationCodeRequirement'
-                  ? 'IdentificationCodeRequirement'
-                  : requirement.id
-              }
-              key={requirement.id}
-              disabled={
-                requirement.__typename === 'IdentificationCodeRequirement' &&
-                requirement.viewerValue
-              }
-              placeholder={
-                requirement.__typename === 'IdentificationCodeRequirement' &&
-                !requirement.viewerValue
-                  ? 'Ex: 25FOVC10'
-                  : null
-              }
-              name={
-                requirement.__typename === 'PostalAddressRequirement'
-                  ? 'PostalAddressText'
-                  : requirement.__typename === 'IdentificationCodeRequirement'
-                  ? 'IdentificationCodeRequirement'
-                  : requirement.id
-              }
-              label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
-              {...getFormProps(requirement, change)}>
-              {requirement.__typename === 'CheckboxRequirement' ? requirement.label : null}
-            </Field>
+            <FormControl name={key} control={control} isRequired isDisabled={isSubmitting}>
+              <FormLabel label={getLabel(key)} />
+              <FieldInput
+                variantSize={CapInputSize.Md}
+                type="text"
+                minLength={4}
+                name={key}
+                control={control}
+                defaultValue={initialValues[key]}
+              />
+            </FormControl>
           );
         })}
-    </form>
+      </Flex>
+    </Flex>
   );
 };
 
-const form = reduxForm({
-  onChange,
-  validate,
-  asyncValidate,
-  asyncChangeFields: ['IdentificationCodeRequirement'],
-  form: formName,
-})(RequirementsForm);
-
-const getRequirementInitialValue = (requirement: Requirement): ?string | boolean => {
-  if (requirement.__typename === 'CheckboxRequirement') {
-    return requirement.viewerMeetsTheRequirement;
-  }
-  if (requirement.__typename === 'PhoneRequirement') {
-    return requirement.viewerValue ? requirement.viewerValue : null;
-  }
-  if (requirement.__typename === 'DateOfBirthRequirement') {
-    return requirement.viewerDateOfBirth;
-  }
-  if (requirement.__typename === 'PostalAddressRequirement') {
-    return requirement.viewerAddress ? requirement.viewerAddress.json : null;
-  }
-  return requirement.viewerValue;
-};
-
-const mapStateToProps = (state: State, { step }: Props) => ({
-  isAuthenticated: !!state.user.user,
-  pristine: isPristine(formName)(state),
-  initialValues: step.requirements.edges
-    ? step.requirements.edges
-        .filter(Boolean)
-        .map(edge => edge.node)
-        .reduce((initialValues, requirement) => {
-          if (requirement.__typename === 'PostalAddressRequirement') {
-            return {
-              ...initialValues,
-              PostalAddressText: requirement.viewerAddress
-                ? requirement.viewerAddress.formatted
-                : null,
-              [requirement.id]: getRequirementInitialValue(requirement),
-            };
-          }
-          if (requirement.__typename === 'IdentificationCodeRequirement') {
-            return {
-              ...initialValues,
-              IdentificationCodeRequirement: getRequirementInitialValue(requirement),
-            };
-          }
-          return {
-            ...initialValues,
-            [requirement.id]: getRequirementInitialValue(requirement),
-          };
-        }, {})
-    : {},
-});
-
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
-
-export default createFragmentContainer(container, {
-  step: graphql`
-    fragment RequirementsForm_step on RequirementStep
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      requirements {
-        edges {
-          node {
-            __typename
-            id
-            viewerMeetsTheRequirement @include(if: $isAuthenticated)
-            ... on DateOfBirthRequirement {
-              viewerDateOfBirth @include(if: $isAuthenticated)
-            }
-            ... on PostalAddressRequirement {
-              viewerAddress @include(if: $isAuthenticated) {
-                formatted
-                json
-              }
-            }
-            ... on FirstnameRequirement {
-              viewerValue @include(if: $isAuthenticated)
-            }
-            ... on LastnameRequirement {
-              viewerValue @include(if: $isAuthenticated)
-            }
-            ... on PhoneRequirement {
-              viewerValue @include(if: $isAuthenticated)
-            }
-            ... on IdentificationCodeRequirement {
-              viewerValue @include(if: $isAuthenticated)
-            }
-            ... on FranceConnectRequirement {
-              viewerValue @include(if: $isAuthenticated)
-            }
-            ... on CheckboxRequirement {
-              label
-            }
-          }
-        }
-      }
-    }
-  `,
-});
+export default RequirementsForm;

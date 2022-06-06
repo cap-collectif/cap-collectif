@@ -1,24 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
-<ProposalPreviewVote__Container>
-  <Relay(ProposalVoteButtonWrapperFragment)
-    className="proposal__preview__vote mr-15"
-    id="proposal-vote-btn-1"
-    proposal={
+<span
+  className="ProposalPreviewVote__Container-byMYDN kiKOLG"
+>
+  <div
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="proposal-vote-modal"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
       Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "1",
+        "display": "none",
       }
     }
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-      }
-    }
-    viewer={null}
+    tabIndex={-1}
   />
-</ProposalPreviewVote__Container>
+</span>
 `;

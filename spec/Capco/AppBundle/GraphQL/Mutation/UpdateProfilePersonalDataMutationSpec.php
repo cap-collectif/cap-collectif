@@ -43,6 +43,9 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $viewer->isAdmin()->willReturn(true);
         $viewer->isSuperAdmin()->willReturn(false);
 
+        $viewer->getPhone()->willReturn('+3311111111');
+        $viewer->setPhoneConfirmed(false);
+
         $encodeId = GlobalId::toGlobalId('User', 'theUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
         $arguments->getArrayCopy()->willReturn($argumentsValues);
@@ -65,6 +68,9 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $viewer->getId()->willReturn('theUserId');
         $viewer->isAdmin()->willReturn(true);
         $viewer->isSuperAdmin()->willReturn(true);
+        $viewer->getPhone()->willReturn('+3311111111');
+        $viewer->setPhoneConfirmed(false);
+
         $encodeId = GlobalId::toGlobalId('User', 'theUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
         $arguments->getArrayCopy()->willReturn($argumentsValues);
@@ -89,6 +95,10 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $viewer->isSuperAdmin()->willReturn(true);
         $viewer->getUsername()->willReturn('Atos');
         $viewer->getId()->willReturn('theUserId');
+
+        $viewer->getPhone()->willReturn('+3311111111');
+        $viewer->setPhoneConfirmed(false);
+
         $encodeId = GlobalId::toGlobalId('User', 'simpleUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
         $arguments->getArrayCopy()->willReturn($argumentsValues);
@@ -121,6 +131,10 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $user->isSuperAdmin()->willReturn(false);
         $user->getUsername()->willReturn('Atos');
         $user->getId()->willReturn('theUserId');
+
+        $user->getPhone()->willReturn('+3311111111');
+        $user->setPhoneConfirmed(false);
+
         $encodeId = GlobalId::toGlobalId('User', 'badUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
         $arguments->getArrayCopy()->willReturn($argumentsValues);
@@ -148,6 +162,11 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $user->isSuperAdmin()->willReturn(false);
         $user->getUsername()->willReturn('Atos');
         $user->getId()->willReturn('theUserId');
+
+
+        $user->getPhone()->willReturn('+3311111111');
+        $user->setPhoneConfirmed(false);
+
         $argumentsValues = ['username' => 'Portos', 'email' => 'portos@test.com'];
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 

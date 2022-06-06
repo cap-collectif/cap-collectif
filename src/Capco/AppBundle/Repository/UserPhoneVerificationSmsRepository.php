@@ -18,8 +18,8 @@ class UserPhoneVerificationSmsRepository extends EntityRepository
         User $user
     ): array {
 
-        $fromDate = (new \DateTime())->modify('-1 minute')->format('Y-m-d h:i:s');
-        $toDate = (new \DateTime())->format('Y-m-d h:i:s');
+        $fromDate = (new \DateTime())->modify('-1 minute')->format('Y-m-d H:i:s');
+        $toDate = (new \DateTime())->format('Y-m-d H:i:s');
 
         $qb = $this->createQueryBuilder('s')
             ->andWhere('s.user = :user')

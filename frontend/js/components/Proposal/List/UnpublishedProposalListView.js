@@ -60,13 +60,14 @@ export class UnpublishedProposalListView extends React.Component<Props> {
 
 export default createFragmentContainer(UnpublishedProposalListView, {
   viewer: graphql`
-    fragment UnpublishedProposalListView_viewer on User {
-      ...ProposalList_viewer
+    fragment UnpublishedProposalListView_viewer on User
+    @argumentDefinitions(stepId: { type: "ID!" }) {
+      ...ProposalList_viewer @arguments(stepId: $stepId)
     }
   `,
   step: graphql`
     fragment UnpublishedProposalListView_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       ...ProposalList_step
       viewerProposalsUnpublished(first: 100)

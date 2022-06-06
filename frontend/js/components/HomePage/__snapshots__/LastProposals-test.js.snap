@@ -676,7 +676,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "cfaba4c44cf87354c4a6c260ec5f9eff",
+          "cacheID": "817c2c62a6c44baba6d0f51995ef5b58",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -738,7 +738,7 @@ fragment ProposalFollowButton_proposal_3HigpW on Proposal {
   id
 }
 
-fragment ProposalPreviewBody_proposal_1nwaua on Proposal {
+fragment ProposalPreviewBody_proposal_dUMnP on Proposal {
   id
   slug
   currentVotableStep {
@@ -837,7 +837,7 @@ fragment ProposalPreview_proposal_dUMnP on Proposal {
     id
   }
   ...ProposalPreviewFooter_proposal_2tPna9
-  ...ProposalPreviewBody_proposal_1nwaua
+  ...ProposalPreviewBody_proposal_dUMnP
   ...ProposalPreviewStatus_proposal_2tPna9
 }
 

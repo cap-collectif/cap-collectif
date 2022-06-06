@@ -40,8 +40,6 @@ type Props = {|
   deletable: boolean,
   snapshot: DraggableStateSnapshot,
   intl: IntlShape,
-  disabledKeyboard?: () => void,
-  activeKeyboard?: () => void,
   isDropDisabled?: boolean,
   features: FeatureToggles,
 |};
@@ -152,9 +150,7 @@ const renderDraggableMembers = ({
   ...VotesProps,
   ...Props,
 |}): any => {
-  if (!votes.edges) {
-    return null;
-  }
+  if (!votes.edges) return null;
 
   return (
     <div style={{ width: '100%' }}>
@@ -197,11 +193,7 @@ const renderDraggableMembers = ({
 
 export class ProposalsUserVotesTable extends React.Component<Props> {
   onDragStart = (start: DragStart, provided: ResponderProvided) => {
-    const { votes, intl, disabledKeyboard } = this.props;
-
-    if (disabledKeyboard) {
-      disabledKeyboard();
-    }
+    const { votes, intl } = this.props;
 
     // Add a little vibration if the browser supports it.
     // Add's a nice little physical feedback
@@ -230,11 +222,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
   };
 
   onDragEnd = (result: DropResult, provided: ResponderProvided) => {
-    const { votes, intl, activeKeyboard, dispatch, form } = this.props;
-
-    if (activeKeyboard) {
-      activeKeyboard();
-    }
+    const { votes, intl, dispatch, form } = this.props;
 
     const title = this.getTitle(votes, result);
 

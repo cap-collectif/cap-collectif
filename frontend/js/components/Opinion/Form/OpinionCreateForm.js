@@ -10,7 +10,7 @@ import { closeOpinionCreateModal } from '~/redux/modules/opinion';
 import type { Dispatch } from '~/types';
 import type { OpinionCreateForm_section } from '~relay/OpinionCreateForm_section.graphql';
 import type { OpinionCreateForm_consultationStep } from '~relay/OpinionCreateForm_consultationStep.graphql';
-import RequirementsForm from '../../Requirements/RequirementsForm';
+import RequirementsFormLegacy from '../../Requirements/RequirementsFormLegacy';
 import type { OpinionCreateForm_consultation } from '~relay/OpinionCreateForm_consultation.graphql';
 import CreateOpinionMutation from '~/mutations/CreateOpinionMutation';
 
@@ -92,7 +92,7 @@ export class OpinionCreateForm extends React.Component<Props> {
         {!consultationStep.requirements.viewerMeetsTheRequirements && (
           <Panel.Body>
             <WYSIWYGRender value={consultationStep.requirements.reason} />
-            <RequirementsForm step={consultationStep} />
+            <RequirementsFormLegacy step={consultationStep} />
           </Panel.Body>
         )}
       </Panel>
@@ -186,7 +186,7 @@ export default createFragmentContainer(container, {
   consultationStep: graphql`
     fragment OpinionCreateForm_consultationStep on ConsultationStep
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+      ...RequirementsFormLegacy_step @arguments(isAuthenticated: $isAuthenticated)
       id
       project {
         _id

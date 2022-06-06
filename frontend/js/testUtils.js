@@ -76,9 +76,10 @@ export const RelaySuspensFragmentTest = ({
   children,
   environment,
   store = {},
+  useCapUIProvider = false,
 }: RelaySuspensFragmentTestProps) => {
   return (
-    <MockProviders store={store}>
+    <MockProviders store={store} useCapUIProvider={useCapUIProvider}>
       <RelayEnvironmentProvider environment={environment}>
         <React.Suspense>{children}</React.Suspense>
       </RelayEnvironmentProvider>

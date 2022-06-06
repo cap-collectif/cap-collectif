@@ -41,9 +41,9 @@ import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import renderResponses from '~/components/Form/RenderResponses';
 import { analytics } from '~/startup/analytics';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
-import RequirementsForm, {
-  formName as requirementsFormName,
-} from '~/components/Requirements/RequirementsForm';
+import RequirementsFormLegacy, {
+  formName as RequirementsFormLegacyName,
+} from '~/components/Requirements/RequirementsFormLegacy';
 import CookieMonster from '~/CookieMonster';
 import { isEmail } from '~/services/Validator';
 import Captcha from '~/components/Form/Captcha';
@@ -452,7 +452,7 @@ export class ReplyForm extends React.Component<Props, State> {
                   !questionnaire.step?.requirements?.viewerMeetsTheRequirements && (
                     <Panel.Body>
                       <WYSIWYGRender value={questionnaire.step?.requirements?.reason} />
-                      <RequirementsForm step={questionnaire.step} stepId={questionnaire.step.id} />
+                      <RequirementsFormLegacy step={questionnaire.step} stepId={questionnaire.step.id} />
                     </Panel.Body>
                   )}
               </Panel>
@@ -614,8 +614,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     isAnonymousQuestionnaireFeatureEnabled:
       state.default.features.unstable__anonymous_questionnaire,
     invalidRequirements:
-      isInvalid(requirementsFormName)(state) ||
-      Object.keys(getFormSyncErrors(requirementsFormName)(state)).length > 0,
+      isInvalid(RequirementsFormLegacyName)(state) ||
+      Object.keys(getFormSyncErrors(RequirementsFormLegacyName)(state)).length > 0,
     platformName: state.default.parameters['global.site.fullname'],
   };
 };
@@ -663,7 +663,7 @@ export default createFragmentContainer(containerWithRouter, {
       step {
         id
         title
-        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+        ...RequirementsFormLegacy_step @arguments(isAuthenticated: $isAuthenticated)
         ... on RequirementStep {
           requirements {
             reason

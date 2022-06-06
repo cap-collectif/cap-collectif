@@ -145,8 +145,8 @@ export const ProposalPreviewBody = ({ proposal, step, viewer, isSPA }: Props) =>
 
 export default createFragmentContainer(ProposalPreviewBody, {
   viewer: graphql`
-    fragment ProposalPreviewBody_viewer on User {
-      ...ProposalPreviewVote_viewer
+    fragment ProposalPreviewBody_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+      ...ProposalPreviewVote_viewer @arguments(stepId: $stepId)
     }
   `,
   proposal: graphql`
@@ -154,6 +154,7 @@ export default createFragmentContainer(ProposalPreviewBody, {
     @argumentDefinitions(
       isAuthenticated: { type: "Boolean!" }
       isProfileView: { type: "Boolean", defaultValue: false }
+      stepId: { type: "ID!" }
     ) {
       id
       slug
@@ -183,7 +184,7 @@ export default createFragmentContainer(ProposalPreviewBody, {
       }
       ...ProposalPreviewUser_proposal
       ...ProposalPreviewVote_proposal
-        @arguments(isAuthenticated: $isAuthenticated)
+        @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
         @skip(if: $isProfileView)
       ...ProposalDetailEstimation_proposal
       ...ProposalDetailLikers_proposal

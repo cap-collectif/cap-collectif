@@ -269,7 +269,7 @@ export const LoginSocialButton = ({
             </a>
           </FranceConnectButton>
           <FranceConnectLink justifyContent={justifyContent}>
-            <a href="https://franceconnect.gouv.fr/" target="_blank"  rel="noreferrer">
+            <a href="https://franceconnect.gouv.fr/" target="_blank" rel="noreferrer">
               <FormattedMessage id="what-is-fc" />
             </a>
             {!noHR ? <hr /> : null}

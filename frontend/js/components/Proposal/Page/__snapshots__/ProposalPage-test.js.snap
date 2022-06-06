@@ -6715,6 +6715,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     "storageKey": null,
                   },
                   Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "phone",
+                    "storageKey": null,
+                  },
+                  Object {
                     "condition": "hasVotableStep",
                     "kind": "Condition",
                     "passingValue": true,
@@ -6830,13 +6837,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         "args": null,
                         "kind": "ScalarField",
                         "name": "open",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "title",
                         "storageKey": null,
                       },
                       Object {
@@ -6995,6 +6995,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "totalCount",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "ProposalVoteEdge",
                                 "kind": "LinkedField",
                                 "name": "edges",
@@ -7013,13 +7020,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                         "args": null,
                                         "kind": "ScalarField",
                                         "name": "id",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "anonymous",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -7076,6 +7076,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                         "storageKey": null,
                                       },
                                       Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "anonymous",
+                                        "storageKey": null,
+                                      },
+                                      Object {
                                         "abstractKey": "__isPublishable",
                                         "kind": "InlineFragment",
                                         "selections": Array [
@@ -7102,13 +7109,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                 ],
                                 "storageKey": null,
                               },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "totalCount",
-                                "storageKey": null,
-                              },
                             ],
                             "storageKey": "viewerVotes(orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"POSITION\\"})",
                           },
@@ -7126,20 +7126,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                             "name": "requirements",
                             "plural": false,
                             "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "reason",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "totalCount",
-                                "storageKey": null,
-                              },
                               Object {
                                 "alias": null,
                                 "args": null,
@@ -7360,28 +7346,35 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                             "name": "label",
                                             "storageKey": null,
                                           },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "viewerMeetsTheRequirement",
+                                            "storageKey": null,
+                                          },
                                         ],
                                         "type": "CheckboxRequirement",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "viewerMeetsTheRequirement",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "PhoneVerifiedRequirement",
                                       },
                                     ],
                                     "storageKey": null,
                                   },
                                 ],
                                 "storageKey": null,
-                              },
-                              Object {
-                                "condition": "isAuthenticated",
-                                "kind": "Condition",
-                                "passingValue": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "viewerMeetsTheRequirements",
-                                    "storageKey": null,
-                                  },
-                                ],
                               },
                             ],
                             "storageKey": null,
@@ -7400,7 +7393,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "68469aac310f8f42dae9211f0061c23e",
+        "cacheID": "e5894d34445588e70499779519bddb16",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -8688,7 +8681,7 @@ fragment ProposalPageHeaderButtons_proposal_2Ag0mE on Proposal {
   }
   publicationStatus
   ...ProposalVoteButtonWrapperFragment_proposal_Q37Wz
-  ...ProposalVoteModal_proposal_2r3fA4 @include(if: $isAuthenticated)
+  ...ProposalVoteModal_proposal @include(if: $isAuthenticated)
   ...ProposalFollowButton_proposal_39ngnn
   ...ProposalReportButton_proposal_39ngnn
   ...ProposalEditModal_proposal_2Ag0mE
@@ -8705,6 +8698,7 @@ fragment ProposalPageHeaderButtons_step_39ngnn on ProposalStep {
 fragment ProposalPageHeaderButtons_viewer_3VJ3TV on User {
   id
   ...ProposalVoteButtonWrapperFragment_viewer_Q37Wz @include(if: $hasVotableStep)
+  ...ProposalVoteModal_viewer
 }
 
 fragment ProposalPageHeader_proposal_2Ag0mE on Proposal {
@@ -9353,19 +9347,10 @@ fragment ProposalVoteButtonWrapperFragment_proposal_Q37Wz on Proposal {
 fragment ProposalVoteButtonWrapperFragment_step_39ngnn on ProposalStep {
   __isProposalStep: __typename
   id
-  title
   votesLimit
   voteType
   open
-  votesRanking
-  viewerVotes(orderBy: {field: POSITION, direction: ASC}) @include(if: $isAuthenticated) {
-    edges {
-      node {
-        id
-        anonymous
-      }
-    }
-  }
+  ...ProposalVoteButton_step
   ...VoteButtonOverlay_step
 }
 
@@ -9398,9 +9383,18 @@ fragment ProposalVoteButton_proposal_Q37Wz on Proposal {
   }
 }
 
-fragment ProposalVoteModal_proposal_2r3fA4 on Proposal {
+fragment ProposalVoteButton_step on ProposalStep {
+  __isProposalStep: __typename
   id
-  viewerHasVote(step: $stepId)
+  votesRanking
+}
+
+fragment ProposalVoteConfirmationModal_viewer on User {
+  phone
+}
+
+fragment ProposalVoteModal_proposal on Proposal {
+  id
 }
 
 fragment ProposalVoteModal_step_39ngnn on ProposalStep {
@@ -9412,9 +9406,45 @@ fragment ProposalVoteModal_step_39ngnn on ProposalStep {
   ... on RequirementStep {
     __isRequirementStep: __typename
     requirements {
-      viewerMeetsTheRequirements @include(if: $isAuthenticated)
-      reason
-      totalCount
+      edges {
+        node {
+          __typename
+          id
+          viewerMeetsTheRequirement @include(if: $isAuthenticated)
+          ... on DateOfBirthRequirement {
+            viewerDateOfBirth @include(if: $isAuthenticated)
+          }
+          ... on PostalAddressRequirement {
+            viewerAddress @include(if: $isAuthenticated) {
+              formatted
+              json
+            }
+          }
+          ... on FirstnameRequirement {
+            viewerValue @include(if: $isAuthenticated)
+          }
+          ... on LastnameRequirement {
+            viewerValue @include(if: $isAuthenticated)
+          }
+          ... on PhoneRequirement {
+            viewerValue @include(if: $isAuthenticated)
+          }
+          ... on IdentificationCodeRequirement {
+            viewerValue @include(if: $isAuthenticated)
+          }
+          ... on FranceConnectRequirement {
+            viewerValue @include(if: $isAuthenticated)
+          }
+          ... on CheckboxRequirement {
+            label
+            viewerMeetsTheRequirement
+            id
+          }
+          ... on PhoneVerifiedRequirement {
+            viewerMeetsTheRequirement
+          }
+        }
+      }
     }
   }
   isSecretBallot
@@ -9431,18 +9461,15 @@ fragment ProposalVoteModal_step_39ngnn on ProposalStep {
     }
     id
   }
-  ...RequirementsForm_step_39ngnn
   ...ProposalsUserVotesTable_step
   viewerVotes(orderBy: {field: POSITION, direction: ASC}) @include(if: $isAuthenticated) {
     ...ProposalsUserVotesTable_votes
     totalCount
-    edges {
-      node {
-        id
-        anonymous
-      }
-    }
   }
+}
+
+fragment ProposalVoteModal_viewer on User {
+  ...ProposalVoteConfirmationModal_viewer
 }
 
 fragment ProposalsUserVotesTable_step on ProposalStep {
@@ -9466,46 +9493,6 @@ fragment ProposalsUserVotesTable_votes on ProposalVoteConnection {
       proposal {
         id
         title
-      }
-    }
-  }
-}
-
-fragment RequirementsForm_step_39ngnn on RequirementStep {
-  __isRequirementStep: __typename
-  requirements {
-    edges {
-      node {
-        __typename
-        id
-        viewerMeetsTheRequirement @include(if: $isAuthenticated)
-        ... on DateOfBirthRequirement {
-          viewerDateOfBirth @include(if: $isAuthenticated)
-        }
-        ... on PostalAddressRequirement {
-          viewerAddress @include(if: $isAuthenticated) {
-            formatted
-            json
-          }
-        }
-        ... on FirstnameRequirement {
-          viewerValue @include(if: $isAuthenticated)
-        }
-        ... on LastnameRequirement {
-          viewerValue @include(if: $isAuthenticated)
-        }
-        ... on PhoneRequirement {
-          viewerValue @include(if: $isAuthenticated)
-        }
-        ... on IdentificationCodeRequirement {
-          viewerValue @include(if: $isAuthenticated)
-        }
-        ... on FranceConnectRequirement {
-          viewerValue @include(if: $isAuthenticated)
-        }
-        ... on CheckboxRequirement {
-          label
-        }
       }
     }
   }

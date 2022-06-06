@@ -146,7 +146,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
   <div
     className="proposal__buttons mt-15"
   >
-    <Relay(ProposalPreviewVote)
+    <ProposalPreviewVote
       proposal={
         Object {
           "$fragmentRefs": null,

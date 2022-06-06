@@ -1,115 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalVoteButton /> renders viewer has not voted 1`] = `
-<Button
-  active={false}
-  block={false}
-  bsClass="btn"
-  bsStyle="default"
-  className="mr-10 proposal__button__vote btn btn-success  "
+<button
+  className="mr-10 proposal__button__vote btn btn-success   btn btn-default"
   disabled={false}
   id="buttonID"
   onClick={[Function]}
+  type="button"
 >
   <i
     className="cap cap-hand-like-2 mr-5"
   />
-  <FormattedMessage
-    id="global.vote.for"
-    values={Object {}}
-  />
-</Button>
+  global.vote.for
+</button>
 `;
 
 exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
-<Button
-  active={true}
-  block={false}
-  bsClass="btn"
-  bsStyle="default"
-  className="mr-10 proposal__button__vote btn btn-success  "
+<button
+  className="mr-10 proposal__button__vote btn btn-success   btn btn-default active"
   disabled={false}
   id="buttonID"
   onClick={[Function]}
+  type="button"
 >
-  <Relay(UnpublishedTooltip)
-    publishable={
-      Object {
-        "$fragmentRefs": null,
-        "id": "vote1",
-        "ranking": null,
-      }
-    }
-    target={[Function]}
-  />
   <i
     className="cap cap-hand-like-2 mr-5"
   />
-  <FormattedMessage
-    id="voted"
-    values={Object {}}
-  />
-</Button>
+  voted
+</button>
 `;
 
 exports[`<ProposalVoteButton /> renders viewer has voted and hovering 1`] = `
-<Button
-  active={true}
-  block={false}
-  bsClass="btn"
-  bsStyle="default"
-  className="mr-10 proposal__button__vote btn btn-danger  "
+<button
+  className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"
   disabled={false}
   id="buttonID"
   onClick={[Function]}
+  type="button"
 >
-  <Relay(UnpublishedTooltip)
-    publishable={
-      Object {
-        "$fragmentRefs": null,
-        "id": "vote1",
-        "ranking": null,
-      }
-    }
-    target={[Function]}
-  />
   <i
     className="cap cap-hand-like-2 mr-5"
   />
-  <FormattedMessage
-    id="cancel"
-    values={Object {}}
-  />
-</Button>
+  cancel
+</button>
 `;
 
 exports[`<ProposalVoteButton /> renders viewer has voted and hovering with ranking 1`] = `
-<Button
-  active={true}
-  block={false}
-  bsClass="btn"
-  bsStyle="default"
-  className="mr-10 proposal__button__vote btn btn-danger  "
+<button
+  className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"
   disabled={false}
   id="buttonID"
   onClick={[Function]}
+  type="button"
 >
-  <Relay(UnpublishedTooltip)
-    publishable={
-      Object {
-        "$fragmentRefs": null,
-        "id": "vote1",
-        "ranking": 0,
-      }
-    }
-    target={[Function]}
-  />
   <i
     className="cap cap-hand-like-2 mr-5"
   />
-  <FormattedMessage
-    id="cancel"
-    values={Object {}}
-  />
-</Button>
+  cancel
+</button>
 `;

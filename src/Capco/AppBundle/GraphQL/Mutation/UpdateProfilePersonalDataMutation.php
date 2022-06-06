@@ -35,6 +35,12 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
             parent::__invoke($input, $viewer);
         }
 
+        $oldPhone = $viewer->getPhone();
+        $newPhone = $this->arguments['phone'] ?? null;
+        if (!$newPhone || ($oldPhone !== $newPhone)) {
+            $viewer->setPhoneConfirmed(false);
+        }
+
         $form = $this->formFactory->create(PersonalDataFormType::class, $this->user);
 
         try {

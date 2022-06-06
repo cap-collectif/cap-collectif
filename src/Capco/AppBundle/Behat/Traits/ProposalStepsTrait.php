@@ -952,7 +952,7 @@ trait ProposalStepsTrait
             ->getPage()
             ->find('css', '#confirm-proposal-vote')
             ->click();
-        $this->waitAndThrowOnFailure(2000, "$('#contained-modal-title-lg').length > 0");
+        $this->waitAndThrowOnFailure(2000, "$('.cap-heading').length > 0");
     }
 
     /**

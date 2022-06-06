@@ -1,17 +1,17 @@
 // @flow
-import React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import * as React from 'react';
+import { graphql, useFragment } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
-import type { ProposalPreviewVote_proposal } from '~relay/ProposalPreviewVote_proposal.graphql';
-import type { ProposalPreviewVote_step } from '~relay/ProposalPreviewVote_step.graphql';
-import type { ProposalPreviewVote_viewer } from '~relay/ProposalPreviewVote_viewer.graphql';
+import type { ProposalPreviewVote_proposal$key } from '~relay/ProposalPreviewVote_proposal.graphql';
+import type { ProposalPreviewVote_step$key } from '~relay/ProposalPreviewVote_step.graphql';
+import type { ProposalPreviewVote_viewer$key } from '~relay/ProposalPreviewVote_viewer.graphql';
 
 type Props = {
-  proposal: ProposalPreviewVote_proposal,
-  step: ProposalPreviewVote_step,
-  viewer: ?ProposalPreviewVote_viewer,
+  proposal: ProposalPreviewVote_proposal$key,
+  step: ProposalPreviewVote_step$key,
+  viewer: ?ProposalPreviewVote_viewer$key,
 };
 
 const Container: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
@@ -22,45 +22,50 @@ const Container: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
   }
 `;
 
-export class ProposalPreviewVote extends React.Component<Props> {
-  render() {
-    const { proposal, step, viewer } = this.props;
-    return (
-      <Container>
-        <ProposalVoteButtonWrapperFragment
-          proposal={proposal}
-          step={step}
-          viewer={viewer}
-          id={`proposal-vote-btn-${proposal.id}`}
-          className="proposal__preview__vote mr-15"
-        />
-        {viewer && <ProposalVoteModal proposal={proposal} step={step} />}
-      </Container>
-    );
+const VIEWER_FRAGMENT = graphql`
+  fragment ProposalPreviewVote_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+    ...ProposalVoteButtonWrapperFragment_viewer
+      @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
+    ...ProposalVoteModal_viewer
   }
-}
+`;
+const PROPOSAL_FRAGMENT = graphql`
+  fragment ProposalPreviewVote_proposal on Proposal
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
+    id
+    ...ProposalVoteModal_proposal @include(if: $isAuthenticated)
+    ...ProposalVoteButtonWrapperFragment_proposal
+      @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+  }
+`;
+const STEP_FRAGMENT = graphql`
+  fragment ProposalPreviewVote_step on Step
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
+    ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
+  }
+`;
 
-export default createFragmentContainer(ProposalPreviewVote, {
-  viewer: graphql`
-    fragment ProposalPreviewVote_viewer on User {
-      ...ProposalVoteButtonWrapperFragment_viewer
-        @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
-    }
-  `,
-  proposal: graphql`
-    fragment ProposalPreviewVote_proposal on Proposal
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      id
-      ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
-      ...ProposalVoteButtonWrapperFragment_proposal
-        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
-    }
-  `,
-  step: graphql`
-    fragment ProposalPreviewVote_step on Step
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
-      ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
-    }
-  `,
-});
+const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({
+  viewer: viewerRef,
+  step: stepRef,
+  proposal: proposalRef,
+}) => {
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
+  const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef);
+  const step = useFragment(STEP_FRAGMENT, stepRef);
+
+  return (
+    <Container>
+      <ProposalVoteButtonWrapperFragment
+        proposal={proposal}
+        step={step}
+        viewer={viewer}
+        id={`proposal-vote-btn-${proposal.id}`}
+        className="proposal__preview__vote mr-15"
+      />
+      {viewer && <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />}
+    </Container>
+  );
+};
+export default ProposalPreviewVote;

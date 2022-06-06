@@ -1,18 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RequirementsForm /> call api on every value changed 1`] = `undefined`;
+exports[`<RequirementsFormLegacy /> call api on every value changed 1`] = `undefined`;
 
-exports[`<RequirementsForm /> call api on every value changed 2`] = `
+exports[`<RequirementsFormLegacy /> call api on every value changed 2`] = `
 [MockFunction] {
   "calls": Array [
-    Array [
-      Object {
-        "meta": Object {
-          "form": "requirements-form",
-        },
-        "type": "@@redux-form/START_SUBMIT",
-      },
-    ],
     Array [
       Object {
         "meta": Object {
@@ -63,15 +55,11 @@ exports[`<RequirementsForm /> call api on every value changed 2`] = `
       "type": "return",
       "value": undefined,
     },
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
   ],
 }
 `;
 
-exports[`<RequirementsForm /> call api on every value changed 3`] = `
+exports[`<RequirementsFormLegacy /> call api on every value changed 3`] = `
 [MockFunction] {
   "calls": Array [
     Array [
@@ -92,16 +80,9 @@ exports[`<RequirementsForm /> call api on every value changed 3`] = `
 }
 `;
 
-exports[`<RequirementsForm /> call api on every value changed 4`] = `
+exports[`<RequirementsFormLegacy /> call api on every value changed 4`] = `
 [MockFunction] {
   "calls": Array [
-    Array [
-      Object {
-        "input": Object {
-          "phone": "+33606060606",
-        },
-      },
-    ],
     Array [
       Object {
         "input": Object {
@@ -137,17 +118,13 @@ exports[`<RequirementsForm /> call api on every value changed 4`] = `
       "type": "return",
       "value": Promise {},
     },
-    Object {
-      "type": "return",
-      "value": Promise {},
-    },
   ],
 }
 `;
 
-exports[`<RequirementsForm /> doesnt call api when value is same 1`] = `undefined`;
+exports[`<RequirementsFormLegacy /> doesnt call api when value is same 1`] = `undefined`;
 
-exports[`<RequirementsForm /> should render a vote widget for a simple vote without limit 1`] = `
+exports[`<RequirementsFormLegacy /> should render a vote widget for a simple vote without limit 1`] = `
 <form>
   <div
     className="col-sm-12 col-xs-12 alert__form_succeeded-message"
@@ -250,11 +227,11 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
 </form>
 `;
 
-exports[`<RequirementsForm /> validate correctly 1`] = `Object {}`;
+exports[`<RequirementsFormLegacy /> validate correctly 1`] = `Object {}`;
 
-exports[`<RequirementsForm /> validate correctly 2`] = `Object {}`;
+exports[`<RequirementsFormLegacy /> validate correctly 2`] = `Object {}`;
 
-exports[`<RequirementsForm /> validate correctly 3`] = `
+exports[`<RequirementsFormLegacy /> validate correctly 3`] = `
 Object {
   "requirement1": "profile.constraints.phone.invalid",
   "requirement2": "global.required",
@@ -264,7 +241,7 @@ Object {
 }
 `;
 
-exports[`<RequirementsForm /> validate correctly 4`] = `
+exports[`<RequirementsFormLegacy /> validate correctly 4`] = `
 Object {
   "requirement2": "global.required",
   "requirement3": "global.required",

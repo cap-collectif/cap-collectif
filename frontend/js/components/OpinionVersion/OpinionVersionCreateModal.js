@@ -10,7 +10,7 @@ import OpinionVersionCreateForm, { formName } from './OpinionVersionCreateForm';
 import type { State } from '../../types';
 import type { OpinionVersionCreateModal_opinion } from '~relay/OpinionVersionCreateModal_opinion.graphql';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
-import RequirementsForm from '~/components/Requirements/RequirementsForm';
+import RequirementsFormLegacy from '~/components/Requirements/RequirementsFormLegacy';
 
 type Props = {
   show: boolean,
@@ -57,7 +57,7 @@ const OpinionVersionCreateModal = ({ dispatch, opinion, submitting, show }: Prop
             {!opinion.step.requirements.viewerMeetsTheRequirements && (
               <Panel.Body>
                 <WYSIWYGRender value={opinion.step.requirements.reason} />
-                <RequirementsForm step={opinion.step} stepId={opinion.step.id} />
+                <RequirementsFormLegacy step={opinion.step} stepId={opinion.step.id} />
               </Panel.Body>
             )}
           </Panel>
@@ -97,7 +97,7 @@ export default createFragmentContainer(container, {
       ...OpinionVersionCreateForm_opinion
       step {
         id
-        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+        ...RequirementsFormLegacy_step @arguments(isAuthenticated: $isAuthenticated)
 
         requirements {
           viewerMeetsTheRequirements @include(if: $isAuthenticated)

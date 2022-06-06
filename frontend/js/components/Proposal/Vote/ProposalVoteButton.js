@@ -1,58 +1,46 @@
 // @flow
 import * as React from 'react';
-import ReactDOM from 'react-dom';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { graphql, useFragment } from 'react-relay';
+import { useIntl } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { openVoteModal } from '../../../redux/modules/proposal';
-import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
-import type { Uuid, Dispatch, GlobalState } from '../../../types';
-import type { ProposalVoteButton_proposal } from '~relay/ProposalVoteButton_proposal.graphql';
-import FluxDispatcher from '../../../dispatchers/AppDispatcher';
-import { UPDATE_ALERT } from '../../../constants/AlertConstants';
+import { useDispatch, useSelector } from 'react-redux';
+import type { IntlShape } from 'react-intl';
+import { openVoteModal } from '~/redux/modules/proposal';
+import type {
+  ProposalVoteButton_proposal$key,
+  ProposalVoteButton_proposal,
+} from '~relay/ProposalVoteButton_proposal.graphql';
 import RemoveProposalVoteMutation from '../../../mutations/RemoveProposalVoteMutation';
 import {
   isInterpellationContextFromStep,
   isInterpellationContextFromProposal,
 } from '~/utils/interpellationLabelHelper';
-import UpdateProposalVotesMutation from '~/mutations/UpdateProposalVotesMutation';
-
-type Step = {|
-  +id: Uuid,
-  +votesRanking: boolean,
-  +viewerVotes?: {|
-    +edges: ?$ReadOnlyArray<?{|
-      +node: {|
-        +id: string,
-        +anonymous: boolean,
-      |},
-    |}>,
-  |},
-|};
-
+import { toast } from '~ds/Toast';
+import type {
+  ProposalVoteButton_step$key,
+  ProposalVoteButton_step,
+} from '~relay/ProposalVoteButton_step.graphql';
+// TODO @Mo remake this file with @cap-collectif/ui to replace tooltip that already doesn't work
 type ParentProps = {|
-  proposal: ProposalVoteButton_proposal,
-  currentStep: Step,
+  proposal: ProposalVoteButton_proposal$key,
+  currentStep: ?ProposalVoteButton_step$key,
   user: { +id: string },
-  isHovering: boolean,
+  isHovering?: boolean,
   id: string,
+  className?: string,
 |};
 
 type Props = {|
   ...ParentProps,
-  proposal: ProposalVoteButton_proposal,
-  dispatch: Dispatch,
-  isDeleting: boolean,
   disabled: boolean,
-  isAuthenticated: boolean,
 |};
 
 const deleteVote = (
-  currentStep: Step,
+  currentStep: ProposalVoteButton_step,
   proposal: ProposalVoteButton_proposal,
   isAuthenticated: boolean,
+  intl: IntlShape,
 ) => {
   return RemoveProposalVoteMutation.commit({
     stepId: currentStep.id,
@@ -60,82 +48,66 @@ const deleteVote = (
     isAuthenticated,
   })
     .then(response => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'success',
-          content:
-            response.removeProposalVote &&
-            response.removeProposalVote.step &&
-            isInterpellationContextFromStep(response.removeProposalVote.step)
-              ? 'support.delete_success'
-              : 'vote.delete_success',
-        },
+      toast({
+        variant: 'success',
+        content:
+          response.removeProposalVote &&
+          response.removeProposalVote.step &&
+          isInterpellationContextFromStep(response.removeProposalVote.step)
+            ? intl.formatMessage({ id: 'support.delete_success' })
+            : intl.formatMessage({ id: 'vote.delete_success' }),
       });
     })
-    .catch(e => {
-      console.log(e); // eslint-disable-line no-console
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'warning',
-          content: 'global.failure',
-        },
+    .catch(() => {
+      toast({
+        variant: 'warning',
+        content: intl.formatMessage({ id: 'global.failure' }),
       });
     });
 };
 
-const onDelete = (
-  currentStep: Step,
-  proposal: ProposalVoteButton_proposal,
-  isAuthenticated: boolean,
-) => {
-  return deleteVote(currentStep, proposal, isAuthenticated).then(() => {
-    const votes = currentStep?.viewerVotes?.edges
-      ?.filter(Boolean)
-      .filter(edge => edge.node.id !== proposal.viewerVote?.id)
-      .map(edge => ({
-        id: edge.node.id,
-        anonymous: edge.node.anonymous,
-      }));
+const PROPOSAL_FRAGMENT = graphql`
+  fragment ProposalVoteButton_proposal on Proposal
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
+    id
+    ...interpellationLabelHelper_proposal @relay(mask: false)
+    viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+    viewerVote(step: $stepId) @include(if: $isAuthenticated) {
+      id
+      ranking
+      ...UnpublishedTooltip_publishable
+    }
+  }
+`;
+const STEP_FRAGMENT = graphql`
+  fragment ProposalVoteButton_step on ProposalStep {
+    id
+    votesRanking
+  }
+`;
 
-    // Otherwise we update/reorder votes
-    return UpdateProposalVotesMutation.commit(
-      {
-        input: {
-          step: currentStep.id,
-          votes: votes || [],
-        },
-        stepId: currentStep.id,
-        isAuthenticated,
-      },
-      {
-        id: proposal.id,
-        position: Number.isNaN(parseInt(proposal.viewerVote?.ranking, 10))
-          ? -1
-          : parseInt(proposal.viewerVote?.ranking, 10),
-        isVoteRanking: currentStep.votesRanking,
-      },
-    );
-  });
-};
-
-// Should only be used via ProposalVoteButtonWrapper
-export class ProposalVoteButton extends React.Component<Props> {
-  static defaultProps = { disabled: false, isHovering: false };
-
-  target: null | Button;
-
-  getButtonStyle = () => {
-    const { isHovering, proposal } = this.props;
+const ProposalVoteButton = ({
+  currentStep: stepRef,
+  user,
+  isHovering = false,
+  id,
+  proposal: proposalRef,
+  disabled = false,
+}: Props) => {
+  const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef);
+  const currentStep = useFragment(STEP_FRAGMENT, stepRef);
+  const isAuthenticated = useSelector(state => state.user.user) != null;
+  const isDeleting = useSelector(state => state.proposal.currentDeletingVote) === proposal.id;
+  const dispatch = useDispatch();
+  const getButtonStyle = () => {
     if (proposal.viewerVote && isHovering) {
       return 'btn btn-danger';
     }
     return 'btn btn-success';
   };
+  const intl = useIntl();
 
-  getButtonText = () => {
-    const { isHovering, proposal } = this.props;
+  const getButtonText = () => {
     const isInterpellation = isInterpellationContextFromProposal(proposal);
 
     if (proposal.viewerHasVote) {
@@ -151,71 +123,29 @@ export class ProposalVoteButton extends React.Component<Props> {
 
     return 'global.vote.for';
   };
-
-  render() {
-    const {
-      dispatch,
-      currentStep,
-      user,
-      proposal,
-      disabled,
-      isDeleting,
-      id,
-      isAuthenticated,
-    } = this.props;
-    const classes = classNames({ disabled });
-    const action = !user
+  const classes = classNames({ disabled });
+  const onButtonClick =
+    !user || disabled
       ? null
       : proposal.viewerHasVote
       ? () => {
-          onDelete(currentStep, proposal, isAuthenticated);
+          if (currentStep) {
+            deleteVote(currentStep, proposal, isAuthenticated, intl);
+          }
         }
       : () => {
           dispatch(openVoteModal(proposal.id));
         };
-
-    return (
-      <Button
-        id={id}
-        ref={button => {
-          this.target = button;
-        }}
-        className={`mr-10 proposal__button__vote ${this.getButtonStyle()} ${classes} `}
-        onClick={disabled ? null : action}
-        active={proposal.viewerHasVote}
-        disabled={disabled || isDeleting}>
-        {proposal.viewerVote && (
-          <UnpublishedTooltip
-            target={() => ReactDOM.findDOMNode(this.target)}
-            publishable={proposal.viewerVote}
-          />
-        )}
-        <i className="cap cap-hand-like-2 mr-5" />
-        <FormattedMessage id={this.getButtonText()} />
-      </Button>
-    );
-  }
-}
-
-const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
-  isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
-  isAuthenticated: !!state.user.user,
-});
-
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalVoteButton);
-
-export default createFragmentContainer(container, {
-  proposal: graphql`
-    fragment ProposalVoteButton_proposal on Proposal
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
-      id
-      ...interpellationLabelHelper_proposal @relay(mask: false)
-      viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
-      viewerVote(step: $stepId) @include(if: $isAuthenticated) {
-        id
-        ranking
-        ...UnpublishedTooltip_publishable
-      }
-    }
-  `,
-});
+  return (
+    <Button
+      id={id}
+      className={`mr-10 proposal__button__vote ${getButtonStyle()} ${classes} `}
+      onClick={onButtonClick}
+      active={proposal.viewerHasVote}
+      disabled={disabled || isDeleting}>
+      <i className="cap cap-hand-like-2 mr-5" />
+      {intl.formatMessage({ id: getButtonText() })}
+    </Button>
+  );
+};
+export default ProposalVoteButton;

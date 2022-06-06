@@ -166,7 +166,7 @@ export const ProposalPageHeaderButtons = ({
         )}
       </>
       {viewer && proposal?.publicationStatus !== 'DRAFT' && step && (
-        <ProposalVoteModal proposal={proposal} step={step} />
+        <ProposalVoteModal viewer={viewer} proposal={proposal} step={step} />
       )}
     </Buttons>
   );
@@ -195,6 +195,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       ...ProposalVoteButtonWrapperFragment_viewer
         @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
         @include(if: $hasVotableStep)
+      ...ProposalVoteModal_viewer
     }
   `,
   step: graphql`
@@ -235,7 +236,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       publicationStatus
       ...ProposalVoteButtonWrapperFragment_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
-      ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
+      ...ProposalVoteModal_proposal @include(if: $isAuthenticated)
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalEditModal_proposal

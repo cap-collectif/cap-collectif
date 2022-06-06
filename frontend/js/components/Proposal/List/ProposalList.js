@@ -97,8 +97,8 @@ export class ProposalList extends React.Component<Props> {
 
 export default createFragmentContainer(ProposalList, {
   viewer: graphql`
-    fragment ProposalList_viewer on User {
-      ...ProposalPreview_viewer
+    fragment ProposalList_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+      ...ProposalPreview_viewer @arguments(stepId: $stepId)
     }
   `,
   step: graphql`

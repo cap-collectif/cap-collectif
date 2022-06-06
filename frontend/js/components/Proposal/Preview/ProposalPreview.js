@@ -127,8 +127,8 @@ export default createFragmentContainer(
   connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPreview),
   {
     viewer: graphql`
-      fragment ProposalPreview_viewer on User {
-        ...ProposalPreviewBody_viewer
+      fragment ProposalPreview_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+        ...ProposalPreviewBody_viewer @arguments(stepId: $stepId)
       }
     `,
     step: graphql`
@@ -163,7 +163,11 @@ export default createFragmentContainer(
         }
         ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
         ...ProposalPreviewBody_proposal
-          @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)
+          @arguments(
+            isAuthenticated: $isAuthenticated
+            isProfileView: $isProfileView
+            stepId: $stepId
+          )
         ...ProposalPreviewStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       }
     `,

@@ -83,8 +83,8 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
   ProposalListViewPaginated,
   {
     viewer: graphql`
-      fragment ProposalListViewPaginated_viewer on User {
-        ...ProposalList_viewer
+      fragment ProposalListViewPaginated_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+        ...ProposalList_viewer @arguments(stepId: $stepId)
       }
     `,
     step: graphql`

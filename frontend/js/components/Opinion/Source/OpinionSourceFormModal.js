@@ -15,7 +15,7 @@ import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modul
 import type { State } from '../../../types';
 import type { OpinionSourceFormModal_source } from '~relay/OpinionSourceFormModal_source.graphql';
 import type { OpinionSourceFormModal_sourceable } from '~relay/OpinionSourceFormModal_sourceable.graphql';
-import RequirementsForm from '../../Requirements/RequirementsForm';
+import RequirementsFormLegacy from '../../Requirements/RequirementsFormLegacy';
 
 type RelayProps = {|
   source: ?OpinionSourceFormModal_source,
@@ -66,7 +66,7 @@ const OpinionSourceFormModal = ({ submitting, sourceable, source, show, dispatch
             {!step.requirements.viewerMeetsTheRequirements && (
               <Panel.Body>
                 <WYSIWYGRender value={step.requirements.reason} />
-                <RequirementsForm step={step} stepId={step.id} />
+                <RequirementsFormLegacy step={step} stepId={step.id} />
               </Panel.Body>
             )}
           </Panel>
@@ -121,7 +121,7 @@ export default createFragmentContainer(container, {
       ...OpinionSourceForm_sourceable
       step {
         id
-        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+        ...RequirementsFormLegacy_step @arguments(isAuthenticated: $isAuthenticated)
 
         requirements {
           viewerMeetsTheRequirements @include(if: $isAuthenticated)

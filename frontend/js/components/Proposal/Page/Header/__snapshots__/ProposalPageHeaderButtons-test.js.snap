@@ -28,7 +28,7 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
     }
   />
   <ProposalPageHeaderButtons__FixedButtons>
-    <Relay(ProposalVoteButtonWrapperFragment)
+    <ProposalVoteButtonWrapperFragment
       disabled={false}
       id="proposal-vote-btn"
       proposal={

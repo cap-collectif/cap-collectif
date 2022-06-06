@@ -232,7 +232,7 @@ export default createFragmentContainer(injectIntl(OpinionVotesButton), {
           requirements {
             viewerMeetsTheRequirements @include(if: $isAuthenticated)
           }
-          ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+          ...RequirementsFormLegacy_step @arguments(isAuthenticated: $isAuthenticated)
 
           ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
         }
@@ -252,7 +252,7 @@ export default createFragmentContainer(injectIntl(OpinionVotesButton), {
           requirements {
             viewerMeetsTheRequirements @include(if: $isAuthenticated)
           }
-          ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+          ...RequirementsFormLegacy_step @arguments(isAuthenticated: $isAuthenticated)
           ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
         }
         section {
