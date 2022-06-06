@@ -1734,6 +1734,13 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "storageKey": null,
                         },
                         Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
                           "abstractKey": null,
                           "kind": "InlineFragment",
                           "selections": Array [
@@ -2387,7 +2394,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "ff02a2f89b5eb4889703d47d8f6ca1e2",
+          "cacheID": "c144b8ad028218d45a1ede161061b6d8",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2477,6 +2484,7 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
         url
       }
     }
+    id
   }
   media {
     id

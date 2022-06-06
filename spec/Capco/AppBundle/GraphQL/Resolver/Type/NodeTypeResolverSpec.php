@@ -2,7 +2,9 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Type;
 
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\Response\ResponseResolver;
 use PhpSpec\ObjectBehavior;
 use GraphQL\Type\Definition\Type;
 use Capco\AppBundle\Entity\Debate\Debate;
@@ -21,9 +23,16 @@ class NodeTypeResolverSpec extends ObjectBehavior
         TypeResolver $typeResolver,
         RequirementTypeResolver $requirementTypeResolver,
         QuestionTypeResolver $questionTypeResolver,
+        ResponseResolver $responseTypeResolver,
         ReplyTypeResolver $replyTypeResolver
     ) {
-        $this->beConstructedWith($typeResolver, $requirementTypeResolver, $questionTypeResolver, $replyTypeResolver);
+        $this->beConstructedWith(
+            $typeResolver,
+            $requirementTypeResolver,
+            $questionTypeResolver,
+            $responseTypeResolver,
+            $replyTypeResolver
+        );
     }
 
     public function it_is_initializable(): void
@@ -31,8 +40,11 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $this->shouldHaveType(NodeTypeResolver::class);
     }
 
-    public function it_resolve_debate(TypeResolver $typeResolver, Debate $debate, Type $type): void
-    {
+    public function it_should_resolve_debate(
+        TypeResolver $typeResolver,
+        Debate $debate,
+        Type $type
+    ): void {
         $typeResolver->getCurrentSchemaName()->willReturn('internal');
         $typeResolver
             ->resolve('InternalDebate')
@@ -41,7 +53,7 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $this->__invoke($debate)->shouldReturn($type);
     }
 
-    public function it_resolve_debateStep(
+    public function it_should_resolve_debateStep(
         TypeResolver $typeResolver,
         DebateStep $debateStep,
         Type $type
@@ -54,7 +66,7 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $this->__invoke($debateStep)->shouldReturn($type);
     }
 
-    public function it_resolve_debateOpinion(
+    public function it_should_resolve_debateOpinion(
         TypeResolver $typeResolver,
         DebateOpinion $debateOpinion,
         Type $type
@@ -67,7 +79,7 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $this->__invoke($debateOpinion)->shouldReturn($type);
     }
 
-    public function it_resolve_debateArgument(
+    public function it_should_resolve_debateArgument(
         TypeResolver $typeResolver,
         DebateArgument $debateArgument,
         Type $type
@@ -80,7 +92,7 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $this->__invoke($debateArgument)->shouldReturn($type);
     }
 
-    public function it_resolve_debateArticle(
+    public function it_should_resolve_debateArticle(
         TypeResolver $typeResolver,
         DebateArticle $article,
         Type $type
@@ -91,5 +103,20 @@ class NodeTypeResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($type);
         $this->__invoke($article)->shouldReturn($type);
+    }
+
+    public function it_should_resolve_response(
+        TypeResolver $typeResolver,
+        ResponseResolver $responseTypeResolver,
+        ValueResponse $response,
+        Type $type
+    ): void {
+        $typeResolver->getCurrentSchemaName()->willReturn('internal');
+        $responseTypeResolver
+            ->__invoke($response)
+            ->shouldBeCalled()
+            ->willReturn($type);
+
+        $this->__invoke($response)->shouldReturn($type);
     }
 }

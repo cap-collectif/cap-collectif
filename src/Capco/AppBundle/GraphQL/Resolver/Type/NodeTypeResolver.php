@@ -7,9 +7,11 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\SmsCredit;
 use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\Response\ResponseResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
 use Capco\AppBundle\Entity\Source;
@@ -56,17 +58,20 @@ class NodeTypeResolver implements ResolverInterface
     private TypeResolver $typeResolver;
     private RequirementTypeResolver $requirementTypeResolver;
     private QuestionTypeResolver $questionTypeResolver;
+    private ResponseResolver $responseTypeResolver;
     private ReplyTypeResolver $replyTypeResolver;
 
     public function __construct(
         TypeResolver $typeResolver,
         RequirementTypeResolver $requirementTypeResolver,
         QuestionTypeResolver $questionTypeResolver,
+        ResponseResolver $responseTypeResolver,
         ReplyTypeResolver $replyTypeResolver
     ) {
         $this->typeResolver = $typeResolver;
         $this->requirementTypeResolver = $requirementTypeResolver;
         $this->questionTypeResolver = $questionTypeResolver;
+        $this->responseTypeResolver = $responseTypeResolver;
         $this->replyTypeResolver = $replyTypeResolver;
     }
 
@@ -229,6 +234,9 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof AbstractQuestion) {
             return $this->questionTypeResolver->__invoke($node);
+        }
+        if ($node instanceof AbstractResponse) {
+            return $this->responseTypeResolver->__invoke($node);
         }
 
         if ($node instanceof Requirement) {

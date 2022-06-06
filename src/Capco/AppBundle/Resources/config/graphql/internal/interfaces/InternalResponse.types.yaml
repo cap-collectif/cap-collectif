@@ -6,7 +6,7 @@ InternalResponse:
         resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseResolver", [value])'
         fields:
             id:
-                type: 'String'
+                type: 'ID!'
                 description: 'Nullable ID in case of empty response.'
             question:
                 type: 'InternalQuestion!'

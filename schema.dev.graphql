@@ -7171,8 +7171,8 @@ type MediaQuestion implements Question & Node {
 
 """A response"""
 type MediaResponse implements Response {
-  """Nullable ID in case of empty response."""
-  id: String
+  """The ID of an object."""
+  id: ID!
 
   """Identifies the question of the response."""
   question: Question!
@@ -12905,7 +12905,7 @@ type ResetPasswordPayload {
 """A response to a question."""
 interface Response {
   """Nullable ID in case of empty response."""
-  id: String
+  id: ID!
 
   """Identifies the question of the response."""
   question: Question!
@@ -17239,9 +17239,9 @@ type UserType {
 }
 
 """A response"""
-type ValueResponse implements Response & CivicIAAnalyzable {
-  """Nullable ID in case of empty response."""
-  id: String
+type ValueResponse implements Response & CivicIAAnalyzable & Node {
+  """The ID of an object."""
+  id: ID!
 
   """The question."""
   question: Question!

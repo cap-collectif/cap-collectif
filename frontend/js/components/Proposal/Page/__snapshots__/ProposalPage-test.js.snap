@@ -2913,6 +2913,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     "kind": "TypeDiscriminator",
                   },
                   Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
                     "abstractKey": null,
                     "kind": "InlineFragment",
                     "selections": Array [
@@ -5004,6 +5011,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                 "type": "MultipleChoiceQuestion",
                               },
                             ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
                             "storageKey": null,
                           },
                           Object {
@@ -7386,7 +7400,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "f3f86604a5404e1ccba29faaf98389eb",
+        "cacheID": "68469aac310f8f42dae9211f0061c23e",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -7753,6 +7767,7 @@ fragment ProposalAnalysisFormPanel_proposal_2uwUKI on Proposal {
           url
         }
       }
+      id
     }
   }
   form {
@@ -8189,6 +8204,7 @@ fragment ProposalForm_proposal on Proposal {
         url
       }
     }
+    id
   }
   media {
     id
@@ -8594,6 +8610,7 @@ fragment ProposalPageCustomSections_proposal on Proposal {
       }
     }
     ...NewProposalResponse_response
+    id
   }
 }
 
@@ -9239,6 +9256,7 @@ fragment ProposalViewAnalysisPanel_proposal on Proposal {
         }
       }
       ...ProposalResponse_response
+      id
     }
   }
   form {

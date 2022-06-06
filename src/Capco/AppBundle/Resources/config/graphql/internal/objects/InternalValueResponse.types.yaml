@@ -1,6 +1,8 @@
 InternalValueResponse:
     type: object
     inherits:
+        - InternalResponse
+        - Node
     # We can not inherit interface from an other schema anymore
     #- PreviewValueResponse
     config:
@@ -8,11 +10,14 @@ InternalValueResponse:
         interfaces:
             - InternalResponse
             - CivicIAAnalyzable
+            - Node
         description: 'A response'
         fields:
             id:
-                type: 'String'
-                description: 'Nullable ID in case of empty response.'
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: ValueResponse
             question:
                 description: 'The question.'
                 type: 'InternalQuestion!'

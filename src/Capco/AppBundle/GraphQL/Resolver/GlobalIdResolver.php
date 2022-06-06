@@ -9,6 +9,7 @@ use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
@@ -266,6 +267,14 @@ class GlobalIdResolver
                     break;
                 case 'Group':
                     $node = $this->container->get(GroupRepository::class)->find($uuid);
+
+                    break;
+                case 'ValueResponse':
+                    $node = $this->container->get(ValueResponseRepository::class)->find($uuid);
+
+                    break;
+                case 'MediaResponse':
+                    $node = $this->container->get(MediaResponseRepository::class)->find($uuid);
 
                     break;
                 default:

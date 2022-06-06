@@ -8,6 +8,11 @@ InternalMediaResponse:
             - InternalResponse
         description: 'A response'
         fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: MediaResponse
             question:
                 type: 'InternalQuestion!'
             medias:
