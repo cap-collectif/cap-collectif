@@ -2,7 +2,7 @@ import * as React from 'react';
 import NavBar, { NavBarProps } from '../NavBar/NavBar';
 import SideBar, { setSideBarCookie, SIDE_BAR_COOKIE } from '../SideBar/SideBar';
 import { useIntl } from 'react-intl';
-import { Box, Flex } from '@cap-collectif/ui';
+import { Box, Flex, Spinner } from '@cap-collectif/ui';
 import Head from 'next/head';
 import NavBarPlaceholder from '../NavBar/NavBarPlaceholder';
 import { NavBarProvider } from '../NavBar/NavBar.context';
@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import CookieHelper from '@utils/cookie-helper';
 import { LayoutProvider } from './Layout.context';
 import useFeatureFlag from '@hooks/useFeatureFlag';
+import HotJar from './HotJar';
 
 export interface LayoutProps {
     children: React.ReactNode;
@@ -28,6 +29,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
     const { viewerSession } = useAppContext();
     const { pathname } = useRouter();
     const helpscoutBeacon = useFeatureFlag('helpscout_beacon');
+
     const menuOpen = sideBarItems.find(sideBarItem => {
         if (sideBarItem.items.length > 0)
             return sideBarItem.items.some(item => item.href.includes(pathname));
@@ -56,11 +58,13 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                             }`,
                         }}
                     />
+
                     <script
                         type="text/javascript"
                         src="https://app.getbeamer.com/js/beamer-embed.js"
                         defer
                     />
+
                     {helpscoutBeacon && (
                         <>
                             <script
@@ -84,6 +88,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                             />
                         </>
                     )}
+
                     <link
                         rel="preload"
                         href={`${FONT_PATH}/OpenSans-Regular.ttf`}
@@ -92,13 +97,17 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                     />
                     <link
                         rel="preload"
-                        href={`${FONT_PATH}/OpenSans-Regular.ttf`}
+                        href={`${FONT_PATH}/OpenSans-SemiBold.ttf`}
                         as="font"
                         crossOrigin=""
                     />
                 </Head>
 
                 <Flex direction="row" height="100%">
+                    <React.Suspense fallback={false}>
+                        <HotJar />
+                    </React.Suspense>
+
                     <SideBar />
 
                     <Flex direction="column" width="100%" bg="gray.100">

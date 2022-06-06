@@ -397,7 +397,7 @@ InternalQuery:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNotificationsFromEmailResolver")'
             siteParameter:
                 description: 'get a site parameter from its keyname'
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 args:
                     keyname:
                         type: 'String!'
