@@ -292,6 +292,24 @@ Object {
 }
 `;
 
+exports[`Internal|Question.civicIA get civicIA analysis on responses, filtered by category 1`] = `
+Object {
+  "question": Object {
+    "responses": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "iaCategory": "home",
+            "iaReadability": null,
+            "iaSentiment": "POSITIVE",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`Internal|Question.civicIA get civicIA analysis on responses, ordered by category 1`] = `
 Object {
   "question": Object {

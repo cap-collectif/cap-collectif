@@ -78,6 +78,7 @@ class ResponseSearch extends Search
         bool $withNotConfirmedUser = false,
         ?string $term = null,
         ?string $sentimentFilter = null,
+        ?string $category = null,
         array $orderBy = ['createdAt' => ['order' => 'desc']],
         int $limit = 20,
         ?string $cursor = null
@@ -100,6 +101,14 @@ class ResponseSearch extends Search
 
         if ($sentimentFilter) {
             $boolQuery->addFilter(new Term(['iaSentiment' => strtolower($sentimentFilter)]));
+        }
+
+        if ($category) {
+            $boolQuery->addFilter(
+                (new Query\MatchQuery())
+                    ->setFieldQuery('iaCategory', Sanitizer::escape($category, [' ']))
+                    ->setFieldOperator('iaCategory', Query\Match::OPERATOR_AND)
+            );
         }
 
         $query = new Query($boolQuery);

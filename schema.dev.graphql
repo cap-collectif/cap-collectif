@@ -6905,6 +6905,9 @@ type MajorityQuestion implements Question & Node {
     """Get responses in which the term appears."""
     term: String
 
+    """Get responses matching given category."""
+    iaCategory: String = null
+
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
 
@@ -7112,6 +7115,9 @@ type MediaQuestion implements Question & Node {
     """Get responses in which the term appears."""
     term: String
 
+    """Get responses matching given category."""
+    iaCategory: String = null
+
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
 
@@ -7204,6 +7210,9 @@ type MultipleChoiceQuestion implements Question & Node {
 
     """Get responses in which the term appears."""
     term: String
+
+    """Get responses matching given category."""
+    iaCategory: String = null
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
@@ -11502,6 +11511,9 @@ interface Question {
     """Get responses in which the term appears."""
     term: String
 
+    """Get responses matching given category."""
+    iaCategory: String = null
+
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
 
@@ -13198,6 +13210,9 @@ type SectionQuestion implements Question & Node {
     """Get responses in which the term appears."""
     term: String
 
+    """Get responses matching given category."""
+    iaCategory: String = null
+
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
 
@@ -13779,6 +13794,9 @@ type SimpleQuestion implements Question & Node {
 
     """Get responses in which the term appears."""
     term: String
+
+    """Get responses matching given category."""
+    iaCategory: String = null
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null

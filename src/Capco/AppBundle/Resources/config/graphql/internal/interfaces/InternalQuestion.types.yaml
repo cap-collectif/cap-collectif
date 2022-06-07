@@ -18,6 +18,10 @@ InternalQuestion:
                     term:
                         type: 'String'
                         description: 'Get responses in which the term appears.'
+                    iaCategory:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Get responses matching given category.'
                     iaSentiment:
                         type: 'CivicIASentiment'
                         defaultValue: null

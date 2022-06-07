@@ -47,6 +47,7 @@ class QuestionResponsesResolver implements ResolverInterface
             true === $arguments['withNotConfirmedUser'];
         $term = $arguments['term'] ?? null;
         $sentimentFilter = $args->offsetGet('iaSentiment');
+        $category = $arguments['iaCategory'] ?? null;
         $orderBy = self::getOrderBy($arguments);
 
         // Schema design is wrong but let's return empty connection for now…
@@ -60,6 +61,7 @@ class QuestionResponsesResolver implements ResolverInterface
             $withNotConfirmedUser,
             $term,
             $sentimentFilter,
+            $category,
             $orderBy
         ) {
             try {
@@ -68,6 +70,7 @@ class QuestionResponsesResolver implements ResolverInterface
                     $withNotConfirmedUser,
                     $term,
                     $sentimentFilter,
+                    $category,
                     $orderBy,
                     $limit,
                     $cursor
