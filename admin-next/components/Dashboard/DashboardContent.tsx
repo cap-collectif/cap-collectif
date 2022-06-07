@@ -21,8 +21,12 @@ import type { DashboardContent_viewer$key } from '@relay/DashboardContent_viewer
 
 const FRAGMENT = graphql`
     fragment DashboardContent_viewer on User
-    @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
-        userProjects: projects(affiliations: $affiliations) {
+    @argumentDefinitions(
+        affiliations: { type: "[ProjectAffiliation!]" }
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+    ) {
+        userProjects: projects(affiliations: $affiliations, first: $count, after: $cursor) {
             totalCount
             edges {
                 node {
@@ -34,7 +38,8 @@ const FRAGMENT = graphql`
                 }
             }
         }
-        ...DashboardFilters_viewer @arguments(affiliations: $affiliations)
+        ...DashboardFilters_viewer
+            @arguments(affiliations: $affiliations, count: $count, cursor: $cursor)
     }
 `;
 

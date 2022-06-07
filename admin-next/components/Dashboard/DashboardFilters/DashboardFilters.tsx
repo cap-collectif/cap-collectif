@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useRef } from 'react';
 import { useIntl } from 'react-intl';
-import { graphql, useFragment } from 'react-relay';
+import { graphql, usePaginationFragment } from 'react-relay';
 import { DateRange, Flex, Select } from '@cap-collectif/ui';
 import type {
     DashboardFilters_viewer,
@@ -10,10 +10,18 @@ import { DEFAULT_FILTERS, FilterKey, useDashboard } from '../Dashboard.context';
 import { useAppContext } from '../../AppProvider/App.context';
 import moment from 'moment';
 
+export const COUNT_PROJECT_PAGINATION = 20;
+
 const FRAGMENT = graphql`
     fragment DashboardFilters_viewer on User
-    @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
-        projects(affiliations: $affiliations) {
+    @argumentDefinitions(
+        affiliations: { type: "[ProjectAffiliation!]" }
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+    )
+    @refetchable(queryName: "DashboardFiltersPaginationQuery") {
+        projects(affiliations: $affiliations, first: $count, after: $cursor)
+            @connection(key: "DashboardFilters_projects", filters: []) {
             totalCount
             edges {
                 node {
@@ -57,10 +65,18 @@ type DashboardFiltersProps = {
 };
 
 const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment }) => {
-    const viewer = useFragment(FRAGMENT, viewerFragment);
+    const {
+        data: viewer,
+        loadNext,
+        hasNext,
+        refetch,
+        isLoadingNext,
+    } = usePaginationFragment(FRAGMENT, viewerFragment);
     const intl = useIntl();
+    const firstRendered = useRef<boolean>(false);
     const { viewerSession } = useAppContext();
     const { setFilters, filters } = useDashboard();
+
     const { projects } = viewer;
     const [dateRange, setDateRange] = useState({
         startDate: moment(filters.dateRange.startAt),
@@ -81,6 +97,16 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
             setFilters(FilterKey.DATE_RANGE, JSON.stringify(dateRangeProject));
         }
     }, [filters[FilterKey.PROJECT], projects]);
+
+    useEffect(() => {
+        if (firstRendered.current) {
+            refetch({
+                affiliations: viewerSession.isAdmin ? null : ['OWNER'],
+            });
+        }
+
+        firstRendered.current = true;
+    }, [viewerSession.isAdmin, refetch]);
 
     const defaultValue =
         projects?.totalCount > 0
@@ -108,6 +134,10 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
                 onChange={optionSelected => setFilters(FilterKey.PROJECT, optionSelected.value)}
                 defaultValue={defaultValueFormatted}
                 width="20%"
+                isLoading={isLoadingNext}
+                onMenuScrollToBottom={() => {
+                    if (hasNext) loadNext(COUNT_PROJECT_PAGINATION);
+                }}
                 options={[
                     ...(viewerSession.isAdmin
                         ? [
@@ -134,7 +164,7 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
             />
 
             <DateRange
-                isOutsideRange={() => false}
+                isOutsideRange
                 value={dateRange}
                 onChange={({ startDate, endDate }) => {
                     setDateRange({
@@ -143,7 +173,6 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
                     });
                 }}
                 minDate={canSelectDateOutRange ? undefined : dateRange.startDate}
-                displayFormat="DD/MM/YYYY"
                 onClose={({ startDate, endDate }) => {
                     const dateRangeUpdated = {
                         startAt: startDate

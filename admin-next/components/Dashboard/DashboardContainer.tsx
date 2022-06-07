@@ -2,12 +2,17 @@ import type { FC } from 'react';
 import { useIntl } from 'react-intl';
 import Layout from '../Layout/Layout';
 import DashboardContent from './DashboardContent';
+import { COUNT_PROJECT_PAGINATION } from './DashboardFilters/DashboardFilters';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import type { DashboardContainerQuery } from '@relay/DashboardContainerQuery.graphql';
 import { useAppContext } from '../AppProvider/App.context';
 
 const QUERY = graphql`
-    query DashboardContainerQuery($affiliations: [ProjectAffiliation!]) {
+    query DashboardContainerQuery(
+        $affiliations: [ProjectAffiliation!]
+        $count: Int
+        $cursor: String
+    ) {
         viewer {
             allProject: projects(affiliations: $affiliations) {
                 totalCount
@@ -18,7 +23,8 @@ const QUERY = graphql`
             doneProjects: projects(affiliations: $affiliations, status: 2) {
                 totalCount
             }
-            ...DashboardContent_viewer @arguments(affiliations: $affiliations)
+            ...DashboardContent_viewer
+                @arguments(affiliations: $affiliations, count: $count, cursor: $cursor)
         }
     }
 `;
@@ -28,6 +34,8 @@ const DashboardContainer: FC = () => {
     const { viewerSession } = useAppContext();
     const query = useLazyLoadQuery<DashboardContainerQuery>(QUERY, {
         affiliations: viewerSession.isAdmin ? null : ['OWNER'],
+        count: COUNT_PROJECT_PAGINATION,
+        cursor: null,
     });
     const { viewer } = query;
     const { allProject, inProgressProjects, doneProjects } = viewer;
