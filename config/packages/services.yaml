@@ -9,9 +9,16 @@ services:
             $samlIdp: '%simplesamlphp.sp%'
             $logger: '@logger'
             $projectDir: '%kernel.project_dir%'
+            $env: '%kernel.environment%'
+            $backChannelSecret: '%openid_backchannel_secret%'
+            $backChannelSecretDev: '%openid_backchannel_secret_dev%'
+            $redisSessionHandler: '@Capco\UserBundle\Security\SessionWithJsonHandler'
 
     Capco\AppBundle\Import\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Import/*'
+
+    Capco\AppBundle\Service\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Service/*'
 
     Capco\AppBundle\EventListener\ToggleSubscriber:
         tags:
@@ -365,9 +372,6 @@ services:
             $deployerBaseUrl: '%deployer_api_url%'
             $instanceName: '%instance_name%'
             $token: '%instance_auth_token%'
-
-    Capco\AppBundle\Service\SmsAnalyticsHelper:
-        autowire: true
 
     Capco\AppBundle\Anonymizer\AnonymizeUser:
         public: true

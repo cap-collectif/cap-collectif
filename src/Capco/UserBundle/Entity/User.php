@@ -76,7 +76,6 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected bool $locked = false;
     protected ?UserType $userType = null;
     protected bool $vip = false;
-
     //account security
     protected ?string $newEmailToConfirm = null;
     protected ?string $newEmailConfirmationToken = null;
@@ -99,6 +98,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected Collection $responses;
     protected bool $profilePageIndexed = false;
     protected ?string $websiteUrl = null;
+    protected array $openIdSessionsId = [];
     private Collection $userGroups;
     private ?string $resetPasswordToken = null;
     private ?UserIdentificationCode $userIdentificationCode = null;
@@ -973,5 +973,60 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
         return $this->userIdentificationCode
             ? $this->userIdentificationCode->getIdentificationCode()
             : null;
+    }
+
+    public function getOpenIdSessionsId(): array
+    {
+        return $this->openIdSessionsId;
+    }
+
+    public function getSessionFromOpenIdSessionId(string $openIdSID): ?string
+    {
+        if ($this->hasOpenIdSession($openIdSID)) {
+            return $this->openIdSessionsId[$openIdSID];
+        }
+
+        return null;
+    }
+
+    public function setOpenIdSessionsId(array $openIdSessionsId): self
+    {
+        $this->openIdSessionsId = $openIdSessionsId;
+
+        return $this;
+    }
+
+    public function hasOpenIdSession(string $openIdSID): bool
+    {
+        return isset($this->openIdSessionsId[$openIdSID]);
+    }
+
+    public function addOpenIdSessionId(string $openIdSessionId, string $sessionId): self
+    {
+        if (!$this->hasOpenIdSession($openIdSessionId)) {
+            $this->openIdSessionsId[$openIdSessionId] = $sessionId;
+        }
+
+        return $this;
+    }
+
+    public function removeOpenIdSession(string $openIdSID): self
+    {
+        if ($this->hasOpenIdSession($openIdSID)) {
+            unset($this->openIdSessionsId[$openIdSID]);
+        }
+
+        return $this;
+    }
+
+    public function removeOpenIdSessionFromUserSession(string $session): self
+    {
+        if (\in_array($session, $this->openIdSessionsId)) {
+            $sessions = array_flip($this->openIdSessionsId);
+            $openIdSessionId = $sessions[$session];
+            $this->removeOpenIdSession($openIdSessionId);
+        }
+
+        return $this;
     }
 }

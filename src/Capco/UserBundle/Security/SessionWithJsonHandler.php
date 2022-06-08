@@ -16,8 +16,8 @@ use Capco\UserBundle\Entity\User;
  */
 class SessionWithJsonHandler extends BaseHandler
 {
-    private Security $security;
     public const SEPARATOR = '___JSON_SESSION_SEPARATOR__';
+    private Security $security;
 
     public function __construct(
         ClientInterface $redis,
@@ -27,33 +27,22 @@ class SessionWithJsonHandler extends BaseHandler
     ) {
         $options['ttl'] = 1209600; // This is two weeks
         $options['prefix'] = $prefix;
-        # /!\ Our session data should be "read-only" :
-        # we use parallel requests and want to avoid cascading requests.
-        #
-        # Unfortunately we are currently using some flash messages that write in the session,
-        # so we are stuck until we fix this…
-        #
-        # TODO https://github.com/cap-collectif/platform/issues/12189
+        // /!\ Our session data should be "read-only" :
+        // we use parallel requests and want to avoid cascading requests.
+        //
+        // Unfortunately we are currently using some flash messages that write in the session,
+        // so we are stuck until we fix this…
+        //
+        // TODO https://github.com/cap-collectif/platform/issues/12189
         $locking = true;
 
         parent::__construct($redis, $options, $prefix, $locking);
         $this->security = $security;
     }
 
-    // See: https://symfony.com/doc/current/session/proxy_examples.html#read-only-guest-sessions
-    private function getUser(): ?User
-    {
-        $user = $this->security->getUser();
-        if ($user instanceof User) {
-            return $user;
-        }
-
-        return null;
-    }
-
     /**
      * $sessionId: string
-     * $data: string
+     * $data: string.
      *
      * We must return 1 to avoid session_close errors
      *
@@ -66,17 +55,26 @@ class SessionWithJsonHandler extends BaseHandler
         return parent::write($sessionId, $this->encode($data, $viewer));
     }
 
+    public function getClient(): ClientInterface
+    {
+        return $this->redis;
+    }
+
+    public function getRedisKey($key)
+    {
+        return parent::getRedisKey($key);
+    }
+
     /**
-     * $sessionId: string
+     * $sessionId: string.
      *
      * @return string
      */
     public function read($sessionId)
     {
         $encodedSession = parent::read($sessionId);
-        $rawPhpSession = $this->decode($encodedSession);
 
-        return $rawPhpSession;
+        return $this->decode($encodedSession);
     }
 
     public function encode(string $rawPhpSession, ?User $viewer): string
@@ -100,7 +98,7 @@ class SessionWithJsonHandler extends BaseHandler
 
     public function decode(string $encodedSession): string
     {
-        if (strlen($encodedSession) == 0) {
+        if (0 == \strlen($encodedSession)) {
             return '';
         }
 
@@ -110,8 +108,17 @@ class SessionWithJsonHandler extends BaseHandler
             return '';
         }
 
-        $rawPhpSession = $decodedArray[0];
+        return $decodedArray[0];
+    }
 
-        return $rawPhpSession;
+    // See: https://symfony.com/doc/current/session/proxy_examples.html#read-only-guest-sessions
+    private function getUser(): ?User
+    {
+        $user = $this->security->getUser();
+        if ($user instanceof User) {
+            return $user;
+        }
+
+        return null;
     }
 }

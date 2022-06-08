@@ -50,6 +50,7 @@
 
         <field name="openIdAccessToken" column="openid_access_token" type="text" nullable="true" />
         <field name="openId"            column="openid_id"           type="string" nullable="true" unique="true" length="512"/>
+        <field name="openIdSessionsId" column="openid_sessions_id" type="array" nullable="true" length="512"/>
 
         <field name="franceConnectId" column="france_connect_id" type="string" length="255" nullable="true" unique="true"/>
         <field name="franceConnectAccessToken" column="france_connect_access_token" type="string" length="255" nullable="true" />

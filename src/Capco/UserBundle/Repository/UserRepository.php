@@ -356,6 +356,17 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
+    public function findOneByOpenIdSID(string $openIdSID): ?User
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->andWhere('u.openIdSessionsId LIKE :openIdSessionsId')->setParameter(
+            'openIdSessionsId',
+            '%' . $openIdSID . '%'
+        );
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function findUserByNewEmailConfirmationToken(string $token)
     {
         $qb = $this->createQueryBuilder('u');
@@ -1170,8 +1181,7 @@ class UserRepository extends EntityRepository
     public function findByRoleAdminOrSuperAdmin(): array
     {
         $qb = $this->createQueryBuilder('u');
-        $qb->where('u.roles LIKE :roleAdmin OR u.roles LIKE :roleSuperAdmin')
-        ->setParameters([
+        $qb->where('u.roles LIKE :roleAdmin OR u.roles LIKE :roleSuperAdmin')->setParameters([
             'roleAdmin' => '%ROLE_ADMIN%',
             'roleSuperAdmin' => '%ROLE_SUPER_ADMIN%',
         ]);
@@ -1509,19 +1519,17 @@ EOF;
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    protected function getIsEnabledQueryBuilder(): QueryBuilder
-    {
-        return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
-    }
-
     public function countPhoneConfirmedUsers(): int
     {
         $qb = $this->createQueryBuilder('u')
             ->select('count(u.id)')
-            ->where('u.phoneConfirmed = true')
-        ;
+            ->where('u.phoneConfirmed = true');
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
 
+    protected function getIsEnabledQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
     }
 }
