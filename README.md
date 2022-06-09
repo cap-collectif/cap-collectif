@@ -12,12 +12,9 @@ For more informations, consult our **[website](https://cap-collectif.com)**.
 
 ## 🔗 Getting started
 
-_Documentation for developers is coming soon._
+Check out the **[Development Portal](https://developers.cap-collectif.com)** to get started:
 
-<!-- Check out the **[Development Portal](https://developers.cap-collectif.com)** to get started:
-
-- [Deploying your own platform](https://developers.cap-collectif.com/start-deployment)
-- [Setting up your development environment](https://developers.cap-collectif.com/start-dev-environment) -->
+- [Setting up your development environment](https://developers.cap-collectif.com/getting-started/dev-environment)
 
 ## 🤝 Contributing
 
