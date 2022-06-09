@@ -21,6 +21,20 @@ def linux_docker_install(force=False):
     run('sudo apt-get install unrar')
 
 
+def doctor():
+    run('echo "Docker: `docker -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"')
+    run('echo "Docker compose: `docker-compose -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"')
+    run('echo "Node: `node -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"')
+    run('echo "Yarn: `yarn -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"')
+    if _platform == 'darwin':
+        run('echo "PHP: `php -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"')
+        run('echo "Composer: `composer --version | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"')
+        run('php -m | grep -qi redis && echo "PHP extension: redis enabled" || echo "PHP extension: redis not found"')
+        run('php -m | grep -qi imagick && echo "PHP extension: imagick enabled" || echo "PHP extension: imagick not found"')
+        run('php -m | grep -qi amqp && echo "PHP extension: amqp enabled" || echo "PHP extension: amqp not found"')
+        run('echo "Symfony CLI: `symfony -V | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"')
+
+
 def symfony_bin_deps():
     symfony_bin_dir = '~/.symfony/bin'
     run('brew list | grep php | while read x; do echo $x; done')

@@ -36,3 +36,8 @@ def sign_ssl(ctx):
 def symfony_bin_install(ctx, force=False):
     environments.local()
     system.symfony_bin_install(force)
+
+@task
+def doctor(ctx):
+    environments.local()
+    system.doctor()
