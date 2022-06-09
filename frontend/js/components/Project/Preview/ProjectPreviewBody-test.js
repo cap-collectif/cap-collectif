@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 import { ProjectPreviewBody } from './ProjectPreviewBody';
 
@@ -15,6 +15,7 @@ const defaultStep = {
   timeless: null,
   __typename: 'PresentationStep',
   url: '',
+  enabled: true,
 };
 
 const defaultClosedStep = {
@@ -43,6 +44,7 @@ const closedStepComplete2 = {
   },
   __typename: 'PresentationStep',
   url: 'http://capco/closed-step2/show-link',
+  enabled: false,
 };
 
 const openStep1 = {
@@ -137,6 +139,7 @@ const secondTest = {
         timeless: false,
         __typename: 'PresentationStep',
         url: 'http://capco/step/show-link',
+        enabled: true,
       },
       {
         $fragmentRefs,
@@ -149,6 +152,7 @@ const secondTest = {
         timeless: true,
         __typename: 'CollectStep',
         url: 'http://capco/timeless-step/show-link',
+        enabled: false,
       },
       defaultFutureStep,
     ],

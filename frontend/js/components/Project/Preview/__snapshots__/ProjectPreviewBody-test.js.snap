@@ -20,6 +20,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
@@ -32,6 +33,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": false,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
@@ -44,6 +46,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
@@ -113,6 +116,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
@@ -125,6 +129,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": false,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
@@ -137,6 +142,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
@@ -165,6 +171,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
@@ -177,6 +184,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": false,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
@@ -189,6 +197,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
@@ -234,6 +243,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
@@ -246,6 +256,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": "2018-01-28T09:00:24+01:00",
@@ -315,6 +326,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": "2017-12-28T09:00:24+01:00",
@@ -327,6 +339,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": "2018-01-28T09:00:24+01:00",
@@ -372,6 +385,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
@@ -384,6 +398,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
@@ -396,6 +411,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
@@ -408,6 +424,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
@@ -477,6 +494,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
@@ -489,6 +507,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
@@ -501,6 +520,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
@@ -513,6 +533,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
@@ -534,6 +555,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       Object {
         "$fragmentRefs": null,
         "__typename": "CollectStep",
+        "enabled": true,
         "state": "OPENED",
         "timeRange": Object {
           "endAt": "2017-11-25T09:00:24+01:00",
@@ -557,6 +579,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           Object {
             "$fragmentRefs": null,
             "__typename": "PresentationStep",
+            "enabled": true,
             "state": "CLOSED",
             "timeRange": Object {
               "endAt": null,
@@ -569,6 +592,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           Object {
             "$fragmentRefs": null,
             "__typename": "CollectStep",
+            "enabled": true,
             "state": "OPENED",
             "timeRange": Object {
               "endAt": "2018-11-28T09:00:24+01:00",
@@ -581,6 +605,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           Object {
             "$fragmentRefs": null,
             "__typename": "CollectStep",
+            "enabled": true,
             "state": "OPENED",
             "timeRange": Object {
               "endAt": "2017-11-25T09:00:24+01:00",
@@ -593,6 +618,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           Object {
             "$fragmentRefs": null,
             "__typename": "PresentationStep",
+            "enabled": true,
             "state": "FUTURE",
             "timeRange": Object {
               "endAt": null,
@@ -649,6 +675,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
@@ -661,6 +688,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
@@ -673,6 +701,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
@@ -685,6 +714,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
@@ -754,6 +784,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
@@ -766,6 +797,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
@@ -778,6 +810,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
@@ -790,6 +823,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
@@ -818,6 +852,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
@@ -830,6 +865,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2018-11-28T09:00:24+01:00",
@@ -842,6 +878,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
@@ -854,6 +891,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
@@ -875,6 +913,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       Object {
         "$fragmentRefs": null,
         "__typename": "CollectStep",
+        "enabled": true,
         "state": "OPENED",
         "timeRange": Object {
           "endAt": "2017-11-25T09:00:24+01:00",
@@ -898,6 +937,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           Object {
             "$fragmentRefs": null,
             "__typename": "PresentationStep",
+            "enabled": true,
             "state": "CLOSED",
             "timeRange": Object {
               "endAt": null,
@@ -910,6 +950,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           Object {
             "$fragmentRefs": null,
             "__typename": "CollectStep",
+            "enabled": true,
             "state": "OPENED",
             "timeRange": Object {
               "endAt": "2018-11-28T09:00:24+01:00",
@@ -922,6 +963,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           Object {
             "$fragmentRefs": null,
             "__typename": "CollectStep",
+            "enabled": true,
             "state": "OPENED",
             "timeRange": Object {
               "endAt": "2017-11-25T09:00:24+01:00",
@@ -934,6 +976,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           Object {
             "$fragmentRefs": null,
             "__typename": "PresentationStep",
+            "enabled": true,
             "state": "FUTURE",
             "timeRange": Object {
               "endAt": null,
@@ -990,6 +1033,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
@@ -1002,6 +1046,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
@@ -1014,6 +1059,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": false,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": null,
@@ -1026,6 +1072,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
@@ -1095,6 +1142,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": null,
@@ -1107,6 +1155,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": "2017-11-25T09:00:24+01:00",
@@ -1119,6 +1168,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "CollectStep",
+              "enabled": false,
               "state": "OPENED",
               "timeRange": Object {
                 "endAt": null,
@@ -1131,6 +1181,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "FUTURE",
               "timeRange": Object {
                 "endAt": null,
@@ -1147,97 +1198,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
   </div>
-  <Relay(ProjectPreviewProgressBar)
-    actualStep={
-      Object {
-        "$fragmentRefs": null,
-        "__typename": "CollectStep",
-        "state": "OPENED",
-        "timeRange": Object {
-          "endAt": null,
-          "startAt": null,
-        },
-        "timeless": true,
-        "title": "timeless step",
-        "url": "http://capco/timeless-step/show-link",
-      }
-    }
-    isCurrentStep={null}
-    project={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "archived": false,
-        "externalLink": null,
-        "id": "1",
-        "isExternal": false,
-        "steps": Array [
-          Object {
-            "$fragmentRefs": null,
-            "__typename": "PresentationStep",
-            "state": "CLOSED",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
-            "timeless": null,
-            "title": "Closed step",
-            "url": "",
-          },
-          Object {
-            "$fragmentRefs": null,
-            "__typename": "PresentationStep",
-            "state": "OPENED",
-            "timeRange": Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-11-10T09:00:24+01:00",
-            },
-            "timeless": false,
-            "title": "Open step",
-            "url": "http://capco/step/show-link",
-          },
-          Object {
-            "$fragmentRefs": null,
-            "__typename": "CollectStep",
-            "state": "OPENED",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
-            "timeless": true,
-            "title": "timeless step",
-            "url": "http://capco/timeless-step/show-link",
-          },
-          Object {
-            "$fragmentRefs": null,
-            "__typename": "PresentationStep",
-            "state": "FUTURE",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
-            "timeless": null,
-            "title": "Future step",
-            "url": "",
-          },
-        ],
-        "title": "Name of my project",
-        "url": "http://capco/show-link",
-      }
-    }
-  />
   <div
     className="small excerpt"
   >
-    <a
-      className="text-uppercase  mr-10"
-      href="http://capco/timeless-step/show-link"
-    >
-      <FormattedMessage
-        id="project.preview.action.participe"
-        values={Object {}}
-      />
-    </a>
      
      
   </div>
@@ -1367,6 +1330,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
@@ -1379,6 +1343,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": false,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
@@ -1448,6 +1413,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
@@ -1460,6 +1426,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": false,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",
@@ -1488,6 +1455,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": true,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2016-12-28T09:00:24+01:00",
@@ -1500,6 +1468,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
             Object {
               "$fragmentRefs": null,
               "__typename": "PresentationStep",
+              "enabled": false,
               "state": "CLOSED",
               "timeRange": Object {
                 "endAt": "2017-01-28T09:00:24+01:00",

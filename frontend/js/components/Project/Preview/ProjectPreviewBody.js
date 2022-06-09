@@ -24,11 +24,15 @@ type Props = {|
 |};
 
 const getStepsFilter = (project: ProjectPreviewBody_project) => {
-  const projectStep = project.steps.slice(0).sort((a, b) => {
-    const dateA = a.timeRange.startAt ? new Date(a.timeRange.startAt) : 0;
-    const dateB = b.timeRange.startAt ? new Date(b.timeRange.startAt) : 0;
-    return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
-  });
+  const projectStep = project.steps
+    .slice(0)
+    .sort((a, b) => {
+      const dateA = a.timeRange.startAt ? new Date(a.timeRange.startAt) : 0;
+      const dateB = b.timeRange.startAt ? new Date(b.timeRange.startAt) : 0;
+      return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
+    })
+    .filter(step => step.enabled);
+
   const stepClosed = projectStep.filter(
     step => step.state === 'CLOSED' && step.__typename !== 'PresentationStep',
   );
@@ -221,6 +225,7 @@ export default createFragmentContainer(ProjectPreviewBody, {
         title
         timeless
         state
+        enabled
         timeRange {
           startAt
           endAt
