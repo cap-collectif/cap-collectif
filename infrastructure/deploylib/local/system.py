@@ -9,12 +9,6 @@ def configure_vhosts(ctx, mode='symfony_bin'):
 
 
 @task
-def dinghy_install(ctx, force=False):
-    environments.local()
-    system.dinghy_install(mode, force)
-
-
-@task
 def generate_ssl(ctx):
     environments.local()
     system.generate_ssl()

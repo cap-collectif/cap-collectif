@@ -32,25 +32,12 @@ def local():
     if _platform == "linux" or _platform == "linux2":
         locallinux()
     elif _platform == "darwin":
-        result = run('which dinghy', warn=True)
-        if result.ok:
-            print("Using dinghy")
-            localmac_dinghy()
-        else:
-            print("Using docker for mac, please make sur you have at least 6GB of RAM on VM (for ES).")
-            localmac_dockerformac()
+        print("Using docker for mac, please make sur you have at least 6GB of RAM on VM (for ES).")
+        localmac_dockerformac()
     Connection.host = 'docker@localhost'
     Config.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']
     Config.shell = "/bin/sh -c"
     Config.directory = Config.root_dir
-
-
-def localmac_dinghy():
-    Config.local = True
-    Connection.host = 'docker@192.168.99.100'
-    Config.dinghy = True
-    Config.local_ip = run('dinghy ip', hide=True, warn=True).stdout
-    Config.asset_host = 'assets.cap.co'
 
 
 def localmac_dockerformac():
@@ -68,8 +55,6 @@ def locallinux():
 def ssh_into(service, user='capco'):
     if Config.docker_machine:
         os.system('eval "$(docker-machine env capco)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
-    elif Config.dinghy:
-        os.system('eval "$(docker-machine env dinghy)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
     elif Config.lxc:
         os.system("Disabled in lxc environment.")
     else:
@@ -81,8 +66,6 @@ def command(command_name, service, directory=".", user="capco", interactive=Fals
         return run('sudo lxc-attach -n "$(docker inspect --format \'{{.Id}}\' %s_%s_1)" -- /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (Config.project_name, service, directory, user, command_name))
     elif Config.docker_machine:
         return run('eval "$(docker-machine env capco)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
-    elif Config.dinghy:
-        return run('eval "$(docker-machine env dinghy)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
     else:
         return run('docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
 
@@ -99,8 +82,6 @@ def compose(command_name):
     os.chdir(Config.directory)
     if Config.docker_machine:
         run('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
-    elif Config.dinghy:
-        run('eval "$(docker-machine env dinghy)" && docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
     else:
         run('docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
 
@@ -151,7 +132,6 @@ Config.ci = False
 Config.project_name = 'capco'
 Config.www_app = '/var/www/'
 Config.local = False
-Config.dinghy = False
 Config.docker_machine = False
 Config.docker_for_mac = False
 Config.assets_host = ''

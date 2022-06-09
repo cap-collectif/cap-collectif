@@ -45,8 +45,6 @@ def clean():
     "Clean the infrastructure, will also remove all data"
     ensure_vm_is_up()
     compose('down --remove-orphans -v')
-    if Config.dinghy:
-        run('dinghy ssh docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc')
 
 
 def ps():
@@ -69,14 +67,10 @@ def ensure_vm_is_up():
             machine_running = run('docker-machine status capco')
             if machine_running.stdout != 'Running':
                 run('docker-machine start capco')
-    if Config.dinghy:
-        machine_running = run('dinghy status').stdout
-        if machine_running.splitlines()[0].strip() != 'VM: running':
-            run('dinghy up --no-proxy')
     if Config.docker_for_mac:
         docker_running = run('docker ps', warn=True)
         if docker_running.stderr:
             print('[Info] Launching docker for mac !' + color_white)
             run('open /Applications/Docker.app')
-            time.sleep(5)
+            time.sleep(8)
             print('[Info] docker for mac should be up !' + color_white)

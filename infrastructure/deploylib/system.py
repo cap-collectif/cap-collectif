@@ -13,21 +13,12 @@ def linux_docker_install(force=False):
     """
     Install docker on linux
     """
-    if Config.docker_machine or Config.dinghy:
+    if Config.docker_machine:
         return
 
     run('curl -sSL https://get.docker.com/ | sh')
     run('curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose')
     run('sudo apt-get install unrar')
-
-
-def dinghy_deps():
-    run('brew install docker docker-machine')
-    run('brew install docker-machine-nfs xhyve docker-machine-driver-xhyve')
-    run('brew tap codekitchen/dinghy')
-    run('brew install dinghy')
-    run('sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve')
-    run('sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve')
 
 
 def symfony_bin_deps():
@@ -50,18 +41,6 @@ def symfony_bin_deps():
     run('printf "\n" | pecl install imagick')
     run('printf "\n" | pecl install redis')
     run('echo $(brew --prefix rabbitmq-c) | pecl install amqp')
-
-
-def dinghy_install(force=False):
-    """
-    Install dinghy
-    """
-    result = run('which dinghy', warn=True)
-    if force or not result.ok:
-        dinghy_deps()
-    run('dinghy create --provider=xhyve --memory=4096 --cpus=8 --disk=60000')
-    # In case of error, consider using virtualbox but perf is lower
-    # run('dinghy create --provider=virtualbox --memory=4096 --cpus=8 --disk=60000')
 
 
 def symfony_bin_install(force=False):

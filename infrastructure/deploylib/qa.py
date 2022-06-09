@@ -130,16 +130,16 @@ def purge_rabbitmq():
 
 
 def save_es_snapshot():
-    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa" -H "Content-Type: application/json" --data "{\\\"type\\\":\\\"fs\\\",\\\"settings\\\":{\\\"location\\\":\\\"var\\\"}}"')
-    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XDELETE "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"')
-    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -XPUT "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true" -H "Content-Type: application/json" --data "{\\\"indices\\\": \\\"capco\\\"}"')
+    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa" -H "Content-Type: application/json" --data "{\\\"type\\\":\\\"fs\\\",\\\"settings\\\":{\\\"location\\\":\\\"var\\\"}}"')
+    run('docker exec capco_application_1 curl -i -XDELETE "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"')
+    run('docker exec capco_application_1 curl -XPUT "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true" -H "Content-Type: application/json" --data "{\\\"indices\\\": \\\"capco\\\"}"')
 
 
 def restore_es_snapshot():
-    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_close"')
-    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false,\\\"feature_states\\\":[\\\"geoip\\\"]}"')
-    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_open"')
-    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_aliases" -H "Content-Type: application/json" --data "{\\\"actions\\\":[{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco\\\"}}]}"')
+    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_close"')
+    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false,\\\"feature_states\\\":[\\\"geoip\\\"]}"')
+    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_open"')
+    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_aliases" -H "Content-Type: application/json" --data "{\\\"actions\\\":[{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco\\\"}}]}"')
 
 
 def behat(fast_failure='true', profile='false', suite='false', tags='false', timer='true'):
@@ -163,8 +163,6 @@ def behat(fast_failure='true', profile='false', suite='false', tags='false', tim
 def view(firefox='false'):
     if Config.docker_for_mac:
         run('echo "secret" | open vnc://localhost:5900')
-    elif Config.dinghy:
-        run('echo "secret" | open vnc://`docker-machine ip dinghy`')
     else:
         if firefox != 'false':
             run('echo "secret" | nohup vncviewer localhost:5901 &')
@@ -183,15 +181,9 @@ def kill_database_container():
 
 def blackfire_curl(url):
     "Blackfire curl"
-    if Config.dinghy:
-        run('eval "$(docker-machine env dinghy)" && docker exec -i capco_application_1 blackfire curl ' + url + '--insecure --env="Capco.Dev"')
-    else:
-        run('eval docker exec -u root -i capco_application_1 blackfire curl ' + url + '--insecure')
+    run('eval docker exec -u root -i capco_application_1 blackfire curl ' + url + '--insecure')
 
 
 def blackfire_run(cli):
     "Blackfire run"
-    if Config.dinghy:
-        run('eval "$(docker-machine env dinghy)" && docker exec -u root -i capco_application_1 blackfire run ' + cli + ' --env="Cap Collectif / Capco.Dev"')
-    else:
-        run('eval docker exec -u root -i capco_application_1 blackfire run ' + cli)
+    run('eval docker exec -u root -i capco_application_1 blackfire run ' + cli)
