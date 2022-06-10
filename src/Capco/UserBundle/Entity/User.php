@@ -134,7 +134,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     public function hydrate(array $data): self
     {
         foreach ($data as $key => $value) {
-            $setter = 'set' . ucfirst($key);
+            $setter = 'set'.ucfirst($key);
             if ('id' === $key) {
                 $this->id = $value;
 
@@ -158,7 +158,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     public function sanitizePhoneNumber(): void
     {
         if ($this->phone) {
-            $this->phone = '+' . preg_replace('/\D/', '', $this->phone);
+            $this->phone = '+'.preg_replace('/\D/', '', $this->phone);
         }
     }
 
@@ -996,8 +996,12 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
         return $this;
     }
 
-    public function hasOpenIdSession(string $openIdSID): bool
+    public function hasOpenIdSession(?string $openIdSID): bool
     {
+        if (!$openIdSID) {
+            return false;
+        }
+
         return isset($this->openIdSessionsId[$openIdSID]);
     }
 

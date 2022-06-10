@@ -119,6 +119,7 @@ class AnonymizeUser
         $user->setLocale(null);
         $user->setTimezone(null);
         $user->setLocked(true);
+        $user->setOpenIdSessionsId([]);
 
         if ($user->getMedia()) {
             try {

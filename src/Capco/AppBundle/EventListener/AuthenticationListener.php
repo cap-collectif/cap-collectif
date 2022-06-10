@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\UserConnection;
 use Capco\AppBundle\Service\OpenIDBackchannel;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\AuthenticationEvents;
@@ -18,15 +19,18 @@ class AuthenticationListener implements EventSubscriberInterface
     private RequestGuesser $requestGuesser;
     private EntityManagerInterface $em;
     private OpenIDBackchannel $openIDBackchannel;
+    private LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,
         RequestGuesser $requestGuesser,
-        OpenIDBackchannel $openIDBackchannel
+        OpenIDBackchannel $openIDBackchannel,
+        LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->requestGuesser = $requestGuesser;
         $this->openIDBackchannel = $openIDBackchannel;
+        $this->logger = $logger;
     }
 
     public function onAuthenticationFailure(AuthenticationFailureEvent $event): void
@@ -48,6 +52,7 @@ class AuthenticationListener implements EventSubscriberInterface
     {
         $request = $event->getRequest();
         $session = $request->getSession();
+
         // Authentication
         $authenticationToken = $event->getAuthenticationToken();
         $serialized = $authenticationToken->serialize();
@@ -65,7 +70,7 @@ class AuthenticationListener implements EventSubscriberInterface
             ->setIpAddress($this->requestGuesser->getClientIp())
             ->setNavigator($this->requestGuesser->getUserAgent());
 
-        if ($user instanceof User && $user->getOpenIdAccessToken()) {
+        if ($user instanceof User && $request->query->get('session_state')) {
             $this->setUserOpenIdSID($request, $user);
         }
         $this->em->persist($userConnection);
@@ -84,14 +89,16 @@ class AuthenticationListener implements EventSubscriberInterface
     private function setUserOpenIdSID(Request $request, User $user): void
     {
         $sessionId = $request->getSession()->getId();
-        $userInfo = OpenIDBackchannel::getUserInfoFromAccessToken($user->getOpenIdAccessToken());
-        if ($user->hasOpenIdSession($userInfo['sid'])) {
-            $this->openIDBackchannel->processToDeleteUserRedisSession(
-                $user,
-                $userInfo['sid'],
-                false
-            );
+        $openIdSid = $request->query->get('session_state');
+        if (empty($openIdSid)) {
+            $this->logger->error(__METHOD__ . ' : openId SID is required  - ' . var_export($openIdSid, true));
+
+            throw new \RuntimeException('openId SID is required');
         }
-        $user->addOpenIdSessionId($userInfo['sid'], $sessionId);
+
+        if ($user->hasOpenIdSession($openIdSid)) {
+            $this->openIDBackchannel->processToDeleteUserRedisSession($user, $openIdSid, false);
+        }
+        $user->addOpenIdSessionId($openIdSid, $sessionId);
     }
 }
