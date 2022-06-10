@@ -5,7 +5,7 @@ import { Modal, InfoMessage, Heading, CapUIModalSize } from '@cap-collectif/ui';
 import type { ModalSectionContributors_contributors$key } from '@relay/ModalSectionContributors_contributors.graphql';
 import type { ModalSectionContributors_anonymousContributors$key } from '@relay/ModalSectionContributors_anonymousContributors.graphql';
 import LineChart from '@ui/Charts/LineChart/LineChart';
-import formatValues from '~/components/Admin/Dashboard/Sections/formatValues';
+import formatValues from '../../formatValues';
 import ProjectPeriod from '../../ProjectPeriod';
 
 interface ModalSectionContributorsProps {
