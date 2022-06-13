@@ -137,7 +137,7 @@ InternalProposal:
             paperVotesTotalCount:
                 description: 'Count of paper votes of the proposal.'
                 type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStepPaperVoteTotalCountResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStepPaperVoteTotalCountResolver", [value, args, getUser()])'
                 args:
                     stepId:
                         type: 'ID'
@@ -145,7 +145,7 @@ InternalProposal:
             paperVotesTotalPointsCount:
                 description: 'Count of paper points of the proposal.'
                 type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStepPaperVoteTotalPointsCountResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStepPaperVoteTotalPointsCountResolver", [value, args, getUser()])'
                 args:
                     stepId:
                         type: 'ID'
