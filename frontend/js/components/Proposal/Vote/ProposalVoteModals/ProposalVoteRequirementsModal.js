@@ -147,7 +147,9 @@ export const onRequirementsSubmit = async (
       phone,
       firstname: data.FirstnameRequirement,
       lastname: data.LastnameRequirement,
-      dateOfBirth: moment(data.DateOfBirthRequirement).format(),
+      dateOfBirth: data.DateOfBirthRequirement
+        ? moment(data.DateOfBirthRequirement).format()
+        : undefined,
       userIdentificationCode: data.IdentificationCodeRequirement,
       postalAddress: data.realAddress ? JSON.stringify([data.realAddress]) : undefined,
     };
