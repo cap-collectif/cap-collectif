@@ -8,7 +8,7 @@ Array [
     aria-expanded={false}
     aria-haspopup="menu"
     aria-label="global.plus"
-    className="sc-bdvvtL bQMwa-d cap-buttonQuickAction cap-menu__disclosure"
+    className="sc-bdvvtL efRUHH cap-buttonQuickAction cap-menu__disclosure"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}

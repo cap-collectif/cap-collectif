@@ -94,7 +94,7 @@ Array [
       aria-expanded={false}
       aria-haspopup="dialog"
       aria-label="global.delete"
-      className="sc-bdvvtL fXnNUY cap-buttonQuickAction"
+      className="sc-bdvvtL jBnaym cap-buttonQuickAction"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}

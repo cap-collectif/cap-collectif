@@ -314,7 +314,7 @@ Array [
               aria-expanded={false}
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bdvvtL fBQcEv cap-buttonQuickAction cap-menu__disclosure"
+              className="sc-bdvvtL flFGQt cap-buttonQuickAction cap-menu__disclosure"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
@@ -592,7 +592,7 @@ Array [
               aria-expanded={false}
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bdvvtL fBQcEv cap-buttonQuickAction cap-menu__disclosure"
+              className="sc-bdvvtL flFGQt cap-buttonQuickAction cap-menu__disclosure"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
@@ -870,7 +870,7 @@ Array [
               aria-expanded={false}
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bdvvtL fBQcEv cap-buttonQuickAction cap-menu__disclosure"
+              className="sc-bdvvtL flFGQt cap-buttonQuickAction cap-menu__disclosure"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
@@ -1148,7 +1148,7 @@ Array [
               aria-expanded={false}
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bdvvtL fBQcEv cap-buttonQuickAction cap-menu__disclosure"
+              className="sc-bdvvtL flFGQt cap-buttonQuickAction cap-menu__disclosure"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
