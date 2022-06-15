@@ -102,6 +102,7 @@ const RequirementsForm = ({
       </Flex>
     );
   }
+
   return (
     <Flex direction="column" spacing={6} as="form">
       <Heading as="h4">{intl.formatMessage({ id: 'vote.modal.body.form.title' })}</Heading>
@@ -207,22 +208,22 @@ const RequirementsForm = ({
           }
 
           if (key === 'CheckboxRequirement') {
-            return (
+            return initialValues[key].map((checkboxRequirement, idx) => (
               <FormControl
-                name={`${key}.viewerMeetsTheRequirement`}
+                name={`${key}[${idx}].viewerMeetsTheRequirement`}
                 control={control}
                 isRequired
                 isDisabled={isSubmitting}>
                 <FieldInput
                   variantSize={CapInputSize.Md}
                   type="checkbox"
-                  name={`${key}.viewerMeetsTheRequirement`}
+                  name={`${key}[${idx}].viewerMeetsTheRequirement`}
                   control={control}
-                  defaultValue={initialValues[key]?.viewerMeetsTheRequirement}>
-                  {initialValues[key]?.label}
+                  defaultValue={checkboxRequirement.viewerMeetsTheRequirement}>
+                  {checkboxRequirement.label}
                 </FieldInput>
               </FormControl>
-            );
+            ));
           }
 
           if (key === 'PhoneVerifiedRequirement' || key === 'PhoneRequirement') {

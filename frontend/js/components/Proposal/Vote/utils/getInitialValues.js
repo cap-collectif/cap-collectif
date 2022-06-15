@@ -41,6 +41,7 @@ const getInitialValues = (
             IdentificationCodeRequirement: requirement.viewerValue ? requirement.viewerValue : '',
           };
         }
+
         if (requirement.__typename === 'PhoneRequirement') {
           if (!needToVerifyPhone) {
             return {
@@ -59,19 +60,25 @@ const getInitialValues = (
             },
           };
         }
+
         if (requirement.__typename === 'CheckboxRequirement') {
           return {
             ...acc,
-            [requirement.__typename]: {
-              viewerMeetsTheRequirement: requirement.viewerMeetsTheRequirement,
-              label: requirement.label,
-              id: requirement.id,
-            },
+            [requirement.__typename]: [
+              ...(acc[requirement.__typename] || []),
+              {
+                viewerMeetsTheRequirement: requirement.viewerMeetsTheRequirement,
+                label: requirement.label,
+                id: requirement.id,
+              },
+            ],
           };
         }
+
         if (requirement.__typename === 'PhoneVerifiedRequirement') {
           return acc;
         }
+
         return {
           ...acc,
           [requirement.__typename]: requirement.viewerValue,

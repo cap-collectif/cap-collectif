@@ -53,6 +53,12 @@ describe('getInitialValues', () => {
         viewerMeetsTheRequirement: true,
         label: 'Checkbox requirement',
       },
+      {
+        __typename: 'CheckboxRequirement',
+        id: 'UmVxdWlyZW1lbnQ6NTlZDgwMjTtZDllZS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
+        viewerMeetsTheRequirement: true,
+        label: 'Checkbox requirement',
+      },
     ];
     const value = getInitialValues(requirements, false, true, { phone: '0766509155' });
     const expected = {
@@ -65,11 +71,18 @@ describe('getInitialValues', () => {
       },
       DateOfBirthRequirement: null,
       PostalAddressRequirement: null,
-      CheckboxRequirement: {
-        viewerMeetsTheRequirement: true,
-        label: 'Checkbox requirement',
-        id: 'UmVxdWlyZW1lbnQ6NTliZDgwMjEtZDllZS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
-      },
+      CheckboxRequirement: [
+        {
+          viewerMeetsTheRequirement: true,
+          label: 'Checkbox requirement',
+          id: 'UmVxdWlyZW1lbnQ6NTliZDgwMjEtZDllZS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
+        },
+        {
+          viewerMeetsTheRequirement: true,
+          label: 'Checkbox requirement',
+          id: 'UmVxdWlyZW1lbnQ6NTlZDgwMjTtZDllZS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
+        }
+      ],
     };
     expect(value).toEqual(expected);
   });
@@ -124,11 +137,11 @@ describe('getInitialValues', () => {
       PhoneVerifiedRequirement: { CountryCode: '+33', phoneNumber: '0766509155' },
       DateOfBirthRequirement: null,
       PostalAddressRequirement: null,
-      CheckboxRequirement: {
+      CheckboxRequirement: [{
         viewerMeetsTheRequirement: true,
         label: 'Checkbox requirement',
         id: 'UmVxdWlyZW1lbnQ6NTliZDgwMjEtZDllZS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
-      },
+      }],
     };
     expect(value).toEqual(expected);
   });

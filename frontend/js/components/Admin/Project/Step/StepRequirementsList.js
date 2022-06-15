@@ -324,8 +324,11 @@ export function StepRequirementsList({
                                           }
                                         });
                                       }
-                                    } else if (requirement.type === 'PHONE') {
-                                      if (!requirement.checked) {
+                                    }
+
+                                    if (requirement.type === 'PHONE') {
+                                      // When PhoneRequirement is unchecked
+                                      if (requirement.checked) {
                                         onInputCheck(
                                           false,
                                           `requirements[${phoneVerifiedRequirementIndex}]`,

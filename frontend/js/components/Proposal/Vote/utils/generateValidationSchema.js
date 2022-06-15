@@ -20,11 +20,13 @@ const generateValidationSchema = (
       franceConnect_: yup.boolean().oneOf([true], intl.formatMessage({ id: 'global.required' })),
     }),
     ...('CheckboxRequirement' in initialValues && {
-      CheckboxRequirement: yup.object({
-        viewerMeetsTheRequirement: yup
-          .boolean()
-          .oneOf([true], intl.formatMessage({ id: 'global.required' })),
-      }),
+      CheckboxRequirement: yup.array().of(
+        yup.object({
+          viewerMeetsTheRequirement: yup
+            .boolean()
+            .oneOf([true], intl.formatMessage({ id: 'global.required' })),
+        }),
+      ),
     }),
     ...('PhoneVerifiedRequirement' in initialValues && {
       PhoneVerifiedRequirement: yup.object({

@@ -3,7 +3,6 @@ import React from 'react';
 import { Flex } from '@cap-collectif/ui';
 import type { IntlShape } from 'react-intl';
 import moment from 'moment';
-import { fetchQuery_DEPRECATED } from 'react-relay';
 import RequirementsForm from '~/components/Requirements/RequirementsForm';
 import UpdateProfilePersonalDataMutation from '~/mutations/UpdateProfilePersonalDataMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
@@ -13,10 +12,9 @@ import type { UpdateProfilePersonalDataMutationResponse } from '~/mutations/Upda
 import type { Uuid } from '~/types';
 import CheckIdentificationCodeMutation from '~/mutations/CheckIdentificationCodeMutation';
 import UpdateRequirementMutation from '~/mutations/UpdateRequirementMutation';
-import { refetchViewer } from '~/components/Requirements/RequirementsFormLegacy';
-import environment from '~/createRelayEnvironment';
 
 export const formName = 'vote-requirements-form';
+
 export type onRequirementsSubmitDataProps = {|
   +PhoneVerifiedRequirement?: {
     CountryCode: string,
@@ -68,7 +66,7 @@ export type onRequirementsSubmitDataProps = {|
     viewerMeetsTheRequirement: boolean,
     label: string,
     id: Uuid,
-  },
+  }[],
 |};
 
 const getPhone = (requirement: { CountryCode: string, phoneNumber: string }) => {
@@ -87,8 +85,6 @@ export const onRequirementsSubmit = async (
   setIsLoading: (value: boolean) => void,
   needToVerifyPhone: boolean,
   setError: any,
-  stepId: string,
-  isAuthenticated: boolean,
 ) => {
   if (data.IdentificationCodeRequirement && data.IdentificationCodeRequirement !== '') {
     try {
@@ -103,31 +99,27 @@ export const onRequirementsSubmit = async (
             id: CheckIdentificationCodeResponse.checkIdentificationCode.errorCode || '',
           }),
         });
-        return false;
+        return;
       }
     } catch (e) {
       mutationErrorToast(intl);
     }
   }
-  if (!!data.CheckboxRequirement && data.CheckboxRequirement.id) {
+
+  if (data.CheckboxRequirement && data.CheckboxRequirement.length > 0) {
     try {
-      const UpdateRequirementResponse = await UpdateRequirementMutation.commit({
-        input: {
-          requirement: data.CheckboxRequirement.id,
-          value: data.CheckboxRequirement.viewerMeetsTheRequirement,
-        },
+      const allCheckboxRequirementRequest = data.CheckboxRequirement.map(checkboxRequirement => {
+        return UpdateRequirementMutation.commit({
+          input: {
+            requirement: checkboxRequirement.id,
+            value: checkboxRequirement.viewerMeetsTheRequirement,
+          },
+        });
       });
-      if (
-        UpdateRequirementResponse.updateRequirement &&
-        UpdateRequirementResponse.updateRequirement.requirement
-      ) {
-        if (stepId) {
-          await fetchQuery_DEPRECATED(environment, refetchViewer, {
-            stepId,
-            isAuthenticated,
-          });
-        }
-      }
+
+      Promise.all(allCheckboxRequirementRequest).catch(() => {
+        mutationErrorToast(intl);
+      });
     } catch (e) {
       mutationErrorToast(intl);
     }

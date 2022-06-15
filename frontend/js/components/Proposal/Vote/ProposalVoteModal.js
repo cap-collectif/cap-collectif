@@ -387,7 +387,7 @@ export const ProposalVoteModal = ({
             </ResetCss>
             <MultiStepModal.ProgressBar />
 
-            <MultiStepModal.Body justify="center" minHeight="450px">
+            <MultiStepModal.Body>
               <ProposalVoteRequirementsModal
                 id="proposal-vote-requirement-modal"
                 label={intl.formatMessage({ id: 'requirements' })}
@@ -478,8 +478,6 @@ export const ProposalVoteModal = ({
                         setIsLoading,
                         hasPhoneRequirements,
                         requirementsForm.setError,
-                        step.id,
-                        isAuthenticated,
                       );
                     })(e);
                   } else if (currentStep === 1) {
