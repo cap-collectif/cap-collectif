@@ -100,10 +100,10 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
 
             // Some performance optimization:
             // We avoid getting a too wide time range by setting
-            // the start date to the project's publication date
+            // the start date to the project's creation date
             // if the given start date is smaller.
-            $projectPublicationDate = $project->getPublishedAt();
-            if ($projectPublicationDate && $start < $project->getPublishedAt()) {
+            $projectPublicationDate = $project->getCreatedAt();
+            if ($start < $projectPublicationDate) {
                 $start = $projectPublicationDate;
             }
         }
