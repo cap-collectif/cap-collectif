@@ -1,0 +1,73 @@
+import { FC } from 'react';
+import { Button, CapUIModalSize, Heading, Modal, Text, toast } from '@cap-collectif/ui';
+import { IntlShape, useIntl } from 'react-intl';
+
+import DeleteProjectDistrictMutation from '@mutations/DeleteProjectDistrictMutation';
+import { mutationErrorToast } from '@utils/mutation-error-toast';
+
+const deleteGeographicalArea = (id: string, intl: IntlShape): void => {
+    DeleteProjectDistrictMutation.commit({
+        input: { id },
+    }).then(response => {
+        if (!response?.deleteProjectDistrict?.deletedDistrictId) {
+            return mutationErrorToast(intl);
+        }
+        toast({
+            variant: 'success',
+            content: intl.formatMessage({ id: 'area-deleted' }),
+        });
+    });
+};
+
+type GeographicalAreaDeleteModalProps = {
+    show: boolean,
+    geographicalAreaId: string | null,
+    onClose: () => void,
+};
+
+const GeographicalAreaDeleteModal: FC<GeographicalAreaDeleteModalProps> = ({
+    show,
+    geographicalAreaId,
+    onClose,
+}) => {
+    const intl = useIntl();
+
+    if (!geographicalAreaId || !show) return null;
+
+    return (
+        <Modal
+            show={show}
+            onClose={onClose}
+            size={CapUIModalSize.Md}
+            ariaLabel={intl.formatMessage({ id: 'sure-to-delete-geo-area' })}>
+            <Modal.Header>
+                <Heading>{intl.formatMessage({ id: 'sure-to-delete-geo-area' })}</Heading>
+            </Modal.Header>
+            <Modal.Body>
+                <Text mt={1} mb={2}>
+                    {intl.formatMessage({ id: 'delete-geo-area-text' })}
+                </Text>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button
+                    onClick={onClose}
+                    variant="secondary"
+                    variantSize="big"
+                    variantColor="hierarchy">
+                    {intl.formatMessage({ id: 'cancel' })}
+                </Button>
+                <Button
+                    variantColor="danger"
+                    variantSize="big"
+                    onClick={() => {
+                        deleteGeographicalArea(geographicalAreaId, intl);
+                        onClose();
+                    }}>
+                    {intl.formatMessage({ id: 'action_delete' })}
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    );
+};
+
+export default GeographicalAreaDeleteModal;
