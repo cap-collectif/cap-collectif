@@ -48,6 +48,7 @@ class QuestionResponsesResolver implements ResolverInterface
         $term = $arguments['term'] ?? null;
         $sentimentFilter = $args->offsetGet('iaSentiment');
         $category = $arguments['iaCategory'] ?? null;
+        $starCrafter = $arguments['hasViewerStarred'] ? $viewer : null;
         $orderBy = self::getOrderBy($arguments);
 
         // Schema design is wrong but let's return empty connection for now…
@@ -62,6 +63,7 @@ class QuestionResponsesResolver implements ResolverInterface
             $term,
             $sentimentFilter,
             $category,
+            $starCrafter,
             $orderBy
         ) {
             try {
@@ -71,6 +73,7 @@ class QuestionResponsesResolver implements ResolverInterface
                     $term,
                     $sentimentFilter,
                     $category,
+                    $starCrafter,
                     $orderBy,
                     $limit,
                     $cursor

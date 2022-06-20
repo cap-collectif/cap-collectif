@@ -23,3 +23,5 @@ Capco\AppBundle\Entity\Responses\AbstractResponse:
         elasticsearchTypeName:
             serialized_name: objectType
             groups: [ElasticsearchResponse]
+        starCrafters:
+            groups: [Proposals, Replies, ElasticsearchResponse]

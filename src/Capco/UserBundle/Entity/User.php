@@ -109,6 +109,8 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
 
     private Collection $userPhoneVerificationSms;
 
+    private Collection $starredResponses;
+
     public function __construct()
     {
         parent::__construct();
@@ -129,6 +131,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
         $this->archives = new ArrayCollection();
         $this->supervisedProposals = new ArrayCollection();
         $this->userPhoneVerificationSms = new ArrayCollection();
+        $this->starredResponses = new ArrayCollection();
     }
 
     public function hydrate(array $data): self
@@ -1029,6 +1032,30 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
             $sessions = array_flip($this->openIdSessionsId);
             $openIdSessionId = $sessions[$session];
             $this->removeOpenIdSession($openIdSessionId);
+        }
+
+        return $this;
+    }
+
+    public function getStarredResponses(): Collection
+    {
+        return $this->starredResponses;
+    }
+
+    public function addStarredResponse(AbstractResponse $response): self
+    {
+        if (!$this->starredResponses->contains($response)) {
+            $this->starredResponses[] = $response;
+            $response->addStarCrafter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStarredResponse(AbstractResponse $response): self
+    {
+        if ($this->starredResponses->removeElement($response)) {
+            $response->removeStarCrafter($this);
         }
 
         return $this;

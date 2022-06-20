@@ -11,3 +11,8 @@ InternalResponse:
             question:
                 type: 'InternalQuestion!'
                 description: 'Identifies the question of the response.'
+            hasViewerStarred:
+                type: 'Boolean!'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                description: 'True if the viewer has starred the response.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\HasViewerStarredResolver", [value, getUser()])'

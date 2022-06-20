@@ -6911,6 +6911,9 @@ type MajorityQuestion implements Question & Node {
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
 
+    """If true, get only responses starred by viewer."""
+    hasViewerStarred: Boolean = false
+
     """Ordering options for responses."""
     orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
@@ -7121,6 +7124,9 @@ type MediaQuestion implements Question & Node {
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
 
+    """If true, get only responses starred by viewer."""
+    hasViewerStarred: Boolean = false
+
     """Ordering options for responses."""
     orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
@@ -7183,6 +7189,9 @@ type MediaResponse implements Response {
   """Identifies the question of the response."""
   question: Question!
 
+  """True if the viewer has starred the response."""
+  hasViewerStarred: Boolean!
+
   """Medias"""
   medias: [Media!]!
 }
@@ -7216,6 +7225,9 @@ type MultipleChoiceQuestion implements Question & Node {
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
+
+    """If true, get only responses starred by viewer."""
+    hasViewerStarred: Boolean = false
 
     """Ordering options for responses."""
     orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
@@ -7623,6 +7635,8 @@ type Mutation {
   updatePaperVote(input: UpdatePaperVoteInput!): UpdatePaperVotePayload
   updateProjectSlug(input: UpdateProjectSlugInput!): UpdateProjectSlugPayload
   updateCivicIA(input: UpdateCivicIAInput!): UpdateCivicIAPayload
+  starResponse(input: StarResponseInput!): StarResponsePayload
+  unstarResponse(input: UnstarResponseInput!): UnstarResponsePayload
 }
 
 """A connection to a list of items."""
@@ -11517,6 +11531,9 @@ interface Question {
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
 
+    """If true, get only responses starred by viewer."""
+    hasViewerStarred: Boolean = false
+
     """Ordering options for responses."""
     orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
@@ -12921,6 +12938,9 @@ interface Response {
 
   """Identifies the question of the response."""
   question: Question!
+
+  """True if the viewer has starred the response."""
+  hasViewerStarred: Boolean!
 }
 
 """A connection to a list of items."""
@@ -13215,6 +13235,9 @@ type SectionQuestion implements Question & Node {
 
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
+
+    """If true, get only responses starred by viewer."""
+    hasViewerStarred: Boolean = false
 
     """Ordering options for responses."""
     orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
@@ -13801,6 +13824,9 @@ type SimpleQuestion implements Question & Node {
     """Get responses matching given sentiment."""
     iaSentiment: CivicIASentiment = null
 
+    """If true, get only responses starred by viewer."""
+    hasViewerStarred: Boolean = false
+
     """Ordering options for responses."""
     orderBy: ResponsesOrder = {field: CREATED_AT, direction: DESC}
   ): ResponseConnection!
@@ -14264,6 +14290,30 @@ interface Sourceable {
   availableSourceCategories: [SourceCategory]
 }
 
+"""Available errors for a `starResponse` mutation."""
+enum StarResponseError {
+  """No response match your id."""
+  RESPONSE_NOT_FOUND
+
+  """Viewer has already starred the response."""
+  ALREADY_STARRED
+}
+
+input StarResponseInput {
+  """Id of the response to star."""
+  responseId: ID!
+  clientMutationId: String
+}
+
+type StarResponsePayload {
+  """The response starred."""
+  response: Response
+
+  """An unsuccessful mutation will return an error message."""
+  error: StarResponseError
+  clientMutationId: String
+}
+
 """A step inside a project."""
 interface Step {
   """When the time interval begins or ends."""
@@ -14697,6 +14747,30 @@ input UnselectProposalInput {
 
 type UnselectProposalPayload {
   proposal: Proposal!
+  clientMutationId: String
+}
+
+"""Available errors for a `unstarResponse` mutation."""
+enum UnstarResponseError {
+  """No response match your id."""
+  RESPONSE_NOT_FOUND
+
+  """Viewer has not starred the response."""
+  NOT_STARRED
+}
+
+input UnstarResponseInput {
+  """Id of the response to unstar."""
+  responseId: ID!
+  clientMutationId: String
+}
+
+type UnstarResponsePayload {
+  """The response unstarred."""
+  response: Response
+
+  """An unsuccessful mutation will return an error message."""
+  error: UnstarResponseError
   clientMutationId: String
 }
 
@@ -17263,6 +17337,9 @@ type ValueResponse implements Response & CivicIAAnalyzable & Node {
 
   """The question."""
   question: Question!
+
+  """True if the viewer has starred the response."""
+  hasViewerStarred: Boolean!
 
   """The response value which can be a string or a JSON."""
   value: String

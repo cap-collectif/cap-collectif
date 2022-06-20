@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Capco\UserBundle\Entity\User;
 use Elastica\Aggregation\AbstractTermsAggregation;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\Terms;
@@ -79,6 +80,7 @@ class ResponseSearch extends Search
         ?string $term = null,
         ?string $sentimentFilter = null,
         ?string $category = null,
+        ?User $starCrafter = null,
         array $orderBy = ['createdAt' => ['order' => 'desc']],
         int $limit = 20,
         ?string $cursor = null
@@ -109,6 +111,10 @@ class ResponseSearch extends Search
                     ->setFieldQuery('iaCategory', Sanitizer::escape($category, [' ']))
                     ->setFieldOperator('iaCategory', Query\Match::OPERATOR_AND)
             );
+        }
+
+        if ($starCrafter) {
+            $boolQuery->addFilter(new Term(['starCrafters.id' => ['value' => $starCrafter->getId()]]));
         }
 
         $query = new Query($boolQuery);

@@ -187,6 +187,7 @@
             <join-column name="user_identification_code" referenced-column-name="identification_code" on-delete="SET NULL"/>
         </one-to-one>
         <one-to-many field="userPhoneVerificationSms" target-entity="Capco\AppBundle\Entity\UserPhoneVerificationSms" mapped-by="user" />
+        <many-to-many field="starredResponses" target-entity="Capco\AppBundle\Entity\Responses\AbstractResponse" mapped-by="starCrafters" />
     </entity>
 
 </doctrine-mapping>

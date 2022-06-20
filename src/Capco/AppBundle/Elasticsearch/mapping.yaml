@@ -344,6 +344,7 @@ mappings:
         iaSentiment: { type: text }
         iaReadability: { type: byte }
         iaCategory: { type: keyword }
+        starCrafters: *Author
         responses:
             type: nested
             properties:

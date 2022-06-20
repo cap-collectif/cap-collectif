@@ -1,0 +1,10 @@
+UnstarResponsePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            response:
+                type: 'InternalResponse'
+                description: 'The response unstarred.'
+            error:
+                type: 'UnstarResponseError'
+                description: 'An unsuccessful mutation will return an error message.'

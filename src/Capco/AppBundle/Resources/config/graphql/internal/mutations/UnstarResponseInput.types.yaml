@@ -1,0 +1,8 @@
+UnstarResponseInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of unstarResponse mutation.'
+        fields:
+            responseId:
+                type: 'ID!'
+                description: 'Id of the response to unstar.'

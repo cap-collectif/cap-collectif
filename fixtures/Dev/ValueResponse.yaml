@@ -908,6 +908,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         createdAt: <(new \DateTime('2021-01-01 04:24:00'))>
         iaCategory: 'literacy'
         iaSentiment: 'NEUTRAL'
+        starCrafters: ['@userTheo', '@user4']
     responseTagCloud24:
         question: '@xQuestion1'
         reply: '@replyTagCloud12'

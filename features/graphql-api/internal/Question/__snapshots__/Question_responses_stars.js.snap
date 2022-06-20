@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Question.stars fail to get stars if not project admin 1`] = `
+Object {
+  "question": Object {
+    "responses": Object {
+      "edges": Array [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Question.stars fail to star a response already starred 1`] = `
+Object {
+  "starResponse": Object {
+    "error": "ALREADY_STARRED",
+    "response": null,
+  },
+}
+`;
+
+exports[`Internal|Question.stars fail to star a response on wrong id 1`] = `
+Object {
+  "starResponse": Object {
+    "error": "RESPONSE_NOT_FOUND",
+    "response": null,
+  },
+}
+`;
+
+exports[`Internal|Question.stars fail to unstar a response not previously starred 1`] = `
+Object {
+  "unstarResponse": Object {
+    "error": "NOT_STARRED",
+    "response": null,
+  },
+}
+`;
+
+exports[`Internal|Question.stars fail to unstar a response on wrong id 1`] = `
+Object {
+  "unstarResponse": Object {
+    "error": "RESPONSE_NOT_FOUND",
+    "response": null,
+  },
+}
+`;
+
+exports[`Internal|Question.stars get stars on responses 1`] = `
+Object {
+  "question": Object {
+    "responses": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "hasViewerStarred": false,
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Question.stars star a response 1`] = `
+Object {
+  "starResponse": Object {
+    "error": null,
+    "response": Object {
+      "hasViewerStarred": true,
+    },
+  },
+}
+`;
+
+exports[`Internal|Question.stars unstar a response 1`] = `
+Object {
+  "unstarResponse": Object {
+    "error": null,
+    "response": Object {
+      "hasViewerStarred": false,
+    },
+  },
+}
+`;

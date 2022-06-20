@@ -14,6 +14,8 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -51,43 +53,43 @@ abstract class AbstractResponse implements IndexableInterface
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    protected $updatedAt;
+    protected ?\DateTime $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $proposal;
+    private ?Proposal $proposal;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $user;
+    private ?User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Reply", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="reply_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $reply;
+    private ?Reply $reply;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ReplyAnonymous", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="reply_anonymous_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $replyAnonymous;
+    private ?ReplyAnonymous $replyAnonymous;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $proposalEvaluation;
+    private ?ProposalEvaluation $proposalEvaluation;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="analysis_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $analysis;
+    private ?ProposalAnalysis $analysis;
 
     /**
      * @Assert\NotNull()
@@ -97,7 +99,21 @@ abstract class AbstractResponse implements IndexableInterface
      * )
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
-    private $question;
+    private AbstractQuestion $question;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="starredResponses")
+     * @ORM\JoinTable(name="response_stars",
+     *      joinColumns={@ORM\JoinColumn(name="response_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     * )
+     */
+    private Collection $starCrafters;
+
+    public function __construct()
+    {
+        $this->starCrafters = new ArrayCollection();
+    }
 
     abstract public function getType();
 
@@ -133,7 +149,7 @@ abstract class AbstractResponse implements IndexableInterface
         return $this->question;
     }
 
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->question->getPosition();
     }
@@ -178,7 +194,7 @@ abstract class AbstractResponse implements IndexableInterface
         return $this;
     }
 
-    public function getProposalEvaluation()
+    public function getProposalEvaluation(): ?ProposalEvaluation
     {
         return $this->proposalEvaluation;
     }
@@ -205,7 +221,7 @@ abstract class AbstractResponse implements IndexableInterface
     /**
      * @ORM\PostUpdate()
      */
-    public function updateProposalTimestamp()
+    public function updateProposalTimestamp(): void
     {
         if ($this->getUpdatedAt() && $this->getProposal()) {
             $this->getProposal()->setUpdatedAt(new \DateTime());
@@ -238,5 +254,26 @@ abstract class AbstractResponse implements IndexableInterface
             'ElasticsearchResponseNestedReply',
             'ElasticsearchResponseNestedQuestion',
         ];
+    }
+
+    public function getStarCrafters(): Collection
+    {
+        return $this->starCrafters;
+    }
+
+    public function addStarCrafter(User $starCrafter): self
+    {
+        if (!$this->starCrafters->contains($starCrafter)) {
+            $this->starCrafters[] = $starCrafter;
+        }
+
+        return $this;
+    }
+
+    public function removeStarCrafter(User $starCrafter): self
+    {
+        $this->starCrafters->removeElement($starCrafter);
+
+        return $this;
     }
 }

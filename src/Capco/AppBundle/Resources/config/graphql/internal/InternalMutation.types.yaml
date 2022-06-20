@@ -1531,3 +1531,17 @@ InternalMutation:
                     inputType: UpdateCivicIAInput
                     payloadType: UpdateCivicIAPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCivicIAMutation", [value, getUser()])'
+            starResponse:
+                access: '@=hasRole("ROLE_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: StarResponseInput
+                    payloadType: StarResponsePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\StarResponseMutation", [value, getUser()])'
+            unstarResponse:
+                access: '@=hasRole("ROLE_ADMIN")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UnstarResponseInput
+                    payloadType: UnstarResponsePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnstarResponseMutation", [value, getUser()])'

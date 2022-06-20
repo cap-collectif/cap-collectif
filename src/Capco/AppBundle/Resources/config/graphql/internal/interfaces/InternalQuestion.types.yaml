@@ -26,6 +26,10 @@ InternalQuestion:
                         type: 'CivicIASentiment'
                         defaultValue: null
                         description: 'Get responses matching given sentiment.'
+                    hasViewerStarred:
+                        type: 'Boolean'
+                        defaultValue: false
+                        description: 'If true, get only responses starred by viewer.'
                     orderBy:
                         type: 'ResponsesOrder'
                         defaultValue: { field: CREATED_AT, direction: DESC }
