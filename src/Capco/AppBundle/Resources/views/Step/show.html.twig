@@ -22,20 +22,14 @@
 {% block jumbotron %}{% endblock %}
 
 {% block details %}
-    <h2 class="h2">{{ currentStep.title }}</h2>
-    {% if currentStep.startAt %}
-        <div class="mb-30 project__step-dates">
-            <i class="cap cap-calendar-2-1"></i>
-            {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': currentStep} only %}
-        </div>
-    {% endif %}
-    <div class="block">
-        <div class="ql-editor wysiwyg-render">
-            {{ currentStep.body | raw }}
-        </div>
-    </div>
+     {{ react_render_component('ProjectStepPageApp', { 'props': { 
+        'projectSlug': project.slug,
+        'projectId': project.id|toGlobalId('Project'),
+        'stepId': currentStep.id|toGlobalId('OtherStep'),
+        'currentStepType': currentStep.getType(),
+    } }) }}
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    {% if currentStep.customCode is defined and currentStep.customCode != '' %}{{ currentStep.customCode | raw }}{% endif %}
+    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
 {% endblock %}

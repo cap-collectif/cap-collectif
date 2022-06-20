@@ -7,7 +7,14 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
   <div>
     <ProposalPageHeader__HeaderActions>
       <Link
-        to="/step"
+        to={
+          Object {
+            "pathname": "/step",
+            "state": Object {
+              "stepId": undefined,
+            },
+          }
+        }
       >
         <Icon
           color="#0388cc"
@@ -74,8 +81,6 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
-      hasVotableStep={true}
-      opinionCanBeFollowed={true}
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -121,7 +126,14 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
   <div>
     <ProposalPageHeader__HeaderActions>
       <Link
-        to="/step"
+        to={
+          Object {
+            "pathname": "/step",
+            "state": Object {
+              "stepId": undefined,
+            },
+          }
+        }
       >
         <Icon
           color="#0388cc"
@@ -184,8 +196,6 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
-      hasVotableStep={true}
-      opinionCanBeFollowed={true}
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -241,7 +251,14 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
   <div>
     <ProposalPageHeader__HeaderActions>
       <Link
-        to="/step"
+        to={
+          Object {
+            "pathname": "/step",
+            "state": Object {
+              "stepId": undefined,
+            },
+          }
+        }
       >
         <Icon
           color="#0388cc"
@@ -316,8 +333,6 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
-      hasVotableStep={true}
-      opinionCanBeFollowed={true}
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -373,7 +388,14 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
   <div>
     <ProposalPageHeader__HeaderActions>
       <Link
-        to="/step"
+        to={
+          Object {
+            "pathname": "/step",
+            "state": Object {
+              "stepId": undefined,
+            },
+          }
+        }
       >
         <Icon
           color="#0388cc"
@@ -440,8 +462,6 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
-      hasVotableStep={true}
-      opinionCanBeFollowed={true}
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -487,7 +507,14 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
   <div>
     <ProposalPageHeader__HeaderActions>
       <Link
-        to="/step"
+        to={
+          Object {
+            "pathname": "/step",
+            "state": Object {
+              "stepId": undefined,
+            },
+          }
+        }
       >
         <Icon
           color="#0388cc"
@@ -554,8 +581,6 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
-      hasVotableStep={true}
-      opinionCanBeFollowed={true}
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -601,7 +626,14 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
   <div>
     <ProposalPageHeader__HeaderActions>
       <Link
-        to="/step"
+        to={
+          Object {
+            "pathname": "/step",
+            "state": Object {
+              "stepId": undefined,
+            },
+          }
+        }
       >
         <Icon
           color="#0388cc"
@@ -668,8 +700,6 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
       </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
-      hasVotableStep={true}
-      opinionCanBeFollowed={true}
       proposal={
         Object {
           "$fragmentRefs": null,

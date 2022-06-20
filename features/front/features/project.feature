@@ -142,11 +142,9 @@ Scenario: Restricted project should display in projects list
 Scenario: Presentation step should display correct number of element
   Given feature "calendar" is enabled
   And feature "blog" is enabled
-  And I visited "consultation page" with:
-    | projectSlug | croissance-innovation-disruption |
-    | stepSlug    | collecte-des-avis                |
-  And I follow "Présentation"
-  Then I should see 1 ".media--news" elements
+  And I go to "/project/croissance-innovation-disruption/presentation/presentation-1"
+  And I wait 10 seconds
+  Then I should see 2 ".media--news" elements
   And I wait "#PresentationStepEvents" to appear on current page
   And I should see 4 ".eventPreview" elements
 
@@ -321,7 +319,7 @@ Scenario: User wants to evaluate a project proposal analysis immediately
   And I wait "#step_now" to appear on current page
   Then I click on button "#step_now"
   And I click on button "#analysis-configuration-submit"
-  When I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quassociation-avec-siret"
+  When I go to "/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quassociation-avec-siret"
   And I wait "#proposal_analysis_decision" to appear on current page
   Then I should not see ".proposal__last__news__title"
   When I click the ".edit-analysis-icon" element
@@ -344,7 +342,7 @@ Scenario: User wants to assess a project proposal analysis immediately
   And I wait "#step_now" to appear on current page
   Then I click on button "#step_now"
   And I click on button "#analysis-configuration-submit"
-  When I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quorganisme-public"
+  When I go to "/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quorganisme-public"
   And I wait "#proposal_analysis_assessment" to appear on current page
   When I click the ".edit-analysis-icon" element
   And I fill in the following:
@@ -363,7 +361,7 @@ Scenario: User wants to analyse a project proposal analysis immediately
   And I am logged in as Agui
   And I close the old browser banner
   And I click on button "#cookie-consent"
-  When I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quorganisme-public"
+  When I go to "/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quorganisme-public"
   And I wait "#proposal_analysis_analyses" to appear on current page
   When I click the ".edit-analysis-icon" element
   And I fill the element "#proposal-analysis-form-responses10" with value 42
@@ -379,5 +377,5 @@ Scenario: User wants to analyse a project proposal analysis immediately
 @database
 Scenario: Can not see the analysis panel when not logged in
   Given feature "unstable__analysis" is enabled
-  And I go to "/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/test-de-publication-avec-accuse-de-reception"
+  And I go to "/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/test-de-publication-avec-accuse-de-reception"
   Then I should not see "#proposal_analysis_panel"

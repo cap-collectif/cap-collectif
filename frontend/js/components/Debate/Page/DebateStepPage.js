@@ -2,29 +2,38 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
+import { useLocation } from 'react-router-dom';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import type { State } from '~/types';
 import type { DebateStepPageQueryResponse } from '~relay/DebateStepPageQuery.graphql';
-import type { DebateType } from '~relay/DebateStepPageLogic_query.graphql';
 import DebateStepPageLogic from './DebateStepPageLogic';
 import { DebateStepPageContext } from './DebateStepPage.context';
 import useIsMobile from '~/utils/hooks/useIsMobile';
+import './main.css';
 
 export type Props = {|
   +stepId: string,
-  +title: string,
   +fromWidget: boolean,
-  +widgetLocation: string,
-  +debateType: DebateType,
+  +widgetLocation?: string,
+  // TODO : type react router
+  +location?: any,
 |};
+
+export const DebateStepPageWithRouter = (props: Props): React.Node => {
+  const location = useLocation();
+  return <DebateStepPage {...props} location={location} />;
+};
 
 export const DebateStepPage = ({
   stepId,
-  title,
   fromWidget,
   widgetLocation,
-  debateType,
+  location,
 }: Props): React.Node => {
+  let routerState = null;
+
+  if (!fromWidget && location) routerState = location.state;
+
   const isMobile = useIsMobile();
 
   const isAuthenticated = useSelector((state: State) => state.user.user !== null);
@@ -36,29 +45,18 @@ export const DebateStepPage = ({
         location: widgetLocation,
       },
       stepClosed: true,
-      title,
     }),
-    [title, fromWidget, widgetLocation],
+    [fromWidget, widgetLocation],
   );
-  const isDebateFaceToFace = debateType === 'FACE_TO_FACE';
 
   return (
     <QueryRenderer
+      fetchPolicy="store-and-network"
       environment={environment}
       query={graphql`
-        query DebateStepPageQuery(
-          $stepId: ID!
-          $isAuthenticated: Boolean!
-          $isMobile: Boolean!
-          $isDebateFaceToFace: Boolean!
-        ) {
+        query DebateStepPageQuery($stepId: ID!, $isAuthenticated: Boolean!, $isMobile: Boolean!) {
           ...DebateStepPageLogic_query
-            @arguments(
-              stepId: $stepId
-              isAuthenticated: $isAuthenticated
-              isMobile: $isMobile
-              isDebateFaceToFace: $isDebateFaceToFace
-            )
+            @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, isMobile: $isMobile)
           step: node(id: $stepId) {
             ... on Step {
               timeRange {
@@ -69,10 +67,9 @@ export const DebateStepPage = ({
         }
       `}
       variables={{
-        stepId,
+        stepId: routerState?.stepId || stepId,
         isAuthenticated,
         isMobile,
-        isDebateFaceToFace,
       }}
       render={({
         error,

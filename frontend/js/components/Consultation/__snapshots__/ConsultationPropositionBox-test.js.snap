@@ -6,6 +6,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
 >
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
+    fetchPolicy="store-and-network"
     query={
       Object {
         "fragment": Object {
@@ -25,11 +26,6 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isMultiConsultation",
             },
           ],
           "kind": "Fragment",
@@ -51,6 +47,38 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
               "plural": false,
               "selections": Array [
                 Object {
+                  "abstractKey": null,
+                  "kind": "InlineFragment",
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "state",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "TimeRange",
+                      "kind": "LinkedField",
+                      "name": "timeRange",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "startAt",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                  ],
+                  "type": "ConsultationStep",
+                },
+                Object {
                   "args": Array [
                     Object {
                       "kind": "Variable",
@@ -62,11 +90,6 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                       "name": "exceptStepId",
                       "variableName": "consultationStepId",
                     },
-                    Object {
-                      "kind": "Variable",
-                      "name": "isMultiConsultation",
-                      "variableName": "isMultiConsultation",
-                    },
                   ],
                   "kind": "FragmentSpread",
                   "name": "ConsultationPropositionStep_consultationStep",
@@ -77,7 +100,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "72f327a3746f5b6b41e6627c72718bec",
+        "hash": "5a6ae4e6b247e4a375a979b8343e2ff2",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -95,11 +118,6 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isMultiConsultation",
             },
           ],
           "kind": "Operation",
@@ -141,7 +159,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "body",
+                      "name": "state",
                       "storageKey": null,
                     },
                     Object {
@@ -173,14 +191,14 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "title",
+                      "name": "body",
                       "storageKey": null,
                     },
                     Object {
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "state",
+                      "name": "title",
                       "storageKey": null,
                     },
                     Object {
@@ -214,30 +232,40 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "condition": "isMultiConsultation",
-                          "kind": "Condition",
-                          "passingValue": true,
+                          "concreteType": "User",
+                          "kind": "LinkedField",
+                          "name": "authors",
+                          "plural": true,
                           "selections": Array [
                             Object {
                               "alias": null,
                               "args": null,
-                              "concreteType": "User",
+                              "kind": "ScalarField",
+                              "name": "username",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Media",
                               "kind": "LinkedField",
-                              "name": "authors",
-                              "plural": true,
+                              "name": "media",
+                              "plural": false,
                               "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "username",
-                                  "storageKey": null,
-                                },
                                 Object {
                                   "alias": null,
                                   "args": null,
@@ -252,35 +280,18 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                   "name": "id",
                                   "storageKey": null,
                                 },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "Media",
-                                  "kind": "LinkedField",
-                                  "name": "media",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "url",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
                               ],
                               "storageKey": null,
                             },
                           ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
                         },
                       ],
                       "storageKey": null,
@@ -2383,6 +2394,24 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                       ],
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ConsultationConnection",
+                      "kind": "LinkedField",
+                      "name": "consultations",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalCount",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
                   ],
                   "type": "ConsultationStep",
                 },
@@ -2392,7 +2421,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "cec923081dfeba61900ba084487326c4",
+          "cacheID": "487fd8fa9cfb3c530c9a8bc13a32261d",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2401,11 +2430,16 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
   $consultationStepId: ID!
   $consultationSlug: String!
   $isAuthenticated: Boolean!
-  $isMultiConsultation: Boolean!
 ) {
   consultationStep: node(id: $consultationStepId) {
     __typename
-    ...ConsultationPropositionStep_consultationStep_3ZYpgI
+    ... on ConsultationStep {
+      state
+      timeRange {
+        startAt
+      }
+    }
+    ...ConsultationPropositionStep_consultationStep_WRRkS
     id
   }
 }
@@ -2440,7 +2474,7 @@ fragment ConsultationPlan_consultation on Consultation {
   }
 }
 
-fragment ConsultationPropositionStep_consultationStep_3ZYpgI on ConsultationStep {
+fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep {
   body
   id
   timeRange {
@@ -2452,7 +2486,7 @@ fragment ConsultationPropositionStep_consultationStep_3ZYpgI on ConsultationStep
   timeless
   project {
     hasParticipativeStep(exceptStepId: $consultationStepId)
-    authors @include(if: $isMultiConsultation) {
+    authors {
       username
       url
       ...UserAvatarList_users
@@ -2484,6 +2518,9 @@ fragment ConsultationPropositionStep_consultationStep_3ZYpgI on ConsultationStep
     ...ConsultationPlan_consultation
     ...SectionRecursiveList_consultation_39ngnn
     id
+  }
+  consultations {
+    totalCount
   }
 }
 
@@ -2867,7 +2904,6 @@ fragment UserLink_user on User {
         "consultationSlug": "consultationSlug",
         "consultationStepId": "stepId",
         "isAuthenticated": false,
-        "isMultiConsultation": false,
       }
     }
   />
@@ -2880,6 +2916,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
 >
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
+    fetchPolicy="store-and-network"
     query={
       Object {
         "fragment": Object {
@@ -2899,11 +2936,6 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isMultiConsultation",
             },
           ],
           "kind": "Fragment",
@@ -2925,6 +2957,38 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
               "plural": false,
               "selections": Array [
                 Object {
+                  "abstractKey": null,
+                  "kind": "InlineFragment",
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "state",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "TimeRange",
+                      "kind": "LinkedField",
+                      "name": "timeRange",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "startAt",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                  ],
+                  "type": "ConsultationStep",
+                },
+                Object {
                   "args": Array [
                     Object {
                       "kind": "Variable",
@@ -2936,11 +3000,6 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                       "name": "exceptStepId",
                       "variableName": "consultationStepId",
                     },
-                    Object {
-                      "kind": "Variable",
-                      "name": "isMultiConsultation",
-                      "variableName": "isMultiConsultation",
-                    },
                   ],
                   "kind": "FragmentSpread",
                   "name": "ConsultationPropositionStep_consultationStep",
@@ -2951,7 +3010,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "72f327a3746f5b6b41e6627c72718bec",
+        "hash": "5a6ae4e6b247e4a375a979b8343e2ff2",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -2969,11 +3028,6 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isMultiConsultation",
             },
           ],
           "kind": "Operation",
@@ -3015,7 +3069,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "body",
+                      "name": "state",
                       "storageKey": null,
                     },
                     Object {
@@ -3047,14 +3101,14 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "title",
+                      "name": "body",
                       "storageKey": null,
                     },
                     Object {
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "state",
+                      "name": "title",
                       "storageKey": null,
                     },
                     Object {
@@ -3088,30 +3142,40 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "condition": "isMultiConsultation",
-                          "kind": "Condition",
-                          "passingValue": true,
+                          "concreteType": "User",
+                          "kind": "LinkedField",
+                          "name": "authors",
+                          "plural": true,
                           "selections": Array [
                             Object {
                               "alias": null,
                               "args": null,
-                              "concreteType": "User",
+                              "kind": "ScalarField",
+                              "name": "username",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Media",
                               "kind": "LinkedField",
-                              "name": "authors",
-                              "plural": true,
+                              "name": "media",
+                              "plural": false,
                               "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "username",
-                                  "storageKey": null,
-                                },
                                 Object {
                                   "alias": null,
                                   "args": null,
@@ -3126,35 +3190,18 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                   "name": "id",
                                   "storageKey": null,
                                 },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "Media",
-                                  "kind": "LinkedField",
-                                  "name": "media",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "url",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
                               ],
                               "storageKey": null,
                             },
                           ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
                         },
                       ],
                       "storageKey": null,
@@ -5257,6 +5304,24 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                       ],
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ConsultationConnection",
+                      "kind": "LinkedField",
+                      "name": "consultations",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalCount",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
                   ],
                   "type": "ConsultationStep",
                 },
@@ -5266,7 +5331,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "cec923081dfeba61900ba084487326c4",
+          "cacheID": "487fd8fa9cfb3c530c9a8bc13a32261d",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5275,11 +5340,16 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
   $consultationStepId: ID!
   $consultationSlug: String!
   $isAuthenticated: Boolean!
-  $isMultiConsultation: Boolean!
 ) {
   consultationStep: node(id: $consultationStepId) {
     __typename
-    ...ConsultationPropositionStep_consultationStep_3ZYpgI
+    ... on ConsultationStep {
+      state
+      timeRange {
+        startAt
+      }
+    }
+    ...ConsultationPropositionStep_consultationStep_WRRkS
     id
   }
 }
@@ -5314,7 +5384,7 @@ fragment ConsultationPlan_consultation on Consultation {
   }
 }
 
-fragment ConsultationPropositionStep_consultationStep_3ZYpgI on ConsultationStep {
+fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep {
   body
   id
   timeRange {
@@ -5326,7 +5396,7 @@ fragment ConsultationPropositionStep_consultationStep_3ZYpgI on ConsultationStep
   timeless
   project {
     hasParticipativeStep(exceptStepId: $consultationStepId)
-    authors @include(if: $isMultiConsultation) {
+    authors {
       username
       url
       ...UserAvatarList_users
@@ -5358,6 +5428,9 @@ fragment ConsultationPropositionStep_consultationStep_3ZYpgI on ConsultationStep
     ...ConsultationPlan_consultation
     ...SectionRecursiveList_consultation_39ngnn
     id
+  }
+  consultations {
+    totalCount
   }
 }
 
@@ -5741,7 +5814,6 @@ fragment UserLink_user on User {
         "consultationSlug": "consultationSlug",
         "consultationStepId": "stepId",
         "isAuthenticated": false,
-        "isMultiConsultation": false,
       }
     }
   />

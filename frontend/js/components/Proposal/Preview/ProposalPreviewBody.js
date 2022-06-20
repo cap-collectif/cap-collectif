@@ -43,6 +43,7 @@ const renderProposalTitle = (
         state: {
           currentVotableStepId: proposal.currentVotableStep?.id,
           stepUrl: step?.url.replace(getBaseUrl(), ''),
+          stepId: step?.id,
         },
       }}>
       <Card.Title tagName="h4">

@@ -151,7 +151,7 @@
         },
         {
             "path": "./public/js/front.js",
-            "maxSize": "350 KB"
+            "maxSize": "900 KB"
         },
         {
             "path": "./public/js/commons.js",

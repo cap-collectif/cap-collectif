@@ -49,7 +49,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
     bsStyle="default"
     className="widget__button "
     disabled={false}
-    href="http//capco.dev/votes"
+    href="/projects//consult/votes"
   >
     <FormattedMessage
       id="project.votes.title"
@@ -125,7 +125,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple s
     bsStyle="default"
     className="widget__button "
     disabled={false}
-    href="http//capco.dev/votes"
+    href="/projects//interpell/votes"
   >
     <FormattedMessage
       id="project.supports.title"
@@ -201,7 +201,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
     bsStyle="default"
     className="widget__button "
     disabled={false}
-    href="http//capco.dev/votes"
+    href="/projects//consult/votes"
   >
     <FormattedMessage
       id="project.votes.title"
@@ -260,7 +260,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
     bsStyle="default"
     className="widget__button "
     disabled={false}
-    href="http//capco.dev/votes"
+    href="/projects//consult/votes"
   >
     <FormattedMessage
       id="project.votes.title"

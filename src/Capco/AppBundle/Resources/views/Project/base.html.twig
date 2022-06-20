@@ -6,13 +6,11 @@
    or if the step has just one consultation
 #}
 
-{% set isConsultationType = currentStep is defined and currentStep.type  is defined and currentStep.type  != 'consultation' and currentStep.type  != 'collect' and currentStep.type  != 'selection' %}
-{% set isConsultationRoute= app.request.get('_route') == 'app_project_show_consultations' %}
+{% set isConsultationType = currentStep is defined and currentStep.type  is defined and currentStep.type  == 'consultation' %}
+{% set isConsultationRoute = app.request.get('_route') == 'app_project_show_consultations' %}
 {% set getConsultations = currentStep is defined and currentStep.type is defined and currentStep.type  == 'consultation' and currentStep.consultations.count <= 1 %}
 {% set isConsultation = isConsultationType or isConsultationRoute or getConsultations %}
-{% set shouldDisplayProjectHeader = currentStep is defined and currentStep.slug is defined and isConsultation %}
-{% set inSmallContainer = currentStep is defined and currentStep.type is defined and (currentStep.type == 'collect' or currentStep.type == 'selection') %}
-
+{% set shouldDisplayProjectHeader = isConsultationRoute or (currentStep is defined and currentStep.slug is defined and isConsultation and currentStep.consultations.count <= 1) %}
 {% set stepsParticipation = ["app_project_show_consultation", "app_project_show_collect", "app_project_show_selection", "app_project_show_debate"] %}
 {% set showTrash = is_feature_enabled('project_trash') and app.request.get('_route') in stepsParticipation %}
 
@@ -32,7 +30,7 @@
 
 {% block jumbotron %}{% endblock %}
 {% block body %}
-    {% if shouldDisplayProjectHeader %}
+      {% if shouldDisplayProjectHeader %}
         <section>
             <div class="container" style='padding: 0;'>
                 {% include '@CapcoApp/Project/show_title.html.twig' %}
@@ -43,19 +41,17 @@
 
     {% block stepNavigation %}{% endblock %}
 
-    {%if inSmallContainer %}
-        <section>
-        <div>
-    {%else%}
-        <section class="section--alt" >
+  {%if isConsultation or currentStep is defined and currentStep.type is defined and currentStep.type  == 'consultation' %}
+  <section class="section--alt" >
         <div class="container" style='padding-top: 48px' >
+       
+    {%else%}
+         <section>
+        <div>
     {%endif%}
+        <div>
             <div class="row">
                 <div class="col-xs-12" id="details">
-                    
-                    {% if is_feature_enabled('calendar') and currentStep is defined and currentStep.type is defined and currentStep.haveAtLeastOneEvent() and not inSmallContainer %}
-                        {{ react_render_component('StepEventsApp', { 'props': {'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'stepId': currentStep|toStepGlobalId()} }) }}
-                    {% endif %}
 
                     {% block details %}{% endblock %}
 

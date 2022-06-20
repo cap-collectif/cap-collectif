@@ -33,8 +33,6 @@ type Props = {|
   +proposal: ProposalPageHeaderButtons_proposal,
   +step: ?ProposalPageHeaderButtons_step,
   +viewer: ?ProposalPageHeaderButtons_viewer,
-  +opinionCanBeFollowed: boolean,
-  +hasVotableStep: boolean,
 |};
 
 const Buttons: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -79,15 +77,7 @@ const FixedButtons: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-export const ProposalPageHeaderButtons = ({
-  proposal,
-  viewer,
-  user,
-  step,
-  opinionCanBeFollowed,
-  hasVotableStep,
-  dispatch,
-}: Props) => {
+export const ProposalPageHeaderButtons = ({ proposal, viewer, user, step, dispatch }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const isAuthor = viewer && viewer.id === proposal?.author?.id;
   const editable = proposal?.form?.contribuable || proposal?.contribuable;
@@ -106,6 +96,10 @@ export const ProposalPageHeaderButtons = ({
   const hasPendingRevisions = proposal?.pendingRevisions
     ? proposal.pendingRevisions.totalCount > 0
     : false;
+
+  const opinionCanBeFollowed = step?.project?.opinionCanBeFollowed;
+  const hasVotableStep = !!proposal?.currentVotableStep;
+
   return (
     <Buttons>
       {isOpen && <ProposalEditModal proposal={proposal} show={isOpen} onClose={onClose} />}
@@ -202,6 +196,9 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
     fragment ProposalPageHeaderButtons_step on ProposalStep
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       open
+      project {
+        opinionCanBeFollowed
+      }
       ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
     }
@@ -215,6 +212,9 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       id
       url
       title
+      currentVotableStep {
+        id
+      }
       pendingRevisions: revisions(state: PENDING, first: 0)
         @include(if: $proposalRevisionsEnabled) {
         totalCount

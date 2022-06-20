@@ -7,9 +7,12 @@ import moment from 'moment';
 import ProjectHeader from '~ui/Project/ProjectHeader';
 import type { ProjectStepTabs_project$key } from '~relay/ProjectStepTabs_project.graphql';
 import { fromGlobalId, isGlobalId } from '~/utils/fromGlobalId';
+import { convertTypenameToStepSlug } from '~/utils/router';
+import useIsMobile from '~/utils/hooks/useIsMobile';
 
 export type Props = {|
   project: ProjectStepTabs_project$key,
+  isConsultation?: boolean,
 |};
 const FRAGMENT = graphql`
   fragment ProjectStepTabs_project on Project {
@@ -19,19 +22,31 @@ const FRAGMENT = graphql`
       label
       __typename
       url
+      slug
       enabled
       timeRange {
         startAt
         endAt
       }
+      ... on QuestionnaireStep {
+        questionnaire {
+          id
+        }
+      }
     }
   }
 `;
-const ProjectStepTabs = ({ project }: Props): React.Node => {
+const ProjectStepTabs = ({ project, isConsultation }: Props): React.Node => {
   const data = useFragment(FRAGMENT, project);
   const intl = useIntl();
-  const currentStepId = useSelector(state => state.project.currentProjectStepById);
-  const { id: current } = fromGlobalId(currentStepId);
+  const isMobile = useIsMobile();
+
+  const [currentStepId, setCurrentStepId] = React.useState(
+    useSelector(state => state.project.currentProjectStepById),
+  );
+  const { id: current } = isGlobalId(currentStepId)
+    ? fromGlobalId(currentStepId)
+    : { id: currentStepId };
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
   React.useEffect(() => {
     setCurrentStepIndex(
@@ -114,7 +129,7 @@ const ProjectStepTabs = ({ project }: Props): React.Node => {
   }
   return (
     <ProjectHeader.Frise>
-       <ProjectHeader.Steps
+      <ProjectHeader.Steps
         modalTitle={intl.formatMessage({ id: 'project-header-step-modal-title' })}
         currentStepIndex={currentStepIndex}>
         {data.steps
@@ -122,15 +137,25 @@ const ProjectStepTabs = ({ project }: Props): React.Node => {
           .map(step => (
             <ProjectHeader.Step
               key={step.id}
+              stepId={step.id}
               title={step.label}
-              href={step.url}
+              onClick={() => {
+                setCurrentStepId(step.id);
+              }}
+              questionnaireId={step.questionnaire?.id}
+              href={`/${convertTypenameToStepSlug(step.__typename)}/${step.slug || ''}`}
+              url={
+                isConsultation || step.__typename === 'ConsultationStep' || isMobile
+                  ? step.url
+                  : null
+              }
               content={returnStepStatus(step)}
               tooltipLabel={getTooltipText(step)}
               state={getColorState(step.id, step.state)}>
               {renderProgressBar(step)}
             </ProjectHeader.Step>
           ))}
-       </ProjectHeader.Steps>
+      </ProjectHeader.Steps>
     </ProjectHeader.Frise>
   );
 };

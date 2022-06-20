@@ -2,7 +2,6 @@
 import * as React from 'react';
 
 export type Context = {|
-  +title: string,
   +stepClosed: boolean,
   +widget: {|
     +isSource: boolean,
@@ -11,7 +10,6 @@ export type Context = {|
 |};
 
 export const DebateStepPageContext: React.Context<Context> = React.createContext<Context>({
-  title: '',
   stepClosed: true,
   widget: {
     isSource: false,

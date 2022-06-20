@@ -160,29 +160,37 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
         content="terminé"
         href="#"
         state="FINISHED"
+        stepId="step1"
         title="Dépots de projets"
         tooltipLabel="Terminé"
+        url="#"
       />
       <Step
         content="30 jours restants"
         href="#"
         state="FINISHED"
+        stepId="step2"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
+        url="#"
       />
       <Step
         content="30 jours restants"
         href="#"
         state="FINISHED"
+        stepId="step3"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
+        url="#"
       />
       <Step
         content="30 jours restants"
         href="#"
         state="ACTIVE"
+        stepId="step4"
         title="Consultation"
         tooltipLabel="30 jours restants"
+        url="#"
       >
         <Progress
           progress={50}
@@ -192,22 +200,28 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
         content="30 jours restants"
         href="#"
         state="WAITING"
+        stepId="step5"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
+        url="#"
       />
       <Step
         content="30 jours restants"
         href="#"
         state="WAITING"
+        stepId="step6"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
+        url="#"
       />
       <Step
         content="30 jours restants"
         href="#"
         state="WAITING"
+        stepId="step7"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
+        url="#"
       />
     </Steps>
   </Frise>

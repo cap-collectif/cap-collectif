@@ -16,8 +16,6 @@ const HEIGHT_WITHOUT_VOTEBAR = 80;
 
 type Props = {
   proposal: ProposalPageAside_proposal,
-  opinionCanBeFollowed: boolean,
-  hasVotableStep: boolean,
   isAnalysing: boolean,
   isAuthenticated: boolean,
   isActualityTab?: boolean,
@@ -77,7 +75,6 @@ const Aside: StyledComponent<
 export const ProposalPageAside = ({
   proposal,
   isAnalysing,
-  hasVotableStep,
   isAuthenticated,
   isActualityTab = false,
 }: Props) => {
@@ -87,7 +84,7 @@ export const ProposalPageAside = ({
   const scrollY: number = useScrollYPosition();
   const isDistrictsEnabled = useFeatureFlag('districts');
   const isThemesEnabled = useFeatureFlag('themes');
-  const hasVoteBar = hasVotableStep && proposal?.currentVotableStep && isAuthenticated;
+  const hasVoteBar = !!proposal?.currentVotableStep && isAuthenticated;
   const footerSize = document.getElementsByTagName('footer')[0]?.offsetHeight;
   const bodyHeight = document.getElementsByTagName('body')[0]?.offsetHeight;
   const heightFromTop = hasVoteBar ? HEIGHT_WITH_VOTEBAR : HEIGHT_WITHOUT_VOTEBAR;

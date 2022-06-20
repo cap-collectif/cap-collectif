@@ -27,5 +27,6 @@ export function fromGlobalId(globalId: ?string): ResolvedGlobalId {
   };
 }
 export function isGlobalId(id: string) {
+  if (!id) return false;
   return !id.match('-');
 }

@@ -23,7 +23,7 @@ exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] =
     <h2
       className="sc-bdvvtL hYSiQD cap-heading"
     >
-      
+      &lt;mock-value-for-field-"title"&gt;
     </h2>
   </div>
 </div>

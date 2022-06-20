@@ -14,6 +14,7 @@ import {
   CapUIIcon,
   headingStyles,
 } from '@cap-collectif/ui';
+import { Link } from 'react-router-dom';
 import { cleanChildren } from '~/utils/cleanChildren';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import hexToRgb from '~/utils/colors/hexToRgb';
@@ -310,16 +311,40 @@ export const Steps = ({ children, modalTitle, currentStepIndex, ...rest }: Steps
   );
 };
 
+type RouterWrapperProps = {|
+  +router: boolean,
+  +children: React.Node,
+  +href: string,
+  +stepId: string,
+  +questionnaireId?: string,
+|};
+
+const RouterWrapper = ({ router, children, href, stepId, questionnaireId }: RouterWrapperProps) =>
+  router ? (
+    <Link
+      to={{
+        pathname: href,
+        state: { stepId, questionnaireId },
+      }}>
+      {children}
+    </Link>
+  ) : (
+    <>{children}</>
+  );
+
 type StepProps = {|
   title: string,
   content?: string,
   tooltipLabel?: ?string,
   state: 'ACTIVE' | 'FINISHED' | 'WAITING',
   href: string,
+  url: ?string,
   children?: React.Node,
   isStart?: boolean,
   isEnd?: boolean,
   onClick?: (event: Event) => void,
+  stepId: string,
+  questionnaireId?: string,
 |};
 export const Step = ({
   title,
@@ -327,9 +352,13 @@ export const Step = ({
   tooltipLabel,
   state,
   href,
+  url,
   children,
+  stepId,
   isStart = false,
   isEnd = false,
+  questionnaireId,
+  onClick,
   ...rest
 }: StepProps) => {
   const mainColor = useSelector(store => store.default.parameters['color.btn.primary.bg']);
@@ -363,49 +392,66 @@ export const Step = ({
 
   if (!isMobile) {
     return (
-      <Flex
-        className="frise__stepItem"
-        color={getBackgroundColor()}
-        sx={{
-          outline: 'initial',
-          '&:hover': {
-            color:
-              state === 'WAITING'
-                ? getBackgroundColor()
-                : `rgba(${RGBPrimary.r},${RGBPrimary.g},${RGBPrimary.b},0.05)`,
-          },
-        }}
-        flexDirection="column"
-        justifyContent="flex-start"
-        as="li"
-        position="relative"
-        marginRight={-5}
-        marginLeft={isStart ? -3 : 0}
-        height="56px"
-        {...rest}>
-        {isStart && <StartStep />}
-        {isEnd && <EndStep />}
-        {!isStart && !isEnd && <MiddleStep />}
+      <RouterWrapper
+        router={!url && !isMobile}
+        href={href}
+        stepId={stepId}
+        questionnaireId={questionnaireId}>
         <Flex
-          className="frise__stepItem__link"
-          direction="column"
-          align="center"
-          position="absolute"
-          zIndex={9}
-          width="248px"
-          top="50%"
-          left="50%"
-          as="a"
-          paddingX={4}
-          textAlign="center"
-          height="100%"
-          justify="center"
-          href={href}
-          style={{
-            transform: 'translate(-45%,-50%)',
-          }}>
-          {isValidTooltip ? (
-            <Tooltip className="platform__body" label={tooltipLabel}>
+          onClick={onClick}
+          className="frise__stepItem"
+          color={getBackgroundColor()}
+          sx={{
+            outline: 'initial',
+            '&:hover': {
+              color:
+                state === 'WAITING'
+                  ? getBackgroundColor()
+                  : `rgba(${RGBPrimary.r},${RGBPrimary.g},${RGBPrimary.b},0.05)`,
+            },
+          }}
+          flexDirection="column"
+          justifyContent="flex-start"
+          as="li"
+          position="relative"
+          marginRight={-5}
+          marginLeft={isStart ? -3 : 0}
+          height="56px"
+          {...rest}>
+          {isStart && <StartStep />}
+          {isEnd && <EndStep />}
+          {!isStart && !isEnd && <MiddleStep />}
+          <Flex
+            className="frise__stepItem__link"
+            direction="column"
+            align="center"
+            position="absolute"
+            zIndex={9}
+            width="248px"
+            top="50%"
+            left="50%"
+            as="a"
+            href={url || undefined}
+            paddingX={4}
+            textAlign="center"
+            height="100%"
+            justify="center"
+            style={{
+              transform: 'translate(-45%,-50%)',
+            }}>
+            {isValidTooltip ? (
+              <Tooltip className="platform__body" label={tooltipLabel}>
+                <Text
+                  {...headingStyles.h5}
+                  fontSize={2}
+                  className="frise__stepItem__link__title platform__body"
+                  color={getTextColor()}
+                  truncate={50}
+                  fontWeight="semibold">
+                  {title}
+                </Text>
+              </Tooltip>
+            ) : (
               <Text
                 {...headingStyles.h5}
                 fontSize={2}
@@ -415,32 +461,22 @@ export const Step = ({
                 fontWeight="semibold">
                 {title}
               </Text>
-            </Tooltip>
-          ) : (
+            )}
             <Text
+              className="frise__stepItem__link__content platform__body"
               {...headingStyles.h5}
-              fontSize={2}
-              className="frise__stepItem__link__title platform__body"
-              color={getTextColor()}
-              truncate={50}
-              fontWeight="semibold">
-              {title}
+              color={getTextColor()}>
+              {content}
             </Text>
-          )}
-          <Text
-            className="frise__stepItem__link__content platform__body"
-            {...headingStyles.h5}
-            color={getTextColor()}>
-            {content}
-          </Text>
-        </Flex>
+          </Flex>
 
-        {progressBar
-          ? React.cloneElement(progressBar, {
-              width: isStart ? '222px' : '232px',
-            })
-          : null}
-      </Flex>
+          {progressBar
+            ? React.cloneElement(progressBar, {
+                width: isStart ? '222px' : '232px',
+              })
+            : null}
+        </Flex>
+      </RouterWrapper>
     );
   }
   return (
@@ -472,7 +508,7 @@ export const Step = ({
               top="50%"
               left="50%"
               as="a"
-              href={href}
+              href={url}
               style={{ transform: 'translate(-50%,-50%)' }}>
               <Text
                 className="frise__stepItem__link__title platform__body"
@@ -528,7 +564,7 @@ export const Step = ({
               top="50%"
               left="50%"
               as="a"
-              href={href}
+              href={url}
               style={{ transform: 'translate(-50%,-50%)' }}>
               <Text
                 className="frise__stepItem__link__title platform__body"

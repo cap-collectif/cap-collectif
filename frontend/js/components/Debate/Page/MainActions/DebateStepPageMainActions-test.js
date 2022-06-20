@@ -7,6 +7,7 @@ import { $refType, $fragmentRefs } from '~/mocks';
 
 const defaultProps = {
   step: {
+    title: 'Titre',
     $refType,
     $fragmentRefs,
     timeRange: {

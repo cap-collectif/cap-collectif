@@ -206,6 +206,8 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   sentryDsn?: ?string;
   btoa(decoded: string): string;
   atob(encoded: string): string;
+  eval(x: string): any;
+  DOMParser(): any;
 
   // analytics
   gtag(

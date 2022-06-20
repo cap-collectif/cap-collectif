@@ -10,13 +10,11 @@ export default new (class ProposalStepPage {
   }
 
   visit({ project, step, stepType }: VisitOptions) {
-    this.cy.interceptGraphQLOperation({ operationName: 'ProposalVoteBasketWidgetAppQuery' })
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
     this.cy.interceptGraphQLOperation({ operationName: 'ProjectHeaderAppQuery' })
     this.cy.visit(`/project/${project}/${stepType}/${step}`)
     this.cy.wait('@ProposalStepPageQuery')
-    this.cy.wait('@ProjectHeaderAppQuery')
-    return this.cy.wait('@ProposalVoteBasketWidgetAppQuery')
+    return this.cy.wait('@ProjectHeaderAppQuery')
   }
 
   visitSelectionStepWithOpenedVoteButNotDisplayed() {

@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block details %}
-    {% if not is_feature_enabled(constant('Capco\\AppBundle\\Toggle\\Manager::unstable__new_consultation_page')) and currentStep.isClosed %}
+  {% if not is_feature_enabled(constant('Capco\\AppBundle\\Toggle\\Manager::unstable__new_consultation_page')) and currentStep.isClosed %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
             <p>
                 <strong>{{ 'step.consultation.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'thank.for.contribution'|trans({}, 'CapcoAppBundle') }}
@@ -45,7 +45,7 @@
             </p>
         </div>
     {% endif %}
-
+    
     {% block content %}
         {{ react_render_component('ConsultationPageApp', { 'props': stepProps }) }}
     {% endblock %}

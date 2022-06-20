@@ -21,51 +21,53 @@ type Props = {
   votesPageUrl: string,
 };
 
-export default (data: Props) => (
-  <Suspense fallback={<Loader />}>
-    <Providers>
-      <QueryRenderer
-        variables={
-          ({
-            stepId: data.stepId,
-          }: ProposalVoteBasketWidgetAppQueryVariables)
-        }
-        environment={environment}
-        query={graphql`
-          query ProposalVoteBasketWidgetAppQuery($stepId: ID!) {
-            step: node(id: $stepId) {
-              ...ProposalVoteBasketWidget_step @arguments(isAuthenticated: true)
-            }
-            viewer {
-              ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)
-            }
+export default (data: Props) => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <Providers>
+        <QueryRenderer
+          variables={
+            ({
+              stepId: data.stepId,
+            }: ProposalVoteBasketWidgetAppQueryVariables)
           }
-        `}
-        render={({
-          error,
-          props,
-        }: {
-          ...ReactRelayReadyState,
-          props: ?ProposalVoteBasketWidgetAppQueryResponse,
-        }) => {
-          if (error) {
-            return graphqlError;
-          }
-          if (props) {
-            if (props.step) {
-              return (
-                <ProposalVoteBasketWidget
-                  step={props.step}
-                  viewer={props.viewer}
-                  votesPageUrl={data.votesPageUrl}
-                />
-              );
+          environment={environment}
+          query={graphql`
+            query ProposalVoteBasketWidgetAppQuery($stepId: ID!) {
+              step: node(id: $stepId) {
+                ...ProposalVoteBasketWidget_step @arguments(isAuthenticated: true)
+              }
+              viewer {
+                ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)
+              }
             }
-            return graphqlError;
-          }
-          return null;
-        }}
-      />
-    </Providers>
-  </Suspense>
-);
+          `}
+          render={({
+            error,
+            props,
+          }: {
+            ...ReactRelayReadyState,
+            props: ?ProposalVoteBasketWidgetAppQueryResponse,
+          }) => {
+            if (error) {
+              return graphqlError;
+            }
+            if (props) {
+              if (props.step) {
+                return (
+                  <ProposalVoteBasketWidget
+                    step={props.step}
+                    viewer={props.viewer}
+                    votesPageUrl={data.votesPageUrl}
+                  />
+                );
+              }
+              return graphqlError;
+            }
+            return null;
+          }}
+        />
+      </Providers>
+    </Suspense>
+  );
+};

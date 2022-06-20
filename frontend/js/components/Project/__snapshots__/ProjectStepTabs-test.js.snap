@@ -44,60 +44,65 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
             tabIndex="-1"
           >
             <div>
-              <li
-                className="sc-bdvvtL gckJqb frise__stepItem"
-                style={
-                  Object {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
+              <a
+                href="/presentation/<mock-value-for-field-\\"slug\\">"
+                onClick={[Function]}
               >
-                <svg
-                  fill="none"
-                  height="56"
-                  viewBox="0 0 231 56"
-                  width="248"
-                >
-                  <rect
-                    fill="currentColor"
-                    height="56"
-                    width="215.6"
-                  />
-                  <path
-                    d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    clipRule="evenodd"
-                    d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
-                    fill="white"
-                    fillRule="evenodd"
-                  />
-                </svg>
-                <a
-                  className="sc-bdvvtL ciajHx frise__stepItem__link"
-                  href="https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner"
+                <li
+                  className="sc-bdvvtL gckJqb frise__stepItem"
+                  onClick={[Function]}
                   style={
                     Object {
-                      "transform": "translate(-45%,-50%)",
+                      "display": "inline-block",
+                      "width": "100%",
                     }
                   }
+                  tabIndex={-1}
                 >
-                  <p
-                    className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
-                    title="Présentation"
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 231 56"
+                    width="248"
                   >
-                    Présentation
-                  </p>
-                  <p
-                    className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      width="215.6"
+                    />
+                    <path
+                      d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      clipRule="evenodd"
+                      d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
+                      fill="white"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    style={
+                      Object {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
                   >
-                    
-                  </p>
-                </a>
-              </li>
+                    <p
+                      className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
+                      title="Présentation"
+                    >
+                      Présentation
+                    </p>
+                    <p
+                      className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                    >
+                      
+                    </p>
+                  </a>
+                </li>
+              </a>
             </div>
           </div>
           <div
@@ -116,6 +121,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
             <div>
               <li
                 className="sc-bdvvtL eQuOKu frise__stepItem"
+                onClick={[Function]}
                 style={
                   Object {
                     "display": "inline-block",
@@ -185,61 +191,66 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
             tabIndex="-1"
           >
             <div>
-              <li
-                className="sc-bdvvtL gjaEAB frise__stepItem"
-                style={
-                  Object {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
+              <a
+                href="/collect/<mock-value-for-field-\\"slug\\">"
+                onClick={[Function]}
               >
-                <svg
-                  fill="none"
-                  height="56"
-                  viewBox="0 0 248 56"
-                  width="248"
-                >
-                  <path
-                    clipRule="evenodd"
-                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                  />
-                  <rect
-                    fill="currentColor"
-                    height="56"
-                    transform="translate(17)"
-                    width="216"
-                  />
-                  <path
-                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <a
-                  className="sc-bdvvtL ciajHx frise__stepItem__link"
-                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet"
+                <li
+                  className="sc-bdvvtL gjaEAB frise__stepItem"
+                  onClick={[Function]}
                   style={
                     Object {
-                      "transform": "translate(-45%,-50%)",
+                      "display": "inline-block",
+                      "width": "100%",
                     }
                   }
+                  tabIndex={-1}
                 >
-                  <p
-                    className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
-                    title="Dépôt"
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 248 56"
+                    width="248"
                   >
-                    Dépôt
-                  </p>
-                  <p
-                    className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                    <path
+                      clipRule="evenodd"
+                      d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      transform="translate(17)"
+                      width="216"
+                    />
+                    <path
+                      d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    style={
+                      Object {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
                   >
-                    count.block.daysLeft
-                  </p>
-                </a>
-              </li>
+                    <p
+                      className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
+                      title="Dépôt"
+                    >
+                      Dépôt
+                    </p>
+                    <p
+                      className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                    >
+                      count.block.daysLeft
+                    </p>
+                  </a>
+                </li>
+              </a>
             </div>
           </div>
           <div
@@ -256,83 +267,88 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
             tabIndex="-1"
           >
             <div>
-              <li
-                className="sc-bdvvtL lcHpFn frise__stepItem"
-                style={
-                  Object {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
+              <a
+                href="/questionnaire/<mock-value-for-field-\\"slug\\">"
+                onClick={[Function]}
               >
-                <svg
-                  fill="none"
-                  height="56"
-                  viewBox="0 0 248 56"
-                  width="248"
-                >
-                  <path
-                    clipRule="evenodd"
-                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                  />
-                  <rect
-                    fill="currentColor"
-                    height="56"
-                    transform="translate(17)"
-                    width="216"
-                  />
-                  <path
-                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <a
-                  className="sc-bdvvtL ciajHx frise__stepItem__link"
-                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet"
+                <li
+                  className="sc-bdvvtL lcHpFn frise__stepItem"
+                  onClick={[Function]}
                   style={
                     Object {
-                      "transform": "translate(-45%,-50%)",
+                      "display": "inline-block",
+                      "width": "100%",
                     }
                   }
+                  tabIndex={-1}
                 >
-                  <p
-                    aria-describedby="id-g"
-                    className="sc-bdvvtL dttrVk cap-text frise__stepItem__link__title platform__body"
-                    onBlur={[Function]}
-                    onFocus={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                    tabIndex={0}
-                    title="Questionnaire qui dénonce"
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 248 56"
+                    width="248"
                   >
-                    Questionnaire qui dénonce
-                  </p>
-                  <div
-                    className="cap-tooltip-container"
-                    hidden={true}
-                    id="id-g"
-                    onAnimationEnd={[Function]}
-                    onTransitionEnd={[Function]}
-                    role="tooltip"
+                    <path
+                      clipRule="evenodd"
+                      d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      transform="translate(17)"
+                      width="216"
+                    />
+                    <path
+                      d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bdvvtL ciajHx frise__stepItem__link"
                     style={
                       Object {
-                        "display": "none",
-                        "left": "100%",
-                        "pointerEvents": "none",
-                        "position": "fixed",
-                        "top": "100%",
-                        "zIndex": 1000,
+                        "transform": "translate(-45%,-50%)",
                       }
                     }
-                  />
-                  <p
-                    className="sc-bdvvtL kJbqTC cap-text frise__stepItem__link__content platform__body"
-                  />
-                </a>
-              </li>
+                  >
+                    <p
+                      aria-describedby="id-g"
+                      className="sc-bdvvtL dttrVk cap-text frise__stepItem__link__title platform__body"
+                      onBlur={[Function]}
+                      onFocus={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      tabIndex={0}
+                      title="Questionnaire qui dénonce"
+                    >
+                      Questionnaire qui dénonce
+                    </p>
+                    <div
+                      className="cap-tooltip-container"
+                      hidden={true}
+                      id="id-g"
+                      onAnimationEnd={[Function]}
+                      onTransitionEnd={[Function]}
+                      role="tooltip"
+                      style={
+                        Object {
+                          "display": "none",
+                          "left": "100%",
+                          "pointerEvents": "none",
+                          "position": "fixed",
+                          "top": "100%",
+                          "zIndex": 1000,
+                        }
+                      }
+                    />
+                    <p
+                      className="sc-bdvvtL kJbqTC cap-text frise__stepItem__link__content platform__body"
+                    />
+                  </a>
+                </li>
+              </a>
             </div>
           </div>
         </div>
@@ -388,60 +404,65 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
             tabIndex="-1"
           >
             <div>
-              <li
-                className="sc-bdvvtL gckJqb frise__stepItem"
-                style={
-                  Object {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
+              <a
+                href="/presentation/<mock-value-for-field-\\"slug\\">"
+                onClick={[Function]}
               >
-                <svg
-                  fill="none"
-                  height="56"
-                  viewBox="0 0 231 56"
-                  width="248"
-                >
-                  <rect
-                    fill="currentColor"
-                    height="56"
-                    width="215.6"
-                  />
-                  <path
-                    d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    clipRule="evenodd"
-                    d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
-                    fill="white"
-                    fillRule="evenodd"
-                  />
-                </svg>
-                <a
-                  className="sc-bdvvtL ciajHx frise__stepItem__link"
-                  href="https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner"
+                <li
+                  className="sc-bdvvtL gckJqb frise__stepItem"
+                  onClick={[Function]}
                   style={
                     Object {
-                      "transform": "translate(-45%,-50%)",
+                      "display": "inline-block",
+                      "width": "100%",
                     }
                   }
+                  tabIndex={-1}
                 >
-                  <p
-                    className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
-                    title="Présentation"
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 231 56"
+                    width="248"
                   >
-                    Présentation
-                  </p>
-                  <p
-                    className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      width="215.6"
+                    />
+                    <path
+                      d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      clipRule="evenodd"
+                      d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
+                      fill="white"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    style={
+                      Object {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
                   >
-                    
-                  </p>
-                </a>
-              </li>
+                    <p
+                      className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
+                      title="Présentation"
+                    >
+                      Présentation
+                    </p>
+                    <p
+                      className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                    >
+                      
+                    </p>
+                  </a>
+                </li>
+              </a>
             </div>
           </div>
           <div
@@ -460,6 +481,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
             <div>
               <li
                 className="sc-bdvvtL eQuOKu frise__stepItem"
+                onClick={[Function]}
                 style={
                   Object {
                     "display": "inline-block",
@@ -529,61 +551,66 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
             tabIndex="-1"
           >
             <div>
-              <li
-                className="sc-bdvvtL gjaEAB frise__stepItem"
-                style={
-                  Object {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
+              <a
+                href="/collect/<mock-value-for-field-\\"slug\\">"
+                onClick={[Function]}
               >
-                <svg
-                  fill="none"
-                  height="56"
-                  viewBox="0 0 248 56"
-                  width="248"
-                >
-                  <path
-                    clipRule="evenodd"
-                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                  />
-                  <rect
-                    fill="currentColor"
-                    height="56"
-                    transform="translate(17)"
-                    width="216"
-                  />
-                  <path
-                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <a
-                  className="sc-bdvvtL ciajHx frise__stepItem__link"
-                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet"
+                <li
+                  className="sc-bdvvtL gjaEAB frise__stepItem"
+                  onClick={[Function]}
                   style={
                     Object {
-                      "transform": "translate(-45%,-50%)",
+                      "display": "inline-block",
+                      "width": "100%",
                     }
                   }
+                  tabIndex={-1}
                 >
-                  <p
-                    className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
-                    title="Dépôt"
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 248 56"
+                    width="248"
                   >
-                    Dépôt
-                  </p>
-                  <p
-                    className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                    <path
+                      clipRule="evenodd"
+                      d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      transform="translate(17)"
+                      width="216"
+                    />
+                    <path
+                      d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    style={
+                      Object {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
                   >
-                    count.block.daysLeft
-                  </p>
-                </a>
-              </li>
+                    <p
+                      className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
+                      title="Dépôt"
+                    >
+                      Dépôt
+                    </p>
+                    <p
+                      className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                    >
+                      count.block.daysLeft
+                    </p>
+                  </a>
+                </li>
+              </a>
             </div>
           </div>
           <div
@@ -600,83 +627,88 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
             tabIndex="-1"
           >
             <div>
-              <li
-                className="sc-bdvvtL lcHpFn frise__stepItem"
-                style={
-                  Object {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
+              <a
+                href="/questionnaire/<mock-value-for-field-\\"slug\\">"
+                onClick={[Function]}
               >
-                <svg
-                  fill="none"
-                  height="56"
-                  viewBox="0 0 248 56"
-                  width="248"
-                >
-                  <path
-                    clipRule="evenodd"
-                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                  />
-                  <rect
-                    fill="currentColor"
-                    height="56"
-                    transform="translate(17)"
-                    width="216"
-                  />
-                  <path
-                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <a
-                  className="sc-bdvvtL ciajHx frise__stepItem__link"
-                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet"
+                <li
+                  className="sc-bdvvtL lcHpFn frise__stepItem"
+                  onClick={[Function]}
                   style={
                     Object {
-                      "transform": "translate(-45%,-50%)",
+                      "display": "inline-block",
+                      "width": "100%",
                     }
                   }
+                  tabIndex={-1}
                 >
-                  <p
-                    aria-describedby="id-g"
-                    className="sc-bdvvtL dttrVk cap-text frise__stepItem__link__title platform__body"
-                    onBlur={[Function]}
-                    onFocus={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                    tabIndex={0}
-                    title="Questionnaire qui dénonce"
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 248 56"
+                    width="248"
                   >
-                    Questionnaire qui dénonce
-                  </p>
-                  <div
-                    className="cap-tooltip-container"
-                    hidden={true}
-                    id="id-g"
-                    onAnimationEnd={[Function]}
-                    onTransitionEnd={[Function]}
-                    role="tooltip"
+                    <path
+                      clipRule="evenodd"
+                      d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      transform="translate(17)"
+                      width="216"
+                    />
+                    <path
+                      d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bdvvtL ciajHx frise__stepItem__link"
                     style={
                       Object {
-                        "display": "none",
-                        "left": "100%",
-                        "pointerEvents": "none",
-                        "position": "fixed",
-                        "top": "100%",
-                        "zIndex": 1000,
+                        "transform": "translate(-45%,-50%)",
                       }
                     }
-                  />
-                  <p
-                    className="sc-bdvvtL kJbqTC cap-text frise__stepItem__link__content platform__body"
-                  />
-                </a>
-              </li>
+                  >
+                    <p
+                      aria-describedby="id-g"
+                      className="sc-bdvvtL dttrVk cap-text frise__stepItem__link__title platform__body"
+                      onBlur={[Function]}
+                      onFocus={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      tabIndex={0}
+                      title="Questionnaire qui dénonce"
+                    >
+                      Questionnaire qui dénonce
+                    </p>
+                    <div
+                      className="cap-tooltip-container"
+                      hidden={true}
+                      id="id-g"
+                      onAnimationEnd={[Function]}
+                      onTransitionEnd={[Function]}
+                      role="tooltip"
+                      style={
+                        Object {
+                          "display": "none",
+                          "left": "100%",
+                          "pointerEvents": "none",
+                          "position": "fixed",
+                          "top": "100%",
+                          "zIndex": 1000,
+                        }
+                      }
+                    />
+                    <p
+                      className="sc-bdvvtL kJbqTC cap-text frise__stepItem__link__content platform__body"
+                    />
+                  </a>
+                </li>
+              </a>
             </div>
           </div>
         </div>

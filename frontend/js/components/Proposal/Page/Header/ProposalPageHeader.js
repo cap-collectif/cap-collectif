@@ -28,8 +28,6 @@ type Props = {
   proposal: ProposalPageHeader_proposal,
   viewer: ?ProposalPageHeader_viewer,
   step: ?ProposalPageHeader_step,
-  opinionCanBeFollowed: boolean,
-  hasVotableStep: boolean,
   hasAnalysingButton?: boolean,
   onAnalysisClick?: () => void,
   shouldDisplayPictures: boolean,
@@ -165,10 +163,19 @@ const AvatarPlaceholder = () => (
   </Flex>
 );
 
-const renderBackUrl = (originStepUrl?: ?string, defaultStepUrl: string, tradKeyToBack: ?string) => {
+const renderBackUrl = (
+  originStepUrl?: ?string,
+  defaultStepUrl: string,
+  tradKeyToBack: ?string,
+  stepId?: string,
+) => {
   const url = getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl);
   return (
-    <Link to={`/${url}`}>
+    <Link
+      to={{
+        pathname: `/${url}`,
+        state: { stepId },
+      }}>
       <Icon name={ICON_NAME.chevronLeft} size={9} color={colors.primaryColor} />
       {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
     </Link>
@@ -179,8 +186,6 @@ export const ProposalPageHeader = ({
   proposal,
   step,
   viewer,
-  opinionCanBeFollowed,
-  hasVotableStep,
   hasAnalysingButton,
   onAnalysisClick,
   shouldDisplayPictures,
@@ -191,7 +196,6 @@ export const ProposalPageHeader = ({
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
   const { state } = useLocation();
-
   const createdDate = (
     <FormattedDate
       value={moment(date)}
@@ -226,6 +230,7 @@ export const ProposalPageHeader = ({
             state?.stepUrl,
             proposal?.form?.step?.url?.replace(getBaseUrl(), '') || '',
             tradKeyToBack,
+            state?.stepId,
           )}
           <div>
             {hasAnalysingButton && (
@@ -289,13 +294,7 @@ export const ProposalPageHeader = ({
             </Flex>
           </Skeleton>
         </Informations>
-        <ProposalPageHeaderButtons
-          proposal={proposal}
-          step={step}
-          viewer={viewer}
-          opinionCanBeFollowed={opinionCanBeFollowed}
-          hasVotableStep={hasVotableStep}
-        />
+        <ProposalPageHeaderButtons proposal={proposal} step={step} viewer={viewer} />
       </div>
     </Header>
   );

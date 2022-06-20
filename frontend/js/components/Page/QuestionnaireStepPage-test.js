@@ -6,9 +6,8 @@ import { QuestionnaireStepPage } from './QuestionnaireStepPage';
 
 describe('<QuestionnaireStepPage />', () => {
   const defaultProps = {
-    questionnaireId: '1',
+    initialQuestionnaireId: '1',
     isAuthenticated: true,
-    isPrivateResult: false,
     enableResults: true,
     dispatch: jest.fn(),
   };

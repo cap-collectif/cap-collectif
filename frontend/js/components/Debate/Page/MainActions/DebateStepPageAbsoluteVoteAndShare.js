@@ -3,7 +3,7 @@ import React, { type Node } from 'react';
 import { useIntl } from 'react-intl';
 import { useActor } from '@xstate/react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
-import {Flex, Text, Box} from '@cap-collectif/ui'
+import { Flex, Text, Box } from '@cap-collectif/ui';
 import type { DebateStepPageAbsoluteVoteAndShare_step } from '~relay/DebateStepPageAbsoluteVoteAndShare_step.graphql';
 import DebateStepPageVote from './DebateStepPageVote';
 import DebateStepPageVoteForm from './DebateStepPageVoteForm';
@@ -26,7 +26,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   viewerIsConfirmed,
 }: Props): Node => {
   const { debate, url } = step;
-  const { title, widget } = useDebateStepPage();
+  const { widget } = useDebateStepPage();
   const intl = useIntl();
   const machine = React.useContext(MachineContext);
   const [current, send] = useActor<{ value: VoteState }, VoteAction>(machine);
@@ -47,22 +47,17 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
         boxShadow: isMobile
           ? 'medium'
           : !showArgumentForm || value.includes('none')
-            ? 'medium'
-            : '0 10px 14px 0 white'
-      }}
-    >
+          ? 'medium'
+          : '0 10px 14px 0 white',
+      }}>
       {/** I dont like this but for now we have to use the bootstrap container max-width, waiting for the DS one */}
       <Box
         className="container"
         sx={{ padding: '0 !important', '& .recaptcha-message': { display: 'none' } }}>
         {value.includes('none') && (
-          <Flex
-            direction={['column', 'row']}
-            spacing={4}
-            justify="center"
-            align="center">
+          <Flex direction={['column', 'row']} spacing={4} justify="center" align="center">
             <Text textAlign={['center', 'left']} color="gray.900" fontSize={4}>
-              {title}
+              {step.title}
             </Text>
             <DebateStepPageVote width="unset" step={step} top={isMobile} />
           </Flex>
@@ -89,8 +84,9 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
 export default (createFragmentContainer(DebateStepPageAbsoluteVoteAndShare, {
   step: graphql`
     fragment DebateStepPageAbsoluteVoteAndShare_step on DebateStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
       url
+      title
       debate {
         ...DebateStepPageVoteForm_debate
           @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)

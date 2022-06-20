@@ -21,7 +21,6 @@ type Props = {|
   ...RelayProps,
   +consultationPlanEnabled: boolean,
   +showConsultationPlan: boolean,
-  +isMultiConsultation: boolean,
 |};
 
 const STICKY_OFFSET_TOP = 60;
@@ -40,12 +39,7 @@ const ConsultationPlanInner: StyledComponent<{}, {}, HTMLDivElement> = styled.di
 `;
 
 export const ConsultationPropositionStep = (props: Props) => {
-  const {
-    consultationPlanEnabled,
-    showConsultationPlan,
-    consultationStep: step,
-    isMultiConsultation,
-  } = props;
+  const { consultationPlanEnabled, showConsultationPlan, consultationStep: step } = props;
   const stepNavigationHeaderRef = React.useRef<?HTMLDivElement>(null);
   const getStepNavigationHeader: () => ?HTMLDivElement = () => {
     if (stepNavigationHeaderRef.current === null) {
@@ -60,6 +54,7 @@ export const ConsultationPropositionStep = (props: Props) => {
   const atLeast2Sections =
     step.consultation && step.consultation.sections && step.consultation.sections.length > 1;
 
+  const isMultiConsultation = step.consultations.totalCount > 1;
   return (
     <>
       {consultationPlanEnabled && (
@@ -176,11 +171,7 @@ export const ConsultationPropositionStep = (props: Props) => {
 export default createFragmentContainer(ConsultationPropositionStep, {
   consultationStep: graphql`
     fragment ConsultationPropositionStep_consultationStep on ConsultationStep
-      @argumentDefinitions(
-        exceptStepId: { type: "ID" }
-        isMultiConsultation: { type: "Boolean!", defaultValue: false }
-        consultationSlug: { type: "String!" }
-      ) {
+    @argumentDefinitions(exceptStepId: { type: "ID" }, consultationSlug: { type: "String!" }) {
       body
       id
       timeRange {
@@ -192,7 +183,7 @@ export default createFragmentContainer(ConsultationPropositionStep, {
       timeless
       project {
         hasParticipativeStep(exceptStepId: $exceptStepId)
-        authors @include(if: $isMultiConsultation) {
+        authors {
           username
           url
           ...UserAvatarList_users
@@ -220,6 +211,9 @@ export default createFragmentContainer(ConsultationPropositionStep, {
         votesCount
         ...ConsultationPlan_consultation
         ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
+      }
+      consultations {
+        totalCount
       }
     }
   `,

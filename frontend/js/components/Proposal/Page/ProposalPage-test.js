@@ -9,11 +9,7 @@ describe('<ProposalPage />', () => {
   const props = {
     proposalSlug: 'proposal-titre',
     currentVotableStepId: 'stepid',
-    opinionCanBeFollowed: false,
-    hasVotableStep: false,
     isAuthenticated: false,
-    showVotesWidget: true,
-    votesPageUrl: '/votes',
   };
 
   afterEach(() => {

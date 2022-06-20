@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'react-relay';
-import { Box, Flex, Tag, Heading, Skeleton } from '@cap-collectif/ui'
+import { Box, Flex, Tag, Heading, Skeleton } from '@cap-collectif/ui';
 import type { DebateStepPageMainActions_step } from '~relay/DebateStepPageMainActions_step.graphql';
 import RemainingTime from '~/components/Utils/RemainingTime';
 import DebateStepPageMainActionsPlaceholder from './DebateStepPageMainActionPlaceholder';
@@ -16,7 +16,7 @@ type Props = {|
 
 export const DebateStepPageMainActions = ({ step, isMobile }: Props): React.Node => {
   const intl = useIntl();
-  const { title, stepClosed } = useDebateStepPage();
+  const { stepClosed } = useDebateStepPage();
 
   return (
     <Box id={step ? 'DebateStepPageMainActions' : 'DebateStepPageMainActionsLoading'}>
@@ -35,7 +35,7 @@ export const DebateStepPageMainActions = ({ step, isMobile }: Props): React.Node
           )}
 
           <Heading as="h2" mb={2} textAlign="center" color="gray.900">
-            {title}
+            {step?.title}
           </Heading>
           {step && <DebateStepPageVoteAndShare isMobile={isMobile} step={step} />}
         </Flex>
@@ -47,7 +47,8 @@ export const DebateStepPageMainActions = ({ step, isMobile }: Props): React.Node
 export default (createFragmentContainer(DebateStepPageMainActions, {
   step: graphql`
     fragment DebateStepPageMainActions_step on DebateStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
+      title
       timeRange {
         endAt
       }

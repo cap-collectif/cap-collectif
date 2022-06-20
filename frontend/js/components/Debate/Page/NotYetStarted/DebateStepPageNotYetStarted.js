@@ -3,9 +3,8 @@ import * as React from 'react';
 import moment from 'moment';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Box, Flex, Tag, Heading } from '@cap-collectif/ui'
+import { Box, Flex, Tag, Heading } from '@cap-collectif/ui';
 import type { DebateStepPageNotYetStarted_step } from '~relay/DebateStepPageNotYetStarted_step.graphql';
-import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
   +step: ?DebateStepPageNotYetStarted_step,
@@ -14,7 +13,6 @@ type Props = {|
 export const DebateStepPageNotYetStarted = ({ step }: Props): React.Node => {
   const endDate = moment(step?.timeRange?.startAt);
   const now = moment();
-  const { title } = useDebateStepPage();
 
   const daysUntil = endDate.diff(now, 'days');
   const hoursUntil = endDate.diff(now, 'hours');
@@ -33,7 +31,7 @@ export const DebateStepPageNotYetStarted = ({ step }: Props): React.Node => {
           {timeUntil}
         </Tag>
         <Heading as="h2" fontWeight="400" mb={2} textAlign="center" color="gray.900">
-          {title}
+          {step?.title}
         </Heading>
       </Flex>
     </Box>
@@ -43,6 +41,7 @@ export const DebateStepPageNotYetStarted = ({ step }: Props): React.Node => {
 export default (createFragmentContainer(DebateStepPageNotYetStarted, {
   step: graphql`
     fragment DebateStepPageNotYetStarted_step on DebateStep {
+      title
       timeRange {
         startAt
       }

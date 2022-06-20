@@ -19,13 +19,11 @@ import ProposalPageVotes from './Votes/ProposalPageVotes';
 import ProposalPageBlog from './Blog/ProposalPageBlog';
 import ProposalPageFollowers from './Followers/ProposalPageFollowers';
 import ProposalDraftAlert from './ProposalDraftAlert';
+import ProposalVoteBasketWidget from '../Vote/ProposalVoteBasketWidget';
 
 export type Props = {|
   queryRef: ?ProposalPageLogic_query$key,
-  opinionCanBeFollowed: boolean,
   hasVotableStep: boolean,
-  votesPageUrl: string,
-  showVotesWidget: boolean,
   isAuthenticated: boolean,
 |};
 
@@ -126,6 +124,9 @@ const FRAGMENT = graphql`
         currentVotableStep {
           id
           canDisplayBallot
+          slug
+          votable
+          state
         }
         allVotes: votes(first: 0, stepId: $stepId) {
           totalCount
@@ -138,13 +139,7 @@ const FRAGMENT = graphql`
   }
 `;
 
-export const ProposalPageLogic = ({
-  queryRef,
-  opinionCanBeFollowed,
-  hasVotableStep,
-  showVotesWidget,
-  isAuthenticated,
-}: Props) => {
+export const ProposalPageLogic = ({ queryRef, isAuthenticated }: Props) => {
   const query = useFragment(FRAGMENT, queryRef);
   const { width, height } = useResize();
   const [tabKey, setTabKey] = useState('content');
@@ -154,6 +149,7 @@ export const ProposalPageLogic = ({
   const bodyHeight = document.getElementsByTagName('body')[0]?.offsetHeight;
   const proposal = query?.proposal;
   const step = query?.step || null;
+  const currentVotableStep = proposal?.currentVotableStep || null;
   const viewer = query?.viewer || null;
   const hasAnalysis =
     (proposal?.viewerCanDecide ||
@@ -165,6 +161,8 @@ export const ProposalPageLogic = ({
   const [show, setShow] = useState<MODAL_STATE>('FALSE');
   const [isAnalysing, setIsAnalysing] = useState(hasAnalysis);
   const bottom = bodyHeight - scrollY - height - footerSize;
+  const showVotesWidget =
+    isAuthenticated && currentVotableStep && currentVotableStep.state === 'OPENED';
 
   useEffect(() => {
     setVotesCount(proposal?.allVotes?.totalCount || 0);
@@ -176,6 +174,7 @@ export const ProposalPageLogic = ({
 
   return (
     <>
+      {showVotesWidget && <ProposalVoteBasketWidget step={step} viewer={viewer} />}
       <Box bg="white" pt={[0, 5]}>
         <ProposalDraftAlert proposal={proposal} message="draft-visible-by-you" />
       </Box>
@@ -191,8 +190,6 @@ export const ProposalPageLogic = ({
             proposal={proposal}
             step={step}
             viewer={viewer}
-            opinionCanBeFollowed={opinionCanBeFollowed}
-            hasVotableStep={hasVotableStep}
           />
           <ProposalPageTabs
             proposal={proposal}
@@ -215,9 +212,7 @@ export const ProposalPageLogic = ({
                   <ProposalPageAside
                     proposal={proposal}
                     isAnalysing={(proposal && isAnalysing && hasAnalysis) || isMobile}
-                    hasVotableStep={hasVotableStep}
                     isAuthenticated={isAuthenticated}
-                    opinionCanBeFollowed={opinionCanBeFollowed}
                   />
                 )}
               </ProposalPageBody>
@@ -234,9 +229,7 @@ export const ProposalPageLogic = ({
                   <ProposalPageAside
                     proposal={proposal}
                     isAnalysing={(proposal && isAnalysing && hasAnalysis) || isMobile}
-                    hasVotableStep={hasVotableStep}
                     isAuthenticated={isAuthenticated}
-                    opinionCanBeFollowed={opinionCanBeFollowed}
                     isActualityTab
                   />
                 )}

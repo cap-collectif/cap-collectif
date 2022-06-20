@@ -32,33 +32,16 @@
 
 {% block jumbotron %}{% endblock %}
 {% block body %}
-    {% if shouldDisplayProjectHeader %}
-        <section>
-            <div class="container" style='padding:0;'>
-                {% include '@CapcoApp/Project/show_title.html.twig' %}
-            </div>
-        </section>
-    {% endif %}
-
-
-    {% block stepNavigation %}{% endblock %}
-    <style>
-        .main p { margin-bottom: unset; }
-    </style>
-    <section style="background: #f7f7f7; border-top: 1px solid #e5e5e5;">
-    <div class="container">
-    {{ react_render_component('DebateStepPageApp',
+  
+    {{ react_render_component('ProjectStepPageApp',
     { 'props':
         {
           stepId: currentStep.id|toGlobalId('DebateStep'),
-          title: currentStep.title,
-          debateType: currentStep.debateType,
-          fromWidget: false,
+          projectSlug: project.slug,
+          projectId: project.id|toGlobalId('Project'),
         }
     })
     }}
-    </div>
-    </section>
 
     {% if showTrash %}
         <section class="hidden-print">
@@ -74,5 +57,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% if currentStep.customCode is defined and currentStep.customCode != '' %}{{ currentStep.customCode | raw }}{% endif %}
+    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
 {% endblock %}

@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedNumber, FormattedMessage } from 'react-intl';
@@ -168,7 +168,6 @@ export const NavBar: StyledComponent<
 type Props = {
   step: ProposalVoteBasketWidget_step,
   viewer: ?ProposalVoteBasketWidget_viewer,
-  votesPageUrl: string,
   voteBarBackgroundColor: string,
   voteBarTextColor: string,
   voteBarBorderColor: string,
@@ -178,7 +177,6 @@ type Props = {
 };
 
 export const ProposalVoteBasketWidget = ({
-  votesPageUrl,
   step,
   viewer,
   voteBarBackgroundColor,
@@ -192,6 +190,15 @@ export const ProposalVoteBasketWidget = ({
   const creditsSpent = viewer && viewer.proposalVotes ? viewer.proposalVotes.creditsSpent : 0;
   const isBudget = step.voteType === 'BUDGET';
   const isInterpellation = isInterpellationContextFromStep(step);
+  const votesPageUrl = `/projects/${step.project?.slug || ''}/votes`;
+
+  useEffect(() => {
+    const html = document.querySelector('html');
+    if (html) html.classList.add('has-vote-widget');
+    return () => {
+      if (html) html.classList.remove('has-vote-widget');
+    };
+  }, []);
 
   return (
     <NavBar
@@ -309,6 +316,9 @@ export default createFragmentContainer(
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
         viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
           totalCount
+        }
+        project {
+          slug
         }
         voteType
         votesLimit

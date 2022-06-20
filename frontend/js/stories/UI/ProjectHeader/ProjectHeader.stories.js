@@ -112,6 +112,8 @@ const Template = (args: any) => (
           <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step1"
               title="Dépots de projets"
               content="terminé"
               tooltipLabel="Terminé"
@@ -119,6 +121,8 @@ const Template = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step2"
               title="Dépots de projets"
               content="terminé"
               tooltipLabel="Terminé"
@@ -126,6 +130,8 @@ const Template = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step3"
               title="Sélection terminée avec un titre plus long que les autres"
               content="terminé"
               tooltipLabel="Terminé"
@@ -133,6 +139,8 @@ const Template = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step4"
               title="Dépots de projets"
               content="terminé"
               tooltipLabel="Terminé"
@@ -140,6 +148,8 @@ const Template = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step5"
               title="Dépots de projets"
               content="terminé"
               tooltipLabel="Terminé"
@@ -148,6 +158,8 @@ const Template = (args: any) => (
 
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step6"
               title="Dépots de projets"
               content="terminé"
               tooltipLabel="Terminé"
@@ -155,6 +167,8 @@ const Template = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step7"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -162,6 +176,8 @@ const Template = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step8"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -169,6 +185,8 @@ const Template = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step9"
               title="Consultation"
               content="30 jours restants"
               tooltipLabel="30 jours restants"
@@ -177,6 +195,8 @@ const Template = (args: any) => (
             </ProjectHeader.Step>
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step10"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -184,6 +204,8 @@ const Template = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step11"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -191,6 +213,8 @@ const Template = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step12"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -260,6 +284,8 @@ export const withoutCoverImage = (args: any) => (
           <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step1"
               title="Dépots de projets"
               content="terminé"
               tooltipLabel="Terminé"
@@ -267,6 +293,8 @@ export const withoutCoverImage = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step2"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -274,6 +302,8 @@ export const withoutCoverImage = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step3"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -281,6 +311,8 @@ export const withoutCoverImage = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step4"
               title="Consultation"
               content="30 jours restants"
               tooltipLabel="30 jours restants"
@@ -344,6 +376,8 @@ export const withCoverVideo = (args: any) => (
           <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step1"
               title="Dépots de projets"
               content="terminé"
               tooltipLabel="Terminé"
@@ -351,6 +385,8 @@ export const withCoverVideo = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step2"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -358,6 +394,8 @@ export const withCoverVideo = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step3"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -365,6 +403,8 @@ export const withCoverVideo = (args: any) => (
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step4"
               title="Consultation"
               content="30 jours restants"
               tooltipLabel="30 jours restants"
@@ -466,6 +506,8 @@ export const oneAuthor = (args: any) => (
         <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step1"
             title="Dépots de projets"
             content="terminé"
             tooltipLabel="Terminé"
@@ -473,6 +515,8 @@ export const oneAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step2"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -480,6 +524,8 @@ export const oneAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step3"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -487,6 +533,8 @@ export const oneAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step4"
             title="Consultation"
             content="30 jours restants"
             tooltipLabel="30 jours restants"
@@ -495,6 +543,8 @@ export const oneAuthor = (args: any) => (
           </ProjectHeader.Step>
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step5"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -502,6 +552,8 @@ export const oneAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step6"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -509,6 +561,8 @@ export const oneAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step7"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -560,6 +614,8 @@ export const multipleAuthor = (args: any) => (
         <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step1"
             title="Dépots de projets"
             content="terminé"
             tooltipLabel="Terminé"
@@ -567,6 +623,8 @@ export const multipleAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step2"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -574,6 +632,8 @@ export const multipleAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step3"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -581,6 +641,8 @@ export const multipleAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step4"
             title="Consultation"
             content="30 jours restants"
             tooltipLabel="30 jours restants"
@@ -589,6 +651,8 @@ export const multipleAuthor = (args: any) => (
           </ProjectHeader.Step>
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step5"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -596,6 +660,8 @@ export const multipleAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step6"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -603,6 +669,8 @@ export const multipleAuthor = (args: any) => (
           />
           <ProjectHeader.Step
             href="#"
+            url="#"
+            stepId="step7"
             title="Le vote des projets"
             content="30 jours restants"
             tooltipLabel="Test tooltip"
@@ -619,6 +687,8 @@ export const MultiFrise = (args: any) => (
       <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step1"
           onClick={args.onClick}
           title="Dépots de projets"
           content="terminé"
@@ -627,6 +697,8 @@ export const MultiFrise = (args: any) => (
         />
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step2"
           onClick={args.onClick}
           title="Le vote des projets"
           content="30 jours restants"
@@ -635,6 +707,8 @@ export const MultiFrise = (args: any) => (
         />
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step3"
           onClick={args.onClick}
           title="Le vote des projets"
           content="30 jours restants"
@@ -643,6 +717,8 @@ export const MultiFrise = (args: any) => (
         />
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step4"
           onClick={args.onClick}
           title="Consultation"
           content="30 jours restants"
@@ -652,6 +728,8 @@ export const MultiFrise = (args: any) => (
         </ProjectHeader.Step>
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step5"
           onClick={args.onClick}
           title="Le vote des projets"
           content="Arrive en 30 jours"
@@ -660,6 +738,8 @@ export const MultiFrise = (args: any) => (
         />
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step6"
           onClick={args.onClick}
           title="Le vote des projets"
           content="Arrive en 30 jours"
@@ -668,6 +748,8 @@ export const MultiFrise = (args: any) => (
         />
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step7"
           onClick={args.onClick}
           title="Le vote des projets"
           content="Arrive en 30 jours"
@@ -680,6 +762,8 @@ export const MultiFrise = (args: any) => (
       <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step8"
           onClick={args.onClick}
           title="Dépots de projets"
           content="terminé"
@@ -688,6 +772,8 @@ export const MultiFrise = (args: any) => (
         />
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step9"
           onClick={args.onClick}
           title="Le vote des projets"
           content="30 jours restants"
@@ -696,6 +782,8 @@ export const MultiFrise = (args: any) => (
         />
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step10"
           onClick={args.onClick}
           title="Le vote des projets"
           content="30 jours restants"
@@ -704,6 +792,8 @@ export const MultiFrise = (args: any) => (
         />
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step11"
           onClick={args.onClick}
           title="Consultation"
           content="30 jours restants"
@@ -717,6 +807,8 @@ export const MultiFrise = (args: any) => (
       <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step12"
           onClick={args.onClick}
           title="Dépots de projets"
           content="terminé"
@@ -726,6 +818,8 @@ export const MultiFrise = (args: any) => (
         </ProjectHeader.Step>
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step13"
           onClick={args.onClick}
           title="Consultation"
           content="6 jours restants"
@@ -733,6 +827,8 @@ export const MultiFrise = (args: any) => (
         />
         <ProjectHeader.Step
           href="#"
+          url="#"
+          stepId="step14"
           onClick={args.onClick}
           title="Etape d'analyse des projets préalablement déposé préalablement préalablement"
           content=""

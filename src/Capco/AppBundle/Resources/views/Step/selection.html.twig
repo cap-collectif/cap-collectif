@@ -27,24 +27,14 @@
 {% endblock %}
 
 {% block details %}
-    {{ react_render_component('ProposalStepPageApp', { 'props': { 
+    {{ react_render_component('ProjectStepPageApp', { 'props': { 
             'stepId': currentStep.id|toGlobalId('SelectionStep'),
             'projectId': project.id|toGlobalId('Project'),
-            'currentStepType': currentStep.getType(),
-            'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
-            'showVotesWidget': showVotesWidget,
-            'hasVotableStep': currentStep != null,
-            'opinionCanBeFollowed': project.opinionCanBeFollowed,
-            count: capco_site_parameter_value('proposal.pagination') * 1 
+            'projectSlug': project.slug,
         } }) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {% if currentStep.useAddressOrMap %}
-        {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
-    {% endif %}
-    {% if currentStep.customCode is defined and currentStep.customCode != '' %}
-        {{ currentStep.customCode | raw }}
-    {% endif %}
+    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
 {% endblock %}

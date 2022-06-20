@@ -325,6 +325,8 @@ class StepController extends Controller
                 'questionnaireId' => $step->getQuestionnaire()
                     ? GlobalId::toGlobalId('Questionnaire', $step->getQuestionnaire()->getId())
                     : null,
+                'projectSlug' => $project->getSlug(),
+                'projectId' => GlobalId::toGlobalId('Project', $project->getId()),
             ],
             'json',
             [

@@ -29,6 +29,7 @@ describe('<ProposalVoteBasketWidget />', () => {
         objectType: 'PROPOSAL',
       },
       project: {
+        slug: '/consult',
         type: {
           title: 'global.consultation',
         },
@@ -60,6 +61,7 @@ describe('<ProposalVoteBasketWidget />', () => {
         objectType: 'PROPOSAL',
       },
       project: {
+        slug: '/consult',
         type: {
           title: 'global.consultation',
         },
@@ -92,6 +94,7 @@ describe('<ProposalVoteBasketWidget />', () => {
         objectType: 'PROPOSAL',
       },
       project: {
+        slug: '/consult',
         type: {
           title: 'global.consultation',
         },
@@ -123,6 +126,7 @@ describe('<ProposalVoteBasketWidget />', () => {
         objectType: 'PROPOSAL',
       },
       project: {
+        slug: '/interpell',
         type: {
           title: 'project.types.interpellation',
         },

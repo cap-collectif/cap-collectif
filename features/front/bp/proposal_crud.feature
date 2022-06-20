@@ -12,7 +12,7 @@ Scenario: Logged in user wants to create a proposal with theme
   And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses3_field"
   And I wait 10 seconds
   And I submit the create proposal form
-  And I go to "/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/nouvelle-proposition-creee"
+  And I go to "/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/nouvelle-proposition-creee"
   And I wait 10 seconds
   And I should see my new proposal
   Then I should see text matching "proposal.tabs.followers"

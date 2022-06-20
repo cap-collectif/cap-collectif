@@ -41,43 +41,11 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     <h2
       className="text-center"
     >
-      Je suis la belle consultation
+      El titro
     </h2>
     <div
       className="mb-15 project__step-authors text-center"
-    >
-      <div
-        className="mr-15 d-ib"
-      >
-        <Relay(Connect(UserAvatarListContainer))
-          avatarSize={16}
-          max={3}
-          users={
-            Array [
-              Object {
-                "$fragmentRefs": null,
-                "url": "https://capco.dev/profile/lebousername",
-                "username": "lebousername",
-              },
-            ]
-          }
-        />
-        <FormattedMessage
-          id="project.show.published_by"
-          values={Object {}}
-        />
-         
-        <span
-          key="0"
-        >
-          <a
-            href="https://capco.dev/profile/lebousername"
-          >
-            lebousername
-          </a>
-        </span>
-      </div>
-    </div>
+    />
     <div
       className="mb-15 project__step-dates text-center"
     >
@@ -173,8 +141,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     </div>
     <BodyInfos
       body="Je suis le beau body"
-      illustration={null}
-      maxLines={7}
+      maxLines={5}
     />
     <Relay(SectionRecursiveList)
       consultation={
@@ -390,43 +357,11 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
     <h2
       className="text-center"
     >
-      Je suis la belle consultation
+      El titro
     </h2>
     <div
       className="mb-15 project__step-authors text-center"
-    >
-      <div
-        className="mr-15 d-ib"
-      >
-        <Relay(Connect(UserAvatarListContainer))
-          avatarSize={16}
-          max={3}
-          users={
-            Array [
-              Object {
-                "$fragmentRefs": null,
-                "url": "https://capco.dev/profile/lebousername",
-                "username": "lebousername",
-              },
-            ]
-          }
-        />
-        <FormattedMessage
-          id="project.show.published_by"
-          values={Object {}}
-        />
-         
-        <span
-          key="0"
-        >
-          <a
-            href="https://capco.dev/profile/lebousername"
-          >
-            lebousername
-          </a>
-        </span>
-      </div>
-    </div>
+    />
     <div
       className="mb-15 project__step-dates text-center"
     >
@@ -522,8 +457,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
     </div>
     <BodyInfos
       body="Je suis le beau body"
-      illustration={null}
-      maxLines={7}
+      maxLines={5}
     />
     <Relay(SectionRecursiveList)
       consultation={

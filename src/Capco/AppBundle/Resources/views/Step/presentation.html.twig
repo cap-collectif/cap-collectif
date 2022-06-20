@@ -22,95 +22,15 @@
 {% block jumbotron %}{% endblock %}
 
 {% block details %}
-
-    <h2 class="h2">{{ currentStep.title }}</h2>
-
-    <div class="block ">
-        <div class="ql-editor wysiwyg-render">
-            {{ currentStep.body | raw }}
-        </div>
-
-        {% if project.ConsultationStepOpen and project.ConsultationStepOpen.canContribute %}
-            <p><a class="btn  btn-primary" href="{{ path('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
-        {% endif %}
-    </div>
-
-    {% if is_feature_enabled('blog') and posts | length > 0 %}
-        <div class="block">
-            <h2 class="h2">{{ 'menu.news'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbPosts }}</span></h2>
-            <ul class="media-list">
-                {% for post in posts %}
-                    {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
-                {% endfor %}
-            </ul>
-            {% if nbPosts > 2 %}
-                <a href="{{ path('app_project_show_posts', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline" id="project-posts">{{ 'view_all_posts'|trans({}, 'CapcoAppBundle') }}</a>
-            {% endif %}
-        </div>
-    {% endif %}
-
-    {% if is_feature_enabled('calendar') %}
-        {{ react_render_component('PresentationStepEventsApp', { 'props': {'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'projectId': project.id|toGlobalId('Project')} }) }}
-    {% endif %}
-
-    {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
-    {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
-    {% set anonymousCount = contributorsConnection.anonymousCount %}
-
-    <div class="block">
-        <h2 class="h2">{{ 'capco.section.metrics.participants'|trans({}, 'CapcoAppBundle') }}
-            <span class="small excerpt">
-                {{ contributorsCount }}
-                {% if anonymousCount > 0 %}
-                    {{ 'contributors-anonymous-count' | trans({'count': anonymousCount}, 'CapcoAppBundle') }}
-                {% endif %}
-            </span>
-            {% if is_feature_enabled('share_buttons') %}
-                <a class="btn btn-primary pull-right" href="mailto:?body={{ project | capco_first_step_link(true) | escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
-                    <i class="cap cap-user-add-2"></i>
-                    {{ 'project.share_button' | trans({}, 'CapcoAppBundle') }}
-                </a>
-            {% endif %}
-        </h2>
-
-        {# {% if contributors | length > 0 %}
-            <div class="row">
-                {% for contributor in contributors|slice(0,9) %}
-                    {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.contributions, votes: contributor.votes, showVotes: showVotes, 'col': 4} only %}
-                {% endfor %}
-            </div>
-        {% else %}
-            <div>
-                {% if (project.consultationStep is defined) and project.isOpen %}
-                    {{ 'project.contributors.participate' | trans({
-                        '%link%': '<a href="' ~ path('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) ~'"">' ,
-                        '%endlink%': '</a>'
-                    }, 'CapcoAppBundle') | raw }}
-                {% else %}
-                    {{ 'project.contributors.no' | trans({}, 'CapcoAppBundle')}}
-                {% endif %}
-            </div>
-        {% endif %}
-        
-        {% if contributors|length > 9 %}
-            <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">
-                {{ 'event_registration.listing.see_all'|trans({}, 'CapcoAppBundle') }}
-            </a>
-        {% endif %} #}
-    </div>
-
+    {{ react_render_component('ProjectStepPageApp', { 'props': { 
+        'projectSlug': project.slug,
+        'projectId': project.id|toGlobalId('Project'),
+        'stepId': currentStep.id|toGlobalId('PresentationStep'),
+        'currentStepType': currentStep.getType(),
+    } }) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            App.equalheight('.event-js');
-        });
-
-        $(window).on('resize', function() {
-            App.resized('.event-js');
-        });
-    </script>
-    {% if currentStep.customCode is defined and currentStep.customCode != '' %}{{ currentStep.customCode | raw }}{% endif %}
+    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
 {% endblock %}

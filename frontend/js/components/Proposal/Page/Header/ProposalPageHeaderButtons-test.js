@@ -26,11 +26,12 @@ describe('<ProposalPageHeaderButtons />', () => {
       canContact: true,
     },
     publicationStatus: 'PUBLISHED',
+    currentVotableStep: {
+      id: 'stepid',
+    },
   };
 
   const props = {
-    opinionCanBeFollowed: true,
-    hasVotableStep: true,
     dispatch: jest.fn(),
   };
 

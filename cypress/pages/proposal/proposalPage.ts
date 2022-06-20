@@ -13,7 +13,7 @@ export default new (class ProposalPage {
   visit({ project, step, stepType, proposal }: VisitOptions) {
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalPageQuery' })
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalVotesByStepQuery' })
-    this.cy.visit(`/projects/${project}/${stepType}/${step}/proposals/${proposal}`)
+    this.cy.visit(`/project/${project}/${stepType}/${step}/proposals/${proposal}`)
     this.cy.wait('@ProposalPageQuery')
     this.cy.wait('@ProposalVotesByStepQuery')
   }
@@ -21,7 +21,7 @@ export default new (class ProposalPage {
   visitWithoutVotes({ project, step, stepType, proposal }: VisitOptions) {
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalPageQuery' })
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalVotesByStepQuery' })
-    this.cy.visit(`/projects/${project}/${stepType}/${step}/proposals/${proposal}`)
+    this.cy.visit(`/project/${project}/${stepType}/${step}/proposals/${proposal}`)
     this.cy.wait('@ProposalPageQuery')
   }
 

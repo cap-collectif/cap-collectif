@@ -13,6 +13,9 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
           "slug": "metal",
         },
         "contribuable": true,
+        "currentVotableStep": Object {
+          "id": "stepid",
+        },
         "form": Object {
           "canContact": true,
           "contribuable": true,
@@ -27,63 +30,6 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
       }
     }
   />
-  <ProposalPageHeaderButtons__FixedButtons>
-    <ProposalVoteButtonWrapperFragment
-      disabled={false}
-      id="proposal-vote-btn"
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "author": Object {
-            "displayName": "flex",
-            "id": "authorid",
-            "slug": "metal",
-          },
-          "contribuable": true,
-          "form": Object {
-            "canContact": true,
-            "contribuable": true,
-          },
-          "id": "proposalId",
-          "pendingRevisions": Object {
-            "totalCount": 0,
-          },
-          "publicationStatus": "PUBLISHED",
-          "title": "OEEEEE",
-          "url": "/slash",
-        }
-      }
-      step={null}
-      viewer={null}
-    />
-    <Relay(ProposalFollowButton)
-      isAuthenticated={false}
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "author": Object {
-            "displayName": "flex",
-            "id": "authorid",
-            "slug": "metal",
-          },
-          "contribuable": true,
-          "form": Object {
-            "canContact": true,
-            "contribuable": true,
-          },
-          "id": "proposalId",
-          "pendingRevisions": Object {
-            "totalCount": 0,
-          },
-          "publicationStatus": "PUBLISHED",
-          "title": "OEEEEE",
-          "url": "/slash",
-        }
-      }
-    />
-  </ProposalPageHeaderButtons__FixedButtons>
   <Connect(ShareButtonDropdownLegacy)
     disabled={false}
     id="proposal-share-button"
@@ -102,6 +48,9 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
           "slug": "metal",
         },
         "contribuable": true,
+        "currentVotableStep": Object {
+          "id": "stepid",
+        },
         "form": Object {
           "canContact": true,
           "contribuable": true,

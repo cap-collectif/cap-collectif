@@ -13,24 +13,15 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 export type Props = {|
   +proposalSlug: string,
   +currentVotableStepId: ?string,
-  +opinionCanBeFollowed: boolean,
   +isAuthenticated: boolean,
-  +hasVotableStep: boolean,
-  +votesPageUrl: string,
-  +showVotesWidget: boolean,
 |};
 
-export const ProposalPage = ({
-  currentVotableStepId,
-  isAuthenticated,
-  opinionCanBeFollowed,
-  hasVotableStep,
-  votesPageUrl,
-  showVotesWidget,
-}: Props) => {
-  const { slug } = useParams();
+export const ProposalPage = ({ currentVotableStepId, isAuthenticated }: Props) => {
+  const { proposalSlug } = useParams();
   const { state } = useLocation();
   const proposalRevisionsEnabled = useFeatureFlag('proposal_revisions');
+  const hasVotableStep = !!state?.currentVotableStepId || !!currentVotableStepId;
+
   return (
     <QueryRenderer
       fetchPolicy="store-and-network"
@@ -61,8 +52,8 @@ export const ProposalPage = ({
         }
       `}
       variables={{
-        proposalSlug: slug,
-        hasVotableStep: !!state?.currentVotableStepId || !!currentVotableStepId,
+        proposalSlug,
+        hasVotableStep,
         stepId: state?.currentVotableStepId || currentVotableStepId || '',
         count: PROPOSAL_FOLLOWERS_TO_SHOW,
         cursor: null,
@@ -87,9 +78,6 @@ export const ProposalPage = ({
           <ProposalPageLogic
             queryRef={props}
             hasVotableStep={hasVotableStep}
-            opinionCanBeFollowed={opinionCanBeFollowed}
-            votesPageUrl={votesPageUrl}
-            showVotesWidget={showVotesWidget}
             isAuthenticated={isAuthenticated}
           />
         );

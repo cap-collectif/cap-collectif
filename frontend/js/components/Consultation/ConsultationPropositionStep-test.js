@@ -8,11 +8,18 @@ import { $fragmentRefs, $refType } from '../../mocks';
 describe('<ConsultationPropositionStep />', () => {
   const props = {
     showConsultationPlan: true,
-    isMultiConsultation: false,
     consultationPlanEnabled: true,
     consultationStep: {
+      consultations: { totalCount: 1 },
       project: {
         hasParticipativeStep: true,
+        authors: [
+          {
+            url: 'https://capco.dev/profile/lebousername',
+            username: 'lebousername',
+            $fragmentRefs,
+          },
+        ],
       },
       id: 'myStep',
       title: 'El titro',
@@ -52,7 +59,6 @@ describe('<ConsultationPropositionStep />', () => {
 
   const multiConsultationProps = {
     ...props,
-    isMultiConsultation: true,
     consultationStep: {
       ...props.consultationStep,
       project: {

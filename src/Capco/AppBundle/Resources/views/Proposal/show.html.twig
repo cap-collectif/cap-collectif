@@ -31,17 +31,11 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('ProposalStepPageApp', { 'props': { 
+    {{ react_render_component('ProjectStepPageApp', { 'props': { 
         'currentVotableStepId': currentVotableStepId,
         'stepId': currentStep.id|toGlobalId('CollectStep'),
         'projectId': project.id|toGlobalId('Project'),
-        'currentStepType': currentStep.getType(),
-        'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
-        'showVotesWidget': showVotesWidget,
-        'hasVotableStep': currentStep != null,
-        'opinionCanBeFollowed': project.opinionCanBeFollowed,
-        'proposalSlug': proposal.slug,
-        count: capco_site_parameter_value('proposal.pagination') * 1 
+        'projectSlug': project.slug,
     } }) }}
 {% endblock %}
 

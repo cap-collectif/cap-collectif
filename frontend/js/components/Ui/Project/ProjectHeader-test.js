@@ -96,6 +96,8 @@ describe('<ProjectHeader />', () => {
           <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step1"
               title="Dépots de projets"
               content="terminé"
               tooltipLabel="Terminé"
@@ -103,6 +105,8 @@ describe('<ProjectHeader />', () => {
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step2"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -110,6 +114,8 @@ describe('<ProjectHeader />', () => {
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step3"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -117,6 +123,8 @@ describe('<ProjectHeader />', () => {
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step4"
               title="Consultation"
               content="30 jours restants"
               tooltipLabel="30 jours restants"
@@ -125,6 +133,8 @@ describe('<ProjectHeader />', () => {
             </ProjectHeader.Step>
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step5"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -132,6 +142,8 @@ describe('<ProjectHeader />', () => {
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step6"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
@@ -139,6 +151,8 @@ describe('<ProjectHeader />', () => {
             />
             <ProjectHeader.Step
               href="#"
+              url="#"
+              stepId="step7"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"

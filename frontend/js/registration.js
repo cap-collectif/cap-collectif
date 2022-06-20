@@ -3,7 +3,6 @@ import ReactOnRails from 'react-on-rails';
 
 import ProjectsListApp from './startup/ProjectsListAppClient';
 import CustomProjectsListApp from './startup/CustomProjectsListApp';
-import ProposalStepPageApp from './startup/ProposalStepPageApp';
 import NavbarApp from './startup/NavbarAppClient';
 import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient';
 import ProjectTrashButtonApp from './startup/ProjectTrashButtonApp';
@@ -11,8 +10,6 @@ import CarouselApp from './startup/CarouselApp';
 import MetricsApp from './startup/MetricsApp';
 import OpinionPageApp from './startup/OpinionPageApp';
 import CommentSectionApp from './startup/CommentSectionApp';
-import ProposalPageApp from './startup/ProposalPageApp';
-import QuestionnaireStepPageApp from './startup/QuestionnaireStepPageApp';
 import ProposalVoteBasketWidgetApp from './startup/ProposalVoteBasketWidgetApp';
 import AlertBoxApp from './startup/AlertBoxApp';
 import ConsultationPageApp from './startup/ConsultationPageApp';
@@ -51,7 +48,6 @@ import OpinionVersionListPageApp from './startup/OpinionVersionListPageApp';
 import SSOSwitchUserApp from './startup/SSOSwitchUserApp';
 import LastProposalsApp from './startup/LastProposalsApp';
 import HomePageEventsApp from './startup/HomePageEventsApp';
-import PresentationStepEventsApp from './startup/PresentationStepEventsApp';
 import StepEventsApp from './startup/StepEventsApp';
 import ProfileUserCommentApp from './startup/ProfileUserCommentApp';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
@@ -82,6 +78,7 @@ import ProjectHeaderApp from '~/startup/ProjectHeaderApp';
 import DebateWidgetAccessDeniedApp from '~/startup/DebateWidgetAccessDeniedApp';
 import UserUnsubscribePageApp from '~/startup/UserUnsubscribePageApp';
 import ChartModalApp from '~/startup/ChartModalApp';
+import ProjectStepPageApp from './startup/ProjectStepPageApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -98,11 +95,9 @@ ReactOnRails.register({
   CasUserNotValidApp,
   ShieldApp,
   HomePageEventsApp,
-  PresentationStepEventsApp,
   ProjectListPageApp,
   ProjectsListApp,
   CustomProjectsListApp,
-  ProposalStepPageApp,
   EmailNotConfirmedApp,
   SectionPageApp,
   AccountProfileApp,
@@ -112,8 +107,6 @@ ReactOnRails.register({
   AnalysisPageApp,
   OpinionPageApp,
   CommentSectionApp,
-  ProposalPageApp,
-  QuestionnaireStepPageApp,
   ProposalVoteBasketWidgetApp,
   AlertBoxApp,
   ConsultationPageApp,
@@ -152,6 +145,7 @@ ReactOnRails.register({
   DebateWidgetAccessDeniedApp,
   UserUnsubscribePageApp,
   ChartModalApp,
+  ProjectStepPageApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,
