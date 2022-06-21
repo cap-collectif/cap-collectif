@@ -29,6 +29,14 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
       edges {
         node {
           id
+          followers {
+            totalCount
+            edges {
+              node {
+                id
+              }
+            }
+          }
         }
       }
     }
@@ -419,7 +427,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: {
           projectId,
           ...BASE_PROJECT,
-          districts: ['projectDistrict2', 'projectDistrict3'],
+          districts: ['projectDistrict2', 'projectDistrict7'],
         },
       },
       'internal_admin',
@@ -438,7 +446,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
               },
               {
                 node: {
-                  id: 'projectDistrict3',
+                  id: 'projectDistrict7',
                 },
               },
             ],
@@ -469,7 +477,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
             'projectDistrict3',
             'projectDistrict4',
             'projectDistrict5',
-            'projectDistrict6',
+            'projectDistrict7',
           ],
         },
       },
@@ -504,7 +512,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
               },
               {
                 node: {
-                  id: 'projectDistrict6',
+                  id: 'projectDistrict7',
                 },
               },
             ],

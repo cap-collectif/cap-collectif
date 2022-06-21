@@ -3,6 +3,8 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            $publisher: '@swarrot.publisher'
 
     Capco\AppBundle\Form\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Form/*'

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form\Persister;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
@@ -16,6 +17,8 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -27,6 +30,7 @@ class ProjectPersister
     private FormFactoryInterface $formFactory;
     private ProjectStepPersister $stepPersister;
     private ProjectRepository $repository;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -34,7 +38,8 @@ class ProjectPersister
         FormFactoryInterface $formFactory,
         ProjectAuthorTransformer $transformer,
         ProjectStepPersister $stepPersister,
-        ProjectRepository $repository
+        ProjectRepository $repository,
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -42,6 +47,7 @@ class ProjectPersister
         $this->stepPersister = $stepPersister;
         $this->transformer = $transformer;
         $this->repository = $repository;
+        $this->publisher = $publisher;
     }
 
     public function persist(Argument $input, User $viewer, ?bool $editMode = false): Project
@@ -55,7 +61,7 @@ class ProjectPersister
         }
 
         $project = (new Project())->setOwner($viewer);
-
+        $previousDistricts = [];
         if (!empty($arguments['restrictedViewerGroups'])) {
             $arguments['restrictedViewerGroups'] = array_map(function ($groupGlobalId) {
                 return GlobalId::fromGlobalId($groupGlobalId)['id'];
@@ -65,7 +71,7 @@ class ProjectPersister
         if ($editMode) {
             $projectId = GlobalId::fromGlobalId($input->offsetGet('projectId'))['id'];
             $project = $this->repository->find($projectId);
-            if (!$project) {
+            if (!$project instanceof Project) {
                 throw new UserError(sprintf('Unknown project "%d"', $projectId));
             }
             if (
@@ -76,6 +82,12 @@ class ProjectPersister
             }
 
             unset($arguments['projectId']);
+            $previousDistricts = $project->getProjectDistrictPositionersIds();
+        }
+
+        $newDistricts = array_diff($arguments['districts'], $previousDistricts);
+        if ($newDistricts) {
+            $this->notifyOnNewProjectInDistrict($newDistricts, $project);
         }
 
         $form = $this->formFactory->create(AlphaProjectFormType::class, $project);
@@ -129,5 +141,21 @@ class ProjectPersister
         }
 
         return $project;
+    }
+
+    private function notifyOnNewProjectInDistrict(array $projectDistrictsId, Project $project): void
+    {
+        $projectDistrictsId = array_values($projectDistrictsId);
+        foreach ($projectDistrictsId as $projectDistrict) {
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROJECT_DISTRICT_NOTIFICATION,
+                new Message(
+                    json_encode([
+                        'projectDistrict' => $projectDistrict,
+                        'projectId' => $project->getId(),
+                    ])
+                )
+            );
+        }
     }
 }

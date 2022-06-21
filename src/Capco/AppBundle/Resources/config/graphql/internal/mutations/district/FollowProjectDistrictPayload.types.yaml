@@ -1,0 +1,10 @@
+FollowProjectDistrictPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            projectDistrict:
+                type: 'ProjectDistrict'
+            followerEdge:
+                type: 'FollowerEdge'
+            errorCode:
+                type: 'ProjectDistrictErrorCode'

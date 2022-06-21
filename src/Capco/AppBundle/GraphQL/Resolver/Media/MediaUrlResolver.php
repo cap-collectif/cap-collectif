@@ -5,18 +5,17 @@ namespace Capco\AppBundle\GraphQL\Resolver\Media;
 use Capco\MediaBundle\Entity\Media;
 use Sonata\MediaBundle\Provider\FileProvider;
 use Sonata\MediaBundle\Provider\ImageProvider;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class MediaUrlResolver implements ResolverInterface
 {
-    private $imgProvider;
-    private $fileProvider;
-    private $router;
-    private $assetsHost;
-    private $routerRequestContextHost;
+    private ImageProvider $imgProvider;
+    private FileProvider $fileProvider;
+    private RouterInterface $router;
+    private ?string $assetsHost;
+    private string $routerRequestContextHost;
 
     public function __construct(
         ImageProvider $imgProvider,
@@ -55,6 +54,7 @@ class MediaUrlResolver implements ResolverInterface
             if ($this->assetsHost && !$isExportContext) {
                 $path = str_replace($this->routerRequestContextHost, $this->assetsHost, $path);
             }
+
             return $path;
         }
 

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.projectDistrict should return an error DISTRICT_NOT_FOUND 1`] = `
+Object {
+  "unfollowProjectDistrict": Object {
+    "errorCode": "DISTRICT_NOT_FOUND",
+    "projectDistrict": null,
+  },
+}
+`;
+
+exports[`mutations.projectDistrict should unfollow to a project district 1`] = `
+Object {
+  "unfollowProjectDistrict": Object {
+    "errorCode": null,
+    "projectDistrict": Object {
+      "followers": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "username": "user",
+            },
+          },
+        ],
+        "totalCount": 1,
+      },
+      "id": "projectDistrict6",
+    },
+  },
+}
+`;

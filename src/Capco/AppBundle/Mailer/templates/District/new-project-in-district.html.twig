@@ -1,0 +1,91 @@
+{% extends "@CapcoMail/standardLayoutNew.html.twig" %}
+
+{% set logo = app_logo_url() %}
+
+{% set btnBg = capco_site_color_value('color.btn.bg') %}
+{% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
+{% set btnText = capco_site_color_value('color.btn.text') %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
+{% set linkText = capco_site_color_value('color.link.default') %}
+{% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}
+
+{% block html_title %}
+    {{ 'new-zone-geo-title'|trans({'zoneGeoTitle': zoneGeoTitle}, 'CapcoAppBundle', user_locale) }}
+{% endblock %}
+{% block core_mail %}
+    <div>
+        {% if logo is not null %}
+            <img style="margin-bottom: 20px;" src="{{ logo }}" alt="logo {{ siteName }}"/>
+        {% else %}
+            <img style="margin-bottom: 20px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt=""/>
+        {% endif %}
+
+        <div style="text-align: left;">
+            <p style="margin: 0; color: #272B30; font-weight: 600; line-height: 32px; font-size: 24px">
+                {{ 'new-zone-geo-title'|trans({'zoneGeoTitle': zoneGeoTitle}, 'CapcoAppBundle', user_locale) }}
+            </p>
+            <p style="font-weight: 400;font-size: 14px;line-height: 24px;">{{ 'email-new-project-in-district'|trans({'zoneGeoTitle': zoneGeoTitle}, 'CapcoAppBundle', user_locale)|raw }}</p>
+            <div style="margin: 0 auto; width: 275px;">
+                <div style="margin-top: 40px; height: 270px;background: #FFFFFF;box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.15); border-radius: 8px;">
+                    {% if projectThumb is not null %}
+                        <img style="width: 275px; height: 127px;" src="{{ projectThumb }}"
+                             alt="logo {{ projectTitle }}"/>
+                    {% else %}
+                        <div style="background: #546E7A;   overflow: hidden; position: relative; width: 275px; height: 127px;border-radius: 8px 8px 0 0;">
+                            <svg
+                                    version="1.1"
+                                    role="img"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    x="0px"
+                                    y="0px"
+                                    width="110px"
+                                    height="110px"
+                                    viewBox="-162.5 -162.5 226.5 226.5"
+                                    enableBackground="new -162.5 -162.5 226.5 226.5"
+                                    style="margin: 0px auto; display: block; position: absolute; top: calc(50% - 55px); left: calc(50% - 55px);"
+                            >
+                                <path
+                                        fill="none"
+                                        stroke="#FFFFFF"
+                                        strokeWidth="10"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeMiterlimit="10"
+                                        d="M-27.254-143.396h-91.487c-20.386,0-36.596,16.21-36.596,36.595v32.934c0,20.386,16.525,32.934,36.907,32.934h14.323v40.252l36.436-40.252h40.417c20.382,0,40.251-16.21,40.251-36.595v-29.275C13.001-127.187-6.865-143.396-27.254-143.396z"
+                                />
+                                <path
+                                        fill="none"
+                                        stroke="#FFFFFF"
+                                        strokeWidth="10"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeMiterlimit="10"
+                                        d="M-52.87-4.331c0,12.74,9.215,21.952,21.959,21.952h21.952L20.32,46.896V17.621h13.662c12.814,0,23.17-10.445,23.066-23.256l-0.137-16.84c0-12.736-9.208-22.111-21.952-22.111"
+                                />
+                            </svg>
+                        </div>
+                    {% endif %}
+                    <div style="padding: 16px; color: #272B30;font-weight: 600;font-size: 14px;line-height: 19px;">
+                        {{ projectTitle|raw }}
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 12px 32px;margin:40px auto 0 auto;width: 152px;background: #331B44;border-radius: 4px;font-weight: 600;font-size: 14px;line-height: 24px;text-align:center;">
+                <a style="color: #FFFFFF;font-size: 14px;width: 88px;height: 24px;"
+                   href="{{ baseUrl ~ projectsURL }}">{{ 'show-project'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer_mail %}
+    <div>
+        <p style="margin: 0; text-align: left">{{ 'geo-zone-email-footer'|trans({'zoneGeoTitle': zoneGeoTitle}, 'CapcoAppBundle', user_locale) | raw }}</p>
+
+        <p style="text-align: left;">
+            {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+            <img src="{{ baseUrl ~ asset("capco-logo-mail.png") }}" alt="logo cap collectif"
+                 style="width: 15px;height: 15px;margin: 0 2px 0 4px;"/>
+            Cap Collectif
+        </p>
+    </div>
+{% endblock %}

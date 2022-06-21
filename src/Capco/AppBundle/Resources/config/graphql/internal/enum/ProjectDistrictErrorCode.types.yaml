@@ -1,0 +1,12 @@
+ProjectDistrictErrorCode:
+    type: enum
+    config:
+        name: ProjectDistrictErrorCode
+        description: 'Available errors on proposal news mutation'
+        values:
+            DISTRICT_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UnfollowProjectDistrictMutation::DISTRICT_NOT_FOUND")'
+                description: 'The given district is not found'
+            FOLLOWER_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UnfollowProjectDistrictMutation::FOLLOWER_NOT_FOUND")'
+                description: 'The given follower is not found'

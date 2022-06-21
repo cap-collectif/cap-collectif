@@ -21,18 +21,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProjectDistrictPositioner
 {
-    use UuidTrait;
     use PositionableTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="projectDistrictPositioners")
      */
-    private $district;
+    private ProjectDistrict $district;
+
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="projectDistrictPositioners")
      */
-    private $project;
+    private Project $project;
 
     public function __toString(): string
     {

@@ -989,6 +989,12 @@ class UserRepository extends EntityRepository
                 ->setParameter('opinionVersionId', $criteria['opinionVersion']->getId());
         }
 
+        if (isset($criteria['projectDistrict'])) {
+            $qb->join('f.projectDistrict', 'pd')
+                ->andWhere('pd.id = :projectDistrict')
+                ->setParameter('projectDistrict', $criteria['projectDistrict']->getId());
+        }
+
         $sortField = array_keys($orderBy)[0];
         $direction = $orderBy[$sortField];
 

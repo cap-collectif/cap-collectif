@@ -1,0 +1,28 @@
+ProjectDistrict:
+    type: object
+    inherits:
+        - District
+        - WithFollowers
+    config:
+        name: ProjectDistrict
+        interfaces:
+            - District
+        description: 'A project district'
+        fields:
+            projects:
+                type: 'InternalProjectConnection'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectsInDistrictResolver", [value, args, getUser()])'
+                description: 'The list of projects in district'
+            followers:
+                type: 'InternalUserConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    orderBy:
+                        type: 'FollowerOrder'
+                        defaultValue: { field: FOLLOWED_AT, direction: DESC }
+                        description: 'Ordering options for followers returning from the connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\ProjectDistrictFollowerConnection", [value, args])'
+                description: 'The list of followers of the district'
+            projectDistrictPositioners:
+                type: '[ProjectDistrictPositioner]'

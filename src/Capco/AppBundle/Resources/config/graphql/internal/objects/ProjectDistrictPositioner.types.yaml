@@ -1,0 +1,11 @@
+ProjectDistrictPositioner:
+    type: object
+    config:
+        name: ProjectDistrictPositioner
+        fields:
+            district:
+                type: 'ProjectDistrict!'
+            project:
+                type: 'InternalProject!'
+            position:
+                type: 'Int!'

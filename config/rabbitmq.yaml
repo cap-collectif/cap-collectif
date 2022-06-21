@@ -242,3 +242,9 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: sendinblue
+        project_district_notification:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: project_district_notification

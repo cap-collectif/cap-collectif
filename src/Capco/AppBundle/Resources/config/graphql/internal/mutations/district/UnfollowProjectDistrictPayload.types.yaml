@@ -1,0 +1,13 @@
+UnfollowProjectDistrictPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            projectDistrict:
+                type: 'ProjectDistrict'
+                description: 'The project district unfollowed'
+            unfollowerId:
+                type: 'ID'
+                description: 'The ID of viewer who unfollow the district'
+            errorCode:
+                type: 'ProjectDistrictErrorCode'
+                description: 'Available errors for the mutation.'

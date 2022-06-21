@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user_following",
  *    uniqueConstraints={
  *      @UniqueConstraint(name="follower_unique_proposal",columns={"user_id", "proposal_id"}),
+ *      @UniqueConstraint(name="follower_unique_project_district",columns={"user_id", "project_district_id"}),
  *      @UniqueConstraint(name="follower_unique_opinion",columns={"user_id", "opinion_id"}),
  *    }
  * )
@@ -55,7 +57,13 @@ class Follower implements IndexableInterface
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="followers")
      * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected $opinionVersion;
+    protected ?OpinionVersion $opinionVersion;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="followers")
+     * @ORM\JoinColumn(name="project_district_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    protected ?ProjectDistrict $projectDistrict;
 
     /**
      * @ORM\Column(name="notified_of", columnDefinition="ENUM('MINIMAL', 'ESSENTIAL', 'ALL')", nullable=true)
@@ -128,6 +136,26 @@ class Follower implements IndexableInterface
         return $this;
     }
 
+    public function getProjectDistrict(): ?ProjectDistrict
+    {
+        return $this->projectDistrict;
+    }
+
+    public function setProjectDistrict(?ProjectDistrict $projectDistrict): self
+    {
+        if (!$projectDistrict && $this->projectDistrict) {
+            $this->projectDistrict->removeFollower($this);
+        }
+
+        $this->projectDistrict = $projectDistrict;
+
+        if ($projectDistrict) {
+            $projectDistrict->addFollower($this);
+        }
+
+        return $this;
+    }
+
     /**
      * @ORM\PreRemove
      */
@@ -143,6 +171,10 @@ class Follower implements IndexableInterface
 
         if ($this->opinionVersion) {
             $this->opinionVersion->removeFollower($this);
+        }
+
+        if ($this->projectDistrict) {
+            $this->projectDistrict->removeFollower($this);
         }
     }
 

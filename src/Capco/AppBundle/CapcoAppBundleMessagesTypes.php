@@ -45,4 +45,6 @@ final class CapcoAppBundleMessagesTypes
 
     public const CUSTOM_DOMAIN_CREATE = 'custom.domain.create';
     public const SENDINBLUE = 'sendinblue';
+
+    public const PROJECT_DISTRICT_NOTIFICATION = 'project_district.notification';
 }

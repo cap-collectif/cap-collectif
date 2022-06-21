@@ -17,11 +17,11 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigura
 
 class FollowProposalMutation implements MutationInterface
 {
-    private $em;
-    private $followerRepository;
-    private $viewerFollowDataLoader;
-    private $viewerFollowingConfigDataLoader;
-    private $globalIdResolver;
+    private EntityManagerInterface $em;
+    private FollowerRepository $followerRepository;
+    private ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader;
+    private ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,

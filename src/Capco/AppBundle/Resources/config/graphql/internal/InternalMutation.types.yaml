@@ -418,6 +418,20 @@ InternalMutation:
                     inputType: UnfollowOpinionInput
                     payloadType: UnfollowOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowOpinionMutation", [value, getUser()])'
+            followProjectDistrict:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: FollowProjectDistrictInput
+                    payloadType: FollowProjectDistrictPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\FollowProjectDistrictMutation", [value, getUser()])'
+            unfollowProjectDistrict:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UnfollowProjectDistrictInput
+                    payloadType: UnfollowProjectDistrictPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UnfollowProjectDistrictMutation", [value, getUser()])'
             selectProposal:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGranted(args["input"]["proposalId"], getUser(), "selectProposal")'
                 builder: 'Relay::Mutation'

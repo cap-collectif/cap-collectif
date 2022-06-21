@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProjectDistrictResolver implements ResolverInterface
 {
-    private $positionerRepository;
+    private ProjectDistrictPositionerRepository $positionerRepository;
 
     public function __construct(ProjectDistrictPositionerRepository $positionerRepository)
     {

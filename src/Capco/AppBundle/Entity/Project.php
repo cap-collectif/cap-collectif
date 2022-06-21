@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
@@ -61,17 +62,17 @@ class Project implements IndexableInterface, TimeRangeable
 
     public const DEFAULT_COVER_FILTER_OPACITY = 50;
 
-    public static $sortOrder = [
+    public static array $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,
         'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
     ];
 
-    public static $sortOrderLabels = [
+    public static array $sortOrderLabels = [
         'date' => 'global.updated.date',
         'popularity' => 'project.sort.contributions_nb',
     ];
 
-    public static $openingStatuses = [
+    public static array $openingStatuses = [
         'future_witout_finished_steps' => self::STATE_FUTURE_WITHOUT_FINISHED_STEPS,
         'future_with_finished_steps' => self::STATE_FUTURE_WITH_FINISHED_STEPS,
         'opened' => self::STATE_OPENED,
@@ -1246,6 +1247,13 @@ class Project implements IndexableInterface, TimeRangeable
         return $this->projectDistrictPositioners;
     }
 
+    public function getProjectDistrictPositionersIds(): iterable
+    {
+        return array_map(function (ProjectDistrictPositioner $district) {
+            return $district->getDistrict()->getId();
+        }, $this->getProjectDistrictPositioners()->toArray());
+    }
+
     public function setProjectDistrictPositioners(iterable $projectDistrictPositioners): self
     {
         $this->projectDistrictPositioners = $projectDistrictPositioners;
@@ -1385,9 +1393,6 @@ class Project implements IndexableInterface, TimeRangeable
         return $this->archived;
     }
 
-    /**
-     * @return Project
-     */
     public function setArchived(bool $archived): self
     {
         $this->archived = $archived;

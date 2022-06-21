@@ -9,8 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class OpinionUpdateProcessor implements ProcessorInterface
 {
-    private $opinionRepository;
-    private $opinionNotifier;
+    private OpinionRepository $opinionRepository;
+    private OpinionNotifier $opinionNotifier;
 
     public function __construct(
         OpinionRepository $opinionRepository,

@@ -10,9 +10,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProjectResolver
 {
-    protected $projectRepository;
-    protected $router;
-    protected $requestStack;
+    protected ProjectRepository $projectRepository;
+    protected RouterInterface $router;
+    protected RequestStack $requestStack;
 
     public function __construct(
         ProjectRepository $projectRepository,

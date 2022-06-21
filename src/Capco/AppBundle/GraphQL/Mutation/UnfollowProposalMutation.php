@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\FollowerRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -17,23 +16,20 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigura
 
 class UnfollowProposalMutation implements MutationInterface
 {
-    private $em;
-    private $proposalRepository;
-    private $followerRepository;
-    private $viewerFollowDataLoader;
-    private $viewerFollowingConfigDataLoader;
-    private $globalIdResolver;
+    private EntityManagerInterface $em;
+    private FollowerRepository $followerRepository;
+    private ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader;
+    private ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
-        ProposalRepository $proposalRepository,
         FollowerRepository $followerRepository,
         ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader,
         ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader,
         GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;
-        $this->proposalRepository = $proposalRepository;
         $this->followerRepository = $followerRepository;
         $this->viewerFollowDataLoader = $viewerFollowDataLoader;
         $this->viewerFollowingConfigDataLoader = $viewerFollowingConfigDataLoader;
@@ -62,15 +58,14 @@ class UnfollowProposalMutation implements MutationInterface
         return ['proposal' => $proposal, 'unfollowerId' => $user->getId()];
     }
 
-    protected function unfollowAProposal(Proposal $proposal, User $user)
+    protected function unfollowAProposal(Proposal $proposal, User $user): void
     {
-        /** @var Follower $follower */
         $follower = $this->followerRepository->findOneBy([
             'user' => $user,
             'proposal' => $proposal,
         ]);
 
-        if (!$follower) {
+        if (!$follower instanceof Follower) {
             throw new UserError('Cant find the follower');
         }
 

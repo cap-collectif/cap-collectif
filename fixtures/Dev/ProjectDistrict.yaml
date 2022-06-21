@@ -1,36 +1,36 @@
 Capco\AppBundle\Entity\District\ProjectDistrict:
-  projectDistrict1:
-    id: projectDistrict1
-    displayedOnMap: 1
-    border: '@borderStyle1'
-    background: '@backgroundStyle1'
-  projectDistrict2:
-    id: projectDistrict2
-    displayedOnMap: 1
-    border: '@borderStyle1'
-    background: '@backgroundStyle1'
-  projectDistrict3:
-    id: projectDistrict3
-    displayedOnMap: 1
-    border: '@borderStyle1'
-    background: '@backgroundStyle1'
-  projectDistrict4:
-    id: projectDistrict4
-    displayedOnMap: 1
-    border: '@borderStyle1'
-    background: '@backgroundStyle1'
-  projectDistrict5:
-    id: projectDistrict5
-    displayedOnMap: 1
-    border: '@borderStyle1'
-    background: '@backgroundStyle1'
-  projectDistrict6:
-    id: projectDistrict6
-    displayedOnMap: 1
-    border: '@borderStyle1'
-    background: '@backgroundStyle1'
-  projectDistrict7:
-    id: projectDistrict7
-    displayedOnMap: 1
-    border: '@borderStyle1'
-    background: '@backgroundStyle1'
+    projectDistrict1:
+        id: projectDistrict1
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    projectDistrict2:
+        id: projectDistrict2
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    projectDistrict3:
+        id: projectDistrict3
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    projectDistrict4:
+        id: projectDistrict4
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    projectDistrict5:
+        id: projectDistrict5
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    projectDistrict6:
+        id: projectDistrict6
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    projectDistrict7:
+        id: projectDistrict7
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'

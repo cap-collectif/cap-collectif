@@ -10,9 +10,9 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class SiteImageRuntime implements RuntimeExtensionInterface
 {
-    protected $resolver;
-    private $repository;
-    private $container;
+    protected Resolver $resolver;
+    private SiteImageRepository $repository;
+    private ContainerInterface $container;
 
     public function __construct(
         Resolver $resolver,

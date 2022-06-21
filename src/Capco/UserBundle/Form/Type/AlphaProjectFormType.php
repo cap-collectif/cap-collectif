@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class AlphaProjectFormType extends AbstractType
 {
-    private $persister;
+    private ProjectDistrictsPersister $persister;
 
     public function __construct(ProjectDistrictsPersister $persister)
     {

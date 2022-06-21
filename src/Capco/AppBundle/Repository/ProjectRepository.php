@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -348,6 +349,38 @@ class ProjectRepository extends EntityRepository
             ->setParameter('projectIds', $projectIds)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findByDistrict(
+        ProjectDistrict $district,
+        $user,
+        int $offset,
+        int $limit
+    ): Paginator {
+        $qb = $this->getProjectsViewerCanSeeQueryBuilder($user);
+
+        $qb->leftJoin('p.projectDistrictPositioners', 'pd')
+            ->andWhere('pd.district = :district')
+            ->setParameter('district', $district);
+
+        $query = $qb
+            ->getQuery()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($query);
+    }
+
+    public function countByDistrict(ProjectDistrict $district, $user): int
+    {
+        $qb = $this->getProjectsViewerCanSeeQueryBuilder($user);
+
+        $qb->select('COUNT(p.id)')
+            ->leftJoin('p.projectDistrictPositioners', 'pd')
+            ->andWhere('pd.district = :district')
+            ->setParameter('district', $district);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     private function getUserProjectPublicQueryBuilder(User $user): QueryBuilder

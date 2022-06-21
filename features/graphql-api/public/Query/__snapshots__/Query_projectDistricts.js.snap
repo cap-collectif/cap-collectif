@@ -6,44 +6,198 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "followers": Object {
+            "totalCount": 0,
+          },
           "id": "projectDistrict3",
           "name": "Centre ville",
+          "projectDistrictPositioners": Array [
+            Object {
+              "project": Object {
+                "_id": "project2",
+                "title": "Stratégie technologique de l'Etat et services publics",
+              },
+            },
+          ],
+          "projects": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "_id": "project2",
+                  "title": "Stratégie technologique de l'Etat et services publics",
+                },
+              },
+            ],
+            "totalCount": 1,
+          },
         },
       },
       Object {
         "node": Object {
+          "followers": Object {
+            "totalCount": 2,
+          },
           "id": "projectDistrict7",
           "name": "Dervallières Zola",
+          "projectDistrictPositioners": Array [
+            Object {
+              "project": Object {
+                "_id": "project2",
+                "title": "Stratégie technologique de l'Etat et services publics",
+              },
+            },
+          ],
+          "projects": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "_id": "project2",
+                  "title": "Stratégie technologique de l'Etat et services publics",
+                },
+              },
+            ],
+            "totalCount": 1,
+          },
         },
       },
       Object {
         "node": Object {
+          "followers": Object {
+            "totalCount": 0,
+          },
           "id": "projectDistrict2",
           "name": "Deuxième Quartier",
+          "projectDistrictPositioners": Array [
+            Object {
+              "project": Object {
+                "_id": "project1",
+                "title": "Croissance, innovation, disruption",
+              },
+            },
+          ],
+          "projects": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "_id": "project1",
+                  "title": "Croissance, innovation, disruption",
+                },
+              },
+            ],
+            "totalCount": 1,
+          },
         },
       },
       Object {
         "node": Object {
+          "followers": Object {
+            "totalCount": 0,
+          },
           "id": "projectDistrict1",
           "name": "Premier Quartier",
+          "projectDistrictPositioners": Array [
+            Object {
+              "project": Object {
+                "_id": "project1",
+                "title": "Croissance, innovation, disruption",
+              },
+            },
+          ],
+          "projects": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "_id": "project1",
+                  "title": "Croissance, innovation, disruption",
+                },
+              },
+            ],
+            "totalCount": 1,
+          },
         },
       },
       Object {
         "node": Object {
+          "followers": Object {
+            "totalCount": 0,
+          },
           "id": "projectDistrict5",
           "name": "Hauts pavés Saint-Félix",
+          "projectDistrictPositioners": Array [
+            Object {
+              "project": Object {
+                "_id": "project2",
+                "title": "Stratégie technologique de l'Etat et services publics",
+              },
+            },
+          ],
+          "projects": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "_id": "project2",
+                  "title": "Stratégie technologique de l'Etat et services publics",
+                },
+              },
+            ],
+            "totalCount": 1,
+          },
         },
       },
       Object {
         "node": Object {
+          "followers": Object {
+            "totalCount": 0,
+          },
           "id": "projectDistrict4",
           "name": "Îles de Nantes",
+          "projectDistrictPositioners": Array [
+            Object {
+              "project": Object {
+                "_id": "project2",
+                "title": "Stratégie technologique de l'Etat et services publics",
+              },
+            },
+          ],
+          "projects": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "_id": "project2",
+                  "title": "Stratégie technologique de l'Etat et services publics",
+                },
+              },
+            ],
+            "totalCount": 1,
+          },
         },
       },
       Object {
         "node": Object {
+          "followers": Object {
+            "totalCount": 2,
+          },
           "id": "projectDistrict6",
           "name": "Malakoff Saint-Donation",
+          "projectDistrictPositioners": Array [
+            Object {
+              "project": Object {
+                "_id": "project2",
+                "title": "Stratégie technologique de l'Etat et services publics",
+              },
+            },
+          ],
+          "projects": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "_id": "project2",
+                  "title": "Stratégie technologique de l'Etat et services publics",
+                },
+              },
+            ],
+            "totalCount": 1,
+          },
         },
       },
     ],

@@ -1,0 +1,10 @@
+FollowProjectDistrictInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            projectDistrictId:
+                type: 'ID!'
+                description: 'The project district id'
+            notifiedOf:
+                type: 'SubscriptionTypeValue!'
+                description: 'The type of notification'

@@ -12,8 +12,8 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoa
 class ViewerFollowProposalResolver implements ResolverInterface
 {
     use ResolverTrait;
-    private $logger;
-    private $proposalviewerFollowDataLoader;
+    private LoggerInterface $logger;
+    private ProposalViewerIsFollowingDataLoader $proposalviewerFollowDataLoader;
 
     public function __construct(
         LoggerInterface $logger,

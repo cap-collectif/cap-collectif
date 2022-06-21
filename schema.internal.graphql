@@ -6179,6 +6179,22 @@ type FollowOpinionPayload {
   clientMutationId: String
 }
 
+input FollowProjectDistrictInput {
+  """The project district id"""
+  projectDistrictId: ID!
+
+  """The type of notification"""
+  notifiedOf: SubscriptionTypeValue!
+  clientMutationId: String
+}
+
+type FollowProjectDistrictPayload {
+  projectDistrict: ProjectDistrict
+  followerEdge: FollowerEdge
+  errorCode: ProjectDistrictErrorCode
+  clientMutationId: String
+}
+
 input FollowProposalInput {
   """The proposal id"""
   proposalId: ID!
@@ -7430,6 +7446,8 @@ type Mutation {
   updateFollowOpinion(input: UpdateFollowOpinionInput!): UpdateFollowOpinionPayload
   unfollowProposal(input: UnfollowProposalInput!): UnfollowProposalPayload
   unfollowOpinion(input: UnfollowOpinionInput!): UnfollowOpinionPayload
+  followProjectDistrict(input: FollowProjectDistrictInput!): FollowProjectDistrictPayload
+  unfollowProjectDistrict(input: UnfollowProjectDistrictInput!): UnfollowProjectDistrictPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
   changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload
@@ -9185,6 +9203,38 @@ type ProjectDistrict implements District {
   border: Style
   background: Style
   translations: [DistrictTranslation!]!
+
+  """The list of followers of the district"""
+  followers(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Ordering options for followers returning from the connection"""
+    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
+  ): UserConnection!
+
+  """Identifies the viewer following configuration on the entity."""
+  viewerFollowingConfiguration: SubscriptionTypeValue
+
+  """Identifies if the viewer is following the entity."""
+  viewerIsFollowing: Boolean!
+
+  """The list of projects in district"""
+  projects(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ProjectConnection
+  projectDistrictPositioners: [ProjectDistrictPositioner]
 }
 
 """A connection to a list of items."""
@@ -9205,6 +9255,21 @@ type ProjectDistrictEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+"""Available errors on proposal news mutation"""
+enum ProjectDistrictErrorCode {
+  """The given district is not found"""
+  DISTRICT_NOT_FOUND
+
+  """The given follower is not found"""
+  FOLLOWER_NOT_FOUND
+}
+
+type ProjectDistrictPositioner {
+  district: ProjectDistrict!
+  project: Project!
+  position: Int!
 }
 
 """An edge in a connection."""
@@ -14706,6 +14771,24 @@ input UnfollowOpinionInput {
 type UnfollowOpinionPayload {
   opinion: OpinionOrVersion
   unfollowerId: ID
+  clientMutationId: String
+}
+
+input UnfollowProjectDistrictInput {
+  """The project district id"""
+  projectDistrictId: ID
+  clientMutationId: String
+}
+
+type UnfollowProjectDistrictPayload {
+  """The project district unfollowed"""
+  projectDistrict: ProjectDistrict
+
+  """The ID of viewer who unfollow the district"""
+  unfollowerId: ID
+
+  """Available errors for the mutation."""
+  errorCode: ProjectDistrictErrorCode
   clientMutationId: String
 }
 

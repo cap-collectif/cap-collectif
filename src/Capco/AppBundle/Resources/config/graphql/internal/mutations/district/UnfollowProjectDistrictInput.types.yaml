@@ -1,0 +1,7 @@
+UnfollowProjectDistrictInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            projectDistrictId:
+                type: 'ID'
+                description: 'The project district id'

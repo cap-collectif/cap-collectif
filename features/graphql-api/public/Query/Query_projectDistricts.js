@@ -7,6 +7,24 @@ const InternalQuery = /* GraphQL */ `
         node {
           id
           name
+          projectDistrictPositioners {
+            project {
+              _id
+              title
+            }
+          }
+          projects {
+            totalCount
+            edges {
+              node {
+                _id
+                title
+              }
+            }
+          }
+          followers {
+            totalCount
+          }
         }
       }
     }

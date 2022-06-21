@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\District;
 
+use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Form\ProjectDistrictType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -13,10 +14,10 @@ use Psr\Log\LoggerInterface;
 
 class UpdateProjectDistrictMutation implements MutationInterface
 {
-    protected $logger;
-    protected $em;
-    protected $projectDistrictRepository;
-    protected $formFactory;
+    protected LoggerInterface $logger;
+    protected EntityManagerInterface $em;
+    protected ProjectDistrictRepository $projectDistrictRepository;
+    protected FormFactoryInterface $formFactory;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -37,7 +38,7 @@ class UpdateProjectDistrictMutation implements MutationInterface
 
         $projectDistrict = $this->projectDistrictRepository->find($projectDistrictId);
 
-        if (!$projectDistrict) {
+        if (!$projectDistrict instanceof ProjectDistrict) {
             $error = [
                 'message' => sprintf('Unknown project district with id: %s', $projectDistrictId),
             ];
