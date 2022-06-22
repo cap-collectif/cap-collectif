@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\Organization\Organization:
+    organization1:
+        id: 'organization1'
+    organization2:
+        id: 'organization2'
+        logo: '@GiecLogo'
+        banner: '@WarmingStripes'
+    organizationWithoutMembers:
+        id: 'organizationWithoutMembers'

@@ -428,3 +428,27 @@ Capco\MediaBundle\Entity\Media:
         name: proposalToImport
         category: '@MediaCategory1'
         providerReference: proposals_idf_bp3.csv
+    ProfilePicVMD:
+        id: 'ProfilePicVMD'
+        binaryContent: user/vmd.jpg
+        name: ProfilePicVMD
+        category: '@MediaCategory1'
+        providerReference: vmd.jpg
+    ProfilePicCassou:
+        id: 'ProfilePicCassou'
+        binaryContent: user/cassou.jpg
+        name: ProfilePicCassou
+        category: '@MediaCategory1'
+        providerReference: cassou.jpg
+    GiecLogo:
+        id: 'GiecLogo'
+        binaryContent: organisation/giec_small.png
+        name: GiecLogo
+        category: '@MediaCategory1'
+        providerReference: giec.jpg
+    WarmingStripes:
+        id: 'WarmingStripes'
+        binaryContent: organisation/warmingstripes.png
+        name: WarmingStripes
+        category: '@MediaCategory1'
+        providerReference: warmingstripes.jpg

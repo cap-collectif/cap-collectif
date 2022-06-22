@@ -1,0 +1,26 @@
+Capco\AppBundle\Entity\Organization\OrganizationTranslation:
+    organization1Fr:
+        locale: fr-FR
+        translatable: '@organization1'
+        title: 'Communauté de commune de Parthenay'
+        body: "Parthenay est une commune du Centre-Ouest de la France située dans le département des Deux-Sèvres, dont elle est l'une des deux sous-préfectures, en région Nouvelle-Aquitaine"
+    organization2Fr:
+        locale: fr-FR
+        translatable: '@organization2'
+        title: 'GIEC'
+        body: 'Le Groupe d’experts intergouvernemental sur l’évolution du climat (GIEC) a été créé en 1988 en vue de fournir des évaluations détaillées de l’état des connaissances scientifiques, techniques et socio-économiques sur les changements climatiques, leurs causes, leurs répercussions potentielles et les stratégies de parade.'
+    organization2En:
+        locale: en-EN
+        translatable: '@organization2'
+        title: 'IPCC'
+        body: 'The Intergovernmental Panel on Climate Change (IPCC) was established in 1988 to provide comprehensive assessments of the state of scientific, technical and socio-economic knowledge about climate change, its causes, potential impacts and response strategies.'
+    organizationWithoutMemberEn:
+        locale: en-EN
+        translatable: '@organizationWithoutMembers'
+        title: 'Organization without members'
+        body: 'There is no members here'
+    organizationWithoutMemberFr:
+        locale: fr-FR
+        translatable: '@organizationWithoutMembers'
+        title: 'Organisation sans members'
+        body: "Il n'y a pas de membres ici"

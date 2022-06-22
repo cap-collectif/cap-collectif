@@ -1,728 +1,757 @@
 Capco\UserBundle\Entity\User:
-    user1:
-        id: 'user1'
-        username: lbrunet
-        firstname: Laurent
-        lastname: Brunet
-        email: lbrunet@cap-collectif.com
-        phone: '+3300000000'
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-            - 'ROLE_SUPER_ADMIN'
-        media: '@ProfilePicLaurent'
-        enabled: true
-        birthPlace: East blue
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
-        confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
-        consentInternalCommunication: true
+  user1:
+    id: 'user1'
+    username: lbrunet
+    firstname: Laurent
+    lastname: Brunet
+    email: lbrunet@cap-collectif.com
+    phone: '+3300000000'
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@ProfilePicLaurent'
+    enabled: true
+    birthPlace: East blue
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
+    confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
+    consentInternalCommunication: true
 
-    user2:
-        id: 'user2'
-        username: sfavot
-        firstname: Suzanne
-        lastname: Favot
-        email: sfavot@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-            - 'ROLE_SUPER_ADMIN'
-        media: '@ProfilePicSfavot'
-        city: Antony
-        websiteUrl: http://www.sfavot.fr
-        biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
-        vip: true
-        phone: '+3300000000'
-        phoneConfirmed: true
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 1 days"))>
+  user2:
+    id: 'user2'
+    username: sfavot
+    firstname: Suzanne
+    lastname: Favot
+    email: sfavot@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@ProfilePicSfavot'
+    city: Antony
+    websiteUrl: http://www.sfavot.fr
+    biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
+    vip: true
+    phone: '+3300000000'
+    phoneConfirmed: true
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 1 days"))>
 
-    user3:
-        id: 'user3'
-        username: xlacot
-        firstname: Xavier
-        lastname: Lacot
-        email: xlacot@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-            - 'ROLE_SUPER_ADMIN'
-        media: '@ProfilePicXavier'
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 2 days"))>
+  user3:
+    id: 'user3'
+    username: xlacot
+    firstname: Xavier
+    lastname: Lacot
+    email: xlacot@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@ProfilePicXavier'
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 2 days"))>
 
-    user4:
-        id: 'userAdmin'
-        username: admin
-        firstname: Administrateur
-        lastname: authentifier
-        email: admin@test.com
-        userType: '@UserType1'
-        plainPassword: admin
-        birthPlace: 'Alabasta'
-        roles:
-            - 'ROLE_ADMIN'
-        vip: true
-        phone: '+33675492871'
-        phoneConfirmed: true
-        enabled: true
-        postalAddress: '[{"address_components":[{"long_name":"26","short_name":"26","types":["street_number"]},{"long_name":"Rue Claude Tillier","short_name":"Rue Claude Tillier","types":["route"]},{"long_name":"Paris","short_name":"Paris","types":["locality","political"]},{"long_name":"Département de Paris","short_name":"Département de Paris","types":["administrative_area_level_2","political"]},{"long_name":"Île-de-France","short_name":"IDF","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"75012","short_name":"75012","types":["postal_code"]}],"formatted_address":"26 Rue Claude Tillier, 75012 Paris, France","geometry":{"location":{"lat":48.84865730000001,"lng":2.3889227},"location_type":"ROOFTOP","viewport":{"south":48.84730831970851,"west":2.387573719708498,"north":48.85000628029151,"east":2.390271680291502}},"place_id":"ChIJrW-3zAxy5kcRvzuJuCmZqf0","plus_code":{"compound_code":"R9XQ+FH Paris, France","global_code":"8FW4R9XQ+FH"},"types":["street_address"]}]'
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 3 days"))>
-        notificationsConfiguration: '@adminNotificationConfiguration'
-        subscribedToProposalNews: true
+  user4:
+    id: 'userAdmin'
+    username: admin
+    firstname: Administrateur
+    lastname: authentifier
+    email: admin@test.com
+    userType: '@UserType1'
+    plainPassword: admin
+    birthPlace: 'Alabasta'
+    roles:
+      - 'ROLE_ADMIN'
+    vip: true
+    phone: '+33675492871'
+    phoneConfirmed: true
+    enabled: true
+    postalAddress: '[{"address_components":[{"long_name":"26","short_name":"26","types":["street_number"]},{"long_name":"Rue Claude Tillier","short_name":"Rue Claude Tillier","types":["route"]},{"long_name":"Paris","short_name":"Paris","types":["locality","political"]},{"long_name":"Département de Paris","short_name":"Département de Paris","types":["administrative_area_level_2","political"]},{"long_name":"Île-de-France","short_name":"IDF","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"75012","short_name":"75012","types":["postal_code"]}],"formatted_address":"26 Rue Claude Tillier, 75012 Paris, France","geometry":{"location":{"lat":48.84865730000001,"lng":2.3889227},"location_type":"ROOFTOP","viewport":{"south":48.84730831970851,"west":2.387573719708498,"north":48.85000628029151,"east":2.390271680291502}},"place_id":"ChIJrW-3zAxy5kcRvzuJuCmZqf0","plus_code":{"compound_code":"R9XQ+FH Paris, France","global_code":"8FW4R9XQ+FH"},"types":["street_address"]}]'
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 3 days"))>
+    notificationsConfiguration: '@adminNotificationConfiguration'
+    subscribedToProposalNews: true
 
-    user666:
-        id: 'adminCapco'
-        username: adminpro
-        firstname: Administrateur
-        lastname: authentifier
-        email: admin@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: admin
-        roles:
-            - 'ROLE_ADMIN'
-        vip: true
-        phone: '+33675492871'
-        phoneConfirmed: true
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
-        subscribedToProposalNews: true
-    user5:
-        id: 'user5'
-        username: user
-        firstname: Utilisateur
-        lastname: authentifier
-        email: user@test.com
-        notificationsConfiguration: '@allDisabledUserNotifications'
-        userType: '@UserType1'
-        media: null
-        plainPassword: user
-        dateOfBirth: <(new \DateTime('1996-03-01'))>
-        address: '12 rue des boulets'
-        address2: '2ieme etages'
-        zip_code: '75012'
-        city: 'Paris'
-        birthPlace: Skipiéa
-        roles:
-            - 'ROLE_USER'
-        phone: '+33635492871'
-        phoneConfirmed: true
-        gender: 'f'
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 5 days"))>
-        updatedAt: <(new \DateTime('2016-01-01'))>
-        confirmedAccountAt: <identity((new \DateTime('2016-01-01 00:00:00'))->modify("+ 4 days"))>
-        consentInternalCommunication: true
-        userIdentificationCode: '@code1'
-    user{6..200}:
-        id: 'user<current()>'
-        username: user<current()>
-        email: <htmlentities('user')><current()><htmlentities('@cap-collectif.com')>
-        firstname: firstname<current()>
-        lastname: lastname<current()>
-        userType: '@UserType1'
-        salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
-        password: <htmlentities('$2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe')>
-        roles:
-            - 'ROLE_USER'
-        enabled: true
-        createdAt: <identity((new \DateTime('2017-01-01'))->modify("+ $current minutes"))>
-        consentInternalCommunication: true
+  user666:
+    id: 'adminCapco'
+    username: adminpro
+    firstname: Administrateur
+    lastname: authentifier
+    email: admin@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: admin
+    roles:
+      - 'ROLE_ADMIN'
+    vip: true
+    phone: '+33675492871'
+    phoneConfirmed: true
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
+    subscribedToProposalNews: true
+  user5:
+    id: 'user5'
+    username: user
+    firstname: Utilisateur
+    lastname: authentifier
+    email: user@test.com
+    notificationsConfiguration: '@allDisabledUserNotifications'
+    userType: '@UserType1'
+    media: null
+    plainPassword: user
+    dateOfBirth: <(new \DateTime('1996-03-01'))>
+    address: '12 rue des boulets'
+    address2: '2ieme etages'
+    zip_code: '75012'
+    city: 'Paris'
+    birthPlace: Skipiéa
+    roles:
+      - 'ROLE_USER'
+    phone: '+33635492871'
+    phoneConfirmed: true
+    gender: 'f'
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 5 days"))>
+    updatedAt: <(new \DateTime('2016-01-01'))>
+    confirmedAccountAt: <identity((new \DateTime('2016-01-01 00:00:00'))->modify("+ 4 days"))>
+    consentInternalCommunication: true
+    userIdentificationCode: '@code1'
+  user{6..200}:
+    id: 'user<current()>'
+    username: user<current()>
+    email: <htmlentities('user')><current()><htmlentities('@cap-collectif.com')>
+    firstname: firstname<current()>
+    lastname: lastname<current()>
+    userType: '@UserType1'
+    salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
+    password: <htmlentities('$2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe')>
+    roles:
+      - 'ROLE_USER'
+    enabled: true
+    createdAt: <identity((new \DateTime('2017-01-01'))->modify("+ $current minutes"))>
+    consentInternalCommunication: true
 
-    userSpyl:
-        id: 'userSpyl'
-        username: spyl
-        firstname: Aurélien
-        lastname: David
-        email: aurelien@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-            - 'ROLE_SUPER_ADMIN'
-        media: '@ProfilePicSpyl'
-        vip: true
-        enabled: true
-        emailConfirmationSentAt: <(new \DateTime('2015-03-01 11:00:00'))>
-        createdAt: <(new \DateTime('2015-03-01 11:00:00'))>
-        consentInternalCommunication: true
-    userWelcomattic:
-        id: 'userWelcomattic'
-        username: welcomattic
-        firstname: Mathieu
-        lastname: Santostefano
-        email: msantostefano@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: capco
-        roles:
-            - 'ROLE_SUPER_ADMIN'
-        media: '@ProfilePicWelcomattic'
-        vip: true
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 8 days"))>
+  userSpyl:
+    id: 'userSpyl'
+    username: spyl
+    firstname: Aurélien
+    lastname: David
+    email: aurelien@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@ProfilePicSpyl'
+    vip: true
+    enabled: true
+    emailConfirmationSentAt: <(new \DateTime('2015-03-01 11:00:00'))>
+    createdAt: <(new \DateTime('2015-03-01 11:00:00'))>
+    consentInternalCommunication: true
+  userWelcomattic:
+    id: 'userWelcomattic'
+    username: welcomattic
+    firstname: Mathieu
+    lastname: Santostefano
+    email: msantostefano@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: capco
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@ProfilePicWelcomattic'
+    vip: true
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 8 days"))>
 
-    user503:
-        id: 'user503'
-        username: disabled
-        firstname: disabled
-        lastname: disabled
-        email: disabled@test.com
-        enabled: false
-        userType: '@UserType1'
-        plainPassword: disabled
-        roles:
-            - 'ROLE_USER'
-        media: '@ProfilePicSfavot'
-        vip: false
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 9 days"))>
+  user503:
+    id: 'user503'
+    username: disabled
+    firstname: disabled
+    lastname: disabled
+    email: disabled@test.com
+    enabled: false
+    userType: '@UserType1'
+    plainPassword: disabled
+    roles:
+      - 'ROLE_USER'
+    media: '@ProfilePicSfavot'
+    vip: false
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 9 days"))>
 
-    user504:
-        id: 'user504'
-        username: user avec un nom très long comme par exemple conseil régional de machin truc
-        firstname: prenom
-        lastname: nom
-        email: conseilregional@test.com
-        userType: '@UserType1'
-        plainPassword: monsupermotdepassetropsafe
-        roles:
-            - 'ROLE_USER'
-        media: null
-        vip: true
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 10 days"))>
+  user504:
+    id: 'user504'
+    username: user avec un nom très long comme par exemple conseil régional de machin truc
+    firstname: prenom
+    lastname: nom
+    email: conseilregional@test.com
+    userType: '@UserType1'
+    plainPassword: monsupermotdepassetropsafe
+    roles:
+      - 'ROLE_USER'
+    media: null
+    vip: true
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 10 days"))>
 
-    userKiroule:
-        id: 'userKiroule'
-        username: ptondereau
-        firstname: Pierre
-        lastname: Tondereau
-        email: pierre@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-            - 'ROLE_USER'
-            - 'ROLE_PROJECT_ADMIN'
-        media: '@ProfilePicKiroule'
-        vip: true
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days"))>
-        confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 12 days"))>
+  userKiroule:
+    id: 'userKiroule'
+    username: ptondereau
+    firstname: Pierre
+    lastname: Tondereau
+    email: pierre@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_USER'
+      - 'ROLE_PROJECT_ADMIN'
+    media: '@ProfilePicKiroule'
+    vip: true
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days"))>
+    confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 12 days"))>
 
-    user_not_confirmed:
-        id: 'user_not_confirmed'
-        username: user_not_confirmed
-        firstname: user_not_confirmed
-        lastname: user_not_confirmed
-        email: user_not_confirmed@test.com
-        dateOfBirth: <(new \DateTime('1990-03-10'))>
-        userType: '@UserType1'
-        plainPassword: user_not_confirmed
-        phone: '+33628353289'
-        roles:
-            - 'ROLE_USER'
-        media: null
-        confirmationToken: azertyuiop
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 1 hours"))>
+  user_not_confirmed:
+    id: 'user_not_confirmed'
+    username: user_not_confirmed
+    firstname: user_not_confirmed
+    lastname: user_not_confirmed
+    email: user_not_confirmed@test.com
+    dateOfBirth: <(new \DateTime('1990-03-10'))>
+    userType: '@UserType1'
+    plainPassword: user_not_confirmed
+    phone: '+33628353289'
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: azertyuiop
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 1 hours"))>
 
-    userNotConfirmedWithContributions:
-        id: 'userNotConfirmedWithContributions'
-        username: userNotConfirmedWithContributions
-        firstname: userNotConfirmedWithContributions
-        lastname: userNotConfirmedWithContributions
-        email: userNotConfirmedWithContributions@test.com
-        userType: '@UserType1'
-        plainPassword: userNotConfirmedWithContributions
-        roles:
-            - 'ROLE_USER'
-        media: null
-        confirmationToken: oklmoklm
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 2 hours"))>
+  userNotConfirmedWithContributions:
+    id: 'userNotConfirmedWithContributions'
+    username: userNotConfirmedWithContributions
+    firstname: userNotConfirmedWithContributions
+    lastname: userNotConfirmedWithContributions
+    email: userNotConfirmedWithContributions@test.com
+    userType: '@UserType1'
+    plainPassword: userNotConfirmedWithContributions
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: oklmoklm
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 2 hours"))>
 
-    user_without_phone:
-        id: 'user511'
-        username: user_without_phone
-        firstname: user_without_phone
-        lastname: user_without_phone
-        email: user_without_phone@test.com
-        userType: '@UserType1'
-        plainPassword: user_without_phone
-        roles:
-            - 'ROLE_USER'
-        media: null
-        enabled: true
-        createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
+  user_without_phone:
+    id: 'user511'
+    username: user_without_phone
+    firstname: user_without_phone
+    lastname: user_without_phone
+    email: user_without_phone@test.com
+    userType: '@UserType1'
+    plainPassword: user_without_phone
+    roles:
+      - 'ROLE_USER'
+    media: null
+    enabled: true
+    createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
 
-    user_with_phone_not_phone_confirmed:
-        id: 'user512'
-        username: user_with_phone_not_phone_confirmed
-        firstname: user_with_phone_not_phone_confirmed
-        lastname: user_with_phone_not_phone_confirmed
-        email: user_with_phone_not_phone_confirmed@test.com
-        userType: '@UserType1'
-        plainPassword: user_with_phone_not_phone_confirmed
-        roles:
-            - 'ROLE_USER'
-        media: null
-        phone: '+33628353289'
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 12 days"))>
+  user_with_phone_not_phone_confirmed:
+    id: 'user512'
+    username: user_with_phone_not_phone_confirmed
+    firstname: user_with_phone_not_phone_confirmed
+    lastname: user_with_phone_not_phone_confirmed
+    email: user_with_phone_not_phone_confirmed@test.com
+    userType: '@UserType1'
+    plainPassword: user_with_phone_not_phone_confirmed
+    roles:
+      - 'ROLE_USER'
+    media: null
+    phone: '+33628353289'
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 12 days"))>
 
-    user_with_code_not_phone_confirmed:
-        id: 'user513'
-        username: user_with_code_not_phone_confirmed
-        firstname: user_with_code_not_phone_confirmed
-        lastname: user_with_code_not_phone_confirmed
-        email: user_with_code_not_phone_confirmed@test.com
-        userType: '@UserType1'
-        plainPassword: user_with_code_not_phone_confirmed
-        roles:
-            - 'ROLE_USER'
-        media: null
-        phone: '+33628232323'
-        smsConfirmationCode: 123456
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 13 days"))>
+  user_with_code_not_phone_confirmed:
+    id: 'user513'
+    username: user_with_code_not_phone_confirmed
+    firstname: user_with_code_not_phone_confirmed
+    lastname: user_with_code_not_phone_confirmed
+    email: user_with_code_not_phone_confirmed@test.com
+    userType: '@UserType1'
+    plainPassword: user_with_code_not_phone_confirmed
+    roles:
+      - 'ROLE_USER'
+    media: null
+    phone: '+33628232323'
+    smsConfirmationCode: 123456
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 13 days"))>
 
-    admin_without_password:
-        id: 'user514'
-        username: admin_without_password
-        firstname: admin_without_password
-        lastname: admin_without_password
-        email: admin_without_password@test.com
-        enabled: false
-        userType: '@UserType1'
-        roles:
-            - 'ROLE_ADMIN'
-        media: null
-        confirmationToken: check-my-email-token
-        resetPasswordToken: reset-my-password-token
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 13 days"))>
-        subscribedToProposalNews: true
-    user_updating_email:
-        id: 'user515'
-        username: user_updating_email
-        firstname: user_updating_email
-        lastname: user_updating_email
-        email: user_updating_email@test.com
-        userType: '@UserType1'
-        roles:
-            - 'ROLE_USER'
-        media: null
-        newEmailToConfirm: new-email-to-confirm@test.com
-        newEmailConfirmationToken: check-my-new-email-token
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
-        updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
+  admin_without_password:
+    id: 'user514'
+    username: admin_without_password
+    firstname: admin_without_password
+    lastname: admin_without_password
+    email: admin_without_password@test.com
+    enabled: false
+    userType: '@UserType1'
+    roles:
+      - 'ROLE_ADMIN'
+    media: null
+    confirmationToken: check-my-email-token
+    resetPasswordToken: reset-my-password-token
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 13 days"))>
+    subscribedToProposalNews: true
+  user_updating_email:
+    id: 'user515'
+    username: user_updating_email
+    firstname: user_updating_email
+    lastname: user_updating_email
+    email: user_updating_email@test.com
+    userType: '@UserType1'
+    roles:
+      - 'ROLE_USER'
+    media: null
+    newEmailToConfirm: new-email-to-confirm@test.com
+    newEmailConfirmationToken: check-my-new-email-token
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
+    updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
 
-    userMaxime:
-        id: 'userMaxime'
-        username: mauriau
-        firstname: Maxime
-        lastname: AURIAU
-        email: 'maxime.auriau@cap-collectif.com'
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-            - 'ROLE_SUPER_ADMIN'
-        media: '@ProfilePicMaxiDev'
-        vip: true
-        emailConfirmationSentAt: <(new \DateTime('2018-01-03 13:37:00'))>
-        enabled: true
-        phoneConfirmed: true
-        createdAt: <(new \DateTime('2018-01-03 13:37:00'))>
-        consentInternalCommunication: true
-    userBellenger:
-        id: 'userBellenger'
-        username: sanzo
-        firstname: Pierre
-        lastname: Bellenger
-        email: pierre.bellenger@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: azerty
-        roles:
-            - 'ROLE_SUPER_ADMIN'
-        media: '@ProfilePicBellenger'
-        city: Antony
-        websiteUrl: http://www.sfavot.fr
-        biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
-        vip: true
-        phone: '+3300000000'
-        phoneConfirmed: true
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 16 days"))>
+  userMaxime:
+    id: 'userMaxime'
+    username: mauriau
+    firstname: Maxime
+    lastname: AURIAU
+    email: 'maxime.auriau@cap-collectif.com'
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@ProfilePicMaxiDev'
+    vip: true
+    emailConfirmationSentAt: <(new \DateTime('2018-01-03 13:37:00'))>
+    enabled: true
+    phoneConfirmed: true
+    createdAt: <(new \DateTime('2018-01-03 13:37:00'))>
+    consentInternalCommunication: true
+  userBellenger:
+    id: 'userBellenger'
+    username: sanzo
+    firstname: Pierre
+    lastname: Bellenger
+    email: pierre.bellenger@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: azerty
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@ProfilePicBellenger'
+    city: Antony
+    websiteUrl: http://www.sfavot.fr
+    biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
+    vip: true
+    phone: '+3300000000'
+    phoneConfirmed: true
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 16 days"))>
 
-    user_without_username:
-        id: 'user518'
-        username: null
-        slug: user518
-        email: no_name@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: no_name
-        roles:
-            - 'ROLE_USER'
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 17 days"))>
+  user_without_username:
+    id: 'user518'
+    username: null
+    slug: user518
+    email: no_name@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: no_name
+    roles:
+      - 'ROLE_USER'
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 17 days"))>
 
-    userJean:
-        id: 'userJean'
-        username: Juan
-        firstname: Jean
-        lastname: Treibert
-        email: jean@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-            - 'ROLE_SUPER_ADMIN'
-        media: '@ProfilePicJean'
-        biography: Yrf pungf qbzvarebag ovragbg yr zbaqr.
-        vip: true
-        emailConfirmationSentAt: <(new \DateTime('2018-09-03 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2018-09-03 09:30:00'))>
-        facebookId: '153808779501692'
-        facebookAccessToken: 'INSERT_A_REAL_SECRET'
-    userJeanDuplicates:
-        id: 'userJeanDuplicates'
-        username: Juan
-        firstname: Jean
-        lastname: Treibert
-        email: jean.duplicates@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-            - 'ROLE_USER'
-        media: '@ProfilePicJean'
-        biography: Yrf pungf qbzvarebag ovragbg yr zbaqr.
-        vip: true
-        emailConfirmationSentAt: <(new \DateTime('2018-09-03 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2018-09-05 09:30:00'))>
-        facebookId: '153808779501692-duplicates'
-        facebookAccessToken: 'INSERT_A_REAL_SECRET'
-    user520:
-        id: 'user520'
-        username: OnePunchMan
-        firstname: Saitama
-        lastname: Dono
-        email: saitama@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: mob?
-        roles:
-            - 'ROLE_USER'
-        media: '@ProfilePicSfavot'
-        biography: Miskin il a que le role user.
-        vip: true
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
-        consentInternalCommunication: true
-    user521:
-        id: 'user521'
-        username: userToDelete
-        firstname: userToDelete
-        lastname: userToDelete
-        email: userToDelete@cap-collectif.com
-        userType: '@UserType1'
-        plainPassword: delete
-        roles:
-            - 'ROLE_USER'
-        biography: Supprime ma vie stp.
-        vip: false
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+  userJean:
+    id: 'userJean'
+    username: Juan
+    firstname: Jean
+    lastname: Treibert
+    email: jean@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@ProfilePicJean'
+    biography: Yrf pungf qbzvarebag ovragbg yr zbaqr.
+    vip: true
+    emailConfirmationSentAt: <(new \DateTime('2018-09-03 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2018-09-03 09:30:00'))>
+    facebookId: '153808779501692'
+    facebookAccessToken: 'INSERT_A_REAL_SECRET'
+  userJeanDuplicates:
+    id: 'userJeanDuplicates'
+    username: Juan
+    firstname: Jean
+    lastname: Treibert
+    email: jean.duplicates@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_USER'
+    media: '@ProfilePicJean'
+    biography: Yrf pungf qbzvarebag ovragbg yr zbaqr.
+    vip: true
+    emailConfirmationSentAt: <(new \DateTime('2018-09-03 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2018-09-05 09:30:00'))>
+    facebookId: '153808779501692-duplicates'
+    facebookAccessToken: 'INSERT_A_REAL_SECRET'
+  user520:
+    id: 'user520'
+    username: OnePunchMan
+    firstname: Saitama
+    lastname: Dono
+    email: saitama@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: mob?
+    roles:
+      - 'ROLE_USER'
+    media: '@ProfilePicSfavot'
+    biography: Miskin il a que le role user.
+    vip: true
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+    consentInternalCommunication: true
+  user521:
+    id: 'user521'
+    username: userToDelete
+    firstname: userToDelete
+    lastname: userToDelete
+    email: userToDelete@cap-collectif.com
+    userType: '@UserType1'
+    plainPassword: delete
+    roles:
+      - 'ROLE_USER'
+    biography: Supprime ma vie stp.
+    vip: false
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
 
-    english_user:
-        id: 'user522'
-        username: johnsmith
-        firstname: John
-        lastname: Smith
-        email: john.smith@england.uk
-        locale: 'en-GB'
-        userType: '@UserType1'
-        roles:
-            - 'ROLE_USER'
-        media: null
-        newEmailToConfirm: john.smith@england.eu
-        newEmailConfirmationToken: check-my-new-email-token-english
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
-        updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
+  english_user:
+    id: 'user522'
+    username: johnsmith
+    firstname: John
+    lastname: Smith
+    email: john.smith@england.uk
+    locale: 'en-GB'
+    userType: '@UserType1'
+    roles:
+      - 'ROLE_USER'
+    media: null
+    newEmailToConfirm: john.smith@england.eu
+    newEmailConfirmationToken: check-my-new-email-token-english
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
+    updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
 
-    userSupervisor:
-        id: 'userSupervisor'
-        username: supervisor
-        firstname: supervisor
-        lastname: supervisor
-        email: supervisor@cap-collectif.com
-        userType: '@UserType1'
-        plainpassword: supervisor
-        roles:
-            - 'ROLE_USER'
-        biography: Je super vise.
-        vip: false
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:16:00'))>
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 13:01:02'))->modify("+ 18 days"))>
+  userSupervisor:
+    id: 'userSupervisor'
+    username: supervisor
+    firstname: supervisor
+    lastname: supervisor
+    email: supervisor@cap-collectif.com
+    userType: '@UserType1'
+    plainpassword: supervisor
+    roles:
+      - 'ROLE_USER'
+    biography: Je super vise.
+    vip: false
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:16:00'))>
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 13:01:02'))->modify("+ 18 days"))>
 
-    userSupervisor2:
-        id: 'userSupervisor2'
-        username: supervisor2
-        firstname: supervisor2
-        lastname: supervisor2
-        email: supervisor2@cap-collectif.com
-        userType: '@UserType1'
-        plainpassword: supervisor2
-        roles:
-            - 'ROLE_USER'
-        biography: Je super vise deux fois.
-        vip: false
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:15:00'))>
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 09:14:07'))->modify("+ 18 days"))>
+  userSupervisor2:
+    id: 'userSupervisor2'
+    username: supervisor2
+    firstname: supervisor2
+    lastname: supervisor2
+    email: supervisor2@cap-collectif.com
+    userType: '@UserType1'
+    plainpassword: supervisor2
+    roles:
+      - 'ROLE_USER'
+    biography: Je super vise deux fois.
+    vip: false
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:15:00'))>
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 09:14:07'))->modify("+ 18 days"))>
 
-    userDecisionMaker:
-        id: 'userDecisionMaker'
-        username: decisionmaker
-        firstname: decisionmaker
-        lastname: decisionmaker
-        email: decisionmaker@cap-collectif.com
-        userType: '@UserType1'
-        plainpassword: decisionmaker
-        roles:
-            - 'ROLE_USER'
-        biography: CÉ MOI QUI DÉCIDE.
-        vip: false
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 18 days"))>
+  userDecisionMaker:
+    id: 'userDecisionMaker'
+    username: decisionmaker
+    firstname: decisionmaker
+    lastname: decisionmaker
+    email: decisionmaker@cap-collectif.com
+    userType: '@UserType1'
+    plainpassword: decisionmaker
+    roles:
+      - 'ROLE_USER'
+    biography: CÉ MOI QUI DÉCIDE.
+    vip: false
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 18 days"))>
 
-    userAnalyst:
-        id: 'userAnalyst'
-        username: analyst
-        firstname: analyst
-        lastname: analyst
-        email: analyst@cap-collectif.com
-        userType: '@UserType1'
-        plainpassword: analyst
-        roles:
-            - 'ROLE_USER'
-        biography: Je suis l'analyste.
-        vip: false
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
+  userAnalyst:
+    id: 'userAnalyst'
+    username: analyst
+    firstname: analyst
+    lastname: analyst
+    email: analyst@cap-collectif.com
+    userType: '@UserType1'
+    plainpassword: analyst
+    roles:
+      - 'ROLE_USER'
+    biography: Je suis l'analyste.
+    vip: false
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
 
-    userAnalyst2:
-        id: 'userAnalyst2'
-        username: analyst2
-        firstname: analyst2
-        lastname: analyst2
-        email: analyst2@cap-collectif.com
-        userType: '@UserType1'
-        plainpassword: analyst2
-        roles:
-            - 'ROLE_USER'
-        biography: Je suis l'analyste 2.
-        vip: false
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
-    userAgui:
-        id: 'userAgui'
-        username: Agui
-        firstname: Julien
-        lastname: AGUILAR
-        email: julien.aguilar@cap-collectif.com
-        plainpassword: toto
-        media: '@ProfilePicAgui'
-        roles:
-            - 'ROLE_USER'
-        emailConfirmationSentAt: <(new \DateTime('2019-09-09 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2019-09-09 09:30:00'))>
-        consentInternalCommunication: true
-    userVincent:
-        id: 'userVincent'
-        username: Vince
-        firstname: Vincent
-        lastname: DEPLAIS
-        media: '@ProfilePicVincent'
-        email: vincent@cap-collectif.com
-        plainpassword: toto
-        roles:
-            - 'ROLE_SUPER_ADMIN'
-        emailConfirmationSentAt: <(new \DateTime('2019-12-02 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2019-12-02 09:30:00'))>
-        consentInternalCommunication: true
-    userOmar:
-        id: 'userOmar'
-        username: Omar <3 Rem
-        firstname: Omar
-        lastname: Jbara
-        email: omar@cap-collectif.com
-        plainpassword: toto
-        media: '@ProfilePicOmar'
-        roles:
-            - 'ROLE_USER'
-        emailConfirmationSentAt: <(new \DateTime('2018-10-17 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2018-10-17 09:30:00'))>
-    userTheo:
-        id: 'userTheo'
-        username: Théo QP
-        firstname: Théo
-        lastname: Bourgoin
-        email: theo@cap-collectif.com
-        plainpassword: toto
-        media: '@ProfilePicTheo'
-        roles:
-            - 'ROLE_USER'
-            - 'ROLE_PROJECT_ADMIN'
-        emailConfirmationSentAt: <(new \DateTime('2019-06-03 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2019-06-03 09:30:00'))>
-        consentInternalCommunication: true
-    userJpec:
-        id: 'userJpec'
-        username: Jpec
-        firstname: Jean Paul
-        lastname: Bella
-        email: jpec@cap-collectif.com
-        plainpassword: toto
-        media: '@ProfilePicJpec'
-        roles:
-            - 'ROLE_USER'
-        emailConfirmationSentAt: <(new \DateTime('2019-07-15 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2019-07-15 09:30:00'))>
-    userMickael:
-        id: 'userMickael'
-        username: Dev null
-        firstname: Mickael
-        lastname: Buliard
-        biography: "La raclette c'est bon."
-        media: '@ProfilePicMickael'
-        email: mickael@cap-collectif.com
-        plainpassword: toto
-        roles:
-            - 'ROLE_USER'
-        emailConfirmationSentAt: <(new \DateTime('2019-11-04 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2019-11-04 09:30:00'))>
-        consentInternalCommunication: true
-    userIan:
-        id: 'userIan'
-        username: Ian apprenti DevOps
-        firstname: Ian
-        lastname: DUCROT--THOLLON-POMMEROL
-        email: ian@cap-collectif.com
-        plainpassword: toto
-        media: '@ProfilePicIan'
-        roles:
-            - 'ROLE_USER'
-        emailConfirmationSentAt: <(new \DateTime('2020-03-09 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2020-03-09 09:30:00'))>
-    userMaximeQA:
-        id: 'userMaximeQA'
-        username: Max de la QA
-        biography: Le mec qui met des retours partout
-        firstname: Maxime
-        lastname: QA
-        media: '@ProfilePicMaxQA'
-        email: maxime.pouessel@cap-collectif.com
-        plainpassword: toto
-        roles:
-            - 'ROLE_USER'
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
-        enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
-    userNotConnectedFranceConnect:
-        id: 'userNotConnectedFranceConnect'
-        username: Angela Claire Louise
-        firstname: Angela Claire Louise
-        lastname: DUBOIS
-        email: wossewodda-3728@yopmail.com
-        dateOfBirth: <(new \DateTime('1990-03-10'))>
-        birthplace: 'nowhere'
-        gender: 'f'
-        plainpassword: toto
-        roles:
-            - 'ROLE_USER'
-        emailConfirmationSentAt: <(new \DateTime('2020-03-09 09:30:00'))>
-        enabled: true
-        createdAt: <(new \DateTime('2020-03-09 09:30:00'))>
-        biography: Je suis france connect pas encore associé.
-    userConnectedFranceConnect:
-        id: 'userConnectedFranceConnect'
-        username: LAMPE Geraldine
-        firstname: Geraldine
-        lastname: LAMPE
-        email: ducowanet-7006@yopmail.com
-        roles:
-            - 'ROLE_USER'
-        enabled: true
-        createdAt: <(new \DateTime('2020-03-10 09:30:00'))>
-        updatedAt: $createdAt
-        biography: Je suis créé via france connect
-        franceConnectId: '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1'
-        franceConnectAccessToken: INSERT_A_REAL_SECRET
-    duplicatesUserConnectedFranceConnect:
-        id: 'duplicatesUserConnectedFranceConnect'
-        username: LAMPE Gerare
-        firstname: Gerare
-        lastname: LAMPE
-        email: gerare@yopmail.com
-        roles:
-            - 'ROLE_USER'
-        enabled: true
-        createdAt: <(new \DateTime('2020-04-10 09:30:00'))>
-        biography: Je suis un doublon
-        franceConnectId: '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1-duplicates'
-        franceConnectAccessToken: INSERT_A_REAL_SECRET
-    userBobMarley:
-        id: 'userBobMarley'
-        username: Bob Marley
-        firstname: Bob
-        lastname: Marley
-        email: b.marley@cap-collectif.com
-        media: '@ProfilePicBobMarley'
-        plainpassword: toto
-        roles:
-            - 'ROLE_USER'
-        enabled: true
-        createdAt: <(new \DateTime('1945-02-06 00:00:00'))>
-        biography: Robert Nesta Marley dit Bob Marley, né le 6 février 1945 à Nine Mile et mort le 11 mai 1981 à Miami d'un cancer généralisé, est un auteur-compositeur-interprète et musicien jamaïcain.
-    userLaurentAlexandre:
-        id: 'userLaurentAlexandre'
-        username: Laurent Alexandre
-        firstname: Laurent
-        lastname: Alexandre
-        email: laurent.alexandre@cap-collectif.com
-        media: '@ProfilePicLaurentAlexandre'
-        plainpassword: toto
-        roles:
-            - 'ROLE_USER'
-        enabled: true
-        createdAt: <(new \DateTime('1945-02-06 00:00:00'))>
-        biography: Laurent Alexandre, né le 10 juin 1960 à Paris, haut fonctionnaire et médecin de formation, est un entrepreneur, écrivain et militant politique français.
-    userWithConfirmedPhone:
-        id: 'userWithConfirmedPhone'
-        username: userWithConfirmedPhone
-        firstname: userWithConfirmedPhone
-        lastname: userWithConfirmedPhone
-        email: userWithConfirmedPhone@cap-collectif.com
-        phone: '+3300000000'
-        phoneConfirmed: true
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-            - 'ROLE_ADMIN'
-        enabled: true
-        birthPlace: Paris
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
-        confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
-        consentInternalCommunication: true
+  userAnalyst2:
+    id: 'userAnalyst2'
+    username: analyst2
+    firstname: analyst2
+    lastname: analyst2
+    email: analyst2@cap-collectif.com
+    userType: '@UserType1'
+    plainpassword: analyst2
+    roles:
+      - 'ROLE_USER'
+    biography: Je suis l'analyste 2.
+    vip: false
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
+  userAgui:
+    id: 'userAgui'
+    username: Agui
+    firstname: Julien
+    lastname: AGUILAR
+    email: julien.aguilar@cap-collectif.com
+    plainpassword: toto
+    media: '@ProfilePicAgui'
+    roles:
+      - 'ROLE_USER'
+    emailConfirmationSentAt: <(new \DateTime('2019-09-09 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2019-09-09 09:30:00'))>
+    consentInternalCommunication: true
+  userVincent:
+    id: 'userVincent'
+    username: Vince
+    firstname: Vincent
+    lastname: DEPLAIS
+    media: '@ProfilePicVincent'
+    email: vincent@cap-collectif.com
+    plainpassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    emailConfirmationSentAt: <(new \DateTime('2019-12-02 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2019-12-02 09:30:00'))>
+    consentInternalCommunication: true
+  userOmar:
+    id: 'userOmar'
+    username: Omar <3 Rem
+    firstname: Omar
+    lastname: Jbara
+    email: omar@cap-collectif.com
+    plainpassword: toto
+    media: '@ProfilePicOmar'
+    roles:
+      - 'ROLE_USER'
+    emailConfirmationSentAt: <(new \DateTime('2018-10-17 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2018-10-17 09:30:00'))>
+  userTheo:
+    id: 'userTheo'
+    username: Théo QP
+    firstname: Théo
+    lastname: Bourgoin
+    email: theo@cap-collectif.com
+    plainpassword: toto
+    media: '@ProfilePicTheo'
+    roles:
+      - 'ROLE_USER'
+      - 'ROLE_PROJECT_ADMIN'
+    emailConfirmationSentAt: <(new \DateTime('2019-06-03 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2019-06-03 09:30:00'))>
+    consentInternalCommunication: true
+  userJpec:
+    id: 'userJpec'
+    username: Jpec
+    firstname: Jean Paul
+    lastname: Bella
+    email: jpec@cap-collectif.com
+    plainpassword: toto
+    media: '@ProfilePicJpec'
+    roles:
+      - 'ROLE_USER'
+    emailConfirmationSentAt: <(new \DateTime('2019-07-15 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2019-07-15 09:30:00'))>
+  userMickael:
+    id: 'userMickael'
+    username: Dev null
+    firstname: Mickael
+    lastname: Buliard
+    biography: "La raclette c'est bon."
+    media: '@ProfilePicMickael'
+    email: mickael@cap-collectif.com
+    plainpassword: toto
+    roles:
+      - 'ROLE_USER'
+    emailConfirmationSentAt: <(new \DateTime('2019-11-04 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2019-11-04 09:30:00'))>
+    consentInternalCommunication: true
+  userIan:
+    id: 'userIan'
+    username: Ian apprenti DevOps
+    firstname: Ian
+    lastname: DUCROT--THOLLON-POMMEROL
+    email: ian@cap-collectif.com
+    plainpassword: toto
+    media: '@ProfilePicIan'
+    roles:
+      - 'ROLE_USER'
+    emailConfirmationSentAt: <(new \DateTime('2020-03-09 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2020-03-09 09:30:00'))>
+  userMaximeQA:
+    id: 'userMaximeQA'
+    username: Max de la QA
+    biography: Le mec qui met des retours partout
+    firstname: Maxime
+    lastname: QA
+    media: '@ProfilePicMaxQA'
+    email: maxime.pouessel@cap-collectif.com
+    plainpassword: toto
+    roles:
+      - 'ROLE_USER'
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
+    enabled: true
+    createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
+  userNotConnectedFranceConnect:
+    id: 'userNotConnectedFranceConnect'
+    username: Angela Claire Louise
+    firstname: Angela Claire Louise
+    lastname: DUBOIS
+    email: wossewodda-3728@yopmail.com
+    dateOfBirth: <(new \DateTime('1990-03-10'))>
+    birthplace: 'nowhere'
+    gender: 'f'
+    plainpassword: toto
+    roles:
+      - 'ROLE_USER'
+    emailConfirmationSentAt: <(new \DateTime('2020-03-09 09:30:00'))>
+    enabled: true
+    createdAt: <(new \DateTime('2020-03-09 09:30:00'))>
+    biography: Je suis france connect pas encore associé.
+  userConnectedFranceConnect:
+    id: 'userConnectedFranceConnect'
+    username: LAMPE Geraldine
+    firstname: Geraldine
+    lastname: LAMPE
+    email: ducowanet-7006@yopmail.com
+    roles:
+      - 'ROLE_USER'
+    enabled: true
+    createdAt: <(new \DateTime('2020-03-10 09:30:00'))>
+    updatedAt: $createdAt
+    biography: Je suis créé via france connect
+    franceConnectId: '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1'
+    franceConnectAccessToken: INSERT_A_REAL_SECRET
+  duplicatesUserConnectedFranceConnect:
+    id: 'duplicatesUserConnectedFranceConnect'
+    username: LAMPE Gerare
+    firstname: Gerare
+    lastname: LAMPE
+    email: gerare@yopmail.com
+    roles:
+      - 'ROLE_USER'
+    enabled: true
+    createdAt: <(new \DateTime('2020-04-10 09:30:00'))>
+    biography: Je suis un doublon
+    franceConnectId: '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1-duplicates'
+    franceConnectAccessToken: INSERT_A_REAL_SECRET
+  userBobMarley:
+    id: 'userBobMarley'
+    username: Bob Marley
+    firstname: Bob
+    lastname: Marley
+    email: b.marley@cap-collectif.com
+    media: '@ProfilePicBobMarley'
+    plainpassword: toto
+    roles:
+      - 'ROLE_USER'
+    enabled: true
+    createdAt: <(new \DateTime('1945-02-06 00:00:00'))>
+    biography: Robert Nesta Marley dit Bob Marley, né le 6 février 1945 à Nine Mile et mort le 11 mai 1981 à Miami d'un cancer généralisé, est un auteur-compositeur-interprète et musicien jamaïcain.
+  userLaurentAlexandre:
+    id: 'userLaurentAlexandre'
+    username: Laurent Alexandre
+    firstname: Laurent
+    lastname: Alexandre
+    email: laurent.alexandre@cap-collectif.com
+    media: '@ProfilePicLaurentAlexandre'
+    plainpassword: toto
+    roles:
+      - 'ROLE_USER'
+    enabled: true
+    createdAt: <(new \DateTime('1945-02-06 00:00:00'))>
+    biography: Laurent Alexandre, né le 10 juin 1960 à Paris, haut fonctionnaire et médecin de formation, est un entrepreneur, écrivain et militant politique français.
+  userWithConfirmedPhone:
+    id: 'userWithConfirmedPhone'
+    username: userWithConfirmedPhone
+    firstname: userWithConfirmedPhone
+    lastname: userWithConfirmedPhone
+    email: userWithConfirmedPhone@cap-collectif.com
+    phone: '+3300000000'
+    phoneConfirmed: true
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_ADMIN'
+    enabled: true
+    birthPlace: Paris
+    createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
+    confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
+    consentInternalCommunication: true
+  ChristopheCassou:
+    id: 'ChristopheCassou'
+    username: Christophe Cassou
+    firstname: Christophe
+    lastname: Cassou
+    email: christophe.cassou@cap-collectif.com
+    media: '@ProfilePicCassou'
+    plainpassword: toto
+    roles:
+      - 'ROLE_USER'
+    enabled: true
+    createdAt: <(new \DateTime('1971-10-29 00:00:00'))>
+    confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
+    biography: "Directeur de Recherche atCNRS, Climatologue/Climate scientistAuteur principal 6e rapport #GIEC/atIPCC_CH 2021-22CoFondateur atTrainDuClimat"
+    consentInternalCommunication: true
+  valerieMassonDelmotte:
+    id: 'valerieMassonDelmotte'
+    username: Valérie Masson Delmotte
+    firstname: Valérie
+    lastname: Masson Delmotte
+    email: valerie.massondelmotte@cap-collectif.com
+    media: '@ProfilePicVMD'
+    plainpassword: toto
+    roles:
+      - 'ROLE_USER'
+    enabled: true
+    createdAt: <(new \DateTime('1972-10-29 00:00:00'))>
+    biography: "Valérie Masson-Delmotte, née le 29 octobre 1971 à Nancy1, est une paléoclimatologue française. Elle est directrice de recherche au CEA et coprésidente du groupe no 1 du GIEC depuis 2015."
+    consentInternalCommunication: true

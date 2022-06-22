@@ -5,63 +5,63 @@ Scenario: GraphQL admin wants to get count of all users and have figures of emai
   Given I am logged in to graphql as "admin@test.com" with password "admin"
   And I send a GraphQL POST request:
   """
-    {
-      "query": "query getAllUsers {
-        users {
-		      totalCount
+  {
+    "query": "query getAllUsers {
+      users {
+            totalCount
+      }
+      usersNotConfirmed: users(emailConfirmed: false) {
+            totalCount
+      }
+      usersConfirmed: users(emailConfirmed: true) {
+            totalCount
         }
-        usersNotConfirmed: users(emailConfirmed: false) {
-		      totalCount
+        usersWithDisabled: users(withDisabled: true) {
+          totalCount
         }
-        usersConfirmed: users(emailConfirmed: true) {
-		      totalCount
-	      }
-	      usersWithDisabled: users(withDisabled: true) {
-	        totalCount
-	      }
-	      usersWithSuperAdmin: users(superAdmin: true) {
-	        totalCount
-	      }
-        usersOnlyProjectAdmin: users(onlyProjectAdmins: true) {
-	        totalCount
-	      }
-	      usersWithConsentInternalCommunication: users(consentInternalCommunication: true) {
-	        totalCount
-	      }
-	      usersWithoutConsentInternalCommunication: users(consentInternalCommunication: false) {
-	        totalCount
-	      }
-      }"
-    }
+        usersWithSuperAdmin: users(superAdmin: true) {
+          totalCount
+        }
+      usersOnlyProjectAdmin: users(onlyProjectAdmins: true) {
+          totalCount
+        }
+        usersWithConsentInternalCommunication: users(consentInternalCommunication: true) {
+          totalCount
+        }
+        usersWithoutConsentInternalCommunication: users(consentInternalCommunication: false) {
+          totalCount
+        }
+    }"
+  }
   """
   Then the JSON response should match:
   """
-    {
-      "data": {
-        "users": {
-          "totalCount": 229
+  {
+     "data":{
+        "users":{
+           "totalCount":231
         },
-        "usersNotConfirmed": {
-          "totalCount": 2
+        "usersNotConfirmed":{
+           "totalCount":2
         },
-        "usersConfirmed": {
-          "totalCount": 227
+        "usersConfirmed":{
+           "totalCount":229
         },
-        "usersWithDisabled": {
-          "totalCount": 231
+        "usersWithDisabled":{
+           "totalCount":233
         },
-        "usersWithSuperAdmin": {
-          "totalCount": 238
+        "usersWithSuperAdmin":{
+           "totalCount":240
         },
-        "usersOnlyProjectAdmin": {
-          "totalCount": 2
+        "usersOnlyProjectAdmin":{
+           "totalCount":2
         },
-        "usersWithConsentInternalCommunication": {
-          "totalCount": 201
+        "usersWithConsentInternalCommunication":{
+           "totalCount":203
         },
-        "usersWithoutConsentInternalCommunication": {
-          "totalCount": 28
+        "usersWithoutConsentInternalCommunication":{
+           "totalCount":28
         }
-      }
-    }
+     }
+  }
   """

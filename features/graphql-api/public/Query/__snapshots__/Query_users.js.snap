@@ -2393,7 +2393,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YToyOntpOjA7aToxNTg2NTAzODAwMDAwO2k6MTtzOjM2OiJkdXBsaWNhdGVzVXNlckNvbm5lY3RlZEZyYW5jZUNvbm5lY3QiO30=",
     },
-    "totalCount": 229,
+    "totalCount": 231,
   },
 }
 `;
@@ -2607,7 +2607,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxNjEiO30=",
     },
-    "totalCount": 229,
+    "totalCount": 231,
   },
 }
 `;

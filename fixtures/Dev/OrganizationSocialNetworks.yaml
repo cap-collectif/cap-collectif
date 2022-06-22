@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\Organization\OrganizationSocialNetworks:
+    organizationSocialNetworks1:
+        organization: '@organization1'
+        webPageUrl: 'https://www.cc-parthenay-gatine.fr/'
+        twitterUrl: 'https://twitter.com/ParthenayGatine'
+    organizationSocialNetworks2:
+        organization: '@organization2'
+        webPageUrl: 'https://www.ipcc.ch/'
+        twitterUrl: 'https://twitter.com/IPCC_ch'
