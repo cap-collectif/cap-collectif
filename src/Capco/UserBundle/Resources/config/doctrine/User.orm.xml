@@ -188,6 +188,13 @@
         </one-to-one>
         <one-to-many field="userPhoneVerificationSms" target-entity="Capco\AppBundle\Entity\UserPhoneVerificationSms" mapped-by="user" />
         <many-to-many field="starredResponses" target-entity="Capco\AppBundle\Entity\Responses\AbstractResponse" mapped-by="starCrafters" />
+
+        <one-to-many target-entity="Capco\AppBundle\Entity\Organization\OrganizationMember" mapped-by="user" field="memberOfOrganizations">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
     </entity>
 
 </doctrine-mapping>

@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
@@ -100,6 +101,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected ?string $websiteUrl = null;
     protected array $openIdSessionsId = [];
     private Collection $userGroups;
+    protected Collection $memberOfOrganizations;
     private ?string $resetPasswordToken = null;
     private ?UserIdentificationCode $userIdentificationCode = null;
     /**
@@ -132,12 +134,13 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
         $this->supervisedProposals = new ArrayCollection();
         $this->userPhoneVerificationSms = new ArrayCollection();
         $this->starredResponses = new ArrayCollection();
+        $this->memberOfOrganizations = new ArrayCollection();
     }
 
     public function hydrate(array $data): self
     {
         foreach ($data as $key => $value) {
-            $setter = 'set'.ucfirst($key);
+            $setter = 'set' . ucfirst($key);
             if ('id' === $key) {
                 $this->id = $value;
 
@@ -161,7 +164,7 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     public function sanitizePhoneNumber(): void
     {
         if ($this->phone) {
-            $this->phone = '+'.preg_replace('/\D/', '', $this->phone);
+            $this->phone = '+' . preg_replace('/\D/', '', $this->phone);
         }
     }
 
@@ -1057,6 +1060,34 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
         if ($this->starredResponses->removeElement($response)) {
             $response->removeStarCrafter($this);
         }
+
+        return $this;
+    }
+
+    public function getMemberOfOrganizations(): Collection
+    {
+        return $this->memberOfOrganizations;
+    }
+
+    public function addMemberOfOrganization(OrganizationMember $organizationMember): self
+    {
+        if (!$this->memberOfOrganizations->contains($organizationMember)) {
+            $this->memberOfOrganizations->add($organizationMember);
+        }
+
+        return $this;
+    }
+
+    public function removeMemberOfOrganization(OrganizationMember $organizationMember): self
+    {
+        $this->memberOfOrganizations->removeElement($organizationMember);
+
+        return $this;
+    }
+
+    public function setMemberOfOrganizations(Collection $memberOfOrganizations): self
+    {
+        $this->memberOfOrganizations = $memberOfOrganizations;
 
         return $this;
     }

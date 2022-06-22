@@ -16,6 +16,7 @@ doctrine:
             enum_proposal_revision_state: Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType
             enum_mailer_type: Capco\AppBundle\DBAL\Enum\MailerType
             enum_sso_type: Capco\AppBundle\DBAL\Enum\SSOType
+            enum_organization_member_role_type: Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType
         mapping_types:
             enum: string
         profiling_collect_schema_errors: false
