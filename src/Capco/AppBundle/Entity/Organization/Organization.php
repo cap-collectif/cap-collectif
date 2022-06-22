@@ -2,9 +2,13 @@
 
 namespace Capco\AppBundle\Entity\Organization;
 
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\SluggableTranslatableTitleTrait;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,16 +21,13 @@ use Doctrine\ORM\Mapping as ORM;
  * )*
  * @ORM\Entity(repositoryClass=OrganizationRepository::class)
  */
-class Organization
+class Organization implements SonataTranslatableInterface, Translatable
 {
-    use SluggableTitleTrait;
+    use SluggableTranslatableTitleTrait;
+    use SonataTranslatableTrait;
     use TimestampableTrait;
+    use TranslatableTrait;
     use UuidTrait;
-
-    /**
-     * @ORM\Column(type="text", nullable=true, name="body")
-     */
-    private ?string $body;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
@@ -55,14 +56,14 @@ class Organization
         $this->members = new ArrayCollection();
     }
 
-    public function getBody(): ?string
+    public function getBody(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->body;
+        return $this->translate($locale, $fallbackToDefault)->getBody();
     }
 
-    public function setBody(?string $body): self
+    public function setBody(?string $body = null): self
     {
-        $this->body = $body;
+        $this->translate(null, false)->setBody($body);
 
         return $this;
     }
@@ -159,5 +160,10 @@ class Organization
         return $this->organizationSocialNetworks
             ? $this->organizationSocialNetworks->getFacebookUrl()
             : null;
+    }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return OrganizationTranslation::class;
     }
 }
