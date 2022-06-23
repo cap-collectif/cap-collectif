@@ -108,3 +108,10 @@ services:
     Capco\AppBundle\Validator\Constraints\CheckCustomDomainValidator:
         tags:
             - { name: validator.constraint_validator, alias: check_custom_domain.validator }
+
+    Capco\AppBundle\Validator\Constraints\PendingOrganizationInvitationValidator:
+        tags:
+            - {
+                  name: validator.constraint_validator,
+                  alias: pending_organization_invitation.validator,
+              }

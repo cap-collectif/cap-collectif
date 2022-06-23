@@ -1,0 +1,19 @@
+Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation:
+    invitation1:
+        organization: '@organization1'
+        user: '@userWelcomattic'
+        role: 'admin'
+        token: 'token1'
+        creator: '@user4'
+    invitation2:
+        organization: '@organization1'
+        user: '@userMaxime'
+        role: 'user'
+        token: 'token2'
+        creator: '@user4'
+    invitation3:
+        organization: '@organization2'
+        role: 'user'
+        email: 'toto@cap-collectif.com'
+        token: 'token3'
+        creator: '@user4'
