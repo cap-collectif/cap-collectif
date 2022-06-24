@@ -2,8 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Repository\MailingListRepository;
-use Capco\AppBundle\Traits\OwnerTrait;
+use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,9 +15,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=MailingListRepository::class)
  * @ORM\Table(name="mailing_list")
  */
-class MailingList
+class MailingList implements Ownerable
 {
-    use OwnerTrait;
+    use OwnerableTrait;
     use UuidTrait;
 
     /**

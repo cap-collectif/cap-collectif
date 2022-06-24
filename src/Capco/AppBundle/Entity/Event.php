@@ -4,11 +4,13 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
+use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
@@ -47,12 +49,14 @@ class Event implements
     TimeRangeable,
     Authorable,
     Translatable,
-    SonataTranslatableInterface
+    SonataTranslatableInterface,
+    Ownerable
 {
     use BodyUsingJoditWysiwygTrait;
     use CommentableWithoutCounterTrait;
     use CustomCodeTrait;
     use DateHelperTrait;
+    use OwnerableTrait;
     use SoftDeleteTrait;
     use SonataTranslatableTrait;
     use TimeRangeableTrait;
@@ -197,11 +201,6 @@ class Event implements
      * @ORM\Column(name="author_agree_to_use_personal_data_for_event_only", type="boolean", nullable=true)
      */
     private $authorAgreeToUsePersonalDataForEventOnly;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     */
-    private ?User $owner;
 
     /**
      * @ORM\Column(name="measurable", type="boolean", options={"default": false})
@@ -793,18 +792,6 @@ class Event implements
     public function setRoomName(?string $roomName): self
     {
         $this->roomName = $roomName;
-
-        return $this;
-    }
-
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(?User $owner): self
-    {
-        $this->owner = $owner;
 
         return $this;
     }

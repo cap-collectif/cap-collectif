@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -13,7 +14,7 @@ use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
-use Capco\AppBundle\Traits\OwnerTrait;
+use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\UsingSocialNetworksTrait;
@@ -44,10 +45,10 @@ use Capco\AppBundle\Entity\District\ProposalDistrict;
  *   message="proposal_form.reference.not_unique"
  * )
  */
-class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
+class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable
 {
     use DescriptionUsingJoditWysiwygTrait;
-    use OwnerTrait;
+    use OwnerableTrait;
     use ReferenceTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;

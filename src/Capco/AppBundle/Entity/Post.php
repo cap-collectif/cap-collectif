@@ -9,7 +9,7 @@ use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
-use Capco\AppBundle\Traits\OwnerTrait;
+use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
@@ -33,14 +33,14 @@ class Post implements
     SonataTranslatableInterface,
     Translatable
 {
+    use BodyUsingJoditWysiwygTrait;
     use CommentableTrait;
     use CustomCodeTrait;
-    use OwnerTrait;
+    use OwnerableTrait;
     use SonataTranslatableTrait;
     use TimestampableTrait;
     use TranslatableTrait;
     use UuidTrait;
-    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\Column(name="is_published", type="boolean", options={"default": false})
@@ -120,7 +120,6 @@ class Post implements
     {
         return $this->getId() ? $this->translate()->getTitle() : 'New post';
     }
-
 
     public static function getTranslationEntityClass(): string
     {

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
@@ -999,7 +1000,7 @@ class Proposal implements
         return null;
     }
 
-    public function getProjectOwner(): ?User
+    public function getProjectOwner(): ?Owner
     {
         return $this->getProject() ? $this->getProject()->getOwner() : null;
     }

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Organization;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\AppBundle\Traits\SluggableTranslatableTitleTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
@@ -22,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )*
  * @ORM\Entity(repositoryClass=OrganizationRepository::class)
  */
-class Organization implements SonataTranslatableInterface, Translatable, Author
+class Organization implements SonataTranslatableInterface, Translatable, Author, Owner
 {
     use SluggableTranslatableTitleTrait;
     use SonataTranslatableTrait;
@@ -166,5 +167,10 @@ class Organization implements SonataTranslatableInterface, Translatable, Author
     public static function getTranslationEntityClass(): string
     {
         return OrganizationTranslation::class;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->getTitle();
     }
 }

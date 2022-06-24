@@ -2,7 +2,8 @@
 
 namespace Capco\AppBundle\Entity\Security;
 
-use Capco\AppBundle\Traits\OwnerTrait;
+use Capco\AppBundle\Entity\Interfaces\Ownerable;
+use Capco\AppBundle\Traits\OwnerableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,9 +13,9 @@ use Capco\AppBundle\Traits\UuidTrait;
  * @ORM\Table(name="user_identification_code_list")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository")
  */
-class UserIdentificationCodeList
+class UserIdentificationCodeList implements Ownerable
 {
-    use OwnerTrait;
+    use OwnerableTrait;
     use UuidTrait;
 
     /**

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
+use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
@@ -20,6 +21,7 @@ use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\LocalizableTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -40,12 +42,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasUserGroupIdVisibilityGroup()
  */
-class Project implements IndexableInterface, TimeRangeable
+class Project implements IndexableInterface, TimeRangeable, Ownerable
 {
     use AddressableTrait;
     use DateHelperTrait;
     use LocalizableTrait;
     use MetaDescriptionCustomCodeTrait;
+    use OwnerableTrait;
     use ProjectVisibilityTrait;
     use TimeRangeableTrait;
     use UuidTrait;
@@ -257,11 +260,6 @@ class Project implements IndexableInterface, TimeRangeable
      * @ORM\Column(name="archived", type="boolean", nullable=false, options={"default" = false})
      */
     private bool $archived = false;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     */
-    private $owner;
 
     /**
      * @ORM\OneToMany(targetEntity=EmailingCampaign::class, mappedBy="project", orphanRemoval=true)
@@ -1396,18 +1394,6 @@ class Project implements IndexableInterface, TimeRangeable
     public function setArchived(bool $archived): self
     {
         $this->archived = $archived;
-
-        return $this;
-    }
-
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(?User $owner): self
-    {
-        $this->owner = $owner;
 
         return $this;
     }

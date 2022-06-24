@@ -126,7 +126,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
             json_encode(
                 [
                     'class' => \get_class($response->getWrappedObject()),
-                    'id' => 10,
+                    'id' => "10",
                 ],
                 \JSON_THROW_ON_ERROR
             )

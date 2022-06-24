@@ -2,10 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
-use Capco\AppBundle\Traits\OwnerTrait;
+use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,9 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=EmailingCampaignRepository::class)
  * @ORM\Table(name="emailing_campaign")
  */
-class EmailingCampaign
+class EmailingCampaign implements Ownerable
 {
-    use OwnerTrait;
+    use OwnerableTrait;
     use UuidTrait;
 
     /**

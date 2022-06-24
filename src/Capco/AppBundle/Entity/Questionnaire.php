@@ -3,13 +3,14 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
-use Capco\AppBundle\Traits\OwnerTrait;
+use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -24,13 +25,13 @@ use Capco\AppBundle\Enum\QuestionnaireType;
  * @ORM\Table(name="questionnaire")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireRepository")
  */
-class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
+class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Ownerable
 {
-    use OwnerTrait;
+    use DescriptionUsingJoditWysiwygTrait;
+    use OwnerableTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
     use UuidTrait;
-    use DescriptionUsingJoditWysiwygTrait;
 
     /**
      * @var \DateTime
