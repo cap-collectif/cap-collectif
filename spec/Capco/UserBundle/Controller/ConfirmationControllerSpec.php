@@ -62,7 +62,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(null);
         $translator
-            ->trans('global.alert.already_email_confirmed', [], 'SonataUserBundle')
+            ->trans('global.alert.already_email_confirmed', [], 'CapcoAppBundle')
             ->shouldBeCalled()
             ->willReturn('global.alert.already_email_confirmed');
         $flashBag
@@ -124,7 +124,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->willReturn(true);
 
         $translator
-            ->trans('global.alert.email_confirmed_with_republish', [], 'SonataUserBundle')
+            ->trans('global.alert.email_confirmed_with_republish', [], 'CapcoAppBundle')
             ->shouldBeCalled()
             ->willReturn('global.alert.email_confirmed_with_republish');
         $flashBag
@@ -160,7 +160,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(null);
         $translator
-            ->trans('global.alert.already_email_confirmed', [], 'SonataUserBundle')
+            ->trans('global.alert.already_email_confirmed', [], 'CapcoAppBundle')
             ->shouldBeCalled()
             ->willReturn('global.alert.already_email_confirmed');
         $flashBag
@@ -225,7 +225,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(null);
         $translator
-            ->trans('global.alert.new_email_confirmed', [], 'SonataUserBundle')
+            ->trans('global.alert.new_email_confirmed', [], 'CapcoAppBundle')
             ->shouldBeCalled()
             ->willReturn('global.alert.new_email_confirmed');
         $flashBag->set('sonata_user_success', 'global.alert.new_email_confirmed')->shouldBeCalled();

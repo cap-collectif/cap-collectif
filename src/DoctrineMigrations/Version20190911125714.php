@@ -17,7 +17,7 @@ final class Version20190911125714 extends AbstractMigration implements Container
 {
     private $translator;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->translator = $container->get('translator');
     }
@@ -39,12 +39,12 @@ final class Version20190911125714 extends AbstractMigration implements Container
                 'beforeText' => $this->translator->trans(
                     'information-for-the-contact-form-1',
                     [],
-                    'SonataUserBundle'
+                    'CapcoAppBundle'
                 ),
                 'afterText' => $this->translator->trans(
                     'information-for-the-contact-form-2',
                     [],
-                    'SonataUserBundle'
+                    'CapcoAppBundle'
                 ),
             ],
             [ParameterType::STRING, ParameterType::STRING]

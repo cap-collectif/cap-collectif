@@ -12,7 +12,6 @@ const domains = [
     'CapcoAppBundle',
     'SonataAdminBundle',
     'SonataMediaBundle',
-    'SonataUserBundle',
     'messages',
 ];
 

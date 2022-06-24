@@ -70,7 +70,7 @@ class ConfirmationController extends Controller
                 $this->translator->trans(
                     'global.alert.already_email_confirmed',
                     [],
-                    'SonataUserBundle'
+                    'CapcoAppBundle'
                 )
             );
 
@@ -111,26 +111,12 @@ class ConfirmationController extends Controller
                     ? 'global.alert.email_confirmed_with_republish'
                     : 'global.alert.email_confirmed',
                 [],
-                'SonataUserBundle'
+                'CapcoAppBundle'
             )
         );
 
         return $response;
     }
-
-    private function pushToSendinblue(array $args): void
-    {
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::SENDINBLUE,
-            new Message(
-                json_encode([
-                    'method' => 'addEmailToSendinblue',
-                    'args' => $args,
-                ])
-            )
-        );
-    }
-
 
     /**
      * @Route("/account/new_email_confirmation/{token}", name="account_confirm_new_email", options={"i18n" = false})
@@ -151,7 +137,7 @@ class ConfirmationController extends Controller
                 $this->translator->trans(
                     'global.alert.already_email_confirmed',
                     [],
-                    'SonataUserBundle'
+                    'CapcoAppBundle'
                 )
             );
 
@@ -178,10 +164,23 @@ class ConfirmationController extends Controller
 
         $flashBag->set(
             'sonata_user_success',
-            $this->translator->trans('global.alert.new_email_confirmed', [], 'SonataUserBundle')
+            $this->translator->trans('global.alert.new_email_confirmed', [], 'CapcoAppBundle')
         );
 
         return $response;
+    }
+
+    private function pushToSendinblue(array $args): void
+    {
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::SENDINBLUE,
+            new Message(
+                json_encode([
+                    'method' => 'addEmailToSendinblue',
+                    'args' => $args,
+                ])
+            )
+        );
     }
 
     /**
