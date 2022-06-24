@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Organization;
 
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
@@ -21,7 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )*
  * @ORM\Entity(repositoryClass=OrganizationRepository::class)
  */
-class Organization implements SonataTranslatableInterface, Translatable
+class Organization implements SonataTranslatableInterface, Translatable, Author
 {
     use SluggableTranslatableTitleTrait;
     use SonataTranslatableTrait;

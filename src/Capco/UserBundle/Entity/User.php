@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Entity\Follower;
@@ -26,7 +27,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-class User extends BaseUser implements ProjectOwner, EquatableInterface, IndexableInterface
+class User extends BaseUser implements ProjectOwner, EquatableInterface, IndexableInterface, Author
 {
     use UserAddressTrait;
     use UserSSOTrait;
@@ -100,8 +101,8 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected bool $profilePageIndexed = false;
     protected ?string $websiteUrl = null;
     protected array $openIdSessionsId = [];
-    private Collection $userGroups;
     protected Collection $memberOfOrganizations;
+    private Collection $userGroups;
     private ?string $resetPasswordToken = null;
     private ?UserIdentificationCode $userIdentificationCode = null;
     /**
