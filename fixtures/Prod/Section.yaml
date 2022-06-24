@@ -1,70 +1,70 @@
 Capco\AppBundle\Entity\Section:
-  SectionHighlighted:
-    type: highlight
-    position: 1
-    nbObjects: null
-    enabled: true
-    associatedFeatures: []
-  SectionIntro:
-    type: introduction
-    position: 2
-    nbObjects: null
-    enabled: true
-    associatedFeatures: []
-  SectionVideos:
-    type: videos
-    position: 3
-    nbObjects: 3
-    enabled: true
-    associatedFeatures: []
-  SectionProjects:
-    type: projects
-    position: 4
-    nbObjects: 4
-    enabled: true
-    associatedFeatures: []
-  SectionThemes:
-    type: themes
-    position: 5
-    nbObjects: 4
-    enabled: true
-    associatedFeatures: [themes]
-  SectionNews:
-    type: news
-    position: 7
-    nbObjects: 3
-    enabled: true
-    associatedFeatures: [blog]
-  SectionEvents:
-    type: events
-    position: 8
-    nbObjects: 3
-    enabled: true
-    associatedFeatures: [calendar]
-  SectionNewsletter:
-    type: newsletter
-    position: 9
-    nbObjects: null
-    enabled: false
-    associatedFeatures: [newsletter]
-  SectionSocialNetworks:
-    type: social-networks
-    position: 9
-    nbObjects: null
-    enabled: true
-    associatedFeatures: []
-  SectionMetrics:
-    type: metrics
-    position: 11
-    nbObjects: null
-    enabled: false
-    metricsToDisplayBasics: true
-    metricsToDisplayEvents: true
-    metricsToDisplayProjects: true
-    associatedFeatures: []
-  SectionProposals:
-    type: proposals
-    position: 10
-    nbObjects: 3
-    enabled: false
-    associatedFeatures: []
+    SectionIntro:
+        type: introduction
+        position: 1
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
+    SectionHighlighted:
+        type: highlight
+        position: 2
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
+    SectionVideos:
+        type: videos
+        position: 3
+        nbObjects: 3
+        enabled: false
+        associatedFeatures: []
+    SectionProjects:
+        type: projects
+        position: 4
+        nbObjects: 4
+        enabled: true
+        associatedFeatures: []
+    SectionThemes:
+        type: themes
+        position: 5
+        nbObjects: 4
+        enabled: false
+        associatedFeatures: [themes]
+    SectionNews:
+        type: news
+        position: 7
+        nbObjects: 3
+        enabled: true
+        associatedFeatures: [blog]
+    SectionEvents:
+        type: events
+        position: 8
+        nbObjects: 3
+        enabled: true
+        associatedFeatures: [calendar]
+    SectionNewsletter:
+        type: newsletter
+        position: 9
+        nbObjects: null
+        enabled: false
+        associatedFeatures: [newsletter]
+    SectionSocialNetworks:
+        type: social-networks
+        position: 9
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
+    SectionMetrics:
+        type: metrics
+        position: 11
+        nbObjects: null
+        enabled: false
+        metricsToDisplayBasics: true
+        metricsToDisplayEvents: true
+        metricsToDisplayProjects: true
+        associatedFeatures: []
+    SectionProposals:
+        type: proposals
+        position: 10
+        nbObjects: 3
+        enabled: false
+        associatedFeatures: []

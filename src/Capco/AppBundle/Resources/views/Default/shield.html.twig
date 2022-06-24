@@ -50,16 +50,17 @@
                         }) }}
                     </li>
                 {% endif %}
-                    <span class="list-separator">•</span>
+                {%  if ads_js or analytic_js %}
+                <span class="list-separator">•</span>
                     <li>
-                        {%  if ads_js or analytic_js %}
                             {{ react_render_component('CookieManagerApp', {
                                 'props': {
                                     'isLink':  true,
-                                    'withListSeparator':  false,                                }
+                                    'withListSeparator':  false,
+                                }
                             }) }}
-                        {%  endif %}
                     </li>
+                {%  endif %}
             </ul>
         </div>
         <div class="footer__links">

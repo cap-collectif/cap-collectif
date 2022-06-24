@@ -150,6 +150,8 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->activate(Manager::proposal_revisions);
             $this->manager->activate(Manager::new_project_card);
             $this->manager->activate(Manager::unstable__anonymous_questionnaire);
+            $this->manager->deactivate(Manager::user_type);
+            $this->manager->activate(Manager::helpscout_beacon);
         }
 
         $output->writeln('<info>Feature flags reseted ! </info>');
