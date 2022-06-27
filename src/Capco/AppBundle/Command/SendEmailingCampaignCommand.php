@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
+use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Mailer\EmailingCampaignSender;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -60,14 +61,19 @@ class SendEmailingCampaignCommand extends Command
 
     private function send(EmailingCampaign $emailingCampaign, OutputInterface $output): void
     {
-        $this->sender->send($emailingCampaign);
+        $emailingCampaign->setStatus(EmailingCampaignStatus::SENDING);
         $this->persistAndFlush($emailingCampaign);
-        $this->log($output, $emailingCampaign->getName());
-    }
+        $output->writeln(
+            '<info>Sending EmailingCampaign ' . $emailingCampaign->getName() . '</info>'
+        );
 
-    private function log(OutputInterface $output, string $name): void
-    {
-        $output->writeln("<info>Sending EmailingCampaign \"${name}\"</info>");
+        try {
+            $count = $this->sender->send($emailingCampaign);
+            $this->persistAndFlush($emailingCampaign);
+            $output->writeln("<info>Sent to ${count} recipients</info>");
+        } catch (\Exception $exception) {
+            $output->writeln('<error>' . $exception->getMessage() . '</error>');
+        }
     }
 
     private function persistAndFlush(EmailingCampaign $emailingCampaign): void

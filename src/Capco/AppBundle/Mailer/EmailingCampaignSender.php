@@ -45,13 +45,16 @@ class EmailingCampaignSender
         $this->projectEmailableContributorsResolver = $projectEmailableContributorsResolver;
     }
 
-    public function send(EmailingCampaign $emailingCampaign): EmailingCampaign
+    public function send(EmailingCampaign $emailingCampaign): int
     {
-        foreach ($this->getRecipients($emailingCampaign) as $recipient) {
+        $recipients = $this->getRecipients($emailingCampaign);
+        foreach ($recipients as $recipient) {
             $this->createAndSendMessage($emailingCampaign, $recipient);
         }
 
-        return $this->setCampaignAsSent($emailingCampaign);
+        $this->setCampaignAsSent($emailingCampaign);
+
+        return $recipients->count();
     }
 
     private function createAndSendMessage(

@@ -5540,6 +5540,9 @@ enum EmailingCampaignStatus {
   """not scheduled"""
   DRAFT
 
+  """currently sending"""
+  SENDING
+
   """already sent"""
   SENT
 

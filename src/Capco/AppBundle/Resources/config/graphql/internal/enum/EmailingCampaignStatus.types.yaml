@@ -6,6 +6,9 @@ EmailingCampaignStatus:
             DRAFT:
                 value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::DRAFT")'
                 description: 'not scheduled'
+            SENDING:
+                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::SENDING")'
+                description: 'currently sending'
             SENT:
                 value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::SENT")'
                 description: 'already sent'

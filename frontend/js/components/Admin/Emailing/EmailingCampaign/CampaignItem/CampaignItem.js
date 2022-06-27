@@ -20,6 +20,10 @@ const STATUS_CAMPAIGN = {
     label: 'global-sent',
     color: '#06BDA5',
   },
+  SENDING: {
+    label: 'global-sent', // todo design specific message
+    color: '#06BDA5',
+  },
   PLANNED: {
     label: 'global-planned',
     color: '#F5C36A',
