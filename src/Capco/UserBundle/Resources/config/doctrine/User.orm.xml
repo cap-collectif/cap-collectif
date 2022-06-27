@@ -70,11 +70,6 @@
         </field>
 
         <attribute-overrides>
-
-            <attribute-override name="updatedAt">
-                <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />
-            </attribute-override>
-
             <attribute-override name="usernameCanonical">
                 <field column="username_canonical" type="string" length="255" unique="false" nullable="true"/>
             </attribute-override>
@@ -91,6 +86,19 @@
                 <field column="password" type="string" length="255" nullable="true" />
             </attribute-override>
         </attribute-overrides>
+
+        <field name="createdAt" type="datetime" column="created_at"/>
+        <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+
+        <!-- Profile fields -->
+        <field name="dateOfBirth" type="datetime" column="date_of_birth" nullable="true"/>
+        <field name="firstname" type="string" column="firstname" length="64" nullable="true"/>
+        <field name="lastname" type="string" column="lastname" length="64" nullable="true"/>
+        <field name="website" type="string" column="website" length="64" nullable="true"/>
+        <field name="biography" type="string" column="biography" length="1000" nullable="true"/>
+        <field name="gender" type="string" column="gender" length="1" nullable="true"/>
+        <field name="locale" type="string" column="locale" length="8" nullable="true"/>
+        <field name="phone" type="string" column="phone" length="64" nullable="true"/>
 
         <field name="newEmailToConfirm" column="new_email_to_confirm" type="string" length="255" nullable="true" />
         <field name="newEmailConfirmationToken" column="new_email_confirmation_token" type="string" length="255" nullable="true" />

@@ -83,24 +83,13 @@ class AnonymizeUser
 
         $user->setFacebookId(null);
         $user->setFacebookUrl(null);
-        $user->setFacebookData(null);
-        $user->setFacebookName(null);
         $user->setFacebookAccessToken(null);
         $user->setCasId(null);
-
         $user->setTwitterId(null);
         $user->setTwitterUrl(null);
-        $user->setTwitterData(null);
-        $user->setTwitterName(null);
         $user->setTwitterAccessToken(null);
-
-        $user->setGplusData(null);
-        $user->setGplusName(null);
-        $user->setGplusData(null);
-
         $user->setOpenId(null);
         $user->setOpenIdAccessToken(null);
-
         $user->setFranceConnectId(null);
         $user->setFranceConnectAccessToken(null);
 
@@ -117,7 +106,6 @@ class AnonymizeUser
         $user->setWebsite(null);
         $user->setGender(null);
         $user->setLocale(null);
-        $user->setTimezone(null);
         $user->setLocked(true);
         $user->setOpenIdSessionsId([]);
 

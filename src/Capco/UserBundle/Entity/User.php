@@ -18,21 +18,22 @@ use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Traits\User\UserAddressTrait;
 use Capco\AppBundle\Traits\User\UserSSOTrait;
+use Capco\Capco\UserBundle\Entity\AbstractUser;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sonata\UserBundle\Entity\BaseUser;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-class User extends BaseUser implements ProjectOwner, EquatableInterface, IndexableInterface, Author
+class User extends AbstractUser implements ProjectOwner, EquatableInterface, IndexableInterface, Author
 {
     use UserAddressTrait;
     use UserSSOTrait;
 
     public const GENDER_OTHER = 'o';
+    public const GENDER_FEMALE = 'f';
+    public const GENDER_MALE = 'm';
     protected const SORT_ORDER_CREATED_AT = 0;
     protected const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
@@ -52,7 +53,6 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     protected ?string $slug = null;
 
     //personal
-    protected $gender;
     protected ?Media $media = null;
     protected ?string $birthPlace = null;
 
@@ -638,8 +638,8 @@ class User extends BaseUser implements ProjectOwner, EquatableInterface, Indexab
     public static function getGenderList(): array
     {
         return [
-            UserInterface::GENDER_FEMALE => 'gender.female',
-            UserInterface::GENDER_MALE => 'gender.male',
+            self::GENDER_FEMALE => 'gender.female',
+            self::GENDER_MALE => 'gender.male',
             self::GENDER_OTHER => 'gender.other',
         ];
     }
