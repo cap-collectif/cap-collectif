@@ -37,6 +37,15 @@ const nextConfig = {
       },
       use: ['@svgr/webpack'],
     });
+    config.module.rules.push({
+      test: /\.(js|jsx)$/,
+      include: /..\/node_modules\/(?=(react-leaflet|@react-leaflet\/core)\/).*/,
+      loader: require.resolve('babel-loader'),
+      options: {
+        presets: ['@babel/preset-env', '@babel/preset-react'],
+        plugins: ['@babel/plugin-proposal-nullish-coalescing-operator'],
+      },
+    });
 
     if (!isServer) {
       config.node = {
