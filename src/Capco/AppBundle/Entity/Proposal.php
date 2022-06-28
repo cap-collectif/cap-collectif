@@ -19,6 +19,7 @@ use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\AddressableTrait;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
@@ -74,6 +75,7 @@ class Proposal implements
     Authorable
 {
     use AddressableTrait;
+    use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;
     use CommentableWithoutCounterTrait;
     use DraftableTrait;
@@ -690,18 +692,6 @@ class Proposal implements
         if ($district && $add) {
             $district->addProposal($this);
         }
-
-        return $this;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(User $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }

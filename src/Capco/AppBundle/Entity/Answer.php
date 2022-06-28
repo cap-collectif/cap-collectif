@@ -2,10 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\HasAuthorTrait;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -15,12 +17,18 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="answer")
  * @ORM\Entity()
  */
-class Answer
+class Answer implements Authorable
 {
-    use HasAuthorTrait;
+    use AuthorableTrait;
     use IdTrait;
     use TextableTrait;
     use TimestampableTrait;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     */
+    protected User $author;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})

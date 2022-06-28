@@ -2,10 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\HasDiffInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Traits\FollowableTrait;
@@ -29,9 +31,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
+class OpinionVersion implements OpinionContributionInterface, HasDiffInterface, Authorable
 {
     use AnswerableTrait;
+    use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;
     use DiffableTrait;
     use FollowableTrait;
@@ -176,18 +179,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     public function setComment($comment)
     {
         $this->comment = $comment;
-
-        return $this;
-    }
-
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    public function setAuthor($author)
-    {
-        $this->author = $author;
 
         return $this;
     }

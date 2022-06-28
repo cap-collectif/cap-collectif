@@ -2,14 +2,16 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
+use Capco\AppBundle\Entity\Interfaces\Authorable;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\TitleTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\DebatableTrait;
-use Capco\AppBundle\Traits\HasAuthorTrait;
 use Capco\AppBundle\Traits\ForAgainstTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 
@@ -21,16 +23,22 @@ use Capco\AppBundle\Traits\TimestampableTrait;
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateOpinionRepository")
  */
-class DebateOpinion
+class DebateOpinion implements Authorable
 {
+    use AuthorableTrait;
+    use BodyUsingJoditWysiwygTrait;
     use DebatableTrait;
     use ForAgainstTrait;
-    use HasAuthorTrait;
     use TextableTrait;
     use TimestampableTrait;
     use TitleTrait;
     use UuidTrait;
-    use BodyUsingJoditWysiwygTrait;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     */
+    protected User $author;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})

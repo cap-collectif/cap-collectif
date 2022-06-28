@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Debate;
 
 use Capco\AppBundle\Entity\Interfaces\AnonymousParticipationInterface;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\DebateStep;
@@ -147,12 +148,12 @@ class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParti
         return false;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): ?Author
     {
         return null;
     }
 
-    public function setAuthor(User $user)
+    public function setAuthor(?Author $user): self
     {
         return $this;
     }

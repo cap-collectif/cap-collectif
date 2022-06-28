@@ -2,10 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Enum\ReplyStatus;
 use Capco\AppBundle\Model\Publishable;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
@@ -24,8 +26,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class Reply extends AbstractReply implements Publishable, DraftableInterface
+class Reply extends AbstractReply implements Publishable, DraftableInterface, Authorable
 {
+    use AuthorableTrait;
     use DraftableTrait;
     use HasResponsesTrait;
     use PrivatableTrait;
@@ -35,7 +38,7 @@ class Reply extends AbstractReply implements Publishable, DraftableInterface
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="replies")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private User $author;
+    protected ?User $author;
 
     /**
      * @ORM\OneToMany(
@@ -51,18 +54,6 @@ class Reply extends AbstractReply implements Publishable, DraftableInterface
     {
         parent::__construct();
         $this->responses = new ArrayCollection();
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
     }
 
     public function viewerCanSee(User $viewer): bool

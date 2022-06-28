@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -15,12 +17,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="proposal_revision")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRevisionRepository")
  */
-class ProposalRevision
+class ProposalRevision implements Authorable
 {
-    use UuidTrait;
-    use TimestampableTrait;
-    use TextableTrait;
+    use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;
+    use TextableTrait;
+    use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="reason", type="text")
@@ -56,8 +59,6 @@ class ProposalRevision
      */
     private \DateTimeInterface $revisedAt;
 
-
-
     public function getReason(): string
     {
         return $this->reason;
@@ -86,18 +87,6 @@ class ProposalRevision
     public function setState(string $state): self
     {
         $this->state = $state;
-
-        return $this;
-    }
-
-    public function getAuthor(): User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(User $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }

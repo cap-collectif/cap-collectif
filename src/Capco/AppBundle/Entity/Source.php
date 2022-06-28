@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Model\ReportableInterface;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
@@ -27,8 +29,15 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Source implements Contribution, Trashable, VotableInterface, Publishable, ReportableInterface
+class Source implements
+    Contribution,
+    Trashable,
+    VotableInterface,
+    Publishable,
+    ReportableInterface,
+    Authorable
 {
+    use AuthorableTrait;
     use ModerableTrait;
     use PublishableTrait;
     use TextableTrait;
@@ -80,7 +89,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="sources")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private $author;
+    private User $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="sources", cascade={"persist"})
@@ -208,18 +217,6 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
     public function setUpdatedAt(?\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(User $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }

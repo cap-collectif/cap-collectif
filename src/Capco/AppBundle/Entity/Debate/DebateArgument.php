@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\Entity\Debate;
 
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\ContributionOriginTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
@@ -13,7 +15,6 @@ use Capco\AppBundle\Model\Publishable;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\DebatableTrait;
-use Capco\AppBundle\Traits\HasAuthorTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
@@ -25,7 +26,6 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Doctrine\ORM\Mapping\Index;
-use Capco\AppBundle\Entity\Interfaces\Authorable;
 
 /**
  * An argument in a debate.
@@ -46,11 +46,11 @@ use Capco\AppBundle\Entity\Interfaces\Authorable;
  */
 class DebateArgument implements DebateArgumentInterface, Publishable
 {
+    use AuthorableTrait;
     use AuthorInformationTrait;
     use ContributionOriginTrait;
     use DebatableTrait;
     use ForAgainstTrait;
-    use HasAuthorTrait;
     use ModerableTrait;
     use PublishableTrait;
     use ReportableTrait;
@@ -64,7 +64,7 @@ class DebateArgument implements DebateArgumentInterface, Publishable
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="debateArguments")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    protected $author;
+    protected User $author;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})

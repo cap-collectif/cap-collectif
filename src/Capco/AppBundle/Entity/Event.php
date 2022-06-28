@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
@@ -52,6 +53,7 @@ class Event implements
     SonataTranslatableInterface,
     Ownerable
 {
+    use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;
     use CommentableWithoutCounterTrait;
     use CustomCodeTrait;
@@ -149,7 +151,7 @@ class Event implements
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @Assert\NotNull()
      */
-    private $author;
+    private ?User $author;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventComment", mappedBy="Event",  cascade={"persist", "remove"})
@@ -312,18 +314,6 @@ class Event implements
         $project->removeEvent($this);
 
         return $this;
-    }
-
-    public function setAuthor(User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
     }
 
     public function setZipCode(?string $zipCode): self
