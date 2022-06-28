@@ -39,6 +39,7 @@ exports[`<ModalMailTest /> should renders correctly 1`] = `
           />
         }
         name="mailAddressee"
+        onKeyDown={[Function]}
         type="text"
       />
     </form>

@@ -3,6 +3,7 @@
 exports[`<MailParameterPage /> should renders correctly 1`] = `
 <MailParameterPagestyle__Form
   id="form-edit-emailing-campaign"
+  onKeyDown={[Function]}
   onSubmit={[MockFunction]}
 >
   <BrowserRouter
@@ -159,6 +160,7 @@ exports[`<MailParameterPage /> should renders correctly 1`] = `
 exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
 <MailParameterPagestyle__Form
   id="form-edit-emailing-campaign"
+  onKeyDown={[Function]}
   onSubmit={[MockFunction]}
 >
   <BrowserRouter
@@ -315,6 +317,7 @@ exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
 exports[`<MailParameterPage /> should renders correctly with emailing group 1`] = `
 <MailParameterPagestyle__Form
   id="form-edit-emailing-campaign"
+  onKeyDown={[Function]}
   onSubmit={[MockFunction]}
 >
   <BrowserRouter

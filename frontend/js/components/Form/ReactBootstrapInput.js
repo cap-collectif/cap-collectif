@@ -117,6 +117,7 @@ export type ParentProps = {|
   fieldUsingJoditWysiwyg?: boolean,
   fieldUsingJoditWysiwygName?: string,
   noCode?: boolean,
+  onKeyDown?: Function,
 |};
 
 type Props = {|

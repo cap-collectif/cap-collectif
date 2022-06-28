@@ -110,6 +110,7 @@ type Props = {|
   fieldUsingJoditWysiwyg?: boolean,
   fieldUsingJoditWysiwygName?: string,
   noCode?: boolean,
+  onKeyDown?: Function,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -173,6 +174,7 @@ class Field extends React.Component<Props> {
       fieldUsingJoditWysiwyg,
       fieldUsingJoditWysiwygName,
       noCode,
+      onKeyDown,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -256,6 +258,7 @@ class Field extends React.Component<Props> {
         fieldUsingJoditWysiwyg={fieldUsingJoditWysiwyg}
         fieldUsingJoditWysiwygName={fieldUsingJoditWysiwygName}
         noCode={noCode}
+        onKeyDown={onKeyDown}
         {...input}>
         {children}
       </Input>

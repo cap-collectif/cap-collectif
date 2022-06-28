@@ -293,7 +293,15 @@ export const MailParameterPage = ({
   }, [dispatch, registeredFieldsName]);
 
   return (
-    <Form id={formName} onSubmit={handleSubmit}>
+    <Form
+      id={formName}
+      onKeyDown={e => {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          return false;
+        }
+      }}
+      onSubmit={handleSubmit}>
       <Router basename={baseNameUrl}>
         <Header
           emailingCampaign={emailingCampaign}

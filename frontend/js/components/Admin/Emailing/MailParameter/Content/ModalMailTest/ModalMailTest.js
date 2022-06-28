@@ -102,6 +102,11 @@ export const ModalMailTest = ({ show, onClose, dispatch, pristine, invalid }: Pr
           id="mailAddressee"
           name="mailAddressee"
           component={component}
+          onKeyDown={e => {
+            if (e.keyCode === 13) {
+              dispatch(submit(formName));
+            }
+          }}
           label={<FormattedMessage id="addressee-address" />}
         />
       </form>
