@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\Common\Collections\Collection;
@@ -17,7 +18,6 @@ use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
@@ -25,6 +25,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Entity\Interfaces\Author;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
@@ -52,7 +53,7 @@ abstract class Comment implements
     Trashable,
     Contribution,
     VotableInterface,
-    HasAuthorInterface,
+    Authorable,
     CommentableInterface,
     ReportableInterface
 {
@@ -175,15 +176,17 @@ abstract class Comment implements
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): ?Author
     {
         return $this->Author;
     }
 
-    public function setAuthor(?User $Author): self
+    public function setAuthor(?Author $author): self
     {
-        $this->Author = $Author;
-        $this->setPinned($Author && $Author->isVip() && !$this->parent);
+        if ($author instanceof User) {
+            $this->Author = $author;
+            $this->setPinned($author && $author->isVip() && !$this->parent);
+        }
 
         return $this;
     }
@@ -201,6 +204,7 @@ abstract class Comment implements
         return $this;
     }
 
+    // FOR COMMENT WITHOUT ACCOUNT
     public function getAuthorName(): ?string
     {
         return $this->authorName;
@@ -236,6 +240,8 @@ abstract class Comment implements
 
         return $this;
     }
+
+    // END FOR COMMENT WITHOUT ACCOUNT
 
     public function getAnswers(): Collection
     {

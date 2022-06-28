@@ -1,13 +1,13 @@
 <?php
-namespace Capco\AppBundle\Model;
 
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
+namespace Capco\AppBundle\Model;
 
 interface Publishable
 {
     public function isPublished(): bool;
+
     public function getPublishedAt(): ?\DateTime;
+
     public function setPublishedAt(\DateTime $date);
 
     public function getPublishableUntil(): ?\DateTime;

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Elasticsearch;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
@@ -17,7 +18,6 @@ use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -114,7 +114,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         }
         if (
             $indexAuthor &&
-            ($entity instanceof HasAuthorInterface ||
+            ($entity instanceof Authorable ||
                 ($entity instanceof Contribution && method_exists($entity, 'getAuthor'))) &&
             $entity->getAuthor()
         ) {

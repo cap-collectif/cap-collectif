@@ -3,8 +3,9 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\IdTrait;
@@ -82,11 +83,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *      "debateAnonymousArgument"   = "Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote",
  * })
  */
-abstract class AbstractVote implements
-    Publishable,
-    VoteContribution,
-    HasAuthorInterface,
-    IndexableInterface
+abstract class AbstractVote implements Publishable, VoteContribution, IndexableInterface, Authorable
 {
     use IdTrait;
     use PublishableTrait;
@@ -125,9 +122,16 @@ abstract class AbstractVote implements
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): ?Author
     {
         return $this->user;
+    }
+
+    public function setAuthor(?Author $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     public function hasUser(): bool
@@ -145,9 +149,7 @@ abstract class AbstractVote implements
     {
         $related = $this->getRelated();
 
-        return null !== $related &&
-            $related instanceof IndexableInterface &&
-            $related->isIndexable();
+        return $related instanceof IndexableInterface && $related->isIndexable();
     }
 
     public function getProject(): ?Project

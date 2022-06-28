@@ -67,6 +67,13 @@ class Event implements
     use UuidTrait;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     * @Assert\NotNull()
+     */
+    protected ?User $author = null;
+
+    /**
      * @Gedmo\Timestampable(on="change", field={"startAt", "endAt", "zipCode", "address", "nbAddress", "media", "Theme"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
@@ -146,12 +153,6 @@ class Event implements
      * @ORM\JoinTable(name="event_step")
      */
     private $steps;
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     * @Assert\NotNull()
-     */
-    private ?User $author;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventComment", mappedBy="Event",  cascade={"persist", "remove"})
