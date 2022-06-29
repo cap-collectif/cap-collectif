@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Mailer\EmailingCampaignSender;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
+use Capco\AppBundle\Slack\OmarDjinn;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,15 +18,18 @@ class SendEmailingCampaignCommand extends Command
     private EmailingCampaignSender $sender;
     private EmailingCampaignRepository $repository;
     private EntityManagerInterface $entityManager;
+    private OmarDjinn $omarDjinn;
 
     public function __construct(
         EmailingCampaignSender $sender,
         EmailingCampaignRepository $repository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        OmarDjinn $omarDjinn
     ) {
         $this->sender = $sender;
         $this->repository = $repository;
         $this->entityManager = $entityManager;
+        $this->omarDjinn = $omarDjinn;
 
         parent::__construct();
     }
@@ -63,17 +67,35 @@ class SendEmailingCampaignCommand extends Command
     {
         $emailingCampaign->setStatus(EmailingCampaignStatus::SENDING);
         $this->persistAndFlush($emailingCampaign);
-        $output->writeln(
-            '<info>Sending EmailingCampaign ' . $emailingCampaign->getName() . '</info>'
-        );
+        $this->logBefore($output, $emailingCampaign);
 
         try {
             $count = $this->sender->send($emailingCampaign);
             $this->persistAndFlush($emailingCampaign);
-            $output->writeln("<info>Sent to ${count} recipients</info>");
+            $this->logAfter($output, $count);
         } catch (\Exception $exception) {
-            $output->writeln('<error>' . $exception->getMessage() . '</error>');
+            $this->logFail($output, $exception);
         }
+    }
+
+    private function logBefore(OutputInterface $output, EmailingCampaign $emailingCampaign): void
+    {
+        $output->writeln(
+            '<info>Sending EmailingCampaign ' . $emailingCampaign->getName() . '</info>'
+        );
+        $this->omarDjinn->sendBefore($emailingCampaign);
+    }
+
+    private function logAfter(OutputInterface $output, int $count): void
+    {
+        $output->writeln("<info>Sent to ${count} recipients</info>");
+        $this->omarDjinn->sendAfter($count);
+    }
+
+    private function logFail(OutputInterface $output, \Exception $exception): void
+    {
+        $output->writeln('<error>' . $exception->getMessage() . '</error>');
+        $this->omarDjinn->sendFail();
     }
 
     private function persistAndFlush(EmailingCampaign $emailingCampaign): void

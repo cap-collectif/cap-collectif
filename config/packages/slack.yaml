@@ -11,3 +11,7 @@ services:
         arguments:
             $hook: '%slack_jpec_ghost%'
             $env: '%kernel.environment%'
+
+    Capco\AppBundle\Slack\OmarDjinn:
+        arguments:
+            $hook: '%slack_omar_djinn%'

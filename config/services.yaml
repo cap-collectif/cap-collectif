@@ -85,6 +85,7 @@ parameters:
     occitanie_client_id: '%env(SYMFONY_OCCITANIE_CLIENT_ID)%'
     occitanie_client_secret: '%env(SYMFONY_OCCITANIE_CLIENT_SECRET)%'
     slack_jpec_ghost: '%env(SLACK_JPEC_GHOST)%'
+    slack_omar_djinn: '%env(SLACK_OMAR_DJINN)%'
     panther_url: '%env(SYMFONY_PANTHER_URL)%'
     panther_token: '%env(SYMFONY_PANTHER_TOKEN)%'
     cas_verify_url_profile: '%env(SYMFONY_CAS_VERIFY_URL_PROFILE)%'
@@ -157,6 +158,7 @@ parameters:
     env(SYMFONY_NEWRELIC_API_KEY): INSERT_A_REAL_SECRET
     env(SYMFONY_NEWRELIC_LICENSE_KEY): INSERT_A_REAL_SECRET
     env(SLACK_JPEC_GHOST): null
+    env(SLACK_OMAR_DJINN): null
     env(SYMFONY_PANTHER_URL): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_PANTHER_TOKEN): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_SESSION_TIMEOUT_SECONDS): 1209600 # in seconds, 1209600 = two weeks
