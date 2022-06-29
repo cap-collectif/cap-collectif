@@ -10,7 +10,6 @@ import { type GlobalState, type Dispatch } from '~/types';
 import { insertCustomCode } from '~/utils/customCode';
 import { type QuestionnaireStepPageQueryResponse } from '~relay/QuestionnaireStepPageQuery.graphql';
 import { Loader } from '~/components/Ui/FeedbacksIndicators/Loader';
-import QuestionnaireStepTabs from '../Questionnaire/QuestionnaireStepTabs';
 import QuestionnaireReplyPage, {
   queryReply,
 } from '~/components/Questionnaire/QuestionnaireReplyPage/QuestionnaireReplyPage';
@@ -18,6 +17,7 @@ import { baseUrl } from '~/config';
 import ScrollToTop from '~/components/Utils/ScrollToTop';
 import { QuestionnaireStepPageContext, type Context } from './QuestionnaireStepPage.context';
 import CookieMonster from '~/CookieMonster';
+import QuestionnairePage from '../Questionnaire/QuestionnairePage';
 
 export type PropsNotConnected = {|
   +initialQuestionnaireId: ?string,
@@ -27,7 +27,6 @@ type Props = {|
   ...PropsNotConnected,
   +dispatch: Dispatch,
   +isAuthenticated: boolean,
-  +enableResults: boolean,
 |};
 
 const preloadQueryReply = (
@@ -112,7 +111,7 @@ const Component = ({
 
               <Switch>
                 <Route exact path="/">
-                  <QuestionnaireStepTabs questionnaire={questionnaire} query={props} />
+                  <QuestionnairePage questionnaire={questionnaire} query={props} />
                 </Route>
 
                 <Route
@@ -139,11 +138,7 @@ const Component = ({
   return <Loader />;
 };
 
-export const QuestionnaireStepPage = ({
-  initialQuestionnaireId,
-  isAuthenticated,
-  enableResults,
-}: Props) => {
+export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated }: Props) => {
   const { state } = useLocation();
 
   const questionnaireId = state?.questionnaireId || initialQuestionnaireId;
@@ -171,7 +166,6 @@ export const QuestionnaireStepPage = ({
           $id: ID!
           $isAuthenticated: Boolean!
           $isNotAuthenticated: Boolean!
-          $enableResults: Boolean!
           $anonymousRepliesIds: [ID!]!
         ) {
           questionnaire: node(id: $id) {
@@ -187,10 +181,9 @@ export const QuestionnaireStepPage = ({
               }
             }
             ...QuestionnaireReplyPage_questionnaire @arguments(isAuthenticated: $isAuthenticated)
-            ...QuestionnaireStepTabs_questionnaire
-              @arguments(isAuthenticated: $isAuthenticated, enableResults: $enableResults)
+            ...QuestionnairePage_questionnaire @arguments(isAuthenticated: $isAuthenticated)
           }
-          ...QuestionnaireStepTabs_query
+          ...QuestionnairePage_query
             @arguments(
               anonymousRepliesIds: $anonymousRepliesIds
               isNotAuthenticated: $isNotAuthenticated
@@ -201,7 +194,6 @@ export const QuestionnaireStepPage = ({
         id: questionnaireId,
         isAuthenticated,
         isNotAuthenticated: !isAuthenticated,
-        enableResults,
         anonymousRepliesIds,
       }}
       render={({ error, props, retry }) => (
@@ -219,7 +211,6 @@ export const QuestionnaireStepPage = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: state.user.user !== null,
-  enableResults: state.default.features.beta__questionnaire_result || false,
 });
 
 export default connect<Props, PropsNotConnected, _, _, _, _>(mapStateToProps)(

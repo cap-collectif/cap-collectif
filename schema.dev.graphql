@@ -16205,7 +16205,6 @@ input UpdateQuestionnaireParametersInput {
   acknowledgeReplies: Boolean
   anonymousAllowed: Boolean
   multipleRepliesAllowed: Boolean
-  privateResult: Boolean
   clientMutationId: String
 }
 

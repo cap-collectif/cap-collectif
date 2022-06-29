@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, formValueSelector } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
@@ -20,9 +20,7 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
   ...ReduxFormFormProps,
-  currentValues: Object,
   initialValues: Object,
-  isOnlyProjectAdmin: boolean,
 |};
 
 const AppBoxNoMargin = styled(AppBox)`
@@ -34,20 +32,13 @@ const AppBoxNoMargin = styled(AppBox)`
 
 const formName = 'questionnaire-admin-parameters';
 
-const validate = () => ({});
-
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { questionnaire } = props;
   values.questionnaireId = questionnaire.id;
   delete values.id;
 
-  const privateResult = values.privateResult === 'private';
-
   return UpdateQuestionnaireParametersMutation.commit({
-    input: {
-      ...values,
-      privateResult,
-    },
+    input: values,
   });
 };
 
@@ -59,8 +50,6 @@ export const QuestionnaireAdminParametersForm = ({
   valid,
   submitSucceeded,
   submitFailed,
-  currentValues,
-  isOnlyProjectAdmin,
 }: Props) => {
   const intl = useIntl();
   return (
@@ -90,7 +79,9 @@ export const QuestionnaireAdminParametersForm = ({
               component={component}
               type="checkbox"
               id="questionnaire_anonymous">
-              <Text color="gray.900" fontWeight={600}>{intl.formatMessage({id: 'allow-user-to-hide-his-contribution'})}</Text>
+              <Text color="gray.900" fontWeight={600}>
+                {intl.formatMessage({ id: 'allow-user-to-hide-his-contribution' })}
+              </Text>
             </Field>
             <Text mb={4} ml="2.5rem" color="gray.700" fontSize={2}>
               {intl.formatMessage({ id: 'allow-user-to-hide-his-contribution-help' })}
@@ -103,39 +94,7 @@ export const QuestionnaireAdminParametersForm = ({
             id="questionnaire_multiple">
             <FormattedMessage id="answer-several-times" />
           </Field>
-          {!isOnlyProjectAdmin && (
-            <>
-              <div className="box-header">
-                <h3 className="box-title">
-                  <FormattedMessage id="results" />
-                </h3>
-              </div>
-              <Field
-                name="privateResult"
-                component={component}
-                type="radio"
-                id="questionnaire_private"
-                checked={currentValues.privateResult === 'private'}
-                value="private">
-                <>
-                  <i className="cap-lock-2-1 mr-5" />
-                  <FormattedMessage id="administrators" />
-                </>
-              </Field>
-              <Field
-                name="privateResult"
-                component={component}
-                type="radio"
-                checked={currentValues.privateResult === 'public'}
-                id="questionnaire_public"
-                value="public">
-                <>
-                  <i className="cap-chat-security mr-5" />
-                  <FormattedMessage id="persons-with-access-to-the-project" />
-                </>
-              </Field>
-            </>
-          )}
+
           <ButtonToolbar className="box-content__toolbar">
             <Button
               disabled={invalid || pristine || submitting}
@@ -161,11 +120,8 @@ export const QuestionnaireAdminParametersForm = ({
   );
 };
 
-const selector = formValueSelector(formName);
-
 const form = reduxForm({
   onSubmit,
-  validate,
   enableReinitialize: true,
   form: formName,
 })(QuestionnaireAdminParametersForm);
@@ -177,12 +133,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
       anonymousAllowed: questionnaire.anonymousAllowed,
       multipleRepliesAllowed: questionnaire.multipleRepliesAllowed,
       acknowledgeReplies: questionnaire.acknowledgeReplies,
-      privateResult: questionnaire.privateResult ? 'private' : 'public',
     },
-    currentValues: {
-      privateResult: selector(state, 'privateResult'),
-    },
-    isOnlyProjectAdmin: state?.user?.user?.isOnlyProjectAdmin,
   };
 };
 
@@ -195,7 +146,6 @@ export default createFragmentContainer(container, {
       anonymousAllowed
       multipleRepliesAllowed
       acknowledgeReplies
-      privateResult
     }
   `,
 });

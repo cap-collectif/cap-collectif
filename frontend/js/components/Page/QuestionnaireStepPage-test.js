@@ -8,7 +8,6 @@ describe('<QuestionnaireStepPage />', () => {
   const defaultProps = {
     initialQuestionnaireId: '1',
     isAuthenticated: true,
-    enableResults: true,
     dispatch: jest.fn(),
   };
 
@@ -22,26 +21,6 @@ describe('<QuestionnaireStepPage />', () => {
       ...defaultProps,
       isAuthenticated: false,
     };
-    const wrapper = shallow(<QuestionnaireStepPage {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly when enableResults is false', () => {
-    const props = {
-      ...defaultProps,
-      enableResults: false,
-    };
-    const wrapper = shallow(<QuestionnaireStepPage {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly when enableResults is null', () => {
-    const props = {
-      ...defaultProps,
-      enableResults: null,
-    };
-
-    // $FlowFixMe
     const wrapper = shallow(<QuestionnaireStepPage {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

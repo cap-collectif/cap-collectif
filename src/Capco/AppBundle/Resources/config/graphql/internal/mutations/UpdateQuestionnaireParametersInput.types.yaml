@@ -11,5 +11,3 @@ UpdateQuestionnaireParametersInput:
                 type: 'Boolean'
             multipleRepliesAllowed:
                 type: 'Boolean'
-            privateResult:
-                type: 'Boolean'
