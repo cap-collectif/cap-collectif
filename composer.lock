@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11cd9cb4d03472ec988530cdb8baba41",
+    "content-hash": "735dc3ac746a059e0c5e33195d4fe688",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -362,6 +362,7 @@
                 "issues": "https://github.com/box/spout/issues",
                 "source": "https://github.com/box/spout/tree/v3.3.0"
             },
+            "abandoned": true,
             "time": "2021-05-14T21:18:09+00:00"
         },
         {
