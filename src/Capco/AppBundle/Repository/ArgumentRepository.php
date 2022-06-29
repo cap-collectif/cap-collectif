@@ -30,7 +30,7 @@ class ArgumentRepository extends EntityRepository
 
         return $qb
             ->select('aut.id as user_id, COUNT(a.id) AS totalCount')
-            ->leftJoin('a.Author', 'aut')
+            ->leftJoin('a.author', 'aut')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('ov.parent', 'ovo')
@@ -73,7 +73,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('pAs.project', 'pro')
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->leftJoin('pro.authors', 'pr_au')
-            ->leftJoin('a.Author', 'aut')
+            ->leftJoin('a.author', 'aut')
             ->andWhere('o.published = true')
             ->andWhere('step.isEnabled = true')
             ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
@@ -83,6 +83,7 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('ids', $ids);
 
         $qb = $this->handleArgumentVisibility($qb, $viewer);
+
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -100,7 +101,7 @@ class ArgumentRepository extends EntityRepository
                 'a.trashedAt as trashed',
                 'c.title as project'
             )
-            ->leftJoin('a.Author', 'aut')
+            ->leftJoin('a.author', 'aut')
             ->leftJoin('aut.userType', 'ut')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.consultation', 'oc')
@@ -127,7 +128,7 @@ class ArgumentRepository extends EntityRepository
                 'a.body as body',
                 'c.title as project'
             )
-            ->leftJoin('a.Author', 'aut')
+            ->leftJoin('a.author', 'aut')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')
@@ -141,12 +142,12 @@ class ArgumentRepository extends EntityRepository
 
     public function getUnpublishedByContributionAndTypeAndAuthor(
         Argumentable $contribution,
-        int $type = null,
+        ?int $type,
         User $author
     ): array {
         $qb = $this->createQueryBuilder('a')
             ->andWhere('a.published = false')
-            ->andWhere('a.Author = :author')
+            ->andWhere('a.author = :author')
             ->setParameter('author', $author);
         if (null !== $type) {
             $qb->andWhere('a.type = :type')->setParameter('type', $type);
@@ -221,7 +222,7 @@ class ArgumentRepository extends EntityRepository
         return $this->createQueryBuilder('a')
             ->addSelect('o', 'ov', 'v', 'aut', 'm', 'ovoc', 'ovo')
             ->leftJoin('a.votes', 'v')
-            ->leftJoin('a.Author', 'aut')
+            ->leftJoin('a.author', 'aut')
             ->leftJoin('aut.media', 'm')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.consultation', 'oc')
@@ -244,7 +245,7 @@ class ArgumentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('version');
         $qb->select('count(DISTINCT version)')
-            ->andWhere('version.Author = :author')
+            ->andWhere('version.author = :author')
             ->setParameter('author', $user);
 
         return $qb->getQuery()->getSingleScalarResult();
@@ -253,7 +254,7 @@ class ArgumentRepository extends EntityRepository
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('version');
-        $qb->andWhere('version.Author = :author')->setParameter('author', $user);
+        $qb->andWhere('version.author = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -272,7 +273,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('pAs.project', 'pro')
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->leftJoin('pro.authors', 'pr_au')
-            ->andWhere('a.Author = :author')
+            ->andWhere('a.author = :author')
             ->andWhere('o.published = true')
             ->andWhere('step.isEnabled = true')
             ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
@@ -304,7 +305,7 @@ class ArgumentRepository extends EntityRepository
                 $qb
                     ->expr()
                     ->andX(
-                        'a.Author = :u AND a.published = 1',
+                        'a.author = :u AND a.published = 1',
                         $qb
                             ->expr()
                             ->andX(
@@ -332,7 +333,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->leftJoin('ovo.consultation', 'ovoc')
-            ->andWhere('a.Author = :author')
+            ->andWhere('a.author = :author')
             ->andWhere('oc.step IN (:steps) OR ovoc.step IN (:steps)')
             ->setParameter(
                 'steps',
@@ -356,7 +357,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('ov.parent', 'ovo')
             ->leftJoin('ovo.consultation', 'ovoc')
             ->andWhere('oc.step = :step OR ovoc.step = :step')
-            ->andWhere('a.Author = :author')
+            ->andWhere('a.author = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author)
             ->getQuery()
@@ -371,7 +372,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->andWhere('o.consultation = :consultation OR ovo.consultation = :consultation')
-            ->andWhere('a.Author = :author')
+            ->andWhere('a.author = :author')
             ->setParameter('consultation', $consultation)
             ->setParameter('author', $author)
             ->getQuery()
@@ -395,7 +396,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('pAs.project', 'pro')
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->leftJoin('pro.authors', 'pr_au')
-            ->andWhere('a.Author = :author')
+            ->andWhere('a.author = :author')
             ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
             ->setParameter('author', $user)
             ->setParameter('status', Trashable::STATUS_INVISIBLE)

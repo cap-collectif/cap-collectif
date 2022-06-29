@@ -72,7 +72,7 @@ class CommentAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('Author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
+            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'email,username',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
@@ -107,7 +107,7 @@ class CommentAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Comment:object_list_field.html.twig',
                 'mapped' => false,
             ])
-            ->add('Author', ModelType::class, [
+            ->add('author', ModelType::class, [
                 'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:Comment:author_list_field.html.twig',
                 'mapped' => false,
@@ -146,7 +146,7 @@ class CommentAdmin extends AbstractAdmin
 
         $formMapper
             ->add('body', null, ['label' => 'global.contenu', 'attr' => ['rows' => 8]])
-            ->add('Author', ModelAutocompleteType::class, [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {

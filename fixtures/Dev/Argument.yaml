@@ -1,317 +1,317 @@
 Capco\AppBundle\Entity\Argument:
-  ### TODO arguments doest not contain HTML
-  ### please remove HTML from fixtures
-  ## Arguments on opinion
-  argument1:
-    id: 'argument1'
-    Opinion: '@opinion2'
-    type: 0
-    Author: '@user5'
-    body: Coucou, je suis un bel argument !
-    publishedAt: <(new \DateTime('2015-01-01 01:00:00'))>
-    createdAt: <(new \DateTime('2015-01-01 01:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-01 01:00:00'))>
-    moderationToken: 'argument1ModerationToken'
+    ### TODO arguments doest not contain HTML
+    ### please remove HTML from fixtures
+    ## Arguments on opinion
+    argument1:
+        id: 'argument1'
+        Opinion: '@opinion2'
+        type: 0
+        author: '@user5'
+        body: Coucou, je suis un bel argument !
+        publishedAt: <(new \DateTime('2015-01-01 01:00:00'))>
+        createdAt: <(new \DateTime('2015-01-01 01:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-01 01:00:00'))>
+        moderationToken: 'argument1ModerationToken'
 
-  argument2:
-    id: 'argument2'
-    Opinion: '@opinion2'
-    type: 0
-    Author: '@user4'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <(new \DateTime('2015-01-01 02:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-01 02:00:00'))>
-    publishedAt: <(new \DateTime('2015-01-01 02:00:00'))>
+    argument2:
+        id: 'argument2'
+        Opinion: '@opinion2'
+        type: 0
+        author: '@user4'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <(new \DateTime('2015-01-01 02:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-01 02:00:00'))>
+        publishedAt: <(new \DateTime('2015-01-01 02:00:00'))>
 
-  argument3trashed:
-    id: 'argument3trashed'
-    Opinion: '@opinion2'
-    type: 0
-    Author: '@user4'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    trashedStatus: 'invisible'
-    trashedAt: <(new \DateTime('2017-03-01'))>
-    trashedReason: 'moderation-guideline-violation'
-    createdAt: <(new \DateTime('2015-01-01 03:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-01 03:00:00'))>
-    publishedAt: <(new \DateTime('2015-01-01 03:00:00'))>
+    argument3trashed:
+        id: 'argument3trashed'
+        Opinion: '@opinion2'
+        type: 0
+        author: '@user4'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        trashedStatus: 'invisible'
+        trashedAt: <(new \DateTime('2017-03-01'))>
+        trashedReason: 'moderation-guideline-violation'
+        createdAt: <(new \DateTime('2015-01-01 03:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-01 03:00:00'))>
+        publishedAt: <(new \DateTime('2015-01-01 03:00:00'))>
 
-  argument{3..95}:
-    id: 'argument<current()>'
-    Opinion: '@opinion3'
-    type: 1
-    Author: '@user1'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>`
-    createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
-    updatedAt: <(new \DateTime('2017-01-01 00:00:00'))>
-    publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
+    argument{3..95}:
+        id: 'argument<current()>'
+        Opinion: '@opinion3'
+        type: 1
+        author: '@user1'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>`
+        createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
+        updatedAt: <(new \DateTime('2017-01-01 00:00:00'))>
+        publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
 
-  argument{96..99}:
-    id: 'argument<current()>'
-    Opinion: '@opinion3'
-    type: 0
-    Author: '@userNotConfirmedWithContributions'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
+    argument{96..99}:
+        id: 'argument<current()>'
+        Opinion: '@opinion3'
+        type: 0
+        author: '@userNotConfirmedWithContributions'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
+        updatedAt: <(new \DateTime('2017-01-01'))>
 
-  argument100:
-    id: 'argument100'
-    Opinion: '@opinion3'
-    type: 1
-    Author: '@userNotConfirmedWithContributions'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <(new \DateTime('2019-01-01 22:00:00'))>
-    updatedAt: <(new \DateTime('2019-02-01 22:00:00'))>
+    argument100:
+        id: 'argument100'
+        Opinion: '@opinion3'
+        type: 1
+        author: '@userNotConfirmedWithContributions'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <(new \DateTime('2019-01-01 22:00:00'))>
+        updatedAt: <(new \DateTime('2019-02-01 22:00:00'))>
 
-  argument{101..150}:
-    id: 'argument<current()>'
-    Opinion: '@opinion<($current-97)>'
-    type: 0
-    Author: '@user5'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
-    publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
-    trashedStatus: 'visible'
-    trashedAt: <(new \DateTime('2017-03-01'))>
+    argument{101..150}:
+        id: 'argument<current()>'
+        Opinion: '@opinion<($current-97)>'
+        type: 0
+        author: '@user5'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
+        updatedAt: <(new \DateTime('2017-01-01'))>
+        publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
+        trashedStatus: 'visible'
+        trashedAt: <(new \DateTime('2017-03-01'))>
 
-  argument{151..175}:
-    id: 'argument<current()>'
-    Opinion: '@opinion<($current-122)>'
-    type: 1
-    Author: '@user3'
-    createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
-    publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    trashedStatus: 'invisible'
-    trashedAt: <(new \DateTime('2017-03-01'))>
+    argument{151..175}:
+        id: 'argument<current()>'
+        Opinion: '@opinion<($current-122)>'
+        type: 1
+        author: '@user3'
+        createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
+        updatedAt: <(new \DateTime('2017-01-01'))>
+        publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        trashedStatus: 'invisible'
+        trashedAt: <(new \DateTime('2017-03-01'))>
 
-  argument{176..200}:
-    id: 'argument<current()>'
-    Opinion: '@opinion<($current-147)>'
-    type: 0
-    Author: '@user2'
-    createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
-    publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+    argument{176..200}:
+        id: 'argument<current()>'
+        Opinion: '@opinion<($current-147)>'
+        type: 0
+        author: '@user2'
+        createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
+        updatedAt: <(new \DateTime('2017-01-01'))>
+        publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
 
-  argument201:
-    id: 'argument201'
-    Opinion: '@opinion51'
-    type: 0
-    Author: '@user1'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <(new \DateTime('2019-03-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
-    publishedAt: <(new \DateTime('2019-03-01'))>
+    argument201:
+        id: 'argument201'
+        Opinion: '@opinion51'
+        type: 0
+        author: '@user1'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <(new \DateTime('2019-03-01'))>
+        updatedAt: <(new \DateTime('2017-01-01'))>
+        publishedAt: <(new \DateTime('2019-03-01'))>
 
-  argument202:
-    id: 'argument202'
-    Opinion: '@opinion51'
-    type: 0
-    Author: '@user2'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <(new \DateTime('2019-03-02'))>
-    updatedAt: <(new \DateTime('2019-03-02'))>
-    publishedAt: <(new \DateTime('2019-03-02'))>
+    argument202:
+        id: 'argument202'
+        Opinion: '@opinion51'
+        type: 0
+        author: '@user2'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <(new \DateTime('2019-03-02'))>
+        updatedAt: <(new \DateTime('2019-03-02'))>
+        publishedAt: <(new \DateTime('2019-03-02'))>
 
-  argument203:
-    id: 'argument203'
-    Opinion: '@opinion52'
-    type: 0
-    Author: '@user3'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <(new \DateTime('2019-03-03'))>
-    updatedAt: <(new \DateTime('2019-03-03'))>
-    publishedAt: <(new \DateTime('2019-03-03'))>
+    argument203:
+        id: 'argument203'
+        Opinion: '@opinion52'
+        type: 0
+        author: '@user3'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <(new \DateTime('2019-03-03'))>
+        updatedAt: <(new \DateTime('2019-03-03'))>
+        publishedAt: <(new \DateTime('2019-03-03'))>
 
-  # Argument on versions
-  argument204:
-    id: 'argument204'
-    opinionVersion: '@version1'
-    type: 0
-    Author: '@user5'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <(new \DateTime('2019-03-04'))>
-    updatedAt: <(new \DateTime('2019-03-04'))>
-    publishedAt: <(new \DateTime('2019-03-04'))>
-  argument205:
-    id: 'argument205'
-    opinionVersion: '@version1'
-    type: 1
-    Author: '@user2'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <(new \DateTime('2019-03-05'))>
-    updatedAt: <(new \DateTime('2019-03-05'))>
-    publishedAt: <(new \DateTime('2019-03-05'))>
+    # Argument on versions
+    argument204:
+        id: 'argument204'
+        opinionVersion: '@version1'
+        type: 0
+        author: '@user5'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <(new \DateTime('2019-03-04'))>
+        updatedAt: <(new \DateTime('2019-03-04'))>
+        publishedAt: <(new \DateTime('2019-03-04'))>
+    argument205:
+        id: 'argument205'
+        opinionVersion: '@version1'
+        type: 1
+        author: '@user2'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <(new \DateTime('2019-03-05'))>
+        updatedAt: <(new \DateTime('2019-03-05'))>
+        publishedAt: <(new \DateTime('2019-03-05'))>
 
-  argument206:
-    id: 'argument206'
-    Opinion: '@opinion57'
-    type: 1
-    Author: '@user1'
-    body: 'Que la force soit avec toi.'
-    publishedAt: <(new \DateTime('2019-03-06'))>
-    createdAt: <(new \DateTime('2019-03-06'))>
-    updatedAt: <(new \DateTime('2019-03-06'))>
-    moderationToken: 'argument206ModerationToken'
+    argument206:
+        id: 'argument206'
+        Opinion: '@opinion57'
+        type: 1
+        author: '@user1'
+        body: 'Que la force soit avec toi.'
+        publishedAt: <(new \DateTime('2019-03-06'))>
+        createdAt: <(new \DateTime('2019-03-06'))>
+        updatedAt: <(new \DateTime('2019-03-06'))>
+        moderationToken: 'argument206ModerationToken'
 
-  argument207:
-    id: 'argument207'
-    Opinion: '@opinion57'
-    type: 1
-    Author: '@user1'
-    body: 'Que la force soit avec toi et avec Yoda.'
-    publishedAt: <(new \DateTime('2019-03-07'))>
-    createdAt: <(new \DateTime('2019-03-07'))>
-    updatedAt: <(new \DateTime('2019-03-07'))>
-    moderationToken: 'argument207ModerationToken'
+    argument207:
+        id: 'argument207'
+        Opinion: '@opinion57'
+        type: 1
+        author: '@user1'
+        body: 'Que la force soit avec toi et avec Yoda.'
+        publishedAt: <(new \DateTime('2019-03-07'))>
+        createdAt: <(new \DateTime('2019-03-07'))>
+        updatedAt: <(new \DateTime('2019-03-07'))>
+        moderationToken: 'argument207ModerationToken'
 
-  argument208:
-    id: 'argument208'
-    Opinion: '@opinion57'
-    type: 1
-    Author: '@user1'
-    body: 'Le spam c cool'
-    trashedStatus: 'visible'
-    publishedAt: <(new \DateTime('2019-03-08'))>
-    createdAt: <(new \DateTime('2019-03-08'))>
-    updatedAt: <(new \DateTime('2019-03-08'))>
-    trashedAt: <(new \DateTime('2019-03-08'))>
-    trashedReason: 'moderation-guideline-violation'
+    argument208:
+        id: 'argument208'
+        Opinion: '@opinion57'
+        type: 1
+        author: '@user1'
+        body: 'Le spam c cool'
+        trashedStatus: 'visible'
+        publishedAt: <(new \DateTime('2019-03-08'))>
+        createdAt: <(new \DateTime('2019-03-08'))>
+        updatedAt: <(new \DateTime('2019-03-08'))>
+        trashedAt: <(new \DateTime('2019-03-08'))>
+        trashedReason: 'moderation-guideline-violation'
 
-  argument{209..210}:
-    id: 'argument<current()>'
-    Opinion: '@opinion57'
-    type: 1
-    Author: '@user1'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <((new \DateTime('2017-06-01 00:00:00'))->modify("+ $current days"))>
-    updatedAt: <((new \DateTime('2017-06-01 00:00:00'))->modify("+ $current days"))>
-    publishedAt: <((new \DateTime('2017-06-01 00:00:00'))->modify("+ $current days"))>
+    argument{209..210}:
+        id: 'argument<current()>'
+        Opinion: '@opinion57'
+        type: 1
+        author: '@user1'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <((new \DateTime('2017-06-01 00:00:00'))->modify("+ $current days"))>
+        updatedAt: <((new \DateTime('2017-06-01 00:00:00'))->modify("+ $current days"))>
+        publishedAt: <((new \DateTime('2017-06-01 00:00:00'))->modify("+ $current days"))>
 
-  argument211:
-    id: 'argument211'
-    opinionVersion: '@version1'
-    type: 1
-    Author: '@user1'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <(new \DateTime('2016-03-01 02:00:00'))>
-    updatedAt: <(new \DateTime('2016-03-01 02:00:00'))>
-    publishedAt: <(new \DateTime('2016-03-01 02:00:00'))>
+    argument211:
+        id: 'argument211'
+        opinionVersion: '@version1'
+        type: 1
+        author: '@user1'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <(new \DateTime('2016-03-01 02:00:00'))>
+        updatedAt: <(new \DateTime('2016-03-01 02:00:00'))>
+        publishedAt: <(new \DateTime('2016-03-01 02:00:00'))>
 
-  argument212:
-    id: 'argument212'
-    opinionVersion: '@version11'
-    type: 1
-    Author: '@user1'
-    createdAt: <(new \DateTime('2016-03-01 03:00:00'))>
-    updatedAt: <(new \DateTime('2016-03-01 03:00:00'))>
-    publishedAt: <(new \DateTime('2016-03-01 03:00:00'))>
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+    argument212:
+        id: 'argument212'
+        opinionVersion: '@version11'
+        type: 1
+        author: '@user1'
+        createdAt: <(new \DateTime('2016-03-01 03:00:00'))>
+        updatedAt: <(new \DateTime('2016-03-01 03:00:00'))>
+        publishedAt: <(new \DateTime('2016-03-01 03:00:00'))>
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
 
-  argument{213..250}:
-    id: 'argument<current()>'
-    Opinion: '@opinion69'
-    type: 0
-    Author: '@user3'
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-    createdAt: <((new \DateTime('2019-03-01 00:00:00'))->modify("+ $current days"))>
-    updatedAt: <((new \DateTime('2019-03-01 00:00:00'))->modify("+ $current days"))>
-    publishedAt: <((new \DateTime('2019-03-01 00:00:00'))->modify("+ $current days"))>
-  argument251:
-    id: 'argument251'
-    Opinion: '@opinion1'
-    type: 0
-    Author: '@user4'
-    body: Coucou, je suis un bel argument !
-    publishedAt: <(new \DateTime('2019-06-01 00:51:00'))>
-    createdAt: <(new \DateTime('2019-06-01 00:51:00'))>
-    updatedAt: <(new \DateTime('2019-06-01 00:51:00'))>
-  argument252:
-    id: 'argument252'
-    Opinion: '@opinion1'
-    type: 0
-    Author: '@user4'
-    body: Coucou, je suis un bel argument !
-    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-  argument253:
-    id: 'argument253'
-    opinionVersion: '@version16'
-    type: 1
-    Author: '@user1'
-    createdAt: <(new \DateTime('2016-03-01 03:00:00'))>
-    updatedAt: <(new \DateTime('2016-03-01 03:00:00'))>
-    publishedAt: <(new \DateTime('2016-03-01 03:00:00'))>
-    body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
-  argument254:
-    id: 'argument254'
-    Opinion: '@opinion103'
-    type: 0
-    Author: '@user666'
-    body: Je suis un argument sur une opinion dans une consultation d'une étape de consultation provenant d'un projet privé (admin).
-    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-  argument255:
-    id: 'argument255'
-    Opinion: '@opinion104'
-    type: 0
-    Author: '@user1'
-    body: Bonjour je suis un argument sur une opinion dans une consultation d'une étape de consultation provenant d'un projet avec des accès custom.
-    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-  argument{256..258}:
-    id: 'argument<current()>'
-    Opinion: '@opinionMultiConsultationFirstInFirstSection81'
-    type: 0
-    Author: '@user1'
-    body: Bonjour je suis un argument sur une opinion dans une consultation d'une étape de multi consultation dans la première section
-    publishedAt: <((new \DateTime('2019-06-01 01:00:00'))->modify("+ $current days"))>
-    createdAt: <((new \DateTime('2017-06-01 01:00:00'))->modify("+ $current days"))>
-    updatedAt: <((new \DateTime('2019-06-01 01:00:00'))->modify("+ $current days"))>
-  argument{259..261}:
-    id: 'argument<current()>'
-    Opinion: '@opinionMultiConsultationFirstInSecondSection86'
-    type: 0
-    Author: '@user1'
-    body: Bonjour je suis un argument sur une opinion dans la première consultation d'une étape de multi consultation dans la deuxième section
-    publishedAt: <((new \DateTime('2019-06-01 02:00:00'))->modify("+ $current days"))>
-    createdAt: <((new \DateTime('2017-06-01 02:00:00'))->modify("+ $current days"))>
-    updatedAt: <((new \DateTime('2019-06-01 02:00:00'))->modify("+ $current days"))>
-  argument{262..266}:
-    id: 'argument<current()>'
-    Opinion: '@opinionMultiConsultationSecondInFirstSection98'
-    type: 0
-    Author: '@user1'
-    body: Bonjour je suis un argument sur une opinion dans la deuxième consultation d'une étape de multi consultation dans la première section
-    publishedAt: <((new \DateTime('2019-06-01 03:00:00'))->modify("+ $current days"))>
-    createdAt: <((new \DateTime('2017-06-01 03:00:00'))->modify("+ $current days"))>
-    updatedAt: <((new \DateTime('2019-06-01 03:00:00'))->modify("+ $current days"))>
-  argument267:
-    id: 'argument267'
-    Opinion: '@opinion101'
-    type: 0
-    Author: '@user4'
-    body: Argument sur une opinion dans un project privé
-    publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
-    updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
-  english_trashed_argument:
-    id: 'argument268'
-    Opinion: '@opinion57'
-    type: 1
-    Author: '@english_user'
-    body: 'Spam is cool'
-    trashedStatus: 'visible'
-    publishedAt: <(new \DateTime('2019-03-08'))>
-    createdAt: <(new \DateTime('2019-03-08'))>
-    updatedAt: <(new \DateTime('2019-03-08'))>
-    trashedAt: <(new \DateTime('2019-03-08'))>
-    trashedReason: 'moderation-guideline-violation'
+    argument{213..250}:
+        id: 'argument<current()>'
+        Opinion: '@opinion69'
+        type: 0
+        author: '@user3'
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+        createdAt: <((new \DateTime('2019-03-01 00:00:00'))->modify("+ $current days"))>
+        updatedAt: <((new \DateTime('2019-03-01 00:00:00'))->modify("+ $current days"))>
+        publishedAt: <((new \DateTime('2019-03-01 00:00:00'))->modify("+ $current days"))>
+    argument251:
+        id: 'argument251'
+        Opinion: '@opinion1'
+        type: 0
+        author: '@user4'
+        body: Coucou, je suis un bel argument !
+        publishedAt: <(new \DateTime('2019-06-01 00:51:00'))>
+        createdAt: <(new \DateTime('2019-06-01 00:51:00'))>
+        updatedAt: <(new \DateTime('2019-06-01 00:51:00'))>
+    argument252:
+        id: 'argument252'
+        Opinion: '@opinion1'
+        type: 0
+        author: '@user4'
+        body: Coucou, je suis un bel argument !
+        publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+        createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
+        updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    argument253:
+        id: 'argument253'
+        opinionVersion: '@version16'
+        type: 1
+        author: '@user1'
+        createdAt: <(new \DateTime('2016-03-01 03:00:00'))>
+        updatedAt: <(new \DateTime('2016-03-01 03:00:00'))>
+        publishedAt: <(new \DateTime('2016-03-01 03:00:00'))>
+        body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
+    argument254:
+        id: 'argument254'
+        Opinion: '@opinion103'
+        type: 0
+        author: '@user666'
+        body: Je suis un argument sur une opinion dans une consultation d'une étape de consultation provenant d'un projet privé (admin).
+        publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+        createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
+        updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    argument255:
+        id: 'argument255'
+        Opinion: '@opinion104'
+        type: 0
+        author: '@user1'
+        body: Bonjour je suis un argument sur une opinion dans une consultation d'une étape de consultation provenant d'un projet avec des accès custom.
+        publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+        createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
+        updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    argument{256..258}:
+        id: 'argument<current()>'
+        Opinion: '@opinionMultiConsultationFirstInFirstSection81'
+        type: 0
+        author: '@user1'
+        body: Bonjour je suis un argument sur une opinion dans une consultation d'une étape de multi consultation dans la première section
+        publishedAt: <((new \DateTime('2019-06-01 01:00:00'))->modify("+ $current days"))>
+        createdAt: <((new \DateTime('2017-06-01 01:00:00'))->modify("+ $current days"))>
+        updatedAt: <((new \DateTime('2019-06-01 01:00:00'))->modify("+ $current days"))>
+    argument{259..261}:
+        id: 'argument<current()>'
+        Opinion: '@opinionMultiConsultationFirstInSecondSection86'
+        type: 0
+        author: '@user1'
+        body: Bonjour je suis un argument sur une opinion dans la première consultation d'une étape de multi consultation dans la deuxième section
+        publishedAt: <((new \DateTime('2019-06-01 02:00:00'))->modify("+ $current days"))>
+        createdAt: <((new \DateTime('2017-06-01 02:00:00'))->modify("+ $current days"))>
+        updatedAt: <((new \DateTime('2019-06-01 02:00:00'))->modify("+ $current days"))>
+    argument{262..266}:
+        id: 'argument<current()>'
+        Opinion: '@opinionMultiConsultationSecondInFirstSection98'
+        type: 0
+        author: '@user1'
+        body: Bonjour je suis un argument sur une opinion dans la deuxième consultation d'une étape de multi consultation dans la première section
+        publishedAt: <((new \DateTime('2019-06-01 03:00:00'))->modify("+ $current days"))>
+        createdAt: <((new \DateTime('2017-06-01 03:00:00'))->modify("+ $current days"))>
+        updatedAt: <((new \DateTime('2019-06-01 03:00:00'))->modify("+ $current days"))>
+    argument267:
+        id: 'argument267'
+        Opinion: '@opinion101'
+        type: 0
+        author: '@user4'
+        body: Argument sur une opinion dans un project privé
+        publishedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+        createdAt: <(new \DateTime('2019-06-01 00:52:00'))>
+        updatedAt: <(new \DateTime('2019-06-01 00:52:00'))>
+    english_trashed_argument:
+        id: 'argument268'
+        Opinion: '@opinion57'
+        type: 1
+        author: '@english_user'
+        body: 'Spam is cool'
+        trashedStatus: 'visible'
+        publishedAt: <(new \DateTime('2019-03-08'))>
+        createdAt: <(new \DateTime('2019-03-08'))>
+        updatedAt: <(new \DateTime('2019-03-08'))>
+        trashedAt: <(new \DateTime('2019-03-08'))>
+        trashedReason: 'moderation-guideline-violation'

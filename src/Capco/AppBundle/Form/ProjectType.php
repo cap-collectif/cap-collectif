@@ -19,7 +19,7 @@ class ProjectType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
             ])
-            ->add('Author', null, ['required' => true]);
+            ->add('author', null, ['required' => true]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

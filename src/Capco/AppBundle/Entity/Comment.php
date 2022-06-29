@@ -84,7 +84,7 @@ abstract class Comment implements
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected $Author;
+    protected $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="answers")
@@ -178,13 +178,13 @@ abstract class Comment implements
 
     public function getAuthor(): ?Author
     {
-        return $this->Author;
+        return $this->author;
     }
 
     public function setAuthor(?Author $author): self
     {
         if ($author instanceof User) {
-            $this->Author = $author;
+            $this->author = $author;
             $this->setPinned($author && $author->isVip() && !$this->parent);
         }
 
@@ -360,7 +360,7 @@ abstract class Comment implements
 
     public function isUserAuthor(?User $user = null): bool
     {
-        return $user === $this->Author;
+        return $user === $this->author;
     }
 
     // ********************** Abstract methods **********************************

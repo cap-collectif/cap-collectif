@@ -49,7 +49,7 @@ class VideoAdmin extends AbstractAdmin
                 'label' => 'global.title',
             ])
             ->add(
-                'Author',
+                'author',
                 ModelAutocompleteFilter::class,
                 [
                     'label' => 'global.author',
@@ -79,7 +79,7 @@ class VideoAdmin extends AbstractAdmin
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
             ])
-            ->add('Author', ModelAutocompleteType::class, [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
@@ -115,7 +115,7 @@ class VideoAdmin extends AbstractAdmin
             ->add('body', TextareaType::class, [
                 'label' => 'global.description',
             ])
-            ->add('Author', ModelType::class, [
+            ->add('author', ModelType::class, [
                 'label' => 'global.author',
 
                 'required' => true,
@@ -162,7 +162,7 @@ class VideoAdmin extends AbstractAdmin
             ->add('body', null, [
                 'label' => 'global.description',
             ])
-            ->add('Author', null, [
+            ->add('author', null, [
                 'label' => 'global.author',
             ])
             ->add('media', MediaType::class, [

@@ -22,7 +22,7 @@ class CommentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')
             ->select('count(DISTINCT c.authorEmail)')
-            ->where('c.Author IS NULL');
+            ->where('c.author IS NULL');
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -38,7 +38,7 @@ class CommentRepository extends EntityRepository
                 'c.published',
                 'c.trashedAt as trashed'
             )
-            ->leftJoin('c.Author', 'a');
+            ->leftJoin('c.author', 'a');
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -55,7 +55,7 @@ class CommentRepository extends EntityRepository
                 'c.trashedAt as trashed',
                 'c.body as body'
             )
-            ->leftJoin('c.Author', 'a')
+            ->leftJoin('c.author', 'a')
             ->where('c.id = :id')
             ->setParameter('id', $id);
 
@@ -66,7 +66,7 @@ class CommentRepository extends EntityRepository
     {
         return $this->getPublishedQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'r')
-            ->leftJoin('c.Author', 'aut')
+            ->leftJoin('c.author', 'aut')
             ->leftJoin('aut.media', 'm')
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
@@ -80,7 +80,7 @@ class CommentRepository extends EntityRepository
     {
         return $this->getPublishedQueryBuilder()
             ->select('COUNT(c)')
-            ->andWhere('c.Author = :author')
+            ->andWhere('c.author = :author')
             ->setParameter('author', $user)
             ->getQuery()
             ->getSingleScalarResult();
@@ -89,7 +89,7 @@ class CommentRepository extends EntityRepository
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->andWhere('c.Author = :author')->setParameter('author', $user);
+        $qb->andWhere('c.author = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -97,19 +97,17 @@ class CommentRepository extends EntityRepository
     /**
      * Get comments by user.
      *
-     * @param mixed    $user
-     * @param int|null $limit
-     * @param int|null $offset
+     * @param mixed $user
      *
      * @return mixed
      */
-    public function getByUser($user, int $limit = null, int $offset = null)
+    public function getByUser($user, ?int $limit = null, ?int $offset = null)
     {
         $qb = $this->getPublishedQueryBuilder()
             ->addSelect('a', 'm')
-            ->leftJoin('c.Author', 'a')
+            ->leftJoin('c.author', 'a')
             ->leftJoin('a.media', 'm')
-            ->andWhere('c.Author = :user')
+            ->andWhere('c.author = :user')
             ->setParameter('user', $user)
             ->orderBy('c.updatedAt', 'ASC')
             ->setMaxResults($limit)

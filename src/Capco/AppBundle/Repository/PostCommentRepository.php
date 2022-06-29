@@ -75,7 +75,7 @@ class PostCommentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')->orWhere('c.published = true');
         if ($viewer) {
-            $qb->orWhere('c.Author = :viewer AND c.published = false')->setParameter(
+            $qb->orWhere('c.author = :viewer AND c.published = false')->setParameter(
                 'viewer',
                 $viewer
             );

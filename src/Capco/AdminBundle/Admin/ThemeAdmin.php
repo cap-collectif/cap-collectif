@@ -96,7 +96,7 @@ class ThemeAdmin extends AbstractAdmin
                 'label' => 'global.maj',
             ])
             ->add(
-                'Author',
+                'author',
                 ModelAutocompleteFilter::class,
                 [
                     'label' => 'global.author',
@@ -117,7 +117,7 @@ class ThemeAdmin extends AbstractAdmin
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
             ])
-            ->add('Author', null, [
+            ->add('author', null, [
                 'label' => 'global.author',
             ])
             ->add('status', null, [
@@ -170,7 +170,7 @@ class ThemeAdmin extends AbstractAdmin
             ]);
         }
         $formMapper
-            ->add('Author', ModelAutocompleteType::class, [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
@@ -258,7 +258,7 @@ class ThemeAdmin extends AbstractAdmin
             ->add('position', null, [
                 'label' => 'global.position',
             ])
-            ->add('Author', null, [
+            ->add('author', null, [
                 'label' => 'global.author',
             ])
             ->add('projects', null, [

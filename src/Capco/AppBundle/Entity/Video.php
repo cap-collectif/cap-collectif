@@ -41,7 +41,7 @@ class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Tr
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="change", field={"title", "body", "Author", "media", "link"})
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "author", "media", "link"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -65,7 +65,7 @@ class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Tr
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $Author;
+    private $author;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
@@ -151,20 +151,14 @@ class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Tr
         return $this->updatedAt;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAuthor()
     {
-        return $this->Author;
+        return $this->author;
     }
 
-    /**
-     * @param mixed $Author
-     */
-    public function setAuthor($Author)
+    public function setAuthor($author)
     {
-        $this->Author = $Author;
+        $this->author = $author;
     }
 
     /**

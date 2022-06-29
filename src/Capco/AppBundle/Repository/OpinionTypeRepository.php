@@ -47,7 +47,7 @@ class OpinionTypeRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getOrderedRootNodesQuery(Consultation $consultation = null)
+    public function getOrderedRootNodesQuery(?Consultation $consultation = null)
     {
         $qb = $this->createQueryBuilder('ot')
             ->andWhere('ot.parent is NULL')
@@ -79,7 +79,7 @@ class OpinionTypeRepository extends EntityRepository
             ->leftJoin('pas.project', 'p')
             ->andWhere('s.isEnabled = :enabled')
             ->andWhere('o.published = :enabled')
-            ->andWhere('o.Author = :author')
+            ->andWhere('o.author = :author')
             ->setParameter('enabled', true)
             ->setParameter('author', $user)
             ->orderBy('ot.position', 'ASC')
@@ -105,7 +105,7 @@ class OpinionTypeRepository extends EntityRepository
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
             ->addGroupBy('ot.id')
-            ->andWhere('o.Author = :author')
+            ->andWhere('o.author = :author')
             ->andWhere('o.published = :enabled')
             ->andWhere('s.isEnabled = :enabled')
             ->setParameter('enabled', true)

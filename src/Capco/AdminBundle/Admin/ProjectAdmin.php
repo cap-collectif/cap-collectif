@@ -66,7 +66,7 @@ final class ProjectAdmin extends CapcoAdmin
     {
         if (empty($object->getAuthors())) {
             $errorElement
-                ->with('Author')
+                ->with('author')
                 ->addConstraint(new Required())
                 ->addViolation('global.required')
                 ->end();

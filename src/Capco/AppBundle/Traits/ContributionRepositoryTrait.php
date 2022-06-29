@@ -12,7 +12,7 @@ trait ContributionRepositoryTrait
     public function findCreatedSinceIntervalByAuthor(
         User $author,
         string $interval,
-        $authorField = 'Author'
+        $authorField = 'author'
     ): array {
         $now = new \DateTime();
         $from = (new \DateTime())->sub(new \DateInterval($interval));

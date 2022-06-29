@@ -65,7 +65,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
-    private $Author;
+    private $author;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "teaser", "position", "status", "body", "media"})
@@ -236,15 +236,15 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
      */
     public function getAuthor()
     {
-        return $this->Author;
+        return $this->author;
     }
 
     /**
-     * @param mixed $Author
+     * @param mixed $author
      */
-    public function setAuthor($Author)
+    public function setAuthor($author)
     {
-        $this->Author = $Author;
+        $this->author = $author;
     }
 
     /**

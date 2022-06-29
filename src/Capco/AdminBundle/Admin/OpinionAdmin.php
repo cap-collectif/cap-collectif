@@ -128,7 +128,7 @@ class OpinionAdmin extends CapcoAdmin
         $datagridMapper
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
             ->add('title', null, ['label' => 'global.title'])
-            ->add('Author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
+            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'email,username',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
@@ -155,7 +155,7 @@ class OpinionAdmin extends CapcoAdmin
                 'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
             ])
-            ->add('Author', ModelType::class, [
+            ->add('author', ModelType::class, [
                 'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
             ])
@@ -215,7 +215,7 @@ class OpinionAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.opinion.group_content')
             ->add('title', null, ['label' => 'global.title'])
-            ->add('Author', ModelAutocompleteType::class, [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {

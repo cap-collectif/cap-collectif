@@ -1,10 +1,10 @@
 Capco\AppBundle\Entity\Opinion:
-  opinion{1..220}:
-    id: 'opinion<current()>'
-    consultation: '@typeDefault'
-    title: 'Opinion <current()>'
-    slug: 'opinion-<current()>'
-    body: <text(400)>
-    publishedAt: <dateTime()>
-    Author: '@user<numberBetween(1, 100)>'
-    OpinionType: '@opinionType1'
+    opinion{1..220}:
+        id: 'opinion<current()>'
+        consultation: '@typeDefault'
+        title: 'Opinion <current()>'
+        slug: 'opinion-<current()>'
+        body: <text(400)>
+        publishedAt: <dateTime()>
+        author: '@user<numberBetween(1, 100)>'
+        OpinionType: '@opinionType1'

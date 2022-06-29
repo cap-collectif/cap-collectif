@@ -1,36 +1,36 @@
 Capco\AppBundle\Entity\ProposalComment:
-  proposal1Comment{1..1000}:
-    id: 'proposal1Comment<current()>'
-    proposal: '@proposal<numberBetween(1, 100)>'
-    Author: '@voter<current()>'
-    body: <text(300)>
-    createdAt: '<dateTimeBetween("-2 days", "now")>'
-    publishedAt: <(new \DateTime())>
-  proposal2Comment{1..1000}:
-    id: 'proposal2Comment<current()>'
-    proposal: '@proposal<numberBetween(101, 200)>'
-    Author: '@voter<current()>'
-    body: <text(300)>
-    createdAt: '<dateTimeBetween("-2 days", "now")>'
-    publishedAt: <(new \DateTime())>
-  proposal3Comment{1..1000}:
-    id: 'proposal3Comment<current()>'
-    proposal: '@proposal<numberBetween(201, 300)>'
-    Author: '@voter<current()>'
-    body: <text(300)>
-    createdAt: '<dateTimeBetween("-2 days", "now")>'
-    publishedAt: <(new \DateTime())>
-  proposal4Comment{1..1000}:
-    id: 'proposal4Comment<current()>'
-    proposal: '@proposal<numberBetween(301, 400)>'
-    Author: '@voter<current()>'
-    body: <text(300)>
-    createdAt: '<dateTimeBetween("-2 days", "now")>'
-    publishedAt: <(new \DateTime())>
-  proposal5Comment{1..1000}:
-    id: 'proposal5Comment<current()>'
-    proposal: '@proposal<numberBetween(401, 500)>'
-    Author: '@voter<current()>'
-    body: <text(300)>
-    createdAt: '<dateTimeBetween("-2 days", "now")>'
-    publishedAt: <(new \DateTime())>
+    proposal1Comment{1..1000}:
+        id: 'proposal1Comment<current()>'
+        proposal: '@proposal<numberBetween(1, 100)>'
+        author: '@voter<current()>'
+        body: <text(300)>
+        createdAt: '<dateTimeBetween("-2 days", "now")>'
+        publishedAt: <(new \DateTime())>
+    proposal2Comment{1..1000}:
+        id: 'proposal2Comment<current()>'
+        proposal: '@proposal<numberBetween(101, 200)>'
+        author: '@voter<current()>'
+        body: <text(300)>
+        createdAt: '<dateTimeBetween("-2 days", "now")>'
+        publishedAt: <(new \DateTime())>
+    proposal3Comment{1..1000}:
+        id: 'proposal3Comment<current()>'
+        proposal: '@proposal<numberBetween(201, 300)>'
+        author: '@voter<current()>'
+        body: <text(300)>
+        createdAt: '<dateTimeBetween("-2 days", "now")>'
+        publishedAt: <(new \DateTime())>
+    proposal4Comment{1..1000}:
+        id: 'proposal4Comment<current()>'
+        proposal: '@proposal<numberBetween(301, 400)>'
+        author: '@voter<current()>'
+        body: <text(300)>
+        createdAt: '<dateTimeBetween("-2 days", "now")>'
+        publishedAt: <(new \DateTime())>
+    proposal5Comment{1..1000}:
+        id: 'proposal5Comment<current()>'
+        proposal: '@proposal<numberBetween(401, 500)>'
+        author: '@voter<current()>'
+        body: <text(300)>
+        createdAt: '<dateTimeBetween("-2 days", "now")>'
+        publishedAt: <(new \DateTime())>

@@ -82,7 +82,7 @@ class ArgumentAdmin extends AbstractAdmin
         $datagridMapper
             ->add('type', null, ['label' => 'admin.fields.argument.type'])
             ->add('opinion', null, ['label' => 'global.proposal'])
-            ->add('Author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
+            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
@@ -114,7 +114,7 @@ class ArgumentAdmin extends AbstractAdmin
                 'label' => 'global.proposal',
                 'template' => 'CapcoAdminBundle:common:opinion_list_field.html.twig',
             ])
-            ->add('Author', ModelType::class, [
+            ->add('author', ModelType::class, [
                 'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
             ])
@@ -155,7 +155,7 @@ class ArgumentAdmin extends AbstractAdmin
                 'label' => 'global.proposal',
                 'property' => 'title',
             ])
-            ->add('Author', ModelAutocompleteType::class, [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {

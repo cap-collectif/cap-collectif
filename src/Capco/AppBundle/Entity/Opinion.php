@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\AnswerableTrait;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
@@ -37,6 +38,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 {
     use AnswerableTrait;
+    use AuthorableTrait;
+    use BodyUsingJoditWysiwygTrait;
     use FollowableTrait;
     use ModerableTrait;
     use PinnableTrait;
@@ -47,7 +50,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     use TrashableTrait;
     use UuidTrait;
     use VotableOkNokMitigeTrait;
-    use BodyUsingJoditWysiwygTrait;
 
     public static $sortCriterias = [
         'opinion.sort.positions' => 'positions',
@@ -75,7 +77,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @Assert\NotNull()
      */
-    protected $Author;
+    protected $author;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
@@ -185,18 +187,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->Author;
-    }
-
-    public function setAuthor(User $Author): self
-    {
-        $this->Author = $Author;
-
-        return $this;
     }
 
     public function getOpinionType(): ?OpinionType
@@ -408,7 +398,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public function isUserAuthor(?User $user = null): bool
     {
-        return $user === $this->Author;
+        return $user === $this->author;
     }
 
     /**

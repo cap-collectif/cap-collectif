@@ -1,8 +1,8 @@
 Capco\AppBundle\Entity\Argument:
-  argument{1..200}:
-    id: 'argument<current()>'
-    Opinion: '@opinion4'
-    type: <numberBetween(0, 1)>
-    Author: '@voter<numberBetween(1, 5)>'
-    body: <text(300)>
-    publishedAt: <dateTime()>
+    argument{1..200}:
+        id: 'argument<current()>'
+        Opinion: '@opinion4'
+        type: <numberBetween(0, 1)>
+        author: '@voter<numberBetween(1, 5)>'
+        body: <text(300)>
+        publishedAt: <dateTime()>

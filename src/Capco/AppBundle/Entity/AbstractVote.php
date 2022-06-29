@@ -115,9 +115,9 @@ abstract class AbstractVote implements Publishable, VoteContribution, IndexableI
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?User $author): self
     {
-        $this->user = $user;
+        $this->user = $author;
 
         return $this;
     }
@@ -129,8 +129,6 @@ abstract class AbstractVote implements Publishable, VoteContribution, IndexableI
 
     public function setAuthor(?Author $user): self
     {
-        $this->user = $user;
-
         return $this;
     }
 

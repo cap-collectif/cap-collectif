@@ -75,7 +75,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="arguments")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $Author;
+    private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments", cascade={"persist"})
@@ -177,12 +177,12 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
 
     public function getAuthor(): ?User
     {
-        return $this->Author;
+        return $this->author;
     }
 
-    public function setAuthor($Author)
+    public function setAuthor($author): self
     {
-        $this->Author = $Author;
+        $this->author = $author;
 
         return $this;
     }
@@ -303,7 +303,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
 
     public function isUserAuthor(?User $user = null): bool
     {
-        return $user === $this->Author;
+        return $user === $this->author;
     }
 
     // ************************* Lifecycle ***********************************

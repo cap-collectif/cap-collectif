@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Traits\CommentableRepositoryTrait;
@@ -13,47 +14,6 @@ use Capco\AppBundle\Model\CommentableInterface;
 class EventCommentRepository extends EntityRepository
 {
     use CommentableRepositoryTrait;
-
-    private function getByCommentableIdsQueryBuilder(
-        string $type,
-        array $commentableIds,
-        bool $excludeAnswers = true,
-        ?User $viewer = null
-    ): QueryBuilder {
-        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
-        if ($excludeAnswers && $type === Event::class) {
-            $qb->andWhere('c.parent is NULL');
-        }
-        if ($type === Event::class) {
-            $qb->leftJoin('c.Event', 'p');
-        }
-
-        if ($type === EventComment::class) {
-            $qb->leftJoin('c.parent', 'p');
-        }
-        $qb->andWhere('p.id IN (:ids)')->setParameter('ids', $commentableIds);
-        return $qb;
-    }
-
-    private function getByCommentableQueryBuilder(
-        CommentableInterface $commentable,
-        bool $excludeAnswers = true,
-        ?User $viewer
-    ): QueryBuilder {
-        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
-        if ($excludeAnswers && $commentable instanceof Event) {
-            $qb->andWhere('c.parent is NULL');
-        }
-        if ($commentable instanceof Event) {
-            $qb->andWhere('c.Event = :event')->setParameter('event', $commentable);
-        }
-
-        if ($commentable instanceof EventComment) {
-            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable);
-        }
-
-        return $qb;
-    }
 
     public function getByCommentable(
         CommentableInterface $commentable,
@@ -91,6 +51,7 @@ class EventCommentRepository extends EntityRepository
         $qb = $this->getByCommentableQueryBuilder($commentable, false, $viewer)->select(
             'count(c.id)'
         );
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -114,10 +75,52 @@ class EventCommentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')->orWhere('c.published = true');
         if ($viewer) {
-            $qb->orWhere('c.Author = :viewer AND c.published = false')->setParameter(
+            $qb->orWhere('c.author = :viewer AND c.published = false')->setParameter(
                 'viewer',
                 $viewer
             );
+        }
+
+        return $qb;
+    }
+
+    private function getByCommentableIdsQueryBuilder(
+        string $type,
+        array $commentableIds,
+        bool $excludeAnswers = true,
+        ?User $viewer = null
+    ): QueryBuilder {
+        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
+        if ($excludeAnswers && Event::class === $type) {
+            $qb->andWhere('c.parent is NULL');
+        }
+        if (Event::class === $type) {
+            $qb->leftJoin('c.Event', 'p');
+        }
+
+        if (EventComment::class === $type) {
+            $qb->leftJoin('c.parent', 'p');
+        }
+        $qb->andWhere('p.id IN (:ids)')->setParameter('ids', $commentableIds);
+
+        return $qb;
+    }
+
+    private function getByCommentableQueryBuilder(
+        CommentableInterface $commentable,
+        bool $excludeAnswers,
+        ?User $viewer
+    ): QueryBuilder {
+        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
+        if ($excludeAnswers && $commentable instanceof Event) {
+            $qb->andWhere('c.parent is NULL');
+        }
+        if ($commentable instanceof Event) {
+            $qb->andWhere('c.Event = :event')->setParameter('event', $commentable);
+        }
+
+        if ($commentable instanceof EventComment) {
+            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable);
         }
 
         return $qb;
