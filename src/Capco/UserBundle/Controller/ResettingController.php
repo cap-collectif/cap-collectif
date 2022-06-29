@@ -87,6 +87,7 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
 
     public function resetAction(Request $request, $token)
     {
+        /** @var User $user */
         $user = $this->userManager->findUserByResetPasswordToken($token);
         if (null === $user) {
             throw new NotFoundHttpException(
