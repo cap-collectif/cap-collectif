@@ -191,7 +191,7 @@ Array [
           </button>
         </header>
         <main
-          className="sc-bdvvtL kAxhVk cap-modal__footer"
+          className="sc-bdvvtL kAxhVk cap-modal__body"
         >
           <form
             className="sc-bdvvtL cHxxHH"

@@ -76,7 +76,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__footer"
+        className="sc-bdvvtL vunmq cap-modal__body"
       >
         <div
           className="ListGroupFlush__Container-eGshRq kTxvA-D ProjectHeaderAuthorsModal__ProjectAuthorList-ewUUPt gcaloH mb-0 list-group-flush list-group"

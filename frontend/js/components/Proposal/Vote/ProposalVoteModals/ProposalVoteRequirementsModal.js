@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
-import { Flex } from '@cap-collectif/ui';
+import {Flex, MultiStepModal, Heading, Button, useMultiStepModal, CapUIIcon, Text} from '@cap-collectif/ui';
 import type { IntlShape } from 'react-intl';
 import moment from 'moment';
+import {useIntl} from "react-intl";
 import RequirementsForm from '~/components/Requirements/RequirementsForm';
 import UpdateProfilePersonalDataMutation from '~/mutations/UpdateProfilePersonalDataMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
@@ -12,6 +13,7 @@ import type { UpdateProfilePersonalDataMutationResponse } from '~/mutations/Upda
 import type { Uuid } from '~/types';
 import CheckIdentificationCodeMutation from '~/mutations/CheckIdentificationCodeMutation';
 import UpdateRequirementMutation from '~/mutations/UpdateRequirementMutation';
+import ResetCss from '~/utils/ResetCss';
 
 export const formName = 'vote-requirements-form';
 
@@ -204,34 +206,85 @@ export const onRequirementsSubmit = async (
 export type ProposalVoteRequirementsModalProps = {|
   +initialValues: { [key: string]: any },
   +isPhoneVerificationOnly: boolean,
-  +control: any,
-  +formState: any,
-  +trigger: any,
-  +setValue: any,
-  +id: string,
-  +label: React$Node,
-  +validationLabel: React$Node,
+  +requirementsForm: any,
+  +isLoading: boolean,
+  +setIsLoading: (isLoading: boolean) => void,
+  +hasPhoneRequirements: boolean,
+  +needToVerifyPhone: boolean,
+  +modalTitle: string,
 |};
 
 const ProposalVoteRequirementsModal = ({
   initialValues,
   isPhoneVerificationOnly,
-  control,
-  formState,
-  trigger,
-  setValue,
+  requirementsForm,
+  isLoading,
+  setIsLoading,
+  hasPhoneRequirements,
+  needToVerifyPhone,
+  modalTitle
 }: ProposalVoteRequirementsModalProps) => {
+  const intl = useIntl();
+  const { goToNextStep, hide } = useMultiStepModal();
+  const { control, formState, trigger, setValue } = requirementsForm;
+
+  const onClick = e => {
+    requirementsForm.handleSubmit(data => {
+      onRequirementsSubmit(
+        data,
+        goToNextStep,
+        isPhoneVerificationOnly,
+        intl,
+        setIsLoading,
+        hasPhoneRequirements,
+        requirementsForm.setError,
+      );
+    })(e);
+  }
+
   return (
-    <Flex align="flex-start" justify="center">
-      <RequirementsForm
-        control={control}
-        formState={formState}
-        isPhoneVerificationOnly={isPhoneVerificationOnly}
-        initialValues={initialValues}
-        trigger={trigger}
-        setValue={setValue}
-      />
-    </Flex>
+    <>
+      <ResetCss>
+        <MultiStepModal.Header>
+          <Text uppercase color="neutral-gray.500" fontWeight={700} fontSize={1} lineHeight="sm">{intl.formatMessage({ id: modalTitle })}</Text>
+          <Heading>{intl.formatMessage({ id: 'requirements' })}</Heading>
+        </MultiStepModal.Header>
+      </ResetCss>
+      <MultiStepModal.Body>
+        <Flex align="flex-start">
+          <RequirementsForm
+            control={control}
+            formState={formState}
+            isPhoneVerificationOnly={isPhoneVerificationOnly}
+            initialValues={initialValues}
+            trigger={trigger}
+            setValue={setValue}
+          />
+        </Flex>
+      </MultiStepModal.Body>
+      <MultiStepModal.Footer>
+        <Button
+          onClick={hide}
+          variant="secondary"
+          variantColor="hierarchy"
+          variantSize="medium"
+        >
+          {intl.formatMessage({ id: 'global.cancel' })}
+        </Button>
+        <Button
+          variantSize="medium"
+          variant="secondary"
+          isLoading={requirementsForm.formState.isSubmitting || isLoading}
+          disabled={Object.keys(requirementsForm.formState.errors).length > 0}
+          rightIcon={CapUIIcon.LongArrowRight}
+          onClick={onClick}
+        >
+          {needToVerifyPhone
+            ? intl.formatMessage({ id: 'verify.number' })
+            : intl.formatMessage({ id: 'global.continue' })}
+        </Button>
+      </MultiStepModal.Footer>
+    </>
   );
 };
 

@@ -9,11 +9,13 @@ import {
   SpotIcon,
   Text,
   Tooltip,
+  MultiStepModal,
+  Heading,
+  useMultiStepModal
 } from '@cap-collectif/ui';
 import { FieldInput, FormControl } from '@cap-collectif/form';
 import { graphql, useFragment } from 'react-relay';
 import { FormattedHTMLMessage, useIntl } from 'react-intl';
-import type { Control } from 'react-hook-form';
 import type { IntlShape } from 'react-intl';
 import formatPhoneNumber from '~/utils/formatPhoneNumber';
 import phoneSplitter from '~/utils/phoneSplitter';
@@ -23,6 +25,7 @@ import SendSmsPhoneValidationCodeMutation from '~/mutations/SendSmsPhoneValidati
 import type { VerifyUserPhoneNumberMutationResponse } from '~relay/VerifyUserPhoneNumberMutation.graphql';
 import type { SendSmsPhoneValidationCodeMutationResponse } from '~relay/SendSmsPhoneValidationCodeMutation.graphql';
 import type { ProposalVoteConfirmationModal_viewer$key } from '~relay/ProposalVoteConfirmationModal_viewer.graphql';
+import ResetCss from '~/utils/ResetCss';
 
 export const formName = 'vote-sms-validation-form';
 
@@ -31,17 +34,12 @@ export type FormValues = {
 };
 
 export type ProposalVoteConfirmationModalProps = {|
-  +control: Control<FormValues>,
-  +isSubmitting: boolean,
   +viewer: ProposalVoteConfirmationModal_viewer$key,
-  +register: any,
-  +handleSubmit: any,
-  +goToNextStep: () => void,
   +setIsLoading: (isLoading: boolean) => void,
-  +reset: any,
-  +id: string,
-  +label: React$Node,
-  +validationLabel: React$Node,
+  +validationForm: any,
+  +isLoading: boolean,
+  +needToVerifyPhone: boolean,
+  +modalTitle: string,
 |};
 
 export const onVoteConfirmationSubmit = async (
@@ -74,20 +72,22 @@ const FRAGMENT = graphql`
 `;
 
 const ProposalVoteConfirmationModal = ({
-  control,
-  isSubmitting,
   viewer: viewerFragment,
-  register,
-  handleSubmit,
-  goToNextStep,
   setIsLoading,
-  reset,
+  validationForm,
+  isLoading,
+  needToVerifyPhone,
+  modalTitle,
 }: ProposalVoteConfirmationModalProps) => {
   const intl = useIntl();
   const viewer = useFragment(FRAGMENT, viewerFragment);
 
   const [verified, setVerified] = React.useState<boolean>(false);
   const [limitReached, setLimitReached] = React.useState<boolean>(false);
+  const { goToNextStep, goToPreviousStep } = useMultiStepModal()
+
+  const { reset, handleSubmit, control, register, formState } = validationForm;
+  const { isSubmitting } = formState;
 
   const validateCode = async (value: $PropertyType<FormValues, 'code'>) => {
     if (!verified) {
@@ -143,59 +143,92 @@ const ProposalVoteConfirmationModal = ({
   }, [reset]);
 
   return (
-    <Flex as="form" direction="column" spacing={3} align="center" justify="center">
-      <SpotIcon name={CapUISpotIcon.ADD_CONTACT} size={CapUISpotIconSize.Lg} />
-      <Text textAlign="center" fontSize="18px" lineHeight="24px">
-        <FormattedHTMLMessage
-          id="confirmation.code.header.title"
-          values={{ phoneNumber: phoneSplitter(formatPhoneNumber(viewer.phone)) }}
-        />
-      </Text>
-
-      <FormControl
-        name="code"
-        control={control}
-        isRequired
-        isDisabled={isSubmitting}
-        align="center">
-        <FieldInput
-          control={control}
-          {...register('code', {
-            validate: {
-              validateCode,
-            },
-          })}
-          type="codeInput"
-          name="code"
-          isVerified={verified}
-        />
-        {verified && (
-          <Text
-            color="green.500"
-            fontFamily={CapUIFontFamily.Body}
-            lineHeight="normal"
-            fontSize={3}
-            textAlign="center">
-            {intl.formatMessage({ id: 'code.validation.success' })}
+    <>
+      <ResetCss>
+        <MultiStepModal.Header>
+          <Text uppercase color="neutral-gray.500" fontWeight={700} fontSize={1} lineHeight="sm">{intl.formatMessage({ id: modalTitle })}</Text>
+          <Heading>{intl.formatMessage({ id: 'verify.code' })}</Heading>
+        </MultiStepModal.Header>
+      </ResetCss>
+      <MultiStepModal.Body>
+        <Flex as="form" direction="column" spacing={3} align="center" justify="center">
+          <SpotIcon name={CapUISpotIcon.ADD_CONTACT} size={CapUISpotIconSize.Lg} />
+          <Text textAlign="center" fontSize="18px" lineHeight="24px">
+            <FormattedHTMLMessage
+              id="confirmation.code.header.title"
+              values={{ phoneNumber: phoneSplitter(formatPhoneNumber(viewer.phone)) }}
+            />
           </Text>
-        )}
-      </FormControl>
 
-      {limitReached ? (
-        <Tooltip
-          zIndex={1500}
-          id="tooltip"
-          label={intl.formatMessage({ id: 'code.limit.reached' })}>
-          <Button variant="link" variantColor="hierarchy">
-            {intl.formatMessage({ id: 'get.new.code' })}
-          </Button>
-        </Tooltip>
-      ) : (
-        <Button variant="link" onClick={sendNewPhoneValidationCode}>
-          {intl.formatMessage({ id: 'get.new.code' })}
+          <FormControl
+            name="code"
+            control={control}
+            isRequired
+            isDisabled={isSubmitting}
+            align="center">
+            <FieldInput
+              control={control}
+              {...register('code', {
+                validate: {
+                  validateCode,
+                },
+              })}
+              type="codeInput"
+              name="code"
+              isVerified={verified}
+            />
+            {verified && (
+              <Text
+                color="green.500"
+                fontFamily={CapUIFontFamily.Body}
+                lineHeight="normal"
+                fontSize={3}
+                textAlign="center">
+                {intl.formatMessage({ id: 'code.validation.success' })}
+              </Text>
+            )}
+          </FormControl>
+
+          {limitReached ? (
+            <Tooltip
+              zIndex={1500}
+              id="tooltip"
+              label={intl.formatMessage({ id: 'code.limit.reached' })}>
+              <Button variant="link" variantColor="hierarchy">
+                {intl.formatMessage({ id: 'get.new.code' })}
+              </Button>
+            </Tooltip>
+          ) : (
+            <Button variant="link" onClick={sendNewPhoneValidationCode}>
+              {intl.formatMessage({ id: 'get.new.code' })}
+            </Button>
+          )}
+        </Flex>
+      </MultiStepModal.Body>
+      <MultiStepModal.Footer>
+        <Button
+          variant="secondary"
+          variantColor="hierarchy"
+          variantSize="medium"
+          onClick={goToPreviousStep}
+        >
+          {intl.formatMessage({ id: 'global.back' })}
         </Button>
-      )}
-    </Flex>
+        <Button
+          variantSize="medium"
+          variant="secondary"
+          isLoading={validationForm.formState.isSubmitting || isLoading}
+          disabled={needToVerifyPhone}
+          onClick={e => {
+            validationForm.handleSubmit(data => {
+              onVoteConfirmationSubmit(data, goToNextStep, intl, false, setIsLoading);
+            })(e);
+          }}
+        >
+          {intl.formatMessage({ id: 'proposal.validate.vote' })}
+        </Button>
+      </MultiStepModal.Footer>
+    </>
   );
 };
 

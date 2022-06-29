@@ -45,7 +45,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
         </div>
       </header>
       <main
-        class="sc-bdvvtL gWVjgj cap-modal__footer"
+        class="sc-bdvvtL gWVjgj cap-modal__body"
       >
         <form
           id="report-form"

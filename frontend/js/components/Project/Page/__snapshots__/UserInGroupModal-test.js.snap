@@ -77,7 +77,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__footer"
+        className="sc-bdvvtL vunmq cap-modal__body"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
@@ -216,7 +216,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__footer"
+        className="sc-bdvvtL vunmq cap-modal__body"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
@@ -355,7 +355,7 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__footer"
+        className="sc-bdvvtL vunmq cap-modal__body"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"

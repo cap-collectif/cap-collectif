@@ -75,7 +75,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__footer"
+        className="sc-bdvvtL vunmq cap-modal__body"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
@@ -232,7 +232,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__footer"
+        className="sc-bdvvtL vunmq cap-modal__body"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
@@ -389,7 +389,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__footer"
+        className="sc-bdvvtL vunmq cap-modal__body"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"

@@ -319,17 +319,19 @@ const form = reduxForm({
 
 export const getFormName = (step: { +id: string }) => `proposal-user-vote-form-step-${step.id}`;
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
-  features: state.default.features,
-  form: getFormName(props.step),
-  initialValues: {
-    votes:
-      props.votes.edges &&
-      props.votes.edges
-        .filter(Boolean)
-        .map(edge => ({ id: edge.node.id, public: !edge.node.anonymous })),
-  },
-});
+const mapStateToProps = (state: State, props: RelayProps) => {
+  return {
+    features: state.default.features,
+    form: getFormName(props.step),
+    initialValues: {
+      votes:
+        props.votes.edges &&
+        props.votes.edges
+          .filter(Boolean)
+          .map(edge => ({ id: edge.node.id, public: !edge.node.anonymous })),
+    },
+  }
+};
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {

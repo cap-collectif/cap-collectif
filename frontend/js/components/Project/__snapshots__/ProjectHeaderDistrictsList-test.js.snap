@@ -214,7 +214,7 @@ Array [
           </header>
         </div>
         <main
-          className="sc-bdvvtL vunmq cap-modal__footer"
+          className="sc-bdvvtL vunmq cap-modal__body"
         >
           <ul
             className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"

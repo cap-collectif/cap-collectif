@@ -193,7 +193,7 @@ Array [
           </button>
         </header>
         <main
-          className="sc-bdvvtL kAxhVk cap-modal__footer"
+          className="sc-bdvvtL kAxhVk cap-modal__body"
         >
           <form
             id="form-create-questionnaire"

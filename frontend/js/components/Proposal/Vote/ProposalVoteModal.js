@@ -14,6 +14,7 @@ import {
   Tag,
   CapUIIcon,
   InfoMessage,
+  useMultiStepModal,
 } from '@cap-collectif/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -30,12 +31,8 @@ import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
 import usePrevious from '~/utils/hooks/usePrevious';
 import ResetCss from '~/utils/ResetCss';
-import ProposalVoteRequirementsModal, {
-  onRequirementsSubmit,
-} from './ProposalVoteModals/ProposalVoteRequirementsModal';
-import ProposalVoteConfirmationModal, {
-  onVoteConfirmationSubmit,
-} from './ProposalVoteModals/ProposalVoteConfirmationModal';
+import ProposalVoteRequirementsModal from './ProposalVoteModals/ProposalVoteRequirementsModal';
+import ProposalVoteConfirmationModal from './ProposalVoteModals/ProposalVoteConfirmationModal';
 
 import invariant from '~/utils/invariant';
 import UpdateProposalVotesMutation from '~/mutations/UpdateProposalVotesMutation';
@@ -366,6 +363,8 @@ export const ProposalVoteModal = ({
     requirement => requirement.viewerMeetsTheRequirement,
   );
 
+  const { hide: multiStepHide } = useMultiStepModal();
+
   return !allRequirementsMet ? (
     step.requirements ? (
       <ProposalVoteMultiModalContainer
@@ -373,134 +372,73 @@ export const ProposalVoteModal = ({
         id="proposal-vote-modal"
         onClose={onHide}
         aria-labelledby="contained-modal-title-lg"
-        size={CapUIModalSize.Lg}
+        size={CapUIModalSize.Md}
         fullSizeOnMobile
         show={showModal}>
-        {({ hide, currentStep, goToNextStep }) => (
-          <>
-            <ResetCss>
-              <MultiStepModal.Header>
-                <Modal.Header.Label color="neutral-gray.500" id="contained-modal-title-lg">
-                  {intl.formatMessage({ id: keyTradForModalVoteTitle })}
-                </Modal.Header.Label>
-              </MultiStepModal.Header>
-            </ResetCss>
-            <MultiStepModal.ProgressBar />
-
-            <MultiStepModal.Body>
-              <ProposalVoteRequirementsModal
-                id="proposal-vote-requirement-modal"
-                label={intl.formatMessage({ id: 'requirements' })}
-                validationLabel={
-                  needToVerifyPhone
-                    ? intl.formatMessage({ id: 'verify.number' })
-                    : intl.formatMessage({ id: 'global.continue' })
-                }
-                control={requirementsForm.control}
-                formState={requirementsForm.formState}
-                isPhoneVerificationOnly={isPhoneVerificationOnly}
-                initialValues={initialValues}
-                trigger={requirementsForm.trigger}
-                setValue={requirementsForm.setValue}
-              />
-              {needToVerifyPhone && (
-                <ProposalVoteConfirmationModal
-                  id="proposal-vote-confirmation-modal"
-                  label={intl.formatMessage({ id: 'verify.code' })}
-                  validationLabel={intl.formatMessage({ id: 'proposal.validate.vote' })}
-                  control={validationForm.control}
-                  isSubmitting={validationForm.formState.isSubmitting}
-                  viewer={viewer}
-                  register={validationForm.register}
-                  handleSubmit={validationForm.handleSubmit}
-                  goToNextStep={goToNextStep}
-                  setIsLoading={setIsLoading}
-                  reset={validationForm.reset}
-                />
-              )}
-
-              <Box
-                id="proposal-validate-vote-modal"
-                validationLabel={intl.formatMessage({ id: 'proposal.validate.vote' })}>
-                <Flex direction="column" align="flex-start" spacing={6}>
-                  <ProposalsUserVotesTable
-                    onSubmit={onSubmit}
-                    step={step}
-                    votes={step.viewerVotes}
-                  />
-                  {votesHelpText && (
-                    <InfoMessage variant="info" width="100%">
-                      <InfoMessage.Title>
-                        {intl.formatMessage({
-                          id: isInterpellationContextFromStep(step)
-                            ? 'admin.fields.step.supportsHelpText'
-                            : 'admin.fields.step.votesHelpText',
-                        })}
-                      </InfoMessage.Title>
-                      <InfoMessage.Content>
-                        <WYSIWYGRender value={votesHelpText} />
-                      </InfoMessage.Content>
-                    </InfoMessage>
-                  )}
-                </Flex>
-              </Box>
-            </MultiStepModal.Body>
-            <MultiStepModal.Footer>
-              {currentStep < 2 && (
-                <MultiStepModal.Footer.BackButton
-                  variantSize="medium"
-                  wording={{
-                    firstStepWording: intl.formatMessage({ id: 'global.cancel' }),
-                    otherStepsWording: intl.formatMessage({ id: 'global.back' }),
-                  }}
-                />
-              )}
-
-              <MultiStepModal.Footer.ContinueButton
-                isLoading={
-                  requirementsForm.formState.isSubmitting ||
-                  validationForm.formState.isSubmitting ||
-                  isLoading
-                }
-                disabled={
-                  (currentStep === 0 &&
-                    Object.keys(requirementsForm.formState.errors).length > 0) ||
-                  (currentStep === 1 && needToVerifyPhone)
-                }
-                onClick={e => {
-                  if (currentStep === 0) {
-                    requirementsForm.handleSubmit(data => {
-                      onRequirementsSubmit(
-                        data,
-                        goToNextStep,
-                        isPhoneVerificationOnly,
-                        intl,
-                        setIsLoading,
-                        hasPhoneRequirements,
-                        requirementsForm.setError,
-                      );
-                    })(e);
-                  } else if (currentStep === 1) {
-                    validationForm.handleSubmit(data => {
-                      onVoteConfirmationSubmit(data, goToNextStep, intl, false, setIsLoading);
-                    })(e);
-                  }
-                }}
-              />
-              <MultiStepModal.Footer.ValidationButton
-                id="confirm-proposal-vote"
-                onClick={() => {
-                  dispatch(submit(getFormName(step)));
-                  fetchQuery_DEPRECATED(environment, refetchViewer, {
-                    stepId: step.id,
-                    isAuthenticated,
-                  });
-                  hide();
-                }}
-              />
-            </MultiStepModal.Footer>
-          </>
+        <ProposalVoteRequirementsModal
+          modalTitle={keyTradForModalVoteTitle}
+          isPhoneVerificationOnly={isPhoneVerificationOnly}
+          initialValues={initialValues}
+          hasPhoneRequirements={hasPhoneRequirements}
+          requirementsForm={requirementsForm}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          needToVerifyPhone={needToVerifyPhone}
+        />
+        {needToVerifyPhone && (
+          <ProposalVoteConfirmationModal
+            viewer={viewer}
+            setIsLoading={setIsLoading}
+            validationForm={validationForm}
+            isLoading={isLoading}
+            needToVerifyPhone={needToVerifyPhone}
+            modalTitle={keyTradForModalVoteTitle}
+          />
         )}
+        <>
+          <ResetCss>
+            <MultiStepModal.Header>
+              <Heading>{intl.formatMessage({ id: keyTradForModalVoteTitle })}</Heading>
+            </MultiStepModal.Header>
+          </ResetCss>
+          <MultiStepModal.Body>
+            <Box id="proposal-validate-vote-modal">
+              <Flex direction="column" align="flex-start" spacing={6}>
+                <ProposalsUserVotesTable onSubmit={onSubmit} step={step} votes={step.viewerVotes} />
+                {votesHelpText && (
+                  <InfoMessage variant="info" width="100%">
+                    <InfoMessage.Title>
+                      {intl.formatMessage({
+                        id: isInterpellationContextFromStep(step)
+                          ? 'admin.fields.step.supportsHelpText'
+                          : 'admin.fields.step.votesHelpText',
+                      })}
+                    </InfoMessage.Title>
+                    <InfoMessage.Content>
+                      <WYSIWYGRender value={votesHelpText} />
+                    </InfoMessage.Content>
+                  </InfoMessage>
+                )}
+              </Flex>
+            </Box>
+          </MultiStepModal.Body>
+          <MultiStepModal.Footer>
+            <Button
+              variant="primary"
+              variantColor="primary"
+              variantSize="big"
+              onClick={() => {
+                dispatch(submit(getFormName(step)));
+                fetchQuery_DEPRECATED(environment, refetchViewer, {
+                  stepId: step.id,
+                  isAuthenticated,
+                });
+                multiStepHide();
+              }}>
+              {intl.formatMessage({ id: 'proposal.validate.vote' })}
+            </Button>
+          </MultiStepModal.Footer>
+        </>
       </ProposalVoteMultiModalContainer>
     ) : null
   ) : (
@@ -509,7 +447,7 @@ export const ProposalVoteModal = ({
       id="proposal-vote-modal"
       onClose={onHide}
       ariaLabel="contained-modal-title-lg"
-      size={CapUIModalSize.Lg}
+      size={CapUIModalSize.Md}
       fullSizeOnMobile
       show={showModal}>
       {({ hide }) => (

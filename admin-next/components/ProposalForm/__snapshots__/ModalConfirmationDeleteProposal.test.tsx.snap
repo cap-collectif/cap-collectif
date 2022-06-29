@@ -233,7 +233,7 @@ Array [
           </button>
         </header>
         <main
-          className="sc-bdvvtL kAxhVk cap-modal__footer"
+          className="sc-bdvvtL kAxhVk cap-modal__body"
         >
           <p
             className="sc-bdvvtL dgPHnB cap-text"

@@ -105,7 +105,9 @@ const RequirementsForm = ({
 
   return (
     <Flex direction="column" spacing={6} as="form">
-      <Heading as="h4">{intl.formatMessage({ id: 'vote.modal.body.form.title' })}</Heading>
+      <Heading as="h4" fontSize={3}>
+        {intl.formatMessage({ id: 'vote.modal.body.form.title' })}
+      </Heading>
       <Flex direction="column" width="300px">
         {Object.keys(initialValues).map(key => {
           if (key === 'FranceConnectRequirement') {
