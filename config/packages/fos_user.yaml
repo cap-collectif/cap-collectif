@@ -6,7 +6,7 @@ fos_user:
         group_class: Capco\AppBundle\Entity\Group
         group_manager: sonata.user.orm.group_manager
     service:
-        user_manager: sonata.user.orm.user_manager
+        user_manager: Capco\UserBundle\Doctrine\UserManager
         email_canonicalizer: Capco\AppBundle\Utils\Canonicalizer
         username_canonicalizer: Capco\AppBundle\Utils\Canonicalizer
         mailer: Capco\AppBundle\Notifier\FOSNotifier

@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Doctrine;
 
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
@@ -18,7 +19,7 @@ class UserManager extends BaseUserManager
         parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, $class);
     }
 
-    public function findUserByResetPasswordToken(?string $token)
+    public function findUserByResetPasswordToken(?string $token): ?User
     {
         return $this->findUserBy(['resetPasswordToken' => $token]);
     }
