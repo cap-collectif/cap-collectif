@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\Author;
-use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
@@ -83,7 +82,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *      "debateAnonymousArgument"   = "Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote",
  * })
  */
-abstract class AbstractVote implements Publishable, VoteContribution, IndexableInterface, Authorable
+abstract class AbstractVote implements Publishable, VoteContribution, IndexableInterface
 {
     use IdTrait;
     use PublishableTrait;

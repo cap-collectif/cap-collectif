@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Model;
 
-interface Publishable
+use Capco\AppBundle\Entity\Interfaces\Authorable;
+
+interface Publishable extends Authorable
 {
     public function isPublished(): bool;
 
@@ -11,9 +13,6 @@ interface Publishable
     public function setPublishedAt(\DateTime $date);
 
     public function getPublishableUntil(): ?\DateTime;
-
-    // A publishable must have an author
-    public function getAuthor();
 
     // A publishable must have a participation step (can be null)
     public function getStep();

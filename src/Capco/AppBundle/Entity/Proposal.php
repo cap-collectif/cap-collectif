@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
-use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Interfaces\Owner;
@@ -71,8 +70,7 @@ class Proposal implements
     SoftDeleteable,
     DisplayableInBOInterface,
     DraftableInterface,
-    ReportableInterface,
-    Authorable
+    ReportableInterface
 {
     use AddressableTrait;
     use AuthorableTrait;

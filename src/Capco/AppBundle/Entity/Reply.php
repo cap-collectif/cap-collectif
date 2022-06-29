@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Enum\ReplyStatus;
@@ -26,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class Reply extends AbstractReply implements Publishable, DraftableInterface, Authorable
+class Reply extends AbstractReply implements Publishable, DraftableInterface
 {
     use AuthorableTrait;
     use DraftableTrait;

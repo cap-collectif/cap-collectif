@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
@@ -29,13 +28,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Source implements
-    Contribution,
-    Trashable,
-    VotableInterface,
-    Publishable,
-    ReportableInterface,
-    Authorable
+class Source implements Contribution, Trashable, VotableInterface, Publishable, ReportableInterface
 {
     use AuthorableTrait;
     use ModerableTrait;

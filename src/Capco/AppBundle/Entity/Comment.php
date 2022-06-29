@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\Common\Collections\Collection;
@@ -53,7 +52,6 @@ abstract class Comment implements
     Trashable,
     Contribution,
     VotableInterface,
-    Authorable,
     CommentableInterface,
     ReportableInterface
 {
