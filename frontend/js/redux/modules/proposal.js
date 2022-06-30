@@ -1,4 +1,6 @@
 // @flow
+import { toast } from '@cap-collectif/ui';
+import type {IntlShape} from "react-intl";
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import addVote from '../../mutations/AddProposalVoteMutation';
@@ -197,7 +199,7 @@ export const stopVoting = (): VoteFailedAction => ({
   type: 'proposal/VOTE_FAILED',
 });
 
-export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymously: boolean) => {
+export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymously: boolean, intl: IntlShape) => {
   dispatch(startVoting());
   return addVote
     .commit({
@@ -206,17 +208,14 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
     })
     .then(response => {
       dispatch(closeVoteModal());
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'success',
-          content:
-            response.addProposalVote &&
-            response.addProposalVote.voteEdge &&
-            isInterpellationContextFromStep(response.addProposalVote.voteEdge.node.step)
-              ? 'support.add_success'
-              : 'vote.add_success',
-        },
+      const successTranslationKey = response.addProposalVote &&
+        response.addProposalVote.voteEdge &&
+        isInterpellationContextFromStep(response.addProposalVote.voteEdge.node.step)
+          ? 'support.add_success'
+          : 'vote.add_success';
+      toast({
+        variant: 'success',
+        content: intl.formatMessage({ id: successTranslationKey }),
       });
       return response;
     })

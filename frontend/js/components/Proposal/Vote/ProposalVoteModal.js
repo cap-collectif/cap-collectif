@@ -242,9 +242,9 @@ export const ProposalVoteModal = ({
 
   const onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
     const tmpVote = values.votes.filter(v => v.id === null)[0];
-
+    if (!tmpVote) return;
     // First we add the vote
-    return vote(dispatch, step.id, proposal.id, !tmpVote.public).then(data => {
+    return vote(dispatch, step.id, proposal.id, !tmpVote.public, intl).then(data => {
       if (
         !data ||
         !data.addProposalVote ||
