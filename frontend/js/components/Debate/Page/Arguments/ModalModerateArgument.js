@@ -3,7 +3,6 @@ import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { submit } from 'redux-form';
 import { useDispatch } from 'react-redux';
-import { Modal } from 'react-bootstrap';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import { toast } from '@cap-collectif/ui';
 import CloseButton from '~/components/Form/CloseButton';
@@ -13,6 +12,8 @@ import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import type { Dispatch } from '~/types';
 import { mediaQueryMobile } from '~/utils/sizes';
 import ModerateForm, { formName, type Values } from '~/components/Moderate/ModerateForm';
+import Modal from '~ds/Modal/Modal';
+import Heading from '~ui/Primitives/Heading';
 
 export type ModerateArgument = {|
   id: string,
@@ -84,16 +85,11 @@ export const ModalModerateArgument = (props: Props): React.Node => {
   const dispatch = useDispatch<Dispatch>();
 
   return (
-    <ModalContainer
-      animation={false}
-      show={!!argument}
-      onHide={onClose}
-      bsSize="large"
-      aria-labelledby="modal-title">
-      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
-        <Modal.Title id="modal-title">
+    <ModalContainer show={!!argument} onHide={onClose} aria-labelledby="modal-title">
+      <Modal.Header closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+        <Heading id="modal-title">
           <FormattedMessage id="moderate-argument" />
-        </Modal.Title>
+        </Heading>
       </Modal.Header>
 
       <Modal.Body>

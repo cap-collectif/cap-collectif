@@ -172,6 +172,7 @@ export const PrivacyInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 
   span {
     margin-left: 5px;
+    white-space: nowrap;
   }
 
   span:first-child {

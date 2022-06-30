@@ -40,6 +40,11 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
         >
           <span
             className="loginIcon"
+            style={
+              Object {
+                "lineHeight": "inherit",
+              }
+            }
           >
             <IconMock
               aria-hidden={true}
@@ -149,6 +154,11 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
           >
             <span
               className="loginIcon"
+              style={
+                Object {
+                  "lineHeight": "inherit",
+                }
+              }
             >
               <IconMock
                 aria-hidden={true}

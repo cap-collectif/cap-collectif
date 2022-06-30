@@ -29,38 +29,31 @@ exports[`<ProjectProposalsAdminForm /> renders correctly empty 1`] = `
         icons={true}
         id="toggle-activity-tracking"
         label={
-          <div>
+          <ForwardRef
+            direction="row"
+            wrap="nowrap"
+          >
             activity-tracking
             <span
               className="excerpt inline"
             >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <_default
-                    className="text-left"
-                    id="tooltip-top"
-                    style={
-                      Object {
-                        "wordBreak": "break-word",
-                      }
-                    }
-                  >
-                    activity-tracking-help-text
-                  </_default>
-                }
+              <Tooltip
+                className="text-left"
+                id="tooltip-description"
+                label="activity-tracking-help-text"
                 placement="top"
-                trigger={
-                  Array [
-                    "hover",
-                    "focus",
-                  ]
+                style={
+                  Object {
+                    "wordBreak": "break-word",
+                  }
                 }
               >
-                <ProjectProposalsAdminForm__ActivityInformationIcon />
-              </OverlayTrigger>
+                <div>
+                  <ProjectProposalsAdminForm__ActivityInformationIcon />
+                </div>
+              </Tooltip>
             </span>
-          </div>
+          </ForwardRef>
         }
         name="opinionCanBeFollowed"
         normalize={[Function]}
@@ -99,38 +92,31 @@ exports[`<ProjectProposalsAdminForm /> renders correctly with a project 1`] = `
         icons={true}
         id="toggle-activity-tracking"
         label={
-          <div>
+          <ForwardRef
+            direction="row"
+            wrap="nowrap"
+          >
             activity-tracking
             <span
               className="excerpt inline"
             >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <_default
-                    className="text-left"
-                    id="tooltip-top"
-                    style={
-                      Object {
-                        "wordBreak": "break-word",
-                      }
-                    }
-                  >
-                    activity-tracking-help-text
-                  </_default>
-                }
+              <Tooltip
+                className="text-left"
+                id="tooltip-description"
+                label="activity-tracking-help-text"
                 placement="top"
-                trigger={
-                  Array [
-                    "hover",
-                    "focus",
-                  ]
+                style={
+                  Object {
+                    "wordBreak": "break-word",
+                  }
                 }
               >
-                <ProjectProposalsAdminForm__ActivityInformationIcon />
-              </OverlayTrigger>
+                <div>
+                  <ProjectProposalsAdminForm__ActivityInformationIcon />
+                </div>
+              </Tooltip>
             </span>
-          </div>
+          </ForwardRef>
         }
         name="opinionCanBeFollowed"
         normalize={[Function]}

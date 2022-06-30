@@ -9,49 +9,53 @@ import type {
 } from '~relay/ProposalsUserVotesPageAppQuery.graphql';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const ProposalsUserVotesPage = lazy(() =>
-  import(
-    /* webpackChunkName: "ProposalsUserVotesPage" */ '~/components/Project/Votes/ProposalsUserVotesPage'
-  ),
+const ProposalsUserVotesPage = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "ProposalsUserVotesPage" */ '~/components/Project/Votes/ProposalsUserVotesPage'
+    ),
 );
 
-export default (data: { projectId: string }) => (
-  <Suspense fallback={<Loader />}>
-    <Providers>
-      <QueryRenderer
-        variables={
-          ({
-            project: data.projectId,
-            isAuthenticated: true,
-          }: ProposalsUserVotesPageAppQueryVariables)
-        }
-        environment={environment}
-        query={graphql`
-          query ProposalsUserVotesPageAppQuery($project: ID!, $isAuthenticated: Boolean!) {
-            project: node(id: $project) {
-              ...ProposalsUserVotesPage_project @arguments(isAuthenticated: $isAuthenticated)
+export default (data: { projectId: string }) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px';
+  return (
+    <Suspense fallback={<Loader />}>
+      <Providers resetCSS={false} designSystem>
+        <QueryRenderer
+          variables={
+            ({
+              project: data.projectId,
+              isAuthenticated: true,
+            }: ProposalsUserVotesPageAppQueryVariables)
+          }
+          environment={environment}
+          query={graphql`
+            query ProposalsUserVotesPageAppQuery($project: ID!, $isAuthenticated: Boolean!) {
+              project: node(id: $project) {
+                ...ProposalsUserVotesPage_project @arguments(isAuthenticated: $isAuthenticated)
+              }
             }
-          }
-        `}
-        render={({
-          error,
-          props,
-        }: {
-          ...ReactRelayReadyState,
-          props: ?ProposalsUserVotesPageAppQueryResponse,
-        }) => {
-          if (error) {
-            return graphqlError;
-          }
-          if (props) {
-            if (props.project) {
-              return <ProposalsUserVotesPage project={props.project} />;
+          `}
+          render={({
+            error,
+            props,
+          }: {
+            ...ReactRelayReadyState,
+            props: ?ProposalsUserVotesPageAppQueryResponse,
+          }) => {
+            if (error) {
+              return graphqlError;
             }
-            return graphqlError;
-          }
-          return null;
-        }}
-      />
-    </Providers>
-  </Suspense>
-);
+            if (props) {
+              if (props.project) {
+                return <ProposalsUserVotesPage project={props.project} />;
+              }
+              return graphqlError;
+            }
+            return null;
+          }}
+        />
+      </Providers>
+    </Suspense>
+  );
+};

@@ -74,6 +74,11 @@ export const DraggableItem: StyledComponent<
   user-select: none;
   transition: background-color 0.1s ease;
 `;
+export const UserVotesTableContainer: StyledComponent<any, any, HTMLDivElement> = styled.div`
+  .wrapper-item-container {
+    overflow: visible !important;
+  }
+`;
 
 let portal: ?HTMLElement = null;
 
@@ -278,8 +283,9 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
 
     if (!step.votesRanking) {
       return (
-        <div className="proposals-user-votes__table">
+        <UserVotesTableContainer className="proposals-user-votes__table">
           <FieldArray
+            style={{ overflow: 'visible' }}
             step={step}
             votes={votes}
             votesMin={features.votes_min && step.votesMin ? step.votesMin : 1}
@@ -287,12 +293,16 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
             name="votes"
             component={renderMembers}
           />
-        </div>
+        </UserVotesTableContainer>
       );
     }
 
     return (
-      <div className="proposals-user-votes__table" style={{ boxSizing: 'border-box' }}>
+      <UserVotesTableContainer
+        className="proposals-user-votes__table"
+        style={{
+          boxSizing: 'border-box',
+        }}>
         <Context
           onDragEnd={this.onDragEnd}
           onDragStart={this.onDragStart}
@@ -308,7 +318,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
             component={renderDraggableMembers}
           />
         </Context>
-      </div>
+      </UserVotesTableContainer>
     );
   }
 }

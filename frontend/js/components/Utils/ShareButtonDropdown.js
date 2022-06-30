@@ -22,7 +22,7 @@ type Props = {|
   disabled?: boolean,
 |};
 
-const ShareButtonDropdownLegacy = ({
+const ShareButtonDropdown = ({
   id = 'share-button',
   title = '',
   url,
@@ -110,7 +110,7 @@ const ShareButtonDropdownLegacy = ({
       }
       placement="bottom-start"
       className="share-button-dropdown">
-      <Menu.List className="share-button-dropdown">
+      <Menu.List className="share-button-dropdown" maxHeight="none">
         <ShareButtonAction action="mail" onSelect={mail} />
         <ShareButtonAction action="facebook" onSelect={facebook} />
         <ShareButtonAction action="twitter" onSelect={twitter} />
@@ -126,4 +126,4 @@ const mapStateToProps = (state: GlobalState) => ({
   enabled: state.default.features.share_buttons,
 });
 
-export default connect<any, any, _, _, _, _>(mapStateToProps)(ShareButtonDropdownLegacy);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ShareButtonDropdown);

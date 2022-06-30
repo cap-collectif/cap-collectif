@@ -10,6 +10,7 @@ import Menu from '../DesignSystem/Menu/Menu';
 import MenuButton from '~ds/Menu/MenuButton';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
+import colors from '~/styles/modules/colors';
 
 type Props = {|
   links: Array<FooterLink>,
@@ -82,18 +83,24 @@ const renderSeeMore = (
       <Menu>
         <Menu.Button>
           <SeeMoreFooterButton
+            padding={0}
             id="footer-see-more-button"
             rightIcon={ICON_NAME.ARROW_DOWN_O}
             variant="primary"
-            variantSize="medium">
+            variantSize="small">
             <FormattedMessage id="global.navbar.see_more" />
           </SeeMoreFooterButton>
         </Menu.Button>
         <Menu.List>
           {links.map((link: FooterLink, index: number) => {
             return index >= overflowIndex ? (
-              <Menu.ListItem key={link.name} ref={handleItemWidth}>
-                <a href={link.url}>{link.name}</a>
+              <Menu.ListItem
+                style={{ color: colors.black }}
+                as="a"
+                href={link.url}
+                key={link.name}
+                ref={handleItemWidth}>
+                {link.name}
               </Menu.ListItem>
             ) : null;
           })}

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import { ICON_NAME } from '~ui/Icons/Icon';
 import type { AnalysisProposalListRole_proposal } from '~relay/AnalysisProposalListRole_proposal.graphql';
@@ -12,6 +11,7 @@ import AnalysisProposalListRoleContainer, {
 } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style';
 import UserAnalystList from '~/components/Analysis/UserAnalystList/UserAnalystList';
 import { getBadge, getHeadStatus } from '~/components/Analysis/UserAnalystList/UserAnalyst.utils';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 export type Status = {|
   name: string,
@@ -39,43 +39,51 @@ const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
 
       <RoleWrapper className="role-supervisor">
         {supervisor && (
-          <OverlayTrigger
+          <Tooltip
             placement="top"
-            overlay={
-              <Tooltip id="avatar-supervisor">
-                {intl.formatMessage({ id: 'global.assigned.to' })} {supervisor.username}
-              </Tooltip>
-            }>
-            <UserAvatarLegacy
-              user={supervisor}
-              displayUrl={false}
-              size={AVATAR_SIZE}
-              badge={getBadge(assessmentStatus)}
-              onClick={() => dispatch({ type: 'CHANGE_SUPERVISOR_FILTER', payload: supervisor.id })}
-            />
-          </OverlayTrigger>
+            label={`${intl.formatMessage({ id: 'global.assigned.to' })} ${
+              supervisor.username || ''
+            }`}
+            id="avatar-supervisor"
+            className="text-left"
+            style={{ wordBreak: 'break-word' }}>
+            <div>
+              <UserAvatarLegacy
+                user={supervisor}
+                displayUrl={false}
+                size={AVATAR_SIZE}
+                badge={getBadge(assessmentStatus)}
+                onClick={() =>
+                  dispatch({ type: 'CHANGE_SUPERVISOR_FILTER', payload: supervisor.id })
+                }
+              />
+            </div>
+          </Tooltip>
         )}
       </RoleWrapper>
 
       <RoleWrapper>
         {decisionMaker && (
-          <OverlayTrigger
+          <Tooltip
             placement="top"
-            overlay={
-              <Tooltip id="avatar-decisionMaker">
-                {intl.formatMessage({ id: 'global.assigned.to' })} {decisionMaker.username}
-              </Tooltip>
-            }>
-            <UserAvatarLegacy
-              user={decisionMaker}
-              displayUrl={false}
-              size={AVATAR_SIZE}
-              badge={getBadge(decisionStatus)}
-              onClick={() =>
-                dispatch({ type: 'CHANGE_DECISION_MAKER_FILTER', payload: decisionMaker.id })
-              }
-            />
-          </OverlayTrigger>
+            label={`${intl.formatMessage({ id: 'global.assigned.to' })} ${
+              decisionMaker.username || ''
+            }`}
+            id="avatar-decisionMaker"
+            className="text-left"
+            style={{ wordBreak: 'break-word' }}>
+            <div>
+              <UserAvatarLegacy
+                user={decisionMaker}
+                displayUrl={false}
+                size={AVATAR_SIZE}
+                badge={getBadge(decisionStatus)}
+                onClick={() =>
+                  dispatch({ type: 'CHANGE_DECISION_MAKER_FILTER', payload: decisionMaker.id })
+                }
+              />
+            </div>
+          </Tooltip>
         )}
       </RoleWrapper>
     </AnalysisProposalListRoleContainer>

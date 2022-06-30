@@ -71,73 +71,28 @@ exports[`<ProposalUserVoteItem /> should render a support item 1`] = `
     componentClass="div"
     md={1}
   >
-    <ProposalsUserVotesstyle__ButtonDeleteVote
-      aria-label="aria.label.delete-support"
-      className="proposal-vote__delete"
-      disabled={false}
-      id="1-proposal-vote__private-delete"
-      onClick={[Function]}
-      type="button"
-    >
-      <Icon
-        color="#dc3545"
-        name="trash"
-        size={16}
-      />
-    </ProposalsUserVotesstyle__ButtonDeleteVote>
-    <Overlay
-      animation={[Function]}
-      onHide={[Function]}
+    <Popover
+      disclosure={
+        <ButtonQuickAction
+          border="none"
+          className="proposal-vote__delete"
+          disabled={false}
+          icon="TRASH"
+          id="1-proposal-vote__private-delete"
+          label="aria.label.delete-support"
+          variantColor="red"
+        />
+      }
+      id="popover-positioned-right"
       placement="bottom"
-      rootClose={true}
-      show={false}
-      target={null}
-      trigger="click"
+      style={
+        Object {
+          "outline": "none",
+        }
+      }
     >
-      <CapcoPopover
-        id="popover-positioned-right"
-      >
-        <i
-          className="cap cap-attention icon--red"
-        />
-        <FormattedMessage
-          id="support.confirm.delete"
-          values={Object {}}
-        />
-        <div
-          className="mt-10 d-flex justify-content-end"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="default"
-            className="mr-10"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="global.no"
-              values={Object {}}
-            />
-          </Button>
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="danger"
-            className="proposal-vote__delete-confirm"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="btn-delete"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      </CapcoPopover>
-    </Overlay>
+      <Component />
+    </Popover>
   </Col>
 </ProposalsUserVotesstyle__VoteItemContainer>
 `;
@@ -199,73 +154,28 @@ exports[`<ProposalUserVoteItem /> should render a support item without createdAt
     componentClass="div"
     md={1}
   >
-    <ProposalsUserVotesstyle__ButtonDeleteVote
-      aria-label="aria.label.delete-support"
-      className="proposal-vote__delete"
-      disabled={false}
-      id="1-proposal-vote__private-delete"
-      onClick={[Function]}
-      type="button"
-    >
-      <Icon
-        color="#dc3545"
-        name="trash"
-        size={16}
-      />
-    </ProposalsUserVotesstyle__ButtonDeleteVote>
-    <Overlay
-      animation={[Function]}
-      onHide={[Function]}
+    <Popover
+      disclosure={
+        <ButtonQuickAction
+          border="none"
+          className="proposal-vote__delete"
+          disabled={false}
+          icon="TRASH"
+          id="1-proposal-vote__private-delete"
+          label="aria.label.delete-support"
+          variantColor="red"
+        />
+      }
+      id="popover-positioned-right"
       placement="bottom"
-      rootClose={true}
-      show={false}
-      target={null}
-      trigger="click"
+      style={
+        Object {
+          "outline": "none",
+        }
+      }
     >
-      <CapcoPopover
-        id="popover-positioned-right"
-      >
-        <i
-          className="cap cap-attention icon--red"
-        />
-        <FormattedMessage
-          id="support.confirm.delete"
-          values={Object {}}
-        />
-        <div
-          className="mt-10 d-flex justify-content-end"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="default"
-            className="mr-10"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="global.no"
-              values={Object {}}
-            />
-          </Button>
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="danger"
-            className="proposal-vote__delete-confirm"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="btn-delete"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      </CapcoPopover>
-    </Overlay>
+      <Component />
+    </Popover>
   </Col>
 </ProposalsUserVotesstyle__VoteItemContainer>
 `;
@@ -341,73 +251,28 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     componentClass="div"
     md={1}
   >
-    <ProposalsUserVotesstyle__ButtonDeleteVote
-      aria-label="aria-label-delete-vote"
-      className="proposal-vote__delete"
-      disabled={false}
-      id="1-proposal-vote__private-delete"
-      onClick={[Function]}
-      type="button"
-    >
-      <Icon
-        color="#dc3545"
-        name="trash"
-        size={16}
-      />
-    </ProposalsUserVotesstyle__ButtonDeleteVote>
-    <Overlay
-      animation={[Function]}
-      onHide={[Function]}
+    <Popover
+      disclosure={
+        <ButtonQuickAction
+          border="none"
+          className="proposal-vote__delete"
+          disabled={false}
+          icon="TRASH"
+          id="1-proposal-vote__private-delete"
+          label="aria-label-delete-vote"
+          variantColor="red"
+        />
+      }
+      id="popover-positioned-right"
       placement="bottom"
-      rootClose={true}
-      show={false}
-      target={null}
-      trigger="click"
+      style={
+        Object {
+          "outline": "none",
+        }
+      }
     >
-      <CapcoPopover
-        id="popover-positioned-right"
-      >
-        <i
-          className="cap cap-attention icon--red"
-        />
-        <FormattedMessage
-          id="are-you-sure-you-want-to-delete-this-vote"
-          values={Object {}}
-        />
-        <div
-          className="mt-10 d-flex justify-content-end"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="default"
-            className="mr-10"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="global.no"
-              values={Object {}}
-            />
-          </Button>
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="danger"
-            className="proposal-vote__delete-confirm"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="btn-delete"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      </CapcoPopover>
-    </Overlay>
+      <Component />
+    </Popover>
   </Col>
 </ProposalsUserVotesstyle__VoteItemContainer>
 `;

@@ -72,7 +72,7 @@ exports[`<MetaStepNavigationShare /> should render correctly for a ConsultationS
   textAlign="right"
 >
   <MetaStepNavigation__ShareButtonDropdownLegacyInner>
-    <Connect(ShareButtonDropdown)
+    <Connect(ShareButtonDropdownLegacy)
       id="share-button"
       title="Deuxième consultation"
       url="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation"

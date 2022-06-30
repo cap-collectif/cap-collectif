@@ -1,9 +1,9 @@
 // @flow
 import React, { useState } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import EarthIcon from '../Icons/EarthIcon';
 import Menu from '../../DesignSystem/Menu/Menu';
 import Button from '~ds/Button/Button';
+import { ICON_NAME } from '~ds/Icon/Icon';
 
 export type LocaleMap = {|
   translationKey: string,
@@ -45,42 +45,24 @@ const DropdownLanguageButton: StyledComponent<
   background: ${({ backgroundColor }) => `${backgroundColor} ` || 'rgba(108, 117, 125, 0.2)'};
   border: ${props => props.borderless && 'none'};
   border-radius: 4px;
-
-  .caret {
-    align-self: center;
-    margin-left: 6px;
-  }
-`;
-
-const SiteEarthIcon: StyledComponent<{ small: boolean }, {}, typeof EarthIcon> = styled(EarthIcon)`
-  margin-top: 3px;
-  margin-right: ${props => !props.small && '15px'};
-`;
-
-export const Caret: StyledComponent<{ color: string }, {}, HTMLElement> = styled.i`
-  color: ${props => props.color};
-  height: 15px;
-  width: 15px;
-  margin-top: 5px;
-  margin-left: 10px;
 `;
 
 const Placeholder: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 21px;
 `;
+const LanguageTitle: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+  color: initial;
+  text-decoration: none;
+`;
 
 const renderCurrentLanguage = (language: LocaleMap, textColor: string, small: boolean) => (
-  <>
-    <LanguageContainer>
-      <SiteEarthIcon color={textColor} small={small} />
-      {!small && (
-        <Language color={textColor}>
-          <span>{language.translationKey}</span>
-        </Language>
-      )}
-    </LanguageContainer>
-    {!small && <Caret id="language-change-caret" className="cap-arrow-39" color={textColor} />}
-  </>
+  <LanguageContainer>
+    {!small && (
+      <Language color={textColor}>
+        <span>{language.translationKey}</span>
+      </Language>
+    )}
+  </LanguageContainer>
 );
 
 const SiteLanguageChangeButton = ({
@@ -100,7 +82,7 @@ const SiteLanguageChangeButton = ({
   if (!currentLanguage) return null;
 
   return (
-    <Menu placement="top">
+    <Menu placement="top" margin="auto">
       <Menu.Button>
         <DropdownLanguageButton
           id="language-change-button-dropdown"
@@ -108,12 +90,15 @@ const SiteLanguageChangeButton = ({
           maxWidth={maxWidth}
           backgroundColor={backgroundColor}
           borderless={borderless}
+          padding={0}
           variant="primary"
-          variantSize="medium">
+          variantSize="small"
+          leftIcon={ICON_NAME.EARTH}
+          rightIcon={small ? undefined : ICON_NAME.ARROW_DOWN_O}>
           {renderCurrentLanguage(currentLanguage, textColor, small)}
         </DropdownLanguageButton>
       </Menu.Button>
-      <Menu.List>
+      <Menu.List id="language-change-menu-list">
         {languageList
           .filter(language => language.code !== currentLanguage.code || small)
           .sort((l1: LocaleMap, l2: LocaleMap) => {
@@ -133,7 +118,7 @@ const SiteLanguageChangeButton = ({
                 ) : (
                   <Placeholder />
                 ))}
-              <span>{language.translationKey}</span>
+              <LanguageTitle>{language.translationKey}</LanguageTitle>
             </Menu.ListItem>
           ))}
       </Menu.List>

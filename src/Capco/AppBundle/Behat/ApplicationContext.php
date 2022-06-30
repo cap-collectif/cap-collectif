@@ -18,7 +18,6 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Symfony\Component\Process\Process;
 use Behat\Mink\Element\DocumentElement;
 use Capco\AppBundle\Elasticsearch\Client;
-use WebDriver\Exception\ElementNotVisible;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\DebateTrait;
@@ -825,7 +824,13 @@ class ApplicationContext extends UserContext
             $wrapper = $this->getSession()
                 ->getPage()
                 ->find('named', ['id_or_name', $field]);
-            if (!$wrapper || (!$wrapper->hasClass('joditEditor' && (!$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor'))))) {
+            if (
+                !$wrapper ||
+                !$wrapper->hasClass(
+                    'joditEditor' &&
+                        (!$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor'))
+                )
+            ) {
                 throw $e;
             }
             if ($wrapper->hasClass('joditEditor')) {
@@ -1124,7 +1129,7 @@ class ApplicationContext extends UserContext
     public function iSelectLocaleInTheLanguageHeader(string $locale)
     {
         $this->iWaitElementToAppearOnPage('#changeLanguageProposalContainer');
-        $this->iClickElement('#language-change-caret');
+        $this->iClickElement('#language-change-button-dropdown');
         $this->iClickElement("#language-choice-${locale}");
         $this->iClickElement('#language-header-continue-button');
         $this->iWaitElementToDisappearOnPage('#changeLanguageProposalContainer');
@@ -1136,11 +1141,10 @@ class ApplicationContext extends UserContext
      */
     public function iSelectLocaleInTheLanguageFooter(string $locale): void
     {
-        $this->iWaitElementToAppearOnPage('#language-change-button-dropdown');
-        $this->iWaitElementToAppearOnPage('#footer-links #language-change-caret');
-        $this->iClickElement('#footer-links #language-change-caret');
-        $this->iWaitElementToAppearOnPage("#language-choice-${locale}");
-        $this->iClickElement("#language-choice-${locale}");
+        $this->iWaitElementToAppearOnPage('#footer-links #language-change-button-dropdown');
+        $this->iClickElement('#footer-links #language-change-button-dropdown');
+        $this->iWaitElementToAppearOnPage("#language-change-menu-list #language-choice-${locale}");
+        $this->iClickElement("#language-change-menu-list #language-choice-${locale}");
     }
 
     /**

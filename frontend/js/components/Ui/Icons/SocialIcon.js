@@ -9,7 +9,7 @@ type Props = {|
 |};
 
 const SocialIcon = ({ className, name, ...rest }: Props) => (
-  <span className={className}>
+  <span style={{ lineHeight: 'inherit' }} className={className}>
     <Icon name={name} {...rest} />
   </span>
 );

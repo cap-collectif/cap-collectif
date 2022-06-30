@@ -5,35 +5,31 @@ exports[`<CommentDate /> should render correctly 1`] = `
   className="excerpt small"
 >
    • 
-  <OverlayTrigger
-    defaultOverlayShown={false}
+  <Tooltip
+    className="text-left"
+    id="comment-createdAt-tooltip-comment"
     key="comment-createdAt-comment"
-    overlay={
-      <_default
-        id="comment-createdAt-tooltip-comment"
-      >
-        <FormattedDate
-          day="numeric"
-          hour="numeric"
-          minute="numeric"
-          month="long"
-          value={"2018-01-01T23:00:00.000Z"}
-          year="numeric"
-        />
-      </_default>
+    label={
+      <FormattedDate
+        day="numeric"
+        hour="numeric"
+        minute="numeric"
+        month="long"
+        value={"2018-01-01T23:00:00.000Z"}
+        year="numeric"
+      />
     }
     placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
+    style={
+      Object {
+        "wordBreak": "break-word",
+      }
     }
   >
     <span>
       il y a 4 ans
     </span>
-  </OverlayTrigger>
+  </Tooltip>
   <span>
      • 
     <FormattedMessage
@@ -49,35 +45,31 @@ exports[`<CommentDate /> should render correctly with trashed false 1`] = `
   className="excerpt small"
 >
    • 
-  <OverlayTrigger
-    defaultOverlayShown={false}
+  <Tooltip
+    className="text-left"
+    id="comment-createdAt-tooltip-comment"
     key="comment-createdAt-comment"
-    overlay={
-      <_default
-        id="comment-createdAt-tooltip-comment"
-      >
-        <FormattedDate
-          day="numeric"
-          hour="numeric"
-          minute="numeric"
-          month="long"
-          value={"2018-01-01T23:00:00.000Z"}
-          year="numeric"
-        />
-      </_default>
+    label={
+      <FormattedDate
+        day="numeric"
+        hour="numeric"
+        minute="numeric"
+        month="long"
+        value={"2018-01-01T23:00:00.000Z"}
+        year="numeric"
+      />
     }
     placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
+    style={
+      Object {
+        "wordBreak": "break-word",
+      }
     }
   >
     <span>
       il y a 4 ans
     </span>
-  </OverlayTrigger>
+  </Tooltip>
   <span>
      • 
     <FormattedMessage
@@ -93,34 +85,30 @@ exports[`<CommentDate /> should render null with createdAt > publishedAt 1`] = `
   className="excerpt small"
 >
    • 
-  <OverlayTrigger
-    defaultOverlayShown={false}
+  <Tooltip
+    className="text-left"
+    id="comment-createdAt-tooltip-comment"
     key="comment-createdAt-comment"
-    overlay={
-      <_default
-        id="comment-createdAt-tooltip-comment"
-      >
-        <FormattedDate
-          day="numeric"
-          hour="numeric"
-          minute="numeric"
-          month="long"
-          value={"2019-08-01T22:00:00.000Z"}
-          year="numeric"
-        />
-      </_default>
+    label={
+      <FormattedDate
+        day="numeric"
+        hour="numeric"
+        minute="numeric"
+        month="long"
+        value={"2019-08-01T22:00:00.000Z"}
+        year="numeric"
+      />
     }
     placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
+    style={
+      Object {
+        "wordBreak": "break-word",
+      }
     }
   >
     <span>
       il y a 3 ans
     </span>
-  </OverlayTrigger>
+  </Tooltip>
 </span>
 `;

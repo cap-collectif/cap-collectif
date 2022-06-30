@@ -14,7 +14,7 @@ class ProjectUserVotesPage extends Page
         'vote' => '.proposals-user-votes__row',
         'first vote button' =>
             '.proposals-user-votes__table > div:nth-child(1) .proposal-vote__delete',
-        'confirm vote delete' => '.popover-content .proposal-vote__delete-confirm',
+        'confirm vote delete' => '.proposal-vote__delete-confirm',
         'toggle vote access' => ' > div > div > div label span.elegant-toggle',
     ];
 

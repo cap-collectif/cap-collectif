@@ -7,8 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import type { StyledComponent } from 'styled-components';
 import styled from 'styled-components';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
-import { OverlayTrigger } from 'react-bootstrap';
-import Tooltip from '~/components/Utils/Tooltip';
+import { Flex } from '@cap-collectif/ui';
 import toggle from '~/components//Form/Toggle';
 import type { Dispatch, GlobalState } from '~/types';
 import type {
@@ -31,6 +30,7 @@ import { InformationIcon } from '~/components/Admin/Project/Content/ProjectConte
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import { isFloat } from '~/utils/string';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type SelectedCurrentValues = {|
   guestListEnabled: boolean,
@@ -132,7 +132,7 @@ const OptionContainer: StyledComponent<
     label {
       margin-bottom: 0 !important;
     }
-    input[name="maxRegistrations"] {
+    input[name='maxRegistrations'] {
       width: 104px;
       height: 32px;
     }
@@ -485,25 +485,22 @@ export const EventForm = ({
           name="metadescription"
           type="textarea"
           label={
-            <>
+            <Flex direction="row" wrap="nowrap">
               {intl.formatMessage({ id: 'global.meta.description' })}
-              <span className="excerpt inline">
+              <Flex direction="row" wrap="nowrap" className="excerpt inline">
                 {intl.formatMessage({ id: 'global.optional' })}{' '}
-                <OverlayTrigger
-                  key="top"
+                <Tooltip
                   placement="top"
-                  overlay={
-                    <Tooltip
-                      id="tooltip-top"
-                      className="text-left"
-                      style={{ wordBreak: 'break-word' }}>
-                      {intl.formatMessage({ id: 'admin.help.metadescription' })}
-                    </Tooltip>
-                  }>
-                  <InformationIcon />
-                </OverlayTrigger>
-              </span>
-            </>
+                  label={intl.formatMessage({ id: 'admin.help.metadescription' })}
+                  id="tooltip-top"
+                  className="text-left"
+                  style={{ wordBreak: 'break-word' }}>
+                  <div>
+                    <InformationIcon />
+                  </div>
+                </Tooltip>
+              </Flex>
+            </Flex>
           }
           component={component}
           disabled={isDisabled(true)}
@@ -707,25 +704,22 @@ export const EventForm = ({
                 name="customcode"
                 type="textarea"
                 label={
-                  <>
+                  <Flex direction="row" wrap="nowrap">
                     {intl.formatMessage({ id: 'admin.customcode' })}
-                    <span className="excerpt inline">
+                    <Flex direction="row" wrap="nowrap" className="excerpt inline">
                       {intl.formatMessage({ id: 'global.optional' })}{' '}
-                      <OverlayTrigger
-                        key="top"
+                      <Tooltip
                         placement="top"
-                        overlay={
-                          <Tooltip
-                            id="tooltip-top"
-                            className="text-left"
-                            style={{ wordBreak: 'break-word' }}>
-                            {intl.formatMessage({ id: 'admin.help.customcode' })}
-                          </Tooltip>
-                        }>
-                        <InformationIcon />
-                      </OverlayTrigger>
-                    </span>
-                  </>
+                        label={intl.formatMessage({ id: 'admin.help.customcode' })}
+                        id="tooltip-description"
+                        className="text-left"
+                        style={{ wordBreak: 'break-word' }}>
+                        <div>
+                          <InformationIcon />
+                        </div>
+                      </Tooltip>
+                    </Flex>
+                  </Flex>
                 }
                 component={component}
                 disabled={isDisabled(true)}

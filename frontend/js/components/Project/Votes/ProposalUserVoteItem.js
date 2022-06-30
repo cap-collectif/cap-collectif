@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import {
   FormattedDate,
   FormattedNumber,
@@ -9,18 +9,16 @@ import {
   injectIntl,
 } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Button, Col, Overlay } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import moment from 'moment';
+import { ButtonQuickAction, Popover, Button, CapUIIcon } from '@cap-collectif/ui';
 import toggle from '../../Form/Toggle';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
-import Popover from '../../Utils/Popover';
 import type { ProposalUserVoteItem_vote } from '~relay/ProposalUserVoteItem_vote.graphql';
 import type { ProposalUserVoteItem_step } from '~relay/ProposalUserVoteItem_step.graphql';
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-import colors from '~/utils/colors';
-import { ButtonDeleteVote, VoteItemContainer } from './ProposalsUserVotes.style';
+import { VoteItemContainer } from './ProposalsUserVotes.style';
 
 type Props = {|
   vote: ProposalUserVoteItem_vote,
@@ -40,8 +38,6 @@ export const ProposalUserVoteItem = ({
   vote,
 }: Props) => {
   const { proposal } = vote;
-  const target = useRef(null);
-  const [show, setShow] = useState<boolean>(false);
 
   const colTitleWidth = () => {
     if (step.votesRanking === true && step.voteType === 'BUDGET') {
@@ -157,55 +153,64 @@ export const ProposalUserVoteItem = ({
       </Col>
       {onDelete && (
         <Col md={1} className="proposal-vote__delete-container">
-          <ButtonDeleteVote
-            ref={target}
-            id={`${proposal.id}-proposal-vote__private-delete`}
-            type="button"
-            onClick={() => setShow(!show)}
-            disabled={!step.open}
-            className="proposal-vote__delete"
-            aria-label={intl.formatMessage(
-              isInterpellationContextFromStep(step)
-                ? { id: 'aria.label.delete-support' }
-                : { id: 'aria-label-delete-vote' },
-            )}>
-            <Icon name={ICON_NAME.trash} size={16} color={colors.dangerColor} />
-          </ButtonDeleteVote>
-          <Overlay
-            trigger="click"
-            onHide={() => setShow(false)}
+          <Popover
+            style={{ outline: 'none' }}
+            id="popover-positioned-right"
             placement="bottom"
-            target={target.current}
-            rootClose
-            show={show}>
-            <Popover id="popover-positioned-right">
-              <i className="cap cap-attention icon--red" />
-              <FormattedMessage
-                id={
+            disclosure={
+              <ButtonQuickAction
+                variantColor="red"
+                border="none"
+                label={intl.formatMessage(
                   isInterpellationContextFromStep(step)
-                    ? 'support.confirm.delete'
-                    : 'are-you-sure-you-want-to-delete-this-vote'
-                }
-              />
-              <div className="mt-10 d-flex justify-content-end">
-                <Button bsStyle="default" onClick={() => setShow(false)} className="mr-10">
-                  <FormattedMessage id="global.no" />
-                </Button>
-                {onDelete && (
-                  <Button
-                    bsStyle="danger"
-                    onClick={() => {
-                      onDelete();
-                      setShow(false);
-                    }}
-                    className="proposal-vote__delete-confirm"
-                    disabled={!step.open}>
-                    <FormattedMessage id="btn-delete" />
-                  </Button>
+                    ? { id: 'aria.label.delete-support' }
+                    : { id: 'aria-label-delete-vote' },
                 )}
-              </div>
-            </Popover>
-          </Overlay>
+                icon={CapUIIcon.Trash}
+                id={`${proposal.id}-proposal-vote__private-delete`}
+                disabled={!step.open}
+                className="proposal-vote__delete"
+              />
+            }>
+            {({ closePopover }) => (
+              <>
+                <Popover.Body>
+                  <i className="cap cap-attention icon--red" />
+                  <FormattedMessage
+                    id={
+                      isInterpellationContextFromStep(step)
+                        ? 'support.confirm.delete'
+                        : 'are-you-sure-you-want-to-delete-this-vote'
+                    }
+                  />
+                </Popover.Body>
+                <Popover.Footer>
+                  <Button
+                    variant="primary"
+                    variantColor="primary"
+                    className="mr-10"
+                    onClick={() => {
+                      closePopover();
+                    }}>
+                    <FormattedMessage id="global.no" />
+                  </Button>
+                  {onDelete && (
+                    <Button
+                      variant="primary"
+                      variantColor="danger"
+                      onClick={() => {
+                        onDelete();
+                        closePopover();
+                      }}
+                      className="proposal-vote__delete-confirm"
+                      disabled={!step.open}>
+                      <FormattedMessage id="btn-delete" />
+                    </Button>
+                  )}
+                </Popover.Footer>
+              </>
+            )}
+          </Popover>
         </Col>
       )}
     </VoteItemContainer>

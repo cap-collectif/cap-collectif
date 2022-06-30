@@ -4,12 +4,12 @@ import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import { Field } from 'redux-form';
-import { OverlayTrigger } from 'react-bootstrap';
 import toggle from '../../../Form/Toggle';
-import Tooltip from '~/components/Utils/Tooltip';
 import type { ProjectProposalsAdminForm_project } from '~relay/ProjectProposalsAdminForm_project.graphql';
 import { ProjectBoxHeader, ProjectBoxContainer } from '../Form/ProjectAdminForm.style';
 import { InformationIcon } from '~/components/Admin/Project/Content/ProjectContentAdminForm';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -45,24 +45,21 @@ export const ProjectProposalsAdminForm = ({ intl }: Props) => (
           name="opinionCanBeFollowed"
           normalize={val => !!val}
           label={
-            <div>
+            <Flex direction="row" wrap="nowrap">
               {intl.formatMessage({ id: 'activity-tracking' })}
               <span className="excerpt inline">
-                <OverlayTrigger
-                  key="top"
+                <Tooltip
                   placement="top"
-                  overlay={
-                    <Tooltip
-                      id="tooltip-top"
-                      className="text-left"
-                      style={{ wordBreak: 'break-word' }}>
-                      {intl.formatMessage({ id: 'activity-tracking-help-text' })}
-                    </Tooltip>
-                  }>
-                  <ActivityInformationIcon />
-                </OverlayTrigger>
+                  label={intl.formatMessage({ id: 'activity-tracking-help-text' })}
+                  id="tooltip-description"
+                  className="text-left"
+                  style={{ wordBreak: 'break-word' }}>
+                  <div>
+                    <ActivityInformationIcon />
+                  </div>
+                </Tooltip>
               </span>
-            </div>
+            </Flex>
           }
         />
       </div>

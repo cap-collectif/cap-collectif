@@ -24,7 +24,7 @@ type Props = {|
   disabled?: boolean,
 |};
 
-const ShareButtonDropdown = ({
+const ShareButtonDropdownLegacy = ({
   id = 'share-button',
   title = '',
   url,
@@ -95,7 +95,7 @@ const ShareButtonDropdown = ({
           style={{
             color: colors.black,
             backgroundColor: colors.white,
-            padding: '6px 12px',
+            padding: '0px 12px',
             fontWeight: 400,
           }}
           id={id}
@@ -107,7 +107,6 @@ const ShareButtonDropdown = ({
             <Icon name={ICON_NAME.SHARE} size={bsSize === 'xs' ? ICON_SIZE.XS : ICON_SIZE.SM} />
           }
           variant="tertiary"
-          variantSize="medium"
           variantColor="hierarchy">
           {intl.formatMessage({ id: 'global.share' })}
         </Button>
@@ -128,4 +127,4 @@ const mapStateToProps = (state: GlobalState) => ({
   enabled: state.default.features.share_buttons,
 });
 
-export default connect<any, any, _, _, _, _>(mapStateToProps)(ShareButtonDropdown);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ShareButtonDropdownLegacy);

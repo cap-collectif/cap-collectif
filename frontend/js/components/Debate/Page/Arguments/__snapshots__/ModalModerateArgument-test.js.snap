@@ -1,3 +1,180 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `null`;
+exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
+<div
+  aria-modal="true"
+  data-dialog="true"
+  id="id-1"
+  role="dialog"
+  tabindex="-1"
+>
+  <div
+    class="sc-bdnxRM duLURM Modal__ModalContainerInner-gRLtaR"
+    style="opacity:0"
+  >
+    <div
+      aria-labelledby="modal-title"
+      class="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda ModalModerateArgument__ModalContainer-aka-Dt hrZTXB ModalModerateArgument__ModalContainer-aka-Dt hrZTXB"
+      style="opacity:0;transform:translateY(-20px) translateZ(0)"
+    >
+      <header
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+      >
+        <div
+          class="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+        >
+          <h2
+            class="sc-bdnxRM fenvOW"
+            id="modal-title"
+          >
+            moderate-argument
+          </h2>
+        </div>
+        <button
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
+          type="button"
+        >
+          <iconmock
+            class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
+          />
+        </button>
+      </header>
+      <main
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+      >
+        <form
+          id="moderate-form"
+        >
+          <div
+            class="sc-bdnxRM form-group"
+          >
+            <div
+              class="Togglestyle__ToggleContainer-bAFtsA ymDGz toggle-container"
+            >
+              <div>
+                <label
+                  class="Togglestyle__LabelContainer-nyUOg beKyY unchecked labelContainer"
+                  for="toggle-isVisible"
+                >
+                  <div
+                    class="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                    id="TOGGLE_hideContent"
+                  >
+                    <span
+                      class="circle-toggler"
+                    />
+                  </div>
+                  <span
+                    class="label-toggler"
+                  >
+                    <div>
+                      toggle.hide.content
+                      <div
+                        aria-describedby="id-2"
+                        tabindex="0"
+                      >
+                        <iconmock
+                          aria-hidden="true"
+                          class="ml-5"
+                          fill="#acacac"
+                          height="12"
+                          style="vertical-align:middle;flex-shrink:0"
+                          width="12"
+                        />
+                      </div>
+                      <div
+                        class="cap-tooltip"
+                        id="id-2"
+                        role="tooltip"
+                        style="position:fixed;left:100%;top:100%;z-index:1100;pointer-events:none"
+                      >
+                        <div
+                          class="sc-bdnxRM dOpKpO cap-tooltip text-left"
+                          id="tooltip-description"
+                          style="word-break:break-word;opacity:0"
+                        >
+                          <div
+                            class="Tooltip__Arrow-kQwTtI hMJWpD"
+                            style="font-size:16px;width:1em;height:1em;pointer-events:none;top:100%"
+                          >
+                            <svg
+                              style="transform:rotateZ(180deg)"
+                              viewBox="0 0 30 30"
+                            >
+                              <path
+                                class="stroke"
+                                d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+                              />
+                              <path
+                                class="fill"
+                                d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+                              />
+                            </svg>
+                          </div>
+                          <p
+                            class="sc-bdnxRM ehoPif"
+                          >
+                            tooltip.explanation.hide.content
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                </label>
+                <input
+                  id="toggle-isVisible"
+                  name="hideContent"
+                  type="checkbox"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+              for="reason"
+              id="label-reason"
+              type="label"
+            >
+              global.moderation.reason 
+              <span
+                class="excerpt"
+              >
+                global.optional
+              </span>
+            </label>
+            <input
+              aria-describedby="label-reason "
+              aria-invalid="false"
+              class="form-control"
+              id="reason"
+              name="reason"
+              type="text"
+              value=""
+            />
+          </div>
+        </form>
+      </main>
+      <footer
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+      >
+        <button
+          class="btn btn-default"
+          id=""
+          type="button"
+        >
+          editor.undo
+        </button>
+        <button
+          class="btn btn-danger"
+          type="submit"
+        >
+          move.contribution.to.trash
+        </button>
+      </footer>
+    </div>
+  </div>
+</div>
+`;

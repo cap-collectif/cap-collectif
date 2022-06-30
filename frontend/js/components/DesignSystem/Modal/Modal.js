@@ -41,7 +41,7 @@ const ModalContainerInner = styled(motion.custom(AppBox)).attrs(({ zIndex }) => 
   bottom: 0,
   top: 0,
   p: [0, 4],
-  pt: [2, 4],
+  pt: [2, 9],
   zIndex,
   display: 'flex',
   flexDirection: 'column',

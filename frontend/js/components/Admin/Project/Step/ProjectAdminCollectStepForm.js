@@ -47,13 +47,18 @@ type Props = {|
 |};
 
 export const StepVisibilityDropdown: StyledComponent<{}, {}, typeof Button> = styled(Button)`
-  margin-top: 15px;
-  background-color: #f4f4f4;
+  margin-top: 10px;
+  height: 38px;
   color: #444;
   border-color: #ddd;
-  &:hover {
+  &:hover,
+  &:active {
     color: #444;
     border-color: #ddd;
+    background-color: #fff;
+  }
+  &:focus {
+    outline: none !important;
   }
   & svg {
     color: #444;
@@ -176,14 +181,14 @@ export const ProjectAdminCollectStepForm = ({
                     className="dropdown-toggle btn btn-default"
                     rightIcon={ICON_NAME.ARROW_DOWN_O}
                     variant="secondary"
-                    variantSize="small">
+                    variantSize="small"
+                    variantColor="hierarchy">
                     <FormattedMessage id={isPrivate ? 'global-restricted' : 'public'} />
                   </StepVisibilityDropdown>
                 </Menu.Button>
                 <Menu.List>
                   <Menu.ListItem
                     as="li"
-                    style={{ paddingBottom: 0, paddingRight: 0 }}
                     id="public-collect"
                     onClick={() => {
                       dispatch(change(formName, 'private', false));
@@ -195,7 +200,6 @@ export const ProjectAdminCollectStepForm = ({
                   </Menu.ListItem>
                   <Menu.ListItem
                     as="li"
-                    style={{ paddingBottom: 0, paddingRight: 0 }}
                     id="private-collect"
                     onClick={() => {
                       dispatch(change(formName, 'private', true));

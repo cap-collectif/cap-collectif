@@ -10,51 +10,51 @@ exports[`<StepArticle /> renders correctly 1`] = `
     color="gray.900"
     fontWeight="bold"
   >
-    <p>
+    <ForwardRef
+      direction="row"
+      wrap="nowrap"
+    >
       <Text
         as="span"
         fontWeight="bold"
       >
         related.articles
       </Text>
-      <Text
+      <ForwardRef
+        align="center"
         as="span"
         color="gray.500"
+        direction="row"
         fontWeight="normal"
+        marginLeft={1}
+        wrap="nowrap"
       >
         global.optional
-        <OverlayTrigger
-          defaultOverlayShown={false}
-          key="top"
-          overlay={
-            <_default
-              className="text-left"
-              id="tooltip-top"
-              style={
-                Object {
-                  "wordBreak": "break-word",
-                }
-              }
-            >
-              <FormattedHTMLMessage
-                id="helpText.add.press.articles"
-                tagName="span"
-                values={Object {}}
-              />
-            </_default>
+        <Tooltip
+          className="text-left"
+          id="tooltip-top"
+          label={
+            <FormattedHTMLMessage
+              id="helpText.add.press.articles"
+              tagName="span"
+              values={Object {}}
+            />
           }
           placement="top"
-          trigger={
-            Array [
-              "hover",
-              "focus",
-            ]
+          style={
+            Object {
+              "wordBreak": "break-word",
+            }
           }
         >
-          <ProjectContentAdminForm__InformationIcon />
-        </OverlayTrigger>
-      </Text>
-    </p>
+          <ForwardRef
+            marginLeft={1}
+          >
+            <ProjectContentAdminForm__InformationIcon />
+          </ForwardRef>
+        </Tooltip>
+      </ForwardRef>
+    </ForwardRef>
   </Text>
   <FieldArray
     component={[Function]}
@@ -85,51 +85,51 @@ exports[`<StepArticle /> renders correctly when no articles 1`] = `
     color="gray.900"
     fontWeight="bold"
   >
-    <p>
+    <ForwardRef
+      direction="row"
+      wrap="nowrap"
+    >
       <Text
         as="span"
         fontWeight="bold"
       >
         related.articles
       </Text>
-      <Text
+      <ForwardRef
+        align="center"
         as="span"
         color="gray.500"
+        direction="row"
         fontWeight="normal"
+        marginLeft={1}
+        wrap="nowrap"
       >
         global.optional
-        <OverlayTrigger
-          defaultOverlayShown={false}
-          key="top"
-          overlay={
-            <_default
-              className="text-left"
-              id="tooltip-top"
-              style={
-                Object {
-                  "wordBreak": "break-word",
-                }
-              }
-            >
-              <FormattedHTMLMessage
-                id="helpText.add.press.articles"
-                tagName="span"
-                values={Object {}}
-              />
-            </_default>
+        <Tooltip
+          className="text-left"
+          id="tooltip-top"
+          label={
+            <FormattedHTMLMessage
+              id="helpText.add.press.articles"
+              tagName="span"
+              values={Object {}}
+            />
           }
           placement="top"
-          trigger={
-            Array [
-              "hover",
-              "focus",
-            ]
+          style={
+            Object {
+              "wordBreak": "break-word",
+            }
           }
         >
-          <ProjectContentAdminForm__InformationIcon />
-        </OverlayTrigger>
-      </Text>
-    </p>
+          <ForwardRef
+            marginLeft={1}
+          >
+            <ProjectContentAdminForm__InformationIcon />
+          </ForwardRef>
+        </Tooltip>
+      </ForwardRef>
+    </ForwardRef>
   </Text>
   <FieldArray
     component={[Function]}

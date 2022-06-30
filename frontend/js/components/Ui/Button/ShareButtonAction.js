@@ -15,12 +15,27 @@ class ShareButtonAction extends React.Component<Props> {
 
     return (
       <Menu.Item
+        _hover={{
+          color: 'initial',
+          textDecoration: 'none',
+        }}
         as="a"
         href="#"
         className="share-option"
-        onClick={onSelect}
-        style={{ marginBottom: 'unset' }}>
-        <Flex>
+        onClick={(e: SyntheticEvent<HTMLAnchorElement>) => {
+          e.preventDefault();
+          if (onSelect) {
+            onSelect();
+          }
+        }}
+        name={`share.${action}`}
+        style={{
+          marginBottom: 'unset',
+          lineHeight: 'inherit',
+          background: 'transparent',
+          borderColor: 'transparent',
+        }}>
+        <Flex spacing={1}>
           <SocialIcon name={action} size={16} />
           <FormattedMessage id={`share.${action}`} />
         </Flex>

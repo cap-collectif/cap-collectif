@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import toggle from '~/components/Form/Toggle';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import component from '~/components/Form/Field';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 export const formName = 'moderate-form';
 
@@ -31,21 +31,22 @@ const ModerateForm: React.StatelessFunctionalComponent<Props> = ({ handleSubmit 
         label={
           <div>
             <FormattedMessage id="toggle.hide.content" />
-
-            <OverlayTrigger
-              placement="top"
-              overlay={
-                <Tooltip id="tooltip-description" className="text-left">
-                  {intl.formatMessage({ id: 'tooltip.explanation.hide.content' })}
-                </Tooltip>
-              }>
-              <Icon
-                name={ICON_NAME.information}
-                size={12}
-                color={colors.iconGrayColor}
-                className="ml-5"
-              />
-            </OverlayTrigger>
+            <Tooltip
+              visible
+              placement="bottom"
+              label={intl.formatMessage({ id: 'tooltip.explanation.hide.content' })}
+              id="tooltip-description"
+              className="text-left"
+              style={{ wordBreak: 'break-word' }}>
+              <div>
+                <Icon
+                  name={ICON_NAME.information}
+                  size={12}
+                  color={colors.iconGrayColor}
+                  className="ml-5"
+                />
+              </div>
+            </Tooltip>
           </div>
         }
       />

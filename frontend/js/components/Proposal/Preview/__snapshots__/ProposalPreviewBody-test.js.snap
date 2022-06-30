@@ -201,7 +201,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
         }
       }
     />
-    <Relay(ProposalFollowButton)
+    <ProposalFollowButton
       isAuthenticated={true}
       proposal={
         Object {

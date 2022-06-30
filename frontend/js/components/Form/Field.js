@@ -72,7 +72,6 @@ type Props = {|
   min?: ?number,
   max?: ?number,
   id: string,
-  popover?: Object,
   choices?: Array<$FlowFixMe>,
   radioChecked?: boolean,
   input: {|
@@ -122,7 +121,6 @@ class Field extends React.Component<Props> {
     const {
       meta: { touched, dirty, error, warning },
       input,
-      popover,
       children,
       id,
       autoComplete,
@@ -210,7 +208,6 @@ class Field extends React.Component<Props> {
         description={description}
         formName={formName}
         disabled={disabled}
-        popover={popover}
         addonAfter={addonAfter}
         image={radioImage ? radioImage.url : null}
         addonBefore={addonBefore}

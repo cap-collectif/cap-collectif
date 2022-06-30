@@ -12,32 +12,44 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     type="hidden"
     value="fr-FR"
   />
-  <Field
-    ariaRequired={true}
-    autoComplete="email"
-    component={[Function]}
-    disabled={false}
-    id="email"
-    label={
-      <FormattedMessage
-        id="global.email"
-        values={Object {}}
-      />
-    }
-    labelClassName="font-weight-normal"
-    name="email"
-    placeholder="global.placeholder.email"
-    popover={
-      Object {
-        "id": "registration-email-tooltip",
-        "message": <FormattedMessage
+  <Popover
+    id="registration-email-tooltip"
+    keepOnHover={true}
+    placement="right"
+    useArrow={true}
+  >
+    <Popover.Trigger>
+      <div>
+        <Field
+          ariaRequired={true}
+          autoComplete="email"
+          component={[Function]}
+          disabled={false}
+          id="email"
+          label={
+            <FormattedMessage
+              id="global.email"
+              values={Object {}}
+            />
+          }
+          labelClassName="font-weight-normal"
+          name="email"
+          placeholder="global.placeholder.email"
+          type="email"
+        />
+      </div>
+    </Popover.Trigger>
+    <Popover.Content>
+      <Popover.Body
+        marginBottom={0}
+      >
+        <FormattedMessage
           id="registration.tooltip.email"
           values={Object {}}
-        />,
-      }
-    }
-    type="email"
-  />
+        />
+      </Popover.Body>
+    </Popover.Content>
+  </Popover>
   <Connect(UserPasswordField)
     ariaRequired={true}
     autoComplete="off"
@@ -184,32 +196,44 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     type="hidden"
     value="fr-FR"
   />
-  <Field
-    ariaRequired={true}
-    autoComplete="email"
-    component={[Function]}
-    disabled={false}
-    id="email"
-    label={
-      <FormattedMessage
-        id="global.email"
-        values={Object {}}
-      />
-    }
-    labelClassName="font-weight-normal"
-    name="email"
-    placeholder="global.placeholder.email"
-    popover={
-      Object {
-        "id": "registration-email-tooltip",
-        "message": <FormattedMessage
+  <Popover
+    id="registration-email-tooltip"
+    keepOnHover={true}
+    placement="right"
+    useArrow={true}
+  >
+    <Popover.Trigger>
+      <div>
+        <Field
+          ariaRequired={true}
+          autoComplete="email"
+          component={[Function]}
+          disabled={false}
+          id="email"
+          label={
+            <FormattedMessage
+              id="global.email"
+              values={Object {}}
+            />
+          }
+          labelClassName="font-weight-normal"
+          name="email"
+          placeholder="global.placeholder.email"
+          type="email"
+        />
+      </div>
+    </Popover.Trigger>
+    <Popover.Content>
+      <Popover.Body
+        marginBottom={0}
+      >
+        <FormattedMessage
           id="registration.tooltip.email"
           values={Object {}}
-        />,
-      }
-    }
-    type="email"
-  />
+        />
+      </Popover.Body>
+    </Popover.Content>
+  </Popover>
   <Connect(UserPasswordField)
     ariaRequired={true}
     autoComplete="off"
@@ -393,32 +417,44 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     type="hidden"
     value="fr-FR"
   />
-  <Field
-    ariaRequired={true}
-    autoComplete="email"
-    component={[Function]}
-    disabled={false}
-    id="email"
-    label={
-      <FormattedMessage
-        id="global.email"
-        values={Object {}}
-      />
-    }
-    labelClassName="font-weight-normal"
-    name="email"
-    placeholder="global.placeholder.email"
-    popover={
-      Object {
-        "id": "registration-email-tooltip",
-        "message": <FormattedMessage
+  <Popover
+    id="registration-email-tooltip"
+    keepOnHover={true}
+    placement="right"
+    useArrow={true}
+  >
+    <Popover.Trigger>
+      <div>
+        <Field
+          ariaRequired={true}
+          autoComplete="email"
+          component={[Function]}
+          disabled={false}
+          id="email"
+          label={
+            <FormattedMessage
+              id="global.email"
+              values={Object {}}
+            />
+          }
+          labelClassName="font-weight-normal"
+          name="email"
+          placeholder="global.placeholder.email"
+          type="email"
+        />
+      </div>
+    </Popover.Trigger>
+    <Popover.Content>
+      <Popover.Body
+        marginBottom={0}
+      >
+        <FormattedMessage
           id="registration.tooltip.email"
           values={Object {}}
-        />,
-      }
-    }
-    type="email"
-  />
+        />
+      </Popover.Body>
+    </Popover.Content>
+  </Popover>
   <Connect(UserPasswordField)
     ariaRequired={true}
     autoComplete="off"

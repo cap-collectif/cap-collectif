@@ -1,9 +1,10 @@
 // @flow
 import * as React from 'react';
-import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Field, reduxForm, submit } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
+import Modal from '~ds/Modal/Modal';
 import CloseButton from '~/components/Form/CloseButton';
 import toggle from '~/components/Form/Toggle';
 import renderInput from '~/components/Form/Field';
@@ -13,6 +14,9 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import type { ModalDeleteProposal_proposal } from '~relay/ModalDeleteProposal_proposal.graphql';
+import Heading from '~ui/Primitives/Heading';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 const formName = 'form-proposal-trash';
 
@@ -58,16 +62,13 @@ const ModalDeleteProposal = ({ onClose, show, handleSubmit, dispatch }: Props) =
   const intl = useIntl();
   return (
     <ModalDeleteProposalContainer
-      animation={false}
       show={show}
-      onHide={onClose}
-      bsSize="large"
-      aria-labelledby="contained-modal-title-lg"
-      dialogClassName="modal-delete-proposal-dialog">
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-lg">
+      onClose={onClose}
+      ariaLabel={intl.formatMessage({ id: 'move.contribution.to.trash' })}>
+      <Modal.Header>
+        <Heading id="contained-modal-title-lg">
           <FormattedMessage id="move.contribution.to.trash" />
-        </Modal.Title>
+        </Heading>
       </Modal.Header>
       <Modal.Body>
         <form id={formName} onSubmit={handleSubmit}>
@@ -79,24 +80,24 @@ const ModalDeleteProposal = ({ onClose, show, handleSubmit, dispatch }: Props) =
             id="toggle-isVisible"
             normalize={val => !!val}
             label={
-              <div>
+              <Flex direction="row" wrap="nowrap">
                 <FormattedMessage id="toggle.hide.content" />
-
-                <OverlayTrigger
-                  placement="top"
-                  overlay={
-                    <Tooltip id="tooltip-description" className="text-left">
-                      {intl.formatMessage({ id: 'tooltip.explanation.hide.content' })}
-                    </Tooltip>
-                  }>
-                  <Icon
-                    name={ICON_NAME.information}
-                    size={12}
-                    color={colors.iconGrayColor}
-                    className="ml-5"
-                  />
-                </OverlayTrigger>
-              </div>
+                <Tooltip
+                  placement="bottom"
+                  label={intl.formatMessage({ id: 'tooltip.explanation.hide.content' })}
+                  id="tooltip-description"
+                  className="text-left"
+                  style={{ wordBreak: 'break-word' }}>
+                  <div>
+                    <Icon
+                      name={ICON_NAME.information}
+                      size={12}
+                      color={colors.iconGrayColor}
+                      className="ml-5"
+                    />
+                  </div>
+                </Tooltip>
+              </Flex>
             }
           />
 
@@ -116,7 +117,7 @@ const ModalDeleteProposal = ({ onClose, show, handleSubmit, dispatch }: Props) =
           />
         </form>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer spacing={2}>
         <CloseButton onClose={onClose} label="editor.undo" />
 
         <Button type="submit" bsStyle="danger" onClick={() => dispatch(submit(formName))}>

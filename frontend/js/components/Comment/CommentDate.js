@@ -2,10 +2,9 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedDate, FormattedMessage } from 'react-intl';
-import { OverlayTrigger } from 'react-bootstrap';
 import moment from 'moment';
+import { Tooltip } from '@cap-collectif/ui';
 import type { CommentDate_comment } from '~relay/CommentDate_comment.graphql';
-import Tooltip from '~/components/Utils/Tooltip';
 
 type Props = {
   comment: CommentDate_comment,
@@ -19,23 +18,24 @@ export class CommentDate extends React.Component<Props> {
     }
 
     return (
-      <OverlayTrigger
+      <Tooltip
         key={`comment-createdAt-${comment.id}`}
         placement="top"
-        overlay={
-          <Tooltip id={`comment-createdAt-tooltip-${comment.id}`}>
-            <FormattedDate
-              value={moment(comment.createdAt)}
-              day="numeric"
-              month="long"
-              year="numeric"
-              hour="numeric"
-              minute="numeric"
-            />
-          </Tooltip>
-        }>
+        label={
+          <FormattedDate
+            value={moment(comment.createdAt)}
+            day="numeric"
+            month="long"
+            year="numeric"
+            hour="numeric"
+            minute="numeric"
+          />
+        }
+        id={`comment-createdAt-tooltip-${comment.id}`}
+        className="text-left"
+        style={{ wordBreak: 'break-word' }}>
         <span>{moment(comment.createdAt).fromNow()}</span>
-      </OverlayTrigger>
+      </Tooltip>
     );
   };
 

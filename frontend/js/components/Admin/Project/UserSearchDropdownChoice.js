@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import { useIntl } from 'react-intl';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import type { UserSearchDropdownChoice_user } from '~relay/UserSearchDropdownChoice_user.graphql';
 import DropdownSelectChoice from '~ui/DropdownSelect/choice';
@@ -11,6 +10,7 @@ import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { TYPE_ROLE } from '~/constants/AnalyseConstants';
 import type { GlobalState } from '~/types';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type Props = {|
   +isIndeterminate?: boolean,
@@ -58,24 +58,25 @@ const UserSearchDropdownChoice = ({
       </div>
 
       {disabled && (
-        <OverlayTrigger
+        <Tooltip
           key="explication"
           placement="top"
-          overlay={
-            <Tooltip id="tooltip-disabled">
-              {intl.formatMessage(
-                {
-                  id:
-                    type === TYPE_ROLE.SUPERVISOR
-                      ? 'tooltip.help.text.unassign.supervisor'
-                      : 'tooltip.help.text.unassign.analyst',
-                },
-                { email: emailNotification },
-              )}
-            </Tooltip>
-          }>
-          <Icon name={ICON_NAME.warning} size="15" />
-        </OverlayTrigger>
+          label={intl.formatMessage(
+            {
+              id:
+                type === TYPE_ROLE.SUPERVISOR
+                  ? 'tooltip.help.text.unassign.supervisor'
+                  : 'tooltip.help.text.unassign.analyst',
+            },
+            { email: emailNotification },
+          )}
+          id="tooltip-description"
+          className="text-left"
+          style={{ wordBreak: 'break-word' }}>
+          <div>
+            <Icon name={ICON_NAME.warning} size="15" />
+          </div>
+        </Tooltip>
       )}
     </UserSearchDropdownChoiceContainer>
   );

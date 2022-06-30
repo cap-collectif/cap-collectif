@@ -2,10 +2,10 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Button, Modal, OverlayTrigger } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import type { OpinionBodyDiffModal_modal } from '~relay/OpinionBodyDiffModal_modal.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
-import Tooltip from '../Utils/Tooltip';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type Props = {
   link: string,
@@ -33,17 +33,17 @@ class OpinionBodyDiffModal extends React.Component<Props, State> {
 
     return (
       <span>
-        <OverlayTrigger
+        <Tooltip
+          label={<FormattedMessage id="opinion.diff.tooltip" />}
+          id="diff-modal-tooltip"
           placement="top"
-          overlay={
-            <Tooltip id="diff-modal-tooltip" placement="top" className="in">
-              <FormattedMessage id="opinion.diff.tooltip" />
-            </Tooltip>
-          }>
+          className="in"
+          style={{ wordBreak: 'break-word' }}>
           <Button bsStyle="link" onClick={() => this.open()}>
             {link}
           </Button>
-        </OverlayTrigger>
+        </Tooltip>
+
         <Modal show={showModal} onHide={() => this.close()}>
           <Modal.Header closeButton>
             <Modal.Title>{modal.title}</Modal.Title>

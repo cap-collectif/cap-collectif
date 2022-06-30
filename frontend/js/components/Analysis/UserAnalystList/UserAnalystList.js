@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import UserAvatarList from '~ui/List/UserAvatarList';
 import { AVATAR_SIZE } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style';
 import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
@@ -12,6 +11,7 @@ import UserAnalystListContainer, {
 } from '~/components/Analysis/UserAnalystList/UserAnalystList.style';
 import UserAnalystListHidden from '~/components/Analysis/UserAnalystListHidden/UserAnalystListHidden';
 import { getStatus, getBadge, getHeadStatus } from './UserAnalyst.utils';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 export const MAX_AVATAR_DISPLAY = 3;
 
@@ -38,22 +38,23 @@ const UserAnalystList = ({ proposal, dispatch }: Props) => {
         avatarSize={AVATAR_SIZE}
         hasHiddenAvatarTooltip>
         {analystsDisplay.map(analyst => (
-          <OverlayTrigger
+          <Tooltip
             key={`analyst-${analyst.id}`}
             placement="top"
-            overlay={
-              <Tooltip id={`avatar-analyst-${analyst.id}`}>
-                {intl.formatMessage({ id: 'global.assigned.to' })} {analyst.username}
-              </Tooltip>
-            }>
-            <UserAvatarLegacy
-              user={analyst}
-              displayUrl={false}
-              size={AVATAR_SIZE}
-              badge={getBadge(getStatus(analyses, analyst.id, decisionState, assessmentState))}
-              onClick={() => dispatch({ type: 'CHANGE_ANALYSTS_FILTER', payload: [analyst.id] })}
-            />
-          </OverlayTrigger>
+            label={`${intl.formatMessage({ id: 'global.assigned.to' })} ${analyst.username || ''}`}
+            id={`avatar-analyst-${analyst.id}`}
+            className="text-left"
+            style={{ wordBreak: 'break-word' }}>
+            <div>
+              <UserAvatarLegacy
+                user={analyst}
+                displayUrl={false}
+                size={AVATAR_SIZE}
+                badge={getBadge(getStatus(analyses, analyst.id, decisionState, assessmentState))}
+                onClick={() => dispatch({ type: 'CHANGE_ANALYSTS_FILTER', payload: [analyst.id] })}
+              />
+            </div>
+          </Tooltip>
         ))}
       </UserAvatarList>
       {analysts && analysts.length > MAX_AVATAR_DISPLAY && (

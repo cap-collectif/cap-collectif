@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import { Button, OverlayTrigger } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import type { GroupAdminParameters_group } from '~relay/GroupAdminParameters_group.graphql';
 import AlertForm from '../../Alert/AlertForm';
 import DeleteGroupMutation from '../../../mutations/DeleteGroupMutation';
@@ -14,8 +14,8 @@ import type { Dispatch, GlobalState } from '~/types';
 import UpdateGroupMutation from '../../../mutations/UpdateGroupMutation';
 import GroupForm from '../GroupForm';
 import DeleteModal from '../../Modal/DeleteModal';
-import Tooltip from '~/components/Utils/Tooltip';
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type RelayProps = {|
   group: GroupAdminParameters_group,
@@ -103,18 +103,18 @@ export const GroupAdminParameters = ({
             }}
           />
           {group.isUsedInEmailing ? (
-            <OverlayTrigger
-              key="top"
+            <Tooltip
               placement="top"
-              overlay={
-                <Tooltip id="tooltip-top" className="text-left" style={{ wordBreak: 'break-word' }}>
-                  {intl.formatMessage({ id: 'group-used-in-mailinglist' })}
-                </Tooltip>
-              }>
-              <Button bsStyle="danger" onClick={onOpen} disabled>
-                <i className="fa fa-trash" /> {intl.formatMessage({ id: 'global.delete' })}
-              </Button>
-            </OverlayTrigger>
+              label={intl.formatMessage({ id: 'group-used-in-mailinglist' })}
+              id="tooltip-top"
+              className="text-left"
+              style={{ wordBreak: 'break-word' }}>
+              <div>
+                <Button bsStyle="danger" onClick={onOpen} disabled>
+                  <i className="fa fa-trash" /> {intl.formatMessage({ id: 'global.delete' })}
+                </Button>
+              </div>
+            </Tooltip>
           ) : (
             <Button bsStyle="danger" onClick={onOpen}>
               <i className="fa fa-trash" /> {intl.formatMessage({ id: 'global.delete' })}

@@ -66,10 +66,9 @@ const StepSelect: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   background: none !important;
   border: none;
   box-shadow: none !important;
-  & span {
-    color: black;
-    white-space: nowrap;
-  }
+  color: ${colors.darkText} !important;
+  white-space: nowrap;
+  font-weight: 400 !important;
 
   &:hover,
   &:focus {
@@ -126,17 +125,22 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
               disclosure={
                 <StepSelect
                   id={`proposal-votes-select-step-${proposal.id}`}
-                  variant="primary"
-                  variantSize="medium">
-                  <span>
-                    <Icon name={ICON_NAME.filter} size={18} color={colors.black} />
-                    {selectedStep?.title}
-                  </span>
+                  variant="tertiary"
+                  variantColor="hierarchy">
+                  <Icon
+                    style={{ marginRight: '4px' }}
+                    name={ICON_NAME.filter}
+                    size={18}
+                    color={colors.black}
+                  />
+                  <span>{selectedStep?.title}</span>
                 </StepSelect>
               }>
               <Menu.List>
                 {proposal.votableSteps.map((votableStep, index) => (
                   <Menu.Item
+                    border="none"
+                    backgroundColor="transparent"
                     key={index}
                     onClick={() => {
                       setSelectedStep(votableStep);

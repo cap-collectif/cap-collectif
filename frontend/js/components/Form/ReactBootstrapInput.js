@@ -4,7 +4,7 @@ import { injectIntl } from 'react-intl';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import moment from 'moment';
-import { FormGroup, FormControl, InputGroup, Thumbnail, OverlayTrigger } from 'react-bootstrap';
+import { FormGroup, FormControl, InputGroup, Thumbnail } from 'react-bootstrap';
 import type { IntlShape } from 'react-intl';
 import DateTime, {
   type DateProps,
@@ -27,7 +27,6 @@ import type { AddressProps } from './Address/Address.type';
 import QuestionPrintHelpText from './QuestionPrintHelpText';
 import Notepad from '../Ui/Form/Notepad';
 import RadioImages from './RadioImages';
-import Popover from '../Utils/Popover';
 import Checkbox from '~/components/Ui/Form/Input/Checkbox/Checkbox';
 import Radio from '~/components/Ui/Form/Input/Radio/Radio';
 import Help from '~/components/Ui/Form/Help/Help';
@@ -87,7 +86,6 @@ export type ParentProps = {|
   disableValidation?: boolean,
   formName?: string,
   lang?: string,
-  popover?: any,
   step?: any,
   style?: any,
   isRangeBetween?: ?boolean,
@@ -176,7 +174,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     addonAfter,
     buttonBefore,
     buttonAfter,
-    popover,
     children,
     value,
     type,
@@ -589,16 +586,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     if (type === 'color-picker') {
       return (
         <ColorPickerInput value={value} getOpacity={getOpacity} opacity={opacity} {...props} />
-      );
-    }
-
-    if (popover) {
-      return (
-        <OverlayTrigger
-          placement={window.innerWidth >= 768 ? 'right' : 'top'}
-          overlay={<Popover id={popover.id}>{popover.message}</Popover>}>
-          {formControl}
-        </OverlayTrigger>
       );
     }
 

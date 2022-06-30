@@ -80,9 +80,10 @@ exports[`<FooterLinksRender /> renders correcty 1`] = `
       <Menu.Button>
         <FooterLinksRender__SeeMoreFooterButton
           id="footer-see-more-button"
+          padding={0}
           rightIcon="ARROW_DOWN_O"
           variant="primary"
-          variantSize="medium"
+          variantSize="small"
         >
           <FormattedMessage
             id="global.navbar.see_more"

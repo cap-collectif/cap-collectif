@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Alert, Button, OverlayTrigger, Panel, Well } from 'react-bootstrap';
+import { Alert, Button as ButtonLegacy, Panel, Well } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import {
@@ -21,11 +21,11 @@ import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import config from '../../../config';
 import UserArchiveRequestButton from './UserArchiveRequestButton';
-import Popover from '../../Utils/Popover';
-import Tooltip from '../../Utils/Tooltip';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import Text from '~ui/Primitives/Text';
 import { styleGuideColors } from '~/utils/colors';
+import Popover from '~ds/Popover';
+import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 
 type RelayProps = {| viewer: PersonalData_viewer |};
 type Props = {|
@@ -43,11 +43,7 @@ const hasAddressData = (viewer: PersonalData_viewer, value: ?Object) => {
   if (!viewer.address && !viewer.zipCode && !viewer.city) {
     return false;
   }
-  if (value && !value.address && !value.zipCode && !value.city) {
-    return false;
-  }
-
-  return true;
+  return !(value && !value.address && !value.zipCode && !value.city);
 };
 
 const validate = (values: Object, props: Props) => {
@@ -194,7 +190,7 @@ const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
     return false;
   }
 
-  if (
+  return !(
     formValue &&
     !formValue.firstname &&
     !formValue.lastname &&
@@ -207,11 +203,7 @@ const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
     !formValue.city &&
     !formValue.gender &&
     !formValue.userIdentificationCode
-  ) {
-    return false;
-  }
-
-  return true;
+  );
 };
 
 const PersonnalDataContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -270,30 +262,48 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     dispatch(change(formName, target, null));
   };
 
-  popover = (target: string) => (
-    <Popover
-      placement="top"
-      className="in"
-      id="delete-field"
-      title={<FormattedMessage id="are-you-sure-you-want-to-delete-this-field" />}>
-      <Button
-        onClick={() => {
-          this.deleteField(target);
-        }}
-        id="btn-confirm-delete-field"
-        bsStyle="danger"
-        className="right-bloc btn-block">
-        <FormattedMessage id="btn_delete" />
-      </Button>
-      <Button
-        onClick={() => {
-          this.refs[target].hide();
-        }}
-        id="btn-cancel-delete-field"
-        bsStyle="default"
-        className="right-block btn-block">
-        <FormattedMessage id="global.no" />
-      </Button>
+  fieldDeletePopover = (target: string) => (
+    <Popover trigger={['click']} placement="top">
+      <Popover.Trigger>
+        <ButtonQuickAction
+          className="personal-data-delete-field"
+          id={`personal-data-${target}`}
+          icon="CIRCLE_CROSS"
+          label={<FormattedMessage id="global.delete" />}
+          size="sm"
+          variantColor="primary"
+        />
+      </Popover.Trigger>
+      <Popover.Content id="delete-field">
+        {({ closePopover }) => (
+          <>
+            <Popover.Header>
+              <FormattedMessage id="are-you-sure-you-want-to-delete-this-field" />
+            </Popover.Header>
+            <Popover.Body>
+              <ButtonLegacy
+                onClick={() => {
+                  this.deleteField(target);
+                  if (closePopover) {
+                    closePopover();
+                  }
+                }}
+                id="btn-confirm-delete-field"
+                bsStyle="danger"
+                className="right-bloc btn-block">
+                <FormattedMessage id="btn_delete" />
+              </ButtonLegacy>
+              <ButtonLegacy
+                onClick={closePopover}
+                id="btn-cancel-delete-field"
+                bsStyle="default"
+                className="right-block btn-block">
+                <FormattedMessage id="global.no" />
+              </ButtonLegacy>
+            </Popover.Body>
+          </>
+        )}
+      </Popover.Content>
     </Popover>
   );
 
@@ -312,12 +322,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       change: changeProps,
     } = this.props;
 
-    const tooltipDelete = (
-      <Tooltip id="tooltip">
-        <FormattedMessage id="global.delete" />
-      </Tooltip>
-    );
-
     const header = (
       <div className="panel-heading profile-header">
         <h1>
@@ -328,13 +332,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
 
     const footer = (
       <div className="col-sm-offset-4">
-        <Button
+        <ButtonLegacy
           disabled={invalid || submitting}
           type="submit"
           bsStyle="primary"
           id="personal-data-form-save">
           <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
-        </Button>
+        </ButtonLegacy>
       </div>
     );
     const canDisplaySubmitButton =
@@ -411,20 +415,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                           {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-4 btn--delete">
-                              <OverlayTrigger
-                                trigger="click"
-                                placement="top"
-                                rootClose
-                                ref="gender"
-                                overlay={this.popover('gender')}>
-                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                  <span
-                                    className="personal-data-delete-field"
-                                    id="personal-data-gender">
-                                    <i className="icon cap-ios-close" />
-                                  </span>
-                                </OverlayTrigger>
-                              </OverlayTrigger>
+                              {this.fieldDeletePopover('gender')}
                             </div>
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
@@ -455,20 +446,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                           {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-4 btn--delete">
-                              <OverlayTrigger
-                                trigger="click"
-                                placement="top"
-                                rootClose
-                                ref="firstname"
-                                overlay={this.popover('firstname')}>
-                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                  <span
-                                    className="personal-data-delete-field"
-                                    id="personal-data-firstname">
-                                    <i className="icon cap-ios-close" />
-                                  </span>
-                                </OverlayTrigger>
-                              </OverlayTrigger>
+                              {this.fieldDeletePopover('firstname')}
                             </div>
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
@@ -499,19 +477,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                           {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-4 btn--delete">
-                              <OverlayTrigger
-                                trigger="click"
-                                placement="top"
-                                ref="lastname"
-                                overlay={this.popover('lastname')}>
-                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                  <span
-                                    className="personal-data-delete-field"
-                                    id="personal-data-lastname">
-                                    <i className="icon cap-ios-close" />
-                                  </span>
-                                </OverlayTrigger>
-                              </OverlayTrigger>
+                              {this.fieldDeletePopover('lastname')}
                             </div>
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
@@ -543,21 +509,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                           {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-2 btn--delete" style={{ marginBottom: 15 }}>
-                              <OverlayTrigger
-                                trigger="click"
-                                placement="top"
-                                rootClose
-                                // eslint-disable-next-line react/no-string-refs
-                                ref="dateOfBirth"
-                                overlay={this.popover('dateOfBirth')}>
-                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                  <span
-                                    className="personal-data-delete-field"
-                                    id="personal-data-dateOfBirth">
-                                    <i className="icon cap-ios-close" />
-                                  </span>
-                                </OverlayTrigger>
-                              </OverlayTrigger>
+                              {this.fieldDeletePopover('dateOfBirth')}
                             </div>
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
@@ -588,19 +540,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                           {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-4 btn--delete">
-                              <OverlayTrigger
-                                trigger="click"
-                                placement="top"
-                                ref="birthPlace"
-                                overlay={this.popover('birthPlace')}>
-                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                  <span
-                                    className="personal-data-delete-field"
-                                    id="personal-data-birthPlace">
-                                    <i className="icon cap-ios-close" />
-                                  </span>
-                                </OverlayTrigger>
-                              </OverlayTrigger>
+                              {this.fieldDeletePopover('birthPlace')}
                             </div>
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
@@ -616,21 +556,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         <div className="horizontal_field_with_border_top">
                           {!isSsoFcOrOccitanie(false) && (
                             <div className="col-sm-11 btn--delete">
-                              <OverlayTrigger
-                                trigger="click"
-                                placement="top"
-                                rootClose
-                                // eslint-disable-next-line react/no-string-refs
-                                ref="address-address2-city-zipCode"
-                                overlay={this.popover('address-address2-city-zipCode')}>
-                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                  <span
-                                    className="personal-data-delete-field"
-                                    id="personal-data-address-address2-city-zipCode">
-                                    <i className="icon cap-ios-close" />
-                                  </span>
-                                </OverlayTrigger>
-                              </OverlayTrigger>
+                              {this.fieldDeletePopover('address-address2-city-zipCode')}
                             </div>
                           )}
                           {currentValues.address !== null && (
@@ -761,18 +687,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </div>
                             {!isSsoFcOrOccitanie(false) && (
                               <div className="col-sm-4 btn--delete">
-                                <OverlayTrigger
-                                  trigger="click"
-                                  placement="top"
-                                  rootClose
-                                  ref="phone"
-                                  overlay={this.popover('phone')}>
-                                  <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                    <span className="personal-data-delete-field" id="phone">
-                                      <i className="icon cap-ios-close" />
-                                    </span>
-                                  </OverlayTrigger>
-                                </OverlayTrigger>
+                                {this.fieldDeletePopover('phone')}
                               </div>
                             )}
                             {isSsoFcOrOccitanie(false) && (
@@ -815,20 +730,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </div>
                             {!isSsoFcOrOccitanie(false) && (
                               <div className="col-sm-4 btn--delete">
-                                <OverlayTrigger
-                                  trigger="click"
-                                  placement="top"
-                                  rootClose
-                                  ref="postalAddress"
-                                  overlay={this.popover('postalAddress')}>
-                                  <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                    <span
-                                      className="personal-data-delete-field"
-                                      id="personal-data-postalAddress">
-                                      <i className="icon cap-ios-close" />
-                                    </span>
-                                  </OverlayTrigger>
-                                </OverlayTrigger>
+                                {this.fieldDeletePopover('postalAddress')}
                               </div>
                             )}
                           </div>

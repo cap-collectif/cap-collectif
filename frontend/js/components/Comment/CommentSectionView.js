@@ -1,16 +1,13 @@
 // @flow
 import React, { useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
-import { Menu } from '@cap-collectif/ui';
-import { mediaQueryMobile } from '~/utils/sizes';
+import { Menu, Button, Flex, Box } from '@cap-collectif/ui';
 import CommentListView, { type CommentOrderBy } from './CommentListView';
 import CommentForm from './CommentForm';
 import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql';
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
-import Button from '~ds/Button/Button';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 type Props = {|
   +intl: IntlShape,
@@ -20,33 +17,17 @@ type Props = {|
   unstable__enableCapcoUiDs?: boolean,
 |};
 
-const SortBy: StyledComponent<{}, {}, typeof Col> = styled(Col)`
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-
-  svg {
-    margin-left: 20px;
-    margin-right: 0;
-    margin-top: 7px;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  @media (max-width: ${mediaQueryMobile.maxWidth}) {
-    margin-top: 10px;
-
-    svg {
-      margin-left: 0;
-    }
-  }
-`;
-
 export const FilterButton: StyledComponent<{}, {}, typeof Button> = styled(Button)`
   border: none !important;
   outline: none !important;
   background-color: ${colors.white} !important;
   box-shadow: none !important;
+  color: ${colors.darkText} !important;
+  svg {
+    margin: 0 !important;
+    margin-top: 5px !important;
+    margin-right: 4px !important;
+  }
 `;
 
 const filters = {
@@ -66,8 +47,8 @@ export function CommentSectionView(props: Props) {
           <FormattedMessage id="proposal.tabs.comments" />
         </h3>
       )}
-      <Row>
-        <Col id="proposal-page-comments-counter" sm={6} className="mt-5">
+      <Flex direction="row" justify="space-between" align="center" mb={5}>
+        <Box id="proposal-page-comments-counter">
           {commentable.allComments && (
             <FormattedHTMLMessage
               id="comment.list"
@@ -76,31 +57,50 @@ export function CommentSectionView(props: Props) {
               }}
             />
           )}
-        </Col>
+        </Box>
         {commentable.allComments && commentable.allComments.totalCountWithAnswers > 1 && (
-          <SortBy smOffset={2} sm={4} xs={12}>
-            <Icon name={ICON_NAME.sort} size={20} color={colors.darkText} />
-            <Menu
-              disclosure={
-                <FilterButton id="js-btn-visibility-step" variant="primary" variantSize="medium">
-                  <FormattedMessage id={filters[order]} />
-                </FilterButton>
-              }>
-              <Menu.List>
-                <Menu.Item id="public-collect" onClick={() => setOrder('popular')}>
-                  {intl.formatMessage({ id: filters.popular })}
-                </Menu.Item>
-                <Menu.Item id="private-collect" onClick={() => setOrder('last')}>
-                  {intl.formatMessage({ id: filters.last })}
-                </Menu.Item>
-                <Menu.Item id="old" onClick={() => setOrder('old')}>
-                  {intl.formatMessage({ id: filters.old })}
-                </Menu.Item>
-              </Menu.List>
-            </Menu>
-          </SortBy>
+          <Menu
+            placement="bottom-end"
+            disclosure={
+              <FilterButton
+                id="js-btn-visibility-step"
+                variant="tertiary"
+                variantColor="hierarchy"
+                style={{ fontWeight: 400 }}>
+                <Icon name={ICON_NAME.sort} size={14} color={colors.darkText} />
+                <FormattedMessage id={filters[order]} />
+              </FilterButton>
+            }>
+            <Menu.List>
+              <Menu.Item
+                style={{ borderWidth: '1px', borderStyle: 'solid' }}
+                backgroundColor="transparent"
+                id="public-collect"
+                onClick={() => setOrder('popular')}>
+                {intl.formatMessage({ id: filters.popular })}
+              </Menu.Item>
+              <Menu.Item
+                style={{ borderWidth: '1px', borderStyle: 'solid' }}
+                backgroundColor="transparent"
+                id="private-collect"
+                onClick={() => setOrder('last')}>
+                {intl.formatMessage({ id: filters.last })}
+              </Menu.Item>
+              <Menu.Item
+                style={{
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                }}
+                borderBottomColor="transparent"
+                backgroundColor="transparent"
+                id="old"
+                onClick={() => setOrder('old')}>
+                {intl.formatMessage({ id: filters.old })}
+              </Menu.Item>
+            </Menu.List>
+          </Menu>
         )}
-      </Row>
+      </Flex>
       {/* $FlowFixMe reduxForm */}
       <CommentForm commentable={commentable} />
       {/* $FlowFixMe */}

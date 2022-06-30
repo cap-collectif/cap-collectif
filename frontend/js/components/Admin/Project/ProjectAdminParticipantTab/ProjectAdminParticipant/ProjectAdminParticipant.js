@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import type { ProjectAdminParticipant_participant } from '~relay/ProjectAdminParticipant_participant.graphql';
@@ -18,6 +17,7 @@ import colors, { styleGuideColors } from '~/utils/colors';
 import { translateContent } from '~/utils/ContentTranslator';
 import { useProjectAdminParticipantsContext } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 export type OwnProps = {|
   +rowId: string,
@@ -61,39 +61,42 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
           <a href={adminUrl ?? url}>{translateContent(username)}</a>
 
           {vip && !hasAccountDeleted && (
-            <OverlayTrigger
+            <Tooltip
               placement="top"
-              overlay={
-                <Tooltip id="tooltip-vip">
-                  {intl.formatMessage({ id: 'status.vip.account' })}
-                </Tooltip>
-              }>
-              <Icon name={ICON_NAME.vip} size={14} />
-            </OverlayTrigger>
+              label={intl.formatMessage({ id: 'status.vip.account' })}
+              id="tooltip-description"
+              className="text-left"
+              style={{ wordBreak: 'break-word' }}>
+              <div>
+                <Icon name={ICON_NAME.vip} size={14} />
+              </div>
+            </Tooltip>
           )}
 
           {isEmailConfirmed && !vip && !hasAccountDeleted && (
-            <OverlayTrigger
+            <Tooltip
               placement="top"
-              overlay={
-                <Tooltip id="tooltip-verified">
-                  {intl.formatMessage({ id: 'status.verified.account' })}
-                </Tooltip>
-              }>
-              <Icon name={ICON_NAME.verified} size={14} />
-            </OverlayTrigger>
+              label={intl.formatMessage({ id: 'status.verified.account' })}
+              id="tooltip-description"
+              className="text-left"
+              style={{ wordBreak: 'break-word' }}>
+              <div>
+                <Icon name={ICON_NAME.verified} size={14} />
+              </div>
+            </Tooltip>
           )}
 
           {hasFeatureEmail && consentInternalCommunication && (
-            <OverlayTrigger
+            <Tooltip
               placement="top"
-              overlay={
-                <Tooltip id="tooltip-consent-to-email">
-                  {intl.formatMessage({ id: 'has-consent-to-internal-email' }, { num: 1 })}
-                </Tooltip>
-              }>
-              <Icon name={ICON_NAME.mail} size={14} color={styleGuideColors.gray500} />
-            </OverlayTrigger>
+              label={intl.formatMessage({ id: 'has-consent-to-internal-email' }, { num: 1 })}
+              id="tooltip-description"
+              className="text-left"
+              style={{ wordBreak: 'break-word' }}>
+              <div>
+                <Icon name={ICON_NAME.mail} size={14} color={styleGuideColors.gray500} />
+              </div>
+            </Tooltip>
           )}
         </UsernameContainer>
 

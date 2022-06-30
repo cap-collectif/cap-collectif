@@ -2,6 +2,7 @@
 
 exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
 <Menu
+  margin="auto"
   placement="top"
 >
   <Menu.Button>
@@ -9,14 +10,13 @@ exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
       backgroundColor="#FFF"
       borderless={false}
       id="language-change-button-dropdown"
+      leftIcon="EARTH"
+      padding={0}
+      rightIcon="ARROW_DOWN_O"
       variant="primary"
-      variantSize="medium"
+      variantSize="small"
     >
       <SiteLanguageChangeButton__LanguageContainer>
-        <SiteLanguageChangeButton__SiteEarthIcon
-          color="#000"
-          small={false}
-        />
         <SiteLanguageChangeButton__Language
           color="#000"
         >
@@ -25,31 +25,28 @@ exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
           </span>
         </SiteLanguageChangeButton__Language>
       </SiteLanguageChangeButton__LanguageContainer>
-      <SiteLanguageChangeButton__Caret
-        className="cap-arrow-39"
-        color="#000"
-        id="language-change-caret"
-      />
     </SiteLanguageChangeButton__DropdownLanguageButton>
   </Menu.Button>
-  <Menu.List>
+  <Menu.List
+    id="language-change-menu-list"
+  >
     <Menu.ListItem
       id="language-choice-de-DE"
       key="de-DE"
       onClick={[Function]}
     >
-      <span>
+      <SiteLanguageChangeButton__LanguageTitle>
         deutsch
-      </span>
+      </SiteLanguageChangeButton__LanguageTitle>
     </Menu.ListItem>
     <Menu.ListItem
       id="language-choice-en-GB"
       key="en-GB"
       onClick={[Function]}
     >
-      <span>
+      <SiteLanguageChangeButton__LanguageTitle>
         english
-      </span>
+      </SiteLanguageChangeButton__LanguageTitle>
     </Menu.ListItem>
   </Menu.List>
 </Menu>

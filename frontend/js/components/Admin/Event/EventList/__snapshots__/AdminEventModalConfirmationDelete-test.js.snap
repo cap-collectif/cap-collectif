@@ -123,7 +123,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM gYBLn Modal__ModalContainerInner-gRLtaR"
+      className="sc-bdnxRM duLURM Modal__ModalContainerInner-gRLtaR"
       onClick={[Function]}
       style={
         Object {

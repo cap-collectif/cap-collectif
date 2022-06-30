@@ -30,7 +30,7 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
       }
     }
   />
-  <Connect(ShareButtonDropdownLegacy)
+  <Connect(ShareButtonDropdown)
     disabled={false}
     id="proposal-share-button"
     title="OEEEEE"

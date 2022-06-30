@@ -1,6 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import { Modal } from 'react-bootstrap';
+import Modal from '~ds/Modal/Modal';
 
 export const ModalDeleteProposalContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal)`
   .hide-content {

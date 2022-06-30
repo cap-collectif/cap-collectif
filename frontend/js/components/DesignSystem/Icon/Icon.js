@@ -79,6 +79,8 @@ export const ICON_NAME = {
   IMAGE: 'IMAGE',
   ERROR: 'ERROR',
   SHARE: 'SHARE',
+  EARTH: 'EARTH',
+  SORT: 'SORT',
 };
 
 export const ICON_SIZE = {

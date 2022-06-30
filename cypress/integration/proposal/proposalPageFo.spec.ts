@@ -18,6 +18,10 @@ describe('Proposal Page', () => {
     })
     it('follow proposal and change type of following', () => {
       ProposalPage.visitProposalPage()
+      cy.on('uncaught:exception', (err, runnable) => {
+        console.log('ERROR', err)
+        return false
+      })
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() //follow
       cy.wait(2000)
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() //open menu

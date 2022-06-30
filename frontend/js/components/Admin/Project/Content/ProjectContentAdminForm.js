@@ -2,7 +2,6 @@
 import React, { type ComponentType } from 'react';
 import { Field } from 'redux-form';
 import styled, { type StyledComponent } from 'styled-components';
-import { OverlayTrigger } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedHTMLMessage, FormattedMessage, type IntlShape } from 'react-intl';
 import { useSelector } from 'react-redux';
@@ -13,7 +12,6 @@ import { type Author } from '../Form/ProjectAdminForm';
 import ProjectTypeListField from '../../Field/ProjectTypeListField';
 import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql';
 import { loadDistrictOptions, loadThemeOptions } from '../Metadata/ProjectMetadataAdminForm';
-import Tooltip from '~/components/Utils/Tooltip';
 import {
   ProjectBoxHeader,
   ProjectSmallInput,
@@ -23,6 +21,8 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { clearToasts } from '~ds/Toast';
 import type { GlobalState } from '~/types';
 import Text from '~ui/Primitives/Text';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type Option = {|
   value: string,
@@ -69,26 +69,33 @@ export const renderLabel = (
   optional?: boolean,
   labelWeight?: string,
 ) => (
-  <p>
+  <Flex direction="row" wrap="nowrap">
     <Text as="span" fontWeight={labelWeight || 'bold'}>
       {intl.formatMessage({ id })}
     </Text>
-    <Text as="span" color="gray.500" fontWeight="normal">
+    <Flex
+      as="span"
+      direction="row"
+      wrap="nowrap"
+      align="center"
+      color="gray.500"
+      fontWeight="normal"
+      marginLeft={1}>
       {optional ? intl.formatMessage({ id: 'global.optional' }) : null}
       {helpText && (
-        <OverlayTrigger
-          key="top"
+        <Tooltip
           placement="top"
-          overlay={
-            <Tooltip id="tooltip-top" className="text-left" style={{ wordBreak: 'break-word' }}>
-              <FormattedHTMLMessage id={helpText} />
-            </Tooltip>
-          }>
-          <InformationIcon />
-        </OverlayTrigger>
+          label={<FormattedHTMLMessage id={helpText} />}
+          id="tooltip-top"
+          className="text-left"
+          style={{ wordBreak: 'break-word' }}>
+          <Flex marginLeft={1}>
+            <InformationIcon />
+          </Flex>
+        </Tooltip>
       )}
-    </Text>
-  </p>
+    </Flex>
+  </Flex>
 );
 
 export const validate = (props: FormValues) => {

@@ -1,192 +1,1171 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalFollowButton /> should render a button to follow a proposal when viewer is not following. 1`] = `
-<Connect(NewLoginOverlay)>
+exports[`<ProposalFollowButton /> <TestProposalFollowButton /> should render a button to follow a proposal when viewer is not following. 1`] = `
+Array [
   <button
-    className="btn btn-default proposal__button__follow"
+    aria-controls="popover-overlay id-g"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL sc-lcepkR iPfbxu iJuXel cap-button cap-menu__disclosure dropdown-button custom-dropdown-button proposal__button__follow_options"
     id="proposal-follow-btn-proposal1"
     onClick={[Function]}
+    onClickCapture={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    onMouseEnter={[Function]}
+    style={
+      Object {
+        "borderColor": "#333",
+        "color": "#333",
+      }
+    }
     type="button"
   >
-    <i
-      className="cap cap-rss mr-5"
-    />
-    <FormattedMessage
-      id="follow"
-      values={Object {}}
-    />
-  </button>
-</Connect(NewLoginOverlay)>
-`;
-
-exports[`<ProposalFollowButton /> should render a button to unfollow a proposal when viewer is following. 1`] = `
-<Connect(NewLoginOverlay)>
-  <Menu
-    disclosure={
-      <Button
-        className=" btn btn-default dropdown-button custom-dropdown-button proposal__button__follow_options"
-        id="proposal-follow-btn-proposal1"
-        rightIcon="ARROW_DOWN_O"
-        style={
-          Object {
-            "borderColor": "#333",
-            "color": "#333",
-          }
-        }
-        variant="secondary"
-        variantColor="hierarchy"
-      >
-        <FormattedMessage
-          id="following"
-          values={Object {}}
-        />
-      </Button>
-    }
-    placement="bottom"
-  >
-    <Menu.List
-      maxHeight="unset"
-      overflow="visible"
+    following
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ iPkWup jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 12 7"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <Menu.OptionGroup
-        as="div"
-        onChange={[Function]}
-        title={
-          <Flex
+      <path
+        d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
+  </button>,
+  <div
+    aria-orientation="vertical"
+    className="sc-bdvvtL cHXLJG sc-fbyfCU cap-menu__list cap-menu__list"
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onBlurCapture={[Function]}
+    onFocus={[Function]}
+    onFocusCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyDownCapture={[Function]}
+    onKeyUpCapture={[Function]}
+    onTransitionEnd={[Function]}
+    role="menu"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "opacity": 0,
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bdvvtL Xwmcd cap-menu__optionGroup"
+      role="group"
+    >
+      <p
+        className="sc-bdvvtL kqQrVp cap-text cap-menu__optionGroup--title"
+      >
+        <div
+          className="sc-bdvvtL lhbxPK"
+          style={
+            Object {
+              "marginBottom": "unset",
+            }
+          }
+        >
+          <h4
+            className="sc-bdvvtL jtLwVb cap-heading"
             style={
               Object {
-                "marginBottom": "unset",
+                "marginLeft": 0,
+                "marginTop": 0,
               }
             }
           >
-            <Heading
-              as="h5"
-            >
-              <FormattedMessage
-                id="to-be-notified-by-email"
-                values={Object {}}
-              />
-            </Heading>
-            <Popover
-              disclosure={
-                <span
-                  className="cap-information ml-30"
-                />
+            to-be-notified-by-email
+          </h4>
+          <svg
+            aria-controls="id-g"
+            aria-expanded={false}
+            aria-haspopup="dialog"
+            className="sc-bdvvtL sc-eJwWfJ kuPGYc jsDA-DM cap-icon cap-popover__disclosure"
+            fill="none"
+            onClick={[Function]}
+            onClickCapture={[Function]}
+            onKeyDown={[Function]}
+            onKeyPressCapture={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseDownCapture={[Function]}
+            type="button"
+            viewBox="0 0 12 12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 0a6 6 0 106 6 6.006 6.006 0 00-6-6zm.125 2.5a.75.75 0 110 1.5.75.75 0 010-1.5zM7.25 9.25h-2a.5.5 0 010-1h.375a.125.125 0 00.125-.125v-2.25a.125.125 0 00-.125-.125H5.25a.5.5 0 010-1h.5a1 1 0 011 1v2.375a.125.125 0 00.125.125h.375a.5.5 0 110 1z"
+              fill="currentColor"
+            />
+          </svg>
+          <div
+            className="sc-Galmp bYcNna"
+            data-dialog={true}
+            hidden={true}
+            id="id-g"
+            onAnimationEnd={[Function]}
+            onBlur={[Function]}
+            onKeyDown={[Function]}
+            onTransitionEnd={[Function]}
+            role="dialog"
+            style={
+              Object {
+                "display": "none",
+                "left": "100%",
+                "position": "fixed",
+                "top": "100%",
               }
-              placement="top"
-            >
-              <Popover.Body>
-                <FormattedMessage
-                  id="you-will-receive-a-summary-of-your-notifications-once-a-day"
-                  values={Object {}}
-                />
-              </Popover.Body>
-            </Popover>
-          </Flex>
-        }
-        type="radio"
-        value="MINIMAL"
-      >
-        <Menu.OptionItem
-          as="a"
-          className="proposal__follow__minimal"
-          href="#"
-          id="proposal-follow-btn-minimal-proposal1"
-          name="minimal"
-          value="MINIMAL"
-        >
-          <Flex
-            direction="column"
-          >
-            <b>
-              <FormattedMessage
-                id="essential"
-                values={Object {}}
-              />
-            </b>
-            <FormattedMessage
-              id="updates-and-news"
-              values={Object {}}
-            />
-          </Flex>
-        </Menu.OptionItem>
-        <Menu.OptionItem
-          as="a"
-          className="proposal__follow__essential"
-          href="#"
-          id="proposal-follow-btn-essential-proposal1"
-          name="essential"
-          value="ESSENTIAL"
-        >
-          <Flex
-            direction="column"
-          >
-            <b>
-              <FormattedMessage
-                id="intermediate"
-                values={Object {}}
-              />
-            </b>
-            <FormattedMessage
-              id="updates-news-and-new-contributions"
-              values={Object {}}
-            />
-          </Flex>
-        </Menu.OptionItem>
-        <Menu.OptionItem
-          as="a"
-          className="proposal__follow__all"
-          href="#"
-          id="proposal-follow-btn-all-proposal1"
-          name="all"
-          value="ALL"
-        >
-          <Flex
-            direction="column"
-          >
-            <b>
-              <FormattedMessage
-                id="complete"
-                values={Object {}}
-              />
-            </b>
-            <FormattedMessage
-              id="updates-news-new-contributions-votes-and-subscriptions"
-              values={Object {}}
-            />
-          </Flex>
-        </Menu.OptionItem>
-      </Menu.OptionGroup>
-      <Menu.Item
-        as="a"
-        className="proposal__unfollow"
-        href="#"
-        id="proposal-unfollow-btn-proposal1"
+            }
+            tabIndex={0}
+          />
+        </div>
+      </p>
+      <button
+        className="sc-bdvvtL jjwgeI cap-menu__item cap-menu__optionItem proposal__follow__minimal"
+        id="proposal-follow-btn-minimal-proposal1"
+        name="minimal"
+        onBlurCapture={[Function]}
         onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "background": "transparent",
+            "borderStyle": "solid",
+            "borderTop": "none",
+            "borderWidth": "1px",
+            "marginBottom": 0,
+          }
+        }
+        tabIndex={0}
+        type="button"
       >
-        <FormattedMessage
-          id="unfollow"
-          values={Object {}}
+        <input
+          checked={true}
+          className="sc-bdvvtL jPCatw"
+          type="radio"
         />
-         
-      </Menu.Item>
-    </Menu.List>
-  </Menu>
-</Connect(NewLoginOverlay)>
+        <div
+          className="sc-bdvvtL gKiHgp"
+        >
+          <b>
+            essential
+          </b>
+          updates-and-news
+        </div>
+      </button>
+      <button
+        className="sc-bdvvtL jjwgeI cap-menu__item cap-menu__optionItem proposal__follow__essential"
+        id="proposal-follow-btn-essential-proposal1"
+        name="essential"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "background": "transparent",
+            "borderStyle": "solid",
+            "borderTop": "none",
+            "borderWidth": "1px",
+            "marginBottom": 0,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <input
+          checked={false}
+          className="sc-bdvvtL jPCatw"
+          type="radio"
+        />
+        <div
+          className="sc-bdvvtL gKiHgp"
+        >
+          <b>
+            intermediate
+          </b>
+          updates-news-and-new-contributions
+        </div>
+      </button>
+      <button
+        className="sc-bdvvtL jjwgeI cap-menu__item cap-menu__optionItem proposal__follow__all"
+        id="proposal-follow-btn-all-proposal1"
+        name="all"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "background": "transparent",
+            "borderStyle": "solid",
+            "borderTop": "none",
+            "borderWidth": "1px",
+            "marginBottom": 0,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <input
+          checked={false}
+          className="sc-bdvvtL jPCatw"
+          type="radio"
+        />
+        <div
+          className="sc-bdvvtL gKiHgp"
+        >
+          <b>
+            complete
+          </b>
+          updates-news-new-contributions-votes-and-subscriptions
+        </div>
+      </button>
+    </div>
+    <a
+      className="sc-bdvvtL jjwgeI cap-menu__item proposal__unfollow"
+      href="#"
+      id="proposal-unfollow-btn-proposal1"
+      loop={false}
+      onClick={[Function]}
+      orientation="vertical"
+      type="button"
+      wrap={false}
+    >
+      unfollow
+       
+    </a>
+  </div>,
+  <div
+    aria-label="vote.popover.title"
+    className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+    data-dialog={true}
+    hidden={true}
+    id="login-popover"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={0}
+  >
+    <div
+      className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg hzLOTG juLQlw"
+      style={
+        Object {
+          "auto": "100%",
+          "fontSize": 30,
+          "height": "1em",
+          "pointerEvents": "none",
+          "width": "1em",
+        }
+      }
+    >
+      <svg
+        style={
+          Object {
+            "transform": undefined,
+          }
+        }
+        viewBox="0 0 30 30"
+      >
+        <path
+          className="stroke"
+          d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+        />
+        <path
+          className="fill"
+          d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+        />
+      </svg>
+    </div>
+    <div
+      className="sc-bdvvtL iEmlgw"
+    >
+      <p
+        className="sc-bdvvtL gfzBSV cap-text"
+      >
+        vote.popover.title
+      </p>
+      <div
+        className="sc-bdvvtL grUqXo"
+      >
+        <p
+          className="sc-bdvvtL egrZXz cap-text"
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          vote.popover.body
+        </p>
+        <span
+          className="sc-bdnxRM hptjof"
+          clip="rect(0px, 0px, 0px, 0px)"
+        >
+          <button
+            className="sc-bdvvtL sc-lcepkR iPfbxu elkPgU cap-button"
+            onClick={[Function]}
+            type="button"
+          >
+            global.close
+          </button>
+        </span>
+        <span
+          style={Object {}}
+        >
+          <button
+            aria-label="open.connection_modal"
+            className="center-block btn-block login-button btn btn-success"
+            destination="http://localhost"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            global.login
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>,
+]
 `;
 
-exports[`<ProposalFollowButton /> should render correctly when not authenticated 1`] = `
-<Button
-  className="btn btn-default proposal__button__follow"
-  disabled={true}
-  id="proposal-follow-btn-placeholder"
->
-  <i
-    className="cap cap-rss mr-5"
-  />
-  <FormattedMessage
-    id="follow"
-    values={Object {}}
-  />
-</Button>
+exports[`<ProposalFollowButton /> <TestProposalFollowButton /> should render a button to unfollow a proposal when viewer is following  1`] = `
+Array [
+  <button
+    aria-controls="popover-overlay id-g"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL sc-lcepkR iPfbxu iJuXel cap-button cap-menu__disclosure dropdown-button custom-dropdown-button proposal__button__follow_options"
+    id="proposal-follow-btn-proposal1"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    onMouseEnter={[Function]}
+    style={
+      Object {
+        "borderColor": "#333",
+        "color": "#333",
+      }
+    }
+    type="button"
+  >
+    following
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ iPkWup jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 12 7"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
+  </button>,
+  <div
+    aria-orientation="vertical"
+    className="sc-bdvvtL cHXLJG sc-fbyfCU cap-menu__list cap-menu__list"
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onBlurCapture={[Function]}
+    onFocus={[Function]}
+    onFocusCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyDownCapture={[Function]}
+    onKeyUpCapture={[Function]}
+    onTransitionEnd={[Function]}
+    role="menu"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "opacity": 0,
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bdvvtL Xwmcd cap-menu__optionGroup"
+      role="group"
+    >
+      <p
+        className="sc-bdvvtL kqQrVp cap-text cap-menu__optionGroup--title"
+      >
+        <div
+          className="sc-bdvvtL lhbxPK"
+          style={
+            Object {
+              "marginBottom": "unset",
+            }
+          }
+        >
+          <h4
+            className="sc-bdvvtL jtLwVb cap-heading"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            to-be-notified-by-email
+          </h4>
+          <svg
+            aria-controls="id-g"
+            aria-expanded={false}
+            aria-haspopup="dialog"
+            className="sc-bdvvtL sc-eJwWfJ kuPGYc jsDA-DM cap-icon cap-popover__disclosure"
+            fill="none"
+            onClick={[Function]}
+            onClickCapture={[Function]}
+            onKeyDown={[Function]}
+            onKeyPressCapture={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseDownCapture={[Function]}
+            type="button"
+            viewBox="0 0 12 12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 0a6 6 0 106 6 6.006 6.006 0 00-6-6zm.125 2.5a.75.75 0 110 1.5.75.75 0 010-1.5zM7.25 9.25h-2a.5.5 0 010-1h.375a.125.125 0 00.125-.125v-2.25a.125.125 0 00-.125-.125H5.25a.5.5 0 010-1h.5a1 1 0 011 1v2.375a.125.125 0 00.125.125h.375a.5.5 0 110 1z"
+              fill="currentColor"
+            />
+          </svg>
+          <div
+            className="sc-Galmp bYcNna"
+            data-dialog={true}
+            hidden={true}
+            id="id-g"
+            onAnimationEnd={[Function]}
+            onBlur={[Function]}
+            onKeyDown={[Function]}
+            onTransitionEnd={[Function]}
+            role="dialog"
+            style={
+              Object {
+                "display": "none",
+                "left": "100%",
+                "position": "fixed",
+                "top": "100%",
+              }
+            }
+            tabIndex={0}
+          />
+        </div>
+      </p>
+      <button
+        className="sc-bdvvtL jjwgeI cap-menu__item cap-menu__optionItem proposal__follow__minimal"
+        id="proposal-follow-btn-minimal-proposal1"
+        name="minimal"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "background": "transparent",
+            "borderStyle": "solid",
+            "borderTop": "none",
+            "borderWidth": "1px",
+            "marginBottom": 0,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <input
+          checked={true}
+          className="sc-bdvvtL jPCatw"
+          type="radio"
+        />
+        <div
+          className="sc-bdvvtL gKiHgp"
+        >
+          <b>
+            essential
+          </b>
+          updates-and-news
+        </div>
+      </button>
+      <button
+        className="sc-bdvvtL jjwgeI cap-menu__item cap-menu__optionItem proposal__follow__essential"
+        id="proposal-follow-btn-essential-proposal1"
+        name="essential"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "background": "transparent",
+            "borderStyle": "solid",
+            "borderTop": "none",
+            "borderWidth": "1px",
+            "marginBottom": 0,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <input
+          checked={false}
+          className="sc-bdvvtL jPCatw"
+          type="radio"
+        />
+        <div
+          className="sc-bdvvtL gKiHgp"
+        >
+          <b>
+            intermediate
+          </b>
+          updates-news-and-new-contributions
+        </div>
+      </button>
+      <button
+        className="sc-bdvvtL jjwgeI cap-menu__item cap-menu__optionItem proposal__follow__all"
+        id="proposal-follow-btn-all-proposal1"
+        name="all"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "background": "transparent",
+            "borderStyle": "solid",
+            "borderTop": "none",
+            "borderWidth": "1px",
+            "marginBottom": 0,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <input
+          checked={false}
+          className="sc-bdvvtL jPCatw"
+          type="radio"
+        />
+        <div
+          className="sc-bdvvtL gKiHgp"
+        >
+          <b>
+            complete
+          </b>
+          updates-news-new-contributions-votes-and-subscriptions
+        </div>
+      </button>
+    </div>
+    <a
+      className="sc-bdvvtL jjwgeI cap-menu__item proposal__unfollow"
+      href="#"
+      id="proposal-unfollow-btn-proposal1"
+      loop={false}
+      onClick={[Function]}
+      orientation="vertical"
+      type="button"
+      wrap={false}
+    >
+      unfollow
+       
+    </a>
+  </div>,
+  <div
+    aria-label="vote.popover.title"
+    className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+    data-dialog={true}
+    hidden={true}
+    id="login-popover"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={0}
+  >
+    <div
+      className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg hzLOTG juLQlw"
+      style={
+        Object {
+          "auto": "100%",
+          "fontSize": 30,
+          "height": "1em",
+          "pointerEvents": "none",
+          "width": "1em",
+        }
+      }
+    >
+      <svg
+        style={
+          Object {
+            "transform": undefined,
+          }
+        }
+        viewBox="0 0 30 30"
+      >
+        <path
+          className="stroke"
+          d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+        />
+        <path
+          className="fill"
+          d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+        />
+      </svg>
+    </div>
+    <div
+      className="sc-bdvvtL iEmlgw"
+    >
+      <p
+        className="sc-bdvvtL gfzBSV cap-text"
+      >
+        vote.popover.title
+      </p>
+      <div
+        className="sc-bdvvtL grUqXo"
+      >
+        <p
+          className="sc-bdvvtL egrZXz cap-text"
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          vote.popover.body
+        </p>
+        <span
+          className="sc-bdnxRM hptjof"
+          clip="rect(0px, 0px, 0px, 0px)"
+        >
+          <button
+            className="sc-bdvvtL sc-lcepkR iPfbxu elkPgU cap-button"
+            onClick={[Function]}
+            type="button"
+          >
+            global.close
+          </button>
+        </span>
+        <span
+          style={Object {}}
+        >
+          <button
+            aria-label="open.connection_modal"
+            className="center-block btn-block login-button btn btn-success"
+            destination="http://localhost"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            global.login
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<ProposalFollowButton /> <TestProposalFollowButton /> should render correctly when not authenticated 1`] = `
+Array [
+  <button
+    aria-controls="popover-overlay id-g"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL sc-lcepkR iPfbxu iJuXel cap-button cap-menu__disclosure dropdown-button custom-dropdown-button proposal__button__follow_options"
+    id="proposal-follow-btn-proposal1"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    onMouseEnter={[Function]}
+    style={
+      Object {
+        "borderColor": "#333",
+        "color": "#333",
+      }
+    }
+    type="button"
+  >
+    following
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ iPkWup jsDA-DM cap-icon"
+      fill="none"
+      viewBox="0 0 12 7"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.8}
+      />
+    </svg>
+  </button>,
+  <div
+    aria-orientation="vertical"
+    className="sc-bdvvtL cHXLJG sc-fbyfCU cap-menu__list cap-menu__list"
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onBlurCapture={[Function]}
+    onFocus={[Function]}
+    onFocusCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyDownCapture={[Function]}
+    onKeyUpCapture={[Function]}
+    onTransitionEnd={[Function]}
+    role="menu"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "opacity": 0,
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bdvvtL Xwmcd cap-menu__optionGroup"
+      role="group"
+    >
+      <p
+        className="sc-bdvvtL kqQrVp cap-text cap-menu__optionGroup--title"
+      >
+        <div
+          className="sc-bdvvtL lhbxPK"
+          style={
+            Object {
+              "marginBottom": "unset",
+            }
+          }
+        >
+          <h4
+            className="sc-bdvvtL jtLwVb cap-heading"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            to-be-notified-by-email
+          </h4>
+          <svg
+            aria-controls="id-g"
+            aria-expanded={false}
+            aria-haspopup="dialog"
+            className="sc-bdvvtL sc-eJwWfJ kuPGYc jsDA-DM cap-icon cap-popover__disclosure"
+            fill="none"
+            onClick={[Function]}
+            onClickCapture={[Function]}
+            onKeyDown={[Function]}
+            onKeyPressCapture={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseDownCapture={[Function]}
+            type="button"
+            viewBox="0 0 12 12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 0a6 6 0 106 6 6.006 6.006 0 00-6-6zm.125 2.5a.75.75 0 110 1.5.75.75 0 010-1.5zM7.25 9.25h-2a.5.5 0 010-1h.375a.125.125 0 00.125-.125v-2.25a.125.125 0 00-.125-.125H5.25a.5.5 0 010-1h.5a1 1 0 011 1v2.375a.125.125 0 00.125.125h.375a.5.5 0 110 1z"
+              fill="currentColor"
+            />
+          </svg>
+          <div
+            className="sc-Galmp bYcNna"
+            data-dialog={true}
+            hidden={true}
+            id="id-g"
+            onAnimationEnd={[Function]}
+            onBlur={[Function]}
+            onKeyDown={[Function]}
+            onTransitionEnd={[Function]}
+            role="dialog"
+            style={
+              Object {
+                "display": "none",
+                "left": "100%",
+                "position": "fixed",
+                "top": "100%",
+              }
+            }
+            tabIndex={0}
+          />
+        </div>
+      </p>
+      <button
+        className="sc-bdvvtL jjwgeI cap-menu__item cap-menu__optionItem proposal__follow__minimal"
+        id="proposal-follow-btn-minimal-proposal1"
+        name="minimal"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "background": "transparent",
+            "borderStyle": "solid",
+            "borderTop": "none",
+            "borderWidth": "1px",
+            "marginBottom": 0,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <input
+          checked={true}
+          className="sc-bdvvtL jPCatw"
+          type="radio"
+        />
+        <div
+          className="sc-bdvvtL gKiHgp"
+        >
+          <b>
+            essential
+          </b>
+          updates-and-news
+        </div>
+      </button>
+      <button
+        className="sc-bdvvtL jjwgeI cap-menu__item cap-menu__optionItem proposal__follow__essential"
+        id="proposal-follow-btn-essential-proposal1"
+        name="essential"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "background": "transparent",
+            "borderStyle": "solid",
+            "borderTop": "none",
+            "borderWidth": "1px",
+            "marginBottom": 0,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <input
+          checked={false}
+          className="sc-bdvvtL jPCatw"
+          type="radio"
+        />
+        <div
+          className="sc-bdvvtL gKiHgp"
+        >
+          <b>
+            intermediate
+          </b>
+          updates-news-and-new-contributions
+        </div>
+      </button>
+      <button
+        className="sc-bdvvtL jjwgeI cap-menu__item cap-menu__optionItem proposal__follow__all"
+        id="proposal-follow-btn-all-proposal1"
+        name="all"
+        onBlurCapture={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "background": "transparent",
+            "borderStyle": "solid",
+            "borderTop": "none",
+            "borderWidth": "1px",
+            "marginBottom": 0,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <input
+          checked={false}
+          className="sc-bdvvtL jPCatw"
+          type="radio"
+        />
+        <div
+          className="sc-bdvvtL gKiHgp"
+        >
+          <b>
+            complete
+          </b>
+          updates-news-new-contributions-votes-and-subscriptions
+        </div>
+      </button>
+    </div>
+    <a
+      className="sc-bdvvtL jjwgeI cap-menu__item proposal__unfollow"
+      href="#"
+      id="proposal-unfollow-btn-proposal1"
+      loop={false}
+      onClick={[Function]}
+      orientation="vertical"
+      type="button"
+      wrap={false}
+    >
+      unfollow
+       
+    </a>
+  </div>,
+  <div
+    aria-label="vote.popover.title"
+    className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+    data-dialog={true}
+    hidden={true}
+    id="login-popover"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={0}
+  >
+    <div
+      className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg hzLOTG juLQlw"
+      style={
+        Object {
+          "auto": "100%",
+          "fontSize": 30,
+          "height": "1em",
+          "pointerEvents": "none",
+          "width": "1em",
+        }
+      }
+    >
+      <svg
+        style={
+          Object {
+            "transform": undefined,
+          }
+        }
+        viewBox="0 0 30 30"
+      >
+        <path
+          className="stroke"
+          d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+        />
+        <path
+          className="fill"
+          d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+        />
+      </svg>
+    </div>
+    <div
+      className="sc-bdvvtL iEmlgw"
+    >
+      <p
+        className="sc-bdvvtL gfzBSV cap-text"
+      >
+        vote.popover.title
+      </p>
+      <div
+        className="sc-bdvvtL grUqXo"
+      >
+        <p
+          className="sc-bdvvtL egrZXz cap-text"
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          vote.popover.body
+        </p>
+        <span
+          className="sc-bdnxRM hptjof"
+          clip="rect(0px, 0px, 0px, 0px)"
+        >
+          <button
+            className="sc-bdvvtL sc-lcepkR iPfbxu elkPgU cap-button"
+            onClick={[Function]}
+            type="button"
+          >
+            global.close
+          </button>
+        </span>
+        <span
+          style={Object {}}
+        >
+          <button
+            aria-label="open.connection_modal"
+            className="center-block btn-block login-button btn btn-success"
+            destination="http://localhost"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            global.login
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>,
+]
 `;
