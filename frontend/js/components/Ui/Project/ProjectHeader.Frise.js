@@ -14,7 +14,7 @@ import {
   CapUIIcon,
   headingStyles,
 } from '@cap-collectif/ui';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { cleanChildren } from '~/utils/cleanChildren';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import hexToRgb from '~/utils/colors/hexToRgb';
@@ -22,6 +22,8 @@ import StartStep from '~ui/Project/SVG/Start';
 import EndStep from '~ui/Project/SVG/End';
 import MiddleStep from '~ui/Project/SVG/Step';
 import ResetCss from '~/utils/ResetCss';
+import { getBaseLocale } from '~/utils/router';
+import type { GlobalState } from '~/types';
 
 type FriseProps = {|
   children: React.Node,
@@ -312,26 +314,37 @@ export const Steps = ({ children, modalTitle, currentStepIndex, ...rest }: Steps
 };
 
 type RouterWrapperProps = {|
-  +router: boolean,
+  +router?: boolean,
   +children: React.Node,
   +href: string,
   +stepId: string,
   +questionnaireId?: string,
 |};
 
-const RouterWrapper = ({ router, children, href, stepId, questionnaireId }: RouterWrapperProps) =>
-  router ? (
+const Route = ({ children, href, stepId, questionnaireId }: RouterWrapperProps) => {
+  const { projectSlug } = useParams();
+  const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage);
+  const baseUrl = getBaseLocale(currentLanguage);
+  return (
     <Link
       to={{
-        pathname: href,
+        pathname: `${baseUrl}/project/${projectSlug || ''}${href}`,
         state: { stepId, questionnaireId },
       }}>
       {children}
     </Link>
+  );
+};
+
+const RouterWrapper = ({ router, children, href, stepId, questionnaireId }: RouterWrapperProps) => {
+  return router ? (
+    <Route stepId={stepId} questionnaireId={questionnaireId} href={href}>
+      {children}
+    </Route>
   ) : (
     <>{children}</>
   );
-
+};
 type StepProps = {|
   title: string,
   content?: string,

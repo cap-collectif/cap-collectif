@@ -6,26 +6,10 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <Link
-        to={
-          Object {
-            "pathname": "/step",
-            "state": Object {
-              "stepId": undefined,
-            },
-          }
-        }
-      >
-        <Icon
-          color="#0388cc"
-          name="chevron-left"
-          size={9}
-        />
-        <FormattedMessage
-          id="questions-list"
-          values={Object {}}
-        />
-      </Link>
+      <BackUrl
+        defaultStepUrl="/step"
+        tradKeyToBack="questions-list"
+      />
       <div />
     </ProposalPageHeader__HeaderActions>
     <div
@@ -125,26 +109,10 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <Link
-        to={
-          Object {
-            "pathname": "/step",
-            "state": Object {
-              "stepId": undefined,
-            },
-          }
-        }
-      >
-        <Icon
-          color="#0388cc"
-          name="chevron-left"
-          size={9}
-        />
-        <FormattedMessage
-          id="proposal.back"
-          values={Object {}}
-        />
-      </Link>
+      <BackUrl
+        defaultStepUrl="/step"
+        tradKeyToBack="proposal.back"
+      />
       <div />
     </ProposalPageHeader__HeaderActions>
     <ProposalPageHeader__Cover
@@ -250,26 +218,10 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <Link
-        to={
-          Object {
-            "pathname": "/step",
-            "state": Object {
-              "stepId": undefined,
-            },
-          }
-        }
-      >
-        <Icon
-          color="#0388cc"
-          name="chevron-left"
-          size={9}
-        />
-        <FormattedMessage
-          id="proposal.back"
-          values={Object {}}
-        />
-      </Link>
+      <BackUrl
+        defaultStepUrl="/step"
+        tradKeyToBack="proposal.back"
+      />
       <div>
         <button
           id="side-analysis-open-button"
@@ -387,26 +339,10 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <Link
-        to={
-          Object {
-            "pathname": "/step",
-            "state": Object {
-              "stepId": undefined,
-            },
-          }
-        }
-      >
-        <Icon
-          color="#0388cc"
-          name="chevron-left"
-          size={9}
-        />
-        <FormattedMessage
-          id="questions-list"
-          values={Object {}}
-        />
-      </Link>
+      <BackUrl
+        defaultStepUrl="/step"
+        tradKeyToBack="questions-list"
+      />
       <div />
     </ProposalPageHeader__HeaderActions>
     <div
@@ -506,26 +442,10 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <Link
-        to={
-          Object {
-            "pathname": "/step",
-            "state": Object {
-              "stepId": undefined,
-            },
-          }
-        }
-      >
-        <Icon
-          color="#0388cc"
-          name="chevron-left"
-          size={9}
-        />
-        <FormattedMessage
-          id="establishment-back"
-          values={Object {}}
-        />
-      </Link>
+      <BackUrl
+        defaultStepUrl="/step"
+        tradKeyToBack="establishment-back"
+      />
       <div />
     </ProposalPageHeader__HeaderActions>
     <div
@@ -625,26 +545,10 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
 >
   <div>
     <ProposalPageHeader__HeaderActions>
-      <Link
-        to={
-          Object {
-            "pathname": "/step",
-            "state": Object {
-              "stepId": undefined,
-            },
-          }
-        }
-      >
-        <Icon
-          color="#0388cc"
-          name="chevron-left"
-          size={9}
-        />
-        <FormattedMessage
-          id="interpellation.back"
-          values={Object {}}
-        />
-      </Link>
+      <BackUrl
+        defaultStepUrl="/step"
+        tradKeyToBack="interpellation.back"
+      />
       <div />
     </ProposalPageHeader__HeaderActions>
     <div

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import type { DraftProposalPreview_proposal } from '~relay/DraftProposalPreview_proposal.graphql';
 import { translateContent } from '~/utils/ContentTranslator';
 import { getBaseUrlFromProposalUrl } from '~/utils/router';
@@ -12,27 +12,26 @@ type Props = {
   stepUrl: string,
 };
 
-export class DraftProposalPreview extends React.Component<Props> {
-  render() {
-    const { proposal, stepUrl } = this.props;
-    const url = getBaseUrlFromProposalUrl(proposal.url);
+export const DraftProposalPreview = ({ proposal, stepUrl }: Props) => {
+  const { projectSlug } = useParams();
 
-    return (
-      <li className="list-group-item">
-        <Link
-          to={{
-            pathname: `/${url}/${proposal.slug}`,
-            state: {
-              currentVotableStepId: proposal.currentVotableStep?.id,
-              stepUrl: stepUrl.replace(getBaseUrl(), ''),
-            },
-          }}>
-          {translateContent(proposal.title)}
-        </Link>
-      </li>
-    );
-  }
-}
+  const url = getBaseUrlFromProposalUrl(proposal.url);
+
+  return (
+    <li className="list-group-item">
+      <Link
+        to={{
+          pathname: `/project/${projectSlug || ''}/${url}/${proposal.slug}`,
+          state: {
+            currentVotableStepId: proposal.currentVotableStep?.id,
+            stepUrl: stepUrl.replace(getBaseUrl(), ''),
+          },
+        }}>
+        {translateContent(proposal.title)}
+      </Link>
+    </li>
+  );
+};
 
 export default createFragmentContainer(DraftProposalPreview, {
   proposal: graphql`

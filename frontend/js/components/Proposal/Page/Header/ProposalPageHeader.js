@@ -2,12 +2,12 @@
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import moment from 'moment';
 import styled, { type StyledComponent } from 'styled-components';
 import { Button, Box, Flex, Skeleton } from '@cap-collectif/ui';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { getBaseUrl } from '~/config';
 import colors from '~/utils/colors';
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes';
@@ -20,7 +20,7 @@ import UserAvatarLegacy from '~/components/User/UserAvatarLegacy';
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
-import { getBaseUrlFromStepUrl } from '~/utils/router';
+import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router';
 import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration';
 
 type Props = {
@@ -163,17 +163,25 @@ const AvatarPlaceholder = () => (
   </Flex>
 );
 
-const renderBackUrl = (
+const BackUrl = ({
+  originStepUrl,
+  defaultStepUrl,
+  tradKeyToBack,
+  stepId,
+}: {
   originStepUrl?: ?string,
   defaultStepUrl: string,
   tradKeyToBack: ?string,
   stepId?: string,
-) => {
+}) => {
   const url = getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl);
+  const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage);
+  const baseUrl = getBaseLocale(currentLanguage);
+  const { projectSlug } = useParams();
   return (
     <Link
       to={{
-        pathname: `/${url}`,
+        pathname: `${baseUrl}/project/${projectSlug || ''}/${url}`,
         state: { stepId },
       }}>
       <Icon name={ICON_NAME.chevronLeft} size={9} color={colors.primaryColor} />
@@ -226,12 +234,12 @@ export const ProposalPageHeader = ({
     <Header id="ProposalPageHeader">
       <div>
         <HeaderActions>
-          {renderBackUrl(
-            state?.stepUrl,
-            proposal?.form?.step?.url?.replace(getBaseUrl(), '') || '',
-            tradKeyToBack,
-            state?.stepId,
-          )}
+          <BackUrl
+            originStepUrl={state?.stepUrl}
+            defaultStepUrl={proposal?.form?.step?.url?.replace(getBaseUrl(), '') || ''}
+            tradKeyToBack={tradKeyToBack}
+            stepId={state?.stepId}
+          />
           <div>
             {hasAnalysingButton && (
               <button type="button" id="side-analysis-open-button" onClick={onAnalysisClick}>

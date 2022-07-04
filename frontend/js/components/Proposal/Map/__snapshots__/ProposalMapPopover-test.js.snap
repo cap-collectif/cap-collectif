@@ -13,7 +13,7 @@ exports[`<ProposalMapPopover /> should render popover with a default picture giv
         <Link
           to={
             Object {
-              "pathname": "//test-proposal",
+              "pathname": "/project///test-proposal",
               "state": Object {
                 "currentVotableStepId": "id",
                 "stepUrl": "/step",
@@ -77,7 +77,7 @@ exports[`<ProposalMapPopover /> should render popover with a picture given the f
         <Link
           to={
             Object {
-              "pathname": "//test-proposal",
+              "pathname": "/project///test-proposal",
               "state": Object {
                 "currentVotableStepId": "id",
                 "stepUrl": "/step",
@@ -125,7 +125,7 @@ exports[`<ProposalMapPopover /> should render popover without a picture given th
         <Link
           to={
             Object {
-              "pathname": "//test-proposal",
+              "pathname": "/project///test-proposal",
               "state": Object {
                 "currentVotableStepId": "id",
                 "stepUrl": "/step",

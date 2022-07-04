@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import type { State, FeatureToggles } from '~/types';
 import type { ProposalMapPopover_proposal } from '~relay/ProposalMapPopover_proposal.graphql';
 import UserLink from '../../User/UserLink';
@@ -135,6 +135,8 @@ export const PopoverInfo: StyledComponent<
 
 export const ProposalMapPopover = ({ proposal, features, isMobile }: Props) => {
   const url = getBaseUrlFromProposalUrl(proposal.url);
+  const { projectSlug } = useParams();
+
   return (
     <>
       <PopoverContainer isMobile={isMobile}>
@@ -145,7 +147,7 @@ export const ProposalMapPopover = ({ proposal, features, isMobile }: Props) => {
           <h4>
             <Link
               to={{
-                pathname: `/${url}/${proposal.slug}`,
+                pathname: `/project/${projectSlug || ''}/${url}/${proposal.slug}`,
                 state: {
                   currentVotableStepId: proposal.currentVotableStep?.id,
                   stepUrl: proposal.form?.step?.url.replace(getBaseUrl(), ''),

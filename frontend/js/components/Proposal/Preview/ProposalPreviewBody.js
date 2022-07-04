@@ -4,7 +4,7 @@ import Truncate from 'react-truncate';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ProposalPreviewVote from './ProposalPreviewVote';
 import { getBaseUrl } from '~/config';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
@@ -30,16 +30,20 @@ type Props = {
   isSPA?: boolean,
 };
 
-const renderProposalTitle = (
+const Route = ({
+  proposal,
+  step,
+}: {
   proposal: ProposalPreviewBody_proposal,
   step: ?ProposalPreviewBody_step,
-  isSPA?: boolean,
-) => {
+}) => {
+  const { projectSlug } = useParams();
   const url = getBaseUrlFromProposalUrl(proposal.url);
-  return isSPA ? (
+
+  return (
     <Link
       to={{
-        pathname: `/${url}/${proposal.slug}`,
+        pathname: `/project/${projectSlug || ''}/${url}/${proposal.slug}`,
         state: {
           currentVotableStepId: proposal.currentVotableStep?.id,
           stepUrl: step?.url.replace(getBaseUrl(), ''),
@@ -50,6 +54,16 @@ const renderProposalTitle = (
         <Truncate lines={3}>{translateContent(proposal.title)}</Truncate>
       </Card.Title>
     </Link>
+  );
+};
+
+const renderProposalTitle = (
+  proposal: ProposalPreviewBody_proposal,
+  step: ?ProposalPreviewBody_step,
+  isSPA?: boolean,
+) => {
+  return isSPA ? (
+    <Route proposal={proposal} step={step} />
   ) : (
     <a href={proposal.url}>
       <Card.Title tagName="h4">

@@ -49,7 +49,7 @@ app_project_show_opinions_2: '/project/{projectSlug}/consultation/{stepSlug}/{co
 app_project_show_opinions_ranking: '/project/{projectSlug}/ranking/{stepSlug}/opinions/{page}'
 app_project_show_posts: '/projects/{projectSlug}/posts/{page}'
 app_project_show_presentation: '/project/{projectSlug}/presentation/{stepSlug}'
-app_project_show_proposal: '/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}'
+app_project_show_proposal: '/project/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}'
 app_project_show_questionnaire: '/project/{projectSlug}/questionnaire/{stepSlug}'
 app_project_show_questionnaire_reply: '/project/{projectSlug}/questionnaire/{stepSlug}/replies/{replyId}'
 app_project_show_questionnaire_trailing_slash: '/project/{projectSlug}/questionnaire/{stepSlug}/'
