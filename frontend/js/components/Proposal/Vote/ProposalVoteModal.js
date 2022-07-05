@@ -14,7 +14,6 @@ import {
   Tag,
   CapUIIcon,
   InfoMessage,
-  useMultiStepModal,
 } from '@cap-collectif/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -363,8 +362,6 @@ export const ProposalVoteModal = ({
     requirement => requirement.viewerMeetsTheRequirement,
   );
 
-  const { hide: multiStepHide } = useMultiStepModal();
-
   return !allRequirementsMet ? (
     step.requirements ? (
       <ProposalVoteMultiModalContainer
@@ -433,7 +430,7 @@ export const ProposalVoteModal = ({
                   stepId: step.id,
                   isAuthenticated,
                 });
-                multiStepHide();
+                onHide();
               }}>
               {intl.formatMessage({ id: 'proposal.validate.vote' })}
             </Button>
