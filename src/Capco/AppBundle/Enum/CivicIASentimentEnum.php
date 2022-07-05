@@ -7,8 +7,9 @@ class CivicIASentimentEnum implements EnumType
     const POSITIVE = 'POSITIVE';
     const NEUTRAL = 'NEUTRAL';
     const NEGATIVE = 'NEGATIVE';
+    const MIXED = 'MIXED';
 
-    const SENTIMENTS = [self::POSITIVE, self::NEUTRAL, self::NEGATIVE];
+    const SENTIMENTS = [self::POSITIVE, self::NEUTRAL, self::NEGATIVE, self::MIXED];
 
     public static function isValid($value): bool
     {

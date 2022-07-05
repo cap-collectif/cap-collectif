@@ -27,7 +27,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
     {
         $category = 'cars';
         $readability = rand(1, 100);
-        $sentiment = 'neutral';
+        $sentiment = 'NEUTRAL';
 
         $valueResponse->setIaSentiment($sentiment)->shouldBeCalledOnce();
         $valueResponse->setIaReadability($readability)->shouldBeCalledOnce();
@@ -50,7 +50,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
         $invalidJson = json_encode([
             [
                 'categories' => 'car',
-                'sentiment' => 'neutral',
+                'sentiment' => 'NEUTRAL',
                 'lisibilite' => rand(1, 100),
             ],
         ]);
@@ -66,7 +66,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
             [
                 'value_id' => 'nope',
                 'categories' => 'car',
-                'sentiment' => 'neutral',
+                'sentiment' => 'NEUTRAL',
                 'lisibilite' => rand(1, 100),
             ],
         ]);
@@ -94,7 +94,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
             [
                 'value_id' => 'response1',
                 'categories' => 'car',
-                'sentiment' => 'neutral',
+                'sentiment' => 'NEUTRAL',
                 'lisibilite' => rand(1, 100),
                 'categories_details' => [
                     ['score' => 0.834992, 'label' => 'news'],
@@ -104,7 +104,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
             [
                 'value_id' => 'response2',
                 'categories' => 'holiday',
-                'sentiment' => 'positive',
+                'sentiment' => 'POSITIVE',
                 'lisibilite' => rand(1, 100),
                 'sentiment_score' => [
                     'Positive' => 0.9745733738,

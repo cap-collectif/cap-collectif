@@ -12,3 +12,6 @@ CivicIASentiment:
             NEGATIVE:
                 value: '@=constant("Capco\\AppBundle\\Enum\\CivicIASentimentEnum::NEGATIVE")'
                 description: 'Negative sentiment.'
+            MIXED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\CivicIASentimentEnum::MIXED")'
+                description: 'Positive and negative sentiment.'

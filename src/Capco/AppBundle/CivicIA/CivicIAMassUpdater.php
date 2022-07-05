@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\CivicIA;
 
 use Capco\AppBundle\Entity\Interfaces\CivicIAAnalyzableInterface;
+use Capco\AppBundle\Enum\CivicIASentimentEnum;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -99,7 +100,8 @@ class CivicIAMassUpdater
             !isset($datum->value_id) ||
             !isset($datum->categories) ||
             !isset($datum->lisibilite) ||
-            !isset($datum->sentiment)
+            !isset($datum->sentiment) ||
+            !CivicIASentimentEnum::isValid($datum->sentiment)
         ) {
             throw new UserError(self::INVALID_JSON);
         }

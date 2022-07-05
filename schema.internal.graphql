@@ -2026,6 +2026,9 @@ enum CivicIASentiment {
 
   """Negative sentiment."""
   NEGATIVE
+
+  """Positive and negative sentiment."""
+  MIXED
 }
 
 """A proposal step"""

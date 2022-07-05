@@ -74,6 +74,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         question: '@simplequestion9'
         proposalEvaluation: '@proposalEvaluation1'
         value: Cette évaluation est effectivement utile, mais ce n'est clairement pas prioritaire.
+        iaSentiment: 'MIXED'
         createdAt: <(new \DateTime('2021-01-01 02:15:00'))>
     response16:
         question: '@xQuestion9'
