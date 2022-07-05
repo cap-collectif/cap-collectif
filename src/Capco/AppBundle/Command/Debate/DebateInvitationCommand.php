@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Find id of a debate : SELECT debate.id, step.title FROM debate LEFT JOIN step ON step.id = step_id;
+ * Find id of a debate : SELECT debate.id, step.title FROM debate LEFT JOIN step ON step.id = step_id;.
  */
 class DebateInvitationCommand extends Command
 {
@@ -26,6 +26,7 @@ class DebateInvitationCommand extends Command
     public const ARG_DEBATE = 'debate';
     public const OPT_REMINDER = 'reminder';
     public const OPT_TEST_TOKEN = 'test-token';
+    public const OPT_TEST_EMAIL = 'test-email';
     public const OPT_BATCH = 'batch';
     public const OPT_BATCH_DEFAULT = 10;
     public const OPT_LIMIT = 'limit';
@@ -82,6 +83,12 @@ class DebateInvitationCommand extends Command
                 null,
                 InputOption::VALUE_NONE,
                 '/!\ Should be used for CI only /!\ .To generate non-randomized tokens.'
+            )
+            ->addOption(
+                self::OPT_TEST_EMAIL,
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'To send the email to a tester.'
             );
     }
 
@@ -91,24 +98,28 @@ class DebateInvitationCommand extends Command
         $isReminder = $input->getOption(self::OPT_REMINDER);
         $limit = $input->getOption(self::OPT_LIMIT);
         $batch = $input->getOption(self::OPT_BATCH);
+        $testEmail = $input->getOption(self::OPT_TEST_EMAIL);
         if ($batch < 1) {
             $batch = self::OPT_BATCH_DEFAULT;
         }
-        $total = $this->userRepository->countConfirmedUsersWithoutVoteInDebate($debate);
+        $total = $testEmail
+            ? 1
+            : $this->userRepository->countConfirmedUsersWithoutVoteInDebate($debate);
         $usersLoaded = 0;
         $mailSent = 0;
         $progressBar = new ProgressBar($output, $limit ?? $total);
         do {
-            $users = $this->userRepository->getConfirmedUsersWithoutVoteInDebate(
-                $debate,
-                $usersLoaded
-            );
+            $users = $this->getUsers($debate, $usersLoaded, $testEmail);
             $usersLoaded += \count($users);
 
             foreach ($users as $user) {
                 try {
                     $voteToken = $this->getVoteToken($user, $debate);
-                    if (null === $voteToken || ($isReminder && $voteToken->isValid())) {
+                    if (
+                        null === $voteToken ||
+                        ($isReminder && $voteToken->isValid()) ||
+                        $testEmail
+                    ) {
                         $this->sendInvitation(
                             $user,
                             $debate,
@@ -147,6 +158,20 @@ class DebateInvitationCommand extends Command
         $output->writeln("\n${mailSent} email(s) sent to invite to debate " . $debate->getId());
 
         return 0;
+    }
+
+    private function getUsers(Debate $debate, int $usersLoaded, ?string $testEmail): array
+    {
+        if ($testEmail) {
+            $testUser = $this->userRepository->findOneByEmail($testEmail);
+            if ($testUser) {
+                return [$testUser];
+            }
+
+            throw new \RuntimeException($testEmail . ' not found');
+        }
+
+        return $this->userRepository->getConfirmedUsersWithoutVoteInDebate($debate, $usersLoaded);
     }
 
     private function sendInvitation(

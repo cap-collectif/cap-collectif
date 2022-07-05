@@ -1,0 +1,585 @@
+<!DOCTYPE HTML PUBLIC>
+<html>Test Spyl tmp disable
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>
+            </title>
+    <style type="text/css" media="screen">
+                                .ExternalClass * {line-height:100%}
+            .bb {
+                border-bottom: 1px solid #d9d9d9;
+                border-collapse: collapse;
+            }
+
+            .ba {
+                border: 0.5px solid #d9d9d9;
+                border-collapse: collapse;
+            }
+            .b-lrb {
+                border:0.5px solid #d9d9d9;
+                border-top: 0;
+                border-collapse: collapse;
+            }
+            .yi, .zi, .im {
+                color: #000000 !important;
+            }
+            #top-mail a {
+                text-decoration: none;
+                color: #337ab7;
+            }
+            #footer-mail {
+                color: #A2ABB4;
+            }
+            #footer-mail  a {
+                color: #ABABAB !important;
+            }
+
+            #email-penrose-conteneur {width:600px;}
+
+            @media (max-width:580px) {
+                *[id=email-penrose-conteneur] {width:100% !important;}
+                table[class=resp-full-table] {width:100% !important; clear:both;}
+                td[class=resp-full-td] {width:100% !important; clear:both;}
+                td[class=resp-full-td-center] {width:100%!important; clear:both; text-align: center !important;}
+                img[class=email-penrose-img-header] {width:100% !important; max-width:340px !important;}
+                hr[class=resp-hr-center] {text-align: center !important; margin-left:auto !important; margin-right:auto !important;}
+                #email-penrose-conteneur {width:350px; margin: 0 auto;}
+            }
+
+            @font-face {
+                font-family: "OpenSans";
+                src: url("https://capco.dev//fonts/openSans/OpenSans-Regular.ttf?v1") format("truetype");
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: "OpenSans";
+                src: url("https://capco.dev//fonts/openSans/OpenSans-SemiBold.ttf?v1") format("truetype");
+                font-weight: 600;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: "OpenSans";
+                src: url("https://capco.dev//fonts/openSans/OpenSans-Bold.ttf?v1") format("truetype");
+                font-weight: bold;
+                font-style: normal;
+            }
+        
+            
+p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #2B2B2B;
+    font-family: 'OpenSans', helvetica, arial, sans-serif !important;
+}
+
+.mail__greeting {
+    margin: 24px 0 ;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    color: #5E5E5E;
+    text-align: left;
+}
+.mail__banner{
+    width: 100%;
+    max-height: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+.mail__vote {
+    display: block;
+    text-align: center;
+    color: #272B30;
+    width: 100%;
+}
+.mail__vote h3{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 32px;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+.mail__vote_buttons{
+    display: inline-block;
+    width: 100%;
+}
+.mail__vote_for{
+    background: #FBFEFC;
+    border: 1px solid #46D267;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 12px 22px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    width: 125px;
+    height: 48px;
+}
+.mail__vote_for p{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #46D267;
+    margin: 0;
+    margin-left: 9px;
+
+}
+.mail__vote_against{
+    background: #FEFBFB;
+    border: 1px solid #DD3C4C;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 12px 22px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    height: 48px;
+}
+.mail__vote_against p{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #DD3C4C;
+    margin: 0;
+    margin-left: 9px;
+}
+.mail_WYSIWIG{
+    margin-top: 48px;
+    text-align: left;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #2B2B2B;
+}
+.mail_WYSIWIG img {
+    border-radius: 4px;
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    margin: 24px 0px;
+}
+.mail_WYSIWIG h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+}
+.mail__opinions{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 24px;
+    grid-template-areas:
+    ". .";
+    margin-top: 48px;
+}
+.mail__opinion_for,
+.mail__opinion_against{
+    position: relative;
+    background: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding-top: 2px;
+    height: 580px;
+    overflow: auto;
+}
+.mail__opinion_for_user,
+.mail__opinion_against_user{
+    padding-left: 16px;
+    margin-top: 16px;
+    width: 100%;
+}
+.mail__opinion_for_user img,
+.mail__opinion_against_user img {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #FFC61A;
+    filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.1));
+    border-radius: 60px;
+}
+.mail__opinion_for_user p,
+.mail__opinion_against_user p {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: right;
+    color: #2B2B2B;
+    margin: 0 0 0 12px;
+}
+.mail__opinion_for_user_bio,
+.mail__opinion_against_user_bio{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #5E5E5E;
+    margin: 8px 0 0 0;
+}
+.mail__opinion_for_body,
+.mail__opinion_against_body{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #2B2B2B;
+    margin-top: 24px;
+}
+.mail__debate_link {
+    width: 100%;
+    text-align: center;
+    margin-top: 24px;
+}
+.mail__debate_link a {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    text-decoration-line: underline !important;
+    color: #6030E8 !important;
+}
+.resp-full-td > div >p{
+    text-align: center !important;
+}
+@media (min-width: 320px) and (max-width: 480px) {
+    body{
+        margin: 0!important;
+    }
+    .mail-container{
+        padding: 40px 32px !important;
+    }
+    #email-penrose-conteneur{
+        padding: 0!important;
+    }
+    #email-penrose-conteneur:first-child {
+        padding: 24px !important;
+    }
+    table, thead, tbody, th, td, tr {
+        display: block!important;
+    }
+    .res-opinion__button,
+    .res-opinion{
+        width: 100% !important;
+    }
+    .mail__banner{
+        max-height: 100px!important;
+    }
+    .mail__vote_buttons{
+        flex-flow: column nowrap!important;
+    }
+    .mail__vote_for,
+    .mail__vote_against{
+        width: 100%!important;
+    }
+    .mail__vote_for{
+        margin-bottom: 16px!important;
+        margin-right: 0px!important;
+    }
+    .mail__opinions{
+        display: grid!important;
+        grid-template-columns: 1fr!important;
+        grid-template-rows: 1fr 1fr!important;
+        gap: 24px 0px!important;
+        grid-template-areas:
+    "."
+    "."!important;
+    }
+    .resp-full-td > div >p:first-child{
+        text-align: left !important;
+    }
+    .mail__vote_for .vote__button_row{
+    padding-left: calc((100% - 54px) / 2);
+    }
+    .mail__vote_against .vote__button_row{
+        padding-left: calc((100% - 68px) / 2);
+    }
+    .vote__button_row td{
+        vertical-align: middle;
+        float: left;
+        margin: auto 0;
+    }
+    .vote__thumb{
+        width: 22px;
+        padding: 7px 0;
+    }
+}
+.vote__thumb{
+    width: 22px;
+    height: 13px;
+}
+table {
+    width: 100%;
+    border-spacing: 0px;
+}
+.opinions{
+    margin-top: 40px;
+}
+.mail__opinion_for_badge{
+    background: #E4F9E9;
+    border-radius: 4px 0px;
+    padding: 4px 8px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 16px;
+    color: #165A26;
+    text-transform: uppercase;
+}
+.mail__opinion_against_badge{
+    background: #FAE5E7;
+    border-radius: 4px 0px;
+    padding: 4px 8px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 16px;
+    color: #5F1119;
+    text-transform: uppercase;
+}
+.mail__author_avatar{width: 32px;
+    height: 32px;
+    border: 2px solid #FFC61A;
+    filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.1));
+    border-radius: 60px;}
+
+.mail_opinion_user_displayName{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+}
+.res-opinion{
+    background: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    border-radius: 8px;
+}
+.res-opinion__button{border: 0}
+td {
+    vertical-align: top;
+    padding: 0px;
+}
+
+            </style>
+</head>
+<body>
+<div align="center" style="background-color: #F7F7F8; padding: 40px;" class='mail-container'>
+    <table id="email-penrose-conteneur" align="center" style="background-color:#fff; padding: 20px; border-radius: 4px;" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                <table width="100%" id="top-mail" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr style="margin-top: 20px">
+                        <td class="resp-full-td-center" valign="top" style="font-family: 'OpenSans', helvetica, arial, sans-serif; font-size: 15px">
+                                        <div>
+                                    <img style="margin-bottom: 20px;" src="https://capco.dev/media/cache/default_logo/default/0001/01/providerReferenceForLogo.png" alt="logo Cap Collectif" />
+                                                    <img class='mail__banner' src='https://capco.dev/media/default/0001/01/cannabis.jpg' alt='banner for the email'>
+                
+
+                <div class='mail__greeting'>
+                    <p>mail-greeting-username {&quot;{username}&quot;:&quot;user&quot;}</p>
+
+                    
+                                            
+
+                            <p>
+                                debate-mail-lancement {"{debateUrl}":"https:\/\/capco.dev\/project\/debat-sur-le-cannabis\/debate\/pour-ou-contre-la-legalisation-du-cannabis","{title}":"Pour ou contre la l\u00e9galisation du Cannabis ?","{forOpinionAuthor}":"Bob Marley","{againstOpinionAuthor}":"Laurent Alexandre"}
+                            </p>
+                                            
+
+                </div>
+                                <div class='mail__vote'>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <h3>
+                                    Pour ou contre la légalisation du Cannabis ?
+                                </h3>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <tbody>
+                            <tr>
+                                                                <td class='res-opinion__button' style='float: right'>
+                                    <a class='mail__vote_for'
+                                       href="https://capco.dev/voteByToken?token=debateCannabis-user5&amp;value=FOR">
+                                        <table>
+                                            <tbody>
+                                                <tr class='vote__button_row'>
+                                                    <td style='vertical-align: middle'><img class='vote__thumb' src="https://capco.dev//ThumbsUp.png?v1" alt=" thumbs up"  ></td>
+                                                    <td style='vertical-align: middle'><p style='height: 24px;vertical-align: middle;display: table-cell;'>mail-vote-for</p></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </a>
+                                </td>
+                                <td class='res-opinion__button'>
+                                    <a  class='mail__vote_against'
+                                        href="https://capco.dev/voteByToken?token=debateCannabis-user5&amp;value=AGAINST">
+                                        <table>
+                                            <tbody>
+                                                <tr class='vote__button_row'>
+                                                    <td style='vertical-align: middle'><img class='vote__thumb' src='https://capco.dev//ThumbsDown.png?v1' alt='Thumbs down'></td>
+                                                    <td style='vertical-align: middle'><p style='height: 24px;vertical-align: middle;display: table-cell;'>mail-vote-against</p></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                                                    <div class='opinions'>
+                        <table>
+                            <tbody>
+                                <tr>
+                                                                            <td class='res-opinion' style='width: 49%;vertical-align: top;'>
+                                            <table style='height: 21px '>
+                                                <tbody>
+                                                <tr>
+                                                    <td style='float: left; height: 21px'>
+                                                        <div class='mail__opinion_for_badge'>opinion.for</div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table style='margin-top: 16px;margin-left: 16px;'>
+                                                <tbody>
+                                                <tr>
+                                                                                                            <td style='width: 48px;vertical-align: middle'>
+                                                            <img class='mail__author_avatar' src='https://capco.dev/media/default/0001/01/bob-marley.jpg' alt='photo of Bob Marley'>
+                                                        </td>
+                                                        <td style='vertical-align: middle'>
+                                                            <p class='mail_opinion_user_displayName'> Bob Marley</p>
+                                                        </td>
+                                                    
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                                                                        <table style='padding: 0 16px'>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <p class='mail__opinion_for_user_bio'>Robert Nesta Marley dit Bob Marley, né le 6 février 1945 à Nine Mile et mort le 11 mai 1981 à Miami d&#039;un cancer généralisé, est un auteur-compositeur-interprète et musicien jamaïcain.</p>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                                                                                                                    <table style='padding: 0 16px'>
+                                                <tbody>
+                                                <tr>
+                                                    <td><div class='mail__opinion_for_body'><p>Légaliser le cannabis, contrairement à ce que beaucoup de personnes pensent, veut dire le contrôler, contrôler sa production, sa qualité mais aussi sa distribution que ce soit pour des objectifs thérapeutiques ou récréatifs. Mais c’est surtout <strong>réduire drastiquement</strong> son trafic et les délits associés. Pour être efficace la légalisation devra être absolument accompagnée par des mesures sociales en faveur des familles qui ne survivent souvent que grâce au trafic de cannabis…</p></div></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                                                                    </td>
+                                    
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                                                                            <td class='res-opinion' style='width: 49%;vertical-align: top;'>
+                                            <table style='height: 21px;'>
+                                                <tbody>
+                                                <tr>
+                                                    <td style='float: left; height: 21px'>
+                                                        <div class='mail__opinion_against_badge'>opinion.against</div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table style='margin-top: 16px;margin-left: 16px;'>
+                                                <tbody>
+                                                <tr>
+                                                                                                            <td style='width: 48px;vertical-align: middle'>
+                                                            <img class='mail__author_avatar' src='https://capco.dev/media/default/0001/01/laurent-alexandre.png' alt='photo of Laurent Alexandre'>
+                                                        </td>
+                                                        <td style='vertical-align: middle'>
+                                                            <p class='mail_opinion_user_displayName'> Laurent Alexandre</p>
+                                                        </td>
+                                                                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                                                                        <table style='padding: 0 16px'>
+                                                <tbody>
+                                                <tr>
+                                                    <td><p class='mail__opinion_against_user_bio'>Laurent Alexandre, né le 10 juin 1960 à Paris, haut fonctionnaire et médecin de formation, est un entrepreneur, écrivain et militant politique français.</p></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                                                                                                                    <table style='padding: 0 16px'>
+                                                <tbody>
+                                                <tr>
+                                                    <td><div class='mail__opinion_against_body'> <p>La loi de 1970, qui a rendu illicite le cannabis, reste pertinente, avec la confirmation de la nocivité de cette drogue. La France est, pour sa consommation, au premier rang des 27 états Européens, avec 1 600 000 usagers réguliers et 600 000 usagers quotidiens ou multi-quotidiens.</p><br /><br /><p>Le cannabis, par son tétrahydrocannabinol (THC), induit une dépendance psychique ainsi qu’une dépendance physique. Les taux de THC des produits en circulation ont été multipliés d’un facteur 3 à…</p></div></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                                                                    </td>
+                                                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                
+
+                <div class='mail__debate_link'><a href="https://capco.dev/project/debat-sur-le-cannabis/debate/pour-ou-contre-la-legalisation-du-cannabis">consulter-site</a></div>
+            </div>
+                                </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <table id="email-penrose-conteneur" align="center" border="0" cellspacing="0" cellpadding="0" style="margin: 30px auto; padding: 0 30px;">
+        <tr>
+            <td>
+                <table id="footer-mail" style="width: 100%; font-size: 13px;"  class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="resp-full-td" style="text-align: center;font-family: 'OpenSans', helvetica, arial, sans-serif;">
+                            
+
+            <div>
+                <p style="margin: 0; text-align: left">email.notification.footer.mail-send-by.with-unsubscribe {"{siteName}":"Cap-Collectif","{siteUrl}":"https:\/\/capco.dev\/","{unsubscribeUrl}":"https:\/\/capco.dev\/actionToken?token=user5unsubscribeToken"}</p>
+                <p style="text-align: left;">
+                    email.propulsed.by
+
+
+                    <img src="https://capco.dev//capco-logo-mail.png?v1" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
+                    Cap Collectif
+
+
+                </p>
+            </div>
+                                </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
