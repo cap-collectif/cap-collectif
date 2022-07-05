@@ -181,7 +181,7 @@ const BackUrl = ({
   return (
     <Link
       to={{
-        pathname: `${baseUrl}/project/${projectSlug || ''}/${url}`,
+        pathname: `${baseUrl}/project${!baseUrl ? `/${projectSlug || ''}` : ''}/${url}`,
         state: { stepId },
       }}>
       <Icon name={ICON_NAME.chevronLeft} size={9} color={colors.primaryColor} />
