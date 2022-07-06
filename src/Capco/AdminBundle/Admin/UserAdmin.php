@@ -2,13 +2,14 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use FOS\UserBundle\Model\UserManagerInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
 
-class UserAdmin extends BaseAdmin
+class UserAdmin extends CapcoAdmin
 {
+    protected UserManagerInterface $userManager;
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
 
     public function getBatchActions()
@@ -36,6 +37,16 @@ class UserAdmin extends BaseAdmin
     public function getExportFormats()
     {
         return ['csv'];
+    }
+
+    public function setUserManager(UserManagerInterface $userManager): void
+    {
+        $this->userManager = $userManager;
+    }
+
+    public function getUserManager(): UserManagerInterface
+    {
+        return $this->userManager;
     }
 
     protected function configureListFields(ListMapper $listMapper): void

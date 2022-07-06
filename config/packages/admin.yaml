@@ -292,18 +292,6 @@ services:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
-    Capco\AdminBundle\Admin\RedirectAdmin:
-        arguments: [~, Capco\AppBundle\Entity\Locale, Sonata\AdminBundle\Controller\CRUDController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: custom-url,
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\LocaleAdmin:
         arguments: [~, Capco\AppBundle\Entity\Locale, Sonata\AdminBundle\Controller\CRUDController]
         tags:

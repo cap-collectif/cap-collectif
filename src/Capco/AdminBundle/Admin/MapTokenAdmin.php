@@ -5,9 +5,8 @@ namespace Capco\AdminBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
 
-class MapTokenAdmin extends BaseAdmin
+class MapTokenAdmin extends CapcoAdmin
 {
     protected $baseRouteName = 'capco_admin_map_list';
     protected $baseRoutePattern = 'map';

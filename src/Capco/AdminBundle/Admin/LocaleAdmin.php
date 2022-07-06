@@ -5,9 +5,8 @@ namespace Capco\AdminBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
 
-class LocaleAdmin extends BaseAdmin
+class LocaleAdmin extends CapcoAdmin
 {
     protected $baseRouteName = 'capco_admin_locale_list';
     protected $baseRoutePattern = 'locale';

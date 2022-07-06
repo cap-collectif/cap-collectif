@@ -78,7 +78,6 @@ sonata_admin:
                     - Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
                     - Capco\AdminBundle\Admin\ProjectDistrictAdmin
                     - Capco\AdminBundle\Admin\MapTokenAdmin
-                    - Capco\AdminBundle\Admin\RedirectAdmin
                     - Capco\AdminBundle\Admin\LocaleAdmin
                     - Capco\AdminBundle\Admin\SiteFaviconAdmin
                     - Capco\AdminBundle\Admin\FontAdmin
