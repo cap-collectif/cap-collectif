@@ -34,7 +34,7 @@ describe('mutations.updateProfilePersonalData', () => {
       {
         input: {
           ...input,
-          phone: '+33628232323',
+          phone: '+33675492871',
         },
       },
       'internal_admin',

@@ -38,7 +38,7 @@ class CheckPhoneNumberValidator extends ConstraintValidator
     private function checkAlreadyUsed(string $phone, Constraint $constraint)
     {
         $currentUser = $this->security->getUser();
-        $user = $this->userRepository->findOneBy(['phone' => $phone]);
+        $user = $this->userRepository->findOneBy(['phone' => $phone, 'phoneConfirmed' => true]);
         if ($user && $user !== $currentUser) {
             $this->context->buildViolation($constraint->alreadyUsedMessage)->addViolation();
         }
