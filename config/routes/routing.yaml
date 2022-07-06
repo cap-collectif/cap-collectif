@@ -87,15 +87,6 @@ capco_app:
     type: annotation
     prefix: /
 
-sonata_user_admin_security:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
-    options: { i18n: false }
-sonata_user_admin_resetting:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
-    prefix: /admin/resetting
-    options: { i18n: false }
-
 admin_capco_media_media_browser:
     path: /admin/capco/media/media/browser
     controller: Capco\AdminBundle\Controller\MediaAdminController::browserAction
