@@ -87,15 +87,6 @@ capco_app:
     type: annotation
     prefix: /
 
-# Dummy route for sonata
-sonata_user_profile_show:
-    path: /profile/redirect-sonata-show
-    defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: capco_user_profile_show
-        permanent: true
-    options: { i18n: false }
-
 sonata_user_admin_security:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
@@ -140,9 +131,6 @@ capco_profile_edit:
     defaults: { _controller: CapcoUserBundle:Profile:editProfile }
     options: { i18n: false }
 
-capco_change_password:
-    path: /profile/change-password
-    defaults: { _controller: SonataUserBundle:ChangePassword:changePassword }
 fos_user:
     resource: '@FOSUserBundle/Resources/config/routing/all.xml'
     options: { i18n: false }
@@ -169,12 +157,6 @@ capco_user:
     resource: '@CapcoUserBundle/Controller/'
     type: annotation
     prefix: /
-
-fos_user_registration_check_email:
-    path: /check-email
-    defaults:
-        _controller: SonataUserBundle:Registration:checkEmail
-    options: { i18n: false }
 
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
