@@ -45,7 +45,6 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y -qq \
         php7.4-apcu \
-        php7.4-apc \
         php7.4-cli \
         php7.4-mbstring \
         php7.4-common \
