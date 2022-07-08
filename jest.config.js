@@ -20,8 +20,8 @@ module.exports = {
     '~(.*)$': '<rootDir>/frontend/js/$1',
     '~svg(.*)$': '<rootDir>/public/svg/$1',
     '~image(.*)$': '<rootDir>/public/image/$1',
-    "\\.(css|less)$": "identity-obj-proxy",
-    "\\.(ttf|woff|woff2)$": '<rootDir>/__mocks__/font.js',
+    '\\.(css|less)$': 'identity-obj-proxy',
+    '\\.(ttf|woff|woff2)$': '<rootDir>/__mocks__/font.js',
   },
   coverageReporters: ['text', 'json-summary', 'lcov', 'clover', 'json'],
   modulePaths: ['<rootDir>/frontend/js/__generated__'],
@@ -36,4 +36,5 @@ module.exports = {
     '.*': 'babel-jest',
   },
   transformIgnorePatterns: ['node_modules/(?!(recharts)/)'],
+  resolver: '<rootDir>/jest.resolver.js',
 };

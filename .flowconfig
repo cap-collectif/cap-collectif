@@ -73,6 +73,9 @@ unnecessary-optional-chain=off
 ; ignore WYSIWYG files (because we uninstall draft-js & his friends, its too heavy)
 .*/AdminEditor/WysiwygEditor.js
 
+; ignore config file
+.*/jest.resolver.js
+
 [libs]
 flow-typed
 

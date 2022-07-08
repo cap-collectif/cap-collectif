@@ -1,5 +1,4 @@
 /* eslint-disable */
-import 'babel-polyfill';
 global['fetch'] = require('fetch-cookie/node-fetch')(require('node-fetch')); // Allow fetch to use cookies
 
 // In development you can use, if you prefer:
@@ -145,7 +144,12 @@ global.graphql = (query, variables, client = 'anonymous') => {
     case 'internal_kiroule':
       return authenticatedInternalRequest('pierre@cap-collectif.com', 'toto', query, variables);
     case 'internal_maxidev':
-      return authenticatedInternalRequest('maxime.auriau@cap-collectif.com', 'toto', query, variables);
+      return authenticatedInternalRequest(
+        'maxime.auriau@cap-collectif.com',
+        'toto',
+        query,
+        variables,
+      );
     case 'internal_not_confirmed':
       return authenticatedInternalRequest(
         'user_not_confirmed@test.com',

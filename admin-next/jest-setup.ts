@@ -1,7 +1,6 @@
 /* eslint-env jest */
 /* eslint-disable no-console */
 
-import 'babel-polyfill';
 import 'whatwg-fetch';
 
 global.console = {
