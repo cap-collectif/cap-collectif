@@ -99,6 +99,10 @@ export type FormValues = {|
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  if (props.invalid) {
+    return;
+  }
+
   const { proposal, onValidate } = props;
   onValidate(values.validate && values.status ? 'SAVING' : 'DRAFT_SAVING');
   const input = {
@@ -155,6 +159,7 @@ const validate = (values: FormValues, { proposal, intl }: Props) => {
     intl,
     false,
     availableQuestions,
+    true
   );
 
   const errors = {};
