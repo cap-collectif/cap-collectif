@@ -39,6 +39,11 @@ class DeleteQuestionnaireMutation implements MutationInterface
 
         $proposalForm = $questionnaire->getProposalForm();
 
+        $step = $questionnaire->getStep();
+        if ($step) {
+            $step->setQuestionnaire(null);
+        }
+
         if ($proposalForm) {
             $proposalForm->setEvaluationForm(null);
         }

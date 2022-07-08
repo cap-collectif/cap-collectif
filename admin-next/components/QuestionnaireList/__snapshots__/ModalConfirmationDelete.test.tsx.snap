@@ -235,6 +235,19 @@ Array [
         <main
           className="sc-bdvvtL kAxhVk cap-modal__body"
         >
+          <div
+            className="sc-bdvvtL gbCrOi sc-GEbAx ugYGx cap-info-message"
+          >
+            <div
+              className="sc-bdvvtL gSsynn cap-info-message__content"
+            >
+              <p
+                className="sc-bdvvtL bTZRLI cap-text"
+              >
+                delete-questionnaire-linked-to-project-message
+              </p>
+            </div>
+          </div>
           <p
             className="sc-bdvvtL dgPHnB cap-text"
           >

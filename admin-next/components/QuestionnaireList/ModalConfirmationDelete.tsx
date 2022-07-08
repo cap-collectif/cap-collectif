@@ -11,6 +11,7 @@ import {
     Modal,
     Text,
     toast,
+    InfoMessage
 } from '@cap-collectif/ui';
 import type { ModalConfirmationDelete_questionnaire$key } from '@relay/ModalConfirmationDelete_questionnaire.graphql';
 import DeleteQuestionnaireMutation from 'mutations/DeleteQuestionnaireMutation';
@@ -26,6 +27,14 @@ const FRAGMENT = graphql`
     fragment ModalConfirmationDelete_questionnaire on Questionnaire {
         id
         title
+        step {
+            id
+            title
+            project {
+              title
+              adminAlphaUrl
+            }
+        }
     }
 `;
 
@@ -58,6 +67,7 @@ const ModalConfirmationDelete: React.FC<Props> = ({
     connectionName,
 }) => {
     const questionnaire = useFragment(FRAGMENT, questionnaireFragment);
+    const { step } = questionnaire;
     const { viewerSession } = useAppContext();
     const intl = useIntl();
 
@@ -78,6 +88,19 @@ const ModalConfirmationDelete: React.FC<Props> = ({
                         <Heading>{intl.formatMessage({ id: 'delete-confirmation' })}</Heading>
                     </Modal.Header>
                     <Modal.Body>
+                        {step && (
+                            <InfoMessage variant="warning" mb={4}>
+                                <InfoMessage.Content>
+                                    <Text fontSize={2}>
+                                        {intl.formatMessage({
+                                            id: 'delete-questionnaire-linked-to-project-message'},
+                                            {step: <strong>{step.title}</strong>,
+                                                project: <a href={step?.project?.adminAlphaUrl} target="_blank"><strong>{step?.project?.title}</strong></a>})
+                                        }
+                                    </Text>
+                                </InfoMessage.Content>
+                            </InfoMessage>
+                        )}
                         <Text>
                             {intl.formatMessage(
                                 { id: 'are-you-sure-to-delete-something' },

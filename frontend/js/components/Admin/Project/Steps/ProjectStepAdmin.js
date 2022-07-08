@@ -38,7 +38,7 @@ export const validate = ({ steps }: StepTypes) => {
   /* QuestionnaireStep */
   const questionnaires = steps
     .filter(s => s.__typename === 'QuestionnaireStep')
-    .map(s => s.questionnaire.value);
+    .map(s => s.questionnaire?.value);
 
   if (questionnaires.some((item, index) => questionnaires.indexOf(item) !== index)) {
     errors.steps = { _error: 'duplicate-questionnaire' };
@@ -47,7 +47,13 @@ export const validate = ({ steps }: StepTypes) => {
   return errors;
 };
 
-export const ProjectStepAdmin = ({ form, project, viewerIsAdmin, hasIdentificationCodeLists, query }: Props) => {
+export const ProjectStepAdmin = ({
+  form,
+  project,
+  viewerIsAdmin,
+  hasIdentificationCodeLists,
+  query,
+}: Props) => {
   const [stepType, setStepType] = useState('OtherStep');
   const [showAddStepModal, displayAddStepModal] = useState(false);
 

@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\GraphQL\Mutation\DeleteQuestionnaireMutation;
 use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
@@ -69,6 +70,7 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
 
         $questionnaire->getProposalForm()->willReturn($proposalForm);
+        $questionnaire->getStep()->shouldBeCalledOnce()->willReturn(null);
         $proposalForm->setEvaluationForm(null)->shouldBeCalled();
 
         $em->remove(Argument::type(Questionnaire::class))->shouldBeCalled();
@@ -129,4 +131,29 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
 
         $this->isGranted($postId, $viewer);
     }
+
+    public function it_should_set_questionnaire_to_null_if_questionnaire_is_linked_to_a_step(
+        Arg $arguments,
+        GlobalIdResolver $globalIdResolver,
+        EntityManagerInterface $em,
+        User $viewer,
+        Questionnaire $questionnaire,
+        ProposalForm $proposalForm,
+        QuestionnaireStep $questionnaireStep
+    )
+    {
+        $id = 'abc';
+        $arguments->offsetGet('id')->willReturn($id);
+        $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
+
+        $questionnaire->getProposalForm()->willReturn($proposalForm);
+        $questionnaire->getStep()->shouldBeCalledOnce()->willReturn($questionnaireStep);
+        $questionnaireStep->setQuestionnaire(null)->shouldBeCalledOnce();
+        $proposalForm->setEvaluationForm(null)->shouldBeCalled();
+
+        $this->__invoke($arguments, $viewer)->shouldReturn([
+            'deletedQuestionnaireId' => $id,
+        ]);
+    }
+
 }
