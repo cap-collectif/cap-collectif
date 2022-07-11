@@ -423,7 +423,13 @@
         "glob-parent": "^5.1.2",
         "shelljs": "^0.8.5",
         "minimist": "^1.2.6",
-        "cross-fetch": "^3.1.5"
+        "cross-fetch": "^3.1.5",
+        "ws": "^7.4.6",
+        "braces": "^2.3.1",
+        "node-fetch": "^2.6.7",
+        "ansi-regex": "^4.1.1",
+        "got": "^11.8.5",
+        "nanoid": "^3.1.31"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.16.0",
@@ -431,7 +437,7 @@
         "@types/styled-system": "^5.1.10",
         "@types/styled-system__css": "^5.0.14",
         "babel-plugin-relay": "^12.0.0",
-        "bundlewatch": "^0.3.1",
+        "bundlewatch": "^0.3.3",
         "fast-xml-parser": "^3.17.4",
         "identity-obj-proxy": "^3.0.0"
     }
