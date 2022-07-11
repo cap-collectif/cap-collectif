@@ -63,6 +63,9 @@ export const ProjectStepAdminItemStep = ({
 }: Props) => {
   const [showEditModal, setShowEditModal] = useState(false);
 
+  const hasSelectionStep = project.steps.some(s => s.__typename === 'SelectionStep');
+  const disabledDelete = step.__typename === 'CollectStep' && hasSelectionStep;
+
   return (
     <StepRow>
       <Col xs={8} className="d-flex align-items-center">
@@ -126,7 +129,8 @@ export const ProjectStepAdminItemStep = ({
             bsStyle="danger"
             id={`js-btn-delete-${index}`}
             className="btn-outline-danger"
-            onClick={() => onDeleteStep(fields, index)}>
+            onClick={() => onDeleteStep(fields, index)}
+            disabled={disabledDelete}>
             <i className="fa fa-trash" />
           </Button>
           <ProjectAdminStepFormModal
@@ -150,6 +154,9 @@ export default createFragmentContainer(ProjectStepAdminItemStep, {
   project: graphql`
     fragment ProjectStepAdminItemStep_project on Project {
       _id
+      steps {
+        __typename
+      }
       ...ProjectAdminStepFormModal_project
     }
   `,

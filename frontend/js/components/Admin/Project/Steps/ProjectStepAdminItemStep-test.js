@@ -8,7 +8,7 @@ import { $fragmentRefs, $refType } from '~/mocks';
 const defaultStep = {
   id: '1',
   title: 'testStep',
-  __typename: 'typeTest',
+  __typename: 'QuestionnaireStep',
   url: 'urlTest',
   slug: 'slugTest',
   hasOpinionsFilled: false,
@@ -25,6 +25,11 @@ const defaultProps = {
     _id: 'project123',
     $fragmentRefs,
     $refType,
+    steps: [
+      {
+        __typename: 'SelectionStep',
+      },
+    ],
   },
   hasIdentificationCodeLists: true,
   query: {
@@ -36,6 +41,19 @@ const defaultProps = {
 describe('<ProjectStepAdminItemStep />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<ProjectStepAdminItemStep {...defaultProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders collect step disabled when there is selection step', () => {
+    const asCollectStep = {
+      ...defaultProps,
+      step: {
+        ...defaultProps.step,
+        __typename: 'CollectStep',
+      },
+    };
+
+    const wrapper = shallow(<ProjectStepAdminItemStep {...asCollectStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

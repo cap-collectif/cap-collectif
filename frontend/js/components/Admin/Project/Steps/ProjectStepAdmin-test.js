@@ -12,6 +12,9 @@ const baseProps = {
   project: {
     $fragmentRefs,
     $refType,
+    firstCollectStep: {
+      id: 'collect-step-123',
+    },
   },
   query: {
     $fragmentRefs,
@@ -23,6 +26,17 @@ const baseProps = {
 
 const props = {
   basic: baseProps,
+  viewerNotAdmin: {
+    ...baseProps,
+    viewerIsAdmin: false,
+  },
+  noCollectStep: {
+    ...baseProps,
+    project: {
+      ...baseProps.project,
+      firstCollectStep: null,
+    },
+  },
 };
 
 describe('<ProjectStepAdmin />', () => {
@@ -32,7 +46,12 @@ describe('<ProjectStepAdmin />', () => {
   });
 
   it('renders correctly with isAdmin false', () => {
-    const wrapper = shallow(<ProjectStepAdmin {...props.basic} viewerIsAdmin={false} />);
+    const wrapper = shallow(<ProjectStepAdmin {...props.viewerNotAdmin} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders list step without selection step when no collect step', () => {
+    const wrapper = shallow(<ProjectStepAdmin {...props.noCollectStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

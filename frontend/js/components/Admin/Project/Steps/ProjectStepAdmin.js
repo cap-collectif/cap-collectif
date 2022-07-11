@@ -1,14 +1,14 @@
 // @flow
-import React, { useState } from 'react';
+import * as React from 'react';
 import { FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar } from 'react-bootstrap';
-import { FormattedMessage, type IntlShape } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import ProjectStepAdminList from './ProjectStepAdminList';
 import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal';
 import { ProjectBoxHeader, ProjectBoxContainer } from '../Form/ProjectAdminForm.style';
 import { STEP_TYPES } from '~/constants/StepTypeConstants';
-import { type StepTypes } from '../Form/ProjectAdminForm';
+import type { StepTypes } from '../Form/ProjectAdminForm';
 import type { ProjectStepAdmin_project } from '~relay/ProjectStepAdmin_project.graphql';
 import type { ProjectStepAdmin_query } from '~relay/ProjectStepAdmin_query.graphql';
 import Menu from '../../../DesignSystem/Menu/Menu';
@@ -54,31 +54,37 @@ export const ProjectStepAdmin = ({
   hasIdentificationCodeLists,
   query,
 }: Props) => {
-  const [stepType, setStepType] = useState('OtherStep');
-  const [showAddStepModal, displayAddStepModal] = useState(false);
+  const intl = useIntl();
+  const [stepType, setStepType] = React.useState('OtherStep');
+  const [showAddStepModal, displayAddStepModal] = React.useState(false);
 
   const stepTypes = React.useMemo(() => {
-    const excludedSteps = [];
+    const excludedSteps = ['RankingStep'];
+    const hasCollectStep = !!project.firstCollectStep?.id;
 
     if (!viewerIsAdmin) {
       excludedSteps.push('ConsultationStep');
     }
 
-    if (excludedSteps.length > 0) {
-      return STEP_TYPES.filter(step => !excludedSteps.includes(step.value));
-    }
+    return STEP_TYPES.filter(step => !excludedSteps.includes(step.value)).map(step => {
+      if (!hasCollectStep && step.value === 'SelectionStep') {
+        return {
+          ...step,
+          disabled: true,
+        };
+      }
 
-    return STEP_TYPES;
-  }, [viewerIsAdmin]);
+      return step;
+    });
+  }, [project.firstCollectStep?.id, viewerIsAdmin]);
 
   return (
     <div className="col-md-12">
       <ProjectBoxContainer className="box container-fluid">
         <ProjectBoxHeader>
-          <h4>
-            <FormattedMessage id="project.show.meta.step.title" />
-          </h4>
+          <FormattedMessage id="project.show.meta.step.title" tagName="h4" />
         </ProjectBoxHeader>
+
         <div className="box-content">
           <div className="form-group" id="project_form_admin_steps_panel">
             <FieldArray
@@ -112,23 +118,21 @@ export const ProjectStepAdmin = ({
                     <FormattedMessage id="global.add" />
                   </Button>
                 </Menu.Button>
+
                 <Menu.List id="create-step-list">
-                  {stepTypes
-                    .filter(st => st.value !== 'RankingStep')
-                    .map((st, idx) => (
-                      <Menu.ListItem
-                        as="li"
-                        key={idx}
-                        id={st.label}
-                        onClick={() => {
-                          setStepType(st.value);
-                          displayAddStepModal(true);
-                        }}>
-                        <Text>
-                          <FormattedMessage id={st.label} />
-                        </Text>
-                      </Menu.ListItem>
-                    ))}
+                  {stepTypes.map((st, idx) => (
+                    <Menu.ListItem
+                      as="li"
+                      key={idx}
+                      id={st.label}
+                      disabled={st.disabled || false}
+                      onClick={() => {
+                        setStepType(st.value);
+                        displayAddStepModal(true);
+                      }}>
+                      <Text>{intl.formatMessage({ id: st.label })}</Text>
+                    </Menu.ListItem>
+                  ))}
                 </Menu.List>
               </Menu>
             </ButtonToolbar>
@@ -142,6 +146,9 @@ export const ProjectStepAdmin = ({
 export default createFragmentContainer(ProjectStepAdmin, {
   project: graphql`
     fragment ProjectStepAdmin_project on Project {
+      firstCollectStep {
+        id
+      }
       ...ProjectAdminStepFormModal_project
       ...ProjectStepAdminList_project
     }

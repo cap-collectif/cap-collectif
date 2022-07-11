@@ -1,6 +1,12 @@
 // @flow
 
-export type StepType = { value: string, label: string, addLabel: string, editLabel: string };
+export type StepType = {
+  value: string,
+  label: string,
+  addLabel: string,
+  editLabel: string,
+  disabled?: boolean,
+};
 
 export const STEP_TYPES: StepType[] = [
   {
