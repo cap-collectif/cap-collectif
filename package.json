@@ -374,7 +374,6 @@
         "relay-compiler": "^12.0.0",
         "relay-compiler-language-js-flow-uncommented": "^2.0.0",
         "relay-config": "^12.0.1",
-        "relay-devtools": "^1.4.0",
         "relay-hooks": "3.7",
         "relay-runtime": "^12.0.0",
         "relay-test-utils": "^12.0.0",
@@ -423,7 +422,8 @@
         "nth-check": "^2.0.1",
         "glob-parent": "^5.1.2",
         "shelljs": "^0.8.5",
-        "minimist": "^1.2.6"
+        "minimist": "^1.2.6",
+        "cross-fetch": "^3.1.5"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.16.0",
