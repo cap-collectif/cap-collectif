@@ -1698,17 +1698,17 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/form@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/form/-/form-0.3.2.tgz#2e57c140a54f4f292227ee2d5bf98e3cbc444076"
-  integrity sha512-e8yNqfismLv9kY9hmNoYAEVWMXYO60p8oeOPfz29iYCoUKpy1z470yt72BgEI0/g7UaCCDY/jadbKAuO9dhCeg==
+"@cap-collectif/form@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/form/-/form-0.4.0.tgz#f5d30c2c94d57d0a34cb54f86823f1ecbbab3aea"
+  integrity sha512-It6oAyj0+73RBj6LRXuEhbTqdVXICOaOJ4G7FIMUjiLUt/Gp+UO7DOVrG/6yp82RnXPLs8uSdlzVInHwux9t5Q==
   dependencies:
     react-places-autocomplete "^7.3.0"
 
-"@cap-collectif/ui@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.4.1.tgz#886d460da5b7dccc11630fe0f12b3ac79a7c0cb3"
-  integrity sha512-cP56W4hwcFw1LQbsKU5Hy6g2kE2o96nI54pEckb+q/j3QLwsSTZPcroH67mEp5Y+9WuN9s4+00IrstdHHhH/UA==
+"@cap-collectif/ui@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.5.1.tgz#40262d43adf7711d08e0768940fd18bf106e912a"
+  integrity sha512-X4pcKPtnT/MhQ2/gKQuaoQUZFey8W/fVEDq7WR3gBuQs2U2UYZTGeTq7W2e6a16pZUJlc9ye61JNDCKNtjmKHg==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
@@ -1716,6 +1716,7 @@
     classnames "^2.3.1"
     deepmerge "^4.2.2"
     framer-motion "^4.1.17"
+    react-color "^2.19.3"
     react-dates "^21.8.0"
     react-dropzone "^11.4.2"
     react-hotkeys-hook "^3.4.4"
@@ -18681,7 +18682,7 @@ react-clientside-effect@^1.2.0:
   dependencies:
     "@babel/runtime" "^7.12.13"
 
-react-color@^2.17.0, react-color@^2.18.1:
+react-color@^2.17.0, react-color@^2.18.1, react-color@^2.19.3:
   version "2.19.3"
   resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.19.3.tgz#ec6c6b4568312a3c6a18420ab0472e146aa5683d"
   integrity sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==
