@@ -95,7 +95,7 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
         tickCount={5}
         tickLine={false}
         type="category"
-        width={120}
+        width={130}
         yAxisId={0}
       />
        
@@ -233,7 +233,7 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other r
         tickCount={5}
         tickLine={false}
         type="category"
-        width={120}
+        width={130}
         yAxisId={0}
       />
        

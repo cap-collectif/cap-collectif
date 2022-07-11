@@ -18,24 +18,25 @@ type Props = {
   innerRef: (ref: any) => void,
 };
 
+type DataType = {
+  name: string,
+  value: number,
+};
+
 const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 768px;
 `;
 
 export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
-  getYAxisWidth = (data: Array<Object>): number => {
-    const test = data.reduce((acc, curr) => {
-      acc.push(curr.name.length);
-      return acc;
-    }, []);
+  getYAxisWidth = (data: DataType[]): number => {
+    const allNameLengthData = data.map(d => d.name.length);
+    const maxLength = Math.max(...allNameLengthData);
 
-    const maxLength = Math.max(...test);
-
-    if (test.length > 0 && maxLength > 50) {
-      return maxLength * 2;
+    if (allNameLengthData.length > 0 && maxLength > 50) {
+      return maxLength * 2.2;
     }
 
-    return 120;
+    return 130;
   };
 
   render() {
