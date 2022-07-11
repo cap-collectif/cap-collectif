@@ -1,4 +1,4 @@
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
   {
     // Fix: [BABEL] Note: The code generator has deoptimised the styling of cap-collectif/platform/bower_components/ckeditor/ckeditor.js as it exceeds the max of 500KB.
@@ -57,7 +57,6 @@ module.exports = function(api) {
           ssr: false,
         },
       ],
-      'react-docgen',
       ['relay', { artifactDirectory: './frontend/js/__generated__/~relay' }],
       'transform-class-properties',
       'lodash',

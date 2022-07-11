@@ -10,10 +10,6 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -44,10 +40,6 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
         "styledComponentId": "styles__DropdownToggle-ckofMh",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],
@@ -153,10 +145,6 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -188,10 +176,6 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
         "styledComponentId": "styles__DropdownMenu-OiPbk",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],
@@ -298,10 +282,6 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -332,10 +312,6 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
         "styledComponentId": "styles__DropdownToggle-ckofMh",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],
@@ -441,10 +417,6 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -476,10 +448,6 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
         "styledComponentId": "styles__DropdownMenu-OiPbk",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],

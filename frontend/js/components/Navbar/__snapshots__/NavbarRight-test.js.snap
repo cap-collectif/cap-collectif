@@ -25,10 +25,6 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -59,10 +55,6 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
         "styledComponentId": "styles__DropdownToggle-ckofMh",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],
@@ -204,10 +196,6 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -239,10 +227,6 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
         "styledComponentId": "styles__DropdownMenu-OiPbk",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],
@@ -842,10 +826,6 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -876,10 +856,6 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
         "styledComponentId": "styles__DropdownToggle-ckofMh",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],
@@ -1021,10 +997,6 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -1056,10 +1028,6 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
         "styledComponentId": "styles__DropdownMenu-OiPbk",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],
@@ -1659,10 +1627,6 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -1693,10 +1657,6 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
         "styledComponentId": "styles__DropdownToggle-ckofMh",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],
@@ -1838,10 +1798,6 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
     as={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "__docgenInfo": Object {
-          "description": "",
-          "methods": Array [],
-        },
         "attrs": Array [
           Object {
             "align": "center",
@@ -1873,10 +1829,6 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
         "styledComponentId": "styles__DropdownMenu-OiPbk",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
-          "__docgenInfo": Object {
-            "description": "",
-            "methods": Array [],
-          },
           "render": [Function],
         },
         "toString": [Function],
