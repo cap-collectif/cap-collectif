@@ -153,6 +153,12 @@ class ImportProposalsFromCsv
         $rows->rewind();
 
         if (!$this->isValidHeaders($rows->current()->toArray())) {
+            if ($isCli) {
+                $missing = $this->getMissingHeaders($rows->current()->toArray());
+                throw new \RuntimeException(
+                    count($missing) . " missing headers : ".implode(", ", $missing)
+                );
+            }
             throw new \RuntimeException(AddProposalsFromCsvMutation::BAD_DATA_MODEL);
         }
 
@@ -325,6 +331,19 @@ class ImportProposalsFromCsv
         return array_flip($fileHeader) === $this->headers;
     }
 
+    private function getMissingHeaders(array $fileHeaders): array
+    {
+        $fileHeaders = array_flip($fileHeaders);
+        $missingHeaders = [];
+        foreach ($this->headers as $requestedHeader) {
+            if (!in_array($requestedHeader, $fileHeaders)) {
+                $missingHeaders[] = $requestedHeader;
+            }
+        }
+
+        return $missingHeaders;
+    }
+
     private function setProposalReferenceAndModerationToken(Proposal $proposal): void
     {
         if (!$this->lastEntity) {
@@ -494,10 +513,11 @@ class ImportProposalsFromCsv
             }
         }
         if ($this->proposalForm->isUsingThemes() && !empty($row['theme'])) {
-            if (!($theme = $this->themeRepository->findOneWithTitle(trim($row['theme'])))) {
+            $theme = str_replace("’","'", trim($row['theme']));
+            if (!($theme = $this->themeRepository->findOneWithTitle($theme))) {
                 $this->badData = $this->incrementBadData($this->badData, $key);
                 $isCurrentLineFail = true;
-                $this->logger->error('bad data theme in line ' . $key);
+                $this->logger->error('bad data theme in line '.$key.' : '.$theme);
             }
         }
         if ($this->proposalForm->isUsingCategories() && !empty($row['category'])) {

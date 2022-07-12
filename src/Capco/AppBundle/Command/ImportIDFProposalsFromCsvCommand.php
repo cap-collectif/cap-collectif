@@ -14,6 +14,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Command to execute specifically for IDF import of proposals.
+ * First, users shall be imported by capco:import:idf-users
+ * Second, images shall be copied on public repository and their url added as "media_url" in the import file.
+ * Third, run the import with the csv import file and the proposal form to link the proposals.
+ */
 class ImportIDFProposalsFromCsvCommand extends Command
 {
     protected static $defaultName = 'capco:import:idf-proposals-from-csv';
