@@ -65,9 +65,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->trans('global.alert.already_email_confirmed', [], 'CapcoAppBundle')
             ->shouldBeCalled()
             ->willReturn('global.alert.already_email_confirmed');
-        $flashBag
-            ->set('sonata_user_success', 'global.alert.already_email_confirmed')
-            ->shouldBeCalled();
+        $flashBag->add('success', 'global.alert.already_email_confirmed')->shouldBeCalled();
         $this->emailAction(
             'unknowntoken',
             false,
@@ -127,9 +125,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->trans('global.alert.email_confirmed_with_republish', [], 'CapcoAppBundle')
             ->shouldBeCalled()
             ->willReturn('global.alert.email_confirmed_with_republish');
-        $flashBag
-            ->set('sonata_user_success', 'global.alert.email_confirmed_with_republish')
-            ->shouldBeCalled();
+        $flashBag->add('success', 'global.alert.email_confirmed_with_republish')->shouldBeCalled();
 
         $this->emailAction(
             'validtoken',
@@ -163,9 +159,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->trans('global.alert.already_email_confirmed', [], 'CapcoAppBundle')
             ->shouldBeCalled()
             ->willReturn('global.alert.already_email_confirmed');
-        $flashBag
-            ->set('sonata_user_success', 'global.alert.already_email_confirmed')
-            ->shouldBeCalled();
+        $flashBag->add('success', 'global.alert.already_email_confirmed')->shouldBeCalled();
         $this->newEmailAction(
             'invalidtoken',
             false,
@@ -228,7 +222,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->trans('global.alert.new_email_confirmed', [], 'CapcoAppBundle')
             ->shouldBeCalled()
             ->willReturn('global.alert.new_email_confirmed');
-        $flashBag->set('sonata_user_success', 'global.alert.new_email_confirmed')->shouldBeCalled();
+        $flashBag->add('success', 'global.alert.new_email_confirmed')->shouldBeCalled();
 
         $this->newEmailAction(
             'validtoken',

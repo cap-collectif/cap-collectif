@@ -9,7 +9,7 @@ use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\RecreatePasswordFormType;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
-use FOS\UserBundle\Mailer\Mailer;
+use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Security\LoginManagerInterface;
 use FOS\UserBundle\Util\TokenGenerator;
@@ -44,7 +44,7 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
 
     public function __construct(
         TokenGenerator $tokenGenerator,
-        Mailer $mailer,
+        MailerInterface $mailer,
         MailerService $mailerService,
         UserManager $userManager,
         EventDispatcherInterface $eventDispatcher,
@@ -80,12 +80,12 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
         );
     }
 
-    public function requestAction()
+    public function requestAction(): Response
     {
         return $this->render('CapcoUserBundle:Resetting:request.html.twig');
     }
 
-    public function resetAction(Request $request, $token)
+    public function resetAction(Request $request, $token): Response
     {
         $user = $this->userManager->findUserByResetPasswordToken($token);
         if (null === $user) {
@@ -137,7 +137,7 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
     /**
      * Request reset user password: submit form and send email.
      */
-    public function sendEmailAction(Request $request)
+    public function sendEmailAction(Request $request): Response
     {
         $email = $request->request->get('email');
         $errors = $this->get('validator')->validate($email, new EmailConstraint());
@@ -183,7 +183,7 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
     /**
      * Tell the user to check his email provider.
      */
-    public function checkEmailAction(Request $request)
+    public function checkEmailAction(Request $request): Response
     {
         $email = $this->session->get(static::SESSION_EMAIL);
         $this->session->remove(static::SESSION_EMAIL);

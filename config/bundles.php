@@ -40,7 +40,6 @@ return [
     // sonata user admin
     //    Sonata\EasyExtendsBundle\SonataEasyExtendsBundle::class => ['all' => true],
     FOS\UserBundle\FOSUserBundle::class => ['all' => true],
-    Sonata\UserBundle\SonataUserBundle::class => ['all' => true],
     // HTTPlug
     Http\HttplugBundle\HttplugBundle::class => ['all' => true],
     // oauth user

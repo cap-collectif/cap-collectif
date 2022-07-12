@@ -8,7 +8,7 @@ services:
             Overblog\GraphiQLBundle\Config\GraphiQLControllerEndpoint: '@overblog_graphiql.controller.graphql.endpoint'
             Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
             FOS\UserBundle\Util\TokenGenerator: '@capco.fos_user.util.token_generator.default'
-            FOS\UserBundle\Mailer\Mailer: '@fos_user.mailer.default'
+            FOS\UserBundle\Mailer\Mailer: '@fos_user.mailer.twig_swift'
             FOS\UserBundle\Doctrine\UserManager: '@fos_user.user_manager.default'
             $retryTtl: '%fos_user.resetting.retry_ttl%'
             $fosFormFactory: '@fos_user.resetting.form.factory'

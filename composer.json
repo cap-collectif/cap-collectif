@@ -97,10 +97,6 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/FOSUserBundle"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/theofidry/AliceBundle"
         }
     ],
@@ -124,8 +120,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "~3.21",
         "sonata-project/block-bundle": "^3.17",
         "sonata-project/media-bundle": "dev-bugfix-3.x#e6c56fd1 as 3.30.0",
-        "sonata-project/user-bundle": "^4.11",
-        "friendsofsymfony/user-bundle": "dev-master#c0b2cd30 as 2.1.2",
+        "friendsofsymfony/user-bundle": "3",
         "sonata-project/datagrid-bundle": "~3.0",
         "sonata-project/exporter": "^2.0",
         "sonata-project/classification-bundle": "^3.0",

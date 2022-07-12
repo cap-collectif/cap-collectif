@@ -118,8 +118,7 @@ sonata_media:
             thumbnail: sonata.media.thumbnail.liip_imagine
             adapter: sonata.media.adapter.image.imagick
             allowed_extensions: ['png', 'svg', 'webp', 'gif', 'jpeg', 'jpg', 'jfif']
-            allowed_mime_types:
-                ['image/png', 'image/svg+xml', 'image/gif', 'image/jpeg']
+            allowed_mime_types: ['image/png', 'image/svg+xml', 'image/gif', 'image/jpeg']
         vimeo:
             thumbnail: sonata.media.thumbnail.liip_imagine
         youtube:
@@ -183,15 +182,3 @@ sonata_media:
         local:
             directory: '%kernel.project_dir%/public/media'
             create: true
-
-sonata_user:
-    security_acl: false
-    manager_type: orm
-    class:
-        user: Capco\UserBundle\Entity\User
-        group: Capco\UserBundle\Entity\Group
-    admin:
-        user:
-            class: Capco\AdminBundle\Admin\UserAdmin
-            controller: Capco\AdminBundle\Controller\UserController
-            translation: CapcoAppBundle

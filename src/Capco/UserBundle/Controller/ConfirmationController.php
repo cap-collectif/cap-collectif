@@ -65,8 +65,8 @@ class ConfirmationController extends Controller
 
         if (!$user) {
             // We could not find a user with this token
-            $flashBag->set(
-                'sonata_user_success',
+            $flashBag->add(
+                'success',
                 $this->translator->trans(
                     'global.alert.already_email_confirmed',
                     [],
@@ -104,8 +104,8 @@ class ConfirmationController extends Controller
             $this->loginManager->loginUser('main', $user, $response);
         }
 
-        $flashBag->set(
-            'sonata_user_success',
+        $flashBag->add(
+            'success',
             $this->translator->trans(
                 $hasPublishedContributions
                     ? 'global.alert.email_confirmed_with_republish'
@@ -132,8 +132,8 @@ class ConfirmationController extends Controller
 
         if (!$user) {
             // We could not find a user with this token
-            $flashBag->set(
-                'sonata_user_success',
+            $flashBag->add(
+                'success',
                 $this->translator->trans(
                     'global.alert.already_email_confirmed',
                     [],
@@ -162,8 +162,8 @@ class ConfirmationController extends Controller
             $this->loginManager->loginUser('main', $user, $response);
         }
 
-        $flashBag->set(
-            'sonata_user_success',
+        $flashBag->add(
+            'success',
             $this->translator->trans('global.alert.new_email_confirmed', [], 'CapcoAppBundle')
         );
 

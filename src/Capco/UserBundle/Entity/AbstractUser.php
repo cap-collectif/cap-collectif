@@ -55,15 +55,6 @@ abstract class AbstractUser extends FosUser
         return $this->updatedAt;
     }
 
-    public function setGroups(iterable $groups): self
-    {
-        foreach ($groups as $group) {
-            $this->addGroup($group);
-        }
-
-        return $this;
-    }
-
     public function setBiography(?string $biography): self
     {
         $this->biography = $biography;
