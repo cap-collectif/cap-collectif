@@ -2,5 +2,6 @@
   "$schema": "https://on.cypress.io/cypress.schema.json",
   "screenshotsFolder": "./screenshots",
   "screenshotOnRunFailure": true,
-  "video": false
+  "video": false,
+  "experimentalSessionAndOrigin": true
 }

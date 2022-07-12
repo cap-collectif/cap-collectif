@@ -4,5 +4,6 @@
   "screenshotsFolder": "./screenshots",
   "screenshotOnRunFailure": true,
   "videoUploadOnPasses": false,
-  "videoCompression": false
+  "videoCompression": false,
+  "experimentalSessionAndOrigin": true
 }

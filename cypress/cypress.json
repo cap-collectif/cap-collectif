@@ -10,6 +10,6 @@
   "viewportWidth": 1280,
   "viewportHeight": 1000,
   "chromeWebSecurity": false,
-  "experimentalSessionSupport": true,
+  "experimentalSessionAndOrigin": true,
   "retries": 2
 }
