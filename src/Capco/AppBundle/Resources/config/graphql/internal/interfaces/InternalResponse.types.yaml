@@ -11,6 +11,10 @@ InternalResponse:
             question:
                 type: 'InternalQuestion!'
                 description: 'Identifies the question of the response.'
+            reply:
+                type: 'InternalReply'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Identifies the reply of the response.'
             hasViewerStarred:
                 type: 'Boolean!'
                 access: "@=hasRole('ROLE_PROJECT_ADMIN')"

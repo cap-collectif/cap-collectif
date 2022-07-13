@@ -7211,6 +7211,9 @@ type MediaResponse implements Response {
   """Identifies the question of the response."""
   question: Question!
 
+  """Identifies the reply of the response."""
+  reply: Reply
+
   """True if the viewer has starred the response."""
   hasViewerStarred: Boolean!
 
@@ -13010,6 +13013,9 @@ interface Response {
   """Identifies the question of the response."""
   question: Question!
 
+  """Identifies the reply of the response."""
+  reply: Reply
+
   """True if the viewer has starred the response."""
   hasViewerStarred: Boolean!
 }
@@ -17425,6 +17431,9 @@ type ValueResponse implements Response & CivicIAAnalyzable & Node {
 
   """The question."""
   question: Question!
+
+  """Identifies the reply of the response."""
+  reply: Reply
 
   """True if the viewer has starred the response."""
   hasViewerStarred: Boolean!
