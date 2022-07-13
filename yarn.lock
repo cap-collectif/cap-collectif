@@ -10707,15 +10707,6 @@ expect@^28.1.1:
     jest-message-util "^28.1.1"
     jest-util "^28.1.1"
 
-exports-loader@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/exports-loader/-/exports-loader-1.1.1.tgz#88c9a6877ee6a5519d7c41a016bdd99148421e69"
-  integrity sha512-CmyhIR2sJ3KOfVsHjsR0Yvo+0lhRhRMAevCbB8dhTVLHsZPs0lCQTvRmR9YNvBXDBxUuhmCE2f54KqEjZUaFrg==
-  dependencies:
-    loader-utils "^2.0.0"
-    schema-utils "^3.0.0"
-    source-map "^0.6.1"
-
 express@^4.17.1:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
@@ -12672,11 +12663,6 @@ iferr@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/iferr/-/iferr-0.1.5.tgz#c60eed69e6d8fdb6b3104a1fcbca1c192dc5b501"
   integrity sha1-xg7taebY/bazEEofy8ocGS3FtQE=
-
-ignore-loader@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/ignore-loader/-/ignore-loader-0.1.2.tgz#d81f240376d0ba4f0d778972c3ad25874117a463"
-  integrity sha1-2B8kA3bQuk8Nd4lyw60lh0EXpGM=
 
 ignore@^4.0.3, ignore@^4.0.6:
   version "4.0.6"
