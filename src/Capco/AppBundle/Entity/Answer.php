@@ -10,12 +10,14 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Answer.
  *
  * @ORM\Table(name="answer")
  * @ORM\Entity()
+ * @CapcoAssert\HasAuthor()
  */
 class Answer implements Authorable
 {
@@ -26,9 +28,9 @@ class Answer implements Authorable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
-    protected User $author;
+    protected ?User $author = null;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})

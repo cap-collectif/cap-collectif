@@ -20,6 +20,7 @@ use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Table(name="source", indexes={
@@ -27,6 +28,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @CapcoAssert\HasAuthor()
  */
 class Source implements Contribution, Trashable, VotableInterface, Publishable, ReportableInterface
 {
@@ -80,9 +82,9 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="sources")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
-    private User $author;
+    private ?User $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="sources", cascade={"persist"})

@@ -42,6 +42,7 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
  * @CapcoAssert\EndAfterStart()
  * @CapcoAssert\HasValidAddress()
  * @CapcoAssert\CheckRegister()
+ * @CapcoAssert\HasAuthor()
  */
 class Event implements
     CommentableInterface,
@@ -69,7 +70,6 @@ class Event implements
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     * @Assert\NotNull()
      */
     protected ?User $author = null;
 

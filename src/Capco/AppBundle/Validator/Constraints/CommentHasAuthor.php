@@ -7,9 +7,9 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class HasAuthor extends Constraint
+class CommentHasAuthor extends Constraint
 {
-    public $message = 'must_have_user_or_organization_as_author';
+    public $message = 'comment.create.no_author_error';
 
     public function validatedBy()
     {

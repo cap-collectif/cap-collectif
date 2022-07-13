@@ -61,6 +61,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasThemeIfMandatory()
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasAddressIfMandatory()
+ * @CapcoAssert\HasAuthor()
  */
 class Proposal implements
     Publishable,
@@ -107,11 +108,10 @@ class Proposal implements
     protected $updatedAt;
 
     /**
-     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected User $author;
+    protected ?User $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")

@@ -14,6 +14,7 @@ use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\DebatableTrait;
 use Capco\AppBundle\Traits\ForAgainstTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Opinion of experts on a debate.
@@ -22,6 +23,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateOpinionRepository")
+ * @CapcoAssert\HasAuthor
  */
 class DebateOpinion implements Authorable
 {
@@ -36,9 +38,9 @@ class DebateOpinion implements Authorable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
-    protected User $author;
+    protected ?User $author = null;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})

@@ -26,6 +26,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Doctrine\ORM\Mapping\Index;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * An argument in a debate.
@@ -43,6 +44,7 @@ use Doctrine\ORM\Mapping\Index;
  *     }
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentRepository")
+ * @CapcoAssert\HasAuthor()
  */
 class DebateArgument implements DebateArgumentInterface, Publishable
 {
@@ -62,9 +64,9 @@ class DebateArgument implements DebateArgumentInterface, Publishable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="debateArguments")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
-    protected User $author;
+    protected ?User $author = null;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})

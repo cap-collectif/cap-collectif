@@ -101,6 +101,14 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: check_identification_code.validator }
 
+    Capco\AppBundle\Validator\Constraints\CommentHasAuthorValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: comment_has_author.validator }
+
+    Capco\AppBundle\Validator\Constraints\HasAuthorValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: has_author.validator }
+
     Capco\AppBundle\Validator\Constraints\CheckPhoneNumberValidator:
         tags:
             - { name: validator.constraint_validator, alias: check_phone_number.validator }

@@ -7,15 +7,13 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class HasAuthorValidator extends ConstraintValidator
 {
-    public function validate($protocol, Constraint $constraint)
+    public function validate($value, Constraint $constraint)
     {
-        if (
-            (null === $protocol->getAuthorName() || null === $protocol->getAuthorEmail()) &&
-            null === $protocol->getAuthor()
-        ) {
+        if (method_exists($value, 'getAuthor') && !$value->getAuthor()) {
+            $path = method_exists($value, 'getUser') && $value->getUser() ? 'user' : 'author';
             $this->context
                 ->buildViolation($constraint->message)
-                ->atPath('authorName')
+                ->atPath($path)
                 ->addViolation();
         }
     }

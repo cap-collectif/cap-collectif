@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Model\ReportableInterface;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -45,7 +46,7 @@ use Capco\AppBundle\Entity\Interfaces\Author;
  *      "post"     = "PostComment",
  *      "proposal" = "ProposalComment"
  * })
- * @CapcoAssert\HasAuthor
+ * @CapcoAssert\CommentHasAuthor
  */
 abstract class Comment implements
     Publishable,
@@ -63,6 +64,7 @@ abstract class Comment implements
     use TrashableTrait;
     use UuidTrait;
     use VotableOkTrait;
+    use AuthorableTrait;
 
     public static $sortCriterias = [
         'date' => 'opinion.sort.last',
@@ -77,12 +79,10 @@ abstract class Comment implements
     protected $updatedAt;
 
     /**
-     * @var User
-     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected $author;
+    protected ?User $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="answers")

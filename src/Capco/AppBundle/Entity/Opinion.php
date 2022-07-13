@@ -34,6 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\AppendicesCorrespondToOpinionType()
+ * @CapcoAssert\HasAuthor()
  */
 class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 {
@@ -75,9 +76,8 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinions")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     * @Assert\NotNull()
      */
-    protected $author;
+    protected ?User $author = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)

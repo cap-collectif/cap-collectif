@@ -14,7 +14,6 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="reply", indexes={
@@ -24,6 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
+ * @CapcoAssert\HasAuthor()
  */
 class Reply extends AbstractReply implements Publishable, DraftableInterface
 {
@@ -33,11 +33,10 @@ class Reply extends AbstractReply implements Publishable, DraftableInterface
     use PrivatableTrait;
 
     /**
-     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="replies")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected ?User $author;
+    protected ?User $author = null;
 
     /**
      * @ORM\OneToMany(

@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Entity\Interfaces\Authorable;
-use Capco\AppBundle\Traits\AuthorableTrait;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -12,14 +12,15 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Table(name="proposal_revision")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRevisionRepository")
+ * @CapcoAssert\HasAuthor()
  */
 class ProposalRevision implements Authorable
 {
-    use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;
     use TextableTrait;
     use TimestampableTrait;
@@ -40,7 +41,7 @@ class ProposalRevision implements Authorable
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private User $author;
+    private ?User $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="revisions")
@@ -87,6 +88,18 @@ class ProposalRevision implements Authorable
     public function setState(string $state): self
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
