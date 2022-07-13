@@ -6,9 +6,8 @@ Capco\AppBundle\Entity\Comment:
             groups: [ElasticsearchComment]
         authorName:
             groups: [ElasticsearchComment]
-        Author:
+        author:
             groups: [ElasticsearchNestedAuthor]
-            serialized_name: author
         published:
             groups: [ElasticsearchComment, ElasticsearchNestedComment]
         trashedStatus:

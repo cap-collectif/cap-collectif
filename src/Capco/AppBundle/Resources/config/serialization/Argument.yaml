@@ -22,8 +22,7 @@ Capco\AppBundle\Entity\Argument:
             groups: [ElasticsearchArgument]
         updatedAt:
             groups: [ElasticsearchArgument]
-        Author:
-            serialized_name: author
+        author:
             groups: [Opinions, OpinionVersions, UserMedias, ElasticsearchArgumentNestedAuthor]
         step:
             groups: [ElasticsearchArgumentNestedStep]

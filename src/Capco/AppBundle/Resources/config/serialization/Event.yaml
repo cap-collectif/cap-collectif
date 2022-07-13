@@ -6,8 +6,7 @@ Capco\AppBundle\Entity\Event:
             groups: [Events, ElasticsearchEvent]
         body:
             groups: [Events, ElasticsearchEvent]
-        Author:
-            serialized_name: author
+        author:
             groups: [Events, ElasticsearchEventNestedAuthor]
         projects:
             groups: [ElasticsearchEventNestedProject]
