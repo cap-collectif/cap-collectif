@@ -140,8 +140,6 @@ const devConf = {
     }),
     // Add some progress infos
     new webpack.ProgressPlugin(),
-    // Remove a warning with es6-polyfill
-    new webpack.IgnorePlugin(/vertx/),
     // Moment.js is an extremely popular library that bundles large locale files
     // by default due to how Webpack interprets its code.
     new MomentLocalesPlugin({
