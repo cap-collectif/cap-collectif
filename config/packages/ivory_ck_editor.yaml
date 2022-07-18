@@ -94,9 +94,3 @@ ivory_ck_editor:
             user_insert: ['Image', 'Table', 'HorizontalRule']
             document: ['Source']
             tools: ['Maximize']
-
-coop_tilleuls_ck_editor_sonata_media:
-    templates:
-        browser: CapcoMediaBundle:MediaAdmin:browser.html.twig
-        upload: CapcoMediaBundle:MediaAdmin:upload.html.twig
-        layout: CoopTilleulsCKEditorSonataMediaBundle::layout.html.twig

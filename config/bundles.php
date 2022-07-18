@@ -62,9 +62,6 @@ return [
     // typography concerns
     JoliTypo\Bridge\Symfony\JoliTypoBundle::class => ['all' => true],
     // CKEditor
-    CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle::class => [
-        'all' => true,
-    ],
     Ivory\CKEditorBundle\IvoryCKEditorBundle::class => ['all' => true],
     Caxy\HtmlDiffBundle\CaxyHtmlDiffBundle::class => ['all' => true],
     // GraphQL

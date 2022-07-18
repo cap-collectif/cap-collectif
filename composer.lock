@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1005dff087c97017b21520dada0c5c6a",
+    "content-hash": "6c94d677ebe9339e49a18dd6b9673a2e",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -15977,70 +15977,6 @@
                 }
             ],
             "time": "2021-01-25T10:07:17+00:00"
-        },
-        {
-            "name": "tilleuls/ckeditor-sonata-media-bundle",
-            "version": "v1.0.9",
-            "target-dir": "CoopTilleuls/Bundle/CKEditorSonataMediaBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/coopTilleuls/CoopTilleulsCKEditorSonataMediaBundle.git",
-                "reference": "eed6902d6595353b8b2f5881cfbfe4cc2f7a640e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/coopTilleuls/CoopTilleulsCKEditorSonataMediaBundle/zipball/eed6902d6595353b8b2f5881cfbfe4cc2f7a640e",
-                "reference": "eed6902d6595353b8b2f5881cfbfe4cc2f7a640e",
-                "shasum": ""
-            },
-            "require": {
-                "sonata-project/admin-bundle": "~3.40",
-                "sonata-project/media-bundle": "~3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.8|~5.0",
-                "symfony/phpunit-bridge": "~2.7|~3.0"
-            },
-            "suggest": {
-                "egeloen/ckeditor-bundle": "for easy Symfony integration"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "CoopTilleuls\\Bundle\\CKEditorSonataMediaBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kévin Dunglas",
-                    "email": "kevin@les-tilleuls.coop",
-                    "homepage": "http://dunglas.fr"
-                }
-            ],
-            "description": "Integrates SonataMediaBundle with CKEditor",
-            "homepage": "http://les-tilleuls.coop",
-            "keywords": [
-                "CKEditor",
-                "file",
-                "image",
-                "media",
-                "sonata",
-                "upload"
-            ],
-            "support": {
-                "issues": "https://github.com/coopTilleuls/CoopTilleulsCKEditorSonataMediaBundle/issues",
-                "source": "https://github.com/coopTilleuls/CoopTilleulsCKEditorSonataMediaBundle/tree/v1.0.9"
-            },
-            "time": "2019-07-01T12:26:58+00:00"
         },
         {
             "name": "tmarsteel/mockery-callable-mock",

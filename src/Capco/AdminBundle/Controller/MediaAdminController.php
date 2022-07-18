@@ -4,7 +4,7 @@ namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Twig\MediaExtension;
-use CoopTilleuls\Bundle\CKEditorSonataMediaBundle\Controller\MediaAdminController as BaseMediaAdminController;
+use Sonata\MediaBundle\Controller\MediaAdminController as BaseMediaAdminController;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class MediaAdminController extends BaseMediaAdminController
 {
     /**
-     * {@inheritdoc}
+     * @deprecated use Media back-office instead
      */
     public function listAction(?Request $request = null)
     {
@@ -32,40 +32,17 @@ class MediaAdminController extends BaseMediaAdminController
         ]);
     }
 
+    /**
+     * @deprecated remove this broken route after removing SonataMedia
+     */
     public function browserAction()
     {
-        if (false === $this->admin->isGranted('LIST')) {
-            throw new AccessDeniedException();
-        }
-
-        $datagrid = $this->admin->getDatagrid();
-        $datagrid->setValue('context', null, $this->admin->getPersistentParameter('context'));
-        $datagrid->setValue('providerName', null, $this->admin->getPersistentParameter('provider'));
-
-        // Store formats
-        $formats = [];
-        foreach ($datagrid->getResults() as $media) {
-            $formats[$media->getId()] = $this->get('sonata.media.pool')->getFormatNamesByContext(
-                $media->getContext()
-            );
-        }
-
-        $formView = $datagrid->getForm()->createView();
-
-        // set the theme for the current Admin Form
-        $this->setFormTheme($formView, $this->admin->getFilterTheme());
-
-        return $this->renderWithExtraParams('CapcoMediaBundle:MediaAdmin:browser.html.twig', [
-            'action' => 'browser',
-            'form' => $formView,
-            'datagrid' => $datagrid,
-            'formats' => $formats,
-            'media_pool' => $this->get('sonata.media.pool'),
-            'base_template' => $this->admin->getTemplate('layout'),
-            'persistent_parameters' => $this->admin->getPersistentParameters(),
-        ]);
+        return null;
     }
 
+    /**
+     * @deprecated use api/files instead
+     */
     public function uploadAction()
     {
         if (false === $this->admin->isGranted('CREATE')) {
