@@ -18,6 +18,7 @@ class UnstarResponseMutation extends StarResponseMutation
             $this->checkIsStarred($response, $viewer);
             $viewer->removeStarredResponse($response);
             $this->entityManager->flush();
+            $this->publish($response);
         } catch (UserError $error) {
             return ['error' => $error->getMessage()];
         }

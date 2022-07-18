@@ -4,11 +4,14 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class StarResponseMutation implements MutationInterface
 {
@@ -17,13 +20,16 @@ class StarResponseMutation implements MutationInterface
 
     protected EntityManagerInterface $entityManager;
     protected GlobalIdResolver $globalIdResolver;
+    protected Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        Publisher $publisher
     ) {
         $this->entityManager = $entityManager;
         $this->globalIdResolver = $globalIdResolver;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $argument, User $viewer): array
@@ -33,6 +39,7 @@ class StarResponseMutation implements MutationInterface
             $this->checkNotAlreadyStarred($response, $viewer);
             $viewer->addStarredResponse($response);
             $this->entityManager->flush();
+            $this->publish($response);
         } catch (UserError $error) {
             return ['error' => $error->getMessage()];
         }
@@ -53,6 +60,21 @@ class StarResponseMutation implements MutationInterface
         }
 
         return $response;
+    }
+
+    protected function publish(AbstractResponse $response): void
+    {
+        if ($response->getReply()) {
+            $this->publisher->publish(
+                'questionnaire.reply',
+                new Message(
+                    json_encode([
+                        'replyId' => $response->getReply()->getId(),
+                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
+                    ])
+                )
+            );
+        }
     }
 
     private function checkNotAlreadyStarred(AbstractResponse $response, User $viewer): void
