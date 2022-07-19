@@ -25,6 +25,7 @@ Scenario: Admin wants to update a district in projects
           translations {
             name
             locale
+            titleOnMap
           }
         }
       }
@@ -44,7 +45,7 @@ Scenario: Admin wants to update a district in projects
           "enabled": false
         },
         "translations":[
-          {"locale":"en-GB","name":"My new awesome district !"}
+          {"locale":"en-GB","name":"My new awesome district !", "titleOnMap": "Short name"}
         ]
       }
     }
@@ -53,28 +54,36 @@ Scenario: Admin wants to update a district in projects
   Then the JSON response should match:
   """
   {
-    "data": {
-      "updateProjectDistrict": {
-          "district": {
-            "id": "projectDistrict1",
-            "geojson": null,
-            "displayedOnMap": true,
-            "border": {
-              "enabled": true,
-              "color": "#FFFFFF",
-              "opacity": 0.8,
-              "size": 1
-            },
-            "background": {
-              "enabled": false
-            },
-            "translations":[
-              {"locale":"en-GB","name":"My new awesome district !"},
-              {"locale":"fr-FR","name":"Premier Quartier"}
-            ]
-          }
+     "data":{
+        "updateProjectDistrict":{
+           "district":{
+              "id":"projectDistrict1",
+              "geojson":null,
+              "displayedOnMap":true,
+              "border":{
+                 "enabled":true,
+                 "color":"#FFFFFF",
+                 "opacity":0.8,
+                 "size":1
+              },
+              "background":{
+                 "enabled":false
+              },
+              "translations":[
+                 {
+                    "name":"My new awesome district !",
+                    "locale":"en-GB",
+                    "titleOnMap":"Short name"
+                 },
+                 {
+                    "name":"Premier Quartier",
+                    "locale":"fr-FR",
+                    "titleOnMap":"1er"
+                 }
+              ]
+           }
         }
-      }
+     }
   }
   """
 

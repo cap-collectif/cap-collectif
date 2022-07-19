@@ -4,41 +4,49 @@ Capco\AppBundle\Entity\District\DistrictTranslation:
         locale: fr-FR
         id: projectDistrictTranslation1
         name: Premier Quartier
+        titleOnMap: 1er
     projectDistrictTranslation1En:
         translatable: '@projectDistrict1'
         locale: en-GB
         id: projectDistrictTranslation1En
         name: First District
+        titleOnMap: 1st
     projectDistrictTranslation2:
         translatable: '@projectDistrict2'
         locale: fr-FR
         id: projectDistrictTranslation2
         name: Deuxième Quartier
+        titleOnMap: 2ième
     projectDistrictTranslation3:
         translatable: '@projectDistrict3'
         locale: fr-FR
         id: projectDistrictTranslation3
         name: Centre ville
+        titleOnMap: Centre
     projectDistrictTranslation4:
         translatable: '@projectDistrict4'
         locale: fr-FR
         id: projectDistrictTranslation4
         name: Îles de Nantes
+        titleOnMap: Îles
     projectDistrictTranslation5:
         translatable: '@projectDistrict5'
         locale: fr-FR
         id: projectDistrictTranslation5
         name: Hauts pavés Saint-Félix
+        titleOnMap: St Félix
     projectDistrictTranslation6:
         translatable: '@projectDistrict6'
         locale: fr-FR
         id: projectDistrictTranslation6
         name: Malakoff Saint-Donation
+        titleOnMap: Malakoff
     projectDistrictTranslation7:
         translatable: '@projectDistrict7'
         locale: fr-FR
         id: projectDistrictTranslation7
         name: Dervallières Zola
+        titleOnMap: Dervallières
     proposalDistrict1:
         id: district1
         translatable: '@district1'

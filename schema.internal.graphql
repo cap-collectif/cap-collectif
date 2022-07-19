@@ -1550,6 +1550,7 @@ input ChangeDistrictInput {
   geojson: GeoJSON
   displayedOnMap: Boolean
   name: String
+  titleOnMap: String
   clientMutationId: String
 }
 
@@ -5242,6 +5243,10 @@ interface District {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
+  titleOnMap(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
@@ -5282,12 +5287,14 @@ enum DistrictOrderField {
 type DistrictTranslation {
   locale: String!
   name: String!
+  titleOnMap: String
 }
 
 input DistrictTranslationInput {
   id: ID
   locale: String!
   name: String
+  titleOnMap: String
 }
 
 """Entities that can be drafted."""
@@ -9206,6 +9213,10 @@ type ProjectDistrict implements District {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
+  titleOnMap(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
@@ -10045,6 +10056,10 @@ type ProposalDistrict implements District {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
+  titleOnMap(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!

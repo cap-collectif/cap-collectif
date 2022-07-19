@@ -11,3 +11,5 @@ ChangeDistrictInput:
                 type: 'Boolean'
             name:
                 type: 'String'
+            titleOnMap:
+                type: 'String'

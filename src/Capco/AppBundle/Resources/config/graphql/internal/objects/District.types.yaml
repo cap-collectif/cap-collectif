@@ -10,6 +10,10 @@ District:
                 type: 'String!'
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getName(args["locale"])'
+            titleOnMap:
+                type: 'String'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getTitleOnMap(args["locale"])'
             geojson:
                 type: GeoJSON
             geojsonStyle:

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Form\ProposalDistrictAdminType;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -11,8 +12,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class DistrictMutation implements MutationInterface
 {
-    private $entityManager;
-    private $formFactory;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -26,10 +27,7 @@ class DistrictMutation implements MutationInterface
     {
         $values = $input->getArrayCopy();
 
-        $district = $this->entityManager->find(
-            'CapcoAppBundle:District\ProposalDistrict',
-            $values['districtId']
-        );
+        $district = $this->entityManager->find(ProposalDistrict::class, $values['districtId']);
         if (!$district) {
             throw new UserError(sprintf('Unknown district with id "%d"', $values['districtId']));
         }

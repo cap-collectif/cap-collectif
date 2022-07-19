@@ -21,13 +21,18 @@ use Capco\AppBundle\Traits\TranslationTrait;
  */
 class DistrictTranslation implements Translation
 {
-    use UuidTrait;
     use TranslationTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\Column(name="title_on_map", type="string", length=255, nullable=true)
+     */
+    private ?string $titleOnMap = null;
 
     public function getName(): ?string
     {
@@ -37,6 +42,18 @@ class DistrictTranslation implements Translation
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getTitleOnMap(): ?string
+    {
+        return $this->titleOnMap;
+    }
+
+    public function setTitleOnMap(?string $titleOnMap): self
+    {
+        $this->titleOnMap = $titleOnMap;
 
         return $this;
     }

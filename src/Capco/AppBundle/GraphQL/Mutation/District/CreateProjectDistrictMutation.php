@@ -16,9 +16,9 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class CreateProjectDistrictMutation implements MutationInterface
 {
-    protected $logger;
-    protected $em;
-    protected $formFactory;
+    protected LoggerInterface $logger;
+    protected EntityManagerInterface $em;
+    protected FormFactoryInterface $formFactory;
 
     public function __construct(
         LoggerInterface $logger,
@@ -55,6 +55,7 @@ class CreateProjectDistrictMutation implements MutationInterface
 
         $totalCount = 0;
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $projectDistrict);
+
         return ['district' => $projectDistrict, 'districtEdge' => $edge, 'userErrors' => []];
     }
 }

@@ -9,3 +9,5 @@ InternalDistrictTranslationInput:
                 type: 'String!'
             name:
                 type: 'String'
+            titleOnMap:
+                type: 'String'

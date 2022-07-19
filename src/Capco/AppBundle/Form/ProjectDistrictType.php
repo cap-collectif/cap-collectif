@@ -14,7 +14,7 @@ class ProjectDistrictType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('translations', TranslationCollectionType::class, [
-            'fields' => ['id', 'name', 'locale'],
+            'fields' => ['id', 'name', 'locale', 'titleOnMap'],
         ]);
         $builder->add('displayedOnMap', CheckboxType::class);
         $builder->add('geojson', TextType::class);

@@ -113,6 +113,11 @@ abstract class AbstractDistrict implements
         return $this->translate($locale, $fallbackToDefault)->getName();
     }
 
+    public function getTitleOnMap(?string $locale = null, ?bool $fallbackToDefault = true): ?string
+    {
+        return $this->translate($locale, $fallbackToDefault)->getTitleOnMap();
+    }
+
     public function setName(?string $name = null): self
     {
         $this->translate(null, false)->setName($name);
