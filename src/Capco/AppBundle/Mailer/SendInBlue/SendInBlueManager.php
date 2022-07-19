@@ -30,7 +30,7 @@ class SendInBlueManager
         string $sendinblueNlListId
     ) {
         $this->kernel = $kernel;
-        $this->listId = $sendinblueNlListId;
+        $this->listId = (int) $sendinblueNlListId;
         $this->apiInstance = $apiInstance;
         $this->logger = $logger;
     }
