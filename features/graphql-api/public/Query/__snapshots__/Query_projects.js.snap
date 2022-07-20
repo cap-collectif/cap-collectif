@@ -390,31 +390,31 @@ Object {
             "edges": Array [
               Object {
                 "node": Object {
-                  "id": "projectDistrict3",
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==",
                   "name": "Centre ville",
                 },
               },
               Object {
                 "node": Object {
-                  "id": "projectDistrict4",
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==",
                   "name": "Îles de Nantes",
                 },
               },
               Object {
                 "node": Object {
-                  "id": "projectDistrict5",
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ==",
                   "name": "Hauts pavés Saint-Félix",
                 },
               },
               Object {
                 "node": Object {
-                  "id": "projectDistrict6",
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng==",
                   "name": "Malakoff Saint-Donation",
                 },
               },
               Object {
                 "node": Object {
-                  "id": "projectDistrict7",
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==",
                   "name": "Dervallières Zola",
                 },
               },

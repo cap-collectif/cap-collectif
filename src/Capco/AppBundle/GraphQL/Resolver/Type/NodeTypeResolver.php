@@ -4,6 +4,8 @@ namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
@@ -78,7 +80,6 @@ class NodeTypeResolver implements ResolverInterface
     public function __invoke($node): Type
     {
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
-
         if ($node instanceof Project) {
             if ('public' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PublicProject');
@@ -299,6 +300,14 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof SmsCredit) {
             return $this->typeResolver->resolve('InternalSmsCredit');
+        }
+
+        if ($node instanceof ProposalDistrict) {
+            return $this->typeResolver->resolve('ProposalDistrict');
+        }
+
+        if ($node instanceof ProjectDistrict) {
+            return $this->typeResolver->resolve('ProjectDistrict');
         }
 
         throw new UserError('Could not resolve type of Node.');

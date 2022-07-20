@@ -8,8 +8,8 @@ use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
 class AdminProjectDistrictPage extends Page
 {
-    use PageTrait;
     use AdminProjectDistrictTrait;
+    use PageTrait;
 
     protected $elements = [
         'project district add button' => '.btn-outline-primary',

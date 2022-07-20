@@ -5238,6 +5238,7 @@ type DeleteVersionPayload {
 
 """A district"""
 interface District {
+  """The ID of an object"""
   id: ID!
   name(
     """The locale to translate content (eg: FR_FR)."""
@@ -9207,7 +9208,8 @@ type ProjectConnection {
 }
 
 """A project district"""
-type ProjectDistrict implements District {
+type ProjectDistrict implements District & Node {
+  """The ID of an object"""
   id: ID!
   name(
     """The locale to translate content (eg: FR_FR)."""
@@ -9243,6 +9245,9 @@ type ProjectDistrict implements District {
 
   """Identifies if the viewer is following the entity."""
   viewerIsFollowing: Boolean!
+
+  """Expose Primary Key, do not use it, except for testing purpose."""
+  _id: ID!
 
   """The list of projects in district"""
   projects(
@@ -10050,7 +10055,8 @@ enum ProposalDecisionState {
 }
 
 """A proposal district"""
-type ProposalDistrict implements District {
+type ProposalDistrict implements District & Node {
+  """The ID of an object"""
   id: ID!
   name(
     """The locale to translate content (eg: FR_FR)."""

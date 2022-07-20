@@ -1,11 +1,17 @@
 District:
     type: interface
+    inherits:
+        - Node
     config:
         resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictTypeResolver", [value])'
         description: 'A district'
         fields:
             id:
-                type: ID!
+                description: 'The ID of an object'
+                builder: 'Relay::GlobalId'
+                type: 'ID!'
+                builderConfig:
+                    typeName: District
             name:
                 type: 'String!'
                 argsBuilder: 'Translatable::Field'

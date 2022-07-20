@@ -296,7 +296,7 @@ Object {
           "name": "Politique",
         },
         "district": Object {
-          "id": "district1",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qx",
           "name": "Beauregard",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
@@ -319,7 +319,7 @@ Object {
           "name": "Aménagement",
         },
         "district": Object {
-          "id": "district3",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qz",
           "name": "Maurepas Patton",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
@@ -339,7 +339,7 @@ Object {
       "node": Object {
         "category": null,
         "district": Object {
-          "id": "district3",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qz",
           "name": "Maurepas Patton",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
@@ -362,7 +362,7 @@ Object {
           "name": "Aménagement",
         },
         "district": Object {
-          "id": "district2",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qy",
           "name": "Nord Saint-Martin",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
@@ -385,7 +385,7 @@ Object {
           "name": "Aménagement",
         },
         "district": Object {
-          "id": "district2",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qy",
           "name": "Nord Saint-Martin",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
@@ -416,7 +416,7 @@ Object {
           "name": "Politique",
         },
         "district": Object {
-          "id": "district1",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qx",
           "name": "Beauregard",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
@@ -439,7 +439,7 @@ Object {
           "name": "Aménagement",
         },
         "district": Object {
-          "id": "district3",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qz",
           "name": "Maurepas Patton",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
@@ -459,7 +459,7 @@ Object {
       "node": Object {
         "category": null,
         "district": Object {
-          "id": "district3",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qz",
           "name": "Maurepas Patton",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
@@ -482,7 +482,7 @@ Object {
           "name": "Aménagement",
         },
         "district": Object {
-          "id": "district2",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qy",
           "name": "Nord Saint-Martin",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
@@ -505,7 +505,7 @@ Object {
           "name": "Aménagement",
         },
         "district": Object {
-          "id": "district2",
+          "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qy",
           "name": "Nord Saint-Martin",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWwy",

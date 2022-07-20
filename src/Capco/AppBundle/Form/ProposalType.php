@@ -3,9 +3,12 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\District\AbstractDistrict;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Form\Type\RelayNodeType;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Capco\AppBundle\Toggle\Manager;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
@@ -62,7 +65,9 @@ class ProposalType extends AbstractType
         }
 
         if ($this->toggleManager->isActive(Manager::districts) && $form->isUsingDistrict()) {
-            $builder->add('district');
+            $builder->add('district', RelayNodeType::class, [
+                'class' => AbstractDistrict::class,
+            ]);
         }
 
         if ($form->getUsingAddress()) {

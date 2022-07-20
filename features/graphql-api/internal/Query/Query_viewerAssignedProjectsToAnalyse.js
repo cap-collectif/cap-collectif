@@ -189,7 +189,7 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
       graphql(
         InternalSortProposalQuery,
         {
-          district: 'district1',
+          district: 'RGlzdHJpY3Q6ZGlzdHJpY3Qx',
           state: null,
           decisionMaker: null,
           category: null,

@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation\District;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Form\ProjectDistrictType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Psr\Log\LoggerInterface;
 
@@ -16,34 +16,33 @@ class UpdateProjectDistrictMutation implements MutationInterface
 {
     protected LoggerInterface $logger;
     protected EntityManagerInterface $em;
-    protected ProjectDistrictRepository $projectDistrictRepository;
     protected FormFactoryInterface $formFactory;
+    protected GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
-        ProjectDistrictRepository $projectDistrictRepository,
         FormFactoryInterface $formFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->logger = $logger;
         $this->em = $em;
-        $this->projectDistrictRepository = $projectDistrictRepository;
         $this->formFactory = $formFactory;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, $viewer): array
     {
         $values = $input->getArrayCopy();
-        $projectDistrictId = $input->offsetGet('id');
 
-        $projectDistrict = $this->projectDistrictRepository->find($projectDistrictId);
+        $projectDistrict = $this->globalIdResolver->resolve($input->offsetGet('id'), $viewer);
 
         if (!$projectDistrict instanceof ProjectDistrict) {
             $error = [
-                'message' => sprintf('Unknown project district with id: %s', $projectDistrictId),
+                'message' => sprintf('Unknown project district with id: %s', $input->offsetGet('id')),
             ];
             $this->logger->error(
-                sprintf('Unknown project district with id: %s', $projectDistrictId)
+                sprintf('Unknown project district with id: %s', $input->offsetGet('id'))
             );
 
             return ['district' => null, 'userErrors' => [$error]];

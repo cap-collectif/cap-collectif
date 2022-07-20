@@ -9,7 +9,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "projectDistrict3",
+          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==",
           "name": "Centre ville",
           "projectDistrictPositioners": Array [
             Object {
@@ -37,7 +37,7 @@ Object {
           "followers": Object {
             "totalCount": 2,
           },
-          "id": "projectDistrict7",
+          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==",
           "name": "Dervallières Zola",
           "projectDistrictPositioners": Array [
             Object {
@@ -65,7 +65,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "projectDistrict2",
+          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==",
           "name": "Deuxième Quartier",
           "projectDistrictPositioners": Array [
             Object {
@@ -93,7 +93,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "projectDistrict1",
+          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
           "name": "Premier Quartier",
           "projectDistrictPositioners": Array [
             Object {
@@ -121,7 +121,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "projectDistrict5",
+          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ==",
           "name": "Hauts pavés Saint-Félix",
           "projectDistrictPositioners": Array [
             Object {
@@ -149,7 +149,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "projectDistrict4",
+          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==",
           "name": "Îles de Nantes",
           "projectDistrictPositioners": Array [
             Object {
@@ -177,7 +177,7 @@ Object {
           "followers": Object {
             "totalCount": 2,
           },
-          "id": "projectDistrict6",
+          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng==",
           "name": "Malakoff Saint-Donation",
           "projectDistrictPositioners": Array [
             Object {

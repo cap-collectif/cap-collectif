@@ -88,7 +88,7 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         ProjectViewerAssignedProposalsQuery,
         {
           projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
-          district: 'districtIdf2',
+          district: 'RGlzdHJpY3Q6ZGlzdHJpY3RJZGYy',
         },
         { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
       ),
@@ -100,7 +100,7 @@ describe('Internal|Project.viewerAssignedProposals', () => {
       ProjectViewerAssignedProposalsQuery,
       {
         projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
-        district: 'districtIdf2',
+        district: 'RGlzdHJpY3Q6ZGlzdHJpY3RJZGYy',
         category: 'NONE',
       },
       { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
@@ -154,7 +154,7 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         {
           projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
           term: 'cantine',
-          district: 'districtIdf2',
+          district: 'RGlzdHJpY3Q6ZGlzdHJpY3RJZGYy',
         },
         { email: 'theo@cap-collectif.com', password: 'toto' },
       ),

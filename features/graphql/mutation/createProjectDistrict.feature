@@ -58,7 +58,7 @@ Scenario: Admin wants to create a district in projects
     "data": {
       "createProjectDistrict": {
           "district": {
-            "id": @uuid@,
+            "id": @string@,
             "geojson": null,
             "displayedOnMap": true,
             "border": {

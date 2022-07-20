@@ -329,13 +329,13 @@ describe('Internal | updateProposalForm', () => {
           proposalFormId: 'proposalForm13',
           districts: [
             {
-              id: 'district15',
+              id: 'RGlzdHJpY3Q6ZGlzdHJpY3QxNQ==',
               translations: [{ locale: 'fr-FR', name: 'Quartier 2' }],
               displayedOnMap: true,
               geojson: null,
             },
             {
-              id: 'district16',
+              id: 'RGlzdHJpY3Q6ZGlzdHJpY3QxNg==',
               translations: [{ locale: 'fr-FR', name: 'Quartier 3' }],
               displayedOnMap: true,
               geojson: null,

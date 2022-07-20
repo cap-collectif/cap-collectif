@@ -21,6 +21,7 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use function Clue\StreamFilter\fun;
 
 class ProjectPersister
 {
@@ -85,6 +86,11 @@ class ProjectPersister
             $previousDistricts = $project->getProjectDistrictPositionersIds();
         }
 
+        if(!empty($arguments['districts'])) {
+            $arguments['districts'] = array_map(function ($districtGlobalId) {
+                return GlobalId::fromGlobalId($districtGlobalId)['id'];
+            }, $arguments['districts']);
+        }
         $newDistricts = array_diff($arguments['districts'], $previousDistricts);
         if ($newDistricts) {
             $this->notifyOnNewProjectInDistrict($newDistricts, $project);

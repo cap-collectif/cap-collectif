@@ -4,15 +4,16 @@ namespace Capco\AppBundle\Form\Persister;
 
 use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProjectDistrictPositionerRepository;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProjectDistrictsPersister
 {
-    private $districtPositionerRepository;
-    private $projectDistrictRepository;
-    private $em;
+    private ProjectDistrictPositionerRepository $districtPositionerRepository;
+    private ProjectDistrictRepository $projectDistrictRepository;
+    private EntityManagerInterface $em;
 
     public function __construct(
         ProjectDistrictPositionerRepository $districtPositionerRepository,
@@ -26,6 +27,9 @@ class ProjectDistrictsPersister
 
     public function persist(array $districtsIds, Project $project)
     {
+        $districtsIds = array_map(function ($districtGlobalId) {
+            return GlobalIdResolver::getDecodedId($districtGlobalId, true);
+        }, $districtsIds);
         $districtEntities = $this->projectDistrictRepository->findByIds($districtsIds);
         $oldPositioners = $this->districtPositionerRepository->findBy([
             'project' => $project->getId(),

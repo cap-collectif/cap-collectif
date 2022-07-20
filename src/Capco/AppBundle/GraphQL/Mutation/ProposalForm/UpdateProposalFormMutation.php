@@ -25,6 +25,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -195,12 +196,9 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
     private function districtsProcess(ProposalForm $proposalForm, array $arguments): array
     {
         if (isset($arguments['districts'])) {
-            $districtsIds = [];
-            foreach ($arguments['districts'] as $dataDistrict) {
-                if (isset($dataDistrict['id'])) {
-                    $districtsIds[] = $dataDistrict['id'];
-                }
-            }
+            $districtsIds= array_map(function ($districtGlobalId) {
+                return GlobalId::fromGlobalId($districtGlobalId)['id'];
+            }, $arguments['districts']);
 
             foreach ($proposalForm->getDistricts() as $position => $district) {
                 if (!\in_array($district->getId(), $districtsIds, true)) {

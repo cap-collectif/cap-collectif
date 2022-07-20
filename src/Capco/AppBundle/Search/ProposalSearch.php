@@ -638,9 +638,8 @@ class ProposalSearch extends Search
         if (isset($providedFilters['proposalForm'])) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
-
-        if (isset($providedFilters['district'])) {
-            $filters['district.id'] = $providedFilters['district'];
+        if (isset($providedFilters['district']) && Search::NONE_VALUE !== $providedFilters['district']) {
+            $filters['district.id'] = GlobalIdResolver::getDecodedId($providedFilters['district'])['id'];
         }
 
         if (isset($providedFilters['theme'])) {

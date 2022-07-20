@@ -5,7 +5,7 @@ Scenario: GraphQL client want to get a node of all available types
   Given I send a GraphQL POST request:
   """
   {
-    "query": "query node ($opinionId: ID!, $proposalId: ID!, $projectId: ID!, $groupId: ID!, $proposalFormId: ID!, $questionnaireId: ID!, $eventId: ID!, $requirementId: ID!, $questionId: ID!, $responseId: ID!){
+    "query": "query node ($opinionId: ID!, $proposalId: ID!, $projectId: ID!, $groupId: ID!, $proposalFormId: ID!, $questionnaireId: ID!, $eventId: ID!, $requirementId: ID!, $questionId: ID!, $responseId: ID!, $districtId: ID!){
       opinion: node(id: $opinionId) {
         ... on Opinion {
           title
@@ -57,6 +57,12 @@ Scenario: GraphQL client want to get a node of all available types
           __typename
         }
       }
+      district: node(id: $districtId) {
+        ... on District {
+          id
+          __typename
+        }
+      }
     }",
     "variables": {
       "opinionId": "opinion1",
@@ -68,46 +74,51 @@ Scenario: GraphQL client want to get a node of all available types
       "eventId": "RXZlbnQ6ZXZlbnQx",
       "requirementId": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx",
       "questionId": "UXVlc3Rpb246Mg==",
-      "responseId": "VmFsdWVSZXNwb25zZTpyZXNwb25zZVRhZ0Nsb3VkMjk="
+      "responseId": "VmFsdWVSZXNwb25zZTpyZXNwb25zZVRhZ0Nsb3VkMjk=",
+      "districtId": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ=="
     }
   }
   """
   Then the JSON response should match:
   """
   {
-    "data": {
-      "opinion": {
-        "title": "Opinion 1"
-      },
-      "proposal": {
-        "title": "Ravalement de la fa\u00e7ade de la biblioth\u00e8que municipale"
-      },
-      "project": {
-        "title": "Croissance, innovation, disruption"
-      },
-      "group": {
-        "title": "Super-administrateur"
-      },
-      "form": {
-        "title": "Collecte des propositions pour le budget 2016 de la Ville de Rennes"
-      },
-      "questionnaire": {
-        "title": "Votre avis sur les JO 2024 à Paris"
-      },
-      "event": {
-        "title": "Event with registrations"
-      },
-      "requirement": {
-        "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx"
-      },
-      "question": {
-        "id": "UXVlc3Rpb246Mg=="
-      },
-      "response": {
-        "id": "VmFsdWVSZXNwb25zZTpyZXNwb25zZVRhZ0Nsb3VkMjk=",
-        "__typename": "ValueResponse"
-      }
-    }
+     "data":{
+        "opinion":{
+           "title":"Opinion 1"
+        },
+        "proposal":{
+           "title":"Ravalement de la fa\u00e7ade de la biblioth\u00e8que municipale"
+        },
+        "project":{
+           "title":"Croissance, innovation, disruption"
+        },
+        "group":{
+           "title":"Super-administrateur"
+        },
+        "form":{
+           "title":"Collecte des propositions pour le budget 2016 de la Ville de Rennes"
+        },
+        "questionnaire":{
+           "title":"Votre avis sur les JO 2024 \u00e0 Paris"
+        },
+        "event":{
+           "title":"Event with registrations"
+        },
+        "requirement":{
+           "id":"UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx"
+        },
+        "question":{
+           "id":"UXVlc3Rpb246Mg=="
+        },
+        "response":{
+           "id":"VmFsdWVSZXNwb25zZTpyZXNwb25zZVRhZ0Nsb3VkMjk=",
+           "__typename":"ValueResponse"
+        },
+        "district":{
+           "id":"RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
+           "__typename":"ProjectDistrict"
+        }
+     }
   }
   """
 

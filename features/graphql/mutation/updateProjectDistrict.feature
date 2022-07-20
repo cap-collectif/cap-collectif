@@ -32,7 +32,7 @@ Scenario: Admin wants to update a district in projects
     }",
     "variables": {
       "input": {
-        "id": "projectDistrict1",
+        "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
         "geojson": null,
         "displayedOnMap": true,
         "border": {
@@ -57,7 +57,7 @@ Scenario: Admin wants to update a district in projects
      "data":{
         "updateProjectDistrict":{
            "district":{
-              "id":"projectDistrict1",
+              "id":"RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
               "geojson":null,
               "displayedOnMap":true,
               "border":{
@@ -106,7 +106,7 @@ Scenario: Admin wants to update a district with another translation
     }",
     "variables": {
       "input": {
-        "id": "projectDistrict1",
+        "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
         "geojson": null,
         "displayedOnMap": true,
         "border": {
@@ -132,7 +132,7 @@ Scenario: Admin wants to update a district with another translation
     "data": {
       "updateProjectDistrict": {
           "district": {
-            "id": "projectDistrict1",
+            "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
             "translations":[
               {"locale":"en-GB","name":"My new awesome district !"},
               {"locale":"fr-FR","name":"Mon super quartier !"}

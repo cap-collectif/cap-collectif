@@ -427,7 +427,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: {
           projectId,
           ...BASE_PROJECT,
-          districts: ['projectDistrict2', 'projectDistrict7'],
+          districts: ['RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==', 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw=='],
         },
       },
       'internal_admin',
@@ -441,12 +441,12 @@ describe('Internal|updateAlphaProject simple mutations', () => {
             edges: [
               {
                 node: {
-                  id: 'projectDistrict2',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==',
                 },
               },
               {
                 node: {
-                  id: 'projectDistrict7',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==',
                 },
               },
             ],
@@ -473,11 +473,11 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           projectId,
           ...BASE_PROJECT,
           districts: [
-            'projectDistrict2',
-            'projectDistrict3',
-            'projectDistrict4',
-            'projectDistrict5',
-            'projectDistrict7',
+            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==',
+            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==',
+            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==',
+            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ==',
+            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==',
           ],
         },
       },
@@ -492,27 +492,27 @@ describe('Internal|updateAlphaProject simple mutations', () => {
             edges: [
               {
                 node: {
-                  id: 'projectDistrict2',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==',
                 },
               },
               {
                 node: {
-                  id: 'projectDistrict3',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==',
                 },
               },
               {
                 node: {
-                  id: 'projectDistrict4',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==',
                 },
               },
               {
                 node: {
-                  id: 'projectDistrict5',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ==',
                 },
               },
               {
                 node: {
-                  id: 'projectDistrict7',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==',
                 },
               },
             ],
@@ -526,7 +526,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: {
           projectId,
           ...BASE_PROJECT,
-          districts: ['projectDistrict2', 'projectDistrict4', 'projectDistrict6'],
+          districts: ['RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==', 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==', 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng=='],
         },
       },
       'internal_admin',
@@ -539,17 +539,17 @@ describe('Internal|updateAlphaProject simple mutations', () => {
             edges: [
               {
                 node: {
-                  id: 'projectDistrict2',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==',
                 },
               },
               {
                 node: {
-                  id: 'projectDistrict4',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==',
                 },
               },
               {
                 node: {
-                  id: 'projectDistrict6',
+                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng==',
                 },
               },
             ],

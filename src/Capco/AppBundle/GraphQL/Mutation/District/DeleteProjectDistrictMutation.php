@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\District;
 
+use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -10,27 +12,27 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class DeleteProjectDistrictMutation implements MutationInterface
 {
-    protected $logger;
-    protected $em;
-    protected $projectDistrictRepository;
+    protected LoggerInterface $logger;
+    protected EntityManagerInterface $em;
+    protected GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         LoggerInterface $logger,
         EntityManagerInterface $em,
-        ProjectDistrictRepository $projectDistrictRepository
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->logger = $logger;
         $this->em = $em;
-        $this->projectDistrictRepository = $projectDistrictRepository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, $viewer): array
     {
         $projectDistrictId = $input->offsetGet('id');
 
-        $projectDistrict = $this->projectDistrictRepository->find($projectDistrictId);
+        $projectDistrict = $this->globalIdResolver->resolve($projectDistrictId, $viewer);
 
-        if (!$projectDistrict) {
+        if (!$projectDistrict instanceof ProjectDistrict) {
             $error = [
                 'message' => sprintf('Unknown project district with id: %s', $projectDistrictId),
             ];

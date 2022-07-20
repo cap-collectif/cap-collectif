@@ -48,7 +48,7 @@ export function ProjectDistrictAdminList(props: Props) {
                       onClick={() => handleEdit(district.id)}
                     />
                     <DeleteButtonPopover
-                      id={`DeleteButtonPopover-${district.id}`}
+                      id={`DeleteButtonPopover-${district._id}`}
                       handleValidate={() => handleDelete(district.id)}
                     />
                   </ButtonToolbar>
@@ -66,6 +66,7 @@ export default createFragmentContainer(ProjectDistrictAdminList, {
       edges {
         node {
           id
+          _id
           translations {
             name
             locale

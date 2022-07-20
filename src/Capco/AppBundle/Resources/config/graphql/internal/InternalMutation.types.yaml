@@ -521,7 +521,7 @@ InternalMutation:
                 builderConfig:
                     inputType: ChangeDistrictInput
                     payloadType: ChangeDistrictPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DistrictMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DistrictMutation", [value, getUser()])'
             # Proposal Form
             createProposalForm:
                 access: "@=hasRole('ROLE_PROJECT_ADMIN')"
@@ -804,14 +804,14 @@ InternalMutation:
                 builderConfig:
                     inputType: DeleteProjectDistrictInput
                     payloadType: DeleteProjectDistrictPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\DeleteProjectDistrictMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\DeleteProjectDistrictMutation", [value, getUser()])'
             updateProjectDistrict:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateProjectDistrictInput
                     payloadType: CreateProjectDistrictPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UpdateProjectDistrictMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UpdateProjectDistrictMutation", [value, getUser()])'
 
             # Media Admin
             deleteMediaAdmin:

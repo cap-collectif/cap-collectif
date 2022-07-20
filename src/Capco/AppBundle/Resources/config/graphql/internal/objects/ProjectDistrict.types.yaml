@@ -3,10 +3,12 @@ ProjectDistrict:
     inherits:
         - District
         - WithFollowers
+        - InternalPrimaryKey
     config:
         name: ProjectDistrict
         interfaces:
             - District
+            - Node
         description: 'A project district'
         fields:
             projects:

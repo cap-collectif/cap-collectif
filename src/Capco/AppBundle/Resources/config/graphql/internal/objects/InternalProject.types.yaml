@@ -141,7 +141,7 @@ InternalProject:
             districts:
                 type: 'ProjectDistrictConnection'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictsResolver", [value, args])'
                 description: 'Linking table with position for district'
             comments:
                 description: 'The comments related to the project.'

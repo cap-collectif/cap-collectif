@@ -11,6 +11,8 @@ use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
+use Capco\AppBundle\Repository\ProjectDistrictRepository;
+use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Repository\SmsCreditRepository;
@@ -277,6 +279,15 @@ class GlobalIdResolver
                     $node = $this->container->get(MediaResponseRepository::class)->find($uuid);
 
                     break;
+                case 'District':
+                    $node = $this->container->get(ProposalDistrictRepository::class)->find($uuid);
+                    if (!$node) {
+                        $node = $this->container
+                            ->get(ProjectDistrictRepository::class)
+                            ->find($uuid);
+                    }
+
+                    break;
                 default:
                     break;
             }
@@ -344,6 +355,12 @@ class GlobalIdResolver
         // TODO remove me.
         if (!$node) {
             $node = $this->container->get(ReplyRepository::class)->find($uuid);
+        }
+        if (!$node) {
+            $node = $this->container->get(ProjectDistrictRepository::class)->find($uuid);
+        }
+        if (!$node) {
+            $node = $this->container->get(ProposalDistrictRepository::class)->find($uuid);
         }
 
         if (!$node) {
@@ -442,7 +459,7 @@ class GlobalIdResolver
         return $viewerCanSee ? $node : null;
     }
 
-    public static function getDecodedId(string $uuidOrGlobalId)
+    public static function getDecodedId(string $uuidOrGlobalId, bool $returnId = false)
     {
         // We try to decode the global id
         $decodeGlobalId = GlobalId::fromGlobalId($uuidOrGlobalId);
@@ -450,7 +467,7 @@ class GlobalIdResolver
             isset($decodeGlobalId['type'], $decodeGlobalId['id']) &&
             null !== $decodeGlobalId['id']
         ) {
-            return $decodeGlobalId;
+            return $returnId ? $decodeGlobalId['id'] : $decodeGlobalId;
         }
 
         return $uuidOrGlobalId;

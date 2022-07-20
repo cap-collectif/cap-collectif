@@ -247,7 +247,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
         ProposalStepProposalsQuery,
         {
           count: 100,
-          district: 'district1',
+          district: toGlobalId('District', 'district1'),
           id: toGlobalId('SelectionStep', 'selectionstep1'),
           orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
         },

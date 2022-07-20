@@ -39,11 +39,11 @@ Scenario: GraphQL client wants to update a project metadata
         "Cover": "media2",
         "video": "rthwrht",
         "districts": [
-          "projectDistrict3",
-          "projectDistrict4",
-          "projectDistrict5",
-          "projectDistrict6",
-          "projectDistrict7"
+          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==",
+          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==",
+          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ==",
+          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng==",
+          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw=="
         ],
         "themes": [
           "theme1",
@@ -81,31 +81,31 @@ Scenario: GraphQL client wants to update a project metadata
               {
                 "node": {
                   "name": "Centre ville",
-                  "id": "projectDistrict3"
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw=="
                 }
               },
               {
                 "node": {
                   "name": "Îles de Nantes",
-                  "id": "projectDistrict4"
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA=="
                 }
               },
               {
                 "node": {
                   "name": "Hauts pavés Saint-Félix",
-                  "id": "projectDistrict5"
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ=="
                 }
               },
               {
                 "node": {
                   "name": "Malakoff Saint-Donation",
-                  "id": "projectDistrict6"
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng=="
                 }
               },
               {
                 "node": {
                   "name": "Dervallières Zola",
-                  "id": "projectDistrict7"
+                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw=="
                 }
               }
             ]

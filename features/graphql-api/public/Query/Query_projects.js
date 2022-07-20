@@ -198,7 +198,7 @@ describe('Preview|Query.projects connection', () => {
       graphql(
         ProjectsDistrictsQuery,
         {
-          districtId: 'projectDistrict6',
+          districtId: toGlobalId('District', 'projectDistrict6'),
           count: 5,
         },
         'internal',

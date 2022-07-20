@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ProjectDistrictResolver implements ResolverInterface
+class ProjectDistrictsResolver implements ResolverInterface
 {
     private ProjectDistrictPositionerRepository $positionerRepository;
 

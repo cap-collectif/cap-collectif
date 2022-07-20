@@ -20,7 +20,7 @@ Scenario: GraphQL client wants to change district of a proposal
       "input": {
         "name": "New name",
         "displayedOnMap": false,
-        "districtId": "district1",
+        "districtId": "RGlzdHJpY3Q6ZGlzdHJpY3Qx",
         "geojson": null
       }
     }
@@ -60,7 +60,7 @@ Scenario: GraphQL client wants to change district of a proposal but geojson is n
       "input": {
         "name": "New name",
         "displayedOnMap": false,
-        "districtId": "district1",
+        "districtId": "RGlzdHJpY3Q6ZGlzdHJpY3Qx",
         "geojson": "{'validjson':false, 'validGeoJSON': false}}}}}"
       }
     }
@@ -90,7 +90,7 @@ Scenario: GraphQL client wants to change district of a proposal but has invalid 
       "input": {
         "name": "New name",
         "displayedOnMap": false,
-        "districtId": "district1",
+        "districtId": "RGlzdHJpY3Q6ZGlzdHJpY3Qx",
         "geojson": "{'validjson':true, 'validGeoJSON': false}"
       }
     }
@@ -120,7 +120,7 @@ Scenario: GraphQL client wants to change district of a proposal and use a valid 
       "input": {
         "name": "New name",
         "displayedOnMap": false,
-        "districtId": "district1",
+        "districtId": "RGlzdHJpY3Q6ZGlzdHJpY3Qx",
         "geojson": "{\"type\": \"Feature\", \"properties\": { \"name\": \"a point\"}, \"geometry\": {\"type\": \"Point\", \"coordinates\": [7.2874, 48.4165]}}"
       }
     }

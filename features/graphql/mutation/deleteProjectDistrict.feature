@@ -14,7 +14,7 @@ Scenario: Admin can delete a project district
     }",
     "variables": {
       "input": {
-        "id": "projectDistrict1"
+        "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ=="
       }
     }
   }
@@ -24,7 +24,7 @@ Scenario: Admin can delete a project district
   {
     "data": {
       "deleteProjectDistrict": {
-          "deletedDistrictId": "projectDistrict1"
+          "deletedDistrictId": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ=="
        }
      }
   }

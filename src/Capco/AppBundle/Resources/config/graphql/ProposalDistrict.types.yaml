@@ -2,5 +2,7 @@ ProposalDistrict:
     type: object
     inherits: [District]
     config:
-        interfaces: [District]
+        interfaces:
+            - District
+            - Node
         description: 'A proposal district'
