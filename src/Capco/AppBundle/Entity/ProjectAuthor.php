@@ -84,4 +84,14 @@ class ProjectAuthor implements Author
 
         return $this;
     }
+
+    public function getSlug(?string $locale = null, ?bool $fallbackToDefault = false): ?string
+    {
+        return $this->getAuthor() ?? $this->getAuthor()->getSlug();
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->getAuthor() ?? $this->getAuthor()->getUsername();
+    }
 }

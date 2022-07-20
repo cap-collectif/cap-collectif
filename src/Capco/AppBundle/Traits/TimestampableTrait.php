@@ -13,7 +13,7 @@ trait TimestampableTrait
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
-    protected $createdAt;
+    protected ?\DateTimeInterface $createdAt = null;
 
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {

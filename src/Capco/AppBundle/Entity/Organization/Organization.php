@@ -13,6 +13,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -172,5 +173,10 @@ class Organization implements SonataTranslatableInterface, Translatable, Author,
     public function getUsername(): ?string
     {
         return $this->getTitle();
+    }
+
+    public function isViewer(?User $user): bool
+    {
+        return $this->members->contains($user);
     }
 }

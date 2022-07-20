@@ -11,6 +11,7 @@ use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
+use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
@@ -286,6 +287,10 @@ class GlobalIdResolver
                             ->get(ProjectDistrictRepository::class)
                             ->find($uuid);
                     }
+
+                    break;
+                case 'Organization':
+                    $node = $this->container->get(OrganizationRepository::class)->find($uuid);
 
                     break;
                 default:
