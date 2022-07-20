@@ -70,23 +70,23 @@
 
     @if $position == "bottom" {
         border-top: $width solid $background;
-        border-left: $width / 2 solid transparent;
-        border-right: $width / 2 solid transparent;
+        border-left: calc( $width / 2) solid transparent;
+        border-right: calc($width / 2) solid transparent;
     }
     @if $position == "top" {
         border-bottom: $width solid $background;
-        border-left: $width / 2 solid transparent;
-        border-right: $width / 2 solid transparent;
+        border-left: calc($width / 2) solid transparent;
+        border-right: calc($width / 2) solid transparent;
     }
     @if $position == "right" {
-        border-top: $width / 2 solid transparent;
+        border-top: calc($width / 2) solid transparent;
         border-right: $width solid $background;
-        border-bottom: $width / 2 solid transparent;
+        border-bottom: calc($width / 2) solid transparent;
     }
     @if $position == "left" {
-        border-top: $width / 2 solid transparent;
+        border-top: calc($width / 2) solid transparent;
         border-left: $width solid $background;
-        border-bottom: $width / 2 solid transparent;
+        border-bottom: calc($width / 2) solid transparent;
     }
 }
 

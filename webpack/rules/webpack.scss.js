@@ -37,6 +37,13 @@ function getRulesConf() {
             },
             {
               loader: 'sass-loader', // compiles Sass to CSS
+              options: {
+                // Prefer `dart-sass`
+                implementation: require('sass'),
+                sassOptions: {
+                  quietDeps: true,
+                },
+              },
             },
           ],
         },

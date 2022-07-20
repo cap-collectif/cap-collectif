@@ -424,7 +424,7 @@
         position: absolute;
         width: $marker-width;
         height: $marker-height;
-        left: -$marker-width / 2;
+        left: - calc( $marker-width / 2);
         top: -$marker-height;
         cursor: pointer;
         margin: 0;
@@ -441,8 +441,8 @@
         cursor: pointer;
         width: $marker-width;
         height: $marker-height;
-        left: -$marker-width / 2;
-        top: -$marker-height / 2;
+        left: - calc( $marker-width / 2);
+        top: - calc( $marker-height / 2);
 
         border: $marker-border-width solid lighten($primary-color, 15%);
         border-radius: 50%;
