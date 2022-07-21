@@ -13,7 +13,7 @@ const getInitialValues = (
     ? {
         PhoneVerifiedRequirement: {
           CountryCode: '+33',
-          phoneNumber: user?.phone ? formatPhoneNumber(user.phone) : null,
+          phoneNumber: user?.phone && user?.phoneConfirmed ? formatPhoneNumber(user.phone) : null,
         },
       }
     : requirements.length && requirements.length > 0
@@ -48,7 +48,8 @@ const getInitialValues = (
               ...acc,
               PhoneRequirement: {
                 CountryCode: '+33',
-                phoneNumber: user?.phone ? formatPhoneNumber(user.phone) : null,
+                phoneNumber:
+                  user?.phone && user?.phoneConfirmed ? formatPhoneNumber(user.phone) : null,
               },
             };
           }
@@ -56,7 +57,8 @@ const getInitialValues = (
             ...acc,
             PhoneVerifiedRequirement: {
               CountryCode: '+33',
-              phoneNumber: user?.phone ? formatPhoneNumber(user.phone) : null,
+              phoneNumber:
+                user?.phone && user?.phoneConfirmed ? formatPhoneNumber(user.phone) : null,
             },
           };
         }

@@ -60,7 +60,10 @@ describe('getInitialValues', () => {
         label: 'Checkbox requirement',
       },
     ];
-    const value = getInitialValues(requirements, false, true, { phone: '0766509155' });
+    const value = getInitialValues(requirements, false, true, {
+      phone: '0766509155',
+      phoneConfirmed: true,
+    });
     const expected = {
       FirstnameRequirement: 'Laurent',
       LastnameRequirement: 'Brunet',
@@ -81,7 +84,7 @@ describe('getInitialValues', () => {
           viewerMeetsTheRequirement: true,
           label: 'Checkbox requirement',
           id: 'UmVxdWlyZW1lbnQ6NTlZDgwMjTtZDllZS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
-        }
+        },
       ],
     };
     expect(value).toEqual(expected);
@@ -130,18 +133,23 @@ describe('getInitialValues', () => {
         label: 'Checkbox requirement',
       },
     ];
-    const value = getInitialValues(requirements, false, true, { phone: '0766509155' });
+    const value = getInitialValues(requirements, false, true, {
+      phone: '0766509155',
+      phoneConfirmed: true,
+    });
     const expected = {
       FranceConnectRequirement: null,
       IdentificationCodeRequirement: '',
       PhoneVerifiedRequirement: { CountryCode: '+33', phoneNumber: '0766509155' },
       DateOfBirthRequirement: null,
       PostalAddressRequirement: null,
-      CheckboxRequirement: [{
-        viewerMeetsTheRequirement: true,
-        label: 'Checkbox requirement',
-        id: 'UmVxdWlyZW1lbnQ6NTliZDgwMjEtZDllZS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
-      }],
+      CheckboxRequirement: [
+        {
+          viewerMeetsTheRequirement: true,
+          label: 'Checkbox requirement',
+          id: 'UmVxdWlyZW1lbnQ6NTliZDgwMjEtZDllZS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
+        },
+      ],
     };
     expect(value).toEqual(expected);
   });
@@ -159,7 +167,10 @@ describe('getInitialValues', () => {
         viewerValue: '+3300000000',
       },
     ];
-    const value = getInitialValues(requirements, true, true, { phone: '0766509155' });
+    const value = getInitialValues(requirements, true, true, {
+      phone: '0766509155',
+      phoneConfirmed: true,
+    });
     const expected = {
       PhoneVerifiedRequirement: {
         CountryCode: '+33',
@@ -170,8 +181,38 @@ describe('getInitialValues', () => {
   });
   it('Should return empty ', () => {
     const requirements = [];
-    const value = getInitialValues(requirements, false, false, { phone: '0766509155' });
+    const value = getInitialValues(requirements, false, false, {
+      phone: '0766509155',
+      phoneConfirmed: true,
+    });
     const expected = {};
+    expect(value).toEqual(expected);
+  });
+
+  it('Should not pre-fill phone number if not verified', () => {
+    const requirements = [
+      {
+        __typename: 'PhoneVerifiedRequirement',
+        id: 'UmVxdWlyZW1lbnQ6N2U3ODVlYWEtZDlmMS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
+        viewerMeetsTheRequirement: false,
+      },
+      {
+        __typename: 'PhoneRequirement',
+        id: 'UmVxdWlyZW1lbnQ6NTliY2I3NDAtZDllZS0xMWVjLWI4NDAtMDI0MmFjMTMwMDA2',
+        viewerMeetsTheRequirement: true,
+        viewerValue: '+3300000000',
+      },
+    ];
+    const value = getInitialValues(requirements, true, true, {
+      phone: '0766509155',
+      phoneConfirmed: false,
+    });
+    const expected = {
+      PhoneVerifiedRequirement: {
+        CountryCode: '+33',
+        phoneNumber: null,
+      },
+    };
     expect(value).toEqual(expected);
   });
 });

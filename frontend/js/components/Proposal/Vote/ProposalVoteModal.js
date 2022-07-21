@@ -134,6 +134,8 @@ const STEP_FRAGMENT = graphql`
 `;
 const VIEWER_FRAGMENT = graphql`
   fragment ProposalVoteModal_viewer on User {
+    phone
+    phoneConfirmed
     ...ProposalVoteConfirmationModal_viewer
   }
 `;
@@ -330,7 +332,7 @@ export const ProposalVoteModal = ({
     requirements,
     isPhoneVerificationOnly,
     hasPhoneRequirements,
-    user,
+    viewer,
   );
 
   const requirementsFormSchema = generateValidationSchema(initialValues, isAuthenticated, intl);

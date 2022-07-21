@@ -6743,6 +6743,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     "storageKey": null,
                   },
                   Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "phoneConfirmed",
+                    "storageKey": null,
+                  },
+                  Object {
                     "condition": "hasVotableStep",
                     "kind": "Condition",
                     "passingValue": true,
@@ -7428,7 +7435,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "61fba16af64c20a460f8fff6b4c60279",
+        "cacheID": "c6335d74874731000457cd6558656946",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -9516,6 +9523,8 @@ fragment ProposalVoteModal_step_39ngnn on ProposalStep {
 }
 
 fragment ProposalVoteModal_viewer on User {
+  phone
+  phoneConfirmed
   ...ProposalVoteConfirmationModal_viewer
 }
 
