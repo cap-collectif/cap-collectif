@@ -3,16 +3,16 @@
 namespace Capco\AppBundle\Manager;
 
 use Capco\MediaBundle\Entity\Media;
-use Sonata\MediaBundle\Entity\MediaManager as SonataMediaManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaManager
 {
-    protected SonataMediaManager $mediaManager;
+    protected EntityManagerInterface $entityManager;
 
-    public function __construct(SonataMediaManager $mediaManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->mediaManager = $mediaManager;
+        $this->entityManager = $entityManager;
     }
 
     public function createFileFromUploadedFile(
@@ -20,8 +20,7 @@ class MediaManager
         string $context = 'default',
         ?string $providerReference = null
     ): Media {
-        /** @var Media $media */
-        $media = $this->mediaManager->create();
+        $media = new Media();
         $media->setProviderName($this->resolveProviderName($file));
         $media->setBinaryContent($file);
         if ($providerReference) {
@@ -29,7 +28,8 @@ class MediaManager
         }
         $media->setContext($context);
         $media->setEnabled(true);
-        $this->mediaManager->save($media);
+        $this->entityManager->persist($media);
+        $this->entityManager->flush();
 
         return $media;
     }
@@ -40,8 +40,7 @@ class MediaManager
         string $context = 'default',
         ?string $providerReference = null
     ): Media {
-        /** @var Media $media */
-        $media = $this->mediaManager->create();
+        $media = new Media();
         $media->setProviderName('sonata.media.provider.file');
         $media->setName($filename . '.pdf');
         $media->setBinaryContent($file);
@@ -50,7 +49,8 @@ class MediaManager
         }
         $media->setContext($context);
         $media->setEnabled(true);
-        $this->mediaManager->save($media);
+        $this->entityManager->persist($media);
+        $this->entityManager->flush();
 
         return $media;
     }
@@ -61,8 +61,7 @@ class MediaManager
         bool $dryRun = false,
         string $context = 'default'
     ): Media {
-        /** @var Media $media */
-        $media = $this->mediaManager->create();
+        $media = new Media();
         $media->setProviderName('sonata.media.provider.image');
         $media->setBinaryContent($path);
         $media->setContext($context);
@@ -70,7 +69,8 @@ class MediaManager
         $media->setName($mediaName);
         $media->setProviderReference($mediaName);
         if (!$dryRun) {
-            $this->mediaManager->save($media);
+            $this->entityManager->persist($media);
+            $this->entityManager->flush();
         }
 
         return $media;

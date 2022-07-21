@@ -4,7 +4,6 @@ services:
         autoconfigure: true
         public: false
         bind:
-            Sonata\MediaBundle\Entity\MediaManager: '@sonata.media.manager.media'
             Qandidate\Toggle\ToggleManager: '@qandidate.toggle.manager'
             Qandidate\Toggle\ContextFactory: '@qandidate.toggle.user_context_factory'
 
@@ -97,13 +96,13 @@ services:
     Capco\AppBundle\Mailer\SenderEmailResolver:
         public: true
         lazy: true
-    
+
     Capco\AppBundle\GraphQL\Resolver\Query\QueryMapTokenResolver:
         public: true
         arguments:
             $defaultMapboxPublicToken: '%mapbox_public_key%'
             $defaultMapboxSecretKey: '%mapbox_secret_key%'
-    
+
     Capco\AppBundle\GraphQL\Resolver\MapToken\MapTokenStylesResolver:
         public: true
         arguments:

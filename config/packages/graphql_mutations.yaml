@@ -6,7 +6,6 @@ services:
         bind:
             Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
             $logger: '@logger'
-            Sonata\MediaBundle\Entity\MediaManager: '@sonata.media.manager.media'
             $authorizationChecker: '@security.authorization_checker'
             $locale: '%locale%'
             $projectDir: '%kernel.project_dir%'

@@ -2,34 +2,33 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\MediaBundle\Entity\Media;
+use Capco\MediaBundle\Repository\MediaRepository;
 use Liip\ImagineBundle\Binary\BinaryInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Data\DataManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Sonata\MediaBundle\Entity\MediaManager;
 use Sonata\MediaBundle\Provider\Pool;
 use InvalidArgumentException;
 
 class CropMediaMutation implements MutationInterface
 {
-    private $mediaPool;
-    private $mediaManager;
-    private $cacheManager;
-    private $filterManager;
-    private $dataManager;
+    private Pool $mediaPool;
+    private MediaRepository $mediaRepository;
+    private CacheManager $cacheManager;
+    private FilterManager $filterManager;
+    private DataManager $dataManager;
 
     public function __construct(
         FilterManager $filterManager,
         DataManager $dataManager,
-        MediaManager $mediaManager,
+        MediaRepository $mediaRepository,
         Pool $mediaPool,
         CacheManager $cacheManager
     ) {
         $this->mediaPool = $mediaPool;
-        $this->mediaManager = $mediaManager;
+        $this->mediaRepository = $mediaRepository;
         $this->cacheManager = $cacheManager;
         $this->filterManager = $filterManager;
         $this->dataManager = $dataManager;
@@ -37,10 +36,8 @@ class CropMediaMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
-        [$mediaId, $filters] = [$args->offsetGet('mediaId'), $args->offsetGet('filters')];
-
-        /** @var Media $media */
-        $media = $this->mediaManager->find($mediaId);
+        $filters = $args->offsetGet('filters');
+        $media = $this->mediaRepository->find($args->offsetGet('mediaId'));
         if (!$media) {
             throw new InvalidArgumentException('This media does not exist.');
         }
