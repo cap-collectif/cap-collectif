@@ -8,7 +8,7 @@ import type { ProposalPreviewVote_proposal$key } from '~relay/ProposalPreviewVot
 import type { ProposalPreviewVote_step$key } from '~relay/ProposalPreviewVote_step.graphql';
 import type { ProposalPreviewVote_viewer$key } from '~relay/ProposalPreviewVote_viewer.graphql';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
-import ProposalSmsVoteModal from "~/components/Proposal/Vote/ProposalSmsVoteModal";
+import ProposalSmsVoteModal from '~/components/Proposal/Vote/ProposalSmsVoteModal';
 
 type Props = {
   proposal: ProposalPreviewVote_proposal$key,
@@ -45,19 +45,20 @@ const STEP_FRAGMENT = graphql`
   fragment ProposalPreviewVote_step on Step
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     ... on ProposalStep {
-        isProposalSmsVoteEnabled
-      }
-    ...ProposalSmsVoteModal_step
+      isProposalSmsVoteEnabled
+    }
+    ...ProposalSmsVoteModal_step @arguments(token: $token)
     ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
-    ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+    ...ProposalVoteButtonWrapperFragment_step
+      @arguments(isAuthenticated: $isAuthenticated, token: $token)
   }
 `;
 
 export const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({
-   viewer: viewerRef,
-   step: stepRef,
-   proposal: proposalRef,
- }) => {
+  viewer: viewerRef,
+  step: stepRef,
+  proposal: proposalRef,
+}) => {
   const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef);
   const step = useFragment(STEP_FRAGMENT, stepRef);
@@ -76,16 +77,8 @@ export const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({
         id={`proposal-vote-btn-${proposal.id}`}
         className="proposal__preview__vote mr-15"
       />
-      {
-        viewer && (
-          <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />
-        )
-      }
-      {
-        (!viewer && smsVoteEnabled) && (
-          <ProposalSmsVoteModal proposal={proposal} step={step} />
-        )
-      }
+      {viewer && <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />}
+      {!viewer && smsVoteEnabled && <ProposalSmsVoteModal proposal={proposal} step={step} />}
     </Container>
   );
 };

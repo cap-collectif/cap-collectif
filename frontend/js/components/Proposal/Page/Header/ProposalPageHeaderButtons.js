@@ -22,8 +22,8 @@ import ProposalEditModal from '../../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../../Delete/ProposalDeleteModal';
 import { ProposalContactButton } from '~/components/Proposal/Contact/ProposalContactButton';
 import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Form/ProposalForm';
-import ProposalSmsVoteModal from "~/components/Proposal/Vote/ProposalSmsVoteModal";
-import useFeatureFlag from "~/utils/hooks/useFeatureFlag";
+import ProposalSmsVoteModal from '~/components/Proposal/Vote/ProposalSmsVoteModal';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type ReduxProps = {|
   +dispatch: Dispatch,
@@ -169,11 +169,9 @@ export const ProposalPageHeaderButtons = ({ proposal, viewer, user, step, dispat
       {viewer && proposal?.publicationStatus !== 'DRAFT' && step && (
         <ProposalVoteModal viewer={viewer} proposal={proposal} step={step} />
       )}
-      {
-        (!viewer && smsVoteEnabled && step) && (
-          <ProposalSmsVoteModal proposal={proposal} step={step} />
-        )
-      }
+      {!viewer && smsVoteEnabled && step && (
+        <ProposalSmsVoteModal proposal={proposal} step={step} />
+      )}
     </Buttons>
   );
 };
@@ -212,8 +210,9 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
         opinionCanBeFollowed
       }
       isProposalSmsVoteEnabled
-      ...ProposalSmsVoteModal_step
-      ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+      ...ProposalSmsVoteModal_step @arguments(token: $token)
+      ...ProposalVoteButtonWrapperFragment_step
+        @arguments(isAuthenticated: $isAuthenticated, token: $token)
       ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
     }
   `,

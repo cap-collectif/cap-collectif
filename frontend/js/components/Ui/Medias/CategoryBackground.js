@@ -4,10 +4,11 @@ import * as React from 'react';
 type Props = {|
   +color: ?string,
   +viewBox?: ?string,
+  +height?: ?string,
 |};
 
-const CategoryBackground = ({ color, viewBox }: Props) => (
-  <svg id="background" viewBox={viewBox || '0 0 260 75'}>
+const CategoryBackground = ({ color, viewBox, height = 'auto' }: Props) => (
+  <svg id="background" viewBox={viewBox || '0 0 260 75'} style={{height}}>
     <defs>
       <filter
         x="-4.6%"

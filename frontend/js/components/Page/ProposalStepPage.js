@@ -155,9 +155,13 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
 const ProposalStepPage = ({ stepId, isAuthenticated, features, terms, filters, order }: Props) => {
   const { state } = useLocation();
 
+  const urlSearch = new URLSearchParams(window.location.search);
+  const category = urlSearch.get('category') ?? null;
+
   const initialRenderVars = {
     term: terms,
     ...queryVariables(filters, order),
+    category
   };
 
   const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone();
