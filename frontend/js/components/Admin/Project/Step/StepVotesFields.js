@@ -23,6 +23,8 @@ type Props = {|
   stepFormName: string,
   votable: boolean,
   isBudgetEnabled: boolean,
+  isProposalSmsVoteEnabled: boolean,
+  hasEnabledFeaturesToVoteBySms: boolean,
   isTresholdEnabled: boolean,
   isSecretBallotEnabled: boolean,
   isLimitEnabled: boolean,
@@ -48,6 +50,8 @@ export function StepVotesFields(
     votable,
     dispatch,
     isBudgetEnabled,
+    isProposalSmsVoteEnabled,
+    hasEnabledFeaturesToVoteBySms,
     isTresholdEnabled,
     isSecretBallotEnabled,
     isLimitEnabled,
@@ -63,6 +67,8 @@ export function StepVotesFields(
   const intl = useIntl();
   const useVoteMin = useFeatureFlag('votes_min');
   const hasFeatureTwilio = useFeatureFlag('twilio');
+
+  const voteSmsEnabled = hasEnabledFeaturesToVoteBySms && isProposalSmsVoteEnabled;
 
   return (
     <>
@@ -85,6 +91,30 @@ export function StepVotesFields(
           </Text>
           <Flex className="vote-fields" justify="space-between">
             <AppBox maxWidth="50%" mr="79px">
+              {hasEnabledFeaturesToVoteBySms && (
+                <FieldContainer toggled={isProposalSmsVoteEnabled}>
+                  <Field
+                    component={toggle}
+                    labelSide="LEFT"
+                    id="step-isProposalSmsVoteEnabled"
+                    name="isProposalSmsVoteEnabled"
+                    normalize={val => !!val}
+                    helpText={intl.formatMessage({ id: 'vote-without-account-help' })}
+                    label={intl.formatMessage({ id: 'vote-without-account' })}
+                    onChange={e => {
+                      const { checked } = e.target;
+                      if (checked) {
+                        dispatch(change(stepFormName, 'isBudgetEnabled', false));
+                        dispatch(change(stepFormName, 'budget', null));
+                        dispatch(change(stepFormName, 'isTresholdEnabled', false));
+                        dispatch(change(stepFormName, 'voteThreshold', null));
+                        dispatch(change(stepFormName, 'votesRanking', false));
+                        dispatch(change(stepFormName, 'votesMin', null));
+                      }
+                    }}
+                  />
+                </FieldContainer>
+              )}
               <FieldContainer toggled={isBudgetEnabled}>
                 <Field
                   component={toggle}
@@ -94,6 +124,7 @@ export function StepVotesFields(
                   normalize={val => !!val}
                   helpText={intl.formatMessage({ id: 'budget-help' })}
                   label={intl.formatMessage({ id: 'maximum-budget' })}
+                  disabled={voteSmsEnabled}
                 />
               </FieldContainer>
               {isBudgetEnabled && (
@@ -115,6 +146,7 @@ export function StepVotesFields(
                   normalize={val => !!val}
                   helpText={intl.formatMessage({ id: 'ceil-help' })}
                   label={intl.formatMessage({ id: 'admin.fields.step.vote_threshold.input' })}
+                  disabled={voteSmsEnabled}
                 />
               </FieldContainer>
 
@@ -154,6 +186,7 @@ export function StepVotesFields(
                           id="step-votesMin"
                           label={intl.formatMessage({ id: 'global-minimum-full' })}
                           component={component}
+                          disabled={voteSmsEnabled}
                           onChange={e => {
                             if (
                               votesRankingState &&
@@ -209,6 +242,7 @@ export function StepVotesFields(
                       groupClassName="m-0"
                       globalClassName="m-0"
                       labelClassName="m-0"
+                      disabled={voteSmsEnabled}
                       onChange={e => {
                         setVotesRankingState(e.target.checked);
                         if (

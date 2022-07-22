@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\AnonymousUserProposalSmsVote:
+    anonymousUserProposalSmsVoteConfirmed:
+        id: 'anonUserProposalSmsVoteConfirmed'
+        status: 'APPROVED'
+        proposal: '@proposalSmsVote1'
+        collectStep: '@collectstepSmsVoteIdf3'
+        phone: '+33611111111'

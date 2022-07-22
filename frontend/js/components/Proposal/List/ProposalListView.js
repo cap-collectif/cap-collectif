@@ -12,6 +12,7 @@ import type { ProposalViewMode } from '../../../redux/modules/proposal';
 import type { MapOptions } from '../Map/Map.types';
 import type { ProposalListViewRefetchQueryVariables } from '~relay/ProposalListViewRefetchQuery.graphql';
 import type { GeoJson } from '~/utils/geojson';
+import CookieMonster from '~/CookieMonster';
 
 type Filters = {|
   categories?: string,
@@ -73,6 +74,7 @@ export const queryVariables = (filters: Filters, order: ?string) => {
     category: filters.categories && filters.categories !== '0' ? filters.categories : null,
     userType: filters.types && filters.types !== '0' ? filters.types : null,
     status: filters.statuses && filters.statuses !== '0' ? filters.statuses : null,
+    token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
   };
 };
 
@@ -178,9 +180,9 @@ export default createRefetchContainer(
       }
     `,
     step: graphql`
-      fragment ProposalListView_step on ProposalStep @argumentDefinitions(count: { type: "Int" }) {
+      fragment ProposalListView_step on ProposalStep @argumentDefinitions(count: { type: "Int" }, token: { type: "String" }) {
         id
-        ...ProposalListViewPaginated_step
+        ...ProposalListViewPaginated_step @arguments(token: $token)
       }
     `,
   },
@@ -196,7 +198,8 @@ export default createRefetchContainer(
       $category: ID
       $status: ID
       $theme: ID
-      $userType: ID
+      $userType: ID,
+      $token: String
     ) {
       step: node(id: $stepId) {
         id

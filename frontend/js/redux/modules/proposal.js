@@ -249,15 +249,15 @@ export type ProposalAction =
   | CloseDetailLikersModalAction
   | { type: 'proposal/POSTS_FETCH_FAILED', error: Error }
   | {
-      type: 'proposal/FETCH_SUCCEEDED',
-      proposals: Array<Object>,
-      count: number,
-    }
+  type: 'proposal/FETCH_SUCCEEDED',
+  proposals: Array<Object>,
+  count: number,
+}
   | {
-      type: 'proposal/POSTS_FETCH_SUCCEEDED',
-      posts: Array<Object>,
-      proposalId: Uuid,
-    };
+  type: 'proposal/POSTS_FETCH_SUCCEEDED',
+  posts: Array<Object>,
+  proposalId: Uuid,
+};
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {

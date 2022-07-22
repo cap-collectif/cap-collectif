@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Internal.project.votes Retrieve project anonymous proposal sms votes total count 1`] = `
+Object {
+  "project": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0SWRmMw==",
+    "votes": Object {
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
 exports[`Internal.project.votes Retrieve project anonymous votes total count 1`] = `
 Object {
   "project": Object {

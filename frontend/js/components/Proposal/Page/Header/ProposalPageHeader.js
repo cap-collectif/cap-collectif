@@ -324,8 +324,8 @@ export default createFragmentContainer(container, {
   `,
   step: graphql`
     fragment ProposalPageHeader_step on ProposalStep
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      ...ProposalPageHeaderButtons_step @arguments(isAuthenticated: $isAuthenticated)
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
+      ...ProposalPageHeaderButtons_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
     }
   `,
   proposal: graphql`

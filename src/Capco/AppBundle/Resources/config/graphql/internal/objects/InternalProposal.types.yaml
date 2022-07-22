@@ -200,7 +200,7 @@ InternalProposal:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, getUser()])'
             viewerVote:
                 access: "@=hasRole('ROLE_USER')"
-                type: 'InternalProposalVote'
+                type: 'InternalProposalUserVote'
                 args:
                     step:
                         type: 'ID!'

@@ -15,14 +15,15 @@ const mutation = graphql`
     $input: RemoveProposalVoteInput!
     $stepId: ID!
     $isAuthenticated: Boolean!
+    $token: String
   ) {
     removeProposalVote(input: $input) {
       previousVoteId @deleteRecord
       step {
         id
-        ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
-        ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
-        viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+        ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+        ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) @include(if: $isAuthenticated) {
           ...ProposalsUserVotesTable_votes
           totalCount
           edges {

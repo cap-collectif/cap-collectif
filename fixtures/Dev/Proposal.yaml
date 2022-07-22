@@ -1110,3 +1110,23 @@ Capco\AppBundle\Entity\Proposal:
         reference: 139
         publishedAt: $createdAt
         undraftAt: $createdAt
+    proposalSmsVote1:
+        id: proposalSmsVote1
+        title: proposalSmsVote1
+        body: 'TODO'
+        author: '@user5'
+        proposalForm: '@proposalFormSmsVote'
+        createdAt: <identity((new \DateTime('2021-06-03')))>
+        reference: 140
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalSmsVote2:
+        id: proposalSmsVote2
+        title: proposalSmsVote2
+        body: 'TODO'
+        author: '@user5'
+        proposalForm: '@proposalFormSmsVote'
+        createdAt: <identity((new \DateTime('2021-06-03')))>
+        reference: 141
+        publishedAt: $createdAt
+        undraftAt: $createdAt

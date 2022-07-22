@@ -27,7 +27,7 @@
 {% endblock %}
 
 {% block details %}
-    {{ react_render_component('ProjectStepPageApp', { 'props': { 
+    {{ react_render_component('ProjectStepPageApp', { 'props': {
             'stepId': currentStep.id|toGlobalId('SelectionStep'),
             'projectId': project.id|toGlobalId('Project'),
             'projectSlug': project.slug,

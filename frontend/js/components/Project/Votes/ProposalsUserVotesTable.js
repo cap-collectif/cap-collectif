@@ -42,6 +42,8 @@ type Props = {|
   intl: IntlShape,
   isDropDisabled?: boolean,
   features: FeatureToggles,
+  smsVoteEnabled: boolean,
+  isAuthenticated: boolean,
 |};
 
 type VotesProps = {|
@@ -49,6 +51,8 @@ type VotesProps = {|
   ...RelayProps,
   deletable: boolean,
   votesMin: number,
+  smsVoteEnabled: boolean,
+  isAuthenticated: boolean,
 |};
 
 export const Wrapper: StyledComponent<
@@ -108,7 +112,15 @@ const renderPlaceholders = (
   });
 };
 
-const renderMembers = ({ fields, votes, step, deletable, votesMin }: VotesProps): any => (
+const renderMembers = ({
+  fields,
+  votes,
+  step,
+  deletable,
+  votesMin,
+  smsVoteEnabled,
+  isAuthenticated,
+}: VotesProps): any => (
   <React.Fragment>
     {fields.map((member: string, index: number) => {
       const voteInReduxForm: ?{ id: string, public: boolean } = fields.get(index);
@@ -133,6 +145,8 @@ const renderMembers = ({ fields, votes, step, deletable, votesMin }: VotesProps)
                   }
                 : null
             }
+            smsVoteEnabled={smsVoteEnabled}
+            isAuthenticated={isAuthenticated}
           />
         </NonDraggableItemContainer>
       );
@@ -151,6 +165,8 @@ const renderDraggableMembers = ({
   deletable,
   votesMin,
   form,
+  smsVoteEnabled,
+  isAuthenticated,
 }: {|
   ...VotesProps,
   ...Props,
@@ -183,6 +199,8 @@ const renderDraggableMembers = ({
                 vote={vote}
                 step={step}
                 onDelete={deletable ? () => fields.remove(index) : null}
+                smsVoteEnabled={smsVoteEnabled}
+                isAuthenticated={isAuthenticated}
               />
             </Item>
           );
@@ -279,7 +297,16 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
   };
 
   render() {
-    const { form, step, votes, deletable, isDropDisabled = false, features } = this.props;
+    const {
+      form,
+      step,
+      votes,
+      deletable,
+      isDropDisabled = false,
+      features,
+      smsVoteEnabled,
+      isAuthenticated,
+    } = this.props;
 
     if (!step.votesRanking) {
       return (
@@ -291,6 +318,8 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
             votesMin={features.votes_min && step.votesMin ? step.votesMin : 1}
             deletable={deletable}
             name="votes"
+            smsVoteEnabled={smsVoteEnabled}
+            isAuthenticated={isAuthenticated}
             component={renderMembers}
           />
         </UserVotesTableContainer>
@@ -351,7 +380,9 @@ export default createFragmentContainer(container, {
         node {
           id
           ...ProposalUserVoteItem_vote
-          anonymous
+          ... on ProposalUserVote {
+            anonymous
+          }
           proposal {
             id
             title
@@ -361,10 +392,11 @@ export default createFragmentContainer(container, {
     }
   `,
   step: graphql`
-    fragment ProposalsUserVotesTable_step on ProposalStep {
+    fragment ProposalsUserVotesTable_step on ProposalStep
+    @argumentDefinitions(token: { type: "String" }) {
       id
       votesRanking
-      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
         totalCount
       }
       votesLimit

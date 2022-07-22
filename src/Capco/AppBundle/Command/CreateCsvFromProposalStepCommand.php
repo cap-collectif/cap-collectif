@@ -132,15 +132,18 @@ fragment commentInfos on Comment {
 EOF;
     protected const PROPOSAL_VOTE_INFOS_FRAGMENT = <<<'EOF'
 fragment proposalVoteInfos on ProposalVote {
+  __typename
   id
   createdAt
-  isAccounted
   publishedAt
-  anonymous
-  ranking
   published
-  author {
-    ... authorInfos
+  ...on ProposalUserVote {
+      isAccounted
+      anonymous
+      ranking
+        author {
+        ... authorInfos
+      }
   }
 }
 EOF;
@@ -227,6 +230,7 @@ EOF;
         'proposal_votes_author_id' => 'vote.author.id',
         'proposal_votes_author_username' => 'vote.author.username',
         'proposal_votes_author_isEmailConfirmed' => 'vote.author.isEmailConfirmed',
+        'proposal_votes_author_isPhoneConfirmed' => 'vote.author.phoneConfirmed',
         'proposal_votes_author_userType_id' => 'vote.author.userType.id',
         'proposal_votes_author_userType_name' => 'vote.author.userType.name',
         //comments
@@ -781,6 +785,7 @@ EOF;
         array $entity,
         array $proposal
     ): void {
+
         $row = [$type];
         foreach ($this->headersMap as $columnName => $path) {
             if (isset($this->proposalHeaderMap[$columnName])) {
@@ -818,7 +823,8 @@ EOF;
 
     protected function addProposalVotesRow(array $vote, array $proposal): void
     {
-        $this->addDataBlock('proposalVote', 'vote', $vote, $proposal);
+        $type = $vote['__typename'] === 'ProposalUserVote' ? 'proposalVote' : 'proposalAnonymousVote';
+        $this->addDataBlock($type, 'vote', $vote, $proposal);
     }
 
     protected function addProposalNewsRow(
@@ -1141,6 +1147,7 @@ EOF;
                 'proposal_comments_author_email',
                 'proposal_news_comments_author_email',
                 'proposal_votes_author_isEmailConfirmed',
+                'proposal_votes_author_isPhoneConfirmed',
                 'proposal_comments_author_isEmailConfirmed',
                 'proposal_comments_vote_author_isEmailConfirmed',
                 'proposal_news_authors_isEmailConfirmed',

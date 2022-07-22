@@ -104,6 +104,7 @@ export const features: FeatureToggles = {
   twilio: false,
   unstable__paper_vote: false,
   helpscout_beacon: false,
+  proposal_sms_vote: false,
 };
 
 export const initialState: State = {

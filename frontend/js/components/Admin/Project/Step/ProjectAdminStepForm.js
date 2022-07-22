@@ -94,6 +94,7 @@ type Props = {|
     isSecretBallot: boolean,
     publishedVoteDate?: ?string,
     isLimitEnabled?: ?boolean,
+    isProposalSmsVoteEnabled?: boolean,
     allowingProgressSteps?: ?boolean,
     allowAuthorsToAddNews?: ?boolean,
     nbVersionsToDisplay?: ?number,
@@ -136,6 +137,7 @@ type Props = {|
   statuses?: ?Array<ProposalStepStatus>,
   votable?: boolean,
   isBudgetEnabled?: boolean,
+  isProposalSmsVoteEnabled?: boolean,
   isTresholdEnabled?: boolean,
   isLimitEnabled?: boolean,
   isSecretBallotEnabled?: boolean,
@@ -182,6 +184,7 @@ export type FormValues = {|
   votesRanking?: boolean,
   budget?: number,
   isBudgetEnabled?: ?boolean,
+  isProposalSmsVoteEnabled?: ?boolean,
   isTresholdEnabled?: ?boolean,
   isLimitEnabled?: ?boolean,
   isSecretBallotEnabled?: ?boolean,
@@ -399,6 +402,7 @@ export function ProjectAdminStepForm({
   statuses,
   votable,
   isBudgetEnabled,
+  isProposalSmsVoteEnabled,
   isTresholdEnabled,
   isLimitEnabled,
   isSecretBallotEnabled,
@@ -638,6 +642,7 @@ export function ProjectAdminStepForm({
             <ProjectAdminSelectionStepForm
               id={step.id}
               isBudgetEnabled={isBudgetEnabled}
+              isProposalSmsVoteEnabled={isProposalSmsVoteEnabled}
               isTresholdEnabled={isTresholdEnabled}
               isSecretBallotEnabled={isSecretBallotEnabled}
               isLimitEnabled={isLimitEnabled}
@@ -662,6 +667,7 @@ export function ProjectAdminStepForm({
               isPrivate={isPrivate}
               proposal={step.proposalForm}
               isBudgetEnabled={isBudgetEnabled}
+              isProposalSmsVoteEnabled={isProposalSmsVoteEnabled}
               isTresholdEnabled={isTresholdEnabled}
               isLimitEnabled={isLimitEnabled}
               isSecretBallotEnabled={isSecretBallotEnabled}
@@ -911,6 +917,7 @@ const mapStateToProps = (
       allowAuthorsToAddNews: step?.allowAuthorsToAddNews || false,
       budget: step?.budget || null,
       isBudgetEnabled: step?.isBudgetEnabled || false,
+      isProposalSmsVoteEnabled: step?.isProposalSmsVoteEnabled || false,
       isLimitEnabled: step?.votesMin != null || step?.votesLimit != null || false,
       isTresholdEnabled: step?.isTresholdEnabled || false,
       isSecretBallotEnabled: step?.isSecretBallotEnabled || false,
@@ -919,6 +926,8 @@ const mapStateToProps = (
       private: step?.private || false,
     },
     isBudgetEnabled: formValueSelector(stepFormName)(state, 'isBudgetEnabled') || false,
+    isProposalSmsVoteEnabled:
+      formValueSelector(stepFormName)(state, 'isProposalSmsVoteEnabled') || false,
     isLimitEnabled: formValueSelector(stepFormName)(state, 'isLimitEnabled') || false,
     isTresholdEnabled: formValueSelector(stepFormName)(state, 'isTresholdEnabled') || false,
     isSecretBallotEnabled: formValueSelector(stepFormName)(state, 'isSecretBallot') || false,

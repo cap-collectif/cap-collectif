@@ -45,6 +45,7 @@ import {
 } from './ProposalVoteModal.style';
 import VoteMinAlert from '~/components/Project/Votes/VoteMinAlert';
 import formatPhoneNumber from '~/utils/formatPhoneNumber';
+import CookieMonster from '~/CookieMonster';
 
 type Props = {
   proposal: ProposalVoteModal_proposal$key,
@@ -73,11 +74,11 @@ const PROPOSAL_FRAGMENT = graphql`
 
 const STEP_FRAGMENT = graphql`
   fragment ProposalVoteModal_step on ProposalStep
-  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     id
     votesRanking
     votesHelpText
-    ...VoteMinAlert_step
+    ...VoteMinAlert_step @arguments(token: $token)
     ... on RequirementStep {
       requirements {
         edges {
@@ -125,8 +126,8 @@ const STEP_FRAGMENT = graphql`
     canDisplayBallot
     publishedVoteDate
     ...interpellationLabelHelper_step @relay(mask: false)
-    ...ProposalsUserVotesTable_step
-    viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+    ...ProposalsUserVotesTable_step @arguments(token: $token)
+    viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) @include(if: $isAuthenticated) {
       ...ProposalsUserVotesTable_votes
       totalCount
     }
@@ -159,6 +160,7 @@ export const ProposalVoteModal = ({
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const pristine = isPristine(getFormName(step))(localState);
+  const token =  CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone();
 
   const createTmpVote = React.useCallback(() => {
     commitLocalUpdate(environment, store => {
@@ -188,9 +190,12 @@ export const ProposalVoteModal = ({
 
       const stepProxy = store.get(step.id);
       if (!stepProxy) return;
-      const connection = stepProxy.getLinkedRecord('viewerVotes', {
-        orderBy: { field: 'POSITION', direction: 'ASC' },
-      });
+
+      const args = token
+        ? { orderBy: { field: 'POSITION', direction: 'ASC' }, token }
+        : { orderBy: { field: 'POSITION', direction: 'ASC' } };
+
+      const connection = stepProxy.getLinkedRecord('viewerVotes', args);
       if (!connection) {
         return;
       }
@@ -198,16 +203,17 @@ export const ProposalVoteModal = ({
       const totalCount = parseInt(connection.getValue('totalCount'), 10);
       connection.setValue(totalCount + 1, 'totalCount');
     });
-  }, [proposal.id, step.id, viewerIsConfirmedByEmail]);
+  }, [proposal.id, step.id, viewerIsConfirmedByEmail, token]);
 
   const deleteTmpVote = React.useCallback(() => {
     commitLocalUpdate(environment, store => {
       const dataID = `client:newTmpVote:${proposal.id}`;
       const stepProxy = store.get(step.id);
       if (!stepProxy) return;
-      const connection = stepProxy.getLinkedRecord('viewerVotes', {
-        orderBy: { field: 'POSITION', direction: 'ASC' },
-      });
+      const args = token
+        ? { orderBy: { field: 'POSITION', direction: 'ASC' }, token }
+        : { orderBy: { field: 'POSITION', direction: 'ASC' } };
+      const connection = stepProxy.getLinkedRecord('viewerVotes', args);
       if (connection) {
         ConnectionHandler.deleteNode(connection, dataID);
         const totalCount = parseInt(connection.getValue('totalCount'), 10);
@@ -215,7 +221,7 @@ export const ProposalVoteModal = ({
       }
       store.delete(dataID);
     });
-  }, [proposal.id, step.id]);
+  }, [proposal.id, step.id, token]);
 
   React.useEffect(() => {
     if (!prevShowModal && showModal) {
@@ -275,6 +281,7 @@ export const ProposalVoteModal = ({
           },
           stepId: step.id,
           isAuthenticated,
+          token: null,
         },
         { id: null, position: -1, isVoteRanking: step.votesRanking },
       );
@@ -423,6 +430,7 @@ export const ProposalVoteModal = ({
           </MultiStepModal.Body>
           <MultiStepModal.Footer>
             <Button
+              id="confirm-proposal-vote"
               variant="primary"
               variantColor="primary"
               variantSize="big"

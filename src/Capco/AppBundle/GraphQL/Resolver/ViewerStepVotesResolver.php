@@ -20,10 +20,8 @@ class ViewerStepVotesResolver implements ResolverInterface
         $this->dataLoader = $dataLoader;
     }
 
-    public function __invoke(AbstractStep $step, $viewer, Argument $args): Promise
+    public function __invoke(AbstractStep $step, $user, Argument $args): Promise
     {
-        $user = $this->preventNullableViewer($viewer);
-
         $args->offsetSet('stepId', $step->getId());
 
         return $this->dataLoader->load(compact('user', 'args'));

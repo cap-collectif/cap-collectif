@@ -74,6 +74,7 @@ export const defaultFeatureFlags: FeatureFlags = {
     graphql_introspection: false,
     helpscout_beacon: false,
     api_sendinblue: false,
+    proposal_sms_vote: false,
 };
 
 const getRedisFeatureFlagKey = (flag: string) => {

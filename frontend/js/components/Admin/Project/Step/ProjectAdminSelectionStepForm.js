@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { Field, FieldArray, arrayPush } from 'redux-form';
+import { Field, FieldArray, arrayPush, change } from 'redux-form';
 import { connect, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
@@ -17,6 +17,7 @@ import StepRequirementsList, { getUId, type Requirement } from './StepRequiremen
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import { type FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import Tooltip from '~ds/Tooltip/Tooltip';
 import AppBox from '~ui/Primitives/AppBox';
 
@@ -30,6 +31,7 @@ type Props = {|
   isTresholdEnabled: boolean,
   isLimitEnabled: boolean,
   isSecretBallotEnabled: boolean,
+  isProposalSmsVoteEnabled: boolean,
   votesMin: ?number,
   votesLimit: ?number,
   votesRanking: boolean,
@@ -62,6 +64,7 @@ export const ProjectAdminSelectionStepForm = ({
   isTresholdEnabled,
   isLimitEnabled,
   isSecretBallotEnabled,
+  isProposalSmsVoteEnabled,
   stepFormName,
   votesRanking,
   votesLimit,
@@ -79,6 +82,30 @@ export const ProjectAdminSelectionStepForm = ({
       .some(step => step.allowingProgressSteps === true);
   });
 
+  const isTwilioFeatureEnabled = useFeatureFlag('twilio');
+  const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote');
+  const hasEnabledFeaturesToVoteBySms = isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled;
+  const showAddRequirementsButton = hasEnabledFeaturesToVoteBySms
+    ? !isProposalSmsVoteEnabled
+    : true;
+
+  const smsVoteEnabled = hasEnabledFeaturesToVoteBySms && isProposalSmsVoteEnabled;
+  const filteredRequirements =
+    requirements &&
+    requirements.map((requirement, index) => {
+      const updatedRequirement = {
+        ...requirement,
+        disabled: smsVoteEnabled,
+      };
+      if (['PHONE_VERIFIED', 'PHONE'].includes(requirement.type)) {
+        updatedRequirement.checked = smsVoteEnabled ? true : requirement.checked;
+      } else {
+        updatedRequirement.checked = smsVoteEnabled ? false : requirement.checked;
+      }
+      dispatch(change(formName, `requirements[${index}]`, updatedRequirement));
+      return updatedRequirement;
+    });
+
   return (
     <>
       <StepVotesFields
@@ -94,6 +121,8 @@ export const ProjectAdminSelectionStepForm = ({
         isLimitEnabled={isLimitEnabled}
         isSecretBallotEnabled={isSecretBallotEnabled}
         endAt={endAt}
+        isProposalSmsVoteEnabled={isProposalSmsVoteEnabled}
+        hasEnabledFeaturesToVoteBySms={hasEnabledFeaturesToVoteBySms}
       />
       {renderSubSection('global.proposals')}
       <ProjectSmallFieldsContainer>
@@ -185,26 +214,28 @@ export const ProjectAdminSelectionStepForm = ({
         name="requirements"
         component={StepRequirementsList}
         formName={formName}
-        requirements={requirements}
+        requirements={filteredRequirements}
         fcAllowedData={fcAllowedData}
         isFranceConnectConfigured={isFranceConnectConfigured}
         stepType="SelectionStep"
       />
-      <Button
-        id="js-btn-create-step"
-        bsStyle="primary"
-        className="btn-outline-primary box-content__toolbar mb-20"
-        onClick={() =>
-          dispatch(
-            arrayPush(formName, 'requirements', {
-              uniqueId: getUId(),
-              id: null,
-              type: 'CHECKBOX',
-            }),
-          )
-        }>
-        <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
-      </Button>
+      {showAddRequirementsButton && (
+        <Button
+          id="js-btn-create-step"
+          bsStyle="primary"
+          className="btn-outline-primary box-content__toolbar mb-20"
+          onClick={() =>
+            dispatch(
+              arrayPush(formName, 'requirements', {
+                uniqueId: getUId(),
+                id: null,
+                type: 'CHECKBOX',
+              }),
+            )
+          }>
+          <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
+        </Button>
+      )}
       <Field
         type="textarea"
         name="requirementsReason"

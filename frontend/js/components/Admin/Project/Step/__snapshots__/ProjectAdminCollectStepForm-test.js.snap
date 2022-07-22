@@ -265,6 +265,7 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for admin 1`] = `
             isFranceConnectConfigured={true}
             isLimitEnabled={false}
             isPrivate={false}
+            isProposalSmsVoteEnabled={false}
             isSecretBallotEnabled={true}
             isTresholdEnabled={true}
             stepFormName="defaultForm"
@@ -545,6 +546,7 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly for project admin 1`]
             isFranceConnectConfigured={true}
             isLimitEnabled={false}
             isPrivate={false}
+            isProposalSmsVoteEnabled={false}
             isSecretBallotEnabled={true}
             isTresholdEnabled={true}
             stepFormName="defaultForm"

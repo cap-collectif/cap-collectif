@@ -16,3 +16,6 @@ Capco\AppBundle\Entity\ProposalCollectVote:
             groups: [ProposalSelectionVotes, ElasticsearchVote]
         createdAt:
             groups: [ProposalSelectionVotes, ElasticsearchVote]
+        getVoteTypeName:
+            serialized_name: voteTypeName
+            groups: [ElasticsearchVote]

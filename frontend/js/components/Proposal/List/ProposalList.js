@@ -122,13 +122,20 @@ export default createFragmentContainer(ProposalList, {
     }
   `,
   proposals: graphql`
-    fragment ProposalList_proposals on ProposalConnection {
+    fragment ProposalList_proposals on ProposalConnection
+    @argumentDefinitions(token: { type: "String" })
+    {
       ...ProposalListTable_proposals @arguments(stepId: $stepId)
       totalCount
       edges {
         node {
           id
-          ...ProposalPreview_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+          ...ProposalPreview_proposal
+            @arguments(
+              stepId: $stepId
+              isAuthenticated: $isAuthenticated
+              token: $token
+            )
         }
       }
     }

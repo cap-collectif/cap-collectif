@@ -1,0 +1,9 @@
+RemoveProposalSmsVoteErrorCode:
+    type: enum
+    config:
+        name: RemoveProposalSmsVoteErrorCode
+        description: 'Available errors for an `removeProposalSmsVoteMutation` mutation.'
+        values:
+            PHONE_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveProposalSmsVoteMutation::PHONE_NOT_FOUND")'
+                description: 'The given token does not match any phone.'

@@ -34,7 +34,7 @@
             </p>
         </div>
     {% else %}
-        {{ react_render_component('ProjectStepPageApp', { 'props': { 
+        {{ react_render_component('ProjectStepPageApp', { 'props': {
             'stepId': currentStep.id|toGlobalId('CollectStep'),
             'projectId': project.id|toGlobalId('Project'),
             'projectSlug': project.slug,

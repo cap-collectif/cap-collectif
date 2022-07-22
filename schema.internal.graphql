@@ -524,6 +524,41 @@ type AddProposalNewsPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `addProposalSmsVote` mutation."""
+enum AddProposalSmsVoteErrorCode {
+  """The proposal is already voted by this phone number."""
+  PROPOSAL_ALREADY_VOTED
+
+  """Max votes limit reached."""
+  VOTE_LIMIT_REACHED
+
+  """Phone not found for the given token."""
+  PHONE_NOT_FOUND
+}
+
+input AddProposalSmsVoteInput {
+  """The Node ID of the proposal to vote."""
+  proposalId: ID!
+
+  """The Node ID of the step."""
+  stepId: ID!
+
+  """The token associated to this number."""
+  token: String!
+
+  """Whether or not the user consents to receive communications by sms."""
+  consentSmsCommunication: Boolean!
+  clientMutationId: String
+}
+
+type AddProposalSmsVotePayload {
+  vote: ProposalSmsVote
+  voteEdge: ProposalVoteEdge
+  errorCode: AddProposalSmsVoteErrorCode
+  votes: ProposalSmsVoteConnection
+  clientMutationId: String
+}
+
 input AddProposalVoteInput {
   """The Node ID of the proposal to vote."""
   proposalId: ID!
@@ -537,7 +572,7 @@ input AddProposalVoteInput {
 }
 
 type AddProposalVotePayload {
-  vote: ProposalVote!
+  vote: ProposalUserVote!
   viewer: User!
   voteEdge: ProposalVoteEdge!
   clientMutationId: String
@@ -2225,6 +2260,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: ProposalVoteOrder = {direction: DESC}
+
+    """If anonymous user the token used to vote."""
+    token: String
   ): ProposalVoteConnection!
   form: ProposalForm
 
@@ -2236,6 +2274,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   """Whether or not can display vote counters and points"""
   canDisplayBallot: Boolean!
+
+  """Whether or not sms vote are enabled."""
+  isProposalSmsVoteEnabled: Boolean
   private: Boolean!
   defaultStatus: ProposalStepStatus
 
@@ -6164,6 +6205,9 @@ enum FeatureFlagType {
 
   """Whether or not the Sendiblue API is enabled"""
   api_sendinblue
+
+  """Whether or not proposal sms vote is enabled"""
+  proposal_sms_vote
 }
 
 """Require a firstname"""
@@ -7672,6 +7716,10 @@ type Mutation {
   updateCivicIA(input: UpdateCivicIAInput!): UpdateCivicIAPayload
   starResponse(input: StarResponseInput!): StarResponsePayload
   unstarResponse(input: UnstarResponseInput!): UnstarResponsePayload
+  addProposalSmsVote(input: AddProposalSmsVoteInput!): AddProposalSmsVotePayload
+  removeProposalSmsVote(input: RemoveProposalSmsVoteInput!): RemoveProposalSmsVotePayload
+  sendSmsProposalVote(input: SendSmsProposalVoteInput!): SendSmsProposalVotePayload
+  verifySmsVotePhoneNumber(input: VerifySmsVotePhoneNumberInput!): VerifySmsVotePhoneNumberPayload
 }
 
 """A connection to a list of items."""
@@ -9423,6 +9471,9 @@ input ProjectStepInput {
   votesRanking: Boolean
   voteThreshold: Int
   defaultSort: ProposalSort
+
+  """Whether or not sms vote is enabled."""
+  isProposalSmsVoteEnabled: Boolean
   allowAuthorsToAddNews: Boolean
   allowingProgressSteps: Boolean
   statuses: [StepStatusInput]
@@ -9756,7 +9807,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   viewerVote(
     """The concerned step."""
     step: ID!
-  ): ProposalVote
+  ): ProposalUserVote
   votableSteps: [ProposalStep!]!
 
   """The supervisor of the proposal."""
@@ -10611,6 +10662,65 @@ type ProposalSelection {
   status: ProposalStepStatus
 }
 
+"""Represents an vote from a non-registered to a proposal."""
+type ProposalSmsVote implements ProposalVote & Vote {
+  """The ID of an object"""
+  id: ID!
+
+  """The contribution that was voted."""
+  related: Contribution
+
+  """Url of the contribution"""
+  url: URI!
+
+  """Return the proposal."""
+  proposal: Proposal!
+
+  """Return the step."""
+  step: ProposalStep!
+
+  """The date of the vote."""
+  createdAt: DateTime!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """The author of the contribution. If null, the vote is anonymous."""
+  author: User
+
+  """Returns 'proposalSmsVote'."""
+  kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
+
+  """The phone number to confirm the vote"""
+  phone: String
+}
+
+"""A connection to a list of items."""
+type ProposalSmsVoteConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ProposalSmsVoteEdge]
+}
+
+"""An edge in a connection."""
+type ProposalSmsVoteEdge {
+  """The item at the end of the edge."""
+  node: ProposalSmsVote!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 """Available errors on proposal social networks mutation."""
 enum ProposalSocialNetworksErrorCode {
   """No proposal match your id."""
@@ -10867,6 +10977,9 @@ interface ProposalStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: ProposalVoteOrder = {direction: DESC}
+
+    """If anonymous user the token used to vote."""
+    token: String
   ): ProposalVoteConnection!
   form: ProposalForm
 
@@ -10878,6 +10991,9 @@ interface ProposalStep {
 
   """Whether or not can display vote counters and points"""
   canDisplayBallot: Boolean!
+
+  """Whether or not sms vote are enabled."""
+  isProposalSmsVoteEnabled: Boolean
 }
 
 type ProposalStepPaperVoteCounter {
@@ -10952,8 +11068,8 @@ enum ProposalTrashedStatus {
   TRASHED
 }
 
-"""A contribution with an author"""
-type ProposalVote implements Vote & Publishable & PrivatableVote & Contribution {
+"""Represents a proposal vote."""
+type ProposalUserVote implements ProposalVote & Vote & Publishable & PrivatableVote {
   """The ID of an object"""
   id: ID!
 
@@ -10969,28 +11085,14 @@ type ProposalVote implements Vote & Publishable & PrivatableVote & Contribution 
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """The date of the vote."""
-  createdAt: DateTime!
-
-  """The author of the contribution. If null, the vote is anonymous."""
-  author: User
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """Returns 'proposalVote'."""
-  kind: String!
-
-  """Returns if vote is accounted or not"""
-  isAccounted: Boolean!
-
   """Whether the author of the vote is anonymous or not."""
   private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2020-01-01 UTC.")
 
   """Whether the author of the vote is anonymous or not."""
   anonymous: Boolean!
+
+  """The contribution that was voted."""
+  related: Contribution
 
   """Url of the contribution"""
   url: URI!
@@ -11001,8 +11103,49 @@ type ProposalVote implements Vote & Publishable & PrivatableVote & Contribution 
   """Return the step."""
   step: ProposalStep!
 
+  """The date of the vote."""
+  createdAt: DateTime!
+
+  """The author of the contribution. If null, the vote is anonymous."""
+  author: User
+
+  """Returns 'proposalUserVote'."""
+  kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
+
   """Return the ranking of the vote (if any)"""
   ranking: Int
+}
+
+"""Represents a proposal vote."""
+interface ProposalVote {
+  """The ID of an object"""
+  id: ID!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """Url of the contribution"""
+  url: URI!
+
+  """Return the proposal."""
+  proposal: Proposal!
+
+  """Return the step."""
+  step: ProposalStep!
+
+  """The date of the vote."""
+  createdAt: DateTime!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
 }
 
 """A connection to a list of items."""
@@ -12556,6 +12699,32 @@ type RemoveOpinionVotePayload {
   clientMutationId: String
 }
 
+"""Available errors for an `removeProposalSmsVoteMutation` mutation."""
+enum RemoveProposalSmsVoteErrorCode {
+  """The given token does not match any phone."""
+  PHONE_NOT_FOUND
+}
+
+input RemoveProposalSmsVoteInput {
+  """The Node ID of the proposal to unvote."""
+  proposalId: ID!
+
+  """The Node ID of the contribuable step."""
+  stepId: ID!
+
+  """The token to authenticate the user."""
+  token: String!
+  clientMutationId: String
+}
+
+type RemoveProposalSmsVotePayload {
+  step: ProposalStep!
+  proposal: Proposal!
+  previousVoteId: ID
+  errorCode: RemoveProposalSmsVoteErrorCode
+  clientMutationId: String
+}
+
 input RemoveProposalVoteInput {
   """The Node ID of the proposal to unvote."""
   proposalId: ID!
@@ -13625,6 +13794,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: ProposalVoteOrder = {direction: DESC}
+
+    """If anonymous user the token used to vote."""
+    token: String
   ): ProposalVoteConnection!
   form: ProposalForm
 
@@ -13636,6 +13808,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
   """Whether or not can display vote counters and points"""
   canDisplayBallot: Boolean!
+
+  """Whether or not sms vote are enabled."""
+  isProposalSmsVoteEnabled: Boolean
   position: Int!
 
   """
@@ -13778,6 +13953,45 @@ input SendSmsPhoneValidationCodeInput {
 type SendSmsPhoneValidationCodePayload {
   """The error code, if failing."""
   errorCode: SendSmsPhoneValidationCodeErrorCode
+  clientMutationId: String
+}
+
+"""Available errors for an `sendSmsProposalVote` mutation."""
+enum SendSmsProposalVoteErrorCode {
+  """The given number is invalid."""
+  INVALID_NUMBER
+
+  """An error occured while calling twilio api."""
+  TWILIO_API_ERROR
+
+  """Given phone number should be a mobile number."""
+  PHONE_SHOULD_BE_MOBILE_NUMBER
+
+  """Given phone number has incorrect length."""
+  PHONE_INVALID_LENGTH
+
+  """Given phone number is already used by another user."""
+  PHONE_ALREADY_USED_BY_ANOTHER_USER
+
+  """The user reached the retry limit."""
+  RETRY_LIMIT_REACHED
+}
+
+input SendSmsProposalVoteInput {
+  """The phone number to send the sms."""
+  phone: String!
+
+  """The step global id."""
+  stepId: ID!
+
+  """The proposal global id."""
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type SendSmsProposalVotePayload {
+  """The error code, if failing."""
+  errorCode: SendSmsProposalVoteErrorCode
   clientMutationId: String
 }
 
@@ -17473,6 +17687,41 @@ type ValueResponse implements Response & CivicIAAnalyzable & Node {
 
   """Detected sentiment by civicIA."""
   iaSentiment: CivicIASentiment
+}
+
+"""Available errors for an `verifySmsVotePhoneNumber` mutation."""
+enum VerifySmsVotePhoneNumberErrorCode {
+  """The given code is expired."""
+  CODE_EXPIRED
+
+  """The given code is not valid."""
+  CODE_NOT_VALID
+
+  """An error occured while calling twilio api."""
+  TWILIO_API_ERROR
+}
+
+input VerifySmsVotePhoneNumberInput {
+  """The phone that received the code."""
+  phone: String!
+
+  """The verification code to verify the phone."""
+  code: String!
+
+  """The Node ID of the proposal to vote."""
+  proposalId: ID!
+
+  """The Node ID of the step."""
+  stepId: ID!
+  clientMutationId: String
+}
+
+type VerifySmsVotePhoneNumberPayload {
+  errorCode: VerifySmsVotePhoneNumberErrorCode
+
+  """The returned token to authenticate the user."""
+  token: String
+  clientMutationId: String
 }
 
 """Available errors for an `verifyUserPhoneNumber` mutation."""

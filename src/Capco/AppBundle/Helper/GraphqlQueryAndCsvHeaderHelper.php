@@ -105,6 +105,7 @@ fragment authorInfos on User {
   id
   username
   isEmailConfirmed
+  phoneConfirmed
   email
   userType {
     ...userTypeInfos

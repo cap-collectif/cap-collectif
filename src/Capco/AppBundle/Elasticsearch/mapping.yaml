@@ -156,6 +156,7 @@ mappings:
         owner: *Author
         archived: { type: boolean }
         replyType: { type: keyword }
+        voteTypeName: { type: keyword }
         visibility: { type: long }
         districts:
             properties:

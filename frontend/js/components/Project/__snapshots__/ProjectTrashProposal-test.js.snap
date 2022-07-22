@@ -861,7 +861,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "f266a67d69a58157538fabe27663d324",
+          "cacheID": "c27dd6b76b3e1edcc843e57a075e50d3",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -925,7 +925,7 @@ fragment ProposalFollowButton_proposal_39ngnn on Proposal {
   viewerFollowingConfiguration @include(if: $isAuthenticated)
 }
 
-fragment ProposalPreviewBody_proposal_4died5 on Proposal {
+fragment ProposalPreviewBody_proposal_4cQoTr on Proposal {
   id
   slug
   currentVotableStep {
@@ -1024,7 +1024,7 @@ fragment ProposalPreview_proposal_4died5 on Proposal {
     id
   }
   ...ProposalPreviewFooter_proposal_2tPna9
-  ...ProposalPreviewBody_proposal_4died5
+  ...ProposalPreviewBody_proposal_4cQoTr
   ...ProposalPreviewStatus_proposal_2tPna9
 }
 

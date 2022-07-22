@@ -21,7 +21,7 @@ const input = {
   address2: null,
   city: null,
   zipCode: null,
-  phone: '+33695868423',
+  phone: '+33611111111',
   gender: null,
   dateOfBirth: null,
   birthPlace: 'East blue',

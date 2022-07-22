@@ -8,6 +8,7 @@ import type {
   ProposalVoteBasketWidgetAppQueryVariables,
 } from '~relay/ProposalVoteBasketWidgetAppQuery.graphql';
 import Loader from '~ui/FeedbacksIndicators/Loader';
+import CookieMonster from '~/CookieMonster';
 
 const ProposalVoteBasketWidget = lazy(
   () =>
@@ -19,6 +20,7 @@ const ProposalVoteBasketWidget = lazy(
 type Props = {
   stepId: string,
   votesPageUrl: string,
+  isAuthenticated: boolean,
 };
 
 export default (data: Props) => {
@@ -29,23 +31,25 @@ export default (data: Props) => {
           variables={
             ({
               stepId: data.stepId,
+              isAuthenticated: data.isAuthenticated,
+              token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone()
             }: ProposalVoteBasketWidgetAppQueryVariables)
           }
           environment={environment}
           query={graphql`
-            query ProposalVoteBasketWidgetAppQuery($stepId: ID!) {
-              step: node(id: $stepId) {
-                ...ProposalVoteBasketWidget_step @arguments(isAuthenticated: true)
-              }
-              viewer {
-                ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)
-              }
+          query ProposalVoteBasketWidgetAppQuery($stepId: ID!, $isAuthenticated: Boolean!, $token: String) {
+            step: node(id: $stepId) {
+              ...ProposalVoteBasketWidget_step @arguments(token: $token)
             }
-          `}
+            viewer @include(if: $isAuthenticated) {
+              ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)
+            }
+          }
+        `}
           render={({
-            error,
-            props,
-          }: {
+                     error,
+                     props,
+                   }: {
             ...ReactRelayReadyState,
             props: ?ProposalVoteBasketWidgetAppQueryResponse,
           }) => {

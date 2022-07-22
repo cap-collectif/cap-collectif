@@ -37,6 +37,8 @@ describe('<ProposalUserVoteItem />', () => {
   const props = {
     intl: intlMock,
     onDelete: jest.fn(),
+    isAuthenticated: true,
+    smsVoteEnabled: false,
   };
 
   it('should render a vote item', () => {

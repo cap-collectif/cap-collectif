@@ -342,6 +342,11 @@
                         "title": "capco.module.api_sendinblue",
                         "description": "",
                         "onlySuperAdmin": true
+                    },
+                    "proposal_sms_vote": {
+                        "title": "capco.module.proposal_sms_vote",
+                        "description": "",
+                        "onlySuperAdmin": false
                     }
                 }
             }

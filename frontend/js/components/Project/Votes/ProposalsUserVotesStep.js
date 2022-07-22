@@ -55,6 +55,7 @@ export const ProposalsUserVotesStep = ({
         },
         stepId: step.id,
         isAuthenticated,
+        token: null,
       },
       null,
     );
@@ -162,9 +163,9 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(
 export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalsUserVotesStep_step on ProposalStep
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      ...ProposalsUserVotesTable_step
-      ...VoteMinAlert_step
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
+      ...ProposalsUserVotesTable_step @arguments(token: $token)
+      ...VoteMinAlert_step @arguments(token: $token)
       id
       title
       votesHelpText
@@ -172,7 +173,7 @@ export default createFragmentContainer(container, {
       url
       isSecretBallot
       publishedVoteDate
-      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
         totalCount
         ...ProposalsUserVotesTable_votes
       }

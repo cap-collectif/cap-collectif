@@ -19,7 +19,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalCollectVote", objectPath="proposal")
  * @CapcoAssert\HasEnoughCreditsToVote()
  */
-class ProposalCollectVote extends AbstractVote
+class ProposalCollectVote extends AbstractProposalVote
 {
     use AnonymousableTrait;
     use PrivatableTrait;
@@ -31,13 +31,13 @@ class ProposalCollectVote extends AbstractVote
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="collectVotes", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $proposal;
+    private Proposal $proposal;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", cascade={"persist"})
      * @ORM\JoinColumn(name="collect_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $collectStep;
+    private CollectStep $collectStep;
 
     public function getStep(): ?AbstractStep
     {
@@ -106,5 +106,10 @@ class ProposalCollectVote extends AbstractVote
         return array_merge(parent::getElasticsearchSerializationGroups(), [
             'ElasticsearchVoteNestedProposal',
         ]);
+    }
+
+    public function getVoteTypeName(): string
+    {
+        return 'proposalCollectVote';
     }
 }

@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\Service;
 
 use Capco\AppBundle\Enum\RemainingSmsCreditStatus;
+use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Repository\SmsCreditRepository;
 use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 use Capco\UserBundle\Repository\UserRepository;
@@ -10,14 +11,17 @@ class SmsAnalyticsHelper
 {
     private SmsCreditRepository $smsCreditRepository;
     private UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
+    private AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
 
     public function __construct(
         SmsCreditRepository $smsCreditRepository,
-        UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
+        UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
+        AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
     )
     {
         $this->smsCreditRepository = $smsCreditRepository;
         $this->userPhoneVerificationSmsRepository = $userPhoneVerificationSmsRepository;
+        $this->anonymousUserProposalSmsVoteRepository = $anonymousUserProposalSmsVoteRepository;
     }
 
     public function getTotalCredits(): int
@@ -27,7 +31,9 @@ class SmsAnalyticsHelper
 
     public function getConsumedCredits(): int
     {
-        return $this->userPhoneVerificationSmsRepository->countApprovedSms() ?? 0;
+        $phoneVerified = $this->userPhoneVerificationSmsRepository->countApprovedSms() ?? 0;
+        $smsVoteVerified = $this->anonymousUserProposalSmsVoteRepository->countApprovedSms() ?? 0;
+        return $phoneVerified + $smsVoteVerified;
     }
 
     public function getRemainingCreditsAmount(): int

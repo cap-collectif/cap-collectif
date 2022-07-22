@@ -18,26 +18,28 @@ const mutation = graphql`
         node {
           id
           __typename
-          author {
-            id
-            ...UserBox_user
+          ...on ProposalUserVote {
+              author {
+                  id
+                  ...UserBox_user
+              }
           }
           step {
-            votesMin
-            votesLimit
-            id
-            viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
-              ...ProposalsUserVotesTable_votes
-              totalCount
-              edges {
-                node {
-                  id
-                  proposal {
-                    id
+              votesMin
+              votesLimit
+              id
+              viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
+                  ...ProposalsUserVotesTable_votes
+                  totalCount
+                  edges {
+                      node {
+                          id
+                          proposal {
+                              id
+                          }
+                      }
                   }
-                }
               }
-            }
             ...interpellationLabelHelper_step @relay(mask: false)
           }
         }

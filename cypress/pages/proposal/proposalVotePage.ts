@@ -1,17 +1,26 @@
-type VisitOptions = {
-  project: string
-  step: string
-  stepType: string
-}
-
 export default new (class ProposalVotePage {
   get cy() {
     return cy
   }
 
-  visit({ project, step, stepType }: VisitOptions) {
-    this.cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
-    this.cy.visit(`/project/${project}/${stepType}/${step}`)
-    this.cy.wait('@ProposalStepPageQuery')
+  getTotalVotesTab() {
+    return this.cy.get('#proposal-page-tabs-tab-votes')
   }
+
+  getTotalVotesCounter() {
+    return this.cy.get('#proposal-page-tabs-tab-votes .tip')
+  }
+
+  getVoteButton() {
+    return this.cy.get('#proposal-vote-btn')
+  }
+
+  getConfirmVoteModalButton() {
+    return this.cy.get('#confirm-proposal-vote')
+  }
+
+  getVoterCardUsername() {
+    return this.cy.get('.proposal__vote a.excerpt')
+  }
+
 })()

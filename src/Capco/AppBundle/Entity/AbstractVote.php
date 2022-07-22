@@ -62,7 +62,15 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *        @UniqueConstraint(
  *            name="debate_argument_vote_unique",
  *            columns={"voter_id", "debate_argument_id"}
- *        )
+ *        ),
+ *        @UniqueConstraint(
+ *            name="selection_step_sms_vote_unique",
+ *            columns={"phone", "proposal_id", "selection_step_id"}
+ *        ),
+ *        @UniqueConstraint(
+ *            name="collect_step_sms_vote_unique",
+ *            columns={"phone", "proposal_id", "collect_step_id"}
+ *        ),
  *    }
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractVoteRepository")
@@ -80,6 +88,8 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *      "debate"                    = "Capco\AppBundle\Entity\Debate\DebateVote",
  *      "debateArgument"            = "Capco\AppBundle\Entity\Debate\DebateArgumentVote",
  *      "debateAnonymousArgument"   = "Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote",
+ *      "proposalSelectionSms"      = "ProposalSelectionSmsVote",
+ *      "proposalCollectSms"        = "ProposalCollectSmsVote",
  * })
  */
 abstract class AbstractVote implements Publishable, VoteContribution, IndexableInterface
@@ -97,7 +107,7 @@ abstract class AbstractVote implements Publishable, VoteContribution, IndexableI
     /**
      * @ORM\Column(name="is_accounted", type="boolean", options={"default": true})
      */
-    private $isAccounted = true;
+    private bool $isAccounted = true;
 
     public function getKind(): string
     {
@@ -187,6 +197,11 @@ abstract class AbstractVote implements Publishable, VoteContribution, IndexableI
     }
 
     public static function getElasticsearchTypeName(): string
+    {
+        return 'vote';
+    }
+
+    public function getVoteTypeName(): string
     {
         return 'vote';
     }

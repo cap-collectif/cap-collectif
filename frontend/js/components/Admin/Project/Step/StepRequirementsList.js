@@ -328,7 +328,10 @@ export function StepRequirementsList({
 
                                     if (requirement.type === 'PHONE') {
                                       // When PhoneRequirement is unchecked
-                                      if (requirement.checked) {
+                                      if (
+                                        requirement.checked &&
+                                        phoneVerifiedRequirementIndex > 0
+                                      ) {
                                         onInputCheck(
                                           false,
                                           `requirements[${phoneVerifiedRequirementIndex}]`,
@@ -341,7 +344,15 @@ export function StepRequirementsList({
                                   },
                                 },
                               }}
-                              label={<FormattedMessage id={requirement.label || ''} />}
+                              label={
+                                <p
+                                  style={{
+                                    marginBottom: 0,
+                                    color: `${requirement.disabled ? '#707070' : 'inherit'}`,
+                                  }}>
+                                  <FormattedMessage id={requirement.label || ''} />
+                                </p>
+                              }
                             />
                           ) : (
                             <>
@@ -393,42 +404,41 @@ export function StepRequirementsList({
                             </InfoMessage>
                           )}
                         </RequirementDragItem>
-                        {
-                          (hasPhoneVerifiedEnabled && phoneVerifiedRequirement) && (
-                            <RequirementSubItem
-                              isHidden={
-                                !(
-                                  hasPhoneVerifiedDisplay &&
-                                  phoneVerifiedRequirement
-                                )
-                              }
-                              isLast={phoneVerifiedRequirementIndex === requirements.length - 1}>
-                              <Field
-                                type="checkbox"
-                                id={`requirement-${phoneVerifiedRequirement.type}`}
-                                disabled={phoneVerifiedRequirement.disabled || !hasFeatureTwilio}
-                                component={component}
-                                name={`requirements[${phoneVerifiedRequirementIndex}]`}
-                                props={{
-                                  input: {
-                                    checked: phoneVerifiedRequirement.checked,
-                                    name: phoneVerifiedRequirement.type,
-                                    onChange: () => {
-                                      onInputCheck(
-                                        !phoneVerifiedRequirement.checked,
-                                        `requirements[${phoneVerifiedRequirementIndex}]`,
-                                        phoneVerifiedRequirement,
-                                      );
-                                    },
+                        {hasPhoneVerifiedEnabled && phoneVerifiedRequirement && (
+                          <RequirementSubItem
+                            isHidden={!(hasPhoneVerifiedDisplay && phoneVerifiedRequirement)}
+                            isLast={phoneVerifiedRequirementIndex === requirements.length - 1}>
+                            <Field
+                              type="checkbox"
+                              id={`requirement-${phoneVerifiedRequirement.type}`}
+                              disabled={phoneVerifiedRequirement.disabled || !hasFeatureTwilio}
+                              component={component}
+                              name={`requirements[${phoneVerifiedRequirementIndex}]`}
+                              props={{
+                                input: {
+                                  checked: phoneVerifiedRequirement.checked,
+                                  name: phoneVerifiedRequirement.type,
+                                  onChange: () => {
+                                    onInputCheck(
+                                      !phoneVerifiedRequirement.checked,
+                                      `requirements[${phoneVerifiedRequirementIndex}]`,
+                                      phoneVerifiedRequirement,
+                                    );
                                   },
+                                },
+                              }}>
+                              <p
+                                style={{
+                                  marginBottom: 0,
+                                  color: `${requirement.disabled ? '#707070' : 'inherit'}`,
                                 }}>
                                 {intl.formatMessage({
                                   id: phoneVerifiedRequirement?.label || '',
                                 })}
-                              </Field>
-                            </RequirementSubItem>
-                          )
-                        }
+                              </p>
+                            </Field>
+                          </RequirementSubItem>
+                        )}
                       </div>
                     )}
                   </Draggable>
@@ -448,7 +458,26 @@ const mapDispatchToProps = (dispatch: Dispatch, props: Props) => ({
     dispatch(change(props.formName, field, { ...requirement, label: value }));
   },
   onInputCheck: (value: boolean, field: string, requirement: Requirement) => {
-    dispatch(change(props.formName, field, { ...requirement, checked: value }));
+    let phoneRequirementValue = null;
+    const requirements = props.requirements.map(r => {
+      // uncheck PHONE_VERIFIED when PHONE is unchecked
+      if (
+        r.type === 'PHONE_VERIFIED' &&
+        r.checked === true &&
+        phoneRequirementValue === false &&
+        requirement.type !== 'PHONE_VERIFIED'
+      ) {
+        return { ...r, checked: false };
+      }
+      if (r.type === requirement.type) {
+        if (r.type === 'PHONE') {
+          phoneRequirementValue = value;
+        }
+        return { ...requirement, checked: value };
+      }
+      return r;
+    });
+    dispatch(change(props.formName, 'requirements', requirements));
   },
   onInputDelete: (index: number) => {
     dispatch(arrayRemove(props.formName, 'requirements', index));

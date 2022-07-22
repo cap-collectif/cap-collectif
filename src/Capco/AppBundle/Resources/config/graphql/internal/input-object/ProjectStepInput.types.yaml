@@ -63,6 +63,9 @@ ProjectStepInput:
                 type: 'Int'
             defaultSort:
                 type: 'ProposalSort'
+            isProposalSmsVoteEnabled:
+                type: 'Boolean'
+                description: 'Whether or not sms vote is enabled.'
             # SelectionStep fields
             allowAuthorsToAddNews:
                 type: 'Boolean'

@@ -83,6 +83,7 @@ class Manager
     public const unstable__paper_vote = 'unstable__paper_vote';
     public const helpscout_beacon = 'helpscout_beacon';
     public const api_sendinblue = 'api_sendinblue';
+    public const proposal_sms_vote = 'proposal_sms_vote';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -184,6 +185,7 @@ class Manager
         self::unstable__paper_vote,
         self::helpscout_beacon,
         self::api_sendinblue,
+        self::proposal_sms_vote,
     ];
 
     protected ToggleManager $toggleManager;

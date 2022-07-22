@@ -9,6 +9,7 @@ import { PROPOSAL_FOLLOWERS_TO_SHOW } from '~/constants/ProposalConstants';
 import type { ProposalPageQueryResponse } from '~relay/ProposalPageQuery.graphql';
 import ProposalPageLogic from './ProposalPageLogic';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import CookieMonster from '~/CookieMonster'
 
 export type Props = {|
   +proposalSlug: string,
@@ -35,6 +36,7 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated }: Props) =
           $cursor: String
           $isAuthenticated: Boolean!
           $proposalRevisionsEnabled: Boolean!
+          $token: String
         ) {
           ...ProposalPageLogic_query
             @arguments(
@@ -45,6 +47,7 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated }: Props) =
               cursor: $cursor
               isAuthenticated: $isAuthenticated
               proposalRevisionsEnabled: $proposalRevisionsEnabled
+              token: $token
             )
           step: node(id: $stepId) @include(if: $hasVotableStep) {
             id
@@ -59,6 +62,7 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated }: Props) =
         cursor: null,
         isAuthenticated,
         proposalRevisionsEnabled: proposalRevisionsEnabled && isAuthenticated,
+        token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
       }}
       render={({
         error,

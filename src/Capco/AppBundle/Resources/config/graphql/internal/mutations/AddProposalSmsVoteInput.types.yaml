@@ -1,0 +1,17 @@
+AddProposalSmsVoteInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of addProposalSmsVote mutation.'
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The Node ID of the proposal to vote.'
+            stepId:
+                type: 'ID!'
+                description: 'The Node ID of the step.'
+            token:
+                type: 'String!'
+                description: 'The token associated to this number.'
+            consentSmsCommunication:
+                type: 'Boolean!'
+                description: 'Whether or not the user consents to receive communications by sms.'

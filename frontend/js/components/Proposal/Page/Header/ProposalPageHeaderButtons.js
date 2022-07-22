@@ -22,6 +22,8 @@ import ProposalEditModal from '../../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../../Delete/ProposalDeleteModal';
 import { ProposalContactButton } from '~/components/Proposal/Contact/ProposalContactButton';
 import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Form/ProposalForm';
+import ProposalSmsVoteModal from "~/components/Proposal/Vote/ProposalSmsVoteModal";
+import useFeatureFlag from "~/utils/hooks/useFeatureFlag";
 
 type ReduxProps = {|
   +dispatch: Dispatch,
@@ -100,6 +102,11 @@ export const ProposalPageHeaderButtons = ({ proposal, viewer, user, step, dispat
   const opinionCanBeFollowed = step?.project?.opinionCanBeFollowed;
   const hasVotableStep = !!proposal?.currentVotableStep;
 
+  const isTwilioFeatureEnabled = useFeatureFlag('twilio');
+  const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote');
+  const smsVoteEnabled =
+    step?.isProposalSmsVoteEnabled && isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled;
+
   return (
     <Buttons>
       {isOpen && <ProposalEditModal proposal={proposal} show={isOpen} onClose={onClose} />}
@@ -162,6 +169,11 @@ export const ProposalPageHeaderButtons = ({ proposal, viewer, user, step, dispat
       {viewer && proposal?.publicationStatus !== 'DRAFT' && step && (
         <ProposalVoteModal viewer={viewer} proposal={proposal} step={step} />
       )}
+      {
+        (!viewer && smsVoteEnabled && step) && (
+          <ProposalSmsVoteModal proposal={proposal} step={step} />
+        )
+      }
     </Buttons>
   );
 };
@@ -194,13 +206,15 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   `,
   step: graphql`
     fragment ProposalPageHeaderButtons_step on ProposalStep
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
       open
       project {
         opinionCanBeFollowed
       }
-      ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
-      ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
+      isProposalSmsVoteEnabled
+      ...ProposalSmsVoteModal_step
+      ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+      ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
     }
   `,
   proposal: graphql`
@@ -234,6 +248,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
         contribuable
       }
       publicationStatus
+      ...ProposalSmsVoteModal_proposal
       ...ProposalVoteButtonWrapperFragment_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       ...ProposalVoteModal_proposal @include(if: $isAuthenticated)

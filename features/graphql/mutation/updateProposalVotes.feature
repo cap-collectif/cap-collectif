@@ -59,7 +59,9 @@ Scenario: Logged in API client wants to delete everything
               edges {
                 node {
                   id
-                  anonymous
+                  ...on ProposalUserVote {
+                    anonymous
+                  }
                 }
               }
             }

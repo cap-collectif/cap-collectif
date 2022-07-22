@@ -25,6 +25,7 @@ import { formatGeoJsons } from '~/utils/geojson';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import StepEvents from '../Steps/StepEvents';
 import ProposalVoteBasketWidget from '../Proposal/Vote/ProposalVoteBasketWidget';
+import CookieMonster from '~/CookieMonster';
 
 type OwnProps = {|
   stepId: string,
@@ -58,8 +59,16 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   const intl = useIntl();
   const calendar = useFeatureFlag('calendar');
 
+  const twilio = useFeatureFlag('twilio');
+  const proposalSmsVote = useFeatureFlag('proposal_sms_vote');
+  const smsVoteEnabled =
+    step?.isProposalSmsVoteEnabled && twilio && proposalSmsVote && !isAuthenticated;
   const showVotesWidget =
-    isAuthenticated && step && step.slug && step.votable && step.state === 'OPENED';
+    (isAuthenticated || smsVoteEnabled) &&
+    step &&
+    step.slug &&
+    step.votable &&
+    step.state === 'OPENED';
 
   React.useEffect(() => {
     if (!displayMode && step?.mainView) setDisplayMode(step?.mainView);
@@ -151,6 +160,8 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, terms, filters, o
     ...queryVariables(filters, order),
   };
 
+  const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone();
+
   return (
     <div className="proposal__step-page">
       <QueryRenderer
@@ -170,6 +181,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, terms, filters, o
             $theme: ID
             $userType: ID
             $isMapDisplay: Boolean!
+            $token: String
           ) {
             viewer @include(if: $isAuthenticated) {
               ...ProposalListView_viewer @arguments(stepId: $stepId)
@@ -178,12 +190,13 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, terms, filters, o
             }
             step: node(id: $stepId) {
               ... on ProposalStep {
+                isProposalSmsVoteEnabled
                 customCode
                 id
                 events(orderBy: { field: START_AT, direction: DESC }) {
                   totalCount
                 }
-                ...ProposalVoteBasketWidget_step @arguments(isAuthenticated: $isAuthenticated)
+                ...ProposalVoteBasketWidget_step @arguments(token: $token)
                 defaultSort
                 voteType
                 state
@@ -250,6 +263,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, terms, filters, o
             cursor: null,
             ...initialRenderVars,
             isMapDisplay: features.display_map || false,
+            token,
           }: ProposalStepPageQueryVariables)
         }
         render={({

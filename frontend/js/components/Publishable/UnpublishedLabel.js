@@ -17,7 +17,7 @@ type Props = {
 export class UnpublishedLabel extends React.Component<Props> {
   render() {
     const { publishable, viewer } = this.props;
-    if (publishable.published) {
+    if (publishable.published || !viewer) {
       return null;
     }
     let overlay = null;

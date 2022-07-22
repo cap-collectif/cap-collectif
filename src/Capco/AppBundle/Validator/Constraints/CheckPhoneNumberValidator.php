@@ -39,7 +39,13 @@ class CheckPhoneNumberValidator extends ConstraintValidator
     {
         $currentUser = $this->security->getUser();
         $user = $this->userRepository->findOneBy(['phone' => $phone, 'phoneConfirmed' => true]);
-        if ($user && $user !== $currentUser) {
+
+        // when current user is unauthenticated only check if there is an existing user with this number
+        if (!$currentUser && $user) {
+            $this->context->buildViolation($constraint->alreadyUsedMessage)->addViolation();
+        }
+
+        if (($user && $currentUser) && $user !== $currentUser) {
             $this->context->buildViolation($constraint->alreadyUsedMessage)->addViolation();
         }
     }

@@ -1,0 +1,8 @@
+SendSmsProposalVotePayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of the sendSmsProposalVote mutation.'
+        fields:
+            errorCode:
+                type: 'SendSmsProposalVoteErrorCode'
+                description: 'The error code, if failing.'

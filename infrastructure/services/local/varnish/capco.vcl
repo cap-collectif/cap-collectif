@@ -56,7 +56,7 @@ sub vcl_recv {
   # Remove all cookies except the Symfony or SimpleSAML session or Paris (mcpAuth) session.
   if (req.http.Cookie) {
     cookie.parse(req.http.Cookie);
-    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,mcpAuth,locale");
+    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,mcpAuth,locale,AnonymousAuthenticatedWithConfirmedPhone");
     set req.http.cookie = cookie.get_string();
 
     if (req.http.Cookie == "") {
@@ -84,6 +84,12 @@ sub vcl_recv {
             # std.log("Skipping cache because body is too big.");
             return (pass);
         }
+
+        # skip cache because user is verified by phone number
+        if (req.http.cookie ~ "AnonymousAuthenticatedWithConfirmedPhone") {
+            return (pass);
+        }
+
 
         # Always send GraphQL mutations to the backend.
         if (bodyaccess.rematch_req_body("mutation") == 1) {

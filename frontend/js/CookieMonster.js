@@ -9,6 +9,8 @@ const DEBATE_ANONYMOUS_ARGUMENTS_NAME = 'CapcoAnonArguments';
 
 const REPLY_ANONYMOUS_NAME = 'CapcoAnonReply';
 
+const ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE = 'AnonymousAuthenticatedWithConfirmedPhone';
+
 const GA_COOKIE_NAMES = ['__utma', '__utmb', '__utmc', '__utmz', '_ga', '_gat', '_gid'];
 
 const FACEBOOK_COOKIE_NAMES = ['_fbp'];
@@ -119,6 +121,20 @@ class CookieMonster {
       sameSite: 'None',
     });
   };
+
+  addAnonymousAuthenticatedWithConfirmedPhone = (token: string): void => {
+    Cookies.set(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE, btoa(JSON.stringify(token)), {
+      expires: 395,
+      secure: true,
+      sameSite: 'None',
+    });
+  }
+
+  getAnonymousAuthenticatedWithConfirmedPhone = (): string | null => {
+    return Cookies.get(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE)
+      ? JSON.parse(atob(Cookies.get(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE)))
+      : null;
+  }
 
   getDebateAnonymousArgumentCookie = (debateId: string): DebateAnonymousArgumentValue | null => {
     const args: DebateAnonymousArgumentsCookie = Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)

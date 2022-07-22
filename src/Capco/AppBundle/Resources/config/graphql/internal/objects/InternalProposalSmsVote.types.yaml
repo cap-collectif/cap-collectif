@@ -1,0 +1,23 @@
+InternalProposalSmsVote:
+    type: object
+    inherits:
+        - InternalProposalVote
+        - InternalVote
+    config:
+        interfaces:
+            - InternalProposalVote
+            - InternalVote
+        name: ProposalSmsVote
+        description: 'Represents an vote from a non-registered to a proposal.'
+        fields:
+            author:
+                type: 'InternalUser'
+                description: 'The author of the contribution. If null, the vote is anonymous.'
+                resolve: null
+            phone:
+                type: 'String'
+                description: 'The phone number to confirm the vote'
+            kind:
+                type: 'String!'
+                description: "Returns 'proposalSmsVote'."
+                resolve: 'proposalSmsVote'

@@ -1559,3 +1559,28 @@ InternalMutation:
                     inputType: UnstarResponseInput
                     payloadType: UnstarResponsePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnstarResponseMutation", [value, getUser()])'
+            addProposalSmsVote:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddProposalSmsVoteInput
+                    payloadType: AddProposalSmsVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalSmsVoteMutation", [value])'
+            removeProposalSmsVote:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: RemoveProposalSmsVoteInput
+                    payloadType: RemoveProposalSmsVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveProposalSmsVoteMutation", [value])'
+            sendSmsProposalVote:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: SendSmsProposalVoteInput
+                    payloadType: SendSmsProposalVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\SendSmsProposalVoteMutation", [value, getUser()])'
+            verifySmsVotePhoneNumber:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: VerifySmsVotePhoneNumberInput
+                    payloadType: VerifySmsVotePhoneNumberPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\VerifySmsVotePhoneNumberMutation", [value])'
+

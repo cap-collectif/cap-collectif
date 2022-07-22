@@ -265,6 +265,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
             isBudgetEnabled={true}
             isFranceConnectConfigured={true}
             isLimitEnabled={true}
+            isProposalSmsVoteEnabled={false}
             isSecretBallotEnabled={false}
             isTresholdEnabled={true}
             requirements={
@@ -558,6 +559,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
             isBudgetEnabled={false}
             isFranceConnectConfigured={true}
             isLimitEnabled={false}
+            isProposalSmsVoteEnabled={false}
             isSecretBallotEnabled={true}
             isTresholdEnabled={false}
             stepFormName="defaultForm"

@@ -61,7 +61,7 @@ describe('getInitialValues', () => {
       },
     ];
     const value = getInitialValues(requirements, false, true, {
-      phone: '0766509155',
+      phone: '0711111111',
       phoneConfirmed: true,
     });
     const expected = {
@@ -70,7 +70,7 @@ describe('getInitialValues', () => {
       IdentificationCodeRequirement: '',
       PhoneVerifiedRequirement: {
         CountryCode: '+33',
-        phoneNumber: '0766509155',
+        phoneNumber: '0711111111',
       },
       DateOfBirthRequirement: null,
       PostalAddressRequirement: null,
@@ -134,13 +134,13 @@ describe('getInitialValues', () => {
       },
     ];
     const value = getInitialValues(requirements, false, true, {
-      phone: '0766509155',
+      phone: '0711111111',
       phoneConfirmed: true,
     });
     const expected = {
       FranceConnectRequirement: null,
       IdentificationCodeRequirement: '',
-      PhoneVerifiedRequirement: { CountryCode: '+33', phoneNumber: '0766509155' },
+      PhoneVerifiedRequirement: { CountryCode: '+33', phoneNumber: '0711111111' },
       DateOfBirthRequirement: null,
       PostalAddressRequirement: null,
       CheckboxRequirement: [
@@ -168,13 +168,13 @@ describe('getInitialValues', () => {
       },
     ];
     const value = getInitialValues(requirements, true, true, {
-      phone: '0766509155',
+      phone: '0711111111',
       phoneConfirmed: true,
     });
     const expected = {
       PhoneVerifiedRequirement: {
         CountryCode: '+33',
-        phoneNumber: '0766509155',
+        phoneNumber: '0711111111',
       },
     };
     expect(value).toEqual(expected);
@@ -182,7 +182,7 @@ describe('getInitialValues', () => {
   it('Should return empty ', () => {
     const requirements = [];
     const value = getInitialValues(requirements, false, false, {
-      phone: '0766509155',
+      phone: '0711111111',
       phoneConfirmed: true,
     });
     const expected = {};
@@ -204,7 +204,7 @@ describe('getInitialValues', () => {
       },
     ];
     const value = getInitialValues(requirements, true, true, {
-      phone: '0766509155',
+      phone: '0711111111',
       phoneConfirmed: false,
     });
     const expected = {

@@ -2,7 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
+use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use DeepCopy\DeepCopy;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -34,6 +37,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     private GlobalIdResolver $globalIdResolver;
     private ProposalStepVotesResolver $helper;
     private AbstractVoteRepository $abstractVoteRepository;
+    private ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
+    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -42,6 +47,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         AbstractStepRepository $repository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
+        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
         ProposalStepVotesResolver $helper,
         GlobalIdResolver $globalIdResolver,
         string $cachePrefix,
@@ -58,6 +65,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->abstractVoteRepository = $abstractVoteRepository;
         $this->helper = $helper;
+        $this->proposalCollectSmsVoteRepository = $proposalCollectSmsVoteRepository;
+        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
 
         parent::__construct(
             [$this, 'all'],
@@ -150,6 +159,50 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         return $connection;
     }
 
+    public function getConnectionForStepAndAnonUser(AbstractStep $step, Argument $args): ConnectionInterface
+    {
+        $field = $args->offsetGet('orderBy')['field'];
+        $direction = $args->offsetGet('orderBy')['direction'];
+        $token = $args->offsetGet('token');
+
+        if ($step instanceof CollectStep) {
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $step,
+                $field,
+                $direction,
+                $token
+            ) {
+
+                return $this->proposalCollectSmsVoteRepository
+                    ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
+                    ->getIterator()
+                    ->getArrayCopy();
+            });
+            $totalCount = $this->proposalCollectSmsVoteRepository->countByTokenAndStep($step, $token);
+        } elseif ($step instanceof SelectionStep) {
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $step,
+                $field,
+                $direction,
+                $token
+            ) {
+                return $this->proposalSelectionSmsVoteRepository
+                    ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
+                    ->getIterator()
+                    ->getArrayCopy();
+            });
+            $totalCount = $this->proposalSelectionSmsVoteRepository->countByTokenAndStep(
+                $step,
+                $token
+            );
+        } else {
+            throw new \RuntimeException('Expected a proposal step got :' . \get_class($step));
+        }
+        $connection = $paginator->auto($args, $totalCount);
+
+        return $connection;
+    }
+
     protected function normalizeValue($value)
     {
         $copier = new DeepCopy(true);
@@ -184,18 +237,24 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     protected function serializeKey($key)
     {
         return [
-            'userId' => $key['user']->getId(),
+            'userId' => $key['user'] ? $key['user']->getId() : null,
             'args' => $key['args']->getArrayCopy(),
         ];
     }
 
-    private function resolve(User $user, Argument $args): Connection
+    private function resolve(?User $user, Argument $args): ConnectionInterface
     {
         try {
+            if (!$user && !$args->offsetGet('token')) return ConnectionBuilder::empty();
+
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user);
 
             if (!$step) {
                 return ConnectionBuilder::empty();
+            }
+
+            if (!$user && $args->offsetGet('token')) {
+                return $this->getConnectionForStepAndAnonUser($step, $args);
             }
 
             return $this->getConnectionForStepAndUser($step, $user, $args);

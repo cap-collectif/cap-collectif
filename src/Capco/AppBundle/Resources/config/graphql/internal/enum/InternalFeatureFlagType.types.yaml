@@ -160,3 +160,6 @@ InternalFeatureFlagType:
             api_sendinblue:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::api_sendinblue")'
                 description: 'Whether or not the Sendiblue API is enabled'
+            proposal_sms_vote:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::proposal_sms_vote")'
+                description: 'Whether or not proposal sms vote is enabled'

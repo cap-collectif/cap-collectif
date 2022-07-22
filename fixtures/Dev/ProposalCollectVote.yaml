@@ -133,3 +133,20 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         user: '@user_not_confirmed'
         position: 2
         createdAt: <(new \DateTime('2015-03-01 00:01:02'))>
+    proposalCollectVote67:
+        id: 2067
+        proposal: '@proposalSmsVote1'
+        collectStep: '@collectstepSmsVoteIdf3'
+        user: '@user1'
+        position: 1
+        createdAt: <(new \DateTime('2022-03-01 00:01:02'))>
+        publishedAt: <(new \DateTime('2022-03-01 00:02:02'))>
+    proposalCollectVote68:
+        id: 2068
+        proposal: '@proposalSmsVote2'
+        collectStep: '@collectstepSmsVoteIdf3'
+        user: '@user1'
+        position: 2
+        createdAt: <(new \DateTime('2022-03-01 00:01:02'))>
+        publishedAt: <(new \DateTime('2022-03-01 00:02:02'))>
+

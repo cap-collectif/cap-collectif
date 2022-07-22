@@ -34,7 +34,9 @@ describe('<ProposalVoteBasketWidget />', () => {
           title: 'global.consultation',
         },
       },
+      isProposalSmsVoteEnabled: false,
     },
+    isAuthenticated: true,
     viewer: {
       $refType,
       proposalVotes: {
@@ -66,7 +68,9 @@ describe('<ProposalVoteBasketWidget />', () => {
           title: 'global.consultation',
         },
       },
+      isProposalSmsVoteEnabled: false,
     },
+    isAuthenticated: true,
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
       $refType,
@@ -99,7 +103,9 @@ describe('<ProposalVoteBasketWidget />', () => {
           title: 'global.consultation',
         },
       },
+      isProposalSmsVoteEnabled: false,
     },
+    isAuthenticated: true,
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
       $refType,
@@ -131,7 +137,9 @@ describe('<ProposalVoteBasketWidget />', () => {
           title: 'project.types.interpellation',
         },
       },
+      isProposalSmsVoteEnabled: false,
     },
+    isAuthenticated: true,
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
       $refType,
@@ -144,6 +152,38 @@ describe('<ProposalVoteBasketWidget />', () => {
     relay,
     $refType,
   };
+
+  const anonVoteProps = {
+    ...colorProps,
+    viewer: null,
+    features: {
+      ...features,
+      twilio: true,
+      proposal_sms_vote: true,
+    },
+    step: {
+      $refType,
+      votesMin: null,
+      viewerVotes: { totalCount: 5 },
+      votesLimit: null,
+      voteType: 'SIMPLE',
+      budget: null,
+      form: {
+        objectType: 'PROPOSAL',
+      },
+      project: {
+        slug: '/consult',
+        type: {
+          title: 'global.consultation',
+        },
+      },
+      isProposalSmsVoteEnabled: true,
+    },
+    isAuthenticated: false,
+    votesPageUrl: 'http//capco.dev/votes',
+    image: 'http://capco.dev/images.png',
+    relay,
+  }
 
   it('should render a vote widget for a simple vote without limit', () => {
     const wrapper = shallow(<ProposalVoteBasketWidget {...simpleWithoutLimitProps} />);
@@ -162,6 +202,11 @@ describe('<ProposalVoteBasketWidget />', () => {
 
   it('should render a vote widget for a simple support with limit', () => {
     const wrapper = shallow(<ProposalVoteBasketWidget {...simpleWithLimitPropsInterpellation} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should hide votes button when anon vote is enabled and user is anonymous ', () => {
+    const wrapper = shallow(<ProposalVoteBasketWidget {...anonVoteProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

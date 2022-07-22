@@ -456,3 +456,10 @@ Capco\AppBundle\Entity\ProposalForm:
         step: '@collectSPhoneVerifRequire'
         owner: '@user1'
         reference: 26
+    proposalFormSmsVote:
+        id: proposalFormSmsVote
+        title: Formulaire vote par sms
+        description: form lié à une étape avec vote par sms
+        step: '@collectstepSmsVoteIdf3'
+        owner: '@user1'
+        reference: 27

@@ -155,6 +155,16 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:ProposalCollectVote']
 
+    Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:ProposalCollectSmsVote']
+
+    Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:ProposalSelectionSmsVote']
+
     Capco\AppBundle\Repository\OpinionVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
@@ -685,3 +695,15 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:SmsRemainingCreditEmailAlert']
+
+    Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:AnonymousUserProposalSmsVote']
+
+    Capco\AppBundle\Repository\PhoneTokenRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:PhoneToken']

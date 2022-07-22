@@ -282,6 +282,10 @@ const onSubmit = (
             votable: undefined,
             isBudgetEnabled: undefined,
             isSecretBallotEnabled: undefined,
+            isProposalSmsVoteEnabled:
+              sTypename === 'CollectStep' || sTypename === 'SelectionStep'
+                ? s.isProposalSmsVoteEnabled
+                : undefined,
             isSecretBallot: undefined,
             isTresholdEnabled: undefined,
             isLimitEnabled: undefined,
@@ -536,6 +540,7 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
             requirementsReason: step.requirements?.reason || null,
             consultations: step.consultations?.edges?.map(edge => edge?.node) || [],
             isBudgetEnabled: !!step.budget,
+            isProposalSmsVoteEnabled: !!step.isProposalSmsVoteEnabled,
             isLimitEnabled: !!step.votesLimit,
             isTresholdEnabled: !!step.voteThreshold,
             isSecretBallotEnabled: step.isSecretBallot,
@@ -712,6 +717,7 @@ export default createFragmentContainer(injectIntl(container), {
           publishedVoteDate
           voteType
           budget
+          isProposalSmsVoteEnabled
         }
         ... on SelectionStep {
           statuses {
@@ -738,6 +744,7 @@ export default createFragmentContainer(injectIntl(container), {
           budget
           mainView
           isAnalysisStep
+          isProposalSmsVoteEnabled
         }
         ... on ConsultationStep {
           consultations {

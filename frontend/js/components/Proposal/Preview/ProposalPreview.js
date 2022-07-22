@@ -143,6 +143,7 @@ export default createFragmentContainer(
         stepId: { type: "ID!" }
         isAuthenticated: { type: "Boolean!" }
         isProfileView: { type: "Boolean", defaultValue: false }
+        token: { type: "String" }
       ) {
         id
         media {
@@ -167,6 +168,7 @@ export default createFragmentContainer(
             isAuthenticated: $isAuthenticated
             isProfileView: $isProfileView
             stepId: $stepId
+            token: $token
           )
         ...ProposalPreviewStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       }

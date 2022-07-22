@@ -7,6 +7,8 @@ import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapper
 import type { ProposalPreviewVote_proposal$key } from '~relay/ProposalPreviewVote_proposal.graphql';
 import type { ProposalPreviewVote_step$key } from '~relay/ProposalPreviewVote_step.graphql';
 import type { ProposalPreviewVote_viewer$key } from '~relay/ProposalPreviewVote_viewer.graphql';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import ProposalSmsVoteModal from "~/components/Proposal/Vote/ProposalSmsVoteModal";
 
 type Props = {
   proposal: ProposalPreviewVote_proposal$key,
@@ -33,27 +35,37 @@ const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalPreviewVote_proposal on Proposal
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
     id
-    ...ProposalVoteModal_proposal @include(if: $isAuthenticated)
+    ...ProposalSmsVoteModal_proposal
+    ...ProposalVoteModal_proposal
     ...ProposalVoteButtonWrapperFragment_proposal
       @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
   }
 `;
 const STEP_FRAGMENT = graphql`
   fragment ProposalPreviewVote_step on Step
-  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-    ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
-    ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
+    ... on ProposalStep {
+        isProposalSmsVoteEnabled
+      }
+    ...ProposalSmsVoteModal_step
+    ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+    ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
   }
 `;
 
-const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({
-  viewer: viewerRef,
-  step: stepRef,
-  proposal: proposalRef,
-}) => {
+export const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({
+   viewer: viewerRef,
+   step: stepRef,
+   proposal: proposalRef,
+ }) => {
   const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef);
   const step = useFragment(STEP_FRAGMENT, stepRef);
+
+  const isTwilioFeatureEnabled = useFeatureFlag('twilio');
+  const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote');
+  const smsVoteEnabled =
+    step.isProposalSmsVoteEnabled && isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled;
 
   return (
     <Container>
@@ -64,8 +76,18 @@ const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({
         id={`proposal-vote-btn-${proposal.id}`}
         className="proposal__preview__vote mr-15"
       />
-      {viewer && <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />}
+      {
+        viewer && (
+          <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />
+        )
+      }
+      {
+        (!viewer && smsVoteEnabled) && (
+          <ProposalSmsVoteModal proposal={proposal} step={step} />
+        )
+      }
     </Container>
   );
 };
+
 export default ProposalPreviewVote;

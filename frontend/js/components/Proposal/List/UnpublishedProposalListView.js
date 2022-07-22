@@ -67,14 +67,14 @@ export default createFragmentContainer(UnpublishedProposalListView, {
   `,
   step: graphql`
     fragment UnpublishedProposalListView_step on ProposalStep
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
       id
       ...ProposalList_step
       viewerProposalsUnpublished(first: 100)
         @include(if: $isAuthenticated)
         @connection(key: "UnpublishedProposalListView_viewerProposalsUnpublished", filters: []) {
         totalCount
-        ...ProposalList_proposals
+        ...ProposalList_proposals @arguments(token: $token)
         edges {
           node {
             id

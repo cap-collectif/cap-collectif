@@ -83,14 +83,20 @@ class ProjectVotesResolver implements ResolverInterface
 
                 $this->adapter->await($promise);
             }
-        } elseif ($step instanceof DebateStep && true === $anonymous) {
-            $promise = $this->stepVotesCountResolver
-                ->__invoke($step, true, $anonymous)
-                ->then(function ($value) use (&$count) {
-                    $count += $value;
-                });
+        } elseif (true === $anonymous) {
+            if (
+                $step instanceof SelectionStep ||
+                $step instanceof CollectStep ||
+                $step instanceof DebateStep
+            ) {
+                $promise = $this->stepVotesCountResolver
+                    ->__invoke($step, true, $anonymous)
+                    ->then(function ($value) use (&$count) {
+                        $count += $value;
+                    });
 
-            $this->adapter->await($promise);
+                $this->adapter->await($promise);
+            }
         }
 
         return $count;

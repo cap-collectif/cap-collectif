@@ -64,8 +64,10 @@ export const VoteMinAlert = ({ step, translationKey }: Props) => {
 
 export default createFragmentContainer(VoteMinAlert, {
   step: graphql`
-    fragment VoteMinAlert_step on ProposalStep {
-      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+    fragment VoteMinAlert_step on ProposalStep
+    @argumentDefinitions(token: { type: "String" })
+    {
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
         totalCount
       }
       votesMin

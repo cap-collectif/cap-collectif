@@ -5,6 +5,8 @@ namespace Capco\AppBundle\GraphQL\Resolver\Vote;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
+use Capco\AppBundle\Entity\ProposalCollectSmsVote;
+use Capco\AppBundle\Entity\ProposalSelectionSmsVote;
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\OpinionVote;
@@ -39,14 +41,20 @@ class VoteTypeResolver implements ResolverInterface
                 return $this->typeResolver->resolve('PreviewProposalVote');
             }
 
-            return $this->typeResolver->resolve('InternalProposalVote');
+            return $this->typeResolver->resolve('InternalProposalUserVote');
         }
         if ($node instanceof ProposalSelectionVote) {
             if ('preview' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PreviewProposalVote');
             }
 
-            return $this->typeResolver->resolve('InternalProposalVote');
+            return $this->typeResolver->resolve('InternalProposalUserVote');
+        }
+        if ($node instanceof ProposalCollectSmsVote) {
+            return $this->typeResolver->resolve('InternalProposalSmsVote');
+        }
+        if ($node instanceof ProposalSelectionSmsVote) {
+            return $this->typeResolver->resolve('InternalProposalSmsVote');
         }
         if ($node instanceof OpinionVersionVote) {
             return $this->typeResolver->resolve('VersionVote');

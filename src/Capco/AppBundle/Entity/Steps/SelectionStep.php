@@ -11,6 +11,7 @@ use Capco\AppBundle\Enum\ProposalSort;
 use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
 use Capco\AppBundle\Traits\SecretBallotTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
+use Capco\AppBundle\Traits\VoteSmsTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -29,6 +30,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     use TimelessStepTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
+    use VoteSmsTrait;
 
     public const TYPE = 'selection';
     const VOTE_TYPE_DISABLED = 0;

@@ -20,6 +20,7 @@ import ProposalPageBlog from './Blog/ProposalPageBlog';
 import ProposalPageFollowers from './Followers/ProposalPageFollowers';
 import ProposalDraftAlert from './ProposalDraftAlert';
 import ProposalVoteBasketWidget from '../Vote/ProposalVoteBasketWidget';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export type Props = {|
   queryRef: ?ProposalPageLogic_query$key,
@@ -85,6 +86,7 @@ const FRAGMENT = graphql`
     cursor: { type: "String" }
     isAuthenticated: { type: "Boolean!" }
     proposalRevisionsEnabled: { type: "Boolean!" }
+    token: { type: "String" }
   ) {
     viewer @include(if: $isAuthenticated) {
       id
@@ -92,9 +94,12 @@ const FRAGMENT = graphql`
       ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId) @include(if: $hasVotableStep)
     }
     step: node(id: $stepId) @include(if: $hasVotableStep) {
-      ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated)
+      ... on ProposalStep {
+        isProposalSmsVoteEnabled
+      }
+      ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
       ...ProposalPageTabs_step
-      ...ProposalVoteBasketWidget_step @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalVoteBasketWidget_step @arguments(token: $token)
     }
     proposal: proposalFromSlug(slug: $proposalSlug) {
       ...ProposalPageAside_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
@@ -161,8 +166,15 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated }: Props) => {
   const [show, setShow] = useState<MODAL_STATE>('FALSE');
   const [isAnalysing, setIsAnalysing] = useState(hasAnalysis);
   const bottom = bodyHeight - scrollY - height - footerSize;
+
+  const twilio = useFeatureFlag('twilio');
+  const proposalSmsVote = useFeatureFlag('proposal_sms_vote');
+  const smsVoteEnabled =
+    step?.isProposalSmsVoteEnabled && twilio && proposalSmsVote && !isAuthenticated;
   const showVotesWidget =
-    isAuthenticated && currentVotableStep && currentVotableStep.state === 'OPENED';
+    (isAuthenticated || smsVoteEnabled) &&
+    currentVotableStep &&
+    currentVotableStep.state === 'OPENED';
 
   useEffect(() => {
     setVotesCount(proposal?.allVotes?.totalCount || 0);

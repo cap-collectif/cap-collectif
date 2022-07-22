@@ -170,6 +170,7 @@ export default createFragmentContainer(ProposalPreviewBody, {
       isAuthenticated: { type: "Boolean!" }
       isProfileView: { type: "Boolean", defaultValue: false }
       stepId: { type: "ID!" }
+      token: { type: "String" }  
     ) {
       id
       slug
@@ -214,7 +215,7 @@ export default createFragmentContainer(ProposalPreviewBody, {
   step: graphql`
     fragment ProposalPreviewBody_step on ProposalStep {
       id
-      ...ProposalPreviewVote_step @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalPreviewVote_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
       ...ProposalVoteThresholdProgressBar_step
       voteThreshold
       url

@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Search\VoteSearch;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -21,6 +23,8 @@ class StepVotesCountDataLoader extends BatchDataLoader
     private ProposalCollectVoteRepository $proposalCollectVoteRepository;
     private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
     private VoteSearch $voteSearch;
+    private ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
+    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -28,6 +32,8 @@ class StepVotesCountDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
+        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
         VoteSearch $voteSearch,
         string $cachePrefix,
         int $cacheTtl,
@@ -38,6 +44,8 @@ class StepVotesCountDataLoader extends BatchDataLoader
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->proposalCollectSmsVoteRepository = $proposalCollectSmsVoteRepository;
+        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
         $this->voteSearch = $voteSearch;
         parent::__construct(
             [$this, 'all'],
@@ -72,17 +80,27 @@ class StepVotesCountDataLoader extends BatchDataLoader
     public function resolve(AbstractStep $step, bool $onlyAccounted, ?bool $anonymous = null): int
     {
         if ($step instanceof CollectStep) {
-            return $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
+            $smsVotes = $this->proposalCollectSmsVoteRepository->countPublishedCollectVoteByStep($step);
+            if ($anonymous) {
+                return $smsVotes;
+            }
+            $votes = $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
                 $step,
                 $onlyAccounted
             );
+            return $votes + $smsVotes;
         }
 
         if ($step instanceof SelectionStep) {
-            return $this->proposalSelectionVoteRepository->countPublishedSelectionVoteByStep(
+            $smsVotes = $this->proposalSelectionSmsVoteRepository->countPublishedSelectionVoteByStep($step);
+            if ($anonymous) {
+                return $smsVotes;
+            }
+            $votes = $this->proposalSelectionVoteRepository->countPublishedSelectionVoteByStep(
                 $step,
                 $onlyAccounted
             );
+            return $votes + $smsVotes;
         }
 
         if ($step instanceof DebateStep) {

@@ -64,4 +64,17 @@ describe('Internal.project.votes', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
+
+  it('Retrieve project anonymous proposal sms votes total count', async () => {
+    await expect(
+      graphql(
+        ProjectVotesQuery,
+        {
+          projectId: toGlobalId('Project', 'projectIdf3'),
+          anonymous: true,
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 });

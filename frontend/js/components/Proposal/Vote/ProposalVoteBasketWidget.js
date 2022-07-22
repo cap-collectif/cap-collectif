@@ -174,6 +174,7 @@ type Props = {
   voteBarButtonBgColor: string,
   voteBarButtonTextColor: string,
   features: FeatureToggles,
+  isAuthenticated: boolean,
 };
 
 export const ProposalVoteBasketWidget = ({
@@ -185,6 +186,7 @@ export const ProposalVoteBasketWidget = ({
   voteBarButtonBgColor,
   voteBarButtonTextColor,
   features,
+  isAuthenticated,
 }: Props) => {
   const [collapsed, setCollapsed] = useState<boolean>(true);
   const creditsSpent = viewer && viewer.proposalVotes ? viewer.proposalVotes.creditsSpent : 0;
@@ -199,6 +201,10 @@ export const ProposalVoteBasketWidget = ({
       if (html) html.classList.remove('has-vote-widget');
     };
   }, []);
+
+  const smsVoteEnabled =
+    step.isProposalSmsVoteEnabled && features.twilio && features.proposal_sms_vote;
+  const showMyVotesButton = !smsVoteEnabled && isAuthenticated;
 
   return (
     <NavBar
@@ -295,16 +301,19 @@ export const ProposalVoteBasketWidget = ({
           </div>
         </div>
       </div>
-      <Button bsStyle="default" className="widget__button " href={votesPageUrl}>
-        <FormattedMessage
-          id={isInterpellation ? 'project.supports.title' : 'project.votes.title'}
-        />
-      </Button>
+      {showMyVotesButton && (
+        <Button bsStyle="default" className="widget__button " href={votesPageUrl}>
+          <FormattedMessage
+            id={isInterpellation ? 'project.supports.title' : 'project.votes.title'}
+          />
+        </Button>
+      )}
     </NavBar>
   );
 };
 
 const mapStateToProps = (state: State) => ({
+  isAuthenticated: !!state.user.user,
   features: state.default.features,
 });
 
@@ -313,8 +322,8 @@ export default createFragmentContainer(
   {
     step: graphql`
       fragment ProposalVoteBasketWidget_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-        viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+      @argumentDefinitions(token: { type: "String" }) {
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
           totalCount
         }
         project {
@@ -324,6 +333,7 @@ export default createFragmentContainer(
         votesLimit
         votesMin
         budget
+        isProposalSmsVoteEnabled
         ...interpellationLabelHelper_step @relay(mask: false)
       }
     `,

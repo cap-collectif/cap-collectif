@@ -46,7 +46,6 @@ class AnalyticsSearch
         array $requestedFields,
         ?string $projectId = null
     ): \Elastica\Multi\ResultSet {
-
         $multiSearchQuery = new Search($this->getClient());
         $searchQueries = [
             'registrations' => $this->createUserRegistrationsQuery($start, $end),
@@ -174,6 +173,12 @@ class AnalyticsSearch
                 ->addFilter(new Query\Term(['objectType' => 'reply']))
                 ->addFilter(new Query\Term(['replyType' => 'replyAnonymous']))
         );
+        $objectTypeBoolQuery->addShould((new BoolQuery())
+            ->addFilter(new Query\Term(['objectType' => 'vote']))
+            ->addFilter(new Query\Term(['voteTypeName' => 'proposalCollectSmsVote'])));
+        $objectTypeBoolQuery->addShould((new BoolQuery())
+            ->addFilter(new Query\Term(['objectType' => 'vote']))
+            ->addFilter(new Query\Term(['voteTypeName' => 'proposalSelectionSmsVote'])));
 
         $boolQuery = new BoolQuery();
         $boolQuery

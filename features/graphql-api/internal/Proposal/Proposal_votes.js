@@ -11,8 +11,10 @@ const ProposalVoteMiniumQuery = /* GraphQL */ `
           edges {
             node {
               id
-              isAccounted
-              published
+              ...on ProposalUserVote {
+                  isAccounted
+                  published
+              }
             }
           }
         }
@@ -25,8 +27,10 @@ const ProposalVoteMiniumQuery = /* GraphQL */ `
           edges {
             node {
               id
-              isAccounted
-              published
+              ...on ProposalUserVote {
+                  isAccounted
+                  published
+              }
             }
           }
         }

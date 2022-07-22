@@ -1,0 +1,14 @@
+Capco\AppBundle\Entity\ProposalCollectSmsVote:
+    attributes:
+        collectStep:
+            groups: [ ProposalCollectVotes ]
+        getProposal:
+            type: object
+            groups: [ ProposalCollectVotes, ElasticsearchVoteNestedProposal ]
+            serialized_name: proposal
+        ipAddress:
+            serialized_name: ipAddress
+            groups: [ElasticsearchVote]
+        getVoteTypeName:
+            serialized_name: voteTypeName
+            groups: [ElasticsearchVote]

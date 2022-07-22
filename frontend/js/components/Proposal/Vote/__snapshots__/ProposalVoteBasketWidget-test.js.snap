@@ -1,5 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ProposalVoteBasketWidget /> should hide votes button when anon vote is enabled and user is anonymous  1`] = `
+<ProposalVoteBasketWidget__NavBar
+  backgroundColor="#FFF"
+  borderColor="#AAA"
+  buttonBgColor="#CCC"
+  buttonTextColor="#000"
+  collapsed={true}
+  fixedTop={true}
+  isBudget={false}
+  textColor="#333"
+>
+  <div>
+    <div>
+      <div>
+        <ProposalVoteBasketWidget__BlockContainer>
+          <Icon
+            color="#333"
+            name="urne"
+            size={25}
+          />
+          <ProposalVoteBasketWidget__InfoContainer
+            borderColor="#AAA"
+          >
+            <FormattedMessage
+              id="project.preview.counters.votes"
+              tagName="p"
+              values={
+                Object {
+                  "count": 2,
+                  "num": 2,
+                }
+              }
+            />
+            <p>
+              5
+            </p>
+          </ProposalVoteBasketWidget__InfoContainer>
+        </ProposalVoteBasketWidget__BlockContainer>
+        <div />
+      </div>
+    </div>
+  </div>
+</ProposalVoteBasketWidget__NavBar>
+`;
+
 exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget vote 1`] = `
 <ProposalVoteBasketWidget__NavBar
   backgroundColor="#FFF"

@@ -43,7 +43,6 @@ describe('<ProposalVoteButton />', () => {
 
   const defaultProps = {
     id: 'buttonID',
-    user: { id: 'id1' },
   };
 
   const query = graphql`
@@ -80,6 +79,7 @@ describe('<ProposalVoteButton />', () => {
           proposal={data.proposal}
           currentStep={data.step}
           isHovering={false}
+          hasVoted
           {...defaultProps}
           {...props}
         />
@@ -96,7 +96,7 @@ describe('<ProposalVoteButton />', () => {
     environment.mock.queueOperationResolver(operation =>
       MockPayloadGenerator.generate(operation, defaultMockResolvers),
     );
-    testComponentTree = ReactTestRenderer.create(<TestComponent />);
+    testComponentTree = ReactTestRenderer.create(<TestComponent hasVoted={false} />);
     expect(testComponentTree).toMatchSnapshot();
   });
   it('renders viewer has voted', () => {

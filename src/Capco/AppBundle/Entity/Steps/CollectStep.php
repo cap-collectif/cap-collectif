@@ -10,6 +10,7 @@ use Capco\AppBundle\Enum\ProposalSort;
 use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
 use Capco\AppBundle\Traits\SecretBallotTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
+use Capco\AppBundle\Traits\VoteSmsTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,6 +29,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface, Vo
     use TimelessStepTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
+    use VoteSmsTrait;
     public const TYPE = 'collect';
 
     public static $sort = [

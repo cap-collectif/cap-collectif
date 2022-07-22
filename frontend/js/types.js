@@ -104,6 +104,7 @@ export type FeatureToggles = {
   twilio: ?boolean,
   unstable__paper_vote: ?boolean,
   helpscout_beacon: ?boolean,
+  proposal_sms_vote: ?boolean,
 };
 
 export type FeatureToggle = $Keys<FeatureToggles>;

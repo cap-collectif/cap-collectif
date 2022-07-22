@@ -3,9 +3,9 @@
 exports[`Internal|Query.smsAnalytics should query sms analytics 1`] = `
 Object {
   "smsAnalytics": Object {
-    "consumedCredits": 1,
+    "consumedCredits": 2,
     "remainingCredits": Object {
-      "amount": 999,
+      "amount": 998,
       "status": "IDLE",
     },
     "totalCredits": 1000,

@@ -30,7 +30,7 @@ declare namespace Cypress {
     email: string
     password: string
   }
-  type LoginAsUsernames = 'admin' | 'super_admin' | 'project_owner' | 'user' | 'pierre'
+  type LoginAsUsernames = 'admin' | 'super_admin' | 'project_owner' | 'user' | 'pierre' | 'user_not_confirmed'
   interface cy {
     appendOperationToGraphQLFetch(): void
   }

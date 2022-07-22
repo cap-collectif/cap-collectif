@@ -1,0 +1,12 @@
+AddProposalSmsVotePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            vote:
+                type: 'InternalProposalSmsVote'
+            voteEdge:
+                type: 'InternalProposalVoteEdge'
+            errorCode:
+                type: 'AddProposalSmsVoteErrorCode'
+            votes:
+                type: 'ProposalSmsVoteConnection'

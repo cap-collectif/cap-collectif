@@ -27,6 +27,8 @@ type Props = {|
   intl: IntlShape,
   onDelete: ?() => void,
   member: string,
+  smsVoteEnabled: boolean,
+  isAuthenticated: boolean,
 |};
 
 export const ProposalUserVoteItem = ({
@@ -36,6 +38,8 @@ export const ProposalUserVoteItem = ({
   step,
   intl,
   vote,
+  smsVoteEnabled,
+  isAuthenticated,
 }: Props) => {
   const { proposal } = vote;
 
@@ -77,6 +81,8 @@ export const ProposalUserVoteItem = ({
     return intl.formatMessage({ id: 'global.anonymous' });
   };
 
+  const showPrivateToggle = !(smsVoteEnabled && !isAuthenticated);
+
   return (
     <VoteItemContainer id={`vote-step${step.id}-proposal${proposal.id}`}>
       <Col md={colTitleWidth()} sm={12} xs={12}>
@@ -116,7 +122,7 @@ export const ProposalUserVoteItem = ({
                 }
               />
             )}
-            {!vote.published && (
+            {!vote?.published && (
               <div>
                 <UnpublishedLabel publishable={vote} />
               </div>
@@ -136,21 +142,23 @@ export const ProposalUserVoteItem = ({
           </div>
         </Col>
       )}
-      <Col id={`${proposal.id}-proposal-vote__private`} md={onDelete ? 2 : 3} sm={12} xs={12}>
-        <div>
-          <div className="toggle-group">
-            <Field
-              labelSide="RIGHT"
-              component={toggle}
-              label={getToggleLabel()}
-              roledescription={intl.formatMessage({ id: 'vote-toggle-aria-roledescription' })}
-              name={`${member}.public`}
-              normalize={val => !!val}
-              id={`${proposal.id}-proposal-vote__private-toggle`}
-            />
+      {showPrivateToggle && (
+        <Col id={`${proposal.id}-proposal-vote__private`} md={onDelete ? 2 : 3} sm={12} xs={12}>
+          <div>
+            <div className="toggle-group">
+              <Field
+                labelSide="RIGHT"
+                component={toggle}
+                label={getToggleLabel()}
+                roledescription={intl.formatMessage({ id: 'vote-toggle-aria-roledescription' })}
+                name={`${member}.public`}
+                normalize={val => !!val}
+                id={`${proposal.id}-proposal-vote__private-toggle`}
+              />
+            </div>
           </div>
-        </div>
-      </Col>
+        </Col>
+      )}
       {onDelete && (
         <Col md={1} className="proposal-vote__delete-container">
           <Popover
@@ -223,8 +231,10 @@ export default createFragmentContainer(container, {
   vote: graphql`
     fragment ProposalUserVoteItem_vote on ProposalVote {
       ...UnpublishedLabel_publishable
-      published
-      createdAt
+      ... on ProposalUserVote {
+        published
+        createdAt
+      }
       proposal {
         id
         title

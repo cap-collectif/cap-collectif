@@ -18,7 +18,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @CapcoAssert\EmailDoesNotBelongToUser(message="proposal.vote.email_belongs_to_user")
  * @CapcoAssert\HasEnoughCreditsToVote()
  */
-class ProposalSelectionVote extends AbstractVote
+class ProposalSelectionVote extends AbstractProposalVote
 {
     // Deleted because for users we have a unique constraint in db
     // * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")
@@ -33,13 +33,13 @@ class ProposalSelectionVote extends AbstractVote
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionVotes", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $proposal;
+    private Proposal $proposal;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", cascade={"persist"})
      * @ORM\JoinColumn(name="selection_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $selectionStep;
+    private SelectionStep $selectionStep;
 
     public function getProposal(): ?Proposal
     {
@@ -108,5 +108,10 @@ class ProposalSelectionVote extends AbstractVote
         return array_merge(parent::getElasticsearchSerializationGroups(), [
             'ElasticsearchVoteNestedProposal',
         ]);
+    }
+
+    public function getVoteTypeName(): string
+    {
+        return 'proposalSelectionVote';
     }
 }

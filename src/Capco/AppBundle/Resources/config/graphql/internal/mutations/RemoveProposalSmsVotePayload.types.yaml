@@ -1,0 +1,12 @@
+RemoveProposalSmsVotePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            step:
+                type: 'ProposalStep!'
+            proposal:
+                type: 'InternalProposal!'
+            previousVoteId:
+                type: 'ID'
+            errorCode:
+                type: 'RemoveProposalSmsVoteErrorCode'

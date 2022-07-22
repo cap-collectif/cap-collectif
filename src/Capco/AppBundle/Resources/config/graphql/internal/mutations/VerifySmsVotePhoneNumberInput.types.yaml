@@ -1,0 +1,17 @@
+VerifySmsVotePhoneNumberInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of verifySmsVotePhoneNumber mutation.'
+        fields:
+            phone:
+                type: 'String!'
+                description: 'The phone that received the code.'
+            code:
+                type: 'String!'
+                description: 'The verification code to verify the phone.'
+            proposalId:
+                type: 'ID!'
+                description: 'The Node ID of the proposal to vote.'
+            stepId:
+                type: 'ID!'
+                description: 'The Node ID of the step.'

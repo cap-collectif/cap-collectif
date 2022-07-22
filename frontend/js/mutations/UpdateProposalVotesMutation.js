@@ -14,23 +14,26 @@ const mutation = graphql`
     $input: UpdateProposalVotesInput!
     $stepId: ID!
     $isAuthenticated: Boolean!
+    $token: String
   ) {
     updateProposalVotes(input: $input) {
       step {
         id
         votesMin
         votesLimit
-        ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
-        ...ProposalsUserVotesStep_step @arguments(isAuthenticated: $isAuthenticated)
-        ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
-        viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+        ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+        ...ProposalsUserVotesStep_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+        ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) @include(if: $isAuthenticated) {
           ...ProposalsUserVotesTable_votes
           totalCount
           edges {
             node {
               id
-              ranking
-              anonymous
+              ...on ProposalUserVote {
+                ranking
+                anonymous
+              }
               proposal {
                 id
                 ...ProposalVoteButton_proposal

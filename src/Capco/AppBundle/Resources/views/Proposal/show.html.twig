@@ -31,7 +31,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('ProjectStepPageApp', { 'props': { 
+    {{ react_render_component('ProjectStepPageApp', { 'props': {
         'currentVotableStepId': currentVotableStepId,
         'stepId': currentStep.id|toGlobalId('CollectStep'),
         'projectId': project.id|toGlobalId('Project'),

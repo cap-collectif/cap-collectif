@@ -37,7 +37,6 @@ ProposalStep:
                 type: 'Boolean!'
                 description: 'If enabled, allow voters to order their votes by point'
             viewerVotes:
-                access: "@=hasRole('ROLE_USER')"
                 type: 'InternalProposalVoteConnection!'
                 description: 'A list of viewer votes associated with the step.'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -46,6 +45,9 @@ ProposalStep:
                     orderBy:
                         type: 'InternalProposalVoteOrder'
                         defaultValue: { field: CREATED_AT, direction: DESC }
+                    token:
+                        type: 'String'
+                        description: 'If anonymous user the token used to vote.'
             form:
                 type: 'ProposalForm'
                 resolve: '@=value.getProposalForm()'
@@ -59,3 +61,6 @@ ProposalStep:
                 type: 'Boolean!'
                 description: 'Whether or not can display vote counters and points'
                 resolve: '@=value.canDisplayBallot()'
+            isProposalSmsVoteEnabled:
+                type: 'Boolean'
+                description: 'Whether or not sms vote are enabled.'

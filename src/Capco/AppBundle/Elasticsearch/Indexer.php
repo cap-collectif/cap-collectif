@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Entity\AbstractProposalVote;
 use Capco\AppBundle\Entity\District\AbstractDistrict;
 use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
@@ -279,7 +280,7 @@ class Indexer
                 return 'comment';
             }
 
-            if (AbstractVote::class === $parentClass->getName()) {
+            if (AbstractVote::class === $parentClass->getName() || AbstractProposalVote::class === $parentClass->getName()) {
                 return 'vote';
             }
 

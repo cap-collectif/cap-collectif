@@ -287,6 +287,10 @@ Object {
       "enabled": false,
       "type": "api_sendinblue",
     },
+    Object {
+      "enabled": false,
+      "type": "proposal_sms_vote",
+    },
   ],
 }
 `;

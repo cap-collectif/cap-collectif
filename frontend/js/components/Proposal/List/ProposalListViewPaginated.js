@@ -12,6 +12,7 @@ import type { ProposalViewMode } from '~/redux/modules/proposal';
 import ProposalsDisplayMap from '../../Page/ProposalsDisplayMap';
 import type { MapOptions } from '../Map/Map.types';
 import type { GeoJson } from '~/utils/geojson';
+import CookieMonster from '~/CookieMonster';
 
 type Props = {
   relay: RelayPaginationProp,
@@ -88,7 +89,9 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
       }
     `,
     step: graphql`
-      fragment ProposalListViewPaginated_step on ProposalStep {
+      fragment ProposalListViewPaginated_step on ProposalStep
+      @argumentDefinitions(token: { type: "String" }) 
+      {
         id
         ... on CollectStep {
           private
@@ -106,7 +109,7 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
           status: $status
           userType: $userType
         ) @connection(key: "ProposalListViewPaginated_proposals", filters: []) {
-          ...ProposalList_proposals
+          ...ProposalList_proposals @arguments(token: $token)
           edges {
             node {
               id
@@ -140,6 +143,7 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
         cursor,
         stepId: props.step.id,
         isAuthenticated: !!props.viewer,
+        token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
       };
     },
     query: graphql`
@@ -155,6 +159,7 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
         $status: ID
         $theme: ID
         $userType: ID
+        $token: String
       ) {
         step: node(id: $stepId) {
           ...ProposalListViewPaginated_step

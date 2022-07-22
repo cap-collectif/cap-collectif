@@ -21,6 +21,7 @@ describe('<ProjectAdminCollectStepForm />', () => {
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     endAt: '2050-01-01',
     isFranceConnectConfigured: true,
+    isProposalSmsVoteEnabled: false,
   };
 
   it('renders correctly for project admin', () => {

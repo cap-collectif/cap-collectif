@@ -15,6 +15,7 @@ describe('<ProjectAdminSelectionStepForm />', () => {
     votable: false,
     votesRanking: true,
     isSecretBallotEnabled: true,
+    isProposalSmsVoteEnabled: false,
     votesLimit: 3,
     votesMin: 1,
     stepFormName: 'defaultForm',
@@ -34,8 +35,7 @@ describe('<ProjectAdminSelectionStepForm />', () => {
 
   it('renders correctly with data', () => {
     const props = {
-      id: 'stepId',
-      dispatch: jest.fn(),
+      ...defaultProps,
       isBudgetEnabled: true,
       isTresholdEnabled: true,
       isLimitEnabled: true,
@@ -44,7 +44,6 @@ describe('<ProjectAdminSelectionStepForm />', () => {
       isSecretBallotEnabled: false,
       votesLimit: 0,
       votesMin: 0,
-      stepFormName: 'defaultForm',
       requirements: [
         { type: 'CHECKBOX', checked: false, label: 'Sku' },
         {

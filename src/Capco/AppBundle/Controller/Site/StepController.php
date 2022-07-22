@@ -278,6 +278,7 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
+            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled()
         ];
     }
 
@@ -362,6 +363,7 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'proposalForm' => null,
+            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled()
         ];
     }
 

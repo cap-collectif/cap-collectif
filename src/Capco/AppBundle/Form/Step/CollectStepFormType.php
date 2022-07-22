@@ -45,7 +45,8 @@ class CollectStepFormType extends AbstractStepFormType
             ->add('allowAuthorsToAddNews')
             ->add('mainView', ChoiceType::class, [
                 'choices' => ViewConfiguration::ALL,
-            ]);
+            ])
+            ->add('isProposalSmsVoteEnabled');
     }
 
     public function configureOptions(OptionsResolver $resolver)

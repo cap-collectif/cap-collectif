@@ -218,6 +218,15 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         body: Avec un saut conditionel sur le formulaire de dépôt, et oui rien que ça.
         startAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
         endAt: <identity((new \DateTime('2031-05-04 12:00:00')))>
+    collectstepSmsVoteIdf3:
+        id: collectstepSmsVoteIdf3
+        title: Collecte vote par sms
+        label: Collecte vote par sms
+        body: Collecte vote par sms
+        startAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
+        endAt: <identity((new \DateTime('2031-05-04 12:00:00')))>
+        voteType: 1
+        isProposalSmsVoteEnabled: true
     collectStepClosedIdf3:
         id: collectStepClosedIdf3
         title: Étape fermée, mais on peut modifier les réseaux sociaux des propositions
