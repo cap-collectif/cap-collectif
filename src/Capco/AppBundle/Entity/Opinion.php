@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -396,9 +397,9 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         return false;
     }
 
-    public function isUserAuthor(?User $user = null): bool
+    public function isUserAuthor(?Author $user = null): bool
     {
-        return $user === $this->author;
+        return $user === $this->getAuthor();
     }
 
     /**

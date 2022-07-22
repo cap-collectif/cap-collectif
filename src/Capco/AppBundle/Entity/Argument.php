@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Model\ReportableInterface;
+use Capco\AppBundle\Traits\AuthorableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -34,6 +36,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
     use TrashableTrait;
     use UuidTrait;
     use VotableOkTrait;
+    use AuthorableTrait;
 
     public const TYPE_AGAINST = 0;
     public const TYPE_FOR = 1;
@@ -175,18 +178,6 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
         $this->type = $type;
     }
 
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor($author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     public function getStep()
     {
         /** @var Opinion|OpinionVersion $related */
@@ -301,9 +292,9 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
         return $related ? $related->getConsultation() : null;
     }
 
-    public function isUserAuthor(?User $user = null): bool
+    public function isUserAuthor(?Author $user = null): bool
     {
-        return $user === $this->author;
+        return $user === $this->getAuthor();
     }
 
     // ************************* Lifecycle ***********************************

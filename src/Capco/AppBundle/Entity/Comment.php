@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
@@ -56,6 +57,7 @@ abstract class Comment implements
     CommentableInterface,
     ReportableInterface
 {
+    use AuthorableTrait;
     use ModerableTrait;
     use PinnableTrait;
     use PublishableTrait;
@@ -64,7 +66,6 @@ abstract class Comment implements
     use TrashableTrait;
     use UuidTrait;
     use VotableOkTrait;
-    use AuthorableTrait;
 
     public static $sortCriterias = [
         'date' => 'opinion.sort.last',
@@ -174,16 +175,14 @@ abstract class Comment implements
         return $this;
     }
 
-    public function getAuthor(): ?Author
-    {
-        return $this->author;
-    }
-
     public function setAuthor(?Author $author): self
     {
         if ($author instanceof User) {
             $this->author = $author;
             $this->setPinned($author && $author->isVip() && !$this->parent);
+        }
+        if ($author instanceof Organization) {
+            $this->organization = $author;
         }
 
         return $this;
