@@ -3,8 +3,7 @@
 namespace Capco\AppBundle\Repository\Organization;
 
 use Capco\AppBundle\Entity\Organization\Organization;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @method Organization|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,10 +11,6 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Organization[]    findAll()
  * @method Organization[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class OrganizationRepository extends ServiceEntityRepository
+class OrganizationRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Organization::class);
-    }
 }

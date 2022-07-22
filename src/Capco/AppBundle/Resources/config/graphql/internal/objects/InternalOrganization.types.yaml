@@ -1,0 +1,59 @@
+InternalOrganization:
+    type: object
+    inherits:
+        - Node
+        - Author
+    config:
+        description: 'An organization.'
+        name: Organization
+        interfaces:
+            - Node
+            - Author
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Organization
+            media:
+                type: 'InternalMedia'
+                description: "The organization's logo file"
+                resolve: '@=value.getLogo()'
+            logo:
+                type: 'InternalMedia'
+                description: "The organization's logo file"
+            banner:
+                type: 'InternalMedia'
+                description: "The organization's banner file"
+            description:
+                type: 'String'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getDescription(args["locale"], true)'
+            biography:
+                type: 'String'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getDescription(args["locale"], true)'
+            title:
+                type: 'String!'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getTitle(args["locale"], true)'
+            slug:
+                type: 'String!'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getSlug(args["locale"], true)'
+            username:
+                type: 'String!'
+                description: "The organization's public name."
+                resolve: '@=value.getTitle(args["locale"], true)'
+            isViewer:
+                type: 'Boolean!'
+                access: "@=hasRole('ROLE_USER')"
+                resolve: '@=value.isViewer(getUser())'
+                description: 'Whether or not this user is the authenticated user.'
+            displayName:
+                type: 'String!'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getTitle(args["locale"], true)'
+            url:
+                type: 'URI'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\OrganizationUrlResolver", [value])'

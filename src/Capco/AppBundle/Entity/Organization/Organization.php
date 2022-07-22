@@ -170,7 +170,7 @@ class Organization implements SonataTranslatableInterface, Translatable, Author,
         return OrganizationTranslation::class;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
         return $this->getTitle();
     }
@@ -178,5 +178,10 @@ class Organization implements SonataTranslatableInterface, Translatable, Author,
     public function isViewer(?User $user): bool
     {
         return $this->members->contains($user);
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->getLogo();
     }
 }

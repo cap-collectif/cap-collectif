@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -93,5 +94,10 @@ class ProjectAuthor implements Author
     public function getUsername(): ?string
     {
         return $this->getAuthor() ?? $this->getAuthor()->getUsername();
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->getAuthor()->getMedia();
     }
 }

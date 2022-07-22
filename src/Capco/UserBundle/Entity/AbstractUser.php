@@ -2,6 +2,7 @@
 
 namespace Capco\Capco\UserBundle\Entity;
 
+use Capco\AppBundle\Traits\TimestampableTrait;
 use FOS\UserBundle\Model\User as FosUser;
 
 /**
@@ -9,7 +10,7 @@ use FOS\UserBundle\Model\User as FosUser;
  */
 abstract class AbstractUser extends FosUser
 {
-    protected \DateTime $createdAt;
+    use TimestampableTrait;
     protected ?\DateTime $updatedAt = null;
     protected ?\DateTime $dateOfBirth = null;
     protected ?string $firstname = null;
@@ -29,30 +30,6 @@ abstract class AbstractUser extends FosUser
     public function __toString(): string
     {
         return $this->getUsername() ?: '-';
-    }
-
-    public function setCreatedAt(\DateTime $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): \DateTime
-    {
-        return $this->createdAt;
-    }
-
-    public function setUpdatedAt(?\DateTime $updatedAt = null): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTime
-    {
-        return $this->updatedAt;
     }
 
     public function setBiography(?string $biography): self

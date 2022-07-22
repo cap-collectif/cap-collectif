@@ -1,0 +1,24 @@
+PreviewAuthor:
+    type: interface
+    inherits:
+        - Timestampable
+    config:
+        name: Author
+        description: 'Represent an author.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'Author ID'
+            username:
+                type: 'String'
+                description: 'Author username'
+            displayName:
+                type: 'String!'
+                description: "The author's public profile name."
+            isViewer:
+                type: 'Boolean!'
+                description: 'Whether or not this author is the authenticated user.'
+            url:
+                type: 'URI!'
+            biography:
+                type: 'String'

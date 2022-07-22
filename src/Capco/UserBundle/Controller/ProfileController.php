@@ -2,7 +2,9 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
+use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
 use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
@@ -57,6 +59,7 @@ class ProfileController extends Controller
     private DeleteAccountMutation $deleteAccountMutation;
     private FranceConnectLogoutHandler $franceConnectLogoutHandler;
     private RouterInterface $router;
+    private OrganizationRepository $organizationRepository;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
@@ -75,6 +78,7 @@ class ProfileController extends Controller
         DeleteAccountMutation $deleteAccountMutation,
         FranceConnectLogoutHandler $franceConnectLogoutHandler,
         RouterInterface $router,
+        OrganizationRepository $organizationRepository,
         string $fireWall,
         string $projectDir
     ) {
@@ -96,6 +100,7 @@ class ProfileController extends Controller
         $this->deleteAccountMutation = $deleteAccountMutation;
         $this->franceConnectLogoutHandler = $franceConnectLogoutHandler;
         $this->router = $router;
+        $this->organizationRepository = $organizationRepository;
     }
 
     /**
@@ -254,6 +259,38 @@ class ProfileController extends Controller
             'replies' => $replies,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
+        ];
+    }
+
+    /**
+     * TODO change view and content for organization.
+     *
+     * @Route("/", name="capco_organization_profile_show", defaults={"_feature_flags" = "profiles"})
+     * @Route("/{slug}", name="capco_organization_profile_show_all", defaults={"_feature_flags" = "profiles"})
+     * @Template("@CapcoUser/Profile/show.html.twig")
+     */
+    public function showOrganizationAction(?string $slug = null)
+    {
+        if (
+            !$slug &&
+            !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $organization = $slug ? $this->organizationRepository->findOneBySlug($slug) : null;
+
+        if (!$organization instanceof Organization) {
+            throw $this->createNotFoundException();
+        }
+
+        //        $arguments = $this->argumentRepository->getByUser($user);
+        //        $replies = $this->replyRepository->getByAuthor($user);
+        //        $sources = $this->sourceRepository->getByUser($user);
+        //        $eventsCount = $this->getEventsCount($user);
+
+        return [
+            'organization' => $organization,
         ];
     }
 
