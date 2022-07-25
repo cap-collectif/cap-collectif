@@ -43,7 +43,7 @@ class AnonymousUserProposalSmsVote
     private ?CollectStep $collectStep = null;
 
     /**
-     * @ORM\Column(name="status", nullable=false, type="string", columnDefinition="ENUM('PENDING', 'APPROVED', 'CANCELED')")
+     * @ORM\Column(name="status", nullable=false, type="string")
      */
     private string $status;
 
