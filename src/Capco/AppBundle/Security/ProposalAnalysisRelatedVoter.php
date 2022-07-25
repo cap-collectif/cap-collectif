@@ -4,13 +4,8 @@ namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Enum\ProposalStatementState;
-use Capco\AppBundle\Repository\ProposalAnalystRepository;
-use Capco\AppBundle\Repository\ProposalDecisionMakerRepository;
-use Capco\AppBundle\Repository\ProposalDecisionRepository;
-use Capco\AppBundle\Repository\ProposalSupervisorRepository;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -24,26 +19,6 @@ class ProposalAnalysisRelatedVoter extends Voter
     public const ASSIGN_SUPERVISOR = 'ASSIGN_SUPERVISOR';
     public const ASSIGN_ANALYST = 'ASSIGN_ANALYST';
     public const ASSIGN_DECISION_MAKER = 'ASSIGN_DECISION_MAKER';
-
-    private ProposalSupervisorRepository $proposalSupervisorRepository;
-    private ProposalDecisionMakerRepository $proposalDecisionMakerRepository;
-    private ProposalDecisionRepository $proposalDecisionRepository;
-    private ProposalAnalystRepository $proposalAnalystRepository;
-    private AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        ProposalSupervisorRepository $proposalSupervisorRepository,
-        ProposalDecisionMakerRepository $proposalDecisionMakerRepository,
-        ProposalDecisionRepository $proposalDecisionRepository,
-        ProposalAnalystRepository $proposalAnalystRepository,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->proposalSupervisorRepository = $proposalSupervisorRepository;
-        $this->proposalDecisionMakerRepository = $proposalDecisionMakerRepository;
-        $this->proposalDecisionRepository = $proposalDecisionRepository;
-        $this->proposalAnalystRepository = $proposalAnalystRepository;
-        $this->authorizationChecker = $authorizationChecker;
-    }
 
     /**
      * {@inheritdoc}

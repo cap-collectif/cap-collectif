@@ -10,12 +10,11 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class EventReviewVoter extends Voter
 {
-    const VIEW = 'view';
     const EDIT = 'edit';
 
-    protected function supports($attribute, $subject)
+    protected function supports($attribute, $subject): bool
     {
-        if (!\in_array($attribute, [self::VIEW, self::EDIT])) {
+        if (!\in_array($attribute, [self::EDIT])) {
             return false;
         }
 
@@ -26,7 +25,7 @@ class EventReviewVoter extends Voter
         return true;
     }
 
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         $viewer = $token->getUser();
 
@@ -38,18 +37,11 @@ class EventReviewVoter extends Voter
         $review = $subject;
 
         switch ($attribute) {
-            case self::VIEW:
-                return $this->canView($review, $viewer);
             case self::EDIT:
                 return $this->canEdit($review, $viewer);
         }
 
         throw new \LogicException('This code should not be reached!');
-    }
-
-    private function canView(EventReview $review, User $viewer): bool
-    {
-        return $this->canEdit($review, $viewer);
     }
 
     private function canEdit(EventReview $review, User $viewer): bool
@@ -58,10 +50,10 @@ class EventReviewVoter extends Voter
             return true;
         }
 
-        if (EventReviewStatusType::AWAITING !== $review->getStatus()) {
-            return false;
+        if (EventReviewStatusType::AWAITING === $review->getStatus() && $viewer->isAdmin()) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 }
