@@ -55,5 +55,5 @@ InternalOrganization:
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getTitle(args["locale"], true)'
             url:
-                type: 'URI'
+                type: 'URI!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\OrganizationUrlResolver", [value])'

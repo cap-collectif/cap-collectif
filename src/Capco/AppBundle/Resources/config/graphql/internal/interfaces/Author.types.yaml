@@ -5,6 +5,7 @@ Author:
     config:
         name: Author
         description: 'Represent an author.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Author\\AuthorTypeResolver", [value])'
         fields:
             id:
                 type: 'ID!'
@@ -31,3 +32,9 @@ Author:
                 type: 'URI'
                 description: "The author's public avatar URL."
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserAvatarUrlResolver", [value])'
+            email:
+                type: 'String'
+            isProjectAdmin:
+                type: 'Boolean!'
+            userType:
+                type: 'UserType'

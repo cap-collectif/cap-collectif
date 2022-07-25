@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
@@ -142,6 +143,9 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof Reporting) {
             return $this->typeResolver->resolve('Reporting');
+        }
+        if ($node instanceof Organization) {
+            return $this->typeResolver->resolve('InternalOrganization');
         }
         if ($node instanceof User) {
             if ('public' === $currentSchemaName) {

@@ -1342,6 +1342,39 @@ type AssignSupervisorToProposalsPayload {
   clientMutationId: String
 }
 
+"""Represent an author."""
+interface Author {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Author ID"""
+  id: ID!
+
+  """Author username"""
+  username: String
+
+  """The author's public profile name."""
+  displayName: String!
+
+  """The author's slug"""
+  slug: String!
+  media: Media
+
+  """Whether or not this author is the authenticated user."""
+  isViewer: Boolean!
+  url: URI!
+  biography: String
+
+  """The author's public avatar URL."""
+  avatarUrl: URI
+  email: String
+  isProjectAdmin: Boolean!
+  userType: UserType
+}
+
 """The possible values for a proposal category color"""
 enum AvailableProposalCategoryColor {
   COLOR_EF5350
@@ -8187,6 +8220,64 @@ enum OrderDirection {
 
   """Specifies a descending order for a given `orderBy` argument."""
   DESC
+}
+
+"""An organization."""
+type Organization implements Node & Author {
+  """The ID of an object."""
+  id: ID!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The organization's public name."""
+  username: String!
+
+  """The author's public profile name."""
+  displayName(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+
+  """The author's slug"""
+  slug(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+
+  """The organization's logo file"""
+  media: Media
+
+  """Whether or not this user is the authenticated user."""
+  isViewer: Boolean!
+  url: URI!
+  biography(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+
+  """The author's public avatar URL."""
+  avatarUrl: URI
+  email: String
+  isProjectAdmin: Boolean!
+  userType: UserType
+
+  """The organization's logo file"""
+  logo: Media
+
+  """The organization's banner file"""
+  banner: Media
+  description(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  title(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
 }
 
 """A step inside a project."""
@@ -16681,17 +16772,17 @@ type UpdateUserReplyPayload {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner & UserIdentificationCodeListOwner {
-  """User ID"""
+type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner & UserIdentificationCodeListOwner & Author {
+  """Author ID"""
   id: ID!
 
   """The user profile URL."""
   url: URI!
 
-  """User username"""
+  """Author username"""
   username: String
 
-  """Whether or not this user is the authenticated user."""
+  """Whether or not this author is the authenticated user."""
   isViewer: Boolean!
 
   """Identifies the date and time when the object was created."""
@@ -16736,12 +16827,12 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   ): ResponseConnection!
 
   """The user's personal email."""
-  email: Email
+  email: String
 
   """Whether or not this user consent internal communication."""
   consentInternalCommunication: Boolean
 
-  """The user's public avatar URL."""
+  """The author's public avatar URL."""
   avatarUrl: URI
 
   """Whether or not this user has a confirmed account."""
@@ -16944,20 +17035,21 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     first: Int = 100
   ): UserIdentificationCodeListConnection!
 
-  """The user's admin edit url"""
-  adminUrl: URI!
-
-  """The user's public avatar file."""
-  media: Media
-
   """The user's public profile name."""
   displayName: String!
 
-  """Whether or not this user is a VIP."""
-  vip: Boolean!
-
   """The user's slug (unique)."""
   slug: String!
+
+  """The user's public avatar file."""
+  media: Media
+  isProjectAdmin: Boolean!
+
+  """The user's admin edit url"""
+  adminUrl: URI!
+
+  """Whether or not this user is a VIP."""
+  vip: Boolean!
 
   """The user's account confirmation date."""
   confirmedAccountAt: DateTime
@@ -17260,7 +17352,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   ): DebateVoteConnection!
   isAdmin: Boolean!
   isSuperAdmin: Boolean!
-  isProjectAdmin: Boolean!
   isOnlyProjectAdmin: Boolean!
 
   """Get any connection attempt"""

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Organization;
 
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Entity\Interfaces\Owner;
@@ -53,6 +54,11 @@ class Organization implements SonataTranslatableInterface, Translatable, Author,
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Organization\OrganizationMember", mappedBy="organization", cascade={"persist"}, orphanRemoval=true)
      */
     private $members;
+
+    /**
+     * @ORM\Column(name="email", type="string")
+     */
+    private string $email;
 
     public function __construct()
     {
@@ -183,5 +189,27 @@ class Organization implements SonataTranslatableInterface, Translatable, Author,
     public function getMedia(): ?Media
     {
         return $this->getLogo();
+    }
+
+    public function isProjectAdmin(): bool
+    {
+        return true;
+    }
+
+    public function getUserType()
+    {
+        return null;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 }

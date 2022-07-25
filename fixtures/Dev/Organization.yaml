@@ -1,9 +1,12 @@
 Capco\AppBundle\Entity\Organization\Organization:
     organization1:
         id: 'organization1'
+        email: "orga1@toto.com"
     organization2:
         id: 'organization2'
         logo: '@GiecLogo'
         banner: '@WarmingStripes'
+        email: "ipcc-sec@wmo.int"
     organizationWithoutMembers:
         id: 'organizationWithoutMembers'
+        email: "nomembers@nothing.com"

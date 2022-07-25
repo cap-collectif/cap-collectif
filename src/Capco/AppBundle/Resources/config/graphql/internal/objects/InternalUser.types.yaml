@@ -11,6 +11,7 @@ InternalUser:
         - InternalMailingListOwner
         - InternalEmailingCampaignOwner
         - InternalUserIdentificationCodeListOwner
+        - Author
     config:
         description: "A user is an individual's account."
         name: User
@@ -23,6 +24,7 @@ InternalUser:
             - InternalMailingListOwner
             - InternalEmailingCampaignOwner
             - InternalUserIdentificationCodeListOwner
+            - Author
         fields:
             adminUrl:
                 type: 'URI!'

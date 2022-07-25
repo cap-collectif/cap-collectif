@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;

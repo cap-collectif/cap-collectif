@@ -118,6 +118,7 @@ overblog_graphql:
                     - InternalTimeRange
                     - InternalProposalVoteConnection
                     - InternalAnonymousReply
+                    - InternalOrganization
             # This is our dev schema (used in development only)
             dev:
                 query: DevQuery
@@ -158,3 +159,4 @@ overblog_graphql:
                     - InternalTimeRange
                     - InternalProposalVoteConnection
                     - InternalAnonymousReply
+                    - InternalOrganization
