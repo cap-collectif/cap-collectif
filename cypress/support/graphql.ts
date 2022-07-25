@@ -1,3 +1,5 @@
+import { RouteHandler } from 'cypress/types/net-stubbing'
+
 Cypress.Commands.add('appendOperationToGraphQLFetch', () => {
   cy.on('window:before:load', win => {
     const originalFetch = win.fetch as any
@@ -20,7 +22,10 @@ Cypress.Commands.add('appendOperationToGraphQLFetch', () => {
 
 Cypress.Commands.add(
   'interceptGraphQLOperation',
-  ({ operationName, schema = 'internal', alias = operationName }: Cypress.InterceptGraphQLOperationOptions) => {
-    return cy.intercept('POST', `/graphql/${schema}?operation=${operationName}`).as(alias)
+  (
+    { operationName, schema = 'internal', alias = operationName }: Cypress.InterceptGraphQLOperationOptions,
+    response?: RouteHandler,
+  ) => {
+    return cy.intercept('POST', `/graphql/${schema}?operation=${operationName}`, response).as(alias)
   },
 )

@@ -3,7 +3,7 @@
     "jsx": "preserve",
     "target": "es5",
     "module": "commonjs",
-    "lib": ["dom", "es6"],
+    "lib": ["dom", "es6", "ES2021.String"],
     "strict": true,
     "types": ["cypress", "node"],
     "typeRoots": ["node_modules/@types/*", "@types/*"],

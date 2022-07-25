@@ -21,6 +21,8 @@
  */
 
 declare namespace Cypress {
+  import { RouteHandler } from 'cypress/types/net-stubbing'
+
   type InterceptGraphQLOperationOptions = {
     readonly operationName: string
     readonly schema?: string
@@ -36,7 +38,7 @@ declare namespace Cypress {
   }
   interface Chainable {
     task(event: 'db:restore', arg?: any, options?: Partial<Loggable & Timeoutable>): Chainable<any>
-    interceptGraphQLOperation(options: InterceptGraphQLOperationOptions): Chainable<null>
+    interceptGraphQLOperation(options: InterceptGraphQLOperationOptions, response?: RouteHandler): Chainable<null>
     assertReactSelectOptionCount(selector: string, value: number): Chainable<any>
     selectReactSelectOption(selector: string, query: string): Chainable<any>
     selectReactSetOption(selector: string, query: string): Chainable<any>

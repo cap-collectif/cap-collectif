@@ -33,7 +33,9 @@ exports[`<ProposalVoteBasketWidget /> should hide votes button when anon vote is
                 }
               }
             />
-            <p>
+            <p
+              id="vote-counter"
+            >
               5
             </p>
           </ProposalVoteBasketWidget__InfoContainer>
@@ -78,7 +80,9 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
                 }
               }
             />
-            <p>
+            <p
+              id="vote-counter"
+            >
               1
             </p>
           </ProposalVoteBasketWidget__InfoContainer>
@@ -137,7 +141,9 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple s
                 }
               }
             />
-            <p>
+            <p
+              id="vote-counter"
+            >
               0
             </p>
           </ProposalVoteBasketWidget__InfoContainer>
@@ -213,7 +219,9 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
                 }
               }
             />
-            <p>
+            <p
+              id="vote-counter"
+            >
               2
             </p>
           </ProposalVoteBasketWidget__InfoContainer>
@@ -289,7 +297,9 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
                 }
               }
             />
-            <p>
+            <p
+              id="vote-counter"
+            >
               5
             </p>
           </ProposalVoteBasketWidget__InfoContainer>

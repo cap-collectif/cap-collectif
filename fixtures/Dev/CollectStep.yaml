@@ -227,6 +227,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         endAt: <identity((new \DateTime('2031-05-04 12:00:00')))>
         voteType: 1
         isProposalSmsVoteEnabled: true
+        votesLimit: 2
     collectStepClosedIdf3:
         id: collectStepClosedIdf3
         title: Étape fermée, mais on peut modifier les réseaux sociaux des propositions

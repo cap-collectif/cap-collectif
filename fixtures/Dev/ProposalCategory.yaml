@@ -112,3 +112,19 @@ Capco\AppBundle\Entity\ProposalCategory:
         color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_616161)>
         name: Énergies renouvelables et efficacité énergétique
         form: '@proposalformIdfBP3'
+    pCategorySmsVote1:
+        id: pCategorySmsVote1
+        color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_B71C1C)>
+        name: Categorie 1
+        form: '@proposalFormSmsVote'
+    pCategorySmsVote2:
+        id: pCategorySmsVote2
+        color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_0097A7)>
+        name: Categorie 2
+        form: '@proposalFormSmsVote'
+    pCategorySmsVote3:
+        id: pCategorySmsVote3
+        color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_0097A7)>
+        name: Categorie avec un nom plus long que la moyenne
+        form: '@proposalFormSmsVote'
+        categoryImage: '@CategoryImage16'

@@ -274,7 +274,7 @@ export const ProposalVoteBasketWidget = ({
                   id={isInterpellation ? 'support.count_no_nb' : 'project.preview.counters.votes'}
                   values={{ num: 2, count: 2 }}
                 />
-                <p>{step?.viewerVotes?.totalCount || 0}</p>
+                <p id="vote-counter">{step?.viewerVotes?.totalCount || 0}</p>
               </InfoContainer>
             </BlockContainer>
             <div>

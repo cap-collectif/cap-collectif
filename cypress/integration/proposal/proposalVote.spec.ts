@@ -86,18 +86,5 @@ describe('Proposal Vote Page', () => {
       ProposalVotePage.getTotalVotesTab().click({ force: true })
       ProposalVotePage.getVoterCardUsername().should('not.have.text', 'user')
     })
-    // describe('sms vote', () => {
-    //   beforeEach(() => {
-    //     cy.task('enable:feature', 'twilio')
-    //     cy.task('enable:feature', 'proposal_sms_vote')
-    //   })
-    //   it('should vote correctly', () => {
-    //     cy.visit('project/budget-participatif-idf-3/collect/collecte-vote-par-sms')
-    //     cy.get('#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWxTbXNWb3RlMg\\==')
-    //     cy.contains('youre-almost-there')
-    //     cy.get('[name="phone"]').type('0611111111')
-    //     cy.get('[name="consentSmsCommunication"]').check()
-    //   });
-    // })
   })
 })

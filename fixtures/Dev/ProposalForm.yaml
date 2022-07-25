@@ -463,3 +463,4 @@ Capco\AppBundle\Entity\ProposalForm:
         step: '@collectstepSmsVoteIdf3'
         owner: '@user1'
         reference: 27
+        usingCategories: true
