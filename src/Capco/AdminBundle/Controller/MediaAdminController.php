@@ -4,13 +4,11 @@ namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Twig\MediaExtension;
-use Sonata\MediaBundle\Controller\MediaAdminController as BaseMediaAdminController;
-use Symfony\Component\Form\FormRenderer;
-use Symfony\Component\Form\FormView;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 
-class MediaAdminController extends BaseMediaAdminController
+class MediaAdminController extends CRUDController
 {
     /**
      * @deprecated use Media back-office instead
@@ -70,12 +68,5 @@ class MediaAdminController extends BaseMediaAdminController
                 $request->getUriForPath('/media') .
                 $this->get(MediaExtension::class)->path($media, 'reference'),
         ]);
-    }
-
-    private function setFormTheme(FormView $formView, $theme)
-    {
-        $twig = $this->get('twig');
-
-        $twig->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
     }
 }
