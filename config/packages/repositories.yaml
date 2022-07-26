@@ -712,4 +712,4 @@ services:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        arguments: ['CapcoAppBundle:Organization\OrganizationRepository']
+        arguments: ['CapcoAppBundle:Organization\Organization']
