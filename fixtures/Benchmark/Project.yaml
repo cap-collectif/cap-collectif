@@ -4,6 +4,7 @@ Capco\AppBundle\Entity\Project:
     title: project-1
     slug: project-1
     authors: ['@pa1']
+    creator: '@pa1'
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 2
   project2:
@@ -11,6 +12,7 @@ Capco\AppBundle\Entity\Project:
     title: project-2
     slug: project-2
     authors: ['@pa2']
+    creator: '@pa2'
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 2
   project3:
@@ -18,6 +20,7 @@ Capco\AppBundle\Entity\Project:
     title: project-proposals
     slug: project-proposals
     authors: ['@pa3']
+    creator: '@pa3'
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 2
   projectDebate:
@@ -25,5 +28,6 @@ Capco\AppBundle\Entity\Project:
     title: Projet Débat
     slug: project-debate
     authors: ['@pa4']
+    creator: '@pa4'
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 2

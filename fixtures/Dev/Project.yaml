@@ -2,6 +2,7 @@ Capco\AppBundle\Entity\Project:
     p1:
         id: 'project1'
         title: Croissance, innovation, disruption
+        creator: '@user4'
         projectType: '@projectType3'
         Cover: '@MediaProject1'
         video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
@@ -17,6 +18,7 @@ Capco\AppBundle\Entity\Project:
     p2:
         id: 'project2'
         title: Stratégie technologique de l'Etat et services publics
+        creator: '@user4'
         projectType: '@projectType2'
         Cover: '@MediaProject2'
         themes: ['@theme1', '@theme3']
@@ -27,6 +29,7 @@ Capco\AppBundle\Entity\Project:
     p3:
         id: 'project3'
         title: Transformation numérique des relations
+        creator: '@user4'
         projectType: '@projectType3'
         themes: ['@theme2', '@theme3']
         visibility: 2
@@ -36,6 +39,7 @@ Capco\AppBundle\Entity\Project:
     p4:
         id: 'project4'
         title: Projet vide
+        creator: '@user4'
         projectType: '@projectType2'
         themes: ['@theme2', '@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
@@ -45,6 +49,7 @@ Capco\AppBundle\Entity\Project:
     p5:
         id: 'project5'
         title: Projet de loi Renseignement
+        creator: '@user2'
         projectType: '@projectType2'
         Cover: '@MediaProject1'
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
@@ -58,6 +63,7 @@ Capco\AppBundle\Entity\Project:
     p6:
         id: 'project6'
         title: Budget Participatif Rennes
+        creator: '@userWelcomattic'
         projectType: '@projectType4'
         themes: ['@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
@@ -68,6 +74,7 @@ Capco\AppBundle\Entity\Project:
     p7:
         id: 'project7'
         title: Dépot avec selection vote budget
+        creator: '@user4'
         projectType: '@projectType4'
         themes: ['@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
@@ -77,6 +84,7 @@ Capco\AppBundle\Entity\Project:
     p8:
         id: 'project8'
         title: Projet avec questionnaire
+        creator: '@userWelcomattic'
         projectType: '@projectType7'
         themes: ['@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
@@ -86,6 +94,7 @@ Capco\AppBundle\Entity\Project:
     p9:
         id: 'project9'
         title: Appel à projets
+        creator: '@user1'
         projectType: '@projectType1'
         themes: []
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
@@ -95,6 +104,7 @@ Capco\AppBundle\Entity\Project:
     p10:
         id: 'project10'
         title: Dépôt avec selection vote simple
+        creator: '@user4'
         projectType: '@projectType4'
         themes: ['@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
@@ -104,6 +114,7 @@ Capco\AppBundle\Entity\Project:
     p11:
         id: 'project11'
         title: Budget avec vote limité
+        creator: '@user4'
         projectType: '@projectType4'
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
         updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
@@ -112,6 +123,7 @@ Capco\AppBundle\Entity\Project:
     p12:
         id: 'project12'
         title: Projet sans étapes participatives
+        creator: '@user4'
         projectType: '@projectType2'
         Cover: '@MediaProject4'
         themes: ['@theme2']
@@ -122,6 +134,7 @@ Capco\AppBundle\Entity\Project:
     p13:
         id: 'project13'
         title: Projet avec une étape de participation en continue
+        creator: '@user3'
         projectType: '@projectType4'
         themes: ['@theme1']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
@@ -131,6 +144,7 @@ Capco\AppBundle\Entity\Project:
     p14:
         id: 'project14'
         title: Projet à venir
+        creator: '@user4'
         projectType: '@projectType2'
         themes: ['@theme1']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
@@ -140,6 +154,7 @@ Capco\AppBundle\Entity\Project:
     p15:
         id: 'project15'
         title: BP avec vote classement
+        creator: '@user4'
         projectType: '@projectType4'
         themes: []
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
@@ -149,6 +164,7 @@ Capco\AppBundle\Entity\Project:
     p16:
         id: 'project16'
         title: Le P16 un projet à base de riz
+        creator: '@user4'
         projectType: '@projectType4'
         themes: ['@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
@@ -158,6 +174,7 @@ Capco\AppBundle\Entity\Project:
     p17:
         id: 'ProjectAccessibleForMeOnly'
         title: Project pour La Force (visible par mauriau seulement)
+        creator: '@userMaxime'
         projectType: '@projectType4'
         themes: ['@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
@@ -167,6 +184,7 @@ Capco\AppBundle\Entity\Project:
     p18:
         id: 'ProjectAccessibleForAdminOnly'
         title: Qui doit conquérir le monde ? | Visible par les admins seulement
+        creator: '@userMaxime'
         projectType: '@projectType2'
         themes: ['@theme2']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
@@ -176,6 +194,7 @@ Capco\AppBundle\Entity\Project:
     p19:
         id: 'ProjectAccessibleForMeOnlyByAdmin'
         title: Project pour la création de la capCoBeer (visible par admin seulement)
+        creator: '@user4'
         projectType: '@projectType8'
         themes: ['@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
@@ -185,6 +204,7 @@ Capco\AppBundle\Entity\Project:
     p20:
         id: 'ProjectWithCustomAccess'
         title: Un avenir meilleur pour les nains de jardins (custom access)
+        creator: '@user4'
         projectType: '@projectType7'
         themes: ['@theme2']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
@@ -195,6 +215,7 @@ Capco\AppBundle\Entity\Project:
     p21:
         id: 'project21'
         title: Questions/Responses
+        creator: '@user4'
         projectType: '@projectType4'
         themes: []
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
@@ -204,6 +225,7 @@ Capco\AppBundle\Entity\Project:
     p22:
         id: 'externalProject'
         title: Projet externe
+        creator: '@userWelcomattic'
         projectType: '@projectType4'
         themes: []
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
@@ -218,6 +240,7 @@ Capco\AppBundle\Entity\Project:
     p23:
         id: 'externalProjectWithoutCounter'
         title: Projet externe sans compteur
+        creator: '@user4'
         themes: []
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
         updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
@@ -228,6 +251,7 @@ Capco\AppBundle\Entity\Project:
     p24:
         id: 'projectGroup2'
         title: Projet pour le group2
+        creator: '@user4'
         themes: []
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
         updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
@@ -239,6 +263,7 @@ Capco\AppBundle\Entity\Project:
     project25:
         id: 'project25'
         title: Projet avec beaucoup d'opinions
+        creator: '@user4'
         projectType: '@projectType2'
         Cover: '@MediaProject1'
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
@@ -284,6 +309,7 @@ Capco\AppBundle\Entity\Project:
     projectIdf:
         id: 'projectIdf'
         title: Budget Participatif IdF
+        creator: '@user4'
         projectType: '@projectType4'
         createdAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-01-04 12:00:00')))>
@@ -292,6 +318,7 @@ Capco\AppBundle\Entity\Project:
     projectFood:
         id: 'projectFood'
         title: Food project
+        creator: '@userVincent'
         Cover: '@MediaProjectFood'
         projectType: '@projectType4'
         createdAt: <identity((new \DateTime('2020-09-15 12:00:00')))>
@@ -301,6 +328,7 @@ Capco\AppBundle\Entity\Project:
     projectCorona:
         id: 'projectCorona'
         title: Solidarité Covid-19
+        creator: '@user4'
         Cover: '@MediaProjectCorona'
         projectType: '@projectType8'
         createdAt: <identity((new \DateTime('2020-03-16 12:00:00')))>
@@ -310,6 +338,7 @@ Capco\AppBundle\Entity\Project:
     projectExport:
         id: 'projectExport'
         title: Projet pour consolider les exports
+        creator: '@userJpec'
         projectType: '@projectType8'
         createdAt: <identity((new \DateTime('2020-06-16 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-16 12:00:00')))>
@@ -318,6 +347,7 @@ Capco\AppBundle\Entity\Project:
     projectCannabis:
         id: 'projectCannabis'
         title: Débat sur le cannabis
+        creator: '@user4'
         projectType: '@projectType9'
         Cover: '@imageCannabis'
         createdAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
@@ -336,6 +366,7 @@ Capco\AppBundle\Entity\Project:
     projectCafetier:
         id: 'projectCafetier'
         title: Sauvons nos cafés
+        creator: '@user4'
         projectType: '@projectType4'
         createdAt: <identity((new \DateTime('2020-06-18 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-18 12:00:00')))>
@@ -345,6 +376,7 @@ Capco\AppBundle\Entity\Project:
     projectOculusQuest:
         id: 'projectOculusQuest'
         title: Débat sur l'Oculus Quest
+        creator: '@userSpyl'
         projectType: '@projectType9'
         Cover: '@imageOculus'
         createdAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
@@ -354,6 +386,7 @@ Capco\AppBundle\Entity\Project:
     projectConfinement:
         id: 'projectConfinement'
         title: Débat du mois
+        creator: '@userSpyl'
         projectType: '@projectType9'
         Cover: '@imageConfinement'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
@@ -363,6 +396,7 @@ Capco\AppBundle\Entity\Project:
     projectWysiwyg:
         id: 'projectWysiwyg'
         title: Débat Wysiwyg
+        creator: '@userSpyl'
         projectType: '@projectType9'
         Cover: '@imageCereale'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
@@ -372,6 +406,7 @@ Capco\AppBundle\Entity\Project:
     projectArchived:
         id: 'projectArchived'
         title: Projet Archivé
+        creator: '@userSpyl'
         projectType: '@projectType9'
         Cover: '@imageArchived'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
@@ -382,6 +417,7 @@ Capco\AppBundle\Entity\Project:
     projectIdf3:
         id: 'projectIdf3'
         title: Budget Participatif IdF 3
+        creator: '@user4'
         projectType: '@projectType4'
         createdAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
         updatedAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
@@ -391,6 +427,7 @@ Capco\AppBundle\Entity\Project:
     projectWithOwner:
         id: 'projectWithOwner'
         owner: '@userTheo'
+        creator: '@userTheo'
         title: Projet avec administrateur de projet
         projectType: '@projectType2'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
@@ -400,6 +437,7 @@ Capco\AppBundle\Entity\Project:
     projectWithAnonymousQuestionnaire:
         id: 'projectWithAnonymousQuestionnaire'
         owner: '@user1'
+        creator: '@user1'
         title: Projet avec questionnaire anonyme
         projectType: '@projectType7'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
@@ -409,6 +447,7 @@ Capco\AppBundle\Entity\Project:
     projectWithPhoneVerifiedRequirement:
         id: 'projectWithPhoneVerifiedRequirement'
         owner: '@user1'
+        creator: '@user1'
         title: Projet condition requise SMS
         projectType: '@projectType4'
         createdAt: <identity((new \DateTime('2017-03-19 13:00:00')))>

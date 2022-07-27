@@ -21,7 +21,6 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use function Clue\StreamFilter\fun;
 
 class ProjectPersister
 {
@@ -61,7 +60,7 @@ class ProjectPersister
             throw new UserError('You must specify at least one author.');
         }
 
-        $project = (new Project())->setOwner($viewer);
+        $project = (new Project())->setOwner($viewer)->setCreator($viewer);
         $previousDistricts = [];
         if (!empty($arguments['restrictedViewerGroups'])) {
             $arguments['restrictedViewerGroups'] = array_map(function ($groupGlobalId) {
@@ -86,7 +85,7 @@ class ProjectPersister
             $previousDistricts = $project->getProjectDistrictPositionersIds();
         }
 
-        if(!empty($arguments['districts'])) {
+        if (!empty($arguments['districts'])) {
             $arguments['districts'] = array_map(function ($districtGlobalId) {
                 return GlobalId::fromGlobalId($districtGlobalId)['id'];
             }, $arguments['districts']);

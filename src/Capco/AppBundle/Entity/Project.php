@@ -18,6 +18,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectHeaderType;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\AddressableTrait;
+use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\LocalizableTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
@@ -45,6 +46,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Project implements IndexableInterface, TimeRangeable, Ownerable
 {
     use AddressableTrait;
+    use CreatableTrait;
     use DateHelperTrait;
     use LocalizableTrait;
     use MetaDescriptionCustomCodeTrait;

@@ -66,7 +66,7 @@ class CreateProjectMutation implements MutationInterface
             throw new UserError('You must specify at least one author.');
         }
 
-        $project = (new Project())->setOwner($viewer);
+        $project = (new Project())->setOwner($viewer)->setCreator($viewer);
         if ($viewer->isOnlyProjectAdmin()) {
             $project->setVisibility(ProjectVisibilityMode::VISIBILITY_ME);
         }
