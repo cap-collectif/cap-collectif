@@ -168,27 +168,29 @@ const ProposalFollowButton = ({ proposal: proposalFragment }: Props) => {
                 }}>
                 <Flex direction="column" ml={2}>
                   <b>
-                    <FormattedMessage id="complete" />
+                    <FormattedMessage id="complete" tagName="b" />
                   </b>
                   <FormattedMessage id="updates-news-new-contributions-votes-and-subscriptions" />
                 </Flex>
               </Menu.OptionItem>
             </Menu.OptionGroup>
             <Menu.Item
-              as="a"
-              href="#"
+              border="none"
+              bg="white"
+              margin="0 !important"
+              _hover={{
+                textDecoration: 'underline',
+              }}
               className="proposal__unfollow"
               id={`proposal-unfollow-btn-${proposal.id}`}
               onClick={() => {
                 if (proposal.viewerIsFollowing) {
                   return UnfollowProposalMutation.commit({
                     input: { proposalId: proposal.id },
-                  }).then(() => {
-                    return true;
                   });
                 }
               }}>
-              <FormattedMessage id="unfollow" />{' '}
+              {intl.formatMessage({ id: 'unfollow' })}
             </Menu.Item>
           </Menu.List>
         </Menu>

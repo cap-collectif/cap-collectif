@@ -265,25 +265,39 @@ Array [
           className="sc-bdvvtL gKiHgp"
         >
           <b>
-            complete
+            <b>
+              complete
+            </b>
           </b>
           updates-news-new-contributions-votes-and-subscriptions
         </div>
       </button>
     </div>
-    <a
-      className="sc-bdvvtL jjwgeI cap-menu__item proposal__unfollow"
-      href="#"
+    <button
+      className="sc-bdvvtL hpVkFX cap-menu__item proposal__unfollow"
       id="proposal-unfollow-btn-proposal1"
-      loop={false}
+      onBlurCapture={[Function]}
       onClick={[Function]}
-      orientation="vertical"
+      onClickCapture={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyPressCapture={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseDownCapture={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      role="menuitem"
+      tabIndex={0}
       type="button"
-      wrap={false}
     >
-      unfollow
-       
-    </a>
+      <p
+        className="sc-bdvvtL ijWykn cap-text"
+      >
+        unfollow
+      </p>
+    </button>
   </div>,
   <div
     aria-label="vote.popover.title"
@@ -655,25 +669,39 @@ Array [
           className="sc-bdvvtL gKiHgp"
         >
           <b>
-            complete
+            <b>
+              complete
+            </b>
           </b>
           updates-news-new-contributions-votes-and-subscriptions
         </div>
       </button>
     </div>
-    <a
-      className="sc-bdvvtL jjwgeI cap-menu__item proposal__unfollow"
-      href="#"
+    <button
+      className="sc-bdvvtL hpVkFX cap-menu__item proposal__unfollow"
       id="proposal-unfollow-btn-proposal1"
-      loop={false}
+      onBlurCapture={[Function]}
       onClick={[Function]}
-      orientation="vertical"
+      onClickCapture={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyPressCapture={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseDownCapture={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      role="menuitem"
+      tabIndex={0}
       type="button"
-      wrap={false}
     >
-      unfollow
-       
-    </a>
+      <p
+        className="sc-bdvvtL ijWykn cap-text"
+      >
+        unfollow
+      </p>
+    </button>
   </div>,
   <div
     aria-label="vote.popover.title"
@@ -1045,25 +1073,39 @@ Array [
           className="sc-bdvvtL gKiHgp"
         >
           <b>
-            complete
+            <b>
+              complete
+            </b>
           </b>
           updates-news-new-contributions-votes-and-subscriptions
         </div>
       </button>
     </div>
-    <a
-      className="sc-bdvvtL jjwgeI cap-menu__item proposal__unfollow"
-      href="#"
+    <button
+      className="sc-bdvvtL hpVkFX cap-menu__item proposal__unfollow"
       id="proposal-unfollow-btn-proposal1"
-      loop={false}
+      onBlurCapture={[Function]}
       onClick={[Function]}
-      orientation="vertical"
+      onClickCapture={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyPressCapture={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseDownCapture={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      role="menuitem"
+      tabIndex={0}
       type="button"
-      wrap={false}
     >
-      unfollow
-       
-    </a>
+      <p
+        className="sc-bdvvtL ijWykn cap-text"
+      >
+        unfollow
+      </p>
+    </button>
   </div>,
   <div
     aria-label="vote.popover.title"
