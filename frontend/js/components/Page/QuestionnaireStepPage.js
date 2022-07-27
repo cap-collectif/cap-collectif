@@ -18,6 +18,8 @@ import ScrollToTop from '~/components/Utils/ScrollToTop';
 import { QuestionnaireStepPageContext, type Context } from './QuestionnaireStepPage.context';
 import CookieMonster from '~/CookieMonster';
 import QuestionnairePage from '../Questionnaire/QuestionnairePage';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import StepEvents from '~/components/Steps/StepEvents';
 
 export type PropsNotConnected = {|
   +initialQuestionnaireId: ?string,
@@ -64,6 +66,7 @@ const Component = ({
   dataPrefetch: any,
 }) => {
   const intl = useIntl();
+  const hasFeatureFlagCalendar = useFeatureFlag('calendar');
 
   React.useEffect(() => {
     insertCustomCode(props?.questionnaire?.step?.customCode);
@@ -78,6 +81,9 @@ const Component = ({
       const { step } = questionnaire;
       return (
         <>
+          {step && step?.events?.totalCount > 0 && hasFeatureFlagCalendar && (
+            <StepEvents step={step} />
+          )}
           {step?.state === 'CLOSED' ? ( // We keep for now these "old style" alerts
             <div className="alert alert-info alert-dismissible block" role="alert">
               <p>
@@ -178,6 +184,10 @@ export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated 
                   startAt
                 }
                 customCode
+                events(orderBy: { field: START_AT, direction: DESC }) {
+                  totalCount
+                }
+                ...StepEvents_step
               }
             }
             ...QuestionnaireReplyPage_questionnaire @arguments(isAuthenticated: $isAuthenticated)

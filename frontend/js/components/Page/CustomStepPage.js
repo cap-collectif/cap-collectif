@@ -6,6 +6,8 @@ import { insertCustomCode } from '~/utils/customCode';
 import type { CustomStepPageQuery as CustomStepPageQueryType } from '~relay/CustomStepPageQuery.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 import DatesInterval from '../Utils/DatesInterval';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import StepEvents from '~/components/Steps/StepEvents';
 
 type Props = {| +stepId: string |};
 
@@ -21,6 +23,10 @@ const QUERY = graphql`
           endAt
         }
         customCode
+        ...StepEvents_step
+        events(orderBy: { field: START_AT, direction: DESC }) {
+          totalCount
+        }
       }
     }
   }
@@ -35,6 +41,7 @@ refresh this page
 */
 export const CustomStepPage = ({ stepId }: Props) => {
   const { state } = useLocation();
+  const hasFeatureFlagCalendar = useFeatureFlag('calendar');
   const data = useLazyLoadQuery<CustomStepPageQueryType>(QUERY, {
     stepId: state?.stepId || stepId,
   });
@@ -51,22 +58,25 @@ export const CustomStepPage = ({ stepId }: Props) => {
   const { title, body, timeRange } = customStep;
 
   return (
-    <>
-      <section className="section--alt">
-        <div className="container" style={{ paddingTop: 48 }}>
-          <h2 className="h2">{title}</h2>
-          {timeRange?.startAt && (
-            <div className="mb-30 project__step-dates">
-              <i className="cap cap-calendar-2-1 mr-10" />
-              <DatesInterval startAt={timeRange.startAt} endAt={timeRange.endAt} fullDay />
-            </div>
-          )}
-          <div className="block">
-            <WYSIWYGRender value={body} />
+    <section className="section--alt">
+      <div className="container">
+        {customStep.events && customStep.events.totalCount > 0 && hasFeatureFlagCalendar && (
+          <StepEvents step={customStep} />
+        )}
+
+        <h2 className="h2">{title}</h2>
+        {timeRange?.startAt && (
+          <div className="mb-30 project__step-dates">
+            <i className="cap cap-calendar-2-1 mr-10" />
+            <DatesInterval startAt={timeRange.startAt} endAt={timeRange.endAt} fullDay />
           </div>
+        )}
+
+        <div className="block">
+          <WYSIWYGRender value={body} />
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

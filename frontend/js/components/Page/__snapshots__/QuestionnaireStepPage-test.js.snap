@@ -106,6 +106,38 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         "name": "customCode",
                         "storageKey": null,
                       },
+                      Object {
+                        "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "orderBy",
+                            "value": Object {
+                              "direction": "DESC",
+                              "field": "START_AT",
+                            },
+                          },
+                        ],
+                        "concreteType": "EventConnection",
+                        "kind": "LinkedField",
+                        "name": "events",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "events(orderBy:{\\"direction\\":\\"DESC\\",\\"field\\":\\"START_AT\\"})",
+                      },
+                      Object {
+                        "args": null,
+                        "kind": "FragmentSpread",
+                        "name": "StepEvents_step",
+                      },
                     ],
                     "storageKey": null,
                   },
@@ -156,7 +188,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
         "type": "Query",
       },
-      "hash": "f0318556b5d4971ae6fd1f82e98dbe5a",
+      "hash": "ffd50d3e7e01fe0f2c95a8a248c30da4",
       "kind": "Request",
       "operation": Object {
         "argumentDefinitions": Array [
@@ -272,6 +304,33 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                       },
                       Object {
                         "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "orderBy",
+                            "value": Object {
+                              "direction": "DESC",
+                              "field": "START_AT",
+                            },
+                          },
+                        ],
+                        "concreteType": "EventConnection",
+                        "kind": "LinkedField",
+                        "name": "events",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "events(orderBy:{\\"direction\\":\\"DESC\\",\\"field\\":\\"START_AT\\"})",
+                      },
+                      Object {
+                        "alias": null,
                         "args": null,
                         "kind": "ScalarField",
                         "name": "footer",
@@ -302,6 +361,151 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": Array [
+                              Object {
+                                "kind": "Literal",
+                                "name": "orderBy",
+                                "value": Object {
+                                  "direction": "DESC",
+                                  "field": "START_AT",
+                                },
+                              },
+                            ],
+                            "concreteType": "EventConnection",
+                            "kind": "LinkedField",
+                            "name": "events",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "EventEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Event",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "User",
+                                        "kind": "LinkedField",
+                                        "name": "author",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "username",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "guestListEnabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "TimeRange",
+                                        "kind": "LinkedField",
+                                        "name": "timeRange",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "startAt",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "endAt",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "GoogleMapsAddress",
+                                        "kind": "LinkedField",
+                                        "name": "googleMapsAddress",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "json",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": "events(orderBy:{\\"direction\\":\\"DESC\\",\\"field\\":\\"START_AT\\"})",
+                          },
                           Object {
                             "alias": null,
                             "args": null,
@@ -1713,7 +1917,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "6c70b67e8e1b2c007cf866b1507abeae",
+        "cacheID": "e4f471ee58740d8a8c9fb135d0fd6607",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -1735,6 +1939,10 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           startAt
         }
         customCode
+        events(orderBy: {field: START_AT, direction: DESC}) {
+          totalCount
+        }
+        ...StepEvents_step
       }
     }
     ...QuestionnaireReplyPage_questionnaire_39ngnn
@@ -1752,6 +1960,25 @@ fragment DeleteReplyModal_reply on Reply {
   __isReply: __typename
   __typename
   id
+}
+
+fragment ProjectEventPreview_event on Event {
+  id
+  title
+  url
+  author {
+    username
+    id
+  }
+  guestListEnabled
+  timeRange {
+    startAt
+    endAt
+  }
+  googleMapsAddress {
+    __typename
+    ...TagCity_address
+  }
 }
 
 fragment QuestionnairePage_query_2uEJPD on Query {
@@ -1993,6 +2220,20 @@ fragment RequirementsFormLegacy_step_39ngnn on RequirementStep {
   }
 }
 
+fragment StepEvents_step on Step {
+  __isStep: __typename
+  id
+  events(orderBy: {field: START_AT, direction: DESC}) {
+    totalCount
+    edges {
+      node {
+        id
+        ...ProjectEventPreview_event
+      }
+    }
+  }
+}
+
 fragment StepPageFooter_step on QuestionnaireStep {
   footer
 }
@@ -2027,6 +2268,10 @@ fragment StepPageHeader_step on Step {
       }
     }
   }
+}
+
+fragment TagCity_address on GoogleMapsAddress {
+  json
 }
 
 fragment UnpublishedLabel_publishable on Publishable {
@@ -2188,6 +2433,38 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         "name": "customCode",
                         "storageKey": null,
                       },
+                      Object {
+                        "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "orderBy",
+                            "value": Object {
+                              "direction": "DESC",
+                              "field": "START_AT",
+                            },
+                          },
+                        ],
+                        "concreteType": "EventConnection",
+                        "kind": "LinkedField",
+                        "name": "events",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "events(orderBy:{\\"direction\\":\\"DESC\\",\\"field\\":\\"START_AT\\"})",
+                      },
+                      Object {
+                        "args": null,
+                        "kind": "FragmentSpread",
+                        "name": "StepEvents_step",
+                      },
                     ],
                     "storageKey": null,
                   },
@@ -2238,7 +2515,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
         "type": "Query",
       },
-      "hash": "f0318556b5d4971ae6fd1f82e98dbe5a",
+      "hash": "ffd50d3e7e01fe0f2c95a8a248c30da4",
       "kind": "Request",
       "operation": Object {
         "argumentDefinitions": Array [
@@ -2354,6 +2631,33 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                       },
                       Object {
                         "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "orderBy",
+                            "value": Object {
+                              "direction": "DESC",
+                              "field": "START_AT",
+                            },
+                          },
+                        ],
+                        "concreteType": "EventConnection",
+                        "kind": "LinkedField",
+                        "name": "events",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "events(orderBy:{\\"direction\\":\\"DESC\\",\\"field\\":\\"START_AT\\"})",
+                      },
+                      Object {
+                        "alias": null,
                         "args": null,
                         "kind": "ScalarField",
                         "name": "footer",
@@ -2384,6 +2688,151 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": Array [
+                              Object {
+                                "kind": "Literal",
+                                "name": "orderBy",
+                                "value": Object {
+                                  "direction": "DESC",
+                                  "field": "START_AT",
+                                },
+                              },
+                            ],
+                            "concreteType": "EventConnection",
+                            "kind": "LinkedField",
+                            "name": "events",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "EventEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Event",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "User",
+                                        "kind": "LinkedField",
+                                        "name": "author",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "username",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "guestListEnabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "TimeRange",
+                                        "kind": "LinkedField",
+                                        "name": "timeRange",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "startAt",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "endAt",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "GoogleMapsAddress",
+                                        "kind": "LinkedField",
+                                        "name": "googleMapsAddress",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "json",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": "events(orderBy:{\\"direction\\":\\"DESC\\",\\"field\\":\\"START_AT\\"})",
+                          },
                           Object {
                             "alias": null,
                             "args": null,
@@ -3795,7 +4244,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "6c70b67e8e1b2c007cf866b1507abeae",
+        "cacheID": "e4f471ee58740d8a8c9fb135d0fd6607",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -3817,6 +4266,10 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           startAt
         }
         customCode
+        events(orderBy: {field: START_AT, direction: DESC}) {
+          totalCount
+        }
+        ...StepEvents_step
       }
     }
     ...QuestionnaireReplyPage_questionnaire_39ngnn
@@ -3834,6 +4287,25 @@ fragment DeleteReplyModal_reply on Reply {
   __isReply: __typename
   __typename
   id
+}
+
+fragment ProjectEventPreview_event on Event {
+  id
+  title
+  url
+  author {
+    username
+    id
+  }
+  guestListEnabled
+  timeRange {
+    startAt
+    endAt
+  }
+  googleMapsAddress {
+    __typename
+    ...TagCity_address
+  }
 }
 
 fragment QuestionnairePage_query_2uEJPD on Query {
@@ -4075,6 +4547,20 @@ fragment RequirementsFormLegacy_step_39ngnn on RequirementStep {
   }
 }
 
+fragment StepEvents_step on Step {
+  __isStep: __typename
+  id
+  events(orderBy: {field: START_AT, direction: DESC}) {
+    totalCount
+    edges {
+      node {
+        id
+        ...ProjectEventPreview_event
+      }
+    }
+  }
+}
+
 fragment StepPageFooter_step on QuestionnaireStep {
   footer
 }
@@ -4109,6 +4595,10 @@ fragment StepPageHeader_step on Step {
       }
     }
   }
+}
+
+fragment TagCity_address on GoogleMapsAddress {
+  json
 }
 
 fragment UnpublishedLabel_publishable on Publishable {
