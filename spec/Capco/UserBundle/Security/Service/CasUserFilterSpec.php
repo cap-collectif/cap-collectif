@@ -2,7 +2,7 @@
 
 namespace spec\Capco\UserBundle\Security\Service;
 
-use Capco\UserBundle\Security\Service\CasUserFilter;
+use Capco\UserBundle\Security\Service\CapebUserFilter;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use GuzzleHttp\Client;
@@ -10,7 +10,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 
-class CasUserFilterSpec extends ObjectBehavior
+class CapebUserFilterSpec extends ObjectBehavior
 {
     public function it_should_return_false_for_authorized_user()
     {
@@ -41,7 +41,7 @@ class CasUserFilterSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(CasUserFilter::class);
+        $this->shouldHaveType(CapebUserFilter::class);
     }
 
     public function let(LoggerInterface $logger)

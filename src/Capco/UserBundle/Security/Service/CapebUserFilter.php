@@ -11,10 +11,10 @@ use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 
 /**
- * Class CasUserFilter
+ * Class CapebUserFilter
  *
  */
-class CasUserFilter
+class CapebUserFilter
 {
     const COLLABORATOR_LABEL = 'C';
     const ELECTED_LABEL = 'E';
@@ -37,9 +37,11 @@ class CasUserFilter
         }
 
         try {
-            $response = $this->client->post( $this->url, [
+
+            $response = $this->client->post($this->url, [
                 'headers' => [
-                    'Content-Type' => 'application/xml'
+                    'Content-Type' => 'application/xml',
+                    'Authorization' => 'Basic ' . getEnv('SYMFONY_CAPCAPEB_CAS_USER') . ':' . getEnv('SYMFONY_CAPCAPEB_CAS_PASSWORD'),
                 ],
                 'verify' => false, // deactivate ssl verification because server certificate not valid put it true otherwise
                 'body' => '<IdentificationRequest>

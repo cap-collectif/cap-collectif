@@ -5,7 +5,7 @@ namespace Capco\UserBundle\Security\Core\User;
 use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Security\Service\CasUserFilter;
+use Capco\UserBundle\Security\Service\CapebUserFilter;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -19,19 +19,19 @@ class CasUserProvider implements UserProviderInterface
     private UserManager $userManager;
     private GroupMutation $groupMutation;
 
-    private CasUserFilter $casUserFilter;
+    private CapebUserFilter $capebUserFilter;
 
     private LoggerInterface $logger;
 
     public function __construct(
         UserManager $manager,
         GroupMutation $groupMutation,
-        CasUserFilter $casUserFilter,
+        CapebUserFilter $capebUserFilter,
         LoggerInterface $logger
     ) {
         $this->userManager = $manager;
         $this->groupMutation = $groupMutation;
-        $this->casUserFilter = $casUserFilter;
+        $this->capebUserFilter = $capebUserFilter;
         $this->logger = $logger;
     }
 
@@ -40,19 +40,20 @@ class CasUserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($casId): UserInterface
     {
-        if (
-            'capcapeb' === getenv('SYMFONY_INSTANCE_NAME') &&
-            $this->casUserFilter->isNotAuthorizedCasUserProfile($casId)
-        ) {
-            $this->logger->error('Access denied for ' . $casId . ' as invalidate cas user');
-
-            throw new CasAuthenticationException(
-                'Vous n\'êtes pas autorisé à accéder à cet espace, désolé. Pour toute question, contactez votre administrateur réseau'
-            );
-        }
         $user = $this->userManager->findUserBy(['casId' => $casId]);
 
         if (!$user) {
+            if (
+                'capcapeb' === getenv('SYMFONY_INSTANCE_NAME') &&
+                $this->capebUserFilter->isNotAuthorizedCasUserProfile($casId)
+            ) {
+                $this->logger->error('Access denied for ' . $casId . ' as invalidate cas user');
+    
+                throw new CasAuthenticationException(
+                    'Vous n\'êtes pas autorisé à accéder à cet espace, désolé. Pour toute question, contactez votre administrateur réseau'
+                );
+            }
+
             $user = $this->userManager->createUser();
             $user->setCasId($casId);
             $user->setUsername($casId);

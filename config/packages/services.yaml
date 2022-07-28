@@ -359,7 +359,7 @@ services:
     Capco\UserBundle\Security\Core\User\CasUserProvider:
         public: true
 
-    Capco\UserBundle\Security\Service\CasUserFilter:
+    Capco\UserBundle\Security\Service\CapebUserFilter:
         autowire: true
         arguments:
             $url: '%cas_verify_url_profile%'

@@ -8,7 +8,7 @@ use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Core\User\CasUserProvider;
-use Capco\UserBundle\Security\Service\CasUserFilter;
+use Capco\UserBundle\Security\Service\CapebUserFilter;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 
@@ -105,8 +105,8 @@ class CasUserProviderSpec extends ObjectBehavior
         $this->shouldHaveType(CasUserProvider::class);
     }
 
-    public function let(UserManager $userManager, GroupMutation $groupMutation, CasUserFilter $casUserFilter, LoggerInterface $logger)
+    public function let(UserManager $userManager, GroupMutation $groupMutation, CapebUserFilter $capebUserFilter, LoggerInterface $logger)
     {
-        $this->beConstructedWith($userManager, $groupMutation, $casUserFilter, $logger);
+        $this->beConstructedWith($userManager, $groupMutation, $capebUserFilter, $logger);
     }
 }
