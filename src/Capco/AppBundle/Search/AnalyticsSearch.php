@@ -259,7 +259,8 @@ class AnalyticsSearch
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['published' => true]));
+            ->addFilter(new Query\Term(['published' => true]))
+            ->addFilter(new Query\Term(['isAccounted' => true]));
 
         if ($projectId) {
             $boolQuery->addFilter(

@@ -1923,7 +1923,7 @@ Object {
       "values": Array [
         Object {
           "key": "2014-12-01T00:00:00.000Z",
-          "totalCount": 114,
+          "totalCount": 109,
         },
         Object {
           "key": "2015-01-01T00:00:00.000Z",
@@ -2123,7 +2123,7 @@ Object {
         },
         Object {
           "key": "2019-02-01T00:00:00.000Z",
-          "totalCount": 3,
+          "totalCount": 1,
         },
         Object {
           "key": "2019-03-01T00:00:00.000Z",
