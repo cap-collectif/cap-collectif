@@ -64,6 +64,7 @@ class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
                 $emailingCampaign->getSenderEmail()
         );
         $emailingCampaign->setOwner($viewer);
+        $emailingCampaign->setCreator($viewer);
 
         return $emailingCampaign;
     }

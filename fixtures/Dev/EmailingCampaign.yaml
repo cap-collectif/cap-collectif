@@ -39,6 +39,7 @@ Capco\AppBundle\Entity\EmailingCampaign:
         senderEmail: 'assistance@cap-collectif.com'
         senderName: 'Théo qui assiste'
         owner: '@userTheo'
+        creator: '@userTheo'
         project: '@projectWithOwner'
         status: 'DRAFT'
         object: 'Vous vous souvenez de Théo ?'

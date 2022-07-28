@@ -63,7 +63,7 @@ class CreateMailingListMutation implements MutationInterface
         $mailingList->setUsers($users);
         $mailingList->setOwner($viewer);
         $mailingList->setProject($project);
-        $mailingList->setOwner($viewer);
+        $mailingList->setCreator($viewer);
 
         return $mailingList;
     }
