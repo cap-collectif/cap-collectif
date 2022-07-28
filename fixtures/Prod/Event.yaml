@@ -3,6 +3,8 @@ Capco\AppBundle\Entity\Event:
         enabled: true
         startAt: <(new \DateTime('2030-01-01'))>
         author: '@user1'
+        creator: '@user1'
+        owner: '@user1'
         media: '@MediaProject3'
         guestListEnabled: true
         projects: ['@p1']

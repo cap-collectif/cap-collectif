@@ -40,6 +40,7 @@ class CreatePostMutation implements MutationInterface
         $data['Authors'] = $input->offsetGet('authors');
 
         $post->setOwner($viewer);
+        $post->setCreator($viewer);
 
         LocaleUtils::indexTranslations($data);
 

@@ -9,6 +9,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2032-03-01')))>
         endAt: <identity((new \DateTime('2032-03-10')))>
         author: '@user5'
+        creator: '@user5'
+        owner: '@user5'
         guestListEnabled: true
         projects: ['@p1']
         themes: ['@theme1', '@theme2']
@@ -26,6 +28,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2030-03-10')))>
         endAt: <identity((new \DateTime('2032-06-15')))>
         author: '@user2'
+        creator: '@user2'
+        owner: '@user2'
         projects: ['@p1']
         themes: ['@theme1']
         createdAt: <identity((new \DateTime('2015-01-02')))>
@@ -41,6 +45,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2032-06-10')))>
         endAt: <identity((new \DateTime('2035-03-16')))>
         author: '@user3'
+        creator: '@user3'
+        owner: '@user3'
         media: '@MediaProject3'
         guestListEnabled: true
         projects: ['@p1']
@@ -56,6 +62,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2032-01-01')))>
         endAt: <identity((new \DateTime('2045-03-10')))>
         author: '@user4'
+        creator: '@user4'
+        owner: '@user4'
         media: '@MediaIdea1'
         createdAt: <identity((new \DateTime('2015-01-04')))>
         measurable: true
@@ -71,6 +79,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <(new \DateTime('2014-02-11'))>
         endAt: <(new \DateTime('2014-02-12'))>
         author: '@user5'
+        creator: '@user5'
+        owner: '@user5'
         createdAt: <identity((new \DateTime('2015-01-05')))>
         addressJson: '[{"address_components":[{"long_name":"101","short_name":"101","types":["street_number"]},{"long_name":"Rue d\u0027Anvers","short_name":"Rue d\u0027Anvers","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69007","short_name":"69007","types":["postal_code"]}],"formatted_address":"101 Rue d\u0027Anvers, 69007 Lyon, France","geometry":{"location":{"lat":45.7479199,"lng":4.840617},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.7492688802915,"lng":4.841965980291502},"southwest":{"lat":45.7465709197085,"lng":4.839268019708498}}},"partial_match":true,"place_id":"ChIJ1eTj80bq9EcRrNwEr2-V3kU","plus_code":{"compound_code":"PRXR+56 Lyon, France","global_code":"8FQ6PRXR+56"},"types":["street_address"]}]'
     event6:
@@ -84,6 +94,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2032-02-01')))>
         endAt: <identity((new \DateTime('2040-02-02')))>
         author: '@user1'
+        creator: '@user1'
+        owner: '@user1'
         createdAt: <identity((new \DateTime('2015-01-06')))>
         addressJson: '[{"address_components":[{"long_name":"103","short_name":"103","types":["street_number"]},{"long_name":"Grande Rue de la Croix-Rousse","short_name":"Grande Rue de la Croix-Rousse","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69004","short_name":"69004","types":["postal_code"]}],"formatted_address":"103 Grande Rue de la Croix-Rousse, 69004 Lyon, France","geometry":{"location":{"lat":45.7817345,"lng":4.8305811},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.78308348029149,"lng":4.831930080291502},"southwest":{"lat":45.7803855197085,"lng":4.829232119708498}}},"place_id":"ChIJjTMnvR_r9EcRYmk8W0oMmC0","plus_code":{"compound_code":"QRJJ+M6 Lyon, France","global_code":"8FQ6QRJJ+M6"},"types":["street_address"]}]'
     event7:
@@ -92,6 +104,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2029-01-01')))>
         endAt: <identity((new \DateTime('2029-05-05')))>
         author: '@user2'
+        creator: '@user2'
+        owner: '@user2'
         createdAt: <identity((new \DateTime('2015-01-07')))>
     event8:
         id: 'event8'
@@ -99,6 +113,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2029-03-03')))>
         endAt: <identity((new \DateTime('2029-09-09')))>
         author: '@user3'
+        creator: '@user3'
+        owner: '@user3'
         createdAt: <identity((new \DateTime('2015-01-08')))>
         steps: ['@collectstepIdf']
     event9:
@@ -107,6 +123,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2030-11-03')))>
         endAt: <identity((new \DateTime('2030-11-08')))>
         author: '@user4'
+        creator: '@user4'
+        owner: '@user4'
         createdAt: <identity((new \DateTime('2015-01-09')))>
         commentable: false
         steps: ['@collectstepIdf']
@@ -116,6 +134,8 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2030-11-11')))>
         endAt: <identity((new \DateTime('2030-11-13')))>
         author: '@user5'
+        creator: '@user5'
+        owner: '@user5'
         createdAt: <identity((new \DateTime('2015-01-10')))>
         steps: ['@collectstepIdf']
     event11:
@@ -124,18 +144,24 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2030-11-13')))>
         endAt: <identity((new \DateTime('2030-11-14')))>
         author: '@user1'
+        creator: '@user1'
+        owner: '@user1'
         createdAt: <identity((new \DateTime('2015-01-11')))>
     event12:
         id: evenementPresentSansDateDeFin
         enabled: true
         startAt: <(new \DateTime('2019-08-07'))>
         author: '@user2'
+        creator: '@user2'
+        owner: '@user2'
         createdAt: <identity((new \DateTime('2015-01-12')))>
     event13:
         id: evenementPasseSansDateDeFin
         enabled: true
         startAt: <identity((new \DateTime('2018-11-14')))>
         author: '@user3'
+        creator: '@user3'
+        owner: '@user3'
         projects: ['@p1']
         themes: ['@theme1', '@theme2']
         createdAt: <identity((new \DateTime('2015-01-13')))>
@@ -144,6 +170,8 @@ Capco\AppBundle\Entity\Event:
         enabled: true
         startAt: <identity((new \DateTime('2024-11-14')))>
         author: '@user4'
+        creator: '@user4'
+        owner: '@user4'
         zipCode: '07400'
         city: Meysse
         address: 1 rue chevrière
@@ -153,6 +181,8 @@ Capco\AppBundle\Entity\Event:
         id: eventCreateByAUserReviewAwaiting
         startAt: <identity((new \DateTime('2024-01-14')))>
         author: '@user5'
+        creator: '@user5'
+        owner: '@user5'
         createdAt: <identity((new \DateTime('2015-01-14')))>
         addressJson: '[{"address_components" : [ {"long_name" : "1","short_name" : "1","types" : [ "street_number" ] }, {"long_name" : "Rue Chevrière","short_name" : "Rue Chevrière","types" : [ "route" ] }, {"long_name" : "Meysse","short_name" : "Meysse","types" : [ "locality", "political" ] }, {"long_name" : "Ardèche","short_name" : "Ardèche","types" : [ "administrative_area_level_2", "political" ] }, {"long_name" : "Auvergne-Rhône-Alpes","short_name" : "Auvergne-Rhône-Alpes","types" : [ "administrative_area_level_1", "political" ] }, {"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ] }, {"long_name" : "07400","short_name" : "07400","types" : [ "postal_code" ] }],"formatted_address" : "1 Rue Chevrière, 07400 Meysse, France","geometry" : { "location" : {"lat" : 44.609786,"lng" : 4.7250767 }, "location_type" : "ROOFTOP", "viewport" : {"northeast" : { "lat" : 44.6111349802915, "lng" : 4.726425680291502},"southwest" : { "lat" : 44.6084370197085, "lng" : 4.723727719708497} }},"place_id" : "ChIJxdE9Avk_tRIR1LmllEhge_g","plus_code" : { "compound_code" : "JP5G+W2 Meysse, France", "global_code" : "8FP6JP5G+W2"},"types" : ["street_address"]}]'
         review: '@eventReview1'
@@ -162,6 +192,8 @@ Capco\AppBundle\Entity\Event:
         enabled: true
         startAt: <identity((new \DateTime('2024-04-14')))>
         author: '@user5'
+        creator: '@user5'
+        owner: '@user5'
         createdAt: <identity((new \DateTime('2015-04-14')))>
         addressJson: '[{"address_components" : [ {"long_name" : "1","short_name" : "1","types" : [ "street_number" ] }, {"long_name" : "Rue Chevrière","short_name" : "Rue Chevrière","types" : [ "route" ] }, {"long_name" : "Meysse","short_name" : "Meysse","types" : [ "locality", "political" ] }, {"long_name" : "Ardèche","short_name" : "Ardèche","types" : [ "administrative_area_level_2", "political" ] }, {"long_name" : "Auvergne-Rhône-Alpes","short_name" : "Auvergne-Rhône-Alpes","types" : [ "administrative_area_level_1", "political" ] }, {"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ] }, {"long_name" : "07400","short_name" : "07400","types" : [ "postal_code" ] }],"formatted_address" : "1 Rue Chevrière, 07400 Meysse, France","geometry" : { "location" : {"lat" : 44.609786,"lng" : 4.7250767 }, "location_type" : "ROOFTOP", "viewport" : {"northeast" : { "lat" : 44.6111349802915, "lng" : 4.726425680291502},"southwest" : { "lat" : 44.6084370197085, "lng" : 4.723727719708497} }},"place_id" : "ChIJxdE9Avk_tRIR1LmllEhge_g","plus_code" : { "compound_code" : "JP5G+W2 Meysse, France", "global_code" : "8FP6JP5G+W2"},"types" : ["street_address"]}]'
         review: '@eventReview2'
@@ -169,6 +201,8 @@ Capco\AppBundle\Entity\Event:
         id: eventCreateByAUserReviewRefused
         startAt: <identity((new \DateTime('2024-06-14')))>
         author: '@user5'
+        creator: '@user5'
+        owner: '@user5'
         createdAt: <identity((new \DateTime('2015-06-14')))>
         addressJson: '[{"address_components":[{"long_name":"103","short_name":"103","types":["street_number"]},{"long_name":"Grande Rue de la Croix-Rousse","short_name":"Grande Rue de la Croix-Rousse","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69004","short_name":"69004","types":["postal_code"]}],"formatted_address":"103 Grande Rue de la Croix-Rousse, 69004 Lyon, France","geometry":{"location":{"lat":45.7817345,"lng":4.8305811},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.78308348029149,"lng":4.831930080291502},"southwest":{"lat":45.7803855197085,"lng":4.829232119708498}}},"place_id":"ChIJjTMnvR_r9EcRYmk8W0oMmC0","plus_code":{"compound_code":"QRJJ+M6 Lyon, France","global_code":"8FQ6QRJJ+M6"},"types":["street_address"]}]'
         review: '@eventReview3'
@@ -184,6 +218,8 @@ Capco\AppBundle\Entity\Event:
         enabled: true
         startAt: <identity((new \DateTime('2024-04-14')))>
         author: '@english_user'
+        creator: '@english_user'
+        owner: '@english_user'
         link: http://www.england.uk
         createdAt: <identity((new \DateTime('2015-04-14')))>
         addressJson: '[{"address_components" : [ {"long_name" : "1","short_name" : "1","types" : [ "street_number" ] }, {"long_name" : "Rue Chevrière","short_name" : "Rue Chevrière","types" : [ "route" ] }, {"long_name" : "Meysse","short_name" : "Meysse","types" : [ "locality", "political" ] }, {"long_name" : "Ardèche","short_name" : "Ardèche","types" : [ "administrative_area_level_2", "political" ] }, {"long_name" : "Auvergne-Rhône-Alpes","short_name" : "Auvergne-Rhône-Alpes","types" : [ "administrative_area_level_1", "political" ] }, {"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ] }, {"long_name" : "07400","short_name" : "07400","types" : [ "postal_code" ] }],"formatted_address" : "1 Rue Chevrière, 07400 Meysse, France","geometry" : { "location" : {"lat" : 44.609786,"lng" : 4.7250767 }, "location_type" : "ROOFTOP", "viewport" : {"northeast" : { "lat" : 44.6111349802915, "lng" : 4.726425680291502},"southwest" : { "lat" : 44.6084370197085, "lng" : 4.723727719708497} }},"place_id" : "ChIJxdE9Avk_tRIR1LmllEhge_g","plus_code" : { "compound_code" : "JP5G+W2 Meysse, France", "global_code" : "8FP6JP5G+W2"},"types" : ["street_address"]}]'
@@ -192,6 +228,8 @@ Capco\AppBundle\Entity\Event:
         id: eventCreateByAUserReviewRefusedEn
         startAt: <identity((new \DateTime('2024-06-14')))>
         author: '@english_user'
+        creator: '@english_user'
+        owner: '@english_user'
         link: http://www.england.uk
         createdAt: <identity((new \DateTime('2015-06-14')))>
         addressJson: '[{"address_components":[{"long_name":"103","short_name":"103","types":["street_number"]},{"long_name":"Grande Rue de la Croix-Rousse","short_name":"Grande Rue de la Croix-Rousse","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69004","short_name":"69004","types":["postal_code"]}],"formatted_address":"103 Grande Rue de la Croix-Rousse, 69004 Lyon, France","geometry":{"location":{"lat":45.7817345,"lng":4.8305811},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.78308348029149,"lng":4.831930080291502},"southwest":{"lat":45.7803855197085,"lng":4.829232119708498}}},"place_id":"ChIJjTMnvR_r9EcRYmk8W0oMmC0","plus_code":{"compound_code":"QRJJ+M6 Lyon, France","global_code":"8FQ6QRJJ+M6"},"types":["street_address"]}]'
@@ -205,6 +243,8 @@ Capco\AppBundle\Entity\Event:
         id: eventReviewRefusedWithoutComment
         startAt: <identity((new \DateTime('2024-06-14')))>
         author: '@user5'
+        creator: '@user5'
+        owner: '@user5'
         createdAt: <identity((new \DateTime('2015-06-14')))>
         addressJson: '[{"address_components":[{"long_name":"103","short_name":"103","types":["street_number"]},{"long_name":"Grande Rue de la Croix-Rousse","short_name":"Grande Rue de la Croix-Rousse","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69004","short_name":"69004","types":["postal_code"]}],"formatted_address":"103 Grande Rue de la Croix-Rousse, 69004 Lyon, France","geometry":{"location":{"lat":45.7817345,"lng":4.8305811},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.78308348029149,"lng":4.831930080291502},"southwest":{"lat":45.7803855197085,"lng":4.829232119708498}}},"place_id":"ChIJjTMnvR_r9EcRYmk8W0oMmC0","plus_code":{"compound_code":"QRJJ+M6 Lyon, France","global_code":"8FQ6QRJJ+M6"},"types":["street_address"]}]'
         review: '@eventReview6'
@@ -213,6 +253,7 @@ Capco\AppBundle\Entity\Event:
         startAt: <identity((new \DateTime('2020-05-28')))>
         author: '@userTheo'
         owner: '@userTheo'
+        creator: '@userTheo'
         createdAt: <identity((new \DateTime('2020-05-28')))>
         enabled: true
         projects: ['@projectIdf']

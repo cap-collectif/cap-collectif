@@ -61,6 +61,7 @@ class AddEventMutation extends AbstractEventMutation
             self::checkRegistrationTypes($values);
             $event = new Event();
             $event->setOwner($viewer);
+            $event->setCreator($viewer);
             $this->setAuthor($event, $values, $viewer);
             LocaleUtils::indexTranslations($values);
             $this->setProjects($event, $viewer, $values);

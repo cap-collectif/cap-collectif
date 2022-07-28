@@ -10,6 +10,7 @@ use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
+use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
@@ -55,6 +56,7 @@ class Event implements
     Ownerable
 {
     use AuthorableTrait;
+    use CreatableTrait;
     use BodyUsingJoditWysiwygTrait;
     use CommentableWithoutCounterTrait;
     use CustomCodeTrait;

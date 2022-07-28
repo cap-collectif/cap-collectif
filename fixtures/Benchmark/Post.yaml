@@ -8,6 +8,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
         publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
         updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+        creator: '@voter2'
         Authors:
             - '@voter2'
         media: null

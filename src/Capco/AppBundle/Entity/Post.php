@@ -8,6 +8,7 @@ use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
@@ -37,6 +38,7 @@ class Post implements
     use CommentableTrait;
     use CustomCodeTrait;
     use OwnerableTrait;
+    use CreatableTrait;
     use SonataTranslatableTrait;
     use TimestampableTrait;
     use TranslatableTrait;

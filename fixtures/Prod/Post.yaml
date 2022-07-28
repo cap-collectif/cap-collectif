@@ -5,6 +5,7 @@ Capco\AppBundle\Entity\Post:
         body: <stripslashes('\<p><text(1500)></p><br><p><text(1500)></p>\')>
         isPublished: true
         publishedAt: <(new \DateTime('now'))>
+        creator: '@user1'
         Authors:
             - '@user1'
         media: '@MediaProject2'

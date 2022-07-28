@@ -104,7 +104,7 @@ class AddEventsMutation extends AbstractEventMutation
                 }
 
                 if ($this->validateDates($eventInput['startAt'], $eventInput['endAt'])) {
-                    $event = (new Event())->setAuthor($author);
+                    $event = (new Event())->setAuthor($author)->setOwner($viewer)->setCreator($viewer);
 
                     if (\is_array($eventInput['projects']) && !empty($eventInput['projects'])) {
                         foreach ($eventInput['projects'] as $key => $projectTitle) {

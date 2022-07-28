@@ -3,6 +3,7 @@ Capco\AppBundle\Entity\Post:
         id: 'post<current()>'
         isPublished: true
         publishedAt: <identity((new \DateTime('2018-11-03')))>
+        creator: '@user1'
         Authors:
             - '@user1'
             - '@user5'
@@ -14,6 +15,7 @@ Capco\AppBundle\Entity\Post:
         id: 'post<current()>'
         isPublished: true
         publishedAt: <identity((new \DateTime('2018-11-04')))>
+        creator: '@user2'
         Authors:
             - '@user2'
         media: null
@@ -24,6 +26,7 @@ Capco\AppBundle\Entity\Post:
         id: 'post9'
         isPublished: true
         publishedAt: <identity((new \DateTime('2018-11-05 00:00:00')))>
+        creator: '@user5'
         Authors:
             - '@user5'
         media: null
@@ -33,6 +36,7 @@ Capco\AppBundle\Entity\Post:
         id: 'post10'
         isPublished: true
         publishedAt: <identity((new \DateTime('2018-11-05 00:00:01')))>
+        creator: '@user5'
         Authors:
             - '@user5'
         media: null
@@ -43,6 +47,7 @@ Capco\AppBundle\Entity\Post:
         id: 'post<current()>'
         isPublished: true
         publishedAt: <identity((new \DateTime('2019-01-03 00:00:00')))>
+        creator: '@user1'
         Authors:
             - '@user1'
         themes: ['@theme1', '@theme2']
@@ -53,6 +58,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2019-01-01 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        creator: '@user4'
         Authors:
             - '@user4'
         themes: ['@theme1', '@theme2']
@@ -65,6 +71,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        creator: '@userIan'
         Authors:
             - '@userIan'
         media: null
@@ -76,6 +83,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        creator: '@userKiroule'
         Authors:
             - '@userKiroule'
         media: null
@@ -87,6 +95,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        creator: '@userIan'
         Authors:
             - '@userIan'
         media: null
@@ -98,6 +107,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        creator: '@user5'
         Authors:
             - '@user5'
         media: null
@@ -109,6 +119,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        creator: '@userIan'
         Authors:
             - '@userIan'
         media: null
@@ -120,6 +131,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        creator: '@userTheo'
         Authors:
             - '@userTheo'
         media: null
@@ -131,6 +143,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2020-01-08 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        creator: '@userTheo'
         Authors:
             - '@userTheo'
         media: null
@@ -142,6 +155,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        creator: '@userTheo'
         Authors:
             - '@userTheo'
         media: null
