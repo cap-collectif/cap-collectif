@@ -411,6 +411,7 @@ Capco\AppBundle\Entity\ProposalForm:
         title: Formulaire du project avec administrateurs de projets
         description: Je suis une belle description
         owner: '@userTheo'
+        creator: '@userTheo'
         step: '@collectStepProjectWithOwner'
         reference: 23
         usingDescription: true
@@ -448,6 +449,7 @@ Capco\AppBundle\Entity\ProposalForm:
         title: Formulaire avec propriétaire
         description: J'appartiens à userTheo
         owner: '@userTheo'
+        creator: '@userTheo'
         reference: 25
     proposalFormPhoneRequired:
         id: proposalFormPhoneRequired
@@ -455,6 +457,7 @@ Capco\AppBundle\Entity\ProposalForm:
         description: form lié à une étape avec une condition requise SMS
         step: '@collectSPhoneVerifRequire'
         owner: '@user1'
+        creator: '@user1'
         reference: 26
     proposalFormSmsVote:
         id: proposalFormSmsVote
@@ -462,5 +465,6 @@ Capco\AppBundle\Entity\ProposalForm:
         description: form lié à une étape avec vote par sms
         step: '@collectstepSmsVoteIdf3'
         owner: '@user1'
+        creator: '@user1'
         reference: 27
         usingCategories: true

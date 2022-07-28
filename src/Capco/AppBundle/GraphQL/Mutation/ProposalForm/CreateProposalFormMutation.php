@@ -36,6 +36,7 @@ class CreateProposalFormMutation implements MutationInterface
         }
 
         $proposalForm->setOwner($viewer);
+        $proposalForm->setCreator($viewer);
 
         $this->em->persist($proposalForm);
         $this->em->flush();

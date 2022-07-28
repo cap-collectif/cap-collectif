@@ -31,6 +31,8 @@ class CreateQuestionnaireMutation implements MutationInterface
     public function __invoke(Argument $input, User $viewer): array
     {
         $questionnaire = new Questionnaire();
+        $questionnaire->setCreator($viewer);
+        $questionnaire->setOwner($viewer);
         $questionnaire->setDescriptionUsingJoditWysiwyg(true);
 
         $form = $this->formFactory->create(QuestionnaireCreateType::class, $questionnaire);

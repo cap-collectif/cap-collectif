@@ -156,6 +156,7 @@ Capco\AppBundle\Entity\Questionnaire:
         type: 'QUESTIONNAIRE'
         privateResult: true
         owner: '@userTheo'
+        creator: '@userTheo'
         createdAt: <(new \DateTime('2019-09-11'))>
         notificationsConfiguration: '@questionnaireNotificationConfigurationProjectWithOwner'
     questionnaireProjectWithOwner2:
@@ -169,6 +170,7 @@ Capco\AppBundle\Entity\Questionnaire:
         type: 'QUESTIONNAIRE'
         privateResult: true
         owner: '@userTheo'
+        creator: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
         notificationsConfiguration: '@questionnaireNotificationConfigurationProjectWithOwner2'
     qAvecDesConditionsRequises:
@@ -193,6 +195,7 @@ Capco\AppBundle\Entity\Questionnaire:
         type: 'QUESTIONNAIRE'
         privateResult: true
         owner: '@user1'
+        creator: '@user1'
         createdAt: <(new \DateTime('2020-09-11'))>
         notificationsConfiguration: '@qNotifConfigAnonymousQuestionnaire'
     questionnaireOwnerWithoutStep:
@@ -205,6 +208,7 @@ Capco\AppBundle\Entity\Questionnaire:
         type: 'QUESTIONNAIRE'
         privateResult: true
         owner: '@userTheo'
+        creator: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
         notificationsConfiguration: '@questionnaireNotificationConfigurationOwnerWithtoutStep'
     questionnaireProjectOwnerAnonymous:
@@ -217,5 +221,6 @@ Capco\AppBundle\Entity\Questionnaire:
         type: 'QUESTIONNAIRE'
         privateResult: true
         owner: '@userTheo'
+        creator: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
         notificationsConfiguration: '@questionnaireNotificationConfigurationOwnerAnonymous'

@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
+use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
@@ -49,6 +50,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
 {
     use DescriptionUsingJoditWysiwygTrait;
     use OwnerableTrait;
+    use CreatableTrait;
     use ReferenceTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
