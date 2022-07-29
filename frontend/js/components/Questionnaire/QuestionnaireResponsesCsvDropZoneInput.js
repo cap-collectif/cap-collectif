@@ -7,7 +7,6 @@ import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import Tooltip from '../Utils/Tooltip';
 import FileUpload from '../Form/FileUpload';
-import { CSV_MAX_UPLOAD_SIZE } from '~/components/Event/Admin/AdminImportEventsCsvInput';
 
 type FileUploadFieldProps = {
   ...FieldProps,
@@ -24,6 +23,8 @@ type FileUploadFieldProps = {
   type: string,
   oldMember: string,
 };
+
+const CSV_MAX_UPLOAD_SIZE = 80000;
 
 export const QuestionnaireResponsesCsvDropZoneInput = ({
   input,

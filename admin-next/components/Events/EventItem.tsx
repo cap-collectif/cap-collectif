@@ -1,0 +1,178 @@
+import * as React from 'react';
+import { graphql, useFragment } from 'react-relay';
+import { useIntl } from 'react-intl';
+import type { EventItem_event$key } from '@relay/EventItem_event.graphql';
+import {
+    ButtonQuickAction,
+    CapUIIcon,
+    CapUIIconSize,
+    Flex,
+    Link,
+    Table,
+    Text,
+    Tooltip,
+    useTheme,
+} from '@cap-collectif/ui';
+import downloadCSV from '@utils/download-csv';
+import EventModalConfirmationDelete from './EventModalConfirmationDelete';
+import {EventAffiliations} from "./EventList";
+
+type Props = {
+    event: EventItem_event$key;
+    isAdmin: boolean;
+    affiliations: EventAffiliations;
+};
+
+const FRAGMENT = graphql`
+    fragment EventItem_event on Event {
+        id
+        title
+        adminUrl
+        reviewStatus
+        deletedAt
+        projects {
+            id
+            title
+            url
+        }
+        themes {
+            id
+            title
+            url
+        }
+        timeRange {
+            startAt
+            endAt
+        }
+        createdAt
+        owner {
+            username
+        }
+        guestListEnabled
+        exportParticipantsUrl
+        ...EventModalConfirmationDelete_event
+    }
+`;
+const EventItem: React.FC<Props> = ({ event: eventFragment, isAdmin, affiliations }) => {
+    const event = useFragment(FRAGMENT, eventFragment);
+    const intl = useIntl();
+    const project = event.projects[0];
+    const { colors } = useTheme();
+
+    return (
+        <>
+            <Table.Td>
+                {event.reviewStatus === 'DELETED' ? (
+                    event.title && event.title?.split('').length > 128 ? (
+                        <Tooltip label={event.title}>
+                            <Text truncate={128}>{event.title}</Text>
+                        </Tooltip>
+                    ) : (
+                        <Text truncate={128}>{event.title}</Text>
+                    )
+                ) : event.title && event.title?.split('').length > 128 ? (
+                    <Tooltip label={event.title}>
+                        <Link truncate={128} href={event.adminUrl}>
+                            {event.title}
+                        </Link>
+                    </Tooltip>
+                ) : (
+                    <Link truncate={128} href={event.adminUrl}>
+                        {event.title}
+                    </Link>
+                )}
+            </Table.Td>
+
+            <Table.Td>
+                <Flex direction="column">
+                    {project && project.title && project.url && (
+                        <Link href={project.url}>{project.title}</Link>
+                    )}
+                    <Flex direction="row" color="gray.500">
+                        {event.themes.length > 0 &&
+                            event.themes.map((theme, index) => {
+                                if (theme && theme.title && theme.url) {
+                                    if (index + 1 < event.themes.length) {
+                                        return (
+                                            <React.Fragment key={theme.id}>
+                                                <Link
+                                                    href={theme?.url}
+                                                >
+                                                    {theme?.title}
+                                                </Link>
+                                                <span>, &nbsp; </span>
+                                            </React.Fragment>
+                                        );
+                                    }
+                                    return (
+                                        <Link
+                                            key={theme.id}
+                                            href={theme?.url}
+                                        >
+                                            {theme?.title}
+                                        </Link>
+                                    );
+                                }
+                            })}
+                    </Flex>
+                </Flex>
+            </Table.Td>
+
+            <Table.Td>
+                {event.timeRange && (
+                    <Text fontSize={3}>
+                        {event.timeRange.startAt &&
+                            intl.formatDate(event.timeRange.startAt, {
+                                day: 'numeric',
+                                month: 'numeric',
+                                year: 'numeric',
+                            })}{' '}
+                        -{' '}
+                        {event.timeRange.endAt &&
+                            intl.formatDate(event.timeRange.endAt, {
+                                day: 'numeric',
+                                month: 'numeric',
+                                year: 'numeric',
+                            })}
+                    </Text>
+                )}
+            </Table.Td>
+            {isAdmin && (
+                <Table.Td>
+                    {event.owner && <Text fontSize={3}>{event.owner.username}</Text>}
+                </Table.Td>
+            )}
+            <Table.Td>
+                {event.createdAt &&
+                    intl.formatDate(event.createdAt, {
+                        day: 'numeric',
+                        month: 'numeric',
+                        year: 'numeric',
+                    })}
+            </Table.Td>
+            <Table.Td visibleOnHover>
+                <Flex direction="row" justify="space-evenly">
+                    {!!event.exportParticipantsUrl && event.guestListEnabled && (
+                        <ButtonQuickAction
+                            icon={CapUIIcon.Download}
+                            size={CapUIIconSize.Md}
+                            variantColor="blue"
+                            label={intl.formatMessage({ id: 'global.download' })}
+                            href={event?.exportParticipantsUrl || ''}
+                            onClick={async () => {
+                                if (event.exportParticipantsUrl) {
+                                    await downloadCSV(event.exportParticipantsUrl, intl);
+                                }
+                            }}
+                        />
+                    )}
+                    {event.deletedAt === null && (
+                        <EventModalConfirmationDelete event={event} affiliations={affiliations} />
+                    )}
+                </Flex>
+            </Table.Td>
+        </>
+    );
+};
+
+export default EventItem;

@@ -190,7 +190,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     <SidebarLink text="admin.label.post" href="/admin/capco/app/post/list" />
                   )}
                   {features.calendar && (
-                    <SidebarLink text="admin.label.events" href="/admin/capco/app/event/list" />
+                    <SidebarLink text="admin.label.events" href="/admin-next/events" />
                   )}
                   {isAdmin && (
                     <SidebarLink text="admin.label.video" href="/admin/capco/app/video/list" />
@@ -339,10 +339,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     text="admin.label.pages.blog"
                     href="/admin/settings/pages.blog/list"
                   />
-                  <SidebarLink
-                    text="admin.label.pages.events"
-                    href="/admin/settings/pages.events/list"
-                  />
+                  <SidebarLink text="admin.label.pages.events" href="/admin-next/events" />
                   <SidebarLink
                     text="admin.label.pages.themes"
                     href="/admin/settings/pages.themes/list"

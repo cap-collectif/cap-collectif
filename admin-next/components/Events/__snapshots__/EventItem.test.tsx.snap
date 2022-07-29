@@ -1,0 +1,311 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventItem /> should render correctly 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
+    >
+      GrenobleWeb2015
+    </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL eRYtWO"
+    >
+      <a
+        className="sc-bdvvtL jtXLLM cap-link"
+        href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
+      >
+        Croissance, innovation, disruption
+      </a>
+      <div
+        className="sc-bdvvtL fIfDCJ"
+      />
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <p
+      className="sc-bdvvtL dPVCFK cap-text"
+    >
+      10/06/2032
+       
+      -
+       
+      16/03/2035
+    </p>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    -
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    03/01/2015
+  </td>,
+  <td
+    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL frIHrh"
+    >
+      <button
+        aria-describedby="id-g"
+        aria-label="global.download"
+        className="sc-bdvvtL flFGQt cap-buttonQuickAction"
+        href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        tabIndex={0}
+      >
+        <svg
+          className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.572 1.572 0 01-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 10-2.424 0v1.855a4 4 0 003.995 4h15.768a4 4 0 004-4V18.15a1.212 1.212 0 00-1.217-1.212z"
+          />
+          <path
+            d="M11.879 0A1.94 1.94 0 009.94 1.939v9.066a.25.25 0 01-.25.25H7.031a.97.97 0 00-.732 1.606l4.848 5.576a.969.969 0 001.464 0l4.848-5.576a.97.97 0 00-.732-1.606h-2.659a.25.25 0 01-.25-.25V1.939A1.94 1.94 0 0011.879 0z"
+          />
+        </svg>
+      </button>
+      <div
+        className="cap-tooltip-container"
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onTransitionEnd={[Function]}
+        role="tooltip"
+        style={
+          Object {
+            "display": "none",
+            "left": "100%",
+            "pointerEvents": "none",
+            "position": "fixed",
+            "top": "100%",
+            "zIndex": 1000,
+          }
+        }
+      />
+    </div>
+  </td>,
+]
+`;
+
+exports[`<EventItem /> should render correctly with deleted event 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
+    >
+      GrenobleWeb2015
+    </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL eRYtWO"
+    >
+      <a
+        className="sc-bdvvtL jtXLLM cap-link"
+        href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
+      >
+        Croissance, innovation, disruption
+      </a>
+      <div
+        className="sc-bdvvtL fIfDCJ"
+      />
+    </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <p
+      className="sc-bdvvtL dPVCFK cap-text"
+    >
+      10/06/2032
+       
+      -
+       
+      16/03/2035
+    </p>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    -
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    03/01/2015
+  </td>,
+  <td
+    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL frIHrh"
+    >
+      <button
+        aria-describedby="id-g"
+        aria-label="global.download"
+        className="sc-bdvvtL flFGQt cap-buttonQuickAction"
+        href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        tabIndex={0}
+      >
+        <svg
+          className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.572 1.572 0 01-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 10-2.424 0v1.855a4 4 0 003.995 4h15.768a4 4 0 004-4V18.15a1.212 1.212 0 00-1.217-1.212z"
+          />
+          <path
+            d="M11.879 0A1.94 1.94 0 009.94 1.939v9.066a.25.25 0 01-.25.25H7.031a.97.97 0 00-.732 1.606l4.848 5.576a.969.969 0 001.464 0l4.848-5.576a.97.97 0 00-.732-1.606h-2.659a.25.25 0 01-.25-.25V1.939A1.94 1.94 0 0011.879 0z"
+          />
+        </svg>
+      </button>
+      <div
+        className="cap-tooltip-container"
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onTransitionEnd={[Function]}
+        role="tooltip"
+        style={
+          Object {
+            "display": "none",
+            "left": "100%",
+            "pointerEvents": "none",
+            "position": "fixed",
+            "top": "100%",
+            "zIndex": 1000,
+          }
+        }
+      />
+    </div>
+  </td>,
+]
+`;

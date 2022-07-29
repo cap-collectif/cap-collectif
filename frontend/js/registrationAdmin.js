@@ -12,14 +12,12 @@ import UserAdminCreateButtonApp from '~/startup/UserAdminCreateButtonApp';
 import ContactAdminPageApp from '~/startup/ContactAdminPageApp';
 import RegistrationAdminApp from '~/startup/RegistrationAdminApp';
 import ProposalAdminPageApp from '~/startup/ProposalAdminPageApp';
-import AdminImportEventsApp from '~/startup/AdminImportEventsApp';
 import UserAdminPageApp from '~/startup/UserAdminPageApp';
 import MapAdminPageApp from '~/startup/MapAdminPageApp';
 import LocaleAdminPageApp from '~/startup/LocaleAdminPageApp';
 import ProjectAdminApp from '~/startup/ProjectAdminApp';
 import ProjectAdminAppDeprecated from '~/startup/ProjectAdminAppDeprecated';
 import ProjectDistrictAdminApp from '~/startup/ProjectDistrictAdminApp';
-import AdminExportButtonApp from '~/startup/AdminExportButtonApp';
 import EventAdminEditPageApp from '~/startup/EventAdminEditPageApp';
 import ProjectExternalProjectAdminAppDeprecated from '~/startup/ProjectExternalProjectAdminAppDeprecated';
 import FontAdminPageApp from '~/startup/FontAdminPageApp';
@@ -39,7 +37,6 @@ import HomePageProjectsSectionConfigurationApp from '~/startup/HomePageProjectsS
 import SidebarApp from '~/startup/SidebarApp';
 import AdminPostListApp from '~/startup/AdminPostListApp';
 import AdminPostCreateFormApp from '~/startup/AdminPostCreateFormApp';
-import AdminEventListApp from '~/startup/AdminEventListApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -57,7 +54,6 @@ ReactOnRails.register({
   ContactAdminPageApp,
   RegistrationAdminApp,
   ProposalAdminPageApp,
-  AdminImportEventsApp,
   UserAdminPageApp,
   EventFormPageApp,
   ProposalCreateFusionButtonApp,
@@ -66,7 +62,6 @@ ReactOnRails.register({
   ProjectAdminApp,
   ProjectAdminAppDeprecated,
   ProjectDistrictAdminApp,
-  AdminExportButtonApp,
   EventAdminEditPageApp,
   ProjectExternalProjectAdminAppDeprecated,
   FontAdminPageApp,
@@ -81,5 +76,4 @@ ReactOnRails.register({
   SidebarApp,
   AdminPostListApp,
   AdminPostCreateFormApp,
-  AdminEventListApp,
 });

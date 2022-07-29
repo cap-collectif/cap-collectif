@@ -80,10 +80,16 @@ class AddEventsMutation extends AbstractEventMutation
             $this->handleAddress($eventInput);
 
             /** @var User $user */
-            $author = $this->userRepo->findOneByEmail($eventInput['authorEmail']);
+            $author = $this->userRepo->findOneByEmail($eventInput['authorEmail'] ?? '');
 
-            $eventInput['startAt'] = $this->parseStringDate($eventInput['startAt']);
+            $eventInput['startAt'] = $eventInput['startAt'] ? $this->parseStringDate($eventInput['startAt']) : null;
             $eventInput['endAt'] = $eventInput['endAt'] ? $this->parseStringDate($eventInput['endAt']) : null;
+
+            if ($eventInput['startAt'] === null) {
+                $brokenDates[] = null;
+            }
+
+            $hasDates = $eventInput['startAt'] && $eventInput['endAt'];
 
             if ($author) {
                 unset($eventInput['authorEmail']);

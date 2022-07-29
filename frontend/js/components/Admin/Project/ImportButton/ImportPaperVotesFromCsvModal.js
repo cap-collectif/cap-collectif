@@ -13,7 +13,6 @@ import Icon, { ICON_NAME as ICON, ICON_SIZE } from '~ds/Icon/Icon';
 import Button from '~ds/Button/Button';
 import type { Uuid } from '~/types';
 import FileUpload from '~/components/Form/FileUpload';
-import { CSV_MAX_UPLOAD_SIZE } from '~/components/Event/Admin/AdminImportEventsCsvInput';
 import UpdatePaperVoteMutation from '~/mutations/UpdatePaperVoteMutation';
 import type { UpdatePaperVoteInput } from '~relay/UpdatePaperVoteMutation.graphql';
 import InfoMessage from '~ds/InfoMessage/InfoMessage';
@@ -29,6 +28,8 @@ import {
 } from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal.utils';
 import type { ProposalType } from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal.utils';
 import { toast } from '~ds/Toast';
+
+const CSV_MAX_UPLOAD_SIZE = 80000;
 
 type Props = {|
   show: boolean,

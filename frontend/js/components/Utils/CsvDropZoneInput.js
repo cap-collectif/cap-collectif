@@ -6,7 +6,6 @@ import { Col, ControlLabel, FormGroup, HelpBlock, Row } from 'react-bootstrap';
 import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import FileUpload from '../Form/FileUpload';
-import { CSV_MAX_UPLOAD_SIZE } from '~/components/Event/Admin/AdminImportEventsCsvInput';
 import InfoMessage from '~ds/InfoMessage/InfoMessage';
 
 type FileUploadFieldProps = {
@@ -21,6 +20,8 @@ type FileUploadFieldProps = {
   disabled: boolean,
   currentFile: ?DropzoneFile,
 };
+
+const CSV_MAX_UPLOAD_SIZE = 80000;
 
 export const CsvDropZoneInput = ({
   input,

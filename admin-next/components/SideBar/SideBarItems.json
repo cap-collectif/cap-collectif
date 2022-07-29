@@ -77,7 +77,7 @@
             },
             {
                 "title": "admin.label.events",
-                "href": "/admin/capco/app/event/list",
+                "href": "/admin-next/events",
                 "rolesRequired": [],
                 "featuresRequired": ["calendar"]
             },

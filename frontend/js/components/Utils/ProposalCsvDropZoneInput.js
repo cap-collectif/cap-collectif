@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { FormGroup } from 'react-bootstrap';
 import { FormattedHTMLMessage, useIntl } from 'react-intl';
 import FileUpload from '../Form/FileUpload';
-import { CSV_MAX_UPLOAD_SIZE } from '~/components/Event/Admin/AdminImportEventsCsvInput';
 import InfoMessage from '~ds/InfoMessage/InfoMessage';
 import Fetcher, { json } from '~/services/Fetcher';
 import Card from '~ds/Card/Card';
@@ -21,6 +20,8 @@ type FileUploadFieldProps = {
   disabled: boolean,
   currentFile: ?{ id: string, name: string, url: string },
 };
+
+const CSV_MAX_UPLOAD_SIZE = 8000000;
 
 export const ProposalCsvDropZoneInput = ({ input, onPostDrop, disabled }: FileUploadFieldProps) => {
   const intl = useIntl();

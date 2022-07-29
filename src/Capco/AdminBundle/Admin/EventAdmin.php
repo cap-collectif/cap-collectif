@@ -64,10 +64,6 @@ class EventAdmin extends AbstractAdmin
 
     public function getTemplate($name)
     {
-    
-        if ('list' === $name) {
-            return 'CapcoAdminBundle:Event:list.html.twig';
-        }
         if ('create' === $name) {
             return 'CapcoAdminBundle:Event:create.html.twig';
         }
