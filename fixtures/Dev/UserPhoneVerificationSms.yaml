@@ -2,5 +2,10 @@ Capco\AppBundle\Entity\UserPhoneVerificationSms:
     userPhoneVerifSmsAlreadyConfirmed:
         id: 'userPhoneVerifSmsAlreadyConfirmed'
         user: '@userWithConfirmedPhone'
-        status: 'approved'
+        status: 'APPROVED'
+        createdAt: <(new \DateTime('2021-12-08 17:01:53'))>
+    userPhoneVerifSmsPending:
+        id: 'userPhoneVerifSmsPending'
+        user: '@user1'
+        status: 'PENDING'
         createdAt: <(new \DateTime('2021-12-08 17:01:53'))>

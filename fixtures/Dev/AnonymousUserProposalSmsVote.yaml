@@ -5,3 +5,9 @@ Capco\AppBundle\Entity\AnonymousUserProposalSmsVote:
         proposal: '@proposalSmsVote1'
         collectStep: '@collectstepSmsVoteIdf3'
         phone: '+33611111111'
+    anonymousUserProposalSmsVotePending:
+        id: 'anonymousUserProposalSmsVotePending'
+        status: 'PENDING'
+        proposal: '@proposalSmsVote1'
+        collectStep: '@collectstepSmsVoteIdf3'
+        phone: '+33611111111'

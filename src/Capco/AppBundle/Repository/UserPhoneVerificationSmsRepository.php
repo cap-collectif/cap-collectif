@@ -14,10 +14,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserPhoneVerificationSmsRepository extends EntityRepository
 {
-    public function findByUserWithinOneMinuteRange(
-        User $user
-    ): array {
-
+    public function findByUserWithinOneMinuteRange(User $user): array
+    {
         $fromDate = (new \DateTime())->modify('-1 minute')->format('Y-m-d H:i:s');
         $toDate = (new \DateTime())->format('Y-m-d H:i:s');
 
@@ -38,8 +36,7 @@ class UserPhoneVerificationSmsRepository extends EntityRepository
         $qb = $this->createQueryBuilder('s')
             ->where('s.user = :user')
             ->orderBy('s.createdAt', 'DESC')
-            ->setParameters(['user' => $user])
-        ;
+            ->setParameters(['user' => $user]);
 
         $results = $qb->getQuery()->getResult();
 
@@ -48,12 +45,13 @@ class UserPhoneVerificationSmsRepository extends EntityRepository
 
     public function countApprovedSms(): int
     {
+        $status = UserPhoneVerificationSms::APPROVED;
+
         return (int) $this->createQueryBuilder('s')
             ->select('COUNT(s.id)')
-            ->where("s.status = 'approved'")
+            ->where('s.status = :status')
+            ->setParameter('status', $status)
             ->getQuery()
             ->getSingleScalarResult();
     }
-
-
 }

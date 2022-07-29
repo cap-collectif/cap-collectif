@@ -18,6 +18,8 @@ class AnonymousUserProposalSmsVote
 {
     use TimestampableTrait;
     use UuidTrait;
+    public const APPROVED = 'APPROVED';
+    public const PENDING = 'PENDING';
 
     /**
      * @ORM\Column(name="phone", nullable=false, type="string")
@@ -76,9 +78,10 @@ class AnonymousUserProposalSmsVote
         return $this->phone;
     }
 
-    public function setPhone(string $phone): AnonymousUserProposalSmsVote
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
         return $this;
     }
 
@@ -86,9 +89,11 @@ class AnonymousUserProposalSmsVote
     {
         return $this->proposal;
     }
-    public function setProposal(?Proposal $proposal): AnonymousUserProposalSmsVote
+
+    public function setProposal(?Proposal $proposal): self
     {
         $this->proposal = $proposal;
+
         return $this;
     }
 
@@ -97,9 +102,10 @@ class AnonymousUserProposalSmsVote
         return $this->selectionStep;
     }
 
-    public function setSelectionStep(?SelectionStep $selectionStep): AnonymousUserProposalSmsVote
+    public function setSelectionStep(?SelectionStep $selectionStep): self
     {
         $this->selectionStep = $selectionStep;
+
         return $this;
     }
 
@@ -108,9 +114,24 @@ class AnonymousUserProposalSmsVote
         return $this->collectStep;
     }
 
-    public function setCollectStep(?CollectStep $collectStep): AnonymousUserProposalSmsVote
+    public function setCollectStep(?CollectStep $collectStep): self
     {
         $this->collectStep = $collectStep;
+
+        return $this;
+    }
+
+    public function setApproved(): self
+    {
+        $this->status = self::APPROVED;
+
+        return $this;
+    }
+
+    public function setPending(): self
+    {
+        $this->status = self::PENDING;
+
         return $this;
     }
 }

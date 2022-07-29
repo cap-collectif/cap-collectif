@@ -18,6 +18,9 @@ class UserPhoneVerificationSms
     use TimestampableTrait;
     use UuidTrait;
 
+    public const APPROVED = 'APPROVED';
+    public const PENDING = 'PENDING';
+
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="userPhoneVerificationSms")
      */
@@ -27,15 +30,7 @@ class UserPhoneVerificationSms
      * @ORM\Column(name="status", nullable=false, type="string")
      */
     private string $status;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
+    
     public function getStatus(): string
     {
         return $this->status;
@@ -63,6 +58,20 @@ class UserPhoneVerificationSms
     public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function setApproved(): self
+    {
+        $this->status = self::APPROVED;
+
+        return $this;
+    }
+
+    public function setPending(): self
+    {
+        $this->status = self::PENDING;
 
         return $this;
     }
