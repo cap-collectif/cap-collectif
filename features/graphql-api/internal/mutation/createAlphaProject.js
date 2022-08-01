@@ -834,7 +834,7 @@ describe('access control', () => {
 
   it('should not create a project when user is a not a project admin', async () => {
     await expect(
-      graphql(CreateAlphaProjectWithOwnerMutation, { input: { ...BASE_PROJECT } }, 'internal_user'),
+      graphql(CreateAlphaProjectWithOwnerMutation, { input: { ...BASE_PROJECT } }, 'internal_saitama'),
     ).rejects.toThrowError('Access denied to this field.');
   });
 });

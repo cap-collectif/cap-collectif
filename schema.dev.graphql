@@ -3110,6 +3110,11 @@ input CreateAlphaProjectInput {
   """The project authors IDs"""
   authors: [ID!]!
 
+  """
+  ID of the owner of the project, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
+
   """The project type ID"""
   projectType: ID
 
@@ -15212,6 +15217,11 @@ input UpdateAlphaProjectInput {
 
   """The project authors IDs"""
   authors: [ID!]!
+
+  """
+  ID of the owner of the project, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
 
   """The project type ID"""
   projectType: ID

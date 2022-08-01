@@ -4,10 +4,9 @@ namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class ProjectVoter extends Voter
+class ProjectVoter extends AbstractOwnerableVoter
 {
     public const VIEW = 'view';
     public const CREATE = 'create';
@@ -68,37 +67,35 @@ class ProjectVoter extends Voter
 
     private static function canView(Project $project, User $viewer): bool
     {
-        return self::isAdminOrOwner($project, $viewer);
+        return self::isAdminOrOwnerOrMember($project, $viewer);
     }
 
     private static function canEdit(Project $project, User $viewer): bool
     {
-        return self::isAdminOrOwner($project, $viewer);
+        return self::isAdminOrOwnerOrMember($project, $viewer);
     }
 
     private static function canCreate(User $viewer): bool
     {
-        return $viewer->isAdmin() || $viewer->isProjectAdmin();
+        return $viewer->isAdmin() ||
+            $viewer->isProjectAdmin() ||
+            self::isMemberOfAnyOrganisation($viewer);
     }
 
     private function canDelete(Project $project, User $viewer): bool
     {
-        return self::isAdminOrOwner($project, $viewer);
+        return self::isAdminOrOwner($project, $viewer) ||
+            self::isAdminOrCreatorInTheOwningOrganisation($project, $viewer);
     }
 
     private static function canDownloadExport(Project $project, User $viewer): bool
     {
-        return self::isAdminOrOwner($project, $viewer);
-    }
-
-    private static function isAdminOrOwner(Project $project, User $viewer): bool
-    {
-        return $viewer->isAdmin() || $project->getOwner() === $viewer;
+        return self::isAdminOrOwnerOrMember($project, $viewer);
     }
 
     private static function canCreateProposalFromBo(Project $project, User $viewer): bool
     {
-        return $viewer->isAdmin() || $viewer === $project->getOwner();
+        return self::isAdminOrOwnerOrMember($project, $viewer);
     }
 
     private static function canDuplicate(User $viewer): bool

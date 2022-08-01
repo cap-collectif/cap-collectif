@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity\Organization;
 
 use Capco\AppBundle\Entity\Interfaces\Author;
-use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Entity\Interfaces\Owner;
@@ -91,6 +90,17 @@ class Organization implements SonataTranslatableInterface, Translatable, Author,
     public function getMembers(): Collection
     {
         return $this->members;
+    }
+
+    public function getMembership(User $user): ?OrganizationMember
+    {
+        foreach ($this->members as $member) {
+            if ($member->getUser() === $user) {
+                return $member;
+            }
+        }
+
+        return null;
     }
 
     public function setMembers(Collection $members): self

@@ -3,7 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Security\CanSetOwner;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
@@ -14,11 +17,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Driver\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\UserBundle\Form\Type\ProjectFormType;
-use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
-use Capco\AppBundle\Repository\ProjectTypeRepository;
 use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -31,18 +32,16 @@ class CreateProjectMutation implements MutationInterface
     private LoggerInterface $logger;
     private ProjectAuthorTransformer $transformer;
     private FormFactoryInterface $formFactory;
-    private UserRepository $userRepository;
-    private ProjectTypeRepository $projectTypeRepository;
+    private GlobalIdResolver $resolver;
     private AuthorizationCheckerInterface $authorizationChecker;
     private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
         LoggerInterface $logger,
-        UserRepository $userRepository,
         FormFactoryInterface $formFactory,
+        GlobalIdResolver $resolver,
         ProjectAuthorTransformer $transformer,
-        ProjectTypeRepository $projectTypeRepository,
         AuthorizationCheckerInterface $authorizationChecker,
         Indexer $indexer
     ) {
@@ -50,8 +49,7 @@ class CreateProjectMutation implements MutationInterface
         $this->logger = $logger;
         $this->transformer = $transformer;
         $this->formFactory = $formFactory;
-        $this->userRepository = $userRepository;
-        $this->projectTypeRepository = $projectTypeRepository;
+        $this->resolver = $resolver;
         $this->authorizationChecker = $authorizationChecker;
         $this->indexer = $indexer;
     }
@@ -66,7 +64,10 @@ class CreateProjectMutation implements MutationInterface
             throw new UserError('You must specify at least one author.');
         }
 
-        $project = (new Project())->setOwner($viewer)->setCreator($viewer);
+        $project = (new Project())->setOwner($this->getOwner($input, $viewer))->setCreator($viewer);
+        if (isset($arguments['owner'])) {
+            unset($arguments['owner']);
+        }
         if ($viewer->isOnlyProjectAdmin()) {
             $project->setVisibility(ProjectVisibilityMode::VISIBILITY_ME);
         }
@@ -125,5 +126,17 @@ class CreateProjectMutation implements MutationInterface
     public function isGranted(): bool
     {
         return $this->authorizationChecker->isGranted(ProjectVoter::CREATE, new Project());
+    }
+
+    private function getOwner(Argument $input, User $viewer): Owner
+    {
+        if ($input->offsetGet('owner')) {
+            $owner = $this->resolver->resolve($input->offsetGet('owner'), $viewer);
+            if ($owner && CanSetOwner::check($owner, $viewer)) {
+                return $owner;
+            }
+        }
+
+        return $viewer;
     }
 }
