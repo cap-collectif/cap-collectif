@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Security\CanSetOwner;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -52,20 +53,14 @@ class CanSetOwnerSpec extends ObjectBehavior
     public function it_should_be_true_for_organisation_member(
         User $viewer,
         Organization $organization,
+        OrganizationMember $memberShip,
         ArrayCollection $members
     ) {
         $viewer
             ->isSuperAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
-        $organization
-            ->getMembers()
-            ->shouldBeCalled()
-            ->willReturn($members);
-        $members
-            ->contains($viewer)
-            ->shouldBeCalled()
-            ->willReturn(true);
+        $organization->getMembership($viewer)->willReturn($memberShip);
 
         $this->check($organization, $viewer)->shouldBe(true);
     }
@@ -79,14 +74,7 @@ class CanSetOwnerSpec extends ObjectBehavior
             ->isSuperAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
-        $organization
-            ->getMembers()
-            ->shouldBeCalled()
-            ->willReturn($members);
-        $members
-            ->contains($viewer)
-            ->shouldBeCalled()
-            ->willReturn(false);
+        $organization->getMembership($viewer)->willReturn(null);
 
         $this->check($organization, $viewer)->shouldBe(false);
     }

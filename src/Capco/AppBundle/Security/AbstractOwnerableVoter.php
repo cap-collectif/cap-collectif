@@ -10,6 +10,29 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 abstract class AbstractOwnerableVoter extends Voter
 {
+    protected static function canView(Ownerable $ownerable, User $viewer): bool
+    {
+        return self::isAdminOrOwnerOrMember($ownerable, $viewer);
+    }
+
+    protected static function canCreate(User $viewer): bool
+    {
+        return $viewer->isAdmin() ||
+            $viewer->isProjectAdmin() ||
+            self::isMemberOfAnyOrganisation($viewer);
+    }
+
+    protected static function canEdit(Ownerable $ownerable, User $viewer): bool
+    {
+        return self::isAdminOrOwnerOrMember($ownerable, $viewer);
+    }
+
+    protected static function canDelete(Ownerable $ownerable, User $viewer): bool
+    {
+        return self::isAdminOrOwner($ownerable, $viewer) ||
+            self::isAdminOrCreatorInTheOwningOrganisation($ownerable, $viewer);
+    }
+
     protected static function isAdminOrOwnerOrMember(Ownerable $ownerable, User $viewer): bool
     {
         return self::isAdminOrOwner($ownerable, $viewer) ||

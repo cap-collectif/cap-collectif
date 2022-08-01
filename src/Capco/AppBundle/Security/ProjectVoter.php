@@ -47,13 +47,13 @@ class ProjectVoter extends AbstractOwnerableVoter
 
         switch ($attribute) {
             case self::VIEW:
-                return $this->canView($subject, $viewer);
+                return self::canView($subject, $viewer);
             case self::EDIT:
-                return $this->canEdit($subject, $viewer);
+                return self::canEdit($subject, $viewer);
             case self::CREATE:
                 return self::canCreate($viewer);
             case self::DELETE:
-                return $this->canDelete($subject, $viewer);
+                return self::canDelete($subject, $viewer);
             case self::EXPORT:
                 return self::canDownloadExport($subject, $viewer);
             case self::CREATE_PROPOSAL_FROM_BO:
@@ -63,29 +63,6 @@ class ProjectVoter extends AbstractOwnerableVoter
         }
 
         return false;
-    }
-
-    private static function canView(Project $project, User $viewer): bool
-    {
-        return self::isAdminOrOwnerOrMember($project, $viewer);
-    }
-
-    private static function canEdit(Project $project, User $viewer): bool
-    {
-        return self::isAdminOrOwnerOrMember($project, $viewer);
-    }
-
-    private static function canCreate(User $viewer): bool
-    {
-        return $viewer->isAdmin() ||
-            $viewer->isProjectAdmin() ||
-            self::isMemberOfAnyOrganisation($viewer);
-    }
-
-    private function canDelete(Project $project, User $viewer): bool
-    {
-        return self::isAdminOrOwner($project, $viewer) ||
-            self::isAdminOrCreatorInTheOwningOrganisation($project, $viewer);
     }
 
     private static function canDownloadExport(Project $project, User $viewer): bool

@@ -162,3 +162,14 @@ Capco\AppBundle\Entity\Post:
         displayedOnBlog: false
         owner: '@userTheo'
         proposals: ['@proposalProjectWithOwner']
+    postWithOrgaMember:
+        id: postWithOrgaMember
+        isPublished: true
+        createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+        Authors:
+            - '@valerieMassonDelmotte'
+        media: null
+        displayedOnBlog: false
+        owner: '@organization2'

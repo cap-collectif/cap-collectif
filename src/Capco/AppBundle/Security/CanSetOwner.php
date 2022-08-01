@@ -18,7 +18,7 @@ class CanSetOwner
             return $viewer === $owner;
         }
         if ($owner instanceof Organization) {
-            return $owner->getMembers()->contains($viewer);
+            return null !== $owner->getMembership($viewer);
         }
 
         throw new \RuntimeException('type of ' . $owner->getUsername() . ' not found');

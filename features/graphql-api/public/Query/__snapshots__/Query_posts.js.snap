@@ -144,6 +144,20 @@ Object {
       ],
     },
     Object {
+      "enTitle": "Article créer par un membre du giec",
+      "frTitle": "Article créer par un membre du giec",
+      "id": "UG9zdDpwb3N0V2l0aE9yZ2FNZW1iZXI=",
+      "title": "Article créer par un membre du giec",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "Body de l'article",
+          "locale": "FR_FR",
+          "title": "Article créer par un membre du giec",
+        },
+      ],
+    },
+    Object {
       "enTitle": "Post title owned by an owner",
       "frTitle": "Articles avec owner",
       "id": "UG9zdDpwb3N0V2l0aE93bmVy",

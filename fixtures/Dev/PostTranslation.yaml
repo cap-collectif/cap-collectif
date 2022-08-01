@@ -137,3 +137,8 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@postWithOwnerOnProposal'
         title: Actuality of the project théo
         body: 'Body of the actuality of the project théo'
+    postWithOrgaMemberFr:
+        locale: fr-FR
+        translatable: '@postWithOrgaMember'
+        title: Article créer par un membre du giec
+        body: "Body de l'article"

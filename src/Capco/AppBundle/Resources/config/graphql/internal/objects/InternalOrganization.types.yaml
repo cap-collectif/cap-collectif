@@ -3,12 +3,14 @@ InternalOrganization:
     inherits:
         - Node
         - Author
+        - InternalPostOwner
     config:
         description: 'An organization.'
         name: Organization
         interfaces:
             - Node
             - Author
+            - InternalPostOwner
         fields:
             id:
                 description: 'The ID of an object.'

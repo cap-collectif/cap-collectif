@@ -78,8 +78,8 @@ describe('Internal.viewer.posts', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.posts.totalCount).toBe(23);
-    expect(response.viewer.posts.edges).toHaveLength(23);
+    expect(response.viewer.posts.totalCount).toBe(24);
+    expect(response.viewer.posts.edges).toHaveLength(24);
   });
 
   it('should correctly fetch posts filtered by a given query', async () => {
@@ -106,8 +106,8 @@ describe('Internal.viewer.posts', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.posts.totalCount).toBe(23);
-    expect(response.viewer.posts.edges).toHaveLength(23);
+    expect(response.viewer.posts.totalCount).toBe(24);
+    expect(response.viewer.posts.edges).toHaveLength(24);
   });
 
   it('should correctly order posts by a given field and direction', async () => {

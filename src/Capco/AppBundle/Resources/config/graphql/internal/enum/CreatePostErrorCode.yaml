@@ -7,3 +7,6 @@ CreatePostErrorCode:
             INVALID_FORM:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreatePostMutation::INVALID_FORM")'
                 description: 'Submitted form is invalid'
+            INVALID_OWNER:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreatePostMutation::INVALID_OWNER")'
+                description: 'Submitted owner is invalid : unknown, different user or organization not belonging.'

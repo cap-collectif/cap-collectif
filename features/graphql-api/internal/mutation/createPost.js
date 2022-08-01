@@ -152,4 +152,20 @@ describe('mutations.createPost', () => {
     expect(response.createPost.post.owner.id).toBe('VXNlcjp1c2VyVGhlbw==');
     expect(response.createPost.post.owner.username).toBe('Théo QP');
   });
+
+  it('owner should be the organization if user creating the article belongs to one', async () => {
+    const response = await graphql(
+      CreatePostMutation,
+      {
+        input: {
+          ...requiredInput,
+          owner: "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI="
+        },
+      },
+      'internal_valerie',
+    );
+
+    expect(response.createPost.post.owner.id).toBe('T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=');
+    expect(response.createPost.post.owner.username).toBe('GIEC');
+  });
 });

@@ -2,6 +2,9 @@
 
 namespace spec\Capco\AppBundle\Security;
 
+use Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType;
+use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Security\PostVoter;
 use Capco\UserBundle\Entity\User;
@@ -110,6 +113,82 @@ class PostVoterSpec extends ObjectBehavior
             VoterInterface::ACCESS_GRANTED
         );
         $this->vote($token, $subject, [PostVoter::VIEW])->shouldBe(VoterInterface::ACCESS_GRANTED);
+    }
+
+    public function it_allow_member_of_organization_to_create_read_update_with_the_post(
+        TokenInterface $token,
+        User $user,
+        Post $subject,
+        Organization $organization,
+        OrganizationMember $memberShip
+    ) {
+        $token
+            ->getUser()
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(false);
+        $memberShip
+            ->getRole()
+            ->shouldBeCalled()
+            ->willReturn(OrganizationMemberRoleType::USER);
+
+        $subject
+            ->getOwner()
+            ->shouldBeCalled()
+            ->willReturn($organization);
+        $subject
+            ->getCreator()
+            ->shouldBeCalled()
+            ->willReturn(null);
+        $organization
+            ->getMembership($user)
+            ->shouldBeCalled()
+            ->willReturn($memberShip);
+
+        $subject->getAuthors()->willReturn(new ArrayCollection());
+        $subject->getProjects()->willReturn(new ArrayCollection());
+
+        // CREATION is handled in CreatePostMutationSpec
+        $this->vote($token, $subject, [PostVoter::EDIT])->shouldBe(VoterInterface::ACCESS_GRANTED);
+        $this->vote($token, $subject, [PostVoter::DELETE])->shouldBe(VoterInterface::ACCESS_DENIED);
+        $this->vote($token, $subject, [PostVoter::VIEW])->shouldBe(VoterInterface::ACCESS_GRANTED);
+    }
+
+    public function it_allow_member_of_organization_post_author_to_delete_the_post(
+        TokenInterface $token,
+        User $user,
+        Post $subject,
+        Organization $organization,
+        OrganizationMember $memberShip
+    ) {
+        $token
+            ->getUser()
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(false);
+        $memberShip
+            ->getRole()
+            ->shouldBeCalled()
+            ->willReturn(OrganizationMemberRoleType::ADMIN);
+
+        $subject
+            ->getOwner()
+            ->shouldBeCalled()
+            ->willReturn($organization);
+        $organization
+            ->getMembership($user)
+            ->shouldBeCalled()
+            ->willReturn($memberShip);
+
+        $this->vote($token, $subject, [PostVoter::DELETE])->shouldBe(
+            VoterInterface::ACCESS_GRANTED
+        );
     }
 
     public function it_does_not_supports_attribute(User $user, Post $post, TokenInterface $token)

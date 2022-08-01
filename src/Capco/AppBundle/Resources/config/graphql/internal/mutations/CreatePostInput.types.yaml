@@ -38,3 +38,6 @@ CreatePostInput:
             media:
                 type: 'ID'
                 description: 'The media attached to the post'
+            owner:
+                type: 'ID'
+                description: 'ID of the owner of the post, user or organization. If null, fallback on the viewer.'

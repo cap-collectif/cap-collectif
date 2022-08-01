@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Security;
 
+use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Post;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class PostVoter extends Voter
+class PostVoter extends AbstractOwnerableVoter
 {
     const VIEW = 'view';
     const CREATE = 'create';
@@ -40,45 +40,56 @@ class PostVoter extends Voter
 
         switch ($attribute) {
             case self::VIEW:
-                return $this->canView($post, $viewer);
+                return self::canView($post, $viewer);
             case self::CREATE:
-                return $this->canCreate($post, $viewer);
+                return self::canCreate($viewer);
             case self::EDIT:
-                return $this->canEdit($post, $viewer);
+                return self::canEdit($post, $viewer);
             case self::DELETE:
-                return $this->canDelete($post, $viewer);
+                return self::canDelete($post, $viewer);
             default:
                 return false;
         }
     }
 
-    private function canCreate(Post $post, User $viewer): bool
+    protected static function canEdit(Ownerable $ownerable, User $viewer): bool
     {
-        return $viewer->isAdmin() || $viewer->isProjectAdmin();
-    }
-
-    private function canEdit(Post $post, User $viewer): bool
-    {
-        return $this->canDelete($post, $viewer);
-    }
-
-    private function canView(Post $post, User $viewer): bool
-    {
-        return $this->canDelete($post, $viewer);
-    }
-
-    private function canDelete(Post $post, User $viewer): bool
-    {
-        if ($viewer->isAdmin()) {
+        if (parent::canEdit($ownerable, $viewer)) {
             return true;
         }
 
-        if ($post->getOwner() && $post->getOwner() === $viewer) {
+        foreach ($ownerable->getProjects() as $project) {
+            if (parent::canEdit($project, $viewer)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected static function canView(Ownerable $ownerable, User $viewer): bool
+    {
+        if (parent::canEdit($ownerable, $viewer)) {
             return true;
         }
 
-        foreach ($post->getProjects() as $project) {
-            if ($project->getOwner() === $viewer) {
+        foreach ($ownerable->getProjects() as $project) {
+            if (parent::canEdit($project, $viewer)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected static function canDelete(Ownerable $ownerable, User $viewer): bool
+    {
+        if (parent::canDelete($ownerable, $viewer)) {
+            return true;
+        }
+
+        foreach ($ownerable->getProjects() as $project) {
+            if (parent::canDelete($project, $viewer)) {
                 return true;
             }
         }

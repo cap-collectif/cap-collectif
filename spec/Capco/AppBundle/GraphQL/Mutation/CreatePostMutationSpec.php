@@ -2,9 +2,12 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\CreatePostMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\PostVoter;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
@@ -38,9 +41,10 @@ class CreatePostMutationSpec extends ObjectBehavior
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationChecker $authorizationChecker,
+        GlobalIdResolver $globalIdResolver
     ) {
-        $this->beConstructedWith($em, $formFactory, $authorizationChecker);
+        $this->beConstructedWith($em, $formFactory, $authorizationChecker, $globalIdResolver);
     }
 
     public function it_is_initializable()
@@ -60,6 +64,10 @@ class CreatePostMutationSpec extends ObjectBehavior
 
         $input->getArrayCopy()->willReturn($this->data);
         $input->offsetGet('authors')->willReturn(['VXNlcjp1c2VyVGhlbw==']);
+        $input
+            ->offsetGet('owner')
+            ->shouldBeCalledOnce()
+            ->willReturn(null);
 
         $formFactory->create(PostType::class, Argument::type(Post::class))->willReturn($form);
         $form->submit($this->data, false)->shouldBeCalled();
@@ -90,6 +98,10 @@ class CreatePostMutationSpec extends ObjectBehavior
 
         $input->getArrayCopy()->willReturn($this->data);
         $input->offsetGet('authors')->willReturn(['VXNlcjp1c2VyVGhlbw==']);
+        $input
+            ->offsetGet('owner')
+            ->shouldBeCalledOnce()
+            ->willReturn(null);
 
         $formFactory->create(PostType::class, Argument::type(Post::class))->willReturn($form);
         $form->submit($this->data, false)->shouldBeCalled();
@@ -117,6 +129,10 @@ class CreatePostMutationSpec extends ObjectBehavior
 
         $input->getArrayCopy()->willReturn($this->data);
         $input->offsetGet('authors')->willReturn(['VXNlcjp1c2VyVGhlbw==']);
+        $input
+            ->offsetGet('owner')
+            ->shouldBeCalledOnce()
+            ->willReturn(null);
 
         $formFactory->create(PostType::class, Argument::type(Post::class))->willReturn($form);
         $form->submit($this->data, false)->shouldBeCalled();
@@ -134,6 +150,55 @@ class CreatePostMutationSpec extends ObjectBehavior
             ->getAuthors()
             ->contains($viewer)
             ->shouldReturn(true);
+
+        $post->shouldHaveType(Post::class);
+        $payload['errorCode']->shouldBe(null);
+    }
+
+    public function it_should_create_post_with_organization(
+        Arg $input,
+        EntityManagerInterface $em,
+        User $viewer,
+        FormFactoryInterface $formFactory,
+        Form $form,
+        GlobalIdResolver $globalIdResolver,
+        Organization $organization,
+        OrganizationMember $memberShip
+    ) {
+        $organizationId = 'organizationId';
+
+        $viewer
+            ->isSuperAdmin()
+            ->shouldBeCalled()
+            ->willReturn(false);
+        $viewer->isAdmin()->willReturn(true);
+        $viewer->isOnlyProjectAdmin()->willReturn(false);
+
+        $input->getArrayCopy()->willReturn($this->data);
+        $input->offsetGet('authors')->willReturn(['VXNlcjp1c2VyVGhlbw==']);
+        $input
+            ->offsetGet('owner')
+            ->shouldBeCalled()
+            ->willReturn($organizationId);
+
+        $globalIdResolver
+            ->resolve($organizationId, $viewer)
+            ->shouldBeCalledOnce()
+            ->willReturn($organization);
+        $organization->getMembership($viewer)->willReturn($memberShip);
+
+        $formFactory->create(PostType::class, Argument::type(Post::class))->willReturn($form);
+        $form->submit($this->data, false)->shouldBeCalled();
+
+        $form->isValid()->willReturn(true);
+
+        $em->persist(Argument::type(Post::class))->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+
+        $payload = $this->__invoke($input, $viewer);
+
+        $post = $payload['post'];
+        $post->getOwner()->shouldReturn($organization);
 
         $post->shouldHaveType(Post::class);
         $payload['errorCode']->shouldBe(null);

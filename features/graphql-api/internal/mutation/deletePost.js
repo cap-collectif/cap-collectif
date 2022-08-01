@@ -33,4 +33,22 @@ describe('mutations.deletePost', () => {
       graphql(DeletePostMutation, { input: { id: 'UG9zdDpwb3N0MTQ=' } }, 'internal_theo'),
     ).rejects.toThrowError('Access denied to this field.');
   });
+
+  it('should allow delete if member of organization is also the author of the post', async () => {
+    const postId = 'UG9zdDpwb3N0V2l0aE9yZ2FNZW1iZXI='
+    const response = await graphql(
+      DeletePostMutation,
+      {
+        input: { id: postId },
+      },
+      'internal_valerie',
+    );
+    expect(response.deletePost.deletedPostId).toBe(postId);
+  });
+
+  it('should throw an access denied when orga member who is not the author attempt to delete the post', async () => {
+    await expect(
+      graphql(DeletePostMutation, { input: { id: 'UG9zdDpwb3N0MTQ=' } }, 'internal_christophe'),
+    ).rejects.toThrowError('Access denied to this field.');
+  });
 });

@@ -180,6 +180,8 @@ class ProjectPersister
             if ($owner && CanSetOwner::check($owner, $viewer)) {
                 return $owner;
             }
+
+            throw new UserError('owner not found');
         }
 
         return $viewer;
