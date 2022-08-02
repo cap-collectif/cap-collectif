@@ -29,9 +29,11 @@ class MediasController extends AbstractController
         'text/comma-separated-values', // .csv
         'application/pdf', // .pdf
         'application/msword', // .doc
+        'text/rtf', // .doc
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+        'application/zip', //.docx
         'application/vnd.ms-excel', // .xls
-        'application/vnd.msexcel',
+        'application/vnd.msexcel', // .xls
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
         'application/vnd.ms-powerpoint', // .ppt
         'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
@@ -92,7 +94,7 @@ class MediasController extends AbstractController
                 'url' =>
                     $request->getUriForPath('/media') .
                     $this->mediaExtension->path($media, 'reference'),
-                'type' => $media->getContentType()
+                'type' => $media->getContentType(),
             ],
             201
         );
