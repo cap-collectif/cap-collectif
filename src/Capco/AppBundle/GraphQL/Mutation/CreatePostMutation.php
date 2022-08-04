@@ -2,13 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Interfaces\Owner;
-use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Security\CanSetOwner;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\PostVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,23 +23,28 @@ class CreatePostMutation implements MutationInterface
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private AuthorizationCheckerInterface $authorizationChecker;
-    private GlobalIdResolver $globalIdResolver;
+    private SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         AuthorizationCheckerInterface $authorizationChecker,
-        GlobalIdResolver $globalIdResolver
+        SettableOwnerResolver $settableOwnerResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->authorizationChecker = $authorizationChecker;
-        $this->globalIdResolver = $globalIdResolver;
+        $this->settableOwnerResolver = $settableOwnerResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
-        $post = (new Post())->setOwner($this->getOwner($input, $viewer))->setCreator($viewer);
+        $post = (new Post())->setCreator($viewer);
+        try {
+            $post->setOwner($this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer));
+        } catch (UserError $error) {
+            throw new UserError(self::INVALID_OWNER);
+        }
 
         $data = $input->getArrayCopy();
 
@@ -73,32 +75,8 @@ class CreatePostMutation implements MutationInterface
         return ['post' => $post, 'errorCode' => null];
     }
 
-    public function getOrganization(string $organizationId, User $viewer): Organization
-    {
-        $organization = $this->globalIdResolver->resolve($organizationId, $viewer);
-        if (!$organization) {
-            throw new UserError('Organization not found');
-        }
-
-        return $organization;
-    }
-
     public function isGranted(): bool
     {
         return $this->authorizationChecker->isGranted(PostVoter::CREATE, new Post());
-    }
-
-    private function getOwner(Argument $input, User $viewer): Owner
-    {
-        if ($input->offsetGet('owner')) {
-            $owner = $this->globalIdResolver->resolve($input->offsetGet('owner'), $viewer);
-            if ($owner && CanSetOwner::check($owner, $viewer)) {
-                return $owner;
-            }
-
-            throw new UserError(self::INVALID_OWNER);
-        }
-
-        return $viewer;
     }
 }

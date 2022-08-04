@@ -3,14 +3,12 @@
 namespace Capco\AppBundle\Form\Persister;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Security\CanSetOwner;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\AlphaProjectFormType;
 use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
@@ -33,7 +31,7 @@ class ProjectPersister
     private FormFactoryInterface $formFactory;
     private ProjectStepPersister $stepPersister;
     private ProjectRepository $repository;
-    private GlobalIdResolver $resolver;
+    private SettableOwnerResolver $settableOwnerResolver;
     private Publisher $publisher;
 
     public function __construct(
@@ -43,7 +41,7 @@ class ProjectPersister
         ProjectAuthorTransformer $transformer,
         ProjectStepPersister $stepPersister,
         ProjectRepository $repository,
-        GlobalIdResolver $resolver,
+        SettableOwnerResolver $settableOwnerResolver,
         Publisher $publisher
     ) {
         $this->em = $em;
@@ -52,7 +50,7 @@ class ProjectPersister
         $this->stepPersister = $stepPersister;
         $this->transformer = $transformer;
         $this->repository = $repository;
-        $this->resolver = $resolver;
+        $this->settableOwnerResolver = $settableOwnerResolver;
         $this->publisher = $publisher;
     }
 
@@ -66,7 +64,9 @@ class ProjectPersister
             throw new UserError('You must specify at least one author.');
         }
 
-        $project = (new Project())->setOwner($this->getOwner($input, $viewer))->setCreator($viewer);
+        $project = (new Project())
+            ->setOwner($this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer))
+            ->setCreator($viewer);
         if (isset($arguments['owner'])) {
             unset($arguments['owner']);
         }
@@ -171,19 +171,5 @@ class ProjectPersister
                 )
             );
         }
-    }
-
-    private function getOwner(Argument $input, User $viewer): Owner
-    {
-        if ($input->offsetGet('owner')) {
-            $owner = $this->resolver->resolve($input->offsetGet('owner'), $viewer);
-            if ($owner && CanSetOwner::check($owner, $viewer)) {
-                return $owner;
-            }
-
-            throw new UserError('owner not found');
-        }
-
-        return $viewer;
     }
 }

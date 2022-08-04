@@ -3,11 +3,11 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Organization\Organization;
-use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\CreatePostMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\PostVoter;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class CreatePostMutationSpec extends ObjectBehavior
 {
-    private $data = [
+    private array $data = [
         'translations' => [
             'fr-FR' => [
                 'title' => 'Titre',
@@ -42,9 +42,9 @@ class CreatePostMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         AuthorizationChecker $authorizationChecker,
-        GlobalIdResolver $globalIdResolver
+        SettableOwnerResolver $settableOwnerResolver
     ) {
-        $this->beConstructedWith($em, $formFactory, $authorizationChecker, $globalIdResolver);
+        $this->beConstructedWith($em, $formFactory, $authorizationChecker, $settableOwnerResolver);
     }
 
     public function it_is_initializable()
@@ -57,7 +57,8 @@ class CreatePostMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         User $viewer,
         FormFactoryInterface $formFactory,
-        Form $form
+        Form $form,
+        SettableOwnerResolver $settableOwnerResolver
     ) {
         $viewer->isAdmin()->willReturn(true);
         $viewer->isOnlyProjectAdmin()->willReturn(false);
@@ -68,6 +69,7 @@ class CreatePostMutationSpec extends ObjectBehavior
             ->offsetGet('owner')
             ->shouldBeCalledOnce()
             ->willReturn(null);
+        $settableOwnerResolver->__invoke(null, $viewer)->shouldBeCalled()->willReturn($viewer);
 
         $formFactory->create(PostType::class, Argument::type(Post::class))->willReturn($form);
         $form->submit($this->data, false)->shouldBeCalled();
@@ -91,7 +93,8 @@ class CreatePostMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         User $viewer,
         FormFactoryInterface $formFactory,
-        Form $form
+        Form $form,
+        SettableOwnerResolver $settableOwnerResolver
     ) {
         $viewer->isAdmin()->willReturn(true);
         $viewer->isOnlyProjectAdmin()->willReturn(false);
@@ -102,6 +105,7 @@ class CreatePostMutationSpec extends ObjectBehavior
             ->offsetGet('owner')
             ->shouldBeCalledOnce()
             ->willReturn(null);
+        $settableOwnerResolver->__invoke(null, $viewer)->shouldBeCalled()->willReturn($viewer);
 
         $formFactory->create(PostType::class, Argument::type(Post::class))->willReturn($form);
         $form->submit($this->data, false)->shouldBeCalled();
@@ -122,7 +126,8 @@ class CreatePostMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         User $viewer,
         FormFactoryInterface $formFactory,
-        Form $form
+        Form $form,
+        SettableOwnerResolver $settableOwnerResolver
     ) {
         $viewer->isAdmin()->willReturn(false);
         $viewer->isOnlyProjectAdmin()->willReturn(true);
@@ -133,6 +138,7 @@ class CreatePostMutationSpec extends ObjectBehavior
             ->offsetGet('owner')
             ->shouldBeCalledOnce()
             ->willReturn(null);
+        $settableOwnerResolver->__invoke(null, $viewer)->shouldBeCalled()->willReturn($viewer);
 
         $formFactory->create(PostType::class, Argument::type(Post::class))->willReturn($form);
         $form->submit($this->data, false)->shouldBeCalled();
@@ -163,29 +169,15 @@ class CreatePostMutationSpec extends ObjectBehavior
         Form $form,
         GlobalIdResolver $globalIdResolver,
         Organization $organization,
-        OrganizationMember $memberShip
+        SettableOwnerResolver $settableOwnerResolver
     ) {
         $organizationId = 'organizationId';
 
-        $viewer
-            ->isSuperAdmin()
-            ->shouldBeCalled()
-            ->willReturn(false);
-        $viewer->isAdmin()->willReturn(true);
-        $viewer->isOnlyProjectAdmin()->willReturn(false);
+        $viewer->isOnlyProjectAdmin()->shouldBeCalled()->willReturn(false);
 
-        $input->getArrayCopy()->willReturn($this->data);
-        $input->offsetGet('authors')->willReturn(['VXNlcjp1c2VyVGhlbw==']);
-        $input
-            ->offsetGet('owner')
-            ->shouldBeCalled()
-            ->willReturn($organizationId);
-
-        $globalIdResolver
-            ->resolve($organizationId, $viewer)
-            ->shouldBeCalledOnce()
-            ->willReturn($organization);
-        $organization->getMembership($viewer)->willReturn($memberShip);
+        $input->getArrayCopy()->shouldBeCalled()->willReturn($this->data);
+        $input->offsetGet('owner')->shouldBeCalled()->willReturn($organizationId);
+        $settableOwnerResolver->__invoke($organizationId, $viewer)->shouldBeCalled()->willReturn($organization);
 
         $formFactory->create(PostType::class, Argument::type(Post::class))->willReturn($form);
         $form->submit($this->data, false)->shouldBeCalled();

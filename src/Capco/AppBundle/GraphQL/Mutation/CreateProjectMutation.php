@@ -3,10 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Security\CanSetOwner;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
@@ -32,7 +30,7 @@ class CreateProjectMutation implements MutationInterface
     private LoggerInterface $logger;
     private ProjectAuthorTransformer $transformer;
     private FormFactoryInterface $formFactory;
-    private GlobalIdResolver $resolver;
+    private SettableOwnerResolver $settableOwnerResolver;
     private AuthorizationCheckerInterface $authorizationChecker;
     private Indexer $indexer;
 
@@ -40,7 +38,7 @@ class CreateProjectMutation implements MutationInterface
         EntityManagerInterface $em,
         LoggerInterface $logger,
         FormFactoryInterface $formFactory,
-        GlobalIdResolver $resolver,
+        SettableOwnerResolver $settableOwnerResolver,
         ProjectAuthorTransformer $transformer,
         AuthorizationCheckerInterface $authorizationChecker,
         Indexer $indexer
@@ -49,7 +47,7 @@ class CreateProjectMutation implements MutationInterface
         $this->logger = $logger;
         $this->transformer = $transformer;
         $this->formFactory = $formFactory;
-        $this->resolver = $resolver;
+        $this->settableOwnerResolver = $settableOwnerResolver;
         $this->authorizationChecker = $authorizationChecker;
         $this->indexer = $indexer;
     }
@@ -64,8 +62,12 @@ class CreateProjectMutation implements MutationInterface
             throw new UserError('You must specify at least one author.');
         }
 
-        $project = (new Project())->setOwner($this->getOwner($input, $viewer))->setCreator($viewer);
+        $project = (new Project())->setCreator($viewer);
+
         if (isset($arguments['owner'])) {
+            $project->setOwner(
+                $this->settableOwnerResolver->__invoke($arguments['owner'], $viewer)
+            );
             unset($arguments['owner']);
         }
         if ($viewer->isOnlyProjectAdmin()) {
@@ -126,19 +128,5 @@ class CreateProjectMutation implements MutationInterface
     public function isGranted(): bool
     {
         return $this->authorizationChecker->isGranted(ProjectVoter::CREATE, new Project());
-    }
-
-    private function getOwner(Argument $input, User $viewer): Owner
-    {
-        if ($input->offsetGet('owner')) {
-            $owner = $this->resolver->resolve($input->offsetGet('owner'), $viewer);
-            if ($owner && CanSetOwner::check($owner, $viewer)) {
-                return $owner;
-            }
-
-            throw new UserError('owner not found');
-        }
-
-        return $viewer;
     }
 }
