@@ -17,6 +17,7 @@ type Props = {|
   onSubmit?: (value: string) => void,
   onClear?: () => void,
   ariaLabel?: string,
+  autoFocus?: boolean,
 |};
 
 const CloseIcon = styled(Icon)``;

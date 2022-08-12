@@ -17,7 +17,7 @@ export const ProposalListSearch = ({ dispatch, intl, terms }: Props) => {
   const onInputChange = debounce((e: SyntheticInputEvent<HTMLInputElement>) => {
     const term = e.target.value;
     dispatch(changeTerm(term || ''));
-  }, 500);
+  }, 1500);
 
   const handleClear = () => {
     dispatch(changeTerm(''));
@@ -38,6 +38,7 @@ export const ProposalListSearch = ({ dispatch, intl, terms }: Props) => {
         }}
         onClear={handleClear}
         initialValue={terms}
+        autoFocus
       />
     </form>
   );
