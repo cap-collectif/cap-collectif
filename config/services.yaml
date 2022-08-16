@@ -103,6 +103,9 @@ parameters:
     sendinblue_secret: '%env(SYMFONY_SENDINBLUE_SECRET)%'
     openid_backchannel_secret: '%env(SYMFONY_OPENID_BACKCHANNEL_SECRET)%'
     openid_backchannel_secret_dev: '%env(SYMFONY_OPENID_BACKCHANNEL_SECRET_DEV)%'
+    openid_test_username: '%env(SYMFONY_OPENID_TEST_USERNAME)%'
+    openid_test_password: '%env(SYMFONY_OPENID_TEST_PASSWORD)%'
+
     #
     # Default env values :
     # Please do not put sensible data here.
@@ -182,6 +185,8 @@ parameters:
     env(SYMFONY_DEFAULT_OAUTH_LOGOUT_URL): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_DEFAULT_OAUTH_PROFILE_URL): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_DEFAULT_REDIRECTIONIO_PROJECT_ID): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_OPENID_TEST_USERNAME): 'test'
+    env(SYMFONY_OPENID_TEST_PASSWORD): 'test'
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead

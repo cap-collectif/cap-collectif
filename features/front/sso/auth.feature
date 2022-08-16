@@ -26,7 +26,7 @@ Scenario: Logged in from ssoOauth2 user wants to soft delete his account
   Then enable sso provider "ssoOauth2"
   And I visited "home page"
   When I press "global.login"
-  Then I authenticate with openid as test with password test
+  Then I authenticate with openid
   Then I should be redirected to "/"
   When I visited "edit profile page"
   And I wait "#account-tabs-tab-account" to appear on current page

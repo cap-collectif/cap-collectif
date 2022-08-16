@@ -15,12 +15,14 @@ trait OpenidConnectTrait
     }
 
     /**
-     * @When I authenticate with openid as :username with password :password
+     * @When I authenticate with openid
      */
-    public function iAuthenticateWithOpenid($username, $password)
+    public function iAuthenticateWithOpenid()
     {
         $this->IJumpToOpenidLoginScreen();
 
+        $username = $this->getParameter('openid_test_username');
+        $password = $this->getParameter('openid_test_password');
         $this->fillField('username', $username);
         $this->fillField('password', $password);
 

@@ -1,5 +1,5 @@
 /*eslint-disable */
-var $buo = function(op, test) {
+var $buo = function (op, test) {
   var jsv = 18;
   var n = window.navigator,
     b;
@@ -26,9 +26,9 @@ var $buo = function(op, test) {
   if (op.reminder < 0.1 || op.reminder === 0) this.op.reminder = 0;
   else this.op.reminder = op.reminder || 24;
   this.op.reminderClosed = op.reminderClosed || 24 * 7;
-  this.op.onshow = op.onshow || function(o) {};
-  this.op.onclick = op.onclick || function(o) {};
-  this.op.onclose = op.onclose || function(o) {};
+  this.op.onshow = op.onshow || function (o) {};
+  this.op.onclick = op.onclick || function (o) {};
+  this.op.onclose = op.onclose || function (o) {};
   this.op.url =
     op.url || `//browser-update.org/update-browser.html#${jsv}:${location.hostname || 'x'}`;
   if (op.l)
@@ -299,7 +299,7 @@ font-family: Arial,Helvetica,sans-serif; color:#000; font-size: 12px;}\
     }
   }
   var me = this;
-  div.onclick = function() {
+  div.onclick = function () {
     if (me.op.newwindow) window.open(me.op.url, '_blank');
     else window.location.href = me.op.url;
     setCookie(me.op.reminderClosed);
@@ -307,7 +307,7 @@ font-family: Arial,Helvetica,sans-serif; color:#000; font-size: 12px;}\
     return false;
   };
   try {
-    div.getElementsByTagName('a')[0].onclick = function(e) {
+    div.getElementsByTagName('a')[0].onclick = function (e) {
       var e = e || window.event;
       if (e.stopPropagation) e.stopPropagation();
       else e.cancelBubble = true;
@@ -319,8 +319,8 @@ font-family: Arial,Helvetica,sans-serif; color:#000; font-size: 12px;}\
   var hm = document.getElementsByTagName('html')[0] || document.body;
   this.op.bodymt = hm.style.marginTop;
   hm.style.marginTop = `${div.clientHeight}px`;
-  (function(me) {
-    document.getElementById('buorgclose').onclick = function(e) {
+  (function (me) {
+    document.getElementById('buorgclose').onclick = function (e) {
       var e = e || window.event;
       if (e.stopPropagation) e.stopPropagation();
       else e.cancelBubble = true;
@@ -335,5 +335,4 @@ font-family: Arial,Helvetica,sans-serif; color:#000; font-size: 12px;}\
   op.onshow(this.op);
 };
 
-var $buoop = $buoop || {};
-$bu = $buo($buoop);
+$bu = typeof window.$buoop != 'undefined' ? $buo($buoop) : null;

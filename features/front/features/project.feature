@@ -359,7 +359,6 @@ Scenario: User wants to assess a project proposal analysis immediately
 Scenario: User wants to analyse a project proposal analysis immediately
   Given feature "unstable__analysis" is enabled
   And I am logged in as Agui
-  And I close the old browser banner
   And I click on button "#cookie-consent"
   When I go to "/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quorganisme-public"
   And I wait "#proposal_analysis_analyses" to appear on current page
