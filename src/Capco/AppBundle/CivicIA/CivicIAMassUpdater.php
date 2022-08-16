@@ -2,10 +2,12 @@
 
 namespace Capco\AppBundle\CivicIA;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Interfaces\CivicIAAnalyzableInterface;
 use Capco\AppBundle\Enum\CivicIASentimentEnum;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
@@ -16,13 +18,16 @@ class CivicIAMassUpdater
 
     private GlobalIdResolver $globalIdResolver;
     private EntityManagerInterface $entityManager;
+    private Indexer $indexer;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        Indexer $indexer
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->entityManager = $entityManager;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(string $json, User $viewer): array
@@ -34,6 +39,11 @@ class CivicIAMassUpdater
         }
 
         $this->entityManager->flush();
+
+        foreach ($results as $result) {
+            $this->indexer->index(ClassUtils::getClass($result), $result->getId());
+        }
+        $this->indexer->finishBulk();
 
         return $results;
     }

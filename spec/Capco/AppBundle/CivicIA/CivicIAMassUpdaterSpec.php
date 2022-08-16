@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\CivicIA;
 
 use Capco\AppBundle\CivicIA\CivicIAMassUpdater;
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
@@ -13,9 +14,12 @@ use Prophecy\Argument;
 
 class CivicIAMassUpdaterSpec extends ObjectBehavior
 {
-    public function let(GlobalIdResolver $globalIdResolver, EntityManagerInterface $entityManager)
-    {
-        $this->beConstructedWith($globalIdResolver, $entityManager);
+    public function let(
+        GlobalIdResolver $globalIdResolver,
+        EntityManagerInterface $entityManager,
+        Indexer $indexer
+    ) {
+        $this->beConstructedWith($globalIdResolver, $entityManager, $indexer);
     }
 
     public function it_is_initializable(): void
@@ -78,7 +82,8 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
         ValueResponse $response2,
         User $viewer,
         GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        Indexer $indexer
     ): void {
         $globalIdResolver
             ->resolve('response1', $viewer)
@@ -89,6 +94,8 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($response2);
         $entityManager->flush()->shouldBeCalledOnce();
+        $indexer->index(Argument::any(), Argument::any())->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
 
         $jsonData = [
             [
@@ -115,6 +122,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
             ],
         ];
 
+        $response1->getId()->shouldBeCalled()->willReturn('response1');
         $response1->setIaCategory($jsonData[0]['categories'])->shouldBeCalledOnce();
         $response1->setIaReadability($jsonData[0]['lisibilite'])->shouldBeCalledOnce();
         $response1->setIaSentiment($jsonData[0]['sentiment'])->shouldBeCalledOnce();
@@ -123,6 +131,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
             ->shouldBeCalledOnce();
         $response1->setIaSentimentDetails(Argument::any())->shouldNotBeCalled();
 
+        $response2->getId()->shouldBeCalled()->willReturn('response2');
         $response2->setIaCategory($jsonData[1]['categories'])->shouldBeCalledOnce();
         $response2->setIaReadability($jsonData[1]['lisibilite'])->shouldBeCalledOnce();
         $response2->setIaSentiment($jsonData[1]['sentiment'])->shouldBeCalledOnce();
