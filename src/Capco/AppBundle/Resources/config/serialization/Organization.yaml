@@ -1,0 +1,41 @@
+Capco\AppBundle\Entity\Organization\Organization:
+    attributes:
+        id:
+            groups:
+                [
+                    OrganizationId,
+                    Elasticsearch,
+                    ElasticsearchNestedProject,
+                    ElasticsearchProposalNestedProject,
+                    ElasticsearchProjectNestedAuthor,
+                ]
+        slug:
+            groups: [Default, Elasticsearch]
+        media:
+            groups: [OrganizationsInfos, UserDetails]
+        getBody:
+            serialized_name: biography
+            groups: [Default, sonata_api_read, sonata_api_write, sonata_search, OrganizationsInfos]
+        username:
+            type: string
+            groups:
+                [
+                    Default,
+                    Elasticsearch,
+                    sonata_api_read,
+                    sonata_api_write,
+                    sonata_search,
+                    OrganizationsInfos,
+                ]
+        getUsername:
+            serialized_name: displayName
+            type: string
+            groups: [UserDetails, OrganizationsInfos]
+        email:
+            groups: [Elasticsearch]
+        createdAt:
+            serialized_name: createdAt
+            groups: [Elasticsearch]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [Elasticsearch]

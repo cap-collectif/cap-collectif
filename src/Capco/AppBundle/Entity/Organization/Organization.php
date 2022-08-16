@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Organization;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
@@ -24,7 +25,12 @@ use Doctrine\ORM\Mapping as ORM;
  * )*
  * @ORM\Entity(repositoryClass=OrganizationRepository::class)
  */
-class Organization implements SonataTranslatableInterface, Translatable, Author, Owner
+class Organization implements
+    SonataTranslatableInterface,
+    Translatable,
+    Author,
+    Owner,
+    IndexableInterface
 {
     use SluggableTranslatableTitleTrait;
     use SonataTranslatableTrait;
@@ -126,7 +132,7 @@ class Organization implements SonataTranslatableInterface, Translatable, Author,
         return $this;
     }
 
-    public function countMembers()
+    public function countMembers(): int
     {
         return $this->members->count();
     }
@@ -201,16 +207,6 @@ class Organization implements SonataTranslatableInterface, Translatable, Author,
         return $this->getLogo();
     }
 
-    public function isProjectAdmin(): bool
-    {
-        return true;
-    }
-
-    public function getUserType()
-    {
-        return null;
-    }
-
     public function getEmail(): string
     {
         return $this->email;
@@ -221,5 +217,25 @@ class Organization implements SonataTranslatableInterface, Translatable, Author,
         $this->email = $email;
 
         return $this;
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 100;
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'organization';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch'];
+    }
+
+    public function isIndexable(): bool
+    {
+        return true;
     }
 }

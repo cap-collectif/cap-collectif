@@ -310,6 +310,7 @@ mappings:
 
         private: { type: boolean }
         user: *Author
+        organization: *Author
         isAccounted: { type: boolean }
         value: { type: long }
         voteType: { type: keyword }

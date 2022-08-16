@@ -12,6 +12,7 @@ use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\Console\Input\InputInterface;
@@ -137,7 +138,7 @@ class ExportDebateCommand extends BaseExportCommand
 
             $debate = $this->debateRepository->find($debateId);
             $owner = $debate ? $debate->getProject()->getOwner() : null;
-            $isProjectAdmin = $owner && $owner->isOnlyProjectAdmin();
+            $isProjectAdmin = $owner instanceOf User && $owner->isOnlyProjectAdmin();
             $geoIp = $input->getOption('geoip');
 
             $url = $this->loadDataAndGetUrl(

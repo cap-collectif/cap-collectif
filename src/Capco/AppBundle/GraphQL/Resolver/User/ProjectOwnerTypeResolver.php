@@ -26,6 +26,10 @@ class ProjectOwnerTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalUser');
         }
 
+        if ('internal' === $currentSchemaName && $data instanceof Organization) {
+            return $this->typeResolver->resolve('InternalOrganization');
+        }
+
         throw new UserError('Could not resolve type of ProjectOwner.');
     }
 }
