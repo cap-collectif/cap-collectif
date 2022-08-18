@@ -340,7 +340,7 @@
         "react-intl": "https://github.com/cap-collectif/react-intl#a224d16c7a37884328676e9608987601a7c26205",
         "react-intl-redux": "^2.0.2",
         "react-jitsi": "^1.0.4",
-        "react-leaflet": "3.2.0",
+        "react-leaflet": "3.2.5",
         "react-leaflet-markercluster": "^3.0.0-rc1",
         "react-linkify": "^0.2.2",
         "react-nl2br": "^0.4.0",

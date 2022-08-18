@@ -25,8 +25,7 @@ const GeographicalAreasEmptyPage: React.FC = () => {
                 <Text mb={8} fontSize={18}>
                     {intl.formatMessage({ id: 'zone-create-text' })}
                 </Text>
-                {/* TODO : create the page 🫥 */}
-                <Button as="a" leftIcon={CapUIIcon.Add} href="#" variantSize="big">
+                <Button as="a" leftIcon={CapUIIcon.Add} href="/geographicalArea" variantSize="big">
                     {intl.formatMessage({ id: 'create-zone' })}
                 </Button>
             </Flex>

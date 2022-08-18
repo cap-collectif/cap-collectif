@@ -5,7 +5,7 @@ import { IntlShape, useIntl } from 'react-intl';
 import DeleteProjectDistrictMutation from '@mutations/DeleteProjectDistrictMutation';
 import { mutationErrorToast } from '@utils/mutation-error-toast';
 
-const deleteGeographicalArea = (id: string, intl: IntlShape): void => {
+const deleteGeographicalArea = (id: string, intl: IntlShape, fromDistrict: boolean): void => {
     DeleteProjectDistrictMutation.commit({
         input: { id },
     }).then(response => {
@@ -16,6 +16,7 @@ const deleteGeographicalArea = (id: string, intl: IntlShape): void => {
             variant: 'success',
             content: intl.formatMessage({ id: 'area-deleted' }),
         });
+        if (fromDistrict) window.location.href = '/geographicalAreas';
     });
 };
 
@@ -23,12 +24,14 @@ type GeographicalAreaDeleteModalProps = {
     show: boolean,
     geographicalAreaId: string | null,
     onClose: () => void,
+    fromDistrict?: boolean,
 };
 
 const GeographicalAreaDeleteModal: FC<GeographicalAreaDeleteModalProps> = ({
     show,
     geographicalAreaId,
     onClose,
+    fromDistrict = false,
 }) => {
     const intl = useIntl();
 
@@ -50,6 +53,7 @@ const GeographicalAreaDeleteModal: FC<GeographicalAreaDeleteModalProps> = ({
             </Modal.Body>
             <Modal.Footer>
                 <Button
+                    type="button"
                     onClick={onClose}
                     variant="secondary"
                     variantSize="big"
@@ -57,10 +61,11 @@ const GeographicalAreaDeleteModal: FC<GeographicalAreaDeleteModalProps> = ({
                     {intl.formatMessage({ id: 'cancel' })}
                 </Button>
                 <Button
+                    type="button"
                     variantColor="danger"
                     variantSize="big"
                     onClick={() => {
-                        deleteGeographicalArea(geographicalAreaId, intl);
+                        deleteGeographicalArea(geographicalAreaId, intl, fromDistrict);
                         onClose();
                     }}>
                     {intl.formatMessage({ id: 'action_delete' })}

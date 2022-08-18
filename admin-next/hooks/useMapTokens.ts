@@ -13,7 +13,11 @@ const query = graphql`
 `;
 
 export const useMapTokens = () => {
-    const data = useLazyLoadQuery<useMapTokensQuery>(query, {}, { fetchPolicy: 'store-only' });
+    const data = useLazyLoadQuery<useMapTokensQuery>(
+        query,
+        {},
+        { fetchPolicy: 'store-and-network' },
+    );
     invariant(data.mapToken !== undefined, 'mapTokens are missing in Relay store.');
     return data.mapToken;
 };

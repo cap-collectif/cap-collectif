@@ -51,6 +51,7 @@ export function getOnlyLanguage(locale: string) {
     }
 }
 
+
 type Translation = {
     readonly locale: string,
     readonly [field: string]: ReactNode,
@@ -64,26 +65,29 @@ export type TranslateField = {
 export function createOrReplaceTranslation(
     fields: TranslateField[],
     locale: string,
-    translations: ReadonlyArray<Translation>,
+    translations: ReadonlyArray<Translation> | null,
 ): Translation[] {
-    const translateAlreadyExist = translations.some(translation => translation.locale === locale);
-    const fieldsAdded = fields.reduce((acc, field) => ({
-        ...acc,
-        [field.name]: field.value
-    }), {})
+    const translateAlreadyExist = translations?.some(translation => translation.locale === locale);
+    const fieldsAdded = fields.reduce(
+        (acc, field) => ({
+            ...acc,
+            [field.name]: field.value,
+        }),
+        {},
+    );
 
     if (translateAlreadyExist) {
         return translations.map(translation => {
             if (translation.locale === locale) {
                 return {
                     locale,
-                    ...fieldsAdded
+                    ...fieldsAdded,
                 };
             }
 
             return translation;
         });
     }
-
-    return [...translations, { locale, ...fieldsAdded }];
+    if (translations) return [...translations, { locale, ...fieldsAdded }];
+    return [{ locale, ...fieldsAdded }];
 }
