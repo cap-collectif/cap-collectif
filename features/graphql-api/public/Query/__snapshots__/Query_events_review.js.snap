@@ -104,6 +104,20 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
+          "review": null,
+          "title": "Evenement owned par un owner",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
+          "review": null,
+          "title": "evenement cosmopolite",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "review": null,
           "title": "EvenementPresentSansDateDeFin",
@@ -128,7 +142,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 15,
+    "totalCount": 17,
   },
 }
 `;

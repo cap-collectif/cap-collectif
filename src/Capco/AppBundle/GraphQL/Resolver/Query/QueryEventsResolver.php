@@ -96,7 +96,11 @@ class QueryEventsResolver implements ResolverInterface
                     $limit,
                     $search,
                     $filters,
-                    $orderBy
+                    $orderBy,
+                    [],
+                    null,
+                    false,
+                    true
                 );
             });
 
