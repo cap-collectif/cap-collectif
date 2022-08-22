@@ -136,7 +136,7 @@ class ImportIDFProposalsFromCsvCommand extends Command
                     return 1;
             }
             $this->logger->error($exception->getMessage());
-            $output->writeln('<error>Something is wrong contact an administrator</error>');
+            $output->writeln('<error>Something is wrong contact an administrator</error>' .  $exception->getMessage());
 
             return 1;
         }
