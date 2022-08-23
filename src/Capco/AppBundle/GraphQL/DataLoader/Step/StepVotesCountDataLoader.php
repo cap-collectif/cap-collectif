@@ -80,7 +80,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
     public function resolve(AbstractStep $step, bool $onlyAccounted, ?bool $anonymous = null): int
     {
         if ($step instanceof CollectStep) {
-            $smsVotes = $this->proposalCollectSmsVoteRepository->countPublishedCollectVoteByStep($step);
+            $smsVotes = $this->proposalCollectSmsVoteRepository->countPublishedCollectVoteByStep($step, $onlyAccounted);
             if ($anonymous) {
                 return $smsVotes;
             }

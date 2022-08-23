@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Capco\AppBundle\Traits\ProposalCollectVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
@@ -15,6 +16,7 @@ use Capco\AppBundle\Entity\ProposalCollectVote;
 class ProposalCollectVoteRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
+    use ProposalCollectVoteRepositoryTrait;
 
     public function getAnonymousVotesCountByStep(CollectStep $step): int
     {
@@ -362,29 +364,6 @@ class ProposalCollectVoteRepository extends EntityRepository
         }
 
         return new Paginator($query);
-    }
-
-    public function countPublishedCollectVoteByStep(
-        CollectStep $step,
-        bool $onlyAccounted = true
-    ): int {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv.id)')
-            ->andWhere('pv.collectStep = :step')
-            ->innerJoin('pv.proposal', 'proposal')
-            ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1');
-        if ($onlyAccounted) {
-            $qb->andWhere('pv.isAccounted = 1');
-        }
-
-        return $qb
-            ->andWhere('proposal.draft = 0')
-            ->andWhere('proposal.trashedAt IS NULL')
-            ->andWhere('proposal.published = 1')
-            ->setParameter('step', $step)
-            ->getQuery()
-            ->getSingleScalarResult();
     }
 
     public function countPointsOnPublishedCollectVoteByStep(

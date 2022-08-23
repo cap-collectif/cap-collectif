@@ -10826,9 +10826,6 @@ type ProposalSmsVote implements ProposalVote & Vote {
 
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
-
-  """The phone number to confirm the vote"""
-  phone: String
 }
 
 """A connection to a list of items."""
@@ -12848,8 +12845,8 @@ input RemoveProposalSmsVoteInput {
 }
 
 type RemoveProposalSmsVotePayload {
-  step: ProposalStep!
-  proposal: Proposal!
+  step: ProposalStep
+  proposal: Proposal
   previousVoteId: ID
   errorCode: RemoveProposalSmsVoteErrorCode
   clientMutationId: String

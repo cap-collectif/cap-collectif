@@ -3,9 +3,9 @@ RemoveProposalSmsVotePayload:
     config:
         fields:
             step:
-                type: 'ProposalStep!'
+                type: 'ProposalStep'
             proposal:
-                type: 'InternalProposal!'
+                type: 'InternalProposal'
             previousVoteId:
                 type: 'ID'
             errorCode:

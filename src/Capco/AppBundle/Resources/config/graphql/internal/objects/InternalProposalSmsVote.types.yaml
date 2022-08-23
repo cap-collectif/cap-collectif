@@ -14,9 +14,6 @@ InternalProposalSmsVote:
                 type: 'InternalUser'
                 description: 'The author of the contribution. If null, the vote is anonymous.'
                 resolve: null
-            phone:
-                type: 'String'
-                description: 'The phone number to confirm the vote'
             kind:
                 type: 'String!'
                 description: "Returns 'proposalSmsVote'."

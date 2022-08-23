@@ -4,12 +4,15 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\PhoneToken;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Traits\ProposalCollectVoteRepositoryTrait;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalCollectSmsVoteRepository extends EntityRepository
 {
+    use ProposalCollectVoteRepositoryTrait;
+
     public function getByTokenAndStep(
         CollectStep $step,
         string $token,
@@ -59,23 +62,4 @@ class ProposalCollectSmsVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function countPublishedCollectVoteByStep(
-        CollectStep $step
-    ): int {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv.id)')
-            ->andWhere('pv.collectStep = :step')
-            ->innerJoin('pv.proposal', 'proposal')
-            ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1');
-
-        return $qb
-            ->andWhere('pv.isAccounted = 1')
-            ->andWhere('proposal.draft = 0')
-            ->andWhere('proposal.trashedAt IS NULL')
-            ->andWhere('proposal.published = 1')
-            ->setParameter('step', $step)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
 }
