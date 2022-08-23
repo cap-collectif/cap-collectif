@@ -17,7 +17,7 @@ class IsSocialNetworkUrlValidator extends ConstraintValidator
             '#^(?:https?:\/\/)?(?:www\.)?(mbasic.instagram|m\.instagram|instagram)\.(com|me)\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
         'youtubeUrl' =>
             '#^(?:https?:\/\/)?(?:www\.)?(mbasic.youtube|m\.youtube|youtube)\.(com|me)\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
-        'linkedinUrl' =>
+        'linkedInUrl' =>
             '#^(?:https?:\/\/)?(?:www\.)?(mbasic.linkedin|m\.linkedin|linkedin)\.(com|me)\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
     ];
 

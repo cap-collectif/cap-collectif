@@ -5,7 +5,6 @@ Object {
   "addProposalsFromCsv": Object {
     "badLines": Array [
       2,
-      4,
     ],
     "duplicates": Array [
       5,
@@ -22,6 +21,13 @@ Object {
             "webPageUrl": null,
           },
         },
+        Object {
+          "node": Object {
+            "facebookUrl": "https://facebook.com/user/toto",
+            "title": "test OK",
+            "webPageUrl": "https://perdu.com",
+          },
+        },
       ],
     },
     "mandatoryMissing": Array [
@@ -36,10 +42,10 @@ Object {
   "addProposalsFromCsv": Object {
     "badLines": Array [
       2,
-      4,
     ],
     "duplicates": Array [
       3,
+      4,
       5,
       6,
     ],
@@ -60,14 +66,13 @@ Object {
   "addProposalsFromCsv": Object {
     "badLines": Array [
       2,
-      4,
     ],
     "duplicates": Array [
       5,
       6,
     ],
     "errorCode": null,
-    "importableProposals": 1,
+    "importableProposals": 2,
     "importedProposals": Object {
       "edges": Array [],
     },
