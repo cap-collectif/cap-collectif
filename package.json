@@ -197,7 +197,7 @@
         "@formatjs/intl-utils": "^3.8.4",
         "@hookform/resolvers": "^2.8.8",
         "@liinkiing/react-hooks": "^1.7.1",
-        "@react-leaflet/core": "^1.1.0",
+        "@react-leaflet/core": "^1.1.1",
         "@react-pdf/renderer": "^2.0.4",
         "@sentry/browser": "^5.15.5",
         "@storybook/addon-a11y": "^6.5.9",
@@ -293,7 +293,7 @@
         "jquery-minicolors": "^2.1.10",
         "js-cookie": "^2.2.1",
         "json-loader": "^0.5.7",
-        "leaflet": "1.7.1",
+        "leaflet": "1.8.0",
         "leaflet-geosearch": "^3.5.0",
         "leaflet-gesture-handling": "^1.2.1",
         "leaflet.locatecontrol": "0.72.0",
@@ -426,7 +426,8 @@
         "nanoid": "^3.1.31",
         "jpeg-js": "^0.4.4",
         "moment": "^2.29.4",
-        "shell-quote": "^1.7.3"
+        "shell-quote": "^1.7.3",
+        "@react-leaflet/core": "1.1.1"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.16.0",
