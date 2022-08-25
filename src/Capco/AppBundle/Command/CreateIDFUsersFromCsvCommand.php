@@ -2,118 +2,80 @@
 
 namespace Capco\AppBundle\Command;
 
-use Box\Spout\Common\Entity\Row;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
-use FOS\UserBundle\Model\UserManagerInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
+use Capco\UserBundle\Doctrine\UserManager;
+use Capco\UserBundle\Entity\UserType;
+use Capco\UserBundle\Repository\UserTypeRepository;
 
 class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
 {
-    const HEADERS = ['username', 'email', 'openid_id'];
-    protected UserManagerInterface $userManager;
-    protected ConvertCsvToArray $csvReader;
-    private UserRepository $userRepository;
+    public const HEADER_OPENID = 'openid_id';
+    public const HEADER_USER_TYPE = 'user_type';
+    protected array $createdOpenIds = [];
+    protected array $userTypes = [];
 
     public function __construct(
         ?string $name,
-        UserManagerInterface $userManager,
+        UserManager $userManager,
         ConvertCsvToArray $csvReader,
-        UserRepository $userRepository
+        UserTypeRepository $userTypeRepository
     ) {
-        $this->userRepository = $userRepository;
         parent::__construct($name, $userManager, $csvReader);
+        $this->setUserTypes($userTypeRepository);
     }
 
-    protected function configure()
+    protected function getRowErrors(array &$row): array
     {
-        $this->addArgument(
-            'filePath',
-            InputArgument::REQUIRED,
-            'Please provide the path of the file you want to use.'
-        )->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
-    }
+        $errors = [];
+        $this->checkEmail($errors, $row[self::HEADER_EMAIL]);
 
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $filePath = $input->getArgument('filePath');
-        $delimiter = $input->getOption('delimiter');
-
-        $rows = $this->csvReader->convert($filePath, $delimiter);
-
-        $count = \count($rows);
-
-        if (0 === $count) {
-            $output->writeln(
-                '<error>Your file with path ' .
-                    $filePath .
-                    ' was not found or no user was found in your file. Please verify your path and file\'s content.</error>'
-            );
-            $output->writeln('<error>Import cancelled. No user was created.</error>');
-
-            return 1;
+        if (empty($row[self::HEADER_OPENID])) {
+            $errors[] = 'missing openId id';
+        } elseif ($this->isOpenIdAlreadyUsed($row[self::HEADER_OPENID])) {
+            $errors[] = 'opendId id ' . $row[self::HEADER_OPENID] . ' is already used';
         }
 
-        $deduplicatedRows = $this->deduplicateEmail($rows, $output);
-
-        $progress = new ProgressBar($output, \count($deduplicatedRows));
-        $progress->start();
-
-        $this->loopRows($deduplicatedRows, $output, $progress);
-
-        $progress->finish();
-
-        $output->writeln(
-            '<info>' . \count($deduplicatedRows) . ' users successfully created.</info>'
-        );
-
-        return 0;
-    }
-
-    protected function createUser(array $row): void
-    {
-        $email = filter_var($row['email'], \FILTER_SANITIZE_EMAIL);
-
-        /** @var User $user */
-        $user = $this->userManager->createUser();
-        $user->setEmail($email);
-
-        $user->setUsername(trim($row['username']));
-        $user->setOpenId($row['openid_id']);
-        $user->setEnabled(true);
-        $this->userManager->updateUser($user);
-    }
-
-    private function deduplicateEmail(array $rows, OutputInterface $output): array
-    {
-        $deduplicatedRows = [];
-
-        foreach ($rows as $row) {
-            if ($row instanceof Row) {
-                $row = $row->toArray();
+        if (isset($row[self::HEADER_USER_TYPE])) {
+            $userType = trim($row[self::HEADER_USER_TYPE]);
+            if ($userType && !\in_array($userType, $this->userTypes)) {
+                $errors[] = "userType ${userType} not found.";
             }
-            $needle = $row['email'];
-            if (isset($deduplicatedRows[$needle])) {
-                continue;
-            }
-            if($this->userRepository->findOneByEmail($needle)) {
-                continue;
-            }
-            $deduplicatedRows[$needle] = $row;
-        }
-        if (\count($rows) > \count($deduplicatedRows)) {
-            $output->writeln(
-                '<info> Skipping ' .
-                    (\count($rows) - \count($deduplicatedRows)) .
-                    ' duplicated email(s).</info>'
-            );
         }
 
-        return $deduplicatedRows;
+        return $errors;
+    }
+
+    protected function importRow(array $row): void
+    {
+        $user = $this->generateUser($row[self::HEADER_USERNAME], $row[self::HEADER_EMAIL]);
+        $user->setOpenId($row[self::HEADER_OPENID]);
+        if (isset($row[self::HEADER_USER_TYPE]) && !empty($row[self::HEADER_USER_TYPE])) {
+            $user->setUserType($this->userTypes[trim($row[self::HEADER_USER_TYPE])]);
+        }
+        $this->createdOpenIds[] = $user->getOpenId();
+
+        if (!$this->dryRun) {
+            $this->userManager->updateUser($user);
+        }
+    }
+
+    private function isOpenIdAlreadyUsed(string $openId): bool
+    {
+        if (\array_key_exists($openId, $this->createdOpenIds)) {
+            return true;
+        }
+        if ($this->userManager->findUserBy(['openId' => $openId])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function setUserTypes(UserTypeRepository $repository): void
+    {
+        /** @var UserType $userType */
+        foreach ($repository->findAll() as $userType) {
+            $this->userTypes[trim($userType->getName())] = $userType;
+        }
     }
 }

@@ -109,13 +109,17 @@ Scenario: Admin wants to import idf users from a CSV
   "toto";"toto@test.com";"openidtoto"
   "titi";"titi@test.com";"openidtiti"
   "tata";"tata@test.com";"openid_tata"
-  "duplicated";"titi@test.com";"openidtiti"
+  "titi";"titi@test.com";"openidtiti"
   "admin";"admin@test.com";"openidadmin"
+  "";;
   """
   Given I run "capco:import:idf-users vfs://users.csv --delimiter ';'"
   Then the command exit code should be 0
   And I should see "3 users successfully created." in output
-  And I should see "Skipping 2 duplicated email(s)." in output
+  And I should see "3 lines with errors" in output
+  And I should see "On line 4 : email titi@test.com is already used, opendId id openidtiti is already used" in output
+  And I should see "On line 5 : email admin@test.com is already used" in output
+  And I should see "On line 6 : missing email, missing openId id" in output
 
 @database
 Scenario: Admin wants to import a IDF BP

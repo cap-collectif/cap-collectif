@@ -2,166 +2,110 @@
 
 namespace Capco\AppBundle\Command;
 
-use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
-use Box\Spout\Reader\CSV\Reader;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
-use FOS\UserBundle\Model\UserManagerInterface;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+use Capco\UserBundle\Doctrine\UserManager;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateUsersFromCsvCommand extends Command
+class CreateUsersFromCsvCommand extends AbstractImportCsvCommand
 {
-    const HEADERS = ['username', 'email', 'password'];
-    protected $filePath;
-    protected $delimiter;
-    protected UserManagerInterface $userManager;
-    protected ConvertCsvToArray $csvReader;
+    public const HEADER_USERNAME = 'username';
+    public const HEADER_EMAIL = 'email';
+    public const HEADER_PASSWORD = 'password';
+
+    protected UserManager $userManager;
+    protected array $createdEmails = [];
+    protected array $createdUsernames = [];
 
     public function __construct(
         ?string $name,
-        UserManagerInterface $userManager,
+        UserManager $userManager,
         ConvertCsvToArray $csvReader
     ) {
+        parent::__construct($name, $csvReader);
         $this->userManager = $userManager;
-        $this->csvReader = $csvReader;
-        parent::__construct($name);
     }
 
     protected function configure()
     {
-        $this->setDescription('Import users from a CSV file')
-            ->addArgument(
-                'filePath',
-                InputArgument::REQUIRED,
-                'Please provide the path of the file you want to use.'
-            )
-            ->addOption(
-                'delimiter',
-                'd',
-                InputOption::VALUE_OPTIONAL,
-                'Delimiter used in csv',
-                ';'
-            );
+        parent::configure();
+        $this->setDescription('Import users from a CSV file');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function getRowErrors(array &$row): array
     {
-        $this->filePath = $input->getArgument('filePath');
-        $this->delimiter = $input->getOption('delimiter');
-
-        $rows = $this->csvReader->convert($this->filePath);
-
-        $count = \count($rows);
-
-        if (0 === $count) {
-            $output->writeln(
-                '<error>Your file with path ' .
-                    $this->filePath .
-                    ' was not found or no user was found in your file. Please verify your path and file\'s content.</error>'
-            );
-            $output->writeln('<error>Import cancelled. No user was created.</error>');
-
-            return 1;
+        $errors = [];
+        $this->checkEmail($errors, $row[self::HEADER_EMAIL]);
+        if (empty($row[self::HEADER_PASSWORD])) {
+            $errors[] = 'missing password';
         }
 
-        $progress = new ProgressBar($output, $count - 1);
-        $progress->start();
-
-        $this->loopRows($rows, $output, $progress);
-
-        $output->writeln('<info>' . \count($rows) . ' users successfully created.</info>');
-
-        return 0;
+        return $errors;
     }
 
-    protected function loopRows($rows, $output, $progress): void
+    protected function importRow(array $row): void
     {
-        $loop = 1;
+        $user = $this->generateUser($row[self::HEADER_USERNAME], $row[self::HEADER_EMAIL]);
+        $user->setPlainpassword($row[self::HEADER_PASSWORD]);
 
-        foreach ($rows as $row) {
-            if ($this->isValidRow($row, $output)) {
-                $this->createUser($row);
-                $progress->advance();
-            }
-
-            ++$loop;
+        if (!$this->dryRun) {
+            $this->userManager->updateUser($user);
         }
     }
 
-    protected function createUser(array $row): void
-    {
-        $user = $this->userManager->createUser();
-        $user->setUsername($row['username']);
-        $user->setEmail(filter_var($row['email'], \FILTER_SANITIZE_EMAIL));
-        $user->setPlainpassword($row['password']);
-        $user->setEnabled(true);
-        $this->userManager->updateUser($user);
-    }
-
-    /**
-     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
-     * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException
-     * @throws \Box\Spout\Common\Exception\IOException
-     */
-    protected function getRows(): array
-    {
-        $rows = [];
-        $reader = ReaderEntityFactory::createCSVReader();
-        $reader->setFieldDelimiter($this->delimiter ?? ';');
-        $reader->open($this->filePath);
-        if ($reader instanceof Reader) {
-            foreach ($reader->getSheetIterator() as $sheet) {
-                foreach ($sheet->getRowIterator() as $row) {
-                    $rows[] = $row;
-                }
-            }
-
-            return $rows;
+    protected function handleRuntimeException(
+        \RuntimeException $exception,
+        OutputInterface $output
+    ): int {
+        if (self::ERROR_NO_FILE === $exception->getMessage()) {
+            $output->writeln("<error>File {$this->filePath} not found !</error>");
+        } elseif (self::ERROR_EMPTY_FILE === $exception->getMessage()) {
+            $output->writeln('<error>No user found in file ! Maybe wrong delimiter ?</error>');
+        } else {
+            throw $exception;
         }
-
-        return $rows;
-    }
-
-    protected function isValidHeaders($row, OutputInterface $output): bool
-    {
-        if ($this::HEADERS !== $row) {
-            $output->writeln('<error>Error headers not correct</error>');
-
-            return false;
-        }
-
-        return true;
-    }
-
-    protected function generateContentException(OutputInterface $output): int
-    {
-        $output->writeln('<error>Content of your file is not valid.</error>');
-        $output->writeln('<error>Import cancelled. No user was created.</error>');
 
         return 1;
     }
 
-    protected function isValidRow($row, OutputInterface $output): bool
+    protected function successMessage(int $successCount, OutputInterface $output): int
     {
-        $hasError = false;
-        if (\count($row) < \count($this::HEADERS)) {
-            $hasError = true;
+        $output->writeln("<info>${successCount} users successfully created.</info>");
+
+        return 0;
+    }
+
+    protected function generateUser(string $username, string $email): User
+    {
+        $user = new User();
+        $user->setUsername($username);
+        $user->setEmail(filter_var($email, \FILTER_SANITIZE_EMAIL));
+        $user->setEnabled(true);
+
+        $this->createdEmails[] = $user->getEmail();
+        $this->createdUsernames[] = $user->getUsername();
+
+        return $user;
+    }
+
+    protected function checkEmail(array &$errors, $email): void
+    {
+        if (empty($email)) {
+            $errors[] = 'missing email';
+        } elseif ($this->isEmailAlreadyUsed($email)) {
+            $errors[] = "email ${email} is already used";
+        }
+    }
+
+    private function isEmailAlreadyUsed(string $email): bool
+    {
+        if (\array_key_exists($email, $this->createdEmails)) {
+            return true;
+        }
+        if ($this->userManager->findUserByEmail($email)) {
+            return true;
         }
 
-        foreach ($this::HEADERS as $header) {
-            if (empty($row[$header])) {
-                $hasError = true;
-            }
-        }
-
-        if ($hasError) {
-            return (bool) $this->generateContentException($output);
-        }
-
-        return true;
+        return false;
     }
 }
