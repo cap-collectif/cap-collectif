@@ -15,12 +15,6 @@ def install_git_hook(ctx):
 
 
 @task
-def sign_ssl(ctx):
-    environments.ci()
-    system.sign_ssl()
-
-
-@task
 def symfony_bin_install(ctx, force=False):
     environments.ci()
     system.symfony_bin_install(force)

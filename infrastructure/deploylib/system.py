@@ -1,7 +1,8 @@
 from sys import platform as _platform
-from fabric import Connection, Config
+from fabric import Config
 from invoke import run
-import os, subprocess
+import os
+import subprocess
 
 
 color_cyan = '\033[96m'
@@ -22,17 +23,19 @@ def linux_docker_install(force=False):
 
 
 def doctor():
-    run('echo "Docker: `docker -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"')
-    run('echo "Docker compose: `docker-compose -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"')
-    run('echo "Node: `node -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"')
-    run('echo "Yarn: `yarn -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"')
+    if _platform == "darwin":
+        print(color_yellow + "On MacOS, please use 'Docker Desktop for Mac' and dedicate at least 6GB of memory (Preferences > Resources > Memory)." + color_white)
+    run('echo "Docker: ' + color_yellow + '`docker -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
+    run('echo "Docker compose: ' + color_yellow + '`docker-compose -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
+    run('echo "Node: ' + color_yellow + '`node -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
+    run('echo "Yarn: ' + color_yellow + '`yarn -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
     if _platform == 'darwin':
-        run('echo "PHP: `php -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"')
-        run('echo "Composer: `composer --version | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"')
-        run('php -m | grep -qi redis && echo "PHP extension: redis enabled" || echo "PHP extension: redis not found"')
-        run('php -m | grep -qi imagick && echo "PHP extension: imagick enabled" || echo "PHP extension: imagick not found"')
-        run('php -m | grep -qi amqp && echo "PHP extension: amqp enabled" || echo "PHP extension: amqp not found"')
-        run('echo "Symfony CLI: `symfony -V | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"')
+        run('echo "PHP: ' + color_yellow + '`php -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"' + color_white)
+        run('php -m | grep -qi redis && echo "PHP extension: redis enabled" || echo "PHP extension: redis not found"' + color_white)
+        run('php -m | grep -qi imagick && echo "PHP extension: imagick enabled" || echo "PHP extension: imagick not found"' + color_white)
+        run('php -m | grep -qi amqp && echo "PHP extension: amqp enabled" || echo "PHP extension: amqp not found"' + color_white)
+        run('echo "Composer: ' + color_yellow + '`composer --version | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"' + color_white)
+        run('echo "Symfony CLI: ' + color_yellow + ' `symfony -V | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"' + color_white)
 
 
 def symfony_bin_deps():
@@ -92,13 +95,14 @@ def configure_vhosts(mode='symfony_bin'):
     if _platform == 'darwin' and mode == "symfony_bin":
         domains.remove('capco.dev')
         tld = 'dev'
-        proxy_path = '~/.symfony/proxy.json'
+        proxy_path = '~/.symfony5/proxy.json'
         run('symfony local:proxy:domain:attach capco', warn=True)
 
         if run('cat ' + proxy_path + ' | grep \'%s\'' % '"tld": "wip"', warn=True).stdout:
             run("sed -i .bak 's/\"tld\": \"wip\"/\"tld\": \"" + tld + "\"/g' " + proxy_path, warn=True)
         print(color_cyan + 'Successfully attached Symfony proxy domain to ' + color_yellow + 'capco.' + tld + color_white)
 
+    run('echo "# Added by cap-collectif" | sudo tee -a /etc/hosts', warn=True)
     for domain in domains:
         if not run('cat /etc/hosts | grep %s | grep %s' % (domain, Config.local_ip), warn=True).stdout:
             print(color_cyan + '%s should point to %s in /etc/hosts' % (domain, Config.local_ip) + color_white)
@@ -108,6 +112,7 @@ def configure_vhosts(mode='symfony_bin'):
         if not run('cat /etc/hosts | grep %s | grep %s' % (domain, '127.0.0.1'), warn=True).stdout:
             print(color_cyan + '%s should point to %s in /etc/hosts' % (domain, '127.0.0.1') + color_white)
             run('echo "%s %s" | sudo tee -a /etc/hosts' % ('127.0.0.1', domain), warn=True)
+    run('echo "# End of section" | sudo tee -a /etc/hosts', warn=True)
 
 
 def generate_ssl():
@@ -115,10 +120,16 @@ def generate_ssl():
     Generate CRT (Black Magic)
     """
 
+    if _platform == "darwin":
+        print("Installing Symfony CLI local certificate authority...")
+        run('symfony local:server:ca:install')
+
+    print("Installing browser local certificate...")
     try:
         os.makedirs("infrastructure/services/local/nginx/ssl")
     except:
-        print("infrastructure/services/local/nginx/ssl already exists, skipping")
+        print(color_yellow + "Directory `infrastructure/services/local/nginx/ssl` already exists, skipping generation." + color_white)
+        return
 
     if subprocess.call(['which', 'mkcert']) != 0:
         raise Exception('mkcert is not installed, install it and try again')
@@ -127,24 +138,6 @@ def generate_ssl():
     run("mkcert -cert-file infrastructure/services/local/nginx/ssl/capco.crt -key-file infrastructure/services/local/nginx/ssl/capco.key *.cap.co capco.dev *.capco.dev capco.prod *.capco.prod capco.test *.capco.test capco.paris.fr")
     run("cat infrastructure/services/local/nginx/ssl/capco.crt > infrastructure/services/local/nginx/ssl/capco.pem")
     run("cat infrastructure/services/local/nginx/ssl/capco.key >> infrastructure/services/local/nginx/ssl/capco.pem")
-
-
-def sign_ssl_linux():
-    run('sudo cp infrastructure/services/local/nginx/ssl/rootCA.crt /etc/ssl/certs/')
-    run('sudo cp infrastructure/services/local/nginx/ssl/rootCA.key /etc/ssl/private')
-
-
-def sign_ssl_mac():
-    run('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % Config.local_dir + "infrastructure/services/local/nginx/ssl/capco.crt")
-    run('symfony local:server:ca:install')
-
-
-def sign_ssl():
-    if _platform == "linux" or _platform == "linux2":
-        sign_ssl_linux()
-    elif _platform == "darwin":
-        sign_ssl_mac()
-    print(color_cyan + 'Successfully added HTTPS support !' + color_white)
 
 
 def install_git_hook():

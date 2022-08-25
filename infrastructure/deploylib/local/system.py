@@ -27,12 +27,6 @@ def linux_docker_install(ctx, force=False):
 
 
 @task
-def sign_ssl(ctx):
-    environments.local()
-    system.sign_ssl()
-
-
-@task
 def symfony_bin_install(ctx, force=False):
     environments.local()
     system.symfony_bin_install(force)

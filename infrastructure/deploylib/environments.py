@@ -32,7 +32,6 @@ def local():
     if _platform == "linux" or _platform == "linux2":
         locallinux()
     elif _platform == "darwin":
-        print("Using docker for mac, please make sur you have at least 6GB of RAM on VM (for ES).")
         localmac_dockerformac()
     Connection.host = 'docker@localhost'
     Config.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']

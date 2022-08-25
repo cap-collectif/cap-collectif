@@ -39,9 +39,9 @@ def rabbitmq_queues(ctx):
 
 
 @task
-def setup_env_vars(ctx):
+def setup_default_env_vars(ctx):
     environments.local()
-    app.setup_env_vars()
+    app.setup_default_env_vars()
 
 
 @task

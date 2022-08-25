@@ -9,7 +9,7 @@ color_cyan = '\033[96m'
 color_white = '\033[0m'
 
 
-def setup_env_vars():
+def setup_default_env_vars():
     """
     Set the correct values for the .env.local file
     """
@@ -33,12 +33,22 @@ SYMFONY_RECAPTCHA_PRIVATE_KEY=INSERT_A_REAL_SECRET
 # If you want to enable sms, set the variables:
 SYMFONY_TWILIO_SID=INSERT_A_REAL_SECRET
 SYMFONY_TWILIO_TOKEN=INSERT_A_REAL_SECRET
+SYMFONY_TWILIO_DEFAULT_SUBACCOUNT_TOKEN=INSERT_A_REAL_SECRET
+SYMFONY_TWILIO_DEFAULT_SUBACCOUNT_SID=INSERT_A_REAL_SECRET
+SYMFONY_TWILIO_DEFAULT_VERIFY_SERVICE_ID=INSERT_A_REAL_SECRET
 
 # If you want to enable emails, set the variables:
 SYMFONY_DISABLE_MAIL_DELIVERY=false
 SYMFONY_MANDRILL_API_KEY=INSERT_A_REAL_SECRET
 SYMFONY_MAILJET_PUBLIC_KEY=INSERT_A_REAL_SECRET
 SYMFONY_MAILJET_PRIVATE_KEY=INSERT_A_REAL_SECRET
+SYMFONY_SENDINBLUE_API_KEY=INSERT_A_REAL_SECRET
+SYMFONY_SENDINBLUE_NL_LIST_ID=INSERT_A_REAL_SECRET
+SYMFONY_SENDINBLUE_SECRET=INSERT_A_REAL_SECRET
+
+# If you want to enable openid backchannel, set the variables:
+SYMFONY_OPENID_BACKCHANNEL_SECRET=INSERT_A_REAL_SECRET
+SYMFONY_OPENID_BACKCHANNEL_SECRET_DEV=INSERT_A_REAL_SECRET
 
 # Host mapping
 SYMFONY_DATABASE_HOST={host}
@@ -48,8 +58,9 @@ SYMFONY_RABBITMQ_HOST={host}
 SYMFONY_RABBITMQ_NODENAME={host}
 SYMFONY_ASSETS_HOST={asset_host}""" \
         .format(host=Config.local_ip, asset_host=Config.asset_host)
+    print('Generating your default environment variables...')
     run('echo "%s" > .env.local' % variables)
-    print(color_cyan + 'Successfully created `.env.local`')
+    print(color_white + 'Created ' + color_cyan + '.env.local' + color_white + ' file')
 
 
 def prepare_php(environment='dev'):
@@ -65,7 +76,7 @@ def deploy(environment='dev', user='capco', mode='symfony_bin'):
     "Deploy"
     if environment == 'dev':
         if _platform == 'darwin' and mode == 'symfony_bin':
-            setup_env_vars()
+            setup_default_env_vars()
         print(color_cyan + 'Successfully downloaded dependencies.' + color_white)
         prepare_php()
     command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', Config.www_app, 'root')
