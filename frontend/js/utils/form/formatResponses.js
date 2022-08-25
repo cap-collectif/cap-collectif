@@ -36,8 +36,9 @@ const formatResponses = (
 
       const questionOfResponse: ?Question = questions.find(q => q.id === idQuestion);
 
-      // It's not possible but flow...
-      if (!questionOfResponse) throw new Error(`Could not find question with id ${idQuestion}`);
+      if (!questionOfResponse) {
+        return [];
+      }
 
       const {
         type,

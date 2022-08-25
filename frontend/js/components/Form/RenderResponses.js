@@ -24,6 +24,7 @@ import select from '~/components/Form/Select';
 import getAvailableQuestionsIds from '~/utils/form/getAvailableQuestionsIds';
 import { MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY } from '~/utils/responsesHelper';
 import Section from '~/components/Form/Section/Section';
+import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey';
 
 const mapQuestionChoicesToOptions = (question: Question) =>
   question.choices &&
@@ -72,6 +73,7 @@ const RenderResponses = ({
   divClassName = '',
   memoize,
   unstable__enableCapcoUiDs,
+  memoizeId,
 }: {
   ...FieldArrayProps,
   questions: Questions,
@@ -85,6 +87,7 @@ const RenderResponses = ({
   divClassName?: string,
   memoize: any,
   unstable__enableCapcoUiDs?: boolean,
+  memoizeId?: string,
 }) => {
   const [lastQuestionType, setLastQuestionType] = useState<?QuestionType>(null);
   const [isModePrint, setModePrint] = useState<boolean>(false);
@@ -101,7 +104,7 @@ const RenderResponses = ({
     !isEqual(oldAvailableQuestions, availableQuestions) ||
     availableQuestionsNotInitialize(oldAvailableQuestions)
   ) {
-    memoize.cache.set('availableQuestions', availableQuestions);
+    memoize.cache.set(getAvailabeQuestionsCacheKey(memoizeId), availableQuestions);
     resetNotAvailableQuestions(questions, responses, availableQuestions, change);
   }
 

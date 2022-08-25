@@ -49,6 +49,7 @@ import { isEmail } from '~/services/Validator';
 import Captcha from '~/components/Form/Captcha';
 import { SPACES_SCALES } from '~/styles/theme/base';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
+import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -252,8 +253,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
 };
 
 const validate = (values: FormValues, props: Props) => {
-  const availableQuestions: Array<string> =
-    memoizeAvailableQuestions.cache.get('availableQuestions');
+  const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
+    getAvailabeQuestionsCacheKey(props.questionnaire.id)
+  );
   const { intl } = props;
   const { questions } = props.questionnaire;
   const { responses } = values;
@@ -396,7 +398,10 @@ export class ReplyForm extends React.Component<Props, State> {
       isAuthenticated,
       isAnonymousQuestionnaireFeatureEnabled,
     } = this.props;
-    const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
+
+    const availableQuestions = memoizeAvailableQuestions.cache.get(
+      getAvailabeQuestionsCacheKey(questionnaire.id),
+    );
     const disabled = this.formIsDisabled();
     const isDraft = reply && reply.draft;
 
@@ -452,7 +457,10 @@ export class ReplyForm extends React.Component<Props, State> {
                   !questionnaire.step?.requirements?.viewerMeetsTheRequirements && (
                     <Panel.Body>
                       <WYSIWYGRender value={questionnaire.step?.requirements?.reason} />
-                      <RequirementsFormLegacy step={questionnaire.step} stepId={questionnaire.step.id} />
+                      <RequirementsFormLegacy
+                        step={questionnaire.step}
+                        stepId={questionnaire.step.id}
+                      />
                     </Panel.Body>
                   )}
               </Panel>
@@ -471,6 +479,7 @@ export class ReplyForm extends React.Component<Props, State> {
             availableQuestions={availableQuestions}
             memoize={memoizeAvailableQuestions}
             unstable__enableCapcoUiDs
+            memoizeId={questionnaire.id}
           />
 
           {!isAuthenticated &&

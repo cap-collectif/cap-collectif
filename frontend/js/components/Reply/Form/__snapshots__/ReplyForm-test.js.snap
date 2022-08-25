@@ -29,6 +29,7 @@ exports[`<ReplyForm /> should render correctly when anonymous participation is a
         }
       }
       memoize={[Function]}
+      memoizeId="2"
       name="responses"
       questions={
         Array [
@@ -125,6 +126,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
         }
       }
       memoize={[Function]}
+      memoizeId="2"
       name="responses"
       questions={
         Array [
@@ -607,6 +609,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
         }
       }
       memoize={[Function]}
+      memoizeId="2"
       name="responses"
       questions={
         Array [
@@ -871,6 +874,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
         }
       }
       memoize={[Function]}
+      memoizeId="2"
       name="responses"
       questions={
         Array [
@@ -1082,6 +1086,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
         }
       }
       memoize={[Function]}
+      memoizeId="2"
       name="responses"
       questions={
         Array [
@@ -1408,6 +1413,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
         }
       }
       memoize={[Function]}
+      memoizeId="2"
       name="responses"
       questions={
         Array [
@@ -1647,6 +1653,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
         }
       }
       memoize={[Function]}
+      memoizeId="2"
       name="responses"
       questions={
         Array [
@@ -1829,6 +1836,7 @@ exports[`<ReplyForm /> should render correctly with requirements filled 1`] = `
         }
       }
       memoize={[Function]}
+      memoizeId="2"
       name="responses"
       questions={
         Array [
@@ -2027,6 +2035,7 @@ exports[`<ReplyForm /> should render correctly with requirements not full filled
         }
       }
       memoize={[Function]}
+      memoizeId="2"
       name="responses"
       questions={
         Array [
