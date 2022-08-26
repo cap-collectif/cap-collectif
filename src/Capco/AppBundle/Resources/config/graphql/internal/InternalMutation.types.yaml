@@ -88,6 +88,13 @@ InternalMutation:
                     inputType: AddCommentVoteInput
                     payloadType: AddCommentVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddCommentVoteMutation", [value, getUser()])'
+            addOrganization:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddOrganizationInput
+                    payloadType: AddOrganizationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddOrganizationMutation", [value])'
             addArgument:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

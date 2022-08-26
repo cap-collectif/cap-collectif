@@ -496,6 +496,18 @@ type AddOpinionVotePayload {
   clientMutationId: String
 }
 
+input AddOrganizationInput {
+  """The title of the new organization."""
+  title: String
+  clientMutationId: String
+}
+
+type AddOrganizationPayload {
+  """The newly created organization."""
+  organization: Organization
+  clientMutationId: String
+}
+
 input AddProposalNewsInput {
   """The Node ID of the proposal to add news."""
   proposalId: ID!
@@ -7508,6 +7520,7 @@ type Mutation {
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
+  addOrganization(input: AddOrganizationInput!): AddOrganizationPayload
   addArgument(input: AddArgumentInput!): AddArgumentPayload
   addArgumentVote(input: AddArgumentVoteInput!): AddArgumentVotePayload
   addSource(input: AddSourceInput!): AddSourcePayload

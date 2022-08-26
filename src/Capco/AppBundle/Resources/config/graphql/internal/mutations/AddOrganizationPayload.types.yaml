@@ -1,0 +1,7 @@
+AddOrganizationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            organization:
+                type: 'InternalOrganization'
+                description: 'The newly created organization.'
