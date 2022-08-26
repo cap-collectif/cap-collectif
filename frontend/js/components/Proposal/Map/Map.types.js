@@ -23,7 +23,7 @@ export type MapRef = {|
 export type PopupProps = {
   setLatLng: MapCenterObject => PopupProps,
   openOn: (null | MapProps) => void,
-  _close: () => void,
+  close: () => void,
 };
 export type PopupRef = {|
   +current: null | PopupProps,

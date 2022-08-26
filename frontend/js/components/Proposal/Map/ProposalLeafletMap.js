@@ -110,7 +110,7 @@ const openPopup = (
 };
 
 const closePopup = (mapRef: MapRef, popupRef: PopupRef) => {
-  if (popupRef.current) popupRef.current._close();
+  if (popupRef.current) popupRef.current.close();
 };
 
 const settingsSlider = {
