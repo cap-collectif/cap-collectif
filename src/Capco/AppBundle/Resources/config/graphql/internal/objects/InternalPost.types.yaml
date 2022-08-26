@@ -3,6 +3,7 @@ InternalPost:
     inherits:
         - PreviewPost
         - Commentable
+        - InternalOwnerable
     config:
         interfaces: [Commentable]
         name: Post

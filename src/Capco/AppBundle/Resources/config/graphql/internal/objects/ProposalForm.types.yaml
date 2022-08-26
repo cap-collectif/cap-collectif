@@ -4,6 +4,7 @@ ProposalForm:
         - Node
         - InternalWithProposals
         - UniformResourceLocatable
+        - InternalOwnerable
     config:
         description: 'A budget form'
         interfaces:

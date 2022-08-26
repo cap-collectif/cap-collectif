@@ -5514,6 +5514,9 @@ type EmailingCampaign implements Node {
   """uuid of the emailing campaign"""
   id: ID!
 
+  """The user that created the resource."""
+  creator: User
+
   """name of the emailing campaign"""
   name: String!
 
@@ -5792,6 +5795,9 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
+
+  """The user that created the resource."""
+  creator: User
 
   """The event admin edit url"""
   adminUrl: URI!
@@ -6893,6 +6899,9 @@ input LogicJumpInput {
 type MailingList implements Node {
   """uuid of the mailing list"""
   id: ID!
+
+  """The user that created the resource."""
+  creator: User
 
   """name of the mailing list"""
   name: String!
@@ -8789,6 +8798,9 @@ type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocat
     first: Int = 100
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
+
+  """The user that created the resource."""
+  creator: User
   displayedOnBlog: Boolean!
   relatedContent: [PostRelatedContent!]!
   viewerDidAuthor: Boolean!
@@ -9201,6 +9213,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """When the time interval begins or ends."""
   timeRange: TimeRange!
+
+  """The user that created the resource."""
+  creator: User
   hasAnalysis: Boolean!
 
   """A list of contributors associated with the project."""
@@ -10427,6 +10442,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   """The URL to this resource."""
   url: URI!
+
+  """The user that created the resource."""
+  creator: User
   reference: String!
   description: HTML
 
@@ -12207,6 +12225,9 @@ type Questionnaire implements Node {
 
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
+
+  """The user that created the resource."""
+  creator: User
   step: QuestionnaireStep
   anonymousAllowed: Boolean!
   description: HTML

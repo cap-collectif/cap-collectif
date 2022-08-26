@@ -6,6 +6,7 @@ InternalProject:
         - InternalWithProposals
         - InternalPrimaryKey
         - InternalTimeRangeable
+        - InternalOwnerable
     config:
         name: Project
         interfaces:

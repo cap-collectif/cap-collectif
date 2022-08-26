@@ -2,6 +2,7 @@ EmailingCampaign:
     type: object
     inherits:
         - Node
+        - InternalOwnerable
     config:
         interfaces:
             - Node

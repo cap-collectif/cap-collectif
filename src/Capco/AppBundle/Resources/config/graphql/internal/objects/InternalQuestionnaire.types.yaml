@@ -3,6 +3,7 @@ InternalQuestionnaire:
     inherits:
         - PreviewQuestionnaire
         - InternalPrimaryKey
+        - InternalOwnerable
     config:
         name: Questionnaire
         fields:

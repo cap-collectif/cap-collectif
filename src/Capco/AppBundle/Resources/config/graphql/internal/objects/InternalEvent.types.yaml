@@ -5,6 +5,7 @@ InternalEvent:
         - Commentable
         - InternalPrimaryKey
         - InternalTimeRangeable
+        - InternalOwnerable
     config:
         description: 'An event.'
         interfaces:
