@@ -1,0 +1,15 @@
+OrganizationMember:
+    type: object
+    config:
+        name: OrganizationMember
+        description: 'A member of an organization.'
+        fields:
+            organization:
+                type: InternalOrganization!
+                description: 'The organization the member belongs to.'
+            user:
+                type: InternalUser!
+                description: 'The member.'
+            role:
+                type: OrganizationAffiliation!
+                description: 'The role of the member in the organization.'

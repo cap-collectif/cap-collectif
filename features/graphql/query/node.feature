@@ -5,7 +5,7 @@ Scenario: GraphQL client want to get a node of all available types
   Given I send a GraphQL POST request:
   """
   {
-    "query": "query node ($opinionId: ID!, $proposalId: ID!, $projectId: ID!, $groupId: ID!, $proposalFormId: ID!, $questionnaireId: ID!, $eventId: ID!, $requirementId: ID!, $questionId: ID!, $responseId: ID!, $districtId: ID!){
+    "query": "query node ($opinionId: ID!, $proposalId: ID!, $projectId: ID!, $groupId: ID!, $proposalFormId: ID!, $questionnaireId: ID!, $eventId: ID!, $requirementId: ID!, $questionId: ID!, $responseId: ID!, $districtId: ID!, $organizationId: ID!){
       opinion: node(id: $opinionId) {
         ... on Opinion {
           title
@@ -63,6 +63,12 @@ Scenario: GraphQL client want to get a node of all available types
           __typename
         }
       }
+      organization: node(id: $organizationId) {
+        ... on Organization {
+          id
+          __typename
+        }
+      }
     }",
     "variables": {
       "opinionId": "opinion1",
@@ -75,7 +81,8 @@ Scenario: GraphQL client want to get a node of all available types
       "requirementId": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx",
       "questionId": "UXVlc3Rpb246Mg==",
       "responseId": "VmFsdWVSZXNwb25zZTpyZXNwb25zZVRhZ0Nsb3VkMjk=",
-      "districtId": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ=="
+      "districtId": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
+      "organizationId": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE="
     }
   }
   """
@@ -117,6 +124,10 @@ Scenario: GraphQL client want to get a node of all available types
         "district":{
            "id":"RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
            "__typename":"ProjectDistrict"
+        },
+        "organization":{
+           "id":"T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE=",
+           "__typename":"Organization"
         }
      }
   }

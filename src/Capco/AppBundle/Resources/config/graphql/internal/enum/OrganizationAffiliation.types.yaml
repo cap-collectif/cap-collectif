@@ -1,0 +1,12 @@
+OrganizationAffiliation:
+    type: enum
+    config:
+        name: OrganizationAffiliation
+        description: 'The affiliation of a user to an Organization'
+        values:
+            ADMIN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\OrganizationAffiliation::ADMIN")'
+                description: 'Organizations that are administered by the viewer.'
+            USER:
+                value: '@=constant("Capco\\AppBundle\\Enum\\OrganizationAffiliation::USER")'
+                description: 'Organizations the viewer is member of.'

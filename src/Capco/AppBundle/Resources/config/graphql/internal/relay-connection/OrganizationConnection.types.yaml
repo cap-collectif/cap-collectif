@@ -1,0 +1,7 @@
+OrganizationConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalOrganization!
+        connectionFields:
+            totalCount:
+                type: Int!

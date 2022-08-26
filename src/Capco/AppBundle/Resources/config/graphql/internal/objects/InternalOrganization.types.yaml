@@ -59,3 +59,6 @@ InternalOrganization:
             url:
                 type: 'URI!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\OrganizationUrlResolver", [value])'
+            members:
+                type: '[OrganizationMember!]'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMembersResolver", [value, getUser()])'

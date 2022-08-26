@@ -8317,6 +8317,48 @@ type Organization implements Node & Author & PostOwner {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
+  members: [OrganizationMember!]
+}
+
+"""The affiliation of a user to an Organization"""
+enum OrganizationAffiliation {
+  """Organizations that are administered by the viewer."""
+  ADMIN
+
+  """Organizations the viewer is member of."""
+  USER
+}
+
+"""A connection to a list of items."""
+type OrganizationConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [OrganizationEdge]
+}
+
+"""An edge in a connection."""
+type OrganizationEdge {
+  """The item at the end of the edge."""
+  node: Organization!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""A member of an organization."""
+type OrganizationMember {
+  """The organization the member belongs to."""
+  organization: Organization!
+
+  """The member."""
+  user: User!
+
+  """The role of the member in the organization."""
+  role: OrganizationAffiliation!
 }
 
 """A step inside a project."""
@@ -11857,6 +11899,25 @@ type Query {
 
   """Get sms analytics"""
   smsAnalytics: SmsAnalytics!
+  organizations(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """search an organization"""
+    search: String
+
+    """
+    Array of affiliations of viewer to organizations.
+    For example, ADMIN will return only organizations the viewer is member of
+    
+    """
+    affiliations: [OrganizationAffiliation!]
+  ): OrganizationConnection!
 }
 
 input QueryAnalyticsFilter {
