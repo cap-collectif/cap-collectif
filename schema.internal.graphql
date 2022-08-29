@@ -17494,6 +17494,7 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   isAdmin: Boolean!
   isSuperAdmin: Boolean!
   isOnlyProjectAdmin: Boolean!
+  isAdminOrganization: Boolean!
 
   """Get any connection attempt"""
   connectionAttempt(

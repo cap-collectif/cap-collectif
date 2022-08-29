@@ -337,6 +337,8 @@ InternalUser:
                 type: 'Boolean!'
             isOnlyProjectAdmin:
                 type: 'Boolean!'
+            isAdminOrganization:
+                type: 'Boolean!'
             connectionAttempt:
                 argsBuilder: 'Relay::ForwardConnection'
                 type: 'UserConnectionAttemptConnection'
