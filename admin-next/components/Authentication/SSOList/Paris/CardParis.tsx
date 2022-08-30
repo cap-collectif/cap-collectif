@@ -3,6 +3,9 @@ import CardSSO from '@ui/CardSSO/CardSSO';
 import { Switch, Text } from '@cap-collectif/ui';
 import logo from './Logo';
 
+/**
+ * @deprecated
+ */
 const CardParis: FC = () => (
     <CardSSO>
         <CardSSO.Header>{logo}</CardSSO.Header>

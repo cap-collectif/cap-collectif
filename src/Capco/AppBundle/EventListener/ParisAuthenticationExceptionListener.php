@@ -9,15 +9,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Twig\Environment;
 
+/** @deprecated  */
 class ParisAuthenticationExceptionListener
 {
-    protected $logger;
-    private $templating;
-    private $client;
+    protected LoggerInterface $logger;
+    private Environment $templating;
+    private OpenAmClient $client;
 
     public function __construct(
         LoggerInterface $logger,
         Environment $templating,
+        // use openId instead of openAm
         OpenAmClient $client
     ) {
         $this->logger = $logger;

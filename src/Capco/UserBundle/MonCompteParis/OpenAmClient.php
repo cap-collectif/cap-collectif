@@ -5,6 +5,9 @@ namespace Capco\UserBundle\MonCompteParis;
 use Http\Client\Common\HttpMethodsClient;
 use Psr\Log\LoggerInterface;
 
+/**
+ * @deprecated
+ */
 class OpenAmClient
 {
     public const COOKIE_NAME = 'mcpAuth';

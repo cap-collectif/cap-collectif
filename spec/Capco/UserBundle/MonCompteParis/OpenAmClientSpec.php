@@ -9,6 +9,7 @@ use Http\Client\Common\HttpMethodsClient;
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/** @deprecated  */
 class OpenAmClientSpec extends ObjectBehavior
 {
     function it_get_user_informations(HttpMethodsClient $client, LoggerInterface $logger, ResponseInterface $response)

@@ -22,6 +22,7 @@ class Manager
     public const public_api = 'public_api';
     public const graphql_introspection = 'graphql_introspection';
     public const login_facebook = 'login_facebook';
+    /** @deprecated */
     public const login_paris = 'login_paris';
     public const login_saml = 'login_saml';
     public const login_cas = 'login_cas';

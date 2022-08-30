@@ -9,11 +9,13 @@ use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/** @deprecated  */
 class MonCompteParisUserProvider implements UserProviderInterface
 {
     private UserManager $userManager;
     private OpenAmClient $openAmCaller;
 
+    /** Use open id instead of OpenAm */
     public function __construct(UserManager $manager, OpenAmClient $openAmCaller)
     {
         $this->userManager = $manager;

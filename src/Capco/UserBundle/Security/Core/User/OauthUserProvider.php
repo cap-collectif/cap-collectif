@@ -189,14 +189,18 @@ class OauthUserProvider extends FOSUBUserProvider
     {
         $ressourceOwner = $response->getResourceOwner();
         $serviceName = $ressourceOwner->getName();
-        $email = $response->getEmail();
-        $ssoIsNotFacebook = 'facebook' !== $serviceName;
-        if (!$email && $ssoIsNotFacebook) {
+        // testing mail for RedHat
+        $email =
+            $response->getEmail() ??
+            ($response->getData()['mail'] ?? ($response->getData()['email'] ?? null));
+        $ssoIsFacebookOrOpenId = \in_array($serviceName, ['facebook', 'openid']);
+        if (!$email && !$ssoIsFacebookOrOpenId) {
             $email = $serviceName . '_' . $response->getUsername();
         }
         $user = $viewer instanceof User ? $viewer : $this->findUser($response, $email);
         $username =
             $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
+
         if (null === $user) {
             $this->isNewUser = true;
             $user = $this->userManager->createUser();

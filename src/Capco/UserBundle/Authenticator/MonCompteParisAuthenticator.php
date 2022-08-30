@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 
+/** @deprecated  */
 class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
 {
     protected HttpUtils $httpUtils;

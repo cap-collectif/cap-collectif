@@ -108,6 +108,60 @@ class OauthUserProviderSpec extends ObjectBehavior
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
 
+    public function it_load_new_openid_redhat_user(
+        UserResponseInterface $response,
+        UserRepository $userRepository,
+        OpenIDResourceOwner $ressourceOwner,
+        UserManagerInterface $userManager,
+        User $user,
+        OpenIDExtraMapper $extraMapper,
+        TokenStorageInterface $tokenStorage,
+        TokenInterface $token
+    ) {
+        $this->generateGenericRedhatResponse($response, $ressourceOwner);
+        $tokenStorage->getToken()->willReturn($token);
+        $token->getUser()->willReturn(null);
+        // We try to find a user that match the criterias, but could not find one.
+        $userRepository
+            ->findByAccessTokenOrUsername('openid_access_token', 'openid_id')
+            ->willReturn(null);
+        $userRepository->findOneByEmail('openid_user@test.com')->willReturn(null);
+
+        $userManager
+            ->createUser()
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user->getId()->willReturn('<some uuid>');
+
+        // Here we assert right values are set for the user.
+        $user
+            ->setOpenId('openid_id')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setOpenIdAccessToken('openid_access_token')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setUsername('openid_user')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setEmail('openid_user@test.com')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setEnabled(true)
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $extraMapper->map($user, $response)->shouldBeCalled();
+
+        // We flush the new values.
+        $userManager->updateUser($user)->shouldBeCalled();
+
+        $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+    }
+
     public function it_load_new_facebook_user(
         UserResponseInterface $response,
         UserRepository $userRepository,
@@ -436,6 +490,15 @@ class OauthUserProviderSpec extends ObjectBehavior
         $response->getResourceOwner()->willReturn($ressourceOwner);
         $response->getLastName()->willReturn('Smith');
         $response->getFirstName()->willReturn('jean');
+        $response->getData()->willReturn(['email' => 'test@test.com']);
+    }
+
+    private function generateGenericRedhatResponse(
+        UserResponseInterface $response,
+        OpenIDResourceOwner $ressourceOwner
+    ) {
+        $this->generateGenericOpenIdResponse($response, $ressourceOwner);
+        $response->getData()->willReturn(['mail' => 'redhatuser@test.com']);
     }
 
     private function generateGenericFacebookResponse(
@@ -450,6 +513,7 @@ class OauthUserProviderSpec extends ObjectBehavior
         $response->getResourceOwner()->willReturn($ressourceOwner);
         $response->getLastName()->willReturn('Smith');
         $response->getFirstName()->willReturn('jean');
+        $response->getData()->willReturn([]);
     }
 
     private function generateGenericFranceConnectResponse(

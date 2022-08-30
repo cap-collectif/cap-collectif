@@ -9,6 +9,7 @@ use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use Capco\UserBundle\Security\Core\User\MonCompteParisUserProvider;
 use PhpSpec\ObjectBehavior;
 
+/** @deprecated  */
 class MonCompteParisUserProviderSpec extends ObjectBehavior
 {
     public function it_is_initializable(): void
