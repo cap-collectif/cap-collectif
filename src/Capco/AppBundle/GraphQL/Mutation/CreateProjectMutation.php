@@ -63,11 +63,11 @@ class CreateProjectMutation implements MutationInterface
         }
 
         $project = (new Project())->setCreator($viewer);
+        $project->setOwner(
+            $this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer)
+        );
 
         if (isset($arguments['owner'])) {
-            $project->setOwner(
-                $this->settableOwnerResolver->__invoke($arguments['owner'], $viewer)
-            );
             unset($arguments['owner']);
         }
         if ($viewer->isOnlyProjectAdmin()) {

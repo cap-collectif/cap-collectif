@@ -9,6 +9,9 @@ const CreateProjectMutation = /* GraphQL */ `
         authors {
           username
         }
+        owner {
+          username
+        }
         visibility
       }
     }
@@ -53,6 +56,14 @@ describe('createProject', () => {
       await expect(
         graphql(CreateProjectMutation, { input: { ...BASE_INPUT, authors: [] } }, 'internal_admin'),
       ).rejects.toThrowError('You must specify at least one author.');
+    });
+    it('should create a project when the user is a project admin', async () => {
+      const response = await graphql(
+        CreateProjectMutation,
+        { input: { ...BASE_INPUT, authors: [] } },
+        'internal_theo',
+      );
+      expect(response.createProject.project.owner.username).toStrictEqual('Théo QP');
     });
   });
 });
