@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User.organizations connection Cant fetch user's organization when user is not allowed. 1`] = `
+Object {
+  "node": Object {
+    "organizations": null,
+  },
+}
+`;
+
+exports[`User.organizations connection fetches a user's organization when authenticated as admin. 1`] = `
+Object {
+  "node": Object {
+    "organizations": Array [
+      Object {
+        "username": "GIEC",
+      },
+    ],
+  },
+}
+`;

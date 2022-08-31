@@ -17,6 +17,12 @@ class UserIsGrantedResolver
         $this->tokenStorage = $tokenStorage;
     }
 
+    /**
+     * @description
+     *  Check if user is viewer or admin. Protect data against other user or .anon
+     *  Prevent other user to see other data
+     *  For example : when it's called on user field, only owner and admin can access to the field
+     */
     public function isGranted(
         $user,
         $viewer = null,

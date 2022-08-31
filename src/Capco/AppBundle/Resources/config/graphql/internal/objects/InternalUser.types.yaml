@@ -393,3 +393,8 @@ InternalUser:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 resolve: '@=value.getOpenId()'
                 description: "The user's openidId value"
+            organizations:
+                type: '[InternalOrganization]'
+                description: "The organizations of which user is a member"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOrganizationsResolver", [value])'

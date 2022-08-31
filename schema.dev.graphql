@@ -17562,6 +17562,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
   """The user's openidId value"""
   openidId: String
+
+  """The organizations of which user is a member"""
+  organizations: [Organization]
 }
 
 """A connection to a list of items."""
