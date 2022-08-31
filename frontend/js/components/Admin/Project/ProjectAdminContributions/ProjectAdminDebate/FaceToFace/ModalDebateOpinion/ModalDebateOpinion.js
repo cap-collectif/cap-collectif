@@ -194,7 +194,7 @@ export const ModalDebateOpinion = ({
           noCode
           label={<FormattedMessage id="global.review" />}
           component={component}
-          maxLength="2000"
+          maxLength="4000"
           withCharacterCounter
         />
       </form>

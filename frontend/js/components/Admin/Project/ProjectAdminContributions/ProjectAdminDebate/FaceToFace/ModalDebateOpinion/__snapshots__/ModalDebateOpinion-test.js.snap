@@ -78,7 +78,7 @@ exports[`<ModalDebateOpinion /> should render correctly when creating opinion 1`
             values={Object {}}
           />
         }
-        maxLength="2000"
+        maxLength="4000"
         name="body"
         noCode={true}
         type="admin-editor"
@@ -191,7 +191,7 @@ exports[`<ModalDebateOpinion /> should render correctly when editing opinion 1`]
             values={Object {}}
           />
         }
-        maxLength="2000"
+        maxLength="4000"
         name="body"
         noCode={true}
         type="admin-editor"
