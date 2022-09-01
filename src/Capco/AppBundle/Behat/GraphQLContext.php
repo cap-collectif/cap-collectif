@@ -54,6 +54,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @When I am logged in to graphql as VMD
+     */
+    public function iAmLoggedInToGraphQLAsVMD()
+    {
+        $this->createAuthenticatedClient('valerie.massondelmotte@cap-collectif.com', 'toto');
+    }
+
+    /**
      * @When I am logged in to graphql as user_without_phone
      */
     public function iAmLoggedInToGraphQLAsUserWithoutPhone()

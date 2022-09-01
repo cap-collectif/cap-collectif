@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Entity;
 use Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Entity\Follower;
@@ -146,10 +147,11 @@ class User extends AbstractUser implements
     public function isAdminOrganization(): bool
     {
         foreach ($this->getMemberOfOrganizations()->toArray() as $memberOfOrganization) {
-            if ($memberOfOrganization->getRole() === OrganizationMemberRoleType::ADMIN) {
+            if (OrganizationMemberRoleType::ADMIN === $memberOfOrganization->getRole()) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -1106,5 +1108,16 @@ class User extends AbstractUser implements
         $this->memberOfOrganizations = $memberOfOrganizations;
 
         return $this;
+    }
+
+    public function removeOrganization(Organization $organization): array
+    {
+        return $this->getMemberOfOrganizations()
+            ->map(function (OrganizationMember $organizationMember) use ($organization) {
+                if ($organizationMember->getOrganization() === $organization) {
+                    $this->memberOfOrganizations->removeElement($organizationMember);
+                }
+            })
+            ->toArray();
     }
 }

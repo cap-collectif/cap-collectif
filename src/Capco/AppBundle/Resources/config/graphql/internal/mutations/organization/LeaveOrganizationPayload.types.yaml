@@ -1,0 +1,9 @@
+LeaveOrganizationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            organizations:
+                type: '[InternalOrganization]'
+                description: "The user's organizations."
+            errorCode:
+                type: LeaveOrganizationErrorCode

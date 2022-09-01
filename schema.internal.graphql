@@ -6771,6 +6771,25 @@ type LastnameRequirement implements Node & Requirement {
   viewerValue: String
 }
 
+"""Available errors on leave organization mutation."""
+enum LeaveOrganizationErrorCode {
+  """The given organization does not exist."""
+  ORGANIZATION_NOT_FOUND
+}
+
+input LeaveOrganizationInput {
+  """The organization ID to leave."""
+  organizationId: ID!
+  clientMutationId: String
+}
+
+type LeaveOrganizationPayload {
+  """The user's organizations."""
+  organizations: [Organization]
+  errorCode: LeaveOrganizationErrorCode
+  clientMutationId: String
+}
+
 """An available locale"""
 type Locale {
   """uuid of the locale"""
@@ -7530,6 +7549,7 @@ type Mutation {
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
   addOrganization(input: AddOrganizationInput!): AddOrganizationPayload
+  leaveOrganization(input: LeaveOrganizationInput!): LeaveOrganizationPayload
   addArgument(input: AddArgumentInput!): AddArgumentPayload
   addArgumentVote(input: AddArgumentVoteInput!): AddArgumentVotePayload
   addSource(input: AddSourceInput!): AddSourcePayload

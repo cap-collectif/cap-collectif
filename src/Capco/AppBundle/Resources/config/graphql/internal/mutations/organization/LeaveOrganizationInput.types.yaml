@@ -1,0 +1,8 @@
+LeaveOrganizationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of leaveOrganization mutation'
+        fields:
+            organizationId:
+                type: 'ID!'
+                description: 'The organization ID to leave.'
