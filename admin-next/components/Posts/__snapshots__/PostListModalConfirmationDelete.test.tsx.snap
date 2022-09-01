@@ -1,0 +1,282 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render correctly 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <button
+    aria-controls="id-g"
+    aria-describedby="id-g"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    aria-label="admin.global.delete"
+    className="sc-bdvvtL jBnaym cap-buttonQuickAction"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={0}
+    type="button"
+  >
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+      fill="none"
+      viewBox="0 0 12 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10.091 3.75H1.909a.286.286 0 00-.193.073.24.24 0 00-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 00.32-.707V4a.24.24 0 00-.08-.177.286.286 0 00-.193-.073zm-5.045 6.5a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11c.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zm2.727 0a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zM11.454 2h-2.59a.143.143 0 01-.097-.037.12.12 0 01-.04-.088V1.25a1.2 1.2 0 00-.4-.884A1.429 1.429 0 007.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 00-.4.884v.625a.12.12 0 01-.04.088.143.143 0 01-.096.037H.546a.572.572 0 00-.386.146A.48.48 0 000 2.5c0 .133.057.26.16.354A.572.572 0 00.545 3h10.91a.572.572 0 00.385-.146A.48.48 0 0012 2.5a.48.48 0 00-.16-.354.572.572 0 00-.386-.146zm-7.09-.125V1.25a.24.24 0 01.08-.177A.286.286 0 014.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 01.08.177v.625a.12.12 0 01-.04.088A.143.143 0 017.5 2h-3a.143.143 0 01-.096-.037.12.12 0 01-.04-.088z"
+        fill="currentColor"
+      />
+    </svg>
+  </button>,
+  <div
+    className="cap-tooltip-container"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
+        "zIndex": 1000,
+      }
+    }
+  />,
+  <div
+    aria-label="delete-confirmation"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+]
+`;
+
+exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render modal open 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <button
+    aria-controls="id-g"
+    aria-describedby="id-g"
+    aria-expanded={true}
+    aria-haspopup="dialog"
+    aria-label="admin.global.delete"
+    className="sc-bdvvtL jBnaym cap-buttonQuickAction"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={0}
+    type="button"
+  >
+    <svg
+      className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+      fill="none"
+      viewBox="0 0 12 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10.091 3.75H1.909a.286.286 0 00-.193.073.24.24 0 00-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 00.32-.707V4a.24.24 0 00-.08-.177.286.286 0 00-.193-.073zm-5.045 6.5a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11c.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zm2.727 0a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zM11.454 2h-2.59a.143.143 0 01-.097-.037.12.12 0 01-.04-.088V1.25a1.2 1.2 0 00-.4-.884A1.429 1.429 0 007.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 00-.4.884v.625a.12.12 0 01-.04.088.143.143 0 01-.096.037H.546a.572.572 0 00-.386.146A.48.48 0 000 2.5c0 .133.057.26.16.354A.572.572 0 00.545 3h10.91a.572.572 0 00.385-.146A.48.48 0 0012 2.5a.48.48 0 00-.16-.354.572.572 0 00-.386-.146zm-7.09-.125V1.25a.24.24 0 01.08-.177A.286.286 0 014.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 01.08.177v.625a.12.12 0 01-.04.088A.143.143 0 017.5 2h-3a.143.143 0 01-.096-.037.12.12 0 01-.04-.088z"
+        fill="currentColor"
+      />
+    </svg>
+  </button>,
+  <div
+    className="cap-tooltip-container"
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onTransitionEnd={[Function]}
+    role="tooltip"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "pointerEvents": "none",
+        "position": "fixed",
+        "top": "100%",
+        "zIndex": 1000,
+      }
+    }
+  />,
+  <div
+    aria-label="delete-confirmation"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bdvvtL cjNftN sc-gsNilK cap-modal__overlay"
+      onClick={[Function]}
+      style={
+        Object {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="sc-bdvvtL dYRnRy sc-bXTejn fAMVJm cap-modal"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+          }
+        }
+      >
+        <header
+          className="sc-bdvvtL ijabiQ cap-modal__header"
+        >
+          <div
+            className="sc-bdvvtL hJgXxS"
+          >
+            <h2
+              className="sc-bdvvtL geLhUw cap-heading"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              delete-confirmation
+            </h2>
+          </div>
+          <button
+            className="sc-bdvvtL cYwHQC"
+            onClick={[Function]}
+          >
+            <svg
+              className="sc-bdvvtL sc-eJwWfJ jxcAbw icfuGT cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+        <main
+          className="sc-bdvvtL kAxhVk cap-modal__body"
+        >
+          <p
+            className="sc-bdvvtL dgPHnB cap-text"
+          >
+            are-you-sure-to-delete-something {"element":"Post FR 12"}
+          </p>
+        </main>
+        <footer
+          className="sc-bdvvtL cnmiif cap-modal__footer"
+        >
+          <div
+            className="sc-bdvvtL gFvFYr cap-buttonGroup"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            <button
+              className="sc-bdvvtL sc-lcepkR fzwTIb itSeml cap-button"
+              onClick={[Function]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              cancel
+            </button>
+            <button
+              className="sc-bdvvtL sc-lcepkR fzwTIb ixkmkg cap-button"
+              onClick={[Function]}
+              type="button"
+            >
+              global.delete
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;

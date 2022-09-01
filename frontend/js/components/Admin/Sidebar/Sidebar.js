@@ -187,7 +187,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     <SidebarLink text="admin.label.theme" href="/admin/capco/app/theme/list" />
                   )}
                   {(isAdmin || isProjectAdmin) && (
-                    <SidebarLink text="admin.label.post" href="/admin/capco/app/post/list" />
+                    <SidebarLink text="admin.label.post" href="/admin-next/posts" />
                   )}
                   {features.calendar && (
                     <SidebarLink text="admin.label.events" href="/admin-next/events" />

@@ -6,3 +6,6 @@ PostOrderField:
             UPDATED_AT:
                 value: '@=constant("Capco\\AppBundle\\Enum\\PostOrderField::UPDATED_AT")'
                 description: 'Allows ordering a list of posts by when they have been updated.'
+            CREATED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\PostOrderField::CREATED_AT")'
+                description: 'Allows ordering a list of posts by when they have been created.'

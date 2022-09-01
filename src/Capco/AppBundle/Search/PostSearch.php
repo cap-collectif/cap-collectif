@@ -72,6 +72,10 @@ class PostSearch extends Search
                 $sortField = PostOrderField::SORT_FIELD[PostOrderField::UPDATED_AT];
 
                 break;
+            case PostOrderField::CREATED_AT:
+                $sortField = PostOrderField::SORT_FIELD[PostOrderField::CREATED_AT];
+
+                break;
             default:
                 throw new \RuntimeException("Unknown order: ${$field}");
         }

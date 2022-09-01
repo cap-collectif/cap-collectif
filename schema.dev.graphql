@@ -8877,6 +8877,9 @@ input PostOrder {
 enum PostOrderField {
   """Allows ordering a list of posts by when they have been updated."""
   UPDATED_AT
+
+  """Allows ordering a list of posts by when they have been created."""
+  CREATED_AT
 }
 
 """Represent an owner of a post."""

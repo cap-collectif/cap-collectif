@@ -75,9 +75,6 @@ class PostAdmin extends AbstractAdmin
 
     public function getTemplate($name)
     {
-        if ('list' === $name) {
-            return 'CapcoAdminBundle:Post:list.html.twig';
-        }
         if ('create' === $name) {
             return 'CapcoAdminBundle:Post:create.html.twig';
         }

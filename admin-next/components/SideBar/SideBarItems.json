@@ -71,7 +71,7 @@
             },
             {
                 "title": "admin.label.post",
-                "href": "/admin/capco/app/post/list",
+                "href": "/admin-next/posts",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

@@ -361,7 +361,7 @@ exports[`<Sidebar /> renders when the user is a project admin and not an admin 1
           >
             <a
               class="sc-bdnxRM Link__LinkInner-jUwnjy bHJmTz jnxQhY SidebarLink___StyledLink-gdXyVy jRCUFA"
-              href="http://localhost/admin/capco/app/post/list"
+              href="http://localhost/admin-next/posts"
             >
               <div
                 class="sc-bdnxRM daIcnO"
