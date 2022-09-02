@@ -638,15 +638,20 @@ class ProposalSearch extends Search
         if (isset($providedFilters['proposalForm'])) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
-        if (isset($providedFilters['district']) && Search::NONE_VALUE !== $providedFilters['district']) {
-            $filters['district.id'] = GlobalIdResolver::getDecodedId($providedFilters['district'])['id'];
+        if (
+            isset($providedFilters['district']) &&
+            Search::NONE_VALUE !== $providedFilters['district']
+        ) {
+            $filters['district.id'] = GlobalIdResolver::getDecodedId($providedFilters['district'])[
+                'id'
+            ];
         }
 
         if (isset($providedFilters['theme'])) {
             $filters['theme.id'] = $providedFilters['theme'];
         }
 
-        if (isset($providedFilters['types']) && $providedFilters['types'] > 0) {
+        if (isset($providedFilters['types'])) {
             $filters['author.userType.id'] = $providedFilters['types'];
         }
         if (
