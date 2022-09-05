@@ -1,0 +1,21 @@
+InternalPendingOrganizationInvitation:
+    type: object
+    config:
+        name: PendingOrganizationInvitation
+        description: Represent an invitation to join an organization.
+        fields:
+            user:
+                type: 'InternalUser'
+                description: 'If already registered, the user to invite.'
+            email:
+                type: 'String'
+                description: 'If not already registered, the email to send the invite.'
+            role:
+                type: 'OrganizationMemberRole!'
+                description: 'The role given to the invited user.'
+            createdAt:
+                type: 'DateTime!'
+                description: 'Identifies the date and time when the object was created.'
+            organization:
+                type: 'InternalOrganization!'
+                description: 'The organization attached to the invite.'

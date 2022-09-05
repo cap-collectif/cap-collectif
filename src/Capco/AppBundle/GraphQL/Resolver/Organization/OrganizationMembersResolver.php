@@ -9,30 +9,16 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class OrganizationMembersResolver implements ResolverInterface
 {
+    private OrganizationAdminAccessResolver $organizationAdminAccessResolver;
 
-    // TODO @TeaAlex extract this in a service
-    private function isViewerAdminOrOrganizationAdmin(Organization $organization, ?User $viewer = null): bool
+    public function __construct(OrganizationAdminAccessResolver $organizationAdminAccessResolver)
     {
-        if (!$viewer) {
-            return false;
-        }
-
-        if ($viewer && $viewer->isAdmin()) {
-            return true;
-        }
-
-        $member = $organization->getMembership($viewer);
-
-        if (!$member) {
-            return false;
-        }
-
-        return OrganizationMemberRoleType::ADMIN === $member->getRole();
+        $this->organizationAdminAccessResolver = $organizationAdminAccessResolver;
     }
 
     public function __invoke(Organization $organization, ?User $viewer = null)
     {
-        if (!$this->isViewerAdminOrOrganizationAdmin($organization, $viewer)) {
+        if (!$this->organizationAdminAccessResolver->__invoke($organization, $viewer)) {
            return null;
         }
 

@@ -62,3 +62,10 @@ InternalOrganization:
             members:
                 type: '[OrganizationMember!]'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMembersResolver", [value, getUser()])'
+            pendingOrganizationInvitations:
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationAdminAccessResolver", [value, getUser()])'
+                type: 'PendingOrganizationInvitationConnection'
+                description: 'Get all pending invitations.'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\PendingOrganizationInvitationsResolver", [value, args])'
+

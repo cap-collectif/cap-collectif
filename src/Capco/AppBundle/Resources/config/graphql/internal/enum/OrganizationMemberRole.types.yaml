@@ -1,0 +1,11 @@
+OrganizationMemberRole:
+    type: enum
+    config:
+        description: 'Available roles for organization member'
+        values:
+            admin:
+                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\OrganizationMemberRoleType::ADMIN")'
+                description: 'Admin of the organization'
+            user:
+                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\OrganizationMemberRoleType::USER")'
+                description: 'Member of the organization.'

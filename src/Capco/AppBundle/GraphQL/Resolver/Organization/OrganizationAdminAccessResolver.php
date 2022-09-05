@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class OrganizationAdminAccessResolver implements ResolverInterface
 {
-    public function __invoke(Organization $organization = null, ?User $viewer = null): bool
+    public function __invoke(Organization $organization, ?User $viewer = null): bool
     {
         if (!$viewer) {
             return false;

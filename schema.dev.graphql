@@ -8360,6 +8360,17 @@ type Organization implements Node & Author & PostOwner {
     locale: TranslationLocale
   ): String!
   members: [OrganizationMember!]
+
+  """Get all pending invitations."""
+  pendingOrganizationInvitations(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): PendingOrganizationInvitationConnection
 }
 
 """The affiliation of a user to an Organization"""
@@ -8401,6 +8412,15 @@ type OrganizationMember {
 
   """The role of the member in the organization."""
   role: OrganizationAffiliation!
+}
+
+"""Available roles for organization member"""
+enum OrganizationMemberRole {
+  """Admin of the organization"""
+  admin
+
+  """Member of the organization."""
+  user
 }
 
 """A step inside a project."""
@@ -8528,6 +8548,44 @@ type ParticipantEdge {
 
   """The item at the end of the edge."""
   node: Participant!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Represent an invitation to join an organization."""
+type PendingOrganizationInvitation {
+  """If already registered, the user to invite."""
+  user: User
+
+  """If not already registered, the email to send the invite."""
+  email: String
+
+  """The role given to the invited user."""
+  role: OrganizationMemberRole!
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The organization attached to the invite."""
+  organization: Organization!
+}
+
+"""A connection to a list of items."""
+type PendingOrganizationInvitationConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [PendingOrganizationInvitationEdge]
+}
+
+"""An edge in a connection."""
+type PendingOrganizationInvitationEdge {
+  """The item at the end of the edge."""
+  node: PendingOrganizationInvitation!
 
   """A cursor for use in pagination."""
   cursor: String!

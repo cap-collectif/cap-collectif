@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Organization.PendingOrganizationInvitation admin should be able to fetch invitations 1`] = `
+Object {
+  "node": Object {
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE=",
+    "pendingOrganizationInvitations": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": null,
+            "organization": Object {
+              "title": "Communauté de commune de Parthenay",
+            },
+            "role": "user",
+            "user": Object {
+              "email": "maxime.auriau@cap-collectif.com",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "email": null,
+            "organization": Object {
+              "title": "Communauté de commune de Parthenay",
+            },
+            "role": "admin",
+            "user": Object {
+              "email": "msantostefano@cap-collectif.com",
+            },
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|Organization.PendingOrganizationInvitation organization member with role admin should be able to fetch invitations 1`] = `
+Object {
+  "node": Object {
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=",
+    "pendingOrganizationInvitations": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": "toto@cap-collectif.com",
+            "organization": Object {
+              "title": "GIEC",
+            },
+            "role": "user",
+            "user": null,
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|Organization.PendingOrganizationInvitation organization member with role user should not be able to fetch invitations 1`] = `
+Object {
+  "node": Object {
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE=",
+    "pendingOrganizationInvitations": null,
+  },
+}
+`;

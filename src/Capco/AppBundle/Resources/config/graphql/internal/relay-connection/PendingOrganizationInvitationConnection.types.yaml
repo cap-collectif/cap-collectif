@@ -1,0 +1,7 @@
+PendingOrganizationInvitationConnection:
+    type: relay-connection
+    config:
+        nodeType: 'InternalPendingOrganizationInvitation!'
+        connectionFields:
+            totalCount:
+                type: Int!
