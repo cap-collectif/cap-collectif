@@ -93,6 +93,7 @@ export function createRequirements(
   twilioEnabled: ?boolean,
   isFranceConnectConfigured: boolean,
   fcAllowedData: FranceConnectAllowedData,
+  isAdmin: boolean = false,
 ): Array<Requirement> {
   const requirements = [];
   if (!doesStepSupportRequirements(step)) {
@@ -116,7 +117,7 @@ export function createRequirements(
     requirements.push(
       requirementFactory('POSTAL_ADDRESS', false, 'admin.fields.event.address', null),
     );
-  if (!initialRequirements.some((r: Requirement) => r.type === 'IDENTIFICATION_CODE'))
+  if (!initialRequirements.some((r: Requirement) => r.type === 'IDENTIFICATION_CODE') && isAdmin)
     requirements.push(
       requirementFactory('IDENTIFICATION_CODE', false, 'identification_code', null),
     );

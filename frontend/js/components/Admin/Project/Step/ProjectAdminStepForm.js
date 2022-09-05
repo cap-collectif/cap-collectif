@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Modal } from 'react-bootstrap';
@@ -420,8 +420,6 @@ export function ProjectAdminStepForm({
   debateContentUsingJoditWysiwyg,
   footerUsingJoditWysiwyg,
 }: Props) {
-  const { user } = useSelector((state: GlobalState) => state.user);
-
   const canSetDisplayMode =
     (step.__typename === 'SelectionStep' || step.__typename === 'CollectStep') &&
     (isGridViewEnabled || isListViewEnabled || isMapViewEnabled);
@@ -438,9 +436,6 @@ export function ProjectAdminStepForm({
 
   const requirementsFiltered = requirements
     ? requirements
-        .filter(requirement => {
-          return user?.isAdmin || requirement.type !== 'IDENTIFICATION_CODE';
-        })
         .map(requirement => {
           if (
             requirement.type === 'IDENTIFICATION_CODE' &&
@@ -838,6 +833,9 @@ const mapStateToProps = (
   state: GlobalState,
   { step, isCreating, project, isFranceConnectConfigured, fcAllowedData }: Props,
 ) => {
+  const { user } = state.user;
+  const isAdmin = user?.isAdmin ?? false;
+
   const { isGridViewEnabled, isListViewEnabled, isMapViewEnabled, mainView } = getValueDisplayMode(
     step,
     project,
@@ -886,7 +884,7 @@ const mapStateToProps = (
       // ConsultationStep
       consultations: step?.consultations || [],
       requirements: step
-        ? createRequirements(step, twilioEnabled, isFranceConnectConfigured, fcAllowedData)
+        ? createRequirements(step, twilioEnabled, isFranceConnectConfigured, fcAllowedData, isAdmin)
         : [],
       // SelectionStep
       statuses: step?.statuses?.length ? step.statuses : [],
