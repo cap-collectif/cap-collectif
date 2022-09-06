@@ -3744,6 +3744,11 @@ input CreateQuestionnaireInput {
 
   """The questionnaire type"""
   type: QuestionnaireType! = QUESTIONNAIRE
+
+  """
+  ID of the owner of the questionnaire, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
   clientMutationId: String
 }
 

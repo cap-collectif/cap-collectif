@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class QuestionnaireVoter extends Voter
+class QuestionnaireVoter extends AbstractOwnerableVoter
 {
+    const CREATE = 'create';
     const VIEW = 'view';
     const EDIT = 'edit';
     const DELETE = 'delete';
@@ -16,7 +16,15 @@ class QuestionnaireVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::DELETE, self::EXPORT])) {
+        if (
+            !\in_array($attribute, [
+                self::CREATE,
+                self::VIEW,
+                self::EDIT,
+                self::DELETE,
+                self::EXPORT,
+            ])
+        ) {
             return false;
         }
 
@@ -39,44 +47,23 @@ class QuestionnaireVoter extends Voter
         $questionnaire = $subject;
 
         switch ($attribute) {
+            case self::CREATE:
+                return self::canCreate($viewer);
             case self::VIEW:
-                return $this->canView($questionnaire, $viewer);
+                return self::canView($questionnaire, $viewer);
             case self::EDIT:
-                return $this->canEdit($questionnaire, $viewer);
+                return self::canEdit($questionnaire, $viewer);
             case self::DELETE:
-                return $this->canDelete($questionnaire, $viewer);
+                return self::canDelete($questionnaire, $viewer);
             case self::EXPORT:
-                return $this->canExport($questionnaire, $viewer);
+                return self::canExport($questionnaire, $viewer);
             default:
                 return false;
         }
     }
 
-    private function canEdit(Questionnaire $questionnaire, User $viewer): bool
+    private static function canExport(Questionnaire $questionnaire, User $viewer): bool
     {
-        return $this->canDelete($questionnaire, $viewer);
-    }
-
-    private function canView(Questionnaire $questionnaire, User $viewer): bool
-    {
-        return $this->canDelete($questionnaire, $viewer);
-    }
-
-    private function canExport(Questionnaire $questionnaire, User $viewer): bool
-    {
-        return $this->canDelete($questionnaire, $viewer);
-    }
-
-    private function canDelete(Questionnaire $questionnaire, User $viewer): bool
-    {
-        if ($viewer->isAdmin()) {
-            return true;
-        }
-
-        if ($questionnaire->getOwner() && $questionnaire->getOwner() === $viewer) {
-            return true;
-        }
-
-        return false;
+        return self::isAdminOrOwnerOrMember($questionnaire, $viewer);
     }
 }

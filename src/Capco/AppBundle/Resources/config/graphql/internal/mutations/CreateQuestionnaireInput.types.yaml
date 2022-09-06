@@ -10,3 +10,6 @@ CreateQuestionnaireInput:
                 type: 'QuestionnaireType!'
                 description: 'The questionnaire type'
                 defaultValue: 'QUESTIONNAIRE'
+            owner:
+                type: 'ID'
+                description: 'ID of the owner of the questionnaire, user or organization. If null, fallback on the viewer.'
