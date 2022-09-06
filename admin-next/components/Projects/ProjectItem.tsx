@@ -29,6 +29,7 @@ interface ProjectItemProps {
     isSuperAdmin?: boolean;
     isOnlyProjectAdmin?: boolean;
     isAdmin?: boolean;
+    isAdminOrganization?: boolean;
 }
 
 const FRAGMENT = graphql`
@@ -41,6 +42,12 @@ const FRAGMENT = graphql`
             url
         }
         owner {
+            __typename
+            id
+            username
+            url
+        }
+        creator {
             __typename
             id
             username
@@ -89,6 +96,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
     isSuperAdmin,
     isOnlyProjectAdmin,
     isAdmin,
+    isAdminOrganization,
 }) => {
     const project = useFragment(FRAGMENT, projectFragment);
     const intl = useIntl();
@@ -130,13 +138,22 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
             </Table.Td>
             {isAdmin && (
                 <Table.Td>
+                    {project?.creator?.url && (
+                        <Link key={project?.creator?.id} href={project?.creator?.url}>
+                            {project?.creator?.username}
+                        </Link>
+                    )}
+                </Table.Td>
+            )}
+            {isAdmin || isAdminOrganization ? (
+                <Table.Td>
                     {project?.owner?.url && (
                         <Link key={project?.owner?.id} href={project?.owner?.url}>
                             {project?.owner?.username}
                         </Link>
                     )}
                 </Table.Td>
-            )}
+            ) : null}
             <Table.Td>
                 {project.visibility === 'PUBLIC' && (
                     <Tag variantColor="green">{intl.formatMessage({ id: 'public-everybody' })}</Tag>

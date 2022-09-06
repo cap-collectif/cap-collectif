@@ -94,8 +94,13 @@ const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
                     <Table.Th width="50%">{intl.formatMessage({ id: 'global.title' })}</Table.Th>
                     <Table.Th>{intl.formatMessage({ id: 'global.project' })}</Table.Th>
                     {viewerSession.isAdmin && (
-                        <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>
+                        <Table.Th>
+                            {intl.formatMessage({ id: 'admin.projects.list.author' })}
+                        </Table.Th>
                     )}
+                    {viewerSession.isAdmin || viewerSession.isAdminOrganization ? (
+                        <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>
+                    ) : null}
                     <Table.Th>{intl.formatMessage({ id: 'global.update' })}</Table.Th>
                     <Table.Th>
                         <Table.Menu label={intl.formatMessage({ id: 'creation' })}>

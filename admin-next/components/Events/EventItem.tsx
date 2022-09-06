@@ -15,12 +15,13 @@ import {
 } from '@cap-collectif/ui';
 import downloadCSV from '@utils/download-csv';
 import EventModalConfirmationDelete from './EventModalConfirmationDelete';
-import {EventAffiliations} from "./EventList";
+import { EventAffiliations } from './EventList';
 
 type Props = {
-    event: EventItem_event$key;
-    isAdmin: boolean;
-    affiliations: EventAffiliations;
+    event: EventItem_event$key,
+    isAdmin: boolean,
+    affiliations: EventAffiliations,
+    isAdminOrganization?: boolean,
 };
 
 const FRAGMENT = graphql`
@@ -48,12 +49,20 @@ const FRAGMENT = graphql`
         owner {
             username
         }
+        creator {
+            username
+        }
         guestListEnabled
         exportParticipantsUrl
         ...EventModalConfirmationDelete_event
     }
 `;
-const EventItem: React.FC<Props> = ({ event: eventFragment, isAdmin, affiliations }) => {
+const EventItem: React.FC<Props> = ({
+    event: eventFragment,
+    isAdmin,
+    affiliations,
+    isAdminOrganization,
+}) => {
     const event = useFragment(FRAGMENT, eventFragment);
     const intl = useIntl();
     const project = event.projects[0];
@@ -82,7 +91,6 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, isAdmin, affiliation
                     </Link>
                 )}
             </Table.Td>
-
             <Table.Td>
                 <Flex direction="column">
                     {project && project.title && project.url && (
@@ -95,20 +103,13 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, isAdmin, affiliation
                                     if (index + 1 < event.themes.length) {
                                         return (
                                             <React.Fragment key={theme.id}>
-                                                <Link
-                                                    href={theme?.url}
-                                                >
-                                                    {theme?.title}
-                                                </Link>
+                                                <Link href={theme?.url}>{theme?.title}</Link>
                                                 <span>, &nbsp; </span>
                                             </React.Fragment>
                                         );
                                     }
                                     return (
-                                        <Link
-                                            key={theme.id}
-                                            href={theme?.url}
-                                        >
+                                        <Link key={theme.id} href={theme?.url}>
                                             {theme?.title}
                                         </Link>
                                     );
@@ -117,7 +118,6 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, isAdmin, affiliation
                     </Flex>
                 </Flex>
             </Table.Td>
-
             <Table.Td>
                 {event.timeRange && (
                     <Text fontSize={3}>
@@ -139,9 +139,14 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, isAdmin, affiliation
             </Table.Td>
             {isAdmin && (
                 <Table.Td>
-                    {event.owner && <Text fontSize={3}>{event.owner.username}</Text>}
+                    {event.creator && <Text fontSize={3}>{event.creator.username}</Text>}
                 </Table.Td>
             )}
+            {isAdmin || isAdminOrganization ? (
+                <Table.Td>
+                    {event.owner && <Text fontSize={3}>{event.owner.username}</Text>}
+                </Table.Td>
+            ) : null}
             <Table.Td>
                 {event.createdAt &&
                     intl.formatDate(event.createdAt, {

@@ -18,6 +18,7 @@ export interface PostItemProps {
     post: PostItem_post$key;
     connectionName: string;
     isAdmin: boolean;
+    isAdminOrganization?: boolean;
 }
 
 const FRAGMENT = graphql`
@@ -48,7 +49,12 @@ const FRAGMENT = graphql`
         ...PostListModalConfirmationDelete_post
     }
 `;
-const PostItem: React.FC<PostItemProps> = ({ post: postFragment, connectionName, isAdmin }) => {
+const PostItem: React.FC<PostItemProps> = ({
+    post: postFragment,
+    connectionName,
+    isAdmin,
+    isAdminOrganization,
+}) => {
     const post = useFragment(FRAGMENT, postFragment);
     const intl = useIntl();
 
@@ -76,15 +82,13 @@ const PostItem: React.FC<PostItemProps> = ({ post: postFragment, connectionName,
                 )}
             </Table.Td>
             {isAdmin && (
-                <>
-                    <Table.Td>
-                        {post.authors.length > 0 && (
-                            <Link href={post.authors[0].url}>{post.authors[0].username}</Link>
-                        )}
-                    </Table.Td>
-                    <Table.Td>{post.owner?.username}</Table.Td>
-                </>
+                <Table.Td>
+                    {post.authors.length > 0 && (
+                        <Link href={post.authors[0].url}>{post.authors[0].username}</Link>
+                    )}
+                </Table.Td>
             )}
+            {isAdmin || isAdminOrganization ? <Table.Td>{post.owner?.username}</Table.Td> : null}
             <Table.Td>
                 <Flex direction="column">
                     {!!project && project.__typename === 'Project' && (

@@ -36,6 +36,11 @@ const FRAGMENT = graphql`
             id
             username
         }
+        creator {
+            __typename
+            id
+            username
+        }
         ...ModalConfirmationDelete_proposalForm
     }
 `;
@@ -92,7 +97,10 @@ const ProposalFormItem: React.FC<ProposalFormItemProps> = ({
                     proposalForm?.step?.project?.title
                 )}
             </Table.Td>
-            {viewerSession.isAdmin && <Table.Td>{proposalForm.owner?.username}</Table.Td>}
+            {viewerSession.isAdmin && <Table.Td>{proposalForm.creator?.username}</Table.Td>}
+            {viewerSession.isAdmin || viewerSession.isAdminOrganization ? (
+                <Table.Td>{proposalForm.owner?.username}</Table.Td>
+            ) : null}
             <Table.Td>
                 {intl.formatDate(proposalForm?.updatedAt ?? undefined, {
                     day: 'numeric',

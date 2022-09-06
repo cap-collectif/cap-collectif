@@ -5,8 +5,8 @@ import EventItem from './EventItem';
 import { Table, Text, Icon, CapUIIcon } from '@cap-collectif/ui';
 import EmptyMessage from '@ui/Table/EmptyMessage';
 import { EventList_viewer$key } from '@relay/EventList_viewer.graphql';
-import {EventListQueryVariables} from '@relay/EventListQuery.graphql';
-import {useAppContext} from "../AppProvider/App.context";
+import { EventListQueryVariables } from '@relay/EventListQuery.graphql';
+import { useAppContext } from '../AppProvider/App.context';
 
 export const EVENT_LIST_PAGINATION = 20;
 
@@ -47,10 +47,10 @@ export const EventListQuery = graphql`
 `;
 
 type EventListProps = {
-    viewer: EventList_viewer$key;
-    term: string;
-    status: string | null;
-    resetFilters: () => void;
+    viewer: EventList_viewer$key,
+    term: string,
+    status: string | null,
+    resetFilters: () => void,
 };
 
 export type EventAffiliations = EventListQueryVariables['affiliations'];
@@ -62,6 +62,7 @@ const EventList: React.FC<EventListProps> = ({ viewer, term, status, resetFilter
     const { events } = data;
     const { viewerSession } = useAppContext();
     const isAdmin = viewerSession?.isAdmin ?? false;
+    const isAdminOrganization = viewerSession?.isAdminOrganization ?? false;
     const firstRendered = React.useRef<boolean | null>(null);
     const hasEvents = events ? events.totalCount > 0 : false;
     const affiliations: EventAffiliations = React.useMemo(
@@ -125,9 +126,14 @@ const EventList: React.FC<EventListProps> = ({ viewer, term, status, resetFilter
                     </Table.Th>
                     {isAdmin && (
                         <Table.Th lineHeight="sm">
-                            {intl.formatMessage({ id: 'global.owner' })}
+                            {intl.formatMessage({ id: 'admin.projects.list.author' })}
                         </Table.Th>
                     )}
+                    {isAdmin || isAdminOrganization ? (
+                        <Table.Th lineHeight="sm">
+                            {intl.formatMessage({ id: 'global.owner' })}
+                        </Table.Th>
+                    ) : null}
                     <Table.Th lineHeight="sm">
                         {intl.formatMessage({ id: 'global.updated.date' })}
                     </Table.Th>

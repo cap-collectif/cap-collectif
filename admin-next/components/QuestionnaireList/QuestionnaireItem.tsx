@@ -26,6 +26,9 @@ const FRAGMENT = graphql`
         owner {
             username
         }
+        creator {
+            username
+        }
         ...ModalConfirmationDelete_questionnaire
     }
 `;
@@ -52,7 +55,10 @@ const QuestionnaireItem: React.FC<QuestionnaireItemProps> = ({
                     questionnaire?.step?.project?.title
                 )}
             </Table.Td>
-            {viewerSession.isAdmin && <Table.Td>{questionnaire.owner?.username}</Table.Td>}
+            {viewerSession.isAdmin && <Table.Td>{questionnaire.creator?.username}</Table.Td>}
+            {viewerSession.isAdmin || viewerSession.isAdminOrganization ? (
+                <Table.Td>{questionnaire.owner?.username}</Table.Td>
+            ) : null}
             <Table.Td>
                 {intl.formatDate(questionnaire.updatedAt ?? undefined, {
                     day: 'numeric',

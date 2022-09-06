@@ -45,6 +45,11 @@ Array [
           <th
             className="sc-bdvvtL hVXTPE cap-table__th"
           >
+            admin.projects.list.author
+          </th>
+          <th
+            className="sc-bdvvtL hVXTPE cap-table__th"
+          >
             global.owner
           </th>
           <th
@@ -278,6 +283,16 @@ Array [
               }
             }
           >
+            &lt;mock-value-for-field-"username"&gt;
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
             Invalid Date
           </td>
           <td
@@ -402,6 +417,16 @@ Array [
             >
               &lt;mock-value-for-field-"title"&gt;
             </a>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
             className="sc-bdvvtL gJUzIT cap-table__td"

@@ -89,6 +89,7 @@ class SessionWithJsonHandler extends BaseHandler
                     'isAdmin' => $viewer->isAdmin(),
                     'isSuperAdmin' => $viewer->isSuperAdmin(),
                     'isProjectAdmin' => $viewer->isProjectAdmin(),
+                    'isAdminOrganization' => $viewer->isAdminOrganization(),
                 ],
             ]);
         }

@@ -73,7 +73,7 @@ const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
         );
     }
 
-    if (!viewerJson.isAdmin && !viewerJson.isProjectAdmin) {
+    if (!viewerJson.isAdmin && !viewerJson.isProjectAdmin && !viewerJson.isAdminOrganization) {
         return redirectOnError(
             res,
             'Access denied: this viewer is not an admin or a project admin.',

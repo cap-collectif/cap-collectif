@@ -43,6 +43,7 @@ interface ProjectListProps {
     term: string;
     orderBy: string;
     isAdmin: boolean;
+    isAdminOrganization?: boolean;
     isSuperAdmin?: boolean;
     isOnlyProjectAdmin?: boolean;
     resetTerm: () => void;
@@ -53,6 +54,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
     viewer,
     term,
     isAdmin,
+    isAdminOrganization,
     resetTerm,
     orderBy,
     setOrderBy,
@@ -99,6 +101,13 @@ const ProjectList: React.FC<ProjectListProps> = ({
                             </Text>
                         </Table.Th>
                     )}
+                    {isAdmin || isAdminOrganization ? (
+                        <Table.Th>
+                            <Text lineHeight="sm">
+                                {intl.formatMessage({ id: 'global.owner' })}
+                            </Text>
+                        </Table.Th>
+                    ) : null}
                     <Table.Th>
                         <Text lineHeight="sm">
                             {intl.formatMessage({ id: 'admin.settings.header.access' })}

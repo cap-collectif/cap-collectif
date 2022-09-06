@@ -56,6 +56,15 @@ Array [
             <p
               className="sc-bdvvtL bhcRpW cap-text"
             >
+              global.owner
+            </p>
+          </th>
+          <th
+            className="sc-bdvvtL hVXTPE cap-table__th"
+          >
+            <p
+              className="sc-bdvvtL bhcRpW cap-text"
+            >
               admin.settings.header.access
             </p>
           </th>
@@ -258,6 +267,21 @@ Array [
                 className="sc-bdvvtL fIfDCJ"
               />
             </div>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <a
+              className="sc-bdvvtL jtXLLM cap-link"
+              href="<mock-value-for-field-\\"url\\">"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
           </td>
           <td
             className="sc-bdvvtL gJUzIT cap-table__td"
@@ -560,6 +584,21 @@ Array [
               }
             }
           >
+            <a
+              className="sc-bdvvtL jtXLLM cap-link"
+              href="<mock-value-for-field-\\"url\\">"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
             <div
               className="sc-bdvvtL iOUgMg sc-fWCJzd eCIVdF cap-tag"
               style={Object {}}
@@ -838,6 +877,21 @@ Array [
               }
             }
           >
+            <a
+              className="sc-bdvvtL jtXLLM cap-link"
+              href="<mock-value-for-field-\\"url\\">"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
             <div
               className="sc-bdvvtL iOUgMg sc-fWCJzd eCIVdF cap-tag"
               style={Object {}}
@@ -1092,6 +1146,21 @@ Array [
                 className="sc-bdvvtL fIfDCJ"
               />
             </div>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <a
+              className="sc-bdvvtL jtXLLM cap-link"
+              href="<mock-value-for-field-\\"url\\">"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
           </td>
           <td
             className="sc-bdvvtL gJUzIT cap-table__td"

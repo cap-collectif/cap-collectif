@@ -83,6 +83,20 @@ Array [
       }
     }
   >
+    <p
+      className="sc-bdvvtL dPVCFK cap-text"
+    >
+      &lt;mock-value-for-field-"username"&gt;
+    </p>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
     -
   </td>,
   <td
@@ -228,6 +242,20 @@ Array [
       -
        
       16/03/2035
+    </p>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <p
+      className="sc-bdvvtL dPVCFK cap-text"
+    >
+      &lt;mock-value-for-field-"username"&gt;
     </p>
   </td>,
   <td

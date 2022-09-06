@@ -68,6 +68,16 @@ Array [
       }
     }
   >
+    &lt;mock-value-for-field-"username"&gt;
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
     01/03/2050
   </td>,
   <td

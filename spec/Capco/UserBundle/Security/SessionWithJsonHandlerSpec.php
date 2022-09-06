@@ -35,7 +35,7 @@ class SessionWithJsonHandlerSpec extends ObjectBehavior
         $this->encode(self::$symfonySession, $viewer)->shouldBe(
             self::$symfonySession .
                 '___JSON_SESSION_SEPARATOR__' .
-                '{"viewer":{"email":"user@email.com","username":"user","id":"VXNlcjoxMjM0","isAdmin":true,"isSuperAdmin":true,"isProjectAdmin":true}}'
+                '{"viewer":{"email":"user@email.com","username":"user","id":"VXNlcjoxMjM0","isAdmin":true,"isSuperAdmin":true,"isProjectAdmin":true,"isAdminOrganization":true}}'
         );
     }
 
@@ -52,5 +52,6 @@ class SessionWithJsonHandlerSpec extends ObjectBehavior
         $viewer->isAdmin()->willReturn(true);
         $viewer->isSuperAdmin()->willReturn(true);
         $viewer->isProjectAdmin()->willReturn(true);
+        $viewer->isAdminOrganization()->willReturn(true);
     }
 }

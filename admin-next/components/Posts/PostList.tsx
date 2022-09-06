@@ -41,10 +41,17 @@ export interface PostListProps {
     viewer: PostList_viewer$key;
     term: string;
     isAdmin: boolean;
+    isAdminOrganization: boolean;
     resetTerm: () => void;
 }
 
-const PostList: React.FC<PostListProps> = ({ viewer, term, isAdmin, resetTerm }) => {
+const PostList: React.FC<PostListProps> = ({
+    viewer,
+    term,
+    isAdmin,
+    isAdminOrganization,
+    resetTerm,
+}) => {
     const intl = useIntl();
     const { data, loadNext, hasNext, refetch } = usePaginationFragment(PostListQuery, viewer);
     const [orderBy, setOrderBy] = React.useState('DESC');
@@ -84,16 +91,16 @@ const PostList: React.FC<PostListProps> = ({ viewer, term, isAdmin, resetTerm })
                     <Table.Th>
                         <Text lineHeight="sm">{intl.formatMessage({ id: 'global.title' })}</Text>
                     </Table.Th>
-                    {isAdmin && (
-                        <>
-                            <Table.Th>
-                                <Text lineHeight="sm">
-                                    {intl.formatMessage({ id: 'global.authors' })}
-                                </Text>
-                            </Table.Th>
-                            <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>
-                        </>
-                    )}
+                    {isAdmin ? (
+                        <Table.Th>
+                            <Text lineHeight="sm">
+                                {intl.formatMessage({ id: 'global.authors' })}
+                            </Text>
+                        </Table.Th>
+                    ) : null}
+                    {isAdmin || isAdminOrganization ? (
+                        <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>
+                    ) : null}
                     <Table.Th>
                         <Text lineHeight="sm">
                             {intl.formatMessage({ id: 'global.participative.project' })}
