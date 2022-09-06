@@ -15,6 +15,7 @@ use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -72,7 +73,6 @@ class StepController extends Controller
 
     /**
      * @Route("/project/{projectSlug}/presentation/{stepSlug}", name="app_project_show_presentation")
-     * @Route("/consultation/{projectSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @Entity("step", class="CapcoAppBundle:Steps\PresentationStep", options={
@@ -98,6 +98,19 @@ class StepController extends Controller
             'nbPosts' => $nbPosts,
             'showVotes' => $showVotes,
         ];
+    }
+
+    /**
+     * @Route("/consultation/{projectSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
+     */
+    public function showPresentationDeprecatedAction(
+        string $projectSlug,
+        string $stepSlug
+    ): RedirectResponse {
+        return $this->redirectToRoute(
+            'app_project_show_presentation',
+            compact('projectSlug', 'stepSlug')
+        );
     }
 
     /**
@@ -278,7 +291,7 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled()
+            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled(),
         ];
     }
 
@@ -363,7 +376,7 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'proposalForm' => null,
-            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled()
+            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled(),
         ];
     }
 
