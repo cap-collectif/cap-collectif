@@ -5,9 +5,8 @@ namespace Capco\AppBundle\Security;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class ProposalFormVoter extends Voter
+class ProposalFormVoter extends AbstractOwnerableVoter
 {
     const CREATE = 'create';
     const VIEW = 'view';
@@ -44,18 +43,12 @@ class ProposalFormVoter extends Voter
         }
 
         if (self::CREATE === $attribute) {
-            return $viewer->isProjectAdmin();
+            return self::canCreate($viewer);
+        }
+        if (self::DELETE === $attribute) {
+            return self::canDelete($subject, $viewer);
         }
 
-        return self::isOwnerOrAdmin($subject, $viewer);
-    }
-
-    private static function isOwnerOrAdmin(ProposalForm $proposalForm, User $user): bool
-    {
-        if ($user->isAdmin()) {
-            return true;
-        }
-
-        return $proposalForm->getOwner() === $user;
+        return self::isAdminOrOwnerOrMember($subject, $viewer);
     }
 }

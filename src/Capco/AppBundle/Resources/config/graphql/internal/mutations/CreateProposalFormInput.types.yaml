@@ -6,3 +6,6 @@ CreateProposalFormInput:
             title:
                 type: 'String!'
                 description: 'The proposal form title'
+            owner:
+                type: 'ID'
+                description: 'ID of the owner of the proposalForm, user or organization. If null, fallback on the viewer.'

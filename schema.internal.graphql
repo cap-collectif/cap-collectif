@@ -3584,6 +3584,11 @@ type CreateProjectPayload {
 input CreateProposalFormInput {
   """The proposal form title"""
   title: String!
+
+  """
+  ID of the owner of the proposalForm, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
   clientMutationId: String
 }
 

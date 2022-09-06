@@ -2,9 +2,11 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\ProposalForm;
 
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\GraphQL\Mutation\ProposalForm\CreateProposalFormMutation;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -15,9 +17,12 @@ use Symfony\Component\Form\FormInterface;
 
 class CreateProposalFormMutationSpec extends ObjectBehavior
 {
-    public function let(FormFactoryInterface $formFactory, EntityManagerInterface $em)
-    {
-        $this->beConstructedWith($formFactory, $em);
+    public function let(
+        FormFactoryInterface $formFactory,
+        EntityManagerInterface $em,
+        SettableOwnerResolver $settableOwnerResolver
+    ) {
+        $this->beConstructedWith($formFactory, $em, $settableOwnerResolver);
     }
 
     public function it_is_initializable(): void
@@ -28,13 +33,18 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
     public function it_creates_proposalForm(
         FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
+        SettableOwnerResolver $settableOwnerResolver,
         FormInterface $form,
         Argument $args,
         User $viewer
     ): void {
         $title = 'title';
-        $input = ['title' => $title];
+        $input = ['title' => $title, 'owner' => null];
         $args->getArrayCopy()->willReturn($input);
+        $args
+            ->offsetGet('owner')
+            ->shouldBeCalled()
+            ->willReturn(null);
 
         $formFactory
             ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
@@ -46,10 +56,54 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
             ->willReturn(true);
         $em->persist(\Prophecy\Argument::type(ProposalForm::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
+        $settableOwnerResolver
+            ->__invoke(null, $viewer)
+            ->shouldBeCalled()
+            ->willReturn($viewer);
 
         $response = $this->__invoke($args, $viewer);
         $response['proposalForm']->shouldHaveType(ProposalForm::class);
         $response['proposalForm']->getOwner()->shouldReturn($viewer);
+        $response['proposalForm']->getCreator()->shouldReturn($viewer);
+    }
+
+    public function it_creates_proposalForm_with_owner(
+        FormFactoryInterface $formFactory,
+        EntityManagerInterface $em,
+        SettableOwnerResolver $settableOwnerResolver,
+        FormInterface $form,
+        Argument $args,
+        User $viewer,
+        Organization $organization
+    ): void {
+        $title = 'title';
+        $organizationId = 'organizationId';
+        $input = ['title' => $title, 'owner' => $organizationId];
+        $args->getArrayCopy()->willReturn($input);
+        $args
+            ->offsetGet('owner')
+            ->shouldBeCalled()
+            ->willReturn($organizationId);
+
+        $formFactory
+            ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
+            ->willReturn($form);
+        $form->submit($input, false)->shouldBeCalled();
+        $form
+            ->isValid()
+            ->shouldBeCalled()
+            ->willReturn(true);
+        $em->persist(\Prophecy\Argument::type(ProposalForm::class))->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+        $settableOwnerResolver
+            ->__invoke($organizationId, $viewer)
+            ->shouldBeCalled()
+            ->willReturn($organization);
+
+        $response = $this->__invoke($args, $viewer);
+        $response['proposalForm']->shouldHaveType(ProposalForm::class);
+        $response['proposalForm']->getOwner()->shouldReturn($organization);
+        $response['proposalForm']->getCreator()->shouldReturn($viewer);
     }
 
     public function it_throws_on_invalid_input(
