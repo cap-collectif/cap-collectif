@@ -10,34 +10,51 @@ use Capco\AppBundle\Enum\CreateEmailingCampaignErrorCode;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\SendEmailingCampaignErrorCode;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Security\EmailingCampaignVoter;
+use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 abstract class AbstractEmailingCampaignMutation implements MutationInterface
 {
     protected GlobalIdResolver $resolver;
     protected EntityManagerInterface $entityManager;
+    protected AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(GlobalIdResolver $resolver, EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        GlobalIdResolver $resolver,
+        EntityManagerInterface $entityManager,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->resolver = $resolver;
         $this->entityManager = $entityManager;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     protected function findCampaignFromGlobalId(string $globalId, User $viewer): ?EmailingCampaign
     {
         $campaign = $this->resolver->resolve($globalId, $viewer);
+        if ($this->authorizationChecker->isGranted(EmailingCampaignVoter::VIEW, $campaign)) {
+            return $campaign;
+        }
 
-        return $viewer->isAdmin() || $campaign->getOwner() === $viewer ? $campaign : null;
+        return null;
     }
 
     protected function getPlannedCampaign(Argument $input, User $viewer): EmailingCampaign
     {
         $emailingCampaign = $this->findCampaignFromGlobalId($input->offsetGet('id'), $viewer);
-        if (null === $emailingCampaign) {
+        if (
+            null === $emailingCampaign ||
+            !$this->authorizationChecker->isGranted(
+                [EmailingCampaignVoter::EDIT],
+                $emailingCampaign
+            )
+        ) {
             throw new UserError(SendEmailingCampaignErrorCode::ID_NOT_FOUND);
         }
 
@@ -51,7 +68,13 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
     protected function getSendableCampaign(Argument $input, User $viewer): EmailingCampaign
     {
         $emailingCampaign = $this->findCampaignFromGlobalId($input->offsetGet('id'), $viewer);
-        if (null === $emailingCampaign) {
+        if (
+            null === $emailingCampaign ||
+            !$this->authorizationChecker->isGranted(
+                [EmailingCampaignVoter::SEND],
+                $emailingCampaign
+            )
+        ) {
             throw new UserError(SendEmailingCampaignErrorCode::ID_NOT_FOUND);
         }
 
@@ -64,6 +87,7 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
 
     protected function findMailingList(string $globalId, User $viewer): MailingList
     {
+        //TODO use MailingListVoter when created
         $mailingList = $this->resolver->resolve($globalId, $viewer);
         if ($mailingList && ($viewer->isAdmin() || $mailingList->getOwner() === $viewer)) {
             return $mailingList;
@@ -85,7 +109,7 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
     protected function findProject(string $globalId, User $viewer): Project
     {
         $project = $this->resolver->resolve($globalId, $viewer);
-        if ($project && ($viewer->isAdmin() || $project->getOwner() === $viewer)) {
+        if ($project && $this->authorizationChecker->isGranted(ProjectVoter::VIEW, $project)) {
             return $project;
         }
 

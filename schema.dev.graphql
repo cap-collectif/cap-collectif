@@ -3314,6 +3314,11 @@ input CreateEmailingCampaignInput {
 
   """Optional. The project to build the campaign."""
   project: ID
+
+  """
+  ID of the owner of the campaign, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
   clientMutationId: String
 }
 

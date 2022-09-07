@@ -6,11 +6,14 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Mailer\SenderEmailResolver;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
+use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use GraphQL\Error\UserError;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
@@ -18,18 +21,22 @@ class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     private TranslatorInterface $translator;
     private SiteParameterResolver $siteParams;
     private SenderEmailResolver $senderEmailResolver;
+    private SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         EntityManagerInterface $entityManager,
+        AuthorizationCheckerInterface $authorizationChecker,
         TranslatorInterface $translator,
         SiteParameterResolver $siteParams,
         SenderEmailResolver $senderEmailResolver,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        SettableOwnerResolver $settableOwnerResolver
     ) {
-        parent::__construct($globalIdResolver, $entityManager);
+        parent::__construct($globalIdResolver, $entityManager, $authorizationChecker);
         $this->translator = $translator;
         $this->siteParams = $siteParams;
         $this->senderEmailResolver = $senderEmailResolver;
+        $this->settableOwnerResolver = $settableOwnerResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -37,6 +44,9 @@ class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         try {
             $this->checkSingleInput($input);
             $emailingCampaign = $this->createDefaultCampaign($viewer);
+            $emailingCampaign->setOwner(
+                $this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer)
+            );
             $this->setReceiptIfAny($emailingCampaign, $input, $viewer);
 
             $this->entityManager->persist($emailingCampaign);
@@ -51,19 +61,25 @@ class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         return compact('emailingCampaign');
     }
 
+    public function isGranted(): bool
+    {
+        return $this->authorizationChecker->isGranted(
+            EmailingCampaignVoter::CREATE,
+            new EmailingCampaign()
+        );
+    }
+
     private function createDefaultCampaign(User $viewer): EmailingCampaign
     {
         $emailingCampaign = new EmailingCampaign();
         $emailingCampaign->setName(
             $this->translator->trans('global.campaign.new', [], 'CapcoAppBundle')
         );
-        $emailingCampaign->setOwner($viewer);
         $emailingCampaign->setSenderEmail($this->senderEmailResolver->__invoke());
         $emailingCampaign->setSenderName(
             $this->siteParams->getValue('admin.mail.notifications.send_name') ??
                 $emailingCampaign->getSenderEmail()
         );
-        $emailingCampaign->setOwner($viewer);
         $emailingCampaign->setCreator($viewer);
 
         return $emailingCampaign;

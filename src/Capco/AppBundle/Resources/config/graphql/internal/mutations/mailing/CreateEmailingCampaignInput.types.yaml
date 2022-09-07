@@ -12,3 +12,6 @@ CreateEmailingCampaignInput:
             project:
                 type: 'ID'
                 description: 'Optional. The project to build the campaign.'
+            owner:
+                type: 'ID'
+                description: 'ID of the owner of the campaign, user or organization. If null, fallback on the viewer.'

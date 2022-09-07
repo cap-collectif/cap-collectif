@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Environment;
 
 class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
@@ -25,12 +26,13 @@ class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
+        AuthorizationCheckerInterface $authorizationChecker,
         MailerService $mailerService,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         Environment $twig
     ) {
-        parent::__construct($resolver, $entityManager);
+        parent::__construct($resolver, $entityManager, $authorizationChecker);
         $this->mailerService = $mailerService;
         $this->siteParams = $siteParams;
         $this->router = $router;

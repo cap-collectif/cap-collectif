@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\DeleteEmailingCampaignsErrorCode;
+use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -57,11 +58,17 @@ class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
         $emailingCampaigns = [];
         foreach ($input->offsetGet('ids') as $globalId) {
             $emailingCampaign = $this->findCampaignFromGlobalId($globalId, $viewer);
-            if (null === $emailingCampaign) {
+            if (
+                $emailingCampaign &&
+                $this->authorizationChecker->isGranted(
+                    EmailingCampaignVoter::DELETE,
+                    $emailingCampaign
+                )
+            ) {
+                $emailingCampaigns[$globalId] = $emailingCampaign;
+            } else {
                 throw new UserError(DeleteEmailingCampaignsErrorCode::ID_NOT_FOUND);
             }
-
-            $emailingCampaigns[$globalId] = $emailingCampaign;
         }
 
         if (empty($emailingCampaigns)) {

@@ -1084,14 +1084,14 @@ InternalMutation:
                     payloadType: DeleteMailingListPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteMailingListMutation", [value, getUser()])'
             createEmailingCampaign:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateEmailingCampaignMutation").isGranted()'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateEmailingCampaignInput
                     payloadType: CreateEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateEmailingCampaignMutation", [value, getUser()])'
             deleteEmailingCampaigns:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteEmailingCampaignsInput

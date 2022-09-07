@@ -3,20 +3,17 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
-use Capco\AppBundle\Entity\Group;
-use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\UpdateEmailingCampaignErrorCode;
 use Capco\AppBundle\Form\EmailingCampaignType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Repository\GroupRepository;
-use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
@@ -28,9 +25,10 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
+        AuthorizationCheckerInterface $authorizationChecker,
         FormFactoryInterface $formFactory
     ) {
-        parent::__construct($resolver, $entityManager);
+        parent::__construct($resolver, $entityManager, $authorizationChecker);
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
     }
@@ -59,7 +57,13 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     private function getCampaign(Argument $input, User $viewer): EmailingCampaign
     {
         $emailingCampaign = $this->findCampaignFromGlobalId($input->offsetGet('id'), $viewer);
-        if (null === $emailingCampaign) {
+        if (
+            null === $emailingCampaign ||
+            !$this->authorizationChecker->isGranted(
+                [EmailingCampaignVoter::EDIT],
+                $emailingCampaign
+            )
+        ) {
             throw new UserError(UpdateEmailingCampaignErrorCode::ID_NOT_FOUND);
         }
 

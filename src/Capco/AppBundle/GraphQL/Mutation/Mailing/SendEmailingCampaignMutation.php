@@ -12,6 +12,7 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
@@ -20,9 +21,10 @@ class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
+        AuthorizationCheckerInterface $authorizationChecker,
         Publisher $publisher
     ) {
-        parent::__construct($resolver, $entityManager);
+        parent::__construct($resolver, $entityManager, $authorizationChecker);
         $this->publisher = $publisher;
     }
 
