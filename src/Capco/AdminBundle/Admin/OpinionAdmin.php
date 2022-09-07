@@ -11,7 +11,6 @@ use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -196,7 +195,7 @@ class OpinionAdmin extends CapcoAdmin
                     ->getAppendices()
                     ->count() > 0
             : null;
-
+        $disabled = $this->getSubject() && null !== $this->getSubject()->getId();
         $classname = $subjectHasAppendices ? '' : 'hidden';
         $formMapper
             ->with('admin.fields.opinion.group_content', ['class' => 'col-md-12'])
@@ -215,13 +214,7 @@ class OpinionAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.opinion.group_content')
             ->add('title', null, ['label' => 'global.title'])
-            ->add('author', ModelAutocompleteType::class, [
-                'label' => 'global.author',
-                'property' => 'username,email',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
-            ])
+            ->add('author', null, ['label' => 'global.author'])
             ->add('position', null, [
                 'label' => 'global.position',
                 'required' => false,
@@ -230,9 +223,9 @@ class OpinionAdmin extends CapcoAdmin
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
             ])
-            ->add('consultation', ModelAutocompleteType::class, [
+            ->add('consultation', null, [
+                'disabled' => $disabled,
                 'label' => 'global.consultation',
-                'property' => 'title',
                 'required' => true,
             ])
             ->end()
