@@ -19,23 +19,8 @@ Object {
           ],
         },
       },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "translations": Array [
-            Object {
-              "locale": "en-GB",
-              "title": "cosmopolite event",
-            },
-            Object {
-              "locale": "fr-FR",
-              "title": "evenement cosmopolite",
-            },
-          ],
-        },
-      },
     ],
-    "totalCount": 2,
+    "totalCount": 1,
   },
 }
 `;
@@ -182,32 +167,6 @@ Object {
       },
       Object {
         "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "translations": Array [
-            Object {
-              "locale": "fr-FR",
-              "title": "Evenement owned par un owner",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "translations": Array [
-            Object {
-              "locale": "en-GB",
-              "title": "cosmopolite event",
-            },
-            Object {
-              "locale": "fr-FR",
-              "title": "evenement cosmopolite",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "translations": Array [
             Object {
@@ -240,7 +199,7 @@ Object {
         },
       },
     ],
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
@@ -262,16 +221,6 @@ Object {
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
         },
       },
       Object {
@@ -335,7 +284,7 @@ Object {
         },
       },
     ],
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
@@ -540,36 +489,6 @@ Object {
       Object {
         "node": Object {
           "availableRegistration": 0,
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement owned par un owner",
-        },
-      },
-      Object {
-        "node": Object {
-          "availableRegistration": 0,
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
-          "projects": Array [],
-          "review": null,
-          "themes": Array [],
-          "title": "evenement cosmopolite",
-        },
-      },
-      Object {
-        "node": Object {
-          "availableRegistration": 0,
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -622,7 +541,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
@@ -827,36 +746,6 @@ Object {
       Object {
         "node": Object {
           "availableRegistration": 0,
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement owned par un owner",
-        },
-      },
-      Object {
-        "node": Object {
-          "availableRegistration": 0,
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
-          "projects": Array [],
-          "review": null,
-          "themes": Array [],
-          "title": "evenement cosmopolite",
-        },
-      },
-      Object {
-        "node": Object {
-          "availableRegistration": 0,
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -909,7 +798,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
@@ -1114,36 +1003,6 @@ Object {
       Object {
         "node": Object {
           "availableRegistration": 0,
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement owned par un owner",
-        },
-      },
-      Object {
-        "node": Object {
-          "availableRegistration": 0,
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
-          "projects": Array [],
-          "review": null,
-          "themes": Array [],
-          "title": "evenement cosmopolite",
-        },
-      },
-      Object {
-        "node": Object {
-          "availableRegistration": 0,
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1196,7 +1055,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
@@ -1415,36 +1274,6 @@ Object {
       Object {
         "node": Object {
           "availableRegistration": 0,
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-            },
-          ],
-          "review": null,
-          "themes": Array [],
-          "title": "Evenement owned par un owner",
-        },
-      },
-      Object {
-        "node": Object {
-          "availableRegistration": 0,
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "isEventRegistrationComplete": false,
-          "isMeasurable": false,
-          "maxRegistrations": null,
-          "projects": Array [],
-          "review": null,
-          "themes": Array [],
-          "title": "evenement cosmopolite",
-        },
-      },
-      Object {
-        "node": Object {
-          "availableRegistration": 0,
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1497,7 +1326,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 5,
+    "totalCount": 3,
   },
 }
 `;
@@ -1535,7 +1364,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxODgzNTk5MjAwMDAwO2k6MTtpOjE4NjcxODY4MDAwMDA7aToyO2k6MTQyMDY3MTYwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
@@ -1573,7 +1402,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxNTY1MTI4ODAwMDAwO2k6MTtpOjkyMjMzNzIwMzY4NTQ3NzU4MDc7aToyO2k6MTQyMTAxNzIwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
@@ -1611,7 +1440,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToyMDU3NjEyNDAwMDAwO2k6MTtpOjE5NzA0MzEyMDAwMDA7aToyO2k6MTQyMDIzOTYwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
@@ -1649,7 +1478,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxOTU5MjAyODAwMDAwO2k6MTtpOjIyMTE3NTAwMDAwMDA7aToyO2k6MTQyMDQ5ODgwMDAwMDt9",
       "hasNextPage": true,
     },
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
@@ -1985,50 +1814,6 @@ Object {
       Object {
         "node": Object {
           "author": Object {
-            "id": "VXNlcjp1c2VyVGhlbw==",
-            "responses": Object {
-              "edges": Array [],
-            },
-            "userType": null,
-          },
-          "body": "Event body",
-          "createdAt": "2020-05-28 00:00:00",
-          "enabled": true,
-          "endAt": null,
-          "fullAddress": "",
-          "id": "RXZlbnQ6ZXZlbnRXaXRoT3duZXI=",
-          "lat": null,
-          "link": null,
-          "lng": null,
-          "startAt": "2020-05-28 00:00:00",
-          "title": "Evenement owned par un owner",
-          "updatedAt": null,
-          "url": "https://capco.test/events/evenement-owned-par-un-owner",
-          "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": null,
-          "body": "va donc, cosmopolite",
-          "createdAt": "2020-02-28 00:00:00",
-          "enabled": true,
-          "endAt": null,
-          "fullAddress": "",
-          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
-          "lat": null,
-          "link": null,
-          "lng": null,
-          "startAt": "2020-02-17 00:00:00",
-          "title": "evenement cosmopolite",
-          "updatedAt": null,
-          "url": "https://capco.test/events/evenement-cosmopolite",
-          "zipCode": null,
-        },
-      },
-      Object {
-        "node": Object {
-          "author": Object {
             "id": "VXNlcjp1c2VyMg==",
             "responses": Object {
               "edges": Array [],
@@ -2112,7 +1897,7 @@ Object {
       "endCursor": "YTozOntpOjA7aToxMzkyMDczMjAwMDAwO2k6MTtpOjEzOTIxNTk2MDAwMDA7aToyO2k6MTQyMDQxMjQwMDAwMDt9",
       "hasNextPage": false,
     },
-    "totalCount": 17,
+    "totalCount": 15,
   },
 }
 `;
