@@ -145,17 +145,22 @@ abstract class AbstractEventMutation implements MutationInterface
             $event->setEndAt(new \DateTime($values['endAt']));
             unset($values['endAt']);
         }
-        if (isset($values['author'])) {
+        if (\array_key_exists('author', $values)) {
             unset($values['author']);
         }
-
-        if (isset($values['animator'])) {
+        if (\array_key_exists('animator', $values)) {
             unset($values['animator']);
         }
-
+        if (\array_key_exists('owner', $values)) {
+            unset($values['owner']);
+        }
+        if (\array_key_exists('projects', $values)) {
+            unset($values['projects']);
+        }
         if (\array_key_exists('steps', $values)) {
             unset($values['steps']);
         }
+
         $form = $formFactory->create(EventType::class, $event);
         $form->submit($values, false);
 

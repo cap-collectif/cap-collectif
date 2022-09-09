@@ -12,6 +12,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Utils\Map;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -31,6 +32,7 @@ class AddEventsMutation extends AbstractEventMutation
     private LocaleRepository $localeRepository;
     private ProjectRepository $projectRepository;
     private Map $map;
+    private SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -44,6 +46,7 @@ class AddEventsMutation extends AbstractEventMutation
         UserRepository $userRepo,
         ThemeRepository $themeRepo,
         ProjectRepository $projectRepository,
+        SettableOwnerResolver $settableOwnerResolver,
         Map $map
     ) {
         parent::__construct(
@@ -57,6 +60,7 @@ class AddEventsMutation extends AbstractEventMutation
         );
         $this->userRepo = $userRepo;
         $this->themeRepo = $themeRepo;
+        $this->settableOwnerResolver = $settableOwnerResolver;
         $this->localeRepository = $localeRepository;
         $this->projectRepository = $projectRepository;
         $this->map = $map;
@@ -82,10 +86,14 @@ class AddEventsMutation extends AbstractEventMutation
             /** @var User $user */
             $author = $this->userRepo->findOneByEmail($eventInput['authorEmail'] ?? '');
 
-            $eventInput['startAt'] = $eventInput['startAt'] ? $this->parseStringDate($eventInput['startAt']) : null;
-            $eventInput['endAt'] = $eventInput['endAt'] ? $this->parseStringDate($eventInput['endAt']) : null;
+            $eventInput['startAt'] = $eventInput['startAt']
+                ? $this->parseStringDate($eventInput['startAt'])
+                : null;
+            $eventInput['endAt'] = $eventInput['endAt']
+                ? $this->parseStringDate($eventInput['endAt'])
+                : null;
 
-            if ($eventInput['startAt'] === null) {
+            if (null === $eventInput['startAt']) {
                 $brokenDates[] = null;
             }
 
@@ -110,7 +118,15 @@ class AddEventsMutation extends AbstractEventMutation
                 }
 
                 if ($this->validateDates($eventInput['startAt'], $eventInput['endAt'])) {
-                    $event = (new Event())->setAuthor($author)->setOwner($viewer)->setCreator($viewer);
+                    $event = (new Event())
+                        ->setAuthor($author)
+                        ->setOwner(
+                            $this->settableOwnerResolver->__invoke(
+                                $input->offsetGet('owner'),
+                                $viewer
+                            )
+                        )
+                        ->setCreator($viewer);
 
                     if (\is_array($eventInput['projects']) && !empty($eventInput['projects'])) {
                         foreach ($eventInput['projects'] as $key => $projectTitle) {
@@ -204,6 +220,15 @@ class AddEventsMutation extends AbstractEventMutation
         ];
     }
 
+    public function validateDates(string $startAt, ?string $endAt): bool
+    {
+        if ($endAt) {
+            return $this->checkIsAValidDate($startAt) && $this->checkIsAValidDate($endAt);
+        }
+
+        return $this->checkIsAValidDate($startAt);
+    }
+
     private function checkIsAValidDate($dateString)
     {
         return (bool) strtotime($dateString);
@@ -244,15 +269,6 @@ class AddEventsMutation extends AbstractEventMutation
         return (new \DateTime($stringDate))->format('Y-m-d H:i:s');
     }
 
-    public function validateDates(string $startAt, ?string $endAt): bool
-    {
-        if ($endAt) {
-            return $this->checkIsAValidDate($startAt) && $this->checkIsAValidDate($endAt);
-        }
-
-        return $this->checkIsAValidDate($startAt);
-    }
-
     private function handleAddress(array &$eventInput): void
     {
         $address = $eventInput['address'] ?? '';
@@ -262,11 +278,16 @@ class AddEventsMutation extends AbstractEventMutation
 
         if (!$address) {
             $addressJson = $this->map->getFormattedAddress("{$zipCode} {$city} {$country}");
-            if (!$addressJson) return;
+            if (!$addressJson) {
+                return;
+            }
             $addressJsonArray = json_decode($addressJson, true);
-            if (!$addressJsonArray) return;
+            if (!$addressJsonArray) {
+                return;
+            }
             $eventInput['address'] = $addressJsonArray[0]['formatted_address'];
             $eventInput['addressJson'] = $addressJson;
+
             return;
         }
         $addressJson = $this->map->getFormattedAddress("{$address} {$zipCode} {$city} {$country}");

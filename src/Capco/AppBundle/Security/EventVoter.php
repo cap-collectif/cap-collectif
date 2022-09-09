@@ -3,13 +3,11 @@
 namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class EventVoter extends Voter
+class EventVoter extends AbstractOwnerableVoter
 {
     const CREATE = 'create';
     const VIEW_FRONT = 'viewFront';
@@ -60,87 +58,41 @@ class EventVoter extends Voter
 
         switch ($attribute) {
             case self::CREATE:
-                return $this->canCreate($viewer);
+                return $viewer && $this->canCreateEvent($viewer);
             case self::VIEW_FRONT:
-                return $this->canViewFront($event, $viewer);
+                return self::canViewFront($event, $viewer);
             case self::VIEW_ADMIN:
-                return $this->canViewAdmin($event, $viewer);
+                return $viewer && self::canViewAdmin($event, $viewer);
             case self::EDIT:
-                return $this->canEdit($event, $viewer);
+                return $viewer && self::canEdit($event, $viewer);
             case self::DELETE:
-                return $this->canDelete($event, $viewer);
+                return $viewer && self::canDelete($event, $viewer);
             case self::EXPORT:
-                return $this->canExport($event, $viewer);
+                return $viewer && self::canExport($event, $viewer);
         }
 
-        throw new \LogicException('This code should not be reached!');
+        throw new \LogicException(self::class . " - Unknown attribute ${attribute}");
     }
 
-    private function canCreate(?User $viewer): bool
+    private function canCreateEvent(User $viewer): bool
     {
-        if (!$viewer) {
-            return false;
-        }
-
-        if (
-            $this->manager->isActive('allow_users_to_propose_events') &&
-            $viewer->hasRole(UserRole::ROLE_USER)
-        ) {
-            return true;
-        }
-
-        return $viewer->isAdmin() || $viewer->isProjectAdmin();
+        return self::canCreate($viewer) ||
+            $this->manager->isActive('allow_users_to_propose_events');
     }
 
-    private function canViewFront(Event $event, ?User $viewer): bool
+    private static function canViewAdmin(Event $event, User $viewer): bool
     {
-        return $this->canDelete($event, $viewer) || $event->isEnabledOrApproved();
+        return $viewer->isAdmin() || ($viewer->isProjectAdmin() && $event->getOwner() === $viewer);
     }
 
-    private function canViewAdmin(Event $event, ?User $viewer): bool
+    private static function canViewFront(Event $event, ?User $viewer): bool
     {
-        if (!$viewer || $viewer->isOnlyUser()) {
-            return false;
-        }
-
-        return $this->canDelete($event, $viewer);
+        return $event->isEnabledOrApproved() ||
+            ($viewer instanceof User && self::canView($event, $viewer));
     }
 
-    private function canEdit(Event $event, ?User $viewer): bool
+    private static function canExport(Event $event, User $viewer): bool
     {
-        return $this->canDelete($event, $viewer);
-    }
-
-    private function canExport(Event $event, ?User $viewer): bool
-    {
-        if ($viewer->isAdmin()) {
-            return true;
-        }
-        if ($viewer->isProjectAdmin() && $event->getOwner() === $viewer) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private function canDelete(Event $event, ?User $viewer): bool
-    {
-        if (!$viewer) {
-            return false;
-        }
-
-        if ($viewer->isAdmin()) {
-            return true;
-        }
-
-        if ($viewer->isProjectAdmin() && $event->getOwner() === $viewer) {
-            return true;
-        }
-
-        if ($event->getAuthor() === $viewer) {
-            return true;
-        }
-
-        return false;
+        return self::isAdminOrOwnerOrMember($event, $viewer);
     }
 }

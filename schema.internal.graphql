@@ -439,6 +439,11 @@ input AddEventInput {
 
   """If measurable what is the max allowed registrations"""
   maxRegistrations: Int
+
+  """
+  ID of the owner of the event, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
 }
 
 type AddEventPayload {
@@ -1692,6 +1697,11 @@ input ChangeEventInput {
 
   """If measurable what is the max allowed registrations"""
   maxRegistrations: Int
+
+  """
+  ID of the owner of the event, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
 
   """The ID of the Event to modify."""
   id: ID!

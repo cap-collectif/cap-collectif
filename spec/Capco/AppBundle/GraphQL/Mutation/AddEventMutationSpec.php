@@ -4,6 +4,7 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\EventVoter;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
@@ -36,6 +37,7 @@ class AddEventMutationSpec extends ObjectBehavior
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker,
         Translator $translator,
+        SettableOwnerResolver $settableOwnerResolver,
         LocaleRepository $localeRepository
     ) {
         $localeRepository->findEnabledLocalesCodes()->willReturn(['fr-FR']);
@@ -47,6 +49,7 @@ class AddEventMutationSpec extends ObjectBehavior
             $publisher,
             $authorizationChecker,
             $translator,
+            $settableOwnerResolver,
             $localeRepository
         );
     }
@@ -64,6 +67,7 @@ class AddEventMutationSpec extends ObjectBehavior
         Form $form,
         Indexer $indexer,
         Event $event,
+        SettableOwnerResolver $settableOwnerResolver,
         Publisher $publisher
     ) {
         $values = [
@@ -109,6 +113,10 @@ class AddEventMutationSpec extends ObjectBehavior
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
         $arguments->getArrayCopy()->willReturn($values);
+        $arguments
+            ->offsetGet('owner')
+            ->shouldBeCalled()
+            ->willReturn(null);
 
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -120,6 +128,11 @@ class AddEventMutationSpec extends ObjectBehavior
         $publisher
             ->publish('event.create', \Prophecy\Argument::type(Message::class))
             ->shouldBeCalled();
+
+        $settableOwnerResolver
+            ->__invoke(null, $viewer)
+            ->shouldBeCalled()
+            ->willReturn($viewer);
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -138,6 +151,7 @@ class AddEventMutationSpec extends ObjectBehavior
         Indexer $indexer,
         Event $event,
         GlobalIdResolver $globalIdResolver,
+        SettableOwnerResolver $settableOwnerResolver,
         User $author
     ) {
         $values = [
@@ -172,6 +186,10 @@ class AddEventMutationSpec extends ObjectBehavior
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
         $arguments->getArrayCopy()->willReturn($values);
+        $arguments
+            ->offsetGet('owner')
+            ->shouldBeCalled()
+            ->willReturn(null);
 
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -179,6 +197,11 @@ class AddEventMutationSpec extends ObjectBehavior
         // we cant moke ID with phpSpec, but in reality there is an ID
         $indexer->index(Event::class, null)->shouldBeCalled();
         $indexer->finishBulk()->shouldBeCalled();
+
+        $settableOwnerResolver
+            ->__invoke(null, $viewer)
+            ->shouldBeCalled()
+            ->willReturn($viewer);
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -225,6 +248,7 @@ class AddEventMutationSpec extends ObjectBehavior
         User $viewer,
         Form $form,
         Indexer $indexer,
+        SettableOwnerResolver $settableOwnerResolver,
         Event $event
     ) {
         $values = [
@@ -260,6 +284,10 @@ class AddEventMutationSpec extends ObjectBehavior
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
         $arguments->getArrayCopy()->willReturn($values);
+        $arguments
+            ->offsetGet('owner')
+            ->shouldBeCalled()
+            ->willReturn(null);
 
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -267,6 +295,11 @@ class AddEventMutationSpec extends ObjectBehavior
         // we cant moke ID with phpSpec, but in reality there is an ID
         $indexer->index(Event::class, null)->shouldBeCalled();
         $indexer->finishBulk()->shouldBeCalled();
+
+        $settableOwnerResolver
+            ->__invoke(null, $viewer)
+            ->shouldBeCalled()
+            ->willReturn($viewer);
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -282,6 +315,7 @@ class AddEventMutationSpec extends ObjectBehavior
         FormInterface $form,
         FormError $error,
         User $viewer,
+        SettableOwnerResolver $settableOwnerResolver,
         Event $event
     ) {
         $values = [
@@ -294,6 +328,10 @@ class AddEventMutationSpec extends ObjectBehavior
             ],
         ];
         $arguments->getArrayCopy()->willReturn($values);
+        $arguments
+            ->offsetGet('owner')
+            ->shouldBeCalled()
+            ->willReturn(null);
 
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
@@ -303,6 +341,11 @@ class AddEventMutationSpec extends ObjectBehavior
 
         $event->setAuthor($viewer)->willReturn($event);
         $event->getAuthor()->willReturn($viewer);
+
+        $settableOwnerResolver
+            ->__invoke(null, $viewer)
+            ->shouldBeCalled()
+            ->willReturn($viewer);
 
         $error->getMessage()->willReturn('Invalid data.');
         $form->getErrors()->willReturn([$error]);

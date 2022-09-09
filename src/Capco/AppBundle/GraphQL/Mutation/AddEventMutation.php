@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\EventTranslation;
 use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\EventVoter;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\DBAL\Exception\DriverException;
@@ -27,6 +28,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddEventMutation extends AbstractEventMutation
 {
+    private SettableOwnerResolver $settableOwnerResolver;
     private LocaleRepository $localeRepository;
 
     public function __construct(
@@ -37,6 +39,7 @@ class AddEventMutation extends AbstractEventMutation
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker,
         TranslatorInterface $translator,
+        SettableOwnerResolver $settableOwnerResolver,
         LocaleRepository $localeRepository
     ) {
         parent::__construct(
@@ -48,6 +51,7 @@ class AddEventMutation extends AbstractEventMutation
             $authorizationChecker,
             $translator
         );
+        $this->settableOwnerResolver = $settableOwnerResolver;
         $this->localeRepository = $localeRepository;
     }
 
@@ -60,13 +64,14 @@ class AddEventMutation extends AbstractEventMutation
             self::checkDates($values);
             self::checkRegistrationTypes($values);
             $event = new Event();
-            $event->setOwner($viewer);
+            $event->setOwner(
+                $this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer)
+            );
             $event->setCreator($viewer);
             $this->setAuthor($event, $values, $viewer);
             LocaleUtils::indexTranslations($values);
             $this->setProjects($event, $viewer, $values);
             $this->setSteps($event, $viewer, $values);
-            unset($values['projects']);
 
             if ($viewer->isProjectAdmin()) {
                 $event->setEnabled(true);
