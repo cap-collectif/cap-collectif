@@ -15,6 +15,7 @@ import type {
   ProposalPageVotesTotalCountQueryResponse,
   ProposalPageVotesTotalCountQueryVariables,
 } from '~relay/ProposalPageVotesTotalCountQuery.graphql';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
   +proposal: ProposalPageVotes_proposal,
@@ -96,6 +97,7 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
   const showVotesTab = votesCount > 0 || proposal?.currentVotableStep !== null;
   const paperVotesTotalCount = proposal?.paperVotesTotalCount ?? 0;
   const votesTotalCount = votesCount + paperVotesTotalCount;
+  const unstable__paper_vote = useFeatureFlag('unstable__paper_vote');
 
   useEffect(() => {
     setVotesCount(proposal?.allVotes?.totalCount || 0);
@@ -113,12 +115,21 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
             <h3>
               <FormattedMessage values={{ num: votesTotalCount }} id="proposal.vote.count" />
             </h3>
-            <h5>
-              {intl.formatMessage(
-                { id: 'paper-and-numeric-distribution' },
-                { numericVotesCount: votesCount, paperVotesCount: paperVotesTotalCount },
-              )}
-            </h5>
+            {unstable__paper_vote ? (
+              <h5>
+                {intl.formatMessage(
+                  { id: 'paper-and-numeric-distribution' },
+                  { numericVotesCount: votesCount, paperVotesCount: paperVotesTotalCount },
+                )}
+              </h5>
+            ) : (
+              <h5>
+                {intl.formatMessage(
+                  { id: 'numeric-distribution' },
+                  { numericVotesCount: votesCount },
+                )}
+              </h5>
+            )}
           </CategoryTitle>
           {proposal.votableSteps.length > 1 && (
             <Menu
