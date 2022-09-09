@@ -7,13 +7,18 @@ Scenario: GraphQL admin wants to get all members of an organization
   """
   query {
     organization: node(id: "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE=") {
-    ... on Organization {
+      ... on Organization {
         title
         members {
-          user {
-            username
+          totalCount
+          edges {
+            node {
+              user {
+                username
+              }
+              role
+            }
           }
-          role
         }
       }
     }
@@ -25,32 +30,43 @@ Scenario: GraphQL admin wants to get all members of an organization
     "data":{
       "organization": {
         "title": "Communauté de commune de Parthenay",
-        "members": [
+        "members": {
+          "totalCount": 4,
+          "edges": [
             {
+              "node": {
                 "user": {
-                    "username": "sfavot"
+                  "username": "sfavot"
                 },
                 "role": "USER"
+              }
             },
             {
+              "node": {
                 "user": {
-                    "username": "lbrunet"
+                  "username": "lbrunet"
                 },
                 "role": "ADMIN"
+              }
             },
             {
+              "node": {
                 "user": {
-                    "username": "admin"
+                  "username": "admin"
                 },
                 "role": "USER"
+              }
             },
             {
+              "node": {
                 "user": {
-                    "username": "user"
+                  "username": "user"
                 },
                 "role": "USER"
+              }
             }
-        ]
+          ]
+        }
       }
     }
   }
@@ -62,13 +78,18 @@ Scenario: GraphQL user not organization admin wants to get all members of an org
   """
   query {
     organization: node(id: "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE=") {
-    ... on Organization {
+      ... on Organization {
         title
         members {
-          user {
-            username
+          totalCount
+          edges {
+            node {
+              user {
+                username
+              }
+              role
+            }
           }
-          role
         }
       }
     }
@@ -80,7 +101,10 @@ Scenario: GraphQL user not organization admin wants to get all members of an org
     "data":{
       "organization": {
         "title": "Communauté de commune de Parthenay",
-        "members": @null@
+        "members": {
+          "totalCount": 0,
+          "edges": []
+        }
       }
     }
   }
@@ -91,13 +115,18 @@ Scenario: GraphQL anonymous wants to get all members of an organization
   """
   query {
     organization: node(id: "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE=") {
-    ... on Organization {
+      ... on Organization {
         title
         members {
-          user {
-            username
+          totalCount
+          edges {
+            node {
+              user {
+                username
+              }
+              role
+            }
           }
-          role
         }
       }
     }
@@ -109,7 +138,10 @@ Scenario: GraphQL anonymous wants to get all members of an organization
     "data":{
       "organization": {
         "title": "Communauté de commune de Parthenay",
-        "members": @null@
+        "members": {
+          "totalCount": 0,
+          "edges": []
+        }
       }
     }
   }

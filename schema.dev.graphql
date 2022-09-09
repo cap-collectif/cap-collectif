@@ -8384,7 +8384,15 @@ type Organization implements Node & Author & PostOwner {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
-  members: [OrganizationMember!]
+  members(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): OrganizationMemberConnection
 
   """Get all pending invitations."""
   pendingOrganizationInvitations(
@@ -8437,6 +8445,27 @@ type OrganizationMember {
 
   """The role of the member in the organization."""
   role: OrganizationAffiliation!
+}
+
+"""A connection to a list of items."""
+type OrganizationMemberConnection {
+  """Identifies the total count of items in the connection."""
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [OrganizationMemberEdge]
+}
+
+"""An edge in a connection."""
+type OrganizationMemberEdge {
+  """The item at the end of the edge."""
+  node: OrganizationMember!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """Available roles for organization member"""
