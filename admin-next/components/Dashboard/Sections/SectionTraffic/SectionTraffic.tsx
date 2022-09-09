@@ -10,6 +10,7 @@ import {
     SectionTrafficQuery as SectionTrafficQueryType,
 } from '@relay/SectionTrafficQuery.graphql';
 import SectionTrafficEmpty from './SectionTrafficEmpty';
+import { Text } from '@cap-collectif/ui';
 
 interface SectionTrafficProps {
     readonly queryOptions: QueryOptions
@@ -53,8 +54,10 @@ const SectionTraffic: FC<SectionTrafficProps> = ({ queryOptions }) => {
     if(!trafficSources || trafficSources?.totalCount === 0 ) return <SectionTrafficEmpty />;
 
     return (
-        <Section width="50%" spacing={6}>
-            <Section.Title>{intl.formatMessage({ id: 'traffic-source' })}</Section.Title>
+        <Section width="50%" spacing={6} border="normal" borderColor="gray.150">
+            <Text fontSize={3} color="blue.800">
+                {intl.formatMessage({ id: 'traffic-source' })}
+            </Text>
             <TrafficChart percentages={formatSources(trafficSources.sources, trafficSources.totalCount)} />
         </Section>
     );

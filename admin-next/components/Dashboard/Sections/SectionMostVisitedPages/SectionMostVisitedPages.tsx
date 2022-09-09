@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import { Box } from '@cap-collectif/ui';
+import { Box, Text } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
 import ViewChart from '@ui/Charts/ViewChart/ViewChart';
 import Section from '@ui/Section/Section';
@@ -46,10 +46,10 @@ const SectionMostVisitedPages: FC<SectionMostVisitedPagesProps> = ({ queryOption
     return (
         <>
             <Box as="button" type="button" onClick={onOpen} textAlign="left">
-                <Section spacing={6}>
-                    <Section.Title>
+                <Section spacing={6} border="normal" borderColor="gray.150">
+                    <Text fontSize={3} color="blue.800">
                         {intl.formatMessage({ id: 'most-visited-pages' })}
-                    </Section.Title>
+                    </Text>
 
                     {mostVisitedPages.values.slice(0, 3).map((value, idx) => (
                         <ViewChart

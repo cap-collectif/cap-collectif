@@ -6,8 +6,10 @@ const SectionMostVisitedPagesEmpty = () => {
     const intl = useIntl();
 
     return (
-        <Section spacing={6}>
-            <Section.Title>{intl.formatMessage({ id: 'most-visited-pages' })}</Section.Title>
+        <Section spacing={6} border="normal" borderColor="gray.150">
+            <Text fontSize={3} color="blue.800">
+                {intl.formatMessage({ id: 'most-visited-pages' })}
+            </Text>
 
             <Flex direction="column" align="center" py={10} spacing={1}>
                 <Text

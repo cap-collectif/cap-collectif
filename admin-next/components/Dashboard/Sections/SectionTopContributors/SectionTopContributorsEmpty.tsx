@@ -1,13 +1,15 @@
 import { useIntl } from 'react-intl';
-import Section from '../../../UI/Section/Section';
+import Section from '@ui/Section/Section';
 import { CapUILineHeight, Flex, Text } from '@cap-collectif/ui';
 
 const SectionTopContributorsEmpty = () => {
     const intl = useIntl();
 
     return (
-        <Section spacing={6}>
-            <Section.Title>{intl.formatMessage({ id: 'most-active-contributors' })}</Section.Title>
+        <Section spacing={6} border="normal" borderColor="gray.150">
+            <Text fontSize={3} color="blue.800">
+                {intl.formatMessage({ id: 'most-active-contributors' })}
+            </Text>
 
             <Flex direction="column" align="center" py={6} spacing={1}>
                 <Text

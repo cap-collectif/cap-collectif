@@ -7,6 +7,7 @@ import { useDashboard } from '../../Dashboard.context';
 import { SectionProposalCategoriesQuery as SectionProposalCategoriesQueryType } from '@relay/SectionProposalCategoriesQuery.graphql';
 import { getVariablesQuery, QueryOptions } from '../Sections.utils';
 import SectionProposalCategoriesEmpty from './SectionProposalCategoriesEmpty';
+import { Text } from '@cap-collectif/ui';
 
 interface SectionProposalCategoriesProps {
     readonly queryOptions: QueryOptions
@@ -58,10 +59,11 @@ const SectionProposalCategories: FC<SectionProposalCategoriesProps> = ({ queryOp
     if(!mostUsedProposalCategories || mostUsedProposalCategories?.totalCount === 0) return <SectionProposalCategoriesEmpty />;
 
     return (
-        <Section width="50%" spacing={6}>
-            <Section.Title>
+        <Section width="50%" spacing={6} border="normal" borderColor="gray.150">
+            <Text fontSize={3} color="blue.800">
                 {intl.formatMessage({ id: 'categories-most-use-proposal' })}
-            </Section.Title>
+            </Text>
+
             <PieChart percentages={formatCategories(mostUsedProposalCategories.values, mostUsedProposalCategories.totalCount)} />
         </Section>
     );

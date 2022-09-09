@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { useIntl } from 'react-intl';
-import { Flex } from '@cap-collectif/ui';
+import { Flex, Text } from '@cap-collectif/ui';
 import Section from '@ui/Section/Section';
 import Contributor from './Contributor';
 import { useDashboard } from '../../Dashboard.context';
@@ -48,8 +48,10 @@ const SectionTopContributors: FC<SectionTopContributorsProps> = ({
     if (totalContributorsCount === 0 || !topContributors) return <SectionTopContributorsEmpty />;
 
     return (
-        <Section spacing={6}>
-            <Section.Title>{intl.formatMessage({ id: 'most-active-contributors' })}</Section.Title>
+        <Section spacing={6} border="normal" borderColor="gray.150">
+            <Text fontSize={3} color="blue.800">
+                {intl.formatMessage({ id: 'most-active-contributors' })}
+            </Text>
             <Flex direction="row">
                 {topContributors.map((contributor, idx) => (
                     <Contributor contributor={contributor} key={idx} />

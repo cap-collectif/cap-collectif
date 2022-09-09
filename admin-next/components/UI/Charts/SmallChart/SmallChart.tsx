@@ -19,7 +19,7 @@ const SmallChart: FC<SmallChartProps> = ({ label, count, ...props }) => (
         borderRadius="normal"
         bg="white"
         height="100%">
-        <Flex direction="column" mr={3} flex={1}>
+        <Flex direction="column" mr={3}>
             <Text color="blue.800" mb={2} textAlign="left" {...headingStyles.h4}>
                 {label}
             </Text>

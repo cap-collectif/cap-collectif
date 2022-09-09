@@ -7,6 +7,7 @@ import formatValues from '../../formatValues';
 import { getVariablesQuery, QueryOptions } from '../Sections.utils';
 import { useDashboard } from '../../Dashboard.context';
 import type { SectionParticipationsQuery as SectionParticipationsQueryType } from '@relay/SectionParticipationsQuery.graphql';
+import { CapUIFontWeight, headingStyles, Text } from '@cap-collectif/ui';
 
 interface SectionParticipationsProps {
     readonly queryOptions: QueryOptions
@@ -56,8 +57,11 @@ const SectionParticipations: FC<SectionParticipationsProps> = ({
     const { votes, comments, contributions, followers } = data.analytics;
 
     return (
-        <Section width="50%" spacing={6}>
-            <Section.Title>{intl.formatMessage({ id: 'methods-of-participation' })}</Section.Title>
+        <Section width="50%" spacing={6} border="normal" borderColor="gray.150">
+            <Text fontSize={3} color="blue.800">
+                {intl.formatMessage({ id: 'methods-of-participation' })}
+            </Text>
+
             <TabsChart>
                 <TabsChart.Tab
                     id="vote"

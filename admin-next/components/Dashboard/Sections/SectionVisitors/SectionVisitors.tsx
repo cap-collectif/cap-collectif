@@ -43,8 +43,7 @@ const SectionVisitors: FC<SectionVisitorsProps> = ({ queryOptions }) => {
                 type="button"
                 onClick={onOpen}
                 flex={1}
-                width="25%"
-                maxWidth="25%">
+                maxWidth="33%">
                 <SmallChart
                     count={visitors?.totalCount || 0}
                     label={intl.formatMessage(

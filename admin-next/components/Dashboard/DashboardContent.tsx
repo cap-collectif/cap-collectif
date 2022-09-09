@@ -108,7 +108,7 @@ const DashboardContent: FC<DashboardContentProps> = ({ viewer: viewerFragment })
 
     return (
         <DashboardContext.Provider value={contextValue}>
-            <Flex direction="column" px={8} py={6} spacing={8}>
+            <Flex direction="column" spacing={8}>
                 <DashboardFilters viewer={viewer} />
 
                 <Flex direction="row" justify="flex-start" overflow="auto" spacing={8}>

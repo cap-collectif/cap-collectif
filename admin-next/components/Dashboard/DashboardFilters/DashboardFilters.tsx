@@ -64,6 +64,11 @@ type DashboardFiltersProps = {
     viewer: DashboardFilters_viewer$key,
 };
 
+type ProjectFormatted = {
+    id: string
+    label: string
+}
+
 const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment }) => {
     const {
         data: viewer,
@@ -108,13 +113,18 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
         firstRendered.current = true;
     }, [viewerSession.isAdmin, refetch]);
 
+    const projectsFormatted: ProjectFormatted[] = projects?.edges
+        ?.filter(Boolean)
+        .map(edge => edge?.node)
+        .filter(Boolean)
+        .map(project => project && ({ id: project.id, label: project.title })) || [];
+
     const defaultValue =
         projects?.totalCount > 0
-            ? projects?.edges
-                  ?.filter(Boolean)
-                  .map(edge => edge?.node)
-                  .filter(Boolean)
-                  .find(project => project && project.id === filters.projectId) || 'ALL'
+            ? projectsFormatted.find(project => project && project.id === filters.projectId) ||
+              viewerSession.isProjectAdmin && !viewerSession.isAdmin
+                ? projectsFormatted[0]
+                : 'ALL'
             : 'ALL';
 
     const defaultValueFormatted =
@@ -123,10 +133,7 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
                   label: intl.formatMessage({ id: 'global.all.projects' }),
                   value: 'ALL',
               }
-            : {
-                  id: defaultValue.id,
-                  label: defaultValue.title,
-              };
+            : defaultValue;
 
     return (
         <Flex direction="row" align="center" spacing={2}>

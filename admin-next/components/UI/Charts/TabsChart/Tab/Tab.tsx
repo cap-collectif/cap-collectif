@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { LineChartProps } from '../../LineChart/LineChart';
 import { Box, headingStyles, Flex, Text } from '@cap-collectif/ui'
 import { capitalizeFirstLetter } from '@utils/format-string';
+import { formatBigNumber } from '@utils/format-number';
 
 export type ActiveTab = {
   readonly id: string,
@@ -41,7 +42,7 @@ const Tab: FC<TabProps> = ({ id, label, count, active, data, selectTab, disabled
         {capitalizeFirstLetter(label)}
       </Text>
       <Text color="blue.800" {...headingStyles.h3}>
-        {count}
+        {formatBigNumber(count)}
       </Text>
     </Flex>
   </Box>

@@ -42,8 +42,8 @@ const SectionPageViews: FC<SectionPageViewsProps> = ({ queryOptions }) => {
                 as="button"
                 type="button"
                 onClick={onOpen}
-                width="25%"
-                maxWidth="25%">
+                flex={1}
+                maxWidth="33%">
                 <SmallChart
                     count={pageViews?.totalCount || 0}
                     label={intl.formatMessage(
