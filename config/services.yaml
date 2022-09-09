@@ -102,7 +102,6 @@ parameters:
     sendinblue_nl_list_id: '%env(SYMFONY_SENDINBLUE_NL_LIST_ID)%'
     sendinblue_secret: '%env(SYMFONY_SENDINBLUE_SECRET)%'
     openid_backchannel_secret: '%env(SYMFONY_OPENID_BACKCHANNEL_SECRET)%'
-    openid_backchannel_secret_dev: '%env(SYMFONY_OPENID_BACKCHANNEL_SECRET_DEV)%'
     openid_test_username: '%env(SYMFONY_OPENID_TEST_USERNAME)%'
     openid_test_password: '%env(SYMFONY_OPENID_TEST_PASSWORD)%'
 

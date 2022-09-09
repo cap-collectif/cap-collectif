@@ -17,7 +17,6 @@ class OpenIDBackchannel
     private UserRepository $userRepository;
     private SessionWithJsonHandler $redisSessionHandler;
     private string $backChannelSecret;
-    private string $backChannelSecretDev;
     private string $env;
     private EntityManagerInterface $entityManager;
     private SerializerInterface $serializer;
@@ -30,7 +29,6 @@ class OpenIDBackchannel
         SerializerInterface $serializer,
         string $env,
         string $backChannelSecret,
-        string $backChannelSecretDev,
         LoggerInterface $logger
     ) {
         $this->userRepository = $userRepository;
@@ -39,7 +37,6 @@ class OpenIDBackchannel
         $this->env = $env;
         $this->entityManager = $entityManager;
         $this->serializer = $serializer;
-        $this->backChannelSecretDev = $backChannelSecretDev;
         $this->logger = $logger;
     }
 
@@ -160,10 +157,6 @@ class OpenIDBackchannel
 
     private function checkToken(string $secret): bool
     {
-        if ('prod' !== $this->env && $secret === $this->backChannelSecretDev) {
-            return true;
-        }
-
         // if we dont have changed the default token, we cant access at this route
         if (\in_array($this->backChannelSecret, ['secret', 'INSERT_REAL_SECRET', ''])) {
             throw new AccessDeniedException('Please change the secret');
