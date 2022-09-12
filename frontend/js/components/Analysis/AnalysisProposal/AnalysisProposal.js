@@ -25,6 +25,7 @@ import { pxToRem } from '~/utils/styles/mixins';
 import { TagContainer } from '~ui/Labels/Tag';
 import Tooltip from '~ds/Tooltip/Tooltip';
 import Text from '~ui/Primitives/Text';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {
   proposal: AnalysisProposal_proposal,
@@ -100,12 +101,13 @@ const AnalysisProposal = ({
                       .join(', '),
                   },
                 )}>
-                <Icon
-                  name={ICON_NAME.information}
-                  size={pxToRem(14)}
-                  className="mr-10"
-                  color={styleGuideColors.blue200}
-                />
+                <Flex mr="10px">
+                  <Icon
+                    name={ICON_NAME.information}
+                    size={pxToRem(14)}
+                    color={styleGuideColors.blue200}
+                  />
+                </Flex>
               </Tooltip>
             )}
             <a href={isAdminView ? proposal?.adminUrl ?? proposal.url : proposal.url}>
