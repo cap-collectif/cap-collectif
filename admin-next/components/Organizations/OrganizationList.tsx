@@ -22,9 +22,7 @@ export const QUERY: GraphQLTaggedNode = graphql`
                     displayName
                     url
                     members {
-                        user {
-                            _id
-                        }
+                        totalCount
                     }
                     logo {
                         id
@@ -54,7 +52,6 @@ const OrganizationList: React.FC<OrganizationListProps> = () => {
         <>
             {organizations &&
                 organizations.map(organization => {
-                    const memberCount = organization?.members?.length;
                     const hasLogo = !!organization?.logo;
                     return (
                         <CardOrg key={organization?.id} marginBottom={4} marginRight={4}>
@@ -72,7 +69,7 @@ const OrganizationList: React.FC<OrganizationListProps> = () => {
                                 <Text>
                                     {intl.formatMessage(
                                         { id: 'organizations.members' },
-                                        { num: memberCount },
+                                        { num: organization?.members?.totalCount },
                                     )}
                                 </Text>
                                 <Button
