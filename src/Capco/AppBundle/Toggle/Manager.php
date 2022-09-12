@@ -85,6 +85,7 @@ class Manager
     public const helpscout_beacon = 'helpscout_beacon';
     public const api_sendinblue = 'api_sendinblue';
     public const proposal_sms_vote = 'proposal_sms_vote';
+    public const unstable__organizations = 'unstable__organizations';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -187,6 +188,7 @@ class Manager
         self::helpscout_beacon,
         self::api_sendinblue,
         self::proposal_sms_vote,
+        self::unstable__organizations,
     ];
 
     protected ToggleManager $toggleManager;

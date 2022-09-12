@@ -192,6 +192,16 @@
         ]
     },
     {
+        "id": "organizations",
+        "title": "admin.label.organizations",
+        "icon": "PIE_CHART",
+        "featuresRequired": ["unstable__organizations"],
+        "rolesRequired": ["admin"],
+        "href": "/admin-next/organizations",
+        "beta": true,
+        "items": []
+    },
+    {
         "id": "settings",
         "title": "admin.group.parameters",
         "icon": "COG",

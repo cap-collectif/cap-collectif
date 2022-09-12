@@ -163,3 +163,6 @@ InternalFeatureFlagType:
             proposal_sms_vote:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::proposal_sms_vote")'
                 description: 'Whether or not proposal sms vote is enabled'
+            unstable__organizations:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__organizations")'
+                description: 'Whether or not organizations are enabled'

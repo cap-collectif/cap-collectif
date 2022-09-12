@@ -6299,6 +6299,9 @@ enum FeatureFlagType {
 
   """Whether or not proposal sms vote is enabled"""
   proposal_sms_vote
+
+  """Whether or not organizations are enabled"""
+  unstable__organizations
 }
 
 """Require a firstname"""

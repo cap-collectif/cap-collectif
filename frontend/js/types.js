@@ -105,6 +105,7 @@ export type FeatureToggles = {
   unstable__paper_vote: ?boolean,
   helpscout_beacon: ?boolean,
   proposal_sms_vote: ?boolean,
+  unstable__organizations: ?boolean,
 };
 
 export type FeatureToggle = $Keys<FeatureToggles>;

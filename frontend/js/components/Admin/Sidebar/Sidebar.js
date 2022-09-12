@@ -411,6 +411,18 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
               </SidebarAccordionItem>
             ) : null}
           </Accordion>
+          {features.unstable__organizations && isAdmin ? (
+            <SidebarLink
+              text="admin.label.organizations"
+              href="/admin-next/organizations"
+              icon="PIE_CHART"
+              withLabel={isOpen}
+              fontSize={3}
+              p={3}
+              width="100%"
+              beta
+            />
+          ) : null}
 
           {features.beta__analytics_page ? (
             <SidebarLink

@@ -291,6 +291,10 @@ Object {
       "enabled": false,
       "type": "proposal_sms_vote",
     },
+    Object {
+      "enabled": false,
+      "type": "unstable__organizations",
+    },
   ],
 }
 `;

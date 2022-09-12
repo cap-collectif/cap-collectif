@@ -80,6 +80,11 @@
                         "title": "capco.module.helpscout-beacon",
                         "description": "description.module.helpscout-beacon",
                         "onlySuperAdmin": true
+                    },
+                    "unstable__organizations": {
+                        "title": "capco.module.organizations",
+                        "description": "description.module.organizations",
+                        "onlySuperAdmin": true
                     }
                 }
             }

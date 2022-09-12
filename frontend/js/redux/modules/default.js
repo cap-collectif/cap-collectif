@@ -105,6 +105,7 @@ export const features: FeatureToggles = {
   unstable__paper_vote: false,
   helpscout_beacon: false,
   proposal_sms_vote: false,
+  unstable__organizations: false,
 };
 
 export const initialState: State = {
