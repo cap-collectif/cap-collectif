@@ -325,7 +325,7 @@ class UserRepository extends EntityRepository
             ->createQuery(
                 'SELECT u.id, count(distinct a) AS arguments_count
           from CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
+          LEFT JOIN CapcoAppBundle:Argument a WITH a.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
@@ -658,7 +658,7 @@ class UserRepository extends EntityRepository
             ->createQuery(
                 'SELECT u.id, count(distinct a) AS arguments_count
           FROM CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
+          LEFT JOIN CapcoAppBundle:Argument a WITH a.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc

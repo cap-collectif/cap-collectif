@@ -21,16 +21,16 @@ class EmptyUsernameListener
     public function onKernelRequest(RequestEvent $event)
     {
         if (!$event->isMasterRequest()) {
-            return;
+            return null;
         }
         $token = $this->tokenStorage->getToken();
         // Skip if anonymous
         if (!$token || 'anon.' === $token->getUser()) {
-            return;
+            return null;
         }
         // Skip if user has a username
-        if (null !== $token->getUser()->getUsername()) {
-            return;
+        if (!empty($token->getUser()->getUsername())) {
+            return null;
         }
         $request = $event->getRequest();
         $route = $request->get('_route');
@@ -40,10 +40,10 @@ class EmptyUsernameListener
             'graphql_multiple_endpoint',
         ]);
         if (\in_array($route, $routes, true)) {
-            return;
+            return null;
         }
         if (false !== strpos($route, '_imagine')) {
-            return;
+            return null;
         }
         $response = new Response(
             $this->templating->render('CapcoAppBundle:Default:choose_a_username.html.twig')

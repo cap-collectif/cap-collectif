@@ -17,7 +17,7 @@ class CollectPage extends Page
 
     protected $elements = [
         'proposal' => '.proposal-preview',
-        'vote proposal button' => '.proposal__button__vote',
+        'vote proposal button' => '.proposal__preview__vote',
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'create proposal button' => '#add-proposal',
         'proposal form submit button' => '#confirm-proposal-create',

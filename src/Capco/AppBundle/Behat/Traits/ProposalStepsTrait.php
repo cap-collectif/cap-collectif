@@ -1160,8 +1160,8 @@ trait ProposalStepsTrait
      */
     public function iSubmitTheProposalVoteForm()
     {
-        $page = $this->getCurrentPage()->submitProposalVoteForm();
         $this->waitAndThrowOnFailure(5000, "$('#confirm-proposal-vote').length == 0");
+        $this->getCurrentPage()->submitProposalVoteForm();
     }
 
     /**
