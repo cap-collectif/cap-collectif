@@ -68,11 +68,12 @@ describe('<UserInvitationSSOPage />', () => {
     loginFranceConnect: false,
     loginParis: false,
     ssoList: [],
+    isRegistrationAllowed: true,
     primaryColor: 'green',
     btnTextColor: 'white',
     backgroundColor: 'white',
     setFirstVisited: jest.fn(),
-    token: 'onishan'
+    token: 'onishan',
   };
 
   describe('<TestUserInvitationSSOPage />', () => {
@@ -86,6 +87,13 @@ describe('<UserInvitationSSOPage />', () => {
     it('should render franceConnect sso button', () => {
       testComponentTree = ReactTestRenderer.create(
         <TestUserInvitationSSOPage {...props} loginFranceConnect />,
+      );
+      expect(testComponentTree).toMatchSnapshot();
+    });
+
+    it('should render franceConnect sso button without create account link', () => {
+      testComponentTree = ReactTestRenderer.create(
+        <TestUserInvitationSSOPage {...props} loginFranceConnect isRegistrationAllowed={false} />,
       );
       expect(testComponentTree).toMatchSnapshot();
     });

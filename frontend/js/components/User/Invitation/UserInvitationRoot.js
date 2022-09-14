@@ -25,6 +25,7 @@ type Props = {|
     +name: string,
   |},
   +hasEnabledSSO: boolean,
+  +isRegistrationAllowed: boolean,
 |};
 
 const COLORS_FRAGMENT = graphql`
@@ -57,6 +58,7 @@ const UserInvitationRootPage = ({
   loginFranceConnect,
   ssoList,
   hasEnabledSSO,
+  isRegistrationAllowed,
 }: Props) => {
   const colors = useFragment(COLORS_FRAGMENT, colorsFragmentRef);
   const logo = useFragment(LOGO_FRAGMENT, logoFragmentRef);
@@ -85,6 +87,7 @@ const UserInvitationRootPage = ({
             loginFranceConnect={loginFranceConnect}
             loginParis={loginParis}
             ssoList={ssoList}
+            isRegistrationAllowed={isRegistrationAllowed}
             logoFragmentRef={logo}
             primaryColor={primaryColor}
             btnTextColor={btnTextColor}

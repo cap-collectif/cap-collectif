@@ -79,6 +79,7 @@ class UserController extends AbstractController
             'loginFranceConnect' => $this->isFranceConnectEnabled(),
             'ssoList' => array_values($ssoList),
             'hasEnabledSSO' => $this->hasAnyEnabledSSO($ssoList),
+            'isRegistrationAllowed' => $this->toggleManager->isActive('registration'),
         ];
     }
 

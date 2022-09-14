@@ -28,6 +28,7 @@ type Props = {|
   +loginFranceConnect: boolean,
   +loginParis: boolean,
   +ssoList: any,
+  +isRegistrationAllowed: boolean,
   +logoFragmentRef: UserInvitationSSOPage_logo$key,
   +primaryColor: string,
   +btnTextColor: string,
@@ -49,12 +50,13 @@ const UserInvitationSSOPage = ({
   loginFranceConnect,
   loginParis,
   ssoList,
+  isRegistrationAllowed,
   logoFragmentRef,
   primaryColor,
   btnTextColor,
   backgroundColor,
   setFirstVisited,
-  token
+  token,
 }: Props) => {
   React.useEffect(() => {
     setFirstVisited(true);
@@ -120,7 +122,7 @@ const UserInvitationSSOPage = ({
                 );
               })}
             </>
-            { !loginParis && (
+            {!loginParis && isRegistrationAllowed && (
               <>
                 <Flex alignItems="center" width="100%" mb={4}>
                   <Line />
@@ -134,8 +136,8 @@ const UserInvitationSSOPage = ({
                   primaryColor={primaryColor}
                   btnTextColor={btnTextColor}
                   to={{
-                    pathname: "/",
-                    search: `?token=${token}`
+                    pathname: '/',
+                    search: `?token=${token}`,
                   }}>
                   {intl.formatMessage({ id: 'create-account-with-email' })}
                 </CreateAccountEmailLink>

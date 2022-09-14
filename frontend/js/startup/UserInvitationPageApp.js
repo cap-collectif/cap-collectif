@@ -18,6 +18,7 @@ export type UserInvitationPageAppProps = {|
   +loginSaml: boolean,
   +ssoList: any,
   +hasEnabledSSO: boolean,
+  +isRegistrationAllowed: boolean,
 |};
 
 type Props = UserInvitationPageAppProps;
@@ -64,6 +65,7 @@ export default (propsComponent: Props) => (
                 loginFranceConnect={propsComponent.loginFranceConnect}
                 ssoList={propsComponent.ssoList}
                 hasEnabledSSO={propsComponent.hasEnabledSSO}
+                isRegistrationAllowed={propsComponent.isRegistrationAllowed}
               />
             </Router>
           );

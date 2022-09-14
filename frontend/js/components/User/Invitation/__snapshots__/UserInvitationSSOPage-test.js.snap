@@ -215,6 +215,87 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
 </div>
 `;
 
+exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render franceConnect sso button without create account link 1`] = `
+<div
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX hsmwud UserInvitationSSOPagestyle__Container-dqcskM gfEZSl"
+>
+  <div
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX kDOTRG UserInvitationSSOPagestyle__LeftSide-hxTIJT jXeXli"
+  >
+    <div
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX kkRZix UserInvitationSSOPagestyle__LeftSideInner-jdiSwF kBWVTx"
+    >
+      <div
+        className="sc-bdnxRM UserInvitationSSOPagestyle__WelcomeMessage-hsrIYq flMSnR eyOJtW"
+      >
+        <h2
+          className="sc-bdnxRM hdEyrP"
+        >
+          global-welcome
+           
+          <span
+            aria-label="global-welcome"
+            role="img"
+          >
+            👋
+          </span>
+        </h2>
+        <p
+          className="sc-bdnxRM cbhbJF"
+        >
+          invite-join-platform
+        </p>
+      </div>
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fitFXx UserInvitationSSOPagestyle__ButtonsContainer-ekelIt knVuOM"
+      >
+        <div
+          className="SSOButtonstyle__FranceConnectButton-iJkBJn jDFPkc"
+        >
+          <a
+            className="sc-bdnxRM Link__LinkInner-jUwnjy kZFksl jnxQhY"
+            href="/login/franceconnect?_destination=http://localhost"
+            target="_blank"
+          >
+            <span
+              className="loginIcon"
+              style={
+                Object {
+                  "lineHeight": "inherit",
+                }
+              }
+            >
+              <IconMock
+                aria-hidden={true}
+                className="icon"
+                style={
+                  Object {
+                    "flexShrink": "0",
+                    "verticalAlign": "middle",
+                  }
+                }
+              />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX egROXr UserInvitationSSOPagestyle__RigthSide-icSZSY ggEWDE"
+  >
+    <div
+      className="UserInvitationPagestyle__Symbols-eeCpyJ doHYBq"
+    />
+    <img
+      alt=""
+      className="UserInvitationSSOPagestyle__Logo-ismXzE hJrHso"
+      src="/logo"
+    />
+  </div>
+</div>
+`;
+
 exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render login paris sso button and hide create account link 1`] = `
 <div
   className="sc-bdnxRM Flex___StyledAppBox-RSPpX hsmwud UserInvitationSSOPagestyle__Container-dqcskM gfEZSl"
