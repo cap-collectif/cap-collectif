@@ -7591,6 +7591,7 @@ type Mutation {
   deleteOpinion(input: DeleteOpinionInput!): DeleteOpinionPayload
   deleteVersion(input: DeleteVersionInput!): DeleteVersionPayload
   addUserReply(input: AddUserReplyInput!): AddUserReplyPayload
+  updateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationPayload
   updateUserReply(input: UpdateUserReplyInput!): UpdateUserReplyPayload
   deleteUserReply(input: DeleteUserReplyInput!): DeleteUserReplyPayload
   addAnonymousReply(input: AddAnonymousReplyInput!): AddAnonymousReplyPayload
@@ -8379,7 +8380,7 @@ type Organization implements Node & Author & PostOwner {
 
   """The organization's banner file"""
   banner: Media
-  description(
+  body(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String
@@ -8396,6 +8397,7 @@ type Organization implements Node & Author & PostOwner {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): OrganizationMemberConnection
+  socialNetworks: OrganizationSocialNetworks
 
   """Get all pending invitations."""
   pendingOrganizationInvitations(
@@ -8478,6 +8480,27 @@ enum OrganizationMemberRole {
 
   """Member of the organization."""
   user
+}
+
+"""The social networks of an organization."""
+type OrganizationSocialNetworks {
+  """Link of Web page."""
+  webPageUrl: URI
+
+  """Link of Facebook page."""
+  facebookUrl: URI
+
+  """Link of Twitter page."""
+  twitterUrl: URI
+
+  """Link of Instagram page."""
+  instagramUrl: URI
+
+  """Link of LinkedIn profile."""
+  linkedInUrl: URI
+
+  """Link of Youtube channel."""
+  youtubeUrl: URI
 }
 
 """A step inside a project."""
@@ -16131,6 +16154,67 @@ type UpdateOpinionPayload {
 
   """available errors if mutation fails"""
   errorCode: UpdateOpinionErrorCode
+  clientMutationId: String
+}
+
+"""Available errors on `updateOrganization` mutation."""
+enum UpdateOrganizationErrorCode {
+  """The organization id could not be found."""
+  ORGANIZATION_NOT_FOUND
+}
+
+input UpdateOrganizationInput {
+  """Link of Web page."""
+  webPageUrl: URI
+
+  """Link of Facebook page."""
+  facebookUrl: URI
+
+  """Link of Twitter page."""
+  twitterUrl: URI
+
+  """Link of Instagram page."""
+  instagramUrl: URI
+
+  """Link of LinkedIn profile."""
+  linkedInUrl: URI
+
+  """Link of Youtube channel."""
+  youtubeUrl: URI
+
+  """The id of the organization."""
+  organizationId: ID!
+  translations: [UpdateOrganizationTranslationInput!]
+
+  """The new email."""
+  email: String
+
+  """The id of a `Media` to use as logo."""
+  logo: ID
+
+  """The id of a `Media` to use as banner."""
+  banner: ID
+  clientMutationId: String
+}
+
+type UpdateOrganizationPayload {
+  """Update an organization."""
+  organization: Organization
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: UpdateOrganizationErrorCode
+  clientMutationId: String
+}
+
+input UpdateOrganizationTranslationInput {
+  """Organization title."""
+  title: String!
+
+  """Organization body."""
+  body: HTML
+
+  """the locale of the translation"""
+  locale: TranslationLocale!
   clientMutationId: String
 }
 

@@ -1,0 +1,21 @@
+UpdateOrganizationInput:
+    type: relay-mutation-input
+    inherits:
+        - InternalWithSocialNetworks
+    config:
+        description: 'Update an organization'
+        fields:
+            organizationId:
+                type: 'ID!'
+                description: 'The id of the organization.'
+            translations:
+                type: '[InternalUpdateOrganizationTranslationInput!]'
+            email:
+                type: 'String'
+                description: 'The new email.'
+            logo:
+                type: 'ID'
+                description: 'The id of a `Media` to use as logo.'
+            banner:
+                type: 'ID'
+                description: 'The id of a `Media` to use as banner.'

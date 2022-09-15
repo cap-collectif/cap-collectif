@@ -193,6 +193,13 @@ InternalMutation:
                     inputType: AddUserReplyInput
                     payloadType: AddUserReplyPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUserReplyMutation", [value, getUser()])'
+            updateOrganization:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOrganizationMutation").isGranted(args["input"]["organizationId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateOrganizationInput
+                    payloadType: UpdateOrganizationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOrganizationMutation", [value, getUser()])'
             updateUserReply:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

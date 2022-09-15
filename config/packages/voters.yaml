@@ -37,6 +37,9 @@ services:
     Capco\AppBundle\Security\ReplyVoter:
         tags:
             - { name: security.voter }
+    Capco\AppBundle\Security\OrganizationVoter:
+        tags:
+            - { name: security.voter }
     Capco\AppBundle\Security\EmailingCampaignVoter:
         tags:
             - { name: security.voter }

@@ -1,0 +1,10 @@
+UpdateOrganizationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            organization:
+                type: 'InternalOrganization'
+                description: 'Update an organization.'
+            errorCode:
+                type: 'UpdateOrganizationErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

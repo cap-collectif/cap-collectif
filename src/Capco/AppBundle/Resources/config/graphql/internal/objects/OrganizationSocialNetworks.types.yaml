@@ -1,0 +1,7 @@
+InternalOrganizationSocialNetworks:
+    type: object
+    inherits:
+        - InternalWithSocialNetworks
+    config:
+        name: OrganizationSocialNetworks
+        description: 'The social networks of an organization.'

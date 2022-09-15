@@ -1,0 +1,14 @@
+InternalUpdateOrganizationTranslationInput:
+    type: relay-mutation-input
+    config:
+        name: UpdateOrganizationTranslationInput
+        fields:
+            title:
+                type: 'String!'
+                description: 'Organization title.'
+            body:
+                type: 'HTML'
+                description: 'Organization body.'
+            locale:
+                type: 'TranslationLocale!'
+                description: 'the locale of the translation'

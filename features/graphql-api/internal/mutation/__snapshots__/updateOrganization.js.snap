@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateOrganization admin organization should be able to edit organization 1`] = `
+Object {
+  "updateOrganization": Object {
+    "organization": Object {
+      "banner": Object {
+        "url": "https://capco.test/media/default/0001/01/archived.jpeg",
+      },
+      "body": "<p>Body</p>",
+      "logo": Object {
+        "url": "https://capco.test/media/default/0001/01/gymnase.jpg",
+      },
+      "socialNetworks": Object {
+        "facebookUrl": "/fb",
+        "instagramUrl": "/instagram",
+        "linkedInUrl": "/linkedIn",
+        "twitterUrl": "/twitter",
+        "webPageUrl": "/webpage",
+        "youtubeUrl": "/youtube",
+      },
+      "title": "Titre",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateOrganization admin should be able to edit organization 1`] = `
+Object {
+  "updateOrganization": Object {
+    "organization": Object {
+      "banner": Object {
+        "url": "https://capco.test/media/default/0001/01/archived.jpeg",
+      },
+      "body": "<p>Body</p>",
+      "logo": Object {
+        "url": "https://capco.test/media/default/0001/01/gymnase.jpg",
+      },
+      "socialNetworks": Object {
+        "facebookUrl": "/fb",
+        "instagramUrl": "/instagram",
+        "linkedInUrl": "/linkedIn",
+        "twitterUrl": "/twitter",
+        "webPageUrl": "/webpage",
+        "youtubeUrl": "/youtube",
+      },
+      "title": "Titre",
+    },
+  },
+}
+`;

@@ -27,14 +27,14 @@ InternalOrganization:
             banner:
                 type: 'InternalMedia'
                 description: "The organization's banner file"
-            description:
+            body:
                 type: 'String'
                 argsBuilder: 'Translatable::Field'
-                resolve: '@=value.getDescription(args["locale"], true)'
+                resolve: '@=value.getBody(args["locale"], true)'
             biography:
                 type: 'String'
                 argsBuilder: 'Translatable::Field'
-                resolve: '@=value.getDescription(args["locale"], true)'
+                resolve: '@=value.getBody(args["locale"], true)'
             title:
                 type: 'String!'
                 argsBuilder: 'Translatable::Field'
@@ -63,6 +63,9 @@ InternalOrganization:
                 type: 'InternalOrganizationMemberConnection'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMembersResolver", [value, getUser(), args])'
+            socialNetworks:
+                type: 'InternalOrganizationSocialNetworks'
+                resolve: '@=value.getOrganizationSocialNetworks()'
             pendingOrganizationInvitations:
                 access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationAdminAccessResolver", [value, getUser()])'
                 type: 'PendingOrganizationInvitationConnection'

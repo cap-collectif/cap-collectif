@@ -1,0 +1,9 @@
+UpdateOrganizationErrorCode:
+    type: enum
+    config:
+        name: UpdateOrganizationErrorCode
+        description: 'Available errors on `updateOrganization` mutation.'
+        values:
+            ORGANIZATION_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOrganizationMutation::ORGANIZATION_NOT_FOUND")'
+                description: 'The organization id could not be found.'
