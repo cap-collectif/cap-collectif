@@ -198,8 +198,7 @@ class OauthUserProvider extends FOSUBUserProvider
             $email = $serviceName . '_' . $response->getUsername();
         }
         $user = $viewer instanceof User ? $viewer : $this->findUser($response, $email);
-        $username =
-            $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
+        $username = $this->getUsername($response);
 
         if (null === $user) {
             $this->isNewUser = true;
@@ -238,5 +237,17 @@ class OauthUserProvider extends FOSUBUserProvider
         $user->{$setterToken}($response->getAccessToken());
 
         return $user;
+    }
+
+    private function getUsername(UserResponseInterface $response): string
+    {
+        $username = '';
+        if ($response->getNickname()) {
+            $username = $response->getNickname();
+        } elseif ($response->getFirstName() && $response->getLastName()) {
+            $username = $response->getFirstName() . ' ' . $response->getLastName();
+        }
+
+        return trim($username);
     }
 }

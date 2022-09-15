@@ -32,11 +32,11 @@ class EmptyUsernameListenerSpec extends ObjectBehavior
         TokenInterface $token
     ) {
         $event->isMasterRequest()->willReturn(false);
-        $this->onKernelRequest($event)->shouldBe(null);
+        $this->onKernelRequest($event);
 
         $event->isMasterRequest()->willReturn(true);
         $tokenStorage->getToken()->willReturn(null);
-        $this->onKernelRequest($event)->shouldBe(null);
+        $this->onKernelRequest($event);
     }
 
     public function it_return_null_if_username(
@@ -51,7 +51,7 @@ class EmptyUsernameListenerSpec extends ObjectBehavior
         $token->getUser()->willReturn($user);
 
         $user->getUsername()->willReturn('username');
-        $this->onKernelRequest($event)->shouldBe(null);
+        $this->onKernelRequest($event);
     }
 
     public function it_return_null_if_in_routes(
@@ -66,7 +66,7 @@ class EmptyUsernameListenerSpec extends ObjectBehavior
         $token->getUser()->willReturn($user);
         $event->getRequest()->willReturn($request);
         $request->get('_route')->willReturn('login_check');
-        $this->onKernelRequest($event)->shouldBe(null);
+        $this->onKernelRequest($event);
     }
 
     public function it_return_view(

@@ -9,8 +9,8 @@ use Twig\Environment;
 
 class EmptyUsernameListener
 {
-    protected $tokenStorage;
-    protected $templating;
+    protected TokenStorageInterface $tokenStorage;
+    protected Environment $templating;
 
     public function __construct(TokenStorageInterface $tokenStorage, Environment $templating)
     {
@@ -21,16 +21,16 @@ class EmptyUsernameListener
     public function onKernelRequest(RequestEvent $event)
     {
         if (!$event->isMasterRequest()) {
-            return null;
+            return;
         }
         $token = $this->tokenStorage->getToken();
         // Skip if anonymous
         if (!$token || 'anon.' === $token->getUser()) {
-            return null;
+            return;
         }
         // Skip if user has a username
         if (!empty($token->getUser()->getUsername())) {
-            return null;
+            return;
         }
         $request = $event->getRequest();
         $route = $request->get('_route');
@@ -40,10 +40,10 @@ class EmptyUsernameListener
             'graphql_multiple_endpoint',
         ]);
         if (\in_array($route, $routes, true)) {
-            return null;
+            return;
         }
         if (false !== strpos($route, '_imagine')) {
-            return null;
+            return;
         }
         $response = new Response(
             $this->templating->render('CapcoAppBundle:Default:choose_a_username.html.twig')
