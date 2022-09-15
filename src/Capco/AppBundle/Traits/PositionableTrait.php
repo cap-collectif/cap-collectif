@@ -13,7 +13,7 @@ trait PositionableTrait
      */
     private $position;
 
-    public function setPosition(int $position): self
+    public function setPosition(int $position)
     {
         $this->position = $position;
 

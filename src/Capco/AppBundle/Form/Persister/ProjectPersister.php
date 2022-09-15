@@ -70,14 +70,25 @@ class ProjectPersister
         if (isset($arguments['owner'])) {
             unset($arguments['owner']);
         }
+        $previousDistricts = [];
         if (!empty($arguments['restrictedViewerGroups'])) {
-            $arguments = $this->getRestrictedViewerGroups($arguments);
+            $arguments['restrictedViewerGroups'] = array_map(function ($groupGlobalId) {
+                return GlobalId::fromGlobalId($groupGlobalId)['id'];
+            }, $arguments['restrictedViewerGroups']);
         }
 
-        $project = (new Project())->setOwner($viewer);
-        $previousDistricts = [];
         if ($editMode) {
-            $project = $this->getProject($arguments, $input->offsetGet('projectId'), $viewer);
+            $projectId = GlobalId::fromGlobalId($input->offsetGet('projectId'))['id'];
+            $project = $this->repository->find($projectId);
+            if (!$project instanceof Project) {
+                throw new UserError(sprintf('Unknown project "%d"', $projectId));
+            }
+            if (
+                ProjectVisibilityMode::VISIBILITY_ADMIN === $arguments['visibility'] &&
+                $viewer->isOnlyProjectAdmin()
+            ) {
+                throw new UserError('Access denied to this field.');
+            }
 
             unset($arguments['projectId']);
             $previousDistricts = $project->getProjectDistrictPositionersIds();
@@ -141,32 +152,6 @@ class ProjectPersister
             $this->logger->error(__METHOD__ . ' => ' . $e->getCode() . ' : ' . $e->getMessage());
 
             throw new BadRequestHttpException('Sorry, please retry.');
-        }
-
-        return $project;
-    }
-
-    private function getRestrictedViewerGroups($arguments)
-    {
-        $arguments['restrictedViewerGroups'] = array_map(function ($groupGlobalId) {
-            return GlobalId::fromGlobalId($groupGlobalId)['id'];
-        }, $arguments['restrictedViewerGroups']);
-
-        return $arguments;
-    }
-
-    private function getProject(array &$arguments, string $projectId, User $viewer): Project
-    {
-        $projectId = GlobalId::fromGlobalId($projectId)['id'];
-        $project = $this->repository->find($projectId);
-        if (!$project) {
-            throw new UserError(sprintf('Unknown project "%d"', $projectId));
-        }
-        if (
-            ProjectVisibilityMode::VISIBILITY_ADMIN === $arguments['visibility'] &&
-            $viewer->isOnlyProjectAdmin()
-        ) {
-            throw new UserError('Access denied to this field.');
         }
 
         return $project;

@@ -33,9 +33,10 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     private $verification = 'none';
 
     /**
+     * @var Questionnaire
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", mappedBy="step", cascade={"persist"})
      */
-    private ?Questionnaire $questionnaire;
+    private $questionnaire;
 
     /**
      * @ORM\Column(name="is_anonymous_participation_allowed", type="boolean", nullable=false, options={"default" = false})
@@ -64,16 +65,14 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
         $this->questionnaire->setTitle('Copie de ' . $this->questionnaire->getTitle());
         $this->questionnaire->setStep($this);
     }
-
     public function isFooterUsingJoditWysiwyg(): bool
     {
         return $this->footerUsingJoditWysiwyg;
     }
 
-    public function setFooterUsingJoditWysiwyg(bool $footerUsingJoditWysiwyg): self
+    public function setFooterUsingJoditWysiwyg(bool $footerUsingJoditWysiwyg): QuestionnaireStep
     {
         $this->footerUsingJoditWysiwyg = $footerUsingJoditWysiwyg;
-
         return $this;
     }
 

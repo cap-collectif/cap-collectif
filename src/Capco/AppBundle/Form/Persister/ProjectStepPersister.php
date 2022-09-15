@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Form\Persister;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\Collection;
 use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Diff;
@@ -81,9 +81,6 @@ class ProjectStepPersister
         foreach ($userSteps as $i => $step) {
             list($type, $entity) = $this->getFormEntity($step);
             $form = $this->formFactory->create($type, $entity);
-            if ('questionnaire' === $step['type']) {
-                $this->removeStepInPreviousQuestionnaire($step, $dbSteps);
-            }
             unset($step['id']);
             if ('collect' === $step['type'] || 'selection' === $step['type']) {
                 self::setDefaultMainViewIfNeeded($step, $project);
@@ -105,21 +102,26 @@ class ProjectStepPersister
                 $this->updateConsultations($consultations, $stepFromData);
             }
 
-            $this->setProjectAbstractStepToProject($project, $stepFromData, $i);
+            $pasMatch = $this->pasRepository->findOneBy([
+                'project' => $project,
+                'step' => $stepFromData,
+            ]);
+            if (!$pasMatch) {
+                $pas = new ProjectAbstractStep();
+                $pas->setPosition($i + 1)
+                    ->setProject($project)
+                    ->setStep($stepFromData);
+                $project->addStep($pas);
+            } else {
+                $pasMatch->setPosition($i + 1);
+            }
 
-            $this->setStatusPosition($stepFromData);
+            foreach ($stepFromData->getStatuses() as $pos => $status) {
+                if (null === $status->getPosition()) {
+                    $status->setPosition($pos);
+                }
+            }
         }
-
-        $this->processToDeleteSteps($dbSteps, $userSteps, $project);
-
-        $this->em->flush();
-    }
-
-    private function processToDeleteSteps(
-        Collection $dbSteps,
-        Collection $userSteps,
-        Project $project
-    ) {
         $stepsToDelete = Diff::fromCollectionsWithId($dbSteps, $userSteps);
         foreach ($stepsToDelete as $stepToDelete) {
             $projectAbstractStep = $this->pasRepository->findOneBy(['step' => $stepToDelete]);
@@ -127,35 +129,7 @@ class ProjectStepPersister
                 $project->removeStep($projectAbstractStep);
             }
         }
-    }
-
-    private function setProjectAbstractStepToProject(
-        Project $project,
-        AbstractStep $stepFromData,
-        int $loopCount
-    ): void {
-        $pasMatch = $this->pasRepository->findOneBy([
-            'project' => $project,
-            'step' => $stepFromData,
-        ]);
-        if (!$pasMatch) {
-            $pas = new ProjectAbstractStep();
-            $pas->setPosition($loopCount + 1)
-                ->setProject($project)
-                ->setStep($stepFromData);
-            $project->addStep($pas);
-        } else {
-            $pasMatch->setPosition($loopCount + 1);
-        }
-    }
-
-    private function setStatusPosition(AbstractStep $stepFromData): void
-    {
-        foreach ($stepFromData->getStatuses() as $pos => $status) {
-            if (null === $status->getPosition()) {
-                $status->setPosition($pos);
-            }
-        }
+        $this->em->flush();
     }
 
     /**
@@ -259,25 +233,6 @@ class ProjectStepPersister
         foreach ($oldConsultations as $oldConsultation) {
             if (!$step->getConsultations()->contains($oldConsultation)) {
                 $oldConsultation->clearStep();
-            }
-        }
-    }
-
-    private function removeStepInPreviousQuestionnaire(
-        array $parsedStep,
-        ArrayCollection $dbSteps
-    ): void {
-        foreach ($dbSteps as $dbStep) {
-            $parsedQuestionnaire = GlobalIdResolver::getDecodedId($parsedStep['questionnaire']);
-            if (
-                $dbStep instanceof QuestionnaireStep &&
-                $dbStep->getQuestionnaire()->getId() !== $parsedQuestionnaire['id']
-            ) {
-                $previousQuestionnaire = $dbStep->getQuestionnaire();
-                $previousQuestionnaire->setStep(null);
-                $this->em->flush();
-
-                break;
             }
         }
     }
