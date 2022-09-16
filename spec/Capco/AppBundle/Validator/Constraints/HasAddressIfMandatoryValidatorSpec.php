@@ -77,6 +77,10 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
             ->getDistricts()
             ->willReturn($districts)
             ->shouldBeCalled();
+        $proposalForm
+            ->isUsingDistrict()
+            ->willReturn(true)
+            ->shouldBeCalled();
 
         $proposal
             ->getProposalForm()
@@ -155,6 +159,10 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
             ->getDistricts()
             ->willReturn($districts)
             ->shouldBeCalled();
+        $proposalForm
+            ->isUsingDistrict()
+            ->willReturn(true)
+            ->shouldBeCalled();
 
         $proposal
             ->getProposalForm()
@@ -217,7 +225,7 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
             ->willReturn(true)
             ->shouldBeCalled();
         $proposalForm
-            ->isProposalInAZoneRequired()
+            ->isUsingDistrict()
             ->willReturn(false)
             ->shouldBeCalled();
         $proposal
@@ -309,6 +317,10 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
         $proposalForm
             ->getDistricts()
             ->willReturn([$district])
+            ->shouldBeCalled();
+        $proposalForm
+            ->isUsingDistrict()
+            ->willReturn(true)
             ->shouldBeCalled();
 
         $proposal

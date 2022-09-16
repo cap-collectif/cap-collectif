@@ -345,7 +345,7 @@ const validate = (
     false,
     isBackOfficeInput,
   );
-  if (values.address && proposalForm.proposalInAZoneRequired) {
+  if (values.address && proposalForm.usingDistrict && proposalForm.proposalInAZoneRequired) {
     const address = JSON.parse(values.address.substring(1, values.address.length - 1));
     if (!geoContains(geoJsons, address?.geometry?.location))
       return { ...errors, addressText: 'constraints.address_in_zone' };
@@ -450,7 +450,7 @@ export class ProposalForm extends React.Component<Props, State> {
     }
 
     if (addressValueProps !== addressValue) {
-      if (proposalForm.proposalInAZoneRequired && addressValue) {
+      if (proposalForm.usingDistrict && proposalForm.proposalInAZoneRequired && addressValue) {
         retrieveDistrictForLocation(
           JSON.parse(addressValue)[0].geometry.location,
           proposalForm.id,

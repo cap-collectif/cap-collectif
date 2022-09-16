@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
+use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Helper\GeometryHelper;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -31,18 +33,45 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
             return;
         }
 
-        if (!$form->isProposalInAZoneRequired()) {
-            return;
+        $this->checkAddressInZone($decodedAddress, $form, $constraint);
+    }
+
+    private function checkAddressInZone(
+        array $decodedAddress,
+        ProposalForm $form,
+        HasAddressIfMandatory $constraint
+    ): void {
+        if ($form->isUsingDistrict() && $form->isProposalInAZoneRequired()) {
+            $latitude = $decodedAddress[0]['geometry']['location']['lat'];
+            $longitude = $decodedAddress[0]['geometry']['location']['lng'];
+            if (!self::isInAnyDistrict($latitude, $longitude, $form)) {
+                $this->context
+                    ->buildViolation($constraint->addressNotInZoneMessage)
+                    ->addViolation();
+            }
         }
-        $latitude = $decodedAddress[0]['geometry']['location']['lat'];
-        $longitude = $decodedAddress[0]['geometry']['location']['lng'];
+    }
+
+    private static function isInAnyDistrict(
+        float $latitude,
+        float $longitude,
+        ProposalForm $form
+    ): bool {
         foreach ($form->getDistricts() as $district) {
-            $geojson = $district->getGeojson();
-            if ($geojson && GeometryHelper::isIncluded($longitude, $latitude, $geojson)) {
-                return;
+            if (self::isInDistrict($latitude, $longitude, $district)) {
+                return true;
             }
         }
 
-        $this->context->buildViolation($constraint->addressNotInZoneMessage)->addViolation();
+        return false;
+    }
+
+    private static function isInDistrict(
+        float $latitude,
+        float $longitude,
+        ProposalDistrict $district
+    ): bool {
+        return $district->getGeojson() &&
+            GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson());
     }
 }
