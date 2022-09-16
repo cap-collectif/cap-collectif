@@ -102,6 +102,13 @@ InternalMutation:
                     inputType: LeaveOrganizationInput
                     payloadType: LeaveOrganizationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\LeaveOrganizationMutation", [value, getUser()])'
+            deleteOrganization:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteOrganizationInput
+                    payloadType: DeleteOrganizationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\DeleteOrganizationMutation", [value, getUser()])'
             addArgument:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

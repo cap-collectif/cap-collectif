@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../../_setup';
 
 const UpdateOrganization = /* GraphQL*/ `
   mutation UpdateOrganization($input: UpdateOrganizationInput!) {

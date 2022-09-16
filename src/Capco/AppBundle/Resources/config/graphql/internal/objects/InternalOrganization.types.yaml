@@ -71,4 +71,7 @@ InternalOrganization:
                 type: 'PendingOrganizationInvitationConnection'
                 description: 'Get all pending invitations.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\PendingOrganizationInvitationsResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\PendingOrganizationInvitationsResolver", [value, args])'
+            deletedAt:
+                type: 'DateTime'
+                description: 'The date when the organization was deleted.'

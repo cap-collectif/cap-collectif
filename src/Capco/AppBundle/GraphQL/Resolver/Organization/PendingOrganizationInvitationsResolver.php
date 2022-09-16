@@ -1,5 +1,6 @@
 <?php
-namespace Capco\AppBundle\GraphQL\Resolver;
+
+namespace Capco\AppBundle\GraphQL\Resolver\Organization;
 
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
@@ -12,13 +13,16 @@ class PendingOrganizationInvitationsResolver implements ResolverInterface
 {
     private PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
 
-    public function __construct(PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository)
-    {
+    public function __construct(
+        PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository
+    ) {
         $this->pendingOrganizationInvitationRepository = $pendingOrganizationInvitationRepository;
     }
 
-    public function __invoke(Organization $organization, Argument $args = null): ConnectionInterface
-    {
+    public function __invoke(
+        Organization $organization,
+        ?Argument $args = null
+    ): ConnectionInterface {
         $paginator = new Paginator(function (int $offset, int $limit) use ($organization) {
             return $this->pendingOrganizationInvitationRepository->findPaginatedByOrganization(
                 $organization,
@@ -27,7 +31,9 @@ class PendingOrganizationInvitationsResolver implements ResolverInterface
             );
         });
 
-        $totalCount = $this->pendingOrganizationInvitationRepository->countByOrganization($organization);
+        $totalCount = $this->pendingOrganizationInvitationRepository->countByOrganization(
+            $organization
+        );
 
         return $paginator->auto($args, $totalCount);
     }

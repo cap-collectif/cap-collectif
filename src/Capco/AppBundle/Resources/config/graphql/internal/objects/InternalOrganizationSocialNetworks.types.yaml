@@ -4,4 +4,4 @@ InternalOrganizationSocialNetworks:
         - InternalWithSocialNetworks
     config:
         name: OrganizationSocialNetworks
-        description: 'The social networks of an organization.'
+        description: 'The social networks of an organization'

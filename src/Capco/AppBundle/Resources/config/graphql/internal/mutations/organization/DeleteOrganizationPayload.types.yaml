@@ -1,0 +1,10 @@
+DeleteOrganizationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedOrganization:
+                type: 'InternalOrganization'
+                description: 'The deleted organization.'
+            errorCode:
+                type: 'DeleteOrganizationErrorCode'
+                description: 'Errors for deleteOrganization mutation.'

@@ -1,0 +1,8 @@
+DeleteOrganizationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteOrganization mutation.'
+        fields:
+            organizationId:
+                type: 'ID!'
+                description: 'The id of the organization to delete'

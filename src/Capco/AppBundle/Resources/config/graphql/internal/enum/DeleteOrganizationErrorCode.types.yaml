@@ -1,0 +1,9 @@
+DeleteOrganizationErrorCode:
+    type: enum
+    config:
+        name: DeleteOrganizationErrorCode
+        description: 'Available errors for an `deleteOrganization` mutation.'
+        values:
+            ORGANIZATION_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\DeleteOrganizationMutation::ORGANIZATION_NOT_FOUND")'
+                description: 'No `Organization` match your `organizationId`.'

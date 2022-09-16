@@ -65,6 +65,11 @@ class Organization implements
      */
     private string $email;
 
+    /**
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
+     */
+    private ?\DateTime $deletedAt = null;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
@@ -219,6 +224,18 @@ class Organization implements
         return $this;
     }
 
+    public function getDeletedAt(): ?\DateTime
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTime $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
     public static function getElasticsearchPriority(): int
     {
         return 100;
@@ -237,5 +254,25 @@ class Organization implements
     public function isIndexable(): bool
     {
         return true;
+    }
+
+    public function remove(): void
+    {
+        $this->removeMembers();
+        $this->setTitle('Organisation supprimée')
+            ->setBody('Organisation supprimée')
+            ->setSlug('organisation-supprimee')
+            ->setEmail('')
+            ->setDeletedAt(new \DateTime())
+            ->setLogo(null)
+            ->setBanner(null)
+            ->setOrganizationSocialNetworks(null);
+    }
+
+    private function removeMembers(): void
+    {
+        foreach ($this->getMembers() as $member) {
+            $this->removeMember($member);
+        }
     }
 }

@@ -5127,6 +5127,27 @@ type DeleteOpinionPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `deleteOrganization` mutation."""
+enum DeleteOrganizationErrorCode {
+  """No `Organization` match your `organizationId`."""
+  ORGANIZATION_NOT_FOUND
+}
+
+input DeleteOrganizationInput {
+  """The id of the organization to delete"""
+  organizationId: ID!
+  clientMutationId: String
+}
+
+type DeleteOrganizationPayload {
+  """The deleted organization."""
+  deletedOrganization: Organization
+
+  """Errors for deleteOrganization mutation."""
+  errorCode: DeleteOrganizationErrorCode
+  clientMutationId: String
+}
+
 input DeletePostInput {
   """The id of the post to delete"""
   id: ID!
@@ -7578,6 +7599,7 @@ type Mutation {
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
   addOrganization(input: AddOrganizationInput!): AddOrganizationPayload
   leaveOrganization(input: LeaveOrganizationInput!): LeaveOrganizationPayload
+  deleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationPayload
   addArgument(input: AddArgumentInput!): AddArgumentPayload
   addArgumentVote(input: AddArgumentVoteInput!): AddArgumentVotePayload
   addSource(input: AddSourceInput!): AddSourcePayload
@@ -8409,6 +8431,9 @@ type Organization implements Node & Author & PostOwner {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): PendingOrganizationInvitationConnection
+
+  """The date when the organization was deleted."""
+  deletedAt: DateTime
 }
 
 """The affiliation of a user to an Organization"""
@@ -8482,7 +8507,7 @@ enum OrganizationMemberRole {
   user
 }
 
-"""The social networks of an organization."""
+"""The social networks of an organization"""
 type OrganizationSocialNetworks {
   """Link of Web page."""
   webPageUrl: URI

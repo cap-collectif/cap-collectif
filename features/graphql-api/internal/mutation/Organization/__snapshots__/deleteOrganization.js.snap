@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateOrganization admin should be able to delete organization and organization should be anonymized 1`] = `
+Object {
+  "deleteOrganization": Object {
+    "deletedOrganization": Object {
+      "banner": null,
+      "body": "Organisation supprimée",
+      "logo": null,
+      "members": Object {
+        "edges": Array [],
+      },
+      "slug": "organisation-supprimee",
+      "socialNetworks": null,
+      "title": "Organisation supprimée",
+    },
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`mutations.updateOrganization should return ORGANIZATION_NOT_FOUND errorCode 1`] = `
+Object {
+  "deleteOrganization": Object {
+    "deletedOrganization": null,
+    "errorCode": "ORGANIZATION_NOT_FOUND",
+  },
+}
+`;
