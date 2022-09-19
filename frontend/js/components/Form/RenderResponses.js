@@ -242,6 +242,7 @@ const RenderResponses = ({
                       {...fieldProps}
                       onChange={() => setLastQuestionType(field.type)}
                       selectFieldIsObject
+                      selectInputProps={{ readOnly: true }}
                     />
                     <div className="visible-print-block form-fields">
                       {field.choices &&

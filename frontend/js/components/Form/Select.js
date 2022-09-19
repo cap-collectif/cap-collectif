@@ -83,6 +83,7 @@ type Props = {
     label: string | React.Node,
     onClick: () => void,
   },
+  selectInputProps?: { readOnly?: boolean },
   noOptionsMessage?: string,
 };
 
@@ -219,6 +220,7 @@ const RenderSelect = ({
   noOptionsMessage = 'result-not-found',
   debounceMs = 1300,
   meta,
+  selectInputProps,
 }: Props): React.Node => {
   const { name, value } = input;
   const intl = useIntl();
@@ -286,6 +288,7 @@ const RenderSelect = ({
         <SelectContainer hasButtonAfter={!!buttonAfter}>
           {typeof loadOptions === 'function' ? (
             <Async
+              inputProps={selectInputProps}
               filterOption={filterOption}
               components={{ ClearIndicator, MenuList }}
               isDisabled={disabled}
@@ -341,6 +344,7 @@ const RenderSelect = ({
           ) : (
             <Select
               name={name}
+              inputProps={selectInputProps}
               components={{ ClearIndicator, MenuList }}
               isDisabled={disabled}
               className="react-select-container"
