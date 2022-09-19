@@ -15,6 +15,8 @@ import CustomStepPage from '~/components/Page/CustomStepPage';
 import ProposalStepPage from '~/components/Page/ProposalStepPage';
 import ProposalPage from '~/components/Proposal/Page/ProposalPage';
 import { getBaseLocale } from '~/utils/router';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import ProjectTrashButton from '~/components/Project/ProjectTrashButton';
 
 const ProjectHeader = ({ projectId }: { +projectId: string }) => (
   <section>
@@ -23,6 +25,24 @@ const ProjectHeader = ({ projectId }: { +projectId: string }) => (
     </div>
   </section>
 );
+
+const ProjectTrash = ({
+  showTrash,
+  projectSlug,
+  unstable__enableCapcoUiDs,
+}: {
+  showTrash: boolean,
+  projectSlug: string,
+  unstable__enableCapcoUiDs?: boolean,
+}) =>
+  showTrash ? (
+    <section className="hidden-print">
+      <ProjectTrashButton
+        link={`/projects/${projectSlug}/trashed`}
+        unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
+      />
+    </section>
+  ) : null;
 
 const BasicStepFallback = () => <section className="section--alt" style={{ height: '300px' }} />;
 
@@ -39,6 +59,7 @@ type Props = {|
 const ProjectStepPageRouterSwitch = ({ ...props }: Props) => {
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage);
   const baseUrl = getBaseLocale(currentLanguage);
+  const showTrash = useFeatureFlag('project_trash');
   return (
     <>
       <Switch>
@@ -67,6 +88,11 @@ const ProjectStepPageRouterSwitch = ({ ...props }: Props) => {
               <DebateStepPageWithRouter stepId={props.stepId} fromWidget={false} />
             </div>
           </section>
+          <ProjectTrash
+            projectSlug={props.projectSlug}
+            showTrash={showTrash}
+            unstable__enableCapcoUiDs
+          />
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/step/:stepSlug`}>
           <ProjectHeader projectId={props.projectId} />
@@ -86,6 +112,11 @@ const ProjectStepPageRouterSwitch = ({ ...props }: Props) => {
               <ProposalStepPage stepId={props.stepId} projectId={props.projectId} />
             </div>
           </section>
+          <ProjectTrash
+            projectSlug={props.projectSlug}
+            showTrash={showTrash}
+            unstable__enableCapcoUiDs
+          />
         </Route>
         <Route
           exact

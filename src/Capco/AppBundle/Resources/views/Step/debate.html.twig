@@ -43,16 +43,6 @@
     })
     }}
 
-    {% if showTrash %}
-        <section class="hidden-print">
-            {{ react_render_component('ProjectTrashButtonApp', {
-                'props': {
-                    'link': path('app_project_show_trashed', {'projectSlug': project.slug })
-                },
-            }) }}
-        </section>
-    {% endif %}
-
 {% endblock %}
 
 {% block javascripts %}
