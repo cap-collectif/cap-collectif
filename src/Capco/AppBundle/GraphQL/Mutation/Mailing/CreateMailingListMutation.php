@@ -6,113 +6,120 @@ use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\CreateMailingListErrorCode;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
+use Capco\AppBundle\Security\MailingListVoter;
+use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class CreateMailingListMutation implements MutationInterface
 {
     private UserRepository $userRepository;
     private ProjectRepository $projectRepository;
     private EntityManagerInterface $entityManager;
+    private AuthorizationChecker $authorizationChecker;
+    private SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         UserRepository $userRepository,
         ProjectRepository $projectRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        AuthorizationChecker $authorizationChecker,
+        SettableOwnerResolver $settableOwnerResolver
     ) {
         $this->userRepository = $userRepository;
         $this->projectRepository = $projectRepository;
         $this->entityManager = $entityManager;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->settableOwnerResolver = $settableOwnerResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
         $error = null;
-        $mailingList = $this->createMailingList($input, $viewer, $error);
+        $mailingList = null;
 
-        if ($mailingList) {
-            try {
-                $this->entityManager->persist($mailingList);
-                $this->entityManager->flush();
-            } catch (\Exception $exception) {
-                $error = 'internal server error';
-            }
+        try {
+            $mailingList = $this->createMailingList($input, $viewer);
+            $this->entityManager->persist($mailingList);
+            $this->entityManager->flush();
+        } catch (UserError $userError) {
+            $error = $userError->getMessage();
+        } catch (\RuntimeException $exception) {
+            $error = 'internal server error';
         }
 
         return compact('mailingList', 'error');
     }
 
-    private function createMailingList(Argument $input, User $viewer, ?string &$error): ?MailingList
+    public function isGranted(): bool
     {
-        $users = $this->getUsers($input, $error);
-        if ($error) {
-            return null;
-        }
+        return $this->authorizationChecker->isGranted(MailingListVoter::CREATE, new MailingList());
+    }
 
-        $project = $this->getProject($input, $viewer, $error);
-        if ($error) {
-            return null;
-        }
+    private function createMailingList(Argument $input, User $viewer): MailingList
+    {
+        $users = $this->getUsers($input);
+        $project = $this->getProject($input, $viewer);
 
         $mailingList = new MailingList();
         $mailingList->setName($input->offsetGet('name'));
         $mailingList->setUsers($users);
-        $mailingList->setOwner($viewer);
+        $mailingList->setOwner(
+            $this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer)
+        );
         $mailingList->setProject($project);
         $mailingList->setCreator($viewer);
 
         return $mailingList;
     }
 
-    private function getUsers(Argument $input, ?string &$error): array
+    private function getUsers(Argument $input): array
     {
         $users = [];
         foreach ($input->offsetGet('userIds') as $globalId) {
             $userId = GlobalId::fromGlobalId($globalId)['id'];
             if (null === $userId) {
-                $error = CreateMailingListErrorCode::ID_NOT_FOUND_USER;
-
-                return [];
+                throw new UserError(CreateMailingListErrorCode::ID_NOT_FOUND_USER);
             }
 
             $user = $this->userRepository->find($userId);
             if (null === $user) {
-                $error = CreateMailingListErrorCode::ID_NOT_FOUND_USER;
-
-                return [];
+                throw new UserError(CreateMailingListErrorCode::ID_NOT_FOUND_USER);
             }
 
             $users[] = $user;
         }
         if (empty($users)) {
-            $error = CreateMailingListErrorCode::EMPTY_USERS;
+            throw new UserError(CreateMailingListErrorCode::EMPTY_USERS);
         }
 
         return $users;
     }
 
-    private function getProject(Argument $input, User $viewer, ?string &$error): ?Project
+    private function getProject(Argument $input, User $viewer): ?Project
     {
-        if (!$input->offsetExists('project')) {
+        if (null === $input->offsetGet('project')) {
             return null;
         }
 
         $projectId = GlobalId::fromGlobalId($input->offsetGet('project'))['id'];
         if (null === $projectId) {
-            $error = CreateMailingListErrorCode::ID_NOT_FOUND_PROJECT;
-
-            return null;
+            throw new UserError(CreateMailingListErrorCode::ID_NOT_FOUND_PROJECT);
         }
 
         $project = $this->projectRepository->find($projectId);
-        if (null === $project || (!$viewer->isAdmin() && $project->getOwner() !== $viewer)) {
-            $error = CreateMailingListErrorCode::ID_NOT_FOUND_PROJECT;
-
-            return null;
+        if (
+            null === $project ||
+            !$this->authorizationChecker->isGranted(ProjectVoter::VIEW, $project)
+        ) {
+            throw new UserError(CreateMailingListErrorCode::ID_NOT_FOUND_PROJECT);
         }
 
         return $project;
