@@ -7,7 +7,6 @@ import { LoginButton } from './LoginButton';
 describe('<LoginButton />', () => {
   const props = {
     className: 'btn-darkest-gray navbar-btn btn--connection',
-    loginWithMonCompteParis: false,
     loginWithOpenID: false,
     byPassLoginModal: false,
     oauth2SwitchUser: false,

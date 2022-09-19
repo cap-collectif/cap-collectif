@@ -72,20 +72,6 @@ export const FranceConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styl
   }
 `;
 
-export const LoginParisButton: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  width: 325px;
-  border-radius: 4px;
-  background: white;
-  text-align: center;
-  margin-bottom: 16px;
-  padding: 8px 0;
-  border: 1px solid #002542;
-
-  a > svg {
-    height: 30px;
-  }
-`;
-
 export const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.div`
   position: relative;
   height: 45px;

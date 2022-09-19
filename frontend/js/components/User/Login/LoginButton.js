@@ -16,7 +16,6 @@ type OwnProps = {|
 |};
 
 type StateProps = {|
-  loginWithMonCompteParis: boolean,
   loginWithOpenID: boolean,
   byPassLoginModal: boolean,
   oauth2SwitchUser: boolean,
@@ -34,7 +33,6 @@ export const LoginButton = (props: Props) => {
 
   const {
     openLoginModal,
-    loginWithMonCompteParis,
     byPassLoginModal,
     loginWithOpenID,
     oauth2SwitchUser,
@@ -43,11 +41,7 @@ export const LoginButton = (props: Props) => {
     className,
   } = props;
 
-  if (loginWithMonCompteParis) {
-    const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
-    const backUrl = `${baseUrl}/login-paris?_destination=${window.location.href}`;
-    redirectUrl = `${monCompteBaseUrl}jsp/site/Portal.jsp?page=myluteceusergu&view=createAccountModal&back_url=${backUrl}`;
-  } else if (loginWithOpenID && byPassLoginModal) {
+  if (loginWithOpenID && byPassLoginModal) {
     const redirectUri = oauth2SwitchUser
       ? `${baseUrl}/sso/switch-user?_destination=${window && window.location.href}`
       : `${window && window.location.href}`;
@@ -61,15 +55,7 @@ export const LoginButton = (props: Props) => {
         bsStyle={bsStyle}
         aria-label={intl.formatMessage({ id: 'open.connection_modal' })}
         onClick={() => {
-          if (loginWithMonCompteParis) {
-            const wH = 600;
-            const wW = $(window).innerWidth() < 768 ? $(window).innerWidth() : 800;
-            window.open(
-              redirectUrl,
-              '_blank',
-              `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
-            );
-          } else if (loginWithOpenID && byPassLoginModal) {
+          if (loginWithOpenID && byPassLoginModal) {
             window.location.href = redirectUrl;
           } else {
             openLoginModal();
@@ -89,7 +75,6 @@ LoginButton.defaultProps = {
 };
 
 const mapStateToProps = (state: State) => ({
-  loginWithMonCompteParis: state.default.features.login_paris || false,
   loginWithOpenID: isLoginWithOpenID(state.default.ssoList),
   byPassLoginModal: state.default.features.sso_by_pass_auth || false,
   oauth2SwitchUser: state.default.features.oauth2_switch_user || false,

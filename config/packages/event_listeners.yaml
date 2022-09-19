@@ -57,9 +57,6 @@ services:
             - { name: doctrine.event_subscriber, event: loadClassMetadata }
         arguments:
             - '%traits%'
-    Capco\AppBundle\EventListener\ParisAuthenticationExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
     Capco\AppBundle\EventListener\ReferenceEventListener:
         public: true
         tags:

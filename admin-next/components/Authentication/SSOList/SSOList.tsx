@@ -10,7 +10,6 @@ import type { CardFacebook_ssoConfiguration$key } from '@relay/CardFacebook_ssoC
 import type { CardFranceConnect_ssoConfiguration$key } from '@relay/CardFranceConnect_ssoConfiguration.graphql';
 import type { CardOpenID_ssoConfiguration$key } from '@relay/CardOpenID_ssoConfiguration.graphql';
 import type { CardCAS_ssoConfiguration$key } from '@relay/CardCAS_ssoConfiguration.graphql';
-import CardParis from './Paris/CardParis';
 import useFeatureFlag from '@hooks/useFeatureFlag';
 import CardCAS from './CAS/CardCAS';
 
@@ -61,7 +60,6 @@ const FRAGMENT = graphql`
 
 const SSOList: FC<SSOListProps> = ({ query: queryFragment }) => {
     const { ssoConfigurations, organizationName } = useFragment(FRAGMENT, queryFragment);
-    const hasSSOParis = useFeatureFlag('login_paris');
 
     const ssoConfigs: SSOConfigs = useMemo(() => {
         if (!ssoConfigurations.edges) return DEFAULT_SSO_CONFIGS;
@@ -135,8 +133,6 @@ const SSOList: FC<SSOListProps> = ({ query: queryFragment }) => {
                         />
                     ),
             )}
-
-            {hasSSOParis && <CardParis />}
         </Grid>
     );
 };

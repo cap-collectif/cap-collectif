@@ -66,7 +66,6 @@ describe('<UserInvitationSSOPage />', () => {
   const props = {
     loginFacebook: false,
     loginFranceConnect: false,
-    loginParis: false,
     ssoList: [],
     isRegistrationAllowed: true,
     primaryColor: 'green',
@@ -87,20 +86,6 @@ describe('<UserInvitationSSOPage />', () => {
     it('should render franceConnect sso button', () => {
       testComponentTree = ReactTestRenderer.create(
         <TestUserInvitationSSOPage {...props} loginFranceConnect />,
-      );
-      expect(testComponentTree).toMatchSnapshot();
-    });
-
-    it('should render franceConnect sso button without create account link', () => {
-      testComponentTree = ReactTestRenderer.create(
-        <TestUserInvitationSSOPage {...props} loginFranceConnect isRegistrationAllowed={false} />,
-      );
-      expect(testComponentTree).toMatchSnapshot();
-    });
-
-    it('should render login paris sso button and hide create account link', () => {
-      testComponentTree = ReactTestRenderer.create(
-        <TestUserInvitationSSOPage {...props} loginParis />,
       );
       expect(testComponentTree).toMatchSnapshot();
     });

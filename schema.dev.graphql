@@ -6231,7 +6231,6 @@ enum FeatureFlagType {
   public_api
   graphql_introspection
   login_facebook
-  login_paris
   privacy_policy
   members_list
   newsletter

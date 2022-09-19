@@ -12,6 +12,7 @@ const onHideModal = () => {
   window.location.replace(`${baseUrl}/logout`);
 };
 
+/** @deprecated ? * */
 const ParisUserNotValidModal = ({ emailAddress }: Props) => {
   const intl = useIntl();
 

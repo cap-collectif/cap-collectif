@@ -15,20 +15,17 @@ class SimplePreAuthenticatorUserProvider implements UserProviderInterface
     private Manager $toggleManager;
     private ?CASSSOConfiguration $casConfiguration;
     private ?SamlUserProvider $samlProvider;
-    private MonCompteParisUserProvider $parisProvider;
     private ?CasUserProvider $casProvider;
 
     public function __construct(
         Manager $toggleManager,
         CASSSOConfigurationRepository $CASSSOConfigurationRepository,
         ?SamlUserProvider $samlProvider,
-        MonCompteParisUserProvider $parisProvider,
         ?CasUserProvider $casProvider
     ) {
         $this->toggleManager = $toggleManager;
         $this->casConfiguration = $CASSSOConfigurationRepository->findOneBy([]);
         $this->samlProvider = $samlProvider;
-        $this->parisProvider = $parisProvider;
         $this->casProvider = $casProvider;
     }
 
@@ -65,9 +62,6 @@ class SimplePreAuthenticatorUserProvider implements UserProviderInterface
     {
         if ($this->toggleManager->isActive('login_saml')) {
             return $this->samlProvider;
-        }
-        if ($this->toggleManager->isActive('login_paris')) {
-            return $this->parisProvider;
         }
         if (
             $this->toggleManager->isActive('login_cas') &&

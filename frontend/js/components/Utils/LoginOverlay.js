@@ -41,7 +41,6 @@ type OwnProps = {|
 type StateProps = {|
   +isAuthenticated: boolean,
   +showRegistrationButton: boolean,
-  +loginWithMonCompteParis?: boolean,
   +loginWithOpenId?: boolean,
 |};
 
@@ -79,7 +78,6 @@ export const LoginOverlay = ({
   children,
   enabled = true,
   showRegistrationButton,
-  loginWithMonCompteParis = false,
   loginWithOpenId = false,
   placement = 'auto',
   dispatch,
@@ -128,7 +126,7 @@ export const LoginOverlay = ({
               <Button onClick={popover.hide}>{intl.formatMessage({ id: 'global.close' })}</Button>
             </VisuallyHidden>
 
-            {showRegistrationButton && !loginWithMonCompteParis && !loginWithOpenId && (
+            {showRegistrationButton && !loginWithOpenId && (
               <ButtonRegistration
                 type="button"
                 onClick={() => {
@@ -152,7 +150,6 @@ LoginOverlay.displayName = 'LoginOverlay';
 const mapStateToProps = (state: State) => ({
   isAuthenticated: !!state.user.user,
   showRegistrationButton: state.default.features.registration || false,
-  loginWithMonCompteParis: state.default.features.login_paris || false,
   loginWithOpenId: loginWithOpenID(state.default.ssoList),
 });
 

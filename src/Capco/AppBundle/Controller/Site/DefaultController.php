@@ -71,14 +71,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/login-paris", name="paris_login", options={"i18n" = false}, defaults={"_feature_flags" = "login_paris"})
-     */
-    public function loginParisAction(Request $request)
-    {
-        return $this->redirect($this->getSafeRedirectDestinationFromRequest($request));
-    }
-
-    /**
      * @Route("/contact", name="app_contact")
      * @Template("CapcoAppBundle:Contact:list.html.twig")
      */

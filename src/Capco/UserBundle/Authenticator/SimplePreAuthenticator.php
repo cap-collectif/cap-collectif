@@ -14,20 +14,17 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
 {
     protected Manager $toggleManager;
     protected ?SamlAuthenticator $samlAuthenticator;
-    protected MonCompteParisAuthenticator $parisAuthenticator;
     protected ?CasAuthenticator $casAuthenticator;
     private ?CASSSOConfiguration $casConfiguration;
 
     public function __construct(
         Manager $toggleManager,
         CASSSOConfigurationRepository $CASSSOConfigurationRepository,
-        MonCompteParisAuthenticator $parisAuthenticator,
         ?SamlAuthenticator $samlAuthenticator = null,
         ?CasAuthenticator $casAuthenticator = null
     ) {
         $this->toggleManager = $toggleManager;
         $this->casConfiguration = $CASSSOConfigurationRepository->findOneBy([]);
-        $this->parisAuthenticator = $parisAuthenticator;
         $this->samlAuthenticator = $samlAuthenticator;
         $this->casAuthenticator = $casAuthenticator;
     }
@@ -65,9 +62,6 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
     {
         if ($this->toggleManager->isActive('login_saml')) {
             return $this->samlAuthenticator;
-        }
-        if ($this->toggleManager->isActive('login_paris')) {
-            return $this->parisAuthenticator;
         }
         if (
             $this->toggleManager->isActive('login_cas') &&

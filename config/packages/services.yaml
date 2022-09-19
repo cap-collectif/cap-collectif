@@ -88,9 +88,6 @@ services:
     Capco\UserBundle\Listener\:
         resource: '%kernel.project_dir%/src/Capco/UserBundle/Listener/*'
 
-    Capco\UserBundle\MonCompteParis\:
-        resource: '%kernel.project_dir%/src/Capco/UserBundle/MonCompteParis/*'
-
     Capco\UserBundle\Security\:
         resource: '%kernel.project_dir%/src/Capco/UserBundle/Security/*'
         exclude: '%kernel.project_dir%/src/Capco/UserBundle/Security/Exception/*'
@@ -130,7 +127,6 @@ services:
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler'
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\BasicAuthLogoutHandler'
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler'
-                - '@Capco\UserBundle\Security\Http\Logout\Handler\ParisLogoutHandler'
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler'
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\CASLogoutHandler'
 
@@ -149,8 +145,6 @@ services:
 
     # Logout Handlers
     Capco\UserBundle\Security\Http\Logout\Handler\BasicAuthLogoutHandler: ~
-
-    Capco\UserBundle\Security\Http\Logout\Handler\ParisLogoutHandler: ~
 
     Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler: ~
 

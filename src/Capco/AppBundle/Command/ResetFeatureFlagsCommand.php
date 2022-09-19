@@ -69,7 +69,6 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate(Manager::login_saml);
         $this->manager->deactivate(Manager::login_cas);
         $this->manager->deactivate(Manager::restrict_registration_via_email_domain);
-        $this->manager->deactivate(Manager::login_paris);
         $this->manager->deactivate(Manager::allow_users_to_propose_events);
         $this->manager->activate(Manager::indexation);
         $this->manager->activate(Manager::developer_documentation);
@@ -125,7 +124,6 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::developer_documentation);
             $this->manager->deactivate(Manager::login_saml);
             $this->manager->deactivate(Manager::login_cas);
-            $this->manager->deactivate(Manager::login_paris);
             $this->manager->deactivate(Manager::oauth2_switch_user);
             $this->manager->deactivate(Manager::public_api);
             $this->manager->deactivate(Manager::search);

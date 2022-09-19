@@ -8,7 +8,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class EnableCommand extends Command
@@ -16,7 +15,7 @@ class EnableCommand extends Command
     private Manager $toggleManager;
     private KernelInterface $kernel;
 
-    public function __construct(string $name = null, Manager $toggleManager, KernelInterface $kernel)
+    public function __construct(?string $name = null, Manager $toggleManager, KernelInterface $kernel)
     {
         parent::__construct($name);
         $this->toggleManager = $toggleManager;
@@ -37,13 +36,12 @@ class EnableCommand extends Command
         $inputToggle = $input->getArgument('toggle');
         $all = $input->getOption('all');
 
-        if($all && $this->kernel->getEnvironment() === 'dev') {
+        if ($all && 'dev' === $this->kernel->getEnvironment()) {
             $this->toggleManager->activateAll();
             $this->toggleManager->deactivate(Manager::shield_mode);
             $this->toggleManager->deactivate(Manager::graphql_introspection);
             $this->toggleManager->deactivate(Manager::graphql_query_analytics);
             $this->toggleManager->deactivate(Manager::developer_documentation);
-            $this->toggleManager->deactivate(Manager::login_paris);
             $this->toggleManager->deactivate(Manager::sso_by_pass_auth);
 
             return 0;

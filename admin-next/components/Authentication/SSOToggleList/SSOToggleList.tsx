@@ -19,8 +19,8 @@ import { toggleFeatureFlag } from '@mutations/ToggleFeatureMutation';
 import ListCard from '@ui/ListCard/ListCard';
 
 type SSOToggle = {
-    label: string,
-    featureFlag: FeatureFlagType,
+    label: string;
+    featureFlag: FeatureFlagType;
 };
 
 const SSO_TOGGLES: SSOToggle[] = [
@@ -40,10 +40,6 @@ const SSO_TOGGLES: SSOToggle[] = [
         label: 'CAS',
         featureFlag: 'login_cas',
     },
-    {
-        label: 'MonCompteParis',
-        featureFlag: 'login_paris',
-    },
 ];
 
 const SSOToggleList: FC = () => {
@@ -54,7 +50,6 @@ const SSOToggleList: FC = () => {
         'login_openid',
         'login_saml',
         'login_cas',
-        'login_paris',
         'oauth2_switch_user',
     ]);
 

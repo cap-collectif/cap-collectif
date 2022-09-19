@@ -24,7 +24,6 @@ class ShieldListener
         'franceconnect_login',
         'hwi_oauth_service_redirect',
         'saml_login',
-        'paris_login',
         'cas_login',
 
         // Public API

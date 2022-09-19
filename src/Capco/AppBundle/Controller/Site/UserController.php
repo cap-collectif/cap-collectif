@@ -75,7 +75,6 @@ class UserController extends AbstractController
             'email' => $invitation->getEmail(),
             'baseUrl' => $this->getInvitationUrl($token),
             'loginFacebook' => $this->isFacebookEnabled(),
-            'loginParis' => $this->isParisEnabled(),
             'loginFranceConnect' => $this->isFranceConnectEnabled(),
             'ssoList' => array_values($ssoList),
             'hasEnabledSSO' => $this->hasAnyEnabledSSO($ssoList),
@@ -159,15 +158,9 @@ class UserController extends AbstractController
 
     private function hasAnyEnabledSSO(array $ssoList): bool
     {
-        return $this->isParisEnabled() ||
-            $this->isFacebookEnabled() ||
+        return $this->isFacebookEnabled() ||
             $this->isFranceConnectEnabled() ||
             \count($ssoList) > 0;
-    }
-
-    private function isParisEnabled(): bool
-    {
-        return $this->toggleManager->isActive('login_paris');
     }
 
     private function isFacebookEnabled(): bool

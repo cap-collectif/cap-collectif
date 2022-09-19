@@ -71,10 +71,10 @@ sub vcl_recv {
       return (synth(200, "Banned"));
   }
 
-  # Remove all cookies except the Symfony or SimpleSAML session or Paris (mcpAuth) session.
+  # Remove all cookies except the Symfony or SimpleSAML session.
   if (req.http.Cookie) {
     cookie.parse(req.http.Cookie);
-    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,mcpAuth,locale,AnonymousAuthenticatedWithConfirmedPhone");
+    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,locale,AnonymousAuthenticatedWithConfirmedPhone");
     set req.http.cookie = cookie.get_string();
 
     if (req.http.Cookie == "") {

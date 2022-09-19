@@ -35,7 +35,6 @@
 
         <field name="samlId" unique="true" column="saml_id" type="string" length="255" nullable="true" />
         <field name="casId" unique="true" column="cas_id" type="string" length="255" nullable="true" />
-        <field name="parisId" unique="true" column="paris_id" type="string" length="255" nullable="true" />
         <field name="locked" column="locked" type="boolean"/>
         <field name="credentialsExpired" column="credentials_expired" type="boolean"/>
         <field name="credentialsExpireAt" column="credentials_expire_at" type="datetime" nullable="true"/>

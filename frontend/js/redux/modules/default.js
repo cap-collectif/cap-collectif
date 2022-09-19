@@ -47,7 +47,6 @@ export const features: FeatureToggles = {
   report_browers_errors_to_sentry: false,
   login_saml: false,
   login_cas: false,
-  login_paris: false,
   oauth2_switch_user: false,
   votes_min: false,
   blog: false,

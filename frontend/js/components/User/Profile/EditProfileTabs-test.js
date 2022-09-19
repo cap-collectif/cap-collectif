@@ -25,16 +25,6 @@ describe('<EditProfileTabs />', () => {
     features: {
       ...features,
       profiles: true,
-      login_paris: false,
-    },
-    loginWithOpenId: false,
-  };
-
-  const propsWithParisAndNotProfiles = {
-    features: {
-      ...features,
-      profiles: false,
-      login_paris: true,
     },
     loginWithOpenId: false,
   };
@@ -43,7 +33,6 @@ describe('<EditProfileTabs />', () => {
     features: {
       ...features,
       profiles: false,
-      login_paris: false,
     },
     loginWithOpenId: true,
   };
@@ -64,11 +53,6 @@ describe('<EditProfileTabs />', () => {
     expect(wrapper.find('[href="#profile"]').length).toEqual(0);
     expect(wrapper.find({ defaultActiveKey: 'account' }).length).toEqual(1);
 
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render all tabs except profile, password and account (Paris)', () => {
-    const wrapper = shallow(<EditProfileTabs {...propsWithParisAndNotProfiles} {...globalProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 

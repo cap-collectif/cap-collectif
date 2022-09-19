@@ -70,8 +70,7 @@ export class EditProfileTabs extends Component<Props> {
     // TODO this will be added to API, one day.
     const viewerSsoAllowToUpdateUsername = window.location.hostname !== occitanieUrl;
     // TODO this will be added to API, one day.
-    const viewerSsoAllowToUpdatePassword =
-      !features.login_paris && !loginWithOpenId && viewer.hasPassword;
+    const viewerSsoAllowToUpdatePassword = !loginWithOpenId && viewer.hasPassword;
 
     return (
       <Tab.Container
@@ -100,14 +99,12 @@ export class EditProfileTabs extends Component<Props> {
                       </ListGroupItem>
                     </NavItem>
                   )}
-                  {!features.login_paris && (
-                    <NavItem eventKey="account" href="#account">
-                      <ListGroupItem>
-                        <span className="icon cap-setting-gear" />
-                        <FormattedMessage id="user.profile.edit.account" />
-                      </ListGroupItem>
-                    </NavItem>
-                  )}
+                  <NavItem eventKey="account" href="#account">
+                    <ListGroupItem>
+                      <span className="icon cap-setting-gear" />
+                      <FormattedMessage id="user.profile.edit.account" />
+                    </ListGroupItem>
+                  </NavItem>
                   <NavItem eventKey="personal-data" href="#personal-data">
                     <ListGroupItem>
                       <span className="icon cap-id-1" />
@@ -148,22 +145,18 @@ export class EditProfileTabs extends Component<Props> {
                 )}
               </Tab.Pane>
               <Tab.Pane eventKey="account">
-                {!features.login_paris && (
-                  <AccountBox
-                    viewer={viewer}
-                    languageList={languageList}
-                    loginWithOpenId={loginWithOpenId}
-                  />
-                )}
+                <AccountBox
+                  viewer={viewer}
+                  languageList={languageList}
+                  loginWithOpenId={loginWithOpenId}
+                />
               </Tab.Pane>
               <Tab.Pane eventKey="personal-data">
                 <PersonalData viewer={viewer} />
               </Tab.Pane>
               {viewer.hasPassword && (
                 <Tab.Pane eventKey="password">
-                  {!features.login_paris && !loginWithOpenId && (
-                    <ChangePasswordForm viewer={viewer} />
-                  )}
+                  {!loginWithOpenId && <ChangePasswordForm viewer={viewer} />}
                 </Tab.Pane>
               )}
               <Tab.Pane eventKey="notifications">

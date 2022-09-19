@@ -54,7 +54,6 @@ export type FeatureToggles = {
   login_facebook: ?boolean,
   login_saml: ?boolean,
   login_cas: ?boolean,
-  login_paris: ?boolean,
   privacy_policy: ?boolean,
   votes_min: ?boolean,
   oauth2_switch_user: ?boolean,
