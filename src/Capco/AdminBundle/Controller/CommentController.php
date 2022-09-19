@@ -2,11 +2,9 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyPath;
 
 class CommentController extends CRUDController
 {
@@ -17,22 +15,18 @@ class CommentController extends CRUDController
         $request = $this->getRequest();
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
-
-        if (
-            (\is_object($this->getUser()) && !$this->getUser()->isSuperAdmin()) ||
-            $object->getAuthor() != $this->getUser()
-        ) {
-            throw new ProjectAccessDeniedException();
-        }
+        $viewer = $this->getUser();
 
         if (!$object) {
             throw $this->createNotFoundException(
                 sprintf('unable to find the object with id: %s', $id)
             );
         }
+        if (!$this->isViewerAdminAuthor($object, $viewer) && !$viewer->isSuperAdmin()) {
+            throw new ProjectAccessDeniedException();
+        }
 
         $this->checkParentChildAssociation($request, $object);
-
         $this->admin->checkAccess('delete', $object);
 
         $preResponse = $this->preDelete($request, $object);
@@ -92,5 +86,10 @@ class CommentController extends CRUDController
             ],
             null
         );
+    }
+
+    private function isViewerAdminAuthor($object, $viewer): bool
+    {
+        return $viewer instanceof User && $viewer->isAdmin() && $object->getAuthor() === $viewer;
     }
 }

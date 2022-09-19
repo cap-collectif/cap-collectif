@@ -14,7 +14,6 @@ use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 
 class CommentAdmin extends AbstractAdmin
@@ -146,14 +145,8 @@ class CommentAdmin extends AbstractAdmin
 
         $formMapper
             ->add('body', null, ['label' => 'global.contenu', 'attr' => ['rows' => 8]])
-            ->add('author', ModelAutocompleteType::class, [
+            ->add('author', null, [
                 'label' => 'global.author',
-                'property' => 'username,email',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
-                'help' => 'admin.help.comment.author',
-                'required' => false,
             ])
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
