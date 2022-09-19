@@ -18,12 +18,21 @@ Object {
         "node": Object {
           "__typename": "Project",
           "archived": false,
+          "id": "UHJvamVjdDpyYXBwb3J0RXZhbHVhdGlvbg==",
+          "title": "Rapport d'évaluation 6 (AR6)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
           "id": "UHJvamVjdDpwcm9qZWN0SWRmMw==",
           "title": "Budget Participatif IdF 3",
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -32,12 +41,176 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "__typename": "Project",
           "archived": true,
           "id": "UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=",
           "title": "Projet Archivé",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=",
+          "title": "Débat du mois",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0V2l0aEFub255bW91c1F1ZXN0aW9ubmFpcmU=",
+          "title": "Projet avec questionnaire anonyme",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
+          "title": "Projet avec administrateur de projet",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0V3lzaXd5Zw==",
+          "title": "Débat Wysiwyg",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0T2N1bHVzUXVlc3Q=",
+          "title": "Débat sur l'Oculus Quest",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Q2FmZXRpZXI=",
+          "title": "Sauvons nos cafés",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
+          "title": "Débat sur le cannabis",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0TXVsdGlEZWJhdGU=",
+          "title": "Débats sur la vie",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0RXhwb3J0",
+          "title": "Projet pour consolider les exports",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
+          "title": "Solidarité Covid-19",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+          "title": "Budget Participatif IdF",
+        },
+      },
+    ],
+    "totalCount": 44,
+  },
+}
+`;
+
+exports[`Internal|Query projects fetches archived projects 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": true,
+          "id": "UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=",
+          "title": "Projet Archivé",
+        },
+      },
+    ],
+    "totalCount": 1,
+  },
+}
+`;
+
+exports[`Internal|Query projects fetches non archived projects 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0RGViYXRlT3BlbldpdGhvdXRWb3Rl",
+          "title": "Débats ouvert sans vote",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpyYXBwb3J0RXZhbHVhdGlvbg==",
+          "title": "Rapport d'évaluation 6 (AR6)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0SWRmMw==",
+          "title": "Budget Participatif IdF 3",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9vZA==",
+          "title": "Food project",
         },
       },
       Object {
@@ -150,179 +323,6 @@ Object {
       },
     ],
     "totalCount": 43,
-  },
-}
-`;
-
-exports[`Internal|Query projects fetches archived projects 1`] = `
-Object {
-  "projects": Object {
-    "edges": Array [
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": true,
-          "id": "UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=",
-          "title": "Projet Archivé",
-        },
-      },
-    ],
-    "totalCount": 1,
-  },
-}
-`;
-
-exports[`Internal|Query projects fetches non archived projects 1`] = `
-Object {
-  "projects": Object {
-    "edges": Array [
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0RGViYXRlT3BlbldpdGhvdXRWb3Rl",
-          "title": "Débats ouvert sans vote",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0SWRmMw==",
-          "title": "Budget Participatif IdF 3",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0Rm9vZA==",
-          "title": "Food project",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=",
-          "title": "Débat du mois",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0V2l0aEFub255bW91c1F1ZXN0aW9ubmFpcmU=",
-          "title": "Projet avec questionnaire anonyme",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
-          "title": "Projet avec administrateur de projet",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0V3lzaXd5Zw==",
-          "title": "Débat Wysiwyg",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0T2N1bHVzUXVlc3Q=",
-          "title": "Débat sur l'Oculus Quest",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0Q2FmZXRpZXI=",
-          "title": "Sauvons nos cafés",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
-          "title": "Débat sur le cannabis",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0TXVsdGlEZWJhdGU=",
-          "title": "Débats sur la vie",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0RXhwb3J0",
-          "title": "Projet pour consolider les exports",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
-          "title": "Solidarité Covid-19",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-          "title": "Budget Participatif IdF",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0QW5hbHlzZQ==",
-          "title": "Project Analyse",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0MjY=",
-          "title": "Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH",
-        },
-      },
-    ],
-    "totalCount": 42,
   },
 }
 `;

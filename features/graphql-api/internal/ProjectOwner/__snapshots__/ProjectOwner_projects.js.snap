@@ -15,7 +15,22 @@ Object {
           "node": Object {
             "authors": Array [
               Object {
+                "username": "GIEC",
+              },
+            ],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
                 "username": "admin",
+              },
+              Object {
+                "username": "GIEC",
               },
             ],
             "owner": Object {
@@ -433,7 +448,7 @@ Object {
           },
         },
       ],
-      "totalCount": 44,
+      "totalCount": 45,
     },
   },
 }
@@ -797,8 +812,14 @@ Object {
             "title": "Débats ouvert sans vote",
           },
         },
+        Object {
+          "node": Object {
+            "publishedAt": "2022-01-03 12:00:00",
+            "title": "Rapport d'évaluation 6 (AR6)",
+          },
+        },
       ],
-      "totalCount": 44,
+      "totalCount": 45,
     },
   },
 }

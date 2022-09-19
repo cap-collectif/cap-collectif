@@ -9,6 +9,7 @@ Scenario: Can create an opinion of contribuable type in opened project
     | stepSlug    | collecte-des-avis                |
   When I click the "#btn-add--les-causes" element
   And I wait "#opinion-create-form" to appear on current page maximum 20
+  And I wait "#opinion_title" to appear on current page maximum 20
   And I fill in the following:
     | opinion_title | Titre                           |
     | opinion_body  | Description de ma proposition   |

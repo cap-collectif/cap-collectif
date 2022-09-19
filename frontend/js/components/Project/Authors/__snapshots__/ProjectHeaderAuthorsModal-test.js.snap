@@ -140,7 +140,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
                 <span
                   className="font-weight-bold"
                 >
-                  admin
+                  &lt;mock-value-for-field-"username"&gt;
                 </span>
                 <span
                   className="excerpt"

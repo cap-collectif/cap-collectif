@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
+use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
@@ -11,17 +12,20 @@ use Capco\UserBundle\Entity\User;
 
 class ProjectAuthorsResolver implements ResolverInterface
 {
-    private $userRepository;
-    private $logger;
-    private $projectRepository;
+    private UserRepository $userRepository;
+    private LoggerInterface $logger;
+    private ProjectRepository $projectRepository;
+    private OrganizationRepository $organizationRepository;
 
     public function __construct(
         UserRepository $userRepository,
         ProjectRepository $projectRepository,
+        OrganizationRepository $organizationRepository,
         LoggerInterface $logger
     ) {
         $this->logger = $logger;
         $this->projectRepository = $projectRepository;
+        $this->organizationRepository = $organizationRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -32,8 +36,8 @@ class ProjectAuthorsResolver implements ResolverInterface
 
         try {
             $authorsIds = array_map(function ($item) {
-                return $item['id'];
-            }, $this->projectRepository->getAuthorsId($user, $orderBy));
+                return $item['oid'] ?? $item['uid'];
+            }, $this->projectRepository->getProjectAuthorsId($user, $orderBy));
 
             return $this->getHydratedResults($authorsIds);
         } catch (\RuntimeException $exception) {
@@ -49,12 +53,16 @@ class ProjectAuthorsResolver implements ResolverInterface
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
 
         $users = $this->userRepository->hydrateFromIds($ids);
+        $organizations = $this->organizationRepository->hydrateFromIds($ids);
         // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         usort($users, function ($a, $b) use ($ids) {
             return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
         });
+        usort($organizations, function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
 
-        return $users;
+        return array_merge($users, $organizations);
     }
 }

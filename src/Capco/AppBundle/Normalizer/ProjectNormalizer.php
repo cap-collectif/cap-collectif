@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Repository\EventRepository;
@@ -23,13 +24,13 @@ class ProjectNormalizer implements
     CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private $router;
+    private UrlGeneratorInterface $router;
     private ObjectNormalizer $normalizer;
-    private $helper;
-    private $mediaExtension;
-    private $stepResolver;
-    private $contributionResolver;
-    private $eventRepository;
+    private ProjectHelper $helper;
+    private MediaExtension $mediaExtension;
+    private StepResolver $stepResolver;
+    private ContributionResolver $contributionResolver;
+    private EventRepository $eventRepository;
 
     public function __construct(
         UrlGeneratorInterface $router,
@@ -70,9 +71,10 @@ class ProjectNormalizer implements
             $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
             $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
             $data['authors'] = [];
+            /** @var ProjectAuthor $projectAuthor */
             foreach ($object->getAuthors() as $projectAuthor) {
                 $data['authors'][] = $this->normalizer->normalize(
-                    $projectAuthor->getUser(),
+                    $projectAuthor->getAuthor(),
                     $format,
                     $context
                 );
@@ -105,7 +107,7 @@ class ProjectNormalizer implements
             $data['authors'] = [];
             foreach ($object->getAuthors() as $projectAuthor) {
                 $data['authors'][] = $this->normalizer->normalize(
-                    $projectAuthor->getUser(),
+                    $projectAuthor->getAuthor(),
                     $format,
                     $context
                 );

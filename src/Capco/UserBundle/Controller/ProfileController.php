@@ -265,8 +265,8 @@ class ProfileController extends Controller
     /**
      * TODO change view and content for organization.
      *
-     * @Route("/", name="capco_organization_profile_show", defaults={"_feature_flags" = "profiles"})
-     * @Route("/{slug}", name="capco_organization_profile_show_all", defaults={"_feature_flags" = "profiles"})
+     * @Route("/organization", name="capco_organization_profile_show", defaults={"_feature_flags" = "profiles"}, options={"i18n" = false})
+     * @Route("/organization/{slug}", name="capco_organization_profile_show_all", defaults={"_feature_flags" = "profiles"}, options={"i18n" = false})
      * @Template("@CapcoUser/Profile/show.html.twig")
      */
     public function showOrganizationAction(?string $slug = null)
@@ -290,7 +290,7 @@ class ProfileController extends Controller
         //        $eventsCount = $this->getEventsCount($user);
 
         return [
-            'organization' => $organization,
+            'user' => $organization,
         ];
     }
 

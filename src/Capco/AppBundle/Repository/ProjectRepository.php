@@ -165,13 +165,14 @@ class ProjectRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
-    public function getAuthorsId($viewer = null, $order = 'DESC'): array
+    public function getProjectAuthorsId($viewer = null, $order = 'DESC')
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
-            ->addSelect('u.id')
+            ->select('organization.id as oid, u.id as uid')
             ->leftJoin('p.authors', 'pa')
+            ->leftJoin('pa.organization', 'organization')
             ->leftJoin('pa.user', 'u')
-            ->groupBy('u.id')
+            ->andWhere('u.id IS NOT NULL OR organization.id IS NOT NULL')
             ->orderBy('pa.createdAt', $order);
 
         return $qb->getQuery()->execute();

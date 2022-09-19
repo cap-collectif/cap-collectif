@@ -4,13 +4,12 @@ import styled from 'styled-components';
 import { graphql, useFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
-import { Modal, Button, Heading, CapUIModalSize } from '@cap-collectif/ui'
+import { Modal, Button, Heading, CapUIModalSize } from '@cap-collectif/ui';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 import UserAvatar from '../../User/UserAvatar';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import type { ProjectHeaderAuthorsModal_project$key } from '~relay/ProjectHeaderAuthorsModal_project.graphql';
 import ResetCss from '~/utils/ResetCss';
-
 
 type Props = {|
   +show: boolean,
@@ -38,13 +37,16 @@ const ProjectAuthorList = styled(ListGroupFlush)`
 const FRAGMENT = graphql`
   fragment ProjectHeaderAuthorsModal_project on Project {
     authors {
-      ...UserAvatar_user
+      __typename
+      ... on User {
+        ...UserAvatar_user
+        userType {
+          name
+        }
+      }
       id
       url
       username
-      userType {
-        name
-      }
     }
   }
 `;
@@ -60,8 +62,7 @@ const ProjectHeaderAuthorsModal = ({ show, onClose, project }: Props): React.Nod
       show={show}
       onClose={onClose}
       ariaLabel={intl.formatMessage({ id: 'project.authors' })}
-      size={CapUIModalSize.Lg}
-    >
+      size={CapUIModalSize.Lg}>
       <ResetCss>
         <Modal.Header>
           <Heading>

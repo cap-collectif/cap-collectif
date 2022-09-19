@@ -462,3 +462,13 @@ Capco\AppBundle\Entity\Project:
         updatedAt: $createdAt
         publishedAt: $createdAt
         visibility: 2
+    rapportEvaluation:
+        id: 'rapportEvaluation'
+        title: Rapport d'évaluation 6 (AR6)
+        projectType: '@projectType9'
+        createdAt: <identity((new \DateTime('2022-01-03 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 0
+        owner: '@user1'
+        creator: '@user1'

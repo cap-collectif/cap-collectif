@@ -9295,7 +9295,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   steps(orderBy: StepOrder = {field: POSITION, direction: ASC}): [Step!]!
 
   """The list of users who authored the project."""
-  authors: [User!]!
+  authors: [Author!]!
 
   """The admin URL to this resource."""
   adminUrl: URI!
@@ -11816,7 +11816,7 @@ type Query {
 
   """Get the contact forms"""
   contactForms: [ContactForm!]
-  projectAuthors: [User!]!
+  projectAuthors: [Author!]!
   projectTypes(
     """If true, filter the projectTypes only used by the projects"""
     onlyUsedByProjects: Boolean = false

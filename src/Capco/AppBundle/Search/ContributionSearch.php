@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
@@ -17,7 +18,6 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\ContributionType;
 use Capco\AppBundle\Enum\OrderDirection;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Aggregation\Terms;
 use Elastica\Index;
@@ -50,7 +50,7 @@ class ContributionSearch extends Search
         $this->entityManager = $entityManager;
     }
 
-    public function getSubmissionsByAuthor(User $user, string $resultType): ResultSet
+    public function getSubmissionsByAuthor(Author $user, string $resultType): ResultSet
     {
         $boolQuery = (new Query\BoolQuery())->addFilter(
             new Query\Term(['author.id' => ['value' => $user->getId()]])
@@ -89,7 +89,7 @@ class ContributionSearch extends Search
     }
 
     public function getUserContributions(
-        User $user,
+        Author $user,
         int $limit,
         string $order,
         string $seed,

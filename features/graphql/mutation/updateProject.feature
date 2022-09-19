@@ -27,7 +27,7 @@ Scenario: GraphQL client wants to update a project and add an author
         "input": {
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "title": "thisisnotatestupdated",
-          "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ==", "VXNlcjp1c2VyMg=="],
+          "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ==", "VXNlcjp1c2VyMg==", "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI="],
           "projectType": "2",
           "address": "[{\"address_components\" : [{\"long_name\" : \"155\",\"short_name\" : \"155\",\"types\" : [ \"street_number\" ]},{\"long_name\" : \"Boulevard Saint-Germain\",\"short_name\" : \"Boulevard Saint-Germain\",\"types\" : [ \"route\" ]},{\"long_name\" : \"Paris\",\"short_name\" : \"Paris\",\"types\" : [ \"locality\", \"political\" ]},{\"long_name\" : \"Département de Paris\",\"short_name\" : \"Département de Paris\",\"types\" : [ \"administrative_area_level_2\", \"political\" ]},{\"long_name\" : \"Île-de-France\",\"short_name\" : \"IDF\",\"types\" : [ \"administrative_area_level_1\", \"political\" ]},{\"long_name\" : \"France\",\"short_name\" : \"FR\",\"types\" : [ \"country\", \"political\" ]},{\"long_name\" : \"75006\",\"short_name\" : \"75006\",\"types\" : [ \"postal_code\" ]}],\"formatted_address\" : \"155 Boulevard Saint-Germain, 75006 Paris, France\",\"geometry\" : {\"location\" : {\"lat\" : 48.8538407,\"lng\" : 2.3321014},\"location_type\" : \"ROOFTOP\",\"viewport\" : {\"northeast\" : {\"lat\" : 48.8551896802915,\"lng\" : 2.333450380291502},\"southwest\" : {\"lat\" : 48.8524917197085,\"lng\" : 2.330752419708498}}},\"place_id\" : \"ChIJq9_ddtdx5kcRRoIJStYdLlA\",\"plus_code\" : {\"compound_code\" : \"V83J+GR Paris, France\",\"global_code\" : \"8FW4V83J+GR\"},\"types\" : [ \"street_address\" ]}]"
         }
@@ -59,6 +59,12 @@ Scenario: GraphQL client wants to update a project and add an author
                     "username":"admin",
                     "email":"admin@test.com",
                     "createdAt":"2015-01-04 00:00:00"
+                 },
+                 {
+                    "id":"T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=",
+                    "username":"GIEC",
+                    "email":"ipcc-sec@wmo.int",
+                    "createdAt":"@string@.isDateTime()"
                  }
               ],
               "address":{

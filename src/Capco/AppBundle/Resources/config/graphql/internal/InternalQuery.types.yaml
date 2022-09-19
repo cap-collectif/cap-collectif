@@ -181,7 +181,7 @@ InternalQuery:
                         defaultValue: true
                         description: 'If true get enabled only, if false get disabled, if null get all events'
             projectAuthors:
-                type: '[InternalUser!]!'
+                type: '[Author!]!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", [args, getUser()])'
             projectTypes:
                 type: '[InternalProjectType!]!'

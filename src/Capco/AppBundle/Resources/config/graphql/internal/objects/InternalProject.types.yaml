@@ -74,7 +74,7 @@ InternalProject:
             cover:
                 type: 'InternalMedia'
             authors:
-                type: '[InternalUser!]!'
+                type: '[Author!]!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\InternalProjectAuthorsResolver", [value])'
             type:
                 type: 'InternalProjectType'

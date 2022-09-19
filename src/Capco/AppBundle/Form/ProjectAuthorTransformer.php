@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\ProjectAuthor;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\ProjectAuthorRepository;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -14,16 +14,16 @@ class ProjectAuthorTransformer
 {
     private EntityManagerInterface $em;
     private ?Project $project;
-    private UserRepository $userRepository;
+    private GlobalIdResolver $globalIdResolver;
     private ProjectAuthorRepository $projectAuthorRepository;
 
     public function __construct(
         EntityManagerInterface $em,
-        UserRepository $userRepository,
+        GlobalIdResolver $globalIdResolver,
         ProjectAuthorRepository $projectAuthorRepository
     ) {
         $this->em = $em;
-        $this->userRepository = $userRepository;
+        $this->globalIdResolver = $globalIdResolver;
         $this->projectAuthorRepository = $projectAuthorRepository;
     }
 
@@ -38,34 +38,26 @@ class ProjectAuthorTransformer
     {
         $data = [];
         foreach ($usersGlobalId as $userId) {
-            $decodedUserId = GlobalId::fromGlobalId($userId)['id'];
-
-            if (!$decodedUserId) {
+            $author = $this->globalIdResolver->resolve($userId, null);
+            if (!$author instanceof Author) {
                 throw new BadRequestHttpException('Sorry, please retry.');
             }
 
-            $user = $this->userRepository->find($decodedUserId);
-            if (!$user) {
-                throw new BadRequestHttpException('Sorry, please retry.');
-            }
-
-            $projectAuthor = $this->projectAuthorRepository->findOneBy([
-                'project' => $this->project,
-                'user' => $user,
-            ]);
-
+            $projectAuthor = $this->projectAuthorRepository->findOneByUserOrOrganization(
+                $this->project,
+                $author
+            );
             if (!$projectAuthor) {
                 $projectAuthor = new ProjectAuthor();
-                $projectAuthor->setUser($user);
+                $projectAuthor->setAuthor($author);
                 $projectAuthor->setProject($this->project);
 
                 $this->em->persist($projectAuthor);
                 $this->em->flush();
-
-                $projectAuthor = $this->projectAuthorRepository->findOneBy([
-                    'project' => $this->project,
-                    'user' => $user,
-                ]);
+                $projectAuthor = $this->projectAuthorRepository->findOneByUserOrOrganization(
+                    $this->project,
+                    $author
+                );
             }
             $data[] = $projectAuthor->getId();
         }

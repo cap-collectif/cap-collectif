@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,13 +15,13 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 /**
  * Project author.
  * This class purpose is to store additional datas on the project author
- * Ex: When a user has been added as author.
+ * Ex: When a user or organization has been added as author.
  *
  * @ORM\Table(name="project_author")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectAuthorRepository")
  * @CapcoAssert\HasAuthor()
  */
-class ProjectAuthor implements Author
+class ProjectAuthor implements Authorable, Author
 {
     use TimestampableTrait;
     use UuidTrait;
@@ -29,19 +30,19 @@ class ProjectAuthor implements Author
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Organization\Organization")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected ?Organization $organization;
+    protected ?Organization $organization = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private ?User $user;
+    private ?User $user = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="authors", cascade="persist")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
-    private $project;
+    private Project $project;
 
     public function getUser(): ?User
     {
@@ -60,6 +61,18 @@ class ProjectAuthor implements Author
         $this->project = $project;
 
         $project->addAuthor($this);
+
+        return $this;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        if ($author instanceof User) {
+            $this->user = $author;
+        }
+        if ($author instanceof Organization) {
+            $this->organization = $author;
+        }
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Theme;
@@ -186,6 +187,16 @@ class UrlResolver
             return $this->manager->isActive('profiles')
                 ? $this->router->generate(
                     'capco_user_profile_show_all',
+                    ['slug' => $object->getSlug(), '_locale' => $locale],
+                    $referenceType
+                )
+                : '';
+        }
+
+        if ($object instanceof Organization && $object->getSlug()) {
+            return $this->manager->isActive('profiles')
+                ? $this->router->generate(
+                    'capco_organization_profile_show_all',
                     ['slug' => $object->getSlug(), '_locale' => $locale],
                     $referenceType
                 )

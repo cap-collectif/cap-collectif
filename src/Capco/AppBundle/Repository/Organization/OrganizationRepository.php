@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository\Organization;
 
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationTranslation;
+use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Enum\OrganizationAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -30,6 +31,29 @@ class OrganizationRepository extends EntityRepository
             ->setParameter('slug', $slug);
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findAuthorsByProjectId(string $projectId): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->innerJoin(ProjectAuthor::class, 'pa', Expr\Join::WITH, 'o.id = pa.organization')
+            ->where('pa.project = :id')
+            ->setParameter('id', $projectId)
+            ->orderBy('o.createdAt')
+            ->getQuery();
+
+        return $qb->getResult();
+    }
+
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb->addSelect('media')
+            ->leftJoin('o.logo', 'media')
+            ->where('o.id IN (:ids)')
+            ->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
     }
 
     public function findPaginated(

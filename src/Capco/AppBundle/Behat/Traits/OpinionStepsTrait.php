@@ -393,7 +393,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->waitAndThrowOnFailure(
-            10000,
+            15000,
             "$('" . $page->getArgumentVoteButtonSelector() . "').length > 0"
         );
         $wantedVotesCount = $page->getArgumentVotesCount() + 1;
@@ -672,7 +672,7 @@ trait OpinionStepsTrait
             'Incorrect button label ' . $buttonLabel . ' on argument vote button.'
         );
         $page->clickArgumentVoteButton();
-        $this->iWait(2);
+        $this->iWait(5);
     }
 
     protected function versionPageIsOpen()

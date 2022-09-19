@@ -232,11 +232,18 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "concreteType": "User",
+                          "concreteType": null,
                           "kind": "LinkedField",
                           "name": "authors",
                           "plural": true,
                           "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
                             Object {
                               "alias": null,
                               "args": null,
@@ -259,29 +266,36 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                               "storageKey": null,
                             },
                             Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "Media",
-                              "kind": "LinkedField",
-                              "name": "media",
-                              "plural": false,
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
                               "selections": Array [
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "url",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "id",
+                                  "concreteType": "Media",
+                                  "kind": "LinkedField",
+                                  "name": "media",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
                                   "storageKey": null,
                                 },
                               ],
-                              "storageKey": null,
+                              "type": "User",
                             },
                           ],
                           "storageKey": null,
@@ -2421,7 +2435,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "487fd8fa9cfb3c530c9a8bc13a32261d",
+          "cacheID": "022ec9c336f8b1cb087c94f490592ad1",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2487,6 +2501,7 @@ fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep 
   project {
     hasParticipativeStep(exceptStepId: $consultationStepId)
     authors {
+      __typename
       username
       url
       ...UserAvatarList_users
@@ -3142,11 +3157,18 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "concreteType": "User",
+                          "concreteType": null,
                           "kind": "LinkedField",
                           "name": "authors",
                           "plural": true,
                           "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
                             Object {
                               "alias": null,
                               "args": null,
@@ -3169,29 +3191,36 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                               "storageKey": null,
                             },
                             Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "Media",
-                              "kind": "LinkedField",
-                              "name": "media",
-                              "plural": false,
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
                               "selections": Array [
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "url",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "id",
+                                  "concreteType": "Media",
+                                  "kind": "LinkedField",
+                                  "name": "media",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
                                   "storageKey": null,
                                 },
                               ],
-                              "storageKey": null,
+                              "type": "User",
                             },
                           ],
                           "storageKey": null,
@@ -5331,7 +5360,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "487fd8fa9cfb3c530c9a8bc13a32261d",
+          "cacheID": "022ec9c336f8b1cb087c94f490592ad1",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5397,6 +5426,7 @@ fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep 
   project {
     hasParticipativeStep(exceptStepId: $consultationStepId)
     authors {
+      __typename
       username
       url
       ...UserAvatarList_users
