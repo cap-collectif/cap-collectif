@@ -926,7 +926,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud13'
         value: Une autre phrase, parce que le mot phrase il va finir par pas mal remonté au final dans toutes ces réponses qui sont censées être liées au sport. Mais bon a cause du covid y'a plus trop de sport en vrai ou alors tu en fait à la maison mais c'est un peu ghetto quand même tu trouve pas ?
         createdAt: <(new \DateTime('2021-01-01 04:26:00'))>
-        iaCategory: 'literacy'
+        iaCategory: '/literacy'
         iaSentiment: 'NEUTRAL'
     responseTagCloud26:
         question: '@xQuestion1'
@@ -944,7 +944,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@replyTagCloud14'
         value: D'ailleurs en parlant de sports et de sportifs, je suis toujours aussi dégouté que l'escalade ce soit toujours fermé ça se trouve en 2024 ça aurait pu être moi aux JO à flex sur des murs de fou la. Je continue à remplir un peu cette ligne histoire de faire genre je suis une longue phrase de sportif.
         createdAt: <(new \DateTime('2021-01-01 04:28:00'))>
-        iaCategory: 'literacy'
+        iaCategory: '/literacy/complaint'
         iaSentiment: 'NEGATIVE'
     responseTagCloud28:
         question: '@xQuestion1'

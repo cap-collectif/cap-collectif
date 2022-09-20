@@ -34,12 +34,12 @@ trait CivicIATrait
 
     public function getIaCategory(): ?string
     {
-        return $this->iaCategory;
+        return self::handleIllFormattedCategory($this->iaCategory);
     }
 
     public function setIaCategory(?string $iaCategory): void
     {
-        $this->iaCategory = $iaCategory;
+        $this->iaCategory = self::handleIllFormattedCategory($iaCategory);
     }
 
     public function getIaCategoryDetails(): ?string
@@ -98,5 +98,24 @@ trait CivicIATrait
         if ($iaSentiment && !CivicIASentimentEnum::isValid($iaSentiment)) {
             throw new \RuntimeException('unknown civic ia sentiment : ' . $iaSentiment);
         }
+    }
+
+    /**
+     * To handle ill formatted category previously received, we take the first non-empty element exploded by /
+     * e.g.
+     * /literacy/complaint -> literacy
+     * /literacy -> literacy
+     * literacy -> literacy.
+     *
+     * This method should be removed when no more needed
+     */
+    private static function handleIllFormattedCategory(?string $iaCategory): ?string
+    {
+        if ($iaCategory) {
+            $exploded = array_filter(explode('/', $iaCategory));
+            $iaCategory = reset($exploded);
+        }
+
+        return $iaCategory;
     }
 }

@@ -67,12 +67,12 @@ Scenario: Admin update CivicIA data for responses
       "updateCivicIA": {
         "analyzables": [
           {
-            "iaCategory": "\/news",
+            "iaCategory": "news",
             "iaReadability": 75,
             "iaSentiment": "NEUTRAL"
           },
           {
-            "iaCategory": "\/business and industrial\/business operations\/management\/business process",
+            "iaCategory": "business and industrial",
             "iaReadability": 42,
             "iaSentiment": "POSITIVE"
           }
