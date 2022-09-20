@@ -34,12 +34,10 @@ class DeleteQuestionnaireMutation implements MutationInterface
     public function __invoke(Argument $input, User $viewer): array
     {
         $id = $input->offsetGet('id');
-
         $questionnaire = $this->globalIdResolver->resolve($id, $viewer);
-
         $proposalForm = $questionnaire->getProposalForm();
-
         $step = $questionnaire->getStep();
+
         if ($step) {
             $step->setQuestionnaire(null);
         }

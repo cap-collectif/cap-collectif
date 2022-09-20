@@ -573,3 +573,293 @@ Scenario: GraphQL client wants to update project with votesMin below 1
     "@*@": "@*@"
   }
   """
+
+@database
+Scenario: GraphQL client wants to update step with another questionnaire
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+   """
+    {
+      "query": "mutation UpdateAlphaProject($input: UpdateAlphaProjectInput!) {
+        updateAlphaProject(input: $input) {
+          project {
+            steps {
+              ...on QuestionnaireStep {
+                title
+                questionnaire {
+                  id
+                  title
+                }
+              }
+            }
+          }
+        }
+      }",
+      "variables": {
+         "input": {
+            "projectId": "UHJvamVjdDpwcm9qZWN0OA==",
+            "title": "Projet avec questionnaire",
+            "authors": [
+              "VXNlcjp1c2VyV2VsY29tYXR0aWM="
+            ],
+            "projectType": "7",
+            "Cover": null,
+            "video": null,
+            "themes": [
+              "theme3"
+            ],
+            "districts": [],
+            "metaDescription": null,
+            "isExternal": false,
+            "publishedAt": "2014-12-24 00:00:00",
+            "visibility": "PUBLIC",
+            "opinionCanBeFollowed": false,
+            "steps": [
+              {
+                "id": "pstep2",
+                "body": "Insert Long Text here",
+                "bodyUsingJoditWysiwyg": false,
+                "title": "Présentation",
+                "startAt": null,
+                "endAt": null,
+                "label": "Présentation",
+                "customCode": null,
+                "metaDescription": null,
+                "isEnabled": true,
+                "requirements": [],
+                "type": "PRESENTATION"
+              },
+              {
+                "id": "questionnairestep1",
+                "label": "Questionnaire",
+                "body": "Insert Long Text here",
+                "bodyUsingJoditWysiwyg": false,
+                "title": "Questionnaire des JO 2024",
+                "endAt": "2024-09-27 00:00:00",
+                "startAt": "2014-09-27 00:00:00",
+                "isEnabled": true,
+                "timeless": false,
+                "isAnonymousParticipationAllowed": false,
+                "metaDescription": null,
+                "customCode": null,
+                "requirementsReason": null,
+                "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3duZXJXaXRob3V0U3RlcA==",
+                "footer": null,
+                "collectParticipantsEmail": false,
+                "footerUsingJoditWysiwyg": false,
+                "requirements": [],
+                "type": "QUESTIONNAIRE"
+              },
+              {
+                "id": "questionnairestep2",
+                "body": "Insert Long Text here",
+                "bodyUsingJoditWysiwyg": false,
+                "timeless": false,
+                "title": "Questionnaire",
+                "startAt": "2014-09-27 00:00:00",
+                "endAt": "2024-09-27 00:00:00",
+                "label": "Questionnaire",
+                "customCode": null,
+                "metaDescription": null,
+                "isEnabled": true,
+                "requirements": [],
+                "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+                "footer": null,
+                "footerUsingJoditWysiwyg": false,
+                "isAnonymousParticipationAllowed": false,
+                "collectParticipantsEmail": false,
+                "requirementsReason": null,
+                "type": "QUESTIONNAIRE"
+              },
+              {
+                "id": "questionnairestepJump",
+                "body": "Insert Long Text here",
+                "bodyUsingJoditWysiwyg": false,
+                "timeless": false,
+                "title": "Etape de questionnaire avec questionnaire sauts conditionnels",
+                "startAt": "2014-09-27 00:00:00",
+                "endAt": "2024-09-27 00:00:00",
+                "label": "Questionnaire conditionnel",
+                "customCode": null,
+                "metaDescription": null,
+                "isEnabled": true,
+                "requirements": [],
+                "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBz",
+                "footer": null,
+                "footerUsingJoditWysiwyg": false,
+                "isAnonymousParticipationAllowed": false,
+                "collectParticipantsEmail": false,
+                "requirementsReason": null,
+                "type": "QUESTIONNAIRE"
+              },
+              {
+                "id": "questionnairestepJump2",
+                "body": "Insert Long Text here",
+                "bodyUsingJoditWysiwyg": false,
+                "timeless": false,
+                "title": "Essais de sauts conditionnels",
+                "startAt": "2014-09-27 00:00:00",
+                "endAt": "2024-09-27 00:00:00",
+                "label": "Questionnaire conditionnel",
+                "customCode": null,
+                "metaDescription": null,
+                "isEnabled": true,
+                "requirements": [],
+                "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBzMg==",
+                "footer": null,
+                "footerUsingJoditWysiwyg": false,
+                "isAnonymousParticipationAllowed": false,
+                "collectParticipantsEmail": false,
+                "requirementsReason": null,
+                "type": "QUESTIONNAIRE"
+              },
+              {
+                "id": "questionnairestep3",
+                "body": "Insert Long Text here",
+                "bodyUsingJoditWysiwyg": false,
+                "timeless": false,
+                "title": "Etape de questionnaire fermée",
+                "startAt": "2014-09-27 00:00:00",
+                "endAt": "2016-09-27 00:00:00",
+                "label": "Questionnaire",
+                "customCode": null,
+                "metaDescription": null,
+                "isEnabled": true,
+                "requirements": [],
+                "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMw==",
+                "footer": null,
+                "footerUsingJoditWysiwyg": false,
+                "isAnonymousParticipationAllowed": false,
+                "collectParticipantsEmail": false,
+                "requirementsReason": null,
+                "type": "QUESTIONNAIRE"
+              },
+              {
+                "id": "questionnaireStepLotChoices",
+                "body": "Une étape avec un questionnaire avec beaucoup de choix",
+                "bodyUsingJoditWysiwyg": false,
+                "timeless": false,
+                "title": "Questionnaire avec beaucoup de choix",
+                "startAt": "2020-01-01 00:00:00",
+                "endAt": "2028-09-27 00:00:00",
+                "label": "Questionnaire choix",
+                "customCode": null,
+                "metaDescription": null,
+                "isEnabled": true,
+                "requirements": [],
+                "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlTG90Q2hvaWNlcw==",
+                "footer": null,
+                "footerUsingJoditWysiwyg": false,
+                "isAnonymousParticipationAllowed": false,
+                "collectParticipantsEmail": false,
+                "requirementsReason": null,
+                "type": "QUESTIONNAIRE"
+              },
+              {
+                "id": "questionnairestep6",
+                "body": "Insert Long Text here",
+                "bodyUsingJoditWysiwyg": false,
+                "timeless": false,
+                "title": "Questionnaire avec des conditions requises",
+                "startAt": "2014-09-27 00:00:00",
+                "endAt": "2024-09-27 00:00:00",
+                "label": "Faut répondre au questionnaire pour avoir un bonbon",
+                "customCode": null,
+                "metaDescription": null,
+                "isEnabled": true,
+                "requirements": [
+                  {
+                    "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQxOA==",
+                    "type": "FIRSTNAME"
+                  },
+                  {
+                    "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQxOQ==",
+                    "type": "LASTNAME"
+                  },
+                  {
+                    "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQyMA==",
+                    "type": "POSTAL_ADDRESS"
+                  },
+                  {
+                    "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQyMQ==",
+                    "type": "IDENTIFICATION_CODE"
+                  }
+                ],
+                "questionnaire": "UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw==",
+                "footer": null,
+                "footerUsingJoditWysiwyg": false,
+                "isAnonymousParticipationAllowed": false,
+                "collectParticipantsEmail": false,
+                "requirementsReason": null,
+                "type": "QUESTIONNAIRE"
+              }
+            ],
+            "locale": null,
+            "archived": false
+         }
+      }
+    }
+  """
+  Then the JSON response should match:
+  """
+   {
+    "data": {
+      "updateAlphaProject": {
+        "project": {
+          "steps": [
+            {},
+            {
+              "title": "Questionnaire des JO 2024",
+              "questionnaire": {
+                "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3duZXJXaXRob3V0U3RlcA==",
+                "title": "Questionnaire visible par un owner sans step"
+              }
+            },
+            {
+              "title": "Questionnaire",
+              "questionnaire": {
+                "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+                "title": "Questionnaire de test"
+              }
+            },
+            {
+              "title": "Etape de questionnaire avec questionnaire sauts conditionnels",
+              "questionnaire": {
+                "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBz",
+                "title": "El famoso questionnaire a branche"
+              }
+            },
+            {
+              "title": "Essais de sauts conditionnels",
+              "questionnaire": {
+                "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBzMg==",
+                "title": "Questionnaire saut conditionnel (tous les champs)"
+              }
+            },
+            {
+              "title": "Etape de questionnaire fermée",
+              "questionnaire": {
+                "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMw==",
+                "title": "Questionnaire dans une étape fermée"
+              }
+            },
+            {
+              "title": "Questionnaire avec beaucoup de choix",
+              "questionnaire": {
+                "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlTG90Q2hvaWNlcw==",
+                "title": "Que choisir?"
+              }
+            },
+            {
+              "title": "Questionnaire avec des conditions requises",
+              "questionnaire": {
+                "id": "UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw==",
+                "title": "Votre condition requise favorite"
+              }
+            }
+          ]
+        }
+      }
+    }
+   }
+  """
