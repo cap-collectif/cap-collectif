@@ -14,6 +14,7 @@ type Props = {|
 |};
 
 export const ProposalListSearch = ({ dispatch, intl, terms }: Props) => {
+  const [hasSearchTermChanged, setHasSearchTermChanged] = React.useState(false);
   const onInputChange = debounce((e: SyntheticInputEvent<HTMLInputElement>) => {
     const term = e.target.value;
     dispatch(changeTerm(term || ''));
@@ -34,11 +35,12 @@ export const ProposalListSearch = ({ dispatch, intl, terms }: Props) => {
         placeholder={intl.formatMessage({ id: 'proposal.search' })}
         onChange={(e: SyntheticInputEvent<HTMLInputElement>) => {
           e.persist();
+          setHasSearchTermChanged(true);
           onInputChange(e);
         }}
         onClear={handleClear}
         initialValue={terms}
-        autoFocus
+        autoFocus={hasSearchTermChanged}
       />
     </form>
   );

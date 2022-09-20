@@ -10,7 +10,7 @@ exports[`<ProposalListSearch /> should render correctly 1`] = `
 >
   <ClearableInput
     ariaLabel="global.menu.search"
-    autoFocus={true}
+    autoFocus={false}
     icon={
       <i
         className="cap cap-magnifier"
