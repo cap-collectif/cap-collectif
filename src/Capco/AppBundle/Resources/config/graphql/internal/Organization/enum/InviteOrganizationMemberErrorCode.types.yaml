@@ -1,0 +1,15 @@
+InviteOrganizationMemberErrorCode:
+    type: enum
+    config:
+        name: InviteOrganizationMemberErrorCode
+        description: 'Available errors for an `inviteOrganizationMember` mutation.'
+        values:
+            ORGANIZATION_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteOrganizationMemberMutation::ORGANIZATION_NOT_FOUND")'
+                description: 'No `Organization` match your `organizationId`.'
+            USER_ALREADY_MEMBER:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteOrganizationMemberMutation::USER_ALREADY_MEMBER")'
+                description: 'The invited user is already a member of the organization.'
+            USER_ALREADY_INVITED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteOrganizationMemberMutation::USER_ALREADY_INVITED")'
+                description: 'The invited user is already invited.'

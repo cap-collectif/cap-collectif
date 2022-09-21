@@ -1,0 +1,14 @@
+InviteOrganizationMemberInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of inviteOrganizationMember mutation.'
+        fields:
+            organizationId:
+                type: 'ID!'
+                description: 'The organization to which the user is invited.'
+            email:
+                type: 'Email!'
+                description: 'The invited user email.'
+            role:
+                type: 'OrganizationMemberRole!'
+                description: 'The given role to the invited user.'

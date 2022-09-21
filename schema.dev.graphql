@@ -6747,6 +6747,39 @@ type IdentificationCodeRequirement implements Node & Requirement {
   viewerValue: String
 }
 
+"""Available errors for an `inviteOrganizationMember` mutation."""
+enum InviteOrganizationMemberErrorCode {
+  """No `Organization` match your `organizationId`."""
+  ORGANIZATION_NOT_FOUND
+
+  """The invited user is already a member of the organization."""
+  USER_ALREADY_MEMBER
+
+  """The invited user is already invited."""
+  USER_ALREADY_INVITED
+}
+
+input InviteOrganizationMemberInput {
+  """The organization to which the user is invited."""
+  organizationId: ID!
+
+  """The invited user email."""
+  email: Email!
+
+  """The given role to the invited user."""
+  role: OrganizationMemberRole!
+  clientMutationId: String
+}
+
+type InviteOrganizationMemberPayload {
+  """The created organization invite."""
+  invitation: PendingOrganizationInvitation
+
+  """The available errors for inviteOrganizationMember mutation."""
+  errorCode: InviteOrganizationMemberErrorCode
+  clientMutationId: String
+}
+
 input InviteUsersInput {
   """Set the maximum results to return"""
   maxResults: Int = 100
@@ -7860,6 +7893,7 @@ type Mutation {
   removeProposalSmsVote(input: RemoveProposalSmsVoteInput!): RemoveProposalSmsVotePayload
   sendSmsProposalVote(input: SendSmsProposalVoteInput!): SendSmsProposalVotePayload
   verifySmsVotePhoneNumber(input: VerifySmsVotePhoneNumberInput!): VerifySmsVotePhoneNumberPayload
+  inviteOrganizationMember(input: InviteOrganizationMemberInput!): InviteOrganizationMemberPayload
 }
 
 """A connection to a list of items."""

@@ -2,21 +2,57 @@
 
 namespace Capco\AppBundle\GraphQL\Type;
 
-class EmailType
+use GraphQL\Error\Error;
+use GraphQL\Type\Definition\ScalarType;
+use GraphQL\Utils\Utils;
+use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
+
+class EmailType extends ScalarType implements AliasedInterface
 {
-    public static function serialize(string $value): string
+    public $name = 'Email';
+
+    public function serialize($value): string
     {
-        return $value;
+        if (!is_scalar($value)) {
+            throw new Error('Email cannot represent non scalar value: ' . Utils::printSafe($value));
+        }
+
+        return self::coerceEmail($value);
     }
 
-    public static function parseValue(string $value): string
+    public function parseValue($value): string
     {
-        return $value;
+        return self::coerceEmail($value);
     }
 
-    public static function parseLiteral($valueNode)
+    public function parseLiteral($valueNode, ?array $variables = null)
     {
-        // : string | array
-        return $valueNode->value;
+        if (false !== filter_var($valueNode->value, \FILTER_VALIDATE_EMAIL)) {
+            return $valueNode->value;
+        }
+
+        throw new \Exception();
+    }
+
+    public static function getAliases(): array
+    {
+        return ['Email'];
+    }
+
+    private static function coerceEmail($value): string
+    {
+        // to trigger EMAIL_BLANK in mutation
+        if (!$value) {
+            return '';
+        }
+        if (false === filter_var($value, \FILTER_VALIDATE_EMAIL)) {
+            throw new Error('Value : ' . Utils::printSafe($value) . ' is not valid');
+        }
+
+        if (\is_array($value)) {
+            throw new Error('Email cannot represent an array value: ' . Utils::printSafe($value));
+        }
+
+        return (string) $value;
     }
 }

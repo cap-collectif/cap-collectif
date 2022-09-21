@@ -114,6 +114,18 @@ class Organization implements
         return null;
     }
 
+    public function getUsersMember(): Collection
+    {
+        return $this->members->map(
+            fn(OrganizationMember $organizationMember) => $organizationMember->getUser()
+        );
+    }
+
+    public function isUserAlreadyMember(User $user): bool
+    {
+        return $this->getUsersMember()->contains($user);
+    }
+
     public function setMembers(Collection $members): self
     {
         $this->members = $members;

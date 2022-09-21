@@ -7,6 +7,8 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use EmailChecker\Exception\InvalidEmailException;
+use GraphQL\Utils\Utils;
 
 /**
  * @ORM\Table(name="pending_organization_invitation",
@@ -127,5 +129,30 @@ class PendingOrganizationInvitation
         $this->creator = $creator;
 
         return $this;
+    }
+
+    public static function create(
+        Organization $organization,
+        string $role,
+        string $token,
+        User $creator
+    ): self {
+        return (new self())
+            ->setOrganization($organization)
+            ->setRole($role)
+            ->setToken($token)
+            ->setCreatedAt(new \DateTime())
+            ->setCreator($creator);
+    }
+
+    public static function makeInvitation(
+        Organization $organization,
+        string $role,
+        string $token,
+        User $creator,
+        ?User $user,
+        ?string $email
+    ): PendingOrganizationInvitation {
+        return static::create($organization, $role, $token, $creator)->setUser($user)->setEmail($email);
     }
 }

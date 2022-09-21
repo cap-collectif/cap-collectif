@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\Repository\Organization;
 
 use Capco\AppBundle\Entity\Organization\Organization;
-use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
 
 /**
  * @method PendingOrganizationInvitation|null find($id, $lockMode = null, $lockVersion = null)
@@ -38,5 +38,16 @@ class PendingOrganizationInvitationRepository extends EntityRepository
             ->setParameter('organization', $organization)
             ->getQuery()
             ->getSingleScalarResult() ?? 0;
+    }
+
+    public function findOneByEmailOrUserAndOrganization(Organization $organization, ?User $user = null, ?string $email = null): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.organization = :organization')
+            ->andWhere('p.user = :user')
+            ->orWhere('p.email = :email')
+            ->setParameters([ 'organization' => $organization, 'user' => $user, 'email' => $email])
+            ->getQuery()
+            ->getResult();
     }
 }

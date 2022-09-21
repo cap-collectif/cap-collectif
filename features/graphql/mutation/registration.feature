@@ -76,7 +76,7 @@ Scenario: GraphQL client wants to register but registration is not enabled
   {"data":{"register":{"errorsCode":["REGISTER_FEATURE_NOT_ENABLED"]}}}
   """
 
-@database 
+@database
 Scenario: GraphQL client wants to register without email
   Given feature "registration" is enabled
   And I send a GraphQL POST request:
