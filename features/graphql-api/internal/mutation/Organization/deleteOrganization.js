@@ -38,7 +38,7 @@ const DeleteOrganization = /* GraphQL*/ `
 `;
 
 const input = {
-  "organizationId": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE=",
+  "organizationId": global.toGlobalId('Organization', 'organization1'),
 }
 
 describe('mutations.updateOrganization', () => {

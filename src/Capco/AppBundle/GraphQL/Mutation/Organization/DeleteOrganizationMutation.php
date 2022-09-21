@@ -25,14 +25,12 @@ class DeleteOrganizationMutation implements MutationInterface
     public function __invoke(Arg $input, User $viewer): array
     {
         $organizationId = $input->offsetGet('organizationId');
-
         $organization = $this->globalIdResolver->resolve($organizationId, $viewer);
         if (!$organization instanceof Organization) {
             return ['errorCode' => self::ORGANIZATION_NOT_FOUND];
         }
 
         $organization->remove();
-
         $this->em->flush();
 
         return ['deletedOrganization' => $organization];
