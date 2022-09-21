@@ -134,6 +134,10 @@ InternalProposal:
                         type: 'Boolean'
                         description: '(ROLE_SUPER_ADMIN only) Select also not accounted votes.'
                         defaultValue: false
+                    includeSecretBallot:
+                        type: 'Boolean'
+                        description: '(ROLE_SUPER_ADMIN only) Select also secret votes.'
+                        defaultValue: false
             paperVotesTotalCount:
                 description: 'Count of paper votes of the proposal.'
                 type: 'Int!'

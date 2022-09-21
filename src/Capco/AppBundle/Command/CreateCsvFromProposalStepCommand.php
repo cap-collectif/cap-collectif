@@ -785,7 +785,6 @@ EOF;
         array $entity,
         array $proposal
     ): void {
-
         $row = [$type];
         foreach ($this->headersMap as $columnName => $path) {
             if (isset($this->proposalHeaderMap[$columnName])) {
@@ -823,7 +822,8 @@ EOF;
 
     protected function addProposalVotesRow(array $vote, array $proposal): void
     {
-        $type = $vote['__typename'] === 'ProposalUserVote' ? 'proposalVote' : 'proposalAnonymousVote';
+        $type =
+            'ProposalUserVote' === $vote['__typename'] ? 'proposalVote' : 'proposalAnonymousVote';
         $this->addDataBlock($type, 'vote', $vote, $proposal);
     }
 
@@ -1238,7 +1238,7 @@ ${AUTHOR_INFOS_FRAGMENT}
 {
   node(id: "${proposalId}") {
     ... on Proposal {
-      votes(includeUnpublished: true, includeNotAccounted: true, stepId: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter}) {
+      votes(includeUnpublished: true, includeNotAccounted: true, stepId: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter},                     includeSecretBallot: true) {
         totalCount
         totalPointsCount
         pageInfo {

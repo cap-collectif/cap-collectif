@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
-use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
@@ -34,11 +34,16 @@ class ProposalVotesResolver implements ResolverInterface
         $includeUnpublished =
             true === $args->offsetGet('includeUnpublished') ||
             ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
-
+        $includeSecretBallot =
+            true === $args->offsetGet('includeSecretBallot') ||
+            ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
+        $step = null;
         if ($args->offsetExists('stepId') && $args->offsetGet('stepId')) {
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $viewer, $context);
+        }
 
-            if ($step && !$step->canResolverDisplayBallot($viewer)) {
+        if ($step instanceof AbstractStep) {
+            if (!$this->resolveSecretBallot($step, $viewer, $includeSecretBallot)) {
                 return ConnectionBuilder::empty(['totalPointsCount' => 0]);
             }
 
@@ -50,5 +55,13 @@ class ProposalVotesResolver implements ResolverInterface
         return $this->proposalVotesDataLoader->load(
             compact('proposal', 'args', 'includeUnpublished', 'includeNotAccounted')
         );
+    }
+
+    private function resolveSecretBallot(
+        AbstractStep $step,
+        $viewer,
+        bool $includeSecretBallot = false
+    ): bool {
+        return $includeSecretBallot || $step->canResolverDisplayBallot($viewer);
     }
 }

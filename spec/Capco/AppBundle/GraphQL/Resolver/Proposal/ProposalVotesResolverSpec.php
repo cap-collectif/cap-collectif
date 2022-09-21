@@ -40,6 +40,7 @@ class ProposalVotesResolverSpec extends ObjectBehavior
         $context->offsetGet('disable_acl')->willReturn(false);
         $args->offsetExists('stepId')->willReturn(true);
         $args->offsetGet('stepId')->willReturn('stepWithSecretBallot');
+        $args->offsetGet('includeSecretBallot')->willReturn(false);
 
         $step->canResolverDisplayBallot($viewer)->willReturn(false);
         $globalIdResolver->resolve('stepWithSecretBallot', $viewer, $context)->willReturn($step);

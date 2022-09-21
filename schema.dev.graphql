@@ -10011,6 +10011,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
     """(ROLE_SUPER_ADMIN only) Select also not accounted votes."""
     includeNotAccounted: Boolean = false
+
+    """(ROLE_SUPER_ADMIN only) Select also secret votes."""
+    includeSecretBallot: Boolean = false
   ): ProposalVoteConnection!
 
   """List of selections (step an status) of the proposal."""
