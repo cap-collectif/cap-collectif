@@ -29,6 +29,8 @@ class GlobalSearch extends Search
         'proposalBody.std',
     ];
 
+    const FILTERED_OUT_TYPES = ['reply'];
+
     protected $transformer;
 
     public function __construct(Index $index, ElasticaToDoctrineTransformer $transformer)
@@ -57,7 +59,11 @@ class GlobalSearch extends Search
         $query->setFrom($from);
         $query->setSize($pagination);
 
-        if ('all' !== $type) {
+        if ('all' === $type) {
+            foreach (self::FILTERED_OUT_TYPES as $filteredOutType) {
+                $this->addObjectNotTypeFilter($query, $filteredOutType);
+            }
+        } else {
             $this->addObjectTypeFilter($query, $type);
         }
 

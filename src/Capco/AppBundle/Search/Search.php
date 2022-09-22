@@ -141,12 +141,6 @@ abstract class Search
      */
     protected function addObjectTypeFilter(Query $query, $type = null): void
     {
-        if (!$this->type && !$type) {
-            throw new \RuntimeException('Type is not specified!');
-        }
-
-        $filter = new Query\Term(['objectType' => $type ?? $this->type]);
-
         $bool = $query->getQuery();
 
         if (!($bool instanceof Query\BoolQuery)) {
@@ -154,7 +148,21 @@ abstract class Search
             $bool->addMust($query->getQuery());
         }
 
-        $bool->addFilter($filter);
+        $bool->addFilter($this->createObjectTypeFilter($type));
+        $query->setQuery($bool);
+    }
+
+    protected function addObjectNotTypeFilter(Query $query, $type = null): void
+    {
+        $bool = $query->getQuery();
+
+        if (!($bool instanceof Query\BoolQuery)) {
+            $bool = new Query\BoolQuery();
+            $bool->addMust($query->getQuery());
+        }
+
+        $bool->addMustNot($this->createObjectTypeFilter($type));
+
         $query->setQuery($bool);
     }
 
@@ -372,5 +380,17 @@ abstract class Search
         }
 
         return [$sortField => ['order' => $sortOrder]];
+    }
+
+    private function createObjectTypeFilter(?string $type = null): Query\Term
+    {
+        if (null === $type) {
+            $type = $this->type;
+            if (null === $type) {
+                throw new \RuntimeException('Type is not specified!');
+            }
+        }
+
+        return new Query\Term(['objectType' => $type]);
     }
 }
