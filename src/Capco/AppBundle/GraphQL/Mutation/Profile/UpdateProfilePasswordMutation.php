@@ -1,7 +1,8 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Mutation;
+namespace Capco\AppBundle\GraphQL\Mutation\Profile;
 
+use Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ChangePasswordFormType;
@@ -49,8 +50,9 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
 
             return [self::USER => $viewer, 'error' => 'fos_user.password.not_current'];
         }
-        $this->logger->debug(__METHOD__ . ' : ' . (string) $form->isValid());
+        $this->logger->debug(__METHOD__ . ' : ' . $viewer->getId());
         $viewer->setPlainPassword($arguments['new_password']);
+        $viewer->setUpdatedAt(new \DateTime());
         $this->userManager->updateUser($viewer);
         $this->publisher->publish(
             'user.password',
