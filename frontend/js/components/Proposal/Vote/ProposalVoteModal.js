@@ -127,7 +127,8 @@ const STEP_FRAGMENT = graphql`
     publishedVoteDate
     ...interpellationLabelHelper_step @relay(mask: false)
     ...ProposalsUserVotesTable_step @arguments(token: $token)
-    viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) @include(if: $isAuthenticated) {
+    viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token)
+      @include(if: $isAuthenticated) {
       ...ProposalsUserVotesTable_votes
       totalCount
     }
@@ -160,7 +161,7 @@ export const ProposalVoteModal = ({
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const pristine = isPristine(getFormName(step))(localState);
-  const token =  CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone();
+  const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone();
 
   const createTmpVote = React.useCallback(() => {
     commitLocalUpdate(environment, store => {
@@ -465,7 +466,7 @@ export const ProposalVoteModal = ({
             </Modal.Header>
           </ResetCss>
 
-          <Modal.Body minHeight="450px">
+          <Modal.Body>
             <Flex direction="column" align="flex-start" spacing={6}>
               <Tag variantColor="green">
                 <Tag.LeftIcon name={CapUIIcon.Check} />
