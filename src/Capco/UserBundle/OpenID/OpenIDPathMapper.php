@@ -10,6 +10,7 @@ use Capco\UserBundle\OpenID\Mapping\GrandLyonMapping;
 use Capco\UserBundle\OpenID\Mapping\MappingInterface;
 use Capco\UserBundle\OpenID\Mapping\NantesMapping;
 use Capco\UserBundle\OpenID\Mapping\OccitanieMapping;
+use Capco\UserBundle\OpenID\Mapping\ParisMapping;
 
 class OpenIDPathMapper
 {
@@ -49,6 +50,10 @@ class OpenIDPathMapper
                 break;
             case 'carpentras':
                 $this->instanceMapper = new CarpentrasMapping();
+
+                break;
+            case 'paris-dedicated':
+                $this->instanceMapper = new ParisMapping();
 
                 break;
             default:
