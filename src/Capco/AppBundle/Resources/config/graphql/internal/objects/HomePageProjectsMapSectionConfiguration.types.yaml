@@ -1,0 +1,22 @@
+HomePageProjectsMapSectionConfiguration:
+    type: object
+    config:
+        description: 'Section projects map page in admin'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: HomePageProjectsMapSectionConfiguration
+            title:
+                type: 'String'
+                description: 'The title of the section'
+            teaser:
+                type: 'String'
+                description: 'The subtitle of the section'
+            position:
+                type: 'Int!'
+                description: 'The position of the section in the homepage'
+            enabled:
+                type: 'Boolean!'
+                description: 'Whether it is published or not'

@@ -113,6 +113,15 @@ class SectionController extends PositionableController
                 ]
             );
         }
+        elseif ($existingObject->getType() === 'projectsMap') {
+            return $this->renderWithExtraParams(
+                'CapcoAdminBundle:Section:edit_projects_map.html.twig',
+                [
+                    'action' => 'edit',
+                    'object' => $existingObject,
+                ]
+            );
+        }
 
         $this->checkParentChildAssociation($request, $existingObject);
 
@@ -127,6 +136,7 @@ class SectionController extends PositionableController
         $objectId = $this->admin->getNormalizedIdentifier($existingObject);
 
         $form = $this->admin->getForm();
+        $form->getName();
 
         $form->setData($existingObject);
         $form->handleRequest($request);

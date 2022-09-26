@@ -131,3 +131,15 @@ Capco\AppBundle\Entity\SectionTranslation:
     title: Collect step highlight
     teaser: null
     body: null
+  SectionProjectsMapFr:
+    locale: fr-FR
+    translatable: '@SectionProjectsMap'
+    title: Carte des projets participatifs
+    teaser: null
+    body: null
+  SectionProjectsMapEn:
+    locale: en-GB
+    translatable: '@SectionProjectsMap'
+    title: Participatory projects map
+    teaser: null
+    body: null

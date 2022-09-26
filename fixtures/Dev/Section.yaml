@@ -99,3 +99,10 @@ Capco\AppBundle\Entity\Section:
     enabled: true
     associatedFeatures: []
     step: '@collectQuestionVoteAvecClassement'
+  SectionProjectsMap:
+    id: 'sectionProjectsMap'
+    type: projectsMap
+    position: 14
+    nbObjects: null
+    enabled: true
+    associatedFeatures: []

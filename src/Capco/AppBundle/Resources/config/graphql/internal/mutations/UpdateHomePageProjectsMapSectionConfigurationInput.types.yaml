@@ -1,0 +1,13 @@
+UpdateHomePageProjectsMapSectionConfigurationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateHomePageProjectsMapSectionConfiguration mutation'
+        fields:
+            position:
+                type: 'Int!'
+                description: 'The position of the section in the homepage'
+            enabled:
+                type: 'Boolean!'
+                description: 'Whether it is published or not'
+            translations:
+                type: '[InternalHomePageProjectsMapSectionConfigurationTranslationInput!]!'

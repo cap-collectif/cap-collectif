@@ -1312,6 +1312,14 @@ InternalMutation:
                     inputType: UpdateHomePageProjectsSectionConfigurationInput
                     payloadType: UpdateHomePageProjectsSectionConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsSectionConfigurationMutation", [value])'
+            updateHomePageProjectsMapSectionConfiguration:
+                description: 'Edit projects map section in admin'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateHomePageProjectsMapSectionConfigurationInput
+                    payloadType: UpdateHomePageProjectsMapSectionConfigurationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsMapSectionConfigurationMutation", [value])'
             register:
                 description: 'User registration'
                 access: "hasFeatureFlag('registration')"

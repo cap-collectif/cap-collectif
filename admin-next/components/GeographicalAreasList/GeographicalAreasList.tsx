@@ -128,7 +128,7 @@ const GeographicalAreasList = () => {
                                 <ButtonGroup>
                                     <ButtonQuickAction
                                         as="a"
-                                        href={`/geographicalArea?id=${area?.id}`}
+                                        href={`/admin-next/geographicalArea?id=${area?.id}`}
                                         variantColor="blue"
                                         icon={CapUIIcon.Pencil}
                                         label={intl.formatMessage({ id: 'global.edit' })}

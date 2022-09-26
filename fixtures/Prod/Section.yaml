@@ -68,3 +68,10 @@ Capco\AppBundle\Entity\Section:
         nbObjects: 3
         enabled: false
         associatedFeatures: []
+    SectionProjectsMap:
+        id: 'sectionProjectsMap'
+        type: projectsMap
+        position: 12
+        nbObjects: null
+        enabled: false
+        associatedFeatures: []

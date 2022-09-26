@@ -1,0 +1,22 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block actions %}
+
+{% endblock %}
+
+{% block form %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {{
+    react_render_component('HomePageProjectsMapSectionConfigurationApp', {
+        'rendering': 'client_side'
+    })
+    }}
+{% endblock %}
+
+{% block list_table %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

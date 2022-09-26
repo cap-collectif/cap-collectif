@@ -6683,6 +6683,36 @@ type GroupEdge {
 """A string containing HTML code."""
 scalar HTML
 
+"""Section projects map page in admin"""
+type HomePageProjectsMapSectionConfiguration {
+  """The ID of an object."""
+  id: ID!
+
+  """The title of the section"""
+  title: String
+
+  """The subtitle of the section"""
+  teaser: String
+
+  """The position of the section in the homepage"""
+  position: Int!
+
+  """Whether it is published or not"""
+  enabled: Boolean!
+}
+
+input HomePageProjectsMapSectionConfigurationTranslationInput {
+  """The title of the section"""
+  title: String!
+
+  """The subtitle of the section"""
+  teaser: String
+
+  """the locale of the translation"""
+  locale: TranslationLocale!
+  clientMutationId: String
+}
+
 """Section projects page in admin"""
 type HomePageProjectsSectionConfiguration {
   """The ID of an object."""
@@ -7814,6 +7844,9 @@ type Mutation {
 
   """Edit projects section in admin"""
   updateHomePageProjectsSectionConfiguration(input: UpdateHomePageProjectsSectionConfigurationInput!): UpdateHomePageProjectsSectionConfigurationPayload
+
+  """Edit projects map section in admin"""
+  updateHomePageProjectsMapSectionConfiguration(input: UpdateHomePageProjectsMapSectionConfigurationInput!): UpdateHomePageProjectsMapSectionConfigurationPayload
 
   """User registration"""
   register(input: RegisterInput!): RegisterPayload
@@ -12105,6 +12138,9 @@ type Query {
   """Get HomePageProjectsSectionConfiguration"""
   homePageProjectsSectionConfiguration: HomePageProjectsSectionConfiguration!
 
+  """Get HomePageProjectsMapSectionConfiguration"""
+  homePageProjectsMapSectionConfiguration: HomePageProjectsMapSectionConfiguration!
+
   """Return the platform analytics"""
   analytics(filter: QueryAnalyticsFilter!): PlatformAnalytics!
   isEmailAlreadyTaken(
@@ -16030,6 +16066,33 @@ input UpdateGroupInput {
 
 type UpdateGroupPayload {
   group: Group!
+  clientMutationId: String
+}
+
+"""
+Available errors for an `updateHomePageProjectsMapSectionConfiguration` mutation.
+"""
+enum UpdateHomePageProjectsMapSectionConfigurationErrorCode {
+  """The form is not valid"""
+  INVALID_FORM
+}
+
+input UpdateHomePageProjectsMapSectionConfigurationInput {
+  """The position of the section in the homepage"""
+  position: Int!
+
+  """Whether it is published or not"""
+  enabled: Boolean!
+  translations: [HomePageProjectsMapSectionConfigurationTranslationInput!]!
+  clientMutationId: String
+}
+
+type UpdateHomePageProjectsMapSectionConfigurationPayload {
+  """the updated homePageProjectsMapSectionConfiguration"""
+  homePageProjectsMapSectionConfiguration: HomePageProjectsMapSectionConfiguration
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: UpdateHomePageProjectsMapSectionConfigurationErrorCode
   clientMutationId: String
 }
 

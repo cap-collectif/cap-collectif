@@ -13,7 +13,7 @@ export const SectionContainer: StyledComponent<{}, {}, HTMLDivElement> = styled(
     font-weight: 400 !important;
   }
   input[type='number'] {
-    width: 55px;
+    width: 75px;
   }
   input[type='number']::-webkit-inner-spin-button,
   input[type='number']::-webkit-outer-spin-button {

@@ -88,6 +88,11 @@ export const handleTranslationChange = <T: BaseTranslation>(
   return [];
 };
 
+// from fr-FR to FR_FR
+export function formatLocaleToCode(locale: string): string {
+  return locale.replace('-', '_').toUpperCase();
+}
+
 const mapStateToProps = ({ language }: State) => ({
   defaultLanguage: language.currentLanguage,
 });
