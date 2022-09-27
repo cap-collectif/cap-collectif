@@ -44,11 +44,6 @@ class ProposalAnalysis implements Timestampable
      */
     private Collection $responses;
 
-    /**
-     * @ORM\Column(type="text", nullable=true, name="comment")
-     */
-    private ?string $comment = null;
-
     //TODO: Rename to analyst.
 
     /**
@@ -88,18 +83,6 @@ class ProposalAnalysis implements Timestampable
     public function setProposal(Proposal $proposal): self
     {
         $this->proposal = $proposal;
-
-        return $this;
-    }
-
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment = null): self
-    {
-        $this->comment = $comment;
 
         return $this;
     }

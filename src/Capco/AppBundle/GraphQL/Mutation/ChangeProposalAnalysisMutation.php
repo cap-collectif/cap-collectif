@@ -63,10 +63,9 @@ class ChangeProposalAnalysisMutation implements MutationInterface
     {
         $this->preventNullableViewer($viewer);
 
-        list($proposalId, $responses, $comment) = [
+        list($proposalId, $responses) = [
             $args->offsetGet('proposalId'),
             $args->offsetGet('responses'),
-            $args->offsetGet('comment'),
         ];
 
         $proposalId = GlobalId::fromGlobalId($proposalId)['id'];
@@ -114,7 +113,6 @@ class ChangeProposalAnalysisMutation implements MutationInterface
 
         $proposalAnalysis
             ->setUpdatedBy($viewer)
-            ->setComment($comment)
             ->setState(ProposalStatementState::IN_PROGRESS);
         $proposal->addAnalysis($proposalAnalysis);
 

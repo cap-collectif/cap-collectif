@@ -978,9 +978,6 @@ type ProposalAnalysis {
   """The estimated cost of the related proposal in €."""
   estimatedCost: Int
 
-  """The proposal's analysis comment."""
-  comment: String
-
   """The current state of the analysis."""
   state: ProposalAnalysisState!
 

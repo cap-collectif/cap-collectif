@@ -23,7 +23,6 @@ describe('<ProposalAnalysisFormPanel  /> ', () => {
           analyst: {
             id: 'userID345',
           },
-          comment: 'mwe',
           state: 'FAVOURABLE',
           responses: [],
         },

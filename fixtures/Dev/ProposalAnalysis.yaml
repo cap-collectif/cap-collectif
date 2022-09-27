@@ -27,7 +27,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: FAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:11'))>
         updatedAt: $createdAt
-        comment: "Tout est parfait, c'est merveilleux."
     proposalAnalysisIdf1Vinc:
         id: 'proposalAnalysis5'
         updatedBy: '@userVincent'
@@ -35,7 +34,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:12'))>
         updatedAt: $createdAt
-        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
     proposalAnalysisIdf1Jpec:
         id: 'proposalAnalysis6'
         updatedBy: '@userJpec'
@@ -43,7 +41,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:13'))>
         updatedAt: $createdAt
-        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
     proposalAnalysisIdf1Omar:
         id: 'proposalAnalysis7'
         updatedBy: '@userOmar'
@@ -51,7 +48,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: NONE
         createdAt: <(new \DateTime('2020-01-01 00:00:14'))>
         updatedAt: $createdAt
-        comment: "Tout est parfait, c'est merveilleux."
     proposalAnalysisIdf1Theo:
         id: 'proposalAnalysis8'
         updatedBy: '@userTheo'
@@ -59,7 +55,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: TOO_LATE
         createdAt: <(new \DateTime('2020-01-01 00:00:15'))>
         updatedAt: $createdAt
-        comment: null
     proposalAnalysisIdf2Theo:
         id: 'proposalAnalysis9'
         updatedBy: '@userTheo'
@@ -67,7 +62,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: TOO_LATE
         createdAt: <(new \DateTime('2020-01-01 00:00:16'))>
         updatedAt: $createdAt
-        comment: null
     proposalAnalysisIdf2Jpec:
         id: 'proposalAnalysis10'
         updatedBy: '@userJpec'
@@ -75,7 +69,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: FAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:17'))>
         updatedAt: $createdAt
-        comment: "Tout est parfait, c'est merveilleux."
     proposalAnalysisIdf3Theo:
         id: 'proposalAnalysis11'
         updatedBy: '@userTheo'
@@ -83,7 +76,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:18'))>
         updatedAt: $createdAt
-        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
     proposalAnalysisIdf3Maxime:
         id: 'proposalAnalysis12'
         updatedBy: '@userMaxime'
@@ -91,7 +83,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:19'))>
         updatedAt: $createdAt
-        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
     proposalAnalysisIdf3Mickael:
         id: 'proposalAnalysis13'
         updatedBy: '@userMickael'
@@ -99,7 +90,6 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:20'))>
         updatedAt: $createdAt
-        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
     proposalAnalysis3:
         id: 'proposalAnalysis14'
         updatedBy: '@userSupervisor'

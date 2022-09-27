@@ -21,9 +21,6 @@ PreviewProposalAnalysis:
             estimatedCost:
                 type: 'Int'
                 description: 'The estimated cost of the related proposal in €.'
-            comment:
-                type: 'String'
-                description: "The proposal's analysis comment."
             state:
                 type: 'ProposalAnalysisState!'
                 description: 'The current state of the analysis.'

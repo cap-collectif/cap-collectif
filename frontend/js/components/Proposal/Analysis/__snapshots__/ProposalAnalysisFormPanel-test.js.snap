@@ -41,19 +41,6 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly 1`] = `
     </ProposalAnalysisFormPanel__AnalysisForm>
     <ProposalAnalysisFormPanel__Validation>
       <Field
-        autoComplete="off"
-        component={[Function]}
-        id="proposalAnalysis-comment"
-        label={
-          <FormattedMessage
-            id="admin.fields.comment_vote.comment"
-            values={Object {}}
-          />
-        }
-        name="comment"
-        type="textarea"
-      />
-      <Field
         component={[Function]}
         id="status-FAVOURABLE"
         label={
@@ -149,7 +136,6 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
               "analyst": Object {
                 "id": "userID345",
               },
-              "comment": "mwe",
               "id": "a1id",
               "responses": Array [],
               "state": "FAVOURABLE",
@@ -197,19 +183,6 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
       />
     </ProposalAnalysisFormPanel__AnalysisForm>
     <ProposalAnalysisFormPanel__Validation>
-      <Field
-        autoComplete="off"
-        component={[Function]}
-        id="proposalAnalysis-comment"
-        label={
-          <FormattedMessage
-            id="admin.fields.comment_vote.comment"
-            values={Object {}}
-          />
-        }
-        name="comment"
-        type="textarea"
-      />
       <Field
         component={[Function]}
         id="status-FAVOURABLE"
@@ -291,7 +264,6 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
                 "analyst": Object {
                   "id": "userID345",
                 },
-                "comment": "mwe",
                 "id": "a1id",
                 "responses": Array [],
                 "state": "FAVOURABLE",

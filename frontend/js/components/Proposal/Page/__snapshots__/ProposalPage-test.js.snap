@@ -4440,13 +4440,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "comment",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
                         "name": "state",
                         "storageKey": null,
                       },
@@ -7726,7 +7719,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "5ffafcb5d599c8350c53a3db627c248d",
+        "cacheID": "546b9ef2af73a12dc6f9462a84066fd1",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -8074,7 +8067,6 @@ fragment ProposalAnalysisFormPanel_proposal_2uwUKI on Proposal {
     analyst {
       id
     }
-    comment
     state
     responses {
       __typename
@@ -9664,7 +9656,6 @@ fragment ProposalViewAnalysisPanel_proposal on Proposal {
     analyst {
       id
     }
-    comment
     state
     responses {
       __typename

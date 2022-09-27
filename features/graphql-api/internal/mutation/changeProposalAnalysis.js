@@ -7,7 +7,6 @@ const ChangeProposalAnalysisMutation = /* GraphQL*/ `
       errorCode
       analysis {
         id
-        comment
         analyst {
           id
         }
@@ -33,7 +32,6 @@ const AnalyseProposalAnalysisMutation = /* GraphQL */ `
       analysis {
         state
         id
-        comment
         responses {
           ... on MediaResponse {
             medias {
@@ -135,7 +133,6 @@ describe('mutations.changeProposalAnalysis', () => {
       {
         input: {
           proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTE=',
-          comment: 'Validons ensemble cette proposition !',
           responses: [
             {
               value: '{"labels":["premier choix"],"other": null}',
@@ -165,7 +162,6 @@ describe('mutations.changeProposalAnalysis', () => {
       {
         input: {
           proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTE=',
-          comment: 'La proposition remplie bien nos critères de séléction',
           decision: 'FAVOURABLE',
           responses: [
             {
@@ -216,7 +212,6 @@ describe('mutations.changeProposalAnalysis', () => {
       {
         input: {
           proposalId: 'UHJvcG9zYWw6cHJvcG9zYWxJZGY2',
-          comment: 'Je valide cette proposition',
           decision: 'FAVOURABLE',
           responses: responses,
         },
@@ -236,7 +231,6 @@ describe('mutations.changeProposalAnalysis', () => {
       {
         input: {
           proposalId: 'UHJvcG9zYWw6cHJvcG9zYWxJZGY2',
-          comment: 'aled',
           decision: 'FAVOURABLE',
           responses: [
             {

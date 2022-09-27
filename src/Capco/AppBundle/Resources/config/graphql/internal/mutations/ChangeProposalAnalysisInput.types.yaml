@@ -9,6 +9,3 @@ ChangeProposalAnalysisInput:
             responses:
                 type: '[ResponseInput!]!'
                 description: 'The responses from the evaluation form.'
-            comment:
-                type: 'String'
-                description: 'The comment related to the analysis.'

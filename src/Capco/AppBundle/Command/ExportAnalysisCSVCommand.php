@@ -55,7 +55,6 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         'proposal_analyst_id' => 'analyst.id',
         'proposal_analyst_username' => 'analyst.username',
         'proposal_analyst_email' => 'analyst.email',
-        'proposal_analyst_comment' => 'comment',
         'proposal_analyst_opinion' => 'state',
         'proposal_analyst_estimated_cost' => 'estimatedCost',
     ];
@@ -127,7 +126,6 @@ fragment proposalInfos on Proposal {
     analyst {
       ...userInfos
     }
-    comment
     state
     estimatedCost
     responses {

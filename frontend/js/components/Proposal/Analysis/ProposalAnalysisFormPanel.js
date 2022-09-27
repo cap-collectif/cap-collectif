@@ -92,7 +92,6 @@ type Decision = 'FAVOURABLE' | 'UNFAVOURABLE' | 'NONE';
 
 export type FormValues = {|
   responses: ResponsesInReduxForm,
-  comment: string,
   status: ?Decision,
   validate: boolean,
   goBack?: boolean,
@@ -111,7 +110,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       proposal?.form?.analysisConfiguration?.evaluationForm?.questions || [],
     ),
     proposalId: proposal.id,
-    comment: values.comment || '',
   };
   if (values.validate && values.status) {
     return AnalyseProposalAnalysisMutation.commit({
@@ -159,7 +157,7 @@ const validate = (values: FormValues, { proposal, intl }: Props) => {
     intl,
     false,
     availableQuestions,
-    true
+    true,
   );
 
   const errors = {};
@@ -207,15 +205,6 @@ export const ProposalAnalysisFormPanel = ({
           />
         </AnalysisForm>
         <Validation>
-          <Field
-            disabled={disabled}
-            name="comment"
-            component={component}
-            type="textarea"
-            id="proposalAnalysis-comment"
-            autoComplete="off"
-            label={<FormattedMessage id="admin.fields.comment_vote.comment" />}
-          />
           <Field
             onChange={() => setStatus('FAVOURABLE')}
             typeForm={TYPE_FORM.QUESTIONNAIRE}
@@ -307,7 +296,6 @@ const mapStateToProps = (state: GlobalState, { proposal, userId }: Props) => {
   return {
     initialValues: {
       responses: defaultResponses,
-      comment: analysis?.comment,
       status: analysis?.state,
       validate: analysis && analysis.state !== 'IN_PROGRESS',
     },
@@ -338,7 +326,6 @@ export default createFragmentContainer(container, {
         analyst {
           id
         }
-        comment
         state
         responses {
           ...responsesHelper_response @relay(mask: false)

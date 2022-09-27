@@ -13,18 +13,6 @@ exports[`<ProposalViewAnalysisPanel  />  renders correctly 1`] = `
       text="global.favorable"
     />
   </ProposalViewAnalysisPanel__ResponsesView>
-  <ProposalViewAnalysisPanel__CommentView
-    tooLate={false}
-  >
-    <FormattedMessage
-      id="global.comment"
-      tagName="p"
-      values={Object {}}
-    />
-    <span>
-      mwe
-    </span>
-  </ProposalViewAnalysisPanel__CommentView>
 </Fragment>
 `;
 
@@ -41,17 +29,5 @@ exports[`<ProposalViewAnalysisPanel  />  renders correctly with ValueResponse an
       text="global.favorable"
     />
   </ProposalViewAnalysisPanel__ResponsesView>
-  <ProposalViewAnalysisPanel__CommentView
-    tooLate={false}
-  >
-    <FormattedMessage
-      id="global.comment"
-      tagName="p"
-      values={Object {}}
-    />
-    <span>
-      mwe
-    </span>
-  </ProposalViewAnalysisPanel__CommentView>
 </Fragment>
 `;

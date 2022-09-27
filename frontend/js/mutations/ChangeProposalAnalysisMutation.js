@@ -23,7 +23,6 @@ const mutation = graphql`
           }
         }
         id
-        comment
         state
         responses {
           ...responsesHelper_response @relay(mask: false)

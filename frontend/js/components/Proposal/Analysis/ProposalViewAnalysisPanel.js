@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import type { ProposalViewAnalysisPanel_proposal } from '~relay/ProposalViewAnalysisPanel_proposal.graphql';
 import colors from '~/utils/colors';
@@ -67,10 +66,6 @@ export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
             <ProposalResponse key={index} response={response} />
           ))}
       </ResponsesView>
-      <CommentView tooLate={state === 'TOO_LATE'}>
-        <FormattedMessage tagName="p" id="global.comment" />
-        <span>{analysis.comment}</span>
-      </CommentView>
     </>
   );
 };
@@ -84,7 +79,6 @@ export default createFragmentContainer(ProposalViewAnalysisPanel, {
         analyst {
           id
         }
-        comment
         state
         responses {
           __typename

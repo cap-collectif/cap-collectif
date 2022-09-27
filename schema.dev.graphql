@@ -846,9 +846,6 @@ input AnalyseProposalAnalysisInput {
 
   """The responses from the evaluation form."""
   responses: [ResponseInput!]!
-
-  """The comment related to the analysis."""
-  comment: String!
   clientMutationId: String
 
   """The analysis decision taken about the proposal"""
@@ -1775,9 +1772,6 @@ input ChangeProposalAnalysisInput {
 
   """The responses from the evaluation form."""
   responses: [ResponseInput!]!
-
-  """The comment related to the analysis."""
-  comment: String
   clientMutationId: String
 }
 
@@ -10356,9 +10350,6 @@ type ProposalAnalysis {
 
   """The estimated cost of the related proposal in €."""
   estimatedCost: Int
-
-  """The proposal's analysis comment."""
-  comment: String
 
   """The current state of the analysis."""
   state: ProposalAnalysisState!
