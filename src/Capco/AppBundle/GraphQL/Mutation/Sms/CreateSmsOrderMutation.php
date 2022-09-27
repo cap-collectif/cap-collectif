@@ -3,30 +3,33 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\SmsOrder;
-use Capco\AppBundle\Notifier\SmsNotifier;
 use Capco\AppBundle\Repository\SmsOrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class CreateSmsOrderMutation implements MutationInterface
 {
     private EntityManagerInterface $em;
-    private SmsNotifier $notifier;
     private SmsOrderRepository $smsOrderRepository;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
-        SmsNotifier $notifier,
-        SmsOrderRepository $smsOrderRepository
+        SmsOrderRepository $smsOrderRepository,
+        Publisher $publisher
     ) {
         $this->em = $em;
-        $this->notifier = $notifier;
         $this->smsOrderRepository = $smsOrderRepository;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input): array
     {
+        $smsOrdersCount = $this->smsOrderRepository->countAll();
+
         $amount = $input->offsetGet('amount');
         $smsOrder = new SmsOrder();
         $smsOrder->setAmount($amount);
@@ -34,13 +37,16 @@ class CreateSmsOrderMutation implements MutationInterface
         $this->em->persist($smsOrder);
         $this->em->flush();
 
-        $smsOrdersCount = $this->smsOrderRepository->countAll();
+        $messageType = $smsOrdersCount > 0 ? 'sms_credit.refill_order' : 'sms_credit.initial_order';
 
-        if ($smsOrdersCount > 0) {
-            $this->notifier->onRefillSmsOrder($smsOrder);
-        } else {
-            $this->notifier->onCreateSmsOrder($smsOrder);
-        }
+        $this->publisher->publish(
+            $messageType,
+            new Message(
+                json_encode([
+                    'smsOrderId' => $smsOrder->getId(),
+                ])
+            )
+        );
 
         return ['smsOrder' => $smsOrder];
     }

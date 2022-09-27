@@ -10,6 +10,7 @@ use Capco\AppBundle\GraphQL\Mutation\Sms\AddSmsCreditMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\TwilioClient;
 use Capco\AppBundle\Notifier\SmsNotifier;
+use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Capco\AppBundle\Repository\SmsCreditRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
@@ -18,6 +19,8 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -29,24 +32,26 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
 
     public function let(
         EntityManagerInterface $em,
-        SmsNotifier            $notifier,
         SmsCreditRepository    $smsCreditRepository,
         GlobalIdResolver       $globalIdResolver,
         FormFactoryInterface   $formFactory,
         TwilioClient           $twilioClient,
         SiteParameterResolver  $siteParameterResolver,
-        LoggerInterface        $logger
+        LoggerInterface        $logger,
+        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
+        Publisher              $publisher
     )
     {
         $this->beConstructedWith(
             $em,
-            $notifier,
             $smsCreditRepository,
             $globalIdResolver,
             $formFactory,
             $twilioClient,
             $siteParameterResolver,
-            $logger
+            $logger,
+            $externalServiceConfigurationRepository,
+            $publisher
         );
     }
 
@@ -59,7 +64,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         Arg                    $input,
         EntityManagerInterface $em,
         SmsCreditRepository    $smsCreditRepository,
-        SmsNotifier            $notifier,
+        Publisher              $publisher,
         User                   $viewer,
         GlobalIdResolver       $globalIdResolver,
         SmsOrder               $smsOrder,
@@ -67,7 +72,8 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         FormInterface          $form,
         TwilioClient           $twilioClient,
         SiteParameterResolver  $siteParameterResolver,
-        AccountInstance        $subAccount
+        AccountInstance        $subAccount,
+        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository
     )
     {
         $smsOrderId = 'smsOrderId';
@@ -91,6 +97,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $em->flush()->shouldBeCalledOnce();
 
         $smsCreditRepository->countAll()->shouldBeCalledOnce()->willReturn(0);
+        $externalServiceConfigurationRepository->findTwilioConfig()->willReturn([]);
 
         $organizationName = 'organizationName';
         $siteParameterResolver->getValue('global.site.organization_name')->shouldBeCalledTimes(2)->willReturn($organizationName);
@@ -112,7 +119,10 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $em->persist(Argument::type(ExternalServiceConfiguration::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
         
-        $notifier->onInitialSmsCredit($smsCredit)->shouldBeCalledOnce();
+        $publisher->publish(
+            'sms_credit.initial_credit',
+            Argument::type(Message::class)
+        )->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(1);
@@ -123,7 +133,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         Arg                    $input,
         EntityManagerInterface $em,
         SmsCreditRepository    $smsCreditRepository,
-        SmsNotifier            $notifier,
+        Publisher              $publisher,
         User                   $viewer,
         GlobalIdResolver       $globalIdResolver,
         SmsOrder               $smsOrder,
@@ -152,7 +162,12 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $em->flush()->shouldBeCalledOnce();
 
         $smsCreditRepository->countAll()->shouldBeCalledOnce()->willReturn(1);
-        $notifier->onRefillSmsCredit($smsCredit)->shouldBeCalledOnce();
+
+
+        $publisher->publish(
+            'sms_credit.refill_credit',
+            Argument::type(Message::class)
+        )->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(1);

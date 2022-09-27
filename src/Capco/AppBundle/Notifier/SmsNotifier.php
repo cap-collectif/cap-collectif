@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\SmsCredit;
 use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\GraphQL\Resolver\Argument\ArgumentUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Sms\AlertSmsConsumedCreditMessage;
 use Capco\AppBundle\Mailer\Message\Sms\CreateSmsOrderMessage;
@@ -24,7 +23,6 @@ class SmsNotifier extends BaseNotifier
     private const BUSINESS_TEAM_EMAIL = 'developpement@cap-collectif.com';
     protected ArgumentUrlResolver $argumentUrlResolver;
     protected TranslatorInterface $translator;
-    protected UserUrlResolver $userUrlResolver;
     private RequestContext $context;
     private UserRepository $userRepository;
 
@@ -55,7 +53,7 @@ class SmsNotifier extends BaseNotifier
                 'platformName' => $this->siteParams->getValue('global.site.fullname'),
             ],
             null,
-            'developpement@cap-collectif.com'
+            self::BUSINESS_TEAM_EMAIL
         );
     }
 
@@ -93,7 +91,7 @@ class SmsNotifier extends BaseNotifier
                 'platformName' => $this->siteParams->getValue('global.site.fullname'),
             ],
             null,
-            'developpement@cap-collectif.com'
+            self::BUSINESS_TEAM_EMAIL
         );
     }
 

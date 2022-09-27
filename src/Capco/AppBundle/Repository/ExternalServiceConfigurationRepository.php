@@ -13,4 +13,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class ExternalServiceConfigurationRepository extends EntityRepository
 {
+
+    public function findTwilioConfig(): array
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->where("e.type LIKE '%twilio%'");
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

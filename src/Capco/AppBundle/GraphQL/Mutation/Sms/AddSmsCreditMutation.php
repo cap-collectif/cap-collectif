@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\SmsCreditType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\TwilioClient;
 use Capco\AppBundle\Notifier\SmsNotifier;
+use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Capco\AppBundle\Repository\SmsCreditRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
@@ -16,42 +17,48 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Twilio\Exceptions\TwilioException;
 
 class AddSmsCreditMutation implements MutationInterface
 {
+    private const VERIFY_SERVICE_NAME_MAX_LENGTH = 30;
     public const ORDER_ALREADY_PROCESSED = 'ORDER_ALREADY_PROCESSED';
     public const SMS_ORDER_NOT_FOUND = 'SMS_ORDER_NOT_FOUND';
     public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
 
     private EntityManagerInterface $em;
-    private SmsNotifier $notifier;
     private SmsCreditRepository $smsCreditRepository;
     private GlobalIdResolver $globalIdResolver;
     private FormFactoryInterface $formFactory;
     private TwilioClient $twilioClient;
     private SiteParameterResolver $siteParameterResolver;
     private LoggerInterface $logger;
+    private ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
-        SmsNotifier $notifier,
         SmsCreditRepository $smsCreditRepository,
         GlobalIdResolver $globalIdResolver,
         FormFactoryInterface $formFactory,
         TwilioClient $twilioClient,
         SiteParameterResolver $siteParameterResolver,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
+        Publisher $publisher
     ) {
         $this->em = $em;
-        $this->notifier = $notifier;
         $this->smsCreditRepository = $smsCreditRepository;
         $this->globalIdResolver = $globalIdResolver;
         $this->formFactory = $formFactory;
         $this->twilioClient = $twilioClient;
         $this->siteParameterResolver = $siteParameterResolver;
         $this->logger = $logger;
+        $this->externalServiceConfigurationRepository = $externalServiceConfigurationRepository;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -82,21 +89,40 @@ class AddSmsCreditMutation implements MutationInterface
 
         $smsCreditsCount = $this->smsCreditRepository->countAll();
 
+        $smsOrder->setIsProcessed(true);
+        $this->em->persist($smsOrder);
+        $this->em->persist($smsCredit);
+        $this->em->flush();
+
         if ($smsCreditsCount > 0) {
-            $this->notifier->onRefillSmsCredit($smsCredit);
-        } else {
+            $this->publisher->publish(
+                'sms_credit.refill_credit',
+                new Message(
+                    json_encode([
+                        'smsCreditId' => $smsCredit->getId(),
+                    ])
+                )
+            );
+            
+            return ['smsCredit' => $smsCredit];
+        } 
+        $twilioConfig = $this->externalServiceConfigurationRepository->findTwilioConfig();
+        if (!$twilioConfig) {
             $subAccountErrorCode = $this->createTwilioSubAccount();
             $verifyServiceErrorCode = $this->createTwilioVerifyServiceName();
             if ($subAccountErrorCode || $verifyServiceErrorCode) {
                 return ['errorCode' => self::TWILIO_API_ERROR];
             }
-            $this->notifier->onInitialSmsCredit($smsCredit);
-        }
-
-        $smsOrder->setIsProcessed(true);
-        $this->em->persist($smsOrder);
-        $this->em->persist($smsCredit);
-        $this->em->flush();
+         }
+         $this->publisher->publish(
+             'sms_credit.initial_credit',
+              new Message(
+                  json_encode([
+                      'smsCreditId' => $smsCredit->getId(),
+                   ])
+                )
+          );
+        
 
         return ['smsCredit' => $smsCredit];
     }
@@ -119,10 +145,15 @@ class AddSmsCreditMutation implements MutationInterface
     private function createTwilioVerifyServiceName(): ?string
     {
         $organizationName = $this->siteParameterResolver->getValue('global.site.organization_name');
+        $organizationName = substr($organizationName, 0, self::VERIFY_SERVICE_NAME_MAX_LENGTH);
+
         $response = $this->twilioClient->createVerifyService($organizationName);
         $statusCode = $response['statusCode'];
 
-        if ($statusCode !== 201) return self::TWILIO_API_ERROR;
+        if ($statusCode !== 201) {
+            $this->logger->error(__METHOD__ . ' : ' . $response['data']['message']);
+            return self::TWILIO_API_ERROR;
+        }
 
         $service = $response['data'];
         $this->persistExternalServiceConfiguration(

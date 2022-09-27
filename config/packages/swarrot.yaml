@@ -133,6 +133,21 @@ swarrot:
         project_district.notification:
             exchange: capco_direct_exchange
             routing_key: project_district_notification
+        sms_credit.initial_credit:
+            exchange: capco_direct_exchange
+            routing_key: sms_credit_initial_credit
+        sms_credit.refill_credit:
+            exchange: capco_direct_exchange
+            routing_key: sms_credit_refill_credit
+        sms_credit.initial_order:
+            exchange: capco_direct_exchange
+            routing_key: sms_credit_initial_order
+        sms_credit.refill_order:
+            exchange: capco_direct_exchange
+            routing_key: sms_credit_refill_order
+        sms_credit.alert_consumed_credit:
+            exchange: capco_direct_exchange
+            routing_key: sms_credit_alert_consumed_credit
     consumers:
         elasticsearch_indexation:
             processor: Capco\AppBundle\Elasticsearch\IndexationProcessor
@@ -831,3 +846,93 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'project_district_%%attempt%%'
+
+        sms_credit_initial_credit:
+            processor: Capco\AppBundle\Processor\Sms\SmsCreditInitialCreditProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'sms_credit_initial_credit_%%attempt%%'
+
+        sms_credit_refill_credit:
+            processor: Capco\AppBundle\Processor\Sms\SmsCreditRefillCreditProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'sms_credit_refill_credit_%%attempt%%'
+
+        sms_credit_initial_order:
+            processor: Capco\AppBundle\Processor\Sms\SmsCreditInitialOrderProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'sms_credit_initial_order_%%attempt%%'
+
+        sms_credit_refill_order:
+            processor: Capco\AppBundle\Processor\Sms\SmsCreditRefillOrderProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'sms_credit_refill_order_%%attempt%%'
+
+        sms_credit_alert_consumed_credit:
+            processor: Capco\AppBundle\Processor\Sms\SmsCreditAlertConsumedCreditProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'sms_credit_alert_consumed_credit_%%attempt%%'

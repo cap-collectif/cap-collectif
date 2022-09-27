@@ -254,3 +254,33 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: project_district_notification
+        sms_credit_initial_credit:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: sms_credit_initial_credit
+        sms_credit_refill_credit:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: sms_credit_refill_credit
+        sms_credit_initial_order:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: sms_credit_initial_order
+        sms_credit_refill_order:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: sms_credit_refill_order
+        sms_credit_alert_consumed_credit:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: sms_credit_alert_consumed_credit

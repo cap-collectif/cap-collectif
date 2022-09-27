@@ -4,20 +4,22 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\GraphQL\Mutation\Sms\CreateSmsOrderMutation;
-use Capco\AppBundle\Notifier\SmsNotifier;
 use Capco\AppBundle\Repository\SmsOrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
+use Prophecy\Argument;
 
 class CreateSmsOrderMutationSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $em,
-        SmsNotifier $notifier,
-        SmsOrderRepository $smsOrderRepository
+        SmsOrderRepository $smsOrderRepository,
+        Publisher $publisher
     ) {
-        $this->beConstructedWith($em, $notifier, $smsOrderRepository);
+        $this->beConstructedWith($em, $smsOrderRepository, $publisher);
     }
 
     public function it_is_initializable()
@@ -29,7 +31,7 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
         Arg $input,
         EntityManagerInterface $em,
         SmsOrderRepository $smsOrderRepository,
-        SmsNotifier $notifier
+        Publisher $publisher
     ) {
         $amount = '1000';
         $input
@@ -47,7 +49,11 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
             ->countAll()
             ->shouldBeCalledOnce()
             ->willReturn(0);
-        $notifier->onCreateSmsOrder($smsOrder)->shouldBeCalledOnce();
+
+        $publisher->publish(
+            'sms_credit.initial_order',
+            Argument::type(Message::class)
+        )->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input);
         $payload->shouldHaveCount(1);
@@ -58,7 +64,7 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
         Arg $input,
         EntityManagerInterface $em,
         SmsOrderRepository $smsOrderRepository,
-        SmsNotifier $notifier
+        Publisher $publisher
     ) {
         $amount = '1000';
         $input
@@ -76,7 +82,11 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
             ->countAll()
             ->shouldBeCalledOnce()
             ->willReturn(1);
-        $notifier->onRefillSmsOrder($smsOrder)->shouldBeCalledOnce();
+
+        $publisher->publish(
+            'sms_credit.refill_order',
+            Argument::type(Message::class)
+        )->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input);
         $payload->shouldHaveCount(1);
