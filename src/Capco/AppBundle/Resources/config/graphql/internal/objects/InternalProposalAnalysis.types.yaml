@@ -12,3 +12,8 @@ InternalProposalAnalysis:
                 type: 'InternalUser!'
             responses:
                 type: '[InternalResponse!]!'
+            comments:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalAnalysisCommentsResolver", [value, args])'
+                type: 'CommentConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'Get all comments of the analysis.'

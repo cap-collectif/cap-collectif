@@ -131,6 +131,12 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: comment_delete
+        proposal_analysis_comment_create:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_analysis_comment_create
         user_archive_request:
             durable: true
             retries: [25, 125, 625]

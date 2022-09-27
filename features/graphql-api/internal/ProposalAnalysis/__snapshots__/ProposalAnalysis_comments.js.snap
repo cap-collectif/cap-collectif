@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProposalAnalysis.comments should fetch analysis comments 1`] = `
+Object {
+  "node": Object {
+    "analyses": Array [
+      Object {
+        "analyst": Object {
+          "username": "analyst",
+        },
+        "comments": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "author": Object {
+                  "username": "supervisor",
+                },
+                "body": "Commentaire",
+                "id": "Q29tbWVudDpwcm9wb3NhbEFuYWx5c2lzQ29tbWVudDE=",
+              },
+            },
+          ],
+        },
+        "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzMQ==",
+        "state": "IN_PROGRESS",
+      },
+      Object {
+        "analyst": Object {
+          "username": "analyst2",
+        },
+        "comments": Object {
+          "edges": Array [],
+        },
+        "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzMg==",
+        "state": "IN_PROGRESS",
+      },
+    ],
+  },
+}
+`;

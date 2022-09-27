@@ -149,4 +149,17 @@ class ProposalAnalysis implements Timestampable
     {
         return true;
     }
+
+    public function getConcernedUsers(): ArrayCollection
+    {
+        $proposal = $this->getProposal();
+        $supervisor = $proposal->getSupervisor();
+        $decisionMaker = $proposal->getDecisionMaker();
+
+        $users = new ArrayCollection([$supervisor, $decisionMaker, $this->updatedBy]);
+
+        return $users->filter(function ($user) {
+            return null !== $user;
+        });
+    }
 }

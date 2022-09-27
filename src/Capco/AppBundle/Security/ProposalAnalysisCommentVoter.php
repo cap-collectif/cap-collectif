@@ -46,22 +46,9 @@ class ProposalAnalysisCommentVoter extends Voter
 
     private function canCreate(ProposalAnalysisComment $proposalAnalysisComment, User $viewer): bool
     {
-        $proposal = $proposalAnalysisComment->getProposalAnalysis()->getProposal();
+        $proposalAnalysis = $proposalAnalysisComment->getProposalAnalysis();
+        $concernedUsers = $proposalAnalysis->getConcernedUsers()->toArray();
 
-        $analysts = $proposal->getAnalysts();
-        foreach ($analysts as $analyst) {
-            if ($analyst === $viewer) {
-                return true;
-            }
-        }
-        if ($proposal->getSupervisor() === $viewer) {
-            return true;
-        }
-
-        if ($proposal->getDecisionMaker() === $viewer) {
-            return true;
-        }
-
-        return false;
+        return in_array($viewer, $concernedUsers);
     }
 }

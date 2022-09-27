@@ -10365,6 +10365,17 @@ type ProposalAnalysis {
 
   """The analysis responses."""
   responses: [Response!]!
+
+  """Get all comments of the analysis."""
+  comments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): CommentConnection!
 }
 
 """Available decisions value for a proposal analysis."""

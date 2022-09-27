@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateProposalAnalysisComments.createAnalysisComment analyst should be able to comment an analysis. 1`] = `
+exports[`CreateProposalAnalysisComments.createAnalysisComment assigned analyst should be able to comment an analysis. 1`] = `
 Object {
   "createProposalAnalysisComment": Object {
     "comment": Object {
@@ -13,7 +13,7 @@ Object {
 }
 `;
 
-exports[`CreateProposalAnalysisComments.createAnalysisComment decision maker should be able to comment an analysis. 1`] = `
+exports[`CreateProposalAnalysisComments.createAnalysisComment assigned decision maker should be able to comment an analysis. 1`] = `
 Object {
   "createProposalAnalysisComment": Object {
     "comment": Object {
@@ -26,7 +26,7 @@ Object {
 }
 `;
 
-exports[`CreateProposalAnalysisComments.createAnalysisComment supervisor should be able to comment an analysis. 1`] = `
+exports[`CreateProposalAnalysisComments.createAnalysisComment assigned supervisor should be able to comment an analysis. 1`] = `
 Object {
   "createProposalAnalysisComment": Object {
     "comment": Object {

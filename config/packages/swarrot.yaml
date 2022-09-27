@@ -73,6 +73,9 @@ swarrot:
         comment.delete:
             exchange: capco_direct_exchange
             routing_key: comment_delete
+        comment.proposal_analysis_create:
+            exchange: capco_direct_exchange
+            routing_key: proposal_analysis_comment_create
         user_archive.request:
             exchange: capco_direct_exchange
             routing_key: user_archive_request
@@ -487,6 +490,23 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'comment_delete_retry_%%attempt%%'
+        proposal_analysis_comment_create:
+            processor: Capco\AppBundle\Processor\Comment\ProposalAnalysisCommentCreateProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'proposal_analysis_comment_create_retry_%%attempt%%'
         user_archive_request:
             processor: Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor
             middleware_stack:
