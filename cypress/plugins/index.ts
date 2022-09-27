@@ -101,6 +101,15 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.timeEnd('enable_feature')
       return Promise.resolve(null)
     },
+    'disable:feature': async (name: string) => {
+      console.log(`Disabling feature flag "${name}"...`)
+      console.time('disable_feature')
+
+      await exec(`fab ${env}.app.toggle-disable --toggle=${name} --environment=test`)
+      console.log(`Successfully disabled "${name}"`)
+      console.timeEnd('enable_disable')
+      return Promise.resolve(null)
+    },
   })
   on('before:run', async () => {
     console.log('Saving database…')

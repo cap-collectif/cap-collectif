@@ -155,15 +155,6 @@ Scenario: Anonymous wants to delete an argument on a version
 
 ## Votes from opinion
 
-@database
-Scenario: Logged in user wants to vote for an argument on an opinion then delete his vote
-  Given I am logged in as admin
-  And I go to an opinion
-  When I vote for the argument
-  Then I should see "vote.add_success" in the "#global-alert-box" element
-  When I delete my vote on the argument
-  Then I should see "vote.delete_success" in the "#global-alert-box" element
-
 @security
 Scenario: Logged in user wants to vote for his own argument on an opinion
   Given I am logged in as user
@@ -177,15 +168,6 @@ Scenario: Logged in user wants to vote for an argument on an opinion in a closed
   Then the argument vote button should be disabled
 
 ## Votes from version
-
-@database
-Scenario: Logged in user wants to vote for an argument on a version then delete his vote
-  Given I am logged in as admin
-  And I go to a version
-  When I vote for the argument
-  Then I should see "vote.add_success" in the "#global-alert-box" element
-  When I delete my vote on the argument
-  Then I should see "vote.delete_success" in the "#global-alert-box" element
 
 @security
 Scenario: Logged in user wants to vote for his own argument on a version
