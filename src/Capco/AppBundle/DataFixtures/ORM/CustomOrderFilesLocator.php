@@ -319,6 +319,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/ProposalCollectSmsVote.yaml',
             $this->fixturesDir . 'Dev/AnonymousUserProposalSmsVote.yaml',
             $this->fixturesDir . 'Dev/PhoneToken.yaml',
+            $this->fixturesDir . 'Dev/ProposalAnalysisComment.yaml',
         ];
     }
 }

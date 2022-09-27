@@ -144,4 +144,9 @@ class ProposalAnalysis implements Timestampable
 
         return $analysisConfiguration->getEvaluationForm();
     }
+
+    public function canDisplay(): bool
+    {
+        return true;
+    }
 }

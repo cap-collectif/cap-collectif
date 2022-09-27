@@ -1,0 +1,6 @@
+CreateProposalAnalysisCommentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            comment:
+                type: 'Comment'

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateProposalAnalysisComments.createAnalysisComment analyst should be able to comment an analysis. 1`] = `
+Object {
+  "createProposalAnalysisComment": Object {
+    "comment": Object {
+      "author": Object {
+        "username": "analyst",
+      },
+      "body": "body du commentaire",
+    },
+  },
+}
+`;
+
+exports[`CreateProposalAnalysisComments.createAnalysisComment decision maker should be able to comment an analysis. 1`] = `
+Object {
+  "createProposalAnalysisComment": Object {
+    "comment": Object {
+      "author": Object {
+        "username": "decisionmaker",
+      },
+      "body": "body du commentaire",
+    },
+  },
+}
+`;
+
+exports[`CreateProposalAnalysisComments.createAnalysisComment supervisor should be able to comment an analysis. 1`] = `
+Object {
+  "createProposalAnalysisComment": Object {
+    "comment": Object {
+      "author": Object {
+        "username": "supervisor",
+      },
+      "body": "body du commentaire",
+    },
+  },
+}
+`;

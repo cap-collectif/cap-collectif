@@ -13,6 +13,7 @@ use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
+use Capco\AppBundle\Repository\ProposalAnalysisRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
@@ -159,6 +160,10 @@ class GlobalIdResolver
                     break;
                 case 'ProposalRevision':
                     $node = $this->container->get(ProposalRevisionRepository::class)->find($uuid);
+
+                    break;
+                case 'ProposalAnalysis':
+                    $node = $this->container->get(ProposalAnalysisRepository::class)->find($uuid);
 
                     break;
                 case 'Debate':

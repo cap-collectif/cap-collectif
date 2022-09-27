@@ -3596,6 +3596,20 @@ type CreateProjectPayload {
   clientMutationId: String
 }
 
+input CreateProposalAnalysisCommentInput {
+  """The proposalAnalysis linked to the comment."""
+  proposalAnalysisId: ID!
+
+  """The body of the comment."""
+  body: String!
+  clientMutationId: String
+}
+
+type CreateProposalAnalysisCommentPayload {
+  comment: Comment
+  clientMutationId: String
+}
+
 input CreateProposalFormInput {
   """The proposal form title"""
   title: String!
@@ -7927,6 +7941,7 @@ type Mutation {
   sendSmsProposalVote(input: SendSmsProposalVoteInput!): SendSmsProposalVotePayload
   verifySmsVotePhoneNumber(input: VerifySmsVotePhoneNumberInput!): VerifySmsVotePhoneNumberPayload
   inviteOrganizationMember(input: InviteOrganizationMemberInput!): InviteOrganizationMemberPayload
+  createProposalAnalysisComment(input: CreateProposalAnalysisCommentInput!): CreateProposalAnalysisCommentPayload
 }
 
 """A connection to a list of items."""

@@ -166,7 +166,7 @@ InternalMutation:
                     payloadType: DeleteArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteArgumentMutation", [value, getUser()])'
             deleteComment:
-                access: "@=hasRole('ROLE_USER')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteCommentMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteCommentInput
@@ -1625,3 +1625,10 @@ InternalMutation:
                     inputType: InviteOrganizationMemberInput
                     payloadType: InviteOrganizationMemberPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteOrganizationMemberMutation", [value, getUser()])'
+            createProposalAnalysisComment:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalAnalysisCommentMutation").isGranted(args["input"]["proposalAnalysisId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateProposalAnalysisCommentInput
+                    payloadType: CreateProposalAnalysisCommentPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalAnalysisCommentMutation", [value, getUser()])'

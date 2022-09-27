@@ -46,3 +46,9 @@ services:
     Capco\AppBundle\Security\MailingListVoter:
         tags:
             - { name: security.voter }
+    Capco\AppBundle\Security\ProposalAnalysisCommentVoter:
+        tags:
+            - { name: security.voter }
+    Capco\AppBundle\Security\CommentVoter:
+        tags:
+            - { name: security.voter }

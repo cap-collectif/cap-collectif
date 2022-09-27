@@ -1,0 +1,67 @@
+<?php
+
+namespace Capco\AppBundle\Security;
+
+use Capco\AppBundle\Entity\ProposalAnalysisComment;
+use Capco\UserBundle\Entity\User;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+
+class ProposalAnalysisCommentVoter extends Voter
+{
+    const CREATE = 'create';
+
+    protected function supports($attribute, $subject): bool
+    {
+        if (
+            !\in_array($attribute, [
+                self::CREATE,
+            ])
+        ) {
+            return false;
+        }
+
+        if (!$subject instanceof ProposalAnalysisComment) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    {
+        $viewer = $token->getUser();
+
+        if (!$viewer instanceof User) {
+            return false;
+        }
+
+        switch ($attribute) {
+            case self::CREATE:
+                return $this->canCreate($subject, $viewer);
+        }
+
+        throw new \LogicException('This code should not be reached!');
+    }
+
+    private function canCreate(ProposalAnalysisComment $proposalAnalysisComment, User $viewer): bool
+    {
+        $proposal = $proposalAnalysisComment->getProposalAnalysis()->getProposal();
+
+        $analysts = $proposal->getAnalysts();
+        foreach ($analysts as $analyst) {
+            if ($analyst === $viewer) {
+                return true;
+            }
+        }
+        if ($proposal->getSupervisor() === $viewer) {
+            return true;
+        }
+
+        if ($proposal->getDecisionMaker() === $viewer) {
+            return true;
+        }
+
+        return false;
+    }
+}

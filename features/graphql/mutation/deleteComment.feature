@@ -57,5 +57,5 @@ Scenario: User wants to delete a comment but is not the author
   """
   Then the JSON response should match:
   """
-  {"data":{"deleteComment":{"deletedCommentId":null,"userErrors":[{"message":"You are not author of the comment."}]}}}
+  {"errors":[{"message":"Access denied to this field.","extensions":{"category":"user"},"locations":[{"line":1,"column":44}],"path":["deleteComment"]}],"data":{"deleteComment":null}}
   """

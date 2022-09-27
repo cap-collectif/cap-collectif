@@ -1,0 +1,11 @@
+CreateProposalAnalysisCommentInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createProposalAnalysisComment mutation.'
+        fields:
+            proposalAnalysisId:
+                type: 'ID!'
+                description: 'The proposalAnalysis linked to the comment.'
+            body:
+                type: 'String!'
+                description: 'The body of the comment.'

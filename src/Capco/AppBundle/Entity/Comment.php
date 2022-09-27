@@ -44,7 +44,8 @@ use Capco\AppBundle\Entity\Interfaces\Author;
  * @ORM\DiscriminatorMap({
  *      "event"    = "EventComment",
  *      "post"     = "PostComment",
- *      "proposal" = "ProposalComment"
+ *      "proposal" = "ProposalComment",
+ *      "proposal_analysis" = "ProposalAnalysisComment"
  * })
  * @CapcoAssert\CommentHasAuthor
  */
@@ -56,6 +57,7 @@ abstract class Comment implements
     CommentableInterface,
     ReportableInterface
 {
+    use AuthorableTrait;
     use ModerableTrait;
     use PinnableTrait;
     use PublishableTrait;
@@ -64,7 +66,6 @@ abstract class Comment implements
     use TrashableTrait;
     use UuidTrait;
     use VotableOkTrait;
-    use AuthorableTrait;
 
     public static $sortCriterias = [
         'date' => 'opinion.sort.last',
