@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\RequirementType;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
+use Capco\AppBundle\Validator\Constraints\CheckboxRequirementHasLabel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -46,6 +47,7 @@ abstract class AbstractStepFormType extends AbstractType
                         ->setLabel($itemFromUser->getLabel())
                         ->setType($itemFromUser->getType());
                 },
+                'constraints' => [new CheckboxRequirementHasLabel()],
             ]);
         if ($builder->getData() instanceof ParticipativeStepInterface) {
             $builder->add('timeless');
