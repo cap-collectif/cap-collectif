@@ -18,9 +18,11 @@
                     {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
                 {% endfor %}
             </ul>
-            <a href="{{ path('app_blog', {'_locale': locale}) }}"
-               class="btn  btn-primary  btn--outline">
-                {{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+            {% if posts|length > 1 %}
+                <a href="{{ path('app_blog', {'_locale': locale}) }}"
+                   class="btn  btn-primary  btn--outline">
+                    {{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+            {% endif %}
         </div>
     </section>
 {% endif %}
