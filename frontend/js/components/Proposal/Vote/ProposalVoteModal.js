@@ -468,10 +468,12 @@ export const ProposalVoteModal = ({
 
           <Modal.Body>
             <Flex direction="column" align="flex-start" spacing={6}>
-              <Tag variantColor="green">
-                <Tag.LeftIcon name={CapUIIcon.Check} />
-                <Tag.Label>{intl.formatMessage({ id: 'vote.conditions.met' })}</Tag.Label>
-              </Tag>
+              {requirements?.length ? (
+                <Tag variantColor="green">
+                  <Tag.LeftIcon name={CapUIIcon.Check} />
+                  <Tag.Label>{intl.formatMessage({ id: 'vote.conditions.met' })}</Tag.Label>
+                </Tag>
+              ) : null}
               <VoteMinAlert step={step} translationKey={getModalVoteTitleTranslation()} />
               <ProposalsUserVotesTable onSubmit={onSubmit} step={step} votes={step.viewerVotes} />
               {votesHelpText && (
