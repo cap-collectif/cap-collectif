@@ -21,7 +21,7 @@ UpdateProjectInput:
             themes:
                 type: '[ID]'
                 description: "The project's themes"
-            Cover:
+            cover:
                 type: 'ID'
                 description: "The project's image"
             video:

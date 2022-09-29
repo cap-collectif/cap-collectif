@@ -619,8 +619,8 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
             project={
               Object {
                 "$refType": null,
-                "Cover": null,
                 "authors": Array [],
+                "cover": null,
                 "districts": null,
                 "id": "1",
                 "metaDescription": "so meta",

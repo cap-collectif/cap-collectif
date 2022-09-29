@@ -26,7 +26,7 @@ describe('<ProjectMetadataAdminForm />', () => {
         publishedAt: '2019-11-28 09:00:00',
         id: '1',
         title: 'project',
-        Cover: {
+        cover: {
           id: 'img1',
           name: 'image',
           size: '10',

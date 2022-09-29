@@ -15,7 +15,7 @@ CreateAlphaProjectInput:
             projectType:
                 type: 'ID'
                 description: 'The project type ID'
-            Cover:
+            cover:
                 type: 'ID'
                 description: 'The project cover'
             video:

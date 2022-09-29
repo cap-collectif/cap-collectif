@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Project:
         title: Croissance, innovation, disruption
         creator: '@user4'
         projectType: '@projectType3'
-        Cover: '@MediaProject1'
+        cover: '@MediaProject1'
         video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
         themes: ['@theme1', '@theme2']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
@@ -20,7 +20,7 @@ Capco\AppBundle\Entity\Project:
         title: Stratégie technologique de l'Etat et services publics
         creator: '@user4'
         projectType: '@projectType2'
-        Cover: '@MediaProject2'
+        cover: '@MediaProject2'
         themes: ['@theme1', '@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
         updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
@@ -51,7 +51,7 @@ Capco\AppBundle\Entity\Project:
         title: Projet de loi Renseignement
         creator: '@user2'
         projectType: '@projectType2'
-        Cover: '@MediaProject1'
+        cover: '@MediaProject1'
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
         themes: ['@theme1', '@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
@@ -125,7 +125,7 @@ Capco\AppBundle\Entity\Project:
         title: Projet sans étapes participatives
         creator: '@user4'
         projectType: '@projectType2'
-        Cover: '@MediaProject4'
+        cover: '@MediaProject4'
         themes: ['@theme2']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
         updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
@@ -265,7 +265,7 @@ Capco\AppBundle\Entity\Project:
         title: Projet avec beaucoup d'opinions
         creator: '@user4'
         projectType: '@projectType2'
-        Cover: '@MediaProject1'
+        cover: '@MediaProject1'
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
         themes: ['@theme1', '@theme3']
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 25 days"))>
@@ -278,7 +278,7 @@ Capco\AppBundle\Entity\Project:
         id: 'project26'
         title: 'Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH'
         projectType: '@projectType2'
-        Cover: '@MediaProject1'
+        cover: '@MediaProject1'
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
         themes: ['@theme1', '@theme3']
         createdAt: <identity((new \DateTime('2019-01-01'))->modify("- 25 days"))>
@@ -319,7 +319,7 @@ Capco\AppBundle\Entity\Project:
         id: 'projectFood'
         title: Food project
         creator: '@userVincent'
-        Cover: '@MediaProjectFood'
+        cover: '@MediaProjectFood'
         projectType: '@projectType4'
         createdAt: <identity((new \DateTime('2020-09-15 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-09-15 12:00:00')))>
@@ -329,7 +329,7 @@ Capco\AppBundle\Entity\Project:
         id: 'projectCorona'
         title: Solidarité Covid-19
         creator: '@user4'
-        Cover: '@MediaProjectCorona'
+        cover: '@MediaProjectCorona'
         projectType: '@projectType8'
         createdAt: <identity((new \DateTime('2020-03-16 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-03-16 12:00:00')))>
@@ -349,7 +349,7 @@ Capco\AppBundle\Entity\Project:
         title: Débat sur le cannabis
         creator: '@user4'
         projectType: '@projectType9'
-        Cover: '@imageCannabis'
+        cover: '@imageCannabis'
         createdAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
@@ -358,7 +358,7 @@ Capco\AppBundle\Entity\Project:
         id: 'projectMultiDebate'
         title: Débats sur la vie
         projectType: '@projectType9'
-        Cover: '@imageCannabis'
+        cover: '@imageCannabis'
         createdAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
@@ -372,13 +372,13 @@ Capco\AppBundle\Entity\Project:
         updatedAt: <identity((new \DateTime('2020-06-18 12:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-18 12:00:00')))>
         visibility: 2
-        Cover: '@imageCafe'
+        cover: '@imageCafe'
     projectOculusQuest:
         id: 'projectOculusQuest'
         title: Débat sur l'Oculus Quest
         creator: '@userSpyl'
         projectType: '@projectType9'
-        Cover: '@imageOculus'
+        cover: '@imageOculus'
         createdAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
@@ -388,7 +388,7 @@ Capco\AppBundle\Entity\Project:
         title: Débat du mois
         creator: '@userSpyl'
         projectType: '@projectType9'
-        Cover: '@imageConfinement'
+        cover: '@imageConfinement'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
@@ -398,7 +398,7 @@ Capco\AppBundle\Entity\Project:
         title: Débat Wysiwyg
         creator: '@userSpyl'
         projectType: '@projectType9'
-        Cover: '@imageCereale'
+        cover: '@imageCereale'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
@@ -408,7 +408,7 @@ Capco\AppBundle\Entity\Project:
         title: Projet Archivé
         creator: '@userSpyl'
         projectType: '@projectType9'
-        Cover: '@imageArchived'
+        cover: '@imageArchived'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>

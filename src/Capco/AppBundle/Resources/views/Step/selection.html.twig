@@ -5,8 +5,8 @@
 {% block metaTags %}
     {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
     {% set image %}
-        {% if project.Cover %}
-            {% path project.Cover, 'blockHeader' %}
+        {% if project.cover %}
+            {% path project.cover, 'blockHeader' %}
         {% endif %}
     {% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {

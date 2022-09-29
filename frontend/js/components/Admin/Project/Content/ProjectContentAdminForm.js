@@ -34,7 +34,7 @@ export type FormValues = {|
   authors: Author[],
   projectType: string,
   themes: Option[],
-  Cover: ?{
+  cover: ?{
     id: string,
     description: ?string,
     name: ?string,
@@ -157,7 +157,7 @@ export const ProjectContentAdminForm = ({ intl }: Props) => {
           <div className="row mr-0 ml-0">
             <Field
               id="cover"
-              name="Cover"
+              name="cover"
               component={renderComponent}
               type="image"
               label={renderLabel('proposal.media', intl)}
@@ -231,7 +231,7 @@ export default createFragmentContainer(ProjectContentAdminForm, {
       type {
         id
       }
-      Cover: cover {
+      cover: cover {
         id
         name
         size

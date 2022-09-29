@@ -23,7 +23,7 @@ const mutation = graphql`
         type {
           id
         }
-        Cover: cover {
+        cover: cover {
           id
           name
           size

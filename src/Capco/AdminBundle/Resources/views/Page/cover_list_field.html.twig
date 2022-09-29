@@ -2,8 +2,8 @@
 
 {% block field %}
     <div>
-        {%  if object.Cover is not null %}
-            {% thumbnail object.Cover, 'small' with {'title': object.Cover.name, 'alt': object.Cover.name} %}
+        {%  if object.cover is not null %}
+            {% thumbnail object.cover, 'small' with {'title': object.cover.name, 'alt': object.cover.name} %}
         {% endif %}
     </div>
 {% endblock %}

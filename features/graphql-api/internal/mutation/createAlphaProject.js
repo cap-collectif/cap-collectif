@@ -149,7 +149,7 @@ const CreateAlphaProjectWithOwnerMutation = /* GraphQL */ `
 
 const BASE_PROJECT = {
   title: 'Je suis un projet simple',
-  Cover: 'media1',
+  cover: 'media1',
   video: 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg',
   authors: ['VXNlcjp1c2VyQWRtaW4=', 'VXNlcjp1c2VyMQ=='],
   metaDescription: 'Je suis la super meta',

@@ -6,7 +6,7 @@
 
 {% block metaTags %}
     {% set title = ('global.version' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.proposal' | trans({}, 'CapcoAppBundle') ~ ' ' ~ version.title %}
-    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set projectCover %}{% if project.cover %}{% path project.cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       title,
         'description': version.body|striptags|truncate(250, true),

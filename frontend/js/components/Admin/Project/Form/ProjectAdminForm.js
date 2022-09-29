@@ -121,7 +121,7 @@ const onSubmit = (
     title,
     authors,
     projectType,
-    Cover,
+    cover,
     video,
     themes,
     metaDescription,
@@ -148,7 +148,7 @@ const onSubmit = (
     title,
     authors: formatAuthors(authors),
     projectType,
-    Cover: Cover ? Cover.id : null,
+    cover: cover ? cover.id : null,
     video,
     themes: themes ? themes.map(theme => theme.value) : [],
     districts: districts ? districts.map(district => district.value) : [],
@@ -387,7 +387,7 @@ const validate = (values: FormValues) => {
     return {};
   }
   const {
-    Cover,
+    cover,
     title,
     video,
     themes,
@@ -416,7 +416,7 @@ const validate = (values: FormValues) => {
       video,
       themes,
       districts,
-      Cover,
+      cover,
       metaDescription,
     }),
     ...validateExternal({
@@ -569,7 +569,7 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
       publishedAt: project ? project.publishedAt : null,
       themes: project ? project.themes && project.themes.map(theme => theme) : [],
       video: project ? project.video : null,
-      Cover: project ? project.Cover : null,
+      cover: project ? project.cover : null,
       opinionCanBeFollowed: project ? project.opinionCanBeFollowed : null,
       isExternal: project ? project.isExternal : false,
       externalLink: project ? project.externalLink : null,
@@ -629,7 +629,7 @@ export default createFragmentContainer(injectIntl(container), {
       type {
         id
       }
-      Cover: cover {
+      cover: cover {
         id
         name
         size

@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_project_show_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set image %}{% if project.cover %}{% path project.cover, 'blockHeader' %}{% endif %}{% endset %}
     {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       title,

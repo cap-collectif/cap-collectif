@@ -75,7 +75,7 @@ exports[`<ProjectMetadataAdminForm /> renders correctly empty 1`] = `
             values={Object {}}
           />
         }
-        name="Cover"
+        name="cover"
         type="image"
       />
     </div>
@@ -207,7 +207,7 @@ exports[`<ProjectMetadataAdminForm /> renders correctly with a project 1`] = `
             values={Object {}}
           />
         }
-        name="Cover"
+        name="cover"
         type="image"
       />
     </div>

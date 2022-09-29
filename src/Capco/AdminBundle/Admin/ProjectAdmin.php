@@ -113,7 +113,7 @@ final class ProjectAdmin extends CapcoAdmin
     // For mosaic view
     public function getObjectMetadata($object)
     {
-        $cover = $object->getCover();
+        $cover = $object->getcover();
         if ($cover) {
             $provider = $this->getConfigurationPool()
                 ->getContainer()
@@ -284,7 +284,7 @@ final class ProjectAdmin extends CapcoAdmin
         // Steps
         $formMapper
             ->add(
-                'Cover',
+                'cover',
                 ModelListType::class,
                 ['required' => false, 'label' => 'global.image'],
                 [
@@ -412,7 +412,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('title', null, ['label' => 'global.title'])
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
             ->add('publishedAt', null, ['label' => 'global.publication'])
-            ->add('Cover', null, [
+            ->add('cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
                 'label' => 'global.image',
             ])

@@ -154,7 +154,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $Cover;
+    private $cover;
 
     /**
      * @ORM\Column(name="video", type="string", nullable = true)
@@ -566,7 +566,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable
      */
     public function getCover()
     {
-        return $this->Cover;
+        return $this->cover;
     }
 
     /**
@@ -574,7 +574,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable
      */
     public function setCover($cover)
     {
-        $this->Cover = $cover;
+        $this->cover = $cover;
 
         return $this;
     }

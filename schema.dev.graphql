@@ -3135,7 +3135,7 @@ input CreateAlphaProjectInput {
   projectType: ID
 
   """The project cover"""
-  Cover: ID
+  cover: ID
 
   """The project video link"""
   video: String
@@ -15628,7 +15628,7 @@ input UpdateAlphaProjectInput {
   projectType: ID
 
   """The project cover"""
-  Cover: ID
+  cover: ID
 
   """The project video link"""
   video: String
@@ -16678,7 +16678,7 @@ input UpdateProjectInput {
   themes: [ID]
 
   """The project's image"""
-  Cover: ID
+  cover: ID
 
   """The project's video"""
   video: String

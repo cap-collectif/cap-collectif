@@ -57,7 +57,7 @@ class UpdateProjectFormType extends AbstractType
                 'multiple' => true,
                 'choice_label' => 'id',
             ])
-            ->add('Cover', EntityType::class, [
+            ->add('cover', EntityType::class, [
                 'required' => false,
                 'class' => Media::class,
             ])

@@ -59,7 +59,7 @@ Capco\AppBundle\Entity\Project:
             groups: [Projects, ElasticsearchProjectNestedProjectType]
         video:
             groups: [Projects]
-        Cover:
+        cover:
             groups: [Default]
             serialized_name: cover
         participativeStep:

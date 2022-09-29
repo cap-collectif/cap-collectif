@@ -327,7 +327,7 @@ Scenario: GraphQL client wants to update project with empty group in custom view
       "variables": {
         "input": {
           "title": "Je suis un projet simple",
-          "Cover": "media1",
+          "cover": "media1",
           "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
           "authors": [
             "VXNlcjp1c2VyQWRtaW4=",
@@ -409,7 +409,7 @@ Scenario: GraphQL client wants to update project with votesMin greater than vote
 
             ],
             "title":"Je suis un projet simple",
-            "Cover":"media1",
+            "cover":"media1",
             "video":"https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
             "authors":[
                "VXNlcjp1c2VyQWRtaW4=",
@@ -513,7 +513,7 @@ Scenario: GraphQL client wants to update project with votesMin below 1
 
             ],
             "title":"Je suis un projet simple",
-            "Cover":"media1",
+            "cover":"media1",
             "video":"https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
             "authors":[
                "VXNlcjp1c2VyQWRtaW4=",
@@ -603,7 +603,7 @@ Scenario: GraphQL client wants to update step with another questionnaire
               "VXNlcjp1c2VyV2VsY29tYXR0aWM="
             ],
             "projectType": "7",
-            "Cover": null,
+            "cover": null,
             "video": null,
             "themes": [
               "theme3"

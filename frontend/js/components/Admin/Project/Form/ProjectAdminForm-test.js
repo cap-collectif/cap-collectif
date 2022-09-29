@@ -20,7 +20,7 @@ describe('<ProjectAdminForm />', () => {
         id: '1',
       },
       video: 'dailymotion.com/issou',
-      Cover: null,
+      cover: null,
       authors: [],
       steps: [],
       themes: [],

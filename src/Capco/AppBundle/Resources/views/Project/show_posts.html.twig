@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_project_show_posts', {'projectSlug': project.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set projectCover %}{% if project.cover %}{% path project.cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':  project.title~' - '~('menu.news' | trans({}, 'CapcoAppBundle')),
         'url':    url('app_project_show_posts', {'projectSlug': project.slug}),

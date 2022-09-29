@@ -1,9 +1,9 @@
 Capco\AppBundle\Entity\Project:
-  p1:
-    title: Projet participatif
-    Cover: '@MediaProject1'
-    publishedAt: <dateTimeBetween('-50 days', 'now')>
-    opinionsRankingThreshold: 60
-    versionsRankingThreshold: 20
-    visibility: 2
-    opinionCanBeFollowed: false
+    p1:
+        title: Projet participatif
+        cover: '@MediaProject1'
+        publishedAt: <dateTimeBetween('-50 days', 'now')>
+        opinionsRankingThreshold: 60
+        versionsRankingThreshold: 20
+        visibility: 2
+        opinionCanBeFollowed: false

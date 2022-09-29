@@ -25,7 +25,7 @@ type Option = {|
 export type FormValues = {|
   publishedAt: string,
   themes: Option[],
-  Cover: ?{
+  cover: ?{
     id: string,
     description: ?string,
     name: ?string,
@@ -60,13 +60,13 @@ const getThemeOptions = graphql`
   }
 `;
 
-export const formatInput = ({ publishedAt, themes, Cover, video, districts }: FormValues) => {
+export const formatInput = ({ publishedAt, themes, cover, video, districts }: FormValues) => {
   if (publishedAt && typeof publishedAt !== 'string' && !(publishedAt instanceof String)) {
     publishedAt = publishedAt.format('YYYY-MM-DD HH:mm:ss');
   }
   const input = {
     publishedAt,
-    Cover: Cover ? Cover.id : null,
+    cover: cover ? cover.id : null,
     video,
     districts: formatOption(districts),
     themes: formatOption(themes),
@@ -175,7 +175,7 @@ export const ProjectMetadataAdminForm = (props: Props) => {
         <div className="row mr-0 ml-0">
           <Field
             id="cover"
-            name="Cover"
+            name="cover"
             component={component}
             type="image"
             image={null}
@@ -235,7 +235,7 @@ const mapStateToProps = (state, { project }: Props) => ({
         })
       : [],
     video: project ? project.video : null,
-    Cover: project ? project.Cover : null,
+    cover: project ? project.cover : null,
 
     districts: project
       ? project &&
@@ -261,7 +261,7 @@ export default createFragmentContainer(injectIntl(container), {
       id
       title
       publishedAt
-      Cover: cover {
+      cover: cover {
         id
         name
         size

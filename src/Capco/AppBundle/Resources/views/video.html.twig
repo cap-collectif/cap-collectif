@@ -1,7 +1,7 @@
     <div class="video-thumbnail">
         {% if project %}
-            {% if project.Cover %}
-                {% thumbnail project.Cover, 'blockHeader' with {'title': project.title, 'alt': '', 'class': 'img-responsive'} %}
+            {% if project.cover %}
+                {% thumbnail project.cover, 'blockHeader' with {'title': project.title, 'alt': '', 'class': 'img-responsive'} %}
             {% else %}
                 <div class="bg__wrapper">
                     <div class="bg--default bg--project">

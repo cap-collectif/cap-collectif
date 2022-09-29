@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'consultationSlug': opinionType.consultation.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set projectcover %}{% if project.cover %}{% path project.cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       project.title~' - '~opinionType.title,
         'description': currentStep.body|striptags|truncate(250, true),

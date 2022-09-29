@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_project_show_collect', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 {% set showVotesWidget = app.user and ((currentStep is defined and currentStep.slug is defined and attribute(currentStep, 'isVotable') is defined and currentStep.isVotable() and (currentStep.isCollectStep() or currentStep.isSelectionStep())) or (proposal is defined and proposal|current_votable_step)) %}
 {% block metaTags %}
-    {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set image %}{% if project.cover %}{% path project.cover, 'blockHeader' %}{% endif %}{% endset %}
     {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       title,

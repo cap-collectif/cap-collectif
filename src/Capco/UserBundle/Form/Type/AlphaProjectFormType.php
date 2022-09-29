@@ -48,7 +48,7 @@ class AlphaProjectFormType extends AbstractType
                 'multiple' => true,
             ])
             ->add('projectType')
-            ->add('Cover')
+            ->add('cover')
             ->add('video')
             ->add('headerType', ChoiceType::class, [
                 'choices' => ProjectHeaderType::getAvailableTypes(),

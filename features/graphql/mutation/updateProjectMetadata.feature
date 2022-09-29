@@ -36,7 +36,7 @@ Scenario: GraphQL client wants to update a project metadata
       "input": {
         "id": "UHJvamVjdDpwcm9qZWN0Mg==",
         "publishedAt": "2014-12-30 00:00:00",
-        "Cover": "media2",
+        "cover": "media2",
         "video": "rthwrht",
         "districts": [
           "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==",

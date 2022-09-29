@@ -52,7 +52,7 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
             ->leftJoin('p.projectDistrictPositioners', 'positioner')
             ->leftJoin('positioner.district', 'district')
-            ->leftJoin('p.Cover', 'cover')
+            ->leftJoin('p.cover', 'cover')
             ->leftJoin('p.authors', 'authors')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
@@ -77,7 +77,7 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
             ->leftJoin('p.projectDistrictPositioners', 'positioner')
             ->leftJoin('positioner.district', 'district')
-            ->leftJoin('p.Cover', 'cover')
+            ->leftJoin('p.cover', 'cover')
             ->leftJoin('p.authors', 'authors')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
@@ -200,7 +200,7 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('t.translations', 'translation')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 's')
-            ->leftJoin('p.Cover', 'pov')
+            ->leftJoin('p.cover', 'pov')
             ->leftJoin('p.projectType', 'projectType')
             ->addOrderBy('p.publishedAt', 'DESC');
 
@@ -241,7 +241,7 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 's')
-            ->leftJoin('p.Cover', 'pov')
+            ->leftJoin('p.cover', 'pov')
             ->leftJoin('p.projectType', 'type')
             ->addOrderBy('p.publishedAt', 'DESC');
 
@@ -269,7 +269,7 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 's')
-            ->leftJoin('p.Cover', 'pov')
+            ->leftJoin('p.cover', 'pov')
             ->leftJoin('p.projectType', 'type')
             ->andWhere('t = :theme')
             ->setParameter('theme', $theme)
