@@ -42,7 +42,7 @@ final class Version20220905103557 extends AbstractMigration implements Container
             foreach ($rows as $row) {
                 $uuid = $this->generator->generate($this->em, null);
                 $token = $this->tokenGenerator->generateToken();
-                $createdAt = $row['created_at'];
+                $createdAt = $row['created_at'] ?? new \DateTime('now');
 
                 $this->connection->insert('comment', [
                     'id' => $uuid,
