@@ -9,12 +9,13 @@ use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Id\UuidGenerator;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220905103557 extends AbstractMigration
+final class Version20220905103557 extends AbstractMigration implements ContainerAwareInterface
 {
 
     private EntityManagerInterface $em;
