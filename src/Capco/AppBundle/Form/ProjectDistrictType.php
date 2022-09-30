@@ -20,6 +20,7 @@ class ProjectDistrictType extends AbstractType
         $builder->add('geojson', TextType::class);
         $builder->add('border', BorderStyleType::class, ['required' => false]);
         $builder->add('background', BackgroundStyleType::class, ['required' => false]);
+        $builder->add('cover');
         $builder->addEventSubscriber(new CleanDistrictFieldSubscriber());
     }
 

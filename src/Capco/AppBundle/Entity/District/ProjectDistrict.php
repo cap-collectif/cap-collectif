@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\District;
 
 use Capco\AppBundle\Traits\FollowableTrait;
+use Capco\AppBundle\Traits\Media\CoverTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\MediaBundle\Entity\Media;
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProjectDistrict extends AbstractDistrict
 {
+    use CoverTrait;
     use FollowableTrait;
     use TextableTrait;
     use TranslatableTrait;

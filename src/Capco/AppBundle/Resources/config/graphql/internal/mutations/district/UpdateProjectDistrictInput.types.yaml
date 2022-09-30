@@ -20,3 +20,6 @@ UpdateProjectDistrictInput:
             translations:
                 type: '[InternalDistrictTranslationInput!]!'
                 description: 'The names of the district for each language'
+            cover:
+                type: 'ID'
+                description: 'The district cover.'

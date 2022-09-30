@@ -19,6 +19,7 @@ Capco\AppBundle\Entity\District\ProjectDistrict:
         displayedOnMap: 1
         border: '@borderStyle1'
         background: '@backgroundStyle1'
+        cover: '@IlesDeNantes'
     projectDistrict5:
         id: projectDistrict5
         displayedOnMap: 1

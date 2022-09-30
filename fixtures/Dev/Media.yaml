@@ -452,3 +452,9 @@ Capco\MediaBundle\Entity\Media:
         name: WarmingStripes
         category: '@MediaCategory1'
         providerReference: warmingstripes.jpg
+    IlesDeNantes:
+        id: 'IlesDeNantes'
+        binaryContent: district/ile_de_nantes.jpeg
+        name: IlesDeNantes
+        category: '@MediaCategory1'
+        providerReference: ile_de_nantes.jpeg

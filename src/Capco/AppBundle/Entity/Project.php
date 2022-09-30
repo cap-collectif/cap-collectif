@@ -21,6 +21,7 @@ use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\LocalizableTrait;
+use Capco\AppBundle\Traits\Media\CoverTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
@@ -46,6 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Project implements IndexableInterface, TimeRangeable, Ownerable
 {
     use AddressableTrait;
+    use CoverTrait;
     use CreatableTrait;
     use DateHelperTrait;
     use LocalizableTrait;
@@ -147,14 +149,6 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable
      * @CapcoAssert\HasOnlyOneSelectionStepAllowingProgressSteps()
      */
     private $steps;
-
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
-     * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    private $cover;
 
     /**
      * @ORM\Column(name="video", type="string", nullable = true)
@@ -557,24 +551,6 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable
     public function removeStep(ProjectAbstractStep $step)
     {
         $this->steps->removeElement($step);
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCover()
-    {
-        return $this->cover;
-    }
-
-    /**
-     * @param mixed $cover
-     */
-    public function setCover($cover)
-    {
-        $this->cover = $cover;
 
         return $this;
     }

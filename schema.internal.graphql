@@ -9769,6 +9769,7 @@ type ProjectDistrict implements District & Node {
     first: Int = 100
   ): ProjectConnection
   projectDistrictPositioners: [ProjectDistrictPositioner]
+  cover: Media
 }
 
 """A connection to a list of items."""
@@ -16656,6 +16657,9 @@ input UpdateProjectDistrictInput {
 
   """The names of the district for each language"""
   translations: [DistrictTranslationInput!]!
+
+  """The district cover."""
+  cover: ID
 }
 
 input UpdateProjectInput {
