@@ -6,6 +6,7 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "description": null,
           "followers": Object {
             "totalCount": 0,
           },
@@ -34,6 +35,7 @@ Object {
       },
       Object {
         "node": Object {
+          "description": null,
           "followers": Object {
             "totalCount": 2,
           },
@@ -62,6 +64,7 @@ Object {
       },
       Object {
         "node": Object {
+          "description": null,
           "followers": Object {
             "totalCount": 0,
           },
@@ -90,6 +93,7 @@ Object {
       },
       Object {
         "node": Object {
+          "description": "Ainsi les derniers seront les premiers, et les premiers seront les derniers, car il y a beaucoup d'appelés, mais peu d'élus.",
           "followers": Object {
             "totalCount": 0,
           },
@@ -118,6 +122,7 @@ Object {
       },
       Object {
         "node": Object {
+          "description": null,
           "followers": Object {
             "totalCount": 0,
           },
@@ -146,6 +151,7 @@ Object {
       },
       Object {
         "node": Object {
+          "description": null,
           "followers": Object {
             "totalCount": 0,
           },
@@ -174,6 +180,7 @@ Object {
       },
       Object {
         "node": Object {
+          "description": null,
           "followers": Object {
             "totalCount": 2,
           },

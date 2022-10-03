@@ -66,6 +66,18 @@ class ProjectDistrict extends AbstractDistrict
         return $this;
     }
 
+    public function getDescription(?string $locale = null, ?bool $fallbackToDefault = true): ?string
+    {
+        return $this->translate($locale, $fallbackToDefault)->getDescription();
+    }
+
+    public function setDescription(?string $description = null): self
+    {
+        $this->translate(null, false)->setDescription($description);
+
+        return $this;
+    }
+
     public static function getTranslationEntityClass(): string
     {
         return DistrictTranslation::class;

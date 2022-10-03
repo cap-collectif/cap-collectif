@@ -26,6 +26,7 @@ Scenario: Admin wants to update a district in projects
             name
             locale
             titleOnMap
+            description
           }
         }
       }
@@ -45,7 +46,7 @@ Scenario: Admin wants to update a district in projects
           "enabled": false
         },
         "translations":[
-          {"locale":"en-GB","name":"My new awesome district !", "titleOnMap": "Short name"}
+          {"locale":"en-GB","name":"My new awesome district !", "titleOnMap": "Short name", "description": "Short description."}
         ]
       }
     }
@@ -73,12 +74,14 @@ Scenario: Admin wants to update a district in projects
                  {
                     "name":"My new awesome district !",
                     "locale":"en-GB",
-                    "titleOnMap":"Short name"
+                    "titleOnMap":"Short name",
+                    "description":"Short description."
                  },
                  {
                     "name":"Premier Quartier",
                     "locale":"fr-FR",
-                    "titleOnMap":"1er"
+                    "titleOnMap":"1er",
+                    "description":"Ainsi les derniers seront les premiers, et les premiers seront les derniers, car il y a beaucoup d'appelés, mais peu d'élus."
                  }
               ]
            }

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\BlameableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,6 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Group
 {
     use BlameableTrait;
+    use DescriptionTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
     use UuidTrait;
@@ -37,11 +39,6 @@ class Group
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="restrictedViewerGroups")
      */
     protected $projectsVisibleByTheGroup;
-
-    /**
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private $description;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\UserGroup", mappedBy="group",  cascade={"persist", "remove"})
@@ -80,18 +77,6 @@ class Group
     public function isEvaluating()
     {
         return $this->evaluating->count() > 0;
-    }
-
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description)
-    {
-        $this->description = $description;
-
-        return $this;
     }
 
     public function getUserGroups(): Collection

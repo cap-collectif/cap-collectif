@@ -7,6 +7,7 @@ const InternalQuery = /* GraphQL */ `
         node {
           id
           name
+          description
           projectDistrictPositioners {
             project {
               _id

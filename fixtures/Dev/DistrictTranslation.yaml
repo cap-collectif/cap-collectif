@@ -5,12 +5,14 @@ Capco\AppBundle\Entity\District\DistrictTranslation:
         id: projectDistrictTranslation1
         name: Premier Quartier
         titleOnMap: 1er
+        description: "Ainsi les derniers seront les premiers, et les premiers seront les derniers, car il y a beaucoup d'appelés, mais peu d'élus."
     projectDistrictTranslation1En:
         translatable: '@projectDistrict1'
         locale: en-GB
         id: projectDistrictTranslation1En
         name: First District
         titleOnMap: 1st
+        description: 'So the last shall be first, and the first last: for many be called, but few chosen.'
     projectDistrictTranslation2:
         translatable: '@projectDistrict2'
         locale: fr-FR

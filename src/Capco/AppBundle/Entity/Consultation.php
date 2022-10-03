@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -22,6 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Consultation implements IndexableInterface
 {
+    use DescriptionTrait;
     use MetaDescriptionCustomCodeTrait;
     use UuidTrait;
 
@@ -38,11 +40,6 @@ class Consultation implements IndexableInterface
      * @ORM\Column(length=255)
      */
     private $slug;
-
-    /**
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
@@ -180,18 +177,6 @@ class Consultation implements IndexableInterface
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description = null): self
-    {
-        $this->description = $description;
 
         return $this;
     }

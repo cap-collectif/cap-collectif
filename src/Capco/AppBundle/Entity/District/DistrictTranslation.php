@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\District;
 
+use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Translation;
@@ -21,6 +22,7 @@ use Capco\AppBundle\Traits\TranslationTrait;
  */
 class DistrictTranslation implements Translation
 {
+    use DescriptionTrait;
     use TranslationTrait;
     use UuidTrait;
 

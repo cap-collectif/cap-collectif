@@ -5403,6 +5403,10 @@ interface District {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String
+  description(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
@@ -5444,6 +5448,9 @@ type DistrictTranslation {
   locale: String!
   name: String!
   titleOnMap: String
+
+  """The description of the district."""
+  description: String
 }
 
 input DistrictTranslationInput {
@@ -5451,6 +5458,7 @@ input DistrictTranslationInput {
   locale: String!
   name: String
   titleOnMap: String
+  description: String
 }
 
 """Entities that can be drafted."""
@@ -9728,6 +9736,10 @@ type ProjectDistrict implements District & Node {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String
+  description(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
@@ -10587,6 +10599,10 @@ type ProposalDistrict implements District & Node {
     locale: TranslationLocale
   ): String!
   titleOnMap(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  description(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,6 +15,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
  */
 class OpinionType
 {
+    use DescriptionTrait;
     use UuidTrait;
 
     const VOTE_WIDGET_DISABLED = 0;
@@ -77,11 +79,6 @@ class OpinionType
      * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
      */
     private $subtitle;
-
-    /**
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private $description;
 
     /**
      * @Gedmo\Slug(handlers={
@@ -610,18 +607,6 @@ class OpinionType
         }
 
         return $types;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description = null): self
-    {
-        $this->description = $description;
-
-        return $this;
     }
 
     public static function getElasticsearchSerializationGroups(): array

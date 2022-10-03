@@ -11,3 +11,5 @@ InternalDistrictTranslationInput:
                 type: 'String'
             titleOnMap:
                 type: 'String'
+            description:
+                type: 'String'
