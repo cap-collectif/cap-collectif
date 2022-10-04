@@ -3,12 +3,14 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
@@ -103,6 +105,34 @@ class ProjectRepository extends EntityRepository
             ->orderBy('p.updatedAt', 'DESC');
 
         return $qb->getQuery()->execute();
+    }
+
+    public function getByOwnerPaginated(
+        ProjectOwner $owner,
+        ?User $viewer,
+        int $offset,
+        int $limit
+    ): array {
+        return $this->getByOwnerQueryBuilder($owner, $viewer)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()->getResult();
+    }
+
+    public function countByOwner(ProjectOwner $owner, ?User $viewer = null): int
+    {
+        return $this->getByOwnerQueryBuilder($owner, $viewer)
+            ->select('count(p.id)')
+            ->getQuery()->getSingleScalarResult();
+    }
+
+    public function getByOwnerQueryBuilder(ProjectOwner $owner, ?User $viewer = null): QueryBuilder
+    {
+        return $this->getProjectsViewerCanSeeQueryBuilder($viewer)
+            ->leftJoin(($owner instanceof User) ? 'p.owner' : 'p.organizationOwner', 'o')
+            ->andWhere('o.id = :ownerId')
+            ->setParameter('ownerId', $owner->getId())
+            ->orderBy('p.updatedAt', 'DESC');
     }
 
     public function getProjectsViewerCanSeeQueryBuilder($viewer = null): QueryBuilder

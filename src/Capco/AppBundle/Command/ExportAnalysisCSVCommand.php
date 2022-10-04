@@ -11,6 +11,7 @@ use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -502,7 +503,7 @@ EOF;
         foreach ($projects as $project) {
             $projectEntity = $this->projectRepository->find($project['id']);
             $owner = $projectEntity->getOwner();
-            $isProjectAdmin = $owner && $owner->isOnlyProjectAdmin();
+            $isProjectAdmin = !($owner instanceof User && $owner->isAdmin());
 
             $projectId = GlobalId::toGlobalId('Project', $project['id']);
 

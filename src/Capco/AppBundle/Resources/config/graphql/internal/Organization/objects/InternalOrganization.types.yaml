@@ -4,6 +4,7 @@ InternalOrganization:
         - Node
         - Author
         - InternalPostOwner
+        - InternalProjectOwner
     config:
         description: 'An organization.'
         name: Organization
@@ -11,6 +12,7 @@ InternalOrganization:
             - Node
             - Author
             - InternalPostOwner
+            - InternalProjectOwner
         fields:
             id:
                 description: 'The ID of an object.'
@@ -75,3 +77,8 @@ InternalOrganization:
             deletedAt:
                 type: 'DateTime'
                 description: 'The date when the organization was deleted.'
+            projects:
+                type: 'InternalProjectConnection!'
+                description: 'Get all projects that the organization owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\OwnerProjectsResolver", [value, args, getUser()])'
+                argsBuilder: 'Relay::ForwardConnection'

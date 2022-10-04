@@ -8414,7 +8414,7 @@ enum OrderDirection {
 }
 
 """An organization."""
-type Organization implements Node & Author & PostOwner {
+type Organization implements Node & Author & PostOwner & ProjectOwner {
   """The ID of an object."""
   id: ID!
 
@@ -8444,6 +8444,8 @@ type Organization implements Node & Author & PostOwner {
 
   """Whether or not this user is the authenticated user."""
   isViewer: Boolean!
+
+  """The owner profile URL."""
   url: URI!
   biography(
     """The locale to translate content (eg: FR_FR)."""
@@ -8479,6 +8481,35 @@ type Organization implements Node & Author & PostOwner {
     """The ordering direction for posts"""
     orderBy: PostOrder = {field: UPDATED_AT, direction: DESC}
   ): PostConnection!
+
+  """Get all projects that the organization owns."""
+  projects(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for projects returned from the connection.
+    For example, OWNER will include only projects that the current viewer owns.
+    
+    """
+    affiliations: [ProjectAffiliation!]
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for posts"""
+    orderBy: ProjectOwnerProjectOrder = {direction: DESC, field: PUBLISHED_AT}
+
+    """
+    ID of a Status to filter by. If non-null, filter projects by statuses.
+    """
+    status: ID
+  ): ProjectConnection!
 
   """The organization's logo file"""
   logo: Media

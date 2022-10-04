@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Organization;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Entity\Interfaces\Owner;
@@ -29,7 +30,7 @@ class Organization implements
     SonataTranslatableInterface,
     Translatable,
     Author,
-    Owner,
+    ProjectOwner,
     IndexableInterface
 {
     use SluggableTranslatableTitleTrait;

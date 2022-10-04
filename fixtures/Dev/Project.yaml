@@ -469,6 +469,6 @@ Capco\AppBundle\Entity\Project:
         createdAt: <identity((new \DateTime('2022-01-03 12:00:00')))>
         updatedAt: $createdAt
         publishedAt: $createdAt
-        visibility: 0
-        owner: '@user1'
+        visibility: 2
+        owner: '@organization2'
         creator: '@user1'

@@ -205,7 +205,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 38,
+    "totalCount": 39,
   },
 }
 `;
@@ -216,6 +216,24 @@ Object {
     "edges": Array [
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 9,
+          },
+          "contributionsCount": 9,
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0SWRmMw==",
+          "title": "Budget Participatif IdF 3",
+          "votes": Object {
+            "totalCount": 5,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -235,7 +253,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -255,7 +273,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 196,
@@ -275,7 +293,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 3,
@@ -292,30 +310,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 5,
-          },
-          "contributionsCount": 3,
-          "contributors": Object {
-            "totalCount": 6,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
-          "title": "Projet avec administrateur de projet",
-          "votes": Object {
-            "totalCount": 2,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 38,
+    "totalCount": 39,
   },
 }
 `;
