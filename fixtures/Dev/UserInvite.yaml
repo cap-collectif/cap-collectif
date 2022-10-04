@@ -65,3 +65,12 @@ Capco\AppBundle\Entity\UserInvite:
         isProjectAdmin: false
         token: 'redirectInvitationToken'
         redirectionUrl: 'https://capco.dev/project/debats-ouvert-sans-vote/debate/debat-ouvert-sans-vote'
+    organizationInvitation:
+        id: 'organizationInvitation'
+        createdAt: <(new \DateTime('2022-09-29 00:00:00'))>
+        email: 'toto@cap-collectif.com'
+        expiresAt: <(new \DateTime('2030-01-01 00:00:00'))>
+        isAdmin: false
+        isProjectAdmin: false
+        token: 'organizationInvitationToken'
+        organization: '@organization2'

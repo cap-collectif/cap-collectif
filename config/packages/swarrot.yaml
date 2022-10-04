@@ -106,6 +106,9 @@ swarrot:
         user_invite.invitation:
             exchange: capco_direct_exchange
             routing_key: user_invite_invitation
+        user_invite.invitation_by_organization:
+            exchange: capco_direct_exchange
+            routing_key: user_invite_invitation_by_organization
         user_invite.check:
             exchange: capco_direct_exchange
             routing_key: user_invite_check
@@ -695,6 +698,23 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'user_invite_invitation_retry_%%attempt%%'
+        user_invite_invitation_by_organization:
+            processor: Capco\AppBundle\Processor\UserInvite\UserInviteNewInvitationProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'user_invite_invitation_by_organization_retry_%%attempt%%'
         user_invite_check:
             processor: Capco\AppBundle\Processor\UserInvite\UserInviteEmailMessageStatusCheckProcessor
             middleware_stack:

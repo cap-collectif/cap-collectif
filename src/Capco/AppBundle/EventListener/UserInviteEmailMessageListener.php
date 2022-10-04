@@ -24,7 +24,7 @@ class UserInviteEmailMessageListener
     {
         try {
             $this->publisher->publish(
-                CapcoAppBundleMessagesTypes::USER_INVITE_INVITATION,
+                $entity->getMessageType(),
                 new Message(
                     json_encode([
                         'id' => $entity->getId(),

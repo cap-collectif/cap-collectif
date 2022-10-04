@@ -290,3 +290,9 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: organization_member_invitation
+        user_invite_invitation_by_organization:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: user_invite_invitation_by_organization

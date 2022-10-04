@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\DBAL\Enum\MailerType;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -46,6 +47,11 @@ class UserInviteEmailMessage
      * @ORM\Column(name="internal_status", type="string", nullable=false)
      */
     private string $internalStatus = self::WAITING_SENDING;
+
+    /**
+     * @ORM\Column(name="message_type", type="string", nullable=false)
+     */
+    private string $messageType = CapcoAppBundleMessagesTypes::USER_INVITE_INVITATION;
 
     public function __construct(UserInvite $invitation)
     {
@@ -101,6 +107,18 @@ class UserInviteEmailMessage
     public function setInternalStatus(string $internalStatus): self
     {
         $this->internalStatus = $internalStatus;
+
+        return $this;
+    }
+
+    public function getMessageType(): string
+    {
+        return $this->messageType;
+    }
+
+    public function setMessageType(string $messageType): self
+    {
+        $this->messageType = $messageType;
 
         return $this;
     }

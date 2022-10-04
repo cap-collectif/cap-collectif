@@ -7,10 +7,9 @@ final class CapcoAppBundleMessagesTypes
     public const DEBATE_ARTICLE_CRAWLER = 'debate_article.crawler';
 
     public const USER_INVITE_INVITATION = 'user_invite.invitation';
+    public const USER_INVITE_INVITATION_BY_ORGANIZATION = 'user_invite.invitation_by_organization';
     public const USER_INVITE_CHECK = 'user_invite.check';
-
     public const USER_EMAIL_REMINDER = 'user.email.reminder';
-
     public const USER_ARCHIVE_REQUEST = 'user_archive.request';
 
     public const COMMENT_CREATE = 'comment.create';

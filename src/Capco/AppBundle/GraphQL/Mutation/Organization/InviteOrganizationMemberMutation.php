@@ -84,13 +84,11 @@ class InviteOrganizationMemberMutation implements MutationInterface
         $invitation = $this->invite($user, $email, $organization, $role, $viewer);
 
         // user not exist, send an invitation for registration
-        /** active this on next PR
         if (!$invitation->getUser()) {
             $this->inviteUserToRegister($invitation);
 
             return ['invitation' => $invitation];
         }
-         * */
 
         try {
             $this->publisher->publish(
@@ -129,13 +127,62 @@ class InviteOrganizationMemberMutation implements MutationInterface
         return [$organizationId, $email, $role];
     }
 
-    private function invite(?User $user, ?string $email, Organization $organization, string $role, User $viewer): PendingOrganizationInvitation
-    {
+    private function invite(
+        ?User $user,
+        ?string $email,
+        Organization $organization,
+        string $role,
+        User $viewer
+    ): PendingOrganizationInvitation {
         $token = $this->tokenGenerator->generateToken();
-        $invitation = PendingOrganizationInvitation::makeInvitation($organization, $role, $token, $viewer, $user, $email);
+        $invitation = PendingOrganizationInvitation::makeInvitation(
+            $organization,
+            $role,
+            $token,
+            $viewer,
+            $user,
+            $email
+        );
         $this->em->persist($invitation);
         $this->em->flush();
 
         return $invitation;
+    }
+
+    private function inviteUserToRegister(PendingOrganizationInvitation $invitation): void
+    {
+        $message = $this->translator->trans(
+            'organization_invitation.content',
+            [
+                'adminName' => $invitation
+                    ->getOrganization()
+                    ->getUserAdmin()
+                    ->getUsername(),
+                'plateformName' => AbstractMessage::escape(
+                    $this->siteParameter->getValue('global.site.fullname')
+                ),
+            ],
+            'CapcoAppBundle'
+        );
+        $redirection = $this->router->generate(
+            'capco_app_user_invitation',
+            ['token' => $invitation->getToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+        $userInvite = UserInvite::invite(
+            $invitation->getEmail(),
+            false,
+            false,
+            $invitation->getToken(),
+            $message,
+            $redirection
+        );
+        $emailMessage = new UserInviteEmailMessage($userInvite);
+        $emailMessage->setMessageType(CapcoAppBundleMessagesTypes::USER_INVITE_INVITATION_BY_ORGANIZATION);
+        // on UserInviteEmailMessageListener postPersist send email to invite user
+        $userInvite->addEmailMessage($emailMessage);
+
+        $this->em->persist($userInvite);
+        $this->em->flush();
     }
 }

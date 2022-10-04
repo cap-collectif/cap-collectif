@@ -55,3 +55,11 @@ Capco\AppBundle\Entity\UserInviteEmailMessage:
         internalStatus: 'waiting_sending'
         mailerId: 'message8'
         mailerType: 'mandrill'
+    organizationInvitationMessage:
+        __construct: ['@organizationInvitation']
+        id: 'organizationInvitationMessage'
+        createdAt: <(new \DateTime('2022-09-29 00:00:51'))>
+        internalStatus: 'waiting_sending'
+        mailerId: 'message9'
+        mailerType: 'mandrill'
+        messageType: 'user_invite.invitation_by_organization'

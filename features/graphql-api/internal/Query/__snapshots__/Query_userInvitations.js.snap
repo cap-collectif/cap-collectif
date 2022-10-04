@@ -6,6 +6,14 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "email": "toto@cap-collectif.com",
+          "id": "VXNlckludml0ZTpvcmdhbml6YXRpb25JbnZpdGF0aW9u",
+          "isAdmin": false,
+          "isProjectAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
           "email": "redirect@invitation.com",
           "id": "VXNlckludml0ZTpyZWRpcmVjdEludml0YXRpb24=",
           "isAdmin": false,

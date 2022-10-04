@@ -67,6 +67,12 @@ class UserInvite implements Expirable, Invitation
      */
     private Collection $emailMessages;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Organization\Organization")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private ?Organization $organization = null;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -193,6 +199,18 @@ class UserInvite implements Expirable, Invitation
         if (!$this->emailMessages->contains($emailMessage)) {
             $this->emailMessages->add($emailMessage);
         }
+
+        return $this;
+    }
+
+    public function getOrganization(): ?Organization
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(?Organization $organization): self
+    {
+        $this->organization = $organization;
 
         return $this;
     }

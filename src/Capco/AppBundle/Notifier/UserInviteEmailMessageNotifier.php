@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\Exception\UserInviteMessageQueuedException;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\UserInvite\UserInviteNewInvitation;
+use Capco\AppBundle\Mailer\Message\UserInvite\UserInviteNewInvitationByOrganization;
 use Capco\AppBundle\Mailer\SenderEmailDomains\MailjetClient;
 use Capco\AppBundle\Mailer\SenderEmailDomains\MandrillClient;
 use Capco\AppBundle\Mailer\Transport\MailjetTransport;
@@ -140,6 +141,40 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
             $recipient
         );
 
+        return $this->deliver($emailMessage, $delivered);
+    }
+
+    public function onNewInvitationByOrganization(UserInviteEmailMessage $emailMessage): bool
+    {
+        $invite = $emailMessage->getInvitation();
+        $recipient = (new User())
+            ->setLocale($this->siteParams->getDefaultLocale())
+            ->setEmail($invite->getEmail());
+
+        $delivered = $this->mailer->createAndSendMessage(
+            UserInviteNewInvitationByOrganization::class,
+            $invite,
+            [
+                'platformName' => $this->siteParams->getValue('global.site.organization_name'),
+                'adminName' => $invite
+                    ->getOrganization()
+                    ->getUserAdmin()
+                    ->getUsername(),
+                'organizationName' => $invite->getOrganization()->getTitle(),
+                'invitationUrl' => $this->router->generate(
+                    'capco_app_user_invitation',
+                    ['token' => $invite->getToken()],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                ),
+            ],
+            $recipient
+        );
+
+        return $this->deliver($emailMessage, $delivered);
+    }
+
+    public function deliver(UserInviteEmailMessage $emailMessage, bool $delivered): bool
+    {
         // The transport instance returned from the mailer is Capco\AppBundle\Mailer\Transport\Transport
         $transport = $this->mailer->getMailerTransport()->getTransport();
         if ($messageId = $this->getLastMessageId($transport)) {
