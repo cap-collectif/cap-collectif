@@ -284,3 +284,9 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: sms_credit_alert_consumed_credit
+        organization_member_invitation:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: organization_member_invitation

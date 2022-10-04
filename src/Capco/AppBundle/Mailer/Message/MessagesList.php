@@ -9,6 +9,7 @@ use Capco\AppBundle\Mailer\Message\Event\EventDeleteMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventReviewApprovedMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventReviewRefusedMessage;
+use Capco\AppBundle\Mailer\Message\Organization\InvitationMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeCreateMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalNewsCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalNewsUpdateAdminMessage;
@@ -47,6 +48,7 @@ final class MessagesList
         'refill_sms_credit' => RefillSmsCreditMessage::class,
         'alert_sms_consumed_credit' => AlertSmsConsumedCreditMessage::class,
         'project_district_refer_project' => ProjectDistrictRefererMessage::class,
+        'organization_invitation' => InvitationMessage::class,
     ];
     public const TEMPLATE_LIST = [
         'event_create_admin' => EventCreateAdminMessage::TEMPLATE,
@@ -70,5 +72,6 @@ final class MessagesList
         'refill_sms_credit' => RefillSmsCreditMessage::TEMPLATE,
         'alert_sms_consumed_credit' => AlertSmsConsumedCreditMessage::TEMPLATE,
         'project_district_refer_project' => ProjectDistrictRefererMessage::TEMPLATE,
+        'organization_invitation' => InvitationMessage::TEMPLATE,
     ];
 }

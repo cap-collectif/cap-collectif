@@ -1,19 +1,25 @@
 Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation:
-    invitation1:
+    inviteWelcomatic:
+        id: inviteWelcomatic
         organization: '@organization1'
         user: '@userWelcomattic'
         role: 'admin'
         token: 'token1'
         creator: '@user4'
-    invitation2:
+        expiresAt: <identity((new \DateTime('2030-01-01 00:00:00')))>
+    inviteMaxime:
+        id: inviteMaxime
         organization: '@organization1'
         user: '@userMaxime'
         role: 'user'
         token: 'token2'
         creator: '@user4'
-    invitation3:
+        expiresAt: <identity((new \DateTime('2030-01-01 00:00:00')))>
+    inviteTotoWithEmail:
+        id: inviteTotoWithEmail
         organization: '@organization2'
         role: 'user'
         email: 'toto@cap-collectif.com'
         token: 'token3'
         creator: '@user4'
+        expiresAt: <identity((new \DateTime('2030-01-01 00:00:00')))>

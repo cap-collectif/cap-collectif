@@ -2,16 +2,27 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Organization;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
+use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class InviteOrganizationMemberMutation implements MutationInterface
 {
@@ -24,19 +35,34 @@ class InviteOrganizationMemberMutation implements MutationInterface
     private UserRepository $userRepository;
     private PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
     private TokenGeneratorInterface $tokenGenerator;
+    private TranslatorInterface $translator;
+    private SiteParameterResolver $siteParameter;
+    private RouterInterface $router;
+    private Publisher $publisher;
+    private LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         UserRepository $userRepository,
         PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository,
-        TokenGeneratorInterface $tokenGenerator
+        TokenGeneratorInterface $tokenGenerator,
+        TranslatorInterface $translator,
+        SiteParameterResolver $siteParameter,
+        RouterInterface $router,
+        Publisher $publisher,
+        LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
         $this->userRepository = $userRepository;
         $this->pendingOrganizationInvitationRepository = $pendingOrganizationInvitationRepository;
         $this->tokenGenerator = $tokenGenerator;
+        $this->translator = $translator;
+        $this->siteParameter = $siteParameter;
+        $this->router = $router;
+        $this->publisher = $publisher;
+        $this->logger = $logger;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -57,7 +83,27 @@ class InviteOrganizationMemberMutation implements MutationInterface
 
         $invitation = $this->invite($user, $email, $organization, $role, $viewer);
 
-        // TODO : send email
+        // user not exist, send an invitation for registration
+        /** active this on next PR
+        if (!$invitation->getUser()) {
+            $this->inviteUserToRegister($invitation);
+
+            return ['invitation' => $invitation];
+        }
+         * */
+
+        try {
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::ORGANIZATION_MEMBER_INVITATION,
+                new Message(
+                    json_encode([
+                        'id' => $invitation->getId(),
+                    ])
+                )
+            );
+        } catch (\RuntimeException $exception) {
+            $this->logger->error(__CLASS__ . ': could not publish to rabbitmq.');
+        }
 
         return ['invitation' => $invitation];
     }
@@ -67,7 +113,7 @@ class InviteOrganizationMemberMutation implements MutationInterface
         ?User $user,
         ?string $email = null
     ): bool {
-        return (bool)$this->pendingOrganizationInvitationRepository->findOneByEmailOrUserAndOrganization(
+        return (bool) $this->pendingOrganizationInvitationRepository->findOneByEmailOrUserAndOrganization(
             $organization,
             $user,
             $email

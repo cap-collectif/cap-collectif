@@ -2,7 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\DateTime\Expirable;
+use Capco\AppBundle\Entity\Interfaces\Invitation;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Repository\UserInviteRepository;
+use Capco\AppBundle\Traits\DateTime\ExpirableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,12 +17,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=UserInviteRepository::class)
  * @ORM\Table(name="user_invite")
  */
-class UserInvite
+class UserInvite implements Expirable, Invitation
 {
+    use ExpirableTrait;
     use TimestampableTrait;
     use UuidTrait;
-
-    public const EXPIRES_AT_PERIOD = '+ 7 days';
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -29,11 +32,6 @@ class UserInvite
      * @ORM\Column(type="string", length=255)
      */
     private string $token;
-
-    /**
-     * @ORM\Column(name="expires_at", type="datetime")
-     */
-    private \DateTimeInterface $expiresAt;
 
     /**
      * @ORM\Column(name="is_admin", type="boolean")
@@ -67,7 +65,7 @@ class UserInvite
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\UserInviteEmailMessage", mappedBy="invitation", cascade={"persist"})
      */
-    private $emailMessages;
+    private Collection $emailMessages;
 
     public function __construct()
     {
@@ -99,18 +97,6 @@ class UserInvite
         return $this;
     }
 
-    public function getExpiresAt(): ?\DateTimeInterface
-    {
-        return $this->expiresAt;
-    }
-
-    public function setExpiresAt(\DateTimeInterface $expiresAt): self
-    {
-        $this->expiresAt = $expiresAt;
-
-        return $this;
-    }
-
     public function isAdmin(): ?bool
     {
         return $this->isAdmin;
@@ -133,11 +119,6 @@ class UserInvite
         $this->isProjectAdmin = $isProjectAdmin;
 
         return $this;
-    }
-
-    public function hasExpired(): bool
-    {
-        return $this->expiresAt < new \DateTimeImmutable();
     }
 
     /**
@@ -209,10 +190,33 @@ class UserInvite
 
     public function addEmailMessage(UserInviteEmailMessage $emailMessage): self
     {
-        if (!$this->groups->contains($emailMessage)) {
-            $this->emailMessages[] = $emailMessage;
+        if (!$this->emailMessages->contains($emailMessage)) {
+            $this->emailMessages->add($emailMessage);
         }
 
         return $this;
+    }
+
+    public function getInvitationEmail(): string
+    {
+        return $this->getEmail();
+    }
+
+    public static function invite(
+        string $email,
+        bool $isAdmin,
+        bool $isProjectAdmin,
+        string $token,
+        ?string $message,
+        ?string $redirectionUrl
+    ): self {
+        return (new self())
+            ->setEmail($email)
+            ->setIsAdmin($isAdmin)
+            ->setIsProjectAdmin($isProjectAdmin)
+            ->setToken($token)
+            ->setMessage($message)
+            ->setRedirectionUrl($redirectionUrl)
+            ->setExpiresAt((new \DateTimeImmutable())->modify(Expirable::EXPIRES_AT_PERIOD));
     }
 }

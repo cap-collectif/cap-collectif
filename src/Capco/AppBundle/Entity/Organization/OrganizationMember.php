@@ -75,4 +75,9 @@ class OrganizationMember
     {
         $this->role = $role;
     }
+
+    public function isAdmin(): bool
+    {
+        return OrganizationMemberRoleType::ADMIN === $this->role;
+    }
 }

@@ -281,6 +281,18 @@ class Organization implements
             ->setOrganizationSocialNetworks(null);
     }
 
+    public function getUserAdmin(): ?User
+    {
+        /** @var OrganizationMember $member */
+        foreach ($this->getMembers() as $member) {
+            if ($member->isAdmin()) {
+                return $member->getUser();
+            }
+        }
+
+        return null;
+    }
+
     private function removeMembers(): void
     {
         foreach ($this->getMembers() as $member) {

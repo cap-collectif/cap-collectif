@@ -47,4 +47,6 @@ final class CapcoAppBundleMessagesTypes
     public const SENDINBLUE = 'sendinblue';
 
     public const PROJECT_DISTRICT_NOTIFICATION = 'project_district.notification';
+
+    public const ORGANIZATION_MEMBER_INVITATION = 'organization_member.invitation';
 }

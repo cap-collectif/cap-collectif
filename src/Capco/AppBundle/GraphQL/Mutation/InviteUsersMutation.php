@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Interfaces\DateTime\Expirable;
 use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\Enum\UserRole;
@@ -93,14 +94,15 @@ class InviteUsersMutation implements MutationInterface
             if (\in_array($email, $existingUserEmails, true)) {
                 continue;
             }
-            $invitation = (new UserInvite())
-                ->setEmail($email)
-                ->setIsAdmin($isAdmin)
-                ->setIsProjectAdmin($isProjectAdmin)
-                ->setToken($this->tokenGenerator->generateToken())
-                ->setMessage($message)
-                ->setRedirectionUrl($redirectionUrl)
-                ->setExpiresAt((new \DateTimeImmutable())->modify(UserInvite::EXPIRES_AT_PERIOD));
+            $invitation = UserInvite::invite(
+                $email,
+                $isAdmin,
+                $isProjectAdmin,
+                $this->tokenGenerator->generateToken(),
+                $message,
+                $redirectionUrl
+            );
+
             $invitation->addEmailMessage(new UserInviteEmailMessage($invitation));
 
             foreach ($groupEntities as $groupEntity) {
@@ -123,7 +125,7 @@ class InviteUsersMutation implements MutationInterface
             $userInvites = $this->userInviteRepository->findBy(['email' => $toUpdateEmails]);
             foreach ($userInvites as $userInvite) {
                 $userInvite
-                    ->setExpiresAt(new \DateTimeImmutable(UserInvite::EXPIRES_AT_PERIOD))
+                    ->setExpiresAt(new \DateTimeImmutable(Expirable::EXPIRES_AT_PERIOD))
                     ->setIsAdmin($isAdmin)
                     ->setIsProjectAdmin($isProjectAdmin)
                     ->setGroups(new ArrayCollection($groupEntities))

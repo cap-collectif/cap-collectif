@@ -2,13 +2,14 @@
 
 namespace Capco\AppBundle\Entity\Organization;
 
+use Capco\AppBundle\Entity\Interfaces\DateTime\Expirable;
+use Capco\AppBundle\Entity\Interfaces\Invitation;
+use Capco\AppBundle\Traits\DateTime\ExpirableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use EmailChecker\Exception\InvalidEmailException;
-use GraphQL\Utils\Utils;
 
 /**
  * @ORM\Table(name="pending_organization_invitation",
@@ -21,8 +22,9 @@ use GraphQL\Utils\Utils;
  * @CapcoAssert\PendingOrganizationInvitation
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository")
  */
-class PendingOrganizationInvitation
+class PendingOrganizationInvitation implements Expirable, Invitation
 {
+    use ExpirableTrait;
     use TimestampableTrait;
     use UuidTrait;
 
@@ -131,17 +133,25 @@ class PendingOrganizationInvitation
         return $this;
     }
 
+    public function getInvitationEmail(): string
+    {
+        return $this->getEmail() ?? $this->getUser()->getEmail();
+    }
+
     public static function create(
         Organization $organization,
         string $role,
         string $token,
         User $creator
     ): self {
+        $now = new \DateTime();
+
         return (new self())
             ->setOrganization($organization)
             ->setRole($role)
             ->setToken($token)
-            ->setCreatedAt(new \DateTime())
+            ->setCreatedAt($now)
+            ->setExpiresAt($now->modify(Expirable::EXPIRES_AT_PERIOD))
             ->setCreator($creator);
     }
 
@@ -152,7 +162,9 @@ class PendingOrganizationInvitation
         User $creator,
         ?User $user,
         ?string $email
-    ): PendingOrganizationInvitation {
-        return static::create($organization, $role, $token, $creator)->setUser($user)->setEmail($email);
+    ): self {
+        return static::create($organization, $role, $token, $creator)
+            ->setUser($user)
+            ->setEmail($email);
     }
 }

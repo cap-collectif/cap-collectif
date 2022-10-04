@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Theme;
@@ -201,6 +202,13 @@ class UrlResolver
                     $referenceType
                 )
                 : '';
+        }
+        if ($object instanceof PendingOrganizationInvitation && $object->getToken()) {
+            return $this->router->generate(
+                'capco_app_organization_invitation',
+                ['token' => $object->getToken(), '_locale' => $locale],
+                $referenceType
+            );
         }
 
         if (false !== ($url = $this->generateOpinionOrProposalRoute($object, $absolute))) {

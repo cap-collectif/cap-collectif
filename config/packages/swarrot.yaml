@@ -148,6 +148,9 @@ swarrot:
         sms_credit.alert_consumed_credit:
             exchange: capco_direct_exchange
             routing_key: sms_credit_alert_consumed_credit
+        organization_member.invitation:
+            exchange: capco_direct_exchange
+            routing_key: organization_member_invitation
     consumers:
         elasticsearch_indexation:
             processor: Capco\AppBundle\Elasticsearch\IndexationProcessor
@@ -846,6 +849,23 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'project_district_%%attempt%%'
+        organization_member_invitation:
+            processor: Capco\AppBundle\Processor\Organization\OrganizationMemberProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'organization_member_%%attempt%%'
 
         sms_credit_initial_credit:
             processor: Capco\AppBundle\Processor\Sms\SmsCreditInitialCreditProcessor
