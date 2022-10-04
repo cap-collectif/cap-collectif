@@ -17,8 +17,8 @@ Capco\AppBundle\Entity\Steps\DebateStep:
         slug: pour-ou-contre-offrir-un-oculus-quest
         label: Débat pas commencé (malheureusement)
         body: null
-        startAt: <identity((new \DateTime('2022-10-01')))>
-        endAt: <identity((new \DateTime('2024-10-01')))>
+        startAt: <identity((new \DateTime('2030-10-01')))>
+        endAt: <identity((new \DateTime('2031-10-01')))>
     debateStepConfinement:
         __construct: ['@debateConfinement']
         isAnonymousParticipationAllowed: false
