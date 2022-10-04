@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|inviteUserToOrganization mutation should invite a user 1`] = `
+Object {
+  "inviteUserToOrganization": Object {
+    "errorCode": null,
+    "invitation": Object {
+      "email": null,
+      "role": "user",
+      "user": Object {
+        "email": "aurelien@cap-collectif.com",
+      },
+    },
+  },
+}
+`;

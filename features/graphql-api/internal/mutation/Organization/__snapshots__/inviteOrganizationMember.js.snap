@@ -1,20 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal|inviteOrganizationMember mutation should invite an registered user 1`] = `
-Object {
-  "inviteOrganizationMember": Object {
-    "errorCode": null,
-    "invitation": Object {
-      "email": "user10@cap-collectif.com",
-      "role": "user",
-      "user": Object {
-        "email": "user10@cap-collectif.com",
-      },
-    },
-  },
-}
-`;
-
 exports[`Internal|inviteOrganizationMember mutation should invite an unregistered user 1`] = `
 Object {
   "inviteOrganizationMember": Object {

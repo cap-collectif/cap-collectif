@@ -1625,6 +1625,12 @@ InternalMutation:
                     inputType: InviteOrganizationMemberInput
                     payloadType: InviteOrganizationMemberPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteOrganizationMemberMutation", [value, getUser()])'
+            inviteUserToOrganization:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: InviteUserToOrganizationInput
+                    payloadType: InviteUserToOrganizationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteUserToOrganizationMutation", [value, getUser()])'
             createProposalAnalysisComment:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalAnalysisCommentMutation").isGranted(args["input"]["proposalAnalysisId"], getUser())'
                 builder: 'Relay::Mutation'

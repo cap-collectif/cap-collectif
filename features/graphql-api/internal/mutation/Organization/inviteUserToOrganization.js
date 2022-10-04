@@ -1,9 +1,9 @@
 /* eslint-env jest */
 import '../../../_setup';
 
-const InviteOrganizationMember = /* GraphQL */ `
-  mutation InviteOrganizationMember($input: InviteOrganizationMemberInput!) {
-    inviteOrganizationMember(input: $input) {
+const InviteUserToOrganization = /* GraphQL */ `
+  mutation InviteUserToOrganization($input: InviteUserToOrganizationInput!) {
+    inviteUserToOrganization(input: $input) {
       invitation {
         email
         user {
@@ -21,14 +21,14 @@ const input = {
   "role": "user"
 }
 
-describe('Internal|inviteOrganizationMember mutation', () => {
-  it('should invite an unregistered user', async () => {
+describe('Internal|inviteUserToOrganization mutation', () => {
+  it('should invite a user', async () => {
     const response = await graphql(
-      InviteOrganizationMember,
+      InviteUserToOrganization,
       {
         input: {
           ...input,
-          email: "abc@cap-collectif.com"
+          user: toGlobalId('User', 'userSpyl')
         },
       },
       'internal_admin',
@@ -36,47 +36,44 @@ describe('Internal|inviteOrganizationMember mutation', () => {
 
     expect(response).toMatchSnapshot();
   });
-  it('should return USER_ALREADY_EXISTING errorCode', async () => {
+  it('should return USER_ALREADY_MEMBER errorCode', async () => {
     const response = await graphql(
-      InviteOrganizationMember,
+      InviteUserToOrganization,
       {
         input: {
           ...input,
-          email: "sfavot@cap-collectif.com"
+          user: toGlobalId('User', 'user2')
         },
       },
       'internal_admin',
     );
-    expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_EXISTING');
+    expect(response.inviteUserToOrganization.errorCode).toBe('USER_ALREADY_MEMBER');
   });
-
   it('should return USER_ALREADY_INVITED errorCode', async () => {
     const response = await graphql(
-      InviteOrganizationMember,
+      InviteUserToOrganization,
       {
         input: {
           ...input,
-          organizationId: toGlobalId('Organization','organization2'),
-          email: "toto@cap-collectif.com"
+          user: toGlobalId('User', 'userMaxime')
         },
       },
       'internal_admin',
     );
-    expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_INVITED');
+    expect(response.inviteUserToOrganization.errorCode).toBe('USER_ALREADY_INVITED');
   });
-
   it('should return ORGANIZATION_NOT_FOUND errorCode', async () => {
     const response = await graphql(
-      InviteOrganizationMember,
+      InviteUserToOrganization,
       {
         input: {
           ...input,
           organizationId: toGlobalId('Organization','notExist'),
-          email: "toto@cap-collectif.com"
+          user: toGlobalId('User', 'userMaxime')
         },
       },
       'internal_admin',
     );
-    expect(response.inviteOrganizationMember.errorCode).toBe('ORGANIZATION_NOT_FOUND');
+    expect(response.inviteUserToOrganization.errorCode).toBe('ORGANIZATION_NOT_FOUND');
   });
 });

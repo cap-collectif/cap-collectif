@@ -1,0 +1,11 @@
+InviteUserToOrganizationPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of inviteUserToOrganization mutation.'
+        fields:
+            invitation:
+                type: 'InternalPendingOrganizationInvitation'
+                description: 'The created organization invite.'
+            errorCode:
+                type: 'InviteUserToOrganizationErrorCode'
+                description: 'The available errors for inviteUserToOrganization mutation.'
