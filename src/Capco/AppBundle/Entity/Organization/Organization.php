@@ -137,7 +137,7 @@ class Organization implements
     public function addMember(OrganizationMember $member): self
     {
         if (!$this->members->contains($member)) {
-            $this->members[] = $member;
+            $this->members->add($member);
         }
 
         return $this;

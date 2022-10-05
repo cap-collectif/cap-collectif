@@ -207,6 +207,8 @@ class OauthUserProvider extends FOSUBUserProvider
             $user->setEmail($email);
             $user->setEnabled(true);
             $this->userInvitationHandler->handleUserInvite($user);
+            $this->userInvitationHandler->handleUserOrganizationInvite($user);
+            $this->userManager->updateUser($user);
         }
 
         $setter = 'set' . ucfirst($serviceName);

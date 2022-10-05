@@ -5,6 +5,7 @@ namespace spec\Capco\UserBundle\Handler;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Enum\UserRole;
+use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Entity\Group;
@@ -22,9 +23,16 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         EntityManagerInterface $em,
         Manager $manager,
         UserInviteRepository $userInviteRepository,
+        PendingOrganizationInvitationRepository $organizationInvitationRepository,
         Publisher $publisher
     ) {
-        $this->beConstructedWith($userInviteRepository, $manager, $em, $publisher);
+        $this->beConstructedWith(
+            $userInviteRepository,
+            $organizationInvitationRepository,
+            $manager,
+            $em,
+            $publisher
+        );
     }
 
     public function it_is_initializable(): void
@@ -46,14 +54,9 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $invitation = (new UserInvite())->setEmail($email)->setIsAdmin(false);
         $userInviteRepository->findOneByEmailAndNotExpired($email)->willReturn($invitation);
 
-        $now = (new \DateTime())->format('Y-m-d');
-        $date = new \DateTime($now);
-        $user->setConfirmationToken(null)->shouldBeCalledOnce();
-        $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
-        $user->isConsentInternalCommunication()->willReturn(true);
+        $user->confirmAccount()->shouldBeCalled();
 
-        $em->persist($user)->shouldBeCalledOnce();
-        $em->flush()->shouldBeCalledOnce();
+        $user->isConsentInternalCommunication()->willReturn(true);
 
         $this->handleUserInvite($user);
     }
@@ -80,13 +83,8 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $user->addRole(UserRole::ROLE_PROJECT_ADMIN)->shouldBeCalledOnce();
         $user->addRole(UserRole::ROLE_ADMIN)->shouldNotBeCalled();
 
-        $now = (new \DateTime())->format('Y-m-d');
-        $date = new \DateTime($now);
-        $user->setConfirmationToken(null)->shouldBeCalledOnce();
-        $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
+        $user->confirmAccount()->shouldBeCalled();
 
-        $em->persist($user)->shouldBeCalledOnce();
-        $em->flush()->shouldBeCalledOnce();
 
         $this->handleUserInvite($user);
     }
@@ -112,14 +110,9 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $user->addRole(UserRole::ROLE_ADMIN)->shouldBeCalledOnce();
         $user->addRole(UserRole::ROLE_PROJECT_ADMIN)->shouldNotBeCalled();
 
-        $now = (new \DateTime())->format('Y-m-d');
-        $date = new \DateTime($now);
-        $user->setConfirmationToken(null)->shouldBeCalledOnce();
-        $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
-        $user->isConsentInternalCommunication()->willReturn(true);
+        $user->confirmAccount()->shouldBeCalled();
 
-        $em->persist($user)->shouldBeCalledOnce();
-        $em->flush()->shouldBeCalledOnce();
+        $user->isConsentInternalCommunication()->willReturn(true);
 
         $this->handleUserInvite($user);
     }
@@ -156,15 +149,8 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $em->persist(Argument::type(UserGroup::class))->shouldBeCalled();
 
         $userInviteRepository->findOneByEmailAndNotExpired($email)->willReturn($invitation);
-
-        $now = (new \DateTime())->format('Y-m-d');
-        $date = new \DateTime($now);
-        $user->setConfirmationToken(null)->shouldBeCalledOnce();
-        $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
+        $user->confirmAccount()->shouldBeCalled();
         $user->isConsentInternalCommunication()->willReturn(true);
-
-        $em->persist($user)->shouldBeCalledOnce();
-        $em->flush()->shouldBeCalledOnce();
 
         $this->handleUserInvite($user);
     }

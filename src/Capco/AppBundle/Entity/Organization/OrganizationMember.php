@@ -80,4 +80,9 @@ class OrganizationMember
     {
         return OrganizationMemberRoleType::ADMIN === $this->role;
     }
+
+    public static function create(Organization $organization, User $user): self
+    {
+        return (new self())->setOrganization($organization)->setUser($user);
+    }
 }

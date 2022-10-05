@@ -1120,4 +1120,11 @@ class User extends AbstractUser implements
             })
             ->toArray();
     }
+
+    public function confirmAccount(): void
+    {
+        $this->setConfirmationToken(null);
+        $now = (new \DateTime())->format('Y-m-d');
+        $this->setConfirmedAccountAt(new \DateTime($now));
+    }
 }

@@ -2,9 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Entity\Organization\OrganizationMember;
+use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
+use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\FOSNotifier;
+use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -15,8 +18,6 @@ use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -42,6 +43,7 @@ class RegisterMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private ResponsesFormatter $responsesFormatter;
     private UserInvitationHandler $userInvitationHandler;
+    private PendingOrganizationInvitationRepository $organizationInvitationRepository;
 
     public function __construct(
         Manager $toggleManager,
@@ -53,7 +55,8 @@ class RegisterMutation implements MutationInterface
         FOSNotifier $notifier,
         FormFactoryInterface $formFactory,
         ResponsesFormatter $responsesFormatter,
-        UserInvitationHandler $userInvitationHandler
+        UserInvitationHandler $userInvitationHandler,
+        PendingOrganizationInvitationRepository $organizationInvitationRepository
     ) {
         $this->toggleManager = $toggleManager;
         $this->userInviteRepository = $userInviteRepository;
@@ -65,20 +68,22 @@ class RegisterMutation implements MutationInterface
         $this->formFactory = $formFactory;
         $this->responsesFormatter = $responsesFormatter;
         $this->userInvitationHandler = $userInvitationHandler;
+        $this->organizationInvitationRepository = $organizationInvitationRepository;
     }
 
-    public function __invoke(Argument $args)
+    public function __invoke(Argument $args): array
     {
         $data = $args->getArrayCopy();
         $invitationToken = $data['invitationToken'] ?? '';
         unset($data['invitationToken']);
 
-        $invitation = $this->userInviteRepository->findOneByTokenNotExpiredAndEmail(
+        $invitation = $this->getInvitation($invitationToken, $data['email']);
+        $organizationInvitation = $this->getInvitationFromOrganization(
             $invitationToken,
             $data['email']
         );
 
-        if (!$invitation && !$this->toggleManager->isActive('registration')) {
+        if (!$this->isRegistrationAllowed($invitation, $organizationInvitation)) {
             // If the request is not made from an invitation and the feature toggle is not active
             // e.g traditional registration flow
             $message = sprintf(
@@ -93,19 +98,12 @@ class RegisterMutation implements MutationInterface
 
         /** @var User $user */
         $user = $this->userManager->createUser();
-
-        if ($this->toggleManager->isActive('multilangue')) {
-            if (isset($data['locale']) && $data['locale']) {
-                $user->setLocale($data['locale']);
-            }
-        }
-        unset($data['locale']);
+        $data = $this->setUserLocal($data, $user);
 
         $form = $this->formFactory->create(ApiRegistrationFormType::class, $user);
         if (isset($data['responses'])) {
             $data['responses'] = $this->responsesFormatter->format($data['responses']);
         }
-
         $form->submit($data, false);
 
         if (!$form->isValid()) {
@@ -136,17 +134,62 @@ class RegisterMutation implements MutationInterface
         // This allow the user to login
         $user->setEnabled(true);
 
-        if (!$invitation) {
+        if (!$invitation && !$organizationInvitation) {
             // We generate a confirmation token to validate email
             $token = $this->tokenGenerator->generateToken();
             $user->setConfirmationToken($token);
             $this->notifier->sendConfirmationEmailMessage($user);
         }
 
-        $this->userManager->updateUser($user);
+        if ($organizationInvitation instanceof PendingOrganizationInvitation) {
+            $organization = $organizationInvitation->getOrganization();
+            $memberOfOrganization = OrganizationMember::create($organization, $user);
+            $user->addMemberOfOrganization($memberOfOrganization);
+        }
 
         $this->userInvitationHandler->handleUserInvite($user);
+        $this->userInvitationHandler->handleUserOrganizationInvite($user);
+        $this->userManager->updateUser($user);
 
         return ['user' => $user, 'errorsCode' => null];
+    }
+
+    private function getInvitation($invitationToken, $email): ?UserInvite
+    {
+        return $this->userInviteRepository->findOneByTokenNotExpiredAndEmail(
+            $invitationToken,
+            $email
+        );
+    }
+
+    private function getInvitationFromOrganization(
+        $invitationToken,
+        $email
+    ): ?PendingOrganizationInvitation {
+        return $this->organizationInvitationRepository->findOneBy([
+            'token' => $invitationToken,
+            'email' => $email,
+        ]);
+    }
+
+    private function isRegistrationAllowed(
+        ?UserInvite $invitation,
+        ?PendingOrganizationInvitation $organizationInvitation
+    ): bool {
+        $gotInvitation = $invitation || $organizationInvitation;
+
+        return $gotInvitation || $this->toggleManager->isActive(Manager::registration);
+    }
+
+    private function setUserLocal(array $data, User $user): array
+    {
+        if ($this->toggleManager->isActive(Manager::multilangue)) {
+            if (isset($data['locale']) && $data['locale']) {
+                $user->setLocale($data['locale']);
+            }
+        }
+        unset($data['locale']);
+
+        return $data;
     }
 }

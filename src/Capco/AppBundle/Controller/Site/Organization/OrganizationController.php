@@ -5,9 +5,10 @@ namespace Capco\AppBundle\Controller\Site\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Security\LoginManagerInterface;
 use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,50 +22,61 @@ class OrganizationController extends AbstractController
     private RouterInterface $router;
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
+    private LoginManagerInterface $loginManager;
 
     public function __construct(
         PendingOrganizationInvitationRepository $repository,
         TranslatorInterface $translator,
         RouterInterface $router,
         EntityManagerInterface $em,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        LoginManagerInterface $loginManager
     ) {
         $this->repository = $repository;
         $this->translator = $translator;
         $this->router = $router;
         $this->em = $em;
         $this->logger = $logger;
+        $this->loginManager = $loginManager;
     }
 
     /**
-     * @Security("has_role('ROLE_USER')")
      * @Route("/invitation/organization/{token}", name="capco_app_organization_invitation", options={"i18n" = false})
      */
     public function acceptInvitation(string $token): RedirectResponse
     {
         $invitation = $this->repository->findOneBy([
             'token' => $token,
-            'user' => $this->getUser(),
         ]);
-        if (null === $invitation) {
+        $response = new RedirectResponse('/');
+        $viewerIsConnected = $this->getUser() instanceof User;
+        if (
+            null === $invitation ||
+            ($viewerIsConnected && $invitation->getUser() !== $this->getUser())
+        ) {
             $this->addFlash(
                 'danger',
                 $this->translator->trans('invalid-token', [], 'CapcoAppBundle')
             );
-            $this->logger->debug(
-                __METHOD__ . ' : invalid token ' . $token . ' by ' . $this->getUser()->getUsername()
-            );
+            $this->logger->debug(__METHOD__ . ' : invalid token ' . $token);
 
-            return new RedirectResponse('/');
+            return $response;
         }
 
         $this->validateInvitation($invitation);
-
-        return new RedirectResponse(
-            $this->router->generate('capco_organization_profile_show', [
-                'slug' => $invitation->getOrganization()->getSlug(),
-            ])
+        if (!$viewerIsConnected && $invitation->getUser()) {
+            $this->loginManager->logInUser('main', $invitation->getUser(), $response);
+        }
+        $this->addFlash(
+            'success',
+            $this->translator->trans(
+                'notify-success-joint-organization',
+                ['organizationName' => $invitation->getOrganization()->getTitle()],
+                'CapcoAppBundle'
+            )
         );
+
+        return $response;
     }
 
     private function validateInvitation(PendingOrganizationInvitation $invitation): void

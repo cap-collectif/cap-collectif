@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository\Organization;
 
 use Capco\AppBundle\Entity\Organization\OrganizationTranslation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -12,10 +13,6 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method OrganizationTranslation[]    findAll()
  * @method OrganizationTranslation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class OrganizationTranslationRepository extends ServiceEntityRepository
+class OrganizationTranslationRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, OrganizationTranslation::class);
-    }
 }

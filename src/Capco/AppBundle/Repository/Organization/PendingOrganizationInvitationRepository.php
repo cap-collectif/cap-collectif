@@ -19,8 +19,7 @@ class PendingOrganizationInvitationRepository extends EntityRepository
         Organization $organization,
         ?int $limit = null,
         ?int $offset = null
-    ): array
-    {
+    ): array {
         return $this->createQueryBuilder('p')
             ->where('p.organization = :organization')
             ->setFirstResult($offset)
@@ -40,13 +39,26 @@ class PendingOrganizationInvitationRepository extends EntityRepository
             ->getSingleScalarResult() ?? 0;
     }
 
-    public function findOneByEmailOrUserAndOrganization(Organization $organization, ?User $user = null, ?string $email = null): array
+    public function countByEmail(string $email): int
     {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->where('p.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getSingleScalarResult() ?? 0;
+    }
+
+    public function findOneByEmailOrUserAndOrganization(
+        Organization $organization,
+        ?User $user = null,
+        ?string $email = null
+    ): array {
         return $this->createQueryBuilder('p')
             ->where('p.organization = :organization')
             ->andWhere('p.user = :user')
             ->orWhere('p.email = :email')
-            ->setParameters([ 'organization' => $organization, 'user' => $user, 'email' => $email])
+            ->setParameters(['organization' => $organization, 'user' => $user, 'email' => $email])
             ->getQuery()
             ->getResult();
     }
