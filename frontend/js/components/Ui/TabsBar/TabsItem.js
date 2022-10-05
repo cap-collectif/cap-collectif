@@ -19,7 +19,7 @@ const TabsItem = ({ item }: Props) => {
       return <TabsBarDropdown item={item} />;
     }
 
-    return (
+    return item.link ? (
       <S.TabsLink
         id={`tabs-navbar-link-${item.id}`}
         href={item.link}
@@ -28,6 +28,8 @@ const TabsItem = ({ item }: Props) => {
         title={item.active ? ariaTitle : null}>
         {item.title}
       </S.TabsLink>
+    ) : (
+      <S.TabsParent id={`tabs-navbar-parent-${item.id}`}>{item.title}</S.TabsParent>
     );
   }
 

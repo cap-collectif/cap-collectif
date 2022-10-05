@@ -16,7 +16,12 @@ const renderChildren = (children, menu): React.Node => {
     <React.Fragment key={child.id}>
       {childIndex > 0 && isSeeMore && <MenuSeparator {...menu} as={S.Separator} />}
 
-      <MenuItem {...menu} as={S.TabsLink} href={child.link} active={child.active} key={childIndex}>
+      <MenuItem
+        {...menu}
+        as={child.link ? S.TabsLink : S.TabsParent}
+        href={child.link ? child.link : undefined}
+        active={child.active}
+        key={childIndex}>
         {child.title}
       </MenuItem>
 
@@ -24,8 +29,8 @@ const renderChildren = (children, menu): React.Node => {
         child.children.map(subChild => (
           <MenuItem
             {...menu}
-            as={S.TabsLink}
-            href={subChild.link}
+            as={subChild.link ? S.TabsLink : S.TabsParent}
+            href={subChild.link ? subChild.link : undefined}
             active={subChild.active}
             key={subChild.id}>
             {subChild.title}

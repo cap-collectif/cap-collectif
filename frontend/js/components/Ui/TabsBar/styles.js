@@ -55,7 +55,7 @@ export const TabsItemContainer: StyledComponent<
   cursor: pointer;
   ${props => props.active && activeNavItem}
 
-  & > a {
+  & > a, & > div[id*='tabs-navbar-parent'] {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -91,6 +91,22 @@ export const TabsLink: StyledComponent<
     background-color: ${props => props.theme.mainNavbarBgActive};
     text-decoration: none;
     outline: none;
+  }
+`;
+
+export const TabsParent: StyledComponent<
+  { active?: boolean, theme?: Theme },
+  Theme,
+  HTMLDivElement,
+> = styled.div`
+  color: ${props => props.theme && props.theme.mainNavbarText};
+  text-decoration: none;
+  text-align: left;
+  width: 100%;
+  padding: 3px 20px;
+  cursor: default !important;
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    padding: 10px 15px;
   }
 `;
 
