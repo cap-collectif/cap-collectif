@@ -25,3 +25,19 @@ Scenario: Member want ot leave organization
   """
   {"data":{"leaveOrganization":{"organizations":[null]}}}
   """
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "query getOrganizations {
+      viewer {
+        organizations {
+          id
+        }
+      }
+    }"
+  }
+  """
+  Then the JSON response should match:
+  """
+  {"data":{"viewer":{"organizations":[]}}}
+  """
