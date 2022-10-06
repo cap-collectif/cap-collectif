@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -23,6 +24,10 @@ class EventOwnerTypeResolver implements ResolverInterface
 
         if ('internal' === $currentSchemaName && $data instanceof User) {
             return $this->typeResolver->resolve('InternalUser');
+        }
+
+        if ('internal' === $currentSchemaName && $data instanceof Organization) {
+            return $this->typeResolver->resolve('InternalOrganization');
         }
 
         throw new UserError('Could not resolve type of EventOwner.');

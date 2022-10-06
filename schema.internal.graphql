@@ -8451,7 +8451,7 @@ enum OrderDirection {
 }
 
 """An organization."""
-type Organization implements Node & Author & PostOwner & ProjectOwner {
+type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwner {
   """The ID of an object."""
   id: ID!
 
@@ -8518,6 +8518,36 @@ type Organization implements Node & Author & PostOwner & ProjectOwner {
     """The ordering direction for posts"""
     orderBy: PostOrder = {field: UPDATED_AT, direction: DESC}
   ): PostConnection!
+
+  """Get all events that the organization owns."""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for events returned from the connection.
+    For example, OWNER will include only events that the current viewer owns.
+    
+    """
+    affiliations: [EventAffiliation!]
+
+    """the search query"""
+    search: String
+
+    """The ordering direction for events."""
+    orderBy: EventOrder = {field: START_AT, direction: DESC}
+
+    """Filter events by a given status."""
+    status: EventStatus = null
+
+    """only fetch where user is author"""
+    onlyWhenAuthor: Boolean = false
+  ): EventConnection!
 
   """Get all projects that the organization owns."""
   projects(

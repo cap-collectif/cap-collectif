@@ -258,3 +258,11 @@ Capco\AppBundle\Entity\Event:
         enabled: true
         projects: ['@projectIdf']
         steps: ['@collectstepIdf', '@selectionStepIdfAnalyse']
+    eventParthenay:
+        id: eventParthenay
+        createdAt: <identity((new \DateTime('2022-10-04')))>
+        startAt: <identity((new \DateTime('2030-05-12')))>
+        endAt: <identity((new \DateTime('2030-05-14')))>
+        enabled: true
+        owner: '@organization1'
+        creator: '@user5'

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -41,8 +42,11 @@ class EventRepository extends EntityRepository
      * Maybe use elasticsearch instead of MySQL.
      * If we don't need this to index data.
      */
-    public function findAllByUser(User $user, string $field = null, string $direction = null): array
-    {
+    public function findAllByUser(
+        User $user,
+        ?string $field = null,
+        ?string $direction = null
+    ): array {
         $qb = $this->createAvailableOrApprovedEventsQueryBuilder('e')
             ->andWhere('e.author = :user')
             ->setParameter('user', $user);
@@ -52,23 +56,6 @@ class EventRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
-    }
-
-    private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder
-    {
-        $qb = $this->createQueryBuilder($alias);
-        $qb->leftJoin("$alias.review", 'review')
-            ->andWhere(
-                $qb
-                    ->expr()
-                    ->orX(
-                        $qb->expr()->isNull('review'),
-                        $qb->expr()->eq('review.status', ':reviewStatus')
-                    )
-            )
-            ->setParameter('reviewStatus', EventReviewStatusType::APPROVED);
-
-        return $qb;
     }
 
     /**
@@ -186,8 +173,51 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
+    public function getByOwnerPaginated(Owner $owner, int $offset, int $limit): array
+    {
+        return $this->getByOwnerQueryBuilder($owner)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countByOwner(Owner $owner): int
+    {
+        return $this->getByOwnerQueryBuilder($owner)
+            ->select('count(e.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getByOwnerQueryBuilder(Owner $owner): QueryBuilder
+    {
+        return $this->createAvailableOrApprovedEventsQueryBuilder('e')
+            ->leftJoin($owner instanceof User ? 'e.owner' : 'e.organizationOwner', 'o')
+            ->andWhere('o.id = :ownerId')
+            ->setParameter('ownerId', $owner->getId())
+            ->orderBy('e.startAt', 'DESC');
+    }
+
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('e')->andWhere('e.enabled = true');
+    }
+
+    private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder($alias);
+        $qb->leftJoin("${alias}.review", 'review')
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb->expr()->isNull('review'),
+                        $qb->expr()->eq('review.status', ':reviewStatus')
+                    )
+            )
+            ->setParameter('reviewStatus', EventReviewStatusType::APPROVED);
+
+        return $qb;
     }
 }

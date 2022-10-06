@@ -168,3 +168,9 @@ Capco\AppBundle\Entity\EventTranslation:
         translatable: '@eventWithOwner'
         title: 'Evenement owned par un owner'
         body: <('Event body')>
+    eventParthenay_fr:
+        id: 'eventParthenay_fr'
+        locale: 'fr-FR'
+        translatable: '@eventParthenay'
+        title: 'Parthenay party'
+        body: 'La grosse teuf de Parthenay'

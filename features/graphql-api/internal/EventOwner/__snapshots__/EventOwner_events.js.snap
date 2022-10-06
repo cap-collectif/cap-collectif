@@ -392,6 +392,16 @@ Object {
         },
         Object {
           "node": Object {
+            "id": "RXZlbnQ6ZXZlbnRQYXJ0aGVuYXk=",
+            "timeRange": Object {
+              "endAt": "2030-05-14 00:00:00",
+              "startAt": "2030-05-12 00:00:00",
+            },
+            "title": "Parthenay party",
+          },
+        },
+        Object {
+          "node": Object {
             "id": "RXZlbnQ6ZXZlbnQ5",
             "timeRange": Object {
               "endAt": "2030-11-08 00:00:00",
@@ -591,7 +601,7 @@ Object {
           },
         },
       ],
-      "totalCount": 23,
+      "totalCount": 24,
     },
   },
 }

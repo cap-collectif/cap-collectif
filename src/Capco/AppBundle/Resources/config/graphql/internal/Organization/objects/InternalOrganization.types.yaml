@@ -4,6 +4,7 @@ InternalOrganization:
         - Node
         - Author
         - InternalPostOwner
+        - InternalEventOwner
         - InternalProjectOwner
     config:
         description: 'An organization.'
@@ -12,6 +13,7 @@ InternalOrganization:
             - Node
             - Author
             - InternalPostOwner
+            - InternalEventOwner
             - InternalProjectOwner
         fields:
             id:
@@ -81,4 +83,9 @@ InternalOrganization:
                 type: 'InternalProjectConnection!'
                 description: 'Get all projects that the organization owns.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\OwnerProjectsResolver", [value, args, getUser()])'
+                argsBuilder: 'Relay::ForwardConnection'
+            events:
+                type: 'InternalEventConnection!'
+                description: 'Get all events that the organization owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\OwnerEventsResolver", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'
