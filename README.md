@@ -22,4 +22,4 @@ We welcome contributions through GitHub pull request, discussions or issues.
 
 ## 📄 License
 
-Source code in this repository is covered by [LICENSE](/LICENSE.md).
+Source code in this repository is covered by [LICENSE](/LICENSE).
