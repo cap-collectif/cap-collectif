@@ -14,6 +14,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Sonata\MediaBundle\Provider\ImageProvider;
+use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -33,7 +34,8 @@ class DeleteEventMutation extends BaseDeleteMutation
         Publisher $publisher,
         EventRegistrationRepository $registration,
         ImageProvider $mediaProvider,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        HighlightedContentRepository $highlightedContentRepository
     ) {
         parent::__construct($em, $mediaProvider);
         $this->globalIdResolver = $globalIdResolver;
@@ -41,6 +43,7 @@ class DeleteEventMutation extends BaseDeleteMutation
         $this->publisher = $publisher;
         $this->registration = $registration;
         $this->authorizationChecker = $authorizationChecker;
+        $this->highlightedContentRepository = $highlightedContentRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -86,6 +89,10 @@ class DeleteEventMutation extends BaseDeleteMutation
             $event->setOwner($owner);
         }
 
+        $highlightedContents = $this->highlightedContentRepository->findByEvent($event);
+        foreach ($highlightedContents => $highlightedContent) {
+            $this->em->delete($highlightedContent);
+        }
         $this->em->flush();
 
         $this->indexer->index(Event::class, $event->getId());
