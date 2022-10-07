@@ -21,6 +21,7 @@ class MediasController extends AbstractController
         'image/svg+xml', // .svg
         'image/gif', // .gif
         'image/jpeg', // .jpeg .jpg
+        'image/webp', // .webp
         'application/csv', // .csv
         'text/csv', // .csv
         'text/plain', // .csv

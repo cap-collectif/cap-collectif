@@ -118,7 +118,8 @@ sonata_media:
             thumbnail: sonata.media.thumbnail.liip_imagine
             adapter: sonata.media.adapter.image.imagick
             allowed_extensions: ['png', 'svg', 'webp', 'gif', 'jpeg', 'jpg', 'jfif']
-            allowed_mime_types: ['image/png', 'image/svg+xml', 'image/gif', 'image/jpeg']
+            allowed_mime_types:
+                ['image/png', 'image/svg+xml', 'image/gif', 'image/jpeg', 'image/webp']
         vimeo:
             thumbnail: sonata.media.thumbnail.liip_imagine
         youtube:
@@ -159,6 +160,7 @@ sonata_media:
                     'image/svg+xml',
                     'image/gif',
                     'image/jpeg',
+                    'image/webp',
                     'application/csv',
                     'text/csv',
                     'text/plain',

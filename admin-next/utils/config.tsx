@@ -39,6 +39,7 @@ export const ALLOWED_IMAGE_MIMETYPES = [
     'image/svg+xml', // .svg
     'image/gif', // .gif
     'image/jpeg', // .jpeg .jpg
+    'image/webp', // .webp
 ];
 
 // This must be sync with API check in MediasController::ALLOWED_MIMETYPES
