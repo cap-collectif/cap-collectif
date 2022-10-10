@@ -26,13 +26,14 @@ class ProposalAnalysisCommentsResolver implements ResolverInterface
             $args = new Argument(['first' => 0]);
         }
 
+        $comments = $this->proposalAnalysisCommentRepository->findBy(['proposalAnalysis' => $proposalAnalysis], ['createdAt' => 'DESC']);
         $paginator = new Paginator(function () use (
-            $proposalAnalysis
+            $comments
         ) {
-            return $this->proposalAnalysisCommentRepository->findBy(['proposalAnalysis' => $proposalAnalysis]);
+            return $comments;
         });
 
-        $totalCount = 0;
+        $totalCount = $this->proposalAnalysisCommentRepository->countByProposalAnalysis($proposalAnalysis);
 
         return $paginator->auto($args, $totalCount);
     }

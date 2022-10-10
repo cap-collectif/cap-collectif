@@ -64,6 +64,10 @@ describe('<ProposalAnalysisPanel />', () => {
       },
       onClose: jest.fn(),
       user: { id: 'Rubilax', displayName: 'Skusku' },
+      viewer: {
+        $fragmentRefs,
+        $refType,
+      },
     };
 
     const wrapper = shallow(<ProposalAnalysisPanel {...props} />);

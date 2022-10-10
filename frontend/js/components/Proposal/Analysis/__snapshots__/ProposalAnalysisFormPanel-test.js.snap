@@ -113,6 +113,25 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly 1`] = `
       </ProposalAnalysisFormPanel__ValidateButton>
     </ProposalAnalysisFormPanel__Validation>
   </form>
+  <ProposalAnalysisComments
+    proposalAnalysis={
+      Object {
+        "$fragmentRefs": null,
+        "analyst": Object {
+          "id": "userID345",
+        },
+        "id": "a1id",
+        "responses": Array [],
+        "state": "FAVOURABLE",
+      }
+    }
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
+  />
 </Fragment>
 `;
 
@@ -133,6 +152,7 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
           "$refType": null,
           "analyses": Array [
             Object {
+              "$fragmentRefs": null,
               "analyst": Object {
                 "id": "userID345",
               },
@@ -261,6 +281,7 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
             "$refType": null,
             "analyses": Array [
               Object {
+                "$fragmentRefs": null,
                 "analyst": Object {
                   "id": "userID345",
                 },
@@ -286,5 +307,24 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
       </ProposalRevision>
     </ProposalAnalysisFormPanel__Validation>
   </form>
+  <ProposalAnalysisComments
+    proposalAnalysis={
+      Object {
+        "$fragmentRefs": null,
+        "analyst": Object {
+          "id": "userID345",
+        },
+        "id": "a1id",
+        "responses": Array [],
+        "state": "FAVOURABLE",
+      }
+    }
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
+  />
 </Fragment>
 `;

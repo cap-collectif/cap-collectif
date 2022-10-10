@@ -12,27 +12,31 @@
 {% block core_mail %}
     <div>
         {% if logo is not null %}
-            <img style="margin-bottom: 10px;" src="{{ logo }}" alt="logo {{ organizationName }}" />
+            <img src="{{ logo }}" alt="logo {{ organizationName }}" />
         {% else %}
-            <img style="margin-bottom: 10px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+            <img src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
         {% endif %}
 
-        <div style="margin: 20px 0; color: #545E68; text-align: left;">
-            <p style="margin: 0; line-height: 24px; color: #919191; font-weight: 600; text-transform: uppercase; font-size: 11px; ">
+        <div style="margin-top: 24px; color: #545E68; text-align: left;">
+            <p style="margin: 0; line-height: 16px; color: #919191; font-weight: 700; text-transform: uppercase; font-size: 11px; ">
                 {{ 'export.option.analysis-form'|trans({},'CapcoAppBundle', user_locale)|raw }}
             </p>
 
-            <p style="margin: 0 0 24px 0; line-height: 24px; font-size: 32px; color: #2B2B2B ">
+            <p style="margin: 0 0 24px 0; line-height: 32px; font-size: 24px; color: #2B2B2B; font-weight: 600">
                 {{ 'user-left-a-comment'|trans({'{username}': username},'CapcoAppBundle', user_locale)|raw }}
             </p>
 
-            <p style="margin: 0 0 24px 0; line-height: 24px; color: #5E5E5E; font-size: 14px;">
-                {{ body }}
+            <p style="margin: 0 0 24px 0; line-height: 19px; color: #5E5E5E; font-size: 14px;">
+                "{{ body }}"
             </p>
 
-            <a style="margin: 0;color: {{ btnText }}; background-color: {{ btnBg }}; font-weight: 600; border-radius: 4px; width: 202px; height: 48px; display: flex; align-items: center; justify-content: center" href="{{ proposalUrl }}">
-                {{ 'see-the-comment'|trans({},'CapcoAppBundle', user_locale)|raw }}
-            </a>
+            <p style="margin-bottom: 24px">
+                <a href="{{ proposalUrl }}"
+                   style="display: inline-block; color:{{ btnText }}; padding:12px 32px; border-radius:4px; background-color: {{ btnBg }}; font-weight: 600; font-size: 14px; line-height: 24px; text-decoration: none">
+                    {{ 'see-the-comment'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+                </a>
+            </p>
+
         </div>
     </div>
 {% endblock %}

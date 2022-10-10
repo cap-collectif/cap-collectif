@@ -90,6 +90,7 @@ const FRAGMENT = graphql`
   ) {
     viewer @include(if: $isAuthenticated) {
       id
+      ...ProposalAnalysisPanel_viewer
       ...ProposalPageHeader_viewer @arguments(hasVotableStep: $hasVotableStep)
       ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId) @include(if: $hasVotableStep)
     }
@@ -260,6 +261,7 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated }: Props) => {
           bottom={bottom}
           hasVoteBar={showVotesWidget}>
           <ProposalAnalysisPanel
+            viewer={viewer}
             proposal={proposal}
             onClose={() => setIsAnalysing(false)}
             isAnalysing={isAnalysing}

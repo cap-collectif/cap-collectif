@@ -19,6 +19,7 @@ describe('<ProposalAnalysisFormPanel  /> ', () => {
       $fragmentRefs,
       analyses: [
         {
+          $fragmentRefs,
           id: 'a1id',
           analyst: {
             id: 'userID345',
@@ -35,6 +36,10 @@ describe('<ProposalAnalysisFormPanel  /> ', () => {
           },
         },
       },
+    },
+    viewer: {
+      $fragmentRefs,
+      $refType,
     },
     userId: 'userID345',
   };

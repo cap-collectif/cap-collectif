@@ -3,14 +3,17 @@ import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import type { ProposalViewAnalysisPanel_proposal } from '~relay/ProposalViewAnalysisPanel_proposal.graphql';
+import type { ProposalViewAnalysisPanel_viewer } from '~relay/ProposalViewAnalysisPanel_viewer.graphql';
 import colors from '~/utils/colors';
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
 import { getLabelData } from './ProposalAnalysisUserRow';
 import ProposalResponse from '~/components/Proposal/Page/ProposalResponse';
+import ProposalAnalysisComments from '~/components/Proposal/Analysis/ProposalAnalysisComments';
 
 type Props = {|
   proposal: ProposalViewAnalysisPanel_proposal,
   userId: string,
+  viewer: ProposalViewAnalysisPanel_viewer,
 |};
 
 export const ResponsesView: StyledComponent<{ tooLate?: boolean }, {}, HTMLDivElement> = styled.div`
@@ -20,7 +23,7 @@ export const ResponsesView: StyledComponent<{ tooLate?: boolean }, {}, HTMLDivEl
 `;
 
 export const CommentView: StyledComponent<{ tooLate?: boolean }, {}, HTMLDivElement> = styled.div`
-  width: 370px;
+  width: 400px;
   background: ${colors.grayF4};
   padding: 20px;
   opacity: ${props => props.tooLate && '.5'};
@@ -31,7 +34,7 @@ export const CommentView: StyledComponent<{ tooLate?: boolean }, {}, HTMLDivElem
   }
 `;
 
-export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
+export const ProposalViewAnalysisPanel = ({ proposal, userId, viewer }: Props) => {
   const analysis = proposal.analyses?.find(a => a.analyst.id === userId);
   if (!analysis) return null;
   const { state } = analysis;
@@ -66,16 +69,23 @@ export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
             <ProposalResponse key={index} response={response} />
           ))}
       </ResponsesView>
+      <ProposalAnalysisComments viewer={viewer} proposalAnalysis={analysis} />
     </>
   );
 };
 
 export default createFragmentContainer(ProposalViewAnalysisPanel, {
+  viewer: graphql`
+    fragment ProposalViewAnalysisPanel_viewer on User {
+      ...ProposalAnalysisComments_viewer
+    }
+  `,
   proposal: graphql`
     fragment ProposalViewAnalysisPanel_proposal on Proposal {
       id
       analyses {
         id
+        ...ProposalAnalysisComments_proposalAnalysis
         analyst {
           id
         }

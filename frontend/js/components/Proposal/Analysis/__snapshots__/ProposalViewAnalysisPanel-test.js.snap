@@ -13,6 +13,33 @@ exports[`<ProposalViewAnalysisPanel  />  renders correctly 1`] = `
       text="global.favorable"
     />
   </ProposalViewAnalysisPanel__ResponsesView>
+  <ProposalAnalysisComments
+    proposalAnalysis={
+      Object {
+        "$fragmentRefs": null,
+        "analyst": Object {
+          "id": "userID345",
+        },
+        "id": "a1id",
+        "responses": Array [
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "ValueResponse",
+            "question": Object {
+              "id": "q1",
+            },
+          },
+        ],
+        "state": "FAVOURABLE",
+      }
+    }
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
+  />
 </Fragment>
 `;
 
@@ -29,5 +56,39 @@ exports[`<ProposalViewAnalysisPanel  />  renders correctly with ValueResponse an
       text="global.favorable"
     />
   </ProposalViewAnalysisPanel__ResponsesView>
+  <ProposalAnalysisComments
+    proposalAnalysis={
+      Object {
+        "$fragmentRefs": null,
+        "analyst": Object {
+          "id": "userID345",
+        },
+        "id": "a1id",
+        "responses": Array [
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "ValueResponse",
+            "question": Object {
+              "id": "q1",
+            },
+          },
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "MediaResponse",
+            "question": Object {
+              "id": "q2",
+            },
+          },
+        ],
+        "state": "FAVOURABLE",
+      }
+    }
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
+  />
 </Fragment>
 `;

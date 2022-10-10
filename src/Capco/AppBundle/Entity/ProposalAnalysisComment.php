@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class ProposalAnalysisComment extends Comment
 {
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", inversedBy="comments")
      * @ORM\JoinColumn(name="proposal_analysis", referencedColumnName="id", onDelete="CASCADE")
      */
     private ProposalAnalysis $proposalAnalysis;
@@ -59,5 +58,10 @@ class ProposalAnalysisComment extends Comment
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), ['ElasticsearchComment']);
+    }
+
+    public function canDisplay($user = null): bool
+    {
+        return true;
     }
 }

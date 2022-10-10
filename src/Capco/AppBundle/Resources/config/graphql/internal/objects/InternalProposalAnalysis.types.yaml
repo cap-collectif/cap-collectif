@@ -17,3 +17,7 @@ InternalProposalAnalysis:
                 type: 'CommentConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all comments of the analysis.'
+            concernedUsers:
+                resolve: '@=value.getConcernedUsers()'
+                type: '[InternalUser!]!'
+                description: 'Users assigned to this proposal analysis'

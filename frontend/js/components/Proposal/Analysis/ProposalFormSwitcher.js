@@ -16,11 +16,12 @@ import ProposalViewAnalysisPanel from './ProposalViewAnalysisPanel';
 import ProposalViewDecisionPanel from './ProposalViewDecisionPanel';
 import ProposalViewAssessmentPanel from './ProposalViewAssessmentPanel';
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
+import type { ProposalFormSwitcher_viewer } from '~relay/ProposalFormSwitcher_viewer.graphql';
 
 const FormPanel: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   overflow: scroll;
   height: calc(100vh - 50px);
-  width: 370px;
+  width: 400px;
 
   textarea {
     resize: none;
@@ -45,7 +46,7 @@ const FormPanel: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 const Header: StyledComponent<{ hide: boolean }, {}, HTMLDivElement> = styled.div`
   position: ${({ hide }) => hide && 'fixed'};
   z-index: 2;
-  width: 370px;
+  width: 400px;
 `;
 
 const Top: StyledComponent<{ border: boolean }, {}, HTMLDivElement> = styled.div`
@@ -90,6 +91,7 @@ type Props = {|
   disabled?: boolean,
   user: User,
   panelState: PanelState,
+  viewer: ProposalFormSwitcher_viewer,
 |};
 
 export type SubmittingState = 'SAVED' | 'SAVING' | 'DRAFT_SAVED' | 'DRAFT_SAVING' | 'ERROR';
@@ -109,6 +111,7 @@ export const ProposalFormSwitcher = ({
   user,
   disabled,
   panelState,
+  viewer,
 }: Props) => {
   const [submittingState, setSubmittingState] = useState<?SubmittingState>(null);
   const finishedSubmitting = (newSubmitting: SubmittingState, goBack: boolean) => {
@@ -163,10 +166,11 @@ export const ProposalFormSwitcher = ({
           disabled={disabled}
           userId={user.id}
           onValidate={finishedSubmitting}
+          viewer={viewer}
         />
       )}
       {panelState === 'VIEW_ANALYSIS' && (
-        <ProposalViewAnalysisPanel proposal={proposal} userId={user.id} />
+        <ProposalViewAnalysisPanel proposal={proposal} userId={user.id} viewer={viewer} />
       )}
       {panelState === 'EDIT_ASSESSMENT' && (
         <ProposalAssessmentFormPanel
@@ -191,9 +195,15 @@ export const ProposalFormSwitcher = ({
 };
 
 export default createFragmentContainer(ProposalFormSwitcher, {
+  viewer: graphql`
+    fragment ProposalFormSwitcher_viewer on User {
+      ...ProposalViewAnalysisPanel_viewer
+      ...ProposalAnalysisFormPanel_viewer
+    }
+  `,
   proposal: graphql`
     fragment ProposalFormSwitcher_proposal on Proposal
-      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
+    @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       id
       ...ProposalAnalysisFormPanel_proposal
         @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)

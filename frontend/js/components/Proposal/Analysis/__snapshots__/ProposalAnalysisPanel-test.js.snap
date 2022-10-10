@@ -180,6 +180,12 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
         "id": "Rubilax",
       }
     }
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
   />
 </ProposalAnalysisPanel__PanelsSlider>
 `;

@@ -12,6 +12,7 @@ const mutation = graphql`
     changeProposalAnalysis(input: $input) {
       errorCode
       analysis {
+        ...ProposalAnalysisCommentsList_proposalAnalysis
         proposal {
           id
           analyses {
@@ -28,6 +29,9 @@ const mutation = graphql`
           ...responsesHelper_response @relay(mask: false)
         }
         analyst {
+          id
+        }
+        concernedUsers {
           id
         }
       }

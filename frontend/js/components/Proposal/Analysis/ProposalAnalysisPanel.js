@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import ProposalAnalysisUserRow from './ProposalAnalysisUserRow';
 import type { ProposalAnalysisPanel_proposal } from '~relay/ProposalAnalysisPanel_proposal.graphql';
+import type { ProposalAnalysisPanel_viewer } from '~relay/ProposalAnalysisPanel_viewer.graphql';
 import colors from '~/utils/colors';
 import type { State } from '~/types';
 import ProposalFormSwitcher from './ProposalFormSwitcher';
@@ -15,13 +16,13 @@ import { CloseIcon } from './ProposalAnalysisPanelCloseIcon';
 
 const PanelsSlider: StyledComponent<{ home: boolean }, {}, HTMLDivElement> = styled.div`
   display: flex;
-  width: 370px;
+  width: 400px;
   overflow: ${props => props.home && 'hidden'};
-  margin-left: ${props => (props.home ? 0 : '-370px')};
+  margin-left: ${props => (props.home ? 0 : '-400px')};
   transition: 0.5s;
 
   > div {
-    min-width: 370px;
+    min-width: 400px;
   }
 `;
 
@@ -59,6 +60,7 @@ type Props = {|
   proposal: ProposalAnalysisPanel_proposal,
   onClose: () => void,
   user: User,
+  viewer: ProposalAnalysisPanel_viewer,
 |};
 
 export const getStatus = (status: ?any, proposal: any) => {
@@ -82,7 +84,7 @@ export const getStatus = (status: ?any, proposal: any) => {
   return status;
 };
 
-export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
+export const ProposalAnalysisPanel = ({ proposal, onClose, user, viewer }: Props) => {
   const [panelState, setPanelState] = useState<PanelState>('HOME');
   const [panelViewUser, setPanelViewUser] = useState<User>(user);
 
@@ -200,6 +202,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
         disabled={false}
         user={panelViewUser}
         panelState={panelState}
+        viewer={viewer}
       />
     </PanelsSlider>
   );
@@ -212,9 +215,14 @@ const mapStateToProps = (state: State) => ({
 export default createFragmentContainer(
   connect<any, any, _, _, _, _>(mapStateToProps)(ProposalAnalysisPanel),
   {
+    viewer: graphql`
+      fragment ProposalAnalysisPanel_viewer on User {
+        ...ProposalFormSwitcher_viewer
+      }
+    `,
     proposal: graphql`
       fragment ProposalAnalysisPanel_proposal on Proposal
-        @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
+      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
         id
         ...ProposalFormSwitcher_proposal
           @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)

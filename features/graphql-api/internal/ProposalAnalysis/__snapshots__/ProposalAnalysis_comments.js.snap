@@ -16,10 +16,22 @@ Object {
                   "username": "supervisor",
                 },
                 "body": "Commentaire",
+                "createdAt": "2019-02-17 00:00:00",
+                "id": "Q29tbWVudDpwcm9wb3NhbEFuYWx5c2lzQ29tbWVudDI=",
+              },
+            },
+            Object {
+              "node": Object {
+                "author": Object {
+                  "username": "supervisor",
+                },
+                "body": "Commentaire",
+                "createdAt": "2018-02-17 00:00:00",
                 "id": "Q29tbWVudDpwcm9wb3NhbEFuYWx5c2lzQ29tbWVudDE=",
               },
             },
           ],
+          "totalCount": 2,
         },
         "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzMQ==",
         "state": "IN_PROGRESS",
@@ -30,6 +42,7 @@ Object {
         },
         "comments": Object {
           "edges": Array [],
+          "totalCount": 0,
         },
         "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzMg==",
         "state": "IN_PROGRESS",

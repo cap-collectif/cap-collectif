@@ -9,10 +9,12 @@ const ProposalAnalysisComments = /** GraphQL */ `
             username
           }
           comments {
+            totalCount
             edges {
               node {
                 id
                 body
+                createdAt
                 author {
                   username
                 }
@@ -31,7 +33,7 @@ describe('ProposalAnalysis.comments', () => {
       graphql(
         ProposalAnalysisComments,
         {
-          id: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=',
+            id: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=',
         },
         'internal_supervisor',
       ),

@@ -35,13 +35,14 @@ import { TYPE_FORM } from '~/constants/FormConstants';
 import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision';
 import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisionPanel';
 import { RevisionButton } from '~/shared/ProposalRevision/styles';
+import ProposalAnalysisComments from '~/components/Proposal/Analysis/ProposalAnalysisComments';
+import type { ProposalAnalysisFormPanel_viewer } from '~relay/ProposalAnalysisFormPanel_viewer.graphql';
 
 const memoizeAvailableQuestions: any = memoize(() => {});
 
 export const Validation: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  width: 370px;
+  width: 400px;
   background: ${colors.grayF4};
-  height: 420px;
   padding: 20px;
 
   .form-group .radio-container label {
@@ -86,6 +87,7 @@ type Props = {|
   intl: IntlShape,
   onValidate: (SubmittingState, ?boolean) => void,
   proposalRevisionsEnabled: boolean,
+  viewer: ProposalAnalysisFormPanel_viewer,
 |};
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE' | 'NONE';
@@ -179,10 +181,15 @@ export const ProposalAnalysisFormPanel = ({
   intl,
   invalid,
   proposalRevisionsEnabled,
+  userId,
+  viewer,
 }: Props) => {
   const [status, setStatus] = useState(initialStatus);
   const availableQuestions: Array<string> =
     memoizeAvailableQuestions.cache.get('availableQuestions');
+
+  const analysis = proposal.analyses?.find(a => a.analyst.id === userId);
+
   return (
     <>
       <form id={formName} style={{ opacity: disabled ? '0.5' : '1' }}>
@@ -281,6 +288,7 @@ export const ProposalAnalysisFormPanel = ({
           )}
         </Validation>
       </form>
+      {analysis && <ProposalAnalysisComments viewer={viewer} proposalAnalysis={analysis} />}
     </>
   );
 };
@@ -315,6 +323,11 @@ const form = reduxForm({
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
+  viewer: graphql`
+    fragment ProposalAnalysisFormPanel_viewer on User {
+      ...ProposalAnalysisComments_viewer
+    }
+  `,
   proposal: graphql`
     fragment ProposalAnalysisFormPanel_proposal on Proposal
     @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
@@ -323,6 +336,7 @@ export default createFragmentContainer(container, {
       ...ProposalRevisionPanel_proposal @include(if: $proposalRevisionsEnabled)
       analyses {
         id
+        ...ProposalAnalysisComments_proposalAnalysis
         analyst {
           id
         }

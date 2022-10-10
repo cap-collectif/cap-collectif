@@ -58,9 +58,15 @@ class ProposalAnalysis implements Timestampable
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysisComment", mappedBy="proposalAnalysis",  cascade={"persist", "remove"})
+     */
+    private Collection $comments;
+
     public function __construct()
     {
         $this->responses = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getResponsesQuestions(): Collection
@@ -144,5 +150,26 @@ class ProposalAnalysis implements Timestampable
         return $users->filter(function ($user) {
             return null !== $user;
         });
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        $this->comments->removeElement($comment);
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? $this->getProposal()->getTitle() : '';
     }
 }

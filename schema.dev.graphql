@@ -10478,6 +10478,9 @@ type ProposalAnalysis {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): CommentConnection!
+
+  """Users assigned to this proposal analysis"""
+  concernedUsers: [User!]!
 }
 
 """Available decisions value for a proposal analysis."""

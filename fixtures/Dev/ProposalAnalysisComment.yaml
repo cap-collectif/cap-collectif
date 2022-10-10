@@ -7,3 +7,11 @@ Capco\AppBundle\Entity\ProposalAnalysisComment:
         publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ 1 days"))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+    proposalAnalysisComment2:
+        id: 'proposalAnalysisComment2'
+        proposalAnalysis: '@proposalAnalysis1'
+        author: '@userSupervisor'
+        body: Commentaire
+        publishedAt: <((new \DateTime('2019-02-16 00:00:00'))->modify("+ 1 days"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt

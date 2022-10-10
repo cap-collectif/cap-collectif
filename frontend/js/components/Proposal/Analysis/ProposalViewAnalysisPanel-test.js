@@ -13,6 +13,7 @@ describe('<ProposalViewAnalysisPanel  /> ', () => {
         $refType,
         analyses: [
           {
+            $fragmentRefs,
             id: 'a1id',
             analyst: {
               id: 'userID345',
@@ -37,6 +38,10 @@ describe('<ProposalViewAnalysisPanel  /> ', () => {
         },
       },
       userId: 'userID345',
+      viewer: {
+        $refType,
+        $fragmentRefs,
+      },
     };
 
     const wrapper = shallow(<ProposalViewAnalysisPanel {...props} />);
@@ -49,6 +54,7 @@ describe('<ProposalViewAnalysisPanel  /> ', () => {
         $refType,
         analyses: [
           {
+            $fragmentRefs,
             id: 'a1id',
             analyst: {
               id: 'userID345',
@@ -78,6 +84,10 @@ describe('<ProposalViewAnalysisPanel  /> ', () => {
         },
       },
       userId: 'userID345',
+      viewer: {
+        $refType,
+        $fragmentRefs,
+      },
     };
 
     const wrapper = shallow(<ProposalViewAnalysisPanel {...props} />);

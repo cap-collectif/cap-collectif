@@ -117,6 +117,7 @@ class InviteUsersMutation implements MutationInterface
                 $this->em->clear(UserInvite::class);
             }
         }
+        // to delete 
 
         $this->em->flush();
         $this->em->clear(UserInvite::class);
