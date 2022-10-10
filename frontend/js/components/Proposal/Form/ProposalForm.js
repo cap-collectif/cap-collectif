@@ -940,7 +940,6 @@ const form = reduxForm({
   form: formName,
   validate,
   onSubmit,
-  destroyOnUnmount: false,
 })(ProposalForm);
 
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));

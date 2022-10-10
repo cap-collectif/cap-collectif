@@ -176,7 +176,7 @@ export const ProposalEditModal = ({
       hideOnClickOutside={false}
       onClose={() => {
         if (modalState !== 'LEAVE') setModalState('LEAVE');
-        else onClose();
+        onClose();
       }}
       ariaLabel={intl.formatMessage({ id: 'contained-modal-title-lg' })}>
       {isRevisionExpired ? (
