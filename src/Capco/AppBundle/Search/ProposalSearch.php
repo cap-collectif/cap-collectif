@@ -692,7 +692,7 @@ class ProposalSearch extends Search
                     break;
                 case ProposalsState::DRAFT:
                     $filters['draft'] = true;
-                    $filters['published'] = false;
+                    unset($filters['published']);
                     $filters['trashed'] = false;
 
                     break;
