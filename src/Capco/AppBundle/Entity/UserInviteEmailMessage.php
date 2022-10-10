@@ -22,7 +22,7 @@ class UserInviteEmailMessage
     public const SENT = 'sent';
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\UserInvite", inversedBy="emailMessages")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\UserInvite", inversedBy="emailMessages", cascade={"persist"})
      * @ORM\JoinColumn(name="invitation_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private UserInvite $invitation;

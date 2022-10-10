@@ -82,12 +82,12 @@ export const CsvDropZoneInput = ({
                       <FormattedHTMLMessage
                         id="csv-bad-lines-error"
                         values={{
-                          num: input.value.invalidLines.length,
+                          count: [...input.value.invalidLines].length?.toString(),
                           lines:
                             input.value.invalidLines.length > 1
                               ? input.value.invalidLines.slice(0, -1).toString()
                               : input.value.invalidLines.toString(),
-                          last: input.value.invalidLines.pop(),
+                          last: [...input.value.invalidLines]?.pop()?.toString(),
                         }}
                       />
                     </InfoMessage.Title>
