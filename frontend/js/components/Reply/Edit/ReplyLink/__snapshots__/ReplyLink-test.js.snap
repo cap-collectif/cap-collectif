@@ -126,7 +126,7 @@ exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`
     />
      
      
-    <Relay(Connect(UnpublishedLabel))
+    <UnpublishedLabel
       publishable={
         Object {
           "$fragmentRefs": null,
@@ -195,7 +195,7 @@ exports[`<ReplyLink /> render a reply in a closed questionnaire 1`] = `
     </Link>
      
      
-    <Relay(Connect(UnpublishedLabel))
+    <UnpublishedLabel
       publishable={
         Object {
           "$fragmentRefs": null,
@@ -243,7 +243,7 @@ exports[`<ReplyLink /> render a reply in a contribuable questionnaire 1`] = `
     </Link>
      
      
-    <Relay(Connect(UnpublishedLabel))
+    <UnpublishedLabel
       publishable={
         Object {
           "$fragmentRefs": null,

@@ -7,14 +7,7 @@ import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
 import moment from 'moment';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import {
-  ButtonToolbar,
-  Button,
-  ListGroup,
-  ListGroupItem,
-  OverlayTrigger,
-  Tooltip,
-} from 'react-bootstrap';
+import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import type { ProposalAdminSelections_proposal } from '~relay/ProposalAdminSelections_proposal.graphql';
 import type { State, Dispatch } from '~/types';
 import AlertForm from '../../Alert/AlertForm';
@@ -362,26 +355,23 @@ export class ProposalAdminSelections extends Component<Props> {
                         <Text color="gray.900">
                           {intl.formatMessage({ id: 'paper-votes-field-label' })}
                         </Text>
-                        <OverlayTrigger
+                        <DsTooltip
+                          placement="top"
+                          id={`paper-vote-tooltip-${index}`}
                           key={intl.formatMessage({
                             id: step.votesRanking
                               ? 'paper-votes-field-help-tooltip'
                               : 'paper-votes-and-points-field-help-tooltip',
                           })}
-                          placement="top"
-                          overlay={
-                            <Tooltip id={`paper-vote-tooltip-${index}`}>
-                              {intl.formatMessage({
-                                id: step.votesRanking
-                                  ? 'paper-votes-field-help-tooltip'
-                                  : 'paper-votes-and-points-field-help-tooltip',
-                              })}
-                            </Tooltip>
-                          }>
+                          label={intl.formatMessage({
+                            id: step.votesRanking
+                              ? 'paper-votes-field-help-tooltip'
+                              : 'paper-votes-and-points-field-help-tooltip',
+                          })}>
                           <AppBox mt={1}>
                             <Icon name={ICON_NAME.CIRCLE_INFO} size="sm" color="blue.500" />
                           </AppBox>
-                        </OverlayTrigger>
+                        </DsTooltip>
                       </Flex>
                       <Text color="gray.700" style={{ marginTop: 0 }}>
                         {intl.formatMessage({

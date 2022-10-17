@@ -176,10 +176,16 @@ Array [
         <div
           className="sc-bdvvtL gKiHgp"
         >
-          <b>
+          <p
+            className="sc-bdvvtL fcYvOq cap-text"
+          >
             essential
-          </b>
-          updates-and-news
+          </p>
+          <p
+            className="sc-bdvvtL PHsbg cap-text"
+          >
+            updates-and-news
+          </p>
         </div>
       </button>
       <button
@@ -220,10 +226,16 @@ Array [
         <div
           className="sc-bdvvtL gKiHgp"
         >
-          <b>
+          <p
+            className="sc-bdvvtL fcYvOq cap-text"
+          >
             intermediate
-          </b>
-          updates-news-and-new-contributions
+          </p>
+          <p
+            className="sc-bdvvtL PHsbg cap-text"
+          >
+            updates-news-and-new-contributions
+          </p>
         </div>
       </button>
       <button
@@ -264,12 +276,17 @@ Array [
         <div
           className="sc-bdvvtL gKiHgp"
         >
-          <b>
-            <b>
-              complete
-            </b>
-          </b>
-          updates-news-new-contributions-votes-and-subscriptions
+          <p
+            className="sc-bdvvtL fcYvOq cap-text"
+          >
+            complete
+          </p>
+          <p
+            className="sc-bdvvtL PHsbg cap-text"
+          >
+            updates-news-new-contributions-votes-and-subscriptions
+             
+          </p>
         </div>
       </button>
     </div>
@@ -293,7 +310,7 @@ Array [
       type="button"
     >
       <p
-        className="sc-bdvvtL ijWykn cap-text"
+        className="sc-bdvvtL PHsbg cap-text"
       >
         unfollow
       </p>
@@ -580,10 +597,16 @@ Array [
         <div
           className="sc-bdvvtL gKiHgp"
         >
-          <b>
+          <p
+            className="sc-bdvvtL fcYvOq cap-text"
+          >
             essential
-          </b>
-          updates-and-news
+          </p>
+          <p
+            className="sc-bdvvtL PHsbg cap-text"
+          >
+            updates-and-news
+          </p>
         </div>
       </button>
       <button
@@ -624,10 +647,16 @@ Array [
         <div
           className="sc-bdvvtL gKiHgp"
         >
-          <b>
+          <p
+            className="sc-bdvvtL fcYvOq cap-text"
+          >
             intermediate
-          </b>
-          updates-news-and-new-contributions
+          </p>
+          <p
+            className="sc-bdvvtL PHsbg cap-text"
+          >
+            updates-news-and-new-contributions
+          </p>
         </div>
       </button>
       <button
@@ -668,12 +697,17 @@ Array [
         <div
           className="sc-bdvvtL gKiHgp"
         >
-          <b>
-            <b>
-              complete
-            </b>
-          </b>
-          updates-news-new-contributions-votes-and-subscriptions
+          <p
+            className="sc-bdvvtL fcYvOq cap-text"
+          >
+            complete
+          </p>
+          <p
+            className="sc-bdvvtL PHsbg cap-text"
+          >
+            updates-news-new-contributions-votes-and-subscriptions
+             
+          </p>
         </div>
       </button>
     </div>
@@ -697,7 +731,7 @@ Array [
       type="button"
     >
       <p
-        className="sc-bdvvtL ijWykn cap-text"
+        className="sc-bdvvtL PHsbg cap-text"
       >
         unfollow
       </p>
@@ -984,10 +1018,16 @@ Array [
         <div
           className="sc-bdvvtL gKiHgp"
         >
-          <b>
+          <p
+            className="sc-bdvvtL fcYvOq cap-text"
+          >
             essential
-          </b>
-          updates-and-news
+          </p>
+          <p
+            className="sc-bdvvtL PHsbg cap-text"
+          >
+            updates-and-news
+          </p>
         </div>
       </button>
       <button
@@ -1028,10 +1068,16 @@ Array [
         <div
           className="sc-bdvvtL gKiHgp"
         >
-          <b>
+          <p
+            className="sc-bdvvtL fcYvOq cap-text"
+          >
             intermediate
-          </b>
-          updates-news-and-new-contributions
+          </p>
+          <p
+            className="sc-bdvvtL PHsbg cap-text"
+          >
+            updates-news-and-new-contributions
+          </p>
         </div>
       </button>
       <button
@@ -1072,12 +1118,17 @@ Array [
         <div
           className="sc-bdvvtL gKiHgp"
         >
-          <b>
-            <b>
-              complete
-            </b>
-          </b>
-          updates-news-new-contributions-votes-and-subscriptions
+          <p
+            className="sc-bdvvtL fcYvOq cap-text"
+          >
+            complete
+          </p>
+          <p
+            className="sc-bdvvtL PHsbg cap-text"
+          >
+            updates-news-new-contributions-votes-and-subscriptions
+             
+          </p>
         </div>
       </button>
     </div>
@@ -1101,7 +1152,7 @@ Array [
       type="button"
     >
       <p
-        className="sc-bdvvtL ijWykn cap-text"
+        className="sc-bdvvtL PHsbg cap-text"
       >
         unfollow
       </p>

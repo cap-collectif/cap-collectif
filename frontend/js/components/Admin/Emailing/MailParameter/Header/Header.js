@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { useResize } from '@liinkiing/react-hooks';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { NavLink } from 'react-router-dom';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import component from '~/components/Form/Field';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
@@ -23,6 +22,7 @@ import {
 } from './Header.style';
 import type { Header_emailingCampaign } from '~relay/Header_emailingCampaign.graphql';
 import type { GlobalState } from '~/types';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 export const PATHS = {
   PARAMETER: '/',
@@ -89,11 +89,10 @@ export const Header = ({
     <Container>
       <TitleContainer>
         {!disabled ? (
-          <OverlayTrigger
+          <Tooltip
             placement="top"
-            overlay={
-              <Tooltip id="tooltip-title">{intl.formatMessage({ id: 'global.rename' })}</Tooltip>
-            }>
+            id="tooltip-title"
+            label={intl.formatMessage({ id: 'global.rename' })}>
             <div className="input-title">
               <Field
                 type="text"
@@ -119,7 +118,7 @@ export const Header = ({
                 <span>{title}</span>
               </div>
             </div>
-          </OverlayTrigger>
+          </Tooltip>
         ) : (
           <div
             className="wrapper-title not-editable"

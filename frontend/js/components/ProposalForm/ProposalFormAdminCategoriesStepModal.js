@@ -1,10 +1,10 @@
 // @flow
 import React, { useState, useEffect } from 'react';
-import { Modal, Panel, OverlayTrigger } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field, change, formValueSelector } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
@@ -18,7 +18,10 @@ import Toggle from '~/components/Ui/Toggle/Toggle';
 import Label from '~/components/Ui/Form/Label/Label';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { colors as utilsColors } from '~/utils/colors';
-import Tooltip from '~/components/Utils/Tooltip';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Modal from '~ds/Modal/Modal';
+import Heading from '~ui/Primitives/Heading';
 
 type RelayProps = {| query: ProposalFormAdminCategoriesStepModal_query |};
 
@@ -91,6 +94,7 @@ export const ProposalFormAdminCategoriesStepModal = ({
     name: i,
     used: usedIcons.some(ic => ic === i),
   }));
+  const intl = useIntl();
 
   useEffect(() => {
     if (!selectedColor)
@@ -98,172 +102,190 @@ export const ProposalFormAdminCategoriesStepModal = ({
   }, []);
 
   return (
-    <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg">
-      <Modal.Header closeButton>
-        <Modal.Title id="report-modal-title-lg">
-          <FormattedMessage
-            id={!isUpdating ? 'category_modal.create.title' : 'category_modal.update.title'}
-          />
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Field
-          label={<FormattedMessage id="global.title" />}
-          id={`${member}.name`}
-          name={`${member}.name`}
-          type="text"
-          component={component}
-          placeholder="category.without.title"
-        />
-        {features.display_pictures_in_depository_proposals_list && (
-          <>
-            <Label>
-              <FormattedMessage id="global.color" />
-            </Label>
+    <Modal
+      show={show}
+      hideOnClickOutside
+      ariaLabel={intl.formatMessage({
+        id: !isUpdating ? 'category_modal.create.title' : 'category_modal.update.title',
+      })}
+      aria-labelledby="report-modal-title-lg">
+      {({ hide }) => (
+        <>
+          <Modal.Header>
+            <Heading id="report-modal-title-lg">
+              <FormattedMessage
+                id={!isUpdating ? 'category_modal.create.title' : 'category_modal.update.title'}
+              />
+            </Heading>
+          </Modal.Header>
+          <Modal.Body>
             <Field
-              name={`${member}.color`}
-              selectedColor={selectedColor}
-              categoryColors={mergedColors}
-              onColorClick={(color: string) => dispatch(change(formName, `${member}.color`, color))}
-              component={ProposalFormCategoryColor}
+              label={<FormattedMessage id="global.title" />}
+              id={`${member}.name`}
+              name={`${member}.name`}
+              type="text"
+              component={component}
+              placeholder="category.without.title"
             />
-            <Label>
-              <FormattedMessage id="admin.fields.footer_social_network.style" />
-              <span className="excerpt">
-                {' '}
-                <FormattedMessage id="global.optional" />
-              </span>
-            </Label>
-            <Field
-              name={`${member}.icon`}
-              selectedIcon={selectedIcon}
-              categoryIcons={mergedIcons}
-              selectedColor={selectedColor}
-              onIconClick={(icon: ?string) => dispatch(change(formName, `${member}.icon`, icon))}
-              component={ProposalFormCategoryIcon}
-            />
-            <div>
-              <Label>
-                <FormattedMessage id="global.previsualisation" />
-                <OverlayTrigger
-                  placement="top"
-                  overlay={
-                    <Tooltip id="tooltip-status">
-                      <FormattedMessage id="category.preview" />
-                    </Tooltip>
-                  }>
-                  <Icon
-                    name={ICON_NAME.information}
-                    size={12}
-                    color={utilsColors.iconGrayColor}
-                    className="ml-5"
-                  />
-                </OverlayTrigger>
-              </Label>
-              <div className="d-flex" style={{ justifyContent: 'space-between' }}>
-                <ProposalFormCategoryBackgroundPreview
-                  color={selectedColor}
-                  name={name}
-                  icon={selectedIcon}
-                  customCategoryImage={
-                    !showPredefinedImage ? customCategoryImage || newCategoryImage : null
+            {features.display_pictures_in_depository_proposals_list && (
+              <>
+                <Label>
+                  <FormattedMessage id="global.color" />
+                </Label>
+                <Field
+                  name={`${member}.color`}
+                  selectedColor={selectedColor}
+                  categoryColors={mergedColors}
+                  onColorClick={(color: string) =>
+                    dispatch(change(formName, `${member}.color`, color))
                   }
+                  component={ProposalFormCategoryColor}
                 />
-                {selectedColor && selectedIcon ? (
-                  <ProposalFormCategoryPinPreview color={selectedColor} icon={selectedIcon} />
-                ) : null}
-              </div>
-            </div>
-            <div className="mt-10">
-              <Panel
-                id="proposal_form_category_illustration_panel_body"
-                expanded={!showPredefinedImage}
-                onToggle={() => {}}>
-                <Panel.Heading>
-                  <div id="illustration">
-                    <div className="pull-left">
-                      <Toggle
-                        id="toggle-registration"
-                        checked={!showPredefinedImage}
-                        onChange={() => setShowPredefinedImage(!showPredefinedImage)}
-                        label={<FormattedMessage id="custom-illustration" />}
-                      />
-                    </div>
-                    <div className="clearfix" />
+                <Label>
+                  <FormattedMessage id="admin.fields.footer_social_network.style" />
+                  <span className="excerpt">
+                    {' '}
+                    <FormattedMessage id="global.optional" />
+                  </span>
+                </Label>
+                <Field
+                  name={`${member}.icon`}
+                  selectedIcon={selectedIcon}
+                  categoryIcons={mergedIcons}
+                  selectedColor={selectedColor}
+                  onIconClick={(icon: ?string) =>
+                    dispatch(change(formName, `${member}.icon`, icon))
+                  }
+                  component={ProposalFormCategoryIcon}
+                />
+                <div>
+                  <Flex as="label">
+                    <FormattedMessage id="global.previsualisation" />
+                    <Tooltip
+                      placement="top"
+                      label={<FormattedMessage id="category.preview" />}
+                      id="tooltip-status"
+                      className="text-left"
+                      style={{ wordBreak: 'break-word' }}>
+                      <div>
+                        <Icon
+                          name={ICON_NAME.information}
+                          size={12}
+                          color={utilsColors.iconGrayColor}
+                          className="ml-5"
+                        />
+                      </div>
+                    </Tooltip>
+                  </Flex>
+                  <div className="d-flex" style={{ justifyContent: 'space-between' }}>
+                    <ProposalFormCategoryBackgroundPreview
+                      color={selectedColor}
+                      name={name}
+                      icon={selectedIcon}
+                      customCategoryImage={
+                        !showPredefinedImage ? customCategoryImage || newCategoryImage : null
+                      }
+                    />
+                    {selectedColor && selectedIcon ? (
+                      <ProposalFormCategoryPinPreview color={selectedColor} icon={selectedIcon} />
+                    ) : null}
                   </div>
-                </Panel.Heading>
-                <Panel.Collapse>
-                  <Panel.Body>
-                    {!showPredefinedImage &&
-                      query.customCategoryImages &&
-                      query.customCategoryImages.length > 0 && (
-                        <p className="text-bold">
-                          <FormattedMessage id="your-pictures" />
-                        </p>
-                      )}
-                    <Field
-                      id={`${member}.customCategoryImage`}
-                      name={`${member}.customCategoryImage`}
-                      type="radio-images"
-                      className={showPredefinedImage ? 'hide' : null}
-                      component={component}
-                      medias={query.customCategoryImages}
-                      disabled={showPredefinedImage}
-                      onChange={() => {
-                        dispatch(change(formName, `${member}.newCategoryImage`, null));
-                      }}
-                    />
-                    <Field
-                      id={`${member}.newCategoryImage`}
-                      name={`${member}.newCategoryImage`}
-                      component={component}
-                      type="image"
-                      className={showPredefinedImage ? 'hide' : ''}
-                      onChange={() => {
-                        dispatch(change(formName, `${member}.customCategoryImage`, null));
-                      }}
-                      label={
-                        <span>
-                          <FormattedMessage id="illustration" />
-                          <span className="excerpt">
-                            {' '}
-                            <FormattedMessage id="global.optional" />
-                          </span>
-                        </span>
-                      }
-                      help={
-                        <span className={showPredefinedImage ? 'hide' : 'excerpt'}>
-                          <FormattedMessage id="authorized-files" />{' '}
-                          <FormattedMessage id="max-weight-1mo" />
-                          <p>
-                            <FormattedMessage id="recommanded-dimensions-186x60" />
-                          </p>
-                        </span>
-                      }
-                      disabled={showPredefinedImage}
-                    />
-                  </Panel.Body>
-                </Panel.Collapse>
-              </Panel>
-            </div>
-          </>
-        )}
-      </Modal.Body>
-      <Modal.Footer>
-        <CloseButton
-          onClose={() => {
-            onClose();
-            setShowPredefinedImage(!isUpdating && !!category.categoryImage);
-          }}
-        />
-        <SubmitButton
-          id="ProposalFormAdminCategoriesStepModal-submit"
-          label="global.validate"
-          isSubmitting={false}
-          disabled={!name || !selectedColor}
-          onSubmit={onSubmit}
-        />
-      </Modal.Footer>
+                </div>
+                <div className="mt-10">
+                  <Panel
+                    id="proposal_form_category_illustration_panel_body"
+                    expanded={!showPredefinedImage}
+                    onToggle={() => {}}>
+                    <Panel.Heading>
+                      <div id="illustration">
+                        <div className="pull-left">
+                          <Toggle
+                            id="toggle-registration"
+                            checked={!showPredefinedImage}
+                            onChange={() => setShowPredefinedImage(!showPredefinedImage)}
+                            label={<FormattedMessage id="custom-illustration" />}
+                          />
+                        </div>
+                        <div className="clearfix" />
+                      </div>
+                    </Panel.Heading>
+                    <Panel.Collapse>
+                      <Panel.Body>
+                        {!showPredefinedImage &&
+                          query.customCategoryImages &&
+                          query.customCategoryImages.length > 0 && (
+                            <p className="text-bold">
+                              <FormattedMessage id="your-pictures" />
+                            </p>
+                          )}
+                        <Field
+                          id={`${member}.customCategoryImage`}
+                          name={`${member}.customCategoryImage`}
+                          type="radio-images"
+                          className={showPredefinedImage ? 'hide' : null}
+                          component={component}
+                          medias={query.customCategoryImages}
+                          disabled={showPredefinedImage}
+                          onChange={() => {
+                            dispatch(change(formName, `${member}.newCategoryImage`, null));
+                          }}
+                        />
+                        <Field
+                          id={`${member}.newCategoryImage`}
+                          name={`${member}.newCategoryImage`}
+                          component={component}
+                          type="image"
+                          className={showPredefinedImage ? 'hide' : ''}
+                          onChange={() => {
+                            dispatch(change(formName, `${member}.customCategoryImage`, null));
+                          }}
+                          label={
+                            <span>
+                              <FormattedMessage id="illustration" />
+                              <span className="excerpt">
+                                {' '}
+                                <FormattedMessage id="global.optional" />
+                              </span>
+                            </span>
+                          }
+                          help={
+                            <span className={showPredefinedImage ? 'hide' : 'excerpt'}>
+                              <FormattedMessage id="authorized-files" />{' '}
+                              <FormattedMessage id="max-weight-1mo" />
+                              <p>
+                                <FormattedMessage id="recommanded-dimensions-186x60" />
+                              </p>
+                            </span>
+                          }
+                          disabled={showPredefinedImage}
+                        />
+                      </Panel.Body>
+                    </Panel.Collapse>
+                  </Panel>
+                </div>
+              </>
+            )}
+          </Modal.Body>
+          <Modal.Footer spacing={2}>
+            <CloseButton
+              onClose={() => {
+                onClose();
+                setShowPredefinedImage(!isUpdating && !!category.categoryImage);
+              }}
+            />
+            <SubmitButton
+              id="ProposalFormAdminCategoriesStepModal-submit"
+              label="global.validate"
+              isSubmitting={false}
+              disabled={!name || !selectedColor}
+              onSubmit={() => {
+                onSubmit();
+                hide();
+              }}
+            />
+          </Modal.Footer>
+        </>
+      )}
     </Modal>
   );
 };

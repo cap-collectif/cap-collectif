@@ -3,26 +3,25 @@
 exports[`<PinnedLabel /> should not render a blue label if not shown 1`] = `""`;
 
 exports[`<PinnedLabel /> should render a blue label if shown for comment 1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={
-    <_default
-      className="in"
-      id="pinned-label"
-      placement="top"
+<Tooltip
+  className="in"
+  id="pinned-label"
+  label={
+    <Text
+      fontSize={1}
+      lineHeight="sm"
+      marginBottom={0}
+      textAlign="center"
     >
-      <FormattedMessage
-        id="global.pinned.tooltip.comment"
-        values={Object {}}
-      />
-    </_default>
+      global.pinned.tooltip.comment
+    </Text>
   }
-  placement="top"
-  trigger={
-    Array [
-      "hover",
-      "focus",
-    ]
+  placement="bottom"
+  style={
+    Object {
+      "marginBottom": 0,
+      "wordBreak": "break-word",
+    }
   }
 >
   <span
@@ -37,30 +36,29 @@ exports[`<PinnedLabel /> should render a blue label if shown for comment 1`] = `
       values={Object {}}
     />
   </span>
-</OverlayTrigger>
+</Tooltip>
 `;
 
 exports[`<PinnedLabel /> should render a blue label if shown for opinion 1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={
-    <_default
-      className="in"
-      id="pinned-label"
-      placement="top"
+<Tooltip
+  className="in"
+  id="pinned-label"
+  label={
+    <Text
+      fontSize={1}
+      lineHeight="sm"
+      marginBottom={0}
+      textAlign="center"
     >
-      <FormattedMessage
-        id="global.pinned.tooltip.opinion"
-        values={Object {}}
-      />
-    </_default>
+      global.pinned.tooltip.opinion
+    </Text>
   }
-  placement="top"
-  trigger={
-    Array [
-      "hover",
-      "focus",
-    ]
+  placement="bottom"
+  style={
+    Object {
+      "marginBottom": 0,
+      "wordBreak": "break-word",
+    }
   }
 >
   <span
@@ -75,5 +73,5 @@ exports[`<PinnedLabel /> should render a blue label if shown for opinion 1`] = `
       values={Object {}}
     />
   </span>
-</OverlayTrigger>
+</Tooltip>
 `;

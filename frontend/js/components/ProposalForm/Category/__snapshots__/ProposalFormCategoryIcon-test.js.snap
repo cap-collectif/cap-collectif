@@ -27,24 +27,20 @@ exports[`<ProposalFormCategoryIcon /> render correctly 1`] = `
       size={12}
     />
   </ProposalFormCategoryIcon__IconContainer>
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <_default
-        id="tooltip-icon-omarlebg.svg"
-      >
-        <FormattedMessage
-          id="already.in.use.feminine"
-          values={Object {}}
-        />
-      </_default>
+  <Tooltip
+    className="text-left"
+    id="tooltip-icon-omarlebg.svg"
+    label={
+      <FormattedMessage
+        id="already.in.use.feminine"
+        values={Object {}}
+      />
     }
     placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
+    style={
+      Object {
+        "wordBreak": "break-word",
+      }
     }
   >
     <ProposalFormCategoryIcon__IconContainer
@@ -58,6 +54,6 @@ exports[`<ProposalFormCategoryIcon /> render correctly 1`] = `
         size={12}
       />
     </ProposalFormCategoryIcon__IconContainer>
-  </OverlayTrigger>
+  </Tooltip>
 </ProposalFormCategoryIcon__Container>
 `;

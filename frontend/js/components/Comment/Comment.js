@@ -41,6 +41,15 @@ const AnswerButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
     margin-right: 5px;
   }
 `;
+const MediaBody: StyledComponent<{}, {}, typeof Media.Body> = styled(Media.Body)`
+  overflow: visible;
+  .cap-popover {
+    button {
+      background-color: transparent !important;
+      border: none !important;
+    }
+  }
+`;
 
 type State = {|
   +answerFormShown: boolean,
@@ -60,13 +69,8 @@ export class Comment extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      comment,
-      isHighlighted,
-      useBodyColor,
-      disabledButton,
-      unstable__enableCapcoUiDs,
-    } = this.props;
+    const { comment, isHighlighted, useBodyColor, disabledButton, unstable__enableCapcoUiDs } =
+      this.props;
     const { answerFormShown } = this.state;
 
     return (
@@ -74,12 +78,12 @@ export class Comment extends React.Component<Props, State> {
         {/* $FlowFixMe */}
         <UserAvatarLegacy user={comment.author} size={45} />
         <Media className="opinion">
-          <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
-            <div className="opinion__data">
+          <MediaBody className="opinion__body" id={`comment_${comment.id}`}>
+            <div className="opinion__data" style={{ overflow: 'visible' }}>
               <CommentInfos comment={comment} />
             </div>
             <CommentBody comment={comment} />
-          </Media.Body>
+          </MediaBody>
           {!disabledButton && (
             <CommentBottom>
               {unstable__enableCapcoUiDs ? (
@@ -109,7 +113,7 @@ export class Comment extends React.Component<Props, State> {
 export default createFragmentContainer(Comment, {
   comment: graphql`
     fragment Comment_comment on Comment
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       author {
         ...UserAvatar_user

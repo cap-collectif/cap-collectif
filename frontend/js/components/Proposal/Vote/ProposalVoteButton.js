@@ -230,7 +230,7 @@ const ProposalVoteButton = ({
       className={`mr-10 proposal__button__vote ${getButtonStyle()} ${classes} `}
       onClick={onButtonClick}
       active={hasVoted}
-      disabled={disabled || isDeleting}>
+      disabled={isDeleting}>
       <i className="cap cap-hand-like-2 mr-5" />
       {intl.formatMessage({ id: getButtonText() })}
     </Button>

@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
-import { OverlayTrigger } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent, css } from 'styled-components';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
-import Tooltip from '~/components/Utils/Tooltip';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 export type Props = {|
   onIconClick: (?string) => void,
@@ -36,33 +35,32 @@ const IconContainer: StyledComponent<
   margin-bottom: 8px;
   padding: 4px 8px;
   ${({ isDisabled, color, isSelected }) => css`
-  
-      ${!isDisabled &&
-        !isSelected &&
-        css`
-          :hover {
-            cursor: pointer;
-            svg {
-              fill: ${color} !important;
-            }
-          }
-        `}
+    ${!isDisabled &&
+    !isSelected &&
+    css`
+      :hover {
+        cursor: pointer;
+        svg {
+          fill: ${color} !important;
+        }
+      }
+    `}
 
-        ${isSelected &&
-          css`
-            :hover {
-              cursor: pointer;
-            }
-            background: ${color};
-          `}
+    ${isSelected &&
+    css`
+      :hover {
+        cursor: pointer;
+      }
+      background: ${color};
+    `}
 
         ${isDisabled &&
-          css`
-            svg {
-              fill: #ccc !important;
-            }
-          `}
+    css`
+      svg {
+        fill: #ccc !important;
+      }
     `}
+  `}
 `;
 
 export const ProposalFormCategoryIcon = ({
@@ -93,15 +91,14 @@ export const ProposalFormCategoryIcon = ({
         return !icon.used || icon.name === selectedIcon ? (
           renderIcon(icon)
         ) : (
-          <OverlayTrigger
+          <Tooltip
             placement="top"
-            overlay={
-              <Tooltip id={`tooltip-icon-${icon.name}`}>
-                <FormattedMessage id="already.in.use.feminine" />
-              </Tooltip>
-            }>
+            label={<FormattedMessage id="already.in.use.feminine" />}
+            id={`tooltip-icon-${icon.name}`}
+            className="text-left"
+            style={{ wordBreak: 'break-word' }}>
             {renderIcon(icon)}
-          </OverlayTrigger>
+          </Tooltip>
         );
       })}
     </Container>

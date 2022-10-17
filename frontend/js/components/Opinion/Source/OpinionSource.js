@@ -3,6 +3,8 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Media, ListGroupItem } from 'react-bootstrap';
+import type { StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import UserAvatarLegacy from '../../User/UserAvatarLegacy';
 import OpinionInfos from '../OpinionInfos';
 import OpinionSourceTitle from './OpinionSourceTitle';
@@ -17,6 +19,15 @@ type Props = {|
   +sourceable: OpinionSource_sourceable,
   +isProfile: boolean,
 |};
+const MediaBody: StyledComponent<{}, {}, typeof Media.Body> = styled(Media.Body)`
+  overflow: visible;
+  .cap-popover {
+    button {
+      background-color: transparent !important;
+      border: none !important;
+    }
+  }
+`;
 
 export class OpinionSource extends React.Component<Props> {
   static defaultProps = {
@@ -44,7 +55,7 @@ export class OpinionSource extends React.Component<Props> {
           <Media.Left>
             <UserAvatarLegacy user={source.author} />
           </Media.Left>
-          <Media.Body className="opinion__body">
+          <MediaBody className="opinion__body">
             <OpinionInfos rankingThreshold={null} opinion={source} />
             <TrashedMessage contribution={source}>
               <OpinionSourceTitle source={source} />
@@ -53,7 +64,7 @@ export class OpinionSource extends React.Component<Props> {
             <div className="small">
               <OpinionSourceButtons sourceable={sourceable} source={source} />
             </div>
-          </Media.Body>
+          </MediaBody>
         </Media>
       </ListGroupItem>
     );
@@ -63,7 +74,7 @@ export class OpinionSource extends React.Component<Props> {
 export default createFragmentContainer(OpinionSource, {
   source: graphql`
     fragment OpinionSource_source on Source
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       ...OpinionInfos_opinion
       ...OpinionSourceTitle_source
@@ -83,7 +94,7 @@ export default createFragmentContainer(OpinionSource, {
   `,
   sourceable: graphql`
     fragment OpinionSource_sourceable on Sourceable
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       ...OpinionSourceButtons_sourceable @arguments(isAuthenticated: $isAuthenticated)
       ... on Opinion {

@@ -2,6 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import { Flex } from '@cap-collectif/ui';
 import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
 import OpinionVotesModal from './OpinionVotesModal';
@@ -25,7 +26,7 @@ export class OpinionVotesBar extends React.Component<Props> {
             helpText={opinion.section.votesThresholdHelpText}
           />
         )}
-        <div style={{ paddingTop: '20px' }}>
+        <Flex direction="row" gap={1} style={{ paddingTop: '20px' }}>
           {opinion.previewVotes &&
             opinion.previewVotes.edges &&
             opinion.previewVotes.edges
@@ -36,7 +37,7 @@ export class OpinionVotesBar extends React.Component<Props> {
               .map((vote, index) => <OpinionUserVote key={index} vote={vote} className="mr-0" />)}
           {opinion.__typename === 'Opinion' && <OpinionVotesModal opinion={opinion} />}
           {opinion.__typename === 'Version' && <VersionVotesModal version={opinion} />}
-        </div>
+        </Flex>
         <FormattedMessage
           id="proposal.vote.count"
           values={{ num: opinion.previewVotes.totalCount }}

@@ -2,6 +2,8 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import type { StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import OpinionInfos from './OpinionInfos';
 import OpinionPreviewTitle from './OpinionPreviewTitle';
@@ -17,6 +19,15 @@ type Props = {|
   +rankingThreshold?: ?number,
   +isProfile: boolean,
 |};
+const MediaBody: StyledComponent<{}, {}, typeof Media.Body> = styled(Media.Body)`
+  overflow: visible;
+  .cap-popover {
+    button {
+      background-color: transparent !important;
+      border: none !important;
+    }
+  }
+`;
 
 class OpinionPreview extends React.Component<Props> {
   static defaultProps = {
@@ -43,7 +54,7 @@ class OpinionPreview extends React.Component<Props> {
           <UserAvatarDeprecated user={opinion.author} />
         </Media.Left>
 
-        <Media.Body className="opinion__body">
+        <MediaBody className="opinion__body">
           <OpinionInfos
             rankingThreshold={rankingThreshold}
             opinion={opinion}
@@ -58,7 +69,7 @@ class OpinionPreview extends React.Component<Props> {
               <OpinionPreviewCounters opinion={opinion} />
             </>
           )}
-        </Media.Body>
+        </MediaBody>
 
         {config.isMobile && (
           <div className="opinion__body mt-10">

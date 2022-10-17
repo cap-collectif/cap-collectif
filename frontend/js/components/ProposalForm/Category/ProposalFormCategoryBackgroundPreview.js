@@ -18,7 +18,6 @@ type Props = {|
 |};
 
 const Container: StyledComponent<{ hasTitle: boolean }, {}, HTMLDivElement> = styled.div`
-  max-height: 119px;
   position: relative;
   width: 49%;
   height: 49%;

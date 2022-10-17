@@ -57,6 +57,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with grid s
       style={
         Object {
           "flex": "1 0 auto",
+          "zIndex": "auto",
         }
       }
       title="mosaic-selected"
@@ -155,6 +156,7 @@ exports[`<ProposalListToggleViewBtn /> should render correctly when SelectionSte
       style={
         Object {
           "flex": "1 0 auto",
+          "zIndex": "auto",
         }
       }
       title="mosaic-selected"

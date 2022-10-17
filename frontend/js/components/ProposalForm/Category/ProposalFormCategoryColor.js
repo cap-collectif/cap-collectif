@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { OverlayTrigger } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent, css } from 'styled-components';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
@@ -8,7 +7,7 @@ import colors from '~/utils/colors';
 import hexToRgb from '~/utils/colors/hexToRgb';
 import rgbToHsl from '~/utils/colors/rgbToHsl';
 import { formatRgb, formatHsl } from '~/utils/colors/formatColor';
-import Tooltip from '~/components/Utils/Tooltip';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 export type Props = {|
   onColorClick: string => void,
@@ -96,15 +95,14 @@ export const ProposalFormCategoryColor = ({
         return !color.used || color.value === selectedColor ? (
           renderColor(color)
         ) : (
-          <OverlayTrigger
+          <Tooltip
             placement="top"
-            overlay={
-              <Tooltip id={`tooltip-color-${color.value}`}>
-                <FormattedMessage id="already.in.use.feminine" />
-              </Tooltip>
-            }>
+            label={<FormattedMessage id="already.in.use.feminine" />}
+            id={`tooltip-color-${color.value}`}
+            className="text-left"
+            style={{ wordBreak: 'break-word' }}>
             {renderColor(color)}
-          </OverlayTrigger>
+          </Tooltip>
         );
       })}
     </Container>

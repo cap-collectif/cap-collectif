@@ -99,7 +99,7 @@ export const ArgumentCreate = ({
       {argumentable.step && (
         <RequirementsFormModal step={argumentable.step} handleClose={closeModal} show={showModal} />
       )}
-      <div className="opinion__data">
+      <div className="opinion__data" style={{ overflow: 'visible' }}>
         <form id={`argument-form--${type}`}>
           {error && (
             <Alert
@@ -170,7 +170,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(
 export default createFragmentContainer(container, {
   argumentable: graphql`
     fragment ArgumentCreate_argumentable on Argumentable
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       contribuable
       ... on Opinion {

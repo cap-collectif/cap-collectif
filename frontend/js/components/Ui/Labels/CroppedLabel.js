@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import { Label, OverlayTrigger } from 'react-bootstrap';
-import Tooltip from '../../Utils/Tooltip';
+import { Label } from 'react-bootstrap';
 import type { BsStyle } from '~/types/ReactBootstrap.type';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type LabelType = {
   name: string,
@@ -24,18 +24,17 @@ export class CroppedLabel extends React.Component<Props> {
     const { label, maxSize, className } = this.props;
 
     if (label.name.length > maxSize) {
-      const tooltip = (
-        <Tooltip placement="top" id="tooltip">
-          {label.name}
-        </Tooltip>
-      );
-
       return (
-        <OverlayTrigger overlay={tooltip} placement="top">
+        <Tooltip
+          placement="top"
+          label={label.name}
+          id="tooltip"
+          className="text-left"
+          style={{ wordBreak: 'break-word' }}>
           <Label bsStyle={label.color} className={className}>
             {label.name.substring(0, 9)}…
           </Label>
-        </OverlayTrigger>
+        </Tooltip>
       );
     }
 

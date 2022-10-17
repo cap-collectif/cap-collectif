@@ -26,10 +26,8 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
         }
       />
     </MediaLeft>
-    <MediaBody
-      bsClass="media-body"
+    <OpinionSource__MediaBody
       className="opinion__body"
-      componentClass="div"
     >
       <Relay(OpinionInfos)
         opinion={
@@ -124,7 +122,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
           }
         />
       </div>
-    </MediaBody>
+    </OpinionSource__MediaBody>
   </Media>
 </ListGroupItem>
 `;
@@ -155,10 +153,8 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
         }
       />
     </MediaLeft>
-    <MediaBody
-      bsClass="media-body"
+    <OpinionSource__MediaBody
       className="opinion__body"
-      componentClass="div"
     >
       <Relay(OpinionInfos)
         opinion={
@@ -253,7 +249,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
           }
         />
       </div>
-    </MediaBody>
+    </OpinionSource__MediaBody>
   </Media>
 </ListGroupItem>
 `;

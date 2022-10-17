@@ -5,7 +5,7 @@ import { connect, useSelector } from 'react-redux';
 import { FormattedMessage, injectIntl, useIntl, type IntlShape } from 'react-intl';
 import moment from 'moment';
 import { change, reset, Field, formValueSelector, reduxForm } from 'redux-form';
-import { Button, ButtonToolbar, ToggleButton, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button, ButtonToolbar, ToggleButton } from 'react-bootstrap';
 import type { Dispatch, GlobalState, State, Uuid } from '~/types';
 import component from '../Form/Field';
 import environment, { graphqlError } from '~/createRelayEnvironment';
@@ -29,6 +29,8 @@ import ProposalFormAdminContainer, {
   DateContainer,
   CustomDateContainer,
 } from './ProposalFormAdminAnalysisConfigurationForm.style';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type RelayProps = {|
   proposalForm: ProposalFormAdminAnalysisConfigurationForm_proposalForm,
@@ -186,27 +188,28 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
             fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
             component={component}
             label={
-              <>
+              <Flex>
                 <FormattedMessage id="global.description" />
                 <span className="excerpt inline">
                   {intl.formatMessage({ id: 'global.optional' })}
                 </span>
 
-                <OverlayTrigger
+                <Tooltip
                   placement="top"
-                  overlay={
-                    <Tooltip id="tooltip-description" className="text-left">
-                      {intl.formatMessage({ id: 'help.text.analysis.phase.intro' })}
-                    </Tooltip>
-                  }>
-                  <Icon
-                    name={ICON_NAME.information}
-                    size={12}
-                    color={colors.iconGrayColor}
-                    className="ml-5"
-                  />
-                </OverlayTrigger>
-              </>
+                  label={intl.formatMessage({ id: 'help.text.analysis.phase.intro' })}
+                  id="tooltip-description"
+                  className="text-left"
+                  style={{ wordBreak: 'break-word' }}>
+                  <div>
+                    <Icon
+                      name={ICON_NAME.information}
+                      size={12}
+                      color={colors.iconGrayColor}
+                      className="ml-5"
+                    />
+                  </div>
+                </Tooltip>
+              </Flex>
             }
           />
         </div>
@@ -349,27 +352,27 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
                 inputClassName="fake-inputClassName"
                 placeholder={<FormattedMessage id="status.select.plural" />}
                 label={
-                  <>
+                  <Flex>
                     <FormattedMessage id="status.plural" />
                     <span className="excerpt inline">
                       {intl.formatMessage({ id: 'global.mandatory' })}
                     </span>
-
-                    <OverlayTrigger
+                    <Tooltip
                       placement="top"
-                      overlay={
-                        <Tooltip id="tooltip-status">
-                          {intl.formatMessage({ id: 'help.reason.for.unfavorable.decision' })}
-                        </Tooltip>
-                      }>
-                      <Icon
-                        name={ICON_NAME.information}
-                        size={12}
-                        color={colors.iconGrayColor}
-                        className="ml-5"
-                      />
-                    </OverlayTrigger>
-                  </>
+                      label={intl.formatMessage({ id: 'help.reason.for.unfavorable.decision' })}
+                      id="tooltip-status"
+                      className="text-left"
+                      style={{ wordBreak: 'break-word' }}>
+                      <div>
+                        <Icon
+                          name={ICON_NAME.information}
+                          size={12}
+                          color={colors.iconGrayColor}
+                          className="ml-5"
+                        />
+                      </div>
+                    </Tooltip>
+                  </Flex>
                 }
               />
             </Card.Body>
@@ -491,26 +494,28 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
                   type="datetime"
                   component={component}
                   label={
-                    <>
+                    <Flex>
                       <FormattedMessage id="label.custom.date" />
                       <span className="excerpt ml-5">
                         {intl.formatMessage({ id: 'global.mandatory' })}
                       </span>
-                      <OverlayTrigger
+
+                      <Tooltip
                         placement="top"
-                        overlay={
-                          <Tooltip id="tooltip-date">
-                            {intl.formatMessage({ id: 'help.date.by.default' })}
-                          </Tooltip>
-                        }>
-                        <Icon
-                          name={ICON_NAME.information}
-                          size={12}
-                          color={colors.iconGrayColor}
-                          className="ml-5"
-                        />
-                      </OverlayTrigger>
-                    </>
+                        label={intl.formatMessage({ id: 'help.date.by.default' })}
+                        id="tooltip-date"
+                        className="text-left"
+                        style={{ wordBreak: 'break-word' }}>
+                        <div>
+                          <Icon
+                            name={ICON_NAME.information}
+                            size={12}
+                            color={colors.iconGrayColor}
+                            className="ml-5"
+                          />
+                        </div>
+                      </Tooltip>
+                    </Flex>
                   }
                   addonAfter={<i className="cap-calendar-2" />}
                 />

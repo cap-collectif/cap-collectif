@@ -1,8 +1,8 @@
 // @flow
 import React, { useState } from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { type IntlShape, useIntl } from 'react-intl';
 import styled, { type StyledComponent, css } from 'styled-components';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type Tag = {| value: string, count: number, onClick: () => void |};
 
@@ -56,15 +56,13 @@ const renderer = (tag: Tag, size: number, intl: IntlShape, setIsHover, marginBot
   const color = getColor(size);
   const style = { ...styles, color, fontSize };
   return (
-    <OverlayTrigger
+    <Tooltip
       key={`info-occurences-${tag.value}`}
+      label={intl.formatMessage({ id: 'appearances-count' }, { num: tag.count })}
+      id={`info-occurences-tooltip-${tag.value}`}
+      className="text-left"
       placement="top"
-      style={{ marginBottom }}
-      overlay={
-        <Tooltip id={`info-occurences-tooltip-${tag.value}`}>
-          {intl.formatMessage({ id: 'appearances-count' }, { num: tag.count })}
-        </Tooltip>
-      }>
+      style={{ marginBottom }}>
       <button
         type="button"
         style={{ ...style, marginBottom }}
@@ -74,7 +72,7 @@ const renderer = (tag: Tag, size: number, intl: IntlShape, setIsHover, marginBot
         onClick={tag.onClick}>
         {tag.value.length <= MAX_LENGTH ? tag.value : `${tag.value.substr(0, MAX_LENGTH)}...`}
       </button>
-    </OverlayTrigger>
+    </Tooltip>
   );
 };
 

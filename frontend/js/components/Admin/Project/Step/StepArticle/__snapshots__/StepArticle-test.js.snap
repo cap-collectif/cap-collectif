@@ -33,13 +33,7 @@ exports[`<StepArticle /> renders correctly 1`] = `
         <Tooltip
           className="text-left"
           id="tooltip-top"
-          label={
-            <FormattedHTMLMessage
-              id="helpText.add.press.articles"
-              tagName="span"
-              values={Object {}}
-            />
-          }
+          label="helpText.add.press.articles"
           placement="top"
           style={
             Object {
@@ -108,13 +102,7 @@ exports[`<StepArticle /> renders correctly when no articles 1`] = `
         <Tooltip
           className="text-left"
           id="tooltip-top"
-          label={
-            <FormattedHTMLMessage
-              id="helpText.add.press.articles"
-              tagName="span"
-              values={Object {}}
-            />
-          }
+          label="helpText.add.press.articles"
           placement="top"
           style={
             Object {

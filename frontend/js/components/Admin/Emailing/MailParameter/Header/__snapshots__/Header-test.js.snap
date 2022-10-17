@@ -3,24 +3,10 @@
 exports[`<Header /> should renders correctly 1`] = `
 <Headerstyle__Container>
   <Headerstyle__TitleContainer>
-    <OverlayTrigger
-      defaultOverlayShown={false}
-      overlay={
-        <Tooltip
-          bsClass="tooltip"
-          id="tooltip-title"
-          placement="right"
-        >
-          global.rename
-        </Tooltip>
-      }
+    <Tooltip
+      id="tooltip-title"
+      label="global.rename"
       placement="top"
-      trigger={
-        Array [
-          "hover",
-          "focus",
-        ]
-      }
     >
       <div
         className="input-title"
@@ -54,7 +40,7 @@ exports[`<Header /> should renders correctly 1`] = `
           </span>
         </div>
       </div>
-    </OverlayTrigger>
+    </Tooltip>
     <Headerstyle__ButtonSendContainer>
       <Headerstyle__ButtonSendMail
         disabled={false}
@@ -151,24 +137,10 @@ exports[`<Header /> should renders correctly when disabled 1`] = `
 exports[`<Header /> should renders correctly when error 1`] = `
 <Headerstyle__Container>
   <Headerstyle__TitleContainer>
-    <OverlayTrigger
-      defaultOverlayShown={false}
-      overlay={
-        <Tooltip
-          bsClass="tooltip"
-          id="tooltip-title"
-          placement="right"
-        >
-          global.rename
-        </Tooltip>
-      }
+    <Tooltip
+      id="tooltip-title"
+      label="global.rename"
       placement="top"
-      trigger={
-        Array [
-          "hover",
-          "focus",
-        ]
-      }
     >
       <div
         className="input-title"
@@ -202,7 +174,7 @@ exports[`<Header /> should renders correctly when error 1`] = `
           </span>
         </div>
       </div>
-    </OverlayTrigger>
+    </Tooltip>
     <Headerstyle__ButtonSendContainer>
       <Headerstyle__ButtonSendMail
         disabled={false}

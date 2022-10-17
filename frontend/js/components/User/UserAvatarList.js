@@ -3,13 +3,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { OverlayTrigger } from 'react-bootstrap';
 
 import UserAvatarList from '../Ui/List/UserAvatarList';
 import UserAvatarLegacy from './UserAvatarLegacy';
 import type { State, FeatureToggles } from '../../types';
-import Tooltip from '../Utils/Tooltip';
 import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type Props = {|
   +users: UserAvatarList_users,
@@ -43,17 +42,21 @@ export const UserAvatarListContainer = (props: Props) => {
                 features={features}
               />
             ) : (
-              <OverlayTrigger
-                key={index}
+              <Tooltip
                 placement="top"
-                overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
-                <UserAvatarLegacy
-                  {...(avatarSize ? { size: avatarSize } : {})}
-                  user={user}
-                  features={features}
-                  displayUrl={false}
-                />
-              </OverlayTrigger>
+                label={user.username}
+                id={`tooltip-${user.id}`}
+                className="text-left"
+                style={{ wordBreak: 'break-word' }}>
+                <div>
+                  <UserAvatarLegacy
+                    {...(avatarSize ? { size: avatarSize } : {})}
+                    user={user}
+                    features={features}
+                    displayUrl={false}
+                  />
+                </div>
+              </Tooltip>
             ),
           )}
       </UserAvatarList>

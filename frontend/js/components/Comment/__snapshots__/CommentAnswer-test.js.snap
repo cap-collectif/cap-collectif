@@ -27,6 +27,11 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
     >
       <div
         className="opinion__data"
+        style={
+          Object {
+            "overflow": "visible",
+          }
+        }
       >
         <Relay(CommentInfos)
           comment={

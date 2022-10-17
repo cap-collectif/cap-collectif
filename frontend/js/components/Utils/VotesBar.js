@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ProgressBar, OverlayTrigger } from 'react-bootstrap';
-import Tooltip from './Tooltip';
+import { ProgressBar } from 'react-bootstrap';
+import { Flex, Text, Tooltip } from '@cap-collectif/ui';
 
 type Props = {
   style?: Object,
@@ -37,10 +37,9 @@ class VotesBar extends React.Component<Props> {
           style={{
             fontSize: '24px',
             color: '#999',
-            paddingLeft: '15px',
             top: '-5px',
           }}
-          className="pull-right cap cap-information"
+          className="pull-right cap-information"
         />
       );
       return this.renderOverlay(icon);
@@ -50,14 +49,14 @@ class VotesBar extends React.Component<Props> {
   renderDoneNb = () => {
     const { value } = this.props;
     return (
-      <p className="small excerpt" style={{ marginBottom: '5px' }}>
+      <Flex className="small excerpt" style={{ marginBottom: '5px' }}>
         <FormattedMessage
           id="opinion.progress.done"
           values={{
             num: value,
           }}
         />
-      </p>
+      </Flex>
     );
   };
 
@@ -66,7 +65,7 @@ class VotesBar extends React.Component<Props> {
     const left = max - value;
     if (left > 0) {
       return (
-        <p className="small excerpt">
+        <Flex className="small excerpt" gap={2}>
           <FormattedMessage
             id="opinion.progress.left"
             values={{
@@ -75,11 +74,11 @@ class VotesBar extends React.Component<Props> {
             }}
           />
           {this.renderIcon()}
-        </p>
+        </Flex>
       );
     }
     return (
-      <p className="small excerpt">
+      <Flex className="small excerpt">
         <FormattedMessage
           id="opinion.progress.reached"
           values={{
@@ -87,19 +86,25 @@ class VotesBar extends React.Component<Props> {
           }}
         />
         {this.renderIcon()}
-      </p>
+      </Flex>
     );
   };
 
   renderOverlay = (children: Object) => {
     const { helpText } = this.props;
     return (
-      <OverlayTrigger
-        rootClose
+      <Tooltip
         placement="top"
-        overlay={<Tooltip id="votes-bar-tooltip">{helpText}</Tooltip>}>
-        {children}
-      </OverlayTrigger>
+        label={
+          <Text textAlign="center" lineHeight="sm" fontSize={1} marginBottom={0}>
+            {helpText}
+          </Text>
+        }
+        id="votes-bar-tooltip"
+        className="text-left"
+        style={{ wordBreak: 'break-word' }}>
+        <div>{children}</div>
+      </Tooltip>
     );
   };
 

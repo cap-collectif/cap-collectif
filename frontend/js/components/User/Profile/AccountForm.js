@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FormattedMessage, FormattedHTMLMessage, type IntlShape, injectIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import { Button, Panel, ListGroupItem, OverlayTrigger } from 'react-bootstrap';
+import { Button, Panel, ListGroupItem } from 'react-bootstrap';
 import {
   formValueSelector,
   hasSubmitFailed,
@@ -45,8 +45,8 @@ import ListGroup from '../../Ui/List/ListGroup';
 import SocialIcon from '~ui/Icons/SocialIcon';
 import { getButtonLinkForType } from '~ui/Button/LoginSocialButton';
 import DissociateSsoModal from '~/components/User/Profile/DissociateSsoModal';
-import Tooltip from '~/components/Utils/Tooltip';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type RelayProps = {| viewer: AccountForm_viewer |};
 
@@ -278,16 +278,17 @@ export const AccountForm = ({
           label: intl.formatMessage({ id: languageObject.translationKey }),
         };
       });
-      const tooltipDelete = (
-        <Tooltip id="tooltip" className="account-form-hint">
-          <FormattedMessage id="display-language-hint" />
-        </Tooltip>
-      );
+
       return (
         <>
           <label className="col-sm-3 control-label" htmlFor="display__language">
             <FormattedMessage id="display-language" />
-            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+            <Tooltip
+              placement="top"
+              label={<FormattedMessage id="display-language-hint" />}
+              id="tooltip"
+              className="account-form-hint"
+              style={{ wordBreak: 'break-word' }}>
               <span className="ml-5 excerpt" style={{ fontSize: 15 }}>
                 <Icon
                   name={ICON_NAME.information}
@@ -296,7 +297,7 @@ export const AccountForm = ({
                   className="mr-5"
                 />
               </span>
-            </OverlayTrigger>
+            </Tooltip>
           </label>
           <div className="col-sm-6">
             <Field

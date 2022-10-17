@@ -20,6 +20,7 @@ Scenario: Logged in admin wants edit a proposal form page content
   And  fill in the following:
     | categories[0].name | test title |
   And I click on a proposal form button "category add popup save"
+  And I scroll to element "#proposal_form_category_mandatory"
   And I check element "proposal_form_using_address_field"
   And I fill in the following:
     | addressHelpText | test text |
@@ -63,6 +64,7 @@ Scenario: Logged in admin wants edit a proposal form page content
     | questions[3].rangeMin| 100 |
     | questions[3].rangeMax | 1000 |
   And I click on a proposal form button "personal-field add popup save"
+  And I scroll to the bottom
   Then I save current admin proposal form "content"
   And I wait ".alert__form_succeeded-message" to appear on current page
   Then I should see "global.saved"

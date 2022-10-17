@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
+import { Flex } from '@cap-collectif/ui';
 import ProposalPreviewVote from './ProposalPreviewVote';
 import { getBaseUrl } from '~/config';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
@@ -117,7 +118,7 @@ export const ProposalPreviewBody = ({ proposal, step, viewer, isSPA }: Props) =>
           <ProposalDetailLikers proposal={proposal} />
         </TagsList>
       </div>
-      <div className="proposal__buttons mt-15">
+      <Flex className="proposal__buttons mt-15">
         {step &&
           proposal.currentVotableStep &&
           step.id === proposal.currentVotableStep.id &&
@@ -138,7 +139,7 @@ export const ProposalPreviewBody = ({ proposal, step, viewer, isSPA }: Props) =>
             <FormattedMessage id="support" />
           </Button>
         )}
-      </div>
+      </Flex>
       {step &&
         step.canDisplayBallot &&
         step.voteThreshold !== null &&

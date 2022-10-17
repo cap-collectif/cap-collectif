@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
-import { OverlayTrigger } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedDate } from 'react-intl';
+import { Text, Tooltip } from '@cap-collectif/ui';
 import UserLink from '../User/UserLink';
 import PinnedLabel from '../Utils/PinnedLabel';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
-import Tooltip from '../Utils/Tooltip';
 import type { OpinionInfos_opinion } from '~relay/OpinionInfos_opinion.graphql';
 
 type Props = {
@@ -62,28 +61,31 @@ class OpinionInfos extends React.Component<Props> {
       return null;
     }
 
-    const OpinionUpdatedTooltip = (
-      <Tooltip placement="top" id="tooltip-top">
-        <FormattedMessage id="opinion-updated-at-the" />{' '}
-        <FormattedDate
-          value={moment(opinion.updatedAt).toDate()}
-          day="numeric"
-          hour="2-digit"
-          minute="2-digit"
-          month="long"
-          year="numeric"
-        />
-      </Tooltip>
-    );
-
     return (
       <span className="excerpt small">
         {' • '}
-        <OverlayTrigger placement="top" overlay={OpinionUpdatedTooltip}>
+        <Tooltip
+          placement="top"
+          label={
+            <Text fontSize={1} marginBottom={0}>
+              <FormattedMessage id="opinion-updated-at-the" />{' '}
+              <FormattedDate
+                value={moment(opinion.updatedAt).toDate()}
+                day="numeric"
+                hour="2-digit"
+                minute="2-digit"
+                month="long"
+                year="numeric"
+              />
+            </Text>
+          }
+          id="tooltip-top"
+          className="text-left"
+          style={{ wordBreak: 'break-word' }}>
           <span>
             <FormattedMessage id="global.modified" />
           </span>
-        </OverlayTrigger>
+        </Tooltip>
       </span>
     );
   };
@@ -139,6 +141,7 @@ class OpinionInfos extends React.Component<Props> {
         {this.renderEditionDate()}
         <PinnedLabel show={opinion.pinned || false} type="opinion" />
         {this.renderRankingLabel()}
+        {/* $FlowFixMe TODO https://github.com/cap-collectif/platform/issues/14792 */}
         <UnpublishedLabel publishable={opinion} />
       </div>
     );

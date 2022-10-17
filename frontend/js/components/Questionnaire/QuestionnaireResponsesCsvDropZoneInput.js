@@ -2,11 +2,12 @@
 import React from 'react';
 import type { DropzoneFile } from 'react-dropzone';
 import type { FieldProps } from 'redux-form';
-import { Col, ControlLabel, FormGroup, HelpBlock, Row, OverlayTrigger } from 'react-bootstrap';
+import { Col, ControlLabel, FormGroup, HelpBlock, Row } from 'react-bootstrap';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import Tooltip from '../Utils/Tooltip';
 import FileUpload from '../Form/FileUpload';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type FileUploadFieldProps = {
   ...FieldProps,
@@ -35,12 +36,6 @@ export const QuestionnaireResponsesCsvDropZoneInput = ({
   oldMember,
 }: FileUploadFieldProps) => {
   const colWidth = 12;
-
-  const tooltip = (
-    <Tooltip id="tooltip-top" className="text-left">
-      <FormattedMessage id="help-text-duplicated-answers" />
-    </Tooltip>
-  );
 
   return (
     <FormGroup>
@@ -104,7 +99,7 @@ export const QuestionnaireResponsesCsvDropZoneInput = ({
                 </Col>
                 {input.value.doublons && input.value.doublons.length > 0 && (
                   <Col xs={12} sm={colWidth} className="left">
-                    <h4>
+                    <Flex as="h4">
                       <i className="cap cap-ios-close text-danger" />{' '}
                       <b>
                         <FormattedMessage
@@ -112,10 +107,18 @@ export const QuestionnaireResponsesCsvDropZoneInput = ({
                           values={{ num: input.value.doublons.length }}
                         />
                       </b>
-                      <OverlayTrigger key="top" placement="top" overlay={tooltip}>
-                        <i className="ml-5 cap cap-information" />
-                      </OverlayTrigger>
-                    </h4>
+                      <Tooltip
+                        key="top"
+                        placement="top"
+                        label={<FormattedMessage id="help-text-duplicated-answers" />}
+                        id="tooltip-top"
+                        className="text-left"
+                        style={{ wordBreak: 'break-word' }}>
+                        <div>
+                          <i className="ml-5 cap cap-information" />
+                        </div>
+                      </Tooltip>
+                    </Flex>
                     <ul>
                       {input.value.doublons.map(doublon => (
                         <li>{doublon}</li>

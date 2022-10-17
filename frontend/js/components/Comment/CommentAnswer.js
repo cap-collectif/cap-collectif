@@ -34,7 +34,7 @@ export class CommentAnswer extends React.Component<Props> {
         </div>
         <Media className="opinion">
           <Media.Body className="opinion__body">
-            <div className="opinion__data">
+            <div className="opinion__data" style={{ overflow: 'visible' }}>
               <CommentInfos comment={comment} />
             </div>
             <CommentBody comment={comment} />
@@ -53,7 +53,7 @@ export class CommentAnswer extends React.Component<Props> {
 export default createFragmentContainer(CommentAnswer, {
   comment: graphql`
     fragment CommentAnswer_comment on Comment
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       author {
         vip

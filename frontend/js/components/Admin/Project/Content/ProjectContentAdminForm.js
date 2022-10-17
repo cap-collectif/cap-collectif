@@ -3,7 +3,7 @@ import React, { type ComponentType } from 'react';
 import { Field } from 'redux-form';
 import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedHTMLMessage, FormattedMessage, type IntlShape } from 'react-intl';
+import { FormattedMessage, type IntlShape } from 'react-intl';
 import { useSelector } from 'react-redux';
 import select from '~/components/Form/Select';
 import renderComponent from '~/components/Form/Field';
@@ -85,7 +85,7 @@ export const renderLabel = (
       {helpText && (
         <Tooltip
           placement="top"
-          label={<FormattedHTMLMessage id={helpText} />}
+          label={intl.formatMessage({ id: helpText })}
           id="tooltip-top"
           className="text-left"
           style={{ wordBreak: 'break-word' }}>

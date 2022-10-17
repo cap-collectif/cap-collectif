@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import moment from 'moment';
 import Linkify from 'react-linkify';
 import { Label, ListGroupItem } from 'react-bootstrap';
+import type { StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import Media from '../Ui/Medias/Media/Media';
 import UserAvatarLegacy from '../User/UserAvatarLegacy';
 import UserLink from '../User/UserLink';
@@ -19,6 +21,15 @@ type Props = {|
   +argument: ArgumentItem_argument,
   +isProfile: boolean,
 |};
+const MediaBody: StyledComponent<{}, {}, typeof Media.Body> = styled(Media.Body)`
+  overflow: visible;
+  .cap-popover {
+    button {
+      background-color: transparent !important;
+      border: none !important;
+    }
+  }
+`;
 
 export class ArgumentItem extends React.Component<Props> {
   static defaultProps = {
@@ -76,8 +87,8 @@ export class ArgumentItem extends React.Component<Props> {
           <Media.Left>
             <UserAvatarLegacy user={argument.author} className="excerpt_dark" />
           </Media.Left>
-          <Media.Body className="opinion__body">
-            <div className="opinion__data">
+          <MediaBody className="opinion__body">
+            <div className="opinion__data" style={{ overflow: 'visible' }}>
               <div className="opinion__user">
                 <UserLink user={argument.author} />
                 {this.renderDate()}
@@ -92,7 +103,7 @@ export class ArgumentItem extends React.Component<Props> {
                 )}
               </div>
             </div>
-          </Media.Body>
+          </MediaBody>
           <div className="opinion__body">
             <TrashedMessage contribution={argument}>
               <p className="opinion__text">
@@ -112,7 +123,7 @@ export class ArgumentItem extends React.Component<Props> {
 export default createFragmentContainer(ArgumentItem, {
   argument: graphql`
     fragment ArgumentItem_argument on Argument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       ...TrashedMessage_contribution
       ...UnpublishedLabel_publishable
       id

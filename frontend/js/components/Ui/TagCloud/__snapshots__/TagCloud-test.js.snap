@@ -71,40 +71,33 @@ exports[`<TagCloud /> should render correctly 1`] = `
     <div
       className="TagCloud__Container-jQhbLY hufUNN"
     >
-      <OverlayTrigger
-        defaultOverlayShown={false}
+      <Tooltip
+        className="text-left"
+        id="info-occurences-tooltip-Amélioratioon"
         key="info-occurences-Amélioratioon"
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="info-occurences-tooltip-Amélioratioon"
-            placement="right"
-          >
-            appearances-count
-          </Tooltip>
-        }
+        label="appearances-count"
         placement="top"
         style={
           Object {
             "marginBottom": -12,
           }
         }
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
       >
-        <button
-          key="Amélioratioon"
-          onBlur={[Function]}
+        <ForwardRef(TooltipReference)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          hide={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
           style={
             Object {
               "background": "none",
@@ -118,45 +111,221 @@ exports[`<TagCloud /> should render correctly 1`] = `
               "verticalAlign": "middle",
             }
           }
+          toggle={[Function]}
           type="button"
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(26, 136, 255); font-size: 45px;"
+                tabindex="0"
+                type="button"
+              >
+                Amélioratioon
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
         >
-          Amélioratioon
-        </button>
-      </OverlayTrigger>
-      <OverlayTrigger
-        defaultOverlayShown={false}
+          <button
+            aria-describedby="id-g"
+            key=".$Amélioratioon"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            style={
+              Object {
+                "background": "none",
+                "border": "none",
+                "color": "#1A88FF",
+                "display": "inline-block",
+                "fontSize": "45px",
+                "margin": "5px",
+                "marginBottom": -12,
+                "padding": 0,
+                "verticalAlign": "middle",
+              }
+            }
+            tabIndex={0}
+            type="button"
+          >
+            Amélioratioon
+          </button>
+        </ForwardRef(TooltipReference)>
+        <ForwardRef(Tooltip)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          className="cap-tooltip"
+          hide={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
+          toggle={[Function]}
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+              "zIndex": 1100,
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(26, 136, 255); font-size: 45px;"
+                tabindex="0"
+                type="button"
+              >
+                Amélioratioon
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
+        >
+          <Portal>
+            <Portal
+              containerInfo={
+                <div
+                  class="__reakit-portal"
+                >
+                  <div
+                    class="cap-tooltip"
+                    hidden=""
+                    id="id-g"
+                    role="tooltip"
+                    style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+                  />
+                </div>
+              }
+            >
+              <div
+                className="cap-tooltip"
+                hidden={true}
+                id="id-g"
+                onAnimationEnd={[Function]}
+                onTransitionEnd={[Function]}
+                role="tooltip"
+                style={
+                  Object {
+                    "display": "none",
+                    "left": "100%",
+                    "pointerEvents": "none",
+                    "position": "fixed",
+                    "top": "100%",
+                    "zIndex": 1100,
+                  }
+                }
+              >
+                <AnimatePresence />
+              </div>
+            </Portal>
+          </Portal>
+        </ForwardRef(Tooltip)>
+      </Tooltip>
+      <Tooltip
+        className="text-left"
+        id="info-occurences-tooltip-infrastructures"
         key="info-occurences-infrastructures"
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="info-occurences-tooltip-infrastructures"
-            placement="right"
-          >
-            appearances-count
-          </Tooltip>
-        }
+        label="appearances-count"
         placement="top"
         style={
           Object {
             "marginBottom": -12,
           }
         }
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
       >
-        <button
-          key="infrastructures"
-          onBlur={[Function]}
+        <ForwardRef(TooltipReference)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          hide={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
           style={
             Object {
               "background": "none",
@@ -170,45 +339,221 @@ exports[`<TagCloud /> should render correctly 1`] = `
               "verticalAlign": "middle",
             }
           }
+          toggle={[Function]}
           type="button"
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(26, 136, 255); font-size: 42px;"
+                tabindex="0"
+                type="button"
+              >
+                infrastructures
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
         >
-          infrastructures
-        </button>
-      </OverlayTrigger>
-      <OverlayTrigger
-        defaultOverlayShown={false}
+          <button
+            aria-describedby="id-g"
+            key=".$infrastructures"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            style={
+              Object {
+                "background": "none",
+                "border": "none",
+                "color": "#1A88FF",
+                "display": "inline-block",
+                "fontSize": "42px",
+                "margin": "5px",
+                "marginBottom": -12,
+                "padding": 0,
+                "verticalAlign": "middle",
+              }
+            }
+            tabIndex={0}
+            type="button"
+          >
+            infrastructures
+          </button>
+        </ForwardRef(TooltipReference)>
+        <ForwardRef(Tooltip)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          className="cap-tooltip"
+          hide={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
+          toggle={[Function]}
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+              "zIndex": 1100,
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(26, 136, 255); font-size: 42px;"
+                tabindex="0"
+                type="button"
+              >
+                infrastructures
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
+        >
+          <Portal>
+            <Portal
+              containerInfo={
+                <div
+                  class="__reakit-portal"
+                >
+                  <div
+                    class="cap-tooltip"
+                    hidden=""
+                    id="id-g"
+                    role="tooltip"
+                    style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+                  />
+                </div>
+              }
+            >
+              <div
+                className="cap-tooltip"
+                hidden={true}
+                id="id-g"
+                onAnimationEnd={[Function]}
+                onTransitionEnd={[Function]}
+                role="tooltip"
+                style={
+                  Object {
+                    "display": "none",
+                    "left": "100%",
+                    "pointerEvents": "none",
+                    "position": "fixed",
+                    "top": "100%",
+                    "zIndex": 1100,
+                  }
+                }
+              >
+                <AnimatePresence />
+              </div>
+            </Portal>
+          </Portal>
+        </ForwardRef(Tooltip)>
+      </Tooltip>
+      <Tooltip
+        className="text-left"
+        id="info-occurences-tooltip-françaises"
         key="info-occurences-françaises"
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="info-occurences-tooltip-françaises"
-            placement="right"
-          >
-            appearances-count
-          </Tooltip>
-        }
+        label="appearances-count"
         placement="top"
         style={
           Object {
             "marginBottom": -12,
           }
         }
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
       >
-        <button
-          key="françaises"
-          onBlur={[Function]}
+        <ForwardRef(TooltipReference)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          hide={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
           style={
             Object {
               "background": "none",
@@ -222,45 +567,221 @@ exports[`<TagCloud /> should render correctly 1`] = `
               "verticalAlign": "middle",
             }
           }
+          toggle={[Function]}
           type="button"
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(26, 136, 255); font-size: 42px;"
+                tabindex="0"
+                type="button"
+              >
+                françaises
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
         >
-          françaises
-        </button>
-      </OverlayTrigger>
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        key="info-occurences-outre-mer"
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="info-occurences-tooltip-outre-mer"
-            placement="right"
+          <button
+            aria-describedby="id-g"
+            key=".$françaises"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            style={
+              Object {
+                "background": "none",
+                "border": "none",
+                "color": "#1A88FF",
+                "display": "inline-block",
+                "fontSize": "42px",
+                "margin": "5px",
+                "marginBottom": -12,
+                "padding": 0,
+                "verticalAlign": "middle",
+              }
+            }
+            tabIndex={0}
+            type="button"
           >
-            appearances-count
-          </Tooltip>
-        }
+            françaises
+          </button>
+        </ForwardRef(TooltipReference)>
+        <ForwardRef(Tooltip)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          className="cap-tooltip"
+          hide={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
+          toggle={[Function]}
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+              "zIndex": 1100,
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(26, 136, 255); font-size: 42px;"
+                tabindex="0"
+                type="button"
+              >
+                françaises
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
+        >
+          <Portal>
+            <Portal
+              containerInfo={
+                <div
+                  class="__reakit-portal"
+                >
+                  <div
+                    class="cap-tooltip"
+                    hidden=""
+                    id="id-g"
+                    role="tooltip"
+                    style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+                  />
+                </div>
+              }
+            >
+              <div
+                className="cap-tooltip"
+                hidden={true}
+                id="id-g"
+                onAnimationEnd={[Function]}
+                onTransitionEnd={[Function]}
+                role="tooltip"
+                style={
+                  Object {
+                    "display": "none",
+                    "left": "100%",
+                    "pointerEvents": "none",
+                    "position": "fixed",
+                    "top": "100%",
+                    "zIndex": 1100,
+                  }
+                }
+              >
+                <AnimatePresence />
+              </div>
+            </Portal>
+          </Portal>
+        </ForwardRef(Tooltip)>
+      </Tooltip>
+      <Tooltip
+        className="text-left"
+        id="info-occurences-tooltip-outre-mer"
+        key="info-occurences-outre-mer"
+        label="appearances-count"
         placement="top"
         style={
           Object {
             "marginBottom": -12,
           }
         }
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
       >
-        <button
-          key="outre-mer"
-          onBlur={[Function]}
+        <ForwardRef(TooltipReference)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          hide={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
           style={
             Object {
               "background": "none",
@@ -274,45 +795,221 @@ exports[`<TagCloud /> should render correctly 1`] = `
               "verticalAlign": "middle",
             }
           }
+          toggle={[Function]}
           type="button"
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(26, 136, 255); font-size: 41px;"
+                tabindex="0"
+                type="button"
+              >
+                outre-mer
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
         >
-          outre-mer
-        </button>
-      </OverlayTrigger>
-      <OverlayTrigger
-        defaultOverlayShown={false}
+          <button
+            aria-describedby="id-g"
+            key=".$outre-mer"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            style={
+              Object {
+                "background": "none",
+                "border": "none",
+                "color": "#1A88FF",
+                "display": "inline-block",
+                "fontSize": "41px",
+                "margin": "5px",
+                "marginBottom": -12,
+                "padding": 0,
+                "verticalAlign": "middle",
+              }
+            }
+            tabIndex={0}
+            type="button"
+          >
+            outre-mer
+          </button>
+        </ForwardRef(TooltipReference)>
+        <ForwardRef(Tooltip)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          className="cap-tooltip"
+          hide={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
+          toggle={[Function]}
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+              "zIndex": 1100,
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(26, 136, 255); font-size: 41px;"
+                tabindex="0"
+                type="button"
+              >
+                outre-mer
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
+        >
+          <Portal>
+            <Portal
+              containerInfo={
+                <div
+                  class="__reakit-portal"
+                >
+                  <div
+                    class="cap-tooltip"
+                    hidden=""
+                    id="id-g"
+                    role="tooltip"
+                    style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+                  />
+                </div>
+              }
+            >
+              <div
+                className="cap-tooltip"
+                hidden={true}
+                id="id-g"
+                onAnimationEnd={[Function]}
+                onTransitionEnd={[Function]}
+                role="tooltip"
+                style={
+                  Object {
+                    "display": "none",
+                    "left": "100%",
+                    "pointerEvents": "none",
+                    "position": "fixed",
+                    "top": "100%",
+                    "zIndex": 1100,
+                  }
+                }
+              >
+                <AnimatePresence />
+              </div>
+            </Portal>
+          </Portal>
+        </ForwardRef(Tooltip)>
+      </Tooltip>
+      <Tooltip
+        className="text-left"
+        id="info-occurences-tooltip-mise"
         key="info-occurences-mise"
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="info-occurences-tooltip-mise"
-            placement="right"
-          >
-            appearances-count
-          </Tooltip>
-        }
+        label="appearances-count"
         placement="top"
         style={
           Object {
             "marginBottom": -12,
           }
         }
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
       >
-        <button
-          key="mise"
-          onBlur={[Function]}
+        <ForwardRef(TooltipReference)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          hide={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
           style={
             Object {
               "background": "none",
@@ -326,45 +1023,221 @@ exports[`<TagCloud /> should render correctly 1`] = `
               "verticalAlign": "middle",
             }
           }
+          toggle={[Function]}
           type="button"
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(0, 54, 112); font-size: 14px;"
+                tabindex="0"
+                type="button"
+              >
+                mise
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
         >
-          mise
-        </button>
-      </OverlayTrigger>
-      <OverlayTrigger
-        defaultOverlayShown={false}
+          <button
+            aria-describedby="id-g"
+            key=".$mise"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            style={
+              Object {
+                "background": "none",
+                "border": "none",
+                "color": "#003670",
+                "display": "inline-block",
+                "fontSize": "14px",
+                "margin": "5px",
+                "marginBottom": -12,
+                "padding": 0,
+                "verticalAlign": "middle",
+              }
+            }
+            tabIndex={0}
+            type="button"
+          >
+            mise
+          </button>
+        </ForwardRef(TooltipReference)>
+        <ForwardRef(Tooltip)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          className="cap-tooltip"
+          hide={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
+          toggle={[Function]}
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+              "zIndex": 1100,
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(0, 54, 112); font-size: 14px;"
+                tabindex="0"
+                type="button"
+              >
+                mise
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
+        >
+          <Portal>
+            <Portal
+              containerInfo={
+                <div
+                  class="__reakit-portal"
+                >
+                  <div
+                    class="cap-tooltip"
+                    hidden=""
+                    id="id-g"
+                    role="tooltip"
+                    style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+                  />
+                </div>
+              }
+            >
+              <div
+                className="cap-tooltip"
+                hidden={true}
+                id="id-g"
+                onAnimationEnd={[Function]}
+                onTransitionEnd={[Function]}
+                role="tooltip"
+                style={
+                  Object {
+                    "display": "none",
+                    "left": "100%",
+                    "pointerEvents": "none",
+                    "position": "fixed",
+                    "top": "100%",
+                    "zIndex": 1100,
+                  }
+                }
+              >
+                <AnimatePresence />
+              </div>
+            </Portal>
+          </Portal>
+        </ForwardRef(Tooltip)>
+      </Tooltip>
+      <Tooltip
+        className="text-left"
+        id="info-occurences-tooltip-Faible"
         key="info-occurences-Faible"
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="info-occurences-tooltip-Faible"
-            placement="right"
-          >
-            appearances-count
-          </Tooltip>
-        }
+        label="appearances-count"
         placement="top"
         style={
           Object {
             "marginBottom": -12,
           }
         }
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
       >
-        <button
-          key="Faible"
-          onBlur={[Function]}
+        <ForwardRef(TooltipReference)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          hide={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
           style={
             Object {
               "background": "none",
@@ -378,45 +1251,221 @@ exports[`<TagCloud /> should render correctly 1`] = `
               "verticalAlign": "middle",
             }
           }
+          toggle={[Function]}
           type="button"
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(0, 54, 112); font-size: 14px;"
+                tabindex="0"
+                type="button"
+              >
+                Faible
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
         >
-          Faible
-        </button>
-      </OverlayTrigger>
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        key="info-occurences-Niveau"
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="info-occurences-tooltip-Niveau"
-            placement="right"
+          <button
+            aria-describedby="id-g"
+            key=".$Faible"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            style={
+              Object {
+                "background": "none",
+                "border": "none",
+                "color": "#003670",
+                "display": "inline-block",
+                "fontSize": "14px",
+                "margin": "5px",
+                "marginBottom": -12,
+                "padding": 0,
+                "verticalAlign": "middle",
+              }
+            }
+            tabIndex={0}
+            type="button"
           >
-            appearances-count
-          </Tooltip>
-        }
+            Faible
+          </button>
+        </ForwardRef(TooltipReference)>
+        <ForwardRef(Tooltip)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          className="cap-tooltip"
+          hide={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
+          toggle={[Function]}
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+              "zIndex": 1100,
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(0, 54, 112); font-size: 14px;"
+                tabindex="0"
+                type="button"
+              >
+                Faible
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
+        >
+          <Portal>
+            <Portal
+              containerInfo={
+                <div
+                  class="__reakit-portal"
+                >
+                  <div
+                    class="cap-tooltip"
+                    hidden=""
+                    id="id-g"
+                    role="tooltip"
+                    style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+                  />
+                </div>
+              }
+            >
+              <div
+                className="cap-tooltip"
+                hidden={true}
+                id="id-g"
+                onAnimationEnd={[Function]}
+                onTransitionEnd={[Function]}
+                role="tooltip"
+                style={
+                  Object {
+                    "display": "none",
+                    "left": "100%",
+                    "pointerEvents": "none",
+                    "position": "fixed",
+                    "top": "100%",
+                    "zIndex": 1100,
+                  }
+                }
+              >
+                <AnimatePresence />
+              </div>
+            </Portal>
+          </Portal>
+        </ForwardRef(Tooltip)>
+      </Tooltip>
+      <Tooltip
+        className="text-left"
+        id="info-occurences-tooltip-Niveau"
+        key="info-occurences-Niveau"
+        label="appearances-count"
         placement="top"
         style={
           Object {
             "marginBottom": -12,
           }
         }
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
       >
-        <button
-          key="Niveau"
-          onBlur={[Function]}
+        <ForwardRef(TooltipReference)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          hide={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
           style={
             Object {
               "background": "none",
@@ -430,11 +1479,194 @@ exports[`<TagCloud /> should render correctly 1`] = `
               "verticalAlign": "middle",
             }
           }
+          toggle={[Function]}
           type="button"
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(0, 54, 112); font-size: 12px;"
+                tabindex="0"
+                type="button"
+              >
+                Niveau
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
         >
-          Niveau
-        </button>
-      </OverlayTrigger>
+          <button
+            aria-describedby="id-g"
+            key=".$Niveau"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            style={
+              Object {
+                "background": "none",
+                "border": "none",
+                "color": "#003670",
+                "display": "inline-block",
+                "fontSize": "12px",
+                "margin": "5px",
+                "marginBottom": -12,
+                "padding": 0,
+                "verticalAlign": "middle",
+              }
+            }
+            tabIndex={0}
+            type="button"
+          >
+            Niveau
+          </button>
+        </ForwardRef(TooltipReference)>
+        <ForwardRef(Tooltip)
+          animated={300}
+          animating={false}
+          baseId="id-g"
+          className="cap-tooltip"
+          hide={[Function]}
+          place={[Function]}
+          placement="top"
+          setAnimated={[Function]}
+          setBaseId={[Function]}
+          setVisible={[Function]}
+          show={[Function]}
+          stopAnimation={[Function]}
+          toggle={[Function]}
+          unstable_arrowRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_arrowStyles={Object {}}
+          unstable_disclosureRef={
+            Object {
+              "current": null,
+            }
+          }
+          unstable_idCountRef={
+            Object {
+              "current": 0,
+            }
+          }
+          unstable_originalPlacement="top"
+          unstable_popoverRef={
+            Object {
+              "current": <div
+                class="cap-tooltip"
+                hidden=""
+                id="id-g"
+                role="tooltip"
+                style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+              />,
+            }
+          }
+          unstable_popoverStyles={
+            Object {
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+              "zIndex": 1100,
+            }
+          }
+          unstable_referenceRef={
+            Object {
+              "current": <button
+                aria-describedby="id-g"
+                style="margin: 5px 5px -12px 5px; vertical-align: middle; display: inline-block; background: none; padding: 0px; color: rgb(0, 54, 112); font-size: 12px;"
+                tabindex="0"
+                type="button"
+              >
+                Niveau
+              </button>,
+            }
+          }
+          unstable_setTimeout={[Function]}
+          unstable_timeout={400}
+          unstable_update={[Function]}
+          visible={false}
+        >
+          <Portal>
+            <Portal
+              containerInfo={
+                <div
+                  class="__reakit-portal"
+                >
+                  <div
+                    class="cap-tooltip"
+                    hidden=""
+                    id="id-g"
+                    role="tooltip"
+                    style="display: none; position: fixed; left: 100%; top: 100%; z-index: 1100; pointer-events: none;"
+                  />
+                </div>
+              }
+            >
+              <div
+                className="cap-tooltip"
+                hidden={true}
+                id="id-g"
+                onAnimationEnd={[Function]}
+                onTransitionEnd={[Function]}
+                role="tooltip"
+                style={
+                  Object {
+                    "display": "none",
+                    "left": "100%",
+                    "pointerEvents": "none",
+                    "position": "fixed",
+                    "top": "100%",
+                    "zIndex": 1100,
+                  }
+                }
+              >
+                <AnimatePresence />
+              </div>
+            </Portal>
+          </Portal>
+        </ForwardRef(Tooltip)>
+      </Tooltip>
     </div>
   </TagCloud__Container>
 </ForwardRef>

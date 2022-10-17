@@ -2,8 +2,9 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { Box, Popover } from '@cap-collectif/ui';
 import type { VoteButtonOverlay_step } from '~relay/VoteButtonOverlay_step.graphql';
+import ResetCss from '~/utils/ResetCss';
 
 type Props = {
   children: React.Node,
@@ -21,14 +22,8 @@ export class VoteButtonOverlay extends React.Component<Props> {
   };
 
   render() {
-    const {
-      children,
-      step,
-      popoverId,
-      userHasVote,
-      hasReachedLimit,
-      hasUserEnoughCredits,
-    } = this.props;
+    const { children, step, popoverId, userHasVote, hasReachedLimit, hasUserEnoughCredits } =
+      this.props;
     if (userHasVote || (hasUserEnoughCredits && !hasReachedLimit)) {
       return children;
     }
@@ -64,25 +59,33 @@ export class VoteButtonOverlay extends React.Component<Props> {
       );
       help = <FormattedMessage id="proposal.vote.popover.limit_reached_help" />;
     }
-    const overlay = (
-      <Popover id={popoverId} title={title}>
-        {content}
-        <p className="excerpt" style={{ marginTop: 10 }}>
-          {help}
-        </p>
-      </Popover>
-    );
     return (
-      <OverlayTrigger placement="top" overlay={overlay} rootClose>
-        <span style={{ cursor: 'not-allowed' }}>
-          {/* $FlowFixMe */
-          React.cloneElement(children, {
-            disabled: true,
-            /* $FlowFixMe */
-            style: { ...children.props.style, pointerEvents: 'none' },
-          })}
-        </span>
-      </OverlayTrigger>
+      <Popover
+        baseId={popoverId}
+        placement="top"
+        disclosure={
+          <Box width="fit-content">
+            {
+              /* $FlowFixMe */
+              React.cloneElement(children, {
+                disabled: true,
+                /* $FlowFixMe */
+                style: { ...children.props.style },
+              })
+            }
+          </Box>
+        }>
+        <ResetCss>
+          <Popover.Header>{title}</Popover.Header>
+        </ResetCss>
+
+        <Popover.Body marginBottom={0}>
+          {content}
+          <p className="excerpt" style={{ marginTop: 10 }}>
+            {help}
+          </p>
+        </Popover.Body>
+      </Popover>
     );
   }
 }

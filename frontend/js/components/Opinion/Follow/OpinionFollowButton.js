@@ -1,49 +1,41 @@
 // @flow
-import React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
-// TODO https://github.com/cap-collectif/platform/issues/7774
-// eslint-disable-next-line no-restricted-imports
-import {
-  Dropdown,
-  MenuItem,
-  Panel,
-  ListGroup,
-  ListGroupItem,
-  Radio,
-  OverlayTrigger,
-} from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import * as React from 'react';
+import { graphql, useFragment } from 'react-relay';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Button, CapUIIcon, Menu, Heading, Popover, Flex, Icon, Text } from '@cap-collectif/ui';
 import FollowOpinionMutation from '../../../mutations/FollowOpinionMutation';
 import UpdateFollowOpinionMutation from '../../../mutations/UpdateFollowOpinionMutation';
-import type { OpinionFollowButton_opinion } from '~relay/OpinionFollowButton_opinion.graphql';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
 import NewLoginOverlay from '../../Utils/NewLoginOverlay';
-import Popover from '../../Utils/Popover';
 
 import type { SubscriptionTypeValue } from '~relay/UpdateFollowOpinionMutation.graphql';
+import type { OpinionFollowButton_opinion$key } from '~relay/OpinionFollowButton_opinion.graphql';
 
-type Props = {
-  opinion: OpinionFollowButton_opinion,
-};
+type Props = {|
+  +opinion: OpinionFollowButton_opinion$key,
+|};
 
-type State = {
-  isJustFollowed: boolean,
-};
-
-export class OpinionFollowButton extends React.Component<Props, State> {
-  state = {
-    isJustFollowed: false,
-  };
-
-  componentWillReceiveProps(nextProps: Props) {
-    if (this.props !== nextProps) {
-      this.setState({
-        isJustFollowed: !!nextProps.opinion.viewerIsFollowing,
-      });
+const OPINION_FRAGMENT = graphql`
+  fragment OpinionFollowButton_opinion on OpinionOrVersion
+  @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+    ... on Opinion {
+      id
+      viewerIsFollowing @include(if: $isAuthenticated)
+      viewerFollowingConfiguration @include(if: $isAuthenticated)
+    }
+    ... on Version {
+      id
+      viewerIsFollowing @include(if: $isAuthenticated)
+      viewerFollowingConfiguration @include(if: $isAuthenticated)
     }
   }
+`;
 
-  changeFollowType(opinion: OpinionFollowButton_opinion, type: SubscriptionTypeValue) {
+const OpinionFollowButton = ({ opinion: opinionRef }: Props) => {
+  const opinion = useFragment(OPINION_FRAGMENT, opinionRef);
+  const intl = useIntl();
+
+  const changeFollowType = (type: SubscriptionTypeValue) => {
     if (
       opinion.id &&
       opinion.viewerIsFollowing &&
@@ -57,153 +49,160 @@ export class OpinionFollowButton extends React.Component<Props, State> {
         },
       });
     }
+  };
+  if (!opinion.viewerIsFollowing && opinion.id) {
+    return (
+      <NewLoginOverlay>
+        <button
+          type="button"
+          className="btn btn-default opinion__button__follow mr-5"
+          onClick={() =>
+            opinion.id &&
+            FollowOpinionMutation.commit({
+              input: { opinionId: opinion.id, notifiedOf: 'MINIMAL' },
+            })
+          }
+          id={`opinion-follow-btn-${opinion.id || ''}`}>
+          <i className="cap cap-rss" />
+          <FormattedMessage id="follow" />
+        </button>
+      </NewLoginOverlay>
+    );
   }
-
-  render() {
-    const { opinion } = this.props;
-    const { isJustFollowed } = this.state;
-    if (!opinion.viewerIsFollowing && opinion.id) {
-      return (
-        <NewLoginOverlay>
-          <button
-            type="button"
-            className="btn btn-default opinion__button__follow mr-5"
-            onClick={() =>
-              opinion.id &&
-              FollowOpinionMutation.commit({
-                input: { opinionId: opinion.id, notifiedOf: 'MINIMAL' },
-              })
-            }
-            id={`opinion-follow-btn-${opinion.id}`}>
-            <i className="cap cap-rss" />
-            <FormattedMessage id="follow" />
-          </button>
-        </NewLoginOverlay>
-      );
-    }
-    if (
-      opinion.id &&
-      opinion.viewerFollowingConfiguration !== null &&
-      typeof opinion.viewerFollowingConfiguration !== 'undefined'
-    ) {
-      return (
-        <NewLoginOverlay>
-          <span className="mb-0 custom-dropdown">
-            <Dropdown
-              className="mb-0 width250 custom-dropdown-bgd dropdown-button"
-              id={`opinion-follow-btn-${opinion.id}`}
-              defaultOpen={isJustFollowed}>
-              <Dropdown.Toggle className="custom-dropdown-button">
-                <i className="cap cap-rss" />
-                <FormattedMessage id="following" />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Panel className="mb-0 b-none width250">
-                  <Panel.Heading>
-                    <FormattedMessage id="to-be-notified-by-email" />
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={
-                        <Popover placement="top" className="in" id="pinned-label">
-                          <FormattedMessage id="you-will-receive-a-summary-of-your-notifications-once-a-day" />
-                        </Popover>
-                      }>
-                      <span className="cap-information ml-30" />
-                    </OverlayTrigger>
-                  </Panel.Heading>
-                  <Panel.Body>
-                    <div className="b-none mb-0" id={`opinion-follow-btn-${opinion.id}`}>
-                      <ListGroup className="mb-0">
-                        <ListGroupItem>
-                          <Radio
-                            id={`opinion-follow-btn-minimal-${opinion.id}`}
-                            name="minimal"
-                            className="opinion__follow__minimal"
-                            checked={
-                              opinion.viewerFollowingConfiguration === 'MINIMAL' ? 'checked' : ''
-                            }
-                            inline
-                            onChange={() => this.changeFollowType(opinion, 'MINIMAL')}>
-                            <b>
-                              <FormattedMessage id="essential" />
-                            </b>{' '}
-                            <br />
-                            <FormattedMessage id="updates-and-news" />
-                          </Radio>
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          <Radio
-                            name="essential"
-                            id={`opinion-follow-btn-essential-${opinion.id}`}
-                            className="opinion__follow__essential"
-                            checked={
-                              opinion.viewerFollowingConfiguration === 'ESSENTIAL' ? 'checked' : ''
-                            }
-                            onChange={() => this.changeFollowType(opinion, 'ESSENTIAL')}>
-                            <b>
-                              <FormattedMessage id="intermediate" />
-                            </b>
-                            <br />
-                            <FormattedMessage id="updates-news-and-new-contributions" />
-                          </Radio>
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          <Radio
-                            name="all"
-                            id={`opinion-follow-btn-all-${opinion.id}`}
-                            className="opinion__follow__all"
-                            checked={
-                              opinion.viewerFollowingConfiguration === 'ALL' ? 'checked' : ''
-                            }
-                            onChange={() => this.changeFollowType(opinion, 'ALL')}>
-                            <b>
-                              <FormattedMessage id="complete" />
-                            </b>
-                            <br />
-                            <FormattedMessage id="updates-news-new-contributions-votes-and-subscriptions" />
-                          </Radio>
-                        </ListGroupItem>
-                      </ListGroup>
-                    </div>
-                  </Panel.Body>
-                </Panel>
-                <MenuItem
-                  eventKey="1"
-                  className="opinion__unfollow"
-                  id={`opinion-unfollow-btn-${opinion.id}`}
-                  onClick={() => {
-                    if (opinion.viewerIsFollowing) {
-                      return UnfollowOpinionMutation.commit({
-                        input: { opinionId: opinion.id },
-                      });
-                    }
-                  }}>
-                  <FormattedMessage id="unfollow" />
-                </MenuItem>
-              </Dropdown.Menu>
-            </Dropdown>
-          </span>
-        </NewLoginOverlay>
-      );
-    }
-    return null;
+  if (
+    opinion.id &&
+    opinion.viewerFollowingConfiguration !== null &&
+    typeof opinion.viewerFollowingConfiguration !== 'undefined'
+  ) {
+    return (
+      <NewLoginOverlay>
+        <Menu
+          placement="bottom"
+          disclosure={
+            <Button
+              style={{ color: '#333', borderColor: '#333' }}
+              className="dropdown-button custom-dropdown-button opinion__button__follow_options"
+              id={`opinion-follow-btn-${opinion.id || ''}`}
+              rightIcon={CapUIIcon.ArrowDownO}
+              variant="secondary"
+              variantColor="hierarchy">
+              <FormattedMessage id="following" />
+            </Button>
+          }>
+          <Menu.List maxHeight="unset" overflow="visible">
+            <Menu.OptionGroup
+              onChange={value => {
+                changeFollowType(value);
+              }}
+              value={opinion.viewerFollowingConfiguration}
+              type="radio"
+              title={
+                <Flex spacing={2} style={{ marginBottom: 'unset' }}>
+                  <Heading as="h4" style={{ fontSize: '16px' }}>
+                    {intl.formatMessage({ id: 'to-be-notified-by-email' })}
+                  </Heading>
+                  <Popover placement="top" disclosure={<Icon name={CapUIIcon.Info} />}>
+                    <Popover.Body>
+                      {intl.formatMessage({
+                        id: 'you-will-receive-a-summary-of-your-notifications-once-a-day',
+                      })}
+                    </Popover.Body>
+                  </Popover>
+                </Flex>
+              }>
+              <Menu.OptionItem
+                value="MINIMAL"
+                id={`opinion-follow-btn-minimal-${opinion.id || ''}`}
+                name="minimal"
+                className="opinion__follow__minimal"
+                style={{
+                  alignItems: 'flex-start',
+                  background: 'transparent',
+                  borderStyle: 'solid',
+                  borderWidth: '1px',
+                  marginBottom: 0,
+                  borderTop: 'none',
+                }}>
+                <Flex direction="column" ml={2}>
+                  <Text fontSize={2} fontWeight="bold" marginBottom={0}>
+                    {intl.formatMessage({ id: 'essential' })}
+                  </Text>
+                  <Text fontSize={2} marginBottom={0}>
+                    {intl.formatMessage({ id: 'updates-and-news' })}
+                  </Text>
+                </Flex>
+              </Menu.OptionItem>
+              <Menu.OptionItem
+                value="ESSENTIAL"
+                name="essential"
+                id={`opinion-follow-btn-essential-${opinion.id || ''}`}
+                className="opinion__follow__essential"
+                style={{
+                  alignItems: 'flex-start',
+                  background: 'transparent',
+                  borderStyle: 'solid',
+                  borderWidth: '1px',
+                  marginBottom: 0,
+                  borderTop: 'none',
+                }}>
+                <Flex direction="column" ml={2}>
+                  <Text fontSize={2} fontWeight="bold" marginBottom={0}>
+                    {intl.formatMessage({ id: 'intermediate' })}
+                  </Text>
+                  <Text fontSize={2} marginBottom={0}>
+                    {intl.formatMessage({ id: 'updates-news-and-new-contributions' })}
+                  </Text>
+                </Flex>
+              </Menu.OptionItem>
+              <Menu.OptionItem
+                value="ALL"
+                name="all"
+                id={`opinion-follow-btn-all-${opinion.id || ''}`}
+                className="opinion__follow__all"
+                style={{
+                  alignItems: 'flex-start',
+                  background: 'transparent',
+                  borderStyle: 'solid',
+                  borderWidth: '1px',
+                  marginBottom: 0,
+                  borderTop: 'none',
+                }}>
+                <Flex direction="column" ml={2}>
+                  <Text fontSize={2} fontWeight="bold" marginBottom={0}>
+                    {intl.formatMessage({ id: 'complete' })}
+                  </Text>
+                  <Text fontSize={2} marginBottom={0}>
+                    {intl.formatMessage({
+                      id: 'updates-news-new-contributions-votes-and-subscriptions',
+                    })}{' '}
+                  </Text>
+                </Flex>
+              </Menu.OptionItem>
+            </Menu.OptionGroup>
+            <Menu.Item
+              as="a"
+              href="#"
+              className="opinion__unfollow"
+              id={`opinion-unfollow-btn-${opinion.id || ''}`}
+              onClick={() => {
+                if (opinion.viewerIsFollowing) {
+                  return UnfollowOpinionMutation.commit({
+                    input: { opinionId: opinion.id },
+                  }).then(() => {
+                    return true;
+                  });
+                }
+              }}>
+              <Text fontSize={2} marginBottom={0}>
+                {intl.formatMessage({ id: 'unfollow' })}
+              </Text>
+            </Menu.Item>
+          </Menu.List>
+        </Menu>
+      </NewLoginOverlay>
+    );
   }
-}
+  return null;
+};
 
-export default createFragmentContainer(OpinionFollowButton, {
-  opinion: graphql`
-    fragment OpinionFollowButton_opinion on OpinionOrVersion
-    @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
-      ... on Opinion {
-        id
-        viewerIsFollowing @include(if: $isAuthenticated)
-        viewerFollowingConfiguration @include(if: $isAuthenticated)
-      }
-      ... on Version {
-        id
-        viewerIsFollowing @include(if: $isAuthenticated)
-        viewerFollowingConfiguration @include(if: $isAuthenticated)
-      }
-    }
-  `,
-});
+export default OpinionFollowButton;

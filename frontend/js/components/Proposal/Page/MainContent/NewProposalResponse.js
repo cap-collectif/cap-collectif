@@ -2,15 +2,15 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { OverlayTrigger, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
+import { Text, Tooltip } from '@cap-collectif/ui';
 import type { NewProposalResponse_response } from '~relay/NewProposalResponse_response.graphql';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import { isHTML } from '~/utils/isHtml';
 import colors from '~/utils/colors';
-import Tooltip from '~/components/Utils/Tooltip';
 import File from '~ui/File/File';
 import { type GlobalState } from '~/types';
 import { COLORS as COLORS_MAJORITY } from '~ui/Form/Input/Majority/Majority';
@@ -66,15 +66,20 @@ const PrivateTitle = ({
   if (isPrivate)
     return (
       <Container>
-        <OverlayTrigger
+        <Tooltip
           placement="top"
-          overlay={
-            <Tooltip id={`private-question-proposal-${id}`}>
+          label={
+            <Text fontSize={1} marginBottom={0}>
               <FormattedMessage id="global.private" />
-            </Tooltip>
-          }>
-          <Icon name={ICON_NAME.lock} size={16} color={color} />
-        </OverlayTrigger>
+            </Text>
+          }
+          id={`private-question-proposal-${id}`}
+          className="text-left"
+          style={{ wordBreak: 'break-word' }}>
+          <div>
+            <Icon name={ICON_NAME.lock} size={16} color={color} />
+          </div>
+        </Tooltip>
         <QuestionTitle>{title}</QuestionTitle>
       </Container>
     );

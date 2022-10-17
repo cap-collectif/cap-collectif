@@ -1,174 +1,197 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<UnpublishedLabel /> renders when not published because author confirmed his account too late 1`] = `
-<Fragment>
-   
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <CapcoPopover
-        id="publishable-id1-not-accounted-popover"
-        title={
-          <strong
-            className="excerpt_dark"
-          >
-            <FormattedMessage
-              id="account-confirmed-too-late"
-              values={Object {}}
-            />
-          </strong>
-        }
-      >
-        <FormattedMessage
-          id="account-confirmed-too-late-message"
-          values={
-            Object {
-              "contentType": "contribution",
-            }
-          }
-        />
-      </CapcoPopover>
-    }
-    placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
-    }
+exports[`<UnpublishedLabel /> <TestUnpublishedLabel /> renders when not published because author confirmed his account too late 1`] = `
+Array [
+  <div
+    aria-controls="publishable-<Node-mock-id-1>-not-accounted-popover"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
   >
-    <Label
-      bsClass="label"
-      bsSize="xs"
-      bsStyle="danger"
-      className="ellipsis"
+    <span
+      className="ellipsis label label-xs label-danger"
     >
       <i
         className="cap cap-delete-2"
       />
-       
-      <FormattedMessage
-        id="not-accounted"
-        values={Object {}}
-      />
-    </Label>
-  </OverlayTrigger>
-</Fragment>
+      not-accounted
+    </span>
+  </div>,
+  <div
+    aria-modal={true}
+    className="sc-Galmp bYcNna"
+    data-dialog={true}
+    hidden={true}
+    id="publishable-<Node-mock-id-1>-not-accounted-popover"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={0}
+  />,
+]
 `;
 
-exports[`<UnpublishedLabel /> renders when not published because author is not confirmed 1`] = `
-<Fragment>
-   
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <CapcoPopover
-        id="publishable-id1-not-accounted-popover"
-        title={
-          <strong
-            className="excerpt_dark"
-          >
-            <FormattedMessage
-              id="account-not-confirmed-in-time"
-              values={Object {}}
-            />
-          </strong>
-        }
-      >
-        <FormattedMessage
-          id="account-not-confirmed-in-time-message"
-          values={
-            Object {
-              "contentType": "contribution",
-            }
-          }
-        />
-      </CapcoPopover>
-    }
-    placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
-    }
+exports[`<UnpublishedLabel /> <TestUnpublishedLabel /> renders when not published because author is not confirmed 1`] = `
+Array [
+  <div
+    aria-controls="publishable-<Node-mock-id-1>-not-accounted-popover"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
   >
-    <Label
-      bsClass="label"
-      bsSize="xs"
-      bsStyle="danger"
-      className="ellipsis"
+    <span
+      className="ellipsis label label-xs label-danger"
     >
       <i
         className="cap cap-delete-2"
       />
-       
-      <FormattedMessage
-        id="not-accounted"
-        values={Object {}}
-      />
-    </Label>
-  </OverlayTrigger>
-</Fragment>
+      not-accounted
+    </span>
+  </div>,
+  <div
+    aria-modal={true}
+    className="sc-Galmp bYcNna"
+    data-dialog={true}
+    hidden={true}
+    id="publishable-<Node-mock-id-1>-not-accounted-popover"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={0}
+  />,
+]
 `;
 
-exports[`<UnpublishedLabel /> renders when not published because author must confirm 1`] = `
-<Fragment>
-   
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <CapcoPopover
-        id="publishable-id1-not-accounted-popover"
-        title={
-          <strong
-            className="excerpt_dark"
-          >
-            <FormattedMessage
-              id="account-pending-confirmation"
-              values={Object {}}
-            />
-          </strong>
-        }
-      >
-        <p>
-          <FormattedMessage
-            id="account-pending-confirmation-message"
-            values={
-              Object {
-                "contentType": "contribution",
-                "emailAddress": "unconfirmed-email@gmail.com",
-              }
-            }
-          />
-        </p>
-      </CapcoPopover>
-    }
-    placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
-    }
+exports[`<UnpublishedLabel /> <TestUnpublishedLabel /> renders when not published because author must confirm 1`] = `
+Array [
+  <div
+    aria-controls="publishable-<Node-mock-id-1>-not-accounted-popover"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
   >
-    <Label
-      bsClass="label"
-      bsSize="xs"
-      bsStyle="danger"
-      className="ellipsis"
+    <span
+      className="ellipsis label label-xs label-danger"
     >
       <i
         className="cap cap-delete-2"
       />
-       
-      <FormattedMessage
-        id="awaiting-publication"
-        values={Object {}}
-      />
-    </Label>
-  </OverlayTrigger>
-</Fragment>
+      not-accounted
+    </span>
+  </div>,
+  <div
+    aria-modal={true}
+    className="sc-Galmp bYcNna"
+    data-dialog={true}
+    hidden={true}
+    id="publishable-<Node-mock-id-1>-not-accounted-popover"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={0}
+  />,
+]
 `;
 
-exports[`<UnpublishedLabel /> renders when published 1`] = `""`;
+exports[`<UnpublishedLabel /> <TestUnpublishedLabel /> renders when published 1`] = `
+Array [
+  <div
+    aria-controls="publishable-<Node-mock-id-1>-not-accounted-popover"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
+  >
+    <span
+      className="ellipsis label label-xs label-danger"
+    >
+      <i
+        className="cap cap-delete-2"
+      />
+      not-accounted
+    </span>
+  </div>,
+  <div
+    aria-modal={true}
+    className="sc-Galmp bYcNna"
+    data-dialog={true}
+    hidden={true}
+    id="publishable-<Node-mock-id-1>-not-accounted-popover"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    tabIndex={0}
+  />,
+]
+`;

@@ -7,101 +7,96 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
   <UserAvatarList
     max={10}
   >
-    <OverlayTrigger
-      defaultOverlayShown={false}
-      key="0"
-      overlay={
-        <_default
-          id="tooltip-1"
-        >
-          toto
-        </_default>
-      }
+    <Tooltip
+      className="text-left"
+      id="tooltip-1"
+      label="toto"
       placement="top"
-      trigger={
-        Array [
-          "hover",
-          "focus",
-        ]
+      style={
+        Object {
+          "wordBreak": "break-word",
+        }
       }
     >
-      <Relay(Connect(UserAvatarLegacy))
-        displayUrl={false}
-        features={
-          Object {
-            "allow_users_to_propose_events": false,
-            "beta__admin_editor": false,
-            "beta__analytics_page": false,
-            "beta__emailing": false,
-            "beta__emailing_parameters": false,
-            "beta__questionnaire_result": false,
-            "blog": false,
-            "calendar": false,
-            "captcha": false,
-            "consent_external_communication": false,
-            "consent_internal_communication": false,
-            "consultation_plan": false,
-            "display_map": false,
-            "display_pictures_in_depository_proposals_list": false,
-            "display_pictures_in_event_list": false,
-            "districts": false,
-            "export": false,
-            "external_project": false,
-            "helpscout_beacon": false,
-            "http_redirects": false,
-            "import_proposals": false,
-            "login_cas": false,
-            "login_facebook": false,
-            "login_franceconnect": false,
-            "login_saml": false,
-            "members_list": false,
-            "multilangue": false,
-            "new_project_card": false,
-            "newsletter": false,
-            "noindex_on_profiles": false,
-            "oauth2_switch_user": false,
-            "phone_confirmation": false,
-            "privacy_policy": false,
-            "profiles": false,
-            "project_trash": false,
-            "projects_form": false,
-            "proposal_revisions": false,
-            "proposal_sms_vote": false,
-            "read_more": false,
-            "registration": false,
-            "report_browers_errors_to_sentry": false,
-            "reporting": false,
-            "restrict_connection": false,
-            "restrict_registration_via_email_domain": false,
-            "search": false,
-            "secure_password": false,
-            "server_side_rendering": false,
-            "share_buttons": false,
-            "shield_mode": false,
-            "sso_by_pass_auth": false,
-            "themes": false,
-            "twilio": false,
-            "unstable__anonymous_questionnaire": false,
-            "unstable__new_consultation_page": false,
-            "unstable__organizations": false,
-            "unstable__paper_vote": false,
-            "unstable__project_admin": false,
-            "user_type": false,
-            "votes_evolution": false,
-            "votes_min": false,
-            "zipcode_at_register": false,
+      <div>
+        <Relay(Connect(UserAvatarLegacy))
+          displayUrl={false}
+          features={
+            Object {
+              "allow_users_to_propose_events": false,
+              "beta__admin_editor": false,
+              "beta__analytics_page": false,
+              "beta__emailing": false,
+              "beta__emailing_parameters": false,
+              "beta__questionnaire_result": false,
+              "blog": false,
+              "calendar": false,
+              "captcha": false,
+              "consent_external_communication": false,
+              "consent_internal_communication": false,
+              "consultation_plan": false,
+              "display_map": false,
+              "display_pictures_in_depository_proposals_list": false,
+              "display_pictures_in_event_list": false,
+              "districts": false,
+              "export": false,
+              "external_project": false,
+              "helpscout_beacon": false,
+              "http_redirects": false,
+              "import_proposals": false,
+              "login_cas": false,
+              "login_facebook": false,
+              "login_franceconnect": false,
+              "login_saml": false,
+              "members_list": false,
+              "multilangue": false,
+              "new_project_card": false,
+              "newsletter": false,
+              "noindex_on_profiles": false,
+              "oauth2_switch_user": false,
+              "phone_confirmation": false,
+              "privacy_policy": false,
+              "profiles": false,
+              "project_trash": false,
+              "projects_form": false,
+              "proposal_revisions": false,
+              "proposal_sms_vote": false,
+              "read_more": false,
+              "registration": false,
+              "report_browers_errors_to_sentry": false,
+              "reporting": false,
+              "restrict_connection": false,
+              "restrict_registration_via_email_domain": false,
+              "search": false,
+              "secure_password": false,
+              "server_side_rendering": false,
+              "share_buttons": false,
+              "shield_mode": false,
+              "sso_by_pass_auth": false,
+              "themes": false,
+              "twilio": false,
+              "unstable__anonymous_questionnaire": false,
+              "unstable__new_consultation_page": false,
+              "unstable__organizations": false,
+              "unstable__paper_vote": false,
+              "unstable__project_admin": false,
+              "user_type": false,
+              "votes_evolution": false,
+              "votes_min": false,
+              "zipcode_at_register": false,
+            }
           }
-        }
-        user={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "id": "1",
-            "username": "toto",
+          user={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "1",
+              "username": "toto",
+            }
           }
-        }
-      />
-    </OverlayTrigger>
+        />
+      </div>
+    </Tooltip>
   </UserAvatarList>
 </UserAvatarList__Button>
 `;

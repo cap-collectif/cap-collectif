@@ -29,7 +29,7 @@ const ProposalCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
   > svg {
     position: absolute;
     left: calc(50% - 20px);
-    z-index: 1;
+    z-index: auto;
     top: 20px;
 
     @media (max-width: ${bootstrapGrid.mdMax}px) {
@@ -47,7 +47,7 @@ const ProposalCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
 
   #background {
     position: initial;
-    z-index: 0;
+    z-index: auto;
   }
 `;
 
@@ -103,10 +103,10 @@ export class ProposalPreview extends React.Component<Props> {
               <ProposalImage bgImage={getCategoryImage(proposal)} />
             ) : (
               <>
+                <CategoryBackground color={proposal?.category?.color || '#1E88E5'} />
                 {proposal?.category?.icon && (
                   <Icon name={ICON_NAME[proposal?.category?.icon]} size={40} color={colors.white} />
                 )}
-                <CategoryBackground color={proposal?.category?.color || '#1E88E5'} />
               </>
             )
           ) : null}

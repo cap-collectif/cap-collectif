@@ -3,7 +3,6 @@ import * as React from 'react';
 import moment from 'moment';
 import Truncate from 'react-truncate';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { OverlayTrigger } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import colors from '~/styles/modules/colors';
@@ -13,8 +12,8 @@ import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
 import ProjectPreviewExternalCounters from './ProjectPreviewExternalCounters';
 import Card from '../../Ui/Card/Card';
-import Tooltip from '../../Utils/Tooltip';
 import type { ProjectPreviewBody_project } from '~relay/ProjectPreviewBody_project.graphql';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type Step = $ArrayElement<$PropertyType<ProjectPreviewBody_project, 'steps'>>;
 
@@ -138,13 +137,20 @@ export class ProjectPreviewBody extends React.Component<Props> {
   getTitleContent = () => {
     const { project } = this.props;
     const link = project.externalLink || project.url;
-    const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
 
     const Title = styled(Truncate)`
       color: ${props => (props.archived ? colors['neutral-gray']['500'] : 'inherit')};
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 6px;
     `;
     return (
-      <OverlayTrigger placement="top" overlay={tooltip}>
+      <Tooltip
+        placement="top"
+        label={project.title}
+        id={`project-${project.id}-tooltip`}
+        className="text-left"
+        style={{ wordBreak: 'break-word' }}>
         <a href={link} target={project.isExternal && project.externalLink ? 'blank' : ''}>
           <div style={{ width: '98%' }}>
             <Title lines={3} archived={project.archived}>
@@ -152,7 +158,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
             </Title>
           </div>
         </a>
-      </OverlayTrigger>
+      </Tooltip>
     );
   };
 

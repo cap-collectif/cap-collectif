@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import { ButtonToolbar } from 'react-bootstrap';
+import { Flex } from '@cap-collectif/ui';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import OpinionVersionEditButton from '../OpinionVersion/OpinionVersionEditButton';
 import OpinionVersionEditModal from '../OpinionVersion/OpinionVersionEditModal';
@@ -57,15 +57,12 @@ export class OpinionButtons extends React.Component<Props> {
       return null;
     }
     return (
-      <ButtonToolbar>
-        <OpinionDelete opinion={opinion} />
-        <div>
-          {this.renderEditButton()}
+      <Flex direction="row" justify="space-between">
+        <Flex direction="row" spacing={1}>
           {opinion.project && opinion.project.opinionCanBeFollowed && (
+            // $FlowFixMe TODO https://github.com/cap-collectif/platform/issues/14792
             <OpinionFollowButton opinion={opinion} />
           )}
-        </div>
-        <div>
           <OpinionReportButton opinion={opinion} />
           {opinion.title && opinion.url && (
             <ShareButtonDropdown
@@ -75,8 +72,12 @@ export class OpinionButtons extends React.Component<Props> {
               url={opinion.url}
             />
           )}
-        </div>
-      </ButtonToolbar>
+        </Flex>
+        <Flex direction="row" spacing={1}>
+          <OpinionDelete opinion={opinion} />
+          {this.renderEditButton()}
+        </Flex>
+      </Flex>
     );
   }
 }

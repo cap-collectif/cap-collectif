@@ -65,21 +65,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     <Title
       tagName="h3"
     >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <_default
-            id="project-1-tooltip"
-          >
-            Name of my project
-          </_default>
-        }
+      <Tooltip
+        className="text-left"
+        id="project-1-tooltip"
+        label="Name of my project"
         placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
+        style={
+          Object {
+            "wordBreak": "break-word",
+          }
         }
       >
         <a
@@ -101,7 +95,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             </ProjectPreviewBody__Title>
           </div>
         </a>
-      </OverlayTrigger>
+      </Tooltip>
     </Title>
     <Relay(ProjectPreviewCounters)
       project={
@@ -275,21 +269,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     <Title
       tagName="h3"
     >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <_default
-            id="project-1-tooltip"
-          >
-            Name of my project
-          </_default>
-        }
+      <Tooltip
+        className="text-left"
+        id="project-1-tooltip"
+        label="Name of my project"
         placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
+        style={
+          Object {
+            "wordBreak": "break-word",
+          }
         }
       >
         <a
@@ -311,7 +299,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             </ProjectPreviewBody__Title>
           </div>
         </a>
-      </OverlayTrigger>
+      </Tooltip>
     </Title>
     <Relay(ProjectPreviewCounters)
       project={
@@ -443,21 +431,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     <Title
       tagName="h3"
     >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <_default
-            id="project-1-tooltip"
-          >
-            Name of my project
-          </_default>
-        }
+      <Tooltip
+        className="text-left"
+        id="project-1-tooltip"
+        label="Name of my project"
         placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
+        style={
+          Object {
+            "wordBreak": "break-word",
+          }
         }
       >
         <a
@@ -479,7 +461,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             </ProjectPreviewBody__Title>
           </div>
         </a>
-      </OverlayTrigger>
+      </Tooltip>
     </Title>
     <Relay(ProjectPreviewCounters)
       project={
@@ -733,21 +715,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     <Title
       tagName="h3"
     >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <_default
-            id="project-1-tooltip"
-          >
-            Name of my project
-          </_default>
-        }
+      <Tooltip
+        className="text-left"
+        id="project-1-tooltip"
+        label="Name of my project"
         placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
+        style={
+          Object {
+            "wordBreak": "break-word",
+          }
         }
       >
         <a
@@ -769,7 +745,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             </ProjectPreviewBody__Title>
           </div>
         </a>
-      </OverlayTrigger>
+      </Tooltip>
     </Title>
     <Relay(ProjectPreviewCounters)
       project={
@@ -1091,21 +1067,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     <Title
       tagName="h3"
     >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <_default
-            id="project-1-tooltip"
-          >
-            Name of my project
-          </_default>
-        }
+      <Tooltip
+        className="text-left"
+        id="project-1-tooltip"
+        label="Name of my project"
         placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
+        style={
+          Object {
+            "wordBreak": "break-word",
+          }
         }
       >
         <a
@@ -1127,7 +1097,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             </ProjectPreviewBody__Title>
           </div>
         </a>
-      </OverlayTrigger>
+      </Tooltip>
     </Title>
     <Relay(ProjectPreviewCounters)
       project={
@@ -1232,21 +1202,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     <Title
       tagName="h3"
     >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <_default
-            id="project-1-tooltip"
-          >
-            Name of my project
-          </_default>
-        }
+      <Tooltip
+        className="text-left"
+        id="project-1-tooltip"
+        label="Name of my project"
         placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
+        style={
+          Object {
+            "wordBreak": "break-word",
+          }
         }
       >
         <a
@@ -1268,7 +1232,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             </ProjectPreviewBody__Title>
           </div>
         </a>
-      </OverlayTrigger>
+      </Tooltip>
     </Title>
     <Relay(ProjectPreviewCounters)
       project={
@@ -1362,21 +1326,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
     <Title
       tagName="h2"
     >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <_default
-            id="project-1-tooltip"
-          >
-            Name of my project
-          </_default>
-        }
+      <Tooltip
+        className="text-left"
+        id="project-1-tooltip"
+        label="Name of my project"
         placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
+        style={
+          Object {
+            "wordBreak": "break-word",
+          }
         }
       >
         <a
@@ -1398,7 +1356,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
             </ProjectPreviewBody__Title>
           </div>
         </a>
-      </OverlayTrigger>
+      </Tooltip>
     </Title>
     <Relay(ProjectPreviewCounters)
       project={

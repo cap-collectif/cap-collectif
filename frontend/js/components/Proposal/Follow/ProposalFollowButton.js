@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, useFragment } from 'react-relay';
 
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, CapUIIcon, Menu, Heading, Popover, Flex, Icon } from '@cap-collectif/ui';
+import { Button, CapUIIcon, Menu, Heading, Popover, Flex, Icon, Text } from '@cap-collectif/ui';
 import FollowProposalMutation from '../../../mutations/FollowProposalMutation';
 import UpdateFollowProposalMutation from '../../../mutations/UpdateFollowProposalMutation';
 import type { ProposalFollowButton_proposal$key } from '~relay/ProposalFollowButton_proposal.graphql';
@@ -127,10 +127,12 @@ const ProposalFollowButton = ({ proposal: proposalFragment }: Props) => {
                   borderTop: 'none',
                 }}>
                 <Flex direction="column" ml={2}>
-                  <b>
-                    <FormattedMessage id="essential" />
-                  </b>
-                  <FormattedMessage id="updates-and-news" />
+                  <Text fontSize={2} fontWeight="bold" marginBottom={0}>
+                    {intl.formatMessage({ id: 'essential' })}
+                  </Text>
+                  <Text fontSize={2} marginBottom={0}>
+                    {intl.formatMessage({ id: 'updates-and-news' })}
+                  </Text>
                 </Flex>
               </Menu.OptionItem>
               <Menu.OptionItem
@@ -147,10 +149,12 @@ const ProposalFollowButton = ({ proposal: proposalFragment }: Props) => {
                   borderTop: 'none',
                 }}>
                 <Flex direction="column" ml={2}>
-                  <b>
-                    <FormattedMessage id="intermediate" />
-                  </b>
-                  <FormattedMessage id="updates-news-and-new-contributions" />
+                  <Text fontSize={2} fontWeight="bold" marginBottom={0}>
+                    {intl.formatMessage({ id: 'intermediate' })}
+                  </Text>
+                  <Text fontSize={2} marginBottom={0}>
+                    {intl.formatMessage({ id: 'updates-news-and-new-contributions' })}
+                  </Text>
                 </Flex>
               </Menu.OptionItem>
               <Menu.OptionItem
@@ -167,10 +171,14 @@ const ProposalFollowButton = ({ proposal: proposalFragment }: Props) => {
                   borderTop: 'none',
                 }}>
                 <Flex direction="column" ml={2}>
-                  <b>
-                    <FormattedMessage id="complete" tagName="b" />
-                  </b>
-                  <FormattedMessage id="updates-news-new-contributions-votes-and-subscriptions" />
+                  <Text fontSize={2} fontWeight="bold" marginBottom={0}>
+                    {intl.formatMessage({ id: 'complete' })}
+                  </Text>
+                  <Text fontSize={2} marginBottom={0}>
+                    {intl.formatMessage({
+                      id: 'updates-news-new-contributions-votes-and-subscriptions',
+                    })}{' '}
+                  </Text>
                 </Flex>
               </Menu.OptionItem>
             </Menu.OptionGroup>
@@ -190,7 +198,9 @@ const ProposalFollowButton = ({ proposal: proposalFragment }: Props) => {
                   });
                 }
               }}>
-              {intl.formatMessage({ id: 'unfollow' })}
+              <Text fontSize={2} marginBottom={0}>
+                {intl.formatMessage({ id: 'unfollow' })}
+              </Text>
             </Menu.Item>
           </Menu.List>
         </Menu>

@@ -83,7 +83,7 @@ export const ProposalListToggleViewBtn = ({
             role="checkbox"
             aria-checked={displayMode === 'GRID'}
             title={displayMode === 'GRID' ? intl.formatMessage({ id: 'mosaic-selected' }) : null}
-            style={{ flex: '1 0 auto' }}
+            style={{ flex: '1 0 auto', zIndex: 'auto' }}
             onClick={() => setDisplayMode('GRID')}>
             <i className="cap cap-th-large" /> <FormattedMessage id="grid" />
           </Button>

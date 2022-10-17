@@ -2,12 +2,11 @@
 import React, { useState } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import copy from 'copy-to-clipboard';
-import { OverlayTrigger } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import colors from '~/utils/colors';
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
-import Tooltip from '~/components/Utils/Tooltip';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type Props = {|
   +url: string,
@@ -47,14 +46,12 @@ export const Link = ({ url, className }: Props) => {
   return (
     <Container className={className} onMouseLeave={() => setIsCopied(false)}>
       <input type="text" value={url} disabled />
-      <OverlayTrigger
-        key="top"
+      <Tooltip
         placement="top"
-        overlay={
-          <Tooltip id={`tooltip-url-${url}`} style={{ width: '86px', transition: 'unset' }}>
-            <FormattedMessage id={isCopied ? 'copied-link' : 'copy-link'} />
-          </Tooltip>
-        }>
+        label={<FormattedMessage id={isCopied ? 'copied-link' : 'copy-link'} />}
+        className="text-left"
+        id={`tooltip-url-${url}`}
+        style={{ transition: 'unset', wordBreak: 'break-word' }}>
         <button
           type="button"
           onClick={() => {
@@ -63,7 +60,7 @@ export const Link = ({ url, className }: Props) => {
           }}>
           <Icon name={ICON_NAME.link} size={15} color={colors.white} />
         </button>
-      </OverlayTrigger>
+      </Tooltip>
     </Container>
   );
 };

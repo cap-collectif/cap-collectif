@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import { OverlayTrigger, ProgressBar } from 'react-bootstrap';
+import { ProgressBar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import debounce from 'debounce-promise';
@@ -9,9 +9,9 @@ import { change, formValueSelector, getFormAsyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 import CheckCircle from '../Ui/Icons/CheckCircle';
 import config from '../../config';
-import type { Dispatch, State } from '../../types';
+import type { Dispatch, State } from '~/types';
 import environment from '../../createRelayEnvironment';
-import Popover from '../Utils/Popover';
+import Popover from '~ds/Popover';
 
 type Props = {|
   +name: string,
@@ -330,21 +330,32 @@ export class UserPasswordComplexityField extends Component<Props> {
       );
     }
     return (
-      <OverlayTrigger
+      <Popover
+        trigger={['click']}
+        keepOnHover
+        useArrow
         placement="right"
-        overlay={
-          <Popover placement="right" className="in" id="pinned-label">
-            {this.renderPasswordInformation(
-              formName,
-              isPasswordFocus,
-              passwordConditions,
-              passwordComplexityScore,
-              formAsyncErrors ? formAsyncErrors[name] : null,
-            )}
-          </Popover>
-        }>
-        {field}
-      </OverlayTrigger>
+        className="in"
+        id="pinned-label">
+        <Popover.Trigger>
+          <div>{field}</div>
+        </Popover.Trigger>
+        {isPasswordFocus && (
+          <Popover.Content>
+            <Popover.Body>
+              <div>
+                {this.renderPasswordInformation(
+                  formName,
+                  isPasswordFocus,
+                  passwordConditions,
+                  passwordComplexityScore,
+                  formAsyncErrors ? formAsyncErrors[name] : null,
+                )}
+              </div>
+            </Popover.Body>
+          </Popover.Content>
+        )}
+      </Popover>
     );
   }
 }

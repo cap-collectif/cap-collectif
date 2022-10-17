@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { OverlayTrigger } from 'react-bootstrap';
+import { Box, Text, Tooltip } from '@cap-collectif/ui';
 import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
-import Tooltip from '../../Utils/Tooltip';
 import type { OpinionUserVote_vote } from '~relay/OpinionUserVote_vote.graphql';
 import { translateContent } from '~/utils/ContentTranslator';
 
@@ -18,16 +17,20 @@ class OpinionUserVote extends React.Component<Props> {
     if (!vote.author) return null;
     return (
       <span className={className}>
-        <OverlayTrigger
+        <Tooltip
           placement="top"
-          overlay={
-            <Tooltip id={`opinion-vote-tooltip-${vote.id}`}>
+          label={
+            <Text fontSize={1} marginBottom={0}>
               {translateContent(vote.author.displayName)}
-            </Tooltip>
-          }>
-          {/* $FlowFixMe Will be a fragment soon */}
-          <UserAvatarDeprecated user={vote.author} className="" />
-        </OverlayTrigger>
+            </Text>
+          }
+          id={`opinion-vote-tooltip-${vote.id}`}
+          className="text-left"
+          style={{ wordBreak: 'break-word' }}>
+          <Box width="45px">
+            <UserAvatarDeprecated user={vote.author} className="" style={{ width: '45px' }} />
+          </Box>
+        </Tooltip>
       </span>
     );
   }

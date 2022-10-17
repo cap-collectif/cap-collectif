@@ -22,24 +22,20 @@ exports[`<ProposalFormCategoryColor /> render correctly 1`] = `
     isDisabled={false}
     onClick={[Function]}
   />
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <_default
-        id="tooltip-color-yellow"
-      >
-        <FormattedMessage
-          id="already.in.use.feminine"
-          values={Object {}}
-        />
-      </_default>
+  <Tooltip
+    className="text-left"
+    id="tooltip-color-yellow"
+    label={
+      <FormattedMessage
+        id="already.in.use.feminine"
+        values={Object {}}
+      />
     }
     placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
+    style={
+      Object {
+        "wordBreak": "break-word",
+      }
     }
   >
     <ProposalFormCategoryColor__Color
@@ -48,6 +44,6 @@ exports[`<ProposalFormCategoryColor /> render correctly 1`] = `
       isDisabled={true}
       onClick={[Function]}
     />
-  </OverlayTrigger>
+  </Tooltip>
 </ProposalFormCategoryColor__Container>
 `;
