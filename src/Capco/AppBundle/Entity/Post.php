@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
@@ -49,68 +50,61 @@ class Post implements
     /**
      * @ORM\Column(name="is_published", type="boolean", options={"default": false})
      */
-    private $isPublished = false;
+    private bool $isPublished = false;
 
     /**
      * @ORM\Column(name="dislayed_on_blog", type="boolean", nullable=false)
      */
-    private $displayedOnBlog = true;
+    private bool $displayedOnBlog = true;
 
     /**
      * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
-    private $publishedAt;
+    private \DateTime $publishedAt;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body", "abstract"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    private \DateTime $updatedAt;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $media;
+    private ?Media $media;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="posts", cascade={"persist"})
      * @ORM\JoinTable(name="theme_post")
      */
-    private $themes;
+    private Collection $themes;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="posts", cascade={"persist"})
      * @ORM\JoinTable(name="project_post")
      */
-    private $projects;
+    private Collection $projects;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", cascade={"persist"})
      * @ORM\JoinTable(name="proposal_post")
      */
-    private $proposals;
+    private Collection $proposals;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
-     * @ORM\JoinTable(name="blog_post_authors",
-     *      joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")}
-     *      )
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\PostAuthor", cascade={"persist", "remove"}, mappedBy="post", orphanRemoval=true)
      */
-    private $Authors;
+    private Collection $authors;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\PostComment", mappedBy="post")
      */
-    private $comments;
+    private Collection $comments;
 
     public function __construct()
     {
-        $this->Authors = new ArrayCollection();
+        $this->authors = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->projects = new ArrayCollection();
@@ -271,32 +265,71 @@ class Post implements
         return $this->updatedAt;
     }
 
-    public function addAuthor(User $author): self
+    public function addAuthor(PostAuthor $postAuthor): self
     {
-        if (!$this->Authors->contains($author)) {
-            $this->Authors[] = $author;
+        if (
+            !$this->authors->contains($postAuthor) &&
+            !$this->containAuthor($postAuthor->getAuthor())
+        ) {
+            $this->authors->add($postAuthor);
         }
 
         return $this;
     }
 
-    public function removeAuthor(User $author): self
+    public function containAuthor(?Author $author): bool
     {
-        $this->Authors->removeElement($author);
+        if (!$author) {
+            return false;
+        }
+        /** @var PostAuthor $postAuthor */
+        foreach ($this->authors as $postAuthor) {
+            if ($postAuthor->getAuthor() === $author) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getPostAuthor(Author $author): ?PostAuthor
+    {
+        /** @var PostAuthor $postAuthor */
+        foreach ($this->authors as $postAuthor) {
+            if ($postAuthor->getAuthor() === $author) {
+                return $postAuthor;
+            }
+        }
+
+        return null;
+    }
+
+    public function removeAuthor(PostAuthor $author): self
+    {
+        if ($this->authors->contains($author)) {
+            $this->authors->removeElement($author);
+        }
 
         return $this;
     }
 
-    public function setAuthors(array $authors = []): self
+    public function setAuthors(?ArrayCollection $authors): self
     {
-        $this->Authors = new ArrayCollection($authors);
+        $this->authors = $authors ?? new ArrayCollection([]);
 
         return $this;
     }
 
     public function getAuthors(): Collection
     {
-        return $this->Authors;
+        return $this->authors;
+    }
+
+    public function getAuthorsObject(): Collection
+    {
+        return $this->authors->map(function (PostAuthor $author) {
+            return $author->getAuthor();
+        });
     }
 
     /**
@@ -461,9 +494,15 @@ class Post implements
         }
     }
 
-    public function isAuthor(User $user): bool
+    public function isAuthor(Author $author): bool
     {
-        return $this->getAuthors()->contains($user);
+        foreach ($this->authors as $postAuthor) {
+            if ($postAuthor->getAuthor() === $author) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function isIndexable(): bool
@@ -484,5 +523,10 @@ class Post implements
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch', 'ElasticsearchNestedAuthor'];
+    }
+
+    public static function create(User $creator): self
+    {
+        return (new self())->setCreator($creator);
     }
 }

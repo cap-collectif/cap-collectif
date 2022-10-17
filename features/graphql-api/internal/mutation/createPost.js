@@ -91,7 +91,7 @@ describe('mutations.createPost', () => {
     expect(response).toMatchSnapshot();
   });
 
-  it('admin should create a post with optionnal fields.', async () => {
+  it('admin should create a post with optional fields.', async () => {
     const response = await graphql(
       CreatePostMutation,
       {

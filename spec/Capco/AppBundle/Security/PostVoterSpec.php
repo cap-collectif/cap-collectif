@@ -52,7 +52,7 @@ class PostVoterSpec extends ObjectBehavior
             ->willReturn(true);
         $subject->getOwner()->willReturn(null);
         $subject->getProjects()->willReturn(new ArrayCollection());
-        $subject->getAuthors()->willReturn(new ArrayCollection());
+        $subject->getAuthorsObject()->willReturn(new ArrayCollection());
 
         $this->vote($token, $subject, [PostVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -148,7 +148,7 @@ class PostVoterSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($memberShip);
 
-        $subject->getAuthors()->willReturn(new ArrayCollection());
+        $subject->getAuthorsObject()->willReturn(new ArrayCollection());
         $subject->getProjects()->willReturn(new ArrayCollection());
 
         // CREATION is handled in CreatePostMutationSpec

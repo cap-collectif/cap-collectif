@@ -151,6 +151,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Prod/FacebookSSOConfiguration.yaml',
             $this->fixturesDir . 'Prod/SenderEmailDomain.yaml',
             $this->fixturesDir . 'Prod/SenderEmail.yaml',
+            $this->fixturesDir . 'Prod/PostAuthor.yaml',
         ];
     }
 
@@ -320,6 +321,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/AnonymousUserProposalSmsVote.yaml',
             $this->fixturesDir . 'Dev/PhoneToken.yaml',
             $this->fixturesDir . 'Dev/ProposalAnalysisComment.yaml',
+            $this->fixturesDir . 'Dev/PostAuthor.yaml',
         ];
     }
 }

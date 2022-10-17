@@ -32,4 +32,9 @@ trait AuthorableTrait
 
         return $this;
     }
+
+    public function getAuthorType(): string
+    {
+        return $this->getAuthor() instanceOf User ? 'User' : 'Organization';
+    }
 }

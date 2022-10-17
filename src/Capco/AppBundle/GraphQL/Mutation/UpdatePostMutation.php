@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Factory\PostAuthorFactory;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -21,29 +22,34 @@ class UpdatePostMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private GlobalIdResolver $globalIdResolver;
     private AuthorizationChecker $authorizationChecker;
+    private PostAuthorFactory $postAuthorFactory;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationChecker $authorizationChecker,
+        PostAuthorFactory $postAuthorFactory
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->globalIdResolver = $globalIdResolver;
         $this->authorizationChecker = $authorizationChecker;
+        $this->postAuthorFactory = $postAuthorFactory;
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
         $id = $input->offsetGet('id');
         $post = $this->globalIdResolver->resolve($id, $viewer);
-
         $data = $input->getArrayCopy();
         unset($data['authors'], $data['id']);
-        $data['Authors'] = $input->offsetGet('authors');
+        $authorsId = $input->offsetGet('authors');
 
         LocaleUtils::indexTranslations($data);
+
+        $authors = $this->postAuthorFactory->findOrCreatePostAuthors($post, $authorsId, $viewer);
+        $data['authors'] = $authors;
 
         $form = $this->formFactory->create(PostType::class, $post);
         $form->submit($data, false);

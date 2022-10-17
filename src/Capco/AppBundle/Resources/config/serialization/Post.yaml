@@ -12,7 +12,7 @@ Capco\AppBundle\Entity\Post:
             groups: [Posts, PostDetails, Elasticsearch]
         publishedAt:
             groups: [Default]
-        Authors:
+        getAuthorsObject:
             groups: [Posts, PostDetails, Elasticsearch]
             serialized_name: authors
         owner:

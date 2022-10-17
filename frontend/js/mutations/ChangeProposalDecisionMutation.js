@@ -21,7 +21,9 @@ const mutation = graphql`
               ...AnswerBody_answer
               title
               authors {
-                vip
+                ... on User {
+                  vip
+                }
               }
             }
           }

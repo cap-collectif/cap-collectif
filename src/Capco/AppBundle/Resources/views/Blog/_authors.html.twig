@@ -4,10 +4,10 @@
             <p class="media--aligned media--news--aligned excerpt">
                 {% if authors|length > 0 %}
                     {% for author in authors %}
-                        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': author, 'classes': 'media-object media--news__author'} only %}
+                        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': author.author, 'classes': 'media-object media--news__author'} only %}
                         {% if is_feature_enabled('profiles') %}
-                            <a href="{{ path('capco_user_profile_show_all', { slug: author.slug })}}">
-                                {{ author.username }}</a>{% else %}<span>{{ author.username }}</span>{% endif %}{% if loop.revindex0 == '1' %}{{ 'blog.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endfor %},
+                            <a href="{{ path('capco_user_profile_show_all', { slug: author.author.slug })}}">
+                                {{ author.author.username }}</a>{% else %}<span>{{ author.author.username }}</span>{% endif %}{% if loop.revindex0 == '1' %}{{ 'blog.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endfor %},
 
                 {% endif %}
                 {% if is_feature_enabled('themes') and themes | length > 0 %}

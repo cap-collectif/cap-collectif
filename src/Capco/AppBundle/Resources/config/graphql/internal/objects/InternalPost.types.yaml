@@ -9,7 +9,8 @@ InternalPost:
         name: Post
         fields:
             authors:
-                type: '[InternalUser!]!'
+                type: '[Author!]!'
+                resolve: '@=value.getAuthorsObject()'
             media:
                 type: 'InternalMedia'
             translations:

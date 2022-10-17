@@ -3,13 +3,14 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\PostAuthor;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\MediaBundle\Entity\Media;
-use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Form\Type\CollectionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -76,9 +77,9 @@ class PostType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
             ])
-            ->add('Authors', CollectionType::class, [
+            ->add('authors', CollectionType::class, [
                 'entry_type' => RelayNodeType::class,
-                'entry_options' => ['class' => User::class],
+                'entry_options' => ['class' => PostAuthor::class],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

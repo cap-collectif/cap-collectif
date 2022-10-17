@@ -21,7 +21,7 @@ final class ProposalNewsCreateAdminMessage extends AbstractAdminMessage
         return [
             'postAuthor' => self::escape(
                 $post
-                    ->getAuthors()
+                    ->getAuthorsObject()
                     ->first()
                     ->getDisplayName()
             ),

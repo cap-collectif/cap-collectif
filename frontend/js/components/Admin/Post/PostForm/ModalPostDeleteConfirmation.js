@@ -10,7 +10,6 @@ import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import DeletePostMutation from '~/mutations/DeletePostMutation';
 import type { ModalPostDeleteConfirmation_post$key } from '~relay/ModalPostDeleteConfirmation_post.graphql';
-import { baseUrl } from '~/config';
 
 type Props = {|
   +post: ?ModalPostDeleteConfirmation_post$key,
@@ -29,7 +28,7 @@ const deletePost = (postId: string, hide: () => void, intl: IntlShape) => {
   };
   hide();
   return DeletePostMutation.commit({ input, connections: [] })
-    .then(() => window.open(`${baseUrl}/admin/capco/app/post/list`, '_self'))
+    .then(() => window.open(`/posts`, '_self'))
     .catch(() => mutationErrorToast(intl));
 };
 

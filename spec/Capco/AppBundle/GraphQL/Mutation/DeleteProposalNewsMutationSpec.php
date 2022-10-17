@@ -102,7 +102,7 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
             $collectStep
         );
 
-        $proposalNews->getAuthors()->willReturn(new ArrayCollection([$viewer->getWrappedObject()]));
+        $proposalNews->getAuthorsObject()->willReturn(new ArrayCollection([$viewer->getWrappedObject()]));
 
         // we test this
         $configuration->isOnProposalNewsDelete()->willReturn(true);
@@ -162,7 +162,7 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
             $collectStep
         );
 
-        $proposalNews->getAuthors()->willReturn(new ArrayCollection([$viewer->getWrappedObject()]));
+        $proposalNews->getAuthorsObject()->willReturn(new ArrayCollection([$viewer->getWrappedObject()]));
 
         // we test this
         $configuration->isOnProposalNewsDelete()->willReturn(false);
@@ -213,7 +213,7 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve('123456', $viewer)->willReturn($proposalNews);
         $proposalNews->isAuthor($viewer)->willReturn(true);
         $proposalNews->getId()->willReturn('123456');
-        $proposalNews->getAuthors()->willReturn(new ArrayCollection([$viewer->getWrappedObject()]));
+        $proposalNews->getAuthorsObject()->willReturn(new ArrayCollection([$viewer->getWrappedObject()]));
 
         $proposal->getProposalForm()->willReturn($proposalForm);
         $proposal->getTitle()->willReturn('proposal title');

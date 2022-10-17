@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\PostOrderField;
 use Capco\AppBundle\Search\PostSearch;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
@@ -23,7 +23,7 @@ class UserPostsResolver implements ResolverInterface
         $this->postSearch = $postSearch;
     }
 
-    public function __invoke(User $user, ?Argument $args = null): ConnectionInterface
+    public function __invoke(Author $author, ?Argument $args = null): ConnectionInterface
     {
         if (!$args) {
             $args = new Argument([
@@ -37,7 +37,7 @@ class UserPostsResolver implements ResolverInterface
         $orderByDirection = $args->offsetGet('orderBy')['direction'] ?? OrderDirection::DESC;
 
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-            $user,
+            $author,
             $affiliations,
             $query,
             $orderByField,
@@ -45,7 +45,7 @@ class UserPostsResolver implements ResolverInterface
         ) {
             try {
                 return $this->postSearch->getUserPostsPaginated(
-                    $user,
+                    $author,
                     $limit,
                     $affiliations,
                     $cursor,

@@ -3,16 +3,17 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Factory\PostAuthorFactory;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\UpdatePostMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\PostVoter;
-use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class UpdatePostMutationSpec extends ObjectBehavior
@@ -29,7 +30,7 @@ class UpdatePostMutationSpec extends ObjectBehavior
         'publishedAt' => '2020-06-05 12:15:30',
         'isPublished' => true,
         'commentable' => true,
-        'Authors' => ['VXNlcjp1c2VyVGhlbw=='],
+        'authors' => ['VXNlcjp1c2VyVGhlbw=='],
         'projects' => [],
         'proposals' => [],
         'themes' => [],
@@ -39,9 +40,16 @@ class UpdatePostMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationChecker $authorizationChecker,
+        PostAuthorFactory $postAuthorFactory
     ) {
-        $this->beConstructedWith($em, $formFactory, $globalIdResolver, $authorizationChecker);
+        $this->beConstructedWith(
+            $em,
+            $formFactory,
+            $globalIdResolver,
+            $authorizationChecker,
+            $postAuthorFactory
+        );
     }
 
     public function it_is_initializable()
@@ -56,7 +64,8 @@ class UpdatePostMutationSpec extends ObjectBehavior
         User $viewer,
         Post $post,
         FormFactoryInterface $formFactory,
-        Form $form
+        Form $form,
+        PostAuthorFactory $postAuthorFactory
     ) {
         $id = 'abc';
         $input->offsetGet('id')->willReturn($id);
@@ -65,8 +74,16 @@ class UpdatePostMutationSpec extends ObjectBehavior
         $input->getArrayCopy()->willReturn($this->data);
         $input->offsetGet('authors')->willReturn(['VXNlcjp1c2VyVGhlbw==']);
 
+        $postAuthorFactory
+            ->findOrCreatePostAuthors($post, ['VXNlcjp1c2VyVGhlbw=='], $viewer)
+            ->shouldBeCalledOnce()
+            ->willReturn(['postAuthorId']);
+
+        $data = $this->data;
+        $data['authors'] = ['postAuthorId'];
+
         $formFactory->create(PostType::class, $post)->willReturn($form);
-        $form->submit($this->data, false)->shouldBeCalled();
+        $form->submit($data, false)->shouldBeCalled();
 
         $form->isValid()->willReturn(true);
 
@@ -84,7 +101,8 @@ class UpdatePostMutationSpec extends ObjectBehavior
         User $viewer,
         Post $post,
         FormFactoryInterface $formFactory,
-        Form $form
+        Form $form,
+        PostAuthorFactory $postAuthorFactory
     ) {
         $id = 'abc';
         $input->offsetGet('id')->willReturn($id);
@@ -93,8 +111,16 @@ class UpdatePostMutationSpec extends ObjectBehavior
         $input->getArrayCopy()->willReturn($this->data);
         $input->offsetGet('authors')->willReturn(['VXNlcjp1c2VyVGhlbw==']);
 
+        $postAuthorFactory
+            ->findOrCreatePostAuthors($post, ['VXNlcjp1c2VyVGhlbw=='], $viewer)
+            ->shouldBeCalledOnce()
+            ->willReturn(['postAuthorId']);
+
+        $data = $this->data;
+        $data['authors'] = ['postAuthorId'];
+
         $formFactory->create(PostType::class, $post)->willReturn($form);
-        $form->submit($this->data, false)->shouldBeCalled();
+        $form->submit($data, false)->shouldBeCalled();
 
         $form->isValid()->willReturn(false);
 

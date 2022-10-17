@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mutations.createPost admin should create a post with optionnal fields. 1`] = `
+exports[`mutations.createPost admin should create a post with optional fields. 1`] = `
 Object {
   "createPost": Object {
     "errorCode": null,

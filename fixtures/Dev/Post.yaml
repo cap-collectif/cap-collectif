@@ -1,34 +1,72 @@
 Capco\AppBundle\Entity\Post:
-    post{1..5}:
-        id: 'post<current()>'
+    post1:
+        id: 'post1'
         isPublished: true
         publishedAt: <identity((new \DateTime('2018-11-03')))>
         creator: '@user1'
-        Authors:
-            - '@user1'
-            - '@user5'
         media: '@MediaProject1'
         projects: ['@p1']
         themes: ['@theme1']
-
-    post{6..8}:
-        id: 'post<current()>'
+    post2:
+        id: 'post2'
         isPublished: true
-        publishedAt: <identity((new \DateTime('2018-11-04')))>
+        publishedAt: <identity((new \DateTime('2018-11-03')))>
+        creator: '@user1'
+        media: '@MediaProject1'
+        projects: ['@p1']
+        themes: ['@theme1']
+    post3:
+        id: 'post3'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-03')))>
+        media: '@MediaProject1'
+        projects: ['@p1']
+        themes: ['@theme1']
+    post4:
+        id: 'post4'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-03')))>
+        creator: '@user1'
+        media: '@MediaProject1'
+        projects: ['@p1']
+        themes: ['@theme1']
+    post5:
+        id: 'post5'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-03')))>
+        creator: '@user1'
+        media: '@MediaProject1'
+        projects: ['@p1']
+        themes: ['@theme1']
+    post6:
+        id: 'post6'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-03')))>
         creator: '@user2'
-        Authors:
-            - '@user2'
         media: null
         projects: ['@p2']
         themes: ['@theme2']
-
+    post7:
+        id: 'post7'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-03')))>
+        creator: '@user1'
+        media: null
+        projects: ['@p2']
+        themes: ['@theme2']
+    post8:
+        id: 'post8'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-03')))>
+        creator: '@user2'
+        media: null
+        projects: ['@p2']
+        themes: ['@theme2']
     post9:
         id: 'post9'
         isPublished: true
         publishedAt: <identity((new \DateTime('2018-11-05 00:00:00')))>
         creator: '@user5'
-        Authors:
-            - '@user5'
         media: null
         projects: ['@p2']
         themes: ['@theme2']
@@ -37,21 +75,37 @@ Capco\AppBundle\Entity\Post:
         isPublished: true
         publishedAt: <identity((new \DateTime('2018-11-05 00:00:01')))>
         creator: '@user5'
-        Authors:
-            - '@user5'
         media: null
         projects: ['@p2']
         themes: ['@theme2']
-
-    post{12..15}:
-        id: 'post<current()>'
+    post12:
+        id: 'post12'
         isPublished: true
-        publishedAt: <identity((new \DateTime('2019-01-03 00:00:00')))>
+        publishedAt: <identity((new \DateTime('2018-11-05 00:00:01')))>
         creator: '@user1'
-        Authors:
-            - '@user1'
-        themes: ['@theme1', '@theme2']
         media: null
+        themes: ['@theme1', '@theme2']
+    post13:
+        id: 'post13'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-05 00:00:01')))>
+        creator: '@user1'
+        media: null
+        themes: ['@theme1', '@theme2']
+    post14:
+        id: 'post14'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-05 00:00:01')))>
+        creator: '@user1'
+        media: null
+        themes: ['@theme1', '@theme2']
+    post15:
+        id: 'post15'
+        isPublished: true
+        publishedAt: <identity((new \DateTime('2018-11-05 00:00:01')))>
+        creator: '@user1'
+        media: null
+        themes: ['@theme1', '@theme2']
     post16:
         id: post16
         isPublished: true
@@ -59,8 +113,6 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         creator: '@user4'
-        Authors:
-            - '@user4'
         themes: ['@theme1', '@theme2']
         media: null
         projects: ['@p19']
@@ -72,8 +124,6 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         creator: '@userIan'
-        Authors:
-            - '@userIan'
         media: null
         proposals: ['@proposalIdf5']
         displayedOnBlog: false
@@ -84,8 +134,6 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         creator: '@userKiroule'
-        Authors:
-            - '@userKiroule'
         media: null
         proposals: ['@proposalIdf4']
         displayedOnBlog: false
@@ -96,8 +144,6 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         creator: '@userIan'
-        Authors:
-            - '@userIan'
         media: null
         proposals: ['@proposalIdf5']
         displayedOnBlog: false
@@ -108,8 +154,6 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         creator: '@user5'
-        Authors:
-            - '@user5'
         media: null
         proposals: ['@lePetitCafe']
         displayedOnBlog: false
@@ -120,8 +164,6 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         creator: '@userIan'
-        Authors:
-            - '@userIan'
         media: null
         proposals: ['@proposalIdf4']
         displayedOnBlog: false
@@ -132,8 +174,6 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         creator: '@userTheo'
-        Authors:
-            - '@userTheo'
         media: null
         displayedOnBlog: false
         owner: '@userTheo'
@@ -144,8 +184,6 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         creator: '@userTheo'
-        Authors:
-            - '@userTheo'
         media: null
         displayedOnBlog: false
         owner: '@userTheo'
@@ -156,8 +194,6 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         creator: '@userTheo'
-        Authors:
-            - '@userTheo'
         media: null
         displayedOnBlog: false
         owner: '@userTheo'
@@ -168,8 +204,7 @@ Capco\AppBundle\Entity\Post:
         createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
-        Authors:
-            - '@valerieMassonDelmotte'
+        creator: '@valerieMassonDelmotte'
         media: null
         displayedOnBlog: false
         owner: '@organization2'

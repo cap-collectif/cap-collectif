@@ -258,7 +258,9 @@ export default createFragmentContainer(container, {
       authors {
         id
         url
-        vip
+        ... on User {
+          vip
+        }
         displayName
       }
     }

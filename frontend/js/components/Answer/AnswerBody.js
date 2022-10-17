@@ -63,7 +63,9 @@ export default createFragmentContainer(AnswerBody, {
         authors {
           ...UserAvatar_user
           id
-          vip
+          ... on User {
+            vip
+          }
           displayName
         }
       }

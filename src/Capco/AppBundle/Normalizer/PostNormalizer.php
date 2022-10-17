@@ -18,9 +18,10 @@ class PostNormalizer implements
     CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private $router;
+
+    private UrlGeneratorInterface $router;
     private ObjectNormalizer $normalizer;
-    private $mediaExtension;
+    private MediaExtension $mediaExtension;
 
     public function __construct(
         UrlGeneratorInterface $router,

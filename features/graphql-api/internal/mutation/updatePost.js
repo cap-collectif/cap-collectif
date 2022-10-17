@@ -48,13 +48,13 @@ const translation = {
 };
 
 const requiredInput = {
-  id: 'UG9zdDpwb3N0MQ==',
+  id: toGlobalId('Post', 'post1'),
   translations: [translation],
   displayedOnBlog: true,
   publishedAt: '2020-06-05 12:15:30',
   isPublished: true,
   commentable: true,
-  authors: ['VXNlcjp1c2VyVGhlbw=='],
+  authors: [toGlobalId('User','userTheo')],
   projects: [],
   proposals: [],
   themes: [],
@@ -87,7 +87,7 @@ describe('mutations.updatePost', () => {
     expect(response).toMatchSnapshot();
   });
 
-  it('admin should update a post with optionnal fields.', async () => {
+  it('admin should update a post with optional fields.', async () => {
     const response = await graphql(
       UpdatePostMutation,
       {

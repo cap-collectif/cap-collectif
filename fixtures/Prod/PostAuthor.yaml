@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\PostAuthor:
+    postAuthor1:
+        id: 'postAuthor1'
+        post: '@post1'
+        author: '@user1'

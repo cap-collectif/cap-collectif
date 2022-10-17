@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\PostAuthor;
 use Capco\AppBundle\Entity\PostTranslation;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\ProposalPostType;
@@ -107,8 +108,9 @@ class AddProposalNewsMutation implements MutationInterface
     private function createProposalPost(Arg $input, Proposal $proposal, User $viewer): Post
     {
         $proposalPost = new Post();
+        $postAuthor = PostAuthor::create($proposalPost, $viewer);
         $proposalPost->addProposal($proposal);
-        $proposalPost->addAuthor($viewer);
+        $proposalPost->addAuthor($postAuthor);
         $proposalPost->setDisplayedOnBlog(false);
         $proposalPost->publishNow();
 

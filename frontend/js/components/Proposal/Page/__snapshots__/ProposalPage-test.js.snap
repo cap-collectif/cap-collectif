@@ -3091,11 +3091,18 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "User",
+                            "concreteType": null,
                             "kind": "LinkedField",
                             "name": "authors",
                             "plural": true,
                             "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "__typename",
+                                "storageKey": null,
+                              },
                               Object {
                                 "alias": null,
                                 "args": null,
@@ -7973,7 +7980,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "54710e7b5424064048baab00b4b40bdc",
+        "cacheID": "dc0b20dc478424788888b744a0824a58",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -8305,6 +8312,7 @@ fragment NewsCard_post on Post {
     url
   }
   authors {
+    __typename
     id
     username
   }

@@ -1,0 +1,118 @@
+Capco\AppBundle\Entity\PostAuthor:
+    postAuthor1:
+        id: 'postAuthor1'
+        post: '@post1'
+        author: '@user1'
+    postAuthor2:
+        id: 'postAuthor2'
+        post: '@post1'
+        author: '@user5'
+    postAuthor3:
+        id: 'postAuthor3'
+        post: '@post2'
+        author: '@user1'
+    postAuthor4:
+        id: 'postAuthor4'
+        post: '@post2'
+        author: '@user5'
+    postAuthor5:
+        id: 'postAuthor5'
+        post: '@post3'
+        author: '@user1'
+    postAuthor6:
+        id: 'postAuthor6'
+        post: '@post3'
+        author: '@user5'
+    postAuthor7:
+        id: 'postAuthor7'
+        post: '@post4'
+        author: '@user1'
+    postAuthor8:
+        id: 'postAuthor8'
+        post: '@post4'
+        author: '@user5'
+    postAuthor9:
+        id: 'postAuthor9'
+        post: '@post5'
+        author: '@user1'
+    postAuthor10:
+        id: 'postAuthor10'
+        post: '@post5'
+        author: '@user5'
+    postAuthor11:
+        id: 'postAuthor11'
+        post: '@post6'
+        author: '@user2'
+    postAuthor12:
+        id: 'postAuthor12'
+        post: '@post7'
+        author: '@user2'
+    postAuthor13:
+        id: 'postAuthor13'
+        post: '@post8'
+        author: '@user2'
+    postAuthor14:
+        id: 'postAuthor14'
+        post: '@post9'
+        author: '@user5'
+    postAuthor15:
+        id: 'postAuthor15'
+        post: '@post10'
+        author: '@user5'
+    postAuthor16:
+        id: 'postAuthor16'
+        post: '@post12'
+        author: '@user1'
+    postAuthor17:
+        id: 'postAuthor17'
+        post: '@post13'
+        author: '@user1'
+    postAuthor18:
+        id: 'postAuthor18'
+        post: '@post14'
+        author: '@user1'
+    postAuthor19:
+        id: 'postAuthor19'
+        post: '@post15'
+        author: '@user1'
+    postAuthor20:
+        id: 'postAuthor20'
+        post: '@post16'
+        author: '@user4'
+    postAuthor21:
+        id: 'postAuthor21'
+        post: '@post17'
+        author: '@userIan'
+    postAuthor22:
+        id: 'postAuthor22'
+        post: '@post18'
+        author: '@userKiroule'
+    postAuthor23:
+        id: 'postAuthor23'
+        post: '@post19'
+        author: '@userKiroule'
+    postAuthor24:
+        id: 'postAuthor24'
+        post: '@post20'
+        author: '@user5'
+    postAuthor25:
+        id: 'postAuthor25'
+        post: '@post21'
+        author: '@userIan'
+    postAuthor26:
+        id: 'postAuthor26'
+        post: '@postWithOwner'
+        author: '@userTheo'
+    postAuthor27:
+        id: 'postAuthor27'
+        post: '@postWithOwner2'
+        author: '@userTheo'
+    postAuthor28:
+        id: 'postAuthor28'
+        post: '@postWithOwnerOnProposal'
+        author: '@userTheo'
+    postAuthor29:
+        id: 'postAuthor29'
+        post: '@postWithOrgaMember'
+        __calls:
+            - setAuthor: ['@organization2']

@@ -98,11 +98,18 @@ exports[`<ProposalNewsHeaderButtons /> should render correctly 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "User",
+                    "concreteType": null,
                     "kind": "LinkedField",
                     "name": "authors",
                     "plural": true,
                     "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
                       Object {
                         "alias": null,
                         "args": null,
@@ -193,7 +200,7 @@ exports[`<ProposalNewsHeaderButtons /> should render correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "01e6e1704bf7f77e065ba55868a2822a",
+        "cacheID": "2fafa798d9bb1e2f9bc6f909c503b65f",
         "id": null,
         "metadata": Object {},
         "name": "ProposalNewsHeaderButtonsQuery",
@@ -217,6 +224,7 @@ fragment ProposalNewsDeleteModal_post on Post {
 fragment ProposalNewsEditModal_post on Post {
   id
   authors {
+    __typename
     id
     slug
   }

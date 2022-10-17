@@ -23,7 +23,7 @@
     <section class="section--custom">
         <div class="container container--thinner">
             <h1>{{ post.title | jolitypo() }}</h1>
-            {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
+            {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
             {% if viewerDidAuthor %}
                 <div class="edit-proposal-news">
                     {{ react_render_component('ProposalNewsHeaderButtonsApp', {

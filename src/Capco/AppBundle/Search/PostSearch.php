@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\PostAffiliation;
 use Capco\AppBundle\Enum\PostOrderField;
 use Capco\AppBundle\Repository\PostRepository;
-use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
@@ -26,7 +26,7 @@ class PostSearch extends Search
     }
 
     public function getUserPostsPaginated(
-        User $user,
+        Author $author,
         int $limit,
         array $affiliations = [],
         ?string $cursor = null,
@@ -44,7 +44,7 @@ class PostSearch extends Search
         }
 
         if ($affiliations && \in_array(PostAffiliation::OWNER, $affiliations, true)) {
-            $boolQuery->addFilter(new Term(['owner.id' => $user->getId()]));
+            $boolQuery->addFilter(new Term(['owner.id' => $author->getId()]));
         }
 
         $query = new Query($boolQuery);

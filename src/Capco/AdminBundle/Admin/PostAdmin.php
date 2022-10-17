@@ -22,7 +22,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 
-
 class PostAdmin extends AbstractAdmin
 {
     protected $classnameLabel = 'post';
@@ -78,7 +77,7 @@ class PostAdmin extends AbstractAdmin
         if ('create' === $name) {
             return 'CapcoAdminBundle:Post:create.html.twig';
         }
-        if('edit'=== $name){
+        if ('edit' === $name) {
             return 'CapcoAdminBundle:Post:edit.html.twig';
         }
 
@@ -288,7 +287,7 @@ class PostAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, ['label' => 'global.title'])
-            ->add('Authors', null, ['label' => 'admin.fields.blog_post.authors']);
+            ->add('authors', null, ['label' => 'admin.fields.blog_post.authors']);
         if (
             $this->getConfigurationPool()
                 ->getContainer()

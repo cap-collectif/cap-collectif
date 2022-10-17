@@ -56,7 +56,7 @@ class DeleteProposalNewsMutation implements MutationInterface
             $proposalName = $proposal->getTitle();
             $projectName = $proposal->getProject()->getTitle();
             $proposalPostAuthor = $proposalPost
-                ->getAuthors()
+                ->getAuthorsObject()
                 ->first()
                 ->getDisplayname();
             $proposalUrl = $this->proposalUrlResolver->__invoke(

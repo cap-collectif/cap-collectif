@@ -9126,7 +9126,7 @@ type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocat
   publishedAt: DateTime
 
   """The post's authors."""
-  authors: [User!]!
+  authors: [Author!]!
 
   """The publication status for this post."""
   publicationStatus: PostPublicationStatus!

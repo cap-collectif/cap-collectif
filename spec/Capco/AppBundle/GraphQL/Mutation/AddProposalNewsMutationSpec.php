@@ -236,7 +236,7 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
 
         $arguments->offsetGet('proposalId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($proposal);
-        $proposalPost->getAuthors()->willReturn(new ArrayCollection([$viewer->getWrappedObject()]));
+        $proposalPost->getAuthorsObject()->willReturn(new ArrayCollection([$viewer->getWrappedObject()]));
         $proposalPost->getUpdatedAt()->willReturn(Argument::type(\DateTime::class));
         $proposalPost->isDisplayedOnBlog()->willReturn(false);
         $proposalPost->getThemes()->willReturn(new ArrayCollection([]));

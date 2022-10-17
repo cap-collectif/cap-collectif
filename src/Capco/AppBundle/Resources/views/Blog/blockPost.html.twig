@@ -32,11 +32,11 @@
                 <a href="{{ path('app_theme_show', {'slug': theme.translate.slug, '_locale': app.request.locale}) }}"><span class="label label-default">{{ theme.translate.title }}</span></a>
             {% endfor %}
             {{ 'event.header.date'|trans({'{date}': (post.publishedAt | localizeddate('long', 'none'))}, 'CapcoAppBundle') | capitalize }}
-            {% if post.Authors|length > 0 %}
+            {% if post.authors|length > 0 %}
                 {{ 'global.written_by' | trans({}, 'CapcoAppBundle') }}
-                {% for author in post.Authors %}
+                {% for author in post.authors %}
                     {% if is_feature_enabled('profiles') %}
-                        <a href="{{ path('capco_user_profile_show_all', { slug: author.slug, '_locale': app.request.locale })}}">
+                        <a href="{{ path('capco_user_profile_show_all', { slug: author.author.slug, '_locale': app.request.locale })}}">
                             {{ author.username }}
                         </a>
                     {% else %}
