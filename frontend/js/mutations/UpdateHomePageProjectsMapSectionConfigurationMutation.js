@@ -18,6 +18,8 @@ const mutation = graphql`
         teaser
         position
         enabled
+        centerLatitude
+        centerLongitude
       }
     }
   }

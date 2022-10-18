@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field, formValueSelector } from 'redux-form';
+import { reduxForm, Field, change, formValueSelector } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { IntlShape } from 'react-intl';
+import L from 'leaflet';
+import { Marker, ZoomControl, MapContainer as Map } from 'react-leaflet';
 import { FormattedHTMLMessage, injectIntl } from 'react-intl';
 import * as S from './HomePageProjectsSectionConfigurationPage.style';
 import renderComponent from '~/components/Form/Field';
@@ -17,6 +19,14 @@ import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import Text from '~ui/Primitives/Text';
 import type { HomePageProjectsMapSectionConfigurationPage_homePageProjectsMapSectionConfiguration } from '~relay/HomePageProjectsMapSectionConfigurationPage_homePageProjectsMapSectionConfiguration.graphql';
 import InfoMessage from '~ds/InfoMessage/InfoMessage';
+import { MapContainer } from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode.style';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
+import type { MapProps } from '~/components/Proposal/Map/Map.types';
+import { LOCATION_PARIS } from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode';
+import AppBox from '~/components/Ui/Primitives/AppBox';
+import Address from '~/components/Form/Address/Address';
+import { flyToPosition } from '~/components/Proposal/Create/ProposalChangeAddressModal';
+import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 const formName = 'section-proposal-admin-form';
 
@@ -25,6 +35,8 @@ type Props = {|
   +hasDistrict: boolean,
   +currentLanguage: string,
   +intl: IntlShape,
+  +centerLatitude: ?number,
+  +centerLongitude: ?number,
   ...ReduxFormFormProps,
 |};
 
@@ -33,6 +45,8 @@ type FormValues = {|
   +position: string,
   +teaser: ?string,
   +title: string,
+  +centerLatitude: number,
+  +centerLongitude: number,
 |};
 
 const TEASER_MAX = 200;
@@ -59,7 +73,7 @@ const onSubmit = async (
   dispatch: Dispatch,
   { currentLanguage, intl }: Props,
 ) => {
-  const { title, teaser, position } = values;
+  const { title, teaser, position, centerLatitude, centerLongitude } = values;
 
   const translationsData = handleTranslationChange(
     [],
@@ -75,6 +89,8 @@ const onSubmit = async (
     position: parseInt(position, 10),
     enabled: values.enabled === 'published',
     translations: translationsData,
+    centerLatitude,
+    centerLongitude,
   };
 
   try {
@@ -104,7 +120,14 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
   intl,
   submitting,
   hasDistrict,
+  dispatch,
+  centerLatitude,
+  centerLongitude,
 }: Props) => {
+  const [address, setAddress] = React.useState(null);
+  const refMap = React.useRef(null);
+  const position = [centerLatitude || LOCATION_PARIS.lat, centerLongitude || LOCATION_PARIS.lng];
+
   return (
     <form method="POST" onSubmit={handleSubmit}>
       <S.SectionContainer>
@@ -141,6 +164,69 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
             component={renderComponent}
             min={0}
           />
+          <div>
+            <AppBox mb={2}>{intl.formatMessage({ id: 'initial-position-of-the-map' })}</AppBox>
+            <MapContainer>
+              <AppBox position="absolute" zIndex={1} top={2} left={2} width="45%">
+                <Address
+                  id="address"
+                  getPosition={(lat, lng) => {
+                    flyToPosition(refMap, lat, lng);
+                    dispatch(change(formName, 'centerLatitude', lat));
+                    dispatch(change(formName, 'centerLongitude', lng));
+                  }}
+                  getAddress={(addr: ?AddressComplete) => {
+                    if (addr) {
+                      flyToPosition(refMap, addr.geometry.location.lat, addr.geometry.location.lng);
+                      dispatch(change(formName, 'centerLatitude', addr.geometry.location.lat));
+                      dispatch(change(formName, 'centerLongitude', addr.geometry.location.lng));
+                    }
+                  }}
+                  debounce={1200}
+                  value={address}
+                  onChange={setAddress}
+                  placeholder={intl.formatMessage({ id: 'proposal.map.form.placeholder' })}
+                />
+              </AppBox>
+              <Map
+                whenCreated={(map: MapProps) => {
+                  refMap.current = map;
+                }}
+                className="map"
+                center={position}
+                zoom={10}
+                zoomControl={false}
+                doubleClickZoom={false}
+                gestureHandling>
+                <CapcoTileLayer />
+                <ZoomControl position="bottomright" />
+                <Marker
+                  position={position}
+                  icon={L.icon({
+                    iconUrl: '/svg/marker.svg',
+                    iconSize: [30, 30],
+                    iconAnchor: [20, 40],
+                  })}
+                />
+              </Map>
+              <div className="fields">
+                <Field
+                  type="text"
+                  name="centerLatitude"
+                  id="centerLatitude"
+                  component={renderComponent}
+                  label={intl.formatMessage({ id: 'admin.fields.proposal_form.latitude' })}
+                />
+                <Field
+                  type="text"
+                  name="centerLongitude"
+                  id="centerLongitude"
+                  component={renderComponent}
+                  label={intl.formatMessage({ id: 'admin.fields.proposal_form.longitude' })}
+                />
+              </div>
+            </MapContainer>
+          </div>
         </S.SectionInner>
       </S.SectionContainer>
 
@@ -191,18 +277,22 @@ const mapStateToProps = (
   { homePageProjectsMapSectionConfiguration }: Props,
 ) => {
   if (homePageProjectsMapSectionConfiguration) {
-    const { title, teaser, position, enabled } = homePageProjectsMapSectionConfiguration;
+    const { title, teaser, position, enabled, centerLatitude, centerLongitude } =
+      homePageProjectsMapSectionConfiguration;
 
     const initialValues = {
       title,
       teaser,
       position,
+      centerLatitude,
+      centerLongitude,
       enabled: enabled === true ? 'published' : 'unpublished',
     };
     return {
       initialValues,
-      displayMode: formValueSelector(formName)(state, 'displayMode'),
       currentLanguage: state.language.currentLanguage,
+      centerLatitude: formValueSelector(formName)(state, 'centerLatitude'),
+      centerLongitude: formValueSelector(formName)(state, 'centerLongitude'),
     };
   }
 };
@@ -229,6 +319,8 @@ const fragmentContainer = createFragmentContainer(
         position
         teaser
         enabled
+        centerLatitude
+        centerLongitude
       }
     `,
   },

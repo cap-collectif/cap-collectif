@@ -5,9 +5,15 @@ UpdateHomePageProjectsMapSectionConfigurationInput:
         fields:
             position:
                 type: 'Int!'
-                description: 'The position of the section in the homepage'
+                description: 'The position of the section in the homepage.'
             enabled:
                 type: 'Boolean!'
-                description: 'Whether it is published or not'
+                description: 'Whether it is published or not.'
             translations:
                 type: '[InternalHomePageProjectsMapSectionConfigurationTranslationInput!]!'
+            centerLatitude:
+                type: 'Float'
+                description: 'The latitude of the center of map.'
+            centerLongitude:
+                type: 'Float'
+                description: 'The longitude of the center of map.'

@@ -20,3 +20,9 @@ HomePageProjectsMapSectionConfiguration:
             enabled:
                 type: 'Boolean!'
                 description: 'Whether it is published or not'
+            centerLatitude:
+                type: 'Float'
+                description: 'The latitude of the center of map.'
+            centerLongitude:
+                type: 'Float'
+                description: 'The longitude of the center of map.'

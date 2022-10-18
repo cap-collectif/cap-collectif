@@ -20,18 +20,15 @@ class UpdateHomePageProjectsMapSectionConfigurationMutation implements MutationI
     private EntityManagerInterface $em;
     private SectionRepository $sectionRepository;
     private FormFactoryInterface $formFactory;
-    private Manager $manager;
 
     public function __construct(
         EntityManagerInterface $em,
         SectionRepository $sectionRepository,
-        FormFactoryInterface $formFactory,
-        Manager $manager
+        FormFactoryInterface $formFactory
     ) {
         $this->em = $em;
         $this->sectionRepository = $sectionRepository;
         $this->formFactory = $formFactory;
-        $this->manager = $manager;
     }
 
     public function __invoke(Argument $args): array

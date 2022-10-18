@@ -6715,6 +6715,12 @@ type HomePageProjectsMapSectionConfiguration {
 
   """Whether it is published or not"""
   enabled: Boolean!
+
+  """The latitude of the center of map."""
+  centerLatitude: Float
+
+  """The longitude of the center of map."""
+  centerLongitude: Float
 }
 
 input HomePageProjectsMapSectionConfigurationTranslationInput {
@@ -16213,12 +16219,18 @@ enum UpdateHomePageProjectsMapSectionConfigurationErrorCode {
 }
 
 input UpdateHomePageProjectsMapSectionConfigurationInput {
-  """The position of the section in the homepage"""
+  """The position of the section in the homepage."""
   position: Int!
 
-  """Whether it is published or not"""
+  """Whether it is published or not."""
   enabled: Boolean!
   translations: [HomePageProjectsMapSectionConfigurationTranslationInput!]!
+
+  """The latitude of the center of map."""
+  centerLatitude: Float
+
+  """The longitude of the center of map."""
+  centerLongitude: Float
   clientMutationId: String
 }
 

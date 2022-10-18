@@ -95,6 +95,8 @@
             {{ get_last_proposals(section.nbObjects, 0, section) }}
         {% elseif section.type == 'metrics' %}
             {{ get_metrics_section(section) }}
+        {% elseif section.type == 'projectsMap' %}
+            {% include '@CapcoApp/Homepage/projectsMap.html.twig' with {'section': section} only %}
         {% endif %}
 
     {% endfor %}

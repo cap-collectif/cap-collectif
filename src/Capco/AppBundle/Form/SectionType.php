@@ -55,7 +55,10 @@ class SectionType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-            ]);
+            ])
+            ->add('centerLatitude', NumberType::class)
+            ->add('centerLongitude', NumberType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

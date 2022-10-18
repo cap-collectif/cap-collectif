@@ -188,4 +188,11 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
 
         return $this->twig->render('CapcoAppBundle:Homepage:metrics.html.twig', compact('props'));
     }
+
+    public function getProjectsMap(?Section $section): string
+    {
+        $user = ($token = $this->tokenStorage->getToken()) ? $token->getUser() : null;
+        $count = $this->projectRepository->countPublished($user);
+        return $this->twig->render('CapcoAppBundle:Homepage:projectsMap.html.twig', compact('count'));
+    }
 }

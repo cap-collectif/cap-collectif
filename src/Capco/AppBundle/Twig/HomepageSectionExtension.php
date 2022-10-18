@@ -55,6 +55,11 @@ class HomepageSectionExtension extends AbstractExtension
                 [HomepageSectionRuntime::class, 'getMetricsSection'],
                 ['is_safe' => ['html']]
             ),
+            new TwigFunction(
+                'get_projects_map',
+                [HomepageSectionRuntime::class, 'getProjectsMap'],
+                ['is_safe' => ['html']]
+            ),
         ];
     }
 }

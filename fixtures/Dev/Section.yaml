@@ -105,4 +105,6 @@ Capco\AppBundle\Entity\Section:
     position: 14
     nbObjects: null
     enabled: true
+    centerLatitude: 48.848578564165784
+    centerLongitude: 2.3884014755569796
     associatedFeatures: []

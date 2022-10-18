@@ -11,7 +11,7 @@ import { Flex, Button, Modal, Box } from '@cap-collectif/ui';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 import { formName, retrieveDistrictForLocation } from '../Form/ProposalForm';
 import type { Dispatch, GlobalState } from '~/types';
-import type { MapProps, MapCenterObject } from '~/components/Proposal/Map/Map.types';
+import type { MapProps, MapCenterObject, MapRef } from '~/components/Proposal/Map/Map.types';
 import type { ProposalChangeAddressModal_proposalForm$key } from '~relay/ProposalChangeAddressModal_proposalForm.graphql';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import 'leaflet/dist/leaflet.css';
@@ -87,7 +87,7 @@ const FRAGMENT = graphql`
   }
 `;
 
-const flyToPosition = (mapRef, lat: number, lng: number) => {
+export const flyToPosition = (mapRef: MapRef, lat: number, lng: number) => {
   if (mapRef.current) {
     mapRef.current.flyTo([lat, lng], 18);
   }

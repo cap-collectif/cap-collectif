@@ -104,75 +104,85 @@ class Section implements Translatable, SonataTranslatableInterface
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
-    protected $step;
+    protected ?AbstractStep $step;
 
     /**
      * @ORM\Column(name="type", type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $type = 'custom';
+    private string $type = 'custom';
 
     /**
      * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")
      * @Assert\NotNull()
      */
-    private $position;
+    private int $position;
 
     /**
      * @ORM\Column(name="nb_objects", type="integer", nullable=true)
      */
-    private $nbObjects;
+    private ?int $nbObjects = null;
 
     /**
      * @ORM\Column(name="enabled", type="boolean", nullable=false, options={"default" = false})
      * @Assert\NotNull()
      */
-    private $enabled = false;
+    private bool $enabled = false;
 
     /**
      * @ORM\Column(name="metrics_to_display_basics", type="boolean", options={"default": false})
      */
-    private $metricsToDisplayBasics = false;
+    private bool $metricsToDisplayBasics = false;
 
     /**
      * @ORM\Column(name="metrics_to_display_events", type="boolean", options={"default": false})
      */
-    private $metricsToDisplayEvents = false;
+    private bool $metricsToDisplayEvents = false;
 
     /**
      * @ORM\Column(name="metrics_to_display_projects", type="boolean", options={"default": false})
      */
-    private $metricsToDisplayProjects = false;
+    private bool $metricsToDisplayProjects = false;
 
     /**
      * @ORM\Column(name="display_mode", type="string", options={"default":"MOST_RECENT"})
      * @Assert\Choice(choices = {"MOST_RECENT", "CUSTOM"})
      * Used when type = 'projects', set how the projects are displayed in the section
      */
-    private $displayMode = HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT;
+    private string $displayMode = HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT;
 
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    private ?\DateTime $createdAt = null;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "position"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    private ?\DateTime $updatedAt = null;
 
     /**
      * @ORM\Column(name="associated_features", type="simple_array", nullable=true)
      */
-    private $associatedFeatures;
+    private ?array $associatedFeatures;
 
     /**
      * @ORM\OneToMany(targetEntity=SectionProject::class, mappedBy="section", cascade="persist", orphanRemoval=true)
      */
-    private $sectionProjects;
+    private Collection $sectionProjects;
+
+    /**
+     * @ORM\Column(name="center_latitude", type="float", nullable=true)
+     */
+    private ?float $centerLatitude;
+
+    /**
+     * @ORM\Column(name="center_longitude", type="float", nullable=true)
+     */
+    private ?float $centerLongitude;
 
     public function __construct()
     {
@@ -351,6 +361,28 @@ class Section implements Translatable, SonataTranslatableInterface
     public function getDisplayMode(): string
     {
         return $this->displayMode;
+    }
+
+    public function getCenterLatitude(): ?float
+    {
+        return $this->centerLatitude;
+    }
+
+    public function setCenterLatitude(?float $centerLatitude): Section
+    {
+        $this->centerLatitude = $centerLatitude;
+        return $this;
+    }
+
+    public function getCenterLongitude(): ?float
+    {
+        return $this->centerLongitude;
+    }
+
+    public function setCenterLongitude(?float $centerLongitude): Section
+    {
+        $this->centerLongitude = $centerLongitude;
+        return $this;
     }
 
     /**
