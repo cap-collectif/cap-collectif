@@ -72,7 +72,19 @@ const generateValidationSchema = (
     ...('PostalAddressRequirement' in initialValues && {
       PostalAddressRequirement: yup
         .string()
+        .ensure()
         .required(intl.formatMessage({ id: 'global.required' })),
+      realAddress: yup
+        .mixed()
+        .test('realAddressTest', '', function (this: yup.TestContext, fieldValue: any): boolean {
+          if (!!this.parent.PostalAddressRequirement && !fieldValue) {
+            return this.createError({
+              message: intl.formatMessage({ id: 'proposal.constraints.address' }),
+              path: 'PostalAddressRequirement',
+            });
+          }
+          return true;
+        }),
     }),
   });
 };
