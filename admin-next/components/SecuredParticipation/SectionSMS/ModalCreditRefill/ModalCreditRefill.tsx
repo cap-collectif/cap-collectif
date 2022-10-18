@@ -73,6 +73,8 @@ const ModalCreditRefill: FC<ModalCreditRefillProps> = ({ firstRequest }) => {
     const packageSelected =
         PACKAGE_LIST.find(pack => pack.sms === offerSelected) || PACKAGE_LIST[2];
     const unitPriceSms = packageSelected.price / packageSelected.sms;
+    const discountPercent = (1 - unitPriceSms) * 100;
+    const discountPercentText = discountPercent ? `(-${discountPercent}%)` : '';
 
     return (
         <Modal
@@ -129,10 +131,10 @@ const ModalCreditRefill: FC<ModalCreditRefillProps> = ({ firstRequest }) => {
                             <Tag variantColor="green" maxWidth="100% !important">
                                 <Tag.Label>
                                     {`${unitPriceSms}
-                                    cts / ${intl
+                                    € / ${intl
                                         .formatMessage({ id: 'verified-participant' })
                                         .toLowerCase()} 
-                                    (-${unitPriceSms * 100}%)`}
+                                    ${discountPercentText}`}
                                 </Tag.Label>
                             </Tag>
 
