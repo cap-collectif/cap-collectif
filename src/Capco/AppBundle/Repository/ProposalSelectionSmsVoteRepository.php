@@ -78,4 +78,24 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function countDistinctPhonePublishedSelectionVoteByStep(
+        SelectionStep $step
+    ): int {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('COUNT(DISTINCT pv.phone)')
+            ->andWhere('pv.selectionStep = :step')
+            ->innerJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('pv.published = 1');
+
+        return $qb
+            ->andWhere('pv.isAccounted = 1')
+            ->andWhere('proposal.draft = 0')
+            ->andWhere('proposal.trashedAt IS NULL')
+            ->andWhere('proposal.published = 1')
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

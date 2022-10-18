@@ -82,7 +82,8 @@ class StepVotesCountDataLoader extends BatchDataLoader
         if ($step instanceof CollectStep) {
             $smsVotes = $this->proposalCollectSmsVoteRepository->countPublishedCollectVoteByStep($step, $onlyAccounted);
             if ($anonymous) {
-                return $smsVotes;
+                
+                return $this->proposalCollectSmsVoteRepository->countDistinctPhonePublishedCollectVoteByStep($step, $onlyAccounted);
             }
             $votes = $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
                 $step,
@@ -94,7 +95,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
         if ($step instanceof SelectionStep) {
             $smsVotes = $this->proposalSelectionSmsVoteRepository->countPublishedSelectionVoteByStep($step);
             if ($anonymous) {
-                return $smsVotes;
+                return $this->proposalSelectionSmsVoteRepository->countDistinctPhonePublishedSelectionVoteByStep($step);
             }
             $votes = $this->proposalSelectionVoteRepository->countPublishedSelectionVoteByStep(
                 $step,
