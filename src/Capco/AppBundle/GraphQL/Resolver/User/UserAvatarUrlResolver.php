@@ -2,22 +2,22 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserAvatarUrlResolver implements ResolverInterface
 {
-    private $urlResolver;
+    private MediaUrlResolver $urlResolver;
 
     public function __construct(MediaUrlResolver $urlResolver)
     {
         $this->urlResolver = $urlResolver;
     }
 
-    public function __invoke(User $user): ?string
+    public function __invoke(Author $author): ?string
     {
-        $media = $user->getMedia();
+        $media = $author->getMedia();
         if (!$media) {
             return null;
         }
