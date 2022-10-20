@@ -9,7 +9,7 @@ import { PROPOSAL_FOLLOWERS_TO_SHOW } from '~/constants/ProposalConstants';
 import type { ProposalPageQueryResponse } from '~relay/ProposalPageQuery.graphql';
 import ProposalPageLogic from './ProposalPageLogic';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '~/CookieMonster';
 
 export type Props = {|
   +proposalSlug: string,

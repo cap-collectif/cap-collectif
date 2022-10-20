@@ -58,6 +58,7 @@ const commit = (variables: {
         newEdge = store.create(edgeID, 'ProposalEdge');
       }
       if (variables.input.draft) {
+        newNode.copyFieldsFrom(proposal);
         newEdge.setLinkedRecord(newNode, 'node');
         const viewerProposalDrafts = stepProxy.getLinkedRecord('viewerProposalDrafts');
         if (!viewerProposalDrafts) return;
