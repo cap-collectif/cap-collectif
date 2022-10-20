@@ -271,7 +271,7 @@
             {
                 "title": "admin.label.settings.performance",
                 "href": "/admin/settings/settings.performance/list",
-                "rolesRequired": [],
+                "rolesRequired": ["superAdmin"],
                 "featuresRequired": []
             },
             {

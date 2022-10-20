@@ -52,3 +52,6 @@ services:
     Capco\AppBundle\Security\CommentVoter:
         tags:
             - { name: security.voter }
+    Capco\AppBundle\Security\SettingsVoter:
+        tags:
+            - { name: security.voter }

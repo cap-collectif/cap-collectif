@@ -13,21 +13,24 @@ import { useSideBarContext } from '@ui/SideBar/SideBar.context';
 
 interface SideBarProps {}
 
-export const SIDE_BAR_COOKIE = 'SIDE_BAR_OPENED'
+export const SIDE_BAR_COOKIE = 'SIDE_BAR_OPENED';
 
 export const setSideBarCookie = (fold: boolean): void => {
     CookieHelper.setCookie(SIDE_BAR_COOKIE, fold.toString());
-}
+};
 
 const SideBar: FC<SideBarProps> = () => {
     const { pathname } = useRouter();
-    const { viewerSession, appVersion } = useAppContext()
-    const { fold } = useSideBarContext()
+    const { viewerSession, appVersion } = useAppContext();
+    const { fold } = useSideBarContext();
     const intl = useIntl();
-    const allFeatureFlags = useAllFeatureFlags()
-    const { isAdmin } = viewerSession;
+    const allFeatureFlags = useAllFeatureFlags();
+    const { isAdmin, isSuperAdmin } = viewerSession;
 
-    const sideBarItemsFiltered = useMemo(() => getSideBarItemsFiltered(isAdmin, allFeatureFlags), [isAdmin, allFeatureFlags])
+    const sideBarItemsFiltered = useMemo(
+        () => getSideBarItemsFiltered(isAdmin, isSuperAdmin, allFeatureFlags),
+        [isAdmin, allFeatureFlags],
+    );
 
     return (
         <SideBarUI>
@@ -39,19 +42,29 @@ const SideBar: FC<SideBarProps> = () => {
 
             {sideBarItemsFiltered.map(sideBarItem =>
                 sideBarItem.href ? (
-                    <SideBarUI.Item key={sideBarItem.id} id={sideBarItem.id} icon={sideBarItem.icon as CapUIIcon} href={sideBarItem.href} beta={sideBarItem.beta} title={intl.formatMessage({ id: sideBarItem.title })} onClick={e => {
-                        setSideBarCookie(false)
-                        return true
-                    }}/>
+                    <SideBarUI.Item
+                        key={sideBarItem.id}
+                        id={sideBarItem.id}
+                        icon={sideBarItem.icon as CapUIIcon}
+                        href={sideBarItem.href}
+                        beta={sideBarItem.beta}
+                        title={intl.formatMessage({ id: sideBarItem.title })}
+                        onClick={e => {
+                            setSideBarCookie(false);
+                            return true;
+                        }}
+                    />
                 ) : (
                     <SideBarUI.Menu
                         key={sideBarItem.id}
                         id={sideBarItem.id}
                         icon={sideBarItem.icon as CapUIIcon}
-                        title={intl.formatMessage({ id: sideBarItem.title })}
-                        >
+                        title={intl.formatMessage({ id: sideBarItem.title })}>
                         {sideBarItem.items.map((item, idx) => (
-                            <SideBarUI.Menu.Item key={`${sideBarItem.id}-${idx}`} href={item.href} selected={item.href.includes(pathname)}>
+                            <SideBarUI.Menu.Item
+                                key={`${sideBarItem.id}-${idx}`}
+                                href={item.href}
+                                selected={item.href.includes(pathname)}>
                                 {intl.formatMessage({ id: item.title })}
                             </SideBarUI.Menu.Item>
                         ))}
@@ -59,9 +72,11 @@ const SideBar: FC<SideBarProps> = () => {
                 ),
             )}
 
-            {fold && <SideBarUI.Version>{`${intl.formatMessage({
-                id: 'app-version',
-            })} ${appVersion}`}</SideBarUI.Version>}
+            {fold && (
+                <SideBarUI.Version>{`${intl.formatMessage({
+                    id: 'app-version',
+                })} ${appVersion}`}</SideBarUI.Version>
+            )}
         </SideBarUI>
     );
 };

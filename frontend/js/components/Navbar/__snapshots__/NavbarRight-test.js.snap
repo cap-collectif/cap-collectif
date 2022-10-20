@@ -166,6 +166,7 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "isOnlyProjectAdmin": false,
           "isPhoneConfirmed": true,
           "isProjectAdmin": false,
+          "isSuperAdmin": false,
           "isViewer": false,
           "media": Object {
             "url": "https://source.unsplash.com/random/150x150",
@@ -967,6 +968,7 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           "isOnlyProjectAdmin": false,
           "isPhoneConfirmed": true,
           "isProjectAdmin": true,
+          "isSuperAdmin": false,
           "isViewer": false,
           "media": Object {
             "url": "https://source.unsplash.com/random/150x150",
@@ -1768,6 +1770,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "isOnlyProjectAdmin": false,
           "isPhoneConfirmed": true,
           "isProjectAdmin": false,
+          "isSuperAdmin": false,
           "isViewer": false,
           "media": Object {
             "url": "https://source.unsplash.com/random/150x150",

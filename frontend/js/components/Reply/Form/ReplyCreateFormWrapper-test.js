@@ -13,6 +13,7 @@ const baseProps = {
     isPhoneConfirmed: true,
     phone: '0606060606',
     isAdmin: false,
+    isSuperAdmin: false,
     isProjectAdmin: false,
     isOnlyProjectAdmin: false,
     isEvaluerOnLegacyTool: false,

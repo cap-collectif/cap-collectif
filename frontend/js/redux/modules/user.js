@@ -1,8 +1,8 @@
 // @flow
 import { change, SubmissionError } from 'redux-form';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
-import { UPDATE_ALERT } from '../../constants/AlertConstants';
-import type { Exact, Dispatch, Action } from '../../types';
+import { UPDATE_ALERT } from '~/constants/AlertConstants';
+import type { Exact, Dispatch, Action } from '~/types';
 import CookieMonster from '../../CookieMonster';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
@@ -27,6 +27,7 @@ export type User = {
   +isEvaluerOnNewTool: boolean,
   +phone: string,
   +isAdmin: boolean,
+  +isSuperAdmin: boolean,
   +isProjectAdmin: boolean,
   +isOnlyProjectAdmin: boolean,
   +email: string,
@@ -65,6 +66,7 @@ export type State = {
     +isPhoneConfirmed: boolean,
     +phone: string,
     +isAdmin: boolean,
+    +isSuperAdmin: boolean,
     +isProjectAdmin: boolean,
     +isOnlyProjectAdmin: boolean,
     +email: string,

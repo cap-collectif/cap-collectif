@@ -37,6 +37,7 @@ export const user = {
   vip: false,
   isViewer: false,
   isAdmin: true,
+  isSuperAdmin: false,
   isProjectAdmin: false,
   isOnlyProjectAdmin: false,
   isEvaluerOnLegacyTool: true,

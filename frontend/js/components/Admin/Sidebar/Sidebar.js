@@ -40,6 +40,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
   const features: FeatureToggles = useSelector((state: GlobalState) => state.default.features);
   const user = useSelector((state: GlobalState) => state.user.user);
   const isAdmin = user ? user.isAdmin : false;
+  const isSuperAdmin = user ? user.isSuperAdmin : false;
   const isProjectAdmin = user ? user.isProjectAdmin : false;
   let defaultAccordion = defaultAccordeon || '';
   if (!defaultAccordeon) {
@@ -59,6 +60,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
     // we only want this on our first render
     // eslint-disable-next-line
   }, []);
+
   return (
     <AppBox
       as="aside"
@@ -302,10 +304,12 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                     text="admin.label.settings.global"
                     href="/admin/settings/settings.global/list"
                   />
-                  <SidebarLink
-                    text="admin.label.settings.performance"
-                    href="/admin/settings/settings.performance/list"
-                  />
+                  {isSuperAdmin ? (
+                    <SidebarLink
+                      text="admin.label.settings.performance"
+                      href="/admin/settings/settings.performance/list"
+                    />
+                  ) : null}
                   <SidebarLink text="admin.label.settings.modules" href="/admin-next/features" />
                   {(!features.beta__emailing ||
                     (features.beta__emailing && !features.beta__emailing_parameters)) && (

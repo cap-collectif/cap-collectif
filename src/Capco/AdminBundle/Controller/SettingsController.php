@@ -11,6 +11,7 @@ use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Repository\SiteColorRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AppBundle\Security\SettingsVoter;
 use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -54,6 +55,7 @@ class SettingsController extends Controller
      * @Route("/admin/settings/pages.shield/list", name="capco_admin_settings_shield")
      * @Template("@CapcoAdmin/Settings/shield.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
+     *
      * @deprecated Replace by our NextJs router so this is not used anymore
      */
     public function shieldAction()
@@ -72,12 +74,13 @@ class SettingsController extends Controller
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      * @Template("CapcoAdminBundle:Settings:list.html.twig")
      */
-    public function listAction(Request $request, $category): array
+    public function listAction(Request $request, $category)
     {
         $featuresCategoryResolver = $this->get(FeaturesCategoryResolver::class);
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted(SettingsVoter::VIEW, $category)) {
             throw $this->createAccessDeniedException();
         }
+
         if (!$featuresCategoryResolver->isCategoryEnabled($category)) {
             throw $this->createNotFoundException();
         }
@@ -116,7 +119,7 @@ class SettingsController extends Controller
     /**
      * @Route("/admin/features/{toggle}/switch", name="capco_admin_feature_switch")
      * @Template()
-     * 
+     *
      * TODO this is a security breach (GET request), delete me when we rebuild features page.
      */
     public function switchToggleAction(string $toggle): RedirectResponse
