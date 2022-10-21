@@ -30,6 +30,7 @@ export type User = {
   +isSuperAdmin: boolean,
   +isProjectAdmin: boolean,
   +isOnlyProjectAdmin: boolean,
+  +isOrganizationMember: boolean,
   +email: string,
   +newEmailToConfirm: ?string,
   +media: ?{
@@ -69,6 +70,7 @@ export type State = {
     +isSuperAdmin: boolean,
     +isProjectAdmin: boolean,
     +isOnlyProjectAdmin: boolean,
+    +isOrganizationMember: boolean,
     +email: string,
     +newEmailToConfirm: ?string,
     +media: ?{

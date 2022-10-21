@@ -155,6 +155,11 @@ class User extends AbstractUser implements
         return false;
     }
 
+    public function isOrganizationMember(): bool
+    {
+        return $this->getMemberOfOrganizations()->count() > 0;
+    }
+
     public function hydrate(array $data): self
     {
         foreach ($data as $key => $value) {

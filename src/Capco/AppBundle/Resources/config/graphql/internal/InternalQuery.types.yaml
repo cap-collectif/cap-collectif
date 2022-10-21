@@ -372,7 +372,7 @@ InternalQuery:
                         description: 'Search by term.'
             availableLocales:
                 description: 'List all locales on the platform.'
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", [getUser()])'
                 args:
                     includeDisabled:
                         type: 'Boolean'

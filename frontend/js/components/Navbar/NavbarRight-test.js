@@ -40,6 +40,7 @@ export const user = {
   isSuperAdmin: false,
   isProjectAdmin: false,
   isOnlyProjectAdmin: false,
+  isOrganizationMember: false,
   isEvaluerOnLegacyTool: true,
   isEvaluerOnNewTool: false,
 };
@@ -79,6 +80,16 @@ describe('<NavbarRight />', () => {
   it('should render with an admin link when user is a project admin', () => {
     const wrapper = shallow(
       <NavbarRight {...props} user={{ ...user, isAdmin: false, isProjectAdmin: true }} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render with an admin link when user is member of an organization', () => {
+    const wrapper = shallow(
+      <NavbarRight
+        {...props}
+        user={{ ...user, isAdmin: false, isProjectAdmin: false, isOrganizationMember: true }}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

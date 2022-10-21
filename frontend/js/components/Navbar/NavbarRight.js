@@ -37,7 +37,7 @@ export const NavbarRight = ({
     window.location.href = `${window.location.protocol}//${window.location.host}/logout`;
   };
   const isMobile = useIsMobile();
-  const isProjectAdmin = user ? user.isProjectAdmin : false;
+  const showAdminLink = user?.isAdmin || user?.isProjectAdmin || user?.isOrganizationMember;
 
   return (
     <>
@@ -82,7 +82,7 @@ export const NavbarRight = ({
               { id: 'user.account.menu' },
               { username: user.username },
             )}>
-            {(user.isAdmin || isProjectAdmin) && (
+            {showAdminLink && (
               <MenuItem
                 {...menu}
                 href={user.isAdmin ? '/admin/' : '/admin-next/projects'}

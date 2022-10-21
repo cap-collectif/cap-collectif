@@ -15,6 +15,7 @@ const baseProps = {
     isAdmin: false,
     isSuperAdmin: false,
     isProjectAdmin: false,
+    isOrganizationMember: false,
     isOnlyProjectAdmin: false,
     isEvaluerOnLegacyTool: false,
     isEvaluerOnNewTool: false,
