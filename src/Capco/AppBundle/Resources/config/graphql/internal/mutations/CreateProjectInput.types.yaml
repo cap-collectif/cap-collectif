@@ -15,3 +15,6 @@ CreateProjectInput:
             locale:
                 type: 'ID'
                 description: 'The uuid of the locale of this project, null if none'
+            owner:
+                type: 'ID'
+                description: 'ID of the owner of the project, user or organization. If null, fallback on the viewer.'

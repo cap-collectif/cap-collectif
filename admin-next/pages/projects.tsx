@@ -27,14 +27,26 @@ export const projectsQuery = graphql`
     ) {
         ...ProjectModalCreateProject_query
         viewer {
-            id
-            username
-            isOnlyProjectAdmin
-            isSuperAdmin
             allProjects: projects(affiliations: $affiliations) {
                 totalCount
             }
+            organizations {
+                allProjects: projects(affiliations: $affiliations) {
+                    totalCount
+                }
+                ...ProjectList_projectOwner
+                    @arguments(
+                        count: $count
+                        cursor: $cursor
+                        term: $term
+                        affiliations: $affiliations
+                        orderBy: $orderBy
+                    )
+            }
             ...ProjectList_viewer
+            ...ProjectModalCreateProject_viewer
+            ...ProjectListNoResult_viewer
+            ...ProjectList_projectOwner
                 @arguments(
                     count: $count
                     cursor: $cursor
@@ -58,15 +70,10 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ isAdmin, queryReferen
     const [term, setTerm] = React.useState('');
     const [orderBy, setOrderBy] = React.useState<OrderDirection>('DESC');
     const query = usePreloadedQuery<projectsQueryType>(projectsQuery, queryReference);
-    const modalInitialValues = {
-        title: '',
-        author: {
-            value: query.viewer.id,
-            label: query.viewer.username,
-        },
-    };
-    const hasProjects = query.viewer.allProjects.totalCount > 0;
-
+    const { viewer } = query;
+    const organization = viewer.organizations?.[0];
+    const hasProjects =
+        viewer.allProjects.totalCount > 0 || (organization?.allProjects?.totalCount ?? 0) > 0;
     const onTermChange = debounce((value: string) => setTerm(value), 400);
 
     return (
@@ -82,13 +89,10 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ isAdmin, queryReferen
                     overflow="hidden">
                     <Flex direction="row">
                         <ProjectModalCreateProject
-                            viewerId={query.viewer.id}
-                            isAdmin={isAdmin}
                             orderBy={orderBy}
                             term={term}
+                            viewer={viewer}
                             query={query}
-                            initialValues={modalInitialValues}
-                            isOnlyProjectAdmin={query.viewer.isOnlyProjectAdmin}
                             noResult={false}
                             hasProjects={hasProjects}
                         />
@@ -103,12 +107,10 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ isAdmin, queryReferen
                         <ProjectList
                             orderBy={orderBy}
                             setOrderBy={setOrderBy}
-                            viewer={query.viewer}
                             term={term}
-                            isAdmin={isAdmin}
                             resetTerm={() => setTerm('')}
-                            isSuperAdmin={query.viewer.isSuperAdmin}
-                            isOnlyProjectAdmin={query.viewer.isOnlyProjectAdmin}
+                            projectOwner={organization ?? viewer}
+                            viewer={viewer}
                         />
                     </React.Suspense>
                 </Flex>
@@ -116,11 +118,8 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ isAdmin, queryReferen
                 <ProjectListNoResult
                     term={term}
                     orderBy={orderBy}
-                    isAdmin={isAdmin}
-                    modalInitialValues={modalInitialValues}
+                    viewer={viewer}
                     query={query}
-                    viewerId={query.viewer.id}
-                    isOnlyProjectAdmin={query.viewer.isOnlyProjectAdmin}
                     hasProjects={hasProjects}
                 />
             )}

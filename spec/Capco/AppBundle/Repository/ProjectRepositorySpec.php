@@ -39,11 +39,6 @@ class ProjectRepositorySpec extends ObjectBehavior
         User $user
     ) {
         $user->getId()->shouldBeCalled()->willReturn('userId');
-        $qb->addSelect('authors')->shouldBeCalled()->willReturn($qb);
-        $qb->leftJoin('p.authors', 'authors')->shouldBeCalled()->willReturn($qb);
-        $qb->leftJoin('p.restrictedViewerGroups', 'pvg')->shouldBeCalled()->willReturn($qb);
-        $qb->orWhere('p.visibility IN (:visibility)')->shouldBeCalled()->willReturn($qb);
-        $qb->setParameter('visibility', [ProjectVisibilityMode::VISIBILITY_PUBLIC])->shouldBeCalled()->willReturn($qb);
         $qb->leftJoin('p.owner', 'o')->shouldBeCalled()->willReturn($qb);
         $qb->andWhere('o.id = :ownerId')->shouldBeCalled()->willReturn($qb);
         $qb->setParameter('ownerId', 'userId')->shouldBeCalled()->willReturn($qb);
@@ -56,11 +51,6 @@ class ProjectRepositorySpec extends ObjectBehavior
         Organization $organization
     ) {
         $organization->getId()->shouldBeCalled()->willReturn('organizationId');
-        $qb->addSelect('authors')->shouldBeCalled()->willReturn($qb);
-        $qb->leftJoin('p.authors', 'authors')->shouldBeCalled()->willReturn($qb);
-        $qb->leftJoin('p.restrictedViewerGroups', 'pvg')->shouldBeCalled()->willReturn($qb);
-        $qb->orWhere('p.visibility IN (:visibility)')->shouldBeCalled()->willReturn($qb);
-        $qb->setParameter('visibility', [ProjectVisibilityMode::VISIBILITY_PUBLIC])->shouldBeCalled()->willReturn($qb);
         $qb->leftJoin('p.organizationOwner', 'o')->shouldBeCalled()->willReturn($qb);
         $qb->andWhere('o.id = :ownerId')->shouldBeCalled()->willReturn($qb);
         $qb->setParameter('ownerId', 'organizationId')->shouldBeCalled()->willReturn($qb);

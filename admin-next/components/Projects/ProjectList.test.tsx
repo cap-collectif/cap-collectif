@@ -233,13 +233,19 @@ describe('<ProjectList />', () => {
                     },
                 ],
             },
+            isAdmin: true,
+            isAdminOrganization: false,
+            isOnlyProjectAdmin: false,
+            isSuperAdmin: false,
+            organizations: null,
         }),
     };
     const query = graphql`
         query ProjectListTestQuery($count: Int, $cursor: String, $term: String)
         @relay_test_operation {
             viewer {
-                ...ProjectList_viewer @arguments(count: $count, cursor: $cursor, term: $term)
+                ...ProjectList_projectOwner @arguments(count: $count, cursor: $cursor, term: $term)
+                ...ProjectList_viewer
             }
         }
     `;
@@ -258,8 +264,8 @@ describe('<ProjectList />', () => {
             if (!data.viewer) return null;
             return (
                 <ProjectList
+                    projectOwner={data.viewer}
                     viewer={data.viewer}
-                    isAdmin
                     term=""
                     resetTerm={jest.fn()}
                     orderBy="DESC"

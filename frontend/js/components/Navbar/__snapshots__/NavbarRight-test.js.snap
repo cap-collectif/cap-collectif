@@ -1773,6 +1773,7 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
           "isOrganizationMember": true,
           "isPhoneConfirmed": true,
           "isProjectAdmin": false,
+          "isSuperAdmin": false,
           "isViewer": false,
           "media": Object {
             "url": "https://source.unsplash.com/random/150x150",

@@ -7,7 +7,7 @@ import colors from '~/styles/modules/colors';
 import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import Tag from '~ds/Tag/Tag';
 import Text from '~ui/Primitives/Text';
-import { getBaseUrlWithAdminNextSupport } from '~/config';
+import {getBaseUrlWithAdminNextSupport} from '~/config';
 
 type Props = {|
   ...LinkProps,

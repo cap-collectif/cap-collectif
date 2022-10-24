@@ -79,11 +79,21 @@ describe('<ProjectItem />', () => {
             ],
             __typename: 'Project',
         }),
+        User: () => ({
+            isAdmin: false,
+            isAdminOrganization: false,
+            isOnlyProjectAdmin: false,
+            isSuperAdmin: false,
+            organizations: null,
+        })
     };
     const query = graphql`
         query ProjectItemTestQuery($id: ID = "<default>") @relay_test_operation {
             project: node(id: $id) {
                 ...ProjectItem_project
+            }
+            viewer {
+                ...ProjectItem_viewer
             }
         }
     `;
@@ -97,10 +107,11 @@ describe('<ProjectItem />', () => {
         const queryVariables = {};
         const TestRenderer = props => {
             const data = useLazyLoadQuery<ProjectItemTestQuery>(query, queryVariables);
-            if (!data.project) return null;
+            if (!data.project && !data.viewer) return null;
             return (
                 <ProjectItem
                     project={data.project}
+                    viewer={data.viewer}
                     connectionName="client:VXNlcjp1c2VyMQ==:__ProjectList_projects_connection"
                     {...props}
                 />

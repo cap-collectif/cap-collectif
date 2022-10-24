@@ -20,30 +20,29 @@ import formatSubmitted from 'utils/format-submitted';
 import CreateProjectMutation from 'mutations/CreateProjectMutation';
 import { useForm } from 'react-hook-form';
 import UserListField from '../Form/UserListField';
+import { ProjectModalCreateProject_viewer$key } from '@relay/ProjectModalCreateProject_viewer.graphql';
 
 const formName = 'form-create-project';
 
-export type Author = { value: string, label: string | null };
+export type Author = { value: string; label: string | null };
 
 type FormValues = {
-    title: string,
-    author?: Author | Array<Author>,
-    type?: string,
+    title: string;
+    author?: Author | Array<Author>;
+    type?: string;
+    owner?: string;
 };
 
 interface ProjectModalCreateProjectProps {
-    viewerId: string;
-    isAdmin: boolean;
-    isOnlyProjectAdmin?: boolean;
     orderBy: string;
     term: string;
     query: null | ProjectModalCreateProject_query$key;
-    initialValues: FormValues;
+    viewer: ProjectModalCreateProject_viewer$key;
     noResult?: boolean;
     hasProjects: boolean;
 }
 
-const FRAGMENT = graphql`
+const QUERY_FRAGMENT = graphql`
     fragment ProjectModalCreateProject_query on Query {
         projectTypes {
             id
@@ -52,19 +51,39 @@ const FRAGMENT = graphql`
     }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+    fragment ProjectModalCreateProject_viewer on User {
+        id
+        username
+        isAdmin
+        isOnlyProjectAdmin
+        organizations {
+            id
+            displayName
+        }
+    }
+`;
+
 const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
     query: queryReference,
+    viewer: viewerReference,
     noResult,
-    isOnlyProjectAdmin,
-    viewerId,
     term,
-    isAdmin,
     orderBy,
     hasProjects,
-    initialValues,
 }) => {
     const intl = useIntl();
-    const data = useFragment(FRAGMENT, queryReference);
+    const query = useFragment(QUERY_FRAGMENT, queryReference);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerReference);
+    const organization = viewer.organizations?.[0];
+    const initialValues = {
+        title: '',
+        author: {
+            value: organization?.id ?? viewer.id,
+            label: organization?.displayName ?? viewer.username,
+        },
+        owner: organization?.id,
+    };
 
     const { handleSubmit, formState, control, reset } = useForm<FormValues>({
         mode: 'onChange',
@@ -76,6 +95,7 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
             projectType: values.type,
             title: values.title,
             authors: formatSubmitted(values.author),
+            owner: values.owner,
         };
         const owner = values.author
             ? Array.isArray(values.author)
@@ -86,14 +106,14 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
             {
                 input,
                 connections: [
-                    ConnectionHandler.getConnectionID(viewerId, 'ProjectList_projects', {
+                    ConnectionHandler.getConnectionID(viewer.id, 'ProjectList_projects', {
                         query: term || null,
-                        affiliations: isAdmin ? null : ['OWNER'],
+                        affiliations: viewer.isAdmin ? null : ['OWNER'],
                         orderBy: { field: 'PUBLISHED_AT', direction: orderBy },
                     }),
                 ],
             },
-            isAdmin,
+            viewer.isAdmin,
             hasProjects,
             owner,
         )
@@ -154,7 +174,7 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
                             <FormControl
                                 name="author"
                                 control={control}
-                                isDisabled={isOnlyProjectAdmin}>
+                                isDisabled={viewer.isOnlyProjectAdmin || !!organization}>
                                 <FormLabel label={intl.formatMessage({ id: 'global.author' })} />
                                 <UserListField name="author" control={control} isMulti />
                             </FormControl>
@@ -169,7 +189,7 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
                                     name="type"
                                     control={control}
                                     options={
-                                        data?.projectTypes?.filter(Boolean).map(type => ({
+                                        query?.projectTypes?.filter(Boolean).map(type => ({
                                             value: type.id,
                                             label: intl.formatMessage({ id: type.title }),
                                         })) || []

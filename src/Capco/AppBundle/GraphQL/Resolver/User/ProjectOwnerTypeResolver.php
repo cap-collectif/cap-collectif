@@ -22,11 +22,11 @@ class ProjectOwnerTypeResolver implements ResolverInterface
     {
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
-        if ('internal' === $currentSchemaName && $data instanceof User) {
+        if (in_array($currentSchemaName, ['dev', 'internal']) && $data instanceof User) {
             return $this->typeResolver->resolve('InternalUser');
         }
 
-        if ('internal' === $currentSchemaName && $data instanceof Organization) {
+        if (in_array($currentSchemaName, ['dev', 'internal']) && $data instanceof Organization) {
             return $this->typeResolver->resolve('InternalOrganization');
         }
 

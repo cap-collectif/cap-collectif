@@ -19,6 +19,9 @@ describe('<ProjectModalCreateProject />', () => {
     const query = graphql`
         query ProjectModalCreateProjectTestQuery @relay_test_operation {
             ...ProjectModalCreateProject_query
+            viewer {
+                ...ProjectModalCreateProject_viewer
+            }
         }
     `;
 
@@ -30,20 +33,19 @@ describe('<ProjectModalCreateProject />', () => {
                 totalCount: 5,
             },
         }),
+        User: () => ({
+            id: 'VXNlcjp1c2VyMQ==',
+            username: 'lbrunet',
+            isAdmin: true,
+            isOnlyProjectAdmin: false,
+            organizations: null,
+        }),
     };
 
     beforeEach(() => {
         addsSupportForPortals();
         environment = createMockEnvironment();
         const viewerId = 'VXNlcjp1c2VyMQ==';
-        const modalInitialValues = {
-            title: '',
-            type: '1',
-            author: {
-                value: viewerId,
-                label: 'lbrunet',
-            },
-        };
         const queryVariables = {};
 
         const TestRenderer = ({ componentProps, queryVariables: variables }) => {
@@ -51,12 +53,10 @@ describe('<ProjectModalCreateProject />', () => {
             if (data) {
                 return (
                     <ProjectModalCreateProject
-                        viewerId={viewerId}
-                        isAdmin
                         query={data}
+                        viewer={data.viewer}
                         orderBy="DESC"
                         term=""
-                        initialValues={modalInitialValues}
                         hasProjects={false}
                         {...componentProps}
                     />

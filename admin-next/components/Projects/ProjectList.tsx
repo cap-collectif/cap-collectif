@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { graphql, usePaginationFragment } from 'react-relay';
+import { graphql, useFragment, usePaginationFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
-import type { ProjectList_viewer$key } from '@relay/ProjectList_viewer.graphql';
+import type { ProjectList_projectOwner$key } from '@relay/ProjectList_projectOwner.graphql';
 import { Text, Table, Menu, Icon, CapUIIcon } from '@cap-collectif/ui';
 import ProjectItem from 'components/Projects/ProjectItem';
 import EmptyMessage from 'components/UI/Table/EmptyMessage';
 import { useLayoutContext } from 'components/Layout/Layout.context';
+import { ProjectList_viewer$key } from '@relay/ProjectList_viewer.graphql';
 
 export const PROJECT_LIST_PAGINATION = 20;
 
 export const ProjectListQuery = graphql`
-    fragment ProjectList_viewer on User
+    fragment ProjectList_projectOwner on ProjectOwner
     @argumentDefinitions(
         count: { type: "Int!" }
         cursor: { type: "String" }
@@ -38,31 +39,38 @@ export const ProjectListQuery = graphql`
     }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+    fragment ProjectList_viewer on User {
+        isAdmin
+        isAdminOrganization
+        ...ProjectItem_viewer
+    }
+`;
+
 interface ProjectListProps {
     viewer: ProjectList_viewer$key;
+    projectOwner: ProjectList_projectOwner$key;
     term: string;
     orderBy: string;
-    isAdmin: boolean;
-    isAdminOrganization?: boolean;
-    isSuperAdmin?: boolean;
-    isOnlyProjectAdmin?: boolean;
     resetTerm: () => void;
     setOrderBy: (orderBy: 'DESC' | 'ASC') => void;
 }
 
 const ProjectList: React.FC<ProjectListProps> = ({
-    viewer,
+    viewer: viewerRef,
+    projectOwner,
     term,
-    isAdmin,
-    isAdminOrganization,
     resetTerm,
     orderBy,
     setOrderBy,
-    isSuperAdmin,
-    isOnlyProjectAdmin,
 }) => {
     const intl = useIntl();
-    const { data, loadNext, hasNext, refetch } = usePaginationFragment(ProjectListQuery, viewer);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
+    const { isAdmin, isAdminOrganization } = viewer;
+    const { data, loadNext, hasNext, refetch } = usePaginationFragment(
+        ProjectListQuery,
+        projectOwner,
+    );
     const { projects } = data;
     const firstRendered = React.useRef<true | null>(null);
     const { contentRef } = useLayoutContext();
@@ -154,9 +162,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
                                     <ProjectItem
                                         project={project}
                                         connectionName={projects.__id}
-                                        isSuperAdmin={isSuperAdmin}
-                                        isAdmin={isAdmin}
-                                        isOnlyProjectAdmin={isOnlyProjectAdmin}
+                                        viewer={viewer}
                                     />
                                 </Table.Tr>
                             ),

@@ -74,7 +74,6 @@ class ProjectPersister
             $arguments = $this->getRestrictedViewerGroups($arguments);
         }
 
-        $project = (new Project())->setOwner($viewer);
         $previousDistricts = [];
         if ($editMode) {
             $project = $this->getProject($arguments, $input->offsetGet('projectId'), $viewer);

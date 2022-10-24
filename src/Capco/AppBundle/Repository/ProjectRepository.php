@@ -128,7 +128,7 @@ class ProjectRepository extends EntityRepository
 
     public function getByOwnerQueryBuilder(ProjectOwner $owner, ?User $viewer = null): QueryBuilder
     {
-        return $this->getProjectsViewerCanSeeQueryBuilder($viewer)
+        return $this->createQueryBuilder('p')
             ->leftJoin(($owner instanceof User) ? 'p.owner' : 'p.organizationOwner', 'o')
             ->andWhere('o.id = :ownerId')
             ->setParameter('ownerId', $owner->getId())

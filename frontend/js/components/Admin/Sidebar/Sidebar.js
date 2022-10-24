@@ -42,6 +42,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
   const isAdmin = user ? user.isAdmin : false;
   const isSuperAdmin = user ? user.isSuperAdmin : false;
   const isProjectAdmin = user ? user.isProjectAdmin : false;
+  const isOrganizationMember = user?.isOrganizationMember ?? false;
   let defaultAccordion = defaultAccordeon || '';
   if (!defaultAccordeon) {
     const keys = Object.keys(URL_MAP);
@@ -171,7 +172,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
-            {isAdmin || isProjectAdmin ? (
+            {isAdmin || isProjectAdmin || isOrganizationMember ? (
               <SidebarAccordionItem id="contenus">
                 <SidebarButton
                   icon={ICON_NAME.FOLDER_O}
@@ -188,8 +189,8 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                   {isAdmin && (
                     <SidebarLink text="admin.label.theme" href="/admin/capco/app/theme/list" />
                   )}
-                  {(isAdmin || isProjectAdmin) && (
-                    <SidebarLink text="admin.label.post" href="/admin-next/posts" />
+                  {(isAdmin || isProjectAdmin || isOrganizationMember) && (
+                      <SidebarLink text="admin.label.post" href="/admin-next/posts" />
                   )}
                   {features.calendar && (
                     <SidebarLink text="admin.label.events" href="/admin-next/events" />
@@ -204,7 +205,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
-            {isAdmin || isProjectAdmin ? (
+            {isAdmin || isProjectAdmin || isOrganizationMember ? (
               <SidebarAccordionItem id="projets">
                 <SidebarButton
                   icon={ICON_NAME.BOOK_STAR_O}

@@ -22,9 +22,11 @@ import ProjectModalConfirmationDelete from 'components/Projects/ProjectModalConf
 import ProjectModalExportSteps from 'components/Projects/ProjectModalExportSteps';
 import DuplicateProjectMutation from 'mutations/DuplicateProjectMutation';
 import { mutationErrorToast } from 'utils/mutation-error-toast';
+import { ProjectItem_viewer$key } from '@relay/ProjectItem_viewer.graphql';
 
 interface ProjectItemProps {
     project: ProjectItem_project$key;
+    viewer: ProjectItem_viewer$key;
     connectionName: string;
     isSuperAdmin?: boolean;
     isOnlyProjectAdmin?: boolean;
@@ -32,7 +34,7 @@ interface ProjectItemProps {
     isAdminOrganization?: boolean;
 }
 
-const FRAGMENT = graphql`
+const PROJECT_FRAGMENT = graphql`
     fragment ProjectItem_project on Project {
         id
         title
@@ -66,6 +68,19 @@ const FRAGMENT = graphql`
     }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+    fragment ProjectItem_viewer on User {
+        id
+        isOnlyProjectAdmin
+        isAdmin
+        isAdminOrganization
+        isSuperAdmin
+        organizations {
+            id
+        }
+    }
+`;
+
 const onDuplicate = (
     intl: IntlShape,
     duplicatedProject: ProjectItem_project,
@@ -92,14 +107,18 @@ const onDuplicate = (
 };
 const ProjectItem: React.FC<ProjectItemProps> = ({
     project: projectFragment,
+    viewer: viewerFragment,
     connectionName,
-    isSuperAdmin,
-    isOnlyProjectAdmin,
-    isAdmin,
-    isAdminOrganization,
 }) => {
-    const project = useFragment(FRAGMENT, projectFragment);
+    const project = useFragment(PROJECT_FRAGMENT, projectFragment);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+    const { isOnlyProjectAdmin, isAdmin, isAdminOrganization, isSuperAdmin } = viewer;
     const intl = useIntl();
+
+    const viewerBelongsToAnOrganization = viewer.organizations?.length ?? 0 > 0;
+    const canDelete = viewerBelongsToAnOrganization
+        ? viewer?.isAdminOrganization || viewer.id === project.creator?.id
+        : true;
 
     return (
         <React.Fragment>
@@ -203,10 +222,12 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                                 <Text> {intl.formatMessage({ id: 'duplicate' })} </Text>
                             </Menu.Item>
                         )}
-                        <ProjectModalConfirmationDelete
-                            project={project}
-                            connectionName={connectionName}
-                        />
+                        {canDelete && (
+                            <ProjectModalConfirmationDelete
+                                project={project}
+                                connectionName={connectionName}
+                            />
+                        )}
                     </Menu.List>
                 </Menu>
             </Table.Td>

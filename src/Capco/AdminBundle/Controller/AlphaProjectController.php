@@ -131,6 +131,14 @@ class AlphaProjectController extends \Sonata\AdminBundle\Controller\CRUDControll
         ]);
     }
 
+    public function editAction($deprecatedId = null)
+    {
+        if (!$this->isGranted(ProjectVoter::EDIT, $this->admin->getSubject())) {
+            throw $this->createAccessDeniedException();
+        }
+        return parent::editAction($deprecatedId);
+    }
+
     private function throwIfNoAccess()
     {
         if (!$this->isGranted(ProjectVoter::VIEW, $this->admin->getSubject())) {

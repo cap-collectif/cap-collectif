@@ -1340,6 +1340,10 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable
             return true;
         }
 
+        if ($viewer && $this->organizationOwner) {
+            return $viewer->isMemberOfOrganization($this->organizationOwner);
+        }
+
         $isOwner = $this->owner && $this->owner === $viewer;
         if (
             $viewer &&

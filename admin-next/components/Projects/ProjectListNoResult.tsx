@@ -2,34 +2,32 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { Heading, Flex, Text, SpotIcon, CapUISpotIcon, CapUISpotIconSize } from '@cap-collectif/ui';
 import type { ProjectModalCreateProject_query$key } from '@relay/ProjectModalCreateProject_query.graphql';
-import ProjectModalCreateProject, { Author } from './ProjectModalCreateProject';
+import ProjectModalCreateProject from './ProjectModalCreateProject';
+import { graphql, useFragment } from 'react-relay';
+import { ProjectListNoResult_viewer$key } from '@relay/ProjectListNoResult_viewer.graphql';
 
 export interface ProjectListNoResultProps {
-    viewerId: string;
-    isAdmin: boolean;
     orderBy: string;
     term: string;
     query: ProjectModalCreateProject_query$key;
-    modalInitialValues: {
-        title: string;
-        author?: Author;
-        type?: string;
-    };
-    isOnlyProjectAdmin: boolean;
+    viewer: ProjectListNoResult_viewer$key;
     hasProjects: boolean;
 }
 
+const VIEWER_FRAGMENT = graphql`
+    fragment ProjectListNoResult_viewer on User {
+        ...ProjectModalCreateProject_viewer
+    }
+`;
 const ProjectListNoResult: React.FC<ProjectListNoResultProps> = ({
     query,
-    isAdmin,
+    viewer: viewerRef,
     orderBy,
     term,
-    modalInitialValues,
-    viewerId,
-    isOnlyProjectAdmin,
     hasProjects,
 }) => {
     const intl = useIntl();
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
 
     return (
         <Flex
@@ -48,13 +46,10 @@ const ProjectListNoResult: React.FC<ProjectListNoResultProps> = ({
                 </Heading>
                 <Text mb={8}>{intl.formatMessage({ id: 'project.first.description' })}</Text>
                 <ProjectModalCreateProject
-                    viewerId={viewerId}
-                    isAdmin={isAdmin}
                     orderBy={orderBy}
                     term={term}
                     query={query}
-                    initialValues={modalInitialValues}
-                    isOnlyProjectAdmin={isOnlyProjectAdmin}
+                    viewer={viewer}
                     noResult
                     hasProjects={hasProjects}
                 />

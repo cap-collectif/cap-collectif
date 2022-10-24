@@ -3581,6 +3581,11 @@ input CreateProjectInput {
 
   """The uuid of the locale of this project, null if none"""
   locale: ID
+
+  """
+  ID of the owner of the project, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
   clientMutationId: String
 }
 
