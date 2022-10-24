@@ -4,3 +4,10 @@ DevMutation:
         - InternalMutation
     config:
         name: Mutation
+#        fields:
+#            exampleFakeMutation:
+#                builder: 'Relay::Mutation'
+#                builderConfig:
+#                    inputType: UpdateProfileInput
+#                    payloadType: InternalUser!
+#                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Dev\\ExampleFakeMutation", [value])'

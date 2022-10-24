@@ -5,3 +5,11 @@ DevQuery:
     config:
         name: Query
         description: 'Root of the schema'
+#        fields:
+#            exampleFake:
+#                type: '[InternalUser!]!'
+#                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Dev\\ExampleFakeResolver")'
+#            exampleFakePaginated:
+#                type: 'InternalUserConnection!'
+#                argsBuilder: 'Relay::ForwardConnection'
+#                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Dev\\ExampleFakePaginatedResolver", [args])'
