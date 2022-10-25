@@ -26,9 +26,9 @@ class SectionProject
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private $project;
+    private Project $project;
 
     /**
      * @ORM\Column(type="integer")
