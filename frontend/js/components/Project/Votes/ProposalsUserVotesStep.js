@@ -75,7 +75,7 @@ export const ProposalsUserVotesStep = ({
       votesHelpText = `${votesHelpText} ${intl.formatMessage(
         { id: 'publish-ballot-date-help-text' },
         {
-          date: moment(step.publishedVoteDate).format('MM/DD/YYYY'),
+          date: moment(step.publishedVoteDate).format('DD/MM/YYYY'),
           time: moment(step.publishedVoteDate).format('HH:mm'),
         },
       )}`;
@@ -84,7 +84,7 @@ export const ProposalsUserVotesStep = ({
       votesHelpText = `${votesHelpText} ${step.votesHelpText}`;
     }
     return votesHelpText;
-  }
+  };
   const votesHelpText = getVoteHelpWording();
 
   return (
