@@ -6,13 +6,13 @@ use Behat\Mink\Session;
 
 trait AdminTrait
 {
-    use AdminProposalTrait;
     use AdminContactListTrait;
+    use AdminPageTrait;
+    use AdminProjectDistrictTrait;
     use AdminProposalFormTrait;
+    use AdminProposalTrait;
     use AdminQuestionnaireTrait;
     use AdminUserTrait;
-    use AdminProjectDistrictTrait;
-    use AdminPageTrait;
 
     /**
      * @When I go to the admin proposals list page
@@ -28,14 +28,6 @@ trait AdminTrait
     public function iGoToTheAdminAuthentificationPage()
     {
         $this->visitPageWithParams('admin proposal list page');
-    }
-
-    /**
-     * @When I click the create merge button
-     */
-    public function iClickTheMergeButton()
-    {
-        $this->getCurrentPage()->clickCreateProposalMergeButton();
     }
 
     /**
@@ -56,39 +48,7 @@ trait AdminTrait
         $this->iWait(3);
         $this->getSession()
             ->getPage()
-            ->find('css', "${element}-menuList .react-select__option:nth-child($number)")
-            ->click();
-    }
-
-    /**
-     * @When I fill the proposal merge form
-     */
-    public function iFillTheProposalMergeForm()
-    {
-        // Select the project "Dépot avec selection vote budget"
-        $this->getSession()
-            ->getPage()
-            ->find('css', '#ProposalFusionForm-project .react-select__input input')
-            ->setValue('UHJvamVjdDpwcm9qZWN0Nw==');
-        $this->iWait(5);
-        
-        $this->getSession()
-            ->getPage()
-            ->find('css', '#ProposalFusionForm-fromProposals')
-            ->click();
-        $searchInput = $this->getSession()
-            ->getPage()
-            ->find('css', '#ProposalFusionForm-fromProposals .react-select__input input');
-        $searchInput->setValue('');
-        $this->iWait(3);
-        $this->getSession()
-            ->getPage()
-            ->find('css', "#ProposalFusionForm-fromProposals")
-            ->click();
-        $this->iWait(3);
-        $this->getSession()
-            ->getPage()
-            ->find('css', "#ProposalFusionForm-fromProposals-menuList .react-select__option:first-child")
+            ->find('css', "${element}-menuList .react-select__option:nth-child(${number})")
             ->click();
     }
 
@@ -104,15 +64,6 @@ trait AdminTrait
                 $url
             )
         )->toBe(1);
-    }
-
-    /**
-     * @When I submit the create merge form
-     */
-    public function iSubmitTheCreateMergeForm()
-    {
-        $this->getCurrentPage()->clickSubmitProposalMergeButton();
-        $this->iWait(3);
     }
 
     /**

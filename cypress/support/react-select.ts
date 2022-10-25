@@ -11,3 +11,7 @@ Cypress.Commands.add('selectReactSelectOption', (selector: string, query: string
 Cypress.Commands.add('selectReactSetOption', (selector: string, query: string) => {
   cy.get(`${selector} .react-select__input input`).focus().type(`${query} {enter}`, { force: true })
 })
+
+Cypress.Commands.add('selectReactSelectFirstOption', (selector: string) => {
+  cy.get(`${selector} .react-select__option:first-child`).click({ force: true })
+})
