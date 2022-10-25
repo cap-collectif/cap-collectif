@@ -3,8 +3,11 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Repository\CommentRepository;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Security\LoginManagerInterface;
+use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -27,6 +30,9 @@ class ConfirmationController extends Controller
     private UserRepository $userRepo;
     private TranslatorInterface $translator;
     private Publisher $publisher;
+    private CommentRepository $commentRepository;
+    private EntityManagerInterface $em;
+    private LoggerInterface $logger;
 
     public function __construct(
         UserManager $userManager,
@@ -36,7 +42,10 @@ class ConfirmationController extends Controller
         ContributionManager $contributionManager,
         TranslatorInterface $translator,
         UserRepository $userRepo,
-        Publisher $publisher
+        Publisher $publisher,
+        CommentRepository $commentRepository,
+        EntityManagerInterface $em,
+        LoggerInterface $logger
     ) {
         $this->userManager = $userManager;
         $this->loginManager = $loginManager;
@@ -47,6 +56,9 @@ class ConfirmationController extends Controller
         $this->translator = $translator;
         $this->login = true;
         $this->publisher = $publisher;
+        $this->commentRepository = $commentRepository;
+        $this->em = $em;
+        $this->logger = $logger;
     }
 
     /**
@@ -165,6 +177,44 @@ class ConfirmationController extends Controller
         $flashBag->add(
             'success',
             $this->translator->trans('global.alert.new_email_confirmed', [], 'CapcoAppBundle')
+        );
+
+        return $response;
+    }
+
+    /**
+     * @Route("/comment/email_confirmation/{token}", name="comment_confirm_email", options={"i18n" = false})
+     */
+    public function commentConfirmAnonymousEmail(string $token): RedirectResponse
+    {
+        $response = new RedirectResponse($this->router->generate('app_homepage'));
+
+        $flashBag = $this->session->getFlashBag();
+
+        $comment = $this->commentRepository->findOneBy(['confirmationToken' => $token]);
+
+        if (!$comment) {
+            $this->logger->error(__METHOD__ . ' : comment with token: ' . $token . 'was not found');
+
+            // We could not find a comment with this token
+            $flashBag->add(
+                'error',
+                $this->translator->trans('no-token-matching-comment', [], 'CapcoAppBundle')
+            );
+
+            return $response;
+        }
+
+        $comment->setConfirmationToken(null);
+        $this->em->flush();
+
+        $flashBag->add(
+            'success',
+            $this->translator->trans(
+                'comment-email-confirm-waiting-for-moderation',
+                [],
+                'CapcoAppBundle'
+            )
         );
 
         return $response;

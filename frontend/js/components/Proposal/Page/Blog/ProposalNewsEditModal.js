@@ -14,6 +14,7 @@ import {
   hasSubmitFailed,
 } from 'redux-form';
 import { connect } from 'react-redux';
+import { Button } from '@cap-collectif/ui';
 import type { Dispatch, GlobalState } from '~/types';
 import SubmitButton from '~/components/Form/SubmitButton';
 import ProposalNewsForm, { formName } from './ProposalNewsForm';
@@ -28,7 +29,6 @@ import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale';
 import { toast } from '~ds/Toast';
 import ProposalNewsDeleteModal from '~/components/Proposal/Page/Blog/ProposalNewsDeleteModal';
 import type { DeleteProposalNewsMutationResponse } from '~relay/DeleteProposalNewsMutation.graphql';
-import Button from '~ds/Button/Button';
 
 type Props = {|
   ...ReduxFormFormProps,

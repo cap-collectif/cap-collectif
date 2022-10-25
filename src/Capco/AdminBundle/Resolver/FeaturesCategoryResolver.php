@@ -72,6 +72,7 @@ class FeaturesCategoryResolver
                     Manager::helpscout_beacon,
                     Manager::api_sendinblue,
                     Manager::unstable__organizations,
+                    Manager::moderation_comment,
                 ],
             ],
         ],

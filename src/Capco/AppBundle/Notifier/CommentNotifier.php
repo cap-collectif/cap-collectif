@@ -11,12 +11,16 @@ use Capco\AppBundle\GraphQL\Resolver\User\UserShowNotificationsPreferencesUrlRes
 use Capco\AppBundle\GraphQL\Resolver\User\UserShowUrlBySlugResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\Comment\CommentConfirmAnonymousEmailMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentModerationApprovedMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentModerationNotifAdminMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentModerationRejectedMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
@@ -278,6 +282,92 @@ class CommentNotifier extends BaseNotifier
                 }
             }
         }
+    }
+
+    public function onConfirmAnonymousEmail(Comment $comment)
+    {
+        $params = [
+            'organizationName' => $this->siteParams->getValue('global.site.organization_name'),
+            'confirmAddressLink' => $this->router->generate(
+                'comment_confirm_email',
+                ['token' => $comment->getConfirmationToken()],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ),
+        ];
+
+        $this->mailer->createAndSendMessage(
+            CommentConfirmAnonymousEmailMessage::class,
+            $comment,
+            $params,
+            null,
+            $comment->getAuthorEmail()
+        );
+    }
+
+    public function onModerationApproved(Comment $comment)
+    {
+        $authorEmail = $comment->getAuthor()
+            ? $comment->getAuthor()->getEmail()
+            : $comment->getAuthorEmail();
+
+        if (!$authorEmail) {
+            return;
+        }
+
+        $params = [
+            'organizationName' => $this->siteParams->getValue('global.site.organization_name'),
+            'commentUrl' => $this->commentShowUrlResolver->__invoke($comment),
+        ];
+
+        $this->mailer->createAndSendMessage(
+            CommentModerationApprovedMessage::class,
+            $comment,
+            $params,
+            null,
+            $authorEmail
+        );
+    }
+
+    public function onModerationRejected(Comment $comment): void
+    {
+        $authorEmail = $comment->getAuthor()
+            ? $comment->getAuthor()->getEmail()
+            : $comment->getAuthorEmail();
+
+        if (!$authorEmail) {
+            return;
+        }
+
+        $params = [
+            'organizationName' => $this->siteParams->getValue('global.site.organization_name'),
+        ];
+
+        $this->mailer->createAndSendMessage(
+            CommentModerationRejectedMessage::class,
+            $comment,
+            $params,
+            null,
+            $authorEmail
+        );
+    }
+
+    public function onModerationNotifAdmin(Comment $comment): void
+    {
+        $commentAdminUrl = $this->router->generate(
+            'admin_capco_app_comment_edit',
+            ['id' => $comment->getId()],
+            RouterInterface::ABSOLUTE_URL
+        );
+        $params = [
+            'organizationName' => $this->siteParams->getValue('global.site.organization_name'),
+            'commentAdminUrl' => $commentAdminUrl,
+        ];
+
+        $this->mailer->createAndSendMessage(
+            CommentModerationNotifAdminMessage::class,
+            $comment,
+            $params
+        );
     }
 
     private function resolveProposalUrlBySlugs(

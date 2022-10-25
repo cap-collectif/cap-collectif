@@ -84,6 +84,7 @@ class Manager
     public const api_sendinblue = 'api_sendinblue';
     public const proposal_sms_vote = 'proposal_sms_vote';
     public const unstable__organizations = 'unstable__organizations';
+    public const moderation_comment = 'moderation_comment';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -186,6 +187,7 @@ class Manager
         self::api_sendinblue,
         self::proposal_sms_vote,
         self::unstable__organizations,
+        self::moderation_comment,
     ];
 
     protected ToggleManager $toggleManager;

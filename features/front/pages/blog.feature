@@ -42,6 +42,20 @@ Scenario: Anonymous wants to comment a blogpost
   And I should see "J'ai un truc à dire" in the ".comments__section" element
 
 @database
+Scenario: Anonymous wants to comment a blogpost with moderation enabled
+  And feature moderation_comment is enabled
+  And I visited "blog article page" with:
+    | articleSlug | post-fr-2 |
+  And I wait "[name='body']" to appear on current page
+  And I fill in the following:
+    | body        | J'ai un truc à dire |
+    | authorName  | Naruto              |
+    | authorEmail | naruto72@gmail.com  |
+  When I press "comment.submit"
+  And I wait 1 seconds
+  Then I should see "confirm-email-address" in the "#global-alert-box" element
+
+@database
 Scenario: Logged in user wants to comment a blogpost
   And I am logged in as user
   And I visited "blog article page" with:

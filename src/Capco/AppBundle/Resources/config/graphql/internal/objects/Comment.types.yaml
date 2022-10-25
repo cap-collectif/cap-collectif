@@ -79,3 +79,9 @@ Comment:
             commentable:
                 type: 'Commentable'
                 resolve: '@=value.getRelatedObject()'
+            moderationStatus:
+                type: 'CommentModerationStatus!'
+                description: 'If moderation is enabled, the comment status.'
+            isEmailConfirmed:
+                type: 'Boolean!'
+                description: 'If comment is anonymous whether or not the user has confirmed his email.'

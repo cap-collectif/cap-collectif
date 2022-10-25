@@ -2428,6 +2428,18 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
 
+  """The comments not yet approved by moderators."""
+  viewerNotApprovedByModeratorComments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection
+
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
 
@@ -2459,6 +2471,14 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   viewerVote: CommentVote
   editUrl: URI
   commentable: Commentable
+
+  """If moderation is enabled, the comment status."""
+  moderationStatus: CommentModerationStatus!
+
+  """
+  If comment is anonymous whether or not the user has confirmed his email.
+  """
+  isEmailConfirmed: Boolean!
 }
 
 """A connection to a list of items."""
@@ -2480,6 +2500,18 @@ type CommentEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+"""Available moderation status for comments"""
+enum CommentModerationStatus {
+  """The comments has not been moderated yet."""
+  PENDING
+
+  """The comments has been approved by a moderator."""
+  APPROVED
+
+  """The comments has been rejected by a moderator."""
+  REJECTED
 }
 
 """Ways in which lists of comments can be ordered upon return."""
@@ -2588,6 +2620,18 @@ interface Commentable {
     first: Int = 100
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
+
+  """The comments not yet approved by moderators."""
+  viewerNotApprovedByModeratorComments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection
 }
 
 """The different available types of step."""
@@ -5860,6 +5904,18 @@ type Event implements Node & UniformResourceLocatable & Commentable {
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
 
+  """The comments not yet approved by moderators."""
+  viewerNotApprovedByModeratorComments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection
+
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
 
@@ -6343,6 +6399,9 @@ enum FeatureFlagType {
 
   """Whether or not organizations are enabled"""
   unstable__organizations
+
+  """Whether or not comment moderation is enabled"""
+  moderation_comment
 }
 
 """Require a firstname"""
@@ -9174,6 +9233,18 @@ type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocat
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
 
+  """The comments not yet approved by moderators."""
+  viewerNotApprovedByModeratorComments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection
+
   """The user that created the resource."""
   creator: User
   displayedOnBlog: Boolean!
@@ -10248,6 +10319,18 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     first: Int = 100
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
+
+  """The comments not yet approved by moderators."""
+  viewerNotApprovedByModeratorComments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection
 
   """Does the viewer already submitted a report ?"""
   viewerHasReport: Boolean!

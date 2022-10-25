@@ -3,6 +3,8 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
+use Capco\AppBundle\Toggle\Manager;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -27,7 +29,9 @@ class AddCommentMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         EventDispatcherInterface $dispatcher,
         CommentableCommentsDataLoader $commentableCommentsDataLoader,
-        RequestGuesser $requestGuesser
+        RequestGuesser $requestGuesser,
+        Manager $manager,
+        TokenGeneratorInterface $tokenGenerator
     ) {
         $requestGuesser->getClientIp()->willReturn('1.1.1.1');
 
@@ -38,7 +42,9 @@ class AddCommentMutationSpec extends ObjectBehavior
             $logger,
             $dispatcher,
             $commentableCommentsDataLoader,
-            $requestGuesser
+            $requestGuesser,
+            $manager,
+            $tokenGenerator
         );
     }
 
@@ -112,7 +118,8 @@ class AddCommentMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer,
         Proposal $commentable,
-        Form $form
+        Form $form,
+        Manager $manager
     ) {
         $formData = ['body' => 'My body'];
         $form->submit($formData, false)->willReturn(null);
@@ -129,6 +136,60 @@ class AddCommentMutationSpec extends ObjectBehavior
         $commentable->isCommentable()->willReturn(true);
         $arguments->offsetGet('commentableId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($commentable);
+        $manager->isActive(Manager::moderation_comment)->willReturn(false);
+        $viewer->isAdmin()->willReturn(true);
+        $viewer->isProjectAdmin()->willReturn(false);
+
+        $em->persist(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+        $commentableCommentsDataLoader->invalidate('123456')->shouldBeCalled();
+        $dispatcher
+            ->dispatch(
+                'capco.comment_changed',
+                Argument::type('Capco\\AppBundle\\Event\\CommentChangedEvent')
+            )
+            ->shouldBeCalled();
+
+        $payload = $this->__invoke($arguments, $viewer);
+        $payload->shouldHaveCount(2);
+        // TODO: We should use snapshot testing, because we don't test commentEdge
+        $payload->shouldBe([
+            'commentEdge' => $payload->getWrappedObject()['commentEdge'],
+            'userErrors' => [],
+        ]);
+    }
+
+    public function it_should_generate_token_for_anon_comment(
+        $commentableCommentsDataLoader,
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        GlobalIdResolver $globalIdResolver,
+        EventDispatcherInterface $dispatcher,
+        Arg $arguments,
+        Proposal $commentable,
+        Form $form,
+        Manager $manager,
+        TokenGeneratorInterface $tokenGenerator
+    ) {
+        $formData = ['body' => 'My body'];
+        $form->submit($formData, false)->willReturn(null);
+        $form->isValid()->willReturn(true);
+        $formFactory
+            ->create('Capco\\AppBundle\\Form\\CommentType', Argument::any())
+            ->willReturn($form);
+        $arguments->getArrayCopy()->willReturn($formData);
+        $commentable
+            ->addComment(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))
+            ->willReturn($commentable);
+
+        $viewer = null;
+
+        $commentable->acceptNewComments()->willReturn(true);
+        $commentable->isCommentable()->willReturn(true);
+        $arguments->offsetGet('commentableId')->willReturn('123456');
+        $globalIdResolver->resolve('123456', $viewer)->willReturn($commentable);
+        $manager->isActive(Manager::moderation_comment)->willReturn(true);
+        $tokenGenerator->generateToken()->shouldBeCalledOnce();
 
         $em->persist(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))->shouldBeCalled();
         $em->flush()->shouldBeCalled();

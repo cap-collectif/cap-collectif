@@ -16,6 +16,7 @@ trait CommentableRepositoryTrait
         $qb = $this->getByCommentableIdsQueryBuilder($type, $commentableIds, true, $viewer)
             ->select('p.id as commentable_id, count(c.id) AS totalCount')
             ->groupBy('p.id');
+        $qb->andWhere("c.moderationStatus = 'APPROVED'");
 
         return $qb
             ->getQuery()
@@ -30,6 +31,7 @@ trait CommentableRepositoryTrait
     ): array {
         $qb = $this->getByCommentableIdsQueryBuilder($type, $ids, false, $viewer)
             ->select('p.id as commentable_id, count(c.id) AS totalCount')
+            ->andWhere("c.moderationStatus = 'APPROVED'")
             ->groupBy('p.id');
 
         return $qb
@@ -50,6 +52,8 @@ trait CommentableRepositoryTrait
         $qb = $this->getByCommentableIdsQueryBuilder($type, $commentableIds, true, $viewer);
         // Pinned always come first
         $qb->addOrderBy('c.pinned', 'DESC');
+
+        $qb->andWhere("c.moderationStatus = 'APPROVED'");
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('c.publishedAt', $direction);

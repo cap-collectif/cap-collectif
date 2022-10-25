@@ -66,6 +66,38 @@ class EventCommentRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getViewerPendingModerationComments(
+        Event $event,
+        User $user,
+        ?int $offset = null,
+        ?int $limit = null
+    ): array {
+        $qb = $this->createQueryBuilder('c')
+            ->where("c.moderationStatus = 'PENDING'")
+            ->andWhere('c.Event = :event')
+            ->andWhere('c.author = :user')
+            ->setParameters([
+                'event' => $event,
+                'user' => $user,
+            ]);
+
+        $qb->setFirstResult($offset)->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countViewerPendingModerationComments(Event $event, User $user): int
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->where("c.moderationStatus = 'PENDING'")
+            ->andWhere('c.Event = :event')
+            ->andWhere('c.author = :user')
+            ->setParameters(['event' => $event, 'user' => $user]);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder
     {
         return $this->getPublishedQueryBuilder($viewer)->andWhere('c.trashedStatus IS NULL');

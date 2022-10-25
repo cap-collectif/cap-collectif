@@ -11,19 +11,11 @@ type Props = {|
   +commentable: CommentListViewPaginated_commentable,
   +highlightedComment: ?string,
   +useBodyColor: boolean,
-  +unstable__enableCapcoUiDs?: boolean,
 |};
 
 export class CommentListViewPaginated extends React.Component<Props> {
   render() {
-    const {
-      intl,
-      commentable,
-      relay,
-      highlightedComment,
-      useBodyColor,
-      unstable__enableCapcoUiDs,
-    } = this.props;
+    const { intl, commentable, relay, highlightedComment, useBodyColor } = this.props;
     if (!commentable.comments || commentable.comments.totalCount === 0) {
       return null;
     }
@@ -42,7 +34,6 @@ export class CommentListViewPaginated extends React.Component<Props> {
                 comment={node}
                 useBodyColor={useBodyColor}
                 isHighlighted={node.id === highlightedComment}
-                unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
               />
             ))}
         {relay.hasMore() && (
@@ -67,12 +58,12 @@ export default createPaginationContainer(
   {
     commentable: graphql`
       fragment CommentListViewPaginated_commentable on Commentable
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 100 }
-          cursor: { type: "String" }
-          orderBy: { type: "CommentOrder!" }
-          isAuthenticated: { type: "Boolean!" }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 100 }
+        cursor: { type: "String" }
+        orderBy: { type: "CommentOrder!" }
+        isAuthenticated: { type: "Boolean!" }
+      ) {
         id
         comments(first: $count, after: $cursor, orderBy: $orderBy)
           @connection(key: "CommentListViewPaginated_comments", filters: ["orderBy"]) {

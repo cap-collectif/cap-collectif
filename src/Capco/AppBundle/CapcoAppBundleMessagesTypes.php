@@ -15,6 +15,7 @@ final class CapcoAppBundleMessagesTypes
     public const COMMENT_CREATE = 'comment.create';
     public const COMMENT_DELETE = 'comment.delete';
     public const COMMENT_UPDATE = 'comment.update';
+    public const COMMENT_CONFIRM_ANONYMOUS_EMAIL = 'comment.confirm_anonymous_email';
 
     public const PROPOSAL_CREATE = 'proposal.create';
     public const PROPOSAL_DELETE = 'proposal.delete';

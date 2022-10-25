@@ -2,7 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Enum\ModerationStatus;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
@@ -39,6 +43,8 @@ class AddCommentMutation implements MutationInterface
     private EventDispatcherInterface $eventDispatcher;
     private CommentableCommentsDataLoader $commentableCommentsDataLoader;
     private RequestGuesser $requestGuesser;
+    private Manager $manager;
+    private TokenGeneratorInterface $tokenGenerator;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -47,7 +53,9 @@ class AddCommentMutation implements MutationInterface
         LoggerInterface $logger,
         EventDispatcherInterface $dispatcher,
         CommentableCommentsDataLoader $commentableCommentsDataLoader,
-        RequestGuesser $requestGuesser
+        RequestGuesser $requestGuesser,
+        Manager $manager,
+        TokenGeneratorInterface $tokenGenerator
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -56,6 +64,8 @@ class AddCommentMutation implements MutationInterface
         $this->eventDispatcher = $dispatcher;
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
         $this->requestGuesser = $requestGuesser;
+        $this->manager = $manager;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function __invoke(Arg $input, /*User|string*/ $viewer): array
@@ -102,11 +112,20 @@ class AddCommentMutation implements MutationInterface
             $comment = new PostComment();
         }
 
+        $isModerationEnabled = $this->manager->isActive(Manager::moderation_comment);
+
         $comment
             ->setAuthor($viewer)
             ->setAuthorIp($this->requestGuesser->getClientIp())
             ->setRelatedObject($relatedCommentInstance)
             ->setParent($commentable instanceof Comment ? $commentable : null);
+
+        $this->setModerationStatus($comment, $isModerationEnabled, $viewer);
+
+        if (!$viewer && $isModerationEnabled) {
+            $token = $this->tokenGenerator->generateToken();
+            $comment->setConfirmationToken($token);
+        }
 
         $values = $input->getArrayCopy();
         unset($values['commentableId']);
@@ -127,6 +146,44 @@ class AddCommentMutation implements MutationInterface
             new CommentChangedEvent($comment, 'add')
         );
 
+        if (!$viewer && $isModerationEnabled) {
+            $this->eventDispatcher->dispatch(
+                CapcoAppBundleEvents::COMMENT_CHANGED,
+                new CommentChangedEvent($comment, 'confirm_anonymous_email')
+            );
+        }
+
         return ['commentEdge' => $edge, 'userErrors' => []];
+    }
+
+    private function setModerationStatus(
+        Comment $comment,
+        bool $isModerationEnabled,
+        ?User $viewer = null
+    ): void {
+
+        if (!$isModerationEnabled) {
+            $comment->approve();
+            return;
+        }
+
+        if (!$viewer) {
+            return;
+        }
+
+        if ($viewer->isAdmin()) {
+            $comment->approve();
+            return;
+        }
+
+        $doesRelatedObjectBelongsToProjectAdmin = $comment->doesRelatedObjectBelongsToProjectAdmin(
+            $viewer
+        );
+        if ($doesRelatedObjectBelongsToProjectAdmin) {
+            $comment->approve();
+            return;
+        }
+
+        $comment->setPending();
     }
 }

@@ -66,6 +66,38 @@ class PostCommentRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getViewerPendingModerationComments(
+        Post $post,
+        User $user,
+        ?int $offset = null,
+        ?int $limit = null
+    ): array {
+        $qb = $this->createQueryBuilder('c')
+            ->where("c.moderationStatus = 'PENDING'")
+            ->andWhere('c.post = :post')
+            ->andWhere('c.author = :user')
+            ->setParameters([
+                'post' => $post,
+                'user' => $user,
+            ]);
+
+        $qb->setFirstResult($offset)->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countViewerPendingModerationComments(Post $post, User $user): int
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->where("c.moderationStatus = 'PENDING'")
+            ->andWhere('c.post = :post')
+            ->andWhere('c.author = :user')
+            ->setParameters(['post' => $post, 'user' => $user]);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder
     {
         return $this->getPublishedQueryBuilder($viewer)->andWhere('c.trashedStatus IS NULL');

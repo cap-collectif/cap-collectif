@@ -308,6 +308,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "moderationStatus",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
                                     "concreteType": "User",
                                     "kind": "LinkedField",
                                     "name": "author",
@@ -371,6 +378,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                         "args": null,
                                         "kind": "ScalarField",
                                         "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isAdmin",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -521,6 +535,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                     "alias": null,
                                                     "args": null,
                                                     "kind": "ScalarField",
+                                                    "name": "isAdmin",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
                                                     "name": "slug",
                                                     "storageKey": null,
                                                   },
@@ -560,6 +581,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                 "args": null,
                                                 "kind": "ScalarField",
                                                 "name": "updatedAt",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "moderationStatus",
                                                 "storageKey": null,
                                               },
                                               Object {
@@ -1778,7 +1806,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "f3fcdcb7506a6ce5c596e269cf1d429c",
+            "cacheID": "62ade5d2ec2373c3ebfc5affc72389ac",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashQuery",
@@ -1857,7 +1885,9 @@ fragment CommentDate_comment on Comment {
 fragment CommentEdit_comment_39ngnn on Comment {
   id
   contribuable
+  moderationStatus
   author {
+    isAdmin
     isViewer @include(if: $isAuthenticated)
     id
   }
@@ -1870,6 +1900,7 @@ fragment CommentForm_commentable on Commentable {
 }
 
 fragment CommentInfos_comment on Comment {
+  moderationStatus
   pinned
   author {
     ...UserLink_user
@@ -1946,8 +1977,10 @@ fragment CommentVoteButton_comment_39ngnn on Comment {
 
 fragment Comment_comment_39ngnn on Comment {
   id
+  moderationStatus
   author {
     ...UserAvatar_user
+    isViewer @include(if: $isAuthenticated)
     vip
     displayName
     media {

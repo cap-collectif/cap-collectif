@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Enum\ModerationStatus;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
@@ -121,6 +122,16 @@ abstract class Comment implements
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Comment", cascade={"persist", "remove"})
      */
     protected $Reports;
+
+    /**
+     * @ORM\Column(name="moderation_status", type="string", options={"default": "PENDING"})
+     */
+    protected string $moderationStatus = ModerationStatus::PENDING;
+
+    /**
+     * @ORM\Column(name="confirmation_token", type="string", nullable=true)
+     */
+    protected ?string $confirmationToken = null;
 
     public function __construct()
     {
@@ -360,6 +371,103 @@ abstract class Comment implements
     public function isUserAuthor(?User $user = null): bool
     {
         return $user === $this->author;
+    }
+
+    public function getModerationStatus(): string
+    {
+        return $this->moderationStatus;
+    }
+
+    public function setModerationStatus($moderationStatus): self
+    {
+        $this->moderationStatus = $moderationStatus;
+
+        return $this;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken = null): self
+    {
+        $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function isEmailConfirmed(): bool
+    {
+        return null === $this->confirmationToken;
+    }
+
+    public function doesRelatedObjectBelongsToProjectAdmin(User $viewer): bool
+    {
+        if (!$viewer->isProjectAdmin()) {
+            return false;
+        }
+        if ($this instanceof ProposalComment) {
+            $project = $this->getProject();
+            return $project && $project->isAuthor($viewer);
+        }
+        if ($this instanceof EventComment) {
+            return $this->getEvent()->getAuthor() === $viewer;
+        }
+        if ($this instanceof PostComment) {
+            $post = $this->getPost();
+            return $post && $post->isAuthor($viewer);
+        }
+
+        return false;
+    }
+
+    public function trash(): self
+    {
+        $this->setTrashedAt(new \DateTime());
+        $this->setTrashedStatus(Trashable::STATUS_VISIBLE);
+
+        return $this;
+    }
+
+    public function publish(): self
+    {
+        $this->setPublishedAt(new \DateTime());
+
+        return $this;
+    }
+
+    public function isApproved(): bool
+    {
+        return $this->moderationStatus === ModerationStatus::APPROVED;
+    }
+
+    public function isRejected(): bool
+    {
+        return $this->moderationStatus === ModerationStatus::REJECTED;
+    }
+
+    public function isPending(): bool
+    {
+        return $this->moderationStatus === ModerationStatus::PENDING;
+    }
+
+    public function approve(): self
+    {
+        $this->moderationStatus = ModerationStatus::APPROVED;
+        return $this;
+    }
+
+    public function setPending(): self
+    {
+        $this->moderationStatus = ModerationStatus::PENDING;
+        return $this;
+    }
+
+    public function reject(): self
+    {
+        $this->moderationStatus = ModerationStatus::REJECTED;
+        return $this;
     }
 
     // ********************** Abstract methods **********************************

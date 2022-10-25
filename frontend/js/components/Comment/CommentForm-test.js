@@ -11,6 +11,7 @@ const props = {
   comment: 'test of comment',
   commentable: { $refType, id: 'proposal1' },
   intl: intlMock,
+  isModerationEnabled: false,
 };
 
 const userProps = {

@@ -131,6 +131,36 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: comment_delete
+        comment_confirm_anonymous_email:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: comment_confirm_anonymous_email
+        comment_moderation_approved:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: comment_moderation_approved
+        comment_moderation_rejected:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: comment_moderation_rejected
+        comment_moderation_notif_admin:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: comment_moderation_notif_admin
+        user_confirmation_email_participation:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: user_confirmation_email_participation
         proposal_analysis_comment_create:
             durable: true
             retries: [25, 125, 625]

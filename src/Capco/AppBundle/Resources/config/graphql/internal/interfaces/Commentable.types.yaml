@@ -15,3 +15,12 @@ Commentable:
                     orderBy:
                         type: 'CommentOrder'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
+            viewerNotApprovedByModeratorComments:
+                description: 'The comments not yet approved by moderators.'
+                type: 'CommentConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\ViewerNotApprovedByModeratorCommentsResolver", [value, args, getUser()])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    orderBy:
+                        type: 'CommentOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }

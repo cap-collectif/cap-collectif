@@ -10,8 +10,10 @@ const defaultComment = {
   $refType,
   editUrl: 'https://aa.com/',
   contribuable: true,
+  moderationStatus: 'APPROVED',
   author: {
     isViewer: true,
+    isAdmin: false,
   },
 };
 const defaultProps = {
@@ -42,6 +44,7 @@ describe('<CommentEdit />', () => {
         ...defaultComment,
         author: {
           isViewer: false,
+          isAdmin: false,
         },
       },
     };

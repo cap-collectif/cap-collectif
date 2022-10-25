@@ -29,6 +29,7 @@ export class CommentSection extends React.Component<Props> {
                   allComments: comments(first: 0) {
                     totalCountWithAnswers
                   }
+                  ...CommentListNotApprovedByModerator_commentable
                   ...CommentListView_commentable @arguments(isAuthenticated: $isAuthenticated)
                   ...CommentForm_commentable
                 }

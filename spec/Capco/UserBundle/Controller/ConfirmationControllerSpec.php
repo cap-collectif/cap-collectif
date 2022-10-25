@@ -2,10 +2,15 @@
 
 namespace spec\Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Repository\CommentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
+use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Router;
 use FOS\UserBundle\Security\LoginManager;
 use Capco\UserBundle\Doctrine\UserManager;
@@ -14,6 +19,7 @@ use Capco\AppBundle\Manager\ContributionManager;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Capco\UserBundle\Controller\ConfirmationController;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConfirmationControllerSpec extends ObjectBehavior
@@ -26,7 +32,10 @@ class ConfirmationControllerSpec extends ObjectBehavior
         ContributionManager $contributionManager,
         TranslatorInterface $translator,
         UserRepository $userRepo,
-        Publisher $publisher
+        Publisher $publisher,
+        CommentRepository $commentRepository,
+        EntityManagerInterface $em,
+        LoggerInterface $logger
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -36,7 +45,10 @@ class ConfirmationControllerSpec extends ObjectBehavior
             $contributionManager,
             $translator,
             $userRepo,
-            $publisher
+            $publisher,
+            $commentRepository,
+            $em,
+            $logger
         );
         $this->login = false;
     }
@@ -235,4 +247,33 @@ class ConfirmationControllerSpec extends ObjectBehavior
             $contributionManager
         );
     }
+
+    public function it_should_confirm_anon_comment_email(
+        RouterInterface $router,
+        SessionInterface $session,
+        CommentRepository $commentRepository,
+        TranslatorInterface $translator,
+        Comment $comment,
+        EntityManagerInterface $em,
+        FlashBagInterface $flashBag
+    )
+    {
+        $token = 'token';
+        $router->generate('app_homepage')->shouldBeCalledOnce()->willReturn('/');
+        $session->getFlashBag()->willReturn($flashBag);
+        $commentRepository->findOneBy(['confirmationToken' => $token])->willReturn($comment);
+        $comment->setConfirmationToken(null)->shouldBeCalledOnce();
+        $em->flush()->shouldBeCalledOnce();
+        $message = 'message';
+        $translator->trans(
+            'comment-email-confirm-waiting-for-moderation',
+            [],
+            'CapcoAppBundle'
+        )->shouldBeCalledOnce()->willReturn($message);
+        $flashBag->add('success', $message)->shouldBeCalledOnce();
+
+        $this->commentConfirmAnonymousEmail($token);
+    }
+
+
 }

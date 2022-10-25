@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\GraphQL\Resolver\User\UserConfirmNewEmailUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationParticipationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
@@ -121,6 +122,22 @@ final class UserNotifier extends BaseNotifier
             UserAccountConfirmationReminderMessage::class,
             $user,
             ['confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke($user)],
+            $user
+        );
+    }
+
+    public function onAccountConfirmationParticipation(User $user): void
+    {
+        $this->mailer->createAndSendMessage(
+            UserAccountConfirmationParticipationMessage::class,
+            $user,
+            [
+                'confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke(
+                    $user
+                ),
+                'organizationName' => $this->siteParams->getValue('global.site.organization_name'),
+                'platformName' => $this->siteParams->getValue('global.site.fullname'),
+            ],
             $user
         );
     }

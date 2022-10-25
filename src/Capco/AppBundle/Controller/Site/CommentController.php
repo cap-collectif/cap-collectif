@@ -4,10 +4,12 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Enum\ModerationStatus;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType as CommentForm;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\Manager\CommentResolver;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -16,7 +18,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -29,6 +30,7 @@ class CommentController extends Controller
     private TranslatorInterface $translator;
     private EntityManagerInterface $em;
     private SessionInterface $session;
+    private Manager $manager;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
@@ -36,7 +38,8 @@ class CommentController extends Controller
         CommentResolver $commentResolver,
         TranslatorInterface $translator,
         EntityManagerInterface $em,
-        SessionInterface $session
+        SessionInterface $session,
+        Manager $manager
     ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
@@ -44,6 +47,7 @@ class CommentController extends Controller
         $this->translator = $translator;
         $this->em = $em;
         $this->session = $session;
+        $this->manager = $manager;
     }
 
     /**
@@ -61,6 +65,22 @@ class CommentController extends Controller
         if (false === $comment->canContribute($this->getUser())) {
             throw new ProjectAccessDeniedException(
                 $this->translator->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
+            );
+        }
+
+        $isAuthorAdmin = $comment->getAuthor() ? $comment->getAuthor()->isAdmin() : false;
+        $isModerationEnabled = $this->manager->isActive(Manager::moderation_comment);
+        if (
+            $isModerationEnabled &&
+            $comment->isApproved() &&
+            !$isAuthorAdmin
+        ) {
+            throw new ProjectAccessDeniedException(
+                $this->translator->trans(
+                    'cannot-edit-already-approved-comment',
+                    [],
+                    'CapcoAppBundle'
+                )
             );
         }
 

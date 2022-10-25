@@ -30,6 +30,7 @@ type StateProps = {|
   +comment: ?string,
   +user: ?Object,
   +dispatch: Dispatch,
+  +isModerationEnabled: ?boolean,
 |};
 
 type AfterConnectProps = {| ...RelayProps, ...OwnProps, ...StateProps |};
@@ -51,7 +52,7 @@ type FormValues = {|
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { commentable, user, reset } = props;
+  const { commentable, user, reset, isModerationEnabled } = props;
 
   if (user) {
     delete values.authorName;
@@ -71,7 +72,19 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       ) {
         throw new Error('Mutation "addComment" failed');
       }
+
+      const comment = response.addComment.commentEdge?.node;
+      const isAuthorAnonymous = !comment?.author?.id && comment?.authorEmail;
       reset();
+
+      if (isAuthorAnonymous && isModerationEnabled) {
+        FluxDispatcher.dispatch({
+          actionType: 'UPDATE_ALERT',
+          alert: { bsStyle: 'success', content: 'confirm-email-address' },
+        });
+        return;
+      }
+
       FluxDispatcher.dispatch({
         actionType: 'UPDATE_ALERT',
         alert: { bsStyle: 'success', content: 'comment.submit_success' },
@@ -271,6 +284,7 @@ const mapStateToProps = (state: GlobalState, props: BeforeConnectProps) => {
     comment,
     user: state.user.user,
     form: formName + props.commentable.id,
+    isModerationEnabled: state.default.features.moderation_comment,
   };
 };
 

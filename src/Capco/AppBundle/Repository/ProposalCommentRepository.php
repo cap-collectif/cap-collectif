@@ -94,7 +94,6 @@ class ProposalCommentRepository extends EntityRepository
         }
 
         if ('UPDATED_AT' === $field) {
-            $qb->addOrderBy('c.updatedAt', $direction);
         }
 
         if ('POPULARITY' === $field) {
@@ -131,6 +130,38 @@ class ProposalCommentRepository extends EntityRepository
         ]);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getViewerPendingModerationComments(
+        Proposal $proposal,
+        User $user,
+        ?int $offset = null,
+        ?int $limit = null
+    ): array {
+        $qb = $this->createQueryBuilder('c')
+            ->where("c.moderationStatus = 'PENDING'")
+            ->andWhere('c.proposal = :proposal')
+            ->andWhere('c.author = :user')
+            ->setParameters([
+                'proposal' => $proposal,
+                'user' => $user,
+            ]);
+
+        $qb->setFirstResult($offset)->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countViewerPendingModerationComments(Proposal $proposal, User $user): int
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->where("c.moderationStatus = 'PENDING'")
+            ->andWhere('c.proposal = :proposal')
+            ->andWhere('c.author = :user')
+            ->setParameters(['proposal' => $proposal, 'user' => $user]);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder

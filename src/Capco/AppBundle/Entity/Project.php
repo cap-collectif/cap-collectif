@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
@@ -423,10 +424,20 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable
     {
         $authors = [];
         foreach ($this->authors as $projectAuthor) {
-            $authors[] = $projectAuthor->getUser();
+            $authors[] = $projectAuthor->getAuthor();
         }
 
         return $authors;
+    }
+
+    public function isAuthor(Author $author): bool
+    {
+        $authors = $this->getUserAuthors();
+        if (\in_array($author, $authors, true)) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getAuthors(): Collection

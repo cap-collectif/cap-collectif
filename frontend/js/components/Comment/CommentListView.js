@@ -15,7 +15,6 @@ type Props = {|
   +order: CommentOrderBy,
   +relay: RelayRefetchProp,
   +useBodyColor: boolean,
-  +unstable__enableCapcoUiDs?: boolean,
 |};
 
 type State = {|
@@ -81,14 +80,13 @@ export class CommentListView extends React.Component<Props, State> {
       return <Loader />;
     }
 
-    const { commentable, useBodyColor, unstable__enableCapcoUiDs } = this.props;
+    const { commentable, useBodyColor } = this.props;
 
     return (
       <CommentListViewPaginated
         commentable={commentable}
         highlightedComment={highlightedComment}
         useBodyColor={useBodyColor}
-        unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
       />
     );
   }
@@ -99,12 +97,12 @@ export default createRefetchContainer(
   {
     commentable: graphql`
       fragment CommentListView_commentable on Commentable
-        @argumentDefinitions(
-          count: { type: "Int" }
-          cursor: { type: "String" }
-          orderBy: { type: "CommentOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
-          isAuthenticated: { type: "Boolean!" }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int" }
+        cursor: { type: "String" }
+        orderBy: { type: "CommentOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+        isAuthenticated: { type: "Boolean!" }
+      ) {
         id
         ...CommentListViewPaginated_commentable
           @arguments(

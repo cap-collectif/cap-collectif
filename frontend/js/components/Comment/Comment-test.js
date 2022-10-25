@@ -9,11 +9,13 @@ const props = {
   comment: {
     $refType,
     $fragmentRefs,
+    moderationStatus: 'APPROVED',
     author: {
       $fragmentRefs,
       displayName: 'admin',
       media: null,
       vip: true,
+      isViewer: true,
     },
     id: 'proposalComment1',
   },
@@ -23,6 +25,7 @@ describe('<Comment />', () => {
   it('should render correctly highlighted', () => {
     const comment = {
       id: 'comment1',
+      moderationStatus: 'APPROVED',
       author: {
         $fragmentRefs,
         vip: true,
@@ -30,6 +33,7 @@ describe('<Comment />', () => {
         media: {
           url: 'http://perdu.com/image.jpg',
         },
+        isViewer: true,
       },
       $fragmentRefs,
       $refType,
@@ -41,11 +45,13 @@ describe('<Comment />', () => {
   it('should render correctly not highlighted', () => {
     const comment = {
       id: 'comment2',
+      moderationStatus: 'APPROVED',
       author: {
         $fragmentRefs,
         vip: true,
         displayName: 'jcVandam',
         media: null,
+        isViewer: true,
       },
       $fragmentRefs,
       $refType,

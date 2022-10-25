@@ -114,3 +114,14 @@ Scenario: Email sent to admin should have correct subject and footer if comment 
   And I consume "comment_delete"
   Then I open mail with subject "notification.email.anonymous.comment.delete.subject"
   And I should see "notification.email.anonymous.comment.delete.body" in mail
+
+@rabbitmq
+Scenario: anonymous user comment confirm email
+Given I publish in "comment_confirm_anonymous_email" with message below:
+"""
+{
+  "commentId": "proposalCommentConfirmationToken"
+}
+"""
+And I consume "comment_confirm_anonymous_email"
+Then I open mail with subject "notification.comment.confirm_anonymous_email.subject"

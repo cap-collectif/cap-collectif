@@ -85,6 +85,15 @@ class CommentSubscriber implements EventSubscriberInterface
                     ])
                 )
             );
+        } elseif ('confirm_anonymous_email' === $action) {
+            $this->publisher->publish(
+                'comment.confirm_anonymous_email',
+                new Message(
+                    json_encode([
+                        'commentId' => $comment->getId(),
+                    ])
+                )
+            );
         }
     }
 }

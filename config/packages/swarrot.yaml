@@ -73,9 +73,24 @@ swarrot:
         comment.delete:
             exchange: capco_direct_exchange
             routing_key: comment_delete
+        comment.confirm_anonymous_email:
+            exchange: capco_direct_exchange
+            routing_key: comment_confirm_anonymous_email
         comment.proposal_analysis_create:
             exchange: capco_direct_exchange
             routing_key: proposal_analysis_comment_create
+        comment.moderation_approved:
+            exchange: capco_direct_exchange
+            routing_key: comment_moderation_approved
+        comment.moderation_rejected:
+            exchange: capco_direct_exchange
+            routing_key: comment_moderation_rejected
+        comment.moderation_notif_admin:
+            exchange: capco_direct_exchange
+            routing_key: comment_moderation_notif_admin
+        user.confirmation_email_participation:
+            exchange: capco_direct_exchange
+            routing_key: user_confirmation_email_participation
         user_archive.request:
             exchange: capco_direct_exchange
             routing_key: user_archive_request
@@ -511,6 +526,23 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'comment_delete_retry_%%attempt%%'
+        comment_confirm_anonymous_email:
+            processor: Capco\AppBundle\Processor\Comment\CommentConfirmAnonymousEmailProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'comment_delete_retry_%%attempt%%'
         proposal_analysis_comment_create:
             processor: Capco\AppBundle\Processor\Comment\ProposalAnalysisCommentCreateProcessor
             middleware_stack:
@@ -528,6 +560,74 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'proposal_analysis_comment_create_retry_%%attempt%%'
+        comment_moderation_approved:
+            processor: Capco\AppBundle\Processor\Comment\CommentModerationApprovedProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'comment_moderation_approved_retry_%%attempt%%'
+        comment_moderation_rejected:
+            processor: Capco\AppBundle\Processor\Comment\CommentModerationRejectedProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'comment_moderation_rejected_retry_%%attempt%%'
+        comment_moderation_notif_admin:
+            processor: Capco\AppBundle\Processor\Comment\CommentModerationNotifAdminProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'comment_moderation_notif_admin_retry_%%attempt%%'
+        user_confirmation_email_participation:
+            processor: Capco\AppBundle\Processor\User\UserAccountConfirmationParticipationProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'user_confirmation_email_participation_retry_%%attempt%%'
         user_archive_request:
             processor: Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor
             middleware_stack:

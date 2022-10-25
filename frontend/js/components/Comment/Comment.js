@@ -6,7 +6,6 @@ import styled, { type StyledComponent } from 'styled-components';
 import UserAvatarLegacy from '../User/UserAvatarLegacy';
 import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
-import CommentVoteButtonLegacy from './CommentVoteButtonLegacy';
 import CommentVoteButton from './CommentVoteButton';
 import CommentReportButton from './CommentReportButton';
 import CommentEdit from './CommentEdit';
@@ -24,7 +23,6 @@ type Props = {|
   +isHighlighted?: ?boolean,
   +disabledButton?: ?boolean,
   +useBodyColor: boolean,
-  +unstable__enableCapcoUiDs?: boolean,
 |};
 
 const AnswerButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
@@ -69,9 +67,11 @@ export class Comment extends React.Component<Props, State> {
   };
 
   render() {
-    const { comment, isHighlighted, useBodyColor, disabledButton, unstable__enableCapcoUiDs } =
+    const { comment, isHighlighted, useBodyColor, disabledButton } =
       this.props;
     const { answerFormShown } = this.state;
+
+    const onlyShowEditButton = comment.moderationStatus === 'PENDING' && comment?.author?.isViewer;
 
     return (
       <CommentContainer as="li" useBodyColor={useBodyColor} isHighlighted={isHighlighted}>
@@ -84,13 +84,16 @@ export class Comment extends React.Component<Props, State> {
             </div>
             <CommentBody comment={comment} />
           </MediaBody>
-          {!disabledButton && (
+          {
+            (onlyShowEditButton) && (
+              <CommentBottom>
+                <CommentEdit comment={comment} />{' '}
+              </CommentBottom>
+            )
+          }
+          {(!disabledButton && !onlyShowEditButton) && (
             <CommentBottom>
-              {unstable__enableCapcoUiDs ? (
-                <CommentVoteButton comment={comment} />
-              ) : (
-                <CommentVoteButtonLegacy comment={comment} />
-              )}
+              <CommentVoteButton comment={comment} />
               <AnswerButton onClick={this.focusAnswer}>
                 <Icon name={ICON_NAME.navigationLeft} size={15} color={colors.darkGray} />
                 <FormattedMessage id="global.answer" />
@@ -115,8 +118,10 @@ export default createFragmentContainer(Comment, {
     fragment Comment_comment on Comment
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
+      moderationStatus
       author {
         ...UserAvatar_user
+        isViewer @include(if: $isAuthenticated)
         vip
         displayName
         media {

@@ -1,0 +1,14 @@
+CommentModerationStatus:
+    type: enum
+    config:
+        description: 'Available moderation status for comments'
+        values:
+            PENDING:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ModerationStatus::PENDING")'
+                description: 'The comments has not been moderated yet.'
+            APPROVED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ModerationStatus::APPROVED")'
+                description: 'The comments has been approved by a moderator.'
+            REJECTED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ModerationStatus::REJECTED")'
+                description: 'The comments has been rejected by a moderator.'

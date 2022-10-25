@@ -85,6 +85,11 @@
                         "title": "capco.module.organizations",
                         "description": "description.module.organizations",
                         "onlySuperAdmin": true
+                    },
+                    "moderation_comment": {
+                        "title": "capco.module.moderation_comment",
+                        "description": "description.module.moderation_comment",
+                        "onlySuperAdmin": true
                     }
                 }
             }

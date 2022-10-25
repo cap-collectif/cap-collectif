@@ -8,13 +8,14 @@ import CommentForm from './CommentForm';
 import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql';
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import CommentListNotApprovedByModerator from '~/components/Comment/CommentListNotApprovedByModerator';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
   +intl: IntlShape,
   +commentable: CommentSectionFragmented_commentable,
   +isAuthenticated: boolean,
   +useBodyColor: boolean,
-  unstable__enableCapcoUiDs?: boolean,
 |};
 
 export const FilterButton: StyledComponent<{}, {}, typeof Button> = styled(Button)`
@@ -38,15 +39,11 @@ const filters = {
 
 export function CommentSectionView(props: Props) {
   const [order, setOrder] = useState<CommentOrderBy>('last');
-  const { isAuthenticated, intl, useBodyColor, commentable, unstable__enableCapcoUiDs } = props;
+  const { isAuthenticated, intl, useBodyColor, commentable } = props;
+  const moderationCommentFeature = useFeatureFlag('moderation_comment');
 
   return (
     <div>
-      {unstable__enableCapcoUiDs ? null : (
-        <h3>
-          <FormattedMessage id="proposal.tabs.comments" />
-        </h3>
-      )}
       <Flex direction="row" justify="space-between" align="center" mb={5}>
         <Box id="proposal-page-comments-counter">
           {commentable.allComments && (
@@ -103,13 +100,18 @@ export function CommentSectionView(props: Props) {
       </Flex>
       {/* $FlowFixMe reduxForm */}
       <CommentForm commentable={commentable} />
+      {(moderationCommentFeature && isAuthenticated) && (
+        <CommentListNotApprovedByModerator
+          commentable={commentable}
+          useBodyColor={useBodyColor}
+        />
+      )}
       {/* $FlowFixMe */}
       <CommentListView
         isAuthenticated={isAuthenticated}
         order={order}
         commentable={commentable}
         useBodyColor={useBodyColor}
-        unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
       />
     </div>
   );

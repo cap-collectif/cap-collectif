@@ -164,3 +164,6 @@ InternalFeatureFlagType:
             unstable__organizations:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__organizations")'
                 description: 'Whether or not organizations are enabled'
+            moderation_comment:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::moderation_comment")'
+                description: 'Whether or not comment moderation is enabled'

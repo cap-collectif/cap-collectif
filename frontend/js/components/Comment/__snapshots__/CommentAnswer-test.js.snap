@@ -33,7 +33,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
           }
         }
       >
-        <Relay(CommentInfos)
+        <CommentInfos
           comment={
             Object {
               "$fragmentRefs": null,

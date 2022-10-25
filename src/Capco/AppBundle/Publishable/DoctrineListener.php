@@ -2,14 +2,23 @@
 
 namespace Capco\AppBundle\Publishable;
 
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Model\Publishable;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class DoctrineListener implements EventSubscriber
 {
+    private Manager $manager;
+
+    public function __construct(Manager $manager)
+    {
+        $this->manager = $manager;
+    }
+
     public function getSubscribedEvents(): array
     {
         return ['prePersist'];
@@ -18,12 +27,22 @@ class DoctrineListener implements EventSubscriber
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
-        if ($entity instanceof Publishable && $entity->isPublished()) {
+
+        if (!$entity instanceof Publishable) {
             return;
         }
-        if ($entity instanceof Publishable) {
-            self::setPublishedStatus($entity);
+
+        if ($entity->isPublished()) {
+            return;
         }
+
+        if ($entity instanceof Comment) {
+            self::handleCommentPublished($entity);
+
+            return;
+        }
+
+        self::setPublishedStatus($entity);
     }
 
     public static function setPublishedStatus(Publishable $entity)
@@ -36,5 +55,15 @@ class DoctrineListener implements EventSubscriber
             }
             $entity->setPublishedAt(new \DateTime());
         }
+    }
+
+    public function handleCommentPublished(Comment $comment)
+    {
+        $isModerationEnabled = $this->manager->isActive(Manager::moderation_comment);
+        $isAnonymousComment = !$comment->getAuthor() && $comment->getAuthorEmail();
+        if ($isAnonymousComment && $isModerationEnabled) {
+            return;
+        }
+        self::setPublishedStatus($comment);
     }
 }

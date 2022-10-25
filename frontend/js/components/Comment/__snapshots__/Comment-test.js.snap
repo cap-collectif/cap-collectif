@@ -11,6 +11,7 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
       Object {
         "$fragmentRefs": null,
         "displayName": "admin",
+        "isViewer": true,
         "media": null,
         "vip": true,
       }
@@ -31,7 +32,7 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
           }
         }
       >
-        <Relay(CommentInfos)
+        <CommentInfos
           comment={
             Object {
               "$fragmentRefs": null,
@@ -39,10 +40,12 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
               "author": Object {
                 "$fragmentRefs": null,
                 "displayName": "admin",
+                "isViewer": true,
                 "media": null,
                 "vip": true,
               },
               "id": "proposalComment1",
+              "moderationStatus": "APPROVED",
             }
           }
         />
@@ -55,16 +58,18 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
     </Comment__MediaBody>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButtonLegacy)
+      <Relay(CommentVoteButton)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -72,10 +77,12 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -100,10 +107,12 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -115,10 +124,12 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -135,10 +146,12 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
         useBodyColor={true}
@@ -159,6 +172,7 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
       Object {
         "$fragmentRefs": null,
         "displayName": "admin",
+        "isViewer": true,
         "media": null,
         "vip": true,
       }
@@ -179,7 +193,7 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
           }
         }
       >
-        <Relay(CommentInfos)
+        <CommentInfos
           comment={
             Object {
               "$fragmentRefs": null,
@@ -187,10 +201,12 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
               "author": Object {
                 "$fragmentRefs": null,
                 "displayName": "admin",
+                "isViewer": true,
                 "media": null,
                 "vip": true,
               },
               "id": "proposalComment1",
+              "moderationStatus": "APPROVED",
             }
           }
         />
@@ -203,16 +219,18 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
     </Comment__MediaBody>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButtonLegacy)
+      <Relay(CommentVoteButton)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -220,10 +238,12 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -248,10 +268,12 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -263,10 +285,12 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -283,10 +307,12 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
         useBodyColor={true}
@@ -307,6 +333,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "displayName": "admin",
+        "isViewer": true,
         "media": null,
         "vip": true,
       }
@@ -327,7 +354,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
           }
         }
       >
-        <Relay(CommentInfos)
+        <CommentInfos
           comment={
             Object {
               "$fragmentRefs": null,
@@ -335,10 +362,12 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
               "author": Object {
                 "$fragmentRefs": null,
                 "displayName": "admin",
+                "isViewer": true,
                 "media": null,
                 "vip": true,
               },
               "id": "proposalComment1",
+              "moderationStatus": "APPROVED",
             }
           }
         />
@@ -351,16 +380,18 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
     </Comment__MediaBody>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButtonLegacy)
+      <Relay(CommentVoteButton)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -368,10 +399,12 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -396,10 +429,12 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -411,10 +446,12 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -431,10 +468,12 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
         useBodyColor={true}
@@ -448,10 +487,12 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -471,6 +512,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
       Object {
         "$fragmentRefs": null,
         "displayName": "admin",
+        "isViewer": true,
         "media": null,
         "vip": true,
       }
@@ -491,7 +533,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
           }
         }
       >
-        <Relay(CommentInfos)
+        <CommentInfos
           comment={
             Object {
               "$fragmentRefs": null,
@@ -499,10 +541,12 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
               "author": Object {
                 "$fragmentRefs": null,
                 "displayName": "admin",
+                "isViewer": true,
                 "media": null,
                 "vip": true,
               },
               "id": "proposalComment1",
+              "moderationStatus": "APPROVED",
             }
           }
         />
@@ -515,16 +559,18 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
     </Comment__MediaBody>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButtonLegacy)
+      <Relay(CommentVoteButton)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -532,10 +578,12 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -560,10 +608,12 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -575,10 +625,12 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -595,10 +647,12 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
         useBodyColor={true}
@@ -612,10 +666,12 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "admin",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "proposalComment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -636,6 +692,7 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
       Object {
         "$fragmentRefs": null,
         "displayName": "jcVandam",
+        "isViewer": true,
         "media": Object {
           "url": "http://perdu.com/image.jpg",
         },
@@ -658,7 +715,7 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
           }
         }
       >
-        <Relay(CommentInfos)
+        <CommentInfos
           comment={
             Object {
               "$fragmentRefs": null,
@@ -666,12 +723,14 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
               "author": Object {
                 "$fragmentRefs": null,
                 "displayName": "jcVandam",
+                "isViewer": true,
                 "media": Object {
                   "url": "http://perdu.com/image.jpg",
                 },
                 "vip": true,
               },
               "id": "comment1",
+              "moderationStatus": "APPROVED",
             }
           }
         />
@@ -684,18 +743,20 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": Object {
                 "url": "http://perdu.com/image.jpg",
               },
               "vip": true,
             },
             "id": "comment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
     </Comment__MediaBody>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButtonLegacy)
+      <Relay(CommentVoteButton)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -703,12 +764,14 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": Object {
                 "url": "http://perdu.com/image.jpg",
               },
               "vip": true,
             },
             "id": "comment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -733,12 +796,14 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": Object {
                 "url": "http://perdu.com/image.jpg",
               },
               "vip": true,
             },
             "id": "comment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -750,12 +815,14 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": Object {
                 "url": "http://perdu.com/image.jpg",
               },
               "vip": true,
             },
             "id": "comment1",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -772,12 +839,14 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": Object {
                 "url": "http://perdu.com/image.jpg",
               },
               "vip": true,
             },
             "id": "comment1",
+            "moderationStatus": "APPROVED",
           }
         }
         useBodyColor={true}
@@ -799,6 +868,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
       Object {
         "$fragmentRefs": null,
         "displayName": "jcVandam",
+        "isViewer": true,
         "media": null,
         "vip": true,
       }
@@ -819,7 +889,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
           }
         }
       >
-        <Relay(CommentInfos)
+        <CommentInfos
           comment={
             Object {
               "$fragmentRefs": null,
@@ -827,10 +897,12 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
               "author": Object {
                 "$fragmentRefs": null,
                 "displayName": "jcVandam",
+                "isViewer": true,
                 "media": null,
                 "vip": true,
               },
               "id": "comment2",
+              "moderationStatus": "APPROVED",
             }
           }
         />
@@ -843,16 +915,18 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "comment2",
+            "moderationStatus": "APPROVED",
           }
         }
       />
     </Comment__MediaBody>
     <Commentstyle__CommentBottom>
-      <Relay(CommentVoteButtonLegacy)
+      <Relay(CommentVoteButton)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -860,10 +934,12 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "comment2",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -888,10 +964,12 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "comment2",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -903,10 +981,12 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "comment2",
+            "moderationStatus": "APPROVED",
           }
         }
       />
@@ -923,10 +1003,12 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "comment2",
+            "moderationStatus": "APPROVED",
           }
         }
         useBodyColor={true}
@@ -940,10 +1022,12 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
             "author": Object {
               "$fragmentRefs": null,
               "displayName": "jcVandam",
+              "isViewer": true,
               "media": null,
               "vip": true,
             },
             "id": "comment2",
+            "moderationStatus": "APPROVED",
           }
         }
       />

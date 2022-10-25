@@ -7,6 +7,7 @@ Capco\AppBundle\Entity\EventComment:
         publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ 1 days"))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        moderationStatus: APPROVED
     evComment{2..19}:
         id: 'eventComment<current()>'
         Event: '@event1'
@@ -15,6 +16,7 @@ Capco\AppBundle\Entity\EventComment:
         publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        moderationStatus: APPROVED
     evComment{20..29}:
         id: 'eventComment<current()>'
         Event: '@event2'
@@ -23,6 +25,7 @@ Capco\AppBundle\Entity\EventComment:
         publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        moderationStatus: APPROVED
     evComment{30..49}:
         id: 'eventComment<current()>'
         Event: '@event3'
@@ -31,6 +34,7 @@ Capco\AppBundle\Entity\EventComment:
         publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        moderationStatus: APPROVED
     evComment50:
         id: 'eventComment50'
         Event: '@event1'
@@ -39,3 +43,4 @@ Capco\AppBundle\Entity\EventComment:
         publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ 50 days"))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        moderationStatus: APPROVED

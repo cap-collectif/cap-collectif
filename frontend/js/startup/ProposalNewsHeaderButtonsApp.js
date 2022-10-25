@@ -4,20 +4,24 @@ import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import type { Uuid } from '~/types';
 
-const ProposalNewsHeaderButtons = lazy(() =>
-  import(
-    /* webpackChunkName: "ProposalNewsHeaderButtons" */ '~/components/Proposal/Page/Blog/ProposalNewsHeaderButtons'
-  ),
+const ProposalNewsHeaderButtons = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "ProposalNewsHeaderButtons" */ '~/components/Proposal/Page/Blog/ProposalNewsHeaderButtons'
+    ),
 );
 
 type Props = {|
   postId: Uuid,
 |};
 
-export default (props: Props) => (
-  <Suspense fallback={<Loader />}>
-    <Providers>
-      <ProposalNewsHeaderButtons {...props} />
-    </Providers>
-  </Suspense>
-);
+export default (props: Props) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px';
+  return (
+    <Suspense fallback={<Loader />}>
+      <Providers designSystem resetCSS={false}>
+        <ProposalNewsHeaderButtons {...props} />
+      </Providers>
+    </Suspense>
+  );
+};

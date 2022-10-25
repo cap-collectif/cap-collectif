@@ -8,7 +8,6 @@ type Props = {|
   +commentable: CommentSectionFragmented_commentable,
   +isAuthenticated: boolean,
   +useBodyColor: boolean,
-  unstable__enableCapcoUiDs?: boolean,
 |};
 
 export class CommentSectionFragmented extends React.Component<Props> {
@@ -17,7 +16,7 @@ export class CommentSectionFragmented extends React.Component<Props> {
   };
 
   render() {
-    const { isAuthenticated, useBodyColor, commentable, unstable__enableCapcoUiDs } = this.props;
+    const { isAuthenticated, useBodyColor, commentable } = this.props;
 
     if (!commentable) {
       return null;
@@ -29,7 +28,6 @@ export class CommentSectionFragmented extends React.Component<Props> {
           commentable={commentable}
           isAuthenticated={isAuthenticated}
           useBodyColor={useBodyColor}
-          unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
         />
       </div>
     );
@@ -39,11 +37,12 @@ export class CommentSectionFragmented extends React.Component<Props> {
 export default createFragmentContainer(CommentSectionFragmented, {
   commentable: graphql`
     fragment CommentSectionFragmented_commentable on Commentable
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       allComments: comments(first: 0) {
         totalCountWithAnswers
       }
+      ...CommentListNotApprovedByModerator_commentable
       ...CommentListView_commentable @arguments(isAuthenticated: $isAuthenticated)
       ...CommentForm_commentable
     }

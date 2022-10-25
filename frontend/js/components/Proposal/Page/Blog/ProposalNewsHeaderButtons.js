@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import { Flex, Button } from '@cap-collectif/ui';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import type { Uuid } from '~/types';
@@ -10,8 +11,6 @@ import type {
   ProposalNewsHeaderButtonsQueryResponse,
 } from '~relay/ProposalNewsHeaderButtonsQuery.graphql';
 import ProposalNewsEditModal from '~/components/Proposal/Page/Blog/ProposalNewsEditModal';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Button from '~ds/Button/Button';
 
 type Props = {|
   postId: Uuid,

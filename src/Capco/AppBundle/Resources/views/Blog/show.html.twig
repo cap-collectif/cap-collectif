@@ -43,7 +43,7 @@
                 {% thumbnail post.media, 'blockHeader' with {'title': post.media.name, 'alt': post.media.name, 'class': 'img-responsive block'} %}
             {%  endif %}
 
-            <div class="block ql-editor wysiwyg-render">
+            <div class="block ql-editor wysiwyg-render" style="font-size: 16px">
                 {{ post.body|raw | jolitypo() }}
             </div>
 
@@ -65,6 +65,7 @@
                         'url': url('app_blog_show', {'slug': post.translate.slug}),
                         'title': post.title,
                         'id': 'post-' ~ post.slug,
+                        'useDS': true
                     }
                 })
             }}

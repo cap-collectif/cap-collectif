@@ -5,6 +5,7 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Toggle\Manager;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -13,6 +14,7 @@ use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Sonata\AdminBundle\Form\Type\ModelType;
 
@@ -22,15 +24,18 @@ class CommentAdmin extends AbstractAdmin
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
 
     private $tokenStorage;
+    private Manager $manager;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        Manager $manager
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
+        $this->manager = $manager;
     }
 
     public function getNewInstance()
@@ -81,7 +86,6 @@ class CommentAdmin extends AbstractAdmin
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('published', null, ['label' => 'global.published'])
-            ->add('trashedStatus', null, ['label' => 'global.is_trashed'])
             ->add('type', 'doctrine_orm_class', [
                 'label' => 'comment.type',
                 'sub_classes' => $this->getSubClasses(),
@@ -116,9 +120,13 @@ class CommentAdmin extends AbstractAdmin
                 'editable' => false,
                 'label' => 'global.published',
             ])
-            ->add('trashedStatus', null, [
-                'label' => 'global.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
+            ->add('moderationStatus', null, [
+                'label' => 'moderation',
+                'accessor' => function ($subject) {
+                    $status = strtolower($subject->getModerationStatus());
+
+                    return $this->translator->trans($status);
+                },
             ])
             ->add('updatedAt', 'datetime', ['label' => 'global.maj'])
             ->add('_action', 'actions', [
@@ -143,6 +151,8 @@ class CommentAdmin extends AbstractAdmin
             ]);
         }
 
+        $isModerationEnabled = $this->manager->isActive(Manager::moderation_comment);
+
         $formMapper
             ->add('body', null, ['label' => 'global.contenu', 'attr' => ['rows' => 8]])
             ->add('author', null, [
@@ -154,7 +164,25 @@ class CommentAdmin extends AbstractAdmin
                 'label' => 'global.published',
                 'disabled' => true,
                 'attr' => ['readonly' => true],
-            ])
+            ]);
+
+        $isAuthorAdmin = $subject->getAuthor() ? $subject->getAuthor()->isAdmin() : false;
+        $doesRelatedObjectBelongsToProjectAdmin = $subject->getAuthor()
+            ? $subject->doesRelatedObjectBelongsToProjectAdmin($subject->getAuthor())
+            : false;
+
+        if ($isModerationEnabled && !$isAuthorAdmin && !$doesRelatedObjectBelongsToProjectAdmin) {
+            $formMapper->add('moderationStatus', ChoiceType::class, [
+                'label' => $this->translator->trans('moderation'),
+                'choices' => [
+                    $this->translator->trans('pending') => 'PENDING',
+                    $this->translator->trans('approved') => 'APPROVED',
+                    $this->translator->trans('rejected') => 'REJECTED',
+                ],
+            ]);
+        }
+
+        $formMapper
             ->add('trashedStatus', TrashedStatusType::class, [
                 'label' => 'global.is_trashed',
             ])

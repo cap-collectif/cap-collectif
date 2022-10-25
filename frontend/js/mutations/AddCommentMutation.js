@@ -1,6 +1,6 @@
 // @flow
 import { graphql } from 'react-relay';
-import { ConnectionHandler } from 'relay-runtime';
+import { ConnectionHandler, type RecordProxy } from 'relay-runtime';
 // eslint-disable-next-line import/no-unresolved
 import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
 import environment from '../createRelayEnvironment';
@@ -18,6 +18,12 @@ const mutation = graphql`
         node {
           id
           ...Comment_comment @arguments(isAuthenticated: $isAuthenticated)
+          author {
+            id
+          }
+          moderationStatus
+          authorEmail
+          isEmailConfirmed
         }
       }
       userErrors {
@@ -27,50 +33,73 @@ const mutation = graphql`
   }
 `;
 
+const connectionsConfig = [
+  {
+    key: 'CommentListViewPaginated_comments',
+    filters: {
+      orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+    },
+  },
+  {
+    key: 'CommentListViewPaginated_comments',
+    filters: {
+      orderBy: { field: 'POPULARITY', direction: 'DESC' },
+    },
+  },
+  {
+    key: 'CommentListViewPaginated_comments',
+    filters: {
+      orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
+    },
+  },
+  {
+    key: 'CommentAnswers_answers',
+    filters: {},
+  },
+];
+const addConnection = (
+  store: RecordSourceSelectorProxy,
+  commentableId: string,
+  newEdge: RecordProxy,
+  key: string,
+  filters: {} = {},
+) => {
+  const commentProxy = store.get(commentableId);
+  if (!commentProxy) return;
+
+  const conn = ConnectionHandler.getConnection(commentProxy, key, filters);
+
+  if (!conn) return;
+  ConnectionHandler.insertEdgeAfter(conn, newEdge);
+};
+
 const commit = (variables: AddCommentMutationVariables): Promise<AddCommentMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
-    configs: [
-      {
-        type: 'RANGE_ADD',
-        parentID: variables.input.commentableId,
-        edgeName: 'commentEdge',
-        connectionInfo: [
-          {
-            key: 'CommentListViewPaginated_comments',
-            rangeBehavior: 'prepend',
-            filters: {
-              orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
-            },
-          },
-          {
-            key: 'CommentListViewPaginated_comments',
-            rangeBehavior: 'append',
-            filters: {
-              orderBy: { field: 'POPULARITY', direction: 'DESC' },
-            },
-          },
-          {
-            key: 'CommentListViewPaginated_comments',
-            rangeBehavior: 'append',
-            filters: {
-              orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
-            },
-          },
-          {
-            key: 'CommentAnswers_answers',
-            rangeBehavior: 'append',
-            filters: {},
-          },
-        ],
-      },
-    ],
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('addComment');
-      if (!payload || !payload.getLinkedRecord('commentEdge')) {
+      const commentEdge = payload?.getLinkedRecord('commentEdge');
+      if (!commentEdge) {
         return;
       }
+      const node = commentEdge?.getLinkedRecord('node');
+      const isAnonymousUser = node?.getValue('authorEmail');
+
+      if (node?.getValue('moderationStatus') === 'PENDING' && isAnonymousUser) return;
+      if (node?.getValue('moderationStatus') === 'PENDING' && !isAnonymousUser) {
+        addConnection(
+          store,
+          variables.input.commentableId,
+          commentEdge,
+          'CommentListNotApprovedByModerator_viewerNotApprovedByModeratorComments',
+        );
+        return;
+      }
+
+      connectionsConfig.forEach(({ key, filters }) => {
+        addConnection(store, variables.input.commentableId, commentEdge, key, filters);
+      });
 
       const commentableProxy = store.get(variables.input.commentableId);
       if (!commentableProxy) {

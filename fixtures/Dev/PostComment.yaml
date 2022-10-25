@@ -7,6 +7,7 @@ Capco\AppBundle\Entity\PostComment:
         publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        moderationStatus: APPROVED
     pComment{6..50}:
         id: 'postComment<current()>'
         post: '@post1'
@@ -15,6 +16,7 @@ Capco\AppBundle\Entity\PostComment:
         publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        moderationStatus: APPROVED
     postCommentProjectAdminNews:
         id: 'postCommentProjectAdminNews'
         post: '@postWithOwnerOnProposal'
@@ -23,3 +25,4 @@ Capco\AppBundle\Entity\PostComment:
         createdAt: <(new \DateTime('2016-02-01'))>
         publishedAt: <(new \DateTime('2016-02-01'))>
         updatedAt: <((new \DateTime('2017-02-01')))>
+        moderationStatus: APPROVED

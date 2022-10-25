@@ -2,7 +2,9 @@
 
 namespace spec\Capco\AppBundle\Publishable;
 
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
+use Capco\AppBundle\Toggle\Manager;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
@@ -11,6 +13,12 @@ use Capco\AppBundle\Publishable\DoctrineListener;
 
 class DoctrineListenerSpec extends ObjectBehavior
 {
+
+    public function let(Manager $manager)
+    {
+        $this->beConstructedWith($manager);
+    }
+
     public function it_is_initializable()
     {
         $this->shouldHaveType(DoctrineListener::class);
@@ -41,5 +49,33 @@ class DoctrineListenerSpec extends ObjectBehavior
         $draft->getAuthor()->willReturn($author);
         $draft->isDraft()->willReturn(true);
         $draft->setPublishedAt()->shouldNotBeCalled();
+    }
+
+    public function it_should_publish_comment_if_moderation_is_disabled_and_author_is_authenticated(
+        Comment $comment,
+        Manager $manager,
+        User $author
+    )
+    {
+        $manager->isActive(Manager::moderation_comment)->shouldBeCalledOnce()->willReturn(false);
+        $comment->getAuthor()->shouldBeCalledTimes(2)->willReturn($author);
+        $comment->getAuthorEmail()->willReturn(null);
+
+        $author->isEmailConfirmed()->willReturn(true);
+        $comment->setPublishedAt(Argument::any())->shouldBeCalled();
+
+        $this->handleCommentPublished($comment);
+    }
+
+    public function it_should_not_publish_comment_if_moderation_is_enabled_and_author_is_anonymous(
+        Comment $comment,
+        Manager $manager
+    )
+    {
+        $manager->isActive(Manager::moderation_comment)->shouldBeCalledOnce()->willReturn(true);
+        $comment->getAuthorEmail()->willReturn('abc@cap-collectif.com');
+        $comment->getAuthor()->willReturn(null);
+
+        $this->handleCommentPublished($comment);
     }
 }

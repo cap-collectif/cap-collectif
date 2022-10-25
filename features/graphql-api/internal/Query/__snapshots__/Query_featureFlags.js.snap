@@ -291,6 +291,10 @@ Object {
       "enabled": false,
       "type": "unstable__organizations",
     },
+    Object {
+      "enabled": false,
+      "type": "moderation_comment",
+    },
   ],
 }
 `;

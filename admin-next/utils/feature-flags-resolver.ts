@@ -75,6 +75,7 @@ export const defaultFeatureFlags: FeatureFlags = {
     api_sendinblue: false,
     proposal_sms_vote: false,
     unstable__organizations: false,
+    moderation_comment: false,
 };
 
 const getRedisFeatureFlagKey = (flag: string) => {
