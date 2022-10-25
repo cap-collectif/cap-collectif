@@ -15,6 +15,8 @@
         "cy:run:project-owner:ci": "NODE_ENV=ci cypress run --spec 'integration/projectOwner/*.spec.ts'",
         "cy:run:questionnaire:ci": "NODE_ENV=ci cypress run --spec 'integration/questionnaire/*.spec.ts'",
         "cy:run:projects:ci": "NODE_ENV=ci cypress run --spec 'integration/projects/*.spec.ts,integration/proposal/*.spec.ts,integration/rgpd/*.spec.ts,integration/consultation/*.spec.ts'",
+        "cy:run:user:ci": "NODE_ENV=ci cypress run --spec 'integration/user/*.spec.ts'",
+        "cy:run:moderation:ci": "NODE_ENV=ci cypress run --spec 'integration/moderation/*.spec.ts'",
         "cy:verify": "cypress verify",
         "cy:info": "cypress info",
         "cy:version": "cypress version"
