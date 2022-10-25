@@ -137,6 +137,10 @@ class AnonymizeUser
             }
         }
 
+        foreach ($user->getMemberOfOrganizations() as $memberOfOrganization) {
+            $this->em->remove($memberOfOrganization);
+        }
+
         $this->removeFromMailingLists($user);
 
         $this->userManager->updateUser($user);
