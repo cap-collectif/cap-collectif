@@ -19,9 +19,14 @@ const query = graphql`
 export type Props = {|
   +projectId: Uuid,
   +isConsultation?: boolean,
+  +platformLocale: string,
 |};
 
-export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation }: Props) => {
+export const ProjectHeaderQueryRenderer = ({
+  projectId,
+  isConsultation,
+  platformLocale,
+}: Props) => {
   document.getElementsByTagName('html')[0].style.fontSize = '14px';
 
   return (
@@ -56,7 +61,11 @@ export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation }: Props)
               isLoaded={!!(props && props.project)}
               placeholder={<ProjectHeaderPlaceholder fetchData={retry} hasError={!!error} />}>
               {!!(props && props.project) && (
-                <ProjectHeader project={props.project} isConsultation={isConsultation} />
+                <ProjectHeader
+                  project={props.project}
+                  isConsultation={isConsultation}
+                  platformLocale={platformLocale}
+                />
               )}
             </Skeleton>
           );
@@ -66,8 +75,12 @@ export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation }: Props)
   );
 };
 
-export default ({ projectId, isConsultation }: Props) => (
+export default ({ projectId, isConsultation, platformLocale }: Props) => (
   <Providers>
-    <ProjectHeaderQueryRenderer projectId={projectId} isConsultation={isConsultation} />
+    <ProjectHeaderQueryRenderer
+      projectId={projectId}
+      isConsultation={isConsultation}
+      platformLocale={platformLocale}
+    />
   </Providers>
 );

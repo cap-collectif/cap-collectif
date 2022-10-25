@@ -46,7 +46,7 @@ describe('<ProjectHeader />', () => {
   };
   const query = graphql`
     query ProjectHeaderTestQuery($id: ID = "<default>", $count: Int, $cursor: String)
-      @relay_test_operation {
+    @relay_test_operation {
       project: node(id: $id) {
         ...ProjectHeader_project @arguments(count: $count, cursor: $cursor)
       }
@@ -62,7 +62,7 @@ describe('<ProjectHeader />', () => {
     const TestRenderer = props => {
       const data = useLazyLoadQuery<ProjectHeaderTestQuery>(query, {});
       if (!data.project) return null;
-      return <ProjectHeader project={data.project} {...props} />;
+      return <ProjectHeader project={data.project} {...props} platformLocale="fr-FR" />;
     };
     TestComponent = props => (
       <RelaySuspensFragmentTest environment={environment}>

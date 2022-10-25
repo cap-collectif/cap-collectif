@@ -26,6 +26,7 @@ export type Props = {|
   queryRef: ?ProposalPageLogic_query$key,
   hasVotableStep: boolean,
   isAuthenticated: boolean,
+  platformLocale: string,
 |};
 
 export const PageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -145,7 +146,7 @@ const FRAGMENT = graphql`
   }
 `;
 
-export const ProposalPageLogic = ({ queryRef, isAuthenticated }: Props) => {
+export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }: Props) => {
   const query = useFragment(FRAGMENT, queryRef);
   const { width, height } = useResize();
   const [tabKey, setTabKey] = useState('content');
@@ -203,6 +204,7 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated }: Props) => {
             proposal={proposal}
             step={step}
             viewer={viewer}
+            platformLocale={platformLocale}
           />
           <ProposalPageTabs
             proposal={proposal}

@@ -27,6 +27,7 @@
         'projectId': project.id|toGlobalId('Project'),
         'stepId': currentStep.id|toGlobalId('PresentationStep'),
         'currentStepType': currentStep.getType(),
+        'platformLocale': capco_default_locale_code(),
     } }) }}
 {% endblock %}
 

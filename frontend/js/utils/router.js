@@ -2,8 +2,10 @@
 // All of this is temporary, once we use react router on all /projects we can remove it
 import { getBaseUrl } from '~/config';
 
-export const getBaseLocale = (currentLanguage: string) =>
-  currentLanguage && currentLanguage !== 'fr-FR' ? `/${currentLanguage.substring(0, 2)}` : '';
+export const getBaseLocale = (currentLanguage: string, platformLocale: string) =>
+  currentLanguage && currentLanguage !== platformLocale
+    ? `/${currentLanguage.substring(0, 2)}`
+    : '';
 
 export const getBaseUrlFromProposalUrl = (proposalUrl: string) => {
   let url = proposalUrl.replace(getBaseUrl(), '');

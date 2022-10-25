@@ -15,9 +15,10 @@ export type Props = {|
   +proposalSlug: string,
   +currentVotableStepId: ?string,
   +isAuthenticated: boolean,
+  +platformLocale: string,
 |};
 
-export const ProposalPage = ({ currentVotableStepId, isAuthenticated }: Props) => {
+export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLocale }: Props) => {
   const { proposalSlug } = useParams();
   const { state } = useLocation();
   const proposalRevisionsEnabled = useFeatureFlag('proposal_revisions');
@@ -83,6 +84,7 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated }: Props) =
             queryRef={props}
             hasVotableStep={hasVotableStep}
             isAuthenticated={isAuthenticated}
+            platformLocale={platformLocale}
           />
         );
       }}

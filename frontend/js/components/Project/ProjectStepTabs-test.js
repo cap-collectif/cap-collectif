@@ -24,8 +24,7 @@ describe('<ProjectStepTabs />', () => {
           state: 'CLOSED',
           label: 'Présentation',
           __typename: 'PresentationStep',
-          url:
-            'https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner',
+          url: 'https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner',
           enabled: true,
           timeRange: {
             startAt: null,
@@ -37,8 +36,7 @@ describe('<ProjectStepTabs />', () => {
           state: 'CLOSED',
           label: 'Consultation',
           __typename: 'ConsultationStep',
-          url:
-            'https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet',
+          url: 'https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet',
           enabled: true,
           timeRange: {
             startAt: '2020-11-03 20:30:55',
@@ -50,8 +48,7 @@ describe('<ProjectStepTabs />', () => {
           state: 'OPENED',
           label: 'Dépôt',
           __typename: 'CollectStep',
-          url:
-            'https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet',
+          url: 'https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet',
           enabled: true,
           timeRange: {
             startAt: '2020-10-16 00:00:00',
@@ -63,8 +60,7 @@ describe('<ProjectStepTabs />', () => {
           state: 'FUTURE',
           label: 'Questionnaire qui dénonce',
           __typename: 'QuestionnaireStep',
-          url:
-            'https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet',
+          url: 'https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet',
           enabled: true,
           timeRange: {
             startAt: '2020-09-11 00:00:00',
@@ -93,7 +89,7 @@ describe('<ProjectStepTabs />', () => {
     const TestRenderer = props => {
       const data = useLazyLoadQuery<ProjectStepTabsTestQuery>(query, {});
       if (!data.project) return null;
-      return <ProjectStepTabs project={data.project} {...props} />;
+      return <ProjectStepTabs project={data.project} {...props} platformLocale="fr-FR" />;
     };
     TestComponent = props => (
       <RelaySuspensFragmentTest
@@ -126,8 +122,7 @@ describe('<ProjectStepTabs />', () => {
               state: 'OPENED',
               label: 'Consultation',
               __typename: 'ConsultationStep',
-              url:
-                'https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet',
+              url: 'https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet',
               enabled: true,
               timeRange: {
                 startAt: '2020-11-03 20:30:55',

@@ -31,6 +31,7 @@ type Props = {
   hasAnalysingButton?: boolean,
   onAnalysisClick?: () => void,
   shouldDisplayPictures: boolean,
+  platformLocale: string,
 };
 
 const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
@@ -168,15 +169,17 @@ const BackUrl = ({
   defaultStepUrl,
   tradKeyToBack,
   stepId,
+  platformLocale,
 }: {
   originStepUrl?: ?string,
   defaultStepUrl: string,
   tradKeyToBack: ?string,
   stepId?: string,
+  platformLocale: string,
 }) => {
   const url = getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl);
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage);
-  const baseUrl = getBaseLocale(currentLanguage);
+  const baseUrl = getBaseLocale(currentLanguage, platformLocale);
   const { projectSlug } = useParams();
   return (
     <Link
@@ -197,6 +200,7 @@ export const ProposalPageHeader = ({
   hasAnalysingButton,
   onAnalysisClick,
   shouldDisplayPictures,
+  platformLocale,
 }: Props) => {
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt;
   const icon = shouldDisplayPictures ? proposal?.category?.icon : null;
@@ -239,6 +243,7 @@ export const ProposalPageHeader = ({
             defaultStepUrl={proposal?.form?.step?.url?.replace(getBaseUrl(), '') || ''}
             tradKeyToBack={tradKeyToBack}
             stepId={state?.stepId}
+            platformLocale={platformLocale}
           />
           <div>
             {hasAnalysingButton && (

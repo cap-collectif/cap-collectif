@@ -18,10 +18,16 @@ import { getBaseLocale } from '~/utils/router';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import ProjectTrashButton from '~/components/Project/ProjectTrashButton';
 
-const ProjectHeader = ({ projectId }: { +projectId: string }) => (
+const ProjectHeader = ({
+  projectId,
+  platformLocale,
+}: {
+  +projectId: string,
+  +platformLocale: string,
+}) => (
   <section>
     <div className="container" style={{ padding: 0 }}>
-      <ProjectHeaderQueryRenderer projectId={projectId} />
+      <ProjectHeaderQueryRenderer projectId={projectId} platformLocale={platformLocale} />
     </div>
   </section>
 );
@@ -50,27 +56,28 @@ type Props = {|
   +projectSlug: string,
   +projectId: string,
   +stepId: string,
+  +platformLocale: string,
   // QuestionnaireStep needs this
   +questionnaireId?: string,
   // ProposalPage needs this
   currentVotableStepId?: string,
 |};
 
-const ProjectStepPageRouterSwitch = ({ ...props }: Props) => {
+const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage);
-  const baseUrl = getBaseLocale(currentLanguage);
+  const baseUrl = getBaseLocale(currentLanguage, platformLocale);
   const showTrash = useFeatureFlag('project_trash');
   return (
     <>
       <Switch>
         <Route exact path={`${baseUrl}/project/:projectSlug/presentation/:stepSlug`}>
-          <ProjectHeader projectId={props.projectId} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
           <Suspense fallback={<BasicStepFallback />}>
             <PresentationStepPage stepId={props.stepId} projectId={props.projectId} />
           </Suspense>
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/questionnaire/:stepSlug`}>
-          <ProjectHeader projectId={props.projectId} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
           <section className="section--alt">
             <div className="container" style={{ paddingTop: 48 }}>
               <div className="row">
@@ -82,7 +89,7 @@ const ProjectStepPageRouterSwitch = ({ ...props }: Props) => {
           </section>
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/debate/:stepSlug`}>
-          <ProjectHeader projectId={props.projectId} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
           <section style={{ background: '#f7f7f7', borderTop: '1px solid #e5e5e5' }}>
             <div className="container">
               <DebateStepPageWithRouter stepId={props.stepId} fromWidget={false} />
@@ -95,7 +102,7 @@ const ProjectStepPageRouterSwitch = ({ ...props }: Props) => {
           />
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/step/:stepSlug`}>
-          <ProjectHeader projectId={props.projectId} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
           <Suspense fallback={<BasicStepFallback />}>
             <CustomStepPage stepId={props.stepId} />
           </Suspense>
@@ -106,7 +113,7 @@ const ProjectStepPageRouterSwitch = ({ ...props }: Props) => {
             `${baseUrl}/project/:projectSlug/collect/:stepSlug`,
             `${baseUrl}/project/:projectSlug/selection/:stepSlug`,
           ]}>
-          <ProjectHeader projectId={props.projectId} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
           <section className="section--alt">
             <div className="container">
               <ProposalStepPage stepId={props.stepId} projectId={props.projectId} />
@@ -125,7 +132,10 @@ const ProjectStepPageRouterSwitch = ({ ...props }: Props) => {
             `/project/:projectSlug/selection/:stepSlug/proposals/:proposalSlug`,
           ]}>
           <ScrollToTop />
-          <ProposalPage currentVotableStepId={props.currentVotableStepId} />
+          <ProposalPage
+            currentVotableStepId={props.currentVotableStepId}
+            platformLocale={platformLocale}
+          />
         </Route>
       </Switch>
     </>

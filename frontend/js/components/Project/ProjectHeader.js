@@ -44,8 +44,9 @@ const FRAGMENT = graphql`
 export type Props = {|
   +project: ProjectHeader_project$key,
   +isConsultation?: boolean,
+  +platformLocale: string,
 |};
-const ProjectHeader = ({ project, isConsultation }: Props): React.Node => {
+const ProjectHeader = ({ project, isConsultation, platformLocale }: Props): React.Node => {
   const data = useFragment(FRAGMENT, project);
   const renderCover = () => {
     if (data.video) {
@@ -93,7 +94,11 @@ const ProjectHeader = ({ project, isConsultation }: Props): React.Node => {
         <ProjectRestrictedAccessFragment project={data} />
         {data.archived && data.visibility === 'PUBLIC' && <ProjectArchivedTag />}
       </ProjectHeaderLayout.Cover>
-      <ProjectStepTabs project={data} isConsultation={isConsultation} />
+      <ProjectStepTabs
+        project={data}
+        isConsultation={isConsultation}
+        platformLocale={platformLocale}
+      />
     </ProjectHeaderLayout>
   );
 };

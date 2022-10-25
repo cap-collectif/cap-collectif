@@ -17,6 +17,7 @@ use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
@@ -35,17 +36,20 @@ class StepController extends Controller
     private SerializerInterface $serializer;
     private OpinionSearch $opinionSearch;
     private VersionSearch $versionSearch;
+    private LocaleRepository $localeRepo;
 
     public function __construct(
         TranslatorInterface $translator,
         SerializerInterface $serializer,
         OpinionSearch $opinionSearch,
-        VersionSearch $versionSearch
+        VersionSearch $versionSearch,
+        LocaleRepository $localeRepo
     ) {
         $this->translator = $translator;
         $this->serializer = $serializer;
         $this->opinionSearch = $opinionSearch;
         $this->versionSearch = $versionSearch;
+        $this->localeRepo = $localeRepo;
     }
 
     /**
@@ -341,6 +345,7 @@ class StepController extends Controller
                     : null,
                 'projectSlug' => $project->getSlug(),
                 'projectId' => GlobalId::toGlobalId('Project', $project->getId()),
+                'platformLocale' => $this->localeRepo->getDefaultCode(),
             ],
             'json',
             [

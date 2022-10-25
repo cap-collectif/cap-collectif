@@ -12,6 +12,7 @@ import useIsMobile from '~/utils/hooks/useIsMobile';
 
 export type Props = {|
   project: ProjectStepTabs_project$key,
+  platformLocale: string,
   isConsultation?: boolean,
 |};
 const FRAGMENT = graphql`
@@ -36,7 +37,7 @@ const FRAGMENT = graphql`
     }
   }
 `;
-const ProjectStepTabs = ({ project, isConsultation }: Props): React.Node => {
+const ProjectStepTabs = ({ project, isConsultation, platformLocale }: Props): React.Node => {
   const data = useFragment(FRAGMENT, project);
   const intl = useIntl();
   const isMobile = useIsMobile();
@@ -151,7 +152,8 @@ const ProjectStepTabs = ({ project, isConsultation }: Props): React.Node => {
               }
               content={returnStepStatus(step)}
               tooltipLabel={getTooltipText(step)}
-              state={getColorState(step.id, step.state)}>
+              state={getColorState(step.id, step.state)}
+              platformLocale={platformLocale}>
               {renderProgressBar(step)}
             </ProjectHeader.Step>
           ))}

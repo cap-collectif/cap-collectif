@@ -319,12 +319,13 @@ type RouterWrapperProps = {|
   +href: string,
   +stepId: string,
   +questionnaireId?: string,
+  +platformLocale: string,
 |};
 
-const Route = ({ children, href, stepId, questionnaireId }: RouterWrapperProps) => {
+const Route = ({ children, href, stepId, questionnaireId, platformLocale }: RouterWrapperProps) => {
   const { projectSlug } = useParams();
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage);
-  const baseUrl = getBaseLocale(currentLanguage);
+  const baseUrl = getBaseLocale(currentLanguage, platformLocale);
   return (
     <Link
       to={{
@@ -336,9 +337,20 @@ const Route = ({ children, href, stepId, questionnaireId }: RouterWrapperProps) 
   );
 };
 
-const RouterWrapper = ({ router, children, href, stepId, questionnaireId }: RouterWrapperProps) => {
+const RouterWrapper = ({
+  router,
+  children,
+  href,
+  stepId,
+  questionnaireId,
+  platformLocale,
+}: RouterWrapperProps) => {
   return router ? (
-    <Route stepId={stepId} questionnaireId={questionnaireId} href={href}>
+    <Route
+      stepId={stepId}
+      questionnaireId={questionnaireId}
+      href={href}
+      platformLocale={platformLocale}>
       {children}
     </Route>
   ) : (
@@ -358,6 +370,7 @@ type StepProps = {|
   onClick?: (event: Event) => void,
   stepId: string,
   questionnaireId?: string,
+  platformLocale?: string,
 |};
 export const Step = ({
   title,
@@ -372,6 +385,7 @@ export const Step = ({
   isEnd = false,
   questionnaireId,
   onClick,
+  platformLocale = 'fr-FR',
   ...rest
 }: StepProps) => {
   const mainColor = useSelector(store => store.default.parameters['color.btn.primary.bg']);
@@ -409,7 +423,8 @@ export const Step = ({
         router={!url && !isMobile}
         href={href}
         stepId={stepId}
-        questionnaireId={questionnaireId}>
+        questionnaireId={questionnaireId}
+        platformLocale={platformLocale}>
         <Flex
           onClick={onClick}
           className="frise__stepItem"

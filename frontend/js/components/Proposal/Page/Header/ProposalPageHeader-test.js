@@ -99,6 +99,7 @@ describe('<ProposalPageHeader />', () => {
     opinionCanBeFollowed: true,
     hasVotableStep: true,
     shouldDisplayPictures: true,
+    platformLocale: 'fr-FR',
   };
 
   it('should render a proposal header as ProposalFrom', () => {

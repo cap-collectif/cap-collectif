@@ -10,6 +10,7 @@ describe('<ProposalPage />', () => {
     proposalSlug: 'proposal-titre',
     currentVotableStepId: 'stepid',
     isAuthenticated: false,
+    platformLocale: 'fr-FR',
   };
 
   afterEach(() => {
