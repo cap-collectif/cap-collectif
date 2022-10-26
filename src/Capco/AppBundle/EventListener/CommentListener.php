@@ -58,7 +58,7 @@ class CommentListener
 
     private function handleUnpublishedComment(Comment $comment): void
     {
-        $moderationEnabled = $this->manager->isActive('moderation_comment');
+        $moderationEnabled = $this->manager->isActive(Manager::moderation_comment);
         if ($comment->isPublished() || !$moderationEnabled) {
             return;
         }
@@ -70,8 +70,8 @@ class CommentListener
 
     private function handlePendingModerationNotification(Comment $comment): void
     {
-        $moderationEnabled = $this->manager->isActive('moderation_comment');
-        if ($comment->isPending() || !$moderationEnabled || !$comment->isPublished()) {
+        $moderationEnabled = $this->manager->isActive(Manager::moderation_comment);
+        if (!$comment->isPending() || !$moderationEnabled || !$comment->isPublished()) {
             return;
         }
         $this->sendModerationPendingNotificationEmail($comment);
@@ -179,7 +179,7 @@ class CommentListener
             return;
         }
 
-        $moderationEnabled = $this->manager->isActive('moderation_comment');
+        $moderationEnabled = $this->manager->isActive(Manager::moderation_comment);
         if ($moderationEnabled && $comment->isPending()) {
             $this->sendModerationPendingNotificationEmail($comment);
         }
@@ -199,7 +199,7 @@ class CommentListener
             return;
         }
 
-        $moderationEnabled = $this->manager->isActive('moderation_comment');
+        $moderationEnabled = $this->manager->isActive(Manager::moderation_comment);
         if ($moderationEnabled && $comment->getModerationStatus() === ModerationStatus::PENDING) {
             $this->sendModerationPendingNotificationEmail($comment);
         }
