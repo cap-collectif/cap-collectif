@@ -14,6 +14,7 @@ class OrganizationVoter extends Voter
     public const CREATE = 'create';
     public const EDIT = 'edit';
     public const DELETE = 'delete';
+    public const KICK = 'kick';
 
     protected function supports($attribute, $subject): bool
     {
@@ -25,6 +26,7 @@ class OrganizationVoter extends Voter
                     self::EDIT,
                     self::CREATE,
                     self::DELETE,
+                    self::KICK,
                 ],
                 true
             );
@@ -44,6 +46,8 @@ class OrganizationVoter extends Voter
         switch ($attribute) {
             case self::EDIT:
                 return self::canEdit($subject, $viewer);
+            case self::KICK:
+                return self::canKick($subject, $viewer);
         }
 
         return false;
@@ -51,15 +55,11 @@ class OrganizationVoter extends Voter
 
     private static function canEdit(Organization $organization, User $viewer): bool
     {
-        if ($viewer->isAdmin()) {
-            return true;
-        }
+        return $viewer->isAdmin() || $organization->isUserAdmin($viewer);
+    }
 
-        $membership = $organization->getMembership($viewer);
-        if ($membership) {
-            return OrganizationMemberRoleType::ADMIN === $membership->getRole();
-        }
-
-        return false;
+    private static function canKick(Organization $organization, User $viewer): bool
+    {
+        return $viewer->isAdmin() || $organization->isUserAdmin($viewer);
     }
 }

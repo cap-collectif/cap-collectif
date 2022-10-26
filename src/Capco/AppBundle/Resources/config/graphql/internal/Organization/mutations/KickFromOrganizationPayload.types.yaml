@@ -1,0 +1,14 @@
+KickFromOrganizationPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of kickFromOrganization mutation.'
+        fields:
+            user:
+                type: 'InternalUser'
+                description: 'The kicked user.'
+            organization:
+                type: 'InternalOrganization'
+                description: 'The organization from which the user is kicked.'
+            errorCode:
+                type: 'KickFromOrganizationErrorCode'
+                description: 'The available errors for kickFromOrganization mutation.'

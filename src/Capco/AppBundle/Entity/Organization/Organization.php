@@ -122,9 +122,16 @@ class Organization implements
         );
     }
 
-    public function isUserAlreadyMember(User $user): bool
+    public function isUserMember(User $user): bool
     {
         return $this->getUsersMember()->contains($user);
+    }
+
+    public function isUserAdmin(User $user): bool
+    {
+        $memberShip = $this->getMembership($user);
+
+        return $memberShip && $memberShip->isAdmin();
     }
 
     public function setMembers(Collection $members): self

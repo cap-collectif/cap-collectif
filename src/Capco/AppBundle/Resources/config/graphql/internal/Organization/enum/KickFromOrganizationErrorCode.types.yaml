@@ -1,0 +1,13 @@
+KickFromOrganizationErrorCode:
+    type: enum
+    config:
+        name: KickFromOrganizationErrorCode
+        description: 'Available errors for an `kickFromOrganization` mutation.'
+        values:
+            ORGANIZATION_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\KickFromOrganizationMutation::ORGANIZATION_NOT_FOUND")'
+                description: 'Organization not found or not admin.'
+            USER_NOT_MEMBER:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\KickFromOrganizationMutation::USER_NOT_MEMBER")'
+                description: 'User not found or not a member of the organization.'
+

@@ -6992,6 +6992,36 @@ enum JumpsOrderField {
   POSITION
 }
 
+"""Available errors for an `kickFromOrganization` mutation."""
+enum KickFromOrganizationErrorCode {
+  """Organization not found or not admin."""
+  ORGANIZATION_NOT_FOUND
+
+  """User not found or not a member of the organization."""
+  USER_NOT_MEMBER
+}
+
+input KickFromOrganizationInput {
+  """The organization from which the user is kicked."""
+  organizationId: ID!
+
+  """The kicked user id."""
+  userId: ID!
+  clientMutationId: String
+}
+
+type KickFromOrganizationPayload {
+  """The kicked user."""
+  user: User
+
+  """The organization from which the user is kicked."""
+  organization: Organization
+
+  """The available errors for kickFromOrganization mutation."""
+  errorCode: KickFromOrganizationErrorCode
+  clientMutationId: String
+}
+
 """Requires a lastname"""
 type LastnameRequirement implements Node & Requirement {
   """The ID of an object"""
@@ -8050,6 +8080,7 @@ type Mutation {
   verifySmsVotePhoneNumber(input: VerifySmsVotePhoneNumberInput!): VerifySmsVotePhoneNumberPayload
   inviteOrganizationMember(input: InviteOrganizationMemberInput!): InviteOrganizationMemberPayload
   inviteUserToOrganization(input: InviteUserToOrganizationInput!): InviteUserToOrganizationPayload
+  kickFromOrganization(input: KickFromOrganizationInput!): KickFromOrganizationPayload
   createProposalAnalysisComment(input: CreateProposalAnalysisCommentInput!): CreateProposalAnalysisCommentPayload
 }
 

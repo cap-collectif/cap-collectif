@@ -1,0 +1,11 @@
+KickFromOrganizationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of kickFromOrganization mutation.'
+        fields:
+            organizationId:
+                type: 'ID!'
+                description: 'The organization from which the user is kicked.'
+            userId:
+                type: 'ID!'
+                description: 'The kicked user id.'

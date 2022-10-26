@@ -98,7 +98,7 @@ abstract class AbstractOrgnizationInvitation implements MutationInterface
         if (!$organization instanceof Organization) {
             throw new \RuntimeException(self::ORGANIZATION_NOT_FOUND);
         }
-        if ($user instanceof User && $organization->isUserAlreadyMember($user)) {
+        if ($user instanceof User && $organization->isUserMember($user)) {
             throw new \RuntimeException(self::USER_ALREADY_MEMBER);
         }
         if ($this->isUserAlreadyInvited($organization, $user, $email)) {
