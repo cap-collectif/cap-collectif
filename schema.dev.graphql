@@ -11073,14 +11073,17 @@ type ProposalFormEdge {
 
 """Value of a proposal sorting"""
 enum ProposalFormObjectType {
-  """The proposal form is a Proposal"""
+  """The proposal form allows to submit proposals"""
   PROPOSAL
 
-  """The proposal form is a Question"""
+  """The proposal form allows to submit questions."""
   QUESTION
 
-  """The proposal form is an Establishment"""
+  """The proposal form allows to submit establishment."""
   ESTABLISHMENT
+
+  """The proposal form allows to submit opinions."""
+  OPINION
 }
 
 """Ways in which lists of proposalForms can be ordered upon return."""

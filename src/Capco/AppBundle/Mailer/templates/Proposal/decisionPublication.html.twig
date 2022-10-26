@@ -1,7 +1,7 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% block html_title %}
-    {{ 'notification.proposal.decision.title'|trans({'decisionMakerName': proposal.decisionMaker.username, 'proposalName': proposal.title}, 'CapcoAppBundle', user_locale) }}
+    {{ 'notification.contribution.decision.title'|trans({'decisionMakerName': proposal.decisionMaker.username, 'proposalName': proposal.title}, 'CapcoAppBundle', user_locale) }}
 {% endblock %}
 
 {% set logoUrl = app_logo_url() %}
@@ -20,7 +20,7 @@
         <table width="100%" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td>
-                    {{ 'notification.proposal.decision.body'
+                    {{ 'notification.contribution.decision.body'
                         |trans({
                             'decisionMakerUrl': decisionMakerUrl,
                             'decisionMakerName': proposal.decisionMaker.username,

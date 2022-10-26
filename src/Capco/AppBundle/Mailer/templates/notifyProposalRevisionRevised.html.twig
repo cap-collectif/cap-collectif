@@ -23,7 +23,7 @@
 
         <p style="margin: 0;line-height: 22px;">
             {{ 'global-hello'|trans({}, 'CapcoAppBundle', user_locale) | raw }} 👋,<br/>
-            {{ 'proposal_revision_revised.notification.body'|trans({}, 'CapcoAppBundle', user_locale) }}
+            {{ 'contribution_revision_revised.notification.body'|trans({}, 'CapcoAppBundle', user_locale) }}
         </p>
         <p>
             <b>{{ 'reason_of_revision'|trans({'{num}': nbRevisions}) }}</b>
@@ -44,7 +44,7 @@
             {{ 'click-show-proposal'|trans({}, 'CapcoAppBundle', user_locale) }}
         </p>
         <div style="background-color: {{ btnColor }}; width: 202px; height: 48px; font-size: 11px; font-weight: 700; color: #fff;display: flex;">
-            <a href="{{ proposalURL }}" style="color: {{btnTextColor}};text-align: center;margin: auto;">{{ 'show-proposal'|trans({}, 'CapcoAppBundle', user_locale) | upper }}</a>
+            <a href="{{ proposalURL }}" style="color: {{btnTextColor}};text-align: center;margin: auto;">{{ 'show-contribution'|trans({}, 'CapcoAppBundle', user_locale) | upper }}</a>
         </div>
     </div>
 {% endblock %}

@@ -198,10 +198,8 @@ const AnalysisDashboardHeader = ({
 
   const roleUserConnected = getRoleUser(project, selectedRows, userConnected.id);
   const actionsShown: string[] = getActionShown(roleUserConnected, userConnected.id, selectedRows);
-  const {
-    analysts: analystsWithAnalyseBegin,
-    supervisors: supervisorsWithAnalyseBegin,
-  } = getUsersWithAnalyseBegin(project, selectedRows);
+  const { analysts: analystsWithAnalyseBegin, supervisors: supervisorsWithAnalyseBegin } =
+    getUsersWithAnalyseBegin(project, selectedRows);
 
   const selectedSupervisorsByProposals = React.useMemo(
     () => getSelectedSupervisorsByProposals(project, selectedRows),
@@ -211,6 +209,7 @@ const AnalysisDashboardHeader = ({
     () => getSelectedAnalystsByProposals(project, selectedRows),
     [project, selectedRows],
   );
+  const areOpinions: boolean = project.firstCollectStep?.form?.objectType === 'OPINION';
 
   React.useEffect(() => {
     setSupervisor(getCommonSupervisorIdWithinProposalIds(project, selectedRows));
@@ -480,8 +479,11 @@ const AnalysisDashboardHeader = ({
     <>
       <FormattedMessage
         tagName="p"
-        id="count-proposal"
-        values={{ num: selectedRows.length > 0 ? selectedRows.length : rowsCount }}
+        id={areOpinions ? 'opinion.count' : 'count-proposal'}
+        values={{
+          num: selectedRows.length > 0 ? selectedRows.length : rowsCount,
+          count: selectedRows.length > 0 ? selectedRows.length : rowsCount,
+        }}
       />
 
       <AnalysisProposalListFiltersContainer>
@@ -519,22 +521,19 @@ export default createPaginationContainer(
   {
     project: graphql`
       fragment AnalysisDashboardHeader_project on Project
-        @argumentDefinitions(
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-          orderBy: {
-            type: "ProposalOrder!"
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-          }
-          category: { type: "ID", defaultValue: null }
-          district: { type: "ID", defaultValue: null }
-          theme: { type: "ID", defaultValue: null }
-          analysts: { type: "[ID!]", defaultValue: null }
-          supervisor: { type: "ID", defaultValue: null }
-          decisionMaker: { type: "ID", defaultValue: null }
-          state: { type: "ProposalTaskState", defaultValue: null }
-          term: { type: "String", defaultValue: null }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+        category: { type: "ID", defaultValue: null }
+        district: { type: "ID", defaultValue: null }
+        theme: { type: "ID", defaultValue: null }
+        analysts: { type: "[ID!]", defaultValue: null }
+        supervisor: { type: "ID", defaultValue: null }
+        decisionMaker: { type: "ID", defaultValue: null }
+        state: { type: "ProposalTaskState", defaultValue: null }
+        term: { type: "String", defaultValue: null }
+      ) {
         id
         steps {
           id
@@ -618,6 +617,11 @@ export default createPaginationContainer(
               }
               ...AnalysisProposalListRole_proposal
             }
+          }
+        }
+        firstCollectStep {
+          form {
+            objectType
           }
         }
       }

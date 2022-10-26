@@ -26,6 +26,7 @@ exports[`<ProposalStepPageHeader /> renders with a map view 1`] = `
         id="proposal.count"
         values={
           Object {
+            "count": 5,
             "num": 5,
           }
         }
@@ -61,6 +62,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
         id="interpellation.count"
         values={
           Object {
+            "count": 5,
             "num": 5,
           }
         }
@@ -191,6 +193,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in selec
         id="interpellation.count"
         values={
           Object {
+            "count": 5,
             "num": 5,
           }
         }
@@ -226,6 +229,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
         id="proposal.count"
         values={
           Object {
+            "count": 5,
             "num": 5,
           }
         }
@@ -356,6 +360,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in selection s
         id="proposal.count"
         values={
           Object {
+            "count": 5,
             "num": 5,
           }
         }
@@ -379,7 +384,7 @@ exports[`<ProposalStepPageHeader /> renders with question context in selection s
       }
     }
     show={false}
-    title="submit-a-question"
+    title="proposal.submit-a-question"
   />
   <div
     id="proposal-step-page-header"
@@ -391,6 +396,7 @@ exports[`<ProposalStepPageHeader /> renders with question context in selection s
         id="count-questions"
         values={
           Object {
+            "count": 5,
             "num": 5,
           }
         }

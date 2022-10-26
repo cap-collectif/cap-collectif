@@ -1,6 +1,6 @@
 {% block body_text %}
     {% autoescape false %}
-        {{ 'notification.proposal.answer.body'|trans(
+        {{ 'notification.contribution.answer.body'|trans(
             {
                 'sitename': capco_site_parameter_value('global.site.fullname'),
                 'project': proposal.step.project.title,

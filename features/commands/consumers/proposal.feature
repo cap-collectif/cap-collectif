@@ -11,7 +11,7 @@ Scenario: Email should be sent if a message is sent to the proposal_create queue
   """
   And I consume "proposal_create"
   Then I open mail with subject "notification.proposal.create.subject"
-  And I should see "notification.proposal.create.body" in mail
+  And I should see "notification.contribution.create.body" in mail
   Then I open mail with subject "acknowledgement-of-receipt"
   And I should see "your-proposal-has-been-registered" in mail
 
@@ -24,8 +24,8 @@ Scenario: Email should be sent if a message is sent to the proposal_delete queue
   }
   """
   And I consume "proposal_delete"
-  Then I open mail with subject "notification.proposal.delete.subject"
-  And I should see "notification.proposal.delete.body" in mail
+  Then I open mail with subject "notification.contribution.delete.subject"
+  And I should see "notification.contribution.delete.body" in mail
 
 @rabbitmq
 Scenario: Email should be sent if a message is sent to the proposal_update queue
@@ -36,8 +36,8 @@ Scenario: Email should be sent if a message is sent to the proposal_update queue
   }
   """
   And I consume "proposal_update"
-  Then I open mail with subject "notification.proposal.update.subject"
-  And I should see "notification.proposal.update.body" in mail
+  Then I open mail with subject "notification.contribution.update.subject"
+  And I should see "notification.contribution.update.body" in mail
   Then I open mail with subject "acknowledgement-of-receipt"
   And I should see "you-have-modified-your-proposal" in mail
 
@@ -51,7 +51,7 @@ Scenario: Email should be sent if a message is sent to the proposal_create queue
   """
   And I consume "proposal_create"
   Then I open mail with subject "notification.proposal.create.subject"
-  And I should see "notification.proposal.create.body" in mail
+  And I should see "notification.contribution.create.body" in mail
   Then I should not see mail with subject "acknowledgement-of-receipt"
 
 @rabbitmq
@@ -63,8 +63,8 @@ Scenario: Email should be sent if a message is sent to the proposal_update queue
   }
   """
   And I consume "proposal_update"
-  Then I open mail with subject "notification.proposal.update.subject"
-  And I should see "notification.proposal.update.body" in mail
+  Then I open mail with subject "notification.contribution.update.subject"
+  And I should see "notification.contribution.update.body" in mail
   Then I should not see mail with subject "acknowledgement-of-receipt"
 
 @rabbitmq @snapshot-email
@@ -101,7 +101,7 @@ Scenario: Proposal author receive message after, admin updated status of his pro
   }
   """
   And I consume "proposal_update_status"
-  Then I open mail with subject 'proposal-notifier-new-status {"{proposalTitle}":"R\u00e9novation du gymnase","{proposalStatus}":"Vote gagn\u00e9"}'
+  Then I open mail with subject 'contribution-notifier-new-status {"{proposalTitle}":"R\u00e9novation du gymnase","{proposalStatus}":"Vote gagn\u00e9"}'
   And email should match snapshot "notifyProposal_AuthorStatusChange.html"
 
 @rabbitmq @snapshot-email
@@ -210,7 +210,7 @@ Scenario: decisionmaker receive message when assessment is published
   """
   And I consume "proposal_analyse"
   Then I should see mail to "aurelien@cap-collectif.com"
-  And I should see mail with subject "notification.proposal.assessment.title"
+  And I should see mail with subject "notification.assessment.title"
 
 @rabbitmq
 Scenario: everyone receive message when decision is published
@@ -227,7 +227,7 @@ Scenario: everyone receive message when decision is published
   And I should see mail to "theo@cap-collectif.com"
   And I should see mail to "maxime.auriau@cap-collectif.com"
   And I should see mail to "mickael@cap-collectif.com"
-  And I should see mail with subject "notification.proposal.decision.title"
+  And I should see mail with subject "notification.contribution.decision.title"
 
 @rabbitmq @snapshot-email
 Scenario: proposal author recive message when assigned user ask a revision on his proposal
@@ -318,4 +318,4 @@ Scenario: Notification email shall be sent to configured address
   """
   And I consume "proposal_create"
   Then I open mail with subject "notification.proposal.create.subject" from "assistance@cap-collectif.com" to "theo@cap-collectif.com"
-  And I should see "notification.proposal.create.body" in mail
+  And I should see "notification.contribution.create.body" in mail

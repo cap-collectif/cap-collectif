@@ -55,6 +55,7 @@ const TYPE_PROPOSAL_FORM = {
   PROPOSAL: 'PROPOSAL',
   QUESTION: 'QUESTION',
   ESTABLISHMENT: 'ESTABLISHMENT',
+  OPINION: 'OPINION',
 };
 
 export const formName = 'proposal-form-admin-configuration';
@@ -341,7 +342,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       delete question.importedResponses;
     }
     values.questions[index].title = values.questions[index].title.trim();
-    if(question.choices) {
+    if (question.choices) {
       question.choices.map((choice, key) => {
         question.choices[key].title = question.choices[key].title.trim();
       });
@@ -489,6 +490,10 @@ export const ProposalFormAdminConfigurationForm = ({
               {
                 value: TYPE_PROPOSAL_FORM.ESTABLISHMENT,
                 label: intl.formatMessage({ id: 'global.establishment' }),
+              },
+              {
+                value: TYPE_PROPOSAL_FORM.OPINION,
+                label: intl.formatMessage({ id: 'global.review' }),
               },
             ]}
           />

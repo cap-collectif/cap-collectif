@@ -676,7 +676,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "8b61b82e576c8a175e196eb7033fa560",
+          "cacheID": "c7e617be7e20fa84f92e4b437b4adc0a",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -795,6 +795,10 @@ fragment ProposalPreviewStatus_proposal_2tPna9 on Proposal {
   trashed
   trashedStatus
   trashedReason
+  form {
+    objectType
+    id
+  }
 }
 
 fragment ProposalPreviewUser_proposal on Proposal {

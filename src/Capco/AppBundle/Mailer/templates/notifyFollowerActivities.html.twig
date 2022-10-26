@@ -93,7 +93,9 @@
                                         <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
-                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'global.proposal'|trans({}, 'CapcoAppBundle', user_locale) }}</span>
+                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">
+                                                        {{ 'opinion' == proposal.type ? 'global.opinion' : 'global.proposal'|trans({}, 'CapcoAppBundle', user_locale) }}
+                                                    </span>
                                                     <ul style="list-style: none; padding:0; color: #000000;">
                                                         <a href="{{ proposal.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4></a>
                                                         {% if proposal.votes > 0 %}

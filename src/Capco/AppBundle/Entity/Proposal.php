@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
@@ -1653,5 +1654,12 @@ class Proposal implements
         }
 
         return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->getForm()
+            ? $this->getForm()->getObjectType()
+            : ProposalFormObjectType::PROPOSAL;
     }
 }

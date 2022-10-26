@@ -453,6 +453,8 @@ const ProposalListHeader = ({ project, themes, defaultUsers }: $Diff<Props, { re
     setSupervisor(getCommonSupervisorIdWithinProposalIds(project, selectedRows));
   }, [project, selectedRows]);
 
+  const isOpinion: boolean = project.firstCollectStep?.form?.objectType === 'OPINION';
+
   const renderFilters = (
     <>
       {districts?.length > 0 && (
@@ -757,7 +759,7 @@ const ProposalListHeader = ({ project, themes, defaultUsers }: $Diff<Props, { re
       {selectedRows.length > 0 ? (
         <React.Fragment>
           <FormattedMessage
-            id="admin-proposals-list-selected"
+            id={isOpinion ? 'admin-opinions-list-selected' : 'admin-proposals-list-selected'}
             tagName="p"
             values={{
               itemCount: selectedRows.length,
@@ -781,7 +783,13 @@ const ProposalListHeader = ({ project, themes, defaultUsers }: $Diff<Props, { re
       ) : (
         <React.Fragment>
           <p>
-            {rowsCount} <FormattedMessage id="global.proposals" />
+            <FormattedMessage
+              id={isOpinion ? 'opinion.count' : 'count-proposal'}
+              values={{
+                num: rowsCount,
+                count: rowsCount,
+              }}
+            />
           </p>
           <AnalysisProposalListFiltersContainer>
             <AnalysisProposalListFiltersAction>{renderFilters}</AnalysisProposalListFiltersAction>
@@ -815,9 +823,8 @@ export const ProjectAdminAnalysis = ({ project, themes, defaultUsers, relay }: P
     project.firstAnalysisStep?.proposals?.totalCount > 0;
   const hasSelectedFilters = getDifferenceFiltersAnalysis(parameters.filters);
   const [proposalSelected, setProposalSelected] = React.useState<?string>(null);
-  const [proposalModalDelete, setProposalModalDelete] = React.useState<?AnalysisProposal_proposal>(
-    null,
-  );
+  const [proposalModalDelete, setProposalModalDelete] =
+    React.useState<?AnalysisProposal_proposal>(null);
 
   const getProjectExportUrl = (type: string): string => {
     switch (type) {
@@ -967,25 +974,22 @@ export default createPaginationContainer(
   {
     project: graphql`
       fragment ProjectAdminAnalysis_project on Project
-        @argumentDefinitions(
-          projectId: { type: "ID!" }
-          count: { type: "Int!" }
-          proposalRevisionsEnabled: { type: "Boolean!" }
-          cursor: { type: "String" }
-          orderBy: {
-            type: "ProposalOrder!"
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-          }
-          category: { type: "ID", defaultValue: null }
-          district: { type: "ID", defaultValue: null }
-          theme: { type: "ID", defaultValue: null }
-          progressStatus: { type: "ProposalProgressState", defaultValue: null }
-          status: { type: "ID", defaultValue: null }
-          term: { type: "String", defaultValue: null }
-          analysts: { type: "[ID!]", defaultValue: null }
-          supervisor: { type: "ID", defaultValue: null }
-          decisionMaker: { type: "ID", defaultValue: null }
-        ) {
+      @argumentDefinitions(
+        projectId: { type: "ID!" }
+        count: { type: "Int!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+        cursor: { type: "String" }
+        orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+        category: { type: "ID", defaultValue: null }
+        district: { type: "ID", defaultValue: null }
+        theme: { type: "ID", defaultValue: null }
+        progressStatus: { type: "ProposalProgressState", defaultValue: null }
+        status: { type: "ID", defaultValue: null }
+        term: { type: "String", defaultValue: null }
+        analysts: { type: "[ID!]", defaultValue: null }
+        supervisor: { type: "ID", defaultValue: null }
+        decisionMaker: { type: "ID", defaultValue: null }
+      ) {
         id
         slug
         ...ProjectAdminAnalysisNoProposals_project
@@ -1107,6 +1111,11 @@ export default createPaginationContainer(
               }
               cursor
             }
+          }
+        }
+        firstCollectStep {
+          form {
+            objectType
           }
         }
       }

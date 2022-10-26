@@ -10,6 +10,7 @@ import {
   isInterpellationContextFromStep,
   isEstablishmentFormStep,
   getProposalLabelByType,
+  isOpinionFormStep,
 } from '~/utils/interpellationLabelHelper';
 import type { Dispatch, GlobalState } from '~/types';
 import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql';
@@ -39,17 +40,21 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
   const { fusionCount } = step.allProposals;
   const isInterpellation = isInterpellationContextFromStep(step);
   const isEstablishment = isEstablishmentFormStep(step);
+  const isOpinion = isOpinionFormStep(step);
   const isProposalForm = step.form && step.form.objectType === 'PROPOSAL';
-  const titleTradKey =
-    step.form?.objectType === 'ESTABLISHMENT'
-      ? getProposalLabelByType(projectType, 'add-establishment')
-      : step.form?.objectType === 'PROPOSAL'
-      ? getProposalLabelByType(projectType, 'add')
-      : 'submit-a-question';
+  const titleTradKey = isEstablishment
+    ? getProposalLabelByType(projectType, 'add-establishment')
+    : step.form?.objectType === 'QUESTION'
+    ? getProposalLabelByType(projectType, 'submit-a-question')
+    : isOpinion
+    ? 'submit-opinion'
+    : getProposalLabelByType(projectType, 'add');
   const tradKeyForTotalCount = isInterpellation
     ? 'interpellation.count_with_total'
     : isEstablishment
     ? 'establishment.count_with_total'
+    : isOpinion
+    ? 'opinion.count_with_total'
     : isProposalForm
     ? 'proposal.count_with_total'
     : 'question-total-count';
@@ -57,9 +62,17 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
     ? 'interpellation.count'
     : isEstablishment
     ? 'establishment.count'
+    : isOpinion
+    ? 'opinion.count'
     : isProposalForm
     ? 'proposal.count'
     : 'count-questions';
+  const tradKeyForFusion =
+    isInterpellation || isEstablishment
+      ? 'interpellation.count_fusions'
+      : isOpinion
+      ? 'opinion.count_fusions'
+      : 'proposal.count_fusions';
   return (
     <>
       <ProposalCreateModal
@@ -84,6 +97,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
               id={tradKeyForCount}
               values={{
                 num: total,
+                count: total,
               }}
             />
           )}
@@ -91,11 +105,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
             <span className="font-weight-300 color-dark-gray">
               {' '}
               <FormattedMessage
-                id={
-                  isInterpellation || isEstablishment
-                    ? 'interpellation.count_fusions'
-                    : 'proposal.count_fusions'
-                }
+                id={tradKeyForFusion}
                 values={{
                   num: fusionCount,
                 }}

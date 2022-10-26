@@ -8,7 +8,7 @@ use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 final class ProposalCreateAdminMessage extends AbstractAdminMessage
 {
     public const SUBJECT = 'notification.proposal.create.subject';
-    public const TEMPLATE = 'notification.proposal.create.body';
+    public const TEMPLATE = 'notification.contribution.create.body';
 
     public static function getMyTemplateVars(Proposal $proposal, array $params): array
     {

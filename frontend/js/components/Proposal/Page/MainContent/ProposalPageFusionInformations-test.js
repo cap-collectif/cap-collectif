@@ -23,6 +23,9 @@ describe('<ProposalPageFusionInformations />', () => {
     ],
     hasBeenMerged: true,
     mergedFrom: [],
+    form: {
+      objectType: 'PROPOSAL',
+    },
   };
   const proposalFusionnedMergedFrom = {
     $refType,
@@ -41,6 +44,9 @@ describe('<ProposalPageFusionInformations />', () => {
         title: 'Title Proposal 3',
       },
     ],
+    form: {
+      objectType: 'PROPOSAL',
+    },
   };
 
   it('should render a list of proposal merged from other proposal', () => {

@@ -9,6 +9,7 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 1`] = `
     tagName="h3"
     values={
       Object {
+        "count": 3,
         "num": 3,
       }
     }
@@ -80,6 +81,7 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 2`] = `
     tagName="h3"
     values={
       Object {
+        "count": 3,
         "num": 3,
       }
     }

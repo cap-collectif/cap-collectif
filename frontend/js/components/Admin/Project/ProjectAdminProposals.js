@@ -501,6 +501,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       }
     }
   }
+  const areOpinions = selectedStep.form?.objectType === 'OPINION';
   const { isLoading, startLoading, stopLoading } = useLoadingMachine();
   const { startToasting, stopToasting } = useToastingMachine();
 
@@ -728,7 +729,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       {selectedRows.length > 0 ? (
         <React.Fragment>
           <FormattedMessage
-            id="admin-proposals-list-selected"
+            id={areOpinions ? 'admin-opinions-list-selected' : 'admin-proposals-list-selected'}
             tagName="p"
             values={{
               itemCount: selectedRows.length,
@@ -746,7 +747,8 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       ) : (
         <React.Fragment>
           <p>
-            {rowsCount} {intl.formatMessage({ id: 'global.proposals' })}
+            {rowsCount}{' '}
+            {intl.formatMessage({ id: areOpinions ? 'global.review' : 'global.proposals' })}
           </p>
           <AnalysisProposalListFiltersContainer>
             <AnalysisProposalListFiltersAction>{renderFilters}</AnalysisProposalListFiltersAction>
@@ -805,6 +807,7 @@ export const ProjectAdminProposals = ({
         paperVotesTotalCount,
         paperVotesTotalPointsCount,
       })) ?? [];
+  const areOpinions = selectedStep?.form?.objectType === 'OPINION';
 
   const [proposalSelected, setProposalSelected] = React.useState<?string>(null);
   const [proposalModalDelete, setProposalModalDelete] =
@@ -953,13 +956,21 @@ export const ProjectAdminProposals = ({
               }}>
               <InlineSelect.Choice value="ALL">
                 {intl.formatMessage(
-                  { id: 'filter.count.status.all' },
+                  {
+                    id: areOpinions
+                      ? 'filter.count.status.all.masculine'
+                      : 'filter.count.status.all',
+                  },
                   { num: project.proposalsAll?.totalCount },
                 )}
               </InlineSelect.Choice>
               <InlineSelect.Choice value="PUBLISHED">
                 {intl.formatMessage(
-                  { id: 'filter.count.status.published' },
+                  {
+                    id: areOpinions
+                      ? 'filter.count.status.published-masculine'
+                      : 'filter.count.status.published',
+                  },
                   { num: project.proposalsPublished?.totalCount },
                 )}
               </InlineSelect.Choice>
@@ -1122,6 +1133,7 @@ const container = createPaginationContainer(
                 id
                 name
               }
+              objectType
             }
           }
           ... on SelectionStep {

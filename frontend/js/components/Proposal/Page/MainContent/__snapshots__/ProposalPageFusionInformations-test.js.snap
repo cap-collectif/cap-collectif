@@ -11,13 +11,13 @@ exports[`<ProposalPageFusionInformations /> should render a list of proposal mer
           size={12}
         />
         <FormattedMessage
-          id="proposal.fusionned"
+          id="proposals.fusionned"
           values={Object {}}
         />
       </span>
       <div>
         <FormattedMessage
-          id="proposal.fusionnedInto"
+          id="new.proposal.fusionnedInto"
           values={Object {}}
         />
         <div

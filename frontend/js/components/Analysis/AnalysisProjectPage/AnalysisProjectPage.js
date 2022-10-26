@@ -52,6 +52,7 @@ const AnalysisProjectPage = ({ project, themes = [], defaultUsers, relay, histor
   const descriptionProject = project.firstCollectStep?.form?.analysisConfiguration?.body;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
   const proposalsWithTheme = getFormattedProposalsWithTheme(project);
+  const areOpinions: boolean = project.firstCollectStep?.form?.objectType === 'OPINION';
   const intl = useIntl();
 
   React.useEffect(() => {
@@ -90,14 +91,14 @@ const AnalysisProjectPage = ({ project, themes = [], defaultUsers, relay, histor
 
           <InlineSelect.Choice value={STATE.DONE}>
             <FormattedMessage
-              id="count.status.done"
+              id={areOpinions ? 'count.status.done.masculine' : 'count.status.done'}
               values={{ num: viewerProposalsDone.totalCount }}
             />
           </InlineSelect.Choice>
 
           <InlineSelect.Choice value={STATE.ALL}>
             <FormattedMessage
-              id="filter.count.status.all"
+              id={areOpinions ? 'filter.count.status.all.masculine' : 'filter.count.status.all'}
               values={{ num: viewerProposalsAll.totalCount }}
             />
           </InlineSelect.Choice>
@@ -176,23 +177,20 @@ export default createPaginationContainer(
   {
     project: graphql`
       fragment AnalysisProjectPage_project on Project
-        @argumentDefinitions(
-          count: { type: "Int!" }
-          proposalRevisionsEnabled: { type: "Boolean!" }
-          cursor: { type: "String" }
-          orderBy: {
-            type: "ProposalOrder!"
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-          }
-          category: { type: "ID", defaultValue: null }
-          district: { type: "ID", defaultValue: null }
-          theme: { type: "ID", defaultValue: null }
-          analysts: { type: "[ID!]", defaultValue: null }
-          supervisor: { type: "ID", defaultValue: null }
-          decisionMaker: { type: "ID", defaultValue: null }
-          state: { type: "ProposalTaskState", defaultValue: null }
-          term: { type: "String", defaultValue: null }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+        cursor: { type: "String" }
+        orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+        category: { type: "ID", defaultValue: null }
+        district: { type: "ID", defaultValue: null }
+        theme: { type: "ID", defaultValue: null }
+        analysts: { type: "[ID!]", defaultValue: null }
+        supervisor: { type: "ID", defaultValue: null }
+        decisionMaker: { type: "ID", defaultValue: null }
+        state: { type: "ProposalTaskState", defaultValue: null }
+        term: { type: "String", defaultValue: null }
+      ) {
         id
         title
         firstCollectStep {
@@ -280,6 +278,11 @@ export default createPaginationContainer(
             state: $state
             term: $term
           )
+        firstCollectStep {
+          form {
+            objectType
+          }
+        }
       }
     `,
     themes: graphql`

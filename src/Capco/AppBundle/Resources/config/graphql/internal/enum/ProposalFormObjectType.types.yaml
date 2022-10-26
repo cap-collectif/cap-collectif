@@ -5,10 +5,13 @@ ProposalFormObjectType:
         values:
             PROPOSAL:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::PROPOSAL")'
-                description: 'The proposal form is a Proposal'
+                description: 'The proposal form allows to submit proposals'
             QUESTION:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::QUESTION")'
-                description: 'The proposal form is a Question'
+                description: 'The proposal form allows to submit questions.'
             ESTABLISHMENT:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::ESTABLISHMENT")'
-                description: 'The proposal form is an Establishment'
+                description: 'The proposal form allows to submit establishment.'
+            OPINION:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::OPINION")'
+                description: 'The proposal form allows to submit opinions.'

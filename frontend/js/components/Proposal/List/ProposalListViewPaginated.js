@@ -36,6 +36,8 @@ const ProposalListViewPaginated = ({
   count,
 }: Props) => {
   const [loading, setLoading] = React.useState<boolean>(false);
+  const isOpinion = step.form?.objectType === 'OPINION';
+  const loadMoreTradKey = isOpinion ? 'see-more-opinions' : 'see-more-proposals';
 
   return (
     <div
@@ -70,7 +72,7 @@ const ProposalListViewPaginated = ({
                     setLoading(false);
                   });
                 }}>
-                <FormattedMessage id={loading ? 'global.loading' : 'see-more-proposals'} />
+                <FormattedMessage id={loading ? 'global.loading' : loadMoreTradKey} />
               </Button>
             )}
           </div>
@@ -84,20 +86,23 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
   ProposalListViewPaginated,
   {
     viewer: graphql`
-      fragment ProposalListViewPaginated_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+      fragment ProposalListViewPaginated_viewer on User
+      @argumentDefinitions(stepId: { type: "ID!" }) {
         ...ProposalList_viewer @arguments(stepId: $stepId)
       }
     `,
     step: graphql`
       fragment ProposalListViewPaginated_step on ProposalStep
-      @argumentDefinitions(token: { type: "String" }) 
-      {
+      @argumentDefinitions(token: { type: "String" }) {
         id
         ... on CollectStep {
           private
         }
         ...ProposalsDisplayMap_step
         ...ProposalList_step
+        form {
+          objectType
+        }
         proposals(
           first: $count
           after: $cursor

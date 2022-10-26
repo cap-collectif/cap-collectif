@@ -7,7 +7,7 @@ use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 
 class DecisionPublicationAdminMessage extends AbstractAdminMessage
 {
-    public const SUBJECT = 'notification.proposal.decision.title';
+    public const SUBJECT = 'notification.contribution.decision.title';
     public const TEMPLATE = '@CapcoMail/Proposal/decisionPublication.html.twig';
     public const FOOTER = '';
 

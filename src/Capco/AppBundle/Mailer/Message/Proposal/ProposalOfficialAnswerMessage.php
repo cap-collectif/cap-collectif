@@ -7,7 +7,7 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 final class ProposalOfficialAnswerMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'proposal_answer.notification.subject';
+    public const SUBJECT = 'contribution_answer.notification.subject';
     public const TEMPLATE = '@CapcoMail/notifyProposalAnswer.html.twig';
 
     public static function getMySubjectVars(Proposal $proposal, array $params): array

@@ -8,11 +8,17 @@ import { $refType } from '../../../mocks';
 describe('<ProposalDraftAlert />', () => {
   const proposal = {
     publicationStatus: 'DRAFT',
+    form: {
+      objectType: 'PROPOSAL',
+    },
     $refType,
   };
 
   const proposalNotInDraft = {
     publicationStatus: 'PUBLISHED',
+    form: {
+      objectType: 'PROPOSAL',
+    },
     $refType,
   };
 

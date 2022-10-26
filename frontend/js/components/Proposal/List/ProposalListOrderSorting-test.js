@@ -12,6 +12,7 @@ const props = {
   order: PROPOSAL_ORDER_RANDOM,
   defaultSort: PROPOSAL_ORDER_RANDOM,
   stepId: 'selectionstep1',
+  objectType: 'PROPOSAL',
   intl: intlMock,
   canDisplayBallot: true,
 };

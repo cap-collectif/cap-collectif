@@ -34,6 +34,7 @@ exports[`<ProposalListFilters /> should render correctly 1`] = `
                 "name": "Ouagadougou",
               },
             ],
+            "objectType": "PROPOSAL",
             "usingAddress": true,
             "usingCategories": true,
             "usingDistrict": true,
@@ -68,6 +69,7 @@ exports[`<ProposalListFilters /> should render correctly 1`] = `
       <Connect(injectIntl(ProposalListOrderSorting))
         canDisplayBallot={true}
         defaultSort="random"
+        objectType="PROPOSAL"
         orderByComments={true}
         orderByCost={true}
         orderByPoints={true}
@@ -112,6 +114,7 @@ exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
                 "name": "Ouagadougou",
               },
             ],
+            "objectType": "PROPOSAL",
             "usingAddress": true,
             "usingCategories": true,
             "usingDistrict": true,
@@ -146,6 +149,7 @@ exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
       <Connect(injectIntl(ProposalListOrderSorting))
         canDisplayBallot={true}
         defaultSort="random"
+        objectType="PROPOSAL"
         orderByComments={true}
         orderByCost={true}
         orderByPoints={true}

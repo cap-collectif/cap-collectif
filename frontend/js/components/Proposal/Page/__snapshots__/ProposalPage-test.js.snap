@@ -2075,7 +2075,42 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   },
                   Object {
                     "abstractKey": "__isStep",
-                    "kind": "TypeDiscriminator",
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProposalForm",
+                            "kind": "LinkedField",
+                            "name": "form",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "objectType",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "CollectStep",
+                      },
+                    ],
+                    "type": "Step",
                   },
                 ],
                 "storageKey": null,
@@ -8790,7 +8825,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "e8e219ff75cce53cbd87ae4d1f26fcf2",
+        "cacheID": "be46566a3d94ae7700ef25d91663ebb2",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -9706,6 +9741,10 @@ fragment ProposalDetailLikers_proposal on Proposal {
 
 fragment ProposalDraftAlert_proposal on Proposal {
   publicationStatus
+  form {
+    objectType
+    id
+  }
 }
 
 fragment ProposalEditModal_proposal_2Ag0mE on Proposal {
@@ -10266,6 +10305,10 @@ fragment ProposalPageFusionInformations_proposal on Proposal {
     url
     id
   }
+  form {
+    objectType
+    id
+  }
 }
 
 fragment ProposalPageHeaderButtons_proposal_2Ag0mE on Proposal {
@@ -10606,6 +10649,10 @@ fragment ProposalPageVoteThreshold_step on Step {
   __isStep: __typename
   ... on CollectStep {
     voteThreshold
+    form {
+      objectType
+      id
+    }
   }
   ... on SelectionStep {
     voteThreshold

@@ -107,3 +107,7 @@ export const isInterpellationContextFromStep = (step: ProposalStep): boolean => 
 export const isEstablishmentFormStep = (step: ProposalStep): boolean => {
   return !!(step.form && step.form.objectType === 'ESTABLISHMENT');
 };
+
+export const isOpinionFormStep = (step: ProposalStep): boolean => {
+  return !!(step.form && step.form.objectType === 'OPINION');
+};

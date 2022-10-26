@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalTrashedListPaginated } from './ProposalTrashedListPaginated';
-import { relayPaginationMock, $refType, $fragmentRefs } from '../../../mocks';
+import { relayPaginationMock, $refType, $fragmentRefs } from '~/mocks';
 
 describe('<ProposalTrashedListPaginated />', () => {
   const props = {
@@ -25,6 +25,11 @@ describe('<ProposalTrashedListPaginated />', () => {
           endCursor: null,
         },
       },
+      firstCollectStep: {
+        form: {
+          objectType: 'PROPOSAL',
+        },
+      },
     },
   };
 
@@ -43,6 +48,11 @@ describe('<ProposalTrashedListPaginated />', () => {
               hasPreviousPage: false,
               startCursor: null,
               endCursor: null,
+            },
+          },
+          firstCollectStep: {
+            form: {
+              objectType: 'PROPOSAL',
             },
           },
         }}

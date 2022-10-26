@@ -131,6 +131,7 @@ export class ProposalListFilters extends React.Component<Props> {
               orderByVotes={orderByVotes}
               orderByPoints={orderByPoints}
               defaultSort={step.defaultSort}
+              objectType={step.form?.objectType}
               canDisplayBallot={step.canDisplayBallot}
             />
           </Col>
@@ -213,6 +214,7 @@ export default createFragmentContainer(container, {
           id
           name
         }
+        objectType
       }
       ...ProposalListToggleViewBtn_step
     }

@@ -34,7 +34,11 @@
 
             {% if typeOfMail == 'create' %}
                 <p style="margin: 0; line-height: 24px;">
-                    {{ 'your-proposal-has-been-registered'|trans({'{proposalTitle}': proposalName,'{proposalLink}': proposalLink, '{linkColor}': linkText},'CapcoAppBundle', user_locale)|raw }}
+                    {{ (proposal.type == 'opinion' ? 'your-opinion-has-been-registered' : 'your-proposal-has-been-registered')|trans(
+                        {'{proposalTitle}': proposalName,'{proposalLink}': proposalLink, '{linkColor}': linkText},
+                        'CapcoAppBundle',
+                        user_locale
+                    )|raw }}
                     <span>{{ 'on-date-at-time'|trans({'{date}':proposalDate, '{heure}': proposalHour},'CapcoAppBundle', user_locale)|raw }}.</span>
                 </p>
 
@@ -62,9 +66,19 @@
 
         <div style="color: #545E68; text-align: left;">
             {% if isTimeless %}
-                {{ 'you-can-still-edit-or-delete-your-proposal'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+                {{ (proposal.type == 'opinion' ? 'you-can-still-edit-or-delete-your-opinion' : 'you-can-still-edit-or-delete-your-proposal')|trans(
+                    {},
+                    'CapcoAppBundle',
+                    user_locale
+                )|raw }}
             {% else %}
-                <p style="margin: 0; line-height: 24px;">{{ 'you-can-modify-or-delete-your-proposal'|trans({'{modifier}':proposalLink, '{supprimer}': proposalLink},'CapcoAppBundle', user_locale) }}</p>
+                <p style="margin: 0; line-height: 24px;">
+                    {{ (proposal.type == 'opinion' ? 'you-can-modify-or-delete-your-opinion' : 'you-can-modify-or-delete-your-proposal')|trans(
+                        {'{modifier}':proposalLink, '{supprimer}': proposalLink},
+                        'CapcoAppBundle',
+                        user_locale
+                    ) }}
+                </p>
             {% endif %}
             <p style="margin: 0; line-height: 24px;">{{ 'published-contribution-email'|trans({}, 'CapcoAppBundle', user_locale)|raw }}</p>
         </div>

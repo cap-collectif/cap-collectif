@@ -1,6 +1,6 @@
 {% block body_text %}
     {% autoescape false %}
-        {{ 'notification.proposal.status.collect.body'|trans(
+        {{ 'notification.contribution.status.collect.body'|trans(
             {
                 'sitename': capco_site_parameter_value('global.site.fullname'),
                 'project': proposal.step.project.title,

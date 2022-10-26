@@ -6,7 +6,10 @@ import RemainingTime from '~/components/Utils/RemainingTime';
 import DatesInterval from '~/components/Utils/DatesInterval';
 import { type StepPageHeader_step$key } from '~relay/StepPageHeader_step.graphql';
 import BodyInfos from '~/components/Ui/Boxes/BodyInfos';
-import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
+import {
+  isInterpellationContextFromStep,
+  isOpinionFormStep,
+} from '~/utils/interpellationLabelHelper';
 import StepPageHeaderContainer from './StepPageHeader.style';
 
 type Props = {|
@@ -72,6 +75,8 @@ export const StepPageHeader = ({ step: stepFragment }: Props) => {
             id={
               isInterpellationContextFromStep(step)
                 ? 'interpellation.support.threshold.step'
+                : isOpinionFormStep(step)
+                ? 'opinion.vote.threshold.step'
                 : 'proposal.vote.threshold.step'
             }
             values={{

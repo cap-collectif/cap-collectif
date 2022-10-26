@@ -62,6 +62,7 @@ const AnalysisProposal = ({
 }: Props) => {
   const isSelected = proposalSelected === proposal.id;
   const hasActionDisplay = isSelected && isAdminView;
+  const isOpinion = proposal.form.objectType === 'OPINION';
   const intl = useIntl();
 
   return (
@@ -122,7 +123,7 @@ const AnalysisProposal = ({
             {proposal.publishedAt && (
               <React.Fragment>
                 {' '}
-                • {intl.formatMessage({ id: 'submited_on' })}{' '}
+                • {intl.formatMessage({ id: isOpinion ? 'published-on' : 'submited_on' })}{' '}
                 <FormattedDate
                   value={moment(proposal.publishedAt)}
                   day="numeric"
@@ -315,6 +316,9 @@ export default createFragmentContainer(AnalysisProposal, {
       theme {
         id
         title
+      }
+      form {
+        objectType
       }
       paperVotesTotalCount(stepId: $step)
       paperVotesTotalPointsCount(stepId: $step)

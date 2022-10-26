@@ -17,6 +17,7 @@ type Props = {
   dispatch: Dispatch,
   order?: string,
   defaultSort?: ?string,
+  objectType: string,
   stepId?: string,
   intl: IntlShape,
   canDisplayBallot: boolean,
@@ -57,15 +58,17 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
   }
 
   render() {
-    const { order, dispatch, intl } = this.props;
+    const { order, dispatch, intl, objectType } = this.props;
     const { displayedOrders } = this.state;
+    const isOpinion = objectType === 'OPINION';
+    const filterPrefix = isOpinion ? '' : 'f_';
 
     return (
       <div>
         <Select
           label={
             order
-              ? intl.formatMessage({ id: `global.filter_f_${order}` })
+              ? intl.formatMessage({ id: `global.filter_${filterPrefix}${order}` })
               : intl.formatMessage({ id: 'global.filter' })
           }
           id="proposal-filter-sorting-button">
@@ -75,7 +78,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
               onClick={e => dispatch(changeOrder(e.currentTarget.value))}
               isSelected={choice === order}
               value={choice}>
-              {intl.formatMessage({ id: `global.filter_f_${choice}` })}
+              {intl.formatMessage({ id: `global.filter_${filterPrefix}${choice}` })}
             </SelectOption>
           ))}
         </Select>

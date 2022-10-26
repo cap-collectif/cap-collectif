@@ -3,12 +3,11 @@
 namespace Capco\AppBundle\Mailer\Message\Proposal\Analysis;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 class DecisionPublicationMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'notification.proposal.decision.title';
+    public const SUBJECT = 'notification.contribution.decision.title';
     public const TEMPLATE = '@CapcoMail/Proposal/decisionPublication.html.twig';
     public const FOOTER = '';
 

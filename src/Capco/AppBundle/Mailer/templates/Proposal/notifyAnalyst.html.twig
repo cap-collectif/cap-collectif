@@ -22,7 +22,7 @@
                 <td>
                     {% if assignation %}
                         {% if 2 <= proposals|length %}
-                            {{ 'notification.title.multiple.assigned'|trans(
+                            {{ 'notification.title.multiple.contribution.assigned'|trans(
                                 {
                                     'count':proposals|length,
                                     'role': role | trans({}, 'CapcoAppBundle', user_locale)
@@ -30,7 +30,7 @@
                                 'CapcoAppBundle',user_locale) | raw
                             }}
                         {% else %}
-                            {{ 'notification.body.assigned' | trans({
+                            {{ 'notification.body.contribution.assigned' | trans({
                                 'proposalName': (proposals|first).title,
                                 'proposalUrl': (proposals|first).url,
                                 'role': role | trans({}, 'CapcoAppBundle', user_locale)
@@ -40,14 +40,14 @@
                         {% endif %}
                     {% else %}
                         {% if 2 <= proposals|length %}
-                            {{ 'notification.body.multiple.unassigned' | trans(
+                            {{ 'notification.body.multiple.contribution.unassigned' | trans(
                                 {
                                     'count': proposals|length
                                 },
                                 'CapcoAppBundle', user_locale)
                             }}
                         {% else %}
-                            {{ 'notification.title.unassigned' | trans(
+                            {{ 'notification.title.contribution.unassigned' | trans(
                                 {
                                     'proposalName': (proposals|first).title
                                 },

@@ -22,17 +22,18 @@ export class ProposalPreviewStatus extends React.Component<Props> {
     const { proposal } = this.props;
     let { status } = proposal;
     if (proposal.trashed) {
+      const isVisible = proposal.trashedStatus === 'VISIBLE';
+      const isOpinion = proposal.form.objectType === 'OPINION';
+      const statusTradKey = isVisible
+        ? isOpinion
+          ? 'reviewed-by-moderation'
+          : 'proposal.show.trashed.reason.moderated'
+        : isOpinion
+        ? 'global.deleted'
+        : 'global.deleted.feminine';
       status = {
         color: 'DEFAULT',
-        name: (
-          <FormattedMessage
-            id={
-              proposal.trashedStatus === 'VISIBLE'
-                ? 'proposal.show.trashed.reason.moderated'
-                : 'global.deleted.feminine'
-            }
-          />
-        ),
+        name: <FormattedMessage id={statusTradKey} />,
       };
 
       return (
@@ -62,16 +63,19 @@ export class ProposalPreviewStatus extends React.Component<Props> {
 export default createFragmentContainer(ProposalPreviewStatus, {
   proposal: graphql`
     fragment ProposalPreviewStatus_proposal on Proposal
-      @argumentDefinitions(
-        stepId: { type: "ID" }
-        isProfileView: { type: "Boolean", defaultValue: false }
-      ) {
+    @argumentDefinitions(
+      stepId: { type: "ID" }
+      isProfileView: { type: "Boolean", defaultValue: false }
+    ) {
       trashed
       trashedStatus
       trashedReason
       status(step: $stepId) @skip(if: $isProfileView) {
         name
         color
+      }
+      form {
+        objectType
       }
     }
   `,

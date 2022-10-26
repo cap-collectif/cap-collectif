@@ -7,8 +7,8 @@ use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 
 final class ProposalDeleteAdminMessage extends AbstractAdminMessage
 {
-    public const SUBJECT = 'notification.proposal.delete.subject';
-    public const TEMPLATE = 'notification.proposal.delete.body';
+    public const SUBJECT = 'notification.contribution.delete.subject';
+    public const TEMPLATE = 'notification.contribution.delete.body';
 
     public static function getMyTemplateVars(Proposal $proposal, array $params): array
     {

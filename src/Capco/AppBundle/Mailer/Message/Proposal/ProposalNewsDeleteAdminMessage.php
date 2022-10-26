@@ -16,7 +16,7 @@ final class ProposalNewsDeleteAdminMessage extends AbstractAdminMessage
             'postAuthor' => self::escape($params['postAuthor']),
             'proposalName' => self::escape($params['proposalName']),
             'projectName' => self::escape($params['projectName']),
-            'bodyTrad' => 'notification.proposal_activity.delete.body',
+            'bodyTrad' => 'notification.contribution_activity.delete.body',
             'titleTrad' => 'notification.proposal_activity.delete.subject',
             'postURL' => null,
             'baseUrl' => $params['baseURL'],

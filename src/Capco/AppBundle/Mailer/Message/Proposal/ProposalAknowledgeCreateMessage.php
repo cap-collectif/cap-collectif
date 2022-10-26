@@ -32,6 +32,7 @@ final class ProposalAknowledgeCreateMessage extends AbstractExternalMessage
             'confirmationUrl' => $params['confirmationURL'],
             'proposalPublished' => $proposal->isPublished(),
             'proposalName' => $proposal->getTitle(),
+            'proposal' => $proposal,
             'typeOfMail' => 'create',
             'sendAt' => $proposal->getPublishedAt(),
             'endAt' => $proposal->getStep()->getEndAt(),

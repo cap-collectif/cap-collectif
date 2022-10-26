@@ -6,7 +6,7 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 class UnassignationMultiMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'notification.title.multiple.unassigned';
+    public const SUBJECT = 'notification.title.multiple.contribution.unassigned';
     public const TEMPLATE = '@CapcoMail/Proposal/notifyAnalyst.html.twig';
     public const FOOTER = '';
 

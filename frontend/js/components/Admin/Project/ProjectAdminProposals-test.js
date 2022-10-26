@@ -67,6 +67,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
             name: 'Noisyzoo',
           },
         ],
+        objectType: 'PROPOSAL',
       },
     },
     {
@@ -517,6 +518,7 @@ const DEFAULT_PROJECT = {
             name: 'Noisyzoo',
           },
         ],
+        objectType: 'PROPOSAL',
       },
     },
     {

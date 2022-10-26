@@ -30,6 +30,7 @@ final class ProposalAknowledgeUpdateMessage extends AbstractExternalMessage
             'confirmationUrl' => $params['confirmationURL'],
             'proposalPublished' => $proposal->isPublished(),
             'proposalName' => $proposal->getTitle(),
+            'proposal' => $proposal,
             'typeOfMail' => 'update',
             'sendAt' => $proposal->getUpdatedAt(),
             'endAt' => $proposal->getStep()->getEndAt(),

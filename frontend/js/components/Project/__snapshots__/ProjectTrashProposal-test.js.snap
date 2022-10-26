@@ -852,6 +852,49 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                       "kind": "LinkedHandle",
                       "name": "proposals",
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "CollectStep",
+                      "kind": "LinkedField",
+                      "name": "firstCollectStep",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "ProposalForm",
+                          "kind": "LinkedField",
+                          "name": "form",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "objectType",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
                   ],
                   "type": "Project",
                 },
@@ -861,7 +904,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c27dd6b76b3e1edcc843e57a075e50d3",
+          "cacheID": "0bbd62e27f40436c8e5b029c656473dd",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -982,6 +1025,10 @@ fragment ProposalPreviewStatus_proposal_2tPna9 on Proposal {
   trashed
   trashedStatus
   trashedReason
+  form {
+    objectType
+    id
+  }
 }
 
 fragment ProposalPreviewUser_proposal on Proposal {
@@ -1046,6 +1093,13 @@ fragment ProposalTrashedListPaginated_project_2RchB8 on Project {
       startCursor
       endCursor
     }
+  }
+  firstCollectStep {
+    form {
+      objectType
+      id
+    }
+    id
   }
 }
 

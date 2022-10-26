@@ -48,12 +48,13 @@ const renderProposalListTableView = (proposals, step) => (
 const getEmptyWordingProposalList = (step: ?ProposalList_step): string => {
   if (step && step.form) {
     if (step.form.objectType === 'ESTABLISHMENT') return 'establishment.empty';
+    if (step.form.objectType === 'QUESTION') return 'question.empty';
+    if (step.form.objectType === 'OPINION') return 'opinion.empty';
     if (
       step.form.objectType === 'PROPOSAL' &&
       step.project?.type?.title === 'project.types.interpellation'
     )
       return 'interpellation.empty';
-    if (step.form.objectType === 'QUESTION') return 'question.empty';
   }
 
   return 'proposal.empty';
@@ -123,19 +124,14 @@ export default createFragmentContainer(ProposalList, {
   `,
   proposals: graphql`
     fragment ProposalList_proposals on ProposalConnection
-    @argumentDefinitions(token: { type: "String" })
-    {
+    @argumentDefinitions(token: { type: "String" }) {
       ...ProposalListTable_proposals @arguments(stepId: $stepId)
       totalCount
       edges {
         node {
           id
           ...ProposalPreview_proposal
-            @arguments(
-              stepId: $stepId
-              isAuthenticated: $isAuthenticated
-              token: $token
-            )
+            @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
         }
       }
     }

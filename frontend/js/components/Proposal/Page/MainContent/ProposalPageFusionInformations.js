@@ -51,6 +51,10 @@ const ProposalPageFusionInformationsContainer: StyledComponent<{}, {}, HTMLDivEl
 
 export const ProposalPageFusionInformations = ({ proposal }: Props) => {
   if (!proposal || (!proposal.hasBeenMerged && !proposal.mergedFrom.length)) return null;
+  const objectType = proposal.form?.objectType === 'OPINION' ? 'opinion' : 'proposal';
+  const title = `${objectType}s.fusionned`;
+  const bodyFrom = `new.${objectType}.fusionnedFrom`;
+  const bodyInto = `new.${objectType}.fusionnedInto`;
   return (
     <>
       {proposal.mergedFrom.length > 0 && (
@@ -58,13 +62,10 @@ export const ProposalPageFusionInformations = ({ proposal }: Props) => {
           <div>
             <span>
               <Icon name={ICON_NAME.information} size={12} color="#1A88FF" />
-              <FormattedMessage id="proposals.fusionned" />
+              <FormattedMessage id={title} />
             </span>
             <div>
-              <FormattedMessage
-                id="new.proposal.fusionnedFrom"
-                values={{ num: proposal.mergedFrom.length }}
-              />
+              <FormattedMessage id={bodyFrom} values={{ num: proposal.mergedFrom.length }} />
               {proposal.mergedFrom.map(child => (
                 <div key={child.id}>
                   - <a href={child.url}>{translateContent(child.title)}</a>
@@ -79,10 +80,10 @@ export const ProposalPageFusionInformations = ({ proposal }: Props) => {
           <div>
             <span>
               <Icon name={ICON_NAME.information} size={12} color="#1A88FF" />
-              <FormattedMessage id="proposal.fusionned" />
+              <FormattedMessage id={title} />
             </span>
             <div>
-              <FormattedMessage id="proposal.fusionnedInto" />
+              <FormattedMessage id={bodyInto} />
               {proposal.mergedIn.map(child => (
                 <div key={child.id}>
                   <a href={child.url}>{translateContent(child.title)}</a>
@@ -110,6 +111,9 @@ export default createFragmentContainer(ProposalPageFusionInformations, {
         title
         url
         id
+      }
+      form {
+        objectType
       }
     }
   `,

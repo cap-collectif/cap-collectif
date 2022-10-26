@@ -45,6 +45,7 @@ export type StepFilter = {|
   +votable: boolean,
   +form: {
     id: Uuid,
+    objectType: string,
   },
   +label: string,
 |};

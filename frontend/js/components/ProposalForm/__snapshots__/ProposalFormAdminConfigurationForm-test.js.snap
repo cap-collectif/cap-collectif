@@ -61,6 +61,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               "label": "global.establishment",
               "value": "ESTABLISHMENT",
             },
+            Object {
+              "label": "global.review",
+              "value": "OPINION",
+            },
           ]
         }
       />
@@ -971,6 +975,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
             Object {
               "label": "global.establishment",
               "value": "ESTABLISHMENT",
+            },
+            Object {
+              "label": "global.review",
+              "value": "OPINION",
             },
           ]
         }
@@ -1884,6 +1892,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
             Object {
               "label": "global.establishment",
               "value": "ESTABLISHMENT",
+            },
+            Object {
+              "label": "global.review",
+              "value": "OPINION",
             },
           ]
         }

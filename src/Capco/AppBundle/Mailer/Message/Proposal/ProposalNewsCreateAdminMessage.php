@@ -35,8 +35,8 @@ final class ProposalNewsCreateAdminMessage extends AbstractAdminMessage
                     ->getProject()
                     ->getTitle()
             ),
-            'bodyTrad' => 'notification.proposal_activity.create.body',
-            'titleTrad' => 'notification.proposal_activity.create.subject',
+            'bodyTrad' => 'notification.contribution_activity.create.body',
+            'titleTrad' => 'notification.contribution_activity.create.subject',
         ];
     }
 

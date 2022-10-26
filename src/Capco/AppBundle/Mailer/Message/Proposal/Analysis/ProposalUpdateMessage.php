@@ -7,7 +7,7 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 class ProposalUpdateMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'modification.by.author';
+    public const SUBJECT = 'contribution.modification.by.author';
     public const TEMPLATE = '@CapcoMail/Proposal/notifyAnalystOnUpdate.html.twig';
     public const FOOTER = '';
 

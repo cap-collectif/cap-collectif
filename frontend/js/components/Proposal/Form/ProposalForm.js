@@ -297,6 +297,8 @@ const onSubmit = (
       const message =
         createdProposal && isInterpellationContextFromProposal(createdProposal)
           ? 'interpellation.create.redirecting'
+          : proposalForm.objectType === 'OPINION'
+          ? 'opinion.create.redirecting'
           : 'proposal.create.redirecting';
       toast({
         variant: 'success',
@@ -513,16 +515,20 @@ export class ProposalForm extends React.Component<Props, State> {
         ? 'global.title'
         : proposalForm.objectType === 'ESTABLISHMENT'
         ? 'establishment-name'
+        : proposalForm.objectType === 'OPINION'
+        ? 'opinion-title'
         : 'title';
 
     const titleSuggestHeader =
-      proposalForm.objectType === 'PROPOSAL'
-        ? 'proposal.suggest_header'
+      proposalForm.objectType === 'QUESTION'
+        ? 'question.suggest_header'
         : proposalForm.objectType === 'ESTABLISHMENT'
         ? 'establishment-suggest_header'
+        : proposalForm.objectType === 'OPINION'
+        ? 'opinion.suggest_header'
         : proposalForm.step && isInterpellationContextFromStep(proposalForm.step)
         ? 'interpellation.suggest_header'
-        : 'question.suggest_header';
+        : 'proposal.suggest_header';
 
     const { districtIdsFilteredByAddress, isLoadingTitleSuggestions, titleSuggestions } =
       this.state;

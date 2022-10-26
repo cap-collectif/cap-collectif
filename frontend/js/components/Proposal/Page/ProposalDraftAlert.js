@@ -16,8 +16,10 @@ type Props = {|
 export const ProposalDraftAlert = ({ proposal, message, ...rest }: Props) => {
   const intl = useIntl();
   if (proposal?.publicationStatus === 'DRAFT') {
+    const defaultMessage =
+      proposal.form.objectType === 'OPINION' ? 'opinion.draft.explain' : 'proposal.draft.explain';
     return (
-      // TODO: Virer le css une fois le code global nettoyé #12925
+      // TODO: Virer le css une fois le code global nette #12925
       <InfoMessage
         {...rest}
         variant="warning"
@@ -27,7 +29,7 @@ export const ProposalDraftAlert = ({ proposal, message, ...rest }: Props) => {
         width="100%"
         css={{ p: { marginBottom: '0 !important' } }}>
         <InfoMessage.Title withIcon fontWeight={400} fontSize={message ? 14 : 1}>
-          {intl.formatMessage({ id: message || 'proposal.draft.explain' })}
+          {intl.formatMessage({ id: message || defaultMessage })}
         </InfoMessage.Title>
       </InfoMessage>
     );
@@ -40,6 +42,9 @@ export default createFragmentContainer(ProposalDraftAlert, {
   proposal: graphql`
     fragment ProposalDraftAlert_proposal on Proposal {
       publicationStatus
+      form {
+        objectType
+      }
     }
   `,
 });

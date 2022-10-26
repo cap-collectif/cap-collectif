@@ -38,13 +38,15 @@ export class ProposalTrashedListPaginated extends React.Component<Props, State> 
     if (project && project.proposals && project.proposals.totalCount === 0) {
       return null;
     }
+    const isOpinion = project.firstCollectStep?.form?.objectType === 'OPINION';
 
     return (
       <React.Fragment>
         <FormattedMessage
-          id="count-proposal"
+          id={isOpinion ? 'opinion.count' : 'count-proposal'}
           values={{
             num: project.proposals.totalCount,
+            count: project.proposals.totalCount,
           }}
           tagName="h3"
         />
@@ -102,6 +104,11 @@ export default createPaginationContainer(
             hasNextPage
             startCursor
             endCursor
+          }
+        }
+        firstCollectStep {
+          form {
+            objectType
           }
         }
       }

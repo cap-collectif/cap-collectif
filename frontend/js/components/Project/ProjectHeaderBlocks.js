@@ -12,6 +12,11 @@ const FRAGMENT = graphql`
     isVotesCounterDisplayable
     isContributionsCounterDisplayable
     isParticipantsCounterDisplayable
+    firstCollectStep {
+      form {
+        objectType
+      }
+    }
     steps {
       state
       timeRange {
@@ -68,6 +73,7 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
   const data = useFragment(FRAGMENT, project);
   const intl = useIntl();
   const {
+    firstCollectStep,
     steps,
     opinions,
     opinionVersions,
@@ -132,6 +138,10 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
     );
   };
 
+  const getContributionsType = () => {
+    return firstCollectStep?.form?.objectType;
+  };
+
   const getContributionsTooltip = () => {
     if (
       opinions.totalCount > 0 ||
@@ -148,7 +158,7 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
           {(opinions.totalCount > 0 || proposals.totalCount > 0) && (
             <Text marginBottom="0px !important">
               {intl.formatMessage(
-                { id: 'proposal-count' },
+                { id: getContributionsType() === 'OPINION' ? 'opinion.count' : 'proposal-count' },
                 { count: opinions.totalCount + proposals.totalCount },
               )}
             </Text>

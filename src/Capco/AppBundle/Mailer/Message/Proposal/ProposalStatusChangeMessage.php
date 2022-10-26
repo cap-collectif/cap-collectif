@@ -8,7 +8,7 @@ use Capco\AppBundle\Traits\FormatDateTrait;
 
 final class ProposalStatusChangeMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'proposal-notifier-new-status';
+    public const SUBJECT = 'contribution-notifier-new-status';
     public const TEMPLATE = '@CapcoMail/Proposal/notifyProposalAuthorStatusChange.html.twig';
     public const FOOTER = '';
 
@@ -56,6 +56,7 @@ final class ProposalStatusChangeMessage extends AbstractExternalMessage
             '%siteUrl%' => $this->getSiteUrl(),
         ];
     }
+
     public function getFooterTemplate(): string
     {
         return self::FOOTER;

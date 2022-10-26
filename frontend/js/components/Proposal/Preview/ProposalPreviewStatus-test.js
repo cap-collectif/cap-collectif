@@ -15,6 +15,9 @@ describe('<ProposalPreviewStatus />', () => {
       name: 'Projet retenu',
       color: 'SUCCESS',
     },
+    form: {
+      objectType: 'PROPOSAL',
+    },
   };
 
   it('render a trashed status for a trashed visible proposal', () => {

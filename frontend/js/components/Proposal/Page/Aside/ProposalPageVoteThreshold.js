@@ -67,6 +67,7 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
     votesPercentage = Math.ceil((votesTotalCount * 100) / voteThreshold);
   }
   const isInterpellation = isInterpellationContextFromProposal(proposal);
+  const isOpinion = proposal.form?.objectType === 'OPINION';
   return (
     <Card id="ProposalPageVoteThreshold">
       <ProposalPageVoteThresholdContainer>
@@ -80,6 +81,8 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
             : intl.formatMessage({
                 id: isInterpellation
                   ? 'interpellation.support.threshold.title'
+                  : isOpinion
+                  ? 'opinion.vote.threshold.title'
                   : 'proposal.vote.threshold.title',
               })}
         </h4>
@@ -224,6 +227,9 @@ export default createFragmentContainer(ProposalPageVoteThreshold, {
     fragment ProposalPageVoteThreshold_step on Step {
       ... on CollectStep {
         voteThreshold
+        form {
+          objectType
+        }
       }
       ... on SelectionStep {
         voteThreshold

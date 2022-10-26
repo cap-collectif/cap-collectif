@@ -38,6 +38,7 @@ describe('<ProposalListFilters />', () => {
             name: 'Category1',
           },
         ],
+        objectType: 'PROPOSAL',
       },
     },
     features: { ...features, user_type: true },

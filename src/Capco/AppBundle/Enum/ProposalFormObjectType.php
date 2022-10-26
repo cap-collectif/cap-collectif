@@ -7,4 +7,5 @@ final class ProposalFormObjectType
     public const PROPOSAL = 'proposal';
     public const QUESTION = 'question';
     public const ESTABLISHMENT = 'establishment';
+    public const OPINION = 'opinion';
 }

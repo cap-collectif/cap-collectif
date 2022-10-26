@@ -88,6 +88,8 @@ export class ProposalListTable extends React.Component<Props, State> {
                   ? 'admin.fields.selection.proposal'
                   : step.form?.objectType === 'QUESTION'
                   ? 'question-title'
+                  : step.form?.objectType === 'OPINION'
+                  ? 'opinion-title'
                   : 'establishment-name',
               value: { displayTitle: getProposalTitle, url: node.url && node.url },
               width: '250px',
@@ -409,7 +411,7 @@ export default createFragmentContainer(ProposalListTable, {
   `,
   proposals: graphql`
     fragment ProposalListTable_proposals on ProposalConnection
-      @argumentDefinitions(stepId: { type: "ID" }) {
+    @argumentDefinitions(stepId: { type: "ID" }) {
       edges {
         node {
           url

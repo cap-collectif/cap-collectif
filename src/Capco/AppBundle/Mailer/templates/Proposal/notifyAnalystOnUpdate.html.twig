@@ -1,7 +1,7 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% block html_title %}
-    {{ 'modification.by.author'|trans({'proposalName': proposal.title}, 'CapcoAppBundle', user_locale) }}
+    {{ 'contribution.modification.by.author'|trans({'proposalName': proposal.title}, 'CapcoAppBundle', user_locale) }}
 {% endblock %}
 
 {% set logoUrl = app_logo_url() %}
@@ -21,7 +21,7 @@
             <tr>
                 <td>
                     {% if isDeleted %}
-                    {{ 'deleted.by.author.at'|trans(
+                        {{ 'contribution.deleted.by.author.at'|trans(
                         {
                             'proposalName': proposal.title,
                             'date': updateDate,
@@ -31,7 +31,7 @@
                         user_locale
                     )|raw }}
                     {% else %}
-                        {{ 'modification.by.author.at'|trans(
+                        {{ 'contribution.modification.by.author.at'|trans(
                             {
                                 'proposalName': proposal.title,
                                 'proposalUrl': proposalUrl,

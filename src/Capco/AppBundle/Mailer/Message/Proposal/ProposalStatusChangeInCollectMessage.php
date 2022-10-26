@@ -7,7 +7,7 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 final class ProposalStatusChangeInCollectMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'proposal_status_change_collect.notification.subject';
+    public const SUBJECT = 'contribution_status_change_collect.notification.subject';
     public const TEMPLATE = '@CapcoMail/notifyProposalStatusChange.html.twig';
 
     public static function getMySubjectVars(Proposal $proposal, array $params): array
