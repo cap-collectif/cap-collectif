@@ -80,38 +80,3 @@ Scenario: GraphQL admin wants to search organizations
     }
   }
   """
-
-Scenario: GraphQL admin wants to get organizations he is a member of
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "{
-      organizations (affiliations: [USER]) {
-        totalCount
-        edges {
-          node {
-            title
-          }
-        }
-      }
-    }"
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data":{
-      "organizations": {
-        "totalCount": 1,
-        "edges": [
-          {
-            "node": {
-              "title": "Communauté de commune de Parthenay"
-            }
-          }
-        ]
-      }
-    }
-  }
-  """

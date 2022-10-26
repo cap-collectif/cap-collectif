@@ -36,23 +36,7 @@ Scenario: GraphQL admin wants to get all members of an organization
             {
               "node": {
                 "user": {
-                  "username": "sfavot"
-                },
-                "role": "USER"
-              }
-            },
-            {
-              "node": {
-                "user": {
-                  "username": "lbrunet"
-                },
-                "role": "ADMIN"
-              }
-            },
-            {
-              "node": {
-                "user": {
-                  "username": "admin"
+                  "username": "user6"
                 },
                 "role": "USER"
               }
@@ -61,6 +45,22 @@ Scenario: GraphQL admin wants to get all members of an organization
               "node": {
                 "user": {
                   "username": "user"
+                },
+                "role": "USER"
+              }
+            },
+            {
+              "node": {
+                "user": {
+                  "username": "Dev null"
+                },
+                "role": "ADMIN"
+              }
+            },
+            {
+              "node": {
+                "user": {
+                  "username": "Omar <3 Rem"
                 },
                 "role": "USER"
               }

@@ -1,15 +1,15 @@
 Capco\AppBundle\Entity\Organization\OrganizationMember:
     organizationMember1:
         organization: '@organization1'
-        user: '@user1'
+        user: '@userMickael'
         role: 'admin'
     organizationMember2:
         organization: '@organization1'
-        user: '@user2'
+        user: '@userOmar'
         role: 'user'
     organizationMember4:
         organization: '@organization1'
-        user: '@user4'
+        user: '@user6'
         role: 'user'
     organizationMember5:
         organization: '@organization1'
@@ -22,4 +22,4 @@ Capco\AppBundle\Entity\Organization\OrganizationMember:
     organizationMember8:
         organization: '@organization2'
         user: '@ChristopheCassou'
-        role: 'admin'
+        role: 'user'

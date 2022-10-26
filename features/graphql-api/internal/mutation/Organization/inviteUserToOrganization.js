@@ -42,7 +42,7 @@ describe('Internal|inviteUserToOrganization mutation', () => {
       {
         input: {
           ...input,
-          user: toGlobalId('User', 'user2')
+          user: toGlobalId('User', 'userOmar')
         },
       },
       'internal_admin',
