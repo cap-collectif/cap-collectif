@@ -28,7 +28,6 @@ final class QuestionnaireReplyAnonymousCreateAdminMessage extends AbstractAdminM
             'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE,
             'configUrl' => $params['configURL'],
             'baseUrl' => $params['baseURL'],
-            'replyShowUrl' => $params['replyShowURL'],
             'isAnonReply' => true,
         ];
     }

@@ -22,7 +22,6 @@ final class QuestionnaireReplyAnonymousDeleteAdminMessage extends AbstractAdminM
             'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_DELETE_STATE,
             'configUrl' => $params['configURL'],
             'baseUrl' => $params['baseURL'],
-            'replyShowUrl' => '#',
             'isAnonReply' => true,
         ];
     }

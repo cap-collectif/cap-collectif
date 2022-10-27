@@ -24,7 +24,6 @@ final class QuestionnaireReplyDeleteAdminMessage extends AbstractAdminMessage
             'userUrl' => $params['userURL'],
             'configUrl' => $params['configURL'],
             'baseUrl' => $params['baseURL'],
-            'replyShowUrl' => '#',
             'isAnonReply' => false,
         ];
     }
