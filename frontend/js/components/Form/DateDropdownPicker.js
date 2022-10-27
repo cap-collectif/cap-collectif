@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { DayPicker, MonthPicker, YearPicker } from 'react-dropdown-date';
-import { Col } from 'react-bootstrap';
 import config from '../../config';
 
 type Props = {
@@ -117,7 +116,7 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
           {label}
         </label>
         <div className={divClassName} id={componentId}>
-          <Col sm={2} md={2} id={dayId}>
+          <div id={dayId}>
             <DayPicker
               defaultValue={dayDefaultValue}
               year={year}
@@ -131,8 +130,8 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
               classes="form-control"
               disabled={disabled}
             />
-          </Col>
-          <Col sm={3} md={3} id={monthId}>
+          </div>
+          <div id={monthId}>
             <MonthPicker
               defaultValue={monthDefaultValue}
               year={year}
@@ -146,8 +145,8 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
               classes="form-control"
               disabled={disabled}
             />
-          </Col>
-          <Col sm={3} md={3} id={yearId}>
+          </div>
+          <div id={yearId}>
             <YearPicker
               defaultValue={yearDefaultValue}
               value={year}
@@ -159,7 +158,7 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
               classes="form-control"
               disabled={disabled}
             />
-          </Col>
+          </div>
         </div>
       </div>
     );

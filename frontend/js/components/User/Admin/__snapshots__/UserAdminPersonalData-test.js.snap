@@ -112,23 +112,25 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
       <div
         className="clearfix"
       />
-      <Field
-        component={[Function]}
-        componentId="personal-data-date-of-birth"
-        dayId="personal-data-date-of-birth-day"
-        disabled={false}
-        globalClassName="col-sm-4 form-group"
-        id="dateOfBirth"
-        label={
-          <FormattedMessage
-            id="form.label_date_of_birth"
-            values={Object {}}
-          />
-        }
-        monthId="personal-data-date-of-birth-month"
-        name="dateOfBirth"
-        yearId="personal-data-date-of-birth-year"
-      />
+      <UserAdminPersonalData___StyledAppBox>
+        <Field
+          component={[Function]}
+          componentId="personal-data-date-of-birth"
+          dayId="personal-data-date-of-birth-day"
+          disabled={false}
+          globalClassName="col-sm-4 form-group"
+          id="dateOfBirth"
+          label={
+            <FormattedMessage
+              id="form.label_date_of_birth"
+              values={Object {}}
+            />
+          }
+          monthId="personal-data-date-of-birth-month"
+          name="dateOfBirth"
+          yearId="personal-data-date-of-birth-year"
+        />
+      </UserAdminPersonalData___StyledAppBox>
       <div
         className="clearfix"
       />
@@ -384,23 +386,25 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
       <div
         className="clearfix"
       />
-      <Field
-        component={[Function]}
-        componentId="personal-data-date-of-birth"
-        dayId="personal-data-date-of-birth-day"
-        disabled={true}
-        globalClassName="col-sm-4 form-group"
-        id="dateOfBirth"
-        label={
-          <FormattedMessage
-            id="form.label_date_of_birth"
-            values={Object {}}
-          />
-        }
-        monthId="personal-data-date-of-birth-month"
-        name="dateOfBirth"
-        yearId="personal-data-date-of-birth-year"
-      />
+      <UserAdminPersonalData___StyledAppBox>
+        <Field
+          component={[Function]}
+          componentId="personal-data-date-of-birth"
+          dayId="personal-data-date-of-birth-day"
+          disabled={true}
+          globalClassName="col-sm-4 form-group"
+          id="dateOfBirth"
+          label={
+            <FormattedMessage
+              id="form.label_date_of_birth"
+              values={Object {}}
+            />
+          }
+          monthId="personal-data-date-of-birth-month"
+          name="dateOfBirth"
+          yearId="personal-data-date-of-birth-year"
+        />
+      </UserAdminPersonalData___StyledAppBox>
       <div
         className="clearfix"
       />
