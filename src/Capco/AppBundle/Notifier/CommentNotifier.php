@@ -26,6 +26,7 @@ use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -39,6 +40,7 @@ class CommentNotifier extends BaseNotifier
     protected UserShowUrlBySlugResolver $userShowUrlBySlugResolver;
     protected TranslatorInterface $translator;
     protected CommentShowUrlResolver $commentShowUrlResolver;
+    private Manager $manager;
 
     public function __construct(
         MailerService $mailer,
@@ -51,7 +53,8 @@ class CommentNotifier extends BaseNotifier
         TranslatorInterface $translator,
         CommentShowUrlResolver $commentShowUrlResolver,
         RouterInterface $router,
-        LocaleResolver $localeResolver
+        LocaleResolver $localeResolver,
+        Manager $manager
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->commentResolver = $commentResolver;
@@ -61,6 +64,7 @@ class CommentNotifier extends BaseNotifier
         $this->userShowUrlBySlugResolver = $userShowUrlBySlugResolver;
         $this->commentShowUrlResolver = $commentShowUrlResolver;
         $this->translator = $translator;
+        $this->manager = $manager;
     }
 
     public function onCreate(Comment $comment)
@@ -113,6 +117,11 @@ class CommentNotifier extends BaseNotifier
                             ->getEmail()
                     );
                 }
+            }
+
+            $isModerationEnabled = $this->manager->isActive(Manager::moderation_comment);
+            if ($isModerationEnabled && $comment->isPending()) {
+                return;
             }
 
             $user = $comment->getProposal()->getAuthor();

@@ -100,6 +100,8 @@ class CommentAdmin extends AbstractAdmin
             'template' => 'CapcoAdminBundle:Comment:list__action_delete.html.twig',
         ];
 
+        $isModerationEnabled = $this->manager->isActive(Manager::moderation_comment);
+
         $listMapper
             ->addIdentifier('body', null, [
                 'label' => 'global.contenu',
@@ -119,15 +121,20 @@ class CommentAdmin extends AbstractAdmin
             ->add('published', null, [
                 'editable' => false,
                 'label' => 'global.published',
-            ])
-            ->add('moderationStatus', null, [
+            ]);
+
+        if ($isModerationEnabled) {
+            $listMapper->add('moderationStatus', null, [
                 'label' => 'moderation',
                 'accessor' => function ($subject) {
                     $status = strtolower($subject->getModerationStatus());
 
                     return $this->translator->trans($status);
                 },
-            ])
+            ]);
+        }
+
+        $listMapper
             ->add('updatedAt', 'datetime', ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
