@@ -83,11 +83,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             ['id' => $questionnaire->getId(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
-        $replyShowUrl = $this->router->generate(
-            'admin_capco_app_reply_show',
-            ['id' => $reply->getId(), '_locale' => $this->defaultLocale],
-            RouterInterface::ABSOLUTE_URL
-        );
         $replyUrl = $this->router->generate(
             'app_project_show_questionnaire_reply',
             [
@@ -107,7 +102,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             'time' => $this->getTime($reply->getPublishedAt()),
             'userURL' => $userUrl,
             'configURL' => $configUrl,
-            'replyShowURL' => $replyShowUrl,
         ];
 
         if ($questionnaire->isNotifyResponseCreate()) {
@@ -185,11 +179,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             ['id' => $questionnaire->getId(), '_locale' => $this->defaultLocale],
             RouterInterface::ABSOLUTE_URL
         );
-        $replyShowUrl = $this->router->generate(
-            'admin_capco_app_reply_show',
-            ['id' => $reply->getId(), '_locale' => $this->defaultLocale],
-            RouterInterface::ABSOLUTE_URL
-        );
         $replyUrl = $this->router->generate(
             'app_project_show_questionnaire_reply',
             [
@@ -218,7 +207,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     'time' => $this->getTime($reply->getUpdatedAt()),
                     'userURL' => $userUrl,
                     'configURL' => $configUrl,
-                    'replyShowURL' => $replyShowUrl,
                 ],
                 null,
                 $recipientEmail

@@ -90,16 +90,6 @@
 
                     </p>
                 </div>
-                {% if
-                    state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE') or
-                    state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE')
-                %}
-                <div style="color:#FFFFFF; margin-top: 30px; margin-bottom: 10px; font-family:helvetica, arial, sans-serif; font-size: 13px;">
-                    <a style="background-color: #0d71bb; padding: 10px; border-radius: 5px; color:#FFFFFF; margin-right: 8px;" href="{{ replyShowUrl }}">
-                        {{ 'link_action_show'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
-                    </a>
-                </div>
-                {% endif %}
             </div>
         </td>
     </tr>

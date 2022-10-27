@@ -29,7 +29,6 @@ final class QuestionnaireReplyAnonymousUpdateAdminMessage extends AbstractAdminM
             'userUrl' => $params['userURL'],
             'configUrl' => $params['configURL'],
             'baseUrl' => $params['baseURL'],
-            'replyShowUrl' => $params['replyShowURL'],
             'isAnonReply' => true,
         ];
     }
