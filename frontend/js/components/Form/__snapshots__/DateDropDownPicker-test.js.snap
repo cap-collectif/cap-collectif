@@ -14,12 +14,8 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
     className="className"
     id="myId"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
+    <div
       id="day"
-      md={2}
-      sm={2}
     >
       <DayPicker
         classes="form-control"
@@ -32,13 +28,9 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
         value="25"
         year="1990"
       />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
+    </div>
+    <div
       id="month"
-      md={3}
-      sm={3}
     >
       <MonthPicker
         classes="form-control"
@@ -51,13 +43,9 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
         value="04"
         year="1990"
       />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
+    </div>
+    <div
       id="year"
-      md={3}
-      sm={3}
     >
       <YearPicker
         classes="form-control"
@@ -68,7 +56,7 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
         onChange={[Function]}
         value="1990"
       />
-    </Col>
+    </div>
   </div>
 </div>
 `;
@@ -87,12 +75,8 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
     className="className"
     id="myId"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
+    <div
       id="day"
-      md={2}
-      sm={2}
     >
       <DayPicker
         classes="form-control"
@@ -105,13 +89,9 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
         value={null}
         year={null}
       />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
+    </div>
+    <div
       id="month"
-      md={3}
-      sm={3}
     >
       <MonthPicker
         classes="form-control"
@@ -124,13 +104,9 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
         value={null}
         year={null}
       />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
+    </div>
+    <div
       id="year"
-      md={3}
-      sm={3}
     >
       <YearPicker
         classes="form-control"
@@ -141,7 +117,7 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
         onChange={[Function]}
         value={null}
       />
-    </Col>
+    </div>
   </div>
 </div>
 `;

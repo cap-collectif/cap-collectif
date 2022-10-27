@@ -17,6 +17,7 @@ import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import Tooltip from '~ds/Tooltip/Tooltip';
 import Icon from '~ds/Icon/Icon';
 import Flex from '~ui/Primitives/Layout/Flex';
+import AppBox from '~/components/Ui/Primitives/AppBox';
 
 type RelayProps = {| user: UserAdminPersonalData_user, viewer: UserAdminPersonalData_viewer |};
 type GenderValue = 'FEMALE' | 'MALE' | 'OTHER';
@@ -186,18 +187,20 @@ export const UserAdminPersonalData = ({
             <option value="OTHER">{intl.formatMessage({ id: 'global.plural.other' })}</option>
           </Field>
           <div className="clearfix" />
-          <Field
-            name="dateOfBirth"
-            id="dateOfBirth"
-            disabled={!isViewerOrSuperAdmin}
-            component={DateDropdownPicker}
-            dayId="personal-data-date-of-birth-day"
-            monthId="personal-data-date-of-birth-month"
-            yearId="personal-data-date-of-birth-year"
-            label={<FormattedMessage id="form.label_date_of_birth" />}
-            componentId="personal-data-date-of-birth"
-            globalClassName="col-sm-4 form-group"
-          />
+          <AppBox css={{ '#personal-data-date-of-birth': { display: 'flex', gap: '10px' } }}>
+            <Field
+              name="dateOfBirth"
+              id="dateOfBirth"
+              disabled={!isViewerOrSuperAdmin}
+              component={DateDropdownPicker}
+              dayId="personal-data-date-of-birth-day"
+              monthId="personal-data-date-of-birth-month"
+              yearId="personal-data-date-of-birth-year"
+              label={<FormattedMessage id="form.label_date_of_birth" />}
+              componentId="personal-data-date-of-birth"
+              globalClassName="col-sm-4 form-group"
+            />
+          </AppBox>
           <div className="clearfix" />
           <Field
             name="address"
