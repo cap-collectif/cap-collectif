@@ -6,6 +6,8 @@ InternalOrganization:
         - InternalPostOwner
         - InternalEventOwner
         - InternalProjectOwner
+        - InternalProposalFormOwner
+        - InternalQuestionnaireOwner
     config:
         description: 'An organization.'
         name: Organization
@@ -15,6 +17,8 @@ InternalOrganization:
             - InternalPostOwner
             - InternalEventOwner
             - InternalProjectOwner
+            - InternalProposalFormOwner
+            - InternalQuestionnaireOwner
         fields:
             id:
                 description: 'The ID of an object.'
@@ -88,4 +92,9 @@ InternalOrganization:
                 type: 'InternalEventConnection!'
                 description: 'Get all events that the organization owns.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\OwnerEventsResolver", [value, args])'
+                argsBuilder: 'Relay::ForwardConnection'
+            proposalForms:
+                type: 'InternalProposalFormConnection!'
+                description: 'Get all proposalForm that the organization owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\OwnerProposalFormResolver", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'

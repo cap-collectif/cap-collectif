@@ -20,15 +20,15 @@ import { ModalCreateProposalForm_viewer$key } from '@relay/ModalCreateProposalFo
 import { useAppContext } from '../AppProvider/App.context';
 
 type ModalCreateProposalFormProps = {
-    viewer: ModalCreateProposalForm_viewer$key,
-    term: string,
-    orderBy: string,
-    hasProposalForm: boolean,
-    noResult?: boolean,
+    viewer: ModalCreateProposalForm_viewer$key;
+    term: string;
+    orderBy: string;
+    hasProposalForm: boolean;
+    noResult?: boolean;
 };
 
 type FormValues = {
-    title: string,
+    title: string;
 };
 
 const formName = 'form-create-proposalForm';
@@ -38,6 +38,9 @@ const FRAGMENT = graphql`
         __typename
         id
         username
+        organizations {
+            id
+        }
     }
 `;
 
@@ -51,6 +54,7 @@ const ModalCreateProposalForm: React.FC<ModalCreateProposalFormProps> = ({
     const intl = useIntl();
     const { viewerSession } = useAppContext();
     const viewer = useFragment<ModalCreateProposalForm_viewer$key>(FRAGMENT, viewerFragment);
+    const organization = viewer?.organizations?.[0];
 
     const initialValues: FormValues = {
         title: '',
@@ -66,6 +70,7 @@ const ModalCreateProposalForm: React.FC<ModalCreateProposalFormProps> = ({
     const onSubmit = (values: FormValues) => {
         const input = {
             title: values.title,
+            owner: organization?.id,
         };
 
         return CreateProposalFormMutation.commit(

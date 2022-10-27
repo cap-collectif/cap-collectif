@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Security;
 
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Traits\OwnerableTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Organization.ProposalForms organization admin should be able to fetch all proposalForms from organization 1`] = `
+Object {
+  "node": Object {
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=",
+    "proposalForms": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "Valérie Masson Delmotte",
+            },
+            "owner": Object {
+              "__typename": "Organization",
+              "username": "GIEC",
+            },
+            "step": Object {
+              "title": "Collecte step organisation",
+            },
+            "title": "Formulaire organisation crée par un admin",
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "Christophe Cassou",
+            },
+            "owner": Object {
+              "__typename": "Organization",
+              "username": "GIEC",
+            },
+            "step": null,
+            "title": "Formulaire organisation crée par un membre",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|Organization.ProposalForms organization admin should be able to fetch all proposalForms from organization not attached to a step  1`] = `
+Object {
+  "node": Object {
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=",
+    "proposalForms": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "Christophe Cassou",
+            },
+            "owner": Object {
+              "__typename": "Organization",
+              "username": "GIEC",
+            },
+            "step": null,
+            "title": "Formulaire organisation crée par un membre",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;

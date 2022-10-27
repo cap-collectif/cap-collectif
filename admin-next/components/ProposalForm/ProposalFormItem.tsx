@@ -10,15 +10,17 @@ import DuplicateProposalFormMutation from 'mutations/DuplicateProposalFormMutati
 import { mutationErrorToast } from 'utils/mutation-error-toast';
 import { Table, Link, ButtonQuickAction, ButtonGroup, toast, CapUIIcon } from '@cap-collectif/ui';
 import { useAppContext } from '../AppProvider/App.context';
+import {ProposalFormItem_viewer$key} from "@relay/ProposalFormItem_viewer.graphql";
 
 export type Viewer = ProposalFormItem_proposalForm['owner'];
 
 type ProposalFormItemProps = {
     proposalForm: ProposalFormItem_proposalForm$key,
+    viewer: ProposalFormItem_viewer$key,
     connectionName: string,
 };
 
-const FRAGMENT = graphql`
+const PROPOSALFORM_FRAGMENT = graphql`
     fragment ProposalFormItem_proposalForm on ProposalForm {
         id
         title
@@ -44,6 +46,17 @@ const FRAGMENT = graphql`
         ...ModalConfirmationDelete_proposalForm
     }
 `;
+
+const VIEWER_FRAGMENT = graphql`
+    fragment ProposalFormItem_viewer on User {
+        id
+        isAdminOrganization
+        isAdmin
+        organizations {
+            id
+        }
+    }
+`
 
 const duplicateProposalForm = (
     proposalFormDuplicated: ProposalFormItem_proposalForm,
@@ -77,11 +90,17 @@ const duplicateProposalForm = (
 
 const ProposalFormItem: React.FC<ProposalFormItemProps> = ({
     proposalForm: proposalFormFragment,
+    viewer: viewerFragment,
     connectionName,
 }) => {
-    const proposalForm = useFragment(FRAGMENT, proposalFormFragment);
+    const proposalForm = useFragment(PROPOSALFORM_FRAGMENT, proposalFormFragment);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
     const intl = useIntl();
-    const { viewerSession } = useAppContext();
+
+    const viewerBelongsToAnOrganization = (viewer.organizations?.length ?? 0) > 0;
+    const canDelete = viewerBelongsToAnOrganization
+        ? viewer?.isAdminOrganization || viewer.id === proposalForm.creator?.id
+        : true;
 
     return (
         <>
@@ -97,8 +116,8 @@ const ProposalFormItem: React.FC<ProposalFormItemProps> = ({
                     proposalForm?.step?.project?.title
                 )}
             </Table.Td>
-            {viewerSession.isAdmin && <Table.Td>{proposalForm.creator?.username}</Table.Td>}
-            {viewerSession.isAdmin || viewerSession.isAdminOrganization ? (
+            {viewer?.isAdmin && <Table.Td>{proposalForm.creator?.username}</Table.Td>}
+            {viewer?.isAdmin || viewer?.isAdminOrganization ? (
                 <Table.Td>{proposalForm.owner?.username}</Table.Td>
             ) : null}
             <Table.Td>
@@ -131,10 +150,14 @@ const ProposalFormItem: React.FC<ProposalFormItemProps> = ({
                         }
                         className="btn-duplicate"
                     />
-                    <ModalConfirmationDelete
-                        proposalForm={proposalForm}
-                        connectionName={connectionName}
-                    />
+                    {
+                        canDelete && (
+                            <ModalConfirmationDelete
+                                proposalForm={proposalForm}
+                                connectionName={connectionName}
+                            />
+                        )
+                    }
                 </ButtonGroup>
             </Table.Td>
         </>

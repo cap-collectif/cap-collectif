@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Model\CommentableInterface;
@@ -35,7 +36,8 @@ class Post implements
     IndexableInterface,
     SonataTranslatableInterface,
     Ownerable,
-    Translatable
+    Translatable,
+    CreatableInterface
 {
     use BodyUsingJoditWysiwygTrait;
     use CommentableTrait;

@@ -26,6 +26,7 @@ export type ViewerSession = {
     isSuperAdmin: boolean;
     isProjectAdmin: boolean;
     isAdminOrganization: boolean;
+    isOrganizationMember: boolean;
 };
 
 export type FeatureFlags = {

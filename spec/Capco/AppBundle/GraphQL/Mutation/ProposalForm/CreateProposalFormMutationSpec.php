@@ -14,15 +14,17 @@ use Overblog\GraphQLBundle\Error\UserError;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateProposalFormMutationSpec extends ObjectBehavior
 {
     public function let(
         FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
-        SettableOwnerResolver $settableOwnerResolver
+        SettableOwnerResolver $settableOwnerResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->beConstructedWith($formFactory, $em, $settableOwnerResolver);
+        $this->beConstructedWith($formFactory, $em, $settableOwnerResolver, $authorizationChecker);
     }
 
     public function it_is_initializable(): void
@@ -49,6 +51,7 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
             ->willReturn($form);
+        unset($input['owner']);
         $form->submit($input, false)->shouldBeCalled();
         $form
             ->isValid()
@@ -88,6 +91,7 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
             ->willReturn($form);
+        unset($input['owner']);
         $form->submit($input, false)->shouldBeCalled();
         $form
             ->isValid()

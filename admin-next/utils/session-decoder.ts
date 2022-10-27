@@ -1,6 +1,8 @@
+import {ViewerSession} from "../types";
+
 const SESSION_SEPARATOR = '___JSON_SESSION_SEPARATOR__';
 
-export default function getViewerJsonFromRedisSession(session: string): string | null {
+export default function getViewerJsonFromRedisSession(session: string): ViewerSession | null {
     const jsonSession = session.split(SESSION_SEPARATOR)[1];
     if (!jsonSession || !jsonSession.length) {
         console.error('The Json session is empty !');

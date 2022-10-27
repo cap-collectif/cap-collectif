@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
@@ -26,7 +27,7 @@ use Capco\AppBundle\Enum\QuestionnaireType;
  * @ORM\Table(name="questionnaire")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireRepository")
  */
-class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Ownerable
+class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface
 {
     use DescriptionUsingJoditWysiwygTrait;
     use OwnerableTrait;

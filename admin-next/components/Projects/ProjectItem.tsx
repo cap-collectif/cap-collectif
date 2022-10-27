@@ -115,7 +115,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
     const { isOnlyProjectAdmin, isAdmin, isAdminOrganization, isSuperAdmin } = viewer;
     const intl = useIntl();
 
-    const viewerBelongsToAnOrganization = viewer.organizations?.length ?? 0 > 0;
+    const viewerBelongsToAnOrganization = (viewer.organizations?.length ?? 0) > 0;
     const canDelete = viewerBelongsToAnOrganization
         ? viewer?.isAdminOrganization || viewer.id === project.creator?.id
         : true;

@@ -250,3 +250,10 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         voteType: 1
         startAt: <identity((new \DateTime('2020-10-16')))>
         endAt: <identity((new \DateTime('2031-10-16')))>
+    collectstepOrga:
+        id: collectstepOrga
+        title: Collecte step organisation
+        label: Dépôt des projets organisation
+        body: Collecte step organisation body
+        startAt: <identity((new \DateTime('2022-05-01 12:00:00')))>
+        endAt: <identity((new \DateTime('2031-05-04 12:00:00')))>

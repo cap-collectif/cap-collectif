@@ -32,9 +32,23 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
         allProposalForm: proposalForms(affiliations: $affiliations) {
             totalCount
         }
+        organizations {
+            allProposalForm: proposalForms(affiliations: $affiliations) {
+                totalCount
+            }
+            ...ProposalFormList_proposalFormOwner
+            @arguments(
+                count: $count
+                cursor: $cursor
+                term: $term
+                affiliations: $affiliations
+                orderBy: $orderBy
+            )
+        }
         ...ModalCreateProposalForm_viewer
         ...ProposalFormListNoResult_viewer
         ...ProposalFormList_viewer
+        ...ProposalFormList_proposalFormOwner
         @arguments(
             count: $count
             cursor: $cursor
@@ -50,7 +64,9 @@ const ProposalFormListPage: FC<ProposalFormListPageProps> = ({ viewer: viewerFra
     const [term, setTerm] = useState('');
     const [orderBy, setOrderBy] = useState('DESC');
     const viewer = useFragment<ProposalFormListPage_viewer$key>(FRAGMENT, viewerFragment);
-    const hasProposalForm = viewer.allProposalForm.totalCount > 0;
+    const organization = viewer?.organizations?.[0];
+    const proposalForms = organization?.allProposalForm ?? viewer.allProposalForm;
+    const hasProposalForm = (proposalForms.totalCount ?? 0) > 0;
 
     const onTermChange = debounce((value: string) => setTerm(value), 400);
 
@@ -80,6 +96,7 @@ const ProposalFormListPage: FC<ProposalFormListPageProps> = ({ viewer: viewerFra
 
             <Suspense fallback={<ProposalFormListPlaceholder />}>
                 <ProposalFormList
+                    proposalFormOwner={organization ?? viewer}
                     viewer={viewer}
                     term={term}
                     resetTerm={() => setTerm('')}

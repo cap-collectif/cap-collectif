@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=EmailingCampaignRepository::class)
  * @ORM\Table(name="emailing_campaign")
  */
-class EmailingCampaign implements Ownerable
+class EmailingCampaign implements Ownerable, CreatableInterface
 {
     use OwnerableTrait;
     use CreatableTrait;

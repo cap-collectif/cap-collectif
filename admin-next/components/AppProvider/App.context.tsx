@@ -15,6 +15,7 @@ export const AppContext = React.createContext<AppContext>({
         isSuperAdmin: false,
         isProjectAdmin: false,
         isAdminOrganization: false,
+        isOrganizationMember: false,
     },
     appVersion: '',
 });

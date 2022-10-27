@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import { usePaginationFragment, graphql } from 'react-relay';
+import {usePaginationFragment, graphql, useFragment} from 'react-relay';
 import { Table, Menu, Icon, CapUIIcon, Text } from '@cap-collectif/ui';
 import type { ProposalFormList_viewer$key } from '@relay/ProposalFormList_viewer.graphql';
 import ProposalFormItem from './ProposalFormItem';
@@ -8,19 +8,21 @@ import EmptyMessage from '@ui/Table/EmptyMessage';
 import type { OrderDirection } from '@relay/ProposalFormListQuery.graphql';
 import { useAppContext } from '../AppProvider/App.context';
 import { useLayoutContext } from '../Layout/Layout.context';
+import {ProposalFormList_proposalFormOwner$key} from "@relay/ProposalFormList_proposalFormOwner.graphql";
 
 export const PROPOSAL_FORM_LIST_PAGINATION = 20;
 
 type ProposalFormListProps = {
-    viewer: ProposalFormList_viewer$key,
+    proposalFormOwner: ProposalFormList_proposalFormOwner$key,
+    viewer: ProposalFormList_viewer$key
     term: string,
     resetTerm: () => void,
     orderBy: string,
     setOrderBy: (orderBy: OrderDirection) => void,
 };
 
-export const FRAGMENT = graphql`
-    fragment ProposalFormList_viewer on User
+export const PROPOSALFORM_OWNER_FRAGMENT = graphql`
+    fragment ProposalFormList_proposalFormOwner on ProposalFormOwner
     @argumentDefinitions(
         count: { type: "Int!" }
         cursor: { type: "String" }
@@ -52,8 +54,15 @@ export const FRAGMENT = graphql`
     }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+    fragment ProposalFormList_viewer on User {
+        ...ProposalFormItem_viewer
+    }
+`
+
 const ProposalFormList: React.FC<ProposalFormListProps> = ({
-    viewer,
+    proposalFormOwner,
+    viewer: viewerFragment,
     term,
     resetTerm,
     orderBy,
@@ -62,7 +71,9 @@ const ProposalFormList: React.FC<ProposalFormListProps> = ({
     const { viewerSession } = useAppContext();
     const intl = useIntl();
     const firstRendered = React.useRef<true | null>(null);
-    const { data, loadNext, hasNext, refetch } = usePaginationFragment(FRAGMENT, viewer);
+    const { data, loadNext, hasNext, refetch } = usePaginationFragment(PROPOSALFORM_OWNER_FRAGMENT, proposalFormOwner);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
+
     const { proposalForms } = data;
     const { contentRef } = useLayoutContext();
     const hasProposalForm = proposalForms ? proposalForms.totalCount > 0 : false;
@@ -142,6 +153,7 @@ const ProposalFormList: React.FC<ProposalFormListProps> = ({
                             proposalForm && (
                                 <Table.Tr key={proposalForm.id} rowId={proposalForm.id}>
                                     <ProposalFormItem
+                                        viewer={viewer}
                                         proposalForm={proposalForm}
                                         connectionName={proposalForms.__id}
                                     />

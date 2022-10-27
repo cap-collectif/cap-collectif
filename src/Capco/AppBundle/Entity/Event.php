@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
@@ -53,7 +54,8 @@ class Event implements
     Authorable,
     Translatable,
     SonataTranslatableInterface,
-    Ownerable
+    Ownerable,
+    CreatableInterface
 {
     use AuthorableTrait;
     use CreatableTrait;

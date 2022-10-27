@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
@@ -46,7 +47,7 @@ use Capco\AppBundle\Entity\District\ProposalDistrict;
  *   message="proposal_form.reference.not_unique"
  * )
  */
-class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable
+class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface
 {
     use DescriptionUsingJoditWysiwygTrait;
     use OwnerableTrait;

@@ -503,7 +503,7 @@ InternalQuery:
             proposalCategoryOptions:
                 type: 'ProposalCategoryOptions!'
                 description: 'Get the options for creating a category within a proposal form'
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", [getUser()])'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ProposalCategoryOptionsResolver")'
             homePageProjectsSectionConfiguration:
                 type: 'HomePageProjectsSectionConfiguration!'

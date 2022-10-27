@@ -14,7 +14,7 @@ security:
         - { path: ^/admin/alpha/project, roles: ROLE_USER }
         - { path: ^/admin/capco/app/project/.*/edit, roles: ROLE_ADMIN }
         - { path: ^/admin/capco/app/project, roles: ROLE_PROJECT_ADMIN }
-        - { path: ^/admin/capco/app/proposalform, roles: ROLE_PROJECT_ADMIN }
+        - { path: ^/admin/capco/app/proposalform, roles: ROLE_USER }
         - { path: ^/admin/capco/app/event, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/capco/app/proposal/.*/edit, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/capco/app/post, roles: ROLE_PROJECT_ADMIN }

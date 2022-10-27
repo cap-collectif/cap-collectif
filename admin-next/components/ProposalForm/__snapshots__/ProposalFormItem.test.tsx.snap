@@ -1,0 +1,334 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFormItem /> should hide delete button when viewer belongs to an organization and is not admin organization 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="https://capco.dev/admin/capco/app/proposalform/proposalFormOrgaAdmin/edit?_locale=fr-FR"
+    >
+      Formulaire organisation crée par un admin
+    </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    -
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    25/10/2022
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    25/10/2022
+  </td>,
+  <td
+    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL gFvFYr cap-buttonGroup"
+    >
+      <button
+        aria-describedby="id-g"
+        aria-label="duplicate"
+        className="sc-bdvvtL flFGQt cap-buttonQuickAction btn-duplicate"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+        tabIndex={0}
+      >
+        <svg
+          className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+          fill="none"
+          viewBox="0 0 10 12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.182 10.607H1.515a.303.303 0 01-.303-.303V2.425a.606.606 0 00-1.212 0v8.182a1.212 1.212 0 001.212 1.212h6.97a.606.606 0 000-1.212z"
+            fill="currentColor"
+          />
+          <path
+            d="M9.842 1.855L8.12.158A.535.535 0 007.739 0H2.66a.537.537 0 00-.538.537v8.555a.537.537 0 00.537.537h6.805A.537.537 0 0010 9.092V2.235a.537.537 0 00-.158-.38z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        className="cap-tooltip-container"
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onTransitionEnd={[Function]}
+        role="tooltip"
+        style={
+          Object {
+            "display": "none",
+            "left": "100%",
+            "pointerEvents": "none",
+            "position": "fixed",
+            "top": "100%",
+            "zIndex": 1000,
+          }
+        }
+      />
+    </div>
+  </td>,
+]
+`;
+
+exports[`<ProposalFormItem /> should render correctly 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="https://capco.dev/admin/capco/app/proposalform/proposalFormOrgaAdmin/edit?_locale=fr-FR"
+    >
+      Formulaire organisation crée par un admin
+    </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    -
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    25/10/2022
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    25/10/2022
+  </td>,
+  <td
+    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdvvtL gFvFYr cap-buttonGroup"
+    >
+      <button
+        aria-describedby="id-g"
+        aria-label="duplicate"
+        className="sc-bdvvtL flFGQt cap-buttonQuickAction btn-duplicate"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+        tabIndex={0}
+      >
+        <svg
+          className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+          fill="none"
+          viewBox="0 0 10 12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.182 10.607H1.515a.303.303 0 01-.303-.303V2.425a.606.606 0 00-1.212 0v8.182a1.212 1.212 0 001.212 1.212h6.97a.606.606 0 000-1.212z"
+            fill="currentColor"
+          />
+          <path
+            d="M9.842 1.855L8.12.158A.535.535 0 007.739 0H2.66a.537.537 0 00-.538.537v8.555a.537.537 0 00.537.537h6.805A.537.537 0 0010 9.092V2.235a.537.537 0 00-.158-.38z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        className="cap-tooltip-container"
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onTransitionEnd={[Function]}
+        role="tooltip"
+        style={
+          Object {
+            "display": "none",
+            "left": "100%",
+            "pointerEvents": "none",
+            "position": "fixed",
+            "top": "100%",
+            "zIndex": 1000,
+          }
+        }
+      />
+      <button
+        aria-controls="id-g"
+        aria-describedby="id-g"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        aria-label="global.delete"
+        className="sc-bdvvtL jBnaym cap-buttonQuickAction"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <svg
+          className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+          fill="none"
+          viewBox="0 0 12 12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.091 3.75H1.909a.286.286 0 00-.193.073.24.24 0 00-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 00.32-.707V4a.24.24 0 00-.08-.177.286.286 0 00-.193-.073zm-5.045 6.5a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11c.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zm2.727 0a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zM11.454 2h-2.59a.143.143 0 01-.097-.037.12.12 0 01-.04-.088V1.25a1.2 1.2 0 00-.4-.884A1.429 1.429 0 007.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 00-.4.884v.625a.12.12 0 01-.04.088.143.143 0 01-.096.037H.546a.572.572 0 00-.386.146A.48.48 0 000 2.5c0 .133.057.26.16.354A.572.572 0 00.545 3h10.91a.572.572 0 00.385-.146A.48.48 0 0012 2.5a.48.48 0 00-.16-.354.572.572 0 00-.386-.146zm-7.09-.125V1.25a.24.24 0 01.08-.177A.286.286 0 014.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 01.08.177v.625a.12.12 0 01-.04.088A.143.143 0 017.5 2h-3a.143.143 0 01-.096-.037.12.12 0 01-.04-.088z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        className="cap-tooltip-container"
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onTransitionEnd={[Function]}
+        role="tooltip"
+        style={
+          Object {
+            "display": "none",
+            "left": "100%",
+            "pointerEvents": "none",
+            "position": "fixed",
+            "top": "100%",
+            "zIndex": 1000,
+          }
+        }
+      />
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+    </div>
+  </td>,
+]
+`;

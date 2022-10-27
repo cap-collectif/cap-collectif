@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Ownerable;
 
+use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Resolver\Organization\OrganizationAdminAccessResolver;
@@ -19,8 +20,13 @@ class OwnerableCreatorAccessResolver implements ResolverInterface
 
     public function __invoke(Ownerable $entity, ?User $viewer = null): bool
     {
-        if (!$viewer) return false;
+        if (!$viewer) {
+            return false;
+        }
         if ($viewer->isAdmin()) {
+            return true;
+        }
+        if ($entity instanceof CreatableInterface && $entity->getCreator() === $viewer) {
             return true;
         }
         $owner = $entity->getOwner();

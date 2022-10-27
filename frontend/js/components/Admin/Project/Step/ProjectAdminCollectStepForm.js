@@ -84,6 +84,19 @@ export const getAvailableProposals = graphql`
           }
         }
       }
+      organizations {
+        proposalForms(query: $term, affiliations: $affiliations, availableOnly: true) {
+          edges {
+            node {
+              id
+              title
+              isGridViewEnabled
+              isListViewEnabled
+              isMapViewEnabled
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -97,7 +110,9 @@ export const loadProposalOptions = (
     term: term === '' ? null : term,
     affiliations: isAdmin ? [] : ['OWNER'],
   }).then(data => {
-    const proposals = data.viewer.proposalForms.edges.map(p => ({
+    const proposalsForms =
+      data.viewer.organizations?.[0]?.proposalForms ?? data.viewer.proposalForms;
+    const proposals = proposalsForms.edges.map(p => ({
       value: p.node.id,
       label: p.node.title,
       isGridViewEnabled: p.node.isGridViewEnabled,

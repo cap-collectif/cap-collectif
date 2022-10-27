@@ -552,7 +552,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DistrictMutation", [value, getUser()])'
             # Proposal Form
             createProposalForm:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\CreateProposalFormMutation").isGranted()'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateProposalFormInput

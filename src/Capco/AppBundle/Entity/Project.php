@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
@@ -45,7 +46,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasUserGroupIdVisibilityGroup()
  */
-class Project implements IndexableInterface, TimeRangeable, Ownerable
+class Project implements IndexableInterface, TimeRangeable, Ownerable, CreatableInterface
 {
     use AddressableTrait;
     use CoverTrait;

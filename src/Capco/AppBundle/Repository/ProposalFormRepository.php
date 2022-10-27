@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Enum\ProposalFormAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\QueryBuilder;
@@ -92,6 +93,32 @@ class ProposalFormRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getByOwner(Owner $owner, int $offset, int $limit, array $options): array
+    {
+        $qb = $this->getByOwnerQueryBuilder($owner);
+        if ($query = $options['query']) {
+            $qb->andWhere('p.title LIKE :query');
+            $qb->setParameter('query', "%{$query}%");
+        }
+        if ($options['availableOnly']) {
+            $qb->andWhere('p.step IS NULL');
+        }
+
+        return $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countByOwner(Owner $owner): int
+    {
+        return $this->getByOwnerQueryBuilder($owner)
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     private function allQueryBuilder(
         ?array $affiliations,
         ?User $user,
@@ -115,5 +142,14 @@ class ProposalFormRepository extends EntityRepository
         }
 
         return $qb;
+    }
+
+    private function getByOwnerQueryBuilder(Owner $owner): QueryBuilder
+    {
+        $ownerField = $owner instanceof User ? 'p.owner' : 'p.organizationOwner';
+
+        return $this->createQueryBuilder('p')
+            ->where("{$ownerField} = :owner")
+            ->setParameter('owner', $owner);
     }
 }

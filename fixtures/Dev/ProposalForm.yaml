@@ -468,3 +468,18 @@ Capco\AppBundle\Entity\ProposalForm:
         creator: '@user1'
         reference: 27
         usingCategories: true
+    proposalFormOrgaAdmin:
+        id: proposalFormOrgaAdmin
+        title: Formulaire organisation crée par un admin
+        description: Formulaire appartenant à une organisation crée par un admin
+        owner: '@organization2'
+        step: '@collectstepOrga'
+        creator: '@valerieMassonDelmotte'
+        reference: 28
+    proposalFormOrgaMember:
+        id: proposalFormOrgaMember
+        title: Formulaire organisation crée par un membre
+        description: Formulaire appartenant à une organisation crée par un membre
+        owner: '@organization2'
+        creator: '@ChristopheCassou'
+        reference: 29

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Traits\CreatableTrait;
@@ -16,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=MailingListRepository::class)
  * @ORM\Table(name="mailing_list")
  */
-class MailingList implements Ownerable
+class MailingList implements Ownerable, CreatableInterface
 {
     use OwnerableTrait;
     use CreatableTrait;
