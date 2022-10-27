@@ -214,115 +214,115 @@ export const ProposalEditModal = ({
               modalState={modalState}
               resetModalState={resetModalState}
             />
-            {modalState === 'NORMAL' && (
-              <motion.div
-                key="normal"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, display: 'block' }}
-                style={{ overflow: 'scroll' }}
-                exit={{ opacity: 0, display: 'none' }}>
-                <Modal.Body height="unset">
-                  <ProposalDraftAlert proposal={proposal} mb={6} />
-                  {hasPendingRevisions && (
-                    <ProposalRevisionItem as="div" className="mb-10">
-                      <p className="font-weight-bold m-0">
-                        {intl.formatMessage({ id: 'reason.review.request' })}
+            <motion.div
+              key="normal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, display: 'block' }}
+              style={{ overflow: 'scroll' }}
+              exit={{ opacity: 0, display: 'none' }}>
+              <Modal.Body height="unset" display={modalState === 'NORMAL' ? 'flex' : 'none'}>
+                <ProposalDraftAlert proposal={proposal} mb={6} />
+                {hasPendingRevisions && (
+                  <ProposalRevisionItem as="div" className="mb-10">
+                    <p className="font-weight-bold m-0">
+                      {intl.formatMessage({ id: 'reason.review.request' })}
+                    </p>
+                    <ProposalRevisionsList>
+                      {pendingRevisions.map(revision => (
+                        <li key={revision.id}>
+                          <span>{revision.reason}&nbsp;</span>
+                          <Collapsable closeOnClickAway={false} className="clearfix">
+                            {({ visible }) => (
+                              <Collapsable.Button inline={false} showCaret={false}>
+                                {!visible && (
+                                  <BsButton variant="link" bsStyle="link">
+                                    <FormattedMessage id="open-instructions" />
+                                  </BsButton>
+                                )}
+                                <Collapsable.Element isAbsolute={false} ariaLabel="Contenu">
+                                  <div dangerouslySetInnerHTML={{ __html: revision.body }} />
+                                  <BsButton variant="link" bsStyle="link">
+                                    <FormattedMessage id="close-instructions" />
+                                  </BsButton>
+                                </Collapsable.Element>
+                              </Collapsable.Button>
+                            )}
+                          </Collapsable>
+                        </li>
+                      ))}
+                    </ProposalRevisionsList>
+                    {!proposal.form.contribuable && (
+                      <p className="mb-0 mt-20">
+                        {intl.formatMessage({ id: 'warning.review.modification' })}
                       </p>
-                      <ProposalRevisionsList>
-                        {pendingRevisions.map(revision => (
-                          <li key={revision.id}>
-                            <span>{revision.reason}&nbsp;</span>
-                            <Collapsable closeOnClickAway={false} className="clearfix">
-                              {({ visible }) => (
-                                <Collapsable.Button inline={false} showCaret={false}>
-                                  {!visible && (
-                                    <BsButton variant="link" bsStyle="link">
-                                      <FormattedMessage id="open-instructions" />
-                                    </BsButton>
-                                  )}
-                                  <Collapsable.Element isAbsolute={false} ariaLabel="Contenu">
-                                    <div dangerouslySetInnerHTML={{ __html: revision.body }} />
-                                    <BsButton variant="link" bsStyle="link">
-                                      <FormattedMessage id="close-instructions" />
-                                    </BsButton>
-                                  </Collapsable.Element>
-                                </Collapsable.Button>
-                              )}
-                            </Collapsable>
-                          </li>
-                        ))}
-                      </ProposalRevisionsList>
-                      {!proposal.form.contribuable && (
-                        <p className="mb-0 mt-20">
-                          {intl.formatMessage({ id: 'warning.review.modification' })}
-                        </p>
-                      )}
-                    </ProposalRevisionItem>
-                  )}
-                  <ProposalForm
-                    onAddressEdit={() => setModalState('MAP')}
-                    proposalForm={proposal.form}
-                    proposal={proposal}
-                    isBackOfficeInput={false}
-                    onSubmitSuccess={onClose}
-                    onSubmitFailed={onSubmitFailed}
-                    setValuesSaved={setValuesSaved}
-                  />
-                </Modal.Body>
-                <Modal.Footer borderTop={['', `1px solid ${colors.gray[200]}`]}>
-                  <ButtonGroup>
-                    {proposal.publicationStatus !== 'DRAFT' && (
-                      <Button
-                        onClick={onClose}
-                        variantSize="big"
-                        variant="secondary"
-                        variantColor="hierarchy"
-                        isLoading={submitting}>
-                        {intl.formatMessage({ id: 'global.cancel' })}
-                      </Button>
                     )}
-                    {proposal.publicationStatus === 'DRAFT' && (
-                      <Button
-                        id="confirm-proposal-create-as-draft"
-                        variantSize="big"
-                        variant="tertiary"
-                        variantColor="primary"
-                        isLoading={submitting && isDraft}
-                        disabled={pristine || (!isDraft && submitting)}
-                        onClick={() => {
-                          dispatch(change(formName, 'draft', true));
-                          setIsDraft(true);
-                          setTimeout(() => {
-                            // TODO find a better way
-                            // We need to wait validation values to be updated with 'draft'
-                            dispatch(submit(formName));
-                          }, 200);
-                        }}>
-                        {intl.formatMessage({ id: 'global.save' })}
-                      </Button>
-                    )}
+                  </ProposalRevisionItem>
+                )}
+                <ProposalForm
+                  onAddressEdit={() => setModalState('MAP')}
+                  proposalForm={proposal.form}
+                  proposal={proposal}
+                  isBackOfficeInput={false}
+                  onSubmitSuccess={onClose}
+                  onSubmitFailed={onSubmitFailed}
+                  setValuesSaved={setValuesSaved}
+                />
+              </Modal.Body>
+              <Modal.Footer
+                borderTop={['', `1px solid ${colors.gray[200]}`]}
+                display={modalState === 'NORMAL' ? 'flex' : 'none'}>
+                <ButtonGroup>
+                  {proposal.publicationStatus !== 'DRAFT' && (
                     <Button
-                      id="confirm-proposal-edit"
+                      onClick={onClose}
                       variantSize="big"
-                      variant="primary"
+                      variant="secondary"
+                      variantColor="hierarchy"
+                      isLoading={submitting}>
+                      {intl.formatMessage({ id: 'global.cancel' })}
+                    </Button>
+                  )}
+                  {proposal.publicationStatus === 'DRAFT' && (
+                    <Button
+                      id="confirm-proposal-create-as-draft"
+                      variantSize="big"
+                      variant="tertiary"
                       variantColor="primary"
-                      isLoading={submitting && !isDraft}
-                      disabled={pristine || invalid || (isDraft && submitting)}
+                      isLoading={submitting && isDraft}
+                      disabled={pristine || (!isDraft && submitting)}
                       onClick={() => {
-                        dispatch(change(formName, 'draft', false));
-                        setIsDraft(false);
+                        dispatch(change(formName, 'draft', true));
+                        setIsDraft(true);
                         setTimeout(() => {
                           // TODO find a better way
                           // We need to wait validation values to be updated with 'draft'
                           dispatch(submit(formName));
                         }, 200);
                       }}>
-                      {intl.formatMessage({ id: 'global.publish' })}
+                      {intl.formatMessage({ id: 'global.save' })}
                     </Button>
-                  </ButtonGroup>
-                </Modal.Footer>
-              </motion.div>
-            )}
+                  )}
+                  <Button
+                    id="confirm-proposal-edit"
+                    variantSize="big"
+                    variant="primary"
+                    variantColor="primary"
+                    isLoading={submitting && !isDraft}
+                    disabled={pristine || invalid || (isDraft && submitting)}
+                    onClick={() => {
+                      dispatch(change(formName, 'draft', false));
+                      setIsDraft(false);
+                      setTimeout(() => {
+                        // TODO find a better way
+                        // We need to wait validation values to be updated with 'draft'
+                        dispatch(submit(formName));
+                      }, 200);
+                    }}>
+                    {intl.formatMessage({ id: 'global.publish' })}
+                  </Button>
+                </ButtonGroup>
+              </Modal.Footer>
+            </motion.div>
             {modalState === 'ERROR' && (
               <ProposalErrorModal
                 allowRetry={errorCount < 2}

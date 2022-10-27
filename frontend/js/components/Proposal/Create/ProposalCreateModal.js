@@ -107,70 +107,68 @@ const ProposalCreateModal = ({
               modalState={modalState}
               resetModalState={resetModalState}
             />
-            {modalState === 'NORMAL' && (
-              <>
-                <Modal.Body>
-                  <ProposalForm
-                    onAddressEdit={() => setModalState('MAP')}
-                    proposalForm={proposalForm}
-                    proposal={null}
-                    onSubmitSuccess={onClose}
-                    onSubmitFailed={onSubmitFailed}
-                    setValuesSaved={setValuesSaved}
-                  />
-                </Modal.Body>
-                <Modal.Footer>
-                  <ButtonGroup>
-                    <Button
-                      id="confirm-proposal-create-as-draft"
-                      variantSize="big"
-                      variant="tertiary"
-                      variantColor="primary"
-                      isLoading={submitting && isDraft}
-                      disabled={pristine || (!isDraft && submitting)}
-                      onClick={() => {
-                        track('submit_draft_proposal_click', {
-                          step_title: proposalForm.step?.title || '',
-                          step_url: proposalForm.step?.url || '',
-                          project_title: proposalForm.step?.project?.title || '',
-                        });
-                        dispatch(change(formName, 'draft', true));
-                        setIsDraft(true);
-                        setTimeout(() => {
-                          // TODO find a better way
-                          // We need to wait validation values to be updated with 'draft'
-                          dispatch(submit(formName));
-                        }, 200);
-                      }}>
-                      {intl.formatMessage({ id: 'global.save' })}
-                    </Button>
-                    <Button
-                      variantSize="big"
-                      variant="primary"
-                      variantColor="primary"
-                      id="confirm-proposal-create"
-                      isLoading={submitting && !isDraft}
-                      disabled={pristine || invalid || (isDraft && submitting)}
-                      onClick={() => {
-                        track('submit_proposal_click', {
-                          step_title: proposalForm.step?.title || '',
-                          step_url: proposalForm.step?.url || '',
-                          project_title: proposalForm.step?.project?.title || '',
-                        });
-                        dispatch(change(formName, 'draft', false));
-                        setIsDraft(false);
-                        setTimeout(() => {
-                          // TODO find a better way
-                          // We need to wait validation values to be updated with 'draft'
-                          dispatch(submit(formName));
-                        }, 200);
-                      }}>
-                      {intl.formatMessage({ id: 'global.publish' })}
-                    </Button>
-                  </ButtonGroup>
-                </Modal.Footer>
-              </>
-            )}
+            <>
+              <Modal.Body display={modalState === 'NORMAL' ? 'flex' : 'none'}>
+                <ProposalForm
+                  onAddressEdit={() => setModalState('MAP')}
+                  proposalForm={proposalForm}
+                  proposal={null}
+                  onSubmitSuccess={onClose}
+                  onSubmitFailed={onSubmitFailed}
+                  setValuesSaved={setValuesSaved}
+                />
+              </Modal.Body>
+              <Modal.Footer display={modalState === 'NORMAL' ? 'flex' : 'none'}>
+                <ButtonGroup>
+                  <Button
+                    id="confirm-proposal-create-as-draft"
+                    variantSize="big"
+                    variant="tertiary"
+                    variantColor="primary"
+                    isLoading={submitting && isDraft}
+                    disabled={pristine || (!isDraft && submitting)}
+                    onClick={() => {
+                      track('submit_draft_proposal_click', {
+                        step_title: proposalForm.step?.title || '',
+                        step_url: proposalForm.step?.url || '',
+                        project_title: proposalForm.step?.project?.title || '',
+                      });
+                      dispatch(change(formName, 'draft', true));
+                      setIsDraft(true);
+                      setTimeout(() => {
+                        // TODO find a better way
+                        // We need to wait validation values to be updated with 'draft'
+                        dispatch(submit(formName));
+                      }, 200);
+                    }}>
+                    {intl.formatMessage({ id: 'global.save' })}
+                  </Button>
+                  <Button
+                    variantSize="big"
+                    variant="primary"
+                    variantColor="primary"
+                    id="confirm-proposal-create"
+                    isLoading={submitting && !isDraft}
+                    disabled={pristine || invalid || (isDraft && submitting)}
+                    onClick={() => {
+                      track('submit_proposal_click', {
+                        step_title: proposalForm.step?.title || '',
+                        step_url: proposalForm.step?.url || '',
+                        project_title: proposalForm.step?.project?.title || '',
+                      });
+                      dispatch(change(formName, 'draft', false));
+                      setIsDraft(false);
+                      setTimeout(() => {
+                        // TODO find a better way
+                        // We need to wait validation values to be updated with 'draft'
+                        dispatch(submit(formName));
+                      }, 200);
+                    }}>
+                    {intl.formatMessage({ id: 'global.publish' })}
+                  </Button>
+                </ButtonGroup>
+              </Modal.Footer>
+            </>
             {modalState === 'ERROR' && (
               <ProposalErrorModal
                 allowRetry={errorCount < 2}
