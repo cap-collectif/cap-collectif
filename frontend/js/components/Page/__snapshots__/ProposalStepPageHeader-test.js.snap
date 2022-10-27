@@ -384,7 +384,7 @@ exports[`<ProposalStepPageHeader /> renders with question context in selection s
       }
     }
     show={false}
-    title="proposal.submit-a-question"
+    title="submit-a-question"
   />
   <div
     id="proposal-step-page-header"

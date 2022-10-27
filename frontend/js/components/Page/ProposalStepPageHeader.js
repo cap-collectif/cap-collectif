@@ -45,7 +45,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
   const titleTradKey = isEstablishment
     ? getProposalLabelByType(projectType, 'add-establishment')
     : step.form?.objectType === 'QUESTION'
-    ? getProposalLabelByType(projectType, 'submit-a-question')
+    ? 'submit-a-question'
     : isOpinion
     ? 'submit-opinion'
     : getProposalLabelByType(projectType, 'add');
