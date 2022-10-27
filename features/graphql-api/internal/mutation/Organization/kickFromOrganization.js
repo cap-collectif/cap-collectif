@@ -38,7 +38,7 @@ describe('Internal|kickFromOrganization mutation', () => {
       {
         input: {
           organizationId: toGlobalId('Organization', 'test'),
-          userId: toGlobalId('User', 'user2')
+          userId: toGlobalId('User', 'userOmar')
         },
       },
       'internal_super_admin',
@@ -55,7 +55,7 @@ describe('Internal|kickFromOrganization mutation', () => {
       {
         input: {
           organizationId: toGlobalId('Organization', 'organization1'),
-          userId: toGlobalId('User', 'user2')
+          userId: toGlobalId('User', 'userOmar')
         },
       },
       'internal_user',
@@ -103,9 +103,48 @@ describe('Internal|kickFromOrganization mutation', () => {
     expect(response.kickFromOrganization.errorCode).toBe("USER_NOT_MEMBER");
   });
 
-  it('should kick a user', async () => {
+  it('should kick a user as admin of organization', async () => {
     const organizationId = toGlobalId('Organization', 'organization1');
-    const userId = toGlobalId('User', 'user2');
+    const userId = toGlobalId('User', 'userOmar');
+
+    const checkBefore = await graphql(
+      CountMembersOfOrganization,
+      {
+        input: organizationId
+      },
+      'internal_mickael',
+    );
+    const expectedCount = checkBefore.organization.members.totalCount - 1;
+
+    const response = await graphql(
+      KickFromOrganization,
+      {
+        input: {
+          organizationId,
+          userId
+        },
+      },
+      'internal_super_admin',
+    );
+
+    expect(response.kickFromOrganization.organization.id).toBe(organizationId);
+    expect(response.kickFromOrganization.organization.members.totalCount).toBe(expectedCount);
+    expect(response.kickFromOrganization.user.id).toBe(userId);
+    expect(response.kickFromOrganization.errorCode).toBeNull();
+
+    const checkAfter = await graphql(
+      CountMembersOfOrganization,
+      {
+        input: organizationId
+      },
+      'internal_super_admin',
+    );
+    expect(checkAfter.organization.members.totalCount).toBe(expectedCount);
+  });
+
+  it('should kick a user as super admin', async () => {
+    const organizationId = toGlobalId('Organization', 'organization1');
+    const userId = toGlobalId('User', 'userMickael');
 
     const checkBefore = await graphql(
       CountMembersOfOrganization,
