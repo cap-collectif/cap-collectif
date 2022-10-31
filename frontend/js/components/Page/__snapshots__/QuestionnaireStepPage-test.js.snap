@@ -1917,7 +1917,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "e4f471ee58740d8a8c9fb135d0fd6607",
+        "cacheID": "2dd6d135ada3cdaf838076b8dde46fcf",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -1981,6 +1981,16 @@ fragment ProjectEventPreview_event on Event {
   }
 }
 
+fragment QuestionnaireFooter_step on QuestionnaireStep {
+  footer
+}
+
+fragment QuestionnaireHeader_step on Step {
+  __isStep: __typename
+  body
+  title
+}
+
 fragment QuestionnairePage_query_2uEJPD on Query {
   ...UserReplies_query_2uEJPD
   anonymousReplies: nodes(ids: $anonymousRepliesIds) @include(if: $isNotAuthenticated) {
@@ -1992,8 +2002,8 @@ fragment QuestionnairePage_query_2uEJPD on Query {
 fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
   multipleRepliesAllowed
   step {
-    ...StepPageFooter_step
-    ...StepPageHeader_step
+    ...QuestionnaireHeader_step
+    ...QuestionnaireFooter_step
     id
   }
   viewerReplies @include(if: $isAuthenticated) {
@@ -4244,7 +4254,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "e4f471ee58740d8a8c9fb135d0fd6607",
+        "cacheID": "2dd6d135ada3cdaf838076b8dde46fcf",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4308,6 +4318,16 @@ fragment ProjectEventPreview_event on Event {
   }
 }
 
+fragment QuestionnaireFooter_step on QuestionnaireStep {
+  footer
+}
+
+fragment QuestionnaireHeader_step on Step {
+  __isStep: __typename
+  body
+  title
+}
+
 fragment QuestionnairePage_query_2uEJPD on Query {
   ...UserReplies_query_2uEJPD
   anonymousReplies: nodes(ids: $anonymousRepliesIds) @include(if: $isNotAuthenticated) {
@@ -4319,8 +4339,8 @@ fragment QuestionnairePage_query_2uEJPD on Query {
 fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
   multipleRepliesAllowed
   step {
-    ...StepPageFooter_step
-    ...StepPageHeader_step
+    ...QuestionnaireHeader_step
+    ...QuestionnaireFooter_step
     id
   }
   viewerReplies @include(if: $isAuthenticated) {

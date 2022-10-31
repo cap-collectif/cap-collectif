@@ -246,7 +246,34 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     <p
                       className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
                     >
-                      count.block.daysLeft
+                      <div
+                        aria-describedby="id-g"
+                        onBlur={[Function]}
+                        onFocus={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        tabIndex={0}
+                      >
+                        count.block.daysLeft
+                      </div>
+                      <div
+                        className="cap-tooltip-container"
+                        hidden={true}
+                        id="id-g"
+                        onAnimationEnd={[Function]}
+                        onTransitionEnd={[Function]}
+                        role="tooltip"
+                        style={
+                          Object {
+                            "display": "none",
+                            "left": "100%",
+                            "pointerEvents": "none",
+                            "position": "fixed",
+                            "top": "100%",
+                            "zIndex": 1000,
+                          }
+                        }
+                      />
                     </p>
                   </a>
                 </li>
@@ -606,7 +633,34 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     <p
                       className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
                     >
-                      count.block.daysLeft
+                      <div
+                        aria-describedby="id-g"
+                        onBlur={[Function]}
+                        onFocus={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        tabIndex={0}
+                      >
+                        count.block.daysLeft
+                      </div>
+                      <div
+                        className="cap-tooltip-container"
+                        hidden={true}
+                        id="id-g"
+                        onAnimationEnd={[Function]}
+                        onTransitionEnd={[Function]}
+                        role="tooltip"
+                        style={
+                          Object {
+                            "display": "none",
+                            "left": "100%",
+                            "pointerEvents": "none",
+                            "position": "fixed",
+                            "top": "100%",
+                            "zIndex": 1000,
+                          }
+                        }
+                      />
                     </p>
                   </a>
                 </li>

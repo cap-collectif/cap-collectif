@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useFragment, graphql } from 'react-relay';
 import { useSelector } from 'react-redux';
+import { Tooltip } from '@cap-collectif/ui';
 import moment from 'moment';
 import ProjectHeader from '~ui/Project/ProjectHeader';
 import type { ProjectStepTabs_project$key } from '~relay/ProjectStepTabs_project.graphql';
@@ -77,12 +78,39 @@ const ProjectStepTabs = ({ project, isConsultation, platformLocale }: Props): Re
           const hours = moment(step.timeRange?.endAt).diff(moment(), 'hours');
           return intl.formatMessage({ id: 'count.block.hoursLeft' }, { count: hours });
         }
-        return intl.formatMessage({ id: 'count.block.daysLeft' }, { count });
+
+        return isMobile ? (
+          intl.formatMessage({ id: 'count.block.daysLeft' }, { count })
+        ) : (
+          <Tooltip
+            label={intl.formatMessage(
+              { id: 'fromDayToDay' },
+              {
+                day: intl.formatDate(moment(step.timeRange?.startAt), {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                }),
+                anotherDay: intl.formatDate(moment(step.timeRange?.endAt), {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                }),
+              },
+            )}>
+            <div>{intl.formatMessage({ id: 'count.block.daysLeft' }, { count })}</div>
+          </Tooltip>
+        );
       }
 
       return '';
     }
   };
+
   const getTooltipText = step => {
     if (
       step.state === 'FUTURE' &&
@@ -102,6 +130,7 @@ const ProjectStepTabs = ({ project, isConsultation, platformLocale }: Props): Re
     }
     return null;
   };
+
   const renderProgressBar = step => {
     const { id: decoded } = isGlobalId(step.id) ? fromGlobalId(step.id) : { id: step.id };
     if (step.state === 'OPENED') {

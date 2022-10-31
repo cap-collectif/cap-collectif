@@ -6,6 +6,13 @@ export type ColorRGB = {|
   b: number,
 |};
 
+export type ColorRGBA = {|
+  r: number | string,
+  g: number | string,
+  b: number | string,
+  a: number | string,
+|};
+
 export type ColorHSL = {|
   h: number,
   s: number,

@@ -1,17 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ReplyForm /> should render correctly when anonymous participation is allowed 1`] = `
-<ReplyFormstyle__ReplyFormContainer
-  id="reply-form-container"
+<ReplyFormstyle__QuestionnaireContainer
+  id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <form
-    id="reply-form"
-    onSubmit={[MockFunction]}
+  <ReplyFormstyle__ReplyFormContainer
+    id="reply-form-container"
   >
     <FieldArray
       change={[MockFunction]}
       component={[Function]}
       disabled={false}
+      divClassName="container-questions"
       form="formName"
       intl={
         Object {
@@ -81,34 +82,35 @@ exports[`<ReplyForm /> should render correctly when anonymous participation is a
       typeForm="questionnaire"
       unstable__enableCapcoUiDs={true}
     />
-    <div
-      className="btn-toolbar btn-box sticky"
-    >
-      <Connect(SubmitButton)
-        bsStyle="info"
-        disabled={true}
-        id="formName-submit-create-reply"
-        label="global.send"
-        onSubmit={[Function]}
-        type="submit"
-      />
-    </div>
-  </form>
-</ReplyFormstyle__ReplyFormContainer>
+  </ReplyFormstyle__ReplyFormContainer>
+  <ReplyFormstyle__ButtonGroupSubmit
+    className="btn-toolbar"
+  >
+    <Connect(SubmitButton)
+      bsStyle="info"
+      disabled={true}
+      id="formName-submit-create-reply"
+      label="global.send"
+      onSubmit={[Function]}
+      type="submit"
+    />
+  </ReplyFormstyle__ButtonGroupSubmit>
+</ReplyFormstyle__QuestionnaireContainer>
 `;
 
 exports[`<ReplyForm /> should render correctly with a select with a lot of choices 1`] = `
-<ReplyFormstyle__ReplyFormContainer
-  id="reply-form-container"
+<ReplyFormstyle__QuestionnaireContainer
+  id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <form
-    id="reply-form"
-    onSubmit={[MockFunction]}
+  <ReplyFormstyle__ReplyFormContainer
+    id="reply-form-container"
   >
     <FieldArray
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
+      divClassName="container-questions"
       form="formName"
       intl={
         Object {
@@ -564,34 +566,35 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
       typeForm="questionnaire"
       unstable__enableCapcoUiDs={true}
     />
-    <div
-      className="btn-toolbar btn-box sticky"
-    >
-      <Connect(SubmitButton)
-        bsStyle="info"
-        disabled={true}
-        id="formName-submit-create-reply"
-        label="global.send"
-        onSubmit={[Function]}
-        type="submit"
-      />
-    </div>
-  </form>
-</ReplyFormstyle__ReplyFormContainer>
+  </ReplyFormstyle__ReplyFormContainer>
+  <ReplyFormstyle__ButtonGroupSubmit
+    className="btn-toolbar"
+  >
+    <Connect(SubmitButton)
+      bsStyle="info"
+      disabled={true}
+      id="formName-submit-create-reply"
+      label="global.send"
+      onSubmit={[Function]}
+      type="submit"
+    />
+  </ReplyFormstyle__ButtonGroupSubmit>
+</ReplyFormstyle__QuestionnaireContainer>
 `;
 
 exports[`<ReplyForm /> should render correctly with equal required and facultative fields 1`] = `
-<ReplyFormstyle__ReplyFormContainer
-  id="reply-form-container"
+<ReplyFormstyle__QuestionnaireContainer
+  id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <form
-    id="reply-form"
-    onSubmit={[MockFunction]}
+  <ReplyFormstyle__ReplyFormContainer
+    id="reply-form-container"
   >
     <FieldArray
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
+      divClassName="container-questions"
       form="formName"
       intl={
         Object {
@@ -829,34 +832,35 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       typeForm="questionnaire"
       unstable__enableCapcoUiDs={true}
     />
-    <div
-      className="btn-toolbar btn-box sticky"
-    >
-      <Connect(SubmitButton)
-        bsStyle="info"
-        disabled={true}
-        id="formName-submit-create-reply"
-        label="global.send"
-        onSubmit={[Function]}
-        type="submit"
-      />
-    </div>
-  </form>
-</ReplyFormstyle__ReplyFormContainer>
+  </ReplyFormstyle__ReplyFormContainer>
+  <ReplyFormstyle__ButtonGroupSubmit
+    className="btn-toolbar"
+  >
+    <Connect(SubmitButton)
+      bsStyle="info"
+      disabled={true}
+      id="formName-submit-create-reply"
+      label="global.send"
+      onSubmit={[Function]}
+      type="submit"
+    />
+  </ReplyFormstyle__ButtonGroupSubmit>
+</ReplyFormstyle__QuestionnaireContainer>
 `;
 
 exports[`<ReplyForm /> should render correctly with majority of required fields 1`] = `
-<ReplyFormstyle__ReplyFormContainer
-  id="reply-form-container"
+<ReplyFormstyle__QuestionnaireContainer
+  id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <form
-    id="reply-form"
-    onSubmit={[MockFunction]}
+  <ReplyFormstyle__ReplyFormContainer
+    id="reply-form-container"
   >
     <FieldArray
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
+      divClassName="container-questions"
       form="formName"
       intl={
         Object {
@@ -1041,34 +1045,35 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
       typeForm="questionnaire"
       unstable__enableCapcoUiDs={true}
     />
-    <div
-      className="btn-toolbar btn-box sticky"
-    >
-      <Connect(SubmitButton)
-        bsStyle="info"
-        disabled={true}
-        id="formName-submit-create-reply"
-        label="global.send"
-        onSubmit={[Function]}
-        type="submit"
-      />
-    </div>
-  </form>
-</ReplyFormstyle__ReplyFormContainer>
+  </ReplyFormstyle__ReplyFormContainer>
+  <ReplyFormstyle__ButtonGroupSubmit
+    className="btn-toolbar"
+  >
+    <Connect(SubmitButton)
+      bsStyle="info"
+      disabled={true}
+      id="formName-submit-create-reply"
+      label="global.send"
+      onSubmit={[Function]}
+      type="submit"
+    />
+  </ReplyFormstyle__ButtonGroupSubmit>
+</ReplyFormstyle__QuestionnaireContainer>
 `;
 
 exports[`<ReplyForm /> should render correctly with minority of required fields 1`] = `
-<ReplyFormstyle__ReplyFormContainer
-  id="reply-form-container"
+<ReplyFormstyle__QuestionnaireContainer
+  id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <form
-    id="reply-form"
-    onSubmit={[MockFunction]}
+  <ReplyFormstyle__ReplyFormContainer
+    id="reply-form-container"
   >
     <FieldArray
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
+      divClassName="container-questions"
       form="formName"
       intl={
         Object {
@@ -1368,34 +1373,35 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       typeForm="questionnaire"
       unstable__enableCapcoUiDs={true}
     />
-    <div
-      className="btn-toolbar btn-box sticky"
-    >
-      <Connect(SubmitButton)
-        bsStyle="info"
-        disabled={true}
-        id="formName-submit-create-reply"
-        label="global.send"
-        onSubmit={[Function]}
-        type="submit"
-      />
-    </div>
-  </form>
-</ReplyFormstyle__ReplyFormContainer>
+  </ReplyFormstyle__ReplyFormContainer>
+  <ReplyFormstyle__ButtonGroupSubmit
+    className="btn-toolbar"
+  >
+    <Connect(SubmitButton)
+      bsStyle="info"
+      disabled={true}
+      id="formName-submit-create-reply"
+      label="global.send"
+      onSubmit={[Function]}
+      type="submit"
+    />
+  </ReplyFormstyle__ButtonGroupSubmit>
+</ReplyFormstyle__QuestionnaireContainer>
 `;
 
 exports[`<ReplyForm /> should render correctly with only facultatives fields 1`] = `
-<ReplyFormstyle__ReplyFormContainer
-  id="reply-form-container"
+<ReplyFormstyle__QuestionnaireContainer
+  id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <form
-    id="reply-form"
-    onSubmit={[MockFunction]}
+  <ReplyFormstyle__ReplyFormContainer
+    id="reply-form-container"
   >
     <FieldArray
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
+      divClassName="container-questions"
       form="formName"
       intl={
         Object {
@@ -1608,34 +1614,35 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
       typeForm="questionnaire"
       unstable__enableCapcoUiDs={true}
     />
-    <div
-      className="btn-toolbar btn-box sticky"
-    >
-      <Connect(SubmitButton)
-        bsStyle="info"
-        disabled={true}
-        id="formName-submit-create-reply"
-        label="global.send"
-        onSubmit={[Function]}
-        type="submit"
-      />
-    </div>
-  </form>
-</ReplyFormstyle__ReplyFormContainer>
+  </ReplyFormstyle__ReplyFormContainer>
+  <ReplyFormstyle__ButtonGroupSubmit
+    className="btn-toolbar"
+  >
+    <Connect(SubmitButton)
+      bsStyle="info"
+      disabled={true}
+      id="formName-submit-create-reply"
+      label="global.send"
+      onSubmit={[Function]}
+      type="submit"
+    />
+  </ReplyFormstyle__ButtonGroupSubmit>
+</ReplyFormstyle__QuestionnaireContainer>
 `;
 
 exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
-<ReplyFormstyle__ReplyFormContainer
-  id="reply-form-container"
+<ReplyFormstyle__QuestionnaireContainer
+  id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <form
-    id="reply-form"
-    onSubmit={[MockFunction]}
+  <ReplyFormstyle__ReplyFormContainer
+    id="reply-form-container"
   >
     <FieldArray
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
+      divClassName="container-questions"
       form="formName"
       intl={
         Object {
@@ -1767,58 +1774,66 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
       typeForm="questionnaire"
       unstable__enableCapcoUiDs={true}
     />
-    <div
-      className="btn-toolbar btn-box sticky"
-    >
-      <Connect(SubmitButton)
-        bsStyle="info"
-        disabled={true}
-        id="formName-submit-create-reply"
-        label="global.send"
-        onSubmit={[Function]}
-        type="submit"
-      />
-    </div>
-  </form>
-</ReplyFormstyle__ReplyFormContainer>
+  </ReplyFormstyle__ReplyFormContainer>
+  <ReplyFormstyle__ButtonGroupSubmit
+    className="btn-toolbar"
+  >
+    <Connect(SubmitButton)
+      bsStyle="info"
+      disabled={true}
+      id="formName-submit-create-reply"
+      label="global.send"
+      onSubmit={[Function]}
+      type="submit"
+    />
+  </ReplyFormstyle__ButtonGroupSubmit>
+</ReplyFormstyle__QuestionnaireContainer>
 `;
 
 exports[`<ReplyForm /> should render correctly with requirements filled 1`] = `
-<ReplyFormstyle__ReplyFormContainer
-  id="reply-form-container"
+<ReplyFormstyle__QuestionnaireContainer
+  id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <form
-    id="reply-form"
-    onSubmit={[MockFunction]}
+  <ReplyFormstyle__ReplyFormContainer
+    id="reply-form-container"
   >
-    <Uncontrolled(Panel)
-      bsStyle="primary"
-      id="required-conditions"
+    <Section
+      level={0}
+      typeForm="questionnaire"
     >
-      <PanelHeading
-        bsClass="panel"
-        componentClass="div"
-      >
-        <FormattedMessage
-          id="requirements"
-          values={Object {}}
-        />
-         
-        <Label
-          bsClass="label"
-          bsStyle="primary"
-        >
-          <FormattedMessage
-            id="filled"
-            values={Object {}}
-          />
-        </Label>
-      </PanelHeading>
-    </Uncontrolled(Panel)>
+      <FormattedMessage
+        id="requirements"
+        values={Object {}}
+      />
+    </Section>
+    <ReplyFormstyle__WrapperWithMarge
+      borderBottom="2px solid #fff000"
+      overflow="hidden"
+    >
+      <Relay(Connect(ReduxForm))
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "collectParticipantsEmail": false,
+            "id": "step1",
+            "isAnonymousParticipationAllowed": false,
+            "requirements": Object {
+              "reason": null,
+              "totalCount": 3,
+              "viewerMeetsTheRequirements": true,
+            },
+            "title": "Step 1",
+          }
+        }
+        stepId="step1"
+      />
+    </ReplyFormstyle__WrapperWithMarge>
     <FieldArray
       change={[MockFunction]}
       component={[Function]}
       disabled={false}
+      divClassName="container-questions"
       form="formName"
       intl={
         Object {
@@ -1928,96 +1943,90 @@ exports[`<ReplyForm /> should render correctly with requirements filled 1`] = `
     <hr
       className="mb-30"
     />
-    <Field
-      component={[Function]}
-      disabled={false}
-      helpPrint={false}
-      id="formName-reply-private"
-      name="private"
-      type="checkbox"
-      typeForm="questionnaire"
-    >
-      <FormattedMessage
-        id="reply.form.private"
-        values={Object {}}
-      />
-    </Field>
-    <div
-      className="btn-toolbar btn-box sticky"
-    >
-      <Connect(SubmitButton)
-        bsStyle="primary"
-        disabled={true}
-        id="formName-submit-create-draft-reply"
-        label="global.save_as_draft"
-        onSubmit={[Function]}
-        type="submit"
-      />
-      <Connect(SubmitButton)
-        bsStyle="info"
-        disabled={true}
-        id="formName-submit-create-reply"
-        label="global.send"
-        onSubmit={[Function]}
-        type="submit"
-      />
-    </div>
-  </form>
-</ReplyFormstyle__ReplyFormContainer>
+    <ReplyFormstyle__WrapperWithMargeX>
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpPrint={false}
+        id="formName-reply-private"
+        name="private"
+        type="checkbox"
+        typeForm="questionnaire"
+      >
+        <FormattedMessage
+          id="reply.form.private"
+          values={Object {}}
+        />
+      </Field>
+    </ReplyFormstyle__WrapperWithMargeX>
+  </ReplyFormstyle__ReplyFormContainer>
+  <ReplyFormstyle__ButtonGroupSubmit
+    className="btn-toolbar"
+  >
+    <Connect(SubmitButton)
+      bsStyle="primary"
+      disabled={true}
+      id="formName-submit-create-draft-reply"
+      label="global.save_as_draft"
+      onSubmit={[Function]}
+      type="submit"
+    />
+    <Connect(SubmitButton)
+      bsStyle="info"
+      disabled={true}
+      id="formName-submit-create-reply"
+      label="global.send"
+      onSubmit={[Function]}
+      type="submit"
+    />
+  </ReplyFormstyle__ButtonGroupSubmit>
+</ReplyFormstyle__QuestionnaireContainer>
 `;
 
 exports[`<ReplyForm /> should render correctly with requirements not full filled 1`] = `
-<ReplyFormstyle__ReplyFormContainer
-  id="reply-form-container"
+<ReplyFormstyle__QuestionnaireContainer
+  id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <form
-    id="reply-form"
-    onSubmit={[MockFunction]}
+  <ReplyFormstyle__ReplyFormContainer
+    id="reply-form-container"
   >
-    <Uncontrolled(Panel)
-      bsStyle="primary"
-      id="required-conditions"
+    <Section
+      level={0}
+      typeForm="questionnaire"
     >
-      <PanelHeading
-        bsClass="panel"
-        componentClass="div"
-      >
-        <FormattedMessage
-          id="requirements"
-          values={Object {}}
-        />
-         
-      </PanelHeading>
-      <PanelBody
-        bsClass="panel"
-        collapsible={false}
-      >
-        <WYSIWYGRender
-          value={null}
-        />
-        <Relay(Connect(ReduxForm))
-          step={
-            Object {
-              "$fragmentRefs": null,
-              "collectParticipantsEmail": false,
-              "id": "step1",
-              "isAnonymousParticipationAllowed": false,
-              "requirements": Object {
-                "reason": null,
-                "totalCount": 3,
-                "viewerMeetsTheRequirements": false,
-              },
-              "title": "Step 1",
-            }
+      <FormattedMessage
+        id="requirements"
+        values={Object {}}
+      />
+    </Section>
+    <ReplyFormstyle__WrapperWithMarge
+      borderBottom="2px solid #fff000"
+      overflow="hidden"
+    >
+      <Relay(Connect(ReduxForm))
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "collectParticipantsEmail": false,
+            "id": "step1",
+            "isAnonymousParticipationAllowed": false,
+            "requirements": Object {
+              "reason": null,
+              "totalCount": 3,
+              "viewerMeetsTheRequirements": false,
+            },
+            "title": "Step 1",
           }
-          stepId="step1"
-        />
-      </PanelBody>
-    </Uncontrolled(Panel)>
+        }
+        stepId="step1"
+      />
+    </ReplyFormstyle__WrapperWithMarge>
     <FieldArray
       change={[MockFunction]}
       component={[Function]}
       disabled={false}
+      divClassName="container-questions"
       form="formName"
       intl={
         Object {
@@ -2127,40 +2136,42 @@ exports[`<ReplyForm /> should render correctly with requirements not full filled
     <hr
       className="mb-30"
     />
-    <Field
-      component={[Function]}
-      disabled={false}
-      helpPrint={false}
-      id="formName-reply-private"
-      name="private"
-      type="checkbox"
-      typeForm="questionnaire"
-    >
-      <FormattedMessage
-        id="reply.form.private"
-        values={Object {}}
-      />
-    </Field>
-    <div
-      className="btn-toolbar btn-box sticky"
-    >
-      <Connect(SubmitButton)
-        bsStyle="primary"
-        disabled={true}
-        id="formName-submit-create-draft-reply"
-        label="global.save_as_draft"
-        onSubmit={[Function]}
-        type="submit"
-      />
-      <Connect(SubmitButton)
-        bsStyle="info"
-        disabled={true}
-        id="formName-submit-create-reply"
-        label="global.send"
-        onSubmit={[Function]}
-        type="submit"
-      />
-    </div>
-  </form>
-</ReplyFormstyle__ReplyFormContainer>
+    <ReplyFormstyle__WrapperWithMargeX>
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpPrint={false}
+        id="formName-reply-private"
+        name="private"
+        type="checkbox"
+        typeForm="questionnaire"
+      >
+        <FormattedMessage
+          id="reply.form.private"
+          values={Object {}}
+        />
+      </Field>
+    </ReplyFormstyle__WrapperWithMargeX>
+  </ReplyFormstyle__ReplyFormContainer>
+  <ReplyFormstyle__ButtonGroupSubmit
+    className="btn-toolbar"
+  >
+    <Connect(SubmitButton)
+      bsStyle="primary"
+      disabled={true}
+      id="formName-submit-create-draft-reply"
+      label="global.save_as_draft"
+      onSubmit={[Function]}
+      type="submit"
+    />
+    <Connect(SubmitButton)
+      bsStyle="info"
+      disabled={true}
+      id="formName-submit-create-reply"
+      label="global.send"
+      onSubmit={[Function]}
+      type="submit"
+    />
+  </ReplyFormstyle__ButtonGroupSubmit>
+</ReplyFormstyle__QuestionnaireContainer>
 `;

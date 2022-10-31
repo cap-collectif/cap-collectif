@@ -20,6 +20,9 @@ export const AlertForm = ({
   submitting,
   errorMessage,
 }: Props) => {
+  const hasGlobalServerError =
+    (valid && submitSucceeded && !submitting) || (submitting && submitFailed);
+
   if (errorMessage) {
     return (
       <div className="d-ib">
@@ -39,17 +42,22 @@ export const AlertForm = ({
       </div>
     );
   }
-  return (
-    <div className="d-ib">
-      {valid && submitSucceeded && !submitting && <AlertFormSucceededMessage />}
-      {submitting && submitFailed && (
-        <div className="alert__form_server-failed-message">
-          <i className="cap cap-ios-close-outline" />{' '}
-          <FormattedHTMLMessage id="global.error.server.form" />
-        </div>
-      )}
-    </div>
-  );
+
+  if (hasGlobalServerError) {
+    return (
+      <div className="d-ib">
+        {valid && submitSucceeded && !submitting && <AlertFormSucceededMessage />}
+        {submitting && submitFailed && (
+          <div className="alert__form_server-failed-message">
+            <i className="cap cap-ios-close-outline" />{' '}
+            <FormattedHTMLMessage id="global.error.server.form" />
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default AlertForm;

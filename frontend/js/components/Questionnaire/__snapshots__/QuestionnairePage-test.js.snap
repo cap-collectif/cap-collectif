@@ -1,8 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionnairePage /> renders correctly 1`] = `
-<QuestionnairePage__QuestionnaireContainer>
-  <StepPageHeader
+<QuestionnairePage__QuestionnaireContainer
+  id="questionnaire-page"
+>
+  <QuestionnaireHeader
     step={
       Object {
         "$fragmentRefs": null,
@@ -43,7 +45,7 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
       values={Object {}}
     />
   </div>
-  <Relay(StepPageFooter)
+  <QuestionnaireFooter
     step={
       Object {
         "$fragmentRefs": null,
@@ -54,8 +56,10 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
 `;
 
 exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`] = `
-<QuestionnairePage__QuestionnaireContainer>
-  <StepPageHeader
+<QuestionnairePage__QuestionnaireContainer
+  id="questionnaire-page"
+>
+  <QuestionnaireHeader
     step={
       Object {
         "$fragmentRefs": null,
@@ -93,7 +97,7 @@ exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`]
       values={Object {}}
     />
   </button>
-  <Relay(StepPageFooter)
+  <QuestionnaireFooter
     step={
       Object {
         "$fragmentRefs": null,
@@ -104,8 +108,10 @@ exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`]
 `;
 
 exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
-<QuestionnairePage__QuestionnaireContainer>
-  <StepPageHeader
+<QuestionnairePage__QuestionnaireContainer
+  id="questionnaire-page"
+>
+  <QuestionnaireHeader
     step={
       Object {
         "$fragmentRefs": null,
@@ -149,7 +155,7 @@ exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
     }
     setIsShow={[Function]}
   />
-  <Relay(StepPageFooter)
+  <QuestionnaireFooter
     step={
       Object {
         "$fragmentRefs": null,

@@ -126,9 +126,6 @@ exports[`<RequirementsFormLegacy /> doesnt call api when value is same 1`] = `un
 
 exports[`<RequirementsFormLegacy /> should render a vote widget for a simple vote without limit 1`] = `
 <form>
-  <div
-    className="col-sm-12 col-xs-12 alert__form_succeeded-message"
-  />
   <Field
     addonBefore="France +33"
     component={[Function]}

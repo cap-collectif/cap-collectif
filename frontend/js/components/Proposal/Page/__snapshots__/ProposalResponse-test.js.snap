@@ -99,11 +99,11 @@ exports[`<ProposalResponse /> should render a radio response 1`] = `
 `;
 
 exports[`<ProposalResponse /> should render a section response 1`] = `
-<Connect(ComponentWithColors)
+<Section
   description="Je suis une section"
 >
   Section
-</Connect(ComponentWithColors)>
+</Section>
 `;
 
 exports[`<ProposalResponse /> should render a select response 1`] = `

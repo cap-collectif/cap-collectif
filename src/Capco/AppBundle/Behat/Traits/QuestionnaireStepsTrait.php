@@ -49,7 +49,7 @@ trait QuestionnaireStepsTrait
     public function iGoToAConditionalQuestionnaireStep()
     {
         $this->visitPageWithParams('questionnaire page', self::$conditionalQuestionnaireStepParams);
-        $this->iWaitElementToAppearOnPage('#reply-form-container');
+        $this->iWaitElementToAppearOnPage('#questionnaire-page', 2000);
     }
 
     /**

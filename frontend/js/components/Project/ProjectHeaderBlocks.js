@@ -20,6 +20,7 @@ const FRAGMENT = graphql`
     steps {
       state
       timeRange {
+        startAt
         endAt
       }
     }
@@ -101,13 +102,38 @@ const ProjectHeaderBlocks = ({ project }: Props): React.Node => {
   const getDaysLeftBlock = () => {
     if (steps.length === 1 && steps[0].state === 'OPENED' && steps[0].timeRange?.endAt) {
       const count = moment(steps[0].timeRange?.endAt).diff(moment(), 'days');
+
       return (
         <ProjectHeaderLayout.Block
           title={intl.formatMessage({ id: 'count.daysLeft' }, { count })}
           content={count}
+          tooltipLabel={
+            steps[0].timeRange?.startAt && steps[0].timeRange?.endAt
+              ? intl.formatMessage(
+                  { id: 'fromDayToDay' },
+                  {
+                    day: intl.formatDate(moment(steps[0].timeRange?.startAt), {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric',
+                    }),
+                    anotherDay: intl.formatDate(moment(steps[0].timeRange?.endAt), {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric',
+                    }),
+                  },
+                )
+              : null
+          }
         />
       );
     }
+
     return null;
   };
 

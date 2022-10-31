@@ -352,6 +352,7 @@ describe('<ReplyForm />', () => {
     isAuthenticated: true,
     platformName: 'capco',
     isAnonymousQuestionnaireFeatureEnabled: false,
+    backgroundColorSection: '#fff000',
   };
 
   it('should render correctly with equal required and facultative fields', () => {

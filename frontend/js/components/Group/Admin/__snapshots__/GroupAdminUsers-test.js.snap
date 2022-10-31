@@ -555,9 +555,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       </button>
     </div>
     <div
-      className="d-ib"
-    />
-    <div
       className="mt-15 list-group"
     >
       <span

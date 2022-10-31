@@ -1,5 +1,5 @@
 // @flow
-import type { ColorRGB } from './formatColor';
+import type { ColorRGB, ColorRGBA } from './formatColor';
 
 // Source: https://css-tricks.com/converting-color-spaces-in-javascript/#hex-to-rgb
 // Example: hexToRgb('#4211D0');
@@ -22,6 +22,15 @@ const hexToRgb = (h: string): ColorRGB => {
   }
 
   return { r: +r, g: +g, b: +b };
+};
+
+export const hexToRgba = (h: string, opacity: number, asString?: boolean): string | ColorRGBA => {
+  const rgba = {
+    ...hexToRgb(h),
+    a: opacity,
+  };
+
+  return asString ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : rgba;
 };
 
 export default hexToRgb;

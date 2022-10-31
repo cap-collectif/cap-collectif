@@ -67,14 +67,6 @@ exports[`<AlertForm /> render correctly the message with a custom error message 
 </div>
 `;
 
-exports[`<AlertForm /> render no message during submitting of form 1`] = `
-<div
-  className="d-ib"
-/>
-`;
+exports[`<AlertForm /> render no message during submitting of form 1`] = `""`;
 
-exports[`<AlertForm /> render no message when the form is valid 1`] = `
-<div
-  className="d-ib"
-/>
-`;
+exports[`<AlertForm /> render no message when the form is valid 1`] = `""`;

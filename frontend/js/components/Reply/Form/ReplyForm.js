@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { Label, Panel } from 'react-bootstrap';
 import {
   change as changeRedux,
   stopSubmit,
@@ -20,7 +19,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import memoize from 'lodash/memoize';
 import css from '@styled-system/css';
 import debounce from 'debounce-promise';
-import { toast, Flex, Text } from '@cap-collectif/ui';
+import { toast, Text } from '@cap-collectif/ui';
 import type { Dispatch, GlobalState } from '~/types';
 import type { ReplyForm_questionnaire } from '~relay/ReplyForm_questionnaire.graphql';
 import type { ReplyForm_reply } from '~relay/ReplyForm_reply.graphql';
@@ -33,8 +32,14 @@ import AddUserReplyMutation from '~/mutations/AddUserReplyMutation';
 import UpdateUserReplyMutation from '~/mutations/UpdateUserReplyMutation';
 import AddAnonymousReplyMutation from '~/mutations/AddAnonymousReplyMutation';
 import UpdateAnonymousReplyMutation from '~/mutations/UpdateAnonymousReplyMutation';
-import Description from '~/components/Ui/Form/Description/Description';
-import { ReplyFormContainer, ParticipantEmailWrapper } from './ReplyForm.style';
+import {
+  ReplyFormContainer,
+  ParticipantEmailWrapper,
+  QuestionnaireContainer,
+  WrapperWithMarge,
+  ButtonGroupSubmit,
+  WrapperWithMargeX,
+} from './ReplyForm.style';
 import validateResponses from '~/utils/form/validateResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
@@ -50,6 +55,8 @@ import Captcha from '~/components/Form/Captcha';
 import { SPACES_SCALES } from '~/styles/theme/base';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey';
+import TitleInvertContrast from '~ui/Typography/TitleInvertContrast';
+import Section from '~/components/Form/Section/Section';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -67,6 +74,7 @@ type Props = {|
   +anonymousRepliesIds: string[],
   +isAuthenticated: boolean,
   +isAnonymousQuestionnaireFeatureEnabled: boolean,
+  +backgroundColorSection: string,
 |};
 
 type FormValues = {|
@@ -254,7 +262,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
 
 const validate = (values: FormValues, props: Props) => {
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
-    getAvailabeQuestionsCacheKey(props.questionnaire.id)
+    getAvailabeQuestionsCacheKey(props.questionnaire.id),
   );
   const { intl } = props;
   const { questions } = props.questionnaire;
@@ -397,6 +405,7 @@ export class ReplyForm extends React.Component<Props, State> {
       platformName,
       isAuthenticated,
       isAnonymousQuestionnaireFeatureEnabled,
+      backgroundColorSection,
     } = this.props;
 
     const availableQuestions = memoizeAvailableQuestions.cache.get(
@@ -406,8 +415,10 @@ export class ReplyForm extends React.Component<Props, State> {
     const isDraft = reply && reply.draft;
 
     const newReplyOrReplyInDraft = !reply || reply.draft;
-    const replyIsPublishedAndRequirementsAreNotMet =
-      reply && !reply.draft && !questionnaire.step?.requirements?.viewerMeetsTheRequirements;
+    const viewerMeetsTheRequirements =
+      questionnaire.step?.requirements?.viewerMeetsTheRequirements || false;
+
+    const replyIsPublished = reply && !reply.draft;
     const stepHasRequirement =
       questionnaire.step?.requirements && questionnaire.step.requirements.totalCount > 0;
 
@@ -437,34 +448,43 @@ export class ReplyForm extends React.Component<Props, State> {
       canParticipateAnonymously &&
       questionnaire.contribuable;
 
+    const hasFilledRequirements = reply && viewerMeetsTheRequirements;
+
     return (
-      <ReplyFormContainer id="reply-form-container">
-        {questionnaire.description && <Description>{questionnaire.description}</Description>}
-        <form id="reply-form" onSubmit={handleSubmit} ref={this.formRef}>
-          {(newReplyOrReplyInDraft || replyIsPublishedAndRequirementsAreNotMet) &&
+      <QuestionnaireContainer id="reply-form" onSubmit={handleSubmit} ref={this.formRef}>
+        {questionnaire.description && (
+          <WYSIWYGRender className="questionnaire__description" value={questionnaire.description} />
+        )}
+
+        <ReplyFormContainer id="reply-form-container">
+          {(newReplyOrReplyInDraft || replyIsPublished) &&
             stepHasRequirement &&
-            user && (
-              <Panel id="required-conditions" bsStyle="primary">
-                <Panel.Heading>
-                  <FormattedMessage id="requirements" />{' '}
-                  {questionnaire.step?.requirements?.viewerMeetsTheRequirements && (
-                    <Label bsStyle="primary">
-                      <FormattedMessage id="filled" />
-                    </Label>
+            user &&
+            !hasFilledRequirements && (
+              <>
+                <Section level={0} typeForm={TYPE_FORM.QUESTIONNAIRE}>
+                  <FormattedMessage id="requirements" />
+                </Section>
+
+                <WrapperWithMarge
+                  overflow="hidden"
+                  borderBottom={
+                    questionnaire.questions[0].__typename !== 'SectionQuestion'
+                      ? `2px solid ${backgroundColorSection}`
+                      : 'none'
+                  }>
+                  {questionnaire.step?.requirements?.reason && (
+                    <WYSIWYGRender value={questionnaire.step?.requirements?.reason} />
                   )}
-                </Panel.Heading>
-                {questionnaire.step &&
-                  !questionnaire.step?.requirements?.viewerMeetsTheRequirements && (
-                    <Panel.Body>
-                      <WYSIWYGRender value={questionnaire.step?.requirements?.reason} />
-                      <RequirementsFormLegacy
-                        step={questionnaire.step}
-                        stepId={questionnaire.step.id}
-                      />
-                    </Panel.Body>
-                  )}
-              </Panel>
+
+                  <RequirementsFormLegacy
+                    step={questionnaire.step}
+                    stepId={questionnaire.step?.id}
+                  />
+                </WrapperWithMarge>
+              </>
             )}
+
           <FieldArray
             typeForm={TYPE_FORM.QUESTIONNAIRE}
             name="responses"
@@ -476,6 +496,7 @@ export class ReplyForm extends React.Component<Props, State> {
             intl={intl}
             disabled={disabled}
             reply={reply}
+            divClassName="container-questions"
             availableQuestions={availableQuestions}
             memoize={memoizeAvailableQuestions}
             unstable__enableCapcoUiDs
@@ -485,52 +506,65 @@ export class ReplyForm extends React.Component<Props, State> {
           {!isAuthenticated &&
             questionnaire.step?.collectParticipantsEmail &&
             canParticipateAnonymously && (
-              <ParticipantEmailWrapper mb={4}>
-                <Text fontSize="20px" color="gray.900" fontWeight={600} fontFamily="inherit">
-                  {intl.formatMessage({ id: 'your-email-address' })}
-                </Text>
-                <Text color="gray.800" fontFamily="inherit">
-                  {intl.formatMessage(
-                    { id: 'anonymous.questionnaire.collect.email.help' },
-                    { platform: platformName },
-                  )}
-                </Text>
-                <Field
-                  type="text"
-                  name="participantEmail"
-                  helpPrint={false}
-                  component={renderComponent}
-                  disabled={disabled}
-                />
-                <Text color="neutral.gray.700" fontFamily="inherit">
-                  {intl.formatMessage(
-                    { id: 'information-for-the-newsletter-registration-form' },
-                    {
-                      organisationName: platformName,
-                    },
-                  )}
-                </Text>
-              </ParticipantEmailWrapper>
+              <>
+                <TitleInvertContrast>
+                  <FormattedMessage id="youre-almost-there" />
+                </TitleInvertContrast>
+
+                <ParticipantEmailWrapper mb={4}>
+                  <Text fontSize="20px" color="gray.900" fontWeight={600} fontFamily="inherit">
+                    {intl.formatMessage({ id: 'your-email-address' })}
+                  </Text>
+                  <Text color="gray.800" fontFamily="inherit">
+                    {intl.formatMessage(
+                      { id: 'anonymous.questionnaire.collect.email.help' },
+                      { platform: platformName },
+                    )}
+                  </Text>
+                  <Field
+                    type="text"
+                    name="participantEmail"
+                    helpPrint={false}
+                    component={renderComponent}
+                    disabled={disabled}
+                  />
+                  <Text color="neutral.gray.700" fontFamily="inherit">
+                    {intl.formatMessage(
+                      { id: 'information-for-the-newsletter-registration-form' },
+                      {
+                        organisationName: platformName,
+                      },
+                    )}
+                  </Text>
+                </ParticipantEmailWrapper>
+              </>
             )}
 
           {questionnaire.anonymousAllowed && !!user && (
             <>
               <hr className="mb-30" />
-              <Field
-                typeForm={TYPE_FORM.QUESTIONNAIRE}
-                type="checkbox"
-                name="private"
-                helpPrint={false}
-                id={`${form}-reply-private`}
-                component={renderComponent}
-                disabled={disabled}>
-                <FormattedMessage id="reply.form.private" />
-              </Field>
+
+              <WrapperWithMargeX>
+                <Field
+                  typeForm={TYPE_FORM.QUESTIONNAIRE}
+                  type="checkbox"
+                  name="private"
+                  helpPrint={false}
+                  id={`${form}-reply-private`}
+                  component={renderComponent}
+                  disabled={disabled}>
+                  <FormattedMessage id="reply.form.private" />
+                </Field>
+              </WrapperWithMargeX>
             </>
           )}
 
           {canContributeAnonymously && (
-            <Flex direction="column" align="center">
+            <WrapperWithMargeX
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              pb="32px">
               <Text
                 css={css({
                   mb: `${SPACES_SCALES[6]} !important`,
@@ -549,50 +583,50 @@ export class ReplyForm extends React.Component<Props, State> {
                   }));
                 }}
               />
-            </Flex>
+            </WrapperWithMargeX>
           )}
+        </ReplyFormContainer>
 
-          {(!reply || reply.viewerCanUpdate || isAnonymousReply) && (
-            <div className="btn-toolbar btn-box sticky">
-              {(!reply || isDraft) && questionnaire.type === 'QUESTIONNAIRE' && !!user && (
-                <SubmitButton
-                  type="submit"
-                  id={`${form}-submit-create-draft-reply`}
-                  disabled={pristine || submitting || disabled || invalidRequirements}
-                  bsStyle="primary"
-                  label={submitting ? 'global.loading' : 'global.save_as_draft'}
-                  onSubmit={() => {
-                    analytics.track('submit_draft_reply_click', {
-                      stepName: questionnaire.step?.title || '',
-                    });
-                    dispatch(changeRedux(form, 'draft', true));
-                  }}
-                />
-              )}
+        {(!reply || reply.viewerCanUpdate || isAnonymousReply) && (
+          <ButtonGroupSubmit className="btn-toolbar">
+            {(!reply || isDraft) && questionnaire.type === 'QUESTIONNAIRE' && !!user && (
               <SubmitButton
                 type="submit"
-                id={`${form}-submit-create-reply`}
-                bsStyle="info"
-                disabled={disabledSubmitBtn()}
-                label={submitting ? 'global.loading' : 'global.send'}
+                id={`${form}-submit-create-draft-reply`}
+                disabled={pristine || submitting || disabled || invalidRequirements}
+                bsStyle="primary"
+                label={submitting ? 'global.loading' : 'global.save_as_draft'}
                 onSubmit={() => {
-                  this.submitReply(reply, questionnaire, form, dispatch);
+                  analytics.track('submit_draft_reply_click', {
+                    stepName: questionnaire.step?.title || '',
+                  });
+                  dispatch(changeRedux(form, 'draft', true));
                 }}
               />
-            </div>
-          )}
-
-          {!disabled && !pristine && (
-            <AlertForm
-              valid={valid}
-              invalid={invalid}
-              submitSucceeded={submitSucceeded}
-              submitFailed={submitFailed}
-              submitting={submitting}
+            )}
+            <SubmitButton
+              type="submit"
+              id={`${form}-submit-create-reply`}
+              bsStyle="info"
+              disabled={disabledSubmitBtn()}
+              label={submitting ? 'global.loading' : 'global.send'}
+              onSubmit={() => {
+                this.submitReply(reply, questionnaire, form, dispatch);
+              }}
             />
-          )}
-        </form>
-      </ReplyFormContainer>
+          </ButtonGroupSubmit>
+        )}
+
+        {!disabled && !pristine && (
+          <AlertForm
+            valid={valid}
+            invalid={invalid}
+            submitSucceeded={submitSucceeded}
+            submitFailed={submitFailed}
+            submitting={submitting}
+          />
+        )}
+      </QuestionnaireContainer>
     );
   }
 }
@@ -626,6 +660,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
       isInvalid(RequirementsFormLegacyName)(state) ||
       Object.keys(getFormSyncErrors(RequirementsFormLegacyName)(state)).length > 0,
     platformName: state.default.parameters['global.site.fullname'],
+    backgroundColorSection: state.default.parameters['color.section.bg'],
   };
 };
 

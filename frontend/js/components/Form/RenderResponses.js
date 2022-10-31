@@ -1,5 +1,6 @@
 // @flow
 import React, { useState, useEffect } from 'react';
+import styled, { type StyledComponent } from 'styled-components';
 import { Field, type FieldArrayProps } from 'redux-form';
 import isEqual from 'lodash/isEqual';
 import type { IntlShape } from 'react-intl';
@@ -24,7 +25,15 @@ import select from '~/components/Form/Select';
 import getAvailableQuestionsIds from '~/utils/form/getAvailableQuestionsIds';
 import { MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY } from '~/utils/responsesHelper';
 import Section from '~/components/Form/Section/Section';
+import AppBox from '~ui/Primitives/AppBox';
 import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey';
+
+const BoxWithMarge: StyledComponent<{ isQuestionnaire: boolean }, {}, HTMLDivElement> = styled(
+  AppBox,
+).attrs({ className: 'box-with-marge' })`
+  padding-left: ${props => (props.isQuestionnaire ? '32px' : '0')};
+  padding-right: ${props => (props.isQuestionnaire ? '32px' : '0')};
+`;
 
 const mapQuestionChoicesToOptions = (question: Question) =>
   question.choices &&
@@ -173,7 +182,7 @@ const RenderResponses = ({
 
             case 'medias': {
               return (
-                <div key={field.id}>
+                <BoxWithMarge isQuestionnaire={isQuestionnaire(typeForm)} key={field.id}>
                   <PrivateBox show={field.private}>
                     <Field
                       name={`${member}.value`}
@@ -191,7 +200,7 @@ const RenderResponses = ({
                     {/* $FlowFixMe please fix this */}
                     <ConditionalJumps jumps={field.jumps} />
                   </PrivateBox>
-                </div>
+                </BoxWithMarge>
               );
             }
 
@@ -224,7 +233,7 @@ const RenderResponses = ({
                     options: mapQuestionChoicesToOptions(field),
                   };
               return (
-                <div key={field.id}>
+                <BoxWithMarge isQuestionnaire={isQuestionnaire(typeForm)} key={field.id}>
                   <PrivateBox show={field.private}>
                     <Field
                       divClassName="reduced"
@@ -260,7 +269,7 @@ const RenderResponses = ({
                     {/* $FlowFixMe please fix this */}
                     <ConditionalJumps jumps={field.jumps} />
                   </PrivateBox>
-                </div>
+                </BoxWithMarge>
               );
             }
 
@@ -271,7 +280,7 @@ const RenderResponses = ({
                   ? responses[index].value
                   : null;
               return (
-                <div key={field.id}>
+                <BoxWithMarge isQuestionnaire={isQuestionnaire(typeForm)} key={field.id}>
                   <PrivateBox show={field.private}>
                     <Field
                       divClassName="reduced"
@@ -295,7 +304,7 @@ const RenderResponses = ({
                       typeForm={typeForm}
                     />
                   </PrivateBox>
-                </div>
+                </BoxWithMarge>
               );
             }
 
@@ -305,7 +314,7 @@ const RenderResponses = ({
                   ? responses[index].value
                   : null;
               return (
-                <div key={field.id}>
+                <BoxWithMarge isQuestionnaire={isQuestionnaire(typeForm)} key={field.id}>
                   <PrivateBox show={field.private}>
                     <Field
                       divClassName="reduced"
@@ -320,6 +329,7 @@ const RenderResponses = ({
                       label={label}
                       disabled={disabled}
                       value={response}
+                      step={field.isRangeBetween ? 'any' : '1'}
                       typeForm={typeForm}
                       style={field.isRangeBetween ? { maxWidth: 150 } : null}
                       max={field.rangeMax || null}
@@ -329,7 +339,7 @@ const RenderResponses = ({
                       }}
                     />
                   </PrivateBox>
-                </div>
+                </BoxWithMarge>
               );
             }
 
@@ -349,7 +359,7 @@ const RenderResponses = ({
               }
 
               return (
-                <div key={field.id}>
+                <BoxWithMarge isQuestionnaire={isQuestionnaire(typeForm)} key={field.id}>
                   <PrivateBox show={field.private}>
                     <Field
                       divClassName="reduced"
@@ -375,7 +385,7 @@ const RenderResponses = ({
                       responseColorsDisabled={field.responseColorsDisabled}
                     />
                   </PrivateBox>
-                </div>
+                </BoxWithMarge>
               );
             }
           }

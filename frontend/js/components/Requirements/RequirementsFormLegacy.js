@@ -316,22 +316,25 @@ export const RequirementsFormLegacy = ({ step, submitting, submitSucceeded, chan
     .filter(requirement => requirement.__typename !== 'PhoneVerifiedRequirement');
   return (
     <form>
-      <div className="col-sm-12 col-xs-12 alert__form_succeeded-message">
-        {submitting ? (
-          <div>
-            <i
-              className="cap cap-spinner"
-              style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}
-            />{' '}
-            <FormattedMessage id="current-registration" />
-          </div>
-        ) : submitSucceeded ? (
-          <div>
-            <i className="cap cap-android-checkmark-circle" />{' '}
-            <FormattedMessage id="global.saved" />
-          </div>
-        ) : null}
-      </div>
+      {(submitting || submitSucceeded) && (
+        <div className="col-sm-12 col-xs-12 alert__form_succeeded-message">
+          {submitting ? (
+            <div>
+              <i
+                className="cap cap-spinner"
+                style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}
+              />{' '}
+              <FormattedMessage id="current-registration" />
+            </div>
+          ) : submitSucceeded ? (
+            <div>
+              <i className="cap cap-android-checkmark-circle" />{' '}
+              <FormattedMessage id="global.saved" />
+            </div>
+          ) : null}
+        </div>
+      )}
+
       {requirements &&
         requirements.length > 0 &&
         requirements.map(requirement => {

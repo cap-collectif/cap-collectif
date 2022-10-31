@@ -359,7 +359,7 @@ const RouterWrapper = ({
 };
 type StepProps = {|
   title: string,
-  content?: string,
+  content?: React.Node,
   tooltipLabel?: ?string,
   state: 'ACTIVE' | 'FINISHED' | 'WAITING',
   href: string,

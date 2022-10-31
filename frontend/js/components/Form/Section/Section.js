@@ -1,30 +1,34 @@
 // @flow
 import * as React from 'react';
-import type { Node } from 'react';
-import { Container, TitleSubSection } from './Section.style';
+import { Container } from './Section.style';
 import { TYPE_FORM } from '~/constants/FormConstants';
-import TitleInvertContrast from '~ui/Typography/TitleInvertContrast';
-import Description from '~ui/Form/Description/Description';
-import withColors from '../../Utils/withColors';
+import SectionTitle from '~ui/Form/Section/SectionTitle';
+import SubSectionTitle from '~ui/Form/SubSection/SubSectionTitle';
+import SectionDescription from '~ui/Form/Section/SectionDescription';
+import SubSectionDescription from '~ui/Form/SubSection/SubSectionDescription';
 
 type Props = {|
-  children: Node | string,
+  children: React$Node,
   level: ?number,
   description?: ?string,
   typeForm?: $Values<typeof TYPE_FORM>,
-  backgroundColor: string,
 |};
 
-const Section = ({ children, typeForm, level, description, backgroundColor }: Props) => (
+const Section = ({ children, level, description, typeForm }: Props) => (
   <Container className="form__section">
     {level === 0 ? (
-      <TitleInvertContrast>{children}</TitleInvertContrast>
+      <SectionTitle typeForm={typeForm}>{children}</SectionTitle>
     ) : (
-      <TitleSubSection primaryColor={backgroundColor}>{children}</TitleSubSection>
+      <SubSectionTitle typeForm={typeForm}>{children}</SubSectionTitle>
     )}
 
-    {description && <Description typeForm={typeForm}>{description}</Description>}
+    {description &&
+      (level === 0 ? (
+        <SectionDescription typeForm={typeForm}>{description}</SectionDescription>
+      ) : (
+        <SubSectionDescription typeForm={typeForm}>{description}</SubSectionDescription>
+      ))}
   </Container>
 );
 
-export default withColors(Section);
+export default Section;

@@ -4,13 +4,13 @@ import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserReplies from '../Reply/UserReplies/UserReplies';
-import StepPageHeader from '../Steps/Page/StepPageHeader/StepPageHeader';
 import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
-import StepPageFooter from '../Steps/Page/StepPageFooter';
 import { type QuestionnairePage_questionnaire } from '~relay/QuestionnairePage_questionnaire.graphql';
 import { type QuestionnairePage_query } from '~relay/QuestionnairePage_query.graphql';
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import QuestionnaireHeader from '~/components/Questionnaire/QuestionnaireHeader';
+import QuestionnaireFooter from '~/components/Questionnaire/QuestionnaireFooter';
 
 type Props = {|
   +questionnaire: ?QuestionnairePage_questionnaire,
@@ -53,8 +53,8 @@ export const QuestionnairePage = ({ questionnaire, query }: Props) => {
   const showCreateForm = (questionnaire?.multipleRepliesAllowed && isShow) || !hasReplies;
 
   return questionnaire && query ? (
-    <QuestionnaireContainer>
-      {questionnaire.step && <StepPageHeader step={questionnaire.step} />}
+    <QuestionnaireContainer id="questionnaire-page">
+      {questionnaire.step && <QuestionnaireHeader step={questionnaire.step} />}
       <UserReplies questionnaire={questionnaire} query={query} />
 
       {showAnswerOnceText && (
@@ -74,7 +74,7 @@ export const QuestionnairePage = ({ questionnaire, query }: Props) => {
         <ReplyCreateFormWrapper questionnaire={questionnaire} setIsShow={setIsShow} />
       )}
 
-      {questionnaire.step && <StepPageFooter step={questionnaire.step} />}
+      {questionnaire.step && <QuestionnaireFooter step={questionnaire.step} />}
     </QuestionnaireContainer>
   ) : null;
 };
@@ -84,11 +84,13 @@ const container = injectIntl(QuestionnairePage);
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment QuestionnairePage_questionnaire on Questionnaire
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       multipleRepliesAllowed
       step {
-        ...StepPageFooter_step
-        ...StepPageHeader_step
+        ...QuestionnaireHeader_step
+        ... on QuestionnaireStep {
+          ...QuestionnaireFooter_step
+        }
       }
       viewerReplies @include(if: $isAuthenticated) {
         totalCount
@@ -99,10 +101,10 @@ export default createFragmentContainer(container, {
   `,
   query: graphql`
     fragment QuestionnairePage_query on Query
-      @argumentDefinitions(
-        anonymousRepliesIds: { type: "[ID!]!" }
-        isNotAuthenticated: { type: "Boolean!" }
-      ) {
+    @argumentDefinitions(
+      anonymousRepliesIds: { type: "[ID!]!" }
+      isNotAuthenticated: { type: "Boolean!" }
+    ) {
       ...UserReplies_query
         @arguments(
           anonymousRepliesIds: $anonymousRepliesIds
