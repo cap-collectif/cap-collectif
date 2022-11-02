@@ -8,7 +8,8 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
     authenticate-with
   </div>
   <Connect(LoginSocialButton)
-    type="saml"
+    justifyContent="center"
+    type="franceConnect"
   />
   <Connect(LoginSocialButton)
     key="0"
@@ -17,13 +18,11 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
     type="openId"
   />
   <Connect(LoginSocialButton)
-    justifyContent="center"
-    key="1"
-    type="franceConnect"
-  />
-  <Connect(LoginSocialButton)
     text="Cap Collectif CAS Provider"
     type="cas"
+  />
+  <Connect(LoginSocialButton)
+    type="saml"
   />
   <p
     className="p--centered"
@@ -65,7 +64,6 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
   </div>
   <Connect(LoginSocialButton)
     justifyContent="center"
-    key="0"
     type="franceConnect"
   />
   <p
@@ -123,7 +121,8 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     authenticate-with
   </div>
   <Connect(LoginSocialButton)
-    type="saml"
+    justifyContent="center"
+    type="franceConnect"
   />
   <Connect(LoginSocialButton)
     key="0"
@@ -132,13 +131,11 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     type="openId"
   />
   <Connect(LoginSocialButton)
-    justifyContent="center"
-    key="1"
-    type="franceConnect"
-  />
-  <Connect(LoginSocialButton)
     text="Cap Collectif CAS Provider"
     type="cas"
+  />
+  <Connect(LoginSocialButton)
+    type="saml"
   />
 </Fragment>
 `;

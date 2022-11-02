@@ -42,33 +42,34 @@ export const LoginSocialButtons = ({ ssoList }: Props) => {
   return (
     <>
       <div className="font-weight-semi-bold">{intl.formatMessage({ id: 'authenticate-with' })}</div>
-      {hasLoginSaml && <LoginSocialButton type="saml" />}
+      {loginFranceConnect &&
+        ssoList.length > 0 &&
+        ssoList.find(sso => sso.ssoType === 'franceconnect') && (
+          <LoginSocialButton type="franceConnect" justifyContent="center" />
+        )}
       {ssoList.length > 0 &&
-        ssoList.map(({ ssoType, name }: ReduxStoreSSOConfiguration, index: number) => {
-          switch (ssoType) {
-            case 'oauth2':
-              return (
-                <LoginSocialButton
-                  text={name}
-                  key={index}
-                  switchUserMode={hasOauth2SwitchUser || false}
-                  type="openId"
-                />
-              );
-            case 'franceconnect':
-              return (
-                loginFranceConnect && (
-                  <LoginSocialButton key={index} type="franceConnect" justifyContent="center" />
-                )
-              );
-            case 'facebook':
-              return <LoginSocialButton type="facebook" />;
-            case 'cas':
-              return cas ? <LoginSocialButton type="cas" text={cas.name} /> : null;
-            default:
-              break;
-          }
-        })}
+        ssoList
+          .filter(sso => sso.ssoType !== 'franceconnect')
+          .map(({ ssoType, name }: ReduxStoreSSOConfiguration, index: number) => {
+            switch (ssoType) {
+              case 'oauth2':
+                return (
+                  <LoginSocialButton
+                    text={name}
+                    key={index}
+                    switchUserMode={hasOauth2SwitchUser || false}
+                    type="openId"
+                  />
+                );
+              case 'facebook':
+                return <LoginSocialButton type="facebook" />;
+              case 'cas':
+                return cas ? <LoginSocialButton type="cas" text={cas.name} /> : null;
+              default:
+                break;
+            }
+          })}
+      {hasLoginSaml && <LoginSocialButton type="saml" />}
       {!hasSsoByPassAuth && <p className="p--centered">{intl.formatMessage({ id: 'login.or' })}</p>}
     </>
   );
