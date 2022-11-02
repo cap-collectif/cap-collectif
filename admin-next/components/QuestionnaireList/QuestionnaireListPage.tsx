@@ -1,10 +1,7 @@
 import { useState, FC, Suspense } from 'react';
 import { useIntl } from 'react-intl';
 import { graphql, GraphQLTaggedNode, useFragment } from 'react-relay';
-import {
-    Flex,
-    Search,
-} from '@cap-collectif/ui';
+import { Flex, Search } from '@cap-collectif/ui';
 import ModalCreateQuestionnaire from './ModalCreateQuestionnaire';
 import QuestionnaireList from './QuestionnaireList';
 import QuestionnaireListPlaceholder from './QuestionnaireListPlaceholder';
@@ -13,7 +10,7 @@ import { QuestionnaireListPage_viewer$key } from '@relay/QuestionnaireListPage_v
 import debounce from '@utils/debounce-promise';
 
 type QuestionnaireListPageProps = {
-    readonly viewer: QuestionnaireListPage_viewer$key,
+    readonly viewer: QuestionnaireListPage_viewer$key;
 };
 
 export const FRAGMENT: GraphQLTaggedNode = graphql`
@@ -24,8 +21,7 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
         term: { type: "String", defaultValue: null }
         affiliations: { type: "[QuestionnaireAffiliation!]" }
         orderBy: { type: "QuestionnaireOrder" }
-    )
-    {
+    ) {
         id
         username
         __typename
@@ -35,13 +31,27 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
         ...ModalCreateQuestionnaire_viewer
         ...QuestionnaireListNoResult_viewer
         ...QuestionnaireList_viewer
-        @arguments(
-            count: $count
-            cursor: $cursor
-            term: $term
-            affiliations: $affiliations
-            orderBy: $orderBy
-        )
+        ...QuestionnaireList_questionnaireOwner
+            @arguments(
+                count: $count
+                cursor: $cursor
+                term: $term
+                affiliations: $affiliations
+                orderBy: $orderBy
+            )
+        organizations {
+            allQuestionnaire: questionnaires {
+                totalCount
+            }
+            ...QuestionnaireList_questionnaireOwner
+                @arguments(
+                    count: $count
+                    cursor: $cursor
+                    term: $term
+                    affiliations: $affiliations
+                    orderBy: $orderBy
+                )
+        }
     }
 `;
 
@@ -50,7 +60,10 @@ const QuestionnaireListPage: FC<QuestionnaireListPageProps> = ({ viewer: viewerF
     const [term, setTerm] = useState('');
     const [orderBy, setOrderBy] = useState('DESC');
     const viewer = useFragment<QuestionnaireListPage_viewer$key>(FRAGMENT, viewerFragment);
-    const hasQuestionnaire = viewer.allQuestionnaire.totalCount > 0;
+    const organization = viewer?.organizations?.[0];
+    const hasQuestionnaire =
+        viewer.allQuestionnaire.totalCount > 0 ||
+        (organization?.allQuestionnaire?.totalCount ?? 0) > 0;
 
     const onTermChange = debounce((value: string) => setTerm(value), 400);
 
@@ -81,6 +94,7 @@ const QuestionnaireListPage: FC<QuestionnaireListPageProps> = ({ viewer: viewerF
             <Suspense fallback={<QuestionnaireListPlaceholder />}>
                 <QuestionnaireList
                     viewer={viewer}
+                    questionnaireOwner={organization ?? viewer}
                     term={term}
                     resetTerm={() => setTerm('')}
                     orderBy={orderBy}
@@ -95,7 +109,7 @@ const QuestionnaireListPage: FC<QuestionnaireListPageProps> = ({ viewer: viewerF
             orderBy={orderBy}
             hasQuestionnaire={hasQuestionnaire}
         />
-    )
+    );
 };
 
 export default QuestionnaireListPage;

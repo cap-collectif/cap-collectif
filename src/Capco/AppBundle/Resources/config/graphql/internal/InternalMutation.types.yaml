@@ -746,7 +746,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUsersToGroupFromEmailMutation", [value["emails"], value["dryRun"], value["groupId"], getUser()])'
             # Questionnaire
             createQuestionnaire:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreateQuestionnaireMutation").isGranted(getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateQuestionnaireInput

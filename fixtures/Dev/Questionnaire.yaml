@@ -224,3 +224,28 @@ Capco\AppBundle\Entity\Questionnaire:
         creator: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
         notificationsConfiguration: '@questionnaireNotificationConfigurationOwnerAnonymous'
+    questionnaireOrga:
+        id: questionnaireOrga
+        title: Questionnaire owner orga
+        step: '@qStepOrga'
+        multipleRepliesAllowed: true
+        anonymousAllowed: true
+        acknowledgeReplies: 1
+        type: 'QUESTIONNAIRE'
+        privateResult: true
+        owner: '@organization2'
+        creator: '@valerieMassonDelmotte'
+        createdAt: <(new \DateTime('2022-09-11'))>
+        notificationsConfiguration: '@questionnaireNotificationConfigurationOrganization'
+    questionnaireOrgaWithoutStep:
+        id: questionnaireOrgaWithoutStep
+        title: Questionnaire owner orga non rattaché à une step
+        multipleRepliesAllowed: true
+        anonymousAllowed: true
+        acknowledgeReplies: 1
+        type: 'QUESTIONNAIRE'
+        privateResult: true
+        owner: '@organization2'
+        creator: '@ChristopheCassou'
+        createdAt: <(new \DateTime('2022-09-11'))>
+        notificationsConfiguration: '@questionnaireNotificationConfigurationOrganization2'

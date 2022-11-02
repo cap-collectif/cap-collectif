@@ -39,6 +39,16 @@ export const getAvailableQuestionnaires = graphql`
           }
         }
       }
+      organizations {
+        questionnaires(query: $term, affiliations: $affiliations, availableOnly: true) {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -57,8 +67,10 @@ export const loadQuestionnaireOptions = (
     term: term === '' ? null : term,
     affiliations: isAdmin ? null : ['OWNER'],
   }).then((data: ProjectAdminQuestionnaireStepFormQuestionnairesQueryResponse) => {
+    const questionnairesEdges = data.viewer.organizations?.[0]?.questionnaires?.edges ?? data.viewer.questionnaires?.edges;
+
     const questionnaires =
-      data.viewer.questionnaires.edges
+      questionnairesEdges
         ?.filter(Boolean)
         .map(edge => edge.node)
         .filter(Boolean)

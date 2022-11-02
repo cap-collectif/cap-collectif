@@ -18,7 +18,7 @@ security:
         - { path: ^/admin/capco/app/event, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/capco/app/proposal/.*/edit, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/capco/app/post, roles: ROLE_PROJECT_ADMIN }
-        - { path: ^/admin/capco/app/questionnaire, roles: ROLE_PROJECT_ADMIN }
+        - { path: ^/admin/capco/app/questionnaire, roles: ROLE_USER }
         - { path: ^/admin/dashboard, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/core/get-autocomplete-items, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/mailingList/, roles: ROLE_PROJECT_ADMIN }

@@ -37,7 +37,6 @@ class QuestionnaireSubscriber implements EventSubscriber
 
         $email = $viewer && $viewer->isOnlyProjectAdmin() ? $viewer->getEmail() : null;
 
-        $questionnaire->setOwner($viewer);
         $notificationConfiguration = $questionnaire
             ->getNotificationsConfiguration()
             ->setEmail($email);

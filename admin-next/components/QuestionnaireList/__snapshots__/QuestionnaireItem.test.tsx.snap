@@ -1,5 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete button when viewer belongs to an organization and is not admin organization 1`] = `
+Array [
+  <div
+    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+  />,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="/admin/questionnaire/questionnaire-1"
+    >
+      Combien font 0 + 0 ?
+    </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="<mock-value-for-field-\\"adminAlphaUrl\\">"
+    >
+      Le projet de la vie
+    </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    01/03/2050
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    01/03/2050
+  </td>,
+  <td
+    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  />,
+]
+`;
+
 exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly 1`] = `
 Array [
   <div

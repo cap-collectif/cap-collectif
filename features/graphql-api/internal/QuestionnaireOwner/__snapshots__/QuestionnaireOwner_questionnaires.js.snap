@@ -19,12 +19,18 @@ Object {
         },
         Object {
           "node": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3JnYVdpdGhvdXRTdGVw",
+            "title": "Questionnaire owner orga non rattaché à une step",
+          },
+        },
+        Object {
+          "node": Object {
             "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3duZXJXaXRob3V0U3RlcA==",
             "title": "Questionnaire visible par un owner sans step",
           },
         },
       ],
-      "totalCount": 3,
+      "totalCount": 4,
     },
   },
 }

@@ -8706,7 +8706,7 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     orderBy: ProposalFormOrder = {field: CREATED_AT, direction: DESC}
   ): ProposalFormConnection!
 
-  """Get all questionnaires that the user owns."""
+  """Get all questionnaires that the organization owns."""
   questionnaires(
     """
     Returns the elements in the list that come after the specified cursor.

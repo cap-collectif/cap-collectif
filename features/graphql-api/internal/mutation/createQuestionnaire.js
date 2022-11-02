@@ -47,4 +47,20 @@ describe('Internal.viewer.posts', () => {
 
     expect(response.createQuestionnaire.questionnaire.owner.username).toBe('Théo QP');
   });
+
+  it('should create a questionnaire as organization', async () => {
+    const response = await graphql(
+      CreateQuestionnaireMutation,
+      {
+        input: {
+          type: 'QUESTIONNAIRE',
+          title: 'questionnaire title',
+          owner: toGlobalId('Organization', 'organization2') // T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=
+        },
+      },
+      'internal_valerie',
+    );
+
+    expect(response.createQuestionnaire.questionnaire.owner.username).toBe('GIEC');
+  });
 });

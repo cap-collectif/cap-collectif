@@ -100,3 +100,11 @@ Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfi
         onQuestionnaireReplyCreate: false
         onQuestionnaireReplyUpdate: false
         onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationOrganization:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationOrganization2:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false

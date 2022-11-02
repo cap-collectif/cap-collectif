@@ -98,3 +98,8 @@ InternalOrganization:
                 description: 'Get all proposalForm that the organization owns.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\OwnerProposalFormResolver", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'
+            questionnaires:
+                type: 'InternalQuestionnaireConnection!'
+                description: 'Get all questionnaires that the organization owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\OwnerQuestionnaireResolver", [value, args])'
+                argsBuilder: 'Relay::ForwardConnection'

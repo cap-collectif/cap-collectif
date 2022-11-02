@@ -7,6 +7,7 @@ use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\BooleanCell;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
+use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
@@ -455,7 +456,7 @@ EOF;
             if (!$project) {
                 continue;
             }
-            if (null !== $project->getOwner() && $project->getOwner()->isOnlyProjectAdmin()) {
+            if ($project->getOwner() instanceof User && $project->getOwner()->isOnlyProjectAdmin()) {
                 $isProjectAdmin = true;
             }
             $fileName = self::getFilename($step, '.csv', $isProjectAdmin);

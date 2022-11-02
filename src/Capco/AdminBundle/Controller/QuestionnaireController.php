@@ -19,7 +19,7 @@ class QuestionnaireController extends CRUDController
 
     private function throwIfNoAccess()
     {
-        if (!$this->isGranted(QuestionnaireVoter::VIEW, $this->admin->getSubject())) {
+        if (!$this->isGranted(QuestionnaireVoter::EDIT, $this->admin->getSubject())) {
             throw $this->createAccessDeniedException();
         }
     }

@@ -1,26 +1,27 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import { usePaginationFragment, graphql } from 'react-relay';
+import { usePaginationFragment, graphql, useFragment } from 'react-relay';
 import { Table, Menu, Icon, CapUIIcon, Text } from '@cap-collectif/ui';
 import type { QuestionnaireList_viewer$key } from '@relay/QuestionnaireList_viewer.graphql';
 import QuestionnaireItem from './QuestionnaireItem';
 import EmptyMessage from '@ui/Table/EmptyMessage';
 import type { OrderDirection } from '@relay/QuestionnaireListQuery.graphql';
-import { useAppContext } from '../AppProvider/App.context';
 import { useLayoutContext } from '../Layout/Layout.context';
+import { QuestionnaireList_questionnaireOwner$key } from '@relay/QuestionnaireList_questionnaireOwner.graphql';
 
 export const QUESTIONNAIRE_LIST_PAGINATION = 20;
 
 type QuestionnaireListProps = {
-    viewer: QuestionnaireList_viewer$key,
-    term: string,
-    resetTerm: () => void,
-    orderBy: string,
-    setOrderBy: (orderBy: OrderDirection) => void,
+    viewer: QuestionnaireList_viewer$key;
+    questionnaireOwner: QuestionnaireList_questionnaireOwner$key;
+    term: string;
+    resetTerm: () => void;
+    orderBy: string;
+    setOrderBy: (orderBy: OrderDirection) => void;
 };
 
-export const FRAGMENT = graphql`
-    fragment QuestionnaireList_viewer on User
+export const QUESTIONNAIRE_OWNER_FRAGMENT = graphql`
+    fragment QuestionnaireList_questionnaireOwner on QuestionnaireOwner
     @argumentDefinitions(
         count: { type: "Int!" }
         cursor: { type: "String" }
@@ -52,17 +53,28 @@ export const FRAGMENT = graphql`
     }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+    fragment QuestionnaireList_viewer on User {
+        isAdmin
+        isAdminOrganization
+        ...QuestionnaireItem_viewer
+    }
+`;
 const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
-    viewer,
+    viewer: viewerRef,
+    questionnaireOwner,
     term,
     resetTerm,
     orderBy,
     setOrderBy,
 }) => {
-    const { viewerSession } = useAppContext();
     const intl = useIntl();
     const firstRendered = React.useRef<true | null>(null);
-    const { data, loadNext, hasNext, refetch } = usePaginationFragment(FRAGMENT, viewer);
+    const { data, loadNext, hasNext, refetch } = usePaginationFragment(
+        QUESTIONNAIRE_OWNER_FRAGMENT,
+        questionnaireOwner,
+    );
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
     const { questionnaires } = data;
     const { contentRef } = useLayoutContext();
     const hasQuestionnaire = questionnaires ? questionnaires.totalCount > 0 : false;
@@ -71,13 +83,13 @@ const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
         if (firstRendered.current) {
             refetch({
                 term: term || null,
-                affiliations: viewerSession.isAdmin ? null : ['OWNER'],
+                affiliations: viewer?.isAdmin ? null : ['OWNER'],
                 orderBy: { field: 'CREATED_AT', direction: orderBy },
             });
         }
 
         firstRendered.current = true;
-    }, [term, viewerSession.isAdmin, refetch, orderBy]);
+    }, [term, viewer?.isAdmin, refetch, orderBy]);
 
     return (
         <Table
@@ -93,12 +105,12 @@ const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
                 <Table.Tr>
                     <Table.Th width="50%">{intl.formatMessage({ id: 'global.title' })}</Table.Th>
                     <Table.Th>{intl.formatMessage({ id: 'global.project' })}</Table.Th>
-                    {viewerSession.isAdmin && (
+                    {viewer?.isAdmin && (
                         <Table.Th>
                             {intl.formatMessage({ id: 'admin.projects.list.author' })}
                         </Table.Th>
                     )}
-                    {viewerSession.isAdmin || viewerSession.isAdminOrganization ? (
+                    {viewer?.isAdmin || viewer?.isAdminOrganization ? (
                         <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>
                     ) : null}
                     <Table.Th>{intl.formatMessage({ id: 'global.update' })}</Table.Th>
@@ -142,6 +154,7 @@ const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
                             questionnaire && (
                                 <Table.Tr key={questionnaire.id} rowId={questionnaire.id}>
                                     <QuestionnaireItem
+                                        viewer={viewer}
                                         questionnaire={questionnaire}
                                         connectionName={questionnaires.__id}
                                     />

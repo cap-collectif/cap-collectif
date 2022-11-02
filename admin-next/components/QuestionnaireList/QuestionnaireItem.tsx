@@ -4,14 +4,15 @@ import { graphql, useFragment } from 'react-relay';
 import { Table, Link } from '@cap-collectif/ui';
 import ModalConfirmationDelete from './ModalConfirmationDelete';
 import type { QuestionnaireItem_questionnaire$key } from '@relay/QuestionnaireItem_questionnaire.graphql';
-import { useAppContext } from '../AppProvider/App.context';
+import { QuestionnaireItem_viewer$key } from '@relay/QuestionnaireItem_viewer.graphql';
 
 type QuestionnaireItemProps = {
-    questionnaire: QuestionnaireItem_questionnaire$key,
-    connectionName: string,
+    questionnaire: QuestionnaireItem_questionnaire$key;
+    viewer: QuestionnaireItem_viewer$key;
+    connectionName: string;
 };
 
-const FRAGMENT = graphql`
+const QUESTIONNAIRE_FRAGMENT = graphql`
     fragment QuestionnaireItem_questionnaire on Questionnaire {
         title
         adminUrl
@@ -27,19 +28,37 @@ const FRAGMENT = graphql`
             username
         }
         creator {
+            id
             username
         }
         ...ModalConfirmationDelete_questionnaire
     }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+    fragment QuestionnaireItem_viewer on User {
+        id
+        isAdminOrganization
+        isAdmin
+        organizations {
+            id
+        }
+    }
+`;
+
 const QuestionnaireItem: React.FC<QuestionnaireItemProps> = ({
-    questionnaire: questionnaireFragment,
+    questionnaire: questionnaireRef,
+    viewer: viewerRef,
     connectionName,
 }) => {
-    const { viewerSession } = useAppContext();
-    const questionnaire = useFragment(FRAGMENT, questionnaireFragment);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
+    const questionnaire = useFragment(QUESTIONNAIRE_FRAGMENT, questionnaireRef);
     const intl = useIntl();
+
+    const viewerBelongsToAnOrganization = (viewer.organizations?.length ?? 0) > 0;
+    const canDelete = viewerBelongsToAnOrganization
+        ? viewer?.isAdminOrganization || viewer.id === questionnaire.creator?.id
+        : true;
 
     return (
         <>
@@ -55,8 +74,8 @@ const QuestionnaireItem: React.FC<QuestionnaireItemProps> = ({
                     questionnaire?.step?.project?.title
                 )}
             </Table.Td>
-            {viewerSession.isAdmin && <Table.Td>{questionnaire.creator?.username}</Table.Td>}
-            {viewerSession.isAdmin || viewerSession.isAdminOrganization ? (
+            {viewer?.isAdmin && <Table.Td>{questionnaire.creator?.username}</Table.Td>}
+            {viewer?.isAdmin || viewer?.isAdminOrganization ? (
                 <Table.Td>{questionnaire.owner?.username}</Table.Td>
             ) : null}
             <Table.Td>
@@ -74,10 +93,12 @@ const QuestionnaireItem: React.FC<QuestionnaireItemProps> = ({
                 })}
             </Table.Td>
             <Table.Td visibleOnHover>
-                <ModalConfirmationDelete
-                    questionnaire={questionnaire}
-                    connectionName={connectionName}
-                />
+                {canDelete && (
+                    <ModalConfirmationDelete
+                        questionnaire={questionnaire}
+                        connectionName={connectionName}
+                    />
+                )}
             </Table.Td>
         </>
     );

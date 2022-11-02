@@ -40,6 +40,9 @@ const FRAGMENT = graphql`
         __typename
         id
         username
+        organizations {
+            id
+        }
     }
 `;
 
@@ -53,6 +56,7 @@ const ModalCreateQuestionnaire: React.FC<ModalCreateQuestionnaireProps> = ({
     const intl = useIntl();
     const { viewerSession } = useAppContext();
     const viewer = useFragment<ModalCreateQuestionnaire_viewer$key>(FRAGMENT, viewerFragment);
+    const organization = viewer?.organizations?.[0];
 
     const initialValues: FormValues = {
         title: '',
@@ -70,6 +74,7 @@ const ModalCreateQuestionnaire: React.FC<ModalCreateQuestionnaireProps> = ({
         const input = {
             type: (values.type.labels[0] as QuestionnaireType) || 'QUESTIONNAIRE',
             title: values.title,
+            owner: organization?.id,
         };
 
         return CreateQuestionnaireMutation.commit(

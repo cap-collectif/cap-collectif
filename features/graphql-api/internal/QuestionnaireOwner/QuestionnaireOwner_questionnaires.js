@@ -106,8 +106,8 @@ describe('Internal.viewer.questionnaires', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.questionnaires.totalCount).toBe(25);
-    expect(response.viewer.questionnaires.edges).toHaveLength(25);
+    expect(response.viewer.questionnaires.totalCount).toBe(27);
+    expect(response.viewer.questionnaires.edges).toHaveLength(27);
   });
 
   it('should correctly filter questionnaires by a given `query`', async () => {

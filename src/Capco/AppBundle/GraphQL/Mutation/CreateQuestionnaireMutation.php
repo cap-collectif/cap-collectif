@@ -6,12 +6,14 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\QuestionnaireCreateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
+use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateQuestionnaireMutation implements MutationInterface
 {
@@ -19,17 +21,20 @@ class CreateQuestionnaireMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
     private SettableOwnerResolver $settableOwnerResolver;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
-        SettableOwnerResolver $settableOwnerResolver
+        SettableOwnerResolver $settableOwnerResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
         $this->settableOwnerResolver = $settableOwnerResolver;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -47,7 +52,7 @@ class CreateQuestionnaireMutation implements MutationInterface
         if (isset($data['owner'])) {
             unset($data['owner']);
         }
-        $form->submit($input->getArrayCopy(), false);
+        $form->submit($data, false);
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
@@ -58,5 +63,17 @@ class CreateQuestionnaireMutation implements MutationInterface
         $this->em->flush();
 
         return ['questionnaire' => $questionnaire];
+    }
+
+    public function isGranted(?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(
+            QuestionnaireVoter::CREATE,
+            new Questionnaire()
+        );
     }
 }

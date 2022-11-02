@@ -10,8 +10,6 @@ import {
 } from 'tests/testUtils';
 import type { QuestionnaireItemTestQuery } from '@relay/QuestionnaireItemTestQuery.graphql';
 import QuestionnaireItem from './QuestionnaireItem';
-import { appContextValue } from '../../jest-setup';
-import { AppContext } from 'components/AppProvider/App.context';
 
 describe('<QuestionnaireItem />', () => {
     let environment: any;
@@ -22,6 +20,9 @@ describe('<QuestionnaireItem />', () => {
         query QuestionnaireItemTestQuery($id: ID = "<default>") @relay_test_operation {
             questionnaire: node(id: $id) {
                 ...QuestionnaireItem_questionnaire
+            }
+            viewer {
+                ...QuestionnaireItem_viewer
             }
         }
     `;
@@ -38,7 +39,40 @@ describe('<QuestionnaireItem />', () => {
                     title: 'Le projet de la vie',
                 },
             },
+            creator: {
+                __typename: 'User',
+                id: 'VXNlcjp2YWxlcmllTWFzc29uRGVsbW90dGU=',
+                username: 'Val\u00e9rie Masson Delmotte',
+            },
         }),
+        User: () => ({
+            id: 'userId',
+            isAdminOrganization: false,
+            isAdmin: true,
+            organizations: null,
+        }),
+    };
+
+    const orgaMemberMockResolvers = {
+        ...defaultMockResolvers,
+        User: (context: any) => {
+            if (context.name === 'creator') {
+                return {
+                    id: 'VXNlcjp2YWxlcmllTWFzc29uRGVsbW90dGU=',
+                    username: 'Val\u00e9rie Masson Delmotte',
+                };
+            }
+            return {
+                id: 'abc',
+                isAdminOrganization: false,
+                isAdmin: false,
+                organizations: [
+                    {
+                        id: 'organizationId',
+                    },
+                ],
+            };
+        },
     };
 
     beforeEach(() => {
@@ -49,22 +83,22 @@ describe('<QuestionnaireItem />', () => {
         const TestRenderer = ({ componentProps, queryVariables: variables }) => {
             const data = useLazyLoadQuery<QuestionnaireItemTestQuery>(query, variables);
 
-            if (data?.questionnaire) {
-                return <QuestionnaireItem questionnaire={data.questionnaire} {...componentProps} />;
+            if (data?.questionnaire && data?.viewer) {
+                return (
+                    <QuestionnaireItem
+                        questionnaire={data.questionnaire}
+                        viewer={data.viewer}
+                        {...componentProps}
+                    />
+                );
             }
             return null;
         };
 
         TestQuestionnaireItem = componentProps => (
             <RelaySuspensFragmentTest environment={environment}>
-                <AppContext.Provider value={appContextValue}>
-                    <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
-                </AppContext.Provider>
+                <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
             </RelaySuspensFragmentTest>
-        );
-
-        environment.mock.queueOperationResolver(operation =>
-            MockPayloadGenerator.generate(operation, defaultMockResolvers),
         );
     });
 
@@ -74,6 +108,19 @@ describe('<QuestionnaireItem />', () => {
 
     describe('<TestQuestionnaireItem />', () => {
         it('should render correctly', () => {
+            environment.mock.queueOperationResolver(operation =>
+                MockPayloadGenerator.generate(operation, defaultMockResolvers),
+            );
+            testComponentTree = ReactTestRenderer.create(
+                <TestQuestionnaireItem connectionName="client:root:__QuestionnaireList_questionnaires_connection" />,
+            );
+            expect(testComponentTree).toMatchSnapshot();
+        });
+
+        it('should hide delete button when viewer belongs to an organization and is not admin organization', () => {
+            environment.mock.queueOperationResolver(operation =>
+                MockPayloadGenerator.generate(operation, orgaMemberMockResolvers),
+            );
             testComponentTree = ReactTestRenderer.create(
                 <TestQuestionnaireItem connectionName="client:root:__QuestionnaireList_questionnaires_connection" />,
             );

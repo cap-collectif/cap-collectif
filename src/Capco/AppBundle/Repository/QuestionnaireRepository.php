@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AnalysisConfiguration;
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Enum\QuestionnaireAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -163,4 +164,42 @@ class QuestionnaireRepository extends EntityRepository
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
+
+
+
+    private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder
+    {
+        $ownerField = $owner instanceof User ? 'p.owner' : 'p.organizationOwner';
+
+        $qb = $this->createQueryBuilder('p')
+            ->where("{$ownerField} = :owner")
+            ->setParameter('owner', $owner);
+
+        if ($query = $options['query']) {
+            $qb->andWhere('p.title LIKE :query');
+            $qb->setParameter('query', "%{$query}%");
+        }
+        if ($options['availableOnly']) {
+            $qb->andWhere('p.step IS NULL');
+        }
+
+        return $qb;
+    }
+    public function getByOwner(Owner $owner, int $offset, int $limit, array $options): array
+    {
+        return $this->getByOwnerQueryBuilder($owner, $options)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countByOwner(Owner $owner, array $options): int
+    {
+        return $this->getByOwnerQueryBuilder($owner, $options)
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

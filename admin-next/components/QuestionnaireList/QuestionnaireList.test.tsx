@@ -10,8 +10,6 @@ import {
 } from 'tests/testUtils';
 import type { QuestionnaireListTestQuery } from '@relay/QuestionnaireListTestQuery.graphql';
 import QuestionnaireList from './QuestionnaireList';
-import { AppContext } from '../AppProvider/App.context';
-import { appContextValue } from '../../jest-setup';
 
 describe('<QuestionnaireList />', () => {
     let environment: any;
@@ -22,7 +20,9 @@ describe('<QuestionnaireList />', () => {
         query QuestionnaireListTestQuery($count: Int, $cursor: String, $term: String)
         @relay_test_operation {
             viewer {
-                ...QuestionnaireList_viewer @arguments(count: $count, cursor: $cursor, term: $term)
+                ...QuestionnaireList_questionnaireOwner
+                    @arguments(count: $count, cursor: $cursor, term: $term)
+                ...QuestionnaireList_viewer
             }
         }
     `;
@@ -45,6 +45,8 @@ describe('<QuestionnaireList />', () => {
                     },
                 ],
             },
+            isAdmin: true,
+            isAdminOrganization: true,
         }),
     };
 
@@ -61,7 +63,13 @@ describe('<QuestionnaireList />', () => {
             const data = useLazyLoadQuery<QuestionnaireListTestQuery>(query, variables);
 
             if (data && data.viewer) {
-                return <QuestionnaireList viewer={data.viewer} {...componentProps} />;
+                return (
+                    <QuestionnaireList
+                        viewer={data.viewer}
+                        questionnaireOwner={data.viewer}
+                        {...componentProps}
+                    />
+                );
             }
 
             return null;
@@ -69,9 +77,7 @@ describe('<QuestionnaireList />', () => {
 
         TestQuestionnaireList = componentProps => (
             <RelaySuspensFragmentTest environment={environment}>
-                <AppContext.Provider value={appContextValue}>
-                    <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
-                </AppContext.Provider>
+                <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
             </RelaySuspensFragmentTest>
         );
 
