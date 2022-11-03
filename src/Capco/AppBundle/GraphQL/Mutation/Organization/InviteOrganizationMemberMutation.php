@@ -95,10 +95,6 @@ class InviteOrganizationMemberMutation extends AbstractOrgnizationInvitation
         $message = $this->translator->trans(
             'organization_invitation.content',
             [
-                'adminName' => $invitation
-                    ->getOrganization()
-                    ->getUserAdmin()
-                    ->getUsername(),
                 'plateformName' => AbstractMessage::escape(
                     $this->siteParameter->getValue('global.site.fullname')
                 ),
