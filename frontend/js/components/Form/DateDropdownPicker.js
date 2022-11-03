@@ -18,6 +18,7 @@ type Props = {
   divClassName: string,
   globalClassName: string,
   disabled: boolean,
+  css?: CSSRule,
 };
 
 const getDay = (date: string): number => {
@@ -107,11 +108,11 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
       divClassName,
       globalClassName,
       disabled,
+      css,
     } = this.props;
-
     const { day, year, month } = this.state;
     return (
-      <div className={globalClassName}>
+      <div className={globalClassName} css={css}>
         <label htmlFor={dayId} className={labelClassName}>
           {label}
         </label>

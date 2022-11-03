@@ -290,7 +290,8 @@ const getFormProps = (requirement: Requirement, change: any) => {
     return {
       component: DateDropdownPicker,
       globalClassName: 'col-sm-12 col-xs-12',
-      divClassName: 'row',
+      divClassName: 'd-flex mb-15',
+      css: { label: { fontSize: 18, marginBottom: 10 }, 'label + div': { gap: 10 } },
     };
   }
   if (requirement.__typename === 'PostalAddressRequirement') {

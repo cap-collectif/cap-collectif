@@ -145,8 +145,19 @@ exports[`<RequirementsFormLegacy /> should render a vote widget for a simple vot
   />
   <Field
     component={[Function]}
+    css={
+      Object {
+        "label": Object {
+          "fontSize": 18,
+          "marginBottom": 10,
+        },
+        "label + div": Object {
+          "gap": 10,
+        },
+      }
+    }
     disabled={false}
-    divClassName="row"
+    divClassName="d-flex mb-15"
     globalClassName="col-sm-12 col-xs-12"
     id="requirement2"
     key="requirement2"
