@@ -18,7 +18,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       }
     }
     show={false}
-    title="add"
+    title="proposal.add"
   />
   <Address
     debounce={1200}
@@ -76,7 +76,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
           opacity={1}
           variantSize="small"
         >
-          add
+          proposal.add
         </Button>
       </Connect(NewLoginOverlay)>
     </ForwardRef(OverlayComponent)>
@@ -299,7 +299,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
       }
     }
     show={false}
-    title="add"
+    title="proposal.add"
   />
   <Address
     debounce={1200}
@@ -357,7 +357,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
           opacity={1}
           variantSize="small"
         >
-          add
+          proposal.add
         </Button>
       </Connect(NewLoginOverlay)>
     </ForwardRef(OverlayComponent)>

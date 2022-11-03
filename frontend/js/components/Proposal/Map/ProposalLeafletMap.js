@@ -148,10 +148,10 @@ export const ProposalLeafletMap = ({
     proposalForm?.objectType === 'ESTABLISHMENT'
       ? getProposalLabelByType(projectType, 'add-establishment')
       : proposalForm?.objectType === 'QUESTION'
-      ? getProposalLabelByType(projectType, 'submit-a-question')
+      ? 'submit-a-question'
       : proposalForm?.objectType === 'OPINION'
       ? 'submit-opinion'
-      : 'add';
+      : getProposalLabelByType(projectType, 'add');
   const mapRef = useRef(null);
   const popupRef = useRef(null);
   const slickRef = useRef(null);
