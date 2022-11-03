@@ -132,16 +132,6 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/notifications", name="capco_profile_notifications_edit_account", options={"i18n" = false})
-     * @Template("@CapcoUser/Profile/edit_notifications.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function showNotificationsOptionsAction(Request $request)
-    {
-        return [];
-    }
-
-    /**
      * @Route("/download_archive", name="capco_profile_download_archive", options={"i18n" = false})
      * @Security("has_role('ROLE_USER')")
      */
@@ -198,7 +188,7 @@ class ProfileController extends Controller
             $this->loginWithToken($request, $userNotificationsConfiguration);
         }
 
-        return $this->redirectToRoute('capco_profile_notifications_edit_account');
+        return $this->redirectToRoute('capco_profile_edit', ['#' => 'notifications']);
     }
 
     /**
@@ -224,7 +214,7 @@ class ProfileController extends Controller
             $this->translator->trans('resetting.notifications.flash.success', [], 'CapcoAppBundle')
         );
 
-        return $this->redirectToRoute('capco_profile_notifications_edit_account');
+        return $this->redirectToRoute('capco_profile_edit', ['#' => 'notifications']);
     }
 
     /**

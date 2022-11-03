@@ -24,7 +24,7 @@ class UserShowNotificationsPreferencesUrlResolverSpec extends ObjectBehavior
         RouterInterface $router
     ): void {
         $router
-            ->generate('capco_profile_notifications_edit_account', [], 0)
+            ->generate('capco_profile_edit', ['#' => 'notifications'], 0)
             ->willReturn(self::FAKE_URL);
 
         $this->__invoke()->shouldReturn(self::FAKE_URL);

@@ -18,8 +18,8 @@ class UserShowNotificationsPreferencesUrlResolver implements ResolverInterface
     public function __invoke(): string
     {
         return $this->router->generate(
-            'capco_profile_notifications_edit_account',
-            [],
+            'capco_profile_edit',
+            ['#' => 'notifications'],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }
