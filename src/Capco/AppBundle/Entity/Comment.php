@@ -144,7 +144,7 @@ abstract class Comment implements
 
     public function __toString()
     {
-        return $this->getId() ? $this->getBodyExcerpt(50) : 'New comment';
+        return $this->getId() ? $this->getBodyTextExcerpt(50) : 'New comment';
     }
 
     public function getKind(): string
@@ -409,6 +409,7 @@ abstract class Comment implements
         }
         if ($this instanceof ProposalComment) {
             $project = $this->getProject();
+
             return $project && $project->isAuthor($viewer);
         }
         if ($this instanceof EventComment) {
@@ -416,6 +417,7 @@ abstract class Comment implements
         }
         if ($this instanceof PostComment) {
             $post = $this->getPost();
+
             return $post && $post->isAuthor($viewer);
         }
 
@@ -439,34 +441,37 @@ abstract class Comment implements
 
     public function isApproved(): bool
     {
-        return $this->moderationStatus === ModerationStatus::APPROVED;
+        return ModerationStatus::APPROVED === $this->moderationStatus;
     }
 
     public function isRejected(): bool
     {
-        return $this->moderationStatus === ModerationStatus::REJECTED;
+        return ModerationStatus::REJECTED === $this->moderationStatus;
     }
 
     public function isPending(): bool
     {
-        return $this->moderationStatus === ModerationStatus::PENDING;
+        return ModerationStatus::PENDING === $this->moderationStatus;
     }
 
     public function approve(): self
     {
         $this->moderationStatus = ModerationStatus::APPROVED;
+
         return $this;
     }
 
     public function setPending(): self
     {
         $this->moderationStatus = ModerationStatus::PENDING;
+
         return $this;
     }
 
     public function reject(): self
     {
         $this->moderationStatus = ModerationStatus::REJECTED;
+
         return $this;
     }
 
