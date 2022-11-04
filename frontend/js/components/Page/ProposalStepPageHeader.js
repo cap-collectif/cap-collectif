@@ -134,8 +134,8 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
                 maxWidth="300px"
                 disabled={!step.form?.contribuable}
                 opacity={!step.form?.contribuable ? 0.5 : 1}
-                bg={btnBgColor}
-                color={btnTextColor}
+                bg={`${btnBgColor} !important`}
+                color={`${btnTextColor} !important`}
                 variantSize={isMobile ? 'big' : 'small'}
                 onClick={onOpen}
                 id="add-proposal"

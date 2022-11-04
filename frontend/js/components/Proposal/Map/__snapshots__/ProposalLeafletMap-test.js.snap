@@ -69,8 +69,8 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         placement="top"
       >
         <Button
-          bg="#4EE323"
-          color="##FFF"
+          bg="#4EE323 !important"
+          color="##FFF !important"
           disabled={false}
           onClick={[Function]}
           opacity={1}
@@ -350,8 +350,8 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         placement="top"
       >
         <Button
-          bg="#4EE323"
-          color="##FFF"
+          bg="#4EE323 !important"
+          color="##FFF !important"
           disabled={false}
           onClick={[Function]}
           opacity={1}

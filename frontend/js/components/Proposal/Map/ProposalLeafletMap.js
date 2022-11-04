@@ -259,8 +259,8 @@ export const ProposalLeafletMap = ({
           className="popup-proposal">
           <NewLoginOverlay placement="top">
             <Button
-              bg={btnBgColor}
-              color={btnTextColor}
+              bg={`${btnBgColor} !important`}
+              color={`${btnTextColor} !important`}
               opacity={!proposalForm?.contribuable ? 0.5 : 1}
               variantSize="small"
               onClick={onOpen}
