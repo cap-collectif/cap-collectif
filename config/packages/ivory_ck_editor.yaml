@@ -25,20 +25,9 @@ ivory_ck_editor:
             skin: minimalist
             extraPlugins: oembed,btgrid,autolink,autogrow
             allowedContent: true
-            filebrowserBrowseRoute: admin_capco_media_media_browser
-            filebrowserImageBrowseRoute: admin_capco_media_media_browser
             entities: false
-            # Display images by default when clicking the image dialog browse button
-            filebrowserImageBrowseRouteParameters:
-                provider: sonata.media.provider.image
-            filebrowserUploadRoute: admin_capco_media_media_upload
-            filebrowserUploadRouteParameters:
-                provider: sonata.media.provider.file
-            # Upload file as image when sending a file from the image dialog
-            filebrowserImageUploadRoute: admin_capco_media_media_upload
-            filebrowserImageUploadRouteParameters:
-                provider: sonata.media.provider.image
-                context: default
+            filebrowserUploadRoute: upload_files_ckeditor
+            filebrowserImageUploadRoute: upload_files_ckeditor
             filebrowserWindowWidth: '50%'
             filebrowserWindowHeight: '80%'
     toolbars:

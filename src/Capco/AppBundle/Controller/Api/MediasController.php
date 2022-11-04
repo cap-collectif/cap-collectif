@@ -7,6 +7,7 @@ use Capco\AppBundle\Twig\MediaExtension;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -16,6 +17,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MediasController extends AbstractController
 {
+    public const NO_MEDIA_FOUND = 'NO_MEDIA_FOUND';
+    public const FILE_NOT_ALLOWED = 'FILE_NOT_ALLOWED';
+
     private const ALLOWED_MIMETYPES = [
         'image/png', // .png
         'image/svg+xml', // .svg
@@ -66,23 +70,10 @@ class MediasController extends AbstractController
      */
     public function postMediaAction(Request $request): JsonResponse
     {
-        /** @var UploadedFile $uploadedFile */
-        $uploadedFile = $request->files->get('file');
-
-        if (!$uploadedFile) {
-            return $this->json(['errorCode' => 'NO_MEDIA_FOUND']);
-        }
-
-        if (!$this->validateUploadedFile($uploadedFile)) {
-            $this->logger->error(
-                __METHOD__ .
-                    ' : ' .
-                    $uploadedFile->getMimeType() .
-                    ' ' .
-                    var_export($this->fileUploadViolations->get(0), true)
-            );
-
-            return $this->json(['errorCode' => 'FILE_NOT_ALLOWED']);
+        try {
+            $uploadedFile = $this->getFile($request);
+        } catch (\RuntimeException $exception) {
+            return $this->json(['errorCode' => $exception->getMessage()]);
         }
 
         $media = $this->mediaManager->createFileFromUploadedFile($uploadedFile);
@@ -99,6 +90,27 @@ class MediasController extends AbstractController
             ],
             201
         );
+    }
+
+    /**
+     * @Route("/files/ckeditor", name="upload_files_ckeditor", options={"i18n" = false})
+     */
+    public function ckEditorUpload(Request $request): Response
+    {
+        try {
+            $uploadedFile = $this->getFile($request);
+        } catch (\RuntimeException $exception) {
+            return $this->json(['errorCode' => $exception->getMessage()]);
+        }
+        $media = $this->mediaManager->createFileFromUploadedFile($uploadedFile);
+
+        $response = $this->render(
+            'CapcoMediaBundle:MediaAdmin:upload.html.twig',
+            ['object' => $media]
+        );
+        $response->headers->set('content-type', 'text/html');
+
+        return $response;
     }
 
     public static function formatBytes(int $bytes): string
@@ -131,8 +143,26 @@ class MediasController extends AbstractController
         $this->fileUploadViolations = $fileUploadViolations;
     }
 
-    private function getFileUploadViolations()
+    private function getFile(Request $request)
     {
-        return $this->fileUploadViolations;
+        $uploadedFile = $request->files->get('file') ??
+            $request->files->get('upload');
+
+        if (!$uploadedFile) {
+            throw new \RuntimeException(self::NO_MEDIA_FOUND);
+        }
+
+        if (!$this->validateUploadedFile($uploadedFile)) {
+            $this->logger->error(
+                __METHOD__ .
+                ' : ' .
+                $uploadedFile->getMimeType() .
+                ' ' .
+                var_export($this->fileUploadViolations->get(0), true)
+            );
+            throw new \RuntimeException(self::FILE_NOT_ALLOWED);
+        }
+
+        return $uploadedFile;
     }
 }

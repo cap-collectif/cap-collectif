@@ -1,1 +1,6 @@
-<script>window.parent.CKEDITOR.tools.callFunction({{ app.request.get('CKEditorFuncNum')|escape('js') }}, "/media{% path object, 'reference'|escape('js') %}");</script>
+<script>
+    window.parent.CKEDITOR.tools.callFunction(
+        {{ app.request.get('CKEditorFuncNum')|escape('js') }},
+        "/media{% path object, 'reference'|escape('js') %}"
+    );
+</script>
