@@ -5202,6 +5202,27 @@ input DeleteOrganizationInput {
   clientMutationId: String
 }
 
+"""Available errors for an `deleteOrganizationInvitionInput` mutation."""
+enum DeleteOrganizationInvitationErrorCode {
+  """The invitation for the given ID is not found."""
+  INVITATION_NOT_FOUND
+}
+
+input DeleteOrganizationInvitationInput {
+  """The invitation id to delete."""
+  invitationId: ID!
+  clientMutationId: String
+}
+
+type DeleteOrganizationInvitationPayload {
+  """The deleted invitation id."""
+  invitationId: ID
+
+  """The available errors for deleteOrganizationInvitation mutation."""
+  errorCode: DeleteOrganizationInvitationErrorCode
+  clientMutationId: String
+}
+
 type DeleteOrganizationPayload {
   """The deleted organization."""
   deletedOrganization: Organization
@@ -8087,6 +8108,7 @@ type Mutation {
   inviteOrganizationMember(input: InviteOrganizationMemberInput!): InviteOrganizationMemberPayload
   inviteUserToOrganization(input: InviteUserToOrganizationInput!): InviteUserToOrganizationPayload
   kickFromOrganization(input: KickFromOrganizationInput!): KickFromOrganizationPayload
+  deleteOrganizationInvitation(input: DeleteOrganizationInvitationInput!): DeleteOrganizationInvitationPayload
   createProposalAnalysisComment(input: CreateProposalAnalysisCommentInput!): CreateProposalAnalysisCommentPayload
 }
 

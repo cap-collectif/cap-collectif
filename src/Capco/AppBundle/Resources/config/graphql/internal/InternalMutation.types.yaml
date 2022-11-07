@@ -1638,6 +1638,13 @@ InternalMutation:
                     inputType: KickFromOrganizationInput
                     payloadType: KickFromOrganizationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\KickFromOrganizationMutation", [value, getUser()])'
+            deleteOrganizationInvitation:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\DeleteOrganizationInvitationMutation").isGranted(args["input"]["invitationId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteOrganizationInvitationInput
+                    payloadType: DeleteOrganizationInvitationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\DeleteOrganizationInvitationMutation", [value, getUser()])'
             createProposalAnalysisComment:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalAnalysisCommentMutation").isGranted(args["input"]["proposalAnalysisId"], getUser())'
                 builder: 'Relay::Mutation'

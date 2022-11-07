@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|deleteOrganizationInvitation mutation should delete an invitation as admin 1`] = `
+Object {
+  "deleteOrganizationInvitation": Object {
+    "errorCode": null,
+    "invitationId": "UGVuZGluZ09yZ2FuaXphdGlvbkludml0YXRpb246aW52aXRlTWF4aW1l",
+  },
+}
+`;
+
+exports[`Internal|deleteOrganizationInvitation mutation should delete an invitation as admin 2`] = `
+Object {
+  "node": Object {
+    "pendingOrganizationInvitations": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": null,
+            "user": Object {
+              "email": "msantostefano@cap-collectif.com",
+            },
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|deleteOrganizationInvitation mutation should delete an invitation when called with admin organization who belongs to the org 1`] = `
+Object {
+  "deleteOrganizationInvitation": Object {
+    "errorCode": null,
+    "invitationId": "UGVuZGluZ09yZ2FuaXphdGlvbkludml0YXRpb246aW52aXRlV2VsY29tYXRpYw==",
+  },
+}
+`;
+
+exports[`Internal|deleteOrganizationInvitation mutation should delete an invitation when called with admin organization who belongs to the org 2`] = `
+Object {
+  "node": Object {
+    "pendingOrganizationInvitations": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+  },
+}
+`;

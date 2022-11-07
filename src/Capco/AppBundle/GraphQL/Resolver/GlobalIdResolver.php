@@ -12,6 +12,7 @@ use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
+use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProposalAnalysisRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
@@ -296,6 +297,10 @@ class GlobalIdResolver
                     break;
                 case 'Organization':
                     $node = $this->container->get(OrganizationRepository::class)->find($uuid);
+
+                    break;
+                case 'PendingOrganizationInvitation':
+                    $node = $this->container->get(PendingOrganizationInvitationRepository::class)->find($uuid);
 
                     break;
                 default:

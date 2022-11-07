@@ -55,3 +55,6 @@ services:
     Capco\AppBundle\Security\SettingsVoter:
         tags:
             - { name: security.voter }
+    Capco\AppBundle\Security\PendingOrganizationInvitationVoter:
+        tags:
+            - { name: security.voter }

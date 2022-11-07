@@ -1,0 +1,12 @@
+DeleteOrganizationInvitationPayload:
+    type: relay-mutation-payload
+    config:
+        name: DeleteOrganizationInvitationPayload
+        description: 'Payload of deleteOrganizationInvitation mutation.'
+        fields:
+            invitationId:
+                type: 'ID'
+                description: 'The deleted invitation id.'
+            errorCode:
+                type: 'DeleteOrganizationInvitationErrorCode'
+                description: 'The available errors for deleteOrganizationInvitation mutation.'

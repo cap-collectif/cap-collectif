@@ -1,0 +1,9 @@
+DeleteOrganizationInvitationInput:
+    type: relay-mutation-input
+    config:
+        name: DeleteOrganizationInvitationInput
+        description: 'Input of deleteOrganizationInvitation mutation.'
+        fields:
+            invitationId:
+                type: 'ID!'
+                description: 'The invitation id to delete.'
