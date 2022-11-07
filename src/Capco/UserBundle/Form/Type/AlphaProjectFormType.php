@@ -24,6 +24,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AlphaProjectFormType extends AbstractType
 {
@@ -88,7 +89,8 @@ class AlphaProjectFormType extends AbstractType
             ])
             ->add('visibility')
             ->add('opinionCanBeFollowed')
-            ->add('archived', CheckboxType::class);
+            ->add('archived', CheckboxType::class)
+            ->add('address', TextType::class);
 
         $builder->addEventSubscriber(new ProjectDistrictsFieldSubscriber($this->persister));
 

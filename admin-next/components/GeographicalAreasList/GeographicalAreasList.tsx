@@ -53,7 +53,7 @@ const GeographicalAreasList = () => {
     const defaultLocale = availableLocales.find(locale => locale.isDefault);
     const [localeSelected, setLocaleSelected] = useState({
         label: intl.formatMessage({ id: defaultLocale?.traductionKey || 'french' }),
-        value: formatCodeToLocale(defaultLocale.code),
+        value: formatCodeToLocale(defaultLocale?.code || 'FR_FR'),
     });
 
     return projectDistricts?.edges?.length ? (
@@ -101,7 +101,7 @@ const GeographicalAreasList = () => {
                     <Text color="gray.600" mb={5}>
                         {intl.formatMessage({ id: 'areas-helptext' })}
                     </Text>
-                    <Button as="a" href="/geographicalArea" variant="primary">
+                    <Button as="a" href="/admin-next/geographicalArea" variant="primary">
                         {intl.formatMessage({ id: 'add.geographical.area' })}
                     </Button>
                 </Box>

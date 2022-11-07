@@ -1,10 +1,2 @@
-{# 
-    {% set locale = app.request.locale %}
-    <section id="projectsMap" class="section--custom">
-        <div class="container">
-            <div class="row">
-                {{ react_render_component('ProjectsMapViewApp') }}
-            </div>‡
-        </div>
-    </section>
- #}
+{% set locale = app.request.locale %}
+    {{ react_render_component('ProjectsMapViewApp') }}

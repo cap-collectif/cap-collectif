@@ -68,3 +68,6 @@ CreateAlphaProjectInput:
             archived:
                 type: 'Boolean!'
                 description: 'if it is archived'
+            address:
+                type: 'String'
+                description: 'The project address, geocoded by google'            

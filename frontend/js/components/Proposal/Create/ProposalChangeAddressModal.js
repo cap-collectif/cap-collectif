@@ -6,7 +6,7 @@ import noop from 'lodash/noop';
 import { renderToString } from 'react-dom/server';
 import { useDispatch, connect } from 'react-redux';
 import { graphql, useFragment } from 'react-relay';
-import { MapContainer, Marker, GeoJSON } from 'react-leaflet';
+import { MapContainer, Marker, GeoJSON, ZoomControl } from 'react-leaflet';
 import { Flex, Button, Modal, Box } from '@cap-collectif/ui';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 import { formName, retrieveDistrictForLocation } from '../Form/ProposalForm';
@@ -25,7 +25,6 @@ import ProposalMapDiscoverPane from '../Map/ProposalMapDiscoverPane';
 import ProposalMapOutOfAreaPane from '../Map/ProposalMapOutOfAreaPane';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import { mapToast } from '../Map/Map.events';
-import ZoomControl from '../Map/ZoomControl';
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 
 let L;

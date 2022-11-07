@@ -52,6 +52,9 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     zoom={12}
     zoomControl={false}
   >
+    <ProposalMapOutOfAreaPane
+      content="[object Object]"
+    />
     <CapcoTileLayer />
     <ForwardRef(OverlayComponent)
       autoPan={false}
@@ -276,9 +279,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       handleClose={[Function]}
       show={true}
     />
-    <ProposalMapOutOfAreaPane
-      content="[object Object]"
-    />
   </ProposalLeafletMapstyle__StyledMap>
 </ProposalLeafletMapstyle__MapContainer>
 `;
@@ -333,6 +333,9 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     zoom={12}
     zoomControl={false}
   >
+    <ProposalMapOutOfAreaPane
+      content="[object Object]"
+    />
     <CapcoTileLayer />
     <ForwardRef(OverlayComponent)
       autoPan={false}
@@ -560,9 +563,6 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     <ProposalMapDiscoverPane
       handleClose={[Function]}
       show={true}
-    />
-    <ProposalMapOutOfAreaPane
-      content="[object Object]"
     />
   </ProposalLeafletMapstyle__StyledMap>
 </ProposalLeafletMapstyle__MapContainer>

@@ -26,7 +26,9 @@ export type FormattedDistrict = {
     },
     displayedOnMap: boolean,
     titleOnMap?: string,
+    description?: string,
     name: string,
+    cover?: { id: string },
 };
 
 export const convertToGeoJsonStyle = (style: FormattedDistrict) => {

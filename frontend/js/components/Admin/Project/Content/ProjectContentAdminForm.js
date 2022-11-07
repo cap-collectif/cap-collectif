@@ -23,6 +23,7 @@ import type { GlobalState } from '~/types';
 import Text from '~ui/Primitives/Text';
 import Tooltip from '~ds/Tooltip/Tooltip';
 import Flex from '~ui/Primitives/Layout/Flex';
+import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 type Option = {|
   value: string,
@@ -44,6 +45,7 @@ export type FormValues = {|
   metaDescription: ?string,
   video: ?string,
   districts: Option[],
+  address?: ?string,
 |};
 
 type Props = {|
@@ -113,7 +115,7 @@ export const validate = (props: FormValues) => {
   return errors;
 };
 
-export const ProjectContentAdminForm = ({ intl }: Props) => {
+export const ProjectContentAdminForm = ({ intl, change }: Props) => {
   const { user } = useSelector((state: GlobalState) => state.user);
   const isAdmin = user ? user.isAdmin : false;
   React.useEffect(() => {
@@ -150,7 +152,6 @@ export const ProjectContentAdminForm = ({ intl }: Props) => {
               ariaControls="EventListFilters-filter-author-listbox"
             />
           )}
-
           <ProjectSmallInput>
             <ProjectTypeListField optional placeholder=" " />
           </ProjectSmallInput>
@@ -188,6 +189,21 @@ export const ProjectContentAdminForm = ({ intl }: Props) => {
             loadOptions={loadThemeOptions}
             multi
             clearable
+          />
+          <Field
+            id="address"
+            component={renderComponent}
+            type="address"
+            name="addressText"
+            label={<FormattedMessage id="proposal_form.address" />}
+            placeholder="proposal.map.form.placeholder"
+            addressProps={{
+              getAddress: (addressComplete: ?AddressComplete) =>
+                change(
+                  'address',
+                  addressComplete ? JSON.stringify([addressComplete]) : addressComplete,
+                ),
+            }}
           />
           <Field
             role="combobox"
@@ -241,6 +257,10 @@ export default createFragmentContainer(ProjectContentAdminForm, {
       themes {
         value: id
         label: title
+      }
+      address {
+        formatted
+        json
       }
       districts {
         edges {

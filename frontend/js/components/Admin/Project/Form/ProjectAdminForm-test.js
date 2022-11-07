@@ -37,6 +37,7 @@ describe('<ProjectAdminForm />', () => {
       externalContributionsCount: null,
       locale: null,
       restrictedViewers: null,
+      address: null,
       firstCollectStep: {
         form: {
           isGridViewEnabled: true,

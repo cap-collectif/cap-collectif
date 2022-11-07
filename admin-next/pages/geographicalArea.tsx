@@ -16,7 +16,7 @@ const GeographicalAreaForm = dynamic(
 export const QUERY = graphql`
     query geographicalAreaQuery($id: ID!) {
         node(id: $id) {
-            ... on District {
+            ... on ProjectDistrict {
                 id
                 geojson
                 border {
@@ -29,11 +29,19 @@ export const QUERY = graphql`
                     opacity
                     size
                 }
+                cover {
+                    id
+                    name
+                    size
+                    type: contentType
+                    url(format: "reference")
+                }
                 displayedOnMap
                 translations {
                     name
                     titleOnMap
                     locale
+                    description
                 }
             }
         }
@@ -47,9 +55,9 @@ const GeographicalAreaFormWithData = ({ geographicalAreaId }: { geographicalArea
 
     if (!node) return null;
 
-    const { geojson, displayedOnMap, background, border, translations, id } = node;
+    const { geojson, displayedOnMap, background, border, translations, id, cover } = node;
 
-    const defaultValues = { geojson, displayedOnMap, background, border, id };
+    const defaultValues = { geojson, displayedOnMap, background, border, id, cover };
 
     return <GeographicalAreaForm queryValues={defaultValues} translations={translations} />;
 };

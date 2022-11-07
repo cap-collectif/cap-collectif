@@ -57,6 +57,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "address": null,
         "archived": false,
         "authors": Array [],
         "cover": null,
@@ -153,6 +154,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "address": null,
         "archived": false,
         "authors": Array [],
         "cover": null,
@@ -249,6 +251,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "address": null,
         "archived": false,
         "authors": Array [],
         "cover": null,
@@ -355,6 +358,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "address": null,
         "archived": false,
         "authors": Array [],
         "cover": null,
@@ -458,6 +462,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "address": null,
         "archived": false,
         "authors": Array [],
         "cover": null,
@@ -553,6 +558,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "address": null,
         "archived": false,
         "authors": Array [],
         "cover": null,

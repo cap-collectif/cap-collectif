@@ -138,6 +138,7 @@ const onSubmit = (
     locale,
     restrictedViewerGroups,
     archived,
+    address,
   }: FormValues,
   dispatch: Dispatch,
   props: Props,
@@ -160,6 +161,7 @@ const onSubmit = (
     isExternal,
     publishedAt: moment(publishedAt).format('YYYY-MM-DD HH:mm:ss'),
     visibility,
+    address,
     restrictedViewerGroups:
       visibility === 'CUSTOM' ? restrictedViewerGroups.map(g => g.value) : undefined,
     opinionCanBeFollowed,
@@ -577,6 +579,8 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
       externalParticipantsCount: project ? project.externalParticipantsCount : null,
       externalVotesCount: project ? project.externalVotesCount : null,
       metaDescription: project ? project.metaDescription : null,
+      addressText: project ? project.address?.formatted : null,
+      address: project ? project.address?.json : null,
       districts:
         project?.districts?.edges
           ?.filter(Boolean)
@@ -647,6 +651,10 @@ export default createFragmentContainer(injectIntl(container), {
             label: title
           }
         }
+      }
+      address {
+        formatted
+        json
       }
       districts {
         edges {

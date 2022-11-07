@@ -25,6 +25,7 @@ const withColors = (Component: React.ComponentType<any>) => {
     sectionColor: state.default.parameters['color.section.bg'],
     bodyColor: state.default.parameters['color.body.bg'],
     linkColor: state.default.parameters['color.link.default'],
+    linkHoverColor: state.default.parameters['color.link.hover'],
     voteBarBackgroundColor: state.default.parameters['color.votes_bar.bg'],
     voteBarTextColor: state.default.parameters['color.votes_bar.text'],
     voteBarBorderColor: state.default.parameters['color.votes_bar.border'],

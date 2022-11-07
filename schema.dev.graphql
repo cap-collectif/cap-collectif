@@ -3226,6 +3226,9 @@ input CreateAlphaProjectInput {
 
   """if it is archived"""
   archived: Boolean!
+
+  """The project address, geocoded by google"""
+  address: String
   clientMutationId: String
 }
 
@@ -3600,6 +3603,9 @@ input CreateProjectDistrictInput {
   border: BorderStyleInput
   background: BackgroundStyleInput
   translations: [DistrictTranslationInput!]!
+
+  """The district cover."""
+  cover: ID
 }
 
 type CreateProjectDistrictPayload {
@@ -15975,6 +15981,9 @@ input UpdateAlphaProjectInput {
 
   """if it is archived"""
   archived: Boolean!
+
+  """The project address, geocoded by google"""
+  address: String
   clientMutationId: String
   projectId: ID!
 }

@@ -21,7 +21,7 @@ import type { HomePageProjectsMapSectionConfigurationPage_homePageProjectsMapSec
 import InfoMessage from '~ds/InfoMessage/InfoMessage';
 import { MapContainer } from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode.style';
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
-import type { MapProps } from '~/components/Proposal/Map/Map.types';
+import type { MapProps, MapCenterObject } from '~/components/Proposal/Map/Map.types';
 import { LOCATION_PARIS } from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import Address from '~/components/Form/Address/Address';
@@ -191,6 +191,10 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
               <Map
                 whenCreated={(map: MapProps) => {
                   refMap.current = map;
+                  map.on('click', (e: ?{ ...?Event, latlng: MapCenterObject }) => {
+                    dispatch(change(formName, 'centerLatitude', e?.latlng.lat));
+                    dispatch(change(formName, 'centerLongitude', e?.latlng.lng));
+                  });
                 }}
                 className="map"
                 center={position}

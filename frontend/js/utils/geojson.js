@@ -50,6 +50,7 @@ export const convertToGeoJsonStyle = (style: Style) => {
 export type GeoJson = {|
   district: string,
   style: Style,
+  titleOnMap?: ?string,
 |};
 
 export const geoContains = (geoJSONS: Array<GeoJson>, pos: MapCenterObject) => {
@@ -66,6 +67,7 @@ type District = {|
   +id: string,
   +displayedOnMap: boolean,
   +name?: string,
+  +titleOnMap?: string,
   +border?: ?{|
     +id: ?string,
     +enabled: boolean,
@@ -107,6 +109,7 @@ export const formatGeoJsons = (districts: $ReadOnlyArray<District>) => {
           border: d.border,
           background: d.background,
         },
+        titleOnMap: d.titleOnMap || undefined,
       }));
   }
   return geoJsons;

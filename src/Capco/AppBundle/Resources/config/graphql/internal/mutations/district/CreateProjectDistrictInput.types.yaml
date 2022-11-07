@@ -13,3 +13,6 @@ CreateProjectDistrictInput:
                 type: BackgroundStyleInput
             translations:
                 type: '[InternalDistrictTranslationInput!]!'
+            cover:
+                type: 'ID'
+                description: 'The district cover.'

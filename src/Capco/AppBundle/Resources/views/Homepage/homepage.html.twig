@@ -105,6 +105,9 @@
 
 {% block javascripts %}
     {{ parent() }}
+       {% if is_feature_enabled('display_map') %}
+         {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+      {% endif %}
     {# bootstrap3 is needed by Carousel #}
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <script type="text/javascript">

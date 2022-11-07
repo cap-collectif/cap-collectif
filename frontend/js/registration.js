@@ -79,6 +79,7 @@ import DebateWidgetAccessDeniedApp from '~/startup/DebateWidgetAccessDeniedApp';
 import UserUnsubscribePageApp from '~/startup/UserUnsubscribePageApp';
 import ChartModalApp from '~/startup/ChartModalApp';
 import ProjectStepPageApp from './startup/ProjectStepPageApp';
+import ProjectsMapViewApp from './startup/ProjectsMapViewApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -146,6 +147,7 @@ ReactOnRails.register({
   UserUnsubscribePageApp,
   ChartModalApp,
   ProjectStepPageApp,
+  ProjectsMapViewApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,

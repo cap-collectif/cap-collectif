@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { renderToString } from 'react-dom/server';
 import noop from 'lodash/noop';
 import { change } from 'redux-form';
-import { GeoJSON, Marker, Popup } from 'react-leaflet';
+import { GeoJSON, Marker, Popup, ZoomControl } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
@@ -14,7 +14,6 @@ import L from 'leaflet';
 import { useResize, useDisclosure } from '@liinkiing/react-hooks';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { Button } from '@cap-collectif/ui';
-import ZoomControl from './ZoomControl';
 import type { MapCenterObject, MapOptions, MapProps, MapRef, PopupRef } from './Map.types';
 import type { State, Dispatch } from '~/types';
 import ProposalMapPopover from './ProposalMapPopover';
@@ -23,7 +22,6 @@ import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_pro
 import type { ProposalLeafletMap_proposalForm } from '~relay/ProposalLeafletMap_proposalForm.graphql';
 import { isSafari, Emitter } from '~/config';
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
-
 import {
   StyledMap,
   BlankPopup,
@@ -80,7 +78,7 @@ const locationIcon = L.divIcon({
 
 let locationMarker: typeof L.Marker = {};
 
-const flyToPosition = (mapRef: MapRef, lat: number, lng: number) => {
+export const flyToPosition = (mapRef: MapRef, lat: number, lng: number) => {
   if (mapRef.current) {
     mapRef.current.removeLayer(locationMarker);
   }
@@ -249,6 +247,9 @@ export const ProposalLeafletMap = ({
         className={className}
         doubleClickZoom={false}
         gestureHandling={!isSafari}>
+        <ProposalMapOutOfAreaPane
+          content={intl.formatHTMLMessage({ id: 'constraints.address_in_zone' })}
+        />
         <CapcoTileLayer />
         <Popup
           ref={popupRef}
@@ -345,9 +346,6 @@ export const ProposalLeafletMap = ({
             handleClose={() => setShowDiscoverPane(false)}
           />
         )}
-        <ProposalMapOutOfAreaPane
-          content={intl.formatHTMLMessage({ id: 'constraints.address_in_zone' })}
-        />
       </StyledMap>
       {isMobileSliderOpen && isMobile && (
         <SliderPane

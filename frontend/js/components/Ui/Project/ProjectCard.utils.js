@@ -25,7 +25,7 @@ export const formatCounter = (iconName: string, count: number, archived: boolean
       color={archived ? 'gray.500' : 'gray.700'}
       mr={1}
     />
-    <Text fontSize={14} color={archived ? 'gray.500' : 'gray.900'}>
+    <Text fontSize={14} color={archived ? 'gray.500' : 'gray.900'} as="div">
       <FormattedNumber number={count} />
     </Text>
   </Flex>

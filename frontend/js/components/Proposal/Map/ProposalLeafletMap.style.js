@@ -81,6 +81,22 @@ export const MapContainer: StyledComponent<{ isMobile: boolean }, {}, HTMLDivEle
   .address-container {
     ${props => getStyleSearchBarAddress(props.isMobile ? 'right' : 'left')};
   }
+
+  .leaflet-control-locate-location circle {
+    fill: ${colors.black};
+    animation: leaflet-control-locate-throb 3s infinite cubic-bezier(0.36, 0.11, 0.89, 0.32);
+  }
+
+  @keyframes leaflet-control-locate-throb {
+    from {
+      transform: scale(0.5, 0.5);
+      opacity: 0.5;
+    }
+    to {
+      transform: scale(2.5, 2.5);
+      opacity: 0;
+    }
+  }
 `;
 
 // I am hard-positioning the Slider onto the map, to allow 1-finger navigation, see https://github.com/Leaflet/Leaflet/issues/5425

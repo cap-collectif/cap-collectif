@@ -16,7 +16,7 @@ const deleteGeographicalArea = (id: string, intl: IntlShape, fromDistrict: boole
             variant: 'success',
             content: intl.formatMessage({ id: 'area-deleted' }),
         });
-        if (fromDistrict) window.location.href = '/geographicalAreas';
+        if (fromDistrict) window.location.href = '/admin-next/geographicalAreas';
     });
 };
 

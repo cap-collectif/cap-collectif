@@ -14,6 +14,14 @@ import {
     Switch,
     Spinner,
     toast,
+    Uploader,
+    FormGuideline,
+    Box,
+    UPLOADER_SIZE,
+    Text,
+    Icon,
+    CapUIIconSize,
+    Link,
 } from '@cap-collectif/ui';
 import { GeographicalAreaFormQuery } from '@relay/GeographicalAreaFormQuery.graphql';
 import useFeatureFlag from '@hooks/useFeatureFlag';
@@ -25,6 +33,7 @@ import CreateProjectDistrictMutation from '@mutations/CreateProjectDistrictMutat
 import { formatGeoJsons, FormattedDistrict } from '@utils/leaflet';
 import { mutationErrorToast } from '@utils/mutation-error-toast';
 import UpdateProjectDistrictMutation from '@mutations/UpdateProjectDistrictMutation';
+import { UPLOAD_PATH } from '@utils/config';
 
 const GeographicalAreaMap = dynamic(() => import('./GeographicalAreaMap'), { ssr: false });
 
@@ -57,10 +66,19 @@ const onSubmit = (data: FormattedDistrict, intl: IntlShape, locale: string, tran
             name: 'titleOnMap',
             value: data.titleOnMap,
         },
+        {
+            name: 'description',
+            value: data.description,
+        },
     ];
 
     const input = {
-        translations: createOrReplaceTranslation(fields, locale, translations ? translations : null),
+        translations: createOrReplaceTranslation(
+            fields,
+            locale,
+            translations ? translations : null,
+        ),
+        cover: data.cover ? data.cover.id : null,
         geojson: data.geojson,
         displayedOnMap: data.displayedOnMap,
         border: {
@@ -79,12 +97,13 @@ const onSubmit = (data: FormattedDistrict, intl: IntlShape, locale: string, tran
         return CreateProjectDistrictMutation.commit({
             input,
         })
-            .then(() =>
+            .then(() => {
                 toast({
                     variant: 'success',
-                    content: intl.formatMessage({ id: 'zone-geo-modified' }),
-                }),
-            )
+                    content: intl.formatMessage({ id: 'zone-geo-created' }),
+                });
+                window.location.href = '/admin-next/geographicalAreas';
+            })
             .catch(() => {
                 mutationErrorToast(intl);
             });
@@ -98,9 +117,8 @@ const onSubmit = (data: FormattedDistrict, intl: IntlShape, locale: string, tran
             .then(() => {
                 toast({
                     variant: 'success',
-                    content: intl.formatMessage({ id: 'zone-geo-created' }),
+                    content: intl.formatMessage({ id: 'zone-geo-modified' }),
                 });
-                window.location.href = '/geographicalAreas';
             })
             .catch(() => {
                 mutationErrorToast(intl);
@@ -116,6 +134,7 @@ type Props = {
         readonly name: string,
         readonly titleOnMap: string | null,
         readonly locale: string,
+        readonly description: string | null,
     }[],
 };
 
@@ -141,10 +160,13 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
         titleOnMap:
             translations?.find(translation => translation.locale === localeSelected.value)
                 ?.titleOnMap || '',
+        description:
+            translations?.find(translation => translation.locale === localeSelected.value)
+                ?.description || '',
         ...queryValues,
         border: { color: '#5e5e5e', size: 1, ...queryValues?.border, opacity: 100 },
         background: {
-            color: '#000012',
+            color: queryValues?.background?.color || '#0000001e',
             opacity: queryValues?.opacity
                 ? queryValues.opacity < 1
                     ? queryValues.opacity * 100
@@ -153,11 +175,10 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
         },
     };
 
-    const { control, reset, handleSubmit, formState, watch, setValue } =
-        useForm({
-            mode: 'onChange',
-            defaultValues,
-        });
+    const { control, reset, handleSubmit, formState, watch, setValue } = useForm({
+        mode: 'onChange',
+        defaultValues,
+    });
 
     React.useEffect(() => {
         reset(defaultValues);
@@ -233,45 +254,100 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                             </Menu>
                         )}
                     </Flex>
-
-                    <FormControl name="name" control={control} isRequired>
-                        <FormLabel
-                            htmlFor="name"
-                            label={intl.formatMessage({ id: 'global.title' })}
-                        />
-                        <FieldInput
-                            id="name"
-                            name="name"
-                            control={control}
-                            type="text"
-                            placeholder={intl.formatMessage({
-                                id: 'city-neighbourhood-placeholder',
-                            })}
-                            minLength={2}
-                            maxLength={255}
-                        />
-                    </FormControl>
-                    <FormControl
-                        name="geojson"
-                        control={control}
-                        isRequired
-                        isInvalid={!geoJSONValid && geojson?.length}>
-                        <FormLabel
-                            htmlFor="geojson"
-                            label={intl.formatMessage({ id: 'geojson-code' })}
-                        />
-                        <FieldInput
-                            id="geojson"
+                    <Flex>
+                        <Box mr={8} width="50%">
+                            <FormControl name="name" control={control} isRequired>
+                                <FormLabel
+                                    htmlFor="name"
+                                    label={intl.formatMessage({ id: 'global.title' })}
+                                />
+                                <FieldInput
+                                    id="name"
+                                    name="name"
+                                    control={control}
+                                    type="text"
+                                    placeholder={intl.formatMessage({
+                                        id: 'city-neighbourhood-placeholder',
+                                    })}
+                                    minLength={2}
+                                    maxLength={255}
+                                />
+                            </FormControl>
+                            <FormControl name="description" control={control}>
+                                <FormLabel
+                                    htmlFor="description"
+                                    label={intl.formatMessage({ id: 'global.description' })}>
+                                    <Text fontSize={2} color="gray.500">
+                                        {intl.formatMessage({ id: 'global.optional' })}
+                                    </Text>
+                                </FormLabel>
+                                <FieldInput
+                                    id="description"
+                                    name="description"
+                                    control={control}
+                                    type="textarea"
+                                    rows={3}
+                                    placeholder={intl.formatMessage({
+                                        id: 'city-neighbourhood-placeholder',
+                                    })}
+                                />
+                            </FormControl>
+                            <FormControl name="cover" control={control}>
+                                <FormLabel label={intl.formatMessage({ id: 'cover-image' })}>
+                                    {' '}
+                                    <Text fontSize={2} color="gray.500">
+                                        {intl.formatMessage({ id: 'global.optional' })}
+                                    </Text>
+                                </FormLabel>
+                                <FormGuideline>
+                                    {intl.formatMessage({ id: 'uploader.banner.format' }) +
+                                        ' jpg, png. ' +
+                                        intl.formatMessage({ id: 'uploader.banner.weight' }) +
+                                        ' 1mo.'}
+                                </FormGuideline>
+                                <FieldInput
+                                    type="uploader"
+                                    name="cover"
+                                    control={control}
+                                    format=".jpg,.jpeg,.png"
+                                    maxSize={204800}
+                                    size={UPLOADER_SIZE.MD}
+                                    uploadURI={UPLOAD_PATH}
+                                    showThumbnail
+                                />
+                            </FormControl>
+                        </Box>
+                        <FormControl
                             name="geojson"
                             control={control}
-                            type="textarea"
-                            rows={5}
-                            placeholder={intl.formatMessage({
-                                id: 'paste-code-here',
-                            })}
-                            rules={{ validate: () => geoJSONValid }}
-                        />
-                    </FormControl>
+                            isInvalid={!geoJSONValid && geojson?.length}>
+                            <FormLabel
+                                htmlFor="geojson"
+                                label={intl.formatMessage({ id: 'geojson-code' })}>
+                                {' '}
+                                <Link
+                                    target="_blank"
+                                    href="https://aide.cap-collectif.com/article/286-le-code-geojson">
+                                    <Icon
+                                        name={CapUIIcon.Info}
+                                        size={CapUIIconSize.Sm}
+                                        color="blue.500"
+                                    />
+                                </Link>
+                            </FormLabel>
+                            <FieldInput
+                                id="geojson"
+                                name="geojson"
+                                control={control}
+                                type="textarea"
+                                rows={16}
+                                placeholder={intl.formatMessage({
+                                    id: 'paste-code-here',
+                                })}
+                                rules={{ validate: () => (geojson?.length ? geoJSONValid : true) }}
+                            />
+                        </FormControl>
+                    </Flex>
                 </Flex>
                 <Flex direction="column" bg="white" borderRadius="normal" p={6} mt={6}>
                     <Flex justify="space-between" alignItems="flex-start">
@@ -297,49 +373,65 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                                         name="titleOnMap"
                                         control={control}
                                         type="text"
+                                        required={displayedOnMap}
                                         placeholder={intl.formatMessage({
                                             id: 'admiun.project.create.title.placeholder',
                                         })}
                                         minLength={2}
-                                        maxLength={255}
+                                        maxLength={50}
                                     />
                                 </FormControl>
-                                <FormControl name="background.color" control={control} isRequired>
-                                    <FormLabel
-                                        htmlFor="background.color"
-                                        label={intl.formatMessage({ id: 'global.background' })}
-                                    />
-                                    <FieldInput
-                                        id="background.color"
+                                <Box position="relative" mb={4}>
+                                    <FormControl
                                         name="background.color"
                                         control={control}
-                                        type="colorPicker"
-                                        onChange={hexColor => {
-                                            const color = String(hexColor);
-                                            setValue('background.color', color?.slice(0, 6));
-                                            setValue(
-                                                'background.opacity',
-                                                color?.length === 10
-                                                    ? fromHexStringToOpacity(color?.slice(7, 9))
-                                                    : 100,
-                                            );
-                                        }}
-                                        withOpacity
-                                    />
-                                </FormControl>
-                                <FormControl name="border.color" control={control} isRequired>
-                                    <FormLabel
-                                        htmlFor="border.color"
-                                        label={intl.formatMessage({ id: 'global.border' })}
-                                    />
-                                    <FieldInput
-                                        id="border.color"
+                                        isRequired>
+                                        <FormLabel
+                                            htmlFor="background.color"
+                                            label={intl.formatMessage({ id: 'global.background' })}
+                                        />
+                                        <FieldInput
+                                            id="background.color"
+                                            name="background.color"
+                                            control={control}
+                                            type="colorPicker"
+                                            onChange={hexColor => {
+                                                const color = String(hexColor);
+                                                setValue('background.color', color?.slice(0, 6));
+                                                setValue(
+                                                    'background.opacity',
+                                                    color?.length === 10
+                                                        ? fromHexStringToOpacity(color?.slice(7, 9))
+                                                        : 100,
+                                                );
+                                            }}
+                                            withOpacity
+                                        />
+                                    </FormControl>
+                                </Box>
+                                <Box position="relative" mb={4}>
+                                    <FormControl
                                         name="border.color"
                                         control={control}
-                                        type="colorPicker"
-                                    />
-                                </FormControl>
-                                <FormControl name="border.size" control={control} isRequired>
+                                        isRequired
+                                        position="relative">
+                                        <FormLabel
+                                            htmlFor="border.color"
+                                            label={intl.formatMessage({ id: 'global.border' })}
+                                        />
+                                        <FieldInput
+                                            id="border.color"
+                                            name="border.color"
+                                            control={control}
+                                            type="colorPicker"
+                                        />
+                                    </FormControl>
+                                </Box>
+                                <FormControl
+                                    name="border.size"
+                                    control={control}
+                                    isRequired
+                                    position="relative">
                                     <FormLabel
                                         htmlFor="border.size"
                                         label={intl.formatMessage({ id: 'thickness' })}
