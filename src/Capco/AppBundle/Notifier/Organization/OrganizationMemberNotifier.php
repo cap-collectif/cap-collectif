@@ -34,10 +34,6 @@ final class OrganizationMemberNotifier extends BaseNotifier
 
     public function onNewInvitation(PendingOrganizationInvitation $invitation): bool
     {
-        $adminName = $invitation
-            ->getOrganization()
-            ->getUserAdmin()
-            ->getUsername();
 
         return $this->mailer->createAndSendMessage(
             InvitationMessage::class,
@@ -45,7 +41,6 @@ final class OrganizationMemberNotifier extends BaseNotifier
             [
                 'organizationName' => $invitation->getOrganization()->getTitle(),
                 'invitationUrl' => $this->urlResolver->getObjectUrl($invitation, true),
-                'adminName' => $adminName,
                 'plateformName' => $this->siteName,
                 'siteName' => $this->siteName,
                 'baseUrl' => $this->baseUrl,

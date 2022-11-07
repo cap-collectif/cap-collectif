@@ -150,16 +150,11 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
         $recipient = (new User())
             ->setLocale($this->siteParams->getDefaultLocale())
             ->setEmail($invite->getEmail());
-
         $delivered = $this->mailer->createAndSendMessage(
             UserInviteNewInvitationByOrganization::class,
             $invite,
             [
                 'platformName' => $this->siteParams->getValue('global.site.organization_name'),
-                'adminName' => $invite
-                    ->getOrganization()
-                    ->getUserAdmin()
-                    ->getUsername(),
                 'organizationName' => $invite->getOrganization()->getTitle(),
                 'invitationUrl' => $this->router->generate(
                     'capco_app_user_invitation',
