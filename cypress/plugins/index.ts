@@ -110,6 +110,15 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.timeEnd('enable_disable')
       return Promise.resolve(null)
     },
+    'run:command': async (name: string) => {
+      console.log(`Run command "${name}"...`)
+      console.time('run_command')
+
+      await exec(`fab ${env}.app.cmd --commandName=${name} --environment=test`)
+      console.log(`Successfully run command "${name}"`)
+      console.timeEnd('run_command')
+      return Promise.resolve(null)
+    },
   })
   on('before:run', async () => {
     console.log('Saving database…')
