@@ -63,7 +63,7 @@ const renderAwaitingOrRefusedEvents = (query: EventListPageContainer_query) => {
             bsStyle="primary"
             className="mt-5"
             onClick={() => {
-              window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/event/list`;
+              window.location.href = `${window.location.protocol}//${window.location.host}/admin-next/events`;
             }}>
             <FormattedMessage id="examine-events" />
           </Button>

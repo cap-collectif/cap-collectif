@@ -9,7 +9,7 @@ class AdminEventListPage extends Page
 {
     use PageTrait;
 
-    protected $path = '/admin/capco/app/event/list';
+    protected $path = '/admin-next/events';
 
     protected $elements = [
         'import button' => '#AdminImportEventsButton-import',

@@ -274,7 +274,7 @@ const onDelete = (eventId: string) =>
       eventId,
     },
   }).then(() => {
-    window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/event/list`;
+    window.location.href = `${window.location.protocol}//${window.location.host}/admin-next/events`;
   });
 
 export class EventFormPage extends React.Component<Props, State> {

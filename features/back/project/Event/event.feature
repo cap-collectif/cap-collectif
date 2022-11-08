@@ -78,7 +78,7 @@ Scenario: Logged in super admin wants to delete an event
   Then I should see "event.alert.delete"
   And I click on button "#delete-modal-button-delete"
   And I wait 3 seconds
-  Then I should be redirected to "/admin/capco/app/event/list"
+  Then I should be redirected to "/admin-next/events"
   And I should not see "event10"
 
 @ready-only
@@ -98,7 +98,7 @@ Scenario: Logged in admin wants to delete his event
   Then I should see "event.alert.delete"
   And I click on button "#delete-modal-button-delete"
   And I wait 3 seconds
-  Then I should be redirected to "/admin/capco/app/event/list"
+  Then I should be redirected to "/admin-next/events"
   And I should not see "event4"
 
 @database @rabbimq
