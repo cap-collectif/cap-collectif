@@ -680,13 +680,13 @@ InternalMutation:
                     inputType: AddUsersInGroupInput
                     payloadType: AddUsersInGroupPayload
                     mutateAndGetPayload: "@=mutation('addUsersInGroup', [value['users'], value['groupId'], getUser()])"
-            updateProfile:
+            updateUsername:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: UpdateProfileInput
-                    payloadType: UpdateProfilePayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfileMutation", [value, getUser()])'
+                    inputType: UpdateUsernameInput
+                    payloadType: UpdateUsernamePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUsernameMutation", [value, getUser()])'
             updateProfilePassword:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

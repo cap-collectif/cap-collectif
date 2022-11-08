@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\UserBundle\Form\Type\UsernameType;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Form\Type\ProfileFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class UpdateProfileMutation implements MutationInterface
+class UpdateUsernameMutation implements MutationInterface
 {
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
@@ -31,7 +31,7 @@ class UpdateProfileMutation implements MutationInterface
     {
         $arguments = $input->getArrayCopy();
 
-        $form = $this->formFactory->create(ProfileFormType::class, $user, [
+        $form = $this->formFactory->create(UsernameType::class, $user, [
             'csrf_protection' => false,
         ]);
         $form->submit($arguments, false);

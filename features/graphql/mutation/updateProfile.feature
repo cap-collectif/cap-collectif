@@ -7,8 +7,8 @@ Scenario: User should be able to update his username
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: UpdateProfileInput!) {
-      updateProfile(input: $input) {
+    "query": "mutation ($input: UpdateUsernameInput!) {
+      updateUsername(input: $input) {
         viewer {
           id
           username
@@ -26,7 +26,7 @@ Scenario: User should be able to update his username
   """
   {
     "data": {
-      "updateProfile": {
+      "updateUsername": {
         "viewer": {
           "id": "VXNlcjp1c2VyNQ==",
           "username": "Nouveau username"

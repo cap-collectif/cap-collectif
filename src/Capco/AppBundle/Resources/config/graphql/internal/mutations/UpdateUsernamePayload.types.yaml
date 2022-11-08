@@ -1,4 +1,4 @@
-UpdateProfilePayload:
+UpdateUsernamePayload:
     type: relay-mutation-payload
     config:
         fields:

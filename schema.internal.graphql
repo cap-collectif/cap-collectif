@@ -7922,7 +7922,7 @@ type Mutation {
   deleteGroup(input: DeleteGroupInput!): DeleteGroupPayload
   deleteUserInGroup(input: DeleteUserInGroupInput!): DeleteUserInGroupPayload
   addUsersInGroup(input: AddUsersInGroupInput!): AddUsersInGroupPayload
-  updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
+  updateUsername(input: UpdateUsernameInput!): UpdateUsernamePayload
   updateProfilePassword(input: UpdateProfilePasswordInput!): UpdateProfilePasswordPayload
   updateProfilePersonalData(input: UpdateProfilePersonalDataInput!): UpdateProfilePersonalDataPayload
   updateProfilePublicData(input: UpdateProfilePublicDataInput!): UpdateProfilePublicDataPayload
@@ -16826,11 +16826,6 @@ type UpdateProfileAccountLocalePayload {
   clientMutationId: String
 }
 
-input UpdateProfileInput {
-  username: String
-  clientMutationId: String
-}
-
 input UpdateProfilePasswordInput {
   """The current password"""
   current_password: String!
@@ -16846,12 +16841,6 @@ type UpdateProfilePasswordPayload {
 
   """The error"""
   error: String
-  clientMutationId: String
-}
-
-type UpdateProfilePayload {
-  """The viewer"""
-  viewer: User!
   clientMutationId: String
 }
 
@@ -17612,6 +17601,17 @@ input UpdateUserReplyInput {
 type UpdateUserReplyPayload {
   """Update a reply"""
   reply: UserReply
+  clientMutationId: String
+}
+
+input UpdateUsernameInput {
+  username: String
+  clientMutationId: String
+}
+
+type UpdateUsernamePayload {
+  """The viewer"""
+  viewer: User!
   clientMutationId: String
 }
 

@@ -1,7 +1,7 @@
-UpdateProfileInput:
+UpdateUsernameInput:
     type: relay-mutation-input
     config:
-        description: 'Update your profile'
+        description: 'Update your username'
         fields:
             username:
                 type: 'String'

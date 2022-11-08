@@ -3,13 +3,13 @@ import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  UpdateProfileMutationVariables,
-  UpdateProfileMutationResponse,
-} from '~relay/UpdateProfileMutation.graphql';
+  UpdateUsernameMutationVariables,
+  UpdateUsernameMutationResponse,
+} from '~relay/UpdateUsernameMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateProfileMutation($input: UpdateProfileInput!) {
-    updateProfile(input: $input) {
+  mutation UpdateUsernameMutation($input: UpdateUsernameInput!) {
+    updateUsername(input: $input) {
       viewer {
         id
         username
@@ -19,8 +19,8 @@ const mutation = graphql`
 `;
 
 const commit = (
-  variables: UpdateProfileMutationVariables,
-): Promise<UpdateProfileMutationResponse> =>
+  variables: UpdateUsernameMutationVariables,
+): Promise<UpdateUsernameMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,

@@ -3,13 +3,13 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import component from '../../Form/Field';
-import UpdateProfileMutation from '~/mutations/UpdateProfileMutation';
+import UpdateUsernameMutation from '~/mutations/UpdateUsernameMutation';
 import { REGEX_USERNAME } from '~/constants/FormConstants';
 
 export const formName = 'choose-username';
 
 const onSubmit = (values: Object) =>
-  UpdateProfileMutation.commit({ input: { username: values.username } }).then(() => {
+  UpdateUsernameMutation.commit({ input: { username: values.username } }).then(() => {
     window.location.reload();
     return true;
   });

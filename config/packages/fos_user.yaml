@@ -16,8 +16,3 @@ fos_user:
     from_email:
         address: noreply@ton_domaine.tld
         sender_name: MonSite - Espace membre
-    profile:
-        form:
-            type: Capco\UserBundle\Form\Type\ProfileFormType
-            validation_groups:
-                - profile
