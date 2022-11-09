@@ -81,7 +81,6 @@ export const ICON_NAME = {
   SHARE: 'SHARE',
   EARTH: 'EARTH',
   SORT: 'SORT',
-  ORGANISATION: 'ORGANISATION',
 };
 
 export const ICON_SIZE = {

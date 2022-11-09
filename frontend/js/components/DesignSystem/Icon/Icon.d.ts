@@ -73,7 +73,6 @@ declare export const ICON_NAME = {
     SHARE: 'SHARE',
     EARTH: 'EARTH',
     SORT: 'SORT',
-    ORGANISATION: 'ORGANISATION',
 };
 
 declare export const ICON_SIZE = {
