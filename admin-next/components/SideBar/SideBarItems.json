@@ -196,7 +196,7 @@
         "title": "admin.label.organizations",
         "icon": "PIE_CHART",
         "featuresRequired": ["unstable__organizations"],
-        "rolesRequired": ["admin"],
+        "rolesRequired": [],
         "href": "/admin-next/organizations",
         "beta": true,
         "items": []

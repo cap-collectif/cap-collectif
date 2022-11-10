@@ -2,8 +2,8 @@ import * as React from 'react';
 import { ViewerSession } from '../../types';
 
 type AppContext = {
-    viewerSession: ViewerSession,
-    appVersion: string,
+    viewerSession: ViewerSession;
+    appVersion: string;
 };
 
 export const AppContext = React.createContext<AppContext>({
@@ -16,6 +16,7 @@ export const AppContext = React.createContext<AppContext>({
         isProjectAdmin: false,
         isAdminOrganization: false,
         isOrganizationMember: false,
+        organization: null,
     },
     appVersion: '',
 });

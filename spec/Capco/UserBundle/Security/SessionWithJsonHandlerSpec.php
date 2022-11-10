@@ -2,7 +2,10 @@
 
 namespace spec\Capco\UserBundle\Security;
 
+use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\UserBundle\Security\SessionWithJsonHandler;
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Predis\ClientInterface;
 use Capco\UserBundle\Entity\User;
@@ -22,20 +25,20 @@ class SessionWithJsonHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($redis, $security, [], '', true);
     }
 
-    public function it_match_symfony_session_after_decode(User $viewer)
+    public function it_match_symfony_session_after_decode(User $viewer, OrganizationMember $organizationMember, Organization $organization)
     {
-        $this->mockViewerJsonSessionData($viewer);
+        $this->mockViewerJsonSessionData($viewer, $organizationMember, $organization);
         $encoded = $this->encode(self::$symfonySession, $viewer);
         $this->decode($encoded)->shouldBe(self::$symfonySession);
     }
 
-    public function it_encode_correctly_with_json_separator(User $viewer)
+    public function it_encode_correctly_with_json_separator(User $viewer, OrganizationMember $organizationMember, Organization $organization)
     {
-        $this->mockViewerJsonSessionData($viewer);
+        $this->mockViewerJsonSessionData($viewer, $organizationMember, $organization);
         $this->encode(self::$symfonySession, $viewer)->shouldBe(
             self::$symfonySession .
                 '___JSON_SESSION_SEPARATOR__' .
-                '{"viewer":{"email":"user@email.com","username":"user","id":"VXNlcjoxMjM0","isAdmin":true,"isSuperAdmin":true,"isProjectAdmin":true,"isAdminOrganization":true,"isOrganizationMember":true}}'
+                '{"viewer":{"email":"user@email.com","username":"user","id":"VXNlcjoxMjM0","isAdmin":true,"isSuperAdmin":true,"isProjectAdmin":true,"isAdminOrganization":true,"isOrganizationMember":true,"organization":"T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbklk"}}'
         );
     }
 
@@ -44,7 +47,7 @@ class SessionWithJsonHandlerSpec extends ObjectBehavior
         $this->decode(self::$symfonySession)->shouldBe(self::$symfonySession);
     }
 
-    private function mockViewerJsonSessionData(User $viewer)
+    private function mockViewerJsonSessionData(User $viewer, OrganizationMember $organizationMember, Organization $organization)
     {
         $viewer->getEmail()->willReturn('user@email.com');
         $viewer->getUsername()->willReturn('user');
@@ -54,5 +57,8 @@ class SessionWithJsonHandlerSpec extends ObjectBehavior
         $viewer->isProjectAdmin()->willReturn(true);
         $viewer->isAdminOrganization()->willReturn(true);
         $viewer->isOrganizationMember()->willReturn(true);
+        $viewer->getMemberOfOrganizations()->willReturn(new ArrayCollection([$organizationMember->getWrappedObject()]));
+        $organizationMember->getOrganization()->shouldBeCalledOnce()->willReturn($organization);
+        $organization->getId()->shouldBeCalledOnce()->willReturn('organizationId');
     }
 }

@@ -91,6 +91,16 @@ class SessionWithJsonHandler extends BaseHandler
                     'isProjectAdmin' => $viewer->isProjectAdmin(),
                     'isAdminOrganization' => $viewer->isAdminOrganization(),
                     'isOrganizationMember' => $viewer->isOrganizationMember(),
+                    'organization' => $viewer->getMemberOfOrganizations()->isEmpty()
+                        ? null
+                        : GlobalId::toGlobalId(
+                            'Organization',
+                            $viewer
+                                ->getMemberOfOrganizations()
+                                ->first()
+                                ->getOrganization()
+                                ->getId()
+                        ),
                 ],
             ]);
         }

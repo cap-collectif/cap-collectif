@@ -27,10 +27,11 @@ export type ViewerSession = {
     isProjectAdmin: boolean;
     isAdminOrganization: boolean;
     isOrganizationMember: boolean;
+    organization: string | null;
 };
 
 export type FeatureFlags = {
-    [key in FeatureFlagType]: boolean
+    [key in FeatureFlagType]: boolean;
 };
 
 export type IntlType = {

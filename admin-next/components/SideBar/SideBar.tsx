@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import { Box, CapUIIcon } from '@cap-collectif/ui';
 import CookieHelper from '@utils/cookie-helper';
 import { getBaseUrlWithAdminNextSupport } from '~/config';
-import { useAllFeatureFlags } from '../../hooks/useFeatureFlag';
+import { useAllFeatureFlags } from '@hooks/useFeatureFlag';
 import { useAppContext } from '../AppProvider/App.context';
 import { getSideBarItemsFiltered } from './SideBar.utils';
 import { useSideBarContext } from '@ui/SideBar/SideBar.context';
@@ -25,10 +25,17 @@ const SideBar: FC<SideBarProps> = () => {
     const { fold } = useSideBarContext();
     const intl = useIntl();
     const allFeatureFlags = useAllFeatureFlags();
-    const { isAdmin, isSuperAdmin } = viewerSession;
+    const { isAdmin, isSuperAdmin, isAdminOrganization, organization } = viewerSession;
 
     const sideBarItemsFiltered = useMemo(
-        () => getSideBarItemsFiltered(isAdmin, isSuperAdmin, allFeatureFlags),
+        () =>
+            getSideBarItemsFiltered(
+                isAdmin,
+                isSuperAdmin,
+                allFeatureFlags,
+                isAdminOrganization,
+                organization,
+            ),
         [isAdmin, allFeatureFlags],
     );
 
