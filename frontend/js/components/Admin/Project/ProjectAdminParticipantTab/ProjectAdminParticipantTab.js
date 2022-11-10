@@ -72,6 +72,9 @@ export const queryParticipant = graphql`
           contribuableId: $contribuableId
         )
     }
+    viewer {
+      ...ProjectAdminParticipants_viewer
+    }
   }
 `;
 
@@ -100,13 +103,13 @@ const ProjectAdminParticipantTab = ({ projectId, dataPrefetch }: Props) => {
     queryVariablesWithParameters,
   );
 
-  const { props: data, error, retry }: PropsQuery = useQuery(
-    queryParticipant,
-    queryVariablesWithParameters,
-    {
-      skip: !hasFilters,
-    },
-  );
+  const {
+    props: data,
+    error,
+    retry,
+  }: PropsQuery = useQuery(queryParticipant, queryVariablesWithParameters, {
+    skip: !hasFilters,
+  });
 
   return (
     <Skeleton
@@ -118,6 +121,7 @@ const ProjectAdminParticipantTab = ({ projectId, dataPrefetch }: Props) => {
       <PickableList.Provider>
         <ProjectAdminParticipants
           project={dataPreloaded && !hasFilters ? dataPreloaded.project : data?.project}
+          viewer={dataPreloaded?.viewer ?? data?.viewer}
         />
       </PickableList.Provider>
     </Skeleton>

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Organization.MailingList organization admin should be able to fetch all mailingList from organization 1`] = `
+Object {
+  "node": Object {
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=",
+    "mailingLists": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "TWFpbGluZ0xpc3Q6bWFpbGluZ0xpc3RPcmdhbml6YXRpb24=",
+            "users": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "username": "lbrunet",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "username": "spyl",
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;

@@ -12,3 +12,6 @@ CreateMailingListInput:
             project:
                 type: 'ID'
                 description: 'Optionnal. The list from which the list is built'
+            owner:
+                type: 'ID'
+                description: 'ID of the owner of the project, user or organization. If null, fallback on the viewer.'

@@ -261,7 +261,7 @@ InternalQuery:
                         description: 'The term to filter groups'
                         type: 'String'
                 argsBuilder: 'Relay::ForwardConnection'
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", [getUser()])'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver", [args])'
             proposalForms:
                 description: 'Lookup forms.'
@@ -544,7 +544,7 @@ InternalQuery:
             senderEmails:
                 type: '[SenderEmail!]!'
                 description: 'Get all sending addresses registered'
-                access: "@=hasRole('ROLE_PROJECT_ADMIN') and hasFeatureFlag('beta__emailing')"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", [getUser()])'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailResolver", [getUser()])'
             siteSettings:
                 type: 'InternalSiteSettings'

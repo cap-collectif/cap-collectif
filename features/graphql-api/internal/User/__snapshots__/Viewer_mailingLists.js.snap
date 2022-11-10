@@ -22,11 +22,16 @@ Object {
         },
         Object {
           "node": Object {
+            "name": "Mailing list organization",
+          },
+        },
+        Object {
+          "node": Object {
             "name": "Les gens qui pèsent dans le capco-game",
           },
         },
       ],
-      "totalCount": 4,
+      "totalCount": 5,
     },
   },
 }

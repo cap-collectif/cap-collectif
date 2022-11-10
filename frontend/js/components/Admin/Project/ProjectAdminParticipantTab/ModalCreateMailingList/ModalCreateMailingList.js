@@ -22,6 +22,7 @@ import InfoMessage from '~ds/InfoMessage/InfoMessage';
 import Link from '~ds/Link/Link';
 import Tooltip from '~ds/Tooltip/Tooltip';
 import Flex from '~ui/Primitives/Layout/Flex';
+import type { ModalCreateMailingList_viewer } from '~relay/ModalCreateMailingList_viewer.graphql';
 
 const formName = 'form-create-mailing-list';
 
@@ -32,6 +33,7 @@ type Props = {|
   members: string[],
   refusingCount: number,
   project: ModalCreateMailingList_project,
+  viewer: ModalCreateMailingList_viewer,
   mailingListName: string,
   dispatch: Dispatch,
 |};
@@ -79,6 +81,7 @@ const createMailingList = (
   members: string[],
   mailingListName: string,
   onClose: () => void,
+  organizationId: ?string,
   withRedirection?: boolean,
 ) => {
   return CreateMailingListMutation.commit({
@@ -86,6 +89,7 @@ const createMailingList = (
       name: mailingListName,
       userIds: members,
       project: projectId,
+      owner: organizationId,
     },
   })
     .then(response => {
@@ -133,10 +137,11 @@ const createMailingList = (
 };
 
 const onSubmit = (values: Values, dispatch: Dispatch, props: Props) => {
-  const { project, onClose, members } = props;
+  const { project, onClose, members, viewer } = props;
   const { mailingListName } = values;
+  const organization = viewer?.organizations?.[0];
 
-  createMailingList(project.id, members, mailingListName, onClose, true);
+  createMailingList(project.id, members, mailingListName, onClose, organization?.id, true);
 };
 
 const ModalCreateMailingList = ({
@@ -148,8 +153,10 @@ const ModalCreateMailingList = ({
   dispatch,
   mailingListName,
   pristine,
+  viewer,
 }: Props) => {
   const intl = useIntl();
+  const organization = viewer?.organizations?.[0];
 
   return (
     <Container
@@ -218,7 +225,9 @@ const ModalCreateMailingList = ({
       <Modal.Footer>
         <ButtonSave
           type="button"
-          onClick={() => createMailingList(project.id, members, mailingListName, onClose)}
+          onClick={() =>
+            createMailingList(project.id, members, mailingListName, onClose, organization?.id)
+          }
           disabled={pristine}>
           <FormattedMessage id="global.save" />
         </ButtonSave>
@@ -256,6 +265,13 @@ export default createFragmentContainer(ModalCreateMailingListConnected, {
     fragment ModalCreateMailingList_project on Project {
       id
       title
+    }
+  `,
+  viewer: graphql`
+    fragment ModalCreateMailingList_viewer on User {
+      organizations {
+        id
+      }
     }
   `,
 });

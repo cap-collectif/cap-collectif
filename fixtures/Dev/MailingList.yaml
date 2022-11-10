@@ -71,3 +71,9 @@ Capco\AppBundle\Entity\MailingList:
                 '@user49',
                 '@user50',
             ]
+    mailingListOrganization:
+        id: mailingListOrganization
+        name: 'Mailing list organization'
+        users: ['@user1', '@userSpyl']
+        owner: '@organization2'
+        creator: '@valerieMassonDelmotte'

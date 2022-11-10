@@ -7,32 +7,33 @@ import { $refType, $fragmentRefs, relayPaginationMock } from '~/mocks';
 
 const baseProps = {
   relay: relayPaginationMock,
-  query: {
+  viewer: {
     $refType,
-    viewer: {
-      isOnlyProjectAdmin: false,
-      mailingLists: {
-        totalCount: 2,
-        pageInfo: {
-          hasNextPage: false,
-        },
-        edges: [
-          {
-            node: {
-              $fragmentRefs,
-              id: '1',
-            },
-            cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==',
-          },
-          {
-            node: {
-              $fragmentRefs,
-              id: '1',
-            },
-            cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI8fQ==',
-          },
-        ],
+    isOnlyProjectAdmin: false,
+  },
+  mailingListOwner: {
+    $refType,
+    mailingLists: {
+      totalCount: 2,
+      pageInfo: {
+        hasNextPage: false,
       },
+      edges: [
+        {
+          node: {
+            $fragmentRefs,
+            id: '1',
+          },
+          cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==',
+        },
+        {
+          node: {
+            $fragmentRefs,
+            id: '1',
+          },
+          cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI8fQ==',
+        },
+      ],
     },
   },
 };

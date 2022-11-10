@@ -3405,6 +3405,11 @@ input CreateMailingListInput {
 
   """Optionnal. The list from which the list is built"""
   project: ID
+
+  """
+  ID of the owner of the project, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
   clientMutationId: String
 }
 
@@ -8580,7 +8585,7 @@ enum OrderDirection {
 }
 
 """An organization."""
-type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwner & ProposalFormOwner & QuestionnaireOwner {
+type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwner & ProposalFormOwner & QuestionnaireOwner & MailingListOwner {
   """The ID of an object."""
   id: ID!
 
@@ -8760,6 +8765,26 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     """Filter by available questionnaires"""
     availableOnly: Boolean
   ): QuestionnaireConnection!
+
+  """Get all mailingLists that the organization owns."""
+  mailingLists(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for mailing lists returned from the connection.
+    For example, OWNER will include only mailing lists that the current viewer owns.
+    """
+    affiliations: [MailingListAffiliation!]
+
+    """If provided, filter lists by name"""
+    term: String
+  ): MailingListConnection!
 
   """The organization's logo file"""
   logo: Media

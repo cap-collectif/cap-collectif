@@ -10,16 +10,18 @@ import ClearableInput from '~ui/Form/Input/ClearableInput';
 import EmailingLoader from '../../EmailingLoader/EmailingLoader';
 import MailingListItem from '~/components/Admin/Emailing/EmailingList/MailingListItem/MailingListItem';
 import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
-import { type DashboardMailingList_query } from '~relay/DashboardMailingList_query.graphql';
 import NoMailingList from '~/components/Admin/Emailing/EmailingList/NoMailingList/NoMailingList';
 import ModalOnboarding from '~/components/Admin/Emailing/ModalOnboarding/ModalOnboarding';
 import InfoMessage from '~ds/InfoMessage/InfoMessage';
+import type { DashboardMailingList_viewer } from '~relay/DashboardMailingList_viewer.graphql';
+import type { DashboardMailingList_mailingListOwner } from '~relay/DashboardMailingList_mailingListOwner.graphql';
 
 export const MAILING_LIST_PAGINATION = 30;
 
 type Props = {|
   relay: RelayPaginationProp,
-  query: DashboardMailingList_query,
+  viewer: DashboardMailingList_viewer,
+  mailingListOwner: DashboardMailingList_mailingListOwner,
 |};
 
 const DashboardHeader = () => {
@@ -52,9 +54,8 @@ const DashboardHeader = () => {
   );
 };
 
-export const DashboardMailingList = ({ query, relay }: Props) => {
-  const { viewer } = query;
-  const { mailingLists } = viewer;
+export const DashboardMailingList = ({ viewer, relay, mailingListOwner }: Props) => {
+  const { mailingLists } = mailingListOwner;
   const { selectedRows } = usePickableList();
   const { parameters, dispatch, status } = useDashboardMailingListContext();
   const [mailingListSelected, setMailingListSelected] = React.useState<?string>(null);
@@ -146,32 +147,34 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
 export default createPaginationContainer(
   DashboardMailingList,
   {
-    query: graphql`
-      fragment DashboardMailingList_query on Query
-        @argumentDefinitions(
-          count: { type: "Int" }
-          cursor: { type: "String" }
-          term: { type: "String", defaultValue: null }
-          affiliations: { type: "[MailingListAffiliation!]" }
-        ) {
-        viewer {
-          isOnlyProjectAdmin
-          mailingLists(first: $count, after: $cursor, term: $term, affiliations: $affiliations)
-            @connection(key: "DashboardMailingList_mailingLists", filters: ["term"]) {
-            totalCount
-            pageInfo {
-              hasNextPage
-            }
-            edges {
-              cursor
-              node {
-                id
-                ...MailingListItem_mailingList
-                ...ModalMembers_mailingList
-              }
+    mailingListOwner: graphql`
+      fragment DashboardMailingList_mailingListOwner on MailingListOwner
+      @argumentDefinitions(
+        count: { type: "Int" }
+        cursor: { type: "String" }
+        term: { type: "String", defaultValue: null }
+        affiliations: { type: "[MailingListAffiliation!]" }
+      ) {
+        mailingLists(first: $count, after: $cursor, term: $term, affiliations: $affiliations)
+          @connection(key: "DashboardMailingList_mailingLists", filters: ["term"]) {
+          totalCount
+          pageInfo {
+            hasNextPage
+          }
+          edges {
+            cursor
+            node {
+              id
+              ...MailingListItem_mailingList
+              ...ModalMembers_mailingList
             }
           }
         }
+      }
+    `,
+    viewer: graphql`
+      fragment DashboardMailingList_viewer on User {
+        isOnlyProjectAdmin
       }
     `,
   },
@@ -184,7 +187,7 @@ export default createPaginationContainer(
      * $FlowFixMe
      * */
     getConnectionFromProps(props: Props) {
-      return props.query.viewer.mailingLists;
+      return props.mailingListOwner.mailingLists;
     },
     getFragmentVariables(prevVars) {
       return {
@@ -205,8 +208,14 @@ export default createPaginationContainer(
         $term: String
         $affiliations: [MailingListAffiliation!]
       ) {
-        ...DashboardMailingList_query
-          @arguments(count: $count, cursor: $cursor, term: $term, affiliations: $affiliations)
+        viewer {
+          ...DashboardMailingList_mailingListOwner
+            @arguments(count: $count, cursor: $cursor, term: $term, affiliations: $affiliations)
+          organizations {
+            ...DashboardMailingList_mailingListOwner
+              @arguments(count: $count, cursor: $cursor, term: $term, affiliations: $affiliations)
+          }
+        }
       }
     `,
   },

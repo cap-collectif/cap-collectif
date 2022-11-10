@@ -31,12 +31,14 @@ const listMailingList = ({
   ...ReactRelayReadyState,
   props: ?EmailingListPageQueryResponse,
 }) => {
+  const viewer = props?.viewer;
+  const organization = viewer?.organizations?.[0];
   return (
     <Skeleton
       isLoaded={!!props}
       placeholder={<DashboardMailingListPlaceholder hasError={!!error} fetchData={retry} />}>
       <PickableList.Provider>
-        <DashboardMailingList query={props} />
+        <DashboardMailingList mailingListOwner={organization ?? viewer} viewer={viewer} />
       </PickableList.Provider>
     </Skeleton>
   );
@@ -97,8 +99,25 @@ export const EmailingListPage = () => {
               $term: String
               $affiliations: [MailingListAffiliation!]
             ) {
-              ...DashboardMailingList_query
-                @arguments(count: $count, cursor: $cursor, term: $term, affiliations: $affiliations)
+              viewer {
+                ...DashboardMailingList_viewer
+                ...DashboardMailingList_mailingListOwner
+                  @arguments(
+                    count: $count
+                    cursor: $cursor
+                    term: $term
+                    affiliations: $affiliations
+                  )
+                organizations {
+                  ...DashboardMailingList_mailingListOwner
+                    @arguments(
+                      count: $count
+                      cursor: $cursor
+                      term: $term
+                      affiliations: $affiliations
+                    )
+                }
+              }
             }
           `}
           variables={createQueryVariables(parameters, isAdmin)}

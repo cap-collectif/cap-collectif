@@ -1,7 +1,12 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
+import {
+  createFragmentContainer,
+  createPaginationContainer,
+  graphql,
+  type RelayPaginationProp,
+} from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { connect } from 'react-redux';
 import PickableList from '~ui/List/PickableList';
@@ -37,12 +42,14 @@ import type { GlobalState } from '~/types';
 import { clearToasts } from '~ds/Toast';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import Tooltip from '~ds/Tooltip/Tooltip';
+import type { ProjectAdminParticipants_viewer } from '~relay/ProjectAdminParticipants_viewer.graphql';
 
 export const PROJECT_ADMIN_PARTICIPANT_PAGINATION = 30;
 
 type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminParticipants_project,
+  +viewer: ProjectAdminParticipants_viewer,
   +viewerIsAdmin: boolean,
 |};
 
@@ -205,7 +212,7 @@ const DashboardHeader = ({ project, showModalCreateMailingList, refusingCount }:
   );
 };
 
-export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin }: Props) => {
+export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer }: Props) => {
   const { parameters, status, dispatch } = useProjectAdminParticipantsContext();
   const { selectedRows } = usePickableList();
   const refusingCount = countSelectedNotConsenting(project, selectedRows);
@@ -309,6 +316,7 @@ export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin }: Prop
         members={selectedRows}
         refusingCount={refusingCount}
         project={project}
+        viewer={viewer}
       />
     </AnalysisPickableListContainer>
   );
@@ -466,4 +474,11 @@ const ProjectAdminParticipantsConnected = connect<any, any, _, _, _, _>(mapState
   ProjectAdminParticipantsRelay,
 );
 
-export default ProjectAdminParticipantsConnected;
+export default createFragmentContainer(ProjectAdminParticipantsConnected, {
+  viewer: graphql`
+    fragment ProjectAdminParticipants_viewer on User {
+      username
+      ...ModalCreateMailingList_viewer
+    }
+  `,
+});
