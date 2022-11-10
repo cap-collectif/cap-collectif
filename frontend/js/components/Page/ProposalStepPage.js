@@ -20,7 +20,6 @@ import type {
   ProposalStepPageQueryVariables,
 } from '~relay/ProposalStepPageQuery.graphql';
 import config from '../../config';
-import LoginModal from '~/components/User/Login/LoginModal';
 import { formatGeoJsons } from '~/utils/geojson';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import StepEvents from '../Steps/StepEvents';
@@ -146,7 +145,6 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
             zoom: form.zoomMap || 10,
           }}
         />
-        <LoginModal />
       </div>
     </>
   );

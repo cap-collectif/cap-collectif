@@ -26,8 +26,9 @@ exports[`<LoginSocialButton /> should render correctly 1`] = `
 
 exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
 <div>
-  <AppBox
+  <Text
     fontSize={2}
+    lineHeight="s"
     mt={1}
     textAlign="center"
   >
@@ -36,7 +37,7 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
       tagName="p"
       values={Object {}}
     />
-  </AppBox>
+  </Text>
   <LoginSocialButton__FranceConnectButton
     justifyContent="center"
   >

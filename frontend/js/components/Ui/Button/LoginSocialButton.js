@@ -5,7 +5,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import tinycolor from 'tinycolor2';
 import { connect } from 'react-redux';
 import SocialIcon from '../Icons/SocialIcon';
-import AppBox from '~ui/Primitives/AppBox';
+import Text from '~ui/Primitives/Text';
 import { baseUrl } from '~/config';
 import type { GlobalState } from '~/types';
 
@@ -248,13 +248,14 @@ export const LoginSocialButton = ({
     <div>
       {type === 'franceConnect' ? (
         <>
-          <AppBox
+          <Text
             textAlign={justifyContent}
             mt={1}
+            lineHeight="s"
             fontSize={isFcRequirement ? '14px' : 2}
             color={isFcRequirement ? 'gray.700' : undefined}>
             <FormattedMessage tagName="p" id={fcTitle} />
-          </AppBox>
+          </Text>
           <FranceConnectButton justifyContent={justifyContent}>
             <a
               href={getButtonLinkForType(type, redirectUri)}

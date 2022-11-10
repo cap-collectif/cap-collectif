@@ -48,7 +48,7 @@ const CardFacebook: FC<CardFacebookProps> = ({ ssoConfiguration: ssoConfiguratio
                         Facebook
                     </Text>
 
-                    {ssoConfiguration ? (
+                    {ssoConfiguration?.clientId ? (
                         <Switch id="sso-facebook" checked={ssoConfiguration.enabled} onChange={() => toggleFacebook(ssoConfiguration, ssoConnectionName) }/>
                     ) : (
                         <Button variantColor="primary" variant="tertiary" onClick={onOpen('facebook-configuration')} alternative>
