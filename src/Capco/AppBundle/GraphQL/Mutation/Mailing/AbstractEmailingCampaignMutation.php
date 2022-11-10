@@ -11,6 +11,7 @@ use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\SendEmailingCampaignErrorCode;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\EmailingCampaignVoter;
+use Capco\AppBundle\Security\MailingListVoter;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -87,13 +88,16 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
 
     protected function findMailingList(string $globalId, User $viewer): MailingList
     {
-        //TODO use MailingListVoter when created
         $mailingList = $this->resolver->resolve($globalId, $viewer);
-        if ($mailingList && ($viewer->isAdmin() || $mailingList->getOwner() === $viewer)) {
-            return $mailingList;
+        $canViewMailingList = $this->authorizationChecker->isGranted(
+            MailingListVoter::VIEW,
+            $mailingList
+        );
+        if (!$canViewMailingList) {
+            throw new UserError(CreateEmailingCampaignErrorCode::ID_NOT_FOUND_MAILING_LIST);
         }
 
-        throw new UserError(CreateEmailingCampaignErrorCode::ID_NOT_FOUND_MAILING_LIST);
+        return $mailingList;
     }
 
     protected function findGroup(string $globalId, User $viewer): Group

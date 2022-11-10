@@ -142,14 +142,7 @@ Scenario: GraphQL admin try to update a non existing campaign
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "updateEmailingCampaign": {
-        "error": "ID_NOT_FOUND",
-        "emailingCampaign": null
-      }
-    }
-  }
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"updateEmailingCampaign":null}}
   """
 
 Scenario: GraphQL admin try to update a campaign already sent
@@ -427,14 +420,7 @@ Scenario: GraphQL project owner tries to update other one campaign
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "updateEmailingCampaign": {
-        "error": "ID_NOT_FOUND",
-        "emailingCampaign": null
-      }
-    }
-  }
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"updateEmailingCampaign":null}}
   """
 
 Scenario: GraphQL project owner tries to update its campaign with another ones mailing list

@@ -15,26 +15,33 @@ import ClearableInput from '~ui/Form/Input/ClearableInput';
 import CampaignItem from '~/components/Admin/Emailing/EmailingCampaign/CampaignItem/CampaignItem';
 import EmailingLoader from '../../EmailingLoader/EmailingLoader';
 import ModalConfirmDelete from '~/components/Admin/Emailing/EmailingCampaign/ModalConfirmDelete/ModalConfirmDelete';
-import { type DashboardCampaign_query } from '~relay/DashboardCampaign_query.graphql';
 import CreateEmailingCampaignMutation from '~/mutations/CreateEmailingCampaignMutation';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import NoCampaign from '~/components/Admin/Emailing/EmailingCampaign/NoCampaign/NoCampaign';
 import ModalOnboarding from '~/components/Admin/Emailing/ModalOnboarding/ModalOnboarding';
 import { CAMPAIGN_PAGINATION } from '../utils';
+import type { DashboardCampaign_emailingCampaignOwner } from '~relay/DashboardCampaign_emailingCampaignOwner.graphql';
+import type { DashboardCampaign_viewer } from '~relay/DashboardCampaign_viewer.graphql';
 
 type Props = {|
   relay: RelayPaginationProp,
-  query: DashboardCampaign_query,
+  emailingCampaignOwner: DashboardCampaign_emailingCampaignOwner,
+  viewer: DashboardCampaign_viewer,
 |};
 
 type HeaderProps = {|
-  query: DashboardCampaign_query,
+  emailingCampaignOwner: DashboardCampaign_emailingCampaignOwner,
+  viewer: DashboardCampaign_viewer,
   showModalDelete: boolean => void,
 |};
 
-const createCampaign = () => {
-  return CreateEmailingCampaignMutation.commit({ input: {} })
+const createCampaign = (organizationId: ?string) => {
+  return CreateEmailingCampaignMutation.commit({
+    input: {
+      owner: organizationId,
+    },
+  })
     .then(response => {
       if (response.createEmailingCampaign?.error) {
         return FluxDispatcher.dispatch({
@@ -63,13 +70,18 @@ const createCampaign = () => {
     });
 };
 
-const DashboardHeader = ({ query, showModalDelete }: HeaderProps) => {
-  const { viewer } = query;
-  const { campaigns } = viewer;
+const DashboardHeader = ({ emailingCampaignOwner, showModalDelete, viewer }: HeaderProps) => {
+  const { campaigns } = emailingCampaignOwner;
   const { selectedRows, rowsCount } = usePickableList();
   const { dispatch, parameters } = useDashboardCampaignContext();
 
   const intl = useIntl();
+  const canDelete = () => {
+    const viewerBelongsToAnOrganization = (viewer.organizations?.length ?? 0) > 0;
+    if (!viewerBelongsToAnOrganization) return true;
+    if (viewer?.isAdminOrganization) return true;
+    return campaigns?.edges?.every(edge => edge?.node?.creator?.id === viewer.id) ?? false;
+  };
 
   return (
     <React.Fragment>
@@ -83,9 +95,11 @@ const DashboardHeader = ({ query, showModalDelete }: HeaderProps) => {
             tagName="p"
           />
 
-          <S.ButtonDelete type="button" onClick={() => showModalDelete(true)}>
-            {intl.formatMessage({ id: 'admin.global.delete' })}
-          </S.ButtonDelete>
+          {canDelete() && (
+            <S.ButtonDelete type="button" onClick={() => showModalDelete(true)}>
+              {intl.formatMessage({ id: 'admin.global.delete' })}
+            </S.ButtonDelete>
+          )}
         </React.Fragment>
       ) : (
         <React.Fragment>
@@ -129,14 +143,15 @@ const DashboardHeader = ({ query, showModalDelete }: HeaderProps) => {
   );
 };
 
-export const DashboardCampaign = ({ query, relay }: Props) => {
-  const { viewer } = query;
-  const { campaigns, campaignsAll, campaignsDraft, campaignsSent, campaignsPlanned } = viewer;
+export const DashboardCampaign = ({ viewer, relay, emailingCampaignOwner }: Props) => {
+  const { campaigns, campaignsAll, campaignsDraft, campaignsSent, campaignsPlanned } =
+    emailingCampaignOwner;
   const intl = useIntl();
   const { selectedRows } = usePickableList();
   const { parameters, dispatch, status } = useDashboardCampaignContext();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const hasCampaigns = campaigns.totalCount > 0;
+  const organization = viewer?.organizations?.[0];
 
   return (
     <>
@@ -198,7 +213,11 @@ export const DashboardCampaign = ({ query, relay }: Props) => {
             placeholder={intl.formatMessage({ id: 'global.menu.search' })}
           />
 
-          <S.ButtonCreate type="button" onClick={createCampaign}>
+          <S.ButtonCreate
+            type="button"
+            onClick={() => {
+              createCampaign(organization?.id);
+            }}>
             <FormattedMessage id="create-mail" />
           </S.ButtonCreate>
         </div>
@@ -213,7 +232,11 @@ export const DashboardCampaign = ({ query, relay }: Props) => {
         hasMore={campaigns?.pageInfo.hasNextPage}
         loader={<EmailingLoader key="loader" />}>
         <S.DashboardCampaignHeader isSelectable={hasCampaigns} disabled={!hasCampaigns}>
-          <DashboardHeader query={query} showModalDelete={onOpen} />
+          <DashboardHeader
+            emailingCampaignOwner={emailingCampaignOwner}
+            showModalDelete={onOpen}
+            viewer={viewer}
+          />
         </S.DashboardCampaignHeader>
 
         <PickableList.Body>
@@ -245,58 +268,61 @@ export const DashboardCampaign = ({ query, relay }: Props) => {
 export default createPaginationContainer(
   DashboardCampaign,
   {
-    query: graphql`
-      fragment DashboardCampaign_query on Query
-        @argumentDefinitions(
-          count: { type: "Int" }
-          cursor: { type: "String" }
-          term: { type: "String", defaultValue: null }
-          orderBy: {
-            type: EmailingCampaignOrder
-            defaultValue: { field: SEND_AT, direction: DESC }
+    emailingCampaignOwner: graphql`
+      fragment DashboardCampaign_emailingCampaignOwner on EmailingCampaignOwner
+      @argumentDefinitions(
+        count: { type: "Int" }
+        cursor: { type: "String" }
+        term: { type: "String", defaultValue: null }
+        orderBy: { type: EmailingCampaignOrder, defaultValue: { field: SEND_AT, direction: DESC } }
+        status: { type: EmailingCampaignStatusFilter, defaultValue: null }
+        affiliations: { type: "[EmailingCampaignAffiliation!]" }
+      ) {
+        campaigns: emailingCampaigns(
+          first: $count
+          after: $cursor
+          term: $term
+          orderBy: $orderBy
+          status: $status
+          affiliations: $affiliations
+        ) @connection(key: "DashboardCampaign_campaigns", filters: ["term", "orderBy", "status"]) {
+          totalCount
+          pageInfo {
+            hasNextPage
           }
-          status: { type: EmailingCampaignStatusFilter, defaultValue: null }
-          affiliations: { type: "[EmailingCampaignAffiliation!]" }
-        ) {
-        viewer {
-          isOnlyProjectAdmin
-          campaigns: emailingCampaigns(
-            first: $count
-            after: $cursor
-            term: $term
-            orderBy: $orderBy
-            status: $status
-            affiliations: $affiliations
-          )
-            @connection(
-              key: "DashboardCampaign_campaigns"
-              filters: ["term", "orderBy", "status"]
-            ) {
-            totalCount
-            pageInfo {
-              hasNextPage
-            }
-            edges {
-              cursor
-              node {
+          edges {
+            cursor
+            node {
+              id
+              status
+              creator {
                 id
-                status
-                ...CampaignItem_campaign
               }
+              ...CampaignItem_campaign
             }
           }
-          campaignsAll: emailingCampaigns(status: null, affiliations: $affiliations) {
-            totalCount
-          }
-          campaignsDraft: emailingCampaigns(status: DRAFT, affiliations: $affiliations) {
-            totalCount
-          }
-          campaignsSent: emailingCampaigns(status: SENT, affiliations: $affiliations) {
-            totalCount
-          }
-          campaignsPlanned: emailingCampaigns(status: PLANNED, affiliations: $affiliations) {
-            totalCount
-          }
+        }
+        campaignsAll: emailingCampaigns(status: null, affiliations: $affiliations) {
+          totalCount
+        }
+        campaignsDraft: emailingCampaigns(status: DRAFT, affiliations: $affiliations) {
+          totalCount
+        }
+        campaignsSent: emailingCampaigns(status: SENT, affiliations: $affiliations) {
+          totalCount
+        }
+        campaignsPlanned: emailingCampaigns(status: PLANNED, affiliations: $affiliations) {
+          totalCount
+        }
+      }
+    `,
+    viewer: graphql`
+      fragment DashboardCampaign_viewer on User {
+        id
+        isOnlyProjectAdmin
+        isAdminOrganization
+        organizations {
+          id
         }
       }
     `,
@@ -309,8 +335,8 @@ export default createPaginationContainer(
      * endCursor) but I only need `hasNextPage`
      * $FlowFixMe
      * */
-    getConnectionFromProps(props: Props) {
-      return props.query.viewer.campaigns;
+    getConnectionFromProps({ emailingCampaignOwner }: Props) {
+      return emailingCampaignOwner?.campaigns;
     },
     getFragmentVariables(prevVars) {
       return {
@@ -333,15 +359,29 @@ export default createPaginationContainer(
         $status: EmailingCampaignStatusFilter
         $affiliations: [EmailingCampaignAffiliation!]
       ) {
-        ...DashboardCampaign_query
-          @arguments(
-            count: $count
-            cursor: $cursor
-            term: $term
-            orderBy: $orderBy
-            status: $status
-            affiliations: $affiliations
-          )
+        viewer {
+          ...DashboardCampaign_viewer
+          ...DashboardCampaign_emailingCampaignOwner
+            @arguments(
+              count: $count
+              cursor: $cursor
+              term: $term
+              orderBy: $orderBy
+              status: $status
+              affiliations: $affiliations
+            )
+          organizations {
+            ...DashboardCampaign_emailingCampaignOwner
+              @arguments(
+                count: $count
+                cursor: $cursor
+                term: $term
+                orderBy: $orderBy
+                status: $status
+                affiliations: $affiliations
+              )
+          }
+        }
       }
     `,
   },

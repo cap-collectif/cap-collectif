@@ -29,39 +29,42 @@ const baseProps = {
     mailingInternal: null,
     project: null,
   },
+  mailingListOwner: {
+    $refType,
+    mailingLists: {
+      totalCount: 2,
+      edges: [
+        {
+          node: {
+            id: '1',
+            name: 'Je suis une mailingList',
+          },
+        },
+        {
+          node: {
+            id: '2',
+            name: 'Je suis une mailingList aussi',
+          },
+        },
+      ],
+    },
+  },
+  projectOwner: {
+    $refType,
+    projects: {
+      totalCount: 1,
+      edges: [
+        {
+          node: {
+            id: '1',
+            title: 'Je suis un project',
+          },
+        },
+      ],
+    },
+  },
   query: {
     $refType,
-    viewer: {
-      mailingLists: {
-        totalCount: 2,
-        edges: [
-          {
-            node: {
-              id: '1',
-              name: 'Je suis une mailingList',
-            },
-          },
-          {
-            node: {
-              id: '2',
-              name: 'Je suis une mailingList aussi',
-            },
-          },
-        ],
-      },
-      projects: {
-        totalCount: 1,
-        edges: [
-          {
-            node: {
-              id: '1',
-              title: 'Je suis un project',
-            },
-          },
-        ],
-      },
-      isAdmin: true,
-    },
     users: {
       totalCount: 30,
     },

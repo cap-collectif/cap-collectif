@@ -55,3 +55,13 @@ Capco\AppBundle\Entity\EmailingCampaign:
         mailingInternal: null
         sendAt: null
         status: 'DRAFT'
+    CampaignToOrganization:
+        id: CampaignToOrganization
+        name: 'Campagne pour le projet avec organization'
+        senderEmail: 'assistance@cap-collectif.com'
+        senderName: 'orga'
+        owner: '@organization2'
+        creator: '@valerieMassonDelmotte'
+        project: '@rapportEvaluation'
+        status: 'DRAFT'
+        object: 'campagne orga'

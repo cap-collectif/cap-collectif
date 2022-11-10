@@ -9,6 +9,7 @@ InternalOrganization:
         - InternalProposalFormOwner
         - InternalQuestionnaireOwner
         - InternalMailingListOwner
+        - InternalEmailingCampaignOwner
     config:
         description: 'An organization.'
         name: Organization
@@ -21,6 +22,7 @@ InternalOrganization:
             - InternalProposalFormOwner
             - InternalQuestionnaireOwner
             - InternalMailingListOwner
+            - InternalEmailingCampaignOwner
         fields:
             id:
                 description: 'The ID of an object.'
@@ -109,4 +111,9 @@ InternalOrganization:
                 type: 'MailingListConnection!'
                 description: 'Get all mailingLists that the organization owns.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMailingListsResolver", [value, args])'
+                argsBuilder: 'Relay::ForwardConnection'
+            emailingCampaigns:
+                type: 'EmailingCampaignConnection!'
+                description: 'Get all emailing campaigns that the organization owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationEmailingCampaignsResolver", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'

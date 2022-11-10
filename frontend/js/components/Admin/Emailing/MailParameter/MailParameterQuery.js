@@ -21,9 +21,9 @@ const renderComponent = ({
 }) => {
   if (error) return graphqlError;
 
-  if (props && props.emailingCampaign) {
-    const { emailingCampaign } = props;
-    return <MailParameterPage emailingCampaign={emailingCampaign} query={props} />;
+  if (props?.emailingCampaign && props?.viewer) {
+    const { emailingCampaign, viewer } = props;
+    return <MailParameterPage emailingCampaign={emailingCampaign} query={props} viewer={viewer} />;
   }
 
   return <Loader />;
@@ -48,11 +48,14 @@ const MailParameterQuery = ({ id }: Props) => {
           $projectAffiliations: [ProjectAffiliation!]
         ) {
           ...MailParameterPage_query
-            @arguments(mlAffiliations: $mlAffiliations, projectAffiliations: $projectAffiliations)
           emailingCampaign: node(id: $emailingCampaignId) {
             ... on EmailingCampaign {
               ...MailParameterPage_emailingCampaign
             }
+          }
+          viewer {
+            ...MailParameterPage_viewer
+              @arguments(mlAffiliations: $mlAffiliations, projectAffiliations: $projectAffiliations)
           }
         }
       `}

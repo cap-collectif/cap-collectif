@@ -29,6 +29,9 @@ const listCampaign = ({
   props: ?EmailingCampaignPageQueryResponse,
   parameters: DashboardParameters,
 }) => {
+  const viewer = props?.viewer;
+  const organization = viewer?.organizations?.[0];
+
   return (
     <Skeleton
       isLoaded={!!props}
@@ -40,7 +43,7 @@ const listCampaign = ({
         />
       }>
       <PickableList.Provider>
-        <DashboardCampaign query={props} />
+        <DashboardCampaign viewer={viewer} emailingCampaignOwner={organization ?? viewer} />
       </PickableList.Provider>
     </Skeleton>
   );
@@ -93,15 +96,29 @@ export const EmailingCampaignPage = () => {
               $status: EmailingCampaignStatusFilter
               $affiliations: [EmailingCampaignAffiliation!]
             ) {
-              ...DashboardCampaign_query
-                @arguments(
-                  count: $count
-                  cursor: $cursor
-                  term: $term
-                  orderBy: $orderBy
-                  status: $status
-                  affiliations: $affiliations
-                )
+              viewer {
+                ...DashboardCampaign_viewer
+                ...DashboardCampaign_emailingCampaignOwner
+                  @arguments(
+                    count: $count
+                    cursor: $cursor
+                    term: $term
+                    orderBy: $orderBy
+                    status: $status
+                    affiliations: $affiliations
+                  )
+                organizations {
+                  ...DashboardCampaign_emailingCampaignOwner
+                    @arguments(
+                      count: $count
+                      cursor: $cursor
+                      term: $term
+                      orderBy: $orderBy
+                      status: $status
+                      affiliations: $affiliations
+                    )
+                }
+              }
             }
           `}
           variables={createQueryVariables(parameters, isAdmin)}

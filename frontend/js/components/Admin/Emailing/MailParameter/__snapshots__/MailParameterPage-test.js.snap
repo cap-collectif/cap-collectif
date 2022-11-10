@@ -61,6 +61,20 @@ exports[`<MailParameterPage /> should renders correctly 1`] = `
               "status": "DRAFT",
             }
           }
+          mailingListOwner={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "organizations": null,
+            }
+          }
+          projectOwner={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "organizations": null,
+            }
+          }
           query={
             Object {
               "$fragmentRefs": null,
@@ -218,6 +232,20 @@ exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
               "status": "SENT",
             }
           }
+          mailingListOwner={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "organizations": null,
+            }
+          }
+          projectOwner={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "organizations": null,
+            }
+          }
           query={
             Object {
               "$fragmentRefs": null,
@@ -373,6 +401,20 @@ exports[`<MailParameterPage /> should renders correctly with emailing group 1`] 
               "senderEmail": "captain.obious@cap-collectif.com",
               "senderName": "Captain Obvious",
               "status": "DRAFT",
+            }
+          }
+          mailingListOwner={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "organizations": null,
+            }
+          }
+          projectOwner={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "organizations": null,
             }
           }
           query={

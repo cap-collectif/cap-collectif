@@ -4,10 +4,12 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\EmailingCampaignAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method EmailingCampaign|null find($id, $lockMode = null, $lockVersion = null)
@@ -78,5 +80,57 @@ class EmailingCampaignRepository extends EntityRepository
             ->setParameter('group', $group)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function findByOwner(
+        Owner $owner,
+        int $offset,
+        int $limit,
+        ?string $status,
+        ?string $orderByField,
+        ?string $orderByDirection,
+        ?string $search
+    ): array {
+        $qb = $this->getByOwnerQueryBuilder($owner);
+        $qb->leftJoin('ec.mailingList', 'ml')->select('ec', 'ml');
+        if ($status) {
+            $qb->andWhere('ec.status = :status')->setParameter('status', $status);
+        } else {
+            $qb->andWhere('ec.status != :status')->setParameter('status', 'ARCHIVED');
+        }
+        if ($search) {
+            $qb->andWhere('ec.name LIKE :name')->setParameter('name', "%${search}%");
+        }
+        if ($orderByField && $orderByDirection) {
+            $qb->orderBy('ec.' . self::ORDERS[$orderByField], $orderByDirection);
+        }
+
+        return $qb
+            ->getQuery()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getResult();
+    }
+
+    public function countByOwner(Owner $owner, ?string $status = null): int
+    {
+        $qb = $this->getByOwnerQueryBuilder($owner)->select('count(ec.id)');
+
+        if ($status) {
+            $qb->andWhere('ec.status = :status')->setParameter('status', $status);
+        } else {
+            $qb->andWhere('ec.status != :status')->setParameter('status', 'ARCHIVED');
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    private function getByOwnerQueryBuilder(Owner $owner): QueryBuilder
+    {
+        $ownerField = $owner instanceof User ? 'ec.owner' : 'ec.organizationOwner';
+
+        return $this->createQueryBuilder('ec')
+            ->where("{$ownerField} = :owner")
+            ->setParameter('owner', $owner);
     }
 }

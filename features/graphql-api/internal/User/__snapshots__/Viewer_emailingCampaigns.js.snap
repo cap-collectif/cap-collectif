@@ -27,11 +27,16 @@ Object {
         },
         Object {
           "node": Object {
+            "name": "Campagne pour le projet avec organization",
+          },
+        },
+        Object {
+          "node": Object {
             "name": "Campagne pour le projet avec propriétaire",
           },
         },
       ],
-      "totalCount": 5,
+      "totalCount": 6,
     },
   },
 }

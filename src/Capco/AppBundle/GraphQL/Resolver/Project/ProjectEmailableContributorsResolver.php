@@ -16,7 +16,7 @@ class ProjectEmailableContributorsResolver implements ResolverInterface
     use ResolverTrait;
 
     private const SQL_FILTER_PROJECT = 'WHERE project_id = :projectId ';
-    private const SQL_FILTER_USER = 'WHERE confirmation_token IS NULL AND consent_internal_communication = :consent ';
+    private const SQL_FILTER_USER = 'WHERE u.confirmation_token IS NULL AND consent_internal_communication = :consent ';
     private const SQL_SELECT_USER = 'SELECT u.username, u.email, project_abstractstep.project_id, null as token ';
     private const SQL_FROM_PAS = 'FROM project_abstractstep ';
     private const SQL_JOIN_STEP =

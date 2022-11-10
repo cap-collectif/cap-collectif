@@ -21,16 +21,19 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     public const SEND_AT_SECURITY = 5 * 60;
 
     private FormFactoryInterface $formFactory;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
         AuthorizationCheckerInterface $authorizationChecker,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        GlobalIdResolver $globalIdResolver
     ) {
         parent::__construct($resolver, $entityManager, $authorizationChecker);
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -52,6 +55,17 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         }
 
         return compact('error', 'emailingCampaign');
+    }
+
+    public function isGranted(string $emailCampaignId, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        $emailCampaign = $this->globalIdResolver->resolve($emailCampaignId, $viewer);
+
+        return $this->authorizationChecker->isGranted(EmailingCampaignVoter::EDIT, $emailCampaign);
     }
 
     private function getCampaign(Argument $input, User $viewer): EmailingCampaign

@@ -8588,7 +8588,7 @@ enum OrderDirection {
 }
 
 """An organization."""
-type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwner & ProposalFormOwner & QuestionnaireOwner & MailingListOwner {
+type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwner & ProposalFormOwner & QuestionnaireOwner & MailingListOwner & EmailingCampaignOwner {
   """The ID of an object."""
   id: ID!
 
@@ -8788,6 +8788,32 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     """If provided, filter lists by name"""
     term: String
   ): MailingListConnection!
+
+  """Get all emailing campaigns that the organization owns."""
+  emailingCampaigns(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """optional filter by status"""
+    status: EmailingCampaignStatusFilter
+
+    """The ordering direction for sending date"""
+    orderBy: EmailingCampaignOrder = {field: SEND_AT, direction: DESC}
+
+    """
+    Array of viewer's affiliation options for mailing campaigns returned from the connection.
+    For example, OWNER will include only mailing lists that the current viewer owns.
+    """
+    affiliations: [EmailingCampaignAffiliation!]
+
+    """If provided, filter campaigns by name"""
+    term: String
+  ): EmailingCampaignConnection!
 
   """The organization's logo file"""
   logo: Media

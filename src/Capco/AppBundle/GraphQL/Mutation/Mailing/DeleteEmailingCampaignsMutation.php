@@ -4,13 +4,28 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\DeleteEmailingCampaignsErrorCode;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
 {
+    private GlobalIdResolver $globalIdResolver;
+
+    public function __construct(
+        GlobalIdResolver $resolver,
+        EntityManagerInterface $entityManager,
+        AuthorizationCheckerInterface $authorizationChecker,
+        GlobalIdResolver $globalIdResolver
+    ) {
+        parent::__construct($resolver, $entityManager, $authorizationChecker);
+        $this->globalIdResolver = $globalIdResolver;
+    }
+
     public function __invoke(Argument $input, User $viewer): array
     {
         $error = null;
@@ -36,6 +51,26 @@ class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
         }
 
         return compact('error', 'deletedIds', 'archivedIds');
+    }
+
+    public function isGranted(array $emailCampaignIds, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        foreach ($emailCampaignIds as $emailCampaignId) {
+            $emailCampaign = $this->globalIdResolver->resolve($emailCampaignId, $viewer);
+            $canDelete = $this->authorizationChecker->isGranted(
+                EmailingCampaignVoter::DELETE,
+                $emailCampaign
+            );
+            if (!$canDelete) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function freeMailingList(EmailingCampaign $campaign): void

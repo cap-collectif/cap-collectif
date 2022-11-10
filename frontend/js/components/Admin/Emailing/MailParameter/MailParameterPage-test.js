@@ -26,6 +26,11 @@ const baseProps = {
     sendAt: '2030-03-11 00:00:00',
     status: 'DRAFT',
   },
+  viewer: {
+    $refType,
+    $fragmentRefs,
+    organizations: null,
+  },
   query: {
     $refType,
     $fragmentRefs,

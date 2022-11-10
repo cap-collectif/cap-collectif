@@ -22,6 +22,8 @@ import select, { type Options } from '~/components/Form/Select';
 import { ModalGroupMembers } from '~/components/Admin/Emailing/ModalMembers/ModalGroupMembers';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import ModalProjectContributors from '~/components/Admin/Emailing/ModalMembers/ModalProjectContributors';
+import type { Parameter_projectOwner } from '~relay/Parameter_projectOwner.graphql';
+import type { Parameter_mailingListOwner } from '~relay/Parameter_mailingListOwner.graphql';
 
 export const DEFAULT_MAILING_LIST = ['REGISTERED', 'CONFIRMED', 'NOT_CONFIRMED'];
 
@@ -30,6 +32,8 @@ type Props = {|
   query: Parameter_query,
   disabled: boolean,
   showError: boolean,
+  projectOwner: Parameter_projectOwner,
+  mailingListOwner: Parameter_mailingListOwner,
 |};
 
 export const getWordingMailingInternal = (mailingInternal: string, intl: IntlShape) => {
@@ -45,10 +49,16 @@ export const getWordingMailingInternal = (mailingInternal: string, intl: IntlSha
   }
 };
 
-export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: Props) => {
+export const ParameterPage = ({
+  emailingCampaign,
+  query,
+  disabled,
+  showError,
+  mailingListOwner,
+  projectOwner,
+}: Props) => {
   const { mailingListFragment, mailingInternal, emailingGroup, project } = emailingCampaign;
   const {
-    viewer,
     users,
     usersConfirmed,
     usersNotConfirmed,
@@ -58,7 +68,8 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
     senderEmails,
     groups,
   } = query;
-  const { mailingLists, projects } = viewer;
+  const { mailingLists } = mailingListOwner;
+  const { projects } = projectOwner;
   const { user } = useSelector((state: GlobalState) => state.user);
   const emailingGroupEnabled = useFeatureFlag('beta__emailing_group');
   const isAdmin = user ? user.isAdmin : false;
@@ -384,32 +395,7 @@ export default createFragmentContainer(ParameterPage, {
     }
   `,
   query: graphql`
-    fragment Parameter_query on Query
-    @argumentDefinitions(
-      mlAffiliations: { type: "[MailingListAffiliation!]" }
-      projectAffiliations: { type: "[ProjectAffiliation!]" }
-    ) {
-      viewer {
-        mailingLists(affiliations: $mlAffiliations) {
-          totalCount
-          edges {
-            node {
-              id
-              name
-            }
-          }
-        }
-        projects(affiliations: $projectAffiliations) {
-          totalCount
-          edges {
-            node {
-              id
-              title
-            }
-          }
-        }
-        isAdmin
-      }
+    fragment Parameter_query on Query {
       users(first: 0) {
         totalCount
       }
@@ -441,6 +427,34 @@ export default createFragmentContainer(ParameterPage, {
         address
       }
       groups {
+        totalCount
+        edges {
+          node {
+            id
+            title
+          }
+        }
+      }
+    }
+  `,
+  mailingListOwner: graphql`
+    fragment Parameter_mailingListOwner on MailingListOwner
+    @argumentDefinitions(mlAffiliations: { type: "[MailingListAffiliation!]" }) {
+      mailingLists(affiliations: $mlAffiliations) {
+        totalCount
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    }
+  `,
+  projectOwner: graphql`
+    fragment Parameter_projectOwner on ProjectOwner
+    @argumentDefinitions(projectAffiliations: { type: "[ProjectAffiliation!]" }) {
+      projects(affiliations: $projectAffiliations) {
         totalCount
         edges {
           node {

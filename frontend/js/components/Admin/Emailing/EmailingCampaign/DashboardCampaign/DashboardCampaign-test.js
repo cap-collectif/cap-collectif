@@ -7,46 +7,56 @@ import { $refType, $fragmentRefs, relayPaginationMock } from '~/mocks';
 
 const baseProps = {
   relay: relayPaginationMock,
-  query: {
+  viewer: {
     $refType,
-    viewer: {
-      isOnlyProjectAdmin: false,
-      campaigns: {
-        totalCount: 2,
-        pageInfo: {
-          hasNextPage: false,
+    id: 'viewerId',
+    isOnlyProjectAdmin: false,
+    isAdminOrganization: false,
+    organizations: null,
+  },
+  emailingCampaignOwner: {
+    $refType,
+    campaigns: {
+      totalCount: 2,
+      pageInfo: {
+        hasNextPage: false,
+      },
+      edges: [
+        {
+          node: {
+            $fragmentRefs,
+            id: '1',
+            status: 'SENT',
+            creator: {
+              id: 'viewerId',
+            },
+          },
+          cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==',
         },
-        edges: [
-          {
-            node: {
-              $fragmentRefs,
-              id: '1',
-              status: 'SENT',
+        {
+          node: {
+            $fragmentRefs,
+            id: '1',
+            status: 'DRAFT',
+            creator: {
+              id: 'viewerId',
             },
-            cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==',
           },
-          {
-            node: {
-              $fragmentRefs,
-              id: '1',
-              status: 'DRAFT',
-            },
-            cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI8fQ==',
-          },
-        ],
-      },
-      campaignsAll: {
-        totalCount: 4,
-      },
-      campaignsSent: {
-        totalCount: 1,
-      },
-      campaignsDraft: {
-        totalCount: 2,
-      },
-      campaignsPlanned: {
-        totalCount: 1,
-      },
+          cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI8fQ==',
+        },
+      ],
+    },
+    campaignsAll: {
+      totalCount: 4,
+    },
+    campaignsSent: {
+      totalCount: 1,
+    },
+    campaignsDraft: {
+      totalCount: 2,
+    },
+    campaignsPlanned: {
+      totalCount: 1,
     },
   },
 };
@@ -55,29 +65,26 @@ const props = {
   basic: baseProps,
   noCampaigns: {
     ...baseProps,
-    query: {
-      ...baseProps.query,
-      viewer: {
-        isOnlyProjectAdmin: false,
-        campaigns: {
-          totalCount: 2,
-          pageInfo: {
-            hasNextPage: false,
-          },
-          edges: [],
+    emailingCampaignOwner: {
+      $refType,
+      campaigns: {
+        totalCount: 2,
+        pageInfo: {
+          hasNextPage: false,
         },
-        campaignsAll: {
-          totalCount: 0,
-        },
-        campaignsSent: {
-          totalCount: 0,
-        },
-        campaignsDraft: {
-          totalCount: 0,
-        },
-        campaignsPlanned: {
-          totalCount: 0,
-        },
+        edges: [],
+      },
+      campaignsAll: {
+        totalCount: 0,
+      },
+      campaignsSent: {
+        totalCount: 0,
+      },
+      campaignsDraft: {
+        totalCount: 0,
+      },
+      campaignsPlanned: {
+        totalCount: 0,
       },
     },
   },

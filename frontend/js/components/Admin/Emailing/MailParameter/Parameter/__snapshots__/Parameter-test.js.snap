@@ -275,6 +275,44 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
                 "senderEmail": "assistance@cap-collectif.com",
               }
             }
+            mailingListOwner={
+              Object {
+                "$refType": null,
+                "mailingLists": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "id": "1",
+                        "name": "Je suis une mailingList",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "id": "2",
+                        "name": "Je suis une mailingList aussi",
+                      },
+                    },
+                  ],
+                  "totalCount": 2,
+                },
+              }
+            }
+            projectOwner={
+              Object {
+                "$refType": null,
+                "projects": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "id": "1",
+                        "title": "Je suis un project",
+                      },
+                    },
+                  ],
+                  "totalCount": 1,
+                },
+              }
+            }
             query={
               Object {
                 "$refType": null,
@@ -322,37 +360,6 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
                 },
                 "usersRefusing": Object {
                   "totalCount": 3,
-                },
-                "viewer": Object {
-                  "isAdmin": true,
-                  "mailingLists": Object {
-                    "edges": Array [
-                      Object {
-                        "node": Object {
-                          "id": "1",
-                          "name": "Je suis une mailingList",
-                        },
-                      },
-                      Object {
-                        "node": Object {
-                          "id": "2",
-                          "name": "Je suis une mailingList aussi",
-                        },
-                      },
-                    ],
-                    "totalCount": 2,
-                  },
-                  "projects": Object {
-                    "edges": Array [
-                      Object {
-                        "node": Object {
-                          "id": "1",
-                          "title": "Je suis un project",
-                        },
-                      },
-                    ],
-                    "totalCount": 1,
-                  },
                 },
               }
             }
@@ -640,6 +647,44 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
                 "senderEmail": "assistance@cap-collectif.com",
               }
             }
+            mailingListOwner={
+              Object {
+                "$refType": null,
+                "mailingLists": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "id": "1",
+                        "name": "Je suis une mailingList",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "id": "2",
+                        "name": "Je suis une mailingList aussi",
+                      },
+                    },
+                  ],
+                  "totalCount": 2,
+                },
+              }
+            }
+            projectOwner={
+              Object {
+                "$refType": null,
+                "projects": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "id": "1",
+                        "title": "Je suis un project",
+                      },
+                    },
+                  ],
+                  "totalCount": 1,
+                },
+              }
+            }
             query={
               Object {
                 "$refType": null,
@@ -687,37 +732,6 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
                 },
                 "usersRefusing": Object {
                   "totalCount": 3,
-                },
-                "viewer": Object {
-                  "isAdmin": true,
-                  "mailingLists": Object {
-                    "edges": Array [
-                      Object {
-                        "node": Object {
-                          "id": "1",
-                          "name": "Je suis une mailingList",
-                        },
-                      },
-                      Object {
-                        "node": Object {
-                          "id": "2",
-                          "name": "Je suis une mailingList aussi",
-                        },
-                      },
-                    ],
-                    "totalCount": 2,
-                  },
-                  "projects": Object {
-                    "edges": Array [
-                      Object {
-                        "node": Object {
-                          "id": "1",
-                          "title": "Je suis un project",
-                        },
-                      },
-                    ],
-                    "totalCount": 1,
-                  },
                 },
               }
             }
@@ -1005,6 +1019,44 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
                 "senderEmail": "assistance@cap-collectif.com",
               }
             }
+            mailingListOwner={
+              Object {
+                "$refType": null,
+                "mailingLists": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "id": "1",
+                        "name": "Je suis une mailingList",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "id": "2",
+                        "name": "Je suis une mailingList aussi",
+                      },
+                    },
+                  ],
+                  "totalCount": 2,
+                },
+              }
+            }
+            projectOwner={
+              Object {
+                "$refType": null,
+                "projects": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "id": "1",
+                        "title": "Je suis un project",
+                      },
+                    },
+                  ],
+                  "totalCount": 1,
+                },
+              }
+            }
             query={
               Object {
                 "$refType": null,
@@ -1052,37 +1104,6 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
                 },
                 "usersRefusing": Object {
                   "totalCount": 3,
-                },
-                "viewer": Object {
-                  "isAdmin": true,
-                  "mailingLists": Object {
-                    "edges": Array [
-                      Object {
-                        "node": Object {
-                          "id": "1",
-                          "name": "Je suis une mailingList",
-                        },
-                      },
-                      Object {
-                        "node": Object {
-                          "id": "2",
-                          "name": "Je suis une mailingList aussi",
-                        },
-                      },
-                    ],
-                    "totalCount": 2,
-                  },
-                  "projects": Object {
-                    "edges": Array [
-                      Object {
-                        "node": Object {
-                          "id": "1",
-                          "title": "Je suis un project",
-                        },
-                      },
-                    ],
-                    "totalCount": 1,
-                  },
                 },
               }
             }
@@ -1370,6 +1391,44 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
                 "senderEmail": "assistance@cap-collectif.com",
               }
             }
+            mailingListOwner={
+              Object {
+                "$refType": null,
+                "mailingLists": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "id": "1",
+                        "name": "Je suis une mailingList",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "id": "2",
+                        "name": "Je suis une mailingList aussi",
+                      },
+                    },
+                  ],
+                  "totalCount": 2,
+                },
+              }
+            }
+            projectOwner={
+              Object {
+                "$refType": null,
+                "projects": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "id": "1",
+                        "title": "Je suis un project",
+                      },
+                    },
+                  ],
+                  "totalCount": 1,
+                },
+              }
+            }
             query={
               Object {
                 "$refType": null,
@@ -1417,37 +1476,6 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
                 },
                 "usersRefusing": Object {
                   "totalCount": 3,
-                },
-                "viewer": Object {
-                  "isAdmin": true,
-                  "mailingLists": Object {
-                    "edges": Array [
-                      Object {
-                        "node": Object {
-                          "id": "1",
-                          "name": "Je suis une mailingList",
-                        },
-                      },
-                      Object {
-                        "node": Object {
-                          "id": "2",
-                          "name": "Je suis une mailingList aussi",
-                        },
-                      },
-                    ],
-                    "totalCount": 2,
-                  },
-                  "projects": Object {
-                    "edges": Array [
-                      Object {
-                        "node": Object {
-                          "id": "1",
-                          "title": "Je suis un project",
-                        },
-                      },
-                    ],
-                    "totalCount": 1,
-                  },
                 },
               }
             }

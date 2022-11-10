@@ -41,7 +41,7 @@ Scenario: GraphQL client wants to get all campaigns
   {
     "data": {
       "emailingCampaigns": {
-        "totalCount": 5,
+        "totalCount": 6,
         "edges":[
           {
             "node": {
@@ -134,7 +134,7 @@ Scenario: GraphQL client wants to sort campaigns by sendDate
   {
      "data":{
         "emailingCampaigns":{
-           "totalCount":5,
+           "totalCount":6,
            "edges":[
               {
                  "node":{

@@ -93,15 +93,7 @@ Scenario: GraphQL project owner tries to delete a draft campaign
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "deleteEmailingCampaigns": {
-        "error": "ID_NOT_FOUND",
-        "archivedIds": [],
-        "deletedIds": []
-      }
-    }
-  }
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"deleteEmailingCampaigns":null}}
   """
 
 Scenario: GraphQL admin gives wrong id for deleting
@@ -129,15 +121,7 @@ Scenario: GraphQL admin gives wrong id for deleting
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "deleteEmailingCampaigns": {
-        "error": "ID_NOT_FOUND",
-        "archivedIds": [],
-        "deletedIds": []
-      }
-    }
-  }
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"deleteEmailingCampaigns":null}}
   """
 
 @database

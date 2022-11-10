@@ -27,6 +27,7 @@ import SendEmailingCampaignMutation from '~/mutations/SendEmailingCampaignMutati
 import stripHtml from '~/utils/stripHtml';
 import { DATE_ISO8601_FORMAT } from '~/shared/date';
 import { fromGlobalId } from '~/utils/fromGlobalId';
+import type { MailParameterPage_viewer } from '~relay/MailParameterPage_viewer.graphql';
 
 const REGISTER_FIELDS = [
   'title',
@@ -55,6 +56,7 @@ type Props = {|
   ...ReduxFormFormProps,
   +emailingCampaign: MailParameterPage_emailingCampaign,
   +query: MailParameterPage_query,
+  +viewer: MailParameterPage_viewer,
   +dispatch: Dispatch,
   +registeredFieldsName: string[],
 |};
@@ -272,11 +274,13 @@ export const MailParameterPage = ({
   invalid,
   dispatch,
   registeredFieldsName,
+  viewer,
 }: Props) => {
   const baseNameUrl = `/admin/mailingCampaign/edit/${emailingCampaign.id}`;
   const formDisabled = emailingCampaign.status === 'SENT' || emailingCampaign.status === 'PLANNED';
   const showError: boolean = invalid && submitFailed;
   const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const organization = viewer?.organizations?.[0];
 
   React.useEffect(() => {
     /**
@@ -315,6 +319,8 @@ export const MailParameterPage = ({
             <ParameterPage
               emailingCampaign={emailingCampaign}
               query={query}
+              mailingListOwner={organization ?? viewer}
+              projectOwner={organization ?? viewer}
               disabled={formDisabled}
               showError={showError}
             />
@@ -403,13 +409,22 @@ export default createFragmentContainer(MailParameterPageConnected, {
     }
   `,
   query: graphql`
-    fragment MailParameterPage_query on Query
+    fragment MailParameterPage_query on Query {
+      ...Parameter_query
+    }
+  `,
+  viewer: graphql`
+    fragment MailParameterPage_viewer on User
     @argumentDefinitions(
       mlAffiliations: { type: "[MailingListAffiliation!]" }
       projectAffiliations: { type: "[ProjectAffiliation!]" }
     ) {
-      ...Parameter_query
-        @arguments(mlAffiliations: $mlAffiliations, projectAffiliations: $projectAffiliations)
+      ...Parameter_mailingListOwner @arguments(mlAffiliations: $mlAffiliations)
+      ...Parameter_projectOwner @arguments(projectAffiliations: $projectAffiliations)
+      organizations {
+        ...Parameter_mailingListOwner @arguments(mlAffiliations: $mlAffiliations)
+        ...Parameter_projectOwner @arguments(projectAffiliations: $projectAffiliations)
+      }
     }
   `,
 });
