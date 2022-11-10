@@ -106,11 +106,15 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
             {
                 input,
                 connections: [
-                    ConnectionHandler.getConnectionID(viewer.id, 'ProjectList_projects', {
-                        query: term || null,
-                        affiliations: viewer.isAdmin ? null : ['OWNER'],
-                        orderBy: { field: 'PUBLISHED_AT', direction: orderBy },
-                    }),
+                    ConnectionHandler.getConnectionID(
+                        values.owner ?? viewer.id,
+                        'ProjectList_projects',
+                        {
+                            query: term || null,
+                            affiliations: viewer.isAdmin ? null : ['OWNER'],
+                            orderBy: { field: 'PUBLISHED_AT', direction: orderBy },
+                        },
+                    ),
                 ],
             },
             viewer.isAdmin,

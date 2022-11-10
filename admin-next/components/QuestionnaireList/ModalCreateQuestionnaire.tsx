@@ -23,16 +23,16 @@ import type { QuestionnaireType } from '@relay/CreateQuestionnaireMutation.graph
 const formName = 'form-create-questionnaire';
 
 type ModalCreateQuestionnaireProps = {
-    orderBy: string,
-    term: string,
-    hasQuestionnaire: boolean,
-    noResult?: boolean,
-    viewer: ModalCreateQuestionnaire_viewer$key,
+    orderBy: string;
+    term: string;
+    hasQuestionnaire: boolean;
+    noResult?: boolean;
+    viewer: ModalCreateQuestionnaire_viewer$key;
 };
 
 type FormValues = {
-    title: string,
-    type: MultipleRadioValue,
+    title: string;
+    type: MultipleRadioValue;
 };
 
 const FRAGMENT = graphql`
@@ -41,6 +41,8 @@ const FRAGMENT = graphql`
         id
         username
         organizations {
+            __typename
+            username
             id
         }
     }
@@ -65,16 +67,23 @@ const ModalCreateQuestionnaire: React.FC<ModalCreateQuestionnaireProps> = ({
         },
     };
 
-    const { handleSubmit, control, formState: { isSubmitting }, reset } = useForm<FormValues>({
+    const {
+        handleSubmit,
+        control,
+        formState: { isSubmitting },
+        reset,
+    } = useForm<FormValues>({
         mode: 'onChange',
         defaultValues: initialValues,
     });
 
     const onSubmit = (values: FormValues) => {
+        const owner = organization ?? viewer;
+
         const input = {
             type: (values.type.labels[0] as QuestionnaireType) || 'QUESTIONNAIRE',
             title: values.title,
-            owner: organization?.id,
+            owner: owner?.id,
         };
 
         return CreateQuestionnaireMutation.commit(
@@ -82,7 +91,7 @@ const ModalCreateQuestionnaire: React.FC<ModalCreateQuestionnaireProps> = ({
                 input,
                 connections: [
                     ConnectionHandler.getConnectionID(
-                        viewer.id,
+                        owner?.id,
                         'QuestionnaireList_questionnaires',
                         {
                             query: term || null,
@@ -93,6 +102,7 @@ const ModalCreateQuestionnaire: React.FC<ModalCreateQuestionnaireProps> = ({
                 ],
             },
             viewerSession.isAdmin,
+            owner,
             viewer,
             hasQuestionnaire,
         ).then(response => {
@@ -127,7 +137,7 @@ const ModalCreateQuestionnaire: React.FC<ModalCreateQuestionnaireProps> = ({
                 </Button>
             }
             onOpen={() => {
-                reset(initialValues)
+                reset(initialValues);
             }}
             size={CapUIModalSize.Md}
             ariaLabel={intl.formatMessage({ id: 'create-questionnaire' })}>

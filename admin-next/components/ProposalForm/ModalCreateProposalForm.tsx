@@ -39,7 +39,9 @@ const FRAGMENT = graphql`
         id
         username
         organizations {
+            __typename
             id
+            username
         }
     }
 `;
@@ -54,7 +56,6 @@ const ModalCreateProposalForm: React.FC<ModalCreateProposalFormProps> = ({
     const intl = useIntl();
     const { viewerSession } = useAppContext();
     const viewer = useFragment<ModalCreateProposalForm_viewer$key>(FRAGMENT, viewerFragment);
-    const organization = viewer?.organizations?.[0];
 
     const initialValues: FormValues = {
         title: '',
@@ -68,16 +69,18 @@ const ModalCreateProposalForm: React.FC<ModalCreateProposalFormProps> = ({
     const { isSubmitting, isValid } = formState;
 
     const onSubmit = (values: FormValues) => {
+        const owner = viewer?.organizations?.[0] ?? viewer;
+
         const input = {
             title: values.title,
-            owner: organization?.id,
+            owner: owner.id,
         };
 
         return CreateProposalFormMutation.commit(
             {
                 input,
                 connections: [
-                    ConnectionHandler.getConnectionID(viewer.id, 'ProposalFormList_proposalForms', {
+                    ConnectionHandler.getConnectionID(owner.id, 'ProposalFormList_proposalForms', {
                         query: term || null,
                         affiliations: viewerSession.isAdmin ? null : ['OWNER'],
                         orderBy: { field: 'CREATED_AT', direction: orderBy },
@@ -85,6 +88,7 @@ const ModalCreateProposalForm: React.FC<ModalCreateProposalFormProps> = ({
                 ],
             },
             viewerSession.isAdmin,
+            owner,
             viewer,
             hasProposalForm,
         ).then(response => {
