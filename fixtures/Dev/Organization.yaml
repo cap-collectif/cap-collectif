@@ -13,3 +13,8 @@ Capco\AppBundle\Entity\Organization\Organization:
         id: 'organizationWithoutMembers'
         email: "nomembers@nothing.com"
         createdAt: <(new \DateTime('2022-08-01 00:00:00'))>
+    organizationDeleted:
+        id: 'organizationDeleted'
+        email: "organization@deleted.com"
+        createdAt: <(new \DateTime('2022-08-01 00:00:00'))>
+        deletedAt: <(new \DateTime('2022-09-01 00:00:00'))>

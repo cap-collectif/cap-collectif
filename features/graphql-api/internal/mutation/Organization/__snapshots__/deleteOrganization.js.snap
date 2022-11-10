@@ -5,16 +5,39 @@ Object {
   "deleteOrganization": Object {
     "deletedOrganization": Object {
       "banner": null,
-      "body": "Organisation supprimée",
+      "body": "",
       "logo": null,
       "members": Object {
         "edges": Array [],
       },
-      "slug": "organisation-supprimee",
+      "pendingOrganizationInvitations": Object {
+        "totalCount": 0,
+      },
+      "projects": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "archived": true,
+              "title": "Rapport d'évaluation 6 (AR6)",
+              "visibility": "ADMIN",
+            },
+          },
+        ],
+      },
+      "slug": "deleted-organization-1",
       "socialNetworks": null,
-      "title": "Organisation supprimée",
+      "title": "deleted-organization 1",
     },
     "errorCode": null,
+  },
+}
+`;
+
+exports[`mutations.updateOrganization should return ORGANIZATION_ALREADY_ANONYMIZED errorCode 1`] = `
+Object {
+  "deleteOrganization": Object {
+    "deletedOrganization": null,
+    "errorCode": "ORGANIZATION_ALREADY_ANONYMIZED",
   },
 }
 `;

@@ -276,19 +276,6 @@ class Organization implements
         return true;
     }
 
-    public function remove(): void
-    {
-        $this->removeMembers();
-        $this->setTitle('Organisation supprimée')
-            ->setBody('Organisation supprimée')
-            ->setSlug('organisation-supprimee')
-            ->setEmail('')
-            ->setDeletedAt(new \DateTime())
-            ->setLogo(null)
-            ->setBanner(null)
-            ->setOrganizationSocialNetworks(null);
-    }
-
     public function getUserAdmin(): ?User
     {
         /** @var OrganizationMember $member */
@@ -301,10 +288,15 @@ class Organization implements
         return null;
     }
 
-    private function removeMembers(): void
+    public function removeMembers(): void
     {
         foreach ($this->getMembers() as $member) {
             $this->removeMember($member);
         }
+    }
+
+    public function isDeleted(): bool
+    {
+        return $this->deletedAt !== null;
     }
 }

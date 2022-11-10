@@ -7,3 +7,6 @@ DeleteOrganizationErrorCode:
             ORGANIZATION_NOT_FOUND:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\DeleteOrganizationMutation::ORGANIZATION_NOT_FOUND")'
                 description: 'No `Organization` match your `organizationId`.'
+            ORGANIZATION_ALREADY_ANONYMIZED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\DeleteOrganizationMutation::ORGANIZATION_ALREADY_ANONYMIZED")'
+                description: 'The given organization has already been anonymized.'

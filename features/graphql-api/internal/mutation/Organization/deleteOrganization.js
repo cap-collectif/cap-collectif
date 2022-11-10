@@ -31,6 +31,18 @@ const DeleteOrganization = /* GraphQL*/ `
           linkedInUrl
           instagramUrl
         }
+        projects {
+          edges {
+            node {
+              title
+              archived
+              visibility
+            }
+          }
+        }
+        pendingOrganizationInvitations {
+          totalCount
+        }
       }
       errorCode
     }
@@ -38,7 +50,7 @@ const DeleteOrganization = /* GraphQL*/ `
 `;
 
 const input = {
-  "organizationId": global.toGlobalId('Organization', 'organization1'),
+  "organizationId": global.toGlobalId('Organization', 'organization2'),
 }
 
 describe('mutations.updateOrganization', () => {
@@ -61,6 +73,18 @@ describe('mutations.updateOrganization', () => {
       {
         input: {
           organizationId: "abc"
+        }
+      },
+      'internal_admin',
+    );
+    expect(response).toMatchSnapshot();
+  });
+  it('should return ORGANIZATION_ALREADY_ANONYMIZED errorCode', async () => {
+    const response = await graphql(
+      DeleteOrganization,
+      {
+        input: {
+          organizationId: toGlobalId('Organization', 'organizationDeleted')
         }
       },
       'internal_admin',

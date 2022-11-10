@@ -5199,6 +5199,9 @@ type DeleteOpinionPayload {
 enum DeleteOrganizationErrorCode {
   """No `Organization` match your `organizationId`."""
   ORGANIZATION_NOT_FOUND
+
+  """The given organization has already been anonymized."""
+  ORGANIZATION_ALREADY_ANONYMIZED
 }
 
 input DeleteOrganizationInput {

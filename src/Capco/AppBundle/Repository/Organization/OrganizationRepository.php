@@ -8,6 +8,8 @@ use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Enum\OrganizationAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr;
 
 /**
@@ -90,5 +92,13 @@ class OrganizationRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function countDeletedOrganization(): int
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->where('o.deletedAt IS NOT NULL');
+        return (int) $qb->getQuery()->getSingleScalarResult() ?? 0;
     }
 }
