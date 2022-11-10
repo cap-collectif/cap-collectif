@@ -603,7 +603,18 @@ class ImportProposalsFromCsv
     private function getMedia(?string $url, $dryRun = false): ?Media
     {
         if ($url && filter_var($url, \FILTER_VALIDATE_URL)) {
-            $mediaBinaryFile = @file_get_contents($url);
+            $arrContextOptions = [
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                ],
+            ];
+
+            $mediaBinaryFile = @file_get_contents(
+                $url,
+                false,
+                stream_context_create($arrContextOptions)
+            );
             if (!$mediaBinaryFile) {
                 $this->logger->error('Error on get file ' . $url);
 
