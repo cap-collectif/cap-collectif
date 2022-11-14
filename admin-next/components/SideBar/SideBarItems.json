@@ -194,7 +194,7 @@
     {
         "id": "organizations",
         "title": "admin.label.organizations",
-        "icon": "PIE_CHART",
+        "icon": "ORGANIZATION",
         "featuresRequired": ["unstable__organizations"],
         "rolesRequired": [],
         "href": "/admin-next/organizations",

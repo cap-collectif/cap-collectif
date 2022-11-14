@@ -4,15 +4,7 @@ import '../../../_setup';
 const KickFromOrganization = /* GraphQL */ `
   mutation KickFromOrganization($input: KickFromOrganizationInput!) {
     kickFromOrganization(input: $input) {
-      user {
-        id
-      }
-      organization {
-        id
-        members {
-          totalCount
-        }
-      }
+      deletedMemberShipId
       errorCode
     }
   }
@@ -43,8 +35,7 @@ describe('Internal|kickFromOrganization mutation', () => {
       },
       'internal_super_admin',
     );
-    expect(response.kickFromOrganization.organization).toBeNull();
-    expect(response.kickFromOrganization.user).toBeNull();
+    expect(response.kickFromOrganization.deletedMemberShipId).toBeNull();
     expect(response.kickFromOrganization.errorCode).toBe("ORGANIZATION_NOT_FOUND");
   });
 
@@ -60,8 +51,7 @@ describe('Internal|kickFromOrganization mutation', () => {
       },
       'internal_user',
     );
-    expect(response.kickFromOrganization.organization).toBeNull();
-    expect(response.kickFromOrganization.user).toBeNull();
+    expect(response.kickFromOrganization.deletedMemberShipId).toBeNull();
     expect(response.kickFromOrganization.errorCode).toBe("ORGANIZATION_NOT_FOUND");
   });
 
@@ -79,8 +69,7 @@ describe('Internal|kickFromOrganization mutation', () => {
       'internal_super_admin',
     );
 
-    expect(response.kickFromOrganization.organization).toBeNull();
-    expect(response.kickFromOrganization.user).toBeNull();
+    expect(response.kickFromOrganization.deletedMemberShipId).toBeNull();
     expect(response.kickFromOrganization.errorCode).toBe("USER_NOT_MEMBER");
   });
 
@@ -98,8 +87,7 @@ describe('Internal|kickFromOrganization mutation', () => {
       'internal_super_admin',
     );
 
-    expect(response.kickFromOrganization.organization).toBeNull();
-    expect(response.kickFromOrganization.user).toBeNull();
+    expect(response.kickFromOrganization.deletedMemberShipId).toBeNull();
     expect(response.kickFromOrganization.errorCode).toBe("USER_NOT_MEMBER");
   });
 
@@ -127,9 +115,7 @@ describe('Internal|kickFromOrganization mutation', () => {
       'internal_super_admin',
     );
 
-    expect(response.kickFromOrganization.organization.id).toBe(organizationId);
-    expect(response.kickFromOrganization.organization.members.totalCount).toBe(expectedCount);
-    expect(response.kickFromOrganization.user.id).toBe(userId);
+    expect(response.kickFromOrganization.deletedMemberShipId).not.toBe(null);
     expect(response.kickFromOrganization.errorCode).toBeNull();
 
     const checkAfter = await graphql(
@@ -166,9 +152,7 @@ describe('Internal|kickFromOrganization mutation', () => {
       'internal_super_admin',
     );
 
-    expect(response.kickFromOrganization.organization.id).toBe(organizationId);
-    expect(response.kickFromOrganization.organization.members.totalCount).toBe(expectedCount);
-    expect(response.kickFromOrganization.user.id).toBe(userId);
+    expect(response.kickFromOrganization.deletedMemberShipId).not.toBe(null);
     expect(response.kickFromOrganization.errorCode).toBeNull();
 
     const checkAfter = await graphql(

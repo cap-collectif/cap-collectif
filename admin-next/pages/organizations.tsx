@@ -29,7 +29,7 @@ const OrganizationPage: React.FC<OrganizationPageProps> = () => {
                     </Text>
                 </Flex>
 
-                <Flex direction="row">
+                <Flex direction="row" wrap="wrap">
                     <CreateOrganizationButton />
                     <OrganizationList />
                 </Flex>

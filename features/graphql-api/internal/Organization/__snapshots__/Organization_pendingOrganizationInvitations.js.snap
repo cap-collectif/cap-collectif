@@ -12,7 +12,7 @@ Object {
             "organization": Object {
               "title": "Communauté de commune de Parthenay",
             },
-            "role": "user",
+            "role": "USER",
             "user": Object {
               "email": "maxime.auriau@cap-collectif.com",
             },
@@ -24,7 +24,7 @@ Object {
             "organization": Object {
               "title": "Communauté de commune de Parthenay",
             },
-            "role": "admin",
+            "role": "ADMIN",
             "user": Object {
               "email": "msantostefano@cap-collectif.com",
             },
@@ -49,7 +49,7 @@ Object {
             "organization": Object {
               "title": "GIEC",
             },
-            "role": "user",
+            "role": "USER",
             "user": null,
           },
         },

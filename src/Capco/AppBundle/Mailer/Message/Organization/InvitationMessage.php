@@ -20,7 +20,6 @@ final class InvitationMessage extends AbstractExternalMessage
             'invitationUrl' => $params['invitationUrl'],
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
-            'adminName' => $params['adminName'],
             'plateformName' => $params['plateformName'],
             'siteUrl' => $params['siteURL'],
         ];
@@ -44,7 +43,6 @@ final class InvitationMessage extends AbstractExternalMessage
             'siteName' => 'capco',
             'invitationUrl' => 'https://capco.dev/invitation/organization/token2',
             'baseUrl' => 'https://capco.dev',
-            'adminName' => 'Sylvain de la conception',
             'user_locale' => 'fr_FR',
         ];
     }

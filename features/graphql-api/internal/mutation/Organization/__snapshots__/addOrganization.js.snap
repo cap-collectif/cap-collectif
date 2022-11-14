@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addOrganization admin should be able to add organization 1`] = `
+Object {
+  "addOrganization": Object {
+    "organization": Object {
+      "body": "Description",
+      "title": "Titre organization",
+    },
+  },
+}
+`;

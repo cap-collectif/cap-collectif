@@ -27,7 +27,6 @@ final class UserInviteNewInvitationByOrganization extends AbstractExternalMessag
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
             'platformName' => $params['platformName'],
-            'adminName' => $params['adminName'],
             'siteUrl' => $params['siteURL'],
         ];
     }

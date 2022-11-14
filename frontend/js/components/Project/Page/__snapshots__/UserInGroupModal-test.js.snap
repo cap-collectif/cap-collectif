@@ -58,6 +58,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
           <button
             className="sc-bdvvtL bFJghn"
             onClick={[Function]}
+            type="button"
           >
             <svg
               className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
@@ -197,6 +198,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
           <button
             className="sc-bdvvtL bFJghn"
             onClick={[Function]}
+            type="button"
           >
             <svg
               className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
@@ -336,6 +338,7 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
           <button
             className="sc-bdvvtL bFJghn"
             onClick={[Function]}
+            type="button"
           >
             <svg
               className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"

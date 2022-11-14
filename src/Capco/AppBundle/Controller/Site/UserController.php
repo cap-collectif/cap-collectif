@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -19,6 +18,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserController extends AbstractController
 {
@@ -29,6 +29,7 @@ class UserController extends AbstractController
     private Manager $toggleManager;
     private RouterInterface $router;
     private LoggerInterface $logger;
+    private TranslatorInterface $translator;
 
     public function __construct(
         UserInviteRepository $userInviteRepository,
@@ -37,7 +38,8 @@ class UserController extends AbstractController
         EntityManagerInterface $em,
         Manager $toggleManager,
         RouterInterface $router,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        TranslatorInterface $translator
     ) {
         $this->userInviteRepository = $userInviteRepository;
         $this->userRepository = $userRepository;
@@ -46,6 +48,7 @@ class UserController extends AbstractController
         $this->toggleManager = $toggleManager;
         $this->router = $router;
         $this->logger = $logger;
+        $this->translator = $translator;
     }
 
     /**
@@ -105,6 +108,9 @@ class UserController extends AbstractController
         if ($invitation) {
             return $invitation;
         }
+
+        $this->logger->error("Invitation matching token : {$token} not found.");
+        $this->addFlash('danger', $this->translator->trans('invalid-token', [], 'CapcoAppBundle'));
 
         throw new UserError('invitation not found : ' . $token);
     }

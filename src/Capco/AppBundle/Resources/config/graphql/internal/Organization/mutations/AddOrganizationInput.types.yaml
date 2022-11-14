@@ -3,6 +3,5 @@ AddOrganizationInput:
     config:
         description: 'Input type of AddOrganization'
         fields:
-            title:
-                type: 'String'
-                description: 'The title of the new organization.'
+            translations:
+                type: '[InternalUpdateOrganizationTranslationInput!]'

@@ -56,6 +56,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
           <button
             className="sc-bdvvtL bFJghn"
             onClick={[Function]}
+            type="button"
           >
             <svg
               className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
@@ -213,6 +214,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
           <button
             className="sc-bdvvtL bFJghn"
             onClick={[Function]}
+            type="button"
           >
             <svg
               className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
@@ -370,6 +372,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
           <button
             className="sc-bdvvtL bFJghn"
             onClick={[Function]}
+            type="button"
           >
             <svg
               className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"

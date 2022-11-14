@@ -5,6 +5,7 @@ import ModalOpenIDConfiguration from './SSOList/OpenID/ModalOpenIDConfiguration'
 import ModalCasConfiguration from './SSOList/CAS/ModalCasConfiguration';
 import { useIntl } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
+import { AddSSO_query$key } from '@relay/AddSSO_query.graphql';
 
 type AddSSOProps = {
     query: AddSSO_query$key;

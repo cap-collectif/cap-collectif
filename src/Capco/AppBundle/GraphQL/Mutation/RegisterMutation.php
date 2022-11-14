@@ -13,6 +13,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Handler\UserInvitationHandler;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -44,6 +45,7 @@ class RegisterMutation implements MutationInterface
     private ResponsesFormatter $responsesFormatter;
     private UserInvitationHandler $userInvitationHandler;
     private PendingOrganizationInvitationRepository $organizationInvitationRepository;
+    private EntityManagerInterface $em;
 
     public function __construct(
         Manager $toggleManager,
@@ -56,7 +58,8 @@ class RegisterMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         ResponsesFormatter $responsesFormatter,
         UserInvitationHandler $userInvitationHandler,
-        PendingOrganizationInvitationRepository $organizationInvitationRepository
+        PendingOrganizationInvitationRepository $organizationInvitationRepository,
+        EntityManagerInterface $em
     ) {
         $this->toggleManager = $toggleManager;
         $this->userInviteRepository = $userInviteRepository;
@@ -69,6 +72,7 @@ class RegisterMutation implements MutationInterface
         $this->responsesFormatter = $responsesFormatter;
         $this->userInvitationHandler = $userInvitationHandler;
         $this->organizationInvitationRepository = $organizationInvitationRepository;
+        $this->em = $em;
     }
 
     public function __invoke(Argument $args): array
@@ -143,8 +147,10 @@ class RegisterMutation implements MutationInterface
 
         if ($organizationInvitation instanceof PendingOrganizationInvitation) {
             $organization = $organizationInvitation->getOrganization();
-            $memberOfOrganization = OrganizationMember::create($organization, $user);
+            $role = $organizationInvitation->getRole();
+            $memberOfOrganization = OrganizationMember::create($organization, $user, $role);
             $user->addMemberOfOrganization($memberOfOrganization);
+            $this->em->remove($organizationInvitation);
         }
 
         $this->userInvitationHandler->handleUserInvite($user);

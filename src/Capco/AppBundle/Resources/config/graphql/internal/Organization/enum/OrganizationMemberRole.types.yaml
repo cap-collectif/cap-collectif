@@ -3,9 +3,9 @@ OrganizationMemberRole:
     config:
         description: 'Available roles for organization member'
         values:
-            admin:
-                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\OrganizationMemberRoleType::ADMIN")'
+            ADMIN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\OrganizationMemberRoleType::ADMIN")'
                 description: 'Admin of the organization'
-            user:
-                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\OrganizationMemberRoleType::USER")'
+            USER:
+                value: '@=constant("Capco\\AppBundle\\Enum\\OrganizationMemberRoleType::USER")'
                 description: 'Member of the organization.'

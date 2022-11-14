@@ -58,6 +58,7 @@ const OrganizationList: React.FC<OrganizationListProps> = () => {
                             <CardOrg.Header>
                                 {hasLogo ? (
                                     <img
+                                        style={{ objectFit: 'cover' }}
                                         src={organization?.logo?.url}
                                         alt={organization?.logo?.description || ''}
                                     />
@@ -75,7 +76,7 @@ const OrganizationList: React.FC<OrganizationListProps> = () => {
                                 <Button
                                     onClick={() => {
                                         window.open(
-                                            `/organizationConfig/${organization?.id}`,
+                                            `/admin-next/organizationConfig/${organization?.id}`,
                                             '_self',
                                         );
                                     }}

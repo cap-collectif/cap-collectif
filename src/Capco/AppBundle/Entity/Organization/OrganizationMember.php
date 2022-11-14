@@ -71,9 +71,10 @@ class OrganizationMember
         return $this->role;
     }
 
-    public function setRole(string $role): void
+    public function setRole(string $role): self
     {
         $this->role = $role;
+        return $this;
     }
 
     public function isAdmin(): bool
@@ -81,8 +82,8 @@ class OrganizationMember
         return OrganizationMemberRoleType::ADMIN === $this->role;
     }
 
-    public static function create(Organization $organization, User $user): self
+    public static function create(Organization $organization, User $user, string $role): self
     {
-        return (new self())->setOrganization($organization)->setUser($user);
+        return (new self())->setOrganization($organization)->setUser($user)->setRole($role);
     }
 }

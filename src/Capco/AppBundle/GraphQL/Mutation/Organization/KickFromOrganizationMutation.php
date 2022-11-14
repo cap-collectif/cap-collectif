@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class KickFromOrganizationMutation implements MutationInterface
@@ -37,15 +38,14 @@ class KickFromOrganizationMutation implements MutationInterface
             $organization = $this->getOrganization($input, $viewer);
             $user = $this->getUser($input, $viewer);
             self::checkIsMemberOfOrganization($organization, $user);
-            $this->doKick($organization, $user);
-
-            return compact('organization', 'user');
+            $deletedMemberShipId = $this->doKick($organization, $user);
+            return compact('deletedMemberShipId');
         } catch (UserError $exception) {
             return ['errorCode' => $exception->getMessage()];
         }
     }
 
-    private function doKick(Organization $organization, User $user): void
+    private function doKick(Organization $organization, User $user): string
     {
         $memberShipToCancel = null;
         foreach ($organization->getMembers() as $memberShip) {
@@ -55,9 +55,13 @@ class KickFromOrganizationMutation implements MutationInterface
             }
         }
 
+        $memberShipToCancelId = GlobalId::toGlobalId('OrganizationMember', $memberShipToCancel->getId());
+
         $organization->removeMember($memberShipToCancel);
         $this->manager->remove($memberShipToCancel);
         $this->manager->flush();
+
+        return $memberShipToCancelId;
     }
 
     private function getOrganization(Argument $input, User $viewer): Organization

@@ -225,8 +225,8 @@ class UserInvite implements Expirable, Invitation
         bool $isAdmin,
         bool $isProjectAdmin,
         string $token,
-        ?string $message,
-        ?string $redirectionUrl
+        ?string $message = null,
+        ?string $redirectionUrl = null
     ): self {
         return (new self())
             ->setEmail($email)

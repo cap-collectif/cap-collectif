@@ -17,9 +17,9 @@ const InviteOrganizationMember = /* GraphQL */ `
 `;
 
 const input = {
-  "organizationId": toGlobalId('Organization','organization1'),
-  "role": "user"
-}
+  organizationId: toGlobalId('Organization', 'organization1'),
+  role: 'USER',
+};
 
 describe('Internal|inviteOrganizationMember mutation', () => {
   it('should invite an unregistered user', async () => {
@@ -28,7 +28,7 @@ describe('Internal|inviteOrganizationMember mutation', () => {
       {
         input: {
           ...input,
-          email: "abc@cap-collectif.com"
+          email: 'abc@cap-collectif.com',
         },
       },
       'internal_admin',
@@ -36,18 +36,18 @@ describe('Internal|inviteOrganizationMember mutation', () => {
 
     expect(response).toMatchSnapshot();
   });
-  it('should return USER_ALREADY_EXISTING errorCode', async () => {
+  it('should return USER_NOT_ONLY_ROLE_USER errorCode', async () => {
     const response = await graphql(
       InviteOrganizationMember,
       {
         input: {
           ...input,
-          email: "sfavot@cap-collectif.com"
+          email: 'sfavot@cap-collectif.com',
         },
       },
       'internal_admin',
     );
-    expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_EXISTING');
+    expect(response.inviteOrganizationMember.errorCode).toBe('USER_NOT_ONLY_ROLE_USER');
   });
 
   it('should return USER_ALREADY_INVITED errorCode', async () => {
@@ -56,8 +56,8 @@ describe('Internal|inviteOrganizationMember mutation', () => {
       {
         input: {
           ...input,
-          organizationId: toGlobalId('Organization','organization2'),
-          email: "toto@cap-collectif.com"
+          organizationId: toGlobalId('Organization', 'organization2'),
+          email: 'toto@cap-collectif.com',
         },
       },
       'internal_admin',
@@ -71,8 +71,8 @@ describe('Internal|inviteOrganizationMember mutation', () => {
       {
         input: {
           ...input,
-          organizationId: toGlobalId('Organization','notExist'),
-          email: "toto@cap-collectif.com"
+          organizationId: toGlobalId('Organization', 'notExist'),
+          email: 'toto@cap-collectif.com',
         },
       },
       'internal_admin',

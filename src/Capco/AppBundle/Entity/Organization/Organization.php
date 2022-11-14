@@ -62,7 +62,7 @@ class Organization implements
     private $members;
 
     /**
-     * @ORM\Column(name="email", type="string")
+     * @ORM\Column(name="email", type="string", nullable=true)
      */
     private string $email;
 

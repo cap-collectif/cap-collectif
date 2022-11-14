@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, NextApiResponse } from 'next';
 import getSessionCookieFromReq from './request-helper';
 import getSessionFromSessionCookie from './session-resolver';
 import getViewerJsonFromRedisSession from './session-decoder';

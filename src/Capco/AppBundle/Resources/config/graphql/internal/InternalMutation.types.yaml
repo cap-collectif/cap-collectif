@@ -1625,12 +1625,6 @@ InternalMutation:
                     inputType: InviteOrganizationMemberInput
                     payloadType: InviteOrganizationMemberPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteOrganizationMemberMutation", [value, getUser()])'
-            inviteUserToOrganization:
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: InviteUserToOrganizationInput
-                    payloadType: InviteUserToOrganizationPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteUserToOrganizationMutation", [value, getUser()])'
             kickFromOrganization:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

@@ -17,6 +17,7 @@ const CreateButton = styled.button`
     align-items: center;
     border-radius: 4px;
     margin-right: 16px;
+    margin-bottom: 16px;
     &:hover {
         border-color: #0051a8;
         color: #0051a8;
@@ -32,12 +33,17 @@ const CreateOrganizationButton: React.FC<CreateOrganizationButtonProps> = () => 
                 try {
                     const response = await AddOrganizationMutation.commit({
                         input: {
-                            title: intl.formatMessage({ id: 'organisation.create.default.name' }),
+                            translations: [
+                                {
+                                    title: intl.formatMessage({ id: 'organisation.create.default.name' }),
+                                    locale: 'FR_FR'
+                                }
+                            ]
                         },
                     });
                     if (response?.addOrganization) {
                         window.open(
-                            `/organizationConfig/${response.addOrganization.organization?.id}`,
+                            `/admin-next/organizationConfig/${response.addOrganization.organization?.id}`,
                             '_self',
                         );
                     }

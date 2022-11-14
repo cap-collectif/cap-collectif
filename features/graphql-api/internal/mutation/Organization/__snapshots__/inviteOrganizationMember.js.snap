@@ -6,7 +6,7 @@ Object {
     "errorCode": null,
     "invitation": Object {
       "email": "abc@cap-collectif.com",
-      "role": "user",
+      "role": "USER",
       "user": null,
     },
   },

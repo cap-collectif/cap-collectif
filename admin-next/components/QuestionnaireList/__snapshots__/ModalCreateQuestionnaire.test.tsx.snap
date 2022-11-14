@@ -175,6 +175,7 @@ Array [
           <button
             className="sc-bdvvtL cYwHQC"
             onClick={[Function]}
+            type="button"
           >
             <svg
               className="sc-bdvvtL sc-eJwWfJ jxcAbw icfuGT cap-icon"

@@ -30,8 +30,7 @@ class UpdateOrganizationMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker
-    )
-    {
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->globalIdResolver = $globalIdResolver;
@@ -66,15 +65,27 @@ class UpdateOrganizationMutation implements MutationInterface
 
     public function handleSocialNetworks(Organization $organization, array &$data): void
     {
-        $socialNetworks = $organization->getOrganizationSocialNetworks() ?? new OrganizationSocialNetworks();
-        $socialNetworksEnum = ['facebookUrl', 'twitterUrl', 'youtubeUrl', 'linkedInUrl', 'instagramUrl', 'webPageUrl'];
+        $socialNetworks = $organization->getOrganizationSocialNetworks();
+
+        if (!$socialNetworks) {
+            $socialNetworks = (new OrganizationSocialNetworks())->setOrganization($organization);
+        }
+
+        $socialNetworksEnum = [
+            'facebookUrl',
+            'twitterUrl',
+            'youtubeUrl',
+            'linkedInUrl',
+            'instagramUrl',
+            'webPageUrl',
+        ];
 
         foreach ($socialNetworksEnum as $name) {
             if (isset($data[$name]) && $data[$name]) {
                 $method = "set{$name}";
-                $socialNetworks->$method($data[$name]);
-                unset($data[$name]);
+                $socialNetworks->{$method}($data[$name]);
             }
+            unset($data[$name]);
         }
 
         $organization->setOrganizationSocialNetworks($socialNetworks);
@@ -82,7 +93,9 @@ class UpdateOrganizationMutation implements MutationInterface
 
     public function isGranted(string $organizationId, ?User $viewer): bool
     {
-        if (!$viewer) return false;
+        if (!$viewer) {
+            return false;
+        }
 
         $organization = $this->globalIdResolver->resolve($organizationId, $viewer);
 
@@ -90,7 +103,6 @@ class UpdateOrganizationMutation implements MutationInterface
             return false;
         }
 
-        return $this->authorizationChecker->isGranted( OrganizationVoter::EDIT, $organization);
+        return $this->authorizationChecker->isGranted(OrganizationVoter::EDIT, $organization);
     }
-
 }

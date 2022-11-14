@@ -57,6 +57,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
           <button
             className="sc-bdvvtL bFJghn"
             onClick={[Function]}
+            type="button"
           >
             <svg
               className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"

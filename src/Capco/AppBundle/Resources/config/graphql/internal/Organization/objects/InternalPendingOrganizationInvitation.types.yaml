@@ -4,6 +4,11 @@ InternalPendingOrganizationInvitation:
         name: PendingOrganizationInvitation
         description: Represent an invitation to join an organization.
         fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: PendingOrganizationInvitation
             user:
                 type: 'InternalUser'
                 description: 'If already registered, the user to invite.'

@@ -16,6 +16,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Handler\UserInvitationHandler;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -40,7 +41,8 @@ class RegisterMutationSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         ResponsesFormatter $responsesFormatter,
         UserInvitationHandler $userInvitationHandler,
-        PendingOrganizationInvitationRepository $organizationInvitationRepository
+        PendingOrganizationInvitationRepository $organizationInvitationRepository,
+        EntityManagerInterface $em
     ) {
         $this->beConstructedWith(
             $toggleManager,
@@ -53,7 +55,8 @@ class RegisterMutationSpec extends ObjectBehavior
             $formFactory,
             $responsesFormatter,
             $userInvitationHandler,
-            $organizationInvitationRepository
+            $organizationInvitationRepository,
+            $em
         );
     }
 
@@ -93,6 +96,7 @@ class RegisterMutationSpec extends ObjectBehavior
         $organizationInvitation->getEmail()->willReturn('toto@test.com');
         $organizationInvitation->getToken()->willReturn('theToken');
         $organizationInvitation->getOrganization()->willReturn($organization);
+        $organizationInvitation->getRole()->willReturn('ROLE_ADMIN');
 
         $toggleManager->isActive(Manager::registration)->willReturn(true);
         $toggleManager->isActive(Manager::multilangue)->willReturn(false);
