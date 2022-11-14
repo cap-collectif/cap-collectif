@@ -20,7 +20,7 @@ describe('<PostForm/>', () => {
 
   const query = graphql`
     query PostFormTestQuery($postId: ID!, $affiliations: [ProjectAffiliation!], $isAdmin: Boolean!)
-      @relay_test_operation {
+    @relay_test_operation {
       ...PostForm_query @arguments(affiliations: $affiliations, isAdmin: $isAdmin, postId: $postId)
     }
   `;
@@ -47,6 +47,7 @@ describe('<PostForm/>', () => {
             },
           ],
         },
+        organizations: null,
         id: 'VXNlcjp1c2VyMQ==',
       },
       userList: {
@@ -195,8 +196,7 @@ describe('<PostForm/>', () => {
           ],
           media: {
             id: '72d8a0bf-115b-11ec-83f2-0242ac120004',
-            url:
-              'https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif',
+            url: 'https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif',
             name: 'ezgif.com-gif-maker (1).gif',
           },
           published_at: '2018-11-03 00:00:00',

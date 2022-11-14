@@ -37,12 +37,16 @@ describe('<PostList />', () => {
                     },
                 ],
             },
+            isAdmin: true,
+            isAdminOrganization: false,
+            organizations: null,
         }),
     };
     const query = graphql`
         query PostListTestQuery($count: Int, $cursor: String, $term: String) @relay_test_operation {
             viewer {
-                ...PostList_viewer @arguments(count: $count, cursor: $cursor, term: $term)
+                ...PostList_postOwner @arguments(count: $count, cursor: $cursor, term: $term)
+                ...PostList_viewer
             }
         }
     `;
@@ -60,7 +64,14 @@ describe('<PostList />', () => {
             const data = useLazyLoadQuery<PostListTestQuery>(query, queryVariables);
             if (!data.viewer) return null;
             return (
-                <PostList viewer={data.viewer} isAdmin term="" resetTerm={jest.fn()} {...props} />
+                <PostList
+                    viewer={data.viewer}
+                    postOwner={data.viewer}
+                    isAdmin
+                    term=""
+                    resetTerm={jest.fn()}
+                    {...props}
+                />
             );
         };
         TestComponent = props => (

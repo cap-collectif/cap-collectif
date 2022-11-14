@@ -85,6 +85,10 @@ export const PostFormPageQuery: GraphQLTaggedNode = graphql`
       isProjectAdmin
       id
       username
+      organizations {
+        id
+        displayName
+      }
     }
     locales {
       id

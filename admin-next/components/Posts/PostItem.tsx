@@ -12,13 +12,13 @@ import {
     Tooltip,
 } from '@cap-collectif/ui';
 import { PostItem_post$key } from '@relay/PostItem_post.graphql';
+import { PostItem_viewer$key } from '@relay/PostItem_viewer.graphql';
 import PostListModalConfirmationDelete from './PostListModalConfirmationDelete';
 
 export interface PostItemProps {
     post: PostItem_post$key;
+    viewer: PostItem_viewer$key;
     connectionName: string;
-    isAdmin: boolean;
-    isAdminOrganization?: boolean;
 }
 
 const FRAGMENT = graphql`
@@ -35,6 +35,9 @@ const FRAGMENT = graphql`
         owner {
             username
         }
+        creator {
+            id
+        }
         relatedContent {
             __typename
             ... on Theme {
@@ -49,15 +52,31 @@ const FRAGMENT = graphql`
         ...PostListModalConfirmationDelete_post
     }
 `;
+
+const VIEWER_FRAGMENT = graphql`
+    fragment PostItem_viewer on User {
+        id
+        isAdmin
+        isAdminOrganization
+        organizations {
+            id
+        }
+    }
+`;
+
 const PostItem: React.FC<PostItemProps> = ({
     post: postFragment,
+    viewer: viewerFragment,
     connectionName,
-    isAdmin,
-    isAdminOrganization,
 }) => {
     const post = useFragment(FRAGMENT, postFragment);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+    const { isAdmin, isAdminOrganization } = viewer;
     const intl = useIntl();
-
+    const viewerBelongsToAnOrganization = (viewer.organizations?.length ?? 0) > 0;
+    const canDelete = viewerBelongsToAnOrganization
+        ? viewer?.isAdminOrganization || viewer.id === post.creator?.id
+        : true;
     const project = post.relatedContent.filter(content => content.__typename === 'Project')[0];
 
     const themes = post.relatedContent.filter(content => content.__typename === 'Theme');
@@ -141,7 +160,12 @@ const PostItem: React.FC<PostItemProps> = ({
                         label={intl.formatMessage({ id: 'global.preview' })}
                         onClick={() => window.open(post.url, '_self')}
                     />
-                    <PostListModalConfirmationDelete post={post} connectionName={connectionName} />
+                    {canDelete ? (
+                        <PostListModalConfirmationDelete
+                            post={post}
+                            connectionName={connectionName}
+                        />
+                    ) : null}
                 </Flex>
             </Table.Td>
         </React.Fragment>

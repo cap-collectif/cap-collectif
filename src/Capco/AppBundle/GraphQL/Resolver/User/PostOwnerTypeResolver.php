@@ -22,7 +22,7 @@ class PostOwnerTypeResolver implements ResolverInterface
     {
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
-        if ('internal' === $currentSchemaName) {
+        if (in_array($currentSchemaName, ['dev', 'internal'])) {
             if ($data instanceof User) {
                 return $this->typeResolver->resolve('InternalUser');
             }

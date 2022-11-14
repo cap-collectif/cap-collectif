@@ -43,11 +43,19 @@ describe('<PostItem />', () => {
                 },
             ],
         }),
+        User: () => ({
+            isAdmin: false,
+            isAdminOrganization: false,
+            organizations: null,
+        }),
     };
     const query = graphql`
         query PostItemTestQuery($id: ID = "<default>") @relay_test_operation {
             post: node(id: $id) {
                 ...PostItem_post
+            }
+            viewer {
+                ...PostItem_viewer
             }
         }
     `;
@@ -65,6 +73,7 @@ describe('<PostItem />', () => {
             return (
                 <PostItem
                     post={data.post}
+                    viewer={data.viewer}
                     connectionName="client:VXNlcjp1c2VyMQ==:__PostList_posts_connection"
                     isAdmin
                     {...props}

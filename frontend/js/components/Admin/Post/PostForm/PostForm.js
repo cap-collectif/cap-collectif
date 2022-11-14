@@ -91,6 +91,10 @@ const FRAGMENT = graphql`
           }
         }
       }
+      organizations {
+        id
+        displayName
+      }
     }
     themes @include(if: $isAdmin) {
       id
@@ -120,6 +124,12 @@ const onSubmit = (values, dispatch, props) => {
     })
     .filter(Boolean);
 
+  const owner = values.author
+    ? Array.isArray(values.author)
+      ? values.author[0]?.value
+      : values.author?.value
+    : null;
+
   if (props.query.post && props.query.post.id) {
     const vals = {
       id: props.query.post.id,
@@ -135,6 +145,7 @@ const onSubmit = (values, dispatch, props) => {
       commentable: values.has_comments,
       customCode: values.custom_code,
       bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg ?? false,
+      owner,
     };
     return UpdatePostMutation.commit({ input: vals })
       .then(() => {
@@ -159,6 +170,7 @@ const onSubmit = (values, dispatch, props) => {
     commentable: values.has_comments,
     customCode: values.custom_code,
     bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg ?? false,
+    owner,
   };
   return CreatePostMutation.commit({ input: vals })
     .then(response => {
@@ -190,6 +202,8 @@ const PostForm = ({
   const { languages } = initialValues;
   const [selectedLocale, setSelectedLocale] = React.useState<string>(languages || '');
   const multiLangue = useFeatureFlag('multilangue');
+  const organization = data.viewer.organizations?.[0];
+
   React.useEffect(() => {
     if (dirty) {
       window.addEventListener('beforeunload', onUnload);
@@ -360,7 +374,7 @@ const PostForm = ({
           autoload
           name="author"
           id="author"
-          disabled={!isAdmin}
+          disabled={!isAdmin || !!organization}
           debounce
           aria-autocomplete="list"
           aria-haspopup="true"
@@ -641,9 +655,22 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const mapStateToProps = (state: GlobalState) => ({
-  bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
-});
+const mapStateToProps = (state: GlobalState, { initialValues, query }: OwnProps) => {
+  // $FlowFixMe $key type does not have the data - need to refacto PostFormPage before
+  const organization = query?.viewer?.organizations?.[0];
+  return {
+    bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
+    initialValues: {
+      ...initialValues,
+      author: organization?.id
+        ? {
+            value: organization?.id,
+            label: organization?.displayName,
+          }
+        : initialValues.author,
+    },
+  };
+};
 
 const formContainer: React.AbstractComponent<AfterConnectProps> = reduxForm({
   form: formName,

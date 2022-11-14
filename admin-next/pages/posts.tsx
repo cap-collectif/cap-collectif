@@ -2,16 +2,7 @@ import * as React from 'react';
 import type { PreloadedQuery } from 'react-relay';
 import { graphql, usePreloadedQuery, useQueryLoader } from 'react-relay';
 import { useIntl } from 'react-intl';
-import {
-    Button,
-    CapUIFontWeight,
-    CapUIIcon,
-    CapUIIconSize,
-    Flex,
-    Heading,
-    Search,
-    Spinner,
-} from '@cap-collectif/ui';
+import { Button, CapUIIcon, CapUIIconSize, Flex, Search, Spinner } from '@cap-collectif/ui';
 import { NextPage } from 'next';
 import { PageProps } from '../types';
 import debounce from '@utils/debounce-promise';
@@ -37,10 +28,24 @@ export const PostListPageQuery = graphql`
     ) {
         viewer {
             id
-            allposts: posts(affiliations: $affiliations) {
+            allPosts: posts(affiliations: $affiliations) {
                 totalCount
             }
+            organizations {
+                allPosts: posts(affiliations: $affiliations) {
+                    totalCount
+                }
+                ...PostList_postOwner
+                    @arguments(
+                        count: $count
+                        cursor: $cursor
+                        term: $term
+                        affiliations: $affiliations
+                        orderBy: $orderBy
+                    )
+            }
             ...PostList_viewer
+            ...PostList_postOwner
                 @arguments(
                     count: $count
                     cursor: $cursor
@@ -56,11 +61,15 @@ const PostListPage: React.FC<PostListPageProps> = ({ queryReference, isAdmin }) 
     const intl = useIntl();
     const [term, setTerm] = React.useState<string>('');
     const query = usePreloadedQuery<postsQueryType>(PostListPageQuery, queryReference);
+    const { viewer } = query;
+    const organization = viewer.organizations?.[0];
+    const hasPosts =
+        viewer.allPosts.totalCount > 0 || (organization?.allPosts?.totalCount ?? 0) > 0;
     const onTermChange = debounce((value: string) => setTerm(value), 400);
 
     return (
         <Flex direction="column" spacing={6}>
-            {query.viewer.allposts.totalCount > 0 ? (
+            {hasPosts ? (
                 <Flex
                     direction="column"
                     p={8}
@@ -89,8 +98,8 @@ const PostListPage: React.FC<PostListPageProps> = ({ queryReference, isAdmin }) 
                     <React.Suspense fallback={<TablePlaceholder rowsCount={20} columnsCount={6} />}>
                         <PostList
                             viewer={query.viewer}
+                            postOwner={organization ?? viewer}
                             term={term}
-                            isAdmin={isAdmin}
                             resetTerm={() => setTerm('')}
                         />
                     </React.Suspense>

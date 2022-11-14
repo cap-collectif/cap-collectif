@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { graphql, usePaginationFragment } from 'react-relay';
+import { graphql, useFragment, usePaginationFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import { Button, CapUIIcon, Icon, Menu, Table, Text } from '@cap-collectif/ui';
 import EmptyMessage from 'components/UI/Table/EmptyMessage';
 import { PostList_viewer$key } from '@relay/PostList_viewer.graphql';
+import { PostList_postOwner$key } from '@relay/PostList_postOwner.graphql';
 import PostItem from './PostItem';
 import { useLayoutContext } from 'components/Layout/Layout.context';
 
 export const POST_LIST_PAGINATION = 20;
 
 export const PostListQuery = graphql`
-    fragment PostList_viewer on User
+    fragment PostList_postOwner on PostOwner
     @argumentDefinitions(
         count: { type: "Int!" }
         cursor: { type: "String" }
@@ -37,23 +38,27 @@ export const PostListQuery = graphql`
         }
     }
 `;
+
+const VIEWER_FRAGMENT = graphql`
+    fragment PostList_viewer on User {
+        isAdmin
+        isAdminOrganization
+        ...PostItem_viewer
+    }
+`;
+
 export interface PostListProps {
     viewer: PostList_viewer$key;
+    postOwner: PostList_postOwner$key;
     term: string;
-    isAdmin: boolean;
-    isAdminOrganization: boolean;
     resetTerm: () => void;
 }
 
-const PostList: React.FC<PostListProps> = ({
-    viewer,
-    term,
-    isAdmin,
-    isAdminOrganization,
-    resetTerm,
-}) => {
+const PostList: React.FC<PostListProps> = ({ viewer: viewerRef, postOwner, term, resetTerm }) => {
     const intl = useIntl();
-    const { data, loadNext, hasNext, refetch } = usePaginationFragment(PostListQuery, viewer);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
+    const { isAdmin, isAdminOrganization } = viewer;
+    const { data, loadNext, hasNext, refetch } = usePaginationFragment(PostListQuery, postOwner);
     const [orderBy, setOrderBy] = React.useState('DESC');
     const { posts } = data;
     const firstRendered = React.useRef<true | null>(null);
@@ -174,7 +179,7 @@ const PostList: React.FC<PostListProps> = ({
                                     <PostItem
                                         post={post}
                                         connectionName={posts.__id}
-                                        isAdmin={isAdmin}
+                                        viewer={viewer}
                                     />
                                 </Table.Tr>
                             ),
