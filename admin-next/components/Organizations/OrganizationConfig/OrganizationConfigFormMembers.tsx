@@ -178,7 +178,9 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                         <FormControl
                             name="memberEmail"
                             control={control}
-                            style={{ minWidth: '320px', flexBasis: '60%' }}>
+                            style={{ minWidth: '320px', flexBasis: '60%' }}
+                            isRequired
+                        >
                             <FieldInput
                                 id="memberEmail"
                                 name="memberEmail"
@@ -192,7 +194,9 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                         <FormControl
                             name="memberRole"
                             control={control}
-                            style={{ flexBasis: '30%', minWidth: '200px' }}>
+                            style={{ flexBasis: '30%', minWidth: '200px' }}
+                            isRequired
+                        >
                             <FieldInput
                                 type="select"
                                 name="memberRole"
