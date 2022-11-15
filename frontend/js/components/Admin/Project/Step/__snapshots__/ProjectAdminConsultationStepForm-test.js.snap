@@ -49,6 +49,7 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with data 1`] = 
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
+        "displayName": "Connect(StepRequirementsList)",
         "type": [Function],
       }
     }
@@ -156,6 +157,7 @@ exports[`<ProjectAdminConsultationStepForm /> renders correctly with no initial 
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
+        "displayName": "Connect(StepRequirementsList)",
         "type": [Function],
       }
     }

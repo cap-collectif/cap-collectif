@@ -532,6 +532,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               Object {
                 "$$typeof": Symbol(react.forward_ref),
                 "__ComponentClass": [Function],
+                "displayName": "Relay(injectIntl(Connect(ProposalFormAdminCategories)))",
                 "render": [Function],
               }
             }
@@ -853,6 +854,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
             "$$typeof": Symbol(react.memo),
             "WrappedComponent": [Function],
             "compare": null,
+            "displayName": "Connect(injectIntl(ProposalFormAdminQuestions))",
             "type": [Function],
           }
         }
@@ -1446,6 +1448,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
               Object {
                 "$$typeof": Symbol(react.forward_ref),
                 "__ComponentClass": [Function],
+                "displayName": "Relay(injectIntl(Connect(ProposalFormAdminCategories)))",
                 "render": [Function],
               }
             }
@@ -1768,6 +1771,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
             "$$typeof": Symbol(react.memo),
             "WrappedComponent": [Function],
             "compare": null,
+            "displayName": "Connect(injectIntl(ProposalFormAdminQuestions))",
             "type": [Function],
           }
         }
@@ -2424,6 +2428,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
               Object {
                 "$$typeof": Symbol(react.forward_ref),
                 "__ComponentClass": [Function],
+                "displayName": "Relay(injectIntl(Connect(ProposalFormAdminCategories)))",
                 "render": [Function],
               }
             }
@@ -2809,6 +2814,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
             "$$typeof": Symbol(react.memo),
             "WrappedComponent": [Function],
             "compare": null,
+            "displayName": "Connect(injectIntl(ProposalFormAdminQuestions))",
             "type": [Function],
           }
         }

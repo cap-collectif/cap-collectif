@@ -13,7 +13,7 @@ import 'moment/locale/fr';
 // $FlowFixMe
 import { configure } from 'enzyme';
 // $FlowFixMe
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import Adapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
 // $FlowFixMe
 import ReactTestRenderer from 'react-test-renderer';
@@ -69,7 +69,9 @@ global.window.matchMedia =
   };
 
 // $FlowFixMe we are in jest mode
-console.error = () => {};
+console.error = () => {
+  
+};
 
 // $FlowFixMe we are in jest mode
 Object.defineProperty(window, 'matchMedia', {
@@ -207,10 +209,11 @@ jest.mock('react-router-dom', () => ({
     slug: 'slug',
   }),
   useLocation: () => ({
-    state: {},
+    state: {}
   }),
   useRouteMatch: () => ({ url: '/mock/url' }),
 }));
+
 
 jest.mock('@cap-collectif/ui', () => {
   const mockMath = Object.create(global.Math);

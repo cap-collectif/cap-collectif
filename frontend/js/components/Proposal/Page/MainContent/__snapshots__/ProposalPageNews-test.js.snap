@@ -294,6 +294,7 @@ exports[`<ProposalPageNews /> should render correctly without news and  with vie
         as={
           Object {
             "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Flex",
             "render": [Function],
           }
         }
