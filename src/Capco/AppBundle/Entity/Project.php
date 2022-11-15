@@ -540,12 +540,6 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         return $this;
     }
 
-    /**
-     * Add step.
-     *
-     *
-     * @return Project
-     */
     public function addStep(ProjectAbstractStep $step)
     {
         $step->setProject($this);
@@ -900,7 +894,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         return null;
     }
 
-    public function getExportableSteps()
+    public function getExportableSteps(): array
     {
         $steps = [];
 

@@ -14684,7 +14684,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The main view : GRID, LIST or MAP"""
   mainView: MainView!
   defaultStatus: ProposalStepStatus
-  isAnalysisStep: Boolean!
 }
 
 """

@@ -31,7 +31,6 @@ export type Step = {|
   +slug: ?string,
   +debateType: DebateType,
   +hasOpinionsFilled: ?boolean,
-  +isAnalysisStep: boolean,
 |};
 
 export type Steps = $ReadOnlyArray<Step>;

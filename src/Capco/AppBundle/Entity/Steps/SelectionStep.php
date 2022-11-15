@@ -28,9 +28,9 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     use AllowAuthorsToAddNewsTrait;
     use SecretBallotTrait;
     use TimelessStepTrait;
+    use VoteSmsTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
-    use VoteSmsTrait;
 
     public const TYPE = 'selection';
     const VOTE_TYPE_DISABLED = 0;
@@ -207,23 +207,6 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     public function isParticipative(): bool
     {
         return true;
-    }
-
-    public function isAnalysisStep(): bool
-    {
-        if (
-            $this->getProposalForm()->getAnalysisConfiguration() &&
-            $this->getProposalForm()
-                ->getAnalysisConfiguration()
-                ->getAnalysisStep()
-        ) {
-            return $this ===
-                $this->getProposalForm()
-                    ->getAnalysisConfiguration()
-                    ->getAnalysisStep();
-        }
-
-        return false;
     }
 
     public function useAddressOrMap(): bool

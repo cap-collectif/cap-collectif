@@ -167,7 +167,6 @@ const onSubmit = (
     opinionCanBeFollowed,
     steps: steps // I cannot type step properly given the unability to create union Input type
       ? steps.map(({ url, ...s }: any) => {
-          delete s.isAnalysisStep;
           const sTypename = s.__typename;
           const stepSupportRequirements = doesStepSupportRequirements(s);
           delete s.__typename;
@@ -546,7 +545,6 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
             isLimitEnabled: !!step.votesLimit,
             isTresholdEnabled: !!step.voteThreshold,
             isSecretBallotEnabled: step.isSecretBallot,
-            isAnalysisStep: step.__typename === 'SelectionStep' && step.isAnalysisStep,
             defaultSort: step.defaultSort?.toUpperCase() || 'RANDOM',
             ...getViewEnabled(step.__typename, step.proposalForm, project?.firstCollectStep?.form),
             // DebateStep
@@ -751,7 +749,6 @@ export default createFragmentContainer(injectIntl(container), {
           allowAuthorsToAddNews
           budget
           mainView
-          isAnalysisStep
           isProposalSmsVoteEnabled
         }
         ... on ConsultationStep {

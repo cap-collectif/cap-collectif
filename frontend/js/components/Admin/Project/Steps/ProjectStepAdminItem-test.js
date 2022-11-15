@@ -12,7 +12,6 @@ const defaultStep = {
   url: 'urlTest',
   slug: 'urlTest',
   hasOpinionsFilled: false,
-  isAnalysisStep: false,
   debateType: 'FACE_TO_FACE',
 };
 

@@ -40,5 +40,3 @@ InternalSelectionStep:
                 description: 'The main view : GRID, LIST or MAP'
             defaultStatus:
                 type: 'ProposalStepStatus'
-            isAnalysisStep:
-                type: 'Boolean!'
