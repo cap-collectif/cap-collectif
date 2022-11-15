@@ -72,3 +72,4 @@ export { default as ERROR } from './svg/error.svg';
 export { default as SHARE } from './svg/share.svg';
 export { default as EARTH } from './svg/earth.svg';
 export { default as SORT } from './svg/sort.svg';
+export { default as ORGANISATION } from './svg/orga.svg';
