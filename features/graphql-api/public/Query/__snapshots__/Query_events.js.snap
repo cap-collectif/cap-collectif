@@ -336,7 +336,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ2",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -362,7 +362,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQxMA==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -375,7 +375,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ5",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -388,7 +388,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQy",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -409,7 +409,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ4",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -422,7 +422,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ3",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -435,7 +435,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -448,7 +448,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -468,7 +468,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWRFbg==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -488,7 +488,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -501,7 +501,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -525,7 +525,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ1",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -593,7 +593,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ2",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -619,7 +619,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQxMA==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -632,7 +632,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ5",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -645,7 +645,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQy",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -666,7 +666,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ4",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -679,7 +679,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ3",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -692,7 +692,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -705,7 +705,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -725,7 +725,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWRFbg==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -745,7 +745,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -758,7 +758,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -782,7 +782,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ1",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -850,7 +850,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ2",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -876,7 +876,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQxMA==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -889,7 +889,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ5",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -902,7 +902,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQy",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -923,7 +923,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ4",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -936,7 +936,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ3",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -949,7 +949,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -962,7 +962,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -982,7 +982,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWRFbg==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1002,7 +1002,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1015,7 +1015,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1039,7 +1039,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ1",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1107,7 +1107,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ2",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1133,7 +1133,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQxMA==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1146,7 +1146,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ5",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1159,7 +1159,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQy",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1180,7 +1180,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ4",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1193,7 +1193,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ3",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1206,7 +1206,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1219,7 +1219,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1239,7 +1239,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWRFbg==",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1273,7 +1273,7 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1286,7 +1286,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,
@@ -1310,7 +1310,7 @@ Object {
       },
       Object {
         "node": Object {
-          "availableRegistration": 0,
+          "availableRegistration": null,
           "id": "RXZlbnQ6ZXZlbnQ1",
           "isEventRegistrationComplete": false,
           "isMeasurable": false,

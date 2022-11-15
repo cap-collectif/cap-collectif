@@ -230,27 +230,28 @@ class ExportController extends Controller
      */
     public function downloadMyEventParticipantsAction(Request $request, Event $event): Response
     {
-        if ($event->getAuthor() !== $this->getUser() && !$this->getUser()->isAdmin()) {
+        if (!$event->viewerDidAuthor($this->getUser()) && !$this->getUser()->isAdmin()) {
             throw new AccessDeniedException();
         }
 
         $fileName = CreateCsvFromEventParticipantsCommand::getFilename($event->getSlug());
-        if (!file_exists($this->exportDir . $fileName)) {
-            $this->flashBag->add(
-                'danger',
-                $this->translator->trans(
-                    'project_contributors.download.not_yet_generated',
-                    [],
-                    'CapcoAppBundle'
-                )
-            );
+        if (file_exists($this->exportDir . $fileName)) {
+            $response = $this->file($this->exportDir . $fileName, $fileName);
+            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
-            return $this->redirect($request->headers->get('referer'));
+            return $response;
         }
-        $response = $this->file($this->exportDir . $fileName, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
-        return $response;
+        $this->flashBag->add(
+            'danger',
+            $this->translator->trans(
+                'project_contributors.download.not_yet_generated',
+                [],
+                'CapcoAppBundle'
+            )
+        );
+
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**

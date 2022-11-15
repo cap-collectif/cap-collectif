@@ -7,6 +7,7 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import type { GlobalState } from '~/types';
 import EventDeleteModal from './EventDeleteModal';
 import type { EventReviewStatus } from '~relay/EventPageHeader_query.graphql';
+import { fromGlobalId } from '~/utils/fromGlobalId';
 
 type Props = {|
   +id: string,
@@ -17,11 +18,12 @@ type Props = {|
 export const EventQuickActions = ({ id, status, viewerDidAuthor }: Props) => {
   const intl = useIntl();
   const hasProposeEventEnabled = useFeatureFlag('allow_users_to_propose_events');
+  const eventIsApproved = status === 'APPROVED';
   const isSuperAdmin = useSelector((state: GlobalState) =>
     state.user.user?.roles.includes('ROLE_SUPER_ADMIN'),
   );
 
-  if (isSuperAdmin || (hasProposeEventEnabled && viewerDidAuthor && status === 'APPROVED'))
+  if (isSuperAdmin || (hasProposeEventEnabled && viewerDidAuthor && eventIsApproved))
     return (
       <Menu
         disclosure={
@@ -39,12 +41,14 @@ export const EventQuickActions = ({ id, status, viewerDidAuthor }: Props) => {
             <Menu.Item
               as="div"
               sx={{ cursor: 'pointer' }}
-              onClick={() => window.open(`/export-my-event-participants/${id}`, '_self')}
+              onClick={() =>
+                window.open(`/export-my-event-participants/${fromGlobalId(id).id}`, '_self')
+              }
               id="download-event-registration">
               <Text> {intl.formatMessage({ id: 'export-registered' })} </Text>
             </Menu.Item>
           ) : null}
-          {status === 'APPROVED' || isSuperAdmin ? (
+          {eventIsApproved || isSuperAdmin ? (
             <EventDeleteModal
               eventId={id}
               disclosure={

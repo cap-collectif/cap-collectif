@@ -206,7 +206,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
                   cursor
                   registeredAt
                   registeredAnonymously
-                  node { 
+                  node {
                     ... on User {
                         ${USER_FRAGMENT}
                     }

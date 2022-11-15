@@ -58,9 +58,9 @@ class Event implements
     CreatableInterface
 {
     use AuthorableTrait;
-    use CreatableTrait;
     use BodyUsingJoditWysiwygTrait;
     use CommentableWithoutCounterTrait;
+    use CreatableTrait;
     use CustomCodeTrait;
     use DateHelperTrait;
     use OwnerableTrait;
@@ -815,9 +815,11 @@ class Event implements
         return $this;
     }
 
-    public function getAvailableRegistration(): int
+    public function getAvailableRegistration(): ?int
     {
-        return $this->maxRegistrations - $this->registrations->count();
+        return $this->maxRegistrations
+            ? $this->maxRegistrations - $this->registrations->count()
+            : null;
     }
 
     public function isRegistrationComplete(): bool

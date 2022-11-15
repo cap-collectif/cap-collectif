@@ -165,10 +165,13 @@ class EventRepository extends EntityRepository
 
     public function findAllWithRegistration()
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.translations', 'translation')
+            ->leftJoin('e.review', 'r')
             ->addSelect('translation.slug, e.id')
-            ->andWhere('e.guestListEnabled = true');
+            ->andWhere('e.guestListEnabled = true')
+            ->andWhere('e.enabled = true OR r.status = :status')
+            ->setParameter('status', EventReviewStatusType::APPROVED);
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -197,11 +200,6 @@ class EventRepository extends EntityRepository
             ->andWhere('o.id = :ownerId')
             ->setParameter('ownerId', $owner->getId())
             ->orderBy('e.startAt', 'DESC');
-    }
-
-    protected function getIsEnabledQueryBuilder(): QueryBuilder
-    {
-        return $this->createQueryBuilder('e')->andWhere('e.enabled = true');
     }
 
     private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder

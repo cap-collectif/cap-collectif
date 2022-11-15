@@ -31,3 +31,9 @@ Capco\AppBundle\Entity\EventRegistration:
         confirmed: true
         username: 'Jpec'
         email: 'jpec@benkyou.com'
+    eventRegistration{56..70}:
+        event: '@event16'
+        username: <username()>
+        email: <email()>
+        private: false
+        confirmed: true

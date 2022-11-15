@@ -189,7 +189,7 @@ Capco\AppBundle\Entity\Event:
         media: '@EventAwaiting'
     event16:
         id: eventCreateByAUserReviewApproved
-        enabled: true
+        guestListEnabled: true
         startAt: <identity((new \DateTime('2024-04-14')))>
         author: '@user5'
         creator: '@user5'
@@ -215,7 +215,6 @@ Capco\AppBundle\Entity\Event:
         body: deleted event
     event19:
         id: eventCreateByAUserReviewApprovedEn
-        enabled: true
         startAt: <identity((new \DateTime('2024-04-14')))>
         author: '@english_user'
         creator: '@english_user'
