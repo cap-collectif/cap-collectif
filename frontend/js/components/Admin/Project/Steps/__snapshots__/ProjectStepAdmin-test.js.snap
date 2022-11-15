@@ -29,10 +29,8 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
                 "$$typeof": Symbol(react.memo),
                 "WrappedComponent": [Function],
                 "compare": null,
-                "displayName": "Connect(ProjectStepAdminList)",
                 "type": [Function],
               },
-              "displayName": "Relay(Connect(ProjectStepAdminList))",
               "render": [Function],
             }
           }
@@ -225,10 +223,8 @@ exports[`<ProjectStepAdmin /> renders correctly with isAdmin false 1`] = `
                 "$$typeof": Symbol(react.memo),
                 "WrappedComponent": [Function],
                 "compare": null,
-                "displayName": "Connect(ProjectStepAdminList)",
                 "type": [Function],
               },
-              "displayName": "Relay(Connect(ProjectStepAdminList))",
               "render": [Function],
             }
           }
@@ -410,10 +406,8 @@ exports[`<ProjectStepAdmin /> renders list step without selection step when no c
                 "$$typeof": Symbol(react.memo),
                 "WrappedComponent": [Function],
                 "compare": null,
-                "displayName": "Connect(ProjectStepAdminList)",
                 "type": [Function],
               },
-              "displayName": "Relay(Connect(ProjectStepAdminList))",
               "render": [Function],
             }
           }

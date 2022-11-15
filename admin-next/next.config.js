@@ -4,8 +4,7 @@
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
 const nextConfig = {
-  // TODO enable this
-  webpack5: false,
+  webpack5: true,
   // TODO enable this
   reactStrictMode: false,
   basePath:
@@ -32,9 +31,7 @@ const nextConfig = {
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
+      issuer: /\.(js|ts)x?$/,
       use: ['@svgr/webpack'],
     });
     config.module.rules.push({
@@ -48,10 +45,12 @@ const nextConfig = {
     });
 
     if (!isServer) {
-      config.node = {
-        net: 'empty',
-        tls: 'empty',
-        child_process: 'empty',
+      config.resolve.fallback = {
+        net: false,
+        tls: false,
+        child_process: false,
+        crypto: require.resolve('crypto-browserify'),
+        stream: require.resolve('stream-browserify'),
       };
     }
 

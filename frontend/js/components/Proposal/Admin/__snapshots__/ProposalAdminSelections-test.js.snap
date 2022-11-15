@@ -139,7 +139,6 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
                   "$$typeof": Symbol(react.memo),
                   "WrappedComponent": [Function],
                   "compare": null,
-                  "displayName": "Connect(ProposalAdminProgressSteps)",
                   "type": [Function],
                 }
               }
@@ -318,7 +317,6 @@ exports[`<ProposalAdminSelections /> render correctly with paper votes 1`] = `
                   "$$typeof": Symbol(react.memo),
                   "WrappedComponent": [Function],
                   "compare": null,
-                  "displayName": "Connect(ProposalAdminProgressSteps)",
                   "type": [Function],
                 }
               }
