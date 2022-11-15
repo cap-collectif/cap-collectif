@@ -423,7 +423,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
             <SidebarLink
               text="admin.label.organizations"
               href="/admin-next/organizations"
-              icon="PIE_CHART"
+              icon="ORGANISATION"
               withLabel={isOpen}
               fontSize={3}
               p={3}
