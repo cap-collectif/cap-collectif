@@ -103,7 +103,6 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
           ],
           "staticRulesId": "",
         },
-        "displayName": "LoginOverlay__PopoverContainer",
         "foldedComponentIds": Array [
           "sc-bdnxRM",
         ],
@@ -198,7 +197,6 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
             ],
             "staticRulesId": "",
           },
-          "displayName": "LoginOverlay__Arrow",
           "foldedComponentIds": Array [
             "sc-bdnxRM",
           ],
