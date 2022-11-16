@@ -62,6 +62,7 @@ describe('<Profile />', () => {
       size: '128*128',
       url: 'http://imgur.com/15645613.jpg',
     },
+    organizations: [],
     username: 'username',
     biography: 'I am a fucking customer',
     facebookUrl: 'https://facebook.com/mmm',

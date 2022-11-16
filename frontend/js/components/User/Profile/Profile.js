@@ -25,6 +25,10 @@ import {
   twitterRegEx,
 } from '~/components/Utils/SocialNetworkRegexUtils';
 import { isUrl } from '~/services/Validator';
+import Flex from '~/components/Ui/Primitives/Layout/Flex';
+import Text from '~/components/Ui/Primitives/Text';
+import Avatar from '~/components/Ui/Medias/Avatar';
+import LeaveOrganizationModal from './LeaveOrganizationModal';
 
 type RelayProps = {| viewer: Profile_viewer |};
 type Props = {|
@@ -177,6 +181,7 @@ export const Profile = ({
 }: Props) => {
   const useNoIndexProfile = useFeatureFlag('noindex_on_profiles');
   const useUserType = useFeatureFlag('user_type');
+  const { organizations } = viewer;
 
   return (
     <form onSubmit={handleSubmit} className="form-horizontal">
@@ -295,6 +300,36 @@ export const Profile = ({
               )}
             </div>
           </div>
+          {organizations?.length ? (
+            <>
+              <div className="clearfix" />
+              <h2>
+                <FormattedMessage id="capco.module.organizations" />
+              </h2>
+              {organizations.map(org => (
+                <Flex
+                  key={org?.id}
+                  p={4}
+                  justify="space-between"
+                  bg="gray.100"
+                  border="normal"
+                  borderRadius="normal"
+                  borderColor="gray.200"
+                  mb={4}>
+                  <Flex alignItems="center" spacing={2} as="a" href={org?.url} color="gray.900">
+                    {org?.media?.url ? (
+                      <Avatar size="tiny" alt={org.username || ''} src={org.media.url || ''} />
+                    ) : null}
+                    <Text>{org?.username}</Text>
+                  </Flex>
+                  <LeaveOrganizationModal
+                    organizationName={org?.username || ''}
+                    organizationId={org?.id || ''}
+                  />
+                </Flex>
+              ))}
+            </>
+          ) : null}
           <div className="clearfix" />
           <h2>
             <FormattedMessage id="social-medias" />
@@ -464,6 +499,14 @@ export default createFragmentContainer(container, {
       linkedInUrl
       instagramUrl
       twitterUrl
+      organizations {
+        id
+        url
+        username
+        media {
+          url
+        }
+      }
       profilePageIndexed
       userType {
         id

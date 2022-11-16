@@ -56,6 +56,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
                 "url": "http://imgur.com/15645613.jpg",
               },
               "neighborhood": "DTC",
+              "organizations": Array [],
               "profilePageIndexed": false,
               "twitterUrl": "https://twitter.com/cuicui",
               "userType": Object {
@@ -407,6 +408,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
                 "url": "http://imgur.com/15645613.jpg",
               },
               "neighborhood": "DTC",
+              "organizations": Array [],
               "profilePageIndexed": false,
               "twitterUrl": "https://twitter.com/cuicui",
               "userType": Object {
