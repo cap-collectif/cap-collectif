@@ -639,6 +639,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     reply ? reply.responses : [],
   );
 
+  console.log(getFormSyncErrors(RequirementsFormLegacyName)(state));
+
   return {
     responses:
       formValueSelector(reply ? getFormNameUpdate(reply.id) : `Create${formName}`)(

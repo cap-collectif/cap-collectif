@@ -16,9 +16,13 @@ exports[`<RequirementsFormLegacy /> call api on every value changed 2`] = `
     Array [
       Object {
         "meta": Object {
+          "field": "form_valid",
           "form": "requirements-form",
+          "persistentSubmitErrors": undefined,
+          "touch": undefined,
         },
-        "type": "@@redux-form/START_SUBMIT",
+        "payload": false,
+        "type": "@@redux-form/CHANGE",
       },
     ],
     Array [
@@ -27,6 +31,38 @@ exports[`<RequirementsFormLegacy /> call api on every value changed 2`] = `
           "form": "requirements-form",
         },
         "type": "@@redux-form/START_SUBMIT",
+      },
+    ],
+    Array [
+      Object {
+        "meta": Object {
+          "field": "form_valid",
+          "form": "requirements-form",
+          "persistentSubmitErrors": undefined,
+          "touch": undefined,
+        },
+        "payload": false,
+        "type": "@@redux-form/CHANGE",
+      },
+    ],
+    Array [
+      Object {
+        "meta": Object {
+          "form": "requirements-form",
+        },
+        "type": "@@redux-form/START_SUBMIT",
+      },
+    ],
+    Array [
+      Object {
+        "meta": Object {
+          "field": "form_valid",
+          "form": "requirements-form",
+          "persistentSubmitErrors": undefined,
+          "touch": undefined,
+        },
+        "payload": false,
+        "type": "@@redux-form/CHANGE",
       },
     ],
     Array [
@@ -39,6 +75,18 @@ exports[`<RequirementsFormLegacy /> call api on every value changed 2`] = `
     ],
   ],
   "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
     Object {
       "type": "return",
       "value": undefined,
@@ -217,7 +265,7 @@ exports[`<RequirementsFormLegacy /> should render a vote widget for a simple vot
   </Field>
   <Field
     component={[Function]}
-    disabled={null}
+    disabled={false}
     divClassName="col-sm-12 col-xs-12"
     id="IdentificationCodeRequirement"
     key="requirement6"
@@ -228,7 +276,7 @@ exports[`<RequirementsFormLegacy /> should render a vote widget for a simple vot
       />
     }
     minlength={8}
-    name="IdentificationCodeRequirement"
+    name="requirement6"
     placeholder="Ex: 25FOVC10"
     type="text"
   />
@@ -246,6 +294,7 @@ Object {
   "requirement3": "global.required",
   "requirement4": "global.required",
   "requirement5": "global.required",
+  "requirement6": "global.required",
 }
 `;
 
@@ -255,5 +304,6 @@ Object {
   "requirement3": "global.required",
   "requirement4": "global.required",
   "requirement5": "global.required",
+  "requirement6": "global.required",
 }
 `;

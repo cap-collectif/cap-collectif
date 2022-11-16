@@ -22,6 +22,8 @@ jest.mock('../../mutations/UpdateProfilePersonalDataMutation', () => ({
   namedExport: jest.fn(),
 }));
 
+const isIdentificationCodeValid = false;
+
 describe('<RequirementsFormLegacy />', () => {
   const step = {
     $refType,
@@ -80,7 +82,14 @@ describe('<RequirementsFormLegacy />', () => {
   };
 
   it('should render a vote widget for a simple vote without limit', () => {
-    const wrapper = shallow(<RequirementsFormLegacy step={step} isAuthenticated {...formMock} />);
+    const wrapper = shallow(
+      <RequirementsFormLegacy
+        step={step}
+        isAuthenticated
+        {...formMock}
+        isIdentificationCodeValid={isIdentificationCodeValid}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -94,7 +103,13 @@ describe('<RequirementsFormLegacy />', () => {
       requirement5: false,
       requirement6: false,
     };
-    const props = { ...formMock, step, pristine: false, isAuthenticated: false };
+    const props = {
+      ...formMock,
+      step,
+      pristine: false,
+      isAuthenticated: false,
+      isIdentificationCodeValid,
+    };
     const dispatch = jest.fn();
     expect(onChange(previousValues, dispatch, props, previousValues)).toMatchSnapshot();
     jest.runAllTimers();
@@ -126,6 +141,7 @@ describe('<RequirementsFormLegacy />', () => {
       step,
       isAuthenticated: false,
       pristine: false,
+      isIdentificationCodeValid,
     };
     const dispatch = jest.fn();
     expect(onChange(values, dispatch, props, previousValues)).toMatchSnapshot();
@@ -139,7 +155,13 @@ describe('<RequirementsFormLegacy />', () => {
   });
 
   it('validate correctly', () => {
-    const props = { ...formMock, pristine: false, step, isAuthenticated: false };
+    const props = {
+      ...formMock,
+      pristine: false,
+      step,
+      isAuthenticated: false,
+      isIdentificationCodeValid,
+    };
     expect(
       validate({}, { ...props, step: { $refType, requirements: { edges: null } } }),
     ).toMatchSnapshot();

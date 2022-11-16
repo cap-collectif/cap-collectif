@@ -10,6 +10,8 @@ import {
   stopSubmit,
   stopAsyncValidation,
   isPristine,
+  change as changeRF,
+  formValueSelector,
 } from 'redux-form';
 import { fetchQuery_DEPRECATED } from 'relay-runtime';
 import component from '../Form/Field';
@@ -51,6 +53,7 @@ type Props = {
   step: RequirementsFormLegacy_step,
   isAuthenticated: boolean,
   pristine: boolean,
+  isIdentificationCodeValid: boolean,
 };
 
 export const refetchViewer = graphql`
@@ -68,59 +71,66 @@ export const refetchViewer = graphql`
 
 const callApiTimeout: { [key: string]: TimeoutID } = {};
 
-const checkIdentificationCode = (identificationCode: string) =>
-  CheckIdentificationCodeMutation.commit({ input: { identificationCode } }).then(
-    (response: CheckIdentificationCodeMutationResponse) => {
-      if (response.checkIdentificationCode?.errorCode) {
-        return response.checkIdentificationCode.errorCode;
-      }
-    },
+const checkIdentificationCode = async (identificationCode: string): Promise<?string> => {
+  const response: CheckIdentificationCodeMutationResponse =
+    await CheckIdentificationCodeMutation.commit({ input: { identificationCode } });
+  return response?.checkIdentificationCode?.errorCode ?? null;
+};
+
+const asyncValidate = async (values: FormValues, dispatch: Dispatch, props: Props): Promise<*> => {
+  const identificationCodeRequirementEdge = props?.step?.requirements?.edges?.find(
+    edge => edge?.node?.__typename === 'IdentificationCodeRequirement',
   );
 
-const asyncValidate = (values: FormValues, dispatch: Dispatch, props: Props): Promise<*> => {
-  return new Promise((resolve, reject) => {
-    const requirementEdge =
-      props.step.requirements.edges &&
-      props.step.requirements.edges.filter(
-        edge => edge?.node?.__typename === 'IdentificationCodeRequirement',
-      )[0];
-    if (!requirementEdge) {
-      return Promise.resolve();
-    }
-    const requirement = requirementEdge.node;
-    // cast as string, because, some code can be numbers only
-    const newValue = String(values.IdentificationCodeRequirement).toUpperCase();
+  if (!identificationCodeRequirementEdge) {
+    return Promise.resolve();
+  }
 
-    // if viewer has code dont update the requirement
-    if (requirement.viewerValue) {
-      return Promise.resolve();
+  const identificationCodeRequirement = identificationCodeRequirementEdge.node;
+
+  if (identificationCodeRequirement.viewerValue) {
+    return Promise.resolve();
+  }
+
+  if (!values[identificationCodeRequirement.id]) {
+    return Promise.resolve();
+  }
+
+  if (values[`${identificationCodeRequirement.id}_valid`] === true) {
+    return Promise.resolve();
+  }
+
+  const newValue = String(values[identificationCodeRequirement.id]).toUpperCase();
+  if (newValue.length < CODE_MINIMAL_LENGTH) {
+    const errors = {};
+    errors[identificationCodeRequirement.id] = 'BAD_CODE';
+    return Promise.reject(errors);
+  }
+
+  try {
+    const errors = {};
+    const checkIdentificationErrorCode = await checkIdentificationCode(newValue);
+    if (checkIdentificationErrorCode) {
+      errors[identificationCodeRequirement.id] = checkIdentificationErrorCode;
+      dispatch(changeRF(formName, `${identificationCodeRequirement.id}_valid`, false));
+      dispatch(changeRF(formName, 'form_valid', false));
+      return Promise.reject(errors);
     }
-    if (newValue.length < CODE_MINIMAL_LENGTH) {
-      const errors = {};
-      errors.IdentificationCodeRequirement = 'BAD_CODE';
-      reject(errors);
-    }
-    if (!requirement.viewerValue && newValue.length >= CODE_MINIMAL_LENGTH) {
-      return checkIdentificationCode(newValue).then(response => {
-        const errors = {};
-        if (response) {
-          errors.IdentificationCodeRequirement = response;
-          reject(errors);
-        } else {
-          dispatch(startSubmit(formName));
-          return UpdateProfilePersonalDataMutation.commit({
-            input: { userIdentificationCode: newValue },
-          }).then(() => {
-            errors.IdentificationCodeRequirement = undefined;
-            dispatch(stopSubmit(formName));
-            dispatch(stopAsyncValidation(formName));
-            Promise.resolve();
-          });
-        }
-      });
-    }
-    Promise.resolve();
-  });
+    dispatch(startSubmit(formName));
+
+    await UpdateProfilePersonalDataMutation.commit({
+      input: { userIdentificationCode: newValue },
+    });
+    dispatch(changeRF(formName, `${identificationCodeRequirement.id}_valid`, true));
+    dispatch(changeRF(formName, `${identificationCodeRequirement.id}`, newValue));
+    dispatch(changeRF(formName, 'form_valid', true));
+    errors[identificationCodeRequirement.id] = undefined;
+    dispatch(stopSubmit(formName));
+    dispatch(stopAsyncValidation(formName));
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const validate = (values: FormValues, props: Props) => {
@@ -129,6 +139,11 @@ export const validate = (values: FormValues, props: Props) => {
   if (!edges) {
     return errors;
   }
+
+  if (values.form_valid === false) {
+    errors.form_valid = 'global.required';
+  }
+
   for (const edge of edges.filter(Boolean)) {
     const requirement = edge.node;
     if (requirement.__typename === 'PhoneRequirement') {
@@ -141,6 +156,12 @@ export const validate = (values: FormValues, props: Props) => {
         } else if (!/^[0-9]+$/.test(remainingPhone) || remainingPhone.length !== 9) {
           errors[requirement.id] = 'profile.constraints.phone.invalid';
         }
+      }
+    } else if (requirement.__typename === 'IdentificationCodeRequirement') {
+      if (!values[requirement.id]) {
+        errors[requirement.id] = 'global.required';
+      } else if (values[`${requirement.id}_valid`] === false) {
+        errors[`${requirement.id}_valid`] = 'global.required';
       }
     } else if (
       !values[requirement.id] &&
@@ -241,10 +262,12 @@ export const onChange = (
         clearTimeout(timeout);
       }
       dispatch(startSubmit(formName));
+      dispatch(changeRF(formName, 'form_valid', false));
 
       callApiTimeout[requirement.id] = setTimeout(() => {
         UpdateProfilePersonalDataMutation.commit({ input }).then(() => {
           dispatch(stopSubmit(formName));
+          dispatch(changeRF(formName, 'form_valid', true));
           if (props.stepId) {
             fetchQuery_DEPRECATED(environment, refetchViewer, {
               stepId: props.stepId,
@@ -310,7 +333,13 @@ const getFormProps = (requirement: Requirement, change: any) => {
   return { component, type: 'text', divClassName: 'col-sm-12 col-xs-12' };
 };
 
-export const RequirementsFormLegacy = ({ step, submitting, submitSucceeded, change }: Props) => {
+export const RequirementsFormLegacy = ({
+  step,
+  submitting,
+  submitSucceeded,
+  change,
+  isIdentificationCodeValid,
+}: Props) => {
   const requirements = step.requirements?.edges
     ?.filter(Boolean)
     .map(edge => edge.node)
@@ -362,7 +391,7 @@ export const RequirementsFormLegacy = ({ step, submitting, submitSucceeded, chan
               key={requirement.id}
               disabled={
                 requirement.__typename === 'IdentificationCodeRequirement' &&
-                requirement.viewerValue
+                (requirement.viewerValue || isIdentificationCodeValid)
               }
               placeholder={
                 requirement.__typename === 'IdentificationCodeRequirement' &&
@@ -373,8 +402,6 @@ export const RequirementsFormLegacy = ({ step, submitting, submitSucceeded, chan
               name={
                 requirement.__typename === 'PostalAddressRequirement'
                   ? 'PostalAddressText'
-                  : requirement.__typename === 'IdentificationCodeRequirement'
-                  ? 'IdentificationCodeRequirement'
                   : requirement.id
               }
               label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
@@ -391,7 +418,6 @@ const form = reduxForm({
   onChange,
   validate,
   asyncValidate,
-  asyncChangeFields: ['IdentificationCodeRequirement'],
   form: formName,
 })(RequirementsFormLegacy);
 
@@ -410,37 +436,59 @@ const getRequirementInitialValue = (requirement: Requirement): ?string | boolean
   }
   return requirement.viewerValue;
 };
+const mapStateToProps = (state: State, { step }: Props) => {
+  const identificationCode = step.requirements.edges?.find(
+    edge => edge?.node?.__typename === 'IdentificationCodeRequirement',
+  );
+  const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: State, { step }: Props) => ({
-  isAuthenticated: !!state.user.user,
-  pristine: isPristine(formName)(state),
-  initialValues: step.requirements.edges
-    ? step.requirements.edges
-        .filter(Boolean)
-        .map(edge => edge.node)
-        .reduce((initialValues, requirement) => {
-          if (requirement.__typename === 'PostalAddressRequirement') {
-            return {
-              ...initialValues,
-              PostalAddressText: requirement.viewerAddress
-                ? requirement.viewerAddress.formatted
-                : null,
-              [requirement.id]: getRequirementInitialValue(requirement),
-            };
-          }
-          if (requirement.__typename === 'IdentificationCodeRequirement') {
-            return {
-              ...initialValues,
-              IdentificationCodeRequirement: getRequirementInitialValue(requirement),
-            };
-          }
-          return {
-            ...initialValues,
-            [requirement.id]: getRequirementInitialValue(requirement),
-          };
-        }, {})
-    : {},
-});
+  const isIdentificationCodeValid = identificationCode?.node?.id
+    ? selector(state, `${identificationCode?.node?.id}_valid`)
+    : false;
+
+  const requirements = step.requirements.edges
+    ? step.requirements.edges.filter(Boolean).map(edge => edge.node)
+    : [];
+
+  return {
+    isAuthenticated: !!state.user.user,
+    pristine: isPristine(formName)(state),
+    isIdentificationCodeValid,
+    initialValues:
+      requirements.length > 0
+        ? requirements.reduce(
+            (initialValues, requirement) => {
+              const value = getRequirementInitialValue(requirement);
+              if (requirement.__typename === 'PostalAddressRequirement') {
+                return {
+                  ...initialValues,
+                  PostalAddressText: requirement.viewerAddress
+                    ? requirement.viewerAddress.formatted
+                    : null,
+                  [requirement.id]: value,
+                };
+              }
+              if (requirement.__typename === 'IdentificationCodeRequirement') {
+                return {
+                  ...initialValues,
+                  [requirement.id]: value,
+                  [`${requirement.id}_valid`]: !!value,
+                };
+              }
+              return {
+                ...initialValues,
+                [requirement.id]: value,
+              };
+            },
+            {
+              form_valid: requirements.every(
+                requirement => requirement.viewerMeetsTheRequirement === true,
+              ),
+            },
+          )
+        : {},
+  };
+};
 
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
