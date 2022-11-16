@@ -70,7 +70,7 @@ class SettableOwnerResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($otherUser);
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
         $this->shouldThrow(new UserError(SettableOwnerResolver::OWNER_NOT_FOUND))->during(
@@ -87,13 +87,13 @@ class SettableOwnerResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($viewer);
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
         $this->__invoke($viewerId, $viewer)->shouldReturn($viewer);
     }
 
-    public function it_should_return_other_user_if_super_admin(
+    public function it_should_return_other_user_if_admin(
         GlobalIdResolver $resolver,
         User $viewer,
         User $otherUser
@@ -104,7 +104,7 @@ class SettableOwnerResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($otherUser);
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(true);
         $this->__invoke($otherUserId, $viewer)->shouldReturn($otherUser);
@@ -121,7 +121,7 @@ class SettableOwnerResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($organization);
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
         $organization
@@ -146,14 +146,14 @@ class SettableOwnerResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($organization);
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
         $organization->getMembership($viewer)->willReturn($memberShip);
         $this->__invoke($organizationId, $viewer)->shouldReturn($organization);
     }
 
-    public function it_should_return_organization_if_super_admin(
+    public function it_should_return_organization_if_admin(
         GlobalIdResolver $resolver,
         User $viewer,
         Organization $organization
@@ -164,7 +164,7 @@ class SettableOwnerResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($organization);
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(true);
         $this->__invoke($organizationId, $viewer)->shouldReturn($organization);

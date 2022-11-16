@@ -15,14 +15,26 @@ export const QUERY: GraphQLTaggedNode = graphql`
     ) {
         viewer {
             ...EventListPage_viewer
-                @arguments(
-                    count: $count
-                    cursor: $cursor
-                    term: $term
-                    affiliations: $affiliations
-                    orderBy: $orderBy
-                    status: $status
-                )
+            ...EventListPage_eventOwner
+                    @arguments(
+                        count: $count
+                        cursor: $cursor
+                        term: $term
+                        affiliations: $affiliations
+                        orderBy: $orderBy
+                        status: $status
+                    )
+            organizations {
+                ...EventListPage_eventOwner
+                    @arguments(
+                        count: $count
+                        cursor: $cursor
+                        term: $term
+                        affiliations: $affiliations
+                        orderBy: $orderBy
+                        status: $status
+                    )
+            }
         }
     }
 `;
@@ -37,8 +49,10 @@ const EventListQuery: React.FC = () => {
         orderBy: { field: 'START_AT', direction: 'DESC' },
         status: null,
     });
+    const { viewer } = query;
+    const organization = viewer.organizations?.[0];
 
-    return <EventListPage viewer={query.viewer} />;
+    return <EventListPage viewer={viewer} eventOwner={organization ?? viewer} />;
 };
 
 export default EventListQuery;

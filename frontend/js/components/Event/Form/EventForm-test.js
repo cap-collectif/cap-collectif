@@ -47,6 +47,7 @@ const defaultProps = {
       id: 'VXNlcjp1c2VyVGhlbw==',
       displayName: 'Théo QP',
       $fragmentRefs,
+      organizations: null,
     },
     $fragmentRefs,
     $refType,

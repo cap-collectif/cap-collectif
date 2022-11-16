@@ -3,9 +3,7 @@ import * as React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
-import EventList, {
-    EVENT_LIST_PAGINATION,
-} from './EventList';
+import EventList, { EVENT_LIST_PAGINATION } from './EventList';
 import {
     addsSupportForPortals,
     clearSupportForPortals,
@@ -27,14 +25,14 @@ describe('<EventList />', () => {
                         node: {
                             id: 'RXZlbnQ6ZXZlbnQz',
                             title: 'GrenobleWeb2015',
-                            adminUrl: 'https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR',
+                            adminUrl:
+                                'https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR',
                             reviewStatus: 'PUBLISHED',
                             projects: [
                                 {
                                     id: 'UHJvamVjdDpwcm9qZWN0MQ==',
                                     title: 'Croissance, innovation, disruption',
-                                    url:
-                                        'https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1',
+                                    url: 'https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1',
                                 },
                             ],
                             themes: [],
@@ -49,22 +47,21 @@ describe('<EventList />', () => {
                                 'https://capco.dev/export-event-participants/event3?_locale=fr-FR',
                             __typename: 'Event',
                         },
-                        cursor:
-                            'YTozOntpOjA7aToxOTcwNDMxMjAwMDAwO2k6MTtpOjIwNTc2MTI0MDAwMDA7aToyO2k6MTQyMDIzOTYwMDAwMDt9',
+                        cursor: 'YTozOntpOjA7aToxOTcwNDMxMjAwMDAwO2k6MTtpOjIwNTc2MTI0MDAwMDA7aToyO2k6MTQyMDIzOTYwMDAwMDt9',
                     },
                     {
                         node: {
                             id: 'RXZlbnQ6ZXZlbnQx',
                             owner: null,
                             title: 'Event with registrations',
-                            adminUrl: 'https://capco.dev/admin/capco/app/event/event1/edit?_locale=fr-FR',
+                            adminUrl:
+                                'https://capco.dev/admin/capco/app/event/event1/edit?_locale=fr-FR',
                             reviewStatus: 'PUBLISHED',
                             projects: [
                                 {
                                     id: 'UHJvamVjdDpwcm9qZWN0MQ==',
                                     title: 'Croissance, innovation, disruption',
-                                    url:
-                                        'https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1',
+                                    url: 'https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1',
                                 },
                             ],
                             themes: [
@@ -87,15 +84,15 @@ describe('<EventList />', () => {
                             guestListEnabled: false,
                             __typename: 'Event',
                         },
-                        cursor:
-                            'YTozOntpOjA7aToxOTYxNzA4NDAwMDAwO2k6MTtpOjE5NjI0ODYwMDAwMDA7aToyO2k6MTQyMDA2NjgwMDAwMDt9',
+                        cursor: 'YTozOntpOjA7aToxOTYxNzA4NDAwMDAwO2k6MTtpOjE5NjI0ODYwMDAwMDA7aToyO2k6MTQyMDA2NjgwMDAwMDt9',
                     },
                     {
                         node: {
                             id: 'RXZlbnQ6ZXZlbnQ2',
                             owner: null,
                             title: 'Event without registrations',
-                            adminUrl: 'https://capco.dev/admin/capco/app/event/event6/edit?_locale=fr-FR',
+                            adminUrl:
+                                'https://capco.dev/admin/capco/app/event/event6/edit?_locale=fr-FR',
                             reviewStatus: 'PUBLISHED',
                             projects: [],
                             themes: [],
@@ -107,35 +104,40 @@ describe('<EventList />', () => {
                             guestListEnabled: true,
                             __typename: 'Event',
                         },
-                        cursor:
-                            'YTozOntpOjA7aToxOTU5MjAyODAwMDAwO2k6MTtpOjIyMTE3NTAwMDAwMDA7aToyO2k6MTQyMDQ5ODgwMDAwMDt9',
+                        cursor: 'YTozOntpOjA7aToxOTU5MjAyODAwMDAwO2k6MTtpOjIyMTE3NTAwMDAwMDA7aToyO2k6MTQyMDQ5ODgwMDAwMDt9',
                     },
                 ],
             },
+            isAdmin: true,
+            isAdminOrganization: false,
+            isOnlyProjectAdmin: false,
+            isSuperAdmin: false,
+            organizations: null,
         }),
     };
     const query = graphql`
-    query EventListTestQuery(
-      $count: Int
-      $cursor: String
-      $term: String
-      $affiliations: [EventAffiliation!]
-      $orderBy: EventOrder
-      $status: EventStatus
-    ) @relay_test_operation {
-      viewer {
-        ...EventList_viewer
-          @arguments(
-            count: $count
-            cursor: $cursor
-            term: $term
-            affiliations: $affiliations
-            orderBy: $orderBy
-            status: $status
-          )
-      }
-    }
-  `;
+        query EventListTestQuery(
+            $count: Int
+            $cursor: String
+            $term: String
+            $affiliations: [EventAffiliation!]
+            $orderBy: EventOrder
+            $status: EventStatus
+        ) @relay_test_operation {
+            viewer {
+                ...EventList_eventOwner
+                    @arguments(
+                        count: $count
+                        cursor: $cursor
+                        term: $term
+                        affiliations: $affiliations
+                        orderBy: $orderBy
+                        status: $status
+                    )
+                ...EventList_viewer
+            }
+        }
+    `;
 
     beforeEach(() => {
         addsSupportForPortals();
@@ -154,8 +156,8 @@ describe('<EventList />', () => {
             if (!data.viewer) return null;
             return (
                 <EventList
+                    eventOwner={data.viewer}
                     viewer={data.viewer}
-                    isAdmin
                     term=""
                     resetFilters={jest.fn()}
                     status="ALL"

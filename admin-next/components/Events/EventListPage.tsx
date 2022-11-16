@@ -4,10 +4,6 @@ import { graphql, GraphQLTaggedNode, useFragment } from 'react-relay';
 import {
     Flex,
     Search,
-    Input,
-    Text,
-    headingStyles,
-    CapUIFontWeight,
     Button,
     InlineSelect,
     CapUIIcon,
@@ -15,6 +11,7 @@ import {
 import EventList from './EventList';
 import EventListNoResult from './EventListNoResult';
 import { EventListPage_viewer$key } from '@relay/EventListPage_viewer.graphql';
+import { EventListPage_eventOwner$key } from '@relay/EventListPage_eventOwner.graphql';
 import debounce from '@utils/debounce-promise';
 import downloadCSV from '@utils/download-csv';
 import TablePlaceholder from '@ui/Table/TablePlaceholder';
@@ -22,10 +19,11 @@ import EventImportModal from './EventImportModal';
 
 type EventListPageProps = {
     readonly viewer: EventListPage_viewer$key;
+    readonly eventOwner: EventListPage_eventOwner$key;
 };
 
 export const FRAGMENT: GraphQLTaggedNode = graphql`
-    fragment EventListPage_viewer on User
+    fragment EventListPage_eventOwner on EventOwner
     @argumentDefinitions(
         count: { type: "Int!" }
         cursor: { type: "String" }
@@ -34,7 +32,6 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
         orderBy: { type: "EventOrder" }
         status: { type: "EventStatus" }
     ) {
-        isAdmin
         allEvents: events(affiliations: $affiliations) {
             totalCount
         }
@@ -50,7 +47,7 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
         deleted: events(status: DELETED, affiliations: $affiliations) {
             totalCount
         }
-        ...EventList_viewer
+        ...EventList_eventOwner
             @arguments(
                 count: $count
                 cursor: $cursor
@@ -62,15 +59,23 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
     }
 `;
 
-const EventListPage: React.FC<EventListPageProps> = ({ viewer: viewerFragment }) => {
+const VIEWER_FRAGMENT = graphql`
+    fragment EventListPage_viewer on User {
+        isAdmin
+        ...EventList_viewer
+    }
+`;
+
+const EventListPage: React.FC<EventListPageProps> = ({ viewer: viewerFragment, eventOwner: eventOwnerFragment }) => {
     const intl = useIntl();
     const [term, setTerm] = React.useState('');
     const [status, setStatus] = React.useState<string>('ALL');
-    const viewer = useFragment<EventListPage_viewer$key>(FRAGMENT, viewerFragment);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+    const eventOwner = useFragment<EventListPage_eventOwner$key>(FRAGMENT, eventOwnerFragment);
 
     const onTermChange = debounce((value: string) => setTerm(value), 400);
 
-    const eventsCount = viewer.allEvents.totalCount;
+    const eventsCount = eventOwner.allEvents.totalCount;
 
     const exportEvents = async () => {
         await downloadCSV('/events/download', intl);
@@ -139,19 +144,19 @@ const EventListPage: React.FC<EventListPageProps> = ({ viewer: viewerFragment })
                                 <InlineSelect.Choice value="AWAITING">
                                     {intl.formatMessage(
                                         { id: 'event.filter.waiting' },
-                                        { number: viewer.awaiting.totalCount },
+                                        { number: eventOwner.awaiting.totalCount },
                                     )}
                                 </InlineSelect.Choice>
                                 <InlineSelect.Choice value="APPROVED">
                                     {intl.formatMessage(
                                         { id: 'event.filter.approved' },
-                                        { number: viewer.approved.totalCount },
+                                        { number: eventOwner.approved.totalCount },
                                     )}
                                 </InlineSelect.Choice>
                                 <InlineSelect.Choice value="REFUSED">
                                     {intl.formatMessage(
                                         { id: 'events.filter.refused' },
-                                        { number: viewer.refused.totalCount },
+                                        { number: eventOwner.refused.totalCount },
                                     )}
                                 </InlineSelect.Choice>
                             </>
@@ -159,13 +164,14 @@ const EventListPage: React.FC<EventListPageProps> = ({ viewer: viewerFragment })
                         <InlineSelect.Choice value="DELETED">
                             {intl.formatMessage(
                                 { id: 'event.filter.deleted' },
-                                { number: viewer.deleted.totalCount },
+                                { number: eventOwner.deleted.totalCount },
                             )}
                         </InlineSelect.Choice>
                     </InlineSelect>
                     <React.Suspense fallback={<TablePlaceholder rowsCount={20} columnsCount={5} />}>
                         <EventList
                             viewer={viewer}
+                            eventOwner={eventOwner}
                             term={term}
                             resetFilters={() => {
                                 setTerm('');

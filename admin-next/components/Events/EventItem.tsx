@@ -2,6 +2,7 @@ import * as React from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import type { EventItem_event$key } from '@relay/EventItem_event.graphql';
+import { EventItem_viewer$key } from '@relay/EventItem_viewer.graphql';
 import {
     ButtonQuickAction,
     CapUIIcon,
@@ -11,7 +12,6 @@ import {
     Table,
     Text,
     Tooltip,
-    useTheme,
 } from '@cap-collectif/ui';
 import downloadCSV from '@utils/download-csv';
 import EventModalConfirmationDelete from './EventModalConfirmationDelete';
@@ -19,7 +19,7 @@ import { EventAffiliations } from './EventList';
 
 type Props = {
     event: EventItem_event$key,
-    isAdmin: boolean,
+    viewer: EventItem_viewer$key,
     affiliations: EventAffiliations,
     isAdminOrganization?: boolean,
 };
@@ -50,6 +50,7 @@ const FRAGMENT = graphql`
             username
         }
         creator {
+            id
             username
         }
         guestListEnabled
@@ -57,16 +58,34 @@ const FRAGMENT = graphql`
         ...EventModalConfirmationDelete_event
     }
 `;
+
+const VIEWER_FRAGMENT = graphql`
+    fragment EventItem_viewer on User {
+        id
+        isOnlyProjectAdmin
+        isAdmin
+        isAdminOrganization
+        isSuperAdmin
+        organizations {
+            id
+        }
+    }
+`;
+
 const EventItem: React.FC<Props> = ({
     event: eventFragment,
-    isAdmin,
     affiliations,
-    isAdminOrganization,
+    viewer: viewerFragment,
 }) => {
     const event = useFragment(FRAGMENT, eventFragment);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+    const { isAdmin, isAdminOrganization } = viewer;
     const intl = useIntl();
     const project = event.projects[0];
-    const { colors } = useTheme();
+    const viewerBelongsToAnOrganization = (viewer.organizations?.length ?? 0) > 0;
+    const canDelete = viewerBelongsToAnOrganization
+        ? viewer?.isAdminOrganization || viewer.id === event.creator?.id
+        : true;
 
     return (
         <>
@@ -171,7 +190,7 @@ const EventItem: React.FC<Props> = ({
                             }}
                         />
                     )}
-                    {event.deletedAt === null && (
+                    {event.deletedAt === null && canDelete && (
                         <EventModalConfirmationDelete event={event} affiliations={affiliations} />
                     )}
                 </Flex>

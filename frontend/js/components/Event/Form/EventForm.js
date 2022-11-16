@@ -290,6 +290,8 @@ export const EventForm = ({
     return isBackOfficeView && !query.viewer.isAdmin;
   };
 
+  const organization = query.viewer.organizations ? query.viewer.organizations[0] : null;
+
   const isModerationDisable = (): boolean => {
     if (query.viewer.isSuperAdmin) {
       return false;
@@ -389,7 +391,7 @@ export const EventForm = ({
               ariaControls="EventForm-filter-user-listbox"
               inputClassName="fake-inputClassName"
               autoload
-              disabled={query.viewer.isOnlyProjectAdmin || isDisabled()}
+              disabled={query.viewer.isOnlyProjectAdmin || isDisabled() || !!organization}
               id="event_author"
               name="author"
               placeholder={intl.formatMessage({ id: 'select-author' })}
@@ -817,7 +819,9 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
       ),
     };
   }
-
+  const organization = props.query.viewer.organizations
+    ? props.query.viewer.organizations[0]
+    : null;
   return {
     currentLanguage: state.language.currentLanguage,
     // WYSIWYG Migration
@@ -828,7 +832,10 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
       authorAgreeToUsePersonalDataForEventOnly: false,
       bodyUsingJoditWysiwyg: true,
       guestListEnabled: false,
-      author: { value: props.query.viewer.id, label: props.query.viewer.displayName },
+      author: {
+        value: organization?.id ?? props.query.viewer.id,
+        label: organization?.displayName ?? props.query.viewer.displayName,
+      },
     },
   };
 };
@@ -848,6 +855,10 @@ export default createFragmentContainer(container, {
         isOnlyProjectAdmin
         id
         displayName
+        organizations {
+          id
+          displayName
+        }
       }
     }
   `,

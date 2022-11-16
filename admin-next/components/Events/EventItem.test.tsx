@@ -25,8 +25,7 @@ describe('<EventItem />', () => {
                 {
                     id: 'UHJvamVjdDpwcm9qZWN0MQ==',
                     title: 'Croissance, innovation, disruption',
-                    url:
-                        'https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1',
+                    url: 'https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1',
                 },
             ],
             themes: [],
@@ -37,17 +36,21 @@ describe('<EventItem />', () => {
             createdAt: '2015-01-03 00:00:00',
             owner: null,
             guestListEnabled: true,
-            exportParticipantsUrl: 'https://capco.dev/export-event-participants/event3?_locale=fr-FR',
+            exportParticipantsUrl:
+                'https://capco.dev/export-event-participants/event3?_locale=fr-FR',
             __typename: 'Event',
         }),
     };
     const query = graphql`
-    query EventItemTestQuery($id: ID = "<default>") @relay_test_operation {
-      event: node(id: $id) {
-        ...EventItem_event
-      }
-    }
-  `;
+        query EventItemTestQuery($id: ID = "<default>") @relay_test_operation {
+            event: node(id: $id) {
+                ...EventItem_event
+            }
+            viewer {
+                ...EventItem_viewer
+            }
+        }
+    `;
     afterEach(() => {
         clearSupportForPortals();
     });
@@ -60,8 +63,10 @@ describe('<EventItem />', () => {
         };
         const TestRenderer = (props: any) => {
             const data = useLazyLoadQuery<EventItemTestQuery>(query, queryVariables);
-            if (!data.event) return null;
-            return <EventItem event={data.event} isAdmin {...props} affiliations={null} />;
+            if (!data.event || !data.viewer) return null;
+            return (
+                <EventItem event={data.event} viewer={data.viewer} {...props} affiliations={null} />
+            );
         };
         TestComponent = (props: any) => (
             <RelaySuspensFragmentTest environment={environment}>
@@ -87,13 +92,13 @@ describe('<EventItem />', () => {
                         owner: null,
                         title: 'TESTEVENT',
                         reviewStatus: 'DELETED',
-                        adminUrl: 'https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR',
+                        adminUrl:
+                            'https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR',
                         projects: [
                             {
                                 id: 'UHJvamVjdDpwcm9qZWN0MQ==',
                                 title: 'Croissance, innovation, disruption',
-                                url:
-                                    'https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1',
+                                url: 'https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1',
                             },
                         ],
                         themes: [],
@@ -103,6 +108,13 @@ describe('<EventItem />', () => {
                         },
                         createdAt: '2015-01-03 00:00:00',
                         __typename: 'Event',
+                    }),
+                    User: () => ({
+                        isAdmin: false,
+                        isAdminOrganization: false,
+                        isOnlyProjectAdmin: false,
+                        isSuperAdmin: false,
+                        organizations: null,
                     }),
                 }),
             );

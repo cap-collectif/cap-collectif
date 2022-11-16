@@ -83,6 +83,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     link: values.link,
   };
 
+  const owner = values.author
+    ? Array.isArray(values.author)
+      ? values.author[0]?.value
+      : values.author?.value
+    : null;
+
   const input = {
     translations: handleTranslationChange(
       props.event && props.event.translations ? props.event.translations : [],
@@ -112,6 +118,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       !Number.isNaN(values.maxRegistrations)
         ? Math.round(Number(values.maxRegistrations))
         : null,
+    owner,
   };
 
   return AddEventMutation.commit({ input })
@@ -159,6 +166,12 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     metaDescription: values.metadescription ? values.metadescription : null,
     link: values.link,
   };
+
+  const owner = values.author
+    ? Array.isArray(values.author)
+      ? values.author[0]?.value
+      : values.author?.value
+    : null;
 
   const measurable = isFrontendView ? false : values.measurable;
   let maxRegistrations =
@@ -210,6 +223,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     ),
     bodyUsingJoditWysiwyg: values?.bodyUsingJoditWysiwyg ?? false,
     maxRegistrations,
+    owner,
   };
   const reviewInput =
     values.refusedReason !== 'NONE'

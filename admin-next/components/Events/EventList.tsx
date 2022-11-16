@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { graphql, usePaginationFragment } from 'react-relay';
+import { graphql, useFragment, usePaginationFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import EventItem from './EventItem';
 import { Table, Text, Icon, CapUIIcon } from '@cap-collectif/ui';
 import EmptyMessage from '@ui/Table/EmptyMessage';
 import { EventList_viewer$key } from '@relay/EventList_viewer.graphql';
+import { EventList_eventOwner$key } from '@relay/EventList_eventOwner.graphql';
 import { EventListQueryVariables } from '@relay/EventListQuery.graphql';
-import { useAppContext } from '../AppProvider/App.context';
 
 export const EVENT_LIST_PAGINATION = 20;
 
 export const EventListQuery = graphql`
-    fragment EventList_viewer on User
+    fragment EventList_eventOwner on EventOwner
     @argumentDefinitions(
         count: { type: "Int!" }
         cursor: { type: "String" }
@@ -21,7 +21,6 @@ export const EventListQuery = graphql`
         status: { type: "EventStatus" }
     )
     @refetchable(queryName: "EventListPaginationQuery") {
-        isAdmin
         events(
             first: $count
             after: $cursor
@@ -46,8 +45,17 @@ export const EventListQuery = graphql`
     }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+    fragment EventList_viewer on User {
+        isAdmin
+        isAdminOrganization
+        ...EventItem_viewer
+    }
+`;
+
 type EventListProps = {
     viewer: EventList_viewer$key,
+    eventOwner: EventList_eventOwner$key,
     term: string,
     status: string | null,
     resetFilters: () => void,
@@ -55,14 +63,19 @@ type EventListProps = {
 
 export type EventAffiliations = EventListQueryVariables['affiliations'];
 
-const EventList: React.FC<EventListProps> = ({ viewer, term, status, resetFilters }) => {
+const EventList: React.FC<EventListProps> = ({
+    viewer: viewerRef,
+    eventOwner,
+    term,
+    status,
+    resetFilters,
+}) => {
     const intl = useIntl();
-    const { data, loadNext, hasNext, refetch } = usePaginationFragment(EventListQuery, viewer);
+    const viewer = useFragment<EventList_viewer$key>(VIEWER_FRAGMENT, viewerRef);
+    const { isAdmin, isAdminOrganization } = viewer;
+    const { data, loadNext, hasNext, refetch } = usePaginationFragment(EventListQuery, eventOwner);
     const [orderBy, setOrderBy] = React.useState('DESC');
     const { events } = data;
-    const { viewerSession } = useAppContext();
-    const isAdmin = viewerSession?.isAdmin ?? false;
-    const isAdminOrganization = viewerSession?.isAdminOrganization ?? false;
     const firstRendered = React.useRef<boolean | null>(null);
     const hasEvents = events ? events.totalCount > 0 : false;
     const affiliations: EventAffiliations = React.useMemo(
@@ -155,9 +168,9 @@ const EventList: React.FC<EventListProps> = ({ viewer, term, status, resetFilter
                             event && (
                                 <Table.Tr key={event.id} rowId={event.id}>
                                     <EventItem
-                                        isAdmin={isAdmin}
                                         event={event}
                                         affiliations={affiliations}
+                                        viewer={viewer}
                                     />
                                 </Table.Tr>
                             ),

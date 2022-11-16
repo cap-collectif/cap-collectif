@@ -10,7 +10,7 @@ class CanSetOwner
 {
     public static function check(Owner $owner, ?User $viewer): bool
     {
-        if ($viewer->isSuperAdmin()) {
+        if ($viewer->isAdmin()) {
             return true;
         }
 

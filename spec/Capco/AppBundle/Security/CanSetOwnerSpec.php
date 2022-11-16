@@ -16,13 +16,13 @@ class CanSetOwnerSpec extends ObjectBehavior
         $this->shouldHaveType(CanSetOwner::class);
     }
 
-    public function it_should_be_true_for_super_admin(
+    public function it_should_be_true_for_admin(
         User $viewer,
         User $otherUser,
         Organization $organization
     ) {
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(true);
 
@@ -33,7 +33,7 @@ class CanSetOwnerSpec extends ObjectBehavior
     public function it_should_be_true_for_viewer(User $viewer)
     {
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
 
@@ -43,7 +43,7 @@ class CanSetOwnerSpec extends ObjectBehavior
     public function it_should_be_false_for_other_user(User $viewer, User $otherUser)
     {
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
 
@@ -57,7 +57,7 @@ class CanSetOwnerSpec extends ObjectBehavior
         ArrayCollection $members
     ) {
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
         $organization->getMembership($viewer)->willReturn($memberShip);
@@ -71,7 +71,7 @@ class CanSetOwnerSpec extends ObjectBehavior
         ArrayCollection $members
     ) {
         $viewer
-            ->isSuperAdmin()
+            ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false);
         $organization->getMembership($viewer)->willReturn(null);

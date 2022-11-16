@@ -223,6 +223,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           "isAdmin": true,
           "isOnlyProjectAdmin": false,
           "isSuperAdmin": false,
+          "organizations": null,
         }
       }
     />
@@ -242,6 +243,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           "isAdmin": true,
           "isOnlyProjectAdmin": false,
           "isSuperAdmin": false,
+          "organizations": null,
         }
       }
     />
@@ -577,6 +579,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           "isAdmin": true,
           "isOnlyProjectAdmin": false,
           "isSuperAdmin": false,
+          "organizations": null,
         }
       }
     />
@@ -596,6 +599,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           "isAdmin": true,
           "isOnlyProjectAdmin": false,
           "isSuperAdmin": false,
+          "organizations": null,
         }
       }
     />
@@ -931,6 +935,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           "isAdmin": true,
           "isOnlyProjectAdmin": false,
           "isSuperAdmin": false,
+          "organizations": null,
         }
       }
     />
@@ -950,6 +955,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           "isAdmin": true,
           "isOnlyProjectAdmin": false,
           "isSuperAdmin": false,
+          "organizations": null,
         }
       }
     />

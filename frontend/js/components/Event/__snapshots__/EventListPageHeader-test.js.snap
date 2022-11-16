@@ -671,6 +671,31 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                     "name": "displayName",
                     "storageKey": null,
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Organization",
+                    "kind": "LinkedField",
+                    "name": "organizations",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "displayName",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
                 ],
                 "storageKey": null,
               },
@@ -679,7 +704,7 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
         ],
       },
       "params": Object {
-        "cacheID": "50e60f11658f3bc3ba32922aa3f5cd81",
+        "cacheID": "57cee28da8f7c8467d0a914109cf93a4",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -780,6 +805,10 @@ fragment EventForm_query on Query {
     isOnlyProjectAdmin
     id
     displayName
+    organizations {
+      id
+      displayName
+    }
   }
 }
 
@@ -1501,6 +1530,31 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                     "name": "displayName",
                     "storageKey": null,
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Organization",
+                    "kind": "LinkedField",
+                    "name": "organizations",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "displayName",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
                 ],
                 "storageKey": null,
               },
@@ -1509,7 +1563,7 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
         ],
       },
       "params": Object {
-        "cacheID": "50e60f11658f3bc3ba32922aa3f5cd81",
+        "cacheID": "57cee28da8f7c8467d0a914109cf93a4",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -1610,6 +1664,10 @@ fragment EventForm_query on Query {
     isOnlyProjectAdmin
     id
     displayName
+    organizations {
+      id
+      displayName
+    }
   }
 }
 
@@ -2331,6 +2389,31 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                     "name": "displayName",
                     "storageKey": null,
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Organization",
+                    "kind": "LinkedField",
+                    "name": "organizations",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "displayName",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
                 ],
                 "storageKey": null,
               },
@@ -2339,7 +2422,7 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "50e60f11658f3bc3ba32922aa3f5cd81",
+        "cacheID": "57cee28da8f7c8467d0a914109cf93a4",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -2440,6 +2523,10 @@ fragment EventForm_query on Query {
     isOnlyProjectAdmin
     id
     displayName
+    organizations {
+      id
+      displayName
+    }
   }
 }
 
@@ -3161,6 +3248,31 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                     "name": "displayName",
                     "storageKey": null,
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Organization",
+                    "kind": "LinkedField",
+                    "name": "organizations",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "displayName",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
                 ],
                 "storageKey": null,
               },
@@ -3169,7 +3281,7 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "50e60f11658f3bc3ba32922aa3f5cd81",
+        "cacheID": "57cee28da8f7c8467d0a914109cf93a4",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -3270,6 +3382,10 @@ fragment EventForm_query on Query {
     isOnlyProjectAdmin
     id
     displayName
+    organizations {
+      id
+      displayName
+    }
   }
 }
 

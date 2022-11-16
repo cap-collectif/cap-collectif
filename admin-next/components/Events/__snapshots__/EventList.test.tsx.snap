@@ -218,6 +218,16 @@ Array [
           <th
             className="sc-bdvvtL hVXTPE cap-table__th"
           >
+            admin.projects.list.author
+          </th>
+          <th
+            className="sc-bdvvtL hVXTPE cap-table__th"
+          >
+            global.owner
+          </th>
+          <th
+            className="sc-bdvvtL hVXTPE cap-table__th"
+          >
             global.updated.date
           </th>
           <th
@@ -286,6 +296,30 @@ Array [
                
               16/03/2035
             </p>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <p
+              className="sc-bdvvtL dPVCFK cap-text"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </p>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            -
           </td>
           <td
             className="sc-bdvvtL gJUzIT cap-table__td"
@@ -438,6 +472,30 @@ Array [
               }
             }
           >
+            <p
+              className="sc-bdvvtL dPVCFK cap-text"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </p>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            -
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
             01/01/2015
           </td>
           <td
@@ -505,6 +563,30 @@ Array [
                
               02/02/2040
             </p>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <p
+              className="sc-bdvvtL dPVCFK cap-text"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </p>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            -
           </td>
           <td
             className="sc-bdvvtL gJUzIT cap-table__td"

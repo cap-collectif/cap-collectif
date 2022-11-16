@@ -716,13 +716,38 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                     "name": "displayName",
                     "storageKey": null,
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Organization",
+                    "kind": "LinkedField",
+                    "name": "organizations",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "displayName",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
                 ],
                 "storageKey": null,
               },
             ],
           },
           "params": Object {
-            "cacheID": "324b7b39326a7e19b07f27db44764f05",
+            "cacheID": "ad2f015c510428365fa599ccb4524396",
             "id": null,
             "metadata": Object {},
             "name": "EventFormPageAppQuery",
@@ -850,6 +875,10 @@ fragment EventForm_query_k3vj0 on Query {
     isOnlyProjectAdmin
     id
     displayName
+    organizations {
+      id
+      displayName
+    }
   }
 }
 
