@@ -8,7 +8,7 @@ cd /var/www/admin-next
 # in the admin-next directory :
 # - yarn install
 # - yarn relay
-# to see logs you can run pm2 logs
+
 
 if [[ -n "$CI" ]]; then
     # Launch `/admin-next` only for cypress tests

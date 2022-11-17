@@ -3,11 +3,7 @@ import { getEnv } from '../config';
 
 const getRedisSessionKey = (cookie: string) => {
     // We have a potential bug here, because we does not check `.lock` session key, too.
-    if (!process.env.SYMFONY_REDIS_PREFIX) {
-        throw new Error('Please define SYMFONY_REDIS_PREFIX in env')
-    }
-    const prefix = process.env.SYMFONY_REDIS_PREFIX || 'dev'
-    return `${prefix}session_json_new_${getEnv()}_${cookie}`;
+    return `${process.env.SYMFONY_REDIS_PREFIX}session_json_new_${getEnv()}_${cookie}`;
 };
 
 const getSessionFromSessionCookie = async (cookie: string): string | null => {
