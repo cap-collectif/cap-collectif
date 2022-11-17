@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Capco\UserBundle\Security\Core\User;
 
@@ -43,20 +43,25 @@ class CasUserProvider implements UserProviderInterface
         $user = $this->userManager->findUserBy(['casId' => $casId]);
 
         if (!$user) {
-            if (
-                'capcapeb' === getenv('SYMFONY_INSTANCE_NAME') &&
-                $this->capebUserFilter->isNotAuthorizedCasUserProfile($casId)
-            ) {
-                $this->logger->error('Access denied for ' . $casId . ' as invalidate cas user');
-    
-                throw new CasAuthenticationException(
-                    'Vous n\'êtes pas autorisé à accéder à cet espace, désolé. Pour toute question, contactez votre administrateur réseau'
-                );
-            }
 
             $user = $this->userManager->createUser();
             $user->setCasId($casId);
             $user->setUsername($casId);
+
+            // capcapeb custom code
+            if ('capcapeb' === getenv('SYMFONY_INSTANCE_NAME')) {
+                $userType = $this->capebUserFilter->getUserType($casId);
+
+                if (is_null($userType)) {
+                    $this->logger->error('Access denied for ' . $casId . ' as invalidate cas user');
+        
+                    throw new CasAuthenticationException(
+                        'Vous n\'êtes pas autorisé à accéder à cet espace, désolé. Pour toute question, contactez votre administrateur réseau'
+                    );
+                }
+
+                $user->setUserType($userType);
+            }
 
             // We create a fake email because the CAS server does not provide any data except the login
             $fakeEmail = $casId . '@fake-email-cap-collectif.com';
