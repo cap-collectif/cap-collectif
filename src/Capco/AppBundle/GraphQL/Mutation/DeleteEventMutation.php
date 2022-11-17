@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\EventReview;
+use Capco\AppBundle\Entity\HighlightedEvent;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\AppBundle\Security\EventVoter;
@@ -89,9 +90,11 @@ class DeleteEventMutation extends BaseDeleteMutation
             $event->setOwner($owner);
         }
 
-        $highlightedContents = $this->highlightedContentRepository->findByEvent($event);
+        $highlightedContents = $this->highlightedContentRepository->findAll();
         foreach ($highlightedContents as $highlightedContent) {
-            $this->em->delete($highlightedContent);
+            if ($highlightedContent instanceof HighlightedEvent && $highlightedContent->getEvent()->getId() === $event->getId()) {
+                $this->em->delete($highlightedContent);
+            }
         }
         $this->em->flush();
 
