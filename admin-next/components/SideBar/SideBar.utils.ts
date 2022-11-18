@@ -8,6 +8,7 @@ export const getSideBarItemsFiltered = (
     allFeatureFlags: FeatureFlags,
     isAdminOrganization: boolean,
     organization: string | null,
+    isOrganizationMember: boolean,
 ): typeof sideBarItems => {
     return sideBarItems.reduce<typeof sideBarItems>((acc, sideBarItem) => {
         const isItemForAdminOnly =
@@ -18,10 +19,15 @@ export const getSideBarItemsFiltered = (
         const hasItemFeatureRequired = (sideBarItem.featuresRequired as FeatureFlagType[]).every(
             featureRequired => allFeatureFlags[featureRequired],
         );
-        //org Redirection
-        if (sideBarItem.id === 'organizations' && isAdminOrganization) {
-            sideBarItem.href = `/organizationConfig/${organization}`;
+        // Organization Redirect
+        if (sideBarItem.id === 'organizations') {
+            if (isAdminOrganization) {
+                sideBarItem.href = `/admin-next/organizationConfig/${organization}`;
+            } else if (isOrganizationMember && !isAdminOrganization) {
+                return acc;
+            }
         }
+
         if ((isItemForAdminOnly || isItemForAll) && hasItemFeatureRequired) {
             // Filtering sub items of a menu here
             sideBarItem.items = sideBarItem.items.filter(subItem => {

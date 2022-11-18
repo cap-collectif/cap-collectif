@@ -25,7 +25,8 @@ const SideBar: FC<SideBarProps> = () => {
     const { fold } = useSideBarContext();
     const intl = useIntl();
     const allFeatureFlags = useAllFeatureFlags();
-    const { isAdmin, isSuperAdmin, isAdminOrganization, organization } = viewerSession;
+    const { isAdmin, isSuperAdmin, isAdminOrganization, organization, isOrganizationMember } =
+        viewerSession;
 
     const sideBarItemsFiltered = useMemo(
         () =>
@@ -35,6 +36,7 @@ const SideBar: FC<SideBarProps> = () => {
                 allFeatureFlags,
                 isAdminOrganization,
                 organization,
+                isOrganizationMember,
             ),
         [isAdmin, allFeatureFlags],
     );

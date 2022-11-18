@@ -24,6 +24,7 @@ use Capco\Capco\UserBundle\Entity\AbstractUser;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -163,10 +164,11 @@ class User extends AbstractUser implements
     public function isMemberOfOrganization(Organization $organization): bool
     {
         foreach ($this->getMemberOfOrganizations() as $memberOrganization) {
-            if($memberOrganization->getOrganization() === $organization) {
+            if ($memberOrganization->getOrganization() === $organization) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -1141,5 +1143,20 @@ class User extends AbstractUser implements
         $this->setConfirmationToken(null);
         $now = (new \DateTime())->format('Y-m-d');
         $this->setConfirmedAccountAt(new \DateTime($now));
+    }
+
+    public function getOrganizationId(): ?string
+    {
+        if ($this->getMemberOfOrganizations()->isEmpty()) {
+            return null;
+        }
+
+        return GlobalId::toGlobalId(
+            'Organization',
+            $this->getMemberOfOrganizations()
+                ->first()
+                ->getOrganization()
+                ->getId()
+        );
     }
 }

@@ -35,6 +35,7 @@
             'isProjectAdmin': app.user.isProjectAdmin,
             'isOnlyProjectAdmin': app.user.isOnlyProjectAdmin,
             'isOrganizationMember': app.user.isOrganizationMember,
+            'isAdminOrganization': app.user.isAdminOrganization,
             'isEvaluerOnLegacyTool': app.user.isEvaluerOnLegacyTool,
             'isEvaluerOnNewTool': viewerCanSeeEvaluationsPageResolver.__invoke(app.user),
             'email': app.user.email,
@@ -47,6 +48,8 @@
             'displayName': app.user.username,
             'uniqueId': app.user.slug,
             'roles': app.user.roles,
+            'organizationId': app.user.getOrganizationId
+
         }
         : null,
     },

@@ -43,6 +43,8 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
   const isSuperAdmin = user ? user.isSuperAdmin : false;
   const isProjectAdmin = user ? user.isProjectAdmin : false;
   const isOrganizationMember = user?.isOrganizationMember ?? false;
+  const isAdminOrganization = user?.isAdminOrganization ?? false;
+  const organizationId = user?.organizationId;
   let defaultAccordion = defaultAccordeon || '';
   if (!defaultAccordeon) {
     const keys = Object.keys(URL_MAP);
@@ -419,10 +421,14 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
               </SidebarAccordionItem>
             ) : null}
           </Accordion>
-          {features.unstable__organizations && isAdmin ? (
+          {features.unstable__organizations && (isAdmin || isAdminOrganization) ? (
             <SidebarLink
               text="admin.label.organizations"
-              href="/admin-next/organizations"
+              href={
+                isAdmin && !organizationId
+                  ? '/admin-next/organizations'
+                  : `/admin-next/organizationConfig/${organizationId || ''}`
+              }
               icon="ORGANISATION"
               withLabel={isOpen}
               fontSize={3}

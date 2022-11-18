@@ -71,6 +71,8 @@ export type State = {
     +isProjectAdmin: boolean,
     +isOnlyProjectAdmin: boolean,
     +isOrganizationMember: boolean,
+    +isAdminOrganization: boolean,
+    +organizationId: string | null,
     +email: string,
     +newEmailToConfirm: ?string,
     +media: ?{
