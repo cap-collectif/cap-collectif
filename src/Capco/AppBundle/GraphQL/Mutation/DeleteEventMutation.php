@@ -93,7 +93,7 @@ class DeleteEventMutation extends BaseDeleteMutation
         $highlightedContents = $this->highlightedContentRepository->findAll();
         foreach ($highlightedContents as $highlightedContent) {
             if ($highlightedContent instanceof HighlightedEvent && $highlightedContent->getEvent()->getId() === $event->getId()) {
-                $this->em->delete($highlightedContent);
+                $this->em->remove($highlightedContent);
             }
         }
         $this->em->flush();
