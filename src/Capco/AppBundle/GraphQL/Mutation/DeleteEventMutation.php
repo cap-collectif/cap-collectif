@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
