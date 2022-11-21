@@ -27,6 +27,7 @@ class DeleteEventMutation extends BaseDeleteMutation
     private Publisher $publisher;
     private EventRegistrationRepository $registration;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private HighlightedContentRepository $highlightedContentRepository;
 
     public function __construct(
         EntityManagerInterface $em,
