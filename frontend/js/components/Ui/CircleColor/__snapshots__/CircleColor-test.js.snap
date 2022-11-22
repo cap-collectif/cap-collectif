@@ -5,6 +5,8 @@ exports[`<CircleColor /> renders correctly 1`] = `
   disabled={false}
   id="circle-color-dropdown"
   noCaret={false}
+  onClick={[Function]}
+  open={false}
   title={
     <CircleColor__Circle
       color="#f4b721"

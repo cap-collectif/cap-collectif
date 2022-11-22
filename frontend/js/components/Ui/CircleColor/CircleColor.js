@@ -68,11 +68,14 @@ const CircleListItem: StyledComponent<
 
 const CircleColor = ({ editable, onChange, colors, defaultColor }: Props) => {
   const [currentColor, changeCurrentColor] = useState(defaultColor);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Container
       id="circle-color-dropdown"
       disabled={!editable}
       noCaret={!editable}
+      onClick={() => setIsOpen(!isOpen)}
+      open={isOpen}
       title={<Circle color={currentColor.hexValue} />}>
       {colors.map(color => (
         <CircleListItem
@@ -81,6 +84,7 @@ const CircleColor = ({ editable, onChange, colors, defaultColor }: Props) => {
           color={color.hexValue}
           onClick={() => {
             changeCurrentColor(color);
+            setIsOpen(false);
             onChange(color);
           }}>
           <Circle color={color.hexValue} selected={color === currentColor} />
