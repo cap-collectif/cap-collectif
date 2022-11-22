@@ -11,6 +11,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -23,19 +24,22 @@ class UpdatePostMutation implements MutationInterface
     private GlobalIdResolver $globalIdResolver;
     private AuthorizationChecker $authorizationChecker;
     private PostAuthorFactory $postAuthorFactory;
+    private LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         AuthorizationChecker $authorizationChecker,
-        PostAuthorFactory $postAuthorFactory
+        PostAuthorFactory $postAuthorFactory,
+        LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->globalIdResolver = $globalIdResolver;
         $this->authorizationChecker = $authorizationChecker;
         $this->postAuthorFactory = $postAuthorFactory;
+        $this->logger = $logger;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -55,6 +59,7 @@ class UpdatePostMutation implements MutationInterface
         $form->submit($data, false);
 
         if (!$form->isValid()) {
+            $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
             return ['post' => null, 'errorCode' => self::INVALID_FORM];
         }
 

@@ -12,7 +12,10 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -41,14 +44,16 @@ class UpdatePostMutationSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         AuthorizationChecker $authorizationChecker,
-        PostAuthorFactory $postAuthorFactory
+        PostAuthorFactory $postAuthorFactory,
+        LoggerInterface $logger
     ) {
         $this->beConstructedWith(
             $em,
             $formFactory,
             $globalIdResolver,
             $authorizationChecker,
-            $postAuthorFactory
+            $postAuthorFactory,
+            $logger
         );
     }
 
@@ -102,7 +107,9 @@ class UpdatePostMutationSpec extends ObjectBehavior
         Post $post,
         FormFactoryInterface $formFactory,
         Form $form,
-        PostAuthorFactory $postAuthorFactory
+        PostAuthorFactory $postAuthorFactory,
+        LoggerInterface $logger,
+        FormErrorIterator $formErrorIterator
     ) {
         $id = 'abc';
         $input->offsetGet('id')->willReturn($id);
@@ -123,6 +130,9 @@ class UpdatePostMutationSpec extends ObjectBehavior
         $form->submit($data, false)->shouldBeCalled();
 
         $form->isValid()->willReturn(false);
+        $form->getErrors(true, false)->willReturn($formErrorIterator);
+        $formErrorIterator->__toString()->willReturn('error');
+        $logger->error(Argument::any())->shouldBeCalled();
 
         $em->flush()->shouldNotBeCalled();
 

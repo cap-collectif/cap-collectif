@@ -145,7 +145,6 @@ const onSubmit = (values, dispatch, props) => {
       commentable: values.has_comments,
       customCode: values.custom_code,
       bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg ?? false,
-      owner,
     };
     return UpdatePostMutation.commit({ input: vals })
       .then(() => {
