@@ -38,11 +38,9 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         $theToken = $request->getSession()->get('theToken');
 
         self::setOauthTokenFromSession($currentToken, $theToken);
-
-        $homepageUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
         $responseWithRequest = new RedirectResponseWithRequest(
             $request,
-            new RedirectResponse($homepageUrl)
+            new RedirectResponse($request->headers->get('referer'))
         );
 
         foreach ($this->handlers as $handler) {
