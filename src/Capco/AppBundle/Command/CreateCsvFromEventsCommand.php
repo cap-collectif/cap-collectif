@@ -6,6 +6,7 @@ use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\DTO\GoogleMapsAddress;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Toggle\Manager;
@@ -123,6 +124,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
             'events',
             function ($edge) use ($writer, $progress) {
                 $event = $edge['node'];
+                $address = $this->handleAddressFormat($event);
                 $writer->addRow(
                     WriterEntityFactory::createRowFromArray([
                         $event['_id'],
@@ -138,10 +140,10 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
                         $event['enabled'],
                         $event['startAt'],
                         $event['endAt'],
-                        $event['zipCode'],
-                        $event['address'],
-                        $event['city'],
-                        $event['country'],
+                        $address['zipCode'],
+                        $address['address'],
+                        $address['city'],
+                        $address['country'],
                         $event['lat'],
                         $event['lng'],
                         $event['link'],
@@ -203,6 +205,9 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
                 enabled
                 startAt
                 endAt
+                googleMapsAddress {
+                  json
+                }
                 zipCode
                 address
                 city
@@ -222,5 +227,37 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
           }
         }
 EOF;
+    }
+
+    private function handleAddressFormat(array $event): array
+    {
+        $googleMapsAddress = null;
+        if ($event['googleMapsAddress']) {
+            $googleMapsAddress = GoogleMapsAddress::fromApi($event['googleMapsAddress']['json']);
+        }
+        $address = [
+            'zipCode' => $event['zipCode'],
+            'address' => $event['address'],
+            'city' => $event['city'],
+            'country' => $event['country']
+        ];
+
+        if ($googleMapsAddress) {
+            $decomposed = $googleMapsAddress->decompose();
+            if (array_key_exists('postal_code', $decomposed)) {
+                $address['zipCode'] = $decomposed['postal_code'];
+            }
+            if (array_key_exists('locality', $decomposed)) {
+                $address['city'] = $decomposed['locality'];
+            }
+            if (array_key_exists('country', $decomposed)) {
+                $address['country'] = $decomposed['country'];
+            }
+            if (array_key_exists('street_number', $decomposed) && array_key_exists('route', $decomposed)) {
+                $address['address'] = $decomposed['street_number'].' '.$decomposed['route'];
+            }
+        }
+
+        return $address;
     }
 }

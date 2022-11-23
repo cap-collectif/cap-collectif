@@ -103,4 +103,33 @@ class GoogleMapsAddress
 
         return $this;
     }
+
+    public function decompose(): array
+    {
+        $decomposed = [];
+        $decoded = \GuzzleHttp\json_decode($this->json, true);
+        if (\count($decoded) > 0 && ($address = $decoded[0])) {
+            foreach ($address['address_components'] as $component) {
+                foreach ($component['types'] as $type) {
+                    if ('postal_code' === $type) {
+                        $decomposed['postal_code'] = $component['long_name'];
+                    }
+                    if ('locality' === $type) {
+                        $decomposed['locality'] = $component['long_name'];
+                    }
+                    if ('country' === $type) {
+                        $decomposed['country'] = $component['long_name'];
+                    }
+                    if ('street_number' === $type) {
+                        $decomposed['street_number'] = $component['long_name'];
+                    }
+                    if ('route' === $type) {
+                        $decomposed['route'] = $component['long_name'];
+                    }
+                }
+            }
+        }
+
+        return $decomposed;
+    }
 }
